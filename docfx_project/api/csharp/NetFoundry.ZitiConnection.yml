@@ -32,6 +32,7 @@ items:
     content: 'public class ZitiConnection : IDisposable'
     content.vb: >-
       Public Class ZitiConnection
+
           Implements IDisposable
   inheritance:
   - System.Object

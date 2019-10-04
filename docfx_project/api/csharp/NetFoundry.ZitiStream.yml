@@ -43,7 +43,9 @@ items:
     content: 'public class ZitiStream : Stream, IDisposable'
     content.vb: >-
       Public Class ZitiStream
+
           Inherits Stream
+
           Implements IDisposable
   inheritance:
   - System.Object

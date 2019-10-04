@@ -74,7 +74,7 @@ remember to use a strong password which is not easy to guess.
 > Once the password is changed - update the credentials.json file with the current password if you want the system to
 > automatically update the certificates in the event of the image losing its IP address or DNS entry.
 
-# [Change via UI](#tab/tabid-1)
+# [Change via UI](#tab/tabid-1a)
 
 1. Log into the UI using the password obtained in the prior step
 1. In the lower left corner, click the icon that looks like a person and choose "Edit Profile" <br/>
@@ -83,7 +83,7 @@ remember to use a strong password which is not easy to guess.
 1. Enter the current password along with a new/confirmed password and click "Save" <br/>
 ![image](../images/changepwd_manageprofile.png) <br/>
 
-# [Change via CLI](#tab/tabid-2)
+# [Change via CLI](#tab/tabid-2a)
 
 To change the administrator password using the CLI simply issue these two commands:
 
@@ -100,7 +100,7 @@ To change the administrator password using the CLI simply issue these two comman
 All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
 within the Controller. Read more about Identities [here](identities.md) Creating an identity via the UI or CLI is easy:
 
-# [New User via UI](#tab/tabid-1)
+# [New User via UI](#tab/tabid-3b)
 
 1. On the left side click "Edge Identities"
 1. In the top right corner of the screen click the "plus" image to add a new identity
@@ -108,7 +108,7 @@ within the Controller. Read more about Identities [here](identities.md) Creating
 1. Choose the type: Device, Service, User (choose User for now)
 1. Click save
 
-# [New User via CLI](#tab/tabid-2)
+# [New User via CLI](#tab/tabid-4b)
 
 To change the administrator password using the CLI simply issue these two commands:
 
@@ -136,7 +136,7 @@ With an identity created it's now time to create a service. Read more about Serv
 example we are going to choose a simple website that is [available on the open internet](http://eth0.me). This site will
 return the IP address you are coming from. Click this link now and discover what the your external IP is.
 
-# [New Service via UI](#tab/tabid-1)
+# [New Service via UI](#tab/tabid-5c)
 
 1. On the left side nav bar, click "Edge Services"
 1. In the top right corner of the screen click the "plus" image to add a new service
@@ -152,7 +152,7 @@ return the IP address you are coming from. Click this link now and discover what
 1. Leave Hosting Identities as is
 1. Click save
 
-# [New Service via CLI](#tab/tabid-2)
+# [New Service via CLI](#tab/tabid-6c)
 
 To change the administrator password using the CLI simply issue these two commands:
 
@@ -172,7 +172,7 @@ To change the administrator password using the CLI simply issue these two comman
 AppWANs are used to to authorize identities to services and allow you to choose the terminating node for traffic
 destined to your service. [Read more about appwans here](appwans.md)
 
-# [New Service via UI](#tab/tabid-1)
+# [New Service via UI](#tab/tabid-7d)
 
 1. On the left side nav bar, click "AppWANs"
 1. In the top right corner of the screen click the "plus" image to add a new AppWAN
@@ -181,7 +181,7 @@ destined to your service. [Read more about appwans here](appwans.md)
 1. Choose the identity you created before (NewUser)
 1. Click save
 
-# [New Service via CLI](#tab/tabid-2)
+# [New Service via CLI](#tab/tabid-8d)
 
 To create an AppWAN using the CLI issue the following commands:
 
