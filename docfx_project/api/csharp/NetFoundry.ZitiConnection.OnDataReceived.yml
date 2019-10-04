@@ -1,0 +1,103 @@
+### YamlMime:ManagedReference
+items:
+- uid: NetFoundry.ZitiConnection.OnDataReceived
+  commentId: T:NetFoundry.ZitiConnection.OnDataReceived
+  id: ZitiConnection.OnDataReceived
+  parent: NetFoundry
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ZitiConnection.OnDataReceived
+  nameWithType: ZitiConnection.OnDataReceived
+  fullName: NetFoundry.ZitiConnection.OnDataReceived
+  type: Delegate
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: OnDataReceived
+    path: aggregatedSources/csharp/ZitiConnection.cs
+    startLine: 35
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA delegate that represents the work to be done when data is recieved over the Ziti network. \nOnly invoked after a successful <xref href=\"NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected%2cNetFoundry.ZitiConnection.OnDataReceived)\" data-throw-if-not-resolved=\"false\"></xref>. Each time data is received\nit is important to verify the <code data-dev-comment-type=\"paramref\" class=\"paramref\">status</code> is still <xref href=\"NetFoundry.ZitiStatus.OK\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
+  syntax:
+    content: public delegate void OnDataReceived(ZitiStatus status, byte[] data, int count);
+    parameters:
+    - id: status
+      type: NetFoundry.ZitiStatus
+      description: The <xref href="NetFoundry.ZitiStatus" data-throw-if-not-resolved="false"></xref> representing the outcome of the write operation.
+    - id: data
+      type: System.Byte[]
+      description: A buffer representing the data that was received over the Ziti network. Data will always start at postiion 0.
+    - id: count
+      type: System.Int32
+      description: The number of bytes received in this interation. Data will always start at postiion 0.
+    content.vb: Public Delegate Sub OnDataReceived(status As ZitiStatus, data As Byte(), count As Integer)
+  modifiers.csharp:
+  - public
+  - delegate
+  modifiers.vb:
+  - Public
+  - Delegate
+references:
+- uid: NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected,NetFoundry.ZitiConnection.OnDataReceived)
+  commentId: M:NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected,NetFoundry.ZitiConnection.OnDataReceived)
+  isExternal: true
+- uid: NetFoundry.ZitiStatus.OK
+  commentId: F:NetFoundry.ZitiStatus.OK
+  isExternal: true
+- uid: NetFoundry.ZitiStatus
+  commentId: T:NetFoundry.ZitiStatus
+  parent: NetFoundry
+  name: ZitiStatus
+  nameWithType: ZitiStatus
+  fullName: NetFoundry.ZitiStatus
+- uid: NetFoundry
+  commentId: N:NetFoundry
+  name: NetFoundry
+  nameWithType: NetFoundry
+  fullName: NetFoundry
+- uid: System.Byte[]
+  isExternal: true
+  name: Byte[]
+  nameWithType: Byte[]
+  fullName: System.Byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: System.Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System

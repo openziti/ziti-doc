@@ -1,0 +1,363 @@
+### YamlMime:ManagedReference
+items:
+- uid: NetFoundry.ZitiStatus
+  commentId: T:NetFoundry.ZitiStatus
+  id: ZitiStatus
+  parent: NetFoundry
+  children:
+  - NetFoundry.ZitiStatus.CONFIG_NOT_FOUND
+  - NetFoundry.ZitiStatus.CONNABORT
+  - NetFoundry.ZitiStatus.CONTROLLER_UNAVAILABLE
+  - NetFoundry.ZitiStatus.EOF
+  - NetFoundry.ZitiStatus.GATEWAY_UNAVAILABLE
+  - NetFoundry.ZitiStatus.NOT_AUTHORIZED
+  - NetFoundry.ZitiStatus.OK
+  - NetFoundry.ZitiStatus.SERVICE_UNAVALABLE
+  - NetFoundry.ZitiStatus.TIMEOUT
+  langs:
+  - csharp
+  - vb
+  name: ZitiStatus
+  nameWithType: ZitiStatus
+  fullName: NetFoundry.ZitiStatus
+  type: Enum
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: ZitiStatus
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 8
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nAn enum representing the outcome of the given Ziti operation.\n"
+  example: []
+  syntax:
+    content: public enum ZitiStatus
+    content.vb: Public Enum ZitiStatus
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: NetFoundry.ZitiStatus.OK
+  commentId: F:NetFoundry.ZitiStatus.OK
+  id: OK
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: OK
+  nameWithType: ZitiStatus.OK
+  fullName: NetFoundry.ZitiStatus.OK
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: OK
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 13
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nIndicates a successful outcome\n"
+  example: []
+  syntax:
+    content: OK = 0
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: NetFoundry.ZitiStatus.CONFIG_NOT_FOUND
+  commentId: F:NetFoundry.ZitiStatus.CONFIG_NOT_FOUND
+  id: CONFIG_NOT_FOUND
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: CONFIG_NOT_FOUND
+  nameWithType: ZitiStatus.CONFIG_NOT_FOUND
+  fullName: NetFoundry.ZitiStatus.CONFIG_NOT_FOUND
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: CONFIG_NOT_FOUND
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 19
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA user error indicating the provided configuration file was not found.\n"
+  example: []
+  syntax:
+    content: CONFIG_NOT_FOUND = -1
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: NetFoundry.ZitiStatus.NOT_AUTHORIZED
+  commentId: F:NetFoundry.ZitiStatus.NOT_AUTHORIZED
+  id: NOT_AUTHORIZED
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: NOT_AUTHORIZED
+  nameWithType: ZitiStatus.NOT_AUTHORIZED
+  fullName: NetFoundry.ZitiStatus.NOT_AUTHORIZED
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: NOT_AUTHORIZED
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 26
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA user error indicating the identity from the provided configuration \nfile is not authorized to perform the action.\n"
+  example: []
+  syntax:
+    content: NOT_AUTHORIZED = -2
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: NetFoundry.ZitiStatus.CONTROLLER_UNAVAILABLE
+  commentId: F:NetFoundry.ZitiStatus.CONTROLLER_UNAVAILABLE
+  id: CONTROLLER_UNAVAILABLE
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: CONTROLLER_UNAVAILABLE
+  nameWithType: ZitiStatus.CONTROLLER_UNAVAILABLE
+  fullName: NetFoundry.ZitiStatus.CONTROLLER_UNAVAILABLE
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: CONTROLLER_UNAVAILABLE
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 32
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA network error indicating the Ziti Network Controller was not able to be contacted.\n"
+  example: []
+  syntax:
+    content: CONTROLLER_UNAVAILABLE = -3
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: NetFoundry.ZitiStatus.GATEWAY_UNAVAILABLE
+  commentId: F:NetFoundry.ZitiStatus.GATEWAY_UNAVAILABLE
+  id: GATEWAY_UNAVAILABLE
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: GATEWAY_UNAVAILABLE
+  nameWithType: ZitiStatus.GATEWAY_UNAVAILABLE
+  fullName: NetFoundry.ZitiStatus.GATEWAY_UNAVAILABLE
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: GATEWAY_UNAVAILABLE
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 38
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA network error indicating the Ziti Network Gateway was not able to be contacted.\n"
+  example: []
+  syntax:
+    content: GATEWAY_UNAVAILABLE = -4
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: NetFoundry.ZitiStatus.SERVICE_UNAVALABLE
+  commentId: F:NetFoundry.ZitiStatus.SERVICE_UNAVALABLE
+  id: SERVICE_UNAVALABLE
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: SERVICE_UNAVALABLE
+  nameWithType: ZitiStatus.SERVICE_UNAVALABLE
+  fullName: NetFoundry.ZitiStatus.SERVICE_UNAVALABLE
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: SERVICE_UNAVALABLE
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 46
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA user error indicating the service name provided was not available. \nEither it does not exist or the provided identity does not have sufficient \nrights to the service.\n"
+  example: []
+  syntax:
+    content: SERVICE_UNAVALABLE = -5
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: NetFoundry.ZitiStatus.EOF
+  commentId: F:NetFoundry.ZitiStatus.EOF
+  id: EOF
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: EOF
+  nameWithType: ZitiStatus.EOF
+  fullName: NetFoundry.ZitiStatus.EOF
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: EOF
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 52
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA normal status indicating the connection is closed.\n"
+  example: []
+  syntax:
+    content: EOF = -6
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: NetFoundry.ZitiStatus.TIMEOUT
+  commentId: F:NetFoundry.ZitiStatus.TIMEOUT
+  id: TIMEOUT
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: TIMEOUT
+  nameWithType: ZitiStatus.TIMEOUT
+  fullName: NetFoundry.ZitiStatus.TIMEOUT
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: TIMEOUT
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 59
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nAn exceptional status indicating the operation did not complete \nwithin the specified timeout\n"
+  example: []
+  syntax:
+    content: TIMEOUT = -7
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: NetFoundry.ZitiStatus.CONNABORT
+  commentId: F:NetFoundry.ZitiStatus.CONNABORT
+  id: CONNABORT
+  parent: NetFoundry.ZitiStatus
+  langs:
+  - csharp
+  - vb
+  name: CONNABORT
+  nameWithType: ZitiStatus.CONNABORT
+  fullName: NetFoundry.ZitiStatus.CONNABORT
+  type: Field
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: CONNABORT
+    path: aggregatedSources/csharp/ZitiStatus.cs
+    startLine: 66
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nAn exceptional situation indicating the connection between the \nclient and the Ziti Network Gateway was interrupted\n"
+  example: []
+  syntax:
+    content: CONNABORT = -8
+    return:
+      type: NetFoundry.ZitiStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: NetFoundry
+  commentId: N:NetFoundry
+  name: NetFoundry
+  nameWithType: NetFoundry
+  fullName: NetFoundry
+- uid: NetFoundry.ZitiStatus
+  commentId: T:NetFoundry.ZitiStatus
+  parent: NetFoundry
+  name: ZitiStatus
+  nameWithType: ZitiStatus
+  fullName: NetFoundry.ZitiStatus

@@ -1,0 +1,474 @@
+{
+  "homepages": [],
+  "source_base_path": "c:/git/ziti-doc-5/docfx_project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.Ziti.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.Ziti.html",
+          "hash": "eS0dqGkboqOuSc8Th4zi8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.ZitiConnection.OnConnected.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnConnected.html",
+          "hash": "Nq9syj9uudQvFrLM502vow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataReceived.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataReceived.html",
+          "hash": "heBVkF6hvEcDqNW82aRo3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataWritten.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataWritten.html",
+          "hash": "xeffWAs3jRRvkZ4s8M6mAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.ZitiConnection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.ZitiConnection.html",
+          "hash": "5PQnh69UxSDpQi12Y63ojQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.ZitiException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.ZitiException.html",
+          "hash": "wG4WPVrCx63vB/8hkxRx+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.ZitiIdentity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.ZitiIdentity.html",
+          "hash": "6oX67akmxNb0Ee+nGsdaZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.ZitiStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.ZitiStatus.html",
+          "hash": "FypXRAzGSC+B9oKsl5MRYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.ZitiStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.ZitiStream.html",
+          "hash": "11c58pPewXmypGskOePi5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/csharp/NetFoundry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/csharp/NetFoundry.html",
+          "hash": "Gq1SzQ0ctnRHjVR53bF9lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "bPm75A1czABv2+jpmNTnLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "QKsPzZcbRAiX42Wa6tyvpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "glossary/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "glossary/index.html",
+          "hash": "iRYFvrRSouaiGk1EEi7+Sw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "glossary/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "glossary/toc.html",
+          "hash": "EnzuqCb+6Tvc/ySA7w1xSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/Square.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/Square.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/changepwd_manageprofile.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/changepwd_manageprofile.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/changepwd_ui.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/changepwd_ui.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/nflightbglogo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/nflightbglogo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/nflightbglogo_40.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/nflightbglogo_40.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/nflightbglogo_50.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/nflightbglogo_50.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/square100.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/square100.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/square50.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/square50.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/ziti-overview.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/ziti-overview.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "JI5s9vHGSQOB9/4yTbj1eA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "samples/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "samples/index.html",
+          "hash": "XDUVEEsHKbNqbn86GZPOPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "samples/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "samples/toc.html",
+          "hash": "EnzuqCb+6Tvc/ySA7w1xSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "test.md",
+      "output": {
+        ".html": {
+          "relative_path": "test.html",
+          "hash": "qvoszXbhyvEHXZhmmE5Daw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "1q9YfaVw33By0c+eEYs5pA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/docker-quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/docker-quickstart.html",
+          "hash": "JVXKa5XAYsj1ZImtEHr2cA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/hello-ziti.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/hello-ziti.html",
+          "hash": "Fzc5rUi24waEpHiSsNRtKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/intro.html",
+          "hash": "maJDQ485hleTcgImaOvn6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/overview.html",
+          "hash": "gWz4lFWjoopkjWG2HZzFrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "ziti/quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/quickstart.html",
+          "hash": "+bxflELR4oLoVmGOLcIiuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "ziti/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/toc.html",
+          "hash": "rQM6bAaEKWVQTjC+MCKiPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

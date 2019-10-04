@@ -1,0 +1,64 @@
+### YamlMime:ManagedReference
+items:
+- uid: NetFoundry.ZitiConnection.OnConnected
+  commentId: T:NetFoundry.ZitiConnection.OnConnected
+  id: ZitiConnection.OnConnected
+  parent: NetFoundry
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ZitiConnection.OnConnected
+  nameWithType: ZitiConnection.OnConnected
+  fullName: NetFoundry.ZitiConnection.OnConnected
+  type: Delegate
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: OnConnected
+    path: aggregatedSources/csharp/ZitiConnection.cs
+    startLine: 25
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA delegate that represents the work to be done after a <xref href=\"NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected%2cNetFoundry.ZitiConnection.OnDataReceived)\" data-throw-if-not-resolved=\"false\"></xref> operation. \nThe result of the <xref href=\"NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected%2cNetFoundry.ZitiConnection.OnDataReceived)\" data-throw-if-not-resolved=\"false\"></xref> may NOT be successful. \nIt is important to verify the result by checking <code data-dev-comment-type=\"paramref\" class=\"paramref\">status</code>\n"
+  example: []
+  syntax:
+    content: public delegate void OnConnected(ZitiConnection zitiConnection, ZitiStatus status);
+    parameters:
+    - id: zitiConnection
+      type: NetFoundry.ZitiConnection
+      description: The <xref href="NetFoundry.ZitiConnection" data-throw-if-not-resolved="false"></xref> which as passed to the <xref href="NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected%2cNetFoundry.ZitiConnection.OnDataReceived)" data-throw-if-not-resolved="false"></xref> method
+    - id: status
+      type: NetFoundry.ZitiStatus
+      description: The <xref href="NetFoundry.ZitiStatus" data-throw-if-not-resolved="false"></xref> representing the outcome of the <xref href="NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected%2cNetFoundry.ZitiConnection.OnDataReceived)" data-throw-if-not-resolved="false"></xref>
+    content.vb: Public Delegate Sub OnConnected(zitiConnection As ZitiConnection, status As ZitiStatus)
+  modifiers.csharp:
+  - public
+  - delegate
+  modifiers.vb:
+  - Public
+  - Delegate
+references:
+- uid: NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected,NetFoundry.ZitiConnection.OnDataReceived)
+  commentId: M:NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected,NetFoundry.ZitiConnection.OnDataReceived)
+  isExternal: true
+- uid: NetFoundry.ZitiConnection
+  commentId: T:NetFoundry.ZitiConnection
+  parent: NetFoundry
+  name: ZitiConnection
+  nameWithType: ZitiConnection
+  fullName: NetFoundry.ZitiConnection
+- uid: NetFoundry.ZitiStatus
+  commentId: T:NetFoundry.ZitiStatus
+  parent: NetFoundry
+  name: ZitiStatus
+  nameWithType: ZitiStatus
+  fullName: NetFoundry.ZitiStatus
+- uid: NetFoundry
+  commentId: N:NetFoundry
+  name: NetFoundry
+  nameWithType: NetFoundry
+  fullName: NetFoundry

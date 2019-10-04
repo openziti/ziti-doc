@@ -1,0 +1,97 @@
+### YamlMime:ManagedReference
+items:
+- uid: NetFoundry.ZitiConnection.OnDataWritten
+  commentId: T:NetFoundry.ZitiConnection.OnDataWritten
+  id: ZitiConnection.OnDataWritten
+  parent: NetFoundry
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ZitiConnection.OnDataWritten
+  nameWithType: ZitiConnection.OnDataWritten
+  fullName: NetFoundry.ZitiConnection.OnDataWritten
+  type: Delegate
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: OnDataWritten
+    path: aggregatedSources/csharp/ZitiConnection.cs
+    startLine: 46
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA delegate that is invoked after data has been put into the event loop. If there are any expensive\nresources held this is the callback to release those resources.\nOnly needed when not using Ziti as a <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> (callback based Ziti)\n"
+  example: []
+  syntax:
+    content: public delegate void OnDataWritten(ZitiStatus status, int bytesWritten, object context);
+    parameters:
+    - id: status
+      type: NetFoundry.ZitiStatus
+      description: "A <xref href=\"NetFoundry.ZitiStatus\" data-throw-if-not-resolved=\"false\"></xref> that represents the state of the connection which \ninitiated this callback. If _NOT_ <xref href=\"NetFoundry.ZitiStatus.OK\" data-throw-if-not-resolved=\"false\"></xref> appropriate actions should be taken"
+    - id: bytesWritten
+      type: System.Int32
+      description: A count of how many bytes were able to be written.
+    - id: context
+      type: System.Object
+      description: The context that was supplied during the <xref href="NetFoundry.ZitiConnection.Write(System.Byte%5b%5d%2cSystem.Int32%2cNetFoundry.ZitiConnection.OnDataWritten%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> invocation
+    content.vb: Public Delegate Sub OnDataWritten(status As ZitiStatus, bytesWritten As Integer, context As Object)
+  modifiers.csharp:
+  - public
+  - delegate
+  modifiers.vb:
+  - Public
+  - Delegate
+references:
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: NetFoundry.ZitiStatus
+  commentId: T:NetFoundry.ZitiStatus
+  parent: NetFoundry
+  name: ZitiStatus
+  nameWithType: ZitiStatus
+  fullName: NetFoundry.ZitiStatus
+- uid: NetFoundry.ZitiStatus.OK
+  commentId: F:NetFoundry.ZitiStatus.OK
+  isExternal: true
+- uid: NetFoundry.ZitiConnection.Write(System.Byte[],System.Int32,NetFoundry.ZitiConnection.OnDataWritten,System.Object)
+  commentId: M:NetFoundry.ZitiConnection.Write(System.Byte[],System.Int32,NetFoundry.ZitiConnection.OnDataWritten,System.Object)
+  isExternal: true
+- uid: NetFoundry
+  commentId: N:NetFoundry
+  name: NetFoundry
+  nameWithType: NetFoundry
+  fullName: NetFoundry
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System

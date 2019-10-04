@@ -1,0 +1,450 @@
+### YamlMime:ManagedReference
+items:
+- uid: NetFoundry.Ziti
+  commentId: T:NetFoundry.Ziti
+  id: Ziti
+  parent: NetFoundry
+  children:
+  - NetFoundry.Ziti.Debug(System.String)
+  - NetFoundry.Ziti.OutputDebugInformation
+  langs:
+  - csharp
+  - vb
+  name: Ziti
+  nameWithType: Ziti
+  fullName: NetFoundry.Ziti
+  type: Class
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiAPI.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: Ziti
+    path: aggregatedSources/csharp/ZitiAPI.cs
+    startLine: 25
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA collection of static helper methods and properties for Ziti. and others\n"
+  example: []
+  syntax:
+    content: public class Ziti
+    content.vb: Public Class Ziti
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: NetFoundry.Ziti.OutputDebugInformation
+  commentId: P:NetFoundry.Ziti.OutputDebugInformation
+  id: OutputDebugInformation
+  parent: NetFoundry.Ziti
+  langs:
+  - csharp
+  - vb
+  name: OutputDebugInformation
+  nameWithType: Ziti.OutputDebugInformation
+  fullName: NetFoundry.Ziti.OutputDebugInformation
+  type: Property
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiAPI.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: OutputDebugInformation
+    path: aggregatedSources/csharp/ZitiAPI.cs
+    startLine: 32
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA property which controls whether or not output is sent to the \n<xref href=\"System.Diagnostics.Debug\" data-throw-if-not-resolved=\"false\"></xref> output stream. This is a global\nflag - when toggled all debug messages will show across any connection.\n"
+  example: []
+  syntax:
+    content: public static bool OutputDebugInformation { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Property OutputDebugInformation As Boolean
+  overload: NetFoundry.Ziti.OutputDebugInformation*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: NetFoundry.Ziti.Debug(System.String)
+  commentId: M:NetFoundry.Ziti.Debug(System.String)
+  id: Debug(System.String)
+  parent: NetFoundry.Ziti
+  langs:
+  - csharp
+  - vb
+  name: Debug(String)
+  nameWithType: Ziti.Debug(String)
+  fullName: NetFoundry.Ziti.Debug(System.String)
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiAPI.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: Debug
+    path: aggregatedSources/csharp/ZitiAPI.cs
+    startLine: 39
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nA helper method to output messages helpful during debugging Ziti-related\nissues.\n"
+  example: []
+  syntax:
+    content: public static void Debug(string msg)
+    parameters:
+    - id: msg
+      type: System.String
+      description: ''
+    content.vb: Public Shared Sub Debug(msg As String)
+  overload: NetFoundry.Ziti.Debug*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: NetFoundry
+  commentId: N:NetFoundry
+  name: NetFoundry
+  nameWithType: NetFoundry
+  fullName: NetFoundry
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Diagnostics.Debug
+  commentId: T:System.Diagnostics.Debug
+  isExternal: true
+- uid: NetFoundry.Ziti.OutputDebugInformation*
+  commentId: Overload:NetFoundry.Ziti.OutputDebugInformation
+  name: OutputDebugInformation
+  nameWithType: Ziti.OutputDebugInformation
+  fullName: NetFoundry.Ziti.OutputDebugInformation
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: NetFoundry.Ziti.Debug*
+  commentId: Overload:NetFoundry.Ziti.Debug
+  name: Debug
+  nameWithType: Ziti.Debug
+  fullName: NetFoundry.Ziti.Debug
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String

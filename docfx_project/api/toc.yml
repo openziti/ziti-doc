@@ -1,0 +1,9 @@
+- name: C (C lang)
+  href: clang/toc.yml
+  _topicHref: clang/index.html
+- name: C# (.NET Core)
+  href: csharp/toc.yml
+  _href: csharp/NetFoundry.Ziti.yml
+  topicHref: csharp/NetFoundry.yml
+  _topicHref: csharp/index.html
+  

@@ -1,0 +1,596 @@
+### YamlMime:ManagedReference
+items:
+- uid: NetFoundry.ZitiConnection
+  commentId: T:NetFoundry.ZitiConnection
+  id: ZitiConnection
+  parent: NetFoundry
+  children:
+  - NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected,NetFoundry.ZitiConnection.OnDataReceived)
+  - NetFoundry.ZitiConnection.Dispose
+  - NetFoundry.ZitiConnection.Write(System.Byte[],System.Int32,NetFoundry.ZitiConnection.OnDataWritten,System.Object)
+  langs:
+  - csharp
+  - vb
+  name: ZitiConnection
+  nameWithType: ZitiConnection
+  fullName: NetFoundry.ZitiConnection
+  type: Class
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: ZitiConnection
+    path: aggregatedSources/csharp/ZitiConnection.cs
+    startLine: 14
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nRepresents a connection through the Ziti network. Supports both <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> use-cases\nas well as callback-based. \n"
+  example: []
+  syntax:
+    content: 'public class ZitiConnection : IDisposable'
+    content.vb: >-
+      Public Class ZitiConnection
+          Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: NetFoundry.ZitiConnection.Write(System.Byte[],System.Int32,NetFoundry.ZitiConnection.OnDataWritten,System.Object)
+  commentId: M:NetFoundry.ZitiConnection.Write(System.Byte[],System.Int32,NetFoundry.ZitiConnection.OnDataWritten,System.Object)
+  id: Write(System.Byte[],System.Int32,NetFoundry.ZitiConnection.OnDataWritten,System.Object)
+  parent: NetFoundry.ZitiConnection
+  langs:
+  - csharp
+  - vb
+  name: Write(Byte[], Int32, ZitiConnection.OnDataWritten, Object)
+  nameWithType: ZitiConnection.Write(Byte[], Int32, ZitiConnection.OnDataWritten, Object)
+  fullName: NetFoundry.ZitiConnection.Write(System.Byte[], System.Int32, NetFoundry.ZitiConnection.OnDataWritten, System.Object)
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: Write
+    path: aggregatedSources/csharp/ZitiConnection.cs
+    startLine: 167
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nWrites the provided data over the NetFoundry network\n"
+  example: []
+  syntax:
+    content: public void Write(byte[] data, int count, ZitiConnection.OnDataWritten onDataWritten, object context)
+    parameters:
+    - id: data
+      type: System.Byte[]
+      description: A buffer holding the information to be sent over the NetFoundry network
+    - id: count
+      type: System.Int32
+      description: How many bytes of the buffer (starting at position 0) to write
+    - id: onDataWritten
+      type: NetFoundry.ZitiConnection.OnDataWritten
+      description: A callback to be invoked after the data is written to the NetFoundry network
+    - id: context
+      type: System.Object
+      description: Any object, provided back to the caller of this functionin the onDataWritten callback
+    content.vb: Public Sub Write(data As Byte(), count As Integer, onDataWritten As ZitiConnection.OnDataWritten, context As Object)
+  overload: NetFoundry.ZitiConnection.Write*
+  nameWithType.vb: ZitiConnection.Write(Byte(), Int32, ZitiConnection.OnDataWritten, Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: NetFoundry.ZitiConnection.Write(System.Byte(), System.Int32, NetFoundry.ZitiConnection.OnDataWritten, System.Object)
+  name.vb: Write(Byte(), Int32, ZitiConnection.OnDataWritten, Object)
+- uid: NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected,NetFoundry.ZitiConnection.OnDataReceived)
+  commentId: M:NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected,NetFoundry.ZitiConnection.OnDataReceived)
+  id: Dial(NetFoundry.ZitiConnection.OnConnected,NetFoundry.ZitiConnection.OnDataReceived)
+  parent: NetFoundry.ZitiConnection
+  langs:
+  - csharp
+  - vb
+  name: Dial(ZitiConnection.OnConnected, ZitiConnection.OnDataReceived)
+  nameWithType: ZitiConnection.Dial(ZitiConnection.OnConnected, ZitiConnection.OnDataReceived)
+  fullName: NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected, NetFoundry.ZitiConnection.OnDataReceived)
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: Dial
+    path: aggregatedSources/csharp/ZitiConnection.cs
+    startLine: 224
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nEstablishes the necessary connecctivity and callbacks to send data through the NetFoundry network\n"
+  example: []
+  syntax:
+    content: public void Dial(ZitiConnection.OnConnected onConnected, ZitiConnection.OnDataReceived onDataReceived)
+    parameters:
+    - id: onConnected
+      type: NetFoundry.ZitiConnection.OnConnected
+      description: Once the connection is established this callback is called
+    - id: onDataReceived
+      type: NetFoundry.ZitiConnection.OnDataReceived
+      description: Called each time data is received over the NetFoundry network
+    content.vb: Public Sub Dial(onConnected As ZitiConnection.OnConnected, onDataReceived As ZitiConnection.OnDataReceived)
+  overload: NetFoundry.ZitiConnection.Dial*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: Thrown when the ZitiConnection has had AsStream invoked previously
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: NetFoundry.ZitiConnection.Dispose
+  commentId: M:NetFoundry.ZitiConnection.Dispose
+  id: Dispose
+  parent: NetFoundry.ZitiConnection
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: ZitiConnection.Dispose()
+  fullName: NetFoundry.ZitiConnection.Dispose()
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: Dispose
+    path: aggregatedSources/csharp/ZitiConnection.cs
+    startLine: 299
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nCloses the ZitiConnection and cleans up as needed\n"
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose
+  overload: NetFoundry.ZitiConnection.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: NetFoundry
+  commentId: N:NetFoundry
+  name: NetFoundry
+  nameWithType: NetFoundry
+  fullName: NetFoundry
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: NetFoundry.ZitiConnection.Write*
+  commentId: Overload:NetFoundry.ZitiConnection.Write
+  name: Write
+  nameWithType: ZitiConnection.Write
+  fullName: NetFoundry.ZitiConnection.Write
+- uid: System.Byte[]
+  isExternal: true
+  name: Byte[]
+  nameWithType: Byte[]
+  fullName: System.Byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: System.Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: NetFoundry.ZitiConnection.OnDataWritten
+  commentId: T:NetFoundry.ZitiConnection.OnDataWritten
+  parent: NetFoundry
+  name: ZitiConnection.OnDataWritten
+  nameWithType: ZitiConnection.OnDataWritten
+  fullName: NetFoundry.ZitiConnection.OnDataWritten
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: NetFoundry.ZitiConnection.Dial*
+  commentId: Overload:NetFoundry.ZitiConnection.Dial
+  name: Dial
+  nameWithType: ZitiConnection.Dial
+  fullName: NetFoundry.ZitiConnection.Dial
+- uid: NetFoundry.ZitiConnection.OnConnected
+  commentId: T:NetFoundry.ZitiConnection.OnConnected
+  parent: NetFoundry
+  name: ZitiConnection.OnConnected
+  nameWithType: ZitiConnection.OnConnected
+  fullName: NetFoundry.ZitiConnection.OnConnected
+- uid: NetFoundry.ZitiConnection.OnDataReceived
+  commentId: T:NetFoundry.ZitiConnection.OnDataReceived
+  parent: NetFoundry
+  name: ZitiConnection.OnDataReceived
+  nameWithType: ZitiConnection.OnDataReceived
+  fullName: NetFoundry.ZitiConnection.OnDataReceived
+- uid: NetFoundry.ZitiConnection.Dispose*
+  commentId: Overload:NetFoundry.ZitiConnection.Dispose
+  name: Dispose
+  nameWithType: ZitiConnection.Dispose
+  fullName: NetFoundry.ZitiConnection.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )

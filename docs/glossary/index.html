@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Glossary | NetFoundry Ziti </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Glossary | NetFoundry Ziti ">
+    <meta name="generator" content="docfx 2.45.1.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/nflightbglogo_40.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="glossary">Glossary</h1>
+
+<p>Here you will find a list of terms you may come across as you are using Ziti.</p>
+<h2 id="ziti-network-ziti">Ziti Network, Ziti</h2>
+<p>Ziti is a modern, programmable network overlay with associated edge components, for application-embedded, zero trust network connectivity, written by developers for developers.</p>
+<p>Ziti is NetFoundry&#39;s next-generation programmable networking product. Ziti is used to create Ziti Networks.</p>
+<h2 id="network-overlay-overlay">Network Overlay, Overlay</h2>
+<p>A Ziti network is implemented as an &quot;overlay&quot;. A network overlay abstracts away the layers beneath it, providing a new set of abstractions for designing and implementing software and systems. Good programming abstractions allow developers to focus on the rules implemented by those abstractions without being concerned with the layers below the abstraction. Ziti&#39;s overlay allows developers to focus on connectivity between components without having to be concerned with low-level details of how that connectivity is managed.</p>
+<h2 id="underlay">Underlay</h2>
+<p>We refer to lower-level network concerns as &quot;underlay&quot;. IP networking would be an example of an underlay concept.</p>
+<h2 id="ziti-fabric-fabric">Ziti Fabric, Fabric</h2>
+<p>The Ziti Fabric provides the core of the network overlay. The Ziti Fabric implements a routable mesh network, which can provide reliable connectivity between any two points on the network. The fabric provides software extension mechanisms that allow the overlay to be embedded into new overlay applications. The Ziti Edge is an example of an overlay application implemented on top of Ziti Fabric extension mechanisms (Xgress, Xctrl, Xmgmt).</p>
+<h2 id="ziti-router-router">Ziti Router, Router</h2>
+<p>A Ziti Router is a process that is installed on a host, which allows it to participate in a Ziti Fabric. The router is designed to be extensible through Ziti fabric extension mechanisms (Xgress), which means that it is capable of &quot;hosting&quot; overlay network applications like the Ziti Edge.</p>
+<h2 id="ziti-controller-controller">Ziti Controller, Controller</h2>
+<p>A Ziti Controller is a process that is installed on a host, which allows it to coordinate a Ziti network. The controller is designed to be extensible through Ziti fabric extension mechanisms (Xctrl, Xmgmt), which means that it is capable of hosting extensions to the fabric control and management planes.</p>
+<h2 id="xgress-xctrl-xmgmt-ziti-fabric-sdk">Xgress (Xctrl, Xmgmt), Ziti Fabric SDK</h2>
+<p>Xgress is a set of extension components for the Ziti fabric, which enable overlay applications to participate in the overlay network. Xgress focuses on extending the data plane, providing interfaces for creating initiating and terminating endpoints. Xctrl and Xmgmt focus on extending the control and management planes of the fabric. Xgress is the core of the Ziti Fabric SDK.</p>
+<h2 id="ziti-edge-edge">Ziti Edge, Edge</h2>
+<p>The Ziti Edge implements the zero trust connectivity framework as an overlay application on top of the Ziti Fabric. The Ziti Edge provides connectivity implementations for a number of important endpoint types, including applications that embed Ziti connectivity through the Ziti Edge SDK. The Ziti Edge provides fallback connectivity solutions for non-Ziti applications using components like the Ziti tunnelers, and the Ziti proxy.</p>
+<h2 id="ziti-endpoint-sdk-endpoint-sdk-sdk">Ziti Endpoint SDK, Endpoint SDK, SDK</h2>
+<p>The Ziti Endpoint SDK provides software components that are designed to be embedded into customer applications so that they can participate natively in a Ziti network. The SDK targets golang, Swift, C, C#, and potentially other programming languages, allowing programs in those languages to work with idioms and concepts native to those environments. The SDK provides support for both accessing and hosting services that are available on a Ziti network.</p>
+<h2 id="ziti-enabled-application">Ziti Enabled Application</h2>
+<p>A Ziti Enabled Application is an application that embeds the Ziti Endpoint SDK, such that it can participate on a Ziti network to either access or host services.</p>
+<h2 id="ziti-tunneler-tunneler">Ziti Tunneler, Tunneler</h2>
+<p>A Ziti Tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, proxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.</p>
+<h2 id="ziti-bridge-gateway">Ziti Bridge Gateway</h2>
+<p>The Ziti Bridge Gateway allows Ziti Edge components to bridge onto a DVN legacy NetFoundry network for long-haul transport. </p>
+<h2 id="zitimop">ZitiMOP</h2>
+<p>ZitiMOP refers to the integration that enables Ziti networks to be orchestrated by the NetFoundry platform (MOP).</p>
+<h2 id="ziti-service-service">Ziti Service, Service</h2>
+<p>A Ziti network is primarily concerned with providing access to &quot;services&quot;. A service encapsulates the definition of any resource that could be accessed by a client on a traditional network. A Ziti Service is defined by a strong, extensible identity, rather than by an expression of an underlay concept. This means that services defined on a Ziti Network have an almost limitless &quot;namespace&quot; available for identifying services. A Ziti service would be defined by a name and/or a certificate, rather than by a DNS name or an IP address (underlay concepts).</p>
+<h2 id="service-definition">Service Definition</h2>
+<p>A service definition is used to &quot;bind&quot; a service to a specific underlay network expression, through one or more nodes on a Ziti overlay network. A service definition usually includes a terminating router (or routers) and one or more SDK or underlay network endpoints where the service can be reached.</p>
+<h2 id="session">Session</h2>
+<p>A session is an &quot;instance&quot; of a service on behalf of an initiating endpoint, which is connected to a terminating endpoint. A session has strong identity and security between the initiating endpoint, terminating endpoint, and throughout the links between. A session selects a specific set of routers to traverse between the endpoints, and that path can change dynamically due to network performance.</p>
+<h2 id="initiating-router-terminating-router">Initiating Router, Terminating Router</h2>
+<p>An initiating router is the router which initiates a request for a session on behalf of a connected endpoint. A terminating router is the router which provides access to the service associated with the session request. Every session links an initiating endpoint (through an initiating router), with a terminating endpoint (through a terminating router).</p>
+<h2 id="initiating-endpoint-terminating-endpoint">Initiating Endpoint, Terminating Endpoint</h2>
+<p>See &quot;initiating router&quot; and &quot;terminating router&quot; above. The initiating endpoint is the endpoint responsible for requesting connectivity to a service. The terminating endpoint is the endpoint that provides the service.</p>
+<h2 id="path">Path</h2>
+<p>The path is the set of Ziti Routers traversed by a session from an initiating router to a terminating router. Ziti aggressively optimizes the path for throughput and reliability, and so it may change during the session.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/glossary/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span class='pull-left'><span><a href='https://netfoundry.io'>© 2019 NetFoundry</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/privacy-policy'>Privacy Policy</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/legal-items'>Legal</a></span>&nbsp;&nbsp;<span><a href='https://netfoundry.zendesk.com/hc/en-us'>Support</a></span>&nbsp;&nbsp;</span><span class='pull-right'><span><a href='https://www.facebook.com/NetFoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145802.svg'></a></span>&nbsp;<span><a href='https://twitter.com/netfoundry' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145812.svg'></a></span>&nbsp;<span><a href='https://www.linkedin.com/company/netfoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145807.svg'></a></span>&nbsp;<span><a href='https://www.youtube.com/channel/UCGN6PFj1rZu50yme9YsICmg' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/174/174883.svg'></a></span>&nbsp;&nbsp;&nbsp;
+      </span><br>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

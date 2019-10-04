@@ -1,0 +1,720 @@
+### YamlMime:ManagedReference
+items:
+- uid: NetFoundry.ZitiIdentity
+  commentId: T:NetFoundry.ZitiIdentity
+  id: ZitiIdentity
+  parent: NetFoundry
+  children:
+  - NetFoundry.ZitiIdentity.#ctor(System.String)
+  - NetFoundry.ZitiIdentity.#ctor(System.String,System.Int32)
+  - NetFoundry.ZitiIdentity.Dump
+  - NetFoundry.ZitiIdentity.InitializeAndRun
+  - NetFoundry.ZitiIdentity.NewConnection(System.String)
+  - NetFoundry.ZitiIdentity.PathToConfigFile
+  - NetFoundry.ZitiIdentity.ServiceAvailable(System.String)
+  - NetFoundry.ZitiIdentity.Shutdown
+  langs:
+  - csharp
+  - vb
+  name: ZitiIdentity
+  nameWithType: ZitiIdentity
+  fullName: NetFoundry.ZitiIdentity
+  type: Class
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: ZitiIdentity
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 11
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nRepresents an enrolled identity\n"
+  example: []
+  syntax:
+    content: public class ZitiIdentity
+    content.vb: Public Class ZitiIdentity
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: NetFoundry.ZitiIdentity.PathToConfigFile
+  commentId: P:NetFoundry.ZitiIdentity.PathToConfigFile
+  id: PathToConfigFile
+  parent: NetFoundry.ZitiIdentity
+  langs:
+  - csharp
+  - vb
+  name: PathToConfigFile
+  nameWithType: ZitiIdentity.PathToConfigFile
+  fullName: NetFoundry.ZitiIdentity.PathToConfigFile
+  type: Property
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: PathToConfigFile
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 16
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nThe path to the enrolled identity\n"
+  example: []
+  syntax:
+    content: public string PathToConfigFile { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property PathToConfigFile As String
+  overload: NetFoundry.ZitiIdentity.PathToConfigFile*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: NetFoundry.ZitiIdentity.#ctor(System.String)
+  commentId: M:NetFoundry.ZitiIdentity.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: NetFoundry.ZitiIdentity
+  langs:
+  - csharp
+  - vb
+  name: ZitiIdentity(String)
+  nameWithType: ZitiIdentity.ZitiIdentity(String)
+  fullName: NetFoundry.ZitiIdentity.ZitiIdentity(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: .ctor
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 31
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nCreates a new ZitiIdentity using the provided path. The path must point at\na file is the result of the enrollment process.\n"
+  example: []
+  syntax:
+    content: public ZitiIdentity(string path)
+    parameters:
+    - id: path
+      type: System.String
+      description: The path to the enrolled Ziti identity
+    content.vb: Public Sub New(path As String)
+  overload: NetFoundry.ZitiIdentity.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: NetFoundry.ZitiIdentity.#ctor(System.String,System.Int32)
+  commentId: M:NetFoundry.ZitiIdentity.#ctor(System.String,System.Int32)
+  id: '#ctor(System.String,System.Int32)'
+  parent: NetFoundry.ZitiIdentity
+  langs:
+  - csharp
+  - vb
+  name: ZitiIdentity(String, Int32)
+  nameWithType: ZitiIdentity.ZitiIdentity(String, Int32)
+  fullName: NetFoundry.ZitiIdentity.ZitiIdentity(System.String, System.Int32)
+  type: Constructor
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: .ctor
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 42
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nCreates a new ZitiIdentity with the provided timeout (ms) using the provided \npath. The path must point at a file is the result of the enrollment process.\n"
+  example: []
+  syntax:
+    content: public ZitiIdentity(string path, int timeOutInMillis)
+    parameters:
+    - id: path
+      type: System.String
+      description: The path to the enrolled ziti identity
+    - id: timeOutInMillis
+      type: System.Int32
+      description: timeout in milliseconds
+    content.vb: Public Sub New(path As String, timeOutInMillis As Integer)
+  overload: NetFoundry.ZitiIdentity.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: NetFoundry.ZitiIdentity.NewConnection(System.String)
+  commentId: M:NetFoundry.ZitiIdentity.NewConnection(System.String)
+  id: NewConnection(System.String)
+  parent: NetFoundry.ZitiIdentity
+  langs:
+  - csharp
+  - vb
+  name: NewConnection(String)
+  nameWithType: ZitiIdentity.NewConnection(String)
+  fullName: NetFoundry.ZitiIdentity.NewConnection(System.String)
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: NewConnection
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 67
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nCreates a new ZitiConnection for this identity\n"
+  example: []
+  syntax:
+    content: public ZitiConnection NewConnection(string serviceName)
+    parameters:
+    - id: serviceName
+      type: System.String
+      description: The service name to create a ZitiConnection for
+    return:
+      type: NetFoundry.ZitiConnection
+      description: A ZitiConnection that is ready to be Dialed or converted to a stream via AsStream()
+    content.vb: Public Function NewConnection(serviceName As String) As ZitiConnection
+  overload: NetFoundry.ZitiIdentity.NewConnection*
+  exceptions:
+  - type: NetFoundry.ZitiException
+    commentId: T:NetFoundry.ZitiException
+    description: Thrown when the serviceName provided does not exist
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: NetFoundry.ZitiIdentity.ServiceAvailable(System.String)
+  commentId: M:NetFoundry.ZitiIdentity.ServiceAvailable(System.String)
+  id: ServiceAvailable(System.String)
+  parent: NetFoundry.ZitiIdentity
+  langs:
+  - csharp
+  - vb
+  name: ServiceAvailable(String)
+  nameWithType: ZitiIdentity.ServiceAvailable(String)
+  fullName: NetFoundry.ZitiIdentity.ServiceAvailable(System.String)
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: ServiceAvailable
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 97
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nDetermines if the provided serviceName is available for this identity\n"
+  example: []
+  syntax:
+    content: public bool ServiceAvailable(string serviceName)
+    parameters:
+    - id: serviceName
+      type: System.String
+      description: The service name to verify
+    return:
+      type: System.Boolean
+      description: If the service exists - true, false if not
+    content.vb: Public Function ServiceAvailable(serviceName As String) As Boolean
+  overload: NetFoundry.ZitiIdentity.ServiceAvailable*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: NetFoundry.ZitiIdentity.InitializeAndRun
+  commentId: M:NetFoundry.ZitiIdentity.InitializeAndRun
+  id: InitializeAndRun
+  parent: NetFoundry.ZitiIdentity
+  langs:
+  - csharp
+  - vb
+  name: InitializeAndRun()
+  nameWithType: ZitiIdentity.InitializeAndRun()
+  fullName: NetFoundry.ZitiIdentity.InitializeAndRun()
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: InitializeAndRun
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 115
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nInitializes this identity with the NetFoundry network\n"
+  example: []
+  syntax:
+    content: public void InitializeAndRun()
+    content.vb: Public Sub InitializeAndRun
+  overload: NetFoundry.ZitiIdentity.InitializeAndRun*
+  exceptions:
+  - type: System.Exception
+    commentId: T:System.Exception
+    description: Thrown when the path to the configuration file no longer exists or if the provided identity file is not valid
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: NetFoundry.ZitiIdentity.Shutdown
+  commentId: M:NetFoundry.ZitiIdentity.Shutdown
+  id: Shutdown
+  parent: NetFoundry.ZitiIdentity
+  langs:
+  - csharp
+  - vb
+  name: Shutdown()
+  nameWithType: ZitiIdentity.Shutdown()
+  fullName: NetFoundry.ZitiIdentity.Shutdown()
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: Shutdown
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 213
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\ninstructs this identity to disconnect from the NetFoundry network\n"
+  example: []
+  syntax:
+    content: public void Shutdown()
+    content.vb: Public Sub Shutdown
+  overload: NetFoundry.ZitiIdentity.Shutdown*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: NetFoundry.ZitiIdentity.Dump
+  commentId: M:NetFoundry.ZitiIdentity.Dump
+  id: Dump
+  parent: NetFoundry.ZitiIdentity
+  langs:
+  - csharp
+  - vb
+  name: Dump()
+  nameWithType: ZitiIdentity.Dump()
+  fullName: NetFoundry.ZitiIdentity.Dump()
+  type: Method
+  source:
+    remote:
+      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      branch: master
+      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+    id: Dump
+    path: aggregatedSources/csharp/ZitiIdentity.cs
+    startLine: 221
+  assemblies:
+  - Ziti.NET.Core
+  namespace: NetFoundry
+  summary: "\nDumps debug information to standard out. Only used when debugging\n"
+  example: []
+  syntax:
+    content: public void Dump()
+    content.vb: Public Sub Dump
+  overload: NetFoundry.ZitiIdentity.Dump*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: NetFoundry
+  commentId: N:NetFoundry
+  name: NetFoundry
+  nameWithType: NetFoundry
+  fullName: NetFoundry
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: NetFoundry.ZitiIdentity.PathToConfigFile*
+  commentId: Overload:NetFoundry.ZitiIdentity.PathToConfigFile
+  name: PathToConfigFile
+  nameWithType: ZitiIdentity.PathToConfigFile
+  fullName: NetFoundry.ZitiIdentity.PathToConfigFile
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: NetFoundry.ZitiIdentity.#ctor*
+  commentId: Overload:NetFoundry.ZitiIdentity.#ctor
+  name: ZitiIdentity
+  nameWithType: ZitiIdentity.ZitiIdentity
+  fullName: NetFoundry.ZitiIdentity.ZitiIdentity
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: NetFoundry.ZitiException
+  commentId: T:NetFoundry.ZitiException
+  name: ZitiException
+  nameWithType: ZitiException
+  fullName: NetFoundry.ZitiException
+- uid: NetFoundry.ZitiIdentity.NewConnection*
+  commentId: Overload:NetFoundry.ZitiIdentity.NewConnection
+  name: NewConnection
+  nameWithType: ZitiIdentity.NewConnection
+  fullName: NetFoundry.ZitiIdentity.NewConnection
+- uid: NetFoundry.ZitiConnection
+  commentId: T:NetFoundry.ZitiConnection
+  parent: NetFoundry
+  name: ZitiConnection
+  nameWithType: ZitiConnection
+  fullName: NetFoundry.ZitiConnection
+- uid: NetFoundry.ZitiIdentity.ServiceAvailable*
+  commentId: Overload:NetFoundry.ZitiIdentity.ServiceAvailable
+  name: ServiceAvailable
+  nameWithType: ZitiIdentity.ServiceAvailable
+  fullName: NetFoundry.ZitiIdentity.ServiceAvailable
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: NetFoundry.ZitiIdentity.InitializeAndRun*
+  commentId: Overload:NetFoundry.ZitiIdentity.InitializeAndRun
+  name: InitializeAndRun
+  nameWithType: ZitiIdentity.InitializeAndRun
+  fullName: NetFoundry.ZitiIdentity.InitializeAndRun
+- uid: NetFoundry.ZitiIdentity.Shutdown*
+  commentId: Overload:NetFoundry.ZitiIdentity.Shutdown
+  name: Shutdown
+  nameWithType: ZitiIdentity.Shutdown
+  fullName: NetFoundry.ZitiIdentity.Shutdown
+- uid: NetFoundry.ZitiIdentity.Dump*
+  commentId: Overload:NetFoundry.ZitiIdentity.Dump
+  name: Dump
+  nameWithType: ZitiIdentity.Dump
+  fullName: NetFoundry.ZitiIdentity.Dump
