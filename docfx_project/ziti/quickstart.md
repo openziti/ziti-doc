@@ -55,7 +55,7 @@ the public internet on ports: 22, 443, 1280, 3022.
 ### Obtain and Change the Default Password
 
 When first launched - the AMI will deposit a file into the file system at
-~/.config/ziti/ziti-controller/credentials.json. 
+~/.config/ziti/ziti-controller/credentials.json.
 
 > [!NOTE]
 > Since this is your first Ziti deployment this system is expected to be transient. If the IP address or DNS entry
@@ -76,6 +76,9 @@ remember to use a strong password which is not easy to guess.
 
 # [Change via UI](#tab/tabid-1a)
 
+These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
+[changing pki](changing-pki.md) for more information.
+
 1. Log into the UI using the password obtained in the prior step
 1. In the lower left corner, click the icon that looks like a person and choose "Edit Profile" <br/>
 ![image](../images/changepwd_ui.png) <br/>
@@ -87,11 +90,19 @@ remember to use a strong password which is not easy to guess.
 
 To change the administrator password using the CLI simply issue these two commands:
 
-    #load the current password into an environment variable
-    pwd=$(jq -r .password ~/.config/ziti/ziti-controller/credentials.json)
+    #load the current user/password into an environment variables
+    ctrl_user=$(jq -r .username ~/.config/ziti/ziti-controller/credentials.json)
+    ctrl_passwd=$(jq -r .password ~/.config/ziti/ziti-controller/credentials.json)
 
+> [!NOTE]
+> You will need to login one time in order to use the ziti cli:
+
+    ziticontroller=127.0.0.1
+    cert=~/.config/ziti/pki/intermediate/certs/intermediate.cert
+    ziti edge controller login https://${ziticontroller}:1280 -u $ctrl_user -p $ctrl_passwd -c $cert
+   
     #update the admin user. This command will prompt you to enter the password
-    ziti edge controller update authenticator updb -i "admin" -c $pwd
+    ziti edge controller update authenticator updb -i "Default Admin" 
     
 ***
 
@@ -141,7 +152,7 @@ return the IP address you are coming from. Click this link now and discover what
 1. On the left side nav bar, click "Edge Services"
 1. In the top right corner of the screen click the "plus" image to add a new service
 1. Choose a name for the serivce. Enter "ethzero-ui"
-1. Enter a host name for the service. Enter "ethZero.ziti.ui"
+1. Enter a host name for the service. Enter "ethzero.ziti.ui"
 1. Enter port 80
 1. Choose Router "ziti-gw01"
 1. For Endpoint Service choose:
@@ -163,7 +174,7 @@ To change the administrator password using the CLI simply issue these two comman
     gateway=$(ziti edge controller list gateways | cut -d ' ' -f2)
 
     #update the admin user. This command will prompt you to enter the password
-    ziti edge controller create service ethZero-cli "ethZero.ziti.cli" "80" "$gateway" "tcp:eth0.me:80" -c "$cluster"
+    ziti edge controller create service ethzero-cli "ethzero.ziti.cli" "80" "$gateway" "tcp:eth0.me:80" -c "$cluster"
 
 ***
 
@@ -177,7 +188,7 @@ destined to your service. [Read more about appwans here](appwans.md)
 1. On the left side nav bar, click "AppWANs"
 1. In the top right corner of the screen click the "plus" image to add a new AppWAN
 1. Choose a name for the AppWAN. Enter "my-first-appwan"
-1. Choose the service(s) you want to add to the AppWAN. Make sure you pick ethzero
+1. Choose the service(s) you want to add to the AppWAN. Make sure you pick ethzero-ui
 1. Choose the identity you created before (NewUser)
 1. Click save
 
@@ -189,7 +200,7 @@ To create an AppWAN using the CLI issue the following commands:
     identity=$(ziti edge controller list identities | grep NewUser | cut -d " " -f2)
 
     #load the service id into an environment variable
-    service=$(ziti edge controller list services | grep ethzero | cut -d " " -f2)
+    service=$(ziti edge controller list services | grep ethzero-cli | cut -d " " -f2)
 
     #update the admin user. This command will prompt you to enter the password
     ziti edge controller create app-wan my-first-cli-appwan -i $identity -s $service
@@ -207,7 +218,9 @@ network and configuration are all working properly:
 
 * Open a command prompt
 * ensure ziti-tunnel and NewUser.json are in the same directory and cd to this directory
-* run the ziti-tunnel in proxy mode `ziti-tunnel proxy -i NewUser.json ethzero:1111`
+* run the ziti-tunnel in proxy mode:
+  * `ziti-tunnel proxy -i NewUser.json ethzero-ui:1111`
+  * `ziti-tunnel proxy -i NewUser.json ethzero-cli:2222`
 * navigate your web browser to (or use curl) to obtain your IP address by going to http://localhost:1111/
 
 At this point you should see the external IP address of your Amazon instance. Delivered to your machine safely and
