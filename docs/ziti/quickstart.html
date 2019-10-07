@@ -152,7 +152,7 @@ automatically update the certificates in the event of the image losing its IP ad
 </ul>
 <section id="tabpanel_jUagFiZuWT_tabid-1a" role="tabpanel" data-tab="tabid-1a">
 <p>These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
-<a href="changing-pki.md">changing pki</a> for more information.</p>
+<a href="pki.html">changing pki</a> for more information.</p>
 <ol>
 <li>Log into the UI using the password obtained in the prior step</li>
 <li><p>In the lower left corner, click the icon that looks like a person and choose &quot;Edit Profile&quot; <br>
@@ -180,7 +180,7 @@ ziti edge controller update authenticator updb -i &quot;Default Admin&quot;
 </div>
 <h2 id="create-an-identity">Create an Identity</h2>
 <p>All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
-within the Controller. Read more about Identities <a href="identities.md">here</a> Creating an identity via the UI or CLI is easy:</p>
+within the Controller. Read more about Identities <a href="identities.html">here</a> Creating an identity via the UI or CLI is easy:</p>
 <div class="tabGroup" id="tabgroup_jUagFiZuWT-1">
 <ul role="tablist">
 <li role="presentation">
@@ -217,7 +217,7 @@ the file as NewUser.jwt) or if you used the CLI from the output location specifi
 <p>The ziti-enroller will output a new json file named <code>NewUser.json</code>. This file is precious and must be protected as it
 contains the identity of the given user.</p>
 <h2 id="create-a-service">Create a Service</h2>
-<p>With an identity created it&#39;s now time to create a service. Read more about Services <a href="services.md">here</a>.  For this
+<p>With an identity created it&#39;s now time to create a service. Read more about Services <a href="services.html">here</a>.  For this
 example we are going to choose a simple website that is <a href="http://eth0.me">available on the open internet</a>. This site will
 return the IP address you are coming from. Click this link now and discover what the your external IP is.</p>
 <div class="tabGroup" id="tabgroup_jUagFiZuWT-2">
@@ -262,7 +262,7 @@ ziti edge controller create service ethzero-cli &quot;ethzero.ziti.cli&quot; &qu
 </div>
 <h2 id="create-an-appwan">Create an AppWan</h2>
 <p>AppWANs are used to to authorize identities to services and allow you to choose the terminating node for traffic
-destined to your service. <a href="appwans.md">Read more about appwans here</a></p>
+destined to your service. <a href="appwans.html">Read more about appwans here</a></p>
 <div class="tabGroup" id="tabgroup_jUagFiZuWT-3">
 <ul role="tablist">
 <li role="presentation">
