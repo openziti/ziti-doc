@@ -8,6 +8,8 @@ Here you'll find the samples we have produced to try to illustrate how to use th
 
 CLANG example
 
+[!code-csharp[wttr.in](../aggregatedSources/clang_sample/sample_wttr.c)]
+
 # [C#](#tab/csharp)
 
 C# Example

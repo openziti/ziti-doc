@@ -92,7 +92,98 @@
 </ul>
 <section id="tabpanel_prvbZ2DWOr_clang" role="tabpanel" data-tab="clang">
 <p>CLANG example</p>
-</section>
+<pre><code class="lang-csharp" name="wttr.in">//
+// Created by eugene on 2/25/19.
+//
+
+#include &lt;nf/ziti.h&gt;
+
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;uv.h&gt;
+
+#define DIE(v) do { \
+int code = (v);\
+if (code != ZITI_OK) {\
+fprintf(stderr, &quot;ERROR: &quot; #v &quot; =&gt; %s\n&quot;, ziti_errorstr(code));\
+exit(code);\
+}} while(0)
+
+static size_t total;
+static nf_context nf;
+
+void on_data(nf_connection c, uint8_t *buf, int len) {
+    if (len == ZITI_EOF) {
+
+        printf(&quot;request completed: %s\n&quot;, ziti_errorstr(len));
+        NF_close(&amp;c);
+        NF_shutdown(nf);
+
+    }
+    else if (len &lt; 0) {
+        fprintf(stderr, &quot;unexpected error: %s\n&quot;, ziti_errorstr(len));
+        NF_close(&amp;c);
+        NF_shutdown(nf);
+    }
+    else {
+        total += len;
+        printf(&quot;%*.*s&quot;, len, len, buf);
+    }
+
+}
+
+static void on_write(nf_connection conn, ssize_t status, void *ctx) {
+    if (status &lt; 0) {
+        fprintf(stderr, &quot;request failed to submit status[%zd]: %s\n&quot;, status, ziti_errorstr(status));
+    }
+    else {
+        printf(&quot;request success: %zd bytes sent\n&quot;, status);
+    }
+}
+
+void on_connect(nf_connection conn, int status) {
+    DIE(status);
+
+    printf(&quot;sending HTTP request\n&quot;);
+    
+    uint8_t *req = &quot;GET /Rochester HTTP/1.0\r\n&quot;
+                   &quot;Accept: */*\r\n&quot;
+                   &quot;Connection: close\r\n&quot;
+                   &quot;Host: wttr.in\r\n&quot;
+                   &quot;User-Agent: curl/7.59.0\r\n&quot;
+                   &quot;\r\n&quot;;
+
+    DIE(NF_write(conn, req, strlen(req), on_write, NULL));
+}
+
+void on_nf_init(nf_context _nf, int status, void* ctx) {
+    DIE(status);
+    nf = _nf;
+
+    nf_connection conn;
+    DIE(NF_conn_init(nf, &amp;conn, NULL));
+    DIE(NF_dial(conn, &quot;demo-weather&quot;, on_connect, on_data));
+}
+
+int main(int argc, char** argv) {
+#if _WIN32
+    //changes the output to UTF-8 so that the windows output looks correct and not all jumbly
+    SetConsoleOutputCP(65001);
+#endif
+    int res;
+    uv_loop_t *loop = uv_default_loop();
+
+    DIE(NF_init(argv[1], loop, on_nf_init, NULL));
+
+    // loop will finish afger the request is complete and NF_shutdown is called
+    uv_run(loop, UV_RUN_DEFAULT);
+
+    printf(&quot;========================\n&quot;);
+
+    NF_free(&amp;nf);
+}
+</code></pre></section>
 <section id="tabpanel_prvbZ2DWOr_csharp" role="tabpanel" data-tab="csharp" aria-hidden="true" hidden="hidden">
 <p>C# Example</p>
 <pre><code class="lang-csharp" name="wttr.in">using System;
