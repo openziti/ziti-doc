@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> | NetFoundry Ziti </title>
+    <title>SDK Sample Usage | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" | NetFoundry Ziti ">
+    <meta name="title" content="SDK Sample Usage | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
@@ -77,8 +77,219 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="sdk-sample-usage">SDK Sample Usage</h1>
 
-<p>Here are samples. samples are nice</p>
+<p>Here you&#39;ll find the samples we have produced to try to illustrate how to use the SDKs.</p>
+<h2 id="demo-weather">Demo Weather</h2>
+<div class="tabGroup" id="tabgroup_prvbZ2DWOr">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_prvbZ2DWOr_clang" role="tab" aria-controls="tabpanel_prvbZ2DWOr_clang" data-tab="clang" tabindex="0" aria-selected="true">C</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_prvbZ2DWOr_csharp" role="tab" aria-controls="tabpanel_prvbZ2DWOr_csharp" data-tab="csharp" tabindex="-1">C#</a>
+</li>
+</ul>
+<section id="tabpanel_prvbZ2DWOr_clang" role="tabpanel" data-tab="clang">
+<p>CLANG example</p>
+</section>
+<section id="tabpanel_prvbZ2DWOr_csharp" role="tabpanel" data-tab="csharp" aria-hidden="true" hidden="hidden">
+<p>C# Example</p>
+<pre><code class="lang-csharp" name="wttr.in">using System;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using System.Net;
+using System.Net.Sockets;
+using System.Net.Security;
+using System.Net.Http;
+using ZitiIdentity = NetFoundry.ZitiIdentity;
+using ZitiStream = NetFoundry.ZitiStream;
+using ZitiConnection = NetFoundry.ZitiConnection;
+using ZitiStatus = NetFoundry.ZitiStatus;
+
+namespace Ziti.NET.Examples
+{
+    class Programb
+    {
+        static void Main(string[] args)
+        {
+            ZitiIdentity id = new ZitiIdentity(@&quot;c:\path\to\enrolled.id.json&quot;);
+
+            //once parsed - we can try to connect this identity to the Ziti network
+            id.InitializeAndRun();
+
+            //set the output encoding of the console to UTF8 to display the ascii art
+            Console.OutputEncoding = Encoding.UTF8;
+
+            //if needed - messages will be output to the System.Diagnostics.Debug stream
+            //NetFoundry.Ziti.OutputDebugInformation = true;
+
+            ZitiExamples.CallackExample(id, &quot;demo-weather&quot;);
+            Console.WriteLine(&quot;Wait for a response... Press any key when the response returns.&quot;);
+            Console.ReadKey();
+
+            //ZitiExamples.StreamExample(id, &quot;demo-weather&quot;);
+            ZitiExamples.SslStreamExample(id, &quot;demo-weather-ssl&quot;);
+            ZitiExamples.SslStreamExampleAsync(id, &quot;demo-weather-ssl&quot;).Wait();
+            ZitiExamples.ProxyExampleAsync(id, IPAddress.Parse(&quot;0.0.0.0&quot;), 2171, &quot;demo-weather-ssl&quot;).Wait();
+        }
+    }
+
+    class ZitiExamples
+    {
+        private const int DefaultBufferSize = 64;
+
+        //a predefined and properly formatted GET request to wttr.in
+        static string wttrRequestAsString = &quot;GET /Rochester HTTP/1.0\r\n&quot;
+                + &quot;Accept: *-/*\r\n&quot;
+                + &quot;Connection: close\r\n&quot;
+                + &quot;User-Agent: curl/7.59.0\r\n&quot;
+                + &quot;Host: wttr.in\r\n&quot;
+                + &quot;\r\n&quot;;
+
+        static byte[] wttrRequestAsBytes = Encoding.UTF8.GetBytes(wttrRequestAsString);
+
+        public static void StreamExample(ZitiIdentity id, string serviceName)
+        {
+            ZitiStream zitiStream = new ZitiStream(id.NewConnection(serviceName));
+
+            zitiStream.Write(wttrRequestAsBytes);
+
+            using (var stdout = Console.OpenStandardOutput())
+            using (BinaryReader binaryReader = new BinaryReader(zitiStream))
+            {
+                byte[] bytes = binaryReader.ReadBytes(DefaultBufferSize);
+                while (bytes != null &amp;&amp; bytes.Length &gt; 0)
+                {
+                    stdout.Write(bytes);
+                    bytes = binaryReader.ReadBytes(DefaultBufferSize);
+                }
+            }
+        }
+
+        public static void SslStreamExample(ZitiIdentity id, string serviceName)
+        {
+            ZitiStream zitiStream = new ZitiStream(id.NewConnection(serviceName));
+
+            SslStream sslStream = new SslStream(zitiStream);
+            sslStream.AuthenticateAsClient(&quot;wttr.in&quot;);
+            sslStream.Write(wttrRequestAsBytes);
+
+            using (var stdout = Console.OpenStandardOutput())
+            {
+                byte[] available = new byte[DefaultBufferSize];
+
+                int numRead = sslStream.Read(available, 0, DefaultBufferSize);
+                while (numRead &gt; 0)
+                {
+                    stdout.Write(available, 0, numRead);
+                    numRead = sslStream.Read(available, 0, DefaultBufferSize);
+                }
+            }
+        }
+
+        public async static Task SslStreamExampleAsync(ZitiIdentity id, string serviceName)
+        {
+            ZitiStream zitiStream = new ZitiStream(id.NewConnection(serviceName));
+
+            SslStream sslStream = new SslStream(zitiStream);
+            await sslStream.AuthenticateAsClientAsync(&quot;wttr.in&quot;);
+            await sslStream.WriteAsync(wttrRequestAsBytes);
+            await ZitiStream.PumpAsync(sslStream, Console.OpenStandardOutput());
+        }
+
+        public static async Task ProxyExampleAsync(ZitiIdentity id, IPAddress ip, int port, string serviceName)
+        {
+            var server = new TcpListener(ip, port);
+            server.Start();
+            while (true)
+            {
+                Console.WriteLine(&quot;Started. Listening on: &quot; + ip + &quot;:&quot; + port);
+                var client = await server.AcceptTcpClientAsync().ConfigureAwait(false);
+                Console.WriteLine(&quot;Client accepted...&quot;);
+                /*await specifically do not await this invocation so that we can support
+                 * more than one connection */
+                _ = ProxyAsync(id, client, serviceName);
+            }
+        }
+
+        public static async Task ProxyAsync(ZitiIdentity id, TcpClient client, string serviceName)
+        {
+            using (var stream = client.GetStream())
+            using (ZitiStream zitiStream = new ZitiStream(id.NewConnection(serviceName)))
+            {
+                await zitiStream.PumpAsync(stream);
+            }
+        }
+
+        public static void CallackExample(ZitiIdentity id, string serviceName)
+        {            
+            ZitiConnection conn = id.NewConnection(serviceName);
+
+            void onConnected(ZitiConnection zitiConnection, ZitiStatus onConnectedStatus)
+            {
+                if (onConnectedStatus != ZitiStatus.OK)
+                {
+                    Console.WriteLine(&quot;The zitiConnection is not in a good state for use.&quot;);
+                    Console.WriteLine(&quot;You should decide how to handle this. &quot;);
+                    Console.WriteLine(&quot;    Error: &quot; + onConnectedStatus.GetDescription());
+                }
+                object dataWrittenContext = &quot;some sort of context&quot;;
+                void onDataWritten(ZitiStatus dataWrittenStatus, int bytesWritten, object context)
+                {
+                    Console.WriteLine(&quot;here&#39;s the context: &quot; + dataWrittenContext.ToString());
+                }
+
+                //connection is connected... write the request over the network
+                zitiConnection.Write(wttrRequestAsBytes, wttrRequestAsBytes.Length, onDataWritten, dataWrittenContext);
+                Console.WriteLine(&quot;Data sent&quot;);
+            }
+
+            void onDataReceived(ZitiStatus dataReceivedStatus, byte[] data, int count)
+            {
+                if (dataReceivedStatus != ZitiStatus.OK)
+                {
+                    return; //all done
+                }
+                else
+                {
+                    using (var stdout = Console.OpenStandardOutput())
+                    {
+                        stdout.Write(data, 0, count);
+                    }
+                }
+            }
+
+            //with callbacks established - dial ziti
+            conn.Dial(onConnected, onDataReceived);
+        }
+    }
+
+    internal static class EnumHelper
+    {
+        /// &lt;summary&gt;
+        /// Extension method to enum to return the DescriptionAttribute
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;enumVal&quot;&gt;The enum in question to get the description from&lt;/param&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        public static string GetDescription(this Enum enumVal)
+        {
+            var type = enumVal.GetType();
+            var memberInfo = type.GetMember(enumVal.ToString());
+            var atts = memberInfo[0].GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false);
+            if (atts.Length &lt; 1)
+            {
+                return &quot;__NO DESCRIPTOIN AVAILABLE__&quot;;
+            }
+            var descAttr = (System.ComponentModel.DescriptionAttribute)(atts[0]);
+            return descAttr.Description;
+        }
+    }
+}
+</code></pre><p>Here is more words</p>
+</section>
+</div>
 </article>
           </div>
           
