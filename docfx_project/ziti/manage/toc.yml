@@ -2,5 +2,7 @@
   href: controller.md
 - name: Router
   href: router.md
+- name: PKI
+  href: pki.md
 - name: Troubleshooting
   href: troubleshooting.md

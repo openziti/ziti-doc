@@ -77,7 +77,7 @@ remember to use a strong password which is not easy to guess.
 # [Change via UI](#tab/tabid-1a)
 
 These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
-[changing pki](pki.md) for more information.
+[changing pki](manage/pki.md) for more information.
 
 1. Log into the UI using the password obtained in the prior step
 1. In the lower left corner, click the icon that looks like a person and choose "Edit Profile" <br/>
