@@ -4,7 +4,10 @@
   href: quickstart.md
 - name: Install
   href: install/toc.yml
+  topicHref: install/overview.md
 - name: Manage
   href: manage/toc.yml
+  topicHref: manage/manage.md
 - name: Clients
-  href: clients/toc.yml  
+  href: clients/toc.yml
+  topicHref: clients/overview.md
