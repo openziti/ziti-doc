@@ -10,4 +10,4 @@
   topicHref: manage/manage.md
 - name: Clients
   href: clients/toc.yml
-  topicHref: clients/overview.md
+  topicHref: clients/which-client.md

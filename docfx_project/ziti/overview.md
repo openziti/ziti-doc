@@ -1,11 +1,19 @@
 # Overview
+
+## Why Ziti?
+Ziti represents the next generation of secure networking for your applications and has arrived with the Ziti platform,
+created by NetFoundry, Inc ! The Ziti Controller and the Ziti Edge Router combine to form a secure, Zero Trust
+entry point into your network or as a secure zero-trust proxy to other hosted services.
+
 ## Getting started with Ziti
+
 If you are looking to jump right in feet first you can follow along
 this with our [up-and-running quickstart guide](quickstart.md).
 The quickstart will leverage [docker](https://docs.docker.com/) and will
 help you spin up a network in minutes.
 
 ## Overview of a Ziti Network
+
 The Ziti Network (Ziti) is composed of the following building
 blocks: Controller, Router, Edge Gateway, Edge Clients. These
 components are used in conjunction to provide secure
@@ -18,6 +26,7 @@ Here's an overview of a network:
 ![image](../images/ziti-overview.png)
 
 ### ZITI CONTROLLER
+
 The NetFoundry Ziti Controller is the central function of the
 NetFoundry Ziti Network. The Controller provides the
 configuration plane. It is responsible for configuring Ziti services
@@ -46,6 +55,7 @@ The Controller uses an out of process database (Postgres) to
 store the information needed to manage the network.
 
 ### ZITI ROUTER
+
 Ziti Routers are the fundamental building blocks of the Ziti
 Network. These routers are responsible for securely and reliably
 delivering traffic from one Ziti Network node to the traffic’s
@@ -58,6 +68,7 @@ allows for active failover to ensure a reliable network connection
 even in the case of a node failure.
 
 ### ZITI EDGE GATEWAY
+
 Another fundamental building block of the Ziti Network is the
 Edge Gateway. The Edge Gateway is the entry point for Edge
 Clients connecting to the Ziti Network. The Edge Gateway is a
@@ -69,6 +80,7 @@ The Gateway in combination with the Controller is responsible
 for authenticating and authorizing Ziti Edge Clients.
 
 ### ZITI EDGE CLIENTS
+
 Connecting to the Ziti Network requires a Ziti Edge Client. Edge
 Clients are designed to work with both brownfield and greenfield
 applications.
@@ -86,12 +98,14 @@ which provide seamless, secure connectivity and do not require
 changes to the target application.
 
 ## USING ZITI
+
 Once the Ziti Network is established and deployed the next step
 is to configure the software-powered network. The three main
 concepts necessary to configure a Ziti Network are: Identities,
 Services, and AppWANs.
 
 ### SERVICES
+
 A service encapsulates the definition of any resource that could
 be accessed by a client on a traditional network. A Ziti Service is
 defined by a strong, extensible identity, rather than by an
@@ -108,6 +122,7 @@ node is all the end-user need do, the Ziti Network handles the
 rest.
 
 ### IDENTITIES
+
 Identities represent individual endpoints in the Ziti Network
 which can establish connectivity. All connections made within the
 Ziti Network are mutually authenticated using X509 Certificates.
@@ -118,6 +133,7 @@ Network to authorize the client and enumerate the services the
 Identity is authorized to use.
 
 ### AppWAN
+
 The AppWAN is concept created to encapsulate the mapping
 between services and identities in a software-powered network.
 In the simplest terms, AppWANs are a group of services and a
