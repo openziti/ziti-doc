@@ -413,11 +413,59 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/clients/android.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/clients/android.html",
+          "hash": "Y6/lm/yYPXbQ0+H7j+5gLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/clients/how-to-choose.md",
       "output": {
         ".html": {
           "relative_path": "ziti/clients/how-to-choose.html",
           "hash": "rqLUgQHwDXTX/4RBy85gtw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/clients/ios.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/clients/ios.html",
+          "hash": "4WF1oKyzDjWd0isReEmToA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/clients/linux.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/clients/linux.html",
+          "hash": "H2n8Gyb+lzKaisGEVVCJPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/clients/macos.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/clients/macos.html",
+          "hash": "Ya6jk+1zpQtScQgvCyfMaA=="
         }
       },
       "is_incremental": false,
@@ -441,7 +489,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/clients/tunneler.html",
-          "hash": "6nH+YXX7WpZkaqGkYHXlXQ=="
+          "hash": "JgMxkiOfxLrI0Vy3zQ6teA=="
         }
       },
       "is_incremental": false,
@@ -509,6 +557,54 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/install/controller.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/install/controller.html",
+          "hash": "RCx7tckDI9phHZywcsX75A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/install/edge-router.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/install/edge-router.html",
+          "hash": "3HTA5SFVxeCLFKIAFh+xxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/install/overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/install/overview.html",
+          "hash": "8F1XTrgqhAq2aMOks9+CIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/install/pki.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/install/pki.html",
+          "hash": "FdwBO6C5i3eGiZ+k1ik6Ow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/intro.md",
       "output": {
         ".html": {
@@ -538,18 +634,6 @@
         ".html": {
           "relative_path": "ziti/manage/edge-router.html",
           "hash": "CuCfXPGVUBUvIzhIleZJUw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "ziti/manage/install/install.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/manage/install/install.html",
-          "hash": "TwdTGhj/viVVp+mxL8X1Lw=="
         }
       },
       "is_incremental": false,
@@ -657,7 +741,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/toc.html",
-          "hash": "ig0R8jTgo7/vx+0FF/ISgA=="
+          "hash": "dVg0Ix9RlXT9R4kaYV08LA=="
         }
       },
       "is_incremental": false,
@@ -680,24 +764,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 31,
-          "skipped_file_count": 31
+          "total_file_count": 38,
+          "skipped_file_count": 38
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 10,
           "skipped_file_count": 10
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         }
       }
     },

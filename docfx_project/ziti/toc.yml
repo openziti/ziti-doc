@@ -2,6 +2,8 @@
   href: overview.md
 - name: Quickstart
   href: quickstart.md
+- name: Install
+  href: install/toc.yml
 - name: Manage
   href: manage/toc.yml
 - name: Clients
