@@ -1,7 +1,9 @@
 - name: C (C lang)
   href: clang/toc.yml
+  topicHref: clang/index.md
 - name: C# (.NET Core)
   href: csharp/toc.yml
   topicHref: csharp/NetFoundry.yml
 - name: Controller ReST API
   href: rest/toc.yml
+  topicHref: rest/index.md
