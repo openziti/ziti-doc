@@ -1,4 +1,4 @@
-# NetFoundry Ziti
+# Overview
 ## Getting started with Ziti
 If you are looking to jump right in feet first you can follow along
 this with our [up-and-running quickstart guide](quickstart.md).

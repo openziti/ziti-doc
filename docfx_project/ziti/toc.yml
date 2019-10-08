@@ -5,8 +5,4 @@
 - name: Manage
   href: manage/toc.yml
 - name: Clients
-  href: clients/toc.yml
-- name: Glossary
-  href: ../glossary/toc.yml
-- name: Samples
-  href: ../samples/toc.yml
+  href: clients/toc.yml  

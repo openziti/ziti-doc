@@ -1,4 +1,4 @@
-# NetFoundry Ziti
+# Overview
 Spin up your network with NetFoundry's Ziti.
 
 ## Getting Started

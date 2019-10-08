@@ -1,6 +1,7 @@
 # Glossary
 Here you will find a list of terms you may come across as you are using Ziti.
 
+
 ## Ziti Network, Ziti
 Ziti is a modern, programmable network overlay with associated edge components, for application-embedded, zero trust network connectivity, written by developers for developers.
 
@@ -58,4 +59,8 @@ An initiating router is the router which initiates a request for a session on be
 See "initiating router" and "terminating router" above. The initiating endpoint is the endpoint responsible for requesting connectivity to a service. The terminating endpoint is the endpoint that provides the service.
 
 ## Path
-The path is the set of Ziti Routers traversed by a session from an initiating router to a terminating router. Ziti aggressively optimizes the path for throughput and reliability, and so it may change during the session.
+The path is the set of Ziti Routers traversed by a session from an initiating router to a terminating router. Ziti
+aggressively optimizes the path for throughput and reliability, and so it may change during the session.
+
+
+bbbb

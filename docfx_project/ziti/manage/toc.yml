@@ -2,3 +2,5 @@
   href: controller.md
 - name: Router
   href: router.md
+- name: Troubleshooting
+  href: troubleshooting.md
