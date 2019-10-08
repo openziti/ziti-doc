@@ -102,7 +102,7 @@ To change the administrator password using the CLI simply issue these two comman
     ziti edge controller login https://${ziticontroller}:1280 -u $ctrl_user -p $ctrl_passwd -c $cert
    
     #update the admin user. This command will prompt you to enter the password
-    ziti edge controller update authenticator updb -i "Default Admin" 
+    ziti edge controller update authenticator updb -s
     
 ***
 

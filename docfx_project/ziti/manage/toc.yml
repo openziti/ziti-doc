@@ -1,3 +1,5 @@
+- name: Install
+  href: install/toc.yml
 - name: Controller
   href: controller.md
 - name: Router
@@ -6,3 +8,5 @@
   href: pki.md
 - name: Troubleshooting
   href: troubleshooting.md
+- name: Install
+  href: install/toc.yml

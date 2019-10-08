@@ -175,7 +175,7 @@ cert=~/.config/ziti/pki/intermediate/certs/intermediate.cert
 ziti edge controller login https://${ziticontroller}:1280 -u $ctrl_user -p $ctrl_passwd -c $cert
 
 #update the admin user. This command will prompt you to enter the password
-ziti edge controller update authenticator updb -i &quot;Default Admin&quot; 
+ziti edge controller update authenticator updb -s
 </code></pre></section>
 </div>
 <h2 id="create-an-identity">Create an Identity</h2>
