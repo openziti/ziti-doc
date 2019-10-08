@@ -10,6 +10,16 @@ Controller and the Edge Router.
 
 ## Controller
 
-The first 
+### Prerequisite - Database
+
+There are a few prerequisites necessary before being able to deploy your first Controller.  The first thing you will
+need is a database. At this time the Ziti Controller is using a Postgres instance. Setting up and managing a Postgres
+database is a complex task beyond the scope of this guide. This guide is intended to be illustrative of installing and
+managing the Ziti Controller and not maintaining a Postgres installation. Refer to the documentation from
+[Postgres](https://www.postgresql.org/docs/) for asistance setting up a Postgres database.
+
+### Prerequistie - PKI
+
+Public Key Infrastructure (PKI) is a complex topic.
 
 ## Edge Router
