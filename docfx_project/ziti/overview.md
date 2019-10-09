@@ -15,7 +15,7 @@ help you spin up a network in minutes.
 ## Overview of a Ziti Network
 
 The Ziti Network (Ziti) is composed of the following building
-blocks: Controller, Router, Edge Gateway, Edge Clients. These
+blocks: Controller, Router, Edge Router, Edge Clients. These
 components are used in conjunction to provide secure
 connectivity between two points such as a client to a server. This
 type of network is considered an overlay network because it
@@ -67,16 +67,16 @@ used when routing traffic to the destination. The monitoring also
 allows for active failover to ensure a reliable network connection
 even in the case of a node failure.
 
-### ZITI EDGE GATEWAY
+### ZITI EDGE Router
 
 Another fundamental building block of the Ziti Network is the
-Edge Gateway. The Edge Gateway is the entry point for Edge
-Clients connecting to the Ziti Network. The Edge Gateway is a
+Edge Router. The Edge Router is the entry point for Edge
+Clients connecting to the Ziti Network. The Edge Router is a
 specialized Router incorporating the functionality of a Router to
 enable it to route traffic over the Ziti network as a Router would
 to a given destination.
 
-The Gateway in combination with the Controller is responsible
+The Edge Router in combination with the Controller is responsible
 for authenticating and authorizing Ziti Edge Clients.
 
 ### ZITI EDGE CLIENTS

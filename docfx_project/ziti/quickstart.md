@@ -46,7 +46,7 @@ the public internet on ports: 22, 443, 1280, 3022.
   * port 22 - the default port that ssh uses. This is how you will log into the bare AMI after it is launched.
   * port 443 - a small UI is delivered via a web server that runs on port 443, using self-signed certificates
   * port 1280 - the preselected port the Ziti controller will serve its API over
-  * port 3022 - the preselected port for data channels to the Ziti gateway
+  * port 3022 - the preselected port for data channels to the Ziti Edge Router
 
 > [!IMPORTANT]
 > Make sure you have the private key corresponding to the public key you choose.
@@ -170,11 +170,11 @@ To change the administrator password using the CLI simply issue these two comman
     #load the default cluster id into an environment variable
     cluster=$(ziti edge controller list clusters | tr -s ' ' | cut -d ' ' -f4)
 
-    #load the gateway id into an environment variable
-    gateway=$(ziti edge controller list gateways | cut -d ' ' -f2)
+    #load the edge router id into an environment variable
+    edgeRouter=$(ziti edge controller list gateways | cut -d ' ' -f2)
 
     #update the admin user. This command will prompt you to enter the password
-    ziti edge controller create service ethzero-cli "ethzero.ziti.cli" "80" "$gateway" "tcp:eth0.me:80" -c "$cluster"
+    ziti edge controller create service ethzero-cli "ethzero.ziti.cli" "80" "$edgeRouter" "tcp:eth0.me:80" -c "$cluster"
 
 ***
 

@@ -119,7 +119,7 @@ the public internet on ports: 22, 443, 1280, 3022.<ul>
 <li>port 22 - the default port that ssh uses. This is how you will log into the bare AMI after it is launched.</li>
 <li>port 443 - a small UI is delivered via a web server that runs on port 443, using self-signed certificates</li>
 <li>port 1280 - the preselected port the Ziti controller will serve its API over</li>
-<li>port 3022 - the preselected port for data channels to the Ziti gateway</li>
+<li>port 3022 - the preselected port for data channels to the Ziti Edge Router</li>
 </ul>
 </li>
 </ul>
@@ -253,11 +253,11 @@ return the IP address you are coming from. Click this link now and discover what
 <pre><code>#load the default cluster id into an environment variable
 cluster=$(ziti edge controller list clusters | tr -s &#39; &#39; | cut -d &#39; &#39; -f4)
 
-#load the gateway id into an environment variable
-gateway=$(ziti edge controller list gateways | cut -d &#39; &#39; -f2)
+#load the edge router id into an environment variable
+edgeRouter=$(ziti edge controller list gateways | cut -d &#39; &#39; -f2)
 
 #update the admin user. This command will prompt you to enter the password
-ziti edge controller create service ethzero-cli &quot;ethzero.ziti.cli&quot; &quot;80&quot; &quot;$gateway&quot; &quot;tcp:eth0.me:80&quot; -c &quot;$cluster&quot;
+ziti edge controller create service ethzero-cli &quot;ethzero.ziti.cli&quot; &quot;80&quot; &quot;$edgeRouter&quot; &quot;tcp:eth0.me:80&quot; -c &quot;$cluster&quot;
 </code></pre></section>
 </div>
 <h2 id="create-an-appwan">Create an AppWan</h2>

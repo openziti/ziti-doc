@@ -6,10 +6,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Net.Security;
 using System.Net.Http;
-using ZitiIdentity = NetFoundry.ZitiIdentity;
-using ZitiStream = NetFoundry.ZitiStream;
-using ZitiConnection = NetFoundry.ZitiConnection;
-using ZitiStatus = NetFoundry.ZitiStatus;
+
+using NetFoundry;
 
 namespace Ziti.NET.Examples
 {
@@ -41,7 +39,7 @@ namespace Ziti.NET.Examples
 
     class ZitiExamples
     {
-        private const int DefaultBufferSize = 64;
+        private const int DefaultBufferSize = 64*1024;
 
         //a predefined and properly formatted GET request to wttr.in
         static string wttrRequestAsString = "GET /Rochester HTTP/1.0\r\n"
