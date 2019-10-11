@@ -34,7 +34,7 @@ The Ziti Endpoint SDK provides software components that are designed to be embed
 A Ziti Enabled Application is an application that embeds the Ziti Endpoint SDK, such that it can participate on a Ziti network to either access or host services.
 
 ## Ziti Tunneler, Tunneler
-A Ziti Tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, proxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.
+A Ziti Tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, tproxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.
 
 ## Ziti Service, Service
 A Ziti network is primarily concerned with providing access to "services". A service encapsulates the definition of any resource that could be accessed by a client on a traditional network. A Ziti Service is defined by a strong, extensible identity, rather than by an expression of an underlay concept. This means that services defined on a Ziti Network have an almost limitless "namespace" available for identifying services. A Ziti service would be defined by a name and/or a certificate, rather than by a DNS name or an IP address (underlay concepts).

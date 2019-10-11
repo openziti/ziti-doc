@@ -2,9 +2,9 @@
   href: overview.md
 - name: Quickstart
   href: quickstart.md
-- name: Install
-  href: install/toc.yml
-  topicHref: install/overview.md
+#- name: Install
+#  href: install/toc.yml
+#  topicHref: install/overview.md
 - name: Manage
   href: manage/toc.yml
   topicHref: manage/manage.md
