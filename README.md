@@ -20,11 +20,12 @@ a bug in docfx as of Oct 11 that will cause docfx to fail.
 * remove the docs folder: `rmdir /s /q docs`
 * put the docs folder back as a symlink: `mklink /j docs docfx_project\_site`
 * add links in aggregatedSources to the sdks (change ZITI_ROOT) accordingly:
-** set ZITI_ROOT=c:\git\github
-** cd aggregatedSources
-** mklink /j clang %ZITI_ROOT%\ziti-sdk-c\library
-** mklink /j clang_example %ZITI_ROOT%\ziti-sdk-c\programs\sample_wttr
-** mklink /j csharp %ZITI_ROOT%\ziti-sdk-csharp\Ziti.NET.Standard
-** mklink /j csharp_example %ZITI_ROOT%\ziti-sdk-csharp\Ziti.Core.Console
-
+```
+   set ZITI_ROOT=c:\git\github
+   cd aggregatedSources
+   mklink /j clang %ZITI_ROOT%\ziti-sdk-c\library
+   mklink /j clang_example %ZITI_ROOT%\ziti-sdk-c\programs\sample_wttr
+   mklink /j csharp %ZITI_ROOT%\ziti-sdk-csharp\Ziti.NET.Standard
+   mklink /j csharp_example %ZITI_ROOT%\ziti-sdk-csharp\Ziti.Core.Console
+```
 * regenerate the docfx site: `docfx docfx_project\docfx.json`
