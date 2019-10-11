@@ -21,7 +21,7 @@ items:
   fullName: NetFoundry
   type: Namespace
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
 references:
 - uid: NetFoundry.Ziti
   commentId: T:NetFoundry.Ziti

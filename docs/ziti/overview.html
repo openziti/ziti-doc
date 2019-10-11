@@ -84,10 +84,12 @@
 created by NetFoundry, Inc ! The Ziti Controller and the Ziti Edge Router combine to form a secure, Zero Trust
 entry point into your network or as a secure zero-trust proxy to other hosted services.</p>
 <h2 id="getting-started-with-ziti">Getting started with Ziti</h2>
-<p>If you are looking to jump right in feet first you can follow along
-this with our <a href="quickstart.html">up-and-running quickstart guide</a>.
-The quickstart will leverage <a href="https://docs.docker.com/">docker</a> and will
-help you spin up a network in minutes.</p>
+<p>If you are looking to jump right in feet first you can follow along this with our <a href="quickstart.html">up-and-running quickstart
+guide</a>. The quickstart will leverage Amazon Web Services (AWS) and will have you launch an AMI which will
+get you up and running in no time.</p>
+<p>This environment is perfect for evaluators to get to know Ziti and the capabilities it offers.  The environement was not
+designed for large scale deployment or for long-term usage. If you are looking for a managed service to help you run a
+truly global, scalable network browse over to our website at <a href="http://netfoundry.io">http://netfoundry.io</a> to learn more.</p>
 <h2 id="overview-of-a-ziti-network">Overview of a Ziti Network</h2>
 <p>The Ziti Network (Ziti) is composed of the following building
 blocks: Controller, Router, Edge Router, Edge Clients. These
@@ -123,12 +125,12 @@ the Ziti network but for sophisticated customers this might make
 overall management of the network easier.
 The Controller uses an out of process database (Postgres) to
 store the information needed to manage the network.</p>
-<h3 id="ziti-router">ZITI ROUTER</h3>
-<p>Ziti Routers are the fundamental building blocks of the Ziti
+<h3 id="ziti-fabric-router">ZITI FABRIC ROUTER</h3>
+<p>Ziti Fabric Routers are the fundamental building blocks of the Ziti
 Network. These routers are responsible for securely and reliably
 delivering traffic from one Ziti Network node to the traffic’s
 destination.</p>
-<p>Routers are linked together to form a mesh network. This mesh is
+<p>Fabric Routers are linked together to form a mesh network. This mesh is
 constantly being monitored for latency and the fastest paths are
 used when routing traffic to the destination. The monitoring also
 allows for active failover to ensure a reliable network connection

@@ -14,14 +14,14 @@ items:
   type: Delegate
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: OnDataWritten
-    path: aggregatedSources/csharp/ZitiConnection.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 46
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA delegate that is invoked after data has been put into the event loop. If there are any expensive\nresources held this is the callback to release those resources.\nOnly needed when not using Ziti as a <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> (callback based Ziti)\n"
   example: []

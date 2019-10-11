@@ -22,14 +22,14 @@ items:
   type: Class
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: ZitiIdentity
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 11
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nRepresents an enrolled identity\n"
   example: []
@@ -65,14 +65,14 @@ items:
   type: Property
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: PathToConfigFile
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 16
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nThe path to the enrolled identity\n"
   example: []
@@ -102,14 +102,14 @@ items:
   type: Constructor
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: .ctor
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 31
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nCreates a new ZitiIdentity using the provided path. The path must point at\na file is the result of the enrollment process.\n"
   example: []
@@ -138,14 +138,14 @@ items:
   type: Constructor
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: .ctor
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 42
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nCreates a new ZitiIdentity with the provided timeout (ms) using the provided \npath. The path must point at a file is the result of the enrollment process.\n"
   example: []
@@ -177,14 +177,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: NewConnection
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 67
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nCreates a new ZitiConnection for this identity\n"
   example: []
@@ -220,14 +220,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: ServiceAvailable
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 97
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nDetermines if the provided serviceName is available for this identity\n"
   example: []
@@ -259,14 +259,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: InitializeAndRun
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 115
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nInitializes this identity with the NetFoundry network\n"
   example: []
@@ -295,14 +295,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Shutdown
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 213
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\ninstructs this identity to disconnect from the NetFoundry network\n"
   example: []
@@ -327,14 +327,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiIdentity.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Dump
-    path: aggregatedSources/csharp/ZitiIdentity.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 221
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nDumps debug information to standard out. Only used when debugging\n"
   example: []

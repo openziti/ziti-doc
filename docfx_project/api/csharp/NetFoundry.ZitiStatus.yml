@@ -23,14 +23,14 @@ items:
   type: Enum
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: ZitiStatus
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 8
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nAn enum representing the outcome of the given Ziti operation.\n"
   example: []
@@ -56,14 +56,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: OK
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 13
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nIndicates a successful outcome\n"
   example: []
@@ -90,14 +90,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: CONFIG_NOT_FOUND
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 19
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA user error indicating the provided configuration file was not found.\n"
   example: []
@@ -124,14 +124,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: NOT_AUTHORIZED
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 26
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA user error indicating the identity from the provided configuration \nfile is not authorized to perform the action.\n"
   example: []
@@ -158,14 +158,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: CONTROLLER_UNAVAILABLE
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 32
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA network error indicating the Ziti Network Controller was not able to be contacted.\n"
   example: []
@@ -192,14 +192,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: GATEWAY_UNAVAILABLE
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 38
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA network error indicating the Ziti Network Gateway was not able to be contacted.\n"
   example: []
@@ -226,14 +226,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: SERVICE_UNAVALABLE
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 46
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA user error indicating the service name provided was not available. \nEither it does not exist or the provided identity does not have sufficient \nrights to the service.\n"
   example: []
@@ -260,14 +260,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: EOF
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 52
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA normal status indicating the connection is closed.\n"
   example: []
@@ -294,14 +294,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: TIMEOUT
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 59
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nAn exceptional status indicating the operation did not complete \nwithin the specified timeout\n"
   example: []
@@ -328,14 +328,14 @@ items:
   type: Field
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStatus.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: CONNABORT
-    path: aggregatedSources/csharp/ZitiStatus.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 66
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nAn exceptional situation indicating the connection between the \nclient and the Ziti Network Gateway was interrupted\n"
   example: []

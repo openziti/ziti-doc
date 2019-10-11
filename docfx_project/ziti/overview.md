@@ -7,10 +7,13 @@ entry point into your network or as a secure zero-trust proxy to other hosted se
 
 ## Getting started with Ziti
 
-If you are looking to jump right in feet first you can follow along
-this with our [up-and-running quickstart guide](quickstart.md).
-The quickstart will leverage [docker](https://docs.docker.com/) and will
-help you spin up a network in minutes.
+If you are looking to jump right in feet first you can follow along this with our [up-and-running quickstart
+guide](quickstart.md). The quickstart will leverage Amazon Web Services (AWS) and will have you launch an AMI which will
+get you up and running in no time.
+
+This environment is perfect for evaluators to get to know Ziti and the capabilities it offers.  The environement was not
+designed for large scale deployment or for long-term usage. If you are looking for a managed service to help you run a
+truly global, scalable network browse over to our website at http://netfoundry.io to learn more.
 
 ## Overview of a Ziti Network
 
@@ -54,14 +57,14 @@ overall management of the network easier.
 The Controller uses an out of process database (Postgres) to
 store the information needed to manage the network.
 
-### ZITI ROUTER
+### ZITI FABRIC ROUTER
 
-Ziti Routers are the fundamental building blocks of the Ziti
+Ziti Fabric Routers are the fundamental building blocks of the Ziti
 Network. These routers are responsible for securely and reliably
 delivering traffic from one Ziti Network node to the traffic’s
 destination.
 
-Routers are linked together to form a mesh network. This mesh is
+Fabric Routers are linked together to form a mesh network. This mesh is
 constantly being monitored for latency and the fastest paths are
 used when routing traffic to the destination. The monitoring also
 allows for active failover to ensure a reliable network connection

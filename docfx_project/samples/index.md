@@ -8,12 +8,12 @@ Here you'll find the samples we have produced to try to illustrate how to use th
 
 CLANG example
 
-[!code-csharp[wttr.in](../aggregatedSources/clang_sample/sample_wttr.c)]
+[!code-csharp[wttr.in](../aggregatedSources/clang_example/sample_wttr.c)]
 
 # [C#](#tab/csharp)
 
 C# Example
 
-[!code-csharp[wttr.in](../aggregatedSources/csharp_examples/ZitiExampleUsages.cs)]
+[!code-csharp[wttr.in](../aggregatedSources/csharp_example/Program.cs)]
 
 ***

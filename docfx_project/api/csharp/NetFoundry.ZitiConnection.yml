@@ -17,14 +17,14 @@ items:
   type: Class
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: ZitiConnection
-    path: aggregatedSources/csharp/ZitiConnection.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 14
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nRepresents a connection through the Ziti network. Supports both <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> use-cases\nas well as callback-based. \n"
   example: []
@@ -32,7 +32,6 @@ items:
     content: 'public class ZitiConnection : IDisposable'
     content.vb: >-
       Public Class ZitiConnection
-
           Implements IDisposable
   inheritance:
   - System.Object
@@ -65,14 +64,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Write
-    path: aggregatedSources/csharp/ZitiConnection.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 167
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nWrites the provided data over the NetFoundry network\n"
   example: []
@@ -113,14 +112,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Dial
-    path: aggregatedSources/csharp/ZitiConnection.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 224
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nEstablishes the necessary connecctivity and callbacks to send data through the NetFoundry network\n"
   example: []
@@ -156,14 +155,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Dispose
-    path: aggregatedSources/csharp/ZitiConnection.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 299
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nCloses the ZitiConnection and cleans up as needed\n"
   example: []

@@ -16,16 +16,16 @@ items:
   type: Class
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiAPI.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Ziti
-    path: aggregatedSources/csharp/ZitiAPI.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
     startLine: 25
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
-  summary: "\nA collection of static helper methods and properties for Ziti. and others\n"
+  summary: "\nA collection of static helper methods and properties for Ziti.\n"
   example: []
   syntax:
     content: public class Ziti
@@ -59,14 +59,14 @@ items:
   type: Property
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiAPI.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: OutputDebugInformation
-    path: aggregatedSources/csharp/ZitiAPI.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
     startLine: 32
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA property which controls whether or not output is sent to the \n<xref href=\"System.Diagnostics.Debug\" data-throw-if-not-resolved=\"false\"></xref> output stream. This is a global\nflag - when toggled all debug messages will show across any connection.\n"
   example: []
@@ -98,14 +98,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiAPI.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Debug
-    path: aggregatedSources/csharp/ZitiAPI.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
     startLine: 39
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA helper method to output messages helpful during debugging Ziti-related\nissues.\n"
   example: []

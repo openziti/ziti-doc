@@ -28,14 +28,14 @@ items:
   type: Class
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: ZitiStream
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 12
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA representation of a standard <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> which utilizes the NetFoundry network\n"
   example: []
@@ -43,9 +43,7 @@ items:
     content: 'public class ZitiStream : Stream, IDisposable'
     content.vb: >-
       Public Class ZitiStream
-
           Inherits Stream
-
           Implements IDisposable
   inheritance:
   - System.Object
@@ -63,7 +61,6 @@ items:
   - System.IO.Stream.CopyToAsync(System.IO.Stream)
   - System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32)
   - System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)
-  - System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
   - System.IO.Stream.CreateWaitHandle
   - System.IO.Stream.Dispose
   - System.IO.Stream.EndRead(System.IAsyncResult)
@@ -71,16 +68,12 @@ items:
   - System.IO.Stream.FlushAsync
   - System.IO.Stream.FlushAsync(System.Threading.CancellationToken)
   - System.IO.Stream.ObjectInvariant
-  - System.IO.Stream.Read(System.Span{System.Byte})
   - System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)
   - System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  - System.IO.Stream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
   - System.IO.Stream.ReadByte
   - System.IO.Stream.Synchronized(System.IO.Stream)
-  - System.IO.Stream.Write(System.ReadOnlySpan{System.Byte})
   - System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)
   - System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  - System.IO.Stream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
   - System.IO.Stream.WriteByte(System.Byte)
   - System.IO.Stream.CanTimeout
   - System.IO.Stream.ReadTimeout
@@ -114,14 +107,14 @@ items:
   type: Constructor
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: .ctor
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 22
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nCreates a <xref href=\"NetFoundry.ZitiStream\" data-throw-if-not-resolved=\"false\"></xref> from the provided <xref href=\"NetFoundry.ZitiConnection\" data-throw-if-not-resolved=\"false\"></xref>\n"
   example: []
@@ -150,14 +143,14 @@ items:
   type: Property
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: CanRead
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 31
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nIndicates if the stream can be read from\n"
   example: []
@@ -190,14 +183,14 @@ items:
   type: Property
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: CanSeek
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 42
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nSeeking is not supported\n"
   example: []
@@ -230,14 +223,14 @@ items:
   type: Property
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: CanWrite
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 53
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nindicates if the stream is ready for writing\n"
   example: []
@@ -270,14 +263,14 @@ items:
   type: Property
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Length
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 64
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nunsupported - always returns 0\n"
   example: []
@@ -310,14 +303,14 @@ items:
   type: Property
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Position
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 76
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nunsupported - always returns 0\n"
   example: []
@@ -354,14 +347,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Flush
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 90
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nFlushes bytes\n"
   example: []
@@ -389,14 +382,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Read
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 109
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nReads data into the provided buffer\n"
   example: []
@@ -453,14 +446,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Seek
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 191
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nunsupported\n"
   example: []
@@ -495,14 +488,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: SetLength
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 199
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nunsupported\n"
   example: []
@@ -533,14 +526,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Write
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 214
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nWrites the provided buffer over the ZitiNetwork\n"
   example: []
@@ -594,14 +587,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: Dispose
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 268
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nDisposes of the <xref href=\"NetFoundry.ZitiStream\" data-throw-if-not-resolved=\"false\"></xref>, cleaning up any retained resources\n"
   example: []
@@ -633,14 +626,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: PumpAsync
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 279
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nAsynchronously pumps data between the input <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> and destination <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>\n"
   example: []
@@ -677,14 +670,14 @@ items:
   type: Method
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiStream.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: PumpAsync
-    path: aggregatedSources/csharp/ZitiStream.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiStream.cs
     startLine: 300
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nAsynchronously pumps this <xref href=\"NetFoundry.ZitiStream\" data-throw-if-not-resolved=\"false\"></xref> to/from the destination <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>\n"
   example: []
@@ -1272,63 +1265,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
-  commentId: M:System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
-  parent: System.IO.Stream
-  isExternal: true
-  name: CopyToAsync(Stream, CancellationToken)
-  nameWithType: Stream.CopyToAsync(Stream, CancellationToken)
-  fullName: System.IO.Stream.CopyToAsync(System.IO.Stream, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
-    name: CopyToAsync
-    nameWithType: Stream.CopyToAsync
-    fullName: System.IO.Stream.CopyToAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.Stream
-    name: Stream
-    nameWithType: Stream
-    fullName: System.IO.Stream
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
-    name: CopyToAsync
-    nameWithType: Stream.CopyToAsync
-    fullName: System.IO.Stream.CopyToAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.Stream
-    name: Stream
-    nameWithType: Stream
-    fullName: System.IO.Stream
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.IO.Stream.CreateWaitHandle
   commentId: M:System.IO.Stream.CreateWaitHandle
   parent: System.IO.Stream
@@ -1576,72 +1512,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.IO.Stream.Read(System.Span{System.Byte})
-  commentId: M:System.IO.Stream.Read(System.Span{System.Byte})
-  parent: System.IO.Stream
-  isExternal: true
-  name: Read(Span<Byte>)
-  nameWithType: Stream.Read(Span<Byte>)
-  fullName: System.IO.Stream.Read(System.Span<System.Byte>)
-  nameWithType.vb: Stream.Read(Span(Of Byte))
-  fullName.vb: System.IO.Stream.Read(System.Span(Of System.Byte))
-  name.vb: Read(Span(Of Byte))
-  spec.csharp:
-  - uid: System.IO.Stream.Read(System.Span{System.Byte})
-    name: Read
-    nameWithType: Stream.Read
-    fullName: System.IO.Stream.Read
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Span`1
-    name: Span
-    nameWithType: Span
-    fullName: System.Span
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IO.Stream.Read(System.Span{System.Byte})
-    name: Read
-    nameWithType: Stream.Read
-    fullName: System.IO.Stream.Read
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Span`1
-    name: Span
-    nameWithType: Span
-    fullName: System.Span
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)
   commentId: M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)
   parent: System.IO.Stream
@@ -1822,88 +1692,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.IO.Stream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
-  commentId: M:System.IO.Stream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
-  parent: System.IO.Stream
-  isExternal: true
-  name: ReadAsync(Memory<Byte>, CancellationToken)
-  nameWithType: Stream.ReadAsync(Memory<Byte>, CancellationToken)
-  fullName: System.IO.Stream.ReadAsync(System.Memory<System.Byte>, System.Threading.CancellationToken)
-  nameWithType.vb: Stream.ReadAsync(Memory(Of Byte), CancellationToken)
-  fullName.vb: System.IO.Stream.ReadAsync(System.Memory(Of System.Byte), System.Threading.CancellationToken)
-  name.vb: ReadAsync(Memory(Of Byte), CancellationToken)
-  spec.csharp:
-  - uid: System.IO.Stream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
-    name: ReadAsync
-    nameWithType: Stream.ReadAsync
-    fullName: System.IO.Stream.ReadAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Memory`1
-    name: Memory
-    nameWithType: Memory
-    fullName: System.Memory
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IO.Stream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
-    name: ReadAsync
-    nameWithType: Stream.ReadAsync
-    fullName: System.IO.Stream.ReadAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Memory`1
-    name: Memory
-    nameWithType: Memory
-    fullName: System.Memory
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.IO.Stream.ReadByte
   commentId: M:System.IO.Stream.ReadByte
   parent: System.IO.Stream
@@ -1973,72 +1761,6 @@ references:
     nameWithType: Stream
     fullName: System.IO.Stream
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.IO.Stream.Write(System.ReadOnlySpan{System.Byte})
-  commentId: M:System.IO.Stream.Write(System.ReadOnlySpan{System.Byte})
-  parent: System.IO.Stream
-  isExternal: true
-  name: Write(ReadOnlySpan<Byte>)
-  nameWithType: Stream.Write(ReadOnlySpan<Byte>)
-  fullName: System.IO.Stream.Write(System.ReadOnlySpan<System.Byte>)
-  nameWithType.vb: Stream.Write(ReadOnlySpan(Of Byte))
-  fullName.vb: System.IO.Stream.Write(System.ReadOnlySpan(Of System.Byte))
-  name.vb: Write(ReadOnlySpan(Of Byte))
-  spec.csharp:
-  - uid: System.IO.Stream.Write(System.ReadOnlySpan{System.Byte})
-    name: Write
-    nameWithType: Stream.Write
-    fullName: System.IO.Stream.Write
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.ReadOnlySpan`1
-    name: ReadOnlySpan
-    nameWithType: ReadOnlySpan
-    fullName: System.ReadOnlySpan
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IO.Stream.Write(System.ReadOnlySpan{System.Byte})
-    name: Write
-    nameWithType: Stream.Write
-    fullName: System.IO.Stream.Write
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.ReadOnlySpan`1
-    name: ReadOnlySpan
-    nameWithType: ReadOnlySpan
-    fullName: System.ReadOnlySpan
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
   - name: )
     nameWithType: )
     fullName: )
@@ -2211,88 +1933,6 @@ references:
     nameWithType: Int32
     fullName: System.Int32
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.IO.Stream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
-  commentId: M:System.IO.Stream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
-  parent: System.IO.Stream
-  isExternal: true
-  name: WriteAsync(ReadOnlyMemory<Byte>, CancellationToken)
-  nameWithType: Stream.WriteAsync(ReadOnlyMemory<Byte>, CancellationToken)
-  fullName: System.IO.Stream.WriteAsync(System.ReadOnlyMemory<System.Byte>, System.Threading.CancellationToken)
-  nameWithType.vb: Stream.WriteAsync(ReadOnlyMemory(Of Byte), CancellationToken)
-  fullName.vb: System.IO.Stream.WriteAsync(System.ReadOnlyMemory(Of System.Byte), System.Threading.CancellationToken)
-  name.vb: WriteAsync(ReadOnlyMemory(Of Byte), CancellationToken)
-  spec.csharp:
-  - uid: System.IO.Stream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
-    name: WriteAsync
-    nameWithType: Stream.WriteAsync
-    fullName: System.IO.Stream.WriteAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.ReadOnlyMemory`1
-    name: ReadOnlyMemory
-    nameWithType: ReadOnlyMemory
-    fullName: System.ReadOnlyMemory
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IO.Stream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
-    name: WriteAsync
-    nameWithType: Stream.WriteAsync
-    fullName: System.IO.Stream.WriteAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.ReadOnlyMemory`1
-    name: ReadOnlyMemory
-    nameWithType: ReadOnlyMemory
-    fullName: System.ReadOnlyMemory
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
   - name: ', '
     nameWithType: ', '
     fullName: ', '

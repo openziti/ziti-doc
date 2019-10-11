@@ -14,14 +14,14 @@ items:
   type: Delegate
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiConnection.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: OnConnected
-    path: aggregatedSources/csharp/ZitiConnection.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 25
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nA delegate that represents the work to be done after a <xref href=\"NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected%2cNetFoundry.ZitiConnection.OnDataReceived)\" data-throw-if-not-resolved=\"false\"></xref> operation. \nThe result of the <xref href=\"NetFoundry.ZitiConnection.Dial(NetFoundry.ZitiConnection.OnConnected%2cNetFoundry.ZitiConnection.OnDataReceived)\" data-throw-if-not-resolved=\"false\"></xref> may NOT be successful. \nIt is important to verify the result by checking <code data-dev-comment-type=\"paramref\" class=\"paramref\">status</code>\n"
   example: []

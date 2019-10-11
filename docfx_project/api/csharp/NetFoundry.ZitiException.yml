@@ -15,14 +15,14 @@ items:
   type: Class
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiException.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiException.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: ZitiException
-    path: aggregatedSources/csharp/ZitiException.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiException.cs
     startLine: 7
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nRepresents a Ziti-specific exception\n"
   example: []
@@ -30,9 +30,7 @@ items:
     content: 'public class ZitiException : Exception, ISerializable'
     content.vb: >-
       Public Class ZitiException
-
           Inherits Exception
-
           Implements ISerializable
   inheritance:
   - System.Object
@@ -77,14 +75,14 @@ items:
   type: Constructor
   source:
     remote:
-      path: docfx_project/aggregatedSources/csharp/ZitiException.cs
+      path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiException.cs
       branch: master
       repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
     id: .ctor
-    path: aggregatedSources/csharp/ZitiException.cs
+    path: aggregatedSources/csharp/src/NetFoundry/ZitiException.cs
     startLine: 13
   assemblies:
-  - Ziti.NET.Core
+  - Ziti.NET.Standard
   namespace: NetFoundry
   summary: "\nThe basic constructor for creating a ZitiException\n"
   example: []
