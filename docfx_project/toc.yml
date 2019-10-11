@@ -6,7 +6,7 @@
   homepage: api/index.md
 - name: Glossary
   href: glossary/
-  homepage: glossary/index.md
+  homepage: glossary/glossary.md
 - name: Samples
   href: samples/
   homepage: samples/index.md

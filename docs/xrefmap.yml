@@ -474,3 +474,9 @@ references:
   isSpec: "True"
   fullName: NetFoundry.ZitiStream.Write
   nameWithType: ZitiStream.Write
+- uid: ziti_client_sdk
+  name: Ziti SDKs
+  href: ziti/clients/sdks.html
+- uid: ziti_sdk_quickinfo
+  name: ziti_sdk_quickinfo
+  href: ziti/clients/sdk-quickinfo.html
