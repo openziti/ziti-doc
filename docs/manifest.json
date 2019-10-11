@@ -488,7 +488,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/clients/linux.html",
-          "hash": "AFHNyXIXXusyooOEOzQHcg=="
+          "hash": "IoRZzF7nAvZU8lkkKY3p3A=="
         }
       },
       "is_incremental": false,
@@ -513,6 +513,18 @@
         ".html": {
           "relative_path": "ziti/clients/overview.html",
           "hash": "ToaoAfo6LHsAypu7+VpXvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/clients/proxy-example.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/clients/proxy-example.html",
+          "hash": "xopUk0gb7ofW4aUgICWCjA=="
         }
       },
       "is_incremental": false,
@@ -560,7 +572,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/clients/tunneler.html",
-          "hash": "GIGEVBkbCr1gUQ/Z0eZgnA=="
+          "hash": "bB6pzITDJlUhiDfHRoUOfA=="
         }
       },
       "is_incremental": false,
@@ -584,7 +596,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/clients/windows.html",
-          "hash": "c6nam+FnyxfsxH3xawgn+w=="
+          "hash": "pCGey2FlFIomOynQudwgMA=="
         }
       },
       "is_incremental": false,
@@ -628,11 +640,35 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/identities/creating.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/identities/creating.html",
+          "hash": "sADj36ksmY1hQevQjwptrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/identities/enrolling.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/identities/enrolling.html",
+          "hash": "SGDYToUqaD0mKN2nFEAK3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/identities/overview.md",
       "output": {
         ".html": {
           "relative_path": "ziti/identities/overview.html",
-          "hash": "4RyBVM1/6jJB5Z8KqVxX2A=="
+          "hash": "W3lzHl9rYRb+PydCtRP30A=="
         }
       },
       "is_incremental": false,
@@ -860,7 +896,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/toc.html",
-          "hash": "8iIyIgqAKS6pxxjMpVQgdw=="
+          "hash": "saaiVv2ODLMoOGcwWYsYuQ=="
         }
       },
       "is_incremental": false,
@@ -883,24 +919,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 46,
-          "skipped_file_count": 44
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 10,
-          "skipped_file_count": 10
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 49,
+          "skipped_file_count": 49
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 10
         }
       }
     },

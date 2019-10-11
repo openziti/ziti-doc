@@ -1,3 +1,5 @@
 ## Windows
 
-The Windows tunneler currently supports proxy mode but does not support seamlessly intercepting traffic
+The Windows tunneler currently supports proxy mode and cannot yet seamlessly intercept IPv4 traffic/DNS requests. 
+
+[!include[](./proxy-example.md)]

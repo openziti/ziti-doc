@@ -5,11 +5,13 @@
 - name: Tunneler based
   href: tunneler.md
   items:
+  - name: Linux
+    href: linux.md
+  - name: Windows
+    href: windows.md
   - name: Android
     href: android.md
   - name: MacOS
     href: macos.md
   - name: iOS
     href: ios.md
-  - name: Linux
-    href: linux.md

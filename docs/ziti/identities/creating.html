@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Windows | NetFoundry Ziti </title>
+    <title>Creating an Identity | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Windows | NetFoundry Ziti ">
+    <meta name="title" content="Creating an Identity | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -77,33 +77,9 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="windows">Windows</h2>
+<h2 id="creating-an-identity">Creating an Identity</h2>
 
-<p>The Windows tunneler currently supports proxy mode and cannot yet seamlessly intercept IPv4 traffic/DNS requests. </p>
-<p>The proxy intercept mode creates a network listener for each Ziti service that is
-intercepted. The services to intercept, and the ports that they are intercepted on,
-are specified on the command line (as opposed to using the service definitions that
-are retrieved from the edge controller):</p>
-<pre><code>$ ziti-tunnel --identity ziti.json proxy wttr.in:8443 ssh-local:2222 netcat:22169
-[   0.004]    INFO ziti/tunnel/intercept/proxy.(*proxyInterceptor).Start: starting proxy interceptor
-[   0.120]    INFO ziti/tunnel/intercept.updateServices: starting tunnel for newly available service ssh-local
-[   0.183]    INFO ziti/tunnel/intercept.updateServices: service ssh-local not hostable
-[   0.183]    INFO ziti/tunnel/intercept.updateServices: starting tunnel for newly available service netcat
-[   0.183]    INFO ziti/tunnel/intercept/proxy.proxyInterceptor.runServiceListener: {addr=[0.0.0.0:2222] service=[ssh-local]} service is listening
-[   0.203]    INFO ziti/tunnel/intercept.updateServices: service netcat not hostable
-[   0.203]    INFO ziti/tunnel/intercept/proxy.proxyInterceptor.runServiceListener: {addr=[0.0.0.0:22169] service=[netcat]} service is listening
-[   0.203]    INFO ziti/tunnel/intercept.updateServices: starting tunnel for newly available service wttr.in
-[   0.226]    INFO ziti/tunnel/intercept.updateServices: service wttr.in not hostable
-[   0.226]    INFO ziti/tunnel/intercept/proxy.proxyInterceptor.runServiceListener: {addr=[0.0.0.0:8443] service=[wttr.in]} service is listening
-</code></pre><p>All network listeners bind to local network interfaces (0.0.0.0):</p>
-<pre><code>$ netstat -tnl | fgrep 0.0.0.0
-Active Internet connections (only servers)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State      
-tcp        0      0 0.0.0.0:2222            0.0.0.0:*               LISTEN     
-tcp        0      0 0.0.0.0:22169           0.0.0.0:*               LISTEN     
-tcp        0      0 0.0.0.0:8443            0.0.0.0:*               LISTEN     
-</code></pre><p>Proxy mode is intended to be a developer tool, most useful in situations where root
-privileges are not available.</p>
+<p>This is all about creating identities</p>
 </article>
           </div>
           
@@ -112,7 +88,7 @@ privileges are not available.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/clients/windows.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/identities/creating.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
