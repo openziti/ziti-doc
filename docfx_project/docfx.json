@@ -23,7 +23,7 @@
       },
       {
         "files": [
-          "ziti/**.md",
+          "ziti/**/*.md",
           "ziti/**/toc.yml",
           "glossary/**.md",
           "glossary/**/toc.yml",
