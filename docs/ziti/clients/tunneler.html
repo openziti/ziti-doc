@@ -86,17 +86,27 @@ NetFoundry provides tunnelers for each major operating system.</p>
 <li><a href="https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-tunnel-mac.tar.gz">MacOS</a></li>
 <li><a href="https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-tunnel-linux.tar.gz">Linux</a></li>
 </ul>
-<h2 id="android">Android</h2>
-<p>This is a markdown file for android doc</p>
-<h2 id="ios">iOS</h2>
-<p>ios stuff doc&#39;ed here if needed</p>
-<h2 id="macos">MacOS</h2>
-<p>This is a markdown file for mac os doc</p>
+<p>Each tunneller operates similarly. The goal is to have the tunneler intercecpt traffic destined for Ziti
+services and forward that traffic over the Ziti overlay instead of the underlay network.  There are two basic modes a
+tunneler operate in: seamless and proxy. A seamless tunneler will transparently intercept traffic via IPv4 address or
+DNS whereas a tunneler in proxy mode works as a proxy. Seamless mode is transparent to existing services and
+applications. Proxy mode is not as transparent at all. It requires applications to send traffic to the localhost proxy
+specifically. This means when running in proxy mode - it does not do any intercepting at all.</p>
+<p>Here you can learn about the
+ways each tunneler operates and see the similarities as well as any differences.</p>
 <h2 id="linux">Linux</h2>
-<p>This is a markdown file for linux doc</p>
+<p>The linux tunneler is capable of operating in both transparent and proxy modes. In transparent mode the tunneler will
+interact with the operating system to establish intercept points. These intercept points correspond directly to the
+service definitions in place.</p>
+<p>operating system.</p>
 <h2 id="windows">Windows</h2>
-<p>This is a markdown file for Windows</p>
-<p>Here&#39;s <a href="android.html">android</a> and <a href="macos.html">macos</a> and <a href="ios.html">ios</a> and finally <a href="linux.html">linux</a></p>
+<p>The Windows tunneler currently supports proxy mode but does not support seamlessly intercepting traffic</p>
+<h2 id="android">Android</h2>
+<p>The Android tunneler is currently in a closed-beta. NetFoundry will look to open this up to everyone in the coming months.</p>
+<h2 id="ios">iOS</h2>
+<p>The iOS tunneler is currently in a closed-beta. NetFoundry will look to open this up to everyone in the coming months.</p>
+<h2 id="macos">MacOS</h2>
+<p>The MacOS tunneler is currently in a closed-beta. NetFoundry will look to open this up to everyone in the coming months.</p>
 </article>
           </div>
           

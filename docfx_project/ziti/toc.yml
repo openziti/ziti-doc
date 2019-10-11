@@ -5,9 +5,18 @@
 #- name: Install
 #  href: install/toc.yml
 #  topicHref: install/overview.md
-- name: Manage
-  href: manage/toc.yml
-  topicHref: manage/manage.md
 - name: Clients
   href: clients/toc.yml
   topicHref: clients/which-client.md
+- name: Identities
+  href: identities/toc.yml
+  topicHref: identities/overview.md
+- name: Services
+  href: services/toc.yml
+  topicHref: services/overview.md
+- name: AppWANs
+  href: appwans/toc.yml
+  topicHref: appwans/overview.md
+- name: Manage
+  href: manage/toc.yml
+  topicHref: manage/manage.md
