@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Enum ZitiStatus
+   | NetFoundry Ziti </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Enum ZitiStatus
+   | NetFoundry Ziti ">
+    <meta name="generator" content="docfx 2.45.1.0">
+    
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/nflightbglogo_40.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NetFoundry.ZitiStatus">
+  
+  
+  <h1 id="NetFoundry_ZitiStatus" data-uid="NetFoundry.ZitiStatus" class="text-break">Enum ZitiStatus
+  </h1>
+  <div class="markdown level0 summary"><p>An enum representing the outcome of the given Ziti operation.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NetFoundry.html">NetFoundry</a></h6>
+  <h6><strong>Assembly</strong>: Ziti.NET.Standard.dll</h6>
+  <h5 id="NetFoundry_ZitiStatus_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum ZitiStatus</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    <thead>
+    <tbody>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_CONFIG_NOT_FOUND">CONFIG_NOT_FOUND</td>
+        <td><p>A user error indicating the provided configuration file was not found.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_CONNABORT">CONNABORT</td>
+        <td><p>An exceptional situation indicating the connection between the 
+client and the Ziti Network Gateway was interrupted</p>
+</td>
+      </tr>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_CONTROLLER_UNAVAILABLE">CONTROLLER_UNAVAILABLE</td>
+        <td><p>A network error indicating the Ziti Network Controller was not able to be contacted.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_EOF">EOF</td>
+        <td><p>A normal status indicating the connection is closed.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_GATEWAY_UNAVAILABLE">GATEWAY_UNAVAILABLE</td>
+        <td><p>A network error indicating the Ziti Network Gateway was not able to be contacted.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_NOT_AUTHORIZED">NOT_AUTHORIZED</td>
+        <td><p>A user error indicating the identity from the provided configuration 
+file is not authorized to perform the action.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_OK">OK</td>
+        <td><p>Indicates a successful outcome</p>
+</td>
+      </tr>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_SERVICE_UNAVALABLE">SERVICE_UNAVALABLE</td>
+        <td><p>A user error indicating the service name provided was not available. 
+Either it does not exist or the provided identity does not have sufficient 
+rights to the service.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="NetFoundry_ZitiStatus_TIMEOUT">TIMEOUT</td>
+        <td><p>An exceptional status indicating the operation did not complete 
+within the specified timeout</p>
+</td>
+      </tr>
+    </tbody>
+  </thead></thead></table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/nf-dev/ziti-doc/new/master/apidoc/new?filename=NetFoundry_ZitiStatus.md&amp;value=---%0Auid%3A%20NetFoundry.ZitiStatus%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span class='pull-left'><span><a href='https://netfoundry.io'>© 2019 NetFoundry</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/privacy-policy'>Privacy Policy</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/legal-items'>Legal</a></span>&nbsp;&nbsp;<span><a href='https://netfoundry.zendesk.com/hc/en-us'>Support</a></span>&nbsp;&nbsp;</span><span class='pull-right'><span><a href='https://www.facebook.com/NetFoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145802.svg'></a></span>&nbsp;<span><a href='https://twitter.com/netfoundry' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145812.svg'></a></span>&nbsp;<span><a href='https://www.linkedin.com/company/netfoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145807.svg'></a></span>&nbsp;<span><a href='https://www.youtube.com/channel/UCGN6PFj1rZu50yme9YsICmg' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/174/174883.svg'></a></span>&nbsp;&nbsp;&nbsp;
+      </span><br>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
