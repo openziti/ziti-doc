@@ -2,7 +2,7 @@
   href: which-client.md
 - name: SDK
   href: sdks.md
-- name: Tunneler based
+- name: Tunnelers
   href: tunneler.md
   items:
   - name: Linux

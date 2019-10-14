@@ -70,7 +70,7 @@ used when routing traffic to the destination. The monitoring also
 allows for active failover to ensure a reliable network connection
 even in the case of a node failure.
 
-### ZITI EDGE Router
+### ZITI EDGE ROUTER
 
 Another fundamental building block of the Ziti Network is the
 Edge Router. The Edge Router is the entry point for Edge

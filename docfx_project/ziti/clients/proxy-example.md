@@ -23,6 +23,3 @@ All network listeners bind to local network interfaces (0.0.0.0):
     tcp        0      0 0.0.0.0:2222            0.0.0.0:*               LISTEN     
     tcp        0      0 0.0.0.0:22169           0.0.0.0:*               LISTEN     
     tcp        0      0 0.0.0.0:8443            0.0.0.0:*               LISTEN     
-
-Proxy mode is intended to be a developer tool, most useful in situations where root
-privileges are not available.
