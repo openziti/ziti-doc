@@ -117,6 +117,7 @@ within the Controller. Read more about Identities [here](identities.md) Creating
 1. In the top right corner of the screen click the "plus" image to add a new identity
 1. Enter the name of the identity you would like to create
 1. Choose the type: Device, Service, User (choose User for now)
+1. Leave the enrollment type as "One Time Token"
 1. Click save
 
 # [New Identity via CLI](#tab/tabid-4b)

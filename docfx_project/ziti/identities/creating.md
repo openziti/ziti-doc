@@ -8,12 +8,23 @@ identites are created. There are generally three groups of identities which can 
 * One Time Token (ott) identites using a 3rd Party CA
 * 3rd Party auto-enrolled identities
 
+## Choosing an Identity Type
+
+Choosing which type of identity you are creating comes down to whether you are using a 3rd Party CA or not. If the
+network does not have a 3rd Party Certificate configured the only option is to use the One Time Token identity.
+
+If one or more 3rd Party CA is installed you will need to understand the intention of each 3rd Party certificate.
+
+Each of the types of identities are secure it just depends on your actual network setup as to which type to choose. If
+you don't know - just use the one time token identity. The identity can always be recreated at a later date and replaced
+if necessary.
+
 ### One Time Token (OTT)
 
 One time token identities are the type of identities available to all Ziti networks.  A one time token identity will
 have a token generated at the time of the identity's creation.  This token is then submitted at some point in the future
 as part of the [enrollment](./enrolling.md) process.  Once an identity is successfully enrolled - the one time token is
-no longer valid and cannot be used to enroll the same identity again.  
+no longer valid and cannot be used to enroll the same identity again.
 
 One time tokens are delivered from the Ziti Controller as a [jwt](https://tools.ietf.org/html/rfc7519) and the token
 expires 24 hours after the identity is created.  The token is downloadable via the basic UI provided in the [Ziti Edge -
@@ -28,8 +39,9 @@ to the selected path. You can then transfer the .jwt file to its intended destin
 
 ### 3rd Party CA - Overview
 
-It's possible that your organization wants to reuse an existing PKI rather than to incorporate a new PKI for
-Ziti-powered networks. If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
+The Ziti controller is capable of using an existing PKI for authentication and authorization rather than to PKI
+configured in the Ziti Controller.  Certificates that are not controlled by the Ziti controller are referred to as "3rd
+party". If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
 to use a 3rd Party CA this section is for you.
 
 > [!NOTE]
@@ -83,3 +95,17 @@ A certificate can only be used for one identity. The Ziti Edge system does not a
 multiple identities. An enrollment request is comprised of a special enrollment URL used to perform an HTTP POST request
 using the signed client certificate as the TLS client certificate and an optional JSON payload that allows the client to
 specify the devices display name and internal username. See [enrollment](./enrolling.md) for more details on enrolling.
+
+### [New Identity via UI](#tab/tabid-new-identity-ui)
+
+1. On the left side click "Certificate Authorities"
+1. In the top right corner of the screen click the "plus" image to add a new Certificate Authority
+1. Enter the name of the Certificate Authority you would like to create
+1. Choose if the CA should be used for Enrollment (yes) and Auth (yes)
+1. Click save
+
+### [New Identity via UI](#tab/tabid-new-identity-cli)
+
+[!include[](../cli-snippets/create-identity.md)]
+
+***

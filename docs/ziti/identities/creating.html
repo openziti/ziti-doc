@@ -87,11 +87,18 @@ identites are created. There are generally three groups of identities which can 
 <li>One Time Token (ott) identites using a 3rd Party CA</li>
 <li>3rd Party auto-enrolled identities</li>
 </ul>
+<h2 id="choosing-an-identity-type">Choosing an Identity Type</h2>
+<p>Choosing which type of identity you are creating comes down to whether you are using a 3rd Party CA or not. If the
+network does not have a 3rd Party Certificate configured the only option is to use the One Time Token identity.</p>
+<p>If one or more 3rd Party CA is installed you will need to understand the intention of each 3rd Party certificate.</p>
+<p>Each of the types of identities are secure it just depends on your actual network setup as to which type to choose. If
+you don&#39;t know - just use the one time token identity. The identity can always be recreated at a later date and replaced
+if necessary.</p>
 <h3 id="one-time-token-ott">One Time Token (OTT)</h3>
 <p>One time token identities are the type of identities available to all Ziti networks.  A one time token identity will
 have a token generated at the time of the identity&#39;s creation.  This token is then submitted at some point in the future
 as part of the <a href="enrolling.html">enrollment</a> process.  Once an identity is successfully enrolled - the one time token is
-no longer valid and cannot be used to enroll the same identity again.  </p>
+no longer valid and cannot be used to enroll the same identity again.</p>
 <p>One time tokens are delivered from the Ziti Controller as a <a href="https://tools.ietf.org/html/rfc7519">jwt</a> and the token
 expires 24 hours after the identity is created.  The token is downloadable via the basic UI provided in the <a href="./intentionally_broken_link_to_ami.md">Ziti Edge -
 Developer Edition</a>. After you create a user you can go to the Identities page and
@@ -102,8 +109,9 @@ to the selected path. You can then transfer the .jwt file to its intended destin
 <pre><code>#creates a new user named &quot;NewUser&quot;
 ziti edge controller create identity user &quot;NewUser&quot; -o NewUser.jwt
 </code></pre><h3 id="3rd-party-ca---overview">3rd Party CA - Overview</h3>
-<p>It&#39;s possible that your organization wants to reuse an existing PKI rather than to incorporate a new PKI for
-Ziti-powered networks. If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
+<p>The Ziti controller is capable of using an existing PKI for authentication and authorization rather than to PKI
+configured in the Ziti Controller.  Certificates that are not controlled by the Ziti controller are referred to as &quot;3rd
+party&quot;. If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
 to use a 3rd Party CA this section is for you.</p>
 <div class="NOTE"><h5>Note</h5><p>Reusing a PKI is not a simple topic and managing and maintaining a PKI is out of the scope of this guide.</p>
 </div>
@@ -169,6 +177,29 @@ authorization will need to be done after the device identities have been created
 multiple identities. An enrollment request is comprised of a special enrollment URL used to perform an HTTP POST request
 using the signed client certificate as the TLS client certificate and an optional JSON payload that allows the client to
 specify the devices display name and internal username. See <a href="enrolling.html">enrollment</a> for more details on enrolling.</p>
+<div class="tabGroup" id="tabgroup_WKKGAgjyEN-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_WKKGAgjyEN-1_tabid-new-identity-ui" role="tab" aria-controls="tabpanel_WKKGAgjyEN-1_tabid-new-identity-ui" data-tab="tabid-new-identity-ui" tabindex="0" aria-selected="true">New Identity via UI</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_WKKGAgjyEN-1_tabid-new-identity-cli" role="tab" aria-controls="tabpanel_WKKGAgjyEN-1_tabid-new-identity-cli" data-tab="tabid-new-identity-cli" tabindex="-1">New Identity via UI</a>
+</li>
+</ul>
+<section id="tabpanel_WKKGAgjyEN-1_tabid-new-identity-ui" role="tabpanel" data-tab="tabid-new-identity-ui">
+<ol>
+<li>On the left side click &quot;Certificate Authorities&quot;</li>
+<li>In the top right corner of the screen click the &quot;plus&quot; image to add a new Certificate Authority</li>
+<li>Enter the name of the Certificate Authority you would like to create</li>
+<li>Choose if the CA should be used for Enrollment (yes) and Auth (yes)</li>
+<li>Click save</li>
+</ol>
+</section>
+<section id="tabpanel_WKKGAgjyEN-1_tabid-new-identity-cli" role="tabpanel" data-tab="tabid-new-identity-cli" aria-hidden="true" hidden="hidden">
+<pre><code>#creates a new user named &quot;NewUser&quot;
+ziti edge controller create identity user &quot;NewUser&quot; -o NewUser.jwt
+</code></pre></section>
+</div>
 </article>
           </div>
           
