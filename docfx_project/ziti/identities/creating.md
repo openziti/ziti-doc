@@ -60,7 +60,26 @@ Developer Edition](./intentionally_broken_link_to_ami.md).
 
 #### 3rd Party CA - One Time Token
 
+CA OTT Enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the utilization of
+a 3rd party CA certificate rather than the configured Ziti Edge CA and PKI. In this method, the system does not have
+access to the 3rd party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is assumed that
+the enrolling device has a separate process to acquire signed certificates. Rather than submitting a CSR the client uses
+an already acquired signed certificate as its client certificate for the enrollment request. The client certificate is
+validated against the CA certificate tied to the one time token.
 
+Similar to the [OTT Enrollment](#one-time-token-ott) process, identities must be provisioned ahead of enrollment in
+order to generate one time token required and to creat the jwt that can be delivered to enrolling devices. This means
+that the provisioning of the Ziti Edge identities and the client certificates must be coordinated. Identities can be enrolled with a one time token flow similar to the [one time token flow](#one-time-token-ott).
 
 #### 3rd Party CA - Auto Enrolled
 
+CA Auto Enrollment is useful in situations where devices are provisioned with certificates en-mass that need to be able
+to register as identities within Ziti Edge. This enrollment method allows for device provisioning processes to skip the
+manual configuration of Ziti Edge and instead allow clients to present a signed client certificate to generate an
+identity during the enrollment process. The identity will grant the client access to authenticate only - any
+authorization will need to be done after the device identities have been created.
+
+A certificate can only be used for one identity. The Ziti Edge system does not allow the same certificate to be used for
+multiple identities. An enrollment request is comprised of a special enrollment URL used to perform an HTTP POST request
+using the signed client certificate as the TLS client certificate and an optional JSON payload that allows the client to
+specify the devices display name and internal username. See [enrollment](./enrolling.md) for more details on enrolling.
