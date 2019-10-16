@@ -182,6 +182,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "api/rest/create-ca-json.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/rest/create-ca-json.html",
+          "hash": "/m0SGpdJR2K/vsMfgamQZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "api/rest/index.md",
       "output": {
         ".html": {
@@ -256,6 +268,28 @@
       "output": {
         "resource": {
           "relative_path": "images/changepwd_ui.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/create-appwan.PNG",
+      "output": {
+        "resource": {
+          "relative_path": "images/create-appwan.PNG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/create_service_ui.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/create_service_ui.png"
         }
       },
       "is_incremental": false,
@@ -460,6 +494,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/cli-snippets/create-identity.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/cli-snippets/create-identity.html",
+          "hash": "vSLclS8KBXGCxbtWZ3buIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/clients/android.md",
       "output": {
         ".html": {
@@ -651,12 +697,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "ziti/identities/creating.md",
       "output": {
         ".html": {
           "relative_path": "ziti/identities/creating.html",
-          "hash": "sADj36ksmY1hQevQjwptrA=="
+          "hash": "Lxnh412rKa4Nphtjbhf8rg=="
         }
       },
       "is_incremental": false,
@@ -680,7 +729,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/identities/overview.html",
-          "hash": "9kYZcUhC+F2HUBYVSP89yw=="
+          "hash": "QDi5f0YhP5hwfIxhEWxuBQ=="
         }
       },
       "is_incremental": false,
@@ -812,7 +861,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/pki.html",
-          "hash": "w3YSXrv1K91C0UH9SJEXuw=="
+          "hash": "vucHFgdHZ/KCBWBZdW7XRQ=="
         }
       },
       "is_incremental": false,
@@ -872,7 +921,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstart.html",
-          "hash": "+gGGZwB3XmSKxgUk3WJpLw=="
+          "hash": "Nd/NWhspIVZVASu/ieNStA=="
         }
       },
       "is_incremental": false,
@@ -936,13 +985,6 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -950,17 +992,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 51,
-          "skipped_file_count": 51
+          "total_file_count": 0,
+          "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 10,
           "skipped_file_count": 10
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 53,
+          "skipped_file_count": 50
         }
       }
     },

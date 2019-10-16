@@ -111,7 +111,7 @@ To change the administrator password using the CLI simply issue these two comman
 All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
 within the Controller. Read more about Identities [here](identities.md) Creating an identity via the UI or CLI is easy:
 
-# [New User via UI](#tab/tabid-3b)
+# [New Identity via UI](#tab/tabid-3b)
 
 1. On the left side click "Edge Identities"
 1. In the top right corner of the screen click the "plus" image to add a new identity
@@ -119,12 +119,11 @@ within the Controller. Read more about Identities [here](identities.md) Creating
 1. Choose the type: Device, Service, User (choose User for now)
 1. Click save
 
-# [New User via CLI](#tab/tabid-4b)
+# [New Identity via CLI](#tab/tabid-4b)
 
 To change the administrator password using the CLI simply issue these two commands:
 
-    #creates a new user named "NewUser"
-    ziti edge controller create identity user "NewUser" -o NewUser.jwt
+[!include[](./cli-snippets/create-identity.md)]
 
 ***
 

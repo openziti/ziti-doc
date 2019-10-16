@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Public Key Infrastructure (PKI) | NetFoundry Ziti </title>
+    <title> | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Public Key Infrastructure (PKI) | NetFoundry Ziti ">
+    <meta name="title" content=" | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -77,15 +77,10 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="public-key-infrastructure-pki">Public Key Infrastructure (PKI)</h2>
 
-<p>All Ziti networks leverage <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">Public Key Infrastructure (PKI)</a> in
-order to provide a secure network.  PKI is a complex topic and it is recommended to be familiar with what a PKI is and
-how to use and configure a PKI before making any decisions about the PKI the Ziti network uses.</p>
-<h3 id="pki-options">PKI Options</h3>
-<p>Configuring the PKI for a Ziti network is often done using a self-signed certificate.  </p>
-<p>The <code>ziti</code> command line utility provides a mechanism to create </p>
-</article>
+<pre><code>#creates a new user named &quot;NewUser&quot;
+ziti edge controller create identity user &quot;NewUser&quot; -o NewUser.jwt
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -93,7 +88,7 @@ how to use and configure a PKI before making any decisions about the PKI the Zit
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/manage/pki.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/cli-snippets/create-identity.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
