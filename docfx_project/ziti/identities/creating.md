@@ -60,12 +60,12 @@ Developer Edition](./intentionally_broken_link_to_ami.md).
 
 #### 3rd Party CA - One Time Token
 
-CA OTT Enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the utilization of
-a 3rd party CA certificate rather than the configured Ziti Edge CA and PKI. In this method, the system does not have
-access to the 3rd party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is assumed that
-the enrolling device has a separate process to acquire signed certificates. Rather than submitting a CSR the client uses
-an already acquired signed certificate as its client certificate for the enrollment request. The client certificate is
-validated against the CA certificate tied to the one time token.
+3rd Party CA OTT enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the
+utilization of a 3rd party CA certificate rather than the configured Ziti Edge CA and PKI. In this method, the system
+does not have access to the 3rd party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is
+assumed that the enrolling device has a separate process to acquire signed certificates. Rather than submitting a CSR
+the client uses an already acquired signed certificate as its client certificate for the enrollment request. The client
+certificate is validated against the CA certificate tied to the one time token.
 
 Similar to the [OTT Enrollment](#one-time-token-ott) process, identities must be provisioned ahead of enrollment in
 order to generate one time token required and to creat the jwt that can be delivered to enrolling devices. This means

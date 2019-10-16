@@ -9,18 +9,3 @@ and learn how to get a network running.
 ## Ziti SDKs
 Learn about the Ziti SDKs available to use and how to embed them into your
 own application to provide secure connectivity.
-
-> [!NOTE]
-> This is a NOTE
-
-> [!WARNING]
-> This is a WARNING
-
-> [!TIP]
-> This is a TIP
-
-> [!IMPORTANT]
-> This is IMPORTANT
-
-[!include[<title>](<./test.html>)]
-[!include[<title>](<./test.md>)]

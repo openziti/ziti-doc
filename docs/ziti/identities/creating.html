@@ -150,12 +150,12 @@ certPem: the CA to upload in PEM format
 </code></pre></section>
 </div>
 <h4 id="3rd-party-ca---one-time-token">3rd Party CA - One Time Token</h4>
-<p>CA OTT Enrollment is closely related to <a href="#one-time-token-ott">OTT Enrollment</a>. The main difference is the utilization of
-a 3rd party CA certificate rather than the configured Ziti Edge CA and PKI. In this method, the system does not have
-access to the 3rd party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is assumed that
-the enrolling device has a separate process to acquire signed certificates. Rather than submitting a CSR the client uses
-an already acquired signed certificate as its client certificate for the enrollment request. The client certificate is
-validated against the CA certificate tied to the one time token.</p>
+<p>3rd Party CA OTT enrollment is closely related to <a href="#one-time-token-ott">OTT Enrollment</a>. The main difference is the
+utilization of a 3rd party CA certificate rather than the configured Ziti Edge CA and PKI. In this method, the system
+does not have access to the 3rd party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is
+assumed that the enrolling device has a separate process to acquire signed certificates. Rather than submitting a CSR
+the client uses an already acquired signed certificate as its client certificate for the enrollment request. The client
+certificate is validated against the CA certificate tied to the one time token.</p>
 <p>Similar to the <a href="#one-time-token-ott">OTT Enrollment</a> process, identities must be provisioned ahead of enrollment in
 order to generate one time token required and to creat the jwt that can be delivered to enrolling devices. This means
 that the provisioning of the Ziti Edge identities and the client certificates must be coordinated. Identities can be enrolled with a one time token flow similar to the <a href="#one-time-token-ott">one time token flow</a>.</p>
