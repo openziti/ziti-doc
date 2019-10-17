@@ -142,18 +142,23 @@ Developer Edition</a>.</p>
 <section id="tabpanel_WKKGAgjyEN_tabid-new-ca-cli" role="tabpanel" data-tab="tabid-new-ca-cli" aria-hidden="true" hidden="hidden">
 <pre><code>Verb: POST
 
-name: The name of the CA to create
-isAutoCaEnrollmentEnabled: controls if the CA can be used for automatic enrollment
-isOttCaEnrollmentEnabled: controls if the CA be used for one time token enrollment
-isAuthEnabled: controls if the CA is enabled for authentication. Devices can enroll but not connect if set to false
-certPem: the CA to upload in PEM format
-
+name:
+  The name of the CA to create
+isAutoCaEnrollmentEnabled:
+  controls if the CA can be used for automatic enrollment
+isOttCaEnrollmentEnabled:
+  controls if the CA be used for one time token enrollment
+isAuthEnabled:
+  controls if the CA is enabled for authentication. Devices can enroll but not connect if set to false
+certPem:
+  the CA to upload in PEM format
+body:
 {
-  &quot;name&quot;: &quot;${ca_name}&quot;,
+  &quot;name&quot;: &quot;${string}&quot;,
   &quot;isAutoCaEnrollmentEnabled&quot;: ${true|false},
   &quot;isOttCaEnrollmentEnabled&quot;: ${true|false},
   &quot;isAuthEnabled&quot;: ${true|false},
-  &quot;certPem&quot;: &quot;${cert}&quot;
+  &quot;certPem&quot;: &quot;${string}&quot;
 }
 </code></pre></section>
 </div>

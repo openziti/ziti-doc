@@ -35,7 +35,7 @@ You can also create a one time token identity using the `ziti` cli tool availabl
 Developer Edition](./intentionally_broken_link_to_ami.md).  This command will create a new identity and output the jwt
 to the selected path. You can then transfer the .jwt file to its intended destination.
 
-[!include[](../cli-snippets/create-identity.md)]
+[!include[](./create-identity-cli.md)]
 
 ### 3rd Party CA - Overview
 
@@ -106,6 +106,6 @@ specify the devices display name and internal username. See [enrollment](./enrol
 
 ### [New Identity via UI](#tab/tabid-new-identity-cli)
 
-[!include[](../cli-snippets/create-identity.md)]
+[!include[](./create-identity-cli.md)]
 
 ***

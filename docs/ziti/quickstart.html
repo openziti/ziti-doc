@@ -88,10 +88,12 @@
 </ol>
 </li>
 <li><a href="#create-an-identity">Create an Identity</a><ol>
-<li><a href="#create-a-service">Enroll the Identity</a></li>
+<li><a href="#enroll-the-new-identity">Enroll the Identity</a></li>
 </ol>
 </li>
-<li><a href="#create-an-appwan">Setup your first Network</a></li>
+<li><a href="#create-a-service">Create a Service</a></li>
+<li><a href="#create-an-appwan">Create an AppWAN</a></li>
+<li><a href="#test-it">Test the Service</a></li>
 </ol>
 <h2 id="start-ziti">Start Ziti</h2>
 <h3 id="getting-started-in-aws">Getting Started in AWS</h3>
@@ -144,13 +146,13 @@ automatically update the certificates in the event of the image losing its IP ad
 <div class="tabGroup" id="tabgroup_jUagFiZuWT">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_jUagFiZuWT_tabid-1a" role="tab" aria-controls="tabpanel_jUagFiZuWT_tabid-1a" data-tab="tabid-1a" tabindex="0" aria-selected="true">Change via UI</a>
+<a href="#tabpanel_jUagFiZuWT_change-pwd-ui" role="tab" aria-controls="tabpanel_jUagFiZuWT_change-pwd-ui" data-tab="change-pwd-ui" tabindex="0" aria-selected="true">Change via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_jUagFiZuWT_tabid-2a" role="tab" aria-controls="tabpanel_jUagFiZuWT_tabid-2a" data-tab="tabid-2a" tabindex="-1">Change via CLI</a>
+<a href="#tabpanel_jUagFiZuWT_change-pwd-cli" role="tab" aria-controls="tabpanel_jUagFiZuWT_change-pwd-cli" data-tab="change-pwd-cli" tabindex="-1">Change via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_jUagFiZuWT_tabid-1a" role="tabpanel" data-tab="tabid-1a">
+<section id="tabpanel_jUagFiZuWT_change-pwd-ui" role="tabpanel" data-tab="change-pwd-ui">
 <p>These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
 <a href="manage/pki.html">changing pki</a> for more information.</p>
 <ol>
@@ -163,7 +165,7 @@ automatically update the certificates in the event of the image losing its IP ad
 </li>
 </ol>
 </section>
-<section id="tabpanel_jUagFiZuWT_tabid-2a" role="tabpanel" data-tab="tabid-2a" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_jUagFiZuWT_change-pwd-cli" role="tabpanel" data-tab="change-pwd-cli" aria-hidden="true" hidden="hidden">
 <p>To change the administrator password using the CLI simply issue these two commands:</p>
 <pre><code>#load the current user/password into an environment variables
 ctrl_user=$(jq -r .username ~/.config/ziti/ziti-controller/credentials.json)
@@ -184,13 +186,13 @@ within the Controller. Read more about Identities <a href="identities.html">here
 <div class="tabGroup" id="tabgroup_jUagFiZuWT-1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_jUagFiZuWT-1_tabid-3b" role="tab" aria-controls="tabpanel_jUagFiZuWT-1_tabid-3b" data-tab="tabid-3b" tabindex="0" aria-selected="true">New Identity via UI</a>
+<a href="#tabpanel_jUagFiZuWT-1_create-identity-ui" role="tab" aria-controls="tabpanel_jUagFiZuWT-1_create-identity-ui" data-tab="create-identity-ui" tabindex="0" aria-selected="true">New Identity via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_jUagFiZuWT-1_tabid-4b" role="tab" aria-controls="tabpanel_jUagFiZuWT-1_tabid-4b" data-tab="tabid-4b" tabindex="-1">New Identity via CLI</a>
+<a href="#tabpanel_jUagFiZuWT-1_create-identity-cli" role="tab" aria-controls="tabpanel_jUagFiZuWT-1_create-identity-cli" data-tab="create-identity-cli" tabindex="-1">New Identity via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_jUagFiZuWT-1_tabid-3b" role="tabpanel" data-tab="tabid-3b">
+<section id="tabpanel_jUagFiZuWT-1_create-identity-ui" role="tabpanel" data-tab="create-identity-ui">
 <ol>
 <li>On the left side click &quot;Edge Identities&quot;</li>
 <li>In the top right corner of the screen click the &quot;plus&quot; image to add a new identity</li>
@@ -200,7 +202,7 @@ within the Controller. Read more about Identities <a href="identities.html">here
 <li>Click save</li>
 </ol>
 </section>
-<section id="tabpanel_jUagFiZuWT-1_tabid-4b" role="tabpanel" data-tab="tabid-4b" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_jUagFiZuWT-1_create-identity-cli" role="tabpanel" data-tab="create-identity-cli" aria-hidden="true" hidden="hidden">
 <p>To change the administrator password using the CLI simply issue these two commands:</p>
 <pre><code>#creates a new user named &quot;NewUser&quot;
 ziti edge controller create identity user &quot;NewUser&quot; -o NewUser.jwt
@@ -224,13 +226,13 @@ return the IP address you are coming from. Click this link now and discover what
 <div class="tabGroup" id="tabgroup_jUagFiZuWT-2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_jUagFiZuWT-2_tabid-5c" role="tab" aria-controls="tabpanel_jUagFiZuWT-2_tabid-5c" data-tab="tabid-5c" tabindex="0" aria-selected="true">New Service via UI</a>
+<a href="#tabpanel_jUagFiZuWT-2_create-service-ui" role="tab" aria-controls="tabpanel_jUagFiZuWT-2_create-service-ui" data-tab="create-service-ui" tabindex="0" aria-selected="true">New Service via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_jUagFiZuWT-2_tabid-6c" role="tab" aria-controls="tabpanel_jUagFiZuWT-2_tabid-6c" data-tab="tabid-6c" tabindex="-1">New Service via CLI</a>
+<a href="#tabpanel_jUagFiZuWT-2_create-service-cli" role="tab" aria-controls="tabpanel_jUagFiZuWT-2_create-service-cli" data-tab="create-service-cli" tabindex="-1">New Service via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_jUagFiZuWT-2_tabid-5c" role="tabpanel" data-tab="tabid-5c">
+<section id="tabpanel_jUagFiZuWT-2_create-service-ui" role="tabpanel" data-tab="create-service-ui">
 <ol>
 <li>On the left side nav bar, click &quot;Edge Services&quot;</li>
 <li>In the top right corner of the screen click the &quot;plus&quot; image to add a new service</li>
@@ -249,7 +251,7 @@ return the IP address you are coming from. Click this link now and discover what
 <li>Click save</li>
 </ol>
 </section>
-<section id="tabpanel_jUagFiZuWT-2_tabid-6c" role="tabpanel" data-tab="tabid-6c" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_jUagFiZuWT-2_create-service-cli" role="tabpanel" data-tab="create-service-cli" aria-hidden="true" hidden="hidden">
 <p>To change the administrator password using the CLI simply issue these two commands:</p>
 <pre><code>#load the default cluster id into an environment variable
 cluster=$(ziti edge controller list clusters | tr -s &#39; &#39; | cut -d &#39; &#39; -f4)
@@ -267,13 +269,13 @@ destined to your service. <a href="appwans.html">Read more about appwans here</a
 <div class="tabGroup" id="tabgroup_jUagFiZuWT-3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_jUagFiZuWT-3_tabid-7d" role="tab" aria-controls="tabpanel_jUagFiZuWT-3_tabid-7d" data-tab="tabid-7d" tabindex="0" aria-selected="true">New Service via UI</a>
+<a href="#tabpanel_jUagFiZuWT-3_create-appwan-ui" role="tab" aria-controls="tabpanel_jUagFiZuWT-3_create-appwan-ui" data-tab="create-appwan-ui" tabindex="0" aria-selected="true">New AppWAN via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_jUagFiZuWT-3_tabid-8d" role="tab" aria-controls="tabpanel_jUagFiZuWT-3_tabid-8d" data-tab="tabid-8d" tabindex="-1">New Service via CLI</a>
+<a href="#tabpanel_jUagFiZuWT-3_create-appwan-cli" role="tab" aria-controls="tabpanel_jUagFiZuWT-3_create-appwan-cli" data-tab="create-appwan-cli" tabindex="-1">New AppWAN via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_jUagFiZuWT-3_tabid-7d" role="tabpanel" data-tab="tabid-7d">
+<section id="tabpanel_jUagFiZuWT-3_create-appwan-ui" role="tabpanel" data-tab="create-appwan-ui">
 <ol>
 <li>On the left side nav bar, click &quot;AppWANs&quot;</li>
 <li>In the top right corner of the screen click the &quot;plus&quot; image to add a new AppWAN</li>
@@ -283,7 +285,7 @@ destined to your service. <a href="appwans.html">Read more about appwans here</a
 <li>Click save</li>
 </ol>
 </section>
-<section id="tabpanel_jUagFiZuWT-3_tabid-8d" role="tabpanel" data-tab="tabid-8d" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_jUagFiZuWT-3_create-appwan-cli" role="tabpanel" data-tab="create-appwan-cli" aria-hidden="true" hidden="hidden">
 <p>To create an AppWAN using the CLI issue the following commands:</p>
 <pre><code>#load the identity&#39;s id into an environment variable
 identity=$(ziti edge controller list identities | grep NewUser | cut -d &quot; &quot; -f2)

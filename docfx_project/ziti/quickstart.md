@@ -10,8 +10,10 @@ To get started with Ziti here are the steps you will need to accomplish:
 1. [Get Ziti](#start-ziti)
   1. Obtain, then change the default password
 1. [Create an Identity](#create-an-identity)
-  1. [Enroll the Identity](#create-a-service)
-1. [Setup your first Network](#create-an-appwan)
+  1. [Enroll the Identity](#enroll-the-new-identity)
+1. [Create a Service](#create-a-service)
+1. [Create an AppWAN](#create-an-appwan)
+1. [Test the Service](#test-it)
 
 ## Start Ziti
 
@@ -74,7 +76,7 @@ remember to use a strong password which is not easy to guess.
 > Once the password is changed - update the credentials.json file with the current password if you want the system to
 > automatically update the certificates in the event of the image losing its IP address or DNS entry.
 
-# [Change via UI](#tab/tabid-1a)
+# [Change via UI](#tab/change-pwd-ui)
 
 These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
 [changing pki](manage/pki.md) for more information.
@@ -86,7 +88,7 @@ These AMIs will be provided with a self-signed certificate generated during secu
 1. Enter the current password along with a new/confirmed password and click "Save" <br/>
 ![image](../images/changepwd_manageprofile.png) <br/>
 
-# [Change via CLI](#tab/tabid-2a)
+# [Change via CLI](#tab/change-pwd-cli)
 
 To change the administrator password using the CLI simply issue these two commands:
 
@@ -111,7 +113,7 @@ To change the administrator password using the CLI simply issue these two comman
 All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
 within the Controller. Read more about Identities [here](identities.md) Creating an identity via the UI or CLI is easy:
 
-# [New Identity via UI](#tab/tabid-3b)
+# [New Identity via UI](#tab/create-identity-ui)
 
 1. On the left side click "Edge Identities"
 1. In the top right corner of the screen click the "plus" image to add a new identity
@@ -120,11 +122,11 @@ within the Controller. Read more about Identities [here](identities.md) Creating
 1. Leave the enrollment type as "One Time Token"
 1. Click save
 
-# [New Identity via CLI](#tab/tabid-4b)
+# [New Identity via CLI](#tab/create-identity-cli)
 
 To change the administrator password using the CLI simply issue these two commands:
 
-[!include[](./cli-snippets/create-identity.md)]
+[!include[](./identities/create-identity-cli.md)]
 
 ***
 
@@ -147,7 +149,7 @@ With an identity created it's now time to create a service. Read more about Serv
 example we are going to choose a simple website that is [available on the open internet](http://eth0.me). This site will
 return the IP address you are coming from. Click this link now and discover what the your external IP is.
 
-# [New Service via UI](#tab/tabid-5c)
+# [New Service via UI](#tab/create-service-ui)
 
 1. On the left side nav bar, click "Edge Services"
 1. In the top right corner of the screen click the "plus" image to add a new service
@@ -163,7 +165,7 @@ return the IP address you are coming from. Click this link now and discover what
 1. Leave Hosting Identities as is
 1. Click save
 
-# [New Service via CLI](#tab/tabid-6c)
+# [New Service via CLI](#tab/create-service-cli)
 
 To change the administrator password using the CLI simply issue these two commands:
 
@@ -183,7 +185,7 @@ To change the administrator password using the CLI simply issue these two comman
 AppWANs are used to to authorize identities to services and allow you to choose the terminating node for traffic
 destined to your service. [Read more about appwans here](appwans.md)
 
-# [New Service via UI](#tab/tabid-7d)
+# [New AppWAN via UI](#tab/create-appwan-ui)
 
 1. On the left side nav bar, click "AppWANs"
 1. In the top right corner of the screen click the "plus" image to add a new AppWAN
@@ -192,7 +194,7 @@ destined to your service. [Read more about appwans here](appwans.md)
 1. Choose the identity you created before (NewUser)
 1. Click save
 
-# [New Service via CLI](#tab/tabid-8d)
+# [New AppWAN via CLI](#tab/create-appwan-cli)
 
 To create an AppWAN using the CLI issue the following commands:
 

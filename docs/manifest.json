@@ -186,7 +186,19 @@
       "output": {
         ".html": {
           "relative_path": "api/rest/create-ca-json.html",
-          "hash": "/m0SGpdJR2K/vsMfgamQZw=="
+          "hash": "cqZHNWKgt7W9K/4HOiW4sw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/rest/create-service-rest.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/rest/create-service-rest.html",
+          "hash": "2/3G3q5rQsh/q633xjpxzQ=="
         }
       },
       "is_incremental": false,
@@ -494,18 +506,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "ziti/cli-snippets/create-identity.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/cli-snippets/create-identity.html",
-          "hash": "vSLclS8KBXGCxbtWZ3buIQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "ziti/clients/android.md",
       "output": {
         ".html": {
@@ -721,6 +721,18 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/identities/create-identity-cli.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/identities/create-identity-cli.html",
+          "hash": "7EchO9M0l4CakgS48mA4nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "log_codes": [
         "InvalidFileLink"
       ],
@@ -729,7 +741,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/identities/creating.html",
-          "hash": "jIrHGx8F4ysvMl/9dJaxsw=="
+          "hash": "a95uVy5BayiFVu/A8ZYcHQ=="
         }
       },
       "is_incremental": false,
@@ -753,7 +765,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/identities/overview.html",
-          "hash": "ttuMcFDrKVNuccFGQtA1JQ=="
+          "hash": "v+0iumWIj24adsUzPpN2PQ=="
         }
       },
       "is_incremental": false,
@@ -945,7 +957,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstart.html",
-          "hash": "OiWIENQMvmre9iFemg9K4A=="
+          "hash": "q7pCCpPpgMtjMRAigFIviA=="
         }
       },
       "is_incremental": false,
@@ -965,11 +977,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/services/create-service-cli.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/services/create-service-cli.html",
+          "hash": "8h0OKe9wiZxjF+Uoe5oVqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/services/creating.md",
       "output": {
         ".html": {
           "relative_path": "ziti/services/creating.html",
-          "hash": "8Lz1ayqg/aywsnYQ7cafuA=="
+          "hash": "2Le9xgXfdULDBvhbATdcAA=="
         }
       },
       "is_incremental": false,
@@ -981,7 +1005,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/services/overview.html",
-          "hash": "qbRsryFl8YVBr/wUXVkYuw=="
+          "hash": "KUWoQ2QN3RZWQNd/QEa/pQ=="
         }
       },
       "is_incremental": false,
@@ -1026,8 +1050,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 55,
-          "skipped_file_count": 55
+          "total_file_count": 57,
+          "skipped_file_count": 51
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

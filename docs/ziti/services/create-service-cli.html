@@ -78,26 +78,12 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
 
-<pre><code>Verb: POST
+<pre><code>#creates a new hosted service
+ziti edge controller create service ${svc_name} --hosted ${intercept_ip_dns} ${intercept_port} --host-ids ${comma separated identity list}
 
-name:
-  The name of the CA to create
-isAutoCaEnrollmentEnabled:
-  controls if the CA can be used for automatic enrollment
-isOttCaEnrollmentEnabled:
-  controls if the CA be used for one time token enrollment
-isAuthEnabled:
-  controls if the CA is enabled for authentication. Devices can enroll but not connect if set to false
-certPem:
-  the CA to upload in PEM format
-body:
-{
-  &quot;name&quot;: &quot;${string}&quot;,
-  &quot;isAutoCaEnrollmentEnabled&quot;: ${true|false},
-  &quot;isOttCaEnrollmentEnabled&quot;: ${true|false},
-  &quot;isAuthEnabled&quot;: ${true|false},
-  &quot;certPem&quot;: &quot;${string}&quot;
-}
+#creates a non-hosted service
+ziti edge controller create service ${svc_name} &quot;${destinationHost}&quot; &quot;${destinationPort}&quot; \
+&quot;${edgeRouter}&quot; &quot;tcp:${interceptHost/ip}:${intercept port}&quot; -c &quot;${cluster}&quot;
 </code></pre></article>
           </div>
           
@@ -106,7 +92,7 @@ body:
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/api/rest/create-ca-json.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/services/create-service-cli.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

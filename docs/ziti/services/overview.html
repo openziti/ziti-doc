@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Ziti Serivces | NetFoundry Ziti </title>
+    <title>Ziti Services | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Ziti Serivces | NetFoundry Ziti ">
+    <meta name="title" content="Ziti Services | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -77,9 +77,58 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="ziti-serivces">Ziti Serivces</h1>
+<h1 id="ziti-services">Ziti Services</h1>
 
-<p>This is all about Services</p>
+<p>A Ziti network is primarily concerned with providing access to &quot;services&quot;. A service encapsulates the definition of any
+resource that could be accessed by a client on a traditional network. Services by themselves do not provide a complete
+mechanism for authorization. That is what an <a href="../appwans/overview.html">AppWAN</a> is for.</p>
+<p>To define a service you need to know the following components:</p>
+<ul>
+<li>Name - what do you want to name your service</li>
+<li>Ziti Router - the last Ziti Router traffic will be sent to</li>
+<li>Intercepting Host and Port - what DNS name or IP you wish to intercept traffic on when intecepting traffic</li>
+<li>Endpoint Service - (if not hosted - see below) the protocol, host, and port traffic sent to</li>
+<li>Hosting Identity - (is hosted - see below) the identity that will host the service</li>
+</ul>
+<h3 id="dark-services">Dark Services</h3>
+<p>One of the benefits of using a Ziti service is that your actual service can be &#39;dark&#39;. In fact this is the default for
+any service based entirely in Ziti. Place your service in a secure network with only Ziti in place and nobody in the
+world can access your service without a valid certificate/identity! </p>
+<p>Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into your existing network and
+Ziti endpoints deployed the only access to these services can be through Ziti!</p>
+<h3 id="service-name">Service Name</h3>
+<p>Services defined on a Ziti Network have an almost limitless &quot;namespace&quot; available for identifying services. A Ziti
+service is be defined by a name of your choosing and this name is registered with your Ziti controller. You have total
+control over your service names rather than by a requiring the use of a DNS name or an IP address (underlay concepts).</p>
+<h2 id="ziti-router">Ziti Router</h2>
+<p>The Ziti Router portion of a service represents the final Ziti Router that traffic will be sent to. From this router the
+traffic will either be sent to a Ziti Endpoint or to a point outside the Ziti network over the underlay network.</p>
+<p>If the traffic is destined for a location that is not on the Ziti network overlay this is the router the Ziti network
+will end up sending the traffic from.</p>
+<p>If the router is sending traffic to another Ziti Endpoint then the service is said to be &quot;hosted&quot;.  Hosted services
+cannot specify a router - the Ziti network figures out the best path to the endpoint.</p>
+<h2 id="intercepting-host-and-port">Intercepting Host and Port</h2>
+<p>Specified on the service when the traffic destination is outside of the Ziti network onto the underlay. If the <a href="../clients/overview.html">Ziti
+client</a> in use is capable of operating in a seamless/transparent mode then these values will
+specify the IPv4 address or DNS name to intercept.  Any traffic sent to the specified address will be captured and if
+the destination port is the same as the specified intercepting port the traffic will be routed into the Ziti network.</p>
+<h2 id="endpoint-service">Endpoint Service</h2>
+<p>Specified on the service when the traffic destination is outside of the Ziti network onto the underlay. These fields
+allow you to choose the protocol, host and port that the actual traffic will be sent to. Note that the host and port do
+not need to match those specified in the intercept host and port (for seamless/transparent ziti clients).</p>
+<h2 id="hosting-identity">Hosting Identity</h2>
+<p>Specified on the service when the serivce is terminated at another Ziti Endpoint. This field is only valid when the
+router specified is set to &quot;hosted&quot;.</p>
+<h2 id="creating-a-service">Creating a Service</h2>
+<p>Creating a Service</p>
+<pre><code>#creates a new hosted service
+ziti edge controller create service ${svc_name} --hosted ${intercept_ip_dns} ${intercept_port} --host-ids ${comma separated identity list}
+
+#creates a non-hosted service
+ziti edge controller create service ${svc_name} &quot;${destinationHost}&quot; &quot;${destinationPort}&quot; \
+&quot;${edgeRouter}&quot; &quot;tcp:${interceptHost/ip}:${intercept port}&quot; -c &quot;${cluster}&quot;
+</code></pre><p>router does not always need to be a Ziti Edge Router however  is the last node traffic will be sent to on the Ziti network.  This node is generally a  Traffic can either be</p>
+<p>Think of a service as  rule in a firewall which defines the exact set of network resources that one may access over an AppWAN, while all other traffic is blocked.</p>
 </article>
           </div>
           

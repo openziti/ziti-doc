@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Creating an Identity | NetFoundry Ziti </title>
+    <title>Creating a Service | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Creating an Identity | NetFoundry Ziti ">
+    <meta name="title" content="Creating a Service | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -77,9 +77,17 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="creating-an-identity">Creating an Identity</h2>
+<h2 id="creating-a-service">Creating a Service</h2>
 
-<p>This is all about creating identities</p>
+<p>Creating a Service</p>
+<pre><code>#creates a new hosted service
+ziti edge controller create service ${svc_name} --hosted ${intercept_ip_dns} ${intercept_port} --host-ids ${comma separated identity list}
+
+#creates a non-hosted service
+ziti edge controller create service ${svc_name} &quot;${destinationHost}&quot; &quot;${destinationPort}&quot; \
+&quot;${edgeRouter}&quot; &quot;tcp:${interceptHost/ip}:${intercept port}&quot; -c &quot;${cluster}&quot;
+</code></pre><p>router does not always need to be a Ziti Edge Router however  is the last node traffic will be sent to on the Ziti network.  This node is generally a  Traffic can either be</p>
+<p>Think of a service as  rule in a firewall which defines the exact set of network resources that one may access over an AppWAN, while all other traffic is blocked.</p>
 </article>
           </div>
           
