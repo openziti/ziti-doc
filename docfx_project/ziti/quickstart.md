@@ -124,7 +124,7 @@ within the Controller. Read more about Identities [here](identities.md) Creating
 
 # [New Identity via CLI](#tab/create-identity-cli)
 
-To change the administrator password using the CLI simply issue these two commands:
+To create a new identity using the CLI simply issue these commands:
 
 [!include[](./identities/create-identity-cli.md)]
 
@@ -167,7 +167,7 @@ return the IP address you are coming from. Click this link now and discover what
 
 # [New Service via CLI](#tab/create-service-cli)
 
-To change the administrator password using the CLI simply issue these two commands:
+To create a new service using the CLI simply issue these two commands:
 
     #load the default cluster id into an environment variable
     cluster=$(ziti edge controller list clusters | tr -s ' ' | cut -d ' ' -f4)

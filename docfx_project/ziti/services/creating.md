@@ -1,14 +1,39 @@
 ## Creating a Service
 
-Creating a Service
+Here's how you can create a service.
+
+# [New non-hosted Service via UI](#tab/create-service-ui)
+
+1. On the left side nav bar, click "Edge Services"
+1. In the top right corner of the screen click the "plus" image to add a new service
+1. Choose a name for the serivce. Example "my-first-service"
+1. Enter a host name for the service. Enter "intercepted-hostname"
+1. Enter the port you want intercepted: 1111
+1. Choose Router by name - for example "ziti-gw01" if you are using "Ziti Edge - Developer Edition"
+1. For Endpoint Service choose:
+    * protocol = tcp
+    * host = actual-hostname
+    * port = 2222
+1. Select a cluster. If using "Ziti Edge - Developer Edition" choose "demo-c01"
+1. Leave Hosting Identities as is
+1. Click save
+
+# [New hosted Service via UI](#tab/create-hosted-service-ui)
+
+1. On the left side nav bar, click "Edge Services"
+1. In the top right corner of the screen click the "plus" image to add a new service
+1. Choose a name for the serivce. Example "my-first-hosted-service"
+1. Enter a host name for the service. Enter "intercepted-hostname"
+1. Enter the port you want intercepted: 1111
+1. Choose "Hosted (No Router)" for the Router
+1. Select a cluster. If using "Ziti Edge - Developer Edition" choose "demo-c01"
+1. Select an identity in "Hosting Identities" of the identy you want to host the service
+1. Click save
+
+# [New Service via CLI](#tab/create-service-cli)
+
+To change the administrator password using the CLI simply issue these two commands:
 
 [!include[](./create-service-cli.md)]
 
-
-
-
-
-router does not always need to be a Ziti Edge Router however  is the last node traffic will be sent to on the Ziti network.  This node is generally a  Traffic can either be
-
-
-Think of a service as  rule in a firewall which defines the exact set of network resources that one may access over an AppWAN, while all other traffic is blocked.
+***

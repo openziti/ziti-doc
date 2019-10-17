@@ -203,7 +203,7 @@ within the Controller. Read more about Identities <a href="identities.html">here
 </ol>
 </section>
 <section id="tabpanel_jUagFiZuWT-1_create-identity-cli" role="tabpanel" data-tab="create-identity-cli" aria-hidden="true" hidden="hidden">
-<p>To change the administrator password using the CLI simply issue these two commands:</p>
+<p>To create a new identity using the CLI simply issue these commands:</p>
 <pre><code>#creates a new user named &quot;NewUser&quot;
 ziti edge controller create identity user &quot;NewUser&quot; -o NewUser.jwt
 </code></pre></section>
@@ -252,7 +252,7 @@ return the IP address you are coming from. Click this link now and discover what
 </ol>
 </section>
 <section id="tabpanel_jUagFiZuWT-2_create-service-cli" role="tabpanel" data-tab="create-service-cli" aria-hidden="true" hidden="hidden">
-<p>To change the administrator password using the CLI simply issue these two commands:</p>
+<p>To create a new service using the CLI simply issue these two commands:</p>
 <pre><code>#load the default cluster id into an environment variable
 cluster=$(ziti edge controller list clusters | tr -s &#39; &#39; | cut -d &#39; &#39; -f4)
 
