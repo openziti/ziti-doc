@@ -9,12 +9,14 @@ Here's how you can create a service.
 1. Choose a name for the serivce. Example "my-first-service"
 1. Enter a host name for the service. Enter "intercepted-hostname"
 1. Enter the port you want intercepted: 1111
-1. Choose Router by name - for example "ziti-gw01" if you are using "Ziti Edge - Developer Edition"
+1. Choose Router by name - for example "ziti-gw01" if you are using [Ziti Edge - Developer
+   Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV)
 1. For Endpoint Service choose:
     * protocol = tcp
     * host = actual-hostname
     * port = 2222
-1. Select a cluster. If using "Ziti Edge - Developer Edition" choose "demo-c01"
+1. Select a cluster. If using [Ziti Edge - Developer Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV) choose
+   "demo-c01"
 1. Leave Hosting Identities as is
 1. Click save
 
@@ -26,7 +28,8 @@ Here's how you can create a service.
 1. Enter a host name for the service. Enter "intercepted-hostname"
 1. Enter the port you want intercepted: 1111
 1. Choose "Hosted (No Router)" for the Router
-1. Select a cluster. If using "Ziti Edge - Developer Edition" choose "demo-c01"
+1. Select a cluster. If using [Ziti Edge - Developer Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV) choose
+   "demo-c01"
 1. Select an identity in "Hosting Identities" of the identy you want to host the service
 1. Click save
 
