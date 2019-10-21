@@ -474,7 +474,31 @@
       "output": {
         ".html": {
           "relative_path": "ziti/appwans.html",
-          "hash": "DhiJJUzke93HKzW+qYo8Vw=="
+          "hash": "Sv02+YBavH1JgVX1eEwAqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/appwans/create-appwan-cli.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/appwans/create-appwan-cli.html",
+          "hash": "JKjSN+RTPxDtWffKhRiIZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/appwans/create-appwan-ui.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/appwans/create-appwan-ui.html",
+          "hash": "u/Zt54RXCIZlEM9jhWQmMg=="
         }
       },
       "is_incremental": false,
@@ -486,7 +510,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/appwans/creating.html",
-          "hash": "0g64ADcdIxtNx/ZRrY4+8g=="
+          "hash": "kv6IYE9ewJcM8iE1U5C+0A=="
         }
       },
       "is_incremental": false,
@@ -498,7 +522,19 @@
       "output": {
         ".html": {
           "relative_path": "ziti/appwans/overview.html",
-          "hash": "UOA0JQFtPDGstGP2owG+IQ=="
+          "hash": "bHQRsawdx3HTEsVbdrPaSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/cli-snippets/login.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/cli-snippets/login.html",
+          "hash": "TMtl2uZBitro09zk5n7yWQ=="
         }
       },
       "is_incremental": false,
@@ -733,15 +769,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "ziti/identities/creating.md",
       "output": {
         ".html": {
           "relative_path": "ziti/identities/creating.html",
-          "hash": "a95uVy5BayiFVu/A8ZYcHQ=="
+          "hash": "BdOGuullGsBIXXkOpczbEg=="
         }
       },
       "is_incremental": false,
@@ -765,7 +798,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/identities/overview.html",
-          "hash": "v+0iumWIj24adsUzPpN2PQ=="
+          "hash": "4sXsjR9YYynSH7xJguayBg=="
         }
       },
       "is_incremental": false,
@@ -957,7 +990,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstart.html",
-          "hash": "ZwKbwLiDt4yLFnVsKzqE2g=="
+          "hash": "CKa+JuIj/EQRoW6x7zyWfg=="
         }
       },
       "is_incremental": false,
@@ -1033,13 +1066,6 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -1050,14 +1076,21 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 57,
-          "skipped_file_count": 54
+          "total_file_count": 60,
+          "skipped_file_count": 59
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 10,
           "skipped_file_count": 10
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         }
       }
     },

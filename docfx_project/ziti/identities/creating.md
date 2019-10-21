@@ -28,11 +28,11 @@ no longer valid and cannot be used to enroll the same identity again.
 
 One time tokens are delivered from the Ziti Controller as a [jwt](https://tools.ietf.org/html/rfc7519) and the token
 expires 24 hours after the identity is created.  The token is downloadable via the basic UI provided in the [Ziti Edge -
-Developer Edition](./intentionally_broken_link_to_ami.md). After you create a user you can go to the Identities page and
+Developer Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV). After you create a user you can go to the Identities page and
 click the icon that looks like a certificate to download the .jwt file.
 
 You can also create a one time token identity using the `ziti` cli tool available on the path of the [Ziti Edge -
-Developer Edition](./intentionally_broken_link_to_ami.md).  This command will create a new identity and output the jwt
+Developer Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV).  This command will create a new identity and output the jwt
 to the selected path. You can then transfer the .jwt file to its intended destination.
 
 [!include[](./create-identity-cli.md)]
@@ -54,7 +54,7 @@ present a certificate during the connection process that is valid per the provid
 #### Adding a 3rd Party CA to the Ziti Controller
 
 Adding a certifate to the Ziti Controller is easy using the Ziti Console provided in the [Ziti Edge -
-Developer Edition](./intentionally_broken_link_to_ami.md).
+Developer Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV).
 
 #### [New CA via UI](#tab/tabid-new-ca-ui)
 

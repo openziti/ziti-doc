@@ -20,7 +20,7 @@ To get started with Ziti here are the steps you will need to accomplish:
 ### Getting Started in AWS
 
 This guide will leverage an [Amazon Machine Image (AMI) delivered via the AWS Marketplace]
-(https://netfoundry.io/todo-link-to-aws.ziti).
+(https://aws.amazon.com/marketplace/pp/B07YZLKMLV).
 Using the image you will have an instance of Ziti to use as you please within minutes. If you are
 unfamiliar AWS you'll want to take some time to come up to speed. You will need an account, and
 you'll want to become familiar with the console. Start
@@ -30,7 +30,7 @@ and when you feel ready - come back to this guide.
 ### Starting a Ziti Instance
 
 NetFoundry has provided an [Amazon Machine Image (AMI) delivered via the AWS Marketplace]
-(https://netfoundry.io/todo-link-to-aws.ziti) to make it easy for you to deploy a fully functional
+(https://aws.amazon.com/marketplace/pp/B07YZLKMLV) to make it easy for you to deploy a fully functional
 Ziti-based network.  Follow the prompts and launch a new AMI.  You will need to make a few key decisions
 that might affect your Ziti-based network.
 
@@ -90,19 +90,13 @@ These AMIs will be provided with a self-signed certificate generated during secu
 
 # [Change via CLI](#tab/change-pwd-cli)
 
-To change the administrator password using the CLI simply issue these two commands:
-
-    #load the current user/password into an environment variables
-    ctrl_user=$(jq -r .username ~/.config/ziti/ziti-controller/credentials.json)
-    ctrl_passwd=$(jq -r .password ~/.config/ziti/ziti-controller/credentials.json)
+To change the administrator password using the CLI simply issue these commands:
 
 > [!NOTE]
 > You will need to login one time in order to use the ziti cli:
 
-    ziticontroller=127.0.0.1
-    cert=~/.config/ziti/pki/intermediate/certs/intermediate.cert
-    ziti edge controller login https://${ziticontroller}:1280 -u $ctrl_user -p $ctrl_passwd -c $cert
-   
+[!include[](./cli-snippets/login.md)]
+    
     #update the admin user. This command will prompt you to enter the password
     ziti edge controller update authenticator updb -s
     
@@ -196,7 +190,7 @@ destined to your service. [Read more about appwans here](appwans.md)
 
 # [New AppWAN via CLI](#tab/create-appwan-cli)
 
-To create an AppWAN using the CLI issue the following commands:
+[To create an AppWAN using the CLI issue the following commands:
 
     #load the identity's id into an environment variable
     identity=$(ziti edge controller list identities | grep NewUser | cut -d " " -f2)
@@ -205,7 +199,7 @@ To create an AppWAN using the CLI issue the following commands:
     service=$(ziti edge controller list services | grep ethzero-cli | cut -d " " -f2)
 
     #update the admin user. This command will prompt you to enter the password
-    ziti edge controller create app-wan my-first-cli-appwan -i $identity -s $service
+    ziti edge controller create app-wan my-first-cli-appwan -i $identity -s $service]
 
 ***
 

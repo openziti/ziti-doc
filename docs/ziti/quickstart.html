@@ -97,14 +97,14 @@
 </ol>
 <h2 id="start-ziti">Start Ziti</h2>
 <h3 id="getting-started-in-aws">Getting Started in AWS</h3>
-<p>This guide will leverage an <a href="https://netfoundry.io/todo-link-to-aws.ziti">Amazon Machine Image (AMI) delivered via the AWS Marketplace</a>.
+<p>This guide will leverage an <a href="https://aws.amazon.com/marketplace/pp/B07YZLKMLV">Amazon Machine Image (AMI) delivered via the AWS Marketplace</a>.
 Using the image you will have an instance of Ziti to use as you please within minutes. If you are
 unfamiliar AWS you&#39;ll want to take some time to come up to speed. You will need an account, and
 you&#39;ll want to become familiar with the console. Start
 <a href="https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html">here</a>
 and when you feel ready - come back to this guide.</p>
 <h3 id="starting-a-ziti-instance">Starting a Ziti Instance</h3>
-<p>NetFoundry has provided an <a href="https://netfoundry.io/todo-link-to-aws.ziti">Amazon Machine Image (AMI) delivered via the AWS Marketplace</a> to make it easy for you to deploy a fully functional
+<p>NetFoundry has provided an <a href="https://aws.amazon.com/marketplace/pp/B07YZLKMLV">Amazon Machine Image (AMI) delivered via the AWS Marketplace</a> to make it easy for you to deploy a fully functional
 Ziti-based network.  Follow the prompts and launch a new AMI.  You will need to make a few key decisions
 that might affect your Ziti-based network.</p>
 <div class="IMPORTANT"><h5>Important</h5><p>This is IMPORTANT. Make sure you consider and understand any security implications of the choices made
@@ -166,17 +166,17 @@ automatically update the certificates in the event of the image losing its IP ad
 </ol>
 </section>
 <section id="tabpanel_jUagFiZuWT_change-pwd-cli" role="tabpanel" data-tab="change-pwd-cli" aria-hidden="true" hidden="hidden">
-<p>To change the administrator password using the CLI simply issue these two commands:</p>
+<p>To change the administrator password using the CLI simply issue these commands:</p>
+<div class="NOTE"><h5>Note</h5><p>You will need to login one time in order to use the ziti cli:</p>
+</div>
 <pre><code>#load the current user/password into an environment variables
 ctrl_user=$(jq -r .username ~/.config/ziti/ziti-controller/credentials.json)
 ctrl_passwd=$(jq -r .password ~/.config/ziti/ziti-controller/credentials.json)
-</code></pre><div class="NOTE"><h5>Note</h5><p>You will need to login one time in order to use the ziti cli:</p>
-</div>
-<pre><code>ziticontroller=127.0.0.1
+
+ziticontroller=127.0.0.1
 cert=~/.config/ziti/pki/intermediate/certs/intermediate.cert
 ziti edge controller login https://${ziticontroller}:1280 -u $ctrl_user -p $ctrl_passwd -c $cert
-
-#update the admin user. This command will prompt you to enter the password
+</code></pre><pre><code>#update the admin user. This command will prompt you to enter the password
 ziti edge controller update authenticator updb -s
 </code></pre></section>
 </div>
@@ -286,7 +286,7 @@ destined to your service. <a href="appwans.html">Read more about appwans here</a
 </ol>
 </section>
 <section id="tabpanel_jUagFiZuWT-3_create-appwan-cli" role="tabpanel" data-tab="create-appwan-cli" aria-hidden="true" hidden="hidden">
-<p>To create an AppWAN using the CLI issue the following commands:</p>
+<p>[To create an AppWAN using the CLI issue the following commands:</p>
 <pre><code>#load the identity&#39;s id into an environment variable
 identity=$(ziti edge controller list identities | grep NewUser | cut -d &quot; &quot; -f2)
 
@@ -294,7 +294,7 @@ identity=$(ziti edge controller list identities | grep NewUser | cut -d &quot; &
 service=$(ziti edge controller list services | grep ethzero-cli | cut -d &quot; &quot; -f2)
 
 #update the admin user. This command will prompt you to enter the password
-ziti edge controller create app-wan my-first-cli-appwan -i $identity -s $service
+ziti edge controller create app-wan my-first-cli-appwan -i $identity -s $service]
 </code></pre></section>
 </div>
 <h2 id="test-it">Test It</h2>

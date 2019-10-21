@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Creating an Identity | NetFoundry Ziti </title>
+    <title>Creating an AppWAN | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Creating an Identity | NetFoundry Ziti ">
+    <meta name="title" content="Creating an AppWAN | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -77,9 +77,39 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="creating-an-identity">Creating an Identity</h2>
+<h2 id="creating-an-appwan">Creating an AppWAN</h2>
 
-<p>This is all about creating identities</p>
+<div class="tabGroup" id="tabgroup_yCb1tlCx+H">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_yCb1tlCx+H_tabid-new-appwan-ui" role="tab" aria-controls="tabpanel_yCb1tlCx+H_tabid-new-appwan-ui" data-tab="tabid-new-appwan-ui" tabindex="0" aria-selected="true">New AppWAN via UI</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_yCb1tlCx+H_tabid-new-appwan-cli" role="tab" aria-controls="tabpanel_yCb1tlCx+H_tabid-new-appwan-cli" data-tab="tabid-new-appwan-cli" tabindex="-1">New AppWAN via UI</a>
+</li>
+</ul>
+<section id="tabpanel_yCb1tlCx+H_tabid-new-appwan-ui" role="tabpanel" data-tab="tabid-new-appwan-ui">
+<ol>
+<li>On the left side nav bar, click &quot;AppWANs&quot;</li>
+<li>In the top right corner of the screen click the &quot;plus&quot; image to add a new AppWAN</li>
+<li>Choose a name for the AppWAN. Enter then name for your AppWAN such as: &quot;my-first-appwan&quot;</li>
+<li>Choose the service(s) you want to add to the AppWAN.</li>
+<li>Choose the identity/identities you want to have access to the AppWAN</li>
+<li>Click save</li>
+</ol>
+</section>
+<section id="tabpanel_yCb1tlCx+H_tabid-new-appwan-cli" role="tabpanel" data-tab="tabid-new-appwan-cli" aria-hidden="true" hidden="hidden">
+<p>To create an AppWAN using the CLI issue the following commands. (ensure you are <a href="../cli-snippets/login.html">logged in</a>)</p>
+<pre><code>#load the identity&#39;s id into an environment variable
+identity=$(ziti edge controller list identities | grep NewUser | cut -d &quot; &quot; -f2)
+
+#load the service id into an environment variable
+service=$(ziti edge controller list services | grep ethzero-cli | cut -d &quot; &quot; -f2)
+
+#update the admin user. This command will prompt you to enter the password
+ziti edge controller create app-wan my-first-cli-appwan -i $identity -s $service
+</code></pre></section>
+</div>
 </article>
           </div>
           
