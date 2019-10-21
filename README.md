@@ -29,4 +29,3 @@ a bug in docfx as of Oct 11 that will cause docfx to fail.
    mklink /j csharp_example %ZITI_ROOT%\ziti-sdk-csharp\Ziti.Core.Console
 ```
 * regenerate the docfx site: `docfx docfx_project\docfx.json`
-
