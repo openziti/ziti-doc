@@ -30,9 +30,7 @@ items:
     content: 'public class ZitiException : Exception, ISerializable'
     content.vb: >-
       Public Class ZitiException
-
           Inherits Exception
-
           Implements ISerializable
   inheritance:
   - System.Object
