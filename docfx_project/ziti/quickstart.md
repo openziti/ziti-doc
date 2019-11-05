@@ -129,7 +129,12 @@ To create a new identity using the CLI simply issue these commands:
 Identities are not truly enabled until they are enrolled. Enrollment is a complex process. NetFoundy has created a tool
 specifically for this task to ensure safe and secure enrollment of identities.  
 
-1. Download [the enroller](https://netfoundry.io/download/ziti/enroller) for your operating system.
+1. Download the enroller for your operating system.
+
+  * [Windows](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller.exe)
+  * [MacOS](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller-mac.tar.gz)
+  * [Linux](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller-linux.tar.gz)
+
 1. Download the [jwt](https://jwt.io/introduction/) from the UI by clicking the icon that looks like a certificate (save
    the file as NewUser.jwt) or if you used the CLI from the output location specified when creating the user.
 1. In a command line editor, change to the folder containing the jwt. Enroll the identity by running `ziti-enroller --jwt NewUser.jwt`

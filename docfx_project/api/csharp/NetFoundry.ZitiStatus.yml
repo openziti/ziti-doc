@@ -25,7 +25,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: ZitiStatus
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 8
@@ -58,7 +58,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: OK
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 13
@@ -92,7 +92,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: CONFIG_NOT_FOUND
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 19
@@ -126,7 +126,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: NOT_AUTHORIZED
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 26
@@ -160,7 +160,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: CONTROLLER_UNAVAILABLE
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 32
@@ -194,7 +194,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: GATEWAY_UNAVAILABLE
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 38
@@ -228,7 +228,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: SERVICE_UNAVALABLE
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 46
@@ -262,7 +262,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: EOF
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 52
@@ -296,7 +296,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: TIMEOUT
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 59
@@ -330,7 +330,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: CONNABORT
     path: aggregatedSources/csharp/src/NetFoundry/ZitiStatus.cs
     startLine: 66

@@ -17,7 +17,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiException.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: ZitiException
     path: aggregatedSources/csharp/src/NetFoundry/ZitiException.cs
     startLine: 7
@@ -79,7 +79,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiException.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: .ctor
     path: aggregatedSources/csharp/src/NetFoundry/ZitiException.cs
     startLine: 13

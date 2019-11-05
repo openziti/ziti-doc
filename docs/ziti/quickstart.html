@@ -212,9 +212,16 @@ ziti edge controller create identity user &quot;NewUser&quot; -o NewUser.jwt
 <p>Identities are not truly enabled until they are enrolled. Enrollment is a complex process. NetFoundy has created a tool
 specifically for this task to ensure safe and secure enrollment of identities.  </p>
 <ol>
-<li>Download <a href="https://netfoundry.io/download/ziti/enroller">the enroller</a> for your operating system.</li>
-<li>Download the <a href="https://jwt.io/introduction/">jwt</a> from the UI by clicking the icon that looks like a certificate (save
-the file as NewUser.jwt) or if you used the CLI from the output location specified when creating the user.</li>
+<li><p>Download the enroller for your operating system.</p>
+<ul>
+<li><a href="https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller.exe">Windows</a></li>
+<li><a href="https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller-mac.tar.gz">MacOS</a></li>
+<li><a href="https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller-linux.tar.gz">Linux</a></li>
+</ul>
+</li>
+<li><p>Download the <a href="https://jwt.io/introduction/">jwt</a> from the UI by clicking the icon that looks like a certificate (save
+the file as NewUser.jwt) or if you used the CLI from the output location specified when creating the user.</p>
+</li>
 <li>In a command line editor, change to the folder containing the jwt. Enroll the identity by running <code>ziti-enroller --jwt NewUser.jwt</code></li>
 </ol>
 <p>The ziti-enroller will output a new json file named <code>NewUser.json</code>. This file is precious and must be protected as it

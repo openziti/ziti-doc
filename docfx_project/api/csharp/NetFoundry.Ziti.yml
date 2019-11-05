@@ -18,7 +18,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: Ziti
     path: aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
     startLine: 25
@@ -61,7 +61,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: OutputDebugInformation
     path: aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
     startLine: 32
@@ -100,7 +100,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: Debug
     path: aggregatedSources/csharp/src/NetFoundry/ZitiAPI.cs
     startLine: 39

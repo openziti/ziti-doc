@@ -24,7 +24,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: ZitiIdentity
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 11
@@ -67,7 +67,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: PathToConfigFile
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 16
@@ -104,7 +104,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: .ctor
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 31
@@ -140,7 +140,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: .ctor
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 42
@@ -179,7 +179,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: NewConnection
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 67
@@ -222,7 +222,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: ServiceAvailable
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 97
@@ -261,7 +261,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: InitializeAndRun
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 115
@@ -297,7 +297,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: Shutdown
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 213
@@ -329,7 +329,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: Dump
     path: aggregatedSources/csharp/src/NetFoundry/ZitiIdentity.cs
     startLine: 221

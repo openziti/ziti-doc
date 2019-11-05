@@ -19,7 +19,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: ZitiConnection
     path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 14
@@ -67,7 +67,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: Write
     path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 167
@@ -115,7 +115,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: Dial
     path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 224
@@ -158,7 +158,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
-      repo: git@dovholuknf-github.com:nf-dev/ziti-doc.git
+      repo: git@dovholuknf-github.com:NetFoundry/ziti-doc.git
     id: Dispose
     path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 299
