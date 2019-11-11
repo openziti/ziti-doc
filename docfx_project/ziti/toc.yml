@@ -1,10 +1,10 @@
 - name: Overview
   href: overview.md
-- name: Quickstart
-  href: quickstart.md
-#- name: Install
-#  href: install/toc.yml
-#  topicHref: install/overview.md
+#- name: Quickstart
+#  href: quickstart.md
+- name: Quickstarts
+  href: quickstarts/toc.yml
+  topicHref: quickstarts/quickstart-overview.md
 - name: Clients
   href: clients/toc.yml
   topicHref: clients/which-client.md
@@ -20,3 +20,4 @@
 - name: Manage
   href: manage/toc.yml
   topicHref: manage/manage.md
+  

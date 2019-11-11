@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Managing Ziti | NetFoundry Ziti </title>
+    <title>Ziti Controller | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Managing Ziti | NetFoundry Ziti ">
+    <meta name="title" content="Ziti Controller | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -77,20 +77,39 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="managing-ziti">Managing Ziti</h1>
+<h1 id="ziti-controller">Ziti Controller</h1>
 
-<p>Ziti management needs to be hands off. The only times one should be expected to be concerned with managing a Ziti
-instance is during the initial installation and when trying to expand the Ziti footprint.</p>
-<h2 id="initial-installation">Initial Installation</h2>
-<h3 id="ziti-edge---developer-edition">Ziti Edge - Developer Edition</h3>
-<p>The initial installation of Ziti is already done for you when using the <a href="https://aws.amazon.com/marketplace/pp/B07YZLKMLV">Ziti Edge - Developer
-Edition</a>.  The installation will contain a
-<a href="controller.html">controller</a>, an <a href="edge-router.html">edge router</a> and corresponding <a href="pki.html">PKI</a>. See the corresponding
-sections for additional details.</p>
-<h2 id="expanding-ziti">Expanding Ziti</h2>
-<p>At this time Ziti is only offered as the <a href="https://aws.amazon.com/marketplace/pp/B07YZLKMLV">Ziti Edge - Developer
-Edition</a> which is not positioned to be expandable. Allowing Ziti to be
-expanded past the developer experience is planned. Check back in the coming months for more information.</p>
+<p>The Ziti Controller is the process that coordinates a Ziti network. It is responsible for authenticating incoming
+connections from identities and authorizing identities to services and provides a ReST-based API for other processes to
+interact with it.</p>
+<h1 id="installation-steps">Installation Steps</h1>
+<p>Installing a Ziti Network from scratch, like most things, is easy once you know how. Getting to knowing how can take some
+time.  The goal of these pages are to get you from nothing to network the long way. If you want to take the quick route
+you should stop now and follow one of the <a href="../quickstarts/quickstart-overview.html">quickstart</a> instead. It is designed to
+get a Edge-only Ziti network running in no time.</p>
+<p>A basic Edge-only Ziti Network is composed of two (or three depending on whether you count the database) pieces. The
+Controller and an Edge Router.</p>
+<h2 id="controller">Controller</h2>
+<h3 id="prerequisite---database">Prerequisite - Database</h3>
+<p>There are a few prerequisites necessary before being able to deploy your first Controller.  The first thing you will
+need is a database. At this time the Ziti Controller is using a Postgres instance. Setting up and managing a Postgres
+database is a complex task beyond the scope of this guide. This guide is intended to be illustrative of installing and
+managing the Ziti Controller and not maintaining a Postgres installation. Refer to the documentation from
+<a href="https://www.postgresql.org/docs/">Postgres</a> for asistance setting up a Postgres database.</p>
+<h3 id="prerequisite---pki">Prerequisite - PKI</h3>
+<p>Public Key Infrastructure (PKI) is a complex topic. See the <a href="pki.html">pki</a> page for additional details about the sort
+of needs and considerations relevant to the Ziti controller.</p>
+<h2 id="sizing-guidelines">Sizing Guidelines</h2>
+<p>The Ziti network controller and routers have not been stress tested at this time. We recommend starting with a small
+scale deployment until key performance indicators start to hint that the server requires more resources. A Ziti network
+will have two important metrics: CPU and network capacity.  Modest sized networks require minimal investments in
+infrastructure. Start with small machines and increase as needed.</p>
+<h2 id="configuration">Configuration</h2>
+<p>The Ziti Controller is configured using a <a href="https://yaml.org/">yaml</a> file. The configuration file can be found
+<a href="sample-controller-config.yaml">here</a>. Each section is annotated and should provide you enough
+information to modify a given setting. Most of the fields are straight-forward. The pki-related fields are the ones you
+will need to pay particular attention to. See the <a href="pki.html">pki</a> page for relevant information on pki
+settings.</p>
 </article>
           </div>
           
@@ -99,7 +118,7 @@ expanded past the developer experience is planned. Check back in the coming mont
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/manage/manage.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/manage/controller-overview.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

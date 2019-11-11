@@ -385,12 +385,11 @@
       "version": ""
     },
     {
-      "type": "Conceptual",
-      "source_relative_path": "index.md",
+      "type": "Resource",
+      "source_relative_path": "index.html",
       "output": {
-        ".html": {
-          "relative_path": "index.html",
-          "hash": "h32VHisnYoxOch0IjcxqrA=="
+        "resource": {
+          "relative_path": "index.html"
         }
       },
       "is_incremental": false,
@@ -890,11 +889,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/manage/controller-overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/manage/controller-overview.html",
+          "hash": "n7a/WiP+Rgf8Al9A/uo+zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/manage/controller.md",
       "output": {
         ".html": {
           "relative_path": "ziti/manage/controller.html",
-          "hash": "EFv8mFwlX/GOFEYaph6tPQ=="
+          "hash": "u10G89C8Ky5dLhkpFy3MnA=="
         }
       },
       "is_incremental": false,
@@ -906,7 +917,19 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/edge-router.html",
-          "hash": "CuCfXPGVUBUvIzhIleZJUw=="
+          "hash": "buT2ktbqLWC9TW/cCei4Iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/manage/fabric-router.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/manage/fabric-router.html",
+          "hash": "ASkfIyUMNQYuALuKbEr/AQ=="
         }
       },
       "is_incremental": false,
@@ -918,7 +941,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/manage.html",
-          "hash": "JwLnU0E+0U2Uay6K3aLf1w=="
+          "hash": "KdhHenGRMIB0kS9c0ekOBw=="
         }
       },
       "is_incremental": false,
@@ -938,11 +961,44 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "ziti/manage/router.md",
+      "source_relative_path": "ziti/manage/router-overview.md",
       "output": {
         ".html": {
-          "relative_path": "ziti/manage/router.html",
-          "hash": "qstfNcD3ntf+q20po0lvQA=="
+          "relative_path": "ziti/manage/router-overview.html",
+          "hash": "8iilCNvOR8rG0SSY4+mICw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti/manage/sample-controller-config.yaml",
+      "output": {
+        "resource": {
+          "relative_path": "ziti/manage/sample-controller-config.yaml"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti/manage/sample-edge-router-config.yaml",
+      "output": {
+        "resource": {
+          "relative_path": "ziti/manage/sample-edge-router-config.yaml"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti/manage/sample-fabric-router-config.yaml",
+      "output": {
+        "resource": {
+          "relative_path": "ziti/manage/sample-fabric-router-config.yaml"
         }
       },
       "is_incremental": false,
@@ -978,7 +1034,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/overview.html",
-          "hash": "VNVkICVTgYIIkTGVEije7g=="
+          "hash": "iry9sUAUU+i+L+jexL+V8w=="
         }
       },
       "is_incremental": false,
@@ -986,11 +1042,35 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "ziti/quickstart.md",
+      "source_relative_path": "ziti/quickstarts/network/AWS/quickstart.md",
       "output": {
         ".html": {
-          "relative_path": "ziti/quickstart.html",
-          "hash": "5tZNPwt8lt5qpyN2Xt2aOw=="
+          "relative_path": "ziti/quickstarts/network/AWS/quickstart.html",
+          "hash": "2YOd++EHHazzZIqLoWO93g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/quickstarts/network/Azure/quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/quickstarts/network/Azure/quickstart.html",
+          "hash": "yaTPyS44UnjX9XbPfLASGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/quickstarts/quickstart-overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/quickstarts/quickstart-overview.html",
+          "hash": "zgyMOqWgTktmZEsDKkiALg=="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1130,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/toc.html",
-          "hash": "+prrPTFR0jsFxLfPOxXCmw=="
+          "hash": "qazR0uZ315qVqAqWFAqtYg=="
         }
       },
       "is_incremental": false,
@@ -1066,13 +1146,6 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -1080,17 +1153,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 60,
-          "skipped_file_count": 59
-        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 10,
           "skipped_file_count": 10
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 63,
+          "skipped_file_count": 63
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         }
       }
     },

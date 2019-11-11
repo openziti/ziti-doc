@@ -1,7 +1,7 @@
-# Ziti Quickstart
+# Ziti Quickstart AWS: Ziti Edge - Developer Edition
 
 This guide will get you up and running with a demonstrable service in only a few minutes.  
-If you are unfamiliar with the relevant ziti concepts refer to the [overview](overview.md).
+If you are unfamiliar with the relevant ziti concepts refer to the [overview](~/ziti/overview.md).
 
 # From Nothing to Network 
 
@@ -29,7 +29,7 @@ and when you feel ready - come back to this guide.
 
 ### Starting a Ziti Instance
 
-NetFoundry has provided an [Amazon Machine Image (AMI) delivered via the AWS Marketplace]
+NetFoundry has provided the [Ziti Edge - Developer Edition]
 (https://aws.amazon.com/marketplace/pp/B07YZLKMLV) to make it easy for you to deploy a fully functional
 Ziti-based network.  Follow the prompts and launch a new AMI.  You will need to make a few key decisions
 that might affect your Ziti-based network.
@@ -41,7 +41,7 @@ that might affect your Ziti-based network.
 * Virtual Private Cloud (VPC): for the instance to be put into. Choosing the VPC will determine what network
 resources are available to your Ziti network
 * Subnet: The subnet you choose further defines what resources the instance will have access to. If you have
-a service that is not visible to the public internet and you wnat to use Ziti to secure that service
+a service that is not visible to the public internet and you want to use Ziti to secure that service
 make sure you put the Ziti instance on the proper subnet
 * Security Group: You will want to put the Ziti instance into a security group that allows access from
 the public internet on ports: 22, 443, 1280, 3022.
@@ -49,6 +49,7 @@ the public internet on ports: 22, 443, 1280, 3022.
   * port 443 - a small UI is delivered via a web server that runs on port 443, using self-signed certificates
   * port 1280 - the preselected port the Ziti controller will serve its API over
   * port 3022 - the preselected port for data channels to the Ziti Edge Router
+* Public IP/DNS: Make sure the EC2 instance is assigned a public IP and a public DNS entry
 
 > [!IMPORTANT]
 > Make sure you have the private key corresponding to the public key you choose.
@@ -79,14 +80,14 @@ remember to use a strong password which is not easy to guess.
 # [Change via UI](#tab/change-pwd-ui)
 
 These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
-[changing pki](manage/pki.md) for more information.
+[changing pki](~/ziti/manage/pki.md) for more information.
 
 1. Log into the UI using the password obtained in the prior step
 1. In the lower left corner, click the icon that looks like a person and choose "Edit Profile" <br/>
-![image](../images/changepwd_ui.png) <br/>
+![image](~/images/changepwd_ui.png) <br/>
 
 1. Enter the current password along with a new/confirmed password and click "Save" <br/>
-![image](../images/changepwd_manageprofile.png) <br/>
+![image](~/images/changepwd_manageprofile.png) <br/>
 
 # [Change via CLI](#tab/change-pwd-cli)
 
@@ -95,7 +96,7 @@ To change the administrator password using the CLI simply issue these commands:
 > [!NOTE]
 > You will need to login one time in order to use the ziti cli:
 
-[!include[](./cli-snippets/login.md)]
+[!include[](~/ziti/cli-snippets/login.md)]
     
     #update the admin user. This command will prompt you to enter the password
     ziti edge controller update authenticator updb -s
@@ -105,7 +106,7 @@ To change the administrator password using the CLI simply issue these commands:
 ## Create an Identity
 
 All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
-within the Controller. Read more about Identities [here](identities.md) Creating an identity via the UI or CLI is easy:
+within the Controller. Read more about Identities [here](~/ziti/identities.md) Creating an identity via the UI or CLI is easy:
 
 # [New Identity via UI](#tab/create-identity-ui)
 
@@ -120,7 +121,7 @@ within the Controller. Read more about Identities [here](identities.md) Creating
 
 To create a new identity using the CLI simply issue these commands:
 
-[!include[](./identities/create-identity-cli.md)]
+[!include[](~/ziti/identities/create-identity-cli.md)]
 
 ***
 
@@ -131,9 +132,9 @@ specifically for this task to ensure safe and secure enrollment of identities.
 
 1. Download the enroller for your operating system.
 
-  * [Windows](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller.exe)
-  * [MacOS](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller-mac.tar.gz)
-  * [Linux](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller-linux.tar.gz)
+    * [Windows](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller.exe)
+    * [MacOS](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller-mac.tar.gz)
+    * [Linux](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.4.16-2301/ziti-enroller-linux.tar.gz)
 
 1. Download the [jwt](https://jwt.io/introduction/) from the UI by clicking the icon that looks like a certificate (save
    the file as NewUser.jwt) or if you used the CLI from the output location specified when creating the user.
@@ -144,7 +145,7 @@ contains the identity of the given user.
 
 ## Create a Service
 
-With an identity created it's now time to create a service. Read more about Services [here](services.md).  For this
+With an identity created it's now time to create a service. Read more about Services [here](~/ziti/services.md).  For this
 example we are going to choose a simple website that is [available on the open internet](http://eth0.me). This site will
 return the IP address you are coming from. Click this link now and discover what the your external IP is.
 
@@ -182,7 +183,7 @@ To create a new service using the CLI simply issue these two commands:
 ## Create an AppWan
 
 AppWANs are used to to authorize identities to services and allow you to choose the terminating node for traffic
-destined to your service. [Read more about appwans here](appwans.md)
+destined to your service. [Read more about appwans here](~/ziti/appwans.md)
 
 # [New AppWAN via UI](#tab/create-appwan-ui)
 

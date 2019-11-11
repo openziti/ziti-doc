@@ -25,9 +25,9 @@
         "files": [
           "ziti/**/*.md",
           "ziti/**/toc.yml",
-          "glossary/**.md",
+          "glossary/**/*.md",
           "glossary/**/toc.yml",
-          "samples/**.md",
+          "samples/**/*.md",
           "samples/**/toc.yml",
           "toc.yml",
           "*.md"
@@ -37,7 +37,9 @@
     "resource": [
       {
         "files": [
-          "images/**"
+          "images/**",
+          "ziti/manage/*.yaml",
+          "index.html"
         ]
       }
     ],

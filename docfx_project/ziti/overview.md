@@ -7,9 +7,9 @@ entry point into your network or as a secure zero-trust proxy to other hosted se
 
 ## Getting started with Ziti
 
-If you are looking to jump right in feet first you can follow along this with our [up-and-running quickstart
-guide](quickstart.md). The quickstart will leverage Amazon Web Services (AWS) and will have you launch an AMI which will
-get you up and running in no time.
+If you are looking to jump right in feet first you can follow along with one of our [up-and-running quickstart
+guides](~/ziti/quickstarts/quickstart-overview.md). The quickstart will leverage Amazon Web Services (AWS) and will have you
+launch an AMI which will get you up and running in no time.
 
 This environment is perfect for evaluators to get to know Ziti and the capabilities it offers.  The environement was not
 designed for large scale deployment or for long-term usage. If you are looking for a managed service to help you run a
