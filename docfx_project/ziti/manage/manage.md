@@ -7,7 +7,7 @@ instance is during the initial installation and when trying to expand the Ziti f
 
 ### Ziti Edge - Developer Edition
 
-The initial installation of Ziti is already done for you when using the [Ziti Edge - Developer
+An initial, simple installation of Ziti is already done for you when using the [Ziti Edge - Developer
 Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV).  The installation will contain a
 [controller](./controller-overview.md), an [edge router](./edge-router.md) and corresponding [PKI](~/ziti/manage/pki.md). See the corresponding
 sections for additional details.
@@ -15,5 +15,5 @@ sections for additional details.
 ## Expanding Ziti
 
 At this time Ziti is only offered as the [Ziti Edge - Developer
-Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV) which is not positioned to be expandable. Allowing Ziti to be
-expanded past the developer experience is planned. Check back in the coming months for more information.
+Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV) which is not expandable beyond a single node at this time. As
+you would exepct, allowing Ziti to be expanded past the developer experience is planned. Check back in the coming months for more information.

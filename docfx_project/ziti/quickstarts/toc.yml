@@ -1,7 +1,9 @@
 - name: Overview
   href: quickstart-overview.md
-- name: AWS
-  href: network/AWS/quickstart.md
-- name: Azure
-  href: network/Azure/quickstart.md
-  
+- name: Network
+  href: networks-overview.md
+  items:
+  - name: AWS
+    href: aws-quickstart.md
+  - name: Azure
+    href: azure-quickstart.md

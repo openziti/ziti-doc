@@ -4,7 +4,7 @@ The Ziti Controller is the process that coordinates a Ziti network. It is respon
 connections from identities and authorizing identities to services and provides a ReST-based API for other processes to
 interact with it.
 
-# Installation Steps
+## Installation Steps
 
 Installing a Ziti Network from scratch, like most things, is easy once you know how. Getting to knowing how can take some
 time.  The goal of these pages are to get you from nothing to network the long way. If you want to take the quick route
@@ -43,3 +43,6 @@ The Ziti Controller is configured using a [yaml](https://yaml.org/) file. The co
 information to modify a given setting. Most of the fields are straight-forward. The pki-related fields are the ones you
 will need to pay particular attention to. See the [pki](~/ziti/manage/pki.md) page for relevant information on pki
 settings.
+
+## Logging
+
