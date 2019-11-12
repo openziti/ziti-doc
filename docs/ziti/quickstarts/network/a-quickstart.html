@@ -144,16 +144,16 @@ remember to use a strong password which is not easy to guess.</p>
 <div class="TIP"><h5>Tip</h5><p>Once the password is changed - update the credentials.json file with the current password if you want the system to
 automatically update the certificates in the event of the image losing its IP address or DNS entry.</p>
 </div>
-<div class="tabGroup" id="tabgroup_hHqDrni2f7">
+<div class="tabGroup" id="tabgroup_bzw0QQ6qeH">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_hHqDrni2f7_change-pwd-ui" role="tab" aria-controls="tabpanel_hHqDrni2f7_change-pwd-ui" data-tab="change-pwd-ui" tabindex="0" aria-selected="true">Change via UI</a>
+<a href="#tabpanel_bzw0QQ6qeH_change-pwd-ui" role="tab" aria-controls="tabpanel_bzw0QQ6qeH_change-pwd-ui" data-tab="change-pwd-ui" tabindex="0" aria-selected="true">Change via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_hHqDrni2f7_change-pwd-cli" role="tab" aria-controls="tabpanel_hHqDrni2f7_change-pwd-cli" data-tab="change-pwd-cli" tabindex="-1">Change via CLI</a>
+<a href="#tabpanel_bzw0QQ6qeH_change-pwd-cli" role="tab" aria-controls="tabpanel_bzw0QQ6qeH_change-pwd-cli" data-tab="change-pwd-cli" tabindex="-1">Change via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_hHqDrni2f7_change-pwd-ui" role="tabpanel" data-tab="change-pwd-ui">
+<section id="tabpanel_bzw0QQ6qeH_change-pwd-ui" role="tabpanel" data-tab="change-pwd-ui">
 <p>These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
 <a href="../../manage/pki.html">changing pki</a> for more information.</p>
 <ol>
@@ -166,7 +166,7 @@ automatically update the certificates in the event of the image losing its IP ad
 </li>
 </ol>
 </section>
-<section id="tabpanel_hHqDrni2f7_change-pwd-cli" role="tabpanel" data-tab="change-pwd-cli" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_bzw0QQ6qeH_change-pwd-cli" role="tabpanel" data-tab="change-pwd-cli" aria-hidden="true" hidden="hidden">
 <p>To change the administrator password using the CLI simply issue these commands:</p>
 <div class="NOTE"><h5>Note</h5><p>You will need to login one time in order to use the ziti cli:</p>
 </div>
@@ -184,16 +184,16 @@ ziti edge controller update authenticator updb -s
 <h2 id="create-an-identity">Create an Identity</h2>
 <p>All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
 within the Controller. Read more about Identities <a href="../../identities/overview.html">here</a> Creating an identity via the UI or CLI is easy:</p>
-<div class="tabGroup" id="tabgroup_hHqDrni2f7-1">
+<div class="tabGroup" id="tabgroup_bzw0QQ6qeH-1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_hHqDrni2f7-1_create-identity-ui" role="tab" aria-controls="tabpanel_hHqDrni2f7-1_create-identity-ui" data-tab="create-identity-ui" tabindex="0" aria-selected="true">New Identity via UI</a>
+<a href="#tabpanel_bzw0QQ6qeH-1_create-identity-ui" role="tab" aria-controls="tabpanel_bzw0QQ6qeH-1_create-identity-ui" data-tab="create-identity-ui" tabindex="0" aria-selected="true">New Identity via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_hHqDrni2f7-1_create-identity-cli" role="tab" aria-controls="tabpanel_hHqDrni2f7-1_create-identity-cli" data-tab="create-identity-cli" tabindex="-1">New Identity via CLI</a>
+<a href="#tabpanel_bzw0QQ6qeH-1_create-identity-cli" role="tab" aria-controls="tabpanel_bzw0QQ6qeH-1_create-identity-cli" data-tab="create-identity-cli" tabindex="-1">New Identity via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_hHqDrni2f7-1_create-identity-ui" role="tabpanel" data-tab="create-identity-ui">
+<section id="tabpanel_bzw0QQ6qeH-1_create-identity-ui" role="tabpanel" data-tab="create-identity-ui">
 <ol>
 <li>On the left side click &quot;Edge Identities&quot;</li>
 <li>In the top right corner of the screen click the &quot;plus&quot; image to add a new identity</li>
@@ -203,7 +203,7 @@ within the Controller. Read more about Identities <a href="../../identities/over
 <li>Click save</li>
 </ol>
 </section>
-<section id="tabpanel_hHqDrni2f7-1_create-identity-cli" role="tabpanel" data-tab="create-identity-cli" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_bzw0QQ6qeH-1_create-identity-cli" role="tabpanel" data-tab="create-identity-cli" aria-hidden="true" hidden="hidden">
 <p>To create a new identity using the CLI simply issue these commands:</p>
 <pre><code>#creates a new user named &quot;NewUser&quot;
 ziti edge controller create identity user &quot;NewUser&quot; -o NewUser.jwt
@@ -231,16 +231,16 @@ contains the identity of the given user.</p>
 <p>With an identity created it&#39;s now time to create a service. Read more about Services <a href="../../services/overview.html">here</a>.  For this
 example we are going to choose a simple website that is <a href="http://eth0.me">available on the open internet</a>. This site will
 return the IP address you are coming from. Click this link now and discover what the your external IP is.</p>
-<div class="tabGroup" id="tabgroup_hHqDrni2f7-2">
+<div class="tabGroup" id="tabgroup_bzw0QQ6qeH-2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_hHqDrni2f7-2_create-service-ui" role="tab" aria-controls="tabpanel_hHqDrni2f7-2_create-service-ui" data-tab="create-service-ui" tabindex="0" aria-selected="true">New Service via UI</a>
+<a href="#tabpanel_bzw0QQ6qeH-2_create-service-ui" role="tab" aria-controls="tabpanel_bzw0QQ6qeH-2_create-service-ui" data-tab="create-service-ui" tabindex="0" aria-selected="true">New Service via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_hHqDrni2f7-2_create-service-cli" role="tab" aria-controls="tabpanel_hHqDrni2f7-2_create-service-cli" data-tab="create-service-cli" tabindex="-1">New Service via CLI</a>
+<a href="#tabpanel_bzw0QQ6qeH-2_create-service-cli" role="tab" aria-controls="tabpanel_bzw0QQ6qeH-2_create-service-cli" data-tab="create-service-cli" tabindex="-1">New Service via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_hHqDrni2f7-2_create-service-ui" role="tabpanel" data-tab="create-service-ui">
+<section id="tabpanel_bzw0QQ6qeH-2_create-service-ui" role="tabpanel" data-tab="create-service-ui">
 <ol>
 <li>On the left side nav bar, click &quot;Edge Services&quot;</li>
 <li>In the top right corner of the screen click the &quot;plus&quot; image to add a new service</li>
@@ -259,7 +259,7 @@ return the IP address you are coming from. Click this link now and discover what
 <li>Click save</li>
 </ol>
 </section>
-<section id="tabpanel_hHqDrni2f7-2_create-service-cli" role="tabpanel" data-tab="create-service-cli" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_bzw0QQ6qeH-2_create-service-cli" role="tabpanel" data-tab="create-service-cli" aria-hidden="true" hidden="hidden">
 <p>To create a new service using the CLI simply issue these two commands:</p>
 <pre><code>#load the default cluster id into an environment variable
 cluster=$(ziti edge controller list clusters | tr -s &#39; &#39; | cut -d &#39; &#39; -f4)
@@ -274,16 +274,16 @@ ziti edge controller create service ethzero-cli &quot;ethzero.ziti.cli&quot; &qu
 <h2 id="create-an-appwan">Create an AppWan</h2>
 <p>AppWANs are used to to authorize identities to services and allow you to choose the terminating node for traffic
 destined to your service. <a href="../../appwans.html">Read more about appwans here</a></p>
-<div class="tabGroup" id="tabgroup_hHqDrni2f7-3">
+<div class="tabGroup" id="tabgroup_bzw0QQ6qeH-3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_hHqDrni2f7-3_create-appwan-ui" role="tab" aria-controls="tabpanel_hHqDrni2f7-3_create-appwan-ui" data-tab="create-appwan-ui" tabindex="0" aria-selected="true">New AppWAN via UI</a>
+<a href="#tabpanel_bzw0QQ6qeH-3_create-appwan-ui" role="tab" aria-controls="tabpanel_bzw0QQ6qeH-3_create-appwan-ui" data-tab="create-appwan-ui" tabindex="0" aria-selected="true">New AppWAN via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_hHqDrni2f7-3_create-appwan-cli" role="tab" aria-controls="tabpanel_hHqDrni2f7-3_create-appwan-cli" data-tab="create-appwan-cli" tabindex="-1">New AppWAN via CLI</a>
+<a href="#tabpanel_bzw0QQ6qeH-3_create-appwan-cli" role="tab" aria-controls="tabpanel_bzw0QQ6qeH-3_create-appwan-cli" data-tab="create-appwan-cli" tabindex="-1">New AppWAN via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_hHqDrni2f7-3_create-appwan-ui" role="tabpanel" data-tab="create-appwan-ui">
+<section id="tabpanel_bzw0QQ6qeH-3_create-appwan-ui" role="tabpanel" data-tab="create-appwan-ui">
 <ol>
 <li>On the left side nav bar, click &quot;AppWANs&quot;</li>
 <li>In the top right corner of the screen click the &quot;plus&quot; image to add a new AppWAN</li>
@@ -293,7 +293,7 @@ destined to your service. <a href="../../appwans.html">Read more about appwans h
 <li>Click save</li>
 </ol>
 </section>
-<section id="tabpanel_hHqDrni2f7-3_create-appwan-cli" role="tabpanel" data-tab="create-appwan-cli" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_bzw0QQ6qeH-3_create-appwan-cli" role="tabpanel" data-tab="create-appwan-cli" aria-hidden="true" hidden="hidden">
 <p>[To create an AppWAN using the CLI issue the following commands:</p>
 <pre><code>#load the identity&#39;s id into an environment variable
 identity=$(ziti edge controller list identities | grep NewUser | cut -d &quot; &quot; -f2)
@@ -337,7 +337,7 @@ securely over your Ziti network.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/quickstarts/network/aws-quickstart.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/quickstarts/network/a-quickstart.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

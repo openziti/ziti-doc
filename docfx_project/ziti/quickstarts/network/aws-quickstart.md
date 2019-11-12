@@ -209,11 +209,14 @@ destined to your service. [Read more about appwans here](~/ziti/appwans.md)
 
 ***
 
-
 ## Test It
 
 Ok, you're almost ready to test your Ziti setup! Now you need to acquire a pre-built client from NetFoundry. The
-simplest way to test your setup is to get the [ziti-tunnel](http://netfoundry.io/ziti/downloads) for your OS. The
+simplest way to test your setup is to get the [ziti-tunnel](~/ziti/clients/tunneler.md) for your OS.
+
+[!include[](~/ziti/downloads/tunneler.md)]
+
+The
 ziti-tunnel has a mode which acts as a proxy into the Ziti overlay network.  You will need the enrolled identity json
 file created in the previous step and this will require running a command. Here are the steps to verify your Ziti
 network and configuration are all working properly:

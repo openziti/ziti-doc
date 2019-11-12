@@ -1,6 +1,6 @@
 # Tunnelers
 
-[!include[](./tunneler-overview.md)]
+[!include[](~/ziti/clients/tunneler-overview.md)]
 
 Each tunneller operates similarly. The goal is to have the tunneler intercecpt traffic destined for Ziti
 services and forward that traffic over the Ziti overlay instead of the underlay network.  There are two basic modes a
