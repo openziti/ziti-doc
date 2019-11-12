@@ -745,18 +745,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "ziti/identities.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/identities.html",
-          "hash": "E+qdXvrOKJISdyZ4Zqn6sA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "ziti/identities/create-identity-cli.md",
       "output": {
         ".html": {
@@ -798,18 +786,6 @@
         ".html": {
           "relative_path": "ziti/identities/overview.html",
           "hash": "4sXsjR9YYynSH7xJguayBg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "ziti/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/index.html",
-          "hash": "j4doyTEkmRmH6C7G8JRV3A=="
         }
       },
       "is_incremental": false,
@@ -877,18 +853,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "ziti/intro.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/intro.html",
-          "hash": "maJDQ485hleTcgImaOvn6A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "ziti/manage/controller-overview.md",
       "output": {
         ".html": {
@@ -901,23 +865,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "ziti/manage/controller.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/manage/controller.html",
-          "hash": "u10G89C8Ky5dLhkpFy3MnA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "ziti/manage/edge-router.md",
       "output": {
         ".html": {
           "relative_path": "ziti/manage/edge-router.html",
-          "hash": "buT2ktbqLWC9TW/cCei4Iw=="
+          "hash": "npT2EpPeqMbR0UI3Z6YjWQ=="
         }
       },
       "is_incremental": false,
@@ -941,7 +893,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/manage.html",
-          "hash": "KdhHenGRMIB0kS9c0ekOBw=="
+          "hash": "zIioQ6xMfc+YW/oPNZzHXw=="
         }
       },
       "is_incremental": false,
@@ -1046,7 +998,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/network/AWS/quickstart.html",
-          "hash": "2YOd++EHHazzZIqLoWO93g=="
+          "hash": "f8jfLGrJhQIUBQnH5ZkdPw=="
         }
       },
       "is_incremental": false,
@@ -1071,18 +1023,6 @@
         ".html": {
           "relative_path": "ziti/quickstarts/quickstart-overview.html",
           "hash": "zgyMOqWgTktmZEsDKkiALg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "ziti/services.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/services.html",
-          "hash": "HXANAWdsRfVjKLh2lNgRvg=="
         }
       },
       "is_incremental": false,
@@ -1153,6 +1093,13 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
@@ -1162,15 +1109,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 63,
-          "skipped_file_count": 63
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
+          "total_file_count": 58,
+          "skipped_file_count": 57
         }
       }
     },

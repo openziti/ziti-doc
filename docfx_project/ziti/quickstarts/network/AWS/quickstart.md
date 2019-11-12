@@ -106,7 +106,7 @@ To change the administrator password using the CLI simply issue these commands:
 ## Create an Identity
 
 All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
-within the Controller. Read more about Identities [here](~/ziti/identities.md) Creating an identity via the UI or CLI is easy:
+within the Controller. Read more about Identities [here](~/ziti/identities/overview.md) Creating an identity via the UI or CLI is easy:
 
 # [New Identity via UI](#tab/create-identity-ui)
 
@@ -145,7 +145,7 @@ contains the identity of the given user.
 
 ## Create a Service
 
-With an identity created it's now time to create a service. Read more about Services [here](~/ziti/services.md).  For this
+With an identity created it's now time to create a service. Read more about Services [here](~/ziti/services/overview.md).  For this
 example we are going to choose a simple website that is [available on the open internet](http://eth0.me). This site will
 return the IP address you are coming from. Click this link now and discover what the your external IP is.
 

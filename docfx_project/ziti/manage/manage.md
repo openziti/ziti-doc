@@ -9,7 +9,7 @@ instance is during the initial installation and when trying to expand the Ziti f
 
 The initial installation of Ziti is already done for you when using the [Ziti Edge - Developer
 Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV).  The installation will contain a
-[controller](./controller.md), an [edge router](./edge-router.md) and corresponding [PKI](~/ziti/manage/pki.md). See the corresponding
+[controller](./controller-overview.md), an [edge router](./edge-router.md) and corresponding [PKI](~/ziti/manage/pki.md). See the corresponding
 sections for additional details.
 
 ## Expanding Ziti
