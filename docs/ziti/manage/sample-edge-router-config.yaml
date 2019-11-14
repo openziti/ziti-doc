@@ -67,8 +67,5 @@ listeners:
   - binding: edge
     address: tls:0.0.0.0:3022
     options:
-      # (required) The public hostname and port combination that Ziti SDKs should connect on. Previously this was in the chanIngress section.
+      # (required) The public hostname and port combination that Ziti SDKs should connect on.
       advertise: 127.0.0.1:3022
-  - binding: transport
-    address: tls:0.0.0.0:7099
-
