@@ -1,5 +1,5 @@
 - name: Controller
-  href: controller-overview.md
+  href: controller.md
   items:
   - name: Configuration File Example
     href: sample-controller-config.yaml

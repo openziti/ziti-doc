@@ -4,18 +4,6 @@ The Ziti Controller is the process that coordinates a Ziti network. It is respon
 connections from identities and authorizing identities to services and provides a ReST-based API for other processes to
 interact with it.
 
-## Installation Steps
-
-Installing a Ziti Network from scratch, like most things, is easy once you know how. Getting to knowing how can take some
-time.  The goal of these pages are to get you from nothing to network the long way. If you want to take the quick route
-you should stop now and follow one of the [quickstart](~/ziti/quickstarts/quickstart-overview.md) instead. It is designed to
-get a Edge-only Ziti network running in no time.
-
-A basic Edge-only Ziti Network is composed of two (or three depending on whether you count the database) pieces. The
-Controller and an Edge Router.
-
-## Controller
-
 ### Prerequisite - Database
 
 There are a few prerequisites necessary before being able to deploy your first Controller.  The first thing you will
@@ -44,5 +32,4 @@ information to modify a given setting. Most of the fields are straight-forward. 
 will need to pay particular attention to. See the [pki](~/ziti/manage/pki.md) page for relevant information on pki
 settings.
 
-## Logging
-
+[!include[](./logging-snippet.md)]

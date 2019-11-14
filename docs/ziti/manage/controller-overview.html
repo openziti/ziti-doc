@@ -82,13 +82,6 @@
 <p>The Ziti Controller is the process that coordinates a Ziti network. It is responsible for authenticating incoming
 connections from identities and authorizing identities to services and provides a ReST-based API for other processes to
 interact with it.</p>
-<h2 id="installation-steps">Installation Steps</h2>
-<p>Installing a Ziti Network from scratch, like most things, is easy once you know how. Getting to knowing how can take some
-time.  The goal of these pages are to get you from nothing to network the long way. If you want to take the quick route
-you should stop now and follow one of the <a href="../quickstarts/quickstart-overview.html">quickstart</a> instead. It is designed to
-get a Edge-only Ziti network running in no time.</p>
-<p>A basic Edge-only Ziti Network is composed of two (or three depending on whether you count the database) pieces. The
-Controller and an Edge Router.</p>
 <h2 id="controller">Controller</h2>
 <h3 id="prerequisite---database">Prerequisite - Database</h3>
 <p>There are a few prerequisites necessary before being able to deploy your first Controller.  The first thing you will
@@ -111,6 +104,24 @@ information to modify a given setting. Most of the fields are straight-forward. 
 will need to pay particular attention to. See the <a href="pki.html">pki</a> page for relevant information on pki
 settings.</p>
 <h2 id="logging">Logging</h2>
+<p>The Ziti components log all output to standard output. Logging to standard out, instead of to configurable files, etc.,
+is a &quot;lighter&quot; approach to logging that is more easily integrated into more different kinds of environments. Logging to
+files and implementing feautres like file rotation is a solved problem and not one that the Ziti components try to
+solve.  Instead look to alternatives which are capable of watching standard out and aggregating the results for you.
+There are many solutions available to collect, aggregate and display logs. Search for and implement a solution that
+works for you and your needs.</p>
+<h3 id="log-format">Log Format</h3>
+<p>The output from Ziti components comes in three distinct styles.  Choose the style of logging that is right for you.</p>
+<ol>
+<li><code>pfxlog</code> - a human-readible format leveraging ascii escape codes to display colorized log level</li>
+<li><code>json</code>   - a machine-readible format targetting automated processes for log aggregation/searching</li>
+<li><code>text</code>   - a human-readible format using plain text (no ascii escape codes)</li>
+</ol>
+<h3 id="log-levels">Log Levels</h3>
+<p>By default the Ziti components will log at the INFO level. This means that log messages INFO, WARNING, ERROR and FATAL
+will all be captured and output.  Ziti components all support verbose logging by adding <code>--verbose</code> or <code>-v</code> to the
+command being executed.  Verbose mode will add DEBUG log messages and as the name implies this log level is much more
+verbose. Often when debugging adding verbose mode will aid in identifying issues.</p>
 </article>
           </div>
           
