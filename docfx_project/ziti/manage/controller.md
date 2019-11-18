@@ -19,14 +19,14 @@ of needs and considerations relevant to the Ziti controller.
 
 ## Sizing Guidelines
 
-The Ziti network controller and routers have not been stress tested at this time. We recommend starting with a small
+The Ziti network controller and routers are still in the process of being stress tested. We recommend starting with a small
 scale deployment until key performance indicators start to hint that the server requires more resources. A Ziti network
 will have two important metrics: CPU and network capacity.  Modest sized networks require minimal investments in
 infrastructure. Start with small machines and increase as needed.
 
 ## Configuration
 
-The Ziti Controller is configured using a [yaml](https://yaml.org/) file. The configuration file can be found
+The Ziti Controller is configured using a [yaml](https://yaml.org/) file. An example configuration file can be found
 [here](~/ziti/manage/sample-controller-config.yaml). Each section is annotated and should provide you enough
 information to modify a given setting. Most of the fields are straight-forward. The pki-related fields are the ones you
 will need to pay particular attention to. See the [pki](~/ziti/manage/pki.md) page for relevant information on pki

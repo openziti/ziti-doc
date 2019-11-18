@@ -3,7 +3,7 @@ v: 2
 # (required) The certificates, ca chains, and private key used to represent this routers identity
 #
 # If the 'edge" section is enabled and enrollment is run, the files in this section will be written to with the results.
-# The "key" value can be provided through any of the support private key engines (file, etc.).
+# The "key" value can be provided through any of the supported private key engines (file, etc.).
 #
 # If the 'key' value is a file and that file exists; it is expected to a pre-generated private key. It will be used for
 # the  enrollment process and it will back the certificates generated during enrollment. If the file does not exist, it
