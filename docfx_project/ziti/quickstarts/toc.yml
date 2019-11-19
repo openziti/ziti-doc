@@ -7,3 +7,7 @@
     href: network/aws-quickstart.md
   - name: Azure
     href: network/azure-quickstart.md
+- name: Kubernetes
+  items:
+  - name: Sidecar Tunneler
+    href: kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.md
