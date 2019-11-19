@@ -19,13 +19,15 @@ a bug in docfx as of Oct 11 that will cause docfx to fail.
 * `cd ziti-doc`
 * remove the docs folder: `rmdir /s /q docs`
 * put the docs folder back as a symlink: `mklink /j docs docfx_project\_site`
-* add links in aggregatedSources to the sdks (change ZITI_ROOT) accordingly:
+* add links in aggregatedSources to the sdks (change GITHUB_ROOT) accordingly:
 ```
-   set ZITI_ROOT=c:\git\github
-   cd %ZITI_ROOT%\ziti-doc\docfx_project\aggregatedSources
-   mklink /j clang %ZITI_ROOT%\ziti-sdk-c\library
-   mklink /j clang_example %ZITI_ROOT%\ziti-sdk-c\programs\sample_wttr
-   mklink /j csharp %ZITI_ROOT%\ziti-sdk-csharp\Ziti.NET.Standard
-   mklink /j csharp_example %ZITI_ROOT%\ziti-sdk-csharp\Ziti.Core.Console
+   set GITHUB_ROOT=c:\git\github
+   set BITBUCKET_ROOT=c:\git\bitbucket
+   cd %GITHUB_ROOT%\ziti-doc\docfx_project\aggregatedSources
+   mklink /j clang %GITHUB_ROOT%\ziti-sdk-c\library
+   mklink /j clang_example %GITHUB_ROOT%\ziti-sdk-c\programs\sample_wttr
+   mklink /j csharp %GITHUB_ROOT%\ziti-sdk-csharp\Ziti.NET.Standard
+   mklink /j csharp_example %GITHUB_ROOT%\ziti-sdk-csharp\Ziti.Core.Console
+   mklink /j ziti %BITBUCKET_ROOT%\ziti\quickstart
 ```
-* regenerate the docfx site: `docfx %ZITI_ROOT%\ziti-doc\docfx_project\docfx.json`
+* regenerate the docfx site: `docfx %GITHUB_ROOT%\ziti-doc\docfx_project\docfx.json`
