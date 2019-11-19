@@ -10,13 +10,13 @@ Here you'll find links to the various binaries needed to make a Ziti network or 
 
 ### Tunneler
 
-[!include[](./enroller-lts.md)]
+[!include[](./tunneler.md)]
 
 ## 0.4
 
 ### Enroller
 
-[!include[](./tunneler.md)]
+[!include[](./enroller-lts.md)]
 
 ### Tunneler
 

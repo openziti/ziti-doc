@@ -20,10 +20,15 @@ The identity block of the Ziti Controller configuration is used by the Ziti Cont
 connected to as well as when the Ziti Controller needs to contact other pieces of the Ziti Network. There are four
 sections of the identity block: cert, server_cert, key, ca.
 
-*ca*: a file representing the chain of certificates. The chain must contain the issuer of the certificate in the `cert`
-field and must contain the entire chain back to root ca.
+**ca**: a file representing the chain of certificates. The chain must contain the issuer of the certificate specified in
+the `cert` field in the controller configuration file and must contain the entire chain of certificates back to root ca.
 
-*key*: also referred to as the [private key](https://en.wikipedia.org/wiki/Symmetric-key_algorithm). It is generated
-first and used to produce the `cert` component.
+**key**: also referred to as the [private key](https://en.wikipedia.org/wiki/Symmetric-key_algorithm). It is generated
+first and used to produce the certificates specified in the `cert` and `server_cert` fields ofthe controller
+configuration file.
 
-*cert*:      
+**cert**: the certificate presented to other Ziti Network components.
+
+**server_cert**: the certificate the Ziti Controller presents when other Ziti Network components attempt to communicate to
+the Ziti Controller over the IP and port specified in the `ctrl.listener` or `mgmt.listener` fields of the controller
+configuration file.
