@@ -39,6 +39,7 @@
         "files": [
           "images/**",
           "ziti/manage/*.yaml",
+          "ziti/**/sidecar-diagram.svg",
           "index.html"
         ]
       }
