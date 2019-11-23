@@ -905,7 +905,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/edge-router.html",
-          "hash": "SkR2lx1iugC001fHUaJ15A=="
+          "hash": "soxGgbh1Cw6LBTdTMGEmdQ=="
         }
       },
       "is_incremental": false,
@@ -949,11 +949,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/manage/pki-troubleshooting.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/manage/pki-troubleshooting.html",
+          "hash": "FNZyOFkvRYRL3qaDYWLMqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/manage/pki.md",
       "output": {
         ".html": {
           "relative_path": "ziti/manage/pki.html",
-          "hash": "R3QUlLZOO2kH/ILCLPNG9Q=="
+          "hash": "WYUV9yrInOxbdllLPBluwQ=="
         }
       },
       "is_incremental": false,
@@ -1010,7 +1022,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/troubleshooting.html",
-          "hash": "w2WKmkx5+CzQVhblWOmakg=="
+          "hash": "JsoWGOaYI/sh6wpZ0PGC/w=="
         }
       },
       "is_incremental": false,
@@ -1081,7 +1093,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/network/aws-quickstart.html",
-          "hash": "ZY891e96HzgwsJr0c+eTcw=="
+          "hash": "cMJzzcT6nsE/0YH6dvZziQ=="
         }
       },
       "is_incremental": false,
@@ -1181,6 +1193,13 @@
         "skipped_file_count": 0
       },
       "processors": {
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -1191,21 +1210,14 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 65,
-          "skipped_file_count": 63
+          "total_file_count": 66,
+          "skipped_file_count": 65
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 10,
           "skipped_file_count": 10
-        },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
         }
       }
     },

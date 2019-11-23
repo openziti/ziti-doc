@@ -15,7 +15,7 @@ infrastructure. Start with small machines and increase as needed.
 
 ## Configuration
 
-The Ziti Edge Router is configured using a [yaml](https://yaml.org/) file. An example configuration file can be found
+The Edge Router is configured using a [yaml](https://yaml.org/) file. An example configuration file can be found
 [here](~/ziti/manage/sample-edge-router-config.yaml). Each section is annotated and should provide enough
 information to modify a given setting. Most of the fields are straight-forward.
 

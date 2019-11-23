@@ -59,10 +59,6 @@ edge:
     # (required) The hostname and port combination to the ziti-controller hosted Edge API
     upstream: 127.0.0.1:1280
 
-dialers:
-  - binding: udp
-  - binding: transport
-
 listeners:
   - binding: edge
     address: tls:0.0.0.0:3022
