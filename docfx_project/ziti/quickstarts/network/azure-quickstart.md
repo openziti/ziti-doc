@@ -1,7 +1,7 @@
 # Ziti Quickstart Azure: Ziti Edge - Developer Edition
 
 This guide will get you up and running with a demonstrable service in only a few minutes.  
-If you are unfamiliar with the relevant ziti concepts refer to the [overview](~/ziti/overview.md).
+If you are unfamiliar with the relevant Ziti concepts refer to the [overview](~/ziti/overview.md).
 
 # From Nothing to Network 
 
@@ -27,77 +27,44 @@ unfamiliar Azure you'll want to take some time to come up to speed. You will nee
 you'll want to become familiar with the console. Start [here](https://azure.microsoft.com/en-us/get-started/) and when
 you feel ready - come back to this guide.
 
-### Important Note for Starting a Ziti Instance
+### Important Note for Starting a Ziti Virtual Machine
 
-When starting your instance of the Ziti Edge - Developer Edition via the Azure UI you will need to ensure the following:
+When starting your virtual machine instance of the Ziti Edge - Developer Edition via the Azure UI you will need to
+ensure the following:
 
-On the "Management" tab when creating your image you will need to make sure you choose "On" for the selection labeled
-"System assigned managed identity".
+* You have an Azure Resource Group and you are able to make the necessary changes
+* From the Resource Group - click "Add" and find the Ziti Edge - Developer Edition
+* Click "Create" to start the creation wizard
+* On the "Basics" tab fill out the required options. Ensure you use the Username "nfziti" and uplaod a public key so you
+  can SSH to the machine after its deployed
+* Configure and choose options for "Disks" and "Networking"
+* On the "Management" tab ensure the "System assigned managed identity" is set to "On" (the default is Off so you need
+  to change this)
+* Advance to and choose options for "Advanced"
+* Advance to "Tags" - it's recommended you assingn a "ZEDE" (stands for Ziti Edge - Developer Edition) tag with a value
+  that will be easy to find such as "my-ziti" or similar
+* Create your virtual machine
 
-to enable identity
-add a role (network contributor)
-configure DNS name.
+After the virtual machine is created and provisioned navigate back to the virtual machine. In the upper-right portion of
+the screen under "DNS Name" click configure to establish a DNS name. For simplicity choose a name that is guaranteed to
+be unique such as "ziti-${ip.address}". For example if the virtual machine is located in US Central and the IP address
+is 52.165.223.129 enter "ziti-52-165-223-129.centralus.cloudapp.azure.com"
 
-### Obtain and Change the Default Password
+The final step is to add the network contributor role so that the machine can automatically discover network settings.
+This is used when the machine is rebooted. If the DNS address changes the Ziti Edge - Developer Edition will recreate
+certificates for the newly created DNS entry.
 
-placeholderc
+* From the Virtual Machine - click "Access control (IAM)"
+* Click "Add" -> "Add role assignment"
+![image](~/images/azure-add-role.png)
+* In the "Add" dialog choose:
+  * Role: Network Contributor
+  * Assign access to: Virtual Machine
+  * Subscription: (choose)
+  * Select: (choose your ZEDE virtual machine)
+![image](~/images/azure-add-role-to-vm.png)
 
-# [Change via UI](#tab/change-pwd-ui)
+Once the network contributor role is granted reboot the virtual machine. You are now able to access your "Ziti Edge -
+Developer Edition".
 
-placeholderd
-
-# [Change via CLI](#tab/change-pwd-cli)
-
-placeholdere
-***
-
-## Create an Identity
-
-placeholderf
-
-# [New Identity via UI](#tab/create-identity-ui)
-
-1. placeholderg
-
-# [New Identity via CLI](#tab/create-identity-cli)
-
-placeholderh
-
-***
-
-### Enroll the New Identity
-
-placeholderi
-
-## Create a Service
-
-placeholderj
-
-# [New Service via UI](#tab/create-service-ui)
-
-1. placeholderk
-
-# [New Service via CLI](#tab/create-service-cli)
-
-placeholderl
-
-***
-
-## Create an AppWan
-
-placeholderm
-
-# [New AppWAN via UI](#tab/create-appwan-ui)
-
-1. placeholdern
-
-# [New AppWAN via CLI](#tab/create-appwan-cli)
-
-placeholdero
-
-***
-
-
-## Test It
-
-placeholderp
+[!include[](./common-quickstart.md)]

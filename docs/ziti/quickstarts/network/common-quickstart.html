@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Ziti Quickstart Azure: Ziti Edge - Developer Edition | NetFoundry Ziti </title>
+    <title>Obtain and Change the Default Password | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Ziti Quickstart Azure: Ziti Edge - Developer Edition | NetFoundry Ziti ">
+    <meta name="title" content="Obtain and Change the Default Password | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../../../images/favicon.ico">
@@ -77,71 +77,8 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="ziti-quickstart-azure-ziti-edge---developer-edition">Ziti Quickstart Azure: Ziti Edge - Developer Edition</h1>
-
-<p>This guide will get you up and running with a demonstrable service in only a few minutes.<br>If you are unfamiliar with the relevant Ziti concepts refer to the <a href="../../overview.html">overview</a>.</p>
-<h1 id="from-nothing-to-network">From Nothing to Network</h1>
-<p>To get started with Ziti here are the steps you will need to accomplish:</p>
-<ol>
-<li><a href="#start-ziti">Get Ziti</a><ol>
-<li>Obtain, then change the default password</li>
-</ol>
-</li>
-<li><a href="#create-an-identity">Create an Identity</a><ol>
-<li><a href="#enroll-the-new-identity">Enroll the Identity</a></li>
-</ol>
-</li>
-<li><a href="#create-a-service">Create a Service</a></li>
-<li><a href="#create-an-appwan">Create an AppWAN</a></li>
-<li><a href="#test-it">Test the Service</a></li>
-</ol>
-<h2 id="start-ziti">Start Ziti</h2>
-<h3 id="getting-started-in-azure">Getting Started in Azure</h3>
-<p>This guide will leverage an image delivered via the <a href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/netfoundryinc.ziti-developer-edition">Azure Marketplace</a>.
-Using the image you will have an instance of Ziti to use as you please within minutes. If you are
-unfamiliar Azure you&#39;ll want to take some time to come up to speed. You will need an account and
-you&#39;ll want to become familiar with the console. Start <a href="https://azure.microsoft.com/en-us/get-started/">here</a> and when
-you feel ready - come back to this guide.</p>
-<h3 id="important-note-for-starting-a-ziti-virtual-machine">Important Note for Starting a Ziti Virtual Machine</h3>
-<p>When starting your virtual machine instance of the Ziti Edge - Developer Edition via the Azure UI you will need to
-ensure the following:</p>
-<ul>
-<li>You have an Azure Resource Group and you are able to make the necessary changes</li>
-<li>From the Resource Group - click &quot;Add&quot; and find the Ziti Edge - Developer Edition</li>
-<li>Click &quot;Create&quot; to start the creation wizard</li>
-<li>On the &quot;Basics&quot; tab fill out the required options. Ensure you use the Username &quot;nfziti&quot; and uplaod a public key so you
-can SSH to the machine after its deployed</li>
-<li>Configure and choose options for &quot;Disks&quot; and &quot;Networking&quot;</li>
-<li>On the &quot;Management&quot; tab ensure the &quot;System assigned managed identity&quot; is set to &quot;On&quot; (the default is Off so you need
-to change this)</li>
-<li>Advance to and choose options for &quot;Advanced&quot;</li>
-<li>Advance to &quot;Tags&quot; - it&#39;s recommended you assingn a &quot;ZEDE&quot; (stands for Ziti Edge - Developer Edition) tag with a value
-that will be easy to find such as &quot;my-ziti&quot; or similar</li>
-<li>Create your virtual machine</li>
-</ul>
-<p>After the virtual machine is created and provisioned navigate back to the virtual machine. In the upper-right portion of
-the screen under &quot;DNS Name&quot; click configure to establish a DNS name. For simplicity choose a name that is guaranteed to
-be unique such as &quot;ziti-${ip.address}&quot;. For example if the virtual machine is located in US Central and the IP address
-is 52.165.223.129 enter &quot;ziti-52-165-223-129.centralus.cloudapp.azure.com&quot;</p>
-<p>The final step is to add the network contributor role so that the machine can automatically discover network settings.
-This is used when the machine is rebooted. If the DNS address changes the Ziti Edge - Developer Edition will recreate
-certificates for the newly created DNS entry.</p>
-<ul>
-<li>From the Virtual Machine - click &quot;Access control (IAM)&quot;</li>
-<li>Click &quot;Add&quot; -&gt; &quot;Add role assignment&quot;
-<img src="../../../images/azure-add-role.PNG" alt="image"></li>
-<li>In the &quot;Add&quot; dialog choose:<ul>
-<li>Role: Network Contributor</li>
-<li>Assign access to: Virtual Machine</li>
-<li>Subscription: (choose)</li>
-<li>Select: (choose your ZEDE virtual machine)
-<img src="../../../images/azure-add-role-to-vm.png" alt="image"></li>
-</ul>
-</li>
-</ul>
-<p>Once the network contributor role is granted reboot the virtual machine. You are now able to access your &quot;Ziti Edge -
-Developer Edition&quot;.</p>
 <h3 id="obtain-and-change-the-default-password">Obtain and Change the Default Password</h3>
+
 <p>When first launched - the instace will deposit a file into the file system at
 ~/.config/ziti/ziti-controller/credentials.json.</p>
 <div class="NOTE"><h5>Note</h5><p>Since this is your first Ziti deployment this system is expected to be transient. If the IP address or DNS entry
@@ -349,7 +286,7 @@ securely over your Ziti network.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/quickstarts/network/azure-quickstart.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/quickstarts/network/common-quickstart.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

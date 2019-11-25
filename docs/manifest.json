@@ -265,6 +265,28 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/azure-add-role-to-vm.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/azure-add-role-to-vm.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/azure-add-role.PNG",
+      "output": {
+        "resource": {
+          "relative_path": "images/azure-add-role.PNG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/changepwd_manageprofile.png",
       "output": {
         "resource": {
@@ -1105,7 +1127,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/network/aws-quickstart.html",
-          "hash": "HVUrr4hxRUURhefxkusUxg=="
+          "hash": "yor5TDP7+W1ldg5dQEb3Aw=="
         }
       },
       "is_incremental": false,
@@ -1117,7 +1139,19 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/network/azure-quickstart.html",
-          "hash": "sX2fCGMuh0K67g8T2I8BMA=="
+          "hash": "blnT9j112C302YDFT8qv9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/quickstarts/network/common-quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/quickstarts/network/common-quickstart.html",
+          "hash": "D5VRd/ePbtKsAizbu3XH8g=="
         }
       },
       "is_incremental": false,
@@ -1212,24 +1246,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 10
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 68,
+          "skipped_file_count": 68
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 67,
-          "skipped_file_count": 66
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 10,
-          "skipped_file_count": 10
         }
       }
     },
