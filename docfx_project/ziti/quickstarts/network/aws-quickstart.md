@@ -27,7 +27,7 @@ you'll want to become familiar with the console. Start
 [here](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html)
 and when you feel ready - come back to this guide.
 
-### Starting a Ziti Instance
+### Important Note for Starting a Ziti Instance
 
 NetFoundry has provided the [Ziti Edge - Developer Edition]
 (https://aws.amazon.com/marketplace/pp/B07YZLKMLV) to make it easy for you to deploy a fully functional

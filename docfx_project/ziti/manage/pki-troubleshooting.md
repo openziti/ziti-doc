@@ -158,21 +158,21 @@ Both of these commands should report SUCCESS.
 
 These two variables represent the identity file in json for a Ziti client and the Controller configuration file.
 
-* `identity_file=/path/to/test_identity.json`
-* `edge_router_config_file=/path/to/edge_router.yaml`
+    identity_file=/path/to/test_identity.json
+    edge_router_config_file=/path/to/edge_router.yaml
 
 #### Variables - Copy/Paste
 
 This command will extract the ca from the enrolled identity file and put it into a file in the /tmp folder
 
-* `jq -j .id.ca $identity_file | cut -d ":" -f2 > /tmp/identity.ca`
+    jq -j .id.ca $identity_file | cut -d ":" -f2 > /tmp/identity.ca
 
 This command extracts the file specified in the configuration and stores it into the assigned variable.
 
-* `edge_router_cert=$(yaml2json $edge_router_config_file | jq -rj .identity.cert)`
+    edge_router_cert=$(yaml2json $edge_router_config_file | jq -rj .identity.cert)
 
 #### Commands to Verify PKI Configuration
 
 The following command should report SUCCESS.
 
-* `verifyCertAgainstPool $edge_router_cert /tmp/identity.ca`
+    verifyCertAgainstPool $edge_router_cert /tmp/identity.ca

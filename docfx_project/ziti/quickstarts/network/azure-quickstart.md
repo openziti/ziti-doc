@@ -20,11 +20,23 @@ To get started with Ziti here are the steps you will need to accomplish:
 
 ### Getting Started in Azure
 
-placeholdera
+This guide will leverage an image delivered via the [Azure Marketplace]
+(https://azuremarketplace.microsoft.com/en-us/marketplace/apps/netfoundryinc.ziti-developer-edition).
+Using the image you will have an instance of Ziti to use as you please within minutes. If you are
+unfamiliar Azure you'll want to take some time to come up to speed. You will need an account and
+you'll want to become familiar with the console. Start [here](https://azure.microsoft.com/en-us/get-started/) and when
+you feel ready - come back to this guide.
 
-### Starting a Ziti Instance
+### Important Note for Starting a Ziti Instance
 
-placeholderb
+When starting your instance of the Ziti Edge - Developer Edition via the Azure UI you will need to ensure the following:
+
+On the "Management" tab when creating your image you will need to make sure you choose "On" for the selection labeled
+"System assigned managed identity".
+
+to enable identity
+add a role (network contributor)
+configure DNS name.
 
 ### Obtain and Change the Default Password
 
