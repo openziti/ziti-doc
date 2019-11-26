@@ -4,28 +4,47 @@ A Ziti network is primarily concerned with providing access to "services". A ser
 resource that could be accessed by a client on a traditional network. Services by themselves do not provide a complete
 mechanism for authorization. That is what an [AppWAN](../appwans/overview.md) is for.
 
-To define a service you need to know the following components:
+A service is defined by the following components:
 
-* Name - what do you want to name your service
+* Name - the name of the service
 * Ziti Router - the last Ziti Router traffic will be sent to
-* Intercepting Host and Port - what DNS name or IP you wish to intercept traffic on when intecepting traffic
+* Intercepting Host and Port - what DNS name or IP should be used when intecepting traffic
 * Endpoint Service - (if not hosted - see below) the protocol, host, and port traffic sent to
 * Hosting Identity - (is hosted - see below) the identity that will host the service
 
 ### Dark Services
 
-One of the benefits of using a Ziti service is that your actual service can be 'dark'. In fact this is the default for
-any service based entirely in Ziti. Place your service in a secure network with only Ziti in place and nobody in the
-world can access your service without a valid certificate/identity! 
+One of the benefits of using a Ziti service is that the actual service can be 'dark'. In fact this is the default for
+any service based entirely in Ziti. Place the service in a secure network with only Ziti in place and nobody in the
+world can access the service without a valid certificate/identity!
 
-Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into your existing network and
+Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into an existing network and
 Ziti endpoints deployed the only access to these services can be through Ziti!
 
 ### Service Name
 
 Services defined on a Ziti Network have an almost limitless "namespace" available for identifying services. A Ziti
-service is be defined by a name of your choosing and this name is registered with your Ziti controller. You have total
-control over your service names rather than by a requiring the use of a DNS name or an IP address (underlay concepts).
+service is be defined by a name and this name is registered with the Controller. Once declared, services can then be
+addressed directly by name from Ziti-aware clients. This means there are effecitvely a **limitless** number names
+available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application
+developer has total control over service names.
+
+### Types of Services
+
+There are two basic types of serivces in a Ziti Network: hosted and non-hosted.
+
+#### Hosted
+
+Hosted services are the new edge. Ziti allows the developer to declare a service is "hosted". This means when a Ziti
+Client attempts to address the specified serivce the Ziti Network will route traffic to this endpoint automatically.
+Once the traffic is at the endpoint the traffic can be terminated inside the process space of a Ziti-powered
+application. When the traffic terminates inside a Ziti-powered application the application it never needs to leave the
+secure environment of the Ziti Network leading to turly zero-trust solutions!
+
+#### Non-Hosted
+
+Non-hosted services are services are the classic types of services. These services are not terminated inside a
+Ziti-capable client
 
 ## Ziti Router
 

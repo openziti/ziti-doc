@@ -82,24 +82,37 @@
 <p>A Ziti network is primarily concerned with providing access to &quot;services&quot;. A service encapsulates the definition of any
 resource that could be accessed by a client on a traditional network. Services by themselves do not provide a complete
 mechanism for authorization. That is what an <a href="../appwans/overview.html">AppWAN</a> is for.</p>
-<p>To define a service you need to know the following components:</p>
+<p>A service is defined by the following components:</p>
 <ul>
-<li>Name - what do you want to name your service</li>
+<li>Name - the name of the service</li>
 <li>Ziti Router - the last Ziti Router traffic will be sent to</li>
-<li>Intercepting Host and Port - what DNS name or IP you wish to intercept traffic on when intecepting traffic</li>
+<li>Intercepting Host and Port - what DNS name or IP should be used when intecepting traffic</li>
 <li>Endpoint Service - (if not hosted - see below) the protocol, host, and port traffic sent to</li>
 <li>Hosting Identity - (is hosted - see below) the identity that will host the service</li>
 </ul>
 <h3 id="dark-services">Dark Services</h3>
-<p>One of the benefits of using a Ziti service is that your actual service can be &#39;dark&#39;. In fact this is the default for
-any service based entirely in Ziti. Place your service in a secure network with only Ziti in place and nobody in the
-world can access your service without a valid certificate/identity! </p>
-<p>Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into your existing network and
+<p>One of the benefits of using a Ziti service is that the actual service can be &#39;dark&#39;. In fact this is the default for
+any service based entirely in Ziti. Place the service in a secure network with only Ziti in place and nobody in the
+world can access the service without a valid certificate/identity!</p>
+<p>Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into an existing network and
 Ziti endpoints deployed the only access to these services can be through Ziti!</p>
 <h3 id="service-name">Service Name</h3>
 <p>Services defined on a Ziti Network have an almost limitless &quot;namespace&quot; available for identifying services. A Ziti
-service is be defined by a name of your choosing and this name is registered with your Ziti controller. You have total
-control over your service names rather than by a requiring the use of a DNS name or an IP address (underlay concepts).</p>
+service is be defined by a name and this name is registered with the Controller. Once declared, services can then be
+addressed directly by name from Ziti-aware clients. This means there are effecitvely a <strong>limitless</strong> number names
+available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application
+developer has total control over service names.</p>
+<h3 id="types-of-services">Types of Services</h3>
+<p>There are two basic types of serivces in a Ziti Network: hosted and non-hosted.</p>
+<h4 id="hosted">Hosted</h4>
+<p>Hosted services are the new edge. Ziti allows the developer to declare a service is &quot;hosted&quot;. This means when a Ziti
+Client attempts to address the specified serivce the Ziti Network will route traffic to this endpoint automatically.
+Once the traffic is at the endpoint the traffic can be terminated inside the process space of a Ziti-powered
+application. When the traffic terminates inside a Ziti-powered application the application it never needs to leave the
+secure environment of the Ziti Network leading to turly zero-trust solutions!</p>
+<h4 id="non-hosted">Non-Hosted</h4>
+<p>Non-hosted services are services are the classic types of services. These services are not terminated inside a
+Ziti-capable client</p>
 <h2 id="ziti-router">Ziti Router</h2>
 <p>The Ziti Router portion of a service represents the final Ziti Router that traffic will be sent to. From this router the
 traffic will either be sent to a Ziti Endpoint or to a point outside the Ziti network over the underlay network.</p>
@@ -164,7 +177,7 @@ Edition</a></li>
 <li>Choose &quot;Hosted (No Router)&quot; for the Router</li>
 <li>Select a cluster. If using <a href="https://aws.amazon.com/marketplace/pp/B07YZLKMLV">Ziti Edge - Developer Edition</a> choose
 &quot;demo-c01&quot;</li>
-<li>Select an identity in &quot;Hosting Identities&quot; of the identy you want to host the service</li>
+<li>Select one or more identities in &quot;Hosting Identities&quot; representing the identities which host the service</li>
 <li>Click save</li>
 </ol>
 </section>

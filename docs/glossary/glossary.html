@@ -80,31 +80,8 @@
 <h1 id="glossary">Glossary</h1>
 
 <p>Here you will find a list of terms you may come across as you are using Ziti.</p>
-<h2 id="ziti-network-ziti">Ziti Network, Ziti</h2>
-<p>Ziti is a modern, programmable network overlay with associated edge components, for application-embedded, zero trust network connectivity, written by developers for developers.</p>
-<p>Ziti is NetFoundry&#39;s next-generation programmable networking product. Ziti is used to create Ziti Networks.</p>
 <h2 id="network-overlay-overlay">Network Overlay, Overlay</h2>
 <p>A Ziti network is implemented as an &quot;overlay&quot;. A network overlay abstracts away the layers beneath it, providing a new set of abstractions for designing and implementing software and systems. Good programming abstractions allow developers to focus on the rules implemented by those abstractions without being concerned with the layers below the abstraction. Ziti&#39;s overlay allows developers to focus on connectivity between components without having to be concerned with low-level details of how that connectivity is managed.</p>
-<h2 id="underlay">Underlay</h2>
-<p>We refer to lower-level network concerns as &quot;underlay&quot;. IP networking would be an example of an underlay concept.</p>
-<h2 id="ziti-fabric-fabric">Ziti Fabric, Fabric</h2>
-<p>The Ziti Fabric provides the core of the network overlay. The Ziti Fabric implements a routable mesh network, which can provide reliable connectivity between any two points on the network. The fabric provides software extension mechanisms that allow the overlay to be embedded into new overlay applications. The Ziti Edge is an example of an overlay application implemented on top of Ziti Fabric extension mechanisms (Xgress, Xctrl, Xmgmt).</p>
-<h2 id="ziti-router-router">Ziti Router, Router</h2>
-<p>A Ziti Router is a process that is installed on a host, which allows it to participate in a Ziti Fabric. The router is designed to be extensible through Ziti fabric extension mechanisms (Xgress), which means that it is capable of &quot;hosting&quot; overlay network applications like the Ziti Edge.</p>
-<h2 id="ziti-controller-controller">Ziti Controller, Controller</h2>
-<p>A Ziti Controller is a process that is installed on a host, which allows it to coordinate a Ziti network. The controller is designed to be extensible through Ziti fabric extension mechanisms (Xctrl, Xmgmt), which means that it is capable of hosting extensions to the fabric control and management planes.</p>
-<h2 id="xgress-xctrl-xmgmt-ziti-fabric-sdk">Xgress (Xctrl, Xmgmt), Ziti Fabric SDK</h2>
-<p>Xgress is a set of extension components for the Ziti fabric, which enable overlay applications to participate in the overlay network. Xgress focuses on extending the data plane, providing interfaces for creating initiating and terminating endpoints. Xctrl and Xmgmt focus on extending the control and management planes of the fabric. Xgress is the core of the Ziti Fabric SDK.</p>
-<h2 id="ziti-edge-edge">Ziti Edge, Edge</h2>
-<p>The Ziti Edge implements the zero trust connectivity framework as an overlay application on top of the Ziti Fabric. The Ziti Edge provides connectivity implementations for a number of important endpoint types, including applications that embed Ziti connectivity through the Ziti Edge SDK. The Ziti Edge provides fallback connectivity solutions for non-Ziti applications using components like the Ziti tunnelers, and the Ziti proxy.</p>
-<h2 id="ziti-endpoint-sdk-endpoint-sdk-sdk">Ziti Endpoint SDK, Endpoint SDK, SDK</h2>
-<p>The Ziti Endpoint SDK provides software components that are designed to be embedded into customer applications so that they can participate natively in a Ziti network. The SDK targets golang, Swift, C, C#, and potentially other programming languages, allowing programs in those languages to work with idioms and concepts native to those environments. The SDK provides support for both accessing and hosting services that are available on a Ziti network.</p>
-<h2 id="ziti-enabled-application">Ziti Enabled Application</h2>
-<p>A Ziti Enabled Application is an application that embeds the Ziti Endpoint SDK, such that it can participate on a Ziti network to either access or host services.</p>
-<h2 id="ziti-tunneler-tunneler">Ziti Tunneler, Tunneler</h2>
-<p>A Ziti Tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, tproxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.</p>
-<h2 id="ziti-service-service">Ziti Service, Service</h2>
-<p>A Ziti network is primarily concerned with providing access to &quot;services&quot;. A service encapsulates the definition of any resource that could be accessed by a client on a traditional network. A Ziti Service is defined by a strong, extensible identity, rather than by an expression of an underlay concept. This means that services defined on a Ziti Network have an almost limitless &quot;namespace&quot; available for identifying services. A Ziti service would be defined by a name and/or a certificate, rather than by a DNS name or an IP address (underlay concepts).</p>
 <h2 id="service-definition">Service Definition</h2>
 <p>A service definition is used to &quot;bind&quot; a service to a specific underlay network expression, through one or more nodes on a Ziti overlay network. A service definition usually includes a terminating router (or routers) and one or more SDK or underlay network endpoints where the service can be reached.</p>
 <h2 id="session">Session</h2>
@@ -115,6 +92,39 @@
 <p>See &quot;initiating router&quot; and &quot;terminating router&quot; above. The initiating endpoint is the endpoint responsible for requesting connectivity to a service. The terminating endpoint is the endpoint that provides the service.</p>
 <h2 id="path">Path</h2>
 <p>The path is the set of Ziti Routers traversed by a session from an initiating router to a terminating router. Ziti aggressively optimizes the path for throughput and reliability, and so it may change during the session.</p>
+<h2 id="underlay">Underlay</h2>
+<p>We refer to lower-level network concerns as &quot;underlay&quot;. IP networking would be an example of an underlay concept.</p>
+<h2 id="xgress-xctrl-xmgmt-ziti-fabric-sdk">Xgress (Xctrl, Xmgmt), Ziti Fabric SDK</h2>
+<p>Xgress is a set of extension components for the Ziti fabric, which enable overlay applications to participate in the
+overlay network. Xgress focuses on extending the data plane, providing interfaces for creating initiating and
+terminating endpoints. Xctrl and Xmgmt focus on extending the control and management planes of the fabric. Xgress is the
+core of the Ziti Fabric SDK.</p>
+<h2 id="ziti-controller-controller">Ziti Controller, Controller</h2>
+<p>A Ziti Controller is a process that is installed on a host, which allows it to coordinate a Ziti network. The controller is designed to be extensible through Ziti fabric extension mechanisms (Xctrl, Xmgmt), which means that it is capable of hosting extensions to the fabric control and management planes.</p>
+<h2 id="ziti-edge-edge">Ziti Edge, Edge</h2>
+<p>The Ziti Edge implements the zero trust connectivity framework as an overlay application on top of the Ziti Fabric. The Ziti Edge provides connectivity implementations for a number of important endpoint types, including applications that embed Ziti connectivity through the Ziti Edge SDK. The Ziti Edge provides fallback connectivity solutions for non-Ziti applications using components like the Ziti tunnelers, and the Ziti proxy.</p>
+<h2 id="ziti-enabled-application">Ziti Enabled Application</h2>
+<p>A Ziti Enabled Application is an application that embeds the Ziti Endpoint SDK, such that it can participate on a Ziti network to either access or host services.</p>
+<h2 id="ziti-endpoint-sdk-endpoint-sdk-sdk">Ziti Endpoint SDK, Endpoint SDK, SDK</h2>
+<p>The Ziti Endpoint SDK provides software components that are designed to be embedded into customer applications so that they can participate natively in a Ziti network. The SDK targets golang, Swift, C, C#, and potentially other programming languages, allowing programs in those languages to work with idioms and concepts native to those environments. The SDK provides support for both accessing and hosting services that are available on a Ziti network.</p>
+<h2 id="ziti-fabric-fabric">Ziti Fabric, Fabric</h2>
+<p>The Ziti Fabric provides the core of the network overlay. The Ziti Fabric implements a routable mesh network, which can provide reliable connectivity between any two points on the network. The fabric provides software extension mechanisms that allow the overlay to be embedded into new overlay applications. The Ziti Edge is an example of an overlay application implemented on top of Ziti Fabric extension mechanisms (Xgress, Xctrl, Xmgmt).</p>
+<h2 id="ziti-network-ziti">Ziti Network, Ziti</h2>
+<p>Ziti is a modern, programmable network overlay with associated edge components, for application-embedded, zero trust network connectivity, written by developers for developers.</p>
+<p>Ziti is NetFoundry&#39;s next-generation programmable networking product. Ziti is used to create Ziti Networks.</p>
+<h2 id="ziti-router-router">Ziti Router, Router</h2>
+<p>A Ziti Router is a process that is installed on a host, which allows it to participate in a Ziti Fabric. The router is designed to be extensible through Ziti fabric extension mechanisms (Xgress), which means that it is capable of &quot;hosting&quot; overlay network applications like the Ziti Edge.</p>
+<h2 id="ziti-service-service">Ziti Service, Service</h2>
+<p>A Ziti network is primarily concerned with providing access to &quot;services&quot;. A service encapsulates the definition of any
+resource that could be accessed by a client on a traditional network. A Ziti Service is defined by a strong, extensible
+identity, rather than by an expression of an underlay concept. This means that services defined on a Ziti Network have
+an almost limitless &quot;namespace&quot; available for identifying services. A Ziti service would be defined by a name and/or a
+certificate, rather than by a DNS name or an IP address (underlay concepts).</p>
+<h2 id="ziti-service-service---hosted">Ziti Service, Service - Hosted</h2>
+<p>Similar to a Ziti Service however the destination is not described as an IP address and port but rather it is expressed
+as a Ziti Identity. When used with a Ziti SDK it is possible to create a truly zero-trust application.</p>
+<h2 id="ziti-tunneler-tunneler">Ziti Tunneler, Tunneler</h2>
+<p>A Ziti Tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, tproxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.</p>
 </article>
           </div>
           

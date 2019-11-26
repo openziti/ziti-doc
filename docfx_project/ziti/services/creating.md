@@ -30,7 +30,7 @@ Here's how you can create a service.
 1. Choose "Hosted (No Router)" for the Router
 1. Select a cluster. If using [Ziti Edge - Developer Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV) choose
    "demo-c01"
-1. Select an identity in "Hosting Identities" of the identy you want to host the service
+1. Select one or more identities in "Hosting Identities" representing the identities which host the service
 1. Click save
 
 # [New Service via CLI](#tab/create-service-cli)
