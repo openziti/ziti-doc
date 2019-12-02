@@ -19,6 +19,8 @@
     
     <meta property="docfx:rel" content="../../">
     
+    <img src="../../images/github-white.svg" alt="view us on github" height="40">
+    <!--span>this is text</span-->
   </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
@@ -40,8 +42,18 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar">
               <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                <div style="display: flex;">
+                    <div class="form-group" style="valign: center;position: relative;">
+                      <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                    </div>
+                    <div style="position: relative">
+                        &nbsp;
+                    </div>
+                    <div style="position: relative">
+                        <a href="https://github.com/netfoundry">
+                            <img src="../../images/github-white.svg" alt="view us on github" height="34px">
+                        </a>
+                    </div>
                 </div>
               </form>
             </div>
@@ -111,8 +123,9 @@ Once the traffic is at the endpoint the traffic can be terminated inside the pro
 application. When the traffic terminates inside a Ziti-powered application the application it never needs to leave the
 secure environment of the Ziti Network leading to turly zero-trust solutions!</p>
 <h4 id="non-hosted">Non-Hosted</h4>
-<p>Non-hosted services are services are the classic types of services. These services are not terminated inside a
-Ziti-capable client</p>
+<p>Non-hosted services are services which are not terminated inside a Ziti-capable client. These services are somewhat
+similar conceptually to services behind a reverse proxy. In these services traffic is onboarded to the Ziti Network at
+an Edge Router and then exits the Ziti Network at the specified Edge Router.</p>
 <h2 id="ziti-router">Ziti Router</h2>
 <p>The Ziti Router portion of a service represents the final Ziti Router that traffic will be sent to. From this router the
 traffic will either be sent to a Ziti Endpoint or to a point outside the Ziti network over the underlay network.</p>
@@ -209,7 +222,7 @@ ziti edge controller create service ${svc_name} &quot;${destinationHost}&quot; &
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/nf-dev/ziti-doc/blob/master/docfx_project/ziti/services/overview.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/services/overview.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

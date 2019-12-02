@@ -59,7 +59,7 @@
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
-      "default"
+      "templates/nf"
     ],
     "postProcessors": [],
     "markdownEngineName": "dfm",
@@ -74,10 +74,11 @@
       "_appFaviconPath": "images/favicon.ico",
       "_enableSearch": true,
       "_gitContribute": {
-        "repo": "https://github.com/nf-dev/ziti-doc",
+        "repo": "https://github.com/netfoundry/ziti-doc",
         "branch": "master",
         "apiSpecFolder": "apidoc"
       }
+      , "_github_link":"https://github.com/netfoundry"
     }
   }
 }
