@@ -22,7 +22,7 @@
             </div>
             <div style="position: relative">
                 <a href="{{_github_link}}">
-                    <img src="~/images/github-white.svg" alt="view us on github" height="34px"/>
+                    <img src="~/images/github-white.svg" alt="view us on github" title="view us on github" height="34px"/>
                 </a>
             </div>
         </div>
