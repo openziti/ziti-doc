@@ -97,7 +97,7 @@ destination is for the given service. In simple deployments - a single edge rout
 with the <a href="../quickstarts/networks-overview.html">Ziti Edge - Developer Edition</a>. In the coming months it will be
 possible to produce complicated deployments having multiple Edge Routers deployed in a myriad of locations.</p>
 <h2 id="sizing-guidelines">Sizing Guidelines</h2>
-<p>The Ziti network controller and routers are still in the process of being stress tested. We recommend starting with a small
+<p>The Ziti Controller and Ziti Routers are still in the process of being stress tested. We recommend starting with a small
 scale deployment until key performance indicators start to hint that the server requires more resources. A Ziti network
 will have two important metrics: CPU and network capacity.  Modest sized networks require minimal investments in
 infrastructure. Start with small machines and increase as needed.</p>
@@ -138,8 +138,8 @@ will be able to participate in a Ziti network.  An Edge Router is enrolled using
 sub-command.</p>
 <h3 id="running-ziti-router-enroll">Running ziti-router enroll</h3>
 <p>In order to enroll the Edge Router a valid <a href="#configuration">configuration</a> file is needed. After creating a valid
-configuration the jwt for the Edge Router also needs to be obtained from the controller. The jwt can be
-retrieved from the controller via the controller&#39;s ReST API at
+configuration the jwt for the Edge Router also needs to be obtained from the Ziti Controller. The jwt can be
+retrieved from the Ziti Controller via the Ziti Controller&#39;s ReST API at
 https://${controller-name}:${controller-port}/edge-routers.</p>
 <p>With a valid configuration file and jwt the router can now be enrolled using:
  <code>ziti-router enroller [path to configuration file] --jwt [path to jwt]</code>.</p>

@@ -9,13 +9,13 @@ instance is during the initial installation and when trying to expand the Ziti f
 
 An initial, simple installation of Ziti is already provided for you when using the [Ziti Edge - Developer
 Edition](~/ziti/quickstarts/networks-overview.md).  The installation will contain a
-[controller](./controller.md), an [edge router](./edge-router.md) and corresponding
+[Ziti Controller](./controller.md), a [Ziti Edge Router](./edge-router.md) and corresponding
 [PKI](~/ziti/manage/pki.md). See the corresponding sections for additional details.
 
 ### Ziti Installation - the long way
 
 At its most simple, a basic Ziti Network is composed of only two (or three depending on whether you count the database)
-components. The [Controller](~/ziti/manage/controller.md) and an [Edge Router](~/ziti/manage/edge-router.md).
+components. The [Ziti Controller](~/ziti/manage/controller.md) and a [Ziti Edge Router](~/ziti/manage/edge-router.md).
 (Note: these executables are not currently available for separate download but will be coming in the months ahead.)
 
 ### Expanding Ziti

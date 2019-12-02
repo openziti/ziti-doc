@@ -18,7 +18,7 @@ truly global, scalable network browse over to our website at http://netfoundry.i
 ## Overview of a Ziti Network
 
 The Ziti Network (Ziti) is composed of the following building
-blocks: Controller, Router, Edge Router, Edge Clients. These
+blocks: Ziti Controller, Ziti Router, Ziti Edge Router, Ziti Edge Clients. These
 components are used in conjunction to provide secure
 connectivity between two points such as a client to a server. This
 type of network is considered an overlay network because it
@@ -31,30 +31,30 @@ Here's an overview of a network:
 ### ZITI CONTROLLER
 
 The NetFoundry Ziti Controller is the central function of the
-NetFoundry Ziti Network. The Controller provides the
+NetFoundry Ziti Network. The Ziti Controller provides the
 configuration plane. It is responsible for configuring Ziti services
 as well as being the central point for managing the identities
 used by users, devices and the nodes making up the Ziti Network.
-Lastly but critically, the Controller is responsible for
+Lastly but critically, the Ziti Controller is responsible for
 authentication and authorization for every connection in the Ziti
 network.
 
-The Controller must be configured with public key infrastructure
+The Ziti Controller must be configured with public key infrastructure
 (pki). The configured pki is used to create secure, mutually
 authenticated TLS (mTLS) network connections between any two
-pieces of the Ziti Network. The Controller does not provide its
-own pki but for the Controller to sign certificate requests (CSR)
-the Controller will need to be configured with a key and
+pieces of the Ziti Network. The Ziti Controller does not provide its
+own pki but for the Ziti Controller to sign certificate requests (CSR)
+the Ziti Controller will need to be configured with a key and
 certificate used for signing. (Optionally, the Ziti CLI can be used
 to generate a pki if needed)
 
-The controller also supports using a third-party pki should the
+The Ziti Controller also supports using a third-party pki should the
 operator of the Ziti Network have an existing pki they wish to
 reuse. Utilizing a third-party CA pushes the burden of obtaining
 and distributing properly signed certificates to the operator of
 the Ziti network but for sophisticated customers this might make
 overall management of the network easier.
-The Controller uses an out of process database (Postgres) to
+The Ziti Controller uses an out of process database (Postgres) to
 store the information needed to manage the network.
 
 ### ZITI FABRIC ROUTER
@@ -64,7 +64,7 @@ Network. These routers are responsible for securely and reliably
 delivering traffic from one Ziti Network node to the traffic’s
 destination.
 
-Fabric Routers are linked together to form a mesh network. This mesh is
+Ziti Fabric Routers are linked together to form a mesh network. This mesh is
 constantly being monitored for latency and the fastest paths are
 used when routing traffic to the destination. The monitoring also
 allows for active failover to ensure a reliable network connection
@@ -73,13 +73,13 @@ even in the case of a node failure.
 ### ZITI EDGE ROUTER
 
 Another fundamental building block of the Ziti Network is the
-Edge Router. The Edge Router is the entry point for Edge
-Clients connecting to the Ziti Network. The Edge Router is a
-specialized Router incorporating the functionality of a Router to
-enable it to route traffic over the Ziti network as a Router would
+Ziti Edge Router. The Ziti Edge Router is the entry point for Edge
+Clients connecting to the Ziti Network. The Ziti Edge Router is a
+specialized Ziti Router incorporating the functionality of a Ziti Router to
+enable it to route traffic over the Ziti network as a Ziti Router would
 to a given destination.
 
-The Edge Router in combination with the Controller is responsible
+The Ziti Edge Router in combination with the Ziti Controller is responsible
 for authenticating and authorizing Ziti Edge Clients.
 
 ### ZITI EDGE CLIENTS

@@ -93,8 +93,8 @@
 
 <p>All Ziti Networks leverage <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">Public Key Infrastructure (PKI)</a> to
 provide secure network connections.  This page is not intended to be a comprehensive guide. What it is, is a set of
-rules that must be followed to properly configure you Ziti Network. If you run into issues with connecting any portion
-of a Ziti Network to another - this page should serve as a starting point of understanding. </p>
+rules that must be followed to properly configure a Ziti Network. If there are issues when connecting any portion
+of a Ziti Network to another - this page should serve as a starting point of understanding.</p>
 <div class="NOTE"><h5>Note</h5><p>PKI is a complex topic and it is recommended to be familiar with what a PKI, what it is and how to properly use and
 configure a PKI before making any decisions about the PKI the Ziti Network uses.</p>
 </div>
@@ -105,26 +105,26 @@ Network using one or more chains of trust back to the provided trust anchors.  T
 these trust anchors can be configured.</p>
 <p>Ziti Network components are required to present a certificate to other Ziti Network components during the connection
 establishment. This certificate will need to be valid per the configured trust anchor store being connected to.</p>
-<h3 id="controller">Controller</h3>
-<p>The Controller has three distinct sections related to PKI: <code>identity</code>, <code>edge.api.identity</code>,
+<h3 id="ziti-controller">Ziti Controller</h3>
+<p>The Ziti Controller has three distinct sections related to PKI: <code>identity</code>, <code>edge.api.identity</code>,
 <code>edge.enrollment.signingCert</code>. The <code>edge.api.identity</code> configuration section is optional and is provided to allow the external
 ReST-based endpoint to present a certificate that is different than the one configured in the identity section.</p>
-<p>Connections to the Controller are considered valid if the certificate presented during connection is signed by a
+<p>Connections to the Ziti Controller are considered valid if the certificate presented during connection is signed by a
 trust anchor declared within the identity.ca configuration or if the certificate presented is signed by the certificate
 specified in the <code>edge.enrollment.signingCert</code>.</p>
 <h4 id="pki-configuration">PKI Configuration</h4>
-<p>The identity section of the Controller configuration is used by the Controller when connections are
+<p>The identity section of the Ziti Controller configuration is used by the Ziti Controller when connections are
 established to or from other components of a Ziti Network. There are four sections in the identity block:
 <code>cert</code>, <code>server_cert</code>, <code>key</code>, <code>ca</code>.</p>
 <p><strong>ca</strong>: A file representing a group of certificates with one or more certificate chains terminating at a trust anchor.
-When a Ziti Network component connects to the Controller and offers a certificate for validation the incoming
+When a Ziti Network component connects to the Ziti Controller and offers a certificate for validation the incoming
 connection is checked to see if it signed by a trust anchor specified in this file.</p>
 <p><strong>key</strong>: Also referred to as the <a href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm">private key</a>. It is generated
-first and used to produce the certificates specified in the <code>cert</code> and <code>server_cert</code> fields of the Controller
+first and used to produce the certificates specified in the <code>cert</code> and <code>server_cert</code> fields of the Ziti Controller
 configuration file.</p>
 <p><strong>cert</strong>: The certificate presented to other Ziti Network components during connection establishment.</p>
-<p><strong>server_cert</strong>: The certificate returned by the Controller when other Ziti Network components attempt to
-communicate to the Controller over the IP and port specified in the <code>ctrl.listener</code> or <code>mgmt.listener</code> fields of the Controller
+<p><strong>server_cert</strong>: The certificate returned by the Ziti Controller when other Ziti Network components attempt to
+communicate to the Ziti Controller over the IP and port specified in the <code>ctrl.listener</code> or <code>mgmt.listener</code> fields of the Ziti Controller
 configuration file. If an edge section is present in the configuration file and no edge.api.identity section exists this
 certificate is also returned to incoming connections to the <code>edge.api.advertise</code> endpoint.</p>
 <h3 id="edge-router">Edge Router</h3>
@@ -133,7 +133,7 @@ manage its own PKI. Allowing the Edge Router to manage its own PKI is almost cer
 only setting that an operator may wish to provide is the <code>key</code> field of the identity. This field is treated differently
 than the other values specified.  If the <code>key</code> specified does not exist a new key will be generated. If the <code>key</code>
 provided exists the Edge Router will use it and the other fields will be <strong>regenerated and overwritten</strong> as necessary.</p>
-<p>The certificate generated will be signed by the Controller using the certificate specified in <code>edge.enrollment.signingCert</code>.</p>
+<p>The certificate generated will be signed by the Ziti Controller using the certificate specified in <code>edge.enrollment.signingCert</code>.</p>
 <h4 id="pki-configuration-1">PKI Configuration</h4>
 <p>The <code>identity</code> section of the Edge Router configuration is used by the Edge Router when connections are
 established to or from the other components of a Ziti Network. There are four sections in the identity block:
@@ -148,6 +148,15 @@ configuration file.</p>
 <p><strong>server_cert</strong>: The certificate returned by the Edge Router when other Ziti Network components attempt to
 communicate to the Edge Router over the IP and port specified in the <code>ctrl.listener</code> or <code>mgmt.listener</code> fields of the Edge Router
 configuration file.</p>
+<h3 id="third-party-ca">Third Party CA</h3>
+<p>An important feature of Ziti is that it supports using third party PKIs to be used for identities. A third party CA is
+one which is maintained and managed entirely outside of the Ziti Network. Ziti is never in posession of the private key.
+This means the Ziti Network cannot maintain nor distribute the certificates necessary for creating secure connections.
+Maintaining a PKI outside of the Ziti Network is a more complex deployment however if such a PKI is already established
+and maintained setting up a Ziti Network with a third party CA may be desirable.</p>
+<h4 id="registering-the-ca">Registering the CA</h4>
+<p>Before a third party CA can be used it must be registered with the Ziti Network. This is done by informing the
+Ziti Controller </p>
 <h2 id="pki-troubleshooting">PKI Troubleshooting</h2>
 <p>Configuring a Ziti Network&#39;s PKI can be confusing. Validating a single side of a mutual TLS connection is
 straightforward it becomes tedious to ensure all the certificates and cas in use are valid when you have a fully
@@ -227,9 +236,9 @@ error /path/to/cert-to-test.cert: verification failed
 
 ============ FAILED TO VALIDATE ============
 </code></pre><hr>
-<h3 id="edge-router-to-controller">Edge Router to Controller</h3>
+<h3 id="ziti-edge-router-to-controller">Ziti Edge Router to Controller</h3>
 <h4 id="variables-to-establish-manually">Variables to Establish Manually</h4>
-<p>These two variables represent the Edge Router configuration file and the Controller configuration file.</p>
+<p>These two variables represent the Ziti Edge Router configuration file and the Controller configuration file.</p>
 <pre><code>edge_router_config_file=/path/to/edge-router.yaml
 controller_config_file=/path/to/controller.yaml
 </code></pre><h4 id="variables---copypaste">Variables - Copy/Paste</h4>
@@ -261,7 +270,7 @@ if [[ &quot;null&quot; == &quot;$controller_api_server_cert&quot; ]]; then contr
 <pre><code>verifyCertAgainstPool /tmp/identity.cert $signing_cert
 verifyCertAgainstPool $controller_api_server_cert /tmp/identity.ca
 </code></pre><hr>
-<h3 id="ziti-client-to-edge-router---data">Ziti Client to Edge Router - Data</h3>
+<h3 id="ziti-client-to-ziti-edge-router---data">Ziti Client to Ziti Edge Router - Data</h3>
 <h4 id="variables-to-establish-manually-2">Variables to Establish Manually</h4>
 <p>These two variables represent the identity file in json for a Ziti client and the Controller configuration file.</p>
 <pre><code>identity_file=/path/to/test_identity.json

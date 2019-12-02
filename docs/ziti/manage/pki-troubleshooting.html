@@ -169,9 +169,9 @@ error /path/to/cert-to-test.cert: verification failed
 
 ============ FAILED TO VALIDATE ============
 </code></pre><hr>
-<h3 id="edge-router-to-controller">Edge Router to Controller</h3>
+<h3 id="ziti-edge-router-to-controller">Ziti Edge Router to Controller</h3>
 <h4 id="variables-to-establish-manually">Variables to Establish Manually</h4>
-<p>These two variables represent the Edge Router configuration file and the Controller configuration file.</p>
+<p>These two variables represent the Ziti Edge Router configuration file and the Controller configuration file.</p>
 <pre><code>edge_router_config_file=/path/to/edge-router.yaml
 controller_config_file=/path/to/controller.yaml
 </code></pre><h4 id="variables---copypaste">Variables - Copy/Paste</h4>
@@ -203,7 +203,7 @@ if [[ &quot;null&quot; == &quot;$controller_api_server_cert&quot; ]]; then contr
 <pre><code>verifyCertAgainstPool /tmp/identity.cert $signing_cert
 verifyCertAgainstPool $controller_api_server_cert /tmp/identity.ca
 </code></pre><hr>
-<h3 id="ziti-client-to-edge-router---data">Ziti Client to Edge Router - Data</h3>
+<h3 id="ziti-client-to-ziti-edge-router---data">Ziti Client to Ziti Edge Router - Data</h3>
 <h4 id="variables-to-establish-manually-2">Variables to Establish Manually</h4>
 <p>These two variables represent the identity file in json for a Ziti client and the Controller configuration file.</p>
 <pre><code>identity_file=/path/to/test_identity.json

@@ -8,7 +8,7 @@ possible to produce complicated deployments having multiple Edge Routers deploye
 
 ## Sizing Guidelines
 
-The Ziti network controller and routers are still in the process of being stress tested. We recommend starting with a small
+The Ziti Controller and Ziti Routers are still in the process of being stress tested. We recommend starting with a small
 scale deployment until key performance indicators start to hint that the server requires more resources. A Ziti network
 will have two important metrics: CPU and network capacity.  Modest sized networks require minimal investments in
 infrastructure. Start with small machines and increase as needed.
@@ -40,8 +40,8 @@ sub-command.
 ### Running ziti-router enroll
 
 In order to enroll the Edge Router a valid [configuration](#configuration) file is needed. After creating a valid
-configuration the jwt for the Edge Router also needs to be obtained from the controller. The jwt can be
-retrieved from the controller via the controller's ReST API at
+configuration the jwt for the Edge Router also needs to be obtained from the Ziti Controller. The jwt can be
+retrieved from the Ziti Controller via the Ziti Controller's ReST API at
 https://${controller-name}:${controller-port}/edge-routers.
 
 With a valid configuration file and jwt the router can now be enrolled using:

@@ -9,7 +9,7 @@ When first launched - the instace will deposit a file into the file system at
 > This file is used to reconfigure the system in this event and it happens automatically on startup.
 
 Now, ssh to the newly created machine. Once there you can obtain the username and password for your
-Ziti controller by issuing this command:
+Ziti Controller by issuing this command:
 
     jq -r .password ~/.config/ziti/ziti-controller/credentials.json
 
@@ -49,7 +49,7 @@ To change the administrator password using the CLI simply issue these commands:
 ## Create an Identity
 
 All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
-within the Controller. Read more about Identities [here](~/ziti/identities/overview.md) Creating an identity via the UI or CLI is easy:
+within the Ziti Controller. Read more about Identities [here](~/ziti/identities/overview.md) Creating an identity via the UI or CLI is easy:
 
 # [New Identity via UI](#tab/create-identity-ui)
 

@@ -48,7 +48,7 @@ the public internet on ports: 22, 443, 1280, 3022.
   * port 22 - the default port that ssh uses. This is how you will log into the bare AMI after it is launched.
   * port 443 - a small UI is delivered via a web server that runs on port 443, using self-signed certificates
   * port 1280 - the preselected port the Ziti controller will serve its API over
-  * port 3022 - the preselected port for data channels to the Edge Router
+  * port 3022 - the preselected port for data channels to the Ziti Edge Router
 * Public IP/DNS: Make sure the EC2 instance is assigned a public IP and a public DNS entry
 
 > [!IMPORTANT]

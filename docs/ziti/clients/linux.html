@@ -222,7 +222,7 @@ by <code>ziti-tunnel</code> when it reads data from the tun interface.</p>
 <p>The proxy intercept mode creates a network listener for each Ziti service that is
 intercepted. The services to intercept, and the ports that they are intercepted on,
 are specified on the command line (as opposed to using the service definitions that
-are retrieved from the edge controller):</p>
+are retrieved from the Ziti Edge Controller):</p>
 <pre><code>$ ziti-tunnel --identity ziti.json proxy wttr.in:8443 ssh-local:2222 netcat:22169
 [   0.004]    INFO ziti/tunnel/intercept/proxy.(*proxyInterceptor).Start: starting proxy interceptor
 [   0.120]    INFO ziti/tunnel/intercept.updateServices: starting tunnel for newly available service ssh-local

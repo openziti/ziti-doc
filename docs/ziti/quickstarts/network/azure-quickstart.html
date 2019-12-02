@@ -161,7 +161,7 @@ changes (such as a system reboot) the image needs to be reconfigured becuase the
 This file is used to reconfigure the system in this event and it happens automatically on startup.</p>
 </div>
 <p>Now, ssh to the newly created machine. Once there you can obtain the username and password for your
-Ziti controller by issuing this command:</p>
+Ziti Controller by issuing this command:</p>
 <pre><code>jq -r .password ~/.config/ziti/ziti-controller/credentials.json
 </code></pre><p>You can choose to keep this password or change it to something easier to remember. If you change the password, please
 remember to use a strong password which is not easy to guess.</p>
@@ -207,7 +207,7 @@ ziti edge controller update authenticator updb -s
 </div>
 <h2 id="create-an-identity">Create an Identity</h2>
 <p>All connections to Ziti are mutually authenticated TLS connections. Identites map a given certificate to an identity
-within the Controller. Read more about Identities <a href="../../identities/overview.html">here</a> Creating an identity via the UI or CLI is easy:</p>
+within the Ziti Controller. Read more about Identities <a href="../../identities/overview.html">here</a> Creating an identity via the UI or CLI is easy:</p>
 <div class="tabGroup" id="tabgroup_Jgj2pEEE-E-1">
 <ul role="tablist">
 <li role="presentation">

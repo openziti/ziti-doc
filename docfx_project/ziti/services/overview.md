@@ -24,7 +24,7 @@ Ziti endpoints deployed the only access to these services can be through Ziti!
 ### Service Name
 
 Services defined on a Ziti Network have an almost limitless "namespace" available for identifying services. A Ziti
-service is be defined by a name and this name is registered with the Controller. Once declared, services can then be
+service is be defined by a name and this name is registered with the Ziti Controller. Once declared, services can then be
 addressed directly by name from Ziti-aware clients. This means there are effecitvely a **limitless** number names
 available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application
 developer has total control over service names.
@@ -45,7 +45,7 @@ secure environment of the Ziti Network leading to turly zero-trust solutions!
 
 Non-hosted services are services which are not terminated inside a Ziti-capable client. These services are somewhat
 similar conceptually to services behind a reverse proxy. In these services traffic is onboarded to the Ziti Network at
-an Edge Router and then exits the Ziti Network at the specified Edge Router.
+an Ziti Edge Router and then exits the Ziti Network at the specified Ziti Edge Router.
 
 ## Ziti Router
 

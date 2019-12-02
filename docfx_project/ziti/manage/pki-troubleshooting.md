@@ -94,11 +94,11 @@ Using the provided bash function above - you will see one of two results:
 
 --------------------------------------------------------------
 
-### Edge Router to Controller
+### Ziti Edge Router to Controller
 
 #### Variables to Establish Manually
 
-These two variables represent the Edge Router configuration file and the Controller configuration file.
+These two variables represent the Ziti Edge Router configuration file and the Controller configuration file.
 
     edge_router_config_file=/path/to/edge-router.yaml
     controller_config_file=/path/to/controller.yaml
@@ -152,7 +152,7 @@ Both of these commands should report SUCCESS.
 
 --------------------------------------------------------------
 
-### Ziti Client to Edge Router - Data
+### Ziti Client to Ziti Edge Router - Data
 
 #### Variables to Establish Manually
 

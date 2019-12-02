@@ -39,8 +39,8 @@ to the selected path. You can then transfer the .jwt file to its intended destin
 
 ### 3rd Party CA - Overview
 
-The Ziti controller is capable of using an existing PKI for authentication and authorization rather than to PKI
-configured in the Ziti Controller.  Certificates that are not controlled by the Ziti controller are referred to as "3rd
+The Ziti Controller is capable of using an existing PKI for authentication and authorization rather than to PKI
+configured in the Ziti Controller.  Certificates that are not controlled by the Ziti Controller are referred to as "3rd
 party". If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
 to use a 3rd Party CA this section is for you.
 
