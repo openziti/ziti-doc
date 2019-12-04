@@ -164,12 +164,14 @@ authentication of clients in a Ziti Network it must be registered with the Ziti 
 by the third party CA can be trusted.  </p>
 <p>Registering a third party CA is done by using the ReST endpoint <code>/cas</code> from the Ziti Controller. To register a third
 party CA the following information is required to be posted to the endpoint:</p>
-<pre><code>name: the desired name of the CA
-isEnrollmentEnabled: a boolean value indicating if the CA can be used for enrollment. Defaults to true. 
-                     Set to false to prevent further enrollments using this CA
-isAuthEnabled: a boolean value indicating if the CA can be used for authentication. Defaults to true.
-               Set to false to prevent all authentication from endpoints signed by this certificate
-</code></pre><p>Assuming the create request was well formed and successful, the response from this invocation will contain a field
+<ul>
+<li><strong>name</strong>: the desired name of the CA</li>
+<li><strong>isEnrollmentEnabled</strong>: a boolean value indicating if the CA can be used for enrollment. Defaults to true. Set to false
+to prevent further enrollments using this CA</li>
+<li><strong>isAuthEnabled</strong>: a boolean value indicating if the CA can be used for authentication. Defaults to true. Set to false to
+prevent all authentication from endpoints signed by this certificate</li>
+</ul>
+<p>Assuming the create request was well formed and successful, the response from this invocation will contain a field
 representing the <code>id</code> of the third party CA at <code>data.id</code>. The id of the third party CA will be needed when validating
 the third party CA.</p>
 <h4 id="validating-the-ca">Validating the CA</h4>

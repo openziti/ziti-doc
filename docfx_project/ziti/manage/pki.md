@@ -102,11 +102,11 @@ by the third party CA can be trusted.
 Registering a third party CA is done by using the ReST endpoint `/cas` from the Ziti Controller. To register a third
 party CA the following information is required to be posted to the endpoint:
 
-    name: the desired name of the CA
-    isEnrollmentEnabled: a boolean value indicating if the CA can be used for enrollment. Defaults to true. 
-                         Set to false to prevent further enrollments using this CA
-    isAuthEnabled: a boolean value indicating if the CA can be used for authentication. Defaults to true.
-                   Set to false to prevent all authentication from endpoints signed by this certificate
+* **name**: the desired name of the CA
+* **isEnrollmentEnabled**: a boolean value indicating if the CA can be used for enrollment. Defaults to true. Set to false
+  to prevent further enrollments using this CA
+* **isAuthEnabled**: a boolean value indicating if the CA can be used for authentication. Defaults to true. Set to false to
+  prevent all authentication from endpoints signed by this certificate
 
 Assuming the create request was well formed and successful, the response from this invocation will contain a field
 representing the `id` of the third party CA at `data.id`. The id of the third party CA will be needed when validating
