@@ -23,7 +23,7 @@ items:
   assemblies:
   - Ziti.NET.Standard
   namespace: NetFoundry
-  summary: "\nA delegate that is invoked after data has been put into the event loop. If there are any expensive\nresources held this is the callback to release those resources.\nOnly needed when not using Ziti as a <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> (callback based Ziti)\n"
+  summary: "\nA delegate that is invoked after data has been put into the event loop. If there are any expensive\nresources held this is the callback to release those resources.\nOnly needed when not using Ziti as a <see cref=\"!:System.IO.Stream\"></see> (callback based Ziti)\n"
   example: []
   syntax:
     content: public delegate void OnDataWritten(ZitiStatus status, int bytesWritten, object context);
@@ -45,13 +45,6 @@ items:
   - Public
   - Delegate
 references:
-- uid: System.IO.Stream
-  commentId: T:System.IO.Stream
-  parent: System.IO
-  isExternal: true
-  name: Stream
-  nameWithType: Stream
-  fullName: System.IO.Stream
 - uid: NetFoundry.ZitiStatus
   commentId: T:NetFoundry.ZitiStatus
   parent: NetFoundry
@@ -70,28 +63,12 @@ references:
   nameWithType: NetFoundry
   fullName: NetFoundry
 - uid: System.Int32
-  commentId: T:System.Int32
-  parent: System
   isExternal: true
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
 - uid: System.Object
-  commentId: T:System.Object
-  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.IO
-  commentId: N:System.IO
-  isExternal: true
-  name: System.IO
-  nameWithType: System.IO
-  fullName: System.IO
-- uid: System
-  commentId: N:System
-  isExternal: true
-  name: System
-  nameWithType: System
-  fullName: System

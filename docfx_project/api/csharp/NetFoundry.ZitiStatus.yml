@@ -35,8 +35,8 @@ items:
   summary: "\nAn enum representing the outcome of the given Ziti operation.\n"
   example: []
   syntax:
-    content: public enum ZitiStatus
-    content.vb: Public Enum ZitiStatus
+    content: 'public enum ZitiStatus : int'
+    content.vb: Public Enum ZitiStatus As Integer
   modifiers.csharp:
   - public
   - enum
@@ -68,9 +68,10 @@ items:
   summary: "\nIndicates a successful outcome\n"
   example: []
   syntax:
-    content: OK = 0
+    content: OK = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: OK = Nothing
   modifiers.csharp:
   - public
   - const
@@ -102,9 +103,10 @@ items:
   summary: "\nA user error indicating the provided configuration file was not found.\n"
   example: []
   syntax:
-    content: CONFIG_NOT_FOUND = -1
+    content: CONFIG_NOT_FOUND = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: CONFIG_NOT_FOUND = Nothing
   modifiers.csharp:
   - public
   - const
@@ -136,9 +138,10 @@ items:
   summary: "\nA user error indicating the identity from the provided configuration \nfile is not authorized to perform the action.\n"
   example: []
   syntax:
-    content: NOT_AUTHORIZED = -2
+    content: NOT_AUTHORIZED = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: NOT_AUTHORIZED = Nothing
   modifiers.csharp:
   - public
   - const
@@ -170,9 +173,10 @@ items:
   summary: "\nA network error indicating the Ziti Network Controller was not able to be contacted.\n"
   example: []
   syntax:
-    content: CONTROLLER_UNAVAILABLE = -3
+    content: CONTROLLER_UNAVAILABLE = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: CONTROLLER_UNAVAILABLE = Nothing
   modifiers.csharp:
   - public
   - const
@@ -204,9 +208,10 @@ items:
   summary: "\nA network error indicating the Ziti Network Gateway was not able to be contacted.\n"
   example: []
   syntax:
-    content: GATEWAY_UNAVAILABLE = -4
+    content: GATEWAY_UNAVAILABLE = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: GATEWAY_UNAVAILABLE = Nothing
   modifiers.csharp:
   - public
   - const
@@ -238,9 +243,10 @@ items:
   summary: "\nA user error indicating the service name provided was not available. \nEither it does not exist or the provided identity does not have sufficient \nrights to the service.\n"
   example: []
   syntax:
-    content: SERVICE_UNAVALABLE = -5
+    content: SERVICE_UNAVALABLE = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: SERVICE_UNAVALABLE = Nothing
   modifiers.csharp:
   - public
   - const
@@ -272,9 +278,10 @@ items:
   summary: "\nA normal status indicating the connection is closed.\n"
   example: []
   syntax:
-    content: EOF = -6
+    content: EOF = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: EOF = Nothing
   modifiers.csharp:
   - public
   - const
@@ -306,9 +313,10 @@ items:
   summary: "\nAn exceptional status indicating the operation did not complete \nwithin the specified timeout\n"
   example: []
   syntax:
-    content: TIMEOUT = -7
+    content: TIMEOUT = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: TIMEOUT = Nothing
   modifiers.csharp:
   - public
   - const
@@ -340,9 +348,10 @@ items:
   summary: "\nAn exceptional situation indicating the connection between the \nclient and the Ziti Network Gateway was interrupted\n"
   example: []
   syntax:
-    content: CONNABORT = -8
+    content: CONNABORT = null
     return:
       type: NetFoundry.ZitiStatus
+    content.vb: CONNABORT = Nothing
   modifiers.csharp:
   - public
   - const

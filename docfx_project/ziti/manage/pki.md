@@ -6,8 +6,8 @@ rules that must be followed to properly configure a Ziti Network. If there are i
 of a Ziti Network to another - this page should serve as a starting point of understanding.
 
 > [!NOTE]
-PKI is a complex topic and it is recommended to be familiar with what a PKI, what it is and how to properly use and
-configure a PKI before making any decisions about the PKI the Ziti Network uses.
+PKI is a complex topic and it is recommended to be familiar with what is a PKI as well as how to properly use and
+configure a one before making any decisions about the PKI the Ziti Network uses.
 
 The Ziti Network allows the operator to declare any trust anchors as valid. This means Ziti does not need to be
 configured with a full chain of certificates which link fully back to a root CA. A configuration using a full chain back
@@ -79,17 +79,54 @@ configuration file.
 communicate to the Edge Router over the IP and port specified in the `ctrl.listener` or `mgmt.listener` fields of the Edge Router
 configuration file.
 
-### Third Party CA
+### Third Party CA (optional)
 
-An important feature of Ziti is that it supports using third party PKIs to be used for identities. A third party CA is
-one which is maintained and managed entirely outside of the Ziti Network. Ziti is never in posession of the private key.
-This means the Ziti Network cannot maintain nor distribute the certificates necessary for creating secure connections.
-Maintaining a PKI outside of the Ziti Network is a more complex deployment however if such a PKI is already established
-and maintained setting up a Ziti Network with a third party CA may be desirable.
+A third party CA is one which is maintained and managed entirely outside of the Ziti Network. This is an important
+feature for organizations wishing to administer and maintain the certificates used by the different pieces of the Ziti
+Network. A Ziti Network is capable of using third party PKIs as the trust mechanism for enrollment and authentication of
+clients for a Ziti Network.
+
+With the PKI being managed externalliy a Ziti Network is never in posession of the private key. This means the Ziti
+Network cannot maintain nor distribute certificates necessary for creating secure connections. The Ziti Network is
+only capable of verifying if the certificate presented was signed by the externally managed PKI.
+
+Maintaining a PKI outside of the Ziti Network is a more complex configuration. If a PKI is already established
+and maintained externally setting up a Ziti Network with a third party CA may be desired.
 
 #### Registering the CA
 
-Before a third party CA can be used it must be registered with the Ziti Network. This is done by informing the
-Ziti Controller 
+A Ziti Network will not trust any third party CA implicitly. Before a third party CA can be used for enrollment and
+authentication of clients in a Ziti Network it must be registered with the Ziti Controller to ensure certificates signed
+by the third party CA can be trusted.  
+
+Registering a third party CA is done by using the ReST endpoint `/cas` from the Ziti Controller. To register a third
+party CA the following information is required to be posted to the endpoint:
+
+    name: the desired name of the CA
+    isEnrollmentEnabled: a boolean value indicating if the CA can be used for enrollment. Defaults to true. 
+                         Set to false to prevent further enrollments using this CA
+    isAuthEnabled: a boolean value indicating if the CA can be used for authentication. Defaults to true.
+                   Set to false to prevent all authentication from endpoints signed by this certificate
+
+Assuming the create request was well formed and successful, the response from this invocation will contain a field
+representing the `id` of the third party CA at `data.id`. The id of the third party CA will be needed when validating
+the third party CA.
+
+#### Validating the CA
+
+After being submitted to the Ziti Controller, the third party CA will have the isCsrValidated field set to false
+indicating it is not yet ready for use. A second step is needed to ensure the third party CA is setup properly as a CA.
+This step ensures the third party CA provided is capable of fullfilling CSR requests. Clients attempting to connect to a
+Ziti Network using the third party CA will be rejected.
+
+To validate the third party CA a CSR must be generated and fulfilled by the third party CA to generate a certificate
+with the common name (CN) field set to a value assigned by the Ziti Controller. The Ziti Controller `/cas`
+ReST endpoint can be interrogated to retrieve the details for a specific third party CA. The field necessary to validate
+the third party CA is `data.verificationToken` and is obtained at this endpoint. A certificate is then created and
+signed by the third party CA with the common name field set to the verificationToken.
+
+To finish verifying the third party CA, the certificate created with the verificationToken is posted back to the Ziti
+Controller at `/cas/${id}/verify`. The `id` is also obtained during the creation process. After posting the certificate
+with the `verificationToken` as the common name the third party CA will change from `isVerified=false` to `isVerified=true`.
 
 [!include[](./pki-troubleshooting.md)]
