@@ -17,6 +17,5 @@
   {{#_noindex}}<meta name="searchOption" content="noindex">{{/_noindex}}
   {{#_enableSearch}}<meta property="docfx:rel" content="{{_rel}}">{{/_enableSearch}}
   {{#_enableNewTab}}<meta property="docfx:newtab" content="true">{{/_enableNewTab}}
-  <img src="~/images/github-white.svg" alt="view us on github" height="40"/>
   <!--span>this is text</span-->
 </head>
