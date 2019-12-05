@@ -22,7 +22,7 @@ establishment. This certificate will need to be valid per the configured trust a
 
 The Ziti Controller has three distinct sections related to PKI: `identity`, `edge.api.identity`,
 `edge.enrollment.signingCert`. The `edge.api.identity` configuration section is optional and is provided to allow the external
-ReST-based endpoint to present a certificate that is different than the one configured in the identity section.
+REST endpoint to present a certificate that is different than the one configured in the identity section.
 
 Connections to the Ziti Controller are considered valid if the certificate presented during connection is signed by a
 trust anchor declared within the identity.ca configuration or if the certificate presented is signed by the certificate
@@ -99,7 +99,7 @@ A Ziti Network will not trust any third party CA implicitly. Before a third part
 authentication of clients in a Ziti Network it must be registered with the Ziti Controller to ensure certificates signed
 by the third party CA can be trusted.  
 
-Registering a third party CA is done by using the ReST endpoint `/cas` from the Ziti Controller. To register a third
+Registering a third party CA is done by using the REST endpoint `/cas` from the Ziti Controller. To register a third
 party CA the following information is required to be posted to the endpoint:
 
 * **name**: the desired name of the CA
@@ -121,7 +121,7 @@ Ziti Network using the third party CA will be rejected.
 
 To validate the third party CA a CSR must be generated and fulfilled by the third party CA to generate a certificate
 with the common name (CN) field set to a value assigned by the Ziti Controller. The Ziti Controller `/cas`
-ReST endpoint can be interrogated to retrieve the details for a specific third party CA. The field necessary to validate
+REST endpoint can be interrogated to retrieve the details for a specific third party CA. The field necessary to validate
 the third party CA is `data.verificationToken` and is obtained at this endpoint. A certificate is then created and
 signed by the third party CA with the common name field set to the verificationToken.
 

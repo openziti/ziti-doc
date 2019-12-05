@@ -37,8 +37,8 @@ Follow these steps to enroll a one time token identity:
 ### 3rd Party CA - One Time Token
 
 This process is similar to the One Time Token flow from above. This flow expects that a private key and certificate have
-already been created on the machine that is about to enroll and that the certificate presented is valid to a CA already
-uploaded to the Ziti Controller.
+already been created on or distributed to the machine that is about to enroll and that the certificate presented is
+signed by a [third party CA](~/ziti/manage/pki.md#third-party-ca-optional) already validated in the Ziti Controller.
 
 Follow these steps to enroll a 3rd Pary CA - one time token identity:
 
@@ -52,9 +52,11 @@ Follow these steps to enroll a 3rd Pary CA - one time token identity:
 
 This enrollment process is almost entirely automated. With "auto" no identity needs to exist prior to enrollment. The
 act of enrolling the identity actually creates the identity.  Like "3rd Party CA - One Time Token" - this flow expects
-that a private key and certificate have already been created on the machine that is about to enroll and that the
-certificate presented is valid to a CA already uploaded to the Ziti Controller. This flow also requires that a jwt
-specifically created for enrollment be downloaded from the CA and the CA uploaded needs to be valid for
-isAutoCaEnrollmentEnabled.
+that a private key and certificate have already been created on or distributed to the machine that is about to enroll
+and that the certificate presented is valid to a [third party CA](~/ziti/manage/pki.md#third-party-ca-optional) already
+uploaded to the Ziti Controller. This flow also requires that a jwt specifically created for enrollment be downloaded
+from the Ziti Controller. The third party CA must also have the `isAutoCaEnrollmentEnabled` property set to true. 
 
-You can get the .jwt by downloading the file from:  `${controller_uri}/cas/${ca_id}/jwt`
+The jwt file specific for a given third party CA is accessible from:  `${controller_uri}/cas/${id}/jwt` where
+`${controller_uri}` represents the fully qualified address of the Ziti Controller api and `${id}` represents the
+identifier for the given third party CA.

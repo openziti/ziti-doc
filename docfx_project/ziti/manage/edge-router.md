@@ -41,7 +41,7 @@ sub-command.
 
 In order to enroll the Edge Router a valid [configuration](#configuration) file is needed. After creating a valid
 configuration the jwt for the Edge Router also needs to be obtained from the Ziti Controller. The jwt can be
-retrieved from the Ziti Controller via the Ziti Controller's ReST API at
+retrieved from the Ziti Controller via the Ziti Controller's REST API at
 https://${controller-name}:${controller-port}/edge-routers.
 
 With a valid configuration file and jwt the router can now be enrolled using:

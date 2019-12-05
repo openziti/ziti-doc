@@ -1,7 +1,7 @@
 # Ziti Controller
 
 The Ziti Controller is the process that coordinates a Ziti network. It is responsible for authenticating incoming
-connections from identities and authorizing identities to services and provides a ReST-based API for other processes to
+connections from identities and authorizing identities to services and provides a RESTful API for other processes to
 interact with it.
 
 ### Prerequisite - Database
