@@ -138,7 +138,7 @@ sub-command.</p>
 <h3 id="running-ziti-router-enroll">Running ziti-router enroll</h3>
 <p>In order to enroll the Edge Router a valid <a href="#configuration">configuration</a> file is needed. After creating a valid
 configuration the jwt for the Edge Router also needs to be obtained from the Ziti Controller. The jwt can be
-retrieved from the Ziti Controller via the Ziti Controller&#39;s ReST API at
+retrieved from the Ziti Controller via the Ziti Controller&#39;s REST API at
 https://${controller-name}:${controller-port}/edge-routers.</p>
 <p>With a valid configuration file and jwt the router can now be enrolled using:
  <code>ziti-router enroller [path to configuration file] --jwt [path to jwt]</code>.</p>

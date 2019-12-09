@@ -107,7 +107,7 @@ establishment. This certificate will need to be valid per the configured trust a
 <h3 id="ziti-controller">Ziti Controller</h3>
 <p>The Ziti Controller has three distinct sections related to PKI: <code>identity</code>, <code>edge.api.identity</code>,
 <code>edge.enrollment.signingCert</code>. The <code>edge.api.identity</code> configuration section is optional and is provided to allow the external
-ReST-based endpoint to present a certificate that is different than the one configured in the identity section.</p>
+REST endpoint to present a certificate that is different than the one configured in the identity section.</p>
 <p>Connections to the Ziti Controller are considered valid if the certificate presented during connection is signed by a
 trust anchor declared within the identity.ca configuration or if the certificate presented is signed by the certificate
 specified in the <code>edge.enrollment.signingCert</code>.</p>
@@ -161,7 +161,7 @@ and maintained externally setting up a Ziti Network with a third party CA may be
 <p>A Ziti Network will not trust any third party CA implicitly. Before a third party CA can be used for enrollment and
 authentication of clients in a Ziti Network it must be registered with the Ziti Controller to ensure certificates signed
 by the third party CA can be trusted.  </p>
-<p>Registering a third party CA is done by using the ReST endpoint <code>/cas</code> from the Ziti Controller. To register a third
+<p>Registering a third party CA is done by using the REST endpoint <code>/cas</code> from the Ziti Controller. To register a third
 party CA the following information is required to be posted to the endpoint:</p>
 <ul>
 <li><strong>name</strong>: the desired name of the CA</li>
@@ -180,7 +180,7 @@ This step ensures the third party CA provided is capable of fullfilling CSR requ
 Ziti Network using the third party CA will be rejected.</p>
 <p>To validate the third party CA a CSR must be generated and fulfilled by the third party CA to generate a certificate
 with the common name (CN) field set to a value assigned by the Ziti Controller. The Ziti Controller <code>/cas</code>
-ReST endpoint can be interrogated to retrieve the details for a specific third party CA. The field necessary to validate
+REST endpoint can be interrogated to retrieve the details for a specific third party CA. The field necessary to validate
 the third party CA is <code>data.verificationToken</code> and is obtained at this endpoint. A certificate is then created and
 signed by the third party CA with the common name field set to the verificationToken.</p>
 <p>To finish verifying the third party CA, the certificate created with the verificationToken is posted back to the Ziti

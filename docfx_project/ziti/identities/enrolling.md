@@ -26,6 +26,8 @@ Follow these steps to enroll a one time token identity:
 * download or copy the jwt - this file contains the single use token
 * run the `ziti-enroller` for your given operating system:
 
+**Example Usage:**
+
     ziti-enroller --jwt ${jwt_file}
 
 > [!IMPORTANT]
@@ -46,17 +48,25 @@ Follow these steps to enroll a 3rd Pary CA - one time token identity:
 * download or copy the jwt - this file contains the single use token
 * run the `ziti-enroller` for your given operating system. Notice you can provide the name of the identity :
 
+**Example Usage:**
+
     ziti-enroller -v --jwt ${jwt_file} --cert ${identity_path_to_cert} --key ${identity_path_to_key} --idname ${identity_name}
 
 ### 3rd Party CA - Auto
 
-This enrollment process is almost entirely automated. With "auto" no identity needs to exist prior to enrollment. The
-act of enrolling the identity actually creates the identity.  Like "3rd Party CA - One Time Token" - this flow expects
-that a private key and certificate have already been created on or distributed to the machine that is about to enroll
-and that the certificate presented is valid to a [third party CA](~/ziti/manage/pki.md#third-party-ca-optional) already
-uploaded to the Ziti Controller. This flow also requires that a jwt specifically created for enrollment be downloaded
-from the Ziti Controller. The third party CA must also have the `isAutoCaEnrollmentEnabled` property set to true. 
+When using a third party CA identity creation process in the Ziti Controller is automatic. The act of enrolling the
+identity will create it. Like "3rd Party CA - One Time Token" - this flow expects that a private key and certificate
+have already been created on or distributed to the machine that is about to enroll. The certificate presented to the
+Ziti Controller must be signed by a [third party CA](~/ziti/manage/pki.md#third-party-ca-optional) already
+uploaded and validated in the Ziti Controller with the `isAutoCaEnrollmentEnabled` property set to true.
 
-The jwt file specific for a given third party CA is accessible from:  `${controller_uri}/cas/${id}/jwt` where
-`${controller_uri}` represents the fully qualified address of the Ziti Controller api and `${id}` represents the
-identifier for the given third party CA.
+Using the `ziti-enroller` will also require the use of a jwt specifically created for the enrollment process. The jwt
+can be downloaded from the Ziti Controller from:  `${controller_uri}/cas/${id}/jwt` where `${controller_uri}` represents
+the fully qualified address of the Ziti Controller api and `${id}` represents the identifier for the given third party CA.
+
+**Example Usage:**
+
+    ziti-enroller --jwt ${jwt_file} --cert ${identity_path_to_cert} --key ${identity_path_to_key} --idname ${identity_name}
+
+If supplied the `idname` will be used as the name for the identity created. If not supplied the common name will be used
+as the name of the identity within the Ziti Controller.
