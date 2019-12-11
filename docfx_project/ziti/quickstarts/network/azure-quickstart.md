@@ -37,7 +37,10 @@ ensure the following:
 * Click "Create" to start the creation wizard
 * On the "Basics" tab fill out the required options. Ensure you use the Username "nfziti" and uplaod a public key so you
   can SSH to the machine after its deployed
-* Configure and choose options for "Disks" and "Networking"
+* Configure and choose options for "Disks"
+* Configure and choose options for "Networking"
+  * It is important that a "Basic" IP is used. Click "Create New" under the Public IP and make a new IP make sure SKU is
+    "Basic" and  Assignment is "Dynamic"
 * On the "Management" tab ensure the "System assigned managed identity" is set to "On" (the default is Off so you need
   to change this)
 * Advance to and choose options for "Advanced"
