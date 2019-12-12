@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Ziti Services | NetFoundry Ziti </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Ziti Services | NetFoundry Ziti ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+    <!--span>this is text</span-->
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/nflightbglogo_40.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div style="display: flex;">
+                    <div class="form-group" style="valign: center;position: relative;">
+                      <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                    </div>
+                    <div style="position: relative">
+                        &nbsp;
+                    </div>
+                    <div style="position: relative">
+                        <a href="https://github.com/netfoundry">
+                            <img src="../../images/github-white.svg" alt="view us on github" title="view us on github" height="34px">
+                        </a>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="ziti-services">Ziti Services</h1>
+
+<p>A Ziti network is primarily concerned with providing access to &quot;services&quot;. A service encapsulates the definition of any
+resource that could be accessed by a client on a traditional network. Services by themselves do not provide a complete
+mechanism for authorization. That is what an <a href="../appwans/overview.html">AppWAN</a> is for.</p>
+<p>A service is defined by the following components:</p>
+<ul>
+<li>Name - the name of the service</li>
+<li>Ziti Router - the last Ziti Router traffic will be sent to</li>
+<li>Intercepting Host and Port - what DNS name or IP should be used when intecepting traffic</li>
+<li>Endpoint Service - (if not hosted - see below) the protocol, host, and port traffic sent to</li>
+<li>Hosting Identity - (is hosted - see below) the identity that will host the service</li>
+</ul>
+<h3 id="dark-services">Dark Services</h3>
+<p>One of the benefits of using a Ziti service is that the actual service can be &#39;dark&#39;. In fact this is the default for
+any service based entirely in Ziti. Place the service in a secure network with only Ziti in place and nobody in the
+world can access the service without a valid certificate/identity!</p>
+<p>Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into an existing network and
+Ziti endpoints deployed the only access to these services can be through Ziti!</p>
+<h3 id="service-name">Service Name</h3>
+<p>Services defined on a Ziti Network have an almost limitless &quot;namespace&quot; available for identifying services. A Ziti
+service is be defined by a name and this name is registered with the Ziti Controller. Once declared, services can then be
+addressed directly by name from Ziti-aware clients. This means there are effecitvely a <strong>limitless</strong> number names
+available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application
+developer has total control over service names.</p>
+<h3 id="types-of-services">Types of Services</h3>
+<p>There are two basic types of serivces in a Ziti Network: hosted and non-hosted.</p>
+<h4 id="hosted">Hosted</h4>
+<p>Hosted services are the new edge. Ziti allows the developer to declare a service is &quot;hosted&quot;. This means when a Ziti
+Client attempts to address the specified serivce the Ziti Network will route traffic to this endpoint automatically.
+Once the traffic is at the endpoint the traffic can be terminated inside the process space of a Ziti-powered
+application. When the traffic terminates inside a Ziti-powered application the application it never needs to leave the
+secure environment of the Ziti Network leading to turly zero-trust solutions!</p>
+<h4 id="non-hosted">Non-Hosted</h4>
+<p>Non-hosted services are services which are not terminated inside a Ziti-capable client. These services are somewhat
+similar conceptually to services behind a reverse proxy. In these services traffic is onboarded to the Ziti Network at
+an Ziti Edge Router and then exits the Ziti Network at the specified Ziti Edge Router.</p>
+<h2 id="ziti-router">Ziti Router</h2>
+<p>The Ziti Router portion of a service represents the final Ziti Router that traffic will be sent to. From this router the
+traffic will either be sent to a Ziti Endpoint or to a point outside the Ziti network over the underlay network.</p>
+<p>If the traffic is destined for a location that is not on the Ziti network overlay this is the router the Ziti network
+will end up sending the traffic from.</p>
+<p>If the router is sending traffic to another Ziti Endpoint then the service is said to be &quot;hosted&quot;.  Hosted services
+cannot specify a router - the Ziti network figures out the best path to the endpoint.</p>
+<h2 id="intercepting-host-and-port">Intercepting Host and Port</h2>
+<p>Specified on the service when the traffic destination is outside of the Ziti network onto the underlay. If the <a href="../clients/overview.html">Ziti
+client</a> in use is capable of operating in a seamless/transparent mode then these values will
+specify the IPv4 address or DNS name to intercept.  Any traffic sent to the specified address will be captured and if
+the destination port is the same as the specified intercepting port the traffic will be routed into the Ziti network.</p>
+<h2 id="endpoint-service">Endpoint Service</h2>
+<p>Specified on the service when the traffic destination is outside of the Ziti network onto the underlay. These fields
+allow you to choose the protocol, host and port that the actual traffic will be sent to. Note that the host and port do
+not need to match those specified in the intercept host and port (for seamless/transparent ziti clients).</p>
+<h2 id="hosting-identity">Hosting Identity</h2>
+<p>Specified on the service when the serivce is terminated at another Ziti Endpoint. This field is only valid when the
+router specified is set to &quot;hosted&quot;.</p>
+<h2 id="creating-a-service">Creating a Service</h2>
+<p>Here&#39;s how you can create a service.</p>
+<div class="tabGroup" id="tabgroup_6M2JU3mIHL">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_6M2JU3mIHL_create-service-ui" role="tab" aria-controls="tabpanel_6M2JU3mIHL_create-service-ui" data-tab="create-service-ui" tabindex="0" aria-selected="true">New non-hosted Service via UI</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_6M2JU3mIHL_create-hosted-service-ui" role="tab" aria-controls="tabpanel_6M2JU3mIHL_create-hosted-service-ui" data-tab="create-hosted-service-ui" tabindex="-1">New hosted Service via UI</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_6M2JU3mIHL_create-service-cli" role="tab" aria-controls="tabpanel_6M2JU3mIHL_create-service-cli" data-tab="create-service-cli" tabindex="-1">New Service via CLI</a>
+</li>
+</ul>
+<section id="tabpanel_6M2JU3mIHL_create-service-ui" role="tabpanel" data-tab="create-service-ui">
+<ol>
+<li>On the left side nav bar, click &quot;Edge Services&quot;</li>
+<li>In the top right corner of the screen click the &quot;plus&quot; image to add a new service</li>
+<li>Choose a name for the serivce. Example &quot;my-first-service&quot;</li>
+<li>Enter a host name for the service. Enter &quot;intercepted-hostname&quot;</li>
+<li>Enter the port you want intercepted: 1111</li>
+<li>Choose Router by name - for example &quot;ziti-gw01&quot; if you are using <a href="https://aws.amazon.com/marketplace/pp/B07YZLKMLV">Ziti Edge - Developer
+Edition</a></li>
+<li>For Endpoint Service choose:<ul>
+<li>protocol = tcp</li>
+<li>host = actual-hostname</li>
+<li>port = 2222</li>
+</ul>
+</li>
+<li>Select a cluster. If using <a href="https://aws.amazon.com/marketplace/pp/B07YZLKMLV">Ziti Edge - Developer Edition</a> choose
+&quot;demo-c01&quot;</li>
+<li>Leave Hosting Identities as is</li>
+<li>Click save</li>
+</ol>
+</section>
+<section id="tabpanel_6M2JU3mIHL_create-hosted-service-ui" role="tabpanel" data-tab="create-hosted-service-ui" aria-hidden="true" hidden="hidden">
+<ol>
+<li>On the left side nav bar, click &quot;Edge Services&quot;</li>
+<li>In the top right corner of the screen click the &quot;plus&quot; image to add a new service</li>
+<li>Choose a name for the serivce. Example &quot;my-first-hosted-service&quot;</li>
+<li>Enter a host name for the service. Enter &quot;intercepted-hostname&quot;</li>
+<li>Enter the port you want intercepted: 1111</li>
+<li>Choose &quot;Hosted (No Router)&quot; for the Router</li>
+<li>Select a cluster. If using <a href="https://aws.amazon.com/marketplace/pp/B07YZLKMLV">Ziti Edge - Developer Edition</a> choose
+&quot;demo-c01&quot;</li>
+<li>Select one or more identities in &quot;Hosting Identities&quot; representing the identities which host the service</li>
+<li>Click save</li>
+</ol>
+</section>
+<section id="tabpanel_6M2JU3mIHL_create-service-cli" role="tabpanel" data-tab="create-service-cli" aria-hidden="true" hidden="hidden">
+<p>To change the administrator password using the CLI simply issue these two commands:</p>
+<pre><code># ------------------- helpful variables you may need ----------------------
+
+#load the default cluster id into an environment variable
+cluster=$(ziti edge controller list clusters | tr -s &#39; &#39; | cut -d &#39; &#39; -f4)
+
+#load the first edge router id into an environment variable
+edgeRouter=$(ziti edge controller list gateways | cut -d &#39; &#39; -f2)
+
+# ------------------- actual creation of the service ----------------------
+
+#creates a new hosted service
+ziti edge controller create service ${svc_name} --hosted ${intercept_ip_dns} ${intercept_port} --host-ids ${comma separated identity list}
+
+#creates a non-hosted service
+ziti edge controller create service ${svc_name} &quot;${destinationHost}&quot; &quot;${destinationPort}&quot; \
+&quot;${edgeRouter}&quot; &quot;tcp:${interceptHost/ip}:${intercept port}&quot; -c &quot;${cluster}&quot;
+</code></pre></section>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/services/overview.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span class='pull-left'><span><a href='https://netfoundry.io'>© 2019 NetFoundry</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/privacy-policy'>Privacy Policy</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/legal-items'>Legal</a></span>&nbsp;&nbsp;<span><a href='https://netfoundry.zendesk.com/hc/en-us'>Support</a></span>&nbsp;&nbsp;</span><span class='pull-right'><span><a href='https://www.facebook.com/NetFoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145802.svg'></a></span>&nbsp;<span><a href='https://twitter.com/netfoundry' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145812.svg'></a></span>&nbsp;<span><a href='https://www.linkedin.com/company/netfoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145807.svg'></a></span>&nbsp;<span><a href='https://www.youtube.com/channel/UCGN6PFj1rZu50yme9YsICmg' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/174/174883.svg'></a></span>&nbsp;&nbsp;&nbsp;</span><br>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

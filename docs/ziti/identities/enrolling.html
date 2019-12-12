@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Enrolling an Identity | NetFoundry Ziti </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Enrolling an Identity | NetFoundry Ziti ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+    <!--span>this is text</span-->
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/nflightbglogo_40.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div style="display: flex;">
+                    <div class="form-group" style="valign: center;position: relative;">
+                      <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                    </div>
+                    <div style="position: relative">
+                        &nbsp;
+                    </div>
+                    <div style="position: relative">
+                        <a href="https://github.com/netfoundry">
+                            <img src="../../images/github-white.svg" alt="view us on github" title="view us on github" height="34px">
+                        </a>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="enrolling-an-identity">Enrolling an Identity</h2>
+
+<p>All connections made to the Ziti network leverage <a href="https://en.wikipedia.org/wiki/Mutual_authentication">mutual TLS</a>
+which means every client needs a valid X509 certificate which it will present to the Ziti network during the connection
+process. The process of obtaining a key/certificate pair and presenting it securely to the Ziti Controller is called
+&quot;Enrollment&quot;.</p>
+<h3 id="overview">Overview</h3>
+<p>All identities need to be enrolled with the Ziti Controller so the Ziti Controller can authenticate the incoming connection.
+This process is slightly different for each type of identity. NetFoundry has created a tool to aid the enrollment
+process named <code>ziti-enroller</code>. It is recommended that you use <code>ziti-enroller</code> to complete the enrollment as the
+process itself complex. Enrollers are available here:</p>
+<ul>
+<li><a href="https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.5.8-2554/ziti-enroller.exe">Windows</a></li>
+<li><a href="https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.5.8-2554/ziti-enroller-mac.tar.gz">MacOS</a></li>
+<li><a href="https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.5.8-2554/ziti-enroller-linux.tar.gz">Linux</a></li>
+</ul>
+<h3 id="one-time-token-enrollment---internal-pki">One Time Token Enrollment - Internal PKI</h3>
+<p>Perhaps the easiest path to an enrolled identity is by using the one time token enrollment flow. This flow leverages the
+PKI configured in the Ziti Controller.  Using the one time token flow - the <code>ziti-enroller</code> will generate a private key
+and a certificate signing request for the Ziti Controller to sign.</p>
+<p>Follow these steps to enroll a one time token identity:</p>
+<ul>
+<li><a href="creating.html">create the Identity</a></li>
+<li>download or copy the jwt - this file contains the single use token</li>
+<li>run the <code>ziti-enroller</code> for your given operating system:</li>
+</ul>
+<p><strong>Example Usage:</strong></p>
+<pre><code>ziti-enroller --jwt ${jwt_file}
+</code></pre><div class="IMPORTANT"><h5>Important</h5><p>The output from the <code>ziti-enroller</code> is a json file which must be kept secure. This file contains within it the private key
+used to generate a certificate request which was sent to the Ziti Controller and signed.  This file should not be
+transferred or shared and should not be moved from the machine unless you are confident you understand the risks
+involved in doing so.</p>
+</div>
+<h3 id="3rd-party-ca---one-time-token">3rd Party CA - One Time Token</h3>
+<p>This process is similar to the One Time Token flow from above. This flow expects that a private key and certificate have
+already been created on or distributed to the machine that is about to enroll and that the certificate presented is
+signed by a <a href="../manage/pki.html#third-party-ca-optional">third party CA</a> already validated in the Ziti Controller.</p>
+<p>Follow these steps to enroll a 3rd Pary CA - one time token identity:</p>
+<ul>
+<li><a href="creating.html">create the Identity</a></li>
+<li>download or copy the jwt - this file contains the single use token</li>
+<li>run the <code>ziti-enroller</code> for your given operating system. Notice you can provide the name of the identity :</li>
+</ul>
+<p><strong>Example Usage:</strong></p>
+<pre><code>ziti-enroller -v --jwt ${jwt_file} --cert ${identity_path_to_cert} --key ${identity_path_to_key} --idname ${identity_name}
+</code></pre><h3 id="3rd-party-ca---auto">3rd Party CA - Auto</h3>
+<p>When using a third party CA identity creation process in the Ziti Controller is automatic. The act of enrolling the
+identity will create it. Like &quot;3rd Party CA - One Time Token&quot; - this flow expects that a private key and certificate
+have already been created on or distributed to the machine that is about to enroll. The certificate presented to the
+Ziti Controller must be signed by a <a href="../manage/pki.html#third-party-ca-optional">third party CA</a> already
+uploaded and validated in the Ziti Controller with the <code>isAutoCaEnrollmentEnabled</code> property set to true.</p>
+<p>Using the <code>ziti-enroller</code> will also require the use of a jwt specifically created for the enrollment process. The jwt
+can be downloaded from the Ziti Controller from:  <code>${controller_uri}/cas/${id}/jwt</code> where <code>${controller_uri}</code> represents
+the fully qualified address of the Ziti Controller api and <code>${id}</code> represents the identifier for the given third party CA.</p>
+<p><strong>Example Usage:</strong></p>
+<pre><code>ziti-enroller --jwt ${jwt_file} --cert ${identity_path_to_cert} --key ${identity_path_to_key} --idname ${identity_name}
+</code></pre><p>If supplied the <code>idname</code> will be used as the name for the identity created. If not supplied the common name will be used
+as the name of the identity within the Ziti Controller.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/identities/enrolling.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span class='pull-left'><span><a href='https://netfoundry.io'>© 2019 NetFoundry</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/privacy-policy'>Privacy Policy</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/legal-items'>Legal</a></span>&nbsp;&nbsp;<span><a href='https://netfoundry.zendesk.com/hc/en-us'>Support</a></span>&nbsp;&nbsp;</span><span class='pull-right'><span><a href='https://www.facebook.com/NetFoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145802.svg'></a></span>&nbsp;<span><a href='https://twitter.com/netfoundry' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145812.svg'></a></span>&nbsp;<span><a href='https://www.linkedin.com/company/netfoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145807.svg'></a></span>&nbsp;<span><a href='https://www.youtube.com/channel/UCGN6PFj1rZu50yme9YsICmg' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/174/174883.svg'></a></span>&nbsp;&nbsp;&nbsp;</span><br>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
