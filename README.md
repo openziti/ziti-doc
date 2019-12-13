@@ -16,18 +16,21 @@ folder and replace it with a link.  Here are the steps to make that happen.
 * start a plain 'cmd' or powershell shell. Do _NOT_ use a "Developer Command Prompt for VS 201x". There is
 a bug in docfx as of Oct 11 that will cause docfx to fail.
 * clone the repo: `git clone git@github.com:nf-dev/ziti-doc.git`
-* `cd ziti-doc`
-* remove the docs folder: `rmdir /s /q docs`
-* put the docs folder back as a symlink: `mklink /j docs docfx_project\_site`
-* add links in aggregatedSources to the sdks (change GITHUB_ROOT) accordingly:
+* clone all necessary referenced repositories and ensure they are at the same level as ziti-doc. For example this
+  project refers to the clang and csharp sdk.  In order for the doc to build correctly the folder that contains this
+  checkout needs both `ziti-sdk-c` and `ziti-sdk-csharp` at the same level such as: `ls -1 %GITHUB_ROOT%` would produce something
+  like:
+
+```ls -1 %GITHUB_ROOT% | sort
+NetFoundry.github.io
+nf-dev.github.io
+ziti-cmd
+ziti-doc
+ziti-doc-pre-move
+ziti-edge
+ziti-sdk-c
+ziti-sdk-csharp
+ziti-sdk-jvm
 ```
-   set GITHUB_ROOT=c:\git\github
-   set BITBUCKET_ROOT=c:\git\bitbucket
-   cd %GITHUB_ROOT%\ziti-doc\docfx_project\aggregatedSources
-   mklink /j clang %GITHUB_ROOT%\ziti-sdk-c\library
-   mklink /j clang_example %GITHUB_ROOT%\ziti-sdk-c\programs\sample_wttr
-   mklink /j csharp %GITHUB_ROOT%\ziti-sdk-csharp\Ziti.NET.Standard
-   mklink /j csharp_example %GITHUB_ROOT%\ziti-sdk-csharp\Ziti.Core.Console
-   mklink /j ziti %BITBUCKET_ROOT%\ziti\quickstart
-```
+
 * regenerate the docfx site: `docfx %GITHUB_ROOT%\ziti-doc\docfx_project\docfx.json`

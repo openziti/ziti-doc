@@ -5,7 +5,7 @@
         {
           "files": [ "**.csproj" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
-          "src": "aggregatedSources"
+          "src": "../../ziti-sdk-csharp/Ziti.NET.Standard"
         }
       ],
       "dest": "api/csharp",
@@ -50,12 +50,11 @@
           "apidoc/**.md"
         ],
         "exclude": [
-          "obj/**",
-          "_site/**"
+          "obj/**"
         ]
       }
     ],
-    "dest": "_site",
+    "dest": "../docs",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
