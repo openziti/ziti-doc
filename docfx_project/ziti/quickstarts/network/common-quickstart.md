@@ -8,17 +8,16 @@ When first launched - the instace will deposit a file into the file system at
 > changes (such as a system reboot) the image needs to be reconfigured becuase the certificates will no longer be valid.
 > This file is used to reconfigure the system in this event and it happens automatically on startup.
 
-Now, ssh to the newly created machine. Once there you can obtain the username (defaults to "admin") and password for your
+Now, ssh to the newly created machine. Once there you can obtain the username and password for your
 Ziti Controller by issuing this command:
 
-    jq -r .password ~/.config/ziti/ziti-controller/credentials.json
+    jq . ~/.config/ziti/ziti-controller/credentials.json
 
-You can choose to keep this password or change it to something easier to remember. If you change the password, please
-remember to use a strong password which is not easy to guess.
+You can choose to keep this username and password or change it to something easier to remember. If you change the password, please remember to use a strong password which is not easy to guess.
 
 > [!TIP]
-> Once the password is changed - update the credentials.json file with the current password if you want the system to
-> automatically update the certificates in the event of the image losing its IP address or DNS entry.
+> If you change the server password via the UI then do also let the credentials.json reflect the new password if 
+> you want the system to automatically refresh the certificates in the event of a new IP address or domain name.
 
 # [Change via UI](#tab/change-pwd-ui)
 
