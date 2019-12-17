@@ -50,6 +50,7 @@ the public internet on ports: 22, 443, 1280, 3022.
   * port 1280 - the preselected port the Ziti controller will serve its API over
   * port 3022 - the preselected port for data channels to the Ziti Edge Router
 * Public IP/DNS: Make sure the EC2 instance is assigned a public IP and a public DNS entry
+* You will login via SSH with username *nfadmin* unless you override that default with the EC2 launcher
 
 > [!IMPORTANT]
 > Make sure you have the private key corresponding to the public key you choose.
