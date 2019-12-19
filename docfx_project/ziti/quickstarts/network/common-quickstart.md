@@ -25,7 +25,7 @@ you change the password, please remember to use a strong password which is not e
 These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
 [changing pki](~/ziti/manage/pki.md) for more information.
 
-1. Log into the UI using the username (defaults to "admin") and the password obtained in the prior step at https://{ZEDE VM public IPv4}
+1. Log in to the UI (https://{ZEDE VM public IPv4}) using the username and password obtained in the prior step
 1. In the lower left corner, click the icon that looks like a person and choose "Edit Profile" <br/>
 ![image](~/images/changepwd_ui.png) <br/>
 
