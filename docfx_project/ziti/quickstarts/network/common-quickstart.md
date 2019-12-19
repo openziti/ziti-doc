@@ -16,8 +16,8 @@ Ziti Controller by issuing this command:
 You can choose to keep this username and password or change it to something easier to remember. If you change the password, please remember to use a strong password which is not easy to guess.
 
 > [!TIP]
-> If you change the server password via the UI then do also let the credentials.json reflect the new password if 
-> you want the system to automatically refresh the certificates in the event of a new IP address or domain name.
+> If you change the server password update the credentials.json file with the updated password. This ensures the 
+> system can automatically update the certificates in the event of a new IP address or domain name.
 
 # [Change via UI](#tab/change-pwd-ui)
 
