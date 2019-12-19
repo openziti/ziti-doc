@@ -37,7 +37,7 @@ The Ziti Edge implements the zero trust connectivity framework as an overlay app
 ## Ziti Enabled Application
 A Ziti Enabled Application is an application that embeds the Ziti Endpoint SDK, such that it can participate on a Ziti network to either access or host services.
 
-## Ziti Endpoint SDK, Endpoint SDK, SDK
+## Ziti Endpoint SDK, Endpoint SDK, Edge SDK
 The Ziti Endpoint SDK provides software components that are designed to be embedded into customer applications so that they can participate natively in a Ziti network. The SDK targets golang, Swift, C, C#, and potentially other programming languages, allowing programs in those languages to work with idioms and concepts native to those environments. The SDK provides support for both accessing and hosting services that are available on a Ziti network.
 
 ## Ziti Fabric, Fabric
