@@ -13,7 +13,8 @@ Ziti Controller by issuing this command:
 
     jq . ~/.config/ziti/ziti-controller/credentials.json
 
-You can choose to keep this username and password or change it to something easier to remember. If you change the password, please remember to use a strong password which is not easy to guess.
+You can choose to keep this username and password or change it to something easier to remember. If 
+you change the password, please remember to use a strong password which is not easy to guess.
 
 > [!TIP]
 > If you change the server password update the credentials.json file with the updated password. This ensures the 
