@@ -180,9 +180,27 @@ resolution manager is being used by your Linux distrubtion is to look at /etc/re
 
     $ ls -l /etc/resolv.conf
 
-* If /etc/resolv.conf is a regular file, then it is most likely being managed by `dhclient`.
 * If /etc/resolv.conf is a symlink to a file in /run/systemd/resolve, then it is being
   managed by `systemd-resolved`
+* If /etc/resolv.conf is a regular file, then it is most likely being managed by `dhclient`.  
+
+#### systemd-resolved
+
+Enable a supported mode of operation for resolvd that bypasses the stub listener by symlinking libc's 
+resolv.conf file to resolved's generated resolv.conf file. See systemd-resolved(8) for more details about this mode.
+
+    $ sudo ln -sfvn /run/systemd/resolve/resolv.conf /etc/resolv.conf
+    
+Configure a resolved configuration include for Ziti
+
+    $ sudo mkdir -p /etc/systemd/resolved.conf.d/
+    $ echo -e "[Resolve]\nDNS=127.0.0.1" | sudo tee /etc/systemd/resolved.conf.d/ziti-tunnel.conf
+    $ sudo systemctl restart systemd-resolved
+
+If you are unable to control the resolver on your operating system, ziti-tunnel can use/update a hosts file for
+any hostnames that it tunnels:
+
+    ziti-tunnel run --resolver file:///etc/hosts "${HOME}/ziti.json"
 
 #### dhclient
 
@@ -193,17 +211,6 @@ ziti-tunnel's internal DNS server first by adding the following to /etc/dhcp/dhc
 
 Then restart network manager. Unless you know the name of the NetworkManager systemd
 service on your Linux distrubtion, it's probably easiest to reboot the host.
-
-#### systemd-resolved
-
-    $ sudo ln -sf /run/systemd/resolve/resolv.conf /etc
-    $ echo -e "[Resolve]\nDNS=127.0.0.1" | sudo tee /etc/systemd/resolved.conf.d/ziti-tunnel.conf
-    $ sudo systemctl restart systemd-resolved
-
-If you are unable to control the resolver on your operating system, ziti-tunnel can use/update a hosts file for
-any hostnames that it tunnels:
-
-    ziti-tunnel run --resolver file:///etc/hosts "${HOME}/ziti.json"
 
 #### IP Address Assignment
 

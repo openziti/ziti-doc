@@ -32,7 +32,7 @@ core of the Ziti Fabric SDK.
 A Ziti Controller is a process that is installed on a host, which allows it to coordinate a Ziti network. The Ziti Controller is designed to be extensible through Ziti fabric extension mechanisms (Xctrl, Xmgmt), which means that it is capable of hosting extensions to the fabric control and management planes.
 
 ## Ziti Edge, Edge
-The Ziti Edge implements the zero trust connectivity framework as an overlay application on top of the Ziti Fabric. The Ziti Edge provides connectivity implementations for a number of important endpoint types, including applications that embed Ziti connectivity through the Ziti Edge SDK. The Ziti Edge provides fallback connectivity solutions for non-Ziti applications using components like the Ziti tunnelers, and the Ziti proxy.
+The Ziti Edge implements the zero trust connectivity framework as an overlay application on top of the Ziti Fabric. The Ziti Edge provides connectivity implementations for a number of important endpoint types, including applications that embed Ziti connectivity through the Ziti Endpoint SDK. The Ziti Edge provides fallback connectivity solutions for non-Ziti applications using components like the Ziti tunnelers, and the Ziti proxy.
 
 ## Ziti Enabled Application
 A Ziti Enabled Application is an application that embeds the Ziti Endpoint SDK, such that it can participate on a Ziti network to either access or host services.
