@@ -187,8 +187,7 @@ resolution manager is being used by your Linux distrubtion is to look at /etc/re
 #### systemd-resolved
 
 Enable a supported mode of operation for resolvd that bypasses the stub listener by symlinking libc's 
-resolv.conf file to resolved's generated resolv.conf file and (refer to `man 8 systemd-resolved` for 
-more about this mode).
+resolv.conf file to resolved's generated resolv.conf file. See systemd-resolved(8) for more details about this mode.
 
     $ sudo ln -sfvn /run/systemd/resolve/resolv.conf /etc/resolv.conf
     
