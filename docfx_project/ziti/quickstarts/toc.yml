@@ -10,4 +10,4 @@
 - name: Kubernetes
   items:
   - name: Sidecar Tunneler
-    href: kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.md
+    href: ~/ziti-cmd/quickstart/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.md

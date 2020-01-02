@@ -513,6 +513,41 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti-cmd/quickstart/docker/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti-cmd/quickstart/docker/README.html",
+          "hash": "RAXzjCw0wE+SAT+dqqY5Xg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti-cmd/quickstart/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti-cmd/quickstart/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.html",
+          "hash": "mefBFk0zebQipfIyGIe19g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-cmd/quickstart/kubernetes/sidecar-tunnel/sidecar-diagram.svg",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-cmd/quickstart/kubernetes/sidecar-tunnel/sidecar-diagram.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/appwans.md",
       "output": {
         ".html": {
@@ -997,7 +1032,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/pki-troubleshooting.html",
-          "hash": "a7XtLGVr/ELoKXHtc78iww=="
+          "hash": "f/b3o+51zUnJFQTIX3IZsw=="
         }
       },
       "is_incremental": false,
@@ -1009,7 +1044,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/pki.html",
-          "hash": "kpnuk0Vvm4W01STrI90cdw=="
+          "hash": "B+0kaZWx3bwf4DSXW9pXgw=="
         }
       },
       "is_incremental": false,
@@ -1066,7 +1101,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/manage/troubleshooting.html",
-          "hash": "CrNDW6fT8gvYRlNIF204yw=="
+          "hash": "SISOsmT9POAqFf7QAqCeBg=="
         }
       },
       "is_incremental": false,
@@ -1090,7 +1125,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/overview.html",
-          "hash": "tCxxrZB+zOBEjZvW/i9oYg=="
+          "hash": "kF/lxpdmVopFrJOo9vyxgA=="
         }
       },
       "is_incremental": false,
@@ -1115,29 +1150,6 @@
         ".html": {
           "relative_path": "ziti/quickstarts/kubernetes/README.html",
           "hash": "IB6gSe1bzCrfnlBv4Z1Dlg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "ziti/quickstarts/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/quickstarts/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.html",
-          "hash": "GzQ3mgVgvUpmkDp5W+qwpw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "ziti/quickstarts/kubernetes/sidecar-tunnel/sidecar-diagram.svg",
-      "output": {
-        "resource": {
-          "relative_path": "ziti/quickstarts/kubernetes/sidecar-tunnel/sidecar-diagram.svg"
         }
       },
       "is_incremental": false,
@@ -1245,7 +1257,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/toc.html",
-          "hash": "JNCXz0k6/eC7PbBWYs5i5g=="
+          "hash": "xV9slWXt5NFQSepruva6aA=="
         }
       },
       "is_incremental": false,
@@ -1261,13 +1273,6 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -1275,11 +1280,18 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 68,
-          "skipped_file_count": 68
+          "total_file_count": 69,
+          "skipped_file_count": 67
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

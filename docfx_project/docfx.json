@@ -25,6 +25,8 @@
         "files": [
           "ziti/**/*.md",
           "ziti/**/toc.yml",
+          "ziti-cmd/quickstart/**/*.md",
+          "ziti-cmd/quickstart/**/toc.yml",
           "glossary/**/*.md",
           "glossary/**/toc.yml",
           "samples/**/*.md",
@@ -40,6 +42,7 @@
           "images/**",
           "ziti/manage/*.yaml",
           "ziti/**/sidecar-diagram.svg",
+          "ziti-cmd/**/*.svg",
           "index.html"
         ]
       }
