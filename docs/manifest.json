@@ -491,7 +491,7 @@
       "output": {
         ".html": {
           "relative_path": "samples/index.html",
-          "hash": "TosNcLO+PnRcejqBAbCDBA=="
+          "hash": "JiUt1TfLlAtOO4fevKt+0A=="
         }
       },
       "is_incremental": false,
@@ -646,7 +646,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/clients/android.html",
-          "hash": "/AV5iL+cFfktrTGrGZXT5A=="
+          "hash": "0gqAJdVeiLTXwY6qgbK3Og=="
         }
       },
       "is_incremental": false,
@@ -766,7 +766,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/clients/tunneler.html",
-          "hash": "QjTHZopTHv+ZY6gWcgGmCQ=="
+          "hash": "BuJiPu+1XVOVoiMj4QzBIQ=="
         }
       },
       "is_incremental": false,
@@ -1295,13 +1295,6 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
@@ -1312,11 +1305,18 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 69,
-          "skipped_file_count": 69
+          "skipped_file_count": 66
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
