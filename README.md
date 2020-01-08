@@ -3,34 +3,21 @@
 ## Prerequisite
 
 * [docfx](https://dotnet.github.io/docfx/) needs to be on your path
-* Windows - Tested to build in windows at this time - mac/linux to come in the future
-
+* Linux - Documentation is run routinely by our CI
+* Windows - Developed with [Windows Subsytem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+* Doxygen - [Doxygen](http://www.doxygen.nl/) is used to generate the api documentation for the CLANG SDK and is
+  necessary to be on the path
+  
 ## Building the Doc
 
-Right now docfx and github aren't 100% in alignment. Github offers [github pages](https://pages.github.com/)
-which this project uses. Github has a few options for where you can put your doc - specifically /docs is used.
+Github offers [github pages](https://pages.github.com/) which this project uses to host the output of building the
+static content. Github has a few options for where you can put your doc at this time, the master branch, a folder on the
+master branch named 'docs' or a special branch that still works named "gh-pages". This project is currently configured
+to use the master branch and docs folder.
 
-The best/easiest thing to do in order to build these docs is to clone the repository and then rm the docs
-folder and replace it with a link.  Here are the steps to make that happen.
+The best/easiest thing to do in order to build these docs is to have Windows Subsytem for Linux installed or any shell
+which can execute a `.sh` script. As of 2020 there's a multitude of ways to get a bash/shell interpreter in windows.
+It's not feasible to test all these shells to make sure this script works so it's encouraged that you use a linux-based
+flavor of bash. If the script doesn't funtion - open an [issue](./issues) and someone will look into it.
 
-* start a plain 'cmd' or powershell shell. Do _NOT_ use a "Developer Command Prompt for VS 201x". There is
-a bug in docfx as of Oct 11 that will cause docfx to fail.
-* clone the repo: `git clone git@github.com:nf-dev/ziti-doc.git`
-* clone all necessary referenced repositories and ensure they are at the same level as ziti-doc. For example this
-  project refers to the clang and csharp sdk.  In order for the doc to build correctly the folder that contains this
-  checkout needs both `ziti-sdk-c` and `ziti-sdk-csharp` at the same level such as: `ls -1 %GITHUB_ROOT%` would produce something
-  like:
-
-```ls -1 %GITHUB_ROOT% | sort
-NetFoundry.github.io
-nf-dev.github.io
-ziti-cmd
-ziti-doc
-ziti-doc-pre-move
-ziti-edge
-ziti-sdk-c
-ziti-sdk-csharp
-ziti-sdk-jvm
-```
-
-* regenerate the docfx site: `docfx %GITHUB_ROOT%\ziti-doc\docfx_project\docfx.json`
+After cloning this repository open the bash shell and execute the [](build-doc.sh) script.

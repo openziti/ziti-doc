@@ -1,17 +1,8 @@
 var searchData=
 [
-  ['nf_5faccept_37',['NF_accept',['../ziti_8h.html#a58af80ef7d3226fbe177ffd6a0e5df02',1,'ziti.h']]],
-  ['nf_5fclose_38',['NF_close',['../ziti_8h.html#a6ed5bfd8cc548b59b675e000b4c37629',1,'ziti.h']]],
-  ['nf_5fconn_5fdata_39',['NF_conn_data',['../ziti_8h.html#afa909fb55c3714dedb8b152d37e659bf',1,'ziti.h']]],
-  ['nf_5fconn_5finit_40',['NF_conn_init',['../ziti_8h.html#a04069ee96060ed7e8ead1badc19d24f8',1,'ziti.h']]],
-  ['nf_5fdial_41',['NF_dial',['../ziti_8h.html#acd8423a36c4814f17fb7206fd1342a0a',1,'ziti.h']]],
-  ['nf_5fdump_42',['NF_dump',['../ziti_8h.html#a5e25c5f02dc46c4804ce47139f7db8aa',1,'ziti.h']]],
-  ['nf_5ffree_43',['NF_free',['../ziti_8h.html#a992cdfc615e9d8fdfc4ffcd69ef3f1d3',1,'ziti.h']]],
-  ['nf_5finit_44',['NF_init',['../ziti_8h.html#a008c2d52128a04f943a76991f51d7e08',1,'ziti.h']]],
-  ['nf_5finit_5fwith_5ftls_45',['NF_init_with_tls',['../ziti_8h.html#ae04053b556b1935cdb66de3288042a4e',1,'ziti.h']]],
-  ['nf_5flisten_46',['NF_listen',['../ziti_8h.html#a8114a341795ae91ca251ef627c32c182',1,'ziti.h']]],
-  ['nf_5fservice_5favailable_47',['NF_service_available',['../ziti_8h.html#a7afd0cb1434488b4784e79aed86bc56b',1,'ziti.h']]],
-  ['nf_5fset_5ftimeout_48',['NF_set_timeout',['../ziti_8h.html#aa5d4ef44a5dc338c85d9d0e74543d9bb',1,'ziti.h']]],
-  ['nf_5fshutdown_49',['NF_shutdown',['../ziti_8h.html#a4e53041cdab4b8a1fa8deb3adad52498',1,'ziti.h']]],
-  ['nf_5fwrite_50',['NF_write',['../ziti_8h.html#a7be5d72f5a17dbc6372bbda75b03501c',1,'ziti.h']]]
+  ['body_5fcb_333',['body_cb',['../controller_8c.html#afc623fc9a644d0010d041bf3a41172ef',1,'controller.c']]],
+  ['buffer_5fappend_334',['buffer_append',['../buffer_8c.html#a4a0fb73377941d28d539d8533452072f',1,'buffer_append(buffer *b, uint8_t *buf, uint32_t len):&#160;buffer.c'],['../buffer_8h.html#adab503ec374f3cb31998ddad5043b118',1,'buffer_append(buffer *, uint8_t *buf, uint32_t len):&#160;buffer.c']]],
+  ['buffer_5favailable_335',['buffer_available',['../buffer_8c.html#a4f298f0bacc4efa4bf44717256157b20',1,'buffer_available(buffer *b):&#160;buffer.c'],['../buffer_8h.html#a856d1420ac4af731e20a9c46a51ff7f3',1,'buffer_available(buffer *):&#160;buffer.c']]],
+  ['buffer_5fcleanup_336',['buffer_cleanup',['../buffer_8c.html#a7239b0f0e7494d3a38cbcf9a5a72adcb',1,'buffer_cleanup(buffer *b):&#160;buffer.c'],['../buffer_8h.html#aaefe7d270b50704b666b4dac86cea127',1,'buffer_cleanup(buffer *):&#160;buffer.c']]],
+  ['buffer_5fget_5fnext_337',['buffer_get_next',['../buffer_8c.html#afbeef07a70dac805a00990e9b37a1bf0',1,'buffer_get_next(buffer *b, uint32_t want, uint8_t **ptr):&#160;buffer.c'],['../buffer_8h.html#af1998e8e7679d92370867530803bc01c',1,'buffer_get_next(buffer *, uint32_t want, uint8_t **ptr):&#160;buffer.c']]]
 ];

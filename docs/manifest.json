@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "c:/git/github/ziti-doc/docfx_project",
+  "source_base_path": "c:/git/github/dovh/ziti-doc/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -26,10 +26,44 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "api/clang/index.html",
+      "source_relative_path": "api/clang/api/index.html",
       "output": {
         "resource": {
-          "relative_path": "api/clang/index.html"
+          "relative_path": "api/clang/api/index.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/nomatches.html",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/nomatches.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/clang/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/clang/index.html",
+          "hash": "E3x1yQ+8ow7sQK/exHnkkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/redir.html",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/redir.html"
         }
       },
       "is_incremental": false,
@@ -216,15 +250,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "wKiRQY5pIq+sOYN2mfWBPg=="
+          "hash": "aTQTHfw1ZP4kNsbLwHtRZw=="
         }
       },
       "is_incremental": false,
@@ -583,6 +614,28 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/annotated.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/annotated.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/annotated_dup.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/annotated_dup.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/bc_s.png",
       "output": {
         "resource": {
@@ -598,6 +651,61 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/bdwn.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/buffer_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/buffer_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/buffer_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/buffer_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/buffer_8h.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/buffer_8h.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/buffer_8h.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/buffer_8h.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/buffer_8h_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/buffer_8h_source.html"
         }
       },
       "is_incremental": false,
@@ -627,10 +735,142 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/channel_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/channel_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/channel_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/channel_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/classes.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/classes.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/closed.png",
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/closed.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/config_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/config_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/config_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/config_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/connect_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/connect_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/connect_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/connect_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/controller_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/controller_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/controller_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/controller_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/controller_8h.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/controller_8h.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/controller_8h.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/controller_8h.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/controller_8h_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/controller_8h_source.html"
         }
       },
       "is_incremental": false,
@@ -675,6 +915,28 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/dir_478c7cfeefbbf1ec7a045dba74fbc00e.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/dir_e3d620c6b6fdb93ed3bc6186215bde2e.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/dir_e3d620c6b6fdb93ed3bc6186215bde2e.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/dir_e3d620c6b6fdb93ed3bc6186215bde2e.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/dir_e3d620c6b6fdb93ed3bc6186215bde2e.js"
         }
       },
       "is_incremental": false,
@@ -730,6 +992,50 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/dynsections.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/endian__internal_8h.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/endian__internal_8h.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/endian__internal_8h_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/endian__internal_8h_source.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/errors_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/errors_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/errors_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/errors_8c.js"
         }
       },
       "is_incremental": false,
@@ -814,10 +1120,87 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/functions.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/functions.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/functions_func.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/functions_func.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/functions_vars.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/functions_vars.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/globals.html",
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/globals.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_a.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_a.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_b.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_b.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_d.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_d.html"
         }
       },
       "is_incremental": false,
@@ -836,6 +1219,61 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_dup.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_dup.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_e.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_e.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_enum.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_enum.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_eval.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_eval.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_f.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_f.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/globals_func.html",
       "output": {
         "resource": {
@@ -847,10 +1285,175 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_g.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_g.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_h.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_h.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_i.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_i.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_l.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_l.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_m.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_m.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_n.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_n.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_o.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_o.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_p.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_p.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_r.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_r.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_s.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_s.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_t.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_t.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/globals_type.html",
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/globals_type.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_u.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_u.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_vars.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_vars.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_w.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_w.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/globals_z.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/globals_z.html"
         }
       },
       "is_incremental": false,
@@ -906,6 +1509,116 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/menudata.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/message_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/message_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/message_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/message_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/message_8h.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/message_8h.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/message_8h.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/message_8h.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/message_8h_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/message_8h_source.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/model_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/model_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/model_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/model_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/model_8h.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/model_8h.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/model_8h.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/model_8h.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/model_8h_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/model_8h_source.html"
         }
       },
       "is_incremental": false,
@@ -983,6 +1696,17 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/navtreeindex0.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/navtreeindex1.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/navtreeindex1.js"
         }
       },
       "is_incremental": false,
@@ -1071,6 +1795,138 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/search/all_1.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_10.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_10.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_10.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_10.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_11.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_11.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_11.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_11.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_12.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_12.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_12.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_12.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_13.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_13.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_13.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_13.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_14.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_14.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_14.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_14.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_15.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_15.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_15.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_15.js"
         }
       },
       "is_incremental": false,
@@ -1188,6 +2044,380 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_7.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_7.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_7.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_8.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_8.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_8.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_8.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_9.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_9.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_9.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_9.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_a.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_a.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_a.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_a.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_b.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_b.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_b.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_b.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_d.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_d.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_d.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_d.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_e.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_e.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_e.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_e.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_f.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_f.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/all_f.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/all_f.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_0.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_0.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_0.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_1.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_1.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_1.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_2.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_2.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_2.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_3.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_3.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_3.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_4.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_4.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_4.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_4.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_5.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_5.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_5.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_5.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_6.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_6.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_6.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_6.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_7.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_7.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/classes_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/classes_7.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/search/close.png",
       "output": {
         "resource": {
@@ -1236,6 +2466,556 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/search/defines_1.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_2.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_2.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_2.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_3.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_3.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_3.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_4.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_4.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_4.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_4.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_5.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_5.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_5.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_5.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_6.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_6.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_6.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_6.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_7.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_7.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_7.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_8.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_8.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_8.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_8.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_9.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_9.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_9.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_9.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_a.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_a.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_a.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_a.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_b.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_b.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_b.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_b.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_d.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_d.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_d.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_d.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_e.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_e.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_e.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_e.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_f.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_f.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/defines_f.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/defines_f.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enums_0.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enums_0.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enums_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enums_0.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enums_1.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enums_1.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enums_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enums_1.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enums_2.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enums_2.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enums_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enums_2.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_0.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_0.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_0.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_1.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_1.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_1.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_2.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_2.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_2.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_3.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_3.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_3.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_4.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_4.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_4.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_4.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_5.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_5.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_5.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_5.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_6.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_6.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_6.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_6.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_7.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_7.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/enumvalues_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/enumvalues_7.js"
         }
       },
       "is_incremental": false,
@@ -1353,6 +3133,94 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/files_5.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/files_5.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/files_5.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/files_5.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/files_6.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/files_6.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/files_6.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/files_6.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/files_7.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/files_7.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/files_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/files_7.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/files_8.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/files_8.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/files_8.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/files_8.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/search/functions_0.html",
       "output": {
         "resource": {
@@ -1390,6 +3258,292 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/search/functions_1.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_2.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_2.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_2.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_3.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_3.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_3.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_4.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_4.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_4.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_4.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_5.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_5.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_5.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_5.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_6.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_6.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_6.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_6.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_7.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_7.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_7.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_8.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_8.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_8.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_8.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_9.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_9.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_9.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_9.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_a.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_a.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_a.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_a.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_b.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_b.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_b.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_b.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_d.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_d.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_d.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_d.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_e.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_e.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/functions_e.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/functions_e.js"
         }
       },
       "is_incremental": false,
@@ -1551,10 +3705,890 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_1.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_1.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_1.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_2.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_2.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_2.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_3.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_3.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_3.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_4.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_4.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_4.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_4.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_5.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_5.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_5.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_5.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_6.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_6.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_6.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_6.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_7.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_7.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_7.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_8.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_8.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/typedefs_8.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/typedefs_8.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_0.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_0.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_0.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_1.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_1.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_1.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_2.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_2.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_2.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_3.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_3.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_3.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_4.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_4.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_4.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_4.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_5.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_5.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_5.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_5.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_6.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_6.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_6.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_6.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_7.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_7.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_7.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_8.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_8.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_8.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_8.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_9.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_9.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_9.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_9.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_a.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_a.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_a.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_a.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_b.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_b.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_b.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_b.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_d.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_d.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_d.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_d.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_e.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_e.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_e.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_e.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_f.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_f.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/search/variables_f.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/search/variables_f.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/splitbar.png",
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/splitbar.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structasync__write__req.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structasync__write__req.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structasync__write__req.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structasync__write__req.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structbuffer__s.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structbuffer__s.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structch__conn__req.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structch__conn__req.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structch__conn__req.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structch__conn__req.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structchunk__s.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structchunk__s.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structchunk__s.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structchunk__s.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structcontroller__resp.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structcontroller__resp.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structcontroller__resp.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structcontroller__resp.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structhdr__t.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structhdr__t.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structhdr__t.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structhdr__t.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structheader__t.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structheader__t.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structheader__t.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structheader__t.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structmessage.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structmessage.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structmessage.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structmessage.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__conn.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__conn.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__conn.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__conn.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__conn__req.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__conn__req.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__conn__req.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__conn__req.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__ctx.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__ctx.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__ctx.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__ctx.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__init__req.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__init__req.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__init__req.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__init__req.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__write__req.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__write__req.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structnf__write__req.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structnf__write__req.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structwaiter__s.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structwaiter__s.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structwaiter__s.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structwaiter__s.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structziti__channel.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structziti__channel.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/structziti__channel.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/structziti__channel.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/strutils_8h.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/strutils_8h.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/strutils_8h.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/strutils_8h.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/strutils_8h_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/strutils_8h_source.html"
         }
       },
       "is_incremental": false,
@@ -1639,6 +4673,50 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/utils_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/utils_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/utils_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/utils_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/ziti_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/ziti_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/ziti_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/ziti_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "ziti-sdk-c/api/ziti_8h.html",
       "output": {
         "resource": {
@@ -1665,6 +4743,61 @@
       "output": {
         "resource": {
           "relative_path": "ziti-sdk-c/api/ziti_8h_source.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/zt__auth_8c.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/zt__auth_8c.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/zt__auth_8c.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/zt__auth_8c.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/zt__internal_8h.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/zt__internal_8h.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/zt__internal_8h.js",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/zt__internal_8h.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-sdk-c/api/zt__internal_8h_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-sdk-c/api/zt__internal_8h_source.html"
         }
       },
       "is_incremental": false,
@@ -2414,7 +5547,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 68,
+          "total_file_count": 69,
           "skipped_file_count": 68
         },
         "ManagedReferenceDocumentProcessor": {

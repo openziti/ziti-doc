@@ -34,12 +34,24 @@ var NAVTREE =
       ] ]
     ] ],
     [ "Getting Started With the Ziti C SDK", "md_doc_overview.html", null ],
+    [ "Data Structures", "annotated.html", [
+      [ "Data Structures", "annotated.html", "annotated_dup" ],
+      [ "Data Structure Index", "classes.html", null ],
+      [ "Data Fields", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
-        [ "All", "globals.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -48,7 +60,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"building.html"
+"annotated.html",
+"structnf__conn.html#ade27763bc90720821472fd275e287e43"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

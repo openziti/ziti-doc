@@ -2,8 +2,6 @@ var ziti_8h =
 [
     [ "nf_client_cb", "ziti_8h.html#a876c1b497f11eb212c95ec95e8fe112c", null ],
     [ "nf_conn_cb", "ziti_8h.html#a69f736c61bb503887114393cc2c27b78", null ],
-    [ "nf_connection", "ziti_8h.html#a8f7f3058686d6698581db948a2414162", null ],
-    [ "nf_context", "ziti_8h.html#ad68072832e06e440d58ea0d7b4531635", null ],
     [ "nf_data_cb", "ziti_8h.html#ad119319c38f685068770e12e1e97d89f", null ],
     [ "nf_init_cb", "ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6", null ],
     [ "nf_listen_cb", "ziti_8h.html#ab7e6db1f4b7b428279687994ac0d290d", null ],

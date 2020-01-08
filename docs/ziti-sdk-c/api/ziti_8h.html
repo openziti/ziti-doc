@@ -99,21 +99,17 @@ $(document).ready(function(){initNavTree('ziti_8h.html',''); initResizable(); })
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ad68072832e06e440d58ea0d7b4531635"><td class="memItemLeft" align="right" valign="top">typedef struct nf_ctx *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a></td></tr>
-<tr class="separator:ad68072832e06e440d58ea0d7b4531635"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f7f3058686d6698581db948a2414162"><td class="memItemLeft" align="right" valign="top">typedef struct nf_conn *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a></td></tr>
-<tr class="separator:a8f7f3058686d6698581db948a2414162"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35e4fd984cab2b59b5aebc42dfa0f8d6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">nf_init_cb</a>) (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, int status, void *init_ctx)</td></tr>
+<tr class="memitem:a35e4fd984cab2b59b5aebc42dfa0f8d6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">nf_init_cb</a>) (nf_context <a class="el" href="structnf__ctx.html">nf_ctx</a>, int status, void *init_ctx)</td></tr>
 <tr class="separator:a35e4fd984cab2b59b5aebc42dfa0f8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad119319c38f685068770e12e1e97d89f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">nf_data_cb</a>) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, uint8_t *data, int length)</td></tr>
+<tr class="memitem:ad119319c38f685068770e12e1e97d89f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">nf_data_cb</a>) (nf_connection conn, uint8_t *data, int length)</td></tr>
 <tr class="separator:ad119319c38f685068770e12e1e97d89f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69f736c61bb503887114393cc2c27b78"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a69f736c61bb503887114393cc2c27b78">nf_conn_cb</a>) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, int status)</td></tr>
+<tr class="memitem:a69f736c61bb503887114393cc2c27b78"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a69f736c61bb503887114393cc2c27b78">nf_conn_cb</a>) (nf_connection conn, int status)</td></tr>
 <tr class="separator:a69f736c61bb503887114393cc2c27b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a876c1b497f11eb212c95ec95e8fe112c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a876c1b497f11eb212c95ec95e8fe112c">nf_client_cb</a>) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> serv, <a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> client, int status)</td></tr>
+<tr class="memitem:a876c1b497f11eb212c95ec95e8fe112c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a876c1b497f11eb212c95ec95e8fe112c">nf_client_cb</a>) (nf_connection serv, nf_connection client, int status)</td></tr>
 <tr class="separator:a876c1b497f11eb212c95ec95e8fe112c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7e6db1f4b7b428279687994ac0d290d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="ziti_8h.html#a69f736c61bb503887114393cc2c27b78">nf_conn_cb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ab7e6db1f4b7b428279687994ac0d290d">nf_listen_cb</a></td></tr>
 <tr class="separator:ab7e6db1f4b7b428279687994ac0d290d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa10e545f8cebd2d5c6f6c5b989ab2d48"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa10e545f8cebd2d5c6f6c5b989ab2d48">nf_write_cb</a>) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, ssize_t status, void *write_ctx)</td></tr>
+<tr class="memitem:aa10e545f8cebd2d5c6f6c5b989ab2d48"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa10e545f8cebd2d5c6f6c5b989ab2d48">nf_write_cb</a>) (nf_connection conn, ssize_t status, void *write_ctx)</td></tr>
 <tr class="separator:aa10e545f8cebd2d5c6f6c5b989ab2d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -122,29 +118,29 @@ Functions</h2></td></tr>
 <tr class="separator:ae04053b556b1935cdb66de3288042a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a008c2d52128a04f943a76991f51d7e08"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a008c2d52128a04f943a76991f51d7e08">NF_init</a> (const char *config, uv_loop_t *loop, <a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">nf_init_cb</a> cb, void *init_ctx)</td></tr>
 <tr class="separator:a008c2d52128a04f943a76991f51d7e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa5d4ef44a5dc338c85d9d0e74543d9bb">NF_set_timeout</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, int timeout)</td></tr>
+<tr class="memitem:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa5d4ef44a5dc338c85d9d0e74543d9bb">NF_set_timeout</a> (nf_context <a class="el" href="structnf__ctx.html">nf_ctx</a>, int timeout)</td></tr>
 <tr class="separator:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e53041cdab4b8a1fa8deb3adad52498"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a4e53041cdab4b8a1fa8deb3adad52498">NF_shutdown</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx)</td></tr>
+<tr class="memitem:a4e53041cdab4b8a1fa8deb3adad52498"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a4e53041cdab4b8a1fa8deb3adad52498">NF_shutdown</a> (nf_context <a class="el" href="structnf__ctx.html">nf_ctx</a>)</td></tr>
 <tr class="separator:a4e53041cdab4b8a1fa8deb3adad52498"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a992cdfc615e9d8fdfc4ffcd69ef3f1d3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a992cdfc615e9d8fdfc4ffcd69ef3f1d3">NF_free</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> *nf_ctx)</td></tr>
+<tr class="memitem:a992cdfc615e9d8fdfc4ffcd69ef3f1d3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a992cdfc615e9d8fdfc4ffcd69ef3f1d3">NF_free</a> (nf_context *<a class="el" href="structnf__ctx.html">nf_ctx</a>)</td></tr>
 <tr class="separator:a992cdfc615e9d8fdfc4ffcd69ef3f1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e25c5f02dc46c4804ce47139f7db8aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a5e25c5f02dc46c4804ce47139f7db8aa">NF_dump</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx)</td></tr>
+<tr class="memitem:a5e25c5f02dc46c4804ce47139f7db8aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a5e25c5f02dc46c4804ce47139f7db8aa">NF_dump</a> (nf_context <a class="el" href="structnf__ctx.html">nf_ctx</a>)</td></tr>
 <tr class="separator:a5e25c5f02dc46c4804ce47139f7db8aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04069ee96060ed7e8ead1badc19d24f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a04069ee96060ed7e8ead1badc19d24f8">NF_conn_init</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, <a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> *conn, void *data)</td></tr>
+<tr class="memitem:a04069ee96060ed7e8ead1badc19d24f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a04069ee96060ed7e8ead1badc19d24f8">NF_conn_init</a> (nf_context <a class="el" href="structnf__ctx.html">nf_ctx</a>, nf_connection *conn, void *data)</td></tr>
 <tr class="separator:a04069ee96060ed7e8ead1badc19d24f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa909fb55c3714dedb8b152d37e659bf"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#afa909fb55c3714dedb8b152d37e659bf">NF_conn_data</a> (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn)</td></tr>
+<tr class="memitem:afa909fb55c3714dedb8b152d37e659bf"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#afa909fb55c3714dedb8b152d37e659bf">NF_conn_data</a> (nf_connection conn)</td></tr>
 <tr class="separator:afa909fb55c3714dedb8b152d37e659bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7afd0cb1434488b4784e79aed86bc56b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a7afd0cb1434488b4784e79aed86bc56b">NF_service_available</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, const char *service)</td></tr>
+<tr class="memitem:a7afd0cb1434488b4784e79aed86bc56b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a7afd0cb1434488b4784e79aed86bc56b">NF_service_available</a> (nf_context <a class="el" href="structnf__ctx.html">nf_ctx</a>, const char *service)</td></tr>
 <tr class="separator:a7afd0cb1434488b4784e79aed86bc56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd8423a36c4814f17fb7206fd1342a0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#acd8423a36c4814f17fb7206fd1342a0a">NF_dial</a> (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, const char *service, <a class="el" href="ziti_8h.html#a69f736c61bb503887114393cc2c27b78">nf_conn_cb</a> cb, <a class="el" href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">nf_data_cb</a> data_cb)</td></tr>
+<tr class="memitem:acd8423a36c4814f17fb7206fd1342a0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#acd8423a36c4814f17fb7206fd1342a0a">NF_dial</a> (nf_connection conn, const char *service, <a class="el" href="ziti_8h.html#a69f736c61bb503887114393cc2c27b78">nf_conn_cb</a> cb, <a class="el" href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">nf_data_cb</a> data_cb)</td></tr>
 <tr class="separator:acd8423a36c4814f17fb7206fd1342a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8114a341795ae91ca251ef627c32c182"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a8114a341795ae91ca251ef627c32c182">NF_listen</a> (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> serv_conn, const char *service, <a class="el" href="ziti_8h.html#ab7e6db1f4b7b428279687994ac0d290d">nf_listen_cb</a> lcb, <a class="el" href="ziti_8h.html#a876c1b497f11eb212c95ec95e8fe112c">nf_client_cb</a> cb)</td></tr>
+<tr class="memitem:a8114a341795ae91ca251ef627c32c182"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a8114a341795ae91ca251ef627c32c182">NF_listen</a> (nf_connection serv_conn, const char *service, <a class="el" href="ziti_8h.html#ab7e6db1f4b7b428279687994ac0d290d">nf_listen_cb</a> lcb, <a class="el" href="ziti_8h.html#a876c1b497f11eb212c95ec95e8fe112c">nf_client_cb</a> cb)</td></tr>
 <tr class="separator:a8114a341795ae91ca251ef627c32c182"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58af80ef7d3226fbe177ffd6a0e5df02"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a58af80ef7d3226fbe177ffd6a0e5df02">NF_accept</a> (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> clt, <a class="el" href="ziti_8h.html#a69f736c61bb503887114393cc2c27b78">nf_conn_cb</a> cb, <a class="el" href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">nf_data_cb</a> data_cb)</td></tr>
+<tr class="memitem:a58af80ef7d3226fbe177ffd6a0e5df02"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a58af80ef7d3226fbe177ffd6a0e5df02">NF_accept</a> (nf_connection clt, <a class="el" href="ziti_8h.html#a69f736c61bb503887114393cc2c27b78">nf_conn_cb</a> cb, <a class="el" href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">nf_data_cb</a> data_cb)</td></tr>
 <tr class="separator:a58af80ef7d3226fbe177ffd6a0e5df02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ed5bfd8cc548b59b675e000b4c37629"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a6ed5bfd8cc548b59b675e000b4c37629">NF_close</a> (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> *conn)</td></tr>
+<tr class="memitem:a6ed5bfd8cc548b59b675e000b4c37629"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a6ed5bfd8cc548b59b675e000b4c37629">NF_close</a> (nf_connection *conn)</td></tr>
 <tr class="separator:a6ed5bfd8cc548b59b675e000b4c37629"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7be5d72f5a17dbc6372bbda75b03501c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a7be5d72f5a17dbc6372bbda75b03501c">NF_write</a> (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, uint8_t *data, size_t length, <a class="el" href="ziti_8h.html#aa10e545f8cebd2d5c6f6c5b989ab2d48">nf_write_cb</a>, void *write_ctx)</td></tr>
+<tr class="memitem:a7be5d72f5a17dbc6372bbda75b03501c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a7be5d72f5a17dbc6372bbda75b03501c">NF_write</a> (nf_connection conn, uint8_t *data, size_t length, <a class="el" href="ziti_8h.html#aa10e545f8cebd2d5c6f6c5b989ab2d48">nf_write_cb</a>, void *write_ctx)</td></tr>
 <tr class="separator:a7be5d72f5a17dbc6372bbda75b03501c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -155,7 +151,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* nf_client_cb) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> serv, <a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> client, int status)</td>
+          <td class="memname">typedef void(* nf_client_cb) (nf_connection serv, nf_connection client, int status)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -169,35 +165,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* nf_conn_cb) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, int status)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8f7f3058686d6698581db948a2414162"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f7f3058686d6698581db948a2414162">&#9670;&nbsp;</a></span>nf_connection</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct nf_conn* <a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad68072832e06e440d58ea0d7b4531635"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad68072832e06e440d58ea0d7b4531635">&#9670;&nbsp;</a></span>nf_context</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct nf_ctx* <a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a></td>
+          <td class="memname">typedef void(* nf_conn_cb) (nf_connection conn, int status)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -211,7 +179,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* nf_data_cb) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, uint8_t *data, int length)</td>
+          <td class="memname">typedef void(* nf_data_cb) (nf_connection conn, uint8_t *data, int length)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -225,7 +193,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* nf_init_cb) (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, int status, void *init_ctx)</td>
+          <td class="memname">typedef void(* nf_init_cb) (nf_context <a class="el" href="structnf__ctx.html">nf_ctx</a>, int status, void *init_ctx)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -253,7 +221,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* nf_write_cb) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, ssize_t status, void *write_ctx)</td>
+          <td class="memname">typedef void(* nf_write_cb) (nf_connection conn, ssize_t status, void *write_ctx)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -270,7 +238,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_accept </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a>&#160;</td>
+          <td class="paramtype">nf_connection&#160;</td>
           <td class="paramname"><em>clt</em>, </td>
         </tr>
         <tr>
@@ -304,7 +272,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_close </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> *&#160;</td>
+          <td class="paramtype">nf_connection *&#160;</td>
           <td class="paramname"><em>conn</em></td><td>)</td>
           <td></td>
         </tr>
@@ -322,7 +290,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void* NF_conn_data </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a>&#160;</td>
+          <td class="paramtype">nf_connection&#160;</td>
           <td class="paramname"><em>conn</em></td><td>)</td>
           <td></td>
         </tr>
@@ -340,13 +308,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_conn_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramtype">nf_context&#160;</td>
           <td class="paramname"><em>nf_ctx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> *&#160;</td>
+          <td class="paramtype">nf_connection *&#160;</td>
           <td class="paramname"><em>conn</em>, </td>
         </tr>
         <tr>
@@ -374,7 +342,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_dial </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a>&#160;</td>
+          <td class="paramtype">nf_connection&#160;</td>
           <td class="paramname"><em>conn</em>, </td>
         </tr>
         <tr>
@@ -414,7 +382,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void NF_dump </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramtype">nf_context&#160;</td>
           <td class="paramname"><em>nf_ctx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -432,7 +400,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> *&#160;</td>
+          <td class="paramtype">nf_context *&#160;</td>
           <td class="paramname"><em>nf_ctx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -536,7 +504,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_listen </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a>&#160;</td>
+          <td class="paramtype">nf_connection&#160;</td>
           <td class="paramname"><em>serv_conn</em>, </td>
         </tr>
         <tr>
@@ -576,7 +544,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_service_available </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramtype">nf_context&#160;</td>
           <td class="paramname"><em>nf_ctx</em>, </td>
         </tr>
         <tr>
@@ -604,7 +572,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_set_timeout </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramtype">nf_context&#160;</td>
           <td class="paramname"><em>nf_ctx</em>, </td>
         </tr>
         <tr>
@@ -632,7 +600,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_shutdown </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramtype">nf_context&#160;</td>
           <td class="paramname"><em>nf_ctx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -650,7 +618,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int NF_write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a>&#160;</td>
+          <td class="paramtype">nf_connection&#160;</td>
           <td class="paramname"><em>conn</em>, </td>
         </tr>
         <tr>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ziti_5ferrorstr_51',['ziti_errorstr',['../errors_8h.html#a2182f9078122799ec98a7c1f17094191',1,'errors.h']]]
+  ['connect_5freply_5fcb_338',['connect_reply_cb',['../connect_8c.html#af2b1f90de4292b4bef39bb5923bf9fd4',1,'connect.c']]]
 ];
