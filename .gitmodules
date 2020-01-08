@@ -1,9 +1,13 @@
 [submodule "docfx_project/ziti-cmd"]
 	path = docfx_project/ziti-cmd
 	url = https://github.com/netfoundry/ziti-cmd
+	update = merge
 [submodule "docfx_project/ziti-sdk-csharp"]
 	path = docfx_project/ziti-sdk-csharp
 	url = https://github.com/netfoundry/ziti-sdk-csharp
+	update = merge
 [submodule "docfx_project/ziti-sdk-c"]
 	path = docfx_project/ziti-sdk-c
 	url = https://github.com/netfoundry/ziti-sdk-c
+	update = merge
+	branch = doxygen-updates

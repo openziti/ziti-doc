@@ -43,7 +43,9 @@
           "ziti/manage/*.yaml",
           "ziti/**/sidecar-diagram.svg",
           "ziti-cmd/**/*.svg",
-          "index.html"
+          "index.html",
+          "ziti-sdk-c/api/**",
+          "api/**/*.html"
         ]
       }
     ],
