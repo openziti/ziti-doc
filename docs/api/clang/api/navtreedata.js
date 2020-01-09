@@ -23,6 +23,16 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Ziti Clang SDK", "index.html", [
+    [ "Building the Project", "building.html", [
+      [ "Prerequisites", "building.html#Prerequisites", [
+        [ "Building Requirements", "building.html#prereqs", null ],
+        [ "Project Initialization", "building.html#initialization", null ]
+      ] ],
+      [ "Building", "building.html#building", [
+        [ "Linux/MacOS", "building.html#linux_mac", null ],
+        [ "Windows", "building.html#win", null ]
+      ] ]
+    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
@@ -37,7 +47,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"dir_09e761304027c904456130627fd4dcf5.html"
+"building.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
