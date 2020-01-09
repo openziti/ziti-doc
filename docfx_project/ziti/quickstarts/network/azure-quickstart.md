@@ -59,7 +59,7 @@ certificates for the newly created DNS entry.
 
 * From the Virtual Machine - click "Access control (IAM)"
 * Click "Add" -> "Add role assignment"
-![image](~/images/azure-add-role.png)
+![image](~/images/azure-add-role.PNG)
 * In the "Add" dialog choose:
   * Role: Network Contributor
   * Assign access to: Virtual Machine
