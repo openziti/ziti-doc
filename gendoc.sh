@@ -6,9 +6,7 @@ if [[ "" = "$DOCFX_EXE" ]]; then
     shopt -s expand_aliases
     source ~/.bash_aliases
 else
-    echo "HEY HEY"
     alias docfx="mono $DOCFX_EXE"
-    alias
 fi
 
 commands_to_test=(doxygen mono docfx)
@@ -53,11 +51,18 @@ popd
 if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
     pushd ${script_root}/docfx_project/ziti-sdk-c
     doxygen
-    cp -rv ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/docs/api/clang
+    echo " "
+    echo "Copying "
+    echo "    from: ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/docs/api/clang"
+    echo "      to: ${script_root}/docs/api/clang"
+    cp -r ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/docs/api/clang
+
+    echo " "
+    echo "Removing"
+    echo "    ${script_root}/docfx_project/ziti-sdk-c/api"
     rm -rf ${script_root}/docfx_project/ziti-sdk-c/api
     popd
 else
     echo "ERROR: CSDK Doxyfile not located"
 fi
 
-command -v $foo >/dev/null 2>&1 || { echo >&2 "I require $foo but it's not installed.  Aborting."; exit 1; }
