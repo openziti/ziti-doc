@@ -25,15 +25,870 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/bc_s.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/bc_s.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/bdwn.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/bdwn.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/closed.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/closed.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/doc.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/doc.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/doxygen.css",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/doxygen.css"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/doxygen.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/doxygen.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/dynsections.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/dynsections.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/folderclosed.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/folderclosed.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/folderopen.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/folderopen.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/index.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/jquery.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/jquery.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/menu.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/menu.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/menudata.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/menudata.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/nav_f.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/nav_f.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/nav_g.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/nav_g.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/nav_h.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/nav_h.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/navtree.css",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/navtree.css"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/navtree.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/navtree.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/navtreedata.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/navtreedata.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/navtreeindex0.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/navtreeindex0.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/open.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/open.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/resize.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/resize.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/close.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/close.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/mag_sel.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/mag_sel.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/nomatches.html",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/nomatches.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/search.css",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/search.css"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/search.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/search.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/search_l.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/search_l.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/search_m.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/search_m.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/search_r.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/search_r.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/search/searchdata.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/search/searchdata.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/splitbar.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/splitbar.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/sync_off.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/sync_off.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/sync_on.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/sync_on.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/tab_a.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/tab_a.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/tab_b.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/tab_b.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/tab_h.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/tab_h.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/tab_s.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/tab_s.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/api/tabs.css",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/api/tabs.css"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/bc_s.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/bc_s.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/bdwn.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/bdwn.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/closed.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/closed.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/doc.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/doc.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/doxygen.css",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/doxygen.css"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/doxygen.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/doxygen.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/dynsections.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/dynsections.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/folderclosed.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/folderclosed.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/folderopen.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/folderopen.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/index.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/jquery.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/jquery.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/menu.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/menu.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/menudata.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/menudata.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/nav_f.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/nav_f.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/nav_g.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/nav_g.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/nav_h.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/nav_h.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/navtree.css",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/navtree.css"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/navtree.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/navtree.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/navtreedata.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/navtreedata.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/navtreeindex0.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/navtreeindex0.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/open.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/open.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/resize.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/resize.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/close.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/close.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/mag_sel.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/mag_sel.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/nomatches.html",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/nomatches.html"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/search.css",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/search.css"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/search.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/search.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/search_l.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/search_l.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/search_m.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/search_m.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/search_r.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/search_r.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/search/searchdata.js",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/search/searchdata.js"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/splitbar.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/splitbar.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/sync_off.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/sync_off.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/sync_on.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/sync_on.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/tab_a.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/tab_a.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/tab_b.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/tab_b.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/tab_h.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/tab_h.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/tab_s.png",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/tab_s.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "api/clang/api/tabs.css",
+      "output": {
+        "resource": {
+          "relative_path": "api/clang/api/tabs.css"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "api/clang/index.md",
       "output": {
         ".html": {
           "relative_path": "api/clang/index.html",
-          "hash": "E3x1yQ+8ow7sQK/exHnkkA=="
+          "hash": "nZcpKNRiQ/uYzSz17qyvkA=="
         }
       },
       "is_incremental": false,

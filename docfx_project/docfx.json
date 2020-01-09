@@ -44,7 +44,7 @@
           "ziti/**/sidecar-diagram.svg",
           "ziti-cmd/**/*.svg",
           "index.html",
-          "ziti-sdk-c/api/**"
+          "api/clang/api/**"
         ]
       }
     ],
