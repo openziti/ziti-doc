@@ -5,7 +5,7 @@
 * [docfx](https://dotnet.github.io/docfx/) needs to be on your path
 * Linux - Documentation is run routinely by our CI
 * Windows - Developed with [Windows Subsytem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
-* Doxygen - [Doxygen](http://www.doxygen.nl/) is used to generate the api documentation for the CLANG SDK and is
+* Doxygen - [Doxygen](http://www.doxygen.nl/) is used to generate the api documentation for the C SDK and is
   necessary to be on the path
   
 ## Building the Doc

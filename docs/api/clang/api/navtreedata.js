@@ -22,7 +22,7 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "Ziti Clang SDK", "index.html", [
+  [ "Ziti C SDK", "index.html", [
     [ "Building the Project", "building.html", [
       [ "Prerequisites", "building.html#Prerequisites", [
         [ "Building Requirements", "building.html#prereqs", null ],
