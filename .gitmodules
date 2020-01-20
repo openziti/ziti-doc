@@ -10,4 +10,4 @@
 	path = docfx_project/ziti-sdk-c
 	url = https://github.com/netfoundry/ziti-sdk-c
 	update = merge
-	branch = doxygen-updates
+	branch = doxygen-updates-2

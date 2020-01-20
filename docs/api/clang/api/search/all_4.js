@@ -1,6 +1,19 @@
 var searchData=
 [
   ['ziti_2eh_28',['ziti.h',['../ziti_8h.html',1,'']]],
-  ['ziti_5ferrors_29',['ZITI_ERRORS',['../errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092',1,'errors.h']]],
-  ['ziti_5ferrorstr_30',['ziti_errorstr',['../errors_8h.html#a2182f9078122799ec98a7c1f17094191',1,'errors.h']]]
+  ['ziti_5fcan_5fbind_29',['ZITI_CAN_BIND',['../ziti_8h.html#a7ad10991d93ba9fbdd3724a7eb64fb76',1,'ziti.h']]],
+  ['ziti_5fcan_5fdial_30',['ZITI_CAN_DIAL',['../ziti_8h.html#a01d00c5d71bfb04e1ded0c3f182f5cc3',1,'ziti.h']]],
+  ['ziti_5fconfig_5fnot_5ffound_31',['ZITI_CONFIG_NOT_FOUND',['../errors_8h.html#ab7f80523d7ec8104c50735bdb5f2818a',1,'errors.h']]],
+  ['ziti_5fconnabort_32',['ZITI_CONNABORT',['../errors_8h.html#a9ac02280a9b31276676bc723ba7f4aba',1,'errors.h']]],
+  ['ziti_5fcontroller_5funavailable_33',['ZITI_CONTROLLER_UNAVAILABLE',['../errors_8h.html#aa2b6a3568c6a435261e751ea64c31c5b',1,'errors.h']]],
+  ['ziti_5feof_34',['ZITI_EOF',['../errors_8h.html#adf68027c57495898fd8bf51ed0bad701',1,'errors.h']]],
+  ['ziti_5ferrors_35',['ZITI_ERRORS',['../errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092',1,'errors.h']]],
+  ['ziti_5ferrorstr_36',['ziti_errorstr',['../errors_8h.html#a2182f9078122799ec98a7c1f17094191',1,'errors.h']]],
+  ['ziti_5fgateway_5funavailable_37',['ZITI_GATEWAY_UNAVAILABLE',['../errors_8h.html#ae7c15b1bb4736d407e8bee75007eb5c0',1,'errors.h']]],
+  ['ziti_5finvalid_5fconfig_38',['ZITI_INVALID_CONFIG',['../errors_8h.html#a8918390961a4837766c0abbd5751c717',1,'errors.h']]],
+  ['ziti_5fnot_5fauthorized_39',['ZITI_NOT_AUTHORIZED',['../errors_8h.html#a7a21163f06d22691e28273c92621547e',1,'errors.h']]],
+  ['ziti_5fok_40',['ZITI_OK',['../errors_8h.html#a58cd556eb411c881903d30ae272984f4',1,'errors.h']]],
+  ['ziti_5fservice_5funavailable_41',['ZITI_SERVICE_UNAVAILABLE',['../errors_8h.html#adce4a78f4190299277ad587530ca5036',1,'errors.h']]],
+  ['ziti_5ftimeout_42',['ZITI_TIMEOUT',['../errors_8h.html#a3b6e0c786cfe90c05611a9ec5d2b1d2b',1,'errors.h']]],
+  ['ziti_5fwtf_43',['ZITI_WTF',['../errors_8h.html#a6cb98ad4d5a5243239c51c92a761fd97',1,'errors.h']]]
 ];

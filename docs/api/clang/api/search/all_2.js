@@ -9,10 +9,10 @@ var searchData=
   ['nf_5fconnection_10',['nf_connection',['../ziti_8h.html#a8f7f3058686d6698581db948a2414162',1,'ziti.h']]],
   ['nf_5fcontext_11',['nf_context',['../ziti_8h.html#ad68072832e06e440d58ea0d7b4531635',1,'ziti.h']]],
   ['nf_5fdata_5fcb_12',['nf_data_cb',['../ziti_8h.html#ad119319c38f685068770e12e1e97d89f',1,'ziti.h']]],
-  ['nf_5fdial_13',['NF_dial',['../ziti_8h.html#acd8423a36c4814f17fb7206fd1342a0a',1,'ziti.h']]],
-  ['nf_5fdump_14',['NF_dump',['../ziti_8h.html#a5e25c5f02dc46c4804ce47139f7db8aa',1,'ziti.h']]],
-  ['nf_5ffree_15',['NF_free',['../ziti_8h.html#a992cdfc615e9d8fdfc4ffcd69ef3f1d3',1,'ziti.h']]],
-  ['nf_5finit_16',['NF_init',['../ziti_8h.html#a008c2d52128a04f943a76991f51d7e08',1,'ziti.h']]],
+  ['nf_5fdefault_5ftimeout_13',['NF_DEFAULT_TIMEOUT',['../ziti_8h.html#a2f2183e804d2b3991b1b6630732bebf0',1,'ziti.h']]],
+  ['nf_5fdial_14',['NF_dial',['../ziti_8h.html#acd8423a36c4814f17fb7206fd1342a0a',1,'ziti.h']]],
+  ['nf_5fdump_15',['NF_dump',['../ziti_8h.html#a5e25c5f02dc46c4804ce47139f7db8aa',1,'ziti.h']]],
+  ['nf_5finit_16',['NF_init',['../ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8',1,'ziti.h']]],
   ['nf_5finit_5fcb_17',['nf_init_cb',['../ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6',1,'ziti.h']]],
   ['nf_5finit_5fwith_5ftls_18',['NF_init_with_tls',['../ziti_8h.html#ae04053b556b1935cdb66de3288042a4e',1,'ziti.h']]],
   ['nf_5flisten_19',['NF_listen',['../ziti_8h.html#a8114a341795ae91ca251ef627c32c182',1,'ziti.h']]],
@@ -21,6 +21,6 @@ var searchData=
   ['nf_5fservice_5fcb_22',['nf_service_cb',['../ziti_8h.html#a48617e3eb5b8f86fdc7178c43b33c5ac',1,'ziti.h']]],
   ['nf_5fset_5ftimeout_23',['NF_set_timeout',['../ziti_8h.html#aa5d4ef44a5dc338c85d9d0e74543d9bb',1,'ziti.h']]],
   ['nf_5fshutdown_24',['NF_shutdown',['../ziti_8h.html#a4e53041cdab4b8a1fa8deb3adad52498',1,'ziti.h']]],
-  ['nf_5fwrite_25',['NF_write',['../ziti_8h.html#a7be5d72f5a17dbc6372bbda75b03501c',1,'ziti.h']]],
+  ['nf_5fwrite_25',['NF_write',['../ziti_8h.html#a14920e2204c48c62aaed663cac3b7abb',1,'ziti.h']]],
   ['nf_5fwrite_5fcb_26',['nf_write_cb',['../ziti_8h.html#aa10e545f8cebd2d5c6f6c5b989ab2d48',1,'ziti.h']]]
 ];

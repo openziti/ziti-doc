@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ziti C SDK: includes/nf/errors.h File Reference</title>
+<title>Ziti C SDK: nf/errors.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,27 +83,72 @@ $(document).ready(function(){initNavTree('errors_8h.html',''); initResizable(); 
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">errors.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Defines the macros, functions, typedefs and constants pertaining to errors observed when using a Ziti Network.  
+<a href="#details">More...</a></p>
 
 <p><a href="errors_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ac40dbb62a3442640d8ea56b9169ac092"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092">ZITI_ERRORS</a>(XX)</td></tr>
+<tr class="memdesc:ac40dbb62a3442640d8ea56b9169ac092"><td class="mdescLeft">&#160;</td><td class="mdescRight">A macro defining the various errors conditions expected to be seen when using the C SDK.  <a href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092">More...</a><br /></td></tr>
 <tr class="separator:ac40dbb62a3442640d8ea56b9169ac092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a947429505002f0c889a011a663ea5a72"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a947429505002f0c889a011a663ea5a72">ERR_ID</a>(e,  _)&#160;&#160;&#160;extern const int ZITI_##e;</td></tr>
+<tr class="memdesc:a947429505002f0c889a011a663ea5a72"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper macro to make declaring expected error conditions easier which is undef'ed immidately.  <a href="errors_8h.html#a947429505002f0c889a011a663ea5a72">More...</a><br /></td></tr>
 <tr class="separator:a947429505002f0c889a011a663ea5a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a2182f9078122799ec98a7c1f17094191"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a2182f9078122799ec98a7c1f17094191">ziti_errorstr</a> (int err)</td></tr>
+<tr class="memdesc:a2182f9078122799ec98a7c1f17094191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a human-readable description for the provided code.  <a href="errors_8h.html#a2182f9078122799ec98a7c1f17094191">More...</a><br /></td></tr>
 <tr class="separator:a2182f9078122799ec98a7c1f17094191"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a58cd556eb411c881903d30ae272984f4"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a58cd556eb411c881903d30ae272984f4">ZITI_OK</a></td></tr>
+<tr class="memdesc:a58cd556eb411c881903d30ae272984f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The expected outcome of a successful operation.  <a href="errors_8h.html#a58cd556eb411c881903d30ae272984f4">More...</a><br /></td></tr>
+<tr class="separator:a58cd556eb411c881903d30ae272984f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f80523d7ec8104c50735bdb5f2818a"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#ab7f80523d7ec8104c50735bdb5f2818a">ZITI_CONFIG_NOT_FOUND</a></td></tr>
+<tr class="memdesc:ab7f80523d7ec8104c50735bdb5f2818a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The provided configuration was not found.  <a href="errors_8h.html#ab7f80523d7ec8104c50735bdb5f2818a">More...</a><br /></td></tr>
+<tr class="separator:ab7f80523d7ec8104c50735bdb5f2818a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8918390961a4837766c0abbd5751c717"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a8918390961a4837766c0abbd5751c717">ZITI_INVALID_CONFIG</a></td></tr>
+<tr class="memdesc:a8918390961a4837766c0abbd5751c717"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some or all of the provided configuration is incorrect.  <a href="errors_8h.html#a8918390961a4837766c0abbd5751c717">More...</a><br /></td></tr>
+<tr class="separator:a8918390961a4837766c0abbd5751c717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a21163f06d22691e28273c92621547e"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a7a21163f06d22691e28273c92621547e">ZITI_NOT_AUTHORIZED</a></td></tr>
+<tr class="memdesc:a7a21163f06d22691e28273c92621547e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returned when the identity does not have the correct level of access needed.  <a href="errors_8h.html#a7a21163f06d22691e28273c92621547e">More...</a><br /></td></tr>
+<tr class="separator:a7a21163f06d22691e28273c92621547e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2b6a3568c6a435261e751ea64c31c5b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#aa2b6a3568c6a435261e751ea64c31c5b">ZITI_CONTROLLER_UNAVAILABLE</a></td></tr>
+<tr class="memdesc:aa2b6a3568c6a435261e751ea64c31c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The SDK has attempted to communicate to the Ziti Controller but the controller is offline or did not respond to the request.  <a href="errors_8h.html#aa2b6a3568c6a435261e751ea64c31c5b">More...</a><br /></td></tr>
+<tr class="separator:aa2b6a3568c6a435261e751ea64c31c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7c15b1bb4736d407e8bee75007eb5c0"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#ae7c15b1bb4736d407e8bee75007eb5c0">ZITI_GATEWAY_UNAVAILABLE</a></td></tr>
+<tr class="memdesc:ae7c15b1bb4736d407e8bee75007eb5c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The SDK cannot send data to the Ziti Network because an Edge Router was not available.  <a href="errors_8h.html#ae7c15b1bb4736d407e8bee75007eb5c0">More...</a><br /></td></tr>
+<tr class="separator:ae7c15b1bb4736d407e8bee75007eb5c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adce4a78f4190299277ad587530ca5036"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#adce4a78f4190299277ad587530ca5036">ZITI_SERVICE_UNAVAILABLE</a></td></tr>
+<tr class="memdesc:adce4a78f4190299277ad587530ca5036"><td class="mdescLeft">&#160;</td><td class="mdescRight">The SDK cannot send data to the Ziti Network because the requested service was not available.  <a href="errors_8h.html#adce4a78f4190299277ad587530ca5036">More...</a><br /></td></tr>
+<tr class="separator:adce4a78f4190299277ad587530ca5036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf68027c57495898fd8bf51ed0bad701"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#adf68027c57495898fd8bf51ed0bad701">ZITI_EOF</a></td></tr>
+<tr class="memdesc:adf68027c57495898fd8bf51ed0bad701"><td class="mdescLeft">&#160;</td><td class="mdescRight">The connection has been closed gracefully.  <a href="errors_8h.html#adf68027c57495898fd8bf51ed0bad701">More...</a><br /></td></tr>
+<tr class="separator:adf68027c57495898fd8bf51ed0bad701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b6e0c786cfe90c05611a9ec5d2b1d2b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a3b6e0c786cfe90c05611a9ec5d2b1d2b">ZITI_TIMEOUT</a></td></tr>
+<tr class="memdesc:a3b6e0c786cfe90c05611a9ec5d2b1d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A connect or write operation did not complete in the alloted timeout.  <a href="errors_8h.html#a3b6e0c786cfe90c05611a9ec5d2b1d2b">More...</a><br /></td></tr>
+<tr class="separator:a3b6e0c786cfe90c05611a9ec5d2b1d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac02280a9b31276676bc723ba7f4aba"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a9ac02280a9b31276676bc723ba7f4aba">ZITI_CONNABORT</a></td></tr>
+<tr class="memdesc:a9ac02280a9b31276676bc723ba7f4aba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The connection has been closed abnormally.  <a href="errors_8h.html#a9ac02280a9b31276676bc723ba7f4aba">More...</a><br /></td></tr>
+<tr class="separator:a9ac02280a9b31276676bc723ba7f4aba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cb98ad4d5a5243239c51c92a761fd97"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a6cb98ad4d5a5243239c51c92a761fd97">ZITI_WTF</a></td></tr>
+<tr class="memdesc:a6cb98ad4d5a5243239c51c92a761fd97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspired by the Android SDK: What a Terrible Failure.  <a href="errors_8h.html#a6cb98ad4d5a5243239c51c92a761fd97">More...</a><br /></td></tr>
+<tr class="separator:a6cb98ad4d5a5243239c51c92a761fd97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Defines the macros, functions, typedefs and constants pertaining to errors observed when using a Ziti Network. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a947429505002f0c889a011a663ea5a72"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a947429505002f0c889a011a663ea5a72">&#9670;&nbsp;</a></span>ERR_ID</h2>
 
@@ -130,6 +175,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>A helper macro to make declaring expected error conditions easier which is undef'ed immidately. </p>
+
 </div>
 </div>
 <a id="ac40dbb62a3442640d8ea56b9169ac092"></a>
@@ -147,20 +194,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    XX(OK, <span class="stringliteral">&quot;OK&quot;</span>) \</div>
-<div class="line">    XX(CONFIG_NOT_FOUND, <span class="stringliteral">&quot;Configuration not found&quot;</span>) \</div>
-<div class="line">    XX(INVALID_CONFIG, <span class="stringliteral">&quot;configuration is invalid&quot;</span>) \</div>
-<div class="line">    XX(NOT_AUTHORIZED, <span class="stringliteral">&quot;Not Authorized&quot;</span>) \</div>
-<div class="line">    XX(CONTROLLER_UNAVAILABLE, <span class="stringliteral">&quot;Ziti Controller is not available&quot;</span>) \</div>
-<div class="line">    XX(GATEWAY_UNAVAILABLE, <span class="stringliteral">&quot;Ziti Gateway is not available&quot;</span>) \</div>
-<div class="line">    XX(SERVICE_UNAVALABLE, <span class="stringliteral">&quot;Service not available&quot;</span>) \</div>
-<div class="line">    XX(EOF, <span class="stringliteral">&quot;Connection closed&quot;</span>) \</div>
-<div class="line">    XX(TIMEOUT, <span class="stringliteral">&quot;Operation did not complete in time&quot;</span>) \</div>
-<div class="line">    XX(CONNABORT, <span class="stringliteral">&quot;Connection to edge router terminated&quot;</span>) \</div>
-<div class="line">    XX(KEY_SPEC_UNSUPPORTED, <span class="stringliteral">&quot;unsupported key specification&quot;</span>) \</div>
-<div class="line">    XX(KEY_INVALID, <span class="stringliteral">&quot;invalid key&quot;</span>) \</div>
-<div class="line">    XX(WTF, <span class="stringliteral">&quot;WTF: programming error&quot;</span>)</div>
-</div><!-- fragment -->
+
+<p>A macro defining the various errors conditions expected to be seen when using the C SDK. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
@@ -180,6 +216,192 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns a human-readable description for the provided code. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ab7f80523d7ec8104c50735bdb5f2818a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7f80523d7ec8104c50735bdb5f2818a">&#9670;&nbsp;</a></span>ZITI_CONFIG_NOT_FOUND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_CONFIG_NOT_FOUND</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The provided configuration was not found. </p>
+
+</div>
+</div>
+<a id="a9ac02280a9b31276676bc723ba7f4aba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ac02280a9b31276676bc723ba7f4aba">&#9670;&nbsp;</a></span>ZITI_CONNABORT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_CONNABORT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The connection has been closed abnormally. </p>
+
+</div>
+</div>
+<a id="aa2b6a3568c6a435261e751ea64c31c5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2b6a3568c6a435261e751ea64c31c5b">&#9670;&nbsp;</a></span>ZITI_CONTROLLER_UNAVAILABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_CONTROLLER_UNAVAILABLE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The SDK has attempted to communicate to the Ziti Controller but the controller is offline or did not respond to the request. </p>
+
+</div>
+</div>
+<a id="adf68027c57495898fd8bf51ed0bad701"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf68027c57495898fd8bf51ed0bad701">&#9670;&nbsp;</a></span>ZITI_EOF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_EOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The connection has been closed gracefully. </p>
+
+</div>
+</div>
+<a id="ae7c15b1bb4736d407e8bee75007eb5c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c15b1bb4736d407e8bee75007eb5c0">&#9670;&nbsp;</a></span>ZITI_GATEWAY_UNAVAILABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_GATEWAY_UNAVAILABLE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The SDK cannot send data to the Ziti Network because an Edge Router was not available. </p>
+<p>Common causes are: * the identity connecting is not associated with any Edge Routers * the Edge Router in use is no longer responding </p>
+
+</div>
+</div>
+<a id="a8918390961a4837766c0abbd5751c717"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8918390961a4837766c0abbd5751c717">&#9670;&nbsp;</a></span>ZITI_INVALID_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_INVALID_CONFIG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Some or all of the provided configuration is incorrect. </p>
+
+</div>
+</div>
+<a id="a7a21163f06d22691e28273c92621547e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a21163f06d22691e28273c92621547e">&#9670;&nbsp;</a></span>ZITI_NOT_AUTHORIZED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_NOT_AUTHORIZED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returned when the identity does not have the correct level of access needed. </p>
+<p>Common causes are: * no policy exists granting the identity access * the certificates presented are incorrect, out of date, or invalid <br  />
+ </p>
+
+</div>
+</div>
+<a id="a58cd556eb411c881903d30ae272984f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58cd556eb411c881903d30ae272984f4">&#9670;&nbsp;</a></span>ZITI_OK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_OK</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The expected outcome of a successful operation. </p>
+
+</div>
+</div>
+<a id="adce4a78f4190299277ad587530ca5036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce4a78f4190299277ad587530ca5036">&#9670;&nbsp;</a></span>ZITI_SERVICE_UNAVAILABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_SERVICE_UNAVAILABLE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The SDK cannot send data to the Ziti Network because the requested service was not available. </p>
+<p>Common causes are: * the service does not exist * the identity connecting is not associated with the given service <br  />
+ </p>
+
+</div>
+</div>
+<a id="a3b6e0c786cfe90c05611a9ec5d2b1d2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b6e0c786cfe90c05611a9ec5d2b1d2b">&#9670;&nbsp;</a></span>ZITI_TIMEOUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_TIMEOUT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A connect or write operation did not complete in the alloted timeout. </p>
+<p>#DEFAULT_TIMEOUT </p>
+
+</div>
+</div>
+<a id="a6cb98ad4d5a5243239c51c92a761fd97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cb98ad4d5a5243239c51c92a761fd97">&#9670;&nbsp;</a></span>ZITI_WTF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ZITI_WTF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inspired by the Android SDK: What a Terrible Failure. </p>
+<p>A condition that should never happen. </p>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -187,7 +409,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_09e761304027c904456130627fd4dcf5.html">includes</a></li><li class="navelem"><a class="el" href="dir_478c7cfeefbbf1ec7a045dba74fbc00e.html">nf</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
+    <li class="navelem"><a class="el" href="dir_8098f81842dff06a8050c494360cd224.html">nf</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

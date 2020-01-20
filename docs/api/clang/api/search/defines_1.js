@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ziti_5ferrors_60',['ZITI_ERRORS',['../errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092',1,'errors.h']]]
+  ['nf_5fdefault_5ftimeout_83',['NF_DEFAULT_TIMEOUT',['../ziti_8h.html#a2f2183e804d2b3991b1b6630732bebf0',1,'ziti.h']]]
 ];
