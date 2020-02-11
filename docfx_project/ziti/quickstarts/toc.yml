@@ -11,3 +11,10 @@
   items:
   - name: Sidecar Tunneler
     href: ~/ziti-cmd/quickstart/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.md
+- name: Hardware Security Modules (HSM)
+  href: hsm-overview.md
+  items:
+  - name: SoftHSM
+    href: hsm/softhsm.md
+  - name: Yubikey
+    href: hsm/yubikey.md
