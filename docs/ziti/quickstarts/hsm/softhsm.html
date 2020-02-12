@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Hardware Security Modules (HSM) | NetFoundry Ziti </title>
+    <title>SoftHSMv2 | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Hardware Security Modules (HSM) | NetFoundry Ziti ">
+    <meta name="title" content="SoftHSMv2 | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../../../images/favicon.ico">
@@ -93,9 +93,282 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="hardware-security-modules-hsm">Hardware Security Modules (HSM)</h1>
+<h1 id="softhsmv2">SoftHSMv2</h1>
 
-<p>This is softhsm</p>
+<h2 id="overview">Overview</h2>
+<p><a href="https://www.opendnssec.org/softhsm/">SoftHSMv2</a> is a purely software-based implementation of PKCS#11. Because it is
+software it is not as secure as a physical HSM but it is very useful to explore the world of PKCS#11 and how it can be
+used with a Ziti-enabled client.</p>
+<p>In this quickstart you will see the commands used to work with SoftHSMv2 and ziti. Since this is a quickstart limited
+context will be provided for each step. When appropriate there will be a small amount of context included to aid in
+understanding of what is happening and why.</p>
+<div class="WARNING"><h5>Warning</h5><p>This quickstart intended audience is for more technically savvy indiviuals. You will need to be familar with the command
+line interface of your operating system.</p>
+</div>
+<h2 id="prerequistites">Prerequistites</h2>
+<ul>
+<li><a href="https://www.opendnssec.org/softhsm/">SoftHSMv2</a> is downloaded and installed in a known location</li>
+<li><a href="https://github.com/OpenSC/OpenSC/wiki">OpenSC</a> is installed and <code>pkcs11-tool</code> is either on the PATH or at a known
+location</li>
+</ul>
+<h2 id="lets-do-this---softhsmv2">Let&#39;s Do This - SoftHSMv2</h2>
+<p>Here&#39;s the list of steps we&#39;ll accomplish in this quickstart:</p>
+<ul>
+<li>Establish a bunch of environment variables to make it easy to copy/paste the other commands</li>
+<li>Make a directory and generate a configuration file for SoftHSM</li>
+<li>Use the <a href="https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti/">Ziti CLI</a> to:<ul>
+<li>create an identity</li>
+<li>enroll the identity</li>
+<li>create a test service</li>
+<li>create test router/service policies</li>
+</ul>
+</li>
+<li>Use the pkcs11-tool provided by OpenSC to interact with SoftHSM to:<ul>
+<li>initialize the SoftHSM driver</li>
+<li>create a key</li>
+</ul>
+</li>
+<li>Use the <a href="https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-tunnel/">ziti-tunnel</a> in proxy mode to verify things
+are working and traffic is flowing over the Ziti Network</li>
+</ul>
+<h3 id="establish-environment-variables">Establish Environment Variables</h3>
+<p>Open a command line and establish the following environment varibles. </p>
+<div class="tabGroup" id="tabgroup_FOdv6PEgws">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws_env-var-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws_env-var-linux" data-tab="env-var-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws_env-var-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws_env-var-windows" data-tab="env-var-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_FOdv6PEgws_env-var-linux" role="tabpanel" data-tab="env-var-linux">
+<pre><code># the name of the ziti controller you&#39;re logging into
+export ZITI_CTRL=local-edge-controller
+# the location of the certificate(s) to use to validate the controller
+export ZITI_CTRL_CERT=/path/to/controller.cert
+
+export ZITI_USER=myUserName
+export ZITI_PWD=myPassword
+
+# a name for the configuration
+export HSM_NAME=softhsm_demo
+
+# the path to the root of the softhsm config files
+export HSM_ROOT=/home/cd/.softhsm
+# location for the config file and tokens to be placed
+export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
+
+# path to the softhsm2 library
+export PKCS11_MODULE=/usr/local/lib/softhsm/libsofthsm2.so
+
+# the id of the key - you probably want to leave these alone unless you know better
+export HSM_ID1=01
+
+# the pins used when accessing the pkcs11 api
+export HSM_SOPIN=1111
+export HSM_PIN=2222
+
+export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
+export SOFTHSM2_CONF=${HSM_DEST}/softhsm.config
+export HSM_LABEL=${HSM_NAME}-label
+export HSM_TOKENS_DIR=&quot;${HSM_DEST}/tokens/&quot;
+
+# make an alias for ease
+alias p=&#39;pkcs11-tool --module $PKCS11_MODULE&#39;
+</code></pre></section>
+<section id="tabpanel_FOdv6PEgws_env-var-windows" role="tabpanel" data-tab="env-var-windows" aria-hidden="true" hidden="hidden">
+<p>Ensure you use the correct dll. If you use an x86 dll with x64 binaries you&#39;ll get an error.</p>
+<pre><code>REM the name of the ziti controller you&#39;re logging into
+SET ZITI_CTRL=local-edge-controller
+REM the location of the certificate(s) to use to validate the controller
+SET ZITI_CTRL_CERT=c:\path\to\controller.cert
+
+SET ZITI_USER=myUserName
+SET ZITI_PWD=myPassword
+
+REM a name for the configuration
+SET HSM_NAME=softhsm_demo
+
+REM the path to the root of the softhsm config files
+SET HSM_ROOT=c:\path\to\softhsm
+REM path to the softhsm2 library
+SET PKCS11_MODULE=%HSM_ROOT%\lib\softhsm2.dll
+--- or ---
+SET PKCS11_MODULE=%HSM_ROOT%\lib\softhsm2-x64.dll
+
+REM the id of the key - you probably want to leave these alone unless you know better
+SET HSM_ID1=01
+SET HSM_ID2=02
+
+REM the pins used when accessing the pkcs11 api
+SET HSM_SOPIN=1111
+SET HSM_PIN=2222
+
+SET HSM_DEST=%HSM_ROOT%\%HSM_NAME%
+SET HSM_LABEL=%HSM_NAME%-label
+SET SOFTHSM2_CONF=%HSM_DEST%\softhsm.config
+SET HSM_TOKENS_DIR=%HSM_DEST%\tokens\
+
+REM make an alias for ease
+doskey p=&quot;c:\Program Files\OpenSC Project\OpenSC\tools\pkcs11-tool.exe&quot; --module %PKCS11_MODULE% $*
+</code></pre></section>
+</div>
+<h3 id="make-directories-and-generate-config-files">Make Directories and Generate Config Files</h3>
+<div class="tabGroup" id="tabgroup_FOdv6PEgws-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-1_dirs-and-config-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-1_dirs-and-config-linux" data-tab="dirs-and-config-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-1_dirs-and-config-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-1_dirs-and-config-windows" data-tab="dirs-and-config-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_FOdv6PEgws-1_dirs-and-config-linux" role="tabpanel" data-tab="dirs-and-config-linux">
+<pre><code>cd ${HSM_ROOT}
+
+rm -rf ${HSM_NAME}
+mkdir -p ${HSM_TOKENS_DIR}
+
+cd ${HSM_NAME}
+
+# Create a text file at ${SOFTHSM2_CONF} with these contents but make sure you replace the tokendir entry with ${HSM_TOKENS_DIR}
+cat &gt; ${SOFTHSM2_CONF} &lt;&lt;HERE
+# SoftHSM v2 configuration file
+
+directories.tokendir = ${HSM_TOKENS_DIR}
+objectstore.backend = file
+
+# ERROR, WARNING, INFO, DEBUG
+log.level = INFO
+
+# If CKF_REMOVABLE_DEVICE flag should be set
+slots.removable = false
+
+# Enable and disable PKCS#11 mechanisms using slots.mechanisms.
+slots.mechanisms = ALL
+HERE
+</code></pre></section>
+<section id="tabpanel_FOdv6PEgws-1_dirs-and-config-windows" role="tabpanel" data-tab="dirs-and-config-windows" aria-hidden="true" hidden="hidden">
+<pre><code>cd /d %HSM_ROOT%
+
+rmdir /s /q %HSM_NAME%
+mkdir %HSM_TOKENS_DIR%
+
+cd /d %HSM_NAME%
+</code></pre><p>Create a text file at %SOFTHSM2_CONF% with these contents but make sure you replace the tokendir entry with %HSM_TOKENS_DIR%</p>
+<pre><code># SoftHSM v2 configuration file
+
+directories.tokendir = _REPLACE_TOKENDIR_
+objectstore.backend = file
+
+# ERROR, WARNING, INFO, DEBUG
+log.level = INFO
+
+# If CKF_REMOVABLE_DEVICE flag should be set
+slots.removable = false
+
+# Enable and disable PKCS#11 mechanisms using slots.mechanisms.
+slots.mechanisms = ALL
+</code></pre></section>
+</div>
+<h3 id="use-the-ziti-cli">Use the Ziti CLI</h3>
+<div class="tabGroup" id="tabgroup_FOdv6PEgws-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-2_ziti-cli-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-2_ziti-cli-linux" data-tab="ziti-cli-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-2_ziti-cli-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-2_ziti-cli-windows" data-tab="ziti-cli-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_FOdv6PEgws-2_ziti-cli-linux" role="tabpanel" data-tab="ziti-cli-linux">
+<pre><code>ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+
+# create a new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;${HSM_NAME}${HSM_ID1}&quot; -o &quot;${HSM_DEST}/${HSM_NAME}${HSM_ID1}.jwt&quot;
+
+# create a second new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;${HSM_NAME}${HSM_ID2}&quot; -o &quot;${HSM_DEST}/${HSM_NAME}${HSM_ID2}.jwt&quot;
+</code></pre></section>
+<section id="tabpanel_FOdv6PEgws-2_ziti-cli-windows" role="tabpanel" data-tab="ziti-cli-windows" aria-hidden="true" hidden="hidden">
+<pre><code>ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+
+REM create a new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;%HSM_NAME%%HSM_ID1%&quot; -o %HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt&quot;
+
+REM create a second new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;%HSM_NAME%%HSM_ID2%&quot; -o %HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt&quot;
+</code></pre></section>
+</div>
+<h3 id="use-pkcs11-tool-to-setup-softhsmv2">Use pkcs11-tool to Setup SoftHSMv2</h3>
+<div class="tabGroup" id="tabgroup_FOdv6PEgws-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-3_pkcs11-tool-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-3_pkcs11-tool-linux" data-tab="pkcs11-tool-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-3_pkcs11-tool-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-3_pkcs11-tool-windows" data-tab="pkcs11-tool-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_FOdv6PEgws-3_pkcs11-tool-linux" role="tabpanel" data-tab="pkcs11-tool-linux">
+<pre><code>p --init-token --label &quot;ziti-test-token&quot; --so-pin $HSM_SOPIN
+p --init-pin --pin $HSM_PIN --so-pin $HSM_SOPIN
+
+# create a couple of keys - one rsa and one ec
+p -p $HSM_PIN -k --key-type rsa:2048 --id &quot;${HSM_ID1}&quot; --label ziti-rsa-key --usage-sign --usage-decrypt
+p -p $HSM_PIN -k --key-type EC:prime256v1 --id ${HSM_ID2} --label ziti-ecdsa-key --usage-sign --usage-decrypt
+</code></pre></section>
+<section id="tabpanel_FOdv6PEgws-3_pkcs11-tool-windows" role="tabpanel" data-tab="pkcs11-tool-windows" aria-hidden="true" hidden="hidden">
+<pre><code>p --init-token --label &quot;ziti-test-token&quot; --so-pin %HSM_SOPIN%
+p --init-pin --pin &quot;%HSM_PIN%&quot; --so-pin %HSM_SOPIN%
+
+REM create a couple of keys - one rsa and one ec
+p -p &quot;%HSM_PIN%&quot; -k --key-type rsa:2048 --id &quot;%HSM_ID1%&quot; --label ziti-rsa-key --usage-sign --usage-decrypt
+p -p &quot;%HSM_PIN%&quot; -k --key-type EC:prime256v1 --id &quot;%HSM_ID2%&quot; --label ziti-ecdsa-key --usage-sign --usage-decrypt
+</code></pre></section>
+</div>
+<h3 id="use-ziti-tunnel-to-verify-things-work">Use ziti-tunnel to Verify Things Work</h3>
+<div class="tabGroup" id="tabgroup_FOdv6PEgws-4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-4_verify-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_verify-linux" data-tab="verify-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-4_verify-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_verify-windows" data-tab="verify-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_FOdv6PEgws-4_verify-linux" role="tabpanel" data-tab="verify-linux">
+<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}1.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
+ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}2.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
+</code></pre></section>
+<section id="tabpanel_FOdv6PEgws-4_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
+<pre><code>ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
+ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&amp;pin=%HSM_PIN%&quot; -v
+</code></pre></section>
+</div>
+<h3 id="putting-it-all-together">Putting It All Together</h3>
+<p>Above we&#39;ve only shown the commands that need to run and not what the output of those commands would look like. Here
+we&#39;ll see all the commands put together along with all the output from the commands. This section is long - you are
+warned!</p>
+<div class="tabGroup" id="tabgroup_FOdv6PEgws-5">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-5_verify-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-5_verify-linux" data-tab="verify-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-5_verify-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-5_verify-windows" data-tab="verify-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_FOdv6PEgws-5_verify-linux" role="tabpanel" data-tab="verify-linux">
+<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}1.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
+ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}2.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
+</code></pre></section>
+<section id="tabpanel_FOdv6PEgws-5_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
+<pre><code>ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
+ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&amp;pin=%HSM_PIN%&quot; -v
+</code></pre></section>
+</div>
 </article>
           </div>
           

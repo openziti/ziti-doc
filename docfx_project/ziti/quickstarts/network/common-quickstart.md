@@ -124,7 +124,7 @@ To create a new service using the CLI simply issue these two commands:
 ## Create an AppWAN
 
 AppWANs are used to to authorize identities to services and allow you to choose the terminating node for traffic
-destined to your service. [Read more about AppWAN here](~/ziti/appwans.md)
+destined to your service. [Read more about AppWAN here](~/ziti/appwans/overview.md)
 
 # [New AppWAN via UI](#tab/create-appwan-ui)
 
