@@ -164,6 +164,7 @@ export PKCS11_MODULE=/usr/local/lib/softhsm/libsofthsm2.so
 
 # the id of the key - you probably want to leave these alone unless you know better
 export HSM_ID1=01
+export HSM_ID2=02
 
 # the pins used when accessing the pkcs11 api
 export HSM_SOPIN=1111
@@ -339,8 +340,8 @@ p -p &quot;%HSM_PIN%&quot; -k --key-type EC:prime256v1 --id &quot;%HSM_ID2%&quot
 </li>
 </ul>
 <section id="tabpanel_FOdv6PEgws-4_verify-linux" role="tabpanel" data-tab="verify-linux">
-<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}1.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
-ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}2.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
+<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}${HSM_ID1}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
+ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}${HSM_ID2}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
 </code></pre></section>
 <section id="tabpanel_FOdv6PEgws-4_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
 <pre><code>ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v

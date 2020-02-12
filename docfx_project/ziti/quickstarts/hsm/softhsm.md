@@ -64,6 +64,7 @@ Open a command line and establish the following environment varibles.
 
     # the id of the key - you probably want to leave these alone unless you know better
     export HSM_ID1=01
+    export HSM_ID2=02
 
     # the pins used when accessing the pkcs11 api
     export HSM_SOPIN=1111
@@ -222,8 +223,8 @@ Create a text file at %SOFTHSM2_CONF% with these contents but make sure you repl
 
 # [Linux/MacOS](#tab/verify-linux)
 
-    ziti-enroller -j "${HSM_DEST}/${HSM_NAME}1.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
-    ziti-enroller -j "${HSM_DEST}/${HSM_NAME}2.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
+    ziti-enroller -j "${HSM_DEST}/${HSM_NAME}${HSM_ID1}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
+    ziti-enroller -j "${HSM_DEST}/${HSM_NAME}${HSM_ID2}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
 
 # [Windows](#tab/verify-windows)
 
