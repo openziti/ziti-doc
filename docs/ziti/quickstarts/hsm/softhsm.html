@@ -169,6 +169,8 @@ export HSM_ID2=02
 # the pins used when accessing the pkcs11 api
 export HSM_SOPIN=1111
 export HSM_PIN=2222
+export RSA_ID=${HSM_NAME}${HSM_ID1}_rsa
+export EC_ID=${HSM_NAME}${HSM_ID2}_ec
 
 export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
 export SOFTHSM2_CONF=${HSM_DEST}/softhsm.config
@@ -201,6 +203,8 @@ SET PKCS11_MODULE=%HSM_ROOT%\lib\softhsm2-x64.dll
 REM the id of the key - you probably want to leave these alone unless you know better
 SET HSM_ID1=01
 SET HSM_ID2=02
+SET RSA_ID=%HSM_NAME%%HSM_ID1%_rsa
+SET EC_ID=%HSM_NAME%%HSM_ID2%_ec
 
 REM the pins used when accessing the pkcs11 api
 SET HSM_SOPIN=1111
@@ -257,20 +261,26 @@ rmdir /s /q %HSM_NAME%
 mkdir %HSM_TOKENS_DIR%
 
 cd /d %HSM_NAME%
-</code></pre><p>Create a text file at %SOFTHSM2_CONF% with these contents but make sure you replace the tokendir entry with %HSM_TOKENS_DIR%</p>
-<pre><code># SoftHSM v2 configuration file
 
-directories.tokendir = _REPLACE_TOKENDIR_
-objectstore.backend = file
+# Create a text file at %SOFTHSM2_CONF% with these contents but make sure you replace the tokendir entry with %HSM_TOKENS_DIR%
+echo ^
+# SoftHSM v2 configuration file ^
 
-# ERROR, WARNING, INFO, DEBUG
-log.level = INFO
+directories.tokendir = %HSM_TOKENS_DIR% ^
 
-# If CKF_REMOVABLE_DEVICE flag should be set
-slots.removable = false
+objectstore.backend = file ^
 
-# Enable and disable PKCS#11 mechanisms using slots.mechanisms.
-slots.mechanisms = ALL
+# ERROR, WARNING, INFO, DEBUG ^
+
+log.level = INFO ^
+
+# If CKF_REMOVABLE_DEVICE flag should be set ^
+
+slots.removable = false ^
+
+# Enable and disable PKCS#11 mechanisms using slots.mechanisms. ^
+
+slots.mechanisms = ALL &gt; %SOFTHSM2_CONF%
 </code></pre></section>
 </div>
 <h3 id="use-the-ziti-cli">Use the Ziti CLI</h3>
@@ -287,19 +297,19 @@ slots.mechanisms = ALL
 <pre><code>ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
 
 # create a new identity and output the jwt to a known location
-ziti edge controller create identity device &quot;${HSM_NAME}${HSM_ID1}&quot; -o &quot;${HSM_DEST}/${HSM_NAME}${HSM_ID1}.jwt&quot;
+ziti edge controller create identity device &quot;${RSA_ID}&quot; -o &quot;${HSM_DEST}/${RSA_ID}.jwt&quot;
 
 # create a second new identity and output the jwt to a known location
-ziti edge controller create identity device &quot;${HSM_NAME}${HSM_ID2}&quot; -o &quot;${HSM_DEST}/${HSM_NAME}${HSM_ID2}.jwt&quot;
+ziti edge controller create identity device &quot;${EC_ID}&quot; -o &quot;${HSM_DEST}/${EC_ID}.jwt&quot;
 </code></pre></section>
 <section id="tabpanel_FOdv6PEgws-2_ziti-cli-windows" role="tabpanel" data-tab="ziti-cli-windows" aria-hidden="true" hidden="hidden">
 <pre><code>ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
 
 REM create a new identity and output the jwt to a known location
-ziti edge controller create identity device &quot;%HSM_NAME%%HSM_ID1%&quot; -o %HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt&quot;
+ziti edge controller create identity device &quot;%RSA_ID%&quot; -o &quot;%HSM_DEST%\%RSA_ID%.jwt&quot;
 
 REM create a second new identity and output the jwt to a known location
-ziti edge controller create identity device &quot;%HSM_NAME%%HSM_ID2%&quot; -o %HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt&quot;
+ziti edge controller create identity device &quot;%EC_ID%&quot; -o &quot;%HSM_DEST%\%EC_ID%.jwt&quot;
 </code></pre></section>
 </div>
 <h3 id="use-pkcs11-tool-to-setup-softhsmv2">Use pkcs11-tool to Setup SoftHSMv2</h3>
@@ -333,19 +343,19 @@ p -p &quot;%HSM_PIN%&quot; -k --key-type EC:prime256v1 --id &quot;%HSM_ID2%&quot
 <div class="tabGroup" id="tabgroup_FOdv6PEgws-4">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_FOdv6PEgws-4_verify-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_verify-linux" data-tab="verify-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+<a href="#tabpanel_FOdv6PEgws-4_start-tunnel-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_start-tunnel-linux" data-tab="start-tunnel-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_FOdv6PEgws-4_verify-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_verify-windows" data-tab="verify-windows" tabindex="-1">Windows</a>
+<a href="#tabpanel_FOdv6PEgws-4_start-tunnel-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_start-tunnel-windows" data-tab="start-tunnel-windows" tabindex="-1">Windows</a>
 </li>
 </ul>
-<section id="tabpanel_FOdv6PEgws-4_verify-linux" role="tabpanel" data-tab="verify-linux">
-<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}${HSM_ID1}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
-ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}${HSM_ID2}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
+<section id="tabpanel_FOdv6PEgws-4_start-tunnel-linux" role="tabpanel" data-tab="start-tunnel-linux">
+<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${RSA_ID}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
+ziti-enroller -j &quot;${HSM_DEST}/${EC_ID}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
 </code></pre></section>
-<section id="tabpanel_FOdv6PEgws-4_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
-<pre><code>ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
-ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&amp;pin=%HSM_PIN%&quot; -v
+<section id="tabpanel_FOdv6PEgws-4_start-tunnel-windows" role="tabpanel" data-tab="start-tunnel-windows" aria-hidden="true" hidden="hidden">
+<pre><code>ziti-enroller -j &quot;%HSM_DEST%\%RSA_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
+ziti-enroller -j &quot;%HSM_DEST%\%EC_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&amp;pin=%HSM_PIN%&quot; -v
 </code></pre></section>
 </div>
 <h3 id="putting-it-all-together">Putting It All Together</h3>
@@ -362,12 +372,52 @@ warned!</p>
 </li>
 </ul>
 <section id="tabpanel_FOdv6PEgws-5_verify-linux" role="tabpanel" data-tab="verify-linux">
-<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}1.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
-ziti-enroller -j &quot;${HSM_DEST}/${HSM_NAME}2.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
+<pre><code># run this command and get the id from the first edge-router.
+ziti edge controller list edge-routers
+
+# use the id returned from the above command and put it into a variable for use in a momment
+EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+
+# remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
+ziti edge controller delete config wttrconfig
+ziti edge controller create config wttrconfig ziti-tunneler-client.v1 &quot;{ \&quot;hostname\&quot; : \&quot;localhost\&quot;, \&quot;port\&quot; : 9000 }&quot;
+
+# recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+# send a request to wttr.in to retreive a weather forecast
+ziti edge controller delete service wttr.ziti
+ziti edge controller create service wttr.ziti &quot;${EDGE_ROUTER_ID}&quot; tcp://wttr.in:80 --configs wttrconfig
+
+# start one or both proxies
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v
+
+# use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
+curl -H &quot;Host: wttr.in&quot; http://localhost:8000
+curl -H &quot;Host: wttr.in&quot; http://localhost:9000
 </code></pre></section>
 <section id="tabpanel_FOdv6PEgws-5_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
-<pre><code>ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
-ziti-enroller -j &quot;%HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&amp;pin=%HSM_PIN%&quot; -v
+<pre><code>REM run this command and get the id from the first edge-router.
+ziti edge controller list edge-routers
+
+REM use the id returned from the above command and put it into a variable for use in a momment
+EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+
+REM remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
+ziti edge controller delete config wttrconfig
+ziti edge controller create config wttrconfig ziti-tunneler-client.v1 &quot;{ \&quot;hostname\&quot; : \&quot;localhost\&quot;, \&quot;port\&quot; : 9000 }&quot;
+
+REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+REM send a request to wttr.in to retreive a weather forecast
+ziti edge controller delete service wttr.ziti
+ziti edge controller create service wttr.ziti &quot;${EDGE_ROUTER_ID}&quot; tcp://wttr.in:80 --configs wttrconfig
+
+REM start one or both proxies
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v
+
+REM use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
+curl -H &quot;Host: wttr.in&quot; http://localhost:8000
+curl -H &quot;Host: wttr.in&quot; http://localhost:9000
 </code></pre></section>
 </div>
 </article>

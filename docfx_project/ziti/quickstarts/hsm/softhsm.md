@@ -69,6 +69,8 @@ Open a command line and establish the following environment varibles.
     # the pins used when accessing the pkcs11 api
     export HSM_SOPIN=1111
     export HSM_PIN=2222
+    export RSA_ID=${HSM_NAME}${HSM_ID1}_rsa
+    export EC_ID=${HSM_NAME}${HSM_ID2}_ec
 
     export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
     export SOFTHSM2_CONF=${HSM_DEST}/softhsm.config
@@ -103,6 +105,8 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     REM the id of the key - you probably want to leave these alone unless you know better
     SET HSM_ID1=01
     SET HSM_ID2=02
+    SET RSA_ID=%HSM_NAME%%HSM_ID1%_rsa
+    SET EC_ID=%HSM_NAME%%HSM_ID2%_ec
     
     REM the pins used when accessing the pkcs11 api
     SET HSM_SOPIN=1111
@@ -155,21 +159,25 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 
     cd /d %HSM_NAME%
 
-Create a text file at %SOFTHSM2_CONF% with these contents but make sure you replace the tokendir entry with %HSM_TOKENS_DIR%
+    # Create a text file at %SOFTHSM2_CONF% with these contents but make sure you replace the tokendir entry with %HSM_TOKENS_DIR%
+    echo ^
+    # SoftHSM v2 configuration file ^
 
-    # SoftHSM v2 configuration file
+    directories.tokendir = %HSM_TOKENS_DIR% ^
 
-    directories.tokendir = _REPLACE_TOKENDIR_
-    objectstore.backend = file
+    objectstore.backend = file ^
 
-    # ERROR, WARNING, INFO, DEBUG
-    log.level = INFO
+    # ERROR, WARNING, INFO, DEBUG ^
 
-    # If CKF_REMOVABLE_DEVICE flag should be set
-    slots.removable = false
+    log.level = INFO ^
 
-    # Enable and disable PKCS#11 mechanisms using slots.mechanisms.
-    slots.mechanisms = ALL
+    # If CKF_REMOVABLE_DEVICE flag should be set ^
+
+    slots.removable = false ^
+
+    # Enable and disable PKCS#11 mechanisms using slots.mechanisms. ^
+
+    slots.mechanisms = ALL > %SOFTHSM2_CONF%
 
 ***
 
@@ -180,20 +188,20 @@ Create a text file at %SOFTHSM2_CONF% with these contents but make sure you repl
     ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
 
     # create a new identity and output the jwt to a known location
-    ziti edge controller create identity device "${HSM_NAME}${HSM_ID1}" -o "${HSM_DEST}/${HSM_NAME}${HSM_ID1}.jwt"
+    ziti edge controller create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge controller create identity device "${HSM_NAME}${HSM_ID2}" -o "${HSM_DEST}/${HSM_NAME}${HSM_ID2}.jwt"
+    ziti edge controller create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
 
 # [Windows](#tab/ziti-cli-windows)
 
     ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
 
     REM create a new identity and output the jwt to a known location
-    ziti edge controller create identity device "%HSM_NAME%%HSM_ID1%" -o %HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt"
+    ziti edge controller create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
 
     REM create a second new identity and output the jwt to a known location
-    ziti edge controller create identity device "%HSM_NAME%%HSM_ID2%" -o %HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt"
+    ziti edge controller create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
 
 ***
 
@@ -221,15 +229,15 @@ Create a text file at %SOFTHSM2_CONF% with these contents but make sure you repl
 
 ### Use ziti-tunnel to Verify Things Work
 
-# [Linux/MacOS](#tab/verify-linux)
+# [Linux/MacOS](#tab/start-tunnel-linux)
 
-    ziti-enroller -j "${HSM_DEST}/${HSM_NAME}${HSM_ID1}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
-    ziti-enroller -j "${HSM_DEST}/${HSM_NAME}${HSM_ID2}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
+    ziti-enroller -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
+    ziti-enroller -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
 
-# [Windows](#tab/verify-windows)
+# [Windows](#tab/start-tunnel-windows)
 
-    ziti-enroller -j "%HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
-    ziti-enroller -j "%HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
+    ziti-enroller -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
+    ziti-enroller -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
 
 ***
 
@@ -241,12 +249,52 @@ warned!
 
 # [Linux/MacOS](#tab/verify-linux)
 
-    ziti-enroller -j "${HSM_DEST}/${HSM_NAME}1.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
-    ziti-enroller -j "${HSM_DEST}/${HSM_NAME}2.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
+    # run this command and get the id from the first edge-router.
+    ziti edge controller list edge-routers
 
+    # use the id returned from the above command and put it into a variable for use in a momment
+    EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+
+    # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
+    ziti edge controller delete config wttrconfig
+    ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    
+    # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+    # send a request to wttr.in to retreive a weather forecast
+    ziti edge controller delete service wttr.ziti
+    ziti edge controller create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
+
+    # start one or both proxies
+    ziti-tunnel proxy -i "${HSM_DEST}/${RSA_ID}.json" wttr.ziti:8000 -v
+    ziti-tunnel proxy -i "${HSM_DEST}/${EC_ID}.json" wttr.ziti:9000 -v
+
+    # use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
+    curl -H "Host: wttr.in" http://localhost:8000
+    curl -H "Host: wttr.in" http://localhost:9000
+    
 # [Windows](#tab/verify-windows)
 
-    ziti-enroller -j "%HSM_DEST%\%HSM_NAME%%HSM_ID1%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
-    ziti-enroller -j "%HSM_DEST%\%HSM_NAME%%HSM_ID2%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
+    REM run this command and get the id from the first edge-router.
+    ziti edge controller list edge-routers
+    
+    REM use the id returned from the above command and put it into a variable for use in a momment
+    SET EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+
+    REM remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
+    ziti edge controller delete config wttrconfig
+    ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    
+    REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+    REM send a request to wttr.in to retreive a weather forecast
+    ziti edge controller delete service wttr.ziti
+    ziti edge controller create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
+
+    REM start one or both proxies
+    ziti-tunnel proxy -i "%HSM_DEST%/%RSA_ID%.json" wttr.ziti:8000 -v
+    ziti-tunnel proxy -i "%HSM_DEST%/%EC_ID%.json" wttr.ziti:9000 -v
+
+    REM use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
+    curl -H "Host: wttr.in" http://localhost:8000
+    curl -H "Host: wttr.in" http://localhost:9000
 
 ***
