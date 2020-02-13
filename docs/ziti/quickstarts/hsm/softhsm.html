@@ -413,8 +413,12 @@ start /b ziti-tunnel proxy -i &quot;%HSM_DEST%/%RSA_ID%.json&quot; wttr.ziti:800
 start /b ziti-tunnel proxy -i &quot;%HSM_DEST%/%EC_ID%.json&quot; wttr.ziti:9000 -v
 
 REM use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
-curl -H &quot;Host: wttr.in&quot; http://localhost:8000
-curl -H &quot;Host: wttr.in&quot; http://localhost:9000
+curl -H &quot;Host: wttr.in&quot; http://localhost:8000 &gt; &quot;%HSM_DEST%\example_%RSA_ID%.txt&quot;
+curl -H &quot;Host: wttr.in&quot; http://localhost:9000 &gt; &quot;%HSM_DEST%\example_%EC_ID%.txt&quot;
+
+REM show the results in the console
+type &quot;%HSM_DEST%\example_%RSA_ID%.txt&quot;
+type &quot;%HSM_DEST%\example_%EC_ID%.txt&quot;
 </code></pre></section>
 </div>
 <h3 id="putting-it-all-together">Putting It All Together</h3>
@@ -979,10 +983,443 @@ $ jobs
 cd@sg1 ~/.softhsm/softhsm_demo
 </code></pre></section>
 <section id="tabpanel_FOdv6PEgws-6_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
-<pre><code>yyyy
+<pre><code>c:\path\to\softhsm\softhsm_demo&gt;[ 805.814]   ERROR github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{lPeD}]: rx error (short read)
+[ 805.814]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).Close [ch{ziti-sdk}-&gt;u{classic}-&gt;i{lPeD}]: closing channel
+[ 805.815]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).txer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{lPeD}]: exited
+[ 805.815]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{lPeD}]: exited
+
+
+[ 814.557]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal interrupt
+[ 814.564]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal interrupt
+[ 814.564]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal interrupt
+[ 814.564]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: stopping tunnel for unavailable service: netcat7256
+c:\path\to\softhsm\softhsm_demo&gt;[ 814.565]   ERROR github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: failed to stop intercepting: StopIntercepting not implemented by proxy interceptor
+[ 814.565]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: stopping tunnel for unavailable service: wttr.ziti
+[ 814.565]   ERROR github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: failed to stop intercepting: StopIntercepting not implemented by proxy interceptor
+[ 814.565]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Stop: stopping proxy interceptor
+[ 814.557]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal interrupt
+[ 814.558]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Stop: stopping proxy interceptor
+
+
+c:\path\to\softhsm\softhsm_demo&gt;
+
+c:\path\to\softhsm\softhsm_demo&gt;
+
+c:\path\to\softhsm\softhsm_demo&gt;
+
+c:\path\to\softhsm\softhsm_demo&gt;clear
+
+
+c:\path\to\softhsm\softhsm_demo&gt;REM the name of the ziti controller you&#39;re logging into
+
+c:\path\to\softhsm\softhsm_demo&gt;SET ZITI_CTRL=local-edge-controller
+
+c:\path\to\softhsm\softhsm_demo&gt;REM the location of the certificate(s) to use to validate the controller
+
+c:\path\to\softhsm\softhsm_demo&gt;SET ZITI_CTRL_CERT=c:\path\to\controller.cert
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;SET ZITI_USER=myUserName
+
+c:\path\to\softhsm\softhsm_demo&gt;SET ZITI_PWD=myPassword
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM a name for the configuration
+
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_NAME=softhsm_demo
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM the path to the root of the softhsm config files
+
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_ROOT=c:\path\to\softhsm
+
+c:\path\to\softhsm\softhsm_demo&gt;REM path to the softhsm2 library
+
+c:\path\to\softhsm\softhsm_demo&gt;SET PKCS11_MODULE=%HSM_ROOT%\lib\softhsm2.dll
+
+c:\path\to\softhsm\softhsm_demo&gt;--- or ---
+&#39;---&#39; is not recognized as an internal or external command,
+operable program or batch file.
+
+c:\path\to\softhsm\softhsm_demo&gt;SET PKCS11_MODULE=%HSM_ROOT%\lib\softhsm2-x64.dll
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM the id of the key - you probably want to leave these alone unless you know better
+
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_ID1=01
+
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_ID2=02
+
+c:\path\to\softhsm\softhsm_demo&gt;SET RSA_ID=%HSM_NAME%%HSM_ID1%_rsa
+
+c:\path\to\softhsm\softhsm_demo&gt;SET EC_ID=%HSM_NAME%%HSM_ID2%_ec
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM the pins used when accessing the pkcs11 api
+
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_SOPIN=1111
+
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_PIN=2222
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_DEST=%HSM_ROOT%\%HSM_NAME%
+
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_LABEL=%HSM_NAME%-label
+
+c:\path\to\softhsm\softhsm_demo&gt;SET SOFTHSM2_CONF=%HSM_DEST%\softhsm.config
+
+c:\path\to\softhsm\softhsm_demo&gt;SET HSM_TOKENS_DIR=%HSM_DEST%\tokens\
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM make an alias for ease
+
+c:\path\to\softhsm\softhsm_demo&gt;doskey p=&quot;c:\Program Files\OpenSC Project\OpenSC\tools\pkcs11-tool.exe&quot; --module %PKCS11_MODULE% $*
+
+c:\path\to\softhsm\softhsm_demo&gt;cd /d %HSM_ROOT%
+
+c:\path\to\softhsm&gt;
+c:\path\to\softhsm&gt;rmdir /s /q %HSM_NAME%
+
+c:\path\to\softhsm&gt;mkdir %HSM_TOKENS_DIR%
+
+c:\path\to\softhsm&gt;
+c:\path\to\softhsm&gt;cd /d %HSM_NAME%
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;# Create a text file at %SOFTHSM2_CONF% with these contents but make sure you replace the tokendir entry with %HSM_TOKENS_DIR%
+&#39;#&#39; is not recognized as an internal or external command,
+operable program or batch file.
+
+c:\path\to\softhsm\softhsm_demo&gt;echo ^
+More? # SoftHSM v2 configuration file ^
+More?
+More? directories.tokendir = %HSM_TOKENS_DIR% ^
+More?
+More? objectstore.backend = file ^
+More?
+More? # ERROR, WARNING, INFO, DEBUG ^
+More?
+More? log.level = INFO ^
+More?
+More? # If CKF_REMOVABLE_DEVICE flag should be set ^
+More?
+More? slots.removable = false ^
+More?
+More? # Enable and disable PKCS#11 mechanisms using slots.mechanisms. ^
+More?
+More? slots.mechanisms = ALL &gt; %SOFTHSM2_CONF%
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+Token: c6f4d504-6095-4118-8f13-3c787821963f
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM create a new identity and output the jwt to a known location
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti edge controller create identity device &quot;%RSA_ID%&quot; -o &quot;%HSM_DEST%\%RSA_ID%.jwt&quot;
+a625ee46-b799-4e9f-a92c-59a579cb9756
+Enrollment expires at 2020-02-23T14:22:08.902166003Z
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM create a second new identity and output the jwt to a known location
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti edge controller create identity device &quot;%EC_ID%&quot; -o &quot;%HSM_DEST%\%EC_ID%.jwt&quot;
+08889f51-1639-4cd0-9c18-ffcc5e315f3e
+Enrollment expires at 2020-02-23T14:22:09.634832703Z
+
+c:\path\to\softhsm\softhsm_demo&gt;p --init-token --label &quot;ziti-test-token&quot; --so-pin %HSM_SOPIN%
+Using slot 0 with a present token (0x0)
+Token successfully initialized
+
+c:\path\to\softhsm\softhsm_demo&gt;p --init-pin --pin &quot;%HSM_PIN%&quot; --so-pin %HSM_SOPIN%
+Using slot 0 with a present token (0x1af2a063)
+User PIN successfully initialized
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM create a couple of keys - one rsa and one ec
+
+c:\path\to\softhsm\softhsm_demo&gt;p -p &quot;%HSM_PIN%&quot; -k --key-type rsa:2048 --id &quot;%HSM_ID1%&quot; --label ziti-rsa-key --usage-sign --usage-decrypt
+Using slot 0 with a present token (0x1af2a063)
+Key pair generated:
+Private Key Object; RSA
+label:      ziti-rsa-key
+ID:         01
+Usage:      decrypt, sign, unwrap
+Access:     sensitive, always sensitive, never extractable, local
+Public Key Object; RSA 2048 bits
+label:      ziti-rsa-key
+ID:         01
+Usage:      encrypt, verify, wrap
+Access:     local
+
+c:\path\to\softhsm\softhsm_demo&gt;p -p &quot;%HSM_PIN%&quot; -k --key-type EC:prime256v1 --id &quot;%HSM_ID2%&quot; --label ziti-ecdsa-key --usage-sign --usage-decrypt
+Using slot 0 with a present token (0x1af2a063)
+Key pair generated:
+Private Key Object; EC
+label:      ziti-ecdsa-key
+ID:         02
+Usage:      decrypt, sign, unwrap
+Access:     sensitive, always sensitive, never extractable, local
+Public Key Object; EC  EC_POINT 256 bits
+EC_POINT:   04410419240eaf1e7628c94dbb3ab46f0b4c5b3fe8bab8227b67ed9bdea6d107547c16ac401437f674c73986697cc2c0e4ae0416775ee8ec0b65f1fe6c935acdc4b35a
+EC_PARAMS:  06082a8648ce3d030107
+label:      ziti-ecdsa-key
+ID:         02
+Usage:      encrypt, verify, wrap
+Access:     local
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti-enroller -j &quot;%HSM_DEST%\%RSA_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=debug msg=&quot;jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjQ2NzcyOCwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6IjQwZjE5Y2VhLWFjYWYtNDQyMy1iNzhjLWI2NjU4MDA0NGI2MSIsInN1YiI6ImE2MjVlZTQ2LWI3OTktNGU5Zi1hOTJjLTU5YTU3OWNiOTc1NiJ9.LkziWbgKeJtZ6f5dd169K32Gq86-6ly13v7iHn7Zj_ITFudxXzLa2dl3JonBRg6hNW8ghiPNZ7JpcSkRiaN8npKUHAnsZfr1kPE-NR-eJmUTqM88UhznQJOKyAZzA-dLxRfsRgmU9ESLVsAQEE4wefPz8AlsXWGYK9oWx-X0SEwu4TgjCWP1jEd7pQJXw5ZXIBYLZMG0buIFaKgskH-inpK7BF2LZc9ENr6nj4W4X_tm7kbzGdQ-ofzlhJMBHFz2w_qQXDqXiYWf59Wrszd9-3y0rbvykmc9L8G3B1YlICKyD6mhaPt4fLquZEOwsyeOgH9BLJhX9I33nfYZe_mQf4jzhw5U13K1VKaL-JGwfXntwrKMUJhB62NDMLNALMDqc4hK3BKp1wdZT5YL2Y91J2lLa50mg0OG9ASvkmh7dW3FhDFntl9UnSuPmVJExfMJJCXwe0DgbLcg0TugUuioJ9iCrAZ2tTsLoXDIqLj4zqDhe2nCXdTGgqGpa2ftqNWsUxJmZM2V8ll8Mb2tcuNu0WHcpZ1nH9iXuNHWRsLyowIZB0NJoIvYRlHzlPiSjJxZlNdMSh2jm6tZ7_sAyw_cIAU20yJ3KSGE2PT9bCgkISiYEZ2V5Q3cyGIi0OMP7IqZ5vomqHhkF41C4LIH7A4NKCWMztTwt-WOIndGX5yB1GA&quot;
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=info msg=&quot;using engine : pkcs11\n&quot;
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=debug msg=&quot;loading key&quot; context=pkcs11 url=&quot;pkcs11://c:%5Cpath%5Cto%5Csofthsm%5Clib%5Csofthsm2-x64.dll?id=01&amp;pin=2222&quot;
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=info msg=&quot;using driver: c:\\path\\to\\softhsm\\lib\\softhsm2-x64.dll&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=warning msg=&quot;slot not specified, using first slot reported by the driver (452108387)&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=debug msg=&quot;found signing mechanism&quot; context=pkcs11 sign mechanism=0
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=debug msg=&quot;no cas provided in caPool. using system provided cas&quot;
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=debug msg=&quot;fetching certificates from server&quot;
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=debug msg=&quot;loading key&quot; context=pkcs11 url=&quot;pkcs11://c:%5Cpath%5Cto%5Csofthsm%5Clib%5Csofthsm2-x64.dll?id=01&amp;pin=2222&quot;
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=info msg=&quot;using driver: c:\\path\\to\\softhsm\\lib\\softhsm2-x64.dll&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=warning msg=&quot;slot not specified, using first slot reported by the driver (452108387)&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:18-05:00&quot; level=debug msg=&quot;found signing mechanism&quot; context=pkcs11 sign mechanism=0
+enrolled successfully. identity file written to: c:\path\to\softhsm\softhsm_demo\softhsm_demo01_rsa.json
+c:\path\to\softhsm\softhsm_demo&gt;ziti-enroller -j &quot;%HSM_DEST%\%EC_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&amp;pin=%HSM_PIN%&quot; -v
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjQ2NzcyOSwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6ImU0NDhlMGVjLTk4Y2ItNDBjMC05MmE4LWE2YjMyZDJlY2UwMCIsInN1YiI6IjA4ODg5ZjUxLTE2MzktNGNkMC05YzE4LWZmY2M1ZTMxNWYzZSJ9.HHlGcNPh1E83SG3ncCzIPLpav4fRZ44eAeq9Igr24CHT3TCJXXooFNVY5LYtTJ3ydsE6RVPn3UCrP_72CK4Y8Bc-OHDxtPsl0wQwH90tYIz68d2Br0D8kBjjLnYNfsQS0w4t9GEdnNLD8WfjIF8V1croBksrA0jyDiZFak67tKwohzftmm7bNNibA2KvNFVSa_ZaD1lT-SR5xEHaTkR4LpBhPSN9HeR6TAj0c0LsFgFAm_4LrX14r3eufCxxj0TIEHPvxqa_dMJq3TuUFQQPvSIStnXKd9i4gTnFhFdxeZ4J4R94IT6UdzAVD1lIBA9tta7XrMgKpG7Yl8OX60rh3je4S73WAff4kZg6gFpL2RckHuCGdn4AoAXPJoFqBerQ3xybAVNW913fxtw942juVBhjb4Ex2LzZylkRrQmJ3xV5s3-MuW8-1-2N1lK5u1JK_sulrCx5trrvFb99z2INnNh0baVFq_7-3KozVsE0RNiXGc5dAjhNFWJWXT9H6PhIzzJ-0l84ZQaloxon1b70LnoVPC8g2z-Psvv8-Pc2JIlg5K4DLIXsagD4n4S1Fh8aqAyduF5Sc7ddVQ20-8Fz8iIZXNEGvNa9KwuHVzrk3UZJ3cB7Q1oWDshHPcMd7B4AtyV4z9U4qUP7syyAYkGYrMT_F26uNmIb0s2eW6xDf68&quot;
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=info msg=&quot;using engine : pkcs11\n&quot;
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;loading key&quot; context=pkcs11 url=&quot;pkcs11://c:%5Cpath%5Cto%5Csofthsm%5Clib%5Csofthsm2-x64.dll?id=02&amp;pin=2222&quot;
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=info msg=&quot;using driver: c:\\path\\to\\softhsm\\lib\\softhsm2-x64.dll&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=warning msg=&quot;slot not specified, using first slot reported by the driver (452108387)&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;found signing mechanism&quot; context=pkcs11 sign mechanism=0
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;EC oid[1.2.840.10045.3.1.7], rest: [], err: &lt;nil&gt;&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=warning msg=&quot;failed to get mechanism info [1044]&quot; context=pkcs11 error=&quot;pkcs11: 0x70: CKR_MECHANISM_INVALID&quot;
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;no cas provided in caPool. using system provided cas&quot;
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;fetching certificates from server&quot;
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;loading key&quot; context=pkcs11 url=&quot;pkcs11://c:%5Cpath%5Cto%5Csofthsm%5Clib%5Csofthsm2-x64.dll?id=02&amp;pin=2222&quot;
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=info msg=&quot;using driver: c:\\path\\to\\softhsm\\lib\\softhsm2-x64.dll&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=warning msg=&quot;slot not specified, using first slot reported by the driver (452108387)&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;found signing mechanism&quot; context=pkcs11 sign mechanism=0
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=debug msg=&quot;EC oid[1.2.840.10045.3.1.7], rest: [], err: &lt;nil&gt;&quot; context=pkcs11
+time=&quot;2020-02-13T09:22:19-05:00&quot; level=warning msg=&quot;failed to get mechanism info [1044]&quot; context=pkcs11 error=&quot;pkcs11: 0x70: CKR_MECHANISM_INVALID&quot;
+enrolled successfully. identity file written to: c:\path\to\softhsm\softhsm_demo\softhsm_demo02_ec.json
+c:\path\to\softhsm\softhsm_demo&gt;REM run this command and get the id from the first edge-router.
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti edge controller list edge-routers
+id: 727f0074-9011-4b79-955b-a6a9e3bb67b1    name: local-edge-router    role attributes: {}
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM use the id returned from the above command and put it into a variable for use in a momment
+
+c:\path\to\softhsm\softhsm_demo&gt;SET EDGE_ROUTER_ID=727f0074-9011-4b79-955b-a6a9e3bb67b1
+
+c:\path\to\softhsm\softhsm_demo&gt;REM remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti edge controller delete config wttrconfig
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti edge controller create config wttrconfig ziti-tunneler-client.v1 &quot;{ \&quot;hostname\&quot; : \&quot;localhost\&quot;, \&quot;port\&quot; : 9000 }&quot;
+7e73d98c-e44f-4360-9a48-6d1c812f0a75
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+
+c:\path\to\softhsm\softhsm_demo&gt;REM send a request to wttr.in to retreive a weather forecast
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti edge controller delete service wttr.ziti
+
+c:\path\to\softhsm\softhsm_demo&gt;ziti edge controller create service wttr.ziti &quot;%EDGE_ROUTER_ID%&quot; tcp://wttr.in:80 --configs wttrconfig
+04ccec0c-3329-4f8f-8942-9dbd378bb15e
+
+c:\path\to\softhsm\softhsm_demo&gt;REM start one or both proxies - use ctrl-break or ctrl-pause to terminate these processes
+
+c:\path\to\softhsm\softhsm_demo&gt;start /b ziti-tunnel proxy -i &quot;%HSM_DEST%/%RSA_ID%.json&quot; wttr.ziti:8000 -v
+
+c:\path\to\softhsm\softhsm_demo&gt;[   0.026]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Start: starting proxy interceptor
+[   0.027]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: {url=[pkcs11://c:%5Cpath%5Cto%5Csofthsm%5Clib%5Csofthsm2-x64.dll?id=01&amp;pin=2222]} loading key
+[   0.028]    INFO github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: using driver: c:\path\to\softhsm\lib\softhsm2-x64.dll
+[   0.036] WARNING github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: slot not specified, using first slot reported by the driver (452108387)
+[   0.043]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: {sign mechanism=[0]} found signing mechanism
+[   0.044]    INFO github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).Authenticate: attempting to authenticate
+[   0.079]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).Authenticate: {id=[087afe19-9c8b-40f4-88c9-962d9e04f1b8] token=[28c9472d-8540-413d-9f8e-532139dfbdcb]} Got api session: {087afe19-9c8b-40f4-88c9-962d9e04f1b8 28c9472d-8540-413d-9f8e-532139dfbdcb}
+[   0.080]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getServices: using api session token 28c9472d-8540-413d-9f8e-532139dfbdcb
+[   0.124]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getServices: using api session token 28c9472d-8540-413d-9f8e-532139dfbdcb
+[   0.166]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: starting tunnel for newly available service netcat7256
+[   0.166]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.interceptor.Intercept: {service=[netcat7256]} service netcat7256 was not specified at initialization. not intercepting
+[   0.167]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: starting tunnel for newly available service wttr.ziti
+[   0.169]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getSession: requesting session from https://local-edge-controller:1280/sessions
+[   0.169]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getSession: {service_id=[04ccec0c-3329-4f8f-8942-9dbd378bb15e]} requesting session
+[   0.203]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.interceptor.Intercept: {service=[wttr.ziti] id=[4b9096a5-4bef-4296-813d-252aebe7ebe6]} acquired network session
+[   0.203]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).handleTCP: {service=[wttr.ziti] addr=[0.0.0.0:8000]} service is listening
+start /b ziti-tunnel proxy -i &quot;%HSM_DEST%/%EC_ID%.json&quot; wttr.ziti:9000 -v
+
+c:\path\to\softhsm\softhsm_demo&gt;[   0.017]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Start: starting proxy interceptor
+[   0.017]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: {url=[pkcs11://c:%5Cpath%5Cto%5Csofthsm%5Clib%5Csofthsm2-x64.dll?id=02&amp;pin=2222]} loading key
+[   0.018]    INFO github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: using driver: c:\path\to\softhsm\lib\softhsm2-x64.dll
+[   0.026] WARNING github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: slot not specified, using first slot reported by the driver (452108387)
+[   0.034]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: {sign mechanism=[0]} found signing mechanism
+[   0.034]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.loadECDSApub [pkcs11]: EC oid[1.2.840.10045.3.1.7], rest: [], err: &lt;nil&gt;
+[   0.035] WARNING github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.getECDSAmechanism [pkcs11]: {error=[pkcs11: 0x70: CKR_MECHANISM_INVALID]} failed to get mechanism info [1044]
+[   0.037]    INFO github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).Authenticate: attempting to authenticate
+[   0.074]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).Authenticate: {token=[68289015-5910-464f-8c1f-4870c28cfbb1] id=[32d29510-6285-4cff-80b3-a9630ffef388]} Got api session: {32d29510-6285-4cff-80b3-a9630ffef388 68289015-5910-464f-8c1f-4870c28cfbb1}
+[   0.074]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getServices: using api session token 68289015-5910-464f-8c1f-4870c28cfbb1
+[   0.123]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getServices: using api session token 68289015-5910-464f-8c1f-4870c28cfbb1
+[   0.162]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: starting tunnel for newly available service wttr.ziti
+[   0.163]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getSession: requesting session from https://local-edge-controller:1280/sessions
+[   0.164]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getSession: {service_id=[04ccec0c-3329-4f8f-8942-9dbd378bb15e]} requesting session
+[   0.204]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.interceptor.Intercept: {service=[wttr.ziti] id=[d09009a6-a2b2-405b-8125-8f9c021ff8de]} acquired network session
+[   0.204]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: starting tunnel for newly available service netcat7256
+[   0.206]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.interceptor.Intercept: {service=[netcat7256]} service netcat7256 was not specified at initialization. not intercepting
+[   0.207]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).handleTCP: {addr=[0.0.0.0:9000] service=[wttr.ziti]} service is listening
+
+c:\path\to\softhsm\softhsm_demo&gt;curl -H &quot;Host: wttr.in&quot; http://localhost:8000 &gt; &quot;%HSM_DEST%\example_%RSA_ID%.txt&quot;
+[  14.743]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).Create [tls:local-edge-router:3022]: started
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                Dload  Upload   Total   Spent    Left  Spee[  14.758]   DEBUG github.com/netfoundry/ziti-foundation/transport/tls.Dial: server provided [2] certificates
+d[  14.758]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).sendHello [u{classic}-&gt;i{}]: started
+[  14.759]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).sendHello [u{classic}-&gt;i{}]: exited
+
+[  14.759]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).Create [tls:local-edge-router:3022]: exited
+[  14.760]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{PpLP}]: started
+[  14.760]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*muxAddSinkEvent).Handle: {connId=[1]} Added sink to mux. Current sink count: 1
+[  14.761]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgMux).AddMsgSink: {connId=[1]} added to msg mux
+[  14.761]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).txer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{PpLP}]: started
+0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[  14.874]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{PpLP}]: waiter found for message. type [60784], sequence [1], replyFor [1]
+[  14.874]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Connect: {connId=[1]} connected
+[  14.875]    INFO github.com/netfoundry/ziti-edge/tunnel.Run: {dst-local=[:1] dst-remote=[wttr.ziti] src-remote=[127.0.0.1:62125] src-local=[127.0.0.1:8000]} tunnel started
+[  14.878]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgChannel).WriteTraced: {edgeSeq=[1] connId=[1] type=[EdgeDataType] chSeq=[-1]} writing 71 bytes
+[  14.879]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} read buffer = 32768 bytes
+[  15.057]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgEvent).Handle: {connId=[1] seq=[1]} handling received EdgeDataType
+[  15.057]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} got buffer from queue 8964 bytes
+[  15.058]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} read buffer = 32768 bytes
+100  8799  100  8799    0     0  28111      0 --:--:-- --:--:-- --:--:-- 28111
+[  15.067]    INFO github.com/netfoundry/ziti-edge/tunnel.myCopy: {src-remote=[127.0.0.1:62125] src-local=[127.0.0.1:8000] dst-local=[:1] dst-remote=[wttr.ziti]} stopping pipe
+[  15.067]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Close: {connId=[1]} close: begin
+[  15.069]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*muxRemoveSinkEvent).Handle: {connId=[1]} Removed sink from mux. Current sink count: 0
+[  15.069]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgMux).RemoveMsgSinkById: {connId=[1]} removed from msg mux
+[  15.070]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Close: {connId=[1]} close: end
+
+c:\path\to\softhsm\softhsm_demo&gt;[  16.070]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} sequencer closed, closing connection
+[  16.070]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} return EOF from closing/closed connection
+[  16.071]    INFO github.com/netfoundry/ziti-edge/tunnel.myCopy: {dst-remote=[127.0.0.1:62125] src-remote=[wttr.ziti] src-local=[:1] dst-local=[127.0.0.1:8000]} stopping pipe
+[  16.072]    INFO github.com/netfoundry/ziti-edge/tunnel.Run: {dst-remote=[wttr.ziti] src-remote=[127.0.0.1:62125] src-local=[127.0.0.1:8000] dst-local=[:1]} tunnel closed: 71 bytes sent; 8964 bytes received
+
+c:\path\to\softhsm\softhsm_demo&gt;    curl -H &quot;Host: wttr.in&quot; http://localhost:9000 &gt; &quot;%HSM_DEST%\example_%EC_ID%.txt&quot;
+[  18.776]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).Create [tls:local-edge-router:3022]: started
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                [  18.785]   DEBUG github.com/netfoundry/ziti-foundation/transport/tls.Dial: server provided [2] certificates
+[  18.785]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).sendHello [u{classic}-&gt;i{}]: started
+[  18.786]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).sendHello [u{classic}-&gt;i{}]: exited
+[  18.786]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).Create [tls:local-edge-router:3022]: exited
+[  18.787]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*muxAddSinkEvent).Handle: {connId=[1]} Added sink to mux. Current sink count: 1
+[  18.787]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{15kP}]: started
+[  18.789]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgMux).AddMsgSink: {connId=[1]} added to msg mux
+[  18.789]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).txer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{15kP}]: started
+            Dload  Upload   Total   Spent    Left  Speed
+0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[  18.902]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{15kP}]: waiter found for message. type [60784], sequence [1], replyFor [1]
+[  18.903]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Connect: {connId=[1]} connected
+[  18.904]    INFO github.com/netfoundry/ziti-edge/tunnel.Run: {src-remote=[127.0.0.1:62130] src-local=[127.0.0.1:9000] dst-local=[:1] dst-remote=[wttr.ziti]} tunnel started
+[  18.905]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgChannel).WriteTraced: {type=[EdgeDataType] chSeq=[-1] edgeSeq=[1] connId=[1]} writing 71 bytes
+[  18.906]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} read buffer = 32768 bytes
+0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[  19.334]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgEvent).Handle: {seq=[1] connId=[1]} handling received EdgeDataType
+[  19.335]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} got buffer from queue 8964 bytes
+[  19.336]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} read buffer = 32768 bytes
+100  8799  100  8799    0     0  15628      0 --:--:-- --:--:-- --:--:-- 15628
+[  19.344]    INFO github.com/netfoundry/ziti-edge/tunnel.myCopy: {src-remote=[127.0.0.1:62130] src-local=[127.0.0.1:9000] dst-local=[:1] dst-remote=[wttr.ziti]} stopping pipe
+[  19.344]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Close: {connId=[1]} close: begin
+[  19.345]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*muxRemoveSinkEvent).Handle: {connId=[1]} Removed sink from mux. Current sink count: 0
+[  19.347]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgMux).RemoveMsgSinkById: {connId=[1]} removed from msg mux
+[  19.349]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Close: {connId=[1]} close: end
+
+c:\path\to\softhsm\softhsm_demo&gt;
+c:\path\to\softhsm\softhsm_demo&gt;[  20.345]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} sequencer closed, closing connection
+[  20.345]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} return EOF from closing/closed connection
+[  20.347]    INFO github.com/netfoundry/ziti-edge/tunnel.Run: {src-remote=[127.0.0.1:62130] src-local=[127.0.0.1:9000] dst-local=[:1] dst-remote=[wttr.ziti]} tunnel closed: 71 bytes sent; 8964 bytes received
+[  20.349]    INFO github.com/netfoundry/ziti-edge/tunnel.myCopy: {dst-local=[127.0.0.1:9000] dst-remote=[127.0.0.1:62130] src-remote=[wttr.ziti] src-local=[:1]} stopping pipe
+tpye &quot;%HSM_DEST%\example_%RSA_ID%.txt&quot;
+&#39;tpye&#39; is not recognized as an internal or external command,
+operable program or batch file.
+
+c:\path\to\softhsm\softhsm_demo&gt;type &quot;%HSM_DEST%\example_%RSA_ID%.txt&quot;
+Weather report: Laurelton, United States
+
+            Mist
+_ - _ - _ -  35..39 °F
+_ - _ - _   ↑ 5 mph
+_ - _ - _ -  3 mi
+            0.0 in
+                                                    ┌─────────────┐
+┌────────────────��─────────────┬───────────────────────┤  Thu 13 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│      .-.      Light rain     │      .-.      Light rain     │  _`/&quot;&quot;.-.     Moderate or he…│    \  /       Partly cloudy  │
+│     (   ).    35..37 °F      │     (   ).    39..41 °F      │   ,\_(   ).   32..39 °F      │  _ /&quot;&quot;.-.     26..+33 °F     │
+│    (___(__)   ↑ 4-6 mph      │    (___(__)   ↗ 5-6 mph      │    /(___(__)  → 8-10 mph     │    \_(   ).   → 9-14 mph     │
+│     ‘ ‘ ‘ ‘   5 mi           │     ‘ ‘ ‘ ‘   5 mi           │     * * * *   5 mi           │    /(___(__)  4 mi           │
+│    ‘ ‘ ‘ ‘    0.1 in | 79%   │    ‘ ‘ ‘ ‘    0.0 in | 80%   │    * * * *    0.0 in | 25%   │               0.0 in | 51%   │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Fri 14 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼─────────────────────────────��┼──────────────────────────────┤
+│    \  /       Partly cloudy  │     \   /     Sunny          │    \  /       Partly cloudy  │     \   /     Clear          │
+│  _ /&quot;&quot;.-.     3..17 °F       │      .-.      6..19 °F       │  _ /&quot;&quot;.-.     8..19 °F       │      .-.      5..14 °F       │
+│    \_(   ).   ↘ 11-13 mph    │   ― (   ) ―   ↘ 11-13 mph    │    \_(   ).   ↗ 9-12 mph     │   ― (   ) ―   ↓ 7-11 mph     │
+│    /(___(__)  6 mi           │      `-’      6 mi           │    /(___(__)  6 mi           │      `-’      6 mi           │
+│               0.0 in | 0%    │     /   \     0.0 in | 0%    │               0.0 in | 0%    │     /   \     0.0 in | 0%    │
+└───────────────────��──────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Sat 15 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├────────────���─────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│     \   /     Sunny          │     \   /     Sunny          │    \  /       Partly cloudy  │    \  /       Partly cloudy  │
+│      .-.      12..17 °F      │      .-.      17..24 °F      │  _ /&quot;&quot;.-.     21..30 °F      │  _ /&quot;&quot;.-.     15..24 °F      │
+│   ― (   ) ―   ↑ 3-4 mph      │   ― (   ) ―   ↑ 6-7 mph      │    \_(   ).   ↑ 8-13 mph     │    \_(   ).   ↑ 7-14 mph     │
+│      `-’      6 mi           │      `-’      6 mi           │    /(___(__)  6 mi           │    /(___(__)  6 mi           │
+│     /   \     0.0 in | 0%    │     /   \     0.0 in | 0%    │               0.0 in | 0%    │               0.0 in | 0%    │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+
+Follow @igor_chubin for wttr.in updates
+
+c:\path\to\softhsm\softhsm_demo&gt;type &quot;%HSM_DEST%\example_%EC_ID%.txt&quot;
+Weather report: Laurelton, United States
+
+            Mist
+_ - _ - _ -  35..39 °F
+_ - _ - _   ↑ 5 mph
+_ - _ - _ -  3 mi
+            0.0 in
+                                                    ┌─────────────┐
+┌────────────────��─────────────┬───────────────────────┤  Thu 13 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│      .-.      Light rain     │      .-.      Light rain     │  _`/&quot;&quot;.-.     Moderate or he…│    \  /       Partly cloudy  │
+│     (   ).    35..37 °F      │     (   ).    39..41 °F      │   ,\_(   ).   32..39 °F      │  _ /&quot;&quot;.-.     26..+33 °F     │
+│    (___(__)   ↑ 4-6 mph      │    (___(__)   ↗ 5-6 mph      │    /(___(__)  → 8-10 mph     │    \_(   ).   → 9-14 mph     │
+│     ‘ ‘ ‘ ‘   5 mi           │     ‘ ‘ ‘ ‘   5 mi           │     * * * *   5 mi           │    /(___(__)  4 mi           │
+│    ‘ ‘ ‘ ‘    0.1 in | 79%   │    ‘ ‘ ‘ ‘    0.0 in | 80%   │    * * * *    0.0 in | 25%   │               0.0 in | 51%   │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Fri 14 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼─────────────────────────────��┼──────────────────────────────┤
+│    \  /       Partly cloudy  │     \   /     Sunny          │    \  /       Partly cloudy  │     \   /     Clear          │
+│  _ /&quot;&quot;.-.     3..17 °F       │      .-.      6..19 °F       │  _ /&quot;&quot;.-.     8..19 °F       │      .-.      5..14 °F       │
+│    \_(   ).   ↘ 11-13 mph    │   ― (   ) ―   ↘ 11-13 mph    │    \_(   ).   ↗ 9-12 mph     │   ― (   ) ―   ↓ 7-11 mph     │
+│    /(___(__)  6 mi           │      `-’      6 mi           │    /(___(__)  6 mi           │      `-’      6 mi           │
+│               0.0 in | 0%    │     /   \     0.0 in | 0%    │               0.0 in | 0%    │     /   \     0.0 in | 0%    │
+└───────────────────��──────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Sat 15 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├────────────���─────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│     \   /     Sunny          │     \   /     Sunny          │    \  /       Partly cloudy  │    \  /       Partly cloudy  │
+│      .-.      12..17 °F      │      .-.      17..24 °F      │  _ /&quot;&quot;.-.     21..30 °F      │  _ /&quot;&quot;.-.     15..24 °F      │
+│   ― (   ) ―   ↑ 3-4 mph      │   ― (   ) ―   ↑ 6-7 mph      │    \_(   ).   ↑ 8-13 mph     │    \_(   ).   ↑ 7-14 mph     │
+│      `-’      6 mi           │      `-’      6 mi           │    /(___(__)  6 mi           │    /(___(__)  6 mi           │
+│     /   \     0.0 in | 0%    │     /   \     0.0 in | 0%    │               0.0 in | 0%    │               0.0 in | 0%    │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+
+Follow @igor_chubin for wttr.in updates
+
+c:\path\to\softhsm\softhsm_demo&gt;
 </code></pre></section>
 </div>
-<p>bottom</p>
 </article>
           </div>
           

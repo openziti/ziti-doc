@@ -1290,5 +1290,3 @@ output would likely look like click one of the tabs to the right.
     c:\path\to\softhsm\softhsm_demo>
 
 ***
-
-bottom
