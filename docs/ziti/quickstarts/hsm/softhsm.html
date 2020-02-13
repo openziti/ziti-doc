@@ -339,39 +339,36 @@ p -p &quot;%HSM_PIN%&quot; -k --key-type rsa:2048 --id &quot;%HSM_ID1%&quot; --l
 p -p &quot;%HSM_PIN%&quot; -k --key-type EC:prime256v1 --id &quot;%HSM_ID2%&quot; --label ziti-ecdsa-key --usage-sign --usage-decrypt
 </code></pre></section>
 </div>
-<h3 id="use-ziti-tunnel-to-verify-things-work">Use ziti-tunnel to Verify Things Work</h3>
+<h3 id="use-ziti-enroller-to-enroll-the-identities">Use ziti-enroller to Enroll the Identities</h3>
 <div class="tabGroup" id="tabgroup_FOdv6PEgws-4">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_FOdv6PEgws-4_start-tunnel-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_start-tunnel-linux" data-tab="start-tunnel-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+<a href="#tabpanel_FOdv6PEgws-4_enroll-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_enroll-linux" data-tab="enroll-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_FOdv6PEgws-4_start-tunnel-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_start-tunnel-windows" data-tab="start-tunnel-windows" tabindex="-1">Windows</a>
+<a href="#tabpanel_FOdv6PEgws-4_enroll-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-4_enroll-windows" data-tab="enroll-windows" tabindex="-1">Windows</a>
 </li>
 </ul>
-<section id="tabpanel_FOdv6PEgws-4_start-tunnel-linux" role="tabpanel" data-tab="start-tunnel-linux">
+<section id="tabpanel_FOdv6PEgws-4_enroll-linux" role="tabpanel" data-tab="enroll-linux">
 <pre><code>ziti-enroller -j &quot;${HSM_DEST}/${RSA_ID}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
 ziti-enroller -j &quot;${HSM_DEST}/${EC_ID}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
 </code></pre></section>
-<section id="tabpanel_FOdv6PEgws-4_start-tunnel-windows" role="tabpanel" data-tab="start-tunnel-windows" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_FOdv6PEgws-4_enroll-windows" role="tabpanel" data-tab="enroll-windows" aria-hidden="true" hidden="hidden">
 <pre><code>ziti-enroller -j &quot;%HSM_DEST%\%RSA_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
 ziti-enroller -j &quot;%HSM_DEST%\%EC_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&amp;pin=%HSM_PIN%&quot; -v
 </code></pre></section>
 </div>
-<h3 id="putting-it-all-together">Putting It All Together</h3>
-<p>Above we&#39;ve only shown the commands that need to run and not what the output of those commands would look like. Here
-we&#39;ll see all the commands put together along with all the output from the commands. This section is long - you are
-warned!</p>
+<h3 id="use-ziti-tunnel-to-verify-things-work">Use ziti-tunnel to Verify Things Work</h3>
 <div class="tabGroup" id="tabgroup_FOdv6PEgws-5">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_FOdv6PEgws-5_verify-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-5_verify-linux" data-tab="verify-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+<a href="#tabpanel_FOdv6PEgws-5_start-tunnel-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-5_start-tunnel-linux" data-tab="start-tunnel-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_FOdv6PEgws-5_verify-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-5_verify-windows" data-tab="verify-windows" tabindex="-1">Windows</a>
+<a href="#tabpanel_FOdv6PEgws-5_start-tunnel-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-5_start-tunnel-windows" data-tab="start-tunnel-windows" tabindex="-1">Windows</a>
 </li>
 </ul>
-<section id="tabpanel_FOdv6PEgws-5_verify-linux" role="tabpanel" data-tab="verify-linux">
+<section id="tabpanel_FOdv6PEgws-5_start-tunnel-linux" role="tabpanel" data-tab="start-tunnel-linux">
 <pre><code># run this command and get the id from the first edge-router.
 ziti edge controller list edge-routers
 
@@ -388,19 +385,19 @@ ziti edge controller delete service wttr.ziti
 ziti edge controller create service wttr.ziti &quot;${EDGE_ROUTER_ID}&quot; tcp://wttr.in:80 --configs wttrconfig
 
 # start one or both proxies
-ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v
-ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v &amp;
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v &amp;
 
 # use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
 curl -H &quot;Host: wttr.in&quot; http://localhost:8000
 curl -H &quot;Host: wttr.in&quot; http://localhost:9000
 </code></pre></section>
-<section id="tabpanel_FOdv6PEgws-5_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_FOdv6PEgws-5_start-tunnel-windows" role="tabpanel" data-tab="start-tunnel-windows" aria-hidden="true" hidden="hidden">
 <pre><code>REM run this command and get the id from the first edge-router.
 ziti edge controller list edge-routers
 
 REM use the id returned from the above command and put it into a variable for use in a momment
-EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+SET EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
 
 REM remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
 ziti edge controller delete config wttrconfig
@@ -409,17 +406,583 @@ ziti edge controller create config wttrconfig ziti-tunneler-client.v1 &quot;{ \&
 REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
 REM send a request to wttr.in to retreive a weather forecast
 ziti edge controller delete service wttr.ziti
-ziti edge controller create service wttr.ziti &quot;${EDGE_ROUTER_ID}&quot; tcp://wttr.in:80 --configs wttrconfig
+ziti edge controller create service wttr.ziti &quot;%EDGE_ROUTER_ID%&quot; tcp://wttr.in:80 --configs wttrconfig
 
-REM start one or both proxies
-ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v
-ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v
+REM start one or both proxies - use ctrl-break or ctrl-pause to terminate these processes 
+start /b ziti-tunnel proxy -i &quot;%HSM_DEST%/%RSA_ID%.json&quot; wttr.ziti:8000 -v
+start /b ziti-tunnel proxy -i &quot;%HSM_DEST%/%EC_ID%.json&quot; wttr.ziti:9000 -v
 
 REM use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
 curl -H &quot;Host: wttr.in&quot; http://localhost:8000
 curl -H &quot;Host: wttr.in&quot; http://localhost:9000
 </code></pre></section>
 </div>
+<h3 id="putting-it-all-together">Putting It All Together</h3>
+<p>Above we&#39;ve only shown the commands that need to run and not what the output of those commands would look like. Here
+we&#39;ll see all the commands put together along with all the output from the commands. This section is long - you are
+warned!</p>
+<div class="tabGroup" id="tabgroup_FOdv6PEgws-6">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-6_hidden-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-6_hidden-linux" data-tab="hidden-linux" tabindex="0" aria-selected="true">Sample Output</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-6_verify-linux" role="tab" aria-controls="tabpanel_FOdv6PEgws-6_verify-linux" data-tab="verify-linux" tabindex="-1">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FOdv6PEgws-6_verify-windows" role="tab" aria-controls="tabpanel_FOdv6PEgws-6_verify-windows" data-tab="verify-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_FOdv6PEgws-6_hidden-linux" role="tabpanel" data-tab="hidden-linux">
+<p>The tabs to the right contain example output from running all the commands in sequence. If you want to see what the
+output would likely look like click one of the tabs to the right.</p>
+</section>
+<section id="tabpanel_FOdv6PEgws-6_verify-linux" role="tabpanel" data-tab="verify-linux" aria-hidden="true" hidden="hidden">
+<pre><code>cd@sg1 ~/.softhsm/softhsm_demo
+$ # the name of the ziti controller you&#39;re logging into
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export ZITI_CTRL=local-edge-controller
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # the location of the certificate(s) to use to validate the controller
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export ZITI_CTRL_CERT=/path/to/controller.cert
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export ZITI_USER=myUserName
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export ZITI_PWD=myPassword
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # a name for the configuration
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_NAME=softhsm_demo
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # the path to the root of the softhsm config files
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_ROOT=/home/cd/.softhsm
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # location for the config file and tokens to be placed
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # path to the softhsm2 library
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export PKCS11_MODULE=/usr/local/lib/softhsm/libsofthsm2.so
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # the id of the key - you probably want to leave these alone unless you know better
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_ID1=01
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_ID2=02
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # the pins used when accessing the pkcs11 api
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_SOPIN=1111
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_PIN=2222
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export RSA_ID=${HSM_NAME}${HSM_ID1}_rsa
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export EC_ID=${HSM_NAME}${HSM_ID2}_ec
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export SOFTHSM2_CONF=${HSM_DEST}/softhsm.config
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_LABEL=${HSM_NAME}-label
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ export HSM_TOKENS_DIR=&quot;${HSM_DEST}/tokens/&quot;
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # make an alias for ease
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ alias p=&#39;pkcs11-tool --module $PKCS11_MODULE&#39;
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ cd ${HSM_ROOT}
+
+cd@sg1 ~/.softhsm
+$
+
+cd@sg1 ~/.softhsm
+$ rm -rf ${HSM_NAME}
+mkdir -p ${HSM_TOKENS_DIR}
+
+cd ${HSM_NAME}
+
+# Create a text file at ${SOFTHSM2_CONF} with these contents but make sure you replace the tokendir entry with ${HSM_TOKENS_DIR}
+cat &gt; ${SOFTHSM2_CONF} &lt;&lt;HERE
+# SoftHSM v2 configuration file
+
+directories.tokendir = ${HSM_TOKENS_DIR}
+objectstore.backend = file
+
+# ERROR, WARNING, INFO, DEBUG
+log.level = INFO
+
+cd@sg1 ~/.softhsm
+$ mkdir -p ${HSM_TOKENS_DIR}
+
+# If CKF_REMOVABLE_DEVICE flag should be set
+slots.removable = false
+
+cd@sg1 ~/.softhsm
+$
+
+cd@sg1 ~/.softhsm
+$ cd ${HSM_NAME}
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # Create a text file at ${SOFTHSM2_CONF} with these contents but make sure you replace the tokendir entry with ${HSM_TOKENS_DIR}
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ cat &gt; ${SOFTHSM2_CONF} &lt;&lt;HERE
+&gt; # SoftHSM v2 configuration file
+&gt;
+&gt; directories.tokendir = ${HSM_TOKENS_DIR}
+&gt; objectstore.backend = file
+&gt;
+&gt; # ERROR, WARNING, INFO, DEBUG
+&gt; log.level = INFO
+&gt;
+&gt; # If CKF_REMOVABLE_DEVICE flag should be set
+&gt; slots.removable = false
+&gt;
+&gt; # Enable and disable PKCS#11 mechanisms using slots.mechanisms.
+&gt; slots.mechanisms = ALL
+&gt; HERE
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+# create a new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;${RSA_ID}&quot; -o &quot;${HSM_DEST}/${RSA_ID}.jwt&quot;
+
+# create a second new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;${EC_ID}&quot; -o &quot;${HSM_DEST}/${EC_ID}.jwt&quot;Token: 28da1089-1636-4e6b-b5c7-96edc8d6162f
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # create a new identity and output the jwt to a known location
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti edge controller create identity device &quot;${RSA_ID}&quot; -o &quot;${HSM_DEST}/${RSA_ID}.jwt&quot;
+dbf953bc-a987-4a89-a93d-0d6dac13150f
+Enrollment expires at 2020-02-23T13:31:35.306053182Z
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # create a second new identity and output the jwt to a known location
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti edge controller create identity device &quot;${EC_ID}&quot; -o &quot;${HSM_DEST}/${EC_ID}.jwt&quot;
+cfffe40d-b859-4a5a-ab4f-c9621a57ec85
+Enrollment expires at 2020-02-23T13:31:36.676560457Z
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ p --init-token --label &quot;ziti-test-token&quot; --so-pin $HSM_SOPIN
+
+# create a couple of keys - one rsa and one ec
+p -p $HSM_PIN -k --key-type rsa:2048 --id &quot;${HSM_ID1}&quot; --label ziti-rsa-key --usage-sign --usage-decrypt
+p -p $HSM_PIN -k --key-type EC:prime256v1 --id ${HSM_ID2} --label ziti-ecdsa-key --usage-sign --usage-decryptUsing slot 0 with a present token (0x0)
+Token successfully initialized
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ p --init-pin --pin $HSM_PIN --so-pin $HSM_SOPIN
+Using slot 0 with a present token (0x7f834e53)
+User PIN successfully initialized
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # create a couple of keys - one rsa and one ec
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ p -p $HSM_PIN -k --key-type rsa:2048 --id &quot;${HSM_ID1}&quot; --label ziti-rsa-key --usage-sign --usage-decrypt
+Using slot 0 with a present token (0x7f834e53)
+Key pair generated:
+Private Key Object; RSA
+label:      ziti-rsa-key
+ID:         01
+Usage:      decrypt, sign, unwrap
+Public Key Object; RSA 2048 bits
+label:      ziti-rsa-key
+ID:         01
+Usage:      encrypt, verify, wrap
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ p -p $HSM_PIN -k --key-type EC:prime256v1 --id ${HSM_ID2} --label ziti-ecdsa-key --usage-sign --usage-decrypt
+Using slot 0 with a present token (0x7f834e53)
+Key pair generated:
+Private Key Object; EC
+label:      ziti-ecdsa-key
+ID:         02
+Usage:      decrypt, sign, unwrap
+Public Key Object; EC  EC_POINT 256 bits
+EC_POINT:   0441046f9ae0bbc3cbe62e6bbad50ad673add3ba1ee5a07f5391893df956c53d67c62b727ca1004fe9b44027e8e1f1605a602946257b1b1d20ba00342cec85c13a0462
+EC_PARAMS:  06082a8648ce3d030107
+label:      ziti-ecdsa-key
+ID:         02
+Usage:      encrypt, verify, wrap
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti-enroller -j &quot;${HSM_DEST}/${RSA_ID}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
+DEBU[0000] jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjQ2NDY5NSwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6IjIzOTNjNDgwLTc0NGMtNDc3OS05NjU3LWNhOTdlMzUzOWQ0ZiIsInN1YiI6ImRiZjk1M2JjLWE5ODctNGE4OS1hOTNkLTBkNmRhYzEzMTUwZiJ9.OucLqJYgvGO0zov3ADI4oM0i0CASfpD6GUUAck5cBKVJqUN8jsdHe272CwnR7TH1w7uUNr5zPDJnwklVRQ0kzgxqFe9lGqNOxKtYecr-oI50K-J_OShPu_LkJ8dpmUk-OEzc1mq29KsIVu9GLUI43FLYD7SWFZZFsYk6iB8H4PPRrUNZucTcApgNNHljlwl8n-my5N3STqazJf7YUIHOh-OiW8rJFXZYf5gri_B6uDGQo-ZcMOISWCTRjPxe2boHK0ymrUanbe_i9vHbOQRIik7J6xOEA2-Vu-QW9WY4bEvl0_LChdV4YBG09EtWsJndl1AIsD0AP0fCjgD6FifAbpmiZx_YoqOM-KCbN9Vts9_FobNfT0rt9s7RzcHImj22jxEQtSNVbrjnulPwzhBM2PnOKrHJtq8KGgsGlC-aC1pUkiRS-eMHDOshDUFk16p56UXm9QS4d1rPmCQ8yksgEdeurRydmBKCr2tr1v9hC7gSxY1sOBF-b9k7HBGuinomuyeF6CRRMRYMiYz26suZXvP70ufJ5Z2h6hYqvIIGtpk_MxMuVl8r9iylWq3P7oqbDo74g3p3OSFwRUDm5llBuZKJUzQXYE3435NdpHeStKu4K2VYvGGCxpWe950ONrAGzwSYtYdOVvkgGxBreO3RNiQN427XD9yZw66pXXqIRV0
+INFO[0000] using engine : pkcs11
+DEBU[0000] loading key                                   context=pkcs11 url=&quot;pkcs11:////usr/local/lib/softhsm/libsofthsm2.so?id=01&amp;pin=2222&quot;
+INFO[0000] using driver: //usr/local/lib/softhsm/libsofthsm2.so  context=pkcs11
+WARN[0000] slot not specified, using first slot reported by the driver (2139311699)  context=pkcs11
+DEBU[0000] found signing mechanism                       context=pkcs11 sign mechanism=0
+DEBU[0000] no cas provided in caPool. using system provided cas
+DEBU[0000] fetching certificates from server
+DEBU[0000] loading key                                   context=pkcs11 url=&quot;pkcs11:////usr/local/lib/softhsm/libsofthsm2.so?id=01&amp;pin=2222&quot;
+INFO[0000] using driver: //usr/local/lib/softhsm/libsofthsm2.so  context=pkcs11
+WARN[0000] slot not specified, using first slot reported by the driver (2139311699)  context=pkcs11
+DEBU[0000] found signing mechanism                       context=pkcs11 sign mechanism=0
+enrolled successfully. identity file written to: /home/cd/.softhsm/softhsm_demo/softhsm_demo01_rsa.json
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti-enroller -j &quot;${HSM_DEST}/${EC_ID}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
+DEBU[0000] jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjQ2NDY5NiwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6ImJlZTJlY2U3LTE4ZTAtNGQ3Zi04NmRlLTU4NmM5MTAyNDY3YiIsInN1YiI6ImNmZmZlNDBkLWI4NTktNGE1YS1hYjRmLWM5NjIxYTU3ZWM4NSJ9.nRCE-_osr6rdVUcfyR-irvAWitCSK0pm7WaG0hOC0-O22SFs8tYw7uKvbGmNkFoVsUYK4y6A4X77Q6JPNPDIzwWl1TO788B4UiJNh6x5jFEKMawzzPbq-wGq0PLstLsULOryxRtIMdHRYaCrxspC9mIZTrIWe85iPPjirOJ0Pgq0-Li2hZmBtlFOh8zTzYGmXVQtKhA-obIDSa12Nrt6gpgpNl1Ob_EXWWkwC5rcdm4yKpiKx7wYjxBRKc4ZLODmNahe69KiG5XD9A5I5o6YWQDs-pgl3Op44U9Kk94fGSZPcgzkPUC8NaX1eWgYh6RCMs3uSp6TMi8bRisPCOW770K3CxPpCS1fKg9rpyPninFShjRMvsbf999ldWh3YKmLJXvtinQF3szbmCsVaTI4-NxlkhLcdL2Qo6ivLz_kddNfzmDFcOEcLerR0D_Ugt0mPi0RidgkX0J00uXqd1SqYyI3b68KyVd5U3hIoL8NRQ1gAluky0jSe-xj5vfTgxYiJNZlUqCA4DvGdXl98NiWu40eHEz5ksKePbB_LVCmcMW3mPNdQjmDw4fdKvfZs0FdqgOcBGzbfQznpt3UV1pgL7Kdl6EfZppP1FNjqaxHyiEqkdINY0X5k33CDV4IVuS0ZDbOuQHInfG2ggLLS_vykC37w5iJe19ECSMWd_JzgQc
+INFO[0000] using engine : pkcs11
+DEBU[0000] loading key                                   context=pkcs11 url=&quot;pkcs11:////usr/local/lib/softhsm/libsofthsm2.so?id=02&amp;pin=2222&quot;
+INFO[0000] using driver: //usr/local/lib/softhsm/libsofthsm2.so  context=pkcs11
+WARN[0000] slot not specified, using first slot reported by the driver (2139311699)  context=pkcs11
+DEBU[0000] found signing mechanism                       context=pkcs11 sign mechanism=0
+DEBU[0000] EC oid[1.2.840.10045.3.1.7], rest: [], err: &lt;nil&gt;  context=pkcs11
+WARN[0000] failed to get mechanism info [1044]           context=pkcs11 error=&quot;pkcs11: 0x70: CKR_MECHANISM_INVALID&quot;
+DEBU[0000] no cas provided in caPool. using system provided cas
+DEBU[0000] fetching certificates from server
+DEBU[0000] loading key                                   context=pkcs11 url=&quot;pkcs11:////usr/local/lib/softhsm/libsofthsm2.so?id=02&amp;pin=2222&quot;
+INFO[0000] using driver: //usr/local/lib/softhsm/libsofthsm2.so  context=pkcs11
+WARN[0000] slot not specified, using first slot reported by the driver (2139311699)  context=pkcs11
+DEBU[0000] found signing mechanism                       context=pkcs11 sign mechanism=0
+DEBU[0000] EC oid[1.2.840.10045.3.1.7], rest: [], err: &lt;nil&gt;  context=pkcs11
+WARN[0000] failed to get mechanism info [1044]           context=pkcs11 error=&quot;pkcs11: 0x70: CKR_MECHANISM_INVALID&quot;
+enrolled successfully. identity file written to: /home/cd/.softhsm/softhsm_demo/softhsm_demo02_ec.json
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # run this command and get the id from the first edge-router.
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti edge controller list edge-routers
+id: c34734a4-d5de-430b-a5dc-7fa05363b28d    name: local-edge-router    role attributes: {}
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ EDGE_ROUTER_ID=c34734a4-d5de-430b-a5dc-7fa05363b28d
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti edge controller delete config wttrconfig
+ziti edge controller create config wttrconfig ziti-tunneler-client.v1 &quot;{ \&quot;hostname\&quot; : \&quot;localhost\&quot;, \&quot;port\&quot; : 9000 }&quot;
+
+# recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+# send a request to wttr.in to retreive a weather forecast
+ziti edge controller delete service wttr.ziti
+ziti edge controller create service wttr.ziti &quot;${EDGE_ROUTER_ID}&quot; tcp://wttr.in:80 --configs wttrconfig
+
+# start one or both proxies
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v &amp;
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v &amp;
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti edge controller create config wttrconfig ziti-tunneler-client.v1 &quot;{ \&quot;hostname\&quot; : \&quot;localhost\&quot;, \&quot;port\&quot; : 9000 }&quot;
+384166bd-0781-4189-ae66-6789cc1952b2
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # send a request to wttr.in to retreive a weather forecast
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti edge controller delete service wttr.ziti
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti edge controller create service wttr.ziti &quot;${EDGE_ROUTER_ID}&quot; tcp://wttr.in:80 --configs wttrconfig
+eb5c5fe8-5781-4760-9962-90ab708027f2
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ # start one or both proxies
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v &amp;
+[1] 14821
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v &amp;
+[2] 14822
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ [   0.005]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Start: starting proxy interceptor
+[   0.007]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Start: starting proxy interceptor
+[   0.006]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: {url=[pkcs11:////usr/local/lib/softhsm/libsofthsm2.so?id=02&amp;pin=2222]} loading key
+[   0.007]    INFO github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: using driver: //usr/local/lib/softhsm/libsofthsm2.so
+[   0.008]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: {url=[pkcs11:////usr/local/lib/softhsm/libsofthsm2.so?id=01&amp;pin=2222]} loading key
+[   0.008]    INFO github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: using driver: //usr/local/lib/softhsm/libsofthsm2.so
+[   0.019] WARNING github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: slot not specified, using first slot reported by the driver (2139311699)
+[   0.020] WARNING github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: slot not specified, using first slot reported by the driver (2139311699)
+[   0.023]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: {sign mechanism=[0]} found signing mechanism
+[   0.024]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.(*engine).LoadKey [pkcs11]: {sign mechanism=[0]} found signing mechanism
+[   0.023]   DEBUG github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.loadECDSApub [pkcs11]: EC oid[1.2.840.10045.3.1.7], rest: [], err: &lt;nil&gt;
+[   0.023] WARNING github.com/netfoundry/ziti-foundation/identity/engines/pkcs11.getECDSAmechanism [pkcs11]: {error=[pkcs11: 0x70: CKR_MECHANISM_INVALID]} failed to get mechanism info [1044]
+[   0.025]    INFO github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).Authenticate: attempting to authenticate
+[   0.024]    INFO github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).Authenticate: attempting to authenticate
+[   0.060]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).Authenticate: {token=[de50dbc8-a00b-49aa-8fcc-285be8babdb4] id=[25692bf8-6cb1-4133-8b86-575a8ea65f09]} Got api session: {25692bf8-6cb1-4133-8b86-575a8ea65f09 de50dbc8-a00b-49aa-8fcc-285be8babdb4}
+[   0.060]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getServices: using api session token de50dbc8-a00b-49aa-8fcc-285be8babdb4
+[   0.069]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).Authenticate: {token=[45eae1d0-8ad0-4428-9900-c328ed9e3d23] id=[b8654830-b9e9-4450-9116-072ab4e8cca5]} Got api session: {b8654830-b9e9-4450-9116-072ab4e8cca5 45eae1d0-8ad0-4428-9900-c328ed9e3d23}
+[   0.069]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getServices: using api session token 45eae1d0-8ad0-4428-9900-c328ed9e3d23
+[   0.106]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getServices: using api session token de50dbc8-a00b-49aa-8fcc-285be8babdb4
+[   0.113]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getServices: using api session token 45eae1d0-8ad0-4428-9900-c328ed9e3d23
+[   0.160]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: starting tunnel for newly available service netcat7256
+[   0.160]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.interceptor.Intercept: {service=[netcat7256]} service netcat7256 was not specified at initialization. not intercepting
+[   0.160]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: starting tunnel for newly available service wttr.ziti
+[   0.160]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getSession: requesting session from https://local-edge-controller:1280/sessions
+[   0.160]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getSession: {service_id=[eb5c5fe8-5781-4760-9962-90ab708027f2]} requesting session
+[   0.170]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: starting tunnel for newly available service wttr.ziti
+[   0.170]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getSession: requesting session from https://local-edge-controller:1280/sessions
+[   0.170]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti.(*contextImpl).getSession: {service_id=[eb5c5fe8-5781-4760-9962-90ab708027f2]} requesting session
+[   0.200]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.interceptor.Intercept: {service=[wttr.ziti] id=[a5291ddc-a86e-48c9-975e-662bc3bcb0d7]} acquired network session
+[   0.200]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).handleTCP: {service=[wttr.ziti] addr=[0.0.0.0:8000]} service is listening
+[   0.221]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.interceptor.Intercept: {service=[wttr.ziti] id=[d4330d93-a6e1-4e48-91e1-cb26520f09d2]} acquired network session
+[   0.222]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: starting tunnel for newly available service netcat7256
+[   0.222]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.interceptor.Intercept: {service=[netcat7256]} service netcat7256 was not specified at initialization. not intercepting
+[   0.222]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).handleTCP: {service=[wttr.ziti] addr=[0.0.0.0:9000]} service is listening
+jobs
+[1]-  Running                 ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v &amp;
+[2]+  Running                 ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v &amp;
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ curl -H &quot;Host: wttr.in&quot; http://localhost:8000
+[   8.289]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).Create [tls:local-edge-router:3022]: started
+[   8.302]   DEBUG github.com/netfoundry/ziti-foundation/transport/tls.Dial: server provided [2] certificates
+[   8.302]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).sendHello [u{classic}-&gt;i{}]: started
+[   8.304]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).sendHello [u{classic}-&gt;i{}]: exited
+[   8.304]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).Create [tls:local-edge-router:3022]: exited
+[   8.304]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{D8nP}]: started
+[   8.305]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).txer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{D8nP}]: started
+[   8.306]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*muxAddSinkEvent).Handle: {connId=[1]} Added sink to mux. Current sink count: 1
+[   8.306]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgMux).AddMsgSink: {connId=[1]} added to msg mux
+[   8.544]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{D8nP}]: waiter found for message. type [60784], sequence [1], replyFor [1]
+[   8.544]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Connect: {connId=[1]} connected
+[   8.544]    INFO github.com/netfoundry/ziti-edge/tunnel.Run: {src-remote=[127.0.0.1:60053] src-local=[127.0.0.1:8000] dst-local=[:1] dst-remote=[wttr.ziti]} tunnel started
+[   8.545]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgChannel).WriteTraced: {chSeq=[-1] edgeSeq=[1] connId=[1] type=[EdgeDataType]} writing 71 bytes
+[   8.547]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} read buffer = 32768 bytes
+[   9.968]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgEvent).Handle: {seq=[1] connId=[1]} handling received EdgeDataType
+[   9.968]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} got buffer from queue 8907 bytes
+[   9.968]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} read buffer = 32768 bytes
+Weather report: Laurelton, United States
+
+            Mist
+_ - _ - _ -  35..39 °F
+_ - _ - _   ↑ 5 mph
+_ - _ - _ -  3 mi
+            0.2 in
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Thu 13 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│      .-.      Light drizzle  │      .-.      Light drizzle  │  _`/&quot;&quot;.-.     Moderate or he…│  _`/&quot;&quot;.-.     Patchy light s…│
+│     (   ).    39..41 °F      │     (   ).    41..46 °F      │   ,\_(   ).   33..39 °F      │   ,\_(   ).   30..+35 °F     │
+│    (___(__)   ↗ 3-5 mph      │    (___(__)   → 8-10 mph     │    /(___(__)  → 7-9 mph      │    /(___(__)  → 6-8 mph      │
+│     ‘ ‘ ‘ ‘   3 mi           │     ‘ ‘ ‘ ‘   1 mi           │     * * * *   5 mi           │      *  *  *  4 mi           │
+│    ‘ ‘ ‘ ‘    0.2 in | 66%   │    ‘ ‘ ‘ ‘    0.0 in | 64%   │    * * * *    0.0 in | 29%   │     *  *  *   0.0 in | 57%   │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Fri 14 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│               Overcast       │               Cloudy         │  _`/&quot;&quot;.-.     Patchy snow po…│    \  /       Partly cloudy  │
+│      .--.     8..21 °F       │      .--.     12..23 °F      │   ,\_(   ).   10..21 °F      │  _ /&quot;&quot;.-.     1..14 °F       │
+│   .-(    ).   ↘ 9-12 mph     │   .-(    ).   ↘ 10-11 mph    │    /(___(__)  ↘ 11-14 mph    │    \_(   ).   ↓ 9-15 mph     │
+│  (___.__)__)  6 mi           │  (___.__)__)  6 mi           │      ‘ * ‘ *  6 mi           │    /(___(__)  5 mi           │
+│               0.0 in | 0%    │               0.0 in | 0%    │     * ‘ * ‘   0.0 in | 0%    │               0.0 in | 0%    │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Sat 15 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│     \   /     Sunny          │     \   /     Sunny          │               Overcast       │               Overcast       │
+│      .-.      14..17 °F      │      .-.      19..24 °F      │      .--.     21..30 °F      │      .--.     17..26 °F      │
+│   ― (   ) ―   → 2 mph        │   ― (   ) ―   ↑ 3-4 mph      │   .-(    ).   ↑ 9-13 mph     │   .-(    ).   ↑ 8-14 mph     │
+│      `-’      6 mi           │      `-’      6 mi           │  (___.__)__)  6 mi           │  (___.__)__)  6 mi           │
+│     /   \     0.0 in | 0%    │     /   \     0.0 in | 0%    │               0.0 in | 0%    │               0.0 in | 0%    │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+
+Follow @igor_chubin for wttr.in updates
+[   9.968]    INFO github.com/netfoundry/ziti-edge/tunnel.myCopy: {dst-local=[:1] dst-remote=[wttr.ziti] src-remote=[127.0.0.1:60053] src-local=[127.0.0.1:8000]} stopping pipe
+[   9.968]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Close: {connId=[1]} close: begin
+[   9.968]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*muxRemoveSinkEvent).Handle: {connId=[1]} Removed sink from mux. Current sink count: 0
+[   9.968]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgMux).RemoveMsgSinkById: {connId=[1]} removed from msg mux
+[   9.968]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Close: {connId=[1]} close: end
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ [  10.969]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} sequencer closed, closing connection
+[  10.969]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} return EOF from closing/closed connection
+[  10.969]    INFO github.com/netfoundry/ziti-edge/tunnel.myCopy: {src-remote=[wttr.ziti] src-local=[:1] dst-local=[127.0.0.1:8000] dst-remote=[127.0.0.1:60053]} stopping pipe
+[  10.969]    INFO github.com/netfoundry/ziti-edge/tunnel.Run: {dst-remote=[wttr.ziti] src-remote=[127.0.0.1:60053] src-local=[127.0.0.1:8000] dst-local=[:1]} tunnel closed: 71 bytes sent; 8907 bytes received
+curl -H &quot;Host: wttr.in&quot; http://localhost:9000
+[  14.253]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).Create [tls:local-edge-router:3022]: started
+[  14.265]   DEBUG github.com/netfoundry/ziti-foundation/transport/tls.Dial: server provided [2] certificates
+[  14.265]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).sendHello [u{classic}-&gt;i{}]: started
+[  14.266]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).sendHello [u{classic}-&gt;i{}]: exited
+[  14.266]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*classicDialer).Create [tls:local-edge-router:3022]: exited
+[  14.266]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*muxAddSinkEvent).Handle: {connId=[1]} Added sink to mux. Current sink count: 1
+[  14.266]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{DGp7}]: started
+[  14.266]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgMux).AddMsgSink: {connId=[1]} added to msg mux
+[  14.266]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).txer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{DGp7}]: started
+[  14.405]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}-&gt;u{classic}-&gt;i{DGp7}]: waiter found for message. type [60784], sequence [1], replyFor [1]
+[  14.405]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Connect: {connId=[1]} connected
+[  14.405]    INFO github.com/netfoundry/ziti-edge/tunnel.Run: {src-local=[127.0.0.1:9000] dst-local=[:1] dst-remote=[wttr.ziti] src-remote=[127.0.0.1:60058]} tunnel started
+[  14.405]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} read buffer = 32768 bytes
+[  14.405]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgChannel).WriteTraced: {connId=[1] type=[EdgeDataType] chSeq=[-1] edgeSeq=[1]} writing 71 bytes
+[  14.605]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgEvent).Handle: {seq=[1] connId=[1]} handling received EdgeDataType
+[  14.605]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} got buffer from queue 8907 bytes
+[  14.605]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} read buffer = 32768 bytes
+Weather report: Laurelton, United States
+
+            Mist
+_ - _ - _ -  35..39 °F
+_ - _ - _   ↑ 5 mph
+_ - _ - _ -  3 mi
+            0.2 in
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Thu 13 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│      .-.      Light drizzle  │      .-.      Light drizzle  │  _`/&quot;&quot;.-.     Moderate or he…│  _`/&quot;&quot;.-.     Patchy light s…│
+│     (   ).    39..41 °F      │     (   ).    41..46 °F      │   ,\_(   ).   33..39 °F      │   ,\_(   ).   30..+35 °F     │
+│    (___(__)   ↗ 3-5 mph      │    (___(__)   → 8-10 mph     │    /(___(__)  → 7-9 mph      │    /(___(__)  → 6-8 mph      │
+│     ‘ ‘ ‘ ‘   3 mi           │     ‘ ‘ ‘ ‘   1 mi           │     * * * *   5 mi           │      *  *  *  4 mi           │
+│    ‘ ‘ ‘ ‘    0.2 in | 66%   │    ‘ ‘ ‘ ‘    0.0 in | 64%   │    * * * *    0.0 in | 29%   │     *  *  *   0.0 in | 57%   │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Fri 14 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│               Overcast       │               Cloudy         │  _`/&quot;&quot;.-.     Patchy snow po…│    \  /       Partly cloudy  │
+│      .--.     8..21 °F       │      .--.     12..23 °F      │   ,\_(   ).   10..21 °F      │  _ /&quot;&quot;.-.     1..14 °F       │
+│   .-(    ).   ↘ 9-12 mph     │   .-(    ).   ↘ 10-11 mph    │    /(___(__)  ↘ 11-14 mph    │    \_(   ).   ↓ 9-15 mph     │
+│  (___.__)__)  6 mi           │  (___.__)__)  6 mi           │      ‘ * ‘ *  6 mi           │    /(___(__)  5 mi           │
+│               0.0 in | 0%    │               0.0 in | 0%    │     * ‘ * ‘   0.0 in | 0%    │               0.0 in | 0%    │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+                                                    ┌─────────────┐
+┌──────────────────────────────┬───────────────────────┤  Sat 15 Feb ├───────────────────────┬──────────────────────────────┐
+│            Morning           │             Noon      └──────┬──────┘     Evening           │             Night            │
+├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│     \   /     Sunny          │     \   /     Sunny          │               Overcast       │               Overcast       │
+│      .-.      14..17 °F      │      .-.      19..24 °F      │      .--.     21..30 °F      │      .--.     17..26 °F      │
+│   ― (   ) ―   → 2 mph        │   ― (   ) ―   ↑ 3-4 mph      │   .-(    ).   ↑ 9-13 mph     │   .-(    ).   ↑ 8-14 mph     │
+│      `-’      6 mi           │      `-’      6 mi           │  (___.__)__)  6 mi           │  (___.__)__)  6 mi           │
+│     /   \     0.0 in | 0%    │     /   \     0.0 in | 0%    │               0.0 in | 0%    │               0.0 in | 0%    │
+└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+
+Follow @igor_chubin for wttr.in updates
+[  14.605]    INFO github.com/netfoundry/ziti-edge/tunnel.myCopy: {src-local=[127.0.0.1:9000] dst-local=[:1] dst-remote=[wttr.ziti] src-remote=[127.0.0.1:60058]} stopping pipe
+[  14.605]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Close: {connId=[1]} close: begin
+[  14.605]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*muxRemoveSinkEvent).Handle: {connId=[1]} Removed sink from mux. Current sink count: 0
+[  14.605]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/edge.(*MsgMux).RemoveMsgSinkById: {connId=[1]} removed from msg mux
+[  14.605]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Close: {connId=[1]} close: end
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ [  15.606]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} sequencer closed, closing connection
+[  15.606]   DEBUG github.com/netfoundry/ziti-sdk-golang/ziti/internal/edge_impl.(*edgeConn).Read: {connId=[1]} return EOF from closing/closed connection
+[  15.606]    INFO github.com/netfoundry/ziti-edge/tunnel.myCopy: {dst-local=[127.0.0.1:9000] dst-remote=[127.0.0.1:60058] src-remote=[wttr.ziti] src-local=[:1]} stopping pipe
+[  15.606]    INFO github.com/netfoundry/ziti-edge/tunnel.Run: {dst-local=[:1] dst-remote=[wttr.ziti] src-remote=[127.0.0.1:60058] src-local=[127.0.0.1:9000]} tunnel closed: 71 bytes sent; 8907 bytes received
+jobs
+[1]-  Running                 ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v &amp;
+[2]+  Running                 ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v &amp;
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ killall ziti-tunnel
+[  21.732]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal terminated
+[  21.731]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal terminated
+[  21.732]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal terminated
+[  21.731]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal terminated
+[  21.732]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: stopping tunnel for unavailable service: netcat7256
+[  21.731]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: stopping tunnel for unavailable service: wttr.ziti
+[  21.731]   ERROR github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: failed to stop intercepting: StopIntercepting not implemented by proxy interceptor
+[  21.732]   ERROR github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: failed to stop intercepting: StopIntercepting not implemented by proxy interceptor
+[  21.731]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: stopping tunnel for unavailable service: netcat7256
+[  21.732]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: stopping tunnel for unavailable service: wttr.ziti
+[  21.731]   ERROR github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: failed to stop intercepting: StopIntercepting not implemented by proxy interceptor
+[  21.732]   ERROR github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: failed to stop intercepting: StopIntercepting not implemented by proxy interceptor
+[  21.731]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Stop: stopping proxy interceptor
+[  21.732]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Stop: stopping proxy interceptor
+[1]-  Done                    ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v
+[2]+  Done                    ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v
+
+cd@sg1 ~/.softhsm/softhsm_demo
+$ jobs
+
+cd@sg1 ~/.softhsm/softhsm_demo
+</code></pre></section>
+<section id="tabpanel_FOdv6PEgws-6_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
+<pre><code>yyyy
+</code></pre></section>
+</div>
+<p>bottom</p>
 </article>
           </div>
           
