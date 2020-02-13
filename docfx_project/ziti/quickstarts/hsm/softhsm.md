@@ -853,33 +853,6 @@ output would likely look like click one of the tabs to the right.
 
 # [Windows](#tab/verify-windows)
 
-    c:\path\to\softhsm\softhsm_demo>[ 805.814]   ERROR github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}->u{classic}->i{lPeD}]: rx error (short read)
-    [ 805.814]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).Close [ch{ziti-sdk}->u{classic}->i{lPeD}]: closing channel
-    [ 805.815]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).txer [ch{ziti-sdk}->u{classic}->i{lPeD}]: exited
-    [ 805.815]   DEBUG github.com/netfoundry/ziti-foundation/channel2.(*channelImpl).rxer [ch{ziti-sdk}->u{classic}->i{lPeD}]: exited
-
-
-    [ 814.557]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal interrupt
-    [ 814.564]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal interrupt
-    [ 814.564]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal interrupt
-    [ 814.564]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: stopping tunnel for unavailable service: netcat7256
-    c:\path\to\softhsm\softhsm_demo>[ 814.565]   ERROR github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: failed to stop intercepting: StopIntercepting not implemented by proxy interceptor
-    [ 814.565]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: stopping tunnel for unavailable service: wttr.ziti
-    [ 814.565]   ERROR github.com/netfoundry/ziti-edge/tunnel/intercept.updateServices: failed to stop intercepting: StopIntercepting not implemented by proxy interceptor
-    [ 814.565]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Stop: stopping proxy interceptor
-    [ 814.557]   DEBUG github.com/netfoundry/ziti-edge/tunnel/intercept.ServicePoller: caught signal interrupt
-    [ 814.558]    INFO github.com/netfoundry/ziti-edge/tunnel/intercept/proxy.(*interceptor).Stop: stopping proxy interceptor
-
-
-    c:\path\to\softhsm\softhsm_demo>
-
-    c:\path\to\softhsm\softhsm_demo>
-
-    c:\path\to\softhsm\softhsm_demo>
-
-    c:\path\to\softhsm\softhsm_demo>clear
-
-
     c:\path\to\softhsm\softhsm_demo>REM the name of the ziti controller you're logging into
 
     c:\path\to\softhsm\softhsm_demo>SET ZITI_CTRL=local-edge-controller
