@@ -147,15 +147,22 @@ metadata:
   name: ziti-tunnel-sidecar-demo
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: ziti-tunnel-sidecar-demo
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: ziti-tunnel-sidecar-demo
     spec:
       containers:
-      - image: busybox
+      - image: centos
         name: testclient
-        command: [&quot;sh&quot;,&quot;-c&quot;,&quot;while true; do echo wget -qO - eth0.ziti.cli:80; sleep 5; done&quot;]
-      - image: netfoundry/ziti-tunnel:0.5.7-2546
+        command: [&quot;sh&quot;,&quot;-c&quot;,&quot;while true; set -x; do curl -sSLf ethzero.ziti.ui 2&gt;&amp;1; set +x; sleep 5; done&quot;]
+      - image: netfoundry/ziti-tunnel:0.5.8-2554
+        name: ziti-tunnel
         env:
         - name: NF_REG_NAME
           value: tunnel-sidecar
@@ -165,11 +172,20 @@ spec:
           readOnly: true
         - name: ziti-tunnel-persistent-storage
           mountPath: /netfoundry
+        securityContext:
+          capabilities:
+          add:
+            - NET_ADMIN
+      dnsPolicy: &quot;None&quot;
+      dnsConfig:
+        nameservers:
+          - 127.0.0.1
+          - 8.8.8.8
       restartPolicy: Always
       volumes:
       - name: ziti-tunnel-persistent-storage
         persistentVolumeClaim:
-          claimName: ziti-tunnel-host-pv-claim
+          claimName: tunnel-sidecar-pv-claim
       - name: tunnel-sidecar-jwt
         secret:
           secretName: tunnel-sidecar.jwt
