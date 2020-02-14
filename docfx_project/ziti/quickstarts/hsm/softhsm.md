@@ -19,6 +19,7 @@ line interface of your operating system.
 * [SoftHSMv2](https://www.opendnssec.org/softhsm/) is downloaded and installed in a known location
 * [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a known
   location
+* ziti, ziti-tunnel, ziti-enroller are all on the path.
 
 ## Let's Do This - SoftHSMv2
 
@@ -303,18 +304,23 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     type "%HSM_DEST%\example_%RSA_ID%.txt"
     type "%HSM_DEST%\example_%EC_ID%.txt"
 
+    REM ctrl-break or ctrl-pause to kill the tunnelers
+
 ***
 
 ### Putting It All Together
 
 Above we've only shown the commands that need to run and not what the output of those commands would look like. Here
 we'll see all the commands put together along with all the output from the commands. This section is long - you are
-warned! Also note that this content is subject to change. If the output you see is not identical it's because the 
+warned! Also note that this content is subject to change. If the output you see is not identical it's because the
+software has changed since this information was captured. File an [issue](https://github.com/netfoundry/ziti-doc/issues)
+if you'd like to see it updated.
 
 # [Sample Output](#tab/hidden-linux)
 
 The tabs to the right contain example output from running all the commands in sequence. If you want to see what the
-output would likely look like click one of the tabs to the right.
+output would likely look like click one of the tabs to the right. Reminder - it's a lot of commands and a lot of output!
+:)
 
 # [Linux/MacOS](#tab/verify-linux)
 

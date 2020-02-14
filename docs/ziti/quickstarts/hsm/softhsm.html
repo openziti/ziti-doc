@@ -110,6 +110,7 @@ line interface of your operating system.</p>
 <li><a href="https://www.opendnssec.org/softhsm/">SoftHSMv2</a> is downloaded and installed in a known location</li>
 <li><a href="https://github.com/OpenSC/OpenSC/wiki">OpenSC</a> is installed and <code>pkcs11-tool</code> is either on the PATH or at a known
 location</li>
+<li>ziti, ziti-tunnel, ziti-enroller are all on the path.</li>
 </ul>
 <h2 id="lets-do-this---softhsmv2">Let&#39;s Do This - SoftHSMv2</h2>
 <p>Here&#39;s the list of steps we&#39;ll accomplish in this quickstart:</p>
@@ -425,12 +426,16 @@ curl -H &quot;Host: wttr.in&quot; http://localhost:9000 &gt; &quot;%HSM_DEST%\ex
 REM show the results in the console
 type &quot;%HSM_DEST%\example_%RSA_ID%.txt&quot;
 type &quot;%HSM_DEST%\example_%EC_ID%.txt&quot;
+
+REM ctrl-break or ctrl-pause to kill the tunnelers
 </code></pre></section>
 </div>
 <h3 id="putting-it-all-together">Putting It All Together</h3>
 <p>Above we&#39;ve only shown the commands that need to run and not what the output of those commands would look like. Here
 we&#39;ll see all the commands put together along with all the output from the commands. This section is long - you are
-warned! Also note that this content is subject to change. If the output you see is not identical it&#39;s because the </p>
+warned! Also note that this content is subject to change. If the output you see is not identical it&#39;s because the
+software has changed since this information was captured. File an <a href="https://github.com/netfoundry/ziti-doc/issues">issue</a>
+if you&#39;d like to see it updated.</p>
 <div class="tabGroup" id="tabgroup_FOdv6PEgws-6">
 <ul role="tablist">
 <li role="presentation">
@@ -445,7 +450,8 @@ warned! Also note that this content is subject to change. If the output you see 
 </ul>
 <section id="tabpanel_FOdv6PEgws-6_hidden-linux" role="tabpanel" data-tab="hidden-linux">
 <p>The tabs to the right contain example output from running all the commands in sequence. If you want to see what the
-output would likely look like click one of the tabs to the right.</p>
+output would likely look like click one of the tabs to the right. Reminder - it&#39;s a lot of commands and a lot of output!
+:)</p>
 </section>
 <section id="tabpanel_FOdv6PEgws-6_verify-linux" role="tabpanel" data-tab="verify-linux" aria-hidden="true" hidden="hidden">
 <pre><code>cd@sg1 ~/.softhsm/softhsm_demo
