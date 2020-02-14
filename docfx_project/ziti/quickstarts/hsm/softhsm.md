@@ -24,16 +24,20 @@ line interface of your operating system.
 
 Here's the list of steps we'll accomplish in this quickstart:
 
-* Establish a bunch of environment variables to make it easy to copy/paste the other commands
+* Establish a bunch of environment variables to make it easy to copy/paste the other commands. You'll want to *look at
+  these environment variables*. They need to be setup properly. If you have problems with this guide it is almost
+  certainly because you have an environment variable setup incorrectly. Double check them.
 * Make a directory and generate a configuration file for SoftHSM
 * Use the [Ziti CLI](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti/) to:
-    * create an identity
-    * enroll the identity
+    * create two identities - one demonstrating an RSA key, one EC
+    * enroll the identities
     * create a test service
     * create test router/service policies
 * Use the pkcs11-tool provided by OpenSC to interact with SoftHSM to:
     * initialize the SoftHSM driver
     * create a key
+* Use the [ziti-enroller](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-enroller/) to enroll the identities
+  using SoftHSM
 * Use the [ziti-tunnel](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-tunnel/) in proxy mode to verify things
   are working and traffic is flowing over the Ziti Network
 
@@ -56,8 +60,6 @@ Open a command line and establish the following environment varibles.
 
     # the path to the root of the softhsm config files
     export HSM_ROOT=/home/cd/.softhsm
-    # location for the config file and tokens to be placed
-    export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
 
     # path to the softhsm2 library
     export PKCS11_MODULE=/usr/local/lib/softhsm/libsofthsm2.so
@@ -72,9 +74,10 @@ Open a command line and establish the following environment varibles.
     export RSA_ID=${HSM_NAME}${HSM_ID1}_rsa
     export EC_ID=${HSM_NAME}${HSM_ID2}_ec
 
+    # location for the config file and tokens to be placed
     export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
-    export SOFTHSM2_CONF=${HSM_DEST}/softhsm.config
     export HSM_LABEL=${HSM_NAME}-label
+    export SOFTHSM2_CONF=${HSM_DEST}/softhsm.config
     export HSM_TOKENS_DIR="${HSM_DEST}/tokens/"
 
     # make an alias for ease
@@ -210,7 +213,6 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 # [Linux/MacOS](#tab/pkcs11-tool-linux)
 
     p --init-token --label "ziti-test-token" --so-pin $HSM_SOPIN
-    p --init-pin --pin $HSM_PIN --so-pin $HSM_SOPIN
 
     # create a couple of keys - one rsa and one ec
     p -p $HSM_PIN -k --key-type rsa:2048 --id "${HSM_ID1}" --label ziti-rsa-key --usage-sign --usage-decrypt
@@ -231,8 +233,8 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 
 # [Linux/MacOS](#tab/enroll-linux)
 
-    ziti-enroller -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
-    ziti-enroller -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
+    ziti-enroller -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
+    ziti-enroller -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
 
 # [Windows](#tab/enroll-windows)
 
@@ -245,11 +247,14 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 
 # [Linux/MacOS](#tab/start-tunnel-linux)
 
-    # run this command and get the id from the first edge-router.
-    ziti edge controller list edge-routers
+    # if you only have a single edge router this command will work without the need for copy/paste
+    EDGE_ROUTER_ID=$(ziti edge controller list edge-routers | cut -d " " -f2)
+    
+    # IF the above command doesn't work - run this command and get the id from the first edge-router.
+    # ziti edge controller list edge-routers
 
-    # use the id returned from the above command and put it into a variable for use in a momment
-    EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+    # then use the id returned from the above command and put it into a variable for use in a momment
+    # EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
     ziti edge controller delete config wttrconfig
@@ -270,11 +275,12 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 
 # [Windows](#tab/start-tunnel-windows)
 
+    REM these two commands can't be copied and pasted - you need to get the result of the first command and use it in the next
     REM run this command and get the id from the first edge-router.
     ziti edge controller list edge-routers
     
     REM use the id returned from the above command and put it into a variable for use in a momment
-    SET EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+    SET EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     REM remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
     ziti edge controller delete config wttrconfig
@@ -296,13 +302,14 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     REM show the results in the console
     type "%HSM_DEST%\example_%RSA_ID%.txt"
     type "%HSM_DEST%\example_%EC_ID%.txt"
+
 ***
 
 ### Putting It All Together
 
 Above we've only shown the commands that need to run and not what the output of those commands would look like. Here
 we'll see all the commands put together along with all the output from the commands. This section is long - you are
-warned!
+warned! Also note that this content is subject to change. If the output you see is not identical it's because the 
 
 # [Sample Output](#tab/hidden-linux)
 

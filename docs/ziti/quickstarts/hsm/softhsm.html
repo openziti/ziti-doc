@@ -114,11 +114,13 @@ location</li>
 <h2 id="lets-do-this---softhsmv2">Let&#39;s Do This - SoftHSMv2</h2>
 <p>Here&#39;s the list of steps we&#39;ll accomplish in this quickstart:</p>
 <ul>
-<li>Establish a bunch of environment variables to make it easy to copy/paste the other commands</li>
+<li>Establish a bunch of environment variables to make it easy to copy/paste the other commands. You&#39;ll want to <em>look at
+these environment variables</em>. They need to be setup properly. If you have problems with this guide it is almost
+certainly because you have an environment variable setup incorrectly. Double check them.</li>
 <li>Make a directory and generate a configuration file for SoftHSM</li>
 <li>Use the <a href="https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti/">Ziti CLI</a> to:<ul>
-<li>create an identity</li>
-<li>enroll the identity</li>
+<li>create two identities - one demonstrating an RSA key, one EC</li>
+<li>enroll the identities</li>
 <li>create a test service</li>
 <li>create test router/service policies</li>
 </ul>
@@ -128,6 +130,8 @@ location</li>
 <li>create a key</li>
 </ul>
 </li>
+<li>Use the <a href="https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-enroller/">ziti-enroller</a> to enroll the identities
+using SoftHSM</li>
 <li>Use the <a href="https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-tunnel/">ziti-tunnel</a> in proxy mode to verify things
 are working and traffic is flowing over the Ziti Network</li>
 </ul>
@@ -156,8 +160,6 @@ export HSM_NAME=softhsm_demo
 
 # the path to the root of the softhsm config files
 export HSM_ROOT=/home/cd/.softhsm
-# location for the config file and tokens to be placed
-export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
 
 # path to the softhsm2 library
 export PKCS11_MODULE=/usr/local/lib/softhsm/libsofthsm2.so
@@ -172,9 +174,10 @@ export HSM_PIN=2222
 export RSA_ID=${HSM_NAME}${HSM_ID1}_rsa
 export EC_ID=${HSM_NAME}${HSM_ID2}_ec
 
+# location for the config file and tokens to be placed
 export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
-export SOFTHSM2_CONF=${HSM_DEST}/softhsm.config
 export HSM_LABEL=${HSM_NAME}-label
+export SOFTHSM2_CONF=${HSM_DEST}/softhsm.config
 export HSM_TOKENS_DIR=&quot;${HSM_DEST}/tokens/&quot;
 
 # make an alias for ease
@@ -324,7 +327,6 @@ ziti edge controller create identity device &quot;%EC_ID%&quot; -o &quot;%HSM_DE
 </ul>
 <section id="tabpanel_FOdv6PEgws-3_pkcs11-tool-linux" role="tabpanel" data-tab="pkcs11-tool-linux">
 <pre><code>p --init-token --label &quot;ziti-test-token&quot; --so-pin $HSM_SOPIN
-p --init-pin --pin $HSM_PIN --so-pin $HSM_SOPIN
 
 # create a couple of keys - one rsa and one ec
 p -p $HSM_PIN -k --key-type rsa:2048 --id &quot;${HSM_ID1}&quot; --label ziti-rsa-key --usage-sign --usage-decrypt
@@ -350,8 +352,8 @@ p -p &quot;%HSM_PIN%&quot; -k --key-type EC:prime256v1 --id &quot;%HSM_ID2%&quot
 </li>
 </ul>
 <section id="tabpanel_FOdv6PEgws-4_enroll-linux" role="tabpanel" data-tab="enroll-linux">
-<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${RSA_ID}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
-ziti-enroller -j &quot;${HSM_DEST}/${EC_ID}.jwt&quot; -k &quot;pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
+<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${RSA_ID}.jwt&quot; -k &quot;pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
+ziti-enroller -j &quot;${HSM_DEST}/${EC_ID}.jwt&quot; -k &quot;pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
 </code></pre></section>
 <section id="tabpanel_FOdv6PEgws-4_enroll-windows" role="tabpanel" data-tab="enroll-windows" aria-hidden="true" hidden="hidden">
 <pre><code>ziti-enroller -j &quot;%HSM_DEST%\%RSA_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
@@ -369,11 +371,14 @@ ziti-enroller -j &quot;%HSM_DEST%\%EC_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MO
 </li>
 </ul>
 <section id="tabpanel_FOdv6PEgws-5_start-tunnel-linux" role="tabpanel" data-tab="start-tunnel-linux">
-<pre><code># run this command and get the id from the first edge-router.
-ziti edge controller list edge-routers
+<pre><code># if you only have a single edge router this command will work without the need for copy/paste
+EDGE_ROUTER_ID=$(ziti edge controller list edge-routers | cut -d &quot; &quot; -f2)
 
-# use the id returned from the above command and put it into a variable for use in a momment
-EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+# IF the above command doesn&#39;t work - run this command and get the id from the first edge-router.
+# ziti edge controller list edge-routers
+
+# then use the id returned from the above command and put it into a variable for use in a momment
+# EDGE_ROUTER_ID={insert the &#39;id&#39; from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
 # remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
 ziti edge controller delete config wttrconfig
@@ -393,11 +398,12 @@ curl -H &quot;Host: wttr.in&quot; http://localhost:8000
 curl -H &quot;Host: wttr.in&quot; http://localhost:9000
 </code></pre></section>
 <section id="tabpanel_FOdv6PEgws-5_start-tunnel-windows" role="tabpanel" data-tab="start-tunnel-windows" aria-hidden="true" hidden="hidden">
-<pre><code>REM run this command and get the id from the first edge-router.
+<pre><code>REM these two commands can&#39;t be copied and pasted - you need to get the result of the first command and use it in the next
+REM run this command and get the id from the first edge-router.
 ziti edge controller list edge-routers
 
 REM use the id returned from the above command and put it into a variable for use in a momment
-SET EDGE_ROUTER_ID=64d4967b-5474-4f06-8548-5700ed7bfa80
+SET EDGE_ROUTER_ID={insert the &#39;id&#39; from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
 REM remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
 ziti edge controller delete config wttrconfig
@@ -424,7 +430,7 @@ type &quot;%HSM_DEST%\example_%EC_ID%.txt&quot;
 <h3 id="putting-it-all-together">Putting It All Together</h3>
 <p>Above we&#39;ve only shown the commands that need to run and not what the output of those commands would look like. Here
 we&#39;ll see all the commands put together along with all the output from the commands. This section is long - you are
-warned!</p>
+warned! Also note that this content is subject to change. If the output you see is not identical it&#39;s because the </p>
 <div class="tabGroup" id="tabgroup_FOdv6PEgws-6">
 <ul role="tablist">
 <li role="presentation">

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Yubikey | NetFoundry Ziti </title>
+    <title>YubiKey by Yubico | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Yubikey | NetFoundry Ziti ">
+    <meta name="title" content="YubiKey by Yubico | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../../../images/favicon.ico">
@@ -93,9 +93,362 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="yubikey">Yubikey</h1>
+<h1 id="yubikey-by-yubico">YubiKey by Yubico</h1>
 
-<p>This is where we talk about yubikey</p>
+<p><a href="https://www.yubico.com/">Yubico</a> is a manufacturer of HSM deviceis. A popular line of HSM produced by Yubico is the
+YubiKey. This quickstart guide will use specific device from Yubico - the <a href="https://www.yubico.com/product/YubiKey-5-nfc">YubiKey 5
+nfc</a>.</p>
+<h2 id="overview">Overview</h2>
+<p>The <a href="https://www.yubico.com/product/YubiKey-5-nfc">YubiKey 5 nfc</a> is a multi-purpose device with a few different
+security-minded uses. One of the applications on the device is an application called PIV or &quot;Personal Identity
+Verification&quot;. PIV is a <a href="https://csrc.nist.gov/projects/piv/piv-standards-and-supporting-documentation">standard published by
+NIST</a> and describes the kinds of
+credentials which make up the standard. PIV credentials have certificates and key pairs, pin numbers, biometrics
+like fingerprints and pictures, and other unique identifiers. When put together into a PIV credential, it provides
+the capability to implement multi-factor authentication for networks, applications and buildings.</p>
+<p>In this quickstart you will see the commands and tools needed to use a <a href="https://www.yubico.com/product/YubiKey-5-nfc">YubiKey 5
+nfc</a> with a Ziti Network. This document is intended to serve as a
+quickstart. That means limited context will be provided for each step. When appropriate there will be a small amount of
+context or a comment included to aid in understanding of what is happening and why. Most if not all of these commands
+are easily searched for using your search engine of choice.</p>
+<div class="WARNING"><h5>Warning</h5><p>This quickstart intended audience is for more technically savvy indiviuals. You will need to be familar with the command
+line interface of your operating system.</p>
+</div>
+<h2 id="prerequistites">Prerequistites</h2>
+<ul>
+<li><a href="https://www.yubico.com/product/YubiKey-5-nfc">YubiKey 5 nfc</a> - clearly you&#39;ll need one in order to use this
+quickstart!</li>
+<li><a href="https://github.com/OpenSC/OpenSC/wiki">OpenSC</a> is installed and <code>pkcs11-tool</code> is either on the PATH or at a known
+location. Not required however this quickstart uses the <code>pkcs11-tool</code> to illustrate that the device is PKCS#11
+compliant. HSM manufacturers will generally provide a similar tool and often expand it&#39;s usage. See more below.
+<a href="https://developers.yubico.com/yubico-piv-tool/">yubico-piv-tool</a> - YubiKey privides a similar tool to the
+<code>pkcs11-tool</code>. This tool is needed to be installed because it contains the pkcs#11 module (driver) for the HSM. As
+this is a tool specific to Yubico we&#39;ve chosen to not use this in the following commands.</li>
+<li>Ensure the YubiKey is factory reset. To avoid any compliations with existing information in the YubiKey ensure the
+device is factory reset using the <a href="https://www.yubico.com/products/services-software/download/YubiKey-manager/">YubiKey
+Manager</a>.</li>
+<li>In order to successfully use the YubiKey the libraries provided by the <code>yubico-piv-tool</code> <em>MUST</em> either be on the path
+or in a common location that</li>
+<li>Linux Only: If you&#39;re using linux - you&#39;ll need to follow the <a href="https://developers.yubico.com/yubico-piv-tool/">build
+instructions</a> provided by Yubico. Before you can do anything with the
+Yubikey you&#39;ll need to make sure the <code>libykcs11.so</code> exists on your system. When creating this quickstart the library
+was built to <code>./yubico-piv-tool-2.0.0/ykcs11/.libs/libykcs11.so</code>.</li>
+<li><a href="https://ubuntu.com/">Ubuntu</a> was used to test this guide. An initial attempt using <a href="https://linuxmint.com/">linux
+mint</a> </li>
+</ul>
+<h2 id="lets-use-the-yubikey">Let&#39;s Use the YubiKey!</h2>
+<p>Here&#39;s the list of steps we&#39;ll accomplish in this quickstart:</p>
+<ul>
+<li>Establish a bunch of environment variables to make it easy to copy/paste the other commands. You&#39;ll want to <em>look at
+these environment variables</em>. They need to be setup properly. If you have problems with this guide it is almost
+certainly because you have an environment variable setup incorrectly. Double check them.</li>
+<li>Make a directory and generate a configuration files for Ziti</li>
+<li>Use the <a href="https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti/">Ziti CLI</a> to:<ul>
+<li>create two identities - one demonstrating an RSA key, one EC</li>
+<li>enroll the identities</li>
+<li>create a test service</li>
+<li>create test router/service policies</li>
+</ul>
+</li>
+<li>Use the pkcs11-tool provided by OpenSC to interact with the YubiKey to:<ul>
+<li>initialize the PIV app</li>
+<li>create a key</li>
+</ul>
+</li>
+<li>Use the <a href="https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-enroller/">ziti-enroller</a> to enroll the identities
+using the YubiKey</li>
+<li>Use the <a href="https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-tunnel/">ziti-tunnel</a> in proxy mode to verify things
+are working and traffic is flowing over the Ziti Network</li>
+</ul>
+<div class="WARNING"><h5>Warning</h5><p>Do <em>NOT</em> use id <code>2</code> or <code>02</code> for any keys you add. Id <code>02</code> corresponds to the YubiKey&#39;s &quot;Management Key&quot;. You will not be
+able to write a key into this location. The error you will see will indicate: <code>CKR_USER_NOT_LOGGED_IN</code>.</p>
+</div>
+<h3 id="establish-environment-variables">Establish Environment Variables</h3>
+<p>Open a command line and establish the following environment varibles. Note that for the YubiKey we do <em>not</em> use id <code>02</code>
+as it appears to be reserved by the YubiKey.  The default SOPIN and PIN are used as well. When using the YubiKey Manager
+software the &quot;SO PIN&quot; corresponds to the &quot;Management Key&quot; while &quot;pin&quot; is the same both here and in the YubiKey Manager.</p>
+<div class="tabGroup" id="tabgroup_VnP2eZrENS">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS_env-var-linux" role="tab" aria-controls="tabpanel_VnP2eZrENS_env-var-linux" data-tab="env-var-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS_env-var-windows" role="tab" aria-controls="tabpanel_VnP2eZrENS_env-var-windows" data-tab="env-var-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_VnP2eZrENS_env-var-linux" role="tabpanel" data-tab="env-var-linux">
+<pre><code># the name of the ziti controller you&#39;re logging into
+export ZITI_CTRL=local-edge-controller
+# the location of the certificate(s) to use to validate the controller
+export ZITI_CTRL_CERT=/path/to/controller.cert
+
+export ZITI_USER=myUserName
+export ZITI_PWD=myPassword
+
+# a name for the configuration
+export HSM_NAME=yubikey_demo
+
+# path to the yubikey pkcs11 libraries
+export HSM_ROOT=/path/to/yubico-piv-tool-2.0.0
+export PKCS11_MODULE=${HSM_ROOT}/ykcs11/.libs/libykcs11.so
+
+# the id of the key - you probably want to leave these alone unless you know better
+export HSM_ID1=01
+export HSM_ID2=03
+
+# the pins used when accessing the pkcs11 api
+export HSM_SOPIN=010203040506070801020304050607080102030405060708
+export HSM_PIN=123456
+export RSA_ID=${HSM_NAME}${HSM_ID1}_rsa
+export EC_ID=${HSM_NAME}${HSM_ID2}_ec
+
+# location for the config files to be placed
+export HSM_DEST=${HSM_ROOT}/${HSM_NAME}
+export HSM_LABEL=${HSM_NAME}-label
+
+# make an alias for ease
+alias p=&#39;pkcs11-tool --module $PKCS11_MODULE&#39;
+</code></pre></section>
+<section id="tabpanel_VnP2eZrENS_env-var-windows" role="tabpanel" data-tab="env-var-windows" aria-hidden="true" hidden="hidden">
+<div class="WARNING"><h5>Warning</h5><p>Ensure you use the correct dll. If you use an x86 dll with x64 binaries you&#39;ll get an error.</p>
+</div>
+<div class="WARNING"><h5>Warning</h5><p>With Windows - make sure you update the path to include the folder of libykcs11-1.dll as additional libraries are needed
+by the pkcs11 driver!</p>
+</div>
+<pre><code>REM the name of the ziti controller you&#39;re logging into
+SET ZITI_CTRL=local-edge-controller
+REM the location of the certificate(s) to use to validate the controller
+SET ZITI_CTRL_CERT=c:\path\to\controller.cert
+
+SET ZITI_USER=myUserName
+SET ZITI_PWD=myPassword
+
+REM a name for the configuration
+SET HSM_NAME=softhsm_demo
+
+REM the path to the root of the softhsm config files
+SET HSM_ROOT=c:\path\to\yubico-piv-tool-2.0.0
+
+REM path to the pkcs11 library
+SET PATH=%PATH%;%HSM_ROOT%\bin
+SET PKCS11_MODULE=%HSM_ROOT%\bin\libykcs11-1.dll
+
+REM the id of the key - you probably want to leave these alone unless you know better
+SET HSM_ID1=01
+SET HSM_ID2=03
+SET RSA_ID=%HSM_NAME%%HSM_ID1%_rsa
+SET EC_ID=%HSM_NAME%%HSM_ID2%_ec
+
+REM the pins used when accessing the pkcs11 api
+SET HSM_SOPIN=010203040506070801020304050607080102030405060708
+SET HSM_PIN=123456
+
+SET HSM_DEST=%HSM_ROOT%\%HSM_NAME%
+SET HSM_LABEL=%HSM_NAME%-label
+SET SOFTHSM2_CONF=%HSM_DEST%\softhsm.config
+SET HSM_TOKENS_DIR=%HSM_DEST%\tokens\
+
+REM make an alias for ease
+doskey p=&quot;c:\Program Files\OpenSC Project\OpenSC\tools\pkcs11-tool.exe&quot; --module %PKCS11_MODULE% $*
+</code></pre></section>
+</div>
+<h3 id="make-directories-for-config-files">Make Directories for Config Files</h3>
+<div class="tabGroup" id="tabgroup_VnP2eZrENS-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-1_dirs-and-config-linux" role="tab" aria-controls="tabpanel_VnP2eZrENS-1_dirs-and-config-linux" data-tab="dirs-and-config-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-1_dirs-and-config-windows" role="tab" aria-controls="tabpanel_VnP2eZrENS-1_dirs-and-config-windows" data-tab="dirs-and-config-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_VnP2eZrENS-1_dirs-and-config-linux" role="tabpanel" data-tab="dirs-and-config-linux">
+<pre><code>cd ${HSM_ROOT}
+
+rm -rf ${HSM_NAME}
+mkdir -p ${HSM_NAME}
+
+cd ${HSM_NAME}
+</code></pre></section>
+<section id="tabpanel_VnP2eZrENS-1_dirs-and-config-windows" role="tabpanel" data-tab="dirs-and-config-windows" aria-hidden="true" hidden="hidden">
+<pre><code>cd /d %HSM_ROOT%
+
+rmdir /s /q %HSM_NAME%
+mkdir %HSM_NAME%
+
+cd /d %HSM_NAME%
+</code></pre></section>
+</div>
+<h3 id="use-the-ziti-cli">Use the Ziti CLI</h3>
+<div class="tabGroup" id="tabgroup_VnP2eZrENS-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-2_ziti-cli-linux" role="tab" aria-controls="tabpanel_VnP2eZrENS-2_ziti-cli-linux" data-tab="ziti-cli-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-2_ziti-cli-windows" role="tab" aria-controls="tabpanel_VnP2eZrENS-2_ziti-cli-windows" data-tab="ziti-cli-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_VnP2eZrENS-2_ziti-cli-linux" role="tabpanel" data-tab="ziti-cli-linux">
+<pre><code>ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+
+# create a new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;${RSA_ID}&quot; -o &quot;${HSM_DEST}/${RSA_ID}.jwt&quot;
+
+# create a second new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;${EC_ID}&quot; -o &quot;${HSM_DEST}/${EC_ID}.jwt&quot;
+</code></pre></section>
+<section id="tabpanel_VnP2eZrENS-2_ziti-cli-windows" role="tabpanel" data-tab="ziti-cli-windows" aria-hidden="true" hidden="hidden">
+<pre><code>ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+
+REM create a new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;%RSA_ID%&quot; -o &quot;%HSM_DEST%\%RSA_ID%.jwt&quot;
+
+REM create a second new identity and output the jwt to a known location
+ziti edge controller create identity device &quot;%EC_ID%&quot; -o &quot;%HSM_DEST%\%EC_ID%.jwt&quot;
+</code></pre></section>
+</div>
+<h3 id="use-pkcs11-tool-to-setup-the-yubikey">Use pkcs11-tool to Setup the YubiKey</h3>
+<div class="tabGroup" id="tabgroup_VnP2eZrENS-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-3_pkcs11-tool-linux" role="tab" aria-controls="tabpanel_VnP2eZrENS-3_pkcs11-tool-linux" data-tab="pkcs11-tool-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-3_pkcs11-tool-windows" role="tab" aria-controls="tabpanel_VnP2eZrENS-3_pkcs11-tool-windows" data-tab="pkcs11-tool-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_VnP2eZrENS-3_pkcs11-tool-linux" role="tabpanel" data-tab="pkcs11-tool-linux">
+<pre><code>p --init-token --label &quot;ziti-test-token&quot; --so-pin $HSM_SOPIN
+
+# create a couple of keys - one rsa and one ec
+p -k --key-type rsa:2048 --usage-sign --usage-decrypt --login --id $HSM_ID1 --login-type so --so-pin $HSM_SOPIN --label defaultkey
+p -k --key-type EC:prime256v1 --usage-sign --usage-decrypt --login --id $HSM_ID2 --login-type so --so-pin $HSM_SOPIN --label defaultkey
+</code></pre></section>
+<section id="tabpanel_VnP2eZrENS-3_pkcs11-tool-windows" role="tabpanel" data-tab="pkcs11-tool-windows" aria-hidden="true" hidden="hidden">
+<pre><code>p --init-token --label &quot;ziti-test-token&quot; --so-pin %HSM_SOPIN%
+
+REM create a couple of keys - one rsa and one ec
+p -k --key-type rsa:2048 --usage-sign --usage-decrypt --login --id %HSM_ID1% --login-type so --so-pin %HSM_SOPIN% --label defaultkey
+p -k --key-type EC:prime256v1 --usage-sign --usage-decrypt --login --id %HSM_ID2% --login-type so --so-pin %HSM_SOPIN% --label defaultkey
+</code></pre></section>
+</div>
+<h3 id="use-ziti-enroller-to-enroll-the-identities">Use ziti-enroller to Enroll the Identities</h3>
+<div class="tabGroup" id="tabgroup_VnP2eZrENS-4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-4_enroll-linux" role="tab" aria-controls="tabpanel_VnP2eZrENS-4_enroll-linux" data-tab="enroll-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-4_enroll-windows" role="tab" aria-controls="tabpanel_VnP2eZrENS-4_enroll-windows" data-tab="enroll-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_VnP2eZrENS-4_enroll-linux" role="tabpanel" data-tab="enroll-linux">
+<pre><code>ziti-enroller -j &quot;${HSM_DEST}/${RSA_ID}.jwt&quot; -k &quot;pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&amp;pin=${HSM_PIN}&quot; -v
+ziti-enroller -j &quot;${HSM_DEST}/${EC_ID}.jwt&quot; -k &quot;pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&amp;pin=${HSM_PIN}&quot; -v
+</code></pre></section>
+<section id="tabpanel_VnP2eZrENS-4_enroll-windows" role="tabpanel" data-tab="enroll-windows" aria-hidden="true" hidden="hidden">
+<pre><code>ziti-enroller -j &quot;%HSM_DEST%\%RSA_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&amp;pin=%HSM_PIN%&quot; -v
+ziti-enroller -j &quot;%HSM_DEST%\%EC_ID%.jwt&quot; -k &quot;pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&amp;pin=%HSM_PIN%&quot; -v
+</code></pre></section>
+</div>
+<h3 id="use-ziti-tunnel-to-verify-things-work">Use ziti-tunnel to Verify Things Work</h3>
+<div class="tabGroup" id="tabgroup_VnP2eZrENS-5">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-5_start-tunnel-linux" role="tab" aria-controls="tabpanel_VnP2eZrENS-5_start-tunnel-linux" data-tab="start-tunnel-linux" tabindex="0" aria-selected="true">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-5_start-tunnel-windows" role="tab" aria-controls="tabpanel_VnP2eZrENS-5_start-tunnel-windows" data-tab="start-tunnel-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_VnP2eZrENS-5_start-tunnel-linux" role="tabpanel" data-tab="start-tunnel-linux">
+<pre><code># if you only have a single edge router this command will work without the need for copy/paste
+EDGE_ROUTER_ID=$(ziti edge controller list edge-routers | cut -d &quot; &quot; -f2)
+
+# IF the above command doesn&#39;t work - run this command and get the id from the first edge-router.
+# ziti edge controller list edge-routers
+
+# then use the id returned from the above command and put it into a variable for use in a momment
+# EDGE_ROUTER_ID={insert the &#39;id&#39; from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
+
+# remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
+ziti edge controller delete config wttrconfig
+ziti edge controller create config wttrconfig ziti-tunneler-client.v1 &quot;{ \&quot;hostname\&quot; : \&quot;localhost\&quot;, \&quot;port\&quot; : 9000 }&quot;
+
+# recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+# send a request to wttr.in to retreive a weather forecast
+ziti edge controller delete service wttr.ziti
+ziti edge controller create service wttr.ziti &quot;${EDGE_ROUTER_ID}&quot; tcp://wttr.in:80 --configs wttrconfig
+
+# start one or both proxies
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${RSA_ID}.json&quot; wttr.ziti:8000 -v &amp;
+ziti-tunnel proxy -i &quot;${HSM_DEST}/${EC_ID}.json&quot; wttr.ziti:9000 -v &amp;
+
+# use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
+curl -H &quot;Host: wttr.in&quot; http://localhost:8000
+curl -H &quot;Host: wttr.in&quot; http://localhost:9000
+</code></pre></section>
+<section id="tabpanel_VnP2eZrENS-5_start-tunnel-windows" role="tabpanel" data-tab="start-tunnel-windows" aria-hidden="true" hidden="hidden">
+<pre><code>REM these two commands can&#39;t be copied and pasted - you need to get the result of the first command and use it in the next
+REM run this command and get the id from the first edge-router.
+ziti edge controller list edge-routers
+
+REM use the id returned from the above command and put it into a variable for use in a momment
+SET EDGE_ROUTER_ID={insert the &#39;id&#39; from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
+
+REM remove/recreate the config - here we&#39;ll be instructing the tunneler to listen on localhost and port 9000
+ziti edge controller delete config wttrconfig
+ziti edge controller create config wttrconfig ziti-tunneler-client.v1 &quot;{ \&quot;hostname\&quot; : \&quot;localhost\&quot;, \&quot;port\&quot; : 9000 }&quot;
+
+REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
+REM send a request to wttr.in to retreive a weather forecast
+ziti edge controller delete service wttr.ziti
+ziti edge controller create service wttr.ziti &quot;%EDGE_ROUTER_ID%&quot; tcp://wttr.in:80 --configs wttrconfig
+
+REM start one or both proxies - use ctrl-break or ctrl-pause to terminate these processes 
+start /b ziti-tunnel proxy -i &quot;%HSM_DEST%/%RSA_ID%.json&quot; wttr.ziti:8000 -v
+start /b ziti-tunnel proxy -i &quot;%HSM_DEST%/%EC_ID%.json&quot; wttr.ziti:9000 -v
+
+REM use a browser - or curl to verify the ziti tunneler is listening locally and the traffic has flowed over the ziti network
+curl -H &quot;Host: wttr.in&quot; http://localhost:8000 &gt; &quot;%HSM_DEST%\example_%RSA_ID%.txt&quot;
+curl -H &quot;Host: wttr.in&quot; http://localhost:9000 &gt; &quot;%HSM_DEST%\example_%EC_ID%.txt&quot;
+
+REM set the codepage for the cmd prompt so that the output looks nice
+chcp 65001
+
+REM show the results in the console
+type &quot;%HSM_DEST%\example_%RSA_ID%.txt&quot;
+type &quot;%HSM_DEST%\example_%EC_ID%.txt&quot;
+</code></pre></section>
+</div>
+<h3 id="putting-it-all-together">Putting It All Together</h3>
+<p>Above we&#39;ve only shown the commands that need to run and not what the output of those commands would look like. Here
+we&#39;ll see all the commands put together along with all the output from the commands. This section is long - you are
+warned! Also note that this content is subject to change. If the output you see is not identical it&#39;s because the </p>
+<div class="tabGroup" id="tabgroup_VnP2eZrENS-6">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-6_hidden-linux" role="tab" aria-controls="tabpanel_VnP2eZrENS-6_hidden-linux" data-tab="hidden-linux" tabindex="0" aria-selected="true">Sample Output</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-6_verify-linux" role="tab" aria-controls="tabpanel_VnP2eZrENS-6_verify-linux" data-tab="verify-linux" tabindex="-1">Linux/MacOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_VnP2eZrENS-6_verify-windows" role="tab" aria-controls="tabpanel_VnP2eZrENS-6_verify-windows" data-tab="verify-windows" tabindex="-1">Windows</a>
+</li>
+</ul>
+<section id="tabpanel_VnP2eZrENS-6_hidden-linux" role="tabpanel" data-tab="hidden-linux">
+<p>The tabs to the right contain example output from running all the commands in sequence. If you want to see what the
+output would likely look like click one of the tabs to the right.</p>
+</section>
+<section id="tabpanel_VnP2eZrENS-6_verify-linux" role="tabpanel" data-tab="verify-linux" aria-hidden="true" hidden="hidden">
+<pre><code>-- coming soon--
+</code></pre></section>
+<section id="tabpanel_VnP2eZrENS-6_verify-windows" role="tabpanel" data-tab="verify-windows" aria-hidden="true" hidden="hidden">
+<pre><code>-- coming soon --
+</code></pre></section>
+</div>
 </article>
           </div>
           

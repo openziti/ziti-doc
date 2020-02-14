@@ -2029,7 +2029,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/hsm/softhsm.html",
-          "hash": "sZglkPedZAXiri/f34nY+w=="
+          "hash": "EDMgxoP26RCbgsK7WHI3jw=="
         }
       },
       "is_incremental": false,
@@ -2041,7 +2041,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/hsm/yubikey.html",
-          "hash": "80Iu21oMu6hguvOatjOASQ=="
+          "hash": "f2LHnSTMEfBc0jeQ35aZ6w=="
         }
       },
       "is_incremental": false,
@@ -2191,17 +2191,17 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 10,
-          "skipped_file_count": 10
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 71,
           "skipped_file_count": 70
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 10
         }
       }
     },
