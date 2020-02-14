@@ -16,7 +16,7 @@ items:
     remote:
       path: docfx_project/aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
       branch: master
-      repo: git@github.com:NetFoundry/ziti-doc.git
+      repo: git@github.com:netfoundry/ziti-doc.git
     id: OnConnected
     path: aggregatedSources/csharp/src/NetFoundry/ZitiConnection.cs
     startLine: 25
