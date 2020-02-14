@@ -8,9 +8,9 @@ connected and disconnected from a computer trying to use the HSM.
 
 Without a doubt the biggest benefit of an HSM is that it is a physical piece of hardware. This means that any cryptographic keys
 protecting data is stored in the HSM and those keys are able to be removed from any given device which had the HSM
-attached. Because these keys are not kept as files on a computer and are instead a physical piece of equipment attached
-to the computer it is more secure because you can be sure that they only computer with the relevant key is one with the
-HSM attached to it.
+attached. Because these keys are not kept as files on a computer but are instead stored inside a physical piece of
+equipment attached to the computer it is more secure since there are no files for an attacker to find and copy. With an
+HSM you can be sure that they only computer with the relevant key is the one with the HSM attached to it.
 
 Another benefit of HSMs is that they are focused on security. The keys stored inside of many if not all HSMs are
 designed to not be able to be exported. This means that there's no chance for these keys to be extracted remotely and
@@ -30,12 +30,10 @@ We have included a couple of quickstarts illustrating two different PKCS#11 driv
 You will want to go to [the OpenSC Project](https://github.com/OpenSC/OpenSC/wiki) as it is what provides the
 `pkcs11-tool` which is used to interact with the HSMs.
 
-The first quickstart is based on [softhsm](https://www.opendnssec.org/softhsm/). This one focuses on software that
+The [first quickstart](hsm/softhsm.md) is based on [softhsm](https://www.opendnssec.org/softhsm/). This one focuses on software that
 provides an *emulated* HSM. This is useful for learning and understandin but it is not an actual HSM. Being software it
 doesn't have the important benefit of being a physical device but it does have one substantial advantage; it's entirely
 free.
 
-The second quickstart uses an actual physical device - a [Yubico](https://www.yubico.com/) Yubikey. The specific key we
+The [second quickstart](hsm/yubikey.md) uses an actual physical device - a [Yubico](https://www.yubico.com/) Yubikey. The specific key we
 used is a [Yubikey 5 nfc](https://www.yubico.com/product/yubikey-5-nfc).
-
-Click on either of the links to the left to read more about using SoftHSMv2 or a Yubikey with Ziti.

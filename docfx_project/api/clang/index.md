@@ -5,4 +5,4 @@
 </head>
 
 This is the c sdk landing page - you should be redirected to the API doc immediately. If not [click
-here](api/index.html)
+here](index.md)
