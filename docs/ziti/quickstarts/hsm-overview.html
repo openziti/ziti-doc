@@ -101,9 +101,9 @@ connected and disconnected from a computer trying to use the HSM.</p>
 <h2 id="why-an-hsm">Why an HSM</h2>
 <p>Without a doubt the biggest benefit of an HSM is that it is a physical piece of hardware. This means that any cryptographic keys
 protecting data is stored in the HSM and those keys are able to be removed from any given device which had the HSM
-attached. Because these keys are not kept as files on a computer and are instead a physical piece of equipment attached
-to the computer it is more secure because you can be sure that they only computer with the relevant key is one with the
-HSM attached to it.</p>
+attached. Because these keys are not kept as files on a computer but are instead stored inside a physical piece of
+equipment attached to the computer it is more secure since there are no files for an attacker to find and copy. With an
+HSM you can be sure that they only computer with the relevant key is the one with the HSM attached to it.</p>
 <p>Another benefit of HSMs is that they are focused on security. The keys stored inside of many if not all HSMs are
 designed to not be able to be exported. This means that there&#39;s no chance for these keys to be extracted remotely and
 used outside of the HSM itself, further increasing the security of these important keys.</p>
@@ -116,13 +116,12 @@ interact with cryptographic hardware such as smart cards or HSMs.</p>
 <p>We have included a couple of quickstarts illustrating two different PKCS#11 drivers to help with understanding.</p>
 <p>You will want to go to <a href="https://github.com/OpenSC/OpenSC/wiki">the OpenSC Project</a> as it is what provides the
 <code>pkcs11-tool</code> which is used to interact with the HSMs.</p>
-<p>The first quickstart is based on <a href="https://www.opendnssec.org/softhsm/">softhsm</a>. This one focuses on software that
+<p>The <a href="hsm/softhsm.html">first quickstart</a> is based on <a href="https://www.opendnssec.org/softhsm/">softhsm</a>. This one focuses on software that
 provides an <em>emulated</em> HSM. This is useful for learning and understandin but it is not an actual HSM. Being software it
 doesn&#39;t have the important benefit of being a physical device but it does have one substantial advantage; it&#39;s entirely
 free.</p>
-<p>The second quickstart uses an actual physical device - a <a href="https://www.yubico.com/">Yubico</a> Yubikey. The specific key we
+<p>The <a href="hsm/yubikey.html">second quickstart</a> uses an actual physical device - a <a href="https://www.yubico.com/">Yubico</a> Yubikey. The specific key we
 used is a <a href="https://www.yubico.com/product/yubikey-5-nfc">Yubikey 5 nfc</a>.</p>
-<p>Click on either of the links to the left to read more about using SoftHSMv2 or a Yubikey with Ziti.</p>
 </article>
           </div>
           
