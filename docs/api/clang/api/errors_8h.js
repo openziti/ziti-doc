@@ -9,6 +9,7 @@ var errors_8h =
     [ "ZITI_EOF", "errors_8h.html#adf68027c57495898fd8bf51ed0bad701", null ],
     [ "ZITI_GATEWAY_UNAVAILABLE", "errors_8h.html#ae7c15b1bb4736d407e8bee75007eb5c0", null ],
     [ "ZITI_INVALID_CONFIG", "errors_8h.html#a8918390961a4837766c0abbd5751c717", null ],
+    [ "ZITI_INVALID_STATE", "errors_8h.html#a1d1729b79d5abcb9fbf24b01363e5826", null ],
     [ "ZITI_NOT_AUTHORIZED", "errors_8h.html#a7a21163f06d22691e28273c92621547e", null ],
     [ "ZITI_OK", "errors_8h.html#a58cd556eb411c881903d30ae272984f4", null ],
     [ "ZITI_SERVICE_UNAVAILABLE", "errors_8h.html#adce4a78f4190299277ad587530ca5036", null ],

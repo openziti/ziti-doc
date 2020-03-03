@@ -1,7 +1,7 @@
 ### Obtain and Change the Default Password
 
 When first launched - the instace will deposit a file into the file system at
-~/.config/ziti/ziti-controller/credentials.json.
+/home/nfadmin/.config/ziti/ziti-controller/credentials.json.
 
 > [!NOTE]
 > Since this is your first Ziti deployment this system is expected to be transient. If the IP address or DNS entry
@@ -11,7 +11,7 @@ When first launched - the instace will deposit a file into the file system at
 Now, ssh to the newly created machine. Once there you can obtain the username and password for your
 Ziti Controller by issuing this command:
 
-    jq -r .password ~/.config/ziti/ziti-controller/credentials.json
+    jq -r .password /home/nfadmin/.config/ziti/ziti-controller/credentials.json
 
 You can choose to keep this password or change it to something easier to remember. If you change the password, please
 remember to use a strong password which is not easy to guess.

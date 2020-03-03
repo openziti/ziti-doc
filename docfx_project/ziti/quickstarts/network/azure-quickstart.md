@@ -51,7 +51,13 @@ ensure the following:
 After the virtual machine is created and provisioned navigate back to the virtual machine. In the upper-right portion of
 the screen under "DNS Name" click configure to establish a DNS name. For simplicity choose a name that is guaranteed to
 be unique such as "ziti-${ip.address}". For example if the virtual machine is located in US Central and the IP address
-is 52.165.223.129 enter "ziti-52-165-223-129.centralus.cloudapp.azure.com"
+is 52.165.223.129 enter "ziti-52-165-223-129.centralus.cloudapp.azure.com". Remember this address. This is the address 
+you will use when ssh-ing to the machine and this is the address that you'll use to access the online Web UI. For example
+building on the DNS name entered above - and if you chose 'nfadmin' as your username you would ssh using this command:
+
+    ssh nfadmin@ziti-52-165-223-129.centralus.cloudapp.azure.com
+
+And you would access the Web UI at https://ziti-52-165-223-129.centralus.cloudapp.azure.com
 
 The final step is to add the network contributor role so that the machine can automatically discover network settings.
 This is used when the machine is rebooted. If the DNS address changes the Ziti Edge - Developer Edition will recreate

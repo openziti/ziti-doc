@@ -143,7 +143,11 @@ that will be easy to find such as &quot;my-ziti&quot; or similar</li>
 <p>After the virtual machine is created and provisioned navigate back to the virtual machine. In the upper-right portion of
 the screen under &quot;DNS Name&quot; click configure to establish a DNS name. For simplicity choose a name that is guaranteed to
 be unique such as &quot;ziti-${ip.address}&quot;. For example if the virtual machine is located in US Central and the IP address
-is 52.165.223.129 enter &quot;ziti-52-165-223-129.centralus.cloudapp.azure.com&quot;</p>
+is 52.165.223.129 enter &quot;ziti-52-165-223-129.centralus.cloudapp.azure.com&quot;. Remember this address. This is the address 
+you will use when ssh-ing to the machine and this is the address that you&#39;ll use to access the online Web UI. For example
+building on the DNS name entered above - and if you chose &#39;nfadmin&#39; as your username you would ssh using this command:</p>
+<pre><code>ssh nfadmin@ziti-52-165-223-129.centralus.cloudapp.azure.com
+</code></pre><p>And you would access the Web UI at <a href="https://ziti-52-165-223-129.centralus.cloudapp.azure.com">https://ziti-52-165-223-129.centralus.cloudapp.azure.com</a></p>
 <p>The final step is to add the network contributor role so that the machine can automatically discover network settings.
 This is used when the machine is rebooted. If the DNS address changes the Ziti Edge - Developer Edition will recreate
 certificates for the newly created DNS entry.</p>
@@ -164,14 +168,14 @@ certificates for the newly created DNS entry.</p>
 Developer Edition&quot;.</p>
 <h3 id="obtain-and-change-the-default-password">Obtain and Change the Default Password</h3>
 <p>When first launched - the instace will deposit a file into the file system at
-~/.config/ziti/ziti-controller/credentials.json.</p>
+/home/nfadmin/.config/ziti/ziti-controller/credentials.json.</p>
 <div class="NOTE"><h5>Note</h5><p>Since this is your first Ziti deployment this system is expected to be transient. If the IP address or DNS entry
 changes (such as a system reboot) the image needs to be reconfigured becuase the certificates will no longer be valid.
 This file is used to reconfigure the system in this event and it happens automatically on startup.</p>
 </div>
 <p>Now, ssh to the newly created machine. Once there you can obtain the username and password for your
 Ziti Controller by issuing this command:</p>
-<pre><code>jq -r .password ~/.config/ziti/ziti-controller/credentials.json
+<pre><code>jq -r .password /home/nfadmin/.config/ziti/ziti-controller/credentials.json
 </code></pre><p>You can choose to keep this password or change it to something easier to remember. If you change the password, please
 remember to use a strong password which is not easy to guess.</p>
 <div class="TIP"><h5>Tip</h5><p>Once the password is changed - update the credentials.json file with the current password if you want the system to

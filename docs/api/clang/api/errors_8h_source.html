@@ -86,7 +86,7 @@ $(document).ready(function(){initNavTree('errors_8h_source.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 <a href="errors_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">Copyright 2019-2020 Netfoundry, Inc.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">Copyright 2019-2020 NetFoundry, Inc.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">you may not use this file except in compliance with the License.</span></div>
@@ -129,28 +129,30 @@ $(document).ready(function(){initNavTree('errors_8h_source.html',''); initResiza
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"> \</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">    XX(CONNABORT, &quot;Connection to edge router terminated&quot;) \</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"> \</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="errors_8h.html#a947429505002f0c889a011a663ea5a72">   64</a></span>&#160;<span class="preprocessor">    XX(WTF, &quot;WTF: programming error&quot;)</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#define ERR_ID(e, _) extern const int ZITI_##e;</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<a class="code" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092">ZITI_ERRORS</a>(<a class="code" href="errors_8h.html#a947429505002f0c889a011a663ea5a72">ERR_ID</a>)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#undef ERR_ID</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="errors_8h.html#a2182f9078122799ec98a7c1f17094191">ziti_errorstr</a>(<span class="keywordtype">int</span> err);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif //ZT_SDK_ERRORS_H</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">    XX(INVALID_STATE, &quot;invalid state&quot;) \</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor"> \</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="errors_8h.html#a947429505002f0c889a011a663ea5a72">   66</a></span>&#160;<span class="preprocessor">    XX(WTF, &quot;WTF: programming error&quot;)</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#define ERR_ID(e, _) extern const int ZITI_##e;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<a class="code" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092">ZITI_ERRORS</a>(<a class="code" href="errors_8h.html#a947429505002f0c889a011a663ea5a72">ERR_ID</a>)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#undef ERR_ID</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="errors_8h.html#a2182f9078122799ec98a7c1f17094191">ziti_errorstr</a>(<span class="keywordtype">int</span> err);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif //ZT_SDK_ERRORS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aerrors_8h_html_ac40dbb62a3442640d8ea56b9169ac092"><div class="ttname"><a href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092">ZITI_ERRORS</a></div><div class="ttdeci">#define ZITI_ERRORS(XX)</div><div class="ttdoc">A macro defining the various errors conditions expected to be seen when using the C SDK.</div><div class="ttdef"><b>Definition:</b> errors.h:32</div></div>
-<div class="ttc" id="aerrors_8h_html_a947429505002f0c889a011a663ea5a72"><div class="ttname"><a href="errors_8h.html#a947429505002f0c889a011a663ea5a72">ERR_ID</a></div><div class="ttdeci">#define ERR_ID(e, _)</div><div class="ttdoc">A helper macro to make declaring expected error conditions easier which is undef'ed immidately.</div><div class="ttdef"><b>Definition:</b> errors.h:64</div></div>
+<div class="ttc" id="aerrors_8h_html_a947429505002f0c889a011a663ea5a72"><div class="ttname"><a href="errors_8h.html#a947429505002f0c889a011a663ea5a72">ERR_ID</a></div><div class="ttdeci">#define ERR_ID(e, _)</div><div class="ttdoc">A helper macro to make declaring expected error conditions easier which is undef'ed immidately.</div><div class="ttdef"><b>Definition:</b> errors.h:66</div></div>
 <div class="ttc" id="aerrors_8h_html_a2182f9078122799ec98a7c1f17094191"><div class="ttname"><a href="errors_8h.html#a2182f9078122799ec98a7c1f17094191">ziti_errorstr</a></div><div class="ttdeci">const char * ziti_errorstr(int err)</div><div class="ttdoc">Returns a human-readable description for the provided code.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

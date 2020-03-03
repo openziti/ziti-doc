@@ -145,16 +145,23 @@ the public internet on ports: 22, 443, 1280, 3022.<ul>
 <div class="IMPORTANT"><h5>Important</h5><p>Make sure you have the private key corresponding to the public key you choose.
 Without the private key - you will not be able to authenticate to the bare AMI.</p>
 </div>
+<p>Take note of the public ip address assigned to the instance. This ip is used when ssh-ing to the machine and 
+this is the address that you&#39;ll use to access the online Web UI. For example if the ip address assigned is
+52.165.223.129. You would ssh to the machine via this ip or the DNS name with &#39;nfadmin&#39; as your username:</p>
+<pre><code>ssh nfadmin@ec2-52-165-223-129.compute-1.amazonaws.com
+- or -
+ssh nfadmin@52.165.223.129
+</code></pre><p>And you would access the Web UI at <a href="https://ec2-52-165-223-129.compute-1.amazonaws.com">https://ec2-52-165-223-129.compute-1.amazonaws.com</a></p>
 <h3 id="obtain-and-change-the-default-password">Obtain and Change the Default Password</h3>
 <p>When first launched - the instace will deposit a file into the file system at
-~/.config/ziti/ziti-controller/credentials.json.</p>
+/home/nfadmin/.config/ziti/ziti-controller/credentials.json.</p>
 <div class="NOTE"><h5>Note</h5><p>Since this is your first Ziti deployment this system is expected to be transient. If the IP address or DNS entry
 changes (such as a system reboot) the image needs to be reconfigured becuase the certificates will no longer be valid.
 This file is used to reconfigure the system in this event and it happens automatically on startup.</p>
 </div>
 <p>Now, ssh to the newly created machine. Once there you can obtain the username and password for your
 Ziti Controller by issuing this command:</p>
-<pre><code>jq -r .password ~/.config/ziti/ziti-controller/credentials.json
+<pre><code>jq -r .password /home/nfadmin/.config/ziti/ziti-controller/credentials.json
 </code></pre><p>You can choose to keep this password or change it to something easier to remember. If you change the password, please
 remember to use a strong password which is not easy to guess.</p>
 <div class="TIP"><h5>Tip</h5><p>Once the password is changed - update the credentials.json file with the current password if you want the system to

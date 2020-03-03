@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.Ziti.html",
-          "hash": "H0+8w4tDzynvgF72voLvSg=="
+          "hash": "gkHUs6+rBOwnqr0Xboah2Q=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnConnected.html",
-          "hash": "fQqTISwjUTTH9hZqcA6WiA=="
+          "hash": "xHDC18sHlUbic8n0aHwW8w=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataReceived.html",
-          "hash": "QaG/s5nAGu5DpfrFZCZoqw=="
+          "hash": "6YR/E277uoSoFZSx52zwUA=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataWritten.html",
-          "hash": "dHEHqgj9VmZQRODCXs9fCA=="
+          "hash": "Qi0Dnqz7La9BgVFbyCcOgw=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.html",
-          "hash": "TEDph03MMRUKtFJl5E7/rw=="
+          "hash": "u0buNs5zoMitYqQtdktsbA=="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiException.html",
-          "hash": "aYX27gZxoyYp8wOY8oJZ1w=="
+          "hash": "YPiVYlG545rh/NpYIk4tnA=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiIdentity.html",
-          "hash": "6bWFFshG6D6qfYNyUF2gyA=="
+          "hash": "Q9Y9o6/rVYtsGeuKDz1Fbw=="
         }
       },
       "is_incremental": false,
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiStatus.html",
-          "hash": "1SOMtbPmbNy2OiB6Kf8ieA=="
+          "hash": "AAoykReOWDZbIDhSt8ITkg=="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiStream.html",
-          "hash": "F8seO2WZZoTVbaqqDtwJhQ=="
+          "hash": "bYbX06Zf1cpNqoLSyoQDUQ=="
         }
       },
       "is_incremental": false,
@@ -491,7 +491,7 @@
       "output": {
         ".html": {
           "relative_path": "samples/index.html",
-          "hash": "UedjhJZzdeFc6kwEbq49Uw=="
+          "hash": "HoNj3CR+BNOMrw5nIsrfbw=="
         }
       },
       "is_incremental": false,
@@ -1207,7 +1207,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/network/aws-quickstart.html",
-          "hash": "4c/APVe8KpSyrSwEskfEsA=="
+          "hash": "QoCLxtxjJusoTXUoTN6Xhg=="
         }
       },
       "is_incremental": false,
@@ -1219,7 +1219,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/network/azure-quickstart.html",
-          "hash": "tLVo2yTJzKc+WOA5P4nY6A=="
+          "hash": "Ot3BEy1s7pe++BFWYIUvUg=="
         }
       },
       "is_incremental": false,
@@ -1231,7 +1231,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/network/common-quickstart.html",
-          "hash": "lJl1KmGmfd+EhjSYSdcvKg=="
+          "hash": "NfDEBLk3VhKP91iuW7fIhw=="
         }
       },
       "is_incremental": false,
@@ -1319,13 +1319,6 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -1337,13 +1330,20 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 71,
-          "skipped_file_count": 71
+          "skipped_file_count": 68
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 10,
           "skipped_file_count": 10
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         }
       }
     },
