@@ -55,4 +55,15 @@ the public internet on ports: 22, 443, 1280, 3022.
 > Make sure you have the private key corresponding to the public key you choose.
 > Without the private key - you will not be able to authenticate to the bare AMI.
 
+Take note of the public ip address assigned to the instance. This ip is used when ssh-ing to the machine and 
+this is the address that you'll use to access the online Web UI. For example if the ip address assigned is
+52.165.223.129. You would ssh to the machine via this ip or the DNS name with 'nfadmin' as your username:
+
+    ssh nfadmin@ec2-52-165-223-129.compute-1.amazonaws.com
+    - or -
+    ssh nfadmin@52.165.223.129
+
+And you would access the Web UI at https://ec2-52-165-223-129.compute-1.amazonaws.com
+
+
 [!include[](./common-quickstart.md)]
