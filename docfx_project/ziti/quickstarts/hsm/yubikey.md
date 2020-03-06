@@ -38,13 +38,17 @@ line interface of your operating system.
   device is factory reset using the [YubiKey
   Manager](https://www.yubico.com/products/services-software/download/YubiKey-manager/).
 * In order to successfully use the YubiKey the libraries provided by the `yubico-piv-tool` *MUST* either be on the path
-  or in a common location that
+  or in a common location that is known to the OS. On linux this is likely done by the YubiKey software installation but
+  on Windows you'll need to take any additional actions highlighted in the Windows-specific sections.
 * Linux Only: If you're using linux - you'll need to follow the [build
   instructions](https://developers.yubico.com/yubico-piv-tool/) provided by Yubico. Before you can do anything with the
   Yubikey you'll need to make sure the `libykcs11.so` exists on your system. When creating this quickstart the library
   was built to `./yubico-piv-tool-2.0.0/ykcs11/.libs/libykcs11.so`.
-* [Ubuntu](https://ubuntu.com/) was used to test this guide. An initial attempt using [linux
-  mint](https://linuxmint.com/)
+* [Ubuntu](https://ubuntu.com/) was used to test this guide. An attempt was also made with [linux
+  mint](https://linuxmint.com/) however the attempt failed when trying to compile the Yubikey software and was aborted.
+  It would likely have worked if enough effort was put into discovering why that linux variant had issues pulling and
+  compiling the necessary software. If you see strange errors when following this guide and are not using Ubuntu it may
+  be related.
 * ziti, ziti-tunnel, ziti-enroller are all on the path.
 
 ## Let's Use the YubiKey!
