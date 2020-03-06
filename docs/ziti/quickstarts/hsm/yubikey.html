@@ -128,13 +128,17 @@ this is a tool specific to Yubico we&#39;ve chosen to not use this in the follow
 device is factory reset using the <a href="https://www.yubico.com/products/services-software/download/YubiKey-manager/">YubiKey
 Manager</a>.</li>
 <li>In order to successfully use the YubiKey the libraries provided by the <code>yubico-piv-tool</code> <em>MUST</em> either be on the path
-or in a common location that</li>
+or in a common location that is known to the OS. On linux this is likely done by the YubiKey software installation but
+on Windows you&#39;ll need to take any additional actions highlighted in the Windows-specific sections.</li>
 <li>Linux Only: If you&#39;re using linux - you&#39;ll need to follow the <a href="https://developers.yubico.com/yubico-piv-tool/">build
 instructions</a> provided by Yubico. Before you can do anything with the
 Yubikey you&#39;ll need to make sure the <code>libykcs11.so</code> exists on your system. When creating this quickstart the library
 was built to <code>./yubico-piv-tool-2.0.0/ykcs11/.libs/libykcs11.so</code>.</li>
-<li><a href="https://ubuntu.com/">Ubuntu</a> was used to test this guide. An initial attempt using <a href="https://linuxmint.com/">linux
-mint</a></li>
+<li><a href="https://ubuntu.com/">Ubuntu</a> was used to test this guide. An attempt was also made with <a href="https://linuxmint.com/">linux
+mint</a> however the attempt failed when trying to compile the Yubikey software and was aborted.
+It would likely have worked if enough effort was put into discovering why that linux variant had issues pulling and
+compiling the necessary software. If you see strange errors when following this guide and are not using Ubuntu it may
+be related.</li>
 <li>ziti, ziti-tunnel, ziti-enroller are all on the path.</li>
 </ul>
 <h2 id="lets-use-the-yubikey">Let&#39;s Use the YubiKey!</h2>
