@@ -8,7 +8,7 @@
     <title>Obtain and Change the Default Password | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Obtain and Change the Default Password | NetFoundry Ziti ">
-    <meta name="generator" content="docfx 2.47.0.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../../../images/favicon.ico">
     <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
@@ -236,38 +236,66 @@ edgeRouter=$(ziti edge controller list gateways | cut -d &#39; &#39; -f2)
 ziti edge controller create service ethzero-cli &quot;ethzero.ziti.cli&quot; &quot;80&quot; &quot;$edgeRouter&quot; &quot;tcp:eth0.me:80&quot; -c &quot;$cluster&quot;
 </code></pre></section>
 </div>
-<h2 id="create-an-appwan">Create an AppWAN</h2>
-<p>AppWANs are used to to authorize identities to services and allow you to choose the terminating node for traffic
-destined to your service. <a href="../../appwans/overview.html">Read more about AppWAN here</a></p>
+<h2 id="create-policies">Create Policies</h2>
+<p>Use policies to </p>
+<ol>
+<li>allow identities to access services</li>
+<li>allow identities to use edge routers</li>
+<li>allow services to use edge routers</li>
+</ol>
+<p><a href="../../policies/overview.html">Read more about Policies here</a></p>
 <div class="tabGroup" id="tabgroup_Jgj2pEEE-E-3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_Jgj2pEEE-E-3_create-appwan-ui" role="tab" aria-controls="tabpanel_Jgj2pEEE-E-3_create-appwan-ui" data-tab="create-appwan-ui" tabindex="0" aria-selected="true">New AppWAN via UI</a>
+<a href="#tabpanel_Jgj2pEEE-E-3_create-policies-ui" role="tab" aria-controls="tabpanel_Jgj2pEEE-E-3_create-policies-ui" data-tab="create-policies-ui" tabindex="0" aria-selected="true">New Policies via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_Jgj2pEEE-E-3_create-appwan-cli" role="tab" aria-controls="tabpanel_Jgj2pEEE-E-3_create-appwan-cli" data-tab="create-appwan-cli" tabindex="-1">New AppWAN via CLI</a>
+<a href="#tabpanel_Jgj2pEEE-E-3_create-policies-cli" role="tab" aria-controls="tabpanel_Jgj2pEEE-E-3_create-policies-cli" data-tab="create-policies-cli" tabindex="-1">New Policies via CLI</a>
 </li>
 </ul>
-<section id="tabpanel_Jgj2pEEE-E-3_create-appwan-ui" role="tabpanel" data-tab="create-appwan-ui">
+<section id="tabpanel_Jgj2pEEE-E-3_create-policies-ui" role="tabpanel" data-tab="create-policies-ui">
+<h3 id="new-service-policy">New Service Policy</h3>
 <ol>
-<li>On the left side nav bar, click &quot;AppWANs&quot;</li>
-<li>In the top right corner of the screen click the &quot;plus&quot; image to add a new AppWAN</li>
-<li>Choose a name for the AppWAN. Enter &quot;my-first-appwan&quot;</li>
-<li>Choose the service(s) you want to add to the AppWAN. Make sure you pick ethzero-ui</li>
-<li>Choose the identity you created before (NewUser)</li>
+<li>On the left side nav bar, click &quot;Ziti Policies&quot;</li>
+<li>On the top nav bar, click &quot;Service Policies&quot;</li>
+<li>In the top right corner of the screen click the &quot;plus&quot; image to add a new Service Policy</li>
+<li>Choose a name for the Service Policy. Enter &quot;my-first-service-policy&quot;</li>
+<li>Select &quot;Dial&quot; in the Type dropdown</li>
+<li>Enter <code>#all</code> in the Service Roles input. <code>#all</code> is a special role attribute which matches all entities.</li>
+<li>Enter <code>#all</code> in the Identity Roles input. <code>#all</code> is a special role attribute which matches all entities.</li>
+<li>Click save</li>
+</ol>
+<h3 id="new-edge-router-policy">New Edge Router Policy</h3>
+<ol>
+<li>On the left side nav bar, click &quot;Ziti Policies&quot;</li>
+<li>It should already be selected, but if not, on the top nav bar, click &quot;Edge Router Policies&quot;</li>
+<li>In the top right corner of the screen click the &quot;plus&quot; image to add a new Edge Router Policy</li>
+<li>Choose a name for the Edge Router Policy. Enter &quot;my-first-edge-router-policy&quot;</li>
+<li>Enter <code>#all</code> in the Identity Roles input. <code>#all</code> is a special role attribute which matches all entities.</li>
+<li>Enter <code>#all</code> in the Router Roles input. <code>#all</code> is a special role attribute which matches all entities.</li>
+<li>Click save</li>
+</ol>
+<h3 id="new-service-edge-router-policy">New Service Edge Router Policy</h3>
+<ol>
+<li>On the left side nav bar, click &quot;Ziti Policies&quot;</li>
+<li>On the top nav bar, click &quot;Service Edge Router Policies&quot;</li>
+<li>In the top right corner of the screen click the &quot;plus&quot; image to add a new Edge Router Policy</li>
+<li>Choose a name for the Edge Router Policy. Enter &quot;my-first-service-edge-router-policy&quot;</li>
+<li>Enter <code>#all</code> in the Router Roles input. <code>#all</code> is a special role attribute which matches all entities.</li>
+<li>Enter <code>#all</code> in the Service Roles input. <code>#all</code> is a special role attribute which matches all entities.</li>
 <li>Click save</li>
 </ol>
 </section>
-<section id="tabpanel_Jgj2pEEE-E-3_create-appwan-cli" role="tabpanel" data-tab="create-appwan-cli" aria-hidden="true" hidden="hidden">
-<p>[To create an AppWAN using the CLI issue the following commands:</p>
-<pre><code>#load the identity&#39;s id into an environment variable
-identity=$(ziti edge controller list identities | grep NewUser | cut -d &quot; &quot; -f2)
+<section id="tabpanel_Jgj2pEEE-E-3_create-policies-cli" role="tabpanel" data-tab="create-policies-cli" aria-hidden="true" hidden="hidden">
+<p>[To create some policies using the CLI issue the following commands:</p>
+<pre><code># Create a service policy which allows all identities to use all services 
+ziti edge controller create service-policy dial-all Dial --service-roles &#39;#all&#39; --identity-roles &#39;#all&#39;
 
-#load the service id into an environment variable
-service=$(ziti edge controller list services | grep ethzero-cli | cut -d &quot; &quot; -f2)
+# Create an edge router policy which allows all identities to use all edge routers 
+ziti edge controller create edge-router-policy all --edge-router-roles &#39;#all&#39; --identity-roles &#39;#all&#39;
 
-#update the admin user. This command will prompt you to enter the password
-ziti edge controller create app-wan my-first-cli-appwan -i $identity -s $service]
+# Create a service edge router policy which allows all services to use all edge routers
+ziti edge controller create service-edge-router-policy --edge-router-roles &#39;#all&#39; --service-roles &#39;#all&#39; 
 </code></pre></section>
 </div>
 <h2 id="test-it">Test It</h2>

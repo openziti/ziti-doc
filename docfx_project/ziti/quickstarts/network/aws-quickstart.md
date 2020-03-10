@@ -12,7 +12,7 @@ To get started with Ziti here are the steps you will need to accomplish:
 1. [Create an Identity](#create-an-identity)
   1. [Enroll the Identity](#enroll-the-new-identity)
 1. [Create a Service](#create-a-service)
-1. [Create an AppWAN](#create-an-appwan)
+1. [Create Policies](#create-policies)
 1. [Test the Service](#test-it)
 
 ## Start Ziti

@@ -2,7 +2,7 @@
 
 A Ziti network is primarily concerned with providing access to "services". A service encapsulates the definition of any
 resource that could be accessed by a client on a traditional network. Services by themselves do not provide a complete
-mechanism for authorization. That is what an [AppWAN](../appwans/overview.md) is for.
+mechanism for authorization. That is what [Policies](../policies/overview.md) are for.
 
 A service is defined by the following components:
 

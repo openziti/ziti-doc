@@ -4,7 +4,9 @@ shopt -s expand_aliases
 
 if [[ "" = "$DOCFX_EXE" ]]; then
     shopt -s expand_aliases
-    source ~/.bash_aliases
+    if [[ -f "~/.bash_aliases" ]]; then
+    	source ~/.bash_aliases
+	fi
 else
     alias docfx="mono $DOCFX_EXE"
 fi
