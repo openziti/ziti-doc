@@ -1,15 +1,21 @@
 #!/bin/bash
 
+echo $(alias)
+
 shopt -s expand_aliases
 
 if [[ "" = "$DOCFX_EXE" ]]; then
     shopt -s expand_aliases
-    source ~/.bash_aliases
+    if [[ -f "~/.bash_aliases" ]]; then
+    	source ~/.bash_aliases
+	fi
 else
     alias docfx="mono $DOCFX_EXE"
 fi
 
 commands_to_test=(doxygen mono docfx)
+
+echo $(alias)
 
 # verify all the commands required in the automation exist before trying to run the full suite
 for cmd in "${commands_to_test[@]}"

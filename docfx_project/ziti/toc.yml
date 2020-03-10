@@ -14,9 +14,9 @@
 - name: Services
   href: services/toc.yml
   topicHref: services/overview.md
-- name: AppWANs
-  href: appwans/toc.yml
-  topicHref: appwans/overview.md
+- name: Policies
+  href: policies/toc.yml
+  topicHref: policies/overview.md
 - name: Manage
   href: manage/toc.yml
   topicHref: manage/manage.md

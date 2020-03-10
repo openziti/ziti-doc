@@ -8,7 +8,7 @@ TLS](https://en.wikipedia.org/wiki/Mutual_authentication) in order to authentica
 
 Conceptually an identity can be thought of as congruent to a user account.  Identities are logical entities stored
 inside the Ziti Controller which map an X509 certifcate to a particular named identity.  Identities exist not only to
-authenticate connections but are also used to authorize identities within Ziti. See [AppWANs](../appwans/overview.md)
+authenticate connections but are also used to authorize identities within Ziti. See [Policies](../policies/overview.md)
 for more information on authoriziation of identities.
 
 ## 3rd Party Certificates

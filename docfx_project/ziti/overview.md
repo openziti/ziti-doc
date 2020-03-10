@@ -109,7 +109,7 @@ changes to the target application.
 Once the Ziti Network is established and deployed the next step
 is to configure the software-powered network. The three main
 concepts necessary to configure a Ziti Network are: Identities,
-Services, and AppWANs.
+Services, and Policies.
 
 ### SERVICES
 
@@ -139,12 +139,48 @@ to the Ziti Network. The presented certificate is used by the Ziti
 Network to authorize the client and enumerate the services the
 Identity is authorized to use.
 
-### AppWAN
+### POLICIES
+Policies control how Identities, Services and Edge Routers are allowed
+to interact. In order to use a service the identity must be granted
+access to the service. Also, since all access to a service goes through
+one more edge routers, both the service and the identity must be
+granted to access to the same edge router or edge routers.  
 
-The AppWAN is concept created to encapsulate the mapping
-between services and identities in a software-powered network.
-In the simplest terms, AppWANs are a group of services and a
-group of identities. The act of adding a service to an AppWAN
-will grant the identities in that AppWAN access to the given
-service. Similarly adding an identity to an AppWAN will grant that
-identity access to the services mapped in that AppWAN.
+#### ROLE ATTRIBUTES
+Entities such as identities, services and edge routers can be added to 
+policies explicity, either by id or name. Entities can  also be tagged 
+with role attributes. Role attributes are simple strings like `sales`,
+`Boston`, `us-employees` or `support`. Their meaning is decided by the 
+administrator. Policies can include entities by specifying a set of role 
+attributes to match.
+
+#### SERVICE POLICIES
+Service Policies encapsulate the mapping between identities and 
+services in a software-powered network. In the simplest terms, 
+Service Policies are a group of services and a group of identities. 
+The act of adding a service to a Service Policy will grant the 
+identities in that Service Policy access to the given service. 
+Similarly, adding an identity to a Service Policy will grant that
+identity access to the services mapped in that Service Policy.
+
+Service policies controls both which identities may dial a service (use the service)
+and which identities may bind a service (provide or host the service). 
+Each Service Policy may either grant dial or bind access, but not both.  
+
+#### EDGE ROUTER POLICIES
+Edge Router Policies manage the mapping between identities and 
+edge routers. Edge Router Policies are a group of edge routers 
+and a group of identities. Adding an edge router to an Edge
+Router Policy will grant the identities in that Edge Router 
+Policy access to the given edge router. Similarly, adding an identity 
+to an Edge Router Policy will grant that identity access to the 
+edge routers mapped in that Edge Router Policy. 
+
+#### SERVICE EDGE ROUTER POLICIES
+Service Edge Router Policies manage the mapping between services and 
+edge routers. Service Edge Router Policies are a group of edge routers 
+and a group of services. Adding an edge router to a Service Edge
+Router Policy will grant the services in that Service Edge Router 
+Policy access to the given edge router. Similarly, adding a service 
+to a Service Edge Router Policy will grant that service access to the 
+edge routers mapped in that Service Edge Router Policy. 

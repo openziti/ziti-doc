@@ -121,33 +121,62 @@ To create a new service using the CLI simply issue these two commands:
 
 ***
 
-## Create an AppWAN
+## Create Policies
 
-AppWANs are used to to authorize identities to services and allow you to choose the terminating node for traffic
-destined to your service. [Read more about AppWAN here](~/ziti/appwans/overview.md)
+Use policies to 
 
-# [New AppWAN via UI](#tab/create-appwan-ui)
+1. allow identities to access services
+1. allow identities to use edge routers
+1. allow services to use edge routers
 
-1. On the left side nav bar, click "AppWANs"
-1. In the top right corner of the screen click the "plus" image to add a new AppWAN
-1. Choose a name for the AppWAN. Enter "my-first-appwan"
-1. Choose the service(s) you want to add to the AppWAN. Make sure you pick ethzero-ui
-1. Choose the identity you created before (NewUser)
+[Read more about Policies here](~/ziti/policies/overview.md)
+
+### [New Policies via UI](#tab/create-policies-ui)
+
+### New Service Policy
+
+1. On the left side nav bar, click "Ziti Policies"
+1. On the top nav bar, click "Service Policies"
+1. In the top right corner of the screen click the "plus" image to add a new Service Policy
+1. Choose a name for the Service Policy. Enter "my-first-service-policy"
+1. Select "Dial" in the Type dropdown
+1. Enter `#all` in the Service Roles input. `#all` is a special role attribute which matches all entities.
+1. Enter `#all` in the Identity Roles input. `#all` is a special role attribute which matches all entities.
 1. Click save
 
-# [New AppWAN via CLI](#tab/create-appwan-cli)
+### New Edge Router Policy
 
-[To create an AppWAN using the CLI issue the following commands:
+1. On the left side nav bar, click "Ziti Policies"
+1. It should already be selected, but if not, on the top nav bar, click "Edge Router Policies"
+1. In the top right corner of the screen click the "plus" image to add a new Edge Router Policy
+1. Choose a name for the Edge Router Policy. Enter "my-first-edge-router-policy"
+1. Enter `#all` in the Identity Roles input. `#all` is a special role attribute which matches all entities.
+1. Enter `#all` in the Router Roles input. `#all` is a special role attribute which matches all entities.
+1. Click save
 
-    #load the identity's id into an environment variable
-    identity=$(ziti edge controller list identities | grep NewUser | cut -d " " -f2)
+### New Service Edge Router Policy
 
-    #load the service id into an environment variable
-    service=$(ziti edge controller list services | grep ethzero-cli | cut -d " " -f2)
+1. On the left side nav bar, click "Ziti Policies"
+1. On the top nav bar, click "Service Edge Router Policies"
+1. In the top right corner of the screen click the "plus" image to add a new Edge Router Policy
+1. Choose a name for the Edge Router Policy. Enter "my-first-service-edge-router-policy"
+1. Enter `#all` in the Router Roles input. `#all` is a special role attribute which matches all entities.
+1. Enter `#all` in the Service Roles input. `#all` is a special role attribute which matches all entities.
+1. Click save
 
-    #update the admin user. This command will prompt you to enter the password
-    ziti edge controller create app-wan my-first-cli-appwan -i $identity -s $service]
+# [New Policies via CLI](#tab/create-policies-cli)
 
+[To create some policies using the CLI issue the following commands:
+
+    # Create a service policy which allows all identities to use all services 
+    ziti edge controller create service-policy dial-all Dial --service-roles '#all' --identity-roles '#all'
+    
+    # Create an edge router policy which allows all identities to use all edge routers 
+    ziti edge controller create edge-router-policy all --edge-router-roles '#all' --identity-roles '#all'
+    
+    # Create a service edge router policy which allows all services to use all edge routers
+    ziti edge controller create service-edge-router-policy --edge-router-roles '#all' --service-roles '#all' 
+    
 ***
 
 ## Test It
