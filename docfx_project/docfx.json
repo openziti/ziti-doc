@@ -27,6 +27,7 @@
           "ziti/**/toc.yml",
           "ziti-cmd/quickstart/**/*.md",
           "ziti-cmd/quickstart/**/toc.yml",
+          "ziti-android-app/**/*.md",
           "glossary/**/*.md",
           "glossary/**/toc.yml",
           "samples/**/*.md",
