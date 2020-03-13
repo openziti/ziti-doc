@@ -43,6 +43,7 @@
           "images/**",
           "ziti/manage/*.yaml",
           "ziti/**/sidecar-diagram.svg",
+          "ziti-android-app/**/*.png",
           "ziti-cmd/**/*.svg",
           "index.html",
           "api/clang/api/**"

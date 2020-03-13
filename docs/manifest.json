@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/home/plorenz/work/nf/ziti-doc/docfx_project",
+  "source_base_path": "/mnt/v/work/apps/cygwin/home/cd/git/github/ziti-doc-clean/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.Ziti.html",
-          "hash": "mMC37TTkmgt+RmZyb1iMQA=="
+          "hash": "sBxxXYPbRCNtKsAuqgQssA=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnConnected.html",
-          "hash": "oZSYc5JjoZwy8aT0S2CY/A=="
+          "hash": "yBiMGCPmZ/NZydCyL0YT1g=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataReceived.html",
-          "hash": "n939pLdwSBE9DYfXqH16VQ=="
+          "hash": "a2WXk6aXR5hUMJFK3fOOqA=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataWritten.html",
-          "hash": "GRxmmxTSGbcpf+G9Jkinew=="
+          "hash": "9m0heZ0YiIHSEtVitigRbA=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.html",
-          "hash": "lg0I4RGykhuv8WUtjW+JXA=="
+          "hash": "ekX6MK7UEdBYovxrMckQIQ=="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiException.html",
-          "hash": "J/PY3EN/RWnWN3cPDfeLBA=="
+          "hash": "J0bdczYxAGr3TS/C2K26aA=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiIdentity.html",
-          "hash": "2VJqAATZn6La2yz2HERXfQ=="
+          "hash": "w+HaK2AIwakzfrp9bK4oew=="
         }
       },
       "is_incremental": false,
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiStatus.html",
-          "hash": "HZlKtpDrXCas7xDzwk0GtQ=="
+          "hash": "nTTKTC/PHcT5bwioAdXRpA=="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiStream.html",
-          "hash": "ch7ivNi9Pd6g8EhX/Asjpw=="
+          "hash": "bfZzHc8qamZEmvjXlJKpHg=="
         }
       },
       "is_incremental": false,
@@ -162,7 +162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.html",
-          "hash": "vFWby1lukklXBCMKXrGy4A=="
+          "hash": "ltH+0M6OiupynlxYboI0EA=="
         }
       },
       "is_incremental": false,
@@ -535,6 +535,185 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti-android-app/CODE_OF_CONDUCT.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti-android-app/CODE_OF_CONDUCT.html",
+          "hash": "j4RkSLujtHcjStyV951G9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti-android-app/CONTRIBUTING.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti-android-app/CONTRIBUTING.html",
+          "hash": "P4Zrq1EI+gIRmbH+yzXEFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti-android-app/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti-android-app/README.html",
+          "hash": "ZPrE9JgV1vUAX9/EQMvCVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/doc/enrollment-success.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/doc/enrollment-success.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/doc/no-enrollment.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/doc/no-enrollment.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "ziti-android-app/doc/pick-jwt.png",
+      "output": {
+        "resource": {
+          "relative_path": "ziti-android-app/doc/pick-jwt.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti-cmd/quickstart/docker/README.md",
       "output": {
         ".html": {
@@ -701,15 +880,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidInclude"
-      ],
       "type": "Conceptual",
       "source_relative_path": "ziti/clients/tunneler.md",
       "output": {
         ".html": {
           "relative_path": "ziti/clients/tunneler.html",
-          "hash": "DzTKolQWL6DdTLlBFMdW1A=="
+          "hash": "mnt1Ok7N6GfCY0NGtWdMhQ=="
         }
       },
       "is_incremental": false,
@@ -1378,7 +1554,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/toc.html",
-          "hash": "k1FPPaEGxg0NbnVoTqxCWg=="
+          "hash": "8l2zsUQywEOLRiPY/V9FmA=="
         }
       },
       "is_incremental": false,
@@ -1397,8 +1573,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 77,
-          "skipped_file_count": 61
+          "total_file_count": 80,
+          "skipped_file_count": 80
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
