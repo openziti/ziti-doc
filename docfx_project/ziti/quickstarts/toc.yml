@@ -18,3 +18,7 @@
     href: hsm/softhsm.md
   - name: Yubikey
     href: hsm/yubikey.md
+- name: Ziti On Mobile
+  items:
+  - name: Android
+    href: ~/ziti-android-app/README.md

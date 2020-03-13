@@ -10,3 +10,6 @@
 	path = docfx_project/ziti-sdk-c
 	url = https://github.com/netfoundry/ziti-sdk-c
 	update = merge
+[submodule "docfx_project/ziti-android-app"]
+	path = docfx_project/ziti-android-app
+	url = git@github.com:netfoundry/ziti-android-app

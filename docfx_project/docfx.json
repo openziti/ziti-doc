@@ -27,6 +27,7 @@
           "ziti/**/toc.yml",
           "ziti-cmd/quickstart/**/*.md",
           "ziti-cmd/quickstart/**/toc.yml",
+          "ziti-android-app/**/*.md",
           "glossary/**/*.md",
           "glossary/**/toc.yml",
           "samples/**/*.md",
@@ -42,6 +43,7 @@
           "images/**",
           "ziti/manage/*.yaml",
           "ziti/**/sidecar-diagram.svg",
+          "ziti-android-app/**/*.png",
           "ziti-cmd/**/*.svg",
           "index.html",
           "api/clang/api/**"
