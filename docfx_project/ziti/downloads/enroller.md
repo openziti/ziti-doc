@@ -1,3 +1,3 @@
-* [Windows](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.5.8-2554/ziti-enroller.exe)
-* [MacOS](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.5.8-2554/ziti-enroller-mac.tar.gz)
-* [Linux](https://netfoundry-clients.s3-us-west-1.amazonaws.com/ziti/0.5.8-2554/ziti-enroller-linux.tar.gz)
+* [Windows](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-enroller/amd64/windows/0.9.0-44/ziti-enroller.tar.gz)
+* [MacOS](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-enroller/amd64/darwin/0.9.0-44/ziti-enroller.tar.gz)
+* [Linux](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-enroller/amd64/linux/0.9.0-44/ziti-enroller.tar.gz)
