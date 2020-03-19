@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/mnt/git/git/github/ziti-doc/docfx_project",
+  "source_base_path": "/Users/scarey/repos/github.com/netfoundry/ziti-doc/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -234,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/c-sdk-on-beaglebone.html",
-          "hash": "1FuThBrLubX4vUqDKmv+xA=="
+          "hash": "RLfXHBvx4XFEC9vm33cCiQ=="
         }
       },
       "is_incremental": false,
@@ -246,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/index.html",
-          "hash": "a4pp4t/jNMObxE5du52HCg=="
+          "hash": "1hQdM1+6eRjMYzMFjsT/cQ=="
         }
       },
       "is_incremental": false,
@@ -1600,12 +1600,26 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because config changed.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ConfigChanged"
       },
       "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 82,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 0
+        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -1619,18 +1633,6 @@
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 80,
-          "skipped_file_count": 80
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 10,
-          "skipped_file_count": 10
         }
       }
     },
