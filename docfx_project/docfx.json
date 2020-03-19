@@ -32,6 +32,8 @@
           "glossary/**/toc.yml",
           "samples/**/*.md",
           "samples/**/toc.yml",
+          "articles/**/*.md",
+          "articles/**/toc.yml",
           "toc.yml",
           "*.md"
         ]

@@ -20,4 +20,6 @@ which can execute a `.sh` script. As of 2020 there's a multitude of ways to get 
 It's not feasible to test all these shells to make sure this script works so it's encouraged that you use a linux-based
 flavor of bash. If the script doesn't funtion - open an [issue](./issues) and someone will look into it.
 
-After cloning this repository open the bash shell and execute the [](build-doc.sh) script.
+After cloning this repository open the bash shell and execute the [](gendoc.sh) script.
+
+You can then run `docfx serve docs` to serve the html and view it in a browser.

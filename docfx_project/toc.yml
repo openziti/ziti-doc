@@ -10,4 +10,6 @@
 - name: Samples
   href: samples/
   homepage: samples/index.md
-  
+- name: Articles
+  href: articles/
+  homepage: articles/index.md
