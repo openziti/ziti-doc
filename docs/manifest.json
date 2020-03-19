@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/mnt/v/work/apps/cygwin/home/cd/git/github/ziti-doc-clean/docfx_project",
+  "source_base_path": "/Users/scarey/repos/github.com/netfoundry/ziti-doc/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.Ziti.html",
-          "hash": "sBxxXYPbRCNtKsAuqgQssA=="
+          "hash": "mMC37TTkmgt+RmZyb1iMQA=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnConnected.html",
-          "hash": "yBiMGCPmZ/NZydCyL0YT1g=="
+          "hash": "oZSYc5JjoZwy8aT0S2CY/A=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataReceived.html",
-          "hash": "a2WXk6aXR5hUMJFK3fOOqA=="
+          "hash": "n939pLdwSBE9DYfXqH16VQ=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.OnDataWritten.html",
-          "hash": "9m0heZ0YiIHSEtVitigRbA=="
+          "hash": "GRxmmxTSGbcpf+G9Jkinew=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiConnection.html",
-          "hash": "ekX6MK7UEdBYovxrMckQIQ=="
+          "hash": "lg0I4RGykhuv8WUtjW+JXA=="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiException.html",
-          "hash": "J0bdczYxAGr3TS/C2K26aA=="
+          "hash": "J/PY3EN/RWnWN3cPDfeLBA=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiIdentity.html",
-          "hash": "w+HaK2AIwakzfrp9bK4oew=="
+          "hash": "2VJqAATZn6La2yz2HERXfQ=="
         }
       },
       "is_incremental": false,
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiStatus.html",
-          "hash": "nTTKTC/PHcT5bwioAdXRpA=="
+          "hash": "HZlKtpDrXCas7xDzwk0GtQ=="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.ZitiStream.html",
-          "hash": "bfZzHc8qamZEmvjXlJKpHg=="
+          "hash": "ch7ivNi9Pd6g8EhX/Asjpw=="
         }
       },
       "is_incremental": false,
@@ -162,7 +162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/csharp/NetFoundry.html",
-          "hash": "ltH+0M6OiupynlxYboI0EA=="
+          "hash": "vFWby1lukklXBCMKXrGy4A=="
         }
       },
       "is_incremental": false,
@@ -223,6 +223,42 @@
         ".html": {
           "relative_path": "api/toc.html",
           "hash": "aTQTHfw1ZP4kNsbLwHtRZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/c-sdk-on-beaglebone.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/c-sdk-on-beaglebone.html",
+          "hash": "1FuThBrLubX4vUqDKmv+xA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/index.html",
+          "hash": "a4pp4t/jNMObxE5du52HCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "kOe+fywOf2ziyi8aSxVYKQ=="
         }
       },
       "is_incremental": false,
@@ -527,7 +563,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "KoJtP0EpfSMOOkDbdHdYRg=="
+          "hash": "JSRIWqfeDuUNJusBetGDRQ=="
         }
       },
       "is_incremental": false,
@@ -1573,8 +1609,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 80,
-          "skipped_file_count": 80
+          "total_file_count": 82,
+          "skipped_file_count": 81
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

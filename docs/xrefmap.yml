@@ -397,17 +397,17 @@ references:
   isSpec: "True"
   fullName: NetFoundry.ZitiStream.Position
   nameWithType: ZitiStream.Position
-- uid: NetFoundry.ZitiStream.PumpAsync(System.IO.Stream)
+- uid: NetFoundry.ZitiStream.PumpAsync(Stream)
   name: PumpAsync(Stream)
-  href: api/csharp/NetFoundry.ZitiStream.html#NetFoundry_ZitiStream_PumpAsync_System_IO_Stream_
-  commentId: M:NetFoundry.ZitiStream.PumpAsync(System.IO.Stream)
-  fullName: NetFoundry.ZitiStream.PumpAsync(System.IO.Stream)
+  href: api/csharp/NetFoundry.ZitiStream.html#NetFoundry_ZitiStream_PumpAsync_Stream_
+  commentId: M:NetFoundry.ZitiStream.PumpAsync(Stream)
+  fullName: NetFoundry.ZitiStream.PumpAsync(Stream)
   nameWithType: ZitiStream.PumpAsync(Stream)
-- uid: NetFoundry.ZitiStream.PumpAsync(System.IO.Stream,System.IO.Stream)
+- uid: NetFoundry.ZitiStream.PumpAsync(Stream,Stream)
   name: PumpAsync(Stream, Stream)
-  href: api/csharp/NetFoundry.ZitiStream.html#NetFoundry_ZitiStream_PumpAsync_System_IO_Stream_System_IO_Stream_
-  commentId: M:NetFoundry.ZitiStream.PumpAsync(System.IO.Stream,System.IO.Stream)
-  fullName: NetFoundry.ZitiStream.PumpAsync(System.IO.Stream, System.IO.Stream)
+  href: api/csharp/NetFoundry.ZitiStream.html#NetFoundry_ZitiStream_PumpAsync_Stream_Stream_
+  commentId: M:NetFoundry.ZitiStream.PumpAsync(Stream,Stream)
+  fullName: NetFoundry.ZitiStream.PumpAsync(Stream, Stream)
   nameWithType: ZitiStream.PumpAsync(Stream, Stream)
 - uid: NetFoundry.ZitiStream.PumpAsync*
   name: PumpAsync
@@ -432,11 +432,11 @@ references:
   isSpec: "True"
   fullName: NetFoundry.ZitiStream.Read
   nameWithType: ZitiStream.Read
-- uid: NetFoundry.ZitiStream.Seek(System.Int64,System.IO.SeekOrigin)
+- uid: NetFoundry.ZitiStream.Seek(System.Int64,SeekOrigin)
   name: Seek(Int64, SeekOrigin)
-  href: api/csharp/NetFoundry.ZitiStream.html#NetFoundry_ZitiStream_Seek_System_Int64_System_IO_SeekOrigin_
-  commentId: M:NetFoundry.ZitiStream.Seek(System.Int64,System.IO.SeekOrigin)
-  fullName: NetFoundry.ZitiStream.Seek(System.Int64, System.IO.SeekOrigin)
+  href: api/csharp/NetFoundry.ZitiStream.html#NetFoundry_ZitiStream_Seek_System_Int64_SeekOrigin_
+  commentId: M:NetFoundry.ZitiStream.Seek(System.Int64,SeekOrigin)
+  fullName: NetFoundry.ZitiStream.Seek(System.Int64, SeekOrigin)
   nameWithType: ZitiStream.Seek(Int64, SeekOrigin)
 - uid: NetFoundry.ZitiStream.Seek*
   name: Seek
