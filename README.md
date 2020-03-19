@@ -21,3 +21,5 @@ It's not feasible to test all these shells to make sure this script works so it'
 flavor of bash. If the script doesn't funtion - open an [issue](./issues) and someone will look into it.
 
 After cloning this repository open the bash shell and execute the [](gendoc.sh) script.
+
+You can then run `docfx serve docs` to serve the html and view it in a browser.
