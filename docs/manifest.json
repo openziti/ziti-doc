@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/Users/scarey/repos/github.com/netfoundry/ziti-doc/docfx_project",
+  "source_base_path": "/mnt/git/git/github/ziti-doc-clean/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -527,7 +527,7 @@
       "output": {
         ".html": {
           "relative_path": "samples/index.html",
-          "hash": "1PDX9M/uB0ay3xOcMgo1fQ=="
+          "hash": "zlETs0lK8yy6nJlSPvGgBw=="
         }
       },
       "is_incremental": false,
@@ -1608,16 +1608,11 @@
         "full_build_reason_code": "ConfigChanged"
       },
       "processors": {
-        "ConceptualDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 82,
-          "skipped_file_count": 0
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 10,
+          "total_file_count": 0,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
@@ -1627,11 +1622,16 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "TocDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 0,
+          "total_file_count": 10,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 82,
           "skipped_file_count": 0
         }
       }

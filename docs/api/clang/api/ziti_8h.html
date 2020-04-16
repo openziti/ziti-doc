@@ -82,6 +82,7 @@ $(document).ready(function(){initNavTree('ziti_8h.html',''); initResizable(); })
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -96,9 +97,17 @@ $(document).ready(function(){initNavTree('ziti_8h.html',''); initResizable(); })
 <code>#include &lt;uv.h&gt;</code><br />
 <code>#include &lt;uv_mbed/tls_engine.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="errors_8h_source.html">errors.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="externs_8h_source.html">externs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ziti__model_8h_source.html">ziti_model.h</a>&quot;</code><br />
 </div>
 <p><a href="ziti_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnf__options__s.html">nf_options_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">nf_context initialization options  <a href="structnf__options__s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a01d00c5d71bfb04e1ded0c3f182f5cc3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a01d00c5d71bfb04e1ded0c3f182f5cc3">ZITI_CAN_DIAL</a>&#160;&#160;&#160;1</td></tr>
@@ -122,9 +131,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a35e4fd984cab2b59b5aebc42dfa0f8d6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">nf_init_cb</a>) (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, int status, void *init_ctx)</td></tr>
 <tr class="memdesc:a35e4fd984cab2b59b5aebc42dfa0f8d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ziti Edge identity context init callback.  <a href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">More...</a><br /></td></tr>
 <tr class="separator:a35e4fd984cab2b59b5aebc42dfa0f8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad053fa0a15fb68d2902bf279cf141b6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aad053fa0a15fb68d2902bf279cf141b6">nf_service_cb</a>) (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, const char *service_name, int status, unsigned int flags, void *data)</td></tr>
-<tr class="memdesc:aad053fa0a15fb68d2902bf279cf141b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Service status callback.  <a href="ziti_8h.html#aad053fa0a15fb68d2902bf279cf141b6">More...</a><br /></td></tr>
-<tr class="separator:aad053fa0a15fb68d2902bf279cf141b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac058257ad4eb51f3371350b9dfe62d67"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ac058257ad4eb51f3371350b9dfe62d67">nf_service_cb</a>) (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, <a class="el" href="ziti__model_8h.html#afc4459bce792db0d76881d56133ccfc9">ziti_service</a> *, int status, void *data)</td></tr>
+<tr class="memdesc:ac058257ad4eb51f3371350b9dfe62d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Service status callback.  <a href="ziti_8h.html#ac058257ad4eb51f3371350b9dfe62d67">More...</a><br /></td></tr>
+<tr class="separator:ac058257ad4eb51f3371350b9dfe62d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad119319c38f685068770e12e1e97d89f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">nf_data_cb</a>) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, uint8_t *data, int length)</td></tr>
 <tr class="memdesc:ad119319c38f685068770e12e1e97d89f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data callback.  <a href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">More...</a><br /></td></tr>
 <tr class="separator:ad119319c38f685068770e12e1e97d89f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,15 +149,33 @@ Typedefs</h2></td></tr>
 <tr class="memitem:aa10e545f8cebd2d5c6f6c5b989ab2d48"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa10e545f8cebd2d5c6f6c5b989ab2d48">nf_write_cb</a>) (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, ssize_t status, void *write_ctx)</td></tr>
 <tr class="memdesc:aa10e545f8cebd2d5c6f6c5b989ab2d48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback called after <a class="el" href="ziti_8h.html#a14920e2204c48c62aaed663cac3b7abb" title="Send data to the connection peer.">NF_write()</a> is complete.  <a href="ziti_8h.html#aa10e545f8cebd2d5c6f6c5b989ab2d48">More...</a><br /></td></tr>
 <tr class="separator:aa10e545f8cebd2d5c6f6c5b989ab2d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b3b0281079ba7255c9f7999bc049227"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227">nf_enroll_cb</a>) (uint8_t *data, int length, char *err_message, void *enroll_ctx)</td></tr>
+<tr class="memdesc:a9b3b0281079ba7255c9f7999bc049227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback called after <a class="el" href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49" title="Performs a Ziti enrollment.">NF_enroll()</a> is complete.  <a href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227">More...</a><br /></td></tr>
+<tr class="separator:a9b3b0281079ba7255c9f7999bc049227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a353488a2d395030ab65bd13a7d324c49"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49">NF_enroll</a> (const char *jwt, uv_loop_t *loop, <a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227">nf_enroll_cb</a> enroll_cb, void *enroll_ctx)</td></tr>
+<tr class="memdesc:a353488a2d395030ab65bd13a7d324c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a Ziti enrollment.  <a href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49">More...</a><br /></td></tr>
+<tr class="separator:a353488a2d395030ab65bd13a7d324c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ac373aa211304ffdf7d395f9aae94f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8">NF_init</a> (const char *config, uv_loop_t *loop, <a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">nf_init_cb</a> init_cb, void *init_ctx)</td></tr>
 <tr class="memdesc:a6ac373aa211304ffdf7d395f9aae94f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a Ziti Edge identity.  <a href="ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8">More...</a><br /></td></tr>
 <tr class="separator:a6ac373aa211304ffdf7d395f9aae94f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae04053b556b1935cdb66de3288042a4e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ae04053b556b1935cdb66de3288042a4e">NF_init_with_tls</a> (const char *ctrl_url, tls_context *tls_context, uv_loop_t *loop, <a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">nf_init_cb</a> init_cb, void *init_ctx)</td></tr>
-<tr class="memdesc:ae04053b556b1935cdb66de3288042a4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Ziti Edge identity context with the provided TLS context.  <a href="ziti_8h.html#ae04053b556b1935cdb66de3288042a4e">More...</a><br /></td></tr>
-<tr class="separator:ae04053b556b1935cdb66de3288042a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7035014ff00537ece431f0dbcf44cc9d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a7035014ff00537ece431f0dbcf44cc9d">NF_init_opts</a> (nf_options *options, uv_loop_t *loop, void *init_ctx)</td></tr>
+<tr class="memdesc:a7035014ff00537ece431f0dbcf44cc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Ziti Edge identity context with the provided options.  <a href="ziti_8h.html#a7035014ff00537ece431f0dbcf44cc9d">More...</a><br /></td></tr>
+<tr class="separator:a7035014ff00537ece431f0dbcf44cc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9044630d375d3365f25bce1bfa334e79"><td class="memItemLeft" align="right" valign="top">const ziti_version *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a9044630d375d3365f25bce1bfa334e79">NF_get_version</a> ()</td></tr>
+<tr class="memdesc:a9044630d375d3365f25bce1bfa334e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">return SDK version  <a href="ziti_8h.html#a9044630d375d3365f25bce1bfa334e79">More...</a><br /></td></tr>
+<tr class="separator:a9044630d375d3365f25bce1bfa334e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3192e14dea250294f83133b0084ff35"><td class="memItemLeft" align="right" valign="top">const ziti_version *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa3192e14dea250294f83133b0084ff35">NF_get_controller_version</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf)</td></tr>
+<tr class="memdesc:aa3192e14dea250294f83133b0084ff35"><td class="mdescLeft">&#160;</td><td class="mdescRight">return Ziti controller version for given context  <a href="ziti_8h.html#aa3192e14dea250294f83133b0084ff35">More...</a><br /></td></tr>
+<tr class="separator:aa3192e14dea250294f83133b0084ff35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8140de2747cda384b40acbad4113cfe5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a8140de2747cda384b40acbad4113cfe5">NF_get_controller</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf)</td></tr>
+<tr class="memdesc:a8140de2747cda384b40acbad4113cfe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">controller URL of the given context  <a href="ziti_8h.html#a8140de2747cda384b40acbad4113cfe5">More...</a><br /></td></tr>
+<tr class="separator:a8140de2747cda384b40acbad4113cfe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae481d7923e66ad693c01ea0eb3b597ed"><td class="memItemLeft" align="right" valign="top">const ziti_identity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ae481d7923e66ad693c01ea0eb3b597ed">NF_get_identity</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf)</td></tr>
+<tr class="memdesc:ae481d7923e66ad693c01ea0eb3b597ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ziti identity of the given context.  <a href="ziti_8h.html#ae481d7923e66ad693c01ea0eb3b597ed">More...</a><br /></td></tr>
+<tr class="separator:ae481d7923e66ad693c01ea0eb3b597ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa5d4ef44a5dc338c85d9d0e74543d9bb">NF_set_timeout</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, int timeout)</td></tr>
 <tr class="memdesc:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets connect and write timeouts(in millis).  <a href="ziti_8h.html#aa5d4ef44a5dc338c85d9d0e74543d9bb">More...</a><br /></td></tr>
 <tr class="separator:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,7 +191,7 @@ Functions</h2></td></tr>
 <tr class="memitem:afa909fb55c3714dedb8b152d37e659bf"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#afa909fb55c3714dedb8b152d37e659bf">NF_conn_data</a> (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn)</td></tr>
 <tr class="memdesc:afa909fb55c3714dedb8b152d37e659bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves any custom data associated with the given <a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162" title="Represents a Ziti connection.">nf_connection</a>.  <a href="ziti_8h.html#afa909fb55c3714dedb8b152d37e659bf">More...</a><br /></td></tr>
 <tr class="separator:afa909fb55c3714dedb8b152d37e659bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c66ef61ae09b4b874948daf112477b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a9c66ef61ae09b4b874948daf112477b1">NF_service_available</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, const char *service, <a class="el" href="ziti_8h.html#aad053fa0a15fb68d2902bf279cf141b6">nf_service_cb</a> cb, void *ctx)</td></tr>
+<tr class="memitem:a9c66ef61ae09b4b874948daf112477b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a9c66ef61ae09b4b874948daf112477b1">NF_service_available</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, const char *service, <a class="el" href="ziti_8h.html#ac058257ad4eb51f3371350b9dfe62d67">nf_service_cb</a> cb, void *ctx)</td></tr>
 <tr class="memdesc:a9c66ef61ae09b4b874948daf112477b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks availability of the service for the given edge context.  <a href="ziti_8h.html#a9c66ef61ae09b4b874948daf112477b1">More...</a><br /></td></tr>
 <tr class="separator:a9c66ef61ae09b4b874948daf112477b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd8423a36c4814f17fb7206fd1342a0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#acd8423a36c4814f17fb7206fd1342a0a">NF_dial</a> (<a class="el" href="ziti_8h.html#a8f7f3058686d6698581db948a2414162">nf_connection</a> conn, const char *service, <a class="el" href="ziti_8h.html#a69f736c61bb503887114393cc2c27b78">nf_conn_cb</a> cb, <a class="el" href="ziti_8h.html#ad119319c38f685068770e12e1e97d89f">nf_data_cb</a> data_cb)</td></tr>
@@ -342,11 +369,39 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">conn</td><td>The Ziti connection which received the data </td></tr>
     <tr><td class="paramname">data</td><td>incoming data buffer </td></tr>
-    <tr><td class="paramname">length</td><td>size of data or error code as defined in <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a> (will receive <a class="el" href="errors_8h.html#adf68027c57495898fd8bf51ed0bad701" title="The connection has been closed gracefully.">ZITI_EOF</a> when connection is closed)</td></tr>
+    <tr><td class="paramname">length</td><td>size of data or error code as defined in <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a> (will receive <a class="el" href="errors_8h.html#a577dcc677a447fbfe6bab5edd9ac8452" title="The connection has been closed gracefully.">ZITI_EOF</a> when connection is closed)</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="ziti_8h.html#acd8423a36c4814f17fb7206fd1342a0a" title="Establishes connection to a Ziti service.">NF_dial()</a>, <a class="el" href="ziti_8h.html#a58af80ef7d3226fbe177ffd6a0e5df02" title="Completes client connection.">NF_accept()</a>, <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a> </dd></dl>
+
+</div>
+</div>
+<a id="a9b3b0281079ba7255c9f7999bc049227"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b3b0281079ba7255c9f7999bc049227">&#9670;&nbsp;</a></span>nf_enroll_cb</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* nf_enroll_cb) (uint8_t *data, int length, char *err_message, void *enroll_ctx)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback called after <a class="el" href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49" title="Performs a Ziti enrollment.">NF_enroll()</a> is complete. </p>
+<p>This callback is invoked on the conclusion of the <a class="el" href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49" title="Performs a Ziti enrollment.">NF_enroll()</a> function. The result of the <a class="el" href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49" title="Performs a Ziti enrollment.">NF_enroll()</a> function may be an error condition so it is important to verify the provided status code in this callback.</p>
+<p>This callback also receives a Ziti identity json salvo if the enrollment was successful. This identity should be persisted into a file, and used in subsequent calls to <a class="el" href="ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8" title="Initializes a Ziti Edge identity.">NF_init()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>identity json data buffer </td></tr>
+    <tr><td class="paramname">length</td><td>size of identity json or error code as defined in <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a> </td></tr>
+    <tr><td class="paramname">err_message</td><td>description of error, or NULL if enrollment succeeded </td></tr>
+    <tr><td class="paramname">enroll_ctx</td><td>additional context to be passed into <a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227" title="Callback called after NF_enroll() is complete.">nf_enroll_cb</a> callback</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49" title="Performs a Ziti enrollment.">NF_enroll()</a>, <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a> </dd></dl>
 
 </div>
 </div>
@@ -395,20 +450,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aad053fa0a15fb68d2902bf279cf141b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad053fa0a15fb68d2902bf279cf141b6">&#9670;&nbsp;</a></span>nf_service_cb</h2>
+<a id="ac058257ad4eb51f3371350b9dfe62d67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac058257ad4eb51f3371350b9dfe62d67">&#9670;&nbsp;</a></span>nf_service_cb</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* nf_service_cb) (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, const char *service_name, int status, unsigned int flags, void *data)</td>
+          <td class="memname">typedef void(* nf_service_cb) (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, <a class="el" href="ziti__model_8h.html#afc4459bce792db0d76881d56133ccfc9">ziti_service</a> *, int status, void *data)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Service status callback. </p>
-<p>This callback is invoked on the conclusion of <a class="el" href="ziti_8h.html#a9c66ef61ae09b4b874948daf112477b1" title="Checks availability of the service for the given edge context.">NF_service_available()</a>. The result of the function may be an error condition so it is important to verify the status code in this callback. In the event the service does not exist or the identity has not been given the access to the service the <a class="el" href="errors_8h.html#adce4a78f4190299277ad587530ca5036" title="The SDK cannot send data to the Ziti Network because the requested service was not available.">ZITI_SERVICE_UNAVAILABLE</a> error code will be returned otherwise <a class="el" href="errors_8h.html#a58cd556eb411c881903d30ae272984f4" title="The expected outcome of a successful operation.">ZITI_OK</a> is expected.</p>
+<p>This callback is invoked on the conclusion of <a class="el" href="ziti_8h.html#a9c66ef61ae09b4b874948daf112477b1" title="Checks availability of the service for the given edge context.">NF_service_available()</a>. The result of the function may be an error condition so it is important to verify the status code in this callback. In the event the service does not exist or the identity has not been given the access to the service the <a class="el" href="errors_8h.html#ab0d324214cb968c0dae7af2a46ffb040" title="The SDK cannot send data to the Ziti Network because the requested service was not available.">ZITI_SERVICE_UNAVAILABLE</a> error code will be returned otherwise <a class="el" href="errors_8h.html#a58cd556eb411c881903d30ae272984f4" title="The expected outcome of a successful operation.">ZITI_OK</a> is expected.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="ziti_8h.html#a9c66ef61ae09b4b874948daf112477b1" title="Checks availability of the service for the given edge context.">NF_service_available()</a>, <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a> </dd></dl>
 
 </div>
@@ -667,6 +722,160 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a353488a2d395030ab65bd13a7d324c49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a353488a2d395030ab65bd13a7d324c49">&#9670;&nbsp;</a></span>NF_enroll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int NF_enroll </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>jwt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uv_loop_t *&#160;</td>
+          <td class="paramname"><em>loop</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227">nf_enroll_cb</a>&#160;</td>
+          <td class="paramname"><em>enroll_cb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>enroll_ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs a Ziti enrollment. </p>
+<p>This function is used to enroll a Ziti Edge identity. The Ziti C SDK is based around the <a href="http://libuv.org/">libuv</a> library and maintains similar semantics. This function is used to setup the chain of callbacks needed once the loop begins to execute.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jwt</td><td>location of JWT file </td></tr>
+    <tr><td class="paramname">loop</td><td>libuv event loop </td></tr>
+    <tr><td class="paramname">enroll_cb</td><td>callback to be called when enrollment is complete </td></tr>
+    <tr><td class="paramname">enroll_ctx</td><td>additional context to be passed into <a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227" title="Callback called after NF_enroll() is complete.">nf_enroll_cb</a> callback</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="errors_8h.html#a58cd556eb411c881903d30ae272984f4" title="The expected outcome of a successful operation.">ZITI_OK</a> or corresponding <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a> </dd></dl>
+
+</div>
+</div>
+<a id="a8140de2747cda384b40acbad4113cfe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8140de2747cda384b40acbad4113cfe5">&#9670;&nbsp;</a></span>NF_get_controller()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* NF_get_controller </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramname"><em>nf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>controller URL of the given context </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nf</td><td>ziti context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>controller URL </dd></dl>
+
+</div>
+</div>
+<a id="aa3192e14dea250294f83133b0084ff35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3192e14dea250294f83133b0084ff35">&#9670;&nbsp;</a></span>NF_get_controller_version()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const ziti_version* NF_get_controller_version </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramname"><em>nf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return Ziti controller version for given context </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nf</td><td>ziti context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>controller version </dd></dl>
+
+</div>
+</div>
+<a id="ae481d7923e66ad693c01ea0eb3b597ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae481d7923e66ad693c01ea0eb3b597ed">&#9670;&nbsp;</a></span>NF_get_identity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const ziti_identity* NF_get_identity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramname"><em>nf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ziti identity of the given context. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nf</td><td>ziti context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ziti identity </dd></dl>
+
+</div>
+</div>
+<a id="a9044630d375d3365f25bce1bfa334e79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9044630d375d3365f25bce1bfa334e79">&#9670;&nbsp;</a></span>NF_get_version()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const ziti_version* NF_get_version </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return SDK version </p>
+<dl class="section return"><dt>Returns</dt><dd>SDK version </dd></dl>
+
+</div>
+</div>
 <a id="a6ac373aa211304ffdf7d395f9aae94f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ac373aa211304ffdf7d395f9aae94f8">&#9670;&nbsp;</a></span>NF_init()</h2>
 
@@ -706,8 +915,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initializes a Ziti Edge identity. </p>
-<p>This function is used to initialize a Ziti Edge identity. The Ziti C SDK is based around the <a href="http://libuv.org/">libuv</a> library and is maintains similar semantics. This function is used to setup the chain of callbacks needed once the loop begins to execute.</p>
-<p>This function will initialize the Ziti C SDK using the default TLS engine <a href="https://tls.mbed.org/">mbed</a>. If a different TLS engine is desired use <a class="el" href="ziti_8h.html#ae04053b556b1935cdb66de3288042a4e" title="Initialize Ziti Edge identity context with the provided TLS context.">NF_init_with_tls()</a>.</p>
+<p>This function is used to initialize a Ziti Edge identity. The Ziti C SDK is based around the <a href="http://libuv.org/">libuv</a> library and maintains similar semantics. This function is used to setup the chain of callbacks needed once the loop begins to execute.</p>
+<p>This function will initialize the Ziti C SDK using the default TLS engine <a href="https://tls.mbed.org/">mbed</a>. If a different TLS engine is desired use NF_init_with_tls().</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">config</td><td>location of identity configuration </td></tr>
@@ -718,39 +927,28 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="errors_8h.html#a58cd556eb411c881903d30ae272984f4" title="The expected outcome of a successful operation.">ZITI_OK</a> or corresponding <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="ziti_8h.html#ae04053b556b1935cdb66de3288042a4e" title="Initialize Ziti Edge identity context with the provided TLS context.">NF_init_with_tls()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="ziti_8h.html#a7035014ff00537ece431f0dbcf44cc9d" title="Initialize Ziti Edge identity context with the provided options.">NF_init_opts()</a> </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd></dd></dl>
 
 </div>
 </div>
-<a id="ae04053b556b1935cdb66de3288042a4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae04053b556b1935cdb66de3288042a4e">&#9670;&nbsp;</a></span>NF_init_with_tls()</h2>
+<a id="a7035014ff00537ece431f0dbcf44cc9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7035014ff00537ece431f0dbcf44cc9d">&#9670;&nbsp;</a></span>NF_init_opts()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int NF_init_with_tls </td>
+          <td class="memname">int NF_init_opts </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ctrl_url</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">tls_context *&#160;</td>
-          <td class="paramname"><em>tls_context</em>, </td>
+          <td class="paramtype">nf_options *&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uv_loop_t *&#160;</td>
           <td class="paramname"><em>loop</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">nf_init_cb</a>&#160;</td>
-          <td class="paramname"><em>init_cb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -766,15 +964,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialize Ziti Edge identity context with the provided TLS context. </p>
-<p>This function is very similar to <a class="el" href="ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8" title="Initializes a Ziti Edge identity.">NF_init()</a> with the exception that it allows the tls_context to be specified. This allows for a TLS implementation other than the included mbed.</p>
+<p>Initialize Ziti Edge identity context with the provided options. </p>
+<p>This function is a more flexible version of <a class="el" href="ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8" title="Initializes a Ziti Edge identity.">NF_init()</a> with the ability to specify tls_context, controller, and refresh options.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ctrl_url</td><td>the url of the Ziti Controller </td></tr>
-    <tr><td class="paramname">tls_context</td><td>the context to use when establishing new TLS connections </td></tr>
+    <tr><td class="paramname">options</td><td>options to initialize with </td></tr>
     <tr><td class="paramname">loop</td><td>libuv event loop </td></tr>
-    <tr><td class="paramname">init_cb</td><td>callback to be called when initialization is complete </td></tr>
-    <tr><td class="paramname">init_ctx</td><td>additional context to be passed into the <a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6" title="Ziti Edge identity context init callback.">nf_init_cb</a> callback</td></tr>
+    <tr><td class="paramname">init_ctx</td><td>additional context to be passed into the #nf_options.nf_init_cb callback</td></tr>
   </table>
   </dd>
 </dl>
@@ -860,7 +1056,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#aad053fa0a15fb68d2902bf279cf141b6">nf_service_cb</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="ziti_8h.html#ac058257ad4eb51f3371350b9dfe62d67">nf_service_cb</a>&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
@@ -878,13 +1074,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Checks availability of the service for the given edge context. </p>
-<p>Checks to see if a given <a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635" title="Represents the Ziti Edge identity context.">nf_context</a> has a service available by the name supplied. The supplied name is case sensitive. This function is not synchronous - the <a class="el" href="ziti_8h.html#aad053fa0a15fb68d2902bf279cf141b6" title="Service status callback.">nf_service_cb</a> specified is invoked at the end of the function invocation with the result.</p>
+<p>Checks to see if a given <a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635" title="Represents the Ziti Edge identity context.">nf_context</a> has a service available by the name supplied. The supplied name is case sensitive. This function is not synchronous - the <a class="el" href="ziti_8h.html#ac058257ad4eb51f3371350b9dfe62d67" title="Service status callback.">nf_service_cb</a> specified is invoked at the end of the function invocation with the result.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf_ctx</td><td>the Ziti Edge identity context to use to check for the service's availability on </td></tr>
     <tr><td class="paramname">service</td><td>the name of the service to check </td></tr>
     <tr><td class="paramname">cb</td><td>callback called with <a class="el" href="errors_8h.html#a58cd556eb411c881903d30ae272984f4" title="The expected outcome of a successful operation.">ZITI_OK</a> or #ZITI_SERVICE_NOT_AVAILABLE </td></tr>
-    <tr><td class="paramname">ctx</td><td>additional context to be passed to the <a class="el" href="ziti_8h.html#aad053fa0a15fb68d2902bf279cf141b6" title="Service status callback.">nf_service_cb</a></td></tr>
+    <tr><td class="paramname">ctx</td><td>additional context to be passed to the <a class="el" href="ziti_8h.html#ac058257ad4eb51f3371350b9dfe62d67" title="Service status callback.">nf_service_cb</a></td></tr>
   </table>
   </dd>
 </dl>
