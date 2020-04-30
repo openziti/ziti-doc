@@ -3,7 +3,7 @@
 This guide will get you up and running with a demonstrable service in only a few minutes.  
 If you are unfamiliar with the relevant Ziti concepts refer to the [overview](~/ziti/overview.md).
 
-# From Nothing to Network 
+# From Nothing to Network
 
 To get started with Ziti here are the steps you will need to accomplish:
 
@@ -51,11 +51,18 @@ the public internet on ports: 22, 443, 1280, 3022.
   * port 3022 - the preselected port for data channels to the Ziti Edge Router
 * Public IP/DNS: Make sure the EC2 instance is assigned a public IP and a public DNS entry
 
+> [!NOTE]
+> One can use CloudFormation template to aide in deploying the ZEDE image to VPC. The following link
+> needs to be entered under "Amazon S3 URL" option when creating [CF Stack] (https://console.aws.amazon.com/cloudformation)
+> https://s3.amazonaws.com/netfoundry-aws-quickstart/production/zede.template
+> As seen in this screen shot.
+> ![image](../images/cloudformation01.png)
+
 > [!IMPORTANT]
 > Make sure you have the private key corresponding to the public key you choose.
 > Without the private key - you will not be able to authenticate to the bare AMI.
 
-Take note of the public ip address assigned to the instance. This ip is used when ssh-ing to the machine and 
+Take note of the public ip address assigned to the instance. This ip is used when ssh-ing to the machine and
 this is the address that you'll use to access the online Web UI. For example if the ip address assigned is
 52.165.223.129. You would ssh to the machine via this ip or the DNS name with 'nfadmin' as your username:
 
