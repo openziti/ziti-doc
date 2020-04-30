@@ -56,7 +56,7 @@ the public internet on ports: 22, 443, 1280, 3022.
 > needs to be entered under "Amazon S3 URL" option when creating [CF Stack] (https://console.aws.amazon.com/cloudformation)
 > https://s3.amazonaws.com/netfoundry-aws-quickstart/production/zede.template
 > As seen in this screen shot.
-> ![image](../images/cloudformation01.png)
+> ![image](~/images/cloudformation01.png)
 
 > [!IMPORTANT]
 > Make sure you have the private key corresponding to the public key you choose.

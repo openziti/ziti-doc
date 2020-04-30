@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['none_5fmod_300',['none_mod',['../model__support_8h.html#a52b55f93ba3927e6d3111c6057b070aaa20e9703a4c7bc3891bde8f453426b7a0',1,'model_support.h']]]
+  ['debug_329',['DEBUG',['../ziti__log_8h.html#ab658e6d84759440dbf3c890446075395a0593585da9181e972974c1274d8f2b4f',1,'ziti_log.h']]]
 ];

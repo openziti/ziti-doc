@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['nf_5fdefault_5ftimeout_311',['NF_DEFAULT_TIMEOUT',['../ziti_8h.html#a2f2183e804d2b3991b1b6630732bebf0',1,'ziti.h']]],
-  ['none_312',['none',['../model__support_8h.html#a6a3518c9c928b1194dfa6123a0a80586',1,'model_support.h']]]
+  ['model_5fapi_348',['MODEL_API',['../model__support_8h.html#a07cd6f8790a80a835dd53aac54dd3fe4',1,'MODEL_API():&#160;model_support.h'],['../ziti__model_8h.html#a07cd6f8790a80a835dd53aac54dd3fe4',1,'MODEL_API():&#160;ziti_model.h']]],
+  ['model_5fmap_5fforeach_349',['MODEL_MAP_FOREACH',['../model__support_8h.html#a7dc514b62f35aeb5f3b6ed873e19b3b0',1,'model_support.h']]],
+  ['model_5fmap_5fforeach_5fl_350',['MODEL_MAP_FOREACH_l',['../model__support_8h.html#a16964b64c051836f7e2c3fbb8583fecd',1,'model_support.h']]]
 ];

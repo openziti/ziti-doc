@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/mnt/git/git/github/ziti-doc-clean/docfx_project",
+  "source_base_path": "/mnt/git/git/github/ziti-doc/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -345,6 +345,17 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/cloudformation01.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/cloudformation01.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/create-appwan.PNG",
       "output": {
         "resource": {
@@ -527,7 +538,7 @@
       "output": {
         ".html": {
           "relative_path": "samples/index.html",
-          "hash": "zlETs0lK8yy6nJlSPvGgBw=="
+          "hash": "KR+EmUaUFkpKuk7ikfpIJw=="
         }
       },
       "is_incremental": false,
@@ -1494,7 +1505,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/quickstarts/network/aws-quickstart.html",
-          "hash": "b4PjI1vRyrkAeSZBqAHO2g=="
+          "hash": "61UkL9KgnDpJFGzq44KK+w=="
         }
       },
       "is_incremental": false,
@@ -1600,12 +1611,10 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because config changed.",
+        "can_incremental": true,
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0,
-        "full_build_reason_code": "ConfigChanged"
+        "skipped_file_count": 0
       },
       "processors": {
         "TocDocumentProcessor": {
@@ -1615,6 +1624,12 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 82,
+          "skipped_file_count": 81
+        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -1623,16 +1638,10 @@
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 10,
-          "skipped_file_count": 0
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 82,
-          "skipped_file_count": 0
+          "skipped_file_count": 10
         }
       }
     },

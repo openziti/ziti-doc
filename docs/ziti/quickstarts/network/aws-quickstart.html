@@ -142,10 +142,16 @@ the public internet on ports: 22, 443, 1280, 3022.<ul>
 </li>
 <li>Public IP/DNS: Make sure the EC2 instance is assigned a public IP and a public DNS entry</li>
 </ul>
+<div class="NOTE"><h5>Note</h5><p>One can use CloudFormation template to aide in deploying the ZEDE image to VPC. The following link
+needs to be entered under &quot;Amazon S3 URL&quot; option when creating <a href="https://console.aws.amazon.com/cloudformation">CF Stack</a>
+<a href="https://s3.amazonaws.com/netfoundry-aws-quickstart/production/zede.template">https://s3.amazonaws.com/netfoundry-aws-quickstart/production/zede.template</a>
+As seen in this screen shot.
+<img src="../../../images/cloudformation01.png" alt="image"></p>
+</div>
 <div class="IMPORTANT"><h5>Important</h5><p>Make sure you have the private key corresponding to the public key you choose.
 Without the private key - you will not be able to authenticate to the bare AMI.</p>
 </div>
-<p>Take note of the public ip address assigned to the instance. This ip is used when ssh-ing to the machine and 
+<p>Take note of the public ip address assigned to the instance. This ip is used when ssh-ing to the machine and
 this is the address that you&#39;ll use to access the online Web UI. For example if the ip address assigned is
 52.165.223.129. You would ssh to the machine via this ip or the DNS name with &#39;nfadmin&#39; as your username:</p>
 <pre><code>ssh nfadmin@ec2-52-165-223-129.compute-1.amazonaws.com

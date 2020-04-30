@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ptr_5fmod_301',['ptr_mod',['../model__support_8h.html#a52b55f93ba3927e6d3111c6057b070aaa8bbbe230f88eca0f864aa639d50f2400',1,'model_support.h']]]
+  ['error_330',['ERROR',['../ziti__log_8h.html#ab658e6d84759440dbf3c890446075395a2fd6f336d08340583bd620a7f5694c90',1,'ziti_log.h']]]
 ];
