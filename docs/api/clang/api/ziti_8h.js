@@ -25,6 +25,7 @@ var ziti_8h =
     [ "NF_get_controller", "ziti_8h.html#a8140de2747cda384b40acbad4113cfe5", null ],
     [ "NF_get_controller_version", "ziti_8h.html#aa3192e14dea250294f83133b0084ff35", null ],
     [ "NF_get_identity", "ziti_8h.html#ae481d7923e66ad693c01ea0eb3b597ed", null ],
+    [ "NF_get_transfer_rates", "ziti_8h.html#a318b52af004fb7b108494b1ebea4fca4", null ],
     [ "NF_get_version", "ziti_8h.html#a9044630d375d3365f25bce1bfa334e79", null ],
     [ "NF_init", "ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8", null ],
     [ "NF_init_opts", "ziti_8h.html#a7035014ff00537ece431f0dbcf44cc9d", null ],

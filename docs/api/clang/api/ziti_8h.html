@@ -176,6 +176,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae481d7923e66ad693c01ea0eb3b597ed"><td class="memItemLeft" align="right" valign="top">const ziti_identity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#ae481d7923e66ad693c01ea0eb3b597ed">NF_get_identity</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf)</td></tr>
 <tr class="memdesc:ae481d7923e66ad693c01ea0eb3b597ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ziti identity of the given context.  <a href="ziti_8h.html#ae481d7923e66ad693c01ea0eb3b597ed">More...</a><br /></td></tr>
 <tr class="separator:ae481d7923e66ad693c01ea0eb3b597ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a318b52af004fb7b108494b1ebea4fca4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a318b52af004fb7b108494b1ebea4fca4">NF_get_transfer_rates</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf, double *up, double *down)</td></tr>
+<tr class="memdesc:a318b52af004fb7b108494b1ebea4fca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve current transfer rates.  <a href="ziti_8h.html#a318b52af004fb7b108494b1ebea4fca4">More...</a><br /></td></tr>
+<tr class="separator:a318b52af004fb7b108494b1ebea4fca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa5d4ef44a5dc338c85d9d0e74543d9bb">NF_set_timeout</a> (<a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nf_ctx, int timeout)</td></tr>
 <tr class="memdesc:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets connect and write timeouts(in millis).  <a href="ziti_8h.html#aa5d4ef44a5dc338c85d9d0e74543d9bb">More...</a><br /></td></tr>
 <tr class="separator:aa5d4ef44a5dc338c85d9d0e74543d9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -896,6 +899,51 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ziti identity </dd></dl>
+
+</div>
+</div>
+<a id="a318b52af004fb7b108494b1ebea4fca4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a318b52af004fb7b108494b1ebea4fca4">&#9670;&nbsp;</a></span>NF_get_transfer_rates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NF_get_transfer_rates </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
+          <td class="paramname"><em>nf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>up</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>down</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve current transfer rates. </p>
+<p>Rates are in bytes/second.</p>
+<p>Calculation is using 1 minute EWMA. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nf</td><td>ziti context </td></tr>
+    <tr><td class="paramname">up</td><td>rate of bytes going up </td></tr>
+    <tr><td class="paramname">down</td><td>rate of bytes going down </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

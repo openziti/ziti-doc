@@ -5,5 +5,6 @@ var dir_8098f81842dff06a8050c494360cd224 =
     [ "model_support.h", "model__support_8h.html", "model__support_8h" ],
     [ "ziti.h", "ziti_8h.html", "ziti_8h" ],
     [ "ziti_log.h", "ziti__log_8h.html", "ziti__log_8h" ],
-    [ "ziti_model.h", "ziti__model_8h.html", "ziti__model_8h" ]
+    [ "ziti_model.h", "ziti__model_8h.html", "ziti__model_8h" ],
+    [ "ziti_src.h", "ziti__src_8h.html", "ziti__src_8h" ]
 ];
