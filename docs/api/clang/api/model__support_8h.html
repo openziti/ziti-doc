@@ -149,6 +149,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:a20444634a5b3afc659d24d3b6edd6600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd4891b59dd77a4b4b2502f3ae545630"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="model__support_8h.html#abd4891b59dd77a4b4b2502f3ae545630">_free_f</a>) (void *obj)</td></tr>
 <tr class="separator:abd4891b59dd77a4b4b2502f3ae545630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9898f9354df43275b79df9b09e6038f"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="model__support_8h.html#ab9898f9354df43275b79df9b09e6038f">_cmp_f</a>) (void *lh, void *rh)</td></tr>
+<tr class="separator:ab9898f9354df43275b79df9b09e6038f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2a65074a62982920edadbc6f5e01433"><td class="memItemLeft" align="right" valign="top">typedef struct timeval&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="model__support_8h.html#ab2a65074a62982920edadbc6f5e01433">timestamp</a></td></tr>
 <tr class="separator:ab2a65074a62982920edadbc6f5e01433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7037b87ab62417854014f25eeb714086"><td class="memItemLeft" align="right" valign="top">typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="model__support_8h.html#a7037b87ab62417854014f25eeb714086">model_map_iter</a></td></tr>
@@ -170,6 +172,8 @@ Functions</h2></td></tr>
 <tr class="separator:ace334e8bcf3f713857529c5c61a2faaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af193275359ee7ea784d8f6d6ad963717"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="model__support_8h.html#af193275359ee7ea784d8f6d6ad963717">model_dump</a> (void *obj, int off, <a class="el" href="structtype__meta.html">type_meta</a> *meta)</td></tr>
 <tr class="separator:af193275359ee7ea784d8f6d6ad963717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a456d4e5ec4970e05427538fe6adaf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="model__support_8h.html#a55a456d4e5ec4970e05427538fe6adaf">model_cmp</a> (void *lh, void *rh, <a class="el" href="structtype__meta.html">type_meta</a> *meta)</td></tr>
+<tr class="separator:a55a456d4e5ec4970e05427538fe6adaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc01cd9e53791bfe2c1f23f52d875af9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="model__support_8h.html#abc01cd9e53791bfe2c1f23f52d875af9">model_parse</a> (void *obj, const char *<a class="el" href="model__support_8h.html#ae5a8ce0b412602b5f07fe3220ea6f77d">json</a>, size_t len, <a class="el" href="structtype__meta.html">type_meta</a> *meta)</td></tr>
 <tr class="separator:abc01cd9e53791bfe2c1f23f52d875af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5e80917106862cdea7729c18e125c27"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="model__support_8h.html#ac5e80917106862cdea7729c18e125c27">model_parse_array</a> (void ***arp, const char *<a class="el" href="model__support_8h.html#ae5a8ce0b412602b5f07fe3220ea6f77d">json</a>, size_t len, <a class="el" href="structtype__meta.html">type_meta</a> *meta)</td></tr>
@@ -256,6 +260,7 @@ Functions</h2></td></tr>
 <div class="line">MODEL_API <a class="code" href="structtype__meta.html">type_meta</a>* get_##type##_meta();\</div>
 <div class="line">MODEL_API <a class="code" href="model__support_8h.html#a71854bec883f6da99f2f20ae3516d540">ptr</a>(type) alloc_##type();\</div>
 <div class="line">MODEL_API <span class="keywordtype">void</span> free_##type(type *v); \</div>
+<div class="line">MODEL_API <span class="keywordtype">int</span> cmp_##type(type *lh, type *rh); \</div>
 <div class="line">MODEL_API <span class="keywordtype">void</span> free_##type##_array(<a class="code" href="model__support_8h.html#a65480cf9f0f8078bda7e8cb31b379a1c">array</a>(type) *ap);\</div>
 <div class="line">MODEL_API <span class="keywordtype">int</span> parse_##type(<a class="code" href="model__support_8h.html#a71854bec883f6da99f2f20ae3516d540">ptr</a>(type) v, <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="model__support_8h.html#ae5a8ce0b412602b5f07fe3220ea6f77d">json</a>, <span class="keywordtype">size_t</span> len);\</div>
 <div class="line">MODEL_API <span class="keywordtype">int</span> parse_##type##_ptr(<a class="code" href="model__support_8h.html#a71854bec883f6da99f2f20ae3516d540">ptr</a>(type) *p, <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="model__support_8h.html#ae5a8ce0b412602b5f07fe3220ea6f77d">json</a>, <span class="keywordtype">size_t</span> len);\</div>
@@ -407,6 +412,7 @@ Functions</h2></td></tr>
 <div class="line">}\</div>
 <div class="line">int parse_##type##_array(<a class="code" href="model__support_8h.html#a65480cf9f0f8078bda7e8cb31b379a1c">array</a>(type) *a, <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="model__support_8h.html#ae5a8ce0b412602b5f07fe3220ea6f77d">json</a>, <span class="keywordtype">size_t</span> len) { <span class="keywordflow">return</span> <a class="code" href="model__support_8h.html#ac5e80917106862cdea7729c18e125c27">model_parse_array</a>((<span class="keywordtype">void</span>***)a, <a class="code" href="model__support_8h.html#ae5a8ce0b412602b5f07fe3220ea6f77d">json</a>, len, &amp;type##_META); }\</div>
 <div class="line">ptr(type) alloc_##type() { <span class="keywordflow">return</span> (<a class="code" href="model__support_8h.html#a71854bec883f6da99f2f20ae3516d540">ptr</a>(type))calloc(1, <span class="keyword">sizeof</span>(type)); } \</div>
+<div class="line">int cmp_##type(type *lh, type *rh) { <span class="keywordflow">return</span> <a class="code" href="model__support_8h.html#a55a456d4e5ec4970e05427538fe6adaf">model_cmp</a>(lh, rh, &amp;type##_META); }\</div>
 <div class="line">void free_##type(type *v) { <a class="code" href="model__support_8h.html#af7918171aa89926391431009dad9afea">model_free</a>(v, &amp;type##_META); } \</div>
 <div class="line">void free_##type##_array(<a class="code" href="model__support_8h.html#a65480cf9f0f8078bda7e8cb31b379a1c">array</a>(type) *ap) { <a class="code" href="model__support_8h.html#ace334e8bcf3f713857529c5c61a2faaa">model_free_array</a>((<span class="keywordtype">void</span>***)ap, &amp;type##_META); }\</div>
 <div class="line">void dump_##type(type *v, <span class="keywordtype">int</span> off) { <a class="code" href="model__support_8h.html#af193275359ee7ea784d8f6d6ad963717">model_dump</a>(v, off, &amp;type##_META);}</div>
@@ -583,6 +589,20 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="ab9898f9354df43275b79df9b09e6038f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9898f9354df43275b79df9b09e6038f">&#9670;&nbsp;</a></span>_cmp_f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int(* _cmp_f) (void *lh, void *rh)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="abd4891b59dd77a4b4b2502f3ae545630"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd4891b59dd77a4b4b2502f3ae545630">&#9670;&nbsp;</a></span>_free_f</h2>
 
@@ -826,6 +846,40 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55a456d4e5ec4970e05427538fe6adaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a456d4e5ec4970e05427538fe6adaf">&#9670;&nbsp;</a></span>model_cmp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int model_cmp </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>lh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>rh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtype__meta.html">type_meta</a> *&#160;</td>
+          <td class="paramname"><em>meta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1215,22 +1269,23 @@ Functions</h2></td></tr>
 <div class="ttc" id="amodel__support_8h_html_af7918171aa89926391431009dad9afea"><div class="ttname"><a href="model__support_8h.html#af7918171aa89926391431009dad9afea">model_free</a></div><div class="ttdeci">void model_free(void *obj, type_meta *meta)</div></div>
 <div class="ttc" id="amodel__support_8h_html_a71854bec883f6da99f2f20ae3516d540"><div class="ttname"><a href="model__support_8h.html#a71854bec883f6da99f2f20ae3516d540">ptr</a></div><div class="ttdeci">#define ptr(t)</div><div class="ttdef"><b>Definition:</b> model_support.h:56</div></div>
 <div class="ttc" id="amodel__support_8h_html_a0a845f813a5015d19de89e5b2b14678e"><div class="ttname"><a href="model__support_8h.html#a0a845f813a5015d19de89e5b2b14678e">model_map_it_value</a></div><div class="ttdeci">void * model_map_it_value(model_map_iter it)</div></div>
-<div class="ttc" id="amodel__support_8h_html_aee4a9b5ebdf3b4b9dc76a46d0b44c69e"><div class="ttname"><a href="model__support_8h.html#aee4a9b5ebdf3b4b9dc76a46d0b44c69e">gen_field_meta</a></div><div class="ttdeci">#define gen_field_meta(n, memtype, modifier, p, partype)</div><div class="ttdef"><b>Definition:</b> model_support.h:75</div></div>
+<div class="ttc" id="amodel__support_8h_html_aee4a9b5ebdf3b4b9dc76a46d0b44c69e"><div class="ttname"><a href="model__support_8h.html#aee4a9b5ebdf3b4b9dc76a46d0b44c69e">gen_field_meta</a></div><div class="ttdeci">#define gen_field_meta(n, memtype, modifier, p, partype)</div><div class="ttdef"><b>Definition:</b> model_support.h:76</div></div>
 <div class="ttc" id="amodel__support_8h_html_a65480cf9f0f8078bda7e8cb31b379a1c"><div class="ttname"><a href="model__support_8h.html#a65480cf9f0f8078bda7e8cb31b379a1c">array</a></div><div class="ttdeci">#define array(t)</div><div class="ttdef"><b>Definition:</b> model_support.h:57</div></div>
-<div class="ttc" id="astructfield__meta_html"><div class="ttname"><a href="structfield__meta.html">field_meta</a></div><div class="ttdef"><b>Definition:</b> model_support.h:122</div></div>
-<div class="ttc" id="amodel__support_8h_html_a9152d0581d1360bfac0757eebb444f7c"><div class="ttname"><a href="model__support_8h.html#a9152d0581d1360bfac0757eebb444f7c">var</a></div><div class="ttdeci">#define var(x, y)</div><div class="ttdef"><b>Definition:</b> model_support.h:193</div></div>
+<div class="ttc" id="astructfield__meta_html"><div class="ttname"><a href="structfield__meta.html">field_meta</a></div><div class="ttdef"><b>Definition:</b> model_support.h:124</div></div>
+<div class="ttc" id="amodel__support_8h_html_a9152d0581d1360bfac0757eebb444f7c"><div class="ttname"><a href="model__support_8h.html#a9152d0581d1360bfac0757eebb444f7c">var</a></div><div class="ttdeci">#define var(x, y)</div><div class="ttdef"><b>Definition:</b> model_support.h:199</div></div>
 <div class="ttc" id="amodel__support_8h_html_af193275359ee7ea784d8f6d6ad963717"><div class="ttname"><a href="model__support_8h.html#af193275359ee7ea784d8f6d6ad963717">model_dump</a></div><div class="ttdeci">void model_dump(void *obj, int off, type_meta *meta)</div></div>
 <div class="ttc" id="amodel__support_8h_html_ac5e80917106862cdea7729c18e125c27"><div class="ttname"><a href="model__support_8h.html#ac5e80917106862cdea7729c18e125c27">model_parse_array</a></div><div class="ttdeci">int model_parse_array(void ***arp, const char *json, size_t len, type_meta *meta)</div></div>
 <div class="ttc" id="amodel__support_8h_html_a94a6f026c81a8be1e14a1b355c254cb6"><div class="ttname"><a href="model__support_8h.html#a94a6f026c81a8be1e14a1b355c254cb6">model_map_iterator</a></div><div class="ttdeci">model_map_iter model_map_iterator(model_map *map)</div></div>
-<div class="ttc" id="amodel__support_8h_html_a7037b87ab62417854014f25eeb714086"><div class="ttname"><a href="model__support_8h.html#a7037b87ab62417854014f25eeb714086">model_map_iter</a></div><div class="ttdeci">void * model_map_iter</div><div class="ttdef"><b>Definition:</b> model_support.h:169</div></div>
+<div class="ttc" id="amodel__support_8h_html_a7037b87ab62417854014f25eeb714086"><div class="ttname"><a href="model__support_8h.html#a7037b87ab62417854014f25eeb714086">model_map_iter</a></div><div class="ttdeci">void * model_map_iter</div><div class="ttdef"><b>Definition:</b> model_support.h:175</div></div>
 <div class="ttc" id="amodel__support_8h_html_a8dc1515fc7557d815731b62f047704dc"><div class="ttname"><a href="model__support_8h.html#a8dc1515fc7557d815731b62f047704dc">FIELD_DECL</a></div><div class="ttdeci">#define FIELD_DECL(name, type, mod, path, _)</div><div class="ttdef"><b>Definition:</b> model_support.h:59</div></div>
 <div class="ttc" id="amodel__support_8h_html_ace334e8bcf3f713857529c5c61a2faaa"><div class="ttname"><a href="model__support_8h.html#ace334e8bcf3f713857529c5c61a2faaa">model_free_array</a></div><div class="ttdeci">void model_free_array(void ***ap, type_meta *meta)</div></div>
 <div class="ttc" id="amodel__support_8h_html_a4481a344f7888c81e79297dc3cca3713"><div class="ttname"><a href="model__support_8h.html#a4481a344f7888c81e79297dc3cca3713">model_map_it_next</a></div><div class="ttdeci">model_map_iter model_map_it_next(model_map_iter it)</div></div>
 <div class="ttc" id="amodel__support_8h_html_abc01cd9e53791bfe2c1f23f52d875af9"><div class="ttname"><a href="model__support_8h.html#abc01cd9e53791bfe2c1f23f52d875af9">model_parse</a></div><div class="ttdeci">int model_parse(void *obj, const char *json, size_t len, type_meta *meta)</div></div>
 <div class="ttc" id="amodel__support_8h_html_a2ed24c267b7bfe10b93db1ac306af78f"><div class="ttname"><a href="model__support_8h.html#a2ed24c267b7bfe10b93db1ac306af78f">model_map_it_key</a></div><div class="ttdeci">const char * model_map_it_key(model_map_iter *it)</div></div>
-<div class="ttc" id="amodel__support_8h_html_ae5a8ce0b412602b5f07fe3220ea6f77d"><div class="ttname"><a href="model__support_8h.html#ae5a8ce0b412602b5f07fe3220ea6f77d">json</a></div><div class="ttdeci">char * json</div><div class="ttdef"><b>Definition:</b> model_support.h:114</div></div>
-<div class="ttc" id="astructtype__meta_html"><div class="ttname"><a href="structtype__meta.html">type_meta</a></div><div class="ttdef"><b>Definition:</b> model_support.h:135</div></div>
-<div class="ttc" id="astructtype__meta_html_ac9c7cd2ca7597d9c1bce2c110a930f8b"><div class="ttname"><a href="structtype__meta.html#ac9c7cd2ca7597d9c1bce2c110a930f8b">type_meta::name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition:</b> model_support.h:136</div></div>
+<div class="ttc" id="amodel__support_8h_html_ae5a8ce0b412602b5f07fe3220ea6f77d"><div class="ttname"><a href="model__support_8h.html#ae5a8ce0b412602b5f07fe3220ea6f77d">json</a></div><div class="ttdeci">char * json</div><div class="ttdef"><b>Definition:</b> model_support.h:116</div></div>
+<div class="ttc" id="astructtype__meta_html"><div class="ttname"><a href="structtype__meta.html">type_meta</a></div><div class="ttdef"><b>Definition:</b> model_support.h:138</div></div>
+<div class="ttc" id="amodel__support_8h_html_a55a456d4e5ec4970e05427538fe6adaf"><div class="ttname"><a href="model__support_8h.html#a55a456d4e5ec4970e05427538fe6adaf">model_cmp</a></div><div class="ttdeci">int model_cmp(void *lh, void *rh, type_meta *meta)</div></div>
+<div class="ttc" id="astructtype__meta_html_ac9c7cd2ca7597d9c1bce2c110a930f8b"><div class="ttname"><a href="structtype__meta.html#ac9c7cd2ca7597d9c1bce2c110a930f8b">type_meta::name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition:</b> model_support.h:139</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

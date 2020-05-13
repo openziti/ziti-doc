@@ -10,6 +10,8 @@ var ziti__model_8h =
     [ "ziti_version_array", "ziti__model_8h.html#a261669f665d5ccd4ec5f68d3d6333247", null ],
     [ "alloc_ziti_service", "ziti__model_8h.html#ae2987b22ba6b2eb155a4823a06c0abbd", null ],
     [ "alloc_ziti_version", "ziti__model_8h.html#a51b14822725a092f11042f32664af421", null ],
+    [ "cmp_ziti_service", "ziti__model_8h.html#a479ee14a016b41e7494e69ec6fc32919", null ],
+    [ "cmp_ziti_version", "ziti__model_8h.html#a64310630ee6bc55a8fd6bf7858505d49", null ],
     [ "DDDDDECLARE_MODEL", "ziti__model_8h.html#a835e6f6cbf379224cd73e8e6993f620f", null ],
     [ "DDDDECLARE_MODEL", "ziti__model_8h.html#a37ee73d88e59e2642c39651f98c4a594", null ],
     [ "dump_ziti_service", "ziti__model_8h.html#a2d81be6576ea20732da6b9c004fa4625", null ],

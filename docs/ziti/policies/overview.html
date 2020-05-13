@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Service Policies | NetFoundry Ziti </title>
+    <title>Policies | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Service Policies | NetFoundry Ziti ">
+    <meta name="title" content="Policies | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.x">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -93,12 +93,134 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="service-policies">Service Policies</h1>
+<h1 id="policies">Policies</h1>
 
-<p>Service Policies are entities within the Ziti Controller which provide 
-identities authorization to services. Having at least one Service Policy 
-is vital because without at least one the Ziti network will have no 
-identities authorized to send traffic over the Ziti network.</p>
+<p>Ziti policies control which identities can access or host which services
+via which edge routers. There are three kinds of policies, and we&#39;ll walk 
+through what kind of access each policy type grants, as well as walk through
+some use cases.</p>
+<p>Each policy type relates two of the following entity types: identities, services and edge routers.</p>
+<p><img src="../../images/policy-entities.png" alt="image"></p>
+<h2 id="service-policies">Service Policies</h2>
+<p>Service policies are entities within the Ziti Controller which provide 
+identities authorization to services. </p>
+<p><img src="../../images/service-policies.png" alt="image"></p>
+<p>There are two kinds of service policies:</p>
+<ul>
+<li><strong>Dial</strong> policies, which control who can use a service</li>
+<li><strong>Bind</strong> policies, which control who can provide a service</li>
+</ul>
+<p>They are separate because in most cases a given identity will not 
+both use and provide any given service, so it&#39;s important to be able
+to distinguish between the two privileges.   </p>
+<p>Service policies are how access to application can be segmented. Each service 
+(and corresponding application) can be accessed only by the identities 
+which are given access to it. An identity can have access to any number 
+of services, and it is straightforward to add or remove identities from 
+service policies. With roles and role attributes (described below), it&#39;s
+easy to group entities and minimize manual maintenance of groups.</p>
+<p>Having at least one Service Policy is vital because without any 
+service policies the Ziti network will have no identities authorized 
+to send traffic over the Ziti network.</p>
+<h2 id="edge-router-policies">Edge Router Policies</h2>
+<p>Edge router policies are entities within the Ziti Controller which provide 
+identities access to edge routers. In order to access or provide a 
+service the identity must first access the Ziti network fabric. Edge
+routers are the points through which SDK based applications can
+get that access.  </p>
+<p><img src="../../images/edge-router-policies.png" alt="image"></p>
+<p>Not every identity should necessarily be allowed to use every edge router. 
+Identities or groups of identities may have dedicated edge routers for a 
+number of reasons.</p>
+<ul>
+<li>For resource isolation due to SLAs</li>
+<li>For resource isolation because they are hosting a service </li>
+<li>Edge routers may be colocated with a set of identities</li>
+<li>A group of identities may need to use a particular version of an edge router </li>
+</ul>
+<p>Having at least one Edge Router Policy is necessary because without at least one, 
+no identities will be able to send traffic over the Ziti network because traffic 
+must enter the network via an edge router.</p>
+<h2 id="service-edge-router-policies">Service Edge Router Policies</h2>
+<p>Service edge router policies are entities within the Ziti Controller which provide 
+services access to edge routers. They are similar to edge router policies except
+they determine via which edge routers a service can be used or provided. </p>
+<p><img src="../../images/service-edge-router-policies.png" alt="image"></p>
+<p>There are a few reasons you might want to have pools of edge routers dedicated 
+particular services or service groups.</p>
+<ul>
+<li>Resource isolation due to SLAs</li>
+<li>Geographic/political boundaries. Some services may need to be accessible only from specific areas to comply with local laws </li>
+</ul>
+<p>Having at least one Service Edge Router Policy is vital because without at least one, 
+no services will be able to accept traffic over the Ziti network because traffic must 
+enter the network via an edge router.</p>
+<h2 id="roles-and-role-attributes">Roles and Role Attributes</h2>
+<p>In order for policies to work they need a way to specify which entities to include
+in the policy. All Ziti policies work the same way. </p>
+<ul>
+<li>The entities included in policies (identities, serviced and edge routers) can all be assigned role attributes<ul>
+<li>For example: an identity could be given the attributes <code>sales</code>, <code>eu</code> if that identity belongs to a sales person from the European Union</li>
+</ul>
+</li>
+<li>Each policy has two list of roles, one for each entity type that the policy is relating <ul>
+<li>Service policies have identityRoles and serviceRoles</li>
+<li>Edge router policies have identityRoles and edgeRouterRoles</li>
+<li>Service edge router policies have edgeRouterRoles and serviceRoles</li>
+</ul>
+</li>
+<li>Each list can contain role attributes, which are prefixed by hash tags, and ids, which are prefixed with at-symbols.<ul>
+<li>For example: a service policy might have <ul>
+<li><code>identityRoles = [#sales, #north-america, @81cc68d0-700a-491f-8e98-4b43a0b30a9f]</code> </li>
+<li><code>serviceRoles = [#office, @738006f2-e33e-4964-945f-7431000d229f]</code></li>
+</ul>
+</li>
+<li>Note that external tools such as the CLI and the ZAC will likely use names instead of IDs. So the roles might instead look like <ul>
+<li><code>identityRoles = [#sales, #north-america, @jsmith-laptop]</code> </li>
+<li><code>serviceRoles = [#office,@crm-suite]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Each policy also has a semantic. The semantic dictates how multiple role attributes will be interpreted. <code>[#sales, #eu]</code> could mean every identity which has <code>#sales</code> <em>and</em> <code>#eu</code>, or it could mean every identity which has <code>#sales</code> <em>or</em> <code>#eu</code><ul>
+<li>The <code>allOf</code> semantic will include only entities have <em>all</em> the listed role attributes</li>
+<li>The <code>anyOf</code> semantic will include all entities that have <em>any of</em> the listed role attributes</li>
+</ul>
+</li>
+<li>No matter the semantic, any entities which are listed by <code>@id</code> will be included in the policy</li>
+<li>There is a special role attribute <code>#all</code> which will include all entities of a given type. This is useful for simpler setups which may not be segmenting edge routers, as well as for development and testing.</li>
+</ul>
+<h2 id="policy-interaction">Policy Interaction</h2>
+<p><strong>Important Note:</strong> When an identity is using a service, the identity
+ and service must have at least one on-line edge router in common in 
+ order for a connection to be made. </p>
+<p>When an identity is trying to establish a session to use or host a service the Ziti
+controller will verify that they access via service policy. Once the session is 
+established, the controller will return a list of edge routers that the identity 
+can use to connect to that service. The list will be all edge routers which <strong>both</strong>
+the identity and service have access to. It is possible that an identity may have
+access to a service and access to edge routers, but none of those edge routers
+can be used to access that particular service. </p>
+<h3 id="policy-advisor">Policy Advisor</h3>
+<p>To help diagnose issues there is a policy advisor API which the CLI has a wrapper for.</p>
+<pre><code>$ ziti edge controller policy-advisor services -q
+OKAY : simple-client (1) -&gt; simple (1) Common Routers: (1/1) Dial: Y Bind: N 
+
+OKAY : simple-server (1) -&gt; simple (1) Common Routers: (1/1) Dial: N Bind: Y
+
+$ ziti edge controller policy-advisor services ssh simple-client -q
+ERROR: simple-client (1) -&gt; ssh (1) Common Routers: (1/1) Dial: N Bind: N 
+  - No access to service. Adjust service policies.
+</code></pre><p>The policy advisor can look at all services or identities, or a specific service
+ and identity, and see if there are any common problems, such as:</p>
+<ul>
+<li>Does an identity not have access to any services?</li>
+<li>Does a service have no one who can access it?</li>
+<li>Do a service and identity have no edge routers in common?</li>
+<li>Do a service and identity have edge routers in common, but they are all off-line?</li>
+</ul>
+<h1 id="managing-policies">Managing Policies</h1>
+<h2 id="service-policies-1">Service Policies</h2>
 <h2 id="creating-a-service-policy">Creating a Service Policy</h2>
 <div class="tabGroup" id="tabgroup_SXxbe2tTxO">
 <ul role="tablist">
@@ -106,7 +228,7 @@ identities authorized to send traffic over the Ziti network.</p>
 <a href="#tabpanel_SXxbe2tTxO_tabid-new-service-policy-ui" role="tab" aria-controls="tabpanel_SXxbe2tTxO_tabid-new-service-policy-ui" data-tab="tabid-new-service-policy-ui" tabindex="0" aria-selected="true">New Service Policy via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_SXxbe2tTxO_tabid-new-service-policy-cli" role="tab" aria-controls="tabpanel_SXxbe2tTxO_tabid-new-service-policy-cli" data-tab="tabid-new-service-policy-cli" tabindex="-1">New Service Policy via UI</a>
+<a href="#tabpanel_SXxbe2tTxO_tabid-new-service-policy-cli" role="tab" aria-controls="tabpanel_SXxbe2tTxO_tabid-new-service-policy-cli" data-tab="tabid-new-service-policy-cli" tabindex="-1">New Service Policy via CLI</a>
 </li>
 </ul>
 <section id="tabpanel_SXxbe2tTxO_tabid-new-service-policy-ui" role="tabpanel" data-tab="tabid-new-service-policy-ui">
@@ -140,16 +262,11 @@ identities authorized to send traffic over the Ziti network.</p>
 </section>
 <section id="tabpanel_SXxbe2tTxO_tabid-new-service-policy-cli" role="tabpanel" data-tab="tabid-new-service-policy-cli" aria-hidden="true" hidden="hidden">
 <p>To create a Service Policy using the CLI issue the following commands. (ensure you are <a href="../cli-snippets/login.html">logged in</a>)</p>
-<pre><code># Create a service policy named &#39;my=policy&#39; which allows all identities to dial/connect to all services 
+<pre><code># Create a service policy named &#39;my-policy&#39; which allows all identities to dial/connect to all services 
 ziti edge controller create service-policy my-policy Dial --identity-roles &#39;#all&#39; --service-roles &#39;#all&#39;
 </code></pre></section>
 </div>
-<h1 id="edge-router-policies">Edge Router Policies</h1>
-<p>Edge Router Policies are entities within the Ziti Controller which provide 
-identities access to edge routers. Having at least one Edge Router Policy 
-is vital because without at least one, no identities will be able to send 
-traffic over the Ziti network because traffic must enter the network via 
-an edge router.</p>
+<h2 id="edge-router-policies-1">Edge Router Policies</h2>
 <h2 id="creating-an-edge-router-policy">Creating an Edge Router Policy</h2>
 <div class="tabGroup" id="tabgroup_RM2o0uUWac">
 <ul role="tablist">
@@ -157,7 +274,7 @@ an edge router.</p>
 <a href="#tabpanel_RM2o0uUWac_tabid-new-edge-router-policy-ui" role="tab" aria-controls="tabpanel_RM2o0uUWac_tabid-new-edge-router-policy-ui" data-tab="tabid-new-edge-router-policy-ui" tabindex="0" aria-selected="true">New Edge Router Policy via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_RM2o0uUWac_tabid-new-edge-router-policy-cli" role="tab" aria-controls="tabpanel_RM2o0uUWac_tabid-new-edge-router-policy-cli" data-tab="tabid-new-edge-router-policy-cli" tabindex="-1">New Edge Router Policy via UI</a>
+<a href="#tabpanel_RM2o0uUWac_tabid-new-edge-router-policy-cli" role="tab" aria-controls="tabpanel_RM2o0uUWac_tabid-new-edge-router-policy-cli" data-tab="tabid-new-edge-router-policy-cli" tabindex="-1">New Edge Router Policy via CLI</a>
 </li>
 </ul>
 <section id="tabpanel_RM2o0uUWac_tabid-new-edge-router-policy-ui" role="tabpanel" data-tab="tabid-new-edge-router-policy-ui">
@@ -190,12 +307,7 @@ an edge router.</p>
 ziti edge controller create edge-router-policy my-policy --identity-roles &#39;#all&#39; --edge-router-roles &#39;#all&#39;
 </code></pre></section>
 </div>
-<h1 id="service-edge-router-policies">Service Edge Router Policies</h1>
-<p>Service Edge Router Policies are entities within the Ziti Controller which provide 
-services access to edge routers. Having at least one Service Edge Router Policy 
-is vital because without at least one, no services will be able to accept 
-traffic over the Ziti network because traffic must enter the network via 
-an edge router.</p>
+<h2 id="service-edge-router-policies-1">Service Edge Router Policies</h2>
 <h2 id="creating-a-service-policy">Creating a Service Policy</h2>
 <div class="tabGroup" id="tabgroup_ROVe-pSECr">
 <ul role="tablist">
@@ -203,7 +315,7 @@ an edge router.</p>
 <a href="#tabpanel_ROVe-pSECr_tabid-new-service-edge-router-policy-ui" role="tab" aria-controls="tabpanel_ROVe-pSECr_tabid-new-service-edge-router-policy-ui" data-tab="tabid-new-service-edge-router-policy-ui" tabindex="0" aria-selected="true">New Service Edge Router Policy via UI</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_ROVe-pSECr_tabid-new-service-edge-router-policy-cli" role="tab" aria-controls="tabpanel_ROVe-pSECr_tabid-new-service-edge-router-policy-cli" data-tab="tabid-new-service-edge-router-policy-cli" tabindex="-1">New Service Edge Router Policy via UI</a>
+<a href="#tabpanel_ROVe-pSECr_tabid-new-service-edge-router-policy-cli" role="tab" aria-controls="tabpanel_ROVe-pSECr_tabid-new-service-edge-router-policy-cli" data-tab="tabid-new-service-edge-router-policy-cli" tabindex="-1">New Service Edge Router Policy via CLI</a>
 </li>
 </ul>
 <section id="tabpanel_ROVe-pSECr_tabid-new-service-edge-router-policy-ui" role="tabpanel" data-tab="tabid-new-service-edge-router-policy-ui">
