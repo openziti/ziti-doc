@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/mnt/git/git/github/ziti-doc/docfx_project",
+  "source_base_path": "/home/plorenz/work/nf/ziti-doc/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -411,6 +411,17 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/edge-router-policies.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/edge-router-policies.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/github-white.svg",
       "output": {
         "resource": {
@@ -459,6 +470,39 @@
       "output": {
         "resource": {
           "relative_path": "images/nflightbglogo_50.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/policy-entities.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/policy-entities.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/service-edge-router-policies.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/service-edge-router-policies.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/service-policies.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/service-policies.png"
         }
       },
       "is_incremental": false,
@@ -1373,7 +1417,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/policies/create-service-policy-cli.html",
-          "hash": "WFFx88oll6YvF4bKhs2LOw=="
+          "hash": "iCvtjF/Pi7uFMlkwdm+xpA=="
         }
       },
       "is_incremental": false,
@@ -1397,7 +1441,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/policies/creating-edge-router-policies.html",
-          "hash": "+sUE3fQdPy3UWtIEJuF/Ug=="
+          "hash": "Sc/eFzU6dPVvw3fzpgBRSg=="
         }
       },
       "is_incremental": false,
@@ -1409,7 +1453,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/policies/creating-service-edge-router-policies.html",
-          "hash": "ACg7G/hvDh8Lt1Y+ZzMxPQ=="
+          "hash": "Sg9RKxv/ck/ac7zCatU9xg=="
         }
       },
       "is_incremental": false,
@@ -1421,7 +1465,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/policies/creating-service-policies.html",
-          "hash": "9xbkn6sJogdCC1GhgV94Og=="
+          "hash": "6fImkU05q7zLCPb7S8ymWg=="
         }
       },
       "is_incremental": false,
@@ -1433,7 +1477,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/policies/overview.html",
-          "hash": "Gw8Q3+R4qL4T8thUoDGE7g=="
+          "hash": "A4mgsFDpjaNhoN53RdZV3g=="
         }
       },
       "is_incremental": false,
@@ -1617,24 +1661,24 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 82,
-          "skipped_file_count": 82
+          "skipped_file_count": 79
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 10,
           "skipped_file_count": 10
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

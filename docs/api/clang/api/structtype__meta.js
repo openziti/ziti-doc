@@ -1,5 +1,6 @@
 var structtype__meta =
 [
+    [ "comparer", "structtype__meta.html#af0b9dfb76d33d68346c6ebe4c49c7ea5", null ],
     [ "destroyer", "structtype__meta.html#a2d403aba10f11e5b49258bd8bf5b3481", null ],
     [ "field_count", "structtype__meta.html#a3e9e939c2f8e10b95e03f83148f463fd", null ],
     [ "fields", "structtype__meta.html#a4ea8190a08e1774b9e0b8cdb6662fde2", null ],

@@ -158,6 +158,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a353488a2d395030ab65bd13a7d324c49"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49">NF_enroll</a> (const char *jwt, uv_loop_t *loop, <a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227">nf_enroll_cb</a> enroll_cb, void *enroll_ctx)</td></tr>
 <tr class="memdesc:a353488a2d395030ab65bd13a7d324c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a Ziti enrollment.  <a href="ziti_8h.html#a353488a2d395030ab65bd13a7d324c49">More...</a><br /></td></tr>
 <tr class="separator:a353488a2d395030ab65bd13a7d324c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f73a2290bc38f239e21da4b6875bf9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#aa2f73a2290bc38f239e21da4b6875bf9">NF_enroll_with_key</a> (const char *jwt, const char *pk_pem, uv_loop_t *loop, <a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227">nf_enroll_cb</a> enroll_cb, void *ctx)</td></tr>
+<tr class="memdesc:aa2f73a2290bc38f239e21da4b6875bf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a Ziti enrollment.  <a href="ziti_8h.html#aa2f73a2290bc38f239e21da4b6875bf9">More...</a><br /></td></tr>
+<tr class="separator:aa2f73a2290bc38f239e21da4b6875bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ac373aa211304ffdf7d395f9aae94f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8">NF_init</a> (const char *config, uv_loop_t *loop, <a class="el" href="ziti_8h.html#a35e4fd984cab2b59b5aebc42dfa0f8d6">nf_init_cb</a> init_cb, void *init_ctx)</td></tr>
 <tr class="memdesc:a6ac373aa211304ffdf7d395f9aae94f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a Ziti Edge identity.  <a href="ziti_8h.html#a6ac373aa211304ffdf7d395f9aae94f8">More...</a><br /></td></tr>
 <tr class="separator:a6ac373aa211304ffdf7d395f9aae94f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -811,6 +814,66 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">jwt</td><td>location of JWT file </td></tr>
+    <tr><td class="paramname">loop</td><td>libuv event loop </td></tr>
+    <tr><td class="paramname">enroll_cb</td><td>callback to be called when enrollment is complete </td></tr>
+    <tr><td class="paramname">enroll_ctx</td><td>additional context to be passed into <a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227" title="Callback called after NF_enroll() is complete.">nf_enroll_cb</a> callback</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="errors_8h.html#a58cd556eb411c881903d30ae272984f4" title="The expected outcome of a successful operation.">ZITI_OK</a> or corresponding <a class="el" href="errors_8h.html#ac40dbb62a3442640d8ea56b9169ac092" title="A macro defining the various errors conditions expected to be seen when using the C SDK.">ZITI_ERRORS</a> </dd></dl>
+
+</div>
+</div>
+<a id="aa2f73a2290bc38f239e21da4b6875bf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2f73a2290bc38f239e21da4b6875bf9">&#9670;&nbsp;</a></span>NF_enroll_with_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int NF_enroll_with_key </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>jwt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pk_pem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uv_loop_t *&#160;</td>
+          <td class="paramname"><em>loop</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227">nf_enroll_cb</a>&#160;</td>
+          <td class="paramname"><em>enroll_cb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs a Ziti enrollment. </p>
+<p>This function is used to enroll a Ziti Edge identity with a user supplied private key.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jwt</td><td>location of JWT file </td></tr>
+    <tr><td class="paramname">pk_pem</td><td>string containing PEM formatted private key </td></tr>
     <tr><td class="paramname">loop</td><td>libuv event loop </td></tr>
     <tr><td class="paramname">enroll_cb</td><td>callback to be called when enrollment is complete </td></tr>
     <tr><td class="paramname">enroll_ctx</td><td>additional context to be passed into <a class="el" href="ziti_8h.html#a9b3b0281079ba7255c9f7999bc049227" title="Callback called after NF_enroll() is complete.">nf_enroll_cb</a> callback</td></tr>

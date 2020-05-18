@@ -22,6 +22,7 @@ var ziti_8h =
     [ "NF_dial", "ziti_8h.html#acd8423a36c4814f17fb7206fd1342a0a", null ],
     [ "NF_dump", "ziti_8h.html#a5e25c5f02dc46c4804ce47139f7db8aa", null ],
     [ "NF_enroll", "ziti_8h.html#a353488a2d395030ab65bd13a7d324c49", null ],
+    [ "NF_enroll_with_key", "ziti_8h.html#aa2f73a2290bc38f239e21da4b6875bf9", null ],
     [ "NF_get_controller", "ziti_8h.html#a8140de2747cda384b40acbad4113cfe5", null ],
     [ "NF_get_controller_version", "ziti_8h.html#aa3192e14dea250294f83133b0084ff35", null ],
     [ "NF_get_identity", "ziti_8h.html#ae481d7923e66ad693c01ea0eb3b597ed", null ],
