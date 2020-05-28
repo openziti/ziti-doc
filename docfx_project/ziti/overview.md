@@ -90,11 +90,11 @@ The Ziti project welcomes contributions including, but not limited to, code, doc
     * [fabric](https://github.com/openziti/fabric): fabric project which includes core controller and router
     * [foundation](https://github.com/openziti/foundation): project which contains library code used across multiple projects
     * SDKs
-        * [ziti-sdk-c] (https://github.com/openziti/sdk-golang): C SDK
-        * [ziti-sdk-csharp] (https://github.com/openziti/sdk-golang): C# SDK
-        * [ziti-sdk-jvm] (https://github.com/openziti/sdk-golang): SDK for JVM based languages
-        * [ziti-sdk-swift] (https://github.com/openziti/sdk-golang): Swift SDK
-        * [ziti-sdk-nodejs] (https://github.com/openziti/sdk-golang): NodeJS SDK
+        * [ziti-sdk-c] (https://github.com/openziti/ziti-sdk-c): C SDK
+        * [ziti-sdk-csharp] (https://github.com/openziti/ziti-sdk-csharp): C# SDK
+        * [ziti-sdk-jvm] (https://github.com/openziti/ziti-sdk-jvm): SDK for JVM based languages
+        * [ziti-sdk-swift] (https://github.com/openziti/ziti-sdk-swift): Swift SDK
+        * [ziti-sdk-nodejs] (https://github.com/openziti/ziti-sdk-nodejs): NodeJS SDK
         * [sdk-golang] (https://github.com/openziti/sdk-golang): Go SDK
     * [ziti-doc](https://github.com/openziti/ziti-doc): Documention (which you are currently reading)
 * A [Discourse forum](https://netfoundry.discourse.group/) is available 
