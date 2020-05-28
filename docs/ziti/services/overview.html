@@ -205,7 +205,57 @@ Ziti endpoints deployed the only access to these services can be through Ziti!</
 <img src="../../images/application-ha.png" alt="image"></p>
 <p>A horizontal scaled application might look like this:
 <img src="../../images/horizontal-scale.png" alt="image"></p>
+<h3 id="xt">Xt</h3>
+<p>All types of availability and scalability involve multiple terminators. What distinguishes an HA failover setup from a load-balanced horizontal scale setup is how new sessions are assigned to terminators. For failover, we want sessions to always go to the same service instance. For horizontal scale, we want to load balance sessions across available instances. </p>
+<p>The fabric contains a framework called Xt (eXtensible Terminators) which allows defining terminator strategies and defines how terminator strategies and external components integrate with smart routing. The general flow of terminator selection goes as follows:</p>
+<ol>
+<li>A client requests a new session for a service</li>
+<li>Smart routing finds all the active terminators for the session (active meaning the terminator&#39;s router is connected)</li>
+<li>Smart routing calculates a cost for each terminator then hands the service&#39;s terminator strategy a list of terminators and their costs ranked from lowest to highest</li>
+<li>The strategy returns the terminator that should be used</li>
+<li>A new session is created using that path. </li>
+</ol>
+<p>Strategies will often work by adjusting terminator costs. The selection algorithm the simply returns the lowest cost option presented by smart routing. </p>
+<h4 id="costs">Costs</h4>
+<p>There are a number of elements which feed the smart routing cost algorithm.</p>
+<h5 id="route-cost">Route Cost</h5>
+<p>The cost of the route from the initiating route to the terminator router will be included in the terminator cost. This cost may be influenced by things such as link latencies and user determined link costs.</p>
+<h5 id="static-cost">Static Cost</h5>
+<p>Each terminator has a static cost which can be set or updated when the terminator is created. SDK applications can set the terminator cost when they invoke the Listen operation.</p>
+<h4 id="precedence">Precedence</h4>
+<p>Each terminator has a precedence. There are three precedence levels: <code>required</code>, <code>default</code> and <code>failed</code>.</p>
+<p>Smart routing will always rank terminators with higher precedence levels higher than terminators with lower precedence levers. So required terminators will always be first, default second and failed third. Precedence levels can be used to implement HA. The primary will be marked as required and the secondary as default. When the primary is determined to be down, either by some internal or external set of heuristics, it will be marked as Failed and new sessions will go to the secondary. When the primary recovers it can be bumped back up to Required.</p>
+<h5 id="dynamic-cost">Dynamic Cost</h5>
+<p>Each terminator also has a dynamic cost that will move a terminator up and down relative to its precedence. This cost can be driven by stratagies or by external components. A strategy might use number of active of open sessions or dial successes and failures to drive the dynamic cost. </p>
+<h5 id="effective-cost">Effective Cost</h5>
+<p>Each terminator has an associated precedence and dynamic cost. This can be reduced to a single cost. The cost algorithm ensures terminators at difference precedence levels do not overlap. So a terminator which is marked failed, with dynamic cost 0, will always have a higher calculated cost than a terminator with default precedence and maximum value for dynamic cost. </p>
+<h4 id="strategies">Strategies</h4>
+<p>The fabric currently provides four strategy implementions.</p>
+<h5 id="smartrouting"><code>smartrouting</code></h5>
+<p>This is the default strategy. It always uses the lowest cost terminator. It drives costs as follows:</p>
+<ul>
+<li>Cost is proportional to number of open sessions</li>
+<li>Dial failures drive the cost up</li>
+<li>Dial successes drive the cost down, but only as much as they were previously driven up by failures</li>
+</ul>
+<h5 id="weighted"><code>weighted</code></h5>
+<p>This strategy drives costs in the same way as the <code>smartrouting</code> strategy. However instead of always picking the lowest cost terminator it does a weighted random selection across all terminators of the highest precedence. If a terminator has double the cost of another terminator it should get picked approximately half as often. </p>
+<h5 id="random"><code>random</code></h5>
+<p>This strategy does not change terminator weights. It does simple random selection across all terminators of the highest precedence. </p>
+<h5 id="ha"><code>ha</code></h5>
+<p>This strategy assumes that one terminator will have <code>required</code> precedence and there will be a secondary terminator with <code>default</code> precedence. If three consecutive dials to the highest ranked terminator fail in a row it will be marked as failed. This will allow the secondary to take over. If the primary recovers it can be marked as required again via the APIs. </p>
 <h2 id="configuration">Configuration</h2>
+<p>Some applications need extra metadata. Ziti has the capability to define a configuration schema for an application and provide configuration for service. One might ask why have this feature in Ziti when applications can store configuration data in local configuration files. While this approach works, centralized management makes deployments much easier. It can be difficult or impossible to update a file on a device out in the field, whereas updating the configuration in Ziti is easy, and running clients will quickly be notified of service changes.</p>
+<p>Some e</p>
+<ul>
+<li>Tunnelers need to know what ip/dns and port(s) to intercept</li>
+<li>Tunnelers which support hosting services need to know what to dial</li>
+<li>Third party applications might want to store arbitrary configuration data</li>
+</ul>
+<p>Not all applications need the same metadata. Desktop and phone tunnelers can have different needs.
+Same application may use multiple kinds of metadata (tunneler client vs server)
+Applications requirements/capabilities change 
+Should support multiple versions of configuration for a given application/service to support older install base</p>
 <h2 id="creating-a-service">Creating a Service</h2>
 <p>Here&#39;s how you can create a service.</p>
 <div class="tabGroup" id="tabgroup_6M2JU3mIHL">
