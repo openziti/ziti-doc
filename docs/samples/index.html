@@ -124,7 +124,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include &lt;nf/ziti.h&gt;
+#include &lt;ziti/ziti.h&gt;
 
 #include &lt;string.h&gt;
 #include &lt;stdlib.h&gt;
@@ -139,20 +139,20 @@ exit(code);\
 }} while(0)
 
 static size_t total;
-static nf_context nf;
+static ziti_context ziti;
 
-ssize_t on_data(nf_connection c, uint8_t *buf, ssize_t len) {
+ssize_t on_data(ziti_connection c, uint8_t *buf, ssize_t len) {
     if (len == ZITI_EOF) {
 
         printf(&quot;request completed: %s\n&quot;, ziti_errorstr(len));
-        NF_close(&amp;c);
-        NF_shutdown(nf);
+        ziti_close(&amp;c);
+        ziti_shutdown(ziti);
 
     }
     else if (len &lt; 0) {
         fprintf(stderr, &quot;unexpected error: %s\n&quot;, ziti_errorstr(len));
-        NF_close(&amp;c);
-        NF_shutdown(nf);
+        ziti_close(&amp;c);
+        ziti_shutdown(ziti);
     }
     else {
         total += len;
@@ -161,20 +161,20 @@ ssize_t on_data(nf_connection c, uint8_t *buf, ssize_t len) {
     return len;
 }
 
-static void on_write(nf_connection conn, ssize_t status, void *ctx) {
+static void on_write(ziti_connection conn, ssize_t status, void *ctx) {
     if (status &lt; 0) {
-        fprintf(stderr, &quot;request failed to submit status[%zd]: %s\n&quot;, status, ziti_errorstr((int)status));
+        fprintf(stderr, &quot;request failed to submit status[%zd]: %s\n&quot;, status, ziti_errorstr((int) status));
     }
     else {
         printf(&quot;request success: %zd bytes sent\n&quot;, status);
     }
 }
 
-void on_connect(nf_connection conn, int status) {
+void on_connect(ziti_connection conn, int status) {
     DIE(status);
 
     printf(&quot;sending HTTP request\n&quot;);
-    
+
     uint8_t *req = &quot;GET /Rochester HTTP/1.0\r\n&quot;
                    &quot;Accept: */*\r\n&quot;
                    &quot;Connection: close\r\n&quot;
@@ -182,16 +182,16 @@ void on_connect(nf_connection conn, int status) {
                    &quot;User-Agent: curl/7.59.0\r\n&quot;
                    &quot;\r\n&quot;;
 
-    DIE(NF_write(conn, req, strlen(req), on_write, NULL));
+    DIE(ziti_write(conn, req, strlen(req), on_write, NULL));
 }
 
-void on_nf_init(nf_context _nf, int status, void* ctx) {
+void on_ziti_init(ziti_context ztx, int status, void *ctx) {
     DIE(status);
-    nf = _nf;
+    ziti = ztx;
 
-    nf_connection conn;
-    DIE(NF_conn_init(nf, &amp;conn, NULL));
-    DIE(NF_dial(conn, &quot;demo-weather&quot;, on_connect, on_data));
+    ziti_connection conn;
+    DIE(ziti_conn_init(ziti, &amp;conn, NULL));
+    DIE(ziti_dial(conn, &quot;demo-weather&quot;, on_connect, on_data));
 }
 
 int main(int argc, char** argv) {
@@ -201,14 +201,14 @@ int main(int argc, char** argv) {
 #endif
     uv_loop_t *loop = uv_default_loop();
 
-    DIE(NF_init(argv[1], loop, on_nf_init, NULL));
+    DIE(ziti_init(argv[1], loop, on_ziti_init, NULL));
 
-    // loop will finish after the request is complete and NF_shutdown is called
+    // loop will finish after the request is complete and ziti_shutdown is called
     uv_run(loop, UV_RUN_DEFAULT);
 
     printf(&quot;========================\n&quot;);
 
-    NF_shutdown(nf);
+    ziti_shutdown(ziti);
 }
 </code></pre></section>
 <section id="tabpanel_prvbZ2DWOr_csharp" role="tabpanel" data-tab="csharp" aria-hidden="true" hidden="hidden">

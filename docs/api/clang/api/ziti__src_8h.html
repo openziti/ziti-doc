@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ziti C SDK: nf/ziti_src.h File Reference</title>
+<title>Ziti C SDK: ziti/ziti_src.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,22 +91,22 @@ $(document).ready(function(){initNavTree('ziti__src_8h.html',''); initResizable(
 <p>header file for ziti_src, which can be used as a source link in um_http requests  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;uv_mbed/um_http.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="ziti_8h_source.html">nf/ziti.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="ziti_8h_source.html">ziti/ziti.h</a>&gt;</code><br />
 </div>
 <p><a href="ziti__src_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3aff0ebe0f38381f06926760935ae9a6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti__src_8h.html#a3aff0ebe0f38381f06926760935ae9a6">ziti_src_init</a> (uv_loop_t *l, um_http_src_t *zl, const char *svc, <a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nfc)</td></tr>
-<tr class="memdesc:a3aff0ebe0f38381f06926760935ae9a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a <code>um_http_src_t</code> handle.  <a href="ziti__src_8h.html#a3aff0ebe0f38381f06926760935ae9a6">More...</a><br /></td></tr>
-<tr class="separator:a3aff0ebe0f38381f06926760935ae9a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a6247065a5c11d1f3fb2ae6fd017171"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziti__src_8h.html#a0a6247065a5c11d1f3fb2ae6fd017171">ziti_src_init</a> (uv_loop_t *l, um_http_src_t *zl, const char *svc, <a class="el" href="ziti_8h.html#a39669b224e62d165a45f8415a342a6b4">ziti_context</a> ztx)</td></tr>
+<tr class="memdesc:a0a6247065a5c11d1f3fb2ae6fd017171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a <code>um_http_src_t</code> handle.  <a href="ziti__src_8h.html#a0a6247065a5c11d1f3fb2ae6fd017171">More...</a><br /></td></tr>
+<tr class="separator:a0a6247065a5c11d1f3fb2ae6fd017171"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>header file for ziti_src, which can be used as a source link in um_http requests </p>
 <dl class="section see"><dt>See also</dt><dd>programs/sample_http_link.c </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a3aff0ebe0f38381f06926760935ae9a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3aff0ebe0f38381f06926760935ae9a6">&#9670;&nbsp;</a></span>ziti_src_init()</h2>
+<a id="a0a6247065a5c11d1f3fb2ae6fd017171"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a6247065a5c11d1f3fb2ae6fd017171">&#9670;&nbsp;</a></span>ziti_src_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,8 +132,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a>&#160;</td>
-          <td class="paramname"><em>nfc</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="ziti_8h.html#a39669b224e62d165a45f8415a342a6b4">ziti_context</a>&#160;</td>
+          <td class="paramname"><em>ztx</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -149,7 +149,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">l</td><td>the uv loop </td></tr>
     <tr><td class="paramname">zl</td><td>the um_http_src_t to initialize </td></tr>
     <tr><td class="paramname">svc</td><td>the name of the service to be dialed </td></tr>
-    <tr><td class="paramname">nfc</td><td>the initialized nf_context </td></tr>
+    <tr><td class="paramname">ztx</td><td>the initialized ziti_context </td></tr>
   </table>
   </dd>
 </dl>
@@ -161,7 +161,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_8098f81842dff06a8050c494360cd224.html">nf</a></li><li class="navelem"><a class="el" href="ziti__src_8h.html">ziti_src.h</a></li>
+    <li class="navelem"><a class="el" href="dir_dadf69ede447b14e22bacdb33be945b5.html">ziti</a></li><li class="navelem"><a class="el" href="ziti__src_8h.html">ziti_src.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ziti C SDK: nf/ziti_src.h Source File</title>
+<title>Ziti C SDK: ziti/ziti_src.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -101,32 +101,32 @@ $(document).ready(function(){initNavTree('ziti__src_8h_source.html',''); initRes
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">limitations under the License.</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifndef NF_ZITI_SRC_H</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define NF_ZITI_SRC_H</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifndef ZITI_SDK_ZITI_SRC_H</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define ZITI_SDK_ZITI_SRC_H</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;uv_mbed/um_http.h&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ziti_8h.html">nf/ziti.h</a>&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ziti_8h.html">ziti/ziti.h</a>&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ziti__src_8h.html#a3aff0ebe0f38381f06926760935ae9a6">ziti_src_init</a>(uv_loop_t *l, um_http_src_t *zl, <span class="keyword">const</span> <span class="keywordtype">char</span> *svc, <a class="code" href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a> nfc);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ziti__src_8h.html#a0a6247065a5c11d1f3fb2ae6fd017171">ziti_src_init</a>(uv_loop_t *l, um_http_src_t *zl, <span class="keyword">const</span> <span class="keywordtype">char</span> *svc, <a class="code" href="ziti_8h.html#a39669b224e62d165a45f8415a342a6b4">ziti_context</a> ztx);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif //NF_ZITI_SRC_H</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif //ZITI_SDK_ZITI_SRC_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aziti__src_8h_html_a3aff0ebe0f38381f06926760935ae9a6"><div class="ttname"><a href="ziti__src_8h.html#a3aff0ebe0f38381f06926760935ae9a6">ziti_src_init</a></div><div class="ttdeci">int ziti_src_init(uv_loop_t *l, um_http_src_t *zl, const char *svc, nf_context nfc)</div><div class="ttdoc">Initialize a um_http_src_t handle.</div></div>
-<div class="ttc" id="aziti_8h_html_ad68072832e06e440d58ea0d7b4531635"><div class="ttname"><a href="ziti_8h.html#ad68072832e06e440d58ea0d7b4531635">nf_context</a></div><div class="ttdeci">struct nf_ctx * nf_context</div><div class="ttdoc">Represents the Ziti Edge identity context.</div><div class="ttdef"><b>Definition:</b> ziti.h:66</div></div>
+<div class="ttc" id="aziti_8h_html_a39669b224e62d165a45f8415a342a6b4"><div class="ttname"><a href="ziti_8h.html#a39669b224e62d165a45f8415a342a6b4">ziti_context</a></div><div class="ttdeci">struct ziti_ctx * ziti_context</div><div class="ttdoc">Represents the Ziti Edge identity context.</div><div class="ttdef"><b>Definition:</b> ziti.h:66</div></div>
+<div class="ttc" id="aziti__src_8h_html_a0a6247065a5c11d1f3fb2ae6fd017171"><div class="ttname"><a href="ziti__src_8h.html#a0a6247065a5c11d1f3fb2ae6fd017171">ziti_src_init</a></div><div class="ttdeci">int ziti_src_init(uv_loop_t *l, um_http_src_t *zl, const char *svc, ziti_context ztx)</div><div class="ttdoc">Initialize a um_http_src_t handle.</div></div>
 <div class="ttc" id="aziti_8h_html"><div class="ttname"><a href="ziti_8h.html">ziti.h</a></div><div class="ttdoc">Defines the macros, functions, typedefs and constants required to interface with a Ziti Network.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_8098f81842dff06a8050c494360cd224.html">nf</a></li><li class="navelem"><a class="el" href="ziti__src_8h.html">ziti_src.h</a></li>
+    <li class="navelem"><a class="el" href="dir_dadf69ede447b14e22bacdb33be945b5.html">ziti</a></li><li class="navelem"><a class="el" href="ziti__src_8h.html">ziti_src.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

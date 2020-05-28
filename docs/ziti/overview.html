@@ -96,9 +96,52 @@
 <h1 id="overview">Overview</h1>
 
 <h2 id="why-ziti">Why Ziti?</h2>
-<p>Ziti represents the next generation of secure networking for your applications and has arrived with the Ziti platform,
-created by NetFoundry, Inc ! The Ziti Controller and the Ziti Edge Router combine to form a secure, Zero Trust
-entry point into your network or as a secure zero-trust proxy to other hosted services.</p>
+<p>Ziti represents the next generation of secure, open-source networking for your applications and has arrived with the Ziti platform, created by NetFoundry, Inc ! The Ziti Controller and the Ziti Edge Router combine to form a secure, Zero Trust entry point into your network or as a secure zero-trust proxy to other hosted services.</p>
+<p>Ziti provides several security features, including:</p>
+<ul>
+<li>Zero Trust and Service Segmentation</li>
+<li>Dark Services and Routers</li>
+<li>End to end encryption</li>
+</ul>
+<p>It also provides performance and reliability through:</p>
+<ul>
+<li>A scalable, extensible mesh fabric with smart routing</li>
+<li>Support for load balancing services for both horizontal scale and failover setups </li>
+</ul>
+<p>Finally, it offers convenience:</p>
+<ul>
+<li>Fully programable REST management APIs</li>
+<li>Application specific configuration store allowing centralized management of configuration</li>
+<li><a href="policies/overview.html">A flexible and expressive policy model for managing access to services and edge routers</a></li>
+<li>A web based admin console</li>
+<li><a href="clients/tunneler.html">Pre-built tunnelers and proxies for a variety of operating systems, including mobile</a></li>
+<li><a href="clients/sdks.html">SDKs for a variety of programming languages</a></li>
+</ul>
+<p>Let&#39;s break some of these buzzwords down.</p>
+<h3 id="zero-trustservice-segmentation">Zero Trust/Service Segmentation</h3>
+<p>Many networking security solutions act like a wall around an internal network. Once you are through the wall, you have access to everything inside. Zero trust solutions enforce not just access to a network, but access to individual services within that network. </p>
+<p>Every client in a Ziti system must have an identity with provisioned certificates. The certificates are used to establish secure communications channels as well as for authentication and authorization of the associated identity. Whenever the client attempts to access a network service, Ziti will first ensure that the identity has access to the service. If access is revoked, open network connections will be closed.</p>
+<p>This model enables Ziti systems to provide access to multiple services while ensuring that clients only get access to those services to which they have been granted access.    </p>
+<p>In addition to requiring cert based authentication for clients, Ziti uses certificates to authorize communication between Ziti components. </p>
+<h3 id="dark-services-and-routers">Dark Services and Routers</h3>
+<p>There are various levels of accessibility a network service can have.</p>
+<ol>
+<li>Many network services are available to the world. The service then relies on authentication and authorization policies to prevent unwanted access. </li>
+<li>Firewalls can be used to limit access to specific IP or ranges. This increases security at the cost of flexibility. Adding users can be complicated and users may not be able to easily switch devices or access the service remotely.</li>
+<li>Services can be put behind a VPN or made only accessible to an internal network, but there are some downsides to this approach.<ol>
+<li>If you can access the VPN or internal network for any reason, all services in that VPN become more vulnerable to you.</li>
+<li>VPNs are not usually appropriate for external customers or users.</li>
+<li>For end users, VPNs add an extra step that needs to be done each time they want to access the service.</li>
+</ol>
+</li>
+<li>Services can be made dark, meaning they do not have any ports open for anyone to even try and connect to. </li>
+</ol>
+<p>Making something dark can be done in a few ways, but the way it&#39;s generally handled in Ziti is that services reach out and establish one or more connections to the Ziti network fabric. Clients coming into the fabric can then reach the service through these connections after being authenticated and authorized. </p>
+<p>Ziti routers, which make up the fabric, can also be dark. Routers locoated in private networks will usually be made dark. These routers will reach out of the private network to talk to the controller and to make connections to join the network fabric mesh. This allows the services and routers in your private networks to make only outbound connections, so no holes have to opened for inbound traffic.</p>
+<p>Services can be completely dark if they embed a Ziti SDK. If this is not possible a Ziti tunneler or proxy can be colocated with the service. The service then only needs to allow connections from the local machine or network, depending on how close you colocate the proxy to the service.   </p>
+<h3 id="end-to-end-encryption">End to End Encryption</h3>
+<p>If you take advantage of Ziti&#39;s developer SDKs and embed Ziti in your client and server applications, your traffic can be configured to be seamlessly encrypted from the client application to server application. If you prefer to use tunnelers or proxy applications, the traffic can be ecnrypted for you from machine to machine or private network to private network. Various combinations of the above are also supported.</p>
+<p>End-to-end encryption means that even if systems between the client and server are compromised, your traffic cannot be intercepted or tampered with.</p>
 <h2 id="getting-started-with-ziti">Getting started with Ziti</h2>
 <p>If you are looking to jump right in feet first you can follow along with one of our <a href="quickstarts/quickstart-overview.html">up-and-running quickstart
 guides</a>. The quickstart will leverage Amazon Web Services (AWS) and will have you
