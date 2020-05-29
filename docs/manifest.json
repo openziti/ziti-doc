@@ -1041,6 +1041,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/config-store/managing.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/config-store/managing.html",
+          "hash": "HXf8LAuPVEf+v5jB2DBWWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ziti/config-store/overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/config-store/overview.html",
+          "hash": "vFf9NPL8KjzKeOehn8JrHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/docker-quickstart.md",
       "output": {
         ".html": {
@@ -1642,7 +1666,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/services/create-service-cli.html",
-          "hash": "mKqnT9JUapxZdkxCTuYCYw=="
+          "hash": "CdpKu1l5lqqnoojvfuFRtQ=="
         }
       },
       "is_incremental": false,
@@ -1654,7 +1678,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/services/creating.html",
-          "hash": "kk3cb79qVod/dHI5rg6yvQ=="
+          "hash": "28DjIR1KAHItVPrIL0jOuQ=="
         }
       },
       "is_incremental": false,
@@ -1666,7 +1690,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/services/overview.html",
-          "hash": "nP4WneOl+/gR5SetRnLJEA=="
+          "hash": "uyDtMywkHFZWxXVXzoeWgQ=="
         }
       },
       "is_incremental": false,
@@ -1678,7 +1702,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/toc.html",
-          "hash": "qwHFaMnWHF0j0n5MME5jxA=="
+          "hash": "rFnmLrYATsj2DBmuimCLHg=="
         }
       },
       "is_incremental": false,
@@ -1697,8 +1721,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 82,
-          "skipped_file_count": 79
+          "total_file_count": 84,
+          "skipped_file_count": 81
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> | NetFoundry Ziti </title>
+    <title>Configuration | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" | NetFoundry Ziti ">
+    <meta name="title" content="Configuration | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.x">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -93,32 +93,44 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="configuration">Configuration</h1>
 
-<pre><code># creates a new service named ssh
-ziti edge controller create service ssh
-
-# creates a new service named ssh with a terminator strategy which load-balances using random selection
-ziti edge controller create service ssh --terminator-strategy random
-
-# creates a router based terminator for ssh on router router1 which connects to the local machine
-ziti edge controller create terminator ssh router1 tcp:localhost:22
-
-# creates a new service named postgresql with a terminator strategy which does failover
-ziti edge controller create service postgresql --terminator-strategy ha
-
-# creates a router based terminator for postgres on router router1
-# this is the posgres primary, so precedence is set to required
-ziti edge controller create terminator postgresql router1 tcp:pg-primary:5432 --precedence required
-
-# creates a router based terminator for postgres on router router1 which connects to another machine
-# this is the posgresql secondary, so precedence is left at default
-ziti edge controller create terminator postgresql router1 tcp:pg-secondary:5432
-
-# If the primary goes down, the controller will notice that dials are failing and set the 
-# precedence to failed. New sessions will go to the secondary. When the primary is brought 
-# back up, it can be marked as requred again
-ziti edge controller update terminator &lt;terminator-id&gt; --precedence required 
-</code></pre></article>
+<p>Ziti has the capability to define a configuration schema for an application and provide service configuration for those applications which need additional metadata. </p>
+<h2 id="why-centralized-configuration">Why Centralized Configuration?</h2>
+<p>One might ask why have this feature in Ziti when applications can store configuration data in local configuration files. While this approach works, centralized management makes deployments much easier. It can be difficult or impossible to update a file on a device out in the field, whereas updating the configuration in Ziti is easy, and running clients will quickly be notified of service changes.</p>
+<p>The Ziti tunneler applicatons provide an example how configuration data can be used. </p>
+<ul>
+<li>Tunnelers need to know what ip/dns and port(s) to intercept for services they are proxying on the client side</li>
+<li>Tunnelers need to know where to reach out to applications they are proxying on the server side</li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>The configuration store has four components:</p>
+<ol>
+<li>Configuration types, which consist of <ol>
+<li>a name </li>
+<li>an optional JSON schema to validate configurations of the type</li>
+<li>Standard edge attributes: id, tags, createdAt, updatedAt</li>
+</ol>
+</li>
+<li>Configurations, which consist of <ol>
+<li>a name</li>
+<li>The configuration data, which is arbitrary JSON data, so long as it conforms to the type schema (if specified)</li>
+<li>Standard edge attributes: id, tags, createdAt, updatedAt</li>
+</ol>
+</li>
+<li>Services. Each service can be linked to one configuration of a given type</li>
+<li>Identities. An identity can have a configuration specified for a given service and configuration type. This will override any configuration for the service for that type </li>
+</ol>
+<p>This configuration model has the following properties:</p>
+<ul>
+<li>Different applications can their own configuration for the same service</li>
+<li>Applications can have multiple configuration types for themselves where it makes sense<ul>
+<li>Ziti tunnelers have one type for the client side and one for the server side, since they have different properties and not every service with use both</li>
+</ul>
+</li>
+<li>Since an application can support multiple configuration types, applications can version their configuration types as their needs change</li>
+</ul>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -126,7 +138,7 @@ ziti edge controller update terminator &lt;terminator-id&gt; --precedence requir
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/services/create-service-cli.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/config-store/overview.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

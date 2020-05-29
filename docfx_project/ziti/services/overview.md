@@ -83,6 +83,8 @@ Services can be made highly available and/or horizontally scalable. There are tw
 ### Router HA/Scaling 
 The first is allowing multiple routers to connect to a single application. 
 
+**Multiple Routers**
+
 ![image](~/images/router-ha.png)
 
 This ensures that the application will still be able to service requests even if a router fails or there is network partition separating a router and server application. It also will help ensure that the router layer doesn't become a bottleneck, as more routers can be addeded as necessary to scale out connectivity. Finally, it provides multiple network paths to the application. This gives smart routing more to choose optimal routes from as network conditions change.
@@ -90,10 +92,12 @@ This ensures that the application will still be able to service requests even if
 ### Application HA/Scaling
 The second is application availabilty and/or scalability. There will often be multiple instances of a service application running, either for failover or in a load balanced deployment.
 
-A failover scenario might look like this:
+**Failover Deployment**
+
 ![image](~/images/application-ha.png)
 
-A horizontal scaled application might look like this:
+**Horizontal Scale Deployment**
+
 ![image](~/images/horizontal-scale.png)
 
 ### Xt
@@ -148,21 +152,5 @@ This strategy does not change terminator weights. It does simple random selectio
 
 ##### `ha`
 This strategy assumes that one terminator will have `required` precedence and there will be a secondary terminator with `default` precedence. If three consecutive dials to the highest ranked terminator fail in a row it will be marked as failed. This will allow the secondary to take over. If the primary recovers it can be marked as required again via the APIs. 
-
-## Configuration
-Some applications need extra metadata. Ziti has the capability to define a configuration schema for an application and provide configuration for service. One might ask why have this feature in Ziti when applications can store configuration data in local configuration files. While this approach works, centralized management makes deployments much easier. It can be difficult or impossible to update a file on a device out in the field, whereas updating the configuration in Ziti is easy, and running clients will quickly be notified of service changes.
-
-Some e
-
-* Tunnelers need to know what ip/dns and port(s) to intercept
-* Tunnelers which support hosting services need to know what to dial
-* Third party applications might want to store arbitrary configuration data
-
-Not all applications need the same metadata. Desktop and phone tunnelers can have different needs.
-Same application may use multiple kinds of metadata (tunneler client vs server)
-Applications requirements/capabilities change 
-Should support multiple versions of configuration for a given application/service to support older install base
-
-
 
 [!include[](./creating.md)]
