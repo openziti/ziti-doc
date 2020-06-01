@@ -7,7 +7,9 @@
 * Windows - Developed with [Windows Subsytem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 * Doxygen - [Doxygen](http://www.doxygen.nl/) is used to generate the api documentation for the C SDK and is
   necessary to be on the path
-  
+* awscli - the swift sdk documentation is currently housed in aws and requires aws access to embed the swift doc.
+  the gendoc.sh may fail or the documentation may be incomplete if the swift doc is not obtained
+
 ## Building the Doc
 
 Github offers [github pages](https://pages.github.com/) which this project uses to host the output of building the

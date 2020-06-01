@@ -11,7 +11,7 @@ else
     alias docfx="mono $DOCFX_EXE"
 fi
 
-commands_to_test=(doxygen mono docfx)
+commands_to_test=(doxygen mono docfx aws)
 
 # verify all the commands required in the automation exist before trying to run the full suite
 for cmd in "${commands_to_test[@]}"
