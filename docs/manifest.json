@@ -217,36 +217,12 @@
       "version": ""
     },
     {
-      "type": "Conceptual",
-      "source_relative_path": "api/swift/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "api/swift/index.html",
-          "hash": "NruMYSagwd+UsvGU7RHujw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "api/swift/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/swift/toc.html",
-          "hash": "uy3T0vVzq62bAuNEfelfoA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "v8qIVMGh7XLs/TMNU+iltA=="
+          "hash": "aTQTHfw1ZP4kNsbLwHtRZw=="
         }
       },
       "is_incremental": false,
@@ -1688,8 +1664,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 83,
-          "skipped_file_count": 83
+          "total_file_count": 82,
+          "skipped_file_count": 81
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

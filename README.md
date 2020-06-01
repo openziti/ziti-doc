@@ -27,3 +27,19 @@ flavor of bash. If the script doesn't funtion - open an [issue](./issues) and so
 After cloning this repository open the bash shell and execute the [](gendoc.sh) script.
 
 You can then run `docfx serve docs` to serve the html and view it in a browser.
+
+## Sparse Checkout
+If you want only the bits required for build, you can do the following
+
+    echo 'path/to/important/dir' >> .git/modules/docfx_project/<SUBPROJECT>/info/sparse-checkout
+    cd docfx_project/<SUBPROJECT>/
+    git config core.sparseCheckout true
+    git checkout
+
+
+For example
+
+    echo '/quickstart' >> .git/modules/docfx_project/ziti-cmd/info/sparse-checkout
+    cd docfx_project/ziti-cmd
+    git config core.sparseCheckout true
+    git checkout 

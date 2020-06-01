@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> | NetFoundry Ziti </title>
+    <title>Managing Configurations | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" | NetFoundry Ziti ">
+    <meta name="title" content="Managing Configurations | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.x">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -93,31 +93,57 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h2 id="managing-configurations">Managing Configurations</h2>
 
-<pre><code># creates a new service named ssh
-ziti edge controller create service ssh
+<p>Here is a JSON schema, modeled on the tunneler client configuration. </p>
+<pre><code class="lang-json">{
+  &quot;$id&quot;: &quot;http://myapp.company.com/schemas/myapp.v1.config.json&quot;,
+  &quot;additionalProperties&quot;: false,
+  &quot;properties&quot;: {
+    &quot;hostname&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;port&quot;: {
+      &quot;maximum&quot;: 65535,
+      &quot;minimum&quot;: 0,
+      &quot;type&quot;: &quot;integer&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;hostname&quot;,
+    &quot;port&quot;
+  ],
+  &quot;type&quot;: &quot;object&quot;
+}
+</code></pre><p>Put the schema in a file named <code>example-config-type.json</code>, and you can create a configuration type named my-app with it. </p>
+<pre><code>$ ziti edge controller create config-type my-app --schema-file example-config-type.json 
+</code></pre><p>You can now create a configuration of this type</p>
+<pre><code>$ ziti edge controller create config ssh-client my-app \
+    &#39;{  
+       &quot;hostname&quot; : &quot;ssh.company.com&quot;, 
+       &quot;port&quot; : 22 
+     }&#39;
+</code></pre><p>Finally, you can reference this when creating a service.</p>
+<pre><code>$ ziti edge controller create service ssh --configs ssh
+</code></pre><p>If a particular site wanted SSH on a different port, you could create a different configuration</p>
+<pre><code>$ ziti edge controller create config scranton-office-ssh-client my-app \
+    &#39;{ 
+       &quot;hostname&quot; : &quot;ssh.company.com&quot;, 
+       &quot;port&quot; : 2222 
+     }&#39;
+</code></pre><p>The identity corresponding to a tunneler at that site could then be configured to use that configuration.</p>
+<pre><code>$ ziti edge controller create identity service scranton-office
 
-# creates a new service named ssh with a terminator strategy which load-balances using random selection
-ziti edge controller create service ssh --terminator-strategy random
+$ ziti edge controller update identity-configs scranton-office ssh scranton-office-ssh-client
 
-# creates a router based terminator for ssh on router router1 which connects to the local machine
-ziti edge controller create terminator ssh router1 tcp:localhost:22
+$ ziti edge controller list identity service-configs scranton-office
+service: ssh    config: scranton-office-ssh-client
+results: 1-1 of 1
+</code></pre><p>Overrides can be removed as well, if they are no longer needed.</p>
+<pre><code>$ ziti edge controller update identity-configs scranton-office ssh scranton-office-ssh-client --remove
 
-# creates a new service named postgresql with a terminator strategy which does failover
-ziti edge controller create service postgresql --terminator-strategy ha
-
-# creates a router based terminator for postgres on router router1
-# this is the posgres primary, so precedence is set to required
-ziti edge controller create terminator postgresql router1 tcp:pg-primary:5432 --precedence required
-
-# creates a router based terminator for postgres on router router1 which connects to another machine
-# this is the posgresql secondary, so precedence is left at default
-ziti edge controller create terminator postgresql router1 tcp:pg-secondary:5432
-
-# If the primary goes down, the controller will notice that dials are failing and set the 
-# precedence to failed. New sessions will go to the secondary. When the primary is brought 
-# back up, it can be marked as requred again
-ziti edge controller update terminator &lt;terminator-id&gt; --precedence required 
+$ ziti edge controller list identity service-configs scranton-office
+results: none
 </code></pre></article>
           </div>
           
@@ -126,7 +152,7 @@ ziti edge controller update terminator &lt;terminator-id&gt; --precedence requir
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/services/create-service-cli.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/config-store/managing.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
