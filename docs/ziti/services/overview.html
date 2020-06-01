@@ -95,60 +95,150 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="ziti-services">Ziti Services</h1>
 
-<p>A Ziti network is primarily concerned with providing access to &quot;services&quot;. A service encapsulates the definition of any
-resource that could be accessed by a client on a traditional network. Services by themselves do not provide a complete
-mechanism for authorization. That is what <a href="../policies/overview.html">Policies</a> are for.</p>
+<p>The primary function of Ziti is providing access to &quot;services&quot;. A service encapsulates the definition of any
+resource that could be accessed by a client on a traditional network. </p>
 <p>A service is defined by the following components:</p>
 <ul>
-<li>Name - the name of the service</li>
-<li>Ziti Router - the last Ziti Router traffic will be sent to</li>
-<li>Intercepting Host and Port - what DNS name or IP should be used when intecepting traffic</li>
-<li>Endpoint Service - (if not hosted - see below) the protocol, host, and port traffic sent to</li>
-<li>Hosting Identity - (is hosted - see below) the identity that will host the service</li>
+<li><strong>Name</strong> - the name of the service</li>
+<li><strong>Termination</strong> - Ziti only provides access to a network service, it does not provide the service itself. The service must be able to get network traffic to whatever application or application cluster is actually providing the service, whether that provider has Ziti embedded or has no knowledge of Ziti</li>
+<li><strong>Configuration</strong> - Ziti allows application specific configuration to be stored for services. See <a href="../config-store/overview.html">Configuration Store</a></li>
+<li><strong>Authorization</strong> - For a details on controlling access to services, see <a href="../policies/overview.html">Policies</a>.</li>
 </ul>
-<h3 id="dark-services">Dark Services</h3>
-<p>One of the benefits of using a Ziti service is that the actual service can be &#39;dark&#39;. In fact this is the default for
-any service based entirely in Ziti. Place the service in a secure network with only Ziti in place and nobody in the
-world can access the service without a valid certificate/identity!</p>
-<p>Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into an existing network and
-Ziti endpoints deployed the only access to these services can be through Ziti!</p>
-<h3 id="service-name">Service Name</h3>
-<p>Services defined on a Ziti Network have an almost limitless &quot;namespace&quot; available for identifying services. A Ziti
-service is be defined by a name and this name is registered with the Ziti Controller. Once declared, services can then be
-addressed directly by name from Ziti-aware clients. This means there are effecitvely a <strong>limitless</strong> number names
-available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application
-developer has total control over service names.</p>
-<h3 id="types-of-services">Types of Services</h3>
-<p>There are two basic types of serivces in a Ziti Network: hosted and non-hosted.</p>
-<h4 id="hosted">Hosted</h4>
-<p>Hosted services are the new edge. Ziti allows the developer to declare a service is &quot;hosted&quot;. This means when a Ziti
-Client attempts to address the specified serivce the Ziti Network will route traffic to this endpoint automatically.
-Once the traffic is at the endpoint the traffic can be terminated inside the process space of a Ziti-powered
-application. When the traffic terminates inside a Ziti-powered application the application it never needs to leave the
-secure environment of the Ziti Network leading to turly zero-trust solutions!</p>
-<h4 id="non-hosted">Non-Hosted</h4>
-<p>Non-hosted services are services which are not terminated inside a Ziti-capable client. These services are somewhat
-similar conceptually to services behind a reverse proxy. In these services traffic is onboarded to the Ziti Network at
-an Ziti Edge Router and then exits the Ziti Network at the specified Ziti Edge Router.</p>
-<h2 id="ziti-router">Ziti Router</h2>
-<p>The Ziti Router portion of a service represents the final Ziti Router that traffic will be sent to. From this router the
-traffic will either be sent to a Ziti Endpoint or to a point outside the Ziti network over the underlay network.</p>
-<p>If the traffic is destined for a location that is not on the Ziti network overlay this is the router the Ziti network
-will end up sending the traffic from.</p>
-<p>If the router is sending traffic to another Ziti Endpoint then the service is said to be &quot;hosted&quot;.  Hosted services
-cannot specify a router - the Ziti network figures out the best path to the endpoint.</p>
-<h2 id="intercepting-host-and-port">Intercepting Host and Port</h2>
-<p>Specified on the service when the traffic destination is outside of the Ziti network onto the underlay. If the <a href="../clients/overview.html">Ziti
-client</a> in use is capable of operating in a seamless/transparent mode then these values will
-specify the IPv4 address or DNS name to intercept.  Any traffic sent to the specified address will be captured and if
-the destination port is the same as the specified intercepting port the traffic will be routed into the Ziti network.</p>
-<h2 id="endpoint-service">Endpoint Service</h2>
-<p>Specified on the service when the traffic destination is outside of the Ziti network onto the underlay. These fields
-allow you to choose the protocol, host and port that the actual traffic will be sent to. Note that the host and port do
-not need to match those specified in the intercept host and port (for seamless/transparent ziti clients).</p>
-<h2 id="hosting-identity">Hosting Identity</h2>
-<p>Specified on the service when the serivce is terminated at another Ziti Endpoint. This field is only valid when the
-router specified is set to &quot;hosted&quot;.</p>
+<h2 id="service-name">Service Name</h2>
+<p>Ziti services must have names that are unique to their Ziti installation. Service names are how clients address services in order to consume them. Services which are provided by applications with Ziti embedded also use the service name to indicate which service is being provided.</p>
+<p>Services defined on a Ziti Network have an almost limitless &quot;namespace&quot; available for identifying services. A Ziti service is be defined by a name and this name is registered with the Ziti Controller. Once declared, services can then be addressed directly by name from Ziti-aware clients. This means there are effecitvely a <strong>limitless</strong> number names available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application developer has total control over service names.</p>
+<h2 id="service-termination">Service Termination</h2>
+<p>In Ziti, service termination refers to how a network traffic going over Ziti reaches the application (or application cluster) which is actually providing a service. There are a few basic ways in which a service can be terminated at an application.</p>
+<p>There are some trade-offs to consider for each type of termination. </p>
+<ol>
+<li>Do you want end-to-end zero trust? If yes, that requires that both the client and server have Ziti identities and can connect securely with provisioned certificates.</li>
+<li>Do you want Ziti provided end-to-end encryption? Developers can always provide their own end-to-end encryption on top of the connectivity that Ziti provides, but not all modes of service termination allow Ziti to encrypt traffic end-to-end for you.</li>
+<li>How accessible to non-zero-trust clients do you want your server application to be? With the proper configuration applications can be fully &#39;dark&#39;, meaning they do not listen for connections.  </li>
+</ol>
+<h3 id="sdk-embedded-applications">SDK Embedded Applications</h3>
+<p>The server application can embed the Ziti Edge SDK. The application will have an enrolled identity and provisioned certificates. This has several advantages:</p>
+<ol>
+<li>Connections between the application and Ziti will be secured using certificates. This enables true zero-trust and end-to-end encrypted connections betwen SDK based clients and SDK based servers. </li>
+<li>With an identity, the server application can particpate in the Ziti security model. This means you can control which services the application can provide, and revoke access as needed. You can also control which edge routers the application may connect to.</li>
+<li>The application will be &#39;dark&#39;. Instead of listening for incoming network connections, the application will make an outgoing, secured connection to one or more Ziti edge routers. It will then receive network requests over these secured connections.</li>
+</ol>
+<p>The downside to this approach, specifically for existing applications, is that the application must be refactored to use a Ziti Edge SDK. Depending on language and frameworks used, the effort required can range from updating a few lines of code to writing a new SDK from scratch for a language that&#39;s not supported yet.   </p>
+<h3 id="proxied-applications">Proxied Applications</h3>
+<p>For applications where it doesn&#39;t make sense to embed the SDK a Ziti SDK based proxy can provide access to the application. Often the proxy may take the form of a sidecar and be co-located with the application. This minimizes the attack surface. There are a few things to note about this approach.</p>
+<ol>
+<li>The application will not be completely dark. It must accept connections from wherever the proxy is located. The proxy may be co-located with the application, so the attack surface area may be tiny. However, tiny is still bigger than zero.</li>
+<li>Similarly, traffic can be encrypted between the client and the proxy, but traffic between the proxy and the application will not be covered under the Ziti end-to-end encryption. It may still be encrypted, if the client and server establish their own encryption at the discretion of the client and server implementors. </li>
+<li>Via the proxy, the application is still represented by an identity and thus participates in policies.</li>
+</ol>
+<p>Services which uses proxes for server side termination may require extra configuration, so that the proxing application knows how to connect to the server application. Service configurations are discussed more below.</p>
+<h3 id="ziti-router-terminated-services">Ziti Router Terminated Services</h3>
+<p>Routers also have the ability to connect to applications providing services. This approach has its own advantages and disadvantages.</p>
+<ol>
+<li>Like the proxy approach, the application cannot be completely dark. The application must be reachable from the Ziti router. </li>
+<li>Ziti currently only offers end-to-end encryption between two SDK applications. Sessions terminating at a router cannot be end-to-end encrypted by Ziti. The data may still be end-to-end encrypted by the client and server, but that is up to the client and server implementors.</li>
+</ol>
+<h3 id="summary">Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Termination Type</th>
+<th>End-to-end Zero Trust</th>
+<th>Managed by Policies</th>
+<th>Ziti Provided End-to-end encryption</th>
+<th>Dark Server Application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SDK Embedded</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>SDK Based Proxy</td>
+<td>No, only to proxy</td>
+<td>Yes (via Proxy)</td>
+<td>Only to proxy. If desired, full end-to-end must be done externally</td>
+<td>No. Can be relatively locked down, though</td>
+</tr>
+<tr>
+<td>Ziti Router</td>
+<td>No</td>
+<td>No</td>
+<td>No. If desired, end-to-end must be done externally</td>
+<td>No. Can be relatively locked down, though.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="terminators">Terminators</h3>
+<p>Terminators represent a way to connect to a specific server application for a specific service. </p>
+<p>For SDK based server (whether embedded or proxied), these are created automatically as the application connects and removed when the application disconnects. </p>
+<p>For router terminated services they must be created manually. When creating a terminator manually, the following must be specified.</p>
+<ol>
+<li>The router which will connect to the server application</li>
+<li>The binding. This indicates which Xgress component on the router will handle making the connection. This will generally be <code>transport</code> for tcp based applications and <code>udp</code> for UDP based applications<ol>
+<li>See the ziti-fabric documentation for more information on the Xgress framework</li>
+</ol>
+</li>
+<li>The address to connect to. This will be generally take the form <code>&lt;protocol&gt;:&lt;host or ip&gt;:&lt;port&gt;</code><ol>
+<li>Example: <code>tcp:localhost:5432</code></li>
+</ol>
+</li>
+</ol>
+<h2 id="availability-and-scaling">Availability and Scaling</h2>
+<p>Services can be made highly available and/or horizontally scalable. There are two kinds of availability that server applications need to concern themselves with. </p>
+<h3 id="router-hascaling">Router HA/Scaling</h3>
+<p>The first is allowing multiple routers to connect to a single application. </p>
+<p><strong>Multiple Routers</strong></p>
+<p><img src="../../images/router-ha.png" alt="image"></p>
+<p>This ensures that the application will still be able to service requests even if a router fails or there is network partition separating a router and server application. It also will help ensure that the router layer doesn&#39;t become a bottleneck, as more routers can be addeded as necessary to scale out connectivity. Finally, it provides multiple network paths to the application. This gives smart routing more to choose optimal routes from as network conditions change.</p>
+<h3 id="application-hascaling">Application HA/Scaling</h3>
+<p>The second is application availabilty and/or scalability. There will often be multiple instances of a service application running, either for failover or in a load balanced deployment.</p>
+<p><strong>Failover Deployment</strong></p>
+<p><img src="../../images/application-ha.png" alt="image"></p>
+<p><strong>Horizontal Scale Deployment</strong></p>
+<p><img src="../../images/horizontal-scale.png" alt="image"></p>
+<h3 id="xt">Xt</h3>
+<p>All types of availability and scalability involve multiple terminators. What distinguishes an HA failover setup from a load-balanced horizontal scale setup is how new sessions are assigned to terminators. For failover, we want sessions to always go to the same service instance. For horizontal scale, we want to load balance sessions across available instances. </p>
+<p>The fabric contains a framework called Xt (eXtensible Terminators) which allows defining terminator strategies and defines how terminator strategies and external components integrate with smart routing. The general flow of terminator selection goes as follows:</p>
+<ol>
+<li>A client requests a new session for a service</li>
+<li>Smart routing finds all the active terminators for the session (active meaning the terminator&#39;s router is connected)</li>
+<li>Smart routing calculates a cost for each terminator then hands the service&#39;s terminator strategy a list of terminators and their costs ranked from lowest to highest</li>
+<li>The strategy returns the terminator that should be used</li>
+<li>A new session is created using that path. </li>
+</ol>
+<p>Strategies will often work by adjusting terminator costs. The selection algorithm the simply returns the lowest cost option presented by smart routing. </p>
+<h4 id="costs">Costs</h4>
+<p>There are a number of elements which feed the smart routing cost algorithm.</p>
+<h5 id="route-cost">Route Cost</h5>
+<p>The cost of the route from the initiating route to the terminator router will be included in the terminator cost. This cost may be influenced by things such as link latencies and user determined link costs.</p>
+<h5 id="static-cost">Static Cost</h5>
+<p>Each terminator has a static cost which can be set or updated when the terminator is created. SDK applications can set the terminator cost when they invoke the Listen operation.</p>
+<h4 id="precedence">Precedence</h4>
+<p>Each terminator has a precedence. There are three precedence levels: <code>required</code>, <code>default</code> and <code>failed</code>.</p>
+<p>Smart routing will always rank terminators with higher precedence levels higher than terminators with lower precedence levers. So required terminators will always be first, default second and failed third. Precedence levels can be used to implement HA. The primary will be marked as required and the secondary as default. When the primary is determined to be down, either by some internal or external set of heuristics, it will be marked as Failed and new sessions will go to the secondary. When the primary recovers it can be bumped back up to Required.</p>
+<h5 id="dynamic-cost">Dynamic Cost</h5>
+<p>Each terminator also has a dynamic cost that will move a terminator up and down relative to its precedence. This cost can be driven by stratagies or by external components. A strategy might use number of active of open sessions or dial successes and failures to drive the dynamic cost. </p>
+<h5 id="effective-cost">Effective Cost</h5>
+<p>Each terminator has an associated precedence and dynamic cost. This can be reduced to a single cost. The cost algorithm ensures terminators at difference precedence levels do not overlap. So a terminator which is marked failed, with dynamic cost 0, will always have a higher calculated cost than a terminator with default precedence and maximum value for dynamic cost. </p>
+<h4 id="strategies">Strategies</h4>
+<p>The fabric currently provides four strategy implementions.</p>
+<h5 id="smartrouting"><code>smartrouting</code></h5>
+<p>This is the default strategy. It always uses the lowest cost terminator. It drives costs as follows:</p>
+<ul>
+<li>Cost is proportional to number of open sessions</li>
+<li>Dial failures drive the cost up</li>
+<li>Dial successes drive the cost down, but only as much as they were previously driven up by failures</li>
+</ul>
+<h5 id="weighted"><code>weighted</code></h5>
+<p>This strategy drives costs in the same way as the <code>smartrouting</code> strategy. However instead of always picking the lowest cost terminator it does a weighted random selection across all terminators of the highest precedence. If a terminator has double the cost of another terminator it should get picked approximately half as often. </p>
+<h5 id="random"><code>random</code></h5>
+<p>This strategy does not change terminator weights. It does simple random selection across all terminators of the highest precedence. </p>
+<h5 id="ha"><code>ha</code></h5>
+<p>This strategy assumes that one terminator will have <code>required</code> precedence and there will be a secondary terminator with <code>default</code> precedence. If three consecutive dials to the highest ranked terminator fail in a row it will be marked as failed. This will allow the secondary to take over. If the primary recovers it can be marked as required again via the APIs. </p>
 <h2 id="creating-a-service">Creating a Service</h2>
 <p>Here&#39;s how you can create a service.</p>
 <div class="tabGroup" id="tabgroup_6M2JU3mIHL">
@@ -200,22 +290,30 @@ Edition</a></li>
 </section>
 <section id="tabpanel_6M2JU3mIHL_create-service-cli" role="tabpanel" data-tab="create-service-cli" aria-hidden="true" hidden="hidden">
 <p>To change the administrator password using the CLI simply issue these two commands:</p>
-<pre><code># ------------------- helpful variables you may need ----------------------
+<pre><code># creates a new service named ssh
+ziti edge controller create service ssh
 
-#load the default cluster id into an environment variable
-cluster=$(ziti edge controller list clusters | tr -s &#39; &#39; | cut -d &#39; &#39; -f4)
+# creates a new service named ssh with a terminator strategy which load-balances using random selection
+ziti edge controller create service ssh --terminator-strategy random
 
-#load the first edge router id into an environment variable
-edgeRouter=$(ziti edge controller list gateways | cut -d &#39; &#39; -f2)
+# creates a router based terminator for ssh on router router1 which connects to the local machine
+ziti edge controller create terminator ssh router1 tcp:localhost:22
 
-# ------------------- actual creation of the service ----------------------
+# creates a new service named postgresql with a terminator strategy which does failover
+ziti edge controller create service postgresql --terminator-strategy ha
 
-#creates a new hosted service
-ziti edge controller create service ${svc_name} --hosted ${intercept_ip_dns} ${intercept_port} --host-ids ${comma separated identity list}
+# creates a router based terminator for postgres on router router1
+# this is the posgres primary, so precedence is set to required
+ziti edge controller create terminator postgresql router1 tcp:pg-primary:5432 --precedence required
 
-#creates a non-hosted service
-ziti edge controller create service ${svc_name} &quot;${destinationHost}&quot; &quot;${destinationPort}&quot; \
-&quot;${edgeRouter}&quot; &quot;tcp:${interceptHost/ip}:${intercept port}&quot; -c &quot;${cluster}&quot;
+# creates a router based terminator for postgres on router router1 which connects to another machine
+# this is the posgresql secondary, so precedence is left at default
+ziti edge controller create terminator postgresql router1 tcp:pg-secondary:5432
+
+# If the primary goes down, the controller will notice that dials are failing and set the 
+# precedence to failed. New sessions will go to the secondary. When the primary is brought 
+# back up, it can be marked as requred again
+ziti edge controller update terminator &lt;terminator-id&gt; --precedence required 
 </code></pre></section>
 </div>
 </article>

@@ -145,22 +145,30 @@ Edition</a></li>
 </section>
 <section id="tabpanel_6M2JU3mIHL_create-service-cli" role="tabpanel" data-tab="create-service-cli" aria-hidden="true" hidden="hidden">
 <p>To change the administrator password using the CLI simply issue these two commands:</p>
-<pre><code># ------------------- helpful variables you may need ----------------------
+<pre><code># creates a new service named ssh
+ziti edge controller create service ssh
 
-#load the default cluster id into an environment variable
-cluster=$(ziti edge controller list clusters | tr -s &#39; &#39; | cut -d &#39; &#39; -f4)
+# creates a new service named ssh with a terminator strategy which load-balances using random selection
+ziti edge controller create service ssh --terminator-strategy random
 
-#load the first edge router id into an environment variable
-edgeRouter=$(ziti edge controller list gateways | cut -d &#39; &#39; -f2)
+# creates a router based terminator for ssh on router router1 which connects to the local machine
+ziti edge controller create terminator ssh router1 tcp:localhost:22
 
-# ------------------- actual creation of the service ----------------------
+# creates a new service named postgresql with a terminator strategy which does failover
+ziti edge controller create service postgresql --terminator-strategy ha
 
-#creates a new hosted service
-ziti edge controller create service ${svc_name} --hosted ${intercept_ip_dns} ${intercept_port} --host-ids ${comma separated identity list}
+# creates a router based terminator for postgres on router router1
+# this is the posgres primary, so precedence is set to required
+ziti edge controller create terminator postgresql router1 tcp:pg-primary:5432 --precedence required
 
-#creates a non-hosted service
-ziti edge controller create service ${svc_name} &quot;${destinationHost}&quot; &quot;${destinationPort}&quot; \
-&quot;${edgeRouter}&quot; &quot;tcp:${interceptHost/ip}:${intercept port}&quot; -c &quot;${cluster}&quot;
+# creates a router based terminator for postgres on router router1 which connects to another machine
+# this is the posgresql secondary, so precedence is left at default
+ziti edge controller create terminator postgresql router1 tcp:pg-secondary:5432
+
+# If the primary goes down, the controller will notice that dials are failing and set the 
+# precedence to failed. New sessions will go to the secondary. When the primary is brought 
+# back up, it can be marked as requred again
+ziti edge controller update terminator &lt;terminator-id&gt; --precedence required 
 </code></pre></section>
 </div>
 </article>
