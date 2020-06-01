@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
-gitbranch=$(git rev-parse --abbrev-ref HEAD)
+#gitbranch=$(git rev-parse --abbrev-ref HEAD)
 
-if [ "${gitbranch}" == "master" ]
+if [ "${GIT_BRANCH}" == "master" ]
 then
   echo on master branch - publish can proceed
 
@@ -14,6 +14,6 @@ then
   git push
 
 else
-  echo ========= cannot publish from branch that is not master : ${gitbranch}
+  echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
   echo ========= publish considered successful though no op
 fi
