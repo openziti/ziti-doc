@@ -8,13 +8,14 @@ script:
   - unzip docfx
   - export PATH=$PATH:$(pwd)
   - echo "mono $(pwd)/docfx.exe" > docfx
+  - chmod +x docfx
   - cd ..
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   - unzip awscliv2.zip
   - ./aws/install
   - wget http://doxygen.nl/files/doxygen-1.8.18.linux.bin.tar.gz
   - tar -xvf doxygen-1.8.18.linux.bin.tar.gz
-  - export PATH=$PATH:doxygen-1.8.18/bin
+  - export PATH=$PATH:$(pwd)/doxygen-1.8.18/bin
   - ls -l
   - export GIT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - ./publish.sh docs
