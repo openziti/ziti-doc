@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entries_304',['entries',['../structmodel__map.html#a6332599d4bbf778ebb78247084691995',1,'model_map']]]
+  ['destroyer_305',['destroyer',['../structtype__meta.html#a2d403aba10f11e5b49258bd8bf5b3481',1,'type_meta']]]
 ];

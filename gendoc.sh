@@ -11,7 +11,7 @@ else
     alias docfx="mono $DOCFX_EXE"
 fi
 
-commands_to_test=(doxygen mono docfx)
+commands_to_test=(doxygen mono docfx aws)
 
 # verify all the commands required in the automation exist before trying to run the full suite
 for cmd in "${commands_to_test[@]}"
@@ -45,8 +45,14 @@ echo "updating git submodules if needed"
 git submodule update --init
 git submodule update --remote --merge
 
+if [ "$1" == "" ]; then
+  DOC_ROOT=docs-local
+else
+  sed -i "s/docs-local/$1/g" docfx_project/docfx.json
+  DOC_ROOT=$1
+fi
+
 pushd docfx_project
-pwd
 docfx build
 popd
 
@@ -55,9 +61,10 @@ if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
     doxygen
     echo " "
     echo "Copying "
-    echo "    from: ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/docs/api/clang"
-    echo "      to: ${script_root}/docs/api/clang"
-    cp -r ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/docs/api/clang
+    echo "    from: ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/${DOC_ROOT}/api/clang"
+    echo "      to: ${script_root}/${DOC_ROOT}/api/clang"
+    mkdir -p "${script_root}/${DOC_ROOT}/api/clang"
+    cp -r ${script_root}/docfx_project/ziti-sdk-c/api "${script_root}/${DOC_ROOT}/api/clang"
 
     echo " "
     echo "Removing"
@@ -67,4 +74,17 @@ if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
 else
     echo "ERROR: CSDK Doxyfile not located"
 fi
+
+if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
+    swift_sdk_rev_short=`git submodule status ${script_root}/docfx_project/ziti-sdk-swift | cut -d' ' -f2`
+    swift_sdk_rev_short=`git rev-parse --short ${swift_sdk_rev_short}`
+    echo " "
+    echo "Copying Swift docs"
+    echo "    from: s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz ${script_root}/docfx_project /api/clang"
+    echo "      to: ${script_root}/${DOC_ROOT}/api/clang"
+    aws s3 cp s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz .
+    mkdir -p "./${DOC_ROOT}/api/swift"
+    tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C "./${DOC_ROOT}/api/swift"
+fi
+
 
