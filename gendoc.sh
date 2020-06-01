@@ -45,6 +45,10 @@ echo "updating git submodules if needed"
 git submodule update --init
 git submodule update --remote --merge
 
+if [ $1 -neq 0 ]; then
+  sed -i 's/docs-local/$1/g' docfx_project/docfx.json
+fi
+
 pushd docfx_project
 docfx build
 popd
@@ -78,9 +82,5 @@ if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.
     mkdir -p docfx_project/api/swift
     tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ./docs/api/swift
 fi
-
-
-
-
 
 
