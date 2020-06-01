@@ -62,7 +62,7 @@
         ]
       }
     ],
-    "dest": "../bbb",
+    "dest": "docs-local",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
