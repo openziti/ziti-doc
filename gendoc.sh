@@ -46,7 +46,6 @@ git submodule update --init
 git submodule update --remote --merge
 
 pushd docfx_project
-pwd
 docfx build
 popd
 
@@ -67,4 +66,21 @@ if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
 else
     echo "ERROR: CSDK Doxyfile not located"
 fi
+
+if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
+    swift_sdk_rev_short=`git submodule status ${script_root}/docfx_project/ziti-sdk-swift | cut -d' ' -f2`
+    swift_sdk_rev_short=`git rev-parse --short ${swift_sdk_rev_short}`
+    echo " "
+    echo "Copying Swift docs"
+    echo "    from: s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz ${script_root}/docfx_project /api/clang"
+    echo "      to: ${script_root}/docs/api/clang"
+    aws s3 cp s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz .
+    mkdir -p docfx_project/api/swift
+    tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ./docs/api/swift
+fi
+
+
+
+
+
 

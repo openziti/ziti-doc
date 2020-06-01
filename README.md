@@ -3,6 +3,8 @@
 ## Prerequisite
 
 * [docfx](https://dotnet.github.io/docfx/) needs to be on your path
+    * mac/linux requires mono which is easily installed by following [these install steps](https://www.mono-project.com/download/stable/#download-lin)
+    * an alias can be made to make docfx use easier `DOCFX_EXE=~/tools/docfx/current/docfx.exe mono $DOCFX_EXE` (or whatever you prefer)
 * Linux - Documentation is run routinely by our CI
 * Windows - Developed with [Windows Subsytem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 * Doxygen - [Doxygen](http://www.doxygen.nl/) is used to generate the api documentation for the C SDK and is
