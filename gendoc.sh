@@ -48,7 +48,7 @@ git submodule update --remote --merge
 if [ "$1" == "" ]; then
   DOC_ROOT=docs-local
 else
-  sed -i 's/docs-local/$1/g' docfx_project/docfx.json
+  sed -i "s/docs-local/$1/g" docfx_project/docfx.json
   DOC_ROOT=$1
 fi
 
