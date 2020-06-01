@@ -1,3 +1,5 @@
+#!/bin/bash
+set -e
 ./gendoc.sh docs
 
 ziti-ci configure-git

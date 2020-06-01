@@ -45,7 +45,7 @@ echo "updating git submodules if needed"
 git submodule update --init
 git submodule update --remote --merge
 
-if [ $1 -neq 0 ]; then
+if [ $1 -ne 0 ]; then
   sed -i 's/docs-local/$1/g' docfx_project/docfx.json
 fi
 
