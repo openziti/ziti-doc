@@ -47,6 +47,9 @@ git submodule update --remote --merge
 
 if [ $1 -ne 0 ]; then
   sed -i 's/docs-local/$1/g' docfx_project/docfx.json
+  DOC_ROOT=$1
+else
+  DOC_ROOT=docs-local
 fi
 
 pushd docfx_project
@@ -58,9 +61,9 @@ if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
     doxygen
     echo " "
     echo "Copying "
-    echo "    from: ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/docs/api/clang"
-    echo "      to: ${script_root}/docs/api/clang"
-    cp -r ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/docs/api/clang
+    echo "    from: ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/${DOC_ROOT}/api/clang"
+    echo "      to: ${script_root}/${DOC_ROOT}/api/clang"
+    cp -r ${script_root}/docfx_project/ziti-sdk-c/api "${script_root}/${DOC_ROOT}/api/clang"
 
     echo " "
     echo "Removing"
@@ -77,10 +80,10 @@ if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.
     echo " "
     echo "Copying Swift docs"
     echo "    from: s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz ${script_root}/docfx_project /api/clang"
-    echo "      to: ${script_root}/docs/api/clang"
+    echo "      to: ${script_root}/${DOC_ROOT}/api/clang"
     aws s3 cp s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz .
     mkdir -p docfx_project/api/swift
-    tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ./docs/api/swift
+    tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C "./${DOC_ROOT}/api/swift"
 fi
 
 
