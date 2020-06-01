@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['field_5fcount_305',['field_count',['../structtype__meta.html#a3e9e939c2f8e10b95e03f83148f463fd',1,'type_meta']]],
-  ['fields_306',['fields',['../structtype__meta.html#a4ea8190a08e1774b9e0b8cdb6662fde2',1,'type_meta']]]
+  ['entries_306',['entries',['../structmodel__map.html#a6332599d4bbf778ebb78247084691995',1,'model_map']]]
 ];

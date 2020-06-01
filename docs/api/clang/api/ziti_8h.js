@@ -1,6 +1,6 @@
 var ziti_8h =
 [
-    [ "ziti_options_s", "structziti__options__s.html", "structziti__options__s" ],
+    [ "ziti_options", "structziti__options.html", "structziti__options" ],
     [ "ZITI_CAN_BIND", "ziti_8h.html#a7ad10991d93ba9fbdd3724a7eb64fb76", null ],
     [ "ZITI_CAN_DIAL", "ziti_8h.html#a01d00c5d71bfb04e1ded0c3f182f5cc3", null ],
     [ "ZITI_DEFAULT_TIMEOUT", "ziti_8h.html#a09b75586a74376352a25de37b835a74d", null ],

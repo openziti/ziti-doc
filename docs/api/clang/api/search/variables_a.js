@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['service_5fcb_315',['service_cb',['../structziti__options__s.html#aa3713d920e705f66d485cd36cf0dd4f3',1,'ziti_options_s']]],
-  ['size_316',['size',['../structtype__meta.html#a7aaa57b534858fd4ed18a0ec9f8c6692',1,'type_meta']]]
+  ['refresh_5finterval_316',['refresh_interval',['../structziti__options.html#a19c21cc791a4b65d83bd66e9dc842679',1,'ziti_options']]],
+  ['revision_317',['revision',['../structziti__version.html#a4439f7a7f951c5bccf616fbe97b81f9f',1,'ziti_version']]]
 ];
