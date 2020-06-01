@@ -84,6 +84,11 @@
     "title": "| NetFoundry Ziti",
     "keywords": "this is the landing page for rest"
   },
+  "api/swift/index.html": {
+    "href": "api/swift/index.html",
+    "title": "Swift (with Objective-C interoperability) | NetFoundry Ziti",
+    "keywords": "Swift (with Objective-C interoperability) empty index to be replaced by the unzipped docs fetched from s3 during build"
+  },
   "articles/c-sdk-on-beaglebone.html": {
     "href": "articles/c-sdk-on-beaglebone.html",
     "title": "Building the Ziti C SDK and Sample Apps for arm (BeagleBone) | NetFoundry Ziti",

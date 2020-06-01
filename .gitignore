@@ -12,3 +12,7 @@ _site
 
 # ignores for content generated before the doc site
 docfx_project/api/clang/api/
+.idea
+docs-local
+
+github_deploy_key

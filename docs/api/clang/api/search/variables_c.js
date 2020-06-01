@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_318',['version',['../structziti__version__s.html#a7733f745876072a3439cbe2a5eccfc11',1,'ziti_version_s']]]
+  ['tls_320',['tls',['../structziti__options.html#a16be179f0bf8a6eed7ba1627f87f5c5b',1,'ziti_options']]]
 ];

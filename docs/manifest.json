@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/home/plorenz/work/nf/ziti-doc/docfx_project",
+  "source_base_path": "/mnt/v/work/git/github/openziti/ziti-doc/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -301,17 +301,6 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/application-ha.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/application-ha.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
       "source_relative_path": "images/azure-add-role-to-vm.png",
       "output": {
         "resource": {
@@ -455,17 +444,6 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/horizontal-scale.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/horizontal-scale.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
       "source_relative_path": "images/nflightbglogo.png",
       "output": {
         "resource": {
@@ -503,17 +481,6 @@
       "output": {
         "resource": {
           "relative_path": "images/policy-entities.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/router-ha.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/router-ha.png"
         }
       },
       "is_incremental": false,
@@ -1041,42 +1008,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "ziti/config-store/consuming.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/config-store/consuming.html",
-          "hash": "84QrY4jRccJzhJbOU0wmCw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "ziti/config-store/managing.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/config-store/managing.html",
-          "hash": "eOxA2WslqDsG7lDSo5pEcA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "ziti/config-store/overview.md",
-      "output": {
-        ".html": {
-          "relative_path": "ziti/config-store/overview.html",
-          "hash": "0e5XgzAWEwL2J8wWhK1fhg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "ziti/docker-quickstart.md",
       "output": {
         ".html": {
@@ -1421,15 +1352,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "ziti/overview.md",
       "output": {
         ".html": {
           "relative_path": "ziti/overview.html",
-          "hash": "JyGhpDJHzb37Cq841QdpXg=="
+          "hash": "ouOX0f8YJHp1xa5oynJhbQ=="
         }
       },
       "is_incremental": false,
@@ -1681,7 +1609,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/services/create-service-cli.html",
-          "hash": "CdpKu1l5lqqnoojvfuFRtQ=="
+          "hash": "mKqnT9JUapxZdkxCTuYCYw=="
         }
       },
       "is_incremental": false,
@@ -1693,7 +1621,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/services/creating.html",
-          "hash": "28DjIR1KAHItVPrIL0jOuQ=="
+          "hash": "kk3cb79qVod/dHI5rg6yvQ=="
         }
       },
       "is_incremental": false,
@@ -1705,7 +1633,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/services/overview.html",
-          "hash": "pursiHhOR41FikDpeAN89w=="
+          "hash": "FkFR5fyWYK/uKTDIAMv1eQ=="
         }
       },
       "is_incremental": false,
@@ -1717,7 +1645,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/toc.html",
-          "hash": "FkPriGeKoTmlY8yWGk6HNQ=="
+          "hash": "qwHFaMnWHF0j0n5MME5jxA=="
         }
       },
       "is_incremental": false,
@@ -1736,8 +1664,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 85,
-          "skipped_file_count": 84
+          "total_file_count": 82,
+          "skipped_file_count": 81
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

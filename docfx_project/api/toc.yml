@@ -4,6 +4,9 @@
 - name: C# (.NET Core)
   href: csharp/toc.yml
   topicHref: csharp/NetFoundry.yml
+- name: Swift (with Objective-C interoperability)
+  href: rest/toc.yml
+  topicHref: swift/index.md
 - name: Controller ReST API
   href: rest/toc.yml
   topicHref: rest/index.md
