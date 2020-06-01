@@ -29,16 +29,23 @@ Put the schema in a file named `example-config-type.json`, and you can create a 
 
 You can now create a configuration of this type
 
-    $ ziti edge controller create config ssh-client my-app '{ "hostname" : "ssh.company.com", "port" : 22 }'
+    $ ziti edge controller create config ssh-client my-app \
+        '{  
+           "hostname" : "ssh.company.com", 
+           "port" : 22 
+         }'
 
 Finally, you can reference this when creating a service.
 
-
-   $ ziti edge controller create service ssh --configs ssh
+    $ ziti edge controller create service ssh --configs ssh
 
 If a particular site wanted SSH on a different port, you could create a different configuration
 
-   $ ziti edge controller create config scranton-office-ssh-client my-app '{ "hostname" : "ssh.company.com", "port" : 2222 }'
+    $ ziti edge controller create config scranton-office-ssh-client my-app \
+        '{ 
+           "hostname" : "ssh.company.com", 
+           "port" : 2222 
+         }'
 
 The identity corresponding to a tunneler at that site could then be configured to use that configuration.
 

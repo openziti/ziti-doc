@@ -5,18 +5,10 @@ resource that could be accessed by a client on a traditional network.
 
 A service is defined by the following components:
 
-* Name - the name of the service
-* Termination - Ziti only provides access to a network service, it does not provide the service itself. The service must be able to get network traffic to whatever application or application cluster is actually providing the service, whether that provider has Ziti embedded or has no knowledge of Ziti
-* Configuration - Ziti allows application specific configuration to be stored for services
-* Authorization - For a details on controlling access to services, see [Policies](../policies/overview.md).
-
-### Dark Services
-One of the benefits of using a Ziti service is that the actual service can be 'dark'. In fact this is the default for
-any service based entirely in Ziti. Place the service in a secure network with only Ziti in place and nobody in the
-world can access the service without a valid certificate/identity!
-
-Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into an existing network and
-Ziti endpoints deployed the only access to these services can be through Ziti!
+* **Name** - the name of the service
+* **Termination** - Ziti only provides access to a network service, it does not provide the service itself. The service must be able to get network traffic to whatever application or application cluster is actually providing the service, whether that provider has Ziti embedded or has no knowledge of Ziti
+* **Configuration** - Ziti allows application specific configuration to be stored for services. See [Configuration Store](../config-store/overview.md)
+* **Authorization** - For a details on controlling access to services, see [Policies](../policies/overview.md).
 
 ## Service Name
 Ziti services must have names that are unique to their Ziti installation. Service names are how clients address services in order to consume them. Services which are provided by applications with Ziti embedded also use the service name to indicate which service is being provided.

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Managing Configurations | NetFoundry Ziti </title>
+    <title>Consuming Configuration Data | NetFoundry Ziti </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Managing Configurations | NetFoundry Ziti ">
+    <meta name="title" content="Consuming Configuration Data | NetFoundry Ziti ">
     <meta name="generator" content="docfx 2.x">
     
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -93,57 +93,80 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="managing-configurations">Managing Configurations</h2>
+<h2 id="consuming-configuration-data">Consuming Configuration Data</h2>
 
-<p>Here is a JSON schema, modeled on the tunneler client configuration. </p>
-<pre><code class="lang-json">{
-  &quot;$id&quot;: &quot;http://myapp.company.com/schemas/myapp.v1.config.json&quot;,
-  &quot;additionalProperties&quot;: false,
-  &quot;properties&quot;: {
-    &quot;hostname&quot;: {
-      &quot;type&quot;: &quot;string&quot;
-    },
-    &quot;port&quot;: {
-      &quot;maximum&quot;: 65535,
-      &quot;minimum&quot;: 0,
-      &quot;type&quot;: &quot;integer&quot;
-    }
-  },
-  &quot;required&quot;: [
-    &quot;hostname&quot;,
-    &quot;port&quot;
-  ],
-  &quot;type&quot;: &quot;object&quot;
-}
-</code></pre><p>Put the schema in a file named <code>example-config-type.json</code>, and you can create a configuration type named my-app with it. </p>
-<pre><code>$ ziti edge controller create config-type my-app --schema-file example-config-type.json 
-</code></pre><p>You can now create a configuration of this type</p>
+<p>Configuration data can be retrieved directly, but it will usually be consumed by applications via the SDK. When an SDK authenticates, it will indicate which configuration types it can process. Then, when listing services, the SDK will recieve configuation data in-line. This can be done from the CLI as well.</p>
+<p>If we&#39;ve set up a service <code>ssh</code> as follows:</p>
 <pre><code>$ ziti edge controller create config ssh-client my-app \
-    &#39;{  
-       &quot;hostname&quot; : &quot;ssh.company.com&quot;, 
-       &quot;port&quot; : 22 
-     }&#39;
-</code></pre><p>Finally, you can reference this when creating a service.</p>
-<pre><code>$ ziti edge controller create service ssh --configs ssh
-</code></pre><p>If a particular site wanted SSH on a different port, you could create a different configuration</p>
-<pre><code>$ ziti edge controller create config scranton-office-ssh-client my-app \
     &#39;{ 
-       &quot;hostname&quot; : &quot;ssh.company.com&quot;, 
-       &quot;port&quot; : 2222 
+        &quot;hostname&quot; : &quot;ssh.company.com&quot;, 
+        &quot;port&quot; : 22 
      }&#39;
-</code></pre><p>The identity corresponding to a tunneler at that site could then be configured to use that configuration.</p>
-<pre><code>$ ziti edge controller create identity service scranton-office
 
-$ ziti edge controller update identity-configs scranton-office ssh scranton-office-ssh-client
-
-$ ziti edge controller list identity service-configs scranton-office
-service: ssh    config: scranton-office-ssh-client
-results: 1-1 of 1
-</code></pre><p>Overrides can be removed as well, if they are no longer needed.</p>
-<pre><code>$ ziti edge controller update identity-configs scranton-office ssh scranton-office-ssh-client --remove
-
-$ ziti edge controller list identity service-configs scranton-office
-results: none
+$ ziti edge controller create service ssh --configs ssh
+</code></pre><p>The SDKs will present this configuration in language specific ways. You can see the data the SDK are working with from the SDK, by specifying configuration types when listing services. </p>
+<p><strong>NOTES</strong></p>
+<ul>
+<li>You can specify <code>all</code> to see all the configuration data.</li>
+<li>In addition to the <code>config</code> block which has the embedded configuration data there&#39;s also a <code>configs</code> section which lists all the associated configurations by ID. All associated configurations will always be listed here, regardless of which configuration types are requested.</li>
+</ul>
+<pre><code>$ ziti edge controller list services -j --config-types my-app &#39;name=&quot;ssh&quot;&#39;
+{
+    &quot;meta&quot;: {
+        &quot;filterableFields&quot;: [
+            &quot;id&quot;,
+            &quot;createdAt&quot;,
+            &quot;updatedAt&quot;,
+            &quot;name&quot;
+        ],
+        &quot;pagination&quot;: {
+            &quot;limit&quot;: 10,
+            &quot;offset&quot;: 0,
+            &quot;totalCount&quot;: 1
+        }
+    },
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;5d802b56-2ce2-4d28-b95c-01c968948ecc&quot;,
+            &quot;createdAt&quot;: &quot;2020-06-01T14:36:36.856984972Z&quot;,
+            &quot;updatedAt&quot;: &quot;2020-06-01T14:36:36.856984972Z&quot;,
+            &quot;_links&quot;: {
+                &quot;configs&quot;: {
+                    &quot;href&quot;: &quot;./services/5d802b56-2ce2-4d28-b95c-01c968948ecc/configs&quot;
+                },
+                &quot;self&quot;: {
+                    &quot;href&quot;: &quot;./services/5d802b56-2ce2-4d28-b95c-01c968948ecc&quot;
+                },
+                &quot;service-edge-router-policies&quot;: {
+                    &quot;href&quot;: &quot;./services/5d802b56-2ce2-4d28-b95c-01c968948ecc/service-edge-router-policies&quot;
+                },
+                &quot;service-policies&quot;: {
+                    &quot;href&quot;: &quot;./services/5d802b56-2ce2-4d28-b95c-01c968948ecc/service-policies&quot;
+                },
+                &quot;terminators&quot;: {
+                    &quot;href&quot;: &quot;./services/5d802b56-2ce2-4d28-b95c-01c968948ecc/terminators&quot;
+                }
+            },
+            &quot;tags&quot;: {},
+            &quot;name&quot;: &quot;ssh&quot;,
+            &quot;terminatorStrategy&quot;: &quot;smartrouting&quot;,
+            &quot;roleAttributes&quot;: null,
+            &quot;permissions&quot;: [
+                &quot;Bind&quot;,
+                &quot;Dial&quot;
+            ],
+            &quot;configs&quot;: [
+                &quot;e471379b-3f40-4ddf-8bae-621491127543&quot;
+            ],
+            &quot;config&quot;: {
+                &quot;my-app&quot;: {
+                    &quot;hostname&quot;: &quot;ssh.company.com&quot;,
+                    &quot;port&quot;: 22
+                }
+            }
+        }
+    ]
+}
 </code></pre></article>
           </div>
           
@@ -152,7 +175,7 @@ results: none
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/config-store/managing.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/netfoundry/ziti-doc/blob/master/docfx_project/ziti/config-store/consuming.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -1041,11 +1041,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "ziti/config-store/consuming.md",
+      "output": {
+        ".html": {
+          "relative_path": "ziti/config-store/consuming.html",
+          "hash": "84QrY4jRccJzhJbOU0wmCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "ziti/config-store/managing.md",
       "output": {
         ".html": {
           "relative_path": "ziti/config-store/managing.html",
-          "hash": "HXf8LAuPVEf+v5jB2DBWWA=="
+          "hash": "eOxA2WslqDsG7lDSo5pEcA=="
         }
       },
       "is_incremental": false,
@@ -1057,7 +1069,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/config-store/overview.html",
-          "hash": "vFf9NPL8KjzKeOehn8JrHg=="
+          "hash": "0e5XgzAWEwL2J8wWhK1fhg=="
         }
       },
       "is_incremental": false,
@@ -1409,12 +1421,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "ziti/overview.md",
       "output": {
         ".html": {
           "relative_path": "ziti/overview.html",
-          "hash": "ouOX0f8YJHp1xa5oynJhbQ=="
+          "hash": "JyGhpDJHzb37Cq841QdpXg=="
         }
       },
       "is_incremental": false,
@@ -1690,7 +1705,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/services/overview.html",
-          "hash": "uyDtMywkHFZWxXVXzoeWgQ=="
+          "hash": "pursiHhOR41FikDpeAN89w=="
         }
       },
       "is_incremental": false,
@@ -1702,7 +1717,7 @@
       "output": {
         ".html": {
           "relative_path": "ziti/toc.html",
-          "hash": "rFnmLrYATsj2DBmuimCLHg=="
+          "hash": "FkPriGeKoTmlY8yWGk6HNQ=="
         }
       },
       "is_incremental": false,
@@ -1721,8 +1736,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 84,
-          "skipped_file_count": 81
+          "total_file_count": 85,
+          "skipped_file_count": 84
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

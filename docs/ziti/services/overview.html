@@ -99,17 +99,11 @@
 resource that could be accessed by a client on a traditional network. </p>
 <p>A service is defined by the following components:</p>
 <ul>
-<li>Name - the name of the service</li>
-<li>Termination - Ziti only provides access to a network service, it does not provide the service itself. The service must be able to get network traffic to whatever application or application cluster is actually providing the service, whether that provider has Ziti embedded or has no knowledge of Ziti</li>
-<li>Configuration - Ziti allows application specific configuration to be stored for services</li>
-<li>Authorization - For a details on controlling access to services, see <a href="../policies/overview.html">Policies</a>.</li>
+<li><strong>Name</strong> - the name of the service</li>
+<li><strong>Termination</strong> - Ziti only provides access to a network service, it does not provide the service itself. The service must be able to get network traffic to whatever application or application cluster is actually providing the service, whether that provider has Ziti embedded or has no knowledge of Ziti</li>
+<li><strong>Configuration</strong> - Ziti allows application specific configuration to be stored for services. See <a href="../config-store/overview.html">Configuration Store</a></li>
+<li><strong>Authorization</strong> - For a details on controlling access to services, see <a href="../policies/overview.html">Policies</a>.</li>
 </ul>
-<h3 id="dark-services">Dark Services</h3>
-<p>One of the benefits of using a Ziti service is that the actual service can be &#39;dark&#39;. In fact this is the default for
-any service based entirely in Ziti. Place the service in a secure network with only Ziti in place and nobody in the
-world can access the service without a valid certificate/identity!</p>
-<p>Existing services can also be converted to dark via Ziti. Once Ziti is incorporated into an existing network and
-Ziti endpoints deployed the only access to these services can be through Ziti!</p>
 <h2 id="service-name">Service Name</h2>
 <p>Ziti services must have names that are unique to their Ziti installation. Service names are how clients address services in order to consume them. Services which are provided by applications with Ziti embedded also use the service name to indicate which service is being provided.</p>
 <p>Services defined on a Ziti Network have an almost limitless &quot;namespace&quot; available for identifying services. A Ziti service is be defined by a name and this name is registered with the Ziti Controller. Once declared, services can then be addressed directly by name from Ziti-aware clients. This means there are effecitvely a <strong>limitless</strong> number names available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application developer has total control over service names.</p>

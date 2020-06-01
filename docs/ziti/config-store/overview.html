@@ -106,20 +106,35 @@
 <h2 id="overview">Overview</h2>
 <p>The configuration store has four components:</p>
 <ol>
-<li>Configuration types, which consist of <ol>
-<li>a name </li>
-<li>an optional JSON schema to validate configurations of the type</li>
+<li><strong>Configuration types</strong> <ol>
+<li>Configuration types define a type of configuration, including an optional JSON schema that the configuration data must conform to.</li>
+<li>Configuration types have the following attributes: <ol>
+<li>A name </li>
+<li>An optional JSON schema to validate configurations of the type</li>
 <li>Standard edge attributes: id, tags, createdAt, updatedAt</li>
 </ol>
 </li>
-<li>Configurations, which consist of <ol>
-<li>a name</li>
-<li>The configuration data, which is arbitrary JSON data, so long as it conforms to the type schema (if specified)</li>
+</ol>
+</li>
+<li><strong>Configurations</strong> <ol>
+<li>Configurations have the following attributes: <ol>
+<li>A name</li>
+<li>The configuration data, which is arbitrary JSON data, so long as it conforms to the type schema (if specified)<ol>
 <li>Standard edge attributes: id, tags, createdAt, updatedAt</li>
 </ol>
 </li>
-<li>Services. Each service can be linked to one configuration of a given type</li>
-<li>Identities. An identity can have a configuration specified for a given service and configuration type. This will override any configuration for the service for that type </li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>Services</strong> <ol>
+<li>Each service can be linked to multiple configuration. Services can have one configuration linked for each configuration type.</li>
+</ol>
+</li>
+<li><strong>Identities</strong> <ol>
+<li>An identity can have a configuration specified for a given service and configuration type. This will override any configuration for the service for that type </li>
+</ol>
+</li>
 </ol>
 <p>This configuration model has the following properties:</p>
 <ul>
