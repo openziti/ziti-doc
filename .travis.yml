@@ -2,4 +2,4 @@
 if: branch = master
 
 script:
-  - publish.bat docs
+  - publish.sh docs
