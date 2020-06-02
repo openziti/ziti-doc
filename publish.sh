@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+mkdir -p ~/.ssh
+
 echo runnint ssh-keyscan to add github.com to known hosts
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 
