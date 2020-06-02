@@ -1,23 +1,6 @@
-language: csharp
+dist: bionic
 
 script:
-  - mono --version
-  - mkdir docfx
-  - cd docfx
-  - wget -q https://github.com/dotnet/docfx/releases/download/v2.54/docfx.zip
-  - unzip docfx
-  - export PATH=$PATH:$(pwd)
-  - echo "mono $(pwd)/docfx.exe" > docfx
-  - chmod +x docfx
-  - cd ..
-  - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  - unzip awscliv2.zip
-  - mkdir ~/bin/aws
-  - ./aws/install -b ~/bin/aws
-  - export PATH=~/bin:$PATH
-  - wget -q http://doxygen.nl/files/doxygen-1.8.18.linux.bin.tar.gz
-  - tar -xvf doxygen-1.8.18.linux.bin.tar.gz
-  - export PATH=$PATH:$(pwd)/doxygen-1.8.18/bin
-  - ls -l
-  - export GIT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-  - ./publish.sh docs
+  - ./prepare-ci.sh
+  - ./publish.sh
+
