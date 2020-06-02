@@ -33,6 +33,7 @@ then
   git add docs docfx_project/ziti-*
 
   #move back to master once we're this deep into the run
+  ./changeToSsh.sh
   git checkout master
   git commit -m "[ci skip] publish docs from travis"
   git push
