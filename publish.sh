@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-cat /mountedSsh/known_hosts >> ~/.ssh/known_hosts
+echo runnint ssh-keyscan to add github.com to known hosts
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo $pub_script_root
