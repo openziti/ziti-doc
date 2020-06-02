@@ -7,13 +7,14 @@ before_script:
   - docker pull openziti/doc:docfx
 
 script:
+  - export GIT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+  - echo $GIT_BRANCH
   - >
-    export GIT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
     docker run --rm -it -v $(pwd):/doc
     -e AWS_ACCESS_KEY_ID=$aws_access_key_id
     -e AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
     -e AWS_DEFAULT_REGION=us-east-1
     -e GIT_BRANCH=$GIT_BRANCH
+    -e gh_ci_key=$gh_ci_key
     openziti/doc:latest
     /bin/sh -c "/doc/publish.sh"
-
