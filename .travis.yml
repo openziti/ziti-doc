@@ -1,17 +1,16 @@
-language: csharp
+dist: bionic
 
-mono: latest
+services:
+  - docker
 
-before_install:
-  - export PATH=$(pwd):$PATH
-  - nuget install docfx.console -ExcludeVersion
-  - echo "mono docfx.console/tools/docfx.exe" > docfx
-  - docfx --version
-  - apt install python-pip
-  - pip install -U pip
-  - pip install awscli
-  - ./prepare-ci.sh
+before_script:
+  - docker pull openziti/doc:docfx
 
 script:
-  - ./publish.sh
+  - >
+    docker run --rm -it -v $(pwd):/doc -e AWS_ACCESS_KEY_ID=$aws_access_key_id
+    -e AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
+    -e AWS_DEFAULT_REGION=us-east-1
+    openziti/doc:latest
+    /bin/sh -c "/doc/publish.sh"
 

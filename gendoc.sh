@@ -59,12 +59,14 @@ popd
 if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
     pushd ${script_root}/docfx_project/ziti-sdk-c
     doxygen
+    CLANG_SOURCE="${script_root}/docfx_project/ziti-sdk-c/api"
+    CLANG_TARGET="${script_root}/${DOC_ROOT}/api/clang"
     echo " "
     echo "Copying "
-    echo "    from: ${script_root}/docfx_project/ziti-sdk-c/api ${script_root}/${DOC_ROOT}/api/clang"
-    echo "      to: ${script_root}/${DOC_ROOT}/api/clang"
-    mkdir -p "${script_root}/${DOC_ROOT}/api/clang"
-    cp -r ${script_root}/docfx_project/ziti-sdk-c/api "${script_root}/${DOC_ROOT}/api/clang"
+    echo "    from: ${CLANG_SOURCE}"
+    echo "      to: ${CLANG_TARGET}"
+    mkdir -p ${CLANG_TARGET}
+    cp -r ${script_root}/docfx_project/ziti-sdk-c/api ${CLANG_TARGET}
 
     echo " "
     echo "Removing"
@@ -76,15 +78,19 @@ else
 fi
 
 if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-    swift_sdk_rev_short=`git submodule status ${script_root}/docfx_project/ziti-sdk-swift | cut -d' ' -f2`
-    swift_sdk_rev_short=`git rev-parse --short ${swift_sdk_rev_short}`
+    pushd ${script_root}/docfx_project/ziti-sdk-swift
+    swift_sdk_rev_short=$(git status | head -1 | cut -d " " -f4)
+    popd
+    S3_SWIFT_BUCKET="s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz"
+    SWIFT_API_TARGET="./${DOC_ROOT}/api/swift"
     echo " "
     echo "Copying Swift docs"
-    echo "    from: s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz ${script_root}/docfx_project /api/clang"
+    echo "    from: ${S3_SWIFT_BUCKET}"
     echo "      to: ${script_root}/${DOC_ROOT}/api/clang"
-    aws s3 cp s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz .
+    echo "     via: tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ${SWIFT_API_TARGET}"
+    aws s3 cp ${S3_SWIFT_BUCKET} .
     mkdir -p "./${DOC_ROOT}/api/swift"
-    tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C "./${DOC_ROOT}/api/swift"
+    tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ${SWIFT_API_TARGET}
 fi
 
 
