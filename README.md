@@ -43,3 +43,15 @@ For example
     cd docfx_project/ziti-cmd
     git config core.sparseCheckout true
     git checkout 
+
+
+## Running CI equivalent locally
+CI uses docker and a bunch of env vars to run. Set the accordingly then issue:
+
+    docker run --rm -it -v $(pwd):/doc \
+      -e AWS_ACCESS_KEY_ID=$aws_access_key_id \
+      -e AWS_SECRET_ACCESS_KEY=$aws_secret_access_key \
+      -e AWS_DEFAULT_REGION=us-east-1 \
+      -e GIT_BRANCH=$GIT_BRANCH \
+      -e gh_ci_key=$gh_ci_key \
+      openziti/doc:latest /bin/sh -c "/doc/publish.sh"
