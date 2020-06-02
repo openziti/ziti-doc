@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-apt install ssh -y
+apt install ssh git -y
 
 mkdir -p ~/.ssh
 
