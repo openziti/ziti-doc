@@ -20,5 +20,5 @@ script:
     -e AWS_DEFAULT_REGION=us-east-1
     -e GIT_BRANCH=$GIT_BRANCH
     -e gh_ci_key=$gh_ci_key
-    openziti/doc:latest
+    openziti/doc:docfx
     /bin/sh -c "/doc/publish.sh"
