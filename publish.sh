@@ -33,11 +33,21 @@ then
   git add docs docfx_project/ziti-*
 
   #move back to master once we're this deep into the run
-  ./changeToSsh.sh
+  if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
+    echo changing git repo from https to git so that we can push...
+    ./changeToSsh.sh
+  fi
   git checkout master
   git commit -m "[ci skip] publish docs from travis"
   git push
 
+  echo "cloning actual github pages now to push docs into"
+  git clone git@github.com:openziti/openziti.github.io.git
+  cp -r docs/* openziti.github.io/
+  cd openziti.github.io
+  git add *
+  git commit -m "[ci skip] publish docs from travis"
+  git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
   echo ========= publish considered successful though no op
