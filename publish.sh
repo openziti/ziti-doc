@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-apt install ssh git -y
-
 mkdir -p ~/.ssh
 
 echo is /usr/bin/ssh-keyscan installed???
