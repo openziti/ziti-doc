@@ -3,20 +3,6 @@ if: branch = master
 
 dist: bionic
 
-################## cache docker images ###########################################
-# https://stackoverflow.com/questions/32866599/can-travis-ci-cache-docker-images
-cache:
-  directories:
-    - docker_images
-
-before_install:
-  - docker load -i docker_images/images.tar || true
-
-before_cache:
-  - docker save -o docker_images/images.tar $(docker images -a -q)
-# https://stackoverflow.com/questions/32866599/can-travis-ci-cache-docker-images
-################## cache docker images ###########################################
-
 services:
   - docker
 
