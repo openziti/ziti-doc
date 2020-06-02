@@ -1,6 +1,18 @@
 #!/bin/bash
 set -e
-#gitbranch=$(git rev-parse --abbrev-ref HEAD)
+
+pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+echo $pub_script_root
+
+pushd $pub_script_root
+
+curl -s https://api.github.com/repos/netfoundry/ziti-ci/releases/latest \
+  | grep browser_download_url \
+  | cut -d ":" -f2,3 \
+  | tr -d \" \
+  | wget -i - -O ziti-ci
+chmod +x ziti-ci
+mv ziti-ci /usr/bin
 
 if [ "${GIT_BRANCH}" == "master" ]
 then
@@ -17,3 +29,5 @@ else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
   echo ========= publish considered successful though no op
 fi
+
+popd
