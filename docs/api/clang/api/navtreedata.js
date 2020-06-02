@@ -25,13 +25,13 @@
 var NAVTREE =
 [
   [ "Ziti C SDK", "index.html", [
-    [ "Building the Project", "md__mnt_v_work_git_github_openziti_ziti-doc-jun1_docfx_project_ziti-sdk-c_building.html", [
-      [ "Prerequisites", "md__mnt_v_work_git_github_openziti_ziti-doc-jun1_docfx_project_ziti-sdk-c_building.html#autotoc_md3", null ],
-      [ "Building Requirements", "md__mnt_v_work_git_github_openziti_ziti-doc-jun1_docfx_project_ziti-sdk-c_building.html#autotoc_md4", null ],
-      [ "Project Initialization", "md__mnt_v_work_git_github_openziti_ziti-doc-jun1_docfx_project_ziti-sdk-c_building.html#autotoc_md5", null ],
-      [ "Building", "md__mnt_v_work_git_github_openziti_ziti-doc-jun1_docfx_project_ziti-sdk-c_building.html#autotoc_md6", [
-        [ "Linux/MacOS", "md__mnt_v_work_git_github_openziti_ziti-doc-jun1_docfx_project_ziti-sdk-c_building.html#autotoc_md7", null ],
-        [ "Windows", "md__mnt_v_work_git_github_openziti_ziti-doc-jun1_docfx_project_ziti-sdk-c_building.html#autotoc_md8", null ]
+    [ "Building the Project", "md__doc_docfx_project_ziti-sdk-c_building.html", [
+      [ "Prerequisites", "md__doc_docfx_project_ziti-sdk-c_building.html#autotoc_md3", null ],
+      [ "Building Requirements", "md__doc_docfx_project_ziti-sdk-c_building.html#autotoc_md4", null ],
+      [ "Project Initialization", "md__doc_docfx_project_ziti-sdk-c_building.html#autotoc_md5", null ],
+      [ "Building", "md__doc_docfx_project_ziti-sdk-c_building.html#autotoc_md6", [
+        [ "Linux/MacOS", "md__doc_docfx_project_ziti-sdk-c_building.html#autotoc_md7", null ],
+        [ "Windows", "md__doc_docfx_project_ziti-sdk-c_building.html#autotoc_md8", null ]
       ] ]
     ] ],
     [ "Deprecated List", "deprecated.html", null ],
