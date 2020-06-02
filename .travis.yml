@@ -4,7 +4,7 @@ script:
   - mono --version
   - mkdir docfx
   - cd docfx
-  - wget https://github.com/dotnet/docfx/releases/download/v2.54/docfx.zip
+  - wget -q https://github.com/dotnet/docfx/releases/download/v2.54/docfx.zip
   - unzip docfx
   - export PATH=$PATH:$(pwd)
   - echo "mono $(pwd)/docfx.exe" > docfx
@@ -12,8 +12,10 @@ script:
   - cd ..
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   - unzip awscliv2.zip
-  - ./aws/install
-  - wget http://doxygen.nl/files/doxygen-1.8.18.linux.bin.tar.gz
+  - mkdir ~/bin/aws
+  - ./aws/install -b ~/bin/aws
+  - export PATH=~/bin:$PATH
+  - wget -q http://doxygen.nl/files/doxygen-1.8.18.linux.bin.tar.gz
   - tar -xvf doxygen-1.8.18.linux.bin.tar.gz
   - export PATH=$PATH:$(pwd)/doxygen-1.8.18/bin
   - ls -l
