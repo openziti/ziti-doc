@@ -31,6 +31,9 @@ then
 
   ziti-ci configure-git
   git add docs docfx_project/ziti-*
+
+  #move back to master once we're this deep into the run
+  git co master
   git commit -m "[ci skip] publish docs from travis"
   git push
 
