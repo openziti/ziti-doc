@@ -42,10 +42,15 @@ then
   git push
 
   echo "cloning actual github pages now to push docs into"
-  git clone git@github.com:openziti/openziti.github.io.git
+  git clone https://github.com/openziti/openziti.github.io.git
+#  git clone git@github.com:openziti/openziti.github.io.git
   cp -r docs/* openziti.github.io/
   cd openziti.github.io
   git add *
+  if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
+    echo changing git repo from https to git so that we can push...
+    ./changeToSsh.sh
+  fi
   git commit -m "[ci skip] publish docs from travis"
   git push
 else
