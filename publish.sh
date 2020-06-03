@@ -39,6 +39,11 @@ then
   echo "cloning actual github pages now to push docs into"
   git clone https://github.com/openziti/openziti.github.io.git
 #  git clone git@github.com:openziti/openziti.github.io.git
+
+  # clean the old site to remove any pages/etc that are no longer around
+  rm -r openziti.github.io/*
+
+  # copy all the docs into the publish site
   cp -r docs/* openziti.github.io/
   cd openziti.github.io
   git add *
