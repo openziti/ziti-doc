@@ -116,8 +116,8 @@ Here's an overview of a network:
 
 ### ZITI CONTROLLER
 
-The NetFoundry Ziti Controller is the central function of the
-NetFoundry Ziti Network. The Ziti Controller provides the
+The Ziti Controller is the central function of the
+Ziti Network. The Ziti Controller provides the
 configuration plane. It is responsible for configuring Ziti services
 as well as being the central point for managing the identities
 used by users, devices and the nodes making up the Ziti Network.
@@ -175,14 +175,14 @@ Clients are designed to work with both brownfield and greenfield
 applications.
 
 If the solution being developed includes developing new
-software NetFoundry offers SDKs targeting various languages
+software Ziti offers SDKs targeting various languages
 and runtimes to provide fast, reliable and secure connectivity.
 These SDKs provide the capabilities needed to securely connect
 to the Ziti Network and are designed to be easily incorporated
 into the target application.
 
 When adding secure connectivity to an already existing solution
-NetFoundry offers specialized Edge Clients called tunnelers
+Ziti offers specialized Edge Clients called tunnelers
 which provide seamless, secure connectivity and do not require
 changes to the target application.
 
