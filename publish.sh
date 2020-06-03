@@ -51,6 +51,7 @@ then
     echo changing git repo from https to git so that we can push...
     ../changeToSsh.sh
   fi
+  echo "0.0" > version
   ziti-ci configure-git
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis"
   git diff-index --quiet HEAD || git push
