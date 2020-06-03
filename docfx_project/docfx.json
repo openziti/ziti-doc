@@ -48,6 +48,8 @@
           "ziti-android-app/**/*.png",
           "ziti-cmd/**/*.svg",
           "index.html",
+          "policies/*.html",
+          "policies/*.pdf",
           "api/clang/api/**"
         ]
       }

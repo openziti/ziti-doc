@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Contributing | NetFoundry </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Contributing | NetFoundry ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/nflightbglogo_40.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="contributing">Contributing</h1>
+
+<p>NetFoundry welcomes all contributions large or small from the community. If you want to contribute to a NetFoundry
+repository this document will serve as a guide. Contributions can come in various forms such as <a href="#example-bugissue-report">bug reports</a>,
+engaging with other users by offering help on the the <a href="https://netfoundry.discourse.group/">discourse group</a> and
+of course as code submissions. Please take a moment and read this document to see how you can help out.</p>
+<h2 id="bugissue-reports">Bug/Issue Reports</h2>
+<p>If you have discovered a potential issue with any of the NetFoundry projects on GitHub please file a GitHub issue for
+the possible problem. We realize you are taking time out of your day to file the issue (thank you!) however we do ask
+that you take a moment to try to submit a high quality report of the issue. A high quality isuse report will ideally be
+short and direct and only as detailed as possible.</p>
+<p>Here are some guidelines to follow when posting an issue:</p>
+<ul>
+<li>Make sure your steps are reporducible and clear. If you are submitting a bit of code that triggers the issue the code
+should be as terse as possible and only inclue the bits relevant to the issue being submitted.</li>
+<li>Search for similar issues before submitting an issue.</li>
+<li>Include version, branch or commit hash information in the bug to help someone else reproducing the bug. If you are not
+using the HEAD of master, search for closed issues to make sure this was not fixed recently or update to HEAD and
+reproduce the issue.</li>
+<li>If applicable to the issue and time permits we ask that you try to produce a test script or code that can trigger the
+issue. If the code is testable - produce an actual test case for the isuse.</li>
+<li>Including the OS, OS version, versions of tooling used to trigger the issue is always helpful. For example if issue is
+UI based including the browser and browser version is often very relevant. If the bug is inside an SDK - what version
+of the SDK is in use?</li>
+<li>We ask that you please not disclose security related issues on GitHub. Instead, please mail security@netfoundry.io
+with any issues which might be security related.</li>
+</ul>
+<p>A high quality issue leaves as little room for ambiguity as possible. The more details provided the better.</p>
+<p>Additional guidelines:</p>
+<ul>
+<li>The issue tracker is not for support requests. Please use the <a href="https://netfoundry.discourse.group/">discourse group</a>
+for questions about &quot;how do i do this&quot; or for seeking additional information that may not be documented yet.</li>
+<li>You are expected to follow the <a href="CODE_OF_CONDUCT.html">code of conduct</a> at all times. Please be respectful of issues
+entered by others.</li>
+<li>Keep responses in the issues specifically about the issue itself. If another issue arises or if discussion is
+warranted open a new issue and use the <a href="https://netfoundry.discourse.group/">discourse group</a> accordingly.</li>
+</ul>
+<h3 id="example-bugissue-report">Example Bug/Issue Report</h3>
+<pre><code>Title: 
+Name with apostrophe breaks save functionality
+
+Description:
+While using the UI I noticed that when I enter a name with an apostrophe the form doesn't save and reports an error.
+
+Here's what I did:
+
+# Environment: Windows 10 [Version 10.0.18362.535]
+# Build from the master branch using `go version go1.13.4 linux/amd64`
+# Log into UI and click &quot;new thing&quot; using Firefox 71.0 (32 bit)
+# Fill out all the required fields
+# When filling out out the Name field ensure you use a name with an apostrophe. I used &quot;Jerry O'Connell&quot;
+# Click save - observe the error
+</code></pre>
+<h2 id="code-contributions">Code Contributions</h2>
+<p>Before a contribution can be accepted there is some bookeeping that needs to occur. NetFoundry requires external
+contributors to sign a Contributor License Agreement (CLA) in order to ensure our products can remain open sourece while
+still allowing NetFoundry to advance the products forward.</p>
+<h3 id="contributor-license-agreement">Contributor License Agreement</h3>
+<p>So what is a Contributor License Agreement (CLA) anyway? A CLA is a document which explicitly defines the terms
+intellectual property is contributed to a company/project. Our CLA is based on the fine work from the Apache Software
+Foundation. In summary the CLA is effectively doing a few things. Ensure you read and understand the CLA you are
+signing. This summary is not legal advice</p>
+<ul>
+<li>Grant of Copyright License. You give NetFoundry permission to use your copyrighted work in the project you contributed
+to.</li>
+<li>Grant of Patent License. If your contributed work uses a patent, you give NetFoundry a license to use that patent in
+the project you have contributed to. You also agree that you have authorization to grant this license.</li>
+<li>No Warranty and no Support. By making a contribution you are not obligating yourself or your corporation to
+provide support for the contribution. You are also not agreeing to any warranty obligations or providing any
+assurances or guarantees about how it will perform.</li>
+</ul>
+<h3 id="submitting-the-cla">Submitting the CLA</h3>
+<p>In order to have a CLA on file you must download the CLA and sign it. If you are an individual you can download the
+<a href="./NetFoundry-ICLA.pdf">Individual Contributor License Agreement</a>. For contributors contributing on behalf of a corporation
+there exists a <a href="./NetFoundry-CCLA.pdf">Corporate Contributor License Agreement</a>. Once signed you will send the CLA to
+<a href="mailto:cla@netfoundry.io">cla@netfoundry.io</a>. We will process your request and add you as a contributor to the project.
+Note that submitting issues does not requires a CLA be signed.  You also will only have to sign a single CLA regardless
+of which repository you are contributing to.</p>
+<p>After being submitted please allow for a few business days for us to process your CLA submission. You will be notified
+by email of your acceptance and the provided GitHub id will be added as a contributor. NetFoundry pledges that any personal information will not be used in any way.</p>
+<h3 id="contributing-1">Contributing</h3>
+<p>With the necessary paperwork complete you can now begin the process of getting your contribution into the targetted
+project! Like other open source projects we ask you to fork the repository in question, make your changes and then issue
+a pull request back to the main project line. If applicable write tests to go along with the code. Please file an issue
+in the GitHub issue for the pull request so that the commits can be traced back to the rationale for the change. As with
+all software projects the more code you change the longer it will take to review and accept the pull request. Short and
+simple pull requests are easy to review and accept so it's often adventageous to stage your changes accordingly. This is
+not always possible but it should be the target. New files should get the appropriate license header as well.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span class='pull-left'><span><a href='https://netfoundry.io'>© 2019 NetFoundry</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/privacy-policy'>Privacy Policy</a></span>&nbsp;&nbsp;<span><a href='https://www.netfoundry.io/legal-items'>Legal</a></span>&nbsp;&nbsp;<span><a href='https://netfoundry.zendesk.com/hc/en-us'>Support</a></span>&nbsp;&nbsp;</span><span class='pull-right'><span><a href='https://www.facebook.com/NetFoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145802.svg'></a></span>&nbsp;<span><a href='https://twitter.com/netfoundry' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145812.svg'></a></span>&nbsp;<span><a href='https://www.linkedin.com/company/netfoundry/' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/145/145807.svg'></a></span>&nbsp;<span><a href='https://www.youtube.com/channel/UCGN6PFj1rZu50yme9YsICmg' target='_blank'><img height='25' src='https://image.flaticon.com/icons/svg/174/174883.svg'></a></span>&nbsp;&nbsp;&nbsp;</span><br>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
