@@ -34,7 +34,7 @@ then
     ./changeToSsh.sh
   fi
   git checkout master
-  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis" && git push
+# branch protection disallows this  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis" && git push
 
   echo "cloning actual github pages now to push docs into"
   git clone https://github.com/openziti/openziti.github.io.git
