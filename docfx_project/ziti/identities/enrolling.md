@@ -8,7 +8,7 @@ process. The process of obtaining a key/certificate pair and presenting it secur
 ### Overview
 
 All identities need to be enrolled with the Ziti Controller so the Ziti Controller can authenticate the incoming connection.
-This process is slightly different for each type of identity. NetFoundry has created a tool to aid the enrollment
+This process is slightly different for each type of identity. Ziti has created a tool to aid the enrollment
 process named `ziti-enroller`. It is recommended that you use `ziti-enroller` to complete the enrollment as the
 process itself complex. Enrollers are available here:
 

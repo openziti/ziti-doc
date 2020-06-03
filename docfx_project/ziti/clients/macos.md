@@ -1,3 +1,3 @@
 ## MacOS
 
-The MacOS tunneler is currently in a closed-beta. NetFoundry will look to open this up to everyone in the coming months.
+The iOS tunneler is currently in preview. Find the app in the [Apple store here](https://apps.apple.com/us/app/ziti-tunnel/id1460484353)
