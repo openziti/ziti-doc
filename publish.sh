@@ -34,8 +34,7 @@ then
     ./changeToSsh.sh
   fi
   git checkout master
-  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis"
-  git diff-index --quiet HEAD || git push
+  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis" && git push
 
   echo "cloning actual github pages now to push docs into"
   git clone https://github.com/openziti/openziti.github.io.git
@@ -53,8 +52,7 @@ then
   git config user.email ziti-ci@netfoundry.io
   git config core.sshCommand "ssh -i /doc/github_deploy_key"
 
-  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis"
-  git diff-index --quiet HEAD || git push
+  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis" && git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
   echo ========= publish considered successful though no op
