@@ -49,9 +49,9 @@ then
   fi
 
   echo Configuring git 
-  set git username: git config user.name ziti-ci 
-  set git password: git config user.email ziti-ci@netfoundry.io 
-  set ssh config: git config core.sshCommand ssh -i /doc/github_deploy_key 
+  git config user.name ziti-ci
+  git config user.email ziti-ci@netfoundry.io
+  git config core.sshCommand ssh -i /doc/github_deploy_key
 
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis"
   git diff-index --quiet HEAD || git push
