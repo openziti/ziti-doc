@@ -13,7 +13,7 @@
     <a title="  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a></p>
+        <p><a href="index.html"> Docs</a> (100% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -269,42 +269,30 @@ $ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/iOS-x86_64.cmake &amp;&amp; make
 <p>The <a href="make_dist.sh"><code>make_dist.sh</code></a> script will package the static library, swiftmodule, and <strong>Objective-C</strong> header file (<code>CZiti-Swift.h</code>) into static frameworks found under the <code>./dist</code> directory.</p>
 <h1 id='adding-code-cziti-code-as-a-dependency' class='heading'>Adding <code>CZiti</code> as a Dependency</h1>
 
-<p><code>CZiti</code> is built into a static library (<code>libCZiti.a</code>) and is packaged as a static Framework (<code>CZiti.framework</code>).</p>
+<p><code>CZiti</code> is built into a static library (<code>libCZiti.a</code>) and packaged as a static Framework (<code>CZiti.framework</code>).</p>
 
-<p>Note that that <code>CZiti</code> is not built for Bitcode, and when building for a device the <strong>Build Settings - Build Options</strong> should set <code>Enable Bitcode</code> to <code>No</code>. </p>
-<h2 id='via-code-cocoapods-code' class='heading'>Via <code>CocoaPods</code></h2>
-<pre class="highlight ruby"><code><span class="n">target</span> <span class="s1">'Some-macOS-Target'</span>
-  <span class="n">use_frameworks!</span>
-  <span class="n">platform</span> <span class="ss">:macos</span><span class="p">,</span> <span class="s1">'10.15'</span>
-  <span class="n">pod</span> <span class="s1">'CZiti-macOS'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1'</span>
-<span class="k">end</span>
-
-<span class="n">target</span> <span class="s1">'SomeTarget-iOS-Target'</span>
-  <span class="n">use_frameworks!</span>
-  <span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'13.4'</span>
-  <span class="n">pod</span> <span class="s1">'CZiti-iOS'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1'</span>
-<span class="k">end</span>
-</code></pre>
+<p>Note that that <code>libCZiti.a</code> is not built for Bitcode, and when building for a device the <strong>Build Settings - Build Options</strong> should set <code>Enable Bitcode</code> to <code>No</code>. </p>
 <h2 id='via-code-cziti-framework-code' class='heading'>Via <code>CZiti.framework</code></h2>
 
 <ul>
-<li>Obtain <code>CZiti.framework</code> following the build steps above or by downloading from <a href="https://netfoundry.jfrog.io/artifactory/ziti-sdk-swift/">Artifactory</a></li>
 <li>Drag the appropriate <code>CZiti.framework</code> into your project, selecting &ldquo;Copy items if needed&rdquo;, &ldquo;Create groups&rdquo;, and your target checked under &ldquo;Add to targets:&rdquo;.</li>
 <li>Ensure the framework is shown under <strong>General - Frameworks, Libraries, and Embedded Content</strong>. If not present, click the &ldquo;+&rdquo; button to add it manually.  The &ldquo;Embedded&rdquo; entry should be set to &ldquo;Do Not Embed&rdquo;.</li>
 <li>Ensure the framework is shown under <strong>Build Phases - Link Binary with Libraries</strong>.  The &ldquo;Status&rdquo; entry should be set to &ldquo;Required&rdquo;</li>
 <li><strong>Build Settings - Frameworks</strong> should include an entry of the directory containing <code>CZiti.framework</code> in your project</li>
+<li>For <strong>Swift</strong> projects, <strong>Build Settings - Swift Compiler - Search Paths - Import Paths</strong> should include <code>CZiti.framework</code></li>
+<li>For <strong>Objective-C</strong> projets, <strong>Build Settings - Header Search Paths</strong> should include <code>CZiti.framework</code>, allowing your <strong>Objective-C</strong> files to <code>import</code>CZiti-Swift.h` successfully.</li>
 </ul>
 
-<p>Wnen including <code>CZiti</code> in an <strong>Objective-C</strong> project, adding a Swift file that imports <code>Foundation</code> to your project will help ensure your project is setup correctly for accessing <strong>Swift</strong> from <strong>Objective-C</strong></p>
+<p>Wnen including <code>CZiti</code> in an <strong>Objective-C</strong> project, addind (an empty) Swift file to your project will help ensure your project is setup correctly for accessing <strong>Swift</strong> from <strong>Objective-C</strong></p>
+
+<p>Coming soon: Distribution via <code>CocoaPods</code></p>
 <h2 id='via-code-libcziti-a-code' class='heading'>Via <code>libCZiti.a</code></h2>
 
-<ul>
-<li>Follow the build steps above to create <code>libCZiti.a</code></li>
-<li>Add <code>libCZiti.a</code> library to your project&rsquo;s <strong>Frameworks and Libraries</strong>, and ensure it is listed in your project&rsquo;s <strong>Build Phases</strong> under <strong>Link Binary with Libraries</strong>.</li>
-<li>Your <strong>Library Search Path</strong> and <strong>Swift Compiler Seatch Paths - Import Paths</strong> should include the directory containing <code>libCZiti.a</code> and <code>CZiti.swiftmodule/</code></li>
-<li>When this project is built from <code>Xcode</code>, the <code>CZiti-Swift.h</code> file is copied to <code>$(PROJECT_ROOT)/include/$(PLATFORM)</code> (e.g., <code>./include/iphoneos</code>).  <code>CZiti-Swift.h</code> can also be found the the <code>DerivedSources</code> directory under <code>./DerivedData</code> following a build from either <code>Xcode</code> or via <code>build_all.sh</code>.  This file is needed to use <code>CZiti</code> from Objective-C. Your  <strong>Search Paths - Header Search Paths</strong> must include the directory containing <code>CZiti-Swift.h</code>.</li>
-<li>Inspect the sample apps&rsquo; configurations in this repository for relevant build settings for libraries and paths</li>
-</ul>
+<p>Add <code>libCZiti.a</code> library to your project&rsquo;s <strong>Frameworks and Libraries</strong>, and ensure it is listed in your project&rsquo;s <strong>Build Phases</strong> under <strong>Link Binary with Libraries</strong>.</p>
+
+<p>Your <strong>Library Search Path</strong> and <strong>Swift Compiler Seatch Paths - Import Paths</strong> should include the directory containing <code>libCZiti.a</code> and <code>CZiti.swiftmodule/</code></p>
+
+<p>When this project is built from <code>Xcode</code>, the <code>CZiti-Swift.h</code> file is copied to <code>$(PROJECT_ROOT)/include/$(PLATFORM)</code> (e.g., <code>./include/iphoneos</code>).  <code>CZiti-Swift.h</code> can also be found the the <code>DerivedSources</code> directory under <code>./DerivedData</code> following a build from either <code>Xcode</code> or via <code>build_all.sh</code>.  This file is needed to use <code>CZiti</code> from Objective-C. Your  <strong>Search Paths - Header Search Paths</strong> must include the directory containing <code>CZiti-Swift.h</code>.</p>
 <h1 id='getting-help' class='heading'>Getting Help</h1>
 
 <p>Please use these community resources for getting help. We use GitHub <a href="https://github.com/openziti/ziti-url-protocol/issues">issues</a> 
@@ -321,8 +309,8 @@ for tracking bugs and feature requests.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-06-02)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-05-30)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
