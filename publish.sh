@@ -38,8 +38,8 @@ then
     ./changeToSsh.sh
   fi
   git checkout master
-  git commit -m "[ci skip] publish docs from travis"
-  git push
+  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis"
+  git diff-index --quiet HEAD || git push
 
   echo "cloning actual github pages now to push docs into"
   git clone https://github.com/openziti/openziti.github.io.git
@@ -51,8 +51,8 @@ then
     echo changing git repo from https to git so that we can push...
     ../changeToSsh.sh
   fi
-  git commit -m "[ci skip] publish docs from travis"
-  git push
+  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis"
+  git diff-index --quiet HEAD || git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
   echo ========= publish considered successful though no op
