@@ -54,7 +54,7 @@ fi
 
 # specifically using ../ziti-doc just to remove any chance to rm something unintended
 echo removing previous build at: rm $(pwd)/../ziti-doc/${DOC_ROOT}
-rm -r $(pwd)/../ziti-doc/${DOC_ROOT}
+rm -r $(pwd)/../ziti-doc/${DOC_ROOT} || true
 
 pushd docfx_project
 docfx build
