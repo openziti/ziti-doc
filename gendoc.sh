@@ -91,6 +91,7 @@ if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.
     aws s3 cp ${S3_SWIFT_BUCKET} .
     mkdir -p "./${DOC_ROOT}/api/swift"
     tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ${SWIFT_API_TARGET}
+    rm ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz
 fi
 
 
