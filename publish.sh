@@ -3,10 +3,6 @@ set -e
 
 mkdir -p ~/.ssh
 
-echo is /usr/bin/ssh-keyscan installed???
-ls -l /usr/bin/ssh-keyscan
-ls -l /usr/bin/ssh-*``
-
 echo running ssh-keyscan to add github.com to known hosts
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 
@@ -55,7 +51,7 @@ then
   echo Configuring git 
   set git username: git config user.name ziti-ci 
   set git password: git config user.email ziti-ci@netfoundry.io 
-  set ssh config: git config core.sshCommand ssh -i /github_deploy_key 
+  set ssh config: git config core.sshCommand ssh -i /doc/github_deploy_key 
 
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis"
   git diff-index --quiet HEAD || git push
