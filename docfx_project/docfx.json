@@ -88,7 +88,7 @@
         "apiSpecFolder": "apidoc"
       }
       , "_github_link":"https://github.com/openziti"
-      , "_discourse_link":"https://netfoundry.discourse.group"
+      , "_discourse_link":"https://openziti.discourse.group"
       , "_docfxVersion": "2.x"
     }
   }
