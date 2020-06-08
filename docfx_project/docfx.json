@@ -64,7 +64,7 @@
         ]
       }
     ],
-    "dest": "../bob",
+    "dest": "../docs-local",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
