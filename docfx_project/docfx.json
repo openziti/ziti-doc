@@ -87,7 +87,7 @@
         "branch": "master",
         "apiSpecFolder": "apidoc"
       }
-      , "_github_link":"https://github.com/openziti"
+      , "_github_link":"https://github.com/openziti/ziti-doc"
       , "_discourse_link":"https://openziti.discourse.group"
       , "_docfxVersion": "2.x"
     }
