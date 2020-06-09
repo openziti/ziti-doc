@@ -315,7 +315,7 @@ by the pkcs11 driver!
 Above we've only shown the commands that need to run and not what the output of those commands would look like. Here
 we'll see all the commands put together along with all the output from the commands. This section is long - you are
 warned! Also note that this content is subject to change. If the output you see is not identical it's because the
-software has changed since this information was captured. File an [issue](https://github.com/netfoundry/ziti-doc/issues)
+software has changed since this information was captured. File an [issue](https://github.com/openziti/ziti-doc/issues)
 if you'd like to see it updated.
 
 # [Sample Output](#tab/hidden-linux)

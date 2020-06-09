@@ -1,3 +1,3 @@
 <head> 
-    <meta http-equiv="refresh" content="0; URL=https://netfoundry.github.io/ziti-doc/ziti/quickstarts/networks-overview.html" />
+    <meta http-equiv="refresh" content="0; URL=https://openziti.github.io/ziti/quickstarts/networks-overview.html" />
 </head>

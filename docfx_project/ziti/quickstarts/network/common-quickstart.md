@@ -172,11 +172,10 @@ Use policies to
     ziti edge controller create service-policy dial-all Dial --service-roles '#all' --identity-roles '#all'
     
     # Create an edge router policy which allows all identities to use all edge routers 
-    ziti edge controller create edge-router-policy all --edge-router-roles '#all' --identity-roles '#all'
+    ziti edge controller create edge-router-policy allEdgeRouters --edge-router-roles '#all' --identity-roles '#all'
     
     # Create a service edge router policy which allows all services to use all edge routers
-    ziti edge controller create service-edge-router-policy --edge-router-roles '#all' --service-roles '#all' 
-    
+    ziti edge controller create service-edge-router-policy allSvcRouter --edge-router-roles '#all' --service-roles '#all'
 ***
 
 ## Test It
