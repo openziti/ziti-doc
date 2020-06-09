@@ -25,7 +25,7 @@ Ziti represents the next generation of secure, open-source networking for your a
 * [Open source code, available with the Apache 2.0 license](https://github.com/openziti)
 * Fully programable REST management APIs
 * [SDKs for a variety of programming languages](~/ziti/clients/sdks.md)
-* [Application specific configuration store allowing centralized management of configuration allowing you to add structured configuration specific to your application](~/config-store/overview.md)
+* [Application specific configuration store allowing centralized management of configuration allowing you to add structured configuration specific to your application](~/ziti/config-store/overview.md)
 * An extensible fabric, allowing you to add your own 
     * load balancing algorithms
     * interconnect protocols
