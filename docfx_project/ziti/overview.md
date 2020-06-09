@@ -3,8 +3,6 @@ uid: zitiOverview
 ---
 
 # Overview
-
-## Why Ziti?
 Ziti represents the next generation of secure, open-source networking for your applications. Ziti has several components.
 
 * The Ziti fabric provides a scalable, plugable, networking mesh with built in smart routing
