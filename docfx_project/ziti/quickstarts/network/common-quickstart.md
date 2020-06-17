@@ -73,7 +73,7 @@ To create a new identity using the CLI simply issue these commands:
 Identities are not truly enabled until they are enrolled. Enrollment is a complex process. NetFoundy has created a tool
 specifically for this task to ensure safe and secure enrollment of identities.
 
-1. Download the ziti-tunnel for your operating system.
+1. Download the ziti-enroller for your operating system.
 
 [!include[](~/ziti/downloads/enroller.md)]
 
