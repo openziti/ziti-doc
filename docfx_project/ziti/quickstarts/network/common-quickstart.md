@@ -137,7 +137,7 @@ To create a new service using the CLI simply issue these two commands:
 1. In the top right corner of the screen click the "plus" image to add a new terminator
 1. In the "Service" dropdown, choose: eth0.ziti.svc.ui
 1. In the "Router" dropdown, choose: ziti-er01 <- NOTE: a bug in the UI will make this show up 'empty'
-   choose it anyway as shown:
+   choose it anyway as shown: <br> ![image](~/images/ui-terminator-bug.png)
 1. In the "Address" box enter: `tcp:eth0.me:80`
 1. Click save
 
