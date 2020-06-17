@@ -1,4 +1,4 @@
-    #load the current user/password into an environment variables
+    # load the current user/password into an environment variables
     ctrl_user=$(jq -r .username ~/.config/ziti/ziti-controller/credentials.json)
     ctrl_passwd=$(jq -r .password ~/.config/ziti/ziti-controller/credentials.json)
 
