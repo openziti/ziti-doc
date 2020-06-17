@@ -24,7 +24,7 @@ This guide will leverage an [Amazon Machine Image (AMI) delivered via the AWS Ma
 Using the image you will have an instance of Ziti to use as you please within minutes. If you are
 unfamiliar AWS you'll want to take some time to come up to speed. You will need an account, and
 you'll want to become familiar with the console. Start
-[here](https://docs.aws.amazon.com/ whitepapers/latest/aws-overview/introduction.html)
+[here](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html)
 and when you feel ready - come back to this guide.
 
 ### Important Note for Starting a Ziti Instance
