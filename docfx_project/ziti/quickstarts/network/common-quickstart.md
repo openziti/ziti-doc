@@ -37,7 +37,7 @@ These AMIs will be provided with a self-signed certificate generated during secu
 To change the administrator password using the CLI simply issue these commands:
 
 > [!NOTE]
-> You will need to login one time in order to use the ziti cli:
+> If you are not already, you will need to be logged in to use the ziti cli
 
 [!include[](~/ziti/cli-snippets/login.md)]
     
@@ -71,9 +71,9 @@ To create a new identity using the CLI simply issue these commands:
 ### Enroll the New Identity
 
 Identities are not truly enabled until they are enrolled. Enrollment is a complex process. NetFoundy has created a tool
-specifically for this task to ensure safe and secure enrollment of identities.  
+specifically for this task to ensure safe and secure enrollment of identities.
 
-1. Download the enroller for your operating system.
+1. Download the ziti-enroller for your operating system.
 
 [!include[](~/ziti/downloads/enroller.md)]
 
@@ -90,34 +90,63 @@ With an identity created it's now time to create a service. Read more about Serv
 example we are going to choose a simple website that is [available on the open internet](http://eth0.me). This site will
 return the IP address you are coming from. Click this link now and discover what the your external IP is.
 
+# [New Service Config via UI](#tab/create-service-config-ui)
+
+1. On the left side nav bar, click "Ziti Config"
+1. In the top right corner of the screen click the "plus" image to add a new config
+1. Enter the name: eth0.ziti.config.ui
+1. In the "Types" box choose: "ziti-tunneler-client.v1"
+1. In the "Hostname" box enter: `eth0.ziti.ui`
+1. In the "Port" box enter: `80`
+1. Click save to save the config<br>
+![image](~/images/eth0.ui.png)
+
+# [New Service Config via CLI](#tab/create-service-config-cli)
+
+> [!NOTE]
+> If you are not already, you will need to be logged in to use the ziti cli
+
+[!include[](~/ziti/cli-snippets/login.md)]
+    
+    # create the config
+    ziti edge controller create config eth0.ziti.config.cli ziti-tunneler-client.v1 '{ "hostname" : "eth0.ziti.cli", "port" : 80 }'
+
+***
+
 # [New Service via UI](#tab/create-service-ui)
 
 1. On the left side nav bar, click "Edge Services"
 1. In the top right corner of the screen click the "plus" image to add a new service
-1. Choose a name for the serivce. Enter "ethzero-ui"
-1. Enter a host name for the service. Enter "ethzero.ziti.ui"
-1. Enter port 80
-1. Choose Router "ziti-gw01"
-1. For Endpoint Service choose:
-    * protocol = tcp
-    * host = eth0.me
-    * port = 80
-1. Select "demo-c01" for the cluster
-1. Leave Hosting Identities as is
+1. Choose a name for the service, enter: `eth0.ziti.svc.ui`
+1. Under Configurations choose the ziti-tunneler-client.v1 config named: eth0.ziti.config.ui
 1. Click save
 
 # [New Service via CLI](#tab/create-service-cli)
 
 To create a new service using the CLI simply issue these two commands:
 
-    #load the default cluster id into an environment variable
-    cluster=$(ziti edge controller list clusters | tr -s ' ' | cut -d ' ' -f4)
+    # create the service and refernce the cli config added earlier
+    ziti edge controller create service ziti.eth0.svc.cli --configs ziti.eth0.config.cli
 
-    #load the edge router id into an environment variable
-    edgeRouter=$(ziti edge controller list gateways | cut -d ' ' -f2)
+***
 
-    #update the admin user. This command will prompt you to enter the password
-    ziti edge controller create service ethzero-cli "ethzero.ziti.cli" "80" "$edgeRouter" "tcp:eth0.me:80" -c "$cluster"
+# [New Terminator via UI](#tab/create-terminator-ui)
+
+1. On the left side nav bar, click "Edge Services"
+1. On the top nav bar, click "Terminators"
+1. In the top right corner of the screen click the "plus" image to add a new terminator
+1. In the "Service" dropdown, choose: eth0.ziti.svc.ui
+1. In the "Router" dropdown, choose: ziti-er01 <- NOTE: a bug in the UI will make this show up 'empty'
+   choose it anyway as shown: <br> ![image](~/images/ui-terminator-bug.png)
+1. In the "Address" box enter: `tcp:eth0.me:80`
+1. Click save
+
+# [New Terminator via CLI](#tab/create-terminator-cli)
+
+To create a new service using the CLI simply issue these two commands:
+
+    # create the service and refernce the cli config added earlier
+    ziti edge controller create terminator eth0.ziti.svc.cli "ziti-er01" tcp:eth0.me:80
 
 ***
 
@@ -129,29 +158,41 @@ Use policies to
 1. allow identities to use edge routers
 1. allow services to use edge routers
 
+> [!WARNING]
+> The policies shown here are for demonstration purposes only. These policies will grant all identities access
+> to all routers and all services. This is certainly not what you want in a production setup! Please read more
+> about policies and experiment with different combinations to understand how best to apply policies in an 
+> actual network
+
 [Read more about Policies here](~/ziti/policies/overview.md)
 
 ### [New Policies via UI](#tab/create-policies-ui)
-
-### New Service Policy
-
-1. On the left side nav bar, click "Ziti Policies"
-1. On the top nav bar, click "Service Policies"
-1. In the top right corner of the screen click the "plus" image to add a new Service Policy
-1. Choose a name for the Service Policy. Enter "my-first-service-policy"
-1. Select "Dial" in the Type dropdown
-1. Enter `#all` in the Service Roles input. `#all` is a special role attribute which matches all entities.
-1. Enter `#all` in the Identity Roles input. `#all` is a special role attribute which matches all entities.
-1. Click save
 
 ### New Edge Router Policy
 
 1. On the left side nav bar, click "Ziti Policies"
 1. It should already be selected, but if not, on the top nav bar, click "Edge Router Policies"
 1. In the top right corner of the screen click the "plus" image to add a new Edge Router Policy
-1. Choose a name for the Edge Router Policy. Enter "my-first-edge-router-policy"
-1. Enter `#all` in the Identity Roles input. `#all` is a special role attribute which matches all entities.
-1. Enter `#all` in the Router Roles input. `#all` is a special role attribute which matches all entities.
+1. Choose a name for the Edge Router Policy, enter: `All Edge Routers`
+1. Inside the "Router Roles" box, type `#all` and press the enter key. Make sure the `#all` tag gets applied. It should
+   look like this: <br> ![image](~/images/all-edge-routers.png)
+1. Inside the "Identity Roles" box, type `#all` and press the enter key. Make sure the `#all` tag gets applied. It should
+   look like this: <br> ![image](~/images/all-identities.png)
+1. Leave the "Semantics" box as "Has Any Role"
+1. Click save
+
+### New Service Policy
+
+1. On the left side nav bar, click "Ziti Policies"
+1. On the top nav bar, click "Service Policies"
+1. In the top right corner of the screen click the "plus" image to add a new Service Policy
+1. Choose a name for the Service Policy, enter: `All Services - Dial`
+1. In the "Type" dropdown, change select "Dial"
+1. Inside the "Service Roles" box, type `#all` and press the enter key. Make sure the `#all` tag gets applied. It should
+   look like this: <br> ![image](~/images/all-services.png)
+1. Inside the "Identity Roles" box, type `#all` and press the enter key. Make sure the `#all` tag gets applied. It should
+   look like this: <br> ![image](~/images/all-identities.png)
+1. Leave the "Semantics" box as "Has Any Role"
 1. Click save
 
 ### New Service Edge Router Policy
@@ -159,23 +200,32 @@ Use policies to
 1. On the left side nav bar, click "Ziti Policies"
 1. On the top nav bar, click "Service Edge Router Policies"
 1. In the top right corner of the screen click the "plus" image to add a new Edge Router Policy
-1. Choose a name for the Edge Router Policy. Enter "my-first-service-edge-router-policy"
-1. Enter `#all` in the Router Roles input. `#all` is a special role attribute which matches all entities.
-1. Enter `#all` in the Service Roles input. `#all` is a special role attribute which matches all entities.
+1. Choose a name for the Edge Router Policy, enter: `All Edge Routers All Services`
+1. Inside the "Router Roles" box, type `#all` and press the enter key. Make sure the `#all` tag gets applied. It should
+   look like this: <br> ![image](~/images/all-edge-routers.png)
+1. Inside the "Service Roles" box, type `#all` and press the enter key. Make sure the `#all` tag gets applied. It should
+   look like this: <br> ![image](~/images/all-services.png)
+1. Leave the "Semantics" box as "Has Any Role"
 1. Click save
 
 # [New Policies via CLI](#tab/create-policies-cli)
 
-[To create some policies using the CLI issue the following commands:
+To create some policies using the CLI issue the following commands:
 
-    # Create a service policy which allows all identities to use all services 
-    ziti edge controller create service-policy dial-all Dial --service-roles '#all' --identity-roles '#all'
+> [!NOTE]
+> If you are not already, you will need to be logged in to use the ziti cli.
+
+[!include[](~/ziti/cli-snippets/login.md)]
     
     # Create an edge router policy which allows all identities to use all edge routers 
-    ziti edge controller create edge-router-policy allEdgeRouters --edge-router-roles '#all' --identity-roles '#all'
+    ziti edge controller create edge-router-policy all-edge-routers-cli --edge-router-roles '#all' --identity-roles '#all'
+    
+    # Create a service policy which allows all identities to use all services 
+    ziti edge controller create service-policy all-services-dial-cli Dial --service-roles '#all' --identity-roles '#all'
     
     # Create a service edge router policy which allows all services to use all edge routers
-    ziti edge controller create service-edge-router-policy allSvcRouter --edge-router-roles '#all' --service-roles '#all'
+    ziti edge controller create service-edge-router-policy all-edge-routers-all-services --edge-router-roles '#all' --service-roles '#all'
+    
 ***
 
 ## Test It
