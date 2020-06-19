@@ -2,15 +2,12 @@
 
 [!include[](~/ziti/clients/tunneler-overview.md)]
 
-Each tunneller operates similarly. The goal is to have the tunneler intercecpt traffic destined for Ziti
-services and forward that traffic over the Ziti overlay instead of the underlay network.  There are two basic modes a
-tunneler operate in: seamless and proxy. A seamless tunneler will transparently intercept traffic via IPv4 address or
-DNS whereas a tunneler in proxy mode works as a proxy. Seamless mode is transparent to existing services and
-applications. Proxy mode is not as transparent at all. It requires applications to send traffic to the localhost proxy
-specifically. This means when running in proxy mode - it does not do any intercepting at all.
+Tunneler behaves similarly for all desktop and mobile operating systems. The goal is for Tunneler to direct traffic matching a Ziti
+service over the Ziti overlay instead of the underlay network.
 
-Here you can learn about the
-ways each tunneler operates and see the similarities as well as any differences.
+The default mode of operation for Tunneler is to configure the operating system's DNS resolver to check with Tunneler for matches before recursing internet nameservers. Alternatively, the command-line interface (CLI) versions of Tunneler offers a `proxy` mode that binds a particular service to a particular local port instead of matching the IP destination or domain name.
+
+Scroll down to know more about operating Tunneler on each operating system.
 
 [!include[](./linux.md)]
 
