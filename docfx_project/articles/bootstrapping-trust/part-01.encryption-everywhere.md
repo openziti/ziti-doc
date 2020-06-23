@@ -131,26 +131,35 @@ We will cover that in parts three and four, read on!
 
 Here are the high-level steps:
 
-creating a CA configuration creating the CA using the CA's public key to
-sign all of the public certificates distribute the CA's certificate
+1. create a CA configuration via OpenSSL CNF files
+1. create the CA
+1. using the CA's public key to sign all of the public
+  certificates
+1. distribute the CA's certificate to every machine
+1. configure the machines certificate store or configure the software
 
 For items one and two, the process can be a bit mystical. There is a
 slew of options involved in managing a CA. To perform number three, you
 will need to go through the processing of creating CSRs on behalf of the
 piece of software, and someone will have to play the role of the CA and
-resolve those CSRs. All of these actions can all be done via a CLI or
-programmatically. You will have to spend time and energy, making sure
-the options are correctly set and learning about all the different
-capabilities and extensions. Mistakes will inevitably occur. It is
-time-consuming to debug why a specific public certificate is not working
-as intended. The tools and systems that use the certificates are
-purposely vague in error messages as not to reveal too much information
-to attackers.
+resolve those CSRs. The last two steps will depend on the OS and
+software that is being configured.
+
+All of these actions can all be done via a CLI or programmatically. You
+will have to spend time and energy, making sure the options are
+correctly set and learning about all the different capabilities and
+extensions. Mistakes will inevitably occur. It is time-consuming to
+debug why a specific public certificate is not working as intended. The
+tools and systems that use the certificates are purposely vague in error
+messages as not to reveal too much information to attackers.
 
 Once configured, there are still other concerns need to be taken into
-account: What happens when systems are removed/added? What happens when
-a certificate expires? How does a system know not to trust a certificate
-anymore?
+account:
+
+- What happens when systems are removed/added?
+- What happens when a certificate expires? How does a system know not to
+  trust a certificate anymore?
+- What happens when private keys need to regenerated?
 
 Remember, the systems deferred trust to the CA, which means it is
 independent of the software. CAs do not automatically handle the
@@ -160,20 +169,25 @@ without additional software. There is also the issue of certificates
 expiring. That "-dash 360" puts a lifetime on each certificate. You
 could make that incredibly long but exposes your system to having
 incredibly old certificates around when encryption and the methods to
-defeat it have had ample time to improve.
+defeat it have had ample time to improve. Also, it is possible that a
+private key's strength, might need to be improved by generating new
+keys. This can happen when security vulnerabilities are found. New
+private keys automatically require new certificates.
 
-Now we have to talk about the seed of trust. So far, you could have
-imagined that a human was doing all of this work. In that case, you are
-trusting a human operator to properly configure all of the systems while
-accessing the most sensitive parts of the process: the private keys. The
-seed of trust is in that human. If this is a software system performing
-these actions, that means that the system has to be trusted and most
-likely have access to every other system coming online. That is
-workable, but what happens when your system can have people external to
-your system request to add software pieces to the network. How can that
-be handled? How do you trust that system in the first place to trust it?
-Using a secret password creates a single, exploitable, weak point.
-Public-key cryptography could be put in place, but then we are in and
+Even if we ignore all of those concerns: who did we trust to get this
+system setup? Whatever or whoever that was was our seed of trust: the
+thing we first trusted. So far, you could have imagined that a human was
+doing all of this work. In that case, you are trusting a human operator
+to properly configure all of the systems while accessing the most
+sensitive parts of the process: the private keys. The seed of trust is
+in that human. If this is a software system performing these actions,
+that means that the system has to be trusted and most likely have access
+to every other system coming online. That is workable, but what happens
+when your system can have people external to your system request to add
+software pieces to the network. How can that be handled? How do you
+trust that system in the first place to trust it? Using a secret
+password creates a single, exploitable, weak point. Public-key
+cryptography could be put in place, but then we are in and
 chicken-and-egg scenario. We are putting public-key cryptography in
 place to put automate public-key cryptography.
 
