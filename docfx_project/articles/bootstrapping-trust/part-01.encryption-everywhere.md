@@ -120,14 +120,16 @@ Then you will need to copy each public certificate to every other
 machine and configure your software so that it trusts that certificate.
 The system will need to repeat this process any time the system adds a
 piece of software. If a machine is compromised, the analogous public
-certificate will need to be untrusted on each machine in the system.
+certificate will need to be untrusted on each machine in the system. To
+combat this problem, Certificate Authorities (CA) can help. !
 
-To combat this problem, Certificate Authorities (CA). A CA enables trust
-deferral from multiple individual certificates to a single certificate.
-Meaning, that instead of trusting each certificate, each piece of
-software will trust the CA, and the CA will be used to sign every public
-certificate, our software pieces need to use. How does "signing" work?
-We will cover that in parts three and four, read on!
+#### CAs & Adding Complexity
+
+A CA enables trust deferral from multiple individual certificates to a
+single certificate. Meaning, that instead of trusting each certificate,
+each piece of software will trust the CA, and the CA will be used to
+sign every public certificate, our software pieces need to use. How does
+"signing" work? We will cover that in parts three and four, read on
 
 Here are the high-level steps:
 
@@ -153,8 +155,10 @@ debug why a specific public certificate is not working as intended. The
 tools and systems that use the certificates are purposely vague in error
 messages as not to reveal too much information to attackers.
 
-Once configured, there are still other concerns need to be taken into
-account:
+#### Further Concerns
+
+Once the security defined above is configured, there are still other
+concerns need to be taken into account:
 
 - What happens when systems are removed/added?
 - What happens when a certificate expires? How does a system know not to
