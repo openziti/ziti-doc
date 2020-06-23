@@ -31,11 +31,11 @@ Zero Trust environment.
 
 The parts are as follows.
 
-- Part 1: Encryption Everywhere
-- Part 2: A Primer On Public-Key Cryptography
-- Part 3: Certificates
-- Part 4: Certificate Authorities & Chains Of Trust Part 5:
-  Bootstrapping Trust
+- [Part 1: Encryption Everywhere](./part-01.encryption-everywhere.md)
+- [Part 2: A Primer On Public-Key Cryptography](./part-02.a-primer-on-public-key-cryptography.md)
+- [Part 3: Certificates](./part-03.certificates.md)
+- [Part 4: Certificate Authorities & Chains Of Trust](./part-04.certificate-authorities-and-chains-of-trust.md)
+- [Part 5: Bootstrapping Trust](./part-05.bootstrapping-trust.md)
 
 ### Trust & Distributed Systems
 
