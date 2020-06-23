@@ -43,7 +43,7 @@ Developing applications that are composed of distributed pieces of
 software that require network connectivity amongst themselves is a
 challenging problem to solve. Multiple pieces of software must be
 configured with encryption to identify itself and to trust the other
-parts of the software. This process is "bootstrapping trust," as it
+parts of the software. This process is "bootstrapping trust." It
 involves taking a system with no trust to one that has secure
 connections amongst them that can verify each connection made. It is not
 a simple task. It requires multiple levels of choices that need to be
@@ -75,9 +75,9 @@ The correct answer to this problem is public-key cryptography. This type
 of encryption allows multiple secrets to exist, and those secrets
 inherently identify both sides of a connection. On top of that,
 public-key cryptography currently provides some of the most robust
-encryption that is available today. It seems like a slam dunk! Alas, it
-introduces some complex behaviors and setup and management is not always
-as easy as one would hope for.
+encryption available today. It seems like a slam dunk! Alas, it
+introduces some complex behaviors. Setup and management are not always
+as easy as one would hope.
 
 
 #### Setting It Up
@@ -96,8 +96,10 @@ cryptography.
 
 ![Image of a simple mesh](./images/mesh.png)
 
-Each needs its own key pair for client & server connections Each needs
-to know about all the other public keys of everyone they connecting to
+In the diagram above, each system needs:
+
+- a key pair for client & server connections
+- to have the public keys of everyone it is connecting to
 
 So what do we need to do? Drop into a CLI and start generating keys on
 each machine. Do that by using these commands:
@@ -120,32 +122,31 @@ Then you will need to copy each public certificate to every other
 machine and configure your software so that it trusts that certificate.
 The system will need to repeat this process any time the system adds a
 piece of software. If a machine is compromised, the analogous public
-certificate will need to be untrusted on each machine in the system. To
-combat this problem, Certificate Authorities (CA) can help. !
+certificate will need to be untrusted on each node. To combat this
+problem, Certificate Authorities (CA) can help!
 
 #### CAs & Adding Complexity
 
 A CA enables trust deferral from multiple individual certificates to a
-single certificate. Meaning, that instead of trusting each certificate,
-each piece of software will trust the CA, and the CA will be used to
-sign every public certificate, our software pieces need to use. How does
-"signing" work? We will cover that in parts three and four, read on
+single certificate. Meaning that instead of trusting each certificate,
+each piece of software will trust the CA. The CA will be used to sign
+every public certificate our software pieces need to use. How does
+"signing" work? We will cover that in parts three and four, read on.
 
 Here are the high-level steps:
 
 1. create a CA configuration via OpenSSL CNF files
-1. create the CA
-1. using the CA's public key to sign all of the public
-  certificates
-1. distribute the CA's certificate to every machine
-1. configure the machines certificate store or configure the software
+2. create the CA
+3. using the CA's public key to sign all of the public certificates
+4. distribute the CA's certificate to every machine
+5. configure the machines certificate store or configure the software
 
 For items one and two, the process can be a bit mystical. There is a
 slew of options involved in managing a CA. To perform number three, you
 will need to go through the processing of creating CSRs on behalf of the
 piece of software, and someone will have to play the role of the CA and
 resolve those CSRs. The last two steps will depend on the OS and
-software that is being configured.
+software.
 
 All of these actions can all be done via a CLI or programmatically. You
 will have to spend time and energy, making sure the options are
@@ -157,26 +158,27 @@ messages as not to reveal too much information to attackers.
 
 #### Further Concerns
 
-Once the security defined above is configured, there are still other
-concerns need to be taken into account:
+Once configured, there are still other concerns need to be taken into
+account:
 
 - What happens when systems are removed/added?
-- What happens when a certificate expires? How does a system know not to
-  trust a certificate anymore?
-- What happens when private keys need to regenerated?
+- What happens when a certificate expires?
+- How does a system know not to trust a certificate anymore?
+- What happens when private keys need to regenerate?
 
 Remember, the systems deferred trust to the CA, which means it is
 independent of the software. CAs do not automatically handle the
-propagation of these types of events. CAs are files on a secure system.
-Issuing or revoking certificates does not generate any kind of event
-without additional software. There is also the issue of certificates
-expiring. That "-dash 360" puts a lifetime on each certificate. You
-could make that incredibly long but exposes your system to having
-incredibly old certificates around when encryption and the methods to
-defeat it have had ample time to improve. Also, it is possible that a
-private key's strength, might need to be improved by generating new
-keys. This can happen when security vulnerabilities are found. New
-private keys automatically require new certificates.
+propagation of these types of events. CAs are data files on a storage
+device. Issuing or revoking certificates does not generate any kind of
+event without additional software. There is also the issue of
+certificates expiring. That "-dash 360" puts a lifetime on each
+certificate. You could make that incredibly long but exposes your system
+to having incredibly old certificates around when encryption and the
+methods to defeat it have had ample time to improve. Also, a private
+key's strength might need enhancement by generating new keys. Replacing
+private keys is necessary when with the advent of security
+vulnerabilities and improved cryptography. New private keys
+automatically require new certificates.
 
 Even if we ignore all of those concerns: who did we trust to get this
 system setup? Whatever or whoever that was was our seed of trust: the
@@ -199,4 +201,3 @@ There are many caveats to bootstrapping trust. In a dynamic distributed
 system where pieces of software can come at the whim of network
 operators, the issues become a mountain of concerns. Thankfully in Ziti,
 a mechanism is provided that abstracts all of this process.
-
