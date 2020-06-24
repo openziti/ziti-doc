@@ -240,12 +240,12 @@ ziti-tunnel has a mode which acts as a proxy into the Ziti overlay network.  You
 file created in the previous step and this will require running a command. Here are the steps to verify your Ziti
 network and configuration are all working properly:
 
-* Open a command prompt
-* ensure ziti-tunnel and NewUser.json are in the same directory and cd to this directory
-* run the ziti-tunnel in proxy mode:
-  * `ziti-tunnel proxy -i NewUser.json ethzero-ui:1111`
-  * `ziti-tunnel proxy -i NewUser.json ethzero-cli:2222`
-* navigate your web browser to (or use curl) to obtain your IP address by going to http://localhost:1111/
+Open a command prompt
+* Ensure ziti-tunnel and NewUser.json are in the same directory and cd to this directory
+* Run the ziti-tunnel in proxy mode 
+  * `ziti-tunnel proxy -i NewUser.json ethzero-ui:1111  (use if you created service via UI)` 
+  * `ziti-tunnel proxy -i NewUser.json ethzero-cli:1111 (use if created service via CLI)`
+* Navigate your web browser to (or use curl) to obtain your IP address by going to http://localhost:1111/
 
 At this point you should see the external IP address of your instance. Delivered to your machine safely and
 securely over your Ziti network.
