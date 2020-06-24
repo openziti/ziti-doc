@@ -201,3 +201,7 @@ There are many caveats to bootstrapping trust. In a dynamic distributed
 system where pieces of software can come at the whim of network
 operators, the issues become a mountain of concerns. Thankfully in Ziti,
 a mechanism is provided that abstracts all of this process.
+
+---
+Written By: Andrew Martinez
+June 2020

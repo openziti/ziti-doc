@@ -162,3 +162,7 @@ that JWT to any system which can then verify that the contents are valid
 and from a trusted identity provider as long as the public key is
 available. The bearer tokens can also contain claims which grant the
 bearer rights on a system.
+
+---
+Written By: Andrew Martinez
+June 2020

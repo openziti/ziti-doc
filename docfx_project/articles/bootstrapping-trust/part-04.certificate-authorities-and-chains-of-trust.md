@@ -176,4 +176,6 @@ management, flexible mesh routing, and more. The goal of this article is
 to focus on bootstrapping trust. So in the last article, let us see how
 all of this comes together.
 
-
+---
+Written By: Andrew Martinez
+June 2020

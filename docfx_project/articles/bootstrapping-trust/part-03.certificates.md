@@ -175,4 +175,6 @@ because they package all of these concerns into a neat single file. In
 the next part, we will explore how to create a formidable chain of
 trust.
 
-
+---
+Written By: Andrew Martinez
+June 2020

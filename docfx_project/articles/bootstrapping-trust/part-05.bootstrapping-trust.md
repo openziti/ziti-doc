@@ -139,3 +139,7 @@ validated as trusted. No individual piece of software trusts any other
 for inbound or outbound connections. Trust has been successfully
 bootstrapped! Now we enter a maintenance window where trust has to be
 verified continuously and maintained.
+
+---
+Written By: Andrew Martinez
+June 2020
