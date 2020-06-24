@@ -17,7 +17,7 @@ have not, please consider reading the whole series:
 Not all certificates are the same! Certificates have different
 capabilities depending on their usage attributes and extensions. The
 previous article in this series mentioned a few of those attributes and
-extensions. Two of those were `clientAuth,` for client certficiates, and
+extensions. Two of those were `clientAuth,` for client certificates, and
 `serverAuth,` for server certificates, which play an essential role in
 how a certificate is used during network authentication negotiations.
 These roles are crucial, as they are a contract for what attributes and
@@ -120,7 +120,7 @@ Visually this would appear as follows:
 This PKI has two chains of trust: Chain A and Chain B. They are called
 chains because the signatures link the certificates together. Root A has
 signed Intermediate A's certificate and Intermediate A has signed Server
-A certificate. Programatically we can traverse these signatures and
+A certificate. Programmatically we can traverse these signatures and
 verify them using the public certificates of each signatory. Trusting
 Root A will trust Server A. Trusting Intermediate A will also trust
 Server A.
@@ -134,7 +134,7 @@ trust that do not interact in any fashion.
 Returning to Chain A, trusting Intermediate A designates it as a "trust
 anchor." Any certificate can be a trust anchor. The certificate used as
 a trust anchor determines which certificates will additionally be
-trusted. A leaf certificate as a trust anchor only tursts that one
+trusted. A leaf certificate as a trust anchor only trusts that one
 certificate. Trusting a CA trusts all certificates that it has signed
 itself or any of its intermediates.
 
