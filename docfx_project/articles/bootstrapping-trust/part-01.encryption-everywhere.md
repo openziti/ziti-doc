@@ -8,7 +8,7 @@ Bootstrapping Trust is a series highlighting a common problem dealing
 with software systems that span multiple machines over any network. All
 networks, private (like your office/data center) or public (like the
 internet), should be considered insecure. Firewalls and segmented
-networks are not enough. Network professionals have segmenting networks
+networks are not enough. Network professionals have segmented networks
 and started praising application-specific networking, but even those
 aren't enough. The next step is simply not trusting the network.
 
