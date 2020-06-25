@@ -101,7 +101,7 @@ enrolling identity to check each other for compatibility. It provides
 many benefits! Below is a detailed image of each step of the enrollment
 process.
 
-[!Enrollment Diagram](./images/enrollment-full.png)
+![Enrollment Diagram](./images/enrollment-full.png)
 
 Let's break those steps down:
 
