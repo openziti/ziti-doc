@@ -248,6 +248,7 @@ Open a command prompt
     
     # [Created Service via CLi](#tab/Test-cli)
     `ziti-tunnel proxy -i NewUser.json ethzero-cli:1111 (use if created service via CLI)`
+    ***
 * Navigate your web browser to (or use curl) to obtain your IP address by going to http://localhost:1111/
 
 At this point you should see the external IP address of your instance. Delivered to your machine safely and
