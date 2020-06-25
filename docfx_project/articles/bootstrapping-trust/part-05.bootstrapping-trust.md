@@ -32,11 +32,11 @@ without the hassle of setting it up yourself. Together they are a
 powerful combo of optimized long halt routing and access and trust
 management.
 
-[!Ziti Edge and Fabric](./images/fabric-edge.png)
+![Ziti Edge and Fabric](./images/fabric-edge.png)
 
 A small scale example Ziti system appears as follows:
 
-[!A sample Ziti system](./images/ziti-system.png)
+![A sample Ziti system](./images/ziti-system.png)
 
 Ziti Edge has the concepts of identities for endpoint SDKs and routers.
 Both require certificates signed by a trusted CA, and Ziti can generate
