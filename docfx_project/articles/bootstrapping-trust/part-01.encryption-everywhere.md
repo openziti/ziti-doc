@@ -8,9 +8,8 @@ Bootstrapping Trust is a series highlighting a common problem dealing
 with software systems that span multiple machines over any network. All
 networks, private (like your office/data center) or public (like the
 internet), should be considered insecure. Firewalls and segmented
-networks are not enough. Network professionals have segmented networks
-and started praising application-specific networking, but even those
-aren't enough. The next step is simply not trusting the network.
+networks are not enough. Even application specific networking is not
+enough. The next step is to not trust the network.
 
 This thought process is a new way of conceptualizing network security
 and is referred to as "Zero Trust." Not that trust is not present, far
@@ -203,5 +202,6 @@ operators, the issues become a mountain of concerns. Thankfully in Ziti,
 a mechanism is provided that abstracts all of this process.
 
 ---
-Written By: Andrew Martinez
+
+Written By: Andrew Martinez  
 June 2020
