@@ -6,4 +6,14 @@
         href: ./c-sdk-on-beaglebone.md
       - name: Bootstrapping Trust
         href: ./bootstrapping-trust/part-01.encryption-everywhere.md
-
+        items:
+          - name: "Part 1: Encryption Everywhere"
+            href: ./bootstrapping-trust/part-01.encryption-everywhere.md
+          - name: "Part 2: A Primer On Public-Key Cryptography"
+            href: ./bootstrapping-trust/part-02.a-primer-on-public-key-cryptography.md
+          - name: "Part 3: Certificates"
+            href: ./bootstrapping-trust/part-03.certificates.md
+          - name: "Part 4: Certificate Authorities & Chains Of Trust"
+            href: ./bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust.md
+          - name: "Part 5: Bootstrapping Trust"
+            href: ./bootstrapping-trust/part-05.bootstrapping-trust.md

@@ -111,7 +111,7 @@ the input data as the hash size is usually fixed length.
 
 For example, here is the Ziti logo:
 
-![Image of a simple mesh](./images/ziti.png)
+![Image of a simple mesh](./images/ziti-system.png)
 
 This logo's file can be hashed using SHA-256 via the `sha256sum` command
 commonly found on Linux.
