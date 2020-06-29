@@ -50,7 +50,10 @@
           "index.html",
           "policies/*.html",
           "policies/*.pdf",
-          "api/clang/api/**"
+          "api/clang/api/**",
+          "articles/**/*.png",
+          "articles/**/*.svg",
+          "articles/**/*.gif"
         ]
       }
     ],

@@ -1,2 +1,9 @@
 - name: Articles
   href: index.md
+  topicHref: ./index.md
+  items:
+      - name: Ziti Up and Running on BeagleBone
+        href: ./c-sdk-on-beaglebone.md
+      - name: Bootstrapping Trust
+        href: ./bootstrapping-trust/part-01.encryption-everywhere.md
+
