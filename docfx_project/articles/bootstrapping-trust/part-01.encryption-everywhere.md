@@ -63,12 +63,10 @@ hardware security modules.
 
 Taking it a step further, we can put individual secrets on each machine
 that each other machine needs to know. If this secret is a password, we
-now have multiple passwords that each identify the connection between
-each machine. Having more secrets is slightly "better," but not great.
-This solution requires the management of all those passwords. A
-compromised machine now means that every password on that machine is
-compromised, which hopefully is a subset of the password, so the impact
-is somewhat limited. However, this is still a mess to manage.
+now have multiple passwords on each machine. Having more secrets is a
+slight improvement. This solution requires the management of those
+passwords and a single compromised machine will affect multiple
+passwords.
 
 The correct answer to this problem is public-key cryptography. This type
 of encryption allows multiple secrets to exist, and those secrets
