@@ -168,7 +168,7 @@ it provides all of the following:
 This type of system allows each device to have its own secret, private
 key, that provides its unique identity. That private key is tied to a
 public key. The public key can be used to encrypt messages that only the
-private key holder can decrypt. In addition, the private key cannot be
+private key holder can decrypt. In addition, the public key cannot be
 used to derive the original private key. This functionality fits
 perfectly for what our distributed system needs! Alas, public-key
 cryptography introduces complex behaviors, setup and management. In the
