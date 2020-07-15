@@ -13,15 +13,17 @@ have not, please consider reading the whole series:
 
 ### Ziti
 
-In this series of articles are exploring bootstrapping trust and what
-that means. Part of the ZIti software system is to provide a method to
-bootstrap trust via its enrollment process. All identities in Ziti have
-a key pair that identifies that individual. The enrollment process
-abstracts away the process of setting up keys, certificates, CSRs, CAs,
-and having each software component of Ziti trust the necessary
-certificates. The Ziti SDK can be embedded within any application and
-enroll with a Ziti instance - instantly granting it secure, encrypted,
-and trusted connections that provide part of Ziti's Zero Trust model.
+In this series of articles we are exploring bootstrapping trust and what
+that means and how it enables Zero Trust security methodologies. Ziti
+provides a method to bootstrap trust via its enrollment process. For
+Ziti the enrollment process is bootstrapping trust. All identities in
+Ziti have a key pair that identifies that individual. The enrollment
+process abstracts away the process of setting up keys, certificates,
+CSRs, CAs, and having each software component of Ziti trust the
+necessary certificates. The Ziti SDK can be embedded within any
+application and enroll with a Ziti network - instantly granting it
+secure, encrypted, and trusted connections that provide part of Ziti's
+Zero Trust model.
 
 
 Ziti has the concept of the Edge, which sits on top of the Fabric. The
@@ -141,5 +143,5 @@ bootstrapped! Now we enter a maintenance window where trust has to be
 verified continuously and maintained.
 
 ---
-Written By: Andrew Martinez
-June 2020
+
+Written By: Andrew Martinez June 2020
