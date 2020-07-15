@@ -38,7 +38,7 @@ management.
 
 A small scale example Ziti system appears as follows:
 
-<img src="./images/ziti-system.png" style="width: 50%; margin: 0 auto; display: block;">
+<img src="./images/ziti-system.png" style="width: 80%; margin: 0 auto; display: block;">
 
 Ziti Edge has the concepts of identities for endpoint SDKs and routers.
 Both require certificates signed by a trusted CA, and Ziti can generate
