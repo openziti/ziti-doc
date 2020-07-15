@@ -196,7 +196,7 @@ What matters is that this system has multiple pieces of software
 connecting amongst themselves. Consider what it means to accomplish this
 using public-key cryptography.
 
-![Image of a simple mesh](./images/mesh.png)
+<img src="./images/mesh.png" style="display: block; width: 50%; margin: 0px auto;">
 
 In the diagram above, each system needs:
 
