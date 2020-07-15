@@ -178,4 +178,5 @@ will explore how to create a formidable chain of trust.
 
 ---
 
-Written By: Andrew Martinez June 2020
+Written By: Andrew Martinez  
+June 2020

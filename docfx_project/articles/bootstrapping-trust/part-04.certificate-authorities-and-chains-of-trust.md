@@ -17,8 +17,8 @@ have not, please consider reading the whole series:
 Not all certificates are the same! Certificates have different
 capabilities depending on their usage attributes and extensions. The
 previous article in this series mentioned a few of those attributes and
-extensions. Two of those were `clientAuth,` for client certificates, and
-`serverAuth,` for server certificates, which play an essential role in
+extensions. Two of those were `clientAuth`, for client certificates, and
+`serverAuth`, for server certificates, which play an essential role in
 how a certificate is used during network authentication negotiations.
 These roles are crucial, as they are a contract for what attributes and
 extensions should be included in the certificate to make it useful. For
@@ -115,7 +115,7 @@ Consider the following PKI setup:
 
 Visually this would appear as follows:
 
-![Image of a chain of trust](./images/chains.png)
+<img src="./images/chains.png" style="width: 50%; margin: 0 auto; display: block;">
 
 This PKI has two chains of trust: Chain A and Chain B. They are called
 chains because the signatures link the certificates together. Root A has
@@ -173,9 +173,11 @@ abstracts away this security setup for both its internal routers and
 client-owned endpoints/SDKs. This setup allows application-specific
 networking with strong identity verification, powerful policy
 management, flexible mesh routing, and more. The goal of this article is
-to focus on bootstrapping trust. So in the last article, let us see how
-all of this comes together.
+to focus on bootstrapping trust. So in the
+[last article](./part-05.bootstrapping-trust.md), let us see how all of
+this comes together.
 
 ---
-Written By: Andrew Martinez
+
+Written By: Andrew Martinez  
 June 2020
