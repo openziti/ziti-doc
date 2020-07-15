@@ -155,14 +155,29 @@ state that data was approved by them and not altered. It is also
 publicly verifiable. This allows many decentralized approaches to
 sharing data that can have its source and content verified.
 
-JSON Web Tokens (JWTs) are a prevalent form of bearer token. They are a
-document that is signed by a trusted authentication system and contain
-data that states the client's identity. This client can then present
-that JWT to any system which can then verify that the contents are valid
-and from a trusted identity provider as long as the public key is
-available. The bearer tokens can also contain claims which grant the
-bearer rights on a system.
+Bearer tokens are and example of the power of signatures. Bearer tokens
+are a document that is signed by a trusted authentication system and
+contain data that provides information about the client presenting the
+token. Signing the token ensures that the content of the token has not
+been changed and has been endorsed by a trusted identity. An example of
+a bearer token is a
+[JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token)
+
+A JWT specifies the format of the bearer token as a header, payload, and
+signature using JSON. A client can then present a JWT to any system
+which can then verify that the contents are valid and from a trusted
+identity. As long as the signature is valid, the JWT can grant access to
+the client presenting it!
+
+# Closing
+
+This article should have shed light on on public-key cryptography by
+explaining the roles of the public and private keys. It should have also
+provided a glimpse at the power of encryption and digital signatures. In
+the following sections we will see both take a dominate role in
+bootstrapping trust.
 
 ---
-Written By: Andrew Martinez
+
+Written By: Andrew Martinez  
 June 2020
