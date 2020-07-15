@@ -75,7 +75,7 @@ can force all connections through the following process.
 2. Request Access To A Resource
 3. Connect To The Requested Resource
 
-To help make Zero Trust and Bootstrapping trust a bit clearer, it helps
+To help make Zero Trust and bootstrapping trust a bit clearer, it helps
 to have a concrete system to use an example. It just so happens that the
 Ziti software system makes a great example! Let us examine Ziti.
 
@@ -84,7 +84,7 @@ Controller. The Ziti Controller manages the Ziti overlay network. It
 maintains a list of known network services, SDK clients, routers,
 enrollments, policies, and much more! All of these pieces working
 together to create a Ziti Network. A Ziti Network is an overlay network
-\- meaning it creates a virtual network on top of some other network
+\- meaning it creates a virtual network on top of a concrete network
 referred to as the underlay network.
 
 In the Ziti Network, all network resources are modeled as services in
