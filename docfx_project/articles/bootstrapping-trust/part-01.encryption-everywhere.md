@@ -316,7 +316,11 @@ cryptography in place to put automate public-key cryptography.
 There are many caveats to bootstrapping trust. In a dynamic distributed
 system where pieces of software can come and go at the whim of network
 operators, the issues become a mountain of concerns. Thankfully in Ziti,
-a mechanism is provided that abstracts all of these issues.
+a mechanism is provided that abstracts all of these issues. To
+understand how Ziti accomplishes this we have a few more topics to
+discuss. In
+[part two](./part-02.a-primer-on-public-key-cryptography.md), we will
+chip away at those topics by covering public-key cryptography.
 
 ---
 

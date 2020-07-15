@@ -174,8 +174,8 @@ the client presenting it!
 This article should have shed light on on public-key cryptography by
 explaining the roles of the public and private keys. It should have also
 provided a glimpse at the power of encryption and digital signatures. In
-the following sections we will see both take a dominate role in
-bootstrapping trust.
+the [part three](././part-03.certificates.md) we will see both take a
+dominate role in bootstrapping trust.
 
 ---
 

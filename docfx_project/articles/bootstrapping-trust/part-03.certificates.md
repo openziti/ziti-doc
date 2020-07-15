@@ -15,7 +15,8 @@ In the series, we have covered public-key cryptography, where we learned
 about public keys and private keys and their uses for encryption and
 signing. Using keys to sign data will play an essential concept in this
 article. The most important is that signatures verify both the content
-of the data and its source. For more detail, see part two of this
+of the data and its source. For more detail, see
+[part two](./part-02.a-primer-on-public-key-cryptography.md) of this
 series!
 
 This article covers how certificates and certificate authorities (CAs)
@@ -145,7 +146,7 @@ The signature section of a certificate is a list of signatures from
 other entities that trust this certificate. A certificate that signs
 itself is a "self-signed certificate." Self-signed certificates must be
 individually trusted as no other certificate has expressed trust in it
-by signing it. Self-signed certificates sometimes used for testing
+by signing it. Self-signed certificates are sometimes used for testing
 purposes as they have a low barrier to entry for creating a certificate.
 They are also used as Root Certificate Authorities (root CAs).
 
@@ -172,9 +173,9 @@ that adds conventions and restrictions around certificate usages. They
 provide a place for signatures to resides and, through CSRs, provide a
 vehicle to request additional signatures. Certificates are useful
 because they package all of these concerns into a neat single file. In
-the next part, we will explore how to create a formidable chain of
-trust.
+the [part three](./part-03.certificates.md), we will explore how to
+create a formidable chain of trust.
 
 ---
-Written By: Andrew Martinez
-June 2020
+
+Written By: Andrew Martinez June 2020
