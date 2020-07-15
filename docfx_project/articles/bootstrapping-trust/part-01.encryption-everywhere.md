@@ -58,10 +58,9 @@ this defense, a series of Zero Trust pillars are defined:
 
 Those pillars, while short and vague, give rise to a challenge.
 Implementing those pillars is not a simple tweak to existing
-infrastructure. It is a series of challenges, and the first challenge
-will be how we move to a system that has the technology in place to
-verify connections? The answer to that is what this series calls
-"bootstrapping trust."
+infrastructure. It is a series of challenges. The first challenge will
+be moving to a system that has the technology in place to verify every
+connections in both directions.
 
 ### Ziti & Zero Trust
 
