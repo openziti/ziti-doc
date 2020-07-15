@@ -1,3 +1,3 @@
 ## MacOS
 
-The iOS tunneler is currently in preview. Find the app in the [Apple store here](https://apps.apple.com/us/app/ziti-tunnel/id1460484353)
+The MacOS tunneler is currently in preview. Find the app in the [MacOS Apple store here](https://apps.apple.com/us/app/ziti-tunnel/id1460484572?mt=12)
