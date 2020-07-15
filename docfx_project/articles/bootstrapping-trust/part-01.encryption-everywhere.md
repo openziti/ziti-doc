@@ -25,8 +25,8 @@ The parts are as follows.
 This entire series assumes some familiarity with Zero Trust. If you do
 not have a strong background in it, that is fine. This section should
 give the reader enough context to make use of the entire series. If a
-more in-depth understanding is desired, please consider reading Zero
-Trust Networks: Building Secure Systems in Untrusted Networks by Evan
+more in-depth understanding is desired, please consider reading *Zero
+Trust Networks: Building Secure Systems in Untrusted Networks* by Evan
 Gilman.
 
 Zero Trust is a security model that requires strict identity
@@ -56,11 +56,10 @@ this defense, a series of Zero Trust pillars are defined:
 - Least Privileged Access - access should only grant connectivity to the
   minimum number of resources
 
-Those pillars, while short and vague, give rise to a challenge.
-Implementing those pillars is not a simple tweak to existing
-infrastructure. It is a series of challenges. The first challenge will
-be moving to a system that has the technology in place to verify every
-connections in both directions.
+Those pillars, while short and vague, give rise to a series of
+challenges. Implementing those pillars is not a simple tweak to existing
+infrastructure. The first challenge will be moving to a system that has
+the technology in place to verify every connections in both directions.
 
 ### Ziti & Zero Trust
 
@@ -88,14 +87,16 @@ together to create a Ziti Network. A Ziti Network is an overlay network
 referred to as the underlay network.
 
 In the Ziti Network, all network resources are modeled as services in
-the Ziti Controller. All services on a Ziti Network are only accessible
-via the Ziti Network. Network services can be made available via a Ziti
-Network in a variety of manners. The preferred method is embedding the
-Ziti SDK inside of applications and servers as it provides the highest
-degree of Zero Trust security. However, it is also possible to configure
-various overly-to-underlay connections to existing network services via
-"router termination" or a particular type of application with the Ziti
-SDK embedded in it called a "tunneler."
+the Ziti Controller. All services on a Ziti Network should only
+accessible via the Ziti Network for maximum effect. Network services can
+be made available via a Ziti Network in a variety of manners. The
+preferred method is embedding the Ziti SDK inside of applications and
+servers as it provides the highest degree of Zero Trust security.
+However, it is also possible to configure various overlay-to-underlay
+connections to existing network services via "router termination" or a
+particular type of application with the Ziti SDK embedded in it that
+specifically deals with underlay-to-overlay translations (i.e. Ziti
+Desktop Edge/Mobile Edge).
 
 The Ziti Controller also knows about one or more Ziti Routers that form
 a mesh network that can create dynamic circuits amongst themselves.
@@ -103,40 +104,41 @@ Routers use circuits to move data across the Ziti Network. Routers can
 be configured to allow data to enter and exit the mesh. The most common
 entry/exit points are Ziti SDKs acting as clients or servers.
 
-Network clients wishing to attach the network use the Ziti SDK to first
-authenticate with the Ziti Controller. During authentication, the Ziti
-SDK client and Ziti Controller will verify each other. Upon successful
-authentication, the Ziti Controller can provide a list of available
-services to dial (connect) or to bind (host) for the authenticated SDK
-Client. The client can then request to dial or bind a service. If
-fulfilled, a session is associated with the client and service. This new
-session is propagated to the necessary Ziti Routers, and the required
-circuits are created. The requesting client is returned a list of Ziti
-Routers that can be connected to complete the last mile of communication
-between the Ziti Overlay Network and the SDK client.
+Network clients wishing to attach to the network use the Ziti SDK to
+first authenticate with the Ziti Controller. During authentication, the
+Ziti SDK client and Ziti Controller will verify each other. Upon
+successful authentication, the Ziti Controller can provide a list of
+available services to dial (connect) or to bind (host) for the
+authenticated SDK Client. The client can then request to dial or bind a
+service. If fulfilled, a session is associated with the client and
+service. This new session is propagated to the necessary Ziti Routers,
+and the required circuits are created. The client is returned the list
+of Ziti Routers which can be connected to in order to complete the last
+mile of communication between the Ziti overlay network and the SDK
+client.
 
 This set of steps covers the pillars of the Zero Trust model! The Ziti
 Controller and SDK Clients verify each other. The client cannot connect
 to network resources or services until it authenticates. After
 authentication, a client is given the least privilege access allowed by
 only being told about and only being able to dial/bind assigned
-services. It is a Zero Trust overly network!
+services. It is a Zero Trust overlay network!
 
 How did this system come into existence? How do the Ziti SDK client and
 Ziti Controller verify each other? How do the routers and controller
 know to validate each other? How is this managed at scale with hundreds
-o Ziti Routers and thousands of Ziti SDK clients? It seems that this is
-a recursive problem and to terminate the recursion we have to start our
-system with a well defined and carefully controlled seed of trust.
+of Ziti Routers and thousands of Ziti SDK clients? It seems that this is
+a recursive problem. To terminate the recursion, we have to start our
+system with a well-defined and carefully controlled seed of trust.
 
 # Trust
 
 In software systems that require network connectivity, there are at
 least two parties in the system. Generally, there are more and in the
-case of a Ziti network, there could be thousands. Between these parties,
+case of a Ziti network, there could be thousands. Between two parties,
 each time a connection is made, a trust decision is made. Should this
 connection be allowed? Mechanisms must be put into place to verify the
-identity of the connecting party.
+identity of the connecting party if that question is to be answered.
 
 One mechanism that might jump out at the reader is a password or secret.
 In Ziti it would be possible to configure the Controller, Routers, and
@@ -161,14 +163,14 @@ need to connect must have each other's secrets. Secret sharing will not
 do! We can not be copying secrets between every machine. One machine
 that is compromised would mean that many secrets will are revealed!
 
-This solution can be evolved and improved, but we do not have to it!
-Where this line of thought goes is right into existing technology that
-has already been solved for us! It is call (public-key
+This solution can be evolved and improved, but we do not have to
+continue improving the solution! If we did, we would end up recreating
+an existing technology. That technology is (public-key
 cryptography)[https://en.wikipedia.org/wiki/Public-key_cryptography],
 and it provides everything we need.
 
-Public-key cryptography allows each device to have a unique secret,
-private key, that prooves its unique identity. That private key is
+Public-key cryptography allows each device to have a unique, secret,
+private key that proves its unique identity. That private key is
 mathematically tied to a public key. The public key can be used to
 encrypt messages that only the private key holder can decrypt. Also, the
 public key cannot be used to derive the original private key. This
@@ -198,7 +200,7 @@ using public-key cryptography.
 
 In the diagram above, each system needs:
 
-- a key pair for client & server connections
+- a key pair for client and server connections
 - to have the public keys of each system it is connecting to
 
 So what do we need to do? Drop into a CLI and start generating keys on
@@ -212,12 +214,17 @@ openssl ecparam -name secp256k1-genkey -param_enc explicit -out private-key.pem
 openssl req -new -x509 -key private-key.pem -out server.pem -days 360
 ```
 
-Voila - you now have a self-signed certificate (that no one trusts). You
-can repeat this for every piece of software in your mesh network, as it
-initially will be deployed. Preferably, you log into each machine and
-generate the private key there. Moving private keys on and off devices
-is a security risk and frowned upon. For maximum security, you would
-work with a
+Voila - you now have a self-signed certificate! What is a self-signed
+certificate? For now let us understand it means that no other system has
+expressed trust in your public certificate. In
+[Part 4: Certificate Authorities & Chains Of Trust](./part-04.certificate-authorities-and-chains-of-trust.md)
+we will cover them in more detail.
+
+You can repeat the above process for every piece of software in your
+mesh network, as it initially will be deployed. Preferably, you log into
+each machine and generate the private key there. Moving private keys on
+and off devices is a security risk and frowned upon. For maximum
+security, you would work with a
 [Hardware Security Module (HSM)](https://en.wikipedia.org/wiki/Hardware_security_module)
 such as those available embedded into devices or as a fob.
 
@@ -228,9 +235,13 @@ piece of software. If a machine is compromised, the analogous public
 certificate will need to be untrusted on every node in the mesh.
 
 Wow, this seems like quite a bit of work. Consider what this means when
-adding a node or removing one? Vising each machine and reconfiguring it
-each time is quite a bit of overhead. Let us see how Certificate
-Authorities (CA) can help!
+adding a node or removing one? Visiting each machine and reconfiguring
+it each time is quite a bit of overhead. Let us see how Certificate
+Authorities (CAs) can help! In the next section we will high the
+highlights of CAs but see
+[Part 4: Certificate Authorities & Chains Of Trust](./part-04.certificate-authorities-and-chains-of-trust.md)
+for more details.
+
 
 #### CAs & Adding Complexity
 
@@ -238,10 +249,12 @@ A CA enables trust deferral from multiple individual certificates to a
 single certificate. Meaning that instead of trusting each certificate,
 each piece of software will trust the CA. The CA will be used to sign
 every public certificate our software pieces need to use. How does
-"signing" work? We will cover that in parts three and four in-depth. For
+"signing" work? We will cover that in
+[parts three](./part-03.certificates.md) and why it matters part in
+[four](./part-04.certificate-authorities-and-chains-of-trust.md). For
 now, the basics will be provided.
 
-Here are the high-level steps:
+Here are the high-level steps of using a CA:
 
 1. create a CA configuration via OpenSSL CNF files
 2. create the CA
@@ -251,18 +264,20 @@ Here are the high-level steps:
 
 For items one and two, the process can be a bit mystical. There are a
 multitude of options involved in managing a CA. To perform number three,
-you will need to go through the processing of creating CSRs on behalf of
-the piece of software, and someone or something will have to play the
-role of the CA and resolve the CSRs. The last two steps will depend on
-the OS and software.
+you will need to go through the processing of creating certificate
+signing requests (CSRs, see [parts three](./part-03.certificates.md) for
+more detail) on behalf of the piece of software, and someone or
+something will have to play the role of the CA and resolve the CSRs. The
+last two steps will depend on the operating system and software being
+used.
 
-All of these actions can all be done via a CLI or programmatically. You
-will have to spend time and energy, making sure the options are
-correctly set and learning about all the different capabilities and
-extensions. Mistakes will inevitably occur. It is time-consuming to
-debug why a specific public certificate is not working as intended. The
-tools and systems that use the certificates are purposely vague in error
-messages as not to reveal too much information to attackers.
+All of these actions can be done via a CLI or programmatically. You will
+have to spend time and energy, making sure the options are correctly set
+and learning about all the different capabilities and extensions.
+Mistakes will inevitably occur. It is time-consuming to debug why a
+specific public certificate is not working as intended. The tools and
+systems that use the certificates are purposely vague in error messages
+as not to reveal too much information to attackers.
 
 #### Further Concerns
 
@@ -284,20 +299,19 @@ of a certificate can be used to reduce attack windows and force the
 adoption of stronger encryption.
 
 Even if we ignore all of those concerns, who did we trust to get this
-system setup? What was our seed of trust? So far, you could have
-imagined that a human was doing all of this work. In that case, a human
-operator is trusted to properly configure all of the systems while
-accessing the most sensitive configuration. The seed of trust is in that
-human. If this is a software system performing these actions, that means
-that the system has to be trusted and most likely have access to every
-other system coming online. That is workable, but what happens when your
-system can have people external to your system request to add software
-pieces to the network. How can that be handled? How do you trust that
-system in the first place to trust it? Using a secret password creates a
-single, exploitable, weak point. Public-key cryptography could be put in
-place, but then we are in and chicken-and-egg scenario. We are putting
-public-key cryptography in place to put automate public-key
-cryptography.
+system setup? What was the seed of trust used to bootstrap trust? So
+far, you could have imagined that a human was doing all of this work. In
+that case, a human operator is trusted to properly configure all of the
+systems - trusting them with access to all of the private keys. The seed
+of trust is in that human. If this is a software system performing these
+actions, that means that the system has to be trusted and most likely
+have access to every other system coming online. That is workable, but
+what happens when your system can have external systems request to be
+added to the network? How can that be handled? How do you trust that
+system in the first place? Using a secret password creates a single,
+exploitable, weak point. Public-key cryptography could be put in place,
+but then we are in a chicken-and-egg scenario. We are putting public-key
+cryptography in place to put automate public-key cryptography.
 
 There are many caveats to bootstrapping trust. In a dynamic distributed
 system where pieces of software can come and go at the whim of network
