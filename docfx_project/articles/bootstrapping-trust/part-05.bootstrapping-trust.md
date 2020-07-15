@@ -34,11 +34,11 @@ without the hassle of setting it up yourself. Together they are a
 powerful combo of optimized long halt routing and access and trust
 management.
 
-![Ziti Edge and Fabric](./images/fabric-edge.png)
+<img src="./images/fabric-edge.png" style="width: 50%; margin: 0 auto; display: block;">
 
 A small scale example Ziti system appears as follows:
 
-![A sample Ziti system](./images/ziti-system.png)
+<img src="./images/ziti-system.png" style="width: 50%; margin: 0 auto; display: block;">
 
 Ziti Edge has the concepts of identities for endpoint SDKs and routers.
 Both require certificates signed by a trusted CA, and Ziti can generate
@@ -103,7 +103,8 @@ enrolling identity to check each other for compatibility. It provides
 many benefits! Below is a detailed image of each step of the enrollment
 process.
 
-![Enrollment Diagram](./images/enrollment-full.png)
+<img src="./images/enrollment-full.png" style="width: 50%; margin: 0 auto; display: block;">
+
 
 Let's break those steps down:
 
@@ -142,6 +143,16 @@ for inbound or outbound connections. Trust has been successfully
 bootstrapped! Now we enter a maintenance window where trust has to be
 verified continuously and maintained.
 
+# Conclusion
+
+Thank you for reading this far! If you completed the entire series, I hope
+it has been helpful. Zero Trust is a complicated topic and it requires a
+serious foundation in bootstrapping trust to get right. Hopefully this series
+starts you on your way. If you have time, please checkout (Ziti)[https://github.com/openziti]! It is the
+Zero Trust network overlay solution that I have personally worked on
+and was the inspiration for this series!
+
 ---
 
-Written By: Andrew Martinez June 2020
+Written By: Andrew Martinez  
+June 2020
