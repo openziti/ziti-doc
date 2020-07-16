@@ -97,7 +97,7 @@ The Ziti project welcomes contributions including, but not limited to, code, doc
     * [ziti-doc](https://github.com/openziti/ziti-doc): Documention (which you are currently reading)
 * A [Discourse forum](https://openziti.discourse.group/) is available 
 
-Ziti was developed and open sourced by [Netfoundry, Inc](https://netfoundry.io). Netfoundry continues to fund and contribute to Ziti. 
+Ziti was developed and open sourced by [NetFoundry, Inc](https://netfoundry.io). NetFoundry continues to fund and contribute to Ziti. 
 
 ## Overview of a Ziti Network
 

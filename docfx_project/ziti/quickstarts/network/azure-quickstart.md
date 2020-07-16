@@ -35,7 +35,7 @@ ensure the following:
 * You have an Azure Resource Group and you are able to make the necessary changes
 * From the Resource Group - click "Add" and find the Ziti Edge - Developer Edition
 * Click "Create" to start the creation wizard
-* On the "Basics" tab fill out the required options. Ensure you use the Username "nfziti" and uplaod a public key so you
+* On the "Basics" tab fill out the required options. Ensure you use the Username "nfadmin" and uplaod a public key so you
   can SSH to the machine after its deployed
 * Configure and choose options for "Disks"
 * Configure and choose options for "Networking"
