@@ -32,34 +32,33 @@ Gilman.
 Zero Trust is a security model that requires strict identity
 authentication and access verification on every connection at all times.
 It sets the tone for a system's security to say, "this system shall
-never assume the identity or access." Before the Zero Trust security
-models, IT infrastructures were set up as a series of security
-perimeters. Think of as a castle with walls and moats. The castle would
-have a set number of entry points with guards. Once past the guards and
-inside the castle, any visitors were trusted and had access to the
-castle. In the real world, passing the guards is analogous to
-authenticating with a machine or, at worst, connect the office network
-via WiFi or ethernet cable.
+never assume the identity or access of any connection." Before the Zero
+Trust security models, IT infrastructures were set up as a series of
+security perimeters. Think of as a castle with walls and moats. The
+castle would have a set number of entry points with guards. Once past
+the guards and inside the castle, any visitors were trusted and had
+access to the castle. In the real world, passing the guards is analogous
+to authenticating with a machine or, at worst, connect the office
+network via WiFi or ethernet cable.
 
 Zero Trust does away with the concept of having a central castle that
-assumes anyone inside the castle is trusted. It assumes that the castle
-has already been breached. That is to say, in the real world, we expect
-attackers to already be inside the network and for it to be a hostile
-environment. Any resources inside the network should be treated as
-publicly available on the internet and must be defended. To accomplish
-this defense, a series of Zero Trust pillars are defined:
+assumes anyone inside is trusted. It assumes that the castle has already
+been breached. That is to say, we expect attackers to already be inside
+the network and for it to be a hostile environment. Any resources inside
+the network should be treated as being publicly available on the
+internet and must be defended. To accomplish this defense, a series of
+Zero Trust pillars are defined:
 
 - Never Trust, Verify - the virtue of a connection should not grant
   access
 - Authenticate Before Connect - authentication should happen before
-  resources are connected to or requested
+  resources are connected to
 - Least Privileged Access - access should only grant connectivity to the
   minimum number of resources
 
-Those pillars, while short and vague, give rise to a series of
-challenges. Implementing those pillars is not a simple tweak to existing
-infrastructure. The first challenge will be moving to a system that has
-the technology in place to verify every connections in both directions.
+Implementing those pillars is not a simple tweak to existing
+infrastructure. The first point alone will have much of this series
+dedicated to it.
 
 ### Ziti & Zero Trust
 
@@ -74,17 +73,24 @@ can force all connections through the following process.
 2. Request Access To A Resource
 3. Connect To The Requested Resource
 
-To help make Zero Trust and bootstrapping trust a bit clearer, it helps
-to have a concrete system to use an example. It just so happens that the
-Ziti software system makes a great example! Let us examine Ziti.
+This process is not the typical connection order on a network. Most
+connections on a network are done in the reverse order. At first, this
+may seem counter intuitive. To help make Zero Trust and bootstrapping
+trust a bit clearer, it helps to have a concrete system to use an
+example. It just so happens that the Ziti software system makes a great
+example!
+
+<img src="./images/ziti-system.png" style="width: 80%; margin: 0 auto; display: block;">
 
 In Ziti, all of the above steps require interacting with a Ziti
-Controller. The Ziti Controller manages the Ziti overlay network. It
-maintains a list of known network services, SDK clients, routers,
+Controller. The Ziti Controller manages the Ziti overlay network by
+maintaining a list of known network services, SDK clients, routers,
 enrollments, policies, and much more! All of these pieces working
 together to create a Ziti Network. A Ziti Network is an overlay network
-\- meaning it creates a virtual network on top of a concrete network
-referred to as the underlay network.
+\- meaning it creates a virtual network on top of a concrete network.
+The concrete network may be the internet, a university network, or your
+own home network. Whatever it is, it is referred ot as the underlay
+network.
 
 In the Ziti Network, all network resources are modeled as services in
 the Ziti Controller. All services on a Ziti Network should only
@@ -112,8 +118,8 @@ available services to dial (connect) or to bind (host) for the
 authenticated SDK Client. The client can then request to dial or bind a
 service. If fulfilled, a session is associated with the client and
 service. This new session is propagated to the necessary Ziti Routers,
-and the required circuits are created. The client is returned the list
-of Ziti Routers which can be connected to in order to complete the last
+and the required circuits are created. The client is returned a list of
+Ziti Routers which can be connected to in order to complete the last
 mile of communication between the Ziti overlay network and the SDK
 client.
 
@@ -121,8 +127,8 @@ This set of steps covers the pillars of the Zero Trust model! The Ziti
 Controller and SDK Clients verify each other. The client cannot connect
 to network resources or services until it authenticates. After
 authentication, a client is given the least privilege access allowed by
-only being told about and only being able to dial/bind assigned
-services. It is a Zero Trust overlay network!
+only being told about and only being able to dial/bind the authenticated
+identity's assigned services. It is a Zero Trust overlay network!
 
 How did this system come into existence? How do the Ziti SDK client and
 Ziti Controller verify each other? How do the routers and controller
@@ -161,11 +167,11 @@ verify connections? Do they challenge for the incoming connections
 secret and compare it to a list? That means that a pair of systems that
 need to connect must have each other's secrets. Secret sharing will not
 do! We can not be copying secrets between every machine. One machine
-that is compromised would mean that many secrets will are revealed!
+that is compromised would mean that many secrets are revealed!
 
-This solution can be evolved and improved, but we do not have to
-continue improving the solution! If we did, we would end up recreating
-an existing technology. That technology is (public-key
+This solution can be evolved and improved, but we do not have to do that
+hard work! If we did, we would end up recreating an existing technology.
+That technology is (public-key
 cryptography)[https://en.wikipedia.org/wiki/Public-key_cryptography],
 and it provides everything we need.
 
@@ -186,8 +192,8 @@ So we have decided that public-key cryptography is the answer. What does
 that mean? What do I have to do? Let us explore what would need to be
 done by a human or a piece of software automating this process. Don't
 worry if you don't get all of this; the gist is all you need for now.
-Later parts will expand upon this terminology. In fact, after reading
-the later parts, consider revisiting this part.
+Later articles will expand upon this terminology. In fact, after reading
+the later articles, consider revisiting this part.
 
 Consider the following diagram of a "mesh" distributed system. This mesh
 could be any type of system such as a mesh of Ziti Routers, or maybe it
@@ -221,10 +227,9 @@ expressed trust in your public certificate. In
 we will cover them in more detail.
 
 You can repeat the above process for every piece of software in your
-mesh network, as it initially will be deployed. Preferably, you log into
-each machine and generate the private key there. Moving private keys on
-and off devices is a security risk and frowned upon. For maximum
-security, you would work with a
+mesh network. Preferably, you log into each machine and generate the
+private key there. Moving private keys on and off devices is a security
+risk and frowned upon. For maximum security, you would work with a
 [Hardware Security Module (HSM)](https://en.wikipedia.org/wiki/Hardware_security_module)
 such as those available embedded into devices or as a fob.
 
@@ -232,15 +237,21 @@ Then you will need to copy each public certificate to every other
 machine and configure your software so that it trusts that certificate.
 The system will need to repeat this process any time the system adds a
 piece of software. If a machine is compromised, the analogous public
-certificate will need to be untrusted on every node in the mesh.
+certificate will need to be untrusted on every node in the mesh. Adding
+or removing trust in a public certificate involves configuring software
+or operating systems. There are many ways it can be implemented
+including: configuration files, files stored in specific directories,
+and even via configuration tools such as Windows Certificate Manager
+snap-in.
 
-Wow, this seems like quite a bit of work. Consider what this means when
-adding a node or removing one? Visiting each machine and reconfiguring
-it each time is quite a bit of overhead. Let us see how Certificate
-Authorities (CAs) can help! In the next section we will high the
-highlights of CAs but see
-[Part 4: Certificate Authorities & Chains Of Trust](./part-04.certificate-authorities-and-chains-of-trust.md)
-for more details.
+This is a log of careful work to get a simple system running. Consider
+what this means when adding or removing many nodes? Visiting each
+machine and reconfiguring it each time is quite a bit of overhead. There
+is a solution and while it  
+elegant on its own it adds more complexity. Let us see how Certificate
+Authorities (CAs) can help! In the next section we will hit the
+highlights of CAs. For more detail look forward to
+[Part 4: Certificate Authorities & Chains Of Trust](./part-04.certificate-authorities-and-chains-of-trust.md).
 
 
 #### CAs & Adding Complexity
@@ -250,7 +261,7 @@ single certificate. Meaning that instead of trusting each certificate,
 each piece of software will trust the CA. The CA will be used to sign
 every public certificate our software pieces need to use. How does
 "signing" work? We will cover that in
-[parts three](./part-03.certificates.md) and why it matters part in
+[part three](./part-03.certificates.md) and why it matters part in
 [four](./part-04.certificate-authorities-and-chains-of-trust.md). For
 now, the basics will be provided.
 
@@ -279,24 +290,30 @@ specific public certificate is not working as intended. The tools and
 systems that use the certificates are purposely vague in error messages
 as not to reveal too much information to attackers.
 
+The payoff for using CAs is having the ability to create chains of
+trust. Chains of trust allow distributed systems to scale without having
+to reconfigure each node every time the system grows or shrinks. With a
+little more upfront cost and bookkeeping to run a CA the system will
+greatly decrease the amount of configuration required on each device.
+
 #### Further Concerns
 
 Once configured, there are still other concerns need to be taken into
-account:
+account. Consider the following list of events that may happen to a CA
+and it's certificates:
 
-- What happens when systems are removed/added?
 - What happens when a certificate expires?
 - How does a system know not to trust a certificate anymore?
 - What happens when private keys need to regenerate?
 
 CAs do not automatically handle the propagation of these types of
-events. CAs are files on a storage device. Issuing or revoking
+events. CAs are files on a storage device or HSM. Issuing or revoking
 certificates does not generate any kind of event without additional
 software. There is also the issue of certificates expiring. That "-days
-360" puts a lifetime on each certificate. The lifetime can be extended
-far into the future, but this is a bad practice. Limiting the life span
-of a certificate can be used to reduce attack windows and force the
-adoption of stronger encryption.
+360", used in the example above, puts a lifetime on each certificate.
+The lifetime can be extended far into the future, but this is a bad
+practice. Limiting the life span of a certificate reduces attack windows
+and can be used as a trigger to adopt strong encryption.
 
 Even if we ignore all of those concerns, who did we trust to get this
 system setup? What was the seed of trust used to bootstrap trust? So
@@ -311,7 +328,7 @@ added to the network? How can that be handled? How do you trust that
 system in the first place? Using a secret password creates a single,
 exploitable, weak point. Public-key cryptography could be put in place,
 but then we are in a chicken-and-egg scenario. We are putting public-key
-cryptography in place to put automate public-key cryptography.
+cryptography in place to automate public-key cryptography.
 
 There are many caveats to bootstrapping trust. In a dynamic distributed
 system where pieces of software can come and go at the whim of network
@@ -320,7 +337,8 @@ a mechanism is provided that abstracts all of these issues. To
 understand how Ziti accomplishes this we have a few more topics to
 discuss. In
 [part two](./part-02.a-primer-on-public-key-cryptography.md), we will
-chip away at those topics by covering public-key cryptography.
+chip away at those topics by covering public-key cryptography in more detail
+to understand its powers and applications.
 
 ---
 
