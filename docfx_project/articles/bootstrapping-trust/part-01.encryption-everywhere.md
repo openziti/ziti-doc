@@ -229,9 +229,12 @@ we will cover them in more detail.
 You can repeat the above process for every piece of software in your
 mesh network. Preferably, you log into each machine and generate the
 private key there. Moving private keys on and off devices is a security
-risk and frowned upon. For maximum security, you would work with a
-[Hardware Security Module (HSM)](https://en.wikipedia.org/wiki/Hardware_security_module)
-such as those available embedded into devices or as a fob.
+risk and frowned upon. For maximum security, hardware, such as
+[Hardware Security Modules (HSMs)](https://en.wikipedia.org/wiki/Hardware_security_module)
+and [Trusted Platform Modules
+(TPMs)](https://en.wikipedia.org/wiki/Trusted_Platform_Module), can be
+used to store the private keys in a manner that does not make them
+directly accessible.
 
 Then you will need to copy each public certificate to every other
 machine and configure your software so that it trusts that certificate.
@@ -246,11 +249,11 @@ snap-in.
 
 This is a log of careful work to get a simple system running. Consider
 what this means when adding or removing many nodes? Visiting each
-machine and reconfiguring it each time is quite a bit of overhead. There
-is a solution and while it  
-elegant on its own it adds more complexity. Let us see how Certificate
-Authorities (CAs) can help! In the next section we will hit the
-highlights of CAs. For more detail look forward to
+machine and reconfiguring them each time is quite a bit of overhead.
+There is a solution for these woes. While it is elegant on its own, it
+does add complexity. Let us see how Certificate Authorities (CAs) can
+help! In the next section we will hit the highlights of CAs. For more
+detail look forward to
 [Part 4: Certificate Authorities & Chains Of Trust](./part-04.certificate-authorities-and-chains-of-trust.md).
 
 
@@ -337,8 +340,8 @@ a mechanism is provided that abstracts all of these issues. To
 understand how Ziti accomplishes this we have a few more topics to
 discuss. In
 [part two](./part-02.a-primer-on-public-key-cryptography.md), we will
-chip away at those topics by covering public-key cryptography in more detail
-to understand its powers and applications.
+chip away at those topics by covering public-key cryptography in more
+detail to understand its powers and applications.
 
 ---
 
