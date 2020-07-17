@@ -67,8 +67,8 @@ this series covered keys, both public and private, but did not mention
 certificates. It is common to hear "certificate" used interchangeably
 with "public key" and, sometimes, "private key." A certificate must have
 at least one key inside of it. Since certificates contain keys, they
-have the same capabilities as the keys they contain. Sometimes the
-words "public certificate" (containing only the public key) and "private
+have the same capabilities as the keys they contain. Sometimes the words
+"public certificate" (containing only the public key) and "private
 certificate" (containing both public and private keys) are used for
 clarity.
 

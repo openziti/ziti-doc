@@ -48,9 +48,10 @@ or
 Mobile devices, such as laptops and smartphones, use hardware technology
 similar to TPMs. Apple has its Secure Enclave, and Android has its
 Keymaster Hardware Abstraction Layer. The goal of all of these pieces of
-hardware is to keep sensitive secrets (e.g., private keys) safe. The fact
-that an entire industry of embedded hardware has been developed to keep
-private keys safe should tip the reader off to how important they are.
+hardware is to keep sensitive secrets (e.g., private keys) safe. The
+fact that an entire industry of embedded hardware has been developed to
+keep private keys safe should tip the reader off to how important they
+are.
 
 
 As stated above, these two keys have some impressive capabilities. It is

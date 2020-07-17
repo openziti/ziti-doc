@@ -243,8 +243,8 @@ piece of software. If a machine is compromised, the analogous public
 certificate will need to be untrusted on every node in the mesh. Adding
 or removing trust in a public certificate involves configuring software
 or operating systems. There are many ways it can be implemented,
-including configuration files, files stored in specific directories,
-and even via configuration tools such as Windows Certificate Manager
+including configuration files, files stored in specific directories, and
+even via configuration tools such as Windows Certificate Manager
 snap-in.
 
 This is a log of careful work to get a simple system running. Consider
@@ -260,10 +260,10 @@ detail, look forward to
 #### CAs & Adding Complexity
 
 A CA enables trust deferral from multiple individual certificates to a
-single certificate which means that instead of trusting each certificate,
-each piece of software will trust the CA. The CA will be used to sign
-every public certificate our software pieces need to use. How does
-"signing" work? We will cover that in
+single certificate which means that instead of trusting each
+certificate, each piece of software will trust the CA. The CA will be
+used to sign every public certificate our software pieces need to use.
+How does "signing" work? We will cover that in
 [part three](./part-03.certificates.md) and why it matters part in
 [four](./part-04.certificate-authorities-and-chains-of-trust.md). For
 now, the basics will be provided.
