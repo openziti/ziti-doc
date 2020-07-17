@@ -75,7 +75,7 @@ can force all connections through the following process.
 
 This process is not the typical connection order on a network. Most
 connections on a network are done in the reverse order. At first, this
-may seem counter intuitive. To help make Zero Trust and bootstrapping
+may seem counter-intuitive. To help make Zero Trust and bootstrapping
 trust a bit clearer, it helps to have a concrete system to use an
 example. It just so happens that the Ziti software system makes a great
 example!
@@ -181,7 +181,7 @@ mathematically tied to a public key. The public key can be used to
 encrypt messages that only the private key holder can decrypt. Also, the
 public key cannot be used to derive the original private key. This
 functionality fits perfectly with what our distributed system needs!
-Alas, public-key cryptography introduces complex behaviors, setup , and
+Alas, public-key cryptography introduces complex behaviors, setup, and
 management. In the next article, we will dive a little deeper into this
 topic. For now, let us take it on faith that it will serve our needs
 well.
@@ -250,9 +250,9 @@ snap-in.
 This is a log of careful work to get a simple system running. Consider
 what this means when adding or removing many nodes? Visiting each
 machine and reconfiguring them each time is quite a bit of overhead.
-There is a solution for these woes. While it is elegant on its own, it
+There is a solution to these woes. While it is elegant on its own, it
 does add complexity. Let us see how Certificate Authorities (CAs) can
-help! In the next section we will hit the highlights of CAs. For more
+help! In the next section, we will hit the highlights of CAs. For more
 detail look forward to
 [Part 4: Certificate Authorities & Chains Of Trust](./part-04.certificate-authorities-and-chains-of-trust.md).
 

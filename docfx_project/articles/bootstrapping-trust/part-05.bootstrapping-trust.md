@@ -1,4 +1,4 @@
-Bootstrapping Trust
+# Bootstrapping Trust
 
 ## Part 5 Bootstrapping Trust
 
