@@ -46,14 +46,14 @@ store the private key in hardware such as
 or
 [Trusted Platform Modules (TPMs)](https://en.wikipedia.org/wiki/Trusted_Platform_Module).
 Mobile devices, such as laptops and smartphones, use hardware technology
-similar to TPMs. Apple has its Secure Enclave and Android has its
+similar to TPMs. Apple has its Secure Enclave, and Android has its
 Keymaster Hardware Abstraction Layer. The goal of all of these pieces of
-hardware is to keep sensitive secrets (e.g. private keys) safe. The fact
+hardware is to keep sensitive secrets (e.g., private keys) safe. The fact
 that an entire industry of embedded hardware has been developed to keep
 private keys safe should tip the reader off to how important they are.
 
 
-As stated above these two keys have some impressive capabilities. It is
+As stated above, these two keys have some impressive capabilities. It is
 not possible to derive one from the other. This allows the public key to
 be handed out freely without compromising the private key. Also, both
 keys can generate encrypted data that only the other key can decrypt.

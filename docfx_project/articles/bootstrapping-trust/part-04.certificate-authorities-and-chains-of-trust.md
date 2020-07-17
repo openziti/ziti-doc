@@ -56,17 +56,17 @@ power of a CA comes not by its creation but by it being trusted.
 
 CAs come in two flavors: Root CAs and Intermediate CAs. Root CAs are the
 egg or the chicken (depending on your viewpoint) of the CA trust
-chicken-and-egg problem. Trust for CAs has to start somewhere. With CAs
+chicken-and-egg problem. Trust for CAs has to start somewhere. With CAs,
 it is the Root CA. A Root CA can sign certificates that are themselves
 CAs as well. Those certificates represent Intermediate CAs. Layers of
 CAs starting with a root and adding intermediates along the way allows
 the private key for the Root CAs to be kept in a highly secure
-environment which is not convenient to use for signing. This security
+environment, which is not convenient to use for signing. This security
 means that the Root CA has a far less likely chance of having its
 private key compromised. Intermediate CAs are put into less secure
 environments and, if compromised, can be revoked. Trust is usually put
 into the Root CA, and since it was not compromised can remain trusted.
-Compromised intermediate CAs can be black listed.
+Compromised intermediate CAs can be blacklisted.
 
 Running a public CA is serious business if you wish to be publicly
 trusted. The organizations running a CA have to have strict protocols
@@ -74,7 +74,7 @@ that verify the security and safe handling of the CAs private keys. If
 the private key is compromised, it can be used to sign other
 certificates for malicious intents. Any system that trusted the
 compromised CA will now trust any maliciously signed certificates. This
-will compromise all certificates singed by that CA.
+will compromise all certificates signed by that CA.
 
 Public CAs are maintained by organizations such as DigiCert, Let's
 Encrypt, and others. Anyone can create private CAs. The only difference

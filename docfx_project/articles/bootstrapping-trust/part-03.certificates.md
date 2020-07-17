@@ -42,7 +42,7 @@ available to get you started.
 For this article, the word "certificate" will mean an "x509
 Certificate". x509 is a public standard and is the de-facto standard for
 software systems dealing with public-key cryptography. There are other
-formats but they are usually environment-specific, such as Card
+formats, but they are usually environment-specific, such as Card
 Verifiable Certificates. x509 good enough for general purpose use on
 most systems.
 
