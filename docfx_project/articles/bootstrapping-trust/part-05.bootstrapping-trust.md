@@ -20,7 +20,7 @@ Ziti the enrollment process is bootstrapping trust. This trust must be
 in place as all connections in Ziti require verification. All identities
 in Ziti have a key pair that identifies that individual. The enrollment
 process abstracts the steps of setting up keys, certificates, CSRs, CAs,
-and deploying them to the proper locations. In addition, the Ziti SDK
+and deploying them to the proper locations. In addition, the Ziti SDKs
 can be embedded within any application and enroll with a Ziti network in
 the exact same fashion to bootstrap trust as part of Ziti's Zero Trust
 model.

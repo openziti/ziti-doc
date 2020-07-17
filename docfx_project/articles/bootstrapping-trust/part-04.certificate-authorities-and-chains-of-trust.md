@@ -60,7 +60,7 @@ chicken-and-egg problem. Trust for CAs has to start somewhere. With CAs
 it is the Root CA. A Root CA can sign certificates that are themselves
 CAs as well. Those certificates represent Intermediate CAs. Layers of
 CAs starting with a root and adding intermediates along the way allows
-the private key for the Root CA's to be kept in a highly secure
+the private key for the Root CAs to be kept in a highly secure
 environment which is not convenient to use for signing. This security
 means that the Root CA has a far less likely chance of having its
 private key compromised. Intermediate CAs are put into less secure
@@ -69,7 +69,7 @@ into the Root CA, and since it was not compromised can remain trusted.
 Compromised intermediate CAs can be black listed.
 
 Running a public CA is serious business if you wish to be publicly
-trusted. The organization's running a CA have to have strict protocols
+trusted. The organizations running a CA have to have strict protocols
 that verify the security and safe handling of the CAs private keys. If
 the private key is compromised, it can be used to sign other
 certificates for malicious intents. Any system that trusted the
@@ -90,11 +90,10 @@ usually signed via Certificate Signing Requests (CSRs). A certificate
 signing itself is called a "self-signed certificate" and is an indicator
 of it being a root CA if the CA flag is also set to true. A root CA can
 sign other certificates that also have the CA flag set to true. Those
-types of  
-certificates are intermediate CAs. Any CA, root or intermediate, that
-fulfills a CSR and signs the enclosed certificate will generate a non-CA
-certificate as long as the CA flag is false. These certificates are
-"leaf certificates."
+types of certificates are intermediate CAs. Any CA, root or
+intermediate, that fulfills a CSR and signs the enclosed certificate
+will generate a non-CA certificate as long as the CA flag is false.
+These certificates are "leaf certificates."
 
 The term Public Key Infrastructure (PKI) is used to describe all of the
 outputs that are generated when a CA is created. That includes the root,
