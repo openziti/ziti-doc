@@ -28,7 +28,7 @@ stored anywhere data can be stored, but are commonly stored as files. A
 set of public and private keys is referred to as a "key set" or "key
 pair."
 
-Within a key pair there is only one private key and one public key. The
+Within a key pair, there is only one private key and one public key. The
 two keys are mathematically entangled, given a particular function and
 its parameters. Today, those functions and parameters are generally
 elliptical curves and are the basis of a "trapdoor function." Trapdoor
@@ -39,21 +39,22 @@ reasons:
    with the other.
 2. one key cannot be derived from the other
 
-Of the two keys the private key is the most important. It must be kept
+Of the two keys, the private key is the most important. It must be kept
 tucked away from prying eyes and attackers. Some secure environments
 store the private key in hardware such as
 [Hardware Security Modules (HSMs)](https://en.wikipedia.org/wiki/Hardware_security_module)
 or
 [Trusted Platform Modules (TPMs)](https://en.wikipedia.org/wiki/Trusted_Platform_Module).
 Mobile devices, such as laptops and smartphones, use hardware technology
-similar to TPMs. Apple has its Secure Enclave and Android has its
+similar to TPMs. Apple has its Secure Enclave, and Android has its
 Keymaster Hardware Abstraction Layer. The goal of all of these pieces of
-hardware is to keep sensitive secrets (e.g. private keys) safe. The fact
-that an entire industry of embedded hardware has been developed to keep
-private keys safe should tip the reader off to how important they are.
+hardware is to keep sensitive secrets (e.g., private keys) safe. The
+fact that an entire industry of embedded hardware has been developed to
+keep private keys safe should tip the reader off to how important they
+are.
 
 
-As stated above these two keys have some impressive capabilities. It is
+As stated above, these two keys have some impressive capabilities. It is
 not possible to derive one from the other. This allows the public key to
 be handed out freely without compromising the private key. Also, both
 keys can generate encrypted data that only the other key can decrypt.
@@ -142,7 +143,7 @@ That long string "c3a....6db" is the hash of that file! The string is 64
 characters long and is comprised of hex characters (a base 16 numbering
 system of 0-9 and a-f). Each character takes four bits to represent (4^2
 = 16). Since there are 64 characters at 4 bits each we have: 64 x 4 =
-256\. This is where SHA-256 gets its name. SHA-256 is a fixed length
+256\. This is where SHA-256 gets its name. SHA-256 is a fixed-length
 cryptographic hashing algorithm who's output is 256 bits in length.
 
 The hash itself is not encryption. It is "hashing." Hashing of this
@@ -176,7 +177,7 @@ publicly verifiable to anyone with the document, signature, and public
 key. This allows many decentralized approaches to sharing data that can
 have its source and content verified.
 
-Bearer tokens are and example of the power of signatures. Bearer tokens
+Bearer tokens are an example of the power of signatures. Bearer tokens
 are a document that is signed by a trusted authentication system and
 contain data that provides information about the client presenting the
 token. Signing the token ensures that the content of the token has not
@@ -193,7 +194,7 @@ JWT.
 
 # Closing
 
-This article should have shed light on on public-key cryptography by
+This article should have shed light on public-key cryptography by
 explaining the roles of the public and private keys. It should have also
 provided a glimpse at the power of encryption and digital signatures. In
 [part three](././part-03.certificates.md) we will see how key pairs can

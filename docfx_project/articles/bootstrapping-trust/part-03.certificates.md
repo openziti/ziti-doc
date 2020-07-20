@@ -1,6 +1,6 @@
 # Bootstrapping Trust
 
-## Part 3: Certificate
+## Part 3: Certificates
 
 If you have read through the entire series up to here, welcome! If you
 have not, please consider reading the whole series:
@@ -40,9 +40,9 @@ experience to wade through. There are many great articles and tutorials
 available to get you started.
 
 For this article, the word "certificate" will mean an "x509
-Certificate". x509 is a public standard and is the de facto standard for
+Certificate". x509 is a public standard and is the de-facto standard for
 software systems dealing with public-key cryptography. There are other
-formats but they are usually environment-specific, such as Card
+formats, but they are usually environment-specific, such as Card
 Verifiable Certificates. x509 good enough for general purpose use on
 most systems.
 
@@ -67,8 +67,8 @@ this series covered keys, both public and private, but did not mention
 certificates. It is common to hear "certificate" used interchangeably
 with "public key" and, sometimes, "private key." A certificate must have
 at least one key inside of it. Since certificates contain keys, they
-have the same capabilities as the keys they contains. Sometimes the
-words "public certificate" (containing only the public key) and "private
+have the same capabilities as the keys they contain. Sometimes the words
+"public certificate" (containing only the public key) and "private
 certificate" (containing both public and private keys) are used for
 clarity.
 

@@ -1,4 +1,4 @@
-Bootstrapping Trust
+# Bootstrapping Trust
 
 ## Part 5 Bootstrapping Trust
 
@@ -13,10 +13,10 @@ have not, please consider reading the whole series:
 
 ### Ziti
 
-In this series of articles we are exploring bootstrapping trust, what
+In this series of articles, we are exploring bootstrapping trust, what
 that means, and how it enables Zero Trust security methodologies. Ziti
 provides a method to bootstrap trust via its enrollment process. For
-Ziti the enrollment process is bootstrapping trust. This trust must be
+Ziti, the enrollment process is bootstrapping trust. This trust must be
 in place as all connections in Ziti require verification. All identities
 in Ziti have a key pair that identifies that individual. The enrollment
 process abstracts the steps of setting up keys, certificates, CSRs, CAs,
@@ -28,7 +28,7 @@ model.
 
 Ziti has a concept called the "Edge." The Edge is a set of software
 features that sit on top of the "Fabric." The Fabric is the core of each
-Ziti component and it provides long haul mesh routing while the Edge
+Ziti component, and it provides long haul mesh routing while the Edge
 focuses on enrolling Ziti components, managing access via policies, and
 maintaining the trust necessary to provide the foundation of a Zero
 Trust network without the hassle of setting it up yourself. Together
@@ -118,16 +118,19 @@ Let's break those steps down:
 3. The JWT is given to the enrolling device
 4. The device parses the JWT, verifies all the information is present to
    enroll
-5. The device retrieves the public certificate from the controller at the address
-   specified in the JWT
-6. The device confirms that server is, in fact, the owner of the private key for
-   that certificate
-7. The device uses the retrieved certificate to verify the signature on the JWT
+5. The device retrieves the public certificate from the controller at
+   the address specified in the JWT
+6. The device confirms that the server is, in fact, the owner of the
+   private key for that certificate
+7. The device uses the retrieved certificate to verify the signature on
+   the JWT
 8. Verifies content has not changed
 9. Verifies the issuing server is the server it is communicating with
-10. Makes a secure connection to the server and requests the CAs to trust
-11. The enrolling identity generates key pair, if necessary, and a CSR.
-    The CSR is submitted in a request with the JWT's enrollment token.
+10. Makes a secure connection to the server and requests the CAs to
+    trust
+11. The enrolling identity generates a key pair, if necessary, and a
+    CSR. The CSR is submitted in a request with the JWT's enrollment
+    token.
 12. The controller verifies the CSR, verifies the enrollment token,
     verifies the client connection, and then returns the necessary
     signed certificates.
@@ -138,19 +141,19 @@ a record of the certificates issued to a specific identity. That
 identity now has certificates that can be used to make connections to
 other enrolled Ziti components. All components in the system can verify
 the identity of any other Ziti component. At every step, every link is
-verified. No individual piece of software blindly trusts any other
-for inbound or outbound connections. Trust has been successfully
+verified. No individual piece of software blindly trusts any other for
+inbound or outbound connections. Trust has been successfully
 bootstrapped! Now we enter a maintenance window where trust has to be
 verified continuously and maintained. The enrolled identity can now
-interact with the Ziti Controller to either function as a Ziti Router
-or as Zero Trust network client.
+interact with the Ziti Controller to either function as a Ziti Router or
+as Zero Trust network client.
 
 # Conclusion
 
 Thank you for reading this far! If you completed the entire series, I
-hope it has been helpful. Zero Trust is a complicated topic and it
+hope it has been helpful. Zero Trust is a complicated topic, and it
 requires a serious foundation in bootstrapping trust to get right.
-Hopefully this series starts you on your way. If you have time, please
+Hopefully, this series starts you on your way. If you have time, please
 checkout (Ziti)[https://github.com/openziti]! It is the Zero Trust
 network overlay solution that I have personally worked on and was the
 inspiration for this series.
