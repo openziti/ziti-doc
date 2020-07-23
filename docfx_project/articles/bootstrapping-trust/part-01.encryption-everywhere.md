@@ -34,7 +34,7 @@ authentication and access verification on every connection at all times.
 It sets the tone for a system's security to say, "this system shall
 never assume the identity or access of any connection." Before the Zero
 Trust security models, IT infrastructures were set up as a series of
-security perimeters. Think of as a castle with walls and moats. The
+security perimeters. Think of it as a castle with walls and moats. The
 castle would have a set number of entry points with guards. Once past
 the guards and inside the castle, any visitors were trusted and had
 access to the castle. In the real world, passing the guards is analogous
