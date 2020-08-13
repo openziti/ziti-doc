@@ -11,21 +11,21 @@ When first launched - the instace will deposit a file into the file system at
 Now, ssh to the newly created machine. Once there you can obtain the username and password for your
 Ziti Controller by issuing this command:
 
-    jq -r .password /home/nfadmin/.config/ziti/ziti-controller/credentials.json
+    jq . ~/.config/ziti/ziti-controller/credentials.json
 
-You can choose to keep this password or change it to something easier to remember. If you change the password, please
-remember to use a strong password which is not easy to guess.
+You can choose to keep this username and password or change it to something easier to remember. If 
+you change the password, please remember to use a strong password which is not easy to guess.
 
 > [!TIP]
-> Once the password is changed - update the credentials.json file with the current password if you want the system to
-> automatically update the certificates in the event of the image losing its IP address or DNS entry.
+> If you change the server password update the credentials.json file with the updated password. This ensures the 
+> system can automatically update the certificates in the event of a new IP address or domain name.
 
 # [Change via UI](#tab/change-pwd-ui)
 
 These AMIs will be provided with a self-signed certificate generated during securely during the bootup process. See
 [changing pki](~/ziti/manage/pki.md) for more information.
 
-1. Log into the UI using the password obtained in the prior step
+1. Log in to the UI (https://{ZEDE VM public IPv4}) using the username and password obtained in the prior step
 1. In the lower left corner, click the icon that looks like a person and choose "Edit Profile" <br/>
 ![image](~/images/changepwd_ui.png) <br/>
 
