@@ -41,9 +41,9 @@ set -e
 script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo $script_root
 
-echo "updating git submodules if needed"
+echo "updating git submodules via rm and then git submodule init"
+rm -r rm -rf $script_root/docfx_project/ziti-*
 git submodule update --init
-git submodule update --remote --merge
 
 if [ "$1" == "" ]; then
   DOC_ROOT=docs-local
@@ -82,7 +82,7 @@ else
 fi
 
 if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-    pushd ${script_root}/docfx_project/ziti-sdk-swift
+    pushd ${script_root}/docfx_project/ziti-sdk-swift   
     swift_sdk_rev_short=$(git status | head -1 | cut -d " " -f4)
     popd
     S3_SWIFT_BUCKET="s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz"
@@ -97,5 +97,6 @@ if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.
     tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ${SWIFT_API_TARGET}
     rm ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz
 fi
+
 
 

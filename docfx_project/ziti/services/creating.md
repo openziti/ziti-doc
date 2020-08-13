@@ -35,7 +35,7 @@ Here's how you can create a service.
 
 # [New Service via CLI](#tab/create-service-cli)
 
-To change the administrator password using the CLI simply issue these two commands:
+To create a new service via CLI simply issue these commands:
 
 [!include[](./create-service-cli.md)]
 
