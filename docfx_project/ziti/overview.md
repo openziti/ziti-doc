@@ -5,7 +5,7 @@ uid: zitiOverview
 # Overview
 Ziti represents the next generation of secure, open-source networking for your applications. Ziti has several components.
 
-* The Ziti fabric provides a scalable, plugable, networking mesh with built in smart routing
+* The Ziti fabric provides a scalable, pluggable, networking mesh with built in smart routing
 * The Ziti edge components provide a secure, Zero Trust entry point into your network
 * The Ziti SDKs allow you to integrate Ziti directly into your applications
 * The Ziti tunnelers and proxies allow existing applications and networks to take advantage of a Ziti deployment 
