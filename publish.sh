@@ -63,6 +63,9 @@ then
     echo "${GH_KEY} DID NOT exist???"
   fi
 
+  ssh -Tv git@github.com
+
+  echo __________________________________________________________________________
   git config user.name ziti-ci
   git config user.email ziti-ci@netfoundry.io
   git config core.sshCommand "ssh -i ${pub_script_root}/github_deploy_key"
