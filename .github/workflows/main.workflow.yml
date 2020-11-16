@@ -20,3 +20,4 @@ jobs:
       - run: ls ./docfx_project
       - run: find . -name docfx.json
       - run: mono --version
+      - run: ./publish.sh
