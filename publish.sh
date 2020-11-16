@@ -63,6 +63,7 @@ then
     echo "${GH_KEY} DID NOT exist???"
   fi
 
+  mkdir /root/.ssh
   cp $HOME/.ssh/known_hosts /root/.ssh/known_hosts
   #echo "chmod'ing ${pub_script_root}/github_deploy_key to 600"
   #chmod 600 ${pub_script_root}/github_deploy_key
