@@ -14,3 +14,5 @@ jobs:
       - uses: actions/checkout@v1
       - run: ls -l /
       - run: ls -l /github/home
+      - run: find . -name main.workflow.yml
+      - run: tree
