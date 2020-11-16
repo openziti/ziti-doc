@@ -53,10 +53,11 @@ then
     ../changeToSsh.sh
   fi
 
-  if test -f "${pub_script_root}"; then
+  GH_KEY="${pub_script_root}/github_deploy_key"
+  if test -f "${GH_KEY}"; then
     echo "Configuring git. ${pub_script_root}/github_deploy_key exists..."
   else
-    echo "${pub_script_root} DID NOT exist???"
+    echo "${GH_KEY} DID NOT exist???"
   fi
 
   git config user.name ziti-ci
