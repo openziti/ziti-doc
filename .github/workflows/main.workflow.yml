@@ -18,8 +18,6 @@ jobs:
         gh_ci_key: ${{ secrets.gh_ci_key }}
     steps:
       - uses: actions/checkout@v1
-      - run: ls -lsd ~/.ssh
-      - run: ls -ls ~/.ssh/*
       #- name: Install Ziti CI
       #  uses: netfoundry/ziti-ci@v1
       #- run: ls -l /
