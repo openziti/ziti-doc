@@ -60,6 +60,9 @@ then
     echo "${GH_KEY} DID NOT exist???"
   fi
 
+  echo "seeing if deploy key exists anywhere..."
+  find / -name github_deploy_key
+  echo "find complete"
   git config user.name ziti-ci
   git config user.email ziti-ci@netfoundry.io
   git config core.sshCommand "ssh -i ${pub_script_root}/github_deploy_key"
