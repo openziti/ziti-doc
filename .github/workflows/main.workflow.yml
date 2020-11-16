@@ -15,4 +15,4 @@ jobs:
       - run: ls -l /
       - run: ls -l /github/home
       - run: find . -name main.workflow.yml
-      - run: tree
+      - run: doxygen --version
