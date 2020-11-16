@@ -66,6 +66,13 @@ then
 
   echo "showing the git config"
   git config --get remote.origin.url
+
+  echo "removing github.com using ssh-keygen -R github.com"
+  ssh-keygen -R github.com
+
+  echo "adding github.com back to known hosts using: ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts"
+  ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
