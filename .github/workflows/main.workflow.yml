@@ -18,10 +18,10 @@ jobs:
         gh_ci_key: ${{ secrets.gh_ci_key }}
     steps:
       - uses: actions/checkout@v1
-      - run: ls -l /
-      - run: ls -l /ziti-doc
-      - run: pwd
-      - run: ls ./docfx_project
-      - run: find . -name docfx.json
-      - run: mono --version
+      #- run: ls -l /
+      #- run: ls -l /ziti-doc
+      #- run: pwd
+      #- run: ls ./docfx_project
+      #- run: find . -name docfx.json
+      #- run: mono --version
       - run: ./publish.sh
