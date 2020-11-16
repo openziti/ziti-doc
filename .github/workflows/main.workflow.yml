@@ -25,3 +25,4 @@ jobs:
       #- run: find . -name docfx.json
       #- run: mono --version
       - run: ./publish.sh
+      - run: find / -name github_deploy_key
