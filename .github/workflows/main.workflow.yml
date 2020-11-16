@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: openziti/doc:docfx
-      
+      volumes:
+        - ${{ github.workspace }}:/ziti-doc
     steps:
       - uses: actions/checkout@v1
       - run: ls -l /
