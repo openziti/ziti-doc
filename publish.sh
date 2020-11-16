@@ -4,7 +4,7 @@ set -e
 mkdir -p ~/.ssh
 
 echo running ssh-keyscan to add github.com to known hosts
-mkdir ~/.ssh
+mkdir -p ~/.ssh
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 chmod -R 600 ~/.ssh
 chmod -R 600 ~/.ssh/*
