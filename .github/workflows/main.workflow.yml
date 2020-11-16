@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: openziti/doc:docfx
-      volumes:
+      
     steps:
       - uses: actions/checkout@v1
       - run: ls -l /
