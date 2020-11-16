@@ -28,13 +28,5 @@ jobs:
       #- run: mono --version
       - name: generate docs
         run: ./publish.sh
+      - run: cd openziti/openziti.github.io
       - run: git status
-         
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY_NAME: openziti/openziti.github.io
-          BRANCH: master # The branch the action should deploy to.
-          FOLDER: openziti.github.io # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
