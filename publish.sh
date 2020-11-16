@@ -71,9 +71,9 @@ then
   #echo running ssh-keyscan to add github.com to known hosts
   #ssh-keyscan github.com >> ~/.ssh/known_hosts
   cat ~/.ssh/known_hosts
-  ssh -Tv github.com
+  ssh -Tv git@github.com
 
-  
+
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
