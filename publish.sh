@@ -3,6 +3,7 @@ set -e
 
 mkdir -p ~/.ssh
 
+echo "HOME is set to: $HOME"
 echo running ssh-keyscan to add github.com to known hosts
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 
