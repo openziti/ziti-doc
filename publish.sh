@@ -7,7 +7,7 @@ echo running ssh-keyscan to add github.com to known hosts
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-echo $pub_script_root
+echo "publish script located in: $pub_script_root"
 
 pushd $pub_script_root
 
@@ -53,10 +53,15 @@ then
     ../changeToSsh.sh
   fi
 
-  echo Configuring git 
+  if test -f "${pub_script_root}"; then
+    echo "Configuring git. ${pub_script_root}/github_deploy_key exists..."
+  else
+    echo "${pub_script_root} DID NOT exist???"
+  fi
+
   git config user.name ziti-ci
   git config user.email ziti-ci@netfoundry.io
-  git config core.sshCommand "ssh -i ./github_deploy_key"
+  git config core.sshCommand "ssh -i ${pub_script_root}/github_deploy_key"
 
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis" && git push
 else
