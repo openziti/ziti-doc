@@ -326,7 +326,7 @@ h2,h3{page-break-after:avoid}
 html{font-size:10px;-webkit-tap-highlight-color:transparent}
 body{font-family:"Open Sans",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.42857143;color:#333}
 button,input,select,textarea{font-family:'Open Sans';font-size:inherit;line-height:inherit}
-a{color:#006cff;text-decoration:none}
+a{color: #006cff!important;text-decoration:none}
 a:focus,a:hover{color:#006cff;text-decoration:underline}
 a:focus{outline:-webkit-focus-ring-color auto 5px;outline-offset:-2px}
 .carousel-inner>.item>a>img,.carousel-inner>.item>img,.img-responsive,.thumbnail a>img,.thumbnail>img{display:block;max-width:100%;height:auto}
