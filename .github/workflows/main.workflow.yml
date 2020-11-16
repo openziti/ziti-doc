@@ -28,5 +28,5 @@ jobs:
       #- run: mono --version
       - name: generate docs
         run: ./publish.sh
-      - run: cd openziti.github.io
+      - run: cd openziti.github.io && git status
       - run: git status
