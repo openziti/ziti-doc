@@ -8,7 +8,8 @@ on:
 jobs:
   publish-docs-from-container:
     runs-on: ubuntu-latest
-    container: openziti/doc:docfx
+    container:
+      image: openziti/doc:docfx
     steps:
       - uses: actions/checkout@v1
-      - run: ./publish-via-docker.sh
+      - run: ls -l /
