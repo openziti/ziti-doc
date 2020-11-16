@@ -10,8 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: openziti/doc:docfx
-      volumes:
-        - ${{ github.workspace }}:/ziti-doc
+      env:
+        - AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+        - AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
+        - AWS_DEFAULT_REGION: us-east-1
+        - GIT_BRANCH: master
+        - gh_ci_key: ${{ secrets.gh_ci_key }}
     steps:
       - uses: actions/checkout@v1
       - run: ls -l /
