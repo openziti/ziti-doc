@@ -89,7 +89,7 @@ then
   echo "showing the git config"
   git config --get remote.origin.url
 
-  #git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
+  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
   echo ========= publish considered successful though no op
