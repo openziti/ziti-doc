@@ -28,3 +28,4 @@ jobs:
       #- run: mono --version
       - name: generate docs
         run: ./publish.sh
+      - run: git status
