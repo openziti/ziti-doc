@@ -3,10 +3,6 @@ set -e
 
 mkdir -p ~/.ssh
 
-echo "HOME is set to: $HOME"
-echo running ssh-keyscan to add github.com to known hosts
-ssh-keyscan github.com >> ~/.ssh/known_hosts
-
 pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "publish script located in: $pub_script_root"
 
@@ -68,11 +64,13 @@ then
   echo "showing the git config"
   git config --get remote.origin.url
 
-  echo "removing github.com using ssh-keygen -R github.com"
-  ssh-keygen -R github.com
-
   echo "adding github.com back to known hosts using: ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts"
   ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+  #echo "HOME is set to: $HOME"
+  #echo running ssh-keyscan to add github.com to known hosts
+  #ssh-keyscan github.com >> ~/.ssh/known_hosts
+  cat ~/.ssh/known_hosts
 
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 else

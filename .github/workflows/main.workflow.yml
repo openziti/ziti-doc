@@ -18,8 +18,8 @@ jobs:
         gh_ci_key: ${{ secrets.gh_ci_key }}
     steps:
       - uses: actions/checkout@v1
-      - name: Install Ziti CI
-        uses: netfoundry/ziti-ci@v1
+      #- name: Install Ziti CI
+      #  uses: netfoundry/ziti-ci@v1
       #- run: ls -l /
       #- run: ls -l /ziti-doc
       #- run: pwd
@@ -28,9 +28,3 @@ jobs:
       #- run: mono --version
       - name: generate docs
         run: ./publish.sh
-      - name: Pushback
-        env:
-          gh_ci_key: ${{ secrets.GH_CI_KEY }}
-        run: |
-         $(go env GOPATH)/bin/ziti-ci configure-git
-
