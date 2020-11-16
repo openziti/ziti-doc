@@ -29,3 +29,10 @@ jobs:
       - name: generate docs
         run: ./publish.sh
       - run: git status
+      - name: Publish generated content to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
+        with:
+          dir: openziti.github.io
+          repo: openziti/openziti.github.io
+          branch: master
+          token: ${{ secrets.ACCESS_TOKEN }}
