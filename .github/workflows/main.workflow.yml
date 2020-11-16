@@ -19,6 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: find / -name known_hosts
+      - run: echo home is: $HOME
       #- run: ls -l /
       #- run: ls -l /ziti-doc
       #- run: pwd

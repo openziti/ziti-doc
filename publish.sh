@@ -3,8 +3,8 @@ set -e
 
 mkdir -p ~/.ssh
 
-#echo running ssh-keyscan to add github.com to known hosts
-#ssh-keyscan github.com >> ~/.ssh/known_hosts
+echo running ssh-keyscan to add github.com to known hosts
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "publish script located in: $pub_script_root"
