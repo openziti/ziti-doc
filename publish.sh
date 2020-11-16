@@ -59,10 +59,13 @@ then
   else
     echo "${GH_KEY} DID NOT exist???"
   fi
-  
+
   git config user.name ziti-ci
   git config user.email ziti-ci@netfoundry.io
   git config core.sshCommand "ssh -i ${pub_script_root}/github_deploy_key"
+
+  echo "showing the git config"
+  git config --get remote.origin.url
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
