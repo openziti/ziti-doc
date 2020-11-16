@@ -55,19 +55,15 @@ then
 
   GH_KEY="${pub_script_root}/github_deploy_key"
   if test -f "${GH_KEY}"; then
-    echo "Configuring git. ${pub_script_root}/github_deploy_key exists..."
+    echo "git push should succeed: ${pub_script_root}/github_deploy_key exists..."
   else
     echo "${GH_KEY} DID NOT exist???"
   fi
-
-  echo "seeing if deploy key exists anywhere..."
-  find / -name github_deploy_key
-  echo "find complete"
+  
   git config user.name ziti-ci
   git config user.email ziti-ci@netfoundry.io
   git config core.sshCommand "ssh -i ${pub_script_root}/github_deploy_key"
-
-  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis" && git push
+  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
   echo ========= publish considered successful though no op
