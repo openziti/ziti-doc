@@ -71,6 +71,12 @@ then
   echo "checking id_rsa exists:"
   ls -l ~/.ssh/id_rsa
 
+  mkdir -p /root/.ssh
+  cp ${pub_script_root}/github_deploy_key /root/.ssh/id_rsa
+  chmod 600 /root/.ssh/id_rsa
+  echo "checking /root/.ssh/* now"
+  ls /root/.ssh/*
+
   ssh -Tv git@github.com
 
   echo __________________________________________________________________________
