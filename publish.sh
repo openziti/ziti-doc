@@ -63,6 +63,8 @@ then
     echo "${GH_KEY} DID NOT exist???"
   fi
 
+  echo "chmod'ing ${pub_script_root}/github_deploy_key to 600"
+  chmod 600 ${pub_script_root}/github_deploy_key
   ssh -Tv -i ${pub_script_root}/github_deploy_key git@github.com
 
   echo __________________________________________________________________________
