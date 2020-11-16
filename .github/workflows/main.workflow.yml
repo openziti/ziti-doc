@@ -11,4 +11,4 @@ jobs:
     container: openziti/doc:docfx
     steps:
       - uses: actions/checkout@v1
-      - run: publish-via-docker.sh
+      - run: ./publish-via-docker.sh
