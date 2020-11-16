@@ -15,8 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: ls -l /
-      - run: ls -l /github
-      - run: ls -l /github/home
-      - run: ls -l /github/workflow
+      - run: ls -l /ziti-doc
       - run: find . -name docfx.json
       - run: mono --version
