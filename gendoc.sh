@@ -85,6 +85,7 @@ fi
 if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
     pushd ${script_root}/docfx_project/ziti-sdk-swift   
     swift_sdk_rev_short=$(git status | head -1 | cut -d " " -f4)
+    echo "swift hash found to be: ${swift_sdk_rev_short}"
     popd
     S3_SWIFT_BUCKET="s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz"
     SWIFT_API_TARGET="./${DOC_ROOT}/api/swift"
