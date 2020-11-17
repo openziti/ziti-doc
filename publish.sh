@@ -63,23 +63,11 @@ then
     echo "${GH_KEY} DID NOT exist???"
   fi
 
-  mkdir /root/.ssh
+  # copy the known hosts to root... since this is running in a container it's running as the root user
+  # and the git commit command is looking for known_hosts at /root/.ssh/known_hosts - although ~/.ssh
+  # is at /github/home instead - go figure... /root/.ssh might not exist either so make it just in case
+  mkdir -p /root/.ssh
   cp $HOME/.ssh/known_hosts /root/.ssh/known_hosts
-  #echo "chmod'ing ${pub_script_root}/github_deploy_key to 600"
-  #chmod 600 ${pub_script_root}/github_deploy_key
-  #ssh -Tv -i ${pub_script_root}/github_deploy_key git@github.com
-  #cp ${pub_script_root}/github_deploy_key ~/.ssh/id_rsa
-  #chmod 600 ~/.ssh/id_rsa
-  #echo "checking id_rsa exists:"
-  #ls -l ~/.ssh/id_rsa
-
-  #mkdir -p /root/.ssh
-  #cp ${pub_script_root}/github_deploy_key /root/.ssh/id_rsa
-  #chmod 600 /root/.ssh/id_rsa
-  #echo "checking /root/.ssh/* now"
-  #ls /root/.ssh/*
-
-  #ssh -Tv git@github.com
 
   echo __________________________________________________________________________
   git config user.name ziti-ci
