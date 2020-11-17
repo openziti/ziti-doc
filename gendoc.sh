@@ -67,7 +67,7 @@ if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
     CLANG_SOURCE="${script_root}/docfx_project/ziti-sdk-c/api"
     CLANG_TARGET="${script_root}/${DOC_ROOT}/api/clang"
     echo " "
-    echo "Copying "
+    echo "Copying C SDK "
     echo "    from: ${CLANG_SOURCE}"
     echo "      to: ${CLANG_TARGET}"
     mkdir -p ${CLANG_TARGET}

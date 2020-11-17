@@ -18,7 +18,7 @@ curl -s https://api.github.com/repos/netfoundry/ziti-ci/releases/latest \
   | grep browser_download_url \
   | cut -d ":" -f2,3 \
   | tr -d \" \
-  | wget -i - -O ziti-ci
+  | wget -q -i - -O ziti-ci
 chmod +x ziti-ci
 mv ziti-ci /usr/bin
 
@@ -49,7 +49,7 @@ then
 
   # copy all the docs into the publish site
   cp -r docs/* openziti.github.io/
-  cd openziti.github.io
+  pushd openziti.github.io
   git add *
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
     echo changing git repo from https to git so that we can push...
@@ -76,7 +76,9 @@ then
 
   echo "showing the git config"
   git config --get remote.origin.url
+  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 
+  popd
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
