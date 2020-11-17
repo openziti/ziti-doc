@@ -79,17 +79,6 @@ then
   git config --get remote.origin.url
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 
-  cd ${pub_script_root}
-  echo __________________________________________________________________________
-  git status
-  git config user.name ziti-ci
-  git config user.email ziti-ci@netfoundry.io
-  git config core.sshCommand "ssh -i ${pub_script_root}/github_deploy_key"
-  if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
-    echo changing git repo from https to git so that we can push...
-    ${pub_script_root}/changeToSsh.sh
-  fi
-  git diff-index --quiet HEAD || git commit -m "[ci skip] update ziti-doc submodules from CI" && git push
   echo __________________________________________________________________________
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
