@@ -26,11 +26,11 @@ if [ "${GIT_BRANCH}" == "master" ]
 then
   echo on master branch - publish can proceed
 
-  ./gendoc.sh docs
+  ./gendoc.sh
 
   echo "configuring git..."
   ziti-ci configure-git
-  git add docs docfx_project/ziti-*
+  #git add docs docfx_project/ziti-*
 
   #move back to master once we're this deep into the run
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
@@ -47,8 +47,8 @@ then
   # clean the old site to remove any pages/etc that are no longer around
   rm -r openziti.github.io/*
 
-  # copy all the docs into the publish site
-  cp -r docs/* openziti.github.io/
+  # copy all the ziti-docs-local into the publish site
+  cp -r ziti-docs-local/* openziti.github.io/
   cd openziti.github.io
   git add *
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then

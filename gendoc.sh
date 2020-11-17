@@ -41,21 +41,21 @@ set -e
 script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo $script_root
 
-echo "updating git submodules via rm and then git submodule init"
+echo "updating dependencies by rm/checkout"
 rm -r rm -rf $script_root/docfx_project/ziti-*
-git submodule update --init
-git submodule update --remote --merge
+git clone https://github.com/netfoundry/ziti-cmd --branch master --single-branch docfx_project/ziti-cmd
+git clone https://github.com/netfoundry/ziti-sdk-csharp --branch master --single-branch docfx_project/ziti-sdk-csharp
+git clone https://github.com/netfoundry/ziti-sdk-c --branch master --single-branch docfx_project/ziti-sdk-c
+git clone https://github.com/netfoundry/ziti-android-app --branch master --single-branch docfx_project/ziti-android-app
+git clone https://github.com/netfoundry/ziti-sdk-swift --branch master --single-branch docfx_project/ziti-sdk-swift
 
-if [ "$1" == "" ]; then
-  DOC_ROOT=docs-local
-else
-  sed -i "s/docs-local/$1/g" docfx_project/docfx.json
-  DOC_ROOT=$1
+DOC_ROOT=ziti-docs-local
+
+if test -d "./$DOC_ROOT"; then
+  # specifically using ../ziti-doc just to remove any chance to rm something unintended
+  echo removing previous build at: rm -r ./$DOC_ROOT
+  rm -r ./$DOC_ROOT || true
 fi
-
-# specifically using ../ziti-doc just to remove any chance to rm something unintended
-echo removing previous build at: rm $(pwd)/../ziti-doc/${DOC_ROOT}
-rm -r $(pwd)/../ziti-doc/${DOC_ROOT} || true
 
 pushd docfx_project
 docfx build
@@ -84,7 +84,7 @@ fi
 
 if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
     pushd ${script_root}/docfx_project/ziti-sdk-swift   
-    swift_sdk_rev_short=$(git status | head -1 | cut -d " " -f4)
+    swift_sdk_rev_short=$(git rev-parse --short HEAD)
     echo "swift hash found to be: ${swift_sdk_rev_short}"
     popd
     S3_SWIFT_BUCKET="s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz"
