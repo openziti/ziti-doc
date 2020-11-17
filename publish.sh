@@ -47,8 +47,8 @@ then
   # clean the old site to remove any pages/etc that are no longer around
   rm -r openziti.github.io/*
 
-  # copy all the ziti-docs-local into the publish site
-  cp -r ziti-docs-local/* openziti.github.io/
+  # copy all the docs-local into the publish site
+  cp -r docs-local/* openziti.github.io/
   cd openziti.github.io
   git add *
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then

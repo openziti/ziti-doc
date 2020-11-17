@@ -49,7 +49,7 @@ git clone https://github.com/netfoundry/ziti-sdk-c --branch master --single-bran
 git clone https://github.com/netfoundry/ziti-android-app --branch master --single-branch docfx_project/ziti-android-app
 git clone https://github.com/netfoundry/ziti-sdk-swift --branch master --single-branch docfx_project/ziti-sdk-swift
 
-DOC_ROOT=ziti-docs-local
+DOC_ROOT=docs-local
 
 if test -d "./$DOC_ROOT"; then
   # specifically using ../ziti-doc just to remove any chance to rm something unintended
