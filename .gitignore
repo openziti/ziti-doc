@@ -16,3 +16,4 @@ docfx_project/api/clang/api/
 docs-local
 
 github_deploy_key
+docfx_project/ziti-*
