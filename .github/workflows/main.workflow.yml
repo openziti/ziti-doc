@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-
+  schedule:
+    - cron: '0 2 * * *' # run at 2 AM UTC
+      
 jobs:
   publish-docs-from-container:
     runs-on: ubuntu-latest
