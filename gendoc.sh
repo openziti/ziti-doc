@@ -44,6 +44,7 @@ echo $script_root
 echo "updating git submodules via rm and then git submodule init"
 rm -r rm -rf $script_root/docfx_project/ziti-*
 git submodule update --init
+git submodule update --remote --merge
 
 if [ "$1" == "" ]; then
   DOC_ROOT=docs-local
