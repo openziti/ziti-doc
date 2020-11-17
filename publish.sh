@@ -79,6 +79,10 @@ then
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 
   popd
+  echo __________________________________________________________________________
+  git config user.name ziti-ci
+  git config user.email ziti-ci@netfoundry.io
+  git config core.sshCommand "ssh -i ${pub_script_root}/github_deploy_key"
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 else
   echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
