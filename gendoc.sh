@@ -11,7 +11,7 @@ else
     alias docfx="mono $DOCFX_EXE"
 fi
 
-commands_to_test=(doxygen mono docfx aws)
+commands_to_test=(doxygen mono docfx jq)
 
 # verify all the commands required in the automation exist before trying to run the full suite
 for cmd in "${commands_to_test[@]}"
@@ -83,20 +83,17 @@ else
 fi
 
 if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-    pushd ${script_root}/docfx_project/ziti-sdk-swift   
-    swift_sdk_rev_short=$(git rev-parse --short HEAD)
-    echo "swift hash found to be: ${swift_sdk_rev_short}"
-    popd
-    S3_SWIFT_BUCKET="s3://ziti-sdk-swift/ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz"
+    pushd ${script_root}/docfx_project/ziti-sdk-swift
+    swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_dow
+nload_url')
     SWIFT_API_TARGET="./${DOC_ROOT}/api/swift"
     echo " "
     echo "Copying Swift docs"
-    echo "    from: ${S3_SWIFT_BUCKET}"
+    echo "    from: ${swift_tgz}"
     echo "      to: ${script_root}/${DOC_ROOT}/api/clang"
-    echo "     via: tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ${SWIFT_API_TARGET}"
-    aws s3 cp ${S3_SWIFT_BUCKET} .
-    mkdir -p "./${DOC_ROOT}/api/swift"
-    tar xvf ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz -C ${SWIFT_API_TARGET}
+    echo "     via: wget -q -O - "$swift_tgz" | tar -zxvC "${SWIFT_API_TARGET}"
+    mkdir -p "./${SWIFT_API_TARGET}"
+    wget -q -O - "$swift_tgz" | tar -zxvC "${SWIFT_API_TARGET}"
     rm ziti-sdk-swift-docs-${swift_sdk_rev_short}.tgz
 fi
 
