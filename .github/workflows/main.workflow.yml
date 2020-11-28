@@ -22,4 +22,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: generate docs
-        run: ./publish.sh
+        run: /ziti-doc/publish.sh
