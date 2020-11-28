@@ -1,5 +1,8 @@
 Some quick notes on building this in travis.
 
+#pull the base image...
+docker pull ubuntu:bionic
+
 #build the base image...
 docker build openziti-mono-base -t openziti/doc:mono-base
 

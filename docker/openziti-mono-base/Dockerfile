@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:bionic
 
 # mono and dependencies install
 RUN apt update && \
