@@ -89,12 +89,13 @@ if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.
     echo " "
     echo "Copying Swift docs"
     echo "    from: ${swift_tgz}"
-    echo "      to: ${script_root}/${DOC_ROOT}/api/clang"
+    echo "      to: ${script_root}/${SWIFT_API_TARGET}"
     echo "     via: wget -q -O - ${swift_tgz} | tar -zxvC ${SWIFT_API_TARGET}"
     mkdir -p "./${SWIFT_API_TARGET}"
     pwd
     wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
-    find . -name EnrollmentResponse*
+    find ${script_root}/${SWIFT_API_TARGET} -name EnrollmentResponse*
+    popd
 fi
 
 
