@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-sudo apt install jq -y
+apt install jq -y
 
 mkdir -p ~/.ssh
 
