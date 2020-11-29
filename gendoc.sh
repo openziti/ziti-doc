@@ -83,17 +83,19 @@ else
 fi
 
 if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-    pushd ${script_root}/docfx_project/ziti-sdk-swift
-    swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
     SWIFT_API_TARGET="./${DOC_ROOT}/api/swift"
+    mkdir -p "./${SWIFT_API_TARGET}"
+    pushd ${SWIFT_API_TARGET}
+    swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
     echo " "
     echo "Copying Swift docs"
     echo "    from: ${swift_tgz}"
     echo "      to: ${script_root}/${SWIFT_API_TARGET}"
-    echo "     via: wget -q -O - ${swift_tgz} | tar -zxvC ${SWIFT_API_TARGET}"
-    mkdir -p "./${SWIFT_API_TARGET}"
+    #echo "     via: wget -q -O - ${swift_tgz} | tar -zxvC ${SWIFT_API_TARGET}"
+    echo "     via: wget -q -O - ${swift_tgz} | tar -zxv"
     pwd
-    wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
+    #wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
+    wget -q -O - "${swift_tgz}" | tar -zxv
     find ${script_root}/${SWIFT_API_TARGET} -name EnrollmentResponse*
     popd
 fi
