@@ -3,7 +3,7 @@ name: build and deploy docs
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
     - cron: '0 2 * * *' # run at 2 AM UTC
       
@@ -17,7 +17,7 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
         AWS_DEFAULT_REGION: us-east-1
-        GIT_BRANCH: master
+        GIT_BRANCH: main
         gh_ci_key: ${{ secrets.gh_ci_key }}
     steps:
       - uses: actions/checkout@v1
