@@ -24,9 +24,9 @@ curl -s https://api.github.com/repos/netfoundry/ziti-ci/releases/latest \
 chmod +x ziti-ci
 mv ziti-ci /usr/bin
 
-if [ "${GIT_BRANCH}" == "master" ]
+if [ "${GIT_BRANCH}" == "main" ]
 then
-  echo on master branch - publish can proceed
+  echo on main branch - publish can proceed
 
   ./gendoc.sh
 
@@ -34,12 +34,12 @@ then
   ziti-ci configure-git
   #git add docs docfx_project/ziti-*
 
-  #move back to master once we're this deep into the run
+  #move back to main once we're this deep into the run
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
     echo changing git repo from https to git so that we can push...
     ./changeToSsh.sh
   fi
-  git checkout master
+  git checkout main
 # branch protection disallows this  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from travis" && git push
 
   echo "cloning actual github pages now to push docs into"
@@ -83,7 +83,7 @@ then
 
   echo __________________________________________________________________________
 else
-  echo ========= cannot publish from branch that is not master : ${GIT_BRANCH}
+  echo ========= cannot publish from branch that is not main : ${GIT_BRANCH}
   echo ========= publish considered successful though no op
 fi
 
