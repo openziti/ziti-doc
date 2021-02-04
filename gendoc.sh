@@ -47,7 +47,7 @@ git clone https://github.com/netfoundry/ziti-cmd --branch main --single-branch d
 git clone https://github.com/netfoundry/ziti-sdk-csharp --branch master --single-branch docfx_project/ziti-sdk-csharp
 git clone https://github.com/netfoundry/ziti-sdk-c --branch main --single-branch docfx_project/ziti-sdk-c
 git clone https://github.com/netfoundry/ziti-android-app --branch master --single-branch docfx_project/ziti-android-app
-git clone https://github.com/netfoundry/ziti-sdk-swift --branch master --single-branch docfx_project/ziti-sdk-swift
+git clone https://github.com/netfoundry/ziti-sdk-swift --branch main --single-branch docfx_project/ziti-sdk-swift
 
 DOC_ROOT=docs-local
 
