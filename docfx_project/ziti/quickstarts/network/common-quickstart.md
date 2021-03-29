@@ -70,18 +70,19 @@ To create a new identity using the CLI simply issue these commands:
 
 ### Enroll the New Identity
 
-Identities are not truly enabled until they are enrolled. Enrollment is a complex process. NetFoundy has created a tool
-specifically for this task to ensure safe and secure enrollment of identities.
+Identities are not truly enabled until they are enrolled. Enrollment is a complex process. The easiest way to
+enroll an identity is to use either the Ziti Desktop Edge/Ziti Mobile Edge for your operating system. Alternatively
+the ziti-tunneler for your operating system can be downloaded and used to enroll the identity.
 
-1. Download the ziti-enroller for your operating system.
+1. Download the ziti-tunneler for your operating system.
 
-[!include[](~/ziti/downloads/enroller.md)]
+[!include[](~/ziti/downloads/tunneler.md)]
 
 1. Download the [jwt](https://jwt.io/introduction/) from the UI by clicking the icon that looks like a certificate (save
    the file as NewUser.jwt) or if you used the CLI from the output location specified when creating the user.
-1. In a command line editor, change to the folder containing the jwt. Enroll the identity by running `ziti-enroller --jwt NewUser.jwt`
+1. In a command line editor, change to the folder containing the jwt. Enroll the identity by running `ziti-tunneler enroll --jwt NewUser.jwt`
 
-The ziti-enroller will output a new json file named `NewUser.json`. This file is precious and must be protected as it
+The enrollment process will output a new json file named `NewUser.json`. This file is precious and must be protected as it
 contains the identity of the given user.
 
 ## Create a Service
