@@ -49,7 +49,7 @@ line interface of your operating system.
   It would likely have worked if enough effort was put into discovering why that linux variant had issues pulling and
   compiling the necessary software. If you see strange errors when following this guide and are not using Ubuntu it may
   be related.
-* ziti, ziti-tunnel, ziti-enroller are all on the path.
+* ziti and ziti-tunnel are both downloaded and on the path.
 
 ## Let's Use the YubiKey!
 
@@ -67,10 +67,8 @@ Here's the list of steps we'll accomplish in this quickstart:
 * Use the pkcs11-tool provided by OpenSC to interact with the YubiKey to:
     * initialize the PIV app
     * create a key
-* Use the [ziti-enroller](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-enroller/) to enroll the identities
-  using the YubiKey
-* Use the [ziti-tunnel](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-tunnel/) in proxy mode to verify things
-  are working and traffic is flowing over the Ziti Network
+* Use `ziti-tunnel` to enroll the identities using the YubiKey
+* Use `ziti-tunnel` in proxy mode to verify things are working and traffic is flowing over the Ziti Network
 
 > [!WARNING]
 Do *NOT* use id `2` or `02` for any keys you add. Id `02` corresponds to the YubiKey's "Management Key". You will not be
@@ -229,17 +227,17 @@ by the pkcs11 driver!
 
 ***
 
-### Use ziti-enroller to Enroll the Identities
+### Use ziti-tunnel to Enroll the Identities
 
 # [Linux/MacOS](#tab/enroll-linux)
 
-    ziti-enroller -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
-    ziti-enroller -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
+    ziti-tunnel enroll -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
+    ziti-tunnel enroll -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
 
 # [Windows](#tab/enroll-windows)
 
-    ziti-enroller -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
-    ziti-enroller -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
+    ziti-tunnel enroll -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
+    ziti-tunnel enroll -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
 
 ***
 
@@ -412,7 +410,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
       label:      Public key for Key Management
       ID:         03
       Usage:      encrypt, verify
-    cd@cd-ubuntuvm: ziti-enroller -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
+    cd@cd-ubuntuvm: ziti-tunnel enroll -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
     DEBU[0000] jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjU1NjE3OSwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6Ijk5NjVlZmQzLTliMjItNDk3ZS04NDdiLTM1NWI3MjE1NTZjMyIsInN1YiI6Ijc2ODc3NzE3LTliY2UtNGYzNC1hZTdhLTJjZTMxM2I4MjY3YSJ9.ohrYUZQK5xum-70AYARu8hYYxhvA9Cm2rEln6jVp8VDvMLRuIQi9bXNO1e2NQtkZLGzo3akg4Brx_QxM-9SIRKdBDYzgaN_otpV6y9XAQjVlarVvtA1bBA9OfQU1SyVGNkkaA2l660cY5gfsGb5TqBQt6wQ7KvMfzZvPhXFdQAMoXW-O2OaRh3jJGPne29-Hoz_thObv5PMTVlCGpzO6tKKfPnoV9p8HchjLHMMybEZO_xITyY_6UmkOPpeSJHdjWxJdkXu0xT8wC9PzAXK2xYYwgmW4yA8ygz2RJP6gXYd5maD-f1jgh87ELeN5dG2ksuy5Fh3_kyFAGg1X7dSnfmXSA0fWH-YPK54aSJe2fcCIt41O9pnqwepPT_7nCB4wSxVhuIugUBh_wYeJzXKI8tVnyv8nLyWhYqMwKRqTtiJM7EtxpBUPD6E35x3d4bw_fkVJ5z36NOIaGRmqhltPIsYMaFDwIE-nUU714Ra-cf8xN9lHuNoi_4Ehf8sR2YwLTsk7mJ9TKZkhLIj2KgwjL2KNCoM9n6MQtJJMq3Ae6H_xVxi2-DA_9zkbusdNi2j11OoIAtBGJQ4ONC5ekRsp_bTbb9GAxF-fO8oAQeFUXWyCpywRV8gT3G4huAlcofZTDnMtcyVvTJbvs8zYRtBM9jCKpUOmHuzb4FefgU-6kP0
     INFO[0000] using engine : pkcs11
     DEBU[0000] loading key                                   context=pkcs11 url="pkcs11:///path/to/yubico-piv-tool-2.0.0/ykcs11/.libs/libykcs11.so?id=01&pin=123456"
@@ -425,7 +423,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     INFO[0001] using driver: /path/to/yubico-piv-tool-2.0.0/ykcs11/.libs/libykcs11.so  context=pkcs11
     WARN[0002] slot not specified, using first slot reported by the driver (0)  context=pkcs11
     DEBU[0002] found signing mechanism                       context=pkcs11 sign mechanism=0
-    enrolled successfully. identity file written to: /path/to/yubico-piv-tool-2.0.0/yubikey_demo/yubikey_demo01_rsa.jsoncd@cd-ubuntuvm: ziti-enroller -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
+    enrolled successfully. identity file written to: /path/to/yubico-piv-tool-2.0.0/yubikey_demo/yubikey_demo01_rsa.jsoncd@cd-ubuntuvm: ziti-tunnel enroll -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
     DEBU[0000] jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjU1NjE4MSwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6IjQwYTg1NmMxLWFiZmItNDQ4ZS1hN2E3LWE3YjZkMzVmYWU4OSIsInN1YiI6ImJkZDE4ZTU4LWU0NzQtNGVkMy05OGViLWM2OGVkOTYzNzdiZSJ9.o5hGXqZXWUuj-zkg-Xd335AbZUe9zNtvQmhE4cNFZNw40eRXNTBeFntLWjWv7-41AtsHbPwmQgWQfDdHS8JuLbhLS-8ZNSL3ZThBwnTiKtgYQvg_aArcu1FbPiw3jdiiHqXu0JoIToCEFX4kMjAJIZlzRi05J0d5w6Wvvjy3V7SqT_8viLla6l3PXsa1_xnHCc89HebuKB_qYds-XO2JvXTOFP0A3dSe6UgierjrTPvRxLMbf8TIfSOFtAc6bbSy17H8S0XrNiL-1bA9Ja9KKpB_ynGTygpM3h1vXda0niJN-_TpPdTX9kFEXOn-DpvAGKW8X6ggPlnpF7Rmfx9AEarA9ft-nRjx4Z4vyoAlukSc7LfnjAqTg9CCsN0-hKB1d1PnAOuWfHP5IZ2w1zibcUvdRQMoW2Twk_P75MP8rjr19VtZu5bDweZjP10-eHt3_QYeujaylBfb7VkJuRtSyh6IeWAb-IlIaJx7hzjGqssqNPn0vqVdf43Sc0h-PJcVTOkNPpcBIbxHPL5IVyujCWUSj4NUSgVh72uQIKjxC-WrkT8i-hEnGbJRYUL2NDcS190yt21AJAAkDPBTiFA_LR0aR7lEPzQV-lsjJzjmta7V460OKATsU8oo82_S8dVv8oYndk2kRboVsCWvR7_6H95CEnmRjAfI0Emxwkg1raA
     INFO[0000] using engine : pkcs11
     DEBU[0000] loading key                                   context=pkcs11 url="pkcs11:///path/to/yubico-piv-tool-2.0.0/ykcs11/.libs/libykcs11.so?id=03&pin=123456"
@@ -794,7 +792,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
       Usage:      encrypt, verify
       Access:     local
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti-enroller -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti-tunnel enroll -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
     time="2020-02-14T09:47:46-05:00" level=debug msg="jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjU1NTYyMiwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6ImYwYjIxZjQ4LTk3N2QtNDVlZi04ZDZlLWY5YzllMzlkYTg1YSIsInN1YiI6IjQzYjc2Mzk3LWM2NWUtNDNhOS1hMzI2LWI1OGY4M2NhY2ZlYSJ9.lAfmkZb_3-qPtW4hWaaHsL_7rZiHlN3LKGIrudX4K91idw5C-AdcjT-smbfSlDBqmZElU0iomrmT4TJ3SbGM9yRhrnRZBgsbC76dKO6sbNuCEGLeMJ_pJFGo7ZZC32wLm2HsvCXszwjMXOrr1ndvWUKs3KkUhvmbBEIA4x566McsngeZ5B4ILso4BmL4KJcef-n-PuI14V42n7uzOu_KZomEGSNZ34LCg0cbWcsUmoeV8d3Vgb3xSR16wyyl7tC_pGvH1qPvaWmNUQ9BWk1j730C6RXLHZ3zECOUXqIjYTOaXkoDEpuXceNF5gNm9Cx76UwpKJlSEyD_LFbkULJL4_zmKy9w9JreSUh6cnkPW7ltXluEt-Wy1VckkwOPUCRXCQ_AuxvClhOPUW_Y-PW8Qbooou7eo8v-ZPAuFqx04_DkPdhMPn2h6CyZiqEM5ZqN_ln-Q6BAUgpBHmAFUuPDnCXk0R1l74Yc23z55hrfFreR9-t4BGl6ZBiV9oAa6kz4-8MTkg_osGJOAn3S0T_mFORCES68dppVAF9Lv8kaFkZsJE3pyQeApyYqtIZWZUUiQH4S3ssFfwuoy9KmP9lvSo4Ampl7whygx6B6nf5EiSvkQyvNPSW1L5VQeI3eShQbrUHVnrBMY2BQHa86Wqz6ICdSLQHW1P_Z6yX71HKa06A"
     time="2020-02-14T09:47:46-05:00" level=info msg="using engine : pkcs11\n"
     time="2020-02-14T09:47:46-05:00" level=debug msg="loading key" context=pkcs11 url="pkcs11://c:%5Cpath%5Cto%5Cyubico-piv-tool-2.0.0%5Cbin%5Clibykcs11-1.dll?id=01&pin=123456"
@@ -808,7 +806,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     time="2020-02-14T09:47:46-05:00" level=warning msg="slot not specified, using first slot reported by the driver (0)" context=pkcs11
     time="2020-02-14T09:47:46-05:00" level=debug msg="found signing mechanism" context=pkcs11 sign mechanism=0
     enrolled successfully. identity file written to: c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo\yubikey_windemo01_rsa.json
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti-enroller -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti-tunnel enroll -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
     time="2020-02-14T09:47:47-05:00" level=debug msg="jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjU1NTYyMywiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6ImY1NzVkZTI0LTcyYzctNDcxZS1hMzI0LTUyMjE3ZWFlYmExNCIsInN1YiI6ImZhMTE2Yjg3LWQzMjItNDA1OC1hOGMxLWQ0MWYyMWE5ZTA1MSJ9.cMyzS7o4ou2XUN6d3C-fx6i7sleIZO5b_LeqOxBNkAZO6l7JFIAp54ak8TUYD-chsVnSZ-bYPiuO-lbPIR2UrZvN6SshOowiQpAKQPggL2y0UZJAqzRoxfzlkjBZXi5BjRSTGTW3nRd9y40AwR_aAkOr4IztYbREGBYvfTK4QX-NSVvSoGVCiBeKFC6PO_8nuAUxMgL_ODVpPVA1ThO5l6Jzut_N5LgysaxTjp8WWsAIvUIbnIxJ7y_hTvmKFQ9hbLuTLaWZ091AA-469dxzbMzQVe_xDSwpQDGfYgRm02_uRlKUlm_w_sPdytaNb54u0I0-la83r31S8ugyGz3xMD-xLDHVKwxZ7dUArQf3oKzGZNhCc6MMJQBI81jbHaeSCNlpDJugYDDG0bx1E87cU7Nt88h-jaLOwEOqozsG_4myhoFaMRGx-unNP8Lr-zlPtU3AGMTu21AvCq4CCg0HYLdKVjCkQ3m6N29wOrMgF_3G_hdvTLDTeHY2wKnJIBHg3lg106a7J6WtiM9CyS_N_01kCtwFWK49662GQPv6_IVb6eKokhtcA4-2E1F6H8v5BCUljzfjpfQ4EQds7uDtQSL3i3muBLuXkLUW86H98q8XVnQZms_41T2n6MWmo5smOYrs4--rM1R-in3lmKymd8nmmN-L2GuJF5zsRaiq0r4"
     time="2020-02-14T09:47:47-05:00" level=info msg="using engine : pkcs11\n"
     time="2020-02-14T09:47:47-05:00" level=debug msg="loading key" context=pkcs11 url="pkcs11://c:%5Cpath%5Cto%5Cyubico-piv-tool-2.0.0%5Cbin%5Clibykcs11-1.dll?id=03&pin=123456"

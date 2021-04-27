@@ -15,9 +15,9 @@
 ## Building the Doc
 
 Github offers [github pages](https://pages.github.com/) which this project uses to host the output of building the
-static content. Github has a few options for where you can put your doc at this time, the master branch, a folder on the
-master branch named 'docs' or a special branch that still works named "gh-pages". This project is currently configured
-to use the master branch and docs folder.
+static content. Github has a few options for where you can put your doc at this time, the main branch, a folder on the
+main branch named 'docs' or a special branch that still works named "gh-pages". This project is currently configured
+to use the main branch and docs folder.
 
 The best/easiest thing to do in order to build these docs is to have Windows Subsytem for Linux installed or any shell
 which can execute a `.sh` script. As of 2020 there's a multitude of ways to get a bash/shell interpreter in windows.

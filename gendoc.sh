@@ -43,11 +43,11 @@ echo $script_root
 
 echo "updating dependencies by rm/checkout"
 rm -r rm -rf $script_root/docfx_project/ziti-*
-git clone https://github.com/netfoundry/ziti-cmd --branch master --single-branch docfx_project/ziti-cmd
-git clone https://github.com/netfoundry/ziti-sdk-csharp --branch master --single-branch docfx_project/ziti-sdk-csharp
-git clone https://github.com/netfoundry/ziti-sdk-c --branch master --single-branch docfx_project/ziti-sdk-c
+git clone https://github.com/netfoundry/ziti-cmd --branch main --single-branch docfx_project/ziti-cmd
+git clone https://github.com/netfoundry/ziti-sdk-csharp --branch main --single-branch docfx_project/ziti-sdk-csharp
+git clone https://github.com/netfoundry/ziti-sdk-c --branch main --single-branch docfx_project/ziti-sdk-c
 git clone https://github.com/netfoundry/ziti-android-app --branch master --single-branch docfx_project/ziti-android-app
-git clone https://github.com/netfoundry/ziti-sdk-swift --branch master --single-branch docfx_project/ziti-sdk-swift
+git clone https://github.com/netfoundry/ziti-sdk-swift --branch main --single-branch docfx_project/ziti-sdk-swift
 
 DOC_ROOT=docs-local
 

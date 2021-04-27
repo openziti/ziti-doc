@@ -19,7 +19,7 @@ line interface of your operating system.
 * [SoftHSMv2](https://www.opendnssec.org/softhsm/) is downloaded and installed in a known location
 * [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a known
   location
-* ziti, ziti-tunnel, ziti-enroller are all on the path.
+* ziti and ziti-tunnel are both on the path.
 
 ## Let's Do This - SoftHSMv2
 
@@ -37,10 +37,8 @@ Here's the list of steps we'll accomplish in this quickstart:
 * Use the pkcs11-tool provided by OpenSC to interact with SoftHSM to:
     * initialize the SoftHSM driver
     * create a key
-* Use the [ziti-enroller](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-enroller/) to enroll the identities
-  using SoftHSM
-* Use the [ziti-tunnel](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-tunnel/) in proxy mode to verify things
-  are working and traffic is flowing over the Ziti Network
+* Use `ziti-tunnel` to enroll the identities using SoftHSM
+* Use `ziti-tunnel` in proxy mode to verify things are working and traffic is flowing over the Ziti Network
 
 ### Establish Environment Variables
 
@@ -230,17 +228,17 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 
 ***
 
-### Use ziti-enroller to Enroll the Identities
+### Use ziti-tunnel to Enroll the Identities
 
 # [Linux/MacOS](#tab/enroll-linux)
 
-    ziti-enroller -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
-    ziti-enroller -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
+    ziti-tunnel enroll -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
+    ziti-tunnel enroll -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11://${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
 
 # [Windows](#tab/enroll-windows)
 
-    ziti-enroller -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
-    ziti-enroller -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
+    ziti-tunnel enroll -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
+    ziti-tunnel enroll -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
 
 ***
 
@@ -567,7 +565,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     Usage:      encrypt, verify, wrap
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti-enroller -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
+    $ ziti-tunnel enroll -j "${HSM_DEST}/${RSA_ID}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID1}&pin=${HSM_PIN}" -v
     DEBU[0000] jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjQ2NDY5NSwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6IjIzOTNjNDgwLTc0NGMtNDc3OS05NjU3LWNhOTdlMzUzOWQ0ZiIsInN1YiI6ImRiZjk1M2JjLWE5ODctNGE4OS1hOTNkLTBkNmRhYzEzMTUwZiJ9.OucLqJYgvGO0zov3ADI4oM0i0CASfpD6GUUAck5cBKVJqUN8jsdHe272CwnR7TH1w7uUNr5zPDJnwklVRQ0kzgxqFe9lGqNOxKtYecr-oI50K-J_OShPu_LkJ8dpmUk-OEzc1mq29KsIVu9GLUI43FLYD7SWFZZFsYk6iB8H4PPRrUNZucTcApgNNHljlwl8n-my5N3STqazJf7YUIHOh-OiW8rJFXZYf5gri_B6uDGQo-ZcMOISWCTRjPxe2boHK0ymrUanbe_i9vHbOQRIik7J6xOEA2-Vu-QW9WY4bEvl0_LChdV4YBG09EtWsJndl1AIsD0AP0fCjgD6FifAbpmiZx_YoqOM-KCbN9Vts9_FobNfT0rt9s7RzcHImj22jxEQtSNVbrjnulPwzhBM2PnOKrHJtq8KGgsGlC-aC1pUkiRS-eMHDOshDUFk16p56UXm9QS4d1rPmCQ8yksgEdeurRydmBKCr2tr1v9hC7gSxY1sOBF-b9k7HBGuinomuyeF6CRRMRYMiYz26suZXvP70ufJ5Z2h6hYqvIIGtpk_MxMuVl8r9iylWq3P7oqbDo74g3p3OSFwRUDm5llBuZKJUzQXYE3435NdpHeStKu4K2VYvGGCxpWe950ONrAGzwSYtYdOVvkgGxBreO3RNiQN427XD9yZw66pXXqIRV0
     INFO[0000] using engine : pkcs11
     DEBU[0000] loading key                                   context=pkcs11 url="pkcs11:////usr/local/lib/softhsm/libsofthsm2.so?id=01&pin=2222"
@@ -582,7 +580,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     DEBU[0000] found signing mechanism                       context=pkcs11 sign mechanism=0
     enrolled successfully. identity file written to: /home/cd/.softhsm/softhsm_demo/softhsm_demo01_rsa.json
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti-enroller -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
+    $ ziti-tunnel enroll -j "${HSM_DEST}/${EC_ID}.jwt" -k "pkcs11:///${PKCS11_MODULE}?id=${HSM_ID2}&pin=${HSM_PIN}" -v
     DEBU[0000] jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjQ2NDY5NiwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6ImJlZTJlY2U3LTE4ZTAtNGQ3Zi04NmRlLTU4NmM5MTAyNDY3YiIsInN1YiI6ImNmZmZlNDBkLWI4NTktNGE1YS1hYjRmLWM5NjIxYTU3ZWM4NSJ9.nRCE-_osr6rdVUcfyR-irvAWitCSK0pm7WaG0hOC0-O22SFs8tYw7uKvbGmNkFoVsUYK4y6A4X77Q6JPNPDIzwWl1TO788B4UiJNh6x5jFEKMawzzPbq-wGq0PLstLsULOryxRtIMdHRYaCrxspC9mIZTrIWe85iPPjirOJ0Pgq0-Li2hZmBtlFOh8zTzYGmXVQtKhA-obIDSa12Nrt6gpgpNl1Ob_EXWWkwC5rcdm4yKpiKx7wYjxBRKc4ZLODmNahe69KiG5XD9A5I5o6YWQDs-pgl3Op44U9Kk94fGSZPcgzkPUC8NaX1eWgYh6RCMs3uSp6TMi8bRisPCOW770K3CxPpCS1fKg9rpyPninFShjRMvsbf999ldWh3YKmLJXvtinQF3szbmCsVaTI4-NxlkhLcdL2Qo6ivLz_kddNfzmDFcOEcLerR0D_Ugt0mPi0RidgkX0J00uXqd1SqYyI3b68KyVd5U3hIoL8NRQ1gAluky0jSe-xj5vfTgxYiJNZlUqCA4DvGdXl98NiWu40eHEz5ksKePbB_LVCmcMW3mPNdQjmDw4fdKvfZs0FdqgOcBGzbfQznpt3UV1pgL7Kdl6EfZppP1FNjqaxHyiEqkdINY0X5k33CDV4IVuS0ZDbOuQHInfG2ggLLS_vykC37w5iJe19ECSMWd_JzgQc
     INFO[0000] using engine : pkcs11
     DEBU[0000] loading key                                   context=pkcs11 url="pkcs11:////usr/local/lib/softhsm/libsofthsm2.so?id=02&pin=2222"
@@ -1023,7 +1021,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     Usage:      encrypt, verify, wrap
     Access:     local
 
-    c:\path\to\softhsm\softhsm_demo>ziti-enroller -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
+    c:\path\to\softhsm\softhsm_demo>ziti-tunnel enroll -j "%HSM_DEST%\%RSA_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID1%&pin=%HSM_PIN%" -v
     time="2020-02-13T09:22:18-05:00" level=debug msg="jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjQ2NzcyOCwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6IjQwZjE5Y2VhLWFjYWYtNDQyMy1iNzhjLWI2NjU4MDA0NGI2MSIsInN1YiI6ImE2MjVlZTQ2LWI3OTktNGU5Zi1hOTJjLTU5YTU3OWNiOTc1NiJ9.LkziWbgKeJtZ6f5dd169K32Gq86-6ly13v7iHn7Zj_ITFudxXzLa2dl3JonBRg6hNW8ghiPNZ7JpcSkRiaN8npKUHAnsZfr1kPE-NR-eJmUTqM88UhznQJOKyAZzA-dLxRfsRgmU9ESLVsAQEE4wefPz8AlsXWGYK9oWx-X0SEwu4TgjCWP1jEd7pQJXw5ZXIBYLZMG0buIFaKgskH-inpK7BF2LZc9ENr6nj4W4X_tm7kbzGdQ-ofzlhJMBHFz2w_qQXDqXiYWf59Wrszd9-3y0rbvykmc9L8G3B1YlICKyD6mhaPt4fLquZEOwsyeOgH9BLJhX9I33nfYZe_mQf4jzhw5U13K1VKaL-JGwfXntwrKMUJhB62NDMLNALMDqc4hK3BKp1wdZT5YL2Y91J2lLa50mg0OG9ASvkmh7dW3FhDFntl9UnSuPmVJExfMJJCXwe0DgbLcg0TugUuioJ9iCrAZ2tTsLoXDIqLj4zqDhe2nCXdTGgqGpa2ftqNWsUxJmZM2V8ll8Mb2tcuNu0WHcpZ1nH9iXuNHWRsLyowIZB0NJoIvYRlHzlPiSjJxZlNdMSh2jm6tZ7_sAyw_cIAU20yJ3KSGE2PT9bCgkISiYEZ2V5Q3cyGIi0OMP7IqZ5vomqHhkF41C4LIH7A4NKCWMztTwt-WOIndGX5yB1GA"
     time="2020-02-13T09:22:18-05:00" level=info msg="using engine : pkcs11\n"
     time="2020-02-13T09:22:18-05:00" level=debug msg="loading key" context=pkcs11 url="pkcs11://c:%5Cpath%5Cto%5Csofthsm%5Clib%5Csofthsm2-x64.dll?id=01&pin=2222"
@@ -1037,7 +1035,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     time="2020-02-13T09:22:18-05:00" level=warning msg="slot not specified, using first slot reported by the driver (452108387)" context=pkcs11
     time="2020-02-13T09:22:18-05:00" level=debug msg="found signing mechanism" context=pkcs11 sign mechanism=0
     enrolled successfully. identity file written to: c:\path\to\softhsm\softhsm_demo\softhsm_demo01_rsa.json
-    c:\path\to\softhsm\softhsm_demo>ziti-enroller -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
+    c:\path\to\softhsm\softhsm_demo>ziti-tunnel enroll -j "%HSM_DEST%\%EC_ID%.jwt" -k "pkcs11://%PKCS11_MODULE%?id=%HSM_ID2%&pin=%HSM_PIN%" -v
     time="2020-02-13T09:22:19-05:00" level=debug msg="jwt to parse: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTU4MjQ2NzcyOSwiaXNzIjoiaHR0cHM6Ly9sb2NhbC1lZGdlLWNvbnRyb2xsZXI6MTI4MCIsImp0aSI6ImU0NDhlMGVjLTk4Y2ItNDBjMC05MmE4LWE2YjMyZDJlY2UwMCIsInN1YiI6IjA4ODg5ZjUxLTE2MzktNGNkMC05YzE4LWZmY2M1ZTMxNWYzZSJ9.HHlGcNPh1E83SG3ncCzIPLpav4fRZ44eAeq9Igr24CHT3TCJXXooFNVY5LYtTJ3ydsE6RVPn3UCrP_72CK4Y8Bc-OHDxtPsl0wQwH90tYIz68d2Br0D8kBjjLnYNfsQS0w4t9GEdnNLD8WfjIF8V1croBksrA0jyDiZFak67tKwohzftmm7bNNibA2KvNFVSa_ZaD1lT-SR5xEHaTkR4LpBhPSN9HeR6TAj0c0LsFgFAm_4LrX14r3eufCxxj0TIEHPvxqa_dMJq3TuUFQQPvSIStnXKd9i4gTnFhFdxeZ4J4R94IT6UdzAVD1lIBA9tta7XrMgKpG7Yl8OX60rh3je4S73WAff4kZg6gFpL2RckHuCGdn4AoAXPJoFqBerQ3xybAVNW913fxtw942juVBhjb4Ex2LzZylkRrQmJ3xV5s3-MuW8-1-2N1lK5u1JK_sulrCx5trrvFb99z2INnNh0baVFq_7-3KozVsE0RNiXGc5dAjhNFWJWXT9H6PhIzzJ-0l84ZQaloxon1b70LnoVPC8g2z-Psvv8-Pc2JIlg5K4DLIXsagD4n4S1Fh8aqAyduF5Sc7ddVQ20-8Fz8iIZXNEGvNa9KwuHVzrk3UZJ3cB7Q1oWDshHPcMd7B4AtyV4z9U4qUP7syyAYkGYrMT_F26uNmIb0s2eW6xDf68"
     time="2020-02-13T09:22:19-05:00" level=info msg="using engine : pkcs11\n"
     time="2020-02-13T09:22:19-05:00" level=debug msg="loading key" context=pkcs11 url="pkcs11://c:%5Cpath%5Cto%5Csofthsm%5Clib%5Csofthsm2-x64.dll?id=02&pin=2222"
