@@ -5,7 +5,7 @@ shopt -s expand_aliases
 if [[ "" = "$DOCFX_EXE" ]]; then
     shopt -s expand_aliases
     if [[ -f "~/.bash_aliases" ]]; then
-    	source ~/.bash_aliases
+    	source "${HOME}/.bash_aliases"
 	fi
 else
     alias docfx="mono $DOCFX_EXE"
@@ -39,15 +39,37 @@ fi
 set -e
 
 script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-echo $script_root
+echo "$script_root"
 
-echo "updating dependencies by rm/checkout"
-rm -r rm -rf $script_root/docfx_project/ziti-*
-git clone https://github.com/openziti/ziti --branch release-next --single-branch docfx_project/ziti-cmd
-git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch docfx_project/ziti-sdk-csharp
-git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch docfx_project/ziti-sdk-c
-git clone https://github.com/netfoundry/ziti-android-app --branch master --single-branch docfx_project/ziti-android-app
-git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch docfx_project/ziti-sdk-swift
+SKIP_GIT=""
+WARNINGS_AS_ERRORS=""
+
+while getopts ":gw" opt; do
+  case ${opt} in
+    g ) # skip git
+      echo "- skipping git cleanup"
+      SKIP_GIT="yes"
+      ;;
+    w ) # process option t
+      echo "- treating warnings as errors"
+      WARNINGS_AS_ERRORS="--warningsAsErrors"
+      ;;
+    #\? ) echo "Usage: cmd [-h] [-t]"
+    #  ;;
+    *)
+      ;;
+  esac
+done
+
+if ! [[ "" -eq "SKIP_GIT" ]]; then
+  echo "updating dependencies by rm/checkout"
+  rm -r rm -rf ${script_root}/docfx_project/ziti-*
+  git clone https://github.com/openziti/ziti --branch release-next --single-branch docfx_project/ziti-cmd
+  git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch docfx_project/ziti-sdk-csharp
+  git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch docfx_project/ziti-sdk-c
+  git clone https://github.com/netfoundry/ziti-android-app --branch master --single-branch docfx_project/ziti-android-app
+  git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch docfx_project/ziti-sdk-swift
+fi
 
 DOC_ROOT=docs-local
 
@@ -58,11 +80,11 @@ if test -d "./$DOC_ROOT"; then
 fi
 
 pushd docfx_project
-docfx build
+docfx build ${WARNINGS_AS_ERRORS}
 popd
 
 if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
-    pushd ${script_root}/docfx_project/ziti-sdk-c
+    pushd "${script_root}"/docfx_project/ziti-sdk-c
     doxygen
     CLANG_SOURCE="${script_root}/docfx_project/ziti-sdk-c/api"
     CLANG_TARGET="${script_root}/${DOC_ROOT}/api/clang"
@@ -70,13 +92,13 @@ if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
     echo "Copying C SDK "
     echo "    from: ${CLANG_SOURCE}"
     echo "      to: ${CLANG_TARGET}"
-    mkdir -p ${CLANG_TARGET}
-    cp -r ${script_root}/docfx_project/ziti-sdk-c/api ${CLANG_TARGET}
+    mkdir -p "${CLANG_TARGET}"
+    cp -r "${script_root}"/docfx_project/ziti-sdk-c/api "${CLANG_TARGET}"
 
     echo " "
     echo "Removing"
     echo "    ${script_root}/docfx_project/ziti-sdk-c/api"
-    rm -rf ${script_root}/docfx_project/ziti-sdk-c/api
+    rm -rf "${script_root}"/docfx_project/ziti-sdk-c/api
     popd
 else
     echo "ERROR: CSDK Doxyfile not located"
@@ -96,9 +118,7 @@ if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.
     pwd
     #wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
     wget -q -O - "${swift_tgz}" | tar -zxv
-    find ${script_root}/${SWIFT_API_TARGET} -name EnrollmentResponse*
+    find "${script_root}/${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
     popd
 fi
-
-
 

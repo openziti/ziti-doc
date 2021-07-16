@@ -14,6 +14,6 @@ C example is available here: https://github.com/nf-dev/ziti-sdk-c/tree/master/pr
 
 C# Example is available here: https://github.com/nf-dev/ziti-sdk-csharp/tree/initial_commit/Ziti.Core.Console
 
-[!code-csharp[wttr.in](../ziti-sdk-csharp/Ziti.Core.Console/Program.cs)]
+[!code-csharp[wttr.in](../ziti-sdk-csharp/Samples/WeatherStream.cs)]
 
 ***

@@ -17,3 +17,10 @@
             href: ./bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust.md
           - name: "Part 5: Bootstrapping Trust"
             href: ./bootstrapping-trust/part-05.bootstrapping-trust.md
+      - name: Zitification
+        href: ./zitification/index.md
+        items:
+          - name: "ssh"
+            href: ./zitification/ssh/zitifying-ssh.md
+          - name: "ssh"
+            href: ./zitification/ssh/zitifying-ssh.md
