@@ -133,9 +133,3 @@ Hopefully this post has been helpful and insightful. Zitifying an application is
 (keeping the focus to start on client-side compromise - maybe a PS at the end that says “btw, we can do the same for
 sshd - ziti don’t care if client or server - just a big ole friendly mesh of secure goodness”
 
-SPELL OUT IDENTITIES ARE USED - highlight that... not hostname as shown
-
-
-xxxxxxxxxxxx How can a zitified app prevent "expand"? WHAT IS ZERO TRUST AT ALL
-
-“Why VPNs Suck” would be a good article. Stuff like “pre-shared keys”, vulnerability to “expand/destroy”….
