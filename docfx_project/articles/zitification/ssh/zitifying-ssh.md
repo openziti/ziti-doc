@@ -33,6 +33,10 @@ that [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-
 we did it and how you can do the same thing using
 a [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network).
 
+Overview of SSH - notice how port 22 is open to inbound connections:
+
+![ssh-overview.svg](ssh-overview.svg)
+
 <hr>
 
 ## How It's Done
@@ -50,6 +54,10 @@ There are a few steps necessary before being able to use `zssh`:
 - Use the `zssh` binary from the client side and the `ziti-tunnel` binary from the serving side to connect
 - Harden `sshd` further by removing port 22 from any internet-based firewall configuration (for example, from within the
   security-groups wizard in AWS) or by forcing `sshd` to only listen on `localhost/127.0.0.1`
+
+Overview of ZSSH - notice port 22 is no longer open to inbound connections:
+
+![zssh-overview.svg](zssh-overview.svg)
 
 After performing these steps you'll have an `sshd` server that is dark to the internet. Accessing the server via `ssh`
 must now occur using the Ziti Network. Since the service is no longer accessible directly through a network, it is no
