@@ -138,6 +138,3 @@ example, my local username is `cd`
 
 Hopefully this post has been helpful and insightful. Zitifying an application is _POWERFUL_!!!!
 
-(keeping the focus to start on client-side compromise - maybe a PS at the end that says “btw, we can do the same for
-sshd - ziti don’t care if client or server - just a big ole friendly mesh of secure goodness”
-
