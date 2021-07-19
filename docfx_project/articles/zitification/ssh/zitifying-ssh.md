@@ -29,11 +29,31 @@ A zitified `ssh` client is superior since the port used by `ssh` can be eliminat
 preventing any connections whatsoever from any network client. In this configuration the `ssh` process is effectively "
 dark". The only way to
 `ssh` to a machine configured in this way is to have an identity authorized for
-that [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network). Cool right? Let's see how
-we did it and how you can do the same thing using
+that [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network).
+
+It doesn't stop there though. A Ziti Network mandates the use of a strong identity. You cannot access any services
+defined in a [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) without having
+gone through the enrollment process to create a strong identity used for bidirectional authentication and
+authorization. With Ziti, you can't even connect to SSH without first being authorized to connect to the remote SSH
+server. 
+
+Contrast that to SSH. With SSH you need access the sshd port before starting the authentication process. This 
+requires the port to be exposed to the network in some way, exposing it to attack. With SSH you are also usually 
+allowed to authenticate without providing a strong identity using a username and password. Even if you are 
+choosing to use the more secure pub/private key authentication for SSH, the remote machine
+still needed the public key added to the authorized_keys file before allowing connections to it via SSH. This is 
+all-too-often a step which a human will do, making the process of authorizing a user or revoking access relatively 
+cumbersome.  Ziti provides a secure, centralized location to manage authorization of users to services. Ziti makes 
+it trivial to grant or revoke access to a given set of services to users immediately. 
+
+Lastly, Ziti provides support for continual authorization through the use of policy checks. These policy checks run 
+continuously. If a user suddenly fails to meet a particular policy, access to the services provided via the [Ziti 
+Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) are revoked immediately.
+
+Cool right? Let's see how we did it and how you can do the same thing using
 a [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network).
 
-Overview of SSH - notice how port 22 is open to inbound connections:
+#### Overview of SSH - notice how port 22 is open to inbound connections:
 
 ![ssh-overview.svg](ssh-overview.svg)
 
@@ -55,7 +75,7 @@ There are a few steps necessary before being able to use `zssh`:
 - Harden `sshd` further by removing port 22 from any internet-based firewall configuration (for example, from within the
   security-groups wizard in AWS) or by forcing `sshd` to only listen on `localhost/127.0.0.1`
 
-Overview of ZSSH - notice port 22 is no longer open to inbound connections:
+#### Overview of ZSSH - notice port 22 is no longer open to inbound connections:
 
 ![zssh-overview.svg](zssh-overview.svg)
 
