@@ -94,7 +94,7 @@ Once the prerequisites are satisfied, we can see `zssh` in action. Simply downlo
 
 Once you have the executable download, make sure it is named `zssh` and for simplicity's sake we'll assume it's on the
 path. A goal for `zssh` is to make the usage of the command very similar to the usage of `ssh`. Anyone familiar
-with `zssh` should be able to pick up `zssh` easily. As with most tooling executing the binary with no arguments will
+with `ssh` should be able to pick up `zssh` easily. As with most tooling executing the binary with no arguments will
 display the expected usage. The general format when using `zssh` will be similar to that
 of `ssh`: `zssh <remoteUsername>@<targetIdentity>`
 
