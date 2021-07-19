@@ -33,22 +33,21 @@ that [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-
 
 It doesn't stop there though. A Ziti Network mandates the use of a strong identity. You cannot access any services
 defined in a [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) without having
-gone through the enrollment process to create a strong identity used for bidirectional authentication and
-authorization. With Ziti, you can't even connect to SSH without first being authorized to connect to the remote SSH
-server. 
+gone through the enrollment process to create a strong identity used for bidirectional authentication and authorization.
+With Ziti, you can't even connect to SSH without first being authorized to connect to the remote SSH server.
 
-Contrast that to SSH. With SSH you need access the sshd port before starting the authentication process. This 
-requires the port to be exposed to the network in some way, exposing it to attack. With SSH you are also usually 
-allowed to authenticate without providing a strong identity using a username and password. Even if you are 
-choosing to use the more secure pub/private key authentication for SSH, the remote machine
-still needed the public key added to the authorized_keys file before allowing connections to it via SSH. This is 
-all-too-often a step which a human will do, making the process of authorizing a user or revoking access relatively 
-cumbersome.  Ziti provides a secure, centralized location to manage authorization of users to services. Ziti makes 
-it trivial to grant or revoke access to a given set of services to users immediately. 
+Contrast that to SSH. With SSH you need access the sshd port before starting the authentication process. This requires
+the port to be exposed to the network, exposing it to attack. With SSH you are also usually allowed to authenticate
+without providing a strong identity using a username and password. Even if you are choosing to use the more secure
+pub/private key authentication for SSH, the remote machine still needed the public key added to the authorized_keys file
+before allowing connections to it via SSH. This is all-too-often a step which a human will do, making the process of
+authorizing a user or revoking access relatively cumbersome. Ziti provides a secure, centralized location to manage
+authorization of users to services. Ziti makes it trivial to grant or revoke access to a given set of services to users
+immediately.
 
-Lastly, Ziti provides support for continual authorization through the use of policy checks. These policy checks run 
-continuously. If a user suddenly fails to meet a particular policy, access to the services provided via the [Ziti 
-Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) are revoked immediately.
+Lastly, Ziti provides support for continual authorization through the use of policy checks. These policy checks run
+continuously. If a user suddenly fails to meet a particular policy, access to the services provided via
+the [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) are revoked immediately.
 
 Cool right? Let's see how we did it and how you can do the same thing using
 a [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network).
