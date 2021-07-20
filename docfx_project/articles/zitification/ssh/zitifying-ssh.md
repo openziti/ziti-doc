@@ -124,7 +124,7 @@ without any parameters. The `-i/--SshKeyPath` flag is congruent to the `-i` flag
 your key to the `ssh` client. Under the hood of `zssh` is a full-fledged `ssh` client that works similarly to how
 `ssh` does. If your `~/.ssh/id_rsa` file is in the `authorized_keys` of the remote machine, then you won't need to
 specify the `-i/` flag (as I didn't in my example). Using `zssh` requires the use of a public/private key in order for
-the `zssh` client to connect to the remote machine. At this
+the `zssh` client to connect to the remote machine.
 
 The `-c/--ZConfig` flag controls access to the network. A configuration file must be supplied to use
 `zssh` but does not need to be supplied as part of the command. By default, `zssh` will look at your home directory in a
