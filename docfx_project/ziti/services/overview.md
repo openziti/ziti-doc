@@ -40,7 +40,7 @@ For applications where it doesn't make sense to embed the SDK a Ziti SDK based p
 1. Similarly, traffic can be encrypted between the client and the proxy, but traffic between the proxy and the application will not be covered under the Ziti end-to-end encryption. It may still be encrypted, if the client and server establish their own encryption at the discretion of the client and server implementors. 
 1. Via the proxy, the application is still represented by an identity and thus participates in policies.
 
-Services which uses proxies for server side termination may require extra configuration, so that the proxing application knows how to connect to the server application. Service configurations are discussed more below.
+Services which use proxies for server side termination may require extra configuration, so that the proxing application knows how to connect to the server application. Service configurations are discussed more below.
 
 ### Ziti Router Terminated Services
 Routers also have the ability to connect to applications providing services. This approach has its own advantages and disadvantages.
