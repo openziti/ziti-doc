@@ -40,7 +40,7 @@ For applications where it doesn't make sense to embed the SDK a Ziti SDK based p
 1. Similarly, traffic can be encrypted between the client and the proxy, but traffic between the proxy and the application will not be covered under the Ziti end-to-end encryption. It may still be encrypted, if the client and server establish their own encryption at the discretion of the client and server implementors. 
 1. Via the proxy, the application is still represented by an identity and thus participates in policies.
 
-Services which uses proxes for server side termination may require extra configuration, so that the proxing application knows how to connect to the server application. Service configurations are discussed more below.
+Services which use proxies for server side termination may require extra configuration, so that the proxing application knows how to connect to the server application. Service configurations are discussed more below.
 
 ### Ziti Router Terminated Services
 Routers also have the ability to connect to applications providing services. This approach has its own advantages and disadvantages.
@@ -103,7 +103,7 @@ The fabric contains a framework called Xt (eXtensible Terminators) which allows 
   1. The strategy returns the terminator that should be used
   1. A new session is created using that path. 
   
-Strategies will often work by adjusting terminator costs. The selection algorithm the simply returns the lowest cost option presented by smart routing. 
+Strategies will often work by adjusting terminator costs. The selection algorithm then simply returns the lowest cost option presented by smart routing. 
 
 #### Costs
 There are a number of elements which feed the smart routing cost algorithm.
@@ -124,7 +124,7 @@ Each terminator also has a dynamic cost that will move a terminator up and down 
 
 ##### Effective Cost
 
-Each terminator has an associated precedence and dynamic cost. This can be reduced to a single cost. The cost algorithm ensures terminators at difference precedence levels do not overlap. So a terminator which is marked failed, with dynamic cost 0, will always have a higher calculated cost than a terminator with default precedence and maximum value for dynamic cost. 
+Each terminator has an associated precedence and dynamic cost. This can be reduced to a single cost. The cost algorithm ensures terminators at different precedence levels do not overlap. So a terminator which is marked failed, with dynamic cost 0, will always have a higher calculated cost than a terminator with default precedence and maximum value for dynamic cost. 
 
 #### Strategies
 The fabric currently provides four strategy implementions.
