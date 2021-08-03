@@ -1,6 +1,6 @@
 # Zitifying Scp
 
-The next step of creating ziti secured development tools is zitifying ssh’s `scp` creating `zscp`. This effectively creates a more secure command line tool for sending and receiving files between ziti empowered devices. We can use `zscp` for more secure and easy network administration using ziti identity names just like we went over in [zssh](). 
+The next step of creating ziti secured development tools is zitifying ssh’s `scp` creating `zscp`. This effectively creates a more secure command line tool for sending and receiving files between ziti empowered devices. We can use `zscp` for more secure and easy network administration using ziti identity names just like we went over in [zssh](zitifying-ssh.md). 
 
 <hr>
 
@@ -59,7 +59,7 @@ This is only a basic example on how we can use `zscp` to send a singular file to
 
 ## Zscp Flags
 
-Just like `zssh`, `zscp` has the same flags to pass in an ssh key, ziti configuration file, service name, and to toggle debug logging. All the default paths are the same as `zssh`, thus both `zscp` and `zssh` will work without the `-i` and `-c` flag, if the file default file-paths exist. Refer to [zssh]() for instructions on how to use to flags below. 
+Just like `zssh`, `zscp` has the same flags to pass in an ssh key, ziti configuration file, service name, and to toggle debug logging. All the default paths are the same as `zssh`, thus both `zscp` and `zssh` will work without the `-i` and `-c` flag, if the file default file-paths exist. Refer to [zssh](zitifying-ssh.md) for instructions on how to use to flags below. 
 
     -i, --SshKeyPath string   Path to ssh key. default: $HOME/.ssh/id_rsa
     -c, --ZConfig string      Path to ziti config file. default: $HOME/.ziti/zssh.json
