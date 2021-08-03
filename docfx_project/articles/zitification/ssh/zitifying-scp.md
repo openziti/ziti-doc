@@ -1,6 +1,6 @@
 # Zitifying Scp
 
-The next step of creating ziti secured development tools is zitifying ssh’s `scp` creating `zscp`. This effectively creates a more secure command line tool for sending and receiving files between ziti empowered devices. We can use `zscp` for more secure and easy network administration using ziti identity names just like we went over in [zssh](zitifying-ssh.md). 
+The next step of creating ziti secured development tools is zitifying ssh’s `scp` creating `zscp`. This effectively creates a more secure command line tool for sending and receiving files between ziti empowered devices. We can use `zscp` for more secure and easy network administration using ziti identity names just like we went over in [zitifying ssh](zitifying-ssh.md). I recommend reading the previous article first ([zitifying ssh](zitifying-ssh.md)) if you haven't to learn the more in depth benifits of zitifying tools like `ssh` and `scp`. 
 
 <hr>
 
