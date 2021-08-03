@@ -34,7 +34,7 @@ Given all the prerequisites are satisfied, we can put `zscp` to use. Simply down
 
 ## Sending and Receiving Files with Zscp
 
-Once you have the executable download, make sure it is named `zscp` and for simplicity's sake we'll assume it's on the
+Once you have the executable downloaded, make sure it is named `zscp` and for simplicity's sake we'll assume it's on the
 path. Just like `zssh` to `ssh`, `zscp` has the same functionality as `scp` with added features needed incorporate ziti. As with most tooling executing the binary with no arguments will display the expected usage.
 
 There are two main functions of `zscp`. Just like `scp` you can send and receive from the remote host. 
