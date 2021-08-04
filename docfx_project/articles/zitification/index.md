@@ -15,7 +15,11 @@ case of if your application will be attacked, but when.
 In these posts we're going to explore how common applications can be "zitified". The first application we are going to
 focus on will be `ssh` and it's corollary `scp`. At first, you might think, "why even bother" zitifying (of all
 things) `ssh` and `scp`? These applications are vital to system administration, and we have been using `ssh` and
-`scp` "safely" on the internet for years. Hopefully your now interested enough to find out in  
+`scp` "safely" on the internet for years. Hopefully you're now interested enough to find out in  
 the first post: [zitifying ssh]( ./ssh/zitifying-ssh.md)
 
+If you'd prefer to read about other zitifications, a running list of zitified apps will be updated below:
+
+* [ssh]( ./ssh/zitifying-ssh.md)
+* [scp]( ./ssh/zitifying-scp.md)
 

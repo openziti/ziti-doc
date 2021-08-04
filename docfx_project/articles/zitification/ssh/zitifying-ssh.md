@@ -67,7 +67,7 @@ There are a few steps necessary before being able to use `zssh`:
 - Create and enroll two Ziti Endpoints (one for our `ssh` server, one for the client)
     * the `sshd` server will run `ziti-tunnel` for this demonstration. Conveniently it will run on the same machine I
       used to setup the [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network).
-    * the client in this case will run `zssh` from my local machine and I'll `zssh` to the other endpoint
+    * the client will run `zssh` from my local machine, and I'll `zssh` to the other endpoint
 - Create the [Ziti Service](https://openziti.github.io/ziti/services/overview.html) we'll use and authorize the two
   endpoints to use this service
 - Use the `zssh` binary from the client side and the `ziti-tunnel` binary from the serving side to connect
@@ -88,13 +88,13 @@ longer susceptible to the types of attacks mentioned previously!
 
 Once the prerequisites are satisfied, we can see `zssh` in action. Simply download the binary for your platform:
 
-- [linux](https://github.com/openziti-incubator/zssh/releases/download/latest-tag/zssh-linux-amd64)
-- [windows](https://github.com/openziti-incubator/zssh/releases/download/latest-tag/zssh-windows-amd64.exe)
-- [MacOs](https://github.com/openziti-incubator/zssh/releases/download/latest-tag/zssh-macos-amd64)
+- [linux](https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-linux-amd64)
+- [windows](https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-windows-amd64.exe)
+- [MacOs](https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-macos-amd64)
 
 Once you have the executable download, make sure it is named `zssh` and for simplicity's sake we'll assume it's on the
 path. A goal for `zssh` is to make the usage of the command very similar to the usage of `ssh`. Anyone familiar
-with `ssh` should be able to pick up `zssh` easily. As with most tooling executing the binary with no arguments will
+with `ssh` should be able to pick up `zssh` easily. As with most tooling, executing the binary with no arguments will
 display the expected usage. The general format when using `zssh` will be similar to that
 of `ssh`: `zssh <remoteUsername>@<targetIdentity>`
 
@@ -115,9 +115,11 @@ We know that `zssh` requires access to
 a [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) but it is not clear from the
 example above is where `zzsh` found the credentials required to access the network. `zssh` supports three basic flags:
 
-    -i, --SshKeyPath string   Path to ssh key. default: $HOME/.ssh/id_rsa
-    -c, --ZConfig string      Path to ziti config file. default: $HOME/.ziti/zssh.json
-    -d, --debug               pass to enable additional debug information
+  -i, --SshKeyPath string   Path to ssh key. default: $HOME/.ssh/id_rsa
+  -c, --ZConfig string      Path to ziti config file. default: $HOME/.ziti/zssh.json
+  -d, --debug               pass to enable additional debug information
+  -h, --help                help for this command
+  -s, --service string      service name. default: zssh (default "zssh")
 
 What you see above is exactly the output `zssh` provides should you pass the `-h/--help` flag or execute `zssh`
 without any parameters. The `-i/--SshKeyPath` flag is congruent to the `-i` flag for `ssh`. You would use it to supply
@@ -131,6 +133,8 @@ The `-c/--ZConfig` flag controls access to the network. A configuration file mus
 folder named `.ziti` for a file named `zssh.json`. In bash this is would be the equivalent of `$HOME`. In Windows this
 is the equivalent the environment variable named `USERPROFILE`. You do not need to supply this flag if a file exists at
 the default location. You can specify this flag to use `zssh` with other networks.
+
+The `-s/--service` flag is for passing in a different service name other than "zssh". By defualt, the service name will be "zssh", but if you would like to access a different service use the `-s` flag followed by the service name.
 
 The `-d/--debug` flag outputs additional information to assist you with debugging. For example:
 
@@ -157,3 +161,7 @@ example, my local username is `cd`
 
 Hopefully this post has been helpful and insightful. Zitifying an application is _POWERFUL_!!!!
 
+The next post in this series will cover how we extended the same code we used for `zssh` and 
+[zitified scp](./zitifying-scp.md).
+
+Have a look at the code over at github: https://github.com/openziti-incubator/zssh/tree/main/zssh/zssh

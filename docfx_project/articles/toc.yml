@@ -22,3 +22,5 @@
         items:
           - name: "ssh"
             href: ./zitification/ssh/zitifying-ssh.md
+          - name: "scp"
+            href: ./zitification/ssh/zitifying-scp.md
