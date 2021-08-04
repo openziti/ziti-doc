@@ -115,9 +115,11 @@ We know that `zssh` requires access to
 a [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) but it is not clear from the
 example above is where `zzsh` found the credentials required to access the network. `zssh` supports three basic flags:
 
-    -i, --SshKeyPath string   Path to ssh key. default: $HOME/.ssh/id_rsa
-    -c, --ZConfig string      Path to ziti config file. default: $HOME/.ziti/zssh.json
-    -d, --debug               pass to enable additional debug information
+  -i, --SshKeyPath string   Path to ssh key. default: $HOME/.ssh/id_rsa
+  -c, --ZConfig string      Path to ziti config file. default: $HOME/.ziti/zssh.json
+  -d, --debug               pass to enable additional debug information
+  -h, --help                help for this command
+  -s, --service string      service name. default: zssh (default "zssh")
 
 What you see above is exactly the output `zssh` provides should you pass the `-h/--help` flag or execute `zssh`
 without any parameters. The `-i/--SshKeyPath` flag is congruent to the `-i` flag for `ssh`. You would use it to supply
@@ -131,6 +133,8 @@ The `-c/--ZConfig` flag controls access to the network. A configuration file mus
 folder named `.ziti` for a file named `zssh.json`. In bash this is would be the equivalent of `$HOME`. In Windows this
 is the equivalent the environment variable named `USERPROFILE`. You do not need to supply this flag if a file exists at
 the default location. You can specify this flag to use `zssh` with other networks.
+
+The `-s/--service` flag is for passing in a different service name other than "zssh". By defualt, the service name will be "zssh", but if you would like to access a different service use the `-s` flag followed by the service name.
 
 The `-d/--debug` flag outputs additional information to assist you with debugging. For example:
 
