@@ -55,3 +55,4 @@ CI uses docker and a bunch of env vars to run. Set the accordingly then issue:
       -e GIT_BRANCH=$GIT_BRANCH \
       -e gh_ci_key=$gh_ci_key \
       openziti/doc:latest /bin/sh -c "/doc/publish.sh"
+
