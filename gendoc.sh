@@ -65,15 +65,13 @@ done
 
 echo "- done processing opts"
 
-if ! [[ "" -eq "SKIP_GIT" ]]; then
-  echo "updating dependencies by rm/checkout"
-  rm -r rm -rf ${script_root}/docfx_project/ziti-*
-  git clone https://github.com/openziti/ziti --branch release-next --single-branch docfx_project/ziti-cmd
-  git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch docfx_project/ziti-sdk-csharp
-  git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch docfx_project/ziti-sdk-c
-  git clone https://github.com/netfoundry/ziti-android-app --branch master --single-branch docfx_project/ziti-android-app
-  git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch docfx_project/ziti-sdk-swift
-fi
+echo "updating dependencies by rm/checkout"
+rm -r rm -rf ${script_root}/docfx_project/ziti-*
+git clone https://github.com/openziti/ziti --branch release-next --single-branch docfx_project/ziti-cmd
+git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch docfx_project/ziti-sdk-csharp
+git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch docfx_project/ziti-sdk-c
+git clone https://github.com/netfoundry/ziti-android-app --branch master --single-branch docfx_project/ziti-android-app
+git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch docfx_project/ziti-sdk-swift
 
 DOC_ROOT=docs-local
 
