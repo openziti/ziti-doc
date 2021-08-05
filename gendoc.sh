@@ -44,6 +44,8 @@ echo "$script_root"
 SKIP_GIT=""
 WARNINGS_AS_ERRORS=""
 
+echo "- processing opts"
+
 while getopts ":gw" opt; do
   case ${opt} in
     g ) # skip git
@@ -60,6 +62,8 @@ while getopts ":gw" opt; do
       ;;
   esac
 done
+
+echo "- done processing opts"
 
 if ! [[ "" -eq "SKIP_GIT" ]]; then
   echo "updating dependencies by rm/checkout"
