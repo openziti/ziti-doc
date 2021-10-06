@@ -34,8 +34,11 @@
           "samples/**/toc.yml",
           "articles/**/*.md",
           "articles/**/toc.yml",
+          "blog/**/*.md",
+          "blog/**/toc.yml",
           "toc.yml",
-          "*.md"
+          "*.md",
+          "*.md.contents"
         ]
       }
     ],

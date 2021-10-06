@@ -1,15 +1,15 @@
 - name: Ziti
   href: ziti/
-  homepage: ziti/overview.md
+  topicHref: ziti/overview.md
 - name: Api Documentation
   href: api/
-  homepage: api/index.md
+  topicHref: api/index.md
 - name: Glossary
   href: glossary/
-  homepage: glossary/glossary.md
+  topicHref: glossary/glossary.md
 - name: Samples
   href: samples/
-  homepage: samples/index.md
+  topicHref: samples/index.md
 - name: Articles
   href: articles/
-  homepage: articles/index.md
+  topicHref: articles/index.md
