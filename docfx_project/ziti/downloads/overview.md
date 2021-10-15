@@ -4,6 +4,8 @@ Here you'll find links to the various binaries needed to make a Ziti network or 
 
 ## Current
 
+[!include[](./ziti-cli.md)]
+
 ### Enroller
 
 [!include[](./enroller.md)]
