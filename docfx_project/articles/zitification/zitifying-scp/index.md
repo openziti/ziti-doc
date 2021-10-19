@@ -1,3 +1,3 @@
 # Zitifying SCP
 
-[!include[](./zitifying-scp.md.contents)]
+[!include[](./zitifying-scp.contents.md)]

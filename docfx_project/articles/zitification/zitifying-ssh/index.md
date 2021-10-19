@@ -1,3 +1,3 @@
 # Zitifying SSH
 
-[!include[](./zitifying-ssh.md.contents)]
+[!include[](./zitifying-ssh.contents.md)]

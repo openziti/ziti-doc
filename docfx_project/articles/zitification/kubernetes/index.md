@@ -1,3 +1,3 @@
 # Zitifying Kubectl
 
-[!include[](./zitifying-kubectl.md.contents)]
+[!include[](./zitifying-kubectl.contents.md)]

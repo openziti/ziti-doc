@@ -1,3 +1,3 @@
 # Zitification
 
-[!include[](./index.md.contents)]
+[!include[](./index.contents.md)]
