@@ -6,21 +6,32 @@ body {
 }
 button,
 a {
-  color: #060725;
-  cursor: pointer;
+  bcolor: #060725 !important;
+  acolor: #FFFFFF !important;
+  cursor: pointer !important;
 }
 button:hover,
 button:focus,
 a:hover,
 a:focus {
-  color: #006cff;
-  text-decoration: none;
+  acolor: #006cff !important;
+  bcolor: #FFFFFF !important;
+  text-decoration: none !important;
+}
+a.active {
+  font-weight: bold;
+  text-decoration: none !important;
+}
+.navbar-nav {
+  color: #FFFFFF !important;
+  font-weight: bold;
+  text-decoration: none !important;
 }
 a.disable,
 a.disable:hover {
-  text-decoration: none;
-  cursor: default;
-  color: #060725;
+  text-decoration: none !important;
+  cursor: default !important;
+  color: #060725 !important;
 }
 
 h1, h2, h3, h4, h5, h6, .text-break {
@@ -81,7 +92,7 @@ span.languagekeyword{
 }
 
 svg:hover path {
-    fill: #ffffff;
+    fill: #ffffff !important;
 }
 
 .hljs {
@@ -190,8 +201,8 @@ header .navbar {
 }
 
 article h1{
-  margin-top: 0px;
-  font-family: 'Russo One';
+  margin-top: 0px !important;
+  font-family: 'Russo One' !important;
 }
 
 article h2, article h3, article h4{
@@ -218,6 +229,7 @@ article section {
   padding: 10px 0;
   background-color: inherit;
   white-space: nowrap;
+  color: #FFFFFF !important;
 }
 
 .breadcrumb a {
@@ -504,7 +516,7 @@ body .toc{
   text-decoration: inherit;
 }
 .toc .nav > li.active > a {
-  color: #006cff;
+  color: #060725;
 }
 .toc .nav > li.active > a:hover,
 .toc .nav > li.active > a:focus {
@@ -658,7 +670,7 @@ body .toc{
   height: calc(100% - 100px);
 }
 .affix ul > li > a:before {
-  color: #cccccc;
+  color: #cccccc !important;
   position: absolute;
 }
 .affix ul > li > a:hover {
@@ -721,10 +733,10 @@ body .toc{
   border-radius: 0px 4px;
   box-sizing: border-box;
   border-width: 1px;
-  border-color: #cccccc;
+  border-color: #cccccc !important;
   text-align: center;
   padding: 2px 8px;
-  background-color: white;
+  background-color: white !important;
   font-size: 12px;
   cursor: pointer;
   z-index: 100;
@@ -733,7 +745,7 @@ body .toc{
 }
 .tryspan:hover {
   background-color: #3b8bd0;
-  color: white;
+  color: white !important;
   border-color: #3b8bd0;
 }
 .codewrapper:hover .tryspan {
@@ -756,7 +768,7 @@ footer {
 }
 
 .footer a {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .footer a:hover {
@@ -876,7 +888,7 @@ footer {
 
 /* For code snippet line highlight */
 pre > code .line-highlight {
-  background-color: #ffffcc;
+  background-color: #ffffcc !important;
 }
 
 /* Alerts */

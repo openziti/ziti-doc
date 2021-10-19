@@ -21,6 +21,8 @@
         href: ./zitification/index.md
         items:
           - name: "ssh"
-            href: ./zitification/ssh/zitifying-ssh.md
+            href: ./zitification/zitifying-ssh/index.md
           - name: "scp"
-            href: ./zitification/ssh/zitifying-scp.md
+            href: ./zitification/zitifying-scp/index.md
+          - name: "kubectl"
+            href: ./zitification/kubernetes/index.md
