@@ -298,8 +298,6 @@ secure, zero-trust overlay network! Use Ziti to expose workloads that are **TRUL
 might explore how we can bring Ziti to bear on these topics, stay tuned!
 ***
 
-## Cheatsheat Commands From the Video
-
 [1]: /articles/zitification/zitifying-scp/index.html
 
 [2]: https://Kubernetes.io/
