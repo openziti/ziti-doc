@@ -19,8 +19,10 @@ If you'd prefer to read about other zitifications, a running list of zitified ap
 
 *   [ssh->zssh][3]
 *   [scp->zscp][4]
+*   [Kubernetes cluster manager - kubectl][5]
 
 [1]: https://netfoundry.io/ztna-ransomware/
 [2]: /ziti/overview.html#overview-of-a-ziti-network
 [3]: /articles/zitification/zitifying-ssh/index.html
 [4]: /articles/zitification/zitifying-scp/index.html
+[5]: /articles/zitification/kubernetes/index.html

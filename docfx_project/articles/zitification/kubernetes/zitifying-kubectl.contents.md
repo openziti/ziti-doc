@@ -1,12 +1,12 @@
 The [previous post][1] showed how to use a zero trust overlay like Ziti for transferring files by zitifying `scp`. Next
 up in the list of zitifications is `kubectl`. [Kubernetes][2] is a container orchestration system. Its purpose is to
 deploy, scale, and manage the deployment containers. Containers are self-contained, pre-built images of software
-generally with a singular purpose. Developers often like using containers because they are self-contained. This means
-the containers are able to run anywhere there's a container engine such as on their local computer using a container
-engine. This is where Kubernetes starts to come into focus.
+generally with a singular purpose. [Developers often like using containers for various reasons][13]. One major reason
+developer like containers is because it simplifies deployment of the solutions they are developing. This is where
+Kubernetes starts to come into focus.
 
-In this article we'll use a cloud provider to make us a Kubernetes cluster (Oracle OKE in this case). Once created we
-will then access the cluster three ways:
+In this article we'll use a cloud provider to make us a Kubernetes cluster. I'm using Oracle OKE in this article but
+there are [numerous Kubernetes providers][14]. Once created we will then access the cluster three ways:
 
 1. Via the public Kubernetes API secured via mTLS. This is the default, out of the box mechanism provided by Kubernetes.
 2. Via a tunneling app. I run Windows so I'll use the Ziti Desktop Edge for Windows.
@@ -264,8 +264,8 @@ off the public IP and even turn off the locally running tunneling app and still 
 
 The `kubeztl` command has also been modified to allow you to add the service name and config file directly into the file
 itself. This is convinient since you will not need to supply the ziti identity file, nor will you need to specify which
-service to use. Modifying the file is straight-forward. Open the config file, find the context listed under the 
-contexts root and add two rows as shown here.
+service to use. Modifying the file is straight-forward. Open the config file, find the context listed under the contexts
+root and add two rows as shown here.
 
 ```bash
 contexts:
@@ -277,6 +277,7 @@ contexts:
 ```
 
 Once done - you can now simply use the context the same way you have always - `kubeztl get pods`!!!
+
 ```bash
 ./kubeztl get pods
 NAME                        READY   STATUS    RESTARTS   AGE
@@ -285,17 +286,17 @@ ziti-host-976b84c66-kr4bc   1/1     Running   0          114m
 
 ## Conclusion
 
-We've seen in this post how you can not only secure your Kubernetes API with the normal Kubernetes mechanisms. You 
-can also take your Kubernetes API off the internet **ENTIRELY**.  No need to deploy and maintain a special bastian 
-node. Now by having a secure, zero-trust overlay in place you can safely and securely access your Kubernetes API 
-without the fear of that public, high-value API getting attacked.
+We've seen in this post how you can not only secure your Kubernetes API with the normal Kubernetes mechanisms. You can
+also take your Kubernetes API off the internet **ENTIRELY**. No need to deploy and maintain a special bastian node. Now
+by having a secure, zero-trust overlay in place you can safely and securely access your Kubernetes API without the fear
+of that public, high-value API getting attacked.
 
 <img src="https://i.imgur.com/JRBQMkN.jpg"/>
 
-Once you've deployed Ziti into the Kubernetes cluster you're not done there. Now you can also use Ziti to span cloud 
-networks. You can use it to easily link private data centers or other private Kubernetes clusters all into one 
-secure, zero-trust overlay network! Use Ziti to expose workloads that are **TRULY** private!  In future articles we 
-might explore how we can bring Ziti to bear on these topics, stay tuned!
+Once you've deployed Ziti into the Kubernetes cluster you're not done there. Now you can also use Ziti to span cloud
+networks. You can use it to easily link private data centers or other private Kubernetes clusters all into one secure,
+zero-trust overlay network! Use Ziti to expose workloads that are **TRULY** private!  In future articles we might
+explore how we can bring Ziti to bear on these topics, stay tuned!
 ***
 
 [1]: /articles/zitification/zitifying-scp/index.html
@@ -321,3 +322,7 @@ might explore how we can bring Ziti to bear on these topics, stay tuned!
 [11]: https://developer.netfoundry.io/guides/kubernetes/#install-ziti-with-helm
 
 [12]: https://helm.sh/docs/intro/install/
+
+[13]: https://appfleet.com/blog/10-reasons-why-developers-love-docker/
+
+[14]: https://v1-17.docs.kubernetes.io/docs/concepts/cluster-administration/cloud-providers/
