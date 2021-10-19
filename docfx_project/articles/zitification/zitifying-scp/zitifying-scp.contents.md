@@ -133,7 +133,7 @@ I hope this post has helped you get familiar with another ziti-empowered develop
 more clear why zitifying your application will make it more resilient to attack and make the act of connecting to remote
 services trivial.
 
-Have a look at the code over at [github][8]
+Have a look at the code over at [github][8] or continue reading on to the next zitification - [kubectl][9]!
 
 [1]: /articles/zitification/zitifying-ssh/index.html
 
@@ -150,3 +150,5 @@ Have a look at the code over at [github][8]
 [7]: https://github.com/openziti-incubator/zssh/releases/latest/download/zscp-macos-amd64
 
 [8]: https://github.com/openziti-incubator/zssh/tree/main/zssh/zscp
+
+[9]: /articles/zitification/kubernetes/index.html
