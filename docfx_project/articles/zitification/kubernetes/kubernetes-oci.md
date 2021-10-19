@@ -1,14 +1,16 @@
-establish some variables just to make commands easier:
+## Kubernetes Cheatsheet
 
+This page exists as the set of commands which were used in the video [Secure Kubernetes Cluster using Ziti][1]
+
+### establish some variables just to make commands easier:
 ```bash
 service_name=k8s.oci
 the_user_identity="${service_name}".client
 the_kubernetes_identity="${service_name}".private
-oci_cluster_id=ocid1.cluster.oc1.iad.aaaaaaaaexhqpfgv6rl7dhq4jzgptiejxw7qksw3qyx62inq4cjw4arxuolq
+oci_cluster_id="put-your-cluster-id-here"
 ```
 
-# clean up if needed:
-
+### clean up commands - if needed:
 ```bash
 rm /tmp/oci/config.oci.public
 rm /tmp/oci/config.oci.private
@@ -28,8 +30,7 @@ work done ahead of time - takes time to establish a cluster:
     * already installed oci as well as helm
     * already deployed a ziti environment using https://github.com/openziti/ziti/blob/release-next/quickstart/aws.md
 
-create kubernetes config files - public and private:
-
+### create kubernetes config files - public and private:
 ```bash
 oci ce cluster create-kubeconfig \
     --cluster-id ${oci_cluster_id} \
@@ -48,44 +49,39 @@ oci ce cluster create-kubeconfig \
 chmod 600 /tmp/oci/config.oci.private
 ```
 
-delete any resources if needed:
-
+### delete any resources if needed:
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.public
 helm uninstall ziti-host
 kubectl delete persistentvolume ziti-host-pv
 ```
 
-show it working via public ip from wsl:
-wsl:
-
+### show it working via public ip from wsl:
+#### wsl:
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.public
 kubectl get pods -v7 --request-timeout='5s'
 ```
 
-show it failing via private ip from wsl:
-
+#### show it failing via private ip from wsl:
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.private
 kubectl get pods -v7 --request-timeout='2s'
 ```
-let's install ziti in the cluster:
 
-make a new identity:
-
+### let's install ziti in the cluster:
+#### make a new identity:
 ```bash 
 ziti edge create identity device "${the_kubernetes_identity}" -a "${service_name}"ServerEndpoints -o "${the_kubernetes_identity}".jwt
 ziti edge create identity device "${the_user_identity}" -a "${service_name}"ClientEndpoints -o "${the_user_identity}".jwt
 ```
 
-add the identity to the cluster (using the public ip):
-
+#### add the identity to the cluster (using the public ip):
 ```bash
 helm repo add netfoundry https://netfoundry.github.io/charts/
 ```
 
-create the config file to apply
+### create the config file to apply
 ```yaml
 apiVersion: v1
 kind: PersistentVolume
@@ -103,15 +99,14 @@ spec:
     path: "/netfoundry"
 ```
 
-kubectl apply the config:
+### kubectl apply the config:
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.public
 kubectl apply -f add-persistent-claims.yaml 
 helm install ziti-host netfoundry/ziti-host --set-file enrollmentToken=k8s.private.jwt
 ```
 
-verify the ziti identity was bootstrapped by using kubectl logs
-
+### verify the ziti identity was bootstrapped by using kubectl logs
 ```bash
 kubectl logs ziti-host<tab><enter>
 ```
@@ -121,7 +116,7 @@ now go disable the public ip so private access ONLY works... this takes "a minut
 
 ---
 
-let's setup the ziti bits we need
+### let's setup the ziti bits we need
 
 setup ziti to access the private server address... 
 set environment variables to make it easier to reference:
@@ -134,7 +129,7 @@ k8s_private_port=$(echo ${k8s_private_host_and_port} | cut -d ":" -f2)
 echo "Private URL: ${k8s_private_host_and_port}, Host: ${k8s_private_host}, Port: ${k8s_private_port}"
 ```
 
-ziti setup:
+#### ziti setup:
 ```bash
 k8s_private_dns=kubernetes
 
@@ -151,45 +146,35 @@ ziti edge create service-policy "${service_name}"-binding Bind --service-roles '
 ziti edge create service-policy "${service_name}"-dialing Dial --service-roles '@'"${service_name}" --identity-roles '#'"${service_name}"'ClientEndpoints'
 ```
 
-verify windows can access the kubernetes api (using wsl for ease):
-
+#### verify windows can access the kubernetes api (using cmd.exe from wsl):
 ```bash
 cmd.exe /c curl -k "https://${k8s_private_dns}"
 cmd.exe /c curl -k "https://${k8s_private_host}"    
 ```
-at this point from wsl kubectl will work using the ip address - but not dns
 
+#### at this point from wsl kubectl will work using the ip address - but not dns
 ```bash
-    zConfig: /mnt/v/temp/oci/oci.json
-    service: k8s.oci
+zConfig: /mnt/v/temp/oci/oci.json
+service: k8s.oci
 ```
 
-use "kubeztl":
-
-download from github:
-DONOTCOMMIT: 
-ln -s /mnt/c/Windows/system32/config/systemprofile/AppData/Roaming/NetFoundry
-/aa63dfc0aa33a4a23b2e697dddbcf895435f7b90.json id.json
-
+#### use "kubeztl":
+#### download from github:
 ```bash
-curl -L -o kubeztl https://github.com/openziti-incubator/kubectl/releases/download/v0.0.4/kubectl-linux-amd64
-./kubeztl get pods -c ./id.json -S "${service_name}"
+curl -L -o kubeztl https://github.com/openziti-incubator/kubectl/releases/download/v0.0.4/kubectl-linux-amd64 ./kubeztl get pods -c ./id.json -S "${service_name}"
 ```
-modify config if you want:
-    find your context, add two lines:
 
+#### modify config if you want...
+find your context, add two lines:
 ```bash
-    zConfig: /mnt/v/temp/oci/oci.json
-    service: k8s.oci
+zConfig: /mnt/v/temp/oci/oci.json
+service: k8s.oci
 ```
 
-useful if you need to update either of the identities...
-``bash
-    ziti edge update identity "${the_user_identity}" -a "${service_name}"ClientEndpoints
-    ziti edge update identity "${the_kubernetes_identity}" -a "${service_name}"ServerEndpoints
+### useful if you need to update either of the identities...
+```bash
+ziti edge update identity "${the_user_identity}" -a "${service_name}"ClientEndpoints
+ziti edge update identity "${the_kubernetes_identity}" -a "${service_name}"ServerEndpoints
 ```
 
-
-
-
-
+[1]: https://youtu.be/CRoansolpR0
