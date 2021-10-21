@@ -18,7 +18,7 @@ ziti edge delete service "${service_name}"
 ziti edge delete service-policy "${service_name}"-binding
 ziti edge delete service-policy "${service_name}"-dialing
 
-ziti edge create config "${service_name}"-host.v1 host.v1 '{"protocol":"tcp", "address":"localhost","port":${the_port}, "listenOptions": {"bindUsingEdgeIdentity":true}}'
+ziti edge create config "${service_name}"-host.v1 host.v1 '{"protocol":"tcp", "address":"localhost","port":'"${the_port}"', "listenOptions": {"bindUsingEdgeIdentity":true}}'
 # intercept is not needed for zscp/zssh but make it for testing if you like
 ziti edge create config "${service_name}"-client-config intercept.v1 '{"protocols":["tcp"],"addresses":["'"${service_name}.ziti"'"], "portRanges":[{"low":'"${the_port}"', "high":"'${the_port}"'}]}'
 ziti edge create service "${service_name}" --configs "${service_name}"-client-config,"${service_name}"-host.v1
