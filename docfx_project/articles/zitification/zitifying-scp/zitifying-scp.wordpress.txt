@@ -1,0 +1,17 @@
+[1]: /blog/zitifying-ssh
+
+[2]: https://github.com/openziti/ziti/blob/release-next/quickstart/aws.md
+
+[3]: https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network
+
+[4]: https://openziti.github.io/ziti/services/overview.html
+
+[5]: https://github.com/openziti-incubator/zssh/releases/latest/download/zscp-linux-amd64
+
+[6]: https://github.com/openziti-incubator/zssh/releases/latest/download/zscp-windows-amd64.exe
+
+[7]: https://github.com/openziti-incubator/zssh/releases/latest/download/zscp-macos-amd64
+
+[8]: https://github.com/openziti-incubator/zssh/tree/main/zssh/zscp
+
+[9]: /blog/kubernetes
