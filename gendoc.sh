@@ -42,15 +42,25 @@ script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "$script_root"
 
 SKIP_GIT=""
+SKIP_LINKED_DOC=""
+SKIP_CLEAN=""
 WARNINGS_AS_ERRORS=""
 
 echo "- processing opts"
 
-while getopts ":gw" opt; do
+while getopts ":gwlc" opt; do
   case ${opt} in
     g ) # skip git
       echo "- skipping git cleanup"
       SKIP_GIT="yes"
+      ;;
+    l ) # skip linked doc gen
+      echo "- skipping linked doc generation"
+      SKIP_LINKED_DOC="yes"
+      ;;
+    c ) # skip clean steps
+      echo "- skipping clean step"
+      SKIP_CLEAN="yes"
       ;;
     w ) # process option t
       echo "- treating warnings as errors"
@@ -77,16 +87,19 @@ fi
 
 DOC_ROOT=docs-local
 
+if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
 if test -d "./$DOC_ROOT"; then
   # specifically using ../ziti-doc just to remove any chance to rm something unintended
   echo removing previous build at: rm -r ./$DOC_ROOT
   rm -r ./$DOC_ROOT || true
+fi
 fi
 
 pushd docfx_project
 docfx build ${WARNINGS_AS_ERRORS}
 popd
 
+if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
 if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
     pushd "${script_root}"/docfx_project/ziti-sdk-c
     doxygen
@@ -125,4 +138,4 @@ if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.
     find "${script_root}/${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
     popd
 fi
-
+fi

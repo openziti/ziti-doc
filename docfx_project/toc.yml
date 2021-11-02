@@ -1,4 +1,4 @@
-- name: Ziti
+- name: Docs
   href: ziti/
   topicHref: ziti/overview.md
 - name: Api Documentation

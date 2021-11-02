@@ -53,6 +53,7 @@
           "ziti-cmd/**/*.svg",
           "ziti-cmd/**/*.gif",
           "index.html",
+          "index.css",
           "policies/*.html",
           "policies/*.pdf",
           "api/clang/api/**",
