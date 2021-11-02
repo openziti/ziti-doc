@@ -1,6 +1,8 @@
 
 div#wrapper{
-    background: linear-gradient(90deg, rgba(244,4,77,1) 0%, rgba(0,104,249,1) 100%);
+    _background: linear-gradient(90deg, rgba(244,4,77,1) 0%, rgba(0,104,249,1) 100%);
+    background: #373850;
+    _background2: #505166
 }
 a.contribution-link{
     background: white;
@@ -93,7 +95,7 @@ a:hover{
     font-weight: 600;
     color: black;
     cursor: pointer;
-    margin: 5px 10px;
+    margin: 20px 20px;
     height: 80px;
     text-align:center;
     border: none;
@@ -124,10 +126,11 @@ a:hover{
     height: 140px;
     width: 140px;
     font-size: 16px;
+    font-weight: bold;
     background: rgba(0, 0, 0, 0.75);
-    color: black;
+    color: grey;
     cursor: pointer;
-    margin: 5px 10px;
+    margin: 20px 20px;
     text-align:center;
     border: none;
     border-radius: 15px;
@@ -144,4 +147,7 @@ a:hover{
     -o-transition: all .25s ease-in-out;
     -webkit-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
+}
+.sdk-buttons:focus {
+    outline: none;
 }

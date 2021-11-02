@@ -54,8 +54,10 @@ a simple tutorial! If your favorite language is not shown, perhaps you can use t
 </div>
 <hr/>
 <h1>Not Ready to Go Fully App-Embedded?</h1>
-<p>That's ok - Zero Trust adoption is a journey! Get started with a couple of very simple examples which will get you
-familiar with the technology overall. These samples will leverage one of the tunneling apps.</p>
+
+That's ok - Zero Trust adoption is a journey! Get started with a couple of very simple examples which will get you
+familiar with the technology overall. These samples will leverage one of the [tunneling apps](~/ziti/clients/which-client.md#tunnelers).
+
 <div class="col-lg-12">
     <div class="centerrow">
     <button class="btn sdk-buttons color-4h">
