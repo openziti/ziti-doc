@@ -1,11 +1,34 @@
 
 # Ziti controlller REST API
 
-The API version and Swagger definition for a particular controller may be fetched.
+The API version and Swagger definition for a particular controller may be fetched and there are relatively good documents
+available as well, also served directly from the controller. There are two main endpoints 
 
-## Examples
+## Client API
+
+The client api services are used by endpoints to interact with the [Ziti Network](~/ziti/overview.md#overview-of-a-ziti-network).
+These services are necessary to authenticate, enroll, return services and fetch other information related to the 
+endpoint's participating in the network.
+
+### Download the Client API Spec
+
+The client api spec can be downloaded from your controller at the following url (replace "${CONTROLLER_URL}" accordingly)
+[https://${CONTROLLER_URL}/edge/client/v1/docs](https://${CONTROLLER_URL}/edge/client/v1/docs).
+
+## Management API
+
+The management api is used to configure, manage, and maintain the [Ziti Network](~/ziti/overview.md#overview-of-a-ziti-network).
+
+### Download the Management API Spec
+
+The client api spec can be downloaded from your controller at the following url (replace "${CONTROLLER_URL}" accordingly)
+[https://${CONTROLLER_URL}/edge/management/v1/docs](https://${CONTROLLER_URL}/edge/management/v1/docs).
+
+## Example
 
 ### Find the controller version
+
+Here's one of many examples you'll find linked in the docs
 
 `GET /`
 
@@ -27,11 +50,3 @@ The API version and Swagger definition for a particular controller may be fetche
     "meta": {}
 }
 ```
-
-### Download the Swagger definition
-
-You may wish to import the definition in Postman to create a collection of requests or generate boilerplate client code for your preferred programming language.
-
-`GET /edge/v1/specs/swagger/spec`
-
-<!-- TODO: there might be a way to transclude the current definition of pasting a stale version in-line -->

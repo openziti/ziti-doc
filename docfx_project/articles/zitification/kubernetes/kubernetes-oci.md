@@ -86,7 +86,7 @@ helm repo add netfoundry https://netfoundry.github.io/charts/
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ziti-host-pv
+  name: ziti-host
   labels:
     type: local
 spec:
@@ -94,7 +94,7 @@ spec:
   capacity:
     storage: 100Mi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:
     path: "/netfoundry"
 ```

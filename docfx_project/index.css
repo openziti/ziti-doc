@@ -52,7 +52,7 @@ span .emphasis{
     cursor: pointer;
     display: block;
     background: whitesmoke;
-    box-shadow: 0 2px 48px 0 rgb(0 0 0 / 20%);
+    box-shadow: 0 2px 25px 0 rgb(0 0 0 / 20%);
     border-radius: 10px;
     text-align: center;
     transition: all 0.3s ease 0s;
@@ -83,7 +83,7 @@ a:hover{
 }
 .btn-hover.color-4 {
     background-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
-    box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
+    box-shadow: 0 5px 5px 0 rgba(252, 104, 110, 0.75);
     height: 80px;
 }
 .color-4 p {
