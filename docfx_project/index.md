@@ -9,10 +9,8 @@ The project provides all the pieces required to implement or integrate Zero Trus
 <li>Tunneling Applications for all operating systems</li>
 <li>Numerous SDKs making it easy to add Zero Trust concepts <span class="emphasis">directly into your application</span></li>
 </ul>
-<p>
-Ziti makes it easy to embed Zero Trust, programmable networking directly into your app. With Ziti you can have
-Zero Trust, high performance networking on any Internet connection, without VPNs!
-</p>
+<p>Ziti makes it easy to embed Zero Trust, programmable networking directly into your app. With Ziti you can have
+Zero Trust, high performance networking on any Internet connection, without VPNs!</p>
 </div>
 <hr/>
 <h1>Get Started - Build a Network!</h1>
@@ -21,10 +19,16 @@ We recommend you start with a simple network. Once you understand the basic conc
 move on to more complex network topologies. Choose what sort of network you want to build.
 </p>
 <div class="col-lg-12">
-    <div class="centerrow">
-        <button class="btn btn-hover color-4"><span>Everything Local<br/>(Not Docker)</span></button>
-        <button class="btn btn-hover color-4"><span>Everything Local<br/>(I love Docker)</span></button>
-        <button class="btn btn-hover color-4"><span>Host It Myself<br/>(I have a server)</span></button>
+    <div class="centerrow buttonrow networkbuttons">
+        <a class="btn btn-hover color-4 sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <div class="sdkbutton-text">Everything Local<br/>(Not Docker)</div>
+        </a>
+        <a class="btn btn-hover color-4 sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <div class="sdkbutton-text">Everything Local<br/>(I love Docker)</div>
+        </a>
+        <a class="btn btn-hover color-4 sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <div class="sdkbutton-text">Host It Myself<br/>(I have a server)</div>
+        </a>
     </div>
 </div>
 <hr/>
@@ -42,14 +46,35 @@ to see any PRs to make the docs better! You'll find a more extensive list of the
 a simple tutorial! If your favorite language is not shown, perhaps you can use the C SDK and integrate via 
 <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">FFI.</a></p>
 <div class="col-lg-12">
-    <div class="centerrow">
-        <button class="btn sdk-buttons color-4h"><img src="images/clang-logo.svg" height="80px"><br/>C Lang</button>
-        <button class="btn sdk-buttons color-4h"><img src="images/golang-logo.svg" height="80px"><br/>Go</button>
-        <button class="btn sdk-buttons color-4h"><img src="images/swift-logo.svg" height="80px"><br/>Swift</button>
-        <button class="btn sdk-buttons color-4h"><img src="images/kotlin-logo.svg" height="80px"><br/>Android</button>
-        <button class="btn sdk-buttons color-4h"><img src="images/java-logo.svg" height="80px"><br/>Java</button>
-        <button class="btn sdk-buttons color-4h"><img src="images/nodejs.svg" height="80px"><br/>NodeJS</button>
-        <button class="btn sdk-buttons color-4h"><img src="images/csharp-logo.svg" height="80px"><br/>C# (.NET)</button>
+    <div class="centerrow buttonrow sdkbuttons">
+        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <img src="images/clang-logo.svg" class="sdkbutton-image">
+            <div class="sdkbutton-text">C Lang</div>
+        </a>
+        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <img src="images/golang-logo.svg" class="sdkbutton-image">
+            <div class="sdkbutton-text">Go2</div>
+        </a>
+        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <img src="images/swift-logo.svg" class="sdkbutton-image">
+            <div class="sdkbutton-text">Swift</div>
+        </a>
+        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <img src="images/kotlin-logo.svg" class="sdkbutton-image">
+            <div class="sdkbutton-text">Android</div>
+        </a>
+        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <img src="images/java-logo.svg" class="sdkbutton-image">
+            <div class="sdkbutton-text">Java</div>
+        </a>
+        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <img src="images/nodejs.svg" class="sdkbutton-image">
+            <div class="sdkbutton-text">NodeJS</div>
+        </a>
+        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <img src="images/csharp-logo.svg" class="sdkbutton-image">
+            <div class="sdkbutton-text">C# (.NET)</div>
+        </a>
     </div>
 </div>
 <hr/>
@@ -59,9 +84,10 @@ That's ok - Zero Trust adoption is a journey! Get started with a couple of very 
 familiar with the technology overall. These samples will leverage one of the [tunneling apps](~/ziti/clients/which-client.md#tunnelers).
 
 <div class="col-lg-12">
-    <div class="centerrow">
-    <button class="btn sdk-buttons color-4h">
-        <img src="https://ziti.dev/wp-content/uploads/2020/02/codealt.png" height="80px">
-        <br/>Simple Webapp</button>
+    <div class="centerrow buttonrow sdkbuttons">
+        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+            <img src="https://ziti.dev/wp-content/uploads/2020/02/codealt.png" class="sdkbutton-image">
+            <div class="sdkbutton-text">Simple Webapp</div>
+        </a>
     </div>
 </div>

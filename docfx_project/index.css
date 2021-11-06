@@ -34,35 +34,18 @@ h1, p.h1{
     font-size: xx-large;
     padding-top: 10px;
 }
-span .emphasis{
+#_content .emphasis{
     font-weight: bold;
-    font-style: italic;
 }
 .row {
-    max-width: 100%;
-    margin-right: -15px;
-    margin-left: -15px;
-    justify-content: space-between;
     font-family: 'Open Sans', Tahoma, Helvetica, sans-serif;
 }
 .col-lg-12 {
     font-family: "Russo One", 'Open Sans', Tahoma, Helvetica, sans-serif;
 }
-.features-small-item {
-    cursor: pointer;
-    display: block;
-    background: whitesmoke;
-    box-shadow: 0 2px 25px 0 rgb(0 0 0 / 20%);
-    border-radius: 10px;
-    text-align: center;
-    transition: all 0.3s ease 0s;
-    position: relative;
-    margin: 10px;
-}
-
 .content a{
     text-decoration-line: underline;
-    color: whitesmoke !important;
+    color: whitesmoke;
     position: relative;
 }
 a:hover{
@@ -70,20 +53,16 @@ a:hover{
     text-decoration-line: underline !important;
 }
 .centerrow {
-    text-align: center;
-    margin: auto;
+    justify-content: center;
 }
 
 .btn{
     font-family: 'Open Sans', Tahoma, Helvetica, sans-serif;
 }
-.btn-hover.color-9 {
-    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
-    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
-}
 .btn-hover.color-4 {
-    background-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
-    box-shadow: 0 5px 5px 0 rgba(252, 104, 110, 0.75);
+    abackground-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+    background: whitesmoke;
+    box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
     height: 80px;
 }
 .color-4 p {
@@ -101,25 +80,28 @@ a:hover{
     border: none;
     background-size: 300% 100%;
     border-radius: 5px;
-    -moz-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 .btn-hover:focus {
     outline: none;
 }
 .btn-hover:hover {
+    text-decoration-line: none !important;
+    color: black !important;
+    box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.95);
     height: 80px;
     background-position: 100% 0;
-    -moz-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
 }
 .sdk-buttons.color-4h {
     background: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 4px 15px 0 rgba(255, 200, 200, 0.50);
+    box-shadow: 0px 0px 10px 0px rgba(255, 200, 200, 0.50);
     height: 140px;
 }
 .sdk-buttons {
@@ -127,27 +109,55 @@ a:hover{
     width: 140px;
     font-size: 16px;
     font-weight: bold;
-    background: rgba(0, 0, 0, 0.75);
-    color: grey;
+    background: rgba(222, 222, 222, 1);
+    margin: 20px 20px !important;
+    padding: 0px !important;
     cursor: pointer;
     margin: 20px 20px;
     text-align:center;
     border: none;
     border-radius: 15px;
-    -moz-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
 }
-.sdk-buttons:hover {
+.col-lg-12 .sdk-buttons:hover {
+    text-decoration-line: none !important;
+    color: black;
     background: rgba(255, 255, 255, 0.9);
     font-weight: bold;
-    box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 1);
-    -moz-transition: all .25s ease-in-out;
-    -o-transition: all .25s ease-in-out;
-    -webkit-transition: all .25s ease-in-out;
-    transition: all .25s ease-in-out;
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 1);
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
 }
 .sdk-buttons:focus {
     outline: none;
+}
+
+.col-lg-12 .buttonrow.sdkbuttons a {
+    width: 140px;
+}
+
+.col-lg-12 .sdkbutton-button {
+    color:grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration-line: none;
+}
+
+.sdkbutton-image {
+    margin: 0 auto;
+    max-width: 115px !important;
+    height: 80px;
+}
+
+.sdkbutton-text {
+    display: flex;
+    justify-content: center;
+}
+
+.col-lg-12 > .buttonrow  {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
