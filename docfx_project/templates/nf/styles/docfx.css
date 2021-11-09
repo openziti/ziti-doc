@@ -564,6 +564,21 @@ body .toc{
   margin: 5px 0 0 15px;
   font-size: 14px;
 }
+.toc .level3 {
+  font-weight: normal;
+  margin: 5px 0 0 15px;
+  font-size: 14px;
+}
+.toc .level4 {
+  font-weight: normal;
+  margin: 5px 0 0 15px;
+  font-size: 14px;
+}
+.toc .level5 {
+  font-weight: normal;
+  margin: 5px 0 0 15px;
+  font-size: 14px;
+}
 .toc-toggle {
   display: none;
   margin: 0 15px 0px 15px;

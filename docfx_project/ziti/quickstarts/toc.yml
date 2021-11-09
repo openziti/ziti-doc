@@ -1,12 +1,12 @@
-- name: Overview
-  href: quickstart-overview.md
 - name: Network
-  href: networks-overview.md
+  href: quickstart-overview.md
   items:
-  - name: AWS
-    href: network/aws-quickstart.md
-  - name: Azure
-    href: network/azure-quickstart.md
+  - name: Local - No Docker
+    href: network/local-no-docker.md
+  - name: Local - With Docker
+    href: network/local-with-docker.md
+  - name: Host It Myself
+    href: network/hosted.md
 - name: Kubernetes
   items:
   - name: Sidecar Tunneler

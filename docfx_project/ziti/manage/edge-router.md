@@ -3,7 +3,7 @@
 The Edge Router is the entry point for Ziti-based clients. It is responsible for authenticating incoming connections by
 verifying the connecting client has a valid network session.  It also routes traffic to whatever the
 destination is for the given service. In simple deployments - a single edge router might be deployed. This is the case
-with the [Ziti Edge - Developer Edition](~/ziti/quickstarts/networks-overview.md). In the coming months it will be
+with the [Ziti Network Quickstart](~/ziti/quickstarts/quickstart-overview.md). In the coming months it will be
 possible to produce complicated deployments having multiple Edge Routers deployed in a myriad of locations.
 
 ## Sizing Guidelines

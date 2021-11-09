@@ -7,8 +7,8 @@ instance is during the initial installation and when trying to expand the Ziti f
 
 ### Ziti Edge - Developer Edition
 
-An initial, simple installation of Ziti is already provided for you when using the [Ziti Edge - Developer
-Edition](~/ziti/quickstarts/networks-overview.md).  The installation will contain a
+An initial, simple installation of Ziti is already provided for you when using the 
+[Ziti Network Quickstart](~/ziti/quickstarts/quickstart-overview.md).  The installation will contain a
 [Ziti Controller](./controller.md), a [Ziti Edge Router](./edge-router.md) and corresponding
 [PKI](~/ziti/manage/pki.md). See the corresponding sections for additional details.
 
