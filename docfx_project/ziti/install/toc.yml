@@ -1,9 +1,0 @@
-- name: Overview
-  href: overview.md
-- name: PKI
-  href: pki.md
-- name: Controller
-  href: controller.md
-- name: Edge Router
-  href: edge-router.md
-

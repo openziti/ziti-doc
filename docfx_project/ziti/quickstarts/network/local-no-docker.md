@@ -39,7 +39,7 @@ at, tail etc. Notice that this log is written to the given location. There is no
 output that looks like the following:
 
 ```bash
-ziti-controller started as process id: 7282. log located at: /Users/clint/.ziti/quickstart/My-Mac-mini.local.domain/ziti-edge-controller.log
+ziti-controller started as process id: 7282. log located at: ${HOME}/.ziti/quickstart/My-Mac-mini.local.domain/ziti-edge-controller.log
 ```
 
 ### Verify the Controller is Running
@@ -63,7 +63,7 @@ router locally by running `startExpressEdgeRouter`.
 You should see output that looks like this:
 
 ```bash
-Express Edge Router started as process id: 7555. log located at: /Users/clint/.ziti/quickstart/My-Mac-mini.local.domain/My-Mac-mini.local.domain-edge-router.log
+Express Edge Router started as process id: 7555. log located at: ${HOME}/.ziti/quickstart/My-Mac-mini.local.domain/My-Mac-mini.local.domain-edge-router.log
 ```
 
 You can verify the edge router is listening by finding the value of `$ZITI_EDGE_ROUTER_HOSTNAME:$ZITI_EDGE_ROUTER_PORT`.
@@ -78,7 +78,7 @@ something similar to this:
 ```bash
 ~ % zitiLogin
 Token: 40d2d280-a633-46c9-8499-ab2e005dd222
-Saving identity 'default' to /Users/clint/.ziti/quickstart/My-Mac-mini.local.domain/ziti-cli.json
+Saving identity 'default' to ${HOME}/.ziti/quickstart/My-Mac-mini.local.domain/ziti-cli.json
 ```
 
 Congratulations! You can now use the `ziti` CLI to interact with Ziti! ([Ziti CLI Help Here](~/ziti/cli/cli.md)) The 
@@ -141,9 +141,9 @@ deployed files went to `${HOME}/.ziti/quickstart/newfolder` you would find an "e
 `${HOME}/.ziti/quickstart/newfolder/newfolder.env` and source it:
 
 ```bash
-source /Users/clint/.ziti/quickstart/newfolder/newfolder.env
+source ${HOME}/.ziti/quickstart/newfolder/newfolder.env
 
 ~ % zitiLogin
 Token: aa1c7fb0-85d9-4a79-86b2-5df450c5b4de
-Saving identity 'default' to /Users/clint/.ziti/quickstart/newfolder/ziti-cli.json
+Saving identity 'default' to ${HOME}/.ziti/quickstart/newfolder/ziti-cli.json
 ```
