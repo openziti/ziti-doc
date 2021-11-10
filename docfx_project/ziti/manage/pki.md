@@ -6,8 +6,8 @@ rules that must be followed to properly configure a Ziti Network. If there are i
 of a Ziti Network to another - this page should serve as a starting point of understanding.
 
 > [!NOTE]
-PKI is a complex topic and it is recommended to be familiar with what is a PKI as well as how to properly use and
-configure a one before making any decisions about the PKI the Ziti Network uses.
+> PKI is a complex topic and it is recommended to be familiar with what is a PKI as well as how to properly use and
+> configure a one before making any decisions about the PKI the Ziti Network uses.
 
 The Ziti Network allows the operator to declare any trust anchors as valid. This means Ziti does not need to be
 configured with a full chain of certificates which link fully back to a root CA. A configuration using a full chain back

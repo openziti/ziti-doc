@@ -93,3 +93,42 @@ results: 1-1 of 1
 ```
 
 Horray! Our edge router shows up and is online!
+
+## Customizing the Express Install
+
+You can influence and customize the express installation somewhat if you wish. This is useful if trying to run more than
+one instance of Ziti locally. The most common settings you might choose to customize would be the ports used or the name
+of the network. 
+
+### Configuration File Location
+
+You can change the location of the configuration files output by adding a parameter to the `expressInstall` function 
+invocation. However, if you do this you will also need to set other environment variables as well. Please realize that
+if you change these variables each of the "hostname" variables will need to be addressable:
+
+* ZITI_CONTROLLER_HOSTNAME
+* ZITI_EDGE_CONTROLLER_HOSTNAME
+* ZITI_EDGE_CONTROLLER_PORT
+* ZITI_EDGE_ROUTER_HOSTNAME
+* ZITI_EDGE_ROUTER_PORT
+
+Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`:
+
+```bash
+ZITI_CONTROLLER_HOSTNAME=localhost; \
+ZITI_EDGE_CONTROLLER_HOSTNAME=localhost; \
+ZITI_EDGE_CONTROLLER_PORT=8800; \
+ZITI_EDGE_ROUTER_HOSTNAME=localhost;ZITI_EDGE_ROUTER_PORT=9090; \
+source ziti-cli-functions.sh; expressInstall newfolder
+```
+
+> [!Warning]
+> If you run this command twice in the same shell you'll see a message warning you that you've already
+> run the command. It will look like this:
+> ```bash
+> --- It looks like you've run an express install in this shell already. ---
+> --- Please execute unsetZitiEnv to clear any variables already set.    ---
+> ```
+> 
+> To clear this warning - as shown simply run `unsetZitiEnv`
+
