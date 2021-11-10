@@ -112,7 +112,8 @@ if you change these variables each of the "hostname" variables will need to be a
 * ZITI_EDGE_ROUTER_HOSTNAME
 * ZITI_EDGE_ROUTER_PORT
 
-Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`:
+Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`, uses
+a host named 'localhost' and uses ports 8800 for the edge controller and 9090 for the edge router:
 
 ```bash
 ZITI_CONTROLLER_HOSTNAME=localhost; \
@@ -132,3 +133,17 @@ source ziti-cli-functions.sh; expressInstall newfolder
 > 
 > To clear this warning - as shown simply run `unsetZitiEnv`
 
+## Sourcing the Env File
+
+In the case you close your shell and you want to get the same environment variables back into your shell you can just 
+source the "env" file that is placed into the location you specify. For example, if you ran the example above where the
+deployed files went to `${HOME}/.ziti/quickstart/newfolder` you would find an "env" file at 
+`${HOME}/.ziti/quickstart/newfolder/newfolder.env` and source it:
+
+```bash
+source /Users/clint/.ziti/quickstart/newfolder/newfolder.env
+
+~ % zitiLogin
+Token: aa1c7fb0-85d9-4a79-86b2-5df450c5b4de
+Saving identity 'default' to /Users/clint/.ziti/quickstart/newfolder/ziti-cli.json
+```
