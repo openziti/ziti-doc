@@ -1,6 +1,6 @@
 # Local - With Docker
 
-[Docker](https://www.docker.com) is a popular container engine and many developers enjoy using solutions delivered via
+[Docker](https://www.docker.com) is a popular container engine, and many developers enjoy using solutions delivered via
 Docker. Ziti provides a single Docker container which contains the entire stack of Ziti components. This is not the most
 common mechanism for deploying containers, we recognize that. However, we think that this makes it a bit easier for
 people to get started with deploying Ziti components using Docker. We will certainly look to create individual
@@ -16,7 +16,7 @@ connections rendering a new network useless. You must have a controller running.
 ### Required - Volume Mount
 
 Running Ziti locally via Docker will require you to mount a common folder which will be used to store the PKI of your
-network. Without a volume mount, you'll be forced to 'figure out' how to get the PKI in place correctly. While this is a
+network. Without a volume mount, you'll be forced to figure out how to get the PKI in place correctly. While this is a
 straightforward process once you know how to do it, when you're getting started this is undoubtedly complicated. We
 recommend that if you're starting out (or if you just don't want to be bothered with these details) you should just
 create a folder and volume mount that folder. It's expected that this volume mount map to `/openziti/pki` inside the
@@ -36,8 +36,8 @@ network. That's done with these two options: `--network myFirstZitiNetwork --net
 ### Optional - Expose Controller Port
 
 Docker containers by default won't expose any ports that you could use from your local machine. If you want to be able
-to use this controller from outside of Docker you'll need to export the controller's API port. That's easy to do, simply
-pass one more parameter to the `docker` command: `-p ${externalPort}:${internalPort}`
+to use this controller from outside of Docker, you'll need to export the controller's API port. That's easy to do, 
+simply pass one more parameter to the `docker` command: `-p ${externalPort}:${internalPort}`
 
 ### Running the Controller
 
@@ -45,8 +45,8 @@ Here's an example of how to make a folder for "myFirstZitiNetwork" in your home 
 using that folder. Do note that this command passes a couple extra flags you'll see used on this page. Notably
 the `--rm` flag and the `-it` flag. The `--rm` flag instructs Docker to delete the container when the container exits.
 The `-it` flag will run the container interactively. Running interactively like this makes it easier to see the logs
-produced, but you will need a terminal for each process you want to run. The choice is yours but in these examples we'll
-use `-it` to make seeing the output from the logs easier.
+produced, but you will need a terminal for each process you want to run. The choice is yours, but in these examples 
+we'll use `-it` to make seeing the output from the logs easier.
 
 Here's an example which will use the Docker network named "myFirstZitiNetwork" and expose the controller to your local
 computer on port 1280 (the default port).
@@ -69,15 +69,34 @@ docker run \
 
 At this point you should have a [Ziti Controller](~/ziti/manage/controller.md) running. You should have created your
 Docker network as well as creating the volume mount. Now it's time to connect your first edge router. The same Docker
-image that runs the controller can run an edge router. To start an edge router you will run a very similar command as
+image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
+
+The first noticable difference is that we need to pass in the name of the edge router we want it to be. To use this
+network, the name supplied needs tobe addressable by clients.  Also notice the port exported is port 3022. This is the
+default port used by edge routers. 
 
 ```bash
 docker run \
-  -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router \
+  -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-1 \
   --network myFirstZitiNetwork \
-  --network-alias edge-controller-1 \
+  --network-alias ziti-edge-router-1 \
   -p 3022:3022 \
+  -it \
+  --rm \
+  -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
+  openziti/quickstart \
+  /openziti/scripts/run-edge-router.sh edge
+```
+
+If you want to a second edge router, you'll need to override the router port, don't forget to export that port too
+```bash
+docker run \
+  -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-2 \
+  -e ZITI_EDGE_ROUTER_PORT=4022 \
+  --network myFirstZitiNetwork \
+  --network-alias ziti-edge-router-2 \
+  -p 4022:4022 \
   -it \
   --rm \
   -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
@@ -88,8 +107,8 @@ docker run \
 ## Testing the Network
 
 With the controller and router running, you can now attach to the Docker host running the Ziti controller and test that
-the router did indeed come online and is running as you expect. To do this we'll use another feature of the `docker`
-command and `exec` into the machine. First you'll need to know your Docker container name which you can figure out by
+the router did indeed come online and is running as you expect. To do this, we'll use another feature of the `docker`
+command and `exec` into the machine. First, you'll need to know your Docker container name which you can figure out by
 running `docker ps`.
 
 ```bash
@@ -101,7 +120,7 @@ CONTAINER ID   IMAGE                 COMMAND                  CREATED          S
 a33d58248d6e   openziti/quickstart   "/openziti/scripts/r…"   46 minutes ago   Up 46 minutes   0.0.0.0:1280->1280/tcp, :::1280->1280/tcp   xenodochial_cori
 ```
 
-Above you'll see my controller is running in a container named "xenodochial_cori". I can tell because it's using the
+Above, you'll see my controller is running in a container named "xenodochial_cori". I can tell because it's using the
 default port of 1280, the default port for the controller. Now I can `exec` into this
 container: `docker exec -it xenodochial_cori /bin/bash`
 
