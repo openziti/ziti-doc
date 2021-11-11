@@ -1,15 +1,15 @@
 # Local - No Docker
 
 This page will show you how to get your [Ziti Network](~/ziti/overview.md#overview-of-a-ziti-network) up and running 
-quickly and easily, entirely locally. Since you'll be running everything locally you'll have no issues communicating
-between network components. All the processes will run locally and you'll be responsible for starting and stopping them
+quickly and easily, entirely locally. Since you'll be running everything locally, you'll have no issues communicating
+between network components. All the processes will run locally, and you'll be responsible for starting and stopping them
 when you want to turn the overlay network on or off.
 
 ## Preparation
 
 There is not much preparation necessary to getting up-and-running locally. At this time, this guide expects that
 you'll be running commands within a `bash` shell. If you're running Windows, you will need to make sure you have 
-Windows Subsystem for Linux installed for now. We plan to provide a Powershell script in the future but for now the
+Windows Subsystem for Linux installed for now. We plan to provide a Powershell script in the future, but for now the
 script requires you to be able to use `bash`.
 
 ## One-liner Setup
@@ -29,13 +29,13 @@ This script will perform an 'express' install of Ziti which does the following:
 
 ## Start the Components
 
-Once the latest version of Ziti has been downloaded and added to your path it's time to start your controller and 
+Once the latest version of Ziti has been downloaded and added to your path, it's time to start your controller and 
 edge router. 
 
 ### Start Your Controller
 
 Start your controller by running `startZitiController`. The location of the log file will be output for you to look
-at, tail etc. Notice that this log is written to the given location. There is no log rotation. Once run you will see
+at, tail etc. Notice that this log is written to the given location. There is no log rotation. Once run, you will see
 output that looks like the following:
 
 ```bash
@@ -44,7 +44,7 @@ ziti-controller started as process id: 7282. log located at: ${HOME}/.ziti/quick
 
 ### Verify the Controller is Running
 
-Assuming you have sourced the script you will have an environment variable set named `$ZITI_EDGE_CONTROLLER_API`. After
+Assuming you have sourced the script, you will have an environment variable set named `$ZITI_EDGE_CONTROLLER_API`. After
 the controller has started, your controller should be listening at that hostname:port combination. You can see what your
 value is set to by running `echo $ZITI_EDGE_CONTROLLER_API`. This variable defaults to: `$(hostname):1280`. Make sure the
 controller is on and listening and then start the edge router. It's best to make sure port 1280 is free before running
@@ -57,7 +57,7 @@ My-Mac-mini.local.domain:1280
 
 ### Start Your Edge Router
 
-Now that the controller is ready you can start the edge router created with the 'express' process. You can start this 
+Now that the controller is ready, you can start the edge router created with the 'express' process. You can start this 
 router locally by running `startExpressEdgeRouter`.
 
 You should see output that looks like this:
@@ -67,7 +67,7 @@ Express Edge Router started as process id: 7555. log located at: ${HOME}/.ziti/q
 ```
 
 You can verify the edge router is listening by finding the value of `$ZITI_EDGE_ROUTER_HOSTNAME:$ZITI_EDGE_ROUTER_PORT`.
-Again this will default to using `$(hostname)` as the host name and port 3022. Make sure port 3022 is available before 
+Again, this will default to using `$(hostname)` as the host name and port 3022. Make sure port 3022 is available before 
 trying to start the edge router.
 
 ## Testing Your Overlay
@@ -113,7 +113,7 @@ if you change these variables each of the "hostname" variables will need to be a
 * ZITI_EDGE_ROUTER_PORT
 
 Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`, uses
-a host named 'localhost' and uses ports 8800 for the edge controller and 9090 for the edge router:
+a host named 'localhost', and uses ports 8800 for the edge controller and 9090 for the edge router:
 
 ```bash
 ZITI_CONTROLLER_HOSTNAME=localhost; \
@@ -135,9 +135,9 @@ source ziti-cli-functions.sh; expressInstall newfolder
 
 ## Sourcing the Env File
 
-In the case you close your shell and you want to get the same environment variables back into your shell you can just 
-source the "env" file that is placed into the location you specify. For example, if you ran the example above where the
-deployed files went to `${HOME}/.ziti/quickstart/newfolder` you would find an "env" file at 
+In the case you close your shell and you want to get the same environment variables back into your shell, you can just 
+source the "env" file that is placed into the location you specified. For example, if you ran the example above where
+the deployed files went to `${HOME}/.ziti/quickstart/newfolder` you would find an "env" file at 
 `${HOME}/.ziti/quickstart/newfolder/newfolder.env` and source it:
 
 ```bash
