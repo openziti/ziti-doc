@@ -53,7 +53,7 @@ IP addresses in case your IP changes.
 The quickest and easiest thing to do, is simply find your external DNS name and set it into the EXTERNAL_DNS environment 
 variable. For example:
 ```bash
-export EXTERNAL_DNS="ec2-18-221-178-218.us-east-2.compute.amazonaws.com"
+export EXTERNAL_DNS="ec2-18-100-100-100.us-east-2.compute.amazonaws.com"
 ```
 
 Once you do that, you'll be able to execute these commands just as shown to have your controller and first edge router 
