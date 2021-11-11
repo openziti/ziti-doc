@@ -41,7 +41,7 @@ docker-compose just like you can with any other compose file: `docker-compose up
 
 ### Stopping the Network
 
-This docker-compose file will generate a volume mount as well as a **three** docker networks. When you issue 
+This docker-compose file will generate a volume mount as well as a **two** docker networks. When you issue 
 `docker-compose down` the volume mapping will not be removed. If you wish to remove the volume you'll need to specify
 the `-v` flag to the `docker-compose` command.
 
