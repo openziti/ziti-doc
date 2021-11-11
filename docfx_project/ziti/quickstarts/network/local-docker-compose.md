@@ -36,13 +36,13 @@ DEFAULT_ENV_FILE
 
 ## Running via Docker Compose
 
-Once the compose file is downloaded and the default.env file exists you'll be able to start this network using
+Once the compose file is downloaded and the `default.env` file exists, you'll be able to start this network using
 docker-compose just like you can with any other compose file: `docker-compose up`
 
 ### Stopping the Network
 
 This docker-compose file will generate a volume mount as well as a **two** docker networks. When you issue 
-`docker-compose down` the volume mapping will not be removed. If you wish to remove the volume you'll need to specify
+`docker-compose down` the volume mapping will not be removed. If you wish to remove the volume, you'll need to specify
 the `-v` flag to the `docker-compose` command.
 
 ## Deployment Diagram
@@ -89,7 +89,7 @@ red network for Ziti to access. It would serve as a great place for you to put y
 The blue network contains two important assets, the `ziti-private-blue` router and the `web-test-blue` server. Along
 with those assets, the network also contains the `ziti-fabric-router-br`. Although the `web-test-blue` server does 
 export a port by default (port 80 on your localhost, will translate to port 8000 on the `web-test-blue` server), you 
-can use Ziti to access this servrer without the exported port.
+can use Ziti to access this server without the exported port.
 
 #### The "Fabric" Router
 
@@ -99,10 +99,10 @@ if the algorithm indicates it's the fastest path. Perhaps we'll see more about t
 
 ## Testing the Network
 
-Now that we have used `docker-compose` to deploy a relatively complicated network we can start testing it out to make
+Now that we have used `docker-compose` to deploy a relatively complicated network, we can start testing it out to make
 sure everything is in place and looks correct. Let's try it out.
 
-To test, we will use `docker` and exec into the running controller. Since we've used `docker-compose` we know the name
+To test, we will use `docker` and exec into the running controller. Since we've used `docker-compose`, we know the name
 that will be created (you could use `docker ps` to find it if you need). Let's exec into the controller with:
 
 ```bash
