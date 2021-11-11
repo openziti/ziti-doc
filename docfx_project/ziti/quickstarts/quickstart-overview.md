@@ -22,7 +22,7 @@ When you're just getting started, the first thing you will need is access to a
 Here you'll start and stop components on your own. This is great for learning but since it's all local, keeping any 
 services you define actually separate from your local machine is a bit hard.
 
-### Run locally using [docker](https://www.docker.com)
+### Run locally using [Docker](https://www.docker.com)
 
 This allows you to do some more complex things like actually isolate services from even yourself.
 
@@ -35,6 +35,7 @@ access to your [Ziti Network](~/ziti/overview.md#overview-of-a-ziti-network) and
 
 ## Which network option sounds right for you?
 
-* [Run Everything Locally - no docker](~/ziti/quickstarts/network/local-no-docker.md)
-* [Run Everything Locally - using docker](~/ziti/quickstarts/network/local-with-docker.md)
+* [Run Everything Locally - no Docker](~/ziti/quickstarts/network/local-no-docker.md)
+* [Run Everything Locally - using Docker](~/ziti/quickstarts/network/local-with-docker.md)
+* [Run Everything Locally - Docker Compose](~/ziti/quickstarts/network/local-docker-compose.md)
 * [Run Everything Hosted](~/ziti/quickstarts/network/hosted.md)

@@ -26,6 +26,9 @@ move on to more complex network topologies. Choose what sort of network you want
         <a class="btn btn-hover color-4 sdkbutton-button" href="/ziti/quickstarts/network/local-with-docker.html">
             <div class="sdkbutton-text">Everything Local<br/>(I love Docker)</div>
         </a>
+        <a class="btn btn-hover color-4 sdkbutton-button" href="/ziti/quickstarts/network/local-docker-compose.html">
+            <div class="sdkbutton-text">Everything Local<br/>(Docker Compose)</div>
+        </a>
         <a class="btn btn-hover color-4 sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
             <div class="sdkbutton-text">Host It Myself<br/>(I have a server)</div>
         </a>

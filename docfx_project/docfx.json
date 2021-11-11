@@ -45,21 +45,16 @@
     "resource": [
       {
         "files": [
+          "**/*.svg",
+          "**/*.png",
+          "**/*.gif",
           "images/**",
           "ziti/manage/*.yaml",
-          "ziti/**/sidecar-diagram.svg",
-          "ziti-android-app/**/*.png",
-          "ziti-cmd/**/*.png",
-          "ziti-cmd/**/*.svg",
-          "ziti-cmd/**/*.gif",
           "index.html",
           "index.css",
           "policies/*.html",
           "policies/*.pdf",
-          "api/clang/api/**",
-          "articles/**/*.png",
-          "articles/**/*.svg",
-          "articles/**/*.gif"
+          "api/clang/api/**"
         ]
       }
     ],

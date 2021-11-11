@@ -5,6 +5,8 @@
     href: network/local-no-docker.md
   - name: Local - With Docker
     href: network/local-with-docker.md
+  - name: Local - Docker Compose
+    href: network/local-docker-compose.md
   - name: Host It Myself
     href: network/hosted.md
 - name: Kubernetes

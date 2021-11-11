@@ -46,7 +46,7 @@ For example
 
 
 ## Running CI equivalent locally
-CI uses docker and a bunch of env vars to run. Set the accordingly then issue:
+CI uses Docker and a bunch of env vars to run. Set the accordingly then issue:
 
     docker run --rm -it -v $(pwd):/doc \
       -e AWS_ACCESS_KEY_ID=$aws_access_key_id \
