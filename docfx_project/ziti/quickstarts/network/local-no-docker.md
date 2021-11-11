@@ -10,11 +10,14 @@ when you want to turn the overlay network on or off.
 There is not much preparation necessary to getting up-and-running locally. At this time, this guide expects that
 you'll be running commands within a `bash` shell. If you're running Windows, you will need to make sure you have 
 Windows Subsystem for Linux installed for now. We plan to provide a Powershell script in the future, but for now the
-script requires you to be able to use `bash`.
+script requires you to be able to use `bash`. Make sure your local ports 1280, 6262, 10000 are free before running the 
+controller. These ports are the default ports used by the controller. Also ensure ports 10080 and 3022 are open as these 
+are the default ports the edge router will use.
 
 ## One-liner Setup
 
-Running the latest version of Ziti locally is as simple as running this one command:
+Running the latest version of Ziti locally is as simple as running this one command (the command will require the `jq` 
+utility be installed):
 
     source <(wget -qO- https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/image/ziti-cli-functions.sh); expressInstall
 
@@ -47,8 +50,7 @@ ziti-controller started as process id: 7282. log located at: ${HOME}/.ziti/quick
 Assuming you have sourced the script, you will have an environment variable set named `$ZITI_EDGE_CONTROLLER_API`. After
 the controller has started, your controller should be listening at that hostname:port combination. You can see what your
 value is set to by running `echo $ZITI_EDGE_CONTROLLER_API`. This variable defaults to: `$(hostname):1280`. Make sure the
-controller is on and listening and then start the edge router. It's best to make sure port 1280 is free before running
-the controller.
+controller is on and listening and then start the edge router. 
 
 ```bash
 ~ % echo $ZITI_EDGE_CONTROLLER_API
@@ -67,8 +69,7 @@ Express Edge Router started as process id: 7555. log located at: ${HOME}/.ziti/q
 ```
 
 You can verify the edge router is listening by finding the value of `$ZITI_EDGE_ROUTER_HOSTNAME:$ZITI_EDGE_ROUTER_PORT`.
-Again, this will default to using `$(hostname)` as the host name and port 3022. Make sure port 3022 is available before 
-trying to start the edge router.
+Again, this will default to using `$(hostname)` as the host name and port 3022. 
 
 ## Testing Your Overlay
 

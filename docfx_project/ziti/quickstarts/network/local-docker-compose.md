@@ -39,11 +39,20 @@ DEFAULT_ENV_FILE
 Once the compose file is downloaded and the `default.env` file exists, you'll be able to start this network using
 docker-compose just like you can with any other compose file: `docker-compose up`
 
+> [!Note]
+> Docker compose will name your containers based on the folder you were in when you started them. For me, I've made a folder
+> named `docker` so all my containers start with `docker_`. You can influence how this works by adding
+> `--project-name docker` (or whatever name you like) to your docker-compose up/down commands
+> ```bash
+> docker-compose --project-name docker up 
+> ```
+> 
 ### Stopping the Network
 
 This docker-compose file will generate a volume mount as well as a **two** docker networks. When you issue 
-`docker-compose down` the volume mapping will not be removed. If you wish to remove the volume, you'll need to specify
-the `-v` flag to the `docker-compose` command.
+`docker-compose --project-name docker down` the volume mapping will not be removed. If you wish to remove the volume, 
+you'll need to specify the `-v` flag to the `docker-compose` command. Leave the `-v` off your command if you want to just 
+stop the containers without losing the controller database and PKI.
 
 ## Deployment Diagram
 
@@ -56,6 +65,12 @@ As you can see there's a fair bit going on in there, let's break it down. The fi
 image is within the scope of a Docker network. You'll see with this compose file there are three pieces of the overlay
 which span the Docker network: the controller, an edge router, and a websocket-based edge router.  
 
+### Deployment Simplified
+
+The stock docker-compose.yml deploys many components and is somewhat complex. If you prefer a simplified deployment via 
+Docker compose, one which only includes the basic controller and edge router combination you can instead download the 
+[simplified-docker-compose.yml](https://git.io/JXQSt)
+ 
 ### Networks
 
 Inside the Docker network you'll see there are three networks:

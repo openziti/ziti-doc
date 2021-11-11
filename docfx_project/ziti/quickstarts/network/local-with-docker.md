@@ -28,7 +28,9 @@ Other containers on the Docker network will **need** to address the controller. 
 a network alias. At this time it would appear that this also forces you to add the container to a network which is not
 the default network. This is a very useful feature which allows your containers to be isolated from one another and also
 will allow you to have multiple networks running locally if you desire. To create a Docker network issue:
-`docker network create myFirstZitiNetwork`.
+```bash
+docker network create myFirstZitiNetwork
+```
 
 Later, when starting the controller, we'll supply this network as a parameter to the `docker` command as well as name the
 network. That's done with these two options: `--network myFirstZitiNetwork --network-alias ziti-controller`
