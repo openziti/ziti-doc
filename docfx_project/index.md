@@ -50,31 +50,31 @@ a simple tutorial! If your favorite language is not shown, perhaps you can use t
 <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">FFI.</a></p>
 <div class="col-lg-12">
     <div class="centerrow buttonrow sdkbuttons">
-        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+        <a class="btn sdk-buttons sdkbutton-button" href="https://github.com/openziti/ziti-sdk-c/tree/main/programs">
             <img src="images/clang-logo.svg" class="sdkbutton-image">
             <div class="sdkbutton-text">C Lang</div>
         </a>
-        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+        <a class="btn sdk-buttons sdkbutton-button" href="https://github.com/openziti/sdk-golang/tree/main/example">
             <img src="images/golang-logo.svg" class="sdkbutton-image">
-            <div class="sdkbutton-text">Go2</div>
+            <div class="sdkbutton-text">Go</div>
         </a>
-        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+        <a class="btn sdk-buttons sdkbutton-button" href="https://github.com/openziti/ziti-sdk-swift">
             <img src="images/swift-logo.svg" class="sdkbutton-image">
             <div class="sdkbutton-text">Swift</div>
         </a>
-        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+        <a class="btn sdk-buttons sdkbutton-button" href="https://github.com/openziti/ziti-sdk-jvm/tree/main/samples">
             <img src="images/kotlin-logo.svg" class="sdkbutton-image">
             <div class="sdkbutton-text">Android</div>
         </a>
-        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+        <a class="btn sdk-buttons sdkbutton-button" href="https://github.com/openziti/ziti-sdk-jvm/tree/main/samples">
             <img src="images/java-logo.svg" class="sdkbutton-image">
             <div class="sdkbutton-text">Java</div>
         </a>
-        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+        <a class="btn sdk-buttons sdkbutton-button" href="https://github.com/openziti/ziti-sdk-nodejs">
             <img src="images/nodejs.svg" class="sdkbutton-image">
             <div class="sdkbutton-text">NodeJS</div>
         </a>
-        <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
+        <a class="btn sdk-buttons sdkbutton-button" href="https://github.com/openziti/ziti-sdk-csharp">
             <img src="images/csharp-logo.svg" class="sdkbutton-image">
             <div class="sdkbutton-text">C# (.NET)</div>
         </a>
