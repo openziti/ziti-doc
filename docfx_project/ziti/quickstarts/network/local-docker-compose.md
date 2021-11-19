@@ -238,3 +238,7 @@ Hello World
 </pre>
 ```
 
+## Install Ziti Admin Console (ZAC) [Optional]
+
+Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with
+the installation guide](~/ziti/quickstarts/zac/installation.md)

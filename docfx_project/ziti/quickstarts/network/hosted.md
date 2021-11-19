@@ -151,3 +151,8 @@ adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the pa
 ubuntu@ip-10-0-0-1:~$ echo $ZITI_HOME
 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1
 ```
+
+## Install Ziti Admin Console (ZAC) [Optional]
+
+Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with
+the installation guide](~/ziti/quickstarts/zac/installation.md)

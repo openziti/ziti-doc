@@ -148,3 +148,8 @@ source ${HOME}/.ziti/quickstart/newfolder/newfolder.env
 Token: aa1c7fb0-85d9-4a79-86b2-5df450c5b4de
 Saving identity 'default' to ${HOME}/.ziti/quickstart/newfolder/ziti-cli.json
 ```
+
+## Install Ziti Admin Console (ZAC) [Optional]
+
+Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with 
+the installation guide](~/ziti/quickstarts/zac/installation.md)

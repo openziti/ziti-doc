@@ -142,3 +142,8 @@ ziti@a33d58248d6e:/openziti$ ziti edge list edge-routers
 id: qNZyqZEix3    name: ziti-edge-router    isOnline: true    role attributes: {}
 results: 1-1 of 1
 ```
+
+## Install Ziti Admin Console (ZAC) [Optional]
+
+Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with 
+the installation guide](~/ziti/quickstarts/zac/installation.md)
