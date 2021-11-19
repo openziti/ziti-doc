@@ -103,7 +103,7 @@ spec:
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.public
 kubectl apply -f add-persistent-claims.yaml 
-helm install ziti-host netfoundry/ziti-host --set-file enrollmentToken=k8s.private.jwt
+helm install ziti-host netfoundry/ziti-host --set-file enrollmentToken="${the_kubernetes_identity}".jwt
 ```
 
 ### verify the ziti identity was bootstrapped by using kubectl logs
@@ -154,7 +154,15 @@ cmd.exe /c curl -k "https://${k8s_private_host}"
 
 #### at this point from wsl kubectl will work using the ip address - but not dns
 ```bash
-zConfig: /mnt/v/temp/oci/oci.json
+#enroll the identity
+ziti edge enroll "${the_user_identity}".jwt
+
+# use the identity to get pods:
+./kubeztl --zConfig "${the_user_identity}".json --service k8s.oci get pods
+
+# update your config to make it so you don't need to supply --zConfig or --service
+# replace "${the_user_identity}" accordingly:
+zConfig: /mnt/v/temp/oci/"${the_user_identity}".json
 service: k8s.oci
 ```
 

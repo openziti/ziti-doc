@@ -56,7 +56,17 @@ variable. For example:
 export EXTERNAL_DNS="ec2-18-100-100-100.us-east-2.compute.amazonaws.com"
 ```
 
-Once you do that, you'll be able to execute these commands just as shown to have your controller and first edge router 
+> [!Note]
+> Make sure you have `jq` installed on your machine. From ubuntu that would look like:
+> ```bash
+> sudo apt update && sudo apt install jq -y
+> ```
+
+Once you do that, you'll be able to 
+execute these commands just as 
+shown to have your 
+controller and 
+first edge router 
 configured and ready to turn on:
 
 ```bash
@@ -80,7 +90,7 @@ is useful to make sure the controller can restart automatically should you shutd
 files run:
 ```bash
 createControllerSystemdFile
-createRouterSystemdFile
+createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
 
 # example:
 ubuntu@ip-172-31-36-141:~$ createControllerSystemdFile

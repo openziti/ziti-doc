@@ -20,6 +20,10 @@
     href: hsm/softhsm.md
   - name: Yubikey
     href: hsm/yubikey.md
+- name: Ziti Administration Console (ZAC)
+  items:
+    - name: Installation
+      href: zac/installation.md
 - name: Ziti On Mobile
   items:
   - name: Android
