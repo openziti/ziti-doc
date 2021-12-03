@@ -91,7 +91,7 @@ docker run \
   /openziti/scripts/run-edge-router.sh edge
 ```
 
-If you want to a second edge router, you'll need to override the router port, don't forget to export that port too
+If you want to create a second edge router, you'll need to override the router port, don't forget to export that port too
 ```bash
 docker run \
   -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-2 \
