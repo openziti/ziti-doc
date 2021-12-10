@@ -124,15 +124,15 @@ ZITI_EDGE_ROUTER_HOSTNAME=localhost;ZITI_EDGE_ROUTER_PORT=9090; \
 source ziti-cli-functions.sh; expressInstall newfolder
 ```
 
-> [!Warning]
+> [!Note]
 > If you run this command twice in the same shell you'll see a message warning you that you've already
 > run the command. It will look like this:
 > ```bash
 > --- It looks like you've run an express install in this shell already. ---
-> --- Please execute unsetZitiEnv to clear any variables already set.    ---
+> Would you like to clear existing Ziti variables and continue (y/N)?
 > ```
 > 
-> To clear this warning - as shown simply run `unsetZitiEnv`
+> you need to reset your shell in this situation. If you select 'N' the function will exit
 
 ## Sourcing the Env File
 

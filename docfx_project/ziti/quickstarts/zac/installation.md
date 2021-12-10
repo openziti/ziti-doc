@@ -89,13 +89,16 @@ expose the http and https ports to your local computer. This is optional, read m
 if necessary.
 
  ```bash
- docker run \
-        --name zac \
-        -p 1408:1408 \
-        -p 8443:8443 \
-        -v "${HOME}/docker-volume/myFirstZitiNetwork/ziti-edge-controller-intermediate/keys/ziti-edge-controller-server.key":/usr/src/app/server.key \
-        -v "${HOME}/docker-volume/myFirstZitiNetwork/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem":/usr/src/app/server.chain.pem \
-        openziti/zac
+docker run \
+    --network myFirstZitiNetwork \
+    --network-alias ziti-edge-router-1 \
+    -e ZAC_SERVER_CERT_CHAIN=/openziti/pki/ziti-controller-intermediate/certs/ziti-controller-server.cert \
+    -e ZAC_SERVER_KEY=/openziti/pki/ziti-controller-intermediate/keys/ziti-controller-server.key -it \
+    -p 1408:1408 \
+    -p 8443:8443 \
+    --rm \
+    -v ${HOME}/docker-volume/myFirstZitiNetwork:/openziti/pki \
+    openziti/zac
  ```
 
 > [!Note]

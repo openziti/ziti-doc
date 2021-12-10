@@ -46,7 +46,7 @@ docker-compose just like you can with any other compose file: `docker-compose up
 > ```bash
 > docker-compose --project-name docker up 
 > ```
-> 
+
 ### Stopping the Network
 
 This docker-compose file will generate a volume mount as well as a **two** docker networks. When you issue 
