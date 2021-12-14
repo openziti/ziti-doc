@@ -22,12 +22,22 @@
             </div>
             <div style="position: relative">
                 <a href="{{_github_link}}">
-                    <img src="~/images/github-white.svg" alt="view us on github" title="view us on github" height="34px"/>
+                    <img src="~/images/github-white.svg" alt="Star us on GitHub" title="Star us on GitHub" height="34px"/>
                 </a>
             </div>
             <div style="position: relative">
                 <a href="{{_discourse_link}}">
                     <img src="~/images/discourse_icon_halo.svg" alt="Start a conversation on Discourse" title="Start a conversation on Discourse" height="34px"/>
+                </a>
+            </div>
+            <div style="position: relative">
+                <a href="{{_twitter_link}}">
+                    <img src="~/images/twit.svg" alt="Follow us on Twitter" title="Follow us on Twitter" height="34px"/>
+                </a>
+            </div>
+            <div style="position: relative">
+                <a href="{{_youtube_link}}">
+                    <img src="~/images/yt.svg" alt="Watch videos about OpenZiti" title="Watch videos about OpenZiti" height="34px"/>
                 </a>
             </div>
         </div>
