@@ -93,17 +93,18 @@ createControllerSystemdFile
 createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
 
 # example:
-ubuntu@ip-172-31-36-141:~$ createControllerSystemdFile
-Controller systemd file written to: /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-controller.service
-ubuntu@ip-172-31-36-141:~$ createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
-Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-router-ip-10-0-0-1-edge-router.service
+ubuntu@ip-172-31-23-18:~$ createControllerSystemdFile
+Controller systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-controller.service
+ubuntu@ip-172-31-23-18:~$ createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
+Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-router.service
+ubuntu@ip-172-31-23-18:~$
 ```
 
 After the files are generated, you can then install them for use by systemd by running:
 
 ```bash
-sudo cp "${ZITI_HOME}/ziti-controller.service" /etc/systemd/system
-sudo cp "${ZITI_HOME}/ziti-router-${ZITI_EDGE_ROUTER_RAWNAME}.service" /etc/systemd/system/ziti-router.service
+sudo cp "${ZITI_HOME}/${ZITI_EDGE_CONTROLLER_RAWNAME}.service" /etc/systemd/system/ziti-controller.service
+sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_RAWNAME}.service" /etc/systemd/system/ziti-router.service
 sudo systemctl daemon-reload
 sudo systemctl start ziti-controller
 sudo systemctl start ziti-router
