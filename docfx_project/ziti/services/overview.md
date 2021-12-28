@@ -13,7 +13,7 @@ A service is defined by the following components:
 ## Service Name
 Ziti services must have names that are unique to their Ziti installation. Service names are how clients address services in order to consume them. Services which are provided by applications with Ziti embedded also use the service name to indicate which service is being provided.
   
-Services defined on a Ziti Network have an almost limitless "namespace" available for identifying services. A Ziti service is be defined by a name and this name is registered with the Ziti Controller. Once declared, services can then be addressed directly by name from Ziti-aware clients. This means there are effecitvely a **limitless** number names available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application developer has total control over service names.
+Services defined on a Ziti Network have an almost limitless "namespace" available for identifying services. A Ziti service is to be defined by a name and this name is registered with the Ziti Controller. Once declared, services can then be addressed directly by name from Ziti-aware clients. This means there are effecitvely a **limitless** number names available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application developer has total control over service names.
 
 ## Service Termination
 In Ziti, service termination refers to how a network traffic going over Ziti reaches the application (or application cluster) which is actually providing a service. There are a few basic ways in which a service can be terminated at an application.
@@ -21,7 +21,7 @@ In Ziti, service termination refers to how a network traffic going over Ziti rea
 There are some trade-offs to consider for each type of termination. 
 
 1. Do you want end-to-end zero trust? If yes, that requires that both the client and server have Ziti identities and can connect securely with provisioned certificates.
-1. Do you want Ziti provided end-to-end encryption? Developers can always provide their own end-to-end encryption on top of the connectivity that Ziti provides, but not all modes of service termination allow Ziti to encrypt traffic end-to-end for you.
+1. Do you want Ziti to provide end-to-end encryption? Developers can always provide their own end-to-end encryption on top of the connectivity that Ziti provides, but not all modes of service termination allow Ziti to encrypt traffic end-to-end for you.
 1. How accessible to non-zero-trust clients do you want your server application to be? With the proper configuration applications can be fully 'dark', meaning they do not listen for connections.  
 
 ### SDK Embedded Applications
@@ -59,14 +59,14 @@ Routers also have the ability to connect to applications providing services. Thi
 ### Terminators
 Terminators represent a way to connect to a specific server application for a specific service. 
 
-For SDK based server (whether embedded or proxied), these are created automatically as the application connects and removed when the application disconnects. 
+For an SDK based server (whether embedded or proxied), these are created automatically as the application connects and removed when the application disconnects. 
 
 For router terminated services they must be created manually. When creating a terminator manually, the following must be specified.
 
 1. The router which will connect to the server application
 1. The binding. This indicates which Xgress component on the router will handle making the connection. This will generally be `transport` for tcp based applications and `udp` for UDP based applications
     1. See the ziti-fabric documentation for more information on the Xgress framework
-1. The address to connect to. This will be generally take the form `<protocol>:<host or ip>:<port>`
+1. The address to connect to. This will generally take the form `<protocol>:<host or ip>:<port>`
     1. Example: `tcp:localhost:5432`
 
 ## Availability and Scaling
