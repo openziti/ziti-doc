@@ -1,6 +1,5 @@
 * [Windows](https://github.com/openziti/desktop-edge-win/releases/latest)
 * [MacOS](https://apps.apple.com/app/id1460484572)
-* [Linux](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-tunnel/amd64/linux/0.17.4//ziti-tunnel.tar.gz)
-* [Linux/ARM](https://netfoundry.jfrog.io/netfoundry/ziti-release/ziti-tunnel/arm/linux/0.17.4//ziti-tunnel.tar.gz)
+* [Linux](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/)
 * [iOS](https://apps.apple.com/app/id1460484353)
 * [Android](https://play.google.com/store/apps/details?id=org.openziti.mobile)
