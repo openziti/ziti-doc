@@ -86,14 +86,6 @@ a simple tutorial! If your favorite language is not shown, perhaps you can use t
 That's ok - Zero Trust adoption is a journey! Get started with a couple of very simple examples which will get you
 familiar with the technology overall. These samples will leverage one of the [tunneling apps](~/ziti/clients/which-client.md#tunnelers).
 
-<h1>Sound Good?</h1>
-
-Now that you've seen how cool OpenZiti is - maybe consider starring us on GitHub? It helps others find the project! 
-Show your support of OpenZiti today!
-
-<!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/openziti/ziti" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star openziti/ziti on GitHub">Star</a>
-
 <div class="col-lg-12">
     <div class="centerrow buttonrow sdkbuttons">
         <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
@@ -103,6 +95,11 @@ Show your support of OpenZiti today!
     </div>
 </div>
 
+
+<h1>Sound Good?</h1>
+
+Now that you've seen how cool OpenZiti is - maybe consider starring us on GitHub? It helps others find the project!
+Show your support of OpenZiti today! Head over and star us on GitHub.
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
