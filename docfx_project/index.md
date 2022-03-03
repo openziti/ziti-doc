@@ -42,7 +42,7 @@ the next step is learning about all of the pieces which go into it. There's a lo
 [our docs](~/ziti/overview.md) are there to help you understand any extra details you need help ironing out. If the 
 docs don't, we love issues for how to improve [our docs](~/ziti/overview.md) or if you're feeling up for it we'd love 
 to see any PRs to make the docs better! You'll find a more extensive list of the 
-[quickstarts](~/ziti/quickstarts/quickstart-overview.md) we have
+[quickstarts](~/ziti/quickstarts/quickstart-overview.md) we have.
 </p>
 <h1>Get Started With an SDK</h1>
 <p>The OpenZiti project offers numerous SDKs to start with. Pick your favorite language and follow along with
@@ -86,6 +86,14 @@ a simple tutorial! If your favorite language is not shown, perhaps you can use t
 That's ok - Zero Trust adoption is a journey! Get started with a couple of very simple examples which will get you
 familiar with the technology overall. These samples will leverage one of the [tunneling apps](~/ziti/clients/which-client.md#tunnelers).
 
+<h1>Sound Good?</h1>
+
+Now that you've seen how cool OpenZiti is - maybe consider starring us on GitHub? It helps others find the project! 
+Show your support of OpenZiti today!
+
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/openziti/ziti" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star openziti/ziti on GitHub">Star</a>
+
 <div class="col-lg-12">
     <div class="centerrow buttonrow sdkbuttons">
         <a class="btn sdk-buttons sdkbutton-button" href="/ziti/quickstarts/network/local-no-docker.html">
@@ -94,3 +102,7 @@ familiar with the technology overall. These samples will leverage one of the [tu
         </a>
     </div>
 </div>
+
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
