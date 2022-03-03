@@ -99,7 +99,7 @@ familiar with the technology overall. These samples will leverage one of the [tu
 <h1>Sound Good?</h1>
 
 Now that you've seen how cool OpenZiti is - maybe consider starring us on GitHub? It helps others find the project!
-Show your support of OpenZiti today! Head over and star us on GitHub.
+Show your support of OpenZiti today! <a class="github-button" href="https://github.com/openziti/ziti" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star openziti/ziti on GitHub">Star</a>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
