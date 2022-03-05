@@ -222,14 +222,156 @@ func (self *Worker) work() {
 
 func (self *Worker) RunNow() {
 	select {
-		case self.signal <- struct{}{}:
-		default:
+	case self.signal <- struct{}{}:
+	default:
 	}
 }
 ```
 
-###
-event pattern
+### Channel Loops and Event Handler
+
+We often have a loop which is processing inputs from one or channel. Often we have a set of data
+we want to keep local to a single goroutine, so we don't have to use any synchronization or worry
+about cpu cache effects. We use channels to feed data to the goroutine and/or to trigger different
+kinds of processing. A for with select loop can handle channels of different types. YOu can have
+a channel per type of work, or per type of data. Sometimes it can be convenient to consolidate things 
+on a single channel, using an event API.
+
+Here's a simple example where the processor is maintaining some cached data which can be updated 
+externally. Presumably the processor would be doing something with the cached data, but we've left
+that out to focus on the pattern itself.
+
+```
+type Event interface {
+	// events are passed the processor so they don't each have to include it
+	Handle(*Processor)
+}
+
+type Processor struct {
+	ch          chan Event
+	closeNotify chan struct{}
+	cache map[string]string
+}
+
+func (self *Processor) run() {
+	for {
+		select {
+		case event := <-self.ch:
+			event.Handle(self)
+		case <-self.closeNotify:
+			return
+		}
+	}
+}
+
+func (self *Processor) queueEvent(evt Event) {
+	select {
+	case self.ch <- evt:
+	case <-self.closeNotify:
+		return
+	}
+}
+
+func (self *Processor) UpdateCache(k, v string) {
+	self.queueEvent(&updateCache{key: k, value: v})
+}
+
+func (self *Processor) Invalidate(k string) {
+	self.queueEvent(invalidate(k))
+}
+
+type updateCache struct {
+	key string
+	value string
+}
+
+func (self *updateCache) Handle(p *Processor) {
+	p.cache[self.key] = self.value
+}
+
+type invalidate string
+
+func (self invalidate) Handle(p *Processor) {
+	delete(p.cache, string(self))
+}
+```
+
+## Type Aliases
+As we demonstrated in the previous example we can alias a type and add functions to it, usually
+to satify some interface.
+
+```
+type invalidate string
+
+func (self invalidate) Handle(p *Processor) {
+        delete(p.cache, string(self))
+}
+```
+
+This can be useful if we only have a single piece of data. Rather than wrapping it in a struct, 
+we can just alias it and add our own funcs. 
+
+The main downside to this approach is that you have to unalias the data inside your functions
+which can lead to code that is less clear. See for example this method from an `AtomicBoolean`
+implementation:
+
+```
+type AtomicBoolean int32
+
+func (ab *AtomicBoolean) Set(val bool) {
+	atomic.StoreInt32((*int32)(ab), boolToInt(val))
+}
+
+```
+
+### Function Type Aliases
+
+A go feature which can surprise developers is the ability to add function definitions to funcs.
+The Event API in the Processor example above could be extended as follows:
+
+```
+type Event interface {
+	Handle(*Processor)
+}
+
+type EventF func(*Processor)
+
+func (self EventF) Handle(p *Processor) {
+	self(p)
+}
+```
+
+The `Invalidate` code could now be written as:
+
+```
+func (self *Processor) Invalidate(k string) {
+	self.queueEvent(EventF(func(processor *Processor) {
+		delete(processor.cache, k)
+	}))
+}
+```
+
+The need for an `EventF` cast could be removed by adding a helper function.
+
+```
+func (self *Processor) queueEventF(evt EventF) {
+	self.queueEvent(evt)
+}
+
+func (self *Processor) UpdateCache(k, v string) {
+	self.queueEventF(func(processor *Processor) {
+		processor.cache[k] = v
+	})
+}
+```
+
+I first encountered this style in the go http library where handlers can be defined
+as structs implementing `Handler` or as functions matching `HandlerFunc`. This is
+most useful when you may have both heavy implementations which carry a lot of state
+as well as very simple implementations which make more sense as a function.
+
+The processor event channel could also be implemented in terms of pure functions, if
+all event implementations are lightweight.
 
 ## Interfaces
 Using interfaces to work around package cycles
