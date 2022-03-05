@@ -374,10 +374,64 @@ The processor event channel could also be implemented in terms of pure functions
 all event implementations are lightweight.
 
 ## Interfaces
-Using interfaces to work around package cycles
 
-## Error Monad
-Encapsulating error in the operation, to reduce verbose error checking
+A golang limitation that often trips people up is that packages cannot have circular
+dependencies. There are a few ways to work around this, but the most common is to 
+introduce interfaces in the more independent of the packages.
+
+## Errors 
+
+In some situations, go's error handling can be excessively verbose. Especially in 
+cases where you're doing a series of I/O operations, your code can look something
+like:
+
+
+```
+func WriteExample(w io.Writer) error {
+	if _, err := w.Write([]byte("one")); err != nil {
+		return err
+	}
+	if _, err := w.Write([]byte("two")); err != nil {
+		return err
+	}
+	if _, err := w.Write([]byte("three")); err != nil {
+		return err
+	}
+	if _, err := w.Write([]byte("four")); err != nil {
+		return err
+	}
+	return nil
+}
+```
+
+One way to clean this up is to wrap the error in the operation and only check it at 
+the end.
+
+```
+type WriterErr struct {
+	err error
+	w io.Writer
+}
+
+func (self *WriterErr) Write(s string) {
+	if self.err == nil {
+		_, self.err = self.w.Write([]byte(s))
+	}
+}
+
+func (self *WriterErr) Error() error {
+	return self.err
+}
+
+func WriteExample2(w io.Writer) error {
+	writer := &WriterErr{w: w}
+	writer.Write("one")
+	writer.Write("two")
+	writer.Write("three")
+	writer.Write("four")
+	return writer.Error()
+}
+```
 
 ## Gotchas
 Loop variables in closures and pointers
