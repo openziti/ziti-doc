@@ -32,7 +32,7 @@ Ziti component, and it provides long haul mesh routing while the Edge
 focuses on enrolling Ziti components, managing access via policies, and
 maintaining the trust necessary to provide the foundation of a Zero
 Trust network without the hassle of setting it up yourself. Together
-they are a powerful combo of optimized long halt routing and trust
+they are a powerful combination of optimized long haul routing and trust
 management.
 
 <img src="./images/fabric-edge.png" style="width: 25%; margin: 0 auto; display: block;">
