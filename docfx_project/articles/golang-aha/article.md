@@ -3,8 +3,11 @@
 ## Introduction
 As we (the OpenZiti team) has progressed on our Go journey, we've stumbed on various
 obstacles, settled on some best practices and hopefully gotten better at writing Go
-code. This document is share some of the stumbling blocks and solutions, both for
-new team members and for anyone else who might be interested.
+code. This document is share some of the 'Aha!' moments where we overcame stumbling 
+blocks and found solutions that sparked joy. 
+This is intended both for new team members and for anyone in the go community who 
+might be interested. We'd be very happy to hear from others about their own 'aha'
+moments and also how the solutions presented strike your sensibilities.
 
 ## Channels
 Channels are a core feature of go. As is typical of go, the channel API is small and
