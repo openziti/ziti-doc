@@ -1,7 +1,10 @@
 # Golang Aha! Moments
 
 ## Introduction
-This attempts to share some of the insights we've had into writing idiomatic Go.
+As we (the OpenZiti team) has progressed on our Go journey, we've stumbed on various
+obstacles, settled on some best practices and hopefully gotten better at writing Go
+code. This document is share some of the stumbling blocks and solutions, both for
+new team members and for anyone else who might be interested.
 
 ## Channels
 Channels are a core feature of go. As is typical of go, the channel API is small and
@@ -99,6 +102,9 @@ func (self *Queue) Pop() (int, error) {
 	}
 }
 ```
+
+Places used:
+* https://github.com/openziti/channel/blob/main/impl.go (see rxer, txer)
 
 ## Other Channel Uses
 Let's look at how we can use channels in a few other ways.
@@ -433,5 +439,70 @@ func WriteExample2(w io.Writer) error {
 }
 ```
 
+See also: 
+* https://go.dev/blog/errors-are-values
+* https://dave.cheney.net/2019/01/27/eliminate-error-handling-by-eliminating-errors
+
+Note: This pattern is could be viewed as an error monad implementation
+
 ## Gotchas
-Loop variables in closures and pointers
+
+### Loop Variables[^cam]
+
+Like many other languages, it's possible to get into trouble when capturing loop variables,
+both via pointer references and via closures.
+
+The following snippet will print out `world world` since the loop variable
+remains constant throughout loop iteration.
+
+```
+func main() {
+	var list []*string
+	for _, v := range []string {"hello", "world"} {
+		list = append(list, &v)
+	}
+	for _, v := range list {
+		fmt.Printf("%v ", *v)
+	}
+	fmt.Println()
+}
+```
+
+Similarly, the following will output `second second`:
+
+```
+func main() {
+	for _, v := range []string {"first", "second"} {
+		go func() {
+			time.Sleep(100 * time.Millisecond)
+			fmt.Printf("%v ", v)
+		}()
+	}
+	time.Sleep(200 *time.Millisecond)
+	fmt.Println()
+}
+```
+
+### Common Deadlock Causes
+
+#### Non-reentrant Mutexes
+
+Unlike in some other languages, the mutexes provide in the sync package are non-reentrant. So if your code
+grabs a lock and ends up calling back into something which gets the same lock, the goroutine will deadlock.
+Typically, if you have to call back in, you'd either need an indicator that the lock is already acquired,
+or do the work in a new go-routine, depending on how independent the second access was.
+
+#### Channel Deadlocks
+
+If you have a goroutine processing events from a channel, if the event submits an event back onto the channel,
+that can cause a deadlock, if the channel is not buffered, or if the buffer is full.
+
+Fixes include:
+* Running the next event in-line, if you can detect that you're already in the event processing context
+* Ensure the channel is buffer is big enough that it will never block
+* Handing the new event submission off to a new go-routine
+
+One benefit to keeping your channel buffers at zero, is that you will detect these deadlocks very quickly.
+If you have a small buffer, then the deadlock may not be caught until the system is under load.
+
+[^cam]: Suggested by Cameron Otts
