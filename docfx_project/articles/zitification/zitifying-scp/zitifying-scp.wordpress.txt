@@ -1,6 +1,6 @@
 [1]: /blog/zitifying-ssh
 
-[2]: https://github.com/openziti/ziti/blob/release-next/quickstart/aws.md
+[2]: https://openziti.github.io/ziti/quickstarts/network/hosted.html
 
 [3]: https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network
 

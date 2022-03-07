@@ -31,7 +31,7 @@ Cool right? Let's see how we did it and how you can do the same thing using a [Z
 
 There are a few steps necessary before being able to use `zssh`:
 
-* Establish a [Ziti Network in AWS][4] (using AWS in this example)
+* Establish a [Ziti Network][4]
 * Create and enroll two Ziti Endpoints (one for our `ssh` server, one for the client)
     * the `sshd` server will run `ziti-tunnel` for this demonstration. Conveniently it will run on the same machine I used to setup the [Ziti Network][2].
     * the client will run `zssh` from my local machine, and I'll `zssh` to the other endpoint
@@ -119,7 +119,7 @@ Have a look at the code over at [GitHub][11]
 
 [3]: /articles/zitification/zitifying-ssh/ssh-overview.svg
 
-[4]: https://github.com/openziti/ziti/blob/release-next/quickstart/aws.md
+[4]: /ziti/quickstarts/network/hosted.html
 
 [5]: /ziti/services/overview.html
 

@@ -6,7 +6,7 @@ In the [previous post][1] we talked about how we could take a well-known applica
 
 `zscp` functions with the same prerequisites as `zssh`:
 
-* Establish a [Ziti Network in AWS][2] (using AWS in this example)
+* Establish a [Ziti Network][2]
 * Create and enroll two Ziti Endpoints (one for our `ssh` server, one for the client)
     * the `sshd` server will run `ziti-tunnel` for this demonstration. Conveniently it will run on the same machine I used to setup the [Ziti Network][3].
     * the client, in this case, is my local machine and I'll `zscp` files both to and from both the remote machine.
@@ -132,7 +132,7 @@ Have a look at the code over at [GitHub][8] or continue reading on to the next z
 
 [1]: /articles/zitification/zitifying-ssh/index.html
 
-[2]: https://github.com/openziti/ziti/blob/release-next/quickstart/aws.md
+[2]: /ziti/quickstarts/network/hosted.html
 
 [3]: /ziti/overview.html#overview-of-a-ziti-network
 

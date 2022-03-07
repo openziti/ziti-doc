@@ -4,7 +4,7 @@
 
 [3]: https://openziti.github.io/articles/zitification/zitifying-ssh/ssh-overview.svg
 
-[4]: https://github.com/openziti/ziti/blob/release-next/quickstart/aws.md
+[4]: hhttps://openziti.github.io/ziti/quickstarts/network/hosted.html
 
 [5]: https://openziti.github.io/ziti/services/overview.html
 
