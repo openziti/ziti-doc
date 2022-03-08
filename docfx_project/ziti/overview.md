@@ -110,7 +110,7 @@ provides secure connectivity on top – or “overlaying” – existing
 networking infrastructure.
 
 Here's an overview of a network:
-![image](../images/ziti-overview.png)
+![image](../images/ziti-overview.svg)
 
 ### ZITI CONTROLLER
 
