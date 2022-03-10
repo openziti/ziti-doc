@@ -2,6 +2,15 @@
 uid: zitiOverview
 ---
 
+# Why?
+
+* You want to provide business value to your project as fast as possible but keep having to worry about security and networking.
+* ‘Secure networking’ is an oxymoron. There are no secure networks. Attacks are coming from the network, even from the local network your computer is on right now!
+* You cannot trust a close sourced solution and you don't want to roll your own. You want the free and easy button.
+
+Great! You have come to the right place.  OpenZiti is the only open-source solution that can place zero trust connectivity directly into your application, making the security of the network entirely irrelevant - internet, local, even host OS. Stop worrying about security and the network and just write your code. Adopt an OpenZiti SDK into your application and you can do just that.
+
+
 # Overview
 Ziti represents the next generation of secure, open-source networking for your applications. Ziti has several components.
 
