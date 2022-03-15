@@ -1,6 +1,6 @@
 # Ziti Services
 
-The primary function of Ziti is providing access to "services". A service encapsulates the definition of any
+The primaryategy assumes that one ter function of Ziti is providing access to "services". A service encapsulates the definition of any
 resource that could be accessed by a client on a traditional network. 
 
 A service is defined by the following components:
@@ -141,8 +141,5 @@ This strategy drives costs in the same way as the `smartrouting` strategy. Howev
    
 ##### `random`
 This strategy does not change terminator weights. It does simple random selection across all terminators of the highest precedence. 
-
-##### `ha`
-This strategy assumes that one terminator will have `required` precedence and there will be a secondary terminator with `default` precedence. If three consecutive dials to the highest ranked terminator fail in a row it will be marked as failed. This will allow the secondary to take over. If the primary recovers it can be marked as required again via the APIs. 
 
 [!include[](./creating.md)]
