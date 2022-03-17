@@ -19,7 +19,7 @@ are the default ports the edge router will use.
 Running the latest version of Ziti locally is as simple as running this one command (the command will require the `jq` 
 utility be installed):
 
-    source <(wget -qO- https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/image/ziti-cli-functions.sh); expressInstall
+    source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/image/ziti-cli-functions.sh)"; expressInstall
 
 This script will perform an 'express' install of Ziti which does the following:
 
