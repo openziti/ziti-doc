@@ -23,4 +23,7 @@
 - name: Manage
   href: manage/toc.yml
   topicHref: manage/manage.md
+- name: Comparing OpenZiti to
+  href: comparisons/toc.yml
+  topicHref: comparisons/overview.md
   
