@@ -7,9 +7,6 @@
 - name: Glossary
   href: glossary/
   topicHref: glossary/glossary.md
-#- name: Samples
-#  href: samples/
-#  topicHref: samples/index.md
 - name: Articles
   href: articles/
   topicHref: articles/index.md
