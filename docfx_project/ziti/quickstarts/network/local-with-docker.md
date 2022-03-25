@@ -88,7 +88,7 @@ docker run \
   --rm \
   -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
   openziti/quickstart \
-  /openziti/scripts/run-edge-router.sh edge
+  /openziti/scripts/run-router.sh edge
 ```
 
 If you want to create a second edge router, you'll need to override the router port, don't forget to export that port too
@@ -103,7 +103,7 @@ docker run \
   --rm \
   -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
   openziti/quickstart \
-  /openziti/scripts/run-edge-router.sh edge
+  /openziti/scripts/run-router.sh edge
 ```
 
 ## Testing the Network
