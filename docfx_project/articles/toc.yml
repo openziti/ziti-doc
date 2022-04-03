@@ -26,3 +26,5 @@
             href: ./zitification/zitifying-scp/index.md
           - name: "kubectl"
             href: ./zitification/kubernetes/index.md
+      - name: Getting to know Go - learnings from the field
+        href: ./golang-aha/article.md
