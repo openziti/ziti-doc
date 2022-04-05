@@ -1,3 +1,4 @@
-
-- name: OpenZiti vs Service Mesh
+- name: Service Mesh vs OpenZiti
   href: service-mesh.md
+- name: Teleport  vs OpenZiti
+  href: teleport.md

@@ -2,4 +2,4 @@
 
 This is the landing page for comparisons.
 
-First might be [service mesh](./service-mesh.md)
+- [Teleport vs OpenZiti](./teleport.md)

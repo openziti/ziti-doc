@@ -34,6 +34,8 @@
           "learning/**/toc.yml",
           "articles/**/*.md",
           "articles/**/toc.yml",
+          "comparisons/**/*.md",
+          "comparisons/toc.yml",
           "blog/**/*.md",
           "blog/**/toc.yml",
           "toc.yml",
