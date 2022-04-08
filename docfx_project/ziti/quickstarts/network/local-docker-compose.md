@@ -114,6 +114,20 @@ if the algorithm indicates it's the fastest path. Perhaps we'll see more about t
 
 ## Testing the Network
 
+### Using Docker Locally
+
+A quick note. If you are not well-versed with Docker you might forget that exposing ports in Docker is one thing,
+but you'll also need to have a hosts entry for the containers you want to access from outside the Docker
+network. This quickstart will expect that you understand this and for every router you add you will want to make
+sure you add a host entry. In the docker-compose example you will want/need hosts entries for at least: 
+
+- `ziti-edge-controller`,
+- `ziti-edge-router`
+
+And if you want to expose any other routers - of course you'll need/want to have entries for those as well.
+
+### Testing
+
 Now that we have used `docker-compose` to deploy a relatively complicated network, we can start testing it out to make
 sure everything is in place and looks correct. Let's try it out.
 
