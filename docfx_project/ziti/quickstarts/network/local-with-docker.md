@@ -131,7 +131,7 @@ A quick note. If you are not well-versed with Docker you might forget that expos
 but you'll also need to have a hosts entry for the containers you want to access from outside of of the Docker 
 network. This quickstart will expect that you understand this and for every router you add you will want to make 
 sure you add a host entry. In the examples above we are adding three entities: `ziti-edge-controller`, 
-`ziti-edge-router` and `ziti-edge-rotuer2`.
+`ziti-edge-router-1` and `ziti-edge-router-2`.
 
 ### Testing
 
