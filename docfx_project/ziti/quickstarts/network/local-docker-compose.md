@@ -19,24 +19,25 @@ curl -o docker-compose.yaml https://raw.githubusercontent.com/openziti/ziti/rele
 ```
 
 Next, grab the
-default [environment file](https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/default.env)
+default [environment file](https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/.env)
 or just make a file in this folder that looks like this:
 
 ```bash
-curl -o default.env https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/default.env
+curl -o .env https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/.env
 ```
 or
 ```bash
-cat > default.env <<DEFAULT_ENV_FILE
+cat > .env <<DEFAULT_ENV_FILE
+ZITI_IMAGE=openziti/quickstart
+ZITI_VERSION=latest
 ZITI_CONTROLLER_RAWNAME=ziti-controller
 ZITI_EDGE_CONTROLLER_RAWNAME=ziti-edge-controller
-ZITI_ZAC_RAWNAME=ziti-zac
 DEFAULT_ENV_FILE
 ```
 
 ## Running via Docker Compose
 
-Once the compose file is downloaded and the `default.env` file exists, you'll be able to start this network using
+Once the compose file is downloaded and the `.env` file exists, you'll be able to start this network using
 docker-compose just like you can with any other compose file: `docker-compose up`
 
 > [!Note]
