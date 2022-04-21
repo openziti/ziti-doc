@@ -160,13 +160,20 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
    > internal docker compose network that is declared in the compose file. You would enter 
    > `https://ziti-edge-controller:1280` as the controller's URL
 2. Set the controller as shown (use the correct URL):
+
    1. Example using the "everything local" quickstart:
-      ![img_1.png](./zac_configure_local.png)
-   1. Example using the "docker-compose" quickstart:
-      ![img_1.png](./zac_configure_dc.png)   
-   2. Example using AWS "host it anywhere":
-      ![img_1.png](./zac_configure_hia.png)
+      ![everything local](./zac_configure_local.png)
+ 
+   2. Example using the "docker-compose" quickstart:
+      ![docker-compose](./zac_configure_dc.png)   
+ 
+   3. Example using AWS "host it anywhere":
+      ![host it anywhere](./zac_configure_hia.png)
+
 3. Login with admin/admin
+ 
    ![img_2.png](./zac_login.png)
+
 4. **IMPORTANT!!!** Edit your profile and change the password
+
    ![img_3.png](./zac_change_pwd.png)
