@@ -141,7 +141,7 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
       - zitiblue
       - zitired
    ```
-5. After adding the ZAC configuration as shown, `docker-compose` will now start and expose the ZAC ports on 1408/8443.
+1. After adding the ZAC configuration as shown, `docker-compose` will now start and expose the ZAC ports on 1408/8443.
    > [!Note]
    > Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
    > addressable by your machine in order to use docker in this way. This guide does not go into how to do this in depth.
@@ -154,15 +154,19 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
 1. At this point you should be able to navigate to both: `https://${ZITI_EDGE_CONTROLLER_HOSTNAME}:8443`and see the ZAC login
    screen. (The TLS warnings your browser will show you are normal - it's because these steps use a self-signed certificate
    generated in the install process)
-
-2. Set the controller as shown:
-
-   ![img_1.png](./zac_configure.png)
-
+   > [!NOTE]
+   > If you are using docker-compose to start your network, when you access ZAC for the first time you will need to 
+   > specify the url of the controller. Since everything is running **in** docker compose this url is relative to the 
+   > internal docker compose network that is declared in the compose file. You would enter 
+   > `https://ziti-edge-controller:1280` as the controller's URL
+2. Set the controller as shown (use the correct URL):
+   1. Example using the "everything local" quickstart:
+      ![img_1.png](./zac_configure_local.png)
+   1. Example using the "docker-compose" quickstart:
+      ![img_1.png](./zac_configure_dc.png)   
+   2. Example using AWS "host it anywhere":
+      ![img_1.png](./zac_configure_hia.png)
 3. Login with admin/admin
-
    ![img_2.png](./zac_login.png)
-
 4. **IMPORTANT!!!** Edit your profile and change the password
-
    ![img_3.png](./zac_change_pwd.png)
