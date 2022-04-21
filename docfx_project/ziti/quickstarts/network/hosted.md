@@ -29,11 +29,11 @@ client connections.
 The ports you choose are not important but unless you change them these ports will default to the following:
 
 Controller
-- REST API: 1280
+- REST API: 1280 (port 8441 used below)
 - Control plane: 6262
 
 Edge Router
-- Edge connections: 3022
+- Edge connections: 3022 (port 8442 used below)
 - Fabric links: 10080
 
 It would be reasonable to change all these ports to use ports 443 and 80 since those ports are almost **always** open 

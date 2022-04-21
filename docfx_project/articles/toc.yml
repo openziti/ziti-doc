@@ -17,7 +17,7 @@
             href: ./bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust.md
           - name: "Part 5: Bootstrapping Trust"
             href: ./bootstrapping-trust/part-05.bootstrapping-trust.md
-      - name: Zitification
+      - name: Zitifications
         href: ./zitification/index.md
         items:
           - name: "ssh"
@@ -26,5 +26,9 @@
             href: ./zitification/zitifying-scp/index.md
           - name: "kubectl"
             href: ./zitification/kubernetes/index.md
+          - name: "prometheus (1/2) - Overview"
+            href: ./zitification/prometheus/part1.md
+          - name: "prometheus (2/2) - Details"
+            href: ./zitification/prometheus/part2.md
       - name: Getting to know Go - learnings from the field
         href: ./golang-aha/article.md
