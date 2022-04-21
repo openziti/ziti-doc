@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     name: POST Webhook
     steps:
-      - uses: openziti/ziti-webhook-action@main
+      - uses: openziti/ziti-webhook-action@v2
         with:
           ziti-id: ${{ secrets.ZITI_MATTERMOST_IDENTITY }}
           webhook-url: ${{ secrets.ZITI_MATTERMOST_WEBHOOK_URL }}
