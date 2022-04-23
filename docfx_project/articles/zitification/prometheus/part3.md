@@ -182,16 +182,154 @@ you sent me: another reflect test
 
 ### Scrape Something Else
 
+Hopefully you agree with me that this is pretty neat. Well what if we take it to the next level? What if we tried to scrape the 
+workload we deployed to ClusterB? Could we get that to work? Recall from above how we enabled the job named 'kubeA.reflectz'. What if we 
+simply copied/pasted that into the configmap changing kubeA --> kubeB. Would it work? Let's see. 
 
+```text
+# edit the configmap on ClusterA:
+kubectl edit cm prometheuz-prometheus-server
 
+#add the job - and wait for the configmap to reload
 
+    - job_name: 'kubeB.reflectz'
+      scrape_interval: 5s
+      honor_labels: true
+      scheme: 'ziti'
+      params:
+        'match[]':
+          - '{job!=""}'
+        'ziti-config':
+          - '/etc/prometheus/scrape.json'
+      static_configs:
+        - targets:
+          - 'kubeB.reflect.scrape.svc-kubeB.reflect.id'
+```
 
-# bob
+After watching the logs from `configmap-reloadz` on ClusterA and seeing the webhook trigger. Just go back to the Prometheus server in 
+the browser. You should be at the 'graph' url but if not navigate back and execute another graph for `reflect_total_connections`. When 
+we do that it probably doesn't look much different but... Wait a second? In the legend? Can it be? That's right. From Kubernetes 
+ClusterA, we have just scraped a workload from Kubernetes ClusterB, entirely over the OpenZiti overlay.
 
-a
-# bob
+![kubeA-and-kubeB.png](kubeA-and-kubeB.png)
 
-a
-# bob
+Generate some data like you did before by running a few netcat connection/disconnects and click 'Execute' again. Don't forget to send 
+the connection request to kubeB though!
 
-a
+```text
+nc kubeB.reflect.svc.ziti 80
+this is kubeb
+you sent me: this is kubeb
+^C
+nc kubeB.reflect.svc.ziti 80
+another to kube b
+you sent me: another to kube b
+^C
+nc kubeB.reflect.svc.ziti 80
+one more for fun and profit
+you sent me: one more for fun and profit
+^C
+```
+
+![kubeB from kubeA](./kubeB-from-kubeA.png)
+
+## Scraping All the Things!
+
+By now, you are probably starting to get the idea just how powerful this is for Prometheus. A zitified Prometheus can scrape things 
+easily and natively by just deploying a `Prometheuz` instance into the location you want to scrape. Or, you can just enable a scrape 
+target using a tunneling app, or in Kubernetes using the `ziti-host` helm chart.  Let's complete our vision now and stand up a 
+Prometheus server on our local workstation using Docker.
+
+When we run `Prometheuz` locally using docker we'll need a config file to give to docker using a volume mount. We also provide the 
+identity used to connect to the OpenZiti overlay in the same fashion. Let's start up a docker container locally and see if we can grab 
+data from our two Prometheus instances using a locally deployed `Prometheuz` via docker.
+
+GitHub has a sample Prometheus [file you can download](https://raw.githubusercontent.com/openziti/ziti-doc/main/docfx_project/articles/zitification/prometheus/scripts/local.prometheus.yml).
+Below, I used curl to download it and put it into the expected location.
+
+```text
+curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docfx_project/articles/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
+
+ziti edge create identity user local.prometheus.id -o /tmp/prometheus/local.prometheus.id.jwt -a "reflectz-clients","prometheus-clients"
+ziti edge enroll /tmp/prometheus/local.prometheus.id.jwt -o /tmp/prometheus/local.prometheus.id.json
+
+docker run \
+  -v /tmp/prometheus/local.prometheus.id.json:/etc/prometheus/ziti.id.json \
+  -v /tmp/prometheus/prometheus.config.yml:/etc/prometheus/prometheus.yml \
+  -p 9090:9090 \
+  openziti/prometheuz
+```
+
+![local-docker-targets.png](local-docker-targets.png)
+
+Look at what we've just done. We have started a Prometheus instance locally, and used it to connect to four Prometheus targets via 
+scrape configurations when all four targets are hidden entirely from my local computer (and any computer) unless the computer has an 
+OpenZiti identity. I personally think that is incredibly cool!
+
+## Taking it to 11
+
+But wait, I'm not done. That docker instance is listening on an underlay network. It's exposed to attack by anything on my local network.
+I want to fix that too. Let's start this docker container up listening only on the OpenZiti overlay. Just like in [part 2](./part2.md) 
+we will make a config, a service and two policies to enable identities on the OpenZiti overlay.
+
+```text
+curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docfx_project/articles/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
+
+# create the config and service for the local prometheus server
+ziti edge create config "local.prometheus.svc-intercept.v1" intercept.v1 \
+  '{"protocols":["tcp"],"addresses":["local.prometheus.svc"],"portRanges":[{"low":80, "high":80}], "dialOptions": {"identity":"local.prometheus.id"}}'
+
+ziti edge create service "local.prometheus.svc" \
+  --configs "local.prometheus.svc-intercept.v1"
+
+# grant the prometheus clients the ability to dial the service and the local.prometheus.id the ability to bind
+ziti edge create service-policy "local.prometheus.svc.dial" Dial \
+  --service-roles "@local.prometheus.svc" \
+  --identity-roles "#prometheus-clients"
+ziti edge create service-policy "local.prometheus.svc.bind" Bind \
+  --service-roles "@local.prometheus.svc" \
+  --identity-roles "@local.prometheus.id"
+```
+
+Once that's done - let's see if we can start the docker container. The helm charts are configured to translate the `--set` flags 
+provided into "container friendly" settings like environment variables, volumes and mounts etc. In docker we need to provide those. If 
+you're familiar with docker these will probably all make sense. The most important part of the command below is the **lack** of a `-p` 
+flag. The `-p` flag is used to expose a port from inside docker, outside docker. Look at the previous docker sample and you'll find we 
+were mapping local underlay port 9090 to port 9090 in the docker container. In this example, **we will do no such thing**! :)
+
+```text
+docker run \
+    -e ZITI_LISTENER_SERVICE_NAME=local.prometheus.svc \
+    -e ZITI_LISTENER_IDENTITY_FILE=/etc/prometheus/ziti.server.json \
+    -e ZITI_LISTENER_IDENTITY_NAME=local.prometheus.id \
+    -v /tmp/prometheus/prometheus.config.yml:/etc/prometheus/prometheus.yml \
+    -v /tmp/prometheus/local.prometheus.id.json:/etc/prometheus/ziti.id.json \
+    -v /tmp/prometheus/local.prometheus.id.json:/etc/prometheus/ziti.server.json \
+    openziti/prometheuz
+```
+
+### But - Does It Work?
+
+After configuring the OpenZiti overlay, we just need to open a browser and navigate to http://local.prometheus.svc/targets. SUCCESS!
+
+![local-docker-targets-no-listener.png](local-docker-targets-no-listener.png)
+
+### SUCCESS!
+![local-docker-graph-no-listener.png](local-docker-graph-no-listener.png)
+
+## Wrap Up
+
+This was quite the journey and a lot of fun. We have taken a wildly popular open source project and brought OpenZiti to it with really 
+not much code at all. Then using OpenZiti we were able to give Prometheus superpowers and enable it to scrape any target regardless of 
+where that target is or what network it is on. 
+
+Think of the possibilities here. Are you a cloud provider looking to monitor your client's services which are deployed on-prem? That's 
+so easy with OpenZiti and without sacrificing security **at all**. In fact, using OpenZiti like this provides amazing reach while 
+**strengthening** the security posture of the solution because you're now using the concepts of
+[zero trust networking principles](https://en.wikipedia.org/wiki/Zero_trust_security_model) and applying them to your alerting and 
+monitoring solution.
+
+What do you think? Was this series interesting? Do you think OpenZiti is cool and you are looking to try it out? What are you going to 
+zitify? Tell us on twitter or on discourse! Both links are included in this page. Let us know what you think! Go star the 
+[openziti/ziti](http://github.com/openziti/ziti) repo and help us spread the word of OpenZiti to the world!
+
