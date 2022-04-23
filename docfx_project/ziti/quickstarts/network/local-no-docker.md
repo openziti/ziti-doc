@@ -100,7 +100,7 @@ Horray! Our edge router shows up and is online!
 You can try out creating and running a simple echo service through ziti by running the `first-service` tutorial.
 
 ```bash
-~ % "${ZITI_BIN_DIR-}/ziti edge tutorial first-service" 
+~ % "${ZITI_BIN_DIR-}/ziti" edge tutorial first-service
 ```
 
 
