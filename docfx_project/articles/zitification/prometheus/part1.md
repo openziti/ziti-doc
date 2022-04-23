@@ -15,9 +15,10 @@ If not hidden, it means some port was exposed on some network, thereby giving Pr
 that port on a "trusted" network is a possible attack vector for bad actors. Exposing that port on the open internet (as is often the case)
 is an open invitation for attack. It's much better to keep these servers totally dark to all networks.
 
-OpenZiti solves this problem of reach elegantly and natively while also enabling dark service. Giving an OpenZiti-enabled Prometheus the
-ability to literally scrape any target, anywhere. As long as the target is participates on an OpenZiti overlay network, and as long as the
-proper polices are in place allowing the traffic to flow, Prometheus will be able to reach out and pull the data it needs.
+OpenZiti solves this problem of reach elegantly and natively while also keeping your service dark to all networks. This gives an 
+OpenZiti-enabled Prometheus the ability to literally scrape any target, anywhere. As long as the target is participates on an OpenZiti 
+overlay network, and as long as the proper polices are in place allowing the traffic to flow, Prometheus will be able to reach out and 
+pull the data it needs from anything, anywhere.
 
 It doesn't matter if the target is in some private cloud data center, some private data center protected by a corporate firewall, or heck
 even running inside my local docker environment! As long as the target participates on that OpenZiti Prometheus can scrape it! That sort of
