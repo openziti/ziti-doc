@@ -496,3 +496,10 @@ helm install prometheuz openziti-test-kitchen/prometheus \
 In this article we've done a lot of OpenZiti CLI work, run some `kubectl` and `helm` commands but we still haven't explored what it is 
 we are building and why it's so cool. We'll do that in the [last, and final](./part3.md) article. Hopefully, the payoff for you will be 
 as rewarding as it was for me while building this article series.
+
+---
+
+#### Addendum - a Quicker Start
+
+All the commands above are also available in github as `.sh` scripts. If you would prefer, you can clone the ziti-doc repository and access 
+the scripts from `${checkout_root}/docfx_project/articles/zitification/prometheus/scripts`. "Cleanup" scripts are also provided if desired.

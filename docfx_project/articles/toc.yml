@@ -26,9 +26,14 @@
             href: ./zitification/zitifying-scp/index.md
           - name: "kubectl"
             href: ./zitification/kubernetes/index.md
-          - name: "prometheus (1/2) - Overview"
+          - name: Prometheus
             href: ./zitification/prometheus/part1.md
-          - name: "prometheus (2/2) - Details"
-            href: ./zitification/prometheus/part2.md
+            items:
+              - name: "Overview - Part 1"
+                href: ./zitification/prometheus/part1.md
+              - name: "Overlay Network Setup - Part 2"
+                href: ./zitification/prometheus/part2.md
+              - name: "The Payoff - Part 3"
+                href: ./zitification/prometheus/part3.md
       - name: Getting to know Go - learnings from the field
         href: ./golang-aha/article.md
