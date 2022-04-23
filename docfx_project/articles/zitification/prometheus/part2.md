@@ -501,5 +501,10 @@ as rewarding as it was for me while building this article series.
 
 #### Addendum - a Quicker Start
 
-All the commands above are also available in github as `.sh` scripts. If you would prefer, you can clone the ziti-doc repository and access 
-the scripts from `${checkout_root}/docfx_project/articles/zitification/prometheus/scripts`. "Cleanup" scripts are also provided if desired.
+All the commands above are also available in github as `.sh` scripts. If you would prefer, you can clone the 
+[ziti-doc repository](https://github.com/openziti/ziti-doc) and access the scripts from the path mentioned below. "Cleanup" scripts are 
+provided if desired. 
+
+```text
+${checkout_root}/docfx_project/articles/zitification/prometheus/scripts
+```
