@@ -71,13 +71,12 @@ End-to-end encryption means that even if systems between the client and server a
 
 ## Getting started with Ziti
 
-If you are looking to jump right in feet first you can follow along with one of our [up-and-running quickstart
-guides](~/ziti/quickstarts/quickstart-overview.md). The quickstart will leverage Amazon Web Services (AWS) and will have you
-launch an AMI which will get you up and running in no time.
-
-This environment is perfect for evaluators to get to know Ziti and the capabilities it offers.  The environement was not
-designed for large scale deployment or for long-term usage. If you are looking for a managed service to help you run a
-truly global, scalable network browse over to our website at http://netfoundry.io to learn more.
+If you are looking to jump right in, feet first, you can follow along with one of our 
+[up-and-running quickstart guides](~/ziti/quickstarts/quickstart-overview.md). These environments are perfect for evaluators to get to know 
+Ziti and the capabilities it offers.  The environment was not designed for large scale deployment or for long-term usage. You can 
+certainly deploy and maintain your own once you understand how to create a scalable network, that's what these guides are meant to 
+provide, a start. If you are looking for a managed service to help you run a truly global, scalable network browse over to our website 
+at http://netfoundry.io to learn more. 
 
 ### Contributing
 The Ziti project welcomes contributions including, but not limited to, code, documentation and bug reports.
