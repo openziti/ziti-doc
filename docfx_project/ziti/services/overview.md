@@ -1,6 +1,6 @@
 # Ziti Services
 
-The primaryategy assumes that one ter function of Ziti is providing access to "services". A service encapsulates the definition of any
+The primary strategy assumes that one function of Ziti is providing access to "services". A service encapsulates the definition of any
 resource that could be accessed by a client on a traditional network. 
 
 A service is defined by the following components:
