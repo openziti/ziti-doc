@@ -187,23 +187,23 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 
 # [Linux/MacOS](#tab/ziti-cli-linux)
 
-    ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+    ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
 
     # create a new identity and output the jwt to a known location
-    ziti edge controller create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge controller create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
+    ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
 
 # [Windows](#tab/ziti-cli-windows)
 
-    ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+    ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
 
     REM create a new identity and output the jwt to a known location
-    ziti edge controller create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
+    ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
 
     REM create a second new identity and output the jwt to a known location
-    ziti edge controller create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
+    ziti edge create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
 
 ***
 
@@ -247,22 +247,22 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 # [Linux/MacOS](#tab/start-tunnel-linux)
 
     # if you only have a single edge router this command will work without the need for copy/paste
-    EDGE_ROUTER_ID=$(ziti edge controller list edge-routers | cut -d " " -f2)
+    EDGE_ROUTER_ID=$(ziti edge list edge-routers | cut -d " " -f2)
     
     # IF the above command doesn't work - run this command and get the id from the first edge-router.
-    # ziti edge controller list edge-routers
+    # ziti edge list edge-routers
 
     # then use the id returned from the above command and put it into a variable for use in a momment
     # EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
-    ziti edge controller delete config wttrconfig
-    ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    ziti edge delete config wttrconfig
+    ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     
     # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
     # send a request to wttr.in to retreive a weather forecast
-    ziti edge controller delete service wttr.ziti
-    ziti edge controller create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
+    ziti edge delete service wttr.ziti
+    ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
 
     # start one or both proxies
     ziti-tunnel proxy -i "${HSM_DEST}/${RSA_ID}.json" wttr.ziti:8000 -v &
@@ -276,19 +276,19 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 
     REM these two commands can't be copied and pasted - you need to get the result of the first command and use it in the next
     REM run this command and get the id from the first edge-router.
-    ziti edge controller list edge-routers
+    ziti edge list edge-routers
     
     REM use the id returned from the above command and put it into a variable for use in a momment
     SET EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     REM remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
-    ziti edge controller delete config wttrconfig
-    ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    ziti edge delete config wttrconfig
+    ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     
     REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
     REM send a request to wttr.in to retreive a weather forecast
-    ziti edge controller delete service wttr.ziti
-    ziti edge controller create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
+    ziti edge delete service wttr.ziti
+    ziti edge create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
 
     REM start one or both proxies - use ctrl-break or ctrl-pause to terminate these processes 
     start /b ziti-tunnel proxy -i "%HSM_DEST%/%RSA_ID%.json" wttr.ziti:8000 -v
@@ -488,12 +488,12 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     > HERE
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+    $ ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
     # create a new identity and output the jwt to a known location
-    ziti edge controller create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge controller create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"Token: 28da1089-1636-4e6b-b5c7-96edc8d6162f
+    ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"Token: 28da1089-1636-4e6b-b5c7-96edc8d6162f
 
     cd@sg1 ~/.softhsm/softhsm_demo
     $
@@ -502,7 +502,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     $ # create a new identity and output the jwt to a known location
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge controller create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    $ ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
     dbf953bc-a987-4a89-a93d-0d6dac13150f
     Enrollment expires at 2020-02-23T13:31:35.306053182Z
 
@@ -513,7 +513,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     $ # create a second new identity and output the jwt to a known location
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge controller create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
+    $ ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
     cfffe40d-b859-4a5a-ab4f-c9621a57ec85
     Enrollment expires at 2020-02-23T13:31:36.676560457Z
 
@@ -602,7 +602,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     $ # run this command and get the id from the first edge-router.
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge controller list edge-routers
+    $ ziti edge list edge-routers
     id: c34734a4-d5de-430b-a5dc-7fa05363b28d    name: local-edge-router    role attributes: {}
 
     cd@sg1 ~/.softhsm/softhsm_demo
@@ -612,20 +612,20 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     $ # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge controller delete config wttrconfig
-    ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    $ ziti edge delete config wttrconfig
+    ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
 
     # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
     # send a request to wttr.in to retreive a weather forecast
-    ziti edge controller delete service wttr.ziti
-    ziti edge controller create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
+    ziti edge delete service wttr.ziti
+    ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
 
     # start one or both proxies
     ziti-tunnel proxy -i "${HSM_DEST}/${RSA_ID}.json" wttr.ziti:8000 -v &
     ziti-tunnel proxy -i "${HSM_DEST}/${EC_ID}.json" wttr.ziti:9000 -v &
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    $ ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     384166bd-0781-4189-ae66-6789cc1952b2
 
     cd@sg1 ~/.softhsm/softhsm_demo
@@ -638,10 +638,10 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     $ # send a request to wttr.in to retreive a weather forecast
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge controller delete service wttr.ziti
+    $ ziti edge delete service wttr.ziti
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge controller create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
+    $ ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
     eb5c5fe8-5781-4760-9962-90ab708027f2
 
     cd@sg1 ~/.softhsm/softhsm_demo
@@ -963,20 +963,20 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     More?
     More? slots.mechanisms = ALL > %SOFTHSM2_CONF%
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+    c:\path\to\softhsm\softhsm_demo>ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
     Token: c6f4d504-6095-4118-8f13-3c787821963f
 
     c:\path\to\softhsm\softhsm_demo>
     c:\path\to\softhsm\softhsm_demo>REM create a new identity and output the jwt to a known location
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge controller create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
+    c:\path\to\softhsm\softhsm_demo>ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
     a625ee46-b799-4e9f-a92c-59a579cb9756
     Enrollment expires at 2020-02-23T14:22:08.902166003Z
 
     c:\path\to\softhsm\softhsm_demo>
     c:\path\to\softhsm\softhsm_demo>REM create a second new identity and output the jwt to a known location
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge controller create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
+    c:\path\to\softhsm\softhsm_demo>ziti edge create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
     08889f51-1639-4cd0-9c18-ffcc5e315f3e
     Enrollment expires at 2020-02-23T14:22:09.634832703Z
 
@@ -1055,7 +1055,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     enrolled successfully. identity file written to: c:\path\to\softhsm\softhsm_demo\softhsm_demo02_ec.json
     c:\path\to\softhsm\softhsm_demo>REM run this command and get the id from the first edge-router.
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge controller list edge-routers
+    c:\path\to\softhsm\softhsm_demo>ziti edge list edge-routers
     id: 727f0074-9011-4b79-955b-a6a9e3bb67b1    name: local-edge-router    role attributes: {}
 
     c:\path\to\softhsm\softhsm_demo>
@@ -1065,9 +1065,9 @@ output would likely look like click one of the tabs to the right. Reminder - it'
 
     c:\path\to\softhsm\softhsm_demo>REM remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge controller delete config wttrconfig
+    c:\path\to\softhsm\softhsm_demo>ziti edge delete config wttrconfig
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    c:\path\to\softhsm\softhsm_demo>ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     7e73d98c-e44f-4360-9a48-6d1c812f0a75
 
     c:\path\to\softhsm\softhsm_demo>
@@ -1075,9 +1075,9 @@ output would likely look like click one of the tabs to the right. Reminder - it'
 
     c:\path\to\softhsm\softhsm_demo>REM send a request to wttr.in to retreive a weather forecast
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge controller delete service wttr.ziti
+    c:\path\to\softhsm\softhsm_demo>ziti edge delete service wttr.ziti
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge controller create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
+    c:\path\to\softhsm\softhsm_demo>ziti edge create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
     04ccec0c-3329-4f8f-8942-9dbd378bb15e
 
     c:\path\to\softhsm\softhsm_demo>REM start one or both proxies - use ctrl-break or ctrl-pause to terminate these processes

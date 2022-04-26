@@ -114,12 +114,12 @@ can be used to access that particular service.
 To help diagnose issues there is a policy advisor API which the CLI has a wrapper for.
 
 
-    $ ziti edge controller policy-advisor services -q
+    $ ziti edge policy-advisor services -q
     OKAY : simple-client (1) -> simple (1) Common Routers: (1/1) Dial: Y Bind: N 
 
     OKAY : simple-server (1) -> simple (1) Common Routers: (1/1) Dial: N Bind: Y
 
-    $ ziti edge controller policy-advisor services ssh simple-client -q
+    $ ziti edge policy-advisor services ssh simple-client -q
     ERROR: simple-client (1) -> ssh (1) Common Routers: (1/1) Dial: N Bind: N 
       - No access to service. Adjust service policies.
  

@@ -187,23 +187,23 @@ by the pkcs11 driver!
 
 # [Linux/MacOS](#tab/ziti-cli-linux)
 
-    ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+    ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
 
     # create a new identity and output the jwt to a known location
-    ziti edge controller create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge controller create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
+    ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
 
 # [Windows](#tab/ziti-cli-windows)
 
-    ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+    ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
 
     REM create a new identity and output the jwt to a known location
-    ziti edge controller create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
+    ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
 
     REM create a second new identity and output the jwt to a known location
-    ziti edge controller create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
+    ziti edge create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
 
 ***
 
@@ -246,22 +246,22 @@ by the pkcs11 driver!
 # [Linux/MacOS](#tab/start-tunnel-linux)
 
     # if you only have a single edge router this command will work without the need for copy/paste
-    EDGE_ROUTER_ID=$(ziti edge controller list edge-routers | cut -d " " -f2)
+    EDGE_ROUTER_ID=$(ziti edge list edge-routers | cut -d " " -f2)
     
     # IF the above command doesn't work - run this command and get the id from the first edge-router.
-    # ziti edge controller list edge-routers
+    # ziti edge list edge-routers
 
     # then use the id returned from the above command and put it into a variable for use in a momment
     # EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
-    ziti edge controller delete config wttrconfig
-    ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    ziti edge delete config wttrconfig
+    ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     
     # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
     # send a request to wttr.in to retreive a weather forecast
-    ziti edge controller delete service wttr.ziti
-    ziti edge controller create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
+    ziti edge delete service wttr.ziti
+    ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
 
     # start one or both proxies
     ziti-tunnel proxy -i "${HSM_DEST}/${RSA_ID}.json" wttr.ziti:8000 -v &
@@ -275,19 +275,19 @@ by the pkcs11 driver!
 
     REM these two commands can't be copied and pasted - you need to get the result of the first command and use it in the next
     REM run this command and get the id from the first edge-router.
-    ziti edge controller list edge-routers
+    ziti edge list edge-routers
     
     REM use the id returned from the above command and put it into a variable for use in a momment
     SET EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     REM remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
-    ziti edge controller delete config wttrconfig
-    ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    ziti edge delete config wttrconfig
+    ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     
     REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
     REM send a request to wttr.in to retreive a weather forecast
-    ziti edge controller delete service wttr.ziti
-    ziti edge controller create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
+    ziti edge delete service wttr.ziti
+    ziti edge create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
 
     REM start one or both proxies - use ctrl-break or ctrl-pause to terminate these processes 
     start /b ziti-tunnel proxy -i "%HSM_DEST%/%RSA_ID%.json" wttr.ziti:8000 -v
@@ -364,20 +364,20 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     cd@cd-ubuntuvm: mkdir -p ${HSM_NAME}
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: cd ${HSM_NAME}
-    cd@cd-ubuntuvm: ziti edge controller login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+    cd@cd-ubuntuvm: ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
     # create a new identity and output the jwt to a known location
-    ziti edge controller create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge controller create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"Token: 7083e601-cc2f-4636-94c0-959174e76264
+    ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"Token: 7083e601-cc2f-4636-94c0-959174e76264
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # create a new identity and output the jwt to a known location
-    cd@cd-ubuntuvm: ziti edge controller create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    cd@cd-ubuntuvm: ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
     76877717-9bce-4f34-ae7a-2ce313b8267a
     Enrollment expires at 2020-02-24T14:56:19.961322754Z
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # create a second new identity and output the jwt to a known location
-    cd@cd-ubuntuvm: ziti edge controller create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
+    cd@cd-ubuntuvm: ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
     bdd18e58-e474-4ed3-98eb-c68ed96377be
     Enrollment expires at 2020-02-24T14:56:21.673599433Z
     cd@cd-ubuntuvm: p --init-token --label "ziti-test-token" --so-pin $HSM_SOPIN
@@ -440,40 +440,40 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     DEBU[0001] EC oid[1.2.840.10045.3.1.7], rest: [], err: <nil>  context=pkcs11
     enrolled successfully. identity file written to: /path/to/yubico-piv-tool-2.0.0/yubikey_demo/yubikey_demo03_ec.jsoncd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # if you only have a single edge router this command will work without the need for copy/paste
-    cd@cd-ubuntuvm: EDGE_ROUTER_ID=$(ziti edge controller list edge-routers | cut -d " " -f2)
+    cd@cd-ubuntuvm: EDGE_ROUTER_ID=$(ziti edge list edge-routers | cut -d " " -f2)
     # IF the above command doesn't work - run this command and get the id from the first edge-router.
-    # ziti edge controller list edge-routers
+    # ziti edge list edge-routers
 
     # then use the id returned from the above command and put it into a variable for use in a momment
     # EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
-    ziti edge controller delete config wttrconfig
-    ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    ziti edge delete config wttrconfig
+    ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
 
     # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # IF the above command doesn't work - run this command and get the id from the first edge-router.
-    cd@cd-ubuntuvm: # ziti edge controller list edge-routers
+    cd@cd-ubuntuvm: # ziti edge list edge-routers
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # then use the id returned from the above command and put it into a variable for use in a momment
     cd@cd-ubuntuvm: # EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
-    cd@cd-ubuntuvm: ziti edge controller delete config wttrconfig
-    ziti edge controller delete service wttr.ziti
-    ziti edge controller create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
+    cd@cd-ubuntuvm: ziti edge delete config wttrconfig
+    ziti edge delete service wttr.ziti
+    ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
 
     # start one or both proxies
     ziti-tunnel proxy -i "${HSM_DEST}/${RSA_ID}.json" wttr.ziti:8000 -v &
     ziti-tunnel proxy -i "${HSM_DEST}/${EC_ID}.json" wttr.ziti:9000 -v &
-    cd@cd-ubuntuvm: ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    cd@cd-ubuntuvm: ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     4ff768fa-0e7e-4b4d-ab4e-5c5aec5bd28d
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
     cd@cd-ubuntuvm: # send a request to wttr.in to retreive a weather forecast
-    cd@cd-ubuntuvm: ziti edge controller delete service wttr.ziti
-    cd@cd-ubuntuvm: ziti edge controller create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
+    cd@cd-ubuntuvm: ziti edge delete service wttr.ziti
+    cd@cd-ubuntuvm: ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
     1827c649-9ba6-4f5a-b122-a8cb9d4e4893
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # start one or both proxies
@@ -737,13 +737,13 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     c:\path\to\yubico-piv-tool-2.0.0>
     c:\path\to\yubico-piv-tool-2.0.0>cd /d %HSM_NAME%
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge controller login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
     Token: 2e4b9d55-fe89-4e35-8101-7d8a5f492b8b
 
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>REM create a new identity and output the jwt to a known location
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge controller create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
     43b76397-c65e-43a9-a326-b58f83cacfea
     Enrollment expires at 2020-02-24T14:47:02.783676578Z
 
@@ -751,7 +751,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
       
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>REM create a second new identity and output the jwt to a known location
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge controller create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
     fa116b87-d322-4058-a8c1-d41f21a9e051
     Enrollment expires at 2020-02-24T14:47:03.521726623Z
     
@@ -826,7 +826,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
 
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>REM run this command and get the id from the first edge-router.
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge controller list edge-routers
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge list edge-routers
     id: 0c2c2049-3577-479c-aa09-625fa0e15d31    name: local-edge-router    role attributes: {}
 
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>
@@ -837,9 +837,9 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>REM remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge controller delete config wttrconfig
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge delete config wttrconfig
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge controller create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     b2c7af06-072d-4ff2-9f73-8d1456a16d5a
 
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>
@@ -847,9 +847,9 @@ output would likely look like click one of the tabs to the right. Reminder - it'
 
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>REM send a request to wttr.in to retreive a weather forecast
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge controller delete service wttr.ziti
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge delete service wttr.ziti
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge controller create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
     5a11bfce-b716-4d7a-944b-ea72e6225549
 
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>
