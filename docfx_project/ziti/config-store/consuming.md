@@ -3,13 +3,13 @@ Configuration data can be retrieved directly, but it will usually be consumed by
 
 If we've set up a service `ssh` as follows:
 
-    $ ziti edge controller create config ssh-client my-app \
+    $ ziti edge create config ssh-client my-app \
         '{ 
             "hostname" : "ssh.company.com", 
             "port" : 22 
          }'
     
-    $ ziti edge controller create service ssh --configs ssh
+    $ ziti edge create service ssh --configs ssh
  
 The SDKs will present this configuration in language specific ways. You can see the data the SDK are working with from the SDK, by specifying configuration types when listing services. 
 
@@ -18,7 +18,7 @@ The SDKs will present this configuration in language specific ways. You can see 
 * In addition to the `config` block which has the embedded configuration data there's also a `configs` section which lists all the associated configurations by ID. All associated configurations will always be listed here, regardless of which configuration types are requested.
 
 
-    $ ziti edge controller list services -j --config-types my-app 'name="ssh"'
+    $ ziti edge list services -j --config-types my-app 'name="ssh"'
     {
         "meta": {
             "filterableFields": [

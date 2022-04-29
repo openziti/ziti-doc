@@ -4,4 +4,4 @@
 
     ziticontroller=127.0.0.1
     cert=~/.config/ziti/pki/intermediate/certs/intermediate.cert
-    ziti edge controller login https://${ziticontroller}:1280 -u $ctrl_user -p $ctrl_passwd -c $cert
+    ziti edge login https://${ziticontroller}:1280 -u $ctrl_user -p $ctrl_passwd -c $cert
