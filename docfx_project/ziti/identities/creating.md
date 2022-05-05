@@ -2,38 +2,36 @@
 
 The mechanism for creating identities is influenced by how your Ziti network is setup, specifically how the PKI is
 established. Identities are itegrally linked to the PKI configured in a given Ziti network and directly affects how
-identites are created. There are generally three groups of identities which can be created:
+identites are created and enrolled. There are generally three enrollment methods for identities:
 
 * One Time Token (ott) identites using the configured PKI
 * One Time Token (ott) identites using a 3rd Party CA
 * 3rd Party auto-enrolled identities
 
-## Choosing an Identity Type
+## Choosing an Enrollment Method
 
-Choosing which type of identity you are creating comes down to whether you are using a 3rd Party CA or not. If the
-network does not have a 3rd Party Certificate configured the only option is to use the One Time Token identity.
+Choosing which type of enrollment your identity will use comes down to whether you are using a 3rd Party CA or not. If the
+network does not have a 3rd Party Certificate configured the only option is to use the One Time Token (OTT) enrollment method.
 
 If one or more 3rd Party CA is installed you will need to understand the intention of each 3rd Party certificate.
 
-Each of the types of identities are secure it just depends on your actual network setup as to which type to choose. If
-you don't know - just use the one time token identity. The identity can always be recreated at a later date and replaced
-if necessary.
+Each of the types of enrollments are secure it just depends on your actual network setup as to which type to choose. If
+you don't know - just use the One Time Token (OTT) method. The identity can always be recreated at a later date if necessary.
 
 ### One Time Token (OTT)
 
-One time token identities are the type of identities available to all Ziti networks.  A one time token identity will
+The One Time Token method is available to all Ziti networks.  A one time token enrolled identity will
 have a token generated at the time of the identity's creation.  This token is then submitted at some point in the future
 as part of the [enrollment](./enrolling.md) process.  Once an identity is successfully enrolled - the one time token is
 no longer valid and cannot be used to enroll the same identity again.
 
 One time tokens are delivered from the Ziti Controller as a [jwt](https://tools.ietf.org/html/rfc7519) and the token
-expires 24 hours after the identity is created.  The token is downloadable via the basic UI provided in the [Ziti Edge -
-Developer Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV). After you create a user you can go to the Identities page and
-click the icon that looks like a certificate to download the .jwt file.
+expires 24 hours after the identity is created.  The token is downloadable via the Ziti Admin Console. After you create
+a user you can go to the Identities page and click the icon that looks like a certificate to download the .jwt file.
 
-You can also create a one time token identity using the `ziti` cli tool available on the path of the [Ziti Edge -
-Developer Edition](https://aws.amazon.com/marketplace/pp/B07YZLKMLV).  This command will create a new identity and output the jwt
-to the selected path. You can then transfer the .jwt file to its intended destination.
+You can also create an identity for one time token enrollment using the `ziti` cli tool.  This command will
+create a new identity and output the jwt to the selected path. You can then transfer the .jwt file to the device where
+the permanent identity JSON file will be installed by running the `enroll` command.
 
 [!include[](./create-identity-cli.md)]
 
@@ -96,7 +94,7 @@ multiple identities. An enrollment request is comprised of a special enrollment 
 using the signed client certificate as the TLS client certificate and an optional JSON payload that allows the client to
 specify the devices display name and internal username. See [enrollment](./enrolling.md) for more details on enrolling.
 
-### [New Identity via UI](#tab/tabid-new-identity-ui)
+### [New 3rd Party CA Identity via UI](#tab/tabid-new-identity-ui)
 
 1. On the left side click "Certificate Authorities"
 1. In the top right corner of the screen click the "plus" image to add a new Certificate Authority
@@ -104,8 +102,19 @@ specify the devices display name and internal username. See [enrollment](./enrol
 1. Choose if the CA should be used for Enrollment (yes) and Auth (yes)
 1. Click save
 
-### [New Identity via UI](#tab/tabid-new-identity-cli)
+### [New 3rd Party Identity via CLI](#tab/tabid-new-identity-cli)
 
 [!include[](./create-identity-cli.md)]
 
 ***
+
+## Choosing an Identity Type
+
+The three types of identities are:
+
+* User
+* Device
+* Service
+
+These are functionally equivalent and have identical properties. You may wish to express the intended purpose of an
+identity by choosing one or another type when the identity is created. The type can not be changed.
