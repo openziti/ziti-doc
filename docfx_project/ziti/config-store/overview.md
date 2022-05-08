@@ -29,7 +29,7 @@ The configuration store has four components:
     1. An identity can have a configuration specified for a given service and configuration type. This will override any configuration for the service for that type 
 
 This configuration model has the following properties:
-* Different applications can their own configuration for the same service
+* Different applications can have their own configuration for the same service
 * Applications can have multiple configuration types for themselves where it makes sense
     * Ziti tunnelers have one type for the client side and one for the server side, since they have different properties and not every service with use both
 * Since an application can support multiple configuration types, applications can version their configuration types as their needs change

@@ -42,7 +42,7 @@ To change the administrator password using the CLI simply issue these commands:
 [!include[](~/ziti/cli-snippets/login.md)]
     
     #update the admin user. This command will prompt you to enter the password
-    ziti edge controller update authenticator updb -s
+    ziti edge update authenticator updb -s
     
 ***
 
@@ -110,7 +110,7 @@ return the IP address you are coming from. Click this link now and discover what
 [!include[](~/ziti/cli-snippets/login.md)]
     
     # create the config
-    ziti edge controller create config eth0.ziti.config.cli ziti-tunneler-client.v1 '{ "hostname" : "eth0.ziti.cli", "port" : 80 }'
+    ziti edge create config eth0.ziti.config.cli ziti-tunneler-client.v1 '{ "hostname" : "eth0.ziti.cli", "port" : 80 }'
 
 ***
 
@@ -127,7 +127,7 @@ return the IP address you are coming from. Click this link now and discover what
 To create a new service using the CLI simply issue these two commands:
 
     # create the service and refernce the cli config added earlier
-    ziti edge controller create service ziti.eth0.svc.cli --configs ziti.eth0.config.cli
+    ziti edge create service ziti.eth0.svc.cli --configs ziti.eth0.config.cli
 
 ***
 
@@ -147,7 +147,7 @@ To create a new service using the CLI simply issue these two commands:
 To create a new service using the CLI simply issue these two commands:
 
     # create the service and refernce the cli config added earlier
-    ziti edge controller create terminator eth0.ziti.svc.cli "ziti-er01" tcp:eth0.me:80
+    ziti edge create terminator eth0.ziti.svc.cli "ziti-er01" tcp:eth0.me:80
 
 ***
 
@@ -219,13 +219,13 @@ To create some policies using the CLI issue the following commands:
 [!include[](~/ziti/cli-snippets/login.md)]
     
     # Create an edge router policy which allows all identities to use all edge routers 
-    ziti edge controller create edge-router-policy all-edge-routers-cli --edge-router-roles '#all' --identity-roles '#all'
+    ziti edge create edge-router-policy all-edge-routers-cli --edge-router-roles '#all' --identity-roles '#all'
     
     # Create a service policy which allows all identities to use all services 
-    ziti edge controller create service-policy all-services-dial-cli Dial --service-roles '#all' --identity-roles '#all'
+    ziti edge create service-policy all-services-dial-cli Dial --service-roles '#all' --identity-roles '#all'
     
     # Create a service edge router policy which allows all services to use all edge routers
-    ziti edge controller create service-edge-router-policy all-edge-routers-all-services --edge-router-roles '#all' --service-roles '#all'
+    ziti edge create service-edge-router-policy all-edge-routers-all-services --edge-router-roles '#all' --service-roles '#all'
     
 ***
 

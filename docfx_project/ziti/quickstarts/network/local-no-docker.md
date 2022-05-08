@@ -85,7 +85,7 @@ Saving identity 'default' to ${HOME}/.ziti/quickstart/My-Mac-mini.local.domain/z
 Congratulations! You can now use the `ziti` CLI to interact with Ziti! ([Ziti CLI Help Here](~/ziti/cli/cli.md)) The 
 `ziti` binary is not added to your path by default but will be available at `"${ZITI_BIN_DIR-}/ziti"`. Add that folder
 to your path, alias `ziti` if you like. Let's try to use this command to see if the edge router is online by running:
-``"${ZITI_BIN_DIR-}/ziti" edge list edge-routers`.
+`"${ZITI_BIN_DIR-}/ziti" edge list edge-routers`.
 
 ```bash
 ~ % "${ZITI_BIN_DIR-}/ziti" edge list edge-routers
@@ -132,16 +132,6 @@ ZITI_EDGE_CONTROLLER_PORT=8800; \
 ZITI_EDGE_ROUTER_HOSTNAME=localhost;ZITI_EDGE_ROUTER_PORT=9090; \
 source ziti-cli-functions.sh; expressInstall newfolder
 ```
-
-> [!Warning]
-> If you run this command twice in the same shell you'll see a message warning you that you've already
-> run the command. It will look like this:
-> ```bash
-> --- It looks like you've run an express install in this shell already. ---
-> --- Please execute unsetZitiEnv to clear any variables already set.    ---
-> ```
-> 
-> To clear this warning - as shown simply run `unsetZitiEnv`
 
 ## Sourcing the Env File
 
