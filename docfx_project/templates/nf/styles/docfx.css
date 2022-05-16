@@ -453,7 +453,7 @@ article section {
 .sidetoc {
   position: fixed;
   width: 260px;
-  top: 150px;
+  top: 175px;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -585,7 +585,7 @@ body .toc{
 }
 .sidefilter {
   position: fixed;
-  top: 90px;
+  top: 115px;
   width: 260px;
   background-color: #f4f5f7;
   padding: 15px;
