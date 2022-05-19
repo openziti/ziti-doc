@@ -9,7 +9,7 @@ a.contribution-link{
     border-radius: 20px;
 }
 .subnav.navbar.navbar-default{
-    visibility: hidden;
+    #visibility: hidden;
 }
 article li{
     color: whitesmoke;
