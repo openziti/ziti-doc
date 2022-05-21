@@ -22,4 +22,4 @@ ignorePost: true
 Enter article body here
 
 
-this was a commit i just made right now. do you like it?
+This was a commit I just made right now. Do you like it?
