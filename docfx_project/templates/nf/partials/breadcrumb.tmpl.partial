@@ -7,7 +7,7 @@
     </ul>
   </div>
   <div style="display:flex; align-items: center; justify-content: center; flex-direction:row; position: relative; width: 100%; text-align: center; background-color: #eb9800">
-    <span style="margin-top: 5px; color: white; margin-right: 10px; height:25px">Give us a Star on GitHub</span>
+    <span style="margin-top: 5px; color: white; margin-right: 10px; height:25px">Star us on GitHub</span>
     <span style="margin-top: 5px;"><a class="github-button" href="https://github.com/openziti/ziti" data-icon="octicon-star" data-show-count="true" aria-label="Star openziti/ziti on GitHub">Star</a></span>
   </div>
 </div>

@@ -2,7 +2,7 @@
 <img src="https://ziti.dev/wp-content/uploads/2020/01/ziti.dev_.alt2_.png" height="100px" class="alignleft size-full wp-image-6451" style="margin-bottom: 40px;"/>
 <div class="headerCallout">
     <p class="h1">Welcome to the OpenZiti Project!</p>
-    <p>The OpenZiti project is an open source initiative focused on bringing Zero Trust to any application. 
+    <p>The OpenZiti project is a free, open source project focused on bringing Zero Trust to any application. 
 The project provides all the pieces required to implement or integrate Zero Trust into your solutions:</p>
 <ul>
 <li>The overlay network</li>
@@ -99,7 +99,11 @@ familiar with the technology overall. These samples will leverage one of the [tu
 <h1>Sound Good?</h1>
 
 Now that you've seen how cool OpenZiti is - maybe consider starring us on GitHub? It helps others find the project!
-Show your support of OpenZiti today! <a class="github-button" href="https://github.com/openziti/ziti" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star openziti/ziti on GitHub">Star</a>
+Show your support of OpenZiti today!
+
+<div align="center">
+<a class="github-button" href="https://github.com/openziti/ziti" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star openziti/ziti on GitHub">Star</a>
+</div>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
