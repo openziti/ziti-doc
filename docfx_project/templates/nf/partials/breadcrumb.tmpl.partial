@@ -6,7 +6,7 @@
       <li>{{_tocTitle}}</li>
     </ul>
   </div>
-  <div style="display:flex; align-items: center; justify-content: center; flex-direction:row; position: relative; width: 100%; text-align: center; background-color: #eb9800">
+  <div style="display:flex; align-items: center; justify-content: center; flex-direction:row; position: relative; width: 100%; text-align: center; background: rgb(0,104,247); background: linear-gradient(90deg, rgba(0,104,247,1) 0%, rgba(222,14,91,1) 100%);">
     <span style="margin-top: 5px; color: white; margin-right: 10px; height:25px">Star us on GitHub</span>
     <span style="margin-top: 5px;"><a class="github-button" href="https://github.com/openziti/ziti" data-icon="octicon-star" data-show-count="true" aria-label="Star openziti/ziti on GitHub">Star</a></span>
   </div>
