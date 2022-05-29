@@ -29,6 +29,7 @@
   - name: Android
     href: ~/ziti-android-app/README.md
 - name: Getting Started With Services
+  href: services/index.md
   items:
     - name: Zero Trust Host Access
       href: services/host-access.md
