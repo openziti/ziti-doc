@@ -28,3 +28,7 @@
   items:
   - name: Android
     href: ~/ziti-android-app/README.md
+- name: Getting Started With Services
+  items:
+    - name: Host Network Access
+      href: services/host-access.md
