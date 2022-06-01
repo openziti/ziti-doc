@@ -69,7 +69,9 @@ With our overlay network ready and with two tunneling applications deployed and 
 Here is an overview of the steps we will follow:
 1. Create an identity for the HTTP client and assign an attribute "http-clients". We'll use this attribute when authorizing the clients to
    access the HTTP service
-2. Create an identity for the HTTP server if you are not using an edge-router with the tunneling option enabled (see below).
+2. Create an identity for the HTTP server if you are not using an edge-router with the tunneling option enabled (see below). Also note 
+   that if you are using the docker-compose quickstart or just plan to use an edge-router with tunneling enabled you can also skip this 
+   step.
 3. Create an [intercept.v1 config](~/ziti/config-store/overview.md). This config is used to instruct the client-side tunneler how 
    to correctly intercept the targeted traffic and put it onto the overlay.
 4. Create a [host.v1 config](~/ziti/config-store/overview.md). This config is used instruct the server-side tunneler how to offload the 
