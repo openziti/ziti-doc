@@ -60,6 +60,27 @@ we'll create an identity for this tunneller and use the identity to access the H
 > If you used the docker-compose quickstart the "private" edge routers are configured as tunnelers and will not require you to deploy 
 > another tunneler nor will you need to create another identity.
 
+### Prerequisite - CLI
+If you plan to use the `ziti` CLI tool, you will either need to download and get the `ziti` executable on your path. If you have 
+followed a quickstart, this will have been done for you and the executable will be located in `~/.ziti/quickstart/$(hostname)/ziti-bin/`.
+Also, the .env file the quickstart emits can be used to put this folder on your path by simply sourcing that file. For example, if you
+followed either the [Local - No Docker](~/ziti/quickstarts/network/local-no-docker.md) or 
+[Host Ziti Anywhere](~/ziti/quickstarts/network/hosted.md) quickstart, you should have a file that can be sourced. Here is an example of 
+my personal "Local - No Docker" result when sourcing that file:
+```text
+$ source ~/.ziti/quickstart/$(hostname)/$(hostname).env
+
+adding /home/cd/.ziti/quickstart/sg3/ziti-bin/ziti-v0.25.6 to the path
+```
+
+If you are using a docker-based example you can exec into the controller where the `ziti` CLI tool will be available and this file will 
+be sourced for you as well. Here's an example when I use docker to exec into my controller locally:
+```text
+$ docker exec -it docker_ziti-controller_1 bash
+
+adding /openziti/ziti-bin to the path
+```
+
 ---
 
 ### Configuring the Overlay - Overview
@@ -107,8 +128,13 @@ identities` to find the name of the identity associated to the router.
 
 
 ```bash
-# login to your controller
-ziti edge login ${ZITI_EDGE_CONTROLLER}:${ZITI_PORT}
+# login to your controller - replace the host/port with the correct value
+ziti edge login localhost:1280
+
+# optional login: 
+# if you're using docker and have exec'ed into your controller using docker you should be able to run the alias `zitiLogin` to login
+# optional login:
+# if you've sourced the .env file from a quickstart you should be able to run the alias `zitiLogin` to login
 
 # 1. Create an identity for the HTTP client and assign an attribute "http-clients". We'll use this attribute when authorizing the clients to
 #  access the HTTP service

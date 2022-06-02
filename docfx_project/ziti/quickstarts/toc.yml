@@ -7,7 +7,7 @@
     href: network/local-with-docker.md
   - name: Local - Docker Compose
     href: network/local-docker-compose.md
-  - name: Host It Myself
+  - name: Host Ziti Anywhere
     href: network/hosted.md
 - name: Kubernetes
   items:
