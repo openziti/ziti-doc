@@ -149,7 +149,7 @@ ziti edge create config http.intercept.v1 intercept.v1 '{"protocols":["tcp"],"ad
     
 #4. Create a host.v1 config. This config is used instruct the server-side tunneler how to offload the traffic from 
 #   the overlay, back to the underlay.
-ziti edge create config http.host.v1 host.v1 '{"protocol":"tcp", "address":"'"${http_server}"'", "port":80}'
+ziti edge create config http.host.v1 host.v1 '{"protocol":"tcp", "address":"'"${http_server}"'", "port":8000}'
     
 #5. Create a service to associate the two configs created previously into a service.
 ziti edge create service http.svc --configs http.intercept.v1,http.host.v1
