@@ -19,6 +19,8 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
         GIT_BRANCH: main
         gh_ci_key: ${{ secrets.gh_ci_key }}
+        ziti_ci_gpg_key: ${{ secrets.ZITI_CI_GPG_KEY }}
+        ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
     steps:
       - uses: actions/checkout@v1
       - name: generate docs
