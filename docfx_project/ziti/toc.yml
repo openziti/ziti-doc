@@ -23,4 +23,6 @@
 - name: Manage
   href: manage/toc.yml
   topicHref: manage/manage.md
-  
+- name: Metrics
+  href: metrics/toc.yml
+  topicHref: metrics/overview.md
