@@ -1,16 +1,16 @@
-# Overview
-The Ziti controller can expose a `/metrics` endpoint that serves network metrics in the Prometheus [text exposition format] (https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format). 
+# Prometheus Endpoint
+The Ziti Controller can expose a `/metrics` endpoint that serves network metrics in the Prometheus [text exposition format] (https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format). 
 
 The endpoint is exposed over HTTPS, and has optional support for client authentication via a certificate.
 
-# Ziti Configuration
+## Ziti Configuration
 The Prometheus metric binding is configured as part of the controller configuration file.
 
-## Binding
+### Binding
 The Prometheus metrics api is not bound to any interface by default. The metrics api can be bound to the same network interface and port as the other Ziti APIs, or it can be set up on its own interface and/or port.   
 
 
-### Listener just for metrics
+#### Listener Just for Metrics
 
 The metric api can be configured to listen on its own combination of network interface and port by adding a new section under the `web` configuration
 
@@ -62,11 +62,15 @@ web
         options: { }
 ```
 
-### Add metrics API to an existing listener
+#### Add Metrics API to an Existing Listener
 
-If it is not feasible to add a listener on a different port, then the metrics binding can be added to an existing listener. 
+The metrics binding can be added to an existing listener in the controller. 
 
 ```
+web
+  -name: apis
+   bindpoints:
+   apis: 
       - binding: health-checks
         options: { }
       - binding: fabric
@@ -78,7 +82,7 @@ If it is not feasible to add a listener on a different port, then the metrics bi
         options: { }
 ```
 
-## Authentication
+### Authentication
 
 Authentication is done by adding a client certificate to the metrics binding.  The metrics endpoint will return a 401 if this certificate is not presented by clients when they connect.
 
@@ -93,10 +97,10 @@ The configuration is added as an option in the metrics binding.  The file must b
         }
 ```
 
-## Prometheus Configuration
+### Prometheus Configuration
 
-### TLS configuration
-The `/metrics` api requires tls configuration in Prometheus. The Prometheus scrape config must have the ziti web public key, or be configured to ignore private keys.
+#### TLS Configuration
+The `/metrics` api requires TLS configuration in Prometheus. The Prometheus scrape config must have the ziti web public key, or be configured to ignore private keys.
 
 ```
   - job_name: ziti
@@ -114,7 +118,7 @@ The `/metrics` api requires tls configuration in Prometheus. The Prometheus scra
         - '127.0.0.1:2112'
 ```
 
-### With Authentication
+#### With Authentication
 It's a good idea to have metrics protected by a certificate to prevent neferious actors from pulling metrics about your network.  The Prometheus scrape configuration can be configured with a keystore for this purpose:
 
 ```
@@ -133,36 +137,34 @@ It's a good idea to have metrics protected by a certificate to prevent neferious
 
 ```
 
-# Examples
+## Examples
 
-## Setup Metrics Authentication
+### Setup Metrics Authentication
 
 In this example you will:
 1. Create a new cert and signing request
 1. Sign the key
-1. Add the key into your Ziti controller configuration
+1. Add the key into your Ziti Controller configuration
 1. Add the key to your prometheus scrape config
 
 
-### Create a cert for metric scraping
+#### Create a cert for metric scraping
 
 
 ```
 # Create the certificate and signing request
-openssl req  -new  -newkey rsa:2048  -nodes  -keyout /tmp/prom-client.key  -out /tmp/prom-client.csr
+openssl req  -new  -newkey rsa:2048  -nodes  -keyout prom-client.key  -out prom-client.csr
 
 # Process the cert signing signing request.  This cert will be good for 10 years.
-openssl  x509  -req  -days 3650 -in /tmp/prom-client.csr  -signkey /tmp/prom-client.key  -out /tmp/prom-client.crt 
+openssl  x509  -req  -days 3650 -in /tmp/prom-client.csr  -signkey prom-client.key  -out prom-client.crt 
 ```
 
-### Add the cert to Ziti
+#### Add the Cert to Ziti
 
 Open your ziti configuration file and set up the metrics api binding as shown in the `Authentication` section above. 
 
 Some common things to watch out for:
-* *The certificate needs to be wrapped in double-quotes*
-* Indentation doesn't matter, but it's easier to read if it's indented under the `pem` key
-* The Ziti controller will need to be restarted after editing the configuration file
+* The Ziti Controller will need to be restarted after editing the configuration file
 
 Best practices is to use a separate metrics listener that is only accessible from Prometheus.  This configuration will expose the `metrics/` on the loopback address, port 2112.
 
@@ -176,17 +178,17 @@ Add this text to the `web` section of your network controller configuration file
     apis:
       - binding: metrics
         options: {
-          scrapeCert: "/tmp/prom-client.crt"
+          scrapeCert: "/path/to/prom-client.crt"
         }
 
 ```
 
-### Test the key
+#### Test the Key
 
 I use `curl` to test my keys when I set up metrics.  If Ziti is configured to bind metrics to `127.0.0.1:2112` then curl command will be:
 
 ```
-curl -i -k --cert /tmp/prom-client.crt --key /tmp/prom-client.key https://127.0.0.1:2112/metrics
+curl -i -k --cert /path/to/prom-client.crt --key /path/to/prom-client.key https://127.0.0.1:2112/metrics
 ```
 
 The options to the curl command mean:
@@ -197,7 +199,7 @@ The options to the curl command mean:
 
 The result should spit out a bunch of metrics.   If you see a `401` response then double-check that you've copied all of the bits from the certificate into the controller configuration file.
 
-### Add the key to Prometheus
+#### Add the Key to Prometheus
 The key is added to Promtetheus by referencing the crt and key files from the Ziti scrape configuration. 
 
 Your scrape config will look something like this:
@@ -223,12 +225,10 @@ scrape_configs:
     honor_labels: true # Ziti supplies system labels for the edge routers, so we need to obey them
     honor_timestamps: true # Honor server timestamps instead of using the scrape timestamp for metrics
     tls_config:
-      cert_file: /tmp/prom-client.crt
-      key_file: /tmp/prom-client.key
+      cert_file: /path/to/prom-client.crt
+      key_file: /path/to/prom-client.key
       insecure_skip_verify: true
     static_configs:
       - targets:
         - '127.0.0.1:2112'
 ```
-
-[!include[](./metric-types.md)]

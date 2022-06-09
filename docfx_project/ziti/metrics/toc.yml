@@ -6,3 +6,5 @@
   href: file.md
 - name: On Demand
   href: inspect.md
+- name: Types of Metrics Reported
+  href: metric-types.md

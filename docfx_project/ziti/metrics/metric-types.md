@@ -1,4 +1,4 @@
-# Types of metrics reported
+# Types of Metrics Reported
 Ziti is instrumenting more code and adding additional metrics all of the time. This section will describe the different types of metrics that ziti reports, not individual metric names.
 
 ## intValue/floatValue

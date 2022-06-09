@@ -1,12 +1,12 @@
-# Overview
-The Ziti controller event system can write metrics to a file for direct viewing or post-processing into a metrics system of your choice.
+# File Reporter
+The Ziti Controller event system can write metrics to a file for direct viewing or post-processing into a metrics system of your choice.
 
-# Ziti Configuration
+## Ziti Configuration
 There are two independent configurations that need to be set up for metric event reporting to work:
 1. **Report Interval:** The controller and routers need to have a metric reporting interval set.  The interval determines how often metrics will be sent to the controller and possibly written out to file
 1. **Event Subscription:** The subscription is configured in the controller, and determines which of the reported metrics are written.
 
-## Metrics Reporting
+### Metrics Reporting
 The reporting interval is defined in the `metrics.reportInterval` property. While the controller and each router can have a different reporting interval, we suggest that you set them all the same to make lining up metrics across the cluster easier.
 
 Example:
@@ -25,13 +25,13 @@ metrics:
 ```
 
 
-## Metrics writing
+### Metrics Writing
 
 Writing of metrics is broken into two pieces:
 1. **subscription:** Which metrics will be written
 1. **hander:** how the metrics will be written
 
-### Metrics Subscription
+#### Metrics Subscription
 The metrics subscription defines which metrics will be written and how they will be written. 
 
 There are two parts to a metrics event reporter
@@ -45,7 +45,7 @@ The subscription has three components
     * **.\*pool.\*:** Report only pool metrics
     * **.\*:** Report all metrics
 
-#### Example:
+##### Example:
 ```
 events:
   allControllerMetrics:
@@ -60,7 +60,7 @@ events:
         metricFilter: .*pool.*
 ```
 
-### Metrics Handling
+#### Metrics Handling
 The metrics handler defined how metrics are to be written.  It is comprised of:
 1. **type:** The type of handler.  Supported types are:
   * **file:** Metrics will be written to a file
@@ -70,7 +70,7 @@ The metrics handler defined how metrics are to be written.  It is comprised of:
 1. **path:** The name of the file to write metrics to
 
 
-#### File rolling
+##### File Rolling
 files are rolled when they reach a size of `maxsizemb`. Files are renamed from `name.log` to `name-iso8601.log`
 
 For example, `name-2022-06-07T18-50-44.568.log`
@@ -88,7 +88,7 @@ Write 100mb files, saving 2 of them.
 ```
 
 
-## Puting it all together
+### Puting it all together
 
 Controller configuration file:
 
@@ -131,9 +131,9 @@ metrics:
 
 [!include[](./metric-types.md)]
 
-# Metric Examples
+## Metric Examples
 
-## intValue
+### intValue
 ```
 {
   "metric_type": "intValue",
@@ -152,7 +152,7 @@ metrics:
 }
 ```
 
-## Histogram
+### Histogram
 ```
 {
   "metric_type": "histogram",
@@ -183,7 +183,7 @@ metrics:
 }
 ```
 
-## Timer
+### Timer
 ```
 {
   "metric_type": "timer",
