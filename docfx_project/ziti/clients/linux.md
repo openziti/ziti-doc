@@ -56,11 +56,6 @@ You will need the token file or its contents to enroll. Enrollment is the act of
 --refresh N
 ```
 
-```bash
-# Specify the tun interface address and the subnet to which Service domain names are resolved (default 100.64.0.1/10). The nameserver address is always the tun interface address +1, default is 100.64.0.2.
---dns-ip-range <ip range>
-```
-
 ### Run Mode
 
 `ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with a command-line option. The OS is automatically configured to treat the nameserver as primary. You may inspect the resulting configuration with these commands.
@@ -71,6 +66,11 @@ resolvectl domain  # inspect the configuration of search domains
 ```
 
 The configured tun device will ordinarily have the wildcard search domain configured, depending on the pre-existing resolver configuration and the version of systemd.
+
+```bash
+# Specify the tun interface address and the subnet to which Service domain names are resolved (default 100.64.0.1/10). The nameserver address is always the tun interface address +1, default is 100.64.0.2.
+--dns-ip-range <ip range>
+```
 
 #### Run Mode System Requirements
 
