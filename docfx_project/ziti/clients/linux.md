@@ -111,7 +111,7 @@ If any interfaces have a wildcard routing domain configured, `ziti-edge-tunnel` 
 
 ### Run-Host Mode
 
-`ziti-edge-tunnel run-host` provides a narrow subset of the capabilities of the main run mode. This mode only listens for the Services that are authorized to bind to the identities that are loaded.
+`ziti-edge-tunnel run-host` is a mode which is does not allow for service intercepts. The nameserver feature will not be enabled and services which require the intercept functionality will not be available. Only services configured for 'Bind' will be available.
 
 #### Run-Host Mode System Requirements
 
