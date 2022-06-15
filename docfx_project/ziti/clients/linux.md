@@ -6,7 +6,7 @@
 
 The purpose of the tunneler is to configure host access. This means all users and all processes on the host will share the same level of access. This is accomplished by configuring the OS to have an on-board OpenZiti DNS nameserver and IP routes for authorized OpenZiti Services.
 
-#### Installation and Upgrade
+### Installation and Upgrade
 
 [The latest release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is distributed as a binary executable from GitHub. The upgrade procedure is identical to the installation procedure.
 
@@ -19,7 +19,7 @@ wget -q "https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/download/
   && ./ziti-edge-tunnel version
 ```
 
-#### Enroll Before You Run
+### Enroll Before You Run
 
 You will need the token file or its contents to enroll. Enrollment is the act of exchanging the token for an identity that is subsequently installed permanently in the filesystem.
 
@@ -33,7 +33,7 @@ You will need the token file or its contents to enroll. Enrollment is the act of
 ./ziti-edge-tunnel enroll --jwt - --identity ./myTunneler.json < ./myTunneler.jwt
 ```
 
-#### Global Options
+### Global Options
 
 
 ```bash
@@ -61,26 +61,26 @@ You will need the token file or its contents to enroll. Enrollment is the act of
 --dns-ip-range <ip range>
 ```
 
-#### Run Mode
+### Run Mode
 
-`ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive. The OS is automatically configured to treat the nameserver as primary. You may inspect the resulting configuration with these commands.
+`ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with a command-line option. The OS is automatically configured to treat the nameserver as primary. You may inspect the resulting configuration with these commands.
 
 ```bash
 resolvectl dns     # inspect the association of tun device and nameserver
 resolvectl domain  # inspect the configuration of search domains
 ```
 
-The configured tun device will ordinarily have the wildcard search domain configured.
+The configured tun device will ordinarily have the wildcard search domain configured, depending on the pre-existing resolver configuration and the version of systemd.
 
-##### Run Mode System Requirements
+#### Run Mode System Requirements
 
 `ziti-edge-tunnel run` requires elevated privileges for managing the `/dev/net/tun` device, IP routes, and works best when `libsystemd` is available so that it can call the `systemd` API `/var/run/dbus/system_bus_socket` to configure nameservers and search domains for `systemd-resolved`.
 
-#### Run-Host Mode
+### Run-Host Mode
 
 `ziti-edge-tunnel run-host` provides a narrow subset of the capabilities of the main run mode. This mode only listens for the Services that are authorized to bind to the identities that are loaded.
 
-##### Run-Host Mode System Requirements
+#### Run-Host Mode System Requirements
 
 `ziti-edge-tunnel run-host` does not require elevated privileges or the above device or socket, only network egress to the servers for which it is hosting Services.
 
@@ -91,13 +91,11 @@ There are also a couple of more specialized tunneling apps. Please use the prefe
 1. `ziti-tunnel` has the unique capability of an opaque, raw TCP proxy in addition to some redundant capabilities deprecated by the preferred, general purpose tunneler described above: `ziti-edge-tunnel`.
 1. `ziti-router` has an optional `ziti-tunnel` feature built-in that may be enabled when an Edge Router is first created.
 
-`ziti-tunnel` is capable of operating in transparent proxy (`tproxy`), opaque proxy (`proxy`), and host (`host`) modes. In transparent mode it will
-interact with IPtables to establish intercept rules. These rules correspond directly to the
-authorized service definitions in place.
+The configuration and behavior of these two tunneler alternatives are identical and so are discussed as one for the remainder of this article. The tunneler is capable of operating in transparent proxy (`tproxy`), opaque proxy (`proxy`), and host (`host`) modes, discussed immediately below.
 
-#### tproxy
+### tproxy
 
-Typically you will run `ziti-tunnel tproxy`. This is the transparent proxy mode that uses IPtables rules to intercept traffic intended for OpenZiti Services. In this mode `ziti-tunnel` will also serve as an OpenZiti nameserver. You must configure the OS to treat the nameserver as the primary resolver. The nameserver will only answer queries for which it is authoritative i.e. OpenZiti Services' domain names, and so you will also need a secondary, recursive resolver. 
+Typically you will run `ziti-tunnel tproxy`. This is the transparent proxy mode that uses IPtables rules to intercept traffic intended for OpenZiti Services. In this mode `ziti-tunnel` will also serve as an OpenZiti nameserver. You must configure the OS with that nameserver as the primary resolver. The nameserver will only answer queries for which it is authoritative i.e. OpenZiti Services' domain names, and so you will also need a secondary, recursive resolver.
 
 ```bash
 # You must have the IPtables kernel module installed.
@@ -182,11 +180,12 @@ directed to the listener by two mechanisms:
     local 169.254.1.1 dev lo proto kernel scope host src 169.254.1.1
     ```
 
-##### tproxy DNS nameserver
+### tproxy DNS nameserver
 
-`ziti-tunnel tproxy` mode runs a built-in nameserver that is authoritative for all authorized OpenZiti Services' domain names. This nameserver must be primary in the host's resolver
-configuration (e.g. resolve.conf). A self-test is performed when ziti-tunnel starts to ensure that its
-internal nameserver is configured in the system resolver:
+_Please use the preferred tunneler if possible. It is not necessary to manually configure DNS for the preferred tunneler_
+
+`ziti-tunnel tproxy` mode runs a built-in nameserver serving on udp://127.0.0.1:53 by default, and configurable with a command-line option. The nameserver is authoritative for all authorized OpenZiti Services' domain names. This nameserver must be primary in the host's resolver
+configuration. A self-test is performed when ziti-tunnel starts to ensure that OpenZiti domains names are resolvable:
 
 ```log
 INFO[0002] dns server started on 127.0.0.1:53           
@@ -211,8 +210,11 @@ ls -l /etc/resolv.conf
 * If /etc/resolv.conf is a regular file, then it is most likely being managed by `dhclient`.
 * If /etc/resolv.conf is a symlink to a file in /run/systemd/resolve, then it is being
   managed by `systemd-resolved`
+* If /etc/resolv.conf is a symlink at all it is being managed by some process on which the particular steps to configure the primary nameserver will depend.
 
-###### dhclient
+### dhclient
+
+_Please use the preferred tunneler if possible. It is not necessary to manually configure DNS for the preferred tunneler_
 
 If your Linux distribution uses dhclient, you can configure the system resolver to use
 ziti-tunnel's internal DNS server first by adding the following to /etc/dhcp/dhclient.conf:
@@ -224,7 +226,9 @@ prepend domain-name-servers 127.0.0.1;
 Then restart network manager. Unless you know the name of the NetworkManager systemd
 service on your Linux distrubtion, it's probably easiest to reboot the host.
 
-###### systemd-resolved
+### systemd-resolved
+
+_Please use the preferred tunneler if possible. It is not necessary to manually configure DNS for the preferred tunneler_
 
 ```bash
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc
@@ -239,7 +243,7 @@ any hostnames that it tunnels:
 ziti-tunnel run --resolver file:///etc/hosts "${HOME}/ziti.json"
 ```
 
-###### IP Address Assignment
+### IP Address Assignment
 
 If the service specifies a hostname for its address, ziti-tunnel resolves the hostname and adds the result to its
 internal DNS server:
@@ -256,7 +260,7 @@ the route for the service:
 [0012]  INFO ziti/tunnel/protocols/tcp.Listen: Accepting on 169.254.1.4:25 service=telnet
 ```
 
-#### proxy
+### proxy
 
 [!include[](./proxy-example.md)]
 
