@@ -4,10 +4,8 @@ You can absolutely choose to host your [OpenZiti Network](xref:zitiOverview#over
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
 own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller at least one edge router.
 
-It's ideal for self-hosting OpenZiti to have those TLS-hardened control plane servers available at a routeable address on the
-internet. With a Zero Trust overlay network provided by OpenZiti, you can rest assured that your traffic is safe even when
-using commodity internet. You also do not need to worry about being on a network you trust as all networks are
-considered untrustworthy, even your private work or home network!
+If you have a server available on the open internet, or you will provision one for use with OpenZiti, that's the
+ideal scenario. With a zero trust overlay network provided by OpenZiti, you can rest assured that your traffic is safe even when using commodity internet. Furthermore, you do not need to worry about being on a network you trust, as all networks are considered untrustworthy, even your work/home network!
 
 ## Installation
 
@@ -17,11 +15,11 @@ the configuration options available you'll be better equipped to make changes.
 
 ### Firewall
 
-The first issue you will need to deal with is opening some ports. The network's control plane is compose of a
-controller and at least one edge router. Both of these components will require server ports to be reachable by all
-components of your network. For the controller you will need to open two ports through your firewall, one port for
-the management REST API, and one the edge-client API. Edge routers will also require two ports open. One for the
-fabric links created between routers to form the mesh network, and one port for incoming edge-client connections.
+The first issue you will need to deal with is opening some ports. A network will consist of at least one controller and 
+at least one edge router. Both of these components will require ports to be open. For the controller you will need to 
+open two ports through your firewall, one port for the REST API, and one the control plane. Edge routers will also 
+require two ports open. One for the links created between routers to form the mesh network, and one port for incoming 
+client connections.
 
 The ports you choose are not important but unless you change them these ports will default to the following:
 
@@ -119,7 +117,7 @@ commands and verify systemd has started the processes and see the status:
 sudo systemctl -q status ziti-controller --lines=0 --no-pager
 sudo systemctl -q status ziti-router --lines=0 --no-pager
 
-● ziti-controller.service - OpenZiti-Controller
+● ziti-controller.service - Ziti-Controller
      Loaded: loaded (/etc/systemd/system/ziti-controller.service; disabled; vendor preset: enabled)
      Active: active (running) since Thu 2021-11-11 19:05:46 UTC; 8s ago
    Main PID: 2375 (ziti-controller)
@@ -128,7 +126,7 @@ sudo systemctl -q status ziti-router --lines=0 --no-pager
      CGroup: /system.slice/ziti-controller.service
              └─2375 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.22.11/ziti-controller run /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/co…
 ubuntu@ip-10-0-0-1:~$ sudo systemctl -q status ziti-router --lines=0 --no-pager
-● ziti-router.service - OpenZiti-Router for ip-10-0-0-1-edge-router
+● ziti-router.service - Ziti-Router for ip-10-0-0-1-edge-router
      Loaded: loaded (/etc/systemd/system/ziti-router.service; disabled; vendor preset: enabled)
      Active: active (running) since Thu 2021-11-11 19:05:47 UTC; 8s ago
    Main PID: 2385 (ziti-router)
@@ -155,7 +153,7 @@ ubuntu@ip-10-0-0-1:~$ echo $ZITI_HOME
 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1
 ```
 
-## Install OpenZiti Admin Console (ZAC) [Optional]
+## Install Ziti Admin Console (ZAC) [Optional]
 
 Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with
 the installation guide](~/ziti/quickstarts/zac/installation.md)
