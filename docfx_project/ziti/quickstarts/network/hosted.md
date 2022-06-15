@@ -1,71 +1,75 @@
-# Host Ziti Anywhere
+# Host OpenZiti Anywhere
 
-You can absolutely choose to host your [Ziti Network](xref:zitiOverview#overview-of-a-ziti-network) anywhere you like.
-It is not necessary for the server to be on the open internet. If it works better for you to deploy Ziti on your 
-own private network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to 
-be able to communicate to the Ziti Edge i.e. the control plane that is composed of the controller's edge-client REST API and 
+You can absolutely choose to host your [OpenZiti Network](xref:zitiOverview#overview-of-a-ziti-network) anywhere you like.
+It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
+own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to
+be able to communicate to the OpenZiti Edge i.e. the control plane that is composed of the controller's edge-client REST API and
 at least one edge router.
 
-It's ideal for self-hosting Ziti to have those TLS-hardened control plane servers available at a routeable address on the
-internet. With a Zero Trust overlay network provided by Ziti, you can rest assured that your traffic is safe even when 
-using commodity internet. You also do not need to worry about being on a network you trust as all networks are 
+It's ideal for self-hosting OpenZiti to have those TLS-hardened control plane servers available at a routeable address on the
+internet. With a Zero Trust overlay network provided by OpenZiti, you can rest assured that your traffic is safe even when
+using commodity internet. You also do not need to worry about being on a network you trust as all networks are
 considered untrustworthy, even your private work or home network!
 
 ## Installation
 
-When starting out deploying a [Ziti Network](xref:zitiOverview#overview-of-a-ziti-network), we recommend you follow
-and use the `expressInstall` function provided by the Ziti project. Once you're familiar with the network and 
-the configuration options available you'll be better equipped to make changes. 
+When starting out deploying a [OpenZiti Network](xref:zitiOverview#overview-of-a-ziti-network), we recommend you follow
+and use the `expressInstall` function provided by the OpenZiti project. Once you're familiar with the network and
+the configuration options available you'll be better equipped to make changes.
 
 ### Firewall
 
-The first issue you will need to deal with is opening some ports. The Ziti network's control plane is compose of a
-controller and at least one edge router. Both of these components will require server ports to be reachable by all 
-components of your network. For the controller you will need to open two ports through your firewall, one port for 
-the management REST API, and one the edge-client API. Edge routers will also require two ports open. One for the 
+The first issue you will need to deal with is opening some ports. The Network's control plane is compose of a
+controller and at least one edge router. Both of these components will require server ports to be reachable by all
+components of your network. For the controller you will need to open two ports through your firewall, one port for
+the management REST API, and one the edge-client API. Edge routers will also require two ports open. One for the
 fabric links created between routers to form the mesh network, and one port for incoming edge-client connections.
 
 The ports you choose are not important but unless you change them these ports will default to the following:
 
 Controller
+
 - REST API: 1280 (port 8441 used below)
 - Management API: 6262
 
 Edge Router
+
 - Edge connections: 3022 (port 8442 used below)
 - Fabric links: 10080
 
-It would be reasonable to change all these ports to use ports 443 and 80 since those ports are almost **always** open 
-outbound from all but the most strict networks. If you're going to be making connections from one of those networks, also 
+It would be reasonable to change all these ports to use ports 443 and 80 since those ports are almost **always** open
+outbound from all but the most strict networks. If you're going to be making connections from one of those networks, also
 verify that outbound access to these ports is available.
 
 ## Express Install
 
-With the firewall ports open you will now be able to source the script which provides the expressInstall function and 
-execute it. You probably should consider DNS names before actually running the script. By default, the script will use 
-the bash `hostname` function to determine a reasonable default for the PKI that will be generated as well as the 
-configuration files that are output.  The script allows you to configure these values and if you are deploying to a cloud 
-provider (AWS, Azure, OCI, IBM, Digital Ocean, GCP, etc.) you will almost certainly want to use the **public** DNS name 
-of your instance. You possibly  want to override the IP address to use as well, but using DNS names is superior to using 
+With the firewall ports open you will now be able to source the script which provides the expressInstall function and
+execute it. You probably should consider DNS names before actually running the script. By default, the script will use
+the bash `hostname` function to determine a reasonable default for the PKI that will be generated as well as the
+configuration files that are output.  The script allows you to configure these values and if you are deploying to a cloud
+provider (AWS, Azure, OCI, IBM, Digital Ocean, GCP, etc.) you will almost certainly want to use the **public** DNS name
+of your instance. You possibly  want to override the IP address to use as well, but using DNS names is superior to using
 IP addresses in case your IP changes.
 
-The quickest and easiest thing to do, is simply find your external DNS name and set it into the EXTERNAL_DNS environment 
+The quickest and easiest thing to do, is simply find your external DNS name and set it into the EXTERNAL_DNS environment
 variable. For example:
+
 ```bash
 export EXTERNAL_DNS="ec2-18-100-100-100.us-east-2.compute.amazonaws.com"
 ```
 
 > [!Note]
 > Make sure you have `jq` installed on your machine. From ubuntu that would look like:
+>
 > ```bash
 > sudo apt update && sudo apt install jq -y
 > ```
 
-Once you do that, you'll be able to 
-execute these commands just as 
-shown to have your 
-controller and 
-first edge router 
+Once you do that, you'll be able to
+execute these commands just as
+shown to have your
+controller and
+first edge router
 configured and ready to turn on:
 
 ```bash
@@ -85,8 +89,9 @@ source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/zi
 
 If the operating system you are deploying on supports it, after the commands above are run there will two other useful
 functions defined in your shell which will allow you to generate a systemd file for the controller and the edge router. This
-is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate these 
+is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate these
 files run:
+
 ```bash
 createControllerSystemdFile
 createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
@@ -109,14 +114,14 @@ sudo systemctl start ziti-controller
 sudo systemctl start ziti-router
 ```
 
-Now, both the controller and the edge router will restart automatically!  After a few seconds you can then run these 
+Now, both the controller and the edge router will restart automatically!  After a few seconds you can then run these
 commands and verify systemd has started the processes and see the status:
 
 ```bash
 sudo systemctl -q status ziti-controller --lines=0 --no-pager
 sudo systemctl -q status ziti-router --lines=0 --no-pager
 
-● ziti-controller.service - Ziti-Controller
+● ziti-controller.service - OpenZiti-Controller
      Loaded: loaded (/etc/systemd/system/ziti-controller.service; disabled; vendor preset: enabled)
      Active: active (running) since Thu 2021-11-11 19:05:46 UTC; 8s ago
    Main PID: 2375 (ziti-controller)
@@ -125,7 +130,7 @@ sudo systemctl -q status ziti-router --lines=0 --no-pager
      CGroup: /system.slice/ziti-controller.service
              └─2375 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.22.11/ziti-controller run /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/co…
 ubuntu@ip-10-0-0-1:~$ sudo systemctl -q status ziti-router --lines=0 --no-pager
-● ziti-router.service - Ziti-Router for ip-10-0-0-1-edge-router
+● ziti-router.service - OpenZiti-Router for ip-10-0-0-1-edge-router
      Loaded: loaded (/etc/systemd/system/ziti-router.service; disabled; vendor preset: enabled)
      Active: active (running) since Thu 2021-11-11 19:05:47 UTC; 8s ago
    Main PID: 2385 (ziti-router)
@@ -137,7 +142,7 @@ ubuntu@ip-10-0-0-1:~$ sudo systemctl -q status ziti-router --lines=0 --no-pager
 
 ## Adding Environment Variables Back to the Shell
 
-If you log out and log back in again you can source the '.env' file located at: 
+If you log out and log back in again you can source the '.env' file located at:
 `. ~/.ziti/quickstart/$(hostname)/$(hostname).env`. Below is an example of logging in, not having ZITI_HOME set, sourcing the
 .env file and then showing ZITI_HOME set:
 
@@ -152,12 +157,12 @@ ubuntu@ip-10-0-0-1:~$ echo $ZITI_HOME
 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1
 ```
 
-## Install Ziti Admin Console (ZAC) [Optional]
+## Install OpenZiti Admin Console (ZAC) [Optional]
 
 Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with
 the installation guide](~/ziti/quickstarts/zac/installation.md)
 
 ## Using the Overlay
 
-Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to 
+Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
 [the services quickstart](~/ziti/quickstarts/services/index.md) and start the journey to understanding how to use OpenZiti.
