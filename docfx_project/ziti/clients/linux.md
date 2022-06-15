@@ -95,10 +95,10 @@ You will need the token file or its contents to enroll. Enrollment is the act of
 
 ```bash
 resolvectl dns     # inspect the association of tun device and nameserver
-resolvectl domain  # inspect the configuration of search domains
+resolvectl domain  # inspect the configuration of query routing domains
 ```
 
-The configured tun device will ordinarily have the wildcard search domain configured, depending on the pre-existing resolver configuration and the version of systemd.
+If any interfaces have a wildcard routing domain configured, `ziti-edge-tunnel` will also configure its tun with a wildcard routing domain. If no other interface has a wildcard routing domain configured, neither will the `ziti-edge-tunnel` tun.
 
 ```bash
 # Specify the tun interface address and the subnet to which Service domain names are resolved (default 100.64.0.1/10). The nameserver address is always the tun interface address +1, default is 100.64.0.2.
