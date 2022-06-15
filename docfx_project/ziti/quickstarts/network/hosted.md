@@ -2,9 +2,7 @@
 
 You can absolutely choose to host your [OpenZiti Network](xref:zitiOverview#overview-of-a-ziti-network) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
-own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to
-be able to communicate to the OpenZiti Edge i.e. the control plane that is composed of the controller's edge-client REST API and
-at least one edge router.
+own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller at least one edge router.
 
 It's ideal for self-hosting OpenZiti to have those TLS-hardened control plane servers available at a routeable address on the
 internet. With a Zero Trust overlay network provided by OpenZiti, you can rest assured that your traffic is safe even when
@@ -19,7 +17,7 @@ the configuration options available you'll be better equipped to make changes.
 
 ### Firewall
 
-The first issue you will need to deal with is opening some ports. The Network's control plane is compose of a
+The first issue you will need to deal with is opening some ports. The network's control plane is compose of a
 controller and at least one edge router. Both of these components will require server ports to be reachable by all
 components of your network. For the controller you will need to open two ports through your firewall, one port for
 the management REST API, and one the edge-client API. Edge routers will also require two ports open. One for the
