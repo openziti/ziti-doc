@@ -62,17 +62,9 @@ ZITI_VERBOSE=3
 
 ### Enroll Before You Run
 
-You will need the token file or its contents to enroll. Enrollment is the act of exchanging the token for an identity that is subsequently installed permanently in the filesystem.
+You will need the token file or its contents to enroll. Enrollment is the act of exchanging the token for an identity that is to be permanently installed in the filesystem.
 
-```bash
-# enroll from a token file
-./ziti-edge-tunnel enroll --jwt ./myTunneler.jwt --identity ./myTunneler.json
-```
-
-```bash
-# enroll from stdin
-./ziti-edge-tunnel enroll --jwt - --identity ./myTunneler.json < ./myTunneler.jwt
-```
+[Here's a link to the article about enrolling](../identities/enrolling.md)
 
 ### Global Options
 
