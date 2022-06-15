@@ -38,7 +38,27 @@ RestartSec=3
 WantedBy=multi-user.target
 ```
 
+Where you have created a directory like this.
 
+```bash
+$ tree /opt/openziti
+/opt/openziti
+├── bin
+│   └── ziti-edge-tunnel
+└── etc
+    ├── identities
+    │   └── ACMEIdent.json
+    └── ziti-edge-tunnel.env
+```
+
+And have a unit environment file like this.
+
+```bash
+$ cat /opt/openziti/etc/ziti-edge-tunnel.env
+ZITI_IDENTITY_DIR='/opt/openziti/etc/identities'
+ZITI_DNS_IP_RANGE='100.64.0.1/10'
+ZITI_VERBOSE=3
+```
 
 ### Enroll Before You Run
 
