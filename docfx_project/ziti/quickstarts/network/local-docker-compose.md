@@ -132,11 +132,10 @@ And if you want to expose any other routers - of course you'll need/want to have
 Now that we have used `docker-compose` to deploy a relatively complicated network, we can start testing it out to make
 sure everything is in place and looks correct. Let's try it out.
 
-To test, we will use `docker` and exec into the running controller. Since we've used `docker-compose`, we know the name
-that will be created (you could use `docker ps` to find it if you need). Let's exec into the controller with:
+To test, we will `docker-compose exe` into the running controller. 
 
 ```bash
-docker exec -it docker_ziti-controller_1 /bin/bash
+docker-compose exec ziti-controller bash
 ```
 
 Once exec'ed into the controller, the `ziti` CLI will be added to your PATH for you. There is also the `zitiLogin`
@@ -205,7 +204,7 @@ round-trip min/avg/max/stddev = 0.633/0.633/0.633/0.000 ms
 ### Test - Network Connectivity Failure
 
 Now let's exit the Ziti controller and instead attach to the private blue router by running this command:
-`docker exec -it docker_ziti-private-blue_1 /bin/bash`.  Once attached to the blue router we'll verify that we cannot
+`docker-compose exec ziti-private-blue bash`.  Once attached to the blue router we'll verify that we cannot
 connect to the private red router:
 
 ```bash
