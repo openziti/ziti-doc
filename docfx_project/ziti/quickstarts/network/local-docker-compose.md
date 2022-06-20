@@ -132,7 +132,7 @@ And if you want to expose any other routers - of course you'll need/want to have
 Now that we have used `docker-compose` to deploy a relatively complicated network, we can start testing it out to make
 sure everything is in place and looks correct. Let's try it out.
 
-To test, we will `docker-compose exe` into the running controller. 
+To test, we will `docker-compose exec` into the running controller. 
 
 ```bash
 docker-compose exec ziti-controller bash
