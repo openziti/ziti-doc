@@ -28,12 +28,30 @@ curl -o .env https://raw.githubusercontent.com/openziti/ziti/release-next/quicks
 or
 ```bash
 cat > .env <<DEFAULT_ENV_FILE
+# OpenZiti Variables
 ZITI_IMAGE=openziti/quickstart
 ZITI_VERSION=latest
 ZITI_CONTROLLER_RAWNAME=ziti-controller
 ZITI_EDGE_CONTROLLER_RAWNAME=ziti-edge-controller
+
+## Additional variables to override. 
+#ZITI_EDGE_CONTROLLER_RAWNAME=some.other.name.com
+#ZITI_EDGE_CTRL_ADVERTISED_HOST_PORT=some.other.name.com:1280
+#ZITI_CTRL_ADVERTISED_ADDRESS=some.other.name.com
+#ZITI_EDGE_CONTROLLER_HOSTNAME=some.other.name.com
+#ZITI_CONTROLLER_HOSTNAME=some.other.name.com
+#ZITI_EDGE_CONTROLLER_IP_OVERRIDE=20.20.20.20
 DEFAULT_ENV_FILE
 ```
+
+> [!Important]
+> If you are running Void linux, you need to modify the docker-compose file, otherwise the services will not start properly.  To do this, add the following two lines to each service definition.
+>
+> ```
+>    security_opt:
+      - seccomp:unconfined
+> ```
+> Please see [this discussion](https://openziti.discourse.group/t/docker-compose-quickstart-setup-edge-controller-issue/601/10) for more information
 
 ## Running via Docker Compose
 
@@ -47,7 +65,7 @@ docker-compose just like you can with any other compose file: `docker-compose up
 > ```bash
 > docker-compose --project-name docker up 
 > ```
-> 
+
 ### Stopping the Network
 
 This docker-compose file will generate a volume mount as well as a **two** docker networks. When you issue 
@@ -153,11 +171,16 @@ Saving identity 'default' to /openziti/ziti-cli.json
 Once authenticated, let's see if all our routers are online by running `ziti edge list edge-routers`:
 ```bash
 ziti@724087d30014:/openziti$ ziti edge list edge-routers
-id: BZ.Y7vMdAI    name: ziti-edge-router    isOnline: true    role attributes: {}
-id: NELWwjMd8    name: ziti-private-blue    isOnline: true    role attributes: {}
-id: l9-W7jMf8    name: ziti-fabric-router-br    isOnline: true    role attributes: {}
-id: rqZW7vMdA    name: ziti-edge-router-wss    isOnline: true    role attributes: {}
-id: xmiYwvMf8    name: ziti-private-red    isOnline: true    role attributes: {}
+╭────────────┬───────────────────────┬────────┬───────────────┬──────┬───────────────────────╮
+│ ID         │ NAME                  │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES            │
+├────────────┼───────────────────────┼────────┼───────────────┼──────┼───────────────────────┤
+│ C6LbVE7fIc │ ziti-edge-router      │ true   │ true          │    0 │ public                │
+│ GY1pcE78Ic │ ziti-private-blue     │ true   │ true          │    0 │ ziti-private-blue     │
+│ H0UbcE78Tc │ ziti-fabric-router-br │ true   │ true          │    0 │ ziti-fabric-router-br │
+│ KHTAct78Tc │ ziti-private-red      │ true   │ true          │    0 │ ziti-private-red      │
+│ Yblbct7fTc │ ziti-edge-router-wss  │ true   │ true          │    0 │ public                │
+╰────────────┴───────────────────────┴────────┴───────────────┴──────┴───────────────────────╯
+results: 1-5 of 5
 ```
 
 We can see all the routers are online - excellent.
@@ -169,12 +192,18 @@ by running `ziti@724087d30014:/openziti$ ziti edge list identities`:
 
 ```bash
 ziti@724087d30014:/openziti$ ziti edge list identities
-id: BZ.Y7vMdAI    name: ziti-edge-router    type: Router    role attributes: {}
-id: NELWwjMd8    name: ziti-private-blue    type: Router    role attributes: {}
-id: Q4Y-OTcwo    name: Default Admin    type: User    role attributes: {}
-id: l9-W7jMf8    name: ziti-fabric-router-br    type: Router    role attributes: {}
-id: rqZW7vMdA    name: ziti-edge-router-wss    type: Router    role attributes: {}
-id: xmiYwvMf8    name: ziti-private-red    type: Router    role attributes: {}
+╭────────────┬───────────────────────┬────────┬────────────╮
+│ ID         │ NAME                  │ TYPE   │ ATTRIBUTES │
+├────────────┼───────────────────────┼────────┼────────────┤
+│ C6LbVE7fIc │ ziti-edge-router      │ Router │            │
+│ GY1pcE78Ic │ ziti-private-blue     │ Router │            │
+│ H0UbcE78Tc │ ziti-fabric-router-br │ Router │            │
+│ KHTAct78Tc │ ziti-private-red      │ Router │            │
+│ Yblbct7fTc │ ziti-edge-router-wss  │ Router │            │
+│ kkVrSLy.D  │ Default Admin         │ User   │            │
+╰────────────┴───────────────────────┴────────┴────────────╯
+results: 1-6 of 6
+
 ````
 
 Notice there is an identity for every router.
@@ -255,7 +284,7 @@ Hello World
 ## Install Ziti Admin Console (ZAC) [Optional]
 
 Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with
-the installation guide](~/ziti/quickstarts/zac/installation.md)
+the installation guide](~/ziti/quickstarts/zac/installation.md#using-docker-compose)
 
 ## Using the Overlay
 
