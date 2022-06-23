@@ -48,7 +48,7 @@ You will need the token file or its contents to enroll. Enrollment is the act of
 --refresh N
 ```
 
-### Run Mode
+### `run` Mode
 
 `ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with a command-line option. The OS is automatically configured to treat the nameserver as primary. You may inspect the resulting configuration with these commands.
 
@@ -64,15 +64,15 @@ If any interfaces have a wildcard routing domain configured, `ziti-edge-tunnel` 
 --dns-ip-range <ip range>
 ```
 
-#### Run Mode System Requirements
+#### System Requirements For Mode `run`
 
-`ziti-edge-tunnel run` requires elevated privileges for managing the `/dev/net/tun` device, IP routes, and works best when `libsystemd` is available so that it can call the `systemd` API `/var/run/dbus/system_bus_socket` to configure nameservers and search domains for `systemd-resolved`.
+`ziti-edge-tunnel run` requires elevated privileges for managing the `/dev/net/tun` device, running `resolvectl` to assign nameservers and domain routes to the tun interface, and running `ip route` to manage IP routes. This requires running as root because `setcaps` are not inherited in all of these cases, even when the inherit bit is set.
 
-### Run-Host Mode
+### `run-host` Mode
 
-`ziti-edge-tunnel run-host` is a mode which is does not allow for service intercepts. The nameserver feature will not be enabled and services which require the intercept functionality will not be available. Only services configured for 'Bind' will be available.
+`ziti-edge-tunnel run-host` is a mode for hosting (listening) for services which does provide service intercepts or DNS. Services configured for 'Bind' will be hosted by the tunneller.
 
-#### Run-Host Mode System Requirements
+#### System Requirements For Mode `run-host`
 
 `ziti-edge-tunnel run-host` does not require elevated privileges or the above device or socket, only network egress to the servers for which it is hosting Services.
 
