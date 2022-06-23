@@ -1,10 +1,10 @@
 ## Linux
 
-### The Tunneler CLI
+### The Tunneller CLI
 
-`ziti-edge-tunnel` is the general purpose tunneler CLI and can also run as a systemd daemon. For the best overall experience, please use the preferred tunneler `ziti-edge-tunnel` described here.
+`ziti-edge-tunnel` is the general purpose tunneller CLI and can also run as a systemd daemon. For the best overall experience, please use the preferred tunneller `ziti-edge-tunnel` described here.
 
-The purpose of the tunneler is to configure host access. This means all users and all processes on the host will share the same level of access. This is accomplished by configuring the OS to have an on-board OpenZiti DNS nameserver and IP routes for authorized OpenZiti Services.
+The purpose of the tunneller is to configure host access. This means all users and all processes on the host will share the same level of access. This is accomplished by configuring the OS to have an on-board OpenZiti DNS nameserver and IP routes for authorized OpenZiti Services.
 
 ### Installation and Upgrade
 
@@ -17,47 +17,6 @@ wget -q "https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/download/
   && rm ./ziti-edge-tunnel-Linux_$(uname -p).zip \
   && chmod -c +x ./ziti-edge-tunnel \
   && ./ziti-edge-tunnel version
-```
-
-Optionally, you may install `ziti-edge-tunnel.service` as a systemd unit. For example,
-
-```ini
-# /usr/lib/systemd/system/ziti-edge-tunnel.service
-[Unit]
-Description=Ziti Edge Tunnel
-After=network-online.target
-
-[Service]
-Type=simple
-EnvironmentFile=/opt/openziti/etc/ziti-edge-tunnel.env
-ExecStart=/opt/openziti/bin/ziti-edge-tunnel run --verbose=${ZITI_VERBOSE} --dns-ip-range=${ZITI_DNS_IP_RANGE} --identity-dir=${ZITI_IDENTITY_DIR}
-Restart=always
-RestartSec=3
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Where you have created a directory like this.
-
-```bash
-$ tree /opt/openziti
-/opt/openziti
-├── bin
-│   └── ziti-edge-tunnel
-└── etc
-    ├── identities
-    │   └── ACMEIdent.json
-    └── ziti-edge-tunnel.env
-```
-
-And have a unit environment file like this.
-
-```bash
-$ cat /opt/openziti/etc/ziti-edge-tunnel.env
-ZITI_IDENTITY_DIR='/opt/openziti/etc/identities'
-ZITI_DNS_IP_RANGE='100.64.0.1/10'
-ZITI_VERBOSE=3
 ```
 
 ### Enroll Before You Run
@@ -117,14 +76,14 @@ If any interfaces have a wildcard routing domain configured, `ziti-edge-tunnel` 
 
 `ziti-edge-tunnel run-host` does not require elevated privileges or the above device or socket, only network egress to the servers for which it is hosting Services.
 
-### Specialized Tunneler Alternatives
+### Specialized Tunneller Alternatives
 
-There are also a couple of more specialized tunneling apps. Please use the preferred tunneler `ziti-edge-tunnel` described above if possible.
+There are also a couple of more specialized tunneling apps. Please use the preferred tunneller `ziti-edge-tunnel` described above if possible.
 
-1. `ziti-tunnel` has the unique capability of an opaque, raw TCP proxy in addition to some redundant capabilities deprecated by the preferred, general purpose tunneler described above: `ziti-edge-tunnel`.
+1. `ziti-tunnel` has the unique capability of an opaque, raw TCP proxy in addition to some redundant capabilities deprecated by the preferred, general purpose tunneller described above: `ziti-edge-tunnel`.
 1. `ziti-router` has an optional `ziti-tunnel` feature built-in that may be enabled when an Edge Router is first created.
 
-The configuration and behavior of these two tunneler alternatives are identical and so are discussed as one for the remainder of this article. The tunneler is capable of operating in transparent proxy (`tproxy`), opaque proxy (`proxy`), and host (`host`) modes, discussed immediately below.
+The configuration and behavior of these two tunneller alternatives are identical and so are discussed as one for the remainder of this article. The tunneller is capable of operating in transparent proxy (`tproxy`), opaque proxy (`proxy`), and host (`host`) modes, discussed immediately below.
 
 ### tproxy
 
@@ -215,7 +174,7 @@ directed to the listener by two mechanisms:
 
 ### tproxy DNS nameserver
 
-_Please use the preferred tunneler if possible. It is not necessary to manually configure DNS for the preferred tunneler_
+_Please use the preferred tunneller if possible. It is not necessary to manually configure DNS for the preferred tunneller_
 
 `ziti-tunnel tproxy` mode runs a built-in nameserver serving on udp://127.0.0.1:53 by default, and configurable with a command-line option. The nameserver is authoritative for all authorized OpenZiti Services' domain names. This nameserver must be primary in the host's resolver
 configuration. A self-test is performed when ziti-tunnel starts to ensure that OpenZiti domains names are resolvable:
@@ -247,7 +206,7 @@ ls -l /etc/resolv.conf
 
 ### dhclient
 
-_Please use the preferred tunneler if possible. It is not necessary to manually configure DNS for the preferred tunneler_
+_Please use the preferred tunneller if possible. It is not necessary to manually configure DNS for the preferred tunneller_
 
 If your Linux distribution uses dhclient, you can configure the system resolver to use
 ziti-tunnel's internal DNS server first by adding the following to /etc/dhcp/dhclient.conf:
@@ -261,7 +220,7 @@ service on your Linux distrubtion, it's probably easiest to reboot the host.
 
 ### systemd-resolved
 
-_Please use the preferred tunneler if possible. It is not necessary to manually configure DNS for the preferred tunneler_
+_Please use the preferred tunneller if possible. It is not necessary to manually configure DNS for the preferred tunneller_
 
 ```bash
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc
@@ -303,7 +262,7 @@ the route for the service:
 
   For `ziti-edge-tunnel`: DEBUG log level is `ziti-edge-tunnel --verbose=4`
 
-  For the alternative tunnelers: DEBUG log level is like `ziti-tunnel --verbose`
+  For the alternative tunnellers: DEBUG log level is like `ziti-tunnel --verbose`
 
 * You may inspect the loaded identities' info for a running `ziti-edge-tunnel` by dumping it to stdout or the systemd journal with an IPC command, or you may signal to dump the identities' info to a file.
 
@@ -318,7 +277,7 @@ the route for the service:
   less /tmp/ziti-dump.964315.dump
   ```
 
-* If the tunneler is crashing then it may be crucial to collect and analyze the core dump file. You may need to enable saving core dumps depending upon your OS configuration. 
+* If the tunneller is crashing then it may be crucial to collect and analyze the core dump file. You may need to enable saving core dumps depending upon your OS configuration. 
 
   You can see how dump files are handled by inspecting this file, which is from Ubuntu 20.10.
 
