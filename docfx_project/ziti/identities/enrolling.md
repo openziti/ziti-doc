@@ -27,9 +27,11 @@ Follow these steps to enroll an identity with a one-time token:
 
 **Example Usage:**
 
-    ziti edge enroll \
-        --jwt ${jwt_file} \
-        --out ${identity_config_file}
+```bash
+ziti edge enroll \
+    --jwt ${jwt_file} \
+    --out ${identity_config_file}
+```
 
 > [!IMPORTANT]
 > The output from the `ziti` is a permanent identity configuration file which
@@ -37,6 +39,18 @@ Follow these steps to enroll an identity with a one-time token:
 > the certificate issued by the Ziti Controller.  This file should not be
 > transferred or shared and should not be moved from the machine unless you are
 > confident you understand the risks involved in doing so.
+
+**Example Usage for `ziti-edge-tunnel` CLI**
+
+```bash
+# enroll from a token file
+./ziti-edge-tunnel enroll --jwt ./myTunneler.jwt --identity ./myTunneler.json
+```
+
+```bash
+# enroll from stdin
+./ziti-edge-tunnel enroll --jwt - --identity ./myTunneler.json < ./myTunneler.jwt
+```
 
 ### 3rd Party CA - One Time Token
 
@@ -52,11 +66,13 @@ Follow these steps to enroll a 3rd Pary CA - one-time token identity:
 
 **Example Usage:**
 
-    ziti edge enroll \
-        --cert ${user_certificate} \
-        --key ${user_private_key} \
-        --jwt ${one_time_jwt_file} \
-        --out ${identity_config_file}
+```bash
+ziti edge enroll \
+    --cert ${user_certificate} \
+    --key ${user_private_key} \
+    --jwt ${one_time_jwt_file} \
+    --out ${identity_config_file}
+```
 
 ### 3rd Party CA - Auto
 
@@ -75,10 +91,12 @@ the fully qualified address of the Ziti Controller api and `${id}` represents th
 
 **Example Usage:**
 
-    ziti edge enroll \
-        --cert ${user_certificate} \
-        --key ${user_private_key} \
-        --jwt ${reusable_ca_jwt_file} \
-        --out ${identity_config_file}
+```bash
+ziti edge enroll \
+    --cert ${user_certificate} \
+    --key ${user_private_key} \
+    --jwt ${reusable_ca_jwt_file} \
+    --out ${identity_config_file}
+```
 
 If supplied the `idname` will be used as the name for the identity created. The default name of auto-created identities is generated from a template that uses values from the user certificate i.e. `[caName]-[commonName]`.
