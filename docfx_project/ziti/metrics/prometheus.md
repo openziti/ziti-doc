@@ -97,6 +97,34 @@ The configuration is added as an option in the metrics binding.  The file must b
         }
 ```
 
+### Timestamps
+
+OpenZiti can export timestamps in the Prometheus metrics. These timestamps can be helpful to align metrics with application logs if there is any clock skew across the OpenZiti network.
+
+Timestamps are disabled by default, and can be enabled by setting a the `includeTimestamps` option to `true` in the metrics binding:
+
+```
+web
+  -name: apis
+   bindpoints:
+   apis:
+      - binding: health-checks
+        options: { }
+      - binding: fabric
+      - binding: edge-management
+        options: { }
+      - binding: edge-client
+        options: { }
+      - binding: metrics
+        options: {
+          includeTimestamps: true
+        }
+```
+
+> [!Note]
+> Prometheus will silently discard metrics that are older than five minutes.
+
+
 ### Prometheus Configuration
 
 #### TLS Configuration
