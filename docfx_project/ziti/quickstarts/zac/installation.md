@@ -123,43 +123,43 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
 4. Now add the ZAC configuration lines to the compose file of your choice:
    ```bash
      ziti-console:
-    image: openziti/zac
-    ports:
-      - "1408:1408"
-      - "8443:8443"
-    environment:
-      - ZITI_EDGE_CONTROLLER_HOSTNAME=ziti-edge-router
-    volumes:
-      - ziti-fs:/openziti
-      - type: bind
-        source: ./ziti-edge-controller-server.key
-        target: /usr/src/app/server.key
-      - type: bind
-        source: ./ziti-edge-controller-server.chain.pem
-        target: /usr/src/app/server.chain.pem
+       image: openziti/zac
+       ports:
+         - "1408:1408"
+         - "8443:8443"
+       environment:
+         - ZITI_EDGE_CONTROLLER_HOSTNAME=ziti-edge-router
+       volumes:
+         - ziti-fs:/openziti
+         - type: bind
+           source: ./ziti-edge-controller-server.key
+           target: /usr/src/app/server.key
+         - type: bind
+           source: ./ziti-edge-controller-server.chain.pem
+           target: /usr/src/app/server.chain.pem
 
-    networks:
-      - zitiblue
-      - zitired
+       networks:
+         - zitiblue
+         - zitired
    ```
 1. After adding the ZAC configuration as shown, `docker-compose` will now start and expose the ZAC ports on 1408/8443.
-   > [!Note]
-   > Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
-   > addressable by your machine in order to use docker in this way. This guide does not go into how to do this in depth.
-   > One easy, and common mechanism to do this would be to edit the 'hosts' file of your operating system. A quick
-   > internet search should show you how to accomplish this.
-   > 
+> [!Note]
+> Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
+> addressable by your machine in order to use docker in this way. This guide does not go into how to do this in depth.
+> One easy, and common mechanism to do this would be to edit the 'hosts' file of your operating system. A quick
+> internet search should show you how to accomplish this.
+> 
 
 ## Login and use the Ziti Console
 
 1. At this point you should be able to navigate to both: `https://${ZITI_EDGE_CONTROLLER_HOSTNAME}:8443`and see the ZAC login
    screen. (The TLS warnings your browser will show you are normal - it's because these steps use a self-signed certificate
    generated in the install process)
-   > [!NOTE]
-   > If you are using docker-compose to start your network, when you access ZAC for the first time you will need to 
-   > specify the url of the controller. Since everything is running **in** docker compose this url is relative to the 
-   > internal docker compose network that is declared in the compose file. You would enter 
-   > `https://ziti-edge-controller:1280` as the controller's URL
+> [!NOTE]
+> If you are using docker-compose to start your network, when you access ZAC for the first time you will need to 
+> specify the url of the controller. Since everything is running **in** docker compose this url is relative to the 
+> internal docker compose network that is declared in the compose file. You would enter 
+> `https://ziti-edge-controller:1280` as the controller's URL
 2. Set the controller as shown (use the correct URL):
 
    1. Example using the "everything local" quickstart:
