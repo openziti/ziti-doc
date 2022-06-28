@@ -79,6 +79,7 @@ you can perform the following steps.
     CGroup: /system.slice/ziti-console.service
     └─13458 /usr/bin/node /home/ubuntu/.ziti/quickstart/ip-172-31-22-212/ziti-console/server.js
     ```
+    
 ### Using Docker
 
 Getting ZAC setup if you have followed the [docker network quickstart](~/ziti/quickstarts/network/local-with-docker.md) 
@@ -143,6 +144,7 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
          - zitired
    ```
 1. After adding the ZAC configuration as shown, `docker-compose` will now start and expose the ZAC ports on 1408/8443.
+
 > [!Note]
 > Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
 > addressable by your machine in order to use docker in this way. This guide does not go into how to do this in depth.
