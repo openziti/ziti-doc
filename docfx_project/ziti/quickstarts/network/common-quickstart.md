@@ -165,7 +165,7 @@ Use policies to
 > about policies and experiment with different combinations to understand how best to apply policies in an 
 > actual network
 
-[Read more about Policies here](~/ziti/policies/overview.md)
+[Read more about Policies here](~/ziti/security/policies/overview.md)
 
 ### [New Policies via UI](#tab/create-policies-ui)
 

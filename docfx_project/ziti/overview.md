@@ -32,7 +32,7 @@ Ziti represents the next generation of secure, open-source networking for your a
     * control and management plane messaging and semantics   
 
 **Easy Management**
-* [A flexible and expressive policy model for managing access to services and edge routers](~/ziti/policies/overview.md)
+* [A flexible and expressive policy model for managing access to services and edge routers](~/ziti/security/policies/overview.md)
 * A web based admin console
 * [Pre-built tunnelers and proxies for a variety of operating systems, including mobile](~/ziti/clients/tunneler.md)
 

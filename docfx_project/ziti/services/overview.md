@@ -8,7 +8,7 @@ A service is defined by the following components:
 * **Name** - the name of the service
 * **Termination** - Ziti only provides access to a network service, it does not provide the service itself. The service must be able to get network traffic to whatever application or application cluster is actually providing the service, whether that provider has Ziti embedded or has no knowledge of Ziti
 * **Configuration** - Ziti allows application specific configuration to be stored for services. See [Configuration Store](../config-store/overview.md)
-* **Authorization** - For a details on controlling access to services, see [Policies](../policies/overview.md).
+* **Authorization** - For a details on controlling access to services, see [Policies](../security/authorization/policies/overview.md).
 
 ## Service Name
 Ziti services must have names that are unique to their Ziti installation. Service names are how clients address services in order to consume them. Services which are provided by applications with Ziti embedded also use the service name to indicate which service is being provided.
