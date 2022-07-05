@@ -1,4 +1,4 @@
-### Obtain and Change the Default Password
+## Obtain and Change the Default Password
 
 When first launched - the instance will deposit a file into the file system at
 $HOME/.config/ziti/ziti-cli.json.
