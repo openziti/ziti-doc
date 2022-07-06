@@ -157,11 +157,13 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
 1. At this point you should be able to navigate to both: `https://${ZITI_EDGE_CONTROLLER_HOSTNAME}:8443`and see the ZAC login
    screen. (The TLS warnings your browser will show you are normal - it's because these steps use a self-signed certificate
    generated in the install process)
+   
 > [!NOTE]
 > If you are using docker-compose to start your network, when you access ZAC for the first time you will need to 
 > specify the url of the controller. Since everything is running **in** docker compose this url is relative to the 
 > internal docker compose network that is declared in the compose file. You would enter 
 > `https://ziti-edge-controller:1280` as the controller's URL
+
 2. Set the controller as shown (use the correct URL):
 
    1. Example using the "everything local" quickstart:
