@@ -17,6 +17,8 @@ jobs:
     steps:
     - uses: openziti/ziti-mattermost-action-py@main
       if: ${{ github.actor!= 'dependabot[bot]' && env.ZITI_MATTERMOST_WEBHOOK_URL != null }}
+      env:
+          ZITI_MATTERMOST_WEBHOOK_URL: ${{ secrets.ZITI_MATTERMOST_WEBHOOK_URL }}
       with:
         zitiId: ${{ secrets.ZITI_MATTERMOST_IDENTITY }}
         webhookUrl: ${{ secrets.ZHOOK_URL }}
