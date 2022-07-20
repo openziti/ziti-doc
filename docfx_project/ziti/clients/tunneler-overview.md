@@ -4,6 +4,4 @@ Note that embedding the Ziti SDK directly into a standalone application or plugi
 
 Ziti Tunnellers are intended for situations where going Ziti-native is expensive or impossible to implement (e.g. a third-party application or library). Ziti Tunnellers enable standard TCP/IP applications to reap _most_ of the security and reliability benefits offered by Ziti networks without changing a line of code.
 
-Ziti provides tunnelers for each major operating system.
-
 [!include[](../downloads/tunneler.md)]
