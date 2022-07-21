@@ -8,7 +8,51 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 ### Installation and Upgrade
 
-[The latest release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is distributed as a binary executable from GitHub. The upgrade procedure is identical to the installation procedure.
+#### RPM
+
+To install the x86_64 RPM you first create a repo file like `/etc/yum.repos.d/openziti.repo` resembling the examples below. Then, you run `yum update` to refresh your repodata cache so you can run `yum install ziti-edge-tunnel` to install the RPM. To upgrade you run `yum update ziti-edge-tunnel`.
+
+The final setup step is to install an enroll token JWT file or identity config JSON file in `/opt/openziti/etc/identities` before you run `systemd start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
+
+##### RHEL, CentOS, and Rocky Linux
+
+```ini
+[OpenZiti]
+name=OpenZiti
+baseurl=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat$releasever/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat$releasever/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+##### Fedora
+
+```ini
+[OpenZiti]
+name=OpenZiti
+baseurl=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat8/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+##### Amazon Linux
+
+```ini
+[OpenZiti]
+name=OpenZiti
+baseurl=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat7/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat7/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+#### Binary
+
+[The latest binary release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is distributed as an executable from GitHub for amd64, arm, arm64 architectures. The upgrade procedure is identical to the installation procedure.
 
 ```bash
 # shell script illustrating the steps to install or upgrade ziti-edge-tunnel
@@ -19,7 +63,7 @@ wget -q "https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/download/
   && ./ziti-edge-tunnel version
 ```
 
-### Enroll Before You Run
+##### Enroll Before You Run
 
 You will need the token file or its contents to enroll. Enrollment is the act of exchanging the token for an identity that is to be permanently installed in the filesystem.
 
