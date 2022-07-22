@@ -9,7 +9,7 @@ DNS whereas a tunneler in proxy mode works as a proxy. Seamless mode is transpar
 applications. Proxy mode is not transparent at all. It requires applications to send traffic to the localhost proxy
 specifically. This means when running in proxy mode it does not do any intercepting at all.
 
-Ziti provides tunnelers for each major operating system.
+The OpenZiti project provides tunnellers for each major operating system.
 
 [!include[](./linux.md)]
 
