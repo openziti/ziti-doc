@@ -8,7 +8,32 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 ### Installation and Upgrade
 
-#### RPM
+#### Installing the DEB
+
+1. Run the script below to import the signing key, add a package source to the list, update sources, and install ziti-edge-tunnel.
+1. Install an enroll token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+1. Run `systemd start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
+
+##### Ubuntu Jammy 22.04
+
+```bash
+curl -sSLf https://raw.githubusercontent.com/qrkourier/ziti-tunnel-sdk-c/upload-deb-artifactory/package-repos.gpg \
+| gpg --dearmor \
+| sudo tee /usr/share/keyrings/openziti.gpg > /dev/null
+echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://netfoundry.jfrog.io/artifactory/zitipax-openziti-deb-stable jammy main' | sudo tee /etc/apt/sources.list
+sudo apt update
+sudo apt install ziti-edge-tunnel
+```
+
+##### Ubuntu Focal 20.04, Bionic 18.04, Xenial 16.04, Trusty 14.04
+
+The script is the same as Jammy for these older Ubuntu releases, but you must substitute the correct Ubuntu release code name e.g. "focal" in place of "jammy" in the apt sources file.
+
+##### Debian GNU/Linux
+
+The script is the same as Ubuntu Jammy for Debian releases, but you should substitute the youngest Ubuntu release code name e.g. "focal" that is older than your release of Debian in place of "jammy" in the apt sources file. For simplicity's sake, the Ubuntu 18.04 "bionic" build is broadly compatible with modern Debian releases.
+
+#### Installing the RPM
 
 1. Create a repo file like `/etc/yum.repos.d/openziti.repo` matching the appropriate example below for your OS.
 1. Run `yum update` to refresh your repodata cache.
