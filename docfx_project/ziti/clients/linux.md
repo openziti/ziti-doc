@@ -10,9 +10,11 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 #### RPM
 
-To install the x86_64 RPM you first create a repo file like `/etc/yum.repos.d/openziti.repo` resembling the examples below. Then, you run `yum update` to refresh your repodata cache so you can run `yum install ziti-edge-tunnel` to install the RPM. To upgrade you run `yum update ziti-edge-tunnel`.
-
-The final setup step is to install an enroll token JWT file or identity config JSON file in `/opt/openziti/etc/identities` before you run `systemd start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
+1. Create a repo file like `/etc/yum.repos.d/openziti.repo` matching the appropriate example below for your OS.
+1. Run `yum update` to refresh your repodata cache.
+1. Run `yum install ziti-edge-tunnel` to install the RPM.
+1. Install an enroll token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+1. Run `systemd start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
 
 ##### RHEL, CentOS, and Rocky Linux
 
@@ -52,7 +54,7 @@ repo_gpgcheck=1
 
 #### Binary
 
-[The latest binary release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is distributed as an executable from GitHub for amd64, arm, arm64 architectures. The upgrade procedure is identical to the installation procedure.
+[The latest binary release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is distributed as an executable for amd64, arm, arm64 architectures. The upgrade procedure is identical to the installation procedure.
 
 ```bash
 # shell script illustrating the steps to install or upgrade ziti-edge-tunnel
