@@ -20,7 +20,7 @@ The purpose of the tunneller is to configure host access. This means all users a
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg > /dev/null
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://netfoundry.jfrog.io/artifactory/zitipax-openziti-deb-stable jammy main' | sudo tee --append /etc/apt/sources.list
+echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable jammy main' | sudo tee --append /etc/apt/sources.list
 sudo apt update
 sudo apt install ziti-edge-tunnel
 ```
@@ -36,20 +36,20 @@ The script is the same as Ubuntu Jammy for Debian releases, but you should subst
 #### Installing the RPM
 
 1. Create a repo file like `/etc/yum.repos.d/openziti.repo` matching the appropriate example below for your OS.
-1. Run `yum update` to refresh your repodata cache.
+1. Run `yum update` to refresh your repodata cache. Optionally, you may wish to also install all available updates.
 1. Run `yum install ziti-edge-tunnel` to install the RPM.
 1. Install an enroll token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
-1. Run `systemd start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
+1. Run `systemctl start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
 
 ##### RHEL, CentOS, and Rocky Linux
 
 ```ini
 [OpenZiti]
 name=OpenZiti
-baseurl=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat$releasever/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat$releasever/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
@@ -58,10 +58,10 @@ repo_gpgcheck=1
 ```ini
 [OpenZiti]
 name=OpenZiti
-baseurl=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat8/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
@@ -70,10 +70,10 @@ repo_gpgcheck=1
 ```ini
 [OpenZiti]
 name=OpenZiti
-baseurl=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat7/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat7/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://netfoundry.jfrog.io/artifactory/zitipax-openziti-rpm-stable/redhat7/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat7/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
