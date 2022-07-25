@@ -16,8 +16,10 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 ##### Ubuntu Jammy 22.04
 
+<!-- FIXME: pubkey URL to main branch before merge -->
+
 ```bash
-curl -sSLf https://raw.githubusercontent.com/qrkourier/ziti-tunnel-sdk-c/upload-deb-artifactory/package-repos.gpg \
+curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/upload-deb-artifactory/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg > /dev/null
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://netfoundry.jfrog.io/artifactory/zitipax-openziti-deb-stable jammy main' | sudo tee --append /etc/apt/sources.list
