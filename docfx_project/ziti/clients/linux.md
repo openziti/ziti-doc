@@ -20,7 +20,7 @@ The purpose of the tunneller is to configure host access. This means all users a
 curl -sSLf https://raw.githubusercontent.com/qrkourier/ziti-tunnel-sdk-c/upload-deb-artifactory/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg > /dev/null
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://netfoundry.jfrog.io/artifactory/zitipax-openziti-deb-stable jammy main' | sudo tee /etc/apt/sources.list
+echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://netfoundry.jfrog.io/artifactory/zitipax-openziti-deb-stable jammy main' | sudo tee --append /etc/apt/sources.list
 sudo apt update
 sudo apt install ziti-edge-tunnel
 ```
