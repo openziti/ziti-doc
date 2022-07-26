@@ -12,7 +12,7 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 1. Run the script below to import the signing key, add a package source to the list, update sources, and install ziti-edge-tunnel.
 1. Install an enroll token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
-1. Run `systemd start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
+1. Run `systemctl start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
 
 ##### Ubuntu Jammy 22.04
 
