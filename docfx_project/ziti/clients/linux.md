@@ -8,6 +8,9 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 ### Installation and Upgrade
 
+> [!NOTE]
+> It is not necessary to manually enroll the identity when using the RPM or DEB package. Just install the token in the identities directory and it will be enrolled when you start the daemon.
+
 #### Installing the DEB
 
 1. Run the script below to import the signing key, add a package source to the list, update sources, and install ziti-edge-tunnel.
