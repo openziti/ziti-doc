@@ -8,7 +8,7 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 ### Installation and Upgrade
 
-Please note it is not necessary to manually enroll the identity when using the RPM or DEB package. Just install the token in the identities directory and it will be enrolled when you start the daemon.
+> [!NOTE] It is not necessary to manually enroll the identity when using the RPM or DEB package. Just install the token in the identities directory and it will be enrolled when you start the daemon.
 
 #### Installing the DEB
 
