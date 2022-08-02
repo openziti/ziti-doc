@@ -48,24 +48,140 @@ erDiagram
     Identity ||..o| MFA-TOTP-Config: has
 ```
 
+## Creating
+
+Creating an identity alone may not be enough to make it usable. An identity will also need a valid primary
+authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment/enrollment.md#clients).
+
+Please note that all authentication mechanisms also require a properly configured [authentication policy](authentication.md)
+
+The following [primary authentication](./authentication.md#primary-authentication) mechanisms require post-creation enrollment:
+- Ziti PKI x509 Client Certificate
+- 3rd Party x509 Client Certificate
+- Username Password (UPDB)
+
+The following do not require enrollment, but must have a properly configured [External JWT Signer](external-jwt-signers.md)
+- JWT
+
+### Creating w/ No Authenticators/Enrollments
+Note: This identity will not be able to authenticate
+
+#### Ziti CLI: 
+
+It is currently not possible to create and identity without an enrollment option through the CLI. It can be completed
+by creating and identity then deleting the default certificate enrollment.
+
+```
+ziti edge create identity [device|service|user] <name>
+ziti edge delete enrollment where "identity=<id>"
+```
+
+#### Edge Management API
+
+`POST /edge/management/v1/identities`
+```json
+{
+  "name": "Roger Wilco",
+  "isAdmin": false
+}
+```
+
+### Creating w/ Ziti PKI Client Cert Enrollment
+Note: This identity will be using the default [authentication policy](authentication.md) which allows certificate authentication
+
+#### Ziti CLI:
+`ziti edge create identity [device|service|user] <name> `
+
+#### Edge Management API
+
+`POST /edge/management/v1/identities`
+```json
+{
+  "name": "Roger Wilco",
+  "isAdmin": false,
+  "enrollment": {
+    "ott": true
+  }
+}
+```
+
+### Creating w/ 3rd Party CA Client Cert Enrollment
+Note: This identity will be using the default [authentication policy](authentication.md) which allows certificate authentication
+
+#### Ziti CLI:
+
+It is currently not possible to create identities with a 3rd party certificate enrollment through the CLI.
+
+#### Edge Management API
+
+`POST /edge/management/v1/identities`
+```json
+{
+  "name": "Roger Wilco",
+  "isAdmin": false,
+  "enrollment": {
+    "ottca": "<id-to-3rd-party-ca>"
+  }
+}
+```
+
+### Creating w/ Username/Password Enrollment
+Note: This identity will be using the default [authentication policy](authentication.md) which allows UPDB authentication
+
+#### Ziti CLI:
+
+`ziti edge create identity [device|service|user] <name> --updb <username>`
+
+#### Edge Management API
+
+`POST /edge/management/v1/identities`
+```json
+{
+  "name": "Roger Wilco",
+  "isAdmin": false,
+  "enrollment": {
+    "updb": "<username>"
+  }
+}
+```
+
+### Creating w/ JWT Authenticator
+Note: A valid [External JWT Signer](external-jwt-signers.md) must be created and an [authentication policy](authentication.md)
+must be defined that allows the identity to authenticate with that signer.
+
+#### Ziti CLI:
+
+`ziti edge create identity [device|service|user] <name> --external-id "externalJWTId"`
+
+#### Edge Management API
+
+`POST /edge/management/v1/identities`
+```json
+{
+  "name": "Roger Wilco",
+  "isAdmin": false,
+  "externalId": "externalJWTId"
+}
+```
+
 ## Deleting
 
 Deleting an Identity removes all directly associated data. This includes:
 
-- API Sessions
-  - Sessions
-  - Posture Data
-  - Session Certificates
-- Identity Role Attributes
-- Authenticators
-- Enrollments
-- MFA TOTP Config
+- [API Sessions](../sessions.md#api-session)
+  - [Sessions](../sessions.md#session)
+  - [Posture Data](../authorization/posture-checks.md#posture-data)
+  - [Session Certificates](../authentication/api-session-certificates.md)
+- Identity [Role Attributes]()
+- [Authenticators](../authentication/authentication.md#authenticators)
+- [Enrollments](../enrollment/enrollment.md)
+- [MFA TOTP Configuration](./totp.md)
 
 It does not remove entities are that re-usable between Identities:
 
-- Authentication Policies
-- Service Policies
-- Edge Router Policies
+- [Authentication Policies](./authentication-policies.md)
+- [Service Policies](../authorization/policies/overview.md)
+- [Edge Router Policies](../authorization/policies/overview.md)
 
 Deleting an Identity immediately removes it and all current and future access it would have to a Ziti Network and its
 Services.

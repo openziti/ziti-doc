@@ -6,13 +6,13 @@ some use cases.
 
 Each policy type relates two of the following entity types: identities, services and edge routers.
  
-![image](~/images/policy-entities.png)
+![image](../../../../images/policy-entities.png)
 
 ## Service Policies
 Service policies are entities within the Ziti Controller which provide 
 identities authorization to services. 
 
-![image](~/images/service-policies.png)
+![image](../../../../images/service-policies.png)
 
 There are two kinds of service policies:
 
@@ -42,7 +42,7 @@ service the identity must first access the Ziti network fabric. Edge
 routers are the points through which SDK based applications can
 get that access.  
 
-![image](~/images/edge-router-policies.png)
+![image](../../../../images/edge-router-policies.png)
 
 Not every identity should necessarily be allowed to use every edge router. 
 Identities or groups of identities may have dedicated edge routers for a 
@@ -62,7 +62,7 @@ Service edge router policies are entities within the Ziti Controller which provi
 services access to edge routers. They are similar to edge router policies except
 they determine via which edge routers a service can be used or provided. 
 
-![image](~/images/service-edge-router-policies.png)
+![image](../../../../images/service-edge-router-policies.png)
 
 There are a few reasons you might want to have pools of edge routers dedicated 
 particular services or service groups.

@@ -1,16 +1,17 @@
 # Authentication
 
-Authorization in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. API Sessions are
-a high level security context that represents an authenticated session with either the Ziti Edge Client API
-or the Ziti Edge Management API.
+Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
+has begun when the client receives and API Session and is  complete when the API Session is fully authenticated.
+API Sessions are a high level security context that represents an authenticated session with either the Ziti [Edge Client API](../../apis/edge-client-api.md)
+or the Ziti [Edge Management API](../../apis/edge-management-api.md).
 
-- Clients that are powered by a Ziti SDK that access services will authenticate with the Client API
-- Clients that are managing a Ziti Network will authenticate with the Management API
+- Clients that are powered by a Ziti SDK that access services will authenticate with the [Edge Client API](../../apis/edge-client-api.md)
+- Clients that are managing a Ziti Network will authenticate with the [Edge Management API](../../apis/edge-management-api.md)
 
 # Authentication Flow
 
-Below is diagram showing initial authentication for some client. The same model is used between the Edge Client API
-and Edge Management API.
+Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](../../apis/edge-client-api.md)
+and [Edge Management API](../../apis/edge-management-api.md).
 
 [![](https://mermaid.ink/img/pako:eNp1kUtPwzAQhP_KyudW3HMApU1fFxQaHoK4B1Mv1CJZR34IRUn-O46bCiGVm9f6ZmY97thRS2QJ-zSiOcFjxiktn0h4d0Jy6igcygPM57d94d9r5SA3qhamhaVBORKisj0sumdRKXk3cFqMMCzLex1lkF6usvIV7YFTFqdVmQszqqsW0j9hnFaRWHeplMopTaKKCDx4NArtmLKOyGayPE_bMZPTNg79Hp03BGm-gwKtDTbwfaMvHj28lWt_LXzzr_xF_e7Qw66cCtmjbTTZuMjuvDmbsRpNLZQMxXacADgLKTVyloSjFOaLM05D4HwjQ_AqPFQblnyENnHGQvu6aOnIEmc8XqBMifBJ9UQNP7yGlbE)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNp1kUtPwzAQhP_KyudW3HMApU1fFxQaHoK4B1Mv1CJZR34IRUn-O46bCiGVm9f6ZmY97thRS2QJ-zSiOcFjxiktn0h4d0Jy6igcygPM57d94d9r5SA3qhamhaVBORKisj0sumdRKXk3cFqMMCzLex1lkF6usvIV7YFTFqdVmQszqqsW0j9hnFaRWHeplMopTaKKCDx4NArtmLKOyGayPE_bMZPTNg79Hp03BGm-gwKtDTbwfaMvHj28lWt_LXzzr_xF_e7Qw66cCtmjbTTZuMjuvDmbsRpNLZQMxXacADgLKTVyloSjFOaLM05D4HwjQ_AqPFQblnyENnHGQvu6aOnIEmc8XqBMifBJ9UQNP7yGlbE)
 
@@ -30,13 +31,12 @@ I --> F
 
 In the above a client has provided primary authentication credentials (certificate, JWT, username password) and then
 subsequently provided any secondary credentials necessary (JWT, TOTP, etc). The secondary credentials are requested 
-via Authentication Queries and enable multi-factor authentication to occur.
+via Authentication Queries and enable multifactor authentication to occur.
 
-The goal of authentication is to obtain an API Session. API Sessions are used to interact with the Ziti Controller that
-is Edge enabled and Ziti Edge Routers. API Sessions for clients are represented by opaque tokens (JWT or
-otherwise) that are provided as headers in HTTP requests and by values in protobuf messages for the Edge protocol
-between routers and SDKs. API Sessions represent a security context that is used to determine authorization in the rest
-of the Ziti system.
+The goal of authentication is to obtain an API Session. API Sessions are used to interact with the Ziti Controller 
+and Ziti Edge Routers. API Sessions for clients are represented by opaque tokens that are provided as headers in HTTP 
+requests and by values in protobuf messages for the Edge protocol between routers and SDKs. API Sessions represent a 
+security context that is used to determine authorization in the rest of the Ziti network.
 
 ## API Sessions
 
@@ -52,6 +52,11 @@ An API Sessions:
     - `POST /edge/client/v1/authenticate`
     - `GET /edge/client/v1/current-api-session`
 - can be referenced by an internal `id` and a security token that is in the format of a UUID
+  - the `id` can be used on the following endpoints:
+    - `GET /edge/management/v1/api-sessions/<id>`
+    - `DELETE /edge/management/v1/api-sessions/<id>`
+
+API Sessions are defined in the Client and Management Open API 2.0 specifications under `currentApiSessionDetail`.
 
 Example `POST /edge/management/v1/authenticate` response:
 
@@ -128,8 +133,6 @@ Example `POST /edge/management/v1/authenticate` response:
 }
 ```
 
-API Sessions are defined in the Client and Management Open API 2.0 specifications under `currentApiSessionDetail`.
-
 ### Full vs Partial Authentication
 
 API Sessions may exist in two states:
@@ -142,9 +145,11 @@ remain outstanding. Ziti Edge models MFA challenges as Authentication Queries. A
 that can be used to display user prompts or direct users to integrating websites for SSO. If no outstanding 
 Authentication Queries are present for an API Session it is considered fully authenticated.
 
-While partially authenticated, the API Session can only be used for a reduced set of operations on the Management
-and Client APIs. These functions are limited to answering Authentication Queries and enrolling in MFA TOTP. While fully
-authenticated the full suite of API operations is available.
+While partially authenticated, the API Session can only be used for a reduced set of operations:
+
+- answering Authentication Queries 
+- enrolling in MFA TOTP
+
 
 #### Authentication Queries
 
@@ -153,7 +158,6 @@ MFA challenge represented as an Authentication Query is provided below.
 
 ```json
 {
-  ...
   "authQueries": [
     {
       "format": "alphaNumeric",
@@ -164,8 +168,7 @@ MFA challenge represented as an Authentication Query is provided below.
       "provider": "ziti",
       "typeId": "MFA"
     }
-  ],
-  ...
+  ]
 }
 ```
 
@@ -175,11 +178,12 @@ in the Client and Management Open API 2.0 specifications under the label `authQu
 
 ### Associated Data & Removal
 
-API Sessions, may be used to create ephemeral certificates and sessions for service access. Additionally, API Sessions
-are used to scope Posture Data. When an API Session is removed for any reason, all associated data is also removed.
-As an example, when removing an API Session used to create a Session the Session will also be removed. Removing that
-Session will also terminate any existing connections that used the security token associated with that Session and
-prevent it from being used to establish new connections.
+API Sessions, may be used to create ephemeral certificates called [API Session Certificates](./api-session-certificates.md) 
+and sessions for service access. Additionally, API Sessions are used to scope [Posture Data](../authorization/posture-checks.md#posture-data). 
+When an API Session is removed for any reason, all associated data is also removed. As an example, when removing an 
+API Session used to create a Session the Session will also be removed. Removing a Session will also terminate any 
+existing connections that used the security token associated with that Session and prevent it from being used to 
+establish new connections.
 
 Removal of an API Session occurs in the following scenarios:
 
@@ -205,11 +209,20 @@ edge:
   api:
   ...
     # sessionTimeout - optional, default 30m
-    # The number of minutes before an Edge API session will timeout. Timeouts are reset by
+    # The number of minutes before an Edge API session will time out. Timeouts are reset by
     # API requests and connections that are maintained to Edge Routers
     sessionTimeout: 30m
     ...
 ```
+
+### Administrative Removal
+
+Through the [Edge Management API](../../apis/edge-management-api.md) any API Session may be forcefully removed
+by calling `DELETE /edge/management/v1/api-sessions<id>` with an empty body. 
+
+### Client Removal (Logout)
+
+A client may terminate its own API Session at any time by calling: `DELETE /edge/client/v1/current-api-session`
 
 # Primary Authentication
 
@@ -224,21 +237,39 @@ Primary authentication factors include:
 - JWTs
 - Username/password
 
-Valid primary authentication methods can be restricted via [External JWT Signer](external-jwt-signers.md). An Identity can have one
-[Authentication Policies](../authentication/authentication-policies.md) associated with it. This association is defined by the `authPolicyId` property on the 
-identity. If no [Authentication Policy](../authentication/authentication-policies.md) is set for an Identity, a special system defined [Authentication Policy](../authentication/authentication-policies.md) with the
-id of `default` will be used.
+Valid primary authentication methods can be restricted via [Authentication Policies](../authentication/authentication-policies.md).
+An Identity can have one [Authentication Policies](../authentication/authentication-policies.md) associated with it. 
+This association is defined by the `authPolicyId` property on the identity. If no[Authentication Policy](../authentication/authentication-policies.md) 
+is set for an Identity, a special system defined [Authentication Policy](../authentication/authentication-policies.md) 
+with the id of `default` will be used.
+
+## Authenticators
+
+Some primary authentication mechanisms (x509, username/password) need to store per identity credentials. When necessary
+these are stored as authenticators. Manipulating authenticators is used to perform [password management](./password-management.md) 
+and [certificate management](./certificate-management.md)
+
+Authenticators may be listed via the CLI:
+
+`ziti edge list authenticators`
+
+or via the [Edge Management API](../../apis/edge-management-api.md):
+
+```
+GET /edge/management/v1/authenticators
+```
 
 ## x509 Certificate Primary Authentication
 
 x509 authentication requires the client to initiate a HTTPs authentication request using a x509 client certificate that
-is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge Controller's internal PKI or an external PKI. If an external PKI
-is being used, it must be registered as a [3rd Party CA](third-party-cas.md) via the Ziti Edge Management API, verified, and have authentication
-enabled. The client certificate must pass signature and CA chain-of-trust validation. All client, intermediate CA,
-and root CA functionality supports RSA and EC keys.
+is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge 
+Controller's internal PKI or an external PKI. If an external PKI is being used, it must be registered as a 
+[3rd Party CA](third-party-cas.md) via the Ziti [Edge Management API](../../apis/edge-management-api.md), verified, and
+have authentication enabled. The client certificate must pass signature and CA chain-of-trust validation. All client, 
+intermediate CA, and root CA functionality supports RSA and EC keys.
 
 Please note that intermediate CA certificates may be provided during authentication if necessary. The client certificate
-should be in index zero and intermediate CA certificates in subsequent indexes.
+should be in index zero and intermediate CA certificates in subsequent indexes in any order.
 
 To associate a client certificate with an Identity and Authenticator see the [Enrollment](../enrollment/enrollment.md) 
 section.
@@ -250,8 +281,8 @@ Expired client certificates may be allowed via [Authentication Policies](authent
 
 JWT authentication requires that an [External JWT Signer](external-jwt-signers.md) be added via the Ziti Edge Management 
 API. The definition of [External JWT Signer](external-jwt-signers.md) allows configuration of which JWT claim should be
-used as a value to map against the unique `externalId` property on Identities. This mapping of JWT claim to `externalId`
-is used to determine which Identity is authenticating.
+used as a value to map against the unique `externalId` or `id` property on Identities. This mapping of JWT claim to 
+`externalId`/`id` is used to determine which Identity is authenticating.
 
 The JWT must be provided in the HTTP request in the `Authentication` header with a value in the format of 
 `Bearer <jwt>`. The JWT provided must pass signature, expiration, issuer, and audience validation as configured
@@ -261,10 +292,13 @@ on the [External JWT Signer](external-jwt-signers.md).
 
 An internal username/password authentication system is provided for smaller deployments of Ziti. It is highly suggested
 that all username/password authenticators be replaced by x509 certificate/JWT authentication mechanisms. Passwords
-are stored individually salted and one-way cryptographically hashed using Argon2id.
+are stored individually salted and one-way cryptographically hashed using [Argon2id](https://en.wikipedia.org/wiki/Argon2).
 
 Password policies may be enforced via [Authentication Policies](authentication-policies.md). Administrative [management
 of passwords](password-management.md) is also available.
+
+Username/password authentication, while supported, is only suggested to be used for testing and R&D activities. For
+production environments JWT and X509 authentication is recommended.
 
 # Secondary Authentication
 
@@ -289,3 +323,46 @@ or connect to any service. [Posture Check](../authorization/posture-checks.md) e
 [fully authenticate](#full-vs-partial-authentication), but based on [Service Policy](../authorization/policies/overview.md) 
 restrict connection to specific services.
 
+## JWT
+
+Similar to JWT primary authentication, a valid JWT must be present in the `Authentication` header in the format of
+`bearer <jwt` on every request.
+
+
+# Authentication Requests
+
+### Example UPDB Authentication Request
+
+`POST /edge/client/v1/authenticate?method=password`
+```json
+{
+  "username": "my-name",
+  "password": "my-password"
+}
+```
+
+### Example Client Certificate Request
+
+Note: The TLS connection to the controller MUST use a valid client certificate
+
+`POST /edge/management/v1/authenticate?method=cert`
+```json
+{}
+```
+
+### Example JWT Authentication Request
+
+`POST /edge/client/v1/authenticate?method=ext-jwt`
+HTTP Header: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...`
+```json
+{}
+```
+
+### Example TOTP Authentication Query Response:
+
+`POST /edge/client/v1/authenticate/mfa`
+```json
+{
+  "code": "123456"
+}
+```
