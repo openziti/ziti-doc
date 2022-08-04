@@ -48,9 +48,17 @@ For example
     git config core.sparseCheckout true
     git checkout 
 
+## Build and Develop Locally with Docker
 
-## Running CI equivalent locally
-CI uses Docker and a bunch of env vars to run. Set the accordingly then issue:
+You can build the docs from the current working directory and inspect in the development server (http://127.0.0.1:8080/).
+
+```bash
+docker run -v "${PWD}":/ziti-doc --rm -it -p 8080:8080 openziti/doc:docfx ./regens.sh
+```
+
+## Publish with Docker by Running CI Equivalent Locally
+
+CI uses Docker and a bunch of env vars to run. Set them accordingly then issue:
 
     docker run --rm -it -v $(pwd):/doc \
       -e AWS_ACCESS_KEY_ID=$aws_access_key_id \
@@ -59,4 +67,3 @@ CI uses Docker and a bunch of env vars to run. Set the accordingly then issue:
       -e GIT_BRANCH=$GIT_BRANCH \
       -e gh_ci_key=$gh_ci_key \
       openziti/doc:latest /bin/sh -c "/doc/publish.sh"
-
