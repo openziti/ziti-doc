@@ -342,17 +342,17 @@ the route for the service:
 
 ### Troubleshooting
 
-* If you change your package repo subscription or install the same DEB or RPM package from another source, excluding normal upgrades and downgrades, then it may be necessary to reload the systemd service unit definitions:
-
-  ```bash
-  sudo systemctl daemon-reload
-  ```
-
 * The simplest step you can take toward a diagnosis is to reduce the minimum message log level. This usually means lower-level DEBUG messages and above are emitted in addition to the default level of INFO level and above e.g. WARN, ERROR, etc.
 
   For `ziti-edge-tunnel`: DEBUG log level is `ziti-edge-tunnel --verbose=4`
 
   For the alternative tunnellers: DEBUG log level is like `ziti-tunnel --verbose`
+
+* If you change your package repo subscription or install the same DEB or RPM package from another source, excluding normal upgrades and downgrades, then it may be necessary to reload the systemd service unit definitions:
+
+  ```bash
+  sudo systemctl daemon-reload
+  ```
 
 * You may inspect the loaded identities' info for a running `ziti-edge-tunnel` by dumping it to stdout or the systemd journal with an IPC command, or you may signal to dump the identities' info to a file.
 
