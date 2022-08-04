@@ -342,7 +342,13 @@ the route for the service:
 
 ### Troubleshooting
 
-* The simplest step you can take toward a diagnosis is to reduce the minimum message log level. This usually means lower-level DEBUG messages and above are emitted in addition to the default level of INFO level and above e.g. WARN, ERROR, etc. 
+* If you change your package repo subscription or install the same DEB or RPM package from another source, excluding normal upgrades and downgrades, then it may be necessary to reload the systemd service unit definitions:
+
+  ```bash
+  sudo systemctl daemon-reload
+  ```
+
+* The simplest step you can take toward a diagnosis is to reduce the minimum message log level. This usually means lower-level DEBUG messages and above are emitted in addition to the default level of INFO level and above e.g. WARN, ERROR, etc.
 
   For `ziti-edge-tunnel`: DEBUG log level is `ziti-edge-tunnel --verbose=4`
 
