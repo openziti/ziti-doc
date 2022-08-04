@@ -50,11 +50,13 @@ For example
 
 ## Build and Develop Locally with Docker
 
-You can build the docs from the current working directory and inspect in the development server (http://127.0.0.1:8080/).
+With a clean Git working copy (all changes checked in) you can build the docs from the current working directory and inspect in the development server (http://127.0.0.1:8080/).
 
 ```bash
 docker run -v "${PWD}":/ziti-doc --rm -it -p 8080:8080 openziti/doc:docfx ./regens.sh
 ```
+
+You can also view modified files that are not checked in by temporarily modifying the script `regens.sh` to uncomment the command that marks `/ziti-docs` as safe for Git to use.
 
 ## Publish with Docker by Running CI Equivalent Locally
 
