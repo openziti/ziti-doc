@@ -236,7 +236,46 @@ For troubleshooting purposes it is possible to view an identity's current Postur
 
 #### Response
 ```json
-
+{
+  "data": {
+    "apiSessionPostureData": {},
+    "domain": {
+      "lastUpdatedAt": "2022-08-03T11:03:29.451Z",
+      "postureCheckId": "-GIxFATMg",
+      "timedOut": false,
+      "domain": "MYDOMAIN"
+    },
+    "mac": {
+      "lastUpdatedAt": null,
+      "postureCheckId": "",
+      "timedOut": false,
+      "addresses": null
+    },
+    "os": {
+      "lastUpdatedAt": "2022-08-03T11:03:29.375Z",
+      "postureCheckId": "OZimG0oGR",
+      "timedOut": false,
+      "build": null,
+      "type": "windows",
+      "version": "10.0.19044"
+    },
+    "processes": [
+      {
+        "lastUpdatedAt": "2022-08-03T11:03:49.803Z",
+        "postureCheckId": "62yttIAeJ",
+        "timedOut": false,
+        "signerFingerprints": []
+      },
+      {
+        "lastUpdatedAt": "2022-08-03T11:03:49.986Z",
+        "postureCheckId": "Gh5DOegtE",
+        "timedOut": false,
+        "signerFingerprints": []
+      }
+    ]
+  },
+  "meta": {}
+}
 ```
 
 # Viewing Failed Service Requests
@@ -251,5 +290,37 @@ For troubleshooting purposes it is possible to view the last fifty failed servic
 
 #### Response
 ```json
-
+{
+  "meta": {},
+  "data": [
+    {
+      "apiSessionId": "ckytwv9811tqz15mzoyfi1uvb",
+      "policyFailures": [
+        {
+          "policyId": "Nk43EwJKE",
+          "policyName": "TestPolicy1",
+          "checks": [
+            {
+              "actualValue": {
+                "passedMfa": false,
+                "passedOnUnlock": false
+              },
+              "expectedValue": {
+                "passedMfa": true,
+                "passedOnWake": true
+              },
+              "postureCheckId": "5Ucbw.tjo0",
+              "postureCheckName": "TestCheck1",
+              "postureCheckType": "MFA"
+            }
+          ]
+        }
+      ],
+      "serviceId": "iGoRLhrx0",
+      "serviceName": "TestService1",
+      "sessionType": "Dial",
+      "when": "2022-01-25T10:18:45.257Z"
+    }
+  ]
+}
 ```
