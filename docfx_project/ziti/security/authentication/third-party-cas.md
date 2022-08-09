@@ -35,7 +35,7 @@ For [Auto CA Enrollment](../enrollment/enrollment.md#auto-ca-enrollment) an iden
 The following fields allow configuration of newly created identities:
 
 - `identityRoles` - the identity roles to give to automatically enrolling identities
-- `identityNameFormat` - the identity name format used to name automatically enrolling identities
+- `identityNameFormat` - the identity name format used to name [automatically enrolling identities](../enrollment/enrollment.md#auto-ca-enrollment)
 
 On initial creation of a 3rd Party CA it will be in an unverified stated and must undergo [verification](#verification).
 The following fields relate to [verification](#verification):
