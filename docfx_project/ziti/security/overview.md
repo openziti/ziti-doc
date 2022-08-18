@@ -22,8 +22,8 @@ are related to identity authentication and service access:
 - [Edge Router Policies](./authorization/policies/overview.md)  - describes which Identities have access to which Edge Routers
 - [Posture Checks](./authorization/posture-checks.md) - describes additional environmental state that an Identity must have in order to obtain and maintain
   service access
-- [Posture Queries](./authorization/posture-checks.md#posture-queries--responses) - describes a request for environmental information from a client
-- [Posture Responses](./authorization/posture-checks.md#posture-queries--responses) - a response to a Posture Query provided by a client
+- [Posture Queries](./authorization/posture-checks.md#posture-data) - describes a request for environmental information from a client
+- [Posture Responses](./authorization/posture-checks.md#posture-data) - a response to a Posture Query provided by a client
 - [Posture Data](./authorization/posture-checks.md#posture-data) - the current environmental state provided via Posture Responses and known information
 - [Authentication Queries](./authentication/authentication.md#authentication-queries) - additional, secondary, authentication factors required after initial, primary, authentication
 
@@ -36,33 +36,33 @@ There is an additional policy type for Edge Routers:
 The following is a high level overview of how these entities interact. Each interaction is further detailed in their
 own separate section.
 
-1) a client enrolls
-    1) A client may enroll via a pre-shared secret defined as an Enrollment or other verifiable documents (JWTs, x509
-       Certs/CAs)
-    2) an Identity is created with associated Authenticators and Authentication Policies
-2) authentication: a client Identity attempts to authenticate
-    1) the authentication credentials are verified against the Authenticators, 3rd Party CAs, External JWT Signers,
+1. a client enrolls
+   1. A client may enroll via a pre-shared secret defined as an Enrollment or other verifiable documents (JWTs, x509
+        Certs/CAs)
+   2. an Identity is created with associated Authenticators and Authentication Policies
+2. authentication: a client Identity attempts to authenticate
+    1. the authentication credentials are verified against the Authenticators, 3rd Party CAs, External JWT Signers,
        and/or Authentication Policy associated with the principal
-    2) secondary factors defined by the Authentication Policy are reported to the client (MFA TOTP, JWT) as Authentication Queries
-    3) the client provides secondary factors
-    4) the client receives an API Session security token without unanswered Authentication Queries
-3) authorization: a client may list Services which will be either grant `dial` (client connect) or `bind` (host) access
-    1) the Service Policies provide a filtered list of all services for the specific client issuing the request
-    2) the Service Policies are also used to evaluate the Posture Checks associated with a Service Policy
-    3) the Posture Checks are converted to Posture Queries with type, pass/fail state, and criteria information
-    4) The Services and Posture Queries are returned to the client 
-    5) (Continuous) the client submits any Posture Responses to Posture Queries as necessary
-5) authorization: the client requests a Session for a specific Service
-    1) (Continuous) the Service Policies are consulted for access additionally re-evaluating Posture Checks against the
+    2. secondary factors defined by the Authentication Policy are reported to the client (MFA TOTP, JWT) as Authentication Queries
+    3. the client provides secondary factors
+    4. the client receives an API Session security token without unanswered Authentication Queries
+3. authorization: a client may list Services which will be either grant `dial` (client connect) or `bind` (host) access
+    1. the Service Policies provide a filtered list of all services for the specific client issuing the request
+    2. the Service Policies are also used to evaluate the Posture Checks associated with a Service Policy
+    3. the Posture Checks are converted to Posture Queries with type, pass/fail state, and criteria information
+    4. The Services and Posture Queries are returned to the client 
+    5. (Continuous) the client submits any Posture Responses to Posture Queries as necessary
+4. authorization: the client requests a Session for a specific Service
+    1. (Continuous) the Service Policies are consulted for access additionally re-evaluating Posture Checks against the
        current know Posture Data
-    2) the list of Service Edge Router Policies and Edge Router Policies are consulted to provide a valid list Edge
+    2. the list of Service Edge Router Policies and Edge Router Policies are consulted to provide a valid list Edge
        Routers the Session security token may be used on
-    3) a Session security token and Edge Router list is provided to the client
-6) the client attempts to connect to a target Edge Router with an API Session security token
-7) the target Edge Router evaluates the credential
-8) the client requests a Service connection with their Session security token
-    1) the connection request is verified through Service Edge Router Policies
-9) the Edge Router coordinates the service connection
+    3. a Session security token and Edge Router list is provided to the client
+5. the client attempts to connect to a target Edge Router with an API Session security token
+6. the target Edge Router evaluates the credential
+7. the client requests a Service connection with their Session security token
+    1. the connection request is verified through Service Edge Router Policies
+8. the Edge Router coordinates the service connection
 
 # High Level Concepts
 

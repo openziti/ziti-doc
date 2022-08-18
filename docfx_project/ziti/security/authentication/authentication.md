@@ -15,20 +15,6 @@ and [Edge Management API](../../apis/edge-apis.md#edge-management-api).
 
 [![](https://mermaid.ink/img/pako:eNp1kUtPwzAQhP_KyudW3HMApU1fFxQaHoK4B1Mv1CJZR34IRUn-O46bCiGVm9f6ZmY97thRS2QJ-zSiOcFjxiktn0h4d0Jy6igcygPM57d94d9r5SA3qhamhaVBORKisj0sumdRKXk3cFqMMCzLex1lkF6usvIV7YFTFqdVmQszqqsW0j9hnFaRWHeplMopTaKKCDx4NArtmLKOyGayPE_bMZPTNg79Hp03BGm-gwKtDTbwfaMvHj28lWt_LXzzr_xF_e7Qw66cCtmjbTTZuMjuvDmbsRpNLZQMxXacADgLKTVyloSjFOaLM05D4HwjQ_AqPFQblnyENnHGQvu6aOnIEmc8XqBMifBJ9UQNP7yGlbE)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNp1kUtPwzAQhP_KyudW3HMApU1fFxQaHoK4B1Mv1CJZR34IRUn-O46bCiGVm9f6ZmY97thRS2QJ-zSiOcFjxiktn0h4d0Jy6igcygPM57d94d9r5SA3qhamhaVBORKisj0sumdRKXk3cFqMMCzLex1lkF6usvIV7YFTFqdVmQszqqsW0j9hnFaRWHeplMopTaKKCDx4NArtmLKOyGayPE_bMZPTNg79Hp03BGm-gwKtDTbwfaMvHj28lWt_LXzzr_xF_e7Qw66cCtmjbTTZuMjuvDmbsRpNLZQMxXacADgLKTVyloSjFOaLM05D4HwjQ_AqPFQblnyENnHGQvu6aOnIEmc8XqBMifBJ9UQNP7yGlbE)
 
-```mermaid
-graph TD
-A[Unauthenticated] -->|Submit Primary Credentials| B{Valid?}
-B --> C[No] --> A
-B --> D[Yes]
-D --> E[Partially Authenticated]
-E --> F{Additional Auth Queries?}
-F --> G[Yes]
-F --> H[No]
-H --> |Return API Session w/o Queries| Z[Fully Authenticated]
-G --> |Return API Session With Queries| I[Submit Responses]
-I --> F
-```
-
 In the above a client has provided primary authentication credentials (certificate, JWT, username password) and then
 subsequently provided any secondary credentials necessary (JWT, TOTP, etc). The secondary credentials are requested 
 via Authentication Queries and enable multifactor authentication to occur.

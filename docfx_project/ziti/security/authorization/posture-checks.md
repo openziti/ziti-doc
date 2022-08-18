@@ -8,9 +8,11 @@ grant access to a service as either a client or host. Posture Checks are defined
 assigned to them via attributes on the Posture Checks and attribute selectors on the Service Policy. This allows Posture
 Checks to be re-used.
 
-Environmental state is saved as [Posture Data](#posture-data). Posture Data is provided to the controller via 
-[Posture Response](#posture-queries--responses) sent from the client. Posture Responses are constructed from 
-[Posture Queries](#posture-queries--responses) which are reported to the client per service from the controller.
+# Posture Data
+
+Environmental state is saved as Posture Data - a set of values describing environmental state. Posture Data is provided 
+to the controller via Posture Response sent from the client. Posture Responses are constructed from Posture Queries 
+which are reported to the client per service from the controller.
 
 [![](https://mermaid.ink/img/pako:eNptkMtuAjEMRX9l5BWo8ANZsJl210XVkdgQFunkto2aBzgOEkL8e4PIICTwypLPsa98ojFZkKKMfUEc8erMD5ugY1er9w5RlqvVS5-icPIerLp3l2UAH9yIPJs38jav9PLqqW6znbiHfY3oGUZQwY-UpTA-kXcp5ifCXYChfAUns0fpeZg7c228s_VgE6f0U9GCAjgYZ-tHTpeZJvlFgCZVW2v4T5OO58qV3WXPm3WSmNS38RkLMkXScIwjKeGCCWovbdT5H_eEfjA)](https://mermaid.live/edit#pako:eNptkMtuAjEMRX9l5BWo8ANZsJl210XVkdgQFunkto2aBzgOEkL8e4PIICTwypLPsa98ojFZkKKMfUEc8erMD5ugY1er9w5RlqvVS5-icPIerLp3l2UAH9yIPJs38jav9PLqqW6znbiHfY3oGUZQwY-UpTA-kXcp5ifCXYChfAUns0fpeZg7c228s_VgE6f0U9GCAjgYZ-tHTpeZJvlFgCZVW2v4T5OO58qV3WXPm3WSmNS38RkLMkXScIwjKeGCCWovbdT5H_eEfjA)
 

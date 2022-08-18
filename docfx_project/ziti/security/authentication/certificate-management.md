@@ -14,7 +14,7 @@ management.
 Routers will attempt to extend their current client and server certificates one week prior to expiration. No
 intervention is necessary on behalf of the network administrator. The request sent to the controller via a 
 pre-authenticated connection. If a router has been disconnected from the Ziti network and their client certificates
-have expired, the router will have to be [re-enrolled](../enrollment/enrollment.md#router-re-enrollment).
+have expired, the router will have to be [re-enrolled](../enrollment/enrollment.md#router-enrollment-extension).
 
 ## Client Certificate Extension
 
