@@ -16,9 +16,9 @@
 - name: Services
   href: services/toc.yml
   topicHref: services/overview.md
-- name: Policies
-  href: policies/toc.yml
-  topicHref: policies/overview.md
+- name: Security
+  href: security/toc.yml
+  topicHref: security/overview.md
 - name: Configuration Store
   href: config-store/toc.yml
   topicHref: config-store/overview.md
