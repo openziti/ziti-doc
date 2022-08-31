@@ -10,7 +10,7 @@ A gauge of a single value.  The value is the current metric value, and can go up
   An exponentially decaying histogram means that as the samples age across the 128 sample window, they are weighted less than the newer samples.  This makes functions, such as the mean, which is often used, able to respond more quickly to changes than a straight sliding window.  An alpha value of .015 means that the sample weights range from 1 (the newest sample) to approximately .93.  This means that when calculating the mean, the oldest sample in the window is weighted to 93%, reducing its contribution to the function.
 
   A simple weighting exercise:
-    Given 3 samples, 10, 5, and 5, how does the weighting and order affect the mean function?
+    Given 3 samples, 10, 5, and 5, how does the weighting and order affect the mean function? (This is not the same actual funciotn of the histogram, but is intended to help explain the decaying functiona nd the impact of the age of the sample on the measurements)
    | Sample	| Weight | Weighted Value |
    |--------|-------------|----------------|
    | 10 | 1.0 |	10.0 |
