@@ -11,13 +11,13 @@ The Ziti tunneler applicatons provide an example how configuration data can be u
     ```json
     {"protocol":"tcp", "address":"localhost","port":5000}
     ```
-<!-- https://github.com/openziti/edge/blob/main/tunnel/entities/host.v1.json -->
+<!-- https://github.com/openziti/edge/blob/main/tunnel/entities/intercept.v1.json -->
 * Tunnelers need to know where to reach out to applications they are proxying on the server side. For this a tunneler may use standard config type `host.v1`. Here's one example of a config of standard config type `host.v1`.
 
     ```json
     {"protocols":["tcp"],"addresses":["acme.example.ziti"], "portRanges":[{"low":5000, "high":5000}]}
     ```
-<!-- https://github.com/openziti/edge/blob/main/tunnel/entities/intercept.v1.json -->
+<!-- https://github.com/openziti/edge/blob/main/tunnel/entities/host.v1.json -->
 
 ## Overview
 The configuration store has four components:
