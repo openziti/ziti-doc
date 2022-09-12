@@ -4,10 +4,20 @@ Ziti has the capability to define a configuration schema for an application and 
 ## Why Centralized Configuration?
 One might ask why have this feature in Ziti when applications can store configuration data in local configuration files. While this approach works, centralized management makes deployments much easier. It can be difficult or impossible to update a file on a device out in the field, whereas updating the configuration in Ziti is easy, and running clients will quickly be notified of service changes.
 
-The Ziti tunneler applicatons provide an example how configuration data can be used. 
+The Ziti tunneler applicatons provide an example how configuration data can be used through standard `config-types`.
 
-* Tunnelers need to know what ip/dns and port(s) to intercept for services they are proxying on the client side
-* Tunnelers need to know where to reach out to applications they are proxying on the server side
+* Tunnelers need to know what ip/dns and port(s) to intercept for services they are proxying on the client side. For this a tunneler may use standard config type `intercept.v1`. Here's one example of a config of standard config type `intercept.v1`.
+
+    ```json
+    {"protocol":"tcp", "address":"localhost","port":5000}
+    ```
+<!-- https://github.com/openziti/edge/blob/main/tunnel/entities/host.v1.json -->
+* Tunnelers need to know where to reach out to applications they are proxying on the server side. For this a tunneler may use standard config type `host.v1`. Here's one example of a config of standard config type `host.v1`.
+
+    ```json
+    {"protocols":["tcp"],"addresses":["acme.example.ziti"], "portRanges":[{"low":5000, "high":5000}]}
+    ```
+<!-- https://github.com/openziti/edge/blob/main/tunnel/entities/intercept.v1.json -->
 
 ## Overview
 The configuration store has four components:
@@ -31,5 +41,5 @@ The configuration store has four components:
 This configuration model has the following properties:
 * Different applications can have their own configuration for the same service
 * Applications can have multiple configuration types for themselves where it makes sense
-    * Ziti tunnelers have one type for the client side and one for the server side, since they have different properties and not every service with use both
+    * Ziti tunnelers have one type for the client side and one for the server side, since they have different properties and not every service will use both
 * Since an application can support multiple configuration types, applications can version their configuration types as their needs change
