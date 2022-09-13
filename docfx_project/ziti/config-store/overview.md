@@ -9,13 +9,13 @@ The Ziti tunneler applicatons provide an example how configuration data can be u
 * Tunnelers need to know what ip/dns and port(s) to intercept for services they are proxying on the client side. For this a tunneler may use standard config type `intercept.v1`. Here's one example of a config of standard config type `intercept.v1`.
 
     ```json
-    {"protocol":"tcp", "address":"localhost","port":5000}
+    {"protocols":["tcp"],"addresses":["acme.example.ziti"], "portRanges":[{"low":5000, "high":5000}]}
     ```
 <!-- https://github.com/openziti/edge/blob/main/tunnel/entities/intercept.v1.json -->
 * Tunnelers need to know where to reach out to applications they are proxying on the server side. For this a tunneler may use standard config type `host.v1`. Here's one example of a config of standard config type `host.v1`.
 
     ```json
-    {"protocols":["tcp"],"addresses":["acme.example.ziti"], "portRanges":[{"low":5000, "high":5000}]}
+    {"protocol":"tcp", "address":"localhost","port":5000}
     ```
 <!-- https://github.com/openziti/edge/blob/main/tunnel/entities/host.v1.json -->
 
