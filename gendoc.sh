@@ -70,7 +70,7 @@ while getopts ":gwlcdf" opt; do
     d ) # docusaurus
       echo "- building docusaurs"
       ZITI_DOCUSAURS="true"
-      ZITI_DOC_GIT_LOC="${script_root}/docusaurus/OpenZiti/remotes"
+      ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
       echo "- building docusaurs to ${ZITI_DOC_GIT_LOC}"
       ;;
     f ) # docfx
@@ -88,6 +88,7 @@ if [[ ! "${SKIP_GIT}" == "yes" ]]; then
   echo "updating dependencies by rm/checkout"
   mkdir -p "${ZITI_DOC_GIT_LOC}"
   rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
+  git config --global --add safe.directory $(pwd)
   git clone https://github.com/openziti/ziti --branch release-next --single-branch ${ZITI_DOC_GIT_LOC}/ziti-cmd
   git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp
   git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-c
