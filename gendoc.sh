@@ -78,6 +78,7 @@ echo "- done processing opts"
 if [[ ! "${SKIP_GIT}" == "yes" ]]; then
   echo "updating dependencies by rm/checkout"
   rm -r rm -rf ${script_root}/docfx_project/ziti-*
+  git config --global --add safe.directory $(pwd)
   git clone https://github.com/openziti/ziti --branch release-next --single-branch docfx_project/ziti-cmd
   git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch docfx_project/ziti-sdk-csharp
   git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch docfx_project/ziti-sdk-c
