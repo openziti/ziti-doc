@@ -45,7 +45,8 @@ SKIP_GIT=""
 SKIP_LINKED_DOC=""
 SKIP_CLEAN=""
 WARNINGS_AS_ERRORS=""
-ZITI_DOC_GIT_LOC="docfx_project"
+ZITI_DOC_GIT_LOC="${script_root}/docfx_project"
+DOC_ROOT_TARGET="${script_root}/docs-local"
 
 echo "- processing opts"
 
@@ -96,13 +97,11 @@ if [[ ! "${SKIP_GIT}" == "yes" ]]; then
   git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-swift
 fi
 
-DOC_ROOT=docs-local
-
 if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
-if test -d "./$DOC_ROOT"; then
+if test -d "${DOC_ROOT_TARGET}"; then
   # specifically using ../ziti-doc just to remove any chance to rm something unintended
-  echo removing previous build at: rm -r ./$DOC_ROOT
-  rm -r ./$DOC_ROOT || true
+  echo removing previous build at: rm -r "${DOC_ROOT_TARGET}"
+  rm -r "${DOC_ROOT_TARGET}" || true
 fi
 fi
 
@@ -116,44 +115,44 @@ else
   npm run build
 fi
 popd
-exit
+
 if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
-if test -f "${script_root}/${ZITI_DOC_GIT_LOC}/ziti-sdk-c/Doxyfile"; then
-    pushd "${script_root}"/${ZITI_DOC_GIT_LOC}/ziti-sdk-c
+if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/Doxyfile"; then
+    pushd "${ZITI_DOC_GIT_LOC}/ziti-sdk-c"
     doxygen
-    CLANG_SOURCE="${script_root}/${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
-    CLANG_TARGET="${script_root}/${DOC_ROOT}/api/clang"
+    CLANG_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
+    CLANG_TARGET="${DOC_ROOT_TARGET}/api/clang"
     echo " "
     echo "Copying C SDK "
     echo "    from: ${CLANG_SOURCE}"
     echo "      to: ${CLANG_TARGET}"
     mkdir -p "${CLANG_TARGET}"
-    cp -r "${script_root}"/${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api "${CLANG_TARGET}"
+    cp -r "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api" "${CLANG_TARGET}"
 
     echo " "
     echo "Removing"
-    echo "    ${script_root}/${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
-    rm -rf "${script_root}"/${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api
+    echo "    ${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
+    rm -rf "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
     popd
 else
     echo "ERROR: CSDK Doxyfile not located"
 fi
 
-if test -f "${script_root}/${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-    SWIFT_API_TARGET="./${DOC_ROOT}/api/swift"
+if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
+    SWIFT_API_TARGET="${DOC_ROOT_TARGET}/api/swift"
     mkdir -p "./${SWIFT_API_TARGET}"
     pushd ${SWIFT_API_TARGET}
     swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
     echo " "
     echo "Copying Swift docs"
     echo "    from: ${swift_tgz}"
-    echo "      to: ${script_root}/${SWIFT_API_TARGET}"
+    echo "      to: ${SWIFT_API_TARGET}"
     #echo "     via: wget -q -O - ${swift_tgz} | tar -zxvC ${SWIFT_API_TARGET}"
     echo "     via: wget -q -O - ${swift_tgz} | tar -zxv"
     pwd
     #wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
     wget -q -O - "${swift_tgz}" | tar -zxv
-    find "${script_root}/${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
+    find "${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
     popd
 fi
 fi
