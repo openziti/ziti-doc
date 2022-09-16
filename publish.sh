@@ -29,7 +29,7 @@ then
   echo on main branch - publish can proceed
 
   ./gendoc.sh
-  ./gendoc.sh -d
+  ./gendoc.sh -dc
 
   echo "configuring git..."
   ziti-ci configure-git
