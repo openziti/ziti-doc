@@ -29,6 +29,7 @@ then
   echo on main branch - publish can proceed
 
   ./gendoc.sh
+  ./gendoc.sh -d
 
   echo "configuring git..."
   ziti-ci configure-git
@@ -51,6 +52,8 @@ then
 
   # copy all the docs-local into the publish site
   cp -r docs-local/* openziti.github.io/
+  mv docusaurus/build openziti.github.io/
+
   cd openziti.github.io
   git add *
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
