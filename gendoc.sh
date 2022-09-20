@@ -45,10 +45,12 @@ SKIP_GIT=""
 SKIP_LINKED_DOC=""
 SKIP_CLEAN=""
 WARNINGS_AS_ERRORS=""
+ZITI_DOC_GIT_LOC="${script_root}/docfx_project"
+DOC_ROOT_TARGET="${script_root}/docs-local"
 
 echo "- processing opts"
 
-while getopts ":gwlc" opt; do
+while getopts ":gwlcdf" opt; do
   case ${opt} in
     g ) # skip git
       echo "- skipping git cleanup"
@@ -66,8 +68,16 @@ while getopts ":gwlc" opt; do
       echo "- treating warnings as errors"
       WARNINGS_AS_ERRORS="--warningsAsErrors"
       ;;
+    d ) # docusaurus
+      echo "- building docusaurs"
+      ZITI_DOCUSAURS="true"
+      ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
+      echo "- building docusaurs to ${ZITI_DOC_GIT_LOC}"
+      ;;
+    f ) # docfx
     #\? ) echo "Usage: cmd [-h] [-t]"
-    #  ;;
+      echo "this would have been docfx"
+      ;;
     *)
       ;;
   esac
@@ -77,65 +87,72 @@ echo "- done processing opts"
 
 if [[ ! "${SKIP_GIT}" == "yes" ]]; then
   echo "updating dependencies by rm/checkout"
-  rm -r rm -rf ${script_root}/docfx_project/ziti-*
-  git clone https://github.com/openziti/ziti --branch release-next --single-branch docfx_project/ziti-cmd
-  git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch docfx_project/ziti-sdk-csharp
-  git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch docfx_project/ziti-sdk-c
-  git clone https://github.com/openziti/ziti-android-app --branch main --single-branch docfx_project/ziti-android-app
-  git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch docfx_project/ziti-sdk-swift
+  mkdir -p "${ZITI_DOC_GIT_LOC}"
+  rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
+  git config --global --add safe.directory $(pwd)
+  git clone https://github.com/openziti/ziti --branch release-next --single-branch ${ZITI_DOC_GIT_LOC}/ziti-cmd
+  git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp
+  git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-c
+  git clone https://github.com/openziti/ziti-android-app --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-android-app
+  git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-swift
 fi
-
-DOC_ROOT=docs-local
 
 if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
-if test -d "./$DOC_ROOT"; then
+if test -d "${DOC_ROOT_TARGET}"; then
   # specifically using ../ziti-doc just to remove any chance to rm something unintended
-  echo removing previous build at: rm -r ./$DOC_ROOT
-  rm -r ./$DOC_ROOT || true
+  echo removing previous build at: rm -r "${DOC_ROOT_TARGET}"
+  rm -r "${DOC_ROOT_TARGET}" || true
 fi
 fi
 
-pushd docfx_project
-docfx build ${WARNINGS_AS_ERRORS}
+pushd ${ZITI_DOC_GIT_LOC}
+if [[ ! "${ZITI_DOCUSAURS}" == "true" ]]; then
+  docfx build ${WARNINGS_AS_ERRORS}
+else
+  echo "running yarn install"
+  yarn install
+  echo "running npm run build"
+  npm run build
+fi
 popd
 
 if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
-if test -f "${script_root}/docfx_project/ziti-sdk-c/Doxyfile"; then
-    pushd "${script_root}"/docfx_project/ziti-sdk-c
+if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/Doxyfile"; then
+    pushd "${ZITI_DOC_GIT_LOC}/ziti-sdk-c"
     doxygen
-    CLANG_SOURCE="${script_root}/docfx_project/ziti-sdk-c/api"
-    CLANG_TARGET="${script_root}/${DOC_ROOT}/api/clang"
+    CLANG_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
+    CLANG_TARGET="${DOC_ROOT_TARGET}/api/clang"
     echo " "
     echo "Copying C SDK "
     echo "    from: ${CLANG_SOURCE}"
     echo "      to: ${CLANG_TARGET}"
     mkdir -p "${CLANG_TARGET}"
-    cp -r "${script_root}"/docfx_project/ziti-sdk-c/api "${CLANG_TARGET}"
+    cp -r "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api" "${CLANG_TARGET}"
 
     echo " "
     echo "Removing"
-    echo "    ${script_root}/docfx_project/ziti-sdk-c/api"
-    rm -rf "${script_root}"/docfx_project/ziti-sdk-c/api
+    echo "    ${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
+    rm -rf "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
     popd
 else
     echo "ERROR: CSDK Doxyfile not located"
 fi
 
-if test -f "${script_root}/docfx_project/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-    SWIFT_API_TARGET="./${DOC_ROOT}/api/swift"
+if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
+    SWIFT_API_TARGET="${DOC_ROOT_TARGET}/api/swift"
     mkdir -p "./${SWIFT_API_TARGET}"
     pushd ${SWIFT_API_TARGET}
     swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
     echo " "
     echo "Copying Swift docs"
     echo "    from: ${swift_tgz}"
-    echo "      to: ${script_root}/${SWIFT_API_TARGET}"
+    echo "      to: ${SWIFT_API_TARGET}"
     #echo "     via: wget -q -O - ${swift_tgz} | tar -zxvC ${SWIFT_API_TARGET}"
     echo "     via: wget -q -O - ${swift_tgz} | tar -zxv"
     pwd
     #wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
     wget -q -O - "${swift_tgz}" | tar -zxv
-    find "${script_root}/${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
+    find "${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
     popd
 fi
 fi
