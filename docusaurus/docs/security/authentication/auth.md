@@ -6,16 +6,16 @@ title: Authentication
 
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
 has begun when the client receives and API Session and is  complete when the API Session is fully authenticated.
-API Sessions are a high level security context that represents an authenticated session with either the Ziti [Edge Client API](../../api/edge-apis#edge-client-api)
-or the Ziti [Edge Management API](../../api/edge-apis#edge-management-api).
+API Sessions are a high level security context that represents an authenticated session with either the Ziti [Edge Client API](../../api/rest/edge-apis.md#edge-client-api)
+or the Ziti [Edge Management API](../../api/rest/edge-apis.md#edge-management-api).
 
-- Clients that are powered by a Ziti SDK that access services will authenticate with the [Edge Client API](../../api/edge-apis#edge-client-api)
-- Clients that are managing a Ziti Network will authenticate with the [Edge Management API](../../api/edge-apis#edge-management-api)
+- Clients that are powered by a Ziti SDK that access services will authenticate with the [Edge Client API](../../api/rest/edge-apis.md#edge-client-api)
+- Clients that are managing a Ziti Network will authenticate with the [Edge Management API](../../api/rest/edge-apis.md#edge-management-api)
 
 # Authentication Flow
 
-Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](../../api/edge-apis#edge-client-api)
-and [Edge Management API](../../api/edge-apis#edge-management-api).
+Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](../../api/rest/edge-apis.md#edge-client-api)
+and [Edge Management API](../../api/rest/edge-apis.md#edge-management-api).
 
 [![](https://mermaid.ink/img/pako:eNp1kUtPwzAQhP_KyudW3HMApU1fFxQaHoK4B1Mv1CJZR34IRUn-O46bCiGVm9f6ZmY97thRS2QJ-zSiOcFjxiktn0h4d0Jy6igcygPM57d94d9r5SA3qhamhaVBORKisj0sumdRKXk3cFqMMCzLex1lkF6usvIV7YFTFqdVmQszqqsW0j9hnFaRWHeplMopTaKKCDx4NArtmLKOyGayPE_bMZPTNg79Hp03BGm-gwKtDTbwfaMvHj28lWt_LXzzr_xF_e7Qw66cCtmjbTTZuMjuvDmbsRpNLZQMxXacADgLKTVyloSjFOaLM05D4HwjQ_AqPFQblnyENnHGQvu6aOnIEmc8XqBMifBJ9UQNP7yGlbE)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNp1kUtPwzAQhP_KyudW3HMApU1fFxQaHoK4B1Mv1CJZR34IRUn-O46bCiGVm9f6ZmY97thRS2QJ-zSiOcFjxiktn0h4d0Jy6igcygPM57d94d9r5SA3qhamhaVBORKisj0sumdRKXk3cFqMMCzLex1lkF6usvIV7YFTFqdVmQszqqsW0j9hnFaRWHeplMopTaKKCDx4NArtmLKOyGayPE_bMZPTNg79Hp03BGm-gwKtDTbwfaMvHj28lWt_LXzzr_xF_e7Qw66cCtmjbTTZuMjuvDmbsRpNLZQMxXacADgLKTVyloSjFOaLM05D4HwjQ_AqPFQblnyENnHGQvu6aOnIEmc8XqBMifBJ9UQNP7yGlbE)
 
@@ -207,7 +207,7 @@ edge:
 
 ### Administrative Removal
 
-Through the [Edge Management API](../../api/edge-apis#edge-management-api) any API Session may be forcefully removed
+Through the [Edge Management API](../../api/rest/edge-apis.md#edge-management-api) any API Session may be forcefully removed
 by calling `DELETE /edge/management/v1/api-sessions<id>` with an empty body. 
 
 ### Client Removal (Logout)
@@ -243,7 +243,7 @@ Authenticators may be listed via the CLI:
 
 `ziti edge list authenticators`
 
-or via the [Edge Management API](../../api/edge-apis#edge-management-api):
+or via the [Edge Management API](../../api/rest/edge-apis.md#edge-management-api):
 
 ```
 GET /edge/management/v1/authenticators
@@ -254,7 +254,7 @@ GET /edge/management/v1/authenticators
 x509 authentication requires the client to initiate a HTTPs authentication request using a x509 client certificate that
 is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge 
 Controller's internal PKI or an external PKI. If an external PKI is being used, it must be registered as a 
-[3rd Party CA](third-party-cas) via the Ziti [Edge Management API](../../api/edge-apis#edge-management-api), verified, and
+[3rd Party CA](third-party-cas) via the Ziti [Edge Management API](../../api/rest/edge-apis.md#edge-management-api), verified, and
 have authentication enabled. The client certificate must pass signature and CA chain-of-trust validation. All client, 
 intermediate CA, and root CA functionality supports RSA and EC keys.
 
