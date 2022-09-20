@@ -2,6 +2,8 @@
   href: overview.md
 - name: Software Architecture
   href: software-architecture.md
+- name: Deployment Architecture
+  href: deployment-architectures/deployment-architecture.md
 #- name: Quickstart
 #  href: quickstart.md
 - name: Quickstarts
