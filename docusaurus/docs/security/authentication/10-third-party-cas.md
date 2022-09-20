@@ -108,8 +108,7 @@ The fields under `externalIdClaims` is as follows:
 - `parserCriteria` - defines the criteria to provide to `parser`
 - `index` - should multiple values still be available after `location`, `matcher,` and `parser` processing the integer value here will be used from the set
 
-#### SPIFFE Example:
-
+#### CA Create/Update REST API
 ```json
 {
   "name": "myCA",
@@ -118,10 +117,19 @@ The fields under `externalIdClaims` is as follows:
     "location": "SAN_URI",
     "matcher": "SCHEME",
     "parser": "NONE",
-    "parserCriteria": null,
+    "parserCriteria": "",
     "index": 0
   }
 }
+```
+#### Ziti CLI
+
+```
+ziti edge create ca myCa ca.pem -l SAN_URI -m SCHEME -x spiffe -p "NONE"
+```
+
+```
+ziti edge update ca myCa -l SAN_URI -m SCHEME -x spiffe -p "NONE"
 ```
 
 ### Location, Matcher, Parser
