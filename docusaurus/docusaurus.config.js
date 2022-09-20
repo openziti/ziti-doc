@@ -82,7 +82,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'overview',
+            docId: 'overview/OpenZitiOverview',
             position: 'left',
             label: 'Docs',
           },

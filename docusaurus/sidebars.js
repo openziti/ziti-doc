@@ -18,7 +18,7 @@ const sidebars = {
     {
       type: 'doc',
       label: 'Overview',
-      id: 'overview'
+      id: 'overview/OpenZitiOverview'
     },
     {
       type: 'doc',
