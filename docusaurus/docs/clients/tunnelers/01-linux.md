@@ -165,6 +165,10 @@ If the DNS record exists it returns the answer and sets query status to `NO_ERRO
 
 `ziti-edge-tunnel run-host` does not require elevated privileges or the above device or socket, only network egress to the servers for which it is hosting Services.
 
+### [Run with Docker](https://github.com/openziti/ziti-tunnel-sdk-c/tree/main/docker#readme)
+
+The `run-host` mode is especially useful as a sidecar for publishing isolated servers in a Docker bridge network or the Docker host's network.
+
 ### Specialized Tunneller Alternatives
 
 There are also a couple of more specialized tunneling apps. Please use the preferred tunneller `ziti-edge-tunnel` described above if possible.
