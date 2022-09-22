@@ -158,7 +158,7 @@ This article describes the various edge deployment architectures of Ziti Network
     &nbsp;
         
     **Disadvantages:**
-    - Less secure, connection from clients to router is not protected
+    - Less secure, connection from router to application server is not protected
 
     &nbsp;
     
