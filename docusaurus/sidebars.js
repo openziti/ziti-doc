@@ -16,9 +16,17 @@ const sidebars = {
   // But you can create a sidebar manually
   zitiDocsSidebar: [
     {
-      type: 'doc',
-      label: 'Overview',
-      id: 'overview/OpenZitiOverview'
+      type: 'category',
+      label: 'Introduction',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'introduction/intro',
+          label: "What is Ziti?"
+        }
+      ]
     },
     {
       type: 'doc',
@@ -28,7 +36,6 @@ const sidebars = {
     {
       type: 'category',
       label: 'Quickstarts',
-      link: { type: "doc", id: "quickstarts/network/quickstartOverview" },
       items: [
         {
           type: 'category',
