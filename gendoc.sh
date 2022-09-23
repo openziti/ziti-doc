@@ -125,9 +125,9 @@ if [[ ! "${ZITI_DOCUSAURS}" == "true" ]]; then
   docfx build ${WARNINGS_AS_ERRORS}
 else
   echo "running yarn install"
-  #yarn install
+  yarn install
   echo "running npm run build"
-  #npm run build
+  npm run build
 fi
 popd
 
