@@ -69,10 +69,11 @@ while getopts ":gwlcdf" opt; do
       WARNINGS_AS_ERRORS="--warningsAsErrors"
       ;;
     d ) # docusaurus
-      echo "- building docusaurs"
+      echo "- building docusaurus"
       ZITI_DOCUSAURS="true"
       ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
-      echo "- building docusaurs to ${ZITI_DOC_GIT_LOC}"
+      DOC_ROOT_TARGET="${script_root}/docusaurus/static/api"
+      echo "- building docusaurus to ${ZITI_DOC_GIT_LOC}"
       ;;
     f ) # docfx
     #\? ) echo "Usage: cmd [-h] [-t]"
@@ -110,24 +111,42 @@ if [[ ! "${ZITI_DOCUSAURS}" == "true" ]]; then
   docfx build ${WARNINGS_AS_ERRORS}
 else
   echo "running yarn install"
-  yarn install
+  #yarn install
   echo "running npm run build"
-  npm run build
+  #npm run build
 fi
 popd
 
 if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
+
+if [[ "${ZITI_DOCUSAURS}" == "true" ]]; then
+  echo "=================================================="
+  echo "charp: building the c# sdk docs"
+  #cp -r "${script_root}/docfx_project/templates" "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/"
+  docfx build -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docfx.json"
+
+  CSHARP_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docfx-output"
+  CSHARP_TARGET="${DOC_ROOT_TARGET}/csharp"
+  echo "Copying csharp SDK docs"
+  echo "    from: ${CSHARP_SOURCE}"
+  echo "      to: ${CSHARP_TARGET}"
+  echo " "
+  mkdir -p "${CSHARP_TARGET}"
+  cp -r "${CSHARP_SOURCE}/"* "${CSHARP_TARGET}"
+fi
+
 if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/Doxyfile"; then
     pushd "${ZITI_DOC_GIT_LOC}/ziti-sdk-c"
     doxygen
     CLANG_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
-    CLANG_TARGET="${DOC_ROOT_TARGET}/api/clang"
+    CLANG_TARGET="${DOC_ROOT_TARGET}/clang"
     echo " "
-    echo "Copying C SDK "
+    echo "Copying C SDK doc"
     echo "    from: ${CLANG_SOURCE}"
     echo "      to: ${CLANG_TARGET}"
+  echo " "
     mkdir -p "${CLANG_TARGET}"
-    cp -r "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api" "${CLANG_TARGET}"
+    cp -r "${CLANG_SOURCE}/*" "${CLANG_TARGET}"
 
     echo " "
     echo "Removing"
@@ -139,7 +158,7 @@ else
 fi
 
 if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-    SWIFT_API_TARGET="${DOC_ROOT_TARGET}/api/swift"
+    SWIFT_API_TARGET="${DOC_ROOT_TARGET}/swift"
     mkdir -p "./${SWIFT_API_TARGET}"
     pushd ${SWIFT_API_TARGET}
     swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
