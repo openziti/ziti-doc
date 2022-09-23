@@ -2,6 +2,18 @@
 
 shopt -s expand_aliases
 
+function clone_or_pull {
+  remote=$1
+  dir="${ZITI_DOC_GIT_LOC}/${2}"
+  if [ -d "${dir}" ]; then
+    pushd "${dir}"
+    git pull
+    popd
+  else
+    git clone "${remote}" --branch main --single-branch "${dir}"
+  fi
+}
+
 if [[ "" = "$DOCFX_EXE" ]]; then
     shopt -s expand_aliases
     if [[ -f "~/.bash_aliases" ]]; then
@@ -89,13 +101,15 @@ echo "- done processing opts"
 if [[ ! "${SKIP_GIT}" == "yes" ]]; then
   echo "updating dependencies by rm/checkout"
   mkdir -p "${ZITI_DOC_GIT_LOC}"
-  rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
+  if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
+    rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
+  fi
   git config --global --add safe.directory $(pwd)
-  git clone https://github.com/openziti/ziti --branch release-next --single-branch ${ZITI_DOC_GIT_LOC}/ziti-cmd
-  git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp
-  git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-c
-  git clone https://github.com/openziti/ziti-android-app --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-android-app
-  git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-swift
+  clone_or_pull "https://github.com/openziti/ziti" "ziti-cmd"
+  clone_or_pull "https://github.com/openziti/ziti-sdk-csharp" "ziti-sdk-csharp"
+  clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c"
+  clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app"
+  clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
 fi
 
 if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
@@ -146,7 +160,7 @@ if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/Doxyfile"; then
     echo "      to: ${CLANG_TARGET}"
   echo " "
     mkdir -p "${CLANG_TARGET}"
-    cp -r "${CLANG_SOURCE}/*" "${CLANG_TARGET}"
+    cp -r "${CLANG_SOURCE}/"* "${CLANG_TARGET}"
 
     echo " "
     echo "Removing"
