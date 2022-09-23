@@ -41,7 +41,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     &nbsp;
 
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - None
     :::
 
@@ -69,7 +69,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     &nbsp;
         
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Fabric is not extended into application network
     :::
 
@@ -95,7 +95,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     &nbsp;
 
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Software must be deployed to application servers
     - Requires defining explicit service for each application
     :::
@@ -123,7 +123,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
         
     &nbsp;
 
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Less secure, connection from private router to application is not protected
     :::
 
@@ -148,7 +148,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     &nbsp;
         
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Fabric is not extended into application network
     - Application host has a client software (ZET) deployed
     :::

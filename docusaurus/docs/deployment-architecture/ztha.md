@@ -41,7 +41,7 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
 
     &nbsp;
 
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Software must be deployed to desktops/mobile
     - Software must be deployed to application servers
     - Requires defining explicit service for each application
@@ -70,7 +70,7 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
         
     &nbsp;
 
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Software must be deployed to desktops/mobile
     - Less secure, connection from private router to application is not protected
     :::
@@ -95,7 +95,7 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
 
     &nbsp;
         
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Less secure, connection from clients to router is not protected
     - Static Routing or Load Balancer is needed to direct traffic toward Routers
     - Clients must be configured use Routers as first DNS entry if using named services
@@ -124,7 +124,7 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
 
     &nbsp;
 
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Software must be deployed to application servers
     - Requires defining explicit service for each application
     :::
@@ -148,7 +148,7 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
 
     &nbsp;
         
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Fabric is not extended into application server network
     - Application host has a client software (ZET) deployed
     :::
@@ -174,7 +174,7 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
 
     &nbsp;
         
-    :::caution Disadvantages
+    :::caution Things to consider while deciding
     - Fabric is not extended into application server network
     - Application host has a client software (ZET) deployed
     :::
