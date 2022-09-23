@@ -2,7 +2,7 @@
 
 OpenZiti has a number of different conenction and session types.  It is important to understand the different scopes and uses of these connections in working with the project, developing, operating, and most importantly, troubleshooting.
 
-![Sessions and Connections Diagram](./SessionsAndConnections.png)
+[![](https://mermaid.ink/img/pako:eNqdVDtrwzAQ_iuHpgTSoR49BEKSoRRKaDoVLUK6pKLyyZXPLSXkv1dS4hLnUZJOxqf77nv4rI3Q3qAoRYMfLZLGmVXroCpJbNkhvFq2sMSmsZ4aUGRg6olQc3qXJKlWga22tSKGqbMYH5O6dlar1NI_X84e4b5fmps1wrNvGcPx0RPylw_viZCDdw7DZWhxSnRUOhAV_YTPNC13dPNh4RRhLHKWCXfj8RkJJUwWD10gklIgHaRIkKsRPeO3kfWMXwdFMp3djL7R85VG8-g9JwzqKK-JSVuNw1t93zqp-Nekg1RmitUuDRi8TBfDRHC6zpllF1UJse3gZ8i6ckJ5uc6iijOoCxqS7GH_w_SSK_OQv8LIhF3bnuU0_B4udtugW8tiJCoMlbIm3gwbSQBS8BtWKEVcBmFwpVrHUkjaxlbVsl9-kxYlhxZHoq2N4u4iEeVKuea3OjeWfdgXtz_UjZHr)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNqdVDtrwzAQ_iuHpgTSoR49BEKSoRRKaDoVLUK6pKLyyZXPLSXkv1dS4hLnUZJOxqf77nv4rI3Q3qAoRYMfLZLGmVXroCpJbNkhvFq2sMSmsZ4aUGRg6olQc3qXJKlWga22tSKGqbMYH5O6dlar1NI_X84e4b5fmps1wrNvGcPx0RPylw_viZCDdw7DZWhxSnRUOhAV_YTPNC13dPNh4RRhLHKWCXfj8RkJJUwWD10gklIgHaRIkKsRPeO3kfWMXwdFMp3djL7R85VG8-g9JwzqKK-JSVuNw1t93zqp-Nekg1RmitUuDRi8TBfDRHC6zpllF1UJse3gZ8i6ckJ5uc6iijOoCxqS7GH_w_SSK_OQv8LIhF3bnuU0_B4udtugW8tiJCoMlbIm3gwbSQBS8BtWKEVcBmFwpVrHUkjaxlbVsl9-kxYlhxZHoq2N4u4iEeVKuea3OjeWfdgXtz_UjZHr)
 
 ## Control Plane
  1. The API Session is the first and primary session between and endpoint and the OpenZiti network isntance.  This session is created during attachment, after validating the certificates in both directions, and the endpoint name.  This makes the endpoint present on the network, and all endpoints and routers have API sessions to the Contoller(s)
