@@ -1,6 +1,6 @@
 ---
-sidebar_position: 3
 id: contributing
+title: Contributing
 ---
 
 # Contributing

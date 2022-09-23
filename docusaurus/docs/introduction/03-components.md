@@ -1,7 +1,6 @@
 ---
-sidebar_position: 2
-title: Components
 id: components
+title: Components
 ---
 
 ## Deployed Components

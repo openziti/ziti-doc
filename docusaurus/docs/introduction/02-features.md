@@ -1,6 +1,6 @@
 ---
-sidebar_position: 1
 id: features
+title: Features
 ---
 
 # Features 

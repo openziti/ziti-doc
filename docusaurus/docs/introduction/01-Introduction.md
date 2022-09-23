@@ -1,8 +1,6 @@
 ---
 id: intro
 title: What is OpenZiti?
-slug: /intro
-sidebar_position: 1
 ---
 
 **OpenZiti** is a free and open source project focused on bringing Zero Trust to any application. The project provides all the pieces required to implement or integrate Zero Trust into your solutions.
@@ -26,4 +24,4 @@ provides secure connectivity on top – or “overlaying” – existing
 networking infrastructure.
 
 Here's an overview of a network topology:
-![image](ziti-overview.svg)
+![image](_ziti-overview.svg)
