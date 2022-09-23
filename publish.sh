@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-apt install jq -y
-
 mkdir -p ~/.ssh
 
 echo running ssh-keyscan to add github.com to known hosts
