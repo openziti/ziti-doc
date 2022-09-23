@@ -2,6 +2,12 @@
 title: ZTAA
 ---
 
+import Share42Md from './share/_share42.mdx';
+import Share15Md from './share/_share15.mdx';
+import Share43Md from './share/_share43.mdx';
+import Share23Md from './share/_share23.mdx';
+import Share13Md from './share/_share13.mdx';
+
 # ZTAA
 
 This article describes the various edge deployments of ZiTi App Access. In all cases, the Controller and at least 2 Public Edge Routers are to be deployed for redundency. The Ziti Fabric connections are established between all Edge Routers but not Clients/SDKs. The Public Edge Routers would provide connection between Private Edge Routers and/or Clients/SDKs.
@@ -21,7 +27,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
 &nbsp;
 
-1. **Application to Application Deployment**
+1. **Application to Application A Deployment**
     &nbsp;
 
     ![image](images/1.4.png)
@@ -42,13 +48,40 @@ This article describes the various edge deployments of ZiTi App Access. In all c
     &nbsp;
 
     :::caution Things to consider while deciding
-    - None
+    - SDK and Application source code availability
     :::
 
     &nbsp;
 
     ---
-1. **Application to Application without Private Edge Routers Deployment**
+1. **Application to Application B Deployment**
+    &nbsp;
+
+    ![image](images/4.1.png)
+
+    :::info Details
+    - Client is SDK integrated
+    - Application is SDK integrated
+    :::
+
+    &nbsp;
+
+    :::tip Advantages
+    - Application to Application Encryption 
+    - No additional routing needed
+    - No additional DNS entries needed
+    :::
+
+    &nbsp;
+
+    :::caution Things to consider while deciding
+    - SDK and Application source code availability
+    :::
+
+    &nbsp;
+
+    ---
+1. **Application to Application C Deployment**
     &nbsp;
     
     ![image](images/2.2.png)
@@ -71,84 +104,47 @@ This article describes the various edge deployments of ZiTi App Access. In all c
         
     :::caution Things to consider while deciding
     - Fabric is not extended into application network
-    :::
-
-    &nbsp;
-
-1. **Application to Host Deployment**
-    &nbsp;
-
-    ![image](images/1.3.png)
-
-    :::info Details
-    - Client is SDK integrated.
-    - Application has a client software (ZET) deployed.
-    :::
-
-    &nbsp;
-
-    :::tip Advantages
-    - Application to Host Encryption 
-    - No additional routing needed
-    - No additional DNS entries needed
-    :::
-
-    &nbsp;
-
-    :::caution Things to consider while deciding
-    - Software must be deployed to application servers
-    - Requires defining explicit service for each application
-    :::
-
-    &nbsp;
-
-    ---    
-1. **Application to Router Deployment**
-    &nbsp;
-    
-    ![image](images/1.5.png)
-
-    :::info Details
-    - Client is SDK integrated.
-    - Application is behind private router
-    :::
-
-    &nbsp;
-    
-    :::tip Advantages
-    - No software must be deployed to application servers
-    - No additional routing needed
-    - No additional DNS entries needed
-    :::
-        
-    &nbsp;
-
-    :::caution Things to consider while deciding
-    - Less secure, connection from private router to application is not protected
+    - SDK and Application source code availability
     :::
 
     &nbsp;
 
     ---
-1. **Application to Host without Private Edge Routers Deployment**
+1. **Application to Host A Deployment**
     &nbsp;
+
+    <Share13Md />
+
+    &nbsp;
+
+    ---
+1. **Application to Host B Deployment**
+    &nbsp;
+
+    <Share42Md />
+
+    &nbsp;
+
+    --- 
+1. **Application to Host C Deployment**
+    &nbsp; 
+
+    <Share23Md />
     
-    ![image](images/2.3.png)
-    
-    :::info Details
-    - Client is SDK integrated
-    :::
+    &nbsp;
+ 
+    ---    
+1. **Application to Router A Deployment**
+    &nbsp;
+
+    <Share15Md />
 
     &nbsp;
 
-    :::tip Advantages
-    - No need to deploy private edge routers
-    - Application to host Encryption 
-    :::
-
+    --- 
+1. **Application to Router B Deployment**
     &nbsp;
-        
-    :::caution Things to consider while deciding
-    - Fabric is not extended into application network
-    - Application host has a client software (ZET) deployed
-    :::
+
+    <Share43Md />
+
+

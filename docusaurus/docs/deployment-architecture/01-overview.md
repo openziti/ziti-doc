@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: Overview
 ---
 
@@ -15,7 +14,7 @@ All openziti deployment architectures can be categorized by three types of Zero 
 
     ![image](images/ZTAA.jpg)
 
-    :::info [**Click me for more details**](./ztaa.md)
+    :::info [**Click me for more details**](./02-ztaa.md)
     :::
 
     &nbsp;
@@ -27,7 +26,7 @@ All openziti deployment architectures can be categorized by three types of Zero 
 
     ![image](images/ZTHA.jpg)
 
-    :::info [**Click me for more details**](./ztha.md)
+    :::info [**Click me for more details**](./03-ztha.md)
     :::
 
     &nbsp;
@@ -39,5 +38,5 @@ All openziti deployment architectures can be categorized by three types of Zero 
 
     ![image](images/ZTNA.jpg)
 
-    :::info [**Click me for more details**](./ztna.md)
+    :::info [**Click me for more details**](./04-ztna.md)
     :::
