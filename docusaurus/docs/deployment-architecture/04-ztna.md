@@ -25,8 +25,7 @@ This article describes the various edge deployments of ZiTi Network Access. In a
 :::
 
 &nbsp;
-
-    ---    
+  
 1. **Application to Router A Deployment**
     &nbsp;
 

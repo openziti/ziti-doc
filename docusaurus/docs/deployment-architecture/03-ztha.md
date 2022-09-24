@@ -27,7 +27,6 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
 
 &nbsp;
 
-    ---
 1. **Application to Host A Deployment**
     &nbsp;
 
