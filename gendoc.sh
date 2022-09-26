@@ -133,7 +133,7 @@ popd
 
 if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
 
-if [[ "${ZITI_DOCUSAURS}" == "true" ]]; then
+if [[ "${ZITI_DOCUSAURS}" == "true_skip_for_now" ]]; then
   echo "=================================================="
   echo "charp: building the c# sdk docs"
   #cp -r "${script_root}/docfx_project/templates" "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/"
@@ -174,7 +174,7 @@ fi
 if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
     SWIFT_API_TARGET="${DOC_ROOT_TARGET}/swift"
     mkdir -p "${SWIFT_API_TARGET}"
-    pushd ${SWIFT_API_TARGET}
+    pushd "${SWIFT_API_TARGET}"
     swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
     echo " "
     echo "Copying Swift docs"
