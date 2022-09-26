@@ -174,7 +174,7 @@ fi
 if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
     SWIFT_API_TARGET="${DOC_ROOT_TARGET}/swift"
     mkdir -p "${SWIFT_API_TARGET}"
-    pushd ${SWIFT_API_TARGET}
+    pushd "${SWIFT_API_TARGET}"
     swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
     echo " "
     echo "Copying Swift docs"
