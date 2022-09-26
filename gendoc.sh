@@ -133,7 +133,7 @@ popd
 
 if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
 
-if [[ "${ZITI_DOCUSAURS}" == "true" ]]; then
+if [[ "${ZITI_DOCUSAURS}" == "true_skip_for_now" ]]; then
   echo "=================================================="
   echo "charp: building the c# sdk docs"
   #cp -r "${script_root}/docfx_project/templates" "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/"
