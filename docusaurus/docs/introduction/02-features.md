@@ -24,8 +24,8 @@ Ziti has many features
 ## Developer Focus
 * [Open source code, available with the Apache 2.0 license](https://github.com/openziti)
 * Fully programable REST management APIs
-* [SDKs for a variety of programming languages](./clients/sdks)
-* [Application specific configuration store allowing centralized management of configuration allowing you to add structured configuration specific to your application](config-store/overview)
+* [SDKs for a variety of programming languages](../clients/sdks)
+* [Application specific configuration store allowing centralized management of configuration allowing you to add structured configuration specific to your application](../config-store/overview)
 * An extensible fabric, allowing you to add your own 
     * load balancing algorithms
     * interconnect protocols
@@ -34,9 +34,9 @@ Ziti has many features
     * control and management plane messaging and semantics   
 
 ## Easy Management
-* [A flexible and expressive policy model for managing access to services and edge routers](./security/authorization/policies/overview)
+* [A flexible and expressive policy model for managing access to services and edge routers](../security/authorization/policies/overview)
 * A web based admin console
-* [Pre-built tunnelers and proxies for a variety of operating systems, including mobile](./clients/tunnelers)
+* [Pre-built tunnelers and proxies for a variety of operating systems, including mobile](../clients/tunnelers)
 
 ## Understanding buzzwords
 
