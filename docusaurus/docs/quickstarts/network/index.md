@@ -20,7 +20,7 @@ pages. Don't be afraid to ask the community for help!
 ## Getting Started - Network
 
 When you're just getting started, the first thing you will need is access to a
-[Ziti Network](../../overview#overview-of-a-ziti-network). For someone just starting out, there are four basic options:
+[Ziti Network](../../introduction/intro). For someone just starting out, there are four basic options:
 
 ### Run all the binaries locally
 
@@ -34,8 +34,8 @@ This allows you to do some more complex things like actually isolate services fr
 ### Run on your own server
 
 This option is great for two situations. If you have a server This is great if you have other people you want to have
-access to your [Ziti Network](../../overview#overview-of-a-ziti-network) and aren't on the local network.
-* If you would prefer not to deal with setting up the [Ziti Network](../../overview#overview-of-a-ziti-network) you
+access to your [Ziti Network](../../introduction/intro) and aren't on the local network.
+* If you would prefer not to deal with setting up the [Ziti Network](../../introduction/intro) you
 * can sign up for a free-tier account over at the [NetFoundry Console](https://nfconsole.io/signup)
 
 ## Which network option sounds right for you?
