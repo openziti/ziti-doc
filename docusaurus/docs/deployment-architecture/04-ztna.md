@@ -2,10 +2,10 @@
 title: ZTNA
 ---
 
-import Share15Md from './share/_share15.mdx';
-import Share43Md from './share/_share43.mdx';
-import Share12Md from './share/_share12.mdx';
-import Share31Md from './share/_share31.mdx';
+import Share15Md from './share/_app_to_router_a_deploy.mdx';
+import Share43Md from './share/_app_to_router_b_deploy.mdx';
+import Share12Md from './share/_client_to_router_deploy.mdx';
+import Share31Md from './share/_router_to_host_deploy.mdx';
 
 # ZTNA
 
@@ -58,7 +58,7 @@ This article describes the various edge deployments of ZiTi Network Access. In a
 1. **Router to Router Deployment**
     &nbsp;
     
-    ![image](images/3.2.png)
+    ![image](/img/deployment-architecture/router_to_router_deploy.png)
 
     :::info Details
     - Clients are behind Router

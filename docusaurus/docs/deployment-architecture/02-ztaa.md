@@ -2,11 +2,11 @@
 title: ZTAA
 ---
 
-import Share42Md from './share/_share42.mdx';
-import Share15Md from './share/_share15.mdx';
-import Share43Md from './share/_share43.mdx';
-import Share23Md from './share/_share23.mdx';
-import Share13Md from './share/_share13.mdx';
+import Share42Md from './share/_app_to_host_b_deploy.mdx';
+import Share15Md from './share/_app_to_router_a_deploy.mdx';
+import Share43Md from './share/_app_to_router_b_deploy.mdx';
+import Share23Md from './share/_app_to_host_c_deploy.mdx';
+import Share13Md from './share/_app_to_host_a_deploy.mdx';
 
 # ZTAA
 
@@ -30,7 +30,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 1. **Application to Application A Deployment**
     &nbsp;
 
-    ![image](images/1.4.png)
+    ![image](/img/deployment-architecture/app_to_app_a_deploy.png)
 
     :::info Details
     - Client is SDK integrated.
@@ -57,7 +57,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 1. **Application to Application B Deployment**
     &nbsp;
 
-    ![image](images/4.1.png)
+    ![image](/img/deployment-architecture/app_to_app_b_deploy.png)
 
     :::info Details
     - Client is SDK integrated
@@ -84,7 +84,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 1. **Application to Application C Deployment**
     &nbsp;
     
-    ![image](images/2.2.png)
+    ![image](/img/deployment-architecture/app_to_app_c_deploy.png)
 
     :::info Details
     - Client is SDK integrated

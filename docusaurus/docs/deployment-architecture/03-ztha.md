@@ -2,11 +2,11 @@
 title: ZTHA
 ---
 
-import Share42Md from './share/_share42.mdx';
-import Share23Md from './share/_share23.mdx';
-import Share13Md from './share/_share13.mdx';
-import Share12Md from './share/_share12.mdx';
-import Share31Md from './share/_share31.mdx';
+import Share42Md from './share/_app_to_host_b_deploy.mdx';
+import Share23Md from './share/_app_to_host_c_deploy.mdx';
+import Share13Md from './share/_app_to_host_a_deploy.mdx';
+import Share12Md from './share/_client_to_router_deploy.mdx';
+import Share31Md from './share/_router_to_host_deploy.mdx';
 
 # ZTHA
 
@@ -53,7 +53,7 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
 1. **Client to Host A Deployment**
     &nbsp;
 
-    ![image](images/1.1.png)
+    ![image](/img/deployment-architecture/client_to_host_a_deploy.png)
 
     :::info Details
     - Client is ZDE/ZME enabled
@@ -81,7 +81,7 @@ This article describes the various edge deployments of ZiTi Host Access. In all 
 1. **Client to Host B Deployment**
     &nbsp;
 
-    ![image](images/2.1.png)
+    ![image](/img/deployment-architecture/client_to_host_b_deploy.png)
 
     :::info Details
     - Client is ZDE/ZME enabled
