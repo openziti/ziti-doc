@@ -54,6 +54,7 @@ then
 
   cd openziti.github.io
   git add -A
+  git add docusaurus/static/api/
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
     echo changing git repo from https to git so that we can push...
     ../changeToSsh.sh
