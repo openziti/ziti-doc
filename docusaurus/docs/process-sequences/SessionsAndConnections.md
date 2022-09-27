@@ -16,4 +16,4 @@ OpenZiti has a number of different conenction and session types.  It is importan
   2. The Connection is the flow speciic connection between the endpoint and the intial Edge Router.  Each service invocation will create an independent Connection, and data will flow over this to the Edge Router
   3. The Fabric Circuit is the path in the OpenZiti Network from initial to terminating Edge Router, comprised of one more more Edge Routers, and zero or more Links. (An initiating Edge Router may have a local terminator for the service) 
 
-These terms in their full and abbreviaed forms appear in logs, metrics, and software, and are therefore ccritical terminaology to understand OpenZiti Networks.
+These terms in their full and abbreviated forms appear in logs, metrics, and software, and are therefore ccritical terminaology to understand OpenZiti Networks.
