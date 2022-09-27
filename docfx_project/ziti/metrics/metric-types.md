@@ -5,12 +5,12 @@ Ziti is instrumenting more code and adding additional metrics all of the time. T
 A gauge of a single value.  The value is the current metric value, and can go up and down over time
 
 ## Histogram
-  Histogram metrics utilize the Go metrics module, and are set to a 128 sample exponentially decaying bucket with a alpha value of .015.  This is important to understand, especially in reference to minimum and maximum values.  The bucket is sample bound, not time bound.  In practice this means one will often see a maximum or minimum value that carries on for several time samples; this is expected behavior. For example, link latency is measured every 10 seconds by default.  This means a maximum value can be in place for 21:40 minutes (128 * 10s).  When viewing the measurements, it is important to keep this in mind, as it may appear that a low or high value is more prevalent than it actually is, if you are  familiar with thinking of time bound buckets. The histogram implementation allows for extremely fast and memory efficient data collection.  As some of the metrics are multiplied by multiple levels of cardinality, it is critical to maintaining the operations of the software.
+  Histogram metrics utilize the Go metrics module, and are set to a 128 sample exponentially decaying bucket with a alpha value of .015.  This is important to understand, especially in reference to minimum and maximum values.  The bucket is sample bound, not time bound.  In practice this means one will often see a maximum or minimum value that carries on for several time samples; this is expected behavior.  The histogram implementation allows for extremely fast and memory efficient data collection.  As some of the metrics are multiplied by multiple levels of cardinality, it is critical to maintaining the operations of the software.
   
   An exponentially decaying histogram means that as the samples age across the 128 sample window, they are weighted less than the newer samples.  This makes functions, such as the mean, which is often used, able to respond more quickly to changes than a straight sliding window.  An alpha value of .015 means that the sample weights range from 1 (the newest sample) to approximately .93.  This means that when calculating the mean, the oldest sample in the window is weighted to 93%, reducing its contribution to the function.
 
   A simple weighting exercise:
-    Given 3 samples, 10, 5, and 5, how does the weighting and order affect the mean function? (This is not the same actual funciotn of the histogram, but is intended to help explain the decaying functiona nd the impact of the age of the sample on the measurements)
+    Given 3 samples, 10, 5, and 5, how does the weighting and order affect the mean function?
    | Sample	| Weight | Weighted Value |
    |--------|-------------|----------------|
    | 10 | 1.0 |	10.0 |
