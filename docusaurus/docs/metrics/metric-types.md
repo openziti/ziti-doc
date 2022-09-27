@@ -1,5 +1,6 @@
 # Types of Metrics Reported
-Ziti is instrumenting more code and adding additional metrics all of the time. This section will describe the different types of metrics that ziti reports, not individual metric names.
+
+OpenZiti is instrumenting more code and adding additional metrics all of the time. This section will describe the different types of metrics that OpenZiti reports, not individual metric names.
 
 ## intValue/floatValue
 A gauge of a single value.  The value is the current metric value, and can go up and down over time
@@ -10,7 +11,7 @@ A gauge of a single value.  The value is the current metric value, and can go up
   An exponentially decaying histogram means that as the samples age across the 128 sample window, they are weighted less than the newer samples.  This makes functions, such as the mean, which is often used, able to respond more quickly to changes than a straight sliding window.  An alpha value of .015 means that the sample weights range from 1 (the newest sample) to approximately .93.  This means that when calculating the mean, the oldest sample in the window is weighted to 93%, reducing its contribution to the function.
 
   A simple weighting exercise:
-    Given 3 samples, 10, 5, and 5, how does the weighting and order affect the mean function? (This is not the same actual funciotn of the histogram, but is intended to help explain the decaying functiona nd the impact of the age of the sample on the measurements)
+    Given 3 samples, 10, 5, and 5, how does the weighting and order affect the mean function? (This is not the same actual function of the histogram, but is intended to help explain the decaying function nd the impact of the age of the sample on the measurements)
    | Sample	| Weight | Weighted Value |
    |--------|-------------|----------------|
    | 10 | 1.0 |	10.0 |
@@ -44,7 +45,7 @@ Standard histograms provide:
   * p999
   * p9999
 
-It is important to note the sample size (128) means the more specific percentiles will use the same actual values, and may be repetetive.
+It is important to note the sample size (128) means the more specific percentiles will use the same actual values, and may be repetitive.
 
 ## Meter
 Meters are used for rate measurements, how much of something happened per unit time.  The samples are exponentially decayed, similar to the histogram, however the values are bound to specific time intervals, such as 1, 5, and 15 minutes.  They can also provide similar statistical values to histograms
