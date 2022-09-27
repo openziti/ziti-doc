@@ -180,7 +180,7 @@ if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj";
     echo "Copying Swift docs"
     echo "    from: ${swift_tgz}"
     echo "      to: ${SWIFT_API_TARGET}"
-    #echo "     via: wget -q -O - ${swift_tgz} | tar -zxvC ${SWIFT_API_TARGET}"
+    echo " "
     echo "     via: wget -q -O - ${swift_tgz} | tar -zxv"
     pwd
     #wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
@@ -188,4 +188,5 @@ if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj";
     find "${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
     popd
 fi
+tree "${DOC_ROOT_TARGET}"
 fi
