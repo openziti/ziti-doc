@@ -53,7 +53,7 @@ then
   mv docusaurus/build openziti.github.io/docusaurus
 
   cd openziti.github.io
-  git add *
+  git add -A
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
     echo changing git repo from https to git so that we can push...
     ../changeToSsh.sh
