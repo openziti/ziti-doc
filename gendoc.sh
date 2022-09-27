@@ -135,11 +135,11 @@ if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
 
 if [[ "${ZITI_DOCUSAURS}" == "true" ]]; then
   echo "=================================================="
-  echo "charp: building the c# sdk docs"
+  #echo "charp: building the c# sdk docs"
   #cp -r "${script_root}/docfx_project/templates" "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/"
-  docfx build -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docfx.json"
-
-  CSHARP_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docfx-output"
+  #docfx build -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docfx.json"
+#
+  CSHARP_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docs"
   CSHARP_TARGET="${DOC_ROOT_TARGET}/csharp"
   echo "Copying csharp SDK docs"
   echo "    from: ${CSHARP_SOURCE}"
@@ -174,13 +174,13 @@ fi
 if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
     SWIFT_API_TARGET="${DOC_ROOT_TARGET}/swift"
     mkdir -p "${SWIFT_API_TARGET}"
-    pushd ${SWIFT_API_TARGET}
+    pushd "${SWIFT_API_TARGET}"
     swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
     echo " "
     echo "Copying Swift docs"
     echo "    from: ${swift_tgz}"
     echo "      to: ${SWIFT_API_TARGET}"
-    #echo "     via: wget -q -O - ${swift_tgz} | tar -zxvC ${SWIFT_API_TARGET}"
+    echo " "
     echo "     via: wget -q -O - ${swift_tgz} | tar -zxv"
     pwd
     #wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
