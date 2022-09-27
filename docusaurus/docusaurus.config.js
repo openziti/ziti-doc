@@ -60,17 +60,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      announcementBar: {
-        content:
-            '⭐️If you like OpenZiti, help spread the word by giving it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/openziti/ziti">GitHub</a>! ⭐️',
-        isCloseable: false,
-        id: 'github-stars'
-      },
       navbar: {
         title: '',
+        hideOnScroll: false,
         logo: {
           alt: 'OpenZiti',
           src: 'img/ziti-logo-dark.svg',
+          srcDark: 'img/ziti-logo-40.png',
           height: "100px",
         },
         items: [
@@ -82,7 +78,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'overview',
+            docId: 'introduction/intro',
             position: 'left',
             label: 'Docs',
           },
