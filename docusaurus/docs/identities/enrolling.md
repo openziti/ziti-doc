@@ -59,7 +59,7 @@ confident you understand the risks involved in doing so.
 
 The flow allows you to pre-create identities for a 3rd party CA with distinct role attributes. This flow is similar to the One Time Token flow from above except that it expects that a private key and certificate have
 already been created on or distributed to the machine that is about to enroll and that the certificate presented is
-issued by a federated [third party CA](../manage/pki#third-party-ca-optional).
+issued by a validated, [third party CA](../manage/pki#third-party-ca-optional).
 
 Follow these steps to enroll a 3rd Pary CA - one-time token identity:
 
@@ -80,13 +80,13 @@ ziti edge enroll \
 ### 3rd Party CA - Auto
 
 When using a third party CA identity creation process in the Ziti Controller is
-automatic with this "auto" flow. The act of enrolling the identity will create it with the default role attributes that were specified when the 3rd party CA was federated.
+automatic with this "auto" flow. The act of enrolling the identity will create it with the default role attributes that were specified when the 3rd party CA was created.
 
 Like "3rd Party CA - One Time Token" - this flow expects that a private key and certificate have
 already been created on or distributed to the machine that is about to enroll.
 The certificate presented to the Ziti Controller must be issued by a [third
 party CA](../manage/pki#third-party-ca-optional) that was already
-federated in the Ziti Controller with the
+imported and verified in the Ziti Controller with the
 `isAutoCaEnrollmentEnabled` property set to true.
 
 Using the `ziti` CLI will also require the re-use of a permanent JWT that is unique to the external CA. The JWT
