@@ -188,5 +188,4 @@ if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj";
     find "${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
     popd
 fi
-find "${DOC_ROOT_TARGET}" -name "*"
 fi
