@@ -2,6 +2,18 @@
 
 shopt -s expand_aliases
 
+function clone_or_pull {
+  remote=$1
+  dir="${ZITI_DOC_GIT_LOC}/${2}"
+  if [ -d "${dir}" ]; then
+    pushd "${dir}"
+    git pull
+    popd
+  else
+    git clone "${remote}" --branch main --single-branch "${dir}"
+  fi
+}
+
 if [[ "" = "$DOCFX_EXE" ]]; then
     shopt -s expand_aliases
     if [[ -f "~/.bash_aliases" ]]; then
@@ -69,10 +81,11 @@ while getopts ":gwlcdf" opt; do
       WARNINGS_AS_ERRORS="--warningsAsErrors"
       ;;
     d ) # docusaurus
-      echo "- building docusaurs"
+      echo "- building docusaurus"
       ZITI_DOCUSAURS="true"
       ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
-      echo "- building docusaurs to ${ZITI_DOC_GIT_LOC}"
+      DOC_ROOT_TARGET="${script_root}/docusaurus/static/api"
+      echo "- building docusaurus to ${ZITI_DOC_GIT_LOC}"
       ;;
     f ) # docfx
     #\? ) echo "Usage: cmd [-h] [-t]"
@@ -88,13 +101,15 @@ echo "- done processing opts"
 if [[ ! "${SKIP_GIT}" == "yes" ]]; then
   echo "updating dependencies by rm/checkout"
   mkdir -p "${ZITI_DOC_GIT_LOC}"
-  rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
+  if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
+    rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
+  fi
   git config --global --add safe.directory $(pwd)
-  git clone https://github.com/openziti/ziti --branch release-next --single-branch ${ZITI_DOC_GIT_LOC}/ziti-cmd
-  git clone https://github.com/openziti/ziti-sdk-csharp --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp
-  git clone https://github.com/openziti/ziti-sdk-c --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-c
-  git clone https://github.com/openziti/ziti-android-app --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-android-app
-  git clone https://github.com/openziti/ziti-sdk-swift --branch main --single-branch ${ZITI_DOC_GIT_LOC}/ziti-sdk-swift
+  clone_or_pull "https://github.com/openziti/ziti" "ziti-cmd"
+  clone_or_pull "https://github.com/openziti/ziti-sdk-csharp" "ziti-sdk-csharp"
+  clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c"
+  clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app"
+  clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
 fi
 
 if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
@@ -117,17 +132,35 @@ fi
 popd
 
 if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
+
+if [[ "${ZITI_DOCUSAURS}" == "true" ]]; then
+  echo "=================================================="
+  #echo "charp: building the c# sdk docs"
+  #cp -r "${script_root}/docfx_project/templates" "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/"
+  #docfx build -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docfx.json"
+#
+  CSHARP_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docs"
+  CSHARP_TARGET="${DOC_ROOT_TARGET}/csharp"
+  echo "Copying csharp SDK docs"
+  echo "    from: ${CSHARP_SOURCE}"
+  echo "      to: ${CSHARP_TARGET}"
+  echo " "
+  mkdir -p "${CSHARP_TARGET}"
+  cp -r "${CSHARP_SOURCE}/"* "${CSHARP_TARGET}"
+fi
+
 if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/Doxyfile"; then
     pushd "${ZITI_DOC_GIT_LOC}/ziti-sdk-c"
     doxygen
     CLANG_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
-    CLANG_TARGET="${DOC_ROOT_TARGET}/api/clang"
+    CLANG_TARGET="${DOC_ROOT_TARGET}/clang"
     echo " "
-    echo "Copying C SDK "
+    echo "Copying C SDK doc"
     echo "    from: ${CLANG_SOURCE}"
     echo "      to: ${CLANG_TARGET}"
+  echo " "
     mkdir -p "${CLANG_TARGET}"
-    cp -r "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api" "${CLANG_TARGET}"
+    cp -r "${CLANG_SOURCE}/"* "${CLANG_TARGET}"
 
     echo " "
     echo "Removing"
@@ -139,15 +172,15 @@ else
 fi
 
 if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-    SWIFT_API_TARGET="${DOC_ROOT_TARGET}/api/swift"
-    mkdir -p "./${SWIFT_API_TARGET}"
-    pushd ${SWIFT_API_TARGET}
+    SWIFT_API_TARGET="${DOC_ROOT_TARGET}/swift"
+    mkdir -p "${SWIFT_API_TARGET}"
+    pushd "${SWIFT_API_TARGET}"
     swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
     echo " "
     echo "Copying Swift docs"
     echo "    from: ${swift_tgz}"
     echo "      to: ${SWIFT_API_TARGET}"
-    #echo "     via: wget -q -O - ${swift_tgz} | tar -zxvC ${SWIFT_API_TARGET}"
+    echo " "
     echo "     via: wget -q -O - ${swift_tgz} | tar -zxv"
     pwd
     #wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
