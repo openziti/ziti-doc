@@ -51,7 +51,7 @@ then
   # copy all the docs-local into the publish site
   cp -r docs-local/* openziti.github.io/
   mv docusaurus/build openziti.github.io/docusaurus
-  mv docusaurus/static openziti.github.io/docusaurus/static
+  mv docusaurus/static/api openziti.github.io/docusaurus/
 
   cd openziti.github.io
   git add -A
