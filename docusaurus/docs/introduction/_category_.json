@@ -1,5 +1,5 @@
 {
-  "label": "What is Ziti?",
+  "label": "What is OpenZiti?",
   "position": 1,
   "link": { "type": "doc", "id": "introduction/intro" }
 }

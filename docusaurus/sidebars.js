@@ -24,7 +24,7 @@ const sidebars = {
         {
           type: 'doc',
           id: 'introduction/intro',
-          label: "What is Ziti?"
+          label: "What is OpenZiti?"
         }
       ]
     },

@@ -66,7 +66,7 @@ const config = {
         logo: {
           alt: 'OpenZiti',
           src: 'img/ziti-logo-dark.svg',
-          srcDark: 'img/ziti-logo-40.png',
+          srcDark: 'img/ziti-logo-light.svg',
           height: "100px",
         },
         items: [
