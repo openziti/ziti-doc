@@ -1,5 +1,6 @@
 ---
 title: ZTAA
+hide_table_of_contents: true
 ---
 
 import Share42Md from './share/_app_to_host_b_deploy.mdx';

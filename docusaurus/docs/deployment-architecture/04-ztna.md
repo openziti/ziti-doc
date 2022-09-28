@@ -1,5 +1,6 @@
 ---
 title: ZTNA
+hide_table_of_contents: true
 ---
 
 import Share15Md from './share/_app_to_router_a_deploy.mdx';
