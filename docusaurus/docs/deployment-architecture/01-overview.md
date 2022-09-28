@@ -13,7 +13,7 @@ All openziti deployment architectures can be categorized by three types of Zero 
     The Zero Trust is maintained between Applications, and the encryption terminated in Applications
     &nbsp;
 
-    ![image](/img/deployment-architecture/ZTAA.V2.png)
+    ![image](/img/deployment-architecture/ZTAA.v2.png)
 
     :::info [**Click me for more details**](./02-ztaa.md)
     :::
@@ -25,7 +25,7 @@ All openziti deployment architectures can be categorized by three types of Zero 
     The Zero Trust is maintained between Application Hosts, and the encryption terminated at Application Hosts
     &nbsp;
 
-    ![image](/img/deployment-architecture/ZTHA.V2.png)
+    ![image](/img/deployment-architecture/ZTHA.v2.png)
 
     :::info [**Click me for more details**](./03-ztha.md)
     :::
@@ -37,7 +37,7 @@ All openziti deployment architectures can be categorized by three types of Zero 
     The Zero Trust is only maintained batween Ziti Private Edge Routers, and the encryption is terminated at Ziti Private Edge Routers
     &nbsp;
 
-    ![image](/img/deployment-architecture/ZTNA.V2.png)
+    ![image](/img/deployment-architecture/ZTNA.v2.png)
 
     :::info [**Click me for more details**](./04-ztna.md)
     :::
