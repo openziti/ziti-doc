@@ -3,6 +3,6 @@
   "position": 40,
   "link":{
     "type": "doc",
-    "id": "security/authorization/policies/overview"
+    "id": "core-concepts/security/authorization/policies/overview"
   }
 }

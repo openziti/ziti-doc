@@ -3,6 +3,6 @@
   "position": 40,
   "link":{
     "type": "doc",
-    "id": "security/overview"
+    "id": "core-concepts/security/overview"
   }
 }

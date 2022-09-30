@@ -1,8 +1,8 @@
 # API Session
 
 API Sessions represent a client that is either partially or fully authenticated as a specific Ziti Identity. API
-Sessions are used to scope [authentication](authentication/auth.md) and [Posture Data](authorization/posture-checks.md).
-API Sessions are used to make [authorization](authorization/auth.md) decisions. Clients interact with
+Sessions are used to scope [authentication](authentication/auth) and [Posture Data](authorization/posture-checks).
+API Sessions are used to make [authorization](authorization/auth) decisions. Clients interact with
 API Sessions via a opaque security token value and is received during authentication via `/edge/client|management/v1/authenticate`.
 
 # Session

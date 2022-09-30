@@ -72,82 +72,15 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'quickstarts/network/quickstartOverview',
-            position: 'left',
-            label: 'Get Started',
-          },
-          {
-            type: 'doc',
             docId: 'introduction/intro',
             position: 'left',
             label: 'Docs',
-          },
-          {
-            type: 'doc',
-            docId: 'api/api',
-            position: 'left',
-            label: 'API Documentation',
-          },
-          {
-            type: 'doc',
-            docId: 'glossary/glossary',
-            position: 'left',
-            label: 'Glossary',
-          },
-          {
-            to: '/blog',
-            label: 'Blog',
-            position: 'right'
-          },
-          {
-            href: 'https://github.com/openziti/ziti',
-            label: 'GitHub',
-            position: 'right',
           },
         ],
       },
       footer: {
         style: 'dark',
         links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/introduction/intro',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
-          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
       },

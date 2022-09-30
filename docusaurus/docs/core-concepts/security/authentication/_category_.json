@@ -3,6 +3,6 @@
   "position": 40,
   "link":{
     "type": "doc",
-    "id": "security/authentication/auth"
+    "id": "core-concepts/security/authentication/auth"
   }
 }

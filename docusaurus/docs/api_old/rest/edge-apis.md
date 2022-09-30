@@ -25,10 +25,10 @@ new identities, identities, policies, and other entities used to manage a Ziti n
 ## Edge Client API
 
 The Edge Client API is used by clients that wish to dial (connect) or bind (host) services. The services that the
-clients are allowed to interact with is defined by [policies](../../security/authorization/policies/overview). In order
-for clients to use the client API they must first [authenticate](../../security/authentication/auth) and
-obtain either a [partial or fully authenticated](../../security/authentication/auth#full-vs-partial-authentication)
-[API Sessioon](../../security/sessions#).
+clients are allowed to interact with is defined by [policies](../../core-concepts/security/authorization/policies/overview). In order
+for clients to use the client API they must first [authenticate](../../core-concepts/security/authentication/auth) and
+obtain either a [partial or fully authenticated](../../core-concepts/security/authentication/auth#full-vs-partial-authentication)
+[API Sessioon](../../core-concepts/security/sessions#).
 
 ## Edge Client & Management Shared Capabilities
 
