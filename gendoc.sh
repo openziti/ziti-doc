@@ -58,7 +58,7 @@ SKIP_LINKED_DOC=""
 SKIP_CLEAN=""
 WARNINGS_AS_ERRORS=""
 ZITI_DOC_GIT_LOC="${script_root}/docfx_project"
-DOC_ROOT_TARGET="${script_root}/docs-local"
+DOC_ROOT_TARGET="${script_root}/docs-local/api"
 
 echo "- processing opts"
 
