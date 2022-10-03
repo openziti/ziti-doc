@@ -63,7 +63,7 @@ issued by a validated, [third party CA](../manage/pki#third-party-ca-optional).
 
 Follow these steps to enroll a 3rd Pary CA - one-time token identity:
 
-* [create the Identity](creating.mdx)
+* [create the Identity](creating)
 * download or copy the JWT - this file contains the one-time token
 * run the `ziti` CLI. Notice you can provide the filename of the identity config JSON file to output:
 

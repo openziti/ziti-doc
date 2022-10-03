@@ -1,4 +1,8 @@
 {
-  "label": "Deployment Architectures",
-  "position": 3
+  "label": "Deploying OpenZiti",
+  "position": 3,
+  "link":{
+    "type": "doc",
+    "id": "deployment-architecture/overview"
+  }
 }

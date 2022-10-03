@@ -3,7 +3,7 @@ title: Overview
 hide_table_of_contents: true
 ---
 
-# Deployment Edge Architectures
+# Deploying OpenZiti
 
 All openziti deployment architectures can be categorized by three types of Zero Trust Edge Access Security Models. Many of them will be overlapping at least 2 of these initially, especially the brownfield deployments.  That gives customers a great deal of flexibility in terms of deployment options depending on where they are in the journey to eventually reach the ZiTi Application Access Security Model, i.e most secured.
     &nbsp;
@@ -15,7 +15,7 @@ All openziti deployment architectures can be categorized by three types of Zero 
 
     ![image](/img/deployment-architecture/ZTAA.v2.png)
 
-    :::info [**Click me for more details**](./02-ztaa)
+    :::info [**Click me for more details**](./ztaa)
     :::
 
     &nbsp;
@@ -27,7 +27,7 @@ All openziti deployment architectures can be categorized by three types of Zero 
 
     ![image](/img/deployment-architecture/ZTHA.v2.png)
 
-    :::info [**Click me for more details**](./03-ztha)
+    :::info [**Click me for more details**](./ztha)
     :::
 
     &nbsp;
@@ -39,5 +39,5 @@ All openziti deployment architectures can be categorized by three types of Zero 
 
     ![image](/img/deployment-architecture/ZTNA.v2.png)
 
-    :::info [**Click me for more details**](./04-ztna
+    :::info [**Click me for more details**](./ztna)
     :::

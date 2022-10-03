@@ -33,7 +33,7 @@ const config = {
       {
         id: 'docs-api',
         path: 'docs-api',
-        routeBasePath: 'docs-api',
+        routeBasePath: 'api',
         sidebarPath: require.resolve('./sidebars.js'),
       },
     ],
@@ -42,10 +42,19 @@ const config = {
       {
         id: 'docs-glossary',
         path: 'docs-glossary',
-        routeBasePath: 'docs-glossary',
+        routeBasePath: 'glossary',
         sidebarPath: require.resolve('./sidebars.js'),
       },
-    ]
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-guides',
+        path: 'docs-guides',
+        routeBasePath: 'guides',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
   ],
   presets: [
     [
@@ -88,22 +97,28 @@ const config = {
         },
         items: [
           {
-            to: '/docs/introduction/intro',    // ./docs/Intro.md
+            to: '/docs/introduction/intro',
             label: 'Docs',
             position: 'left',
             activeBaseRegex: `/docs/`,
           },
           {
-            to: '/docs-api/api',    // ./docs-api/Intro.md
+            to: '/api/',
             label: 'API Documentation',
             position: 'left',
-            activeBaseRegex: `/docs-api/`,
+            activeBaseRegex: `/api/`,
           },
           {
-            to: '/docs-glossary/glossary',
+            to: '/guides/',
+            label: 'Guides',
+            position: 'left',
+            activeBaseRegex: `/guides/`,
+          },
+          {
+            to: '/glossary/glossary',
             label: 'Glossary',
             position: 'left',
-            activeBaseRegex: `/docs-glossary/`,
+            activeBaseRegex: `/glossary/`,
           },
           {
             to: '/blog',

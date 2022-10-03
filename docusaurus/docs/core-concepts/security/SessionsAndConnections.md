@@ -1,4 +1,4 @@
-# Sessions and Connections
+# Sessions and Connections Sequence Diagram
 
 OpenZiti has a number of different conenction and session types.  It is important to understand the different scopes and uses of these connections in working with the project, developing, operating, and most importantly, troubleshooting.
 

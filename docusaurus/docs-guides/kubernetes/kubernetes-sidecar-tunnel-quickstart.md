@@ -18,7 +18,7 @@ by hostname instead of IP address.
 
 ### Solution Overview
 
-![Diagram of solution](./sidecar-diagram.svg)
+![Diagram of solution](sidecar-diagram.svg)
 
 ## Prerequisites
 
