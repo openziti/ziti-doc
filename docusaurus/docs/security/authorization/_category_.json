@@ -1,8 +1,0 @@
-{
-  "label": "Authorization",
-  "position": 40,
-  "link":{
-    "type": "doc",
-    "id": "security/authorization/auth"
-  }
-}

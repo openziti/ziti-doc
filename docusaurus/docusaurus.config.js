@@ -28,7 +28,33 @@ const config = {
   },
 
   plugins: [
-
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-api',
+        path: 'docs-api',
+        routeBasePath: 'api',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-glossary',
+        path: 'docs-glossary',
+        routeBasePath: 'glossary',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-guides',
+        path: 'docs-guides',
+        routeBasePath: 'guides',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
   ],
   presets: [
     [
@@ -60,6 +86,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        }
+      },
       navbar: {
         title: '',
         hideOnScroll: false,
@@ -71,28 +103,28 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'quickstarts/network/quickstartOverview',
-            position: 'left',
-            label: 'Get Started',
-          },
-          {
-            type: 'doc',
-            docId: 'introduction/intro',
-            position: 'left',
+            to: '/docs/introduction/intro',
             label: 'Docs',
+            position: 'left',
+            activeBaseRegex: `/docs/`,
           },
           {
-            type: 'doc',
-            docId: 'api/api',
+            to: '/api/',
+            label: 'APIs',
             position: 'left',
-            label: 'API Documentation',
+            activeBaseRegex: `/api/`,
           },
           {
-            type: 'doc',
-            docId: 'glossary/glossary',
+            to: '/guides/',
+            label: 'Guides',
             position: 'left',
+            activeBaseRegex: `/guides/`,
+          },
+          {
+            to: '/glossary/glossary',
             label: 'Glossary',
+            position: 'left',
+            activeBaseRegex: `/glossary/`,
           },
           {
             to: '/blog',
@@ -109,45 +141,6 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/introduction/intro',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
-          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
       },

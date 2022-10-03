@@ -1,8 +1,0 @@
-{
-  "label": "Policies",
-  "position": 40,
-  "link":{
-    "type": "doc",
-    "id": "security/authorization/policies/overview"
-  }
-}

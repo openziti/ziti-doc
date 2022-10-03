@@ -1,0 +1,8 @@
+{
+  "label": "Security",
+  "position": 40,
+  "link":{
+    "type": "doc",
+    "id": "core-concepts/security/overview"
+  }
+}

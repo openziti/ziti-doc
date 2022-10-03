@@ -10,11 +10,11 @@ This page will hopefully give you some insight into some of the choices you can 
 OpenZiti is really about embedding zero trust directly into your applications. If you are a developer, you might want to start with 
 your favorite language and start your OpenZiti journy with "zero trust application access". This means you'll take an SDK and embed it 
 into an application you write! It's probably best to explore the best SDK for your language and find samples for that SDK to use. 
-[The landing page](index.md) has links to all the SDKs to choose from.  
+[The landing page](index) has links to all the SDKs to choose from.  
 
 ## Zero Trust Host Access
 
 If you're not a developer, or if you have an application which you can't (or don't want to) change you can start with "zero trust host 
-access". For this, you will install an [OpenZiti tunneller](../../clients/tunnelers) on your "clients" and on your "servers" and 
+access". For this, you will install an [OpenZiti tunneller](../../core-concepts/clients/tunnelers) on your "clients" and on your "servers" and 
 provide access to your services using these executables. If this sounds like a good place to start, 
 [check out the host access quickstart](ztha).

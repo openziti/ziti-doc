@@ -52,11 +52,11 @@ Alternatively, if you have used the [docker-compose quickstart](../network/local
 OpenZiti overlay network, you will have this HTTP server available to use immediately. 
 
 ### Prerequisite - HTTP Client Tunneller
-You will need to install an [OpenZiti tunneler](../../clients/tunnelers) on the machine which represents the HTTP client. Later on 
+You will need to install an [OpenZiti tunneler](../../core-concepts/clients/tunnelers) on the machine which represents the HTTP client. Later on 
 we'll create an identity for this tunneller and use the identity to access the HTTP server. 
 
 ### Prerequisite - HTTP Server Tunneller
-You will need to install an [OpenZiti tunneler](../../clients/tunnelers) on the machine which represents the HTTP server. Later on
+You will need to install an [OpenZiti tunneler](../../core-concepts/clients/tunnelers) on the machine which represents the HTTP server. Later on
 we'll create an identity for this tunneller and use the identity to access the HTTP server. 
 
 :::note
@@ -97,9 +97,9 @@ Here is an overview of the steps we will follow:
 2. Create an identity for the HTTP server if you are not using an edge-router with the tunneling option enabled (see below). Also note 
    that if you are using the docker-compose quickstart or just plan to use an edge-router with tunneling enabled you can also skip this 
    step.
-3. Create an [intercept.v1 config](../../config-store/overview). This config is used to instruct the client-side tunneler how 
+3. Create an [intercept.v1 config](../../core-concepts/config-store/overview). This config is used to instruct the client-side tunneler how 
    to correctly intercept the targeted traffic and put it onto the overlay.
-4. Create a [host.v1 config](../../config-store/overview). This config is used instruct the server-side tunneler how to offload the 
+4. Create a [host.v1 config](../../core-concepts/config-store/overview). This config is used instruct the server-side tunneler how to offload the 
    traffic from the overlay, back to the underlay.
 5. Create a service to associate the two configs created previously into a service.
 6. Create a service-policy to authorize "HTTP Clients" to "dial" the service representing the HTTP server.
