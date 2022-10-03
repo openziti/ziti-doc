@@ -6,27 +6,172 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #005dce;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-background-color: #f8fafc;
+  --ifm-background-surface-color: #f1f5f9;
+  --ifm-background-surface-color-dark: #e2e8f0;
+  --ifm-footer-background-color: #f8fafc;
+  --ifm-color-primary: #158eed;
+  --ifm-color-primary-dark: #8519e7;
+  --ifm-color-primary-darker: #7e17dc;
+  --ifm-color-primary-darkest: #6813b5;
+  --ifm-color-primary-light: #a14ded;
+  --ifm-color-primary-lighter: #a85aee;
+  --ifm-color-primary-lightest: #b776f1;
+  --ifm-font-color-base: #334155;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+html[data-theme="dark"] {
+  --ifm-background-color: #111827;
+  --ifm-background-surface-color: #1f2937;
+  --ifm-background-surface-color-dark: #374151;
+  --ifm-footer-background-color: #111827;
+  --ifm-color-primary: #158eed;
+  --ifm-color-primary-dark: #b671fc;
+  --ifm-color-primary-darker: #ad5ffb;
+  --ifm-color-primary-darkest: #a34cfb;
+  --ifm-color-primary-light: #d3a9fd;
+  --ifm-color-primary-lighter: #ddbcfd;
+  --ifm-color-primary-lightest: #e6cffe;
+  --ifm-font-color-base: #94a3b8;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.button:hover {
+  background: linear-gradient(90deg,#0068f9 0, #fc0147 100%) ;
+}
+
+input[type="radio"]
+{
+  display: none;
+}
+
+input[type="radio"]+label {
+  appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  padding-left: 34px;
+  position: relative;
+  vertical-align: middle;
+}
+
+input[type="radio"]:checked+label {
+  backface-visibility: hidden;
+  animation: checked 200ms ease 1;
+}
+
+input[type="radio"]+label:before {
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0);
+  border-radius: 100% 100% 100% 100%;
+  content: " ";
+  height: 7px;
+  left: 12px;
+  position: absolute;
+  top: 6px;
+  width: 7px;
+}
+
+input[type="radio"]+label:hover:before {
+  /* background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5); */
+  background: linear-gradient(90deg,#0068f9 0, #fc0147 100%) ;
+}
+
+input[type="radio"]:checked+label:before {
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 1);
+}
+
+
+
+input[type="radio"]+label:after {
+  border: 3px solid #FFFFFF;
+  border-radius: 100% 100% 100% 100%;
+  content: " ";
+  height: 15px;
+  left: 5px;
+  position: absolute;
+  top: -1px;
+  width: 15px;
+}
+
+input[type="radio"]:checked+label:after {
+  border-color: rgba(255, 255, 255, 1);
+}
+
+
+.header-github-link:hover {
+  opacity: 0.6;
+}
+.header-github-link::before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='rgb(60, 74, 94)' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+  no-repeat;
+  content: "";
+  display: flex;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+[data-theme="dark"] .header-github-link::before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='rgb(148, 163, 184)' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+  no-repeat;
+}
+
+/**
+ Footer
+ */
+.footer {
+  margin-top: 4.5rem;
+}
+.footer__links {
+  margin-bottom: 4.5rem;
+}
+
+.videowrapper {
+  float: none;
+  clear: both;
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+}
+
+.videowrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.button--red {
+  background: #ec1f2e;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.notification_new {
+  background: linear-gradient(90deg,#0068f9 0, #fc0147 100%) ;
+  border-radius: 5px;
+  color: #fff;
+  padding: 1px 8px;
+  font-weight: 700;
+  font-size: .9em;
+  display: inline-flex;
+  margin-right: 5px;
+  text-transform: uppercase;
 }
 
 @media (min-width: 1416px) {
