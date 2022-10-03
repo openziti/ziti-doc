@@ -21,6 +21,6 @@ yarn-error.log*
 
 _remotes
 remotes
-docs/_remotes
+all/docs/_remotes
 ziti
 static/api

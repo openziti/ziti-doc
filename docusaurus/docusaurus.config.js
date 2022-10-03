@@ -28,7 +28,24 @@ const config = {
   },
 
   plugins: [
-
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-api',
+        path: 'docs-api',
+        routeBasePath: 'docs-api',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-glossary',
+        path: 'docs-glossary',
+        routeBasePath: 'docs-glossary',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ]
   ],
   presets: [
     [
@@ -71,16 +88,77 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'introduction/intro',
-            position: 'left',
+            to: '/docs/introduction/intro',    // ./docs/Intro.md
             label: 'Docs',
+            position: 'left',
+            activeBaseRegex: `/docs/`,
+          },
+          {
+            to: '/docs-api/api',    // ./docs-api/Intro.md
+            label: 'API Documentation',
+            position: 'left',
+            activeBaseRegex: `/docs-api/`,
+          },
+          {
+            to: '/docs-glossary/glossary',
+            label: 'Glossary',
+            position: 'left',
+            activeBaseRegex: `/docs-glossary/`,
+          },
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'right'
+          },
+          {
+            href: 'https://github.com/openziti/ziti',
+            label: 'GitHub',
+            position: 'right',
           },
         ],
       },
       footer: {
         style: 'dark',
         links: [
+          {
+            title: 'Docs',
+            items: [
+              {
+                label: 'Tutorial',
+                to: '/docs/introduction/intro',
+              },
+            ],
+          },
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'Stack Overflow',
+                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              },
+              {
+                label: 'Discord',
+                href: 'https://discordapp.com/invite/docusaurus',
+              },
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/docusaurus',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/facebook/docusaurus',
+              },
+            ],
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
       },
