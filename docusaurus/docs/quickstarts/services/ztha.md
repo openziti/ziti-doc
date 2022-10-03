@@ -19,7 +19,7 @@ to any network be it host network, local network, the internet, private network,
 ### Simple HTTP Solution Overview - Before Ziti<br/>
 ![before OpenZiti](before-openziti.png)
 
-The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](../../glossary/#underlay)
+The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](/glossary/glossary#underlay)
 network and requires a hole through the firewall to allow clients to connect.
 
 ### Simple HTTP Solution - After Ziti
@@ -27,7 +27,7 @@ network and requires a hole through the firewall to allow clients to connect.
 
 After OpenZiti, we can see that there is no longer an open firewall to allow access to the HTTP server. Instead, the HTTP client 
 will have its network requests intercepted by an OpenZiti tunneller. Once intercepted, the packets are then delivered to the OpenZiti
-[overlay](../../glossary#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
+[overlay](/glossary/glossary#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
 target identity. Once delivered to the target identity, in this example, the traffic will offload back to the underlay network to be 
 sent to the final destination: the HTTP Server.
 
@@ -97,9 +97,9 @@ Here is an overview of the steps we will follow:
 2. Create an identity for the HTTP server if you are not using an edge-router with the tunneling option enabled (see below). Also note 
    that if you are using the docker-compose quickstart or just plan to use an edge-router with tunneling enabled you can also skip this 
    step.
-3. Create an [intercept.v1 config](../../core-concepts/config-store/overview). This config is used to instruct the client-side tunneler how 
+3. Create an [intercept.v1 config](/docs/core-concepts/config-store/overview). This config is used to instruct the client-side tunneler how 
    to correctly intercept the targeted traffic and put it onto the overlay.
-4. Create a [host.v1 config](../../core-concepts/config-store/overview). This config is used instruct the server-side tunneler how to offload the 
+4. Create a [host.v1 config](/docs/core-concepts/config-store/overview). This config is used instruct the server-side tunneler how to offload the 
    traffic from the overlay, back to the underlay.
 5. Create a service to associate the two configs created previously into a service.
 6. Create a service-policy to authorize "HTTP Clients" to "dial" the service representing the HTTP server.
