@@ -1,3 +1,6 @@
+---
+sidebar_position: 0
+---
 # Guides
 
 This will be where guides will be put. Guides are longer, more bespoke pages that illustrate different ideas.

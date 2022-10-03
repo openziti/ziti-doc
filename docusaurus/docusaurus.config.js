@@ -86,6 +86,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        }
+      },
       navbar: {
         title: '',
         hideOnScroll: false,
@@ -104,7 +110,7 @@ const config = {
           },
           {
             to: '/api/',
-            label: 'API Documentation',
+            label: 'APIs',
             position: 'left',
             activeBaseRegex: `/api/`,
           },
