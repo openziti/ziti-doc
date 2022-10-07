@@ -1,3 +1,5 @@
+# Consuming
+
 ## Consuming Configuration Data
 Configuration data can be retrieved directly, but it will usually be consumed by applications via the SDK. When an SDK authenticates, it will indicate which configuration types it can process. Then, when listing services, the SDK will recieve configuation data in-line. This can be done from the CLI as well.
 
