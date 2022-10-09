@@ -96,10 +96,9 @@ const config = {
         title: '',
         hideOnScroll: false,
         logo: {
-          alt: 'OpenZiti',
+          alt: 'OpenZiti Logo',
           src: 'img/ziti-logo-dark.svg',
           srcDark: 'img/ziti-logo-light.svg',
-          height: "100px",
         },
         items: [
           {
