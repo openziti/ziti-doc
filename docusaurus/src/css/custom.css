@@ -8,7 +8,7 @@
 :root {
   --ifm-background-color: #f8fafc;
   --ifm-background-surface-color: #f1f5f9;
-  --ifm-background-surface-color-dark: #e2e8f0;
+  --ifm-background-surface-color-dark: #e1d4ee;
   --ifm-footer-background-color: #f8fafc;
   --ifm-color-primary: #158eed;
   --ifm-color-primary-dark: #8519e7;
@@ -17,9 +17,12 @@
   --ifm-color-primary-light: #a14ded;
   --ifm-color-primary-lighter: #a85aee;
   --ifm-color-primary-lightest: #b776f1;
-  --ifm-font-color-base: #334155;
+  --ifm-font-color-base: #3f3f3f;
   --ifm-code-font-size: 95%;
+  --ifm-paragraph-margin-bottom: 0;
+  --ifm-paragraph-margin-top: 0;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --logo-name: "ziti-logo-dark.svg"
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -36,7 +39,10 @@ html[data-theme="dark"] {
   --ifm-color-primary-lighter: #ddbcfd;
   --ifm-color-primary-lightest: #e6cffe;
   --ifm-font-color-base: #94a3b8;
+  --ifm-paragraph-margin-bottom: 0;
+  --ifm-paragraph-margin-top: 0;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --logo-name: "ziti-logo-light.svg"
 }
 
 * {
@@ -126,40 +132,11 @@ input[type="radio"]:checked+label:after {
  Footer
  */
 .footer {
-  margin-top: 4.5rem;
+  display: flex;
+  #margin-top: 1.5rem;
 }
 .footer__links {
   margin-bottom: 4.5rem;
-}
-
-.videowrapper {
-  float: none;
-  clear: both;
-  width: 100%;
-  position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 25px;
-  height: 0;
-}
-
-.videowrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.button--red {
-  background: #ec1f2e;
-}
-
-.center {
-  text-align: center;
-}
-
-.right {
-  text-align: right;
 }
 
 .notification_new {
@@ -174,6 +151,7 @@ input[type="radio"]:checked+label:after {
   text-transform: uppercase;
 }
 
+
 @media (min-width: 1416px) {
   .main-wrapper {
     align-self: center;
@@ -185,4 +163,113 @@ input[type="radio"]:checked+label:after {
 .navbar .navbar__inner {
   margin: 0 auto;
   max-width: 1360px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.sdkbutton-image {
+  margin: 0 auto;
+  max-width: 115px !important;
+  height: 80px;
+}
+
+.sdkbutton-text {
+  display: flex;
+  justify-content: center;
+}
+
+.sdk-buttons {
+  height: 140px;
+  width: 140px;
+  font-size: 16px;
+  font-weight: bold;
+  background: rgba(222, 222, 222, 1);
+  padding: 0px !important;
+  cursor: pointer;
+  margin: 20px 20px;
+  text-align:center;
+  border: none;
+  border-radius: 15px;
+}
+
+.btn-hover {
+  width: 175px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Open Sans', Tahoma, Helvetica, sans-serif;
+  cursor: pointer;
+  margin: 20px 20px;
+  height: 80px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 5px;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;  background: whitesmoke;
+  box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+  color:grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration-line: none;
+}
+
+.col-lg-12 .sdk-buttons:hover {
+  text-decoration-line: none !important;
+  color: black;
+  background: rgba(255, 255, 255, 0.9);
+  font-weight: bold;
+  box-shadow: 0px 0px 20px 0px rgba(0,104,249,1);
+  -moz-transition: all .15s ease-in-out;
+  -o-transition: all .15s ease-in-out;
+  -webkit-transition: all .15s ease-in-out;
+  transition: all .15s ease-in-out;
+}
+
+.col-lg-12 > .buttonrow  {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+
+.btn-hover:hover {
+  text-decoration-line: none !important;
+  color: black !important;
+  box-shadow: 0px 0px 20px 0px rgba(244,4,77,.5);
+  height: 80px;
+  background-position: 100% 0;
+  -moz-transition: all .15s ease-in-out;
+  -o-transition: all .15s ease-in-out;
+  -webkit-transition: all .15s ease-in-out;
+  transition: all .15s ease-in-out;
+}
+
+.centerrow {
+  justify-content: center;
+}
+
+.sdk-buttons:focus {
+  outline: none;
+}
+
+.col-lg-12 .sdkbutton-button {
+  color:grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration-line: none;
 }

@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  flex-grow: 1;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+}

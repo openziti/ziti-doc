@@ -10,9 +10,9 @@ import Footer from '@theme/Footer';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
-import GitHubButton from "react-github-btn";
 import StarUs from "../../components/StarUs";
-export default function Layout(props) {
+
+export default function OpenZitiLayout(props) {
   const {
     children,
     noFooter,
@@ -20,32 +20,26 @@ export default function Layout(props) {
     // Not really layout-related, but kept for convenience/retro-compatibility
     title,
     description,
+    bgColor,
   } = props;
   useKeyboardNavigation();
   return (
-    <LayoutProvider style={{backgroundColor: "orange"}}>
-      <PageMetadata title={title} description={description} />
+      <LayoutProvider>
+          <div className={styles.root}>
+              <div className={styles.content}>
+                  <PageMetadata title="title" description="desc" />
 
-      <SkipToContent />
+                  <SkipToContent />
 
-      <AnnouncementBar />
+                  <AnnouncementBar />
 
-      <StarUs/>
+                  <StarUs/>
 
-      <Navbar />
-
-      <div
-        className={clsx(
-          ThemeClassNames.wrapper.main,
-          styles.mainWrapper,
-          wrapperClassName,
-        )}>
-        <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
-          {children}
-        </ErrorBoundary>
-      </div>
-
-      {!noFooter && <Footer />}
-    </LayoutProvider>
+                  <Navbar />
+              </div>
+              {children}
+              <Footer />
+          </div>
+      </LayoutProvider>
   );
 }
