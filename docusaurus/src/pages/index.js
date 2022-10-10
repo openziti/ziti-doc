@@ -169,6 +169,11 @@ export default function Home() {
                             <div className="sdkbutton-text">Go</div>
                         </a>
                         <a className="btn sdk-buttons sdkbutton-button"
+                           href="https://github.com/openziti/ziti-sdk-py/tree/main/sample">
+                            <img src={useBaseUrl("img/python-logo.svg")} className="sdkbutton-image"/>
+                            <div className="sdkbutton-text">Python</div>
+                        </a>
+                        <a className="btn sdk-buttons sdkbutton-button"
                            href="https://github.com/openziti/ziti-sdk-swift">
                             <img src={useBaseUrl("img/swift-logo.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">Swift</div>
