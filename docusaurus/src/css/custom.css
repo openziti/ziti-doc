@@ -45,6 +45,7 @@ html[data-theme="dark"] {
   --ifm-paragraph-margin-top: 0;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --logo-name: "ziti-logo-light.svg"
+  --welcome-page-font-family: "Russo One", "Open Sans"
 }
 
 * {
