@@ -1,21 +1,10 @@
 - name: Controller
   href: controller.md
-  items:
-  - name: Configuration File Example
-    href: sample-controller-config.yaml
 - name: Router
   href: router-overview.md
   items:
   - name: Edge Router
     href: edge-router.md
-    items:
-    - name: Configuration File Example
-      href: sample-edge-router-config.yaml
-#  - name: Fabric Router
-#    href: fabric-router.md
-#    items:
-#    - name: Configuration File Example
-#      href: sample-fabric-router-config.yaml
 - name: PKI
   href: pki.md
 - name: Troubleshooting
