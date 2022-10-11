@@ -27,7 +27,7 @@ export default function OpenZitiLayout(props) {
       <LayoutProvider>
           <div className={styles.root}>
               <div className={styles.content}>
-                  <PageMetadata title="title" description="desc" />
+                  <PageMetadata title="Welcome!" description="OpenZiti is dedicated to make the challenge of secure connectivity simple and accessible by replacing infrastructure with software. The world is software, your secure network needs to be software." />
 
                   <SkipToContent />
 

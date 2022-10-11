@@ -5,8 +5,6 @@
 
 .main {
   display: flex;
-  #flex-direction: column;
-  #background: #62c21c;
   width: 100%;
   min-height: 100%;
   flex-grow: 1;

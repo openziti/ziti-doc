@@ -135,7 +135,6 @@ input[type="radio"]:checked+label:after {
  */
 .footer {
   display: flex;
-  #margin-top: 1.5rem;
 }
 .footer__links {
   margin-bottom: 4.5rem;
@@ -188,7 +187,7 @@ input[type="radio"]:checked+label:after {
   justify-content: center;
 }
 
-.sdk-buttons {
+.sdkbutton-button {
   height: 140px;
   width: 140px;
   font-size: 16px;
@@ -226,7 +225,7 @@ input[type="radio"]:checked+label:after {
   text-decoration-line: none;
 }
 
-.col-lg-12 .sdk-buttons:hover {
+.col-lg-12 .sdkbutton-button:hover {
   text-decoration-line: none !important;
   color: black;
   background: rgba(255, 255, 255, 0.9);
@@ -264,7 +263,7 @@ input[type="radio"]:checked+label:after {
   justify-content: center;
 }
 
-.sdk-buttons:focus {
+.sdkbutton-button:focus {
   outline: none;
 }
 
