@@ -52,13 +52,10 @@ export default function Home() {
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection style={{fontSize:"large"}}>
                 <H1>The Mission</H1>
-                <p>OpenZiti is dedicated to make the challenge of secure connectivity simple and accessible by replacing
-                    infrastructure with software. The world is software, your secure network needs to be software.
-                    OpenZiti is bringing zero trust networking principles directly to
-                    applications through SDKs, the <Highlight>natural evolution</Highlight> of network security. It does
-                    this without losing sight of the journey that comes with the move to zero trust. Not every application
-                    can be recompiled with zero trust principles. The OpenZiti project provides everything you'll need
-                    to add zero trust principles to <Highlight>existing applications</Highlight> as well.
+                <p>OpenZiti is dedicated to making secure connectivity simple and accessible by <Highlight>replacing
+                    infrastructure with software</Highlight>. The world is software, your secure network needs to be software. OpenZiti is bringing
+                    zero trust networking principles directly inside applications through SDKs. The project provides
+                    everything you'll need to add zero trust principles to existing applications as well.
                 </p>
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection style={{fontSize:"large"}}>
