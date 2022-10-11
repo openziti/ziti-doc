@@ -17,6 +17,7 @@
   --ifm-color-primary-light: #a14ded;
   --ifm-color-primary-lighter: #a85aee;
   --ifm-color-primary-lightest: #b776f1;
+  --background-color-1: #ffd0d0;
   --ifm-font-color-base: #3f3f3f;
   --ifm-code-font-size: 95%;
   --ifm-paragraph-margin-bottom: 0;
@@ -38,6 +39,7 @@ html[data-theme="dark"] {
   --ifm-color-primary-light: #d3a9fd;
   --ifm-color-primary-lighter: #ddbcfd;
   --ifm-color-primary-lightest: #e6cffe;
+  --background-color-1: #434862;
   --ifm-font-color-base: #94a3b8;
   --ifm-paragraph-margin-bottom: 0;
   --ifm-paragraph-margin-top: 0;
