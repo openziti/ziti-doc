@@ -48,6 +48,11 @@ html[data-theme="dark"] {
   --logo-name: "ziti-logo-light.svg";
 }
 
+@fontface {
+  font-family: 'Russo One', cursive;
+  src: url('https://fonts.googleapis.com/css?family=Russo+One')
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
