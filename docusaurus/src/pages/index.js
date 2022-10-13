@@ -88,8 +88,8 @@ export default function Home() {
                     own zero trust, high performance network using any Internet connection! Say goodbye to your outmoded VPN.
                 </p>
 
-                <div style={{display:"flex", flexWrap: "wrap", maxWidth: "800px"}}>
-                    <ul>
+                <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center"}}>
+                    <ul style={{maxWidth: "800px"}}>
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
