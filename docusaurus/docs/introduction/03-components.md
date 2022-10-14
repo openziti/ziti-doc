@@ -37,17 +37,26 @@ store the information needed to manage the network.
 ### Ziti Router
 
 Ziti Routers are the fundamental building blocks of the Ziti Network. The routers are responsible for securely and reliably delivering traffic from clients to services. They have two major deployment modes. 
-1. Fabric mode (i.e. network side)
-    1. Link Creation - Mesh
-    Each router can be a dialer (initiating the link creation) and/or a listener (accepting the link creation request). The links created between routers form a network mesh. The routers in the link dial mode only are private and can establish links to all public routers that are at least in the link listen mode or both modes.  At least one router in the listen mode is required to form a network mesh. The links are continously being monitored for latency, packet loss.  Link and Router failures are automatically detected, and the smart routing algorithm will try to avoid failures and route service connections around them if another path across the network exists.
-1. Edge mode (client and service side) 
-    1.Listeners 
-        1. edge
+
+1. **Fabric mode** (i.e. network side)
+    - **Link Creation**
+    
+        Each router can be a dialer (i.e. initiating the link creation) and/or a listener (i.e. accepting the link creation request). The links created between routers form a network mesh. The routers in the link dial mode only are private and can establish links to all public routers that are at least in the link listen mode. In other words, at least one router in the listen mode is required to form a network mesh. The links are continously being monitored for latency, packet loss.  Link and Router failures are automatically detected, and the smart routing algorithm will try to avoid failed routers/links and route service connections around them if another path across the network exists.
+1. **Edge mode** (i.e. client and service side) 
+
+    - **Listeners** 
+
+        - **edge**
+
             This function in conjuction with the Ziti Network Controller allows sdk service and client apps to autheticate, authorize and connect to the Ziti Newtork based on predefined access and service control policies. 
-        1. Tunnel Mode
-            Edge also comes with a tunnel mode, where it works as a network gateway. It can be a default gateway, where it processes all service traffic from a private data center, or can be deloyed along side a default gateway and only process selective service destinations.
-    1. CSR
-    It enables enrollment and management of endpoints that make use of the Ziti SDK.
+
+        - **Tunnel Mode**
+
+            Edge also comes with a tunnel mode, where it works as a network gateway. It can be a default gateway, where it processes all service traffic from a private data center, or can be deloyed along side a default gateway and only forward selective service destinations.
+
+    - **CSR**
+
+        It enables enrollment and management of endpoints that make use of the Ziti SDK.
 
 ### Ziti Edge Clients
 
