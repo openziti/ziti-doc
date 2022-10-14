@@ -34,30 +34,20 @@ overall management of the network easier.
 The Ziti Controller uses an out of process database (Postgres) to
 store the information needed to manage the network.
 
-### Ziti Fabric Router
+### Ziti Router
 
-Ziti Fabric Routers are the fundamental building blocks of the Ziti
-Network. These routers are responsible for securely and reliably
-delivering traffic from one Ziti Network node to the traffic’s
-destination.
-
-Ziti Fabric Routers are linked together to form a mesh network. This mesh is
-constantly being monitored for latency and the fastest paths are
-used when routing traffic to the destination. The monitoring also
-allows for active failover to ensure a reliable network connection
-even in the case of a node failure.
-
-### Ziti Edge Router
-
-Another fundamental building block of the Ziti Network is the
-Ziti Edge Router. The Ziti Edge Router is the entry point for Edge
-Clients connecting to the Ziti Network. The Ziti Edge Router is a
-specialized Ziti Router incorporating the functionality of a Ziti Router to
-enable it to route traffic over the Ziti network as a Ziti Router would
-to a given destination.
-
-The Ziti Edge Router in combination with the Ziti Controller is responsible
-for authenticating and authorizing Ziti Edge Clients.
+Ziti Routers are the fundamental building blocks of the Ziti Network. The routers are responsible for securely and reliably delivering traffic from clients to services. They have two major deployment modes. 
+1. Fabric mode (i.e. network side)
+    1. Link Creation - Mesh
+    Each router can be a dialer (initiating the link creation) and/or a listener (accepting the link creation request). The links created between routers form a network mesh. The routers in the link dial mode only are private and can establish links to all public routers that are at least in the link listen mode or both modes.  At least one router in the listen mode is required to form a network mesh. The links are continously being monitored for latency, packet loss.  Link and Router failures are automatically detected, and the smart routing algorithm will try to avoid failures and route service connections around them if another path across the network exists.
+1. Edge mode (client and service side) 
+    1.Listeners 
+        1. edge
+            This function in conjuction with the Ziti Network Controller allows sdk service and client apps to autheticate, authorize and connect to the Ziti Newtork based on predefined access and service control policies. 
+        1. Tunnel Mode
+            Edge also comes with a tunnel mode, where it works as a network gateway. It can be a default gateway, where it processes all service traffic from a private data center, or can be deloyed along side a default gateway and only process selective service destinations.
+    1. CSR
+    It enables enrollment and management of endpoints that make use of the Ziti SDK.
 
 ### Ziti Edge Clients
 
