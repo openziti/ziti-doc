@@ -37,7 +37,7 @@ export default function Home() {
 
     return (
         <OpenZitiLayout>
-            <OpenZitiHorizontalSection>
+            <div style={{display:"flex", alignItems:"center", flexDirection:"column"}}>
                 <ThemedImage
                     alt="OpenZiti Logo"
                     style={{paddingTop: "75px", paddingBottom: "10px", width:"50%", alignSelf: "center", minWidth: "400px"}}
@@ -49,7 +49,7 @@ export default function Home() {
                 <div style={{display:"flex", justifyContent:"center"}}>
                 <p style={{fontSize: "x-large"}}>-- Replacing Infrastructure With Software --</p>
                 </div>
-            </OpenZitiHorizontalSection>
+            </div>
             <OpenZitiHorizontalSection style={{fontSize:"large"}}>
                 <H1>The Mission</H1>
                 <p>OpenZiti is dedicated to making secure connectivity simple and accessible by <Highlight>replacing
@@ -88,8 +88,8 @@ export default function Home() {
                     own zero trust, high performance network using any Internet connection! Say goodbye to your outmoded VPN.
                 </p>
 
-                <div style={{display:"flex", flexWrap: "wrap", maxWidth: "800px"}}>
-                    <ul>
+                <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center"}}>
+                    <ul style={{maxWidth: "800px"}}>
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>

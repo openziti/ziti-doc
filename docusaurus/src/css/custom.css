@@ -178,7 +178,6 @@ input[type="radio"]:checked+label:after {
   text-transform: uppercase;
 }
 
-
 @media (min-width: 1416px) {
   .main-wrapper {
     align-self: center;

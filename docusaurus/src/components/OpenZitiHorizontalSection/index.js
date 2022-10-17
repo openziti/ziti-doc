@@ -16,7 +16,7 @@ export default function OpenZitiHorizontalSection(props) {
 
   return (
       <div className={styles.root} style={style}>
-          <div className={styles.content} style={{padding:"20px 20px"}}>
+          <div className={styles.content}>
               {children}
           </div>
       </div>
