@@ -8,6 +8,7 @@
 /**/obj/
 _site
 .vscode
+.docusaurus/
 
 
 # ignores for content generated before the doc site
