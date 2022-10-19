@@ -3,6 +3,6 @@
     "framework": "docusaurus-2",
     "outputDirectory": "build",
     "github": {
-        "silent": true
-      }
+        "silent": false
+    }
 }
