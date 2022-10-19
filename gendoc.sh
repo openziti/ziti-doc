@@ -70,7 +70,7 @@ echo "- done processing opts"
 
 # if in Docfx mode, not Docusaurus mode, then make sure the required programs are available 
 if [[ "${ZITI_DOCUSAURUS}" == false ]]; then
-  if [[ "" = "$DOCFX_EXE" ]]; then
+  if [[ -z "${DOCFX_EXE:-}" ]]; then
       shopt -s expand_aliases
       if [[ -f "~/.bash_aliases" ]]; then
         source "${HOME}/.bash_aliases"
@@ -93,7 +93,7 @@ if [[ "${ZITI_DOCUSAURUS}" == false ]]; then
   done
 
   # are requirements ? if yes, stop here and help 'em out
-  if ! [[ "" = "${missing_requirements}" ]]; then
+  if ! [[ -z "${missing_requirements:-}" ]]; then
       echo " "
       echo "The commands listed below are required to be on the path for this script to function properly."
       echo "Please ensure the commands listed are on the path and then try again."
