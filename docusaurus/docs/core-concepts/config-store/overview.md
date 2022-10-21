@@ -1,10 +1,8 @@
-# Configs
+# Service Configurations
 
-Configs are created and updated through the edge-management API and consumed by Edge SDKs through the edge-client API. Developers may define Config Types for storing arbitrary data in Ziti for use by their application. Configs and Config Types are Ziti entities. Each Config is an instance of a Config Type. A Config Type is defined by a JSON schema.
+Ziti Service Configurations, henceforth "Configs", may be associated with a service to provide metadata for the application that is being delivered by that service.
 
-## Why Centralized Configuration?
-
-One might ask why have this feature in Ziti when applications can store configuration data in local configuration files, databases, etc. While this approach works, centralized management makes deployments much easier. It can be difficult or impossible to update a file on a device out in the field, whereas updating the Config in Ziti is easier because Config changes will automatically propagate to all other Ziti SDK apps.
+Configs are created and updated through the edge-management API and consumed by Edge SDKs through the edge-client API. Configs and Config Types are Ziti entities. Each Config is an instance of a Config Type.
 
 ## Overview
 
@@ -30,22 +28,22 @@ This configuration model has the following properties:
 
 * Different applications can have their own Configs for the same service
 * Applications can have multiple Config Types for themselves where it makes sense
-* Ziti tunnelers use standard Config Types for intercept (client) side and hosting (server) side
+* There are tunneler Config Types for intercept (client) side and hosting (server) side
 * Since an application can support multiple Config Types, applications can version their Config Types as their needs change
 
-## Standard Config Types
+## Tunneler Config Types
 
 The Ziti tunnelers are themselves SDK applications and so they serve as an example of how configuration data can be used.
 
 * Tunnelers need to know what ip/dns and port(s) to intercept for services they are proxying on the intercept (client) side
 * Tunnelers need to know where to forward to destination servers on the hosting (server) side
 
-Ziti provides a handful of standard Config Types for use with tunnelers.
+Ziti provides a handful of tunneler Config Types.
 
 The most relevant Config Types:
 
-* [`intercept.v1`](./standard-config-type-intercept.v1.md): used by a tunneler to configure itself as a proxy for a particular service
-* [`host.v1`](./standard-config-type-host.v1.md): describes the destination server for a Ziti service hosted by a tunneler
+* [`intercept.v1`](./tunneler-config-type-intercept.v1.md): used by a tunneler to configure itself as a proxy for a particular service
+* [`host.v1`](./tunneler-config-type-host.v1.md): describes the destination server for a Ziti service hosted by a tunneler
 
 Other Config Types:
 
@@ -53,4 +51,4 @@ Other Config Types:
 * `ziti-tunneler-client.v1`: predecessor of `intercept.v1`
 * `ziti-tunneler-server.v1`: predecessor of `host.v1`
 
-The standard Config Types' schemas are maintained [in GitHub](https://github.com/openziti/edge/tree/main/tunnel/entities).
+The tunneler Config Types' schemas are maintained [in GitHub](https://github.com/openziti/edge/tree/main/tunnel/entities).
