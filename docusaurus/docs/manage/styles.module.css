@@ -1,20 +1,34 @@
 .blue {
     color:blue;
-  }
-  .blue[aria-selected='true'] {
-    border-bottom-color: blue;
-  }
-  
-  .orange {
-    color: orange;
-  }
-  .orange[aria-selected='true'] {
-    border-bottom-color: orange;
-  }
-  
-  .green {
-    color: green;
-  }
-  .green[aria-selected='true'] {
-    border-bottom-color: green;
-  }
+}
+.blue[aria-selected='true'] {
+  border-bottom-color: blue;
+}
+
+.orange {
+  color: orange;
+}
+.orange[aria-selected='true'] {
+  border-bottom-color: orange;
+}
+
+.green {
+  color: green;
+}
+.green[aria-selected='true'] {
+  border-bottom-color: green;
+}
+
+.red {
+  color: red;
+}
+.red[aria-selected='true'] {
+  border-bottom-color: red;
+}
+
+.black {
+  color: black;
+}
+.black[aria-selected='true'] {
+  border-bottom-color: black;
+}
