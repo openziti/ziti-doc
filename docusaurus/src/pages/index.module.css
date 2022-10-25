@@ -5,15 +5,13 @@
 
 .main {
   display: flex;
-  #flex-direction: column;
-  #background: #62c21c;
   width: 100%;
   min-height: 100%;
   flex-grow: 1;
 }
 
 .h1 {
-  font-family: 'Russo One', 'Open Sans', Tahoma, Helvetica, sans-serif;
+  font-family: var(--welcome-page-font-family);
   font-size: xxx-large;
 }
 p.h2{

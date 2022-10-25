@@ -37,23 +37,35 @@ export default function Home() {
 
     return (
         <OpenZitiLayout>
-            <OpenZitiHorizontalSection>
+            <div style={{display:"flex", alignItems:"center", flexDirection:"column"}}>
                 <ThemedImage
                     alt="OpenZiti Logo"
-                    style={{paddingTop: "75px", paddingBottom: "50px", width:"50%", alignSelf: "center", minWidth: "400px"}}
+                    style={{paddingTop: "75px", paddingBottom: "10px", width:"50%", alignSelf: "center", minWidth: "400px"}}
                     sources={{
                         light: useBaseUrl('/img/ziti-logo-dark.svg'),
                         dark: useBaseUrl('/img/ziti-logo-light.svg'),
                     }}
                 />
-            </OpenZitiHorizontalSection>
+                <div style={{display:"flex", justifyContent:"center"}}>
+                <p style={{fontSize: "x-large"}}>-- Replacing Infrastructure With Software --</p>
+                </div>
+            </div>
             <OpenZitiHorizontalSection style={{fontSize:"large"}}>
                 <H1>The Mission</H1>
-                <p>Made by developers, for developers, OpenZiti is bringing zero trust networking principles directly to
-                    applications through SDKs, the <Highlight>natural evolution</Highlight> of network security. It does
-                    this without losing sight of the journey that comes with the move to zero trust. Not every application
-                    can be recompiled with zero trust principles. The OpenZiti project provides everything you'll need
-                    to add zero trust principles to <Highlight>existing applications</Highlight> as well.
+                <p>OpenZiti is dedicated to making secure connectivity simple and accessible by <Highlight>replacing
+                    infrastructure with software</Highlight>. The world is software, your secure network needs to be software. OpenZiti is bringing
+                    zero trust networking principles directly inside applications through SDKs. The project provides
+                    everything you'll need to add zero trust principles to existing applications as well.
+                </p>
+            </OpenZitiHorizontalSection>
+            <OpenZitiHorizontalSection style={{fontSize:"large"}}>
+                <H1>Who is OpenZiti For?</H1>
+                <p>Software is for <Highlight>everyone </Highlight>- that's why its eating the world. Is OpenZiti for:
+                <ul>
+                    <li>developers - yes!</li>
+                    <li>operators - yes!</li>
+                    <li>security folks - yes!</li>
+                </ul>
                 </p>
                 <p>OpenZiti provides all the tooling needed to run your own zero trust overlay network. If you would rather
                     not maintain your own network, you can let NetFoundry manage the network for you. Head over to
@@ -76,8 +88,8 @@ export default function Home() {
                     own zero trust, high performance network using any Internet connection! Say goodbye to your outmoded VPN.
                 </p>
 
-                <div style={{display:"flex", flexWrap: "wrap", maxWidth: "800px"}}>
-                    <ul>
+                <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center"}}>
+                    <ul style={{maxWidth: "800px"}}>
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
@@ -114,26 +126,26 @@ export default function Home() {
                 </div>
 
             </OpenZitiHorizontalSection>
-            <OpenZitiHorizontalSection style={{backgroundColor: "aliceblue"}}>
+            <OpenZitiHorizontalSection style={{backgroundColor: "var(--background-color-1)"}}>
                 <H1>Get Started - Build a Network!</H1>
                 <p>Ziti make zero trust easy but you'll need an overlay network in order to start on your zero trust
                     journey. We recommend you start with a simple network. Once you understand the basic concepts it can make
                     more sense to move on to more complex network topologies. Choose what sort of network you want to build.
                 </p>
-                <div style={{display:"flex", alignItems:"center", alignContent: "center", alignSelf:"center"}}>
-                    <a className="btn btn-hover sdkbutton-button"
+                <div style={{display:"flex", flexWrap: "wrap", alignItems:"center", alignContent: "center", alignSelf:"center"}}>
+                    <a className="btn-hover sdkbutton-button"
                        href={useBaseUrl("docs/quickstarts/network/local-no-docker")}>
                         <div className="sdkbutton-text">Everything Local<br/>(Not Docker)</div>
                     </a>
-                    <a className="btn btn-hover sdkbutton-button"
+                    <a className="btn-hover sdkbutton-button"
                        href={useBaseUrl("docs/quickstarts/network/local-with-docker")}>
                         <div className="sdkbutton-text">Everything Local<br/>(I love Docker)</div>
                     </a>
-                    <a className="btn btn-hover sdkbutton-button"
+                    <a className="btn-hover sdkbutton-button"
                        href={useBaseUrl("docs/quickstarts/network/local-docker-compose")}>
                         <div className="sdkbutton-text">Everything Local<br/>(Docker Compose)</div>
                     </a>
-                    <a className="btn btn-hover sdkbutton-button"
+                    <a className="btn-hover sdkbutton-button"
                        href={useBaseUrl("docs/quickstarts/network/hosted")}>
                         <div className="sdkbutton-text">Host It Myself<br/>(I have a server)</div>
                     </a>
@@ -158,42 +170,42 @@ export default function Home() {
                     integrate via <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">FFI.</a></p>
                 <div className="col-lg-12">
                     <div className="centerrow buttonrow">
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href="https://github.com/openziti/ziti-sdk-c/tree/main/programs">
                             <img src={useBaseUrl("img/clang-logo.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">C Lang</div>
                         </a>
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href="https://github.com/openziti/sdk-golang/tree/main/example">
                             <img src={useBaseUrl("img/golang-logo.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">Go</div>
                         </a>
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href="https://github.com/openziti/ziti-sdk-py/tree/main/sample">
                             <img src={useBaseUrl("img/python-logo.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">Python</div>
                         </a>
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href="https://github.com/openziti/ziti-sdk-swift">
                             <img src={useBaseUrl("img/swift-logo.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">Swift</div>
                         </a>
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href="https://github.com/openziti/ziti-sdk-jvm/tree/main/samples">
                             <img src={useBaseUrl("img/kotlin-logo.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">Android</div>
                         </a>
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href="https://github.com/openziti/ziti-sdk-jvm/tree/main/samples">
                             <img src={useBaseUrl("img/java-logo.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">Java</div>
                         </a>
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href="https://github.com/openziti/ziti-sdk-nodejs">
                             <img src={useBaseUrl("img/nodejs.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">NodeJS</div>
                         </a>
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href="https://github.com/openziti/ziti-sdk-csharp">
                             <img src={useBaseUrl("img/csharp-logo.svg")} className="sdkbutton-image"/>
                             <div className="sdkbutton-text">C# (.NET)</div>
@@ -210,7 +222,7 @@ export default function Home() {
                 </p>
                 <div className="col-lg-12">
                     <div className="centerrow buttonrow sdkbuttons">
-                        <a className="btn sdk-buttons sdkbutton-button"
+                        <a className="sdkbutton-button"
                            href={useBaseUrl("docs/quickstarts/services/ztha")}>
                             <img src="https://ziti.dev/wp-content/uploads/2020/02/codealt.png"
                                  className="sdkbutton-image"/>

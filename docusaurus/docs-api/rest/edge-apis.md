@@ -14,7 +14,7 @@ available from a running controller directly at:
 - https://\<host\>:\<port\>/edge/client/v1/docs
 - https://\<host\>:\<port\>/edge/management/v1/docs
 
-Where `<host>:<port>` should be replaced with the values configured for the APIs in the [`web` section](/#web-configuration-section)
+Where `<host>:<port>` should be replaced with the values configured for the APIs in the [`web` section](#web-configuration-section)
 
 ## Edge Management API
 
