@@ -1,0 +1,8 @@
+{
+    "buildCommand": "../gendoc.sh -d -l -V",
+    "framework": "docusaurus-2",
+    "outputDirectory": "build",
+    "github": {
+        "silent": false
+    }
+}
