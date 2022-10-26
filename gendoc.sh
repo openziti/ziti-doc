@@ -136,9 +136,9 @@ else
     sed -E -i "s|(baseUrl:).*,|\1 '/',|" ${ZITI_DOC_GIT_LOC}/../docusaurus.config.js
   fi
   pushd ${ZITI_DOC_GIT_LOC}/..
-  echo "running yarn install in ${PWD}"
+  echo "running 'yarn install' in ${PWD}"
   yarn install --frozen-lockfile
-  echo "running npm run build in ${PWD}"
+  echo "running 'yarn build' in ${PWD}"
   yarn build
   popd
 fi

@@ -15,6 +15,7 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
+  onDuplicateRoutes: 'throw',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -55,6 +56,113 @@ const config = {
         path: 'docs-guides',
         routeBasePath: 'guides',
         sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        // fromExtensions: ['html', 'htm'], // /myPage.html -> /myPage
+        // toExtensions: ['exe', 'zip'], // /myAsset -> /myAsset.zip (if latter exists)
+        redirects: [
+          {
+            to: '/docs/introduction/intro',
+            from: ['/ziti/overview.html'],
+          },
+          {
+            to: '/docs/quickstarts/network/',
+            from: ['/ziti/quickstarts/quickstart-overview'],
+          },
+          {
+            to: '/docs/quickstarts/network/local-no-docker',
+            from: ['/ziti/quickstarts/network/local-no-docker.html'],
+          },
+          {
+            to: '/docs/quickstarts/network/hosted',
+            from: ['/ziti/quickstarts/network/hosted.html'],
+          },
+          {
+            to: '/docs/core-concepts/clients/choose',
+            from: ['/ziti/clients/which-client.html'],
+          },
+          {
+            to: '/docs/core-concepts/clients/tunnelers/',
+            from: ['/ziti/clients/tunneler.html'],
+          },
+          {
+            to: '/docs/core-concepts/services/overview',
+            from: ['/ziti/services/overview.html'],
+          },
+          {
+            to: '/docs/core-concepts/identities/overview',
+            from: ['/ziti/identities/overview.html'],
+          },
+          // {
+          //   to: '???',
+          //   from: ['/articles/zitification/prometheus/part1.html'],
+          // },
+          {
+            to: '/docs/quickstarts/network/local-with-docker',
+            from: ['/ziti/quickstarts/network/local-with-docker.html'],
+          },
+          {
+            to: '/docs/introduction/zitiSoftwareArchitecture',
+            from: ['/ziti/software-architecture.html'],
+          },
+          {
+            to: '/docs/quickstarts/network/local-docker-compose',
+            from: ['/ziti/quickstarts/network/local-docker-compose.html'],
+          },
+          {
+            to: '/docs/quickstarts/services/',
+            from: ['/ziti/quickstarts/services/index.html'],
+          },
+          {
+            to: '/docs/core-concepts/config-store/overview',
+            from: ['/ziti/config-store/overview.html'],
+          },
+          // {
+          //   to: '???',
+          //   from: ['/articles/index.html'],
+          // },
+          {
+            to: '/docs/quickstarts/zac/installation',
+            from: ['/ziti/quickstarts/zac/installation.html'],
+          },
+          {
+            to: '/docs/core-concepts/clients/tunnelers/linux',
+            from: ['/ziti/clients/linux.html'],
+          },
+          {
+            to: '/docs/core-concepts/security/overview',
+            from: ['/ziti/security/overview.html'],
+          },
+          // {
+          //   to: '/glossary/glossary',
+          //   from: ['/glossary/glossary.html'],
+          // },
+          {
+            to: '/docs/manage/controller',
+            from: ['/ziti/manage/controller.html'],
+          },
+          {
+            to: '/docs/core-concepts/identities/creating',
+            from: ['/ziti/identities/creating.html'],
+          },
+          {
+            to: '/guides/hsm/',
+            from: ['/ziti/quickstarts/hsm-overview.html'],
+          },
+        ],
+        // createRedirects(existingPath) {
+        //   if (existingPath.includes('/community')) {
+        //     // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
+        //     return [
+        //       existingPath.replace('/community', '/docs/team'),
+        //       existingPath.replace('/community', '/docs/support'),
+        //     ];
+        //   }
+        //   return undefined; // Return a falsy value: no redirect created
+        // },
       },
     ],
   ],
