@@ -71,12 +71,13 @@ const config = {
             'https://github.com/openziti/ziti-doc/tree/main/docusaurus',
 
         },
-        blog: {
-          blogTitle: 'OpenZiti Technical Blog',
-          blogDescription: 'OpenZiti Blog Desc',
-          showReadingTime: true,
+        blog: false,
+        // {
+          // blogTitle: 'OpenZiti Technical Blog',
+          // blogDescription: 'OpenZiti Blog Desc',
+          // showReadingTime: true,
 
-        },
+        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -126,11 +127,11 @@ const config = {
             position: 'left',
             activeBaseRegex: `/glossary/`,
           },
-          {
-            to: '/blog',
-            label: 'Blog',
-            position: 'right'
-          },
+          // {
+          //   to: '/blog',
+          //   label: 'Blog',
+          //   position: 'right'
+          // },
           {
             href: 'https://github.com/openziti/ziti',
             label: 'GitHub',
