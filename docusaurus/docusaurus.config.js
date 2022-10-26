@@ -321,7 +321,7 @@ const config = {
             from: ['/ziti/metrics/metric-types.html'],
           },
           {
-            to: '/docs/core-concepts/security/authorization/policies/overview#service-edge-router-policies-1',
+            to: '/docs/core-concepts/security/authorization/policies/creating-service-edge-router-policies',
             from: ['/ziti/security/authorization/policies/creating-service-edge-router-policies.html'],
           },
           {
@@ -351,6 +351,34 @@ const config = {
           {
             to: '/docs/core-concepts/security/authentication/api-session-certificates',
             from: ['/ziti/security/authentication/api-session-certificates.html'],
+          },
+          // {
+          //   to: '???',
+          //   from: ['/articles/bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust.html'],
+          // },
+          {
+            to: '/docs/core-concepts/security/authorization/policies/creating-service-policies',
+            from: ['/ziti/security/authorization/policies/creating-service-policies.html'],
+          },
+          // {
+          //   to: '???',
+          //   from: ['/articles/bootstrapping-trust/part-03.certificates.html'],
+          // },
+          {
+            to: '/api/rest/',
+            from: ['/ziti/apis/edge-apis.html'],
+          },
+          {
+            to: '/docs/core-concepts/config-store/overview',
+            from: ['/ziti/config-store/overview'],
+          },
+          {
+            to: '/docs/core-concepts/metrics/file',
+            from: ['/ziti/metrics/file.html'],
+          },
+          {
+            to: '/docs/core-concepts/metrics/inspect',
+            from: ['/ziti/metrics/inspect.html'],
           },
         ],
         // createRedirects(existingPath) {
