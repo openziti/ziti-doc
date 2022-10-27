@@ -65,6 +65,10 @@ const config = {
         // toExtensions: ['exe', 'zip'], // /myAsset -> /myAsset.zip (if latter exists)
         redirects: [
           {
+            to: '/',
+            from: ['/docusaurus'],
+          },
+          {
             to: '/docs/introduction/intro',
             from: ['/ziti/overview.html'],
           },
@@ -381,15 +385,16 @@ const config = {
             from: ['/ziti/metrics/inspect.html'],
           },
         ],
-        createRedirects(existingPath) {
-          if (existingPath.startsWith('/docusaurus')) {
-            // Redirect from /docusaurus/X to /X
-            return [
-              existingPath.replace('/docusaurus', '/'),
-            ];
-          }
-          return undefined; // Return a falsy value: no redirect created
-        },
+        // createRedirects(existingPath) {
+        //   if (existingPath.includes('/community')) {
+        //     // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
+        //     return [
+        //       existingPath.replace('/community', '/docs/team'),
+        //       existingPath.replace('/community', '/docs/support'),
+        //     ];
+        //   }
+        //   return undefined; // Return a falsy value: no redirect created
+        // },
       },
     ],
   ],
