@@ -32,6 +32,13 @@ const config = {
 
   plugins: [
     [
+      '@docusaurus/plugin-google-analytics',
+      {
+        trackingID: 'G-THVRRJ3GLE',
+        anonymizeIP: true,
+      },
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'docs-api',
