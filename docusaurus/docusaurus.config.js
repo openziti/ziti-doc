@@ -11,7 +11,7 @@ const config = {
   title: 'OpenZiti',
   tagline: 'OpenZiti Tagline',
   url: 'https://openziti.io',
-  baseUrl: '/docusaurus/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
