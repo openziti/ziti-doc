@@ -25,8 +25,18 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --logo-name: "ziti-logo-dark.svg";
   --welcome-page-font-family: "Russo One", "Open Sans", Tahoma, Helvetica, sans-serif;
+  --h1-size: 50px;
 }
-
+@media (max-width: 767px) {
+  html[data-theme="dark"] {
+    --h1-size: 30px;
+  }
+}
+@media (max-width: 767px) {
+  html[data-theme="light"] {
+    --h1-size: 30px;
+  }
+}
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme="dark"] {
   --ifm-background-color: #111827;
@@ -42,8 +52,6 @@ html[data-theme="dark"] {
   --ifm-color-primary-lightest: #e6cffe;
   --background-color-1: #434862;
   --ifm-font-color-base: #94a3b8;
-  --ifm-paragraph-margin-bottom: 0;
-  --ifm-paragraph-margin-top: 0;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --logo-name: "ziti-logo-light.svg";
 }
