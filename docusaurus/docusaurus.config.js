@@ -65,6 +65,10 @@ const config = {
         // toExtensions: ['exe', 'zip'], // /myAsset -> /myAsset.zip (if latter exists)
         redirects: [
           {
+            to: '/',
+            from: ['/docusaurus'],
+          },
+          {
             to: '/docs/introduction/intro',
             from: ['/ziti/overview.html'],
           },
