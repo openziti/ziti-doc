@@ -211,10 +211,13 @@ You will need the token file or its contents to enroll. Enrollment is the act of
 ziti-edge-tunnel run --verbose=2 --dns-ip-range=100.64.0.1/10 --identity-dir=/opt/openziti/etc/identities
 ```
 
-To learn more about tunneler options, please refer to this [doc](/docs/core-concepts/extra/tunneler-options)
+To learn more about tunneler options, please refer to this [doc](linux-tunnel-options)
 
 ## Run with Docker
 
 Please reference the [Docker README](https://github.com/openziti/ziti-tunnel-sdk-c/tree/main/docker#readme) for guidance and examples!
 
 
+## Troubleshooting
+
+Please refer to the [trobleshooting guild](linux-tunnel-troubleshooting)
