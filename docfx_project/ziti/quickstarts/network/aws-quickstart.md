@@ -1,1 +1,0 @@
-Ziti Edge Developer Edition has been replaced. See [here](../quickstart-overview.md) for current deployment options.
