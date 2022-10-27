@@ -19,13 +19,12 @@ set -e
 script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "$script_root"
 
-SKIP_GIT=""
-SKIP_LINKED_DOC=""
-SKIP_CLEAN=""
-WARNINGS_AS_ERRORS=""
+: ${SKIP_GIT:=no}
+: ${SKIP_LINKED_DOC:=no}
+: ${SKIP_CLEAN:=no}
 ZITI_DOC_GIT_LOC="${script_root}/docfx_project"
 DOC_ROOT_TARGET="${script_root}/docs-local/api"
-: ${ZITI_DOCUSAURUS:=false}
+: ${ZITI_DOCUSAURUS:=no}
 : ${WEB_HOST:=gh_pages}
 
 echo "- processing opts"
@@ -50,7 +49,7 @@ while getopts ":gwlcdfV" opt; do
       ;;
     d ) # docusaurus
       echo "- building docusaurus"
-      ZITI_DOCUSAURUS="true"
+      ZITI_DOCUSAURUS="yes"
       ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
       DOC_ROOT_TARGET="${script_root}/docusaurus/static/api"
       echo "- building docusaurus to ${ZITI_DOC_GIT_LOC}"
@@ -69,7 +68,7 @@ done
 echo "- done processing opts"
 
 # if in Docfx mode, not Docusaurus mode, then make sure the required programs are available 
-if [[ "${ZITI_DOCUSAURUS}" == false ]]; then
+if [[ "${ZITI_DOCUSAURUS}" == no ]]; then
   if [[ -z "${DOCFX_EXE:-}" ]]; then
       shopt -s expand_aliases
       if [[ -f "~/.bash_aliases" ]]; then
@@ -105,10 +104,10 @@ if [[ "${ZITI_DOCUSAURUS}" == false ]]; then
   fi
 fi
 
-if [[ ! "${SKIP_GIT}" == "yes" ]]; then
+if [[ "${SKIP_GIT}" == no ]]; then
   echo "updating dependencies by rm/checkout"
   mkdir -p "${ZITI_DOC_GIT_LOC}"
-  if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
+  if [[ "${SKIP_CLEAN}" == no ]]; then
     rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
   fi
   git config --global --add safe.directory $(pwd)
@@ -119,33 +118,16 @@ if [[ ! "${SKIP_GIT}" == "yes" ]]; then
   clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
 fi
 
-if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
-if test -d "${DOC_ROOT_TARGET}"; then
-  # specifically using ../ziti-doc just to remove any chance to rm something unintended
-  echo removing previous build at: rm -r "${DOC_ROOT_TARGET}"
-  rm -r "${DOC_ROOT_TARGET}" || true
-fi
-fi
-
-if [[ "${ZITI_DOCUSAURUS}" == "false" ]]; then
-  pushd ${ZITI_DOC_GIT_LOC}
-  docfx build ${WARNINGS_AS_ERRORS}
-  popd
-else
-  if [[ ${WEB_HOST} == vercel ]]; then
-    sed -E -i "s|(baseUrl:).*,|\1 '/',|" ${ZITI_DOC_GIT_LOC}/../docusaurus.config.js
+if [[ "${SKIP_CLEAN}" == no ]]; then
+  if test -d "${DOC_ROOT_TARGET}"; then
+    # specifically using ../ziti-doc just to remove any chance to rm something unintended
+    echo removing previous build at: rm -r "${DOC_ROOT_TARGET}"
+    rm -r "${DOC_ROOT_TARGET}" || true
   fi
-  pushd ${ZITI_DOC_GIT_LOC}/..
-  echo "running yarn install in ${PWD}"
-  yarn install --frozen-lockfile
-  echo "running npm run build in ${PWD}"
-  yarn build
-  popd
 fi
 
-if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
-
-  if [[ "${ZITI_DOCUSAURUS}" == "true" ]]; then
+if [[ "${SKIP_LINKED_DOC}" == no ]]; then
+  if [[ "${ZITI_DOCUSAURUS}" == yes ]]; then
     echo "=================================================="
     #echo "charp: building the c# sdk docs"
     #cp -r "${script_root}/docfx_project/templates" "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/"
@@ -201,3 +183,20 @@ if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
       popd
   fi
 fi
+
+if [[ "${ZITI_DOCUSAURUS}" == no ]]; then
+  pushd ${ZITI_DOC_GIT_LOC}
+  docfx build ${WARNINGS_AS_ERRORS:-}
+  popd
+else
+  if [[ ${WEB_HOST} == vercel ]]; then
+    sed -E -i "s|(baseUrl:).*,|\1 '/',|" ${ZITI_DOC_GIT_LOC}/../docusaurus.config.js
+  fi
+  pushd ${ZITI_DOC_GIT_LOC}/..
+  echo "running 'yarn install' in ${PWD}"
+  yarn install --frozen-lockfile
+  echo "running 'yarn build' in ${PWD}"
+  yarn build
+  popd
+fi
+
