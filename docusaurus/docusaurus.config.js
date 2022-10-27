@@ -435,6 +435,29 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'EYL355ZRV9',
+  
+        // Public API key: it is safe to commit it
+        apiKey: '96f3340e859a20220001b4a0bb73c451',
+  
+        indexName: 'prod_DOCUSAURUS',
+  
+        // Optional: see doc section below
+        contextualSearch: true,
+  
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        externalUrlRegex: 'openziti\\.github\\.io',
+  
+        // Optional: Algolia search parameters
+        searchParameters: {},
+  
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+  
+        //... other Algolia params
+      },
       docs: {
         sidebar: {
           hideable: true,
