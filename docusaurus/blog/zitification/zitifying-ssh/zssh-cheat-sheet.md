@@ -1,3 +1,4 @@
+```bash
 # establish some variables which are used below
 service_name=zsshSvc
 client_identity="${service_name}"Client
@@ -24,3 +25,4 @@ ziti edge create config "${service_name}"-client-config intercept.v1 '{"protocol
 ziti edge create service "${service_name}" --configs "${service_name}"-client-config,"${service_name}"-host.v1
 ziti edge create service-policy "${service_name}"-binding Bind --service-roles '@'"${service_name}" --identity-roles '#'"${service_name}"'ServerEndpoints'
 ziti edge create service-policy "${service_name}"-dialing Dial --service-roles '@'"${service_name}" --identity-roles '#'"${service_name}"'ClientEndpoints'
+```

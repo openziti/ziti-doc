@@ -119,7 +119,7 @@ Consider the following PKI setup:
 
 Visually this would appear as follows:
 
-<img src="./images/chains.png" style="width: 50%; margin: 0 auto; display: block;"/>
+![Chains](./images/chains.png)
 
 This PKI has two chains of trust: Chain A and Chain B. They are called
 chains because the signatures link the certificates together. Root A has

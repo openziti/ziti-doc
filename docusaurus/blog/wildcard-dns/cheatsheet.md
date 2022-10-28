@@ -1,3 +1,5 @@
+
+```bash
 # ------------- start docker 
 docker-compose up
 
@@ -75,3 +77,4 @@ ziti edge delete service-policy wildcard.web.test.service.dial.zdew
 ziti edge create service-policy wildcard.web.test.service.dial.zdew Dial --service-roles "@wildcard.web.test.service" --identity-roles "@zdewclint"
 
 
+```

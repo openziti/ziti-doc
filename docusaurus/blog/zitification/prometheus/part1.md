@@ -45,7 +45,7 @@ I don't know about you, but historically when I've thought about a metrics colle
 file or some library that pushes rows into a giant data lake in the cloud. I don't generally think about a solution that implements
 poll-based metrics. Often, this is because the target of a poll-based collecting agent will probably be behind a firewall.
 
-<img src="./fw.png" style="display: block;margin-left: auto;margin-right: auto;"/>
+![FW](./fw.png)
 
 As you would expect, firewalls make it exceptionally difficult to implement a poll-based solution as firewalls have been known to make a
 habit of preventing external actors from accessing random http servers behind it! After all, that is their primary function!
@@ -132,7 +132,7 @@ issues. When applying OpenZiti, the goal will be to strengthen our security post
 
 #### Figure 2 - After OpenZiti
 
-<img src="./kubernetes-prometheus-after.svg" style="display: block;margin-left: auto;margin-right: auto;"/>
+![after](./kubernetes-prometheus-after.svg)
 
 ### Taking a Closer Look After OpenZiti
 

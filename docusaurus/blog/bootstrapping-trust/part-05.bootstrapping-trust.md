@@ -35,11 +35,11 @@ Trust network without the hassle of setting it up yourself. Together
 they are a powerful combination of optimized long haul routing and trust
 management.
 
-<img src="./images/fabric-edge.png" style="width: 25%; margin: 0 auto; display: block;"/>
+![Fabric Edge](./images/fabric-edge.png)
 
 A small scale example Ziti system appears as follows:
 
-<img src="./images/ziti-system.png" style="width: 80%; margin: 0 auto; display: block;"/>
+![Ziti System](./images/ziti-system.png)
 
 Ziti Edge has the concepts of identities for endpoint SDKs and routers.
 Both require certificates signed by a trusted CA. Ziti can generate the
@@ -104,8 +104,7 @@ verifying each step. This process does not suffer from man-in-the-middle
 attacks. It provides many benefits! Below is a detailed image of each
 step of the enrollment process.
 
-<img src="./images/enrollment-full.png" style="width: 90%; margin: 0 auto; display: block;"/>
-
+![Enrollment Full](./images/enrollment-full.png)
 
 Let's break those steps down:
 

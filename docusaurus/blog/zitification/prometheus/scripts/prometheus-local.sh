@@ -1,4 +1,4 @@
-curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docfx_project/articles/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
+curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docfx_project/blog/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
 
 ziti edge create identity user local.prometheus.id -o /tmp/prometheus/local.prometheus.id.jwt -a "reflectz-clients","prometheus-clients"
 ziti edge enroll /tmp/prometheus/local.prometheus.id.jwt -o /tmp/prometheus/local.prometheus.id.json

@@ -17,7 +17,7 @@ created_
 
 As described in [the previous article](./part1.md), Prometheus really prefers to be able to gather metrics from the targets it is
 monitoring. When the target is behind a firewall, you will be left with two choices.
-<img src="https://github.com/openziti/branding/raw/main/images/ziggy/svg/Ziggy%20The%20Superhero.svg" style="display: block;margin-left: auto;margin-right: auto; height:150px;float:right"/>
+![superhero](https://github.com/openziti/branding/raw/main/images/ziggy/svg/Ziggy%20The%20Superhero.svg)
 You can choose to open a hole in the firewall granting access (a generally bad idea), or you can use a PushGateway. Even if you choose to
 use the PushGateway, Prometheus will still need to be able to access and pull from the PushGateway so you'll still need some port open and
 listening for Prometheus to collect data.
@@ -51,7 +51,7 @@ or use the Prometheus server. We won't care where this is deployed, we'll actual
 move it to a private server in AWS just to show how easy it that is. 
 
 This is what the solution we'll build looks like:
-<img src="./kubernetes-prometheus-after.svg" style="display: block;margin-left: auto;margin-right: auto;"/>
+![after](./kubernetes-prometheus-after.svg)
 
 ---
 
@@ -67,24 +67,19 @@ Let's get to work and build this solution. We'll need some legwork done first.
 
 ### Prerequisites
 
-<div class="leftdiv">
-    <img src="https://github.com/openziti/branding/raw/main/images/ziggy/svg/Ziggy%20The%20Construction%20Worker.svg" class="leftdiv"/>
-</div>
-<div style="overflow: auto;">
-<ul>
-<li> You have an OpenZiti overlay network available. If not, for this scenario you will want to use 
-["host your own"](/docs/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path</li>
-<li> Two Kubernetes clusters provisioned</li>
-<li> Necessary tooling installed and available on the path</li>
-  <ul><li>kubectl</li>
-  <li>helm</li></ul>
-<li> bash/zsh shell - tested in bash and some commands will use variables. If you use another shell, change accordingly</li>
-<li> a machine with [docker installed](https://docs.docker.com/get-docker/) to run the final Prometheus sever on (your local machine is fine)</li>
-<li> Ziti Desktop Edge installed on the development machine. I use 
-[Ziti Desktop Edge for Windows](https://github.com/openziti/desktop-edge-win/releases/latest/).</li>
-<li>A temporary folder exists to house files as we need them: /tmp/prometheus</li>
-</ul>
-</div>
+![construction worker](https://github.com/openziti/branding/raw/main/images/ziggy/svg/Ziggy%20The%20Construction%20Worker.svg)
+
+* You have an OpenZiti overlay network available. If not, for this scenario you will want to use 
+["host your own"](/docs/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
+* Two Kubernetes clusters provisioned
+* Necessary tooling installed and available on the path
+  * kubectl
+  * helm
+* bash/zsh shell - tested in bash and some commands will use variables. If you use another shell, change accordingly
+* a machine with [docker installed](https://docs.docker.com/get-docker/) to run the final Prometheus sever on (your local machine is fine)
+* Ziti Desktop Edge installed on the development machine. I use 
+[Ziti Desktop Edge for Windows](https://github.com/openziti/desktop-edge-win/releases/latest/).
+* A temporary folder exists to house files as we need them: /tmp/prometheus
 
 ---
 
