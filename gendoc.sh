@@ -22,15 +22,14 @@ echo "$script_root"
 : ${SKIP_GIT:=no}
 : ${SKIP_LINKED_DOC:=no}
 : ${SKIP_CLEAN:=no}
-ZITI_DOC_GIT_LOC="${script_root}/docfx_project"
-DOC_ROOT_TARGET="${script_root}/docs-local/api"
-: ${ZITI_DOCUSAURUS:=no}
-: ${WEB_HOST:=gh_pages}
+ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
+DOC_ROOT_TARGET="${script_root}/docusaurus/static/api"
+: ${ZITI_DOCUSAURUS:=yes}
 
 echo "- processing opts"
 
-while getopts ":gwlcdfV" opt; do
-  case ${opt} in
+while getopts ":glcwd" OPT; do
+  case ${OPT} in
     g ) # skip git
       echo "- skipping git cleanup"
       SKIP_GIT="yes"
@@ -47,62 +46,16 @@ while getopts ":gwlcdfV" opt; do
       echo "- treating warnings as errors"
       WARNINGS_AS_ERRORS="--warningsAsErrors"
       ;;
-    d ) # docusaurus
-      echo "- building docusaurus"
-      ZITI_DOCUSAURUS="yes"
-      ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
-      DOC_ROOT_TARGET="${script_root}/docusaurus/static/api"
-      echo "- building docusaurus to ${ZITI_DOC_GIT_LOC}"
-      ;;
-    f ) # docfx
-    #\? ) echo "Usage: cmd [-h] [-t]"
-      echo "this would have been docfx"
-      ;;
-    V ) WEB_HOST=vercel
+    d)
+      echo "WARN: ignoring option ${OPT}" >&2
       ;;
     *)
+      echo "WARN: ignoring option ${OPT}" >&2
       ;;
   esac
 done
 
 echo "- done processing opts"
-
-# if in Docfx mode, not Docusaurus mode, then make sure the required programs are available 
-if [[ "${ZITI_DOCUSAURUS}" == no ]]; then
-  if [[ -z "${DOCFX_EXE:-}" ]]; then
-      shopt -s expand_aliases
-      if [[ -f "~/.bash_aliases" ]]; then
-        source "${HOME}/.bash_aliases"
-    fi
-  else
-      alias docfx="mono $DOCFX_EXE"
-  fi
-
-  commands_to_test=(doxygen mono docfx jq)
-
-  # verify all the commands required in the automation exist before trying to run the full suite
-  for cmd in "${commands_to_test[@]}"
-  do
-      # checking all commands are on the path before continuing...
-      result="$(type ${cmd} &>/dev/null && echo "Found" || echo "Not Found")"
-
-      if [ "Not Found" = "${result}" ]; then
-          missing_requirements="${missing_requirements}    * ${cmd}\n"
-      fi
-  done
-
-  # are requirements ? if yes, stop here and help 'em out
-  if ! [[ -z "${missing_requirements:-}" ]]; then
-      echo " "
-      echo "The commands listed below are required to be on the path for this script to function properly."
-      echo "Please ensure the commands listed are on the path and then try again."
-      printf "\n${missing_requirements}"
-      echo " "
-      echo "If any of these commands are declared as aliases (docfx is a common one) ensure your alias is"
-      echo "declared inside of ~/.bash_aliases - or modify this script to add the aliases you require"
-      exit 1
-  fi
-fi
 
 if [[ "${SKIP_GIT}" == no ]]; then
   echo "updating dependencies by rm/checkout"
@@ -127,11 +80,34 @@ if [[ "${SKIP_CLEAN}" == no ]]; then
 fi
 
 if [[ "${SKIP_LINKED_DOC}" == no ]]; then
+
+  commands_to_test=(doxygen jq curl wget)
+
+  # verify all the commands required in the automation exist before trying to run the full suite
+  for cmd in "${commands_to_test[@]}"; do
+    # checking all commands are on the path before continuing...
+    result="$(type ${cmd} &>/dev/null && echo "Found" || echo "Not Found")"
+
+    if [ "Not Found" = "${result}" ]; then
+        missing_requirements="${missing_requirements}    * ${cmd}\n"
+    fi
+  done
+
+  # are requirements ? if yes, stop here and help 'em out
+  if ! [[ -z "${missing_requirements:-}" ]]; then
+      echo " "
+      echo "The commands listed below are required to be on the path for this script to function properly."
+      echo "Please ensure the commands listed are on the path and then try again."
+      printf "\n${missing_requirements}"
+      echo " "
+      echo "If any of these commands are declared as aliases ensure your alias is"
+      echo "declared inside of ~/.bash_aliases - or modify this script to add the aliases you require"
+      exit 1
+  fi
+
   if [[ "${ZITI_DOCUSAURUS}" == yes ]]; then
     echo "=================================================="
-    #echo "charp: building the c# sdk docs"
-    #cp -r "${script_root}/docfx_project/templates" "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/"
-    #docfx build -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docfx.json"
+    #echo "csharp: building the c# sdk docs"
   #
     CSHARP_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docs"
     CSHARP_TARGET="${DOC_ROOT_TARGET}/csharp"
@@ -184,19 +160,10 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
   fi
 fi
 
-if [[ "${ZITI_DOCUSAURUS}" == no ]]; then
-  pushd ${ZITI_DOC_GIT_LOC}
-  docfx build ${WARNINGS_AS_ERRORS:-}
-  popd
-else
-  if [[ ${WEB_HOST} == vercel ]]; then
-    sed -E -i "s|(baseUrl:).*,|\1 '/',|" ${ZITI_DOC_GIT_LOC}/../docusaurus.config.js
-  fi
-  pushd ${ZITI_DOC_GIT_LOC}/..
-  echo "running 'yarn install' in ${PWD}"
-  yarn install --frozen-lockfile
-  echo "running 'yarn build' in ${PWD}"
-  yarn build
-  popd
-fi
+pushd ${ZITI_DOC_GIT_LOC}/..
+echo "running 'yarn install' in ${PWD}"
+yarn install --frozen-lockfile
+echo "running 'yarn build' in ${PWD}"
+yarn build
+popd
 
