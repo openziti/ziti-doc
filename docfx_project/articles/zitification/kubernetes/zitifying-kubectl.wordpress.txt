@@ -1,0 +1,27 @@
+[1]: /blog/zitifying-scp
+
+[2]: https://Kubernetes.io/
+
+[3]: https://openziti.github.io/articles/zitification/kubernetes/private-kubernetes.svg
+
+[4]: https://Kubernetes.io/docs/reference/kubectl/overview/
+
+[5]: https://docs.microsoft.com/en-us/windows/wsl/install
+
+[6]: https://github.com/openziti-incubator/kubectl/releases/latest/download/kubectl-linux-amd64
+
+[7]: https://github.com/openziti-incubator/kubectl
+
+[8]: https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network
+
+[9]: https://github.com/openziti/ziti/releases/latest
+
+[10]: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
+
+[11]: https://developer.netfoundry.io/guides/kubernetes/#install-ziti-with-helm
+
+[12]: https://helm.sh/docs/intro/install/
+
+[13]: https://appfleet.com/blog/10-reasons-why-developers-love-docker/
+
+[14]: https://www.google.com/search?q=kubernetes+cloud+providers&oq=kubernetes+cloud+providers
