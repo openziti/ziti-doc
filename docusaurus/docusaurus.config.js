@@ -9,7 +9,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'OpenZiti',
-  tagline: 'OpenZiti Tagline',
+  tagline: 'Replacing Infrastructure With Software',
   url: 'https://openziti.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -68,7 +68,7 @@ const config = {
     [
       '@docusaurus/plugin-client-redirects',
       {
-        // fromExtensions: ['html', 'htm'], // /myPage.html -> /myPage
+        // fromExtensions: ['md'], // /myPage.md -> /myPage
         // toExtensions: ['exe', 'zip'], // /myAsset -> /myAsset.zip (if latter exists)
         redirects: [
           {
@@ -392,16 +392,15 @@ const config = {
             from: ['/ziti/metrics/inspect.html'],
           },
         ],
-        // createRedirects(existingPath) {
-        //   if (existingPath.includes('/community')) {
-        //     // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
-        //     return [
-        //       existingPath.replace('/community', '/docs/team'),
-        //       existingPath.replace('/community', '/docs/support'),
-        //     ];
-        //   }
-        //   return undefined; // Return a falsy value: no redirect created
-        // },
+        createRedirects(existingPath) {
+          if (existingPath.includes('/blog')) {
+            // Redirect from /articles/X to /blog/X
+            return [
+              existingPath.replace('/blog', '/articles'),
+            ];
+          }
+          return undefined; // Return a falsy value: no redirect created
+        },
       },
     ],
   ],
@@ -418,13 +417,12 @@ const config = {
             'https://github.com/openziti/ziti-doc/tree/main/docusaurus',
 
         },
-        blog: false,
-        // {
-          // blogTitle: 'OpenZiti Technical Blog',
-          // blogDescription: 'OpenZiti Blog Desc',
-          // showReadingTime: true,
-
-        // },
+        // blog: false,
+        blog: {
+          blogTitle: 'OpenZiti Technical Blog',
+          blogDescription: 'Technical articles about OpenZiti',
+          showReadingTime: true,
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
