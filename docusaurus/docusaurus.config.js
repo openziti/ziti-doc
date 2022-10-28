@@ -116,7 +116,7 @@ const config = {
             from: ['/ziti/quickstarts/network/local-with-docker.html'],
           },
           {
-            to: '/docs/introduction/zitiSoftwareArchitecture',
+            to: '/docs/introduction/openziti-is-software',
             from: ['/ziti/software-architecture.html'],
           },
           {
