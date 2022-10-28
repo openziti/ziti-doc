@@ -73,35 +73,35 @@ const config = {
         redirects: [
           {
             to: '/',
-            from: ['/docusaurus'],
+            from: ['/docusaurus', '/docusaurus.html'],
           },
           {
             to: '/docs/introduction/intro',
-            from: ['/ziti/overview'],
+            from: ['/ziti/overview', '/ziti/overview.html'],
           },
           {
             to: '/docs/quickstarts/services/ztha',
-            from: ['/ziti/quickstarts/services/host-access'],
+            from: ['/ziti/quickstarts/services/host-access', '/ziti/quickstarts/services/host-access.html'],
           },
           {
             to: '/docs/quickstarts/network/',
-            from: ['/ziti/quickstarts/quickstart-overview'],
+            from: ['/ziti/quickstarts/quickstart-overview', '/ziti/quickstarts/quickstart-overview.html'],
           },
           {
             to: '/api/ziti-sdk-csharp',
-            from: ['/api/csharp/NetFoundry'],
+            from: ['/api/csharp/NetFoundry', '/api/csharp/NetFoundry.html'],
           },
           {
             to: '/docs/core-concepts/clients/choose',
-            from: ['/ziti/clients/which-client'],
+            from: ['/ziti/clients/which-client', '/ziti/clients/which-client.html'],
           },
           {
             to: '/docs/core-concepts/services/overview',
-            from: ['/ziti/services/overview'],
+            from: ['/ziti/services/overview', '/ziti/services/overview.html'],
           },
           {
             to: '/docs/core-concepts/identities/overview',
-            from: ['/ziti/identities/overview'],
+            from: ['/ziti/identities/overview', '/ziti/identities/overview.html'],
           },
           {
             to: '/docs/introduction/openziti-is-software',
@@ -121,199 +121,199 @@ const config = {
           },
           {
             to: '/docs/introduction/zitiSoftwareArchitecture',
-            from: ['/ziti/software-architecture'],
+            from: ['/ziti/software-architecture', '/ziti/software-architecture.html'],
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/linux',
-            from: ['/ziti/clients/linux'],
+            from: ['/ziti/clients/linux', '/ziti/clients/linux.html'],
           },
           {
             to: '/docs/core-concepts/security/overview',
-            from: ['/ziti/security/overview'],
+            from: ['/ziti/security/overview', '/ziti/security/overview.html'],
           },
           {
             to: '/docs/core-concepts/identities/creating',
-            from: ['/ziti/identities/creating'],
+            from: ['/ziti/identities/creating', '/ziti/identities/creating.html'],
           },
           {
             to: '/guides/hsm/',
-            from: ['/ziti/quickstarts/hsm-overview'],
+            from: ['/ziti/quickstarts/hsm-overview', '/ziti/quickstarts/hsm-overview.html'],
           },
           {
             to: '/docs/core-concepts/clients/sdks',
-            from: ['/ziti/clients/sdks'],
+            from: ['/ziti/clients/sdks', '/ziti/clients/sdks.html'],
           },
           {
             to: '/guides/hsm/softhsm',
-            from: ['/ziti/quickstarts/hsm/softhsm'],
+            from: ['/ziti/quickstarts/hsm/softhsm', '/ziti/quickstarts/hsm/softhsm.html'],
           },
           {
             to: '/docs/core-concepts/identities/enrolling',
-            from: ['/ziti/identities/enrolling'],
+            from: ['/ziti/identities/enrolling', '/ziti/identities/enrolling.html'],
           },
           {
             to: '/guides/kubernetes/kubernetes-sidecar-tunnel-quickstart',
-            from: ['/ziti-cmd/quickstart/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart'],
+            from: ['/ziti-cmd/quickstart/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart', '/ziti-cmd/quickstart/kubernetes/sidecar-tunnel/kubernetes-sidecar-tunnel-quickstart.html'],
           },
           {
             to: '/docs/core-concepts/security/authorization/policies/overview',
-            from: ['/ziti/security/authorization/policies/overview'],
+            from: ['/ziti/security/authorization/policies/overview', '/ziti/security/authorization/policies/overview.html'],
           },
           {
             to: '/docs/manage/controller',
-            from: ['/ziti/manage/manage'],
+            from: ['/ziti/manage/manage', '/ziti/manage/manage.html'],
           },
           {
             to: '/docs/core-concepts/services/creating',
-            from: ['/ziti/services/creating'],
+            from: ['/ziti/services/creating', '/ziti/services/creating.html'],
           },
           {
             to: '/docs/core-concepts/security/authentication/auth',
-            from: ['/ziti/security/authentication/authentication'],
+            from: ['/ziti/security/authentication/authentication', '/ziti/security/authentication/authentication.html'],
           },
           {
             to: '/docs/core-concepts/metrics/',
-            from: ['/ziti/metrics/overview'],
+            from: ['/ziti/metrics/overview', '/ziti/metrics/overview.html'],
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/windows',
-            from: ['/ziti/clients/windows'],
+            from: ['/ziti/clients/windows', '/ziti/clients/windows.html'],
           },
           {
             to: '/docs/core-concepts/config-store/managing',
-            from: ['/ziti/config-store/managing'],
+            from: ['/ziti/config-store/managing', '/ziti/config-store/managing.html'],
+          },
+          {
+            to: '/guides/mobile/android',
+            from: ['/ziti-android-app/README', '/ziti-android-app/README.html'],
           },
           // {
-          //   to: '???',
-          //   from: ['/ziti-android-app/README'],
-          // },
-          // {
-          //   to: '/blog/bootstrapping-trust/part-01-encryption-everywhere',
-          //   from: ['/articles/bootstrapping-trust/part-01.encryption-everywhere.html'],
+          //   to: '/blog/bootstrapping-trust/part-01.encryption-everywhere',
+          //   from: ['/articles/bootstrapping-trust/part-01.encryption-everywhere', '/articles/bootstrapping-trust/part-01.encryption-everywhere.html'],
           // },
           {
             to: '/docs/core-concepts/security/authentication/third-party-cas',
-            from: ['/ziti/security/authentication/third-party-cas'],
+            from: ['/ziti/security/authentication/third-party-cas', '/ziti/security/authentication/third-party-cas.html'],
           },
           {
             to: '/docs/core-concepts/security/authorization/auth',
-            from: ['/ziti/security/authorization/authorization'],
+            from: ['/ziti/security/authorization/authorization', '/ziti/security/authorization/authorization.html'],
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/android',
-            from: ['/ziti/clients/android'],
+            from: ['/ziti/clients/android', '/ziti/clients/android.html'],
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/macos',
-            from: ['/ziti/clients/macos'],
+            from: ['/ziti/clients/macos', '/ziti/clients/macos.html'],
           },
           {
             to: '/docs/core-concepts/config-store/consuming',
-            from: ['/ziti/config-store/consuming'],
+            from: ['/ziti/config-store/consuming', '/ziti/config-store/consuming.html'],
           },
           {
             to: '/guides/hsm/yubikey',
-            from: ['/ziti/quickstarts/hsm/yubikey'],
+            from: ['/ziti/quickstarts/hsm/yubikey', '/ziti/quickstarts/hsm/yubikey.html'],
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/iOS',
-            from: ['/ziti/clients/iOS'],
+            from: ['/ziti/clients/iOS', '/ziti/clients/iOS.html'],
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/',
-            from: ['/ziti/downloads/overview'],
+            from: ['/ziti/downloads/overview', '/ziti/downloads/overview.html'],
           },
           {
             to: '/docs/core-concepts/metrics/prometheus',
-            from: ['/ziti/metrics/prometheus'],
+            from: ['/ziti/metrics/prometheus', '/ziti/metrics/prometheus.html'],
           },
           {
             to: '/docs/core-concepts/security/authorization/posture-checks',
-            from: ['/ziti/security/authorization/posture-checks'],
+            from: ['/ziti/security/authorization/posture-checks', '/ziti/security/authorization/posture-checks.html'],
           },
           {
             to: '/docs/core-concepts/security/enrollment',
-            from: ['/ziti/security/enrollment/enrollment'],
+            from: ['/ziti/security/enrollment/enrollment', '/ziti/security/enrollment/enrollment.html'],
           },
           // {
           //   to: '/blog/bootstrapping-trust/part-05.bootstrapping-trust',
-          //   from: ['/articles/bootstrapping-trust/part-05.bootstrapping-trust'],
+          //   from: ['/articles/bootstrapping-trust/part-05.bootstrapping-trust', '/articles/bootstrapping-trust/part-05.bootstrapping-trust.html'],
           // },
           {
             to: '/docs/core-concepts/security/authentication/authentication-policies',
-            from: ['/ziti/security/authentication/authentication-policies'],
+            from: ['/ziti/security/authentication/authentication-policies', '/ziti/security/authentication/authentication-policies.html'],
           },
           {
             to: '/docs/core-concepts/security/authorization/policies/creating-edge-router-policies',
-            from: ['/ziti/security/authorization/policies/creating-edge-router-policies'],
+            from: ['/ziti/security/authorization/policies/creating-edge-router-policies', '/ziti/security/authorization/policies/creating-edge-router-policies.html'],
           },
           {
             to: '/docs/core-concepts/security/authentication/external-jwt-signers',
-            from: ['/ziti/security/authentication/external-jwt-signers'],
+            from: ['/ziti/security/authentication/external-jwt-signers', '/ziti/security/authentication/external-jwt-signers.html'],
           },
           {
             to: '/docs/core-concepts/metrics/metric-types',
-            from: ['/ziti/metrics/metric-types'],
+            from: ['/ziti/metrics/metric-types', '/ziti/metrics/metric-types.html'],
           },
           {
             to: '/docs/core-concepts/security/authorization/policies/creating-service-edge-router-policies',
-            from: ['/ziti/security/authorization/policies/creating-service-edge-router-policies'],
+            from: ['/ziti/security/authorization/policies/creating-service-edge-router-policies', '/ziti/security/authorization/policies/creating-service-edge-router-policies.html'],
           },
           {
             to: '/docs/core-concepts/security/authentication/certificate-management',
-            from: ['/ziti/security/authentication/certificate-management'],
+            from: ['/ziti/security/authentication/certificate-management', '/ziti/security/authentication/certificate-management.html'],
           },
           {
             to: '/docs/core-concepts/security/authentication/totp',
-            from: ['/ziti/security/authentication/totp'],
+            from: ['/ziti/security/authentication/totp', '/ziti/security/authentication/totp.html'],
           },
           // {
           //   to: '/blog/bootstrapping-trust/part-02.a-primer-on-public-key-cryptography',
-          //   from: ['/articles/bootstrapping-trust/part-02.a-primer-on-public-key-cryptography'],
+          //   from: ['/articles/bootstrapping-trust/part-02.a-primer-on-public-key-cryptography', '/articles/bootstrapping-trust/part-02.a-primer-on-public-key-cryptography.html'],
           // },
           {
             to: '/',
-            from: ['/ziti/'],
+            from: ['/ziti/', '/ziti/.html'],
           },
           {
             to: '/docs/core-concepts/security/authentication/identities',
-            from: ['/ziti/security/authentication/identities'],
+            from: ['/ziti/security/authentication/identities', '/ziti/security/authentication/identities.html'],
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/',
-            from: ['/ziti/clients/tunneler'],
+            from: ['/ziti/clients/tunneler', '/ziti/clients/tunneler.html'],
           },
           {
             to: '/docs/core-concepts/security/authentication/api-session-certificates',
-            from: ['/ziti/security/authentication/api-session-certificates'],
+            from: ['/ziti/security/authentication/api-session-certificates', '/ziti/security/authentication/api-session-certificates.html'],
           },
           // {
           //   to: '/blog/bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust',
-          //   from: ['/articles/bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust'],
+          //   from: ['/articles/bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust', '/articles/bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust.html'],
           // },
           {
             to: '/docs/core-concepts/security/authorization/policies/creating-service-policies',
-            from: ['/ziti/security/authorization/policies/creating-service-policies'],
+            from: ['/ziti/security/authorization/policies/creating-service-policies', '/ziti/security/authorization/policies/creating-service-policies.html'],
           },
           // {
           //   to: '/blog/bootstrapping-trust/part-03.certificates',
-          //   from: ['/articles/bootstrapping-trust/part-03.certificates'],
+          //   from: ['/articles/bootstrapping-trust/part-03.certificates', '/articles/bootstrapping-trust/part-03.certificates.html'],
           // },
           {
             to: '/api/rest/',
-            from: ['/ziti/apis/edge-apis'],
+            from: ['/ziti/apis/edge-apis', '/ziti/apis/edge-apis.html'],
           },
           {
             to: '/docs/core-concepts/config-store/overview',
-            from: ['/ziti/config-store/overview'],
+            from: ['/ziti/config-store/overview', '/ziti/config-store/overview.html'],
           },
           {
             to: '/docs/core-concepts/metrics/file',
-            from: ['/ziti/metrics/file'],
+            from: ['/ziti/metrics/file', '/ziti/metrics/file.html'],
           },
           {
             to: '/docs/core-concepts/metrics/inspect',
-            from: ['/ziti/metrics/inspect'],
+            from: ['/ziti/metrics/inspect', '/ziti/metrics/inspect.html'],
           },
         ],
         createRedirects(existingPath) {
@@ -323,7 +323,8 @@ const config = {
               existingPath.replace('/blog', '/articles'),
             ];
           } 
-          else if (existingPath.includes('/docs')) {
+          else 
+          if (existingPath.includes('/docs')) {
             // Redirect from /ziti/X to /docs/X
             return [
               existingPath.replace('/docs', '/ziti'),
