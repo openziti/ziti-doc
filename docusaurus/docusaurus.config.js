@@ -68,7 +68,7 @@ const config = {
     [
       '@docusaurus/plugin-client-redirects',
       {
-        // fromExtensions: ['md'], // /myPage.md -> /myPage
+        fromExtensions: ['md', 'html'], // /myPage.md -> /myPage
         // toExtensions: ['exe', 'zip'], // /myAsset -> /myAsset.zip (if latter exists)
         redirects: [
           {
