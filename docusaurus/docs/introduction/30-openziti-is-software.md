@@ -1,40 +1,18 @@
----
-sidebar_position: 2
-id: zitiSoftwareArchitecture
----
+# It's All Software
 
-# Software Architecture
+OpenZiti is software first and foremost. Moving at the speed of software is a vital characteristic of any
+modern project.
 
-This article describes the internal software architecture of Ziti. In most scenarios, this information is not essential
-to deploy and operate a Ziti Network. While not strictly necessary, understanding the internal model can help operators
-intuit Ziti functionality, understand design decisions, and smooth the road for intrepid contributors.
+This article lightly describes the internal software architecture of OpenZiti. In most scenarios, this information is not essential
+to deploy and operate an OpenZiti Network. While not strictly necessary, understanding the internal model can help operators
+understand the functionality provided by OpenZiti, understand design decisions, and smooth the road for contributors.
 
-The simplest way to describe a Ziti Network is to by describing the binary outputs of the OpenZiti GitHub repositories.
-If we did so the components would be: Ziti Controller, Ziti Edge Router, Ziti Fabric Router, and Ziti Clients. However,
-internally the code is divided up into four main groupings:
-
-- Fabric - https://github.com/openziti/fabric
-- Edge - https://github.com/openziti/edge
-- SDKs
-    - https://github.com/openziti/ziti-sdk-c
-    - https://github.com/openziti/ziti-sdk-jvm
-    - https://github.com/openziti/ziti-sdk-py
-    - https://github.com/openziti/sdk-golang
-    - https://github.com/openziti/ziti-sdk-nodejs
-    - https://github.com/openziti/ziti-sdk-js
-    - https://github.com/openziti/ziti-sdk-csharp
-    - https://github.com/openziti/ziti-sdk-swift
-    - https://github.com/openziti/ziti-sdk-rb
-    - ...and more
-- Clients
-    - https://github.com/openziti/ziti-tunnel-sdk-c
-    - https://github.com/openziti/ziti-tunnel-apple
-    - https://github.com/openziti/desktop-edge-win
-    - ...and others
+Broadly speaking there are four major areas of concentration for the OpenZiti project: Fabric, Edge, SDKs, Clients.
+These areas are expanded on below.
 
 ## Fabric
 
-Each of the above build upon each other with the Fabric repository as the base. It is the only repository that can be
+All of the OpenZiti repositories build upon each other. with the Fabric repository as the base. It is the only repository that can be
 used on its own and have a semblance of network connectivity. From the Fabric repository alone, one can build a
 fabric-only controller and router binaries. The capabilities of these components will be limited and require
 low-level configuration and maintenance. If done, a mesh network will be established that can be used to send
@@ -74,7 +52,7 @@ sections allow type-specific custom configuration.
 
 The Fabric provides several extension points. The main consumer of those extension points is the
 Edge. The Edge extends controllers and routers to add additional security controls and enable SDK connectivity.
-The Edge adds the concepts of endpoint identities, which represent Ziti SDKs that can connect to a Ziti Network. This
+The Edge adds the concepts of endpoint identities, which represent OpenZiti SDKs that can connect to an OpenZiti Network. This
 concept acts as a springboard for an entire suite of identity life cycle and access management features. Below are the
 Fabric extension points and what Edge features they enable.
 
@@ -86,24 +64,45 @@ Fabric extension points and what Edge features they enable.
 The Edge also exposes a configuration extension point for SDKs. An SDK developer can define
 configuration types with JSON schemas. This configuration can be stored at the service, identity, or identity+service
 specific level and delivered to connecting applications upon request. This mechanism allows SDK applications to
-define and distribute configuration to power advanced application features. The pre-built Ziti clients
+define and distribute configuration to power advanced application features. The pre-built OpenZiti clients
 use this feature to power features such as DNS/IP intercept addresses.
 
 ## SDKs
 
 The Ziti SDKs come in a variety of languages. Where appropriate, they are wrappers around the Ziti C SDK. The SDKs
-make use of the Edge Client REST API on the controller and the `xgress_edge` protocol on the router to extend a Ziti
+make use of the Edge Client REST API on the controller and the `xgress_edge` protocol on the router to extend an OpenZiti
 Network beyond the mesh network of routers and into applications and devices. The SDKs rely on the Edge to enable
-service connectivity over a Ziti Network. The SDKs do not directly interact with the Fabric. They act as a
-fulcrum to leverage the power of a Ziti Network.
+service connectivity over an OpenZiti Network. The SDKs do not directly interact with the Fabric. They act as a
+fulcrum to leverage the power of an OpenZiti Network.
 
 The SDKs expose an API that allows endpoints to enroll, authenticate, list services, receive centralized configuration,
 and connect or host services based on security access configuration.
 
 ## Clients
 
-Ziti clients are any code that uses a Ziti SDK to connect to a Ziti Network. The OpenZiti project can provide these
-applications or be custom-built by any software developer. They rely directly upon a Ziti SDK, indirectly
+OpenZiti clients are any code that uses an OpenZiti SDK to connect to an OpenZiti Network. The OpenZiti project can provide these
+applications or be custom-built by any software developer. They rely directly upon an OpenZiti SDK, indirectly
 on the Edge, and subsequently the Fabric. They can serve as the initiating client or terminating host for
 services. Clients may or may not expose extension points - it is at the author's discretion.
 
+## Contributing
+The OpenZiti project welcomes contributions including, but not limited to, code, documentation and bug reports.
+OpenZiti has grown to have many, many repositories. Here are just a few notable repositories, there are many more:
+
+* All code is found on GitHub under the [OpenZiti](https://github.com/openziti) organization.
+  * [ziti](https://github.com/openziti/ziti): top level project which builds all OpenZiti executables
+  * [edge](https://github.com/openziti/edge): edge components and model which includes identity, polices and config
+  * [fabric](https://github.com/openziti/fabric): fabric project which includes core controller and router
+  * [foundation](https://github.com/openziti/foundation): project which contains library code used across multiple projects
+  * SDKs
+    * [ziti-sdk-c](https://github.com/openziti/ziti-sdk-c): C SDK
+    * [sdk-golang](https://github.com/openziti/sdk-golang): Go SDK
+    * [ziti-sdk-jvm](https://github.com/openziti/ziti-sdk-jvm): SDK for JVM based languages
+    * [ziti-sdk-csharp](https://github.com/openziti/ziti-sdk-py): Python SDK
+    * [ziti-sdk-swift](https://github.com/openziti/ziti-sdk-swift): Swift SDK
+    * [ziti-sdk-nodejs](https://github.com/openziti/ziti-sdk-nodejs): NodeJS SDK
+    * [ziti-sdk-csharp](https://github.com/openziti/ziti-sdk-csharp): C# SDK
+  * [ziti-doc](https://github.com/openziti/ziti-doc): Documentation (which you are currently reading)
+* A [Discourse forum](https://openziti.discourse.group/) is available
+
+OpenZiti was developed and open sourced by [NetFoundry Inc.](https://netfoundry.io). NetFoundry continues to fund and contribute to OpenZiti.

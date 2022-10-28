@@ -93,7 +93,7 @@ export default function Home() {
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
-                                    <Link to="/docs/introduction/intro">The OpenZiti Fabric</Link>
+                                    <Link to="/docs/introduction/openziti-is-software#fabric">The OpenZiti Fabric</Link>
                                 </H3>
                             </div>
                             <p>a scalable, pluggable, overlay networking mesh with built-in smart routing</p>
@@ -101,7 +101,7 @@ export default function Home() {
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
-                                    <Link to="/docs/introduction/intro">The OpenZiti Edge</Link>
+                                    <Link to="/docs/introduction/openziti-is-software#edge">The OpenZiti Edge</Link>
                                 </H3>
                             </div>
                             <p>the components providing secure, zero trust entry points into the overlay network</p>
@@ -109,7 +109,7 @@ export default function Home() {
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
-                                    <Link to="/docs/introduction/intro">The OpenZiti SDKs</Link>
+                                    <Link to="/docs/introduction/openziti-is-software#sdks">The OpenZiti SDKs</Link>
                                 </H3>
                             </div>
                             <p>allows developers to embed zero trust principles directly into applications</p>
