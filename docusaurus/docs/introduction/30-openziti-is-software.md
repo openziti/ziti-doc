@@ -1,36 +1,43 @@
----
-sidebar_position: 2
-id: zitiSoftwareArchitecture
----
+# It's All Software
 
-# Software Architecture
+OpenZiti is software first and foremost. Moving at the speed of software is a vital characteristic of any
+modern project.
 
-This article describes the internal software architecture of Ziti. In most scenarios, this information is not essential
-to deploy and operate a Ziti Network. While not strictly necessary, understanding the internal model can help operators
-intuit Ziti functionality, understand design decisions, and smooth the road for intrepid contributors.
+This article lightly describes the internal software architecture of OpenZiti. In most scenarios, this information is not essential
+to deploy and operate a OpenZiti Network. While not strictly necessary, understanding the internal model can help operators
+understand the functionality provided by OpenZiti, understand design decisions, and smooth the road for contributors.
 
-The simplest way to describe a Ziti Network is to by describing the binary outputs of the OpenZiti GitHub repositories.
-If we did so the components would be: Ziti Controller, Ziti Edge Router, Ziti Fabric Router, and Ziti Clients. However,
-internally the code is divided up into four main groupings:
-
+Broadly speaking, there are four main focus areas of an OpenZiti Network.
 - Fabric - https://github.com/openziti/fabric
 - Edge - https://github.com/openziti/edge
-- SDKs
-    - https://github.com/openziti/ziti-sdk-c
-    - https://github.com/openziti/ziti-sdk-jvm
-    - https://github.com/openziti/ziti-sdk-py
-    - https://github.com/openziti/sdk-golang
-    - https://github.com/openziti/ziti-sdk-nodejs
-    - https://github.com/openziti/ziti-sdk-js
-    - https://github.com/openziti/ziti-sdk-csharp
-    - https://github.com/openziti/ziti-sdk-swift
-    - https://github.com/openziti/ziti-sdk-rb
-    - ...and more
 - Clients
     - https://github.com/openziti/ziti-tunnel-sdk-c
     - https://github.com/openziti/ziti-tunnel-apple
     - https://github.com/openziti/desktop-edge-win
-    - ...and others
+
+## Contributing
+The OpenZiti project welcomes contributions including, but not limited to, code, documentation and bug reports.
+OpenZiti has grown to have many, many repositories. Here are a few notable repositories:
+
+* All code is found on GitHub under the [OpenZiti](https://github.com/openziti) organization.
+  * [ziti](https://github.com/openziti/ziti): top level project which builds all OpenZiti executables
+  * [edge](https://github.com/openziti/edge): edge components and model which includes identity, polices and config
+  * [fabric](https://github.com/openziti/fabric): fabric project which includes core controller and router
+  * [foundation](https://github.com/openziti/foundation): project which contains library code used across multiple projects
+  * SDKs
+    * [ziti-sdk-c] (https://github.com/openziti/ziti-sdk-c): C SDK
+    * [sdk-golang] (https://github.com/openziti/sdk-golang): Go SDK
+    * [ziti-sdk-jvm] (https://github.com/openziti/ziti-sdk-jvm): SDK for JVM based languages
+    * [ziti-sdk-csharp] (https://github.com/openziti/ziti-sdk-py): Python SDK
+    * [ziti-sdk-swift] (https://github.com/openziti/ziti-sdk-swift): Swift SDK
+    * [ziti-sdk-nodejs] (https://github.com/openziti/ziti-sdk-nodejs): NodeJS SDK
+    * [ziti-sdk-csharp] (https://github.com/openziti/ziti-sdk-csharp): C# SDK
+  * [ziti-doc](https://github.com/openziti/ziti-doc): Documentation (which you are currently reading)
+* A [Discourse forum](https://openziti.discourse.group/) is available
+
+OpenZiti was developed and open sourced by [NetFoundry Inc.](https://netfoundry.io). NetFoundry continues to fund and contribute to Ziti.
+
+
 
 ## Fabric
 
@@ -106,4 +113,3 @@ Ziti clients are any code that uses a Ziti SDK to connect to a Ziti Network. The
 applications or be custom-built by any software developer. They rely directly upon a Ziti SDK, indirectly
 on the Edge, and subsequently the Fabric. They can serve as the initiating client or terminating host for
 services. Clients may or may not expose extension points - it is at the author's discretion.
-

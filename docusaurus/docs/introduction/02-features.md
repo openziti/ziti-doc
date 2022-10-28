@@ -15,7 +15,7 @@ Applications are increasingly exposed to the public internet (and networks, laye
 ### Built-In, Not Bolted On
 Traditional network security is exposed to the internet with at least some open ports allowing attackers to scan and potentially find an exploit. OpenZiti provides the ability to be embedded directly into the app using an SDK removing this threat and making security even stronger – i.e., we are not even trusting the host OS network, nor does the developer need to know port/IP.
 
-### zero trust
+### Zero Trust
 Traditional systems allow users to connect before they authenticate. Many give access to the network without using separate firewalls and access control points – which slows down developers and burdens operators. OpenZiti mandates authentication and authorisation before any connectivity can be established using a strong identity. When connectivity is created, it can be micro-segmented using least privilege and attribute-based access control.
 
 ### Trusting Endpoints 
