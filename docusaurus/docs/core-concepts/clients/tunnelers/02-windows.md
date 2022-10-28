@@ -4,7 +4,44 @@
 
 The ZDEW has an installer which is available for download from GitHub.
 [Download the latest release here](https://github.com/openziti/desktop-edge-win/releases/latest).
-The installer will require administrator privileges to install successfully.
+
+This brings the user to the NetFoundry Ziti GitHub repository.  There are a list of releases, select the top release and the .exe package from the list of files.
+
+![image](/img/clients/windows-install1.jpg)
+
+**NOTE: Installer requires elevated permissions**. Right click on  Ziti.Desktop Edge Client installer file and select **Run as Administrator**.
+
+This will launch the installation on the user Windows Machine.  Click **Next>**
+
+![image](/img/clients/windows-install2.jpg)
+
+Keep the default file location unless you have a reason to move to another location.  Select **Next>**
+
+![image](/img/clients/windows-install3.png)
+
+Click **Install** to execute the installation of the Windows Desktop Edge.  Select to **install WinTun driver** if prompted. Select **YES** when prompted in the next screen to allow the application to make changes.
+
+![image](/img/clients/windows-install4.png)
+
+Click **Run Ziti Desktop Edge** when installation completes.
+
+![image](/img/clients/windows-install5.png)
+
+## Enrolling 
+
+Following this [guide](/docs/core-concepts/identities/creating) to create an identity and transfer the jwt file to your PC.
+
+Go back to the **Windows Desktop Edge** widget and click **ADD IDENTITY**.
+
+![image](/img/clients/windows-install6.jpg)
+
+You will be brought to your file manager and should navigate to the directory where you saved the .jwt file in the previous steps. Click **Open**
+
+![image](/img/clients/windows-install7.jpg)
+
+Once the identity has been enrolled and registered you will see any services you have been granted. Status = Active and the IP/Hostname/Port of rendered services.
+
+![image](/img/clients/windows-install8.jpg)
 
 ## Architecture
 The ZDEW is composed of three main components: the data service, the monitor service, the UI. Communication among
