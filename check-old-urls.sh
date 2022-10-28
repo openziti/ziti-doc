@@ -115,6 +115,6 @@ if [[ ${#FAILURES} -eq 0 ]]; then
     exit 0
 else
     printf 'Failed:\n'
-    for i in ${FAILURES[*]}; do printf '\t%s\n' $i; done
+    for i in ${FAILURES[*]}; do printf '\t%s\n' $i; done | sort
     exit 1
 fi
