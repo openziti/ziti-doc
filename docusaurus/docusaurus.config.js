@@ -107,10 +107,6 @@ const config = {
             to: '/docs/core-concepts/identities/overview',
             from: ['/ziti/identities/overview.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/zitification/prometheus/part1.html'],
-          // },
           {
             to: '/docs/quickstarts/network/local-with-docker',
             from: ['/ziti/quickstarts/network/local-with-docker.html'],
@@ -124,17 +120,9 @@ const config = {
             from: ['/ziti/quickstarts/network/local-docker-compose.html'],
           },
           {
-            to: '/docs/quickstarts/services/',
-            from: ['/ziti/quickstarts/services/index.html'],
-          },
-          {
             to: '/docs/core-concepts/config-store/overview',
             from: ['/ziti/config-store/overview.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/index.html'],
-          // },
           {
             to: '/docs/quickstarts/zac/installation',
             from: ['/ziti/quickstarts/zac/installation.html'],
@@ -147,10 +135,6 @@ const config = {
             to: '/docs/core-concepts/security/overview',
             from: ['/ziti/security/overview.html'],
           },
-          // {
-          //   to: '/glossary/glossary',
-          //   from: ['/glossary/glossary.html'],
-          // },
           {
             to: '/docs/manage/controller',
             from: ['/ziti/manage/controller.html'],
@@ -199,10 +183,6 @@ const config = {
             to: '/docs/core-concepts/security/authentication/auth',
             from: ['/ziti/security/authentication/authentication.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/golang-aha/article.html'],
-          // },
           {
             to: '/docs/manage/router-overview',
             from: ['/ziti/manage/router-overview.html'],
@@ -211,10 +191,6 @@ const config = {
             to: '/docs/core-concepts/metrics/',
             from: ['/ziti/metrics/overview.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/zitification/zitifying-ssh/index.html'],
-          // },
           {
             to: '/docs/core-concepts/clients/tunnelers/windows',
             from: ['/ziti/clients/windows.html'],
@@ -227,18 +203,10 @@ const config = {
           //   to: '???',
           //   from: ['/ziti-android-app/README.html'],
           // },
-          // {
-          //   to: '???',
-          //   from: ['/articles/bootstrapping-trust/part-01.encryption-everywhere.html'],
-          // },
-          // {
-          //   to: '???',
-          //   from: ['/articles/zitification/kubernetes/index.html'],
-          // },
-          // {
-          //   to: '???',
-          //   from: ['/articles/c-sdk-on-beaglebone.html'],
-          // },
+          {
+            to: '/blog/bootstrapping-trust/part-01.encryption-everywhere',
+            from: ['/articles/bootstrapping-trust/part-01.encryption-everywhere.html'],
+          },
           {
             to: '/docs/manage/pki',
             from: ['/ziti/manage/pki.html'],
@@ -247,18 +215,10 @@ const config = {
             to: '/docs/core-concepts/security/authentication/third-party-cas',
             from: ['/ziti/security/authentication/third-party-cas.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/zitification/prometheus/part2.html'],
-          // },
           {
             to: '/docs/core-concepts/security/authorization/auth',
             from: ['/ziti/security/authorization/authorization.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/zitification/prometheus/part3.html'],
-          // },
           {
             to: '/docs/core-concepts/clients/tunnelers/android',
             from: ['/ziti/clients/android.html'],
@@ -275,10 +235,6 @@ const config = {
             to: '/guides/hsm/yubikey',
             from: ['/ziti/quickstarts/hsm/yubikey.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/zitification/index.html'],
-          // },
           {
             to: '/docs/core-concepts/clients/tunnelers/iOS',
             from: ['/ziti/clients/iOS.html'],
@@ -299,10 +255,10 @@ const config = {
             to: '/docs/core-concepts/security/enrollment',
             from: ['/ziti/security/enrollment/enrollment.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/bootstrapping-trust/part-05.bootstrapping-trust.html'],
-          // },
+          {
+            to: '/blog/bootstrapping-trust/part-05.bootstrapping-trust',
+            from: ['/articles/bootstrapping-trust/part-05.bootstrapping-trust.html'],
+          },
           {
             to: '/docs/core-concepts/clients/sdks',
             from: ['/ziti/clients/sdks'],
@@ -315,10 +271,6 @@ const config = {
             to: '/docs/core-concepts/security/authorization/policies/creating-edge-router-policies',
             from: ['/ziti/security/authorization/policies/creating-edge-router-policies.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/zitification/zitifying-scp/index.html'],
-          // },
           {
             to: '/docs/manage/troubleshooting/',
             from: ['/ziti/manage/troubleshooting.html'],
@@ -343,10 +295,10 @@ const config = {
             to: '/docs/core-concepts/security/authentication/totp',
             from: ['/ziti/security/authentication/totp.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/bootstrapping-trust/part-02.a-primer-on-public-key-cryptography.html'],
-          // },
+          {
+            to: '/blog/bootstrapping-trust/part-02.a-primer-on-public-key-cryptography',
+            from: ['/articles/bootstrapping-trust/part-02.a-primer-on-public-key-cryptography.html'],
+          },
           {
             to: '/',
             from: ['/ziti/'],
@@ -363,18 +315,18 @@ const config = {
             to: '/docs/core-concepts/security/authentication/api-session-certificates',
             from: ['/ziti/security/authentication/api-session-certificates.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust.html'],
-          // },
+          {
+            to: '/blog/bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust',
+            from: ['/articles/bootstrapping-trust/part-04.certificate-authorities-and-chains-of-trust.html'],
+          },
           {
             to: '/docs/core-concepts/security/authorization/policies/creating-service-policies',
             from: ['/ziti/security/authorization/policies/creating-service-policies.html'],
           },
-          // {
-          //   to: '???',
-          //   from: ['/articles/bootstrapping-trust/part-03.certificates.html'],
-          // },
+          {
+            to: '/blog/bootstrapping-trust/part-03.certificates',
+            from: ['/articles/bootstrapping-trust/part-03.certificates.html'],
+          },
           {
             to: '/api/rest/',
             from: ['/ziti/apis/edge-apis.html'],
@@ -397,6 +349,11 @@ const config = {
             // Redirect from /articles/X to /blog/X
             return [
               existingPath.replace('/blog', '/articles'),
+            ];
+          } else if (existingPath.includes('/docs')) {
+            // Redirect from /ziti/X to /docs/X
+            return [
+              existingPath.replace('/docs', '/ziti'),
             ];
           }
           return undefined; // Return a falsy value: no redirect created
