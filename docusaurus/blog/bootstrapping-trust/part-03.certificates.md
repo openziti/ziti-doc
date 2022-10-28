@@ -165,7 +165,7 @@ that adds conventions and restrictions around certificate usages. They
 provide a place for signatures to resides and, through CSRs, provide a
 vehicle to request additional signatures. Certificates are useful
 because they package all of these concerns into a neat single file. In
-[part four](/part-04.certificate-authorities-and-chains-of-trust.md), we
+[part four](./part-04.certificate-authorities-and-chains-of-trust.md), we
 will explore how to create a formidable chain of trust by linking
 multiple certificates together.
 

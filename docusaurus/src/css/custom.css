@@ -307,3 +307,35 @@ input[type="radio"]:checked+label:after {
   justify-content: center;
   text-decoration-line: none;
 }
+
+.leftdiv {
+  width: 110px;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  float: left;
+}
+.leftdiv img {
+  height: 220px;
+  width: 210px;
+  margin-top: -35px;
+}
+.rightdiv {
+  width: 110px;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  float: right;
+}
+.rightdiv img {
+  height: 220px;
+  width: 210px;
+  margin-top: -35px;
+}
+.flr {
+float: right;
+}

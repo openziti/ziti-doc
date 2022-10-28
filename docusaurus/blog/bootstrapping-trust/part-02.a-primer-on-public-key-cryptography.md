@@ -129,7 +129,7 @@ hash size is usually fixed length.
 
 For example, here is the Ziti logo:
 
-<img src="./images/ziti.png" style="display: block; width: 25%; margin: 0px auto;">
+<img src="./images/ziti.png" style="display: block; width: 25%; margin: 0px auto;"/>
 
 This logo's file can be hashed using SHA-256 via the `sha256sum` command
 commonly found on Linux.

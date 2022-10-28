@@ -19,7 +19,7 @@ Kubernetes itself is not a container engine, it's an orchestrator. This means th
 If you'd prefer to watch a video that goes over the same content contained in the rest of this article you can go ahead and click here to watch.
 
 <a href="https://youtu.be/CRoansolpR0">
-    <img alt="Secure Kubernetes" src="https://img.youtube.com/vi/CRoansolpR0/0.jpg" height="180px">
+    <img alt="Secure Kubernetes" src="https://img.youtube.com/vi/CRoansolpR0/0.jpg" height="180px"/>
 </a>
 
 * * *

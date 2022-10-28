@@ -80,7 +80,7 @@ trust a bit clearer, it helps to have a concrete system to use an
 example. It just so happens that the Ziti software system makes a great
 example!
 
-<img src="./images/ziti-system.png" style="width: 80%; margin: 0 auto; display: block;">
+<img src="./images/ziti-system.png" style="width: 80%; margin: 0 auto; display: block;"/>
 
 In Ziti, all of the above steps require interacting with a Ziti
 Controller. The Ziti Controller manages the Ziti overlay network by
@@ -202,7 +202,7 @@ What matters is that this system has multiple pieces of software
 connecting amongst themselves. Consider what it means to accomplish this
 using public-key cryptography.
 
-<img src="./images/mesh.png" style="display: block; width: 50%; margin: 0px auto;">
+<img src="./images/mesh.png" style="display: block; width: 50%; margin: 0px auto;"/>
 
 In the diagram above, each system needs:
 

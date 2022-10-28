@@ -1,11 +1,5 @@
 # Scraping Anything, Anywhere in Action
 
-<style>
-.flr {
-  float: right;
-}
-</style>
-
 _This is part three of a three-part article. This article builds on the previous two articles. Here we will take a look at what we built 
 and use it to explore the power of a zitified Prometheus. See [part one](./part1.md) for the necessary background about the series. See 
 [part two](./part2.md) for detailed instructions covering how to setup the environment you're about to explore_
@@ -27,7 +21,7 @@ prove it works. Once that's complete, we'll play around with the setup and see i
 
 In the [previous article](./part2.md), we established our entire solution using the OpenZiti overlay, `kubectl` and `helm`. We saw 
 everything get installed and it all "seems to work". But how do we **know** it works?  Let's provision an identity for yourself now and 
-let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](~/ziti/clients/which-client.md) running 
+let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](/docs/core-concepts/clients/choose) running 
 locally. Once you have that installed, provision an identity and enroll it with your tunneling client. 
 
 ```text
@@ -63,7 +57,7 @@ With your developer access you should be able to navigate your browser to http:/
 > [Look at the full list of top level domains starting with S](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#S). You 
 > won't find ".svc" on that list at this time
 
-<img src="./kubea.prom.init.png" class="flr" style="height: 300px;">
+<img src="./kubea.prom.init.png" class="flr" style="height: 300px;"/>
 
 You should see the following. You might have noticed that the chart deployed has a few other containers we have not discussed yet. We'll 
 not go into those containers in this article. What's important is that this Prometheus server has a few targets already for us to access. 
@@ -244,11 +238,11 @@ When we run `Prometheuz` locally using docker we'll need a config file to give t
 identity used to connect to the OpenZiti overlay in the same fashion. Let's start up a docker container locally and see if we can grab 
 data from our two Prometheus instances using a locally deployed `Prometheuz` via docker.
 
-GitHub has a sample Prometheus [file you can download](https://raw.githubusercontent.com/openziti/ziti-doc/main/docfx_project/articles/zitification/prometheus/scripts/local.prometheus.yml).
+GitHub has a sample Prometheus [file you can download](https://raw.githubusercontent.com/openziti/ziti-doc/main/docusaurus/blog/zitification/prometheus/scripts/local.prometheus.yml).
 Below, I used curl to download it and put it into the expected location.
 
 ```text
-curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docfx_project/articles/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
+curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docusaurus/blog/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
 
 ziti edge create identity user local.prometheus.id -o /tmp/prometheus/local.prometheus.id.jwt -a "reflectz-clients","prometheus-clients"
 ziti edge enroll /tmp/prometheus/local.prometheus.id.jwt -o /tmp/prometheus/local.prometheus.id.json
@@ -273,7 +267,7 @@ I want to fix that too. Let's start this docker container up listening only on t
 we will make a config, a service and two policies to enable identities on the OpenZiti overlay.
 
 ```text
-curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docfx_project/articles/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
+curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docusaurus/blog/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
 
 # create the config and service for the local prometheus server
 ziti edge create config "local.prometheus.svc-intercept.v1" intercept.v1 \

@@ -50,7 +50,7 @@ When `make` completes, you'll have statically linked binaries for the SDK's samp
 ## Set up a Ziti Network
 
 For this article we'll use a Ziti Edge Developer Edition to run our network. Follow
-the [Ziti Network Quickstart](../ziti/quickstarts/quickstart-overview.md).
+the [Ziti Network Quickstart](/docs/quickstarts/network/).
 
 ### Create the "demo-weather" Service
 

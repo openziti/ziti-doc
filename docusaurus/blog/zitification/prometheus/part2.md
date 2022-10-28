@@ -1,39 +1,5 @@
 # Configuring OpenZiti to Enable Prometheus
 
-<style>
-.leftdiv {
-    width: 110px;
-    height: 150px;
-    object-fit: cover;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    float: left;
-}
-.leftdiv img {
-    height: 220px;
-    width: 210px;
-    margin-top: -35px;
-}
-.rightdiv {
-    width: 110px;
-    height: 150px;
-    object-fit: cover;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    float: right;
-}
-.rightdiv img {
-    height: 220px;
-    width: 210px;
-    margin-top: -35px;
-}
-.flr {
-  float: right;
-}
-</style>
-
 _This is part two of a three-part article. This article provides the technical deep dive into the steps necessary to implement the vision
 outlined in [part one](./part1.md). This article will be heavy on OpenZiti CLI commands, explaining what we are doing to configure the 
 overlay network, and why. In [the final article](./part3.md), we will explore what we have just created and understand what was just 
@@ -60,7 +26,7 @@ What we really want is to enable Prometheus to scrape data from targets without 
 even better** if we didn't have to expose any ports at all, even to the local "trusted" network. This capability is something that is 
 unique to an OpenZiti-enabled application. You can take an OpenZiti SDK and embed it into your application, and give your app zero trust 
 superpowers! If we take an OpenZiti SDK and embed it into Prometheus, we can give Prometheus the superpower of invisibility and 
-addressability. Embedding an OpenZiti SDK produces a [zitified](~/articles/zitification/index.md) version of Prometheus. With an 
+addressability. Embedding an OpenZiti SDK produces a [zitified](../index.md) version of Prometheus. With an 
 OpenZiti-powered Prometheus, no ports need to be open.
 
 The OpenZiti project has done the work to produce an OpenZiti-enabled version of Prometheus. It's also entirely open source. Check it out
@@ -102,12 +68,12 @@ Let's get to work and build this solution. We'll need some legwork done first.
 ### Prerequisites
 
 <div class="leftdiv">
-    <img src="https://github.com/openziti/branding/raw/main/images/ziggy/svg/Ziggy%20The%20Construction%20Worker.svg" class="leftdiv">
+    <img src="https://github.com/openziti/branding/raw/main/images/ziggy/svg/Ziggy%20The%20Construction%20Worker.svg" class="leftdiv"/>
 </div>
 <div style="overflow: auto;">
 <ul>
 <li> You have an OpenZiti overlay network available. If not, for this scenario you will want to use 
-["host your own"](~/ziti/quickstarts/network/hosted.md). You'll also want to have the ziti cli tool on your path</li>
+["host your own"](/docs/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path</li>
 <li> Two Kubernetes clusters provisioned</li>
 <li> Necessary tooling installed and available on the path</li>
   <ul><li>kubectl</li>
@@ -124,7 +90,7 @@ Let's get to work and build this solution. We'll need some legwork done first.
 
 ## ClusterA - Using `ziti-host`
 
-<img src="./clusterA.svg" class="flr">
+<img src="./clusterA.svg" class="flr"/>
 
 We start with an empty OpenZiti network, and two empty Kubernetes clusters. Let's start by populating ClusterA. We will deploy three 
 pods into this Kubernetes cluster. When done, the Kubernetes cluster will look similar to the image to the right.
@@ -337,7 +303,7 @@ helm install prometheuz openziti-test-kitchen/prometheus \
 
 ## ClusterB - Fully Dark
 
-<img src="./clusterB.svg" class="flr">
+<img src="./clusterB.svg" class="flr"/>
 
 Now that we have deployed our first Kubernetes cluster, it's now time to deploy the second Kubernetes cluster. This time, we are going 
 to keep our entire deployment **fully dark**! There will be no listening ports, not even local to the Kubernetes cluster itself. To get 
@@ -506,5 +472,5 @@ All the commands above are also available in github as `.sh` scripts. If you wou
 provided if desired. 
 
 ```text
-${checkout_root}/docfx_project/articles/zitification/prometheus/scripts
+${checkout_root}/docusaurus/blog/zitification/prometheus/scripts
 ```
