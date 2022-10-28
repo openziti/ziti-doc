@@ -51,11 +51,11 @@ Network Management – Large-scale networks are difficult to measure and report 
 ### Server to Client 
 Various means to have a server communicate to the server (e.g., HTTP polling or WebSocket) have drawbacks and are not zero trust. OpenZiti allows any endpoints to communicate to other endpoints. There is no concept of client/server. Therefore, applications can be hosted and accessed by any other participating endpoint (as long as it has passed their authentication and authorisation checks).
 
-### Application portability 
+### Application Portability 
 Application operators and users must consider how and where their applications will be hosted and set up various controls (e.g., firewalls). OpenZiti-powered applications can be hosted anywhere without worrying about managing ports, IP, DNS etc., while users can access them from anywhere without thinking about ‘being on the network’ as the network moves wherever they do.
 
-### Easy to integrate 
+### Easy Integration 
 Developers need to identify/configure their applications to interact with the networking – e.g., specifying the application ports/IP that will be used. OpenZiti is seamless and easy to integrate, and if using SDKs, developers do not need to specify (or even care about) ports/IPs or the underlying network.
 
 ### Multiple options of deployment
-Deploying software to desktop/server is never an easy task. OpenZiti-powered applications enable you to reduce the deployment time & effort. You can integrate the SDK directly into the application that's already being deployed. If you can't integrate, you can use [Pre-built tunnelers and proxies for a variety of operating systems, including mobile](../core-concepts/clients/tunnelers) to allow existing applications and networks to take advantage of an OpenZiti deployment.
+Deploying software to desktop/server is never an easy task. Applications powered by OpenZiti enable you to reduce the deployment time & effort. You can integrate the SDK directly into the application that's already being deployed. If you can't integrate, you can use [Pre-built tunnelers and proxies for a variety of operating systems, including mobile](../core-concepts/clients/tunnelers) to allow existing applications and networks to take advantage of an OpenZiti deployment.

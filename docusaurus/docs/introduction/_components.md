@@ -2,38 +2,38 @@
 
 ### OpenZiti Controller
 
-The Ziti Controller is the central function of the
-Ziti Network. The Ziti Controller provides the
-configuration plane. It is responsible for configuring Ziti services
+The OpenZiti Controller is the central function of the
+OpenZiti Network. The OpenZiti Controller provides the
+configuration plane. It is responsible for configuring OpenZiti services
 as well as being the central point for managing the identities
-used by users, devices and the nodes making up the Ziti Network.
-Lastly but critically, the Ziti Controller is responsible for
-authentication and authorization for every connection in the Ziti
-network.
+used by users, devices and the nodes making up the OpenZiti Network.
+Lastly but critically, the OpenZiti Controller is responsible for
+authentication and authorization for every connection in the OpenZiti
+Network.
 
-The Ziti Controller must be configured with public key infrastructure
+The OpenZiti Controller must be configured with public key infrastructure
 (pki). The configured pki is used to create secure, mutually
 authenticated TLS (mTLS) network connections between any two
-pieces of the Ziti Network. The Ziti Controller does not provide its
-own pki but for the Ziti Controller to sign certificate requests (CSR)
-the Ziti Controller will need to be configured with a key and
-certificate used for signing. (Optionally, the Ziti CLI can be used
+pieces of the OpenZiti Network. The OpenZiti Controller does not provide its
+own pki but for the OpenZiti Controller to sign certificate requests (CSR)
+the OpenZiti Controller will need to be configured with a key and
+certificate used for signing. (Optionally, the OpenZiti CLI can be used
 to generate a pki if needed)
 
-The Ziti Controller also supports using a third-party pki should the
-operator of the Ziti Network have an existing pki they wish to
+The OpenZiti Controller also supports using a third-party pki should the
+operator of the OpenZiti Network have an existing pki they wish to
 reuse. Utilizing a third-party CA pushes the burden of obtaining
 and distributing properly signed certificates to the operator of
-the Ziti network but for sophisticated customers this might make
+the OpenZiti Network but for sophisticated customers this might make
 overall management of the network easier.
-The Ziti Controller uses an out of process database (Postgres) to
+The OpenZiti Controller uses a local database based on [bbolt](https://github.com/etcd-io/bbolt) to
 store the information needed to manage the network.
 
 ### OpenZiti Fabric Router
 
-Ziti Fabric Routers are the fundamental building blocks of the Ziti
+OpenZiti Fabric Routers are the fundamental building blocks of the OpenZiti
 Network. These routers are responsible for securely and reliably
-delivering traffic from one Ziti Network node to the traffic’s
+delivering traffic from one OpenZiti Network node to the traffic’s
 destination.
 
 Ziti Fabric Routers are linked together to form a mesh network. This mesh is
@@ -44,66 +44,66 @@ even in the case of a node failure.
 
 ### OpenZiti Edge Router
 
-Another fundamental building block of the Ziti Network is the
-Ziti Edge Router. The Ziti Edge Router is the entry point for Edge
-Clients connecting to the Ziti Network. The Ziti Edge Router is a
-specialized Ziti Router incorporating the functionality of a Ziti Router to
-enable it to route traffic over the Ziti network as a Ziti Router would
+Another fundamental building block of the OpenZiti Network is the
+OpenZiti Edge Router. The OpenZiti Edge Router is the entry point for Edge
+Clients connecting to the OpenZiti Network. The OpenZiti Edge Router is a
+specialized OpenZiti Router incorporating the functionality of an OpenZiti Router to
+enable it to route traffic over the OpenZiti Network as an OpenZiti Router would
 to a given destination.
 
-The Ziti Edge Router in combination with the Ziti Controller is responsible
-for authenticating and authorizing Ziti Edge Clients.
+The OpenZiti Edge Router in combination with the Ziti Controller is responsible
+for authenticating and authorizing OpenZiti Edge Clients.
 
 ### OpenZiti Edge Clients
 
-Connecting to the Ziti Network requires a Ziti Edge Client. Edge
+Connecting to the OpenZiti Network requires an OpenZiti Edge Client. Edge
 Clients are designed to work with both brownfield and greenfield
 applications.
 
 If the solution being developed includes developing new
-software Ziti offers SDKs targeting various languages
+software OpenZiti offers SDKs targeting various languages
 and runtimes to provide fast, reliable and secure connectivity.
 These SDKs provide the capabilities needed to securely connect
-to the Ziti Network and are designed to be easily incorporated
+to the OpenZiti Network and are designed to be easily incorporated
 into the target application.
 
 When adding secure connectivity to an already existing solution
-Ziti offers specialized Edge Clients called tunnelers
+OpenZiti offers specialized Edge Clients called tunnelers
 which provide seamless, secure connectivity and do not require
 changes to the target application.
 
 ## Logical Components
 
-Once the Ziti Network is established and deployed the next step
+Once the OpenZiti Network is established and deployed the next step
 is to configure the software-powered network. The three main
-concepts necessary to configure a Ziti Network are: Identities,
+concepts necessary to configure an OpenZiti Network are: Identities,
 Services, and Policies.
 
 ### Services
 
 A service encapsulates the definition of any resource that could
-be accessed by a client on a traditional network. A Ziti Service is
+be accessed by a client on a traditional network. An OpenZiti Service is
 defined by a strong, extensible identity, rather than by an
 expression of an underlay concept. This means that services
-defined on a Ziti Network have an almost limitless "namespace"
-available for identifying services. A Ziti Service is defined by a
+defined on an OpenZiti Network have an almost limitless "namespace"
+available for identifying services. An OpenZiti Service is defined by a
 name and/or a certificate, rather than by a DNS name or an IP
 address (underlay concepts). Services also declare a node where
-traffic that exits the Ziti Network needs to be sent do before
+traffic that exits the OpenZiti Network needs to be sent do before
 exiting. It’s possible for the node traffic enters to be the same it
-exits and it’s possible for traffic needing to traverse the Ziti
+exits and it’s possible for traffic needing to traverse the OpenZiti
 Network Routers to reach the correct node. Simply specifying the
-node is all the end-user need do, the Ziti Network handles the
+node is all the end-user need do, the OpenZiti Network handles the
 rest.
 
 ### Identities
 
-Identities represent individual endpoints in the Ziti Network
+Identities represent individual endpoints in the OpenZiti Network
 which can establish connectivity. All connections made within the
-Ziti Network are mutually authenticated using X509 Certificates.
-Every Identity is mapped to a given certificate’s signature. Ziti
+OpenZiti Network are mutually authenticated using X509 Certificates.
+Every Identity is mapped to a given certificate’s signature. OpenZiti
 Edge Clients present this certificate when initiating connections
-to the Ziti Network. The presented certificate is used by the Ziti
+to the OpenZiti Network. The presented certificate is used by the OpenZiti
 Network to authorize the client and enumerate the services the
 Identity is authorized to use.
 
