@@ -78,7 +78,7 @@ const config = {
           },
           {
             to: '/docs/introduction/intro',
-            from: ['/ziti/overview'],
+            from: ['/ziti/overview.html'],
           },
           {
             to: '/docs/quickstarts/services/ztha',
