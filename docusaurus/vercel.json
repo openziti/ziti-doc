@@ -4,5 +4,6 @@
     "outputDirectory": "build",
     "github": {
         "silent": false
-    }
+    },
+    "cleanUrls": false
 }
