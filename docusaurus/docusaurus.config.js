@@ -108,14 +108,6 @@ const config = {
             from: ['/docs/introduction/zitiSoftwareArchitecture', '/ziti/software-architecture', '/ziti/software-architecture.html'],
           },
           {
-            to: '/docs/quickstarts/network/local-docker-compose',
-            from: ['/ziti/quickstarts/network/local-docker-compose', '/ziti/quickstarts/network/local-docker-compose.html'],
-          },
-          {
-            to: '/docs/quickstarts/zac/installation',
-            from: ['/ziti/quickstarts/zac/installation', '/ziti/quickstarts/zac/installation.html'],
-          },
-          {
             to: '/docs/core-concepts/clients/tunnelers/linux',
             from: ['/ziti/clients/linux', '/ziti/clients/linux.html'],
           },
