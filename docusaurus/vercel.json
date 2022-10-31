@@ -5,5 +5,6 @@
     "github": {
         "silent": false
     },
-    "cleanUrls": false
+    "cleanUrls": false,
+    "public": true
 }
