@@ -302,13 +302,13 @@ const config = {
           },
         ],
         createRedirects(existingPath) {
-          if (existingPath.includes('/blog')) {
-            // Redirect from /articles/X to /blog/X
-            return [
-              existingPath.replace('/blog', '/articles'),
-            ];
-          } 
-          else 
+          // if (existingPath.includes('/blog')) {
+          //   // Redirect from /articles/X to /blog/X
+          //   return [
+          //     existingPath.replace('/blog', '/articles'),
+          //   ];
+          // } 
+          // else 
           if (existingPath.includes('/docs')) {
             // Redirect from /ziti/X to /docs/X
             return [
