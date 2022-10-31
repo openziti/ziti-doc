@@ -126,7 +126,7 @@ const config = {
           },
           {
             to: '/docs/core-concepts/clients/sdks',
-            from: ['/ziti/clients/sdks.html'],
+            from: ['/ziti/clients/sdks', '/ziti/clients/sdks.html'],
           },
           {
             to: '/guides/hsm/softhsm',
@@ -266,7 +266,7 @@ const config = {
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/',
-            from: ['/ziti/clients/tunneler.html'],
+            from: ['/ziti/clients/tunneler', '/ziti/clients/tunneler.html'],
           },
           {
             to: '/docs/core-concepts/security/authentication/api-session-certificates',
@@ -290,7 +290,7 @@ const config = {
           },
           {
             to: '/docs/core-concepts/config-store/overview',
-            from: ['/ziti/config-store/overview.html'],
+            from: ['/ziti/config-store/overview', '/ziti/config-store/overview.html'],
           },
           {
             to: '/docs/core-concepts/metrics/file',
@@ -300,8 +300,16 @@ const config = {
             to: '/docs/core-concepts/metrics/inspect',
             from: ['/ziti/metrics/inspect.html'],
           },
+          {
+            to: '/docs/manage/edge-router',
+            from: ['/ziti/manage/edge-router.html'],
+          },
+          {
+            to: '/docs/manage/pki',
+            from: ['/ziti/manage/pki.html'],
+          },
         ],
-        createRedirects(existingPath) {
+        // createRedirects(existingPath) {
           // if (existingPath.includes('/blog')) {
           //   // Redirect from /articles/X to /blog/X
           //   return [
@@ -309,14 +317,14 @@ const config = {
           //   ];
           // } 
           // else 
-          if (existingPath.includes('/docs')) {
-            // Redirect from /ziti/X to /docs/X
-            return [
-              existingPath.replace('/docs', '/ziti'),
-            ];
-          }
-          return undefined; // Return a falsy value: no redirect created
-        },
+        //   if (existingPath.includes('/docs')) {
+        //     // Redirect from /ziti/X to /docs/X
+        //     return [
+        //       existingPath.replace('/docs', '/ziti'),
+        //     ];
+        //   }
+        //   return undefined; // Return a falsy value: no redirect created
+        // },
       },
     ],
   ],
