@@ -1,3 +1,7 @@
+---
+authors: clint_dovholuk
+---
+
 # Zitifying Kubectl
 
 The [previous post][1] showed how to use a zero trust overlay like Ziti for transferring files by zitifying `scp`. Next up in the list of zitifications is `kubectl`. [Kubernetes][2] is a container orchestration system. Its purpose is to deploy, scale, and manage the deployment containers. Containers are self-contained, pre-built images of software generally with a singular purpose. [Developers often like using containers for various reasons][13]. One major reason developers like containers is because it simplifies the deployment of the solutions they are developing. This is where Kubernetes starts to come into focus.

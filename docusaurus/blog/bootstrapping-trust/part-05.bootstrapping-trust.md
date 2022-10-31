@@ -1,3 +1,7 @@
+---
+authors: andrew_martinez
+---
+
 # Bootstrapping Trust
 
 ## Part 5 Bootstrapping Trust

@@ -1,3 +1,7 @@
+---
+authors: clint_dovholuk
+---
+
 # Scraping Anything, Anywhere in Action
 
 _This is part three of a three-part article. This article builds on the previous two articles. Here we will take a look at what we built 

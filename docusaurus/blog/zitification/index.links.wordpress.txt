@@ -1,9 +1,0 @@
-[1]: https://netfoundry.io/ztna-ransomware/
-
-[2]: https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network
-
-[3]: /blog/zitifying-ssh
-
-[4]: /blog/zitifying-scp
-
-[5]: /blog/kubernetes

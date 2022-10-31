@@ -125,6 +125,10 @@ Prometheus config, adding new scrape configs etc.
 
 ---
 
+---
+authors: clint_dovholuk
+---
+
 ### Applying Zero Trust Networking Principles Using OpenZiti
 
 Now that we understand the basic setup and understand some possible problems, let's see if OpenZiti can address one or more of these

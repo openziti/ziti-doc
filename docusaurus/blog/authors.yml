@@ -1,17 +1,23 @@
-endi:
-  name: Endilie Yacop Sucipto
-  title: Maintainer of Docusaurus
-  url: https://github.com/endiliey
-  image_url: https://github.com/endiliey.png
+andrew_martinez:
+  name: Andrew Martinez
+  title: OpenZiti Maintainer
+  url: https://hashnode.com/@andrewpmartinez
+  image_url: /img/profile-andrew-martinez.webp
 
-yangshun:
-  name: Yangshun Tay
-  title: Front End Engineer @ Facebook
-  url: https://github.com/yangshun
-  image_url: https://github.com/yangshun.png
+paul_lorenz:
+  name: Paul Lorenz
+  title: OpenZiti Maintainer
+  url: https://hashnode.com/@plorenz
+  image_url: /img/profile-paul-lorenz.webp
 
-slorber:
-  name: Sébastien Lorber
-  title: Docusaurus maintainer
-  url: https://sebastienlorber.com
-  image_url: https://github.com/slorber.png
+curt_tudor:
+  name: Curt Tudor
+  title: OpenZiti Maintainer
+  url: https://hashnode.com/@ctudor
+  image_url: /img/profile-curt-tudor.webp
+
+clint_dovholuk:
+  name: Clint Dovholuk
+  title: OpenZiti Maintainer
+  url: https://hashnode.com/@dovholuknf
+  image_url: /img/profile-clint-dovholuk.webp

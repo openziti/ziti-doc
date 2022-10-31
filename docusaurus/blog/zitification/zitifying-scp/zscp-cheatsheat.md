@@ -1,3 +1,8 @@
+---
+authors: clint_dovholuk
+---
+
+# `zscp` Cheat Sheet
 
 ```bash
 # establish some variables which are used below

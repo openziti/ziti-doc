@@ -1,3 +1,7 @@
+---
+authors: andrew_martinez
+---
+
 # Bootstrapping Trust
 
 ## Part 1: Encryption Everywhere

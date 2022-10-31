@@ -1,3 +1,7 @@
+---
+authors: andrew_martinez
+---
+
 # Bootstrapping Trust
 
 ## Part 2: A Primer On Public-Key Cryptography

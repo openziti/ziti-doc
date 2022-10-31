@@ -1,3 +1,7 @@
+---
+authors: clint_dovholuk
+---
+
 # Configuring OpenZiti to Enable Prometheus
 
 _This is part two of a three-part article. This article provides the technical deep dive into the steps necessary to implement the vision
