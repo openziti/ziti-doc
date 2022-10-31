@@ -106,7 +106,7 @@ const config = {
           },
           {
             to: '/docs/introduction/openziti-is-software',
-            from: ['/docs/introduction/zitiSoftwareArchitecture', '/ziti/software-architecture'],
+            from: ['/docs/introduction/zitiSoftwareArchitecture', '/ziti/software-architecture.html'],
           },
           {
             to: '/docs/core-concepts/clients/tunnelers/linux',
@@ -308,23 +308,79 @@ const config = {
             to: '/docs/manage/pki',
             from: ['/ziti/manage/pki.html'],
           },
+          {
+            to: '/blog/c-sdk-on-beaglebone',
+            from: ['/articles/c-sdk-on-beaglebone.html'],
+          },
+          {
+            to: '/blog/golang-aha/article',
+            from: ['/articles/golang-aha/article.html'],
+          },
+          {
+            to: '/blog',
+            from: ['/articles/index.html'],
+          },
+          {
+            to: '/blog/zitification',
+            from: ['/articles/zitification/index.html'],
+          },
+          {
+            to: '/blog/zitification/kubernetes',
+            from: ['/articles/zitification/kubernetes/index.html'],
+          },
+          {
+            to: '/blog/zitification/prometheus/part1',
+            from: ['/articles/zitification/prometheus/part1.html'],
+          },
+          {
+            to: '/blog/zitification/prometheus/part2',
+            from: ['/articles/zitification/prometheus/part2.html'],
+          },
+          {
+            to: '/blog/zitification/prometheus/part3',
+            from: ['/articles/zitification/prometheus/part3.html'],
+          },
+          {
+            to: '/blog/zitification/zitifying-scp',
+            from: ['/articles/zitification/zitifying-scp/index.html'],
+          },
+          {
+            to: '/blog/zitification/zitifying-ssh',
+            from: ['/articles/zitification/zitifying-ssh/index.html'],
+          },
+          {
+            to: '/docs/manage/router-overview',
+            from: ['/ziti/manage/router-overview.html'],
+          },
+          {
+            to: '/docs/manage/troubleshooting/',
+            from: ['/ziti/manage/troubleshooting.html'],
+          },
+          {
+            to: '/docs/quickstarts/network/hosted',
+            from: ['/ziti/quickstarts/network/hosted.html'],
+          },
+          {
+            to: '/docs/quickstarts/network/local-docker-compose',
+            from: ['/ziti/quickstarts/network/local-docker-compose.html'],
+          },
+          {
+            to: '/docs/quickstarts/network/local-no-docker',
+            from: ['/ziti/quickstarts/network/local-no-docker.html'],
+          },
+          {
+            to: '/docs/quickstarts/network/local-with-docker',
+            from: ['/ziti/quickstarts/network/local-with-docker.html'],
+          },
+          {
+            to: '/docs/quickstarts/services/',
+            from: ['/ziti/quickstarts/services/index.html'],
+          },
+          {
+            to: '/docs/quickstarts/zac/installation',
+            from: ['/ziti/quickstarts/zac/installation.html'],
+          },
         ],
-        // createRedirects(existingPath) {
-          // if (existingPath.includes('/blog')) {
-          //   // Redirect from /articles/X to /blog/X
-          //   return [
-          //     existingPath.replace('/blog', '/articles'),
-          //   ];
-          // } 
-          // else 
-        //   if (existingPath.includes('/docs')) {
-        //     // Redirect from /ziti/X to /docs/X
-        //     return [
-        //       existingPath.replace('/docs', '/ziti'),
-        //     ];
-        //   }
-        //   return undefined; // Return a falsy value: no redirect created
-        // },
       },
     ],
   ],
