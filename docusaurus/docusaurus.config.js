@@ -12,7 +12,7 @@ const config = {
   tagline: 'Replacing Infrastructure With Software',
   url: 'https://openziti.github.io/',
   baseUrl: '/',
-  trailingSlash: false,
+  trailingSlash: undefined,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
