@@ -5,23 +5,18 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 2 * * *' # run at 2 AM UTC
-      
+    - cron: '0 2 * * *' # run at 2 AM UTC to keep companion microsites updated e.g. swift SDK docs
+
 jobs:
   publish-docs-from-container:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     runs-on: ubuntu-latest
-    container:
-      image: openziti/doc:docfx
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
-        AWS_DEFAULT_REGION: us-east-1
-        GIT_BRANCH: main
-        gh_ci_key: ${{ secrets.gh_ci_key }}
-        ziti_ci_gpg_key: ${{ secrets.ZITI_CI_GPG_KEY }}
-        ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
+    env:
+      GIT_BRANCH: main
+      gh_ci_key: ${{ secrets.gh_ci_key }}
+      ziti_ci_gpg_key: ${{ secrets.ZITI_CI_GPG_KEY }}
+      ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: generate docs
         run: ./publish.sh

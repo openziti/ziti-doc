@@ -1,5 +1,5 @@
 
-# Ziti Controlller REST API
+# Ziti Controller REST API
 
 The API version and Swagger definition for a particular controller may be fetched and there are relatively good documents
 available as well, also served directly from the controller. There are two main endpoints 
