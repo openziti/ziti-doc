@@ -81,20 +81,20 @@ fi
 
 if [[ "${SKIP_LINKED_DOC}" == no ]]; then
 
-  commands_to_test=(doxygen jq curl wget)
+  commands_to_test=(doxygen wget)
 
   # verify all the commands required in the automation exist before trying to run the full suite
   for cmd in "${commands_to_test[@]}"; do
     # checking all commands are on the path before continuing...
     result="$(type ${cmd} &>/dev/null && echo "Found" || echo "Not Found")"
 
-    if [ "Not Found" = "${result}" ]; then
-        missing_requirements="${missing_requirements}    * ${cmd}\n"
+    if [[ "Not Found" == "${result}" ]]; then
+        missing_requirements+=" * ${cmd}\n"
     fi
   done
 
   # are requirements ? if yes, stop here and help 'em out
-  if ! [[ -z "${missing_requirements:-}" ]]; then
+  if [[ -n "${missing_requirements:-}" ]]; then
       echo " "
       echo "The commands listed below are required to be on the path for this script to function properly."
       echo "Please ensure the commands listed are on the path and then try again."
@@ -145,7 +145,7 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
       SWIFT_API_TARGET="${DOC_ROOT_TARGET}/swift"
       mkdir -p "${SWIFT_API_TARGET}"
       pushd "${SWIFT_API_TARGET}"
-      swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
+      swift_tgz="https://github.com/openziti/ziti-sdk-swift/releases/latest/download/ziti-sdk-swift-docs.tgz"
       echo " "
       echo "Copying Swift docs"
       echo "    from: ${swift_tgz}"
