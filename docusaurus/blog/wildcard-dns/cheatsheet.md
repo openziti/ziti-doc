@@ -1,5 +1,5 @@
 ---
-authors: clint_dovholuk
+authors: dovholuknf
 ---
 
 # Wildcard DNS Cheatsheet

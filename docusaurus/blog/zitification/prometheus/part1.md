@@ -126,7 +126,7 @@ Prometheus config, adding new scrape configs etc.
 ---
 
 ---
-authors: clint_dovholuk
+authors: dovholuknf
 ---
 
 ### Applying Zero Trust Networking Principles Using OpenZiti

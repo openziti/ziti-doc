@@ -1,5 +1,5 @@
 ---
-authors: andrew_martinez
+authors: andrewpmartinez
 ---
 
 # Bootstrapping Trust
