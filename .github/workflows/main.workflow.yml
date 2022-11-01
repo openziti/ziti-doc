@@ -17,6 +17,11 @@ jobs:
       ziti_ci_gpg_key: ${{ secrets.ZITI_CI_GPG_KEY }}
       ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
     steps:
-      - uses: actions/checkout@v3
-      - name: generate docs
+      - name: Checkout Workspace
+        uses: actions/checkout@v3
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update \
+          && sudo apt-get install -y doxygen
+      - name: Build & Publish Docusaurus Site
         run: ./publish.sh
