@@ -7,7 +7,7 @@ set -euo pipefail
     exit 1
 } 
 
-typeset -a FAILURES
+typeset -a FAILURES=()
 while read; do
     curl -sfLw "\n${REPLY}\t%{http_code}\n" ${1}${REPLY} &>/dev/null || { FAILURES+=($REPLY); }; 
 done <<URLS
@@ -110,7 +110,7 @@ URLS
 # /api/csharp/NetFoundry.ZitiStatus.html
 
 
-if [[ ${#FAILURES} -eq 0 ]]; then
+if [[ ${#FAILURES[*]} -eq 0 ]]; then
     echo "Success!"
     exit 0
 else
