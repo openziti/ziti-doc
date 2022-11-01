@@ -1,3 +1,8 @@
+---
+authors: dovholuknf
+---
+
+# Wildcard DNS Cheatsheet
 
 ```bash
 # ------------- start docker 
@@ -75,6 +80,4 @@ ziti edge create service-policy wildcard.web.test.service.bind.blue Bind --servi
 
 ziti edge delete service-policy wildcard.web.test.service.dial.zdew
 ziti edge create service-policy wildcard.web.test.service.dial.zdew Dial --service-roles "@wildcard.web.test.service" --identity-roles "@zdewclint"
-
-
 ```

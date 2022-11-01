@@ -1,3 +1,7 @@
+---
+authors: andrewpmartinez
+---
+
 # Bootstrapping Trust
 
 ## Part 3: Certificates

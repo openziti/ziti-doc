@@ -1,3 +1,9 @@
+---
+authors: dovholuknf
+---
+
+# `zssh` Cheat Sheet
+
 ```bash
 # establish some variables which are used below
 service_name=zsshSvc

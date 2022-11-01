@@ -1,3 +1,7 @@
+---
+authors: andrewpmartinez
+---
+
 # Bootstrapping Trust
 
 ## Part 4: Certificate Authorities & Chains of Trust

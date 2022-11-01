@@ -1,3 +1,7 @@
+---
+authors: plorenz
+---
+
 # Golang Aha! Moments
 
 ## Introduction

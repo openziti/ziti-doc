@@ -1,3 +1,7 @@
+---
+authors: dovholuknf
+---
+
 # Zitification
 
 "Zitification" or "zitifying" is the act of taking an application and incorporating a Ziti SDK into that application. Once an

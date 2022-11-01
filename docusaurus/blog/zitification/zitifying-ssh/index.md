@@ -1,3 +1,7 @@
+---
+authors: dovholuknf
+---
+
 # Zitifying SSH
 
 As we learned in the [opening post][1], "zitifying" an application means to embed a Ziti SDK into an application and leverage the power of a [Ziti Network][2] to provide secure, truly zero-trust access to your application no matter where in the world that application goes. In this post we are going to see how we have zitified `ssh` and why. Future posts will expand on this even further by showing how NetFoundry uses `zssh` to support our customers.

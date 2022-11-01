@@ -1,3 +1,7 @@
+---
+authors: dovholuknf
+---
+
 # Zitifying SCP
 
 In the [previous post][1] we talked about how we could take a well-known application and improve its security by zitifying it, producing `zssh`. The logical next step after zitifying `ssh` would be to extend the functionality of `zssh` to cover moving files securely as well, enter `zscp`. A zitified `scp` effectively creates a more secure command line tool for sending and receiving files between ziti-empowered devices. Once zitified, we can use `zscp` using ziti identity names just like we did in [zitifying ssh][1]. I recommend reading the [previous article][1]) if you haven't to learn more about the benefits of zitifying tools like `ssh` and `scp`.
