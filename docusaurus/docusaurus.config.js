@@ -33,13 +33,6 @@ const config = {
 
   plugins: [
     [
-      '@docusaurus/plugin-google-analytics',
-      {
-        trackingID: 'G-THVRRJ3GLE',
-        anonymizeIP: true,
-      },
-    ],
-    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'docs-api',
@@ -406,7 +399,11 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        debug: true
+        debug: true,
+        gtag: {
+          trackingID: 'G-THVRRJ3GLE',
+          anonymizeIP: true,
+        },
       }),
     ],
   ],
