@@ -32,3 +32,17 @@
 .black[aria-selected='true'] {
   border-bottom-color: black;
 }
+
+.yellow {
+  color: yellow;
+}
+.yellow[aria-selected='true'] {
+  border-bottom-color: yellow;
+}
+
+.custom {
+  color: rgb(128, 135, 138);
+}
+.custom[aria-selected='true'] {
+  border-bottom-color: rgb(128, 135, 138);
+}
