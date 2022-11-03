@@ -144,7 +144,7 @@ An enrollment JWT can be retrieved in the same manner as [OTT Enrollment](#ott-e
 
 ## Auto CA Enrollment
 
-Auto CA enrollment allows a [3rd Party CA](./uthentication/third-party-cas) to have clients enroll with a
+Auto CA enrollment allows a [3rd Party CA](./authentication/third-party-cas) to have clients enroll with a
 Ziti network without first creating an identity or distributing a JWT enrollment token. Create a
 [3rd Party CA](./authentication/third-party-cas) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
 
