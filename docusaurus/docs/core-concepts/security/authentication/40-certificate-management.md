@@ -6,7 +6,7 @@ is possible through other means however router and controller verification is al
 In order to maintain valid client and server certificates, both routers and clients have API available to them to
 extend their current certificates forward. These APIs only work for the internal Ziti PKI. Routers within a Ziti
 network always use the internal Ziti PKI for their certificates. Clients may be configured to other external
-PKIs via [3rd Party CAs](third-party-cas). In that scenario ZIti can not provide support for certificate
+PKIs via [3rd Party CAs](./third-party-cas). In that scenario ZIti can not provide support for certificate
 management.
 
 ## Router Certificate Extension
@@ -21,7 +21,7 @@ have expired, the router will have to be [re-enrolled](../enrollment#router-enro
 Clients may determine their own client certificate extension frequency. In order to extend their current client 
 certificate issued by the Ziti PKI they must issue the following RESt request to either the 
 [Edge Management API](/api/rest/edge-apis#edge-management-api) or [Edge Client API](/api/rest/edge-apis#edge-client-api) 
-after becoming [fully authenticated](auth#full-vs-partial-authentication).
+after becoming [fully authenticated](./auth#full-vs-partial-authentication).
 
 ### Client Certificate Extension
 
