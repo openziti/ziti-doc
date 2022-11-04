@@ -47,7 +47,7 @@ export default function Home() {
                     }}
                 />
                 <div style={{display:"flex", justifyContent:"center"}}>
-                <p style={{fontSize: "x-large"}}>-- Replacing Infrastructure With Software --</p>
+                <p style={{fontSize: "x-large"}}>Replacing Infrastructure with Software</p>
                 </div>
             </div>
             <OpenZitiHorizontalSection style={{fontSize:"large"}}>
