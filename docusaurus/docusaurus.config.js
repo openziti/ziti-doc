@@ -413,12 +413,12 @@ const config = {
     ({
       algolia: {
         // The application ID provided by Algolia
-        appId: 'EXWPKK5PV4',
+        appId: 'EYL355ZRV9',
   
         // Public API key: it is safe to commit it
-        apiKey: '47858a78ccf0246d9b9cf4efaf6a1b8b',
+        apiKey: '96f3340e859a20220001b4a0bb73c451',
   
-        indexName: 'openziti',
+        indexName: 'prod_DOCUSAURUS',
   
         // Optional: see doc section below
         contextualSearch: true,
