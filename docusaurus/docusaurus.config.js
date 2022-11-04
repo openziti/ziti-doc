@@ -294,10 +294,6 @@ const config = {
             from: ['/ziti/metrics/inspect.html'],
           },
           {
-            to: '/docs/manage/edge-router',
-            from: ['/ziti/manage/edge-router.html'],
-          },
-          {
             to: '/docs/manage/pki',
             from: ['/ziti/manage/pki.html'],
           },
@@ -340,14 +336,6 @@ const config = {
           {
             to: '/blog/zitification/zitifying-ssh',
             from: ['/articles/zitification/zitifying-ssh/index.html'],
-          },
-          {
-            to: '/docs/manage/router-overview',
-            from: ['/ziti/manage/router-overview.html'],
-          },
-          {
-            to: '/docs/manage/troubleshooting/',
-            from: ['/ziti/manage/troubleshooting.html'],
           },
           {
             to: '/docs/quickstarts/network/hosted',
