@@ -1,5 +1,3 @@
-(Note: Here is the modification I wantted to see on the front page or concept section for the router concept. I left it using _ here just incase someone want to use these as part of the revamp of those sections. Dariusz Nov/22)
-
 ### Ziti Router
 
 Ziti Routers are the fundamental building blocks of the Ziti Network. 
