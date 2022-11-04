@@ -77,7 +77,7 @@ sudo apt install ziti-edge-tunnel
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable jammy main' \
+echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable Bionic main' \
 | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
 sudo apt update
 sudo apt install ziti-edge-tunnel
@@ -96,9 +96,8 @@ sudo apt install ziti-edge-tunnel
 <Tabs
   defaultValue="Redhat"
   values={[
-      { label: 'RHEL 7,8', value: 'Redhat', },
-      { label: 'Rocky 8', value: 'Rocky', },
-      { label: 'Centos 7', value: 'Centos', },
+      { label: 'Redhat', value: 'Redhat', },
+      { label: 'Redhat 9', value: 'Redhat9', },
       { label: 'Fedora', value: 'Fedora', },
       { label: 'Amazon Linux', value: 'Amazon', },
   ]}
@@ -106,7 +105,7 @@ sudo apt install ziti-edge-tunnel
 <TabItem value="Redhat">
 
 ```Redhat
-**Redhat 9 is not supported yet**
+** For Redhat 9 please refer to Redhat 9 section**
 
 [OpenZiti]
 name=OpenZiti
@@ -118,32 +117,16 @@ repo_gpgcheck=1
 ```
 
 </TabItem>
-<TabItem value="Rocky">
+<TabItem value="Redhat9">
 
-```Rocky
-**Rocky 9 is not supported yet**
-
-[OpenZiti]
-name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch
-enabled=1
-gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch/repodata/repomd.xml.key
-repo_gpgcheck=1
-```
-
-</TabItem>
-<TabItem value="Centos">
-
-```Centos
-** CentOS Stream 9 is not supported yet**
+```Redhat9
 
 [OpenZiti]
 name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 

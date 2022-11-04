@@ -1,5 +1,5 @@
 
-# Linux Tunneler Options
+# Linux Tunneler Options and Modes
 
 ## ziti-edge-tunnel options
 
