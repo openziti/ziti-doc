@@ -3,7 +3,7 @@ id: pki
 title: PKI
 ---
 
-import PkiTroubleshootingMd from './06-troubleshooting/_pki-troubleshooting.md'
+import PkiTroubleshootingMd from './troubleshooting/_pki-troubleshooting.md'
 
 # Public Key Infrastructure (PKI)
 
