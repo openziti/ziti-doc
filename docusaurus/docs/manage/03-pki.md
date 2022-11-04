@@ -1,4 +1,9 @@
-import PkiTroubleshootingMd from './troubleshooting/_pki-troubleshooting.md'
+---
+id: pki
+title: PKI
+---
+
+import PkiTroubleshootingMd from './05-troubleshooting/_pki-troubleshooting.md'
 
 # Public Key Infrastructure (PKI)
 

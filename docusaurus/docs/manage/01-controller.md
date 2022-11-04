@@ -1,4 +1,7 @@
-import LoggingSnippetMd from './_logging-snippet.md'
+---
+id: controller
+title: Controller
+---
 
 # Ziti Controller
 
@@ -31,4 +34,5 @@ Each section is annotated and should provide you enough information to modify a 
 straight-forward. The pki-related fields are the ones you will need to pay particular attention to. See
 the [pki](./pki) page for relevant information on pki settings.
 
-<LoggingSnippetMd />
+## Logging
+See [logging](04-cli/logging.md) for more details
