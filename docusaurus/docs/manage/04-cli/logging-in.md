@@ -1,6 +1,6 @@
 ---
 id: cli-login
-title: Log-in
+title: Login
 ---
 
 import LoginCliMd from './_login-snippet.md'
