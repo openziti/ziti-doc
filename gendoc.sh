@@ -19,19 +19,17 @@ set -e
 script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "$script_root"
 
-SKIP_GIT=""
-SKIP_LINKED_DOC=""
-SKIP_CLEAN=""
-WARNINGS_AS_ERRORS=""
-ZITI_DOC_GIT_LOC="${script_root}/docfx_project"
-DOC_ROOT_TARGET="${script_root}/docs-local/api"
-: ${ZITI_DOCUSAURUS:=false}
-: ${WEB_HOST:=gh_pages}
+: ${SKIP_GIT:=no}
+: ${SKIP_LINKED_DOC:=no}
+: ${SKIP_CLEAN:=no}
+ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
+DOC_ROOT_TARGET="${script_root}/docusaurus/static/api"
+: ${ZITI_DOCUSAURUS:=yes}
 
 echo "- processing opts"
 
-while getopts ":gwlcdfV" opt; do
-  case ${opt} in
+while getopts ":glcwd" OPT; do
+  case ${OPT} in
     g ) # skip git
       echo "- skipping git cleanup"
       SKIP_GIT="yes"
@@ -48,67 +46,21 @@ while getopts ":gwlcdfV" opt; do
       echo "- treating warnings as errors"
       WARNINGS_AS_ERRORS="--warningsAsErrors"
       ;;
-    d ) # docusaurus
-      echo "- building docusaurus"
-      ZITI_DOCUSAURUS="true"
-      ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
-      DOC_ROOT_TARGET="${script_root}/docusaurus/static/api"
-      echo "- building docusaurus to ${ZITI_DOC_GIT_LOC}"
-      ;;
-    f ) # docfx
-    #\? ) echo "Usage: cmd [-h] [-t]"
-      echo "this would have been docfx"
-      ;;
-    V ) WEB_HOST=vercel
+    d)
+      echo "WARN: ignoring option ${OPT}" >&2
       ;;
     *)
+      echo "WARN: ignoring option ${OPT}" >&2
       ;;
   esac
 done
 
 echo "- done processing opts"
 
-# if in Docfx mode, not Docusaurus mode, then make sure the required programs are available 
-if [[ "${ZITI_DOCUSAURUS}" == false ]]; then
-  if [[ -z "${DOCFX_EXE:-}" ]]; then
-      shopt -s expand_aliases
-      if [[ -f "~/.bash_aliases" ]]; then
-        source "${HOME}/.bash_aliases"
-    fi
-  else
-      alias docfx="mono $DOCFX_EXE"
-  fi
-
-  commands_to_test=(doxygen mono docfx jq)
-
-  # verify all the commands required in the automation exist before trying to run the full suite
-  for cmd in "${commands_to_test[@]}"
-  do
-      # checking all commands are on the path before continuing...
-      result="$(type ${cmd} &>/dev/null && echo "Found" || echo "Not Found")"
-
-      if [ "Not Found" = "${result}" ]; then
-          missing_requirements="${missing_requirements}    * ${cmd}\n"
-      fi
-  done
-
-  # are requirements ? if yes, stop here and help 'em out
-  if ! [[ -z "${missing_requirements:-}" ]]; then
-      echo " "
-      echo "The commands listed below are required to be on the path for this script to function properly."
-      echo "Please ensure the commands listed are on the path and then try again."
-      printf "\n${missing_requirements}"
-      echo " "
-      echo "If any of these commands are declared as aliases (docfx is a common one) ensure your alias is"
-      echo "declared inside of ~/.bash_aliases - or modify this script to add the aliases you require"
-      exit 1
-  fi
-fi
-
-if [[ ! "${SKIP_GIT}" == "yes" ]]; then
+if [[ "${SKIP_GIT}" == no ]]; then
   echo "updating dependencies by rm/checkout"
   mkdir -p "${ZITI_DOC_GIT_LOC}"
-  if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
+  if [[ "${SKIP_CLEAN}" == no ]]; then
     rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
   fi
   git config --global --add safe.directory $(pwd)
@@ -119,37 +71,43 @@ if [[ ! "${SKIP_GIT}" == "yes" ]]; then
   clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
 fi
 
-if [[ ! "${SKIP_CLEAN}" == "yes" ]]; then
-if test -d "${DOC_ROOT_TARGET}"; then
-  # specifically using ../ziti-doc just to remove any chance to rm something unintended
-  echo removing previous build at: rm -r "${DOC_ROOT_TARGET}"
-  rm -r "${DOC_ROOT_TARGET}" || true
-fi
-fi
-
-if [[ "${ZITI_DOCUSAURUS}" == "false" ]]; then
-  pushd ${ZITI_DOC_GIT_LOC}
-  docfx build ${WARNINGS_AS_ERRORS}
-  popd
-else
-  if [[ ${WEB_HOST} == vercel ]]; then
-    sed -E -i "s|(baseUrl:).*,|\1 '/',|" ${ZITI_DOC_GIT_LOC}/../docusaurus.config.js
+if [[ "${SKIP_CLEAN}" == no ]]; then
+  if test -d "${DOC_ROOT_TARGET}"; then
+    # specifically using ../ziti-doc just to remove any chance to rm something unintended
+    echo removing previous build at: rm -r "${DOC_ROOT_TARGET}"
+    rm -r "${DOC_ROOT_TARGET}" || true
   fi
-  pushd ${ZITI_DOC_GIT_LOC}/..
-  echo "running yarn install in ${PWD}"
-  yarn install --frozen-lockfile
-  echo "running npm run build in ${PWD}"
-  yarn build
-  popd
 fi
 
-if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
+if [[ "${SKIP_LINKED_DOC}" == no ]]; then
 
-  if [[ "${ZITI_DOCUSAURUS}" == "true" ]]; then
+  commands_to_test=(doxygen wget)
+
+  # verify all the commands required in the automation exist before trying to run the full suite
+  for cmd in "${commands_to_test[@]}"; do
+    # checking all commands are on the path before continuing...
+    result="$(type ${cmd} &>/dev/null && echo "Found" || echo "Not Found")"
+
+    if [[ "Not Found" == "${result}" ]]; then
+        missing_requirements+=" * ${cmd}\n"
+    fi
+  done
+
+  # are requirements ? if yes, stop here and help 'em out
+  if [[ -n "${missing_requirements:-}" ]]; then
+      echo " "
+      echo "The commands listed below are required to be on the path for this script to function properly."
+      echo "Please ensure the commands listed are on the path and then try again."
+      printf "\n${missing_requirements}"
+      echo " "
+      echo "If any of these commands are declared as aliases ensure your alias is"
+      echo "declared inside of ~/.bash_aliases - or modify this script to add the aliases you require"
+      exit 1
+  fi
+
+  if [[ "${ZITI_DOCUSAURUS}" == yes ]]; then
     echo "=================================================="
-    #echo "charp: building the c# sdk docs"
-    #cp -r "${script_root}/docfx_project/templates" "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/"
-    #docfx build -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docfx.json"
+    #echo "csharp: building the c# sdk docs"
   #
     CSHARP_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docs"
     CSHARP_TARGET="${DOC_ROOT_TARGET}/csharp"
@@ -187,7 +145,7 @@ if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
       SWIFT_API_TARGET="${DOC_ROOT_TARGET}/swift"
       mkdir -p "${SWIFT_API_TARGET}"
       pushd "${SWIFT_API_TARGET}"
-      swift_tgz=$(curl -s https://api.github.com/repos/openziti/ziti-sdk-swift/releases/latest | jq -r '.assets[] | select (.name=="ziti-sdk-swift-docs.tgz") | .browser_download_url')
+      swift_tgz="https://github.com/openziti/ziti-sdk-swift/releases/latest/download/ziti-sdk-swift-docs.tgz"
       echo " "
       echo "Copying Swift docs"
       echo "    from: ${swift_tgz}"
@@ -201,3 +159,11 @@ if [[ ! "${SKIP_LINKED_DOC}" == "yes" ]]; then
       popd
   fi
 fi
+
+pushd ${ZITI_DOC_GIT_LOC}/..
+echo "running 'yarn install' in ${PWD}"
+yarn install --frozen-lockfile
+echo "running 'yarn build' in ${PWD}"
+yarn build
+popd
+

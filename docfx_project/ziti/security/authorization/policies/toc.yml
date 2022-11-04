@@ -1,8 +1,0 @@
-- name: Overview
-  href: overview.md
-- name: Creating Service Policies
-  href: creating-service-policies.md
-- name: Creating Edge Router Policies
-  href: creating-edge-router-policies.md
-- name: Creating Service Edge Router Policies
-  href: creating-service-edge-router-policies.md

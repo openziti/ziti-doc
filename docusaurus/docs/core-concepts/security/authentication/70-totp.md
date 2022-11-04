@@ -9,11 +9,11 @@ specification.
 ## Enforcement
 
 Ziti allows individual clients to enroll or un-enroll from MFA TOTP. Administrators can enforce TOTP enrollment through
-[Authentication Policies](authentication-policies) and [Posture Checks](../authorization/posture-checks#mfa).
+[Authentication Policies](./authentication-policies) and [Posture Checks](../authorization/posture-checks#mfa).
 
 ### Authentication Policies
-When enforced at authentication via [Authentication Policies](authentication-policies), clients are unable to 
-transition from [partially authenticated to fully authenticated](auth#full-vs-partial-authentication) 
+When enforced at authentication via [Authentication Policies](./authentication-policies), clients are unable to 
+transition from [partially authenticated to fully authenticated](./auth#full-vs-partial-authentication) 
 without enrolling in MFA TOTP - leaving them unable to list services or connect to them. 
 
 ### MFA Posture Check
