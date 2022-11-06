@@ -13,24 +13,24 @@ wheres the dns name is used in the public router. This is only to illustrate how
 :::
 
 <Tabs groupId="routerType">
-<TabItem value="Private" label="Private Router with Edge" attributes={{className: styles.green}}>
+<TabItem value="Private" label="Private Router w/ Edge" attributes={{className: styles.green}}>
 
-This is a network dialing only router with edge. It does not listen for connections from other routers. Set environmental variables that match your deployment 
-and run the following command to create the router configuration file on the host VM.
+This is a network side dialing only router with edge. It does not listen for connections from other routers.
+Set environmental variables to match this type of deployment, and run the command shown.
 ```bash
 ZITI_CTRL_ADVERTISED_ADDRESS=controller01.zitinetwork.example.org
 ZITI_CTRL_PORT=80
-ZITI_ROUTER_ADVERTISED_HOST=192.168.10.11
-ZITI_EDGE_ROUTER_IP_OVERRIDE=192.168.10.11
+ZITI_ROUTER_ADVERTISED_HOST="192.168.10.11"
+ZITI_EDGE_ROUTER_IP_OVERRIDE="192.168.10.11"
 ZITI_EDGE_ROUTER_PORT=443
-ROUTER_NAME_PREFIX=$ZITI_ROUTER_ADVERTISED_HOST
-ZITI_ROUTER_IDENTITY_CERT="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.cert"
-ZITI_ROUTER_IDENTITY_SERVER_CERT="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.server.chain.cert"
-ZITI_ROUTER_IDENTITY_KEY="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.key"
-ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.cas"
+ROUTER_NAME=$ZITI_ROUTER_ADVERTISED_HOST
+ZITI_ROUTER_IDENTITY_CERT="~/.ziti/config/certs/${ROUTER_NAME}.cert"
+ZITI_ROUTER_IDENTITY_SERVER_CERT="~/.ziti/config/certs/${ROUTER_NAME}.server.chain.cert"
+ZITI_ROUTER_IDENTITY_KEY="~/.ziti/config/certs/${ROUTER_NAME}.key"
+ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME}.cas"
 
-./ziti create config router edge --routerName  $ROUTER_NAME_PREFIX \
-                                --output $ROUTER_NAME_PREFIX.yaml \
+./ziti create config router edge --routerName  $ROUTER_NAME \
+                                --output $ROUTER_NAME.yaml \
                                 --disableTunneler --private
 ```
 **Expected File Content**
@@ -107,25 +107,25 @@ forwarder:
 ```
 
 </TabItem>
-<TabItem value="Gateway" label="Private Router with Edge and Tunneler" attributes={{className: styles.orange}}>
+<TabItem value="Gateway" label="Private Router w/ Edge & Tunneler" attributes={{className: styles.green}}>
 
-This is a network dialing only router with edge and tunneler( i.e. gateway mode). It does not listen for connections from other routers. 
-Set environmental variables that match your deployment and run the following command to create the router configuration file on the host VM.
+This is a network side dialing only router with edge and tunneler( i.e. gateway mode). It does not listen for connections from other routers. 
+Set environmental variables to match this type of deployment, and run the command shown.
 ```bash
 ZITI_CTRL_ADVERTISED_ADDRESS=controller01.zitinetwork.example.org
 ZITI_CTRL_PORT=80
-ZITI_ROUTER_ADVERTISED_HOST=192.168.10.11
-ZITI_EDGE_ROUTER_IP_OVERRIDE=192.168.10.11
+ZITI_ROUTER_ADVERTISED_HOST="192.168.10.11"
+ZITI_EDGE_ROUTER_IP_OVERRIDE="192.168.10.11"
 ZITI_EDGE_ROUTER_PORT=443
 ZITI_EDGE_ROUTER_LAN_INTERFACE=eth0
-ROUTER_NAME_PREFIX=$ZITI_ROUTER_ADVERTISED_HOST
-ZITI_ROUTER_IDENTITY_CERT="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.cert"
-ZITI_ROUTER_IDENTITY_SERVER_CERT="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.server.chain.cert"
-ZITI_ROUTER_IDENTITY_KEY="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.key"
-ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.cas"
+ROUTER_NAME=$ZITI_ROUTER_ADVERTISED_HOST
+ZITI_ROUTER_IDENTITY_CERT="~/.ziti/config/certs/${ROUTER_NAME}.cert"
+ZITI_ROUTER_IDENTITY_SERVER_CERT="~/.ziti/config/certs/${ROUTER_NAME}.server.chain.cert"
+ZITI_ROUTER_IDENTITY_KEY="~/.ziti/config/certs/${ROUTER_NAME}.key"
+ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME}.cas"
 
-./ziti create config router edge --routerName  $ROUTER_NAME_PREFIX \
-                                --output $ROUTER_NAME_PREFIX.yaml \
+./ziti create config router edge --routerName  $ROUTER_NAME \
+                                --output $ROUTER_NAME.yaml \
                                 --Tproxy --private
 ```
 **Expected File Content**
@@ -202,23 +202,23 @@ forwarder:
 ```
 
 </TabItem>
-<TabItem value="Public" label="Public Router with Edge" attributes={{className: styles.red}}>
+<TabItem value="Public-Edge" label="Public Router w/ Edge" attributes={{className: styles.orange}}>
 
-This is a network dialing and listening router with edge. It listens for connections from other routers. The host firewall needs to be opened to allow connections through. 
-In this example code, the ports are 80 and 443. Set environmental variables that match your deployment and run the following command to create the router configuration file on the host VM. 
+This is a network side dialing and listening router with edge. It listens for connections from other routers. The host firewall needs to be opened to allow connections through. 
+In this example code, the ports are 80 and 443. Set environmental variables to match this type of deployment, and run the command shown. 
 ```bash
 ZITI_CTRL_ADVERTISED_ADDRESS=controller01.zitinetwork.example.org
 ZITI_CTRL_PORT=80
 ZITI_EDGE_ROUTER_RAWNAME=router01.zitinetwork.example.org
 ZITI_EDGE_ROUTER_PORT=443
-ROUTER_NAME_PREFIX=$ZITI_EDGE_ROUTER_RAWNAME
-ZITI_ROUTER_IDENTITY_CERT="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.cert"
-ZITI_ROUTER_IDENTITY_SERVER_CERT="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.server.chain.cert"
-ZITI_ROUTER_IDENTITY_KEY="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.key"
-ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME_PREFIX}.cas"
+ROUTER_NAME=$ZITI_EDGE_ROUTER_RAWNAME
+ZITI_ROUTER_IDENTITY_CERT="~/.ziti/config/certs/${ROUTER_NAME}.cert"
+ZITI_ROUTER_IDENTITY_SERVER_CERT="~/.ziti/config/certs/${ROUTER_NAME}.server.chain.cert"
+ZITI_ROUTER_IDENTITY_KEY="~/.ziti/config/certs/${ROUTER_NAME}.key"
+ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME}.cas"
 
-./ziti create config router edge --routerName  $ROUTER_NAME_PREFIX \
-                                --output $ROUTER_NAME_PREFIX.yaml \
+./ziti create config router edge --routerName  $ROUTER_NAME \
+                                --output $ROUTER_NAME.yaml \
                                 --disableTunneler
 ```
 **Expected File Content**
@@ -293,6 +293,8 @@ forwarder:
     linkDialQueueLength: 1000
     linkDialWorkerCount: 32
 ```
-
+</TabItem>
+<TabItem value="Public-Fabric" label="Public Router" attributes={{className: styles.orange}}>
+To be added
 </TabItem>
 </Tabs>
