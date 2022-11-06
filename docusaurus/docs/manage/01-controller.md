@@ -35,4 +35,4 @@ straight-forward. The pki-related fields are the ones you will need to pay parti
 the [pki](./pki) page for relevant information on pki settings.
 
 ## Logging
-See [logging](04-cli/logging.md) for more details
+See [logging](04-cli/03-logging.md) for more details

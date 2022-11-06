@@ -13,10 +13,7 @@ The output from Ziti components comes in three distinct styles. Choose the style
 - `text` - a human-readible format using plain text (no ascii escape codes)
 
 ```bash
-ziti-router run <config file> \
-                    --log-formatter pfxlog
-
-ziti-controller run <config> \
+<openziti binary> run <config file> \
                     --log-formatter pfxlog
 ```
 
@@ -26,10 +23,7 @@ ziti-controller run <config> \
 By default the Ziti components will log at the INFO level. This means that `log messages INFO, WARNING, ERROR and FATAL` will all be captured and output. Ziti components all support verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will add DEBUG log messages and as the name implies this log level is much more verbose. Often when debugging adding verbose mode will aid in identifying issues.
 
 ```bash
-ziti-router run <config file> \
-                    --verbose
-
-ziti-controller run <config> \
+<openziti binary> run <config file> \
                     --verbose
 ```
 
