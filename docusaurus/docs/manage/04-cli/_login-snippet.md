@@ -5,6 +5,6 @@ ctrl_passwd=$(jq -r .password ~/.config/ziti/ziti-controller/credentials.json)
 cert=~/.config/ziti/pki/intermediate/certs/intermediate.cert
 
 ```bash
-ziti edge login ${ZITI_CTRL_ADVERTISED_ADDRESS}:${ZITI_CONTROLLER_MGMT_PORT} \
+ziti edge login ${ZITI_CTRL_IP_OR_FQDN}:${ZITI_CONTROLLER_MGMT_PORT} \
                 -u $ctrl_user -p $ctrl_passwd -y  -c $cert
 ```
