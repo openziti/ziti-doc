@@ -6,7 +6,6 @@ import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from "./index.module.css"
 import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
-import Callout from "../components/Callout";
 
 export function Highlight(props) {
     const { children } = props;
