@@ -92,7 +92,8 @@ export default function Home() {
                         <div style={{display:"flex", flexDirection: "column"}}>
                             <p><Highlight>No installation necessary</Highlight>! Just sign up and go!</p>
                             <p>Easiest path for SDK-only solutions</p>
-                            <p>No network customization</p>
+                            <p>Preconfigured test services</p>
+                            <p>Sandbox environment geared towards app development</p>
                         </div>
                         <div style={{display:"flex", alignItems:"center"}}>
                             <div className={styles.indexCtas}>
@@ -105,7 +106,7 @@ export default function Home() {
                 </div>
                 <div className={styles.whoziticontainer}>
                     <div className={styles.whozitititlelogo}>
-                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>CloudZiti</h2>
+                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>CloudZiti Teams</h2>
                         <img src={"/img/nf.svg"} style={{display:"flex", alignItems:"center", width: "75px"}}/>
                     </div>
                     <div className={styles.whozitibullets}>
@@ -113,6 +114,10 @@ export default function Home() {
                             <p>Easy to get started, fully customizable</p>
                             <p><Highlight>Managed and supported</Highlight> by NetFoundry</p>
                             <p>OpenZiti with none of the maintenance</p>
+                            <p>Free forever for limited number of endpoints</p>
+                            <p>Good for proof-of-concepts, home labs, small production environments</p>
+                            <p>Upgradable to paid Growth or Enterprise if needed</p>
+                            <p>Community supported</p>
                         </div>
                         <div style={{display:"flex", alignItems:"center"}}>
                             <div className={styles.indexCtas}>
