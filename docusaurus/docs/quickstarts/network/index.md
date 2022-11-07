@@ -39,7 +39,7 @@ access to your [Ziti Network](/docs/introduction/intro) and aren't on the local 
 * can sign up for a free-tier account over at the [NetFoundry Console](https://nfconsole.io/signup)
 
 ## Which network option sounds right for you?
-* [Run Everything Locally - no Docker](local-no-docker)
-* [Run Everything Locally - using Docker](local-with-docker)
-* [Run Everything Locally - Docker Compose](local-docker-compose)
-* [Run Everything Hosted](hosted)
+* [Run Everything Locally - no Docker](./local-no-docker.md)
+* [Run Everything Locally - using Docker](./local-with-docker.md)
+* [Run Everything Locally - Docker Compose](./local-docker-compose.md)
+* [Run Everything Hosted](./hosted.md)

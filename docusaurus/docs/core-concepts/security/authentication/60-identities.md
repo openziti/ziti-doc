@@ -52,14 +52,14 @@ erDiagram
 Creating an identity alone may not be enough to make it usable. An identity will also need a valid primary
 authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment#clients).
 
-Please note that all authentication mechanisms also require a properly configured [authentication policy](auth)
+Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth)
 
-The following [primary authentication](auth#primary-authentication) mechanisms require post-creation enrollment:
+The following [primary authentication](./auth#primary-authentication) mechanisms require post-creation enrollment:
 - Ziti PKI x509 Client Certificate
 - 3rd Party x509 Client Certificate
 - Username Password (UPDB)
 
-The following do not require enrollment, but must have a properly configured [External JWT Signer](external-jwt-signers)
+The following do not require enrollment, but must have a properly configured [External JWT Signer](./external-jwt-signers)
 - JWT
 
 ### Creating w/ No Authenticators/Enrollments
@@ -86,7 +86,7 @@ ziti edge delete enrollment where "identity=<id>"
 ```
 
 ### Creating w/ Ziti PKI Client Cert Enrollment
-Note: This identity will be using the default [authentication policy](auth) which allows certificate authentication
+Note: This identity will be using the default [authentication policy](./auth) which allows certificate authentication
 
 #### Ziti CLI:
 `ziti edge create identity [device|service|user] <name> `
@@ -105,7 +105,7 @@ Note: This identity will be using the default [authentication policy](auth) whic
 ```
 
 ### Creating w/ 3rd Party CA Client Cert Enrollment
-Note: This identity will be using the default [authentication policy](auth) which allows certificate authentication
+Note: This identity will be using the default [authentication policy](./auth) which allows certificate authentication
 
 #### Ziti CLI:
 
@@ -125,7 +125,7 @@ It is currently not possible to create identities with a 3rd party certificate e
 ```
 
 ### Creating w/ Username/Password Enrollment
-Note: This identity will be using the default [authentication policy](auth) which allows UPDB authentication
+Note: This identity will be using the default [authentication policy](./auth) which allows UPDB authentication
 
 #### Ziti CLI:
 
@@ -145,7 +145,7 @@ Note: This identity will be using the default [authentication policy](auth) whic
 ```
 
 ### Creating w/ JWT Authenticator
-Note: A valid [External JWT Signer](external-jwt-signers) must be created and an [authentication policy](auth)
+Note: A valid [External JWT Signer](./external-jwt-signers) must be created and an [authentication policy](./auth)
 must be defined that allows the identity to authenticate with that signer.
 
 #### Ziti CLI:
@@ -170,15 +170,15 @@ Deleting an Identity removes all directly associated data. This includes:
 - [API Sessions](../sessions#api-session)
   - [Sessions](../sessions#session)
   - [Posture Data](../authorization/posture-checks#posture-data)
-  - [Session Certificates](api-session-certificates)
+  - [Session Certificates](./api-session-certificates)
 - Identity [Role Attributes](.)
-- [Authenticators](auth#authenticators)
+- [Authenticators](./auth#authenticators)
 - [Enrollments](../enrollment)
 - [MFA TOTP Configuration](totp)
 
 It does not remove entities are that re-usable between Identities:
 
-- [Authentication Policies](authentication-policies)
+- [Authentication Policies](./authentication-policies)
 - [Service Policies](../authorization/policies/overview)
 - [Edge Router Policies](../authorization/policies/overview)
 

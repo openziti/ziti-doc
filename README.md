@@ -2,15 +2,10 @@
 
 ## Prerequisite
 
-* [docfx](https://dotnet.github.io/docfx/) needs to be on your path
-    * mac/linux requires mono which is easily installed by following [these install steps](https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html)
-    * an alias can be made to make docfx use easier `DOCFX_EXE=~/tools/docfx/current/docfx.exe mono $DOCFX_EXE` (or whatever you prefer)
 * Linux - Documentation is run routinely by our CI
 * Windows - Developed with [Windows Subsytem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 * Doxygen - [Doxygen](http://www.doxygen.nl/) is used to generate the api documentation for the C SDK and is
   necessary to be on the path
-* awscli - the swift sdk documentation is currently housed in aws and requires aws access to embed the swift doc.
-  the gendoc.sh may fail or the documentation may be incomplete if the swift doc is not obtained
 
 ## Building the Doc
 
@@ -24,48 +19,25 @@ which can execute a `.sh` script. As of 2020 there's a multitude of ways to get 
 It's not feasible to test all these shells to make sure this script works so it's encouraged that you use a linux-based
 flavor of bash. If the script doesn't funtion - open an [issue](./issues) and someone will look into it.
 
-After cloning this repository open the bash shell and execute the [gendoc.sh](https://raw.githubusercontent.com/openziti/ziti-doc/main/gendoc.sh) script. The script has a few
+After cloning this repository open the bash shell and execute the [gendoc.sh](./gendoc.sh) script. The script has a few
 flags to pass that mostly controls the cleanup of what the script does. In general, it's recommended you use the -w flag
 so that warngings are treated as errors. 
 
 Expected gendoc.sh usage: `./gendoc.sh -w`
 
-You can then run `docfx serve docs` to serve the html and view it in a browser.
+You can then run `cd ./docusaurus && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
 
-## Sparse Checkout
-If you want only the bits required for build, you can do the following
+## Publish by Running CI Equivalent Locally
 
-    echo 'path/to/important/dir' >> .git/modules/docfx_project/<SUBPROJECT>/info/sparse-checkout
-    cd docfx_project/<SUBPROJECT>/
-    git config core.sparseCheckout true
-    git checkout
+`./publish.sh` is intended to run in GitHub Actions on branch `main` where the following variables are defined:
 
+* `GIT_BRANCH`: output of `git rev-parse --abbrev-ref HEAD`
+* `gh_ci_key`: base64 encoding of an OpenSSH private key authorized to clobber the `master` branch of [the root doc repo for GitHub pages](https://github.com/openziti/openziti.github.io/tree/master).
 
-For example
+## How Search Works
 
-    echo '/quickstart' >> .git/modules/docfx_project/ziti-cmd/info/sparse-checkout
-    cd docfx_project/ziti-cmd
-    git config core.sparseCheckout true
-    git checkout 
+Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this site.
 
-## Build and Develop Locally with Docker
+* Docusaurus v2's classic preset theme provides an integration with Algolia DocSearch v3 as a built-in plugin. The public search API key and application ID are properties in `docusaurus.config.js`. That plugin provides [the site's `/search` URL](/search) and a search widget in the main navigation ribbon that's visible on all pages. The Javascript running in these elements returns search results from the DocSearch API.
 
-With a clean Git working copy (all changes checked in) you can build the docs from the current working directory and inspect in the development server (http://127.0.0.1:8080/).
-
-```bash
-docker run -v "${PWD}":/ziti-doc --rm -it -p 8080:8080 openziti/doc:docfx ./regens.sh
-```
-
-You can also view modified files that are not checked in by temporarily modifying the script `regens.sh` to uncomment the command that marks `/ziti-docs` as safe for Git to use.
-
-## Publish with Docker by Running CI Equivalent Locally
-
-CI uses Docker and a bunch of env vars to run. Set them accordingly then issue:
-
-    docker run --rm -it -v $(pwd):/doc \
-      -e AWS_ACCESS_KEY_ID=$aws_access_key_id \
-      -e AWS_SECRET_ACCESS_KEY=$aws_secret_access_key \
-      -e AWS_DEFAULT_REGION=us-east-1 \
-      -e GIT_BRANCH=$GIT_BRANCH \
-      -e gh_ci_key=$gh_ci_key \
-      openziti/doc:latest /bin/sh -c "/doc/publish.sh"
+* The DocSearch API fetches records from an Algolia index that is populated by [an Algolia crawler](https://crawler.algolia.com/). Search results may be tuned by adjusting the crawler config. The crawler is specifically configured for the Docusaurus theme. If the theme changes structurally then it will be necessary to adjust the crawler config to suit. Changes to the site will not be reflected in the search results if the crawler config does not match the theme. The current config is based on [this configuration template for Docusaurus v2](https://docsearch.algolia.com/docs/templates/#docusaurus-v2-template).

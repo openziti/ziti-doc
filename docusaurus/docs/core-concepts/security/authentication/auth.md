@@ -227,17 +227,17 @@ Primary authentication factors include:
 - JWTs
 - Username/password
 
-Valid primary authentication methods can be restricted via [Authentication Policies](authentication-policies).
-An Identity can have one [Authentication Policies](authentication-policies) associated with it. 
-This association is defined by the `authPolicyId` property on the identity. If no[Authentication Policy](authentication-policies) 
-is set for an Identity, a special system defined [Authentication Policy](authentication-policies) 
+Valid primary authentication methods can be restricted via [Authentication Policies](./authentication-policies).
+An Identity can have one [Authentication Policies](./authentication-policies) associated with it. 
+This association is defined by the `authPolicyId` property on the identity. If no[Authentication Policy](./authentication-policies) 
+is set for an Identity, a special system defined [Authentication Policy](./authentication-policies) 
 with the id of `default` will be used.
 
 ## Authenticators
 
 Some primary authentication mechanisms (x509, username/password) need to store per identity credentials. When necessary
-these are stored as authenticators. Manipulating authenticators is used to perform [password management](password-management) 
-and [certificate management](certificate-management)
+these are stored as authenticators. Manipulating authenticators is used to perform [password management](./password-management) 
+and [certificate management](./certificate-management)
 
 Authenticators may be listed via the CLI:
 
@@ -264,13 +264,13 @@ should be in index zero and intermediate CA certificates in subsequent indexes i
 To associate a client certificate with an Identity and Authenticator see the [Enrollment](../enrollment) 
 section.
 
-Expired client certificates may be allowed via [Authentication Policies](authentication-policies) if desired.
+Expired client certificates may be allowed via [Authentication Policies](./authentication-policies) if desired.
 
 
 ## JWT Primary Authentication
 
-JWT authentication requires that an [External JWT Signer](external-jwt-signers) be added via the Ziti Edge Management 
-API. The definition of [External JWT Signer](external-jwt-signers) allows configuration of which JWT claim should be
+JWT authentication requires that an [External JWT Signer](./external-jwt-signers) be added via the Ziti Edge Management 
+API. The definition of [External JWT Signer](./external-jwt-signers) allows configuration of which JWT claim should be
 used as a value to map against the unique `externalId` or `id` property on Identities. This mapping of JWT claim to 
 `externalId`/`id` is used to determine which Identity is authenticating.
 
@@ -284,8 +284,8 @@ An internal username/password authentication system is provided for smaller depl
 that all username/password authenticators be replaced by x509 certificate/JWT authentication mechanisms. Passwords
 are stored individually salted and one-way cryptographically hashed using [Argon2id](https://en.wikipedia.org/wiki/Argon2).
 
-Password policies may be enforced via [Authentication Policies](authentication-policies). Administrative [management
-of passwords](password-management) is also available.
+Password policies may be enforced via [Authentication Policies](./authentication-policies). Administrative [management
+of passwords](./password-management) is also available.
 
 Username/password authentication, while supported, is only suggested to be used for testing and R&D activities. For
 production environments JWT and X509 authentication is recommended.
@@ -305,8 +305,8 @@ which includes all major and popular TOTP applications such as Google Authentica
 many others.
 
 TOTP is configured per-identity and must be client initiated due to the symmetric key exchange that must take place.
-Administrators can enforce TOTP usage through [Authentication Policies](authentication-policies) and 
-[Posture Checks](../authorization/posture-checks). [Authentication Policy](authentication-policies) enforcement 
+Administrators can enforce TOTP usage through [Authentication Policies](./authentication-policies) and 
+[Posture Checks](../authorization/posture-checks). [Authentication Policy](./authentication-policies) enforcement 
 stops the client from transitioning between [partially authenticated](#full-vs-partial-authentication) and
 [fully authenticated](#full-vs-partial-authentication) status. This stops a client from accessing any service information
 or connect to any service. [Posture Check](../authorization/posture-checks) enforcement allows a client to

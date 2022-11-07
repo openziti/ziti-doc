@@ -1,17 +1,23 @@
-endi:
-  name: Endilie Yacop Sucipto
-  title: Maintainer of Docusaurus
-  url: https://github.com/endiliey
-  image_url: https://github.com/endiliey.png
+andrewpmartinez:
+  name: Andrew Martinez
+  title: OpenZiti Maintainer
+  url: https://github.com/andrewpmartinez
+  image_url: https://avatars.githubusercontent.com/u/199856?v=4
 
-yangshun:
-  name: Yangshun Tay
-  title: Front End Engineer @ Facebook
-  url: https://github.com/yangshun
-  image_url: https://github.com/yangshun.png
+plorenz:
+  name: Paul Lorenz
+  title: OpenZiti Maintainer
+  url: https://github.com/plorenz
+  image_url: https://avatars.githubusercontent.com/u/777993?v=4
 
-slorber:
-  name: Sébastien Lorber
-  title: Docusaurus maintainer
-  url: https://sebastienlorber.com
-  image_url: https://github.com/slorber.png
+rentallect:
+  name: Curt Tudor
+  title: OpenZiti Maintainer
+  url: https://github.com/rentallect
+  image_url: https://avatars.githubusercontent.com/u/919888?v=4
+
+dovholuknf:
+  name: Clint Dovholuk
+  title: OpenZiti Maintainer
+  url: https://github.com/dovholuknf
+  image_url: https://avatars.githubusercontent.com/u/46322585?v=4

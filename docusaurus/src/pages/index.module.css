@@ -12,7 +12,7 @@
 
 .h1 {
   font-family: var(--welcome-page-font-family);
-  font-size: xxx-large;
+  font-size: var(--h1-size);
 }
 p.h2{
   font-size: large;

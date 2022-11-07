@@ -35,10 +35,10 @@ We have included a couple of quickstarts illustrating two different PKCS#11 driv
 You will want to go to [the OpenSC Project](https://github.com/OpenSC/OpenSC/wiki) as it is what provides the
 `pkcs11-tool` which is used to interact with the HSMs.
 
-The [first quickstart](softhsm) is based on [softhsm](https://www.opendnssec.org/softhsm/). This one focuses on software that
+The [first quickstart](./softhsm.mdx) is based on [softhsm](https://www.opendnssec.org/softhsm/). This one focuses on software that
 provides an *emulated* HSM. This is useful for learning and understandin but it is not an actual HSM. Being software it
 doesn't have the important benefit of being a physical device but it does have one substantial advantage; it's entirely
 free.
 
-The [second quickstart](./yubikey) uses an actual physical device - a [Yubico](https://www.yubico.com/) Yubikey. The specific key we
+The [second quickstart](./yubikey.mdx) uses an actual physical device - a [Yubico](https://www.yubico.com/) Yubikey. The specific key we
 used is a [Yubikey 5 nfc](https://www.yubico.com/product/yubikey-5-nfc).

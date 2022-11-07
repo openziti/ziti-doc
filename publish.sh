@@ -11,23 +11,22 @@ chmod -R u=rwX,go-rwx ~/.ssh/
 pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "publish script located in: $pub_script_root"
 
-pushd $pub_script_root
+cd $pub_script_root
 
 curl -s https://api.github.com/repos/netfoundry/ziti-ci/releases/latest \
   | grep browser_download_url \
   | cut -d ":" -f2,3 \
   | tr -d \" \
-  | wget -q -i - -O ./ziti-ci
-chmod +x ./ziti-ci
-mv ./ziti-ci /usr/bin/
+  | wget -q -i - -O /tmp/ziti-ci
+chmod +x /tmp/ziti-ci
 
 if [ "${GIT_BRANCH:-}" == "main" ]; then
   echo on main branch - publish can proceed
 
-  ./gendoc.sh -d  # clone and build companion microsites and build Docusaurus
+  ./gendoc.sh  # clone and build companion microsites and build Docusaurus
 
   echo "configuring git..."
-  ziti-ci configure-git  # writes key from env var $gh_ci_key to file ./github_deploy_key
+  /tmp/ziti-ci configure-git  # writes key from env var $gh_ci_key to file ./github_deploy_key
   #git add docs docfx_project/ziti-*
 
   #move back to main once we're this deep into the run
@@ -67,7 +66,7 @@ if [ "${GIT_BRANCH:-}" == "main" ]; then
   # is at /github/home instead - go figure... /root/.ssh might not exist either so make it just in case
   if [[ ${EUID} -eq 0 ]]; then
     mkdir -p /root/.ssh
-    cp $HOME/.ssh/known_hosts /root/.ssh/known_hosts
+    cp "${HOME}/.ssh/known_hosts" /root/.ssh/known_hosts
     chown -R root:root /root/.ssh/
     chmod -R u=rwX,go-rwx /root/.ssh/
   fi
@@ -89,4 +88,3 @@ else
   echo ========= publish considered successful though no op
 fi
 
-popd
