@@ -74,7 +74,7 @@ export default function Home() {
                         <div style={{display:"flex", flexDirection: "column"}}>
                             <p>Host everything yourself</p>
                             <p>Some people learn best by <Highlight>doing</Highlight></p>
-                            <p>Fully configurable - your running it all after all!</p>
+                            <p>Fully configurable - you're running it all after all!</p>
                         </div>
                         <div className={styles.indexCtas}>
                             <Link className="button button--primary" to="#build-a-network">
