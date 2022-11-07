@@ -6,6 +6,7 @@ import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from "./index.module.css"
 import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
+import Callout from "../components/Callout";
 
 export function Highlight(props) {
     const { children } = props;
@@ -14,9 +15,15 @@ export function Highlight(props) {
     );
 }
 export function H1(props) {
+    const {children, id} = props;
+    return (
+        <p id={id} className={styles.h1}>{children}</p>
+    );
+}
+export function H2(props) {
     const {children} = props;
     return (
-        <p className={styles.h1}>{children}</p>
+        <p className={styles.h2}>{children}</p>
     );
 }
 export function H3(props) {
@@ -37,39 +44,86 @@ export default function Home() {
 
     return (
         <OpenZitiLayout>
-            <div style={{display:"flex", alignItems:"center", flexDirection:"column"}}>
-                <ThemedImage
-                    alt="OpenZiti Logo"
-                    style={{paddingTop: "75px", paddingBottom: "10px", width:"50%", alignSelf: "center", minWidth: "400px"}}
-                    sources={{
-                        light: useBaseUrl('/img/ziti-logo-dark.svg'),
-                        dark: useBaseUrl('/img/ziti-logo-light.svg'),
-                    }}
-                />
-                <div style={{display:"flex", justifyContent:"center"}}>
-                <p style={{fontSize: "x-large"}}>-- Replacing Infrastructure With Software --</p>
-                </div>
-            </div>
-            <OpenZitiHorizontalSection style={{fontSize:"large"}}>
-                <H1>The Mission</H1>
-                <p>OpenZiti is dedicated to making secure connectivity simple and accessible by <Highlight>replacing
-                    infrastructure with software</Highlight>. The world is software, your secure network needs to be software. OpenZiti is bringing
-                    zero trust networking principles directly inside applications through SDKs. The project provides
-                    everything you'll need to add zero trust principles to existing applications as well.
+            <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
+                <H1>About OpenZiti</H1>
+                <p>OpenZiti is taking application and API security to the  to making secure connectivity simple and accessible by <Highlight>replacing
+                    infrastructure with software</Highlight>. The world is software, your network security needs to
+                    react with the speed of software; it needs to be software. OpenZiti is bringing ground-breaking,
+                    zero trust networking principles directly inside applications through SDKs but OpenZiti isn't just
+                    for developers. The project also provides everything you'll need on your zero trust journey.
                 </p>
             </OpenZitiHorizontalSection>
-            <OpenZitiHorizontalSection style={{fontSize:"large"}}>
-                <H1>Who is OpenZiti For?</H1>
-                <p>Software is for <Highlight>everyone </Highlight>- that's why its eating the world. Is OpenZiti for:
-                <ul>
-                    <li>developers - yes!</li>
-                    <li>operators - yes!</li>
-                    <li>security folks - yes!</li>
-                </ul>
-                </p>
-                <p>OpenZiti provides all the tooling needed to run your own zero trust overlay network. If you would rather
-                    not maintain your own network, you can let NetFoundry manage the network for you. Head over to
-                    <Link to={"https://netfoundry.io/pricing/"}> the NetFoundry Console</Link> and learn more.</p>
+            <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
+                <H2>Who is OpenZiti For?</H2>
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <div style={{display: "flex", flexDirection: "column"}}>
+                        <p>Software is for <Highlight>everyone</Highlight> - that's why its eating the world. Is OpenZiti for:
+                            developers, operators, security professionals, businesses, home users, you name it! OpenZiti
+                            provides all the tooling needed to run your own zero trust overlay network. If you would rather
+                            not maintain your own network, you can let NetFoundry manage the network for you. Head over to
+                            <Link to={"https://netfoundry.io/pricing/"}> the NetFoundry Console</Link> and learn more.</p>
+                    </div>
+                </div>
+            </OpenZitiHorizontalSection>
+            <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
+                <div className={styles.whoziticontainer}>
+                    <div className={styles.whozitititlelogo}>
+                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>OpenZiti</h2>
+                        <img src={"/img/github.svg"} style={{display:"flex", alignItems:"center", height: "75px"}}/>
+                    </div>
+                    <div className={styles.whozitibullets}>
+                        <div style={{display:"flex", flexDirection: "column"}}>
+                            <p>Host everything yourself</p>
+                            <p>Some people learn best by <Highlight>doing</Highlight></p>
+                            <p>Fully configurable - your running it all after all!</p>
+                        </div>
+                        <div className={styles.indexCtas}>
+                            <Link className="button button--primary" to="#build-a-network">
+                                <p>Get OpenZiti</p>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.whoziticontainer}>
+                    <div className={styles.whozitititlelogo}>
+                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>ZEDS</h2>
+                        <img src={"/img/zeds.png"} style={{display:"flex", alignItems:"center", height: "75px"}}/>
+                    </div>
+                    <div className={styles.whozitibullets}>
+                        <div style={{display:"flex", flexDirection: "column"}}>
+                            <p><Highlight>No installation necessary</Highlight>! Just sign up and go!</p>
+                            <p>Easiest path for SDK-only solutions</p>
+                            <p>No network customization</p>
+                        </div>
+                        <div style={{display:"flex", alignItems:"center"}}>
+                            <div className={styles.indexCtas}>
+                                <Link className="button button--primary" to="https://zeds.openziti.org/">
+                                    <p>Get ZEDS!</p>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.whoziticontainer}>
+                    <div className={styles.whozitititlelogo}>
+                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>Teams/Enterprise</h2>
+                        <img src={"/img/nf.svg"} style={{display:"flex", alignItems:"center", width: "75px"}}/>
+                    </div>
+                    <div className={styles.whozitibullets}>
+                        <div style={{display:"flex", flexDirection: "column"}}>
+                            <p>Easy to get started, fully customizable</p>
+                            <p><Highlight>Managed and supported</Highlight> by NetFoundry</p>
+                            <p>OpenZiti with none of the maintenance</p>
+                        </div>
+                        <div style={{display:"flex", alignItems:"center"}}>
+                            <div className={styles.indexCtas}>
+                                <Link className="button button--primary" to="https://netfoundry.io/pricing/">
+                                    <p>Try NetFoundry</p>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection style={{backgroundColor:"var(--ifm-background-surface-color-dark)"}}>
                 <div style={{display:"flex", flexDirection: "column", alignItems:"center"}}>
@@ -127,7 +181,7 @@ export default function Home() {
 
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection style={{backgroundColor: "var(--background-color-1)"}}>
-                <H1>Get Started - Build a Network!</H1>
+                <H1 id="build-a-network">Get Started - Build a Network!</H1>
                 <p>Ziti make zero trust easy but you'll need an overlay network in order to start on your zero trust
                     journey. We recommend you start with a simple network. Once you understand the basic concepts it can make
                     more sense to move on to more complex network topologies. Choose what sort of network you want to build.

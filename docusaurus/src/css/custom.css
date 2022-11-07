@@ -17,6 +17,7 @@
   --ifm-color-primary-light: #a14ded;
   --ifm-color-primary-lighter: #a85aee;
   --ifm-color-primary-lightest: #b776f1;
+  --ifm-color-banner: #edac15;
   --background-color-1: #ffd0d0;
   --ifm-font-color-base: #3f3f3f;
   --ifm-code-font-size: 95%;
@@ -26,6 +27,7 @@
   --logo-name: "ziti-logo-dark.svg";
   --welcome-page-font-family: "Russo One", "Open Sans", Tahoma, Helvetica, sans-serif;
   --h1-size: 50px;
+  --h2-size: 35px;
 }
 @media (max-width: 767px) {
   html[data-theme="dark"] {

@@ -14,8 +14,9 @@
   font-family: var(--welcome-page-font-family);
   font-size: var(--h1-size);
 }
-p.h2{
-  font-size: large;
+.h2 {
+  font-family: var(--welcome-page-font-family);
+  font-size: var(--h2-size);
 }
 
 .cardz {
@@ -29,5 +30,50 @@ p.h2{
   overflow: hidden;
 }
 
+.indexCtas {
+  --ifm-button-size-multiplier: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0;
+}
+.indexCtas a,
+.indexCtas a:hover {
+  color: black;
+}
+.indexCtas a:last-of-type {
+  margin: 20px 36px;
+}
+.indexCtasGitHubButtonWrapper {
+  display: flex;
+}
+.indexCtasGitHubButton {
+  overflow: hidden;
+}
 
-
+.whoziticontainer {
+  display: flex;
+  padding: 5px;
+}
+.whozitititlelogo {
+  min-height: 100px;
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  border-radius: 15px 0 0 15px;
+  padding-right:10px;
+  border-style: solid;
+  border-width:thin;
+  align-items: center;
+}
+.whozitibullets {
+  display:flex;
+ justify-content:space-between;
+ align-items: center;
+ width: 70%;
+ border-radius: 0px 15px 15px 0px;
+ padding:10px;border-width:thin;
+ border-bottom-style: solid;
+ border-right-style: solid;
+ border-top-style: solid;
+}
