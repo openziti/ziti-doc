@@ -59,8 +59,7 @@ export default function Home() {
                         <p>Software is for <Highlight>everyone</Highlight> - that's why its eating the world. Is OpenZiti for:
                             developers, operators, security professionals, businesses, home users, you name it! OpenZiti
                             provides all the tooling needed to run your own zero trust overlay network. If you would rather
-                            not maintain your own network, you can let NetFoundry manage the network for you. Head over to
-                            <Link to={"https://netfoundry.io/pricing/"}> the NetFoundry Console</Link> and learn more.</p>
+                            not maintain your own network, you can let NetFoundry manage the network for you.</p>
                     </div>
                 </div>
             </OpenZitiHorizontalSection>
