@@ -105,7 +105,7 @@ export default function Home() {
                 </div>
                 <div className={styles.whoziticontainer}>
                     <div className={styles.whozitititlelogo}>
-                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>Teams/Enterprise</h2>
+                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>CloudZiti</h2>
                         <img src={"/img/nf.svg"} style={{display:"flex", alignItems:"center", width: "75px"}}/>
                     </div>
                     <div className={styles.whozitibullets}>
@@ -117,7 +117,7 @@ export default function Home() {
                         <div style={{display:"flex", alignItems:"center"}}>
                             <div className={styles.indexCtas}>
                                 <Link className="button button--primary" to="https://netfoundry.io/pricing/">
-                                    <p>Try NetFoundry</p>
+                                    <p>Try CloudZiti</p>
                                 </Link>
                             </div>
                         </div>
