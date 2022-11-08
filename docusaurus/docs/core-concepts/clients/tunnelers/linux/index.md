@@ -13,7 +13,7 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 ## Install Linux Package
 
-Linux packages are currently available for the amd64 (x86_64) platform. There are [binaries available for ARM](#manual-installation), and packages are [coming soon](https://github.com/openziti/ziti-tunnel-sdk-c/issues/449). There is an optional [GUI beta here](https://github.com/openziti/desktop-edge-ui/releases/latest) that depends on `ziti-edge-tunnel` described below.
+Linux packages are currently available for the amd64 (x86_64) platform. There are [binaries available for ARM](#manual-installation), and packages are [coming soon](https://github.com/openziti/ziti-tunnel-sdk-c/issues/449).
 
 :::note
 It is not necessary to manually enroll the identity when using the RPM or DEB package. Just install the token in the identities directory and it will be enrolled when you start the daemon.
@@ -195,14 +195,12 @@ wget -q "https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/download/
 
 You will need the token file or its contents to enroll. Enrollment is the act of exchanging the token for an identity that is to be permanently installed in the filesystem.
 
-[Here's a link to the article about enrolling](/docs/core-concepts/identities/enrolling)
+[Learn more about enrolling here](/docs/core-concepts/identities/enrolling)
 
-### Example execution command
+### Run the Manually Installed Binary
 
 ```bash
 ziti-edge-tunnel run \
-  --verbose 2 \
-  --dns-ip-range 100.64.0.1/10 \
   --identity-dir /opt/openziti/etc/identities
 ```
 
