@@ -28,7 +28,7 @@ export function H2(props) {
 export function H3(props) {
     const {children,style} = props;
     return (
-        <h3 style={style}>{children}</h3>
+        <h3 className={styles.h3} style={style}>{children}</h3>
     );
 }
 
@@ -43,17 +43,91 @@ export default function Home() {
 
     return (
         <OpenZitiLayout>
-            <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
-                <H1>About OpenZiti</H1>
-                <p>OpenZiti is taking application and API security to the  to making secure connectivity simple and accessible by <Highlight>replacing
-                    infrastructure with software</Highlight>. The world is software, your network security needs to
-                    react with the speed of software; it needs to be software. OpenZiti is bringing ground-breaking,
-                    zero trust networking principles directly inside applications through SDKs but OpenZiti isn't just
-                    for developers. The project also provides everything you'll need on your zero trust journey.
-                </p>
+            <OpenZitiHorizontalSection style={{padding: "0px"}}>
+                <div className={styles.installChoice} style={{backgroundColor: "var(--callout-color)"}}>
+                    <H2>Application Embedded Zero Trust</H2>
+
+                    <p>OpenZiti is taking application and API security to the  to making secure connectivity simple and accessible by <Highlight>replacing
+                        infrastructure with software</Highlight>. The world is software, your network security needs to
+                        react with the speed of software; it needs to be software. OpenZiti is bringing ground-breaking,
+                        zero trust networking principles directly inside applications through SDKs but OpenZiti isn't just
+                        for developers. The project also provides everything you'll need on your zero trust journey.
+                    </p>
+                </div>
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
-                <H2>Who is OpenZiti For?</H2>
+
+                <div style={{display: "flex", flexDirection: "row"}}>
+
+                    <div className={styles.installChoice} style={{backgroundColor: "var(--openziti-callout-color)"}}>
+                        <H3>OpenZiti</H3>
+                        <p><b></b></p>
+                        <ul>
+                            <li>Open Source - Apache v2</li>
+                            <li>Host everything yourself</li>
+                            <li>Learn by doing</li>
+                            <li>Fully configurable</li>
+                            <li>Free forever</li>
+                        </ul>
+                        <div className={styles.installChoiceBtn} >
+                            <div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-around"}}>
+                                <div className={styles.indexCtas}>
+                                    <Link className="button button--primary" to="#build-a-network">
+                                        <p>Get OpenZiti</p>
+                                    </Link>
+                                </div>
+                                <img src={"/img/github.svg"} style={{display:"flex", alignItems:"center", height: "75px"}}/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.installChoice} style={{backgroundColor: "var(--zeds-callout-color)"}}>
+                        <H3>Ziti Edge Developer Sandbox</H3>
+                        <p><b></b></p>
+                        <ul>
+                            <li>Sandbox environment</li>
+                            <li>Easiest path for SDK-only solutions</li>
+                            <li>Preconfigured test services</li>
+                            <li>No network configuration needed</li>
+                        </ul>
+                        <div className={styles.installChoiceBtn} >
+                            <div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-around"}}>
+                                <div className={styles.indexCtas}>
+                                    <Link className="button button--primary" to="https://zeds.openziti.org/">
+                                        <p>Get ZEDS!</p>
+                                    </Link>
+                                </div>
+                                <img src={"/img/zeds.png"} style={{display:"flex", alignItems:"center", height: "75px"}}/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.installChoice} style={{backgroundColor: "var(--cloudziti-callout-color)"}}>
+                        <H3>CloudZiti Teams</H3>
+                        <p><b></b></p>
+                        <ul>
+                            <li>Easy to get started, fully customizable</li>
+                            <li>Free forever for limited number of endpoints</li>
+                            <li>Community support</li>
+                            <li>Managed by NetFoundry</li>
+                            <li>Grows with your needs</li>
+                        </ul>
+                        <div className={styles.installChoiceBtn} >
+                            <div style={{display: "flex", alignItems: "center"}}>
+                                <div className={styles.indexCtas}>
+                                    <Link className="button button--primary" to="https://netfoundry.io/pricing/">
+                                        <p>Try CloudZiti</p>
+                                    </Link>
+                                </div>
+                                <img src={"/img/nf.svg"} style={{display:"flex", alignItems:"center", width: "75px"}}/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </OpenZitiHorizontalSection>
+            <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
+                <H1>Who is OpenZiti For?</H1>
                 <div style={{display: "flex", flexDirection: "column"}}>
                     <div style={{display: "flex", flexDirection: "column"}}>
                         <p>Software is for <Highlight>everyone</Highlight> - that's why its eating the world. Is OpenZiti for:
@@ -63,71 +137,7 @@ export default function Home() {
                     </div>
                 </div>
             </OpenZitiHorizontalSection>
-            <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
-                <div className={styles.whoziticontainer}>
-                    <div className={styles.whozitititlelogo}>
-                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>OpenZiti</h2>
-                        <img src={"/img/github.svg"} style={{display:"flex", alignItems:"center", height: "75px"}}/>
-                    </div>
-                    <div className={styles.whozitibullets}>
-                        <div style={{display:"flex", flexDirection: "column"}}>
-                            <p>Host everything yourself</p>
-                            <p>Some people learn best by <Highlight>doing</Highlight></p>
-                            <p>Fully configurable - you're running it all after all!</p>
-                        </div>
-                        <div className={styles.indexCtas}>
-                            <Link className="button button--primary" to="#build-a-network">
-                                <p>Get OpenZiti</p>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.whoziticontainer}>
-                    <div className={styles.whozitititlelogo}>
-                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>ZEDS</h2>
-                        <img src={"/img/zeds.png"} style={{display:"flex", alignItems:"center", height: "75px"}}/>
-                    </div>
-                    <div className={styles.whozitibullets}>
-                        <div style={{display:"flex", flexDirection: "column"}}>
-                            <p><Highlight>No installation necessary</Highlight>! Just sign up and go!</p>
-                            <p>Easiest path for SDK-only solutions</p>
-                            <p>Preconfigured test services</p>
-                            <p>Sandbox environment geared towards app development</p>
-                        </div>
-                        <div style={{display:"flex", alignItems:"center"}}>
-                            <div className={styles.indexCtas}>
-                                <Link className="button button--primary" to="https://zeds.openziti.org/">
-                                    <p>Get ZEDS!</p>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.whoziticontainer}>
-                    <div className={styles.whozitititlelogo}>
-                        <h2 style={{display:"flex", paddingRight: "10px", margin: "0px"}}>CloudZiti Teams</h2>
-                        <img src={"/img/nf.svg"} style={{display:"flex", alignItems:"center", width: "75px"}}/>
-                    </div>
-                    <div className={styles.whozitibullets}>
-                        <div style={{display:"flex", flexDirection: "column"}}>
-                            <p>Easy to get started, fully customizable</p>
-                            <p><Highlight>Managed and supported</Highlight> by NetFoundry</p>
-                            <p>OpenZiti with none of the maintenance</p>
-                            <p>Free forever for limited number of endpoints</p>
-                            <p>Good for proof-of-concepts, home labs, small production environments</p>
-                            <p>Upgradable to paid Growth or Enterprise if needed</p>
-                            <p>Community supported</p>
-                        </div>
-                        <div style={{display:"flex", alignItems:"center"}}>
-                            <div className={styles.indexCtas}>
-                                <Link className="button button--primary" to="https://netfoundry.io/pricing/">
-                                    <p>Try CloudZiti</p>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </OpenZitiHorizontalSection>
+
             <OpenZitiHorizontalSection style={{backgroundColor:"var(--ifm-background-surface-color-dark)"}}>
                 <div style={{display:"flex", flexDirection: "column", alignItems:"center"}}>
                 <div style={{display:"flex", flexDirection: "row", alignItems:"center"}}>
