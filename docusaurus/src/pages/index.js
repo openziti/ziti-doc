@@ -94,7 +94,7 @@ export default function Home() {
                             <div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-around"}}>
                                 <div className={styles.indexCtas}>
                                     <Link className="button button--primary" to="https://zeds.openziti.org/">
-                                        <p>Get ZEDS!</p>
+                                        <p>Try ZEDS</p>
                                     </Link>
                                 </div>
                                 <img src={"/img/zeds.png"} style={{display:"flex", alignItems:"center", height: "75px"}}/>
@@ -152,7 +152,7 @@ export default function Home() {
                 <H1>OpenZiti Provides</H1>
 
                 <p>OpenZiti makes it easy to embed zero trust, programmable networking directly into your app. Deploy your
-                    own zero trust, high performance network using any Internet connection! Say goodbye to your outmoded VPN.
+                    own zero trust, high performance network using any Internet connection. Say goodbye to your outmoded VPN.
                 </p>
 
                 <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center"}}>
@@ -194,7 +194,7 @@ export default function Home() {
 
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection style={{backgroundColor: "var(--background-color-1)"}}>
-                <H1 id="build-a-network">Get Started - Build a Network!</H1>
+                <H1 id="build-a-network">Get Started - Build a Network</H1>
                 <p>Ziti make zero trust easy but you'll need an overlay network in order to start on your zero trust
                     journey. We recommend you start with a simple network. Once you understand the basic concepts it can make
                     more sense to move on to more complex network topologies. Choose what sort of network you want to build.
@@ -219,21 +219,21 @@ export default function Home() {
                 </div>
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection>
-                <H1>I Have a Network! What's Next?</H1>
+                <H1>I Have a Network, What's Next?</H1>
                 <p>
-                    Fantastic! Now that you have a <Link to="/docs/introduction/intro">OpenZiti Network</Link> all
+                    Now that you have a <Link to="/docs/introduction/intro">OpenZiti Network</Link> all
                     setup and ready to go, the next step is learning about all of the pieces which go into it. There's a lot to learn and
                     <Link to={"/docs/introduction/intro"}> our docs</Link> are there to help you understand any extra details you need help
-                    ironing out. If the docs aren't complete or aren't helpful, we love seeing issues filed for how to improve
-                    them! Or, if you're feeling up for it, we'd love to see any PRs to make the docs better you wish to
-                    contribute! You'll find a more extensive list of the <Link to={"/docs/quickstarts/network/"}> quickstarts
+                    ironing out. If the docs aren't complete or aren't helpful, we love seeing issues filed for how to improve.
+                    Or, if you're feeling up for it, we'd love to see any PRs to make the docs better you wish to
+                    contribute. You'll find a more extensive list of the <Link to={"/docs/quickstarts/network/"}> quickstarts
                 we have here.</Link>
                 </p>
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection>
                 <H1>Get Started With an SDK</H1>
                 <p>The OpenZiti project offers numerous SDKs to start with. Pick your favorite language and follow
-                    along with a simple tutorial! If your favorite language is not shown, perhaps you can use the C SDK and
+                    along with a simple tutorial. If your favorite language is not shown, perhaps you can use the C SDK and
                     integrate via <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">FFI.</a></p>
                 <div className="col-lg-12">
                     <div className="centerrow buttonrow">
@@ -283,7 +283,7 @@ export default function Home() {
             <OpenZitiHorizontalSection>
                 <H1>Not Ready to Go Fully App-Embedded?</H1>
                 <p>
-                    That's ok - zero trust adoption is a journey! Get started with a couple of very simple examples which
+                    That's ok - zero trust adoption is a journey. Get started with a couple of very simple examples which
                     will get you familiar with the technology overall. These samples will leverage one of the
                     <Link to="/docs/core-concepts/clients/choose"> tunneling apps</Link>.
                 </p>
