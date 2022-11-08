@@ -102,7 +102,7 @@ const config = {
             from: ['/docs/introduction/zitiSoftwareArchitecture', '/ziti/software-architecture.html'],
           },
           {
-            to: '/docs/core-concepts/clients/tunnelers/linux',
+            to: '/docs/core-concepts/clients/tunnelers/linux/',
             from: ['/ziti/clients/linux.html'],
           },
           {
