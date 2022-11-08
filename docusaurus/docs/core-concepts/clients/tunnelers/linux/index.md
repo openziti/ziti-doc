@@ -195,7 +195,7 @@ wget -q "https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/download/
 
 You will need the token file or its contents to enroll. Enrollment is the act of exchanging the token for an identity that is to be permanently installed in the filesystem.
 
-[Learn more about enrolling here](/docs/core-concepts/identities/enrolling)
+[Learn more about enrolling](/docs/core-concepts/identities/enrolling).
 
 ### Run the Manually Installed Binary
 
