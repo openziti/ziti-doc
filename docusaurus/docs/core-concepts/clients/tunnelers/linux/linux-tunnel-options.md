@@ -1,11 +1,9 @@
 
 # Options and Modes
 
-## `ziti-edge-tunnel` options
+## `ziti-edge-tunnel` Global Options
 
-### Global Options
-
-You can start the ziti-edge-tunnel with different options, some of the most commonly used options are listed below.
+You can start `ziti-edge-tunnel` with different options, some of the most commonly used options are listed below.
 
 ```bash
 # Load a single identity.
@@ -27,7 +25,14 @@ You can start the ziti-edge-tunnel with different options, some of the most comm
 --refresh N
 ```
 
-### `ziti-edge-tunnel run` Mode
+## Run Modes
+
+There are two run modes:
+
+* `run`: transparent proxy with DNS nameserver
+* `run-host`: hosting-only without proxy or nameserver
+
+### `run` Mode
 
 `ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with a command-line option. The OS is automatically configured to treat the nameserver as primary. You may inspect the resulting configuration with these commands.
 
@@ -36,14 +41,14 @@ resolvectl dns     # inspect the association of tun device and nameserver
 resolvectl domain  # inspect the configuration of query routing domains
 ```
 
-If any interfaces have a wildcard routing domain configured, `ziti-edge-tunnel` will also configure its tun with a wildcard routing domain. If no other interface has a wildcard routing domain configured, neither will the `ziti-edge-tunnel` tun.
+If any interface has a wildcard routing domain configured, `ziti-edge-tunnel` will also configure its tun with a wildcard routing domain. If no other interface has a wildcard routing domain configured, neither will the `ziti-edge-tunnel` tun.
 
 ```bash
 # Specify the tun interface address and the subnet to which Service domain names are resolved (default 100.64.0.1/10). The nameserver address is always the tun interface address +1, default is 100.64.0.2.
 --dns-ip-range <ip range>
 ```
 
-#### How does `ziti-edge-tunnel run` configure nameservers?
+#### How does `run` configure nameservers?
 
 `ziti-edge-tunnel run` provides a built-in nameserver that will answer queries that exactly match authorized OpenZiti services' intercept domain names, and will respond with a hard-fail `NXDOMAIN` code if the query does not match an authorized service.
 
@@ -53,14 +58,14 @@ You may enable DNS recursion by specifying an upstream nameserver to answer quer
 
 If the DNS record exists it returns the answer and sets query status to `NO_ERROR`. If it does not exist then it sends the query to an upstream DNS server if configured. Otherwise, it sets the query status to `REFUSE`. This implies that the caller *should* keep trying to resolve the domain name with other nameservers.
 
-#### System Requirements For Mode `run`
+#### System Requirements for Mode `run`
 
 `ziti-edge-tunnel run` requires elevated privileges for managing the `/dev/net/tun` device, running `resolvectl` to assign nameservers and domain routes to the tun interface, and running `ip route` to manage IP routes. This requires running as root because `setcaps` are not inherited in all of these cases, even when the inherit bit is set.
 
-### ziti-edge-tunnel `run-host` Mode
+### `run-host` Mode
 
 `ziti-edge-tunnel run-host` is a mode for hosting (listening) for services which does provide service intercepts or DNS. Services configured for 'Bind' will be hosted by the tunneller.
 
-#### System Requirements For Mode `run-host`
+#### System Requirements for Mode `run-host`
 
 `ziti-edge-tunnel run-host` does not require elevated privileges or the above device or socket, only network egress to the servers for which it is hosting Services.
