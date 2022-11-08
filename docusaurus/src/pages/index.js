@@ -44,7 +44,7 @@ export default function Home() {
     return (
         <OpenZitiLayout>
             <OpenZitiHorizontalSection style={{padding: "0px"}}>
-                <div className={styles.installChoice} style={{backgroundColor: "var(--callout-color)"}}>
+                <div className={styles.titleSection} style={{backgroundColor: "var(--callout-color)"}}>
                     <H2>Application Embedded Zero Trust</H2>
 
                     <p>OpenZiti is taking application and API security to the  to making secure connectivity simple and accessible by <Highlight>replacing
@@ -62,7 +62,7 @@ export default function Home() {
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
 
-                <div style={{display: "flex", flexDirection: "row"}}>
+                <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent:"center"}}>
 
                     <div className={styles.installChoice} style={{backgroundColor: "var(--openziti-callout-color)"}}>
                         <H3>OpenZiti</H3>

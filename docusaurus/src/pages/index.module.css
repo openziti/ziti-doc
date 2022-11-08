@@ -60,7 +60,7 @@ html[data-theme="dark"] {
   color: black;
 }
 .indexCtas a:last-of-type {
-  margin: 20px 36px;
+  margin: 20px 20px;
 }
 .indexCtasGitHubButtonWrapper {
   display: flex;
@@ -96,7 +96,7 @@ html[data-theme="dark"] {
   border-top-style: solid;
 }
 
-.installChoice {
+.titleSection {
   border-radius: 10px;
   padding: 20px;
   display: flex;
@@ -108,8 +108,23 @@ html[data-theme="dark"] {
   border-width: 1px;
   box-shadow: 0 0 10px var(--callout-border-color);
 }
+.installChoice {
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  margin: 10px;
+  border-style: solid;
+  border-color: var(--callout-border-color);
+  border-width: 1px;
+  box-shadow: 0 0 10px var(--callout-border-color);
+  min-width: 350px;
+  max-width: 400px;
+}
 .installChoiceBtn {
   display: flex;
+  justify-content: space-around;
   flex-grow: 1;
   align-items: end;
   flex-direction: row;
