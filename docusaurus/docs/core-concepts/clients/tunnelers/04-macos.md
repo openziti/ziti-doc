@@ -2,7 +2,7 @@
 
 ## Installation
 
-The MacOS tunneler is currently in preview. Find the app in the [Mac App Store](https://apps.apple.com/us/app/ziti-tunnel/id1460484572?mt=12)
+The MacOS tunneler is in the [Mac App Store](https://apps.apple.com/us/app/ziti-tunnel/id1460484572?mt=12)
 
 ![image](/img/clients/mac-install1.png)
 
