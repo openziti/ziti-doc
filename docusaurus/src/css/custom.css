@@ -26,8 +26,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --logo-name: "ziti-logo-dark.svg";
   --welcome-page-font-family: "Russo One", "Open Sans", Tahoma, Helvetica, sans-serif;
+  --title-font-family: "Russo One", "Open Sans", Tahoma, Helvetica, sans-serif;
+  --content-font-family: "Open Sans", Tahoma, Helvetica, sans-serif;
   --h1-size: 50px;
   --h2-size: 35px;
+  --h3-size: 25px;
 }
 @media (max-width: 767px) {
   html[data-theme="dark"] {

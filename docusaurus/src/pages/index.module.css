@@ -2,6 +2,12 @@
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
  */
+:root {
+  --callout-color: #ffffff;
+  --openziti-callout-color: #ffffff;
+  --zeds-callout-color: #ffffff;
+  --cloudziti-callout-color: #ffffff;
+}
 
 .main {
   display: flex;
@@ -11,12 +17,15 @@
 }
 
 .h1 {
-  font-family: var(--welcome-page-font-family);
+  font-family: var(--title-font-family);
   font-size: var(--h1-size);
 }
 .h2 {
-  font-family: var(--welcome-page-font-family);
+  font-family: var(--title-font-family);
   font-size: var(--h2-size);
+}
+.h3 {
+  font-size: var(--h3-size);
 }
 
 .cardz {
@@ -76,4 +85,22 @@
  border-bottom-style: solid;
  border-right-style: solid;
  border-top-style: solid;
+}
+
+.installChoice {
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  margin: 10px;
+  border-style: solid;
+  border-color: #9f9f9f;
+  border-width: 1px;
+}
+.installChoiceBtn {
+  display: flex;
+  flex-grow: 1;
+  align-items: end;
+  flex-direction: row;
 }
