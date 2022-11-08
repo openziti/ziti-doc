@@ -5,7 +5,7 @@
 
 The simplest step you can take toward a diagnosis is to reduce the minimum message log level. This usually means lower-level DEBUG messages and above are emitted in addition to the default level of INFO level and above e.g. WARN, ERROR, etc.
 
-  For `ziti-edge-tunnel`: DEBUG log level is `ziti-edge-tunnel --verbose 4`
+  For `ziti-edge-tunnel`, `DEBUG` log level is `--verbose 4`.
 
 ## Systemd service won't start or keeps restarting
 
