@@ -4,9 +4,18 @@
  */
 :root {
   --callout-color: #ffffff;
+  --callout-border-color: #c3c3c3;
   --openziti-callout-color: #ffffff;
   --zeds-callout-color: #ffffff;
   --cloudziti-callout-color: #ffffff;
+}
+html[data-theme="dark"] {
+  --callout-color: #374050;
+  --callout-border-color: #93a2b7;
+  --openziti-callout-color: #374050;
+  --zeds-callout-color: #374050;
+  --cloudziti-callout-color: #374050;
+  --github-img: '/img/github.svg';
 }
 
 .main {
@@ -95,9 +104,9 @@
   flex-basis: 100%;
   margin: 10px;
   border-style: solid;
-  border-color: #c3c3c3;
+  border-color: var(--callout-border-color);
   border-width: 1px;
-  box-shadow: 0 0 10px #ababab;
+  box-shadow: 0 0 10px var(--callout-border-color);
 }
 .installChoiceBtn {
   display: flex;

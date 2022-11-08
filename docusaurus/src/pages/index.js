@@ -81,7 +81,14 @@ export default function Home() {
                                         <p>Get OpenZiti</p>
                                     </Link>
                                 </div>
-                                <img src={"/img/github.svg"} style={{display:"flex", alignItems:"center", height: "75px"}}/>
+                                <ThemedImage
+                                    alt="Docusaurus themed image"
+                                    sources={{
+                                        light: useBaseUrl('/img/github.svg'),
+                                        dark: useBaseUrl('/img/github-white.svg'),
+                                    }}
+                                    style={{display:"flex", alignItems:"center", height: "75px"}}
+                                />
                             </div>
                         </div>
                     </div>
