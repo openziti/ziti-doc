@@ -1,7 +1,7 @@
 
-# Linux Tunneler Options and Modes
+# Options and Modes
 
-## ziti-edge-tunnel options
+## `ziti-edge-tunnel` options
 
 ### Global Options
 
@@ -27,7 +27,7 @@ You can start the ziti-edge-tunnel with different options, some of the most comm
 --refresh N
 ```
 
-### ziti-edge-tunnel `run` Mode
+### `ziti-edge-tunnel run` Mode
 
 `ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with a command-line option. The OS is automatically configured to treat the nameserver as primary. You may inspect the resulting configuration with these commands.
 
