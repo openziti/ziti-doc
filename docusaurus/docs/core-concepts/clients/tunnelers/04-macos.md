@@ -2,13 +2,8 @@
 
 ## Installation
 
-The MacOS tunneler is in the [Mac App Store](https://apps.apple.com/us/app/ziti-tunnel/id1460484572?mt=12)
+Install the **Ziti Desktop Edge** from the [Mac App Store](https://apps.apple.com/us/app/ziti-tunnel/id1460484572?mt=12)
 
-![image](/img/clients/mac-install1.png)
-
-You will have the page to download the most recent Mac Ziti Desktop Edge. 
-
-![image](/img/clients/mac-install2.png) 
 
 :::info Note
 
@@ -18,8 +13,6 @@ If you already have MAC Ziti Desktop already installed and you are updating it, 
  
 
 And after the download and installation is complete, click on **open**
-
-![image](/img/clients/mac-install3.png) 
 
  
 

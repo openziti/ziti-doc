@@ -5,27 +5,10 @@
 The ZDEW has an installer which is available for download from GitHub.
 [Download the latest release here](https://github.com/openziti/desktop-edge-win/releases/latest).
 
-This brings the user to the NetFoundry Ziti GitHub repository.  There are a list of releases, select the top release and the .exe package from the list of files.
-
-![image](/img/clients/windows-install1.jpg)
-
-**NOTE: Installer requires elevated permissions**. Right click on  Ziti.Desktop Edge Client installer file and select **Run as Administrator**.
-
-This will launch the installation on the user Windows Machine.  Click **Next>**
-
-![image](/img/clients/windows-install2.jpg)
-
-Keep the default file location unless you have a reason to move to another location.  Select **Next>**
-
-![image](/img/clients/windows-install3.png)
-
-Click **Install** to execute the installation of the Windows Desktop Edge.  Select to **install WinTun driver** if prompted. Select **YES** when prompted in the next screen to allow the application to make changes.
-
-![image](/img/clients/windows-install4.png)
+Please download **Ziti.Desktop.Edge.Client-*.exe** and follow the on screen instruction for installation.
 
 Click **Run Ziti Desktop Edge** when installation completes.
 
-![image](/img/clients/windows-install5.png)
 
 ## Enrolling 
 
