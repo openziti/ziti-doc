@@ -98,7 +98,7 @@ export default function Home() {
                         <p><b></b></p>
                         <ul>
                             <li>Sandbox environment</li>
-                            <li>Easiest path for SDK-only solutions</li>
+                            <li>For SDK-only development</li>
                             <li>Preconfigured test services</li>
                             <li>No network configuration needed</li>
                         </ul>
