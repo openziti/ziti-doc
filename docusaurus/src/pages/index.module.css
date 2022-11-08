@@ -77,26 +77,27 @@
 }
 .whozitibullets {
   display:flex;
- justify-content:space-between;
- align-items: center;
- width: 70%;
- border-radius: 0px 15px 15px 0px;
- padding:10px;border-width:thin;
- border-bottom-style: solid;
- border-right-style: solid;
- border-top-style: solid;
+  justify-content:space-between;
+  align-items: center;
+  width: 70%;
+  border-radius: 0px 15px 15px 0px;
+  padding:10px;border-width:thin;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
 }
 
 .installChoice {
   border-radius: 10px;
-  padding: 25px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
   margin: 10px;
   border-style: solid;
-  border-color: #9f9f9f;
+  border-color: #c3c3c3;
   border-width: 1px;
+  box-shadow: 0 0 10px #ababab;
 }
 .installChoiceBtn {
   display: flex;

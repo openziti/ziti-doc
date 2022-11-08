@@ -53,6 +53,11 @@ export default function Home() {
                         zero trust networking principles directly inside applications through SDKs but OpenZiti isn't just
                         for developers. The project also provides everything you'll need on your zero trust journey.
                     </p>
+                    <p>&nbsp;</p>
+                    <ul>
+                        <li><Link to="/docs/introduction/intro">Read the docs</Link></li>
+                        <li><Link to="/guides">Check out the guides</Link></li>
+                    </ul>
                 </div>
             </OpenZitiHorizontalSection>
             <OpenZitiHorizontalSection style={{fontSize:"large", padding: "0px"}}>
