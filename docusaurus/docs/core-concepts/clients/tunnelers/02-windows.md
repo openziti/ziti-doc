@@ -4,7 +4,27 @@
 
 The ZDEW has an installer which is available for download from GitHub.
 [Download the latest release here](https://github.com/openziti/desktop-edge-win/releases/latest).
-The installer will require administrator privileges to install successfully.
+
+Please download **Ziti.Desktop.Edge.Client-*.exe** and follow the on screen instruction for installation.
+
+Click **Run Ziti Desktop Edge** when installation completes.
+
+
+## Enrolling 
+
+Following this [guide](/docs/core-concepts/identities/creating) to create an identity and transfer the jwt file to your PC.
+
+Go back to the **Windows Desktop Edge** widget and click **ADD IDENTITY**.
+
+![image](/img/clients/windows-install6.jpg)
+
+You will be brought to your file manager and should navigate to the directory where you saved the .jwt file in the previous steps. Click **Open**
+
+![image](/img/clients/windows-install7.jpg)
+
+Once the identity has been enrolled and registered you will see any services you have been granted. Status = Active and the IP/Hostname/Port of rendered services.
+
+![image](/img/clients/windows-install8.jpg)
 
 ## Architecture
 The ZDEW is composed of three main components: the data service, the monitor service, the UI. Communication among
