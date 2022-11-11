@@ -96,19 +96,8 @@ done <<URLS
 /ziti/config-store/overview
 /ziti/metrics/file.html
 /ziti/metrics/inspect.html
+/policies/CONTRIBUTING.html
 URLS
-
-# /api/csharp/NetFoundry.html
-# /api/csharp/NetFoundry.ZitiConnection.html
-# /api/csharp/NetFoundry.ZitiIdentity.html
-# /api/csharp/NetFoundry.Ziti.html
-# /api/csharp/NetFoundry.ZitiConnection.OnConnected.html
-# /api/csharp/NetFoundry.ZitiConnection.OnDataReceived.html
-# /api/csharp/NetFoundry.ZitiConnection.OnDataWritten.html
-# /api/csharp/NetFoundry.ZitiException.html
-# /api/csharp/NetFoundry.ZitiStream.html
-# /api/csharp/NetFoundry.ZitiStatus.html
-
 
 if [[ ${#FAILURES[*]} -eq 0 ]]; then
     echo "Success!"

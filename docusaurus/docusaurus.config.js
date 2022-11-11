@@ -373,6 +373,10 @@ const config = {
             to: '/docs/quickstarts/zac/installation',
             from: ['/ziti/quickstarts/zac/installation.html'],
           },
+          {
+            to: '/docs/introduction/openziti-is-software',
+            from: ['/policies/CONTRIBUTING.html'],
+          },
         ],
       },
     ],
