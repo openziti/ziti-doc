@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 import styles from './styles.module.css';
 
 <Tabs>
-<TabItem value="vcpe" label="vCPE (generic type)" attributes={{className: styles.custom}}>
+<TabItem value="vcpe" label="Bare Metal" attributes={{className: styles.custom}}>
 
 :::info Notes
 - Reference CPU - Intel(R) Xeon(R) CPU E5-2680 v3 @ 2.50GHz
