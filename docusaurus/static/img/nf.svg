@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 72 72" style="enable-background:new 0 0 72 72;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{opacity:0.26;fill:#FFFFFF;enable-background:new    ;}
+	.st2{fill:#C1CED3;}
+	.st3{fill:#83F219;}
+	.st4{fill:#01B5FF;}
+	.st5{fill:none;stroke:#000000;stroke-width:0.4671;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#000000;stroke-width:0.4671;stroke-miterlimit:10;}
+	.st7{opacity:0.35;fill:#FFFFFF;enable-background:new    ;}
+	.st8{opacity:0.45;fill:#FFFFFF;enable-background:new    ;}
+	.st9{opacity:0.8;fill:#FFFFFF;enable-background:new    ;}
+	.st10{opacity:7.000000e-02;fill:#FFFFFF;enable-background:new    ;}
+	.st11{opacity:0.1;fill:#FFFFFF;enable-background:new    ;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="7.3789" y1="66.4212" x2="66.5386" y2="7.2615" gradientTransform="matrix(1 0 0 -1 0 74)">
+	<stop  offset="0" style="stop-color:#026CFF"/>
+	<stop  offset="1" style="stop-color:#0545B8"/>
+</linearGradient>
+<circle class="st0" cx="35.9" cy="36.1" r="34.3"/>
+<polygon class="st1" points="10.4,20.9 10.3,50.7 36.3,65.8 62.3,50.8 62.3,20.9 36.3,6 "/>
+<polyline class="st2" points="49.1,28.4 36.2,35.8 23.5,28.4 23.5,13.3 36.2,6 49.1,13.3 49.1,28.4 36.2,35.8 "/>
+<polyline class="st3" points="49.6,58.1 62.3,50.8 62.3,35.8 49.1,28.4 36.2,35.8 36.3,50.5 "/>
+<polyline class="st4" points="36.2,35.8 23.5,28.4 10.3,35.8 10.3,50.8 23.5,58.4 36.3,50.5 "/>
+<path class="st5" d="M49.1,43.1"/>
+<path class="st6" d="M23.5,43.1"/>
+<polygon class="st7" points="23.5,28.4 36.2,35.8 36.3,50.5 23.5,43.1 "/>
+<polygon class="st8" points="49.1,28.4 49.1,43.1 36.3,50.5 36.2,35.8 "/>
+<polygon class="st9" points="36.3,21 23.5,28.4 36.2,35.8 49.1,28.4 "/>
+<polygon class="st10" points="10.3,20.9 36.2,6 62.3,20.9 36.2,35.7 "/>
+<polygon class="st11" points="10.3,50.7 36.3,65.8 36.2,35.7 10.3,20.9 "/>
+</svg>

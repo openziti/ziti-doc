@@ -479,9 +479,14 @@ const config = {
           //   position: 'right'
           // },
           {
-            href: 'https://github.com/openziti/ziti',
-            label: 'GitHub',
+            href: 'https://openziti.discourse.group/',
             position: 'right',
+            className: 'header-discourse-link',
+          },
+          {
+            href: 'https://github.com/openziti/ziti',
+            position: 'right',
+            className: 'header-github-link',
           },
         ],
       },

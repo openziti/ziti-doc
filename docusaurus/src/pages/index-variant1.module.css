@@ -77,6 +77,49 @@ li {
   overflow: hidden;
 }
 
+.whoziticontainer {
+  display: flex;
+  padding: 5px;
+}
+.whozitititlelogo {
+  min-height: 100px;
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  border-radius: 15px 0 0 15px;
+  padding-right:10px;
+  border-style: solid;
+  border-width:thin;
+  align-items: center;
+}
+.whozitibullets {
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+  width: 70%;
+  border-radius: 0 15px 15px 0;
+  padding:10px;border-width:thin;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+}
+
+.titleSection {
+  /*border-radius: 10px;*/
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  margin: 5px;
+  //background-color: var(--openziti-callout-color);
+  /*border-style: solid;*/
+  /*border-color: var(--callout-border-color);*/
+  /*border-width: 1px;*/
+  /*box-shadow: 0 0 10px var(--callout-border-color);*/
+  min-width: 250px;
+  max-width: 350px;
+}
+
 .installChoice {
   border-radius: 10px;
   padding: 10px;
@@ -88,6 +131,7 @@ li {
   border-color: var(--callout-border-color);
   border-width: 1px;
   box-shadow: 0 0 10px var(--callout-border-color);
+  min-width: 250px;
   max-width: 320px;
 }
 .installChoiceBtn {
@@ -98,30 +142,15 @@ li {
   flex-direction: row;
 }
 
-.getStartedRow {
-  display: flex;
-  flex-wrap: nowrap;
-}
-@media (max-width: 767px) {
-  .getStartedRow {
-    flex-wrap: wrap;
-  }
-}
-.getStartedBlurb {
+.textSection {
+  border-radius: 10px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
   margin: 5px;
-  min-width: 250px;
-  max-width: 350px;
-  flex-wrap: nowrap;
-}
-.getStartedBoxes {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  min-width: 300px;
+  border-style: solid;
+  border-color: var(--callout-border-color);
+  border-width: 1px;
+  box-shadow: 0 0 10px var(--callout-border-color);
 }
