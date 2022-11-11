@@ -61,7 +61,7 @@ simply pass one more parameter to the `docker` command: `-p ${externalPort}:${in
 
 ### Running the Controller
 
-Here's an example of how to launch a controller using the folder created in the steps asbove. Also, notice this command
+Here's an example of how to launch a controller using the folder created in the steps above. Also, notice this command
 passes a couple extra flags you'll see used on this page. Notably
 the `--rm` flag and the `-it` flag. The `--rm` flag instructs Docker to delete the container when the container exits.
 The `-it` flag will run the container interactively. Running interactively like this makes it easier to see the logs
