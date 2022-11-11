@@ -1,5 +1,5 @@
 ---
-id: router-update
+id: router-update-cli
 title: Cli
 ---
 
@@ -37,7 +37,7 @@ ziti edge create edge-router $ROUTER_NAME \
 
 :::info Notes
 `--no-travesal` flag is not required, but keep in mind that private routers are stub routers and setting it to true disables transitive routing through it.
-In other words, only connections destined for this router will be routed to it by the samrt routing algorithm. `--tunneler-enabled or just -t` flag indicates the tunnel mode.
+In other words, only connections destined for this router will be routed to it by the smart routing algorithm. `--tunneler-enabled or just -t` flag indicates the tunnel mode.
 :::
 
 ```bash
@@ -55,9 +55,6 @@ ziti edge create edge-router $ROUTER_NAME \
 ```
 
 </TabItem>
-<TabItem value="Public-Fabric" label="Public Router" attributes={{className: styles.orange}}>
-To be added
-</TabItem>
 </Tabs>
 
 ### List Routers
@@ -72,6 +69,7 @@ ziti edge delete edge-routers $ROUTER_ID
 ```
 
 ### Update Router
+For the more detail options list, please refer to the [Flags Section](#flags).
 ```bash
 ziti edge update edge-router $ROUTER_NAME [flags]
 ziti edge update edge-router $ROUTER_ID [flags]

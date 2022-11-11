@@ -6,8 +6,8 @@ title: Overview
 This section describes the cli method of managing configuration and troubleshooting of openziti components.
 
 ### Login 
-More details Found [here](./02-logging-in.md)
+More details Found [here](./cli-login)
 ### Logging
-More details Found  [here](./03-logging.md)
+More details Found  [here](./logging)
 ### Router
-More details Found  [here](../02-router/04-update/01-cli.md)
+More details Found  [here](../router/update/router-update-cli/#router-update)

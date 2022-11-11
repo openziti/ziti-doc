@@ -1,5 +1,5 @@
 ---
-id: router-deploying-overview
+id: router-overview
 title: Deployment Overview
 ---
 
@@ -7,57 +7,50 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import styles from './styles.module.css';
 
-In this article, we are describing the process of router deployment and what attributes can be updated, removed, added after the deployment is completed.  
+This article describes the process of deploying a router. It covers what attributes can be updated, removed and added after the deployment is completed.
 
 ## Components of Deployment
 
 :::info Notes
-Currently, the DNS name or IP address can not be changed after the deployment, because it requires to update the `Sans` section of the router server certificate. To do that one would need to re-enroll the router, which can not be done without creating a new router.
+Changing a router's advertised DNS entry or IP address (if not DNS-based) is not supported. To change these values after enrollment, the router must be deleted and re-enrolled.
 :::
 
-<Tabs>
-<TabItem value="Identity" label="Identity" attributes={{className: styles.green}}>
-
+### Identity
 The pki-related fields in the `identity` section of the router configuration files are important to understand. These
 files are generated during the process of [enrolling](#enrollment) the router. These files do not need to exist before and will be created during the enrollment process. 
 This means the process running the enrollment will need the correct privileges granted in order to write - or overwrite those files in case of re-enrollment.  
 If the key specified in the identity section already exists - it will not be overwritten. Instead, it will be used during the enrollment process. In other words, you can create your own key or use existing key.
 
-</TabItem>
-<TabItem value="Config" label="Configuration File" attributes={{className: styles.orange}}>
-
+### Configuration File
 The router is configured using a [yaml](https://yaml.org/) file. The configuration file can be obtained by running the `ziti` CLI binary on the destiantion host, 
-but some configration options will need to be passeed to match the deployment details, i.e hostname, ip, private or public routers, etc. See `Process of deployment` for more.
-
-</TabItem>
-</Tabs>
+but some configration options will need to be passed to match the deployment details, i.e hostname, ip, private or public routers, etc. See `Process of deployment` for more.
 
 ## Sizing Guidelines
-More details can be found [here](03-sizing.md)
+More details can be found [here](./router-sizing)
 ## Process of Deployment
 In order to eliminate sharing private key(s) over internet (i.e. existing key(s) located on a target host), it is best practice to run the cli router creation commands  on the target host. 
 
 :::info Note
-Ensure you are [logged in](../04-cli/02-logging-in.md) 
-for creating/udating routers through Cli
+Ensure you are [logged in](../cli/cli-login) 
+for creating/updating routers through Cli
 :::
 
-1. ### Download ziti and ziti-router binaries
-    [openziti release notes and artifacts](https://github.com/openziti/ziti/releases)
-1. ### Create router config file {#router-config-file}
-    More details found [here](02-configuration.md)
-1. ### Adding router to network {#router-create}
-    More details found [here](04-update/01-cli.md/#create-router).
-1. ### Enrolling router to create identity files {#enrollment}  
-    ```bash
-    ziti-router enroll $ROUTER_NAME.yaml \
-                    --jwt $ROUTER_NAME.jwt
-    ```
-1. ### Running router {#router-running} 
-    ```bash
-    ziti-router run $ROUTER_NAME.yaml
-    ```
-## Updates after deployment {#router-update}
-See [update section](04-update/01-cli.md/#update-router) for more details
+### Download ziti and ziti-router binaries
+[openziti release notes and artifacts](https://github.com/openziti/ziti/releases/latest)
+### Create router config file {#router-config-file}
+More details found [here](./router-configuration-file)
+### Add router to network {#router-create}
+More details found [here](./update/router-update-cli/#create-router).
+### Enroll router to create identity files {#enrollment}  
+```bash
+ziti-router enroll $ROUTER_NAME.yaml \
+                --jwt $ROUTER_NAME.jwt
+```
+### Run router {#router-running} 
+```bash
+ziti-router run $ROUTER_NAME.yaml
+```
+## Update router after deployment {#router-update}
+See [update section](./update/router-update-cli/#update-router) for more details
 ## Logging
-See [logging section](../04-cli/03-logging.md) for more details
+See [logging section](../cli/logging) for more details
