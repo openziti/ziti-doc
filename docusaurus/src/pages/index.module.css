@@ -8,6 +8,9 @@
   --openziti-callout-color: #ffffff;
   --zeds-callout-color: #ffffff;
   --cloudziti-callout-color: #ffffff;
+  --h1-size: 40px;
+  --h2-size: 30px;
+  --h3-size: 20px;
 }
 html[data-theme="dark"] {
   --callout-color: #374050;
@@ -16,6 +19,12 @@ html[data-theme="dark"] {
   --zeds-callout-color: #374050;
   --cloudziti-callout-color: #374050;
   --github-img: '/img/github.svg';
+}
+p {
+  font-size: 14px;
+}
+li {
+  font-size: 14px;
 }
 
 .main {
@@ -36,7 +45,6 @@ html[data-theme="dark"] {
 .h3 {
   font-size: var(--h3-size);
 }
-
 .cardz {
   align-content: center;
   padding: 10px;
@@ -69,58 +77,18 @@ html[data-theme="dark"] {
   overflow: hidden;
 }
 
-.whoziticontainer {
-  display: flex;
-  padding: 5px;
-}
-.whozitititlelogo {
-  min-height: 100px;
-  display: flex;
-  justify-content: flex-end;
-  width: 30%;
-  border-radius: 15px 0 0 15px;
-  padding-right:10px;
-  border-style: solid;
-  border-width:thin;
-  align-items: center;
-}
-.whozitibullets {
-  display:flex;
-  justify-content:space-between;
-  align-items: center;
-  width: 70%;
-  border-radius: 0px 15px 15px 0px;
-  padding:10px;border-width:thin;
-  border-bottom-style: solid;
-  border-right-style: solid;
-  border-top-style: solid;
-}
-
-.titleSection {
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  margin: 10px;
-  border-style: solid;
-  border-color: var(--callout-border-color);
-  border-width: 1px;
-  box-shadow: 0 0 10px var(--callout-border-color);
-}
 .installChoice {
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-  margin: 10px;
+  margin: 5px;
   border-style: solid;
   border-color: var(--callout-border-color);
   border-width: 1px;
   box-shadow: 0 0 10px var(--callout-border-color);
-  min-width: 350px;
-  max-width: 400px;
+  max-width: 320px;
 }
 .installChoiceBtn {
   display: flex;
@@ -128,4 +96,32 @@ html[data-theme="dark"] {
   flex-grow: 1;
   align-items: end;
   flex-direction: row;
+}
+
+.getStartedRow {
+  display: flex;
+  flex-wrap: nowrap;
+}
+@media (max-width: 767px) {
+  .getStartedRow {
+    flex-wrap: wrap;
+  }
+}
+.getStartedBlurb {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  margin: 5px;
+  min-width: 250px;
+  max-width: 350px;
+  flex-wrap: nowrap;
+}
+.getStartedBoxes {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-width: 300px;
 }
