@@ -47,7 +47,7 @@ export default function Home() {
                 <div className={styles.getStartedRow}>
 
                     <div className={styles.getStartedBlurb}>
-                        <H2>Solving the challenge of network security with <Highlight>software</Highlight></H2>
+                        <H2>Secure by design networking, anywhere, as <Highlight>software</Highlight></H2>
 
                         <p>&nbsp;</p>
                         <ul>
