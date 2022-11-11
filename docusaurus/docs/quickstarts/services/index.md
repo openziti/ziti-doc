@@ -8,9 +8,9 @@ This page will hopefully give you some insight into some of the choices you can 
 ## Zero Trust Application Access
 
 OpenZiti is really about embedding zero trust directly into your applications. If you are a developer, you might want to start with 
-your favorite language and start your OpenZiti journy with "zero trust application access". This means you'll take an SDK and embed it 
+your favorite language and start your OpenZiti journey with "zero trust application access". This means you'll take an SDK and embed it 
 into an application you write! It's probably best to explore the best SDK for your language and find samples for that SDK to use. 
-[The landing page](index) has links to all the SDKs to choose from.  
+[The landing page](/) has links to all the SDKs to choose from.  
 
 ## Zero Trust Host Access
 
