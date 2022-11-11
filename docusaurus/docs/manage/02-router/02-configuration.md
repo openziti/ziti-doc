@@ -31,7 +31,8 @@ ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME}.cas"
 
 ./ziti create config router edge --routerName  $ROUTER_NAME \
                                 --output $ROUTER_NAME.yaml \
-                                --disableTunneler --private
+                                --tunnelerMode none \
+                                --private
 ```
 **Expected File Content**
 ```yaml
@@ -58,7 +59,7 @@ link:
 
 listeners:
 # bindings of edge and tunnel requires an "edge" section below
-    - binding: edge
+  - binding: edge
     address: tls:0.0.0.0:443
     options:
         advertise: 192.168.10.11:443
@@ -66,9 +67,9 @@ listeners:
         getSessionTimeout: 60
 #  - binding: tunnel
 #    options:
-#
-#
-#
+#      mode: host #tproxy|host
+
+
 
 edge:
     csr:
@@ -98,6 +99,7 @@ edge:
 #    enableCompression: true
 #    server_cert: ~/.ziti/config/certs/192.168.10.11.server.chain.cert
 #    key: ~/.ziti/config/certs/192.168.10.11.key
+
 forwarder:
     latencyProbeInterval: 10
     xgressDialQueueLength: 1000
@@ -117,7 +119,6 @@ ZITI_CTRL_PORT=80
 ZITI_ROUTER_ADVERTISED_HOST="192.168.10.11"
 ZITI_EDGE_ROUTER_IP_OVERRIDE="192.168.10.11"
 ZITI_EDGE_ROUTER_PORT=443
-ZITI_EDGE_ROUTER_LAN_INTERFACE=eth0
 ROUTER_NAME=$ZITI_ROUTER_ADVERTISED_HOST
 ZITI_ROUTER_IDENTITY_CERT="~/.ziti/config/certs/${ROUTER_NAME}.cert"
 ZITI_ROUTER_IDENTITY_SERVER_CERT="~/.ziti/config/certs/${ROUTER_NAME}.server.chain.cert"
@@ -126,7 +127,9 @@ ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME}.cas"
 
 ./ziti create config router edge --routerName  $ROUTER_NAME \
                                 --output $ROUTER_NAME.yaml \
-                                --Tproxy --private
+                                --tunnelerMode tproxy \
+                                --lanInterface eth0 \
+                                --private
 ```
 **Expected File Content**
 ```yaml
@@ -153,15 +156,15 @@ link:
 
 listeners:
 # bindings of edge and tunnel requires an "edge" section below
-    - binding: edge
+  - binding: edge
     address: tls:0.0.0.0:443
     options:
         advertise: 192.168.10.11:443
         connectTimeoutMs: 1000
         getSessionTimeout: 60
-    - binding: tunnel
+  - binding: tunnel
     options:
-        mode: tproxy
+        mode: tproxy #tproxy|host
         resolver: udp://192.168.10.11:53
         lanIf: eth0
 
@@ -193,6 +196,7 @@ edge:
 #    enableCompression: true
 #    server_cert: ~/.ziti/config/certs/192.168.10.11.server.chain.cert
 #    key: ~/.ziti/config/certs/192.168.10.11.key
+
 forwarder:
     latencyProbeInterval: 10
     xgressDialQueueLength: 1000
@@ -205,7 +209,7 @@ forwarder:
 <TabItem value="Public-Edge" label="Public Router w/ Edge" attributes={{className: styles.orange}}>
 
 This is a network side dialing and listening router with edge. It listens for connections from other routers. The host firewall needs to be opened to allow connections through. 
-In this example code, the ports are 80 and 443. Set environmental variables to match this type of deployment, and run the command shown. 
+In this example code, the listen ports are 80 and 443. Set environmental variables to match this type of deployment, and run the command shown. 
 ```bash
 ZITI_CTRL_ADVERTISED_ADDRESS=controller01.zitinetwork.example.org
 ZITI_CTRL_PORT=80
@@ -219,7 +223,7 @@ ZITI_ROUTER_IDENTITY_CA="~/.ziti/config/certs/${ROUTER_NAME}.cas"
 
 ./ziti create config router edge --routerName  $ROUTER_NAME \
                                 --output $ROUTER_NAME.yaml \
-                                --disableTunneler
+                                --tunnelerMode none
 ```
 **Expected File Content**
 ```yaml
@@ -246,7 +250,7 @@ link:
 
 listeners:
 # bindings of edge and tunnel requires an "edge" section below
-    - binding: edge
+  - binding: edge
     address: tls:0.0.0.0:443
     options:
         advertise: router01.zitinetwork.example.org:443
@@ -254,9 +258,9 @@ listeners:
         getSessionTimeout: 60
 #  - binding: tunnel
 #    options:
-#
-#
-#
+#      mode: host #tproxy|host
+
+
 
 edge:
     csr:
@@ -293,8 +297,6 @@ forwarder:
     linkDialQueueLength: 1000
     linkDialWorkerCount: 32
 ```
-</TabItem>
-<TabItem value="Public-Fabric" label="Public Router" attributes={{className: styles.orange}}>
-To be added
+
 </TabItem>
 </Tabs>
