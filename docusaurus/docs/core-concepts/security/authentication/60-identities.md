@@ -6,7 +6,7 @@ itself, a single account on a multi-user device, an application, or a set of app
 Identity is only limited by the intent of its use, its security configuration, and where/how it stores its credentials.
 
 If an Identity represents a human that is using an SSO provider that ties into Ziti Edge's
-[External JWT Signers](external-jwt-signers) the human operator can move from device to device using whichever Ziti
+[External JWT Signers](./external-jwt-signers) the human operator can move from device to device using whichever Ziti
 enabled applications that allow them to authenticate. If the Identity can only authenticate via a x509 Client
 Certificate where the private key is stored in a hardware back keystore on a device, such that the key can not be moved,
 the identity is tied to that hardware. Further if the Identity's credentials are stored in an OS-backed user specific
@@ -174,7 +174,7 @@ Deleting an Identity removes all directly associated data. This includes:
 - Identity [Role Attributes](.)
 - [Authenticators](./auth#authenticators)
 - [Enrollments](../enrollment)
-- [MFA TOTP Configuration](totp)
+- [MFA TOTP Configuration](./totp)
 
 It does not remove entities are that re-usable between Identities:
 

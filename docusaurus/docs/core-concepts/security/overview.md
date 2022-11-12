@@ -9,13 +9,13 @@ are related to identity authentication and service access:
 
 - [Identities](#identity) - describe a human, device, or service within Ziti Edge
 - [Authenticators](./authentication/auth#authenticators) - describes the credentials of an authentication method associated with an Identity
-- [Enrollments](enrollment) - describes a set of criteria necessary to create a new Identity and associated Authenticator
+- [Enrollments](./enrollment) - describes a set of criteria necessary to create a new Identity and associated Authenticator
 - [Authentication Policy](./authentication/authentication-policies) - describes the methods available for Identity authentication
 - [3rd Party CAs](./authentication/third-party-cas) - allows external x509 PKIs to be used for authentication
 - [External JWT Signers](./authentication/external-jwt-signers) - allows external JWT signers to be used for authentication
-- [API Session](sessions) - a security context represented by a security token (JWT, secret, etc) that represents
+- [API Session](./sessions) - a security context represented by a security token (JWT, secret, etc) that represents
   Identity authentication
-- [Session](sessions) - a security context represented by a security token (JWT, secret, etc) that represents access
+- [Session](./sessions) - a security context represented by a security token (JWT, secret, etc) that represents access
   to a Service
 - [Service Policy](./authorization/policies/overview) - describes which Identities have access to which Services and the Posture Checks that are required to
   pass for access
@@ -79,7 +79,7 @@ dial (connect) to services over a Ziti Network. Read more in the [Identity](./au
 Enrollment is a client initiated process where the result is the creation of an Identity that has some manner
 of authenticating. Enrollments may be automated through [3rd Party Cas](./authentication/third-party-cas) and 
 [External JWT Signers](./authentication/external-jwt-signers)  or may be completed through pre-provisioning. Read more in the 
-[Enrollment](enrollment) section.
+[Enrollment](./enrollment) section.
 
 ## Authentication
 
