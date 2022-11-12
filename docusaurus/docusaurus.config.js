@@ -142,7 +142,7 @@ const config = {
             from: ['/ziti/manage/controller.html', '/ziti/manage/manage.html'],
           },
           {
-            to: '/docs/core-concepts/services/creating',
+            to: '/docs/core-concepts/services/overview',
             from: ['/ziti/services/creating.html'],
           },
           {
