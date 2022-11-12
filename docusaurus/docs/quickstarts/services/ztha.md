@@ -17,13 +17,13 @@ principles. We will use some sort of http client, connect it over a network. The
 to any network be it host network, local network, the internet, private network, etc. 
 
 ### Simple HTTP Solution Overview - Before Ziti<br/>
-![before OpenZiti](before-openziti.png)
+![before OpenZiti](./before-openziti.png)
 
 The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](/glossary/glossary#underlay)
 network and requires a hole through the firewall to allow clients to connect.
 
 ### Simple HTTP Solution - After Ziti
-![after OpenZiti](after-openziti.png)
+![after OpenZiti](./after-openziti.png)
 
 After OpenZiti, we can see that there is no longer an open firewall to allow access to the HTTP server. Instead, the HTTP client 
 will have its network requests intercepted by an OpenZiti tunneller. Once intercepted, the packets are then delivered to the OpenZiti

@@ -176,7 +176,7 @@ you sent me: another reflect test
 ^C
 ```
 
-![kubea.more.total.conn.png](kubea.more.total.conn.png)
+![kubea.more.total.conn.png](./kubea.more.total.conn.png)
 
 ### Scrape Something Else
 
@@ -209,7 +209,7 @@ the browser. You should be at the 'graph' url but if not navigate back and execu
 we do that it probably doesn't look much different but... Wait a second? In the legend? Can it be? That's right. From Kubernetes 
 ClusterA, we have just scraped a workload from Kubernetes ClusterB, entirely over the OpenZiti overlay.
 
-![kubeA-and-kubeB.png](kubeA-and-kubeB.png)
+![kubeA-and-kubeB.png](./kubeA-and-kubeB.png)
 
 Generate some data like you did before by running a few netcat connection/disconnects and click 'Execute' again. Don't forget to send 
 the connection request to kubeB though!
@@ -258,7 +258,7 @@ docker run \
   openziti/prometheuz
 ```
 
-![local-docker-targets.png](local-docker-targets.png)
+![local-docker-targets.png](./local-docker-targets.png)
 
 Look at what we've just done. We have started a Prometheus instance locally, and used it to connect to four Prometheus targets via 
 scrape configurations when all four targets are hidden entirely from my local computer (and any computer) unless the computer has an 
@@ -310,10 +310,10 @@ docker run \
 
 After configuring the OpenZiti overlay, we just need to open a browser and navigate to http://local.prometheus.svc/targets. SUCCESS!
 
-![local-docker-targets-no-listener.png](local-docker-targets-no-listener.png)
+![local-docker-targets-no-listener.png](./local-docker-targets-no-listener.png)
 
 ### SUCCESS!
-![local-docker-graph-no-listener.png](local-docker-graph-no-listener.png)
+![local-docker-graph-no-listener.png](./local-docker-graph-no-listener.png)
 
 ## Wrap Up
 

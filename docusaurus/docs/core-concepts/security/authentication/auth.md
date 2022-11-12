@@ -168,7 +168,7 @@ in the Client and Management Open API 2.0 specifications under the label `authQu
 
 ### Associated Data & Removal
 
-API Sessions, may be used to create ephemeral certificates called [API Session Certificates](api-session-certificates) 
+API Sessions, may be used to create ephemeral certificates called [API Session Certificates](./api-session-certificates) 
 and sessions for service access. Additionally, API Sessions are used to scope [Posture Data](../authorization/posture-checks#posture-data). 
 When an API Session is removed for any reason, all associated data is also removed. As an example, when removing an 
 API Session used to create a Session the Session will also be removed. Removing a Session will also terminate any 
@@ -254,7 +254,7 @@ GET /edge/management/v1/authenticators
 x509 authentication requires the client to initiate a HTTPs authentication request using a x509 client certificate that
 is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge 
 Controller's internal PKI or an external PKI. If an external PKI is being used, it must be registered as a 
-[3rd Party CA](third-party-cas) via the Ziti [Edge Management API](/api/rest/edge-apis#edge-management-api), verified, and
+[3rd Party CA](./third-party-cas) via the Ziti [Edge Management API](/api/rest/edge-apis#edge-management-api), verified, and
 have authentication enabled. The client certificate must pass signature and CA chain-of-trust validation. All client, 
 intermediate CA, and root CA functionality supports RSA and EC keys.
 
@@ -276,7 +276,7 @@ used as a value to map against the unique `externalId` or `id` property on Ident
 
 The JWT must be provided in the HTTP request in the `Authentication` header with a value in the format of 
 `Bearer <jwt>`. The JWT provided must pass signature, expiration, issuer, and audience validation as configured
-on the [External JWT Signer](external-jwt-signers).
+on the [External JWT Signer](./external-jwt-signers).
 
 ## Username/password
 

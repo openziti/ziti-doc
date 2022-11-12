@@ -23,7 +23,7 @@ and a certificate signing request for the Ziti Controller's built-in certificate
 
 Follow these steps to enroll an identity with a one-time token:
 
-* [create the Identity](creating)
+* [create the Identity](./creating)
 * download or copy the JWT - this file contains the single use token
 * run the `ziti` CLI:
 
@@ -63,7 +63,7 @@ issued by a validated, [third party CA](/docs/manage/pki#third-party-ca-optional
 
 Follow these steps to enroll a 3rd Pary CA - one-time token identity:
 
-* [create the Identity](creating)
+* [create the Identity](./creating)
 * download or copy the JWT - this file contains the one-time token
 * run the `ziti` CLI. Notice you can provide the filename of the identity config JSON file to output:
 
