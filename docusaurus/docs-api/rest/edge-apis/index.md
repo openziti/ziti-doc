@@ -22,6 +22,8 @@ The Edge Management API is used by clients that wish to configure a Ziti network
 with service for dialing (connecting) nor binding (hosting). The Edge Management API provides the ability to create
 new identities, identities, policies, and other entities used to manage a Ziti network.
 
+[Explore the Edge Management API Reference](./edge-management-reference)
+
 ## Edge Client API
 
 The Edge Client API is used by clients that wish to dial (connect) or bind (host) services. The services that the
@@ -29,6 +31,8 @@ clients are allowed to interact with is defined by [policies](/docs/core-concept
 for clients to use the client API they must first [authenticate](/docs/core-concepts/security/authentication/auth) and
 obtain either a [partial or fully authenticated](/docs/core-concepts/security/authentication/auth#full-vs-partial-authentication)
 [API Sessioon](/docs/core-concepts/security/sessions#).
+
+[Explore the Edge Client API Reference](./edge-client-reference)
 
 ## Edge Client & Management Shared Capabilities
 
