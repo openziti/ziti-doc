@@ -85,6 +85,23 @@ docker run \
   /openziti/scripts/run-controller.sh
 ```
 
+## Create Edge Router Policies
+For the purposes of quickstart, it is necessary to create an Edge Router Policy and a 
+Service Edge Router Policy allowing all Edge Routers with the "public" role attribute to 
+handle all services and give all Edge Routers access to all Services.
+
+```shell
+docker run \
+  --network myFirstZitiNetwork \
+  --network-alias ziti-controller-init-container \
+  -it \
+  --rm \
+  -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
+  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/openziti/ziti.env \
+  openziti/quickstart \
+  /openziti/scripts/run-with-ziti-cli.sh  /openziti/scripts/access-control.sh
+```
+
 ## Edge Router
 
 At this point you should have a [Ziti Controller](/docs/manage/controller) running. You should have created your
@@ -92,13 +109,14 @@ Docker network as well as creating the volume mount. Now it's time to connect yo
 image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
 
-The first noticable difference is that we need to pass in the name of the edge router we want it to be. To use this
+The first noticeable difference is that we need to pass in the name of the edge router we want it to be. To use this
 network, the name supplied needs tobe addressable by clients.  Also notice the port exported is port 3022. This is the
 default port used by edge routers. 
 
 ```bash
 docker run \
   -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-1 \
+  -e ZITI_EDGE_ROUTER_ROLES=public \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-1 \
   -p 3022:3022 \
@@ -114,6 +132,7 @@ If you want to create a second edge router, you'll need to override the router p
 ```bash
 docker run \
   -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-2 \
+  -e ZITI_EDGE_ROUTER_ROLES=public \
   -e ZITI_EDGE_ROUTER_PORT=4022 \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-2 \
