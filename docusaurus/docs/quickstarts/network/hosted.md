@@ -20,7 +20,7 @@ the configuration options available you'll be better equipped to make changes.
 
 The first issue you will need to deal with is opening some ports. A network will consist of at least one controller and 
 at least one edge router. Both of these components will require ports to be open. For the controller you will need to 
-open two ports through your firewall, one port for the Edge API, and one for Edge Router connections.
+open a range of ports through your firewall:
 
 - `8440/tcp`: Edge Controller listening for clients
 - `8441/tcp`: Edge Controller listening for routers
