@@ -33,7 +33,7 @@ you can perform the following steps.
     ```bash
     git clone https://github.com/openziti/ziti-console.git "${ZITI_HOME}/ziti-console"
     ```
-   
+
 2. Install node and npm and get the server ready:
 
     ```bash
@@ -41,24 +41,26 @@ you can perform the following steps.
     sudo apt install npm nodejs -y
     npm install
     ````
-   
-3. Use the ziti-controller certificates for the Ziti Console:
+
+3. You may need a newer version of Node if the app complains about `await`. In that case, you could use [Node Version Manager](https://github.com/nvm-sh/nvm#readme) (`nvm`) instead of `apt` to install Node.
+
+4. Use the ziti-controller certificates for the Ziti Console:
 
     ```bash
     ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/certs/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
     ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.key" "${ZITI_HOME}/ziti-console/server.key"
     ```
-   
-4. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
+
+5. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
    Ziti helper script, you need to in order to get the necessary function.
 
     ```bash
     createZacSystemdFile
     sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
     sudo systemctl daemon-reload
-    sudo systemctl start ziti-console
+    sudo systemctl enable --now ziti-console
     ```
-   
+
    If you do not have systemd installed or if you just wish to start ZAC you can simply issue:
 
    ```bash
@@ -72,8 +74,7 @@ you can perform the following steps.
    `sudo systemctl status ziti-console --lines=0 --no-pager`
 
     ```bash
-    #sample output of the command:
-    ubuntu@ip-172-31-22-212:~$ sudo systemctl status ziti-console --lines=0 --no-pager
+   $ sudo systemctl status ziti-console --lines=0 --no-pager
     ● ziti-console.service - Ziti-Console
     Loaded: loaded (/etc/systemd/system/ziti-console.service; disabled; vendor preset: enabled)
     Active: active (running) since Wed 2021-05-19 22:04:44 UTC; 13h ago
@@ -82,11 +83,15 @@ you can perform the following steps.
     Memory: 33.4M
     CGroup: /system.slice/ziti-console.service
     └─13458 /usr/bin/node /home/ubuntu/.ziti/quickstart/ip-172-31-22-212/ziti-console/server.js
+
+   $ sudo ss -lntp | grep node
+   LISTEN 0      511                *:8443             *:*    users:(("node",pid=26013,fd=19))           
+   LISTEN 0      511                *:1408             *:*    users:(("node",pid=26013,fd=18))
     ```
-    
+
 ### Using Docker
 
-Getting ZAC setup if you have followed theaa [docker network quickstart](../network/local-with-docker) 
+Getting ZAC setup if you have followed the [docker network quickstart](../network/local-with-docker) 
 should be straightforward. If you have used the default values from this quickstart you can issue the following command. 
 Notice that this command uses the default path: `${HOME}/docker-volume/myFirstZitiNetwork`. If you customized the path, 
 replace the paths specified in the volume mount sections below accordingly (the '-v' lines). Also note this command will 
