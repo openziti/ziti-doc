@@ -13,7 +13,9 @@ and can be accomplished in two basic ways shown below.
 
 It's expected that you're using `bash` for these commands. If you're using Windows we strongly recommend that you install 
 and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to 
-translate to your shell accordingly. 
+translate to your shell accordingly.
+
+You will need `node` and `npm` executables. You may need a newer version of Node than your OS package manager provides. Ubuntu Jammy currently provides Node v12 which is too old. If the app complains about `await` then a newer version is needed. In that case, you could use [Node Version Manager](https://github.com/nvm-sh/nvm#readme) (`nvm`) instead of `apt` to install `node` and `npm`.
 
 :::note
 When running Ziti Administration Console, you should also prefer using https over http. In order to do this you will need
@@ -34,24 +36,21 @@ you can perform the following steps.
     git clone https://github.com/openziti/ziti-console.git "${ZITI_HOME}/ziti-console"
     ```
 
-2. Install node and npm and get the server ready:
+1. Install Node modules:
 
     ```bash
     cd "${ZITI_HOME}/ziti-console"
-    sudo apt install npm nodejs -y
     npm install
     ````
 
-3. You may need a newer version of Node if the app complains about `await`. In that case, you could use [Node Version Manager](https://github.com/nvm-sh/nvm#readme) (`nvm`) instead of `apt` to install Node.
-
-4. Use the ziti-controller certificates for the Ziti Console:
+1. Use the ziti-controller certificates for the Ziti Console:
 
     ```bash
     ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/certs/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
     ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.key" "${ZITI_HOME}/ziti-console/server.key"
     ```
 
-5. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
+1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
    Ziti helper script, you need to in order to get the necessary function.
 
     ```bash
@@ -70,7 +69,7 @@ you can perform the following steps.
    Ziti Server running on port 1408
    ```
 
-6. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command 
+1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command 
    `sudo systemctl status ziti-console --lines=0 --no-pager`
 
     ```bash
