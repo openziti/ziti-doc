@@ -15,7 +15,7 @@ It's expected that you're using `bash` for these commands. If you're using Windo
 and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to 
 translate to your shell accordingly.
 
-You will need `node` and `npm` executables. You may need a newer version of Node than your OS package manager provides. Ubuntu Jammy currently provides Node v12 which is too old. If the app complains about `await` then a newer version is needed. In that case, you could use [Node Version Manager](https://github.com/nvm-sh/nvm#readme) (`nvm`) instead of `apt` to install `node` and `npm`.
+You will need `node` and `npm` executables from Node.js v16+. Ubuntu Jammy currently provides v12.
 
 :::note
 When running Ziti Administration Console, you should also prefer using https over http. In order to do this you will need
