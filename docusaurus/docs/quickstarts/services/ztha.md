@@ -131,7 +131,7 @@ with the tunneler option (`-t`) enabled. This means that edge-router is configur
 identities` to find the name of the identity associated to the router.
 
 
-```bash
+```shell
 # login to your controller - replace the host/port with the correct value
 ziti edge login localhost:1280
 
@@ -152,8 +152,8 @@ ziti edge create identity user http-server -o http.server.jwt
 ziti edge create config http.intercept.v1 intercept.v1 '{"protocols":["tcp"],"addresses":["http.ziti"], "portRanges":[{"low":80, "high":80}]}'
     
 #4. Create a host.v1 config. This config is used instruct the server-side tunneler how to offload the traffic from 
-#   the overlay, back to the underlay.
-ziti edge create config http.host.v1 host.v1 '{"protocol":"tcp", "address":"'"${http_server}"'", "port":8000}'
+#   the overlay, back to the underlay. 
+ziti edge create config http.host.v1 host.v1 '{"protocol":"tcp", "address":"'"${http_server}"'", "port":80}'
     
 #5. Create a service to associate the two configs created previously into a service.
 ziti edge create service http.svc --configs http.intercept.v1,http.host.v1
