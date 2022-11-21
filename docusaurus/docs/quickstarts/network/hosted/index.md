@@ -43,10 +43,10 @@ The quickest and easiest thing to do, is simply find your external DNS name and 
 variable. For example:
 
 ```bash
-export EXTERNAL_DNS="ec2-18-100-100-100.us-east-2.compute.amazonaws.com"
+export EXTERNAL_DNS="acme.example.com"
 ```
 
-You may override the default administrator password "admin". The secret value will be stored in the `*.env` file inside the express install home directory so that it can be easily referenced by the `zitiLogin` function.
+A random password for user "admin" will be generated and stored in the `*.env` file inside the express install home directory so that it can be easily referenced by the `zitiLogin` function. Optionally, you may override with a preferred password by setting `ZITI_PWD` now.
 
 ```bash
 read -s ZITI_PWD
@@ -54,7 +54,7 @@ read -s ZITI_PWD
 ```
 
 :::note
-Make sure you have `jq` installed on your machine. From ubuntu that would look like:
+Make sure you have `jq` installed on your machine. From Debian distros that would look like:
 
 ```bash
 sudo apt update && sudo apt install jq -y
@@ -70,6 +70,7 @@ first edge router
 configured and ready to turn on:
 
 ```bash
+# run me
 export EXTERNAL_IP="$(curl -s eth0.me)"       
 export ZITI_EDGE_CONTROLLER_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_EDGE_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
@@ -81,6 +82,7 @@ export ZITI_EDGE_ROUTER_PORT=8442
 
 # now download, source, and execute the expressInstall function
 source <(wget -qO- https://raw.githubusercontent.com/openziti/ziti/main/quickstart/docker/image/ziti-cli-functions.sh)
+
 expressInstall
 ```
 
@@ -92,10 +94,13 @@ is useful to make sure the controller can restart automatically should you shutd
 files run:
 
 ```bash
+# run me
 createControllerSystemdFile
 createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
+```
 
-# example:
+```bash
+# example output
 $ createControllerSystemdFile
 Controller systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-controller.service
 
@@ -106,6 +111,7 @@ Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip
 After the files are generated, you can then install them for use by systemd by running:
 
 ```bash
+# run me
 sudo cp "${ZITI_HOME}/${ZITI_EDGE_CONTROLLER_RAWNAME}.service" /etc/systemd/system/ziti-controller.service
 sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_RAWNAME}.service" /etc/systemd/system/ziti-router.service
 sudo systemctl daemon-reload
@@ -113,10 +119,32 @@ sudo systemctl enable --now ziti-controller
 sudo systemctl enable --now ziti-router
 ```
 
+```bash
+# example output
+$ sudo cp "${ZITI_HOME}/${ZITI_EDGE_CONTROLLER_RAWNAME}.service" /etc/systemd/system/ziti-controller.service
+
+$ sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_RAWNAME}.service" /etc/systemd/system/ziti-router.service
+
+$ sudo systemctl daemon-reload
+
+$ sudo systemctl enable --now ziti-controller
+Created symlink from /etc/systemd/system/multi-user.target.wants/ziti-controller.service to /etc/systemd/system/ziti-controller.service.
+
+$ sudo systemctl enable --now ziti-router
+Created symlink from /etc/systemd/system/multi-user.target.wants/ziti-router.service to /etc/systemd/system/ziti-router.service.
+```
+
 Now, both the controller and the edge router will restart automatically!  After a few seconds you can then run these
 commands and verify systemd has started the processes and see the status:
 
 ```bash
+# run me
+sudo systemctl -q status ziti-controller --lines=0 --no-pager
+sudo systemctl -q status ziti-router --lines=0 --no-pager
+```
+
+```bash
+# example output
 $ sudo systemctl -q status ziti-controller --lines=0 --no-pager
 ● ziti-controller.service - Ziti-Controller
      Loaded: loaded (/etc/systemd/system/ziti-controller.service; disabled; vendor preset: enabled)
@@ -141,6 +169,12 @@ $ sudo systemctl -q status ziti-router --lines=0 --no-pager
 Inspect the servers' listening ports.
 
 ```bash
+# run me
+sudo ss -lntp | grep ziti
+```
+
+```bash
+# example
 $ sudo ss -lntp | grep ziti
 LISTEN 0      4096               *:8440             *:*    users:(("ziti-controller",pid=5240,fd=10))
 LISTEN 0      4096               *:8441             *:*    users:(("ziti-controller",pid=5240,fd=9)) 
@@ -151,9 +185,15 @@ LISTEN 0      4096               *:10080            *:*    users:(("ziti-router"
 ## Adding Environment Variables Back to the Shell
 
 If you log out and log back in again you can source the '.env' file located at:
-`source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env`.
+`~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env`.
 
 ```bash
+# run me
+source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
+```
+
+```bash
+# example output
 $ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the path
 
