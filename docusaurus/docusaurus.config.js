@@ -350,7 +350,7 @@ const config = {
             from: ['/ziti/manage/troubleshooting.html'],
           },
           {
-            to: '/docs/quickstarts/network/hosted/',
+            to: '/docs/quickstarts/network/hosted',
             from: ['/ziti/quickstarts/network/hosted.html'],
           },
           {

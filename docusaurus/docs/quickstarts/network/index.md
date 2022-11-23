@@ -42,4 +42,4 @@ access to your [Ziti Network](/docs/introduction/intro) and aren't on the local 
 * [Run Everything Locally - no Docker](./local-no-docker.md)
 * [Run Everything Locally - using Docker](./local-with-docker.md)
 * [Run Everything Locally - Docker Compose](./local-docker-compose.md)
-* [Run Everything Hosted](./hosted/index.md)
+* [Run Everything Hosted](./hosted.md)
