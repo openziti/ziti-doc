@@ -46,13 +46,6 @@ variable. For example:
 export EXTERNAL_DNS="acme.example.com"
 ```
 
-A random password for user "admin" will be generated and stored in the `*.env` file inside the express install home directory so that it can be easily referenced by the `zitiLogin` function. Optionally, you may override with a preferred password by setting `ZITI_PWD` now.
-
-```bash
-read -s ZITI_PWD
-# type or paste the password (not echoed) and press <enter>
-```
-
 :::note
 Make sure you have `jq` installed on your machine. From Debian distros that would look like:
 
