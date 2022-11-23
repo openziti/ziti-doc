@@ -13,7 +13,7 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 ## Install Linux Package
 
-Linux packages are currently available for the amd64 (x86_64) platform. There are [binaries available for ARM](#manual-installation), and packages are [coming soon](https://github.com/openziti/ziti-tunnel-sdk-c/issues/449).
+Linux DEB packages are currently available for the x86_64 and arm64 platforms and RPM packages are available for x86_64. Additionally, there are executable downloads available for arm/v7 (32bit) for [manual installation](#manual-installation).
 
 :::note
 It is not necessary to manually enroll the identity when using the RPM or DEB package. Just install the token in the identities directory and it will be enrolled when you start the daemon.
@@ -34,6 +34,11 @@ It is not necessary to manually enroll the identity when using the RPM or DEB pa
 >
 <TabItem value="Jammy">
 
+Architectures available:
+
+* x86_64
+* arm64
+
 ```bash
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
 | gpg --dearmor \
@@ -47,6 +52,11 @@ sudo apt install ziti-edge-tunnel
 </TabItem>
 <TabItem value="Focal">
 
+Architectures available:
+
+* x86_64
+* arm64
+
 ```bash
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
 | gpg --dearmor \
@@ -59,6 +69,11 @@ sudo apt install ziti-edge-tunnel
 
 </TabItem>
 <TabItem value="Bionic">
+
+Architectures available:
+
+* x86_64
+* arm64
 
 ```bash
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
@@ -80,6 +95,11 @@ This example subscribes you to the `bionic` repo for the sake of broad compatibi
 | Bookworm | Jammy  |
 | Bullseye | Focal  |
 | Buster   | Bionic |
+
+Architectures available:
+
+* x86_64
+* arm64
 
 ```bash
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
@@ -114,6 +134,10 @@ sudo apt install ziti-edge-tunnel
 
 Use this repo with var `$releasever` on CentOS 7, Rocky 8, RHEL 7-8.
 
+Architectures available:
+
+* x86_64
+
 ```ini
 [OpenZiti]
 name=OpenZiti
@@ -128,6 +152,10 @@ repo_gpgcheck=1
 <TabItem value="RedHat9">
 
 Use the the Red Hat 8 repo until a dedicated Red Hat 9 repo becomes available ([link to issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/517)).
+
+Architectures available:
+
+* x86_64
 
 ```ini
 [OpenZiti]
@@ -144,6 +172,10 @@ repo_gpgcheck=1
 
 The Red Hat 8 RPM was tested on Fedora 31-36.
 
+Architectures available:
+
+* x86_64
+
 ```ini
 [OpenZiti]
 name=OpenZiti
@@ -158,6 +190,10 @@ repo_gpgcheck=1
 <TabItem value="Amazon">
 
 The Red Hat 7 RPM was tested on Amazon Linux.
+
+Architectures available:
+
+* x86_64
 
 ```ini
 [OpenZiti]
