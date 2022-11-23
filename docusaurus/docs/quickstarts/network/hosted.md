@@ -3,7 +3,7 @@ sidebar_position: 10
 ---
 # Host OpenZiti Anywhere
 
-You can absolutely choose to host your [OpenZiti Network](../index.md#overview-of-a-ziti-network) anywhere you like.
+You can absolutely choose to host your [OpenZiti Network](./index.md#overview-of-a-ziti-network) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
 own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller at least one edge router.
 
@@ -12,7 +12,7 @@ ideal scenario. With a zero trust overlay network provided by OpenZiti, you can 
 
 ## Installation
 
-When starting out deploying a [OpenZiti Network](../index.md#overview-of-a-ziti-network), we recommend you follow
+When starting out deploying a [OpenZiti Network](./index.md#overview-of-a-ziti-network), we recommend you follow
 and use the `expressInstall` function provided by the OpenZiti project. Once you're familiar with the network and
 the configuration options available you'll be better equipped to make changes.
 
@@ -206,13 +206,13 @@ $ echo $ZITI_HOME
 ### Use the Overlay
 
 Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../../services/index.md) and start the journey to understanding how to use OpenZiti.
+[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
 
 ### Install Ziti Admin Console (ZAC)
 
 This is an optional server app and web console for Ziti network administration.
 
-[Installation guide](../../zac/installation.md)
+[Installation guide](../zac/installation.md)
 
 ### Add a Second Public Router
 
