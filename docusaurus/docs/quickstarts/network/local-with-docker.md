@@ -86,9 +86,9 @@ docker run \
 ```
 
 ## Create Edge Router Policies
-For the purposes of quickstart, it is necessary to create an Edge Router Policy and a 
-Service Edge Router Policy allowing all Edge Routers with the "public" role attribute to 
-handle all services and give all Edge Routers access to all Services.
+OpenZiti requires specific authorization of users and routers (edge router policies), as well as authorization of 
+services and routers (service edge router policies). The docker-based quickstart doesn't perform these steps 
+automatically. Run the initialization container one time, after starting the controller as shown
 
 ```shell
 docker run \
@@ -117,6 +117,7 @@ default port used by edge routers.
 docker run \
   -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-1 \
   -e ZITI_EDGE_ROUTER_ROLES=public \
+  -e ZITI_EDGE_ROUTER_IDENTITY_ROLES=ziti.rest.host \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-1 \
   -p 3022:3022 \
