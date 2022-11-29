@@ -21,7 +21,7 @@ It is not necessary to manually enroll the identity when using the RPM or DEB pa
 
 ### Installing the DEB
 
-1. Run the script below to import the signing key, add a package source to the list, update sources, and install ziti-edge-tunnel.
+1. Run the script for your OS to install `ziti-edge-tunnel`.
 
 <Tabs
   defaultValue="Jammy"
@@ -33,6 +33,8 @@ It is not necessary to manually enroll the identity when using the RPM or DEB pa
   ]}
 >
 <TabItem value="Jammy">
+
+#### Ubuntu Jammy 22.04
 
 Architectures available:
 
@@ -52,6 +54,8 @@ sudo apt install ziti-edge-tunnel
 </TabItem>
 <TabItem value="Focal">
 
+#### Ubuntu Focal 20.04
+
 Architectures available:
 
 * x86_64
@@ -69,6 +73,8 @@ sudo apt install ziti-edge-tunnel
 
 </TabItem>
 <TabItem value="Bionic">
+
+#### Ubuntu Bionic 18.04
 
 Architectures available:
 
@@ -88,18 +94,14 @@ sudo apt install ziti-edge-tunnel
 </TabItem>
 <TabItem value="Debian">
 
-This example subscribes you to the `bionic` repo for the sake of broad compatibility. You could instead subscribe to another Ubuntu release as long as it is not younger than your Debian release.
-
-| Debian   | Ubuntu |
-|----------|--------|
-| Bookworm | Jammy  |
-| Bullseye | Focal  |
-| Buster   | Bionic |
+#### Debian GNU/Linux
 
 Architectures available:
 
 * x86_64
 * arm64
+
+This example subscribes you to the Ubuntu `bionic` repo for the sake of broad compatibility. You could instead subscribe to another Ubuntu release as long as it is not younger than your Debian release.
 
 ```bash
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
@@ -111,11 +113,27 @@ sudo apt update
 sudo apt install ziti-edge-tunnel
 ```
 
+| Debian   | Ubuntu |
+|----------|--------|
+| 12 Bookworm | 22.04 Jammy  |
+| 11 Bullseye | 20.04 Focal  |
+| 10 Buster   | 18.04 Bionic |
+
 </TabItem>
 </Tabs>
 
-2. Install an enroll token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
-2. Run `sudo systemctl restart ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
+2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+2. Enable and start the service
+
+    ```bash
+    sudo systemctl enable --now ziti-edge-tunnel.service
+    ```
+
+2. The process needs to be restarted if the contents of `/opt/openziti/etc/identities` change.
+
+    ```bash
+    sudo systemctl restart ziti-edge-tunnel.service
+    ```
 
 ### Installing the RPM
 
@@ -132,11 +150,13 @@ sudo apt install ziti-edge-tunnel
 >
 <TabItem value="RedHat">
 
-Use this repo with var `$releasever` on CentOS 7, Rocky 8, RHEL 7-8.
+#### Red Hat
 
 Architectures available:
 
 * x86_64
+
+Use this repo with var `$releasever` on CentOS 7, Rocky 8, RHEL 7-8.
 
 ```ini
 [OpenZiti]
@@ -151,11 +171,13 @@ repo_gpgcheck=1
 </TabItem>
 <TabItem value="RedHat9">
 
-Use the the Red Hat 8 repo until a dedicated Red Hat 9 repo becomes available ([link to issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/517)).
+#### Red Hat 9
 
 Architectures available:
 
 * x86_64
+
+Use the the Red Hat 8 repo until a dedicated Red Hat 9 repo becomes available ([link to issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/517)).
 
 ```ini
 [OpenZiti]
@@ -170,7 +192,7 @@ repo_gpgcheck=1
 </TabItem>
 <TabItem value="Fedora">
 
-The Red Hat 8 RPM was tested on Fedora 31-36.
+#### Fedora
 
 Architectures available:
 
@@ -189,7 +211,7 @@ repo_gpgcheck=1
 </TabItem>
 <TabItem value="Amazon">
 
-The Red Hat 7 RPM was tested on Amazon Linux.
+#### Amazon Linux
 
 Architectures available:
 
@@ -210,8 +232,18 @@ repo_gpgcheck=1
 
 2. Run `sudo yum update` to refresh your repodata cache. Optionally, you may wish to also install all available updates.
 2. Run `sudo yum install ziti-edge-tunnel` to install the RPM.
-2. Install an enroll token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
-2. Run `sudo systemctl start ziti-edge-tunnel.service`. The service needs to be restarted if the contents of the identities directory change.
+2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+2. Enable and start the service
+
+    ```bash
+    sudo systemctl enable --now ziti-edge-tunnel.service
+    ```
+
+2. The process needs to be restarted if the contents of `/opt/openziti/etc/identities` change.
+
+    ```bash
+    sudo systemctl restart ziti-edge-tunnel.service
+    ```
 
 ## Manual Installation
 
