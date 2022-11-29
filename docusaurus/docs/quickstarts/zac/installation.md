@@ -1,15 +1,11 @@
 ---
-title: Installation
+title: Ziti Admin Console
 ---
-# Installing Ziti Administration Console
 
-The Ziti Administration Console (ZAC) is a UI provided by the OpenZiti project which will allow you to configure and 
-explore a [Ziti Network](../../introduction/intro). Installing the ZAC is relatively straightforward 
-and can be accomplished in two basic ways shown below.
+The Ziti Administration Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and 
+explore a [Ziti Network](../../introduction/intro).
 
-## Setting up the Ziti Admin Console
-
-### Prerequisites
+## Prerequisites
 
 It's expected that you're using `bash` for these commands. If you're using Windows we strongly recommend that you install 
 and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to 
@@ -22,7 +18,7 @@ When running Ziti Administration Console, you should also prefer using https ove
 to either create, or copy the certificates needed. Each section below tries to show you how to accomplish this on your own.
 :::
 
-### Cloning From GitHub
+## Run ZAC by Cloning From GitHub
 
 These steps are applicable to both the [local, no docker](../network/local-no-docker) as well as the 
 [hosted yourself](../network/hosted) deployments. Do note, these steps expect you have the necessary 
@@ -88,7 +84,7 @@ you can perform the following steps.
    LISTEN 0      511                *:1408             *:*    users:(("node",pid=26013,fd=18))
     ```
 
-### Using Docker
+## Run ZAC with Docker
 
 Getting ZAC setup if you have followed the [docker network quickstart](../network/local-with-docker) 
 should be straightforward. If you have used the default values from this quickstart you can issue the following command. 
@@ -114,7 +110,7 @@ One easy, and common mechanism to do this would be to edit the 'hosts' file of y
 internet search should show you how to accomplish this.
 :::
 
-### Using Docker Compose
+## Run ZAC with Docker Compose
 
 If you have followed the [docker compose quickstart](../network/local-docker-compose) getting the ZAC 
 running within the compose file is a bit cumbersome because the docker-compose file will generate a full PKI on your 
@@ -161,7 +157,7 @@ One easy, and common mechanism to do this would be to edit the 'hosts' file of y
 internet search should show you how to accomplish this.
 :::
 
-## Login and use the Ziti Console
+## Login and use ZAC
 
 1. At this point you should be able to navigate to both: `https://${ZITI_EDGE_CONTROLLER_HOSTNAME}:8443`and see the ZAC login
    screen. (The TLS warnings your browser will show you are normal - it's because these steps use a self-signed certificate
@@ -185,10 +181,14 @@ internal docker compose network that is declared in the compose file. You would 
    3. Example using AWS "host it anywhere":
       ![host it anywhere](./zac_configure_hia.png)
 
-3. Login with admin/admin
- 
+3. Login as admin
+
+   If you followed the quickstart then admin's password is stored as an environment variable `ZITI_PWD` defined in your quickstart environment file. You may reload your quickstart environment by sourcing the environment file: `source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env`.
+
    ![img_2.png](./zac_login.png)
 
-4. **IMPORTANT!!!** Edit your profile and change the password
+4. Optionally, edit your profile to change admin's password
 
    ![img_3.png](./zac_change_pwd.png)
+
+   Keep in mind that this is the same password that is sourced from the quickstart environment file. You'll need to change it there too for the `zitiLogin` command.
