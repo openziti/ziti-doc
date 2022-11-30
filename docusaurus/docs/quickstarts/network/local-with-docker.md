@@ -12,7 +12,7 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [Ziti Networks](../../introduction/intro) require
+All [Ziti Networks](../../introduction/01-Introduction.mdx) require
 a [Ziti Controller](/docs/manage/controller). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
@@ -197,9 +197,9 @@ results: 1-1 of 1
 ## Install Ziti Admin Console (ZAC) [Optional]
 
 Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with 
-the installation guide](../zac/installation)
+the installation guide](../zac/installation.md)
 
 ## Using the Overlay
 
 Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services) and start the journey to understanding how to use OpenZiti.
+[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
