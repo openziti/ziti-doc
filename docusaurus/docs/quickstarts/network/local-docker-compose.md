@@ -289,9 +289,9 @@ Hello World
 ## Install Ziti Admin Console (ZAC) [Optional]
 
 Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with
-the installation guide](../zac/installation#using-docker-compose)
+the installation guide](../zac/installation.md#using-docker-compose)
 
 ## Using the Overlay
 
 Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services) and start the journey to understanding how to use OpenZiti.
+[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
