@@ -1,5 +1,6 @@
 ---
-title: ZTAA
+title: Application Access Model
+sidebar_label: App Access
 hide_table_of_contents: true
 ---
 
@@ -9,21 +10,16 @@ import Share43Md from './share/_app_to_router_b_deploy.mdx';
 import Share23Md from './share/_app_to_host_c_deploy.mdx';
 import Share13Md from './share/_app_to_host_a_deploy.mdx';
 
-# ZTAA
-
 This article describes the various edge deployments of ZiTi App Access. In all cases, the Controller and at least 2 Public Edge Routers are to be deployed for redundency. The Ziti Fabric connections are established between all Edge Routers but not Clients/SDKs. The Public Edge Routers would provide connection between Private Edge Routers and/or Clients/SDKs.
-
-&nbsp;
 
 :::info Note
 
 - *Recommended configuration deployment of Public Edge Routers is to have only Ziti Edge enabled and of Private Edge Routers is to have Ziti Edge enabled with Tunnel option being required for cases where the Zero Trust domain ends at the private edge router.*
 
 - *Acronyms used in this article:*
-    - *ZDE - Ziti Desktop Edge*
-    - *ZME - Ziti Mobile Edge*
-    - *ZET - Ziti Edge Tunnel*
-    
+  - *ZDE - Ziti Desktop Edge*
+  - *ZME - Ziti Mobile Edge*
+  - *ZET - Ziti Edge Tunnel*
 :::
 
 &nbsp;

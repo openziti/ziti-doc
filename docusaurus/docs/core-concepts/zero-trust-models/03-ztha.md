@@ -1,5 +1,6 @@
 ---
-title: ZTHA
+title: Host Access Model
+sidebar_label: Host Access
 hide_table_of_contents: true
 ---
 
