@@ -26,9 +26,9 @@ It is not necessary to manually enroll the identity when using the RPM or DEB pa
 <Tabs
   defaultValue="Jammy"
   values={[
-      { label: 'Ubuntu 22.04', value: 'Jammy', },
-      { label: 'Ubuntu 20.04', value: 'Focal', },
-      { label: 'Ubuntu 18.04', value: 'Bionic', },
+      { label: 'Ubuntu Focal 20.04', value: 'Focal', },
+      { label: 'Ubuntu Jammy 22.04', value: 'Jammy', },
+      { label: 'Ubuntu Bionic 18.04', value: 'Bionic', },
       { label: 'Debian GNU/Linux', value: 'Debian', },
   ]}
 >
@@ -79,7 +79,6 @@ sudo apt install ziti-edge-tunnel
 Architectures available:
 
 * x86_64
-* arm64
 
 ```bash
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
@@ -101,23 +100,25 @@ Architectures available:
 * x86_64
 * arm64
 
-This example subscribes you to the Ubuntu `bionic` repo for the sake of broad compatibility. You could instead subscribe to another Ubuntu release as long as it is not younger than your Debian release.
+This example subscribes you to the Ubuntu `focal` repo for the sake of broad compatibility. You could instead subscribe to another Ubuntu release as long as it is not younger than your Debian release. Refer to the following table to find the Ubuntu release that is the contemporary of your Debian release.
+
+| Debian      | Ubuntu       | Archs         |
+|-------------|--------------|---------------|
+| 12 Bookworm | Jammy 22.04  | x86_64, arm64 |
+| 11 Bullseye | Focal 20.04  | x86_64, arm64 |
+| 10 Buster   | Bionic 18.04 | x86_64        |
+|  9 Stretch  | Xenial 16.04 | x86_64        |
+|  8 Jessie   | Trusty 14.04 | x86_64        |
 
 ```bash
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable bionic main' \
+echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
 | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
 sudo apt update
 sudo apt install ziti-edge-tunnel
 ```
-
-| Debian   | Ubuntu |
-|----------|--------|
-| 12 Bookworm | 22.04 Jammy  |
-| 11 Bullseye | 20.04 Focal  |
-| 10 Buster   | 18.04 Bionic |
 
 </TabItem>
 </Tabs>
