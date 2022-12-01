@@ -205,9 +205,9 @@ Hello World
 </pre>
 ```
 
-### Configuring the Overlay Using Ziti Admin Console
+### Ziti Admin Console (ZAC)
 
--- COMING SOON --
+Optionally, you may [install the ZAC](../zac/installation.md) to manage your network with a UI.
 
 ### Testing Everything Works
 
