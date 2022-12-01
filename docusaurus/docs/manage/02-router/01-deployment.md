@@ -17,55 +17,76 @@ with the [Ziti Network Quickstart](../../quickstarts/network/index.md).
 This article describes the process of deploying a router. It covers what attributes can be updated, removed, and added after the deployment is completed.
 
 :::info Notes
-Changing a router's advertised DNS entry or IP address (if not DNS-based) is not supported. To change these values after enrollment, the router must be deleted and re-enrolled.
+The life cycle of a router does not allow for the advertised, external DNS name or IP address to change. A new router must be created.
 :::
-
-### Identity
-
-The pki-related fields in the `identity` section of the router configuration files are important to understand. These files are generated during the process of [enrolling](#enrollment) the router. These files do not need to exist before and will be created during the enrollment process. This means the process running the enrollment will need the correct privileges granted in order to write - or overwrite those files in case of re-enrollment. If the key specified in the identity section already exists - it will not be overwritten. Instead, it will be used during the enrollment process. In other words, you can create your own key or use existing key.
-
-### Configuration File
-
-The router is configured using a YAML file. The configuration file can be obtained by running the `ziti` CLI binary on the destiantion host, but some configration options will need to be passed to match the deployment details, i.e hostname, ip, private or public routers, etc. See `Process of deployment` for more.
 
 ## Process of Deployment
 
-It is advisable to generate private keys on the same host where they'll be used to avoid duplication. This minimizes opportunities for theft and misuse.
+It is advisable to generate private keys on the same host where they'll be used. This minimizes the risk of losing custody of the private key material.
 
 :::info Note
 Ensure you are [logged in](../04-cli-basics.md)
-for creating/updating routers through Cli
+for managing routers with the CLI
 :::
 
 ### Download Binaries
 
-You will need the `ziti` and `ziti-router` executables: [OpenZiti Releases](https://github.com/openziti/ziti/releases/latest)
+You will need the `ziti-router` executable from [OpenZiti Releases](https://github.com/openziti/ziti/releases/latest).
 
-### Create Router Config File {#router-config-file}
+### Create Config File {#router-config-file}
 
-More details found [here](./02-configuration.md)
+The router loads its configuration from a YAML file. You may use the `ziti create config router` command to generate a config file, influencing the contents with options and variables. Here are [some practical examples representing common deployment scenarios](./02-configuration.md).
 
-### Add Router to Network {#router-create}
+The `identity.key` field in the config behaves differently for routers. If a file exists in the path indicated by `key` then the key will be used during router enrollment. If it does not exist then a unique key will be generated.
 
-More details found [here](./04-cli-mgmt.md#create-router).
+```yaml
+identity:
+    cert:                 "~/.ziti/config/certs/router01.zitinetwork.example.org.cert"
+    server_cert:          "~/.ziti/config/certs/router01.zitinetwork.example.org.server.chain.cert"
+    key:                  "~/.ziti/config/certs/router01.zitinetwork.example.org.key"
+    ca:                   "~/.ziti/config/certs/router01.zitinetwork.example.org.cas"
+```
 
-### Enroll Router to Create Identity Files {#enrollment}
+### Create Router {#router-create}
+
+The life cycle of a router begins by calling the controller's management API to create a router. You can do this with [the REST API](/api/rest) or [the `ziti` CLI](./04-cli-mgmt.md#create-router).
+
+### Enroll Router {#enrollment}
+
+Creating a router yields a one-time enrollment token that you may store as a JWT file. Enrollment consumes the token and facilitates issuing a client certificate for the router, establishing cryptographic trust with the controller.
 
 ```bash
-ziti-router enroll $ROUTER_NAME.yaml \
-                --jwt $ROUTER_NAME.jwt
+ziti-router enroll config.yaml --jwt token.jwt
 ```
 
 ### Run Router {#router-run}
 
 ```bash
-ziti-router run $ROUTER_NAME.yaml
+ziti-router run config.yaml
 ```
 
-## Update Router After Deployment {#router-update}
+```ini
+# /etc/systemd/system/ziti-router.service
+[Unit]
+Description=Ziti Router
+After=network.target
 
-See [update section](./04-cli-mgmt.md/#update-router) for more details
+[Service]
+User=root
+WorkingDirectory=/etc/openziti/router
+ExecStart=/usr/local/sbin/ziti-router run /etc/openziti/router/config.yml --log-formatter pfxlog
+Restart=always
+RestartSec=2
+LimitNOFILE=65536
 
-## Logging
+[Install]
+WantedBy=multi-user.target
+```
 
-See [logging section](../04-cli-basics.md) for more details
+### Manage Router {#router-update}
+
+You can manage a router's role attributes, tags, etc. with [the REST API](/api/rest) or [the `ziti` CLI](./04-cli-mgmt.md#managing-routers-with-the-cli) for more details
+
+### Configure Logging
+
+See [logging section](../04-cli-basics.md#logging) for more details
