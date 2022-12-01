@@ -1,5 +1,5 @@
 ---
-id: router-deployment
+id: deployment
 title: Router Deployment
 ---
 
@@ -22,7 +22,7 @@ Changing a router's advertised DNS entry or IP address (if not DNS-based) is not
 
 ### Identity
 
-The pki-related fields in the `identity` section of the router configuration files are important to understand. These files are generated during the process of [enrolling](#enroll-router-to-create-identity-files-enrollment) the router. These files do not need to exist before and will be created during the enrollment process. This means the process running the enrollment will need the correct privileges granted in order to write - or overwrite those files in case of re-enrollment. If the key specified in the identity section already exists - it will not be overwritten. Instead, it will be used during the enrollment process. In other words, you can create your own key or use existing key.
+The pki-related fields in the `identity` section of the router configuration files are important to understand. These files are generated during the process of [enrolling](#enrollment) the router. These files do not need to exist before and will be created during the enrollment process. This means the process running the enrollment will need the correct privileges granted in order to write - or overwrite those files in case of re-enrollment. If the key specified in the identity section already exists - it will not be overwritten. Instead, it will be used during the enrollment process. In other words, you can create your own key or use existing key.
 
 ### Configuration File
 
@@ -33,7 +33,7 @@ The router is configured using a YAML file. The configuration file can be obtain
 It is advisable to generate private keys on the same host where they'll be used to avoid duplication. This minimizes opportunities for theft and misuse.
 
 :::info Note
-Ensure you are [logged in](../cli/cli-login)
+Ensure you are [logged in](../04-cli-basics.md)
 for creating/updating routers through Cli
 :::
 
@@ -47,7 +47,7 @@ More details found [here](./02-configuration.md)
 
 ### Add Router to Network {#router-create}
 
-More details found [here](./update/router-update-cli/#create-router).
+More details found [here](./04-cli-mgmt.md#create-router).
 
 ### Enroll Router to Create Identity Files {#enrollment}
 
@@ -64,8 +64,8 @@ ziti-router run $ROUTER_NAME.yaml
 
 ## Update Router After Deployment {#router-update}
 
-See [update section](./update/router-update-cli/#update-router) for more details
+See [update section](./04-cli-mgmt.md/#update-router) for more details
 
 ## Logging
 
-See [logging section](../cli/logging) for more details
+See [logging section](../04-cli-basics.md) for more details

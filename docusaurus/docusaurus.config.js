@@ -294,7 +294,7 @@ const config = {
             from: ['/ziti/metrics/inspect.html'],
           },
           {
-            to: '/docs/manage/router/',
+            to: '/docs/manage/router/deployment',
             from: ['/ziti/manage/edge-router.html', '/ziti/manage/router-overview.html'],
           },
           {
