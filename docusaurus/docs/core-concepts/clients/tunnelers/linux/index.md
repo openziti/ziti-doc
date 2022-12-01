@@ -24,10 +24,10 @@ It is not necessary to manually enroll the identity when using the RPM or DEB pa
 1. Run the script for your OS to install `ziti-edge-tunnel`.
 
 <Tabs
-  defaultValue="Jammy"
+  defaultValue="Focal"
   values={[
-      { label: 'Ubuntu Focal 20.04', value: 'Focal', },
       { label: 'Ubuntu Jammy 22.04', value: 'Jammy', },
+      { label: 'Ubuntu Focal 20.04', value: 'Focal', },
       { label: 'Ubuntu Bionic 18.04', value: 'Bionic', },
       { label: 'Debian GNU/Linux', value: 'Debian', },
   ]}
@@ -95,13 +95,6 @@ sudo apt install ziti-edge-tunnel
 
 #### Debian GNU/Linux
 
-Architectures available:
-
-* x86_64
-* arm64
-
-This example subscribes you to the Ubuntu `focal` repo for the sake of broad compatibility. You could instead subscribe to another Ubuntu release as long as it is not younger than your Debian release. Refer to the following table to find the Ubuntu release that is the contemporary of your Debian release.
-
 | Debian      | Ubuntu       | Archs         |
 |-------------|--------------|---------------|
 | 12 Bookworm | Jammy 22.04  | x86_64, arm64 |
@@ -109,6 +102,8 @@ This example subscribes you to the Ubuntu `focal` repo for the sake of broad com
 | 10 Buster   | Bionic 18.04 | x86_64        |
 |  9 Stretch  | Xenial 16.04 | x86_64        |
 |  8 Jessie   | Trusty 14.04 | x86_64        |
+
+This example subscribes you to the Ubuntu `focal` repo which will work well in most cases. Alternatively, you may refer to the table to find the Ubuntu release name that is the contemporary of your Debian release. Then, substitute the Ubuntu release name for `focal` in the `/etc/apt/sources.list.d/openziti.list` file.
 
 ```bash
 curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
