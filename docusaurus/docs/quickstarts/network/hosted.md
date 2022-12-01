@@ -3,7 +3,7 @@ sidebar_position: 10
 ---
 # Host OpenZiti Anywhere
 
-You can absolutely choose to host your [OpenZiti Network](./index.md#overview-of-a-ziti-network) anywhere you like.
+You can absolutely choose to host your [OpenZiti Network](../../introduction/01-Introduction.mdx#overview-of-a-ziti-network) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
 own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller at least one edge router.
 
@@ -12,7 +12,7 @@ ideal scenario. With a zero trust overlay network provided by OpenZiti, you can 
 
 ## Installation
 
-When starting out deploying a [OpenZiti Network](./index.md#overview-of-a-ziti-network), we recommend you follow
+When starting out deploying an [OpenZiti Network](../../introduction/01-Introduction.mdx#overview-of-a-ziti-network), we recommend you follow
 and use the `expressInstall` function provided by the OpenZiti project. Once you're familiar with the network and
 the configuration options available you'll be better equipped to make changes.
 
@@ -72,11 +72,11 @@ export ZITI_EDGE_ROUTER_HOSTNAME="${EXTERNAL_DNS}"
 export ZITI_CTRL_PORT=8440
 export ZITI_EDGE_CONTROLLER_PORT=8441
 export ZITI_EDGE_ROUTER_PORT=8442
+```
 
-# now download, source, and execute the expressInstall function
-source <(wget -qO- https://raw.githubusercontent.com/openziti/ziti/main/quickstart/docker/image/ziti-cli-functions.sh)
-
-expressInstall
+```bash
+# run expressInstall
+source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/main/quickstart/docker/image/ziti-cli-functions.sh)"; expressInstall
 ```
 
 ### Systemd
@@ -157,22 +157,6 @@ $ sudo systemctl -q status ziti-router --lines=0 --no-pager
      Memory: 231.4M
      CGroup: /system.slice/ziti-router.service
              └─2385 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.22.11/ziti-router run /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ip-10…
-```
-
-Inspect the servers' listening ports.
-
-```bash
-# run me
-sudo ss -lntp | grep ziti
-```
-
-```bash
-# example
-$ sudo ss -lntp | grep ziti
-LISTEN 0      4096               *:8440             *:*    users:(("ziti-controller",pid=5240,fd=10))
-LISTEN 0      4096               *:8441             *:*    users:(("ziti-controller",pid=5240,fd=9)) 
-LISTEN 0      4096               *:8442             *:*    users:(("ziti-router",pid=5272,fd=9))     
-LISTEN 0      4096               *:10080            *:*    users:(("ziti-router",pid=5272,fd=8))     
 ```
 
 ## Adding Environment Variables Back to the Shell
