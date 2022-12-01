@@ -4,7 +4,7 @@ title: Controller Deployment
 sidebar_label: Controller
 ---
 
-The Ziti Controller is responsible for authenticating incoming connections from identities and authorizing their access to services. The Ziti Controller provides two RESTful APIs: client and management. Take a look at the [API doc page](/api/rest/) for more info.
+This article provides some guidance for deploying a Ziti Controller. You can go back and read [the controller component introduction](../introduction/03-components.md#openziti-controller) if needed.
 
 ## Public Key Infrastructure
 
@@ -14,8 +14,17 @@ You will need a PKI setup for Ziti. If you follow one of the [quickstart guides]
 
 The Ziti Controller's configuration is loaded from a YAML file. If you follow one of the [quickstart guides](../quickstarts/network/) a configuration file will be generated. You can generate a configuration with the `ziti create config controller` command, optionally mutating the result through command-line options or environment variables. You can also find an annotated sample config file from [the Ziti repo](https://github.com/openziti/ziti/blob/main/etc/ctrl.with.edge.yml).
 
+## Firewall
+
+The controller listens on several configurable server ports that must be exposed.
+
+- `1280/tcp`: client sessions and management API
+- `6262/tcp`: router control plane
+
+You may configure the controller to expose management functions on separate port if you wish to limit network access for password authenticators.
+
 ## Logging
 
-See [logging](./04-cli-basics.md#logging) for more details
+See [CLI basics](./04-cli-basics.md#logging) for a few details about log output.
 
 <!-- TODO: host sizing guidance -->

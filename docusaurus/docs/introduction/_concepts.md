@@ -1,4 +1,6 @@
+
 ## Zero Trust/Application Segmentation
+
 Many networking security solutions act like a wall around an internal network. Once you are through the wall, you have access to everything inside. Zero trust solutions enforce not just access to a network, but access to individual applications within that network.
 
 Every client in a Ziti system must have an identity with provisioned certificates. The certificates are used to establish secure communications channels as well as for authentication and authorization of the associated identity. Whenever the client attempts to access a network application, Ziti will first ensure that the identity has access to the application. If access is revoked, open network connections will be closed.
@@ -8,6 +10,7 @@ This model enables Ziti systems to provide access to multiple applications while
 In addition to requiring cert based authentication for clients, Ziti uses certificates to authorize communication between Ziti components.
 
 ## Dark Services and Routers
+
 There are various levels of accessibility a network application/service can have.
 
 1. Many network services are available to the world. The service then relies on authentication and authorization policies to prevent unwanted access.
@@ -25,6 +28,7 @@ Ziti routers, which make up the fabric, can also be dark. Routers located in pri
 Services can be completely dark if they are implemented with a Ziti SDK. If this is not possible a Ziti tunneler or proxy can be co-located with the service. The service then only needs to allow connections from the local machine or network, depending on how close you colocate the proxy to the service.
 
 ## End to End Encryption
+
 If you take advantage of Ziti's developer SDKs and embed Ziti in your client and server applications, your traffic can be configured to be seamlessly encrypted from the client application to server application. If you prefer to use tunnelers or proxy applications, the traffic can be encrypted for you from machine to machine or private network to private network. Various combinations of the above are also supported.
 
 End-to-end encryption means that even if systems between the client and server are compromised, your traffic cannot be decrypted or tampered with.
