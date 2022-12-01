@@ -1,9 +1,8 @@
 ---
-id: controller
-title: Controller
+id: controller-deployment
+title: Controller Deployment
+sidebar_label: Controller
 ---
-
-# Ziti Controller
 
 The Ziti Controller is the process that coordinates a [Ziti Networks](../introduction/intro#overview-of-a-ziti-network). It
 is responsible for authenticating incoming connections from identities. It also authorizes access to services for any

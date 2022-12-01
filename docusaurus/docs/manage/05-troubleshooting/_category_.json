@@ -1,3 +1,7 @@
 {
-  "label": "Troubleshooting"
+  "label": "Troubleshooting",
+  "link":{
+    "type": "doc",
+    "id": "troubleshooting"
+  }
 }

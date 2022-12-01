@@ -142,7 +142,7 @@ const config = {
             from: ['/ziti/manage/controller.html', '/ziti/manage/manage.html'],
           },
           {
-            to: '/docs/core-concepts/services/creating',
+            to: '/docs/core-concepts/services/overview',
             from: ['/ziti/services/creating.html'],
           },
           {
@@ -294,12 +294,8 @@ const config = {
             from: ['/ziti/metrics/inspect.html'],
           },
           {
-            to: '/docs/manage/controller',
-            from: ['/ziti/manage/controller.html', '/ziti/manage/manage.html'],
-          },
-          {
-            to: '/docs/manage/router/router-overview',
-            from: ['/ziti/manage/edge-router.html'],
+            to: '/docs/manage/router/',
+            from: ['/ziti/manage/edge-router.html', '/ziti/manage/router-overview.html'],
           },
           {
             to: '/docs/manage/pki',
@@ -308,10 +304,6 @@ const config = {
           {
             to: '/docs/manage/troubleshooting/troubleshooting',
             from: ['/ziti/manage/troubleshooting.html'],
-          },
-          {
-            to: '/docs/manage/router/router-overview',
-            from: ['/ziti/manage/router-overview.html'],
           },
           {
             to: '/blog/c-sdk-on-beaglebone',
