@@ -7,47 +7,46 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import styles from './02-router/styles.module.css';
 
-This section describes the cli method of managing configuration and troubleshooting of openziti components.
+This section covers a few CLI basics.
 
 ## Login
 
-The `openziti` CLI requires you to login before you can use it. Currently you will need to supply a username and password to authenticate.
+The `ziti` CLI will help you get a session from the controller's management API. You will be prompted to trust any new server certificates. Your session cache and trust store are managed by the CLI in your home directory.
 
 ```bash
-CTRL_USER="#####"
-CTRL_PASSWD="#####"
-CERT=$PATH/intermediate.cert
+# implies https://localhost:1280
+ziti edge login -u admin -p admin
+```
 
-ziti edge login ${ZITI_CTRL_IP_OR_FQDN}:${ZITI_CONTROLLER_MGMT_PORT} \
-                -u $CTRL_USER -p $CTRL_PASSWD -y  -c $CERT
+```bash
+# implies https://
+ziti edge login ziti.example.com:8441 -u admin -p admin
 ```
 
 ## Logging
 
-The Ziti components log all output to standard output. Logging to standard out, instead of to configurable files, etc., is a "lighter" approach to logging that is more easily integrated into more different kinds of environments. Logging to files and implementing feautres like file rotation is a solved problem and not one that the Ziti components try to solve. Instead look to alternatives which are capable of watching standard out and aggregating the results for you. There are many solutions available to collect, aggregate and display logs. Search for and implement a solution that works for you and your needs.
+All Ziti components log to standard output and standard error file descriptors.
 
 <Tabs>
-<TabItem value="format" label="Log Format">
+<TabItem value="goformats" label="Go Log Formats">
 
-The output from Ziti components comes in three distinct styles. Choose the style of logging that is right for you.
+Output from Ziti components comes in three distinct styles. Choose the style of logging that is right for you.
 
 - `pfxlog` - a human-readible format leveraging ascii escape codes to display colorized log level
 - `json` - a machine-readible format targetting automated processes for log aggregation/searching
 - `text` - a human-readible format using plain text (no ascii escape codes)
 
 ```bash
-<openziti binary> run <config file> \
-                    --log-formatter pfxlog
+ziti-router run ./router.yml --log-formatter pfxlog
 ```
 
 </TabItem>
-<TabItem value="level" label="Log Levels">
+<TabItem value="golevels" label="Go Log Levels">
 
-By default the Ziti components will log at the INFO level. This means that `log messages INFO, WARNING, ERROR and FATAL` will all be captured and output. Ziti components all support verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will add DEBUG log messages and as the name implies this log level is much more verbose. Often when debugging adding verbose mode will aid in identifying issues.
+By default the Ziti components will log at the `INFO` level. This means that log messages `INFO`, `WARNING`, `ERROR`, and `FATAL` will all be emitted. Ziti components all support verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will add `DEBUG` log messages.
 
 ```bash
-<openziti binary> run <config file> \
-                    --verbose
+ziti-controller run ./ctrl.yml --verbose
 ```
 
 </TabItem>

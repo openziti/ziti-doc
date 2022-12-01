@@ -1,4 +1,8 @@
 {
   "label": "Ziti Administration Console (ZAC)",
-  "position": 3
+  "position": 3,
+  "link":{
+    "type": "doc",
+    "id": "quickstarts/zac/installation"
+  }
 }

@@ -1,11 +1,10 @@
 ---
 id: pki
-title: PKI
+title: Public Key Infrastructure (PKI)
+sidebar_label: PKI
 ---
 
 import PkiTroubleshootingMd from './05-troubleshooting/_pki-troubleshooting.md'
-
-# Public Key Infrastructure (PKI)
 
 All Ziti Networks leverage [Public Key Infrastructure (PKI)](https://en.wikipedia.org/wiki/Public_key_infrastructure) to
 provide secure network connections.  This page is not intended to be a comprehensive guide. What it is, is a set of
