@@ -8,15 +8,16 @@ import TabItem from '@theme/TabItem';
 import styles from './styles.module.css';
 
 <Tabs>
-<TabItem value="vcpe" label="Bare Metal" attributes={{className: styles.custom}}>
+<TabItem value="baremetal" label="Bare Metal">
 
 :::info Notes
+
 - Reference CPU - Intel(R) Xeon(R) CPU E5-2680 v3 @ 2.50GHz
-- NetFoundry recommends a 1:1 physical to logical association for network interfaces.
+- Reference NIC - 1:1 physical-to-logical association
 :::
 
 <Tabs>
-<TabItem value="low-med" label="LOW-MED" attributes={{className: styles.green}}>
+<TabItem value="low" label="LOW">
 
 | Target performance | VM specification | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -25,7 +26,7 @@ import styles from './styles.module.css';
 | | Disk Storage: 30 GByte | 1 LAN + 2 WAN interfaces |
 
 </TabItem>
-<TabItem value="med" label="MED" attributes={{className: styles.orange}}>
+<TabItem value="med" label="MED">
 
 | Target performance | VM specification | Supported interface configurations * |
 | :---: | :---: | :---: |
@@ -34,7 +35,7 @@ import styles from './styles.module.css';
 | | Disk Storage: 50 GByte | |
 
 </TabItem>
-<TabItem value="high" label="HIGH" attributes={{className: styles.red}}>
+<TabItem value="high" label="HIGH">
 
 | Target performance | VM specification | Supported interface configurations * |
 | :---: | :---: | :---: |
@@ -46,10 +47,10 @@ import styles from './styles.module.css';
 </Tabs>
 
 </TabItem>
-<TabItem value="aws" label="AWS Cloud" attributes={{className: styles.custom}}>
+<TabItem value="aws" label="AWS Cloud">
 
 <Tabs>
-<TabItem value="low-med" label="LOW-MED" attributes={{className: styles.green}}>
+<TabItem value="low" label="LOW">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -57,7 +58,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="med" label="MED" attributes={{className: styles.orange}}>
+<TabItem value="med" label="MED">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -65,7 +66,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="high" label="HIGH" attributes={{className: styles.red}}>
+<TabItem value="high" label="HIGH">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -76,10 +77,10 @@ import styles from './styles.module.css';
 </Tabs>
 
 </TabItem>
-<TabItem value="azure" label="Azure Cloud" attributes={{className: styles.custom}}>
+<TabItem value="azure" label="Azure Cloud" >
 
 <Tabs>
-<TabItem value="low-med" label="LOW-MED" attributes={{className: styles.green}}>
+<TabItem value="low" label="LOW">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -87,7 +88,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="med" label="MED" attributes={{className: styles.orange}}>
+<TabItem value="med" label="MED">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -95,7 +96,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="high" label="HIGH" attributes={{className: styles.red}}>
+<TabItem value="high" label="HIGH">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -106,10 +107,10 @@ import styles from './styles.module.css';
 </Tabs>
 
 </TabItem>
-<TabItem value="oracle" label="Oracle Cloud" attributes={{className: styles.custom}}>
+<TabItem value="oracle" label="Oracle Cloud" >
 
 <Tabs>
-<TabItem value="low-med" label="LOW-MED" attributes={{className: styles.green}}>
+<TabItem value="low" label="LOW">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -117,7 +118,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | 1 Core OCPU / 4 GB Memory | |
 
 </TabItem>
-<TabItem value="med" label="MED" attributes={{className: styles.orange}}>
+<TabItem value="med" label="MED">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -125,7 +126,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | 2 Core OCPU / 8 GB Memory | |
 
 </TabItem>
-<TabItem value="high" label="HIGH" attributes={{className: styles.red}}>
+<TabItem value="high" label="HIGH">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -136,10 +137,10 @@ import styles from './styles.module.css';
 </Tabs>
 
 </TabItem>
-<TabItem value="ali" label="Ali Cloud" attributes={{className: styles.custom}}>
+<TabItem value="ali" label="Ali Cloud" >
 
 <Tabs>
-<TabItem value="low-med" label="LOW-MED" attributes={{className: styles.green}}>
+<TabItem value="low" label="LOW">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -147,7 +148,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | ecs.sn1ne.large | |
 
 </TabItem>
-<TabItem value="med" label="MED" attributes={{className: styles.orange}}>
+<TabItem value="med" label="MED">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -155,7 +156,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | ecs.sn1ne.xlarge | |
 
 </TabItem>
-<TabItem value="high" label="HIGH" attributes={{className: styles.red}}>
+<TabItem value="high" label="HIGH">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -166,10 +167,10 @@ import styles from './styles.module.css';
 </Tabs>
 
 </TabItem>
-<TabItem value="gcp" label="GCP Cloud" attributes={{className: styles.custom}}>
+<TabItem value="gcp" label="GCP Cloud" >
 
 <Tabs>
-<TabItem value="low-med" label="LOW-MED" attributes={{className: styles.green}}>
+<TabItem value="low" label="LOW">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -177,7 +178,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="med" label="MED" attributes={{className: styles.orange}}>
+<TabItem value="med" label="MED">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -185,7 +186,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="high" label="HIGH" attributes={{className: styles.red}}>
+<TabItem value="high" label="HIGH">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -196,10 +197,10 @@ import styles from './styles.module.css';
 </Tabs>
 
 </TabItem>
-<TabItem value="ibm" label="IBM Cloud" attributes={{className: styles.custom}}>
+<TabItem value="ibm" label="IBM Cloud" >
 
 <Tabs>
-<TabItem value="low-med" label="LOW-MED" attributes={{className: styles.green}}>
+<TabItem value="low" label="LOW">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -207,7 +208,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="med" label="MED" attributes={{className: styles.orange}}>
+<TabItem value="med" label="MED">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -215,7 +216,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="high" label="HIGH" attributes={{className: styles.red}}>
+<TabItem value="high" label="HIGH">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |

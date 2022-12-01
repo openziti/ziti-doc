@@ -1,3 +1,7 @@
 {
-  "label": "Router"
+  "label": "Router",
+  "link":{
+    "type": "doc",
+    "id": "router-deployment"
+  }
 }
