@@ -120,8 +120,8 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
 1. Start the network using `docker-compose` as normal.
 2. After running, copy the `ziti-edge-controller` server certificate chain and key from the controller using these commands:
 	```bash
-   docker cp docker_ziti-controller_1:/openziti/pki/ziti-edge-controller-intermediate/keys/ziti-edge-controller-server.key .
-   docker cp docker_ziti-controller_1:/openziti/pki/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem .
+   docker cp docker_ziti-controller_1:/var/openziti/pki/ziti-edge-controller-intermediate/keys/ziti-edge-controller-server.key .
+   docker cp docker_ziti-controller_1:/var/openziti/pki/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem .
 	```
 	
 3. Once these files are copied out, shut down the running docker-compose `docker-compose down`. Do NOT remove the volume 

@@ -52,11 +52,11 @@ ziti-controller started as process id: 7282. log located at: ${HOME}/.ziti/quick
 
 Assuming you have sourced the script, you will have an environment variable set named `$ZITI_EDGE_CONTROLLER_API`. After
 the controller has started, your controller should be listening at that hostname:port combination. You can see what your
-value is set to by running `echo $ZITI_EDGE_CONTROLLER_API`. This variable defaults to: `$(hostname):1280`. Make sure the
+value is set to by running `echo $ZITI_EDGE_CTRL_ADVERTISED`. This variable defaults to: `$(hostname):1280`. Make sure the
 controller is on and listening and then start the edge router. 
 
 ```bash
-~ % echo $ZITI_EDGE_CONTROLLER_API
+~ % echo $ZITI_EDGE_CTRL_ADVERTISED
 My-Mac-mini.local.domain:1280
 ```
 
