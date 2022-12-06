@@ -28,7 +28,7 @@ overall management of the network easier.
 The OpenZiti Controller uses a local database based on [bbolt](https://github.com/etcd-io/bbolt) to
 store the information needed to manage the network.
 
-[Controller Deployment Guide](../manage/01-controller.md)
+[Controller Deployment Guide](/operations/controller)
 
 ### OpenZiti Router
 
@@ -46,7 +46,7 @@ The OpenZiti Router is the entry point to the OpenZiti Network for client connec
 The OpenZiti Router in combination with the Ziti Controller is responsible
 for authenticating and authorizing OpenZiti Edge Clients.
 
-[Router Deployment Guide](../manage/02-router/01-deployment.md)
+[Router Deployment Guide](/operations/router/deployment)
 
 ### OpenZiti Edge Clients
 

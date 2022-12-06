@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 The Ziti Router is the entry point for Ziti-based clients. It is responsible for authenticating incoming connections by
 verifying the connecting client has a valid network session.  It also routes traffic to whatever the
 destination is for the given service. In simple deployments can have a single router as is the case
-with the [Ziti Network Quickstart](../../quickstarts/network/index.md).
+with the [Ziti Network Quickstart](/docs/quickstarts/network/).
 
 ## Deployment
 
