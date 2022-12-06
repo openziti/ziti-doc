@@ -47,7 +47,7 @@ const config = {
         id: 'docs-glossary',
         path: 'docs-glossary',
         routeBasePath: 'glossary',
-        sidebarPath: require.resolve('./sidebars.js'),
+        sidebarPath: false,
       },
     ],
     [
@@ -56,6 +56,15 @@ const config = {
         id: 'docs-guides',
         path: 'docs-guides',
         routeBasePath: 'guides',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-ops',
+        path: 'docs-ops',
+        routeBasePath: 'operations',
         sidebarPath: require.resolve('./sidebars.js'),
       },
     ],
@@ -138,7 +147,7 @@ const config = {
             from: ['/ziti/security/authorization/policies/overview.html'],
           },
           {
-            to: '/docs/manage/controller',
+            to: '/operations/controller',
             from: ['/ziti/manage/controller.html', '/ziti/manage/manage.html'],
           },
           {
@@ -294,15 +303,15 @@ const config = {
             from: ['/ziti/metrics/inspect.html'],
           },
           {
-            to: '/docs/manage/router/deployment',
+            to: '/operations/router/deployment',
             from: ['/ziti/manage/edge-router.html', '/ziti/manage/router-overview.html'],
           },
           {
-            to: '/docs/manage/pki',
+            to: '/operations/pki',
             from: ['/ziti/manage/pki.html'],
           },
           {
-            to: '/docs/manage/troubleshooting/troubleshooting',
+            to: '/operations/troubleshooting/troubleshooting',
             from: ['/ziti/manage/troubleshooting.html'],
           },
           {
@@ -472,6 +481,12 @@ const config = {
             label: 'Glossary',
             position: 'left',
             activeBaseRegex: `/glossary/`,
+          },
+          {
+            to: '/operations/controller',
+            label: 'Ops',
+            position: 'left',
+            activeBaseRegex: `/operations/`,
           },
           // {
           //   to: '/blog',
