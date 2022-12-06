@@ -85,7 +85,7 @@ Here's an example command using `docker` to exec into the controller container:
 ```shell
 $ docker exec -it docker_ziti-controller_1 bash
 
-adding /openziti/ziti-bin to the path
+adding /var/openziti/ziti-bin to the path
 ```
 
 ---

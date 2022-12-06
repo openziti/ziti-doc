@@ -166,16 +166,16 @@ alias to make it easy for you to authenticate to the Ziti controller. Run `zitiL
 authenticated.
 
 ```bash
-ziti@724087d30014:/openziti$ zitiLogin
+ziti@724087d30014:/persistent$ zitiLogin
 Token: 55ec6721-f33b-4101-970a-412331bd7578
-Saving identity 'default' to /openziti/ziti-cli.json
+Saving identity 'default' to /persistent/ziti-cli.json
 ```
 
 ### Test - Edge Routers Online
 
 Once authenticated, let's see if all our routers are online by running `ziti edge list edge-routers`:
 ```bash
-ziti@724087d30014:/openziti$ ziti edge list edge-routers
+ziti@724087d30014:/persistent$ ziti edge list edge-routers
 ╭────────────┬───────────────────────┬────────┬───────────────┬──────┬───────────────────────╮
 │ ID         │ NAME                  │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES            │
 ├────────────┼───────────────────────┼────────┼───────────────┼──────┼───────────────────────┤
@@ -193,10 +193,10 @@ We can see all the routers are online - excellent.
 ### Test - Edge Router Identites
 
 In this compose file, we have used a script that adds an identity for each of our edge routers as well. We can see those
-by running `ziti@724087d30014:/openziti$ ziti edge list identities`:
+by running `ziti@724087d30014:/persistent$ ziti edge list identities`:
 
 ```bash
-ziti@724087d30014:/openziti$ ziti edge list identities
+ziti@724087d30014:/persistent$ ziti edge list identities
 ╭────────────┬───────────────────────┬────────┬────────────╮
 │ ID         │ NAME                  │ TYPE   │ ATTRIBUTES │
 ├────────────┼───────────────────────┼────────┼────────────┤
@@ -218,7 +218,7 @@ Notice there is an identity for every router.
 Recall that the controller should be able to contact both the red and blue edge routers. Let's use ping and verify:
 
 ```bash
-ziti@724087d30014:/openziti$ ping ziti-private-red -c 1
+ziti@724087d30014:/persistent$ ping ziti-private-red -c 1
 PING ziti-private-red (172.29.0.2): 56 data bytes
 64 bytes from 172.29.0.2: icmp_seq=0 ttl=64 time=0.387 ms
 --- ziti-private-red ping statistics ---
@@ -227,7 +227,7 @@ round-trip min/avg/max/stddev = 0.387/0.387/0.387/0.000 ms
 ```
 
 ```bash
-ziti@724087d30014:/openziti$ ping ziti-private-blue -c 1
+ziti@724087d30014:/persistent$ ping ziti-private-blue -c 1
 PING ziti-private-blue (172.28.0.6): 56 data bytes
 64 bytes from 172.28.0.6: icmp_seq=0 ttl=64 time=0.633 ms
 --- ziti-private-blue ping statistics ---
@@ -242,7 +242,7 @@ Now let's exit the Ziti controller and instead attach to the private blue router
 connect to the private red router:
 
 ```bash
-ziti@e610d6b44166:/openziti$ ping ziti-private-red -c 1
+ziti@e610d6b44166:/persistent$ ping ziti-private-red -c 1
 ping: unknown host
 ```
 
@@ -252,7 +252,7 @@ Unknown host - the private blue router cannot connect to the red router.
 
 While we're attached to the blue router - let's make sure we can connect to that `web-test-blue` server.  
 ```bash
-ziti@e610d6b44166:/openziti$ curl http://web-test-blue:8000
+ziti@e610d6b44166:/persistent$ curl http://web-test-blue:8000
 <pre>
 Hello World
 
