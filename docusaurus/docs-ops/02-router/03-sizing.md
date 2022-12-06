@@ -17,7 +17,16 @@ import styles from './styles.module.css';
 :::
 
 <Tabs>
-<TabItem value="low" label="LOW">
+<TabItem value="tiny" label="Tiny">
+
+| Target performance | VM specification | Supported interface configurations |
+| :---: | :---: | :---: |
+| 10 Simultaneous Data Sessions | CPU Cores: 1 | Single LAN/WAN interface |
+| 10-20 Mbps Throughput  | Memory RAM: 1 GBytes | 1 LAN + 1 WAN interfaces |
+| | Disk Storage: 10 GByte | 1 LAN + 2 WAN interfaces |
+
+</TabItem>
+<TabItem value="small" label="Small">
 
 | Target performance | VM specification | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -26,7 +35,7 @@ import styles from './styles.module.css';
 | | Disk Storage: 30 GByte | 1 LAN + 2 WAN interfaces |
 
 </TabItem>
-<TabItem value="med" label="MED">
+<TabItem value="med" label="Medium">
 
 | Target performance | VM specification | Supported interface configurations * |
 | :---: | :---: | :---: |
@@ -35,7 +44,7 @@ import styles from './styles.module.css';
 | | Disk Storage: 50 GByte | |
 
 </TabItem>
-<TabItem value="high" label="HIGH">
+<TabItem value="large" label="Large">
 
 | Target performance | VM specification | Supported interface configurations * |
 | :---: | :---: | :---: |
@@ -50,7 +59,7 @@ import styles from './styles.module.css';
 <TabItem value="aws" label="AWS Cloud">
 
 <Tabs>
-<TabItem value="low" label="LOW">
+<TabItem value="small" label="Small">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -58,7 +67,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="med" label="MED">
+<TabItem value="med" label="Medium">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -66,7 +75,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="high" label="HIGH">
+<TabItem value="large" label="Large">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -80,7 +89,7 @@ import styles from './styles.module.css';
 <TabItem value="azure" label="Azure Cloud" >
 
 <Tabs>
-<TabItem value="low" label="LOW">
+<TabItem value="small" label="Small">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -88,7 +97,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="med" label="MED">
+<TabItem value="med" label="Medium">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -96,7 +105,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="high" label="HIGH">
+<TabItem value="large" label="Large">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -110,7 +119,7 @@ import styles from './styles.module.css';
 <TabItem value="oracle" label="Oracle Cloud" >
 
 <Tabs>
-<TabItem value="low" label="LOW">
+<TabItem value="small" label="Small">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -118,7 +127,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | 1 Core OCPU / 4 GB Memory | |
 
 </TabItem>
-<TabItem value="med" label="MED">
+<TabItem value="med" label="Medium">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -126,7 +135,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | 2 Core OCPU / 8 GB Memory | |
 
 </TabItem>
-<TabItem value="high" label="HIGH">
+<TabItem value="large" label="Large">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -140,7 +149,7 @@ import styles from './styles.module.css';
 <TabItem value="ali" label="Ali Cloud" >
 
 <Tabs>
-<TabItem value="low" label="LOW">
+<TabItem value="small" label="Small">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -148,7 +157,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | ecs.sn1ne.large | |
 
 </TabItem>
-<TabItem value="med" label="MED">
+<TabItem value="med" label="Medium">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -156,7 +165,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | ecs.sn1ne.xlarge | |
 
 </TabItem>
-<TabItem value="high" label="HIGH">
+<TabItem value="large" label="Large">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -170,7 +179,7 @@ import styles from './styles.module.css';
 <TabItem value="gcp" label="GCP Cloud" >
 
 <Tabs>
-<TabItem value="low" label="LOW">
+<TabItem value="small" label="Small">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -178,7 +187,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="med" label="MED">
+<TabItem value="med" label="Medium">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -186,7 +195,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="high" label="HIGH">
+<TabItem value="large" label="Large">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -200,7 +209,7 @@ import styles from './styles.module.css';
 <TabItem value="ibm" label="IBM Cloud" >
 
 <Tabs>
-<TabItem value="low" label="LOW">
+<TabItem value="small" label="Small">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -208,7 +217,7 @@ import styles from './styles.module.css';
 | 100-300 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="med" label="MED">
+<TabItem value="med" label="Medium">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
@@ -216,7 +225,7 @@ import styles from './styles.module.css';
 | 500 Mbps Throughput | | |
 
 </TabItem>
-<TabItem value="high" label="HIGH">
+<TabItem value="large" label="Large">
 
 | Target performance | Instance Name | Supported interface configurations |
 | :---: | :---: | :---: |
