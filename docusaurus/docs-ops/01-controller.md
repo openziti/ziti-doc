@@ -4,7 +4,7 @@ title: Controller Deployment
 sidebar_label: Controller
 ---
 
-This article provides some guidance for deploying a Ziti Controller. You can go back and read [the controller component introduction](/docs/introduction/zcomponents#openziti-controller) if needed.
+This article provides some guidance for deploying a Ziti Controller. You can go back and read [the controller component introduction](/docs/introduction/components#openziti-controller) if needed.
 
 ## Public Key Infrastructure
 
