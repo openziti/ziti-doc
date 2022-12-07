@@ -419,8 +419,29 @@ const config = {
         },
       }),
     ],
+    // Redocusaurus config
+    [
+      'redocusaurus',
+      {
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            id: 'edge-client',
+            spec: 'https://raw.githubusercontent.com/openziti/edge/main/specs/client.yml',
+          },
+          {
+            id: 'edge-management',
+            spec: 'https://raw.githubusercontent.com/openziti/edge/main/specs/management.yml',
+          },
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#1890ff',
+        },
+      },
+    ],
   ],
-
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
