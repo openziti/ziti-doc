@@ -1,13 +1,14 @@
 ---
-sidebar_position: 10
+sidebar_position: 60
 ---
+
 # Host OpenZiti Anywhere
 
 You can absolutely choose to host your [OpenZiti Network](../../introduction/01-Introduction.mdx#overview-of-a-ziti-network) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
-own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller at least one edge router.
+own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller and at least one edge router, which this quickstart will provide.
 
-If you have a server available on the open internet, or you will provision one for use with OpenZiti, that's the
+If you have a Linux server available on the open internet, or you will provision one for use with OpenZiti, that's the
 ideal scenario. With a zero trust overlay network provided by OpenZiti, you can rest assured that your traffic is safe even when using commodity internet. Furthermore, you do not need to worry about being on a network you trust, as all networks are considered untrustworthy, even your work/home network!
 
 ## Installation
@@ -37,7 +38,7 @@ These are the arbitrary ports we'll use in this example for convenience when spe
 Make sure you have `jq` installed. It's available to `apt` (Debian) and `dnf` (RHEL, Rocky, Fedora) as package name `jq`.
 :::
 
-### Set Up `expressInstall` {#set-up-expressinstall}
+### `expressInstall` Setup {#expressinstall-setup}
 
 `expressInstall` may be customized with environment variables. Consider creating a DNS name for this installation before running the script. By default, the
 quickstart will install your Ziti network's PKI and configuration files in `${HOME}/.ziti/quickstart/$(hostname -s)`. You may choose a different location by defining `ZITI_HOME=/custom/path/to/quickstart`. If you do customize `ZITI_HOME` then you should also make this assignment in your shell RC, e.g., `~/.bashrc` for future convenience.
@@ -46,16 +47,13 @@ You will almost certainly want to use the **public** DNS name
 of your instance. It is possible to use an IP address, but a DNS name is a more flexible option, which will be important if the IP ever changes.
 
 The quickest and easiest thing to do, is find your external DNS name and set it into the `EXTERNAL_DNS` environment
-variable. For example,
+variable. You may skip setting `EXTERNAL_DNS` if you don't need to configure the advertised DNS Subject Alternative Name (SAN). For example,
 
 ```bash
 export EXTERNAL_DNS="acme.example.com"
 ```
 
-If you don't set `EXTERNAL_DNS` then it will be set to "localhost".
-
 ```bash
-export EXTERNAL_DNS=${EXTERNAL_DNS:-"localhost"}
 export EXTERNAL_IP="$(curl -s eth0.me)"       
 export ZITI_EDGE_CONTROLLER_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_EDGE_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
@@ -72,67 +70,10 @@ export ZITI_EDGE_ROUTER_PORT=8442
 source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/main/quickstart/docker/image/ziti-cli-functions.sh)"; expressInstall
 ```
 
-### Start the Controller and Router
-
-```bash
-startController
-startRouter
-```
-
-Example output:
-
-```bash
-$ startController
-ziti-controller started as process id: 1286. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye.log
-
-$ startRouter
-Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
-```
-
-## Adding Environment Variables Back to the Shell
-
-If you log out and log back in again you can source the *.env file located in `ZITI_HOME`.
-
-```bash
-source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
-```
-
-Example output:
-
-```bash
-$ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
-adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the path
-
-$ echo $ZITI_HOME
-/home/ubuntu/.ziti/quickstart/ip-10-0-0-1
-```
-
-## Next Steps
-
-- [Use the Overlay](#use-the-overlay)
-- [Install Ziti Admin Console (ZAC)](#install-ziti-admin-console-zac)
-- [Enable `systemd`](#systemd)
-<!-- - Add a Private Router -->
-- [Add a Second Public Router](#add-a-second-public-router)
-- [Change Admin Password](#change-admin-password)
-- [Reset the Quickstart](#reset-quickstart)
-
-### Start Using Ziti Services
-
-Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
-
-### Install Ziti Admin Console (ZAC)
-
-This is an optional server app and web console for Ziti network administration.
-
-[Installation guide](../zac/installation.md)
-
 ### `systemd` {#systemd}
 
-This part is optional. If it's available, then you may want to use `systemd` to manage your controller and router processes. This
-is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate these
-files run:
+This assumes you already ran `expressInstall` on a Linux server. If it's available on your system, then it is recommended to use `systemd` to manage your controller and router processes. This
+is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate the `systemd` unit files, run:
 
 ```bash
 createControllerSystemdFile
@@ -224,40 +165,30 @@ $ sudo systemctl -q status ziti-router --lines=0 --no-pager
              └─2385 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.22.11/ziti-router run /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ip-10…
 ```
 
-### Add a Second Public Router
+## Adding Environment Variables Back to the Shell
 
-In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
-
-<!-- TODO: link to the new router deployment guide when it's published -->
-
-### Change Admin Password
-
-After changing the password with `ziti` CLI, change the value of `ZITI_PWD` in `~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env` to match your preferred password. This variable is used by the `zitiLogin` function.
+If you log out and log back in again you can source the *.env file located in `ZITI_HOME`.
 
 ```bash
-$ zitiLogin
-Token: d6152c84-3166-4ae4-8ca3-1c38c973d450
-Saving identity 'default' to /home/ubuntu/.ziti/quickstart/ip-172-31-28-116/ziti-cli.json
-
-$ ziti edge update authenticator updb -s
-Enter your current password: 
-Enter your new password: 
+source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 ```
 
-### Reset the Quickstart {#reset-quickstart}
+Example output:
 
-You may want to re-run `expressInstall` with different parameters. You could run it again with a new `ZITI_HOME` without changing the current installation. You may begin again with these steps:
+```bash
+$ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
+adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the path
 
-1. Delete the express install directory. Delete is forever, so make sure you're deleting the right thing.
+$ echo $ZITI_HOME
+/home/ubuntu/.ziti/quickstart/ip-10-0-0-1
+```
 
-    ```bash
-    rm -rI "${ZITI_HOME}"  # probably a sub-directory of ~/.ziti/quickstart/ 
-    ```
+## Next Steps
 
-1. If the current shell environment was configured by the express install you may unset vars named like `ZITI_`. This will prepare your current shell environment to set up and re-run `expressInstall`.
-
-    ```bash
-    unsetZitiEnv
-    ```
-
-1. Return to [the set up section](#set-up-expressinstall)
+- Now that you have your network in place, you probably want to try it out. Head to
+[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
+- [Install the Ziti Console](../zac/installation.md) (web UI)
+- Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
+- Help
+  - [Change Admin Password](./help/change-admin-password.md)
+  - [Reset the Quickstart](./help/reset-quickstart.md)
