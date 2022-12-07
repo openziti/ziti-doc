@@ -18,8 +18,8 @@ the configuration options available you'll be better equipped to make changes.
 
 ### Firewall
 
-The first issue you will need to deal with is opening some ports. A network will consist of at least one controller and 
-at least one edge router. Both of these components will require ports to be open. For the controller you will need to 
+The first issue you will need to deal with is opening some ports. A network will consist of at least one controller and
+at least one edge router. Both of these components will require ports to be open. For the controller you will need to
 open a range of ports through your firewall:
 
 - `8440/tcp`: Edge Controller providing router control plane
@@ -31,39 +31,28 @@ These are the arbitrary ports we'll use in this example for convenience when spe
 
 ## Express Install
 
-With the firewall ports open you will now be able to source the script which provides the expressInstall function and
-execute it. You probably should consider DNS names before actually running the script. By default, the script will use the output of the
-`hostname -s` command to determine a reasonable default for the PKI that will be generated as well as the
-configuration files that are output.  The script allows you to configure these values and if you are deploying to a cloud
-provider (AWS, Azure, OCI, IBM, Digital Ocean, GCP, etc.) you will almost certainly want to use the **public** DNS name
-of your instance. You possibly  want to override the IP address to use as well, but using DNS names is superior to using
-IP addresses in case your IP changes.
+### Prerequisites
 
-The quickest and easiest thing to do, is simply find your external DNS name and set it into the EXTERNAL_DNS environment
-variable. For example:
+:::note
+Make sure you have `jq` installed. It's available to `apt` (Debian) and `dnf` (RHEL, Rocky, Fedora) as package name `jq`.
+:::
+
+### Set Up `expressInstall`
+
+`expressInstall` may be customized with environment variables. Consider creating a DNS name for this installation before running the script. By default, the
+quickstart will install your Ziti network's PKI and configuration files in `${HOME}/.ziti/quickstart/$(hostname -s)`. You may choose a different location by defining `ZITI_HOME=/custom/path/to/quickstart`. If you do customize `ZITI_HOME` then you should also make this assignment in your shell RC, e.g., `~/.bashrc` for future convenience.
+
+You will almost certainly want to use the **public** DNS name
+of your instance. It is possible to use an IP address, but a DNS name is a more flexible option, which will be important if the IP ever changes.
+
+The quickest and easiest thing to do, is find your external DNS name and set it into the `EXTERNAL_DNS` environment
+variable. For example,
 
 ```bash
 export EXTERNAL_DNS="acme.example.com"
 ```
 
-:::note
-Make sure you have `jq` installed on your machine. From Debian distros that would look like:
-
 ```bash
-sudo apt update && sudo apt install jq -y
-```
-
-:::
-
-Once you do that, you'll be able to
-execute these commands just as
-shown to have your
-controller and
-first edge router
-configured and ready to turn on:
-
-```bash
-# run me
 export EXTERNAL_IP="$(curl -s eth0.me)"       
 export ZITI_EDGE_CONTROLLER_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_EDGE_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
@@ -74,26 +63,82 @@ export ZITI_EDGE_CONTROLLER_PORT=8441
 export ZITI_EDGE_ROUTER_PORT=8442
 ```
 
+### Run `expressInstall`
+
 ```bash
-# run expressInstall
 source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/main/quickstart/docker/image/ziti-cli-functions.sh)"; expressInstall
 ```
 
-### Systemd
+### Start the Controller and Router
 
-If the operating system you are deploying on supports it, after the commands above are run there will two other useful
-functions defined in your shell which will allow you to generate a systemd file for the controller and the edge router. This
+```bash
+startController
+startRouter
+```
+
+Example output:
+
+```bash
+$ startController
+ziti-controller started as process id: 1286. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye.log
+
+$ startRouter
+Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
+```
+
+## Adding Environment Variables Back to the Shell
+
+If you log out and log back in again you can source the *.env file located in `ZITI_HOME`.
+
+```bash
+source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
+```
+
+Example output:
+
+```bash
+$ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
+adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the path
+
+$ echo $ZITI_HOME
+/home/ubuntu/.ziti/quickstart/ip-10-0-0-1
+```
+
+## Next Steps
+
+- [Use the Overlay](#use-the-overlay)
+- [Install Ziti Admin Console (ZAC)](#install-ziti-admin-console-zac)
+- [Enable `systemd`](#systemd)
+<!-- - Add a Private Router -->
+- [Add a Second Public Router](#add-a-second-public-router)
+- [Change Admin Password](#change-admin-password)
+- [Delete everything and start over](#delete-everything-and-start-over)
+
+### Start Using Ziti Services
+
+Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
+[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
+
+### Install Ziti Admin Console (ZAC)
+
+This is an optional server app and web console for Ziti network administration.
+
+[Installation guide](../zac/installation.md)
+
+### `systemd` {#systemd}
+
+This part is optional. If it's available, then you may want to use `systemd` to manage your controller and router processes. This
 is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate these
 files run:
 
 ```bash
-# run me
 createControllerSystemdFile
 createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
 ```
 
+Example output:
+
 ```bash
-# example output
 $ createControllerSystemdFile
 Controller systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-controller.service
 
@@ -101,10 +146,26 @@ $ createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
 Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-router.service
 ```
 
-After the files are generated, you can then install them for use by systemd by running:
+Before you run the controller and router with `systemd` you need to stop them if they're currently running.
 
 ```bash
-# run me
+stopRouter 
+stopController 
+```
+
+Example output:
+
+```bash
+$ stopRouter 
+INFO: stopped router
+
+$ stopController 
+INFO: Controller stopped.
+```
+
+After the `systemd` service units are generated, you can then install them by running:
+
+```bash
 sudo cp "${ZITI_HOME}/${ZITI_EDGE_CONTROLLER_RAWNAME}.service" /etc/systemd/system/ziti-controller.service
 sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_RAWNAME}.service" /etc/systemd/system/ziti-router.service
 sudo systemctl daemon-reload
@@ -112,8 +173,9 @@ sudo systemctl enable --now ziti-controller
 sudo systemctl enable --now ziti-router
 ```
 
+Example output:
+
 ```bash
-# example output
 $ sudo cp "${ZITI_HOME}/${ZITI_EDGE_CONTROLLER_RAWNAME}.service" /etc/systemd/system/ziti-controller.service
 
 $ sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_RAWNAME}.service" /etc/systemd/system/ziti-router.service
@@ -131,13 +193,13 @@ Now, both the controller and the edge router will restart automatically!  After 
 commands and verify systemd has started the processes and see the status:
 
 ```bash
-# run me
 sudo systemctl -q status ziti-controller --lines=0 --no-pager
 sudo systemctl -q status ziti-router --lines=0 --no-pager
 ```
 
+Example output:
+
 ```bash
-# example output
 $ sudo systemctl -q status ziti-controller --lines=0 --no-pager
 ● ziti-controller.service - Ziti-Controller
      Loaded: loaded (/etc/systemd/system/ziti-controller.service; disabled; vendor preset: enabled)
@@ -158,45 +220,6 @@ $ sudo systemctl -q status ziti-router --lines=0 --no-pager
      CGroup: /system.slice/ziti-router.service
              └─2385 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.22.11/ziti-router run /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ip-10…
 ```
-
-## Adding Environment Variables Back to the Shell
-
-If you log out and log back in again you can source the '.env' file located at:
-`~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env`.
-
-```bash
-# run me
-source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
-```
-
-```bash
-# example output
-$ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
-adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the path
-
-$ echo $ZITI_HOME
-/home/ubuntu/.ziti/quickstart/ip-10-0-0-1
-```
-
-## Next Steps
-
-- [Use the Overlay](#use-the-overlay)
-- [Install Ziti Admin Console (ZAC)](#install-ziti-admin-console-zac)
-<!-- - Add a Private Router -->
-- [Add a Second Public Router](#add-a-second-public-router)
-- [Change Admin Password](#change-admin-password)
-- [Delete everything and start over](#delete-everything-and-start-over)
-
-### Use the Overlay
-
-Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
-
-### Install Ziti Admin Console (ZAC)
-
-This is an optional server app and web console for Ziti network administration.
-
-[Installation guide](../zac/installation.md)
 
 ### Add a Second Public Router
 
