@@ -47,16 +47,13 @@ You will almost certainly want to use the **public** DNS name
 of your instance. It is possible to use an IP address, but a DNS name is a more flexible option, which will be important if the IP ever changes.
 
 The quickest and easiest thing to do, is find your external DNS name and set it into the `EXTERNAL_DNS` environment
-variable. For example,
+variable. You may skip setting `EXTERNAL_DNS` if you don't need to configure the advertised DNS Subject Alternative Name (SAN). For example,
 
 ```bash
 export EXTERNAL_DNS="acme.example.com"
 ```
 
-If you don't set `EXTERNAL_DNS` then it will be set to "localhost".
-
 ```bash
-export EXTERNAL_DNS=${EXTERNAL_DNS:-"localhost"}
 export EXTERNAL_IP="$(curl -s eth0.me)"       
 export ZITI_EDGE_CONTROLLER_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_EDGE_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
