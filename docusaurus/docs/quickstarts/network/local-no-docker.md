@@ -161,12 +161,12 @@ Token: aa1c7fb0-85d9-4a79-86b2-5df450c5b4de
 Saving identity 'default' to ${HOME}/.ziti/quickstart/newfolder/ziti-cli.json
 ```
 
-## Install Ziti Admin Console (ZAC) [Optional]
+## Next Steps
 
-Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with 
-the installation guide](../zac/installation.md)
-
-## Using the Overlay
-
-Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
+- Now that you have your network in place, you probably want to try it out. Head to
+[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
+- [Install the Ziti Console](../zac/installation.md#cloning-from-github) (web UI)
+- Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
+- Help
+  - [Change Admin Password](./help/change-admin-password.md)
+  - [Reset the Quickstart](./help/reset-quickstart.md)
