@@ -1,13 +1,14 @@
 ---
 sidebar_position: 60
 ---
+
 # Host OpenZiti Anywhere
 
 You can absolutely choose to host your [OpenZiti Network](../../introduction/01-Introduction.mdx#overview-of-a-ziti-network) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
-own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller at least one edge router.
+own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller and at least one edge router, which this quickstart will provide.
 
-If you have a server available on the open internet, or you will provision one for use with OpenZiti, that's the
+If you have a Linux server available on the open internet, or you will provision one for use with OpenZiti, that's the
 ideal scenario. With a zero trust overlay network provided by OpenZiti, you can rest assured that your traffic is safe even when using commodity internet. Furthermore, you do not need to worry about being on a network you trust, as all networks are considered untrustworthy, even your work/home network!
 
 ## Installation
@@ -74,9 +75,8 @@ source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/zi
 
 ### `systemd` {#systemd}
 
-This part is optional and recommended. If it's available on your system, then you may want to use `systemd` to manage your controller and router processes. This
-is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate these
-files run:
+This assumes you already ran `expressInstall` on a Linux server. If it's available on your system, then it is recommended to use `systemd` to manage your controller and router processes. This
+is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate the `systemd` unit files, run:
 
 ```bash
 createControllerSystemdFile
