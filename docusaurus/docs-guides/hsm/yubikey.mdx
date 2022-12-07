@@ -5,11 +5,11 @@ import TabItem from '@theme/TabItem';
 
 [Yubico](https://www.yubico.com/) is a manufacturer of HSM deviceis. A popular line of HSM produced by Yubico is the
 YubiKey. This quickstart guide will use specific device from Yubico - the [YubiKey 5
-nfc](https://www.yubico.com/product/YubiKey-5-nfc).
+nfc](https://www.yubico.com/products/yubikey-5-overview/).
 
 ## Overview
 
-The [YubiKey 5 nfc](https://www.yubico.com/product/YubiKey-5-nfc) is a multi-purpose device with a few different
+The [YubiKey 5 nfc](https://www.yubico.com/products/yubikey-5-overview/) is a multi-purpose device with a few different
 security-minded uses. One of the applications on the device is an application called PIV or "Personal Identity
 Verification". PIV is a [standard published by
 NIST](https://csrc.nist.gov/projects/piv/piv-standards-and-supporting-documentation) and describes the kinds of
@@ -18,7 +18,7 @@ like fingerprints and pictures, and other unique identifiers. When put together 
 the capability to implement multi-factor authentication for networks, applications and buildings.
 
 In this quickstart you will see the commands and tools needed to use a [YubiKey 5
-nfc](https://www.yubico.com/product/YubiKey-5-nfc) with a Ziti Network. This document is intended to serve as a
+nfc](https://www.yubico.com/products/yubikey-5-overview/) with a Ziti Network. This document is intended to serve as a
 quickstart. That means limited context will be provided for each step. When appropriate there will be a small amount of
 context or a comment included to aid in understanding of what is happening and why. Most if not all of these commands
 are easily searched for using your search engine of choice.
@@ -30,7 +30,7 @@ line interface of your operating system.
 
 ## Prerequistites
 
-* [YubiKey 5 nfc](https://www.yubico.com/product/YubiKey-5-nfc) - clearly you'll need one in order to use this
+* [YubiKey 5 nfc](https://www.yubico.com/products/yubikey-5-overview/) - clearly you'll need one in order to use this
   quickstart!
 * [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a known
   location. Not required however this quickstart uses the `pkcs11-tool` to illustrate that the device is PKCS#11
@@ -40,7 +40,7 @@ line interface of your operating system.
   this is a tool specific to Yubico we've chosen to not use this in the following commands.
 * Ensure the YubiKey is factory reset. To avoid any compliations with existing information in the YubiKey ensure the
   device is factory reset using the [YubiKey
-  Manager](https://www.yubico.com/products/services-software/download/YubiKey-manager/).
+  Manager](https://www.yubico.com/support/download/yubikey-manager/).
 * In order to successfully use the YubiKey the libraries provided by the `yubico-piv-tool` *MUST* either be on the path
   or in a common location that is known to the OS. On linux this is likely done by the YubiKey software installation but
   on Windows you'll need to take any additional actions highlighted in the Windows-specific sections.
