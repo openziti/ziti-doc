@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 60
 ---
 # Host OpenZiti Anywhere
 
@@ -188,41 +188,9 @@ $ echo $ZITI_HOME
 
 ## Next Steps
 
-- Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
+- Now that you have your network in place, you probably want to try it out. Head to
+[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
 - [Install the Ziti Console](../zac/installation.md) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
-- [Change Admin Password](#change-admin-password)
-- [Reset the Quickstart](#reset-quickstart)
-
-### Change Admin Password
-
-After changing the password with `ziti` CLI, change the value of `ZITI_PWD` in `~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env` to match your preferred password. This variable is used by the `zitiLogin` function.
-
-```bash
-$ zitiLogin
-Token: d6152c84-3166-4ae4-8ca3-1c38c973d450
-Saving identity 'default' to /home/ubuntu/.ziti/quickstart/ip-172-31-28-116/ziti-cli.json
-
-$ ziti edge update authenticator updb -s
-Enter your current password: 
-Enter your new password: 
-```
-
-### Reset the Quickstart {#reset-quickstart}
-
-You may want to re-run `expressInstall` with different parameters. You could run it again with a new `ZITI_HOME` without changing the current installation. You may begin again with these steps:
-
-1. Delete the express install directory. Delete is forever, so make sure you're deleting the right thing.
-
-    ```bash
-    rm -rI "${ZITI_HOME}"  # probably a sub-directory of ~/.ziti/quickstart/ 
-    ```
-
-1. If the current shell environment was configured by the express install you may unset vars named like `ZITI_`. This will prepare your current shell environment to set up and re-run `expressInstall`.
-
-    ```bash
-    unsetZitiEnv
-    ```
-
-1. Return to [the setup section](#expressinstall-setup)
+- [Change Admin Password](./help/change-admin-password.md)
+- [Reset the Quickstart](./help/reset-quickstart.md)
