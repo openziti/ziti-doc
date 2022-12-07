@@ -52,7 +52,10 @@ variable. For example,
 export EXTERNAL_DNS="acme.example.com"
 ```
 
+If you don't set `EXTERNAL_DNS` then it will be set to "localhost".
+
 ```bash
+export EXTERNAL_DNS=${EXTERNAL_DNS:-"localhost"}
 export EXTERNAL_IP="$(curl -s eth0.me)"       
 export ZITI_EDGE_CONTROLLER_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_EDGE_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
