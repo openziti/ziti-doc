@@ -41,6 +41,8 @@ you can perform the following steps.
 
 1. Use the ziti-controller certificates for the Ziti Console:
 
+   Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
+
     ```bash
     ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/certs/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
     ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.key" "${ZITI_HOME}/ziti-console/server.key"
@@ -119,14 +121,16 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
 
 1. Start the network using `docker-compose` as normal.
 2. After running, copy the `ziti-edge-controller` server certificate chain and key from the controller using these commands:
-	```bash
+
+   ```bash
    docker cp docker_ziti-controller_1:/openziti/pki/ziti-edge-controller-intermediate/keys/ziti-edge-controller-server.key .
    docker cp docker_ziti-controller_1:/openziti/pki/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem .
-	```
-	
+   ```
+
 3. Once these files are copied out, shut down the running docker-compose `docker-compose down`. Do NOT remove the volume 
    with `-v`.
 4. Now add the ZAC configuration lines to the compose file of your choice:
+
    ```bash
      ziti-console:
        image: openziti/zac
@@ -148,7 +152,8 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
          - zitiblue
          - zitired
    ```
-1. After adding the ZAC configuration as shown, `docker-compose` will now start and expose the ZAC ports on 1408/8443.
+
+5. After adding the ZAC configuration as shown, `docker-compose` will now start and expose the ZAC ports on 1408/8443.
 
 :::note
 Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
@@ -162,33 +167,21 @@ internet search should show you how to accomplish this.
 1. At this point you should be able to navigate to both: `https://${ZITI_EDGE_CONTROLLER_HOSTNAME}:8443`and see the ZAC login
    screen. (The TLS warnings your browser will show you are normal - it's because these steps use a self-signed certificate
    generated in the install process)
-   
-:::note
-If you are using docker-compose to start your network, when you access ZAC for the first time you will need to 
-specify the url of the controller. Since everything is running **in** docker compose this url is relative to the 
-internal docker compose network that is declared in the compose file. You would enter 
-`https://ziti-edge-controller:1280` as the controller's URL
-:::
+
+   :::note
+   If you are using docker-compose to start your network, when you access ZAC for the first time you will need to 
+   specify the url of the controller. Since everything is running **in** docker compose this url is relative to the 
+   internal docker compose network that is declared in the compose file. You would enter 
+   `https://ziti-edge-controller:1280` as the controller's URL
+   :::
 
 2. Set the controller as shown (use the correct URL):
 
    1. Example using the "everything local" quickstart:
       ![everything local](./zac_configure_local.png)
- 
+
    2. Example using the "docker-compose" quickstart:
-      ![docker-compose](./zac_configure_dc.png)   
- 
+      ![docker-compose](./zac_configure_dc.png)
+
    3. Example using AWS "host it anywhere":
       ![host it anywhere](./zac_configure_hia.png)
-
-3. Login as admin
-
-   If you followed the quickstart then admin's password is stored as an environment variable `ZITI_PWD` defined in your quickstart environment file. You may reload your quickstart environment by sourcing the environment file: `source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env`.
-
-   ![img_2.png](./zac_login.png)
-
-4. Optionally, edit your profile to change admin's password
-
-   ![img_3.png](./zac_change_pwd.png)
-
-   Keep in mind that this is the same password that is sourced from the quickstart environment file. You'll need to change it there too for the `zitiLogin` command.
