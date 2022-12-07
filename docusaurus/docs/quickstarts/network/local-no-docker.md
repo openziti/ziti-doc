@@ -3,7 +3,7 @@ sidebar_position: 3
 ---
 # Local - No Docker
 
-This page will show you how to get your [Ziti Network](../../introduction/01-Introduction.mdx) up and running 
+This page will show you how to get your [Ziti Network](../../introduction/index.mdx) up and running 
 quickly and easily, entirely locally. Since you'll be running everything locally, you'll have no issues communicating
 between network components. All the processes will run locally, and you'll be responsible for starting and stopping them
 when you want to turn the overlay network on or off.
@@ -76,7 +76,7 @@ Again, this will default to using `$(hostname)` as the host name and port 3022.
 
 ## Testing Your Overlay
 
-At this point you should have a functioning [Ziti Network](../../introduction/01-Introduction.mdx). The script 
+At this point you should have a functioning [Ziti Network](../../introduction/index.mdx). The script 
 you sourced provides another function to login to your network. Try this now by running `zitiLogin`. You should see 
 something similar to this:
 ```bash

@@ -79,7 +79,11 @@ const config = {
             from: ['/docusaurus'],
           },
           {
-            to: '/docs/introduction/intro',
+            to: '/docs/introduction/',
+            from: ['/docs/introduction/intro'],
+          },
+          {
+            to: '/docs/introduction/',
             from: ['/ziti/overview.html'],
           },
           {
@@ -459,7 +463,7 @@ const config = {
         },
         items: [
           {
-            to: '/docs/introduction/intro',
+            to: '/docs/introduction/',
             label: 'Docs',
             position: 'left',
             activeBaseRegex: `/docs/`,
@@ -477,7 +481,7 @@ const config = {
             activeBaseRegex: `/guides/`,
           },
           {
-            to: '/glossary/glossary',
+            to: '/glossary/',
             label: 'Glossary',
             position: 'left',
             activeBaseRegex: `/glossary/`,

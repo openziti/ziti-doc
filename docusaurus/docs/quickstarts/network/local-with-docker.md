@@ -12,7 +12,7 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [Ziti Networks](../../introduction/01-Introduction.mdx) require
+All [Ziti Networks](../../introduction/index.mdx) require
 a [Ziti Controller](/operations/controller). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
