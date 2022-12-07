@@ -28,35 +28,35 @@ you can perform the following steps.
 
 1. Clone the ziti-console repo from github:
 
-    ```bash
-    git clone https://github.com/openziti/ziti-console.git "${ZITI_HOME}/ziti-console"
-    ```
+   ```bash
+   git clone https://github.com/openziti/ziti-console.git "${ZITI_HOME}/ziti-console"
+   ```
 
 1. Install Node modules:
 
-    ```bash
-    cd "${ZITI_HOME}/ziti-console"
-    npm install
-    ````
+   ```bash
+   cd "${ZITI_HOME}/ziti-console"
+   npm install
+   ````
 
 1. Use the ziti-controller certificates for the Ziti Console:
 
    Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
 
-    ```bash
-    ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/certs/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
-    ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.key" "${ZITI_HOME}/ziti-console/server.key"
-    ```
+   ```bash
+   ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/certs/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
+   ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.key" "${ZITI_HOME}/ziti-console/server.key"
+   ```
 
 1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
    Ziti helper script, you need to in order to get the necessary function.
 
-    ```bash
-    createZacSystemdFile
-    sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
-    sudo systemctl daemon-reload
-    sudo systemctl enable --now ziti-console
-    ```
+   ```bash
+   createZacSystemdFile
+   sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
+   sudo systemctl daemon-reload
+   sudo systemctl enable --now ziti-console
+   ```
 
    If you do not have systemd installed or if you just wish to start ZAC you can simply issue:
 
@@ -70,7 +70,7 @@ you can perform the following steps.
 1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command 
    `sudo systemctl status ziti-console --lines=0 --no-pager`
 
-    ```bash
+   ```bash
    $ sudo systemctl status ziti-console --lines=0 --no-pager
     ● ziti-console.service - Ziti-Console
     Loaded: loaded (/etc/systemd/system/ziti-console.service; disabled; vendor preset: enabled)
@@ -84,7 +84,7 @@ you can perform the following steps.
    $ sudo ss -lntp | grep node
    LISTEN 0      511                *:8443             *:*    users:(("node",pid=26013,fd=19))           
    LISTEN 0      511                *:1408             *:*    users:(("node",pid=26013,fd=18))
-    ```
+   ```
 
 ## Docker
 
