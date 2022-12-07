@@ -23,6 +23,14 @@ ziti edge login -u admin -p admin
 ziti edge login ziti.example.com:8441 -u admin -p admin
 ```
 
+## Change Password
+
+If a user identity has a password authenticator (`updb`) then you may change the password with the CLI.
+
+```bash
+ziti edge update authenticator updb -s
+```
+
 ## Logging
 
 All Ziti components log to standard output and standard error file descriptors.
