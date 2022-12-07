@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 30
 ---
 # Local - No Docker
 
@@ -22,7 +22,9 @@ are the default ports the edge router will use.
 Running the latest version of Ziti locally is as simple as running this one command (the command will require the `jq` 
 utility be installed):
 
+```bash
     source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/image/ziti-cli-functions.sh)"; expressInstall
+```
 
 This script will perform an 'express' install of Ziti which does the following:
 
@@ -36,16 +38,19 @@ This script will perform an 'express' install of Ziti which does the following:
 ## Start the Components
 
 Once the latest version of Ziti has been downloaded and added to your path, it's time to start your controller and 
-edge router. 
+edge router.
 
-### Start Your Controller
-
-Start your controller by running `startZitiController`. The location of the log file will be output for you to look
-at, tail etc. Notice that this log is written to the given location. There is no log rotation. Once run, you will see
-output that looks like the following:
+## Start Your Controller
 
 ```bash
-ziti-controller started as process id: 7282. log located at: ${HOME}/.ziti/quickstart/My-Mac-mini.local.domain/ziti-edge-controller.log
+startController
+```
+
+Example output:
+
+```bash
+$ startController
+ziti-controller started as process id: 1286. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye.log
 ```
 
 ### Verify the Controller is Running
@@ -56,23 +61,28 @@ value is set to by running `echo $ZITI_EDGE_CTRL_ADVERTISED`. This variable defa
 controller is on and listening and then start the edge router. 
 
 ```bash
-~ % echo $ZITI_EDGE_CTRL_ADVERTISED
+$ echo $ZITI_EDGE_CTRL_ADVERTISED
 My-Mac-mini.local.domain:1280
 ```
 
 ### Start Your Edge Router
 
 Now that the controller is ready, you can start the edge router created with the 'express' process. You can start this 
-router locally by running `startExpressEdgeRouter`.
-
-You should see output that looks like this:
+router locally by running:
 
 ```bash
-Express Edge Router started as process id: 7555. log located at: ${HOME}/.ziti/quickstart/My-Mac-mini.local.domain/My-Mac-mini.local.domain-edge-router.log
+startRouter
+```
+
+Example output:
+
+```bash
+$ startRouter
+Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
 ```
 
 You can verify the edge router is listening by finding the value of `$ZITI_EDGE_ROUTER_HOSTNAME:$ZITI_EDGE_ROUTER_PORT`.
-Again, this will default to using `$(hostname)` as the host name and port 3022. 
+Again, this will default to using `$(hostname -s)` as the host name and port 3022.
 
 ## Testing Your Overlay
 
@@ -151,12 +161,12 @@ Token: aa1c7fb0-85d9-4a79-86b2-5df450c5b4de
 Saving identity 'default' to ${HOME}/.ziti/quickstart/newfolder/ziti-cli.json
 ```
 
-## Install Ziti Admin Console (ZAC) [Optional]
+## Next Steps
 
-Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with 
-the installation guide](../zac/installation.md)
-
-## Using the Overlay
-
-Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
+- Now that you have your network in place, you probably want to try it out. Head to
+[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
+- [Install the Ziti Console](../zac/installation.md#cloning-from-github) (web UI)
+- Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
+- Help
+  - [Change Admin Password](./help/change-admin-password.md)
+  - [Reset the Quickstart](./help/reset-quickstart.md)
