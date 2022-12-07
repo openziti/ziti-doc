@@ -11,14 +11,14 @@ It's expected that you're using `bash` for these commands. If you're using Windo
 and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to 
 translate to your shell accordingly.
 
-You will need `node` and `npm` executables from Node.js v16+. Ubuntu Jammy currently provides v12.
+You will need `node` and `npm` executables from Node.js v16+.
 
 :::note
 When running Ziti Administration Console, you should also prefer using https over http. In order to do this you will need
 to either create, or copy the certificates needed. Each section below tries to show you how to accomplish this on your own.
 :::
 
-## Run ZAC by Cloning From GitHub
+## Cloning From GitHub
 
 These steps are applicable to both the [local, no docker](../network/local-no-docker) as well as the 
 [hosted yourself](../network/hosted) deployments. Do note, these steps expect you have the necessary 
@@ -84,7 +84,7 @@ you can perform the following steps.
    LISTEN 0      511                *:1408             *:*    users:(("node",pid=26013,fd=18))
     ```
 
-## Run ZAC with Docker
+## Docker
 
 Getting ZAC setup if you have followed the [docker network quickstart](../network/local-with-docker) 
 should be straightforward. If you have used the default values from this quickstart you can issue the following command. 
@@ -110,7 +110,7 @@ One easy, and common mechanism to do this would be to edit the 'hosts' file of y
 internet search should show you how to accomplish this.
 :::
 
-## Run ZAC with Docker Compose
+## Docker Compose
 
 If you have followed the [docker compose quickstart](../network/local-docker-compose) getting the ZAC 
 running within the compose file is a bit cumbersome because the docker-compose file will generate a full PKI on your 
