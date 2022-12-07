@@ -37,7 +37,7 @@ These are the arbitrary ports we'll use in this example for convenience when spe
 Make sure you have `jq` installed. It's available to `apt` (Debian) and `dnf` (RHEL, Rocky, Fedora) as package name `jq`.
 :::
 
-### Set Up `expressInstall` {#set-up-expressinstall}
+### `expressInstall` Setup {#expressinstall-setup}
 
 `expressInstall` may be customized with environment variables. Consider creating a DNS name for this installation before running the script. By default, the
 quickstart will install your Ziti network's PKI and configuration files in `${HOME}/.ziti/quickstart/$(hostname -s)`. You may choose a different location by defining `ZITI_HOME=/custom/path/to/quickstart`. If you do customize `ZITI_HOME` then you should also make this assignment in your shell RC, e.g., `~/.bashrc` for future convenience.
@@ -72,65 +72,9 @@ export ZITI_EDGE_ROUTER_PORT=8442
 source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/main/quickstart/docker/image/ziti-cli-functions.sh)"; expressInstall
 ```
 
-### Start the Controller and Router
-
-```bash
-startController
-startRouter
-```
-
-Example output:
-
-```bash
-$ startController
-ziti-controller started as process id: 1286. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye.log
-
-$ startRouter
-Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
-```
-
-## Adding Environment Variables Back to the Shell
-
-If you log out and log back in again you can source the *.env file located in `ZITI_HOME`.
-
-```bash
-source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
-```
-
-Example output:
-
-```bash
-$ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
-adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the path
-
-$ echo $ZITI_HOME
-/home/ubuntu/.ziti/quickstart/ip-10-0-0-1
-```
-
-## Next Steps
-
-- [Use the Overlay](#use-the-overlay)
-- [Install Ziti Admin Console (ZAC)](#install-ziti-admin-console-zac)
-- [Enable `systemd`](#systemd)
-<!-- - Add a Private Router -->
-- [Add a Second Public Router](#add-a-second-public-router)
-- [Change Admin Password](#change-admin-password)
-- [Reset the Quickstart](#reset-quickstart)
-
-### Start Using Ziti Services
-
-Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
-
-### Install Ziti Admin Console (ZAC)
-
-This is an optional server app and web console for Ziti network administration.
-
-[Installation guide](../zac/installation.md)
-
 ### `systemd` {#systemd}
 
-This part is optional. If it's available, then you may want to use `systemd` to manage your controller and router processes. This
+This part is optional and recommended. If it's available on your system, then you may want to use `systemd` to manage your controller and router processes. This
 is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate these
 files run:
 
@@ -224,11 +168,32 @@ $ sudo systemctl -q status ziti-router --lines=0 --no-pager
              └─2385 /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.22.11/ziti-router run /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ip-10…
 ```
 
-### Add a Second Public Router
+## Adding Environment Variables Back to the Shell
 
-In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
+If you log out and log back in again you can source the *.env file located in `ZITI_HOME`.
 
-<!-- TODO: link to the new router deployment guide when it's published -->
+```bash
+source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
+```
+
+Example output:
+
+```bash
+$ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
+adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the path
+
+$ echo $ZITI_HOME
+/home/ubuntu/.ziti/quickstart/ip-10-0-0-1
+```
+
+## Next Steps
+
+- Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
+[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
+- [Install the Ziti Console](../zac/installation.md) (web UI)
+- Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
+- [Change Admin Password](#change-admin-password)
+- [Reset the Quickstart](#reset-quickstart)
 
 ### Change Admin Password
 
@@ -260,4 +225,4 @@ You may want to re-run `expressInstall` with different parameters. You could run
     unsetZitiEnv
     ```
 
-1. Return to [the set up section](#set-up-expressinstall)
+1. Return to [the setup section](#expressinstall-setup)
