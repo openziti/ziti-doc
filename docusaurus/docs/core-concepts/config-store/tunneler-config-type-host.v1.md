@@ -1,4 +1,4 @@
-# Tunneler Config Type `host.v1`
+# Tunneler Config Type host.v1
 
 A Config of Config Type `host.v1` configures a hosting Ziti tunneler to forward connections to the destination server for a particular Ziti service.
 

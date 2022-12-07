@@ -6,8 +6,8 @@ deployed with a default authentication policy that has the id `default`. This au
 but not deleted. This default authentication policy is used when identities are created and an authentication
 policy is not specified.
 
-
 Example: Authentication Policy
+
 ```json
 {
     "createdAt": "2022-05-20T14:02:53.359Z",
@@ -37,15 +37,14 @@ Example: Authentication Policy
 }
 ```
 
-
-# Sections
+## Sections
 
 An authentication policy is split into two separate major sections:
 
 - primary - initial authentication to establish the authenticating principal
 - secondary - additional MFA authentication challenges
 
-## Primary
+### Primary
 
 The primary section allow or disposals various authentication mechanisms used to establish the initial principal
 (identity) authenticating. A viable authentication policy must allow at least one primary authentication mechanism.
@@ -54,9 +53,10 @@ The primary section allow or disposals various authentication mechanisms used to
 - extJwt - externally signed JWT bearer tokens
 - updb - "username password database" which power traditional username/password authentication
 
-### Certificate (cert)
+#### Certificate (cert)
 
 Fields:
+
 - allowed - enables/disabled x509 certificate authentication
 - allowExpiredCerts - allows expired client certificates to authenticate
 
@@ -70,8 +70,7 @@ certificates cannot be updated. Clients do have an API available to them to roll
 certificates forward. Client certificates issued by a [3rd Party CAs](./third-party-cas) must have an external
 process to maintain client certificate validity if `allowExpiredCerts` is false.
 
-
-### External JWT Signers (extJwt)
+#### External JWT Signers (extJwt)
 
 Fields:
 
@@ -81,13 +80,13 @@ Fields:
 If `allowed` is true the [External JWT Signers](./external-jwt-signers) specified in the `allowedSigners` field
 may be used for authentication.
 
-### Username Password (updb)
+#### Username Password (updb)
 
 - allowed - whether UPDB may be used for authentication
 - maxAttempts - the maximum number of invalid logins allowed before an identity is locked for `lockoutDurationMinutes`, 0 for never
 - lockoutDurationMinutes - the number of minutes to lock identities after `maxAttempts` is reached, 0 for forever
 
-## Secondary
+### Secondary
 
 The secondary section contain only two top-level configuration values:
 

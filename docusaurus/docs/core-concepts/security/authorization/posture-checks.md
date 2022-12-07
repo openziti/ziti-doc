@@ -8,7 +8,7 @@ grant access to a service as either a client or host. Posture Checks are defined
 assigned to them via attributes on the Posture Checks and attribute selectors on the Service Policy. This allows Posture
 Checks to be re-used.
 
-# Posture Data
+## Posture Data {#posture-data}
 
 Environmental state is saved as Posture Data - a set of values describing environmental state. Posture Data is provided 
 to the controller via Posture Response sent from the client. Posture Responses are constructed from Posture Queries 
@@ -16,29 +16,28 @@ which are reported to the client per service from the controller.
 
 [![](https://mermaid.ink/img/pako:eNptkMtuAjEMRX9l5BWo8ANZsJl210XVkdgQFunkto2aBzgOEkL8e4PIICTwypLPsa98ojFZkKKMfUEc8erMD5ugY1er9w5RlqvVS5-icPIerLp3l2UAH9yIPJs38jav9PLqqW6znbiHfY3oGUZQwY-UpTA-kXcp5ifCXYChfAUns0fpeZg7c228s_VgE6f0U9GCAjgYZ-tHTpeZJvlFgCZVW2v4T5OO58qV3WXPm3WSmNS38RkLMkXScIwjKeGCCWovbdT5H_eEfjA)](https://mermaid.live/edit#pako:eNptkMtuAjEMRX9l5BWo8ANZsJl210XVkdgQFunkto2aBzgOEkL8e4PIICTwypLPsa98ojFZkKKMfUEc8erMD5ugY1er9w5RlqvVS5-icPIerLp3l2UAH9yIPJs38jav9PLqqW6znbiHfY3oGUZQwY-UpTA-kXcp5ifCXYChfAUns0fpeZg7c228s_VgE6f0U9GCAjgYZ-tHTpeZJvlFgCZVW2v4T5OO58qV3WXPm3WSmNS38RkLMkXScIwjKeGCCWovbdT5H_eEfjA)
 
-# Evaluation
+## Evaluation
 
 Posture Checks are event based and are evaluated as events are encountered. Once evaluated failure states begin
 to restrict access as Service Policies being to fail their associated Posture Checks. One exception to this
 is the [MFA Posture Check](#mfa) which has grace periods for some scenarios.
 
-# Access
+## Access
 
 A single Service may be granted to a client through multiple Service Policies. Only one of those policies needs to be
 in a passing state for access to be granted. For example creating two Service Policies, one with Posture Checks and
 one without, to the same service and client will result in the client always having access. This is because one
 Service Policy lacking Posture Checks will always result as passing.
 
-# Associating
+## Associating
 
-Posture Checks are associated to [Service Policies](./policies/overview) through 
+Posture Checks are associated to [Service Policies](./policies/overview) through
 [Roles and Role Attributes](./policies/overview#roles-and-role-attributes). Attributes on each Posture Check created
 will be selected for on Service Policies via the `postureCheckRoles` as an array of selected roles. Service Policies are
 associated to Identities in the same fashion via `identityRoles` and the attributes on Identities.
 
+## Types
 
-
-# Types
 The following Posture Check types are currently defined:
 
 - [OS / OS Version](#os-os-version) - requires a specific operating system and optionally a specific version or versions
@@ -47,11 +46,12 @@ The following Posture Check types are currently defined:
 - [Multi Process](#multi-process) - requires a client be running one or more applications
 - [Windows Domain](#windows-domain) - requires the client be a member of a specific domain
 
-## OS/ OS Version
+### Operating System {#os-os-version}
 
 The `OS` Posture Check type is used to verify a client's operating system and optionally version
 
 Supported OS Types
+
 - Windows
 - Windows Server
 - Linux
@@ -59,7 +59,7 @@ Supported OS Types
 - iOS
 - Android
 
-Versions may be validated with any valid [Semver 2.0](https://semver.org/) statement. This includes the ability to
+OS version may be validated with any valid [Semver 2.0](https://semver.org/) statement. This includes the ability to
 specify ranges by major, minor, and patch levels. Operating systems that do not have an explicit patch level, their
 build number will be used instead.
 
@@ -69,15 +69,16 @@ build number will be used instead.
 - `>=1.2.7` would match the versions 1.2.7, 1.2.8, 2.5.3, and 1.3.9, but not the versions 1.2.6 or 1.1.0
 - `1.2.7 || >=1.2.9 <2.0.0` would match the versions 1.2.7, 1.2.9, and 1.4.6, but not the versions 1.2.8 or 2.0.0
 
-### Creating
+#### Creating
 
-#### Ziti CLI
+##### Ziti CLI
 
 ` ziti edge create posture-check os windows-and-android -o "WINDOWS:>10.0.0,ANDROID:>6.0.0" -a check-attribute1`
 
-#### Edge Management API
+##### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "OS",
@@ -97,20 +98,21 @@ build number will be used instead.
 }
 ```
 
-## MAC Address
+### MAC Address
 
 The `MAC` Posture Check type is used to verify a client's network interface cards MAC addresses. MAC Addresses
 that are not specified will fail the check.
 
-### Creating
+#### Creating
 
-#### Ziti CLI
+##### Ziti CLI
 
 `ziti edge create posture-check mac mac-lsit =m "14-B2-2C-E5-F0-61" -m "D5-22-E8-B7-FF-48" -m "..."  -a check-attribute1`
 
-#### Edge Management API
+##### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "MAC",
@@ -120,13 +122,13 @@ that are not specified will fail the check.
 }
 ```
 
-## MFA
+### MFA
 
 The `MFA` Posture Check type is used to enforce [MFA TOTP](../authentication/totp) configuration on a client. Posture
 Checks enforce access authorization. For authentication enforcement, see 
 [Authentication Policies](../authentication/authentication-policies#secondary).
 
-### Creating
+#### Creating
 
 MFA Posture Checks also support forcing a client to re-submit a valid TOTP on timeout, after locking/unlocking a
 device, or waking a device from sleep.
@@ -139,13 +141,14 @@ is given a five-minute grace period before the posture check begins to fail.
 Forcing submission on wake is set through `promptOnWake` as `true` or `false`. After a wake event the client
 is given a five-minute grace period before the posture check begins to fail.
 
-#### Ziti CLI
+##### Ziti CLI
 
 `ziti edge create posture-check mfa my-mfa-check -s 3600 -w -u -a check-attribute1`
 
-#### Edge Management API
+##### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "MFA",
@@ -156,12 +159,12 @@ is given a five-minute grace period before the posture check begins to fail.
 }
 ```
 
-## Multi Process
+### Multi Process
 
 The `MULTI_PROCESS` Posture Check is used to verify that one or more programs are running on the client. It can 
 optionally check sha256 hash as well as digital signers on Window.
 
-### Creating
+#### Creating
 
 Multi Process Posture Checks allow multiple processes to be defined which either all of must be running or one of must
 be running. The `semantic` of the check determines how the processes are evaluated. `AllOf` requires that all
@@ -174,13 +177,14 @@ Valid sha256 hashes of a binary may be provided in the `hashes`.
 If the file is digital signed (Windows only) the `signerFingerprints` may be provided. Signer fingerprints are the 
 sha1 fingerprints (thumbprints) of valid signing certificates.
 
-#### Ziti CLI
+##### Ziti CLI
 
 `ziti edge create posture-check process-multi my-proc-multi AnyOf "Windows,Linux", "C:\\program1.exe,/usr/local/program1" -a check-attribute1`
 
-#### Edge Management API
+##### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "PROCESS_MULTI",
@@ -204,19 +208,20 @@ sha1 fingerprints (thumbprints) of valid signing certificates.
 }
 ```
 
-## Windows Domain
+### Windows Domain
 
 The `DOMAIN` Posture CHeck is used to verify that a Windows client has joined a specific Windows Domain.
 
-### Creating
+#### Creating
 
-#### Ziti CLI
+##### Ziti CLI
 
 `ziti edge create posture-check domain domain-list -d domain1 -d "domain2"  -a check-attribute1`
 
-#### Edge Management API
+##### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "DOMAIN",
@@ -226,17 +231,20 @@ The `DOMAIN` Posture CHeck is used to verify that a Windows client has joined a 
 }
 ```
 
-# Viewing Identity Posture Data
+## Viewing Identity Posture Data
 
 For troubleshooting purposes it is possible to view an identity's current Posture Data.
 
-#### Request
+### Request
+
 `GET /edge/management/v1/identities/<id>/posture-data`
+
 ```
 <empty body>
 ```
 
-#### Response
+### Response
+
 ```json
 {
   "data": {
@@ -280,17 +288,20 @@ For troubleshooting purposes it is possible to view an identity's current Postur
 }
 ```
 
-# Viewing Failed Service Requests
+## Viewing Failed Service Requests
 
 For troubleshooting purposes it is possible to view the last fifty failed service requests due to Posture Check failure.
 
-#### Request
+### Request
+
 `GET /edge/management/v1/identities/<id>/failed-service-requests`
+
 ```
 <empty body>
 ```
 
-#### Response
+### Response
+
 ```json
 {
   "meta": {},

@@ -1,5 +1,5 @@
 
-# Tunneler Config Type `intercept.v1`
+# Tunneler Config Type intercept.v1
 
 A Config of Config Type `intercept.v1` configures an intercepting Ziti tunneler as a proxy for a particular Ziti service.
 
