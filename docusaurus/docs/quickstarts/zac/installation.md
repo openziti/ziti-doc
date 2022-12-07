@@ -3,7 +3,7 @@ title: Ziti Admin Console
 ---
 
 The Ziti Administration Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and 
-explore a [Ziti Network](../../introduction/intro).
+explore a [Ziti Network](../../introduction/index.mdx).
 
 ## Prerequisites
 
