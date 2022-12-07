@@ -223,7 +223,7 @@ $ sudo systemctl -q status ziti-router --lines=0 --no-pager
 
 ### Add a Second Public Router
 
-Routers automatically form a mesh of router links when there's more than one. In order for your express-installed router to participate in the mesh it needs a firewall exception to expose its "link listener" on port `10080/tcp`, the default port.
+In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 
 <!-- TODO: link to the new router deployment guide when it's published -->
 
