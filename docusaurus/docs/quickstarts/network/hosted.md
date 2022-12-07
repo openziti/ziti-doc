@@ -37,7 +37,7 @@ These are the arbitrary ports we'll use in this example for convenience when spe
 Make sure you have `jq` installed. It's available to `apt` (Debian) and `dnf` (RHEL, Rocky, Fedora) as package name `jq`.
 :::
 
-### Set Up `expressInstall`
+### Set Up `expressInstall` {#set-up-expressinstall}
 
 `expressInstall` may be customized with environment variables. Consider creating a DNS name for this installation before running the script. By default, the
 quickstart will install your Ziti network's PKI and configuration files in `${HOME}/.ziti/quickstart/$(hostname -s)`. You may choose a different location by defining `ZITI_HOME=/custom/path/to/quickstart`. If you do customize `ZITI_HOME` then you should also make this assignment in your shell RC, e.g., `~/.bashrc` for future convenience.
@@ -115,7 +115,7 @@ $ echo $ZITI_HOME
 <!-- - Add a Private Router -->
 - [Add a Second Public Router](#add-a-second-public-router)
 - [Change Admin Password](#change-admin-password)
-- [Delete everything and start over](#delete-everything-and-start-over)
+- [Reset the Quickstart](#reset-quickstart)
 
 ### Start Using Ziti Services
 
@@ -244,18 +244,20 @@ Enter your current password:
 Enter your new password: 
 ```
 
-### Delete everything and start over
+### Reset the Quickstart {#reset-quickstart}
 
-You may begin again with these steps:
+You may want to re-run `expressInstall` with different parameters. You could run it again with a new `ZITI_HOME` without changing the current installation. You may begin again with these steps:
 
-1. Delete the express install directory
+1. Delete the express install directory. Delete is forever, so make sure you're deleting the right thing.
 
     ```bash
-    rm -r "${ZITI_HOME}"
+    rm -rI "${ZITI_HOME}"  # probably a sub-directory of ~/.ziti/quickstart/ 
     ```
 
-1. If the current shell environment was configured by the express install you may unset vars named like `ZITI_`
+1. If the current shell environment was configured by the express install you may unset vars named like `ZITI_`. This will prepare your current shell environment to set up and re-run `expressInstall`.
 
     ```bash
     unsetZitiEnv
     ```
+
+1. Return to [the set up section](#set-up-expressinstall)
