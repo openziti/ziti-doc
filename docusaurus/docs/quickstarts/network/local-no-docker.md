@@ -3,7 +3,7 @@ sidebar_position: 3
 ---
 # Local - No Docker
 
-This page will show you how to get your [Ziti Network](../../introduction/intro) up and running 
+This page will show you how to get your [Ziti Network](../../introduction/01-Introduction.mdx) up and running 
 quickly and easily, entirely locally. Since you'll be running everything locally, you'll have no issues communicating
 between network components. All the processes will run locally, and you'll be responsible for starting and stopping them
 when you want to turn the overlay network on or off.
@@ -52,11 +52,11 @@ ziti-controller started as process id: 7282. log located at: ${HOME}/.ziti/quick
 
 Assuming you have sourced the script, you will have an environment variable set named `$ZITI_EDGE_CONTROLLER_API`. After
 the controller has started, your controller should be listening at that hostname:port combination. You can see what your
-value is set to by running `echo $ZITI_EDGE_CONTROLLER_API`. This variable defaults to: `$(hostname):1280`. Make sure the
+value is set to by running `echo $ZITI_EDGE_CTRL_ADVERTISED`. This variable defaults to: `$(hostname):1280`. Make sure the
 controller is on and listening and then start the edge router. 
 
 ```bash
-~ % echo $ZITI_EDGE_CONTROLLER_API
+~ % echo $ZITI_EDGE_CTRL_ADVERTISED
 My-Mac-mini.local.domain:1280
 ```
 
@@ -76,7 +76,7 @@ Again, this will default to using `$(hostname)` as the host name and port 3022.
 
 ## Testing Your Overlay
 
-At this point you should have a functioning [Ziti Network](../../introduction/intro). The script 
+At this point you should have a functioning [Ziti Network](../../introduction/01-Introduction.mdx). The script 
 you sourced provides another function to login to your network. Try this now by running `zitiLogin`. You should see 
 something similar to this:
 ```bash
@@ -154,9 +154,9 @@ Saving identity 'default' to ${HOME}/.ziti/quickstart/newfolder/ziti-cli.json
 ## Install Ziti Admin Console (ZAC) [Optional]
 
 Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with 
-the installation guide](../zac/installation)
+the installation guide](../zac/installation.md)
 
 ## Using the Overlay
 
 Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services) and start the journey to understanding how to use OpenZiti.
+[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.

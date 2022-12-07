@@ -12,7 +12,7 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [Ziti Networks](../../introduction/intro) require
+All [Ziti Networks](../../introduction/01-Introduction.mdx) require
 a [Ziti Controller](/docs/manage/controller). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
@@ -22,7 +22,7 @@ Running Ziti locally via Docker will require you to mount a common folder which 
 network. Without a volume mount, you'll be forced to figure out how to get the PKI in place correctly. While this is a
 straightforward process once you know how to do it, when you're getting started this is undoubtedly complicated. We
 recommend that if you're starting out (or if you just don't want to be bothered with these details) you should just
-create a folder and volume mount that folder. It's expected that this volume mount map to `/openziti/pki` inside the
+create a folder and volume mount that folder. It's expected that this volume mount map to `/persistent/pki` inside the
 container.
 
 ### Required - Known Name
@@ -79,10 +79,10 @@ docker run \
   -p 1280:1280 \
   -it \
   --rm \
-  -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
-  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/openziti/ziti.env \
+  -v ~/docker-volume/myFirstZitiNetwork:/persistent/pki \
+  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/persistent/ziti.env \
   openziti/quickstart \
-  /openziti/scripts/run-controller.sh
+  /var/openziti/scripts/run-controller.sh
 ```
 
 ## Edge Router
@@ -104,10 +104,10 @@ docker run \
   -p 3022:3022 \
   -it \
   --rm \
-  -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
-  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/openziti/ziti.env \
+  -v ~/docker-volume/myFirstZitiNetwork:/persistent/pki \
+  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/persistent/ziti.env \
   openziti/quickstart \
-  /openziti/scripts/run-router.sh edge
+  /var/openziti/scripts/run-router.sh edge
 ```
 
 If you want to create a second edge router, you'll need to override the router port, don't forget to export that port too
@@ -120,10 +120,10 @@ docker run \
   -p 4022:4022 \
   -it \
   --rm \
-  -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
-  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/openziti/ziti.env \
+  -v ~/docker-volume/myFirstZitiNetwork:/persistent/pki \
+  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/persistent/ziti.env \
   openziti/quickstart \
-  /openziti/scripts/run-router.sh edge
+  /var/openziti/scripts/run-router.sh edge
 ```
 
 ## Testing the Network
@@ -148,8 +148,8 @@ $ docker ps
 
 CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS          PORTS
                    NAMES
-1b86c4b461e7   openziti/quickstart   "/openziti/scripts/r…"   10 minutes ago   Up 10 minutes   0.0.0.0:3022->3022/tcp, :::3022->3022/tcp   musing_engelbart
-a33d58248d6e   openziti/quickstart   "/openziti/scripts/r…"   46 minutes ago   Up 46 minutes   0.0.0.0:1280->1280/tcp, :::1280->1280/tcp   xenodochial_cori
+1b86c4b461e7   openziti/quickstart   "/var/openziti/scripts/r…"   10 minutes ago   Up 10 minutes   0.0.0.0:3022->3022/tcp, :::3022->3022/tcp   musing_engelbart
+a33d58248d6e   openziti/quickstart   "/var/openziti/scripts/r…"   46 minutes ago   Up 46 minutes   0.0.0.0:1280->1280/tcp, :::1280->1280/tcp   xenodochial_cori
 ```
 
 Above, you'll see my controller is running in a container named "xenodochial_cori". I can tell because it's using the
@@ -161,14 +161,14 @@ Once in the container, I can now issue `zitiLogin` to authenticate the `ziti` CL
 ```bash
 zitiLogin
 Token: b16f182f-88b3-4fcc-9bfc-1e32319ca486
-Saving identity 'default' to /openziti/ziti-cli.json
+Saving identity 'default' to /persistent/ziti-cli.json
 ```
 
 And finally, once authenticated I can test to see if the edge router is online in the controller and as you'll see, the
 `isOnline` property is true!
 
 ```bash
-ziti@a33d58248d6e:/openziti$ ziti edge list edge-routers
+ziti@a33d58248d6e:/persistent$ ziti edge list edge-routers
 id: qNZyqZEix3    name: ziti-edge-router    isOnline: true    role attributes: {}
 results: 1-1 of 1
 ```
@@ -176,9 +176,9 @@ results: 1-1 of 1
 ## Install Ziti Admin Console (ZAC) [Optional]
 
 Once you have the network up and running, if you want to install the UI management console, the ZAC, [follow along with 
-the installation guide](../zac/installation)
+the installation guide](../zac/installation.md)
 
 ## Using the Overlay
 
 Now you have your zero trust overlay network in place, you probably want to try it out. Head on over to
-[the services quickstart](../services) and start the journey to understanding how to use OpenZiti.
+[the services quickstart](../services/index.md) and start the journey to understanding how to use OpenZiti.
