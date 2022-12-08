@@ -4,6 +4,8 @@ title: Controller Deployment
 sidebar_label: Controller
 ---
 
+import CliLogFormats from '../docs/_cli-log-levels-and-formats.md'
+
 This article provides some guidance for deploying a Ziti Controller. You can go back and read [the controller component introduction](/docs/introduction/components#openziti-controller) if needed.
 
 ## Public Key Infrastructure
@@ -25,6 +27,4 @@ You may configure the controller to expose management functions on separate port
 
 ## Logging
 
-See [CLI basics](./04-cli-basics.md#logging) for a few details about log output.
-
-<!-- TODO: host sizing guidance -->
+<CliLogFormats/>
