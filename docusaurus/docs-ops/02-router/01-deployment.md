@@ -6,6 +6,8 @@ title: Router Deployment
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import styles from './styles.module.css';
+import CliLogin from '../../docs/_cli-login.md'
+import CliLogFormats from '../../docs/_cli-log-levels-and-formats.md'
 
 The Ziti Router is the entry point for Ziti-based clients. It is responsible for authenticating incoming connections by
 verifying the connecting client has a valid network session.  It also routes traffic to whatever the
@@ -25,8 +27,10 @@ The life cycle of a router does not allow for the advertised, external DNS name 
 It is advisable to generate private keys on the same host where they'll be used. This minimizes the risk of losing custody of the private key material.
 
 :::info Note
-Ensure you are [logged in](../04-cli-basics.md)
-for managing routers with the CLI
+Ensure you are logged in for managing routers with the CLI
+
+<CliLogin/>
+
 :::
 
 ### Download Binaries
@@ -89,4 +93,4 @@ You can manage a router's role attributes, tags, etc. with [the REST API](/api/r
 
 ### Configure Logging
 
-See [logging section](../04-cli-basics.md#logging) for more details
+<CliLogFormats/>

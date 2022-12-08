@@ -6,16 +6,19 @@ title: CLI Mgmt
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import styles from './styles.module.css';
+import CliLogin from '../../docs/_cli-login.md'
 
 ## Managing Routers with the CLI
 
 In this article we are highlighting the most relevant commands and options for managing routers with the `ziti` CLI.
 
 :::info Important Note
-Routers or their identities can be referenced by `@router_name` or `#attribute` in various policies like service policy, edge router policy, etc. Using group `#attribute` is strongly recommended.
-
-Let's consider an Autoscaling Group scenario, where routers would be created or deleted as the scale-out or scale-in events occur respectively. If router names were referenced in such deployment, then all policies would need to be updated upon the scale-out event with `@router_name`. To keep the complexity of this deployment to minimum, it just makes sense to use #attribute, where no other updates would be needed.
+Routers or their identities can be referenced by `@router_name` or `#attribute` in various policies like service policy, edge router policy, etc. Using group `#attribute` is recommended.
 :::
+
+### Login
+
+<CliLogin/>
 
 ### Create Router
 
@@ -104,3 +107,7 @@ ziti edge update edge-router $ROUTER_ID [flags]
 -a, --role-attributes strings   Set role attributes of the edge router. Use --role-attributes '' to set an empty list
  --role-attributes 'example,example2,example3'
 ```
+
+### Attributes
+
+Let's consider an Autoscaling Group scenario, where routers would be created or deleted as the scale-out or scale-in events occur respectively. If router names were referenced in such deployment, then all policies would need to be updated upon the scale-out event with `@router_name`. To keep the complexity of this deployment to minimum, it just makes sense to use #attribute, where no other updates would be needed.
