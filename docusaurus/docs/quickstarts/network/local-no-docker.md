@@ -95,7 +95,7 @@ Token: 40d2d280-a633-46c9-8499-ab2e005dd222
 Saving identity 'default' to ${HOME}/.ziti/quickstart/My-Mac-mini.local.domain/ziti-cli.json
 ```
 
-You can now use the `ziti` CLI to interact with Ziti! ([Ziti CLI Help Here](/operations/cli-basics)). The 
+You can now use the `ziti` CLI to interact with Ziti!. The
 `ziti` binary is not added to your path by default but will be available at `"${ZITI_BIN_DIR-}/ziti"`. Add that folder
 to your path, alias `ziti` if you like. Let's try to use this command to see if the edge router is online by running:
 `"${ZITI_BIN_DIR-}/ziti" edge list edge-routers`.

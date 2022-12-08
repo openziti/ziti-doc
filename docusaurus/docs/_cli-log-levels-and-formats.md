@@ -1,37 +1,6 @@
----
-id: cli-basics
-title: CLI Basics
----
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import styles from './02-router/styles.module.css';
-
-This section covers a few CLI basics.
-
-## Login
-
-The `ziti` CLI will help you get a session from the controller's management API. You will be prompted to trust any new server certificates. Your session cache and trust store are managed by the CLI in your home directory.
-
-```bash
-# implies https://localhost:1280
-ziti edge login -u admin -p admin
-```
-
-```bash
-# implies https://
-ziti edge login ziti.example.com:8441 -u admin -p admin
-```
-
-## Change Password
-
-If a user identity has a password authenticator (`updb`) then you may change the password with the CLI.
-
-```bash
-ziti edge update authenticator updb -s
-```
-
-## Logging
 
 All Ziti components log to standard output and standard error file descriptors.
 
