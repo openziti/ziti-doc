@@ -2,13 +2,13 @@
 title: Admin Console
 ---
 
-The Ziti Admin Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and 
+The Ziti Admin Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and
 explore a [Ziti Network](../../introduction/intro).
 
 ## Prerequisites
 
-It's expected that you're using `bash` for these commands. If you're using Windows we strongly recommend that you install 
-and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to 
+It's expected that you're using `bash` for these commands. If you're using Windows we strongly recommend that you install
+and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to
 translate to your shell accordingly.
 
 You will need `node` and `npm` executables from Node.js v16+.
@@ -20,9 +20,9 @@ to either create, or copy the certificates needed. Each section below tries to s
 
 ## Cloning From GitHub
 
-These steps are applicable to both the [local, no docker](../network/local-no-docker) as well as the 
-[hosted yourself](../network/hosted) deployments. Do note, these steps expect you have the necessary 
-environment variables established in your shell. If you used the default parameters, you can establish these variables 
+These steps are applicable to both the [local, no docker](../network/local-no-docker) as well as the
+[hosted yourself](../network/hosted) deployments. Do note, these steps expect you have the necessary
+environment variables established in your shell. If you used the default parameters, you can establish these variables
 using the file at `${HOME}/.ziti/quickstart/$(hostname)/$(hostname).env`. To deploy ZAC after following one of those guides,
 you can perform the following steps.
 
@@ -48,7 +48,7 @@ you can perform the following steps.
     ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.key" "${ZITI_HOME}/ziti-console/server.key"
     ```
 
-1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
+1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the
    Ziti helper script, you need to in order to get the necessary function.
 
     ```bash
@@ -67,7 +67,7 @@ you can perform the following steps.
    Ziti Server running on port 1408
    ```
 
-1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command 
+1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command
    `sudo systemctl status ziti-console --lines=0 --no-pager`
 
     ```bash
@@ -88,11 +88,11 @@ you can perform the following steps.
 
 ## Docker
 
-Getting ZAC setup if you have followed the [docker network quickstart](../network/local-with-docker) 
-should be straightforward. If you have used the default values from this quickstart you can issue the following command. 
-Notice that this command uses the default path: `${HOME}/docker-volume/myFirstZitiNetwork`. If you customized the path, 
-replace the paths specified in the volume mount sections below accordingly (the '-v' lines). Also note this command will 
-expose the http and https ports to your local computer. This is optional, read more about using docker for more details 
+Getting ZAC setup if you have followed the [docker network quickstart](../network/local-with-docker)
+should be straightforward. If you have used the default values from this quickstart you can issue the following command.
+Notice that this command uses the default path: `${HOME}/docker-volume/myFirstZitiNetwork`. If you customized the path,
+replace the paths specified in the volume mount sections below accordingly (the '-v' lines). Also note this command will
+expose the http and https ports to your local computer. This is optional, read more about using docker for more details
 if necessary.
 
  ```bash
@@ -106,17 +106,17 @@ if necessary.
  ```
 
 :::note
-Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is 
-addressable by your machine in order to use docker in this way. This guide does not go into how to do this in depth. 
-One easy, and common mechanism to do this would be to edit the 'hosts' file of your operating system. A quick 
+Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
+addressable by your machine in order to use docker in this way. This guide does not go into how to do this in depth.
+One easy, and common mechanism to do this would be to edit the 'hosts' file of your operating system. A quick
 internet search should show you how to accomplish this.
 :::
 
 ## Docker Compose
 
-If you have followed the [docker compose quickstart](../network/local-docker-compose) getting the ZAC 
-running within the compose file is a bit cumbersome because the docker-compose file will generate a full PKI on your 
-behalf. While this makes it very easy to get a basic network setup, it makes reusing that PKI in the ZAC difficult at 
+If you have followed the [docker compose quickstart](../network/local-docker-compose) getting the ZAC
+running within the compose file is a bit cumbersome because the docker-compose file will generate a full PKI on your
+behalf. While this makes it very easy to get a basic network setup, it makes reusing that PKI in the ZAC difficult at
 this time.  It's not difficult to reuse the PKI but you'll need to do the following:
 
 1. Start the network using `docker-compose` as normal.
@@ -127,7 +127,7 @@ this time.  It's not difficult to reuse the PKI but you'll need to do the follow
    docker cp docker_ziti-controller_1:/var/openziti/pki/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem .
    ```
 
-3. Once these files are copied out, shut down the running docker-compose `docker-compose down`. Do NOT remove the volume 
+3. Once these files are copied out, shut down the running docker-compose `docker-compose down`. Do NOT remove the volume
    with `-v`.
 4. Now add the ZAC configuration lines to the compose file of your choice:
 
@@ -169,9 +169,9 @@ internet search should show you how to accomplish this.
    generated in the install process)
 
    :::note
-   If you are using docker-compose to start your network, when you access ZAC for the first time you will need to 
-   specify the url of the controller. Since everything is running **in** docker compose this url is relative to the 
-   internal docker compose network that is declared in the compose file. You would enter 
+   If you are using docker-compose to start your network, when you access ZAC for the first time you will need to
+   specify the url of the controller. Since everything is running **in** docker compose this url is relative to the
+   internal docker compose network that is declared in the compose file. You would enter
    `https://ziti-edge-controller:1280` as the controller's URL
    :::
 
