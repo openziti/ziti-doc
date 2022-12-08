@@ -1,3 +1,7 @@
+---
+sidebar_label: Controller
+---
+
 # Controller Configuration Reference
 
 OpenZiti uses configuration files for controllers that are in the [YAML](https://yaml.org/) format.
@@ -36,7 +40,7 @@ from the scope of the executing process (i.e. controller, router). The syntax `$
 
 Example:
 
-```
+```yaml
 db: ${ZITI_DATA}/db/ctrl.db
 ```
 
@@ -69,7 +73,7 @@ machine. This allows for access to hardware backed private keys.
 
 Example Identity Section (Client & Server use same key):
 
-```
+```yaml
 identity:
   cert: "file:ctrl-client.cert.pem"
   server_cert: "pem:-----BEGIN CERTIFICATE-----\nMIIEtzCCAp+gAwIBAgICEA0wDQYJKoZIhvcNAQELBQAwgYsxCzAJBgNVBAYTAlVT..."
@@ -78,7 +82,6 @@ identity:
   alt_server_certs:
     - server_cert: lets_encrypt.cert.pem
     - server_key: lets_encrypt.key.pem
-
 ```
 
 ## Sections
@@ -97,7 +100,7 @@ related configuration settings.
 - [`profile`](#profile) - enables profiling of controller memory and CPU statistics
 - [`trace`](#trace) - adds a peek handler to all controller messaging for debug purposes
 - [`web`](#web) - configures API presentation exposure
-- [`v`](#v) - A special section to note the version of the configuration file, only `v: 3` is currently supported
+- [`v` (version)](#version) - A special section to note the version of the configuration file, only `v: 3` is currently supported
 
 The standard OpenZit experience minimally requires the following sections:
 
@@ -116,7 +119,7 @@ Client API running it will be impossible for Edge clients to connect to services
 
 Example Minimum Controller Configuration:
 
-```
+```yaml
 v: 3
 
 db: ctrl.db
@@ -168,14 +171,14 @@ protocol(s) used for router connections and how those connections are managed.
 
 Example w/o Options:
 
-```
+```yaml
 ctrl:
   listener: tls:127.0.0.1:6262
 ```
 
 Example w/ Options:
 
-```
+```yaml
 ctrl:
   listener: tls:127.0.0.1:6262
   options:
@@ -193,7 +196,7 @@ required.
 
 Example:
 
-```
+```yaml
 db: /mnt/fast-drive/db/ctrl.db
 ```
 
@@ -211,7 +214,7 @@ The `edge` section also has the following subsections:
 
 Example Minimum Edge:
 
-```
+```yaml
 edge:
   enrollment:
     signingCert:
@@ -221,7 +224,7 @@ edge:
 
 Example Fully Defined:
 
-```
+```yaml
 edge:
   api:
     activityUpdateInterval: 90s
@@ -237,7 +240,6 @@ edge:
       duration: 5m
     edgeRouter:
       duration: 5m
-
 ```
 
 #### `api`
@@ -337,7 +339,7 @@ The `handler` section contains two or three properties depending on `type`:
 
 Example JSON File Logger:
 
-```
+```yaml
 events:
   jsonLogger:
     subscriptions:
@@ -370,7 +372,7 @@ to ensuring the internal database has not deadlocked by attempting to aquire a l
     - `timeout` - (optional) how long to wait for a transaction before timing out, defaults to 15 seconds
     - `initialDelay` - (optional) how long to wait on startup before performing the first check, defaults to 15 secconds
 
-```
+```yaml
 healthChecks:
   boltCheck:
     # How often to try entering a bolt read tx. Defaults to 30 seconds
@@ -410,7 +412,7 @@ be enabled in production environments without careful consideration.
     - `path` - (required) the path to output the memprof data
     - `intervalMs` (optional) the frequency to output memprof data (default 15s)
 
-```
+```yaml
 profile:
    cpu:
        path: /home/plorenz/tmp/ctrl.cpu.pprof
@@ -426,7 +428,7 @@ useful for debugging purposes only and should not be enabled in production envir
 
 - `path` - (required) the file to output decoded messages to
 
-```
+```yaml
 trace:
   path: /var/opt/open.ziti.ctrl.trace
 ```
@@ -438,7 +440,7 @@ exposed on multiple interfaces/networks through configuration alone.
 
 Example:
 
-```
+```yaml
 web:
   - name: all-apis-localhost
     bindPoints:
@@ -461,12 +463,11 @@ web:
       - binding: fabric
       - binding: edge-management
       - binding: edge-client
-
 ```
 
 The structure of the `web` section is an array of API exposure options:
 
-```
+```yaml
 web:
   - name: API Exposure 1
     ...
@@ -519,8 +520,7 @@ Each API may have their own options, but currently do not.
 - `minTLSVersion` - (optional) the minimum TLS version to support (TLS1.1, TLS1.2, TLS1.3)
 - `maxTLSVersion` - (optional) the maximum TLS version to support (TLS1.1, TLS1.2, TLS1.3)
 
-### `v`
+### `v` (version) {#version}
 
 The `v` section is used to detect if the version file is supported by the OpenZiti binary read it. The current and only
 supported value is "3".
-
