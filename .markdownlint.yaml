@@ -9,10 +9,8 @@ extends: null
 # MD001/heading-increment/header-increment - Heading levels should only increment by one level at a time
 MD001: true
 
+# deprecated in favor of MD041
 # MD002/first-heading-h1/first-header-h1 - First heading should be a top-level heading
-MD002:
-  # Heading level
-  level: 1
 
 # MD003/heading-style/header-style - Heading style
 MD003:
@@ -201,12 +199,13 @@ MD041:
 # MD042/no-empty-links - No empty links
 MD042: true
 
+# disabled because many Markdown files are partials without headings and intended for transclusion
 # MD043/required-headings/required-headers - Required heading structure
-MD043:
-  # List of headings
-  headings: []
-  # List of headings
-  headers: []
+# MD043:
+#   # List of headings
+#   headings: []
+#   # List of headings
+#   headers: []
 
 # MD044/proper-names - Proper names should have the correct capitalization
 MD044:
