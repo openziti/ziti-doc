@@ -140,7 +140,7 @@ Have a look at the code over at [GitHub][8] or continue reading on to the next z
 
 [2]: /docs/quickstarts/network/hosted
 
-[3]: /docs/introduction/intro#overview-of-a-ziti-network
+[3]: /docs/introduction/#overview-of-a-ziti-network
 
 [4]: /docs/core-concepts/services/overview
 

@@ -19,7 +19,7 @@ to any network be it host network, local network, the internet, private network,
 ### Simple HTTP Solution Overview - Before Ziti<br/>
 ![before OpenZiti](./before-openziti.png)
 
-The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](/glossary/glossary#underlay)
+The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](/glossary/#underlay)
 network and requires a hole through the firewall to allow clients to connect.
 
 ### Simple HTTP Solution - After Ziti
@@ -27,7 +27,7 @@ network and requires a hole through the firewall to allow clients to connect.
 
 After OpenZiti, we can see that there is no longer an open firewall to allow access to the HTTP server. Instead, the HTTP client 
 will have its network requests intercepted by an OpenZiti tunneller. Once intercepted, the packets are then delivered to the OpenZiti
-[overlay](/glossary/glossary#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
+[overlay](/glossary/#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
 target identity. Once delivered to the target identity, in this example, the traffic will offload back to the underlay network to be 
 sent to the final destination: the HTTP Server.
 
@@ -205,9 +205,9 @@ Hello World
 </pre>
 ```
 
-### Configuring the Overlay Using Ziti Admin Console
+### Ziti Admin Console (ZAC)
 
--- COMING SOON --
+Optionally, you may [install the ZAC](../zac/installation.md) to manage your network with a UI.
 
 ### Testing Everything Works
 

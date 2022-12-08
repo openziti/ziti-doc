@@ -51,8 +51,11 @@ export default function Home() {
 
                         <p>&nbsp;</p>
                         <ul>
-                            <li><Link to="/docs/introduction/intro">Read the docs</Link></li>
-                            <li><Link to="/guides">Check out the guides</Link></li>
+                            <li><Link to="/docs/introduction/">Learn the basics</Link></li>
+                            <li><Link to="/api/">Reference the API docs</Link></li>
+                            <li><Link to="/guides">Check out practical recipes</Link></li>
+                            <li><Link to="/glossary/">Define terms</Link></li>
+                            <li><Link to="/operations/controller">Operationalize the Ziti stack</Link></li>
                         </ul>
                     </div>
 
@@ -202,9 +205,9 @@ export default function Home() {
             <OpenZitiHorizontalSection>
                 <H1>I Have a Network, What's Next?</H1>
                 <p>
-                    Now that you have a <Link to="/docs/introduction/intro">OpenZiti Network</Link> all
+                    Now that you have a <Link to="/docs/introduction/">OpenZiti Network</Link> all
                     setup and ready to go, the next step is learning about all of the pieces which go into it. There's a lot to learn and
-                    <Link to={"/docs/introduction/intro"}> our docs</Link> are there to help you understand any extra details you need help
+                    <Link to={"/docs/introduction/"}> our docs</Link> are there to help you understand any extra details you need help
                     ironing out. If the docs aren't complete or aren't helpful, we love seeing issues filed for how to improve.
                     Or, if you're feeling up for it, we'd love to see any PRs to make the docs better you wish to
                     contribute. You'll find a more extensive list of the <Link to={"/docs/quickstarts/network/"}> quickstarts
@@ -215,7 +218,7 @@ export default function Home() {
                 <H1>Get Started With an SDK</H1>
                 <p>The OpenZiti project offers numerous SDKs to start with. Pick your favorite language and follow
                     along with a simple tutorial. If your favorite language is not shown, perhaps you can use the C SDK and
-                    integrate via <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">FFI.</a></p>
+                    integrate via <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">Foreign Function Interface</a> (FFI).</p>
                 <div className="col-lg-12">
                     <div className="centerrow buttonrow">
                         <a className="sdkbutton-button"
