@@ -22,7 +22,7 @@ of the following values, however `tls` is suggested for most scenarios.
 
 - `tls`
 - `tcp`
-- `upd`
+- `udp`
 - `dtls`
 - `ws`
 - `wss`
@@ -54,7 +54,7 @@ router and controller configurations) or as JSON.
 - `server_cert` -(optional) A string in the format of `<engine>:<value>` that defines a x509 certificate, if not defined `cert` is used
 - `server_key` - (optional) A string in the format of `<engine>:<value>` that defines a private key for `server_cert`, if not
   defined `key` is used if `server_cert` is defined
-- `ca` - (required) A string in the format of `<engine>:<value>` that defines x509 certificate chain used to define trusted CAs
+- `ca` - (optional) A string in the format of `<engine>:<value>` that defines x509 certificate chain used to define trusted CAs
 - `alt_server_certs` - (optional) An array of objects with `server_cert` and `server_key` values use to add additional server
   certificates and keys not managed by OpenZiti (i.e. from public CAs like Let's Encrypt).
 
@@ -307,27 +307,28 @@ handler. This allows different events to be output in different manners or to di
 
 The `events` section is an array of named objects. The name (`jsonLogger` in the example below) is used for
 configuration error output only. Each logger has a `subscriptions` and `handler` section. The `subscriptions` section is
-an array of objects with fields associated with the event type. The list of valid event types and their options is as
-follows:
+an array of objects with fields associated with the event type. Specifying an event type will cause it to be output via
+the defined handler. If an event type is omitted, it will not be output. The list of valid event types and their options
+is as follows:
 
-- `edge.apiSessions`
-    - `include` - a string or array of strings that specify which API session events to include ("created" and/or "
+- `edge.apiSessions` - (optional) Edge API Session events
+    - `include` - (optional) a string or array of strings that specify which API session events to include ("created" and/or "
       deleted")
-- `edge.entityCounts`
-    - `interval` - the time interval to generate entity count events on (e.g. "5s", "5000ms", "1h")
-- `edge.sessions`
-    - `include` - a string or array of strings that specify which session events to include ("created" and/or "deleted")
-- `fabric.circuits`
-    - `include` - a string or array of strings that specify which circuit events to include ("created", "pathUpdated", "
+- `edge.entityCounts` - (optional) Edge entity counts (API Sessions, sessions, routers, etc.)
+    - `interval` - (optional) the time interval to generate entity count events on (e.g. "5s", "5000ms", "1h")
+- `edge.sessions`  - (optional) Edge Session events
+    - `include` - (optional) a string or array of strings that specify which session events to include ("created" and/or "deleted")
+- `fabric.circuits`  - (optional) Fabric circuit events
+    - `include` - (optional) a string or array of strings that specify which circuit events to include ("created", "pathUpdated", "
       deleted", "failed")
-- `fabric.links`
-- `fabric.routers`
-- `fabric.usage`
-    - `version` - a string representing the value of the usage event to use ("2' or "3")
-- `metrics`
-    - `sourceFilter` - a regular expression to match the source name value on
-    - `metricFilter` - a regular expression to match the metric name value on
-- `services`
+- `fabric.links` -  - (optional) Fabric link events
+- `fabric.routers` - (optional) Fabric router events
+- `fabric.usage` - (optional) Fabric usage events
+    - `version` - (optional) a string representing the value of the usage event to use ("2' or "3")
+- `metrics` - (optional) - System-wide metrics
+    - `sourceFilter` - (optional) a regular expression to match the source name value on
+    - `metricFilter` - (optional) a regular expression to match the metric name value on
+- `services` - (optional) Service events
 
 The `handler` section contains two or three properties depending on `type`:
 
