@@ -1,6 +1,7 @@
 name: mattermost-ziti-webhook
 on:
   issues:
+    types: [opened, deleted, transferred, closed, reopened]
   issue_comment:
   pull_request_review:
     types: [submitted]
