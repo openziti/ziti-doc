@@ -519,6 +519,37 @@ const config = {
           //   position: 'right'
           // },
           {
+            type: 'dropdown',
+            label: 'Docs',
+            position: 'right',
+            items: [
+              {
+                label: 'Blog',
+                href: 'https://openziti.io',
+              },
+              {
+                label: 'YouTube',
+                href: 'https://www.youtube.com/openziti',
+              },
+              {
+                label: 'Forum',
+                href: 'https://openziti.discourse.group',
+              },
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/openziti',
+              },
+              {
+                label: 'Ziggy\'s Twitter',
+                href: 'https://twitter.com/openziggy',
+              },
+              {
+                label: 'Reddit',
+                href: 'https://reddit.com/r/openziti',
+              }
+            ]
+          },
+          {
             href: 'https://openziti.discourse.group/',
             position: 'right',
             className: 'header-discourse-link',
