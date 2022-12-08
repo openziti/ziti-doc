@@ -15,9 +15,9 @@ jobs:
       - id: changed-files
         uses: tj-actions/changed-files@v34
         with:
-          files:
-            - docusaurus/**/*.md
-            - docusaurus/**/*.mdx
+          files: |
+            docusaurus/**/*.md
+            docusaurus/**/*.mdx
       - uses: articulate/actions-markdownlint@v1
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         with:
