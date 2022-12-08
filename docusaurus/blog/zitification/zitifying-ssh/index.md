@@ -121,7 +121,7 @@ Have a look at the code over at [GitHub][11]
 
 [1]: /blog/zitification/
 
-[2]: /docs/introduction/intro#overview-of-a-ziti-network
+[2]: /docs/introduction/#overview-of-a-ziti-network
 
 [3]: ./ssh-overview.svg
 
