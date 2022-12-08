@@ -18,7 +18,7 @@ Enter your new password:
 
 ## Use the Ziti Console {#ziti-console}
 
-If you installed the Ziti Console (ZAC) in your quickstart network then you can [login with your current password](../../../quickstarts//zac/index.md#login-and-use-zac) and change it.
+If you installed the Ziti Console (ZAC) in your quickstart network then you can [login with your current password](../../../quickstarts/zac/index.md#login-and-use-zac) and change it.
 
 Click on the person icon on the lower left and then select "Edit Profile" as shown to change your password.
 
