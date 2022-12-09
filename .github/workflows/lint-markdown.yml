@@ -12,16 +12,16 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
-      - id: changed-files
+      - id: changed_files
         uses: tj-actions/changed-files@v34
         with:
           files: |
             docusaurus/**/*.md
             docusaurus/**/*.mdx
       - uses: articulate/actions-markdownlint@v1
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        if: steps.changed_files.outputs.any_changed == 'true'
         with:
           config: .markdownlint.yaml
-          files: ${{ steps.changed-files.outputs.all_changed_files }}
+          files: ${{ steps.changed_files.outputs.all_changed_files }}
           ignore: node_modules
           version: 0.28.1
