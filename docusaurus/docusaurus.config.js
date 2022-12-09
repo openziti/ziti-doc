@@ -505,33 +505,37 @@ const config = {
           // },
           {
             type: 'dropdown',
-            label: 'Docs',
+            label: 'Links',
             position: 'right',
             items: [
               {
-                label: 'Blog',
-                href: 'https://openziti.io',
+                type: 'html',
+                value: '<a href="https://www.linkedin.com/company/netfoundry/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/li.svg"/>LinkedIn</span></a>'
               },
               {
-                label: 'YouTube',
-                href: 'https://www.youtube.com/openziti',
+                type: 'html',
+                value: '<a href="https://www.youtube.com/OpenZiti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/yt.svg"/>YouTube</span></a>'
               },
               {
-                label: 'Forum',
-                href: 'https://openziti.discourse.group',
+                type: 'html',
+                value: '<a href="https://twitter.com/OpenZiti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/twit.svg"/>Twitter</span></a>'
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/openziti',
+                type: 'html',
+                value: '<a href="https://reddit.com/r/openziti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="https://www.redditinc.com/assets/images/site/reddit-logo.png"/>Reddit</span></a>'
               },
               {
-                label: 'Ziggy\'s Twitter',
-                href: 'https://twitter.com/openziggy',
+                type: 'html',
+                value: '<hr style="margin-top: 5px; margin-bottom: 5px;" />'
               },
               {
-                label: 'Reddit',
-                href: 'https://reddit.com/r/openziti',
-              }
+                type: 'html',
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank">Open Ziti Test Kitchen</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/ziggy.png"/><a href="https://twitter.com/OpenZiggy" target="_blank">OpenZiggy\'s Twitter</span></a>'
+              },
             ]
           },
           {
