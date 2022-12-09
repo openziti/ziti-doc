@@ -24,4 +24,3 @@ jobs:
           config: .markdownlint.yaml
           files: ${{ steps.changed_files.outputs.all_changed_files }}
           ignore: node_modules
-          version: 0.28.1
