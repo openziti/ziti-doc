@@ -44,7 +44,7 @@ Example:
 db: ${ZITI_DATA}/db/ctrl.db
 ```
 
-### Identity
+### Identity {#identity-sections}
 
 OpenZiti uses a common framework for loading, storing, and processing certificate and private key configuration.
 Identity sections all have a similar format. The use of the defined certificates is up to the implementing application.

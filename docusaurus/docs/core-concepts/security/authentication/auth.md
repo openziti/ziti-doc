@@ -2,8 +2,6 @@
 title: Authentication
 ---
 
-# Authentication
-
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
 has begun when the client receives and API Session and is  complete when the API Session is fully authenticated.
 API Sessions are a high level security context that represents an authenticated session with either the Ziti [Edge Client API](/api/rest/edge-apis#edge-client-api)
@@ -214,7 +212,7 @@ by calling `DELETE /edge/management/v1/api-sessions<id>` with an empty body.
 
 A client may terminate its own API Session at any time by calling: `DELETE /edge/client/v1/current-api-session`
 
-# Primary Authentication
+## Primary Authentication
 
 Primary authentication in Ziti establishes and API Sessions identity principal and enabled Ziti to determine which
 secondary authentication factors are necessary for an API Session to become fully authenticated. If no secondary
@@ -290,7 +288,7 @@ of passwords](./password-management) is also available.
 Username/password authentication, while supported, is only suggested to be used for testing and R&D activities. For
 production environments JWT and X509 authentication is recommended.
 
-# Secondary Authentication
+## Secondary Authentication
 
 Secondary authentication is represented by a series of [Authentication Queries](#authentication-queries) on an API
 Session in the `authQueries` property. At present the following secondary authentication mechanisms are supported:
@@ -298,7 +296,7 @@ Session in the `authQueries` property. At present the following secondary authen
 - TOTP - Time-Based One-Time Password (aka Authenticator Apps)
 - JWT - JSON Web Tokens
 
-## TOTP: Time-Based One-Time Password
+### TOTP: Time-Based One-Time Password
 
 Ziti supports all authenticator application that implement [RFC6238](https://datatracker.ietf.org/doc/html/rfc6238)
 which includes all major and popular TOTP applications such as Google Authenticator, Microsoft Authenticator, Authy, and
@@ -313,13 +311,12 @@ or connect to any service. [Posture Check](../authorization/posture-checks) enfo
 [fully authenticate](#full-vs-partial-authentication), but based on [Service Policy](../authorization/policies/overview 
 restrict connection to specific services.
 
-## JWT
+### JWT
 
 Similar to JWT primary authentication, a valid JWT must be present in the `Authentication` header in the format of
 `bearer <jwt` on every request.
 
-
-# Authentication Requests
+## Authentication Requests
 
 ### Example UPDB Authentication Request
 
