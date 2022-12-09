@@ -47,7 +47,7 @@ const config = {
         id: 'docs-glossary',
         path: 'docs-glossary',
         routeBasePath: 'glossary',
-        sidebarPath: require.resolve('./sidebars.js'),
+        sidebarPath: false,
       },
     ],
     [
@@ -56,6 +56,15 @@ const config = {
         id: 'docs-guides',
         path: 'docs-guides',
         routeBasePath: 'guides',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-ops',
+        path: 'docs-ops',
+        routeBasePath: 'operations',
         sidebarPath: require.resolve('./sidebars.js'),
       },
     ],
@@ -70,7 +79,11 @@ const config = {
             from: ['/docusaurus'],
           },
           {
-            to: '/docs/introduction/intro',
+            to: '/docs/introduction/',
+            from: ['/docs/introduction/intro'],
+          },
+          {
+            to: '/docs/introduction/',
             from: ['/ziti/overview.html'],
           },
           {
@@ -138,7 +151,7 @@ const config = {
             from: ['/ziti/security/authorization/policies/overview.html'],
           },
           {
-            to: '/docs/manage/controller',
+            to: '/operations/controller',
             from: ['/ziti/manage/controller.html', '/ziti/manage/manage.html'],
           },
           {
@@ -294,12 +307,16 @@ const config = {
             from: ['/ziti/metrics/inspect.html'],
           },
           {
-            to: '/docs/manage/edge-router',
-            from: ['/ziti/manage/edge-router.html'],
+            to: '/operations/router/deployment',
+            from: ['/ziti/manage/edge-router.html', '/ziti/manage/router-overview.html'],
           },
           {
-            to: '/docs/manage/pki',
+            to: '/operations/pki',
             from: ['/ziti/manage/pki.html'],
+          },
+          {
+            to: '/operations/troubleshooting/troubleshooting',
+            from: ['/ziti/manage/troubleshooting.html'],
           },
           {
             to: '/blog/c-sdk-on-beaglebone',
@@ -340,14 +357,6 @@ const config = {
           {
             to: '/blog/zitification/zitifying-ssh',
             from: ['/articles/zitification/zitifying-ssh/index.html'],
-          },
-          {
-            to: '/docs/manage/router-overview',
-            from: ['/ziti/manage/router-overview.html'],
-          },
-          {
-            to: '/docs/manage/troubleshooting/',
-            from: ['/ziti/manage/troubleshooting.html'],
           },
           {
             to: '/docs/quickstarts/network/hosted',
@@ -475,7 +484,7 @@ const config = {
         },
         items: [
           {
-            to: '/docs/introduction/intro',
+            to: '/docs/introduction/',
             label: 'Docs',
             position: 'left',
             activeBaseRegex: `/docs/`,
@@ -493,10 +502,16 @@ const config = {
             activeBaseRegex: `/guides/`,
           },
           {
-            to: '/glossary/glossary',
+            to: '/glossary/',
             label: 'Glossary',
             position: 'left',
             activeBaseRegex: `/glossary/`,
+          },
+          {
+            to: '/operations/controller',
+            label: 'Ops',
+            position: 'left',
+            activeBaseRegex: `/operations/`,
           },
           // {
           //   to: '/blog',

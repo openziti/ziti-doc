@@ -8,7 +8,7 @@ grant access to a service as either a client or host. Posture Checks are defined
 assigned to them via attributes on the Posture Checks and attribute selectors on the Service Policy. This allows Posture
 Checks to be re-used.
 
-# Posture Data
+## Posture Data {#posture-data}
 
 Environmental state is saved as Posture Data - a set of values describing environmental state. Posture Data is provided 
 to the controller via Posture Response sent from the client. Posture Responses are constructed from Posture Queries 
@@ -47,7 +47,7 @@ The following Posture Check types are currently defined:
 - [Multi Process](#multi-process) - requires a client be running one or more applications
 - [Windows Domain](#windows-domain) - requires the client be a member of a specific domain
 
-## OS/ OS Version
+### Operating System {#os-os-version}
 
 The `OS` Posture Check type is used to verify a client's operating system and optionally version
 

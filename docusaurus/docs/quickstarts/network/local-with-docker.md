@@ -12,8 +12,8 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [Ziti Networks](../../introduction/01-Introduction.mdx) require
-a [Ziti Controller](/docs/manage/controller). Without a controller, edge routers won't be able to authorize new
+All [Ziti Networks](../../introduction/index.mdx) require
+a [Ziti Controller](/operations/controller). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
 ### Required - Volume Mount
@@ -22,7 +22,7 @@ Running Ziti locally via Docker will require you to mount a common folder which 
 network. Without a volume mount, you'll be forced to figure out how to get the PKI in place correctly. While this is a
 straightforward process once you know how to do it, when you're getting started this is undoubtedly complicated. We
 recommend that if you're starting out (or if you just don't want to be bothered with these details) you should just
-create a folder and volume mount that folder. It's expected that this volume mount map to `/persistent/pki` inside the
+create a folder and volume mount that folder. It's expected that this volume is mounted on `/persistent/pki` inside the
 container.
 
 ### Required - Known Name
@@ -87,7 +87,7 @@ docker run \
 
 ## Edge Router
 
-At this point you should have a [Ziti Controller](/docs/manage/controller) running. You should have created your
+At this point you should have a [Ziti Controller](/operations/controller) running. You should have created your
 Docker network as well as creating the volume mount. Now it's time to connect your first edge router. The same Docker
 image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
@@ -111,6 +111,7 @@ docker run \
 ```
 
 If you want to create a second edge router, you'll need to override the router port, don't forget to export that port too
+
 ```bash
 docker run \
   -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-2 \
