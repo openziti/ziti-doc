@@ -6,23 +6,21 @@ available as well, also served directly from the controller. There are two main 
 
 ## Client API
 
-The client api services are used by endpoints to interact with the [Ziti Network](/docs/introduction/intro).
+The client api services are used by endpoints to interact with the [Ziti Network](/docs/introduction/).
 These services are necessary to authenticate, enroll, return services and fetch other information related to the 
 endpoint's participating in the network.
 
 ### Download the Client API Spec
 
-The client api spec can be downloaded from your controller at the following url (replace "${CONTROLLER_URL}" accordingly)
-[https://${CONTROLLER_URL}/edge/client/v1/docs](https://${CONTROLLER_URL}/edge/client/v1/docs).
+The client api spec can be downloaded from your controller, e.g., `https://ctrl.example.com:1280/edge/client/v1/docs`.
 
 ## Management API
 
-The management api is used to configure, manage, and maintain the [Ziti Network](/docs/introduction/intro).
+The management api is used to configure, manage, and maintain the [Ziti Network](/docs/introduction/).
 
 ### Download the Management API Spec
 
-The client api spec can be downloaded from your controller at the following url (replace "${CONTROLLER_URL}" accordingly)
-[https://${CONTROLLER_URL}/edge/management/v1/docs](https://${CONTROLLER_URL}/edge/management/v1/docs).
+The client api spec can be downloaded from your controller, e.g., `https://ctrl.example.com:1280/edge/management/v1/docs`.
 
 ## Example
 

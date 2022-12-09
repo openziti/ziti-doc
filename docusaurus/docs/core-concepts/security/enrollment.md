@@ -4,7 +4,7 @@ Enrollment is the process of some Edge client or Edge Router associating itself 
 results in the creation of an identity or associating security credentials with a pre-provisioned identity.
 Ziti Router enrollment is exclusively associating security credentials with a pre-provisioned Edge Router.
 
-# Routers
+## Routers
 
 Upon creation of an Edge Router, enrollment details in the form of a JWT that acts as a one-time-token become 
 available in the `enrollmentJWT` field.
@@ -38,11 +38,11 @@ To enroll a router, deliver the `enrollmentJWT` to the host that will run the Ed
 
 `ziti-router enroll -j <jwt_path>`
 
-## Router Enrollment Extension
+### Router Enrollment Extension
 
 Routers will automatically maintain their enrollment by refreshing their certificates seven days before they expire.
 
-# Clients
+## Clients
 
 Client enroll in one of two major categories:
 
@@ -51,18 +51,14 @@ Client enroll in one of two major categories:
 - post-provisioned - an identity is created during enrollment
   - Auto CA
 
-
-## OTT Enrollment
+### OTT Enrollment
 
 OTT Enrollment involves creating an identity and then delivering the enrollment JWT to client software that can then
 complete enrollment.
 
+#### Create
 
-### Create
-
-#### Ziti CLI
-
-The Ziti CLI will 
+##### Ziti CLI
 
 `ziti edge create identity [device|service|user] test-user10 -j ./my.token.jwt`
 
@@ -115,16 +111,16 @@ The Ziti CLI will
 Alternatively, enrollments for an identity can be reviewed at `/edge/management/v1/identities/<id>/enrollments` or
 `/edge/management/v1/enrollments` or `ziti edge list enrollments`.
 
-## OTT CA Enrollment
+### OTT CA Enrollment
 
 OTT CA Enrollment requires that the enrolling client also has an existing client certificate signed by a 
 [3rd Party CA](./authentication/third-party-cas). When creating an identity the `id` of the target
 [3rd Party CA](./authentication/third-party-cas) is specified.
 
+#### Create
 
-### Create
+##### Edge Management API
 
-#### Edge Management API
 `POST /edge/management/v1/identities`
 ```json
 {
@@ -142,7 +138,7 @@ OTT CA Enrollment requires that the enrolling client also has an existing client
 
 An enrollment JWT can be retrieved in the same manner as [OTT Enrollment](#ott-enrollment)
 
-## Auto CA Enrollment
+### Auto CA Enrollment
 
 Auto CA enrollment allows a [3rd Party CA](./authentication/third-party-cas) to have clients enroll with a
 Ziti network without first creating an identity or distributing a JWT enrollment token. Create a
@@ -161,8 +157,8 @@ The default format is `[caName] - [commonName]`.
 
 Identity names are unique and if a collision occurs, incrementing numbers are appended.
 
-## Client Re-Enrollment
+### Client Re-Enrollment
 
 Clients may request to extend enrollments that generated x509 certificates if the client certificate was issued by
 Ziti. If the client's certificate was issued by a [3rd Party CA](./authentication/third-party-cas), the
-client certificate renewal must be handle outside of Ziti.
+client certificate renewal must be handled outside of Ziti.

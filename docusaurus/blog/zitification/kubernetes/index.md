@@ -228,7 +228,7 @@ Once you've deployed Ziti into the Kubernetes cluster you're not done there. Now
 
 [7]: https://github.com/openziti-incubator/kubectl
 
-[8]: /docs/introduction/intro#overview-of-a-ziti-network
+[8]: /docs/introduction/
 
 [9]: https://github.com/openziti/ziti/releases/latest
 
