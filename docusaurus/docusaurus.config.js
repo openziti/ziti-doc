@@ -92,7 +92,7 @@ const config = {
           },
           {
             to: '/docs/quickstarts/network/',
-            from: ['/ziti/quickstarts/quickstart-overview.html'],
+            from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html'],
           },
           {
             to: '/api/ziti-sdk-csharp',

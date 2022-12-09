@@ -13,6 +13,7 @@ while read; do
 done <<URLS
 /ziti/overview.html
 /ziti/quickstarts/quickstart-overview.html
+/ziti/quickstarts/networks-overview.html
 /index.html
 /ziti/quickstarts/network/local-no-docker.html
 /ziti/quickstarts/network/hosted.html
