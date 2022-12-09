@@ -51,12 +51,12 @@ you can perform the following steps.
 1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
    Ziti helper script, you need to in order to get the necessary function.
 
-    ```bash
-    createZacSystemdFile
-    sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
-    sudo systemctl daemon-reload
-    sudo systemctl enable --now ziti-console
-    ```
+   ```bash
+   createZacSystemdFile
+   sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
+   sudo systemctl daemon-reload
+   sudo systemctl enable --now ziti-console
+   ```
 
    If you do not have systemd installed or if you just wish to start ZAC you can simply issue:
 
