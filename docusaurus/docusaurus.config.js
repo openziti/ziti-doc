@@ -520,7 +520,7 @@ const config = {
           // },
           {
             type: 'dropdown',
-            label: 'Docs',
+            label: 'Ziti Docs',
             position: 'right',
             items: [
               {
@@ -532,12 +532,27 @@ const config = {
                 href: 'https://www.youtube.com/openziti',
               },
               {
-                label: 'Forum',
-                href: 'https://openziti.discourse.group',
-              },
-              {
                 label: 'Twitter',
                 href: 'https://twitter.com/openziti',
+              },
+              {
+                href: 'https://github.com/openziti/ziti',
+                label: 'GitHub',
+                className: 'header-github-link',
+              },
+              {
+                label: 'Forum',
+                href: 'https://openziti.discourse.group',
+                className: 'header-discourse-link',
+              },
+              {
+                type: 'html',
+                value: '<hr class="dropdown-separator">',
+              },
+              {
+                href: 'https://github.com/openziti-test-kitchen',
+                label: 'GitHub Test Kitchen',
+                className: 'header-github-link',
               },
               {
                 label: 'Ziggy\'s Twitter',
@@ -548,16 +563,6 @@ const config = {
                 href: 'https://reddit.com/r/openziti',
               }
             ]
-          },
-          {
-            href: 'https://openziti.discourse.group/',
-            position: 'right',
-            className: 'header-discourse-link',
-          },
-          {
-            href: 'https://github.com/openziti/ziti',
-            position: 'right',
-            className: 'header-github-link',
           },
         ],
       },
