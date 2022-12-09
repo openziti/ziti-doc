@@ -510,6 +510,10 @@ const config = {
             items: [
               {
                 type: 'html',
+                value: '<div class="text-divider"><p>Socials</p></div>'
+              },
+              {
+                type: 'html',
                 value: '<a href="https://www.linkedin.com/company/netfoundry/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/li.svg"/>LinkedIn</span></a>'
               },
               {
@@ -526,7 +530,11 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<hr style="margin-top: 5px; margin-bottom: 5px;" />'
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/ziggy.png"/><a href="https://twitter.com/OpenZiggy" target="_blank">OpenZiggy\'s Twitter</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<div class="text-divider"><p>Other</p></div>'
               },
               {
                 type: 'html',
@@ -534,7 +542,11 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/ziggy.png"/><a href="https://twitter.com/OpenZiggy" target="_blank">OpenZiggy\'s Twitter</span></a>'
+                value: '<a href="https://zeds.openziti.org" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/zeds.png"/>ZEDS</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://www.linkedin.com/company/netfoundry/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/nf.svg"/>CloudZiti</span></a>'
               },
             ]
           },

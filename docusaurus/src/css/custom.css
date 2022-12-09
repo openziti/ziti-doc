@@ -382,3 +382,20 @@ float: right;
   flex-wrap: nowrap;
   width: 180px;
 }
+
+.text-divider {
+  display: flex;
+  align-items: center;
+}
+
+.text-divider::before,
+.text-divider::after {
+  content: '';
+  height: 1px;
+  background-color: silver;
+  flex-grow: 1;
+}
+.text-divider p {
+  padding-left: 5px;
+  padding-right: 5px;
+}
