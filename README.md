@@ -46,7 +46,7 @@ Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this sit
 
 [A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site, but doesn't make any changes.
 
-With these scripts, you can check for broken links to other sites and redirects from other sites.
+With these scripts, you can check for broken links to other sites and redirects from known permalinks.
 
 * [check-broken-links.sh](./check-broken-links.sh): uses `docker` to run `muffet`
 
