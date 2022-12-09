@@ -2,8 +2,6 @@
 title: Ziti Admin Console
 ---
 
-import CliChangeUpdb from '../../_cli-change-password.md'
-
 The Ziti Administration Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and 
 explore a [Ziti Network](../../introduction/index.mdx).
 
@@ -188,6 +186,4 @@ internet search should show you how to accomplish this.
    3. Example using AWS "host it anywhere":
       ![host it anywhere](./zac_configure_hia.png)
 
-3. Optionally, change admin's password.
-
-   <CliChangeUpdb/>
+3. Optionally, [**change admin's password**](../../quickstarts/network/help/change-admin-password.md#ziti-console)
