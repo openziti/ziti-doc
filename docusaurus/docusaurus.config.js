@@ -514,10 +514,6 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<a href="https://www.linkedin.com/company/netfoundry/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/li.svg"/>LinkedIn</span></a>'
-              },
-              {
-                type: 'html',
                 value: '<a href="https://www.youtube.com/OpenZiti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/yt.svg"/>YouTube</span></a>'
               },
               {
@@ -547,6 +543,10 @@ const config = {
               {
                 type: 'html',
                 value: '<a href="https://www.linkedin.com/company/netfoundry/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/nf.svg"/>CloudZiti</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://www.linkedin.com/company/netfoundry/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/li.svg"/>NetFoundry</span></a>'
               },
             ]
           },
