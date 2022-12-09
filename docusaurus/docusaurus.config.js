@@ -315,7 +315,7 @@ const config = {
             from: ['/ziti/manage/pki.html'],
           },
           {
-            to: '/operations/troubleshooting/troubleshooting',
+            to: '/operations/troubleshooting/',
             from: ['/ziti/manage/troubleshooting.html'],
           },
           {
