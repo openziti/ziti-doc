@@ -186,4 +186,4 @@ internet search should show you how to accomplish this.
    3. Example using AWS "host it anywhere":
       ![host it anywhere](./zac_configure_hia.png)
 
-3. Optionally, [change admin's password](../../quickstarts/network/help/change-admin-password.md#ziti-console)
+3. Optionally, [**change admin's password**](../../quickstarts/network/help/change-admin-password.md#ziti-console)
