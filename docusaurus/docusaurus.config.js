@@ -520,49 +520,60 @@ const config = {
           // },
           {
             type: 'dropdown',
-            label: 'Ziti Docs',
+            label: 'Links',
             position: 'right',
             items: [
               {
-                label: 'Blog',
-                href: 'https://openziti.io',
-              },
-              {
-                label: 'YouTube',
-                href: 'https://www.youtube.com/openziti',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/openziti',
-              },
-              {
-                href: 'https://github.com/openziti/ziti',
-                label: 'GitHub',
-                className: 'header-github-link',
-              },
-              {
-                label: 'Forum',
-                href: 'https://openziti.discourse.group',
-                className: 'header-discourse-link',
+                type: 'html',
+                value: '<div class="text-divider"><p>Socials</p></div>'
               },
               {
                 type: 'html',
-                value: '<hr class="dropdown-separator">',
+                value: '<a href="https://www.youtube.com/OpenZiti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/yt.svg"/>YouTube</span></a>'
               },
               {
-                href: 'https://github.com/openziti-test-kitchen',
-                label: 'GitHub Test Kitchen',
-                className: 'header-github-link',
+                type: 'html',
+                value: '<a href="https://twitter.com/OpenZiti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/twit.svg"/>Twitter</span></a>'
               },
               {
-                label: 'Ziggy\'s Twitter',
-                href: 'https://twitter.com/openziggy',
+                type: 'html',
+                value: '<a href="https://reddit.com/r/openziti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="https://www.redditinc.com/assets/images/site/reddit-logo.png"/>Reddit</span></a>'
               },
               {
-                label: 'Reddit',
-                href: 'https://reddit.com/r/openziti',
-              }
+                type: 'html',
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/ziggy.png"/><a href="https://twitter.com/OpenZiggy" target="_blank">OpenZiggy\'s Twitter</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<div class="text-divider"><p>Other</p></div>'
+              },
+              {
+                type: 'html',
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank">OpenZiti Test Kitchen</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://zeds.openziti.org" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/zeds.png"/>ZEDS</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://netfoundry.io/pricing/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/nf.svg"/>CloudZiti</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://www.linkedin.com/company/netfoundry/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/li.svg"/>NetFoundry</span></a>'
+              },
             ]
+          },
+          {
+            href: 'https://openziti.discourse.group/',
+            position: 'right',
+            className: 'header-discourse-link',
+          },
+          {
+            href: 'https://github.com/openziti/ziti',
+            position: 'right',
+            className: 'header-github-link',
           },
         ],
       },
