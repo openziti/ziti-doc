@@ -379,7 +379,7 @@ const config = {
             from: ['/ziti/quickstarts/services/index.html'],
           },
           {
-            to: '/docs/quickstarts/zac/installation',
+            to: '/docs/quickstarts/zac/',
             from: ['/ziti/quickstarts/zac/installation.html'],
           },
           {
