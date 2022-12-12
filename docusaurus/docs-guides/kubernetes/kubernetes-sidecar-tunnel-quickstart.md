@@ -6,7 +6,7 @@ container.
 
 ## Overview
 
-The [Ziti Network Quickstart](https://openziti.github.io/ziti/quickstarts/networks-overview.html)
+The [Ziti Network Quickstart](https://openziti.github.io/ziti/quickstarts/overview.html)
 walked you through standing up a Ziti instance and accessing a Ziti service from your workstation with 
 `ziti-tunnel`. In this guide we'll deploy the same `ziti-tunnel` client, but instead of running it from the
 command line we will deploy it in a sidecar container in a Kubernetes Pod.
