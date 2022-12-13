@@ -529,19 +529,19 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<a href="https://www.youtube.com/OpenZiti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/yt.svg"/>YouTube</span></a>'
+                value: '<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/yt.svg"/>YouTube</span></a>'
               },
               {
                 type: 'html',
-                value: '<a href="https://twitter.com/OpenZiti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/twit.svg"/>Twitter</span></a>'
+                value: '<a href="https://twitter.com/OpenZiti" target="_blank" title="OpenZiti on Twitter"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/twit.svg"/>Twitter</span></a>'
               },
               {
                 type: 'html',
-                value: '<a href="https://reddit.com/r/openziti" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="https://www.redditinc.com/assets/images/site/reddit-logo.png"/>Reddit</span></a>'
+                value: '<a href="https://reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="https://www.redditinc.com/assets/images/site/reddit-logo.png"/>Reddit</span></a>'
               },
               {
                 type: 'html',
-                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/ziggy.png"/><a href="https://twitter.com/OpenZiggy" target="_blank">OpenZiggy\'s Twitter</span></a>'
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/ziggy.png"/><a href="https://twitter.com/OpenZiggy" target="_blank" title="OpenZiggy on Twitter">Ziggy</span></a>'
               },
               {
                 type: 'html',
@@ -549,19 +549,15 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank">OpenZiti Test Kitchen</span></a>'
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project incubator">OpenZiti Test Kitchen</span></a>'
               },
               {
                 type: 'html',
-                value: '<a href="https://zeds.openziti.org" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/zeds.png"/>ZEDS</span></a>'
+                value: '<a href="https://zeds.openziti.org" target="_blank" title="Developer Sandbox"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/zeds.png"/>ZEDS</span></a>'
               },
               {
                 type: 'html',
-                value: '<a href="https://netfoundry.io/pricing/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/nf.svg"/>CloudZiti</span></a>'
-              },
-              {
-                type: 'html',
-                value: '<a href="https://www.linkedin.com/company/netfoundry/" target="_blank"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/li.svg"/>NetFoundry</span></a>'
+                value: '<a href="https://netfoundry.io/pricing/" target="_blank" title="NetFoundry-hosted Ziti"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="img/nf.svg"/>CloudZiti</span></a>'
               },
             ]
           },
@@ -569,11 +565,13 @@ const config = {
             href: 'https://openziti.discourse.group/',
             position: 'right',
             className: 'header-discourse-link',
+            title: 'Forum'
           },
           {
             href: 'https://github.com/openziti/ziti',
             position: 'right',
             className: 'header-github-link',
+            title: 'GitHub'
           },
         ],
       },
