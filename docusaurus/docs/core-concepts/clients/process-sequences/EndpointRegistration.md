@@ -14,5 +14,5 @@
 8. The endpoint generates a Certificate Signing Request and forwards it to the controller along with an enrollment request. 
     - The token value (jti) in the JWT is used as a unique identifier for the controller to verify the endpoint.  That token is held by the controller as well when created, and then deleted when it is "used", rending the JWT useless after the enrollment.
 9. The controller validates the token value, and the information included in the CSR, signs the certificate, and returns it to the endpoint.
-10. The ednpoint stores the signed certificate.
+10. The endpoint stores the signed certificate.
 The endpoint is now registered to the network, and has all the necessary certificates to identify itself and participate.

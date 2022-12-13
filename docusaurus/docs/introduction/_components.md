@@ -118,7 +118,7 @@ granted to access to the same edge router or edge routers.
 #### Role Attributes
 
 Entities such as identities, services and edge routers can be added to
-policies explicity, either by id or name. Entities can  also be tagged
+policies explicitly, either by id or name. Entities can  also be tagged
 with role attributes. Role attributes are simple strings like `sales`,
 `Boston`, `us-employees` or `support`. Their meaning is decided by the
 administrator. Policies can include entities by specifying a set of role

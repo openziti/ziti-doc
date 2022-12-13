@@ -25,7 +25,7 @@ The Zero Trust is maintained between Application Hosts, and the encryption termi
 
 ## Network Access (ZTNA)
 
-The Zero Trust is only maintained batween Ziti Private Edge Routers, and the encryption is terminated at Ziti Private Edge Routers
+The Zero Trust is only maintained between Ziti Private Edge Routers, and the encryption is terminated at Ziti Private Edge Routers
 &nbsp;
 
 ![image](/img/deployment-architecture/ZTNA.v2.png)

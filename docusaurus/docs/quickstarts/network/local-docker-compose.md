@@ -190,7 +190,7 @@ results: 1-5 of 5
 
 We can see all the routers are online - excellent.
 
-### Test - Edge Router Identites
+### Test - Edge Router Identities
 
 In this compose file, we have used a script that adds an identity for each of our edge routers as well. We can see those
 by running `ziti@724087d30014:/persistent$ ziti edge list identities`:

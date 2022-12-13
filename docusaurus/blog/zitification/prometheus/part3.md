@@ -56,7 +56,7 @@ With your developer access you should be able to navigate your browser to http:/
 
 > [!NOTE]
 > We won't dwell on this for long in this article but notice that this is showing off another superpower of OpenZiti, private DNS. 
-> Notice that you were able to browse to a totally fictious domain name: kubea.prometheus.svc. ".svc" is **not** a legitimate top level 
+> Notice that you were able to browse to a totally fictitious domain name: kubea.prometheus.svc. ".svc" is **not** a legitimate top level 
 > domain. 
 > [Look at the full list of top level domains starting with S](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#S). You 
 > won't find ".svc" on that list at this time
