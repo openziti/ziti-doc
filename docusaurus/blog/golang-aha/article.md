@@ -311,7 +311,7 @@ func (self invalidate) Handle(p *Processor) {
 
 ## Type Aliases
 As we demonstrated in the previous example we can alias a type and add functions to it, usually
-to satify some interface.
+to satisfy some interface.
 
 ```
 type invalidate string
