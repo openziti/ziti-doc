@@ -36,7 +36,7 @@ You will want to go to [the OpenSC Project](https://github.com/OpenSC/OpenSC/wik
 `pkcs11-tool` which is used to interact with the HSMs.
 
 The [first quickstart](./softhsm.mdx) is based on [softhsm](https://www.opendnssec.org/softhsm/). This one focuses on software that
-provides an *emulated* HSM. This is useful for learning and understandin but it is not an actual HSM. Being software it
+provides an *emulated* HSM. This is useful for learning and understanding but it is not an actual HSM. Being software it
 doesn't have the important benefit of being a physical device but it does have one substantial advantage; it's entirely
 free.
 

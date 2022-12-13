@@ -3,7 +3,7 @@
 ## Prerequisite
 
 * Linux - Documentation is run routinely by our CI
-* Windows - Developed with [Windows Subsytem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+* Windows - Developed with [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 * Doxygen - [Doxygen](http://www.doxygen.nl/) is used to generate the api documentation for the C SDK and is
   necessary to be on the path
 
@@ -14,14 +14,14 @@ static content. Github has a few options for where you can put your doc at this 
 main branch named 'docs' or a special branch that still works named "gh-pages". This project is currently configured
 to use the main branch and docs folder.
 
-The best/easiest thing to do in order to build these docs is to have Windows Subsytem for Linux installed or any shell
+The best/easiest thing to do in order to build these docs is to have Windows Subsystem for Linux installed or any shell
 which can execute a `.sh` script. As of 2020 there's a multitude of ways to get a bash/shell interpreter in windows.
 It's not feasible to test all these shells to make sure this script works so it's encouraged that you use a linux-based
-flavor of bash. If the script doesn't funtion - open an [issue](./issues) and someone will look into it.
+flavor of bash. If the script doesn't function - open an [issue](./issues) and someone will look into it.
 
 After cloning this repository open the bash shell and execute the [gendoc.sh](./gendoc.sh) script. The script has a few
 flags to pass that mostly controls the cleanup of what the script does. In general, it's recommended you use the -w flag
-so that warngings are treated as errors. 
+so that warnings are treated as errors. 
 
 Expected gendoc.sh usage: `./gendoc.sh -w`
 

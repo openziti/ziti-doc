@@ -26,7 +26,7 @@ journalctl -xeu ziti-edge-tunnel.service
 You may inspect the loaded identity and router info for a running `ziti-edge-tunnel` by dumping it to stdout or the systemd journal with an IPC command, or you may signal to dump the identities' info to a file.
 
   ```bash
-  # dump indentities info to std our journal if systemd unit with IPC command
+  # dump identities info to std our journal if systemd unit with IPC command
   ./ziti-edge-tunnel dump
   ```
 

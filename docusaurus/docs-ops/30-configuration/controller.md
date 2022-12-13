@@ -366,12 +366,12 @@ events:
 ### `healthChecks`
 
 The `healthChecks` section configures how often health checking is performed. As of now, health checks are limited
-to ensuring the internal database has not deadlocked by attempting to aquire a locking transaction on some interval.
+to ensuring the internal database has not deadlocked by attempting to acquire a locking transaction on some interval.
 
 - `boltCheck` - (optional) bbolt specific configuration
     - `interval` - (optional) how often to try entering a bolt read transaction, defaults to 30 seconds
     - `timeout` - (optional) how long to wait for a transaction before timing out, defaults to 15 seconds
-    - `initialDelay` - (optional) how long to wait on startup before performing the first check, defaults to 15 secconds
+    - `initialDelay` - (optional) how long to wait on startup before performing the first check, defaults to 15 seconds
 
 ```yaml
 healthChecks:

@@ -94,7 +94,7 @@ codes are not treated as a valid value.
 
 ### QR Code
 
-To aid in enrollment, the current enrollment's `provisioningUrl` may be retrieved as a QR code. As long as an oustanding
+To aid in enrollment, the current enrollment's `provisioningUrl` may be retrieved as a QR code. As long as an outstanding
 MFA TOTP enrollment is active an image is available at: `GET /edge/client/v1/current-identity/mfa/qr-code`
 
 ### Removing/Unenrolling

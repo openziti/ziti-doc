@@ -100,12 +100,12 @@ pods into this Kubernetes cluster. When done, the Kubernetes cluster will look s
   overlay network. Instead, we will follow a more traditional model of listening on the underlay at a known ip:port combination. We'll 
   install this pod using a chart from the OpenZiti charts repository.
 * Pod 3. **reflectz**. This pod represents the workload which we want to monitor. This is another chart provided by the OpenZiti chart 
-  repository and will also be installed with hlem. If you are interested in viewing the source code for this project you can find it on 
+  repository and will also be installed with helm. If you are interested in viewing the source code for this project you can find it on 
   [GitHub here](https://github.com/nf-npieros/sdk-golang/tree/feature/reflect-prometheus)
 
 > [!NOTE]
 > Running the ziti cli commands shown below as shown will expect you to have the ziti binary on your path. Also it is expected that all 
-> the comands run will run from the same "development" machine with the expected tools available. Reach out on discourse if you get stuck.
+> the commands run will run from the same "development" machine with the expected tools available. Reach out on discourse if you get stuck.
 
 ### Pod 1 - `ziti-host`
 
@@ -206,7 +206,7 @@ ziti edge create service-policy "kubeA.reflect.svc.dial.scrape" Dial \
 
 #### Deploy `reflectz`
 
-With the identity enrolled, we can now install the helm chart from openziti, and install our demonstraction workload: `reflectz`. Notice 
+With the identity enrolled, we can now install the helm chart from openziti, and install our demonstration workload: `reflectz`. Notice 
 that to deploy `reflectz` we need to supply an identity to the workload using `--set-file reflectIdentity`. This identity will be used 
 to 'Bind' the services the workload exposes. We also need to define what the service names are we want to allow that identity to bind. 
 We do this using the `--set serviceName` and `--set prometheusServiceName` flags.

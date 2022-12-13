@@ -226,7 +226,7 @@ repo_gpgcheck=1
 </TabItem>
 </Tabs>
 
-2. Run `sudo yum update` to refresh your repodata cache. Optionally, you may wish to also install all available updates.
+2. Run `sudo yum update` to refresh your repo data cache. Optionally, you may wish to also install all available updates.
 2. Run `sudo yum install ziti-edge-tunnel` to install the RPM.
 2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
 2. Enable and start the service

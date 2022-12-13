@@ -23,17 +23,17 @@ quickstart. That means limited context will be provided for each step. When appr
 context or a comment included to aid in the understanding of what is happening. Most, if not all, of these commands
 are easily found in the search engine of choice.
 
-## Prerequistites
+## Prerequisites
 
 * [YubiKey 5 nfc](https://www.yubico.com/products/yubikey-5-overview/) - You'll need one to use this
   quickstart!
 * [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a known
   location. Not required however this quickstart uses the `pkcs11-tool` to illustrate that the device is PKCS#11
   compliant. HSM manufacturers will generally provide a similar tool and often expand it's usage. See more below.
-  [yubico-piv-tool](https://developers.yubico.com/yubico-piv-tool/) - YubiKey privides a similar tool to the
+  [yubico-piv-tool](https://developers.yubico.com/yubico-piv-tool/) - YubiKey provides a similar tool to the
   `pkcs11-tool`. This tool is needed to be installed because it contains the pkcs#11 module (driver) for the HSM. As
   this is a tool specific to Yubico we've chosen to not use this in the following commands.
-* Ensure the YubiKey is factory reset. To avoid any compliations with existing information in the YubiKey ensure the
+* Ensure the YubiKey is factory reset. To avoid any complications with existing information in the YubiKey ensure the
   device is factory reset using the [YubiKey
   Manager](https://www.yubico.com/support/download/yubikey-manager/).
 * To successfully use the YubiKey, the libraries provided by the `yubico-piv-tool` must either be on the path
@@ -75,7 +75,7 @@ able to write a key into this location. The error you will see will indicate: `C
 
 ### Establish Environment Variables
 
-Open a command line and establish the following environment varibles. Note that for the YubiKey we do _not_ use id `02`
+Open a command line and establish the following environment variables. Note that for the YubiKey we do _not_ use id `02`
 as it appears to be reserved by the YubiKey.  The default SOPIN and PIN are used as well. When using the YubiKey Manager
 software the "SO PIN" corresponds to the "Management Key" while "pin" is the same both here and in the YubiKey Manager.
 
@@ -294,7 +294,7 @@ you update the path to include the folder of libykcs11-1.dll as additional libra
     # IF the above command doesn't work - run this command and get the id from the first edge-router.
     # ziti edge list edge-routers
 
-    # then use the id returned from the above command and put it into a variable for use in a momment
+    # then use the id returned from the above command and put it into a variable for use in a moment
     # EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
@@ -302,7 +302,7 @@ you update the path to include the folder of libykcs11-1.dll as additional libra
     ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
 
     # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
-    # send a request to wttr.in to retreive a weather forecast
+    # send a request to wttr.in to retrieve a weather forecast
     ziti edge delete service wttr.ziti
     ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
 

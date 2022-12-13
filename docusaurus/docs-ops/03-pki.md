@@ -93,7 +93,7 @@ feature for organizations wishing to administer and maintain the certificates us
 Network. A Ziti Network is capable of using third party PKIs as the trust mechanism for enrollment and authentication of
 clients for a Ziti Network.
 
-With the PKI being managed externalliy a Ziti Network is never in posession of the private key. This means the Ziti
+With the PKI being managed externally a Ziti Network is never in possession of the private key. This means the Ziti
 Network cannot maintain nor distribute certificates necessary for creating secure connections. The Ziti Network is
 only capable of verifying if the certificate presented was signed by the externally managed PKI.
 
@@ -123,7 +123,7 @@ the third party CA.
 
 After being submitted to the Ziti Controller, the third party CA will have the isCsrValidated field set to false
 indicating it is not yet ready for use. A second step is needed to ensure the third party CA is setup properly as a CA.
-This step ensures the third party CA provided is capable of fullfilling CSR requests. Clients attempting to connect to a
+This step ensures the third party CA provided is capable of fulfilling CSR requests. Clients attempting to connect to a
 Ziti Network using the third party CA will be rejected.
 
 To validate the third party CA a CSR must be generated and fulfilled by the third party CA to generate a certificate

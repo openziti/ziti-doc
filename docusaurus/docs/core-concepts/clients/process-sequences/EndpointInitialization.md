@@ -19,6 +19,6 @@
 	1.	Create routes for IPs to 100.64.0.0 block
 1. Collect latency information for ER selection
 1. Complete DNS initialization with Service names
-1. Periodically check for updates to services or other network config.  Polling controlled by app, including desktop edges and tunnelers, 10 or 15 seconds in OpenZiti releesed software.
+1. Periodically check for updates to services or other network config.  Polling controlled by app, including desktop edges and tunnelers, 10 or 15 seconds in OpenZiti released software.
 1. Update services, add or delete Edge Routers, etc. as necessary.
 

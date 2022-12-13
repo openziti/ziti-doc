@@ -147,7 +147,7 @@ The `/metrics` api requires TLS configuration in Prometheus. The Prometheus scra
 ```
 
 #### With Authentication
-It's a good idea to have metrics protected by a certificate to prevent neferious actors from pulling metrics about your network.  The Prometheus scrape configuration can be configured with a keystore for this purpose:
+It's a good idea to have metrics protected by a certificate to prevent nefarious actors from pulling metrics about your network.  The Prometheus scrape configuration can be configured with a keystore for this purpose:
 
 ```
  - job_name: ziti
@@ -228,7 +228,7 @@ The options to the curl command mean:
 The result should spit out a bunch of metrics.   If you see a `401` response then double-check that you've copied all of the bits from the certificate into the controller configuration file.
 
 #### Add the Key to Prometheus
-The key is added to Promtetheus by referencing the crt and key files from the Ziti scrape configuration. 
+The key is added to Prometheus by referencing the crt and key files from the Ziti scrape configuration. 
 
 Your scrape config will look something like this:
 
