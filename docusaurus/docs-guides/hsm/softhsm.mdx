@@ -14,11 +14,11 @@ context will be provided for each step. When appropriate there will be a small a
 understanding of what is happening and why.
 
 :::caution
-This quickstart intended audience is for more technically savvy indiviuals. You will need to be familar with the command
+This quickstart intended audience is for more technically savvy individuals. You will need to be familiar with the command
 line interface of your operating system.
 :::
 
-## Prerequistites
+## Prerequisites
 
 * [SoftHSMv2](https://www.opendnssec.org/softhsm/) is downloaded and installed in a known location
 * [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a known
@@ -46,7 +46,7 @@ Here's the list of steps we'll accomplish in this quickstart:
 
 ### Establish Environment Variables
 
-Open a command line and establish the following environment varibles. 
+Open a command line and establish the following environment variables.
 
 <Tabs>
 <TabItem value="env-var-linux" label="Linux/MacOS">
@@ -272,7 +272,7 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     # IF the above command doesn't work - run this command and get the id from the first edge-router.
     # ziti edge list edge-routers
 
-    # then use the id returned from the above command and put it into a variable for use in a momment
+    # then use the id returned from the above command and put it into a variable for use in a moment
     # EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
@@ -280,7 +280,7 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     
     # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
-    # send a request to wttr.in to retreive a weather forecast
+    # send a request to wttr.in to retrieve a weather forecast
     ziti edge delete service wttr.ziti
     ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
 
@@ -299,7 +299,7 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     REM run this command and get the id from the first edge-router.
     ziti edge list edge-routers
     
-    REM use the id returned from the above command and put it into a variable for use in a momment
+    REM use the id returned from the above command and put it into a variable for use in a moment
     SET EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     REM remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
@@ -307,7 +307,7 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
     
     REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
-    REM send a request to wttr.in to retreive a weather forecast
+    REM send a request to wttr.in to retrieve a weather forecast
     ziti edge delete service wttr.ziti
     ziti edge create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
 

@@ -60,7 +60,7 @@ steps:
 
 1. On the left side nav bar, click "Edge Services"
 2. In the top right corner of the screen click the "plus" image to add a new service
-3. Choose a name for the serivce. Enter "demo-weather"
+3. Choose a name for the service. Enter "demo-weather"
 4. Choose Router "ziti-gw01"
 5. For Endpoint Service choose:
     * protocol = tcp

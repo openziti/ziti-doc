@@ -2,7 +2,7 @@
 
 Configuring a Ziti Network's PKI can be confusing. Validating a single side of a mutual TLS connection is
 straightforward it becomes tedious to ensure all the certificates and cas in use are valid when you have a fully
-configured Ziti Network.  It's the goal of this page to make diagnosing PKI issues eaiser. This guide will also use the
+configured Ziti Network.  It's the goal of this page to make diagnosing PKI issues easier. This guide will also use the
 paths you will find in the Ziti Edge - Developer Edition. Change paths accordingly.
 
 ### Prerequisites
@@ -57,7 +57,7 @@ In your bash prompt copy and paste these two functions:
 
 ### Validating the PKI
 
-Every connection in a Ziti Network is mutally authenticated via X509 certificates. It is easiest to first identify the
+Every connection in a Ziti Network is mutually authenticated via X509 certificates. It is easiest to first identify the
 two components trying to communicate to isolate and minimize the configuration and files that need to be inspected.
 Below you will find sections relevant to each of the pieces of Ziti which connect.
 

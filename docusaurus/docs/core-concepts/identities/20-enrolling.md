@@ -61,7 +61,7 @@ This flow allows you to pre-create identities for a 3rd party CA with distinct r
 already been created on or distributed to the machine that is about to enroll and that the certificate presented is
 issued by a validated, [third party CA](/operations/pki#third-party-ca-optional).
 
-Follow these steps to enroll a 3rd Pary CA - one-time token identity:
+Follow these steps to enroll a 3rd Party CA - one-time token identity:
 
 * [create the Identity](./creating)
 * download or copy the JWT - this file contains the one-time token
