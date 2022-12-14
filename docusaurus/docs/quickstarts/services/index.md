@@ -1,5 +1,7 @@
+---
+title: Starting With Services
+---
 import CliLoginMd from '../../_cli-login.md'
-# Starting With Services
 
 Once you have your zero trust overlay network in place and you want to start using it, you'll be wondering where to begin. You can start 
 in a few different directions. Depending on your experience and what you're looking to do you'll have numerous directions to go in.
@@ -13,12 +15,13 @@ enroll that identity, and start making calls to the controller's REST API.
 
 ### Create an Identity
 
-Log into the controller; this process will differ depending on which quickstart you followed. For example, if you are 
-using docker quickstart you'll need to `exec` into the container.
+#### Log into the Controller
+This process will differ depending on which quickstart you followed. For example, if you are using docker quickstart 
+you'll need to `exec` into the container, for remotely hosted networks you will need to ssh into the remote host, etc.
 
 <CliLoginMd/>
 
-Once logged in, create an identity for yourself.
+#### Create an Identity
 
 ```shell
 ziti edge create identity user quickstart.user -a quickstart.rest.user -o quickstart.user.jwt
