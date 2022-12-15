@@ -205,9 +205,9 @@ Each xgress components are referenced to by `binding` name. The following `bindi
 - `proxy` - listener only - allows ingress TCP connections to connect directly to a `service` defined in `options`
 - `proxy_udp` - listener only - allows ingress UDP connections to connect directly to a `service` defined in `options`
 - `transport` - listener, dialer - allows ingress TCP connections to request a circuit for a service and for traffic to
-  dial to an underlay UDP service at a <host>:<port> address
+  dial to an underlay UDP service at a `<host>:<port>` address
 - `transport_udp` - listener, dialer - allows ingress UDP connections to request a circuit for a service and for traffic
-  to dial to an underlay UDP service at a <host>:<port> address
+  to dial to an underlay UDP service at a `<host>:<port>` address
 - `edge` - listener, dialer - allows multiplexed ingress connections from SDKs and connections to other SDKs hosting
   services
 

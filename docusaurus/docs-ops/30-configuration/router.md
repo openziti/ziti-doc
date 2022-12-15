@@ -295,7 +295,7 @@ other address. The `advertise` value should be externally routable.
 - `binding` - (required) the name of a [xgress component](conventions.md#xgress-components) that will provide the server
   side logic for the listener
 - `bind` - (required) the [address](conventions.md#addressing) that the listener should listen on
-- `advertise` (required) the <host>:<port> combination that external resources should use to reach this listener
+- `advertise` (required) the `<host>:<port>` combination that external resources should use to reach this listener
 - `costTags` - (optional) an array of tags used during link cost calculations
 - `options` - (optional) options specified by the component specifically in addition to
   the [shared options](conventions.md#xgress-options)
