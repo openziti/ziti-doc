@@ -4,85 +4,9 @@ sidebar_label: Controller
 
 # Controller Configuration Reference
 
-OpenZiti uses configuration files for controllers that are in the [YAML](https://yaml.org/) format.
-
-## Conventions
-
-The following conventions apply to multiple areas of the configuration file.
-
-### Addressing
-
-Listening and dialing addresses in OpenZiti are in the format of `<protocol>:<ip-or-host>:<port>` format.
-
-For servers that are listening `<ip-or-host>` should be the address of an interface to listen on or "0.0.0.0" for all
-IPv4 interfaces or "::" for all IPv6 interfaces. `<port>` should be a valid port number that the server should listen
-on.
-
-For clients dialing a server the `<ip-or-host>` should be an IP address or hostname that resolves to the target
-server. `<port>` should be the port the server is listening on.
-
-For clients and server, the `<protocol>` section is the protocol used to host or initiate the connection. It may be one
-of the following values, however `tls` is suggested for most scenarios.
-
-- `tls`
-- `tcp`
-- `udp`
-- `dtls`
-- `ws`
-- `wss`
-- `transwarp`
-- `transwarptls`
-
-### Environment Variables
-
-All values in the configuration file support environment variable replacement. The environment variables are sourced
-from the scope of the executing process (i.e. controller, router). The syntax `${VARIABLE}` is used.
-
-Example:
-
-```yaml
-db: ${ZITI_DATA}/db/ctrl.db
-```
-
-### Identity {#identity-sections}
-
-OpenZiti uses a common framework for loading, storing, and processing certificate and private key configuration.
-Identity sections all have a similar format. The use of the defined certificates is up to the implementing application.
-So see their configuration sections for details on which values are utilized for what. This documentation provides an
-overview useful to understand the "default" assumptions. These sections can be formatted as YAML (as is the case for the
-router and controller configurations) or as JSON.
-
-- `cert` - (required) A string in the format of `<engine>:<value>` that defines a x509 client certificate
-- `key` - (required) A string in the format of `<engine>:<value>` that defines a private key used for `cert` and `server_cert`
-  if `server_key` is not defined
-- `server_cert` -(optional) A string in the format of `<engine>:<value>` that defines a x509 certificate, if not defined `cert` is used
-- `server_key` - (optional) A string in the format of `<engine>:<value>` that defines a private key for `server_cert`, if not
-  defined `key` is used if `server_cert` is defined
-- `ca` - (optional) A string in the format of `<engine>:<value>` that defines x509 certificate chain used to define trusted CAs
-- `alt_server_certs` - (optional) An array of objects with `server_cert` and `server_key` values use to add additional server
-  certificates and keys not managed by OpenZiti (i.e. from public CAs like Let's Encrypt).
-
-The `<engine>:<value>` format is used to define multiple different source types. If the `<engine>:` part is omitted, it
-is assumed to be `file:`. The following engines are supported:
-
-- `file` - indicates that `<value>` is the path to a file
-- `pem` - indicates that `<value>` is an inline PEM string
-
-Additional PKCS#11 engines such as `siometrics.so` and `authenta.so` may be used if the library are present on the host
-machine. This allows for access to hardware backed private keys.
-
-Example Identity Section (Client & Server use same key):
-
-```yaml
-identity:
-  cert: "file:ctrl-client.cert.pem"
-  server_cert: "pem:-----BEGIN CERTIFICATE-----\nMIIEtzCCAp+gAwIBAgICEA0wDQYJKoZIhvcNAQELBQAwgYsxCzAJBgNVBAYTAlVT..."
-  key: ctrl.key.pem
-  ca: ca-chain.cert.pem
-  alt_server_certs:
-    - server_cert: lets_encrypt.cert.pem
-    - server_key: lets_encrypt.key.pem
-```
+OpenZiti uses configuration files for controllers that are in the [YAML](https://yaml.org/) format. All configuration
+files are also subject to a set of [conventions](conventions.md) such as environment variable substitution, identity
+sections, and addressing formats.
 
 ## Sections
 
@@ -100,7 +24,7 @@ related configuration settings.
 - [`profile`](#profile) - enables profiling of controller memory and CPU statistics
 - [`trace`](#trace) - adds a peek handler to all controller messaging for debug purposes
 - [`web`](#web) - configures API presentation exposure
-- [`v` (version)](#version) - A special section to note the version of the configuration file, only `v: 3` is currently supported
+- [`v`](#v) - A special section to note the version of the configuration file, only `v: 3` is currently supported
 
 The standard OpenZit experience minimally requires the following sections:
 
@@ -109,8 +33,9 @@ The standard OpenZit experience minimally requires the following sections:
 - `identity`
 - `edge`
 - `web`
+- `v`
 
-Of those values, to start the controller only the `ctrl`, `db`, and `identity` sections are required. However, not
+Of those values, to start the controller only the `ctrl`, `db`, `v`, and `identity` sections are required. However, not
 including the `edge` section will start the controller in "fabric only" mode and will not support any edge functionality
 or concepts (identities, JWT enrollment, 3rd Party CAs, policies, etc.). Not including the `web` section will result in
 none of the REST APIs (Fabric Management API, Edge Client API, Edge Management API, Health Check API) being started.
@@ -158,25 +83,21 @@ protocol(s) used for router connections and how those connections are managed.
 
 - `listener` - (required) is in the format of `<protocol>:<interface>:<port>` format. The value set here must be
   resolvable by routers and correspond the routers `ctrl.endpoint` configuration value.
-  See [addressing](#addressing).
-- `options` - a set of optional connections options
-    - `maxQueuedConnects` - (optional) the maximum number of connections to be accepted but awaiting initial messaging
-    - `maxOutstandingConnects` - (optional) the maximum number of connection accepted and waiting for hello messaging to
-      complete
-    - `connectTimeoutMs` - (optional) the maximum number of milliseconds to wait for hello messaging to complete
-        - `writeTimeout` - (optional)  the maximum amount of time to wait when writing data to a connection
+  See [addressing](conventions#addressing).
+- `options` - a set of option which includes the below options and those defined
+  in [channel options](conventions.md#channel)
     - `newListener` - (optional) an `<protocol>:<interface>:<port>` address that is sent to routers to indicate a
       controller address migration. Should only be specified when the new listener address is reachable as clients will
       begin to use the new value on restart
 
-Example w/o Options:
+Example w/o options:
 
 ```yaml
 ctrl:
   listener: tls:127.0.0.1:6262
 ```
 
-Example w/ Options:
+Example w/ options:
 
 ```yaml
 ctrl:
@@ -184,8 +105,8 @@ ctrl:
   options:
     maxQueuedConnects: 1000
     maxOutstandingConnects: 16
-    connectTimeoutMs:       1000
-   	writeTimeout: 15s
+    connectTimeoutMs: 1000
+    writeTimeout: 15s
 ```
 
 ### `db`
@@ -229,7 +150,6 @@ edge:
   api:
     activityUpdateInterval: 90s
     activityUpdateBatchSize: 250
-    sessionTimeout - optional, default 10m
     sessionTimeout: 30m
     address: 127.0.0.1:1280
   enrollment:
@@ -240,6 +160,7 @@ edge:
       duration: 5m
     edgeRouter:
       duration: 5m
+
 ```
 
 #### `api`
@@ -314,16 +235,19 @@ the defined handler. If an event type is omitted, it will not be output. The lis
 is as follows:
 
 - `edge.apiSessions` - (optional) Edge API Session events
-    - `include` - (optional) a string or array of strings that specify which API session events to include ("created" and/or "
+    - `include` - (optional) a string or array of strings that specify which API session events to include ("created"
+      and/or "
       deleted")
 - `edge.entityCounts` - (optional) Edge entity counts (API Sessions, sessions, routers, etc.)
     - `interval` - (optional) the time interval to generate entity count events on (e.g. "5s", "5000ms", "1h")
 - `edge.sessions`  - (optional) Edge Session events
-    - `include` - (optional) a string or array of strings that specify which session events to include ("created" and/or "deleted")
+    - `include` - (optional) a string or array of strings that specify which session events to include ("created"
+      and/or "deleted")
 - `fabric.circuits`  - (optional) Fabric circuit events
-    - `include` - (optional) a string or array of strings that specify which circuit events to include ("created", "pathUpdated", "
+    - `include` - (optional) a string or array of strings that specify which circuit events to include ("created", "
+      pathUpdated", "
       deleted", "failed")
-- `fabric.links` -  - (optional) Fabric link events
+- `fabric.links` - - (optional) Fabric link events
 - `fabric.routers` - (optional) Fabric router events
 - `fabric.usage` - (optional) Fabric usage events
     - `version` - (optional) a string representing the value of the usage event to use ("2' or "3")
@@ -369,18 +293,15 @@ The `healthChecks` section configures how often health checking is performed. As
 to ensuring the internal database has not deadlocked by attempting to acquire a locking transaction on some interval.
 
 - `boltCheck` - (optional) bbolt specific configuration
-    - `interval` - (optional) how often to try entering a bolt read transaction, defaults to 30 seconds
-    - `timeout` - (optional) how long to wait for a transaction before timing out, defaults to 15 seconds
-    - `initialDelay` - (optional) how long to wait on startup before performing the first check, defaults to 15 seconds
+    - `interval` - (optional, 30s) how often to try entering a bolt read transaction
+    - `timeout` - (optional, 15s) how long to wait for a transaction before timing out
+    - `initialDelay` - (optional, 15s) how long to wait on startup before performing the first check
 
 ```yaml
 healthChecks:
   boltCheck:
-    # How often to try entering a bolt read tx. Defaults to 30 seconds
     interval: 30s
-    # When to timeout the check. Defaults to 15 seconds
     timeout: 15s
-    # How long to wait before starting the check. Defaults to 15 seconds
     initialDelay: 15s
 ```
 
@@ -389,7 +310,8 @@ healthChecks:
 The identity section includes the default server certificate and private key used for services hosted by the controller,
 alternate server certificates and keys to support SNI on hosted services, client certificate and private key when making
 connections, and the `ca` bundle that the controller will use when making connections and when bootstrapping identities
-and routers. See the general [identity](#identity-sections) over above.
+and routers. See the conventions that apply to all [identity](conventions.md#identity) sections for field level
+detail.
 
 ### `network`
 
@@ -411,12 +333,12 @@ be enabled in production environments without careful consideration.
     - `path` - (required) the path to output the pprof data
 - `memory` - (optional)
     - `path` - (required) the path to output the memprof data
-    - `intervalMs` (optional) the frequency to output memprof data (default 15s)
+    - `intervalMs` (optional, 15s) the frequency to output memprof data
 
 ```yaml
 profile:
-   cpu:
-       path: /home/plorenz/tmp/ctrl.cpu.pprof
+  cpu:
+    path: /home/user1/tmp/ctrl.cpu.pprof
   memory:
     path: ctrl.memprof
     intervalMs: 150000
@@ -436,92 +358,19 @@ trace:
 
 ### `web`
 
-The `web` section is powered by [XWeb](https://github.com/openziti/xweb). XWeb allows web APIs to be defined in code and
-exposed on multiple interfaces/networks through configuration alone.
-
-Example:
-
-```yaml
-web:
-  - name: all-apis-localhost
-    bindPoints:
-      - interface: 127.0.0.1:1280
-        address: 127.0.0.1:1280
-        newAddress: localhost:1280
-        identity:
-          cert:                 ctrl-client.cert.pem
-          server_cert:          ctrl-server.cert.pem
-          key:                  ctrl.key.pem
-          ca:                   ca-chain.cert.pem
-    options:
-      idleTimeout: 5000ms
-      readTimeout: 5000ms
-      writeTimeout: 100000ms
-      minTLSVersion: TLS1.2
-      maxTLSVersion: TLS1.3
-    apis:
-      - binding: health-checks
-      - binding: fabric
-      - binding: edge-management
-      - binding: edge-client
-```
-
-The structure of the `web` section is an array of API exposure options:
-
-```yaml
-web:
-  - name: API Exposure 1
-    ...
-  - name: API Exposure 2
-    ...
-```
-
-Each exposure has the following configuration options:
-
-- `name` - (required) a name used for logging and error messaging
-- `bindPoints` - (required) the interfaces, external addresses, and migration address options for this exposure
-- `apis` - (required) a list of APIs and their options from the list above
-- `options` - (optional) a set of options used to tune HTTP/TLS
-
-#### `bindPoints`
-
-`bindPoints` are used to instruct XWeb on where to listen for new connections. Each exposure can have multiple bind
-pints to have the same API listen on one or more interfaces/networks. Additionally, each interface listened on can have
-its own external address and migration address.
-
-- `interface` - (required) the interface and port to listen on ("0.0.0.0" for all IPv4 interfaces, "::" for all IPv6
-  interfaces)
-- `address` - (required) the host:port combination that external devices can use to reach the exposed interface (ip or
-  host name)
-- `newAddress` - (optional) when specified, `newAddress` will be sent to clients in the HTTP header `ziti-ctrl-address`
-
-`newAddress` should only be specified when clients can use the new host:port combination to reach the specified APIs.
-This setting is used to migrate APIs between ip/hostnames.
-
-#### `apis`
-
-The `apis` section defines which APIs will be hosted on this exposure. The controller has the following APIs defined:
+The `web` section follows the [conventions of XWeb](conventions.md#xweb).0 The controller has the following APIs
+defined:
 
 - `health-checks` - provides a health check API that allows remote parties to verify the health of the controller
 - `fabric` - the Fabric Management API which allows remote administration of a network
 - `edge-management` - the Edge Management API which allows remote administration of a network's edge components (
   identities, policies, authentication, etc.)
-- `edge-clietn` - the Edge Client API which allows clients to authenticate and request connections to services
+- `edge-client` - the Edge Client API which allows clients to authenticate and request connections to services
 
 Each API may have their own options, but currently do not.
 
-#### `options`
-
-- `idleTimeout` - (optional) the maximum amount of time to wait for the next request when keep-alives are enabled, if
-  IdleTimeout is zero, the value of ReadTimeout is used
-- `readTimeout` - (optional) the maximum duration for reading the entire request, including the body
-- `writeTimeout`  - (optional) the maximum duration before timing out writes of the response, it is reset whenever a new
-  request’s
-  header is read
-- `minTLSVersion` - (optional) the minimum TLS version to support (TLS1.1, TLS1.2, TLS1.3)
-- `maxTLSVersion` - (optional) the maximum TLS version to support (TLS1.1, TLS1.2, TLS1.3)
-
-### `v` (version) {#version}
+### `v`
 
 The `v` section is used to detect if the version file is supported by the OpenZiti binary read it. The current and only
 supported value is "3".
+
