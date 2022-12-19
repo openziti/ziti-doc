@@ -209,7 +209,7 @@ Each xgress components are referenced to by `binding` name. The following `bindi
 - `transport_udp` - listener, dialer - allows ingress UDP connections to request a circuit for a service and for traffic
   to dial to an underlay UDP service at a `<host>:<port>` address
 - `edge` - listener, dialer - allows multiplexed ingress connections from SDKs and connections to other SDKs hosting
-  services
+  services, requires an `advertise` option in the `options` section to be defined for external linking
 
 ### xgress Options
 

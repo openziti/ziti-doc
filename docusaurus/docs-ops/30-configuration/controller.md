@@ -374,3 +374,6 @@ Each API may have their own options, but currently do not.
 The `v` section is used to detect if the version file is supported by the OpenZiti binary read it. The current and only
 supported value is "3".
 
+```yaml
+v: 3
+```

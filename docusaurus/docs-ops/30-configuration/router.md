@@ -300,12 +300,27 @@ other address. The `advertise` value should be externally routable.
 - `options` - (optional) options specified by the component specifically in addition to
   the [shared options](conventions.md#xgress-options)
 
+
+```yaml
+listeners:
+  - binding: edge
+    address: tls:0.0.0.0:3022
+    options:
+      advertise: 127.0.0.1:3022
+```
+
 ### `metrics`
 
 The `metrics` section controls how metrics are communicated to the connection controller.
 
 - `reportInterval` - (optional, 1m) the interval of time to wait between crafting a new metrics message to be sent to the controller
 - `messageQueueSize` - (optional, 10) the maximum number of buffered metrics messages allowed to be queued to send to the controller
+
+```yaml
+metrics:
+  reportInterval: 1m
+  messageQueueSize: 10
+```
 
 ### `trace`
 
@@ -372,3 +387,7 @@ Each API may have their own options, but currently do not.
 
 The `v` section is used to detect if the version file is supported by the OpenZiti binary read it. The current and only
 supported value is "3".
+
+```yaml
+v: 3
+```
