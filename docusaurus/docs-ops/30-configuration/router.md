@@ -302,6 +302,11 @@ other address. The `advertise` value should be externally routable.
 
 ### `metrics`
 
+The `metrics` section controls how metrics are communicated to the connection controller.
+
+- `reportInterval` - (optional, 1m) the interval of time to wait between crafting a new metrics message to be sent to the controller
+- `messageQueueSize` - (optional, 10) the maximum number of buffered metrics messages allowed to be queued to send to the controller
+
 ### `trace`
 
 The `trace` section instructs the router to output incoming and outgoing messaging it receives. This setting is
