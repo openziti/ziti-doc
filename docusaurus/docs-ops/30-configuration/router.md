@@ -190,9 +190,10 @@ Each dialer currently supports a number of [shared options](conventions.md#xgres
 
 ### `edge`
 
-The `edge` section contains configuration that pertain to edge functionality. At present, the only value in this section
-is a `csr` section (that is duplicated by the root [`csr` section](#csr)). This section must be preset and empty to
-enable edge functionality (e.g. SDK connectivity).
+The `edge` section contains configuration that pertain to edge functionality. This section must be preset and empty to
+enable edge functionality (e.g. SDK connectivity). At present, the only value in this section is a deprecated `csr` 
+section. It is suggested to use the root `csr` section instead as this allows the router to run in "fabric only" and
+"edge mode" seamlessly.
 
 Example:
 
