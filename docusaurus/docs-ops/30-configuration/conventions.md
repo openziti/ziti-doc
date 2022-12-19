@@ -216,8 +216,8 @@ Each xgress components are referenced to by `binding` name. The following `bindi
 Each xgress component can have its own options in addition to the following shared options:
 
 - `mtu` - (optional, 640*1024) unused
-- `randomDrops` - (optional, false) true/yes/on or false/no/off to randomly drop 1 in `drop1InN` payloads
-- `drop1InN` - (optional, 100)  if `randomDrops` is enabled, will drop 1 in N payloads
+- `randomDrops` - (optional, false) true/yes/on or false/no/off to randomly drop 1 in `drop1InN` payloads, used for testing only
+- `drop1InN` - (optional, 100)  if `randomDrops` is enabled, will drop 1 in N payloads, used for testing only
 - `txQueueSize` - (optional, 1) the number of transmit payload to queue
 - `txPortalStartSize` - (optional, 16*1024) integer that sets the starting window sizes
 - `txPortalMinSize` - (optional, 16*1024) integer that sets the minimum window size
