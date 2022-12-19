@@ -1,5 +1,6 @@
 ---
 sidebar_label: Controller
+sidebar_position: 20
 ---
 
 # Controller Configuration Reference

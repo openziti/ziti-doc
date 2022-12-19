@@ -1,5 +1,6 @@
 ---
 sidebar_label: Router
+sidebar_position: 30
 ---
 
 # Router Configuration Reference
@@ -235,7 +236,7 @@ forwarder:
   latencyProbeInterval: 1000
 ```
 
-### `healthChecks`
+### `healthChecks` {#healthChecks}
 
 The `healthChecks` sections allows configuration of router health checks performed. Health check status is available by
 exposing the `health-checks` API in the `web` section.
