@@ -1,5 +1,6 @@
 ---
 sidebar_label: Router
+sidebar_position: 30
 ---
 
 # Router Configuration Reference

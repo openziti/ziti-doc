@@ -1,5 +1,6 @@
 ---
 sidebar_label: Conventions
+sidebar_position: 10
 ---
 
 # Conventions
@@ -36,7 +37,7 @@ from the scope of the executing process (i.e. controller, router). The syntax `$
 
 Example:
 
-```
+```yaml
 db: ${ZITI_DATA}/db/ctrl.db
 ```
 
@@ -74,7 +75,7 @@ machine. This allows for access to hardware backed private keys.
 
 Example Identity Section (Client & Server use same key):
 
-```
+```yaml
 identity:
   cert: "file:ctrl-client.cert.pem"
   server_cert: "pem:-----BEGIN CERTIFICATE-----\nMIIEtzCCAp+gAwIBAgICEA0wDQYJKoZIhvcNAQELBQAwgYsxCzAJBgNVBAYTAlVT..."
@@ -120,7 +121,7 @@ exposed on multiple interfaces/networks through configuration alone.
 
 Example:
 
-```
+```yaml
 web:
   - name: all-apis-localhost
     bindPoints:
@@ -148,7 +149,7 @@ web:
 
 The structure of the `web` section is an array of API exposure options:
 
-```
+```yaml
 web:
   - name: API Exposure 1
     ...
