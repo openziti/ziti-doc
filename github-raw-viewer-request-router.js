@@ -8,28 +8,25 @@ function handler(event) {
       case /^\/quick\/.*/i.test(uri):
         var re = /(^\/quick\/)(.*)/;
         request.uri = uri.replace(re, '/openziti/ziti/main/quickstart/docker/image/$2');
-        console.log("Routing '"+uri+"' to '"+request.uri+"'");
         break;
       // Edge API specs
       case /^\/spec\/.*/i.test(uri):
         var re = /(^\/spec\/)(.*)/;
         request.uri = uri.replace(re, '/openziti/edge/main/specs/$2');
-        console.log("Routing '"+uri+"' to '"+request.uri+"'");
         break;
       // tunneler package signing key
-      case /^\/pack\/.*/i.test(uri):
-        var re = /(^\/pack\/)(.*)/;
+      case /^\/tun\/.*/i.test(uri):
+        var re = /(^\/tun\/)(.*)/;
         request.uri = uri.replace(re, '/openziti/ziti-tunnel-sdk-c/main/$2');
-        console.log("Routing '"+uri+"' to '"+request.uri+"'");
         break;
       // docker quickstart
       case /^\/dock\/.*/i.test(uri):
         var re = /(^\/dock\/)(.*)/;
         request.uri = uri.replace(re, '/openziti/ziti/main/quickstart/docker/$2');
-        console.log("Routing '"+uri+"' to '"+request.uri+"'");
         break;
-    
     }
+
+    console.log("Routing '"+uri+"' to '"+request.uri+"'");
 
     return request;
 }
