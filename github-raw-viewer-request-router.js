@@ -14,10 +14,10 @@ function handler(event) {
         var re = /(^\/spec\/)(.*)/;
         request.uri = uri.replace(re, '/openziti/edge/main/specs/$2');
         break;
-      // tunneler package signing key
-      case /^\/tun\/.*/i.test(uri):
-        var re = /(^\/tun\/)(.*)/;
-        request.uri = uri.replace(re, '/openziti/ziti-tunnel-sdk-c/main/$2');
+      // tunneler downloads like the package signing key and install script
+      case /^\/(tun|pack)\/.*/i.test(uri):
+        var re = /(^\/(tun|pack)\/)(.*)/;
+        request.uri = uri.replace(re, '/openziti/ziti-tunnel-sdk-c/main/$3');
         break;
       // docker quickstart
       case /^\/dock\/.*/i.test(uri):
