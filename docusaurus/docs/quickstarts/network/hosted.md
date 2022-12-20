@@ -67,7 +67,7 @@ export ZITI_EDGE_ROUTER_PORT=8442
 ### Run `expressInstall`
 
 ```bash
-source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/main/quickstart/docker/image/ziti-cli-functions.sh)"; expressInstall
+source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
 ```
 
 ### `systemd` {#systemd}
