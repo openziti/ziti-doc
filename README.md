@@ -77,3 +77,5 @@ With these scripts, you can check for broken links to other sites and redirects 
 |API specs|`/spec/`|`/openziti/edge/main/specs/`|
 |Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
 |Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
+
+Reference: [CloudFront Function that routes requests](./github-raw-viewer-request-router.js)
