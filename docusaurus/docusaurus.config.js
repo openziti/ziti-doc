@@ -427,11 +427,11 @@ const config = {
         specs: [
           {
             id: 'edge-client',
-            spec: 'https://raw.githubusercontent.com/openziti/edge/main/specs/client.yml',
+            spec: 'https://get.openziti.io/spec/client.yml',
           },
           {
             id: 'edge-management',
-            spec: 'https://raw.githubusercontent.com/openziti/edge/main/specs/management.yml',
+            spec: 'https://get.openziti.io/spec/management.yml',
           },
         ],
         // Theme Options for modifying how redoc renders them
