@@ -66,3 +66,14 @@ With these scripts, you can check for broken links to other sites and redirects 
   ```
 
   Redirects don't work the same as GH Pages when the host is `yarn` or Vercel, so it's probably not useful to test against those hosts without further investigation.
+
+## How Short URLs Work
+
+`https://get.openziti.io` is a reverse proxy with cache provided by AWS CloudFront. The upstream/origin is `https://raw.githubusercontent.com`. The proxy allows for a shorter URL by mapping a URL path abbreviation to the full path.
+
+|purpose|abbreviation|full URL path|
+|---|---|---|
+|quickstart functions|`/quick/`|`/openziti/ziti/main/quickstart/docker/image/`|
+|API specs|`/spec/`|`/openziti/edge/main/specs/`|
+|Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
+|Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
