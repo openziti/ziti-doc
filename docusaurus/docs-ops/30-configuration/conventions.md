@@ -172,6 +172,7 @@ its own external address and migration address.
 
 - `interface` - (required) the interface and port to listen on ("0.0.0.0" for all IPv4 interfaces, "::" for all IPv6
   interfaces
+- `identity` - (optional, root identity) the certificates and keys to use for TLS
 - `address` - (required) the host:port combination that external devices can use to reach the exposed interface (ip or
   host name)
 - `newAddress` - (optional) when specified, `newAddress` will be sent to clients in the HTTP header `ziti-ctrl-address`
