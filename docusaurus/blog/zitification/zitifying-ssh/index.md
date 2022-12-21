@@ -89,7 +89,7 @@ flag (as I didn't in my example). Using `zssh` requires the use of a public/priv
 
 The `-c/--ZConfig` flag controls access to the network. A configuration file must be supplied to use `zssh` but does not need to be supplied as part of the command. By default, `zssh` will look at your home directory in a folder named `.ziti` for a file named `zssh.json`. In bash this is would be the equivalent of `$HOME`. In Windows this is the equivalent the environment variable named `USERPROFILE`. You do not need to supply this flag if a file exists at the default location. You can specify this flag to use `zssh` with other networks.
 
-The `-s/--service` flag is for passing in a different service name other than "zssh". By defualt, the service name will be "zssh", but if you would like to access a different service use the `-s` flag followed by the service name.
+The `-s/--service` flag is for passing in a different service name other than "zssh". By default, the service name will be "zssh", but if you would like to access a different service use the `-s` flag followed by the service name.
 
 The `-d/--debug` flag outputs additional information to assist you with debugging. For example:
 

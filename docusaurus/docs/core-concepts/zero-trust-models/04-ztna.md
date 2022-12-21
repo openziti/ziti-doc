@@ -9,7 +9,7 @@ import Share43Md from './share/_app_to_router_b_deploy.mdx';
 import Share12Md from './share/_client_to_router_deploy.mdx';
 import Share31Md from './share/_router_to_host_deploy.mdx';
 
-This article describes the various edge deployments of ZiTi Network Access. In all cases, the Controller and at least 2 Public Edge Routers are to be deployed for redundency. The Ziti Fabric connections are established between all Edge Routers but not Clients/SDKs. The Public Edge Routers would provide connection between Private Edge Routers and/or Clients/SDKs.
+This article describes the various edge deployments of ZiTi Network Access. In all cases, the Controller and at least 2 Public Edge Routers are to be deployed for redundancy. The Ziti Fabric connections are established between all Edge Routers but not Clients/SDKs. The Public Edge Routers would provide connection between Private Edge Routers and/or Clients/SDKs.
 
 :::info Note
 

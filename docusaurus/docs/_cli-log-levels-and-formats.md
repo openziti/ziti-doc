@@ -9,9 +9,9 @@ All Ziti components log to standard output and standard error file descriptors.
 
 Output from Ziti components comes in three distinct styles. Choose the style of logging that is right for you.
 
-- `pfxlog` - a human-readible format leveraging ascii escape codes to display colorized log level
-- `json` - a machine-readible format targetting automated processes for log aggregation/searching
-- `text` - a human-readible format using plain text (no ascii escape codes)
+- `pfxlog` - a human-readable format leveraging ascii escape codes to display colorized log level
+- `json` - a machine-readable format targeting automated processes for log aggregation/searching
+- `text` - a human-readable format using plain text (no ascii escape codes)
 
 ```bash
 ziti-router run ./router.yml --log-formatter pfxlog

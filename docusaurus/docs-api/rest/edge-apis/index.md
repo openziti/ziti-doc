@@ -30,7 +30,7 @@ The Edge Client API is used by clients that wish to dial (connect) or bind (host
 clients are allowed to interact with is defined by [policies](/docs/core-concepts/security/authorization/policies/overview). In order
 for clients to use the client API they must first [authenticate](/docs/core-concepts/security/authentication/auth) and
 obtain either a [partial or fully authenticated](/docs/core-concepts/security/authentication/auth#full-vs-partial-authentication)
-[API Sessioon](/docs/core-concepts/security/sessions#).
+[API Session](/docs/core-concepts/security/sessions#).
 
 [Explore the Edge Client API Reference](./01-edge-client-reference.mdx)
 

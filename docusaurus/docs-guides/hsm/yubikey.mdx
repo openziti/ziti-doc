@@ -290,7 +290,7 @@ you update the path to include the folder of `libykcs11-1.dll` as additional lib
     # IF the above command doesn't work - run this command and get the id from the first edge-router.
     # ziti edge list edge-routers
 
-    # then use the id returned from the above command and put it into a variable for use in a momment
+    # then use the id returned from the above command and put it into a variable for use in a moment
     # EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     # remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
@@ -298,7 +298,7 @@ you update the path to include the folder of `libykcs11-1.dll` as additional lib
     ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
 
     # recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
-    # send a request to wttr.in to retreive a weather forecast
+    # send a request to wttr.in to retrieve a weather forecast
     ziti edge delete service wttr.ziti
     ziti edge create service wttr.ziti "${EDGE_ROUTER_ID}" tcp://wttr.in:80 --configs wttrconfig
 
@@ -317,7 +317,7 @@ you update the path to include the folder of `libykcs11-1.dll` as additional lib
     REM run this command and get the id from the first edge-router.
     ziti edge list edge-routers
 
-    REM use the id returned from the above command and put it into a variable for use in a momment
+    REM use the id returned from the above command and put it into a variable for use in a moment
     SET EDGE_ROUTER_ID={insert the 'id' from above - example: 64d4967b-5474-4f06-8548-5700ed7bfa80}
 
     REM remove/recreate the config - here we'll be instructing the tunneler to listen on localhost and port 9000
@@ -325,7 +325,7 @@ you update the path to include the folder of `libykcs11-1.dll` as additional lib
     ziti edge create config wttrconfig ziti-tunneler-client.v1 "{ \"hostname\" : \"localhost\", \"port\" : 9000 }"
 
     REM recreate the service with the EDGE_ROUTER_ID from above. Here we are adding a ziti service that will
-    REM send a request to wttr.in to retreive a weather forecast
+    REM send a request to wttr.in to retrieve a weather forecast
     ziti edge delete service wttr.ziti
     ziti edge create service wttr.ziti "%EDGE_ROUTER_ID%" tcp://wttr.in:80 --configs wttrconfig
 

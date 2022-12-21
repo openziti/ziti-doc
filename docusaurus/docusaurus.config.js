@@ -92,7 +92,7 @@ const config = {
           },
           {
             to: '/docs/quickstarts/network/',
-            from: ['/ziti/quickstarts/quickstart-overview.html'],
+            from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html'],
           },
           {
             to: '/api/ziti-sdk-csharp',
@@ -379,7 +379,7 @@ const config = {
             from: ['/ziti/quickstarts/services/index.html'],
           },
           {
-            to: '/docs/quickstarts/zac/installation',
+            to: '/docs/quickstarts/zac/',
             from: ['/ziti/quickstarts/zac/installation.html'],
           },
           {
@@ -427,11 +427,11 @@ const config = {
         specs: [
           {
             id: 'edge-client',
-            spec: 'https://raw.githubusercontent.com/openziti/edge/main/specs/client.yml',
+            spec: 'https://get.openziti.io/spec/client.yml',
           },
           {
             id: 'edge-management',
-            spec: 'https://raw.githubusercontent.com/openziti/edge/main/specs/management.yml',
+            spec: 'https://get.openziti.io/spec/management.yml',
           },
         ],
         // Theme Options for modifying how redoc renders them

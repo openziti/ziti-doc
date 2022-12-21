@@ -67,7 +67,7 @@ export ZITI_EDGE_ROUTER_PORT=8442
 ### Run `expressInstall`
 
 ```bash
-source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/main/quickstart/docker/image/ziti-cli-functions.sh)"; expressInstall
+source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
 ```
 
 ### `systemd` {#systemd}
@@ -187,7 +187,7 @@ $ echo $ZITI_HOME
 
 - Now that you have your network in place, you probably want to try it out. Head to
 [the services quickstart](../services/index.md) and start learning how to use OpenZiti.
-- [Install the Ziti Console](../zac/installation.md) (web UI)
+- [Install the Ziti Console](../zac/index.md) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

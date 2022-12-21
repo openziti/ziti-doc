@@ -49,7 +49,7 @@ erDiagram
 ## Creating
 
 Creating an identity alone may not be enough to make it usable. An identity will also need a valid primary
-authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment#clients).
+authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment.md#clients).
 
 Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth)
 

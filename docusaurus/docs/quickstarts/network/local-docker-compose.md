@@ -13,20 +13,20 @@ and `docker-compose` already installed in your system.
 ## Preparation - Required Files
 
 First, grab the compose file from the
-[ziti repository](https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/docker-compose.yml).
+[ziti repository](https://get.openziti.io/dock/docker-compose.yml).
 
 Using curl that would look like this:
 
 ```bash
-curl -o docker-compose.yaml https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/docker-compose.yml
+curl -o docker-compose.yaml https://get.openziti.io/dock/docker-compose.yml
 ```
 
 Next, grab the
-default [environment file](https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/.env)
+default [environment file](https://get.openziti.io/dock/.env)
 or just make a file in this folder that looks like this:
 
 ```bash
-curl -o .env https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/docker/.env
+curl -o .env https://get.openziti.io/dock/.env
 ```
 or
 ```text
@@ -190,7 +190,7 @@ results: 1-5 of 5
 
 We can see all the routers are online - excellent.
 
-### Test - Edge Router Identites
+### Test - Edge Router Identities
 
 In this compose file, we have used a script that adds an identity for each of our edge routers as well. We can see those
 by running `ziti@724087d30014:/persistent$ ziti edge list identities`:
@@ -290,7 +290,7 @@ Hello World
 
 - Now that you have your network in place, you probably want to try it out. Head to
 [the services quickstart](../services/index.md) and start learning how to use OpenZiti.
-- [Install the Ziti Console](../zac/installation.md#docker-compose) (web UI)
+- [Install the Ziti Console](../zac/index.md#docker-compose) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

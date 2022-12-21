@@ -92,7 +92,7 @@ Docker network as well as creating the volume mount. Now it's time to connect yo
 image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
 
-The first noticable difference is that we need to pass in the name of the edge router we want it to be. To use this
+The first noticeable difference is that we need to pass in the name of the edge router we want it to be. To use this
 network, the name supplied needs tobe addressable by clients.  Also notice the port exported is port 3022. This is the
 default port used by edge routers. 
 
@@ -178,7 +178,7 @@ results: 1-1 of 1
 
 - Now that you have your network in place, you probably want to try it out. Head to
 [the services quickstart](../services/index.md) and start learning how to use OpenZiti.
-- [Install the Ziti Console](../zac/installation.md#docker) (web UI)
+- [Install the Ziti Console](../zac/index.md#docker) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

@@ -42,8 +42,8 @@ Ziti provides a handful of tunneler Config Types.
 
 The most relevant Config Types:
 
-* [`intercept.v1`](./tunneler-config-type-intercept.v1.md): used by a tunneler to configure itself as a proxy for a particular service
-* [`host.v1`](./tunneler-config-type-host.v1.md): describes the destination server for a Ziti service hosted by a tunneler
+* [`intercept.v1`](./config-type-intercept-v1.md): used by a tunneler to configure itself as a proxy for a particular service
+* [`host.v1`](./config-type-host-v1.md): describes the destination server for a Ziti service hosted by a tunneler
 
 Other Config Types:
 

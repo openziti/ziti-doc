@@ -42,7 +42,7 @@ Architectures available:
 * arm64
 
 ```bash
-curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
+curl -sSLf https://get.openziti.io/pack/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable jammy main' \
@@ -62,7 +62,7 @@ Architectures available:
 * arm64
 
 ```bash
-curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
+curl -sSLf https://get.openziti.io/pack/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
@@ -81,7 +81,7 @@ Architectures available:
 * x86_64
 
 ```bash
-curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
+curl -sSLf https://get.openziti.io/pack/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable bionic main' \
@@ -106,7 +106,7 @@ sudo apt install ziti-edge-tunnel
 This example subscribes you to the Ubuntu `focal` repo which will work well in most cases. Alternatively, you may refer to the table to find the Ubuntu release name that is the contemporary of your Debian release. Then, substitute the Ubuntu release name for `focal` in the `/etc/apt/sources.list.d/openziti.list` file.
 
 ```bash
-curl -sSLf https://raw.githubusercontent.com/openziti/ziti-tunnel-sdk-c/main/package-repos.gpg \
+curl -sSLf https://get.openziti.io/pack/package-repos.gpg \
 | gpg --dearmor \
 | sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
@@ -226,7 +226,7 @@ repo_gpgcheck=1
 </TabItem>
 </Tabs>
 
-2. Run `sudo yum update` to refresh your repodata cache. Optionally, you may wish to also install all available updates.
+2. Run `sudo yum update` to refresh your repo data cache. Optionally, you may wish to also install all available updates.
 2. Run `sudo yum install ziti-edge-tunnel` to install the RPM.
 2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
 2. Enable and start the service
