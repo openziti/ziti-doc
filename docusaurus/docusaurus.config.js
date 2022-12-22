@@ -565,7 +565,7 @@ const config = {
             href: 'https://openziti.discourse.group/',
             position: 'right',
             className: 'header-discourse-link',
-            title: 'Forum'
+            title: 'Discourse'
           },
           {
             href: 'https://github.com/openziti/ziti',
