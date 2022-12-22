@@ -71,11 +71,12 @@ With these scripts, you can check for broken links to other sites and redirects 
 
 `https://get.openziti.io` is a reverse proxy with cache provided by AWS CloudFront. The upstream/origin is `https://raw.githubusercontent.com`. The proxy allows for a shorter URL by mapping a URL path abbreviation to the full path.
 
-|purpose|abbreviation|full URL path|
-|---|---|---|
-|quickstart functions|`/quick/`|`/openziti/ziti/main/quickstart/docker/image/`|
-|API specs|`/spec/`|`/openziti/edge/main/specs/`|
-|Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
-|Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
+| purpose                  | abbreviation     | full URL path                                  |
+|--------------------------|------------------|------------------------------------------------|
+| quickstart functions     | `/quick/`        | `/openziti/ziti/main/quickstart/docker/image/` |
+| Edge API specs           | `/specs/edge/`   | `/openziti/edge/main/specs`                    |
+| Fabric API specs         | `/specs/fabric/` | `/openziti/fabric/main/specs`                  |
+| Linux package key        | `/pack/`         | `/openziti/ziti-tunnel-sdk-c/main/`            |
+| Docker quickstart assets | `/dock/`         | `/openziti/ziti/main/quickstart/docker/`       |
 
 Reference: [CloudFront Function that routes requests](./github-raw-viewer-request-router.js)
