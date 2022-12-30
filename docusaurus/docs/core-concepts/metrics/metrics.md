@@ -43,6 +43,7 @@ Metrics are reported to the log files, locale in /var/log/ziti by default.  Ther
 |ingress.tx.bytesrate | Meter | router | Data rate of data sent via xgress originating from initiators. Per router.|
 |ingress.tx.msgrate | Meter | router | Message rate of data sent via xgress originating from initiators. Per router.|
 |ingress.tx.msgsize | Histogram | router | Message size distribution of data sent via xgress, originating from initiators. Per router.|
+|link.dropped_msgs | Gauge | router | Number of messages dropped by the link forwarder.  Per link. |
 |link.latency | Histogram | controller | Per link latency in nanoseconds|
 |link.queue_time | Histogram | controller | Per link queue time (between send and write to wire)|
 |link.rx.bytesrate | Meter | controller | Per link receive data rate|
