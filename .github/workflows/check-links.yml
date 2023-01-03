@@ -11,6 +11,8 @@ jobs:
   broken-link-checker:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Workspace
+        uses: actions/checkout@v3
       - name: Check broken links
         uses: ruzickap/action-my-broken-link-checker@v2
         with:
