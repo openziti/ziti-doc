@@ -11,6 +11,8 @@ jobs:
   broken-link-checker:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Workspace
+        uses: actions/checkout@v3
       - name: Check broken links
         uses: ruzickap/action-my-broken-link-checker@v2
         with:
@@ -23,3 +25,18 @@ jobs:
             --header=User-Agent:curl/7.54.0
             --timeout=20
           debug: true
+      - name: Resolve Alarm Issue if Links are Not Broken
+        if: ${{ success() }}
+        uses: DavidMarquezF/close-matching-issues@v3.0.1
+        with:
+          query: 'is:open label:bug in:title "Broken Links Alarm"'
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Raise an Alarm Issue if Links are Broken
+        if: ${{ failure() }}
+        uses: JasonEtco/create-an-issue@v2.9.1
+        with:
+          update_existing: true
+          search_existing: open
+          filename: .github/workflows/check-links-issue-template.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
