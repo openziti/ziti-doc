@@ -46,7 +46,7 @@ db: ${ZITI_DATA}/db/ctrl.db
 OpenZiti uses a common framework for loading, storing, and processing certificate and private key configuration.
 Identity sections all have a similar format. The use of the defined certificates is up to the implementing application.
 So see their configuration sections for details on which values are utilized for what. This documentation provides an
-overview useful to understand the "default" assumptions. These sections can be formatted as YAML. JSON is a subset of YAML.
+overview useful to understand the "default" assumptions. The `identity` section may need to be formatted as YAML or JSON, depending on the implementing application. The `ziti` CLI and bundled sub-commands, e.g. `ziti controller`, `ziti router`, expect a configuration file formatted as YAML.
 
 - `cert` - (required) A string in the format of `<engine>:<value>` that defines a x509 client certificate
 - `key` - (required) A string in the format of `<engine>:<value>` that defines a private key used for `cert`
