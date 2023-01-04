@@ -1,5 +1,5 @@
 ---
-title: Authentication
+title: Authentication Flow
 ---
 
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
@@ -9,8 +9,6 @@ or the Ziti [Edge Management API](/api/rest/edge-apis#edge-management-api).
 
 - Clients that are powered by a Ziti SDK that access services will authenticate with the [Edge Client API](/api/rest/edge-apis#edge-client-api)
 - Clients that are managing a Ziti Network will authenticate with the [Edge Management API](/api/rest/edge-apis#edge-management-api)
-
-# Authentication Flow
 
 Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](/api/rest/edge-apis#edge-client-api)
 and [Edge Management API](/api/rest/edge-apis#edge-management-api).
@@ -138,7 +136,6 @@ While partially authenticated, the API Session can only be used for a reduced se
 - answering Authentication Queries 
 - enrolling in MFA TOTP
 
-
 #### Authentication Queries
 
 Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example 
@@ -178,7 +175,6 @@ Removal of an API Session occurs in the following scenarios:
 - timeout
 - administrative removal
 - client removal (logout)
-
 
 ### Timeout
 
@@ -233,7 +229,7 @@ with the id of `default` will be used.
 ## Authenticators
 
 Some primary authentication mechanisms (x509, username/password) need to store per-identity credentials. When necessary,
-these are stored as authenticators. Authenticators are manipulated during [password management](./password-management) 
+these are stored as authenticators. Authenticators are manipulated using [password management](./password-management) 
 and [certificate management](./certificate-management).
 
 Authenticators may be listed via the CLI:
@@ -262,7 +258,6 @@ To associate a client certificate with an Identity and Authenticator see the [En
 section.
 
 Expired client certificates may be allowed via [Authentication Policies](./authentication-policies) if desired.
-
 
 ## JWT Primary Authentication
 
@@ -320,6 +315,7 @@ Similar to JWT primary authentication, a valid JWT must be present in the `Authe
 ### Example UPDB Authentication Request
 
 `POST /edge/client/v1/authenticate?method=password`
+
 ```json
 {
   "username": "my-name",
@@ -332,6 +328,7 @@ Similar to JWT primary authentication, a valid JWT must be present in the `Authe
 Note: The TLS connection to the controller MUST use a valid client certificate
 
 `POST /edge/management/v1/authenticate?method=cert`
+
 ```json
 {}
 ```
@@ -340,13 +337,15 @@ Note: The TLS connection to the controller MUST use a valid client certificate
 
 `POST /edge/client/v1/authenticate?method=ext-jwt`
 HTTP Header: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...`
+
 ```json
 {}
 ```
 
-### Example TOTP Authentication Query Response:
+### Example TOTP Authentication Query Response
 
 `POST /edge/client/v1/authenticate/mfa`
+
 ```json
 {
   "code": "123456"
