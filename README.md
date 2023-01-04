@@ -78,4 +78,49 @@ With these scripts, you can check for broken links to other sites and redirects 
 |Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
 |Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
 
-Reference: [CloudFront Function that routes requests](./github-raw-viewer-request-router.js)
+Reference:
+
+* [CloudFront Function that routes requests](./github-raw-viewer-request-router.js)
+* update the function's DEVELOPMENT stage in AWS
+
+  ```bash
+  aws cloudfront update-function \
+    --name github-raw-viewer-request-router \
+    --function-code $(base64 -w0 < github-raw-viewer-request-router.js) \
+    --function-config '{"Runtime": "cloudfront-js-1.0","Comment": "update function"}' \
+    --if-match E3JWKAKR8XB7XF  # ETag from DescribeFunction
+  ```
+
+* verify the request is modified as expected
+
+  ```bash
+  aws cloudfront test-function \
+    --name github-raw-viewer-request-router \
+    --stage DEVELOPMENT \
+    --if-match E3JWKAKR8XB7XF \
+    --event-object $(base64 -w0 <<< '
+  {
+    "version": "1.0",
+    "context": {
+      "eventType": "viewer-request"
+    },
+    "viewer": {
+      "ip": "1.2.3.4"
+    },
+    "request": {
+      "method": "GET",
+      "uri": "/tun/install.sh",
+      "headers": {},
+      "cookies": {},
+      "querystring": {}
+    }
+  }')
+  ```
+
+* publish LIVE stage
+
+  ```bash
+  aws cloudfront publish-function \      
+    --name github-raw-viewer-request-router \
+    --if-match E3JWKAKR8XB7XF
+  ```
