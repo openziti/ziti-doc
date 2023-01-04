@@ -138,10 +138,9 @@ While partially authenticated, the API Session can only be used for a reduced se
 - answering Authentication Queries 
 - enrolling in MFA TOTP
 
-
 #### Authentication Queries
 
-Authentication Queries are represented on an API Session the property `authQuries` which is an array. An example 
+Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example 
 MFA challenge represented as an Authentication Query is provided below.
 
 ```json
@@ -166,7 +165,7 @@ in the Client and Management Open API 2.0 specifications under the label `authQu
 
 ### Associated Data & Removal
 
-API Sessions, may be used to create ephemeral certificates called [API Session Certificates](./api-session-certificates) 
+API Sessions, may be used to create ephemeral certificates called [API Session Certificates](./20-api-session-certificates.md) 
 and sessions for service access. Additionally, API Sessions are used to scope [Posture Data](../authorization/posture-checks#posture-data). 
 When an API Session is removed for any reason, all associated data is also removed. As an example, when removing an 
 API Session used to create a Session the Session will also be removed. Removing a Session will also terminate any 
@@ -179,12 +178,10 @@ Removal of an API Session occurs in the following scenarios:
 - administrative removal
 - client removal (logout)
 
-
 ### Timeout
 
 The controller maintains a last accessed at timestamp for every API Session. This timestamp is used to determine whether
-the session timeout has been reached, signaling an API Session removal. Activity that move the last accessed at timestamp
-includes:
+the session timeout has been reached, signaling an API Session removal. Activities that update the timestamp include:
 
 - Any maintained Edge Router connection
 - Any valid Client or Management API interaction
@@ -233,9 +230,9 @@ with the id of `default` will be used.
 
 ## Authenticators
 
-Some primary authentication mechanisms (x509, username/password) need to store per identity credentials. When necessary
-these are stored as authenticators. Manipulating authenticators is used to perform [password management](./password-management) 
-and [certificate management](./certificate-management)
+Some primary authentication mechanisms (x509, username/password) need to store per-identity credentials. When necessary,
+these are stored as authenticators. Authenticators are manipulated using [password management](./password-management) 
+and [certificate management](./certificate-management).
 
 Authenticators may be listed via the CLI:
 
@@ -263,7 +260,6 @@ To associate a client certificate with an Identity and Authenticator see the [En
 section.
 
 Expired client certificates may be allowed via [Authentication Policies](./authentication-policies) if desired.
-
 
 ## JWT Primary Authentication
 
@@ -308,19 +304,20 @@ Administrators can enforce TOTP usage through [Authentication Policies](./authen
 stops the client from transitioning between [partially authenticated](#full-vs-partial-authentication) and
 [fully authenticated](#full-vs-partial-authentication) status. This stops a client from accessing any service information
 or connect to any service. [Posture Check](../authorization/posture-checks) enforcement allows a client to
-[fully authenticate](#full-vs-partial-authentication), but based on [Service Policy](../authorization/policies/overview 
+[fully authenticate](#full-vs-partial-authentication), but based on [Service Policy](../authorization/policies/overview.mdx) 
 restrict connection to specific services.
 
 ### JWT
 
 Similar to JWT primary authentication, a valid JWT must be present in the `Authentication` header in the format of
-`bearer <jwt` on every request.
+`bearer <JWT>` on every request.
 
 ## Authentication Requests
 
 ### Example UPDB Authentication Request
 
 `POST /edge/client/v1/authenticate?method=password`
+
 ```json
 {
   "username": "my-name",
@@ -333,6 +330,7 @@ Similar to JWT primary authentication, a valid JWT must be present in the `Authe
 Note: The TLS connection to the controller MUST use a valid client certificate
 
 `POST /edge/management/v1/authenticate?method=cert`
+
 ```json
 {}
 ```
@@ -341,13 +339,15 @@ Note: The TLS connection to the controller MUST use a valid client certificate
 
 `POST /edge/client/v1/authenticate?method=ext-jwt`
 HTTP Header: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...`
+
 ```json
 {}
 ```
 
-### Example TOTP Authentication Query Response:
+### Example TOTP Authentication Query Response
 
 `POST /edge/client/v1/authenticate/mfa`
+
 ```json
 {
   "code": "123456"
