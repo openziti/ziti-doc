@@ -1,5 +1,5 @@
 ---
-title: Authentication Flow
+title: Authentication
 ---
 
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
@@ -9,6 +9,8 @@ or the Ziti [Edge Management API](/api/rest/edge-apis#edge-management-api).
 
 - Clients that are powered by a Ziti SDK that access services will authenticate with the [Edge Client API](/api/rest/edge-apis#edge-client-api)
 - Clients that are managing a Ziti Network will authenticate with the [Edge Management API](/api/rest/edge-apis#edge-management-api)
+
+# Authentication Flow
 
 Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](/api/rest/edge-apis#edge-client-api)
 and [Edge Management API](/api/rest/edge-apis#edge-management-api).
