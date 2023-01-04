@@ -7,7 +7,7 @@ sidebar_position: 10
 
 The following conventions apply to multiple areas of the configuration files for routers and controllers.
 
-### Addressing
+## Addressing
 
 Listening and dialing addresses in OpenZiti are in the format of `<protocol>:<ip-or-host>:<port>` format.
 
@@ -30,7 +30,7 @@ of the following values, however `tls` is suggested for most scenarios.
 - `transwarp`
 - `transwarptls`
 
-### Environment Variables
+## Environment Variables
 
 All values in the configuration file support environment variable replacement. The environment variables are sourced
 from the scope of the executing process (i.e. controller, router). The syntax `${VARIABLE}` is used.
@@ -41,7 +41,7 @@ Example:
 db: ${ZITI_DATA}/db/ctrl.db
 ```
 
-### Identity
+## Identity
 
 OpenZiti uses a common framework for loading, storing, and processing certificate and private key configuration.
 Identity sections all have a similar format. The use of the defined certificates is up to the implementing application.
@@ -86,20 +86,20 @@ identity:
 
 ```
 
-### Channel
+## Channel
 
 Channel sections control different ways in which connections behave. It is controlled by the
 [channel](https://github.com/openziti/channel) library. Sections that invoke the channel library support the following
 options section.
 
 - `options` - a set of optional connections options
-    - `maxQueuedConnects` - (optional) the maximum number of connections to be accepted but awaiting initial messaging
-    - `maxOutstandingConnects` - (optional) the maximum number of connection accepted and waiting for hello messaging to
-      complete
-    - `connectTimeoutMs` - (optional) the maximum number of milliseconds to wait for hello messaging to complete
-        - `writeTimeout` - (optional)  the maximum amount of time to wait when writing data to a connection
+  - `maxQueuedConnects` - (optional) the maximum number of connections to be accepted but awaiting initial messaging
+  - `maxOutstandingConnects` - (optional) the maximum number of connection accepted and waiting for hello messaging to
+    complete
+  - `connectTimeoutMs` - (optional) the maximum number of milliseconds to wait for hello messaging to complete
+    - `writeTimeout` - (optional)  the maximum amount of time to wait when writing data to a connection
 
-### Time Units
+## Time Units
 
 Configurations that do not specify a unit of time in their name, support a variety of human-readable time units. The
 format supports single and combinations of values (e.g. `12s`, `5m20s`,  `2h30m22s`).
@@ -113,7 +113,7 @@ Supported units:
 - `m`
 - `h`
 
-### XWeb
+## XWeb
 
 The `web` section is powered by [XWeb](https://github.com/openziti/xweb). XWeb allows web APIs to be defined in code and
 exposed on multiple interfaces/networks through configuration alone.
@@ -163,7 +163,7 @@ Each exposure has the following configuration options:
 - `apis` - (required) a list of APIs and their options from the list above
 - `options` - (optional) a set of options used to tune HTTP/TLS
 
-#### `bindPoints`
+### `bindPoints`
 
 `bindPoints` are used to instruct XWeb on where to listen for new connections. Each exposure can have multiple bind
 pints to have the same API listen on one or more interfaces/networks. Additionally, each interface listened on can have
@@ -179,12 +179,12 @@ its own external address and migration address.
 `newAddress` should only be specified when clients can use the new host:port combination to reach the specified APIs.
 This setting is used to migrate APIs between ip/hostnames.
 
-#### `apis`
+### `apis`
 
 The `apis` section defines which APIs will be hosted on this exposure. Different OpenZiti components support different
 APIs. See their documentation for a list of APIs supported.
 
-#### `options`
+### `options`
 
 - `idleTimeout` - (optional) the maximum amount of time to wait for the next request when keep-alives are enabled, if
   IdleTimeout is zero, the value of ReadTimeout is used
@@ -195,7 +195,7 @@ APIs. See their documentation for a list of APIs supported.
 - `minTLSVersion` - (optional) the minimum TLS version to support (TLS1.1, TLS1.2, TLS1.3)
 - `maxTLSVersion` - (optional) the maximum TLS version to support (TLS1.1, TLS1.2, TLS1.3)
 
-### xgress Components
+## xgress Components
 
 "xgress" is an internal OpenZiti set of components that facilitate ingress and egress traffic from the OpenZiti mesh
 overlay network. Ingress traffic is handled by "listeners" and egress traffic is handled by "dialers". Internally,
@@ -212,7 +212,7 @@ Each xgress components are referenced to by `binding` name. The following `bindi
 - `edge` - listener, dialer - allows multiplexed ingress connections from SDKs and connections to other SDKs hosting
   services, requires an `advertise` option in the `options` section to be defined for external linking
 
-### xgress Options
+## xgress Options
 
 Each xgress component can have its own options in addition to the following shared options:
 
@@ -222,7 +222,7 @@ Each xgress component can have its own options in addition to the following shar
 - `txQueueSize` - (optional, 1) the number of transmit payload to queue
 - `txPortalStartSize` - (optional, 16*1024) integer that sets the starting window sizes
 - `txPortalMinSize` - (optional, 16*1024) integer that sets the minimum window size
-- `txPortalMaxSize` - (optional, 4 * 1024 * 1024l) integer that sets the maximum window size
+- `txPortalMaxSize` - (optional, 4*1024*1024) integer that sets the maximum window size
 - `txPortalIncreaseThresh` - (optional, 224)  the number of successful transmits that triggers the window size to be
   scaled by `txPortalIncreaseScale`
 - `txPortalIncreaseScale` - (optional, 1.0) the scale factor to increase the window size by
