@@ -61,7 +61,7 @@ overview useful to understand the "default" assumptions. These sections can be f
   trusted CAs
 - `alt_server_certs` - (optional) An array of objects with `server_cert` and `server_key` values used to add additional
   server
-  certificates and keys not managed by OpenZiti (i.e. from public CAs like Let's Encrypt). The server name indication (SNI) of incoming requests is compared with all DNS subject alternative names (SAN) of the server certificates in `identity.server` and `identity.alt_server_certs[].server`. The first-matched server certificate is presented to the TLS client. You must use distinct DNS SANs for `server` and `alt_server_certs[].server` to avoid ambiguity during server certificate selection.
+  certificates and keys not managed by OpenZiti (i.e. from public CAs like Let's Encrypt). The server name indication (SNI) of incoming requests is compared with all DNS subject alternative names (SAN) of the server certificates in `identity.server_cert` and `identity.alt_server_certs[].server_cert`. The first-matched server certificate is presented to the TLS client. You must use distinct DNS SANs to avoid ambiguity during server certificate selection.
 
 The `<engine>:<value>` format is used to define multiple different source types. If the `<engine>:` part is omitted, it
 is assumed to be `file:`. The following engines are supported:
