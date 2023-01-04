@@ -13,20 +13,13 @@ echo "publish script located in: $pub_script_root"
 
 cd $pub_script_root
 
-curl -s https://api.github.com/repos/netfoundry/ziti-ci/releases/latest \
-  | grep browser_download_url \
-  | cut -d ":" -f2,3 \
-  | tr -d \" \
-  | wget -q -i - -O /tmp/ziti-ci
-chmod +x /tmp/ziti-ci
-
 if [ "${GIT_BRANCH:-}" == "main" ]; then
   echo on main branch - publish can proceed
 
   ./gendoc.sh  # clone and build companion microsites and build Docusaurus
 
   echo "configuring git..."
-  /tmp/ziti-ci configure-git  # writes key from env var $gh_ci_key to file ./github_deploy_key
+  $(go env GOPATH)/bin/ziti-ci configure-git  # writes key from env var $gh_ci_key to file ./github_deploy_key
   #git add docs docfx_project/ziti-*
 
   #move back to main once we're this deep into the run
