@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GIT_BRANCH: main
-      gh_ci_key: ${{ secrets.gh_ci_key }}
+      gh_ci_key: ${{ secrets.GH_CI_KEY }}
       ziti_ci_gpg_key: ${{ secrets.ZITI_CI_GPG_KEY }}
       ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
     steps:
