@@ -46,8 +46,7 @@ db: ${ZITI_DATA}/db/ctrl.db
 OpenZiti uses a common framework for loading, storing, and processing certificate and private key configuration.
 Identity sections all have a similar format. The use of the defined certificates is up to the implementing application.
 So see their configuration sections for details on which values are utilized for what. This documentation provides an
-overview useful to understand the "default" assumptions. These sections can be formatted as YAML (as is the case for the
-router and controller configurations) or as JSON.
+overview useful to understand the "default" assumptions. The `identity` section may need to be formatted as YAML or JSON, depending on the implementing application. The `ziti` CLI and bundled sub-commands, e.g. `ziti controller`, `ziti router`, expect a configuration file formatted as YAML.
 
 - `cert` - (required) A string in the format of `<engine>:<value>` that defines a x509 client certificate
 - `key` - (required) A string in the format of `<engine>:<value>` that defines a private key used for `cert`
@@ -60,9 +59,9 @@ router and controller configurations) or as JSON.
   defined `key` is used if `server_cert` is defined
 - `ca` - (optional) A string in the format of `<engine>:<value>` that defines x509 certificate chain used to define
   trusted CAs
-- `alt_server_certs` - (optional) An array of objects with `server_cert` and `server_key` values use to add additional
+- `alt_server_certs` - (optional) An array of objects with `server_cert` and `server_key` values used to add additional
   server
-  certificates and keys not managed by OpenZiti (i.e. from public CAs like Let's Encrypt).
+  certificates and keys not managed by OpenZiti (i.e. from public CAs like Let's Encrypt). The server name indication (SNI) of incoming requests is compared with all DNS subject alternative names (SAN) of the server certificates in `identity.server_cert` and `identity.alt_server_certs[].server_cert`. The first-matched server certificate is presented to the TLS client. You must use distinct DNS SANs to avoid ambiguity during server certificate selection.
 
 The `<engine>:<value>` format is used to define multiple different source types. If the `<engine>:` part is omitted, it
 is assumed to be `file:`. The following engines are supported:
