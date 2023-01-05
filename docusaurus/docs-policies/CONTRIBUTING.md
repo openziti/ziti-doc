@@ -1,8 +1,8 @@
 ﻿# Contributing to NetFoundry Open-Source Projects
 
-NetFoundry welcomes all contributions large or small from the community. If you want to contribute to a NetFoundry repository this document will serve as a guide. Contributions can come in various forms such as [bug reports](#example-bugissue-report), engaging with other users by offering help on the the [discourse group](https://openziti.discourse.group/) and of course as code submissions. Please take a moment and read this document to see how you can help out.
+NetFoundry welcomes all contributions large or small from the community. If you want to contribute to a NetFoundry repository this document will serve as a guide. Contributions can come in various forms such as [bug reports](#example-bug-report), engaging with other users by offering help on the the [discourse group](https://openziti.discourse.group/) and of course as code submissions. Please take a moment and read this document to see how you can help out.
 
-## Bug/Issue Reports
+## Bug Reports
 
 If you have discovered a potential issue with any of the NetFoundry projects on GitHub please file a GitHub issue for the possible problem. We realize you are taking time out of your day to file the issue (thank you!) however we do ask that you take a moment to try to submit a high quality report of the issue. A high quality isuse report will ideally be short and direct and only as detailed as possible.
 
@@ -20,10 +20,10 @@ A high quality issue leaves as little room for ambiguity as possible. The more d
 Additional guidelines:
 
 * The issue tracker is not for support requests. Please use the [discourse group](https://openziti.discourse.group/) for questions about "how do i do this" or for seeking additional information that may not be documented yet.
-* You are expected to follow the [code of conduct](CODE_OF_CONDUCT.html) at all times. Please be respectful of issues entered by others.
+* You are expected to follow the [code of conduct](./CODE_OF_CONDUCT.md) at all times. Please be respectful of issues entered by others.
 * Keep responses in the issues specifically about the issue itself. If another issue arises or if discussion is warranted open a new issue and use the [discourse group](https://openziti.discourse.group/) accordingly.
 
-### Example Bug/Issue Report
+### Example Bug Report {#example-bug-report}
 
     Title: 
     Name with apostrophe breaks save functionality
@@ -54,7 +54,7 @@ So what is a Contributor License Agreement (CLA) anyway? A CLA is a document whi
 
 ### Submitting the CLA
 
-In order to have a CLA on file you must download the CLA and sign it. If you are an individual you can download the [Individual Contributor License Agreement](./NetFoundry-ICLA.pdf). For contributors contributing on behalf of a corporation there exists a [Corporate Contributor License Agreement](./NetFoundry-CCLA.pdf). Once signed you will send the CLA to [cla@netfoundry.io](mailto:cla@netfoundry.io). We will process your request and add you as a contributor to the project. Note that submitting issues does not requires a CLA be signed. You also will only have to sign a single CLA regardless of which repository you are contributing to.
+In order to have a CLA on file you must download the CLA and sign it. If you are an individual you can download the [Individual Contributor License Agreement](/policies/NetFoundry-ICLA.pdf). For contributors contributing on behalf of a corporation there exists a [Corporate Contributor License Agreement](/policies/NetFoundry-CCLA.pdf). Once signed you will send the CLA to [cla@netfoundry.io](mailto:cla@netfoundry.io). We will process your request and add you as a contributor to the project. Note that submitting issues does not requires a CLA be signed. You also will only have to sign a single CLA regardless of which repository you are contributing to.
 
 After being submitted please allow for a few business days for us to process your CLA submission. You will be notified by email of your acceptance and the provided GitHub id will be added as a contributor. NetFoundry pledges that any personal information will not be used in any way.
 
