@@ -10,7 +10,7 @@ or the Ziti [Edge Management API](/api/rest/edge-apis#edge-management-api).
 - Clients that are powered by a Ziti SDK that access services will authenticate with the [Edge Client API](/api/rest/edge-apis#edge-client-api)
 - Clients that are managing a Ziti Network will authenticate with the [Edge Management API](/api/rest/edge-apis#edge-management-api)
 
-# Authentication Flow
+## Authentication Flow
 
 Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](/api/rest/edge-apis#edge-client-api)
 and [Edge Management API](/api/rest/edge-apis#edge-management-api).
@@ -26,7 +26,7 @@ and Ziti Edge Routers. API Sessions for clients are represented by opaque tokens
 requests and by values in protobuf messages for the Edge protocol between routers and SDKs. API Sessions represent a 
 security context that is used to determine authorization in the rest of the Ziti network.
 
-## API Sessions
+### API Sessions
 
 API Sessions are represented by opaque strings and are provided in the HTTP header `zt-session` and in Edge Router
 connection requests initiated by Ziti SDKs. API Sessions remain valid as long they have not timed out.
@@ -121,7 +121,7 @@ Example `POST /edge/management/v1/authenticate` response:
 }
 ```
 
-### Full vs Partial Authentication
+#### Full vs Partial Authentication
 
 API Sessions may exist in two states:
 
@@ -138,7 +138,7 @@ While partially authenticated, the API Session can only be used for a reduced se
 - answering Authentication Queries 
 - enrolling in MFA TOTP
 
-#### Authentication Queries
+##### Authentication Queries
 
 Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example 
 MFA challenge represented as an Authentication Query is provided below.
@@ -163,7 +163,7 @@ The existence of any Authentication Query on an API Session represents a partial
 in this state will have reduced access to their target API. The data structure for Authentication Queries is defined
 in the Client and Management Open API 2.0 specifications under the label `authQueryDetail`.
 
-### Associated Data & Removal
+#### Associated Data & Removal
 
 API Sessions, may be used to create ephemeral certificates called [API Session Certificates](./20-api-session-certificates.md) 
 and sessions for service access. Additionally, API Sessions are used to scope [Posture Data](../authorization/posture-checks#posture-data). 
@@ -178,7 +178,7 @@ Removal of an API Session occurs in the following scenarios:
 - administrative removal
 - client removal (logout)
 
-### Timeout
+#### Timeout
 
 The controller maintains a last accessed at timestamp for every API Session. This timestamp is used to determine whether
 the session timeout has been reached, signaling an API Session removal. Activities that update the timestamp include:
@@ -200,16 +200,16 @@ edge:
     ...
 ```
 
-### Administrative Removal
+#### Administrative Removal
 
 Through the [Edge Management API](/api/rest/edge-apis#edge-management-api) any API Session may be forcefully removed
 by calling `DELETE /edge/management/v1/api-sessions<id>` with an empty body. 
 
-### Client Removal (Logout)
+#### Client Removal (Logout)
 
 A client may terminate its own API Session at any time by calling: `DELETE /edge/client/v1/current-api-session`
 
-## Primary Authentication
+### Primary Authentication
 
 Primary authentication in Ziti establishes and API Sessions identity principal and enabled Ziti to determine which
 secondary authentication factors are necessary for an API Session to become fully authenticated. If no secondary
@@ -228,7 +228,7 @@ This association is defined by the `authPolicyId` property on the identity. If n
 is set for an Identity, a special system defined [Authentication Policy](./authentication-policies) 
 with the id of `default` will be used.
 
-## Authenticators
+### Authenticators
 
 Some primary authentication mechanisms (x509, username/password) need to store per-identity credentials. When necessary,
 these are stored as authenticators. Authenticators are manipulated using [password management](./password-management) 
@@ -244,7 +244,7 @@ or via the [Edge Management API](/api/rest/edge-apis#edge-management-api):
 GET /edge/management/v1/authenticators
 ```
 
-## x509 Certificate Primary Authentication
+### x509 Certificate Primary Authentication
 
 x509 authentication requires the client to initiate a HTTPs authentication request using a x509 client certificate that
 is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge 
@@ -261,7 +261,7 @@ section.
 
 Expired client certificates may be allowed via [Authentication Policies](./authentication-policies) if desired.
 
-## JWT Primary Authentication
+### JWT Primary Authentication
 
 JWT authentication requires that an [External JWT Signer](./external-jwt-signers) be added via the Ziti Edge Management 
 API. The definition of [External JWT Signer](./external-jwt-signers) allows configuration of which JWT claim should be
@@ -272,7 +272,7 @@ The JWT must be provided in the HTTP request in the `Authentication` header with
 `Bearer <jwt>`. The JWT provided must pass signature, expiration, issuer, and audience validation as configured
 on the [External JWT Signer](./external-jwt-signers).
 
-## Username/password
+### Username/password
 
 An internal username/password authentication system is provided for smaller deployments of Ziti. It is highly suggested
 that all username/password authenticators be replaced by x509 certificate/JWT authentication mechanisms. Passwords
@@ -284,7 +284,7 @@ of passwords](./password-management) is also available.
 Username/password authentication, while supported, is only suggested to be used for testing and R&D activities. For
 production environments JWT and X509 authentication is recommended.
 
-## Secondary Authentication
+### Secondary Authentication
 
 Secondary authentication is represented by a series of [Authentication Queries](#authentication-queries) on an API
 Session in the `authQueries` property. At present the following secondary authentication mechanisms are supported:
@@ -292,7 +292,7 @@ Session in the `authQueries` property. At present the following secondary authen
 - TOTP - Time-Based One-Time Password (aka Authenticator Apps)
 - JWT - JSON Web Tokens
 
-### TOTP: Time-Based One-Time Password
+#### TOTP: Time-Based One-Time Password
 
 Ziti supports all authenticator application that implement [RFC6238](https://datatracker.ietf.org/doc/html/rfc6238)
 which includes all major and popular TOTP applications such as Google Authenticator, Microsoft Authenticator, Authy, and
@@ -307,14 +307,14 @@ or connect to any service. [Posture Check](../authorization/posture-checks) enfo
 [fully authenticate](#full-vs-partial-authentication), but based on [Service Policy](../authorization/policies/overview.mdx) 
 restrict connection to specific services.
 
-### JWT
+#### JWT
 
 Similar to JWT primary authentication, a valid JWT must be present in the `Authentication` header in the format of
 `bearer <JWT>` on every request.
 
-## Authentication Requests
+### Authentication Requests
 
-### Example UPDB Authentication Request
+#### Example UPDB Authentication Request
 
 `POST /edge/client/v1/authenticate?method=password`
 
@@ -325,7 +325,7 @@ Similar to JWT primary authentication, a valid JWT must be present in the `Authe
 }
 ```
 
-### Example Client Certificate Request
+#### Example Client Certificate Request
 
 Note: The TLS connection to the controller MUST use a valid client certificate
 
@@ -335,7 +335,7 @@ Note: The TLS connection to the controller MUST use a valid client certificate
 {}
 ```
 
-### Example JWT Authentication Request
+#### Example JWT Authentication Request
 
 `POST /edge/client/v1/authenticate?method=ext-jwt`
 HTTP Header: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...`
@@ -344,7 +344,7 @@ HTTP Header: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...`
 {}
 ```
 
-### Example TOTP Authentication Query Response
+#### Example TOTP Authentication Query Response
 
 `POST /edge/client/v1/authenticate/mfa`
 
