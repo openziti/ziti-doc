@@ -588,11 +588,11 @@ const config = {
             items: [
               {
                 label: 'Code of Conduct',
-                to: '/policies/CODE_OF_CONDUCT.html',
+                to: '/policies/CODE_OF_CONDUCT',
               },
               {
                 label: 'Contributing',
-                to: '/policies/CONTRIBUTING.html',
+                to: '/policies/CONTRIBUTING',
               },
             ],
           },
