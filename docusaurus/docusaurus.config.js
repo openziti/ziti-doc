@@ -69,6 +69,15 @@ const config = {
       },
     ],
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-policies',
+        path: 'docs-policies',
+        routeBasePath: 'policies',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
       '@docusaurus/plugin-client-redirects',
       {
         fromExtensions: ['md', 'html'], // /myPage.md -> /myPage
@@ -382,10 +391,6 @@ const config = {
             to: '/docs/quickstarts/zac/',
             from: ['/ziti/quickstarts/zac/installation.html'],
           },
-          {
-            to: '/docs/introduction/openziti-is-software',
-            from: ['/policies/CONTRIBUTING.html'],
-          },
         ],
       },
     ],
@@ -578,6 +583,19 @@ const config = {
       footer: {
         style: 'dark',
         links: [
+          {
+            title: 'Policies',
+            items: [
+              {
+                label: 'Code of Conduct',
+                to: '/policies/CODE_OF_CONDUCT.html',
+              },
+              {
+                label: 'Contributing',
+                to: '/policies/CONTRIBUTING.html',
+              },
+            ],
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
       },
