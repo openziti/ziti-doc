@@ -18,3 +18,10 @@ If you're not a developer, or if you have an application which you can't (or don
 access". For this, you will install an [OpenZiti tunneller](../../core-concepts/clients/tunnelers/index.mdx) on your "clients" and on your "servers" and 
 provide access to your services using these executables. If this sounds like a good place to start, 
 [check out the host access quickstart](./ztha.md).
+
+## Edge Router Policy
+An Edge Router Policy is a policy/configuration that describes which Identities can connect to which Edge Routers
+
+## Service Edge Router Policy
+A Service Edge Router Policy is a policy/configuration that describes which Edge Routers are able to be used for inbound
+or outbound traffic for a particular Service

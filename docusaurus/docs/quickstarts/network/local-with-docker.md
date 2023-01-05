@@ -86,9 +86,10 @@ docker run \
 ```
 
 ## Create Edge Router Policies
-OpenZiti requires specific authorization of users and routers (edge router policies), as well as authorization of 
-services and routers (service edge router policies). The docker-based quickstart doesn't perform these steps 
-automatically. Run the initialization container one time, after starting the controller as shown
+OpenZiti requires specific authorization of users and routers ([edge router policies](/glossary#edge-router-policy)), 
+as well as authorization of services and routers ([service edge router policies](/glossary#service-edge-router-policy)). 
+The docker-based quickstart doesn't perform these steps automatically. Run the initialization container one time, after 
+starting the controller as shown, to set up the default authorization.
 
 ```shell
 docker run \
