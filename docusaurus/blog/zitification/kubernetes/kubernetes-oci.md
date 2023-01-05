@@ -2,10 +2,6 @@
 authors: dovholuknf
 ---
 
-<head>
-    <link rel="canonical" href="https://openziti.io/kubernetes" />
-</head>
-
 ## Kubernetes Cheatsheet
 
 This page exists as the set of commands which were used in the video [Secure Kubernetes Cluster using Ziti][1]
