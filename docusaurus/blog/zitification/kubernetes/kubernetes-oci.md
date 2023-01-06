@@ -1,12 +1,12 @@
 ---
 authors: dovholuknf
+title: Kubernetes Cheatsheet
 ---
-
-## Kubernetes Cheatsheet
 
 This page exists as the set of commands which were used in the video [Secure Kubernetes Cluster using Ziti][1]
 
-### establish some variables just to make commands easier:
+### establish some variables just to make commands easier
+
 ```bash
 service_name=k8s.oci
 the_user_identity="${service_name}".client
@@ -14,7 +14,8 @@ the_kubernetes_identity="${service_name}".private
 oci_cluster_id="put-your-cluster-id-here"
 ```
 
-### clean up commands - if needed:
+### clean up commands - if needed
+
 ```bash
 rm /tmp/oci/config.oci.public
 rm /tmp/oci/config.oci.private
@@ -23,19 +24,20 @@ ziti edge delete identity "${the_user_identity}"
 ```
 
 work done ahead of time - takes time to establish a cluster:
-    * previously setup kubernetes in OKE
-        * simple cluster
-        * standard quick create cluster
-        * public endpoint
-        * Shape: VM.Standard2.2
-        * 1 node
-        * pasted my public key for access
-        * exposed the cluster with public ip
-    * already installed oci as well as helm
-    * already deployed a ziti environment using [the hosted quickstart](/docs/quickstarts/network/hosted)
 
+* previously setup kubernetes in OKE
+  * simple cluster
+  * standard quick create cluster
+  * public endpoint
+  * Shape: VM.Standard2.2
+  * 1 node
+  * pasted my public key for access
+  * exposed the cluster with public ip
+* already installed oci as well as helm
+* already deployed a ziti environment using https://openziti.github.io/docs/quickstarts/network/hosted
 
-### create kubernetes config files - public and private:
+## create kubernetes config files - public and private
+
 ```bash
 oci ce cluster create-kubeconfig \
     --cluster-id ${oci_cluster_id} \
@@ -54,67 +56,74 @@ oci ce cluster create-kubeconfig \
 chmod 600 /tmp/oci/config.oci.private
 ```
 
-### delete any resources if needed:
+### delete any resources if needed
+
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.public
 helm uninstall ziti-host
 kubectl delete persistentvolume ziti-host-pv
 ```
 
-### show it working via public ip from wsl:
-#### wsl:
+### show it working via public ip from wsl
+
+#### wsl
+
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.public
 kubectl get pods -v7 --request-timeout='5s'
 ```
 
-#### show it failing via private ip from wsl:
+#### show it failing via private ip from wsl
+
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.private
 kubectl get pods -v7 --request-timeout='2s'
 ```
 
-### let's install ziti in the cluster:
-#### make a new identity:
-```bash 
+### let's install ziti in the cluster
+
+#### make a new identity
+
+```bash
 ziti edge create identity device "${the_kubernetes_identity}" -a "${service_name}"ServerEndpoints -o "${the_kubernetes_identity}".jwt
 ziti edge create identity device "${the_user_identity}" -a "${service_name}"ClientEndpoints -o "${the_user_identity}".jwt
 ```
 
-#### add the identity to the cluster (using the public ip):
-```bash
-helm repo add netfoundry https://netfoundry.github.io/charts/
-```
+#### Deploying Ziti to Kubernetes
 
-### create the config file to apply
-```yaml
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ziti-host
-  labels:
-    type: local
-spec:
-  storageClassName: oci
-  capacity:
-    storage: 100Mi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/netfoundry"
-```
+1. install the `helm` CLI tool [using this guide](https://helm.sh/docs/intro/install/)
+2. add the OpenZiti Helm repo:
 
-### kubectl apply the config:
-```bash
-export KUBECONFIG=/tmp/oci/config.oci.public
-kubectl apply -f add-persistent-claims.yaml 
-helm install ziti-host netfoundry/ziti-host --set-file enrollmentToken="${the_kubernetes_identity}".jwt
-```
+    ```bash
+    helm repo add openziti https://openziti.github.io/helm-charts/
+    ```
+
+3. locate the jwt file for the Kubernetes identity. If you followed the steps above the file will be named: `"${the_kubernetes_identity}".jwt` (make sure you replace the variable with the correct value)
+4. enroll the Kubernetes identity. This exchanges the temporary JWT for a permanent identity JSON file. Several Ziti CLIs have an `enroll` command for this purpose. Here's one way to obtain the identity that doesn't require you to download a CLI if you already have Docker:
+
+    ```bash
+    # start with JWT file on Docker host in 
+    #  /tmp/${the_kubernetes_identity}.jwt
+    docker run --rm --volume /tmp:/mnt \
+        openziti/quickstart /openziti/ziti-bin/ziti edge enroll \
+        "/mnt/${the_kubernetes_identity}.jwt"
+    # now you will have a new file 
+    # /tmp/${the_kubernetes_identity}.json
+    ```
+
+5. use the Kubernetes identity JSON file when you install the Helm chart:
+
+    ```bash
+    helm install ziti-host openziti/ziti-host \
+        --set-file zitiIdentity="/tmp/${the_kubernetes_identity}.json"
+    ```
 
 ### verify the ziti identity was bootstrapped by using kubectl logs
+
 ```bash
 kubectl logs ziti-host<tab><enter>
 ```
+
 ---
 
 now go disable the public ip so private access ONLY works... this takes "a minute or two or three"...
@@ -134,7 +143,8 @@ k8s_private_port=$(echo ${k8s_private_host_and_port} | cut -d ":" -f2)
 echo "Private URL: ${k8s_private_host_and_port}, Host: ${k8s_private_host}, Port: ${k8s_private_port}"
 ```
 
-#### ziti setup:
+#### ziti setup
+
 ```bash
 k8s_private_dns=kubernetes
 
@@ -151,13 +161,15 @@ ziti edge create service-policy "${service_name}"-binding Bind --service-roles '
 ziti edge create service-policy "${service_name}"-dialing Dial --service-roles '@'"${service_name}" --identity-roles '#'"${service_name}"'ClientEndpoints'
 ```
 
-#### verify windows can access the kubernetes api (using cmd.exe from wsl):
+#### verify windows can access the kubernetes api (using cmd.exe from wsl)
+
 ```bash
 cmd.exe /c curl -k "https://${k8s_private_dns}"
 cmd.exe /c curl -k "https://${k8s_private_host}"    
 ```
 
 #### at this point from wsl kubectl will work using the ip address - but not dns
+
 ```bash
 #enroll the identity
 ziti edge enroll "${the_user_identity}".jwt
@@ -171,20 +183,25 @@ zConfig: /mnt/v/temp/oci/"${the_user_identity}".json
 service: k8s.oci
 ```
 
-#### use "kubeztl":
-#### download from github:
+#### use "kubeztl"
+
+#### download from github
+
 ```bash
 curl -L -o kubeztl https://github.com/openziti-incubator/kubectl/releases/download/v0.0.4/kubectl-linux-amd64 ./kubeztl get pods -c ./id.json -S "${service_name}"
 ```
 
-#### modify config if you want...
+#### modify config if you want
+
 find your context, add two lines:
+
 ```bash
 zConfig: /mnt/v/temp/oci/oci.json
 service: k8s.oci
 ```
 
-### useful if you need to update either of the identities...
+### useful if you need to update either of the identities
+
 ```bash
 ziti edge update identity "${the_user_identity}" -a "${service_name}"ClientEndpoints
 ziti edge update identity "${the_kubernetes_identity}" -a "${service_name}"ServerEndpoints

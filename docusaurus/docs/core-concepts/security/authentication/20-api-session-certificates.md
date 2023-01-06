@@ -21,8 +21,8 @@ as no certificates will be available for use to connect to Edge Routers.
 ## Creation
 
 API Session Certificates can be created by `POST /edge/client/v1/current-api-session/certificates`. The payload
-needs to be a valid PEN encoded CSR in the `csr` field. The CSR should contain at minimum subject information.
-Sensitive fields such as key usage will be ignored. Additional Ziti specific SANs information
+needs to be a valid PEM-encoded CSR in the `csr` field. The CSR should contain at minimum subject information.
+Sensitive fields such as key usage will be ignored. Additional Ziti-specific SANs
 may be added.
 
 ### Request Payload

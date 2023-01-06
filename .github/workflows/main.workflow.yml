@@ -13,18 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GIT_BRANCH: main
-      gh_ci_key: ${{ secrets.gh_ci_key }}
+      gh_ci_key: ${{ secrets.GH_CI_KEY }}
       ziti_ci_gpg_key: ${{ secrets.ZITI_CI_GPG_KEY }}
       ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v3
+
       - name: Install Doxygen
         run: |
           sudo apt-get update \
           && sudo apt-get install -y doxygen
+
       - name: Build & Publish Docusaurus Site
         run: ./publish.sh
+
   check-links:
     needs: publish-docs-from-container
     name: Check for Broken Links

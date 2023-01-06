@@ -69,6 +69,15 @@ const config = {
       },
     ],
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-policies',
+        path: 'docs-policies',
+        routeBasePath: 'policies',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
       '@docusaurus/plugin-client-redirects',
       {
         fromExtensions: ['md', 'html'], // /myPage.md -> /myPage
@@ -382,10 +391,6 @@ const config = {
             to: '/docs/quickstarts/zac/',
             from: ['/ziti/quickstarts/zac/installation.html'],
           },
-          {
-            to: '/docs/introduction/openziti-is-software',
-            from: ['/policies/CONTRIBUTING.html'],
-          },
         ],
       },
     ],
@@ -523,20 +528,78 @@ const config = {
           //   position: 'right'
           // },
           {
+            type: 'dropdown',
+            label: 'Links',
+            position: 'right',
+            items: [
+              {
+                type: 'html',
+                value: '<div class="text-divider"><p>Socials</p></div>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/yt.svg"/>YouTube</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://twitter.com/OpenZiti" target="_blank" title="OpenZiti on Twitter"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/twit.svg"/>Twitter</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/reddit-logo.png"/>Reddit</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/ziggy.png"/><a href="https://twitter.com/OpenZiggy" target="_blank" title="OpenZiggy on Twitter">Ziggy</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<div class="text-divider"><p>Other</p></div>'
+              },
+              {
+                type: 'html',
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project incubator">Test Kitchen</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://zeds.openziti.org" target="_blank" title="Developer Sandbox"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/zeds.png"/>ZEDS</span></a>'
+              },
+              {
+                type: 'html',
+                value: '<a href="https://netfoundry.io/pricing/" target="_blank" title="NetFoundry-hosted Ziti"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/nf.svg"/>CloudZiti</span></a>'
+              },
+            ]
+          },
+          {
             href: 'https://openziti.discourse.group/',
             position: 'right',
             className: 'header-discourse-link',
+            title: 'Discourse'
           },
           {
             href: 'https://github.com/openziti/ziti',
             position: 'right',
             className: 'header-github-link',
+            title: 'GitHub'
           },
         ],
       },
       footer: {
         style: 'dark',
         links: [
+          {
+            title: 'Policies',
+            items: [
+              {
+                label: 'Code of Conduct',
+                to: '/policies/CODE_OF_CONDUCT',
+              },
+              {
+                label: 'Contributing',
+                to: '/policies/CONTRIBUTING',
+              },
+            ],
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
       },

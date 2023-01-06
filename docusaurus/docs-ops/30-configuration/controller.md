@@ -292,6 +292,7 @@ events:
 
 The `healthChecks` section configures how often health checking is performed. As of now, health checks are limited
 to ensuring the internal database has not deadlocked by attempting to acquire a locking transaction on some interval.
+Health check status is reported externally on the [`health-checks` API](#web).
 
 - `boltCheck` - (optional) bbolt specific configuration
     - `interval` - (optional, 30s) how often to try entering a bolt read transaction
@@ -359,7 +360,7 @@ trace:
 
 ### `web`
 
-The `web` section follows the [conventions of XWeb](conventions.md#xweb).0 The controller has the following APIs
+The `web` section follows the [conventions of XWeb](conventions.md#xweb). The controller has the following APIs
 defined:
 
 - `health-checks` - provides a health check API that allows remote parties to verify the health of the controller
