@@ -1,0 +1,8 @@
+{
+  "label": "Authentication",
+  "position": 40,
+  "link":{
+    "type": "doc",
+    "id": "learn/core-concepts/security/authentication/auth"
+  }
+}
