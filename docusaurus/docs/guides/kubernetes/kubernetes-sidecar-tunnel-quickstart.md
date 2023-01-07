@@ -34,13 +34,13 @@ We will create a new identity for our client, with a new AppWAN that uses the et
 
 Create the Identity:
 
-    ziti edge controller create identity device tunnel-sidecar -o tunnel-sidecar.jwt
+    ziti edge create identity device tunnel-sidecar -o tunnel-sidecar.jwt
 
 Create the AppWAN and reference the service created in the Ziti Network Quickstart. We'll be using `eth0.ziti.cli`
 here but if you created `eth0.ziti.ui` in the quickstart - use that instead. Also note that in the
 tunnel-sidecar-demo.yaml:
 
-    ziti edge controller create app-wan ziti-tunnel-appwan -i tunnel-sidecar -s eth0.ziti.cli
+    ziti edge create app-wan ziti-tunnel-appwan -i tunnel-sidecar -s eth0.ziti.cli
 
 ## Create a Kubernetes Secret
 
