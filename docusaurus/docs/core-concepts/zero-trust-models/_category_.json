@@ -1,8 +1,0 @@
-{
-  "label": "Zero Trust Models",
-  "position": 20,
-  "link":{
-    "type": "doc",
-    "id": "core-concepts/zero-trust-models/overview"
-  }
-}

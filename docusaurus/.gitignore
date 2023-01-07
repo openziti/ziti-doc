@@ -23,4 +23,4 @@ _remotes
 remotes
 all/docs/_remotes
 ziti
-static/api
+static/docs/reference/api

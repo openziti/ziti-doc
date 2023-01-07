@@ -25,7 +25,7 @@ prove it works. Once that's complete, we'll play around with the setup and see i
 
 In the [previous article](./part2.md), we established our entire solution using the OpenZiti overlay, `kubectl` and `helm`. We saw 
 everything get installed and it all "seems to work". But how do we **know** it works?  Let's provision an identity for yourself now and 
-let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](/docs/core-concepts/clients/choose) running 
+let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](/docs/learn/core-concepts/clients/choose) running 
 locally. Once you have that installed, provision an identity and enroll it with your tunneling client. 
 
 ```text

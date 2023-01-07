@@ -74,7 +74,7 @@ Let's get to work and build this solution. We'll need some legwork done first.
 ![construction worker](https://github.com/openziti/branding/raw/main/images/ziggy/svg/Ziggy%20The%20Construction%20Worker.svg)
 
 * You have an OpenZiti overlay network available. If not, for this scenario you will want to use 
-["host your own"](/docs/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
+["host your own"](/docs/learn/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
 * Two Kubernetes clusters provisioned
 * Necessary tooling installed and available on the path
   * kubectl
