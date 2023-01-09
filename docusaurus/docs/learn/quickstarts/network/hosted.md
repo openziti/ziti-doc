@@ -35,7 +35,7 @@ These are the arbitrary ports we'll use in this example for convenience when spe
 ### Prerequisites
 
 :::note
-Make sure you have `jq` installed. It's available to `apt` (Debian) and `dnf` (RHEL, Rocky, Fedora) as package name `jq`.
+Make sure you have `jq` and `curl` installed before running the `expressInstall` one-liner. Both are available in `apt` (Debian) and `dnf` (RHEL, Rocky, Fedora) as eponymous packages.
 :::
 
 ### `expressInstall` Setup {#expressinstall-setup}
