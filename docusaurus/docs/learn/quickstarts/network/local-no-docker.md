@@ -8,19 +8,22 @@ quickly and easily, entirely locally. Since you'll be running everything locally
 between network components. All the processes will run locally, and you'll be responsible for starting and stopping them
 when you want to turn the overlay network on or off.
 
-## Preparation
+## Prerequisites
+
+:::note
+Make sure you have `jq` and `curl` installed before running the `expressInstall` one-liner. Both are available in `apt` (Debian) and `dnf` (RHEL, Rocky, Fedora) as eponymous packages.
+:::
 
 There is not much preparation necessary to getting up-and-running locally. At this time, this guide expects that
 you'll be running commands within a `bash` shell. If you're running Windows, you will need to make sure you have 
 Windows Subsystem for Linux installed for now. We plan to provide a Powershell script in the future, but for now the
-script requires you to be able to use `bash`. Make sure your local ports 1280, 6262, 10000 are free before running the 
+script requires you to be able to use `bash`. Make sure your local ports 1280, 6262, 10000 are free before running the
 controller. These ports are the default ports used by the controller. Also ensure ports 10080 and 3022 are open as these 
 are the default ports the edge router will use.
 
-## One-liner Setup
+## Run `expressInstall` One-liner
 
-Running the latest version of Ziti locally is as simple as running this one command (the command will require the `jq` 
-utility and `curl` to be installed):
+Running the latest version of Ziti locally is as simple as running this one command:
 
 ```bash
     source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
@@ -29,7 +32,7 @@ utility and `curl` to be installed):
 This script will perform an 'express' install of Ziti which does the following:
 
 * download the latest version of the Ziti components (`ziti`, `ziti-controller`, `ziti-edge-router`, `ziti-tunnel`)
-* extract the components into a predefined location: ~/.ziti/quickstart/$(hostname)
+* extract the components into a predefined location: ~/.ziti/quickstart/$(hostname -s)
 * create a full PKI for you to explore
 * create a controller configuration using default values and the PKI created above
 * create an edge-router configuration using default values and the PKI created above 
