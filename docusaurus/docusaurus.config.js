@@ -38,7 +38,7 @@ const config = {
         id: 'docs-policies',
         path: 'docs-policies',
         routeBasePath: 'policies',
-        sidebarPath: require.resolve('./sidebars.js'),
+        sidebarPath: require.resolve('./sidebar-policies.js'),
       },
     ],
     [
@@ -454,28 +454,16 @@ const config = {
         items: [
           {
             to: '/docs/learn/introduction/',
-            label: 'Learn',
-            position: 'left',
-            activeBaseRegex: `/docs/learn/`,
+            label: 'Documentation',
+            position: 'right',
+            activeBaseRegex: '/docs/(?!downloads)',
           },
           {
-            to: '/docs/reference/glossary',
-            label: 'Reference',
-            position: 'left',
-            activeBaseRegex: `/docs/reference/`,
+            to: '/docs/downloads',
+            label: 'Downloads',
+            position: 'right',
+            activeBaseRegex: '/docs/downloads',
           },
-          {
-            to: '/docs/guides/',
-            label: 'Guides',
-            position: 'left',
-            activeBaseRegex: `/docs/guides/`,
-          },
-          // {
-          //   to: '/docs/downloads',
-          //   label: 'Downloads',
-          //   position: 'left',
-          //   activeBaseRegex: `/docs/downloads/`,
-          // },
           // {
           //   to: '/blog',
           //   label: 'Blog',
