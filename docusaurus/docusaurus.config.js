@@ -267,6 +267,10 @@ const config = {
               },
               {
                 type: 'html',
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/blog-icon.png"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>'
+              },
+              {
+                type: 'html',
                 value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project incubator">Test Kitchen</span></a>'
               },
               {
