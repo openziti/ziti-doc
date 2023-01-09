@@ -40,3 +40,4 @@ jobs:
           filename: .github/workflows/check-links-issue-template.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
