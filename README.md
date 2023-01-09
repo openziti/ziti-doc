@@ -69,7 +69,7 @@ With these scripts, you can check for broken links to other sites and redirects 
 
 ## How Short URLs Work
 
-`https://get.openziti.io` is a reverse proxy with cache provided by AWS CloudFront. The upstream/origin is `https://raw.githubusercontent.com`. The proxy allows for a shorter URL by mapping a URL path abbreviation to the full path.
+`https://get.openziti.io` is a CloudFront caching proxy that runs a viewer request function ([script](./cloudfront-function-github-proxy.js)). The upstream/origin is `https://raw.githubusercontent.com`. The proxy allows for a shorter URL by mapping a URL path abbreviation to the full path.
 
 |purpose|abbreviation|full URL path|
 |---|---|---|
@@ -78,15 +78,14 @@ With these scripts, you can check for broken links to other sites and redirects 
 |Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
 |Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
 
-Reference:
+Deployment Reference:
 
-* [CloudFront Function that routes requests](./github-raw-viewer-request-router.js)
 * update the function's DEVELOPMENT stage in AWS
 
   ```bash
   aws cloudfront update-function \
     --name github-raw-viewer-request-router \
-    --function-code $(base64 -w0 < github-raw-viewer-request-router.js) \
+    --function-code $(base64 -w0 < cloudfront-function-github-proxy.js) \
     --function-config '{"Runtime": "cloudfront-js-1.0","Comment": "update function"}' \
     --if-match E3JWKAKR8XB7XF  # ETag from DescribeFunction
   ```
@@ -124,3 +123,14 @@ Reference:
     --name github-raw-viewer-request-router \
     --if-match E3JWKAKR8XB7XF
   ```
+
+## How openziti.io Works
+
+The `openziti.io` DNS name resolves to a proxy that redirects selectively to HashNode or GitHub Pages, depending on the request path. This behavior represents a transitional state preserving historical links to blog articles as redirects while this docs site becomes the landing page for `openziti.io`.
+
+| request | redirect            |
+|---------|---------------------|
+| `/`     | openziti.github.io/ |
+| `/*`    | blog.openziti.io/*  | 
+
+Like the GitHub proxy, this proxy runs a CloudFront viewer request function ([script](./cloudfront-function-blog-proxy.js)) to decide how to handle requests. However, this proxy only responds with redirects.
