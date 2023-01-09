@@ -313,6 +313,52 @@ const config = {
               },
             ],
           },
+          {
+            title: 'Socials',
+            items: [
+              {
+                label: 'YouTube',
+                to: 'https://www.youtube.com/OpenZiti'
+              },
+              {
+                label: 'Twitter',
+                to: 'https://twitter.com/OpenZiti'
+              },
+              {
+                label: 'Reddit',
+                to: 'https://reddit.com/r/openziti'
+              },
+              {
+                label: 'Ziggy',
+                to: 'https://twitter.com/OpenZiggy'
+              },
+              {
+                label: 'Discourse',
+                to: 'https://openziti.discourse.group/',
+              },
+              {
+                label: 'GitHub',
+                to: 'https://github.com/openziti/ziti',
+              },
+            ]
+          },
+          {
+            title: 'Other',
+            items: [
+              {
+                label: 'Test Kitchen',
+                to: 'https://github.com/openziti-test-kitchen'
+              },
+              {
+                label: 'Developer Sandbox',
+                to: 'https://zeds.openziti.org'
+              },
+              {
+                label: 'CloudZiti',
+                to: 'https://netfoundry.io/pricing/'
+              },
+            ]
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
       },
