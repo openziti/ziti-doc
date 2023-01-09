@@ -231,11 +231,11 @@ const config = {
             position: 'right',
             activeBaseRegex: '/docs/downloads',
           },
-          // {
-          //   to: '/blog',
-          //   label: 'Blog',
-          //   position: 'right'
-          // },
+          {
+            to: 'https://blog.openziti.io/',
+            label: 'Blog',
+            position: 'right'
+          },
           {
             type: 'dropdown',
             label: 'Links',
