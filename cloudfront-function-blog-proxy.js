@@ -57,6 +57,19 @@ function handler(event) {
     ]
 
     switch (true) {
+      case uri == "/":
+        var response = {
+          statusCode: 307,
+          statusDescription: 'Found',
+          headers: {
+            location: {
+              value: `https://openziti.github.io${uri}`
+            },
+          }
+        }
+        console.log(`Redirecting "${uri}" to "${response.headers.location.value}"`);
+        return response;
+        break;
       case popularBlogUris.includes(uri.replace(/\/$/, "")):
         var response = {
           statusCode: 307,
