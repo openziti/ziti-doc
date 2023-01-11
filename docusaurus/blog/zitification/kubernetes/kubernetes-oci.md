@@ -34,7 +34,7 @@ work done ahead of time - takes time to establish a cluster:
   * pasted my public key for access
   * exposed the cluster with public ip
 * already installed oci as well as helm
-* already deployed a ziti environment using https://openziti.github.io/docs/quickstarts/network/hosted
+* already deployed a ziti environment using https://openziti.github.io/docs/learn/quickstarts/network/hosted
 
 ## create kubernetes config files - public and private
 

@@ -399,3 +399,15 @@ float: right;
   padding-left: 5px;
   padding-right: 5px;
 }
+
+/* highlight sidebar section headings */
+.theme-doc-sidebar-item-link-level-1.sidebar-title {
+  margin-top: 20px;
+  margin-left: 0px;
+  font-weight: bold;
+}
+
+/* indent sidebar list items */
+div > aside > div > nav > ul > li {
+  margin-left: 15px;
+}
