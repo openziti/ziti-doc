@@ -2,8 +2,8 @@
 id: glossary
 title: Glossary
 ---
-import ERPBrief from '../docs/core-concepts/security/authorization/policies/_edge-router-policy-brief.md'
-import SERPBrief from '../docs/core-concepts/security/authorization/policies/_service-edge-router-policy-brief.md'
+import ERPBrief from '../learn/core-concepts/security/authorization/policies/_edge-router-policy-brief.md'
+import SERPBrief from '../learn/core-concepts/security/authorization/policies/_service-edge-router-policy-brief.md'
 
 Here you will find a list of terms you may come across as you are using Ziti.
 
