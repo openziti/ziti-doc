@@ -1,14 +1,23 @@
 ---
 id: glossary
+title: Glossary
 ---
-# Glossary
+import ERPBrief from '../docs/core-concepts/security/authorization/policies/_edge-router-policy-brief.md'
+import SERPBrief from '../docs/core-concepts/security/authorization/policies/_service-edge-router-policy-brief.md'
+
 Here you will find a list of terms you may come across as you are using Ziti.
+
+## Edge Router Policy
+<ERPBrief />
 
 ## Network Overlay, Overlay
 A Ziti network is implemented as an "overlay". A network overlay abstracts away the layers beneath it, providing a new set of abstractions for designing and implementing software and systems. Good programming abstractions allow developers to focus on the rules implemented by those abstractions without being concerned with the layers below the abstraction. Ziti's overlay allows developers to focus on connectivity between components without having to be concerned with low-level details of how that connectivity is managed.
 
 ## Service Definition
 A service definition is used to "bind" a service to a specific underlay network expression, through one or more nodes on a Ziti overlay network. A service definition usually includes a terminating router (or routers) and one or more SDK or underlay network endpoints where the service can be reached.
+
+## Service Edge Router Policy
+<SERPBrief />
 
 ## Session
 A session is an "instance" of a service on behalf of an initiating endpoint, which is connected to a terminating endpoint. A session has strong identity and security between the initiating endpoint, terminating endpoint, and throughout the links between. A session selects a specific set of routers to traverse between the endpoints, and that path can change dynamically due to network performance.
