@@ -132,8 +132,6 @@ done <<URLS
 /policies/new-project-template/CODE_OF_CONDUCT
 /policies/new-project-template/CONTRIBUTING
 /policies/new-project-template/NF_EULA
-/ziti/manage/sample-controller-config.yaml
-/ziti/quickstarts/networks-overview.html
 URLS
 
 if ! (( ${#FAILURES[*]} )); then
