@@ -320,7 +320,7 @@ const config = {
             `,
           },
             ],
-        copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} NetFoundry, Inc.`,
       },
       prism: {
         theme: lightCodeTheme,
