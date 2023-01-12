@@ -298,7 +298,7 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
+        style: 'light',
         links: [
           {
             title: 'Policies',
@@ -346,16 +346,20 @@ const config = {
             title: 'Other',
             items: [
               {
-                label: 'Test Kitchen',
-                to: 'https://github.com/openziti-test-kitchen'
+                label: 'CloudZiti',
+                to: 'https://netfoundry.io/pricing/'
+              },
+              {
+                label: 'Blog',
+                to: 'https://blog.openziti.io'
               },
               {
                 label: 'Developer Sandbox',
                 to: 'https://zeds.openziti.org'
               },
               {
-                label: 'CloudZiti',
-                to: 'https://netfoundry.io/pricing/'
+                label: 'Test Kitchen',
+                to: 'https://github.com/openziti-test-kitchen'
               },
             ]
           },
