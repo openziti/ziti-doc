@@ -87,6 +87,23 @@ Express Edge Router started as process id: 1296. log located at: /home/vagrant/.
 You can verify the edge router is listening by finding the value of `$ZITI_EDGE_ROUTER_HOSTNAME:$ZITI_EDGE_ROUTER_PORT`.
 Again, this will default to using `$(hostname -s)` as the host name and port 3022.
 
+### Stopping the Controller and Router
+
+```bash
+stopRouter 
+stopController 
+```
+
+Example output:
+
+```bash
+$ stopRouter 
+INFO: stopped router
+
+$ stopController 
+INFO: Controller stopped.
+```
+
 ## Testing Your Overlay
 
 At this point you should have a functioning [Ziti Network](../../introduction/index.mdx). The script 
