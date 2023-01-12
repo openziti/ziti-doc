@@ -301,69 +301,25 @@ const config = {
         style: 'light',
         links: [
           {
-            title: 'Policies',
-            items: [
-              {
-                label: 'Code of Conduct',
-                to: '/policies/CODE_OF_CONDUCT',
-              },
-              {
-                label: 'Contributing',
-                to: '/policies/CONTRIBUTING',
-              },
+            label: 'Policies',
+            href: '/policies/CODE_OF_CONDUCT',
+          },
+          {
+            label: 'CloudZiti',
+            href: 'https://netfoundry.io/pricing/'
+          },
+          {
+            label: 'Blog',
+            to: 'https://blog.openziti.io'
+          },
+          {
+            html: `
+              <form>
+                <input type="BUTTON" class="footer__buttons" value="Back to top of page" onclick="window.location.href='#top'">
+              </form>
+            `,
+          },
             ],
-          },
-          {
-            title: 'Socials',
-            items: [
-              {
-                label: 'YouTube',
-                to: 'https://www.youtube.com/OpenZiti'
-              },
-              {
-                label: 'Twitter',
-                to: 'https://twitter.com/OpenZiti'
-              },
-              {
-                label: 'Reddit',
-                to: 'https://reddit.com/r/openziti'
-              },
-              {
-                label: 'Ziggy',
-                to: 'https://twitter.com/OpenZiggy'
-              },
-              {
-                label: 'Discourse',
-                to: 'https://openziti.discourse.group/',
-              },
-              {
-                label: 'GitHub',
-                to: 'https://github.com/openziti/ziti',
-              },
-            ]
-          },
-          {
-            title: 'Other',
-            items: [
-              {
-                label: 'CloudZiti',
-                to: 'https://netfoundry.io/pricing/'
-              },
-              {
-                label: 'Blog',
-                to: 'https://blog.openziti.io'
-              },
-              {
-                label: 'Developer Sandbox',
-                to: 'https://zeds.openziti.org'
-              },
-              {
-                label: 'Test Kitchen',
-                to: 'https://github.com/openziti-test-kitchen'
-              },
-            ]
-          },
-        ],
         copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
       },
       prism: {
