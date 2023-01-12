@@ -14,7 +14,7 @@ command line we will deploy it in a sidecar container in a Kubernetes Pod.
 This guide also demonstrates `ziti-tunnel`'s internal DNS server, which allows us to access Ziti services
 by hostname instead of IP address.
 
-[Here's some detail on how the various intercept modes work on Linux](https://openziti.github.io/ziti/clients/linux.html)
+[Here's some detail on how the various intercept modes work on Linux](../../learn/core-concepts/clients/tunnelers/linux/index.md)
 
 ### Solution Overview
 
@@ -22,7 +22,7 @@ by hostname instead of IP address.
 
 ## Prerequisites
 
-- Complete the [Ziti Network Quickstart](https://openziti.github.io/ziti/quickstarts/networks-overview.html). This guide
+- Complete the [Ziti Network Quickstart](../../learn/quickstarts/network/index.md). This guide
   uses the Ziti Controller and Ziti Edge Router that are created in the Ziti Quickstart.
 - Admin-level access to a Kubernetes cluster via `kubectl`.
 
