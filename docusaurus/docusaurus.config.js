@@ -313,7 +313,7 @@ const config = {
             to: 'https://blog.openziti.io'
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} NetFoundry, Inc.`,
+        copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc.`,
       },
       prism: {
         theme: lightCodeTheme,
