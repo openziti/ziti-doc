@@ -302,11 +302,11 @@ const config = {
         links: [
           {
             label: 'Policies',
-            href: '/policies/CODE_OF_CONDUCT',
+            to: '/policies/CODE_OF_CONDUCT',
           },
           {
             label: 'CloudZiti',
-            href: 'https://netfoundry.io/pricing/'
+            to: 'https://netfoundry.io/pricing/'
           },
           {
             label: 'Blog',
