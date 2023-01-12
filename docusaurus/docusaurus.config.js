@@ -312,14 +312,7 @@ const config = {
             label: 'Blog',
             to: 'https://blog.openziti.io'
           },
-          {
-            html: `
-              <form>
-                <input type="BUTTON" class="footer__buttons" value="Back to top of page" onclick="window.location.href='#top'">
-              </form>
-            `,
-          },
-            ],
+        ],
         copyright: `Copyright © ${new Date().getFullYear()} NetFoundry, Inc.`,
       },
       prism: {

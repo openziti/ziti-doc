@@ -51,7 +51,7 @@ html[data-theme="dark"] {
   --ifm-background-color: #111827;
   --ifm-background-surface-color: #1f2937;
   --ifm-background-surface-color-dark: #374151;
-  --ifm-footer-background-color: #111827;
+  --ifm-footer-background-color: #1b263e;
   --ifm-color-primary: #158eed;
   --ifm-color-primary-dark: #b671fc;
   --ifm-color-primary-darker: #ad5ffb;
@@ -196,36 +196,16 @@ input[type="radio"]:checked+label:after {
 /**
  Footer
  */
-.footer {
-  display: flex;
-}
-
-.footer__copyright {
-  text-align: left;
+.footer, .footer.container {
+  padding: calc(var(--ifm-spacing-vertical) * 0.2)
+  var(--ifm-footer-padding-horizontal);
 }
 
 .footer__links {
-  margin-bottom: 1.5rem;
-  text-align: left;
+  margin-bottom: 0.5rem;
 }
 
-.footer__buttons {
-  float: right;
-  background-color: #bbbbbb;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-.footer__title {
-  margin-bottom: 0.1rem;
-}
-
-.footer__link-item {
-  line-height: 1;
+.footer__bottom {
 }
 
 .notification_new {
