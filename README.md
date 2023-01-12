@@ -44,28 +44,28 @@ Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this sit
 
 ## Check For Broken Links
 
-[A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site, but doesn't make any changes.
+[A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site and incoming links from external sites, but doesn't make any changes to the site source files. An alarm issue is raised and auto-resolved based on the result of the check.
 
-With these scripts, you can check for broken links to other sites and redirects from known permalinks.
+With these scripts, you can test all the links in the site's pages and popular incoming request paths.
 
 * [check-broken-links.sh](./check-broken-links.sh): uses `docker` to run `muffet`
 
   ```bash
-  # check local dev server for broken links to itself and other sites, excluding GitHub links
+  # check local dev server for broken outgoing links to itself and other sites, excluding a few hosts that are sensitive to being hammered by a crawler
   ./check-broken-links.sh http://127.0.0.1:3000
 
   # check the GH Pages site for broken links to anywhere
   ./check-broken-links.sh https://openziti.github.io --rate-limit=11
   ```
 
-* [check-old-urls.sh](./check-old-urls.sh): uses `curl`
+* [check-popular-links.sh](./check-popular-links.sh): uses `curl`
 
   ```bash
-  # check a list of important permalinks to make sure they still work
-  ./check-old-urls.sh https://openziti.github.io
+  # check a list of popular incoming links from external sites
+  ./check-popular-links.sh https://openziti.github.io
   ```
 
-  Redirects don't work the same as GH Pages when the host is `yarn` or Vercel, so it's probably not useful to test against those hosts without further investigation.
+  You will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
 
 ## How the Proxies Work
 
