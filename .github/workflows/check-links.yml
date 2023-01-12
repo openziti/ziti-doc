@@ -41,3 +41,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+  popular-link-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Workspace
+        uses: actions/checkout@v3
+      - name: Check popular links
+        run: ./check-popular-links.sh https://openziti.github.io/
+      - name: Resolve Alarm Issue if Links are Not Broken
+        if: ${{ success() }}
+        uses: DavidMarquezF/close-matching-issues@v3.0.1
+        with:
+          query: 'is:open label:bug in:title "Popular Links Alarm"'
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Raise an Alarm Issue if Links are Broken
+        if: ${{ failure() }}
+        uses: JasonEtco/create-an-issue@v2.9.1
+        with:
+          update_existing: true
+          search_existing: open
+          filename: .github/workflows/popular-links-issue-template.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
