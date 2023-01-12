@@ -44,32 +44,40 @@ Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this sit
 
 ## Check For Broken Links
 
-[A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site, but doesn't make any changes.
+[A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site and incoming links from external sites, but doesn't make any changes to the site source files. An alarm issue is raised and auto-resolved based on the result of the check.
 
-With these scripts, you can check for broken links to other sites and redirects from known permalinks.
+With these scripts, you can test all the links in the site's pages and popular incoming request paths.
 
 * [check-broken-links.sh](./check-broken-links.sh): uses `docker` to run `muffet`
 
   ```bash
-  # check local dev server for broken links to itself and other sites, excluding GitHub links
+  # check local dev server for broken outgoing links to itself and other sites, excluding a few hosts that are sensitive to being hammered by a crawler
   ./check-broken-links.sh http://127.0.0.1:3000
 
   # check the GH Pages site for broken links to anywhere
   ./check-broken-links.sh https://openziti.github.io --rate-limit=11
   ```
 
-* [check-old-urls.sh](./check-old-urls.sh): uses `curl`
+* [check-popular-links.sh](./check-popular-links.sh): uses `curl`
 
   ```bash
-  # check a list of important permalinks to make sure they still work
-  ./check-old-urls.sh https://openziti.github.io
+  # check a list of popular incoming links from external sites
+  ./check-popular-links.sh https://openziti.github.io
   ```
 
-  Redirects don't work the same as GH Pages when the host is `yarn` or Vercel, so it's probably not useful to test against those hosts without further investigation.
+  You will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
 
-## How Short URLs Work
+## How the Proxies Work
+
+There are a couple of reverse proxies hosted by CloudFront. Both employ CloudFront functions with a custom script. Both scripts are of type "viewer request" meaning they operate on the request of the viewer, which is the frontend of the proxy.
+
+The scripts parse the request and decide whether to return a response to the viewer or pass along the request to the origin, i.e., upstream or backend.
+
+### How the Short URL Proxy Works
 
 `https://get.openziti.io` is a CloudFront caching proxy that runs a viewer request function ([script](./cloudfront-function-github-proxy.js)). The upstream/origin is `https://raw.githubusercontent.com`. The proxy allows for a shorter URL by mapping a URL path abbreviation to the full path.
+
+This proxy's function modifies the viewer's request if it matches one of the shortening prefixes below before passing it along to the origin, which is GitHub.
 
 |purpose|abbreviation|full URL path|
 |---|---|---|
@@ -78,9 +86,17 @@ With these scripts, you can check for broken links to other sites and redirects 
 |Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
 |Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
 
-Deployment Reference:
+### How the openziti.io Proxy Works
 
-* update the function's DEVELOPMENT stage in AWS
+The `openziti.io` DNS name resolves to a proxy that redirects selectively to HashNode or GitHub Pages, depending on the request path. This preserves popular incoming links to blog articles as redirects while this docs site becomes the default destination for all other requests for `openziti.io`.
+
+Like the GitHub proxy, this proxy runs a CloudFront viewer request function ([script](./cloudfront-function-blog-proxy.js)) to decide how to handle requests. This proxy's function inspects the viewer's request to see if it matches any of the popular blog links. If it matches then it responds to the viewer with a redirect instructing their browser to instead load the same request path at `blog.openziti.io`. If the viewer's request doesn't match one of the old blog links then it's passed along unmodified to the default origin, `openziti.github.io`.
+
+### CloudFront Proxy Deployment Notes
+
+You can perform these steps in the AWS Web Console or with `aws` CLI.
+
+* Update the function's DEVELOPMENT stage in AWS. In the console you need to paste the new script and save it to update the development stage of the CloudFront function.
 
   ```bash
   aws cloudfront update-function \
@@ -90,7 +106,7 @@ Deployment Reference:
     --if-match E3JWKAKR8XB7XF  # ETag from DescribeFunction
   ```
 
-* verify the request is modified as expected
+* Test the function. You need to verify the request or response is modified in the expected way. You can do this in the web console with the "test" tab on the CloudFront function.
 
   ```bash
   aws cloudfront test-function \
@@ -123,14 +139,3 @@ Deployment Reference:
     --name github-raw-viewer-request-router \
     --if-match E3JWKAKR8XB7XF
   ```
-
-## How openziti.io Works
-
-The `openziti.io` DNS name resolves to a proxy that redirects selectively to HashNode or GitHub Pages, depending on the request path. This behavior represents a transitional state preserving historical links to blog articles as redirects while this docs site becomes the landing page for `openziti.io`.
-
-| request | redirect            |
-|---------|---------------------|
-| `/`     | openziti.github.io/ |
-| `/*`    | blog.openziti.io/*  | 
-
-Like the GitHub proxy, this proxy runs a CloudFront viewer request function ([script](./cloudfront-function-blog-proxy.js)) to decide how to handle requests. However, this proxy only responds with redirects.

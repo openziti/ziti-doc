@@ -26,7 +26,7 @@ function handler(event) {
         break;
     }
 
-    console.log("Routing '"+uri+"' to '"+request.uri+"'");
+    console.log(`Routing "${uri}" to "${request.uri}"`);
 
     return request;
 }
