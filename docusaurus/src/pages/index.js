@@ -193,7 +193,7 @@ export default function Home() {
                         <div className="sdkbutton-text">Everything Local<br/>(I love Docker)</div>
                     </a>
                     <a className="btn-hover sdkbutton-button"
-                       href={useBaseUrl("docs/learn//network/local-docker-compose")}>
+                       href={useBaseUrl("docs/learn/quickstarts/network/local-docker-compose")}>
                         <div className="sdkbutton-text">Everything Local<br/>(Docker Compose)</div>
                     </a>
                     <a className="btn-hover sdkbutton-button"
