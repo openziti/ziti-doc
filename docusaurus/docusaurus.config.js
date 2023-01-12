@@ -231,11 +231,11 @@ const config = {
             position: 'right',
             activeBaseRegex: '/docs/downloads',
           },
-          // {
-          //   to: '/blog',
-          //   label: 'Blog',
-          //   position: 'right'
-          // },
+          {
+            to: 'https://blog.openziti.io/',
+            label: 'Blog',
+            position: 'right'
+          },
           {
             type: 'dropdown',
             label: 'Links',
@@ -264,6 +264,10 @@ const config = {
               {
                 type: 'html',
                 value: '<div class="text-divider"><p>Other</p></div>'
+              },
+              {
+                type: 'html',
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/blog-icon.png"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>'
               },
               {
                 type: 'html',
