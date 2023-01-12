@@ -298,23 +298,22 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
+        style: 'light',
         links: [
           {
-            title: 'Policies',
-            items: [
-              {
-                label: 'Code of Conduct',
-                to: '/policies/CODE_OF_CONDUCT',
-              },
-              {
-                label: 'Contributing',
-                to: '/policies/CONTRIBUTING',
-              },
-            ],
+            label: 'Policies',
+            to: '/policies/CODE_OF_CONDUCT',
+          },
+          {
+            label: 'CloudZiti',
+            to: 'https://netfoundry.io/pricing/'
+          },
+          {
+            label: 'Blog',
+            to: 'https://blog.openziti.io'
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc.`,
       },
       prism: {
         theme: lightCodeTheme,

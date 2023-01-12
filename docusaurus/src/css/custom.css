@@ -9,7 +9,7 @@
   --ifm-background-color: #f8fafc;
   --ifm-background-surface-color: #f1f5f9;
   --ifm-background-surface-color-dark: #e1d4ee;
-  --ifm-footer-background-color: #f8fafc;
+  --ifm-footer-background-color: #f0f0f0;
   --ifm-color-primary: #158eed;
   --ifm-color-primary-dark: #8519e7;
   --ifm-color-primary-darker: #7e17dc;
@@ -48,7 +48,7 @@ html[data-theme="dark"] {
   --ifm-background-color: #111827;
   --ifm-background-surface-color: #1f2937;
   --ifm-background-surface-color-dark: #374151;
-  --ifm-footer-background-color: #111827;
+  --ifm-footer-background-color: #1b263e;
   --ifm-color-primary: #158eed;
   --ifm-color-primary-dark: #b671fc;
   --ifm-color-primary-darker: #ad5ffb;
@@ -190,11 +190,13 @@ input[type="radio"]:checked+label:after {
 /**
  Footer
  */
-.footer {
-  display: flex;
+ .footer, .footer.container {
+  padding: calc(var(--ifm-spacing-vertical) * 0.2)
+  var(--ifm-footer-padding-horizontal);
 }
+
 .footer__links {
-  margin-bottom: 4.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .notification_new {
