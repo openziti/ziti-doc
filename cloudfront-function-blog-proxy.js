@@ -63,7 +63,7 @@ function handler(event) {
           statusDescription: 'Found',
           headers: {
             location: {
-              value: `https://openziti.github.io${uri}`
+              value: `https://docs.openziti.io${uri}`
             },
           }
         }
