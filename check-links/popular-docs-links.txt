@@ -1,22 +1,3 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-[[ $# -eq 1 ]] || {
-    echo "ERROR: need base URL to check as first param" >&2
-    exit 1
-} 
-
-TOTAL=0
-typeset -a SUCCESSES=() FAILURES=()
-while read; do
-    (( ++TOTAL ))
-    if HTTP_CODE=$(curl -sfLw '%{http_code}' -o/dev/null "${1}${REPLY}" 2>/dev/null); then
-        SUCCESSES+=("${HTTP_CODE} ${REPLY}")
-    else
-        FAILURES+=("${HTTP_CODE} ${REPLY}")
-    fi
-done <<URLS
 /api
 /api/rest
 /api/rest/edge-apis
@@ -132,18 +113,3 @@ done <<URLS
 /policies/new-project-template/CODE_OF_CONDUCT
 /policies/new-project-template/CONTRIBUTING
 /policies/new-project-template/NF_EULA
-URLS
-
-if ! (( ${#FAILURES[*]} )); then
-    echo "INFO: all ${TOTAL} links succeeded!"
-    exit 0
-elif [[ ${TOTAL} -eq ${#FAILURES[*]} ]]; then
-    echo "ERROR: all ${TOTAL} links failed" >&2
-    exit 1
-else
-    echo "INFO: of ${TOTAL} links there were ${#SUCCESSES[*]} successes and ${#FAILURES[*]} failures."
-    printf '\n.:: REPORT ::.\n'
-    for i in "${SUCCESSES[@]}"; do printf '\t%d\t%s\n' ${i}; done | sort
-    for i in "${FAILURES[@]}"; do printf '\t%d\t%s\n' ${i}; done | sort
-    exit 1
-fi
