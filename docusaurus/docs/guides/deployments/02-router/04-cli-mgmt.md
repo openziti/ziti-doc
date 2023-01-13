@@ -6,7 +6,7 @@ title: CLI Mgmt
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import styles from './styles.module.css';
-import CliLogin from '../../_cli-login.md'
+import CliLogin from '../../../_cli-login.md'
 
 ## Managing Routers with the CLI
 

@@ -5,12 +5,19 @@ shopt -s expand_aliases
 function clone_or_pull {
   remote=$1
   dir="${ZITI_DOC_GIT_LOC}/${2}"
+  if [[ -n ${3:-} ]]; then
+    local BRANCH="${3}"
+  else
+    local BRANCH="main"
+  fi
   if [ -d "${dir}" ]; then
     pushd "${dir}"
+    git fetch
+    git checkout "${BRANCH}"
     git pull
     popd
   else
-    git clone "${remote}" --branch main --single-branch "${dir}"
+    git clone "${remote}" --branch "${BRANCH}" --single-branch "${dir}"
   fi
 }
 
@@ -69,6 +76,7 @@ if [[ "${SKIP_GIT}" == no ]]; then
   clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c"
   clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app"
   clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
+  clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c" "docker-readme-importable"
 fi
 
 if [[ "${SKIP_CLEAN}" == no ]]; then

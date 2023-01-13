@@ -7,7 +7,7 @@ For identities using username password (UPDB) authenticators the following actio
 
 ## Administrative Password Reset
 
-Passwords may be reset via the [Edge Management API](/docs/reference/api/rest/edge-apis#edge-management-api) by an administrative client.
+Passwords may be reset via the [Edge Management API](/docs/reference/api/edge-apis#edge-management-api) by an administrative client.
 
 ### Ziti CLI
 
@@ -25,8 +25,8 @@ Passwords may be reset via the [Edge Management API](/docs/reference/api/rest/ed
 
 ## Client Password Change
 
-Passwords may be reset via the [Edge Management API](/docs/reference/api/rest/edge-apis#edge-management-api) or 
-[Edge Client API](/docs/reference/api/rest/edge-apis#edge-client-api) by the currently authenticated client.
+Passwords may be reset via the [Edge Management API](/docs/reference/api/edge-apis#edge-management-api) or 
+[Edge Client API](/docs/reference/api/edge-apis#edge-client-api) by the currently authenticated client.
 
 ### Ziti CLI
 

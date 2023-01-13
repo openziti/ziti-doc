@@ -53,7 +53,7 @@ export default function Home() {
                         <ul>
                             <li><Link to="/docs/learn/introduction/">Learn the Basics</Link></li>
                             <li><Link to="/docs/reference/glossary">References and other Developer Resources</Link></li>
-                            <li><Link to="/docs/guides/controller">Practical Recipes</Link></li>
+                            <li><Link to="/docs/guides/deployments/controller">Practical Recipes</Link></li>
                             <li><Link to="/docs/reference/glossary">Define Terms</Link></li>
                             {/* <li><Link to="/docs/downloads">Downloads</Link></li> */}
                         </ul>

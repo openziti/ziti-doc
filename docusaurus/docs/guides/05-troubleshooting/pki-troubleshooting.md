@@ -1,4 +1,6 @@
-## PKI Troubleshooting
+---
+title: PKI Troubleshooting
+---
 
 Configuring a Ziti Network's PKI can be confusing. Validating a single side of a mutual TLS connection is
 straightforward it becomes tedious to ensure all the certificates and cas in use are valid when you have a fully

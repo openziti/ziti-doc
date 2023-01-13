@@ -1,9 +1,7 @@
 ---
-title: Alternative Server Certificates
-sidebar_label: Alt Server Certs
+title: Using Public CA Certificates
+sidebar_label: Public CA Certs
 ---
-
-## Use Certificates from a Public Authority with your Ziti Network
 
 You can configure the Ziti controller and routers to present alternative server certificates to Edge clients. This is useful in a deployment scenario where the Edge clients use ephemeral identities that can not be preconfigured to trust a particular certificate authority (CA) and must rely on the OS trust bundle of CA certificates.
 

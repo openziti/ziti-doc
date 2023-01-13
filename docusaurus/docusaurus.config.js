@@ -13,6 +13,7 @@ const config = {
   url: 'https://openziti.github.io/',
   baseUrl: '/',
   trailingSlash: undefined,
+  // onBrokenLinks: 'warn',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
@@ -95,7 +96,7 @@ const config = {
             from: ['/docs/introduction/zitiSoftwareArchitecture', '/ziti/software-architecture.html'],
           },
           {
-            to: '/docs/guides/controller',
+            to: '/docs/guides/deployments/controller',
             from: ['/guides', '/ziti/manage/sample-controller-config.yaml'],
           },
           {
@@ -103,16 +104,12 @@ const config = {
             from: ['/policies'],
           },
           {
-            to: '/docs/guides/troubleshooting/troubleshooting',
-            from: ['/docs/manage/troubleshooting'],
-          },
-          {
-            to: '/docs/guides/router/deployment',
+            to: '/docs/guides/deployments/router/deployment',
             from: ['/docs/manage/edge-router'],
           },
           {
-            to: '/docs/reference/api/rest/edge-apis/shared-api-capabilities',
-            from: ['/api/rest/shared-api-capabilities'],
+            to: '/docs/reference/api/edge-apis/shared-api-capabilities',
+            from: ['/api/shared-api-capabilities'],
           },
           {
             to: '/docs/learn/quickstarts/services/',

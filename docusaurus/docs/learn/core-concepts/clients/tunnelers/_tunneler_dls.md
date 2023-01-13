@@ -1,5 +1,0 @@
-* [Windows](https://github.com/openziti/desktop-edge-win/releases/latest)
-* [MacOS](https://apps.apple.com/app/id1460484572)
-* [Linux](/docs/learn/core-concepts/clients/tunnelers/linux/#install-linux-package)
-* [iOS](https://apps.apple.com/app/id1460484353)
-* [Android](https://play.google.com/store/apps/details?id=org.openziti.mobile)
