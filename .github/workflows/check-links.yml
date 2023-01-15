@@ -24,7 +24,7 @@ jobs:
             --max-connections-per-host=5
             --header=User-Agent:curl/7.54.0
             --timeout=20
-          debug: true
+          debug: false
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: DavidMarquezF/close-matching-issues@v3.0.1
@@ -37,7 +37,7 @@ jobs:
         with:
           update_existing: true
           search_existing: open
-          filename: .github/workflows/check-links-issue-template.md
+          filename: ./check-links/check-links-issue-template.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -46,8 +46,12 @@ jobs:
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v3
-      - name: Check popular links
-        run: ./check-popular-links.sh https://openziti.github.io/
+      - name: Check popular links to new docs site
+        run: ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
+        working-directory: ./check-links/
+      - name: Check popular links to old docs site
+        run: ./check-links.sh https://openziti.github.io ./popular-docs-links.txt
+        working-directory: ./check-links/
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: DavidMarquezF/close-matching-issues@v3.0.1
@@ -60,7 +64,7 @@ jobs:
         with:
           update_existing: true
           search_existing: open
-          filename: .github/workflows/popular-links-issue-template.md
+          filename: ./check-links/popular-links-issue-template.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

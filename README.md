@@ -48,30 +48,34 @@ Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this sit
 
 With these scripts, you can test all the links in the site's pages and popular incoming request paths.
 
-* [check-broken-links.sh](./check-broken-links.sh): uses `docker` to run `muffet`
+* [crawl-for-broken-links.sh](./check-links/crawl-for-broken-links.sh): uses `docker` to run `muffet` which crawls the given base URL looking for broken links
 
   ```bash
   # check local dev server for broken outgoing links to itself and other sites, excluding a few hosts that are sensitive to being hammered by a crawler
-  ./check-broken-links.sh http://127.0.0.1:3000
+  ./crawl-for-broken-links.sh http://127.0.0.1:3000
 
   # check the GH Pages site for broken links to anywhere
-  ./check-broken-links.sh https://openziti.github.io --rate-limit=11
+  ./crawl-for-broken-links.sh https://openziti.github.io --rate-limit=11
   ```
 
-* [check-popular-links.sh](./check-popular-links.sh): uses `curl`
+* [check-links.sh](./check-links/check-links.sh): uses `curl` to try a list of URL paths from a file
 
   ```bash
   # check a list of popular incoming links from external sites
-  ./check-popular-links.sh https://openziti.github.io
+  ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
+  ```
+
+  ```bash
+  ./check-links.sh https://blog.openziti.io ./popular-blog-links.txt
   ```
 
   You will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
 
 ## How the Proxies Work
 
-There are a couple of reverse proxies hosted by CloudFront. Both employ CloudFront functions with a custom script. Both scripts are of type "viewer request" meaning they operate on the request of the viewer, which is the frontend of the proxy.
+There are a couple of reverse proxies hosted by CloudFront. Both employ CloudFront functions with a custom script. Both scripts are of type "viewer request" meaning they operate on the request of the viewer, which is on the front side of the proxy. 
 
-The scripts parse the request and decide whether to return a response to the viewer or pass along the request to the origin, i.e., upstream or backend.
+The scripts parse the request and decide whether to return a response to the viewer or pass along the request to the origin, i.e., upstream, a.k.a backend, a.k.a. origin.
 
 ### How the Short URL Proxy Works
 
@@ -90,7 +94,7 @@ This proxy's function modifies the viewer's request if it matches one of the sho
 
 The `openziti.io` DNS name resolves to a proxy that redirects selectively to HashNode or GitHub Pages, depending on the request path. This preserves popular incoming links to blog articles as redirects while this docs site becomes the default destination for all other requests for `openziti.io`.
 
-Like the GitHub proxy, this proxy runs a CloudFront viewer request function ([script](./cloudfront-function-blog-proxy.js)) to decide how to handle requests. This proxy's function inspects the viewer's request to see if it matches any of the popular blog links. If it matches then it responds to the viewer with a redirect instructing their browser to instead load the same request path at `blog.openziti.io`. If the viewer's request doesn't match one of the old blog links then it's passed along unmodified to the default origin, `openziti.github.io`.
+Like the GitHub proxy, this proxy runs a CloudFront viewer request function ([script](./cloudfront-function-openziti-io-proxy.js)) to decide how to handle requests. This proxy's function inspects the viewer's request to see if it exactly matches the `/` root document which triggers a redirect to `https://docs.openziti.io/`. If it does not match, then the proxy responds to the viewer with a redirect to the same request path at `blog.openziti.io`.
 
 ### CloudFront Proxy Deployment Notes
 
