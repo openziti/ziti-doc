@@ -44,6 +44,10 @@ if [ "${GIT_BRANCH:-}" == "main" ]; then
   cp -rT ./docusaurus/build/ ./openziti.github.io/
 
   cd ./openziti.github.io/
+  
+  echo 'Creating CNAME file for custom github pages domain. see https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages#cname-errors'
+  cat "docs.openziti.io" > CNAME
+  
   git add -A
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
     echo changing git repo from https to git so that we can push...
