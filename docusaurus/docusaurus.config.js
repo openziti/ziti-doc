@@ -77,6 +77,9 @@ const config = {
           if ( path.startsWith("/docs/learn/introduction/") ) {
             return [path.replace("/docs/learn/introduction/","/docs/introduction/")];
           }
+          if ( path.startsWith("/docs/reference/tunnelers/") ) {
+            return [path.replace("/docs/reference/tunnelers/","/docs/learn/core-concepts/clients/tunnelers/")];
+          }
         },
         redirects: [
           {
@@ -96,7 +99,7 @@ const config = {
             from: ['/docs/introduction/zitiSoftwareArchitecture', '/ziti/software-architecture.html'],
           },
           {
-            to: '/docs/guides/deployments/controller',
+            to: '/docs/reference/deployments/controller',
             from: ['/guides', '/ziti/manage/sample-controller-config.yaml'],
           },
           {
@@ -104,7 +107,7 @@ const config = {
             from: ['/policies'],
           },
           {
-            to: '/docs/guides/deployments/router/deployment',
+            to: '/docs/reference/deployments/router/deployment',
             from: ['/docs/manage/edge-router'],
           },
           {

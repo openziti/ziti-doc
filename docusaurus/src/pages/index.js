@@ -53,7 +53,7 @@ export default function Home() {
                         <ul>
                             <li><Link to="/docs/learn/introduction/">Learn the Basics</Link></li>
                             <li><Link to="/docs/reference/glossary">References and other Developer Resources</Link></li>
-                            <li><Link to="/docs/guides/deployments/controller">Practical Recipes</Link></li>
+                            <li><Link to="/docs/reference/deployments/controller">Practical Recipes</Link></li>
                             <li><Link to="/docs/reference/glossary">Define Terms</Link></li>
                             {/* <li><Link to="/docs/downloads">Downloads</Link></li> */}
                         </ul>
@@ -168,7 +168,7 @@ export default function Home() {
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
-                                    <Link to="/docs/learn/core-concepts/clients/tunnelers/">OpenZiti Tunneling Applications</Link>
+                                    <Link to="/docs/reference/tunnelers/">OpenZiti Tunneling Applications</Link>
                                 </H3>
                             </div>
                             <p>not all apps can be recompiled with zero trust principles built in. For those situations, these components provide the bridge from classic underlay networks to the overlay</p>

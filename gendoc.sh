@@ -35,10 +35,10 @@ DOC_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/api"
 
 echo "- processing opts"
 
-while getopts ":glcwd" OPT; do
+while getopts ":glc" OPT; do
   case ${OPT} in
     g ) # skip git
-      echo "- skipping git cleanup"
+      echo "- skipping creating and updating Git working copies"
       SKIP_GIT="yes"
       ;;
     l ) # skip linked doc gen
@@ -46,15 +46,8 @@ while getopts ":glcwd" OPT; do
       SKIP_LINKED_DOC="yes"
       ;;
     c ) # skip clean steps
-      echo "- skipping clean step"
+      echo "- skipping clean step that deletes Git working copies"
       SKIP_CLEAN="yes"
-      ;;
-    w ) # process option t
-      echo "- treating warnings as errors"
-      WARNINGS_AS_ERRORS="--warningsAsErrors"
-      ;;
-    d)
-      echo "WARN: ignoring option ${OPT}" >&2
       ;;
     *)
       echo "WARN: ignoring option ${OPT}" >&2
@@ -76,7 +69,7 @@ if [[ "${SKIP_GIT}" == no ]]; then
   clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c"
   clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app"
   clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
-  clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c" "docker-readme-importable"
+  clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c"
 fi
 
 if [[ "${SKIP_CLEAN}" == no ]]; then
