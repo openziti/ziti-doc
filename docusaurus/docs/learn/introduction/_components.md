@@ -85,10 +85,10 @@ defined on an OpenZiti Network have an almost limitless "namespace"
 available for identifying services. An OpenZiti Service is defined by a
 name and/or a certificate, rather than by a DNS name or an IP
 address (underlay concepts). Services also declare a node where
-traffic that exits the OpenZiti Network needs to be sent do before
-exiting. It’s possible for the node traffic enters to be the same it
-exits and it’s possible for traffic needing to traverse the OpenZiti
-Network Routers to reach the correct node. Simply specifying the
+traffic that exits the OpenZiti Network needs to be sent to before
+exiting. The node where traffic enters the OpenZiti Network may be the same
+node where traffic exits. Alternatively, traffic may need to traverse the
+OpenZiti Network Routers to reach the exit node. Simply specifying the
 node is all the end-user need do, the OpenZiti Network handles the
 rest.
 
