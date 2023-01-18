@@ -97,10 +97,10 @@ docker run \
   --network-alias ziti-controller-init-container \
   -it \
   --rm \
-  -v ~/docker-volume/myFirstZitiNetwork:/openziti/pki \
-  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/openziti/ziti.env \
+  -v ~/docker-volume/myFirstZitiNetwork:/persistent/pki \
+  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/persistent/ziti.env \
   openziti/quickstart \
-  /openziti/scripts/run-with-ziti-cli.sh  /openziti/scripts/access-control.sh
+  /var/openziti/scripts/run-with-ziti-cli.sh  /var/openziti/scripts/access-control.sh
 ```
 
 ## Edge Router
