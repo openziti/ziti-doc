@@ -75,7 +75,7 @@ Access to a certificate with the `verifiationToken` set as the common name and s
 
 ### Edge Management API
 
-The [Edge Management API](/docs/reference/api/edge-apis#edge-management-api) accepts and `id` in the URL path and x509 certificate PEM
+The [Edge Management API](/docs/reference/developer/api#edge-management-api) accepts and `id` in the URL path and x509 certificate PEM
 as the body:
 
 `POST /edge/management/v1/cas/<id>/verify`

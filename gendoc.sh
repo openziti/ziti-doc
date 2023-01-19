@@ -30,7 +30,7 @@ echo "$script_root"
 : ${SKIP_LINKED_DOC:=no}
 : ${SKIP_CLEAN:=no}
 ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
-DOC_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/api"
+DOC_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/api"
 : ${ZITI_DOCUSAURUS:=yes}
 
 echo "- processing opts"

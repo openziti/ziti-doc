@@ -53,8 +53,8 @@ const config = {
               path.replace("/docs/guides/","/docs/manage/"),
             ];
           }
-          if ( path.startsWith("/docs/reference/api") ) {
-            return [path.replace("/docs/reference/api","/api/")];
+          if ( path.startsWith("/docs/reference/developer/api") ) {
+            return [path.replace("/docs/reference/developer/api","/api/")];
           }
           if ( path.startsWith("/docs/reference/configuration/") ) {
             return [path.replace("/docs/reference/configuration/","/operations/configuration/")];
@@ -109,10 +109,6 @@ const config = {
           {
             to: '/docs/reference/deployments/router/deployment',
             from: ['/docs/manage/edge-router'],
-          },
-          {
-            to: '/docs/reference/api/edge-apis/shared-api-capabilities',
-            from: ['/api/shared-api-capabilities'],
           },
           {
             to: '/docs/learn/quickstarts/services/',
