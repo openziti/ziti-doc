@@ -23,7 +23,7 @@ After cloning this repository open the bash shell and execute the [gendoc.sh](./
 flags to pass that mostly controls the cleanup of what the script does. In general, it's recommended you use the -w flag
 so that warnings are treated as errors. 
 
-Expected gendoc.sh usage: `./gendoc.sh -w`
+Expected usage: `./gendoc.sh -c`
 
 You can then run `cd ./docusaurus && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
 

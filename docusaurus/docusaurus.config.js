@@ -13,6 +13,7 @@ const config = {
   url: 'https://docs.openziti.io/',
   baseUrl: '/',
   trailingSlash: undefined,
+  // onBrokenLinks: 'warn',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
@@ -52,8 +53,8 @@ const config = {
               path.replace("/docs/guides/","/docs/manage/"),
             ];
           }
-          if ( path.startsWith("/docs/reference/api") ) {
-            return [path.replace("/docs/reference/api","/api/")];
+          if ( path.startsWith("/docs/reference/developer/api") ) {
+            return [path.replace("/docs/reference/developer/api","/api/")];
           }
           if ( path.startsWith("/docs/reference/configuration/") ) {
             return [path.replace("/docs/reference/configuration/","/operations/configuration/")];
@@ -76,6 +77,9 @@ const config = {
           if ( path.startsWith("/docs/learn/introduction/") ) {
             return [path.replace("/docs/learn/introduction/","/docs/introduction/")];
           }
+          if ( path.startsWith("/docs/reference/tunnelers/") ) {
+            return [path.replace("/docs/reference/tunnelers/","/docs/learn/core-concepts/clients/tunnelers/")];
+          }
         },
         redirects: [
           {
@@ -95,7 +99,7 @@ const config = {
             from: ['/docs/introduction/zitiSoftwareArchitecture', '/ziti/software-architecture.html'],
           },
           {
-            to: '/docs/guides/controller',
+            to: '/docs/reference/deployments/controller',
             from: ['/guides', '/ziti/manage/sample-controller-config.yaml'],
           },
           {
@@ -103,16 +107,8 @@ const config = {
             from: ['/policies'],
           },
           {
-            to: '/docs/guides/troubleshooting/troubleshooting',
-            from: ['/docs/manage/troubleshooting'],
-          },
-          {
-            to: '/docs/guides/router/deployment',
+            to: '/docs/reference/deployments/router/deployment',
             from: ['/docs/manage/edge-router'],
-          },
-          {
-            to: '/docs/reference/api/rest/edge-apis/shared-api-capabilities',
-            from: ['/api/rest/shared-api-capabilities'],
           },
           {
             to: '/docs/learn/quickstarts/services/',

@@ -4,13 +4,13 @@ title: Controller Deployment
 sidebar_label: Controller
 ---
 
-import CliLogFormats from '../_cli-log-levels-and-formats.md'
+import CliLogFormats from '../../_cli-log-levels-and-formats.md'
 
-This article provides some guidance for deploying a Ziti Controller. You can go back and read [the controller component introduction](../learn/introduction/index.mdx#openziti-controller) if needed.
+This article provides some guidance for deploying a Ziti Controller. You can go back and read [the controller component introduction](../../learn/introduction/index.mdx#openziti-controller) if needed.
 
 ## Public Key Infrastructure
 
-You will need a PKI setup for Ziti. If you follow one of the [quickstart guides](/docs/learn/quickstarts/network/) then a PKI will be generated for you. This is probably the best way to start out. Pay particular attention to the PKI-related fields in the configuration file, and check out [the pki page](./pki).
+You will need a PKI setup for Ziti. If you follow one of the [quickstart guides](/docs/learn/quickstarts/network/) then a PKI will be generated for you. This is probably the best way to start out. Pay particular attention to the PKI-related fields in the configuration file, and check out [the pki page](../../learn/core-concepts/pki.md).
 
 ## Configuration
 

@@ -6,8 +6,8 @@ title: Router Deployment
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import styles from './styles.module.css';
-import CliLogin from '../../_cli-login.md'
-import CliLogFormats from '../../_cli-log-levels-and-formats.md'
+import CliLogin from '../../../_cli-login.md'
+import CliLogFormats from '../../../_cli-log-levels-and-formats.md'
 
 The Ziti Router is the entry point for Ziti-based clients. It is responsible for authenticating incoming connections by
 verifying the connecting client has a valid network session.  It also routes traffic to whatever the
@@ -53,7 +53,7 @@ identity:
 
 ### Create Router {#router-create}
 
-The life cycle of a router begins by calling the controller's management API to create a router. You can do this with [the REST API](/docs/reference/api/rest) or [the `ziti` CLI](./04-cli-mgmt.md#create-router).
+The life cycle of a router begins by calling the controller's management API to create a router. You can do this with [the REST API](/docs/reference/developer/api/) or [the `ziti` CLI](./04-cli-mgmt.md#create-router).
 
 ### Enroll Router {#enrollment}
 
@@ -89,7 +89,7 @@ WantedBy=multi-user.target
 
 ### Manage Router {#router-update}
 
-You can manage a router's role attributes, tags, etc. with [the REST API](/docs/reference/api/rest) or [the `ziti` CLI](./04-cli-mgmt.md#managing-routers-with-the-cli) for more details
+You can manage a router's role attributes, tags, etc. with [the REST API](/docs/reference/developer/api/) or [the `ziti` CLI](./04-cli-mgmt.md#managing-routers-with-the-cli) for more details
 
 ### Configure Logging
 

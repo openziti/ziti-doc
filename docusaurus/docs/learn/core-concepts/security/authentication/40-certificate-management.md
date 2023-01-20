@@ -20,7 +20,7 @@ have expired, the router will have to be [re-enrolled](../enrollment#router-enro
 
 Clients may determine their own client certificate extension frequency. In order to extend their current client 
 certificate issued by the Ziti PKI they must issue the following RESt request to either the 
-[Edge Management API](/docs/reference/api/rest/edge-apis#edge-management-api) or [Edge Client API](/docs/reference/api/rest/edge-apis#edge-client-api) 
+[Edge Management API](/docs/reference/developer/api#edge-management-api) or [Edge Client API](/docs/reference/developer/api#edge-client-api) 
 after becoming [fully authenticated](./auth#full-vs-partial-authentication).
 
 ### Client Certificate Extension

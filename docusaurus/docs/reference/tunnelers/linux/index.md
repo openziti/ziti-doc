@@ -272,7 +272,7 @@ ziti-edge-tunnel run \
 
 ## Run with Docker
 
-Please reference [the Docker README](https://github.com/openziti/ziti-tunnel-sdk-c/tree/main/docker#readme) for guidance and examples!
+Please reference [the article about running the Linux tunneler in a container](./container/readme.mdx) for guidance and examples!
 
 ## Troubleshooting
 

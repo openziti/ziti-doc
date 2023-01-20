@@ -1,3 +1,2 @@
 If you are building a new application you have a unique opportunity to choose to use one of the Ziti SDKs and to create a
-truly zero trust application from the start! Navigate over to [the API reference](/docs/reference/api) to learn more about which SDKs
-are available and for documentation focused on using these sdks.
+truly zero trust application from the start! A Ziti Edge SDK enables your application to discover and provide or connect to Ziti services directly without an agent or proxy. The SDKs use [the Edge Client API](../../../reference/developer/api/index.md#edge-client-api) provided by the controller to authenticate and discover routers and services. Then, the SDK connects to the most responsive router and begins hosting or connecting to the Ziti service.

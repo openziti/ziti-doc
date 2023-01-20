@@ -1,20 +1,46 @@
-# Edge APIs
+---
+title: Edge APIs
+---
 
-The Edge in Ziti currently has two APIs that it provides for configuration:
+import ApiQuickInfoMd from './_api-quickinfo.md';
 
-- Edge Management API
-- Edge Client API
+<ApiQuickInfoMd/>
 
 ## Specifications & Documentation
 
-Both the Edge Management and Client APIs have Open API 2.0 specifications. The most up-to-date versions of them are
-available within the [Ziti Edge GitHub repository](https://github.com/openziti/edge/tree/main/specs). They are also
-available from a running controller directly at:
+Both the Edge Management and Client APIs have OpenAPI 2.0, formerly Swagger, specifications. The most up-to-date versions  are
+available within the [Ziti Edge GitHub repository](https://github.com/openziti/edge/tree/main/specs). There is also
+an API reference web site built in to the running Ziti controller:
 
-- https://\<host\>:\<port\>/edge/client/v1/docs
-- https://\<host\>:\<port\>/edge/management/v1/docs
+- `https://<host>:<port>/edge/client/v1/docs`
+- `https://<host>:<port>/edge/management/v1/docs`
 
 Where `<host>:<port>` should be replaced with the values configured for the APIs in the [`web` section](#web-configuration-section)
+
+### Find the Controller Version
+
+It is essential to build your application with respect to the specification of your controller version. If it is not practical to access the specification provided by your running controller then you may compose a URL that includes the controller version, e.g. `https://github.com/openziti/edge/tree/v0.24.109/specs`.
+
+`GET /`
+
+```json
+{
+    "data": {
+        "apiVersions": {
+            "edge": {
+                "v1": {
+                    "path": "/edge/v1"
+                }
+            }
+        },
+        "buildDate": "2021-04-23 18:09:47",
+        "revision": "fe826ed2ec0c",
+        "runtimeVersion": "go1.16.3",
+        "version": "v0.19.12"
+    },
+    "meta": {}
+}
+```
 
 ## Edge Management API
 
@@ -22,7 +48,7 @@ The Edge Management API is used by clients that wish to configure a Ziti network
 with service for dialing (connecting) nor binding (hosting). The Edge Management API provides the ability to create
 new identities, identities, policies, and other entities used to manage a Ziti network.
 
-[Explore the Edge Management API Reference](./02-edge-management-reference.mdx)
+[Explore the latest Edge Management API Reference](./02-edge-management-reference.mdx)
 
 ## Edge Client API
 
@@ -32,7 +58,7 @@ for clients to use the client API they must first [authenticate](/docs/learn/cor
 obtain either a [partial or fully authenticated](/docs/learn/core-concepts/security/authentication/auth#full-vs-partial-authentication)
 [API Session](/docs/learn/core-concepts/security/sessions#).
 
-[Explore the Edge Client API Reference](./01-edge-client-reference.mdx)
+[Explore the latest Edge Client API Reference](./01-edge-client-reference.mdx)
 
 ## Edge Client & Management Shared Capabilities
 
@@ -46,18 +72,18 @@ all Ziti APIs. Additionally, between the two the following endpoint paths are ex
   - /edge/client/v1/current-api-session/*
   - /edge/management/v1/current-api-session/*
 
-## Configuring
+## Configuring the Controller Edge APIs
 
 In order for the Edge Client and Management API to be available a controller must be configured to enable them. This 
 requires two configuration sections `edge` and `web`. The `edge` section configures values that will affect  both the
 Edge Client API and the Edge Management API. The `web` section is used to configure and compose any of Ziti's
 APIs, Edge Client and Management included, to listen on any combination of network interface and ports.
 
-### Edge Configuration Section
-The main [Ziti GitHub repository](https://github.com/openziti/ziti) has[example configuration](https://github.com/openziti/ziti/blob/release-next/etc/) 
-files. The `ctrl.with.edge.yml` file has all of the `edge` values documented.
+### Controller Configuration Reference
 
-#### Example Edge Configuration Section
+[The controller configuration reference](../../30-configuration/controller.md)
+
+#### Example Controller Edge Configuration Section
 
 ```yaml
 edge:
@@ -100,23 +126,11 @@ edge:
       duration: 5m
 ```
 
-### Web Configuration Section
+#### Example Controller Web Configuration Section
 
 The `web` section of the controller is based off of the [xweb](https://github.com/openziti/xweb) library. xweb allows
 a single configuration section to be used to compose multiple APIs across any number of network interfaces. Understanding
 the xweb configuration format is essential for success with configuring the `web` section in the controller.
-
-Ziti Edge exposes the following two xweb API bindings:
-
-- `edge-client` - the Edge Client API
-- `edge-management` - the Edge Management API
-
-Neither have any associated options in the `web` section.
-
-#### Example Web Configuration Section
-
-The main [Ziti GitHub repository](https://github.com/openziti/ziti) has[example configuration](https://github.com/openziti/ziti/blob/release-next/etc/)
-files. The `ctrl.with.edge.yml` file has all of the `web` values documented.
 
 ```yaml
 # web - optional

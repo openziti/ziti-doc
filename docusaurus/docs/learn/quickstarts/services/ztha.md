@@ -52,11 +52,11 @@ Alternatively, if you have used the [docker-compose quickstart](../network/local
 OpenZiti overlay network, you will have this HTTP server available to use immediately. 
 
 ### Prerequisite - HTTP Client Tunneller
-You will need to install an [OpenZiti tunneler](../../core-concepts/clients/tunnelers) on the machine which represents the HTTP client. Later on 
+You will need to install an [OpenZiti tunneler](../../../reference/tunnelers) on the machine which represents the HTTP client. Later on 
 we'll create an identity for this tunneller and use the identity to access the HTTP server. 
 
 ### Prerequisite - HTTP Server Tunneller
-You will need to install an [OpenZiti tunneler](../../core-concepts/clients/tunnelers) on the machine which represents the HTTP server. Later on
+You will need to install an [OpenZiti tunneler](../../../reference/tunnelers) on the machine which represents the HTTP server. Later on
 we'll create an identity for this tunneller and use the identity to access the HTTP server. 
 
 :::note

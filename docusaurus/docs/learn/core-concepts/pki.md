@@ -4,7 +4,7 @@ title: Public Key Infrastructure (PKI)
 sidebar_label: PKI
 ---
 
-import PkiTroubleshootingMd from './05-troubleshooting/_pki-troubleshooting.md'
+import PkiTroubleshootingMd from '../../guides/05-troubleshooting/pki-troubleshooting.md'
 
 All Ziti Networks leverage [Public Key Infrastructure (PKI)](https://en.wikipedia.org/wiki/Public_key_infrastructure) to
 provide secure network connections.  This page is not intended to be a comprehensive guide. What it is, is a set of
@@ -12,8 +12,7 @@ rules that must be followed to properly configure a Ziti Network. If there are i
 of a Ziti Network to another - this page should serve as a starting point of understanding.
 
 :::note
-PKI is a complex topic and it is recommended to be familiar with what is a PKI as well as how to properly use and
-configure a one before making any decisions about the PKI the Ziti Network uses.
+This article is about managing your own PKI. There's a guide for using public CA certificates.
 :::
 
 The Ziti Network allows the operator to declare any trust anchors as valid. This means Ziti does not need to be
