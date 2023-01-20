@@ -53,8 +53,18 @@ const config = {
               path.replace("/docs/guides/","/docs/manage/"),
             ];
           }
-          if ( path.startsWith("/docs/reference/developer/api") ) {
-            return [path.replace("/docs/reference/developer/api","/api/")];
+          if ( path.startsWith("/docs/reference/deployments/") ) {
+            return [
+              path.replace("/docs/reference/deployments/","/docs/manage/"),
+              path.replace("/docs/reference/deployments/","/operations/")
+            ];
+          }
+          if ( path.startsWith("/docs/reference/developer/api/") ) {
+            return [
+              path.replace("/docs/reference/developer/api/","/api/"),
+              path.replace("/docs/reference/developer/api/","/api/rest/"),
+              path.replace("/docs/reference/developer/api/","/api/rest/edge-apis/")
+            ];
           }
           if ( path.startsWith("/docs/reference/configuration/") ) {
             return [path.replace("/docs/reference/configuration/","/operations/configuration/")];
@@ -78,10 +88,38 @@ const config = {
             return [path.replace("/docs/learn/introduction/","/docs/introduction/")];
           }
           if ( path.startsWith("/docs/reference/tunnelers/") ) {
-            return [path.replace("/docs/reference/tunnelers/","/docs/learn/core-concepts/clients/tunnelers/")];
+            return [
+              path.replace("/docs/reference/tunnelers/","/docs/learn/core-concepts/clients/tunnelers/"),
+              path.replace("/docs/reference/tunnelers/","/docs/core-concepts/clients/tunnelers/")
+            ];
           }
+          return undefined;
         },
         redirects: [
+          {
+            to: '/docs/guides/troubleshooting/',
+            from: ['/operations/troubleshooting/troubleshooting'],
+          },
+          {
+            to: '/docs/learn/core-concepts/pki',
+            from: ['/docs/manage/pki', '/operations/pki'],
+          },
+          {
+            to: '/docs/reference/developer/sdk',
+            from: ['/api/ziti-sdk-swift', '/api/ziti-c-sdk', '/api/ziti-sdk-csharp'],
+          },
+          {
+            to: '/docs/reference/developer/sdk/android',
+            from: ['/guides/mobile/android'],
+          },
+          {
+            to: '/docs/reference/tunnelers/linux/container/kubernetes-sidecar-tunnel-quickstart',
+            from: ['/guides/kubernetes/kubernetes-sidecar-tunnel-quickstart'],
+          },
+          {
+            to: '/docs/reference/developer/sdk',
+            from: ['/docs/core-concepts/clients/sdks'],
+          },
           {
             to: '/docs/reference/glossary',
             from: ['/glossary', '/glossary/glossary'],

@@ -83,7 +83,7 @@ APIs, Edge Client and Management included, to listen on any combination of netwo
 
 [The controller configuration reference](../../30-configuration/controller.md)
 
-#### Example Controller Edge Configuration Section
+#### Example Controller Edge Configuration Section {#edge-configuration-section}
 
 ```yaml
 edge:
@@ -126,7 +126,7 @@ edge:
       duration: 5m
 ```
 
-#### Example Controller Web Configuration Section
+#### Example Controller Web Configuration Section {#web-configuration-section}
 
 The `web` section of the controller is based off of the [xweb](https://github.com/openziti/xweb) library. xweb allows
 a single configuration section to be used to compose multiple APIs across any number of network interfaces. Understanding

@@ -69,7 +69,7 @@ With these scripts, you can test all the links in the site's pages and popular i
   ./check-links.sh https://blog.openziti.io ./popular-blog-links.txt
   ```
 
-  You will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
+  You will need to run `yarn serve` to crawl for broken links locally because the webpack server (`yarn start`) is not crawlable, and you will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
 
 ## How the Proxies Work
 

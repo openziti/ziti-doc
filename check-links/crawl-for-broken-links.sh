@@ -11,13 +11,8 @@ else
 fi
 
 case "$SERVER" in
-    https://openziti.github.io*)
-        # ignore links that are known to be irrelevant or known issues
-        EXCLUDE='https://(EXWPKK5PV4-dsn.algolia.net|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|play.google.com/store/apps/details\?id=io\.netfoundry\.ziti\.tunnel|apps.apple.com/app/)|#docusaurus_skipToContent_fallback$' \
-    ;;
     *)
-        # additionally ignore GitHub links if not testing GH Pages site
-        EXCLUDE='https://(EXWPKK5PV4-dsn.algolia.net|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|github.com/openziti/ziti-doc/blob/main/docusaurus/|play.google.com/store/apps/details\?id=io\.netfoundry\.ziti\.tunnel|apps.apple.com/app/|openziti.github.io|github.com/openziti/ziti-doc/tree/main/docusaurus/)|#docusaurus_skipToContent_fallback$' \
+        EXCLUDE='https://(EXWPKK5PV4-dsn.algolia.net|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|play.google.com/store/apps/details\?id=io\.netfoundry\.ziti\.tunnel|apps.apple.com/|www.reddit.com/r/openziti$|.*\.ziti[^\.]+$)|#docusaurus_skipToContent_fallback$'
     ;;
 esac
 
