@@ -1,15 +1,16 @@
-# Edge APIs
+---
+title: Edge APIs
+---
 
-The Ziti controller provides two REST APIs that are relevant for Edge developers:
+import ApiQuickInfoMd from './_api-quickinfo.md';
 
-- Edge Management API
-- Edge Client API
+<ApiQuickInfoMd/>
 
 ## Specifications & Documentation
 
-Both the Edge Management and Client APIs have OpenAPI 2.0 specifications. The most up-to-date versions of them are
+Both the Edge Management and Client APIs have OpenAPI 2.0, formerly Swagger, specifications. The most up-to-date versions  are
 available within the [Ziti Edge GitHub repository](https://github.com/openziti/edge/tree/main/specs). There is also
-an API reference web site built in:
+an API reference web site built in to the running Ziti controller:
 
 - `https://<host>:<port>/edge/client/v1/docs`
 - `https://<host>:<port>/edge/management/v1/docs`
