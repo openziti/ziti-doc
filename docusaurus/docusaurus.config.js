@@ -97,8 +97,24 @@ const config = {
         },
         redirects: [
           {
+            to: '/docs/learn/core-concepts/security/authentication/external-jwt-signers',
+            from: ['/ziti/security/authentication/external-jwt-signers.html'],
+          },
+          {
+            to: '/docs/learn/core-concepts/identities/enrolling',
+            from: ['/ziti/identities/enrolling.html'],
+          },
+          {
+            to: '/docs/reference/tunnelers/',
+            from: ['/ziti/clients/tunneler.html'],
+          },
+          {
             to: '/docs/guides/troubleshooting/',
             from: ['/operations/troubleshooting/troubleshooting'],
+          },
+          {
+            to: '/blog/golang-aha/article',
+            from: ['/articles/golang-aha/article.html'],
           },
           {
             to: '/docs/learn/core-concepts/pki',
@@ -126,7 +142,7 @@ const config = {
           },
           {
             to: '/docs/learn/introduction/',
-            from: ['/docs', '/docs/learn', '/docs/introduction/intro', '/docusaurus/docs/overview'],
+            from: ['/docs', '/docs/learn', '/docs/introduction/intro', '/docusaurus/docs/overview', '/ziti/overview/', '/ziti/overview.html'],
           },
           {
             to: '/docs/learn/quickstarts/network/',
