@@ -54,10 +54,14 @@ const config = {
             ];
           }
           if ( path.startsWith("/docs/reference/deployments/") ) {
-            return [
-              path.replace("/docs/reference/deployments/","/docs/manage/"),
-              path.replace("/docs/reference/deployments/","/operations/")
-            ];
+            const opsPaths = []
+            if (!(path === "/docs/reference/deployments/")) {  // do not place a redirect in /operations/index.html or /docs/manage/index.html because there can be only one "from" and it was previously created to /docs/guides/index.html
+              opsPaths.push(
+                path.replace("/docs/reference/deployments/","/operations/"),
+                path.replace("/docs/reference/deployments/","/docs/manage/")
+              )
+            }
+            return opsPaths;
           }
           if ( path.startsWith("/docs/reference/developer/api/") ) {
             return [
@@ -138,7 +142,7 @@ const config = {
           },
           {
             to: '/docs/reference/deployments/controller',
-            from: ['/guides', '/ziti/manage/sample-controller-config.yaml'],
+            from: ['/ziti/manage/sample-controller-config.yaml'],
           },
           {
             to: '/policies/CODE_OF_CONDUCT',
