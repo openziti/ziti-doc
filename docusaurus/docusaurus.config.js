@@ -93,9 +93,31 @@ const config = {
               path.replace("/docs/reference/tunnelers/","/docs/core-concepts/clients/tunnelers/")
             ];
           }
+          if ( path.startsWith("/blog/") ) {
+            var regex = /^\/blog\/(.*)\/?$/;
+            return [
+              path.replace(regex,"/articles/$1.html")
+            ];
+          }
           return undefined;
         },
         redirects: [
+          {
+            to: '/docs/learn/core-concepts/security/authentication/external-jwt-signers',
+            from: ['/ziti/security/authentication/external-jwt-signers.html'],
+          },
+          {
+            to: '/docs/learn/core-concepts/identities/enrolling',
+            from: ['/ziti/identities/enrolling.html'],
+          },
+          {
+            to: '/docs/reference/tunnelers/',
+            from: ['/ziti/clients/tunneler.html'],
+          },
+          {
+            to: '/docs/reference/tunnelers/linux/',
+            from: ['/ziti/clients/linux.html'],
+          },
           {
             to: '/docs/guides/troubleshooting/',
             from: ['/operations/troubleshooting/troubleshooting'],
@@ -126,7 +148,7 @@ const config = {
           },
           {
             to: '/docs/learn/introduction/',
-            from: ['/docs', '/docs/learn', '/docs/introduction/intro', '/docusaurus/docs/overview'],
+            from: ['/docs', '/docs/learn', '/docs/introduction/intro', '/docusaurus/docs/overview', '/ziti/overview/', '/ziti/overview.html'],
           },
           {
             to: '/docs/learn/quickstarts/network/',
