@@ -93,6 +93,12 @@ const config = {
               path.replace("/docs/reference/tunnelers/","/docs/core-concepts/clients/tunnelers/")
             ];
           }
+          if ( path.startsWith("/blog/") ) {
+            var regex = /^\/blog\/(.*)\/?$/;
+            return [
+              path.replace(regex,"/articles/$1.html")
+            ];
+          }
           return undefined;
         },
         redirects: [
@@ -109,12 +115,12 @@ const config = {
             from: ['/ziti/clients/tunneler.html'],
           },
           {
-            to: '/docs/guides/troubleshooting/',
-            from: ['/operations/troubleshooting/troubleshooting'],
+            to: '/docs/reference/tunnelers/linux/',
+            from: ['/ziti/clients/linux.html'],
           },
           {
-            to: '/blog/golang-aha/article',
-            from: ['/articles/golang-aha/article.html'],
+            to: '/docs/guides/troubleshooting/',
+            from: ['/operations/troubleshooting/troubleshooting'],
           },
           {
             to: '/docs/learn/core-concepts/pki',
