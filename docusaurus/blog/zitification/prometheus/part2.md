@@ -273,7 +273,7 @@ ziti edge create service-policy "kubeA.prometheus.svc.bind" Bind \
   --identity-roles "@kubeA.ziti.id"
 ```
 
-#### Deploying `Prometheuz`
+#### Deploying `Prometheuz` {#deploying-prometheuz-1}
 
 With our services, configs and service-policies in place we are now ready to start our Prometheus server. Remember this server will not 
 listen on a the OpenZiti overlay. It's going to listen exclusively on the underlay. We are still exploring OpenZiti, and we are not yet
@@ -363,7 +363,7 @@ ziti edge create service-policy "kubeB.reflect.svc.dial.scrape" Dial \
   --service-roles "@kubeB.reflect.scrape.svc" --identity-roles "#reflectz-clients"
   ```
 
-#### Deploy `reflectz` 
+#### Deploy `reflectz` {#deploy-reflectz-1}
 ```text
 helm repo add openziti-test-kitchen https://openziti-test-kitchen.github.io/helm-charts/
 helm repo update
