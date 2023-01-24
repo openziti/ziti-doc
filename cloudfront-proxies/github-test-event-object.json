@@ -1,0 +1,18 @@
+{                            
+    "version": "1.0",
+    "context": {    
+        "eventType": "viewer-request"
+    },
+    "viewer": {
+        "ip": "1.2.3.4"
+    },
+    "request": {
+    "method": "GET",                                                             
+    "uri": "/spec/client.yml",
+    "headers": {
+        "host": {"value": "get.openziti.io"}
+    },
+    "cookies": {},              
+    "querystring": {}                                                            
+    }                        
+}
