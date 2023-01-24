@@ -86,7 +86,7 @@ This proxy's function modifies the viewer's request if it matches one of the sho
 |purpose|abbreviation|full URL path|
 |---|---|---|
 |quickstart functions|`/quick/`|`/openziti/ziti/main/quickstart/docker/image/`|
-|API specs|`/spec/`|`/openziti/edge/main/specs/`|
+|API specs|`/spec/`|`/openziti/edge-api/main/`|
 |Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
 |Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
 
