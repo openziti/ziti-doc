@@ -176,13 +176,15 @@ If you have made it this far, you've seen us access the Kubernetes API via the p
 
 1. Disable the cluster's public IP address in OKE (go to the cluster in Oracle Cloud, click Edit and remove the public IP and click save)
 2. Turn off the Ziti Desktop Edge for Windows
-3. Download `kubeztl` from [the latest release page](https://github.com/openziti-test-kitchen/z_archived_kubectl/releases/latest) (you don't need to call the executable `kubeztl` - you can keep it named `kubectl` if you want)
+3. Build `kubeztl` from [the GitHub repo](https://github.com/openziti-test-kitchen/kubeztl)
 4. Use `kubeztl` to get pods!
-```bash
-./kubeztl get pods -c id.json -S k8s.oci
-NAME                        READY   STATUS    RESTARTS   AGE
-ziti-host-976b84c66-kr4bc   1/1     Running   0          101m
-```
+
+    ```bash
+    ./kubeztl -zConfig ./id.json -service k8s.oci get pods
+    NAME                        READY   STATUS    RESTARTS   AGE
+    ziti-host-976b84c66-kr4bc   1/1     Running   0          101m
+    ```
+
 ### Modifying KUBECONFIG
 
 The `kubeztl` command has also been modified to allow you to add the service name and config file directly into the file itself. This is convenient since you will not need to supply the ziti identity file, nor will you need to specify which service to use. Modifying the file is straight-forward. Open the config file, find the context listed under the contexts root and add two rows as shown here.
