@@ -176,10 +176,7 @@ If you have made it this far, you've seen us access the Kubernetes API via the p
 
 1. Disable the cluster's public IP address in OKE (go to the cluster in Oracle Cloud, click Edit and remove the public IP and click save)
 2. Turn off the Ziti Desktop Edge for Windows
-3. Download `kubeztl` (you don't need to call the executable `kubeztl` - you can keep it named `kubectl` if you want)
-```bash
-curl -L -o kubeztl https://github.com/openziti-incubator/kubectl/releases/download/v0.0.4/kubectl-linux-amd64
-```
+3. Download `kubeztl` from [the latest release page](https://github.com/openziti-test-kitchen/z_archived_kubectl/releases/latest) (you don't need to call the executable `kubeztl` - you can keep it named `kubectl` if you want)
 4. Use `kubeztl` to get pods!
 ```bash
 ./kubeztl get pods -c id.json -S k8s.oci
