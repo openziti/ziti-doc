@@ -15,7 +15,7 @@ The OpenZiti Controller must be configured with public key infrastructure
 (PKI). The configured PKI is used to create secure, mutually-
 authenticated TLS (mTLS) network connections between any two
 pieces of the OpenZiti Network. The OpenZiti Controller does not provide its
-own PKI but for the OpenZiti Controller to sign certificate requests (CSR)
+own PKI but for the OpenZiti Controller to sign a certificate signing request (CSR)
 the OpenZiti Controller will need to be configured with a key and
 certificate used for signing. The OpenZiti CLI can generate a PKI.
 
