@@ -12,7 +12,7 @@ These areas are expanded on below.
 
 ## Fabric
 
-All of the OpenZiti repositories build upon each other. with the Fabric repository as the base. It is the only repository that can be
+All of the OpenZiti repositories build upon each other with the Fabric repository as the base. It is the only repository that can be
 used on its own and have a semblance of network connectivity. From the Fabric repository alone, one can build a
 fabric-only controller and router binaries. The capabilities of these components will be limited and require
 low-level configuration and maintenance. If done, a mesh network will be established that can be used to send
