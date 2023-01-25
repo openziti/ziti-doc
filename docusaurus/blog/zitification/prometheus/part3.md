@@ -61,7 +61,7 @@ With your developer access you should be able to navigate your browser to http:/
 > [Look at the full list of top level domains starting with S](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#S). You 
 > won't find ".svc" on that list at this time
 
-<img src="./kubea.prom.init.png" class="flr"/>
+<img src="/img/kubea.prom.init.png" class="flr"/>
 
 You should see the following. You might have noticed that the chart deployed has a few other containers we have not discussed yet. We'll 
 not go into those containers in this article. What's important is that this Prometheus server has a few targets already for us to access. 
