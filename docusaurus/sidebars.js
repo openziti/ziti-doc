@@ -16,7 +16,7 @@ const sidebars = {
   docsSidebar: [
     {
       type: 'html',
-      value: '<a href="/docs/learn/introduction/">LEARN', // The HTML to be rendered
+      value: '<a href="/docs/learn/introduction/">LEARN</a>', // The HTML to be rendered
       className: 'sidebar-title'
     },
     {
