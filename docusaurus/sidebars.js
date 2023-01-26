@@ -16,7 +16,7 @@ const sidebars = {
   docsSidebar: [
     {
       type: 'html',
-      value: 'LEARN', // The HTML to be rendered
+      value: '<a href="/docs/learn/introduction/">LEARN', // The HTML to be rendered
       className: 'sidebar-title'
     },
     {
@@ -34,7 +34,7 @@ const sidebars = {
     },
     {
       type: 'html',
-      value: 'GUIDES', // The HTML to be rendered
+      value: '<a href="/docs/guides/">GUIDES</a>', // The HTML to be rendered
       className: 'sidebar-title'
     },
     {
