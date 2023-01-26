@@ -16,7 +16,7 @@ jobs:
       - name: Check broken links
         uses: ruzickap/action-my-broken-link-checker@v2
         with:
-          url: https://openziti.github.io/
+          url: https://docs.openziti.io/
           cmd_params: >
             --color=always 
             --exclude=https://(EXWPKK5PV4-dsn.algolia.net|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|play.google.com/|apps.apple.com/|www.reddit.com/r/openziti)|(#docusaurus_skipToContent_fallback|\.ziti/?)$
