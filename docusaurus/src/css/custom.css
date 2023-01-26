@@ -413,3 +413,7 @@ float: right;
 div > aside > div > nav > ul > li {
   margin-left: 15px;
 }
+
+div > aside > div > nav > ul > li > a {
+  color: var(--ifm-font-color-base)
+}
