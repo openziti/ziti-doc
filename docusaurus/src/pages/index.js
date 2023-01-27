@@ -150,11 +150,7 @@ export default function Home() {
             </OpenZitiHorizontalSection>
 
             <OpenZitiHorizontalSection>
-                <H1>OpenZiti Provides</H1>
-
-                <p>OpenZiti makes it easy to embed zero trust, programmable networking directly into your app. Deploy your
-                    own zero trust, high performance network using any Internet connection. Say goodbye to your outmoded VPN.
-                </p>
+                <H1>OpenZiti Components</H1>
 
                 <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center"}}>
                     <ul style={{maxWidth: "800px"}}>
