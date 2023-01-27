@@ -21,10 +21,10 @@ html[data-theme="dark"] {
   --github-img: '/img/github.svg';
 }
 p {
-  font-size: 14px;
+  font-size: 16px;
 }
 li {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .main {
