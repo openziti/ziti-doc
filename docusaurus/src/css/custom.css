@@ -58,6 +58,7 @@ html[data-theme="dark"] {
   --ifm-color-primary-lighter: #ddbcfd;
   --ifm-color-primary-lightest: #e6cffe;
   --background-color-1: #434862;
+  --landing-banner-1: #38383a;
   --ifm-font-color-base: #94a3b8;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --logo-name: "ziti-logo-light.svg";
