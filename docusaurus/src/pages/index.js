@@ -1,6 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import OpenZitiLayout from "../components/OpenZitiLayout";
+import {WhatIsOpenZiti} from "../components/SharedComponents";
 import Link from '@docusaurus/Link';
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -134,8 +135,7 @@ export default function Home() {
             <OpenZitiHorizontalSection style={{backgroundColor: "var(--landing-banner-1)"}}>
                 <H1>What is OpenZiti?</H1>
                 <p>
-                    The OpenZiti project is a free, open source project focused on bringing Zero Trust to any application.
-                    The project provides all the pieces required to implement or integrate Zero Trust into your solutions:
+                    <WhatIsOpenZiti/>
 
                     <ul style={{margin: "var(--ifm-list-margin)"}}>
                         <li><a href="/docs/reference/glossary#network-overlay-overlay">The overlay network</a></li>
