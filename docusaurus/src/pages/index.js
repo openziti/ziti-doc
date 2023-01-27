@@ -150,9 +150,8 @@ export default function Home() {
             </OpenZitiHorizontalSection>
 
             <OpenZitiHorizontalSection>
-                <H1>OpenZiti Components</H1>
-
-                <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center"}}>
+                <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center", flexDirection: "column"}}>
+                    <H1>OpenZiti Components</H1>
                     <ul style={{maxWidth: "800px"}}>
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
