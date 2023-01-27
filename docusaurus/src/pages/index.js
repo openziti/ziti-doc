@@ -43,7 +43,7 @@ export default function Home() {
 
     return (
         <OpenZitiLayout>
-            <OpenZitiHorizontalSection style={{fontSize:"large", padding: "50px"}}>
+            <OpenZitiHorizontalSection style={{padding: "40px"}}>
                 <div className={styles.getStartedRow}>
 
                     <div className={styles.getStartedBlurb}>
@@ -131,7 +131,25 @@ export default function Home() {
                 </div>
             </OpenZitiHorizontalSection>
 
-            <OpenZitiHorizontalSection style={{fontSize:"large"}}>
+            <OpenZitiHorizontalSection style={{backgroundColor: "var(--landing-banner-1)"}}>
+                <H1>What is OpenZiti?</H1>
+                <p>
+                    The OpenZiti project is a free, open source project focused on bringing Zero Trust to any application.
+                    The project provides all the pieces required to implement or integrate Zero Trust into your solutions:
+
+                    <ul style={{margin: "var(--ifm-list-margin)"}}>
+                        <li><a href="/docs/reference/glossary#network-overlay-overlay">The overlay network</a></li>
+                        <li><a href="/docs/reference/tunnelers/">Tunneling Applications for all operating systems</a></li>
+                        <li><a href="/docs/reference/developer/sdk/">Numerous SDKs making it easy to add Zero Trust concepts directly into your application</a></li>
+                    </ul>
+
+                    OpenZiti makes it easy to embed Zero Trust, programmable networking directly into your app.
+                    With OpenZiti you can have Zero Trust, high performance networking on any internet connection, without VPNs
+                    and ultimately without any open, inbound ports to the application by embedding an SDK into the application.
+                </p>
+            </OpenZitiHorizontalSection>
+
+            <OpenZitiHorizontalSection>
                 <H1>OpenZiti Provides</H1>
 
                 <p>OpenZiti makes it easy to embed zero trust, programmable networking directly into your app. Deploy your
