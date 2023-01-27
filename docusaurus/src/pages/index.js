@@ -145,7 +145,7 @@ export default function Home() {
 
                     OpenZiti makes it easy to embed Zero Trust, programmable networking directly into your app.
                     With OpenZiti you can have Zero Trust, high performance networking on any internet connection, without VPNs
-                    and ultimately without any open, inbound ports by embedding an SDK into to the application itself.
+                    and ultimately without any open, inbound ports needed for your application.
                 </p>
             </OpenZitiHorizontalSection>
 
