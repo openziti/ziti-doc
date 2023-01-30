@@ -25,7 +25,7 @@ const sidebars = {
     },
     {
       type: 'html',
-      value: 'REFERENCE', // The HTML to be rendered
+      value: '<a href="/docs/reference/">REFERENCE</a>', // The HTML to be rendered
       className: 'sidebar-title'
     },
     {
