@@ -302,13 +302,46 @@ other address. The `advertise` value should be externally routable.
 - `options` - (optional) options specified by the component specifically in addition to
   the [shared options](conventions.md#xgress-options)
 
-
 ```yaml
 listeners:
   - binding: edge
     address: tls:0.0.0.0:3022
     options:
       advertise: 127.0.0.1:3022
+```
+
+#### tunnel `listeners`
+
+A tunnel is a special kind of listener binding.
+
+When generating a router configuration with `ziti create config router edge` the tunnel binding is enabled with default mode `host`. This mode continually configures the router's tunnel to reverse proxy the list of services that are authorized by Bind Service Policy.
+
+```yaml
+listeners:
+  - binding: tunnel
+    options:
+      mode: host
+```
+
+If tunnel is enabled at the time the router is created then its configuration may be changed and will take effect when the router is restarted. For example, this configures the router's tunnel to transparently proxy all services authorized by Dial Service Policy, reverse proxy all services authorized by Bind Service Policy, and provide a nameserver
+
+```yaml
+listeners:
+  - binding: tunnel
+    options:
+      mode: tproxy
+      resolver: udp://127.0.0.1:53
+```
+
+In this example the router's tunnel is configured to provide a forward proxy listener for a list of service, TCP port pairs.
+
+```yaml
+listeners:
+  - binding: tunnel
+    options:
+      mode: proxy
+      services: 
+        - zedsDemoHttpHttpbin:8080
 ```
 
 ### `metrics`

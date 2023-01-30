@@ -211,6 +211,7 @@ Each xgress components are referenced to by `binding` name. The following `bindi
   to dial to an underlay UDP service at a `<host>:<port>` address
 - `edge` - listener, dialer - allows multiplexed ingress connections from SDKs and connections to other SDKs hosting
   services, requires an `advertise` option in the `options` section to be defined for external linking
+- `tunnel` - a special type of binding [used by routers](./router.md#tunnel-listeners)
 
 ## xgress Options
 
