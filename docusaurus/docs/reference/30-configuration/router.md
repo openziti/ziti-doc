@@ -323,7 +323,7 @@ listeners:
       mode: host
 ```
 
-If tunnel is enabled at the time the router is created then its configuration may be changed and will take effect when the router is restarted. For example, this configures the router's tunnel to transparently proxy all services authorized by Dial Service Policy, reverse proxy all services authorized by Bind Service Policy, and provide a nameserver
+If tunnel is enabled at the time the router is created then its configuration may be changed and will take effect when the router is restarted. For example, this configures the router's tunnel to transparently proxy all services authorized by Dial Service Policy and provide a nameserver. This mode also enables the reverse proxy features of `host` mode.
 
 ```yaml
 listeners:
@@ -333,7 +333,7 @@ listeners:
       resolver: udp://127.0.0.1:53
 ```
 
-In this example the router's tunnel is configured to provide a forward proxy listener for a list of service, TCP port pairs.
+In this example the router's tunnel is configured to provide a forward proxy listener for a list of service, TCP port pairs. This mode also enables the reverse proxy features of `host` mode.
 
 ```yaml
 listeners:
