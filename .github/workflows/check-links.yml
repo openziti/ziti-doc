@@ -27,7 +27,7 @@ jobs:
           debug: false
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
-        uses: DavidMarquezF/close-matching-issues@v3.0.1
+        uses: netfoundry/close-matching-issues@v3
         with:
           query: 'is:open label:bug in:title "Broken Links Alarm"'
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -54,7 +54,7 @@ jobs:
         working-directory: ./check-links/
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
-        uses: DavidMarquezF/close-matching-issues@v3.0.1
+        uses: netfoundry/close-matching-issues@v3
         with:
           query: 'is:open label:bug in:title "Popular Links Alarm"'
           token: ${{ secrets.GITHUB_TOKEN }}
