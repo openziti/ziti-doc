@@ -6,5 +6,7 @@
         "silent": false
     },
     "cleanUrls": false,
-    "public": true
-}
+    "public": true,
+    "ignoreCommand": "git diff --quiet HEAD^ HEAD -- ../docusaurus/ ../gendoc.sh"
+    }
+    
