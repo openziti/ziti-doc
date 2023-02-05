@@ -122,9 +122,9 @@ that are not specified will fail the check.
 
 ## MFA
 
-The `MFA` Posture Check type is used to enforce [MFA TOTP](../authentication/totp) configuration on a client. Posture
+The `MFA` Posture Check type is used to enforce [MFA TOTP](../authentication/70-totp.md) configuration on a client. Posture
 Checks enforce access authorization. For authentication enforcement, see 
-[Authentication Policies](../authentication/authentication-policies#secondary).
+[Authentication Policies](../authentication/30-authentication-policies.md#secondary).
 
 ### Creating
 
