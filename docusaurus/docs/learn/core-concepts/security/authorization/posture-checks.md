@@ -31,8 +31,8 @@ Service Policy lacking Posture Checks will always result as passing.
 
 # Associating
 
-Posture Checks are associated to [Service Policies](./policies/overview) through 
-[Roles and Role Attributes](./policies/overview#roles-and-role-attributes). Attributes on each Posture Check created
+Posture Checks are associated to [Service Policies](./policies/overview.mdx) through 
+[Roles and Role Attributes](./policies/overview.mdx#roles-and-role-attributes). Attributes on each Posture Check created
 will be selected for on Service Policies via the `postureCheckRoles` as an array of selected roles. Service Policies are
 associated to Identities in the same fashion via `identityRoles` and the attributes on Identities.
 
@@ -122,9 +122,9 @@ that are not specified will fail the check.
 
 ## MFA
 
-The `MFA` Posture Check type is used to enforce [MFA TOTP](../authentication/totp) configuration on a client. Posture
+The `MFA` Posture Check type is used to enforce [MFA TOTP](../authentication/70-totp.md) configuration on a client. Posture
 Checks enforce access authorization. For authentication enforcement, see 
-[Authentication Policies](../authentication/authentication-policies#secondary).
+[Authentication Policies](../authentication/30-authentication-policies.md#secondary).
 
 ### Creating
 
