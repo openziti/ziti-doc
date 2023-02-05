@@ -31,8 +31,8 @@ Service Policy lacking Posture Checks will always result as passing.
 
 # Associating
 
-Posture Checks are associated to [Service Policies](./policies/overview) through 
-[Roles and Role Attributes](./policies/overview#roles-and-role-attributes). Attributes on each Posture Check created
+Posture Checks are associated to [Service Policies](./policies/overview.mdx) through 
+[Roles and Role Attributes](./policies/overview.mdx#roles-and-role-attributes). Attributes on each Posture Check created
 will be selected for on Service Policies via the `postureCheckRoles` as an array of selected roles. Service Policies are
 associated to Identities in the same fashion via `identityRoles` and the attributes on Identities.
 
