@@ -415,3 +415,12 @@ float: right;
 div > aside > div > nav > ul > li {
   margin-left: 15px;
 }
+
+div > aside > div > nav > ul > li > a,
+div > aside > div > nav > ul > li > a:link,
+div > aside > div > nav > ul > li > a:hover,
+div > aside > div > nav > ul > li > a:visited,
+div > aside > div > nav > ul > li > a:active {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
