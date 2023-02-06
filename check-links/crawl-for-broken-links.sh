@@ -12,7 +12,7 @@ fi
 
 case "$SERVER" in
     *)
-        EXCLUDE='https://(EXWPKK5PV4-dsn.algolia.net|www.google.com/search|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|play.google.com/|apps.apple.com/|www.reddit.com/r/openziti|github.com/.*/releases/latest/download/)|(#docusaurus_skipToContent_fallback|\.(ziti|svc)(/[^.]+)?)$'
+        EXCLUDE='https://(EXWPKK5PV4-dsn.algolia.net|www.google.com/search|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|mermaid.ink|play.google.com/|apps.apple.com/|www.reddit.com/r/openziti|github.com/.*/releases/latest/download/)|(#docusaurus_skipToContent_fallback|\.(ziti|svc)(/[^.]+)?)$'
     ;;
 esac
 
