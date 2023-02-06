@@ -56,6 +56,7 @@ as my service name. When deployed by a cloud provider, the Kubernetes API is gen
 , `kubernetes.default.svc.cluster.local`. I chose the IP since it's pretty obvious that it's an internal IP, not on my local network. Also worth pointing out is that I'm mapping the port as well, changing it from the port that the server provides, 6443, to the common HTTPS port of 443 for the local intercept. With zitified `kubectl` we don't even need these intercepts, but we'll keep it here so that we can use the unmodified `kubectl` as well. Finally, these commands are all executed inside a bash shell since I'm using WSL.
 
 #### Example Ziti CLI commands
+
 ```bash
 # the name of the service
 service_name=k8s.oci
@@ -98,6 +99,7 @@ Once we have established the pieces of the [Ziti Network][8], we'll want to get 
 ### Getting the Kubernetes Config Files
 
 Notice that we are changing the file location output by these commands and they are being output as two separate Kubernetes config files. If you prefer to merge them all into one big config file and change contexts - feel free. I left them as separate files here because it provides a very clear separation as to which config is being used or modified.
+
 ```bash
 # Get this value directly from Oracle
 oci_cluster_id="put-your-cluster-id-here"
@@ -126,6 +128,7 @@ At this point we should have all the pieces in place so that we can start puttin
 ### Testing the Public API
 
 This step is very straight-forward for anyone who's used Kubernetes before. Issue the following commands, making sure the path is correct for your public Kubernetes config file, and verify Kubernetes works as expected.
+
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.public
 kubectl get pods -v6 --request-timeout='5s'
@@ -133,6 +136,7 @@ I1019 13:57:31.910962    3211 loader.go:372] Config loaded from file:  /tmp/oci/
 I1019 13:57:33.676047    3211 round_trippers.go:454] GET https://150.230.150.0:6443/api/v1/namespaces/default/pods?limit=500&timeout=5s 200 OK in 1752 milliseconds
 NAME                                        READY   STATUS    RESTARTS   AGE
 ```
+
 If your output looks something similar to the above (with or without the pods you expect to see) then great! That means your Kubernetes cluster is indeed up and running. Let's move on!
 
 #### Deploying Ziti to Kubernetes
@@ -143,6 +147,7 @@ Next we'll grab a few lines from the excellent guide NetFoundry put out for inte
 2. add the NetFoundry helm repo: `helm repo add netfoundry https://netfoundry.github.io/charts/`
 3. locate the jwt file for the Kubernetes identity. If you followed the steps above the file will be named: `"${the_kubernetes_identity}".jwt` (make sure you replace the variable with the correct value)
 4. use the jwt to add Ziti: `helm install ziti-host netfoundry/ziti-host --set-file enrollmentToken="${the_kubernetes_identity}".jwt` (again make sure you replace the variable name) If you need to, make sure you create a persistent volume. The ziti pod requires storage to store a secret.
+
 ```bash
 apiVersion: v1
 kind: PersistentVolume
@@ -163,6 +168,7 @@ spec:
 #### Add/Enroll the Client Identity
 
 Now consume the one time token (the jwt file) to enroll and create a client-side identity using the Ziti Desktop Edge for Windows (or MacOS or via the `ziti-edge-tunnel` if you prefer). Once you can see the identity in your tunneling app, you should be able to use the private kubernetes config file to access the same exact cluster. Remember though, we have mapped the port on the client side to use 443. That means you'll need to update your config file and change 6443 --> 443. Now when you run `get pods` you'll see the ziti-host pod deployed:
+
 ```bash
 export KUBECONFIG=/tmp/oci/config.oci.private
 kubectl get pods
@@ -176,19 +182,19 @@ If you have made it this far, you've seen us access the Kubernetes API via the p
 
 1. Disable the cluster's public IP address in OKE (go to the cluster in Oracle Cloud, click Edit and remove the public IP and click save)
 2. Turn off the Ziti Desktop Edge for Windows
-3. Download `kubeztl` (you don't need to call the executable `kubeztl` - you can keep it named `kubectl` if you want)
-```bash
-curl -L -o kubeztl https://github.com/openziti-incubator/kubectl/releases/download/v0.0.4/kubectl-linux-amd64
-```
+3. Build `kubeztl` from [the GitHub repo](https://github.com/openziti-test-kitchen/kubeztl)
 4. Use `kubeztl` to get pods!
-```bash
-./kubeztl get pods -c id.json -S k8s.oci
-NAME                        READY   STATUS    RESTARTS   AGE
-ziti-host-976b84c66-kr4bc   1/1     Running   0          101m
-```
+
+    ```bash
+    ./kubeztl -zConfig ./id.json -service k8s.oci get pods
+    NAME                        READY   STATUS    RESTARTS   AGE
+    ziti-host-976b84c66-kr4bc   1/1     Running   0          101m
+    ```
+
 ### Modifying KUBECONFIG
 
 The `kubeztl` command has also been modified to allow you to add the service name and config file directly into the file itself. This is convenient since you will not need to supply the ziti identity file, nor will you need to specify which service to use. Modifying the file is straight-forward. Open the config file, find the context listed under the contexts root and add two rows as shown here.
+
 ```bash
 contexts
 - context:
@@ -198,7 +204,8 @@ contexts
     service: k8s.oci
 ```
 
-Once done - you can now simply use the context the same way you have always - `kubeztl get pods`!!!
+Once done - you can now simply use the context the same way you have always - `kubeztl get pods`!
+
 ```bash
 ./kubeztl get pods
 NAME                        READY   STATUS    RESTARTS   AGE
