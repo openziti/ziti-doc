@@ -201,15 +201,10 @@ The enrolment section has these subsection:
 
 An object defining the `cert` and `key` used to issue certificates to identities and routers.
 
-- `cert` - (required) the x509 PEM formatted certificate used to sign certificate, must be a root or intermediate CA
-- `key` - (required) the x509 PEM formatted private key used to sign certificates, must be the key for the certificate
-  defined
-  in `cert`
+- `cert` - (required) the x509 PEM formatted certificate of the CA that the controller will use to issue edge identity certificates 
+- `key` - (required) the x509 PEM formatted private key for the certificate defined in `cert`
 
-As this signing certificate will be the signer for all issued edge router certificates, it is important that all
-enrolling identities and routers trust the PKI that issued the signing certificate. To have that happen the trust anchor
-of the PKI the `signingCert` is a member of should be in the `ca` bundle defined in the controller's `identity` section.
-The `ca` value is used as part of the trust bundle delivered to identities and routers during enrollment.
+This is the signing certificate (root or intermediate CA certificate) that the controller will use to issue client certificates for identities (edge SDKs) and client and server certificates for routers. It is essential that all identities and routers trust this certificate. This trust is configured by including this certificate in the router control plane's trust bundle defined in the controller's `.identity.ca` field.
 
 #### `edgeIdentity`
 
@@ -312,7 +307,7 @@ healthChecks:
 The identity section includes the default server certificate and private key used for services hosted by the controller,
 alternate server certificates and keys to support SNI on hosted services, client certificate and private key when making
 connections, and the `ca` bundle that the controller will use when making connections and when bootstrapping identities
-and routers. See the conventions that apply to all [identity](conventions.md#identity) sections for field level
+and routers. For example, this `ca` bundle must contain the issuer's cert of this ctrl plane `identity` and the edge signer (CA) configured in [`.edge.enrollment.signingCert.cert`](#signingcert). See the conventions that apply to all [identity](./conventions.md#identity) sections for field level
 detail.
 
 ### `network`
