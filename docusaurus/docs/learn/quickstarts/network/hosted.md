@@ -66,6 +66,10 @@ export ZITI_EDGE_ROUTER_PORT=8442
 
 ### Run `expressInstall`
 
+As with any script that is downloaded and run from the internet, we recommend you examine 
+the script before running it locally. This script is provided as a convinience
+method for installing an environment quickly and easily.
+
 ```bash
 source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
 ```
