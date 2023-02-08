@@ -89,7 +89,7 @@ Let's get to work and build this solution. We'll need some legwork done first.
 
 ## ClusterA - Using `ziti-host`
 
-<img src="/img/clusterA.svg" class="flr"/>
+<img src="./clusterA.svg" class="flr"/>
 
 We start with an empty OpenZiti network, and two empty Kubernetes clusters. Let's start by populating ClusterA. We will deploy three 
 pods into this Kubernetes cluster. When done, the Kubernetes cluster will look similar to the image to the right.
@@ -302,7 +302,7 @@ helm install prometheuz openziti-test-kitchen/prometheus \
 
 ## ClusterB - Fully Dark
 
-<img src="/img/clusterB.svg" class="flr"/>
+<img src="./clusterB.svg" class="flr"/>
 
 Now that we have deployed our first Kubernetes cluster, it's now time to deploy the second Kubernetes cluster. This time, we are going 
 to keep our entire deployment **fully dark**! There will be no listening ports, not even local to the Kubernetes cluster itself. To get 
