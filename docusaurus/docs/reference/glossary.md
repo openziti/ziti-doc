@@ -76,3 +76,8 @@ as a Ziti Identity. When used with a Ziti SDK it is possible to create a truly z
 
 ## Ziti Tunneler, Tunneler
 A Ziti Tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, tproxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.
+
+## Zitification, Zitified, Zitify
+"Zitification", "Zitified", "Zitify" are words which the project has created to describe "embedding an OpenZiti SDK into a project". 
+After an OpenZiti SDK is added to a project, it is said to be "zitified" (ziti-fied). The verb form of adding OpenZiti to
+a project is called "zitify" (ziti-fy). A project which has had OpenZiti added to it, is often rerferred to as a "zitification" (ziti-fication).
