@@ -412,8 +412,8 @@ float: right;
 }
 
 /* indent sidebar list items */
-div > aside > div > nav > ul > li {
-  margin-left: 15px;
+div > aside > div > div > nav > ul > li  {
+  margin-left: 20px;
 }
 
 div > aside > div > nav > ul > li > a,
