@@ -1,5 +1,7 @@
 # Building this Project
 
+![build & deploy](https://github.com/openziti/ziti-doc/actions/workflows/main.workflow.yml/badge.svg)
+
 ## Prerequisite
 
 * Linux - Documentation is run routinely by our CI
