@@ -289,18 +289,16 @@ link:
 ### `listeners`
 
 Listeners configure different types of server logic and protocols to be "listened" for on the router. This includes
-opening ports on one or more interfaces by specified in the `address` option. The `address` field is formatted according
-to the [address conventions](conventions.md#addressing). If necessary to refer to the listener externally in
-documents or payloads maintained outside the process, the `advertise` option will be used to format URLs or any
-other address. The `advertise` value should be externally routable.
+opening ports on one or more interfaces specified in the `address` option. The `address` field is formatted according
+to the [address conventions](./conventions.md#addressing). The `advertise` option is used to format the listener address when it is presented to audiences outside the router process. The `advertise` value must be addressable by clients of the listener.
 
-- `binding` - (required) the name of a [xgress component](conventions.md#xgress-components) that will provide the server
+- `binding` - (required) the name of a [xgress component](./conventions.md#xgress-components) that will provide the server
   side logic for the listener
-- `bind` - (required) the [address](conventions.md#addressing) that the listener should listen on
+- `bind` - (required) the [address](./conventions.md#addressing) that the listener should listen on
 - `advertise` (required) the `<host>:<port>` combination that external resources should use to reach this listener
 - `costTags` - (optional) an array of tags used during link cost calculations
 - `options` - (optional) options specified by the component specifically in addition to
-  the [shared options](conventions.md#xgress-options)
+  the [shared options](./conventions.md#xgress-options)
 
 ```yaml
 listeners:
