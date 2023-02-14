@@ -84,9 +84,9 @@ protocol(s) used for router connections and how those connections are managed.
 
 - `listener` - (required) is in the format of `<protocol>:<interface>:<port>` format. The value set here must be
   resolvable by routers and correspond the routers `ctrl.endpoint` configuration value.
-  See [addressing](conventions#addressing).
+  See [addressing](./conventions.md#addressing).
 - `options` - a set of option which includes the below options and those defined
-  in [channel options](conventions.md#channel)
+  in [channel options](./conventions.md#channel)
     - `newListener` - (optional) an `<protocol>:<interface>:<port>` address that is sent to routers to indicate a
       controller address migration. Should only be specified when the new listener address is reachable as clients will
       begin to use the new value on restart
