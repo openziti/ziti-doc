@@ -17,7 +17,7 @@ function clone_or_pull {
     git pull
     popd
   else
-    git clone "${remote}" --branch "${BRANCH}" --single-branch "${dir}"
+    git clone "${remote}" --branch "${BRANCH}" --single-branch "${dir}" --depth 1
   fi
 }
 
@@ -70,6 +70,7 @@ if [[ "${SKIP_GIT}" == no ]]; then
   clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app"
   clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
   clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c"
+  clone_or_pull "https://github.com/openziti/helm-charts" "helm-charts"
 fi
 
 if [[ "${SKIP_CLEAN}" == no ]]; then

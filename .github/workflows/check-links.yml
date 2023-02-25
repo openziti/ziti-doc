@@ -19,7 +19,7 @@ jobs:
           url: https://docs.openziti.io/
           cmd_params: >
             --color=always 
-            --exclude=https://(EXWPKK5PV4-dsn.algolia.net|www.google.com/search|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|mermaid.ink|play.google.com/|apps.apple.com/|www.reddit.com/r/openziti|github.com/.*/releases/latest/download/)|(#docusaurus_skipToContent_fallback|\.(ziti|svc)(/[^.]+)?)$
+            --exclude=https://(EXWPKK5PV4-dsn.algolia.net|www.google.com/search|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|mermaid.ink|play.google.com/|apps.apple.com/|www.reddit.com/r/openziti|github.com/.*/releases/latest/download/)|(#docusaurus_skipToContent_fallback|\.(ziti(k8s)?|svc)(/[^.]+)?)$
             --buffer-size=8192 
             --max-connections-per-host=5
             --header=User-Agent:curl/7.54.0
