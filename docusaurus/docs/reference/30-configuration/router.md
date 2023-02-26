@@ -290,7 +290,7 @@ link:
 
 Listeners configure different types of server logic and protocols to be "listened" for on the router. This includes
 opening ports on one or more interfaces specified in the `address` option. The `address` field is formatted according
-to the [address conventions](./conventions.md#addressing). The `advertise` option is used to format the listener address when it is presented to audiences outside the router process. The `advertise` value must be addressable by clients of the listener.
+to the [address conventions](./conventions.md#addressing). The advertise field specifies the address a client will use to connect to the listener.
 
 - `binding` - (required) the name of a [xgress component](./conventions.md#xgress-components) that will provide the server
   side logic for the listener
