@@ -307,8 +307,7 @@ healthChecks:
 The identity section includes the default server certificate and private key used for services hosted by the controller,
 alternate server certificates and keys to support SNI on hosted services, client certificate and private key when making
 connections, and the `ca` bundle that the controller will use when making connections and when bootstrapping identities
-and routers. For example, this `ca` bundle must contain the issuer's cert of this ctrl plane `identity` and the edge signer (CA) configured in [`.edge.enrollment.signingCert.cert`](#signingcert). See the conventions that apply to all [identity](./conventions.md#identity) sections for field level
-detail.
+and routers. See the conventions that apply to all [identity](conventions.md#identity) sections for field level detail.
 
 ### `network`
 
