@@ -45,7 +45,7 @@ This guide will re-use the Ziti service "webhook-service1", a REST API demo serv
 You can restore the KUBECONFIG context from the Minikube quickstart like this if you switched contexts after running it.
 
 ```bash
-minikube --profile zitik8s update-context
+minikube --profile miniziti update-context
 ```
 
 ## Save the Identity in a Kubernetes Secret
@@ -102,7 +102,7 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
                     wget --quiet \
                       --output-document=- \
                       --post-data ziti=awesome \
-                      http://webhook.zitik8s/post \
+                      http://webhook.miniziti/post \
                     | jq .data
                     set +x
                     sleep 3
@@ -159,21 +159,21 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
 
     ```bash
     $ kubectl logs --follow ziti-tunnel-sidecar-demo-749c476989-6wpfn --container testclient
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.zitik8s/post
+    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
     + jq .data
     + set +x
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.zitik8s/post
+    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
     + jq .data
     + set +x
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.zitik8s/post
-    + jq .data
-    "ziti=awesome"
-    + set +x
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.zitik8s/post
+    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
     + jq .data
     "ziti=awesome"
     + set +x
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.zitik8s/post
+    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
+    + jq .data
+    "ziti=awesome"
+    + set +x
+    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
     + jq .data
     "ziti=awesome"
 

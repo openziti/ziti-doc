@@ -19,18 +19,18 @@ sidebar_label: Minikube
 1. [Install a Ziti tunneler app](https://docs.openziti.io/docs/downloads)
 1. Optional: Install `curl` and `jq` for testing a Ziti service in the terminal. 
 
-## Create the `zitik8s` Cluster
+## Create the `miniziti` Cluster
 
-First, let's create a brand new `minikube` profile named "zitik8s". We'll also use "zitik8s" as a top-level domain name to represent the Kubernetes cluster in DNS.
+First, let's create a brand new `minikube` profile named "miniziti". We'll also use "*.miniziti" as a top-level domain name to represent the Kubernetes cluster in DNS.
 
 ```bash
-minikube --profile zitik8s start
+minikube --profile miniziti start
 ```
 
 `minikube` will try to configure the default context of your KUBECONFIG. Let's test the connection to the new cluster. You can always restore the KUBECONFIG context from this Minikube quickstart like this:
 
 ```bash
-minikube --profile zitik8s update-context
+minikube --profile miniziti update-context
 ```
 
 Let's do a quick test of the current KUBECONFIG context.
@@ -44,8 +44,8 @@ kubectl get pods -- --all-namespaces
 We'll use the `ingress-nginx` and associated DNS addon in this quickstart.
 
 ```bash
-minikube --profile zitik8s addons enable ingress
-minikube --profile zitik8s addons enable ingress-dns
+minikube --profile miniziti addons enable ingress
+minikube --profile miniziti addons enable ingress-dns
 ```
 
 Ziti needs SSL passthrough, so let's patch the `ingress-nginx` deployment to enable that feature.
@@ -59,7 +59,7 @@ kubectl patch deployment -n ingress-nginx ingress-nginx-controller \
       }]'
 ```
 
-Now your zitik8s cluster is ready for some Ziti!
+Now your miniziti cluster is ready for some Ziti!
 
 ## Install the Ziti Controller
 
@@ -83,7 +83,7 @@ helm install \
    --create-namespace --namespace ziti-controller \
    "miniziti" \
    openziti/ziti-controller \
-      --set clientApi.advertisedHost="client.zitik8s" \
+      --set clientApi.advertisedHost="client.miniziti" \
       --values https://docs.openziti.io/helm-charts/charts/ziti-controller/values-ingress-nginx.yaml
 ```
 
@@ -95,26 +95,26 @@ kubectl --namespace ziti-controller get pods --watch
 
 ## Configure DNS
 
-Let's configure your computer (the one that's running `minikube`) and the zitik8s cluster to use the DNS addon we enabled earlier. The addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "client.zitik8s" which we just created by installing the controller chart.
+Let's configure your computer (the one that's running `minikube`) and the miniziti cluster to use the DNS addon we enabled earlier. The addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "client.miniziti" which we just created by installing the controller chart.
 
 1. First, let's make sure the DNS addon is working. Send a DNS query to the `minikube ip` address where the ingress nameserver is running.
 
    ```bash
-   nslookup client.zitik8s $(minikube --profile zitik8s ip)
+   nslookup client.miniziti $(minikube --profile miniziti ip)
    ```
 
 1. Next, let's configure your computer to send certain DNS queries to the `minikube ip` DNS server automatically. They have a pretty good guide for this step over at [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation).
 
-   Now that your computer is set up to use the `minikube` DNS server for DNS names that end in "*.zitik8s", you can test it again without specifying where to send the DNS query.
+   Now that your computer is set up to use the `minikube` DNS server for DNS names that end in "*.miniziti", you can test it again without specifying where to send the DNS query.
 
    ```bash
    # test your DNS configuration
-   nslookup client.zitik8s
+   nslookup client.miniziti
    ```
 
    You know it's working if you see the same IP address in the response as when you run `minikube ip`.
 
-1. Finally, let's configure the zitik8s cluster too. Add the zitik8s forwarder to the end of the value of `Corefile` in CoreDNS's configmap. Don't forget to substitute the real IP for `{MINIKUBE_IP}`, and be mindful to keep the indentation the same as the default `.:53` handler.
+1. Finally, let's configure the miniziti cluster too. Add the miniziti forwarder to the end of the value of `Corefile` in CoreDNS's configmap. Don't forget to substitute the real IP for `{MINIKUBE_IP}`, and be mindful to keep the indentation the same as the default `.:53` handler.
 
    ```bash
    # 1. Edit the configmap. 
@@ -124,7 +124,7 @@ Let's configure your computer (the one that's running `minikube`) and the zitik8
    ```
 
    ```json
-    zitik8s:53 {
+    miniziti:53 {
             errors
             cache 30
             forward . {MINIKUBE_IP}
@@ -162,7 +162,7 @@ Let's configure your computer (the one that's running `minikube`) and the zitik8
          reload
          loadbalance
       }
-      zitik8s:53 {
+      miniziti:53 {
                errors
                cache 30
                forward . 192.168.49.2
@@ -192,7 +192,7 @@ Let's configure your computer (the one that's running `minikube`) and the zitik8
 
    ```bash
    kubectl run --rm --tty --stdin dnstest --image=busybox --restart=Never -- \
-         nslookup client.zitik8s
+         nslookup client.miniziti
    ```
 
    Again, you know it's working if you see the same IP address in the response as when you run `minikube ip`.
@@ -205,7 +205,7 @@ Let's configure your computer (the one that's running `minikube`) and the zitik8
    # if this is your first time running the ziti CLI you may need to move the
    # downloaded binary to a directory in your executable search PATH and
    # set the filemode to allow execution with "chmod +x".
-   ziti edge login client.zitik8s:443 \
+   ziti edge login client.miniziti:443 \
       --yes --username admin \
       --password $(
          kubectl --namespace ziti-controller \
@@ -248,7 +248,7 @@ Let's configure your computer (the one that's running `minikube`) and the zitik8
       "minirouter" \
       openziti/ziti-router \
          --set-file enrollmentJwt=/tmp/minirouter.jwt \
-         --set edge.advertisedHost=minirouter.zitik8s \
+         --set edge.advertisedHost=minirouter.miniziti \
          --set ctrl.endpoint=miniziti-controller-ctrl.ziti-controller.svc:6262 \
          --values https://docs.openziti.io/helm-charts/charts/ziti-router/values-ingress-nginx.yaml
    ```
@@ -264,8 +264,8 @@ Let's configure your computer (the one that's running `minikube`) and the zitik8
       --create-namespace --namespace ziti-console \
       "miniconsole" \
       openziti/ziti-console \
-         --set ingress.hosts[0].host=miniconsole.zitik8s \
-         --set settings.edgeControllers[0].url=https://client.zitik8s \
+         --set ingress.hosts[0].host=miniconsole.miniziti \
+         --set settings.edgeControllers[0].url=https://client.miniziti \
          --values https://docs.openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml
    ```
 
@@ -279,7 +279,7 @@ Let's configure your computer (the one that's running `minikube`) and the zitik8
          -o go-template='{{index .data "admin-password" | base64decode }}')
    ```
 
-1. Open [http://miniconsole.zitik8s](http://miniconsole.zitik8s) in your web browser and login with username "admin" and the password from your clipboard.
+1. Open [http://miniconsole.miniziti](http://miniconsole.miniziti) in your web browser and login with username "admin" and the password from your clipboard.
 
 ## Create Ziti Identities and Services
 
@@ -293,7 +293,7 @@ ziti edge create identity device webhook-server1 \
     --jwt-output-file /tmp/webhook-server1.jwt --role-attributes webhook-servers
 
 ziti edge create config webhook-intercept-config intercept.v1 \
-    '{"protocols":["tcp"],"addresses":["webhook.zitik8s"], "portRanges":[{"low":80, "high":80}]}'
+    '{"protocols":["tcp"],"addresses":["webhook.miniziti"], "portRanges":[{"low":80, "high":80}]}'
 
 ziti edge create config webhook-host-config host.v1 \
     '{"protocol":"tcp", "address":"httpbin","port":8080}'
@@ -333,20 +333,20 @@ As soon as identity enrollment completes you should have a new DNS name availabl
 
 ```bash
 # this DNS answer is coming from the Ziti tunneler
-nslookup webhook.zitik8s
+nslookup webhook.miniziti
 ```
 
 ## Test the Webhook Service
 
 ```bash
-curl -sSf -XPOST -d ziti=awesome http://webhook.zitik8s/post | jq .data
+curl -sSf -XPOST -d ziti=awesome http://webhook.miniziti/post | jq .data
 ```
 
-You can also visit [http://webhook.zitik8s/get](http://webhook.zitik8s/get) in your web browser to see a JSON test response from the demo server.
+You can also visit [http://webhook.miniziti/get](http://webhook.miniziti/get) in your web browser to see a JSON test response from the demo server.
 
 ## Explore the Ziti Console
 
-Now that you've successfully tested the Ziti service, check out the various entities in your that were created by the script in [http://miniconsole.zitik8s/](http://miniconsole.zitik8s/).
+Now that you've successfully tested the Ziti service, check out the various entities in your that were created by the script in [http://miniconsole.miniziti/](http://miniconsole.miniziti/).
 
 ## Optional Hello Server Demo
 
@@ -357,7 +357,7 @@ Now that you've successfully tested the Ziti service, check out the various enti
       --jwt-output-file /tmp/hello-server1.jwt --role-attributes hello-servers
 
    ziti edge create config hello-intercept-config intercept.v1 \
-      '{"protocols":["tcp"],"addresses":["hello.zitik8s"], "portRanges":[{"low":80, "high":80}]}'
+      '{"protocols":["tcp"],"addresses":["hello.miniziti"], "portRanges":[{"low":80, "high":80}]}'
 
    ziti edge create config hello-host-config host.v1 \
       '{"protocol":"tcp", "address":"hello-server1.default.svc","port":80}'
@@ -394,7 +394,7 @@ Now that you've successfully tested the Ziti service, check out the various enti
       --set-file zitiIdentity=/tmp/hello-server1.json
    ```
 
-1. Visit the Hello Demo page in your browser: [http://hello.zitik8s/](http://hello.zitik8s/)
+1. Visit the Hello Demo page in your browser: [http://hello.miniziti/](http://hello.miniziti/)
 
    Now you have two Ziti services available to your Ziti tunneler app.
 
@@ -406,4 +406,4 @@ Now that you've successfully tested the Ziti service, check out the various enti
    1. Connect to the K8s apiserver from another computer with [`kubeztl`, the Ziti fork of `kubectl`](https://github.com/openziti-test-kitchen/kubeztl/). `kubeztl` works by itself without a Ziti tunneler.
 1. Share the demo server with someone.
    1. Create another identity named " edge-client2" with role "hello-clients" and send it to someone. 
-   1. Ask them to [install a tunneler and load the identity](https://docs.openziti.io/docs/reference/tunnelers/) so they too can access [http://hello.zitik8s/](http://hello.zitik8s/).
+   1. Ask them to [install a tunneler and load the identity](https://docs.openziti.io/docs/reference/tunnelers/) so they too can access [http://hello.miniziti/](http://hello.miniziti/).
