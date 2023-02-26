@@ -204,7 +204,7 @@ An object defining the `cert` and `key` used to issue certificates to identities
 - `cert` - (required) the x509 PEM formatted certificate of the CA that the controller will use to issue edge identity certificates 
 - `key` - (required) the x509 PEM formatted private key for the certificate defined in `cert`
 
-This is the signing certificate (root or intermediate CA certificate) that the controller will use to issue client certificates for identities (edge SDKs) and client and server certificates for routers. It is essential that all identities and routers trust this certificate. This trust is configured by including this certificate in the router control plane's trust bundle defined in the controller's `.identity.ca` field.
+OpenZiti clients rely on the controller to provide a bundle of trusted certificates during enrollment. The bundle is specified by the `identity.ca` field and points to a file on the server containing the bundle of trusted certificates. The signing certificate must be included in this file.
 
 #### `edgeIdentity`
 
