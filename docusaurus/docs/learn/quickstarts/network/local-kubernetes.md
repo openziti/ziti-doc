@@ -88,7 +88,7 @@ helm install \
    --create-namespace --namespace ziti-controller \
    "miniziti" \
    openziti/ziti-controller \
-      --set clientApi.advertisedHost="client.miniziti" \
+      --set clientApi.advertisedHost="controller.miniziti" \
       --values https://docs.openziti.io/helm-charts/charts/ziti-controller/values-ingress-nginx.yaml
 ```
 
@@ -100,12 +100,12 @@ kubectl --namespace ziti-controller get pods --watch
 
 ## Configure DNS
 
-Let's configure your computer (the one that's running `minikube`) and the miniziti cluster to use the DNS addon we enabled earlier. The addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "client.miniziti" which we just created by installing the controller chart.
+Let's configure your computer (the one that's running `minikube`) and the miniziti cluster to use the DNS addon we enabled earlier. The addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "controller.miniziti" which we just created by installing the controller chart.
 
 1. First, let's make sure the DNS addon is working. Send a DNS query to the `minikube ip` address where the ingress nameserver is running.
 
    ```bash
-   nslookup client.miniziti $(minikube --profile miniziti ip)
+   nslookup controller.miniziti $(minikube --profile miniziti ip)
    ```
 
 1. Next, let's configure your computer to send certain DNS queries to the `minikube ip` DNS server automatically. They have a pretty good guide for this step over at [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation).
@@ -114,7 +114,7 @@ Let's configure your computer (the one that's running `minikube`) and the minizi
 
    ```bash
    # test your DNS configuration
-   nslookup client.miniziti
+   nslookup controller.miniziti
    ```
 
    You know it's working if you see the same IP address in the response as when you run `minikube ip`.
@@ -193,24 +193,19 @@ Let's configure your computer (the one that's running `minikube`) and the minizi
    pod "coredns-787d4945fb-j8vwj" deleted
    ```
 
-   Now you can test DNS from inside your cluster.
+   Test DNS from inside your cluster. You know it's working if you see the same IP address in the response as when you run `minikube ip`.
 
    ```bash
    kubectl run --rm --tty --stdin dnstest --image=busybox --restart=Never -- \
-         nslookup client.miniziti
+         nslookup controller.miniziti
    ```
-
-   Again, you know it's working if you see the same IP address in the response as when you run `minikube ip`.
 
 ## Install the Router Helm Chart
 
-1. Let's get you logged in to Ziti!
+1. Log in to Ziti.
 
    ```bash
-   # if this is your first time running the ziti CLI you may need to move the
-   # downloaded binary to a directory in your executable search PATH and
-   # set the filemode to allow execution with "chmod +x".
-   ziti edge login client.miniziti:443 \
+   ziti edge login controller.miniziti:443 \
       --yes --username admin \
       --password $(
          kubectl --namespace ziti-controller \
@@ -270,7 +265,7 @@ Let's configure your computer (the one that's running `minikube`) and the minizi
       "miniconsole" \
       openziti/ziti-console \
          --set ingress.advertisedHost=miniconsole.miniziti \
-         --set settings.edgeControllers[0].url=https://client.miniziti \
+         --set settings.edgeControllers[0].url=https://controller.miniziti \
          --values https://docs.openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml
    ```
 

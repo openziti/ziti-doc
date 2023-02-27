@@ -19,7 +19,7 @@ by hostname instead of IP address.
 
 ## Prerequisites
 
-- Complete the [Minikube Quickstart](/docs/learn/quickstarts/network/local-minikube). This guide
+- Complete the [Minikube Quickstart](/docs/learn/quickstarts/network/local-kubernetes). This guide
   uses the Ziti Controller and Ziti Edge Router that are created in the Minikube Quickstart.
 - Admin-level access to a Kubernetes cluster via `kubectl`.
 
