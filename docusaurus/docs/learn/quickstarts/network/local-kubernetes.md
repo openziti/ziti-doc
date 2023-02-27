@@ -5,11 +5,11 @@ sidebar_label: Kubernetes
 
 # Kubernetes Quickstart
 
-`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows. This quickstart is a great way to explore running your own OpenZiti controller and routers. I'll assume you have a terminal woth BASH or ZSH terminal for pasting commands.
+`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows. This quickstart is a great way to explore running your own OpenZiti controller and routers. I'll assume you have a terminal with BASH or ZSH terminal for pasting commands.
 
 ## Before You Begin
 
-`minikube` can be deployed as a VM, a container, or bare-metal. We'll use the preferred Docker driver for this quickstart. You don't have to install `kubectl` because it's built-in to `minikube`.
+`minikube` can be deployed as a VM, a container, or bare-metal. We'll use the preferred Docker driver for this quickstart.
 
 1. [Install Docker](https://docs.docker.com/engine/install/)
 1. [Install `kubectl`](https://kubernetes.io/docs/tasks/tools/)
@@ -27,11 +27,16 @@ First, let's create a brand new `minikube` profile named "miniziti". We'll also 
 minikube --profile miniziti start
 ```
 
-`minikube` will try to configure the default context of your KUBECONFIG. Let's test the connection to the new cluster. You can always restore the KUBECONFIG context from this Minikube quickstart like this:
+`minikube` will try to configure the default context of your KUBECONFIG. Let's test the connection to the new cluster. 
+
+:::info
+You can always restore the KUBECONFIG context from this Minikube quickstart like this:
 
 ```bash
 minikube --profile miniziti update-context
 ```
+
+:::
 
 Let's do a quick test of the current KUBECONFIG context.
 
@@ -41,14 +46,14 @@ kubectl get pods -- --all-namespaces
 
 ## Install `minikube` Addons
 
-We'll use the `ingress-nginx` and associated DNS addon in this quickstart.
+We'll use the `ingress-nginx` and associated DNS addon in this quickstart. This allows us to run DNS locally instead of deploying cloud infrastructure for this exercise.
 
 ```bash
 minikube --profile miniziti addons enable ingress
 minikube --profile miniziti addons enable ingress-dns
 ```
 
-Ziti needs SSL passthrough, so let's patch the `ingress-nginx` deployment to enable that feature.
+Ziti will need SSL passthrough, so let's patch the `ingress-nginx` deployment to enable that feature.
 
 ```bash
 kubectl patch deployment -n ingress-nginx ingress-nginx-controller \
