@@ -86,10 +86,6 @@ you can perform the following steps.
    LISTEN 0      511                *:1408             *:*    users:(("node",pid=26013,fd=18))
    ```
 
-## Kubernetes
-
-There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides/kubernetes/self-hosting/kubernetes-console).
-
 ## Docker
 
 Getting ZAC setup if you have followed the [docker network quickstart](../network/local-with-docker)
@@ -165,6 +161,10 @@ addressable by your machine in order to use docker in this way. This guide does 
 One easy, and common mechanism to do this would be to edit the 'hosts' file of your operating system. A quick
 internet search should show you how to accomplish this.
 :::
+
+## Kubernetes
+
+There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides/kubernetes/self-hosting/kubernetes-console).
 
 ## Login and use ZAC
 
