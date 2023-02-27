@@ -41,7 +41,7 @@ minikube --profile miniziti update-context
 Let's do a quick test of the current KUBECONFIG context.
 
 ```bash
-kubectl get pods -- --all-namespaces
+kubectl cluster-info
 ```
 
 ## Install `minikube` Addons
@@ -70,7 +70,7 @@ Now your miniziti cluster is ready for some Ziti!
 
 ### Required Custom Resource Definitions
 
-You need to first install the required CRDs that Ziti Controller will use.
+You need to first install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CDR) that Ziti Controller will use. This adds APIs to Kubernetes for managing certificates.
 
 ```bash
 kubectl apply \
@@ -185,12 +185,12 @@ Let's configure your computer (the one that's running `minikube`) and the minizi
    
    ```bash
    # 1. Find the name of the pod.
-   $ kubectl --namespace kube-system get pods | grep coredns
-   coredns-787d4945fb-j8vwj          1/1     Running   0          2m24s
+   kubectl --namespace kube-system get pods | grep coredns
+   ```
 
+   ```bash
    # 2. Issue the delete command.
-   $ kubectl --namespace kube-system delete pods coredns-787d4945fb-j8vwj
-   pod "coredns-787d4945fb-j8vwj" deleted
+   kubectl --namespace kube-system delete pods # coredns-787d4945fb-j8vwj
    ```
 
    Test DNS from inside your cluster. You know it's working if you see the same IP address in the response as when you run `minikube ip`.
