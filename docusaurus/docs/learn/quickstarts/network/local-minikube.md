@@ -264,7 +264,7 @@ Let's configure your computer (the one that's running `minikube`) and the minizi
       --create-namespace --namespace ziti-console \
       "miniconsole" \
       openziti/ziti-console \
-         --set ingress.hosts[0].host=miniconsole.miniziti \
+         --set ingress.advertisedHost=miniconsole.miniziti \
          --set settings.edgeControllers[0].url=https://client.miniziti \
          --values https://docs.openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml
    ```
@@ -306,10 +306,10 @@ ziti edge create service-policy webhook-bind-policy Bind \
 ziti edge create service-policy webhook-dial-policy Dial \
     --service-roles '@webhook-service1' --identity-roles '#webhook-clients'
 
-ziti edge create edge-router-policy blanket \
+ziti edge create edge-router-policy default \
     --edge-router-roles '#default' --identity-roles '#all'
 
-ziti edge create service-edge-router-policy blanket \
+ziti edge create service-edge-router-policy default \
     --edge-router-roles '#default' --service-roles '#all'
 
 ziti edge enroll /tmp/webhook-server1.jwt
