@@ -371,7 +371,7 @@ You can also visit [http://webhook.ziti/get](http://webhook.ziti/get) in your we
 
 Now that you've successfully tested the Ziti service, check out the various entities in your that were created by the script in [http://miniconsole.ziti/](http://miniconsole.ziti/).
 
-## Optional Hello Server Demo
+## Hello Web Server Demo
 
 1. Create a Ziti service, configs, and policies for the Hello Demo Server
 
