@@ -398,7 +398,7 @@ Now that you've successfully tested the Ziti service, check out the various enti
 
    Now you have two Ziti services available to your Ziti tunneler app.
 
-## Challenges
+## Next Steps
 
 1. In the Ziti Console, fiddle the policies and roles to revoke then restore your permission to acess the demo services.
 1. Add a service, configs, and policies to expose the Kubernetes apiserver as a Ziti service. 
