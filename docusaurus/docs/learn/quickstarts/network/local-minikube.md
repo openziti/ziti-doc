@@ -1,9 +1,9 @@
 ---
 sidebar_position: 60
-sidebar_label: Minikube
+sidebar_label: Kubernetes
 ---
 
-# Minikube Quickstart
+# Kubernetes Quickstart
 
 `minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows. This quickstart is a great way to explore running your own OpenZiti controller and routers. I'll assume you have a terminal woth BASH or ZSH terminal for pasting commands.
 
