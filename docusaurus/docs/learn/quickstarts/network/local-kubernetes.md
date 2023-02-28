@@ -118,9 +118,27 @@ helm repo add openziti https://docs.openziti.io/helm-charts/
 
 ## Configure DNS
 
-1. Configure your computer to use the DNS addon we enabled earlier. The addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "minicontroller.ziti" which we just created by installing the controller chart.
+There are two DNS resolvers to set up: your computer running `minikube` and the cluster DNS. Both need to resolve these three domain names to the `minikube` IP address. 
 
-   1. Make sure the DNS addon is working. Send a DNS query to the `minikube --profile miniziti ip` address where the ingress nameserver is running.
+
+### Host DNS
+
+The simplest way to set up your host's resolver is to modify the system's hosts file, e.g. `/etc/hosts`. The alternative is to configure your host's resolver to use the DNS addon we enabled earlier. Whichever method you choose, you'll still need to configure CoreDNS so that pods can resolve these DNS names too.
+
+#### Host DNS Easy Option: `/etc/hosts` 
+
+Add this line to your system's hosts file. Replace `{MINIKUBEIP}` with the IP address from `minikube --profile miniziti ip`.
+
+```bash
+# /etc/hosts
+{MINIKUBEIP}    minicontroller.ziti  minirouter.ziti  miniconsole.ziti
+```
+
+#### Host DNS Harder Option: `ingress-dns`
+
+This host DNS option Configure your computer to use use the DNS addon we enabled earlier for DNS names like "*.ziti". The DNS addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "minicontroller.ziti" which you just created when you installed the OpenZiti Controller chart.
+
+   1. Make sure the DNS addon is working. Send a DNS query to the  address where the ingress nameserver is running.
 
       ```bash
       nslookup minicontroller.ziti $(minikube --profile miniziti ip)
@@ -128,7 +146,7 @@ helm repo add openziti https://docs.openziti.io/helm-charts/
 
       You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
 
-   1. Configure your computer to send certain DNS queries to the `minikube --profile miniziti ip` DNS server automatically. They have a pretty good guide for this step over at [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation).
+   1. Configure your computer to send certain DNS queries to the `minikube --profile miniziti ip` DNS server automatically. Follow the steps in [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation) to configure macOS, Windows, or Linux's DNS resolver.
 
       Now that your computer is set up to use the `minikube` DNS server for DNS names that end in "*.ziti", you can test it again without specifying where to send the DNS query.
 
@@ -139,14 +157,11 @@ helm repo add openziti https://docs.openziti.io/helm-charts/
 
       You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
 
-   If you have any trouble with DNS step you may hack the system hosts file instead, but you'll still need to complete the next step to configure CoreDNS.
+### Cluster DNS
 
-   ```bash
-   # /etc/hosts
-   {MINIKUBEIP}    minicontroller.ziti  minirouter.ziti  miniconsole.ziti
-   ```
+Configure CoreDNS in the miniziti cluster. This is necessary no matter which host DNS resolver method you used above. 
 
-1. Finally, let's configure CoreDNS in the miniziti cluster. Add the miniziti forwarder to the end of the value of `Corefile` in CoreDNS's configmap. Don't forget to substitute the real IP from `minikube --profile miniziti ip` for `{MINIKUBE_IP}`, and be mindful to keep the indentation the same as the default `.:53` handler.
+1. Add the miniziti forwarder to the end of the value of `Corefile` in CoreDNS's configmap. Don't forget to substitute the real IP from `minikube --profile miniziti ip` for `{MINIKUBE_IP}`, and be mindful to keep the indentation the same as the default `.:53` handler.
 
    ```bash
    # 1. Edit the configmap. 
@@ -208,7 +223,7 @@ helm repo add openziti https://docs.openziti.io/helm-charts/
    uid: deae90e7-5b3d-49ea-b996-4f525da5597a
    ```
 
-   Delete the running CoreDNS pod so a new one will pick up the Corefile change you just made. 
+1. Delete the running CoreDNS pod so a new one will pick up the Corefile change you just made. 
    
    ```bash
    # 1. Find the name of the pod.
@@ -220,7 +235,7 @@ helm repo add openziti https://docs.openziti.io/helm-charts/
    kubectl --namespace kube-system delete pods # coredns-787d4945fb-j8vwj
    ```
 
-   Test DNS from inside your cluster. You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
+1. Test DNS from inside your cluster. You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
 
    ```bash
    kubectl run --rm --tty --stdin dnstest --image=busybox --restart=Never -- \
