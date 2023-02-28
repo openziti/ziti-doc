@@ -413,7 +413,7 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
       --service-roles '@hello-service1' --identity-roles '#hello-clients'
 
    ziti edge update identity edge-client1 \
-      --role-attributes webhook-senders,hello-clients
+      --role-attributes webhook-clients,hello-clients
 
    ziti edge enroll /tmp/hello-server1.jwt
    ```
@@ -427,18 +427,20 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
       --set serviceDomainName=hello-server1
    ```
 
-1. Deploy an OpenZiti Hosting Tunneler
+1. Grant "Bind" permission to minirouter. 
 
-   This chart installs an OpenZiti Tunneler in hosting mode to connect regular cluster services to the OpenZiti Network.
+   This tells minirouter to start hosting the service "hello-service1" by giving it a role that matches the policy "hello-bind-policy".
 
    ```bash
-   helm install ziti-host1 openziti/ziti-host \
-      --set-file zitiIdentity=/tmp/hello-server1.json
+   ziti edge update identity "minirouter" \
+      --role-attributes hello-servers
    ```
 
 1. Visit the Hello Demo page in your browser: [http://hello.ziti/](http://hello.ziti/)
 
-   Now you have two OpenZiti Services available to your OpenZiti Tunneler.
+   Now you have two OpenZiti Services available to your OpenZiti Tunneler:
+   * hello-service1
+   * webhook-service1
 
 ## Next Steps
 
