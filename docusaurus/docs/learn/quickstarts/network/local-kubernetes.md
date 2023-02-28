@@ -120,10 +120,13 @@ helm repo add openziti https://docs.openziti.io/helm-charts/
 
 There are two DNS resolvers to set up: your computer running `minikube` and the cluster DNS. Both need to resolve these three domain names to the `minikube` IP address. 
 
-
 ### Host DNS
 
 The simplest way to set up your host's resolver is to modify the system's hosts file, e.g. `/etc/hosts`. The alternative is to configure your host's resolver to use the DNS addon we enabled earlier. Whichever method you choose, you'll still need to configure CoreDNS so that pods can resolve these DNS names too.
+
+* minicontroller.ziti
+* miniconsole.ziti
+* minirouter.ziti
 
 #### Host DNS Easy Option: `/etc/hosts` 
 
@@ -136,7 +139,7 @@ Add this line to your system's hosts file. Replace `{MINIKUBEIP}` with the IP ad
 
 #### Host DNS Harder Option: `ingress-dns`
 
-This host DNS option Configure your computer to use use the DNS addon we enabled earlier for DNS names like "*.ziti". The DNS addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "minicontroller.ziti" which you just created when you installed the OpenZiti Controller chart.
+This option configures your host to use use the DNS addon we enabled earlier for DNS names like "*.ziti". The DNS addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "minicontroller.ziti" which you just created when you installed the OpenZiti Controller chart.
 
    1. Make sure the DNS addon is working. Send a DNS query to the  address where the ingress nameserver is running.
 
