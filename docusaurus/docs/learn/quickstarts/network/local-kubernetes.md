@@ -231,13 +231,8 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 1. Delete the running CoreDNS pod so a new one will pick up the Corefile change you just made. 
    
    ```bash
-   # 1. Find the name of the pod.
-   kubectl --namespace kube-system get pods | grep coredns
-   ```
-
-   ```bash
-   # 2. Issue the delete command.
-   kubectl --namespace kube-system delete pods # coredns-787d4945fb-j8vwj
+   kubectl --namespace kube-system delete pods \
+      $(kubectl --namespace kube-system get pods | /bin/grep coredns | cut -d " " -f1)
    ```
 
 1. Test DNS from inside your cluster. You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
