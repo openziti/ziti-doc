@@ -132,7 +132,7 @@ The simplest way to set up your host's resolver is to modify the system's hosts 
 
 #### Host DNS Easy Option: `/etc/hosts` 
 
-Add this line to your system's hosts file. Replace `{MINIKUBEIP}` with the IP address from `minikube --profile miniziti ip`.
+Add a line to your system's hosts file.
 
 ```bash
 # /etc/hosts
