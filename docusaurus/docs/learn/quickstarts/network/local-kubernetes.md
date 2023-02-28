@@ -5,7 +5,7 @@ sidebar_label: Kubernetes
 
 # Kubernetes Quickstart
 
-`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows. This quickstart is a great way to explore running your own OpenZiti controller and routers. I'll assume you have a terminal with BASH or ZSH terminal for pasting commands.
+`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows. This quickstart is a great way to explore running your own OpenZiti Controller and Router(s). I'll assume you have a terminal with BASH or ZSH terminal for pasting commands.
 
 ## Before You Begin
 
@@ -16,8 +16,8 @@ sidebar_label: Kubernetes
 1. [Install Helm](https://helm.sh/docs/intro/install/)
 1. [Install `minikube`](https://minikube.sigs.k8s.io/docs/start/)
 1. [Install `ziti` CLI](https://github.com/openziti/ziti/releases/latest)
-1. [Install a Ziti tunneler app](https://docs.openziti.io/docs/downloads)
-1. Optional: Install `curl` and `jq` for testing a Ziti service in the terminal. 
+1. [Install an OpenZiti Tunneler app](https://docs.openziti.io/docs/downloads)
+1. Optional: Install `curl` and `jq` for testing an OpenZiti Service in the terminal. 
 
 ## Create the `miniziti` Cluster
 
@@ -44,7 +44,7 @@ Let's do a quick test of the current KUBECONFIG context.
 kubectl cluster-info
 ```
 
-A good result looks like this.
+A good result looks like this (no errors).
 
 ```bash
 $ kubectl cluster-info
@@ -54,14 +54,14 @@ CoreDNS is running at https://192.168.49.2:8443/api/v1/namespaces/kube-system/se
 
 ## Install `minikube` Addons
 
-We'll use the `ingress-nginx` and associated DNS addon in this quickstart. This allows us to run DNS locally instead of deploying cloud infrastructure for this exercise. The Ziti pods will need these addons even if you decide to forego configuring your computer's DNS resolver to use the `minikube` DNS server.
+We'll use the `ingress-nginx` and associated DNS addon in this quickstart. This allows us to run DNS locally instead of deploying cloud infrastructure for this exercise. The pods will the addon DNS server even if you decide to forego configuring your computer's DNS resolver to use the `minikube` DNS server.
 
 ```bash
 minikube --profile miniziti addons enable ingress
 minikube --profile miniziti addons enable ingress-dns
 ```
 
-Ziti will need SSL passthrough, so let's patch the `ingress-nginx` deployment to enable that feature.
+OpenZiti will need SSL passthrough, so let's patch the `ingress-nginx` deployment to enable that feature.
 
 ```bash
 kubectl patch deployment -n ingress-nginx ingress-nginx-controller \
@@ -72,13 +72,13 @@ kubectl patch deployment -n ingress-nginx ingress-nginx-controller \
       }]'
 ```
 
-Now your miniziti cluster is ready for some Ziti!
+Now your miniziti cluster is ready for some OpenZiti!
 
-## Install the Ziti Controller
+## Install the OpenZiti Controller
 
 ### Required Custom Resource Definitions
 
-You need to first install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CDR) that Ziti Controller will use. This adds APIs to Kubernetes for managing certificates.
+You need to first install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CDR) that OpenZiti Controller will use. This adds APIs to Kubernetes for managing certificates.
 
 ```bash
 kubectl apply \
@@ -89,7 +89,7 @@ kubectl apply \
 
 ### Install the Controller Helm Chart
 
-Let's create a Helm release named "miniziti" for the Ziti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
+Let's create a Helm release named "miniziti" for the OpenZiti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
 
 1. Add the OpenZiti Helm Repo
 
@@ -225,7 +225,7 @@ Let's create a Helm release named "miniziti" for the Ziti Controller. This will 
 
 ## Install the Router Helm Chart
 
-1. Log in to Ziti.
+1. Log in to OpenZiti.
 
    ```bash
    ziti edge login minicontroller.ziti:443 \
@@ -304,7 +304,7 @@ Let's create a Helm release named "miniziti" for the Ziti Controller. This will 
 
 1. Open [http://miniconsole.ziti](http://miniconsole.ziti) in your web browser and login with username "admin" and the password from your clipboard.
 
-## Create Ziti Identities and Services
+## Create OpenZiti Identities and Services
 
 Here's a BASH script that runs several `ziti` CLI commands to illustrate a minimal set of identities, services, and policies.
 
@@ -340,7 +340,7 @@ ziti edge enroll /tmp/webhook-server1.jwt
 
 ## Install the `httpbin` Demo Webhook Server Chart
 
-This Helm chart installs a Ziti fork of `go-httpbin`, so it doesn't need to be accompanied by a Ziti tunneler. We'll use it as a demo webhook server to test the Ziti service you just created named "webhook-service1".
+This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by an OpenZiti Tunneler. We'll use it as a demo webhook server to test the OpenZiti Service you just created named "webhook-service1".
 
 ```bash
 helm install webhook-server1 openziti/httpbin \
@@ -348,14 +348,14 @@ helm install webhook-server1 openziti/httpbin \
    --set zitiServiceName=webhook-service1
 ```
 
-## Load the Client Identity in your Ziti Tunneler
+## Load the Client Identity in your OpenZiti Tunneler
 
-Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the Ziti identity that was saved as filename `/tmp/edge-client1.jwt`.
+Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/edge-client1.jwt`.
 
 As soon as identity enrollment completes you should have a new DNS name available to you. Let's test that with a DNS query.
 
 ```bash
-# this DNS answer is coming from the Ziti tunneler
+# this DNS answer is coming from the OpenZiti Tunneler
 nslookup webhook.ziti
 ```
 
@@ -367,13 +367,13 @@ curl -sSf -XPOST -d ziti=awesome http://webhook.ziti/post | jq .data
 
 You can also visit [http://webhook.ziti/get](http://webhook.ziti/get) in your web browser to see a JSON test response from the demo server.
 
-## Explore the Ziti Console
+## Explore the OpenZiti Console
 
-Now that you've successfully tested the Ziti service, check out the various entities in your that were created by the script in [http://miniconsole.ziti/](http://miniconsole.ziti/).
+Now that you've successfully tested the OpenZiti Service, check out the various entities in your that were created by the script in [http://miniconsole.ziti/](http://miniconsole.ziti/).
 
 ## Hello Web Server Demo
 
-1. Create a Ziti service, configs, and policies for the Hello Demo Server
+1. Create an OpenZiti Service, configs, and policies for the Hello Demo Server
 
    ```bash
    ziti edge create identity device hello-server1 \
@@ -401,16 +401,16 @@ Now that you've successfully tested the Ziti service, check out the various enti
 
 1. Install the Hello Toy chart.
 
-   This chart is a regular, non-Ziti demo server deployment. Next we'll connect it to our Ziti network with a Ziti tunneler deployment.
+   This chart is a regular, non-OpenZiti demo server deployment. Next we'll connect it to our OpenZiti Network with an OpenZiti Tunneler deployment.
 
    ```bash
    helm install hello-ziti-1 openziti/hello-toy \
       --set serviceDomainName=hello-server1
    ```
 
-1. Deploy a Ziti Hosting Tunneler
+1. Deploy an OpenZiti Hosting Tunneler
 
-   This chart installs a Ziti tunneler in hosting mode to connect regular cluster services to the Ziti network.
+   This chart installs an OpenZiti Tunneler in hosting mode to connect regular cluster services to the OpenZiti Network.
 
    ```bash
    helm install ziti-host1 openziti/ziti-host \
@@ -419,14 +419,14 @@ Now that you've successfully tested the Ziti service, check out the various enti
 
 1. Visit the Hello Demo page in your browser: [http://hello.ziti/](http://hello.ziti/)
 
-   Now you have two Ziti services available to your Ziti tunneler app.
+   Now you have two OpenZiti Services available to your OpenZiti Tunneler.
 
 ## Next Steps
 
-1. In the Ziti Console, fiddle the policies and roles to revoke then restore your permission to acess the demo services.
-1. Add a service, configs, and policies to expose the Kubernetes apiserver as a Ziti service. 
+1. In the OpenZiti Console, fiddle the policies and roles to revoke then restore your permission to acess the demo services.
+1. Add a service, configs, and policies to expose the Kubernetes apiserver as an OpenZiti Service. 
    1. Hint, the address is "kubernetes.default.svc:443" inside the cluster. 
-   1. Connect to the K8s apiserver from another computer with [`kubeztl`, the Ziti fork of `kubectl`](https://github.com/openziti-test-kitchen/kubeztl/). `kubeztl` works by itself without a Ziti tunneler.
+   1. Connect to the K8s apiserver from another computer with [`kubeztl`, the OpenZiti fork of `kubectl`](https://github.com/openziti-test-kitchen/kubeztl/). `kubeztl` works by itself without an OpenZiti Tunneler.
 1. Share the demo server with someone.
    1. Create another identity named " edge-client2" with role "hello-clients" and send it to someone. 
    1. Ask them to [install a tunneler and load the identity](https://docs.openziti.io/docs/reference/tunnelers/) so they too can access [http://hello.ziti/](http://hello.ziti/).
