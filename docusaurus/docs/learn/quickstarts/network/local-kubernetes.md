@@ -78,7 +78,7 @@ Now your miniziti cluster is ready for some OpenZiti!
 
 ### Required Custom Resource Definitions
 
-You need to first install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CDR) that OpenZiti Controller will use. This adds APIs to Kubernetes for managing certificates.
+You need to install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CRD) that OpenZiti Controller will use.
 
 ```bash
 kubectl apply \
@@ -87,15 +87,17 @@ kubectl apply \
    -f https://raw.githubusercontent.com/cert-manager/trust-manager/v0.4.0/deploy/crds/trust.cert-manager.io_bundles.yaml
 ```
 
-### Install the Controller Helm Chart
+### Add the OpenZiti Helm Repository
 
 Let's create a Helm release named "miniziti" for the OpenZiti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
 
-1. Add the OpenZiti Helm Repo
+Add the OpenZiti Helm Repo
 
-   ```bash
-   helm repo add openziti https://docs.openziti.io/helm-charts/
-   ```
+```bash
+helm repo add openziti https://docs.openziti.io/helm-charts/
+```
+
+### Install the Controller Helm Chart
 
 1. Install the Controller chart
 
