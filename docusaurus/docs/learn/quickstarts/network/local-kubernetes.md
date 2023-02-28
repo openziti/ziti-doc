@@ -76,9 +76,9 @@ Now your miniziti cluster is ready for some OpenZiti!
 
 ## Install the OpenZiti Controller
 
-### Required Custom Resource Definitions
+### Allow Kubernetes to Manage Certificates
 
-You need to install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CRD) that OpenZiti Controller will use.
+You need to install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CRD) for the OpenZiti Controller.
 
 ```bash
 kubectl apply \
