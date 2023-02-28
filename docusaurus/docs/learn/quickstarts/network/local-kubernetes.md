@@ -19,6 +19,8 @@ sidebar_label: Kubernetes
 1. [Install an OpenZiti Tunneler app](https://docs.openziti.io/docs/downloads)
 1. Optional: Install `curl` and `jq` for testing an OpenZiti Service in the terminal. 
 
+Make sure these command-line tools are available in your executable search `PATH`.
+
 ## Create the `miniziti` Cluster
 
 First, let's create a brand new `minikube` profile named "miniziti".
@@ -134,7 +136,7 @@ Add this line to your system's hosts file. Replace `{MINIKUBEIP}` with the IP ad
 
 ```bash
 # /etc/hosts
-{MINIKUBEIP}    minicontroller.ziti  minirouter.ziti  miniconsole.ziti
+sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.ziti  minirouter.ziti  miniconsole.ziti" 
 ```
 
 #### Host DNS Harder Option: `ingress-dns`
@@ -174,11 +176,11 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    ```
 
    ```json
-    ziti:53 {
-            errors
-            cache 30
-            forward . {MINIKUBE_IP}
-    }
+      ziti:53 {
+         errors
+         cache 30
+         forward . {MINIKUBE_IP}
+      }
    ```
 
    It should look like this.
@@ -245,7 +247,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
          nslookup minicontroller.ziti
    ```
 
-## Install the Router Helm Chart
+## Install the Router
 
 1. Log in to OpenZiti.
 
@@ -300,7 +302,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 
    These Helm chart values configure the router to use the controller's cluster-internal service that provides the router control plane, i.e., the "ctrl" endpoint.
 
-## Install the Console Helm Chart
+## Install the Console
 
 1. Install the chart
 
