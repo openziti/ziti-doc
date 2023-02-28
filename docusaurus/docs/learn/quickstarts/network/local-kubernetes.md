@@ -307,7 +307,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       "miniconsole" \
       openziti/ziti-console \
          --set ingress.advertisedHost=miniconsole.ziti \
-         --set settings.edgeControllers[0].url=https://minicontroller.ziti \
+         --set settings.edgeControllers[0].url=https://miniziti-controller-client.ziti-controller.svc:443 \
          --values https://docs.openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml
    ```
 
