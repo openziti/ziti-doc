@@ -97,7 +97,7 @@ Add the OpenZiti Helm Repo
 helm repo add openziti https://docs.openziti.io/helm-charts/
 ```
 
-### Install the Controller Helm Chart
+### Install the Controller
 
 1. Install the Controller chart
 
@@ -120,7 +120,7 @@ helm repo add openziti https://docs.openziti.io/helm-charts/
 
 1. Configure your computer to use the DNS addon we enabled earlier. The addon provides a nameserver that can answer queries about the cluster's ingresses, e.g. "minicontroller.ziti" which we just created by installing the controller chart.
 
-   1. First, let's make sure the DNS addon is working. Send a DNS query to the `minikube --profile miniziti ip` address where the ingress nameserver is running.
+   1. Make sure the DNS addon is working. Send a DNS query to the `minikube --profile miniziti ip` address where the ingress nameserver is running.
 
       ```bash
       nslookup minicontroller.ziti $(minikube --profile miniziti ip)
