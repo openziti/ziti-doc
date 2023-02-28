@@ -126,6 +126,8 @@ helm repo add openziti https://docs.openziti.io/helm-charts/
       nslookup minicontroller.ziti $(minikube --profile miniziti ip)
       ```
 
+      You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
+
    1. Next, let's configure your computer to send certain DNS queries to the `minikube --profile miniziti ip` DNS server automatically. They have a pretty good guide for this step over at [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation).
 
       Now that your computer is set up to use the `minikube` DNS server for DNS names that end in "*.ziti", you can test it again without specifying where to send the DNS query.
