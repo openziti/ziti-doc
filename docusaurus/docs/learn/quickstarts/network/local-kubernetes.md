@@ -176,11 +176,11 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    ```
 
    ```json
-      ziti:53 {
-         errors
-         cache 30
-         forward . {MINIKUBE_IP}
-      }
+       ziti:53 {
+          errors
+          cache 30
+          forward . {MINIKUBE_IP}
+       }
    ```
 
    It should look like this.
