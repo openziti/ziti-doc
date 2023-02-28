@@ -151,7 +151,7 @@ This option configures your host to use use the DNS addon we enabled earlier for
 
       You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
 
-   1. Configure your computer to send certain DNS queries to the `minikube --profile miniziti ip` DNS server automatically. Follow the steps in [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation) to configure macOS, Windows, or Linux's DNS resolver.
+   1. Configure your computer to always send certain DNS queries to the `ingress-dns` nameserver. Follow the steps in [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation) to configure macOS, Windows, or Linux's DNS resolver.
 
       Now that your computer is set up to use the `minikube` DNS server for DNS names that end in "*.ziti", you can test it again without specifying where to send the DNS query.
 
