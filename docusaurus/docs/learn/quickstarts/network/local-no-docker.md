@@ -58,9 +58,9 @@ ziti-controller started as process id: 1286. log located at: /home/vagrant/.ziti
 
 ### Verify the Controller is Running
 
-Assuming you have sourced the OpenZiti quickstart script, you will have environment variables set named 
-`ZITI_CTRL_EDGE_ADVERTISED_ADDRESS` and `ZITI_CTRL_EDGE_ADVERTISED_PORT`. After the controller has started, your 
-controller should be listening at that address:port combination. You can see what your value is set to by running 
+After running `expressInstall`, you will have environment variables set named `ZITI_CTRL_EDGE_ADVERTISED_ADDRESS` and 
+`ZITI_CTRL_EDGE_ADVERTISED_PORT`. After the controller has started, your controller should be listening at that 
+address:port combination. You can see what your value is set to by running 
 `echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"`. This value defaults to: 
 `$(hostname):1280`. Make sure the controller is on and listening and then start the edge router. 
 
