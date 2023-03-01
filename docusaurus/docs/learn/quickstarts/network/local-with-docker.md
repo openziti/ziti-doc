@@ -116,7 +116,7 @@ default port used by edge routers.
 
 ```bash
 docker run \
-  -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-1 \
+  -e ZITI_EDGE_ROUTER_NAME=ziti-edge-router-1 \
   -e ZITI_EDGE_ROUTER_ROLES=public \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-1 \
@@ -133,7 +133,7 @@ If you want to create a second edge router, you'll need to override the router p
 
 ```bash
 docker run \
-  -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-2 \
+  -e ZITI_EDGE_ROUTER_NAME=ziti-edge-router-2 \
   -e ZITI_EDGE_ROUTER_ROLES=public \
   -e ZITI_EDGE_ROUTER_PORT=4022 \
   --network myFirstZitiNetwork \
