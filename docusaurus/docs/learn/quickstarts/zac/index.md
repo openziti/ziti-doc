@@ -44,8 +44,8 @@ you can perform the following steps.
    Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
 
    ```bash
-   ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/certs/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
-   ln -s "${ZITI_PKI}/${ZITI_EDGE_CONTROLLER_HOSTNAME}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME}-server.key" "${ZITI_HOME}/ziti-console/server.key"
+   ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-intermediate/certs/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
+   ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
    ```
 
 1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
@@ -131,7 +131,7 @@ There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides
 
 ## Login and use ZAC
 
-1. At this point you should be able to navigate to both: `https://${ZITI_EDGE_CONTROLLER_HOSTNAME}:8443`and see the ZAC login
+1. At this point you should be able to navigate to both: `https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:8443`and see the ZAC login
    screen. (The TLS warnings your browser will show you are normal - it's because these steps use a self-signed certificate
    generated in the install process)
 
