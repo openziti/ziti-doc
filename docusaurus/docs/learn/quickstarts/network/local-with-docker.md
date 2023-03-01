@@ -118,6 +118,7 @@ default port used by edge routers.
 docker run \
   -e ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-1 \
   -e ZITI_EDGE_ROUTER_ROLES=public \
+  -e ZITI_EDGE_ROUTER_IDENTITY_ROLES=ziti.rest.binders \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-1 \
   -p 3022:3022 \
