@@ -265,23 +265,6 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       --jwt-output-file /tmp/minirouter.jwt
    ```
 
-1. List your minirouter.
-
-   ```bash
-   ziti edge list edge-routers
-   ```
-
-   ```bash
-   # example output
-   $ ziti edge list edge-routers
-   ╭────────────┬────────────┬────────┬───────────────┬──────┬────────────╮
-   │ ID         │ NAME       │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
-   ├────────────┼────────────┼────────┼───────────────┼──────┼────────────┤
-   │ oYl6Zi2oKS │ minirouter │ false  │ true          │    0 │ public-routers    │
-   ╰────────────┴────────────┴────────┴───────────────┴──────┴────────────╯
-   results: 1-1 of 1
-   ```
-
 1. Install the Router Chart.
 
    ```bash
@@ -296,6 +279,23 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    ```
 
    These Helm chart values configure the router to use the controller's cluster-internal service that provides the router control plane, i.e., the "ctrl" endpoint.
+
+1. Verify the new router is "online=true"
+
+   ```bash
+   ziti edge list edge-routers
+   ```
+
+   ```bash
+   # example output
+   $ ziti edge list edge-routers
+   ╭────────────┬────────────┬────────┬───────────────┬──────┬────────────╮
+   │ ID         │ NAME       │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
+   ├────────────┼────────────┼────────┼───────────────┼──────┼────────────┤
+   │ oYl6Zi2oKS │ minirouter │ true   │ true          │    0 │ public-routers    │
+   ╰────────────┴────────────┴────────┴───────────────┴──────┴────────────╯
+   results: 1-1 of 1
+   ```
 
 ## Install the Console
 
