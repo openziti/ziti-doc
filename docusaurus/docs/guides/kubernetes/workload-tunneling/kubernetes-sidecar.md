@@ -25,7 +25,7 @@ by hostname instead of IP address.
 
 ## Create and Enroll an Identity
 
-This guide will re-use the Ziti service "webhook-service1", a REST API demo server, that was created in the quickstart.
+This guide will re-use the Ziti service "webhook-service", a REST API demo server, that was created in the quickstart.
 
 1. We will create a new identity for our client app with the correct role to grant access to the Ziti service.
 
