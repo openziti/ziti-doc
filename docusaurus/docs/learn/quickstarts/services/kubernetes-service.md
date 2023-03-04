@@ -32,7 +32,7 @@ This is a quick example for tunneling to a Kubernetes workload with OpenZiti tha
 
     # adds a role to "edge-client1" from the local Kubernetes quickstart        
     ziti edge update identity "edge-client1" \
-        --role-attributes webhook-clients,hello-clients
+        --role-attributes testapi-clients,hello-clients
     ```
 
 1. Deploy Hello Toy.
@@ -56,6 +56,6 @@ This is a quick example for tunneling to a Kubernetes workload with OpenZiti tha
 1. Visit the Hello Demo page in your browser: [http://minihello.ziti/](http://minihello.ziti/)
 
    Now you have two OpenZiti Services available to your OpenZiti Tunneler:
-   * hello-service1
-   * webhook-service
+   * hello-service
+   * testapi-service
 

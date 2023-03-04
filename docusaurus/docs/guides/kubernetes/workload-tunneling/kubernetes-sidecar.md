@@ -25,13 +25,13 @@ by hostname instead of IP address.
 
 ## Create and Enroll an Identity
 
-This guide will re-use the Ziti service "webhook-service", a REST API demo server, that was created in the quickstart.
+This guide will re-use the Ziti service "testapi-service", a REST API demo server, that was created in the quickstart.
 
 1. We will create a new identity for our client app with the correct role to grant access to the Ziti service.
 
   ```bash
   ziti edge create identity device sidecar-client1 \
-    --jwt-output-file /tmp/sidecar-client1.jwt --role-attributes webhook-clients
+    --jwt-output-file /tmp/sidecar-client1.jwt --role-attributes testapi-clients
   ```
 
 1. Enroll the identity.
@@ -60,7 +60,7 @@ kubectl create secret generic "sidecar-client1-identity" \
 ## Deploy the Pod
 
 Deploy a Pod that runs a non-Ziti demo client application and `ziti-tunnel` as a sidecar proxy. For this
-demonstration, the client application is `wget`. Our Pod sends a `POST` request to the demo webhook server in a loop so we can see the response in the log.
+demonstration, the client application is `wget`. Our Pod sends a `POST` request to the demo testapi server in a loop so we can see the response in the log.
 
 1. Find the CoreDNS cluster service IP address.
 
@@ -102,7 +102,7 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
                     wget --quiet \
                       --output-document=- \
                       --post-data ziti=awesome \
-                      http://webhook.miniziti/post \
+                      http://testapi.ziti/post \
                     | jq .data
                     set +x
                     sleep 3
@@ -159,21 +159,21 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
 
     ```bash
     $ kubectl logs --follow ziti-tunnel-sidecar-demo-749c476989-6wpfn --container testclient
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
+    + wget --quiet --output-document=- --post-data ziti=awesome http://testapi.ziti/post
     + jq .data
     + set +x
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
+    + wget --quiet --output-document=- --post-data ziti=awesome http://testapi.ziti/post
     + jq .data
     + set +x
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
-    + jq .data
-    "ziti=awesome"
-    + set +x
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
+    + wget --quiet --output-document=- --post-data ziti=awesome http://testapi.ziti/post
     + jq .data
     "ziti=awesome"
     + set +x
-    + wget --quiet --output-document=- --post-data ziti=awesome http://webhook.miniziti/post
+    + wget --quiet --output-document=- --post-data ziti=awesome http://testapi.ziti/post
+    + jq .data
+    "ziti=awesome"
+    + set +x
+    + wget --quiet --output-document=- --post-data ziti=awesome http://testapi.ziti/post
     + jq .data
     "ziti=awesome"
 
