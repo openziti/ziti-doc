@@ -23,9 +23,9 @@ Make sure these command-line tools are available in your executable search `PATH
 
 ## BASH Script
 
-Here's a scripted form of the quickstart in case you prefer to expedite running the commands. It's recommended that you read the script before you run it.
+There's a scripted form of this quickstart in case you prefer to expedite running the commands. It's recommended that you read the script before you run it. It's safe to re-run the script if it encounters a temporary problem.
 
-You'll need to complete one of the host DNS options in advance, i.e., `/etc/hosts` or configure your OS to use minikube DNS for "*.ziti" DNS names. The script assumes DNS is already configured.
+You'll need to complete one of the two host DNS options in advance, i.e., `/etc/hosts` or configure your OS to use minikube DNS for *.ziti DNS names. 
 
 To run the script you'll need to [download the file](./miniziti.bash) and run it like this:
 
@@ -127,8 +127,6 @@ kubectl apply \
 
 ### Add the OpenZiti Helm Repository
 
-Let's create a Helm release named "minicontroller" for the OpenZiti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
-
 Add the OpenZiti Helm Repo
 
 ```bash
@@ -136,6 +134,8 @@ helm repo add "openziti" https://docs.openziti.io/helm-charts/
 ```
 
 ### Install the Controller
+
+Let's create a Helm release named "minicontroller" for the OpenZiti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
 
 1. Install the Controller chart
 
@@ -157,7 +157,7 @@ helm repo add "openziti" https://docs.openziti.io/helm-charts/
 
 ## Configure DNS
 
-There are two DNS resolvers to set up: your computer running `minikube` and the cluster DNS. Both need to resolve these three domain names to the `minikube` IP address. 
+There are two DNS resolvers to set up: your computer running `minikube` and the cluster DNS. Both need to resolve these three domain names to the `minikube` IP address on macOS and Linux, and resolve to the loopback address on Windows with WSL.
 
 * minicontroller.ziti
 * miniconsole.ziti
@@ -223,7 +223,7 @@ sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.zit
 
 #### Host DNS - Harder Option: `ingress-dns`
 
-This option configures your host to use use the DNS addon we enabled earlier for DNS names like "*.ziti". If you do this then you don't need to edit the `/etc/hosts` file at all.
+This option configures your host to use use the DNS addon we enabled earlier for DNS names like *.ziti. If you do this then you don't need to edit the `/etc/hosts` file at all.
 
    1. Make sure the DNS addon is working. Send a DNS query to the  address where the ingress nameserver is running.
 
@@ -235,7 +235,7 @@ This option configures your host to use use the DNS addon we enabled earlier for
 
    1. Configure your computer to always send certain DNS queries to the `ingress-dns` nameserver. Follow the steps in [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation) to configure macOS, Windows, or Linux's DNS resolver.
 
-      Now that your computer is set up to use the `minikube` DNS server for DNS names that end in "*.ziti", you can test it again without specifying where to send the DNS query.
+      Now that your computer is set up to use the `minikube` DNS server for DNS names that end in *.ziti, you can test it again without specifying where to send the DNS query.
 
       ```bash
       # test your DNS configuration
@@ -321,7 +321,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
          --namespace kube-system
    ```
 
-1. Verify that "*.ziti" DNS names are resolvable from inside your cluster. This is required for your pods to communicate with the OpenZiti Controller's advertised address.You will know it's working because you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
+1. Verify that *.ziti DNS names are resolvable from inside your cluster. This is required for your pods to communicate with the OpenZiti Controller's advertised address.You will know it's working because you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
 
    ```bash
    kubectl run "dnstest" --rm --tty --stdin --image=busybox --restart=Never -- \
