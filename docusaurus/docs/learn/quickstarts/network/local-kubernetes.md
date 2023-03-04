@@ -9,7 +9,7 @@ sidebar_label: Kubernetes
 
 ## Before You Begin
 
-`minikube` can be deployed as a VM, a container, or bare-metal. We'll use the preferred Docker driver for this quickstart.
+`minikube` can be deployed as a VM, a container, or bare-metal. We'll use the preferred Docker driver for this quickstart. You can run `minikube` in WSL with Docker Engine or Docker Desktop, but keep an eye out for one extra step to run `minikube tunnel` at the necessary point in the process.
 
 1. [Install Docker](https://docs.docker.com/engine/install/)
 1. [Install `kubectl`](https://kubernetes.io/docs/tasks/tools/)
@@ -20,6 +20,14 @@ sidebar_label: Kubernetes
 1. Optional: Install `curl` and `jq` for testing an OpenZiti Service in the terminal. 
 
 Make sure these command-line tools are available in your executable search `PATH`.
+
+## BASH Script
+
+Here's a scripted form of the quickstart in case you prefer to expedite running the commands: [miniziti.bash](./miniziti.bash). To run the script you'll need to download it and run it like this:
+
+```bash
+bash ./miniziti.bash
+```
 
 ## Create the `miniziti` Cluster
 
@@ -377,10 +385,10 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 
 1. Open [http://miniconsole.ziti](http://miniconsole.ziti) in your web browser and login with username "admin" and the password from your clipboard.
 
-   You'll see an Nginx 503 error while it's starting, which may take a couple of minutes. You can watch the console pod progress to status "Running".
+   You'll see an Nginx 503 error while it's starting, which may take a couple of minutes. You can set a watcher for the console pod to progress to become ready.
 
    ```bash
-   kubectl --namespace ziti-console get pods --watch
+   kubectl --namespace ziti-console get pods | awk '/miniconsole/ {print $1}' | xargs kubectl --namespace ziti-console wait --for=condition=Ready pods
    ```
 
 ## Create OpenZiti Identities and Services
@@ -388,11 +396,11 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 Here's a BASH script that runs several `ziti` CLI commands to illustrate a minimal set of identities, services, and policies.
 
 ```bash
-ziti edge create identity device edge-client1 \
-    --jwt-output-file /tmp/edge-client1.jwt --role-attributes testapi-clients
+ziti edge create identity device edge-client \
+    --jwt-output-file /tmp/edge-client.jwt --role-attributes testapi-clients
 
-ziti edge create identity device testapi-server1 \
-    --jwt-output-file /tmp/testapi-server1.jwt --role-attributes testapi-servers
+ziti edge create identity device testapi-host \
+    --jwt-output-file /tmp/testapi-host.jwt --role-attributes testapi-hosts
 
 ziti edge create config testapi-intercept-config intercept.v1 \
     '{"protocols":["tcp"],"addresses":["testapi.ziti"], "portRanges":[{"low":80, "high":80}]}'
@@ -403,7 +411,7 @@ ziti edge create config testapi-host-config host.v1 \
 ziti edge create service testapi-service --configs testapi-intercept-config,testapi-host-config
 
 ziti edge create service-policy testapi-bind-policy Bind \
-    --service-roles '@testapi-service' --identity-roles '#testapi-servers'
+    --service-roles '@testapi-service' --identity-roles '#testapi-hosts'
 
 ziti edge create service-policy testapi-dial-policy Dial \
     --service-roles '@testapi-service' --identity-roles '#testapi-clients'
@@ -414,7 +422,7 @@ ziti edge create edge-router-policy "public-routers" \
 ziti edge create service-edge-router-policy "public-routers" \
     --edge-router-roles '#public-routers' --service-roles '#all'
 
-ziti edge enroll /tmp/testapi-server1.jwt
+ziti edge enroll /tmp/testapi-host.jwt
 ```
 
 ## Install the `httpbin` Demo API Server Chart
@@ -422,14 +430,14 @@ ziti edge enroll /tmp/testapi-server1.jwt
 This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by an OpenZiti Tunneler. We'll use it as a demo API to test the OpenZiti Service you just created named "testapi-service".
 
 ```bash
-helm install testapi-server1 openziti/httpbin \
-   --set-file zitiIdentity=/tmp/testapi-server1.json \
+helm install testapi-host openziti/httpbin \
+   --set-file zitiIdentity=/tmp/testapi-host.json \
    --set zitiServiceName=testapi-service
 ```
 
 ## Load the Client Identity in your OpenZiti Tunneler
 
-Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/edge-client1.jwt` (`\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
+Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/edge-client.jwt` (`\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
 
 As soon as identity enrollment completes you should have a new DNS name available to you. Let's test that with a DNS query.
 
@@ -462,7 +470,7 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
       ```bash
       # the role you add needs to match the bind policy's identity roles
       ziti edge update identity "minirouter" \
-         --role-attributes k8sapi-servers
+         --role-attributes k8sapi-hosts
       ```
 
    1. Connect to the K8s apiserver from another computer with [`kubeztl`, the OpenZiti fork of `kubectl`](https://github.com/openziti-test-kitchen/kubeztl/). `kubeztl` works by itself without an OpenZiti Tunneler.

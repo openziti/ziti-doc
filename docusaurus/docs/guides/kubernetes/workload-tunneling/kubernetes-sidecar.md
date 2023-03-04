@@ -30,14 +30,14 @@ This guide will re-use the Ziti service "testapi-service", a REST API demo serve
 1. We will create a new identity for our client app with the correct role to grant access to the Ziti service.
 
   ```bash
-  ziti edge create identity device sidecar-client1 \
-    --jwt-output-file /tmp/sidecar-client1.jwt --role-attributes testapi-clients
+  ziti edge create identity device sidecar-client \
+    --jwt-output-file /tmp/sidecar-client.jwt --role-attributes testapi-clients
   ```
 
 1. Enroll the identity.
 
   ```bash
-  ziti edge enroll /tmp/sidecar-client1.jwt
+  ziti edge enroll /tmp/sidecar-client.jwt
   ```
 
 ## Restore the Quickstart KUBECONFIG If Necessary
@@ -53,8 +53,8 @@ minikube --profile miniziti update-context
 The `ziti-tunnel` sidecar will access its identity by mounting a Kubernetes secret in the container.
 
 ```bash
-kubectl create secret generic "sidecar-client1-identity" \
-    --from-file=/tmp/sidecar-client1.json
+kubectl create secret generic "sidecar-client-identity" \
+    --from-file=/tmp/sidecar-client.json
 ```
 
 ## Deploy the Pod
@@ -112,9 +112,9 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
               args: ["tproxy"]
               env:
               - name: ZITI_IDENTITY_BASENAME
-                value: sidecar-client1  # the filename in the volume is sidecar-client1.json
+                value: sidecar-client  # the filename in the volume is sidecar-client.json
               volumeMounts:
-              - name: sidecar-client1-identity
+              - name: sidecar-client-identity
                 mountPath: /netfoundry
                 readOnly: true
               securityContext:
@@ -128,9 +128,9 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
               - 10.96.0.10  # change to CoreDNS cluster service address
           restartPolicy: Always
           volumes:
-          - name: sidecar-client1-identity
+          - name: sidecar-client-identity
             secret:
-              secretName: sidecar-client1-identity
+              secretName: sidecar-client-identity
     ```
 
     You'll notice that the `ziti-tunnel` sidecar container has a few requirements:
