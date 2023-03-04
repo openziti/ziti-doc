@@ -164,7 +164,7 @@ internet search should show you how to accomplish this.
 
 ## Kubernetes
 
-There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides/kubernetes/stack/kubernetes-console).
+There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides/kubernetes/hosting/kubernetes-console).
 
 ## Login and use ZAC
 
