@@ -1,25 +1,23 @@
 # Certificate Management
 
-x509 client and server certificates are used for client, router, and controller verification. Client authentication
-is possible through other means however router and controller verification is always x509 certificates.
+Clients, routers, and the controller use x509 client and server certificates. Client authentication
+methods include certificates, but router and controller authentication always uses certificates.
 
-In order to maintain valid client and server certificates, both routers and clients have API available to them to
-extend their current certificates forward. These APIs only work for the internal Ziti PKI. Routers within a Ziti
-network always use the internal Ziti PKI for their certificates. Clients may be configured to other external
-PKIs via [3rd Party CAs](./third-party-cas). In that scenario ZIti can not provide support for certificate
-management.
+Client and Routers with certificates from the internal Edge signer PKI may request new certificates by calling the Edge API.
+Routers always have certificates from the internal Edge signer PKI. Clients can also be created with certificates from external
+PKIs via [3rd Party CAs](./third-party-cas). Ziti can trust certificates from a configured external CA, but can not revoke or issue those certificates.
 
 ## Router Certificate Extension
 
 Routers will attempt to extend their current client and server certificates one week prior to expiration. No
-intervention is necessary on behalf of the network administrator. The request sent to the controller via a 
+intervention is necessary on behalf of the network administrator. The request must be sent to the controller via a 
 pre-authenticated connection. If a router has been disconnected from the Ziti network and their client certificates
-have expired, the router will have to be [re-enrolled](../enrollment#router-enrollment-extension).
+have expired, the router must be [re-enrolled](../enrollment#router-enrollment-extension).
 
 ## Client Certificate Extension
 
 Clients may determine their own client certificate extension frequency. In order to extend their current client 
-certificate issued by the Ziti PKI they must issue the following RESt request to either the 
+certificate issued by the Ziti PKI, they must issue the following REST request to either the 
 [Edge Management API](/docs/reference/developer/api#edge-management-api) or [Edge Client API](/docs/reference/developer/api#edge-client-api) 
 after becoming [fully authenticated](./auth#full-vs-partial-authentication).
 
@@ -27,7 +25,7 @@ after becoming [fully authenticated](./auth#full-vs-partial-authentication).
 
 The Ziti SDKs provide helper functions for this process and issuing these requests manually should not be necessary.
 
-The `id` necessary to extend a specific authenticator may be obtained by listing the clients current authenticators
+The `id` necessary to extend a specific authenticator may be obtained by listing the client's current authenticators
 with `GET edge/*/v1/current-identity/authenticators` where `*` may be `management` or `client`. The CSR provided
 must be PEM encoded.
 
