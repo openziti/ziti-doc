@@ -3,7 +3,7 @@ title: Authentication
 ---
 
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
-has begun when the client receives and API Session and is  complete when the API Session is fully authenticated.
+has begun when the client receives an API Session and is complete when the API Session is fully authenticated.
 API Sessions are a high level security context that represents an authenticated session with either the Ziti [Edge Client API](/docs/reference/developer/api#edge-client-api)
 or the Ziti [Edge Management API](/docs/reference/developer/api#edge-management-api).
 
@@ -17,7 +17,7 @@ and [Edge Management API](/docs/reference/developer/api#edge-management-api).
 
 [![](https://mermaid.ink/img/pako:eNp1kUtPwzAQhP_KyudW3HMApU1fFxQaHoK4B1Mv1CJZR34IRUn-O46bCiGVm9f6ZmY97thRS2QJ-zSiOcFjxiktn0h4d0Jy6igcygPM57d94d9r5SA3qhamhaVBORKisj0sumdRKXk3cFqMMCzLex1lkF6usvIV7YFTFqdVmQszqqsW0j9hnFaRWHeplMopTaKKCDx4NArtmLKOyGayPE_bMZPTNg79Hp03BGm-gwKtDTbwfaMvHj28lWt_LXzzr_xF_e7Qw66cCtmjbTTZuMjuvDmbsRpNLZQMxXacADgLKTVyloSjFOaLM05D4HwjQ_AqPFQblnyENnHGQvu6aOnIEmc8XqBMifBJ9UQNP7yGlbE)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNp1kUtPwzAQhP_KyudW3HMApU1fFxQaHoK4B1Mv1CJZR34IRUn-O46bCiGVm9f6ZmY97thRS2QJ-zSiOcFjxiktn0h4d0Jy6igcygPM57d94d9r5SA3qhamhaVBORKisj0sumdRKXk3cFqMMCzLex1lkF6usvIV7YFTFqdVmQszqqsW0j9hnFaRWHeplMopTaKKCDx4NArtmLKOyGayPE_bMZPTNg79Hp03BGm-gwKtDTbwfaMvHj28lWt_LXzzr_xF_e7Qw66cCtmjbTTZuMjuvDmbsRpNLZQMxXacADgLKTVyloSjFOaLM05D4HwjQ_AqPFQblnyENnHGQvu6aOnIEmc8XqBMifBJ9UQNP7yGlbE)
 
-In the above a client has provided primary authentication credentials (certificate, JWT, username password) and then
+In the above a client has provided primary authentication credentials (certificate, JWT, username/password) and then
 subsequently provided any secondary credentials necessary (JWT, TOTP, etc). The secondary credentials are requested 
 via Authentication Queries and enable multifactor authentication to occur.
 
@@ -31,7 +31,7 @@ security context that is used to determine authorization in the rest of the Ziti
 API Sessions are represented by opaque strings and are provided in the HTTP header `zt-session` and in Edge Router
 connection requests initiated by Ziti SDKs. API Sessions remain valid as long they have not timed out.
 
-An API Sessions:
+An API Session:
 
 - can and are represented by a JSON data structure returned from the Client and Management APIs
   - returned from:
@@ -140,7 +140,7 @@ While partially authenticated, the API Session can only be used for a reduced se
 
 ##### Authentication Queries
 
-Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example 
+Authentication Queries are represented on an API Session as the property `authQueries` which is an array. An example 
 MFA challenge represented as an Authentication Query is provided below.
 
 ```json
@@ -161,7 +161,7 @@ MFA challenge represented as an Authentication Query is provided below.
 
 The existence of any Authentication Query on an API Session represents a partial authentication state. API Sessions
 in this state will have reduced access to their target API. The data structure for Authentication Queries is defined
-in the Client and Management Open API 2.0 specifications under the label `authQueryDetail`.
+in the Client and Management OpenAPI 2.0 specifications under the label `authQueryDetail`.
 
 #### Associated Data & Removal
 
@@ -211,21 +211,21 @@ A client may terminate its own API Session at any time by calling: `DELETE /edge
 
 ### Primary Authentication
 
-Primary authentication in Ziti establishes and API Sessions identity principal and enabled Ziti to determine which
+Primary authentication in Ziti establishes an API Session's identity principal and enables Ziti to determine which
 secondary authentication factors are necessary for an API Session to become fully authenticated. If no secondary
-authentication factors are required the API Session becomes fully authenticated immediately without any further
+authentication factors are required, the API Session becomes fully authenticated immediately without any further
 interaction with the Client or Management API.
 
 Primary authentication factors include:
 
-- x509 certificates
-- JWTs
-- Username/password
+- x509 certificates from primary Edge signer CA or trusted external CA
+- External JWTs
+- Username/Password
 
 Valid primary authentication methods can be restricted via [Authentication Policies](./authentication-policies).
-An Identity can have one [Authentication Policies](./authentication-policies) associated with it. 
-This association is defined by the `authPolicyId` property on the identity. If no[Authentication Policy](./authentication-policies) 
-is set for an Identity, a special system defined [Authentication Policy](./authentication-policies) 
+An Identity can have only one [Authentication Policy](./authentication-policies) set.
+This is set by the `authPolicyId` property on the identity. If no [Authentication Policy](./authentication-policies) 
+is set for an Identity, a special system-defined [Authentication Policy](./authentication-policies) 
 with the id of `default` will be used.
 
 ### Authenticators
@@ -248,7 +248,7 @@ GET /edge/management/v1/authenticators
 
 x509 authentication requires the client to initiate a HTTPs authentication request using a x509 client certificate that
 is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge 
-Controller's internal PKI or an external PKI. If an external PKI is being used, it must be registered as a 
+Controller's internal Edge signer PKI or an external PKI. If an external PKI is being used, it must be registered as a 
 [3rd Party CA](./third-party-cas) via the Ziti [Edge Management API](/docs/reference/developer/api#edge-management-api), verified, and
 have authentication enabled. The client certificate must pass signature and CA chain-of-trust validation. All client, 
 intermediate CA, and root CA functionality supports RSA and EC keys.
