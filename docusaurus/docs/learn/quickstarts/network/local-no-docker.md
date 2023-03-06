@@ -151,9 +151,9 @@ of the network.
 
 ### Configuration File Location
 
-You can change the location of the configuration files output by adding a parameter to the `expressInstall` function 
-invocation. However, if you do this you will also need to set other environment variables as well. Please realize that
-if you change these variables each of the "hostname" variables will need to be addressable:
+You can change the location of the configuration files output by setting the `ZITI_NETWORK` environment variable prior 
+to running `expressInstall`. However, if you do this you will also need to set other environment variables as well. 
+Please realize that if you change these variables each of the "hostname" variables will need to be addressable:
 
 * ZITI_CTRL_EDGE_ADVERTISED_ADDRESS
 * ZITI_CTRL_EDGE_ADVERTISED_PORT
@@ -164,11 +164,12 @@ Here is an example which allows you to put all the files into a folder called: `
 a host named 'localhost', and uses ports 8800 for the edge controller and 9090 for the edge router:
 
 ```bash
+ZITI_NETWORK="newfolder"; \
 ZITI_CTRL_EDGE_ADVERTISED_ADDRESS=localhost; \
 ZITI_CTRL_EDGE_ADVERTISED_PORT=8800; \
 ZITI_EDGE_ROUTER_HOSTNAME=localhost; \
 ZITI_EDGE_ROUTER_PORT=9090; \
-source ziti-cli-functions.sh; expressInstall newfolder
+source ziti-cli-functions.sh; expressInstall
 ```
 
 ## Sourcing the Env File
