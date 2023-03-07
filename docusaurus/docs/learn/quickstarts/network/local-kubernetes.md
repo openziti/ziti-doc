@@ -1,5 +1,6 @@
 ---
 sidebar_position: 60
+hide_table_of_contents: true
 sidebar_label: Kubernetes
 title: Kubernetes Quickstart
 ---
@@ -7,7 +8,7 @@ title: Kubernetes Quickstart
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL2). This quickstart is a great way to explore running your own OpenZiti Controller, Router, and Console.
+`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL). This quickstart is a great way to explore running your own OpenZiti Controller, Router, and Console.
 
 ## Tools of the Trade
 
@@ -34,9 +35,15 @@ Your computer running `minikube` needs to resolve these three domain names. They
 <Tabs groupId="operating-systems">
   <TabItem value="win" label="Windows (WSL2)">
 
-   In Windows, `minikube` sets up localhost port forwarding to the IP of the Docker container running in WSL2. Docker will forward localhost:80,443/tcp to support the HTTP ingresses to your miniziti cluster.
+   This step allows you to connect to the `minikube` ingresses from Windows or WSL. We'll need that connection to the ingresses later when we run the `ziti` CLI in WSL.
 
-1. In PowerShell, edit file `$env:userprofile\.wslconfig` to configure WSL to bind localhost.
+1. Enable localhost binding in WSL.
+
+   ```cmd
+   %USERPROFILE%\.wslconfig
+   ```
+
+   Add `localhostforwarding=true` to the `[wsl2]` section like this.
 
    ```ini
    [wsl2]
@@ -44,20 +51,56 @@ Your computer running `minikube` needs to resolve these three domain names. They
    localhostforwarding=true
    ```
 
-1. In PowerShell, Add the *.ziti DNS names to `$env:SystemRoot\system32\drivers\etc\hosts`
+1. Add the DNS names to the system hosts file. This allows us to resolve the DNS names from both Windows and WSL.
 
-   ```bash
+   Edit the system hosts file.
+   
+   ```cmd
+   %SYSTEMROOT%\system32\drivers\etc\hosts
+   ```
+
+   Add this line to the system hosts file.
+
+   ```ini
    # miniziti
    127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti
    ```
 
-1. In PowerShell, Restart WSL.
+1. Restart WSL.
 
    ```powershell
    wsl --shutdown
    ```
 
-1. In WSL2, verify that localhost is bound. You know it's working if you see the *.ziti DNS names in `/etc/hosts` duplicated from Windows.
+1. In WSL, verify that Docker restarted successfully.
+
+   ```bash
+   docker ps
+   ```
+
+   If Docker has restarted then you'll see your running containers, if any. If you don't have any running containers then you'll only see the headings, like this. This is a healthy result and you can skip to the next numbered step.
+
+   ```bash
+   $ docker ps
+   CONTAINER ID   IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES
+   ```
+
+   If you see an error then you need to restart Docker. If you have Docker Desktop it may be necessary to "Quick Docker Desktop" in the system tray menu (right-click tray icon).
+
+   You can verify that the `docker-desktop-data` instance is running with this PowerShell command.
+
+   ```powershell
+   wsl -l -v
+   ```
+
+   Example output:
+
+   ```powershell
+   % wsl -l -v
+   FIXME: paste output here showing WSL, docker-desktop, docker-desktop-data running
+   ```
+
+1. In WSL, verify that localhost is bound. You know it's working if you see the *.ziti DNS names in `/etc/hosts` duplicated from Windows.
 
    ```bash
    grep ziti /etc/hosts
@@ -72,12 +115,16 @@ Your computer running `minikube` needs to resolve these three domain names. They
 
 1. In WSL, Run `minikube tunnel`.
 
-   Keep a separate terminal window open so you can make sure the tunnel is still running. Create a "miniziti" profile if you haven't, and run the tunnel.
+   Keep a separate terminal window open so you can make sure the tunnel is still running and provide your password if prompted. Create a "miniziti" profile if you haven't, and run the tunnel.
+
+   :::info
+   You will likely be prompted by `minikube tunnel` for your WSL user's password, but this prompt may not occur immediately. This grants permission for the tunnel to add a route to the minikube node IP. 
+   :::
 
    ```bash
-   # you may be prompted for your WSL user's password to grant permission to add IP route to minikube 
    minikube --profile miniziti start
    minikube --profile miniziti tunnel
+
    ```
 
 </TabItem>
@@ -107,9 +154,9 @@ sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.zit
 
 ## BASH Script
 
-There's a scripted form of this quickstart in case you prefer to expedite running the commands. It's recommended that you read the script before you run it. It's safe to re-run the script if it encounters a temporary problem.
+You can run this script or perform the steps manually yourself. Click the "Manual Steps" tab above to switch your view. 
 
-You'll need to complete one of the two host DNS options in advance, i.e., `/etc/hosts` or configure your OS to use minikube DNS for *.ziti DNS names. 
+It's recommended that you read the script before you run it. It's safe to re-run the script if it encounters a temporary problem.
 
 To run the script you'll need to [download the file](./miniziti.bash) and run it like this:
 
@@ -159,7 +206,7 @@ CoreDNS is running at https://192.168.49.2:8443/api/v1/namespaces/kube-system/se
 ```
 
 ```bash
-# Windows with WSL2 looks like this
+# Windows with WSL looks like this
 $ kubectl cluster-info
 Kubernetes control plane is running at https://127.0.0.1:49439
 CoreDNS is running at https://127.0.0.1:49439/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
@@ -424,8 +471,8 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 Here's a BASH script that runs several `ziti` CLI commands to illustrate a minimal set of identities, services, and policies.
 
 ```bash
-ziti edge create identity device "edge-client" \
-    --jwt-output-file /tmp/edge-client.jwt --role-attributes testapi-clients
+ziti edge create identity device "miniziti-client" \
+    --jwt-output-file /tmp/miniziti-client.jwt --role-attributes testapi-clients
 
 ziti edge create identity device "testapi-host" \
     --jwt-output-file /tmp/testapi-host.jwt --role-attributes testapi-hosts
@@ -469,7 +516,7 @@ helm install "testapi-host" openziti/httpbin \
 
 ## Load the Client Identity in your OpenZiti Tunneler
 
-Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/edge-client.jwt` (`\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
+Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/miniziti-client.jwt` (or WSL's "tmp" directory, e.g., `\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
 
 As soon as identity enrollment completes you should have a new OpenZiti DNS name available to this device. Let's test that with a DNS query.
 
@@ -493,7 +540,7 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
 
 ## Next Steps
 
-1. In the OpenZiti Console, fiddle the policies and roles to revoke then restore your permission to acess the demo services.
+1. In the OpenZiti Console, try to revoke then restore your permission to acess the demo services.
 1. Deploy a non-Ziti demo application to Kubernetes and securely [share it with a Ziti proxy pod](../services/kubernetes-service)
 1. Add a configs, service, and policies to access the Kubernetes apiserver with OpenZiti. 
    1. Hint: the apiserver's address is "kubernetes.default.svc:443" inside the cluster. 
@@ -507,10 +554,13 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
 
    1. Connect to the K8s apiserver from another computer with [`kubeztl`, the OpenZiti fork of `kubectl`](https://github.com/openziti-test-kitchen/kubeztl/). `kubeztl` works by itself without an OpenZiti Tunneler.
 1. Share the demo server with someone.
-   1. Create another identity named " edge-client2" with role "hello-clients" and send it to someone. 
+   1. Create another identity named " miniziti-client2" with role "hello-clients" and send it to someone. 
    1. Ask them to [install a tunneler and load the identity](https://docs.openziti.io/docs/reference/tunnelers/) so they too can access [http://hello.ziti/](http://hello.ziti/).
 
 ## Cleanup
+
+<Tabs groupId="operating-systems-cleanup">
+<TabItem value="win" label="Windows (WSL2)">
 
 1. Remove the *.ziti names from `/etc/hosts` if you added them.
 
@@ -526,6 +576,45 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
    ```
 
 1. In your OpenZiti Tunneler, "Forget" your Identity.
+
+</TabItem>
+<TabItem value="mac" label="macOS">
+
+1. Remove the *.ziti names from `/etc/hosts` if you added them.
+
+   ```bash
+   # macOS and Linux
+   sudo sed -iE '/mini.*\.ziti/d' /etc/hosts
+   ```
+
+1. Delete the cluster.
+
+   ```bash
+   minikube --profile miniziti delete
+   ```
+
+1. In your OpenZiti Tunneler, "Forget" your Identity.
+
+</TabItem>
+<TabItem value="linux" label="Linux">
+
+1. Remove the *.ziti names from `/etc/hosts` if you added them.
+
+   ```bash
+   # macOS and Linux
+   sudo sed -iE '/mini.*\.ziti/d' /etc/hosts
+   ```
+
+1. Delete the cluster.
+
+   ```bash
+   minikube --profile miniziti delete
+   ```
+
+1. In your OpenZiti Tunneler, "Forget" your Identity.
+
+</TabItem>
+</Tabs>
 
 ## minikube `ingress-dns` nameserver
 
