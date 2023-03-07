@@ -139,10 +139,6 @@ const config = {
             from: ['/guides/mobile/android'],
           },
           {
-            to: '/docs/reference/tunnelers/linux/container/kubernetes-sidecar-tunnel-quickstart',
-            from: ['/guides/kubernetes/kubernetes-sidecar-tunnel-quickstart'],
-          },
-          {
             to: '/docs/reference/developer/sdk',
             from: ['/docs/core-concepts/clients/sdks'],
           },

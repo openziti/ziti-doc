@@ -13,18 +13,8 @@ jobs:
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v3
-      - name: Check broken links
-        uses: ruzickap/action-my-broken-link-checker@v2
-        with:
-          url: https://docs.openziti.io/
-          cmd_params: >
-            --color=always 
-            --exclude=https://(EXWPKK5PV4-dsn.algolia.net|www.google.com/search|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|mermaid.ink|play.google.com/|apps.apple.com/|www.reddit.com/r/openziti|github.com/.*/releases/latest/download/)|(#docusaurus_skipToContent_fallback|\.(ziti|svc)(/[^.]+)?)$
-            --buffer-size=8192 
-            --max-connections-per-host=5
-            --header=User-Agent:curl/7.54.0
-            --timeout=20
-          debug: false
+      - name: Crawl for Broken Links
+        run: ./check-links/crawl-for-broken-links.sh https://docs.openziti.io
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v3

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o xtrace
 
 if [[ $# -eq 0 || $1 =~ -h|(--)?help ]]; then
     echo "ERROR: need URL to check as first param. Extra params are passed to muffet" >&2
@@ -10,9 +13,28 @@ else
     shift
 fi
 
+EXCLUDE_PATTERN="https://("
+while read -r; do
+    EXCLUDE_PATTERN+="${REPLY}|"
+done< <(cat <<EOF
+EXWPKK5PV4-dsn.algolia.net
+www.google.com/search
+www.googletagmanager.com
+mermaid-js.github.io
+mermaid.live
+mermaid.ink
+play.google.com/
+apps.apple.com/
+www.reddit.com/r/openziti
+github.com/.*/releases/latest/download/)
+(#docusaurus_skipToContent_fallback|\.(ziti(k8s)?|svc)(/[^.]+)?)
+EOF
+)
+EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}$"
+
 case "$SERVER" in
     *)
-        EXCLUDE='https://(EXWPKK5PV4-dsn.algolia.net|www.google.com/search|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|mermaid.ink|play.google.com/|apps.apple.com/|www.reddit.com/r/openziti|github.com/.*/releases/latest/download/)|(#docusaurus_skipToContent_fallback|\.(ziti|svc)(/[^.]+)?)$'
+        EXCLUDE="${EXCLUDE_PATTERN}"
     ;;
 esac
 

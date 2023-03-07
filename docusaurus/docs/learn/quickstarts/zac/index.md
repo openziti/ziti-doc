@@ -162,6 +162,10 @@ One easy, and common mechanism to do this would be to edit the 'hosts' file of y
 internet search should show you how to accomplish this.
 :::
 
+## Kubernetes
+
+There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides/kubernetes/hosting/kubernetes-console).
+
 ## Login and use ZAC
 
 1. At this point you should be able to navigate to both: `https://${ZITI_EDGE_CONTROLLER_HOSTNAME}:8443`and see the ZAC login
