@@ -352,3 +352,18 @@ terraform plan  -var include_aks_nginx=true -var authorized_source_ip_list=[\"19
 terraform apply "aks"
 ```
 Retest with ZDE enabled and disabled for this network.
+
+## Clean up
+:::note
+Run terraform to open up the AKS API to public before deleting AKS resources, so you dont get locked out.
+:::
+```shell
+terraform plan  -var include_aks_nginx=true -var authorized_source_ip_list=[\"0.0.0.0/0\"] -out aks
+```
+```shell
+terraform apply "aks"
+```
+Delete all resources
+```shell
+terraform plan  --destroy -var include_aks_nginx=true  -out aks
+```
