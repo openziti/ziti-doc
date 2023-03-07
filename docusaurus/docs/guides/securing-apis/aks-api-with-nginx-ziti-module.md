@@ -243,9 +243,14 @@ config:
           }
         }
 ```
+:::caution
+Need to disable ZDE for this network before the next step, so the nginx updates will not get intercepted while the service is not ready yet.
+:::
 - ***Re-run terraform***
 ```bash
 terraform plan  -var include_aks_nginx=true  -out aks
+```
+```bash
 terraform apply "aks"
 ```
 
@@ -265,7 +270,7 @@ az aks get-credentials --resource-group $RG_NAME --name {cluster_name} --subscri
 
 - ***Check context in the kubectl config file***
 ```shell
-$ kubectl config  get-contexts
+kubectl config  get-contexts
 ```
 `Expected Output`
 ```shell
@@ -275,7 +280,7 @@ CURRENT   NAME            CLUSTER         AUTHINFO                              
 
 - ***Let's check the status of nodes in the cluster.***
 ```shell
-$ kubectl get nodes
+kubectl get nodes
 ```
 `Expected Output`
 ```shell
@@ -286,7 +291,7 @@ aks-agentpool-20887740-vmss000001   Ready    agent   151m   v1.24.9
 
 - ***List cluster info***
 ```shell
-$ kubectl cluster-info
+kubectl cluster-info
 ```
 `Expected Output`
 ```shell
@@ -299,7 +304,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 - ***List pods***
 ```shell
-$ kubectl get pods --all-namespaces
+kubectl get pods --all-namespaces
 ```
 `Expected Output`
 ```shell
@@ -326,7 +331,7 @@ kube-system   metrics-server-8655f897d8-tnpzt                2/2     Running   0
 
 - ***List  services***
 ```shell
-$ kubectl get services --all-namespaces
+kubectl get services --all-namespaces
 ```
 `Expected Output`
 ```shell
@@ -342,6 +347,8 @@ At this point the public access is still available even though the API Kubectl q
 Pass the following variable to only allow 192.168.1.1/32 source IP to essentially disable Public Access. 
 ```shell
 terraform plan  -var include_aks_nginx=true -var authorized_source_ip_list=[\"192.168.1.1/32\"] -out aks
+```
+```shell
 terraform apply "aks"
 ```
-Retest with ZDE enabled and disabled
+Retest with ZDE enabled and disabled for this network.
