@@ -154,7 +154,7 @@ sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.zit
 
 ## BASH Script
 
-You can run this script or perform the steps manually yourself. Click the "Manual Steps" tab above to switch your view. 
+You can run this script or perform the steps manually yourself. Click the "Manual Steps" tab directly above to switch your view. 
 
 It's recommended that you read the script before you run it. It's safe to re-run the script if it encounters a temporary problem.
 
@@ -167,11 +167,11 @@ bash ./miniziti.bash
   </TabItem>
   <TabItem value="manual" label="Manual Steps" default>
 
-## Step-by-Step with Explanations
+## Manual Steps to Learn by Doing
 
-This section explains the actions performed by the miniziti.bash script so you can run them manually yourself if you wish. I'll assume you have a terminal with BASH or ZSH terminal for pasting commands.
+This section explains the actions performed by the `miniziti.bash` script.You need a BASH or ZSH terminal for pasting commands.<br/><br/>
 
-## Create the `miniziti` Cluster
+### Create the `miniziti` Cluster
 
 First, let's create a brand new `minikube` profile named "miniziti".
 
@@ -212,7 +212,7 @@ Kubernetes control plane is running at https://127.0.0.1:49439
 CoreDNS is running at https://127.0.0.1:49439/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
 
-## Install Ingress Addons
+### Install Ingress Addons
 
 You will need two Minikube addons:
 
@@ -248,11 +248,11 @@ kubectl wait pods \
     --timeout=120s
 ```
 
-Now your miniziti cluster is ready for some OpenZiti!
+Now your miniziti cluster is ready for some OpenZiti!<br/><br/>
 
-## Install the OpenZiti Controller
+### Install the OpenZiti Controller
 
-### Allow Kubernetes to Manage Certificates
+#### Allow Kubernetes to Manage Certificates
 
 You need to install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CRD) for the OpenZiti Controller.
 
@@ -263,7 +263,7 @@ kubectl apply \
    --filename https://raw.githubusercontent.com/cert-manager/trust-manager/v0.4.0/deploy/crds/trust.cert-manager.io_bundles.yaml
 ```
 
-### Add the OpenZiti Helm Repository
+#### Add the OpenZiti Helm Repository
 
 Add the OpenZiti Helm Repo
 
@@ -271,7 +271,7 @@ Add the OpenZiti Helm Repo
 helm repo add "openziti" https://docs.openziti.io/helm-charts/
 ```
 
-### Install the Controller
+#### Install the Controller
 
 Let's create a Helm release named "minicontroller" for the OpenZiti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
 
@@ -293,7 +293,7 @@ Let's create a Helm release named "minicontroller" for the OpenZiti Controller. 
       --timeout=240s
    ```
 
-## Cluster DNS
+### Cluster DNS
 
 Configure CoreDNS in the miniziti cluster. This is necessary no matter which host DNS resolver method you used above. 
 
@@ -377,7 +377,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
          nslookup minicontroller.ziti
    ```
 
-## Install the Router
+### Install the Router
 
 1. Log in to OpenZiti.
 
@@ -433,7 +433,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    results: 1-1 of 1
    ```
 
-## Install the Console
+### Install the Console
 
 1. Install the chart
 
@@ -466,7 +466,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 
 1. Open [http://miniconsole.ziti](http://miniconsole.ziti) in your web browser and login with username "admin" and the password from your clipboard.
 
-## Create OpenZiti Identities and Services
+### Create OpenZiti Identities and Services
 
 Here's a BASH script that runs several `ziti` CLI commands to illustrate a minimal set of identities, services, and policies.
 
@@ -501,7 +501,7 @@ ziti edge create service-edge-router-policy "public-routers" \
 ziti edge enroll /tmp/testapi-host.jwt
 ```
 
-## Install the `httpbin` Demo API Server Chart
+### Install the `httpbin` Demo API Server Chart
 
 This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by an OpenZiti Tunneler. We'll use it as a demo API to test the OpenZiti Service you just created named "testapi-service".
 
@@ -514,7 +514,9 @@ helm install "testapi-host" openziti/httpbin \
   </TabItem>
 </Tabs>
 
-## Load the Client Identity in your OpenZiti Tunneler
+## Add the Client Identity
+
+Add the client identity you created to your OpenZiti Tunneler.
 
 Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/miniziti-client.jwt` (or WSL's "tmp" directory, e.g., `\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
 
@@ -562,59 +564,49 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
 <Tabs groupId="operating-systems-cleanup">
 <TabItem value="win" label="Windows (WSL2)">
 
-1. Remove the *.ziti names from `/etc/hosts` if you added them.
+1. Remove the `mini*.ziti` DNS names from the system hosts file.
 
-   ```bash
-   # macOS and Linux
-   sudo sed -iE '/mini.*\.ziti/d' /etc/hosts
+   Edit the system hosts file.
+   
+   ```cmd
+   %SYSTEMROOT%\system32\drivers\etc\hosts
    ```
 
-1. Delete the cluster.
+   Remove this line.
 
-   ```bash
-   minikube --profile miniziti delete
+   ```ini
+   # miniziti
+   127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti
    ```
-
-1. In your OpenZiti Tunneler, "Forget" your Identity.
 
 </TabItem>
 <TabItem value="mac" label="macOS">
 
-1. Remove the *.ziti names from `/etc/hosts` if you added them.
+1. Remove the `mini*.ziti` names from `/etc/hosts`.
 
    ```bash
-   # macOS and Linux
    sudo sed -iE '/mini.*\.ziti/d' /etc/hosts
    ```
-
-1. Delete the cluster.
-
-   ```bash
-   minikube --profile miniziti delete
-   ```
-
-1. In your OpenZiti Tunneler, "Forget" your Identity.
 
 </TabItem>
 <TabItem value="linux" label="Linux">
 
-1. Remove the *.ziti names from `/etc/hosts` if you added them.
+1. Remove the `mini*.ziti` names from `/etc/hosts`.
 
    ```bash
-   # macOS and Linux
    sudo sed -iE '/mini.*\.ziti/d' /etc/hosts
    ```
 
-1. Delete the cluster.
+</TabItem>
+</Tabs>
+
+2. Delete the cluster.
 
    ```bash
    minikube --profile miniziti delete
    ```
 
-1. In your OpenZiti Tunneler, "Forget" your Identity.
-
-</TabItem>
-</Tabs>
+2. In your OpenZiti Tunneler, "Forget" your Identity.
 
 ## minikube `ingress-dns` nameserver
 
