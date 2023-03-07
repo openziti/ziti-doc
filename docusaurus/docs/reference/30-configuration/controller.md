@@ -201,15 +201,10 @@ The enrolment section has these subsection:
 
 An object defining the `cert` and `key` used to issue certificates to identities and routers.
 
-- `cert` - (required) the x509 PEM formatted certificate used to sign certificate, must be a root or intermediate CA
-- `key` - (required) the x509 PEM formatted private key used to sign certificates, must be the key for the certificate
-  defined
-  in `cert`
+- `cert` - (required) the x509 PEM formatted certificate of the CA that the controller will use to issue edge identity certificates 
+- `key` - (required) the x509 PEM formatted private key for the certificate defined in `cert`
 
-As this signing certificate will be the signer for all issued edge router certificates, it is important that all
-enrolling identities and routers trust the PKI that issued the signing certificate. To have that happen the trust anchor
-of the PKI the `signingCert` is a member of should be in the `ca` bundle defined in the controller's `identity` section.
-The `ca` value is used as part of the trust bundle delivered to identities and routers during enrollment.
+OpenZiti clients rely on the controller to provide a bundle of trusted certificates during enrollment. The bundle is specified by the `identity.ca` field and points to a file on the server containing the bundle of trusted certificates. The signing certificate must be included in this file.
 
 #### `edgeIdentity`
 
@@ -312,8 +307,7 @@ healthChecks:
 The identity section includes the default server certificate and private key used for services hosted by the controller,
 alternate server certificates and keys to support SNI on hosted services, client certificate and private key when making
 connections, and the `ca` bundle that the controller will use when making connections and when bootstrapping identities
-and routers. See the conventions that apply to all [identity](conventions.md#identity) sections for field level
-detail.
+and routers. See the conventions that apply to all [identity](conventions.md#identity) sections for field level detail.
 
 ### `network`
 
