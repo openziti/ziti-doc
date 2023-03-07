@@ -266,7 +266,7 @@ the conventions that apply to all [identity](conventions.md#identity) sections f
 ### `link`
 
 The `link` section configures which protocols and ports are used to listen for incoming router mesh links via the
-`listenes` subsection and which protocols are used to dial other routers via the `dialers` subsection. Dialers and
+`listeners` subsection and which protocols are used to dial other routers via the `dialers` subsection. Dialers and
 listeners use `binding` names which can be further configured in the [`transport` section](#transport). For both
 "link listeners" and "link dialers", the `transport` `binding` is recommended.
 
