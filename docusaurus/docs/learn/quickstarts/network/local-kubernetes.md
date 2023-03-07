@@ -7,7 +7,7 @@ title: Kubernetes Quickstart
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL2). This quickstart is a great way to explore running your own OpenZiti Controller and Router(s). 
+`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL2). This quickstart is a great way to explore running your own OpenZiti Controller, Router, and Console.
 
 ## Tools of the Trade
 
