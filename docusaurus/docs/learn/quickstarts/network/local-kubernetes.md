@@ -555,9 +555,6 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
       ```
 
    1. Connect to the K8s apiserver from another computer with [`kubeztl`, the OpenZiti fork of `kubectl`](https://github.com/openziti-test-kitchen/kubeztl/). `kubeztl` works by itself without an OpenZiti Tunneler.
-1. Share the demo server with someone.
-   1. Create another identity named " miniziti-client2" with role "hello-clients" and send it to someone. 
-   1. Ask them to [install a tunneler and load the identity](https://docs.openziti.io/docs/reference/tunnelers/) so they too can access [http://hello.ziti/](http://hello.ziti/).
 
 ## Cleanup
 
