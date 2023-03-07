@@ -132,9 +132,25 @@ Your computer running `minikube` needs to resolve these three domain names. They
 
 In macOS, `minikube` sets up localhost port forwarding to the IP of the Docker container of the `minikube` node. Docker will forward localhost:80,443/tcp to support the HTTP ingresses to your miniziti cluster.
 
-```bash
-sudo tee -a /etc/hosts <<< "127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti" 
-```
+1. Add the DNS names to your system hosts file.
+
+   ```bash
+   sudo tee -a /etc/hosts <<< "127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti" 
+   ```
+
+1. Run `minikube tunnel`.
+
+   Keep a separate terminal window open so you can make sure the tunnel is still running and provide your password if prompted. Create a "miniziti" profile if you haven't, and run the tunnel.
+
+   :::info
+   You will likely be prompted by `minikube tunnel` for your macOS user's password, but this prompt may not occur immediately. This grants permission for the tunnel to add a route to the minikube node IP. 
+   :::
+
+   ```bash
+   minikube --profile miniziti start
+   minikube --profile miniziti tunnel
+
+   ```
 
 </TabItem>
 <TabItem value="linux" label="Linux">
