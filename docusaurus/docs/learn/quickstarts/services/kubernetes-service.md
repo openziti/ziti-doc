@@ -30,8 +30,8 @@ This is a quick example for tunneling to a Kubernetes workload with OpenZiti tha
     ziti edge create service-policy "hello-dial-policy" Dial \
         --service-roles '@hello-service' --identity-roles '#hello-clients'
 
-    # adds a role to "edge-client" from the local Kubernetes quickstart        
-    ziti edge update identity "edge-client" \
+    # adds a role to "miniziti-client" from the local Kubernetes quickstart        
+    ziti edge update identity "miniziti-client" \
         --role-attributes testapi-clients,hello-clients
     ```
 
