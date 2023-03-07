@@ -1,15 +1,17 @@
 ---
 sidebar_position: 60
 sidebar_label: Kubernetes
+title: Kubernetes Quickstart
 ---
 
-# Kubernetes Quickstart
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows. This quickstart is a great way to explore running your own OpenZiti Controller and Router(s). I'll assume you have a terminal with BASH or ZSH terminal for pasting commands.
+`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL2). This quickstart is a great way to explore running your own OpenZiti Controller and Router(s). 
 
-## Before You Begin
+## Tools of the Trade
 
-`minikube` can be deployed as a VM, a container, or bare-metal. We'll use the preferred Docker driver for this quickstart. You can run `minikube` in WSL with Docker Engine or Docker Desktop, but keep an eye out for one extra step to run `minikube tunnel` at the necessary point in the process.
+We'll use the preferred `minikube` Docker driver for this quickstart. You can run `minikube` in WSL with Docker Engine or Docker Desktop, but keep an eye out for one extra step to run `minikube tunnel` at the necessary point in the process.
 
 1. [Install Docker](https://docs.docker.com/engine/install/)
 1. [Install `kubectl`](https://kubernetes.io/docs/tasks/tools/)
@@ -20,6 +22,88 @@ sidebar_label: Kubernetes
 1. Optional: Install `curl` and `jq` for testing an OpenZiti Service in the terminal. 
 
 Make sure these command-line tools are available in your executable search `PATH`.
+
+## Configure DNS
+
+Your computer running `minikube` needs to resolve these three domain names. They will all resolve to the same IP address where minikube exposes ingresses on your OS.
+
+* minicontroller.ziti
+* miniconsole.ziti
+* minirouter.ziti
+
+<Tabs groupId="operating-systems">
+  <TabItem value="win" label="Windows (WSL2)">
+
+   In Windows, `minikube` sets up localhost port forwarding to the IP of the Docker container running in WSL2. Docker will forward localhost:80,443/tcp to support the HTTP ingresses to your miniziti cluster.
+
+1. In PowerShell, edit file `$env:userprofile\.wslconfig` to configure WSL to bind localhost.
+
+   ```ini
+   [wsl2]
+   # Turn off default connection to bind WSL 2 localhost to Windows localhost
+   localhostforwarding=true
+   ```
+
+1. In PowerShell, Add the *.ziti DNS names to `$env:SystemRoot\system32\drivers\etc\hosts`
+
+   ```bash
+   # miniziti
+   127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti
+   ```
+
+1. In PowerShell, Restart WSL.
+
+   ```powershell
+   wsl --shutdown
+   ```
+
+1. In WSL2, verify that localhost is bound. You know it's working if you see the *.ziti DNS names in `/etc/hosts` duplicated from Windows.
+
+   ```bash
+   grep ziti /etc/hosts
+   ```
+
+   It should look like this.
+
+   ```bash
+   $ grep ziti /etc/hosts
+   127.0.0.1    minicontroller.ziti  minirouter.ziti  miniconsole.ziti
+   ```
+
+1. In WSL, Run `minikube tunnel`.
+
+   Keep a separate terminal window open so you can make sure the tunnel is still running. Create a "miniziti" profile if you haven't, and run the tunnel.
+
+   ```bash
+   # you may be prompted for your WSL user's password to grant permission to add IP route to minikube 
+   minikube --profile miniziti start
+   minikube --profile miniziti tunnel
+   ```
+
+</TabItem>
+<TabItem value="mac" label="macOS">
+
+In macOS, `minikube` sets up localhost port forwarding to the IP of the Docker container of the `minikube` node. Docker will forward localhost:80,443/tcp to support the HTTP ingresses to your miniziti cluster.
+
+```bash
+sudo tee -a /etc/hosts <<< "127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti" 
+```
+
+</TabItem>
+<TabItem value="linux" label="Linux">
+
+On Linux, the IP of the `minikube` node running in Docker is routeable via the bridge interface created by `minikube`. Create a "miniziti" profile if you haven't, and obtain the node's external IP for your hosts file.
+
+```bash
+minikube --profile miniziti start
+sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.ziti  minirouter.ziti  miniconsole.ziti" 
+```
+
+</TabItem>
+</Tabs>
+
+<Tabs>
+  <TabItem value="miniziti.bash" label="BASH Script" default>
 
 ## BASH Script
 
@@ -32,6 +116,13 @@ To run the script you'll need to [download the file](./miniziti.bash) and run it
 ```bash
 bash ./miniziti.bash
 ```
+
+  </TabItem>
+  <TabItem value="manual" label="Manual Steps" default>
+
+## Step-by-Step with Explanations
+
+This section explains the actions performed by the miniziti.bash script so you can run them manually yourself if you wish. I'll assume you have a terminal with BASH or ZSH terminal for pasting commands.
 
 ## Create the `miniziti` Cluster
 
@@ -68,7 +159,7 @@ CoreDNS is running at https://192.168.49.2:8443/api/v1/namespaces/kube-system/se
 ```
 
 ```bash
-# Windows with WSL looks like this
+# Windows with WSL2 looks like this
 $ kubectl cluster-info
 Kubernetes control plane is running at https://127.0.0.1:49439
 CoreDNS is running at https://127.0.0.1:49439/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
@@ -155,96 +246,7 @@ Let's create a Helm release named "minicontroller" for the OpenZiti Controller. 
       --timeout=240s
    ```
 
-## Configure DNS
-
-There are two DNS resolvers to set up: your computer running `minikube` and the cluster DNS. Both need to resolve these three domain names to the `minikube` IP address on macOS and Linux, and resolve to the loopback address on Windows with WSL.
-
-* minicontroller.ziti
-* miniconsole.ziti
-* minirouter.ziti
-
-### Host DNS
-
-The simplest way to set up your host's resolver is to modify the system's hosts file, e.g. `/etc/hosts`. The alternative is to configure your host's resolver to use the DNS addon we enabled earlier. Whichever method you choose, you'll still need to configure CoreDNS so that pods can resolve these DNS names too.
-
-#### Host DNS - Easy Option: `/etc/hosts` 
-
-Add a line to your system's hosts file.
-
-##### Linux and macOS
-
-```bash
-# /etc/hosts
-sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.ziti  minirouter.ziti  miniconsole.ziti" 
-```
-
-##### Windows with WSL2
-
-1. In PowerShell, edit file `$env:userprofile\.wslconfig` to configure WSL to bind localhost.
-
-   ```ini
-   [wsl2]
-   # Turn off default connection to bind WSL 2 localhost to Windows localhost
-   localhostforwarding=true
-   ```
-
-1. In PowerShell, Add the *.ziti DNS names to `$env:SystemRoot\system32\drivers\etc\hosts`
-
-   ```bash
-   # miniziti
-   127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti
-   ```
-
-1. In PowerShell, Restart WSL.
-
-   ```powershell
-   wsl --shutdown
-   ```
-
-1. In WSL, verify that localhost is bound. You know it's working if you see the *.ziti DNS names in `/etc/hosts` duplicated from Windows.
-
-   ```bash
-   grep ziti /etc/hosts
-   ```
-
-   It should look like this.
-
-   ```bash
-   $ grep ziti /etc/hosts
-   127.0.0.1    minicontroller.ziti  minirouter.ziti  miniconsole.ziti
-   ```
-
-1. In WSL, Run `minikube tunnel`.
-
-   ```bash
-   # you may be prompted for your WSL user's password to grant permission to add IP route to minikube 
-   minikube --profile miniziti tunnel
-   ```
-
-#### Host DNS - Harder Option: `ingress-dns`
-
-This option configures your host to use use the DNS addon we enabled earlier for DNS names like *.ziti. If you do this then you don't need to edit the `/etc/hosts` file at all.
-
-   1. Make sure the DNS addon is working. Send a DNS query to the  address where the ingress nameserver is running.
-
-      ```bash
-      nslookup minicontroller.ziti $(minikube --profile miniziti ip)
-      ```
-
-      You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
-
-   1. Configure your computer to always send certain DNS queries to the `ingress-dns` nameserver. Follow the steps in [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation) to configure macOS, Windows, or Linux's DNS resolver.
-
-      Now that your computer is set up to use the `minikube` DNS server for DNS names that end in *.ziti, you can test it again without specifying where to send the DNS query.
-
-      ```bash
-      # test your DNS configuration
-      nslookup minicontroller.ziti
-      ```
-
-      You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
-
-### Cluster DNS
+## Cluster DNS
 
 Configure CoreDNS in the miniziti cluster. This is necessary no matter which host DNS resolver method you used above. 
 
@@ -462,6 +464,9 @@ helm install "testapi-host" openziti/httpbin \
    --set zitiServiceName=testapi-service
 ```
 
+  </TabItem>
+</Tabs>
+
 ## Load the Client Identity in your OpenZiti Tunneler
 
 Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/edge-client.jwt` (`\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
@@ -521,3 +526,26 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
    ```
 
 1. In your OpenZiti Tunneler, "Forget" your Identity.
+
+## minikube `ingress-dns` nameserver
+
+This option configures your host to use use the DNS addon we enabled earlier for DNS names like *.ziti. If you do this then you don't need to edit the `/etc/hosts` file at all.
+
+1. Make sure the DNS addon is working. Send a DNS query to the  address where the ingress nameserver is running.
+
+   ```bash
+   nslookup minicontroller.ziti $(minikube --profile miniziti ip)
+   ```
+
+   You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
+
+1. Configure your computer to always send certain DNS queries to the `ingress-dns` nameserver. Follow the steps in [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation) to configure macOS, Windows, or Linux's DNS resolver.
+
+   Now that your computer is set up to use the `minikube` DNS server for DNS names that end in *.ziti, you can test it again without specifying where to send the DNS query.
+
+   ```bash
+   # test your DNS configuration
+   nslookup minicontroller.ziti
+   ```
+
+   You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
