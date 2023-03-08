@@ -13,36 +13,32 @@ else
     shift
 fi
 
-EXCLUDE_PATTERN="https://("
+EXCLUDE_PATTERN="https?://("
 while read -r; do
     EXCLUDE_PATTERN+="${REPLY}|"
-done< <(cat <<EOF
+done<<EOF
 EXWPKK5PV4-dsn.algolia.net
-www.google.com/search
-www.googletagmanager.com
-mermaid-js.github.io
-mermaid.live
-mermaid.ink
-play.google.com/
-apps.apple.com/
-www.reddit.com/r/openziti
-github.com/.*/releases/latest/download/)
-(#docusaurus_skipToContent_fallback|\.(ziti(k8s)?|svc)(/[^.]+)?)
+www\.google\.com/search
+www\.googletagmanager\.com
+mermaid-js\.github.io
+mermaid\.live
+mermaid\.ink
+play\.google\.com
+apps\.apple\.com
+www\.reddit\.com/r/openziti
+.*#docusaurus_skipToContent_fallback$
+.*\.ziti
+.*\.zitik8s
+.*\.svc
 EOF
-)
-EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}$"
+# github\.com/.*/releases/latest/download
 
-case "$SERVER" in
-    *)
-        EXCLUDE="${EXCLUDE_PATTERN}"
-    ;;
-esac
+EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|})"
 
 docker run --rm --network=host raviqqe/muffet "${SERVER}" \
-    --color=always \
     --buffer-size=8192 \
-    --max-connections-per-host=5 \
+    --max-connections-per-host=1 \
     --header=User-Agent:curl/7.54.0 \
     --timeout=20 \
-    --exclude="$EXCLUDE" \
+    "--exclude=${EXCLUDE_PATTERN}" \
     "${@}"
