@@ -111,6 +111,10 @@ const config = {
             from: ['/ziti/security/authentication/external-jwt-signers.html'],
           },
           {
+            to: '/docs/guides/kubernetes/workload-tunneling/kubernetes-sidecar',
+            from: ['/guides/kubernetes/kubernetes-sidecar-tunnel-quickstart'],
+          },
+          {
             to: '/docs/learn/core-concepts/identities/enrolling',
             from: ['/ziti/identities/enrolling.html'],
           },
