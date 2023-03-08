@@ -166,11 +166,11 @@ sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.zit
 </Tabs>
 
 <Tabs>
-  <TabItem value="miniziti.bash" label="BASH Script" default>
+  <TabItem value="miniziti.bash" label="miniziti script" default>
 
-## BASH Script
+## miniziti Script
 
-You can run this script or perform the steps manually yourself. Click the "Manual Steps" tab directly above to switch your view. 
+You can run the miniziti shell script or perform the steps manually yourself. Click the "Manual Steps" tab directly above to switch your view. 
 
 It's recommended that you read the script before you run it. It's safe to re-run the script if it encounters a temporary problem.
 
@@ -180,8 +180,8 @@ To run the script you'll need to [download the file](./miniziti.bash) and run it
 bash ./miniziti.bash
 ```
 
-  </TabItem>
-  <TabItem value="manual" label="Manual Steps" default>
+</TabItem>
+<TabItem value="manual" label="Manual Steps" default>
 
 ## Manual Steps to Learn by Doing
 
@@ -527,7 +527,7 @@ helm install "testapi-host" openziti/httpbin \
    --set zitiServiceName=testapi-service
 ```
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Add the Client Identity
