@@ -52,10 +52,10 @@ tar -xf $(curl -s https://api.github.com/repos/openziti/ziti/releases/latest | j
 Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2~3MBs. Therefore, the module can not be uploaded to the existing nginx image. One needs to build a custom image and add the module to it during the build process.
 
 - Follow steps to build @[ngx-ziti-module](https://github.com/openziti/ngx_ziti_module/blob/main/README.md#build-using-cmake)
-- Follow Steps to create @[nginx ingress controller image](https://docs.nginx.com/nginx-ingress-controller/installation/building-ingress-controller-image/#building-the-image-and-pushing-it-to-the-private-registry)
+- Follow steps to create @[nginx ingress controller image](https://docs.nginx.com/nginx-ingress-controller/installation/building-ingress-controller-image/#building-the-image-and-pushing-it-to-the-private-registry)
 
 :::tip
-One way to update the build is to add to thier Dockerfile (`build/Dockerfile`) this snippet of code in the common section, i.e. `FROM ${BUILD_OS} as common`
+One way to update the build is to add to the Dockerfile (`build/Dockerfile`) this snippet of code under the common section, i.e. `FROM ${BUILD_OS} as common`
 ```shell
 # copy ziti module
 COPY  ./ngx_ziti_module.so /usr/lib/nginx/modules
@@ -104,7 +104,7 @@ Run terraform plan.
 :::info Steps
 ```shell
 git clone https://github.com/dariuszSki/openziti-nginx-ingress-terraform.git
-cd openziti-nginx-ingress-terraform/terraform/tf-provider
+cd openziti-nginx-ingress-terraform/tf-provider
 terraform init
 terraform plan  -var include_aks_nginx=true  -out aks
 terraform apply "aks"
@@ -152,7 +152,7 @@ set {
 
 - ***Configuration File - Main section block***
 :::info
-Services are commented out unitl they are created. Then, terraform plan can be rerun to enable them.
+Services are commented out until they are created. Then, terraform plan can be re-run to enable them.
 :::
 ```shell
 controller:
