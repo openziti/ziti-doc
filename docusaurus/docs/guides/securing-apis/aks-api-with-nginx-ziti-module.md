@@ -1,5 +1,5 @@
 ---
-title: AKS API with NGINX Ziti Module
+title: OpenZiti Ingress to Azure K8s Controll Plane
 ---
 
 ## Prerequisites
@@ -12,9 +12,9 @@ title: AKS API with NGINX Ziti Module
 ---
 ## Architecture:
 - Before
-![](../../../static/img/nginx-aks-before.svg)
+![](img/nginx-aks-before.svg)
 - After 
-![](../../../static/img/nginx-aks-after.svg)
+![](img/nginx-aks-after.svg)
 
 ---
 
@@ -28,9 +28,9 @@ Tested with OpenZiti Network deployed to the LKE Cluster using Terraform.
 
 ---
 
-## Create NGNIX Server and ZDE Client Identities
+## Create Identities
 
-Follow the guide @[Create Identities](../../learn/core-concepts/identities/overview#creating-an-identity)
+Follow the guide @[Create Identities](../../learn/core-concepts/identities/overview#creating-an-identity) for the ngx-ziti-module and windows client.
 
 :::tip
 client name = `client-nginx` with `Attribute`: `#clients`,  server module name = `server-nginx` with `Attribute`: `#servers`
@@ -38,18 +38,13 @@ client name = `client-nginx` with `Attribute`: `#clients`,  server module name =
 
 Download jwt files and enroll identities. 
 - Windows ZDE Identity can be enrolled following this [enrolling process](https://docs.openziti.io/docs/reference/tunnelers/windows#enrolling)
-- Nginx Module Identity can be enrolled using ziti binary by following this:
+- Nginx Module Identity can be enrolled by following [Enrolling an Identity Guide](../../learn/core-concepts/identities/20-enrolling.md)
 
-```shell
-wget $(curl -s https://api.github.com/repos/openziti/ziti/releases/latest | jq -r .assets[].browser_download_url | grep "linux-amd64")
-tar -xf $(curl -s https://api.github.com/repos/openziti/ziti/releases/latest | jq -r .assets[].name | grep "linux-amd64") 'ziti/ziti' --strip-components 1; rm $(curl -s https://api.github.com/repos/openziti/ziti/releases/latest | jq -r .assets[].name | grep "linux-amd64")
-./ziti edge enroll -j server-nginx.jwt -o server-nginx.json
-```
 ---
 
-# Build NGX Ziti Module and Ingress Controller Image
+## Build Docker Image
 
-Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2~3MBs. Therefore, the module can not be uploaded to the existing nginx image. One needs to build a custom image and add the module to it during the build process.
+Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2~3MBs. Therefore, the ziti module can not be uploaded to the existing nginx image. One needs to build a custom docker image and add the module to it during the build process.
 
 - Follow steps to build @[ngx-ziti-module](https://github.com/openziti/ngx_ziti_module/blob/main/README.md#build-using-cmake)
 - Follow steps to create @[nginx ingress controller image](https://docs.nginx.com/nginx-ingress-controller/installation/building-ingress-controller-image/#building-the-image-and-pushing-it-to-the-private-registry)
@@ -81,7 +76,7 @@ set {
 ```
 :::
 
-## Deploy AKS cluster
+## Deploy AKS Cluster
 
 Deploy the AKS Infrustructure in Azure using terraform. The terraform code is located @[OpenZiti Nginx Ingress Terraform Repo](https://github.com/dariuszSki/openziti-nginx-ingress-terraform.git). The following resources will be created, when the plan is applied.
 
