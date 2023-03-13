@@ -1,5 +1,5 @@
 ---
-title: OpenZiti Ingress to Azure K8s Controll Plane
+title: OpenZiti Ingress to Azure K8s Service
 ---
 
 ## Prerequisites
@@ -37,14 +37,14 @@ client name = `client-nginx` with `Attribute`: `#clients`,  server module name =
 :::
 
 Download jwt files and enroll identities. 
-- Windows ZDE Identity can be enrolled following this [enrolling process](https://docs.openziti.io/docs/reference/tunnelers/windows#enrolling)
+- Windows ZDE Identity can be enrolled by following this [enrolling process](https://docs.openziti.io/docs/reference/tunnelers/windows#enrolling)
 - Nginx Module Identity can be enrolled by following [Enrolling an Identity Guide](../../learn/core-concepts/identities/20-enrolling.md)
 
 ---
 
 ## Build Docker Image
 
-Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2~3MBs. Therefore, the ziti module can not be uploaded to the existing nginx image. One needs to build a custom docker image and add the module to it during the build process.
+Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2~3MBs. Therefore, it can not be uploaded to the existing nginx image. One needs to build a custom docker image and add it during the build process.
 
 - Follow steps to build @[ngx-ziti-module](https://github.com/openziti/ngx_ziti_module/blob/main/README.md#build-using-cmake)
 - Follow steps to create @[nginx ingress controller image](https://docs.nginx.com/nginx-ingress-controller/installation/building-ingress-controller-image/#building-the-image-and-pushing-it-to-the-private-registry)
