@@ -4,23 +4,28 @@ title: OpenZiti Ingress to Azure K8s Service
 
 ## Prerequisites
 
-  - Azure Subscription, Resource Group and [Azure Cli](https://learn.microsoft.com/en-us/cli/azure/)
-  - [OpenZiti Nginx Module Repo](https://github.com/openziti/ngx_ziti_module)
-  - [Terraform](https://developer.hashicorp.com/terraform/downloads)
-  - Openziti Network
-  - [Desktop Tunneler](https://docs.openziti.io/docs/reference/tunnelers/)
+- Azure Subscription, Resource Group and [Azure Cli](https://learn.microsoft.com/en-us/cli/azure/)
+- [OpenZiti Nginx Module Repo](https://github.com/openziti/ngx_ziti_module)
+- [Terraform](https://developer.hashicorp.com/terraform/downloads)
+- Openziti Network
+- [Desktop Tunneler](https://docs.openziti.io/docs/reference/tunnelers/)
+
 ---
-## Architecture:
+
+## Architecture
+
 - Before
-![](img/nginx-aks-before.svg)
+![Before](img/nginx-aks-before.svg)
+
 - After 
-![](img/nginx-aks-after.svg)
+![After](img/nginx-aks-after.svg)
 
 ---
 
 ## Create OpenZiti Network
 
 A couple of ways to do that:
+
 - Follow the guide @[Host OpenZiti](../../learn/quickstarts/network/hosted.md)
 - Follow the guide @[Terraform LKE Setup with OpenZiti](https://github.com/openziti-test-kitchen/terraform-lke-ziti/blob/main/README.md)
 
@@ -37,6 +42,7 @@ client name = `client-nginx` with `Attribute`: `#clients`,  server module name =
 :::
 
 Download jwt files and enroll identities. 
+
 - Windows ZDE Identity can be enrolled by following this [enrolling process](https://docs.openziti.io/docs/reference/tunnelers/windows#enrolling)
 - Nginx Module Identity can be enrolled by following [Enrolling an Identity Guide](../../learn/core-concepts/identities/20-enrolling.md)
 
@@ -51,23 +57,31 @@ Currently, configmaps have a binary file limit of 1MB and the size of the ngx-zi
 
 :::tip
 One way to update the build is to add to the Dockerfile (`build/Dockerfile`) this snippet of code under the common section, i.e. `FROM ${BUILD_OS} as common`
+
 ```shell
 # copy ziti module
 COPY  ./ngx_ziti_module.so /usr/lib/nginx/modules
+
 ```
+
 Also, need to add the following package `libc6` to the debian build in the same Dockerfile, i.e. `FROM nginx:1.23.3 AS debian`. Did not try the alpine build but the assumption is that would be the same.
+
 ```shell
 && apt-get install --no-install-recommends --no-install-suggests -y libcap2-bin libc6 \
 ```
+
 Lastly, if you don't want the image name to have a postfix of`SNAPSHOT...` , comment it out in `Makefile`.
+
 ```shell
 VERSION = $(GIT_TAG)##-SNAPSHOT-$(GIT_COMMIT_SHORT)
 ```
+
 :::
 
 Once the image is built, upload it to your container registry. You will need it during customization of the nginx ingress controller deployment to the AKS Cluster.
 :::note
 if you don't have time to build your own, can use our test image based on debian 11 and nginx v1.23.3 
+
 ```shell
 set {
     name = "controller.image.repository"
@@ -97,6 +111,7 @@ export ARM_TENANT_ID = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 Run terraform plan.
 :::info Steps
+
 ```shell
 git clone https://github.com/dariuszSki/openziti-nginx-ingress-terraform.git
 cd openziti-nginx-ingress-terraform/tf-provider
@@ -111,6 +126,7 @@ Once completed, grab  `cluster_public_fqdn` under `outputs` as shown in the exam
 cluster_name = "akssandeastus"
 cluster_private_fqdn = ""
 cluster_public_fqdn = "akssand-2ift1yqr.hcp.eastus.azmk8s.io"
+
 ```
 :::
 
@@ -119,6 +135,7 @@ cluster_public_fqdn = "akssand-2ift1yqr.hcp.eastus.azmk8s.io"
 If you are using your own deployment method, here are some configuration details from helm chart that need to be passed to the nginx ingress controller deployment.
 
 - ***Ziti Nginx Module Identity***
+
 ```shell
 nginx_ziti_identity = "${file("./server-nginx.json")}"
 resource "kubernetes_secret" "ziti-identity" {
@@ -133,6 +150,7 @@ resource "kubernetes_secret" "ziti-identity" {
 ```
 
 - ***Image Reference***
+
 ```shell
 set {
     name = "controller.image.repository"
@@ -148,7 +166,9 @@ set {
 - ***Configuration File - Main section block***
 :::info
 Services are commented out until they are created. Then, terraform plan can be re-run to enable them.
+
 :::
+
 ```shell
 controller:
   service:
@@ -170,6 +190,7 @@ controller:
 ```
 
 - ***Volume section and path to secrets. Added openziti.io folder.***
+
 ```bash
   volumes:
       - name: "ziti-nginx-files"
@@ -191,7 +212,9 @@ controller:
 ---
 
 ## OpenZiti Service Configurations
+
 - ***Create configs***
+
 ```shell
 ziti edge create config k8s-api-intercept.v1 intercept.v1 "{\"protocols\": [\"tcp\"], \"addresses\": [\"akssand-2ift1yqr.hcp.eastus.azmk8s.io\"],\"portRanges\": [{\"low\": 443,\"high\": 443}]}"
 ```
@@ -221,7 +244,9 @@ ziti edge create service-policy k8s-api-dial Dial --semantic "AnyOf" --identity-
 ---
 
 ## Enable Ziti Service in Ingress Controller
+
 Uncomment `ziti identity1` block in `resource.helm_release.nginx-ingress`
+
 ```shell
 config:
     entries:
@@ -238,13 +263,17 @@ config:
           }
         }
 ```
+
 :::caution
 Need to disable ZDE for this network before the next step, so the nginx updates will not get intercepted while the service is not ready yet.
 :::
+
 - ***Re-run terraform***
+
 ```bash
 terraform plan  -var include_aks_nginx=true  -out aks
 ```
+
 ```bash
 terraform apply "aks"
 ```
@@ -253,6 +282,7 @@ terraform apply "aks"
 
 :::tip
 If the terraform was run, the kube-config file was created in the tf root directory. One can also use `az cli` to get the kube config downloaded.
+
 ```shell
 # Configure your local kube configuration file using azure cli
 az login # if not already logged in
@@ -261,23 +291,30 @@ export RG_NAME = 'resource group name'
 export ARM_SUBSCRIPTION_ID =  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 az aks get-credentials --resource-group $RG_NAME --name {cluster_name} --subscription $ARM_SUBSCRIPTION_ID
 ```
+
 :::
 
 - ***Check context in the kubectl config file***
+
 ```shell
 kubectl config  get-contexts
 ```
+
 `Expected Output`
+
 ```shell
 CURRENT   NAME            CLUSTER         AUTHINFO                                           NAMESPACE
 *         akssandeastus   akssandeastus   clusterUser_nginx_module_rg_eastus_akssandeastus   
 ```
 
 - ***Let's check the status of nodes in the cluster.***
+
 ```shell
 kubectl get nodes
 ```
+
 `Expected Output`
+
 ```shell
 NAME                                STATUS   ROLES   AGE    VERSION
 aks-agentpool-20887740-vmss000000   Ready    agent   151m   v1.24.9
@@ -285,10 +322,13 @@ aks-agentpool-20887740-vmss000001   Ready    agent   151m   v1.24.9
 ```
 
 - ***List cluster info***
+
 ```shell
 kubectl cluster-info
 ```
+
 `Expected Output`
+
 ```shell
 Kubernetes control plane is running at https://akssand-2ift1yqr.hcp.eastus.azmk8s.io:443
 CoreDNS is running at https://akssand-2ift1yqr.hcp.eastus.azmk8s.io:443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
@@ -298,10 +338,13 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
 - ***List pods***
+
 ```shell
 kubectl get pods --all-namespaces
 ```
+
 `Expected Output`
+
 ```shell
 NAMESPACE     NAME                                           READY   STATUS    RESTARTS   AGE
 default       nginx-ingress-nginx-ingress-7ffd564557-ngt69   1/1     Running   0          134m
@@ -325,40 +368,54 @@ kube-system   metrics-server-8655f897d8-tnpzt                2/2     Running   0
 ```
 
 - ***List  services***
+
 ```shell
 kubectl get services --all-namespaces
 ```
+
 `Expected Output`
+
 ```shell
 NAMESPACE     NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)         AGE
 default       kubernetes       ClusterIP   10.0.0.1       <none>        443/TCP         169m
 kube-system   kube-dns         ClusterIP   10.0.0.10      <none>        53/UDP,53/TCP   169m
 kube-system   metrics-server   ClusterIP   10.0.218.224   <none>        443/TCP         169m
 ```
+
 :::note
 At this point the public access is still available even though the API Kubectl queries are routed through Ziti Network. You can disable ZDE client and test that.
 :::
+
 ## Block IPs to API Server
+
 Pass the following variable to only allow 192.168.1.1/32 source IP to essentially disable Public Access. 
+
 ```shell
 terraform plan  -var include_aks_nginx=true -var authorized_source_ip_list=[\"192.168.1.1/32\"] -out aks
 ```
+
 ```shell
 terraform apply "aks"
 ```
+
 Retest with ZDE enabled and disabled for this network.
 
 ## Clean up
+
 :::note
 Run terraform to open up the AKS API to public before deleting AKS resources, so you dont get locked out.
 :::
+
 ```shell
 terraform plan  -var include_aks_nginx=true -var authorized_source_ip_list=[\"0.0.0.0/0\"] -out aks
 ```
+
 ```shell
 terraform apply "aks"
 ```
+
 Delete all resources
+
 ```shell
 terraform plan  --destroy -var include_aks_nginx=true  -out aks
 ```
