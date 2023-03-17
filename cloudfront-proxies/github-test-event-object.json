@@ -8,7 +8,7 @@
     },
     "request": {
     "method": "GET",                                                             
-    "uri": "/spec/client.yml",
+    "uri": "/quick/ziti-cli-functions.sh",
     "headers": {
         "host": {"value": "get.openziti.io"}
     },
