@@ -88,7 +88,7 @@ This proxy's function modifies the viewer's request if it matches one of the sho
 |purpose|abbreviation|full URL path|
 |---|---|---|
 |quickstart functions|`/quick/`|`/openziti/ziti/main/quickstart/docker/image/`|
-|API specs|`/spec/`|`/openziti/edge/main/specs/`|
+|API specs|`/spec/`|`/openziti/edge-api/main/`|
 |Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
 |Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
 
@@ -102,40 +102,63 @@ Like the GitHub proxy, this proxy runs a CloudFront viewer request function ([sc
 
 You can perform these steps in the AWS Web Console or with `aws` CLI.
 
+* Find the name and "ETag" (changes when updated) of the CloudFront Function you wish to update.
+
+  ```bash
+  $ aws cloudfront list-functions | \
+    jq '.FunctionList.Items[]|select(.FunctionMetadata.Stage == "LIVE")|.Name'
+  "blog-viewer-request-function"
+  "github-raw-viewer-request-router"
+  ```
+
+  ```bash
+  $ aws cloudfront describe-function --name github-raw-viewer-request-router | \
+    jq '.ETag'
+"E135L1TOL8QIJF"
+  ```
+
 * Update the function's DEVELOPMENT stage in AWS. In the console you need to paste the new script and save it to update the development stage of the CloudFront function.
 
   ```bash
   aws cloudfront update-function \
     --name github-raw-viewer-request-router \
-    --function-code $(base64 -w0 < cloudfront-function-github-proxy.js) \
+    --function-code fileb://./cloudfront-proxies/cloudfront-function-github-proxy.js \
     --function-config '{"Runtime": "cloudfront-js-1.0","Comment": "update function"}' \
-    --if-match E3JWKAKR8XB7XF  # ETag from DescribeFunction
+    --if-match E135L1TOL8QIJF  # ETag from DescribeFunction
   ```
 
-* Test the function. You need to verify the request or response is modified in the expected way. You can do this in the web console with the "test" tab on the CloudFront function.
+* Find the new ETag (version ID) of the updated function
+
+  ```bash
+  $ aws cloudfront describe-function --name github-raw-viewer-request-router | \
+    jq '.ETag'
+"E3T4TT2Z381HKD"
+  ```
+
+* Test the function. You need to verify the request or response was handled expectedly. You can also do this in the web console with the "test" tab on the CloudFront function.
 
   ```bash
   aws cloudfront test-function \
-    --name github-raw-viewer-request-router \
-    --stage DEVELOPMENT \
-    --if-match E3JWKAKR8XB7XF \
-    --event-object $(base64 -w0 <<< '
+      --name github-raw-viewer-request-router \
+      --stage DEVELOPMENT \
+      --if-match E3T4TT2Z381HKD \
+      --event-object fileb://./github/ziti-doc/cloudfront-proxies/github-test-event-object.json | jq -r '.TestResult.FunctionOutput' | jq .
+  ```
+
+  ```json
   {
-    "version": "1.0",
-    "context": {
-      "eventType": "viewer-request"
-    },
-    "viewer": {
-      "ip": "1.2.3.4"
-    },
     "request": {
+      "headers": {
+        "host": {
+          "value": "get.openziti.io"
+        }
+      },
       "method": "GET",
-      "uri": "/tun/install.sh",
-      "headers": {},
-      "cookies": {},
-      "querystring": {}
+      "querystring": {},
+      "uri": "/openziti/ziti-tunnel-sdk-c/main/install.sh",
+      "cookies": {}
     }
-  }')
+  }
   ```
 
 * publish LIVE stage
@@ -143,5 +166,5 @@ You can perform these steps in the AWS Web Console or with `aws` CLI.
   ```bash
   aws cloudfront publish-function \      
     --name github-raw-viewer-request-router \
-    --if-match E3JWKAKR8XB7XF
+    --if-match E3T4TT2Z381HKD
   ```

@@ -7,12 +7,12 @@ function handler(event) {
       // quickstart functions are symlinked everywhere else
       case /^\/quick\/.*/i.test(uri):
         var re = /(^\/quick\/)(.*)/;
-        request.uri = uri.replace(re, '/openziti/ziti/main/quickstart/docker/image/$2');
+        request.uri = uri.replace(re, '/openziti/ziti/release-next/quickstart/docker/image/$2');
         break;
       // Edge API specs
       case /^\/spec\/.*/i.test(uri):
         var re = /(^\/spec\/)(.*)/;
-        request.uri = uri.replace(re, '/openziti/edge/main/specs/$2');
+        request.uri = uri.replace(re, '/openziti/edge-api/main/$2');
         break;
       // tunneler downloads like the package signing key and install script
       case /^\/(tun|pack)\/.*/i.test(uri):
