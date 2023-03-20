@@ -5,10 +5,9 @@ sidebar_position: 50
 
 If you are not familiar with it, [Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running
 multi-container Docker applications. It makes deploying multiple containers easy by using a declarative format defined
-via yaml.
-
-Ziti provides a Docker compose file that will get you up and running very quickly assuming you have both `docker`
-and `docker-compose` already installed in your system.
+via yaml. Note that this page uses ["Compose V2"](https://docs.docker.com/compose/compose-v2/). This means all the 
+commands shown will reference `docker compose`, not `docker-compose`. If you're using the older style of compose, 
+consider upgrading to the newer v2.
 
 ## Preparation - Required Files
 
@@ -18,7 +17,7 @@ First, grab the compose file from the
 Using curl that would look like this:
 
 ```bash
-curl -o docker-compose.yaml https://get.openziti.io/dock/docker-compose.yml
+curl -so docker-compose.yaml https://get.openziti.io/dock/docker-compose.yml
 ```
 
 Next, grab the
@@ -26,9 +25,9 @@ default [environment file](https://get.openziti.io/dock/.env)
 or just make a file in this folder that looks like this:
 
 ```bash
-curl -o .env https://get.openziti.io/dock/.env
+curl -so .env https://get.openziti.io/dock/.env
 ```
-or
+or, if you would prefer to make your .env file manually, create a file in some way such as using the command shown below:
 ```text
 cat > .env <<DEFAULT_ENV_FILE
 # OpenZiti Variables
@@ -60,27 +59,27 @@ Please see [this discussion](https://openziti.discourse.group/t/docker-compose-q
 ## Running via Docker Compose
 
 Once the compose file is downloaded and the `.env` file exists, you'll be able to start this network using
-docker-compose just like you can with any other compose file: `docker-compose up`
+`docker compose` just like you can with any other compose file: `docker compose up`
 
 :::note
 Docker compose will name your containers based on the folder you were in when you started them. For me, I've made a folder
 named `docker` so all my containers start with `docker_`. You can influence how this works by adding
-`--project-name docker` (or whatever name you like) to your docker-compose up/down commands
+`--project-name docker` (or whatever name you like) to your `docker compose` up/down commands
 ```bash
-docker-compose --project-name docker up 
+docker compose --project-name docker up 
 ```
 :::
 
 ### Stopping the Network
 
 This docker-compose file will generate a volume mount as well as a **two** docker networks. When you issue 
-`docker-compose --project-name docker down` the volume mapping will not be removed. If you wish to remove the volume, 
-you'll need to specify the `-v` flag to the `docker-compose` command. Leave the `-v` off your command if you want to just 
+`  --project-name docker down` the volume mapping will not be removed. If you wish to remove the volume, 
+you'll need to specify the `-v` flag to the `docker compose` command. Leave the `-v` off your command if you want to just 
 stop the containers without losing the controller database and PKI.
 
 ## Deployment Diagram
 
-This `docker-compose` file will create quite a few containers on your behalf. Here is an overview of the network that
+The docker-compose file will create quite a few containers on your behalf. Here is a logical overview of the network that
 will get created:
 
 ![docker-compose-overview.svg](./docker-compose-overview.svg)
@@ -143,7 +142,7 @@ if the algorithm indicates it's the fastest path. Perhaps we'll see more about t
 A quick note. If you are not well-versed with Docker you might forget that exposing ports in Docker is one thing,
 but you'll also need to have a hosts entry for the containers you want to access from outside the Docker
 network. This quickstart will expect that you understand this and for every router you add you will want to make
-sure you add a host entry. In the docker-compose example you will want/need hosts entries for at least: 
+sure you add a host entry. In the `docker compose` example you will want/need hosts entries for at least: 
 
 - `ziti-edge-controller`,
 - `ziti-edge-router`
@@ -152,13 +151,15 @@ And if you want to expose any other routers - of course you'll need/want to have
 
 ### Testing
 
-Now that we have used `docker-compose` to deploy a relatively complicated network, we can start testing it out to make
+Now that we have used `docker compose` to deploy a relatively complicated network, we can start testing it out to make
 sure everything is in place and looks correct. Let's try it out.
 
-To test, we will `docker-compose exec` into the running controller. 
+To test, we will `docker exec` into the running controller. Notice we'll be specifying the container and it's expected
+that the project was named "docker". If you don't start your compose using `--project-name docker`, use the proper
+exec command:
 
 ```bash
-docker-compose exec ziti-controller bash
+docker exec -it docker-ziti-controller-1 bash
 ```
 
 Once exec'ed into the controller, the `ziti` CLI will be added to your PATH for you. There is also the `zitiLogin`
@@ -193,7 +194,7 @@ We can see all the routers are online - excellent.
 ### Test - Edge Router Identities
 
 In this compose file, we have used a script that adds an identity for each of our edge routers as well. We can see those
-by running `ziti@724087d30014:/persistent$ ziti edge list identities`:
+by running `ziti edge list identities`:
 
 ```bash
 ziti@724087d30014:/persistent$ ziti edge list identities
@@ -215,7 +216,8 @@ Notice there is an identity for every router.
 
 ### Test - Network Connectivity Success
 
-Recall that the controller should be able to contact both the red and blue edge routers. Let's use ping and verify:
+Recall that the controller should be able to contact both the red and blue edge routers using the underlay network.
+Let's use ping and verify:
 
 ```bash
 ziti@724087d30014:/persistent$ ping ziti-private-red -c 1
@@ -235,10 +237,10 @@ PING ziti-private-blue (172.28.0.6): 56 data bytes
 round-trip min/avg/max/stddev = 0.633/0.633/0.633/0.000 ms
 ```
 
-### Test - Network Connectivity Failure
+### Test - Underlay Network Connectivity Failure
 
 Now let's exit the Ziti controller and instead attach to the private blue router by running this command:
-`docker-compose exec ziti-private-blue bash`.  Once attached to the blue router we'll verify that we cannot
+`docker exec -it docker-ziti-private-blue-1 bash`.  Once attached to the blue router we'll verify that we cannot
 connect to the private red router:
 
 ```bash
@@ -248,7 +250,7 @@ ping: unknown host
 
 Unknown host - the private blue router cannot connect to the red router.
 
-### Test - Web Test Blue
+### Test - Underlay Network Web Test Blue
 
 While we're attached to the blue router - let's make sure we can connect to that `web-test-blue` server.  
 ```bash
