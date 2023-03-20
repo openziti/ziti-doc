@@ -96,9 +96,9 @@ OpenZiti has grown to have many, many repositories. Here are just a few notable 
   * [foundation](https://github.com/openziti/foundation): project which contains library code used across multiple projects
   * SDKs
     * [ziti-sdk-c](https://github.com/openziti/ziti-sdk-c): C SDK
-    * [sdk-golang](https://github.com/openziti/sdk-golang): Go SDK
+    * [ziti-sdk-golang](https://github.com/openziti/sdk-golang): Go SDK
     * [ziti-sdk-jvm](https://github.com/openziti/ziti-sdk-jvm): SDK for JVM based languages
-    * [ziti-sdk-csharp](https://github.com/openziti/ziti-sdk-py): Python SDK
+    * [ziti-sdk-py](https://github.com/openziti/ziti-sdk-py): Python SDK
     * [ziti-sdk-swift](https://github.com/openziti/ziti-sdk-swift): Swift SDK
     * [ziti-sdk-nodejs](https://github.com/openziti/ziti-sdk-nodejs): NodeJS SDK
     * [ziti-sdk-csharp](https://github.com/openziti/ziti-sdk-csharp): C# SDK
