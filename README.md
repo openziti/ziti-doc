@@ -27,7 +27,11 @@ so that warnings are treated as errors.
 
 Expected usage: `./gendoc.sh -c`
 
-You can then run `cd ./docusaurus && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
+```
+NOTE: you must be configured to run NodeJS >=16.14 before running the next command.
+```
+
+You can then run `cd ./docusaurus && yarn install && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
 
 ## Publish by Running CI Equivalent Locally
 
