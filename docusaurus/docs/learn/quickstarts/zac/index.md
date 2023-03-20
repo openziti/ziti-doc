@@ -114,46 +114,9 @@ internet search should show you how to accomplish this.
 
 ## Docker Compose
 
-If you have followed the [docker compose quickstart](../network/local-docker-compose) getting the ZAC
-running within the compose file is a bit cumbersome because the docker-compose file will generate a full PKI on your
-behalf. While this makes it very easy to get a basic network setup, it makes reusing that PKI in the ZAC difficult at
-this time.  It's not difficult to reuse the PKI but you'll need to do the following:
-
-1. Start the network using `docker-compose` as normal.
-2. After running, copy the `ziti-edge-controller` server certificate chain and key from the controller using these commands:
-
-   ```bash
-   docker cp docker_ziti-controller_1:/var/openziti/pki/ziti-edge-controller-intermediate/keys/ziti-edge-controller-server.key .
-   docker cp docker_ziti-controller_1:/var/openziti/pki/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem .
-   ```
-
-3. Once these files are copied out, shut down the running docker-compose `docker-compose down`. Do NOT remove the volume
-   with `-v`.
-4. Now add the ZAC configuration lines to the compose file of your choice:
-
-   ```bash
-     ziti-console:
-       image: openziti/zac
-       ports:
-         - "1408:1408"
-         - "8443:8443"
-       environment:
-         - ZITI_EDGE_CONTROLLER_HOSTNAME=ziti-edge-router
-       volumes:
-         - ziti-fs:/openziti
-         - type: bind
-           source: ./ziti-edge-controller-server.key
-           target: /usr/src/app/server.key
-         - type: bind
-           source: ./ziti-edge-controller-server.chain.pem
-           target: /usr/src/app/server.chain.pem
-
-       networks:
-         - zitiblue
-         - zitired
-   ```
-
-5. After adding the ZAC configuration as shown, `docker-compose` will now start and expose the ZAC ports on 1408/8443.
+If you have followed the [docker compose quickstart](../network/local-docker-compose) you will have the ZAC
+running already. It's now included with both the default docker-compose file and the simplified-docker-compose file. 
+Both compose files will start and expose the ZAC ports on 1408/8443.
 
 :::note
 Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
