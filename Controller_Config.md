@@ -12,8 +12,11 @@ apt upgrade
 The first issue you will need to deal with is opening some ports. A network will consist of at least one controller and at least one edge router. Both of these components will require ports to be open. For the controller you will need to open a range of ports through your firewall. Any additional Ports you need to allow in the firewall.
 
 8440/tcp: Edge Controller providing router control plane
+
 8441/tcp: Edge Controller providing client sessions
+
 8442/tcp: Edge Router providing client connections
+
 8443/tcp: Ziti Admin Console (ZAC) [optional]
 
 # Prerequisites
@@ -199,7 +202,8 @@ root@OMSINER:~# sudo systemctl -q status ziti-controller --lines=0 --no-pager
 root@OMSINER:~#sudo systemctl -q status ziti-router --lines=0 --no-pager
 ```
 Output:
-● ziti-controller.service - Ziti-Controller
+```
+ziti-controller.service - Ziti-Controller
      Loaded: loaded (/etc/systemd/system/ziti-controller.service; enabled; preset: enabled)
      Active: active (running) since Tue 2023-02-28 07:23:29 UTC; 3min 2s ago
    Main PID: 20883 (ziti-controller)
@@ -208,7 +212,7 @@ Output:
         CPU: 1.065s
      CGroup: /system.slice/ziti-controller.service
              └─20883 /root/.ziti/quickstart/OMSINER/ziti-bin/ziti-v0.27.5/ziti-controller run /root/.ziti/quickstart/OMSINER/OMSINER.yaml
-● ziti-router.service - Ziti-Router for OMSINER-edge-router
+ziti-router.service - Ziti-Router for OMSINER-edge-router
      Loaded: loaded (/etc/systemd/system/ziti-router.service; enabled; preset: enabled)
      Active: active (running) since Tue 2023-02-28 07:23:32 UTC; 2min 59s ago
    Main PID: 20927 (ziti-router)
@@ -217,7 +221,7 @@ Output:
         CPU: 1.049s
      CGroup: /system.slice/ziti-router.service
              └─20927 /root/.ziti/quickstart/OMSINER/ziti-bin/ziti-v0.27.5/ziti-router run /root/.ziti/quickstart/OMSINER/OMSINER-edge-ro…
-
+```
 Adding Environment Variables Back to the Shell
 ```
 root@OMSINER:~# source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
