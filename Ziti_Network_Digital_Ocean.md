@@ -174,8 +174,8 @@ Log from BLR ER
 ![Diagram](BLR_ER.png)
  
 
-3- Verification from ompc1 window pc to SSHSG client.
-![Diagram](ompc1_window_pc_SSHSG _client.png)
+3- Verification from ompc1 window pc to SSHSG client:
+![Diagram](ompc1_window_pc_SSHSG_client.png)
 
 Log from OMSGER1
 ![Diagram](Log_from_OMSGER.png)
