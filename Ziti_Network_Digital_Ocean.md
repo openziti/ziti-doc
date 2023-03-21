@@ -164,7 +164,7 @@ add Ip route 100.64.0.0/10 in ssh client machine towards the SG ER
 
 Log from the Bangalore ER 10.47.0.6
 
-![Diagram](log from BLR ER.png)
+![Diagram]("log from BLR ER.png")
 
 2- Verification from Ubuntu tunneler OMSGUBUNTU to access the BGLCL.ziti(SSH server) using BLR ER
 
