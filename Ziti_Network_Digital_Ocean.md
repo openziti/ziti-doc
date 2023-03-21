@@ -20,16 +20,16 @@ root@OMSINCN:~/.ziti/quickstart/OMSINCN/ziti-bin/ziti-v0.27.5# ./ziti edge list 
 ╭────────────┬─────────────────────┬────────┬────────────╮
 │ ID         │ NAME                │ TYPE   │ ATTRIBUTES │
 ├────────────┼─────────────────────┼────────┼────────────┤
-│ 2Be.AE7vjV │ ubuntusg            │ User   │            │
+│ 2Be.AE7vjV │ ubuntusg            │ User   │ ubuntu     │
 │ 8oY.X-0P3  │ Default Admin       │ User   │            │
-│ O2cJOpOg.  │ ompc1               │ User   │ window     │
-│ Pr-BsNRg.t │ new-router          │ Router │            │
 │ Za3OWM7WjV │ sg-router           │ Router │ sgrouter   │
 │ e7s-nE7vjV │ omwnd               │ User   │ ompc1      │
 │ ifhU9roHY  │ bgl-router1         │ Router │ blrtr      │
 │ rmVPzLyEc  │ OMSINCN-edge-router │ Router │            │
 ╰────────────┴─────────────────────┴────────┴────────────╯
+
 ```
+
 Note: Admin type identities can access all the bind configuration without adding that identities into the dial policy. and user identities can access the only config that has assign the user into dial policy.
 
 # Configuration of SSH service
@@ -150,4 +150,12 @@ More usefull command from controller:
 ./ziti fabric list services
 
 ./ziti fabric list terminators
+```
+Delete the Identity
+```
+./ziti edge delete identity user ompc1
+```
+Update the identity
+```
+./ziti edge update identity ubuntusg -a ubuntu
 ```
