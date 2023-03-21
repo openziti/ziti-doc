@@ -175,9 +175,10 @@ root@OMSINER:~# createControllerSystemdFile
 createRouterSystemdFile "${ZITI_EDGE_ROUTER_RAWNAME}"
 ```
 Output:
+```
 Controller systemd file written to: /root/.ziti/quickstart/OMSINER/OMSINER.service
 Router systemd file written to: /root/.ziti/quickstart/OMSINER/OMSINER-edge-router.service
-
+```
 Before you run the controller and router with systemd you need to stop them if they're currently running.
 ```
 sudo systemctl stop --now ziti-controller
