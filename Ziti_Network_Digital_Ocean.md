@@ -3,24 +3,36 @@ Use follwing setup to create the ziti network
 ![Diagram](DO_network.png)
 Ziti controller configuration:
 
-1- identities configuration: 
-
-Create an identity for the ssh client and assign an attribute "ubuntusg" for ubuntu tunneler and “ompc1” for window PC. We'll use this attribute when authorizing the clients to access the ssh service.
-
-Note: Create an identity for the ssh server if you are not using an edge-router with the tunneling option enabled. In our case we didn’t create the ssh server identity as BLR ER accting as a ER with tunnel options for SSH server.
-
-access the HTTP service
-
-Cli Method:
-
+# 1- identities configuration: 
 login to controller API in the path of ziti binary home directry:
 ```
 ./ziti edge login localhost:8441 
 ```
+Create an identity for the open ziti clients and assign an attribute. I use "ubuntusg" for ubuntu tunneler and “ompc1” for window PC. We'll use this attribute when I'll configure the ssh service.
+```
+./ziti edge create identity user ompc1 -a window -o ompc1.jwt
+./ziti edge create identity user ubuntusg -a ubuntu -o ubuntusg.jwt
+```
+Verification of Identity configuration:
 
-Same way we will configure the server side identites configuration.
-
+```
+root@OMSINCN:~/.ziti/quickstart/OMSINCN/ziti-bin/ziti-v0.27.5# ./ziti edge list identities
+╭────────────┬─────────────────────┬────────┬────────────╮
+│ ID         │ NAME                │ TYPE   │ ATTRIBUTES │
+├────────────┼─────────────────────┼────────┼────────────┤
+│ 2Be.AE7vjV │ ubuntusg            │ User   │            │
+│ 8oY.X-0P3  │ Default Admin       │ User   │            │
+│ O2cJOpOg.  │ ompc1               │ User   │ window     │
+│ Pr-BsNRg.t │ new-router          │ Router │            │
+│ Za3OWM7WjV │ sg-router           │ Router │ sgrouter   │
+│ e7s-nE7vjV │ omwnd               │ User   │ ompc1      │
+│ ifhU9roHY  │ bgl-router1         │ Router │ blrtr      │
+│ rmVPzLyEc  │ OMSINCN-edge-router │ Router │            │
+╰────────────┴─────────────────────┴────────┴────────────╯
+```
 Note: Admin type identities can access all the bind configuration without adding that identities into the dial policy. and user identities can access the only config that has assign the user into dial policy.
+
+# Configuration of SSH service
 
 2- Create the intercept.v1 and host.v1 configuration:
 
@@ -30,38 +42,28 @@ Create a host.v1 config. This config is used instruct the server-side tunneler h
 
 
 BLR Host config
-
-
+```
+./ziti edge create config BLR-host-config host.v1 '{"protocol":"tcp", "address":"'"10.47.0.6"'", "port":22}'
+```
 BLR intercept config
-
-
-SG host config
-
-
-sgintercept config
-
-
- 
 ```
 ./ziti edge create config BLR-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["BLRCL.ziti"], "portRanges": [{"low": 22, "high": 22}]}'
-
-./ziti edge create config BLR-host-config host.v1 '{"protocol":"tcp", "address":"'"10.47.0.6"'", "port":22}'
-
+```
+SG host config
+```
+./ziti edge create config sghost.v1 host.v1 '{"protocol":"tcp", "address":"'"10.114.0.2"'", "port":22}'
+```
+sgintercept config
+ 
+```
 ./ziti edge create config sgintercept intercept.v1 '{"protocols": ["tcp"], "addresses": ["sgclient.ziti"], "portRanges": [{"low": 22, "high": 22}]}'
 
-./ziti edge create config sghost.v1 host.v1 '{"protocol":"tcp", "address":"'"10.114.0.2"'", "port":22}'
 ```
 
 3- Services Configurations:
 
 Create a service to associate the two configs created previously into a service. BGLSR use to create services for the BGL ER and server. SGRTRSR use to create the services for SG ER/ SG client.
 
-
-
-
- 
-
-CLI:
 ```
 ./ziti edge create service BGLSR -c BLR-intercept-config,BLR-host-config -a blrrouter
 
@@ -85,17 +87,17 @@ Following command with create the bind policy to bind the SG ssh client/10.15.0.
 Following command with create the dial policy from SG ER(sgrouter)/ompc1 to dial the BLR server/10.47.0.5  to BLR ER.
 ```
 ./ziti edge create service-policy sshtoblrfromsgcl.dial Dial --service-roles '@BGLSR' --identity-roles "#sgrouter"
-
-./ziti edge create service-policy sshtoblrfrompc.dial Dial --service-roles "@BGLSR" --identity-roles '#ompc1'
-
 ```
-Following command with create the dial policy from ubuntu tunneler (ubuntusg)/BRL server/BLR ER (blrtr) to dial the SG ssh client using SG ER (SGRTRSR).
+Following command will create the dial policy from ompc1 (window client to dial the Bangalore ssh server using Bangalore ER (BGLSR).
+```
+./ziti edge create service-policy sshtoblrfrompc.dial Dial --service-roles "@BGLSR" --identity-roles '#ompc1'
+```
+Following command will create the dial policy from ubuntu tunneler (ubuntusg)/BRL server/BLR ER (blrtr) to dial the SG ssh client using SG ER (SGRTRSR).
 
 ```
 ./ziti edge create service-policy sshtoblrfromtunneler.dial Dial --service-roles "@SGRTRSR" --identity-roles '@ubuntusg'
 ```
 
- 
 
 5- ER policy(optional):
 
