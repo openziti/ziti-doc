@@ -1,9 +1,9 @@
 # Create new router using open ziti
 
  Update the VM 
- ```
+```
  apt update
-``
+```
 Update the VM 
 ```
 apt upgrade
