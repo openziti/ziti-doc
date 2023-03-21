@@ -1,13 +1,16 @@
 # Create new router using open ziti
 
  Update the VM 
+ 
 ```
- apt update
+apt update
 ```
+
 Update the VM 
 ```
 apt upgrade
 ```
+
 Install binary into the ziti home directory using any of following 2 methods
 ```
 source /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/openziti/ziti/db71b1a4a6d70feff70cde3962d2c9f9148a0dd5/quickstart/docker/image/ziti-cli-functions.sh)" getZiti
