@@ -78,6 +78,7 @@ forwarder:
  ```
  mkdir certs
 ```
+Edge login to controller
 ```
  ./ziti edge login "CONTROLLER PUB_IP":8441   #Where 8441 is the  ZITI_EDGE_CONTROLLER_PORT. You have to provide the user name and password which you created at the time of controller installation default username is admin.
 ```
