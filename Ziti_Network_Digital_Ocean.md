@@ -171,7 +171,7 @@ Log from the Bangalore ER 10.47.0.6
 ![Diagram](from Ubuntu tunneler OMSGUBUNTU to access the BGLCL.ziti(SSH server) using BLR ER.png)
 Log from BLR ER 
 
-![Diagram](BLR ER.png)
+![Diagram](BLR_ER.png)
  
 
 3- Verification from ompc1 window pc to SSHSG client.
