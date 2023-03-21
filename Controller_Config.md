@@ -193,9 +193,10 @@ sudo systemctl enable --now ziti-controller
 sudo systemctl enable --now ziti-router
 ```
 Output:
+```
 Created symlink /etc/systemd/system/multi-user.target.wants/ziti-controller.service → /etc/systemd/system/ziti-controller.service.
 Created symlink /etc/systemd/system/multi-user.target.wants/ziti-router.service → /etc/systemd/system/ziti-router.service.
-
+```
 Check the status of router and controller:
 ```
 root@OMSINER:~# sudo systemctl -q status ziti-controller --lines=0 --no-pager
@@ -227,12 +228,16 @@ Adding Environment Variables Back to the Shell
 root@OMSINER:~# source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 ```
 Output:
+```
   adding /root/.ziti/quickstart/OMSINER/ziti-bin/ziti-v0.27.5 to the path
+```
 ```
 echo $ZITI_HOME
 ```
+Output:
+```
 /root/.ziti/quickstart/OMSINER
-
+```
  
 
 Change Ziti edge admin password:
