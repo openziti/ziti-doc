@@ -17,7 +17,7 @@ Create config.yaml in the binary installed directory like ZITI_HOME=~/.ziti/quic
 Note: By default ER router config will be on tproxy mode. Host made only requres on Public router or hosted router. Never use host mode on private router or Egress edge router.
 
   Example of config.yaml
-  v: 3
+v: 3
 identity:
      cert: "certs/identity.cert.pem"
      server_cert: "certs/internal.chain.cert.pem"
