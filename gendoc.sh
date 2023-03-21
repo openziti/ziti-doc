@@ -64,7 +64,9 @@ if [[ "${SKIP_GIT}" == no ]]; then
   if [[ "${SKIP_CLEAN}" == no ]]; then
     rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
   fi
-  git config --global --add safe.directory $(pwd)
+  if ! git config --global --get safe.directory | grep -qE "^$(pwd)$"; then
+    git config --global --add safe.directory "$(pwd)"
+  fi
   clone_or_pull "https://github.com/openziti/ziti" "ziti-cmd"
   clone_or_pull "https://github.com/openziti/ziti-sdk-csharp" "ziti-sdk-csharp"
   clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c"
