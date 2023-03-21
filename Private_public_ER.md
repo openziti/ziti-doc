@@ -111,8 +111,11 @@ Verify the create edge router using
 ```
 ./ziti edge list edge-routers
 ```
- To automate the command ./ziti-router run configom.yaml 
-
+Run the edge router using config.yaml file
+```
+./ziti-router run config.yaml
+```
+To automate the command ./ziti-router run config.yaml 
 Create the router.service in same directry where ziti binary downloaded
 ```
 root@ubuntu-s-1vcpu-2gb-amd-blr1-01:~/.ziti/quickstart/ubuntu-s-1vcpu-2gb-amd-blr1-01/ziti-bin/ziti-v0.27.5# cat router.service
@@ -123,7 +126,7 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/root/.ziti/quickstart/ubuntu-s-1vcpu-2gb-amd-blr1-01/ziti-bin/ziti-v0.27.5
-ExecStart="/root/.ziti/quickstart/ubuntu-s-1vcpu-2gb-amd-blr1-01/ziti-bin/ziti-v0.27.5/ziti-router" run "/root/.ziti/quickstart/ubuntu-s-1vcpu-2gb-amd-blr1-01/ziti-bin/ziti-v0.27.5/configom.yaml"
+ExecStart="/root/.ziti/quickstart/ubuntu-s-1vcpu-2gb-amd-blr1-01/ziti-bin/ziti-v0.27.5/ziti-router" run "/root/.ziti/quickstart/ubuntu-s-1vcpu-2gb-amd-blr1-01/ziti-bin/ziti-v0.27.5/config.yaml"
 Restart=always
 RestartSec=2
 LimitNOFILE=65536
