@@ -59,7 +59,18 @@ sgintercept config
 ./ziti edge create config sgintercept intercept.v1 '{"protocols": ["tcp"], "addresses": ["sgclient.ziti"], "portRanges": [{"low": 22, "high": 22}]}'
 
 ```
-
+Verification:
+```
+root@OMSINCN:~/.ziti/quickstart/OMSINCN/ziti-bin/ziti-v0.27.5# ./ziti edge list configs
+╭────────────────────────┬──────────────────────┬──────────────╮
+│ ID                     │ NAME                 │ CONFIG TYPE  │
+├────────────────────────┼──────────────────────┼──────────────┤
+│ 2gERkdMbLrkEjhLFvLfsg4 │ sghost.v1            │ host.v1      │
+│ 2vPdGVT3vCH98l2JDJMIRx │ BLR-intercept-config │ intercept.v1 │
+│ 4b58WogYO3gdX8M4pPE5zM │ BLR-host-config      │ host.v1      │
+│ 6h7qQaAKKs94hBBYgAxwZe │ sgintercept          │ intercept.v1 │
+╰────────────────────────┴──────────────────────┴──────────────╯
+```
 3- Services Configurations:
 
 Create a service to associate the two configs created previously into a service. BGLSR use to create services for the BGL ER and server. SGRTRSR use to create the services for SG ER/ SG client.
@@ -69,7 +80,17 @@ Create a service to associate the two configs created previously into a service.
 
 ./ziti edge create service SGRTRSR -c sgintercept,sghost.v1 -a sgrtrsr
 ```
-
+Verification:
+```
+root@OMSINCN:~/.ziti/quickstart/OMSINCN/ziti-bin/ziti-v0.27.5# ./ziti edge list services
+╭────────────────────────┬─────────┬────────────┬─────────────────────┬────────────╮
+│ ID                     │ NAME    │ ENCRYPTION │ TERMINATOR STRATEGY │ ATTRIBUTES │
+│                        │         │  REQUIRED  │                     │            │
+├────────────────────────┼─────────┼────────────┼─────────────────────┼────────────┤
+│ 1E6o9mZCnhEj4IQQtQcRX6 │ BGLSR   │ true       │ smartrouting        │ blrrouter  │
+│ 5lJnz6KyrXx61IIOfLLBV5 │ SGRTRSR │ true       │ smartrouting        │ sgrtrsr    │
+╰────────────────────────┴─────────┴────────────┴─────────────────────┴────────────╯
+```
 
 4- Dial and Bind Service policy:
 
@@ -97,16 +118,40 @@ Following command will create the dial policy from ubuntu tunneler (ubuntusg)/BR
 ```
 ./ziti edge create service-policy sshtoblrfromtunneler.dial Dial --service-roles "@SGRTRSR" --identity-roles '@ubuntusg'
 ```
-
+Verification:
+```
+root@OMSINCN:~/.ziti/quickstart/OMSINCN/ziti-bin/ziti-v0.27.5# ./ziti edge list service-policies
+╭────────────────────────┬───────────────────────────┬──────────┬───────────────┬────────────────┬─────────────────────╮
+│ ID                     │ NAME                      │ SEMANTIC │ SERVICE ROLES │ IDENTITY ROLES │ POSTURE CHECK ROLES │
+├────────────────────────┼───────────────────────────┼──────────┼───────────────┼────────────────┼─────────────────────┤
+│ 2a8yWpDXxo3j0um6Ea2kUL │ ssh.policy.bind           │ AllOf    │ @BGLSR        │ #blrtr         │                     │
+│ 3me18dnmfEnRcqvIX7WNb0 │ sshtoblrfrompc.dial       │ AllOf    │ @SGRTRSR      │ #ompc1         │                     │
+│ 7JI53KtE8xEkxExgWrAyky │ sshtoblrfromsgcl.dial     │ AllOf    │ @BGLSR        │ #sgrouter      │                     │
+│ 7g5cKQxYJYpOzaf9k8pBwh │ sshtoblrfromtunneler.dial │ AllOf    │ @BGLSR        │ @ubuntusg      │                     │
+│ sJQ1SvXCLeUYYcRoZozc   │ sshsgbind                 │ AllOf    │ @SGRTRSR      │ #sgrouter      │                     │
+╰────────────────────────┴───────────────────────────┴──────────┴───────────────┴────────────────┴─────────────────────╯
+```
 
 5- ER policy(optional):
 
 By default all the services will bind to all ER. We can manualy change the router policy using bellow.
 ```
-./ziti edge create service-edge-router-policy ssh-serp --edge-router-roles #all --service-roles #all
+./ziti edge create service-edge-router-policy ssh-erpolicy --edge-router-roles '#all' --service-roles '#all' --semantic 'AnyOf'
+
+```
+Verification
+```
+root@OMSINCN:~/.ziti/quickstart/OMSINCN/ziti-bin/ziti-v0.27.5# ./ziti edge list edge-router-policies                                     ╭────────────────────────┬───────────────────────────────┬──────────────────────┬──────────────────────╮
+│ ID                     │ NAME                          │ EDGE ROUTER ROLES    │ IDENTITY ROLES       │
+├────────────────────────┼───────────────────────────────┼──────────────────────┼──────────────────────┤
+│ 3qIkMiF4scQBJ75I49brvz │ allEdgeRouters                │ #public              │ #all                 │
+│ Za3OWM7WjV             │ edge-router-Za3OWM7WjV-system │ @sg-router           │ @sg-router           │
+│ ifhU9roHY              │ edge-router-ifhU9roHY-system  │ @bgl-router1         │ @bgl-router1         │
+│ rmVPzLyEc              │ edge-router-rmVPzLyEc-system  │ @OMSINCN-edge-router │ @OMSINCN-edge-router │
+╰────────────────────────┴───────────────────────────────┴──────────────────────┴──────────────────────╯
 ```
 
-Varification:
+Client testing Varification:
 
 1- accessing the BLR ssh server(206.189.136.247) from SG ssh client(OMSGCL2)
 
