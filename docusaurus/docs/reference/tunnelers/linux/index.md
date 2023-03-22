@@ -79,6 +79,7 @@ sudo apt install ziti-edge-tunnel
 Architectures available:
 
 * x86_64
+* arm64
 
 ```bash
 curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
