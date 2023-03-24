@@ -159,26 +159,26 @@ add Ip route 100.64.0.0/10 in ssh client machine towards the SG ER
 
 100.64.0.0/10 via 10.104.0.3 dev eth1 proto static
 
-![Diagram](BLR_ssh_server_from_SG_ssh_client.png)
+![](Ziti_Network_om/imag/BLR_ssh_server_from_SG_ssh_client.png)
  
 
 Log from the Bangalore ER 10.47.0.6
 
-![Diagram](log_from_BLR_ER.png)
+![](Ziti_Network_om/imag/log_from_BLR_ER.png)
 
 2- Verification from Ubuntu tunneler OMSGUBUNTU to access the BGLCL.ziti(SSH server) using BLR ER
 
-![Diagram](from_Ubuntu_tunneler_OMSGUBUNTU_to_access_BGLCL.ziti.png)
+![](Ziti_Network_om/imag/from_Ubuntu_tunneler_OMSGUBUNTU_to_access_BGLCL.ziti.png)
 Log from BLR ER 
 
-![Diagram](BLR_ER.png)
+![](Ziti_Network_om/imag/BLR_ER.png)
  
 
 3- Verification from ompc1 window pc to SSHSG client:
-![Diagram](ompc1_window_pc_SSHSG_client.png)
+![](Ziti_Network_om/imag/ompc1_window_pc_SSHSG_client.png)
 
 Log from OMSGER1
-![Diagram](Log_from_OMSGER.png)
+![](Ziti_Network_om/imag/Log_from_OMSGER.png)
 
  
 
