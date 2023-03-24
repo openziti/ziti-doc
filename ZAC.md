@@ -81,4 +81,4 @@ set edge controller name as the hostname of the controller
 set url https://hostname:8441  click the setcontroller
 
 login the username and password
-![Diagram](console.png)
+![](Ziti_Network_om/imag/console.png)
