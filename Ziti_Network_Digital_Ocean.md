@@ -1,6 +1,6 @@
 Use follwing setup to create the ziti network
 
-![Diagram](DO_network.png)
+![](images/DO_network.png)
 Ziti controller configuration:
 
 # 1- identities configuration: 
