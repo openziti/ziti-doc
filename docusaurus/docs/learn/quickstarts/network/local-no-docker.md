@@ -31,8 +31,8 @@ Running the latest version of Ziti locally is as simple as running this one comm
 
 This script will perform an 'express' install of Ziti which does the following:
 
-* download the latest version of the Ziti components (`ziti`, `ziti-controller`, `ziti-router`, `ziti-tunnel`)
-* extract the components into a predefined location: ~/.ziti/quickstart/$(hostname -s)
+* download the latest version of the OpenZiti binary (`ziti`)
+* extract the binary into a predefined location: ~/.ziti/quickstart/$(hostname -s)
 * create a full PKI for you to explore
 * create a controller configuration using default values and the PKI created above
 * create an edge-router configuration using default values and the PKI created above 
@@ -41,7 +41,7 @@ This script will perform an 'express' install of Ziti which does the following:
 ## Start the Components
 
 Once the latest version of Ziti has been downloaded and added to your path, it's time to start your controller and 
-edge router.
+edge-router.
 
 ## Start Your Controller
 
