@@ -16,7 +16,7 @@ terraform {
         }
         kubernetes = {
             source  = "hashicorp/kubernetes"
-            version = "2.0.1"
+            version = "~> 2.19"
         }
         restapi = {
             source = "qrkourier/restapi"
@@ -56,13 +56,18 @@ provider restapi {
     ziti_password         = (data.terraform_remote_state.controller_state.outputs.ziti_admin_password).data["admin-password"]
 }
 
-module "minirouter2" {
+module "public_routers" {
+    source       = "/home/kbingham/Sites/netfoundry/github/terraform-lke-ziti/modules/public-router-policies"
+    router_roles = ["#public-routers"]
+}
+
+module "router" {
     source                    = "/home/kbingham/Sites/netfoundry/github/terraform-lke-ziti/modules/ziti-router-nginx"
-    name                      = "minirouter2"
+    name                      = var.router_name
     namespace                 = data.terraform_remote_state.controller_state.outputs.miniziti_profile
     ctrl_endpoint             = "${data.terraform_remote_state.controller_state.outputs.ziti_controller_ctrl_internal_host}:443"
-    edge_advertised_host      = "minirouter2.${data.terraform_remote_state.controller_state.outputs.dns_zone}"
-    transport_advertised_host = "minirouter2-transport.${data.terraform_remote_state.controller_state.outputs.dns_zone}"
+    edge_advertised_host      = "${var.router_name}.${data.terraform_remote_state.controller_state.outputs.dns_zone}"
+    transport_advertised_host = "${var.router_name}-transport.${data.terraform_remote_state.controller_state.outputs.dns_zone}"
     ziti_charts               = var.ziti_charts
     router_properties         = {
         roleAttributes = [
@@ -73,21 +78,21 @@ module "minirouter2" {
 
 # find the id of the Router's tunnel identity so we can declare it in the next
 # resource for import and ongoing PATCH management
-data "restapi_object" "minirouter2_identity_lookup" {
-    depends_on = [module.minirouter2]
+data "restapi_object" "router_identity_lookup" {
+    depends_on = [module.router]
     provider     = restapi
     path         = "/identities"
     search_key   = "name"
-    search_value = "minirouter2"
+    search_value = var.router_name
 }
 
-resource "restapi_object" "minirouter2_identity" {
-    depends_on         = [data.restapi_object.minirouter2_identity_lookup]
+resource "restapi_object" "router_identity" {
+    depends_on         = [data.restapi_object.router_identity_lookup]
     provider           = restapi
     path               = "/identities"
     update_method      = "PATCH"
     data               = jsonencode({
-        id             = jsondecode(data.restapi_object.minirouter2_identity_lookup.api_response).data.id
+        id             = jsondecode(data.restapi_object.router_identity_lookup.api_response).data.id
         roleAttributes = [
             "grafana-hosts"
         ]
@@ -99,18 +104,67 @@ resource "helm_release" "prometheus" {
     repository    = "https://prometheus-community.github.io/helm-charts"
     name          = "prometheus-stack"
     # wait       = false  # hooks don't run if wait=true!?
-    # set             {
-    #     name      = "zitiServiceName"
-    #     value     = "testapi-service"
-    # }
 }
 
-module "testapi_service" {
+resource "kubernetes_manifest" "ziti_service_monitor" {
+    manifest = {
+        "apiVersion" = "monitoring.coreos.com/v1"
+        "kind" = "ServiceMonitor"
+        "metadata" = {
+            "labels" = {
+                "team" = "ziggy-ops"
+            }
+            "name" = "ziti-monitor"
+            "namespace" = "ziti"
+        }
+        "spec" = {
+            "endpoints" = [
+                {
+                    "port" = 443
+                },
+            ]
+            "selector" = {
+                "matchLabels" = {
+                    "prometheus.openziti.io/scrape" = true
+                }
+            }
+        }
+    }
+}
+
+module "grafana_service" {
     source                   = "/home/kbingham/Sites/netfoundry/github/terraform-lke-ziti/modules/simple-tunneled-service"
     upstream_address         = "prometheus-stack-grafana.default.svc"
     upstream_port            = 80
-    intercept_address        = "minigrafana.ziti"
+    intercept_address        = "grafana.${var.ziti_dns_zone}"
     intercept_port           = 80
     role_attributes          = ["monitoring-services"]
     name                     = "grafana"
 }
+
+resource "restapi_object" "client_identity" {
+    debug              = true
+    provider           = restapi
+    path               = "/identities"
+    data               = jsonencode({
+        name           = "edge-client"
+        type           = "Device"
+        isAdmin        = false
+        enrollment     = {
+            ott        = true
+        }
+        roleAttributes = [
+            "testapi-clients",
+            "k8sapi-clients",
+            "mgmt-clients",
+            "grafana-clients"
+        ]
+    })
+}
+
+resource "local_file" "client_identity_enrollment" {
+    depends_on = [restapi_object.client_identity]
+    content    = try(jsondecode(restapi_object.client_identity.api_response).data.enrollment.ott.jwt, "-")
+    filename   = "../edge-client.jwt"
+}
+

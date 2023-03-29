@@ -16,7 +16,7 @@ terraform {
         }
         kubernetes = {
             source  = "hashicorp/kubernetes"
-            version = "2.0.1"
+            version = "~> 2.19"
         }
         restapi = {
             source = "qrkourier/restapi"
@@ -46,8 +46,11 @@ module "ziti_controller" {
     source = "/home/kbingham/Sites/netfoundry/github/terraform-lke-ziti/modules/ziti-controller-nginx"
     ziti_charts = var.ziti_charts
     ziti_namespace = var.miniziti_profile
-    ziti_controller_release = "minicontroller"
-    mgmt_domain_name = "minicontroller"
+    ziti_controller_release = var.controller_release
+    mgmt_domain_name = var.mgmt_domain_name
     dns_zone = var.dns_zone
-    install = false  # only read controller info
+    # intrall=true will install and manage the controller with TF, false not try
+    # to install but will delete the controller release and deployment if
+    # already imported in state
+    install = var.install_controller
 }
