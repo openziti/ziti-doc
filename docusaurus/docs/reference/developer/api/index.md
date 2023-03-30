@@ -9,7 +9,7 @@ import ApiQuickInfoMd from './_api-quickinfo.md';
 ## Specifications & Documentation
 
 Both the Edge Management and Client APIs have OpenAPI 2.0, formerly Swagger, specifications. The most up-to-date versions  are
-available within the [Ziti Edge GitHub repository](https://github.com/openziti/edge/tree/main/specs). There is also
+available within the [Ziti Edge API GitHub repository](https://github.com/openziti/edge-api#user-content-versioning). There is also
 an API reference web site built in to the running Ziti controller:
 
 - `https://<host>:<port>/edge/client/v1/docs`
@@ -19,7 +19,7 @@ Where `<host>:<port>` should be replaced with the values configured for the APIs
 
 ### Find the Controller Version
 
-It is essential to build your application with respect to the specification of your controller version. If it is not practical to access the specification provided by your running controller then you may compose a URL that includes the controller version, e.g. `https://github.com/openziti/edge/tree/v0.24.109/specs`.
+It is essential to build your application with respect to the specification of your controller version, and [the spec is versioned separately from the controller](https://github.com/openziti/edge-api#user-content-versioning).
 
 `GET /`
 
@@ -44,9 +44,9 @@ It is essential to build your application with respect to the specification of y
 
 ## Edge Management API
 
-The Edge Management API is used by clients that wish to configure a Ziti network and does not facilitate to interacting
+The Edge Management API is used by clients that wish to configure an OpenZiti Network and does not facilitate to interacting
 with service for dialing (connecting) nor binding (hosting). The Edge Management API provides the ability to create
-new identities, identities, policies, and other entities used to manage a Ziti network.
+new identities, identities, policies, and other entities used to manage an OpenZiti Network.
 
 [Explore the latest Edge Management API Reference](./02-edge-management-reference.mdx)
 
