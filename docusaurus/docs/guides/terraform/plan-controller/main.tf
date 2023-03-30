@@ -26,14 +26,18 @@ terraform {
 }
 
 provider "kubernetes" {
-        config_path = "~/.kube/config"
-        config_context = var.miniziti_profile
+        # config_path = "~/.kube/config"
+        # config_context = var.miniziti_profile
+        config_path = "/tmp/haus11.yaml"
+        config_context = "haus11"
 }
 
 provider "helm" {
     kubernetes {
-        config_path = "~/.kube/config"
-        config_context = var.miniziti_profile
+        # config_path = "~/.kube/config"
+        # config_context = var.miniziti_profile
+        config_path = "/tmp/haus11.yaml"
+        config_context = "haus11"
     }
 }
 

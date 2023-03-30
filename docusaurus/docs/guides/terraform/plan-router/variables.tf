@@ -12,3 +12,6 @@ variable "ziti_dns_zone" {
     default = "ziti"
 }
 
+variable "monitoring_password" {
+    default = "prom-operator"
+}

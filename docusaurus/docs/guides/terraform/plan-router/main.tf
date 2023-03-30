@@ -33,14 +33,18 @@ data "terraform_remote_state" "controller_state" {
 }
 
 provider "kubernetes" {
-        config_path = "~/.kube/config"
-        config_context = data.terraform_remote_state.controller_state.outputs.miniziti_profile
+        # config_path = "~/.kube/config"
+        # config_context = data.terraform_remote_state.controller_state.outputs.miniziti_profile
+        config_path = "/tmp/haus11.yaml"
+        config_context = "haus11"
 }
 
 provider "helm" {
     kubernetes {
-        config_path = "~/.kube/config"
-        config_context = data.terraform_remote_state.controller_state.outputs.miniziti_profile
+        # config_path = "~/.kube/config"
+        # config_context = data.terraform_remote_state.controller_state.outputs.miniziti_profile
+        config_path = "/tmp/haus11.yaml"
+        config_context = "haus11"
     }
 }
 
@@ -94,7 +98,7 @@ resource "restapi_object" "router_identity" {
     data               = jsonencode({
         id             = jsondecode(data.restapi_object.router_identity_lookup.api_response).data.id
         roleAttributes = [
-            "grafana-hosts"
+            "monitoring-hosts"
         ]
     })
 }
@@ -103,29 +107,49 @@ resource "helm_release" "prometheus" {
     chart         = "kube-prometheus-stack"
     repository    = "https://prometheus-community.github.io/helm-charts"
     name          = "prometheus-stack"
+    namespace     = "monitoring"
+    create_namespace = true
     # wait       = false  # hooks don't run if wait=true!?
+    set {
+        name  = "grafana.adminPassword"
+        value = var.monitoring_password
+    }
 }
 
 resource "kubernetes_manifest" "ziti_service_monitor" {
+    depends_on = [
+        helm_release.prometheus
+    ]
     manifest = {
-        "apiVersion" = "monitoring.coreos.com/v1"
-        "kind" = "ServiceMonitor"
-        "metadata" = {
-            "labels" = {
-                "team" = "ziggy-ops"
+        apiVersion = "monitoring.coreos.com/v1"
+        kind = "ServiceMonitor"
+        metadata = {
+            labels = {
+                team = "ziggy-ops"
+                release = "prometheus-stack"
             }
-            "name" = "ziti-monitor"
-            "namespace" = "ziti"
+            name = "ziti-monitor"
+            namespace = "monitoring"
         }
-        "spec" = {
-            "endpoints" = [
+        spec = {
+            endpoints = [
                 {
-                    "port" = 443
+                    port = "prometheus"
+                    interval = "30s"
+                    scheme = "https"
+                    tlsConfig = {
+                        insecureSkipVerify = true
+                    }
                 },
             ]
-            "selector" = {
-                "matchLabels" = {
-                    "prometheus.openziti.io/scrape" = true
+            namespaceSelector = {
+                matchNames = [
+                    "ziti"
+                ]
+            }
+            selector = {
+                matchLabels = {
+                    "prometheus.openziti.io/scrape" = "true"
                 }
             }
         }
@@ -134,16 +158,15 @@ resource "kubernetes_manifest" "ziti_service_monitor" {
 
 module "grafana_service" {
     source                   = "/home/kbingham/Sites/netfoundry/github/terraform-lke-ziti/modules/simple-tunneled-service"
-    upstream_address         = "prometheus-stack-grafana.default.svc"
+    upstream_address         = "prometheus-stack-grafana.monitoring.svc"
     upstream_port            = 80
-    intercept_address        = "grafana.${var.ziti_dns_zone}"
+    intercept_address        = "monitoring.${var.ziti_dns_zone}"
     intercept_port           = 80
     role_attributes          = ["monitoring-services"]
-    name                     = "grafana"
+    name                     = "monitoring"
 }
 
 resource "restapi_object" "client_identity" {
-    debug              = true
     provider           = restapi
     path               = "/identities"
     data               = jsonencode({
@@ -157,7 +180,7 @@ resource "restapi_object" "client_identity" {
             "testapi-clients",
             "k8sapi-clients",
             "mgmt-clients",
-            "grafana-clients"
+            "monitoring-clients"
         ]
     })
 }
