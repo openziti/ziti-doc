@@ -48,6 +48,9 @@ module "ziti_controller" {
     #     helm_release.ingress_nginx
     # ]
     source = "/home/kbingham/Sites/netfoundry/github/terraform-lke-ziti/modules/ziti-controller-nginx"
+    image_repo = var.image_repo
+    admin_image_repo = var.admin_image_repo
+    image_tag = var.image_tag
     ziti_charts = var.ziti_charts
     ziti_namespace = var.miniziti_profile
     ziti_controller_release = var.controller_release

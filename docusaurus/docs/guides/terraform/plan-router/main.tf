@@ -67,6 +67,8 @@ module "public_routers" {
 
 module "router" {
     source                    = "/home/kbingham/Sites/netfoundry/github/terraform-lke-ziti/modules/ziti-router-nginx"
+    image_repo                = var.image_repo
+    image_tag                 = var.image_tag
     name                      = var.router_name
     namespace                 = data.terraform_remote_state.controller_state.outputs.miniziti_profile
     ctrl_endpoint             = "${data.terraform_remote_state.controller_state.outputs.ziti_controller_ctrl_internal_host}:443"

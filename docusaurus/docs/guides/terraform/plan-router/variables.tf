@@ -15,3 +15,13 @@ variable "ziti_dns_zone" {
 variable "monitoring_password" {
     default = "prom-operator"
 }
+
+variable "image_repo" {
+    description = "debug value for alternative container image repo"
+    default = "openziti/ziti-router"
+}
+
+variable "image_tag" {
+    description = "debug value for container image tag"
+    default = ""
+}

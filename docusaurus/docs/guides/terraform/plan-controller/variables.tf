@@ -25,3 +25,18 @@ variable "install_controller" {
     description = "If true, install and manage the controller with TF, false not try to install but will delete the controller release and deployment if already imported in state"
     default = false
 }
+
+variable "image_repo" {
+    description = "debug value for alternative container image repo"
+    default = "openziti/ziti-controller"
+}
+
+variable "admin_image_repo" {
+    description = "debug value for alternative admin container image repo"
+    default = "openziti/ziti-cli"
+}
+
+variable "image_tag" {
+    description = "debug value for container image tag"
+    default = ""
+}
