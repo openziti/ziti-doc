@@ -30,7 +30,8 @@ echo "$script_root"
 : ${SKIP_LINKED_DOC:=no}
 : ${SKIP_CLEAN:=no}
 ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
-DOC_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
+SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
+BLOG_ROOT_TARGET="${script_root}/docusaurus/blog"
 : ${ZITI_DOCUSAURUS:=yes}
 
 echo "- processing opts"
@@ -71,13 +72,14 @@ if [[ "${SKIP_GIT}" == no ]]; then
   clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
   clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c"
   clone_or_pull "https://github.com/openziti/helm-charts" "helm-charts"
+  clone_or_pull "https://github.com/openziti-test-kitchen/kubeztl" "kubeztl"
 fi
 
 if [[ "${SKIP_CLEAN}" == no ]]; then
-  if test -d "${DOC_ROOT_TARGET}"; then
+  if test -d "${SDK_ROOT_TARGET}"; then
     # specifically using ../ziti-doc just to remove any chance to rm something unintended
-    echo removing previous build at: rm -r "${DOC_ROOT_TARGET}"
-    rm -r "${DOC_ROOT_TARGET}" || true
+    echo removing previous build at: rm -r "${SDK_ROOT_TARGET}"
+    rm -r "${SDK_ROOT_TARGET}" || true
   fi
 fi
 
@@ -112,7 +114,7 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
     #echo "csharp: building the c# sdk docs"
   #
     CSHARP_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-csharp/docs"
-    CSHARP_TARGET="${DOC_ROOT_TARGET}/csharp"
+    CSHARP_TARGET="${SDK_ROOT_TARGET}/csharp"
     echo "Copying csharp SDK docs"
     echo "    from: ${CSHARP_SOURCE}"
     echo "      to: ${CSHARP_TARGET}"
@@ -125,7 +127,7 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
       pushd "${ZITI_DOC_GIT_LOC}/ziti-sdk-c"
       doxygen
       CLANG_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
-      CLANG_TARGET="${DOC_ROOT_TARGET}/clang"
+      CLANG_TARGET="${SDK_ROOT_TARGET}/clang"
       echo " "
       echo "Copying C SDK doc"
       echo "    from: ${CLANG_SOURCE}"
@@ -144,7 +146,7 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
   fi
 
   if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
-      SWIFT_API_TARGET="${DOC_ROOT_TARGET}/swift"
+      SWIFT_API_TARGET="${SDK_ROOT_TARGET}/swift"
       mkdir -p "${SWIFT_API_TARGET}"
       pushd "${SWIFT_API_TARGET}"
       swift_tgz="https://github.com/openziti/ziti-sdk-swift/releases/latest/download/ziti-sdk-swift-docs.tgz"
@@ -159,6 +161,16 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
       wget -q -O - "${swift_tgz}" | tar -zxv
       find "${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
       popd
+  fi
+
+  if test -f "${ZITI_DOC_GIT_LOC}/kubeztl/README.md"; then
+    echo "moving kubernetes blog from checkout to blog location..."
+    KUBE_BLOG_TARGET="${BLOG_ROOT_TARGET}/zitification/kubernetes"
+    mkdir -p "${KUBE_BLOG_TARGET}"
+    cp "${ZITI_DOC_GIT_LOC}/kubeztl/*" "${KUBE_BLOG_TARGET}/"
+    mv "${ZITI_DOC_GIT_LOC}/kubeztl/README.md" "${KUBE_BLOG_TARGET}/index.md"
+  else
+    echo "ERROR: could not find kubernetes README.md???"
   fi
 fi
 
