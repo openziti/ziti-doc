@@ -167,8 +167,8 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
     echo "moving kubernetes blog from checkout to blog location..."
     KUBE_BLOG_TARGET="${BLOG_ROOT_TARGET}/zitification/kubernetes"
     mkdir -p "${KUBE_BLOG_TARGET}"
-    cp "${ZITI_DOC_GIT_LOC}/kubeztl/*" "${KUBE_BLOG_TARGET}/"
-    mv "${ZITI_DOC_GIT_LOC}/kubeztl/README.md" "${KUBE_BLOG_TARGET}/index.md"
+    cp "${ZITI_DOC_GIT_LOC}"/kubeztl/{README.md,private-kubernetes.svg} "${KUBE_BLOG_TARGET}/"
+    mv "${KUBE_BLOG_TARGET}"/{README,index}.md
   else
     echo "ERROR: could not find kubernetes README.md???"
   fi
