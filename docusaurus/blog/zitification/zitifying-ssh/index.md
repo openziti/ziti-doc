@@ -131,12 +131,12 @@ Have a look at the code over at [GitHub][11]
 
 [6]: ./zssh-overview.svg
 
-[7]: https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-linux-amd64
+[7]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zssh-linux-amd64
 
-[8]: https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-windows-amd64.exe
+[8]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zssh-windows-amd64.exe
 
-[9]: https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-macos-amd64
+[9]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zssh-macos-amd64
 
 [10]: /blog/zitification/zitifying-scp/
 
-[11]: https://github.com/openziti-incubator/zssh/tree/main/zssh/zssh
+[11]: https://github.com/openziti-test-kitchen/zssh/tree/main/zssh/zssh
