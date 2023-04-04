@@ -42,7 +42,7 @@ You can deploy a transparent proxy sidecar to intercept workload egress with Ope
 
 #### Loopback Proxy Sidecar
 
-You can deploy a loopback proxy sidecar to intercept workload egress with OpenZiti. The sidecar binds OpenZiti Services to a local port on the pod's loopback interface, e.g. 127.0.0.1:8443. The workload application must be configured to connect to the local port. There is not yet a dedicated guide for this mode of operation, and the differences are few in comparison to the [transparent proxy sidecar](./kubernetes-sidecar/) quickstart.
+You can deploy a loopback proxy sidecar for workload egress to OpenZiti Services. The sidecar binds OpenZiti Services to a local port on the pod's loopback interface, e.g., 127.0.0.1:8443. The workload application must be configured to connect to the local port. There is not yet a dedicated guide for this mode of operation, and the differences are few in comparison to the [transparent proxy sidecar](./kubernetes-sidecar/) quickstart.
 
 1. The sidecar container runs `ziti tunnel proxy` instead of `ziti tunnel tproxy`.
 2. The sidecar container does not need the CAP_NET_ADMIN capability.
