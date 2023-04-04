@@ -20,21 +20,7 @@ a Ziti Network. This diagram does not show all entities, simply the ones tied cl
 the Role Attributes on an Identity are used by selectors defined on policies to act on the identity. However, the 
 policies and selectors are not modeled here.
 
-[![](https://mermaid.ink/img/pako:eNqVkcFuwjAMhl8l8pnwALlVwCQO06rBMZfQuBCtTabEOVQN746rFa3bBNJ8sv98jn_ZIzTBIijAuHXmHE2vveDYW_TkaBClrNdhFFW9lwdMyQUvlLiY9IUt5Zn8FyU3GMm1rjGE6VlLKaIOiXJEuTVklugPq8xVmS6Twn9OE-rQuWZ42MBe7rV8Dx3Kiii6U_7l588-voeE-ITb-Ri6rmfxIVTE60slj2_HWm6Cb915QU6hvfawgh5jb5zlU43TmwY20KMGxak18UOD9lfm8qflZe6sY2OgWtMlXIHJFA6Db0BRzHiH5ovP1PUG3vuwIw)](https://mermaid.live/edit#pako:eNqVkcFuwjAMhl8l8pnwALlVwCQO06rBMZfQuBCtTabEOVQN746rFa3bBNJ8sv98jn_ZIzTBIijAuHXmHE2vveDYW_TkaBClrNdhFFW9lwdMyQUvlLiY9IUt5Zn8FyU3GMm1rjGE6VlLKaIOiXJEuTVklugPq8xVmS6Twn9OE-rQuWZ42MBe7rV8Dx3Kiii6U_7l588-voeE-ITb-Ri6rmfxIVTE60slj2_HWm6Cb915QU6hvfawgh5jb5zlU43TmwY20KMGxak18UOD9lfm8qflZe6sY2OgWtMlXIHJFA6Db0BRzHiH5ovP1PUG3vuwIw)
-
 ```mermaid
-erDiagram
-    Identity ||..o{ API-Session : has
-    API-Session ||..o{ Session : has
-    API-Session ||..o{ Session-Certificates : has
-    API-Session ||..|| Posture-Data : has
-    Identity ||..|| Authentication-Policy : has
-    Identity ||..o{ Identity-Role-Attributes : has
-    Identity ||..o{ Authenticator: has
-    Identity ||..o{ Enrollment: has
-    Identity ||..o| MFA-TOTP-Config: has
-        
-
 erDiagram
     Identity ||..o{ API-Session : has
     API-Session ||..o{ Session : has

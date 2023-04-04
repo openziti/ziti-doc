@@ -2,9 +2,55 @@
 
 OpenZiti systems provide a wide range of metrics for the monitoring of the network services, endpoints, and processes.  Some of the various metrics are visualized below to understand where they fall and what they measure in a network instance.  The bulk of the remaining metrics are measuring processes within the control plane, rather than network operation.
 
-[![](https://mermaid.ink/img/pako:eNqdlcFP5CAUxv-VF05rMjuJc2w2c1EPZuMedI8kBtvnSKSPkb66zhr_d6FjR6BUo-2JDz4--D1ankVtGxSV6PChR6rxVKuNU60k1mwQLpCdrjtJkrbKsa71VhHDOWnWijVt4Or0d9p31mwQLm3P6OA47fqD_M-6ezixxM4ag27eukq7_qJrNUWR45suBX6u18kCoALf5bDrwD3tHUlKMGRzQ4V7Aw8GsoxgH_3gNGoBM0FL97S82TF2TjH-unHrSG-7TVnt9H-EIMeB2cLSxFWUyDOJXEzkPDFlchyYZJt9pxig5MAy6GFlGDP_wo6wjBBLBPFTgJ9VDMv4sEQPZ-D5UwqSwD_T4106jpIUNW-OCfbCFNXYgJM7RYQGftTszJEkpOZr8asP4lffi0_Lm-xnAcXpgntpPFSqd4Hg0PY_nx6vWbd4kPIjMIpRSSIpFOQgccnKU-t7LWf-DNPaTSqW8zWa7j-EkhnC-BjH0E5xDFKOYxSjPUXSiGOQuGTlqTXGIRai9d-q0o2_HJ7DcZGC77BFKTwG0eCt6g1LIenFD1U926sd1aJi1-NC9NvGT_x2l4jqVpnuoJ41mq07iDg0L_a30HAZvbwCsdRbfQ?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNqdlcFP5CAUxv-VF05rMjuJc2w2c1EPZuMedI8kBtvnSKSPkb66zhr_d6FjR6BUo-2JDz4--D1ankVtGxSV6PChR6rxVKuNU60k1mwQLpCdrjtJkrbKsa71VhHDOWnWijVt4Or0d9p31mwQLm3P6OA47fqD_M-6ezixxM4ag27eukq7_qJrNUWR45suBX6u18kCoALf5bDrwD3tHUlKMGRzQ4V7Aw8GsoxgH_3gNGoBM0FL97S82TF2TjH-unHrSG-7TVnt9H-EIMeB2cLSxFWUyDOJXEzkPDFlchyYZJt9pxig5MAy6GFlGDP_wo6wjBBLBPFTgJ9VDMv4sEQPZ-D5UwqSwD_T4106jpIUNW-OCfbCFNXYgJM7RYQGftTszJEkpOZr8asP4lffi0_Lm-xnAcXpgntpPFSqd4Hg0PY_nx6vWbd4kPIjMIpRSSIpFOQgccnKU-t7LWf-DNPaTSqW8zWa7j-EkhnC-BjH0E5xDFKOYxSjPUXSiGOQuGTlqTXGIRai9d-q0o2_HJ7DcZGC77BFKTwG0eCt6g1LIenFD1U926sd1aJi1-NC9NvGT_x2l4jqVpnuoJ41mq07iDg0L_a30HAZvbwCsdRbfQ)
+```mermaid
+sequenceDiagram
+title Metrics
+
+participant Initiating SDK
+participant Edge Router 1
+participant Network Controller
+participant Edge Router 2
+participant Terminating SDK
+
+
+
+
+Initiating SDK ->>Edge Router 1 : ingress rx
+
+
+Edge Router 2 ->>Terminating SDK :egress tx
+
+note over Initiating SDK, Edge Router 1 : ingress.rx.bytesrate<br>ingress.rx.msgrate<br>ingress.rx.msgsize <br>
+note over Terminating SDK, Edge Router 2 : ingress.tx.bytesrate<br>ingress.tx.msgrate<br>ingress.tx.msgsize <br>
+
+Edge Router 1 ->> Initiating SDK: ingress tx
+Terminating SDK ->>Edge Router 2 : egress rx
+
+note over Terminating SDK, Edge Router 2 : egress.rx.bytesrate<br>egress.rx.msgrate<br>egress.rx.msgsize <br>
+note over Initiating SDK, Edge Router 1 : egress.tx.bytesrate<br>egress.tx.msgrate<br>egress.tx.msgsize <br>
+par 
+    Network Controller ->>Edge Router 1 : 
+and 
+    Edge Router 1 ->>Network Controller : Control Channel (ctrl)
+end
+par 
+    Network Controller ->>Edge Router 2 : 
+and 
+    Edge Router 2 ->>Network Controller : Control Channel (ctrl)
+end
+
+
+note over Edge Router 1, Network Controller : ctrl.latency<br>ctrl.queue_time<br>ctrl.rx.bytesrate<br>ctrl.rx.msgrate<br>ctrl.rx.msgsize<br>ctrl.tx.bytesrate<br>ctrl.tx.msgrate<br>ctrl.tx.msgsize
+
+
+Edge Router 2 ->>Edge Router 1 : 
+Edge Router 1 ->>Edge Router 2 : link
+
+note over Edge Router 1, Edge Router 2 :link.latency<br>link.queue_time<br>link.rx.bytesrate<br>link.rx.msgrate<br>link.rx.msgsize<br>link.tx.bytesrate<br>link.tx.msgrate<br>link.tx.msgsize
+```
 
 ## Available Metrics
+
 Metrics are reported to the log files, locale in /var/log/ziti by default.  There are 2 primary log files for metrics, utilization-metrics.log and utilization-usage.log.  These logs may be shipped to various reporting systems for easier visibility and monitoring.
 
 | Metric | Type | Source | Description|

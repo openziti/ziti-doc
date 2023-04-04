@@ -1,6 +1,22 @@
 # Endpoint Registration
 
-[![](https://mermaid.ink/img/pako:eNptUs1q3DAQfpVBlzaQUnL1IRC820IDpcRLAkUX1Rq7Q-XRdiTvsoS8e0e2Gy-bnGyG-X41z6aNHk1lEv4dkVvckOvFDZYz5YDwkzLBd4_wgD2lLC5TZPgS4tGyG3PkcfiFAjeW7_xA_On2FurIWWIIKFUt6DJC_o2AXGbEPZDHQn76jL5HkDhmFMsrCgrJxFapah6FzwgGxcK3p92ZXrO5r2CDgQ6KfbsJOV4Y8HigFi0rcMFDBT-cpNlpwTj2sEfpogxArB24oN-0x7bkn6BwkVWtCuFh5ljnHxI0KMVajZKpo1YbWQkm848o1J3-iysiUc9Ok-O7SvAqVWzuZEx5wm6bHdR30OQoCB-PGAL84Xjkq_dYNPJXZJTyPg7q5mEic3zenpSbSPnN48yNPbpAfoIrUNaHWlDTuF0yk-6li9SzzxIV18WpHI7KGktn0-KW_T6S-plvEAW9uTYDyuDI6-k-WwawRrUHtKbSX4-dG0O2xvKLrpZDbU7cmirLiNdm3Bffy6WbqnMhvU63ntTXMnz5B_U1GTI)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNptUs1q3DAQfpVBlzaQUnL1IRC820IDpcRLAkUX1Rq7Q-XRdiTvsoS8e0e2Gy-bnGyG-X41z6aNHk1lEv4dkVvckOvFDZYz5YDwkzLBd4_wgD2lLC5TZPgS4tGyG3PkcfiFAjeW7_xA_On2FurIWWIIKFUt6DJC_o2AXGbEPZDHQn76jL5HkDhmFMsrCgrJxFapah6FzwgGxcK3p92ZXrO5r2CDgQ6KfbsJOV4Y8HigFi0rcMFDBT-cpNlpwTj2sEfpogxArB24oN-0x7bkn6BwkVWtCuFh5ljnHxI0KMVajZKpo1YbWQkm848o1J3-iysiUc9Ok-O7SvAqVWzuZEx5wm6bHdR30OQoCB-PGAL84Xjkq_dYNPJXZJTyPg7q5mEic3zenpSbSPnN48yNPbpAfoIrUNaHWlDTuF0yk-6li9SzzxIV18WpHI7KGktn0-KW_T6S-plvEAW9uTYDyuDI6-k-WwawRrUHtKbSX4-dG0O2xvKLrpZDbU7cmirLiNdm3Bffy6WbqnMhvU63ntTXMnz5B_U1GTI)
+```mermaid
+sequenceDiagram
+title Ziti Nde Registration Flow
+autonumber 1
+Admin->> Controller:Create the enrolling identity/edge router
+Controller ->> Admin: Return the enrollment JWT
+Admin->> SDK: Deliver the enrollment JWT to the enrolling device
+SDK->> SDK : Parse the JWT and perform initial inspection
+SDK ->> Controller:Retrieve the Controller's Server Certificate
+SDK ->> SDK: Verify the JWT's signature
+SDK ->> Controller: Retrieve and Trust the EST CA Store (well known)
+SDK ->> Controller : Generate a CSR and an enrollment request
+Controller ->> SDK : Validate and return the request and certificiates
+SDK ->> SDK: Store signed certificate
+note over SDK: Endpoint Registered
+```
+
 ## Steps
 
 1. A person with administrative rights to the Network instance creates a new identity.
