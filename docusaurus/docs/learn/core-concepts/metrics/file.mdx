@@ -5,7 +5,9 @@ import MetricTypesMd from './metric-types.md'
 The Ziti Controller event system can write metrics to a file for direct viewing or post-processing into a metrics system of your choice.
 
 ## Ziti Configuration
+
 There are two independent configurations that need to be set up for metric event reporting to work:
+
 1. **Report Interval:** The controller and routers need to have a metric reporting interval set.  The interval determines how often metrics will be sent to the controller and possibly written out to file
 1. **Event Subscription:** The subscription is configured in the controller, and determines which of the reported metrics are written.
 
@@ -13,7 +15,8 @@ There are two independent configurations that need to be set up for metric event
 The reporting interval is defined in the `metrics.reportInterval` property. While the controller and each router can have a different reporting interval, we suggest that you set them all the same to make lining up metrics across the cluster easier.
 
 Example:
-```
+
+```yaml
 metrics:
   reportInterval: 20s
 ```
@@ -21,7 +24,8 @@ metrics:
 Routers support an additional configuration parameter `MessageQueueSize` which is the number of unsent metrics messages that can sit in the router metrics queue before metrics gathering is paused.
 
 Example:
-```
+
+```yaml
 metrics:
   reportInterval: 20s
   messageQueueSize: 20  // Default 10
@@ -31,6 +35,7 @@ metrics:
 ### Metrics Writing
 
 Writing of metrics is broken into two pieces:
+
 1. **subscription:** Which metrics will be written
 1. **hander:** how the metrics will be written
 
@@ -49,7 +54,8 @@ The subscription has three components
     * **.\*:** Report all metrics
 
 ##### Example:
-```
+
+```yaml
 events:
   allControllerMetrics:
     subscriptions:
@@ -64,7 +70,9 @@ events:
 ```
 
 #### Metrics Handling
+
 The metrics handler defined how metrics are to be written.  It is comprised of:
+
 1. **type:** The type of handler.  Supported types are:
   * **file:** Metrics will be written to a file
 1. **maxsizemb:** File rolling - log files will be rolled when they reach this size.  Default size is `10mb`.
@@ -74,6 +82,7 @@ The metrics handler defined how metrics are to be written.  It is comprised of:
 
 
 ##### File Rolling
+
 files are rolled when they reach a size of `maxsizemb`. Files are renamed from `name.log` to `name-iso8601.log`
 
 For example, `name-2022-06-07T18-50-44.568.log`
@@ -81,7 +90,8 @@ For example, `name-2022-06-07T18-50-44.568.log`
 #### Example
 
 Write 100mb files, saving 2 of them.
-```
+
+```yaml
     handler:
       type: file
       format: json
@@ -95,7 +105,7 @@ Write 100mb files, saving 2 of them.
 
 Controller configuration file:
 
-```
+```yaml
 metrics:
   reportInterval: 20s
 
@@ -127,7 +137,7 @@ events:
 
 Router configuration files:
 
-```
+```yaml
 metrics:
   reportInterval: 20s
 ```
@@ -137,7 +147,8 @@ metrics:
 ## Metric Examples
 
 ### intValue
-```
+
+```json
 {
   "metric_type": "intValue",
   "namespace": "metrics",
@@ -156,7 +167,8 @@ metrics:
 ```
 
 ### Histogram
-```
+
+```json
 {
   "metric_type": "histogram",
   "namespace": "metrics",
@@ -187,7 +199,8 @@ metrics:
 ```
 
 ### Timer
-```
+
+```json
 {
   "metric_type": "timer",
   "namespace": "metrics",

@@ -12,6 +12,7 @@ A gauge of a single value.  The value is the current metric value, and can go up
 
   A simple weighting exercise:
     Given 3 samples, 10, 5, and 5, how does the weighting and order affect the mean function? (This is not the same actual function of the histogram, but is intended to help explain the decaying function nd the impact of the age of the sample on the measurements)
+
    | Sample	| Weight | Weighted Value |
    |--------|-------------|----------------|
    | 10 | 1.0 |	10.0 |
@@ -28,10 +29,8 @@ A gauge of a single value.  The value is the current metric value, and can go up
    | Sum | 2.85 | 18.75 |
    | Mean | 18.75/2.85 | 6.58 |
 
-		
-
-
 Standard histograms provide:
+
 * min
 * max
 * mean
@@ -48,9 +47,11 @@ Standard histograms provide:
 It is important to note the sample size (128) means the more specific percentiles will use the same actual values, and may be repetitive.
 
 ## Meter
+
 Meters are used for rate measurements, how much of something happened per unit time.  The samples are exponentially decayed, similar to the histogram, however the values are bound to specific time intervals, such as 1, 5, and 15 minutes.  They can also provide similar statistical values to histograms
 
 Meter metric with:
+
 * count
 * m1_rate
 * m5_rate
@@ -69,6 +70,7 @@ Meter metric with:
   * p9999
 
 ## Timer
+
 Timers provide statistical samples of timed events. 
 
 * min
@@ -85,4 +87,5 @@ Timers provide statistical samples of timed events.
   * p9999
 
 ## Gauge
+
 Gauges present a point in time measurement of a metric.  For example, the number of open database transactions at a given moment.
