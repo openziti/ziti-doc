@@ -92,7 +92,7 @@ which span the Docker network: the controller, an edge router, and a websocket-b
 
 The stock docker-compose.yml deploys many components and is somewhat complex. If you prefer a simplified deployment via 
 Docker compose, one which only includes the basic controller and edge router combination you can instead download the 
-[simplified-docker-compose.yml](https://git.io/JXQSt)
+[simplified-docker-compose.yml](https://github.com/openziti/ziti/blob/release-next/quickstart/docker/simplified-docker-compose.yml)
  
 ### Networks
 
