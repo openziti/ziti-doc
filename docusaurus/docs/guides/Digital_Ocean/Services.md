@@ -35,7 +35,7 @@ error: error listing https://161.35.108.218:8441/edge/management/v1/config-types
 ```
 
 ### 4.2.2 Router
-Follow the [Router guide](/docs/guides/image/Router/) to setup a "Router with link listener and tunneler". We will name this router: **JAMES-ER-SF**
+Follow the [Router guide](/docs/guides/Digital_Ocean/Router/) to setup a "Router with link listener and tunneler". We will name this router: **JAMES-ER-SF**
 
 Once the router is create, you can check the **controller** to make sure the router is created correctly.
 
@@ -75,7 +75,7 @@ results: 1-2 of 2
 ```
 
 ### 4.2.3 Tunnelers/Identities
-We need two tunnelers for our testing. Please follow [controller guide](/docs/guides/image/Controller/) section of "Create VM on Digital Ocean" to create two VMs running Ubuntu 22.04.
+We need two tunnelers for our testing. Please follow [controller guide](/docs/guides/Digital_Ocean/Controller/) section of "Create VM on Digital Ocean" to create two VMs running Ubuntu 22.04.
 
 Create two identities (JAMES-CL-NY, JAMES-CL-SF) on the **controller**:
 ```bash
