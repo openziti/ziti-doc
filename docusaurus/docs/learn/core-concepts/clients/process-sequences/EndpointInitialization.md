@@ -1,7 +1,27 @@
 # Endpoint  Initialization
 
-[![](https://mermaid.ink/img/pako:eNqNk01v2zAMhv8KodMGZGkKFDsYQy5JDwGyIGjWmy6qxLjqbDKj5A5d0f8-KojzUaQf8EWmXr18_VB-Np4Dmsok_NMheZxGV4trLeWYG4RrChuOlGFGMUfXxH8uRyarz8ZJjj5unO72stPqhCkLNw3KK3WoEW64y2XDdZmpa-9Q4LLYEmcEftTXfe8K5uwCeKZ1rIcPic_LVDcRdFr_dbuAKT5Gjx8IpYSANYu1BJej0fD71XA0HEHm4vHW4T0LhOliBSuU91pts88CFqJPn7Ccc11Hqi31-9_G4wPJkp2J0CvrQ1UlR7QWmP-y_IaLPlo5oug62Q3vyPloFgdrmNw7XTRf0tc3BrIU9phS3yDBjzsZ61cklLyFsnBtXz1mnQraV7Bny3Suy-A02k9WRCwwVy_yZ0EOTjAtdVFGC7eboGeSGZgWpXUx6HV_1ghgTb7HFq2pdBlw7bomW2PpRaXlWq6eyJsqS4cD021Ndn-HqdauSfvqdSjJdsWX_8IFMBY)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNqNk01v2zAMhv8KodMGZGkKFDsYQy5JDwGyIGjWmy6qxLjqbDKj5A5d0f8-KojzUaQf8EWmXr18_VB-Np4Dmsok_NMheZxGV4trLeWYG4RrChuOlGFGMUfXxH8uRyarz8ZJjj5unO72stPqhCkLNw3KK3WoEW64y2XDdZmpa-9Q4LLYEmcEftTXfe8K5uwCeKZ1rIcPic_LVDcRdFr_dbuAKT5Gjx8IpYSANYu1BJej0fD71XA0HEHm4vHW4T0LhOliBSuU91pts88CFqJPn7Ccc11Hqi31-9_G4wPJkp2J0CvrQ1UlR7QWmP-y_IaLPlo5oug62Q3vyPloFgdrmNw7XTRf0tc3BrIU9phS3yDBjzsZ61cklLyFsnBtXz1mnQraV7Bny3Suy-A02k9WRCwwVy_yZ0EOTjAtdVFGC7eboGeSGZgWpXUx6HV_1ghgTb7HFq2pdBlw7bomW2PpRaXlWq6eyJsqS4cD021Ndn-HqdauSfvqdSjJdsWX_8IFMBY)
+```mermaid
+sequenceDiagram
+title Endpoint Initialization
 
+participant Endpoint
+participant Controller
+participant Edge Router
+autonumber 1
+
+note over Endpoint : Load config.json
+note over Endpoint  : Create TUN Device
+note over Endpoint  : Create route for\n 100.64.0.0 to TUN
+note over Endpoint  : Initialize DNS Service
+note over Endpoint  : Load Identity
+note over Endpoint  : Initialize Logging
+Endpoint->>Controller : Connect
+Controller->>Endpoint : Network / Service Configuration
+Endpoint->>Edge Router : Connect Channel(s)
+note over Endpoint : Process Services <br> Insert DNS Names <br> Create routes to \n 100.64.0.0 IPs
+note over Endpoint,Edge Router : Monitor Latency
+note over Endpoint,Controller : Poll for Updates
+```
 
 ## Steps
 
