@@ -12,9 +12,9 @@ In this guide, we will demonstrate ziti-service by setup connection between two 
 
 ## 4.2 Setup VMs for ziti network
 ### 4.2.1 Controller
-You will need to login to controller to provision identies and service. Please make sure you are performing the action on the right node.
+You will need to login to controller to provision identities and service. Please make sure you are performing the action on the right node.
 
-On the controller, before perfroming the CLI command, you will need to login first:
+On the controller, before performing the CLI command, you will need to login first:
 ```bash
 zitiLogin
 ```
@@ -267,7 +267,7 @@ The procedure is similar to tunnel to tunnel service, so please refer to that se
 ziti edge create config t2ehostconf host.v1 '{"protocol":"tcp", "address":"127.0.0.1", "port":8080}'
 ```
 ### 4.5.2 Create an intercept.v1 config 
-Use detination local ip (10.124.0.2) as intercept address
+Use destination local ip (10.124.0.2) as intercept address
 ```bash
 ziti edge create config t2eintconf intercept.v1 '{"protocols": ["tcp"], "addresses": ["10.124.0.2"], "portRanges": [{"low": 80, "high": 80}]}'
 ```
@@ -326,5 +326,5 @@ root@JAMES-CL-NY:~#
 ```
 
 ### 4.5.8 Conclusion
-In section, we demontrated intercepting http (port 80) request to an IP address and forward the request to a remote http server listening to port 8080 via ziti network.
+In section, we demonstrated intercepting http (port 80) request to an IP address and forward the request to a remote http server listening to port 8080 via ziti network.
 

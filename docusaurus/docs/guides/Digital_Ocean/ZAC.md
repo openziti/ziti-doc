@@ -123,7 +123,7 @@ node -v
 ```
 v18.15.0
 ```
-**Make sure this version is bigger than v16**
+**Make sure this version is higher than v16**
 
 ### 3.1.3 Install ziti-console
 ```bash

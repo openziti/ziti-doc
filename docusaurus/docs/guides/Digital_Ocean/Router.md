@@ -5,8 +5,8 @@ title: Create new router
 ---
 # 2.0 Configure new router using open ziti
 
-## 2.1 Create an VM on Digital Ocean
-Please follow **Section 1.1** of the [Controller Guide](/docs/guides/Digital_Ocean/Controller/) to setup an VM to be used as Router. 
+## 2.1 Create a VM on Digital Ocean
+Please follow **Section 1.1** of the [Controller Guide](/docs/guides/Digital_Ocean/Controller/) to setup a VM to be used as Router. 
 
 ## 2.2 Login and Update the repo and apps on VM
 Once the VM is created, we can get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
@@ -52,7 +52,7 @@ We are also going to create the router without healthcheck section and metrics, 
 - --disableHealthChecks
 - --disableMetrics
 
-If you choose to explore these two functionality, you can remove the options (from command line) when creating router.
+If you choose to explore these two functionalities, you can remove the options (from command line) when creating router.
 
 #### 2.3.3.1 Create the Router with link listener
 ```
@@ -78,7 +78,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/ziti-router.service 
 
 **Alternative way of creating router**
 
-Instead of passing parameters in the commandline to create routers, the parameters can be specified via environmental varibles. Here is example on how to accomplish that.
+Instead of passing parameters through the command line to create routers, the parameters can be specified via environmental variables. Here is example on how to accomplish that.
 ```
 export CONTROLLER="161.35.108.218"
 export CONTROLLERFABRICPORT="8440"
@@ -122,5 +122,5 @@ systemctl status ziti-router
 ```
 If the status shows **active (running)**, then the setup finished correctly.
 
-On the controller, you can check the status of the routers. Please refer to the controller guide (usefull command for the Router) section for more information.
+On the controller, you can check the status of the routers. Please refer to the controller guide (useful command for the Router) section for more information.
 

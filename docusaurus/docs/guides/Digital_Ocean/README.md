@@ -4,7 +4,7 @@ sidebar_label: Intro
 title: Introduction
 ---
 
-This guide discribes the step by step procedure to create the open-ziti controller/Private/public ER/ZAC/ziti services.
+This guide describes the step by step procedure to create the open-ziti controller/Private/public ER/ZAC/ziti services.
 This guide has 4 major components
 
 1. Controller - use this guide for creating the controller

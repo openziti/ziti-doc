@@ -5,7 +5,7 @@ title: Controller Config
 ---
 
 # 1.0 Configure the controller
-## 1.1 Create an VM on Digital Ocean
+## 1.1 Create a VM on Digital Ocean
 Login to the Digital Ocean console, create a **Droplets** from the dropdown menu on the upper right hand side.
 
 ![Diagram](/img/digital_ocean/Create1.jpg)
@@ -298,7 +298,7 @@ ziti edge update authenticator updb -s
 ```
 **Important:** if you change the password, you must update the passwd (ZITI_PWD) in the "~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env" file. 
 
-### 1.7.3 Some usefull command for the Router
+### 1.7.3 Some useful command for the Router
 ** login the CLI**
 ```bash
 zitiLogin
