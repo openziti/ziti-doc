@@ -41,22 +41,25 @@ authentication mechanism. Depending on that mechanism it may also need to comple
 Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth)
 
 The following [primary authentication](./auth#primary-authentication) mechanisms require post-creation enrollment:
+
 - Ziti PKI x509 Client Certificate
 - 3rd Party x509 Client Certificate
 - Username Password (UPDB)
 
 The following do not require enrollment, but must have a properly configured [External JWT Signer](./external-jwt-signers)
+
 - JWT
 
 ### Creating w/ No Authenticators/Enrollments
+
 Note: This identity will not be able to authenticate
 
-#### Ziti CLI: 
+#### Ziti CLI
 
 It is currently not possible to create and identity without an enrollment option through the CLI. It can be completed
 by creating and identity then deleting the default certificate enrollment.
 
-```
+```bash
 ziti edge create identity [device|service|user] <name>
 ziti edge delete enrollment where "identity=<id>"
 ```
@@ -64,6 +67,7 @@ ziti edge delete enrollment where "identity=<id>"
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
+
 ```json
 {
   "name": "Roger Wilco",
@@ -72,9 +76,11 @@ ziti edge delete enrollment where "identity=<id>"
 ```
 
 ### Creating w/ Ziti PKI Client Cert Enrollment
+
 Note: This identity will be using the default [authentication policy](./auth) which allows certificate authentication
 
-#### Ziti CLI:
+#### Ziti CLI
+
 `ziti edge create identity [device|service|user] <name> `
 
 #### Edge Management API

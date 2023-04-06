@@ -20,7 +20,7 @@ F --> G[Submit Posture Responses]
 G --> A
 ```
 
-# Authentication Policies
+## Authentication Policies
 
 [Authentication Policies](../authentication/authentication-policies) define which primary and secondary authentication methods are allowed for an individual
 identity and can be read more about in the [Authentication Policies](../authentication/authentication-policies) section.

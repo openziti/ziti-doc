@@ -23,29 +23,28 @@ sequenceDiagram
     Controller->>-Controller: ValidatePosture()
 ```
 
-# Evaluation
+## Evaluation
 
 Posture Checks are event based and are evaluated as events are encountered. Once evaluated failure states begin
 to restrict access as Service Policies being to fail their associated Posture Checks. One exception to this
 is the [MFA Posture Check](#mfa) which has grace periods for some scenarios.
 
-# Access
+## Access
 
 A single Service may be granted to a client through multiple Service Policies. Only one of those policies needs to be
 in a passing state for access to be granted. For example creating two Service Policies, one with Posture Checks and
 one without, to the same service and client will result in the client always having access. This is because one
 Service Policy lacking Posture Checks will always result as passing.
 
-# Associating
+## Associating
 
 Posture Checks are associated to [Service Policies](./policies/overview.mdx) through 
 [Roles and Role Attributes](./policies/overview.mdx#roles-and-role-attributes). Attributes on each Posture Check created
 will be selected for on Service Policies via the `postureCheckRoles` as an array of selected roles. Service Policies are
 associated to Identities in the same fashion via `identityRoles` and the attributes on Identities.
 
+## Types
 
-
-# Types
 The following Posture Check types are currently defined:
 
 - [OS / OS Version](#os-os-version) - requires a specific operating system and optionally a specific version or versions
@@ -59,6 +58,7 @@ The following Posture Check types are currently defined:
 The `OS` Posture Check type is used to verify a client's operating system and optionally version
 
 Supported OS Types
+
 - Windows
 - Windows Server
 - Linux
@@ -85,6 +85,7 @@ build number will be used instead.
 #### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "OS",
@@ -118,6 +119,7 @@ that are not specified will fail the check.
 #### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "MAC",
@@ -153,6 +155,7 @@ is given a five-minute grace period before the posture check begins to fail.
 #### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "MFA",
@@ -188,6 +191,7 @@ sha1 fingerprints (thumbprints) of valid signing certificates.
 #### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "PROCESS_MULTI",
@@ -224,6 +228,7 @@ The `DOMAIN` Posture CHeck is used to verify that a Windows client has joined a 
 #### Edge Management API
 
 `POST /edge/management/v1/posture-checks`
+
 ```json
 {
   "typeId": "DOMAIN",
@@ -238,12 +243,15 @@ The `DOMAIN` Posture CHeck is used to verify that a Windows client has joined a 
 For troubleshooting purposes it is possible to view an identity's current Posture Data.
 
 #### Request
+
 `GET /edge/management/v1/identities/<id>/posture-data`
+
 ```
 <empty body>
 ```
 
 #### Response
+
 ```json
 {
   "data": {
@@ -287,17 +295,20 @@ For troubleshooting purposes it is possible to view an identity's current Postur
 }
 ```
 
-# Viewing Failed Service Requests
+## Viewing Failed Service Requests
 
 For troubleshooting purposes it is possible to view the last fifty failed service requests due to Posture Check failure.
 
 #### Request
+
 `GET /edge/management/v1/identities/<id>/failed-service-requests`
+
 ```
 <empty body>
 ```
 
 #### Response
+
 ```json
 {
   "meta": {},
