@@ -176,7 +176,7 @@ Now we need to put these two config into a service. We going to name the service
 ```
 ziti edge create service t2tssh -c t2tintconf,t2thostconf
 ```
-### 4.4.4 Check Service (Optional)
+### 4.4.4 Check Service
 ```
 # ziti edge list services
 ╭───────────────────────┬────────┬────────────┬─────────────────────┬────────────╮
@@ -281,7 +281,7 @@ Now we need to put these two config into a service. We going to name the service
 ```
 ziti edge create service t2ehttp -c t2eintconf,t2ehostconf
 ```
-### 4.5.4 Check Service (Optional)
+### 4.5.4 Check Service
 ```
 # ziti edge list services |grep t2e
 │ 5FI8Aw0IQ7xaUMgH2rKvps │ t2ehttp │ true       │ smartrouting        │            │
