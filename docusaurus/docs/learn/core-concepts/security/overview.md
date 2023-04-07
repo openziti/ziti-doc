@@ -70,38 +70,38 @@ in each section will lead to a more detailed explanation of the relevant topics.
 ## Identity
 
 Ziti Edge defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or 
-dial (connect) to services over a Ziti Network. Read more in the [Identity](./authentication/identities) section.
+dial (connect) to services over a Ziti Network. Read more in the [Identity](../identities/overview.mdx) section.
 
 ## Enrollment
 
 Enrollment is a client initiated process where the result is the creation of an Identity that has some manner
-of authenticating. Enrollments may be automated through [3rd Party Cas](./authentication/third-party-cas) and 
-[External JWT Signers](./authentication/external-jwt-signers)  or may be completed through pre-provisioning. Read more in the 
-[Enrollment](./enrollment) section.
+of authenticating. Enrollments may be automated through [3rd Party Cas](./authentication/10-third-party-cas.md) and 
+[External JWT Signers](./authentication/50-external-jwt-signers.md)  or may be completed through pre-provisioning. Read more in the 
+[Enrollment](./enrollment.md) section.
 
 ## Authentication
 
-[Authentication](./authentication/auth) is the process of a client proving their identity through the submission of one primary credential
+[Authentication](./authentication/auth.md) is the process of a client proving their identity through the submission of one primary credential
 and zero or more secondary credentials that are prompted by Authentication Queries. Authentication methods can be
-configured through [3rd Party Cas](./authentication/third-party-cas), [External JWT Signers](./authentication/external-jwt-signers),
-and [Authentication Policies](./authentication/authentication-policies). Read more in the
-[Authentication](./authentication/auth) section.
+configured through [3rd Party Cas](./authentication/10-third-party-cas.md), [External JWT Signers](./authentication/50-external-jwt-signers.md),
+and [Authentication Policies](./authentication/30-authentication-policies.md). Read more in the
+ [Authentication](./authentication/auth.md) section.
 
 ## Authorization
 
-[Authorization](./authorization/auth) in Ziti is configured for Identities and Edge Routers. Edge Router authorization only covers which
+[Authorization](./authorization/auth.md) in Ziti is configured for Identities and Edge Routers. Edge Router authorization only covers which
 services can be used over an Edge Router via Service Edge Router Policies. Identity authorization is covered by Service
 Policies and Edge Router Policies.
 
 All policies in Ziti are represented by a robust [attribute based access control system (ABAC)](https://en.wikipedia.org/wiki/Attribute-based_access_control) based on `roleAttributes`
-properties on entities within the [Edge Management API](/docs/reference/developer/api#edge-management-api). `roleAttributes` properties are an array of user defined strings.
+properties on entities within the [Edge Management API](/docs/reference/developer/api/index.md#edge-management-api). `roleAttributes` properties are an array of user defined strings.
 Policies support attribute selector properties to determine which entities a policy interacts on. Policies themselves
-are documented in [Policies](./authorization/policies/overview) section.
+are documented in [Policies](./authorization/policies/overview.mdx) section.
 
 Additionally, Service Policies can require additional environmental states to be satisfied by Posture Checks.
 Posture Checks analyze Posture Data. Posture Data is a collection of server side information and data harvested from
 Posture Responses sent by client endpoints in response to Posture Queries. More can be found in
-the [Posture Check](./authorization/posture-checks)
+the [Posture Check](./authorization/posture-checks.md) 
 section.
 
-Read more in the [Authorization](./authorization/auth)section.
+Read more in the [Authorization](./authorization/auth.md) section.
