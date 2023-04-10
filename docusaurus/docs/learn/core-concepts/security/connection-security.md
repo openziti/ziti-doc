@@ -39,8 +39,8 @@ certificate may be used as well - negating the need for n API Session Certificat
 
 Connections to a specific services available on a Ziti network are authorized by a service session security token 
 obtained from the controller's Edge Client API. A session security token is used via the `edge` connection with an
-Edge Router, request dial (connect) or bind (host) a service. During service dial/bind, an Edge Router will validate
-the security token provided and facilitate the exchange of public keys between the client and host.
+Edge Router to dial (connect) or bind (host) a service. During service dial/bind, the Edge Router will validate
+the security token provided and facilitate the exchange of public keys between the client and host. 
 
 The `edge` connection is multiplexed, meaning it carries multiple streams of data. These streams are the individual 
-`service` connections. Each stream is end-to-end encrypted per service per connection. 
+`service` connections. Each stream is end-to-end encrypted per connection. 
