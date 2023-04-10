@@ -5,8 +5,8 @@
 API Sessions represent a client that is either partially or fully authenticated as a specific Ziti Identity.
 They are used to:
 
-- scope [authentication](./authentication/auth.md) and [Posture Data](./authorization/posture-checks)
-- to make [authorization](./authorization/auth.md) decisions.
+- scope [authentication](authentication/auth.md) and [Posture Data](authorization/posture-checks)
+- to make [authorization](authorization/auth.md) decisions.
 
 Clients interact with API Sessions via an opaque security token value and is received during authentication via `/edge/client|management/v1/authenticate`.
 
@@ -106,10 +106,10 @@ Example `POST /edge/management/v1/authenticate` response:
 ## Session
 
 Session represent access to a specific service for dialing or binding. They are scoped to the
-[API Session](#api-sessions) that was used to create them. They are requested from the
+[API Session](#api-session) that was used to create them. They are requested from the
 controller by a client through the Edge Client API. The result of that request is a security token representing
 the session and a list of Edge Routers that the client may use to dial or bind the service through.
 
-Sessions are removed when the parent [API Session](../authentication/auth.md#api-sessions) is removed,
-[policies](policies/overview.mdx) are changed to deny access, or when [Posture Checks](posture-checks.md) enter an
+Sessions are removed when the parent [API Session](authentication/auth.md#api-sessions) is removed,
+[policies](authorization/policies/overview.mdx) are changed to deny access, or when [Posture Checks](authorization/posture-checks.md) enter an
 invalid state for the target service.
