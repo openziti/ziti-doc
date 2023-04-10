@@ -21,7 +21,7 @@ Connections between SDKs and Edge Routers are called `edge` connections. `edge` 
 multiple `service` connections. Each connection is for a specific service and secured with end-to-end encryption in 
 order to transport application/service data securely between the two intended parties only.
 
-[![image](/img/connections.png)](/img/connections-edge-sdk-sdk.png)
+[![image](/img/connections-edge-sdk-sdk.png)](/img/connections-edge-sdk-sdk.png)
 
 # Control and Link Connection Details
 
