@@ -29,6 +29,8 @@ There is an additional policy type for Edge Routers:
 
 - [Service Edge Router Policies](./authorization/policies/overview) - determines which services can be accessed over which routers
 
+Additionally, connection security document is provided on the [Connection Security](connection-security.md) page. 
+
 ## Authentication & Authorization High Level Flow
 
 The following is a high level overview of how these entities interact. Each interaction is further detailed in their
