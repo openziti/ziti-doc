@@ -14,33 +14,62 @@ Here are the different types of connections:
 Below is a diagram showing the `control`, `link`, `edge`, and `controller API` connections. The `service` connections
 exist within an `edge` connection and are pictured in more detail in the second diagram.
 
-![image](/img/connections.png)
+[![image](/img/connections.png)](/img/connections.png)
 
 
 Connections between SDKs and Edge Routers are called `edge` connections. `edge` connections are multiplexed and carry
 multiple `service` connections. Each connection is for a specific service and secured with end-to-end encryption in 
 order to transport application/service data securely between the two intended parties only.
 
-![image](/img/connections-edge-sdk-sdk.png)
+[![image](/img/connections.png)](/img/connections-edge-sdk-sdk.png)
 
-# Connection Walkthrough
+# Control and Link Connection Details
 
 Routers work in concert with a controller to establish a mesh network of `link` connections between routers. Routers coordinate
 with a controller over a `control` connection. These connections are initialized and maintained while the network is in
-operation. `control` and `link` connections are always authenticated using mTLS.
+operation. `control` and `link` connections are always authenticated using mTLS. The certificates that enable mTLS
+for `control` connections are exchanged during router enrollment. The `control` connection between controllers and
+Edge Routers is used to continuously update routers with the proper certificate information for all other routers in
+the mesh.
 
-SDKs coordinate authentication with a controller via a `controller API` - specifically the [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx). 
-Authentication credentials have many forms: mTLS/certificates, SSO via External JWT Signers, or UPDB/username password 
-([See Authentication](authentication/auth.md)or full details). The Edge Client API is also used for router discovery, 
-service discovery, and to obtain security tokens. After authentication, an SDK will receive an API Session security 
-token used to make further requests. An SKD may then establish ephemeral [API Session Certificates](authentication/20-api-session-certificates.md) 
-to enable `edge` mTLS connections. If the SDk already has a certificate used for mTSL/certificate authentication, that
-certificate may be used as well - negating the need for n API Session Certificate.
+# Controller API Connection Details
 
-Connections to a specific services available on a Ziti network are authorized by a service session security token 
-obtained from the controller's Edge Client API. A session security token is used via the `edge` connection with an
-Edge Router to dial (connect) or bind (host) a service. During service dial/bind, the Edge Router will validate
-the security token provided and facilitate the exchange of public keys between the client and host. 
+Controller APIs provide ways for clients (SDKs or otherwise) to interact with a network. The [Edge Management API](../../../reference/developer/api/02-edge-management-reference.mdx)
+is used for configuration and maintenance. The [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx)
+is used to allow clients to authenticate, discover services, request service [Sessions](authorization/auth.md#sessions),
+discover Edge Routers, and to perform basic self-maintenance.
 
-The `edge` connection is multiplexed, meaning it carries multiple streams of data. These streams are the individual 
-`service` connections. Each stream is end-to-end encrypted per connection. 
+Access to the APIs requires [authentication](authentication/auth.md) in order to obtain and [API Session](authentication/auth.md#api-sessions).
+Further an [API Session](authentication/auth.md#api-sessions) is required to make `edge` connections.
+
+# Edge Connection Details
+
+`edge` connections are made between SDKs and Edge Routers. They require the following:
+
+- a valid [API Session](authentication/auth.md#api-sessions) represented by a token
+- a valid x509 certificate associated with the supplied API Session
+- a target Edge Router
+
+An [API Session](authentication/auth.md#api-sessions) is obtained during authentication with either the Edge Client 
+or Management APIs. It is represented as by a token. The x509 certificate used to establish the mTLS connection may 
+either be the certificate used during authentication (if used) or an [API Session Certificate](authentication/20-api-session-certificates.md).
+
+`edge` connections once establish allow the use of [Session](authorization/auth.md#sessions) tokens to establish
+`service` connections that dial or bind services. When a [Session](authorization/auth.md#sessions) is created, 
+a list of valid Edge Router targets is included in the response.
+
+# Service Connection Details
+
+`service` connections represent an SDK that has connected to a service (dial) or is hosting a service (bind). To
+establish a `service` connection of either type the following is required:
+
+- an `edge` connection to an Edge Router that has the correct policies in place to support the target service and intent (dial/bind)
+- a [session](authorization/auth.md#sessions) for the target service and intent (dial/bind)
+
+[Sessions](authorization/auth.md#sessions) are issued by the controller's Edge Client API. A valid Session token 
+must be included with dial and bind requests. Edge Routers validate Session tokens continuously. If valid, the Edge 
+Router will facilitate the connecting the client to a service or registering the client as a host.
+
+Should a [session](authorization/auth.md#sessions) become invalid at any point, any existing `service` connection that 
+was established using the invalidated session will be terminated. Attempts to re-establish connection with the 
+invalidated session will be refused.

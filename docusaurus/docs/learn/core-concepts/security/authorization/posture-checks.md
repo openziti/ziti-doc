@@ -5,8 +5,7 @@ uid: zitiSecurityPostureChecks
 
 Posture Checks represent environmental state (posture) that an endpoint must be in, in order for a Service Policy to 
 grant access to a service as either a client or host. Posture Checks are defined separately from Service Policies and 
-assigned to them via attributes on the Posture Checks and attribute selectors on the Service Policy. This allows Posture
-Checks to be re-used.
+assigned to them via attributes on the Posture Checks and attribute selectors on the Service Policy.
 
 ## Posture Data {#posture-data}
 
