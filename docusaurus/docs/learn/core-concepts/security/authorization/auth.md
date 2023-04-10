@@ -22,15 +22,3 @@ E --> F[Collected Posture Data]
 F --> G[Submit Posture Responses]
 G --> A
 ```
-
-# Sessions
-
-Sessions represent access to a specific service for dialing or binding. They are scoped to the 
-[API Session](../authentication/auth.md#api-sessions) that is used to create them. They are requested from the
-controller by a client through the Edge Client API. The result of that request is a security token representing
-the session and a list of Edge Routers that the client may use to dial or bind the service through.
-
-Sessions are removed when the parent [API Session](../authentication/auth.md#api-sessions) is removed, 
-[policies](policies/overview.mdx) are changed to deny access, or when [Posture Checks](posture-checks.md) enter an 
-invalid state for the target service.
-

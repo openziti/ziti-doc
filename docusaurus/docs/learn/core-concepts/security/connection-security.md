@@ -36,10 +36,10 @@ the mesh.
 
 Controller APIs provide ways for clients (SDKs or otherwise) to interact with a network. The [Edge Management API](../../../reference/developer/api/02-edge-management-reference.mdx)
 is used for configuration and maintenance. The [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx)
-is used to allow clients to authenticate, discover services, request service [Sessions](authorization/auth.md#sessions),
+is used to allow clients to authenticate, discover services, request service [Sessions](sessions.md#session),
 discover Edge Routers, and to perform basic self-maintenance.
 
-Access to the APIs requires [authentication](authentication/auth.md) and results in an [API Session](authentication/auth.md#api-sessions)
+Access to the APIs requires [authentication](authentication/auth.md) which results in an [API Session](authentication/auth.md#api-sessions)
 being returned to the client. An [API Session](authentication/auth.md#api-sessions) is required to make `edge` connections.
 
 # Edge Connection Details
@@ -51,12 +51,12 @@ being returned to the client. An [API Session](authentication/auth.md#api-sessio
 - a target Edge Router
 
 An [API Session](authentication/auth.md#api-sessions) is obtained during authentication with either the Edge Client 
-or Management APIs. It is represented as by a token. The x509 certificate used to establish the mTLS connection may 
+or Management APIs. It is represented as a token. The x509 certificate used to establish the mTLS connection may 
 either be the certificate used during authentication (if used) or an [API Session Certificate](authentication/20-api-session-certificates.md).
 
-`edge` connections once establish allow the use of [Session](authorization/auth.md#sessions) tokens to establish
-`service` connections that dial or bind services. When a [Session](authorization/auth.md#sessions) is created, 
-a list of valid Edge Router targets is included in the response.
+`edge` connections once establish allow the use of [Session](sessions.md#session) tokens to establish
+`service` connections. When a [Session](sessions.md#session) is created, a list of valid Edge Router
+is included in the response.
 
 # Service Connection Details
 
@@ -64,12 +64,12 @@ a list of valid Edge Router targets is included in the response.
 establish a `service` connection of either type the following is required:
 
 - an `edge` connection to an Edge Router that has the correct policies in place to support the target service and intent (dial/bind)
-- a [session](authorization/auth.md#sessions) for the target service and intent (dial/bind)
+- a [session](sessions.md#session) for the target service and intent (dial/bind)
 
-[Sessions](authorization/auth.md#sessions) are issued by the controller's Edge Client API. A valid Session token 
+[Sessions](sessions.md#session) are issued by the controller's Edge Client API. A valid Session token 
 must be included with dial and bind requests. Edge Routers validate Session tokens continuously. If valid, the Edge 
 Router will facilitate the connecting the client to a service or registering the client as a host.
 
-Should a [session](authorization/auth.md#sessions) become invalid at any point, any existing `service` connection that 
+Should a [session](sessions.md#session) become invalid at any point, any existing `service` connection that 
 was established using the invalidated session will be terminated. Attempts to re-establish connection with the 
 invalidated session will be refused.
