@@ -39,8 +39,8 @@ is used for configuration and maintenance. The [Edge Client API](../../../refere
 is used to allow clients to authenticate, discover services, request service [Sessions](authorization/auth.md#sessions),
 discover Edge Routers, and to perform basic self-maintenance.
 
-Access to the APIs requires [authentication](authentication/auth.md) in order to obtain and [API Session](authentication/auth.md#api-sessions).
-Further an [API Session](authentication/auth.md#api-sessions) is required to make `edge` connections.
+Access to the APIs requires [authentication](authentication/auth.md) and results in an [API Session](authentication/auth.md#api-sessions)
+being returned to the client. An [API Session](authentication/auth.md#api-sessions) is required to make `edge` connections.
 
 # Edge Connection Details
 
