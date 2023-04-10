@@ -6,10 +6,10 @@ security technology that fits its role and use-cases.
 Here are the different types of connections:
 
 - `control` -  connections between a controller and a router that manage network state. Secured via mTLS 1.2+
-- `link` - connections between a routers. Secured via mTLS 1.2+
-- `edge` - a multiplexed connections between an SDK and an Edge Router that carries `service` connections. Secured via mTLS 1.2+
-- `controller APIs` - connections between a controller and an SDK or other software via HTTPS and/or secure websockets. Secured via TLS, mTLS 1.2+
-- `service` - connections are routed through an `edge` connection and establish connection between a client SDK and a host SDK. They carry application data is end-to-end encrypted. Secured via libsodium public private key cryptography and inherits the security of its `edge` connection.
+- `link` - connections between routers to form a mesh network. Secured via mTLS 1.2+
+- `edge` - multiplexed connections between an SDK and an Edge Router that carries `service` connections. Secured via mTLS 1.2+
+- `controller APIs` - connections between a controller and an SDK (or other software) via HTTPS and/or secure websockets. Secured via TLS, mTLS 1.2+
+- `service` - connections carried by an `edge` connection and establish communication between a client and host. Application data is end-to-end encrypted via libsodium public private key cryptography.
 
 Below is a diagram showing the `control`, `link`, `edge`, and `controller API` connections. The `service` connections
 exist within an `edge` connection and are pictured in more detail in the second diagram.
@@ -39,7 +39,8 @@ certificate may be used as well - negating the need for n API Session Certificat
 
 Connections to a specific services available on a Ziti network are authorized by a service session security token 
 obtained from the controller's Edge Client API. A session security token is used via the `edge` connection with an
-Edge Router, request dial (connect) or bind (host) a service. 
+Edge Router, request dial (connect) or bind (host) a service. During service dial/bind, an Edge Router will validate
+the security token provided and facilitate the exchange of public keys between the client and host.
 
 The `edge` connection is multiplexed, meaning it carries multiple streams of data. These streams are the individual 
 `service` connections. Each stream is end-to-end encrypted per service per connection. 
