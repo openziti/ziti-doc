@@ -242,9 +242,9 @@ The `healthChecks` sections allows configuration of router health checks perform
 exposing the `health-checks` API in the `web` section.
 
 - `ctrlPingCheck` - (optional) - configures controller health check pings
-    - `interval` - (optional, 30s) - the frequency to ping the controller with connection checks
-    - `timeout` - (optional, 15s) - the length of time to wait before giving up on a controller health ping
-    - `initialDelay` - (optional, 15s) - the length of time to wait before starting controller health check pings
+  - `interval` - (optional, 30s) - the frequency to ping the controller with connection checks
+  - `timeout` - (optional, 15s) - the length of time to wait before giving up on a controller health ping
+  - `initialDelay` - (optional, 15s) - the length of time to wait before starting controller health check pings
 
 Example:
 
