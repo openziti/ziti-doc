@@ -112,7 +112,35 @@ export ADMINPASSWORD="Test@123"
 
 You can create the router on the controller first then register the router on the router VM.
 
-### 2.4.1 Creating Router on the controller
+### 2.4.1 Creating Router on the controller Using ZAC
+**If you prefer to create router using CLI, you can jump to next section.**
+
+**In order to complete the procedures in this section, you need to install ZAC first and have access to the controller using the ZAC. If you have trouble using ZAC, you can use the CLI procedures to create router.**
+
+From the ZAC welcome screen, choose the **ROUTERS**
+
+![Diagram](/img/digital_ocean/ZAC01-router.png)
+
+Click on **+** to bring up the **CREATE EDGE ROUTER** widget. The **NAME** of Router is required, and it has to be unique. Also choose whether you want the tunneler to be enable or not on the router.  Enter other optional fields and hit **SAVE**
+
+![Diagram](/img/digital_ocean/ZAC02-router.png)
+
+If the router is created successfully, you will be back to the **MANAGE EDGE ROUTERS** screen.  From the list of edge routers, you will see the **JWT** icon on the newly created router. You need this JWT for the registration.
+
+![Diagram](/img/digital_ocean/ZAC03-router.png)
+
+Click on the **JWT ICON**, the JWT will be downloaded to your machine. On Chrome browser, the downloaded file will appear on the bottom right corner of the browser like picture below.
+
+![Diagram](/img/digital_ocean/ZAC04-router.png)
+
+Open the JWT file, and copy the content.  Now you are ready for the registration.
+
+![Diagram](/img/digital_ocean/ZAC05-router.png)
+
+
+### 2.4.2 Creating Router on the controller Using CLI
+**If you already created router using ZAC, you can skip ahead to register the router.** Otherwise, this section provides CLI commands to create routers on the controller.
+
 **login to controller**
 login to CLI first
 ```bash
@@ -148,7 +176,7 @@ We also need the management port (default 8441) and fabric port (default 8440) o
 8440
 ```
 
-### 2.4.2 Create the Router with link listener
+### 2.4.3 Register the Router with link listener
 **Perform this on the Router VM**
 
 **command**
@@ -176,16 +204,16 @@ Downloading: 100%|████████████████████�
 2023-04-07-01:07:57-INFO-Service ziti-router.service enable successful.
 ```
 
-### 2.4.3 Create the Router with link listener and tunneler
+### 2.4.4 Register the Router with link listener and tunneler
 ```
 ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks --disableMetrics --autoTunnelListener <jwt content>
 ```
 
-### 2.4.4 Create the Router with edge listener only (no link listener)
+### 2.4.5 Register the Router with edge listener only (no link listener)
 ```
 ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --disableHealthChecks --disableMetrics <jwt content>
 ```
-### 2.4.5 Create the Router with edge listener and tunneler
+### 2.4.6 Register the Router with edge listener and tunneler
 ```
 ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --disableHealthChecks --disableMetrics --autoTunnelListener <jwt content>
 ```
@@ -216,7 +244,7 @@ If you run router without tunneler enabled, you can skip this section.
 
 We need to remove the digital ocean resolver for tunnel resolver to work correctly.
 
-Check resolver before any change:
+Check resolver before any changes:
 ```
 # resolvectl
 Global
@@ -229,7 +257,7 @@ Current DNS Server: 67.207.67.2
 ```
 Under the Global DNS servers, it should say something like "67.207.67.2 67.207.67.3"
 
-**make change**
+**Now, make changes to the resolver:**
 ```bash
 cd /etc/systemd/resolved.conf.d/
 rm DigitalOcean.conf
