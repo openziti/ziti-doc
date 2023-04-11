@@ -32,7 +32,7 @@ For detail info on ziti_router_auto_enroll, please checkout this page on github:
 
 ## 2.3 Create and setup Router directly on router VM
 
-You can setup the router directly on the router VM with one command if you did not block your controller's edge-management port. At this time, the quickstart for setting up controller did not separate edge-management port from edge-client port, so the edge-management port has to be open. You may continue this section if you know your controller's management password, Fabric Port (default 8440) and Management Port (default 8441).
+You can setup the router directly on the router VM with one command if you did not block your controller's edge-management port. At this time, the quickstart for setting up controller does not separate edge-management port from edge-client port, so the edge-management port has to be open. You may continue this section if you know your controller's management password, Fabric Port (default 8440) and Management Port (default 8441).
 
 You can also choose to create router on the controller and then register with the jwt file (created when creating the router) on the router. The procedure for this is detailed in **section 2.4**
 

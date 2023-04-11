@@ -6,7 +6,10 @@ title: Services
 
 # 3.0 Ziti services
 ## 3.1 Introduction
-In this guide, we will demonstrate ziti-service by setup connection between two identities running ziti-edge-tunnel and connection between ziti-edge-tunnel and ziti-router.
+In this guide, we will demonstrate ziti services with three examples:
+- connection between two identities running ziti-edge-tunnel
+- connection between ziti-edge-tunnel and a ziti-router (with tunnel enabled)
+- connection from a non-OpenZiti endpoint using router as GW
 
 ![Diagram](/img/digital_ocean/Services1.jpg)
 
