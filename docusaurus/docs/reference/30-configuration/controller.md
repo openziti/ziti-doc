@@ -27,7 +27,7 @@ related configuration settings.
 - [`web`](#web) - configures API presentation exposure
 - [`v`](#v) - A special section to note the version of the configuration file, only `v: 3` is currently supported
 
-The standard OpenZit experience minimally requires the following sections:
+The standard OpenZiti experience minimally requires the following sections:
 
 - `ctrl`
 - `db`
@@ -314,9 +314,9 @@ and routers. See the conventions that apply to all [identity](conventions.md#ide
 The `network` section sets network wide options.
 
 - `minRouterCost` - (optional) the minimum router cost (default 10)
-- `routerConnectionChurnLimit` -  (optional) how often a new connection from a router can take over for an existing
-  connection (
-  default 1m)
+- `routerConnectionChurnLimit` -  (optional) how often a new connection from a router can take over for an existing connection (default 1m)
+- `intervalAgeThreshold` - (optional) the interval at which metrics are batched for reporting (default 80s)
+- `metricsReportInterval` - (optional) the frequency at which metrics are reported (default 1m)
 
 ### `profile`
 
