@@ -2,7 +2,7 @@
 
 External JWT Signers allow external identity providers to facilitate authentication with a Ziti network. External
 JWT Signers can be added as a static x509 certificate or via a JWKS endpoint. Authenticating clients can provide
-a JWT as a primary authentication mechanism to obtain an API Session. Additionally, the JWT can be required on
+a JWT as a primary authentication mechanism to obtain an [API Session](../sessions.md#api-session). Additionally, the JWT can be required on
 all REST API calls if desired by using an Authentication Policy that requires it as a secondary factor.
 
 JWT is described in [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519) and on [Wikipedia](https://en.wikipedia.org/wiki/JSON_Web_Token).

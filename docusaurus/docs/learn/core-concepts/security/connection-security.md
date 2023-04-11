@@ -14,14 +14,14 @@ Here are the different types of connections:
 Below is a diagram showing the `control`, `link`, `edge`, and `controller API` connections. The `service` connections
 exist within an `edge` connection and are pictured in more detail in the second diagram.
 
-[![image](/img/connections.png)](/img/connections.png)
+[![image](../../../../static/img/connections.png)](../../../../static/img/connections.png)
 
 
 Connections between SDKs and Edge Routers are called `edge` connections. `edge` connections are multiplexed and carry
 multiple `service` connections. Each connection is for a specific service and secured with end-to-end encryption in 
 order to transport application/service data securely between the two intended parties only.
 
-[![image](/img/connections-edge-sdk-sdk.png)](/img/connections-edge-sdk-sdk.png)
+[![image](../../../../static/img/connections-edge-sdk-sdk.png)](../../../../static/img/connections-edge-sdk-sdk.png)
 
 # Control and Link Connection Details
 
@@ -47,7 +47,7 @@ being returned to the client. An [API Session](authentication/auth.md#api-sessio
 `edge` connections are made between SDKs and Edge Routers. They require the following:
 
 - a valid [API Session](authentication/auth.md#api-sessions) represented by a token
-- a valid x509 certificate associated with the supplied API Session
+- a valid x509 certificate associated with the supplied [API Session](authentication/auth.md#api-sessions)
 - a target Edge Router
 
 An [API Session](authentication/auth.md#api-sessions) is obtained during authentication with either the Edge Client 
@@ -64,12 +64,12 @@ is included in the response.
 establish a `service` connection of either type the following is required:
 
 - an `edge` connection to an Edge Router that has the correct policies in place to support the target service and intent (dial/bind)
-- a [session](sessions.md#session) for the target service and intent (dial/bind)
+- a [Session](sessions.md#session) for the target service and intent (dial/bind)
 
-[Sessions](sessions.md#session) are issued by the controller's Edge Client API. A valid Session token 
+[Sessions](sessions.md#session) are issued by the controller's Edge Client API. A valid [Sessions](sessions.md#session) token 
 must be included with dial and bind requests. Edge Routers validate Session tokens continuously. If valid, the Edge 
 Router will facilitate the connecting the client to a service or registering the client as a host.
 
-Should a [session](sessions.md#session) become invalid at any point, any existing `service` connection that 
+Should a [Session](sessions.md#session) become invalid at any point, any existing `service` connection that 
 was established using the invalidated session will be terminated. Attempts to re-establish connection with the 
-invalidated session will be refused.
+invalidated [Session](sessions.md#session) will be refused.

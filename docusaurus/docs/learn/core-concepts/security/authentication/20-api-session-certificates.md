@@ -5,11 +5,11 @@ an API Session is [fully authenticated](./auth#full-vs-partial-authentication).
 
 ## Lifecycle & Scope
 
-The certificates are scoped by the "valid before" and "valid after" dates in addition to the API Session. If an API Session is 
+The certificates are scoped by the "valid before" and "valid after" dates in addition to the API Session. If an [API Session](../sessions.md#api-session) is 
 removed (expiration, logout, etc.) the API Session Certificates created by that API Session are no longer valid.
 
-API Session Certificates may only be used by the API Session that created them. Attempting to use an API Session
-Certificate to connect to and Edge Router without the matching API Session security token will be rejected.
+API Session Certificates may only be used by the [API Session](../sessions.md#api-session) that created them. Attempting to use an [API Session](../sessions.md#api-session)
+Certificate to connect to and Edge Router without the matching [API Session](../sessions.md#api-session) security token will be rejected.
 
 ## Use
 
@@ -52,7 +52,7 @@ may be added.
 
 ## List & Detail
 
-API Session certificates for the current API Session may be 
+API Session Certificates for the current [API Session](../sessions.md#api-session) may be: 
 
 - listed: `GET /edge/client/v1/current-api-session/certificates`
 - detailed: `GET /edge/client/v1/current-api-session/certificates/<id>`
