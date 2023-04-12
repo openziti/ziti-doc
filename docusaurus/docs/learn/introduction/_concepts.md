@@ -27,8 +27,13 @@ Ziti routers, which make up the fabric, can also be dark. Routers located in pri
 
 Services can be completely dark if they are implemented with a Ziti SDK. If this is not possible a Ziti tunneler or proxy can be co-located with the service. The service then only needs to allow connections from the local machine or network, depending on how close you colocate the proxy to the service.
 
-## End to End Encryption
+## End-to-End Encryption
 
-If you take advantage of Ziti's developer SDKs and embed Ziti in your client and server applications, your traffic can be configured to be seamlessly encrypted from the client application to server application. If you prefer to use tunnelers or proxy applications, the traffic can be encrypted for you from machine to machine or private network to private network. Various combinations of the above are also supported.
+Ziti makes sure that when you connect to a service using a Ziti network, your connection is encrypted from start to 
+finish. Each connection is secured through public-private-key cryptography provided by
+[libsodium](https://libsodium.org). This means that even if your service data is not encrypted on its own, the 
+connection between the SDKs will be encrypted and only readable by the intended parties. This feature is available in 
+all applications that use Ziti's SDKs, including Ziti's tunneler, desktop, and mobile applications.
 
-End-to-end encryption means that even if systems between the client and server are compromised, your traffic cannot be decrypted or tampered with.
+
+Read more about end-to-end encryption and security for other connections on the [Connection Security](../core-concepts/security/connection-security.md) page.
