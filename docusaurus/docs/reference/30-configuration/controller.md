@@ -326,10 +326,10 @@ interval memory profiling occurs at and is output. These settings are useful for
 be enabled in production environments without careful consideration.
 
 - `cpu` - (optional)
-    - `path` - (required) the path to output the pprof data
+  - `path` - (required) the path to output the pprof data
 - `memory` - (optional)
-    - `path` - (required) the path to output the memprof data
-    - `intervalMs` (optional, 15s) the frequency to output memprof data
+  - `path` - (required) the path to output the memprof data
+  - `intervalMs` (optional, 15s) the frequency to output memprof data
 
 ```yaml
 profile:
