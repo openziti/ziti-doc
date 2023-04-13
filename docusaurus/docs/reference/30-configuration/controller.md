@@ -298,6 +298,7 @@ events:
   amqpLogger:
     subscriptions:
       - type: fabric.usage
+        interval: 5s
     handler:
       type: amqp
       format: json
