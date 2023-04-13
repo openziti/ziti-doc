@@ -252,11 +252,19 @@ is as follows:
     - `metricFilter` - (optional) a regular expression to match the metric name value on
 - `services` - (optional) Service events
 
-The `handler` section contains two or three properties depending on `type`:
+The properties in the `handler` section depend on handler `type` (one of `file`, `stdout`, or `amqp`):
 
-- `type` - (required) the type of handler ("file" or "stdout")
-- `format` - (required) the format of events for the `type` ("json" or "plain")
-- `path` - (conditional) used the "file" `type`, the path of the output file
+- common properties for all handler types
+  - `format` - (required) the format of events for the `type` (`json` or `plain`)
+- type `file`
+  - `path` - (conditional) used the "file" `type`, the path of the output file
+- type `amqp`: note that queue and consumer options must match
+  - `url` (required) the URL of the AMQP broker to connect to
+  - `queue` (required) the name of the queue to publish events to
+  - `durable` (optional) whether the queue should be durable between broker runs (default: true)
+  - `autoDelete` (optional) whether the queue should be deleted when there are no consumers (default: false)
+  - `exclusive` (optional) whether the queue should be exclusive to a single consumer (default: false)
+  - `noWait` (optional) whether the controller should wait for the queue to confirm receipt of messages (default: false)
 
 Example JSON File Logger:
 
@@ -281,6 +289,25 @@ events:
       type: file
       format: json
       path: /tmp/ziti-events.log
+```
+
+Example amqp Logger:
+
+```yaml
+events:
+  amqpLogger:
+    subscriptions:
+      - type: fabric.usage
+        interval: 5s
+    handler:
+      type: amqp
+      format: json
+      url: amqp://guest:guest@localhost:5672
+      queue: ziti-events
+      durable: true
+      autoDelete: false
+      exclusive: false
+      noWait: false
 ```
 
 ### `healthChecks`
