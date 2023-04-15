@@ -35,7 +35,7 @@ These are the arbitrary ports we'll use in this example for convenience when spe
 ### Prerequisites
 
 :::note
-Make sure you have `jq` and `curl` installed before running the `expressInstall` one-liner.
+Make sure you have `tar`, `jq` and `curl` installed before running the `expressInstall` one-liner.
 :::
 
 ### `expressInstall` Setup {#expressinstall-setup}
