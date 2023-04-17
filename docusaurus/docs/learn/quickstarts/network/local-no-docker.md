@@ -11,7 +11,7 @@ when you want to turn the overlay network on or off.
 ## Prerequisites
 
 :::note
-Make sure you have `jq` and `curl` installed before running the `expressInstall` one-liner.
+Make sure you have `tar`, `hostname`, `jq` and `curl` installed before running the `expressInstall` one-liner.
 :::
 
 There is not much preparation necessary to getting up-and-running locally. At this time, this guide expects that
