@@ -83,18 +83,16 @@ If the DNS record exists it returns the answer and sets query status to `NO_ERRO
 
 ## Multi-Factor Authentication
 
-You may use multi-factor authentication (MFA) with `ziti-edge-tunnel` by completing the following workflow to register a time-based one-time password (TOTP) token generator with the OpenZiti Controller.
+Complete the following workflow to register a time-based one-time password (TOTP) token generator with the OpenZiti Controller.
 
 ### Find the Identifier of the OpenZiti Identity
 
-The identifier is typically the full path to the JSON identity file that is already added to the running `ziti-edge-tunnel run` process.
-
 The `ziti-edge-tunnel tunnel_status` command will list the identifiers of all identities that are currently loaded. The user that runs this command, and all the `ziti-edge-tunnel` commands that follow, must have write permission on the IPC socket, i.e. `/tmp/.ziti/ziti-edge-tunnel.sock`.
 
-Optionally, you may use `jq` to parse the JSON output of `ziti-edge-tunnel tunnel_status` to extract the identifiers. I found it necessary to also truncate the output to remove the leading and trailing characters around the JSON.
+Use `sed` and `jq` to parse the JSON output of `ziti-edge-tunnel tunnel_status` and extract the identifiers of all the loaded identities.
 
 ```bash
-$ ziti-edge-tunnel tunnel_status|tail -c +20|head -c -2|jq '.Data.Identities[].Identifier'
+$ ziti-edge-tunnel tunnel_status | sed -E 's/(^received\sresponse\s<|>$)//g' | jq '.Data.Identities[].Identifier'
 "/opt/openziti/etc/identities/ziti-id.json"
 ```
 
