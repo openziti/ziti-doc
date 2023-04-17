@@ -1,3 +1,5 @@
+import TunnelerMfa from './_tunneler-mfa.md'
+
 # Windows
 
 ## Installation
@@ -8,7 +10,6 @@ The ZDEW has an installer which is available for download from GitHub.
 Please download **Ziti.Desktop.Edge.Client-*.exe** and follow the on screen instruction for installation.
 
 Click **Run Ziti Desktop Edge** when installation completes.
-
 
 ## Enrolling 
 
@@ -67,3 +68,11 @@ The logs directory has three subdirectories for each of the main components:
 
 ## Source
 The source for ZDEW is found on GitHub at https://github.com/openziti/desktop-edge-win
+
+## Managing MFA with the CLI
+
+The tunneler CLI is installed automatically along with the ZDEW and is not necessary to use the CLI directly.  
+
+Using Powershell, adapt the following instructions from BASH to Powershell to register a time-based one-time password (TOTP) token generator with the OpenZiti Controller.
+
+<TunnelerMfa/>
