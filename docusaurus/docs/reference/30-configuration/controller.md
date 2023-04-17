@@ -313,10 +313,10 @@ and routers. See the conventions that apply to all [identity](conventions.md#ide
 
 The `network` section sets network wide options.
 
-- `minRouterCost` - (optional) the minimum router cost (default 10)
-- `routerConnectionChurnLimit` -  (optional) how often a new connection from a router can take over for an existing connection (default 1m)
-- `intervalAgeThreshold` - (optional) the interval at which metrics are batched for reporting (default 80s)
-- `metricsReportInterval` - (optional) the frequency at which metrics are reported (default 1m)
+- `minRouterCost` - (optional, 10) the minimum router cost
+- `routerConnectionChurnLimit` -  (optional, 1m) how often a new connection from a router can take over for an existing connection
+- `intervalAgeThreshold` - (optional, 80s) the interval at which metrics are batched for reporting
+- `metricsReportInterval` - (optional, 1m) the frequency at which metrics are reported
 
 ### `profile`
 
