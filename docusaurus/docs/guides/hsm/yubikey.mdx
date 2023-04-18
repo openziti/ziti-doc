@@ -205,7 +205,7 @@ you update the path to include the folder of libykcs11-1.dll as additional libra
     ]}>
     <TabItem value="notwindows">
 
-    ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+    ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD
 
     # create a new identity and output the jwt to a known location
     ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
@@ -216,7 +216,7 @@ you update the path to include the folder of libykcs11-1.dll as additional libra
 </TabItem>
 <TabItem value="windows">
 
-    ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+    ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD%
 
     REM create a new identity and output the jwt to a known location
     ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
@@ -410,7 +410,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     cd@cd-ubuntuvm: mkdir -p ${HSM_NAME}
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: cd ${HSM_NAME}
-    cd@cd-ubuntuvm: ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+    cd@cd-ubuntuvm: ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD
     # create a new identity and output the jwt to a known location
     ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
@@ -784,7 +784,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     c:\path\to\yubico-piv-tool-2.0.0>
     c:\path\to\yubico-piv-tool-2.0.0>cd /d %HSM_NAME%
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD%
     Token: 2e4b9d55-fe89-4e35-8101-7d8a5f492b8b
 
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>

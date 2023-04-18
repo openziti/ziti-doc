@@ -198,7 +198,7 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 <Tabs>
 <TabItem value="ziti-cli-linux" label="Linux/MacOS">
 
-    ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+    ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD
 
     # create a new identity and output the jwt to a known location
     ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
@@ -209,7 +209,7 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
 </TabItem>
 <TabItem value="ziti-cli-windows" label="Windows">
 
-    ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+    ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD%
 
     REM create a new identity and output the jwt to a known location
     ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
@@ -511,7 +511,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     > HERE
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD -c $ZITI_CTRL_CERT
+    $ ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD
     # create a new identity and output the jwt to a known location
     ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
@@ -987,7 +987,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     More?
     More? slots.mechanisms = ALL > %SOFTHSM2_CONF%
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD% -c %ZITI_CTRL_CERT%
+    c:\path\to\softhsm\softhsm_demo>ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD%
     Token: c6f4d504-6095-4118-8f13-3c787821963f
 
     c:\path\to\softhsm\softhsm_demo>
