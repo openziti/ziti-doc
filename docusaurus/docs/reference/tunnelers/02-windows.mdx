@@ -67,12 +67,13 @@ The logs directory has three subdirectories for each of the main components:
 * UI - the logs from the UI
 
 ## Source
-The source for ZDEW is found on GitHub at https://github.com/openziti/desktop-edge-win
 
-## Managing MFA with the CLI
+The [ZDEW source is in GitHub](https://github.com/openziti/desktop-edge-win).
 
-The tunneler CLI is installed automatically along with the ZDEW and is not necessary to use the CLI directly.  
+## Managing MFA with the CLI in WSL
 
-Using Powershell, adapt the following instructions from BASH to Powershell to register a time-based one-time password (TOTP) token generator with the OpenZiti Controller.
+You can run the tunneler CLI in WSL directly instead of or in addition to running Ziti Desktop Edge for Windows (ZDEW) app. 
+
+These are the instructions for BASH in WSL to register a time-based one-time password (TOTP) token generator with the OpenZiti Controller. You could adapt these steps to Powershell to manage MFA for ZDEW with the CLI, but using the ZDEW app is easier.
 
 <TunnelerMfa/>
