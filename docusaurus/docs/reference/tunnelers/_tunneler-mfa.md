@@ -1,6 +1,5 @@
 
 
-
 ### Find the Identifier of the OpenZiti Identity
 
 The `ziti-edge-tunnel tunnel_status` command will list the identifiers of all identities that are currently loaded. The user that runs this command, and all the `ziti-edge-tunnel` commands that follow, must have write permission on the IPC socket, i.e. `/tmp/.ziti/ziti-edge-tunnel.sock`.
@@ -12,7 +11,7 @@ $ ziti-edge-tunnel tunnel_status | sed -E 's/(^received\sresponse\s<|>$)//g' | j
 "/opt/openziti/etc/identities/ziti-id.json"
 ```
 
-The identifier is "**/opt/openziti/etc/identities/ziti-id.json**" in this example.
+The identifier is "**/opt/openziti/etc/identities/ziti-id.json**" in this example. The identifier is computed from the value of the `--identity` or `--identity-dir` option that was used when the identity was loaded. If the `--identity` option was used, then the identifier is exactly the value of the `--identity` option. If the `--identity-dir` option was used, then the identifier is directory value with the path to the identity file appended. The resultant identifier could be an absolute or relative path, depending on the value given to those options.
 
 ### Enable MFA
 
