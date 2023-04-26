@@ -22,7 +22,11 @@ Once the VM is created, we can get the IP address of the droplet from the Resour
 ssh root@<ip>
 ```
 
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. Skip the setup for the "EXTERNAL_DNS" when following the guide.
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+ 
+**export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
+This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 
 ## 1.3 Setup Ziti Administration Console (ZAC) 
 **Optional**
