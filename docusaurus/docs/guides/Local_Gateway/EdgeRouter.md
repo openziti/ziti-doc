@@ -31,18 +31,18 @@ Please complete the following steps before continue with this demo.
 - Ziti Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_PORT**
 - Ziti Controller Management Port: On the controller, issue this command **echo $ZITI_EDGE_CONTROLLER_PORT**
 - Ziti Controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
-- Created two *routers* already. The routers should be running under **Ubuntu 22.04**.
+- Created two *routers* already. The routers should be running on **Ubuntu 22.04**.
 - Created one *windows client* already. Suggested windows version Windows 10 or Windows 11. Windows servers should work fine as well.
 - Created one *ubuntu server* already. This can be any server capable of accepting ssh connection.
 
-# 2.0 Setup routers
+# 2.0 Setup Routers
 ## 2.1 Setup the Router For Windows Subnet
 ### 2.1.1 Retrieve auto_enroll script and gather setup info
 **ssh** into your router VM (**local-router**). 
 
 Retrieve **ziti_router_auto_enroll** to setup your router.
 ```bash
-wget https://github.com/netfoundry/edge-router-registration/releases/latest/download/ziti_router_auto_enroll.tar.gz
+wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
 tar xf ziti_router_auto_enroll.tar.gz
 ```
 You should have a file **ziti_router_auto_enroll** under the directory.
@@ -127,7 +127,7 @@ We want to add attribute "clients" to the identity associated with the edge rout
 
 Retrieve **ziti_router_auto_enroll** to setup your router automatically.
 ```bash
-wget https://github.com/netfoundry/edge-router-registration/releases/latest/download/ziti_router_auto_enroll.tar.gz
+wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
 tar xf ziti_router_auto_enroll.tar.gz
 ```
 
@@ -238,7 +238,7 @@ Now we need to put these two configs into a service. We going to name the servic
 ## 4.4 Create Service-Edge-Router-Policy
 This step is **optional** since the default service-edge-router-policy already includes all services to all routers.
 
-But in case, you need to add a policy, here is the command to add the service tag we created (rtrhosted) to all routers
+But in case you need to add a policy, here is the command to add the service tag we created (rtrhosted) to all routers
 ```bash
 /opt/ziti/ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
