@@ -23,12 +23,12 @@ sudo apt upgrade
 ### 2.2.2 Download ziti_router_auto_enroll binary
 **ziti_router_auto_enroll** is an easy way to setup your router automatically.
 ```bash
-wget https://github.com/netfoundry/edge-router-registration/releases/latest/download/ziti_router_auto_enroll.tar.gz
+wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
 tar xf ziti_router_auto_enroll.tar.gz
 ```
 You should have a file **ziti_router_auto_enroll** under the directory.
 
-For detail info on ziti_router_auto_enroll, please checkout this page on github: https://github.com/netfoundry/edge-router-registration/tree/main/ziti_router_auto_enroll
+For detail info on ziti_router_auto_enroll, please checkout the [github page](https://github.com/netfoundry/ziti_router_auto_enroll)
 
 ## 2.3 Create and setup Router directly on router VM
 
