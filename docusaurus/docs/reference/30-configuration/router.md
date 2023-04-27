@@ -348,7 +348,7 @@ The `metrics` section controls how metrics are communicated to the connection co
 
 - `reportInterval` - (optional, 1m) the interval of time to wait between crafting a new metrics message to be sent to the controller
 - `messageQueueSize` - (optional, 10) the maximum number of buffered metrics messages allowed to be queued to send to the controller
-- `intervalAgeThreshold` - (optional, 80s) the interval at which metrics are batched for reporting
+- `intervalAgeThreshold` - (optional, 80s) how old a batch of metrics must be before it's eligible to be sent to the controller
 
 ```yaml
 metrics:

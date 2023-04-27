@@ -315,8 +315,8 @@ The `network` section sets network wide options.
 
 - `minRouterCost` - (optional, 10) the minimum router cost
 - `routerConnectionChurnLimit` -  (optional, 1m) how often a new connection from a router can take over for an existing connection
-- `intervalAgeThreshold` - (optional, 80s) the interval at which controller metrics are batched for reporting
-- `metricsReportInterval` - (optional, 1m) the frequency at which controller metrics are reported
+- `intervalAgeThreshold` - (optional, 80s) how old a batch of metrics must be before it's eligible to be emitted
+- `metricsReportInterval` - (optional, 1m) the frequency at which controller metrics events are emitted
 
 ### `profile`
 
