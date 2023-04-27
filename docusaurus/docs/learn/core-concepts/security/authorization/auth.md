@@ -1,7 +1,7 @@
 
 # Authorization
 
-After becoming [fully authenticated](../authentication/auth.md#full-vs-partial-authentication), an identity may now 
+After becoming [fully authenticated](../sessions.md#full-vs-partial-authentication), an identity may now 
 discover services and Edge Routers available on the network via the Edge Client API they are authorized to access.
 Both service and Edge Router authorization are controlled through [policies](policies/overview.mdx). Additionally,
 service policies may have additional requirements for authorization based on the environment or attributes of a

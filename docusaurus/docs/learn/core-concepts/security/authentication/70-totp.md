@@ -13,7 +13,7 @@ Ziti allows individual clients to enroll or un-enroll from MFA TOTP. Administrat
 
 ### Authentication Policies
 When enforced at authentication via [Authentication Policies](./30-authentication-policies.md), clients are unable to 
-transition from [partially authenticated to fully authenticated](./auth.md#full-vs-partial-authentication) 
+transition from [partially authenticated to fully authenticated](../sessions.md#full-vs-partial-authentication) 
 without enrolling in MFA TOTP - leaving them unable to list services or connect to them. 
 
 ### MFA Posture Check

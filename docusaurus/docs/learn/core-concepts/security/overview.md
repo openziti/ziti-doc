@@ -23,7 +23,7 @@ are related to identity authentication and service access:
 - [Posture Queries](./authorization/posture-checks#posture-data) - describes a request for environmental information from a client
 - [Posture Responses](./authorization/posture-checks#posture-data) - a response to a Posture Query provided by a client
 - [Posture Data](./authorization/posture-checks#posture-data) - the current environmental state provided via Posture Responses and known information
-- [Authentication Queries](./authentication/auth.md#authentication-queries) - additional, secondary, authentication factors required after initial, primary, authentication
+- [Authentication Queries](./sessions.md#authentication-queries) - additional, secondary, authentication factors required after initial, primary, authentication
 
 There is an additional policy type for Edge Routers:
 

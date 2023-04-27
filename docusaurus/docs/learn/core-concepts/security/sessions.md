@@ -148,7 +148,7 @@ in the Client and Management Open API 2.0 specifications under the label `authQu
 #### Associated Data & Removal
 
 API Sessions, may be used to create ephemeral certificates called [API Session Certificates](authentication/20-api-session-certificates.md)
-and sessions for service access. Additionally, API Sessions are used to scope [Posture Data](authorization/posture-checks.md#posture-data-posture-data).
+and sessions for service access. Additionally, API Sessions are used to scope [Posture Data](authorization/posture-checks.md#posture-data).
 When an API Session is removed for any reason, all associated data is also removed. As an example, when removing an
 API Session used to create a [Session](#session) the [Session](#session) will also be removed. Removing a [Session](#session) will also terminate any
 existing connections that used the security token associated with that [Session](#session) and prevent it from being used to
