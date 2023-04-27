@@ -3,7 +3,7 @@ sidebar_position: 20
 sidebar_label: Using Ziti-Edge-Tunnel
 title: Ziti-Edge-Tunnel as Gateway
 ---
-# 1.0 Introduction
+## 1.0 Introduction
 
 ## 1.1 Network Description
 This guide demonstrates how to setup LAN gateways with **Ziti-Edge-Tunnel** for the purpose of transferring data between non-Ziti endpoints across Ziti Fabric.
@@ -26,9 +26,10 @@ Please complete the following steps before continue with this demo.
 - An open-ziti network should be created already. If not, please follow this quickstart [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) guide to setup open-ziti network first.
 - Created two *tunnellers* already. The tunnelers should be running on **Ubuntu 22.04**. Please note, we support wide range of OSes for tunneler deployment. However, this demo uses Ubuntu 22.04 as example. 
 - Created one *windows client* already. Suggested windows version Windows 10 or Windows 11. Windows servers should work fine as well.
-- Created one *ubuntu server* already. This can be any server capable of accepting ssh connection.
+- Created one *ubuntu server* already. Or any linux server capable of accepting ssh and http connection.
+- We also need at least one Transit Router and one Public Edge Router. The quickstart already setup a Edge Router with both transit and edge functionality. So if you used the quickstart guide, this should work already.
 
-# 2.0 Setup Tunnellers
+## 2.0 Setup Tunnellers
 ## 2.1 Create Tunnellers on the Controller
 Login to your controller and create two identities named **local-tunnel** and **remote-tunnel**
 ```
@@ -42,7 +43,7 @@ Login to ziti cli.
 ```bash
 zitiLogin
 ```
-Create identities.
+Create identities and save the enrollment token to files.
 ```bash
 ziti edge create identity user local-tunnel -o local-tunnel.jwt
 ziti edge create identity user remote-tunnel -o remote-tunnel.jwt
@@ -88,7 +89,7 @@ First setup IP forwarding in the Linux system.
 echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/01-ipforward.conf >/dev/null
 sudo sysctl -p /etc/sysctl.d/01-ipforward.conf
 ```
-Second, setup forwarding from local interface to the tun0.
+Second, setup forwarding on the firewall from local interface to the tun interface created by ziti (tun0).
 
 Find the local interface first, if you have only one local interface, this command can help you find the name of the interface.
 ```bash
@@ -99,34 +100,40 @@ ip -o -4 route show to default | awk '{print $5}'
 ziggy@local-tunnel:~$ ip -o -4 route show to default | awk '{print $5}'
 ens160
 ```
-Now setup the forwarding
+Now setup the forwarding on ufw
 ```bash
 sudo ufw route allow in on ens160 out on tun0
 ```
 
 ## 2.3 Setup the Router For Ubuntu Server Subnet
 ### 2.3.1 Register Identities
-Login to your **remote-tunnel** machine/VM. Register the Tunneler follow the previous section. This time use **remote-tunnel.jwt** as the token.
+Login to your **remote-tunnel** machine/VM. Register the tunneler by using **remote-tunnel.jwt** token with the instructions mentioned in [this section](#221-register-identities).
 ### 2.3.2 setup ufw
+For this demo, we only show the connection initiated from local-tunnel side towards remote-tunnel. The ufw rules below are not needed. If you want to have bidirectional connections, you will need to setup these rules.
 ```bash
 sudo ufw enable
 sudo ufw allow from any to 172.16.240.130/32 port 53 proto udp
 sudo ufw allow from any to 172.16.240.130/32 port 22 proto tcp
+sudo ufw allow from any to 172.16.240.130/32 port 80 proto tcp
 ```
-
-# 3.0 Setup Client and Server
+## 3.0 Setup Client and Server
 
 ## 3.1 Ubuntu Server
 
-The Ubuntu Server needs to support **ssh** for our demo.
+The Ubuntu Server needs to support **ssh** (port 22) and **http** (port 8000) for our demo.
 
-We also have a service for http, so we need to setup http server on this machine.
+Make sure these ports are open on the firewall.
+```bash
+sudo ufw enable
+sudo ufw allow from any to 172.16.240.129/32 port 22 proto tcp
+sudo ufw allow from any to 172.16.240.129/32 port 8000 proto tcp
+```
+
+Next, start the webserver. The web server will be listening on the port 8000.
 ```bash
 echo "You have reached Remote Web Server." >hello.txt
 python3 -m http.server
 ```
-
-The web server will be listening on the port 8000.
 
 ## 3.2 Windows Client
 There are two changes we need to make on the windows side.
@@ -135,7 +142,10 @@ The first one, we need to change the configuration of the preferred DNS to point
 
 ![Diagram](/img/local_gw/LocalGW24.png)
 
-The second change is to setup routing.  We need to route the 100.64.0.0/10 traffic to our **local-tunnel**. And for any IP based traffic redirecting, we also need to setup route to our Tunneler as well. For the demo, we are routing traffics destine for **172.16.240.129**.
+The second change is to setup routing.
+- We need to route the **100.64.0.0/10** traffic to our **local-tunnel**. Any DNS based intercept resolved to the IP in the subnet 100.64.0.0/10.
+- We also need to route **172.16.240.129/32** to **local-tunnel**.  **172.16.240.129** is IP we intended to intercept and pass through ziti fabric.
+
 To do this, open an cmd window as Administrator.
 ```bash
 route add 100.64.0.0 mask 255.192.0.0 172.16.31.175
@@ -143,19 +153,19 @@ route add 172.16.240.129 mask 255.255.255.255 172.16.31.175
 ```
 ![Diagram](/img/local_gw/LocalGW25.png)
 
-# 4.0 ssh Service Configuration
-
-The service configuration are done on the controller. Login to the controller and connect to ziti cli first.
+## 4.0 ssh Service Configuration
+We make all configuration changes on the controller. Login to the controller and connect to ziti cli first.
 ```
 ssh <user>@68.183.139.122
 ```
+Example on how to start CLI with quickstart created controller:
 ```bash
 source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 zitiLogin
 ```
 
 ## 4.1 Create an intercept.v1 config
-This config is used for local side connection. We are setting up intercept on dns name "mysimpleservice.ziti"
+This config is used for local side connection. We are setting up intercept on DNS name "mysimpleservice.ziti"
 
 ```bash
 ziti edge create config ssh-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["mysimpleservice.ziti"], "portRanges": [{"low": 22, "high": 22}]}'
@@ -172,7 +182,7 @@ If the command finished successfully, you will see two configs:
 
 ![Diagram](/img/local_gw/LocalGW26.png)
 
-## 4.3 Create Service
+## 4.3 Create ssh Service
 Now we need to put these two configs into a service. We going to name the service "ssh" and assign an attribute "tun-hosted"
 
 ```bash
@@ -183,7 +193,7 @@ ziti edge create service ssh -c ssh-intercept-config,ssh-host-config -a tun-host
 ![Diagram](/img/local_gw/LocalGW27.png)
 
 ## 4.4 Create Service-Edge-Router-Policy
-This step is **optional** since the default service-edge-router-policy already includes all services to all routers.
+This step is **optional** if you used quickstart. The service-edge-router-policy already includes "#all" service roles to "#all" edge router roles as displayed on the screen capture below.
 
 But in case you need to add a policy, here is the command to add the service tag we created (tun-hosted) to all routers
 ```bash
@@ -192,12 +202,12 @@ ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' 
 ![Diagram](/img/local_gw/LocalGW28.png)
 
 ## 4.5 Create Bind policies
-Now we need to specify which identity (in our case, **#hosts**) is going to host the service by setting up a bind service policy
+We need to specify which identity (in our case, **#hosts**) is going to host the service by setting up a bind service policy
 ```bash
 ziti edge create service-policy ssh-bind Bind --identity-roles "#hosts" --service-roles '#tun-hosted' --semantic 'AnyOf'
 ```
 ## 4.6 Create Dial policies
-Now we need to specify which identity (in this case, **#clients**) is going to intercept the service by setting up a dial service policy
+We also need to specify which identity (in this case, **#clients**) is going to intercept the service by setting up a dial service policy
 ```bash
 ziti edge create service-policy ssh-dial Dial --identity-roles "#clients" --service-roles '#tun-hosted' --semantic 'AnyOf'
 ```
@@ -206,16 +216,13 @@ If both policies are setup correctly, you should see two service-policies.
 ![Diagram](/img/local_gw/LocalGW29.png)
 
 ## 4.7 Create Edge-Router-Policy and Public Edge-Router
-The Tunnellers need to connect to Public Edge-Router to pass traffic as depict in the network diagram. 
+The Tunnellers need to connect to Public Edge-Router to pass traffic as depict in the [network diagram](#11-network-description). 
 
-If you decided to create another Edge-Router for your testing, you can follow guide "[Ziti-Edge-Router as Gateway](/docs/guides/Local_Gateway/EdgeRouter/)" to setup your edge router.
-
-Once your edge router is setup, make sure it is assigned to all identities. The easiest way to accomplish this is to set your edge router's attribute to "#public". 
-
-The quickstart already created an public router and edge-router-policy. 
-
+**The quickstart already created an public router and the edge-router-policy.**
 
 ![Diagram](/img/local_gw/LocalGW30.png)
+
+If you need to create a public Edge-Router, you can follow [this guide](#a1-create-public-edge-router). If you need to create an edge-router-policy, you can follow [this guide](#a2-create-edge-router-policy).
 
 ## 4.8 Test the service
 
@@ -227,10 +234,10 @@ Then you should be able ssh to mysimpleservice.ziti.
 
 ![Diagram](/img/local_gw/LocalGW31.png)
 
-# 5.0 http Service Configuration
-In this section, we going to show how to setup interception via IP address. In the previous section (3.2 Windows Client), we already setup the routing on windows to route the intercept traffic to local-tunnel node. (route add 172.16.240.129 mask 255.255.255.255 172.16.31.175)
+## 5.0 http Service Configuration
+In the previous section, we showed how to configure a DNS based intercept via open-ziti. In this section, we going to show how to setup interception via IP address. If you followed the instruction in the [3.2 Windows Client](#32-windows-client) section, the routing for the intercept traffic to local-tunnel node is ready set. (*route add 172.16.240.129 mask 255.255.255.255 172.16.31.175*)
 
-The service configuration are done on the controller. Login to the controller and connect to ziti cli first.
+We can login to the controller to perform the configurations.
 ```
 ssh <user>@68.183.139.122
 ```
@@ -240,13 +247,13 @@ zitiLogin
 ```
 
 ## 5.1 Create an intercept.v1 config
+Create intercept config on IP: 172.16.240.129 and port **80** for http traffic.
 ```bash
 ziti edge create config http-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["172.16.240.129"], "portRanges": [{"low": 80, "high": 80}]}'
 ```
 
 ## 5.2 Create a host.v1 config
-This config is used for remote side connection. We are setting up the address the remote server can reach. In this demo, We are dropping the traffic off at "172.16.240.129"
-
+Create Host config on IP: 172.16.240.129 and port **8000**. As you can see, we have redirected traffic intended for port 80 (from client) to port 8000 (on the host).
 ```bash
 ziti edge create config http-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":8000}'
 ```
@@ -255,8 +262,8 @@ If the command finished successfully, you will see two configs:
 
 ![Diagram](/img/local_gw/LocalGW32.png)
 
-## 5.3 Create Service
-Now we need to put these two configs into a service. We going to name the service "http" and assign an attribute "tun-hosted"
+## 5.3 Create http Service
+Put these two configs into a service. We going to name the service "http" and assign an attribute "tun-hosted"
 
 ```bash
 ziti edge create service http -c http-intercept-config,http-host-config -a tun-hosted
@@ -265,18 +272,104 @@ ziti edge create service http -c http-intercept-config,http-host-config -a tun-h
 ![Diagram](/img/local_gw/LocalGW33.png)
 
 ## 5.4 Service-Edge-Router-Policy
-This is done already. Please make sure there is a service-edge-router-policy for service tag (tun-hosted) to all routers.
+Since we used same attribute for http service as the attribute for ssh service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
 
 ![Diagram](/img/local_gw/LocalGW28.png)
 
 ## 5.5 Bind and Dial policies
-We can also reused the Bind and Dial policies we created earlier. Since our host identity (#hosts) and service attribute (#tun-hosted) did not change for bind policy. And our client identity (#clients) and service attribute (#tun-hosted) did not change for dial policy.
+We also do not need to create new Bind and Dial policies. Since our host identity (#hosts) and service attribute (#tun-hosted) did not change for bind policy. And our client identity (#clients) and service attribute (#tun-hosted) did not change for dial policy.
 
 ![Diagram](/img/local_gw/LocalGW29.png)
 
 ## 5.6 Test the service
 
-Connect to the Windows Client machine, open a webbrowser. Enter this address (http://172.16.240.129/hello.txt). You should see the text we entered earlier on the ubuntu server: (You have reached Remote Web Server.)
-
+Connect to the Windows Client machine, open a web browser. Enter this address (http://172.16.240.129/hello.txt). You should see the text we entered earlier on the [ubuntu server](#31-ubuntu-server)
 
 ![Diagram](/img/local_gw/LocalGW34.png)
+
+## Appendix
+## A.1 Create Public Edge Router
+### A.1.1 Create and register router
+Create an VM (Ubuntu 22.04) on the public cloud. **ssh** into that machine.
+
+Retrieve **ziti_router_auto_enroll** to setup your router.
+```bash
+wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
+tar xf ziti_router_auto_enroll.tar.gz
+```
+You should have a file **ziti_router_auto_enroll** under the directory.
+
+Get all the required information from controller:
+![Diagram](/img/local_gw/LocalGW02.png)
+- Controller IP: **68.183.139.122**
+- Controller Fabric Port: **8440** (default value if following controller setup guide)
+- Controller Management Port: **8441** (default value if following controller setup guide)
+- Controller Passwd: **Test@123**
+
+We are going to use Router Name: **DemoPublicER**
+
+### A.1.2 Create and Register Router
+```bash
+sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --assumePublic --routerName DemoPublicER
+```
+Check to make sure ziti-router is running correctly
+```
+root@LocalGWDemoER:~# systemctl status ziti-router
+● ziti-router.service - Ziti-Router
+     Loaded: loaded (/etc/systemd/system/ziti-router.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2023-04-27 15:23:59 UTC; 2min 31s ago
+   Main PID: 2894 (ziti)
+      Tasks: 6 (limit: 2323)
+     Memory: 16.5M
+        CPU: 435ms
+     CGroup: /system.slice/ziti-router.service
+             └─2894 /opt/ziti/ziti router run /opt/ziti/config.yml
+```
+**expected output:** The status should show "active (running)"
+
+Assign the attribute (#public) to the router. Here is how to do it from the router.
+```bash
+/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+/opt/ziti/ziti edge update edge-router DemoPublicER -a public
+```
+Verify the router attribute got assigned correctly.
+```
+root@LocalGWDemoER:~# /opt/ziti/ziti edge list edge-routers
+╭────────────┬───────────────────────────┬────────┬───────────────┬──────┬────────────╮
+│ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
+├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
+│ hzb8uoeIY5 │ DemoPublicER              │ true   │ true          │    0 │ public     │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ false  │ true          │    0 │ public     │
+╰────────────┴───────────────────────────┴────────┴───────────────┴──────┴────────────╯
+results: 1-2 of 2
+```
+
+### A.1.3 setup ufw
+The following steps turn on the ufw firewall and opens the ports for this demo.
+```bash
+sudo ufw enable
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+```
+
+## A.2 Create edge-router-policy
+The edge-router-policy sets up the access point (Edge Routers) to the ziti fabric for the identities (Tunnellers). 
+
+There are many approaches on how to create policies to suit your need. For example, you may want to create policy for identities on the west coast to connect to ER in west coast. And policy for east coast identities to connect to east coast ER. But fine tuning edge-route-policy is beyond the scope of this demo. Here, we are going to show you a simple policy for all identities.
+### A.2.1 edge-router-policy for all identities
+We will create an edge-router-policy for all identities to connect to public routers. Here is how to do it from the router.
+```bash
+/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+/opt/ziti/ziti edge create edge-router-policy demoEdgeRouterPolicy --edge-router-roles '#public' --identity-roles '#all'
+```
+
+Check to make sure the policy was created correctly.
+```
+root@LocalGWDemoER:~# /opt/ziti/ziti edge list edge-router-policies
+╭────────────────────────┬───────────────────────────────┬────────────────────────────┬────────────────────────────╮
+│ ID                     │ NAME                          │ EDGE ROUTER ROLES          │ IDENTITY ROLES             │
+├────────────────────────┼───────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ 2zFwqfbeCsVkR4PWP8ELuc │ demoEdgeRouterPolicy          │ #public                    │ #all                       │
+╰────────────────────────┴───────────────────────────────┴────────────────────────────┴────────────────────────────╯
+```
