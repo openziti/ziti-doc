@@ -242,9 +242,9 @@ The `healthChecks` sections allows configuration of router health checks perform
 exposing the `health-checks` API in the `web` section.
 
 - `ctrlPingCheck` - (optional) - configures controller health check pings
-    - `interval` - (optional, 30s) - the frequency to ping the controller with connection checks
-    - `timeout` - (optional, 15s) - the length of time to wait before giving up on a controller health ping
-    - `initialDelay` - (optional, 15s) - the length of time to wait before starting controller health check pings
+  - `interval` - (optional, 30s) - the frequency to ping the controller with connection checks
+  - `timeout` - (optional, 15s) - the length of time to wait before giving up on a controller health ping
+  - `initialDelay` - (optional, 15s) - the length of time to wait before starting controller health check pings
 
 Example:
 
@@ -348,6 +348,7 @@ The `metrics` section controls how metrics are communicated to the connection co
 
 - `reportInterval` - (optional, 1m) the interval of time to wait between crafting a new metrics message to be sent to the controller
 - `messageQueueSize` - (optional, 10) the maximum number of buffered metrics messages allowed to be queued to send to the controller
+- `intervalAgeThreshold` - (optional, 80s) how old a batch of metrics must be before it's eligible to be sent to the controller
 
 ```yaml
 metrics:
