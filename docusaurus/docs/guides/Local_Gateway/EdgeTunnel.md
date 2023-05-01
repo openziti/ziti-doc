@@ -65,16 +65,32 @@ root@LocalGWDemoNC:~# ls -l *jwt
 ziti edge update identity local-tunnel -a clients
 ziti edge update identity remote-tunnel -a hosts
 ```
-![Diagram](/img/local_gw/LocalGW22.png)
+Check to make sure both identities are created correctly with right attribute.
+```
+root@LocalGWDemoNC:~# ziti edge list identities
+╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
+│ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
+├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
+│ TvWsTie6Y  │ remote-tunnel             │ User   │ hosts      │ default     │
+│ gBWYMi26Y5 │ local-tunnel              │ User   │ clients    │ default     │
+│ lIend76Tu  │ Default Admin             │ User   │            │ default     │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ Router │            │ default     │
+╰────────────┴───────────────────────────┴────────┴────────────┴─────────────╯
+results: 1-4 of 4
+```
 
 ## 2.2 Setup the Tunneller For Windows Subnet
 ### 2.2.1 Register Identities
 Login to your **local-tunnel** machine/VM. Follow [Install Linux Package:](/docs/reference/tunnelers/linux/) **Ubuntu Jammy 22.04** section to install and register your ziti-edge-tunnel. Use the **local-tunnel.jwt** created earlier for its identity token.
 
 After the tunnel is registered, check the status and make sure it is running correctly. The status should show "active (running)"
-
-![Diagram](/img/local_gw/LocalGW23.png)
-
+```
+ziggy@local-tunnel:~$ systemctl status ziti-edge-tunnel
+● ziti-edge-tunnel.service - Ziti Edge Tunnel
+     Loaded: loaded (/etc/systemd/system/ziti-edge-tunnel.service; enabled; vendor preset: enabled)
+     Active: active (running) since Fri 2023-04-28 18:38:41 UTC; 3 days ago
+<... output truncated ...>
+```     
 ### 2.2.2 setup ufw
 The following steps turn on the ufw firewall and opens the ports for this demo.
 ```bash
@@ -177,30 +193,52 @@ This config is used for remote side connection. We are setting up the address th
 ```bash
 ziti edge create config ssh-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":22}'
 ```
-
-If the command finished successfully, you will see two configs:
-
-![Diagram](/img/local_gw/LocalGW26.png)
-
+If the config command were successfully, you will see two configs by using "list configs" command:
+```
+root@LocalGWDemoNC:~# ziti edge list configs
+╭────────────────────────┬──────────────────────┬──────────────╮
+│ ID                     │ NAME                 │ CONFIG TYPE  │
+├────────────────────────┼──────────────────────┼──────────────┤
+│ 2U1aRwQCQMHTdrrPTkoafR │ ssh-host-config      │ host.v1      │
+│ 6eduUGlPVvvqCruHc1V7Zd │ ssh-intercept-config │ intercept.v1 │
+╰────────────────────────┴──────────────────────┴──────────────╯
+results: 1-2 of 2
+```
 ## 4.3 Create ssh Service
 Now we need to put these two configs into a service. We going to name the service "ssh" and assign an attribute "tun-hosted"
 
 ```bash
 ziti edge create service ssh -c ssh-intercept-config,ssh-host-config -a tun-hosted
 ```
-
-**Check Service**
-![Diagram](/img/local_gw/LocalGW27.png)
-
+**Check Service** by using "list service"
+```
+root@LocalGWDemoNC:~# ziti edge list services
+╭────────────────────────┬──────┬────────────┬─────────────────────┬────────────╮
+│ ID                     │ NAME │ ENCRYPTION │ TERMINATOR STRATEGY │ ATTRIBUTES │
+│                        │      │  REQUIRED  │                     │            │
+├────────────────────────┼──────┼────────────┼─────────────────────┼────────────┤
+│ 4I7PmAQZ6GhTKkzTRhN0Ac │ ssh  │ true       │ smartrouting        │ tun-hosted │
+╰────────────────────────┴──────┴────────────┴─────────────────────┴────────────╯
+results: 1-1 of 1
+```
 ## 4.4 Create Service-Edge-Router-Policy
 This step is **optional** if you used quickstart. The service-edge-router-policy already includes "#all" service roles to "#all" edge router roles as displayed on the screen capture below.
 
-But in case you need to add a policy, here is the command to add the service tag we created (tun-hosted) to all routers
+But in case you need to add a policy, here is the command to add the service tag we created (tun-hosted) to all routers.
 ```bash
 ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#tun-hosted' --semantic 'AnyOf'
 ```
-![Diagram](/img/local_gw/LocalGW28.png)
-
+Check your service-edge-router-policy, and make sure the policy name "ssh-serp" is created. The automatically created one is called "allSvcAllRouters".
+```
+root@LocalGWDemoNC:~# ziti edge list service-edge-router-policies
+╭────────────────────────┬──────────────────┬───────────────┬───────────────────╮
+│ ID                     │ NAME             │ SERVICE ROLES │ EDGE ROUTER ROLES │
+├────────────────────────┼──────────────────┼───────────────┼───────────────────┤
+│ 5QzQPx6EUOJXT0hTm26Vuc │ allSvcAllRouters │ #all          │ #all              │
+│ 70HiRuxK2JHjz9AuuzEhBt │ ssh-serp         │ #tun-hosted   │ #all              │
+╰────────────────────────┴──────────────────┴───────────────┴───────────────────╯
+results: 1-2 of 2
+```
 ## 4.5 Create Bind policies
 We need to specify which identity (in our case, **#hosts**) is going to host the service by setting up a bind service policy
 ```bash
@@ -212,17 +250,40 @@ We also need to specify which identity (in this case, **#clients**) is going to 
 ziti edge create service-policy ssh-dial Dial --identity-roles "#clients" --service-roles '#tun-hosted' --semantic 'AnyOf'
 ```
 If both policies are setup correctly, you should see two service-policies.
-
-![Diagram](/img/local_gw/LocalGW29.png)
-
+```
+root@LocalGWDemoNC:~# ziti edge list service-policies
+╭────────────────────────┬──────────┬──────────┬───────────────┬────────────────┬─────────────────────╮
+│ ID                     │ NAME     │ SEMANTIC │ SERVICE ROLES │ IDENTITY ROLES │ POSTURE CHECK ROLES │
+├────────────────────────┼──────────┼──────────┼───────────────┼────────────────┼─────────────────────┤
+│ 5hzzeiQBcao4VpQWv645Al │ ssh-bind │ AnyOf    │ #tun-hosted   │ #hosts         │                     │
+│ 5zLKYSfTSXojhZGhFC8uYF │ ssh-dial │ AnyOf    │ #tun-hosted   │ #clients       │                     │
+╰────────────────────────┴──────────┴──────────┴───────────────┴────────────────┴─────────────────────╯
+results: 1-2 of 2
+```
 ## 4.7 Create Edge-Router-Policy and Public Edge-Router
 The Tunnellers need to connect to Public Edge-Router to pass traffic as depict in the [network diagram](#11-network-description). 
 
-**The quickstart already created an public router and the edge-router-policy.**
-
-![Diagram](/img/local_gw/LocalGW30.png)
-
-If you need to create a public Edge-Router, you can follow [this guide](#a1-create-public-edge-router). If you need to create an edge-router-policy, you can follow [this guide](#a2-create-edge-router-policy).
+**The quickstart already created an public router and the edge-router-policy.** You can check the edge-routers and edge-router-policies.
+- There should be one edge router has "edge router roles" of "#public".
+- One policy (named "allEdgeRouters") with "edge router roles" of "#public" and "identity roles" of "#all".
+```
+root@LocalGWDemoNC:~# ziti edge list edge-routers
+╭────────────┬───────────────────────────┬────────┬───────────────┬──────┬────────────╮
+│ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
+├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ false  │ true          │    0 │ public     │
+╰────────────┴───────────────────────────┴────────┴───────────────┴──────┴────────────╯
+results: 1-1 of 1
+root@LocalGWDemoNC:~# ziti edge list edge-router-policies
+╭────────────────────────┬───────────────────────────────┬────────────────────────────┬────────────────────────────╮
+│ ID                     │ NAME                          │ EDGE ROUTER ROLES          │ IDENTITY ROLES             │
+├────────────────────────┼───────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ 1obfCQ6vhYabkXb61DqjU  │ allEdgeRouters                │ #public                    │ #all                       │
+│ xCW0lSWpcn             │ edge-router-xCW0lSWpcn-system │ @LocalGWDemoNC-edge-router │ @LocalGWDemoNC-edge-router │
+╰────────────────────────┴───────────────────────────────┴────────────────────────────┴────────────────────────────╯
+results: 1-2 of 2
+```
+If you need to create a public Edge-Router, you can follow this guide: [Create Public Edge Router](#a1-create-public-edge-router). If you need to create an edge-router-policy, you can follow this guide: [Create edge-router-policy](#a2-create-edge-router-policy).
 
 ## 4.8 Test the service
 
@@ -257,30 +318,41 @@ Create Host config on IP: 172.16.240.129 and port **8000**. As you can see, we h
 ```bash
 ziti edge create config http-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":8000}'
 ```
-
-If the command finished successfully, you will see two configs:
-
-![Diagram](/img/local_gw/LocalGW32.png)
-
-## 5.3 Create http Service
+If the command finished successfully, you will see two more configs created, their names start with "http":
+```
+root@LocalGWDemoNC:~# ziti edge list configs
+╭────────────────────────┬───────────────────────┬──────────────╮
+│ ID                     │ NAME                  │ CONFIG TYPE  │
+├────────────────────────┼───────────────────────┼──────────────┤
+│ 2U1aRwQCQMHTdrrPTkoafR │ ssh-host-config       │ host.v1      │
+│ 3raxTxDn1IRBKcgAEi5ZbM │ http-host-config      │ host.v1      │
+│ 6eduUGlPVvvqCruHc1V7Zd │ ssh-intercept-config  │ intercept.v1 │
+│ 7M6TQ3Rlw2XP6dI2fas7fC │ http-intercept-config │ intercept.v1 │
+╰────────────────────────┴───────────────────────┴──────────────╯
+results: 1-4 of 4
+```
+5.3 Create http Service
 Put these two configs into a service. We going to name the service "http" and assign an attribute "tun-hosted"
 
 ```bash
 ziti edge create service http -c http-intercept-config,http-host-config -a tun-hosted
 ```
 **Check Service**
-![Diagram](/img/local_gw/LocalGW33.png)
-
+```
+root@LocalGWDemoNC:~# ziti edge list services
+╭────────────────────────┬──────┬────────────┬─────────────────────┬────────────╮
+│ ID                     │ NAME │ ENCRYPTION │ TERMINATOR STRATEGY │ ATTRIBUTES │
+│                        │      │  REQUIRED  │                     │            │
+├────────────────────────┼──────┼────────────┼─────────────────────┼────────────┤
+│ 3OUoCk9Oo7xfOxaUZjhzUq │ http │ true       │ smartrouting        │ tun-hosted │
+│ 4I7PmAQZ6GhTKkzTRhN0Ac │ ssh  │ true       │ smartrouting        │ tun-hosted │
+╰────────────────────────┴──────┴────────────┴─────────────────────┴────────────╯
+results: 1-2 of 2
+```
 ## 5.4 Service-Edge-Router-Policy
 Since we used same attribute for http service as the attribute for ssh service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
-
-![Diagram](/img/local_gw/LocalGW28.png)
-
 ## 5.5 Bind and Dial policies
 We also do not need to create new Bind and Dial policies. Since our host identity (#hosts) and service attribute (#tun-hosted) did not change for bind policy. And our client identity (#clients) and service attribute (#tun-hosted) did not change for dial policy.
-
-![Diagram](/img/local_gw/LocalGW29.png)
-
 ## 5.6 Test the service
 
 Connect to the Windows Client machine, open a web browser. Enter this address (http://172.16.240.129/hello.txt). You should see the text we entered earlier on the [ubuntu server](#31-ubuntu-server)
@@ -289,7 +361,7 @@ Connect to the Windows Client machine, open a web browser. Enter this address (h
 
 ## Appendix
 ## A.1 Create Public Edge Router
-### A.1.1 Create and register router
+### A.1.1 Create edge-router
 Create an VM (Ubuntu 22.04) on the public cloud. **ssh** into that machine.
 
 Retrieve **ziti_router_auto_enroll** to setup your router.
@@ -300,15 +372,19 @@ tar xf ziti_router_auto_enroll.tar.gz
 You should have a file **ziti_router_auto_enroll** under the directory.
 
 Get all the required information from controller:
-![Diagram](/img/local_gw/LocalGW02.png)
-- Controller IP: **68.183.139.122**
-- Controller Fabric Port: **8440** (default value if following controller setup guide)
-- Controller Management Port: **8441** (default value if following controller setup guide)
-- Controller Passwd: **Test@123**
-
+```
+root@LocalGWDemoNC:~# curl -s eth0.me
+68.183.139.122  <--- Controller IP
+root@LocalGWDemoNC:~# echo $ZITI_CTRL_PORT
+8440  <--- Controller Fabric Port
+root@LocalGWDemoNC:~# echo $ZITI_EDGE_CONTROLLER_PORT
+8441  <--- Controller Management Port
+root@LocalGWDemoNC:~# echo $ZITI_PWD
+Test@123  <--- Controller Passwd
+```
 We are going to use Router Name: **DemoPublicER**
 
-### A.1.2 Create and Register Router
+### A.1.2 Enroll edge-router
 ```bash
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --assumePublic --routerName DemoPublicER
 ```
@@ -327,7 +403,7 @@ root@LocalGWDemoER:~# systemctl status ziti-router
 ```
 **expected output:** The status should show "active (running)"
 
-Assign the attribute (#public) to the router. Here is how to do it from the router.
+Assign the attribute (#public) to the router. Here is how to do it from **the router**.
 ```bash
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge update edge-router DemoPublicER -a public

@@ -9,7 +9,7 @@ This guide demonstrates how to setup LAN gateways with **Ziti-Edge-Router** for 
 
 There is a [video](https://www.youtube.com/watch?v=H0qGRBMGNIA) for this demo. The demo here setup exact same network as described in the video.
 
-In addition to the video, this guide also demonstrates IP intercept in [Section 5](#50-http-service-configuration).
+In addition to the setup discussed in the video, this guide also demonstrates IP intercept in [Section 5.0 http Service Configuration](#50-http-service-configuration).
 
 For the demonstration, we will setup the network like below:
 
@@ -45,12 +45,16 @@ tar xf ziti_router_auto_enroll.tar.gz
 You should have a file **ziti_router_auto_enroll** under the directory.
 
 Here is information I gathered from **Prerequisite** step:
-![Diagram](/img/local_gw/LocalGW02.png)
-- Controller IP: **68.183.139.122**
-- Controller Fabric Port: **8440** (default value if following controller setup guide)
-- Controller Management Port: **8441** (default value if following controller setup guide)
-- Controller Passwd: **Test@123**
-
+```
+root@LocalGWDemoNC:~# curl -s eth0.me
+68.183.139.122  <--- Controller IP
+root@LocalGWDemoNC:~# echo $ZITI_CTRL_PORT
+8440  <--- Controller Fabric Port
+root@LocalGWDemoNC:~# echo $ZITI_EDGE_CONTROLLER_PORT
+8441  <--- Controller Management Port
+root@LocalGWDemoNC:~# echo $ZITI_PWD
+Test@123  <--- Controller Passwd
+```
 We are going to use Router Name: **local-router**
 
 We are also going to create the router without healthcheck section and metrics, so the following two options will be used to create the router:
@@ -78,7 +82,13 @@ systemctl status ziti-router
 ```
 
 **expected output:** The status should show "active (running)"
-![Diagram](/img/local_gw/LocalGW03.png)
+```
+ziggy@local-gw:~$ systemctl status ziti-router
+● ziti-router.service - Ziti-Router
+     Loaded: loaded (/etc/systemd/system/ziti-router.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2023-05-01 19:51:54 UTC; 1min 48s ago
+<... output truncated ...>
+```
 
 #### 2.1.3.2 resolver
 ```bash
@@ -86,7 +96,22 @@ resolvectl
 ```
 
 **expected output:** The resolver should be set to the IP of the local LAN
-![Diagram](/img/local_gw/LocalGW04.png)
+```
+ziggy@local-gw:~$ hostname -I
+172.16.31.173
+ziggy@local-gw:~$ resolvectl
+Global
+         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+  resolv.conf mode: stub
+Current DNS Server: 172.16.31.173
+       DNS Servers: 172.16.31.173
+
+Link 2 (ens160)
+    Current Scopes: DNS
+         Protocols: +DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+Current DNS Server: 8.8.8.8
+       DNS Servers: 8.8.8.8
+```       
 
 #### 2.1.3.3 Check Router and Identity
 ```bash
@@ -94,8 +119,29 @@ resolvectl
 /opt/ziti/ziti edge list edge-routers
 /opt/ziti/ziti edge list identities
 ```
-![Diagram](/img/local_gw/LocalGW05.png)
-
+**expected output:** You should see a router name "local-router" after "list edge-router".  And there is an identity called "local-router" after "list identities".
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+Token: 0b3a8cc6-dc76-4a94-a502-04380586b49a
+Saving identity 'default' to /home/ziggy/.config/ziti/ziti-cli.json
+ziggy@local-gw:~$ /opt/ziti/ziti edge list edge-routers
+╭────────────┬───────────────────────────┬────────┬───────────────┬──────┬────────────╮
+│ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
+├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
+│ .t9Gno26Y  │ local-router              │ true   │ true          │    0 │            │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ false  │ true          │    0 │ public     │
+╰────────────┴───────────────────────────┴────────┴───────────────┴──────┴────────────╯
+results: 1-2 of 2
+ziggy@local-gw:~$ /opt/ziti/ziti edge list identities
+╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
+│ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
+├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
+│ .t9Gno26Y  │ local-router              │ Router │            │ default     │
+│ lIend76Tu  │ Default Admin             │ User   │            │ default     │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ Router │            │ default     │
+╰────────────┴───────────────────────────┴────────┴────────────┴─────────────╯
+results: 1-3 of 3
+```
 ### 2.1.4 setup ufw
 The following steps turn on the ufw firewall and opens the ports for this demo.
 ```bash
@@ -112,8 +158,19 @@ We want to add attribute "clients" to the identity associated with the edge rout
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge update identity local-router -a clients
 ```
-![Diagram](/img/local_gw/LocalGW06.png)
-
+**expected output:** You should see "clients" show up at "local-router" attribute when you list identities.
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge update identity local-router -a clients
+ziggy@local-gw:~$ /opt/ziti/ziti edge list identities
+╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
+│ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
+├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
+│ .t9Gno26Y  │ local-router              │ Router │ clients    │ default     │
+│ lIend76Tu  │ Default Admin             │ User   │            │ default     │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ Router │            │ default     │
+╰────────────┴───────────────────────────┴────────┴────────────┴─────────────╯
+results: 1-3 of 3
+```
 ## 2.2 Setup the Router For Ubuntu Server Subnet
 
 ### 2.2.1 Retrieve auto_enroll script and gather setup info
@@ -155,7 +212,26 @@ resolvectl
 /opt/ziti/ziti edge list edge-routers
 /opt/ziti/ziti edge list identities
 ```
-![Diagram](/img/local_gw/LocalGW07.png)
+OUTPUT:
+```
+╭────────────┬───────────────────────────┬────────┬───────────────┬──────┬────────────╮
+│ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
+├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
+│ .t9Gno26Y  │ local-router              │ true   │ true          │    0 │            │
+│ 967-JQe6s  │ remote-router             │ false  │ true          │    0 │            │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ false  │ true          │    0 │ public     │
+╰────────────┴───────────────────────────┴────────┴───────────────┴──────┴────────────╯
+results: 1-3 of 3
+╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
+│ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
+├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
+│ .t9Gno26Y  │ local-router              │ Router │ clients    │ default     │
+│ 967-JQe6s  │ remote-router             │ Router │            │ default     │
+│ lIend76Tu  │ Default Admin             │ User   │            │ default     │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ Router │            │ default     │
+╰────────────┴───────────────────────────┴────────┴────────────┴─────────────╯
+results: 1-4 of 4
+```
 
 ### 2.2.3 setup ufw
 For this demo, we only show the connection initiated from local-tunnel side towards remote-tunnel. The ufw rules below are not needed. If you want to have bidirectional connections, you will need to setup these rules.
@@ -174,8 +250,19 @@ We want to add attribute "hosts" to the identity associated with the edge router
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge update identity remote-router -a hosts
 ```
-![Diagram](/img/local_gw/LocalGW08.png)
-
+Check Identity for modified attribute:
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge list identities
+╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
+│ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
+├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
+│ .t9Gno26Y  │ local-router              │ Router │ clients    │ default     │
+│ 967-JQe6s  │ remote-router             │ Router │ hosts      │ default     │
+│ lIend76Tu  │ Default Admin             │ User   │            │ default     │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ Router │            │ default     │
+╰────────────┴───────────────────────────┴────────┴────────────┴─────────────╯
+results: 1-4 of 4
+```
 ## 3.0 Setup Client and Server
 
 ## 3.1 Ubuntu Server
@@ -229,21 +316,34 @@ This config is used for remote side connection. We are setting up the address th
 ```bash
 /opt/ziti/ziti edge create config ssh-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":22}'
 ```
-
-If the command finished successfully, you will see two configs:
-
-![Diagram](/img/local_gw/LocalGW11.png)
-
+If the config command were successfully, you will see two configs by using "list configs" command:
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge list configs
+╭────────────────────────┬───────────────────────┬──────────────╮
+│ ID                     │ NAME                  │ CONFIG TYPE  │
+├────────────────────────┼───────────────────────┼──────────────┤
+│ 3FdpRUpQ2TYinEwURqArpD │ ssh-host-config       │ host.v1      │
+│ 3GAjRaE9CcAhdYZiRNpasa │ ssh-intercept-config  │ intercept.v1 │
+╰────────────────────────┴───────────────────────┴──────────────╯
+results: 1-2 of 2
+```
 ## 4.3 Create ssh Service
 Now we need to put these two configs into a service. We going to name the service "ssh" and assign an attribute "rtrhosted"
 
 ```bash
 /opt/ziti/ziti edge create service ssh -c ssh-intercept-config,ssh-host-config -a rtrhosted
 ```
-
-**Check Service**
-![Diagram](/img/local_gw/LocalGW12.png)
-
+**Check Service** by using "list service"
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge list services
+╭────────────────────────┬──────┬────────────┬─────────────────────┬────────────╮
+│ ID                     │ NAME │ ENCRYPTION │ TERMINATOR STRATEGY │ ATTRIBUTES │
+│                        │      │  REQUIRED  │                     │            │
+├────────────────────────┼──────┼────────────┼─────────────────────┼────────────┤
+│ 48Z59WmcETzhmAwiUGpdwv │ ssh  │ true       │ smartrouting        │ rtrhosted  │
+╰────────────────────────┴──────┴────────────┴─────────────────────┴────────────╯
+results: 1-1 of 1
+```
 ## 4.4 Create Service-Edge-Router-Policy
 This step is **optional** if you used quickstart. The service-edge-router-policy already includes "#all" service roles to "#all" edge router roles as displayed on the screen capture below.
 
@@ -252,7 +352,17 @@ But in case you need to add a policy, here is the command to add the service tag
 ```bash
 /opt/ziti/ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
-![Diagram](/img/local_gw/LocalGW13.png)
+Check your service-edge-router-policy, and make sure the policy name "ssh-serp" is created. The automatically created one is called "allSvcAllRouters".
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge list service-edge-router-policies
+╭────────────────────────┬──────────────────┬───────────────┬───────────────────╮
+│ ID                     │ NAME             │ SERVICE ROLES │ EDGE ROUTER ROLES │
+├────────────────────────┼──────────────────┼───────────────┼───────────────────┤
+│ 5QzQPx6EUOJXT0hTm26Vuc │ allSvcAllRouters │ #all          │ #all              │
+│ PElJS8hQ6E6ykYnRiCJyX  │ ssh-serp         │ #rtrhosted    │ #all              │
+╰────────────────────────┴──────────────────┴───────────────┴───────────────────╯
+results: 1-2 of 2
+```
 
 ## 4.5 Create Bind policies
 We need to specify which identity (in our case, **#hosts**) is going to host the service by setting up a bind service policy
@@ -265,9 +375,16 @@ We also need to specify which identity (in this case, **#clients**) is going to 
 /opt/ziti/ziti edge create service-policy ssh-dial Dial --identity-roles "#clients" --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
 If both policies are setup correctly, you should see two service-policies.
-
-![Diagram](/img/local_gw/LocalGW14.png)
-
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge list service-policies
+╭────────────────────────┬──────────┬──────────┬───────────────┬────────────────┬─────────────────────╮
+│ ID                     │ NAME     │ SEMANTIC │ SERVICE ROLES │ IDENTITY ROLES │ POSTURE CHECK ROLES │
+├────────────────────────┼──────────┼──────────┼───────────────┼────────────────┼─────────────────────┤
+│ 5cEZw4ZJmoajO68yomA9Hd │ ssh-dial │ AnyOf    │ #rtrhosted    │ #clients       │                     │
+│ 5ouEy4ArjXwkwu8xoZJGg5 │ ssh-bind │ AnyOf    │ #rtrhosted    │ #hosts         │                     │
+╰────────────────────────┴──────────┴──────────┴───────────────┴────────────────┴─────────────────────╯
+results: 1-2 of 2
+```
 ## 4.7 Test the service
 
 Connect to the Windows Client machine, open a cmd window.
@@ -295,10 +412,19 @@ Create Host config on IP: 172.16.240.129 and port **8000**. As you can see, we h
 /opt/ziti/ziti edge create config http-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":8000}'
 ```
 
-If the command finished successfully, you will see two configs:
-
-![Diagram](/img/local_gw/LocalGW16.png)
-
+If the command finished successfully, you will see two more configs created, their names start with "http":
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge list configs
+╭────────────────────────┬───────────────────────┬──────────────╮
+│ ID                     │ NAME                  │ CONFIG TYPE  │
+├────────────────────────┼───────────────────────┼──────────────┤
+│ 1QwmHB69qqvtJKMD3LaUiB │ http-host-config      │ host.v1      │
+│ 3FdpRUpQ2TYinEwURqArpD │ ssh-host-config       │ host.v1      │
+│ 3GAjRaE9CcAhdYZiRNpasa │ ssh-intercept-config  │ intercept.v1 │
+│ 7aEkSQs5eOdXRuVT8aCYDz │ http-intercept-config │ intercept.v1 │
+╰────────────────────────┴───────────────────────┴──────────────╯
+results: 1-4 of 4
+```
 ## 5.3 Create http Service
 Put these two configs into a service. We going to name the service "http" and assign an attribute "rtrhosted"
 
@@ -306,21 +432,25 @@ Put these two configs into a service. We going to name the service "http" and as
 /opt/ziti/ziti edge create service http -c http-intercept-config,http-host-config -a rtrhosted
 ```
 **Check Service**
-![Diagram](/img/local_gw/LocalGW17.png)
-
+```
+ziggy@local-gw:~$ /opt/ziti/ziti edge list services
+╭────────────────────────┬──────┬────────────┬─────────────────────┬────────────╮
+│ ID                     │ NAME │ ENCRYPTION │ TERMINATOR STRATEGY │ ATTRIBUTES │
+│                        │      │  REQUIRED  │                     │            │
+├────────────────────────┼──────┼────────────┼─────────────────────┼────────────┤
+│ 2E3LsWbgwo0PiOO67ZyWEP │ http │ true       │ smartrouting        │ rtrhosted  │
+│ 48Z59WmcETzhmAwiUGpdwv │ ssh  │ true       │ smartrouting        │ rtrhosted  │
+╰────────────────────────┴──────┴────────────┴─────────────────────┴────────────╯
+results: 1-2 of 2
+```
 ## 5.4 Service-Edge-Router-Policy
 Since we used same attribute for http service as the attribute for ssh service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
 
-![Diagram](/img/local_gw/LocalGW13.png)
-
 ## 5.5 Bind and Dial policies
-We also do not need to create new Bind and Dial policies. Since our host identity (#hosts) and service attribute (#rtrhosted) did not change for bind policy. And our client identity (#clients) and service attribute (#rtrhosted) did not change for dial policy.
-
-![Diagram](/img/local_gw/LocalGW14.png)
+We also do not need to create new Bind and Dial policies. Since our host identity (#hosts) and service attribute (#rtrhosted) did not change for bind policy. And our client identity (#clients) and service attribute (#rtrhosted) did not change for dial policy. You can review the policies from the [previous section](#46-create-dial-policies).
 
 ## 5.6 Test the service
 
 Connect to the Windows Client machine, open a web browser. Enter this address (http://172.16.240.129/hello.txt). You should see the text we entered earlier on the [ubuntu server](#31-ubuntu-server)
-
 
 ![Diagram](/img/local_gw/LocalGW34.png)
