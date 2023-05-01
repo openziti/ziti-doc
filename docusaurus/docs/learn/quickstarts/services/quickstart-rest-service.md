@@ -1,5 +1,5 @@
 ---
-title: Quickstart Rest Service
+title: Make My Management Service Dark
 ---
 import CliLoginMd from '/docs/_cli-login.md'
 
