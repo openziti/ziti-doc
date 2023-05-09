@@ -132,10 +132,6 @@ const config = {
             from: ['/ziti/clients/linux.html'],
           },
           {
-            to: '/docs/guides/troubleshooting/',
-            from: ['/operations/troubleshooting/troubleshooting'],
-          },
-          {
             to: '/docs/learn/core-concepts/pki',
             from: ['/docs/manage/pki', '/operations/pki'],
           },
