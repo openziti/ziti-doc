@@ -106,7 +106,6 @@
 /operations/router/deployment
 /operations/router/router-configuration
 /operations/troubleshooting/circuit-create-error-codes
-/operations/troubleshooting/troubleshooting
 /policies
 /policies/CODE_OF_CONDUCT
 /policies/CONTRIBUTING
