@@ -1,4 +1,7 @@
 {
   "label": "Troubleshooting",
-  "position": 80
+  "position": 80,
+  "link": {
+    "type": "generated-index"
+  }
 }
