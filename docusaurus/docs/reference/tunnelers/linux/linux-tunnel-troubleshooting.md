@@ -50,3 +50,43 @@ If the tunneller is crashing then it may be crucial to collect and analyze the c
   In this case the dump is handled by `apport` which saves the file in `/var/crash`. I'll need to follow the `apport` documentation to learn how to unpack and parse the dump file.
 
 Please raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/) if you experience a crash.
+
+## tun device is DOWN
+
+If the tun device is DOWN then the tunneller will not be able to establish a connection to the Ziti network. You can check the status of the tun device with the `ip` command.
+
+```bash
+$ ip link sh tun0
+202: tun0: <POINTOPOINT,MULTICAST,NOARP> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+    link/none 
+```
+
+Potential causes include override capabilities are set on the `/bin/ip` command.
+
+  ```bash
+  $ attr -l /bin/ip
+  Attribute "capability" has a 20 byte value for /bin/ip
+
+  $ getcap /bin/ip
+  /bin/ip =
+  ```
+
+An empty set of capabilities prevents inheriting ambient capabilities when invoked by systemd. You can remove the empty set with the `setcap -r` command.
+
+  ```bash
+  sudo setcap -r /bin/ip
+  ```
+
+Now the capabilities are completely removed.
+
+  ```bash
+  $ attr -l /bin/ip
+
+  $ getcap /bin/ip
+  ```
+
+Restart the tunneller service.
+
+  ```bash
+  sudo systemctl restart ziti-edge-tunnel
+  ```
