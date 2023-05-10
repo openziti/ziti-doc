@@ -61,32 +61,41 @@ $ ip link sh tun0
     link/none 
 ```
 
-Potential causes include override capabilities are set on the `/bin/ip` command.
+Another symptom of this condition is the following error log.
 
-  ```bash
-  $ attr -l /bin/ip
-  Attribute "capability" has a 20 byte value for /bin/ip
+```txt
+ERROR ziti-edge-tunnel:utils.c:31 run_command_va() cmd{ip link set tun0 up} failed: 512/17/File exists
+RTNETLINK answers: Operation not permitted
+```
 
-  $ getcap /bin/ip
-  /bin/ip =
-  ```
+Potential causes include override capabilities or an empty set of capabilities are in effect for the `/bin/ip` command.
 
-An empty set of capabilities prevents inheriting ambient capabilities when invoked by systemd. You can remove the empty set with the `setcap -r` command.
+The following output is indicative of an empty set of capbaliities overriding the inherited capabilities specified by systemd when `/bin/ip` is executed by `ziti-edge-tunnel`.
 
-  ```bash
-  sudo setcap -r /bin/ip
-  ```
+```bash
+$ attr -l /bin/ip
+Attribute "capability" has a 20 byte value for /bin/ip
 
-Now the capabilities are completely removed.
+$ getcap /bin/ip
+/bin/ip =
+```
 
-  ```bash
-  $ attr -l /bin/ip
+You can remove the empty set with the `setcap -r` command.
 
-  $ getcap /bin/ip
-  ```
+```bash
+sudo setcap -r /bin/ip
+```
+
+Now the capabilities are completely removed, and these commands have no output. The `ip` command will inherit the necessary capabilities when it is executed by `ziti-edge-tunnel`.
+
+```bash
+$ attr -l /bin/ip
+
+$ getcap /bin/ip
+```
 
 Restart the tunneller service.
 
-  ```bash
-  sudo systemctl restart ziti-edge-tunnel
-  ```
+```bash
+sudo systemctl restart ziti-edge-tunnel
+```
