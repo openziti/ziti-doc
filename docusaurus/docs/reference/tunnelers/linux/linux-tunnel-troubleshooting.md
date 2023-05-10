@@ -51,9 +51,9 @@ If the tunneller is crashing then it may be crucial to collect and analyze the c
 
 Please raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/) if you experience a crash.
 
-## tun device is DOWN
+## Tunnel service is running but tun device is DOWN
 
-If the tun device is DOWN then the tunneller will not be able to establish a connection to the Ziti network. You can check the status of the tun device with the `ip` command.
+If the tunnel service is running and tun device is DOWN then the tunneller will not be able to establish a connection to the Ziti network. You can check the status of the tun device with the `ip` command.
 
 ```bash
 $ ip link sh tun0
