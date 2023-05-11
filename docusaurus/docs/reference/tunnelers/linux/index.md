@@ -124,7 +124,6 @@ sudo apt install ziti-edge-tunnel
 | 11 Bullseye | Focal 20.04  | x86_64, arm64 |
 | 10 Buster   | Bionic 18.04 | x86_64        |
 |  9 Stretch  | Xenial 16.04 | x86_64        |
-|  8 Jessie   | Trusty 14.04 | x86_64        |
 
 This example subscribes you to the Ubuntu `focal` repo which will work well in most cases. Alternatively, you may refer to the table to find the Ubuntu release name that is the contemporary of your Debian release. Then, substitute the Ubuntu release name for `focal` in the `/etc/apt/sources.list.d/openziti.list` file.
 
