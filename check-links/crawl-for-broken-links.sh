@@ -30,6 +30,7 @@ www\.reddit\.com/r/openziti
 .*\.ziti
 .*\.zitik8s
 .*\.svc
+twitter\.com/(OpenZiggy|OpenZiti)
 EOF
 # github\.com/.*/releases/latest/download
 
