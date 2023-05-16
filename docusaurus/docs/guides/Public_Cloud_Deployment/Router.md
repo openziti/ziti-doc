@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 # 2.0 Configure new router using open ziti
 
-## 2.1 Create a VM on Digital Ocean
+## 2.1 Create the Edge Router VM 
 Please follow **[Create a VM section](Controller/#11-create-a-vm-to-be-used-as-the-controller)** of the Controller Guide to setup a VM to be used as Router. 
 
 ## 2.2 Login and Update the repo and apps on VM
