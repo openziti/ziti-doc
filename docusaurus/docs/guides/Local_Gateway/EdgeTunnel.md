@@ -121,7 +121,7 @@ Now setup the forwarding on ufw
 sudo ufw route allow in on ens160 out on tun0
 ```
 
-## 2.3 Setup the Router For Ubuntu Server Subnet
+## 2.3 Setup the Tunneller For Ubuntu Server Subnet
 ### 2.3.1 Register Identities
 Login to your **remote-tunnel** machine/VM. Register the tunneler by using **remote-tunnel.jwt** token with the instructions mentioned in [this section](#221-register-identities).
 ### 2.3.2 setup ufw
