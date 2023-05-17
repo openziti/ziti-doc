@@ -18,7 +18,7 @@ if [ "${GIT_BRANCH:-}" == "main" ]; then
 
   ./gendoc.sh  # clone and build companion microsites and build Docusaurus
 
-  wget https://github.com/netfoundry/ziti-ci/releases/latest/download/ziti-ci  # fetch latest release
+  wget https://github.com/openziti/ziti-ci/releases/latest/download/ziti-ci  # fetch latest release
   install ./ziti-ci /usr/local/bin/  # set executable bit and copy to executable search path
 
   echo "configuring git..."
