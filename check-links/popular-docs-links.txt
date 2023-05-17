@@ -73,7 +73,6 @@
 /docs/manage/controller
 /docs/manage/edge-router
 /docs/manage/pki
-/docs/manage/troubleshooting
 /docs/quickstarts
 /docs/quickstarts/network
 /docs/quickstarts/network/help/change-admin-password
