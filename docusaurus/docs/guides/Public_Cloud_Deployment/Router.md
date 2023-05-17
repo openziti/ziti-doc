@@ -9,6 +9,8 @@ import TabItem from '@theme/TabItem';
 
 # 2.0 Configure new router using open ziti
 
+In this section, we are describing how to setup the Edge Router (pub-er) for our [test network](Services#311-network-diagram-1).
+
 ## 2.1 Create the Edge Router VM 
 Please follow **[Create a VM section](Controller/#11-create-a-vm-to-be-used-as-the-controller)** of the Controller Guide to setup a VM to be used as Router. 
 
@@ -24,14 +26,17 @@ Please follow **[Create a VM section](Controller/#11-create-a-vm-to-be-used-as-t
 >
 <TabItem value="DigitalOcean">
 
-Once the VM is created, we can get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
+Once the VM is created, get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
 ```bash
 ssh root@<ip>
 ```
 </TabItem>
 <TabItem value="Azure">
 
-**Coming Soon**
+Once the VM is created, get the IP address from the Resources screen. Login to the VM by using "username" and IP address:
+```bash
+ssh -i <private_key> "username"@<ip>
+```
 </TabItem>
 <TabItem value="GCP">
 
@@ -332,5 +337,100 @@ Now the Global DNS servers should be the IP address on your local interface.
 <TabItem value="GCP">
 
 **Not applicable**
+</TabItem>
+</Tabs>
+
+## 2.7 Route Table 
+
+<Tabs
+  defaultValue="DigitalOcean"
+  values={[
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Azure', value: 'Azure', },
+      { label: 'Google Cloud', value: 'GCP', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+DigitalOcean does not have route table.  The routes are setup directly on the VM. The example is in the [test section](Services#367-verify-the-connection)
+</TabItem>
+<TabItem value="Azure">
+
+For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Azure.
+
+Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32. The next hop is our local gateway ER.
+
+![Diagram](/img/public_cloud/RouteTable-Azure.jpg)
+
+The following routes are required:
+- any intercept address cidr
+- 100.64.0.0/10 (for DNS based intercept)
+
+</TabItem>
+<TabItem value="GCP">
+
+**Coming Soon**
+</TabItem>
+</Tabs>
+
+## 2.8 Source and Destination Check
+
+Most cloud provider checks the source and destination of the traffic to make sure it is either originated or terminated at the VM. When our ER is used as a local GW, it is neither the source or the destination of the traffic. Therefore, the source and destination check must be disabled. 
+
+<Tabs
+  defaultValue="DigitalOcean"
+  values={[
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Azure', value: 'Azure', },
+      { label: 'Google Cloud', value: 'GCP', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+DigitalOcean does not have this feature.
+</TabItem>
+<TabItem value="Azure">
+
+In Azure, the "Source and Destination Check" is named **IP forwarding**
+
+From your VM screen, click on the **Network Interface** of that VM. On the left side menu, choose **IP configurations** (like the picture below). **Enable** the **IP forwarding**
+
+![Diagram](/img/public_cloud/SrcDestCheck-Azure.jpg)
+
+</TabItem>
+<TabItem value="GCP">
+
+**Coming Soon**
+</TabItem>
+</Tabs>
+
+## 2.9 Firewall
+
+<Tabs
+  defaultValue="DigitalOcean"
+  values={[
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Azure', value: 'Azure', },
+      { label: 'Google Cloud', value: 'GCP', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+DigitalOcean by default does not setup firewall for the VM.
+</TabItem>
+<TabItem value="Azure">
+
+Azure's default firewall is blocking all incoming access to the VM. You will need the following ports open for your ERs:
+
+- 443/TCP (default port for edge listener)
+- 80/TCP (default port for link listener)
+- 53/UDP (when using as local gw)
+
+![Diagram](/img/public_cloud/Firewall-Azure.jpg)
+
+</TabItem>
+<TabItem value="GCP">
+
+**Coming Soon**
 </TabItem>
 </Tabs>

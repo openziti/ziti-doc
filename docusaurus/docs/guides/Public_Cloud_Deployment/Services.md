@@ -591,12 +591,33 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 Login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
 
 #### 3.6.7.1 Test IP intercept
+
+<Tabs
+  defaultValue="DigitalOcean"
+  values={[
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Azure', value: 'Azure', },
+      { label: 'Google Cloud', value: 'GCP', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
 **setup the route first**. The route is via our ER in the same DC (10.124.0.2)
 ```
 root@Non-OpenZiti-Client:~# ip route add 11.11.11.11/32 via 10.124.0.2
 ```
 
-Now test the connection
+</TabItem>
+<TabItem value="Azure">
+
+</TabItem>
+<TabItem value="GCP">
+
+</TabItem>
+</Tabs>
+
+
+**test the connection**
 ```
 root@Non-OpenZiti-Client:~# curl http://11.11.11.11/hello.txt
               _   _      _ _
@@ -639,7 +660,18 @@ systemctl restart systemd-resolved.service
 </TabItem>
 <TabItem value="Azure">
 
-**Coming Soon**
+Modify **/etc/systemd/resolved.conf**. Put local IP of the "local-er" into the file. For example:
+```
+DNS=10.5.0.4  #local private IP of the ER eth0
+```
+**NOTE, the IP address should match your Next hop in the route table**
+
+Restart the systemd-resolved service 
+```bash
+systemctl restart systemd-resolved.service
+```
+
+
 </TabItem>
 <TabItem value="GCP">
 
@@ -648,12 +680,32 @@ systemctl restart systemd-resolved.service
 </Tabs>
 
 #### 3.6.7.3 Test DNS intercept
+
+<Tabs
+  defaultValue="DigitalOcean"
+  values={[
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Azure', value: 'Azure', },
+      { label: 'Google Cloud', value: 'GCP', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
 **setup the route first**. The route is via our ER in the same DC (10.124.0.2). The DNS is going to resolve to 100.64.0.0/10 address.
 ```
 root@Non-OpenZiti-Client:~# ip route add 100.64.0.0/10 via 10.124.0.2
 ```
 
-Now test the connection
+</TabItem>
+<TabItem value="Azure">
+
+</TabItem>
+<TabItem value="GCP">
+
+</TabItem>
+</Tabs>
+
+**test the connection**
 ```
 root@Non-OpenZiti-Client:~# curl http://e2thttp.ziti/hello.txt
               _   _      _ _

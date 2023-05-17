@@ -32,7 +32,45 @@ Next, choose a ssh-key to login to the VM. (We highly discourage login to the VM
 </TabItem>
 <TabItem value="Azure">
 
-**Coming Soon**
+Login to the Azure console, create a resource from the Azure services on the upper right hand side.
+
+![Diagram](/img/public_cloud/Create-Azure1.jpg)
+
+On the "Create" screen, Choose "**Ubuntu Server 22.04 LTS**".
+
+- From the project details select the **Subscription** to manage deployed resources and costs. 
+- Use **resource group** to organize and manage all your resources.
+- In the **Instance details** section, enter the **VM name**.
+- Select the **Region** to host your VM.
+- Leave default **Availability options**, **Security type**(Standard).
+- Leave the selected image **Ubuntu Server 22.04 LTS x64 Gen2**.
+
+For the Size, choose the appropriate size for your application.  For this guide, **Standard_B2s(2CPU,4 GB)** size was used.
+
+![Diagram](/img/public_cloud/Create-Azure2.jpg)
+
+- Next, choose a ssh-key to login to the VM. 
+- Enter an username (**remember the username, you will need it to login to the VM**).
+- Choose your ssh key (We highly discourage login to the VM using Password). 
+- For **inbound ports**, select the ssh. You can add extra port based on open ziti requirement. 
+- Leave everything default in disks. 
+
+Then **Create VM**
+![Diagram](/img/public_cloud/Create-Azure3.jpg)
+
+- In the networking tab select the **Virtual network**
+- select the **Subnet**
+- Select the auto generated **Public IP**.
+- Leave the **NIC network security group** "none". 
+
+Then press **Review + create**
+
+![Diagram](/img/public_cloud/Create-Azure4.jpg)
+
+Once the Validation passed. Press **Create** to create VM.
+![Diagram](/img/public_cloud/Create-Azure5.jpg)
+
+
 </TabItem>
 <TabItem value="GCP">
 
@@ -61,13 +99,26 @@ ssh root@<ip>
 
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
  
+<p></p>
+
 **export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
 <TabItem value="Azure">
 
-**Coming Soon**
+Once the VM is created, we can get the IP address of the VM from the Resources screen. Login to the VM by using defined user "usename", private sshkey and IP address:
+```bash
+ssh -i <private_key> "username"@<ip>
+```
+
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+
+**export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
+This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
+
 </TabItem>
 <TabItem value="GCP">
 
