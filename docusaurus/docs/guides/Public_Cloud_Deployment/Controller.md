@@ -99,10 +99,7 @@ ssh root@<ip>
 
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
  
-<p></p>
-
 **export EXTERNAL_DNS="$(curl -s eth0.me)"**
-
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
@@ -161,7 +158,21 @@ After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/lea
 </TabItem>
 <TabItem value="Azure">
 
-**Coming Soon**
+Example of setting up node in Azure:
+
+Setup the repo:
+```bash
+cd ~
+curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+```
+
+Install nodejs:
+```bash
+sudo apt install nodejs
+```
+
+After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/learn/quickstarts/zac/#cloning-from-github) to setup ZAC.
 </TabItem>
 <TabItem value="GCP">
 
@@ -169,11 +180,38 @@ After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/lea
 </TabItem>
 </Tabs>
 
-## 1.4 Helpers
+## 1.4 Firewall
+
+<Tabs
+  defaultValue="DigitalOcean"
+  values={[
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Azure', value: 'Azure', },
+      { label: 'Google Cloud', value: 'GCP', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+DigitalOcean by default does not setup firewall for the VM.
+</TabItem>
+<TabItem value="Azure">
+
+Azure's default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
+
+![Diagram](/img/public_cloud/Controller-Firewall-Azure.jpg)
+
+</TabItem>
+<TabItem value="GCP">
+
+**Coming Soon**
+</TabItem>
+</Tabs>
+
+## 1.5 Helpers
 
 Following helpers are needed to complete the guides for router and services.
 
-### 1.4.1 Add Environment Variables Back to the Shell
+### 1.5.1 Add Environment Variables Back to the Shell
 Source the environment variables when you log back in the shell
 ```bash
 source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
@@ -188,7 +226,7 @@ echo $ZITI_HOME
 /root/.ziti/quickstart/OMSINER
 ```
  
-### 1.4.2 Change Ziti edge admin password
+### 1.5.2 Change Ziti edge admin password
 Find the Current admin edge login password of controller (if you forget the password):
 ```bash
 grep "export ZITI_PWD" ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
@@ -203,7 +241,7 @@ ziti edge update authenticator updb -s
 ```
 **Important:** if you change the password, you must update the passwd (ZITI_PWD) in the "~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env" file. 
 
-### 1.4.3 Some useful command for the Router
+### 1.5.3 Some useful command for the Router
 ** login the CLI**
 ```bash
 zitiLogin
