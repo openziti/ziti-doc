@@ -143,16 +143,145 @@ This strategy drives costs in the same way as the `smartrouting` strategy. Howev
 ##### `random`
 This strategy does not change terminator weights. It does simple random selection across all terminators of the highest precedence. 
 
-## Practical Service Hosting
+## Service Hosting
+
+### `host.v2` Configuration
+
+The `host.v2` configuration type defines how edge routers or tunnelers should create terminators and health checks for
+the application endpoints that provide a service.
+
+### Terminators
+
+Each config can have multiple terminators. Terminators have the following properties:
+
+If your service is for a specific server, then you will provide the following three attributes:
+
+* `address` - an IP or DNS address to connect to
+* `port` - the network port to connect to
+* `protocol` - tcp or udp
+
+If your service is forwarding traffic from a Ziti tunneling proxy, you'll specify the following properties:
+
+* `forwardProtocol` - flag indicating that the protocol of the forwarded connection is to be used
+    * Must be the value `true`
+* `allowedProtocols` - the list of allowed protocols. Valid values include `tcp` and `udp`
+* `forwardAddress` - flag indicating that the target address of the forwarded connection is to be used
+    * Must be the value `true`
+* `allowedAddresses` - the list of allowed addresses. Valid values include ips, hostnames and CIDRs
+* `forwardPort` - flag indicating that the target port of the forwarded connection is to be used
+    * Must be the value `true`
+* `allowedPortRanges` - the list of allowed port ranges.
+    * Example: `allowedPortRanges: [ {"low" : 80, "high" : 80}, {"low" : 8080, "high" : 8090} ]`
+* `allowedSourceAddresses` - list of addresses in ip, hostname or CIDR
+    * hosting tunnelers establish local routes for the specified source addresses so binding will succeed
+
+Health checks and listen options also can be specified for each terminator.
+
+* `listenOptions` - Provides ways to customize the terminator
+    * See below for the full definition
+* `portChecks` - TCP port health check definitions
+    * See below for the full definition
+* `httpChecks` - HTTP health check definitions
+    * See below for the full definition
+
+### Listen Options
+
+* `bindUsingEdgeIdentity` - Associate the hosting terminator with the name of the hosting tunneler's identity. Setting this to 'true' is equivalent to setting 'identity=$tunneler_id.name'",
+    * Boolean value, defaults to `false`
+* `connectTimeout` - Timeout when making connections to the external server. Specified as a duration. Examples: `500ms`, `5s`, `1m`
+* `cost` - Static cost of the terminator. Must be a value between 0 and 65535. Default to 0.
+* `identity` - Associate the hosting terminator with the specified identity.
+    * '$tunneler_id.name' resolves to the name of the hosting tunneler's identity.
+    * '$tunneler_id.tag[tagName]' resolves to the value of the 'tagName' tag on the hosting tunneler's identity.
+* maxConnections - Number of routers to create terminators on. Does not apply to hosting edge routers, only to SDK hosted tunnelers.
+* precedence - Initial terminator precedence. Must be one of `default`, `required` or `failed`. Defaults to `default`.
+
+### Health Checks
+
+There are two kinds of health checks supported, port check and http checks.
+
+**Port Checks**
+
+Port checks verify if a given port is accepting TCP connections. The check does not attempt to send or receive any data. Port
+check definitions support the following properties:
+
+* `address` - an IP or DNS address with port.
+    * This field is required.
+    * Example: `192.168.1.100:8080`
+    * Example: `myserver.com:8080`
+* `interval` - how often to run the health check.
+    * This field is required.
+    * Example: `5s` (5 seconds)
+    * Example: `1m` (1 minute)
+    * Example: `250ms` (250 milliseconds)
+* `timeout` - the connection timeout. Uses same format as interval.
+    * This field is required.
+    * Example: `10s` (10 seconds)
+* `actions` - how to react to health check result. Covered in more detail below.
+
+**HTTP Checks**
+
+HTTP checks make a call to an HTTP endpoint, which may include submitting a static body and checking the check results. HTTP
+check definitions support the following properties:
+
+* `url` - the URL to connect to.
+    * This field is required.
+* `method` - the method to use. Valid values include `GET`, `PUT`, `POST`, `PATCH`.
+    * This field is optional and defaults to `GET`.
+* `body` - the data to submit in the body of the HTTP request.
+    * This field is optional and defaults to an empty string.
+* `expectStatus` - the response status code to expect. The check will fail if a different status code is encountered.
+    * This field is optional and defaults to `200`.
+* `expectInBody` - a string to expect in the status code response. The check will fail if the string is not found.
+    * This field is optional. If not specified, the response body will not be checked.
+* `interval` - how often to run the health check.
+    * This field is required.
+    * Example: `5s` (5 seconds)
+    * Example: `1m` (1 minute)
+    * Example: `250ms` (250 milliseconds)
+* `timeout` - the connection timeout. Uses same format as interval.
+    * This field is required.
+    * Example: `10s` (10 seconds)
+* `actions` - how to react to health check result. Covered in more detail below.
+
+**Actions**
+
+Actions define how health checks results should be reacted to. Each check may have multiple actions. Actions support
+the following properties:
+
+* `trigger` - which kind of health check result to react to. Valid values include `pass`, `fail` and `change`.
+    * This field is required
+    * `change` is when the status changes from `pass` to `fail` or from `fail` to `pass`.
+* `duration` - only trigger the action if the trigger state has existed for the given duration.
+    * This field is optional. If not specified, the duration is not checked.
+    * Example: `30s` (30 seconds)
+    * Use with `change` trigger events is not recommended.
+* `consecutiveEvents` - the number of consecutive results of the given trigger type before executing the action.
+    * This field is optional and defaults to 1
+    * Use with `change` trigger events is not recommended.
+* `action` - the action to take when the conditions defined by `trigger`, `duration` and `consecutiveEvents` are met.
+    * This field is required
+    * Valid actions include:
+        * `mark unhealthy` - sets the associated terminator's precedence to `failed`.
+        * `mark healthy` - sets the associated terminator's precedence back from `failed` to its original value.
+        * `increase cost N` - increases the cost of the associated terminator by `N`.
+        * `decrease cost N` - decreases the cost of the associated terminator by `N`.
+        * `send event` - causes a terminator event to be emitted from the controller. Useful for alerting or external integrations.
+
+:::note
+Although multiple health checks can be configured, it's best if the actions don't overlap. If multiple health
+checks change the health status, the behavior when one check is passing and another is failing is undefined.
+It should generally be safe to have multiple checks adjusting cost or generating events.
+:::
 
 ### Edge Router Tunneler Hosting
 
 #### Single Application Endpoint
-When hosting services with the edge router tunneler (ER/T) combination you'll need to use a service configurations. We're going
-to start off simply, with one service endpoint and build up from there.
+Hosting services with the edge router tunneler combination requires a service configuration.
+The initial setup will be simple, with one service endpoint. Following examples will build up from there.
 
-Our application server is going to be on a local subnet at IP 192.168.3.136, port 8080. For our `test` service, we make
- and initial service configuration using the CLI as follows:
+The example application server is going to be on a local subnet at IP 192.168.3.136, port 8080. For the `test` service,
+create an initial service configuration using the CLI as follows:
 
 ```
 ziti edge create config test-host-config host.v2 '
@@ -181,21 +310,21 @@ ziti edge create service-edge-router-policy test-serp --service-roles '@test' --
 ziti edge create service-policy test-bind Bind --service-roles '@test' --identity-roles '#test-host'
 ```
 
-This will provide basic access to the service with one or many ER/Ts. All edge routers are hitting the same endpoint,
-so they don't need any customized configurations. Each ER/T hosting the service will create a terminator for the service
-and traffic will get load-balanced across them.
+This will provide basic access to the service with one or many edge routers. All edge routers are hitting the same endpoint,
+so they don't need any customized configurations. Each edge router hosting the service will create a terminator for the
+service and traffic will get load-balanced across them.
 
 #### Setting Per-Identity Precedence and Cost
-If you're hosting this service on multiple ER/Ts but want to give preference to one or more of the, you can use cost
-and precedence to do so. With our two ER/Ts, `edge-router-1` and `edge-router-2` if we want all traffic to go to
-`edge-router-1` unless it's not available, we can set the service precedence for the identity as follows:
+Cost and precedence can be used to give preference to specific identities. For example, given two edge routers,
+`edge-router-1` and `edge-router-2`, all traffic can be sent to `edge-router-1` while it's online and available by using
+the `--service-precedences` flag of the `ziti edge update identity` command:
 
 ```
 ziti edge update identity edge-router-1 --service-precedences test=required
 ```
 
-If instead you just want to give the terminator on `edge-router-2` a higher cost, so it gets used less often, you
-can do that as follows:
+Giving the terminator on `edge-router-2` a higher cost, so it gets used less often, can be done with the
+`--service-costs` flag:
 
 ```
 ziti edge update identity edge-router-2 --service-costs test=100
@@ -208,8 +337,9 @@ ziti edge update identity edge-router-1 --default-hosting-precedence required --
 ```
 
 #### Multiple Application Endpoints
-Next, let us add a second application endpoint. We want traffic load-balanced across the endpoints equally. We're going
-to do this by adding the second endpoint to the configuration.
+Hosting configurations can support multiple application server endpoints. If a second endpoint is added to the example
+configuration, traffic will be load balanced across the endpoints based on their precedence and cost. Since in this
+case they have the same precedence and cost, traffic should be routed fairly evenly across the two of them.
 
 ```
 ziti edge update config test-host-config host.v2 --data '
@@ -230,9 +360,9 @@ ziti edge update config test-host-config host.v2 --data '
 '
 ```
 
-Now each ER/T will create two terminators, one for each endpoint, for a total of four terminators. Now that we have
-multiple endpoints we'll want to know when they are healthy or unavailable we can use the just the endpoints which
-are working. We can accomplish this by adding health checks to the configuration.
+Now each edge router will create two terminators, one for each endpoint, for a total of four terminators. When multiple endpoints
+exist, it is important to know if each endpoint is healthy, so that traffic is routed to only to healthy endpoints. This
+is accomplished by adding health checks to the configuration.
 
 ```
 ziti edge update config test-host-config host.v2 --data '
@@ -291,8 +421,7 @@ ziti edge update config test-host-config host.v2 --data '
 '
 ```
 
-Our configuration has gotten quite large! However, we've gained a good bit of functionality with our new additions.
-Our servers will now be pinged every five seconds. If a the health check fails three times in a row, the associated
+The application servers will now be pinged every five seconds. If a the health check fails three times in a row, the associated
 terminator will be marked unhealthy, which means its precedence will be set to `failed`. If subsequently the health check
 passes three times in a row, its precedence will be reset to its original value.
 
@@ -301,91 +430,13 @@ network fails between `edge-router-1` and the first application endpoint, that t
 However, if `edge-router-2` can still reach it, then that terminator will remain in `default` or `required`, depending
 on how it's configured.
 
-At this point we have multiple ER/Ts and multiple application endpoints thereby removing all single points of failures.
+This configuration now has multiple edge routers and multiple application endpoints, removing all single points of failures.
 This setup should work well for applications which are horizontally scalable.
-
-#### Health Checks
-
-There are two kinds of health checks supported, port check and http checks.
-
-**Port Checks**
-
-Port checks just check if a given port is accepting connections. They don't attempt to send or receive any data. They
-support the following properties:
-
-* `address` - an IP or DNS address with port.
-    * This field is required.
-    * Example: `192.168.1.100:8080`
-    * Example: `myserver.com:8080`
-* `interval` - how often to run the health check.
-    * This field is required.
-    * Example: `5s` (5 seconds)
-    * Example: `1m` (1 minute)
-    * Example: `250ms` (250 milliseconds)
-* `timout` - the connection timeout. Uses same format as interval.
-    * This field is required.
-    * Example: `10s` (10 seconds)
-* `actions` - how to react to health check result. Covered in more detail below.
-
-**HTTP Checks**
-
-HTTP Checks make a call to an HTTP endpoint. They support submitting a static body and checking the check results. They
-support the following properties:
-
-* `url` - the URL to connect to.
-    * This field is required.
-* `method` - the method to use. Valid values include `GET`, `PUT`, `POST`, `PATCH`.
-    * This field is optional and defaults to `GET`.
-* `body` - the data to submit in the body of the HTTP request.
-    * This field is optional and defaults to an empty string.
-* `expectStatus` - the response status code to expect. The check will fail if a different status code is encountered.
-    * This field is optional and defaults to `200`.
-* `expectInBody` - a string to expect in the status code response. The check will fail if the string is not found.
-    * This field is optional. If not specified, the response body will not be checked.
-* `interval` - how often to run the health check.
-    * This field is required.
-    * Example: `5s` (5 seconds)
-    * Example: `1m` (1 minute)
-    * Example: `250ms` (250 milliseconds)
-* `timout` - the connection timeout. Uses same format as interval.
-    * This field is required.
-    * Example: `10s` (10 seconds)
-* `actions` - how to react to health check result. Covered in more detail below.
-
-**Actions**
-
-Actions define how health checks results should be reacted to. Each check may have multiple actions. Actions support
-the following properties:
-
-* `trigger` - which kind of health check result to react to. Valid values include `pass`, `fail` and `change`.
-    * This field is required
-    * `change` is when the status changes from `pass` to `fail` or vice-versa.
-* `duration` - only trigger the action if the trigger state has existed for the given duration.
-    * This field is optional. If not specified, the duration is not checked.
-    * Example: `30s` (30 seconds)
-    * Use with `change` trigger events is not recommended.
-* `consecutiveEvents` - the number of consecutive results of the given trigger type before executing the action.
-    * This field is optional and defaults to 1
-    * Use with `change` trigger events is not recommended.
-* `action` - the action to take when the prerequisites defined by `trigger`, `duration` and `consecutiveEvents` are met.
-    * This field is required
-    * Valid actions include:
-        * `mark unhealthy` - sets the associated terminator's precedence to `failed`.
-        * `mark healthy` - sets the associated terminator's precedence back from `failed` to its original value.
-        * `increase cost N` - increases the cost of the associated terminator by `N`.
-        * `decrease cost N` - decreases the cost of the associated terminator by `N`.
-        * `send event` - causes a terminator event to be emitted from the controller. Useful for alerting or external integrations.
-
-**NOTE**
-
-Although multiple health checks can be configured, it's best if the actions don't overlap. If you have two health
-checks both changing the health status, the behavior when one check is passing and another is failing is undefined.
-It should generally be safe to have multiple checks adjusting cost or generating events.
 
 #### Active/Passive Fail-over
 
-We may also setups with primary and fail-over instances. These can be configured by setting the precedence in the
-config, rather than on the identity, as follows:
+Configurations for environments with primary and fail-over instances are also supported. These can be configured by
+setting the precedence in the config, rather than on the identity, as follows:
 
 ```
 ziti edge update config test-host-config host.v2 --data '
@@ -414,20 +465,25 @@ ziti edge update config test-host-config host.v2 --data '
 '
 ```
 
-We've skipped the health checks in this example in order to highlight the important change, namely the addition of the
-`listenOptions` section. Our first terminator is set to `required` and the second is set to `default`. Should the
-health check for the primary endpoint fail, the terminator precedence will be dropped to `failed` and new traffic will
-start flowing to the fail-over server. Should the primary recover, the health check will detect this and the precedence
-will be reset to `required`.
+This example doesn't show the health checks in this example in order to highlight the important change, namely the
+addition of the `listenOptions` section. The first terminator is set to `required` and the second is set to `default`.
+Should the health check for the primary endpoint fail, the terminator precedence will be dropped to `failed` and new
+traffic will start flowing to the fail-over server. Should the primary recover, the health check will detect this and
+the precedence will be reset to `required`.
 
 Note that in addition to precedence, cost may also be set in the `listenOptions`.
 
-
 ### Standalone Tunneler Hosting
 Most of the above applies to standalone tunnelers as well. The primary difference is in placement. Generally a tunneler
-will be running on the same machine as the application server. This means that you'd have two tunnelers running, one on
-each of the hosts. Your configuration could then reference `localhost`, allowing you to only define a single terminator
-in your host config. In that case your configuration might looking something like the following:
+will be running on the same machine as the application server. This means that there would be two tunnelers running, one on
+each of the hosts. The configuration could then reference `localhost`, with only a single terminator
+in the host config. The configuration would looking something like the following:
+
+:::note
+Not all tunneler implementations have support for the full `host.v1` and `host.v2` configs. The Go based tunneler,
+which is included in the edge router, has full support. Support in tunnelers for other languages may be partial,
+or non-existent.
+:::
 
 ```
 ziti edge update config test-host-config host.v2 --data '
@@ -462,7 +518,7 @@ ziti edge update config test-host-config host.v2 --data '
 '
 ```
 
-For fail-over setups, you would set the precedence on the identity, rather than in the configuration.
+For fail-over setups, the precedence would be set on the identity, rather than in the configuration.
 
 ### SDK Hosted
 
@@ -475,7 +531,5 @@ remove any associated terminators. When the SDK reconnects, it will re-bind and 
 
 If the health checks provided by `host.v2` configs are not adequate, there are a few options.
 
-1. You can write a custom proxy using one of the SDKs. This would let you adjust cost and precedence based on your own,
-arbitrarily complex health checks.
-2. You could write a sidecar which runs the health checks and translates those into an HTTP health check that the tunnelers
-can understand.
+1. A custom proxy using one of the SDKs. This allows adjusting cost and precedence based on arbitrarily complex custom health checks.
+2. A sidecar which runs the health checks and translates those into an HTTP health check that the tunnelers can understand.
