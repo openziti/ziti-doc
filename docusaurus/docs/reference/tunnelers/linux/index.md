@@ -149,8 +149,10 @@ sudo apt install ziti-edge-tunnel
 
   ```bash
   sudo -u ziti tee /opt/openziti/etc/identities/ziti-id.jwt >/dev/null
-  # paste the contents of the enrollment token JWT file and press Ctrl+D
+  # run the above command then paste the token from clipboard then press Ctrl+D to close the file
   ```
+
+  The above command is equivalent to opening the JWT file in an editor and pasting the token into it, then saving and closing the file, then changing the group ownership to `ziti`.
 
 2. Enable and start the service
 
