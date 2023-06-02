@@ -74,7 +74,29 @@ Once the Validation passed. Press **Create** to create VM.
 </TabItem>
 <TabItem value="GCP">
 
-**Coming Soon**
+Login to the GCP console. Go to **COMPUTE ENGINE** dashboard. Click on **CREATE INSTANCE**.
+
+
+![Diagram](/img/public_cloud/Create-GCP1.jpg)
+
+
+Select the option **Marketplace**
+
+
+![Diagram](/img/public_cloud/Create-GCP2.jpg)
+
+Search for Ubuntu & from the dropdown select the Ubuntu Pro 22.04 LTS (Jammy) & Launch the VM
+
+![Diagram](/img/public_cloud/Create-GCP3.jpg)
+
+Configure the VM as follows
+
+![Diagram](/img/public_cloud/Create-GCP4.jpg)
+
+
+In the **Networking** section, under **Network Interfaces**, Choose the **NETWORK, SUB NETWORK & the EXTERNAL IP**. Now click on **DEPLOY**
+
+
 </TabItem>
 </Tabs>
 
@@ -119,7 +141,16 @@ This ensures the Controller setup by the quickstart is advertising the external 
 </TabItem>
 <TabItem value="GCP">
 
-**Coming Soon**
+Once the VM is created, we can login through **SSH** button on the console
+
+![Diagram](/img/public_cloud/GCP-login1.jpg)
+
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+
+**export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
+This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
+
 </TabItem>
 </Tabs>
 
@@ -176,7 +207,21 @@ After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/lea
 </TabItem>
 <TabItem value="GCP">
 
-**Coming Soon**
+Example of setting up node in GCP:
+
+Setup the repo:
+```bash
+cd ~
+curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+```
+
+Install nodejs:
+```bash
+sudo apt install nodejs
+```
+
+After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/learn/quickstarts/zac/#cloning-from-github) to setup ZAC.
 </TabItem>
 </Tabs>
 
@@ -203,7 +248,18 @@ Azure's default firewall is blocking all incoming access to the VM. You will nee
 </TabItem>
 <TabItem value="GCP">
 
-**Coming Soon**
+GCP’s default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
+
+
+For controller we have to allow the TCP port 8440-8443 along with SSH port.
+
+![Diagram](/img/public_cloud/Controller-Firewall-GCP.jpg)
+
+
+For Public ER we have to allow 80, 443, 22.
+
+![Diagram](/img/public_cloud/PublicER-Firewall-GCP.jpg)
+
 </TabItem>
 </Tabs>
 

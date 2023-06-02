@@ -40,7 +40,7 @@ ssh -i <private_key> "username"@<ip>
 </TabItem>
 <TabItem value="GCP">
 
-**Coming Soon**
+Once the VM is created, we can login through **SSH** button on the console
 </TabItem>
 </Tabs>
 
@@ -369,7 +369,19 @@ The following routes are required:
 </TabItem>
 <TabItem value="GCP">
 
-**Coming Soon**
+For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in GCP.
+
+Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32. The next hop is our local gateway ER.
+
+
+Following are the route table entries in Non-openziti-client
+- To reach the destination IP 11.11.11.11/32
+- To reach the destination 100.64.0.0/10 which is the locally resolved DNS IP by the Ziti DNS
+
+![Diagram](/img/public_cloud/RouteTable-GCP.jpg)
+
+Note: In GCP, I gave the name of the instance as openziti-private-er-vm for the local gateway which is same as local-er in test network 2
+
 </TabItem>
 </Tabs>
 
@@ -400,7 +412,12 @@ From your VM screen, click on the **Network Interface** of that VM. On the left 
 </TabItem>
 <TabItem value="GCP">
 
-**Coming Soon**
+In GCP, the "Source and Destination Check" is named **IP forwarding**
+
+In the VM configuration screen, choose the **ADVANCED OPTIONS** & under the **NETWORKING** section (like the picture below). **Enable** the **IP forwarding**
+
+![Diagram](/img/public_cloud/SrcDestCheck-GCP.jpg)
+
 </TabItem>
 </Tabs>
 
@@ -431,6 +448,24 @@ Azure's default firewall is blocking all incoming access to the VM. You will nee
 </TabItem>
 <TabItem value="GCP">
 
-**Coming Soon**
+GCP’S default firewall is blocking all incoming access to the VM.
+
+Private router i.e. local-er in test network 2  was enrolled with edge listener and Tunneler enabled & following are the inbound firewall requirements for the instance.
+
+
+![Diagram](/img/public_cloud/PrivateER-Firewall-GCP.jpg)
+
+•       TCP Port 22 is opened only for the SSH access to the VM
+•       UDP Port 53 is opened for accepting the DNS query request from the Non-openziti-client
+
+Also allow HTTP Traffic to flow via the Private router i.e. local-er in test network 2 originated from the Non-openziti-client
+
+![Diagram](/img/public_cloud/PrivateER-Firewall-GCP2.jpg)
+
+Inbound firewall requirements for the Public Edge router
+
+
+![Diagram](/img/public_cloud/PublicER-Firewall-GCP.jpg)
+
 </TabItem>
 </Tabs>
