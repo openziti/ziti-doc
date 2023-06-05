@@ -597,6 +597,7 @@ Login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -640,6 +641,7 @@ The **Non-OpenZiti-Client**'s resolver has to point to the local-er.  So it can 
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -670,8 +672,19 @@ Restart the systemd-resolved service
 ```bash
 systemctl restart systemd-resolved.service
 ```
+</TabItem>
+<TabItem value="AWS">
 
+Modify **/etc/systemd/resolved.conf**. Put local IP of the "local-er" into the file. For example:
+```
+DNS=10.5.0.4  #local private IP of the ER eth0
+```
+**NOTE, the IP address should match your Next hop in the route table**
 
+Restart the systemd-resolved service
+```bash
+systemctl restart systemd-resolved.service
+```
 </TabItem>
 <TabItem value="GCP">
 
@@ -698,6 +711,7 @@ systemctl restart systemd-resolved.service
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >

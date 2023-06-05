@@ -15,6 +15,7 @@ import TabItem from '@theme/TabItem';
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -72,6 +73,44 @@ Once the Validation passed. Press **Create** to create VM.
 
 
 </TabItem>
+<TabItem value="AWS">
+
+- login to the AWS console. 
+- go to the EC2 dashboard. 
+- Click on the instance. 
+- Launch the instance
+
+![Diagram](/img/public_cloud/Create-AWS1.jpg)
+
+- Name the instance.
+![Diagram](/img/public_cloud/Create-AWS2.jpg)
+
+- On the Quick start select **ubuntu**. 
+- Select the ubuntu server 22.04 LTS. 
+- Select the instance type T2 medium
+
+![Diagram](/img/public_cloud/Create-AWS3.jpg)
+
+- In the **Key pair (login.)** section, choose the key name which you already created.
+- In the **Network settings** section, choose the VPC for your VM.
+- Select the subnet. 
+- Select **Enable** for **Auto assign public IP**
+
+![Diagram](/img/public_cloud/Create-AWS4.jpg)
+
+- ** Create your own security group**
+- Name the security group.
+- Create the Firewall rule based on controller and ER. 
+- For controller. allow the TCP port 8440-8443 along with ssh. 
+- For ER we have to allow 80, 443, 22.
+
+**SG For the controller.**
+![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
+
+**SG for the ER**
+![Diagram](/img/public_cloud/Firewall-AWS-ER.jpg)
+Now click on **Launch instance**
+</TabItem>
 <TabItem value="GCP">
 
 Login to the GCP console. Go to **COMPUTE ENGINE** dashboard. Click on **CREATE INSTANCE**.
@@ -107,6 +146,7 @@ In the **Networking** section, under **Network Interfaces**, Choose the **NETWOR
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -139,6 +179,21 @@ Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 
 </TabItem>
+<TabItem value="AWS">
+
+Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
+
+Login to the VM by using user name "ubuntu":
+```bash
+ssh -i <private_key> "ubuntu"@<ip>
+```
+
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+
+**export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
+This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
+</TabItem>
 <TabItem value="GCP">
 
 Once the VM is created, we can login through **SSH** button on the console
@@ -159,15 +214,9 @@ This ensures the Controller setup by the quickstart is advertising the external 
 
 ZAC provides GUI for managing the OpenZiti network. If you prefer UI over CLI to manage network, please following the [ZAC Setup Guide](/docs/learn/quickstarts/zac/) to setup ZAC before going to the next section.
 
-<Tabs
-  defaultValue="DigitalOcean"
-  values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
-      { label: 'Azure', value: 'Azure', },
-      { label: 'Google Cloud', value: 'GCP', },
-  ]}
->
-<TabItem value="DigitalOcean">
+**Quickfix:**
+
+---
 
 To setup npm executables, you can follow [install Node.js guide](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04).
 
@@ -186,44 +235,8 @@ sudo apt install nodejs
 ```
 
 After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/learn/quickstarts/zac/#cloning-from-github) to setup ZAC.
-</TabItem>
-<TabItem value="Azure">
 
-Example of setting up node in Azure:
-
-Setup the repo:
-```bash
-cd ~
-curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-```
-
-Install nodejs:
-```bash
-sudo apt install nodejs
-```
-
-After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/learn/quickstarts/zac/#cloning-from-github) to setup ZAC.
-</TabItem>
-<TabItem value="GCP">
-
-Example of setting up node in GCP:
-
-Setup the repo:
-```bash
-cd ~
-curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-```
-
-Install nodejs:
-```bash
-sudo apt install nodejs
-```
-
-After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/learn/quickstarts/zac/#cloning-from-github) to setup ZAC.
-</TabItem>
-</Tabs>
+---
 
 ## 1.4 Firewall
 
@@ -232,6 +245,7 @@ After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/lea
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },      
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -244,6 +258,12 @@ DigitalOcean by default does not setup firewall for the VM.
 Azure's default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
 
 ![Diagram](/img/public_cloud/Controller-Firewall-Azure.jpg)
+
+</TabItem>
+<TabItem value="AWS">
+Azure's default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
+
+![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
 
 </TabItem>
 <TabItem value="GCP">

@@ -21,6 +21,7 @@ Please follow **[Create a VM section](Controller/#11-create-a-vm-to-be-used-as-t
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -36,6 +37,15 @@ ssh root@<ip>
 Once the VM is created, get the IP address from the Resources screen. Login to the VM by using "username" and IP address:
 ```bash
 ssh -i <private_key> "username"@<ip>
+```
+</TabItem>
+<TabItem value="AWS">
+
+Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
+
+Login to the VM by using user name "ubuntu":
+```bash
+ssh -i <private_key> "ubuntu"@<ip>
 ```
 </TabItem>
 <TabItem value="GCP">
@@ -286,6 +296,7 @@ On the controller, you can check the status of the routers. Please refer to the 
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -334,6 +345,10 @@ Now the Global DNS servers should be the IP address on your local interface.
 
 **Not applicable**
 </TabItem>
+<TabItem value="AWS">
+
+**Not applicable**
+</TabItem>
 <TabItem value="GCP">
 
 **Not applicable**
@@ -347,6 +362,7 @@ Now the Global DNS servers should be the IP address on your local interface.
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -361,6 +377,20 @@ For any router setup as local gateway (i.e. local-er in [test network 2](Service
 Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32. The next hop is our local gateway ER.
 
 ![Diagram](/img/public_cloud/RouteTable-Azure.jpg)
+
+The following routes are required:
+- any intercept address cidr
+- 100.64.0.0/10 (for DNS based intercept)
+
+</TabItem>
+<TabItem value="AWS">
+
+For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Azure.
+
+Following is an example route for intercepting traffic destine for ip: 10.10.0.0/24. The next hop is our local gateway ER.
+
+![Diagram](/img/public_cloud/RouterTable-AWS1.jpg)
+![Diagram](/img/public_cloud/RouterTable-AWS2.jpg)
 
 The following routes are required:
 - any intercept address cidr
@@ -394,6 +424,7 @@ Most cloud provider checks the source and destination of the traffic to make sur
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -410,6 +441,16 @@ From your VM screen, click on the **Network Interface** of that VM. On the left 
 ![Diagram](/img/public_cloud/SrcDestCheck-Azure.jpg)
 
 </TabItem>
+<TabItem value="AWS">
+
+- From your VM screen, click on the **Network Interface** of that VM. 
+- On the right side dropdown menu, choose **Actions**. 
+- select **source and destination check** then **untick the enable**
+
+![Diagram](/img/public_cloud/SrcDestCheck-AWS1.jpg)
+![Diagram](/img/public_cloud/SrcDestCheck-AWS2.jpg)
+</TabItem>
+
 <TabItem value="GCP">
 
 In GCP, the "Source and Destination Check" is named **IP forwarding**
@@ -428,6 +469,7 @@ In the VM configuration screen, choose the **ADVANCED OPTIONS** & under the **NE
   values={[
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
@@ -445,6 +487,19 @@ Azure's default firewall is blocking all incoming access to the VM. You will nee
 
 ![Diagram](/img/public_cloud/Firewall-Azure.jpg)
 
+</TabItem>
+<TabItem value="AWS">
+
+AWS default firewall is blocking all incoming access to the VM. You will need the following ports open for your ERs:
+
+- 443/TCP (default port for edge listener)
+- 80/TCP (default port for link listener)
+- 53/UDP (when using as local gw)
+- 22/TCP (SSH access)
+- 8080/TCP (HTTP testing from non ziti client)
+
+Following is the firewall setting for edge router which serves as the GW for non ziti client.
+![Diagram](/img/public_cloud/Firewall-AWS-ER-nonziti.jpg)
 </TabItem>
 <TabItem value="GCP">
 
