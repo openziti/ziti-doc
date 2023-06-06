@@ -670,7 +670,7 @@ DNS=10.5.0.4  #local private IP of the ER eth0
 
 Restart the systemd-resolved service 
 ```bash
-systemctl restart systemd-resolved.service
+sudo systemctl restart systemd-resolved.service
 ```
 </TabItem>
 <TabItem value="AWS">
@@ -683,7 +683,7 @@ DNS=10.5.0.4  #local private IP of the ER eth0
 
 Restart the systemd-resolved service
 ```bash
-systemctl restart systemd-resolved.service
+sudo systemctl restart systemd-resolved.service
 ```
 </TabItem>
 <TabItem value="GCP">
@@ -698,7 +698,7 @@ DNS=10.5.0.4  #local private IP of the ER eth0
 
 Restart the systemd-resolved service
 ```bash
-systemctl restart systemd-resolved.service
+sudo systemctl restart systemd-resolved.service
 ```
 
 </TabItem>

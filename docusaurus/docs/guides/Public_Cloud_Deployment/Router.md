@@ -27,16 +27,17 @@ Please follow **[Create a VM section](Controller#11-create-a-vm-to-be-used-as-th
 >
 <TabItem value="DigitalOcean">
 
-Once the VM is created, get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
+- Once the VM is created, get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
 ```bash
 ssh root@<ip>
 ```
 </TabItem>
 <TabItem value="Azure">
 
-Once the VM is created, get the IP address from the Resources screen. Login to the VM by using "username" and IP address:
+- Once the VM is created, we can get the IP address of the VM from the Virtual machine screen.
+- Login to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
 ```bash
-ssh -i <private_key> "username"@<ip>
+ssh -i <private_key> <username>@<ip>
 ```
 </TabItem>
 <TabItem value="AWS">
@@ -131,7 +132,7 @@ export CONTROLLERMGMTPORT="8441"
 export ADMINUSER="admin"
 export ADMINPASSWORD="Test@123"
 
-./ziti_router_auto_enroll -f -n --assumePublic --disableHealthChecks --disableMetrics --routerName pub-er
+sudo ./ziti_router_auto_enroll -f -n --assumePublic --disableHealthChecks --disableMetrics --routerName pub-er
 ```
 
 ### 2.3.4 Other Router creation options
@@ -139,16 +140,16 @@ If you need to create router with difference options than the one mentioned abov
 
 #### 2.3.4.1 Create the Router with link listener and tunneler
 ```
-./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --assumePublic --disableHealthChecks --disableMetrics --autoTunnelListener --routerName pub-er
+sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --assumePublic --disableHealthChecks --disableMetrics --autoTunnelListener --routerName pub-er
 ```
 
 #### 2.3.4.2 Create the Router with edge listener only (no link listener)
 ```
-./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --routerName pub-er 
+sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --routerName pub-er 
 ```
 #### 2.3.4.3 Create the Router with edge listener and tunneler
 ```
-./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --autoTunnelListener --routerName pub-er
+sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --autoTunnelListener --routerName pub-er
 ```
 
 ## 2.4 Creating Router on the Controller first
@@ -230,11 +231,11 @@ Use this procedure to create a Public Router with link listener (but without tun
 
 **command**
 ```
-./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks --disableMetrics <jwt content>
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks --disableMetrics <jwt content>
 ```
 
 ```
-./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks --disableMetrics eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImVyb3R0IiwiZXhwIjoxNjgwODM5NjA4LCJpc3MiOiJodHRwczovLzE2MS4zNS4xMDguMjE4Ojg0NDEiLCJqdGkiOiJhNDg5N2Q0ZS1lZTY4LTQ1M2UtYjY1NS03MGU0YjgyZTllNDciLCJzdWIiOiJpY2JLakM3RS5QIn0.Y6DohYyWEeJQmRMe29v4cL3Y1APCnBlrv_-S_941au2OESuQdt2CS4C4djvESYzV5vbnbgZgyU5xtNvb4lW5Uv2HP3XUGQNVsWjpwZbazNoTXg1IX6hhWb7T6u1AhS4xnJ3jpoapKsdOkUSqeQNUMSiN3aeLNcGVA_XK1-utCYjVsHDC90M1ZYZqgd8C9IKziDI10XQVlKTqosv8hoJD0OKIu7WZMslweRSMBtQUA2lZ2QSkIhFr2bvtgPll-5aBnG7eo6Ka_WtEW6EikU2fxgpNaVVBEIdZs1tkdGU6dfBDA6j5wA1TBI0FZnuKlNW24bMZCWKy2B_AMqJW1a80I0qNDx-QHEy-pt8FzZ-eqXWyfhc_nYzwT9kr6hO9VJrrD81hboCeTl8G6EXZjwCi2lPbKHROtkQu08-Ns1Kps7R3GILeNMltW9tKApP746ek4DVxm2cKqiB1Axcb0tNjDWTthjyp8m40aSiiqOPIoQbwa43JLqbHcuhZOSBLQNb_bwzkxBSf34D2w5eVETWy9VX-lgHwM-uhT5SfZIWdnWtO7-Cxn-cqgz89twtOim-yc5j0p0ieAbrOArbjKFBXiQjP8yWkorQKlj5PTSk7vyb3X4q6p--RxP2Z5F8alCPQx3XiVcohvIJnrJiEP86myNIYcKhhJ4OB4r9iOr0qTc8 
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks --disableMetrics eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImVyb3R0IiwiZXhwIjoxNjgwODM5NjA4LCJpc3MiOiJodHRwczovLzE2MS4zNS4xMDguMjE4Ojg0NDEiLCJqdGkiOiJhNDg5N2Q0ZS1lZTY4LTQ1M2UtYjY1NS03MGU0YjgyZTllNDciLCJzdWIiOiJpY2JLakM3RS5QIn0.Y6DohYyWEeJQmRMe29v4cL3Y1APCnBlrv_-S_941au2OESuQdt2CS4C4djvESYzV5vbnbgZgyU5xtNvb4lW5Uv2HP3XUGQNVsWjpwZbazNoTXg1IX6hhWb7T6u1AhS4xnJ3jpoapKsdOkUSqeQNUMSiN3aeLNcGVA_XK1-utCYjVsHDC90M1ZYZqgd8C9IKziDI10XQVlKTqosv8hoJD0OKIu7WZMslweRSMBtQUA2lZ2QSkIhFr2bvtgPll-5aBnG7eo6Ka_WtEW6EikU2fxgpNaVVBEIdZs1tkdGU6dfBDA6j5wA1TBI0FZnuKlNW24bMZCWKy2B_AMqJW1a80I0qNDx-QHEy-pt8FzZ-eqXWyfhc_nYzwT9kr6hO9VJrrD81hboCeTl8G6EXZjwCi2lPbKHROtkQu08-Ns1Kps7R3GILeNMltW9tKApP746ek4DVxm2cKqiB1Axcb0tNjDWTthjyp8m40aSiiqOPIoQbwa43JLqbHcuhZOSBLQNb_bwzkxBSf34D2w5eVETWy9VX-lgHwM-uhT5SfZIWdnWtO7-Cxn-cqgz89twtOim-yc5j0p0ieAbrOArbjKFBXiQjP8yWkorQKlj5PTSk7vyb3X4q6p--RxP2Z5F8alCPQx3XiVcohvIJnrJiEP86myNIYcKhhJ4OB4r9iOr0qTc8 
 ```
 **output**
 ```
@@ -257,16 +258,16 @@ If you need to create router with difference options than the one mentioned abov
 
 #### 2.4.4.1 Register the Router with link listener and tunneler
 ```
-./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks --disableMetrics --autoTunnelListener <jwt content>
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks --disableMetrics --autoTunnelListener <jwt content>
 ```
 
 #### 2.4.4.2 Register the Router with edge listener only (no link listener)
 ```
-./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --disableHealthChecks --disableMetrics <jwt content>
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --disableHealthChecks --disableMetrics <jwt content>
 ```
 #### 2.4.4.3 Register the Router with edge listener and tunneler
 ```
-./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --disableHealthChecks --disableMetrics --autoTunnelListener <jwt content>
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --disableHealthChecks --disableMetrics --autoTunnelListener <jwt content>
 ```
 
 ## 2.5 Auto start the router
@@ -372,11 +373,19 @@ DigitalOcean does not have route table.  The routes are setup directly on the VM
 </TabItem>
 <TabItem value="Azure">
 
-For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Azure.
+- For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Azure.
+- First you need to create a **Route Table** from Marketplace.
+![Diagram](/img/public_cloud/RouteTable-Azure1.jpg)
 
-Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32. The next hop is our local gateway ER.
+- Then go to your subnet of your VM, associate the Route Table just created to the subnet.
+![Diagram](/img/public_cloud/RouteTable-Azure2.jpg)
 
-![Diagram](/img/public_cloud/RouteTable-Azure.jpg)
+- Click on the route table, then choose **Routes** from the left side menu.
+- Now you will be presented a screen like below, you can then add your route.
+- Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32.
+- The **Next hop address** is local IP of our local gateway ER.
+
+![Diagram](/img/public_cloud/RouteTable-Azure3.jpg)
 
 The following routes are required:
 - any intercept address cidr
@@ -392,7 +401,7 @@ The following routes are required:
 - Following is an example routes for intercepting traffic destine for IP subnet: 10.10.0.0/24 and 100.64.0.1/32.
 - The Target is **Instance** (our local gateway ER).
 
-![Diagram](/img/public_cloud/RouterTable-AWS1.jpg)
+![Diagram](/img/public_cloud/RouteTable-AWS1.jpg)
 
 The following routes are required:
 - any intercept address CIDR
@@ -436,10 +445,11 @@ DigitalOcean does not have this feature.
 </TabItem>
 <TabItem value="Azure">
 
-In Azure, the "Source and Destination Check" is named **IP forwarding**
-
-From your VM screen, click on the **Network Interface** of that VM. On the left side menu, choose **IP configurations** (like the picture below). **Enable** the **IP forwarding**
-
+- In Azure, the "Source and Destination Check" is called **IP forwarding**
+- From your Virtual machine screen, click on the **Network Interface** of that VM. 
+- On the left side menu, choose **IP configurations** (like the picture below). 
+- **Enable** the **IP forwarding**
+- **Save**
 ![Diagram](/img/public_cloud/SrcDestCheck-Azure.jpg)
 
 </TabItem>
@@ -487,7 +497,12 @@ Azure's default firewall is blocking all incoming access to the VM. You will nee
 - 443/TCP (default port for edge listener)
 - 80/TCP (default port for link listener)
 - 53/UDP (when using as local gw)
+- any intercept ports. (i.e. if you want to intercept RDP traffic, you will need to open port 3389)
 
+To open ports:
+
+- From your Virtual machine page, click on **Networking** from the left side menu.
+- Under the **Inbound port rules**, you can click on **Add inbound port rule** to allow traffic in. Like example here.
 ![Diagram](/img/public_cloud/Firewall-Azure.jpg)
 
 </TabItem>

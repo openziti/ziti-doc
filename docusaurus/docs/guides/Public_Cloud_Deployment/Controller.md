@@ -33,44 +33,37 @@ Next, choose a ssh-key to login to the VM. (We highly discourage login to the VM
 </TabItem>
 <TabItem value="Azure">
 
-Login to the Azure console, create a resource from the Azure services on the upper right hand side.
+- It is easier to use **resource group** to organize and manage all your resources for this demo.
+- Create a **resource group** and change into that resource group.
+- Use **+ Create** button to create a resource.
+- Azure will take you to the **Marketplace** screen. In the search bar, type in **Ubuntu Server**.
+- Choose "**Ubuntu Server 22.04 LTS**".
 
 ![Diagram](/img/public_cloud/Create-Azure1.jpg)
 
-On the "Create" screen, Choose "**Ubuntu Server 22.04 LTS**".
-
-- From the project details select the **Subscription** to manage deployed resources and costs. 
-- Use **resource group** to organize and manage all your resources.
+On the **Create a virtual machine** screen.
+- The **Subscription** and **Resource group** should already be filled. 
 - In the **Instance details** section, enter the **VM name**.
 - Select the **Region** to host your VM.
-- Leave default **Availability options**, **Security type**(Standard).
+- Leave default **Availability options** and **Security type**(Standard).
 - Leave the selected image **Ubuntu Server 22.04 LTS x64 Gen2**.
-
-For the Size, choose the appropriate size for your application.  For this guide, **Standard_B2s(2CPU,4 GB)** size was used.
+- For the Size, choose the appropriate size for your application.  For this demo, **Standard_B2s(2CPU,4 GB)** size was used.
 
 ![Diagram](/img/public_cloud/Create-Azure2.jpg)
 
-- Next, choose a ssh-key to login to the VM. 
-- Enter an username (**remember the username, you will need it to login to the VM**).
-- Choose your ssh key (We highly discourage login to the VM using Password). 
+- Next, choose **Authentication type** to login to the VM. (We highly **discourage** login to the VM using Password). 
+- Enter an username (**remember the username, you will need it to login to the VM**), or leave the default user **azureuser**
+- Choose your ssh key
 - For **inbound ports**, select the ssh. You can add extra port based on open ziti requirement. 
-- Leave everything default in disks. 
-
-Then **Create VM**
-![Diagram](/img/public_cloud/Create-Azure3.jpg)
-
-- In the networking tab select the **Virtual network**
-- select the **Subnet**
-- Select the auto generated **Public IP**.
-- Leave the **NIC network security group** "none". 
-
-Then press **Review + create**
-
+- You can leave everything default.
+Press **Review + create**
 ![Diagram](/img/public_cloud/Create-Azure4.jpg)
 
-Once the Validation passed. Press **Create** to create VM.
+- After the Validation passed. Press **Create** to create VM.
 ![Diagram](/img/public_cloud/Create-Azure5.jpg)
 
+- **Optional:** You can associate an DNS name to the public IP of your VM. You can do this from "Virtual machine" page.
+![Diagram](/img/public_cloud/Create-Azure6.jpg)
 
 </TabItem>
 <TabItem value="AWS">
@@ -144,7 +137,54 @@ In the **Networking** section, under **Network Interfaces**, Choose the **NETWOR
 </TabItem>
 </Tabs>
 
-## 1.2 Login and Setup Controller
+## 1.2 Firewall
+
+<Tabs
+  defaultValue="DigitalOcean"
+  values={[
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },      
+      { label: 'Google Cloud', value: 'GCP', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+DigitalOcean by default does not setup firewall for the VM.
+</TabItem>
+<TabItem value="Azure">
+
+- Azure's firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports (TCP 8440-8443).
+
+![Diagram](/img/public_cloud/Controller-Firewall-Azure.jpg)
+
+</TabItem>
+<TabItem value="AWS">
+
+- The steps in the create VM section already specified the ports need to be opened on the AWS firewall.
+- You can double check if the required ports are open. Here is a example of the firewall ports if you used the default ports(TCP 8440-8443).
+
+![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
+
+</TabItem>
+<TabItem value="GCP">
+
+GCP’s default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
+
+
+For controller we have to allow the TCP port 8440-8443 along with SSH port.
+
+![Diagram](/img/public_cloud/Controller-Firewall-GCP.jpg)
+
+
+For Public ER we have to allow 80, 443, 22.
+
+![Diagram](/img/public_cloud/PublicER-Firewall-GCP.jpg)
+
+</TabItem>
+</Tabs>
+
+## 1.3 Login and Setup Controller
 
 <Tabs
   defaultValue="DigitalOcean"
@@ -172,12 +212,15 @@ This ensures the Controller setup by the quickstart is advertising the external 
 </TabItem>
 <TabItem value="Azure">
 
-Once the VM is created, we can get the IP address of the VM from the Resources screen. Login to the VM by using defined user "usename", private sshkey and IP address:
+- Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Virtual machine screen.
+- Login to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
 ```bash
-ssh -i <private_key> "username"@<ip>
+ssh -i <private_key> <username>@<ip>
+or
+ssh -i <private_key> <username>@<dns-name>
 ```
 
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. ** If you do not have a DNS hostname**, you must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
 **export EXTERNAL_DNS="$(curl -s eth0.me)"**
 
@@ -218,7 +261,7 @@ This ensures the Controller setup by the quickstart is advertising the external 
 </TabItem>
 </Tabs>
 
-## 1.3 Setup Ziti Administration Console (ZAC) 
+## 1.4 Setup Ziti Administration Console (ZAC) 
 **Optional**
 
 ZAC provides GUI for managing the OpenZiti network. If you prefer UI over CLI to manage network, please following the [ZAC Setup Guide](/docs/learn/quickstarts/zac/) to setup ZAC before going to the next section.
@@ -246,52 +289,6 @@ sudo apt install nodejs
 After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/learn/quickstarts/zac/#cloning-from-github) to setup ZAC.
 
 ---
-
-## 1.4 Firewall
-
-<Tabs
-  defaultValue="DigitalOcean"
-  values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
-      { label: 'Azure', value: 'Azure', },
-      { label: 'AWS', value: 'AWS', },      
-      { label: 'Google Cloud', value: 'GCP', },
-  ]}
->
-<TabItem value="DigitalOcean">
-
-DigitalOcean by default does not setup firewall for the VM.
-</TabItem>
-<TabItem value="Azure">
-
-Azure's default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
-
-![Diagram](/img/public_cloud/Controller-Firewall-Azure.jpg)
-
-</TabItem>
-<TabItem value="AWS">
-
-- AWS' default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
-
-![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
-
-</TabItem>
-<TabItem value="GCP">
-
-GCP’s default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
-
-
-For controller we have to allow the TCP port 8440-8443 along with SSH port.
-
-![Diagram](/img/public_cloud/Controller-Firewall-GCP.jpg)
-
-
-For Public ER we have to allow 80, 443, 22.
-
-![Diagram](/img/public_cloud/PublicER-Firewall-GCP.jpg)
-
-</TabItem>
-</Tabs>
 
 ## 1.5 Helpers
 
