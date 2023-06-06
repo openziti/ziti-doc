@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 In this section, we are describing how to setup the Edge Router (pub-er) for our [test network](Services#311-network-diagram-1).
 
 ## 2.1 Create the Edge Router VM 
-Please follow **[Create a VM section](Controller/#11-create-a-vm-to-be-used-as-the-controller)** of the Controller Guide to setup a VM to be used as Router. 
+Please follow **[Create a VM section](Controller#11-create-a-vm-to-be-used-as-the-controller)** of the Controller Guide to setup a VM to be used as Router. 
 
 ## 2.2 Login and Update the repo and apps on VM
 
@@ -41,11 +41,11 @@ ssh -i <private_key> "username"@<ip>
 </TabItem>
 <TabItem value="AWS">
 
-Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
+- Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
 
 Login to the VM by using user name "ubuntu":
 ```bash
-ssh -i <private_key> "ubuntu"@<ip>
+ssh -i <private_key> ubuntu@<ip>
 ```
 </TabItem>
 <TabItem value="GCP">
@@ -100,8 +100,8 @@ If you choose to explore these two functionalities, you can remove the options (
 
 ### 2.3.3 Create the Router with link listener
 Use this procedure to create a Public Router with link listener (but without tunnel).
-```
-./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --assumePublic --disableHealthChecks --disableMetrics --routerName pub-er 
+```bash
+sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --assumePublic --disableHealthChecks --disableMetrics --routerName pub-er 
 ```
 **output**
 ```
@@ -385,15 +385,17 @@ The following routes are required:
 </TabItem>
 <TabItem value="AWS">
 
-For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Azure.
-
-Following is an example route for intercepting traffic destine for ip: 10.10.0.0/24. The next hop is our local gateway ER.
+- For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes for your VPC.
+- To get to the route table, click on **Subnet** from your Instances screen
+- From the Subnet screen, click on **Router table**
+- Then you can use **Edit routes** to add routes to the table.
+- Following is an example routes for intercepting traffic destine for IP subnet: 10.10.0.0/24 and 100.64.0.1/32.
+- The Target is **Instance** (our local gateway ER).
 
 ![Diagram](/img/public_cloud/RouterTable-AWS1.jpg)
-![Diagram](/img/public_cloud/RouterTable-AWS2.jpg)
 
 The following routes are required:
-- any intercept address cidr
+- any intercept address CIDR
 - 100.64.0.0/10 (for DNS based intercept)
 
 </TabItem>
@@ -443,9 +445,10 @@ From your VM screen, click on the **Network Interface** of that VM. On the left 
 </TabItem>
 <TabItem value="AWS">
 
-- From your VM screen, click on the **Network Interface** of that VM. 
-- On the right side dropdown menu, choose **Actions**. 
-- select **source and destination check** then **untick the enable**
+- From your Instance screen, Under **Networking** tab, click on the **Network Interface** of that VM. 
+- Click on **Actions** on the right side to bring up a dropdown menu. 
+- Select **Change source/dest. check**
+- **uncheck** Enable and then press **Save**
 
 ![Diagram](/img/public_cloud/SrcDestCheck-AWS1.jpg)
 ![Diagram](/img/public_cloud/SrcDestCheck-AWS2.jpg)
@@ -495,8 +498,7 @@ AWS default firewall is blocking all incoming access to the VM. You will need th
 - 443/TCP (default port for edge listener)
 - 80/TCP (default port for link listener)
 - 53/UDP (when using as local gw)
-- 22/TCP (SSH access)
-- 8080/TCP (HTTP testing from non ziti client)
+- any intercept ports. (i.e. if you want to intercept RDP traffic, you will need to open port 3389)
 
 Following is the firewall setting for edge router which serves as the GW for non ziti client.
 ![Diagram](/img/public_cloud/Firewall-AWS-ER-nonziti.jpg)

@@ -37,7 +37,7 @@ On the controller, before performing the CLI command, you will need to login fir
 zitiLogin
 ```
 
-The login token expires after a period of time. If the token expired, you will need to login again via the same command. You will see error message like this when the CLI logs out:
+The login token expires after some period of time. If the token expired, you will need to login again via the same command. You will see error message like this when the token expired:
 ```
 error: error listing https://161.35.108.218:8441/edge/management/v1/config-types?filter=id%3D%22host.v1%22 in Ziti Edge Controller. Status code: 401 Unauthorized, Server returned: {
     "error": {
@@ -129,8 +129,8 @@ Once the identities are created, you can check the identities and download the *
 #### 3.2.3.2 Create Identity with CLI
 Create two identities (ingress-tunnel, egress-tunnel) on the **controller**:
 ```bash
-ziti edge create identity user ingress-tunnel -o ingress-tunnel.jwt
-ziti edge create identity user egress-tunnel -o egress-tunnel.jwt
+ziti edge create identity device ingress-tunnel -o ingress-tunnel.jwt
+ziti edge create identity device egress-tunnel -o egress-tunnel.jwt
 ```
 
 #### 3.2.3.3 Register Identities
@@ -583,7 +583,7 @@ root@egress-tunnel:~# cat >hello.txt
 
 You have reached the "egress-tunnel".
 <CTRL-D>
-root@egress-tunnel:~# python3 -m http.server 80
+root@egress-tunnel:~# sudo python3 -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 ```
 
@@ -656,7 +656,7 @@ DNS=144.126.220.15
 
 Restart the systemd-resolved service 
 ```bash
-systemctl restart systemd-resolved.service
+sudo systemctl restart systemd-resolved.service
 ```
 
 </TabItem>

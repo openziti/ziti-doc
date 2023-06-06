@@ -75,41 +75,46 @@ Once the Validation passed. Press **Create** to create VM.
 </TabItem>
 <TabItem value="AWS">
 
-- login to the AWS console. 
-- go to the EC2 dashboard. 
-- Click on the instance. 
-- Launch the instance
+- login to the **AWS console**. 
+- go to the **EC2 dashboard**. 
+- Click on the **Instances**. 
+- **Launch the instances**
 
 ![Diagram](/img/public_cloud/Create-AWS1.jpg)
 
-- Name the instance.
+- Fill the **Name** of your instance.
 ![Diagram](/img/public_cloud/Create-AWS2.jpg)
 
-- On the Quick start select **ubuntu**. 
-- Select the ubuntu server 22.04 LTS. 
-- Select the instance type T2 medium
+- On the Quick start select **Ubuntu**. 
+- Select the **Ubuntu Server 22.04 LTS**.
+- Leave the Architecture as **64-bit (x86)**
+- Select the instance type **t2.medium**
 
 ![Diagram](/img/public_cloud/Create-AWS3.jpg)
 
 - In the **Key pair (login.)** section, choose the key name which you already created.
 - In the **Network settings** section, choose the VPC for your VM.
-- Select the subnet. 
+- Select the subnet.
 - Select **Enable** for **Auto assign public IP**
 
 ![Diagram](/img/public_cloud/Create-AWS4.jpg)
 
-- ** Create your own security group**
+- Click on ** Create security group** to allow traffic into your VM.
 - Name the security group.
 - Create the Firewall rule based on controller and ER. 
-- For controller. allow the TCP port 8440-8443 along with ssh. 
-- For ER we have to allow 80, 443, 22.
+- For controller. allow the TCP port 8440-8443 (default ports from quickstart) along with SSH. 
+- For ER we have to allow TCP port 80, 443 and SSH,
 
 **SG For the controller.**
 ![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
 
 **SG for the ER**
 ![Diagram](/img/public_cloud/Firewall-AWS-ER.jpg)
+
+- Under **Configure storage** section, choose at least **20** GiB storage space.
+
 Now click on **Launch instance**
+
 </TabItem>
 <TabItem value="GCP">
 
@@ -181,16 +186,20 @@ This ensures the Controller setup by the quickstart is advertising the external 
 </TabItem>
 <TabItem value="AWS">
 
-Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
-
-Login to the VM by using user name "ubuntu":
+- Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Instance detail screen.
+- **Please Note:** DNS name is only available if you enabled **DNS Hostnames** under VPC.
+- Login to the VM by using user name "ubuntu":
 ```bash
-ssh -i <private_key> "ubuntu"@<ip>
+ssh -i <private_key> ubuntu@<ip>
+or
+ssh -i <private_key> ubuntu@<dns-name>
 ```
 
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+- Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. **If you do not have a DNS hostname**, You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
-**export EXTERNAL_DNS="$(curl -s eth0.me)"**
+```
+export EXTERNAL_DNS="$(curl -s eth0.me)"
+```
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
@@ -261,7 +270,8 @@ Azure's default firewall is blocking all incoming access to the VM. You will nee
 
 </TabItem>
 <TabItem value="AWS">
-Azure's default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
+
+- AWS' default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
 
 ![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
 
