@@ -1,6 +1,17 @@
 
 # Options and Modes
 
+## `ziti-edge-tunnel` Environment Variables
+
+`ZITI_TIME_FORMAT=utc` - set the log message time format to UTC timestamp instead of milliseconds since start
+
+`ZITI_LOG=4` - set the log level of the underlying Ziti C SDK, higher is more verbose (level 4 means DEBUG)
+
+`TLSUV_DEBUG=4` - set the log level of the underlying libuv library, higher is more verbose (level 4 means DEBUG)
+
+<!-- Ken will update this when a better C SDK reference becomes available; this is a full URL because Docusaurus resolves relative and absolute URL and file paths at build time, and the Vercel build will always fail because it can't resolve the linked docs sites, e.g. CLANG doxygen site -->
+For more information about configuring the underlying Ziti C SDK with environment variables, see [the Ziti C SDK documentation](https://docs.openziti.io/docs/reference/developer/sdk/clang/).
+
 ## `ziti-edge-tunnel` Global Options
 
 You can start `ziti-edge-tunnel` with different options, some of the most commonly used options are listed below.

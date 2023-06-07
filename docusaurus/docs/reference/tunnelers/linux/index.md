@@ -13,10 +13,17 @@ The purpose of the tunneller is to configure host access. This means all users a
 
 ## Install Linux Package
 
+Reasons to use the package:
+
+1. Install the tunneller as a systemd service.
+1. Create permissions and policies for the tunneller to run as a non-root user.
+1. Automatically enroll the identity and clean up the enrollment token in identity directory.
+1. Automatically upgrade the tunneller when a new package is available.
+
 Linux DEB packages are currently available for the x86_64 and arm64 platforms and RPM packages are available for x86_64. Additionally, there are executable downloads available for arm/v7 (32bit) for [manual installation](#manual-installation).
 
 :::note
-It is not necessary to manually enroll the identity when using the RPM or DEB package. Just install the token in the identities directory and it will be enrolled when you start the daemon.
+It is not necessary to manually enroll the identity when using the RPM or DEB package. Just install the token in the identities directory with file owner "ziti" and it will be enrolled and cleaned up when you start the service.
 :::
 
 ### Installing the DEB
@@ -42,13 +49,18 @@ Architectures available:
 * arm64
 
 ```bash
+(
+set -euo pipefail
+
 curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-| gpg --dearmor \
-| sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
+  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
+
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable jammy main' \
-| sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+
 sudo apt update
 sudo apt install ziti-edge-tunnel
+)
 ```
 
 </TabItem>
@@ -62,13 +74,18 @@ Architectures available:
 * arm64
 
 ```bash
+(
+set -euo pipefail
+
 curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-| gpg --dearmor \
-| sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
+  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
+
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
-| sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+
 sudo apt update
 sudo apt install ziti-edge-tunnel
+)
 ```
 
 </TabItem>
@@ -82,13 +99,18 @@ Architectures available:
 * arm64
 
 ```bash
+(
+set -euo pipefail
+
 curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-| gpg --dearmor \
-| sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
+  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
+
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable bionic main' \
-| sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+
 sudo apt update
 sudo apt install ziti-edge-tunnel
+)
 ```
 
 </TabItem>
@@ -102,24 +124,34 @@ sudo apt install ziti-edge-tunnel
 | 11 Bullseye | Focal 20.04  | x86_64, arm64 |
 | 10 Buster   | Bionic 18.04 | x86_64        |
 |  9 Stretch  | Xenial 16.04 | x86_64        |
-|  8 Jessie   | Trusty 14.04 | x86_64        |
 
 This example subscribes you to the Ubuntu `focal` repo which will work well in most cases. Alternatively, you may refer to the table to find the Ubuntu release name that is the contemporary of your Debian release. Then, substitute the Ubuntu release name for `focal` in the `/etc/apt/sources.list.d/openziti.list` file.
 
 ```bash
+(
+set -euo pipefail
+
 curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-| gpg --dearmor \
-| sudo tee /usr/share/keyrings/openziti.gpg >/dev/null
+  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
+
 echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
-| sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+
 sudo apt update
 sudo apt install ziti-edge-tunnel
+)
 ```
 
 </TabItem>
 </Tabs>
 
 2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+
+  ```bash
+  sudo -u ziti tee /opt/openziti/etc/identities/ziti-id.jwt >/dev/null
+  # paste the contents of the enrollment token JWT file and press Ctrl+D
+  ```
+
 2. Enable and start the service
 
     ```bash
@@ -230,6 +262,12 @@ repo_gpgcheck=1
 2. Run `sudo yum update` to refresh your repo data cache. Optionally, you may wish to also install all available updates.
 2. Run `sudo yum install ziti-edge-tunnel` to install the RPM.
 2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+
+  ```bash
+  sudo -u ziti tee /opt/openziti/etc/identities/ziti-id.jwt >/dev/null
+  # paste the contents of the enrollment token JWT file and press Ctrl+D
+  ```
+
 2. Enable and start the service
 
     ```bash

@@ -13,7 +13,8 @@ else
     shift
 fi
 
-EXCLUDE_PATTERN="https?://("
+# ignore all http:// links and selected https:// links
+EXCLUDE_PATTERN="(http://|https://("
 while read -r; do
     EXCLUDE_PATTERN+="${REPLY}|"
 done<<EOF
@@ -30,10 +31,11 @@ www\.reddit\.com/r/openziti
 .*\.ziti
 .*\.zitik8s
 .*\.svc
+twitter\.com/(OpenZiggy|OpenZiti)
 EOF
 # github\.com/.*/releases/latest/download
 
-EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|})"
+EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}))"
 
 docker run --rm --network=host raviqqe/muffet "${SERVER}" \
     --buffer-size=8192 \

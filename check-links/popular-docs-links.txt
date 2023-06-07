@@ -73,7 +73,6 @@
 /docs/manage/controller
 /docs/manage/edge-router
 /docs/manage/pki
-/docs/manage/troubleshooting
 /docs/quickstarts
 /docs/quickstarts/network
 /docs/quickstarts/network/help/change-admin-password
@@ -106,7 +105,6 @@
 /operations/router/deployment
 /operations/router/router-configuration
 /operations/troubleshooting/circuit-create-error-codes
-/operations/troubleshooting/troubleshooting
 /policies
 /policies/CODE_OF_CONDUCT
 /policies/CONTRIBUTING
