@@ -662,7 +662,9 @@ sudo systemctl restart systemd-resolved.service
 </TabItem>
 <TabItem value="Azure">
 
-Modify **/etc/systemd/resolved.conf**. Put local IP of the "local-er" into the file. For example:
+- Modify **/etc/systemd/resolved.conf**.
+- Put local IP of the "local-er" into the file. 
+- For example:
 ```
 DNS=10.5.0.4  #local private IP of the ER eth0
 ```
@@ -675,7 +677,9 @@ sudo systemctl restart systemd-resolved.service
 </TabItem>
 <TabItem value="AWS">
 
-Modify **/etc/systemd/resolved.conf**. Put local IP of the "local-er" into the file. For example:
+- Modify **/etc/systemd/resolved.conf**.
+- Put local IP of the "local-er" into the file.
+- For example:
 ```
 DNS=10.5.0.4  #local private IP of the ER eth0
 ```
@@ -688,11 +692,11 @@ sudo systemctl restart systemd-resolved.service
 </TabItem>
 <TabItem value="GCP">
 
-The Non-OpenZiti-Client's resolver must point to the local-er. So, it can resolve the DNS name from local-er.
-
-Modify **/etc/systemd/resolved.conf**. Put local IP of the "local-er" into the file. For example:
+- Modify **/etc/systemd/resolved.conf**.
+- Put local IP of the "local-er" into the file.
+- For example:
 ```
-DNS=10.5.0.4  #local private IP of the ER eth0
+DNS=10.138.0.2  #local private IP of the local ER
 ```
 **NOTE, the IP address should match your Next hop in the route table**
 

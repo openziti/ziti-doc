@@ -111,28 +111,33 @@ Now click on **Launch instance**
 </TabItem>
 <TabItem value="GCP">
 
-Login to the GCP console. Go to **COMPUTE ENGINE** dashboard. Click on **CREATE INSTANCE**.
-
-
+- Login to the GCP console. 
+- Go to **COMPUTE ENGINE** dashboard. 
+- Click on **CREATE INSTANCE**.
 ![Diagram](/img/public_cloud/Create-GCP1.jpg)
 
-
-Select the option **Marketplace**
-
-
-![Diagram](/img/public_cloud/Create-GCP2.jpg)
-
-Search for Ubuntu & from the dropdown select the Ubuntu Pro 22.04 LTS (Jammy) & Launch the VM
-
-![Diagram](/img/public_cloud/Create-GCP3.jpg)
-
-Configure the VM as follows
-
+- Configure the VM as follow:
+- **Name** of the VM
+- **Region** and **Zone**
+- Choose **e2-medium** for **Machine type** 
 ![Diagram](/img/public_cloud/Create-GCP4.jpg)
 
+- Hit **CHANGE** at the "Boot disk** section to change the OS image.
+- On the "Boot disk" page, Choose **PUBLIC IMAGES**
+- Choose **Ubuntu** as the Operating system
+- Select **Ubuntu 22.04 LTS, x86** Version. 
+- Hit **SELECT** to complete the selection.
+![Diagram](/img/public_cloud/Create-GCP5.jpg)
 
-In the **Networking** section, under **Network Interfaces**, Choose the **NETWORK, SUB NETWORK & the EXTERNAL IP**. Now click on **DEPLOY**
+- Open **Advanced Options**, and then open **Networking**
+- **Highly recommended:** assign a Network tags.  This will help you configuring the firewalls later.
+- **For local GW VM**, **Enable** IP forwarding at this time. You will not be able to change this setting from the console after the VM is created.
+![Diagram](/img/public_cloud/Create-GCP6.jpg)
 
+- **Optional** you can reserve static external IP ADDRESS under **Networking/Network interfaces** section. Reserving static IP is useful for the Network controller in case you have to shut down the VM.
+![Diagram](/img/public_cloud/Create-GCP7.jpg)
+
+- Now click on **CREATE** to create the virtual machine.
 
 </TabItem>
 </Tabs>
@@ -155,7 +160,6 @@ DigitalOcean by default does not setup firewall for the VM.
 <TabItem value="Azure">
 
 - Azure's firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports (TCP 8440-8443).
-
 ![Diagram](/img/public_cloud/Controller-Firewall-Azure.jpg)
 
 </TabItem>
@@ -163,23 +167,30 @@ DigitalOcean by default does not setup firewall for the VM.
 
 - The steps in the create VM section already specified the ports need to be opened on the AWS firewall.
 - You can double check if the required ports are open. Here is a example of the firewall ports if you used the default ports(TCP 8440-8443).
-
 ![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
 
 </TabItem>
+
 <TabItem value="GCP">
 
-GCP’s default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
-
-
-For controller we have to allow the TCP port 8440-8443 along with SSH port.
-
+- GCP’s default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
+- Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
+- Click on **Firewall** menu on the left side to bring up the firewall screen
+- On the firewall screen, click on **+ CREATE FIREWALL RULE** to create new rules
+- Give a meaningful **name** to your firewall rule
+- Choose your **Network**
+- Leave Direction of traffic as **Ingress**
+- Action **Allow**
+- Targets, you can use "All instances in the network" (if you did not specify "Network tags" for your VM). In this example, we are using **Specified target tags** option.
+- Enter **Target tags** for your VM. In this example, our tag is **nc**
+- Enter Source IPv4 ranges: **0.0.0.0/0**
+- For the controller we have to allow the **TCP** port **8440-8443** along with SSH port (**22**).
+Hit **CREAETE** to create rules.
 ![Diagram](/img/public_cloud/Controller-Firewall-GCP.jpg)
 
-
-For Public ER we have to allow 80, 443, 22.
-
-![Diagram](/img/public_cloud/PublicER-Firewall-GCP.jpg)
+- The firewall rule also shows up on your "Network interface details" screen.
+- From your VM screen, click on the **Network interfaces** name (i.e. nic0)
+![Diagram](/img/public_cloud/Controller-Firewall-GCP2.jpg)
 
 </TabItem>
 </Tabs>
@@ -197,16 +208,14 @@ For Public ER we have to allow 80, 443, 22.
 >
 <TabItem value="DigitalOcean">
 
-Once the VM is created, we can get the IP address of the droplet from the Resources screen. 
-
-Login to the VM by using user "root" and IP address:
+- Once the VM is created, we can get the IP address of the droplet from the Resources screen. 
+- Login to the VM by using user "root" and IP address:
 ```bash
 ssh root@<ip>
 ```
-
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
  
-**export EXTERNAL_DNS="$(curl -s eth0.me)"**
+- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
@@ -222,7 +231,7 @@ ssh -i <private_key> <username>@<dns-name>
 
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. ** If you do not have a DNS hostname**, you must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
-**export EXTERNAL_DNS="$(curl -s eth0.me)"**
+- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 
@@ -238,25 +247,22 @@ or
 ssh -i <private_key> ubuntu@<dns-name>
 ```
 
-- Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. **If you do not have a DNS hostname**, You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. **If you do not have a DNS hostname**, You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
-```
-export EXTERNAL_DNS="$(curl -s eth0.me)"
-```
+-  **export EXTERNAL_DNS="$(curl -s eth0.me)"**
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
 <TabItem value="GCP">
 
-Once the VM is created, we can login through **SSH** button on the console
-
+- Once the VM is created, we can login through **SSH** button on the VM instances screen.
 ![Diagram](/img/public_cloud/GCP-login1.jpg)
 
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
-
-**export EXTERNAL_DNS="$(curl -s eth0.me)"**
-
-This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
+- export the DNS record 
+```bash
+export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
+```
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) to setup the controller.
 
 </TabItem>
 </Tabs>

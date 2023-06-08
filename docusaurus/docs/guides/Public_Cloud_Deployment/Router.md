@@ -51,7 +51,9 @@ ssh -i <private_key> ubuntu@<ip>
 </TabItem>
 <TabItem value="GCP">
 
-Once the VM is created, we can login through **SSH** button on the console
+- Once the VM is created, we can login through **SSH** button on the VM instances screen. Make sure **ssh is allow** on the firewall before you do this. Alternatively, you can [configure firewall](Router#29-firewall) first.
+
+![Diagram](/img/public_cloud/GCP-login1.jpg)
 </TabItem>
 </Tabs>
 
@@ -412,16 +414,19 @@ The following routes are required:
 
 For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in GCP.
 
+- Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
+- Click on **Routes** menu on the left side to bring up the Routes screen
+- Click **ROUTE MANAGEMENT** and **+ CREATE ROUTE** to bring up a dialog to create a route
+- Specify your **Network** and **Destination IP range**
+- **Next hop** is our **local-er** instance.
+- Click **CREATE** to generate the route.
+
 Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32. The next hop is our local gateway ER.
-
-
-Following are the route table entries in Non-openziti-client
-- To reach the destination IP 11.11.11.11/32
-- To reach the destination 100.64.0.0/10 which is the locally resolved DNS IP by the Ziti DNS
-
 ![Diagram](/img/public_cloud/RouteTable-GCP.jpg)
 
-Note: In GCP, I gave the name of the instance as openziti-private-er-vm for the local gateway which is same as local-er in test network 2
+The following routes are required:
+- any intercept address CIDR
+- 100.64.0.0/10 (for DNS based intercept)
 
 </TabItem>
 </Tabs>
@@ -466,11 +471,11 @@ DigitalOcean does not have this feature.
 
 <TabItem value="GCP">
 
-In GCP, the "Source and Destination Check" is named **IP forwarding**
-
-In the VM configuration screen, choose the **ADVANCED OPTIONS** & under the **NETWORKING** section (like the picture below). **Enable** the **IP forwarding**
-
+- In GCP, the "Source and Destination Check" is named **IP forwarding**
+- During the VM creation, from the VM configuration screen, choose the **ADVANCED OPTIONS** & under the **NETWORKING** section (like the picture below). **Enable** the **IP forwarding**
 ![Diagram](/img/public_cloud/SrcDestCheck-GCP.jpg)
+
+- If the **IP forwarding** was not enabled during VM creation, you can follow [this procedure](https://cloud.google.com/compute/docs/instances/update-instance-properties) to enable it.
 
 </TabItem>
 </Tabs>
@@ -520,24 +525,15 @@ Following is the firewall setting for edge router which serves as the GW for non
 </TabItem>
 <TabItem value="GCP">
 
-GCP’S default firewall is blocking all incoming access to the VM.
+GCP default firewall is blocking all incoming access to the VM. You will need the following ports open for your ERs:
 
-Private router i.e. local-er in test network 2  was enrolled with edge listener and Tunneler enabled & following are the inbound firewall requirements for the instance.
+- 443/TCP (default port for edge listener)
+- 80/TCP (default port for link listener)
+- 53/UDP (when using as local gw)
+- any intercept ports. (i.e. if you want to intercept RDP traffic, you will need to open port 3389)
 
-
-![Diagram](/img/public_cloud/PrivateER-Firewall-GCP.jpg)
-
-•       TCP Port 22 is opened only for the SSH access to the VM
-•       UDP Port 53 is opened for accepting the DNS query request from the Non-openziti-client
-
-Also allow HTTP Traffic to flow via the Private router i.e. local-er in test network 2 originated from the Non-openziti-client
-
-![Diagram](/img/public_cloud/PrivateER-Firewall-GCP2.jpg)
-
-Inbound firewall requirements for the Public Edge router
-
-
-![Diagram](/img/public_cloud/PublicER-Firewall-GCP.jpg)
+Following is example firewall configuration for public ER and local ER.
+![Diagram](/img/public_cloud/ER-Firewall-GCP.jpg)
 
 </TabItem>
 </Tabs>
