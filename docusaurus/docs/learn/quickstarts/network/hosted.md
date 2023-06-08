@@ -58,7 +58,7 @@ export EXTERNAL_IP="$(curl -s eth0.me)"
 export ZITI_EDGE_CONTROLLER_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_EDGE_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${EXTERNAL_DNS}"
-export ZITI_EDGE_ROUTER_HOSTNAME="${EXTERNAL_DNS}"
+export ZITI_ROUTER_ADVERTISED_ADDRESS="${EXTERNAL_DNS}"
 export ZITI_CTRL_LISTENER_PORT=8440
 export ZITI_CTRL_EDGE_ADVERTISED_PORT=8441
 export ZITI_EDGE_ROUTER_PORT=8442
@@ -105,7 +105,7 @@ Example output:
 
 ```bash
 $ stopRouter 
-INFO: stopped router
+INFO: Router stopped.
 
 $ stopController 
 INFO: Controller stopped.

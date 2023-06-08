@@ -66,13 +66,13 @@ another tunneler nor will you need to create another identity.
 > 
 ### Prerequisite - CLI
 If you plan to use the `ziti` CLI tool, you will need to download and get the `ziti` executable on your path. If you have 
-followed a quickstart, this will have been done for you and the executable will be located in `~/.ziti/quickstart/$(hostname)/ziti-bin/`.
+followed a quickstart, this will have been done for you and the executable will be located in `~/.ziti/quickstart/$(hostname -s)/ziti-bin/`.
 Also, the .env file the quickstart emits can be used to put this folder on your path by simply sourcing that file. For example, if you
 followed either the [Local - No Docker](../network/local-no-docker) or 
 [Host Ziti Anywhere](../network/hosted) quickstart, you should have a file that can be sourced. Here is an example of 
 my personal "Local - No Docker" result when sourcing that file:
 ```shell
-$ source ~/.ziti/quickstart/$(hostname)/$(hostname).env
+$ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 
 adding /home/cd/.ziti/quickstart/sg3/ziti-bin/ziti-v0.25.6 to the path
 ```

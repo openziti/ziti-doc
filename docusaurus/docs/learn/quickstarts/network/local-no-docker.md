@@ -62,7 +62,7 @@ After running `expressInstall`, you will have environment variables set named `Z
 `ZITI_CTRL_EDGE_ADVERTISED_PORT`. After the controller has started, your controller should be listening at that 
 address:port combination. You can see what your value is set to by running 
 `echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"`. This value defaults to: 
-`$(hostname):1280`. Make sure the controller is on and listening and then start the edge router. 
+`$(hostname -s):1280`. Make sure the controller is on and listening and then start the edge router. 
 
 ```bash
 echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
@@ -72,7 +72,7 @@ Example output:
 
 ```bash
 $ echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
-My-Mac-mini.local.domain:1280
+My-Mac-mini:1280
 ```
 ### Start Your Edge Router
 
@@ -90,7 +90,7 @@ $ startRouter
 Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
 ```
 
-You can verify the edge router is listening by finding the value of `$ZITI_EDGE_ROUTER_HOSTNAME:$ZITI_EDGE_ROUTER_PORT`.
+You can verify the edge router is listening by finding the value of `$ZITI_ROUTER_ADVERTISED_ADDRESS:$ZITI_EDGE_ROUTER_PORT`.
 Again, this will default to using `$(hostname -s)` as the host name and port 3022.
 
 ### Stopping the Controller and Router
@@ -104,7 +104,7 @@ Example output:
 
 ```bash
 $ stopRouter 
-INFO: stopped router
+INFO: Router stopped.
 
 $ stopController 
 INFO: Controller stopped.
@@ -118,7 +118,7 @@ something similar to this:
 ```bash
 $ zitiLogin
 Token: 40d2d280-a633-46c9-8499-ab2e005dd222
-Saving identity 'default' to ${HOME}/.ziti/quickstart/My-Mac-mini.local.domain/ziti-cli.json
+Saving identity 'default' to ${HOME}/.ziti/quickstart/My-Mac-mini/ziti-cli.json
 ```
 
 You can now use the `ziti` CLI to interact with Ziti!. The
@@ -128,7 +128,7 @@ to your path, alias `ziti` if you like. Let's try to use this command to see if 
 
 ```bash
 $ "${ZITI_BIN_DIR-}/ziti" edge list edge-routers
-id: rhx6687N.P    name: My-Mac-mini.local.domain    isOnline: true    role attributes: {}
+id: rhx6687N.P    name: My-Mac-mini    isOnline: true    role attributes: {}
 results: 1-1 of 1
 ```
 
@@ -157,7 +157,7 @@ Please realize that if you change these variables each of the "hostname" variabl
 
 * ZITI_CTRL_EDGE_ADVERTISED_ADDRESS
 * ZITI_CTRL_EDGE_ADVERTISED_PORT
-* ZITI_EDGE_ROUTER_HOSTNAME
+* ZITI_ROUTER_ADVERTISED_ADDRESS
 * ZITI_EDGE_ROUTER_PORT
 
 Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`, uses
@@ -167,7 +167,7 @@ a host named 'localhost', and uses ports 8800 for the edge controller and 9090 f
 ZITI_NETWORK="newfolder"; \
 ZITI_CTRL_EDGE_ADVERTISED_ADDRESS=localhost; \
 ZITI_CTRL_EDGE_ADVERTISED_PORT=8800; \
-ZITI_EDGE_ROUTER_HOSTNAME=localhost; \
+ZITI_ROUTER_ADVERTISED_ADDRESS=localhost; \
 ZITI_EDGE_ROUTER_PORT=9090; \
 source ziti-cli-functions.sh; expressInstall
 ```

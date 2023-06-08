@@ -39,8 +39,8 @@ You can also choose to create router on the controller and then register with th
 ### 2.3.1 Info needed for creating Router
 In order to create the Router, the VM needs to contact controller. We need the following information before we can continue:
 - Controller IP
-- Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_PORT**
-- Controller Management Port: On the controller, issue this command **echo $ZITI_EDGE_CONTROLLER_PORT**
+- Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_LISTENER_PORT**
+- Controller Management Port: On the controller, issue this command **echo $ZITI_CTRL_EDGE_ADVERTISED_PORT**
 - Controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
 - Router Name: Name for this router
 
@@ -170,9 +170,9 @@ eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImVyb3R0IiwiZXhwIjoxNjgwODM5NjA4LCJ
 
 We also need the management port (default 8441) and fabric port (default 8440) of the controller to register the router
 ```
-# echo $ZITI_EDGE_CONTROLLER_PORT
+# echo $ZITI_CTRL_EDGE_ADVERTISED_PORT
 8441
-# echo $ZITI_CTRL_PORT
+# echo $ZITI_CTRL_LISTENER_PORT
 8440
 ```
 

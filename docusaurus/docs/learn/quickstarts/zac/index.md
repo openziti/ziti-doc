@@ -34,7 +34,7 @@ you can perform the following steps.
 
 1. Install Node modules:
 
-   ```bash
+   ```bash0000
    cd "${ZITI_HOME}/ziti-console"
    npm install
    ````

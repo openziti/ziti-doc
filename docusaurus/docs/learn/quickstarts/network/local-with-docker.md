@@ -118,6 +118,7 @@ default port used by edge routers.
 docker run \
   -e ZITI_EDGE_ROUTER_NAME=ziti-edge-router-1 \
   -e ZITI_EDGE_ROUTER_ROLES=public \
+  -e ZITI_EDGE_ROUTER_ADVERTISED_HOST=ziti-edge-router-1 \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-1 \
   -p 3022:3022 \
@@ -136,6 +137,7 @@ docker run \
   -e ZITI_EDGE_ROUTER_NAME=ziti-edge-router-2 \
   -e ZITI_EDGE_ROUTER_ROLES=public \
   -e ZITI_EDGE_ROUTER_PORT=4022 \
+  -e ZITI_EDGE_ROUTER_ADVERTISED_HOST=ziti-edge-router-2 \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-2 \
   -p 4022:4022 \
@@ -190,7 +192,7 @@ And finally, once authenticated I can test to see if the edge router is online i
 
 ```bash
 ziti@a33d58248d6e:/persistent$ ziti edge list edge-routers
-id: qNZyqZEix3    name: ziti-edge-router    isOnline: true    role attributes: {}
+id: qNZyqZEix3    name: ziti-edge-router-1    isOnline: true    role attributes: {}
 results: 1-1 of 1
 ```
 
