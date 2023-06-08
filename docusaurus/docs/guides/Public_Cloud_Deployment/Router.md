@@ -17,21 +17,13 @@ Please follow **[Create a VM section](Controller#11-create-a-vm-to-be-used-as-th
 ## 2.2 Login and Update the repo and apps on VM
 
 <Tabs
-  defaultValue="DigitalOcean"
+  defaultValue="Azure"
   values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
-<TabItem value="DigitalOcean">
-
-- Once the VM is created, get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
-```bash
-ssh root@<ip>
-```
-</TabItem>
 <TabItem value="Azure">
 
 - Once the VM is created, we can get the IP address of the VM from the Virtual machine screen.
@@ -293,86 +285,16 @@ If the status shows **active (running)**, then the setup finished correctly.
 
 On the controller, you can check the status of the routers. Please refer to the controller guide (useful command for the Router) section for more information.
 
-## 2.6 Fix the resolver
-<Tabs
-  defaultValue="DigitalOcean"
-  values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
-      { label: 'Azure', value: 'Azure', },
-      { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
-  ]}
->
-<TabItem value="DigitalOcean">
-
-If you run router without tunneler enabled, you can skip this section.
-
-We need to remove the digital ocean resolver for tunnel resolver to work correctly.
-
-Check resolver before any changes:
-```
-# resolvectl
-Global
-         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
-  resolv.conf mode: stub
-Current DNS Server: 67.207.67.2
-       DNS Servers: 67.207.67.2 67.207.67.3
-...
-...
-```
-Under the Global DNS servers, it should say something like "67.207.67.2 67.207.67.3"
-
-**Now, make changes to the resolver:**
-```bash
-cd /etc/systemd/resolved.conf.d/
-rm DigitalOcean.conf
-sudo ln -s /dev/null DigitalOcean.conf
-systemctl restart systemd-resolved.service
-```
-
-Check resolver again 
-```
-# resolvectl
-Global
-         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
-  resolv.conf mode: stub
-Current DNS Server: 146.190.120.86
-       DNS Servers: 146.190.120.86
-...
-...       
-```
-Now the Global DNS servers should be the IP address on your local interface.
-
-</TabItem>
-<TabItem value="Azure">
-
-**Not applicable**
-</TabItem>
-<TabItem value="AWS">
-
-**Not applicable**
-</TabItem>
-<TabItem value="GCP">
-
-**Not applicable**
-</TabItem>
-</Tabs>
-
 ## 2.7 Route Table 
 
 <Tabs
-  defaultValue="DigitalOcean"
+  defaultValue="Azure"
   values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
-<TabItem value="DigitalOcean">
-
-DigitalOcean does not have route table.  The routes are setup directly on the VM. The example is in the [test section](Services#367-verify-the-connection)
-</TabItem>
 <TabItem value="Azure">
 
 - For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Azure.
@@ -436,18 +358,13 @@ The following routes are required:
 Most cloud provider checks the source and destination of the traffic to make sure it is either originated or terminated at the VM. When our ER is used as a local GW, it is neither the source or the destination of the traffic. Therefore, the source and destination check must be disabled. 
 
 <Tabs
-  defaultValue="DigitalOcean"
+  defaultValue="Azure"
   values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
-<TabItem value="DigitalOcean">
-
-DigitalOcean does not have this feature.
-</TabItem>
 <TabItem value="Azure">
 
 - In Azure, the "Source and Destination Check" is called **IP forwarding**
@@ -483,18 +400,13 @@ DigitalOcean does not have this feature.
 ## 2.9 Firewall
 
 <Tabs
-  defaultValue="DigitalOcean"
+  defaultValue="Azure"
   values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
-<TabItem value="DigitalOcean">
-
-DigitalOcean by default does not setup firewall for the VM.
-</TabItem>
 <TabItem value="Azure">
 
 Azure's default firewall is blocking all incoming access to the VM. You will need the following ports open for your ERs:

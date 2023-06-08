@@ -571,6 +571,7 @@ OKAY : local-er (3) -> e2thttp (3) Common Routers: (3/3) Dial: Y Bind: N
 ```
 Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has at least 1 Common Routers.
 ### 3.6.7 Verify the connection
+#### 3.6.7.1 Setup Server Side
 Login to the Client (**egress-tunnel**), setup a file to send via http.
 ```
 root@egress-tunnel:~# cat >hello.txt
@@ -590,35 +591,8 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 Login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
 
-#### 3.6.7.1 Test IP intercept
+#### 3.6.7.2 Test IP intercept
 
-<Tabs
-  defaultValue="DigitalOcean"
-  values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
-      { label: 'Azure', value: 'Azure', },
-      { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
-  ]}
->
-<TabItem value="DigitalOcean">
-
-**setup the route first**. The route is via our ER in the same DC (10.124.0.2)
-```
-root@Non-OpenZiti-Client:~# ip route add 11.11.11.11/32 via 10.124.0.2
-```
-
-</TabItem>
-<TabItem value="Azure">
-
-</TabItem>
-<TabItem value="GCP">
-
-</TabItem>
-</Tabs>
-
-
-**test the connection**
 ```
 root@Non-OpenZiti-Client:~# curl http://11.11.11.11/hello.txt
               _   _      _ _
@@ -633,40 +607,24 @@ Bye.
 root@Non-OpenZiti-Client:~#
 ```
 
-#### 3.6.7.2 Modify the resolver
+#### 3.6.7.3 Modify the resolver
 The **Non-OpenZiti-Client**'s resolver has to point to the local-er.  So it can resolve the DNS name from local-er.
 
 <Tabs
-  defaultValue="DigitalOcean"
+  defaultValue="Azure"
   values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
-<TabItem value="DigitalOcean">
-
-Modify "/etc/systemd/resolved.conf.d/DigitalOcean.conf" to point to the local IP of the "local-er".
-```
-root@Non-OpenZiti-Client:~# cat /etc/systemd/resolved.conf.d/DigitalOcean.conf
-[Resolve]
-DNS=144.126.220.15
-```
-
-Restart the systemd-resolved service 
-```bash
-sudo systemctl restart systemd-resolved.service
-```
-
-</TabItem>
 <TabItem value="Azure">
 
 - Modify **/etc/systemd/resolved.conf**.
 - Put local IP of the "local-er" into the file. 
 - For example:
 ```
-DNS=10.5.0.4  #local private IP of the ER eth0
+DNS=10.5.0.4  #local private IP of the ER
 ```
 **NOTE, the IP address should match your Next hop in the route table**
 
@@ -681,7 +639,7 @@ sudo systemctl restart systemd-resolved.service
 - Put local IP of the "local-er" into the file.
 - For example:
 ```
-DNS=10.5.0.4  #local private IP of the ER eth0
+DNS=10.5.0.4  #local private IP of the ER
 ```
 **NOTE, the IP address should match your Next hop in the route table**
 
@@ -708,34 +666,8 @@ sudo systemctl restart systemd-resolved.service
 </TabItem>
 </Tabs>
 
-#### 3.6.7.3 Test DNS intercept
+#### 3.6.7.4 Test DNS intercept
 
-<Tabs
-  defaultValue="DigitalOcean"
-  values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
-      { label: 'Azure', value: 'Azure', },
-      { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
-  ]}
->
-<TabItem value="DigitalOcean">
-
-**setup the route first**. The route is via our ER in the same DC (10.124.0.2). The DNS is going to resolve to 100.64.0.0/10 address.
-```
-root@Non-OpenZiti-Client:~# ip route add 100.64.0.0/10 via 10.124.0.2
-```
-
-</TabItem>
-<TabItem value="Azure">
-
-</TabItem>
-<TabItem value="GCP">
-
-</TabItem>
-</Tabs>
-
-**test the connection**
 ```
 root@Non-OpenZiti-Client:~# curl http://e2thttp.ziti/hello.txt
               _   _      _ _

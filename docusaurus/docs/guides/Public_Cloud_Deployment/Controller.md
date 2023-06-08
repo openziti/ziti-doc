@@ -11,26 +11,13 @@ import TabItem from '@theme/TabItem';
 ## 1.1 Create a VM to be used as the Controller
 
 <Tabs
-  defaultValue="DigitalOcean"
+  defaultValue="Azure"
   values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
-<TabItem value="DigitalOcean">
-
-Login to the Digital Ocean console, create a **Droplets** from the dropdown menu on the upper right hand side.
-
-![Diagram](/img/public_cloud/Create1.jpg)
-
-On the "Create Droplets" screen, Choose "**Ubuntu**", version "**22.04**". For the Size, choose the appropriate size for your application.  For this guide, a smaller size was used. 
-![Diagram](/img/public_cloud/Create2.jpg)
-
-Next, choose a ssh-key to login to the VM. (We highly discourage login to the VM using Password), then **Create Droplet**
-![Diagram](/img/public_cloud/Create3.jpg)
-</TabItem>
 <TabItem value="Azure">
 
 - It is easier to use **resource group** to organize and manage all your resources for this demo.
@@ -146,18 +133,13 @@ Now click on **Launch instance**
 ## 1.2 Firewall
 
 <Tabs
-  defaultValue="DigitalOcean"
+  defaultValue="Azure"
   values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },      
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
-<TabItem value="DigitalOcean">
-
-DigitalOcean by default does not setup firewall for the VM.
-</TabItem>
 <TabItem value="Azure">
 
 - Azure's firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports (TCP 8440-8443).
@@ -199,27 +181,13 @@ Hit **CREAETE** to create rules.
 ## 1.3 Login and Setup Controller
 
 <Tabs
-  defaultValue="DigitalOcean"
+  defaultValue="Azure"
   values={[
-      { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
   ]}
 >
-<TabItem value="DigitalOcean">
-
-- Once the VM is created, we can get the IP address of the droplet from the Resources screen. 
-- Login to the VM by using user "root" and IP address:
-```bash
-ssh root@<ip>
-```
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
- 
-- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
-
-This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
-</TabItem>
 <TabItem value="Azure">
 
 - Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Virtual machine screen.
