@@ -62,7 +62,8 @@ Press **Review + create**
 - After the Validation passed. Press **Create** to create VM.
 ![Diagram](/img/public_cloud/Create-Azure5.jpg)
 
-- **Optional:** You can associate an DNS name to the public IP of your VM. You can do this from "Virtual machine" page.
+- **Important:** If you are creating the network controller, you need to associate an DNS name to the public IP of your VM.
+- You can do this from "Virtual machine" page.
 ![Diagram](/img/public_cloud/Create-Azure6.jpg)
 
 </TabItem>
@@ -229,29 +230,25 @@ or
 ssh -i <private_key> <username>@<dns-name>
 ```
 
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. ** If you do not have a DNS hostname**, you must replace the EXTERNAL_DNS with the following command before running the quickstart.
-
-- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
-
-This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
+Use the DNS name to setup the controller with [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/). 
 
 </TabItem>
 <TabItem value="AWS">
 
 - Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Instance detail screen.
-- **Please Note:** DNS name is only available if you enabled **DNS Hostnames** under VPC.
+- **NOTE:** DNS name is only available if you enabled **DNS Hostnames** under VPC.
 - Login to the VM by using user name "ubuntu":
 ```bash
 ssh -i <private_key> ubuntu@<ip>
 or
 ssh -i <private_key> ubuntu@<dns-name>
 ```
+- export the DNS record 
+```bash
+export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
+```
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
 
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. **If you do not have a DNS hostname**, You must replace the EXTERNAL_DNS with the following command before running the quickstart.
-
--  **export EXTERNAL_DNS="$(curl -s eth0.me)"**
-
-This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
 <TabItem value="GCP">
 
@@ -262,7 +259,7 @@ This ensures the Controller setup by the quickstart is advertising the external 
 ```bash
 export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
 ```
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) to setup the controller.
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
 
 </TabItem>
 </Tabs>
