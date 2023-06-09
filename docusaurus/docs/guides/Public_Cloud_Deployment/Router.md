@@ -7,7 +7,7 @@ title: Create new router
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 2.0 Configure new router using open ziti
+# 2.0 Configure new router using OpenZiti
 
 In this section, we are describing how to setup the Edge Router (pub-er) for our [test network](Services#311-network-diagram-1).
 

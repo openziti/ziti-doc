@@ -4,7 +4,7 @@ sidebar_label: Intro
 title: Introduction
 ---
 
-This guide describes the steps for creating the open-ziti components on the public clouds. The components include: 
+This guide describes the steps for creating the OpenZiti components on the public clouds. The components include: 
 
 1. Controller - use this guide for creating the controller
 2. Router     - use this guide for creating the routers

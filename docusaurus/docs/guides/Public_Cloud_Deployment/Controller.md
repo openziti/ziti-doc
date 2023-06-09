@@ -41,7 +41,7 @@ On the **Create a virtual machine** screen.
 - Next, choose **Authentication type** to login to the VM. (We highly **discourage** login to the VM using Password). 
 - Enter an username (**remember the username, you will need it to login to the VM**), or leave the default user **azureuser**
 - Choose your ssh key
-- For **inbound ports**, select the ssh. You can add extra port based on open ziti requirement. 
+- For **inbound ports**, select the ssh. You can add extra port based on your OpenZiti setup. 
 - You can leave everything default.
 Press **Review + create**
 ![Diagram](/img/public_cloud/Create-Azure4.jpg)
