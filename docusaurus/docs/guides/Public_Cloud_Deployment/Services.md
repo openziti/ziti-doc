@@ -20,7 +20,7 @@ In this guide, we will demonstrate ziti services with three examples:
 ### 3.1.2 Network Diagram 2
 ![Diagram](/img/public_cloud/Services02.jpg)
 
-This guide provides both CLI and GUI (ZAC) instructions. To use ZAC, make sure ZAC is installed. If you have not installed ZAC, and would like to use it in this section, please follow the [ZAC Setup Guide](Controller#13-setup-ziti-administration-console-zac) before continue.
+This guide provides both CLI and GUI (ZAC) instructions. To use ZAC, make sure ZAC is installed. If you have not installed ZAC, and would like to use it in this section, please follow the [ZAC Setup Guide](Controller#14-setup-ziti-administration-console-zac) before continue.
 
 ## 3.2 Setup VMs for ziti network
 ### 3.2.1 Controller
@@ -56,7 +56,7 @@ error: error listing https://161.35.108.218:8441/edge/management/v1/config-types
 We need two routers to complete our example in this guide.
 
 - Public Edge Router (**pub-er**) was setup in the [Router setup section](Router#23-create-and-setup-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](Router#29-firewall) for this router.
-- Local Edge Router (**local-er**). Please follow the [Router guide](Router/) to setup a [Router with edge listener and tunneler](Router/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Resolver](Router#26-fix-the-resolver), [Route Table](Router#27-route-table), [Source and Destination Check](Router#28-source-and-destination-check) and [Firewall](Router#29-firewall).
+- Local Edge Router (**local-er**). Please follow the [Router guide](Router/) to setup a [Router with edge listener and tunneler](Router/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Route Table](Router#27-route-table), [Source and Destination Check](Router#28-source-and-destination-check) and [Firewall](Router#29-firewall).
 
 #### 3.2.2.1 ZAC
 On the ZAC **ROUTERS** screen, you can check your router and make sure it is created correctly. You can also check the identity associated with the router by clicked on **IDENTITIES**
