@@ -6,28 +6,28 @@ A Ziti Network's security setup is defined by several entities defined in the [E
 are related to identity authentication and service access:
 
 - [Identities](#identity) - describe a human, device, or service within Ziti Edge
-- [Authenticators](./authentication/auth#authenticators) - describes the credentials of an authentication method associated with an Identity
-- [Enrollments](./enrollment) - describes a set of criteria necessary to create a new Identity and associated Authenticator
-- [Authentication Policy](./authentication/authentication-policies) - describes the methods available for Identity authentication
-- [3rd Party CAs](./authentication/third-party-cas) - allows external x509 PKIs to be used for authentication
-- [External JWT Signers](./authentication/external-jwt-signers) - allows external JWT signers to be used for authentication
-- [API Session](./sessions) - a security context represented by a security token (JWT, secret, etc) that represents
+- [Authenticators](./authentication/auth.md#authenticators) - describes the credentials of an authentication method associated with an Identity
+- [Enrollments](./enrollment.md) - describes a set of criteria necessary to create a new Identity and associated Authenticator
+- [Authentication Policy](./authentication/30-authentication-policies.md) - describes the methods available for Identity authentication
+- [3rd Party CAs](./authentication/10-third-party-cas.md) - allows external x509 PKIs to be used for authentication
+- [External JWT Signers](./authentication/50-external-jwt-signers.md) - allows external JWT signers to be used for authentication
+- [API Session](./sessions.md) - a security context represented by a security token (JWT, secret, etc) that represents
   Identity authentication
-- [Session](./sessions) - a security context represented by a security token (JWT, secret, etc) that represents access
+- [Session](./sessions.md) - a security context represented by a security token (JWT, secret, etc) that represents access
   to a Service
-- [Service Policy](./authorization/policies/overview) - describes which Identities have access to which Services and the Posture Checks that are required to
+- [Service Policy](./authorization/policies/overview.mdx) - describes which Identities have access to which Services and the Posture Checks that are required to
   pass for access
-- [Edge Router Policies](./authorization/policies/overview)  - describes which Identities have access to which Edge Routers
-- [Posture Checks](./authorization/posture-checks) - describes additional environmental state that an Identity must have in order to obtain and maintain
+- [Edge Router Policies](./authorization/policies/overview.mdx)  - describes which Identities have access to which Edge Routers
+- [Posture Checks](./authorization/posture-checks.md) - describes additional environmental state that an Identity must have in order to obtain and maintain
   service access
-- [Posture Queries](./authorization/posture-checks#posture-data) - describes a request for environmental information from a client
-- [Posture Responses](./authorization/posture-checks#posture-data) - a response to a Posture Query provided by a client
-- [Posture Data](./authorization/posture-checks#posture-data) - the current environmental state provided via Posture Responses and known information
+- [Posture Queries](./authorization/posture-checks.md#posture-data) - describes a request for environmental information from a client
+- [Posture Responses](./authorization/posture-checks.md#posture-data) - a response to a Posture Query provided by a client
+- [Posture Data](./authorization/posture-checks.md#posture-data) - the current environmental state provided via Posture Responses and known information
 - [Authentication Queries](./sessions.md#authentication-queries) - additional, secondary, authentication factors required after initial, primary, authentication
 
 There is an additional policy type for Edge Routers:
 
-- [Service Edge Router Policies](./authorization/policies/overview) - determines which services can be accessed over which routers
+- [Service Edge Router Policies](./authorization/policies/overview.mdx) - determines which services can be accessed over which routers
 
 Additionally, connection security document is provided on the [Connection Security](connection-security.md) page. 
 

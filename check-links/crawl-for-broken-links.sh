@@ -27,7 +27,7 @@ mermaid\.ink
 play\.google\.com
 apps\.apple\.com
 www\.reddit\.com/r/openziti
-.*#docusaurus_skipToContent_fallback$
+.*#(__)?docusaurus_skipToContent_fallback$
 .*\.ziti
 .*\.zitik8s
 .*\.svc
