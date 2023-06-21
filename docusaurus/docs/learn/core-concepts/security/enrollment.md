@@ -36,7 +36,7 @@ available in the `enrollmentJWT` field.
 
 To enroll a router, deliver the `enrollmentJWT` to the host that will run the Edge Router and perform enrollment via:
 
-`ziti-router enroll -j <jwt_path>`
+`ziti router enroll -j <jwt_path>`
 
 ### Router Enrollment Extension
 

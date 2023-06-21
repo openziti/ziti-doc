@@ -60,13 +60,13 @@ The life cycle of a router begins by calling the controller's management API to 
 Creating a router yields a one-time enrollment token that you may store as a JWT file. Enrollment consumes the token and facilitates issuing a client certificate for the router, establishing cryptographic trust with the controller.
 
 ```bash
-ziti-router enroll config.yaml --jwt token.jwt
+ziti router enroll config.yaml --jwt token.jwt
 ```
 
 ### Run Router {#router-run}
 
 ```bash
-ziti-router run config.yaml
+ziti router run config.yaml
 ```
 
 ```ini
