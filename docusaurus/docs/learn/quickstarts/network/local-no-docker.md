@@ -66,7 +66,7 @@ it up again. You can get the environment variables by sourcing the ".env" file.
 for details)
 
 You can see what your value is set to by running 
-`curl "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}/versions"`. This value defaults to: 
+`echo ${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}`. This value defaults to: 
 `$(hostname -s):1280`. Make sure the controller by trying to curl to the address and then start the edge router. 
 
 ```bash
