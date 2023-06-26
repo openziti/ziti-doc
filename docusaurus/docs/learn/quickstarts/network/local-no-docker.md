@@ -66,11 +66,12 @@ it up again. You can get the environment variables by sourcing the ".env" file.
 for details)
 
 You can see what your value is set to by running 
-`echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"`. This value defaults to: 
-`$(hostname -s):1280`. Make sure the controller is on and listening and then start the edge router. 
+`curl "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}/versions"`. This value defaults to: 
+`$(hostname -s):1280`. Make sure the controller by trying to curl to the address and then start the edge router. 
 
 ```bash
-echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
+curl "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
+{"data":{"apiVersions":{"edge":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-client":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-management":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/management/v1"],"path":"/edge/management/v1"}}},"buildDate":"2023-06-23T15:08:25Z","revision":"65d1dda821a3","runtimeVersion":"go1.20.5","version":"v0.28.4"},"meta":{}}
 ```
 
 Example output:
