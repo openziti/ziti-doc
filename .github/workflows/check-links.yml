@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Workspace
         uses: actions/checkout@v3
       - name: Crawl for Broken Links
-        run: ./check-links/crawl-for-broken-links.sh https://docs.openziti.io
+        run: ./check-links/crawl-for-broken-links.sh https://openziti.io
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v3
@@ -37,10 +37,10 @@ jobs:
       - name: Checkout Workspace
         uses: actions/checkout@v3
       - name: Check popular links to new docs site
-        run: ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
+        run: ./check-links.sh https://openziti.io ./popular-docs-links.txt
         working-directory: ./check-links/
       - name: Check popular links to old docs site
-        run: ./check-links.sh https://openziti.github.io ./popular-docs-links.txt
+        run: ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
         working-directory: ./check-links/
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
