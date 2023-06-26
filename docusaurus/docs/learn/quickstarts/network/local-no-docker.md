@@ -60,7 +60,12 @@ ziti-controller started as process id: 1286. log located at: /home/vagrant/.ziti
 
 After running `expressInstall`, you will have environment variables set named `ZITI_CTRL_EDGE_ADVERTISED_ADDRESS` and 
 `ZITI_CTRL_EDGE_ADVERTISED_PORT`. After the controller has started, your controller should be listening at that 
-address:port combination. You can see what your value is set to by running 
+address:port combination. (Note, if you do not have these environment variables, you've probably closed your shell and opened
+it up again. You can get the environment variables by sourcing the ".env" file. 
+[See the section at the bottom of the page](https://docs.openziti.io/docs/learn/quickstarts/network/local-no-docker/#sourcing-the-env-file)
+for details)
+
+You can see what your value is set to by running 
 `echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"`. This value defaults to: 
 `$(hostname -s):1280`. Make sure the controller is on and listening and then start the edge router. 
 
@@ -175,16 +180,12 @@ source ziti-cli-functions.sh; expressInstall
 ## Sourcing the Env File
 
 In the case you close your shell and you want to get the same environment variables back into your shell, you can just 
-source the "env" file that is placed into the location you specified. For example, if you ran the example above where
-the deployed files went to `${HOME}/.ziti/quickstart/newfolder` you would find an "env" file at 
-`${HOME}/.ziti/quickstart/newfolder/newfolder.env` and source it:
+source the "env" file that is placed into the location you specified. This file is usually located at:
+`$HOME/.ziti/quickstart/$(hostname)/$(hostname).env`. You can source this file to place the environment variables back
+into your shell.
 
 ```bash
-source ${HOME}/.ziti/quickstart/newfolder/newfolder.env
-
-$ zitiLogin
-Token: aa1c7fb0-85d9-4a79-86b2-5df450c5b4de
-Saving identity 'default' to ${HOME}/.ziti/quickstart/newfolder/ziti-cli.json
+source $HOME/.ziti/quickstart/$(hostname)/$(hostname).env
 ```
 
 ## Next Steps
