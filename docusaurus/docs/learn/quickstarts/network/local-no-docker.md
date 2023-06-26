@@ -67,7 +67,8 @@ for details)
 
 You can see what your value is set to by running 
 `echo ${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}`. This value defaults to: 
-`$(hostname -s):1280`. Make sure the controller by trying to curl to the address and then start the edge router. 
+`$(hostname -s):1280`. Make sure the controller is available by trying to curl to the address, and then start the edge router. 
+
 
 ```bash
 curl "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
