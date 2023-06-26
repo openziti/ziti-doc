@@ -71,6 +71,10 @@ You can see what your value is set to by running
 
 ```bash
 curl "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
+```
+
+Example output: 
+```bash
 {"data":{"apiVersions":{"edge":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-client":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-management":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/management/v1"],"path":"/edge/management/v1"}}},"buildDate":"2023-06-23T15:08:25Z","revision":"65d1dda821a3","runtimeVersion":"go1.20.5","version":"v0.28.4"},"meta":{}}
 ```
 
