@@ -40,7 +40,7 @@ You can then run `cd ./docusaurus && yarn install && yarn start` to serve the Do
 * `GIT_BRANCH`: output of `git rev-parse --abbrev-ref HEAD`
 * `gh_ci_key`: base64 encoding of an OpenSSH private key authorized to clobber the `main` branch of [the root doc repo for GitHub pages](https://github.com/openziti/openziti.github.io/tree/main).
 
-The script defines the GitHub Pages custom domain by committing a file `CNAME`. You must change the custom domain in the script if you change the custom domain in GitHub Pages web console.
+The [./publish.sh](./publish.sh) script emits a `CNAME` file which defines the custom domain to be used by GitHub Pages. If the script is not changed, the domain will revert to the value defined in the script every time the site is published.
 
 To run this script locally, define the necessary variables in your environment.
 
