@@ -42,7 +42,7 @@ You can then run `cd ./docusaurus && yarn install && yarn start` to serve the Do
 
 The script defines the GitHub Pages custom domain by committing a file `CNAME`. You must change the custom domain in the script if you change the custom domain in GitHub Pages web console.
 
-You may run this script locally if you define the same variables in your environment.
+To run this script locally, define the necessary variables in your environment.
 
 ## How Search Works
 
