@@ -33,12 +33,16 @@ NOTE: you must be configured to run NodeJS >=16.14 before running the next comma
 
 You can then run `cd ./docusaurus && yarn install && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
 
-## Publish by Running CI Equivalent Locally
+## Publishing this Site
 
 `./publish.sh` is intended to run in GitHub Actions on branch `main` where the following variables are defined:
 
 * `GIT_BRANCH`: output of `git rev-parse --abbrev-ref HEAD`
-* `gh_ci_key`: base64 encoding of an OpenSSH private key authorized to clobber the `master` branch of [the root doc repo for GitHub pages](https://github.com/openziti/openziti.github.io/tree/master).
+* `gh_ci_key`: base64 encoding of an OpenSSH private key authorized to clobber the `main` branch of [the root doc repo for GitHub pages](https://github.com/openziti/openziti.github.io/tree/main).
+
+The script defines the GitHub Pages custom domain by committing a file `CNAME`. You must change the custom domain in the script if you change the custom domain in GitHub Pages web console.
+
+You may run this script locally if you define the same variables in your environment.
 
 ## How Search Works
 
