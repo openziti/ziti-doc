@@ -45,7 +45,7 @@ if [ "${GIT_BRANCH:-}" == "main" ]; then
 
   cd ./openziti.github.io/
   
-  # echo 'Creating CNAME file for custom github pages domain. see https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages#cname-errors'
+  echo 'Creating CNAME file for custom github pages domain. see https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages#cname-errors'
   echo "openziti.io" > ./CNAME
   
   git add -A
