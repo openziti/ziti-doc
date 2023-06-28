@@ -39,7 +39,7 @@ With an understanding of what we are looking to accomplish in this guide, let's 
 
 ### Prerequisite - OpenZiti Network
 You will need an OpenZiti overlay network in place before you can complete this guide. If you do not have an
-OpenZiti overlay network provisioned yet, [follow a quickstart](../network/) and get a network up and running.
+OpenZiti overlay network provisioned yet, [follow a quickstart](../network/index.md) and get a network up and running.
 
 ### Prerequisite - HTTP Server
 You'll need an HTTP server which you plan to connect your HTTP client to. There are numerous ways to 
@@ -48,15 +48,15 @@ simply print out the "docker whale" when it's connected to. (This guide will not
 HTTP server which is listening)  If you are familiar with docker and wish to use the exact same example as shown here, simply run the 
 container with: `docker run -d --rm --name web-test -p 80:8000 crccheck/hello-world`. 
 
-Alternatively, if you have used the [docker-compose quickstart](../network/local-docker-compose) to provision your 
+Alternatively, if you have used the [docker-compose quickstart](../network/local-docker-compose.md) to provision your 
 OpenZiti overlay network, you will have this HTTP server available to use immediately. 
 
 ### Prerequisite - HTTP Client Tunneller
-You will need to install an [OpenZiti tunneler](../../../reference/tunnelers) on the machine which represents the HTTP client. Later on 
+You will need to install an [OpenZiti tunneler](../../../reference/tunnelers/index.mdx) on the machine which represents the HTTP client. Later on 
 we'll create an identity for this tunneller and use the identity to access the HTTP server. 
 
 ### Prerequisite - HTTP Server Tunneller
-You will need to install an [OpenZiti tunneler](../../../reference/tunnelers) on the machine which represents the HTTP server. Later on
+You will need to install an [OpenZiti tunneler](../../../reference/tunnelers/index.mdx) on the machine which represents the HTTP server. Later on
 we'll create an identity for this tunneller and use the identity to access the HTTP server. 
 
 :::note
@@ -68,8 +68,8 @@ another tunneler nor will you need to create another identity.
 If you plan to use the `ziti` CLI tool, you will need to download and get the `ziti` executable on your path. If you have 
 followed a quickstart, this will have been done for you and the executable will be located in `~/.ziti/quickstart/$(hostname -s)/ziti-bin/`.
 Also, the .env file the quickstart emits can be used to put this folder on your path by simply sourcing that file. For example, if you
-followed either the [Local - No Docker](../network/local-no-docker) or 
-[Host Ziti Anywhere](../network/hosted) quickstart, you should have a file that can be sourced. Here is an example of 
+followed either the [Local - No Docker](../network/local-no-docker.md) or 
+[Host Ziti Anywhere](../network/hosted.md) quickstart, you should have a file that can be sourced. Here is an example of 
 my personal "Local - No Docker" result when sourcing that file:
 ```shell
 $ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
@@ -100,9 +100,9 @@ Here is an overview of the steps we will follow:
 2. Create an identity for the HTTP server if you are not using an edge-router with the tunneling option enabled (see below). Also note 
    that if you are using the docker-compose quickstart or just plan to use an edge-router with tunneling enabled you can also skip this 
    step.
-3. Create an [intercept.v1 config](/docs/learn/core-concepts/config-store/overview). This config is used to instruct the client-side tunneler how 
+3. Create an [intercept.v1 config](../../core-concepts/config-store/overview.md). This config is used to instruct the client-side tunneler how 
    to correctly intercept the targeted traffic and put it onto the overlay.
-4. Create a [host.v1 config](/docs/learn/core-concepts/config-store/overview). This config is used instruct the server-side tunneler how to offload the 
+4. Create a [host.v1 config](../../core-concepts/config-store/overview.md). This config is used instruct the server-side tunneler how to offload the 
    traffic from the overlay, back to the underlay.
 5. Create a service to associate the two configs created previously into a service.
 6. Create a service-policy to authorize "HTTP Clients" to "dial" the service representing the HTTP server.
