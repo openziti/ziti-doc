@@ -16,6 +16,7 @@ import TabItem from '@theme/TabItem';
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
   ]}
 >
 <TabItem value="Azure">
@@ -128,6 +129,21 @@ Now click on **Launch instance**
 - Now click on **CREATE** to create the virtual machine.
 
 </TabItem>
+<TabItem value="DigitalOcean">
+
+- Login to the Digital Ocean console, create a **Droplets** from the dropdown menu on the upper right hand side.
+
+![Diagram](/img/public_cloud/Create1.jpg)
+
+- On the "Create Droplets" screen, Choose "**Ubuntu**", version "**22.04**".
+- For the Size, choose the appropriate size for your application.  For this guide, a smaller size was used.
+![Diagram](/img/public_cloud/Create2.jpg)
+
+- Next, choose a ssh-key to login to the VM. (We highly discourage login to the VM using Password),
+- then **Create Droplet**
+![Diagram](/img/public_cloud/Create3.jpg)
+
+</TabItem>
 </Tabs>
 
 ## 1.2 Firewall
@@ -138,6 +154,7 @@ Now click on **Launch instance**
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },      
       { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
   ]}
 >
 <TabItem value="Azure">
@@ -176,6 +193,10 @@ Hit **CREAETE** to create rules.
 ![Diagram](/img/public_cloud/Controller-Firewall-GCP2.jpg)
 
 </TabItem>
+<TabItem value="DigitalOcean">
+
+DigitalOcean by default does not setup firewall for the VM.
+</TabItem>
 </Tabs>
 
 ## 1.3 Login and Setup Controller
@@ -186,6 +207,7 @@ Hit **CREAETE** to create rules.
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
   ]}
 >
 <TabItem value="Azure">
@@ -229,6 +251,19 @@ export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
 ```
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
 
+</TabItem>
+<TabItem value="DigitalOcean">
+
+- Once the VM is created, we can get the IP address of the droplet from the Resources screen.
+- Login to the VM by using user "root" and IP address:
+```bash
+ssh root@<ip>
+```
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+
+- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
+This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
 </Tabs>
 

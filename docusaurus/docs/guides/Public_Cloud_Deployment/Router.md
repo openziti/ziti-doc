@@ -22,6 +22,7 @@ Please follow **[Create a VM section](Controller#11-create-a-vm-to-be-used-as-th
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
   ]}
 >
 <TabItem value="Azure">
@@ -46,6 +47,13 @@ ssh -i <private_key> ubuntu@<ip>
 - Once the VM is created, we can login through **SSH** button on the VM instances screen. Make sure **ssh is allow** on the firewall before you do this. Alternatively, you can [configure firewall](Router#29-firewall) first.
 
 ![Diagram](/img/public_cloud/GCP-login1.jpg)
+</TabItem>
+<TabItem value="DigitalOcean">
+
+- Once the VM is created, get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
+```bash
+ssh root@<ip>
+```
 </TabItem>
 </Tabs>
 
@@ -285,6 +293,71 @@ If the status shows **active (running)**, then the setup finished correctly.
 
 On the controller, you can check the status of the routers. Please refer to the controller guide (useful command for the Router) section for more information.
 
+## 2.6 Fix the resolver
+<Tabs
+  defaultValue="Azure"
+  values={[
+      { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
+      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+If you run router without tunneler enabled, you can skip this section.
+
+We need to remove the digital ocean resolver for tunnel resolver to work correctly.
+
+Check resolver before any changes:
+```
+# resolvectl
+Global
+         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+  resolv.conf mode: stub
+Current DNS Server: 67.207.67.2
+       DNS Servers: 67.207.67.2 67.207.67.3
+...
+...
+```
+Under the Global DNS servers, it should say something like "67.207.67.2 67.207.67.3"
+
+**Now, make changes to the resolver:**
+```bash
+cd /etc/systemd/resolved.conf.d/
+rm DigitalOcean.conf
+sudo ln -s /dev/null DigitalOcean.conf
+systemctl restart systemd-resolved.service
+```
+
+Check resolver again
+```
+# resolvectl
+Global
+         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+  resolv.conf mode: stub
+Current DNS Server: 146.190.120.86
+       DNS Servers: 146.190.120.86
+...
+...
+```
+Now the Global DNS servers should be the IP address on your local interface.
+
+</TabItem>
+<TabItem value="Azure">
+
+**Not applicable**
+</TabItem>
+<TabItem value="AWS">
+
+**Not applicable**
+</TabItem>
+<TabItem value="GCP">
+
+**Not applicable**
+</TabItem>
+</Tabs>
+
 ## 2.7 Route Table 
 
 <Tabs
@@ -293,6 +366,7 @@ On the controller, you can check the status of the routers. Please refer to the 
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
   ]}
 >
 <TabItem value="Azure">
@@ -351,6 +425,10 @@ The following routes are required:
 - 100.64.0.0/10 (for DNS based intercept)
 
 </TabItem>
+<TabItem value="DigitalOcean">
+
+DigitalOcean does not have route table.  The routes are setup directly on the VM. The example is in the [test section](Services#367-verify-the-connection)
+</TabItem>
 </Tabs>
 
 ## 2.8 Source and Destination Check
@@ -363,6 +441,7 @@ Most cloud provider checks the source and destination of the traffic to make sur
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },      
   ]}
 >
 <TabItem value="Azure">
@@ -395,6 +474,10 @@ Most cloud provider checks the source and destination of the traffic to make sur
 - If the **IP forwarding** was not enabled during VM creation, you can follow [this procedure](https://cloud.google.com/compute/docs/instances/update-instance-properties) to enable it.
 
 </TabItem>
+<TabItem value="DigitalOcean">
+
+DigitalOcean does not have this feature.
+</TabItem>
 </Tabs>
 
 ## 2.9 Firewall
@@ -405,6 +488,7 @@ Most cloud provider checks the source and destination of the traffic to make sur
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },      
   ]}
 >
 <TabItem value="Azure">
@@ -447,5 +531,9 @@ GCP default firewall is blocking all incoming access to the VM. You will need th
 Following is example firewall configuration for public ER and local ER.
 ![Diagram](/img/public_cloud/ER-Firewall-GCP.jpg)
 
+</TabItem>
+<TabItem value="DigitalOcean">
+
+DigitalOcean by default does not setup firewall for the VM.
 </TabItem>
 </Tabs>

@@ -56,7 +56,7 @@ error: error listing https://161.35.108.218:8441/edge/management/v1/config-types
 We need two routers to complete our example in this guide.
 
 - Public Edge Router (**pub-er**) was setup in the [Router setup section](Router#23-create-and-setup-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](Router#29-firewall) for this router.
-- Local Edge Router (**local-er**). Please follow the [Router guide](Router/) to setup a [Router with edge listener and tunneler](Router/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Route Table](Router#27-route-table), [Source and Destination Check](Router#28-source-and-destination-check) and [Firewall](Router#29-firewall).
+- Local Edge Router (**local-er**). Please follow the [Router guide](Router/) to setup a [Router with edge listener and tunneler](Router/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Resolver](Router#26-fix-the-resolver), [Route Table](Router#27-route-table), [Source and Destination Check](Router#28-source-and-destination-check) and [Firewall](Router#29-firewall).
 
 #### 3.2.2.1 ZAC
 On the ZAC **ROUTERS** screen, you can check your router and make sure it is created correctly. You can also check the identity associated with the router by clicked on **IDENTITIES**
@@ -593,6 +593,33 @@ Login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
 
 #### 3.6.7.2 Test IP intercept
 
+<Tabs
+  defaultValue="Azure"
+  values={[
+      { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
+      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+**setup the route first**. The route is via our ER in the same DC (10.124.0.2)
+```
+root@Non-OpenZiti-Client:~# ip route add 11.11.11.11/32 via 10.124.0.2
+```
+
+</TabItem>
+<TabItem value="Azure">
+
+</TabItem>
+<TabItem value="GCP">
+
+</TabItem>
+</Tabs>
+
+
+**test the connection**
 ```
 root@Non-OpenZiti-Client:~# curl http://11.11.11.11/hello.txt
               _   _      _ _
@@ -616,6 +643,7 @@ The **Non-OpenZiti-Client**'s resolver has to point to the local-er.  So it can 
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
   ]}
 >
 <TabItem value="Azure">
@@ -657,6 +685,21 @@ sudo systemctl restart systemd-resolved.service
 DNS=10.138.0.2  #local private IP of the local ER
 ```
 **NOTE, the IP address should match your Next hop in the route table**
+
+Restart the systemd-resolved service
+```bash
+sudo systemctl restart systemd-resolved.service
+```
+
+</TabItem>
+<TabItem value="DigitalOcean">
+
+Modify "/etc/systemd/resolved.conf.d/DigitalOcean.conf" to point to the local IP of the "local-er".
+```
+root@Non-OpenZiti-Client:~# cat /etc/systemd/resolved.conf.d/DigitalOcean.conf
+[Resolve]
+DNS=144.126.220.15
+```
 
 Restart the systemd-resolved service
 ```bash
