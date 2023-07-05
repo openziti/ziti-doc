@@ -94,7 +94,14 @@ $ createRouterSystemdFile "${ZITI_EDGE_ROUTER_NAME}"
 Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-router.service
 ```
 
-Before you run the controller and router with `systemd` you need to stop them if they're currently running.
+#### The helper functions vs systemd
+
+The set of startController/stopController, startRouter/stopRouter are functions declared in the 
+[the ziti-cli-function.sh helper script](https://get.openziti.io/quick/ziti-cli-functions.sh) and are useful for running
+the controller and router directly in your shell. These functions are not meant to work with systemd-enabled installs. If
+you are enabling systemd, use `systemctl` to start/stop the components. During the expressInstall, the controller and router
+were started using the helper scripts to complete the installation. Both should not be running, but before you run the 
+controller and router with `systemd` you need to stop them if they're currently running:
 
 ```bash
 stopRouter 
