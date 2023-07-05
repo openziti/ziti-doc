@@ -48,10 +48,13 @@ you can perform the following steps.
    ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
    ```
 
-1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced the 
-   Ziti helper script, you need to in order to get the necessary function.
+1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console. If you have not sourced 
+   [the Ziti helper script](https://get.openziti.io/quick/ziti-cli-functions.sh) and you wish to have ZAC enabled with systemd,
+   you need to in order to get the necessary function. Either inspect the script and find the function, download and source it,
+   or source it directly from the internet (direct sourcing from internet shown below)
 
    ```bash
+   source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"
    createZacSystemdFile
    sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
    sudo systemctl daemon-reload
