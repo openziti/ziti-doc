@@ -17,6 +17,7 @@ import TabItem from '@theme/TabItem';
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
   ]}
 >
 <TabItem value="Azure">
@@ -144,6 +145,41 @@ Now click on **Launch instance**
 ![Diagram](/img/public_cloud/Create3.jpg)
 
 </TabItem>
+<TabItem value="OCI">
+
+- Login to the **ORACLE Cloud** console. 
+- Go to Home dashboard.
+- Click on **Instances** (Under **Compute** category). 
+- Create an instance.
+- Name the instance. 
+- Choose the compartment (Create a new compartment if you has not created before).
+- Select the Placement.
+- Leave the security disabled
+
+![Diagram](/img/public_cloud/Create-OCI1.jpg)
+
+- On Image and shape selection, click **Change image** icon.
+- Select the **Ubuntu** icon. 
+- Select the **Canonical Ubuntu 22.04**. 
+- Select any image build. And press *Select image**
+- On shape select, Choose lick change shape. Select **2** OCUP and 4 GB memory.
+
+![Diagram](/img/public_cloud/Create-OCI2.jpg)
+
+- On the networking section.
+- Select the existing virtual cloud network for primary network.
+- Select the existing subnet.
+- For **Public IPv4 address**, check the **Assign a public IPv4 address**.
+
+![Diagram](/img/public_cloud/Create-OCI3.jpg)
+
+- In the **Add SSH keys** section upload public key file or paste the existing public key.
+- Leave default boot volume.
+- Now click on **Create**.
+
+![Diagram](/img/public_cloud/Create-OCI4.jpg)
+
+</TabItem>
 </Tabs>
 
 ## 1.2 Firewall
@@ -155,6 +191,7 @@ Now click on **Launch instance**
       { label: 'AWS', value: 'AWS', },      
       { label: 'Google Cloud', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
   ]}
 >
 <TabItem value="Azure">
@@ -197,10 +234,53 @@ Hit **CREAETE** to create rules.
 
 DigitalOcean by default does not setup firewall for the VM.
 </TabItem>
+<TabItem value="OCI">
+
+---
+
+Oracle cloud by default blocks all incoming traffic to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). 
+
+- First, we need to **Create security group**
+- From **Networking** category, select the **Virtual cloud networks**. 
+- Select the VCN your VM is in.
+- On the left side menu, select the **Network Security Group**.
+- Select **Create Network Security Group**.
+- Name the security group and select the next.
+- Now create rules for ingress traffic. 
+- Let everything open in the outbound direction.
+
+Following is the example of the Security Group for the controller
+
+![Diagram](/img/public_cloud/Firewall-OCI1.jpg)
+
+- Then attach the created security group to the instance
+- Select **Edit** under the **Network security groups** section.
+- Select the security group from the drop down and press **Save changes**.
+
+![Diagram](/img/public_cloud/Firewall-OCI2.jpg)
+
+
+---
+**NOTE 1**
+```
+Oracle Cloud also uses Security Lists to limit the traffic, 
+please make sure the setting under Security Lists is not conflict 
+with your security group setup.
+```
+
+---
+**NOTE 2**
+```
+It is possible after the security group configuration, the ufw does not
+work correctly on the VM.
+
+Please restart the VM after the security group configuration.
+```
+
+</TabItem>
 </Tabs>
 
 ## 1.3 Login and Setup Controller
-
 <Tabs
   defaultValue="Azure"
   values={[
@@ -208,6 +288,7 @@ DigitalOcean by default does not setup firewall for the VM.
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
   ]}
 >
 <TabItem value="Azure">
@@ -259,6 +340,21 @@ Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/
 ```bash
 ssh root@<ip>
 ```
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+
+- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
+This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
+</TabItem>
+<TabItem value="OCI">
+
+Once the VM is created, we can get the IP address of the VM from the instance details screen.
+
+Login to the VM by using user name "ubuntu" and the IP address:
+```bash
+ssh -i <private_key> ubuntu@<ip>
+```
+
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
 - **export EXTERNAL_DNS="$(curl -s eth0.me)"**

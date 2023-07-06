@@ -23,6 +23,7 @@ Please follow **[Create a VM section](Controller#11-create-a-vm-to-be-used-as-th
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
   ]}
 >
 <TabItem value="Azure">
@@ -53,6 +54,14 @@ ssh -i <private_key> ubuntu@<ip>
 - Once the VM is created, get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
 ```bash
 ssh root@<ip>
+```
+</TabItem>
+<TabItem value="OCI">
+
+- Once the VM is created, we can get the IP address of the VM from the instance details screen.
+- Login to the VM by using user name "ubuntu" and the IP address:
+```bash
+ssh -i <private_key> ubuntu@<ip>
 ```
 </TabItem>
 </Tabs>
@@ -134,7 +143,14 @@ export CONTROLLERMGMTPORT="8441"
 export ADMINUSER="admin"
 export ADMINPASSWORD="Test@123"
 
-sudo ./ziti_router_auto_enroll -f -n --assumePublic --disableHealthChecks --disableMetrics --routerName pub-er
+sudo -E ./ziti_router_auto_enroll -f -n --assumePublic --disableHealthChecks --disableMetrics --routerName pub-er
+```
+
+---
+**NOTE**
+```
+When using the environmental variable for ziti_router_auto_enroll, you must
+use "-E" option to pass the environmental value to sudo.
 ```
 
 ### 2.3.4 Other Router creation options
@@ -301,6 +317,7 @@ On the controller, you can check the status of the routers. Please refer to the 
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
   ]}
 >
 <TabItem value="DigitalOcean">
@@ -356,6 +373,10 @@ Now the Global DNS servers should be the IP address on your local interface.
 
 **Not applicable**
 </TabItem>
+<TabItem value="OCI">
+
+**Not applicable**
+</TabItem>
 </Tabs>
 
 ## 2.7 Route Table 
@@ -367,6 +388,7 @@ Now the Global DNS servers should be the IP address on your local interface.
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
   ]}
 >
 <TabItem value="Azure">
@@ -429,6 +451,24 @@ The following routes are required:
 
 DigitalOcean does not have route table.  The routes are setup directly on the VM. The example is in the [test section](Services#367-verify-the-connection)
 </TabItem>
+<TabItem value="OCI">
+
+- For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Oracle Cloud.
+- To setup your route, choose the default route table from your VCN.
+![Diagram](/img/public_cloud/RouteTable-OCI1.jpg)
+
+- Following is an example route for traffic for 100.64.0.0/10.
+- The **Target Type** is **Private IP**
+- The **Destination Type** is **CIDR Block**
+- The **Destination CIDR Block** is the example traffic (100.64.0.0/10)
+- The **Target Selection** is the IP of our local gateway ER.
+![Diagram](/img/public_cloud/RouteTable-OCI2.jpg)
+
+The following routes are required:
+- any intercept address CIDR
+- 100.64.0.0/10 (for DNS based intercept)
+
+</TabItem>
 </Tabs>
 
 ## 2.8 Source and Destination Check
@@ -441,7 +481,8 @@ Most cloud provider checks the source and destination of the traffic to make sur
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
-      { label: 'Digital Ocean', value: 'DigitalOcean', },      
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
   ]}
 >
 <TabItem value="Azure">
@@ -478,6 +519,17 @@ Most cloud provider checks the source and destination of the traffic to make sur
 
 DigitalOcean does not have this feature.
 </TabItem>
+<TabItem value="OCI">
+
+- From the Instance details screen, click on the **Attached VNICs** from the left side menu
+- On the right side menu, choose **3 dots** (like the picture below), Click **Edit VNIC** 
+![Diagram](/img/public_cloud/SrcDestCheck-OCI1.jpg)
+
+- Select **Skip Source/Destination Check** 
+- Click **Save changes**
+![Diagram](/img/public_cloud/SrcDestCheck-OCI2.jpg)
+
+</TabItem>
 </Tabs>
 
 ## 2.9 Firewall
@@ -488,7 +540,8 @@ DigitalOcean does not have this feature.
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
       { label: 'Google Cloud', value: 'GCP', },
-      { label: 'Digital Ocean', value: 'DigitalOcean', },      
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },   
   ]}
 >
 <TabItem value="Azure">
@@ -535,5 +588,31 @@ Following is example firewall configuration for public ER and local ER.
 <TabItem value="DigitalOcean">
 
 DigitalOcean by default does not setup firewall for the VM.
+</TabItem>
+<TabItem value="OCI">
+
+Oracle Cloud default firewall is s blocking all incoming access to the VM. You will need the following ports open for your ERs:
+- 443/TCP (default port for edge listener)
+- 80/TCP (default port for link listener)
+- 53/UDP (when using as local gw)
+- 22/TCP (SSH access, this rule by default allowed in iptable rule)
+- any intercept ports. (i.e. if you want to intercept RDP traffic, you will need to open port 3389)
+
+**To setup the security group**
+- From **Networking** category, select the **Virtual cloud networks**. 
+- Select the VCN your VM is in.
+- On the left side menu, select the **Network Security Group**.
+- Select **Create Network Security Group**.
+- Name the security group and select the next.
+- Now create rules for ingress traffic.
+
+![Diagram](/img/public_cloud/ER-Firewall-OCI1.jpg)
+
+**Then attach the created security group to the instance**
+- Select **Edit** under the **Network security groups** section.
+- Select the security group from the drop down and press **Save changes**.
+
+![Diagram](/img/public_cloud/ER-Firewall-OCI2.jpg)
+
 </TabItem>
 </Tabs>
