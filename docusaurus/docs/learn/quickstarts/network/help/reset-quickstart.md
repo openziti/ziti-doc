@@ -3,7 +3,7 @@ title: Reset the Quickstart
 id: reset-quickstart
 ---
 
-You may want to re-run `expressInstall` with different parameters. You could run it again with a new `ZITI_HOME` without changing the current installation. You may begin again with these steps:
+You may want to re-run `expressInstall` with different parameters or because a readiness check failed. You could run it again with a new `ZITI_HOME` without changing the current installation or delete the directory and begin again with these steps:
 
 1. Delete the express install directory. Delete is forever, so make sure you're deleting the right thing.
 
@@ -17,4 +17,4 @@ You may want to re-run `expressInstall` with different parameters. You could run
     unsetZitiEnv
     ```
 
-1. Return to set up steps before running `expressinstall`
+1. Return to set up steps before running `expressinstall`, e.g., setting the necessary environment variables for the next run.
