@@ -598,16 +598,17 @@ Login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
-      { label: 'Oracle', value: 'OCI', }, 
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="DigitalOcean">
 
 **setup the route first**. The route is via our ER in the same DC (10.124.0.2)
 ```
-root@Non-OpenZiti-Client:~# ip route add 11.11.11.11/32 via 10.124.0.2
+root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.124.0.2
 ```
 
 </TabItem>
@@ -619,6 +620,14 @@ root@Non-OpenZiti-Client:~# ip route add 11.11.11.11/32 via 10.124.0.2
 </TabItem>
 <TabItem value="OCI">
 
+</TabItem>
+<TabItem value="IBM">
+
+**setup the route first**. The route is via our ER in the same DC (10.162.209.220)
+
+```
+root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.162.209.220
+```
 </TabItem>
 </Tabs>
 
@@ -634,7 +643,6 @@ root@Non-OpenZiti-Client:~# curl http://11.11.11.11/hello.txt
 
 
 You have reached the "egress-tunnel".
-Bye.
 root@Non-OpenZiti-Client:~#
 ```
 
@@ -646,9 +654,10 @@ The **Non-OpenZiti-Client**'s resolver has to point to the local-er.  So it can 
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
-      { label: 'Oracle', value: 'OCI', }, 
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -727,9 +736,65 @@ Restart the systemd-resolved service
 sudo systemctl restart systemd-resolved.service
 ```
 </TabItem>
+<TabItem value="IBM">
+
+- Modify **/etc/systemd/resolved.conf**. 
+- Put **Public IP** of the "local-er" into the file.
+- For example:
+```
+DNS=169.45.71.226    #Public IP of the ER
+```
+Restart the systemd-resolved service
+```bash
+sudo systemctl restart systemd-resolved.service
+```
+
+</TabItem>
 </Tabs>
 
 #### 3.6.7.4 Test DNS intercept
+
+<Tabs
+  defaultValue="Azure"
+  values={[
+      { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
+      { label: 'Google', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+**setup the route first**.
+- The route is via our ER in the same DC (10.124.0.2)
+- We need to setup the route for 100.64/10 subnet
+```
+root@Non-OpenZiti-Client:~# sudo ip route add 100.64.0.0/10 via 10.124.0.2
+```
+
+</TabItem>
+<TabItem value="Azure">
+
+</TabItem>
+<TabItem value="GCP">
+
+</TabItem>
+<TabItem value="OCI">
+
+</TabItem>
+<TabItem value="IBM">
+
+**setup the route first**.
+- The route is via our ER in the same DC (10.162.209.220)
+- We need to setup the route for 100.64/10 subnet
+```
+root@Non-OpenZiti-Client:~# sudo ip route add 100.64.0.0/10 via 10.162.209.220
+```
+
+</TabItem>
+</Tabs>
 
 ```
 root@Non-OpenZiti-Client:~# curl http://e2thttp.ziti/hello.txt

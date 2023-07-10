@@ -21,9 +21,10 @@ Please follow **[Create a VM section](Controller#11-create-a-vm-to-be-used-as-th
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -59,6 +60,14 @@ ssh root@<ip>
 <TabItem value="OCI">
 
 - Once the VM is created, we can get the IP address of the VM from the instance details screen.
+- Login to the VM by using user name "ubuntu" and the IP address:
+```bash
+ssh -i <private_key> ubuntu@<ip>
+```
+</TabItem>
+<TabItem value="IBM">
+
+- Once the VM is created, we can get the IP address of the VM from the Devices screen.
 - Login to the VM by using user name "ubuntu" and the IP address:
 ```bash
 ssh -i <private_key> ubuntu@<ip>
@@ -315,9 +324,10 @@ On the controller, you can check the status of the routers. Please refer to the 
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="DigitalOcean">
@@ -377,6 +387,10 @@ Now the Global DNS servers should be the IP address on your local interface.
 
 **Not applicable**
 </TabItem>
+<TabItem value="IBM">
+
+**Not applicable**
+</TabItem>
 </Tabs>
 
 ## 2.7 Route Table 
@@ -386,9 +400,10 @@ Now the Global DNS servers should be the IP address on your local interface.
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -469,6 +484,10 @@ The following routes are required:
 - 100.64.0.0/10 (for DNS based intercept)
 
 </TabItem>
+<TabItem value="IBM">
+
+IBM Cloud does not have route table.  The routes are setup directly on the VM. The example is in the [test section](Services#367-verify-the-connection)
+</TabItem>
 </Tabs>
 
 ## 2.8 Source and Destination Check
@@ -480,9 +499,10 @@ Most cloud provider checks the source and destination of the traffic to make sur
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
       { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -530,6 +550,9 @@ DigitalOcean does not have this feature.
 ![Diagram](/img/public_cloud/SrcDestCheck-OCI2.jpg)
 
 </TabItem>
+<TabItem value="IBM">
+IBM Cloud does not have this feature.
+</TabItem>
 </Tabs>
 
 ## 2.9 Firewall
@@ -539,9 +562,10 @@ DigitalOcean does not have this feature.
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
       { label: 'Digital Ocean', value: 'DigitalOcean', },
-      { label: 'Oracle', value: 'OCI', },   
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -613,6 +637,28 @@ Oracle Cloud default firewall is s blocking all incoming access to the VM. You w
 - Select the security group from the drop down and press **Save changes**.
 
 ![Diagram](/img/public_cloud/ER-Firewall-OCI2.jpg)
+
+</TabItem>
+<TabItem value="IBM">
+
+
+If you turn on the firewall feature, you will need to config firewall rules. 
+
+- Open the Instance detail screen
+- Find the **Firewall details** at the bottom right. Open it.
+
+Add the following rules.
+- 443/TCP (default port for edge listener)
+- 80/TCP (default port for link listener)
+- 53/UDP (when using as local gw)
+- 22/TCP (SSH access)
+- any intercept ports. (i.e. if you want to intercept RDP traffic, you will need to open port 3389)
+- Deny rules to deny all other traffic
+
+Make sure the firewall is active, it should display **Processing all rules** if it is active.
+
+![Diagram](/img/public_cloud/Firewall-IBM-er.jpg)
+
 
 </TabItem>
 </Tabs>
