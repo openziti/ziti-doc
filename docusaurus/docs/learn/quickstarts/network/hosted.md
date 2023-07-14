@@ -56,12 +56,12 @@ export EXTERNAL_DNS="acme.example.com"
 ```bash
 export EXTERNAL_IP="$(curl -s eth0.me)"       
 export ZITI_EDGE_CONTROLLER_IP_OVERRIDE="${EXTERNAL_IP}"
-export ZITI_EDGE_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
+export ZITI_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${EXTERNAL_DNS}"
 export ZITI_ROUTER_ADVERTISED_ADDRESS="${EXTERNAL_DNS}"
-export ZITI_CTRL_LISTENER_PORT=8440
+export ZITI_CTRL_ADVERTISED_PORT=8440
 export ZITI_CTRL_EDGE_ADVERTISED_PORT=8441
-export ZITI_EDGE_ROUTER_PORT=8442
+export ZITI_ROUTER_PORT=8442
 ```
 
 ### Run `expressInstall`
@@ -81,7 +81,7 @@ is useful to make sure the controller can restart automatically should you shutd
 
 ```bash
 createControllerSystemdFile
-createRouterSystemdFile "${ZITI_EDGE_ROUTER_NAME}"
+createRouterSystemdFile "${ZITI_ROUTER_NAME}"
 ```
 
 Example output:
@@ -90,7 +90,7 @@ Example output:
 $ createControllerSystemdFile
 Controller systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-controller.service
 
-$ createRouterSystemdFile "${ZITI_EDGE_ROUTER_NAME}"
+$ createRouterSystemdFile "${ZITI_ROUTER_NAME}"
 Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-router.service
 ```
 
@@ -122,7 +122,7 @@ After the `systemd` service units are generated, you can then install them by ru
 
 ```bash
 sudo cp "${ZITI_HOME}/${ZITI_CTRL_NAME}.service" /etc/systemd/system/ziti-controller.service
-sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
+sudo cp "${ZITI_HOME}/${ZITI_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now ziti-controller
 sudo systemctl enable --now ziti-router
@@ -133,7 +133,7 @@ Example output:
 ```bash
 $ sudo cp "${ZITI_HOME}/${ZITI_CTRL_NAME}.service" /etc/systemd/system/ziti-controller.service
 
-$ sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
+$ sudo cp "${ZITI_HOME}/${ZITI_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
 
 $ sudo systemctl daemon-reload
 

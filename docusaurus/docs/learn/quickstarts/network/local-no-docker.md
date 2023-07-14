@@ -95,7 +95,7 @@ $ startRouter
 Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
 ```
 
-You can verify the edge router is listening by finding the value of `$ZITI_ROUTER_ADVERTISED_ADDRESS:$ZITI_EDGE_ROUTER_PORT`.
+You can verify the edge router is listening by finding the value of `$ZITI_ROUTER_ADVERTISED_ADDRESS:$ZITI_ROUTER_PORT`.
 Again, this will default to using `$(hostname -s)` as the host name and port 3022.
 
 ### Stopping the Controller and Router
@@ -163,7 +163,7 @@ Please realize that if you change these variables each of the "hostname" variabl
 * ZITI_CTRL_EDGE_ADVERTISED_ADDRESS
 * ZITI_CTRL_EDGE_ADVERTISED_PORT
 * ZITI_ROUTER_ADVERTISED_ADDRESS
-* ZITI_EDGE_ROUTER_PORT
+* ZITI_ROUTER_PORT
 
 Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`, uses
 a host named 'localhost', and uses ports 8800 for the edge controller and 9090 for the edge router:
@@ -173,7 +173,7 @@ ZITI_NETWORK="newfolder"; \
 ZITI_CTRL_EDGE_ADVERTISED_ADDRESS=localhost; \
 ZITI_CTRL_EDGE_ADVERTISED_PORT=8800; \
 ZITI_ROUTER_ADVERTISED_ADDRESS=localhost; \
-ZITI_EDGE_ROUTER_PORT=9090; \
+ZITI_ROUTER_PORT=9090; \
 source ziti-cli-functions.sh; expressInstall
 ```
 
