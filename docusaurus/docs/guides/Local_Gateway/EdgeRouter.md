@@ -26,7 +26,7 @@ For the demonstration, we will setup the network like below:
 Please complete the following steps before continue with this demo.
 - An open-ziti network should be created already. If not, please follow this quickstart [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) guide to setup open-ziti network first.
 - Ziti Controller IP
-- Ziti Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_LISTENER_PORT**
+- Ziti Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_ADVERTISED_PORT**
 - Ziti Controller Management Port: On the controller, issue this command **echo $ZITI_CTRL_EDGE_ADVERTISED_PORT**
 - Ziti Controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
 - Created two *routers* already. The routers should be running on **Ubuntu 22.04**.
@@ -48,7 +48,7 @@ Here is information I gathered from **Prerequisite** step:
 ```
 root@LocalGWDemoNC:~# curl -s eth0.me
 68.183.139.122  <--- Controller IP
-root@LocalGWDemoNC:~# echo $ZITI_CTRL_LISTENER_PORT
+root@LocalGWDemoNC:~# echo $ZITI_CTRL_ADVERTISED_PORT
 8440  <--- Controller Fabric Port
 root@LocalGWDemoNC:~# echo $ZITI_CTRL_EDGE_ADVERTISED_PORT
 8441  <--- Controller Management Port

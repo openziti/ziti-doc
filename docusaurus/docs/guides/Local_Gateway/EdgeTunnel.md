@@ -375,7 +375,7 @@ Get all the required information from controller:
 ```
 root@LocalGWDemoNC:~# curl -s eth0.me
 68.183.139.122  <--- Controller IP
-root@LocalGWDemoNC:~# echo $ZITI_CTRL_LISTENER_PORT
+root@LocalGWDemoNC:~# echo $ZITI_CTRL_ADVERTISED_PORT
 8440  <--- Controller Fabric Port
 root@LocalGWDemoNC:~# echo $ZITI_CTRL_EDGE_ADVERTISED_PORT
 8441  <--- Controller Management Port
