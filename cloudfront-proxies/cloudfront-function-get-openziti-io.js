@@ -22,7 +22,7 @@ function handler(event) {
       // docker quickstart
       case /^\/dock\/.*/i.test(uri):
         var re = /(^\/dock\/)(.*)/;
-        request.uri = uri.replace(re, '/openziti/ziti/main/quickstart/docker/$2');
+        request.uri = uri.replace(re, '/openziti/ziti/release-next/quickstart/docker/$2');
         break;
     }
 
