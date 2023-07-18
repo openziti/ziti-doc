@@ -44,8 +44,8 @@ you can perform the following steps.
    Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
 
    ```bash
-   ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-intermediate/certs/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
-   ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
+   ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/certs/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
+   ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
    ```
 
 1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console (ZAC). If you have not sourced 
