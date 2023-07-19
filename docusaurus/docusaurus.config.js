@@ -265,6 +265,9 @@ const config = {
   
         //... other Algolia params
       },
+      hotjar: {
+      applicationId: 3576473,
+      },
       docs: {
         sidebar: {
           hideable: true,
@@ -384,3 +387,9 @@ const config = {
 };
 
 module.exports = config;
+
+{
+  plugins: [
+    'docusaurus-plugin-hotjar',
+  ]
+}
