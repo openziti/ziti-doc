@@ -68,6 +68,16 @@ changes to the target application.
 
 Read more about [clients](../core-concepts/clients/choose.mdx)
 
+### OpenZiti BrowZer
+
+BrowZer is a set of components which facilitates the bootstrapping of trust
+in a web browser **without** the need for client-side installations. This means you will not
+need to install an extension in your web-browser, nor will you need to install one of the
+OpenZiti Mobile/Desktop Edge clients!
+
+To enable BrowZer in a given OpenZiti Network, you will need to configure it. For information
+on how to add BrowZer to your network, follow [the BrowZer quickstart guide](../quickstarts/browzer/index.md)
+
 ## Logical Components
 
 Once the OpenZiti Network is established and deployed the next step
