@@ -164,15 +164,17 @@ Once the environment variables are set, to start the Ziti BrowZer Bootstrapper p
 
 Running the Ziti BrowZer Bootstrapper using Docker is similar to running with NodeJS. Establish the environment variables
 then run the agent with a command as shown. Note that this is running in the foreground. It's up to you to decide to put
-this into daeomon mode, to use docker compose, etc.
+this into daemon mode, to use docker compose, etc.
 
 :::note
 To work around the LetsEncrypt issue mentioned above (the certs only visible to root), this example explicitly sets the
 --user the container runs as. Shown is using a group id of 2171. Not shown was the establishment of this group prior to
-running in docker. A group was added using a command such as: `sudo groupadd -g 2171 zitiweb`. Then the LetsEncrypt 
-folder containing the certificates/keys was chown'ed: `sudo chown -R root:zitiweb /etc/letsencrypt/`. Understanding the
-exact mechanics of why/how this works is beyond the scope of this page and is more relevant to linux/docker system
-administration.
+running in docker. On the host os, a group was added using a command such as: `sudo groupadd -g 2171 zitiweb`. Then the
+LetsEncrypt folder containing the certificates/keys was chown'ed: `sudo chown -R root:zitiweb /etc/letsencrypt/`.
+This allows the docker container that will run the bootstrapper to access the files
+
+Understanding the exact mechanics of why/how this works is beyond the scope of this page and is more relevant to linux/docker
+system administration.
 :::
 
 ### Example Docker Command
