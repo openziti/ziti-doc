@@ -12,6 +12,10 @@ import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
 import GitHubButton from "react-github-btn";
 import StarUs from "../../components/StarUs";
+import Hotjar from '@hotjar/browser';
+const siteId = 3576473;
+const hotjarVersion = 6;
+Hotjar.init(siteId, hotjarVersion);
 export default function Layout(props) {
   const {
     children,

@@ -265,9 +265,6 @@ const config = {
   
         //... other Algolia params
       },
-      hotjar: {
-      applicationId: 3576473,
-      },
       docs: {
         sidebar: {
           hideable: true,
