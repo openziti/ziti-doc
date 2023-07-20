@@ -384,3 +384,9 @@ const config = {
 };
 
 module.exports = config;
+
+{
+  plugins: [
+    'docusaurus-plugin-hotjar',
+  ]
+}
