@@ -20,7 +20,7 @@ We'll use the preferred `minikube` Docker driver for this quickstart. You can ru
 1. [Install `minikube`](https://minikube.sigs.k8s.io/docs/start/)
 1. [Install `ziti` CLI](https://github.com/openziti/ziti/releases/latest)
 1. [Install an OpenZiti Tunneler app](https://docs.openziti.io/docs/downloads)
-1. Optional: Install `curl` and `jq` for testing an OpenZiti Service in the terminal. 
+1. Optional: Install `curl` and `jq` for testing an OpenZiti Service in the terminal.
 
 Make sure these command-line tools are available in your executable search `PATH`.
 
@@ -28,9 +28,9 @@ Make sure these command-line tools are available in your executable search `PATH
 
 Your computer running `minikube` needs to resolve these three domain names. They will all resolve to the same IP address where minikube exposes ingresses on your OS.
 
-* minicontroller.ziti
-* miniconsole.ziti
-* minirouter.ziti
+* miniziti-controller.ziti
+* miniziti-console.ziti
+* miniziti-router.ziti
 
 <Tabs groupId="operating-systems">
   <TabItem value="win" label="Windows (WSL2)">
@@ -54,7 +54,7 @@ Your computer running `minikube` needs to resolve these three domain names. They
 1. Add the DNS names to the system hosts file. This allows us to resolve the DNS names from both Windows and WSL.
 
    Edit the system hosts file.
-   
+
    ```cmd
    %SYSTEMROOT%\system32\drivers\etc\hosts
    ```
@@ -63,7 +63,7 @@ Your computer running `minikube` needs to resolve these three domain names. They
 
    ```ini
    # miniziti
-   127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti
+   127.0.0.1  miniziti-controller.ziti  miniziti-router.ziti  miniziti-console.ziti
    ```
 
 1. Restart WSL.
@@ -110,7 +110,7 @@ Your computer running `minikube` needs to resolve these three domain names. They
 
    ```bash
    $ grep ziti /etc/hosts
-   127.0.0.1    minicontroller.ziti  minirouter.ziti  miniconsole.ziti
+   127.0.0.1    miniziti-controller.ziti  miniziti-router.ziti  miniziti-console.ziti
    ```
 
 1. In WSL, Run `minikube tunnel`.
@@ -118,7 +118,7 @@ Your computer running `minikube` needs to resolve these three domain names. They
    Keep a separate terminal window open so you can make sure the tunnel is still running and provide your password if prompted. Create a "miniziti" profile if you haven't, and run the tunnel.
 
    :::info
-   You will likely be prompted by `minikube tunnel` for your WSL user's password, but this prompt may not occur immediately. This grants permission for the tunnel to add a route to the minikube node IP. 
+   You will likely be prompted by `minikube tunnel` for your WSL user's password, but this prompt may not occur immediately. This grants permission for the tunnel to add a route to the minikube node IP.
    :::
 
    ```bash
@@ -135,7 +135,7 @@ In macOS, `minikube` sets up localhost port forwarding to the IP of the Docker c
 1. Add the DNS names to your system hosts file.
 
    ```bash
-   sudo tee -a /etc/hosts <<< "127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti" 
+   sudo tee -a /etc/hosts <<< "127.0.0.1  miniziti-controller.ziti  miniziti-router.ziti  miniziti-console.ziti"
    ```
 
 1. Run `minikube tunnel`.
@@ -143,7 +143,7 @@ In macOS, `minikube` sets up localhost port forwarding to the IP of the Docker c
    Keep a separate terminal window open so you can make sure the tunnel is still running and provide your password if prompted. Create a "miniziti" profile if you haven't, and run the tunnel.
 
    :::info
-   You will likely be prompted by `minikube tunnel` for your macOS user's password, but this prompt may not occur immediately. This grants permission for the tunnel to add a route to the minikube node IP. 
+   You will likely be prompted by `minikube tunnel` for your macOS user's password, but this prompt may not occur immediately. This grants permission for the tunnel to add a route to the minikube node IP.
    :::
 
    ```bash
@@ -159,7 +159,7 @@ On Linux, the IP of the `minikube` node running in Docker is routeable via the b
 
 ```bash
 minikube --profile miniziti start
-sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.ziti  minirouter.ziti  miniconsole.ziti" 
+sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) miniziti-controller.ziti  miniziti-router.ziti  miniziti-console.ziti"
 ```
 
 </TabItem>
@@ -170,7 +170,7 @@ sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) minicontroller.zit
 
 ## miniziti Script
 
-You can run the miniziti shell script or perform the steps manually yourself. Click the "Manual Steps" tab directly above to switch your view. 
+You can run the miniziti shell script or perform the steps manually yourself. Click the "Manual Steps" tab directly above to switch your view.
 
 It's recommended that you read the script before you run it. It's safe to re-run the script if it encounters a temporary problem.
 
@@ -195,7 +195,7 @@ First, let's create a brand new `minikube` profile named "miniziti".
 minikube --profile miniziti start
 ```
 
-`minikube` will try to configure the default context of your KUBECONFIG. Let's test the connection to the new cluster. 
+`minikube` will try to configure the default context of your KUBECONFIG. Let's test the connection to the new cluster.
 
 :::info
 You can always restore the KUBECONFIG context from this Minikube quickstart like this:
@@ -233,7 +233,7 @@ CoreDNS is running at https://127.0.0.1:49439/api/v1/namespaces/kube-system/serv
 You will need two Minikube addons:
 
 1. `ingress`: installs the Nginx ingress controller. Ingresses provide access into the cluster and are the only things exposed to networks outside the cluster.
-1. `ingress-dns`: provides a DNS server that can answer queries about the cluster's ingresses, e.g. "minicontroller.ziti" which will be created when you install the OpenZiti Controller Helm chart.
+1. `ingress-dns`: provides a DNS server that can answer queries about the cluster's ingresses, e.g. "miniziti-controller.ziti" which will be created when you install the OpenZiti Controller Helm chart.
 
 ```bash
 minikube --profile miniziti addons enable ingress
@@ -246,7 +246,7 @@ OpenZiti will need SSL passthrough, so let's patch the `ingress-nginx` deploymen
 kubectl patch deployment "ingress-nginx-controller" \
    --namespace ingress-nginx \
    --type='json' \
-   --patch='[{"op": "add", 
+   --patch='[{"op": "add",
          "path": "/spec/template/spec/containers/0/args/-",
          "value":"--enable-ssl-passthrough"
       }]'
@@ -289,21 +289,21 @@ helm repo add "openziti" https://docs.openziti.io/helm-charts/
 
 #### Install the Controller
 
-Let's create a Helm release named "minicontroller" for the OpenZiti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
+Let's create a Helm release named "miniziti-controller" for the OpenZiti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
 
 1. Install the Controller chart
 
    ```bash
-   helm install "minicontroller" openziti/ziti-controller \
+   helm install "ziti-controller" openziti/ziti-controller \
       --namespace ziti-controller --create-namespace \
-      --set clientApi.advertisedHost="minicontroller.ziti" \
+      --set clientApi.advertisedHost="miniziti-controller.ziti" \
       --values https://docs.openziti.io/helm-charts/charts/ziti-controller/values-ingress-nginx.yaml
    ```
 
 1. This may take a few minutes. Wait the controller's pod status progress to "Running." You can get started on the DNS set up in the next section, but you need the controller up and running to install the router.
 
    ```bash
-   kubectl wait deployments "minicontroller" \
+   kubectl wait deployments "ziti-controller" \
       --namespace ziti-controller \
       --for condition=Available=True \
       --timeout=240s
@@ -311,13 +311,13 @@ Let's create a Helm release named "minicontroller" for the OpenZiti Controller. 
 
 ### Cluster DNS
 
-Configure CoreDNS in the miniziti cluster. This is necessary no matter which host DNS resolver method you used above. 
+Configure CoreDNS in the miniziti cluster. This is necessary no matter which host DNS resolver method you used above.
 
 1. Add the *.ziti forwarder to the end of the value of `Corefile` in CoreDNS's configmap. Don't forget to substitute the real IP from `minikube --profile miniziti ip` if you get something different than "192.168.49.2", and be mindful to keep the indentation the same as the default `.:53` handler.
 
    ```bash
-   # 1. Edit the configmap. 
-   # 2. Save the file. 
+   # 1. Edit the configmap.
+   # 2. Save the file.
    # 3. Exit the editor.
    kubectl edit configmap "coredns" \
       --namespace kube-system
@@ -376,8 +376,8 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    uid: deae90e7-5b3d-49ea-b996-4f525da5597a
    ```
 
-1. Delete the running CoreDNS pod so a new one will pick up the Corefile change you just made. 
-   
+1. Delete the running CoreDNS pod so a new one will pick up the Corefile change you just made.
+
    ```bash
    kubectl get pods \
       --namespace kube-system \
@@ -390,7 +390,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 
    ```bash
    kubectl run "dnstest" --rm --tty --stdin --image=busybox --restart=Never -- \
-         nslookup minicontroller.ziti
+         nslookup miniziti-controller.ziti
    ```
 
 ### Install the Router
@@ -398,10 +398,10 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 1. Log in to OpenZiti.
 
    ```bash
-   kubectl get secrets "minicontroller-admin-secret" \
+   kubectl get secrets "ziti-controller-admin-secret" \
                --namespace ziti-controller \
                --output go-template='{{index .data "admin-password" | base64decode }}' \
-      | xargs -rl ziti edge login minicontroller.ziti:443 \
+      | xargs -rl ziti edge login miniziti-controller.ziti:443 \
          --yes --username "admin" \
          --password
    ```
@@ -409,23 +409,23 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 1. Create a Router with role "public-routers" and save the enrollment one-time-token as a temporary file.
 
    ```bash
-   ziti edge create edge-router "minirouter" \
+   ziti edge create edge-router "miniziti-router" \
       --role-attributes "public-routers" \
       --tunneler-enabled \
-      --jwt-output-file /tmp/minirouter.jwt
+      --jwt-output-file /tmp/miniziti-router.jwt
    ```
 
 1. Install the Router Chart.
 
    ```bash
-   helm install "minirouter" openziti/ziti-router \
+   helm install "ziti-router" openziti/ziti-router \
       --namespace ziti-router --create-namespace \
-      --set-file enrollmentJwt=/tmp/minirouter.jwt \
-      --set edge.advertisedHost=minirouter.ziti \
-      --set ctrl.endpoint=minicontroller-ctrl.ziti-controller.svc:6262 \
+      --set-file enrollmentJwt=/tmp/miniziti-router.jwt \
+      --set edge.advertisedHost=miniziti-router.ziti \
+      --set ctrl.endpoint=miniziti-controller-mgmt.miniziti.svc:6262 \
       --values https://docs.openziti.io/helm-charts/charts/ziti-router/values-ingress-nginx.yaml
 
-   kubectl wait deployments "minirouter" \
+   kubectl wait deployments "ziti-router" \
       --namespace ziti-router \
       --for condition=Available=True
    ```
@@ -441,11 +441,11 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    ```bash
    # example output
    $ ziti edge list edge-routers
-   ╭────────────┬────────────┬────────┬───────────────┬──────┬────────────────╮
-   │ ID         │ NAME       │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES     │
-   ├────────────┼────────────┼────────┼───────────────┼──────┼────────────────┤
-   │ opR39JLZ2v │ minirouter │ true   │ true          │    0 │ public-routers │
-   ╰────────────┴────────────┴────────┴───────────────┴──────┴────────────────╯
+   ╭────────────┬─────────────────┬────────┬───────────────┬──────┬────────────────╮
+   │ ID         │ NAME            │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES     │
+   ├────────────┼─────────────────┼────────┼───────────────┼──────┼────────────────┤
+   │ opR39JLZ2v │ miniziti-router │ true   │ true          │    0 │ public-routers │
+   ╰────────────┴─────────────────┴────────┴───────────────┴──────┴────────────────╯
    results: 1-1 of 1
    ```
 
@@ -454,10 +454,10 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 1. Install the chart
 
    ```bash
-   helm install "miniconsole" openziti/ziti-console \
+   helm install "ziti-console" openziti/ziti-console \
       --namespace ziti-console --create-namespace  \
-      --set ingress.advertisedHost=miniconsole.ziti \
-      --set settings.edgeControllers[0].url=https://minicontroller-client.ziti-controller.svc:443 \
+      --set ingress.advertisedHost=miniziti-console.ziti \
+      --set settings.edgeControllers[0].url=https://miniziti-controller-client.miniziti.svc:443 \
       --values https://docs.openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml
    ```
 
@@ -466,7 +466,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    You'll see an Nginx 503 error while the console is deploying.
 
    ```bash
-   kubectl wait deployments "miniconsole" \
+   kubectl wait deployments "ziti-console" \
       --namespace ziti-console \
       --for condition=Available=True \
       --timeout=240s
@@ -475,12 +475,12 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 1. Get the admin password on your clipboard.
 
    ```bash
-   kubectl get secrets "minicontroller-admin-secret" \
+   kubectl get secrets "ziti-controller-admin-secret" \
       --namespace ziti-controller \
-      --output go-template='{{"\nINFO: Your OpenZiti Console http://miniconsole.ziti password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
+      --output go-template='{{"\nINFO: Your OpenZiti Console http://miniziti-console.ziti password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
    ```
 
-1. Open [http://miniconsole.ziti](http://miniconsole.ziti) in your web browser and login with username "admin" and the password from your clipboard.
+1. Open [http://miniziti-console.ziti](http://miniziti-console.ziti) in your web browser and login with username "admin" and the password from your clipboard.
 
 ### Create OpenZiti Identities and Services
 
@@ -488,25 +488,25 @@ Here's a BASH script that runs several `ziti` CLI commands to illustrate a minim
 
 ```bash
 ziti edge create identity device "miniziti-client" \
-    --jwt-output-file /tmp/miniziti-client.jwt --role-attributes testapi-clients
+    --jwt-output-file /tmp/miniziti-client.jwt --role-attributes miniziti-httpbin-clients
 
-ziti edge create identity device "testapi-host" \
-    --jwt-output-file /tmp/testapi-host.jwt --role-attributes testapi-hosts
+ziti edge create identity device "miniziti-httpbin-host" \
+    --jwt-output-file /tmp/miniziti-httpbin-host.jwt --role-attributes miniziti-httpbin-hosts
 
-ziti edge create config "testapi-intercept-config" intercept.v1 \
-    '{"protocols":["tcp"],"addresses":["testapi.ziti"], "portRanges":[{"low":80, "high":80}]}'
+ziti edge create config "miniziti-httpbin-intercept-config" intercept.v1 \
+    '{"protocols":["tcp"],"addresses":["miniziti-httpbin.ziti"], "portRanges":[{"low":80, "high":80}]}'
 
-ziti edge create config "testapi-host-config" host.v1 \
+ziti edge create config "miniziti-httpbin-host-config" host.v1 \
     '{"protocol":"tcp", "address":"httpbin","port":8080}'
 
-ziti edge create service "testapi-service" \
-   --configs testapi-intercept-config,testapi-host-config
+ziti edge create service "miniziti-httpbin-service" \
+   --configs miniziti-httpbin-intercept-config,miniziti-httpbin-host-config
 
-ziti edge create service-policy "testapi-bind-policy" Bind \
-    --service-roles '@testapi-service' --identity-roles '#testapi-hosts'
+ziti edge create service-policy "miniziti-httpbin-bind-policy" Bind \
+    --service-roles '@miniziti-httpbin-service' --identity-roles '#miniziti-httpbin-hosts'
 
-ziti edge create service-policy "testapi-dial-policy" Dial \
-    --service-roles '@testapi-service' --identity-roles '#testapi-clients'
+ziti edge create service-policy "miniziti-httpbin-dial-policy" Dial \
+    --service-roles '@miniziti-httpbin-service' --identity-roles '#miniziti-httpbin-clients'
 
 ziti edge create edge-router-policy "public-routers" \
     --edge-router-roles '#public-routers' --identity-roles '#all'
@@ -514,17 +514,17 @@ ziti edge create edge-router-policy "public-routers" \
 ziti edge create service-edge-router-policy "public-routers" \
     --edge-router-roles '#public-routers' --service-roles '#all'
 
-ziti edge enroll /tmp/testapi-host.jwt
+ziti edge enroll /tmp/miniziti-httpbin-host.jwt
 ```
 
 ### Install the `httpbin` Demo API Server Chart
 
-This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by an OpenZiti Tunneler. We'll use it as a demo API to test the OpenZiti Service you just created named "testapi-service".
+This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by an OpenZiti Tunneler. We'll use it as a demo API to test the OpenZiti Service you just created named "miniziti-httpbin-service".
 
 ```bash
-helm install "testapi-host" openziti/httpbin \
-   --set-file zitiIdentity=/tmp/testapi-host.json \
-   --set zitiServiceName=testapi-service
+helm install "miniziti-httpbin-host" openziti/httpbin \
+   --set-file zitiIdentity=/tmp/miniziti-httpbin-host.json \
+   --set zitiServiceName=miniziti-httpbin-service
 ```
 
 </TabItem>
@@ -540,33 +540,33 @@ As soon as identity enrollment completes you should have a new OpenZiti DNS name
 
 ```bash
 # this DNS answer is coming from the OpenZiti Tunneler, e.g. Ziti Desktop Edge
-nslookup testapi.ziti
+nslookup miniziti-httpbin.ziti
 ```
 
 ## Test the Demo API Service
 
 ```bash
 # macOS or Linux, including WSL
-curl -sSf -XPOST -d ziti=awesome http://testapi.ziti/post | jq .data
+curl -sSf -XPOST -d ziti=awesome http://miniziti-httpbin.ziti/post | jq .data
 ```
 
-Visit [http://testapi.ziti/get](http://testapi.ziti/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
+Visit [http://miniziti-httpbin.ziti/get](http://miniziti-httpbin.ziti/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
 
 ## Explore the OpenZiti Console
 
-Now that you've successfully tested the OpenZiti Service, check out the various entities in your that were created by the script in [http://miniconsole.ziti/](http://miniconsole.ziti/).
+Now that you've successfully tested the OpenZiti Service, check out the various entities in your that were created by the script in [http://miniziti-console.ziti/](http://miniziti-console.ziti/).
 
 ## Next Steps
 
 1. In the OpenZiti Console, try to revoke then restore your permission to acess the demo services.
 1. Deploy a non-Ziti demo application to Kubernetes and securely [share it with a Ziti proxy pod](../services/kubernetes-service)
-1. Add a configs, service, and policies to access the Kubernetes apiserver with OpenZiti. 
-   1. Hint: the apiserver's address is "kubernetes.default.svc:443" inside the cluster. 
-   1. Hint: After you create the configs, service, and policies, grant "Bind" permission for the service to "minirouter" by adding a role.
+1. Add a configs, service, and policies to access the Kubernetes apiserver with OpenZiti.
+   1. Hint: the apiserver's address is "kubernetes.default.svc:443" inside the cluster.
+   1. Hint: After you create the configs, service, and policies, grant "Bind" permission for the service to "miniziti-router" by adding a role.
 
       ```bash
       # the role you add needs to match the bind policy's identity roles
-      ziti edge update identity "minirouter" \
+      ziti edge update identity "miniziti-router" \
          --role-attributes k8sapi-hosts
       ```
 
@@ -580,7 +580,7 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
 1. Remove the `mini*.ziti` DNS names from the system hosts file.
 
    Edit the system hosts file.
-   
+
    ```cmd
    %SYSTEMROOT%\system32\drivers\etc\hosts
    ```
@@ -589,7 +589,7 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
 
    ```ini
    # miniziti
-   127.0.0.1  minicontroller.ziti  minirouter.ziti  miniconsole.ziti
+   127.0.0.1  miniziti-controller.ziti  miniziti-router.ziti  miniziti-console.ziti
    ```
 
 </TabItem>
@@ -628,7 +628,7 @@ This option configures your host to use use the DNS addon we enabled earlier for
 1. Make sure the DNS addon is working. Send a DNS query to the  address where the ingress nameserver is running.
 
    ```bash
-   nslookup minicontroller.ziti $(minikube --profile miniziti ip)
+   nslookup miniziti-controller.ziti $(minikube --profile miniziti ip)
    ```
 
    You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
@@ -639,7 +639,7 @@ This option configures your host to use use the DNS addon we enabled earlier for
 
    ```bash
    # test your DNS configuration
-   nslookup minicontroller.ziti
+   nslookup miniziti-controller.ziti
    ```
 
    You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
