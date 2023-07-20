@@ -323,12 +323,12 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       --namespace kube-system
    ```
 
-   ```json
-       ziti:53 {
-          errors
-          cache 30
-          forward . 192.168.49.2
-       }
+   ```nginx
+   ziti:53 {
+      errors
+      cache 30
+      forward . 192.168.49.2
+   }
    ```
 
    It should look like this.
