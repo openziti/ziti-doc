@@ -74,7 +74,7 @@ Let's get to work and build this solution. We'll need some legwork done first.
 ![construction worker](https://github.com/openziti/branding/raw/main/images/ziggy/svg/Ziggy%20The%20Construction%20Worker.svg)
 
 * You have an OpenZiti overlay network available. If not, for this scenario you will want to use 
-["host your own"](/docs/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
+["host your own"](/docs/learn/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
 * Two Kubernetes clusters provisioned
 * Necessary tooling installed and available on the path
   * kubectl
@@ -89,7 +89,7 @@ Let's get to work and build this solution. We'll need some legwork done first.
 
 ## ClusterA - Using `ziti-host`
 
-<img src="./clusterA.svg" class="flr"/>
+![clusterA](./clusterA.svg)
 
 We start with an empty OpenZiti network, and two empty Kubernetes clusters. Let's start by populating ClusterA. We will deploy three 
 pods into this Kubernetes cluster. When done, the Kubernetes cluster will look similar to the image to the right.
@@ -273,7 +273,7 @@ ziti edge create service-policy "kubeA.prometheus.svc.bind" Bind \
   --identity-roles "@kubeA.ziti.id"
 ```
 
-#### Deploying `Prometheuz`
+#### Deploying `Prometheuz` {#deploying-prometheuz-1}
 
 With our services, configs and service-policies in place we are now ready to start our Prometheus server. Remember this server will not 
 listen on a the OpenZiti overlay. It's going to listen exclusively on the underlay. We are still exploring OpenZiti, and we are not yet
@@ -302,7 +302,7 @@ helm install prometheuz openziti-test-kitchen/prometheus \
 
 ## ClusterB - Fully Dark
 
-<img src="./clusterB.svg" class="flr"/>
+![clusterB](./clusterB.svg)
 
 Now that we have deployed our first Kubernetes cluster, it's now time to deploy the second Kubernetes cluster. This time, we are going 
 to keep our entire deployment **fully dark**! There will be no listening ports, not even local to the Kubernetes cluster itself. To get 
@@ -363,7 +363,7 @@ ziti edge create service-policy "kubeB.reflect.svc.dial.scrape" Dial \
   --service-roles "@kubeB.reflect.scrape.svc" --identity-roles "#reflectz-clients"
   ```
 
-#### Deploy `reflectz` 
+#### Deploy `reflectz` {#deploy-reflectz-1}
 ```text
 helm repo add openziti-test-kitchen https://openziti-test-kitchen.github.io/helm-charts/
 helm repo update

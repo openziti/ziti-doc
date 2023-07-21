@@ -1,5 +1,7 @@
 # Building this Project
 
+![build & deploy](https://github.com/openziti/ziti-doc/actions/workflows/main.workflow.yml/badge.svg)
+
 ## Prerequisite
 
 * Linux - Documentation is run routinely by our CI
@@ -23,16 +25,24 @@ After cloning this repository open the bash shell and execute the [gendoc.sh](./
 flags to pass that mostly controls the cleanup of what the script does. In general, it's recommended you use the -w flag
 so that warnings are treated as errors. 
 
-Expected gendoc.sh usage: `./gendoc.sh -w`
+Expected usage: `./gendoc.sh -c`
 
-You can then run `cd ./docusaurus && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
+```
+NOTE: you must be configured to run NodeJS >=16.14 before running the next command.
+```
 
-## Publish by Running CI Equivalent Locally
+You can then run `cd ./docusaurus && yarn install && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
+
+## Publishing this Site
 
 `./publish.sh` is intended to run in GitHub Actions on branch `main` where the following variables are defined:
 
 * `GIT_BRANCH`: output of `git rev-parse --abbrev-ref HEAD`
-* `gh_ci_key`: base64 encoding of an OpenSSH private key authorized to clobber the `master` branch of [the root doc repo for GitHub pages](https://github.com/openziti/openziti.github.io/tree/master).
+* `gh_ci_key`: base64 encoding of an OpenSSH private key authorized to clobber the `main` branch of [the root doc repo for GitHub pages](https://github.com/openziti/openziti.github.io/tree/main).
+
+The [./publish.sh](./publish.sh) script emits a `CNAME` file which defines the custom domain to be used by GitHub Pages. If the script is not changed, the domain will revert to the value defined in the script every time the site is published.
+
+To run this script locally, define the necessary variables in your environment.
 
 ## How Search Works
 
@@ -44,38 +54,125 @@ Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this sit
 
 ## Check For Broken Links
 
-[A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site, but doesn't make any changes.
+[A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site and incoming links from external sites, but doesn't make any changes to the site source files. An alarm issue is raised and auto-resolved based on the result of the check.
 
-With these scripts, you can check for broken links to other sites and redirects from known permalinks.
+With these scripts, you can test all the links in the site's pages and popular incoming request paths.
 
-* [check-broken-links.sh](./check-broken-links.sh): uses `docker` to run `muffet`
+* [crawl-for-broken-links.sh](./check-links/crawl-for-broken-links.sh): uses `docker` to run `muffet` which crawls the given base URL looking for broken links
 
   ```bash
-  # check local dev server for broken links to itself and other sites, excluding GitHub links
-  ./check-broken-links.sh http://127.0.0.1:3000
+  # check local dev server for broken outgoing links to itself and other sites, excluding a few hosts that are sensitive to being hammered by a crawler
+  ./crawl-for-broken-links.sh http://127.0.0.1:3000
 
   # check the GH Pages site for broken links to anywhere
-  ./check-broken-links.sh https://openziti.github.io --rate-limit=11
+  ./crawl-for-broken-links.sh https://openziti.github.io --rate-limit=11
   ```
 
-* [check-old-urls.sh](./check-old-urls.sh): uses `curl`
+* [check-links.sh](./check-links/check-links.sh): uses `curl` to try a list of URL paths from a file
 
   ```bash
-  # check a list of important permalinks to make sure they still work
-  ./check-old-urls.sh https://openziti.github.io
+  # check a list of popular incoming links from external sites
+  ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
   ```
 
-  Redirects don't work the same as GH Pages when the host is `yarn` or Vercel, so it's probably not useful to test against those hosts without further investigation.
+  ```bash
+  ./check-links.sh https://blog.openziti.io ./popular-blog-links.txt
+  ```
 
-## How Short URLs Work
+  You will need to run `yarn serve` to crawl for broken links locally because the webpack server (`yarn start`) is not crawlable, and you will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
 
-`https://get.openziti.io` is a reverse proxy with cache provided by AWS CloudFront. The upstream/origin is `https://raw.githubusercontent.com`. The proxy allows for a shorter URL by mapping a URL path abbreviation to the full path.
+## How the Proxies Work
+
+There are a couple of reverse proxies hosted by CloudFront. Both employ CloudFront functions with a custom script. Both scripts are of type "viewer request" meaning they operate on the request of the viewer, which is on the front side of the proxy. 
+
+The scripts parse the request and decide whether to return a response to the viewer or pass along the request to the origin, i.e., upstream, a.k.a backend, a.k.a. origin.
+
+### How the Short URL Proxy Works
+
+`https://get.openziti.io` is a CloudFront caching proxy that runs a viewer request function ([script](./cloudfront-function-github-proxy.js)). The upstream/origin is `https://raw.githubusercontent.com`. The proxy allows for a shorter URL by mapping a URL path abbreviation to the full path.
+
+This proxy's function modifies the viewer's request if it matches one of the shortening prefixes below before passing it along to the origin, which is GitHub.
 
 |purpose|abbreviation|full URL path|
 |---|---|---|
 |quickstart functions|`/quick/`|`/openziti/ziti/main/quickstart/docker/image/`|
-|API specs|`/spec/`|`/openziti/edge/main/specs/`|
+|API specs|`/spec/`|`/openziti/edge-api/main/`|
 |Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
 |Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
 
-Reference: [CloudFront Function that routes requests](./github-raw-viewer-request-router.js)
+### How the openziti.io Proxy Works
+
+The `openziti.io` DNS name resolves to a proxy that redirects selectively to HashNode or GitHub Pages, depending on the request path. This preserves popular incoming links to blog articles as redirects while this docs site becomes the default destination for all other requests for `openziti.io`.
+
+Like the GitHub proxy, this proxy runs a CloudFront viewer request function ([script](./cloudfront-function-openziti-io-proxy.js)) to decide how to handle requests. This proxy's function inspects the viewer's request to see if it exactly matches the `/` root document which triggers a redirect to `https://docs.openziti.io/`. If it does not match, then the proxy responds to the viewer with a redirect to the same request path at `blog.openziti.io`.
+
+### CloudFront Proxy Deployment Notes
+
+You can perform these steps in the AWS Web Console or with `aws` CLI.
+
+* Find the name and "ETag" (changes when updated) of the CloudFront Function you wish to update.
+
+  ```bash
+  $ aws cloudfront list-functions | \
+    jq '.FunctionList.Items[]|select(.FunctionMetadata.Stage == "LIVE")|.Name'
+  "blog-viewer-request-function"
+  "github-raw-viewer-request-router"
+  ```
+
+  ```bash
+  $ aws cloudfront describe-function --name github-raw-viewer-request-router | \
+    jq '.ETag'
+"E135L1TOL8QIJF"
+  ```
+
+* Update the function's DEVELOPMENT stage in AWS. In the console you need to paste the new script and save it to update the development stage of the CloudFront function.
+
+  ```bash
+  aws cloudfront update-function \
+    --name github-raw-viewer-request-router \
+    --function-code fileb://./cloudfront-proxies/cloudfront-function-github-proxy.js \
+    --function-config '{"Runtime": "cloudfront-js-1.0","Comment": "update function"}' \
+    --if-match E135L1TOL8QIJF  # ETag from DescribeFunction
+  ```
+
+* Find the new ETag (version ID) of the updated function
+
+  ```bash
+  $ aws cloudfront describe-function --name github-raw-viewer-request-router | \
+    jq '.ETag'
+"E3T4TT2Z381HKD"
+  ```
+
+* Test the function. You need to verify the request or response was handled expectedly. You can also do this in the web console with the "test" tab on the CloudFront function.
+
+  ```bash
+  aws cloudfront test-function \
+      --name github-raw-viewer-request-router \
+      --stage DEVELOPMENT \
+      --if-match E3T4TT2Z381HKD \
+      --event-object fileb://./github/ziti-doc/cloudfront-proxies/github-test-event-object.json | jq -r '.TestResult.FunctionOutput' | jq .
+  ```
+
+  ```json
+  {
+    "request": {
+      "headers": {
+        "host": {
+          "value": "get.openziti.io"
+        }
+      },
+      "method": "GET",
+      "querystring": {},
+      "uri": "/openziti/ziti-tunnel-sdk-c/main/install.sh",
+      "cookies": {}
+    }
+  }
+  ```
+
+* publish LIVE stage
+
+  ```bash
+  aws cloudfront publish-function \      
+    --name github-raw-viewer-request-router \
+    --if-match E3T4TT2Z381HKD
+  ```

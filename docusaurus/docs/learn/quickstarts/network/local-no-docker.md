@@ -1,0 +1,199 @@
+---
+sidebar_position: 30
+---
+# Local - No Docker
+
+This page will show you how to get your [Ziti Network](../../introduction/index.mdx) up and running 
+quickly and easily, entirely locally. Since you'll be running everything locally, you'll have no issues communicating
+between network components. All the processes will run locally, and you'll be responsible for starting and stopping them
+when you want to turn the overlay network on or off.
+
+## Prerequisites
+
+:::note
+Make sure you have `tar`, `hostname`, `jq` and `curl` installed before running the `expressInstall` one-liner.
+:::
+
+There is not much preparation necessary to getting up-and-running locally. At this time, this guide expects that
+you'll be running commands within a `bash` shell. If you're running Windows, you will need to make sure you have 
+Windows Subsystem for Linux installed for now. We plan to provide a Powershell script in the future, but for now the
+script requires you to be able to use `bash`. Make sure your local ports 1280, 6262, 10000 are free before running the
+controller. These ports are the default ports used by the controller. Also ensure ports 10080 and 3022 are open as these 
+are the default ports the edge router will use.
+
+## Run `expressInstall` One-liner
+
+Running the latest version of Ziti locally is as simple as running this one command:
+
+```bash
+    source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
+```
+
+This script will perform an 'express' install of Ziti which does the following:
+
+* download the latest version of the OpenZiti binary (`ziti`)
+* extract the binary into a predefined location: ~/.ziti/quickstart/$(hostname -s)
+* create a full PKI for you to explore
+* create a controller configuration using default values and the PKI created above
+* create an edge-router configuration using default values and the PKI created above 
+* add helper functions and environment variables to your shell (explore the script to see all)
+
+## Start the Components
+
+Once the latest version of Ziti has been downloaded and added to your path, it's time to start your controller and 
+edge-router.
+
+## Start Your Controller
+
+```bash
+startController
+```
+
+Example output:
+
+```bash
+$ startController
+ziti-controller started as process id: 1286. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye.log
+```
+
+### Verify the Controller is Running
+
+After running `expressInstall`, you will have environment variables set named `ZITI_CTRL_EDGE_ADVERTISED_ADDRESS` and 
+`ZITI_CTRL_EDGE_ADVERTISED_PORT`. After the controller has started, your controller should be listening at that 
+address:port combination. (Note, if you do not have these environment variables, you've probably closed your shell and opened
+it up again. You can get the environment variables by sourcing the ".env" file. 
+[See the section at the bottom of the page](https://docs.openziti.io/docs/learn/quickstarts/network/local-no-docker/#sourcing-the-env-file)
+for details)
+
+You can see what your value is set to by running 
+`echo ${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}`. This value defaults to: 
+`$(hostname -s):1280`. Make sure the controller is available by trying to curl to the address, and then start the edge router. 
+
+
+```bash
+curl "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
+```
+
+Example output: 
+```bash
+{"data":{"apiVersions":{"edge":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-client":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-management":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/management/v1"],"path":"/edge/management/v1"}}},"buildDate":"2023-06-23T15:08:25Z","revision":"65d1dda821a3","runtimeVersion":"go1.20.5","version":"v0.28.4"},"meta":{}}
+```
+
+### Start Your Edge Router
+
+Now that the controller is ready, you can start the edge router created with the 'express' process. You can start this 
+router locally by running:
+
+```bash
+startRouter
+```
+
+Example output:
+
+```bash
+$ startRouter
+Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
+```
+
+You can verify the edge router is listening by finding the value of `$ZITI_ROUTER_ADVERTISED_ADDRESS:$ZITI_ROUTER_PORT`.
+Again, this will default to using `$(hostname -s)` as the host name and port 3022.
+
+### Stopping the Controller and Router
+
+```bash
+stopRouter 
+stopController 
+```
+
+Example output:
+
+```bash
+$ stopRouter 
+INFO: Router stopped.
+
+$ stopController 
+INFO: Controller stopped.
+```
+
+## Testing Your Overlay
+
+At this point you should have a functioning [Ziti Network](../../introduction/index.mdx). The script 
+you sourced provides another function to login to your network. Try this now by running `zitiLogin`. You should see 
+something similar to this:
+```bash
+$ zitiLogin
+Token: 40d2d280-a633-46c9-8499-ab2e005dd222
+Saving identity 'default' to ${HOME}/.ziti/quickstart/My-Mac-mini/ziti-cli.json
+```
+
+You can now use the `ziti` CLI to interact with Ziti!. The
+`ziti` binary is not added to your path by default but will be available at `"${ZITI_BIN_DIR-}/ziti"`. Add that folder
+to your path, alias `ziti` if you like. Let's try to use this command to see if the edge router is online by running:
+`"${ZITI_BIN_DIR-}/ziti" edge list edge-routers`.
+
+```bash
+$ "${ZITI_BIN_DIR-}/ziti" edge list edge-routers
+id: rhx6687N.P    name: My-Mac-mini    isOnline: true    role attributes: {}
+results: 1-1 of 1
+```
+
+Horray! Our edge router shows up and is online!
+
+## Run Your First Service
+
+You can try out creating and running a simple echo service through ziti by running the `first-service` tutorial.
+
+```bash
+$ "${ZITI_BIN_DIR-}/ziti" edge tutorial first-service
+```
+
+
+## Customizing the Express Install
+
+You can influence and customize the express installation somewhat if you wish. This is useful if trying to run more than
+one instance of Ziti locally. The most common settings you might choose to customize would be the ports used or the name
+of the network. 
+
+### Configuration File Location
+
+You can change the location of the configuration files output by setting the `ZITI_NETWORK` environment variable prior 
+to running `expressInstall`. However, if you do this you will also need to set other environment variables as well. 
+Please realize that if you change these variables each of the "hostname" variables will need to be addressable:
+
+* ZITI_CTRL_EDGE_ADVERTISED_ADDRESS
+* ZITI_CTRL_EDGE_ADVERTISED_PORT
+* ZITI_ROUTER_ADVERTISED_ADDRESS
+* ZITI_ROUTER_PORT
+
+Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`, uses
+a host named 'localhost', and uses ports 8800 for the edge controller and 9090 for the edge router:
+
+```bash
+ZITI_NETWORK="newfolder"; \
+ZITI_CTRL_EDGE_ADVERTISED_ADDRESS=localhost; \
+ZITI_CTRL_EDGE_ADVERTISED_PORT=8800; \
+ZITI_ROUTER_ADVERTISED_ADDRESS=localhost; \
+ZITI_ROUTER_PORT=9090; \
+source ziti-cli-functions.sh; expressInstall
+```
+
+## Sourcing the Env File
+
+In the case you close your shell and you want to get the same environment variables back into your shell, you can just 
+source the "env" file that is placed into the location you specified. This file is usually located at:
+`$HOME/.ziti/quickstart/$(hostname)/$(hostname).env`. You can source this file to place the environment variables back
+into your shell.
+
+```bash
+source $HOME/.ziti/quickstart/$(hostname)/$(hostname).env
+```
+
+## Next Steps
+
+- Now that you have your network in place, you probably want to try it out. Head to
+[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
+- [Install the Ziti Console](../zac/index.md#cloning-from-github) (web UI)
+- Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
+- Help
+  - [Change Admin Password](./help/change-admin-password.md)
+  - [Reset the Quickstart](./help/reset-quickstart.md)

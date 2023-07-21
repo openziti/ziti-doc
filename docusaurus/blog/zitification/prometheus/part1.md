@@ -163,8 +163,8 @@ from the clusters to a centralized, [zitified](../index.md) Prometheus server.
 
 Once no longer exposed to the open internet, to maintain our Kubernetes cluster we could then turn to [zitified]
 (../index.md) tools. The OpenZiti project provides zitified versions of `kubectl` -
-[kubeztl](https://github.com/openziti-incubator/kubectl) and `helm` -
-[helmz](https://github.com/openziti-incubator/helm). Each of these tools have an OpenZiti SDK embedded inside them. This allows both 
+[kubeztl](https://github.com/openziti-test-kitchen/kubectl) and `helm` -
+[helmz](https://github.com/openziti-test-kitchen/helm). Each of these tools have an OpenZiti SDK embedded inside them. This allows both 
 tools to connect to the private Kubernetes API over the OpenZiti overlay network. To use them, you will need a strong, OpenZiti identity 
 as well as be authorized to access the service. Also note that we're also not replacing the existing security constraints the 
 Kubernetes ecosystem already provides. You can (and should) still secure your Kubernetes clusters using namespaces, roles, etc. 

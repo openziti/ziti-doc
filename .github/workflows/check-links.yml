@@ -11,15 +11,50 @@ jobs:
   broken-link-checker:
     runs-on: ubuntu-latest
     steps:
-      - name: Check broken links
-        uses: ruzickap/action-my-broken-link-checker@v2
+      - name: Checkout Workspace
+        uses: actions/checkout@v3
+      - name: Crawl for Broken Links
+        run: ./check-links/crawl-for-broken-links.sh https://openziti.io
+      - name: Resolve Alarm Issue if Links are Not Broken
+        if: ${{ success() }}
+        uses: netfoundry/close-matching-issues@v3
         with:
-          url: https://openziti.github.io/
-          cmd_params: >
-            --color=always 
-            --exclude=https://(EXWPKK5PV4-dsn.algolia.net|www.googletagmanager.com|mermaid-js.github.io|mermaid.live|github.com/openziti/ziti-doc/blob/main/docusaurus/|play.google.com/store/apps/details\?id=io\.netfoundry\.ziti\.tunnel|apps.apple.com/app/|github.com/openziti/ziti-doc/tree/main/docusaurus/)|#docusaurus_skipToContent_fallback$
-            --buffer-size=8192 
-            --max-connections=10
-            --header=User-Agent:curl/7.54.0
-            --timeout=20
-          debug: true
+          query: 'is:open label:bug in:title "Broken Links Alarm"'
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Raise an Alarm Issue if Links are Broken
+        if: ${{ failure() }}
+        uses: JasonEtco/create-an-issue@v2.9.1
+        with:
+          update_existing: true
+          search_existing: open
+          filename: ./check-links/check-links-issue-template.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+  popular-link-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Workspace
+        uses: actions/checkout@v3
+      - name: Check popular links to new docs site
+        run: ./check-links.sh https://openziti.io ./popular-docs-links.txt
+        working-directory: ./check-links/
+      - name: Check popular links to old docs site
+        run: ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
+        working-directory: ./check-links/
+      - name: Resolve Alarm Issue if Links are Not Broken
+        if: ${{ success() }}
+        uses: netfoundry/close-matching-issues@v3
+        with:
+          query: 'is:open label:bug in:title "Popular Links Alarm"'
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Raise an Alarm Issue if Links are Broken
+        if: ${{ failure() }}
+        uses: JasonEtco/create-an-issue@v2.9.1
+        with:
+          update_existing: true
+          search_existing: open
+          filename: ./check-links/popular-links-issue-template.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

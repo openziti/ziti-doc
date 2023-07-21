@@ -121,22 +121,22 @@ Have a look at the code over at [GitHub][11]
 
 [1]: /blog/zitification/
 
-[2]: /docs/introduction/
+[2]: /docs/learn/introduction/
 
 [3]: ./ssh-overview.svg
 
-[4]: /docs/quickstarts/network/hosted
+[4]: /docs/learn/quickstarts/network/hosted
 
-[5]: /docs/core-concepts/services/overview
+[5]: /docs/learn/core-concepts/services/overview
 
 [6]: ./zssh-overview.svg
 
-[7]: https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-linux-amd64
+[7]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zssh-linux-amd64
 
-[8]: https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-windows-amd64.exe
+[8]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zssh-windows-amd64.exe
 
-[9]: https://github.com/openziti-incubator/zssh/releases/latest/download/zssh-macos-amd64
+[9]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zssh-macos-amd64
 
 [10]: /blog/zitification/zitifying-scp/
 
-[11]: https://github.com/openziti-incubator/zssh/tree/main/zssh/zssh
+[11]: https://github.com/openziti-test-kitchen/zssh/tree/main/zssh/zssh

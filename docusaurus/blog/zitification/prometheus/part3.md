@@ -25,7 +25,7 @@ prove it works. Once that's complete, we'll play around with the setup and see i
 
 In the [previous article](./part2.md), we established our entire solution using the OpenZiti overlay, `kubectl` and `helm`. We saw 
 everything get installed and it all "seems to work". But how do we **know** it works?  Let's provision an identity for yourself now and 
-let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](/docs/core-concepts/clients/choose) running 
+let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](/docs/learn/core-concepts/clients/choose) running 
 locally. Once you have that installed, provision an identity and enroll it with your tunneling client. 
 
 ```text
@@ -61,7 +61,7 @@ With your developer access you should be able to navigate your browser to http:/
 > [Look at the full list of top level domains starting with S](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#S). You 
 > won't find ".svc" on that list at this time
 
-<img src="./kubea.prom.init.png" class="flr"/>
+![kubea.prom.init](./kubea.prom.init.png)
 
 You should see the following. You might have noticed that the chart deployed has a few other containers we have not discussed yet. We'll 
 not go into those containers in this article. What's important is that this Prometheus server has a few targets already for us to access. 

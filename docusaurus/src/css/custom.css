@@ -9,7 +9,7 @@
   --ifm-background-color: #f8fafc;
   --ifm-background-surface-color: #f1f5f9;
   --ifm-background-surface-color-dark: #e1d4ee;
-  --ifm-footer-background-color: #f8fafc;
+  --ifm-footer-background-color: #f0f0f0;
   --ifm-color-primary: #158eed;
   --ifm-color-primary-dark: #8519e7;
   --ifm-color-primary-darker: #7e17dc;
@@ -20,6 +20,7 @@
   --ifm-color-banner: #edac15;
   --ifm-navbar-item-padding-horizontal: .5em;
   --background-color-1: #ffd0d0;
+  --landing-banner-1: #e0e4ee;
   --ifm-font-color-base: #3f3f3f;
   --ifm-code-font-size: 95%;
   --ifm-paragraph-margin-bottom: 0;
@@ -48,7 +49,7 @@ html[data-theme="dark"] {
   --ifm-background-color: #111827;
   --ifm-background-surface-color: #1f2937;
   --ifm-background-surface-color-dark: #374151;
-  --ifm-footer-background-color: #111827;
+  --ifm-footer-background-color: #1b263e;
   --ifm-color-primary: #158eed;
   --ifm-color-primary-dark: #b671fc;
   --ifm-color-primary-darker: #ad5ffb;
@@ -57,6 +58,7 @@ html[data-theme="dark"] {
   --ifm-color-primary-lighter: #ddbcfd;
   --ifm-color-primary-lightest: #e6cffe;
   --background-color-1: #434862;
+  --landing-banner-1: #38383a;
   --ifm-font-color-base: #94a3b8;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --logo-name: "ziti-logo-light.svg";
@@ -190,11 +192,13 @@ input[type="radio"]:checked+label:after {
 /**
  Footer
  */
-.footer {
-  display: flex;
+ .footer, .footer.container {
+  padding: calc(var(--ifm-spacing-vertical) * 0.2)
+  var(--ifm-footer-padding-horizontal);
 }
+
 .footer__links {
-  margin-bottom: 4.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .notification_new {
@@ -398,4 +402,25 @@ float: right;
 .text-divider p {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+/* highlight sidebar section headings */
+.theme-doc-sidebar-item-link-level-1.sidebar-title {
+  margin-top: 20px;
+  margin-left: 0px;
+  font-weight: bold;
+}
+
+/* indent sidebar list items */
+div > aside > div > div > nav > ul > li  {
+  margin-left: 20px;
+}
+
+div > aside > div > nav > ul > li > a,
+div > aside > div > nav > ul > li > a:link,
+div > aside > div > nav > ul > li > a:hover,
+div > aside > div > nav > ul > li > a:visited,
+div > aside > div > nav > ul > li > a:active {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
 }

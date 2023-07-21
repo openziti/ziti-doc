@@ -1,6 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import OpenZitiLayout from "../components/OpenZitiLayout";
+import {WhatIsOpenZiti} from "../components/SharedComponents";
 import Link from '@docusaurus/Link';
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -43,7 +44,7 @@ export default function Home() {
 
     return (
         <OpenZitiLayout>
-            <OpenZitiHorizontalSection style={{fontSize:"large", padding: "50px"}}>
+            <OpenZitiHorizontalSection style={{padding: "40px"}}>
                 <div className={styles.getStartedRow}>
 
                     <div className={styles.getStartedBlurb}>
@@ -51,11 +52,10 @@ export default function Home() {
 
                         <p>&nbsp;</p>
                         <ul>
-                            <li><Link to="/docs/introduction/">Learn the basics</Link></li>
-                            <li><Link to="/api/">Reference the API docs</Link></li>
-                            <li><Link to="/guides">Check out practical recipes</Link></li>
-                            <li><Link to="/glossary/">Define terms</Link></li>
-                            <li><Link to="/operations/controller">Operationalize the Ziti stack</Link></li>
+                            <li><Link to="/docs/learn/introduction/">Learn the Basics</Link></li>
+                            <li><Link to="/docs/reference/developer/">Developer Resources</Link></li>
+                            <li><Link to="/docs/guides/">Practical Recipes</Link></li>
+                            <li><Link to="/docs/reference/glossary/">Define Terms</Link></li>
                         </ul>
                     </div>
 
@@ -132,19 +132,31 @@ export default function Home() {
                 </div>
             </OpenZitiHorizontalSection>
 
-            <OpenZitiHorizontalSection style={{fontSize:"large"}}>
-                <H1>OpenZiti Provides</H1>
+            <OpenZitiHorizontalSection style={{backgroundColor: "var(--landing-banner-1)"}}>
+                <H1>What is OpenZiti?</H1>
+                <p>
+                    <WhatIsOpenZiti/>
 
-                <p>OpenZiti makes it easy to embed zero trust, programmable networking directly into your app. Deploy your
-                    own zero trust, high performance network using any Internet connection. Say goodbye to your outmoded VPN.
+                    <ul style={{margin: "var(--ifm-list-margin)"}}>
+                        <li><a href="/docs/reference/glossary#network-overlay-overlay">The overlay network</a></li>
+                        <li><a href="/docs/reference/tunnelers/">Tunneling Applications for all operating systems</a></li>
+                        <li><a href="/docs/reference/developer/sdk/">Numerous SDKs making it easy to add Zero Trust concepts directly into your application</a></li>
+                    </ul>
+
+                    OpenZiti makes it easy to embed Zero Trust, programmable networking directly into your app.
+                    With OpenZiti you can have Zero Trust, high performance networking on any internet connection, without VPNs
+                    and ultimately without any open, inbound ports needed for your application.
                 </p>
+            </OpenZitiHorizontalSection>
 
-                <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center"}}>
+            <OpenZitiHorizontalSection>
+                <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center", flexDirection: "column"}}>
+                    <H1>OpenZiti Components</H1>
                     <ul style={{maxWidth: "800px"}}>
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
-                                    <Link to="/docs/introduction/openziti-is-software#fabric">The OpenZiti Fabric</Link>
+                                    <Link to="/docs/learn/introduction/openziti-is-software#fabric">The OpenZiti Fabric</Link>
                                 </H3>
                             </div>
                             <p>a scalable, pluggable, overlay networking mesh with built-in smart routing</p>
@@ -152,7 +164,7 @@ export default function Home() {
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
-                                    <Link to="/docs/introduction/openziti-is-software#edge">The OpenZiti Edge</Link>
+                                    <Link to="/docs/learn/introduction/openziti-is-software#edge">The OpenZiti Edge</Link>
                                 </H3>
                             </div>
                             <p>the components providing secure, zero trust entry points into the overlay network</p>
@@ -160,7 +172,7 @@ export default function Home() {
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
-                                    <Link to="/docs/introduction/openziti-is-software#sdks">The OpenZiti SDKs</Link>
+                                    <Link to="/docs/learn/introduction/openziti-is-software#sdks">The OpenZiti SDKs</Link>
                                 </H3>
                             </div>
                             <p>allows developers to embed zero trust principles directly into applications</p>
@@ -168,7 +180,7 @@ export default function Home() {
                         <li className={styles.cardz}>
                             <div style={{display: "flex", alignItems: "center"}}>
                                 <H3 style={{minWidth: "250px", margin: "0px"}}>
-                                    <Link to="/docs/core-concepts/clients/tunnelers/">OpenZiti Tunneling Applications</Link>
+                                    <Link to="/docs/reference/tunnelers/">OpenZiti Tunneling Applications</Link>
                                 </H3>
                             </div>
                             <p>not all apps can be recompiled with zero trust principles built in. For those situations, these components provide the bridge from classic underlay networks to the overlay</p>
@@ -185,19 +197,19 @@ export default function Home() {
                 </p>
                 <div style={{display:"flex", flexWrap: "wrap", alignItems:"center", alignContent: "center", alignSelf:"center"}}>
                     <a className="btn-hover sdkbutton-button"
-                       href={useBaseUrl("docs/quickstarts/network/local-no-docker")}>
+                       href={useBaseUrl("docs/learn/quickstarts/network/local-no-docker")}>
                         <div className="sdkbutton-text">Everything Local<br/>(Not Docker)</div>
                     </a>
                     <a className="btn-hover sdkbutton-button"
-                       href={useBaseUrl("docs/quickstarts/network/local-with-docker")}>
+                       href={useBaseUrl("docs/learn/quickstarts/network/local-with-docker")}>
                         <div className="sdkbutton-text">Everything Local<br/>(I love Docker)</div>
                     </a>
                     <a className="btn-hover sdkbutton-button"
-                       href={useBaseUrl("docs/quickstarts/network/local-docker-compose")}>
+                       href={useBaseUrl("docs/learn/quickstarts/network/local-docker-compose")}>
                         <div className="sdkbutton-text">Everything Local<br/>(Docker Compose)</div>
                     </a>
                     <a className="btn-hover sdkbutton-button"
-                       href={useBaseUrl("docs/quickstarts/network/hosted")}>
+                       href={useBaseUrl("docs/learn/quickstarts/network/hosted")}>
                         <div className="sdkbutton-text">Host It Anywhere<br/>(I have a server)</div>
                     </a>
                 </div>
@@ -205,12 +217,12 @@ export default function Home() {
             <OpenZitiHorizontalSection>
                 <H1>I Have a Network, What's Next?</H1>
                 <p>
-                    Now that you have a <Link to="/docs/introduction/">OpenZiti Network</Link> all
+                    Now that you have a <Link to="/docs/learn/introduction/">OpenZiti Network</Link> all
                     setup and ready to go, the next step is learning about all of the pieces which go into it. There's a lot to learn and
-                    <Link to={"/docs/introduction/"}> our docs</Link> are there to help you understand any extra details you need help
+                    <Link to={"/docs/learn/introduction/"}> our docs</Link> are there to help you understand any extra details you need help
                     ironing out. If the docs aren't complete or aren't helpful, we love seeing issues filed for how to improve.
                     Or, if you're feeling up for it, we'd love to see any PRs to make the docs better you wish to
-                    contribute. You'll find a more extensive list of the <Link to={"/docs/quickstarts/network/"}> quickstarts
+                    contribute. You'll find a more extensive list of the <Link to={"/docs/learn/quickstarts/network/"}> quickstarts
                     we have here.</Link>
                 </p>
             </OpenZitiHorizontalSection>
@@ -269,13 +281,13 @@ export default function Home() {
                 <p>
                     That's ok - zero trust adoption is a journey. Get started with a couple of very simple examples which
                     will get you familiar with the technology overall. These samples will leverage one of the
-                    <Link to="/docs/core-concepts/clients/choose"> tunneling apps</Link>.
+                    <Link to="/docs/learn/core-concepts/clients/choose"> tunneling apps</Link>.
                 </p>
                 <div className="col-lg-12">
                     <div className="centerrow buttonrow sdkbuttons">
                         <a className="sdkbutton-button"
                            href={useBaseUrl("docs/quickstarts/services/ztha")}>
-                            <img src="https://ziti.dev/wp-content/uploads/2020/02/codealt.png"
+                            <img src="/img/codealt.png"
                                  className="sdkbutton-image"/>
                             <div className="sdkbutton-text">Simple Webapp</div>
                         </a>

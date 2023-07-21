@@ -13,20 +13,16 @@ echo "publish script located in: $pub_script_root"
 
 cd $pub_script_root
 
-curl -s https://api.github.com/repos/netfoundry/ziti-ci/releases/latest \
-  | grep browser_download_url \
-  | cut -d ":" -f2,3 \
-  | tr -d \" \
-  | wget -q -i - -O /tmp/ziti-ci
-chmod +x /tmp/ziti-ci
-
 if [ "${GIT_BRANCH:-}" == "main" ]; then
   echo on main branch - publish can proceed
 
   ./gendoc.sh  # clone and build companion microsites and build Docusaurus
 
+  wget https://github.com/netfoundry/ziti-ci/releases/latest/download/ziti-ci  # fetch latest release
+  install ./ziti-ci /usr/local/bin/  # set executable bit and copy to executable search path
+
   echo "configuring git..."
-  /tmp/ziti-ci configure-git  # writes key from env var $gh_ci_key to file ./github_deploy_key
+  ziti-ci configure-git  # writes key from env var $gh_ci_key to file ./github_deploy_key
   #git add docs docfx_project/ziti-*
 
   #move back to main once we're this deep into the run
@@ -48,6 +44,10 @@ if [ "${GIT_BRANCH:-}" == "main" ]; then
   cp -rT ./docusaurus/build/ ./openziti.github.io/
 
   cd ./openziti.github.io/
+  
+  echo 'Creating CNAME file for custom github pages domain. see https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages#cname-errors'
+  echo "openziti.io" > ./CNAME
+  
   git add -A
   if [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]]; then
     echo changing git repo from https to git so that we can push...

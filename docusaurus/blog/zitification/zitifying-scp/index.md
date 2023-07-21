@@ -138,18 +138,18 @@ Have a look at the code over at [GitHub][8] or continue reading on to the next z
 
 [1]: /blog/zitification/zitifying-ssh/
 
-[2]: /docs/quickstarts/network/hosted
+[2]: /docs/learn/quickstarts/network/hosted
 
-[3]: /docs/introduction/
+[3]: /docs/learn/introduction/
 
-[4]: /docs/core-concepts/services/overview
+[4]: /docs/learn/core-concepts/services/overview
 
-[5]: https://github.com/openziti-incubator/zssh/releases/latest/download/zscp-linux-amd64
+[5]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zscp-linux-amd64
 
-[6]: https://github.com/openziti-incubator/zssh/releases/latest/download/zscp-windows-amd64.exe
+[6]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zscp-windows-amd64.exe
 
-[7]: https://github.com/openziti-incubator/zssh/releases/latest/download/zscp-macos-amd64
+[7]: https://github.com/openziti-test-kitchen/zssh/releases/latest/download/zscp-macos-amd64
 
-[8]: https://github.com/openziti-incubator/zssh/tree/main/zssh/zscp
+[8]: https://github.com/openziti-test-kitchen/zssh/tree/main/zssh/zscp
 
 [9]: /blog/zitification/kubernetes/
