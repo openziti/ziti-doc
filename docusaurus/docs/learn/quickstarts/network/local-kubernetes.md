@@ -324,11 +324,11 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    ```
 
    ```nginx
-   ziti:53 {
-      errors
-      cache 30
-      forward . 192.168.49.2
-   }
+       ziti:53 {
+          errors
+          cache 30
+          forward . 192.168.49.2
+       }
    ```
 
    It should look like this.
@@ -422,7 +422,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       --namespace ziti-router --create-namespace \
       --set-file enrollmentJwt=/tmp/miniziti-router.jwt \
       --set edge.advertisedHost=miniziti-router.ziti \
-      --set ctrl.endpoint=miniziti-controller-ctrl.miniziti.svc:6262 \
+      --set ctrl.endpoint=ziti-controller-ctrl.miniziti.svc:6262 \
       --values https://docs.openziti.io/helm-charts/charts/ziti-router/values-ingress-nginx.yaml
 
    kubectl wait deployments "ziti-router" \
