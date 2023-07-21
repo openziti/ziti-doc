@@ -488,25 +488,25 @@ Here's a BASH script that runs several `ziti` CLI commands to illustrate a minim
 
 ```bash
 ziti edge create identity device "miniziti-client" \
-    --jwt-output-file /tmp/miniziti-client.jwt --role-attributes miniziti-httpbin-clients
+    --jwt-output-file /tmp/miniziti-client.jwt --role-attributes httpbin-clients
 
-ziti edge create identity device "miniziti-httpbin-host" \
-    --jwt-output-file /tmp/miniziti-httpbin-host.jwt --role-attributes miniziti-httpbin-hosts
+ziti edge create identity device "httpbin-host" \
+    --jwt-output-file /tmp/httpbin-host.jwt --role-attributes httpbin-hosts
 
-ziti edge create config "miniziti-httpbin-intercept-config" intercept.v1 \
-    '{"protocols":["tcp"],"addresses":["miniziti-httpbin.ziti"], "portRanges":[{"low":80, "high":80}]}'
+ziti edge create config "httpbin-intercept-config" intercept.v1 \
+    '{"protocols":["tcp"],"addresses":["httpbin.ziti"], "portRanges":[{"low":80, "high":80}]}'
 
-ziti edge create config "miniziti-httpbin-host-config" host.v1 \
+ziti edge create config "httpbin-host-config" host.v1 \
     '{"protocol":"tcp", "address":"httpbin","port":8080}'
 
-ziti edge create service "miniziti-httpbin-service" \
-   --configs miniziti-httpbin-intercept-config,miniziti-httpbin-host-config
+ziti edge create service "httpbin-service" \
+   --configs httpbin-intercept-config,httpbin-host-config
 
-ziti edge create service-policy "miniziti-httpbin-bind-policy" Bind \
-    --service-roles '@miniziti-httpbin-service' --identity-roles '#miniziti-httpbin-hosts'
+ziti edge create service-policy "httpbin-bind-policy" Bind \
+    --service-roles '@httpbin-service' --identity-roles '#httpbin-hosts'
 
-ziti edge create service-policy "miniziti-httpbin-dial-policy" Dial \
-    --service-roles '@miniziti-httpbin-service' --identity-roles '#miniziti-httpbin-clients'
+ziti edge create service-policy "httpbin-dial-policy" Dial \
+    --service-roles '@httpbin-service' --identity-roles '#httpbin-clients'
 
 ziti edge create edge-router-policy "public-routers" \
     --edge-router-roles '#public-routers' --identity-roles '#all'
@@ -514,17 +514,17 @@ ziti edge create edge-router-policy "public-routers" \
 ziti edge create service-edge-router-policy "public-routers" \
     --edge-router-roles '#public-routers' --service-roles '#all'
 
-ziti edge enroll /tmp/miniziti-httpbin-host.jwt
+ziti edge enroll /tmp/httpbin-host.jwt
 ```
 
 ### Install the `httpbin` Demo API Server Chart
 
-This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by an OpenZiti Tunneler. We'll use it as a demo API to test the OpenZiti Service you just created named "miniziti-httpbin-service".
+This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by an OpenZiti Tunneler. We'll use it as a demo API to test the OpenZiti Service you just created named "httpbin-service".
 
 ```bash
-helm install "miniziti-httpbin-host" openziti/httpbin \
-   --set-file zitiIdentity=/tmp/miniziti-httpbin-host.json \
-   --set zitiServiceName=miniziti-httpbin-service
+helm install "miniziti-httpbin" openziti/httpbin \
+   --set-file zitiIdentity=/tmp/httpbin-host.json \
+   --set zitiServiceName=httpbin-service
 ```
 
 </TabItem>
@@ -540,17 +540,17 @@ As soon as identity enrollment completes you should have a new OpenZiti DNS name
 
 ```bash
 # this DNS answer is coming from the OpenZiti Tunneler, e.g. Ziti Desktop Edge
-nslookup miniziti-httpbin.ziti
+nslookup httpbin.ziti
 ```
 
 ## Test the Demo API Service
 
 ```bash
 # macOS or Linux, including WSL
-curl -sSf -XPOST -d ziti=awesome http://miniziti-httpbin.ziti/post | jq .data
+curl -sSf -XPOST -d ziti=awesome http://httpbin.ziti/post | jq .data
 ```
 
-Visit [http://miniziti-httpbin.ziti/get](http://miniziti-httpbin.ziti/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
+Visit [http://httpbin.ziti/get](http://httpbin.ziti/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
 
 ## Explore the OpenZiti Console
 
