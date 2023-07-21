@@ -150,7 +150,7 @@ HERE
 echo browzer env file written to: $ZITI_HOME/browzer.env
 ```
 
-## Pepare the OpenZiti Network
+## Prepare the OpenZiti Network
 
 ### Configure the External JWT Signer and Auth Policy
 ```bash
@@ -228,11 +228,11 @@ sudo npm install --global yarn
 yarn install
 
 
+createBrowZerSystemdFile
 sudo cp "${ZITI_HOME}/browzer-bootstrapper.service" /etc/systemd/system/browzer-bootstrapper.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now browzer-bootstrapper
 
-journalctl -fu browzer-bootstrapper
 
 ```
 
@@ -247,6 +247,9 @@ echo "now go to: https://${ZITI_BROWZER_VHOST}:${ZITI_AGENT_LISTEN_PORT} and see
 echo " "
 echo " "
 echo " "
+
+journalctl -fu browzer-bootstrapper
+
 ```
 
 
