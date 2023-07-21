@@ -15,7 +15,7 @@ We set the name of the server, in this case our OpenZiti Network Controller, but
 
 ![Infinity datasource authentication configuration](./Infinity_noAuth.png)
 
-In the network section, we can provide the CA certificate for the controller, or skip TLS verification, depending on your security posture needs.  To obtain the CA cert, use an identity.json file from the network instance and the command 'ziti ops unwrap <IDENTITY.JSON>'  This will break out the certificate, CA, and key file from the identity individually, then just copy and paste the CA into the entry field provided when selecting "With CA Cert".
+In the network section, we can provide the CA certificate for the controller, or skip TLS verification, depending on your security posture needs.  To obtain the CA cert, use an identity.json file from the network instance and the command `ziti ops unwrap <IDENTITY.JSON>`  This will break out the certificate, CA, and key file from the identity individually, then just copy and paste the CA into the entry field provided when selecting "With CA Cert".
 
 ![Infinity datasource network confioguration](Infinity_CACert.png)
 
@@ -28,7 +28,7 @@ In the network section, we can provide the CA certificate for the controller, or
 - Build the query as below, entering your Edge management API socket address 
   
   ![Variable query configuration](bearer_token_variable.png)
-  
+
 - Open the URL options by selecting the Headers, Body, Request params button to the right of the URL and configure as below, entering the username and password from your identity.
  
  ![Variable query URL Options configuration](bearer_token_variable_url_options.png) 
