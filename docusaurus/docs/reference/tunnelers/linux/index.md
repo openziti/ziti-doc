@@ -148,8 +148,8 @@ sudo apt install ziti-edge-tunnel
 2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
 
   ```bash
-  sudo -u ziti tee /opt/openziti/etc/identities/ziti-id.jwt >/dev/null
-  # paste the contents of the enrollment token JWT file and press Ctrl+D
+  sudo -u ziti vi /opt/openziti/etc/identities/ziti-id.jwt
+  # paste the contents of the enrollment token JWT on a single line, save, and exit
   ```
 
 2. Enable and start the service
@@ -243,8 +243,8 @@ repo_gpgcheck=1
 2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
 
   ```bash
-  sudo -u ziti tee /opt/openziti/etc/identities/ziti-id.jwt >/dev/null
-  # paste the contents of the enrollment token JWT file and press Ctrl+D
+  sudo -u ziti vi /opt/openziti/etc/identities/ziti-id.jwt
+  # paste the contents of the enrollment token JWT on a single line, save, and exit
   ```
 
 2. Enable and start the service
