@@ -145,11 +145,12 @@ sudo apt install ziti-edge-tunnel
 </TabItem>
 </Tabs>
 
-2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+2. Place a copy of the enrollment token JWT file in the `/opt/openziti/etc/identities` directory.
+2. Set the filemode and owner so that members of group `ziti` will be able to read and delete the token file.
 
   ```bash
-  sudo -u ziti vi /opt/openziti/etc/identities/ziti-id.jwt
-  # paste the contents of the enrollment token JWT on a single line, save, and exit
+  sudo chown -cR :ziti        /opt/openziti/etc/identities
+  sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
   ```
 
 2. Enable and start the service
@@ -240,11 +241,12 @@ repo_gpgcheck=1
 
 2. Run `sudo yum update` to refresh your repo data cache. Optionally, you may wish to also install all available updates.
 2. Run `sudo yum install ziti-edge-tunnel` to install the RPM.
-2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+2. Place a copy of the enrollment token JWT file in the `/opt/openziti/etc/identities` directory.
+2. Set the filemode and owner so that members of group `ziti` will be able to read and delete the token file.
 
   ```bash
-  sudo -u ziti vi /opt/openziti/etc/identities/ziti-id.jwt
-  # paste the contents of the enrollment token JWT on a single line, save, and exit
+  sudo chown -cR :ziti        /opt/openziti/etc/identities
+  sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
   ```
 
 2. Enable and start the service
