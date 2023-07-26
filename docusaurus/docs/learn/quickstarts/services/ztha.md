@@ -39,7 +39,7 @@ With an understanding of what we are looking to accomplish in this guide, let's 
 
 ### Prerequisite - OpenZiti Network
 You will need an OpenZiti overlay network in place before you can complete this guide. If you do not have an
-OpenZiti overlay network provisioned yet, [follow a quickstart](../network/index.md) and get a network up and running.
+OpenZiti overlay network provisioned yet, [follow a quickstart](../quickstarts.md) and get a network up and running.
 
 ### Prerequisite - HTTP Server
 You'll need an HTTP server which you plan to connect your HTTP client to. There are numerous ways to 
@@ -71,6 +71,7 @@ Also, the .env file the quickstart emits can be used to put this folder on your 
 followed either the [Local - No Docker](../network/local-no-docker.md) or 
 [Host Ziti Anywhere](../network/hosted.md) quickstart, you should have a file that can be sourced. Here is an example of 
 my personal "Local - No Docker" result when sourcing that file:
+
 ```shell
 $ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 
@@ -132,7 +133,6 @@ name of the container running the HTTP server.
 Note that step 7 below requires you to have set the variable named `http_server_id`. All of the quickstarts provision an edge-router 
 with the tunneler option (`-t`) enabled. This means that edge-router is configured to serve as a tunneller. Run `ziti edge list 
 identities` to find the name of the identity associated to the router.
-
 
 ```shell
 # login to your controller - replace the host/port with the correct value

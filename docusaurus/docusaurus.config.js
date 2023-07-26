@@ -156,8 +156,8 @@ const config = {
             from: ['/docs', '/docs/learn', '/docs/introduction/intro', '/docusaurus/docs/overview', '/ziti/overview/', '/ziti/overview.html'],
           },
           {
-            to: '/docs/learn/quickstarts/network/',
-            from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html', '/docs/quickstarts'],
+            to: '/docs/learn/quickstarts/',
+            from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html', '/docs/learn/quickstarts/network'],
           },
           {
             to: '/docs/learn/introduction/openziti-is-software',
