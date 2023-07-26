@@ -249,10 +249,10 @@ Architectures available:
 ```ini
 [OpenZiti]
 name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat7/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat7/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
