@@ -73,7 +73,7 @@ If the DNS record exists it returns the answer and sets query status to `NO_ERRO
 
 `ziti-edge-tunnel run` requires Linux capabilities for managing the `/dev/net/tun` device, running `resolvectl` to assign nameservers and domain routes to the tun interface, and running `ip route` to manage IP routes.
 
-* tun device and route management are permitted by passing the `CAP_NET_ADMIN` to the ziti-edge-tunnel process via `AmbientCapabilities`` in the systemd service unit.
+* tun device and route management are permitted by passing the `CAP_NET_ADMIN` to the ziti-edge-tunnel process via `AmbientCapabilities` in the systemd service unit.
 * `systemd-resolved` DNS configuration is permitted by a PolKit rule installed with the RPM or DEB package.
 
 ### `run-host` Mode
