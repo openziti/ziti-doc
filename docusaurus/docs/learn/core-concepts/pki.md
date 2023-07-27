@@ -39,7 +39,7 @@ An Edge Router has one section related to PKI: `identity`. It is important to no
 manage its own PKI. Allowing the Edge Router to manage its own PKI is almost certainly desired. The
 only setting that an operator may wish to provide is the `key` field of the identity. This field is treated differently
 than the other values specified.  If the `key` specified does not exist a new key will be generated. If the `key`
-provided exists the Edge Router will use it and the other fields will be **regenerated and overwritten** as necessary, if the filesystem is writeable.
+provided exists the Edge Router will use it and the other fields will be **regenerated and overwritten** as necessary, if the filesystem is writable.
 
 The Ziti Controller edge enrollment signer (`edge.enrollment.signingCert`) will issue a client and server certificate during enrollment. These are written to the file paths specified in the `identity` configuration section at the same time.
 

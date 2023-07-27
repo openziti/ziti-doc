@@ -42,7 +42,7 @@ To enroll a router, deliver the `enrollmentJWT` to the host that will run the Ed
 
 ### Router Enrollment Extension
 
-Routers will attempt to automatically maintain their enrollment by refreshing their certificates seven days before they expire. This only works if the router's identity certificate file is writeable. If it is not writeable, the router will not be able to refresh its certificate and will need to orchestrated for replacement more often than router client certificates are configured to expire.
+Routers will attempt to automatically maintain their enrollment by refreshing their certificates seven days before they expire. This only works if the router's identity certificate file is writable. If it is not writable, the router will not be able to refresh its certificate and will need to orchestrated for replacement more often than router client certificates are configured to expire.
 
 ## Clients
 
