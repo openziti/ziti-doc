@@ -45,7 +45,7 @@ There are two run modes:
 
 ### `run` Mode
 
-`ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with command-line option `--dns-upstream`. `systemd-resolved`, if enabled, is automatically configured to treat the Ziti nameserver as primary. You may inspect the configuration with these commands.
+`ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with command-line option `--dns-upstream`. `systemd-resolved`, if enabled, automatically configures the Ziti nameserver. You may inspect the configuration with these commands.
 
 ```bash
 resolvectl dns     # inspect the association of tun device and nameserver
@@ -71,7 +71,10 @@ If the DNS record exists it returns the answer and sets query status to `NO_ERRO
 
 #### System Requirements for Mode `run`
 
-`ziti-edge-tunnel run` requires elevated privileges for managing the `/dev/net/tun` device, running `resolvectl` to assign nameservers and domain routes to the tun interface, and running `ip route` to manage IP routes. This is normally accomplished by PolKit rules defined in the DEB and RPM packages that set capabilities inherited by the run-as user, `ziti`.
+`ziti-edge-tunnel run` requires Linux capabilities for managing the `/dev/net/tun` device, running `resolvectl` to assign nameservers and domain routes to the tun interface, and running `ip route` to manage IP routes.
+
+* tun device and route management are permitted by passing the `CAP_NET_ADMIN` to the ziti-edge-tunnel process via `AmbientCapabilities`` in the systemd service unit.
+* `systemd-resolved` DNS configuration is permitted by a PolKit installed with the RPM or DEB package.
 
 ### `run-host` Mode
 
