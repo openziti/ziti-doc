@@ -27,10 +27,10 @@ so that warnings are treated as errors.
 
 Expected usage: `./gendoc.sh -c`
 
-> [!NOTE]
+> [!NOTE]\
 > you must configure NodeJS >=16.14 before running `yarn`
 
-> [!WARNING]
+> [!WARNING]\
 > It is never necessary to run `npm` to build this project or add a plugin. Always use `yarn`.
 
 You can then run `cd ./docusaurus && yarn install --frozen-lockfile && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
