@@ -9,29 +9,31 @@
 * Doxygen - [Doxygen](http://www.doxygen.nl/) is used to generate the api documentation for the C SDK and is
   necessary to be on the path
 
-## Building the Doc
+## Building the Docs Site
 
-Github offers [github pages](https://pages.github.com/) which this project uses to host the output of building the
-static content. Github has a few options for where you can put your doc at this time, the main branch, a folder on the
-main branch named 'docs' or a special branch that still works named "gh-pages". This project is currently configured
-to use the main branch and docs folder.
+This project uses [GitHub Pages](https://pages.github.com/) to host the static HTML output of building the
+docs site. GitHub has a few options for where you can put your doc at this time: the main branch, a folder on the
+main branch named "docs," or a branch named "gh-pages." This project is currently configured
+to publish by running `publish.sh` which destructively pushes the build output to the root of branch "master" in another repository "openziti/openziti.github.io". That repo is configured to publish the contents of the "master" branch as the GitHub Pages custom domain "openziti.io."
 
 The best/easiest thing to do in order to build these docs is to have Windows Subsystem for Linux installed or any shell
-which can execute a `.sh` script. As of 2020 there's a multitude of ways to get a bash/shell interpreter in windows.
-It's not feasible to test all these shells to make sure this script works so it's encouraged that you use a linux-based
-flavor of bash. If the script doesn't function - open an [issue](./issues) and someone will look into it.
+which can execute a `.sh` script. As of 2020, there's a multitude of ways to get a BASH/shell interpreter in Windows.
+It's not feasible to test all these shells to make sure this script works so it's encouraged that you use a Linux-based
+flavor of BASH. If the script doesn't function - open an [issue](./issues).
 
-After cloning this repository open the bash shell and execute the [gendoc.sh](./gendoc.sh) script. The script has a few
-flags to pass that mostly controls the cleanup of what the script does. In general, it's recommended you use the -w flag
+After cloning this repository, open the BASH shell and execute the [gendoc.sh](./gendoc.sh) script. The script has a few
+flags to pass that control the cleanup of what the script does. In general, it's recommended you use the -w flag
 so that warnings are treated as errors. 
 
 Expected usage: `./gendoc.sh -c`
 
-```
-NOTE: you must be configured to run NodeJS >=16.14 before running the next command.
-```
+> [!NOTE]\
+> you must configure NodeJS >=16.14 before running `yarn`
 
-You can then run `cd ./docusaurus && yarn install && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
+> [!WARNING]\
+> It is never necessary to run `npm` to build this project or add a plugin. Always use `yarn`.
+
+You can then run `cd ./docusaurus && yarn install --frozen-lockfile && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
 
 ## Publishing this Site
 
@@ -40,9 +42,31 @@ You can then run `cd ./docusaurus && yarn install && yarn start` to serve the Do
 * `GIT_BRANCH`: output of `git rev-parse --abbrev-ref HEAD`
 * `gh_ci_key`: base64 encoding of an OpenSSH private key authorized to clobber the `main` branch of [the root doc repo for GitHub pages](https://github.com/openziti/openziti.github.io/tree/main).
 
-The [./publish.sh](./publish.sh) script emits a `CNAME` file which defines the custom domain to be used by GitHub Pages. If the script is not changed, the domain will revert to the value defined in the script every time the site is published.
+The [./publish.sh](./publish.sh) script emits a `CNAME` file that defines the custom domain to be used by GitHub Pages. If the script is not changed, the domain will revert to the value defined in the script every time the site is published.
 
 To run this script locally, define the necessary variables in your environment.
+
+## Adding a NodeJS Package
+
+Docusaurus plugins are distributed as NodeJS packages. This project uses `yarn`, not `npm`, to manage packages, build the project, and run the development server. To add a NodeJS package:
+
+```bash
+cd ./docusaurus
+yarn add @hotjar/browser
+```
+
+This will update `./docusaurus/package.json` and `./docusaurus/yarn.lock`. Test and commit these changes.
+
+## Upgrading a NodeJS Package
+
+Docusaurus plugins are distributed as NodeJS packages. This project uses `yarn`, not `npm`, to manage packages, build the project, and run the development server. To upgrade a NodeJS package:
+
+```bash
+cd ./docusaurus
+yarn upgrade @docusaurus/plugin-content-docs
+```
+
+This will update `./docusaurus/package.json` and `./docusaurus/yarn.lock`. Test and commit these changes.
 
 ## How Search Works
 
