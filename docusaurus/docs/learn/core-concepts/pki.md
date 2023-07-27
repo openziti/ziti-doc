@@ -7,13 +7,7 @@ sidebar_label: PKI
 import PkiTroubleshootingMd from '../../guides/05-troubleshooting/pki-troubleshooting.md'
 
 All Ziti Networks leverage [Public Key Infrastructure (PKI)](https://en.wikipedia.org/wiki/Public_key_infrastructure) to
-provide secure network connections.  This page is not intended to be a comprehensive guide. What it is, is a set of
-rules that must be followed to properly configure a Ziti Network. If there are issues when connecting any portion
-of a Ziti Network to another - this page should serve as a starting point of understanding.
-
-:::note
-This article is about managing your own PKI. There's a guide for using public CA certificates.
-:::
+provide secure network connections. 
 
 The Ziti Network allows the operator to declare any trust anchors as valid. This means Ziti does not need to be
 configured with a full chain of certificates which link fully back to a root CA. A configuration using a full chain back
@@ -26,34 +20,18 @@ establishment. This certificate will need to be valid per the configured trust a
 
 ### Ziti Controller
 
-The Ziti Controller has three distinct sections related to PKI: `identity`, `edge.api.identity`,
-`edge.enrollment.signingCert`. The `edge.api.identity` configuration section is optional and is provided to allow the external
-REST endpoint to present a certificate that is different than the one configured in the identity section.
+The Ziti Controller configuration has these sections related to PKI: `identity` and `edge.enrollment.signingCert`. The `identity` section may appear multiple times in the configuration file. Each appearance of `identity` defines the server identity for a specific TLS server listener. The `edge.enrollment.signingCert` section is used to specify the certificate used to sign enrollment tokens. If only the top-level, default `identity` secion is present, it is used for all listeners.
 
-Connections to the Ziti Controller are considered valid if the certificate presented during connection is signed by a
-trust anchor declared within the identity.ca configuration or if the certificate presented is signed by the certificate
-specified in the `edge.enrollment.signingCert`.
+Edge identities may be configured for client certificate authentication. Client TLS is permitted if the client certificate presented is from the edge enrollment signer
+specified in `edge.enrollment.signingCert` or one of the verified external CAs. 
+
+The trust bundle defined in controller config property `identity.ca` is not used to verify client certificates. Rather, clients fetch the well-known CA bundle `/.well-known/est/cacerts` from the controller during enrollment which includes the CA certs in `identity.ca` and the edge enrollment signer's certificate, and subsequently use that bundle to verify server certificates that are presented by the controller and routers.
 
 #### PKI Configuration
 
-The identity section of the Ziti Controller configuration is used by the Ziti Controller when connections are
-established to or from other components of a Ziti Network. There are four sections in the identity block:
-`cert`, `server_cert`, `key`, `ca`.
+Please refer to [the configuration reference](../../reference/30-configuration/conventions.md#identity) for a description of each property in the conventional `identity` section that is used n the controller's and routers' configuration files.
 
-**ca**: A file representing a group of certificates with one or more certificate chains terminating at a trust anchor.
-When a Ziti Network component connects to the Ziti Controller and offers a certificate for validation the incoming
-connection is checked to see if it signed by a trust anchor specified in this file.
-
-**key**: Also referred to as the [private key](https://en.wikipedia.org/wiki/Symmetric-key_algorithm). It is generated
-first and used to produce the certificates specified in the `cert` and `server_cert` fields of the Ziti Controller
-configuration file.
-
-**cert**: The certificate presented to other Ziti Network components during connection establishment.
-
-**server_cert**: The certificate returned by the Ziti Controller when other Ziti Network components attempt to
-communicate to the Ziti Controller over the IP and port specified in the `ctrl.listener` or `mgmt.listener` fields of the Ziti Controller
-configuration file. If an edge section is present in the configuration file and no edge.api.identity section exists this
-certificate is also returned to incoming connections to the `edge.api.advertise` endpoint.
+The `identity.server_cert` 
 
 ### Edge Router
 
@@ -61,29 +39,13 @@ An Edge Router has one section related to PKI: `identity`. It is important to no
 manage its own PKI. Allowing the Edge Router to manage its own PKI is almost certainly desired. The
 only setting that an operator may wish to provide is the `key` field of the identity. This field is treated differently
 than the other values specified.  If the `key` specified does not exist a new key will be generated. If the `key`
-provided exists the Edge Router will use it and the other fields will be **regenerated and overwritten** as necessary.
+provided exists the Edge Router will use it and the other fields will be **regenerated and overwritten** as necessary, if the filesystem is writeable.
 
-The certificate generated will be signed by the Ziti Controller using the certificate specified in `edge.enrollment.signingCert`.
+The Ziti Controller edge enrollment signer (`edge.enrollment.signingCert`) will issue a client and server certificate during enrollment. These are written to the file paths specified in the `identity` configuration section at the same time.
 
 #### PKI Configuration
 
-The `identity` section of the Edge Router configuration is used by the Edge Router when connections are
-established to or from the other components of a Ziti Network. There are four sections in the identity block:
-`cert`, `server_cert`, `key`, `ca`.
-
-**ca**: A file representing a group of certificates with one or more certificate chains terminating at a trust anchor.
-When a Ziti Network component connects to the Edge Router and offers a certificate for validation the incoming
-connection is checked to see if it signed by a trust anchor specified in this file.
-
-**key**: Also referred to as the [private key](https://en.wikipedia.org/wiki/Symmetric-key_algorithm). It is generated
-first and used to produce the certificates specified in the `cert` and `server_cert` fields of the Edge Router
-configuration file.
-
-**cert**: The certificate presented to other Ziti Network components during connection establishment.
-
-**server_cert**: The certificate returned by the Edge Router when other Ziti Network components attempt to
-communicate to the Edge Router over the IP and port specified in the `ctrl.listener` or `mgmt.listener` fields of the Edge Router
-configuration file.
+Please refer to [the configuration reference](../../reference/30-configuration/conventions.md#identity) for a description of each property in the conventional `identity` section that is used n the controller's and routers' configuration files.
 
 ### Third Party CA (optional)
 
@@ -118,7 +80,7 @@ Assuming the create request was well formed and successful, the response from th
 representing the `id` of the third party CA at `data.id`. The id of the third party CA will be needed when validating
 the third party CA.
 
-#### Validating the CA
+#### Verifying the CA
 
 After being submitted to the Ziti Controller, the third party CA will have the isCsrValidated field set to false
 indicating it is not yet ready for use. A second step is needed to ensure the third party CA is setup properly as a CA.
