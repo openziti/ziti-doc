@@ -6,32 +6,35 @@ sidebar_label: PKI
 
 import PkiTroubleshootingMd from '../../guides/05-troubleshooting/pki-troubleshooting.md'
 
-All Ziti Networks leverage [Public Key Infrastructure (PKI)](https://en.wikipedia.org/wiki/Public_key_infrastructure) to
-provide secure network connections. 
-
-The Ziti Network allows the operator to declare any trust anchors as valid. This means Ziti does not need to be
-configured with a full chain of certificates which link fully back to a root CA. A configuration using a full chain back
-to a root CA is of course supported but it is not explicitly required.  This allows the operator to configure a Ziti
-Network using one or more chains of trust back to the provided trust anchors.  The sections below will describe where
-these trust anchors can be configured.
-
-Ziti Network components are required to present a certificate to other Ziti Network components during the connection
-establishment. This certificate will need to be valid per the configured trust anchor store being connected to.
+The Ziti controller enrolls identities in a [Public Key Infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure) (PKI) that it manages. The PKI is used to establish trust between Ziti components. 
 
 ### Ziti Controller
 
-The Ziti Controller configuration has these sections related to PKI: `identity` and `edge.enrollment.signingCert`. The `identity` section may appear multiple times in the configuration file. Each appearance of `identity` defines the server identity for a specific TLS server listener. The `edge.enrollment.signingCert` section is used to specify the certificate used to sign enrollment tokens. If only the top-level, default `identity` secion is present, it is used for all listeners.
+The certificate authority (CA) in a Ziti network's PKI is the controller's edge enrollment CA. The edge enrollment CA issues long-lived client authentication certificates to identities during identity enrollment. The edge enrollment CA issues long-lived client and server authentication certificates to routers during router enrollment. 
 
-Edge identities may be configured for client certificate authentication. Client TLS is permitted if the client certificate presented is from the edge enrollment signer
-specified in `edge.enrollment.signingCert` or one of the verified external CAs. 
+The Ziti controller's own leaf certificates are not necessarily issued by the edge enrollment CA, and they are never issued automatically by the Ziti controller. The controller's own leaf certificates' life cycles are managed externally, not by the Ziti controller. Each server certificate presented by the controller must be accompanied by a certificate chain that terminates in a root CA that is declared in the controller's `identity.ca` bundle of known CAs.
 
-The trust bundle defined in controller config property `identity.ca` is not used to verify client certificates. Rather, clients fetch the well-known CA bundle `/.well-known/est/cacerts` from the controller during enrollment which includes the CA certs in `identity.ca` and the edge enrollment signer's certificate, and subsequently use that bundle to verify server certificates that are presented by the controller and routers.
+The Ziti Controller configuration has these sections related to PKI: `identity` and `edge.enrollment.signingCert`. 
 
-#### PKI Configuration
+* The `edge.enrollment.signingCert` section defines the edge enrollment CA's certificate and private key. 
+* The `identity` section appears at the root level of the configuration file and, optionally, in any `web[]` listener. Each appearance of `identity` defines a TLS server identity. If only the root-level `identity` secion is present, it is used whenever a TLS server identity is needed by the controller.
 
-Please refer to [the configuration reference](../../reference/30-configuration/conventions.md#identity) for a description of each property in the conventional `identity` section that is used n the controller's and routers' configuration files.
+<!-- the identity.cert property will be used to define the client authentication certificate for controller HA at which time we should update this to stop saying it's always a TLS server certificate -->
 
-The `identity.server_cert` 
+The controller provides these TLS servers:
+
+* The control plane API is consumed by routers and presents the certificate defined in `identity.server_cert`.
+* One or more web listeners provide bindings for the controller's REST APIs and other web services. Each web listener presents the certificate defined in its own `web[].identity.server_cert` property, or defaults to the root-level `identity.server_cert`.
+
+:::note
+The private key of the web listener to which the client API is bound is used to sign edge enrollment tokens. During enrollment, the identity or router in possession of a token will verify that it was signed by the same key that is backing the server certificate of the controller's client API. This allows the enrolling identity to confirm the client API URL is correct before requesting authentication certificate(s).
+::: 
+
+The trust bundle defined in controller config property `identity.ca` is used by the controller to bundle known CAs' certificates. This bundle is downloaded by clients during enrollment from the client API in `/edge/client/v1/.well-known/est/cacerts` and subsequently used to verify controller and router server certificate chains. These known CAs are never used by the controller to verify client certificates which are always from the controller's own edge enrollment CA or a known, verified external CA.
+
+#### Controller Configuration Reference
+
+Please refer to [the configuration reference](../../reference/30-configuration/conventions.md#identity) for a description of each property in the conventional `identity` section that is used in the controller's configuration file.
 
 ### Edge Router
 
@@ -43,9 +46,9 @@ provided exists the Edge Router will use it and the other fields will be **regen
 
 The Ziti Controller edge enrollment signer (`edge.enrollment.signingCert`) will issue a client and server certificate during enrollment. These are written to the file paths specified in the `identity` configuration section at the same time.
 
-#### PKI Configuration
+#### Router Configuration Reference
 
-Please refer to [the configuration reference](../../reference/30-configuration/conventions.md#identity) for a description of each property in the conventional `identity` section that is used n the controller's and routers' configuration files.
+Please refer to [the configuration reference](../../reference/30-configuration/conventions.md#identity) for a description of each property in the conventional `identity` section that is used in the router configuration file.
 
 ### Third Party CA (optional)
 
