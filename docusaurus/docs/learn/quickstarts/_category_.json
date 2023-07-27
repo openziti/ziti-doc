@@ -1,5 +1,4 @@
 {
   "label": "Quickstarts",
-  "position": 3,
-  "link": { "type": "doc", "id": "learn/quickstarts/network/quickstartOverview" }
+  "position": 3
 }
