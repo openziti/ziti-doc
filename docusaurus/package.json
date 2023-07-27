@@ -32,7 +32,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-github-btn": "^1.4.0",
-    "redocusaurus": "^1.4.0"
+    "redocusaurus": "^1.4.0",
+    "update-browserslist-db": "^1.0.11"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.4.1",
