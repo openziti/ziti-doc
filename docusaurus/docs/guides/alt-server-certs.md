@@ -4,51 +4,60 @@ sidebar_label: Public CA Certs
 sidebar_position: 50
 ---
 
-You can configure the Ziti controller and routers to present alternative server certificates, but it's not normally necessary. Most Ziti entities broker mutual cryptographic trust through enrollment, not a third-party CA. There are certain scenarios where a verifiable server certificate is necessary.
+You can configure the Ziti controller and routers to present alternative server certificates, but it's not necessary in the most common cases. There are certain scenarios where a server certificate from a trusted third-party is necessary. 
 
-Alternative server certificates are most relevant to Ziti networks that use [browZer](https://blog.openziti.io/series/browzer) because ephemeral identities are created inside a normal web browser that must trust the Edge client API's server certificate. For Ziti networks that run a browZer agent, you must configure the controller's Edge client API and the routers' WebSocket servers to present server certificates from a public CA like Let's Encrypt.
+Alternative server certificates are most relevant to Ziti networks that use [BrowZer](https://blog.openziti.io/series/browzer). BrowZer is an implementation of Ziti's external ID claim feature. Unlike enrollment, which configures an explicit root of trust for mTLS, an external ID claim allows short-lived authentication instruments, e.g., JWT or x509 client cert, issued by a trusted identity provider to "claim" an existing Ziti identity. This is how a BrowZer user is able to connect to a Ziti service with an authorization token from an OIDC provider.
+
+For Ziti networks that run the BrowZer Bootstrapper, you must configure the controller's Edge client API and the routers' WebSocket servers to present server certificates from a trusted third-party like Let's Encrypt. This allows the BrowZer runtime to verify the controller's and routers' server certitificates without any pre-configuration or additional client software.
+
+Publicly verifiable server certificates are not necessary, or even desirable, for Ziti identities that are "enrolled." This is because enrolled identities are always configured to explicitly trust the Ziti controller's known CAs. Enrolled clients must verify the server certificate chains they encounter from one of the known CAs. 
 
 ## Ziti Controller
 
-Ziti has a conventional way of configuring [`identity`](../reference/30-configuration/controller.md#identity) certificates for the controller's servers. Anywhere that you can configure a controller `identity` block you can also configure `alt_server_certs` as a sub-property. 
+Ziti has a conventional way of configuring [`identity`](../reference/30-configuration/controller.md#identity) certificates for the controller's TLS servers. Anywhere that you can configure a controller `identity` section you can also configure `alt_server_certs`. The controller's leaf certificates are managed externally, not by Ziti itself.
 
-The controller will select the correct server certificate to present by reading the Server Name Indication (SNI) of the incoming request and matching a DNS Subject Alternative Name (SAN) from all available server certificates configured in that particular `identity` block. This is important because the controller will select the first match in the event that two certificates have the same DNS SAN. To avoid this ambiguity, you must configure `alt_server_certs` with distinct DNS SANs from the `server_cert` property of the same `identity`.
+The controller will select the correct server certificate to present by reading the Server Name Indication (SNI) to match a DNS Subject Alternative Name (SAN) from all available server certificates configured in that particular `identity` section. 
 
-The simplest way to configure the controller with alternative certificates is with the main `identity` block that is typically organized at the top of the configuration file. This is the identity of the control plane, abbreviated "ctrl." If no other `identity` blocks are added to the controller's servers this identity will be used. For example, the web binding for the edge client and management APIs will present the same server certificates. 
+:::note
+The controller will select the first match in the event that two certificates have the same DNS SAN. You must configure `alt_server_certs` with DNS SANs that are distinct from the `server_cert` property of the same `identity` section.
+:::
+
+The simplest way to configure the controller with alternative certificates is with the main `identity` section. This is the root identity of the control plane, often abbreviated "ctrl." 
+
+If no other `identity` sections are configured then this identity will be used whenever a client or server or CA certificate is needed.
 
 ```yaml
 identity:
   cert: ctrl-plane-client.crt                  # user cert from ctrl plane CA
   server_cert: ctrl-plane-server.crt           # server cert from ctrl plane CA with SAN "ctrl.ziti.example.com"
-  key: ctrl-plane.key                          # private key of user and client certs
-  ca: ctrl-plane-trust-bundle.pem              # bundle of issuer certs including ctrl plane CA and edge signer CA
+  key: ctrl-plane-client.key                   # private key of client cert
+  server_key: ctrl-plane-server.key            # private key of server certs
+  ca: ctrl-plane-trust-bundle.pem              # bundle of root CAs that may be used to verify this identity's leaf cert chains
   alt_server_certs:
-    - server_cert: lets_encrypt.cert.pem       # server cert from Let's Encrypt with SAN "client-pub.ziti.example.com"
+    - server_cert: lets_encrypt.cert.pem       # server cert chain from Let's Encrypt with SAN "client-pub.ziti.example.com"
     - server_key: lets_encrypt.key.pem         # private key of alt server cert
 ```
 
 ## Ziti Routers
 
-Like controllers, routers too have a conventional [`identity`](../reference/30-configuration/router.md#identity) configuration block, but 
+Like controllers, routers too have a conventional [`identity`](../reference/30-configuration/router.md#identity) configuration section. Unlike the controller, the router's leaf certificates are managed by Ziti, not externally. The router obtains its leaf certificates from the controller's edge enrollment signer during enrollment and will attempt to renew them prior to expiration. The new certificates will not be saved if the filesystem is not writable.
 
 ```yaml
 identity:
-  cert: ctrl-plane-client.crt                  # user cert from ctrl plane CA
-  server_cert: ctrl-plane-server.crt           # server cert from ctrl plane CA with SAN "ctrl.ziti.example.com"
-  key: ctrl-plane.key                          # private key of user and client certs
-  ca: ctrl-plane-trust-bundle.pem              # bundle of issuer certs including ctrl plane CA and edge signer CA
+  cert: ctrl-plane-client.crt                  # filepath to write client cert from controller's edge enrollment signer during enrollment
+  server_cert: ctrl-plane-server.crt           # filepath to write server cert from edge enrollment signer during enrollment
+  key: ctrl-plane.key                          # filepath to write generated private key for leaf certs during enrollment
+  ca: ctrl-plane-trust-bundle.pem              # filepath to write known CA certs during enrollment
   alt_server_certs:
-    - server_cert: lets_encrypt.cert.pem       # server cert from Let's Encrypt with SAN "client-pub.ziti.example.com"
+    - server_cert: lets_encrypt.cert.pem       # server cert from Let's Encrypt with a distinct DNS SAN
     - server_key: lets_encrypt.key.pem         # private key of alt server cert
 ```
-
-
 
 If you choose to configure alternative wildcard certificates, you may ensure a predictable server certificate selection by using a distinct DNS name for `listeners[binding=edge].options.advertise`.
 
 For example, if you had initially configured your Ziti router to advertise an address of `router1.example.com:443` then the Ziti PKI certainly issued a server certificate with a DNS SAN like `router1.example.com`. If you later decide to use alternative server certificates, then you would need to advertise a different address like `router1-pub.example.com:443`. That way, when Edge clients request a connection, they'll be presented with the expected server certificate.
 
-If present, then it is also necessary to configure an alternative server certificate for the WebSocket binding.
+It is necessary to configure a verifiable server certificate for the WebSocket server that is necessary for BrowZer. This TLS server only needs the verifiable certificate from a trusted third-party, not a certificate from the Ziti controller.
 
 ```yaml
 transport:
@@ -66,4 +75,4 @@ The Ziti Administration Console (ZAC) is a server application that provides a co
 
 ## Ziti CLI
 
-The `ziti` CLI uses the controller's Edge management API and employs trust on first use (TOFU), much like the OpenSSH client's known host keys. The first time the CLI connects to a new controller it will prompt the user to accept the well-known trust bundle, e.g., `/.well-known/est/cacerts`, that is compiled by the controller and fetched by Edge clients during enrollment. This trust bundle comprises CA certificates from the issuers of the server certificates used by the controller.
+The `ziti` CLI uses the controller's Edge management API and employs trust on first use (TOFU), much like the OpenSSH client's known host keys, when authenticating with a password. The first time the CLI connects to a new controller it will prompt the user to accept the well-known trust bundle, e.g., `/.well-known/est/cacerts`, that is computed by the controller and fetched by Edge clients during enrollment after they verify the server certificate is backed by the same private key that signed their enrollment token. This trust bundle comprises root CA certificates that must be used to verify the server certificate chains presented by the Ziti controller.
