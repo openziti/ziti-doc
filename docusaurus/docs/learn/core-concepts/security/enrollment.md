@@ -6,9 +6,9 @@ Ziti Router enrollment is exclusively associating security credentials with a pr
 
 ## Identity Enrollment
 
-Enrollment is how an Edge Identity registers an authentication mechanism with the Edge Controller. Each authentication mechanism could be a client certificate, a password, or a time-based one-time token. The authentication mechanisms are used for primary or secondary authentication. An Edge Identity must enroll a certificate or password (primary) before enrolling a token generator (secondary).
+Enrollment is how an Edge Identity registers an authentication mechanism with the Edge Controller. Each authentication mechanism could be a client certificate, a password, or a time-based one-time password (TOTP). The authentication mechanisms are used for primary or secondary authentication. An Edge Identity must enroll a certificate or password (primary) before enrolling a TOTP (secondary).
 
-To enroll a primary authentication mechanism, the Edge Identity must possess an enrollment token and use it before it expires. The token is parsed as a JSON Web Token (JWT) to obtain the URL of the authentication API. The URL is fetched to obtain the public key of the server certificate. The public key is used to verify the signature of the enrollment token, proving to the Edge Identity that the token is authentic for the URL in the token. A secret value from the verified token is sent with the enrollment request to prove its authenticity.
+To enroll a primary authentication mechanism, the Edge Identity must possess an enrollment token and use it before it expires. The token is parsed as a JSON Web Token (JWT) to obtain the URL of the authentication API. The URL is fetched to obtain the public key of the server certificate. The public key is used to verify the signature of the enrollment token, proving to the Edge Identity that the token is authentic for the URL in the token. A secret value from the verified token is sent with the enrollment request to prove the authenticity of the request to the Edge Controller.
 
 ### Enrolling a Primary Authentication Mechanism
 
@@ -72,7 +72,7 @@ Alternatively, enrollments for an identity can be reviewed at `/edge/management/
 
 ### Enrolling a Secondary Authentication Mechanism
 
-To enroll a [TOTP generator](./authentication/70-totp.md) as a secondary authentication mechanism, the Edge Identity first performs primary authentication with a client certificate or password. Then the Edge Identity proves it received the TOTP seed by generating a valid token. Any Edge Identity may enroll a TOTP generator at any time, and the Edge Controller may be configured at any time to require a secondary trust factor. A session is considered [partially-authenticated](./sessions.md#full-vs-partial-authentication) if the primary factor is valid and a secondary factor is required by an [Auth Policy](./authentication/30-authentication-policies.md). The session must be fully-authenticated before the Edge Identity may discover Ziti Services.
+To enroll a [TOTP](./authentication/70-totp.md) as a secondary authentication mechanism, the Edge Identity first performs primary authentication with a client certificate or password. Then the Edge Identity proves it received the TOTP seed by generating a valid token. Any Edge Identity may enroll a TOTP at any time, and the Edge Controller may be configured at any time to require a secondary trust factor. A session is considered [partially-authenticated](./sessions.md#full-vs-partial-authentication) if the primary factor is valid and a secondary factor is required by an [Auth Policy](./authentication/30-authentication-policies.md). The session must be fully-authenticated before the Edge Identity may discover Ziti Services.
 
 ### Enrolling a Certificate from a Third-Party CA
 
