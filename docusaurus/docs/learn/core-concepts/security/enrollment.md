@@ -4,7 +4,85 @@ Enrollment is the process of some Edge client or Edge Router associating itself 
 results in the creation of an identity or associating security credentials with a pre-provisioned identity.
 Ziti Router enrollment is exclusively associating security credentials with a pre-provisioned Edge Router.
 
-## Routers
+## Identity Enrollment
+
+Enrollment is how an Edge Identity registers an authentication mechanism with the Edge Controller. Each authentication mechanism could be a client certificate, a password, or a time-based one-time token. The authentication mechanisms are used for primary or secondary authentication. An Edge Identity must enroll a certificate or password (primary) before enrolling a token generator (secondary).
+
+To enroll a primary authentication mechanism, the Edge Identity must possess an enrollment token and use it before it expires. The token is parsed as a JSON Web Token (JWT) to obtain the URL of the authentication API. The URL is fetched to obtain the public key of the server certificate. The public key is used to verify the signature of the enrollment token, proving to the Edge Identity that the token is authentic for the URL in the token. A secret value from the verified token is sent with the enrollment request to prove its authenticity.
+
+### Enrolling a Primary Authentication Mechanism
+
+The client certificate authentication method requests a client certificate from the Edge CA and its fingerprint is registered with the Edge Controller as a certificate [Authenticator](./authentication/auth.md#authenticators). The Edge Identity may [request a new client certificate](./authentication/40-certificate-management.md#client-certificate-extension) before the current certificate expires to update the Authenticator with the new SHA1 fingerprint. The password authentication method registers a password Authenticator with the Edge Controller. 
+
+#### Create an Identity with Ziti CLI
+
+The default authentication mechanism is a one-time token (JWT) that may be used by the Edge Identity to obtain a client authentication certificate.
+
+`ziti edge create identity [device|service|user] test-user10 -j ./my.token.jwt`
+
+#### Create an Identity with Edge Management API
+
+`POST /edge/management/v1/identities`
+
+```json
+{
+  "name": "test-user10",
+  "type": "User",
+  "isAdmin": false,
+  "roleAttributes": [
+    "dial"
+  ],
+  "enrollment": {
+    "ott": true
+  }
+}
+```
+
+#### Find Identities with Ziti CLI
+
+`ziti edge list identities 'id="-ItUkLGKUE"'`
+
+#### Find Identities with Edge Management API
+
+`GET /edge/management/v1/identities/-ItUkLGKUE`
+
+```json
+{
+  "data": {
+    ...
+    "id": "-ItUkLGKUE",
+    "tags": {},
+   ...
+    "enrollment": {
+      "ott": {
+        "expiresAt": "2022-08-09T15:37:16.619Z",
+        "id": "uFtU28GKj",
+        "jwt": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTY2MDA1OTQzNiwiaXNzIjoiaHR0cHM6Ly8xMjcuMC4wLjE6MTI4MCIsImp0aSI6IjdjM2VmOWFkLTE2ZjAtNDk4OS05MDQ3LTNmYzFmYTE5NDgyYyIsInN1YiI6Ii1JdFVrTEdLVUUifQ.JnLlHP9wdMlfgteAf4Y-KMnxRv_00EOhEtRRmMABg_dD7xRK2RQt-bwt5rkosfgghZPR4jppuR9Prg1F1skf7JGa9Z-CmEIVvmHB8LAT6AvNnRmfkNBioD4g-Q0LP1o_xZyfePUslSxwNYPevzYYdCwgXK-TuIW34sCirX1edZ25eRtlnTUq9T0cgqMyVCEtX03WkAhb8C_TLIzhWxCwxxJTY3lgOqwuMXQEqLrWFiuG6Q1aIAA8hjh57043z5a1GQ8sUGIWP0U7YuXBWzl50VY4fenrstaaanweQLDPCZlZGPKh08mPCAGAc4Fun10hBzYaezJXGb8BpEPKXrtmLA",
+        "token": "7c3ef9ad-16f0-4989-9047-3fc1fa19482c"
+      }
+    },
+    ...
+  },
+  "meta": {}
+}
+```
+
+Alternatively, enrollments for an identity can be reviewed at `/edge/management/v1/identities/<id>/enrollments` or
+`/edge/management/v1/enrollments` or `ziti edge list enrollments`.
+
+### Enrolling a Secondary Authentication Mechanism
+
+To enroll a [TOTP generator](./authentication/70-totp.md) as a secondary authentication mechanism, the Edge Identity first performs primary authentication with a client certificate or password. Then the Edge Identity proves it received the TOTP seed by generating a valid token. Any Edge Identity may enroll a TOTP generator at any time, and the Edge Controller may be configured at any time to require a secondary trust factor. A session is considered [partially-authenticated](./sessions.md#full-vs-partial-authentication) if the primary factor is valid and a secondary factor is required by an [Auth Policy](./authentication/30-authentication-policies.md). The session must be fully-authenticated before the Edge Identity may discover Ziti Services.
+
+### Enrolling a Certificate from a Third-Party CA
+
+The Edge Controller may be configured to [trust another CA](./authentication/10-third-party-cas.md) to issue client certificates that Edge Identities may use as primary authentication mechanisms. Those client certificates' fingerprints need to be registered through an enrollment process too, and the process differs because the certificate is not being issued by Ziti's Edge CA.
+
+### Claiming an Edge Identity without Enrolling
+
+Ziti also supports Edge Identity "claims" that are independent of any enrolled authentication mechanisms. [A claim](./authentication/50-external-id-claims.md) allows a trusted signer, e.g., x509 CA or OIDC IdP, to issue authentication mechanisms that are valid for assuming a particular existing Edge Identity. The properties of a verifiable document from the external provider must match a pre-configured pattern, e.g., common name property of an x509 client certificate, e.g., `CN="acme id"`, may match Edge Identity `Acme Identity 01` with property `externalId: "acme id"`. This is particularly useful for mapping many short-lived trust factors to a single Edge Identity.
+
+## Router Enrollment
 
 Upon creation of an Edge Router, enrollment details in the form of a JWT that acts as a one-time-token become 
 available in the `enrollmentJWT` field.
@@ -43,125 +121,6 @@ To enroll a router, deliver the `enrollmentJWT` to the host that will run the Ed
 ### Router Enrollment Extension
 
 Routers will attempt to automatically maintain their enrollment by refreshing their certificates seven days before they expire. This only works if the router's identity certificate file is writable. If it is not writable, the router will not be able to refresh its certificate and will need to orchestrated for replacement more often than router client certificates are configured to expire.
-
-## Clients
-
-Client enroll in one of two major categories:
-
-- pre-provisioned - identities are created before the client attempts to run and are provided with one-time-tokens to enroll
-  - OTT, OTT CA
-- post-provisioned - an identity is created during enrollment
-  - Auto CA
-
-### OTT Enrollment
-
-OTT Enrollment involves creating an identity and then delivering the enrollment JWT to client software that can then
-complete enrollment.
-
-#### Create
-
-##### Ziti CLI
-
-`ziti edge create identity [device|service|user] test-user10 -j ./my.token.jwt`
-
-#### Edge Management API
-
-`POST /edge/management/v1/identities`
-
-```json
-{
-  "name": "test-user10",
-  "type": "User",
-  "isAdmin": false,
-  "roleAttributes": [
-    "dial"
-  ],
-  "enrollment": {
-    "ott": true
-  }
-}
-```
-
-### Read
-
-#### Ziti CLI
-
-`ziti edge list identities 'id="-ItUkLGKUE"'`
-
-#### Edge Management API
-
-`GET /edge/management/v1/identities/-ItUkLGKUE`
-
-```json
-{
-    "data": {
-        ...
-        "id": "-ItUkLGKUE",
-        "tags": {},
-       ...
-        "enrollment": {
-            "ott": {
-                "expiresAt": "2022-08-09T15:37:16.619Z",
-                "id": "uFtU28GKj",
-                "jwt": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im90dCIsImV4cCI6MTY2MDA1OTQzNiwiaXNzIjoiaHR0cHM6Ly8xMjcuMC4wLjE6MTI4MCIsImp0aSI6IjdjM2VmOWFkLTE2ZjAtNDk4OS05MDQ3LTNmYzFmYTE5NDgyYyIsInN1YiI6Ii1JdFVrTEdLVUUifQ.JnLlHP9wdMlfgteAf4Y-KMnxRv_00EOhEtRRmMABg_dD7xRK2RQt-bwt5rkosfgghZPR4jppuR9Prg1F1skf7JGa9Z-CmEIVvmHB8LAT6AvNnRmfkNBioD4g-Q0LP1o_xZyfePUslSxwNYPevzYYdCwgXK-TuIW34sCirX1edZ25eRtlnTUq9T0cgqMyVCEtX03WkAhb8C_TLIzhWxCwxxJTY3lgOqwuMXQEqLrWFiuG6Q1aIAA8hjh57043z5a1GQ8sUGIWP0U7YuXBWzl50VY4fenrstaaanweQLDPCZlZGPKh08mPCAGAc4Fun10hBzYaezJXGb8BpEPKXrtmLA",
-                "token": "7c3ef9ad-16f0-4989-9047-3fc1fa19482c"
-            }
-        },
-        ...
-    },
-    "meta": {}
-}
-```
-
-Alternatively, enrollments for an identity can be reviewed at `/edge/management/v1/identities/<id>/enrollments` or
-`/edge/management/v1/enrollments` or `ziti edge list enrollments`.
-
-### OTT CA Enrollment
-
-OTT CA Enrollment requires that the enrolling client also has an existing client certificate signed by a 
-[3rd Party CA](./authentication/10-third-party-cas.md). When creating an identity the `id` of the target
-[3rd Party CA](./authentication/10-third-party-cas.md) is specified.
-
-#### Create
-
-##### Edge Management API
-
-`POST /edge/management/v1/identities`
-
-```json
-{
-  "name": "test-user10",
-  "type": "User",
-  "isAdmin": false,
-  "roleAttributes": [
-    "dial"
-  ],
-  "enrollment": {
-    "ottca": "<ott-ca-id>"
-  }
-}
-```
-
-An enrollment JWT can be retrieved in the same manner as [OTT Enrollment](#ott-enrollment)
-
-### Auto CA Enrollment
-
-Auto CA enrollment allows a [3rd Party CA](./authentication/10-third-party-cas.md) to have clients enroll with a
-Ziti network without first creating an identity or distributing a JWT enrollment token. Create a
-[3rd Party CA](./authentication/10-third-party-cas.md) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
-
-The name of enrolling clients is controlled by the `identityNameFormat` of the [3rd Party CA](./authentication/10-third-party-cas.md).
-The format support a number of replacement strings:
-
-- `[caName]` - the Ziti `name` of the [3rd Party CA](./authentication/10-third-party-cas.md) that validates the enrolling certificate
-- `[caId]` - the Ziti `id` of the [3rd Party CA](./authentication/10-third-party-cas.md) that validates the enrolling certificate
-- `[commonName]` - the common name of the enrolling certificate
-- `[requestedName]` - clients can submit a requested name during enrollment
-- `[identityId]` - the `id` of the created identity
-
-The default format is `[caName] - [commonName]`.
-
-Identity names are unique and if a collision occurs, incrementing numbers are appended.
 
 ### Client Re-Enrollment
 

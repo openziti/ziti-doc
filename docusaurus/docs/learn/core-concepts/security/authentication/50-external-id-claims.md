@@ -1,4 +1,6 @@
-# External JWT Signers
+# External ID Claims
+
+## Claiming an Edge Identity with a JWT from an External Signer
 
 External JWT Signers allow external identity providers to facilitate authentication with a Ziti network. External
 JWT Signers can be added as a static x509 certificate or via a JWKS endpoint. Authenticating clients can provide
@@ -7,8 +9,6 @@ all REST API calls if desired by using an Authentication Policy that requires it
 
 JWT is described in [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519) and on [Wikipedia](https://en.wikipedia.org/wiki/JSON_Web_Token).
 X509 PKI is described in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) an on [Wikipedia](https://en.wikipedia.org/wiki/X.509)
-
-# Usage
 
 External JWT Signers are used in conjunction with Authentication Policies to allow identities to authenticate using a
 JWT. External JWT Signers can be configured to match an identity through the `claimsProperty` and `useExternalId`
@@ -21,8 +21,7 @@ _Note: `externalId` values on identities are enforced to be unique._
 `claimsProperty` can contain JWT standard claims or private claims. An example usage would be an `email` JWT private
 claim and Ziti identities with `externalId` set to email addresses.
 
-
-## x509 Certificate
+### x509 Certificate
 
 If the JWT provider has a static x509 certificate, it is possible define an External JWT Signer using the PEM encoded
 public certificate of the signer. If the JWT provider has JWKS endpoint support it is strongly recommended to create
@@ -30,14 +29,14 @@ an External JWT Signer using the JWKS endpoint. External JWT Signers configured 
 need maintenance during key rotation and certificate expiration. For these operations the Edge Management API 
 can be used for external automation.
 
-## JWKS Endpoint
+### JWKS Endpoint
 
 JSON Web Key Sets (JWKS) is defined in [RFC7517 Section 5](https://datatracker.ietf.org/doc/html/rfc7517#section-5)
 and is used by many popular IdPs (Auth0, Okta) in order to enable external JWT verification. External JWT Signers
 configured with a JWKS endpoint allows an identity provider to rotate keys and bridge signer certificate expiration
 windows.
 
-# JWT Validation
+### JWT Validation
 
 External JTW Signers are used to validate JWTs for authentication. This validation requires the following:
 
@@ -48,12 +47,13 @@ External JTW Signers are used to validate JWTs for authentication. This validati
 - the JWT `kid` must match the External JWT `kid` field for x509 certificates or the `kid` in a JWKS response
 - the JWT must not be expired
 
-# Creation 
+### Creating an External JWT Signer
 
 An External JWT Signer that uses a private `email` claim and matches on `externalId` with a JWKS endpoint can
 be created as follows:
 
 `POST /edge/management/v1/ext-jwt-signers`
+
 ```json
 {
   "name": "My External JWT Signer",
@@ -70,6 +70,7 @@ An External JWT Signer that uses the `sub` claim and matches on `id` with a x509
 be created as follows:
 
 `POST /edge/management/v1/ext-jwt-signers`
+
 ```json
 {
   "name": "My External JWT Signer",
@@ -81,7 +82,7 @@ be created as follows:
 }
 ```
 
-# External Authentication URL & Client Authentication
+### External Authentication URL & Client Authentication
 
 Unauthenticated clients can enumerate External JWT Signers that have an `externalAuthUrl` property. Clients will
 receive the name of the External JWT Signer and the `externalAuthUrl` only. This information can allow clients
@@ -90,6 +91,7 @@ to initiate client authentication to the target identity provider.
 Example Client External JWT Signer response:
 
 `GET /edge/client/v1/external-jwt-signers`
+
 ```json
 {
   "data": [
@@ -107,3 +109,85 @@ Example Client External JWT Signer response:
   "meta": {}
 }
 ```
+
+## Claiming an Edge Identity with a Client x509 Certificate from an External Signer
+
+The base set of capabilities of x509 certificates do not allow the inclusion of custom private claims. Ziti internally
+uses [x509-claims](https://github.com/openziti/x509-claims) to allow claims data to be parsed from SANs and other
+fields. An example of this in other projects is [SPIFFE](https://spiffe.io/). SPIFFE defines [SPIFFE IDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-id)
+which are stored in [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-verifiable-identity-document-svid).
+
+3rd Party CAs support defining a set of x509 claims configuration that allows a claim to be matched to an identity
+`externalId`. The configuration is contained in an object in the field `externalIdClaims`. When not defined, x509
+client certificate authentication attempts to find an identity that is tied to an [authenticator](./auth#authenticators) 
+by matching client certificates. Using x509 claims, the client is matched by the identity `externalId` value.
+
+The fields under `externalIdClaims` is as follows:
+
+- `location` - defines which value(s) in an x509 certificate will be processed: `COMMON_NAME`, `SAN_URI`, `SAN_EMAIL`
+- `matcher` - defines how values from `location` will be filtered: `ALL`, `PREFIX`, `SUFFIX`, `SCHEME`
+- `matcherCriteria` - defines the `PREFIX`, `SUFFIX`, or `SCHEME` to look for based on `matcher`
+- `parser` - defines how values from `location` filtered by `matcher` will be parsed: `NONE`, `SPLIT`
+- `parserCriteria` - defines the criteria to provide to `parser`
+- `index` - should multiple values still be available after `location`, `matcher,` and `parser` processing the integer value here will be used from the set
+
+### Manage an External x509 Signer with the REST Management API
+
+```json
+{
+  "name": "myCA",
+  "certPem": "—–BEGIN CERTIFICATE—–\nMIIDdTCCAHMU...\n—–END CERTIFICATE—–",
+  "externalIdClaims": {
+    "location": "SAN_URI",
+    "matcher": "SCHEME",
+    "parser": "NONE",
+    "parserCriteria": "",
+    "index": 0
+  }
+}
+```
+
+### Manage an External x509 Signer with the Ziti CLI
+
+```bash
+ziti edge create ca myCa ca.pem -l SAN_URI -m SCHEME -x spiffe -p "NONE"
+```
+
+```bash
+ziti edge update ca myCa -l SAN_URI -m SCHEME -x spiffe -p "NONE"
+```
+
+### Location, Matcher, Parser
+
+x509 claims are located, matched, and parsed. Location defines where the value(s) are sourced from, matching filters, 
+and parsing allows for a single value to yield multiple claims.
+
+#### Location
+
+Location configuration sources value(s) from the x509 certificate
+
+- `COMMON_NAME` - the common name of the certificate
+- `SAN_URI` - SAN URI fields
+- `SAN_EMAIL` - SAN email fields
+
+#### Matcher & Matcher Criteria
+
+Matcher and matcher criteria work together to filter fields. The `matcher` uses `matcherCritera` to perform basic
+filtering.
+
+Matcher values:
+
+- `ALL` - returns all values (i.e. no filtering)
+- `PREFIX` - matches by the string prefix defined by `matcherCriteria`
+- `SUFFIX` - matched by the string suffix defined by `matcherCriteria`
+- `SCHEME` - a matcher that specializes in matching the protocol defined in `matcherCriteria` of  a URI (used with `SAN_URI` only)
+
+#### Parser & Parser Criteria
+
+Parser and parser criteria work together to turn individual values from location and matching into multiple values.
+Parsers allow a single value to contain more than one claim.
+
+Parser values:
+
+- `NONE` - perform no parsing
+- `SPLIT` - perform string splitting based on the string separator defined by `parserCriteria`

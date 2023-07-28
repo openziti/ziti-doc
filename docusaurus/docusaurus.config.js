@@ -112,8 +112,8 @@ const config = {
         },
         redirects: [
           {
-            to: '/docs/learn/core-concepts/security/authentication/external-jwt-signers',
-            from: ['/ziti/security/authentication/external-jwt-signers.html'],
+            to: '/docs/learn/core-concepts/security/authentication/external-id-claims',
+            from: ['/ziti/security/authentication/external-jwt-signers.html', '/docs/learn/core-concepts/security/authentication/external-jwt-signers'],
           },
           {
             to: '/docs/guides/kubernetes/workload-tunneling/kubernetes-sidecar',

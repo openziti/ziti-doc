@@ -1,16 +1,18 @@
 ---
 id: pki
-title: Public Key Infrastructure (PKI)
+title: Public Key Infrastructure
 sidebar_label: PKI
 ---
 
 import PkiTroubleshootingMd from '../../guides/05-troubleshooting/pki-troubleshooting.md'
 
-The Ziti controller enrolls identities in a [Public Key Infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure) (PKI) that it manages. The PKI is used to establish trust between Ziti components. 
+[Public Key Infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure) (PKI) is used to establish trust between all Ziti components. The Ziti controller enrolls identities with a PKI that it manages, and externally-managed PKIs may be verified with the Ziti controller and used for enrollment. Enrollment is best suited for long-lived client certificate fingerprint authentication.
+
+Alternatively to enrollment, external PKIs may be trusted to sign authentication instruments that are used to [claim an existing Ziti identity](./security/authentication/50-external-id-claims.md).
 
 ### Ziti Controller
 
-The certificate authority (CA) in a Ziti network's PKI is the controller's edge enrollment CA. The edge enrollment CA issues long-lived client authentication certificates to identities during identity enrollment. The edge enrollment CA issues long-lived client and server authentication certificates to routers during router enrollment. 
+The certificate authority (CA) in a Ziti network's PKI is the controller's edge enrollment CA. The edge enrollment CA issues client authentication certificates to identities during identity enrollment. The edge enrollment CA issues client and server authentication certificates to routers during router enrollment. 
 
 The Ziti controller's own leaf certificates are not necessarily issued by the edge enrollment CA, and they are never issued automatically by the Ziti controller. The controller's own leaf certificates' life cycles are managed externally, not by the Ziti controller. Each server certificate presented by the controller must be accompanied by a certificate chain that terminates in a root CA that is declared in the controller's `identity.ca` bundle of known CAs.
 

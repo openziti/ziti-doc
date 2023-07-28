@@ -10,14 +10,13 @@ that adding a x509 certificate as a 3rd Party CA will treat it as a trust anchor
 that the root CA is added as a 3rd Party CA and ensure authenticating clients provide their client certificate in
 index zero and any required intermediate certificates afterwards.
 
-
-# Usage 
+## Usage 
 
 3rd Party CAs can be used in the following manners:
-- allows clients to enroll and authenticate automatically for at-scale network boarding - [Auto CA Enrollment](../enrollment#auto-ca-enrollment)
-- allows clients to enroll pre-created identities - [OTT CA Enrollment](../enrollment#ott-ca-enrollment)
-- allows clients to map to pre-created identities using `externalId` and [X509 Claims](#external-id--x509-claims)
 
+- allows clients to enroll and authenticate automatically for at-scale network boarding - [Auto CA Enrollment](../enrollment.md#auto-ca-enrollment)
+- allows clients to enroll pre-created identities - [OTT CA Enrollment](../enrollment.md#ott-ca-enrollment)
+- allows clients to map to pre-created identities using `externalId` and [X509 Claims](../authentication/50-external-id-claims.md#claiming-an-edge-identity-with-a-client-x509-certificate-from-an-external-signer)
 
 ## Create
 
@@ -27,9 +26,7 @@ certificates will be validated. The following fields configure client authentica
 - `isAutoCaEnrollmentEnabled` - allows client certificates of the CA to automatically enroll when encountered
 - `isOttCaEnrollmentEnabled` - allows client certificates of the CA to enroll if an identity with an `ottca` enrollment was created
 - `isAuthEnabled` - allows client certificates of the CA to attempt to enroll
-- `externalIdClaim` - configuration used to pull values out of the x509 client certificate used to match identity `externalId`, see [External Id & x509 Claims](#external-id--x509-claims)
-
-
+- `externalIdClaim` - configuration used to pull values out of the x509 client certificate used to match identity `externalId`, see [External Id & x509 Claims](../authentication/50-external-id-claims.md#claiming-an-edge-identity-with-a-client-x509-certificate-from-an-external-signer)
 
 For [Auto CA Enrollment](../enrollment#auto-ca-enrollment) an identity is created on first authentication. 
 The following fields allow configuration of newly created identities:
@@ -44,10 +41,10 @@ The following fields relate to [verification](#verification):
 - `verificationToken` - read only displaying the verification token required to verify the CA
 
 All other fields are for informational purposes:
+
 - `name` - the name of the given CA
 - `fingerprint` - read only field of the sha1 fingerprint of the provided x509 certificate
 - `certPem` - PEM encoded version of the CA
-
 
 ## Verification 
 
@@ -65,7 +62,7 @@ and submit it or submit an already created certificate.
 
 Access to the CA's certificate and private key is required.
 
-` ziti edge verify ca <name> --cacert <signingCaCert> --cakey <signingCaKey> [--password <caKeyPassword>]`
+`ziti edge verify ca <name> --cacert <signingCaCert> --cakey <signingCaKey> [--password <caKeyPassword>]`
 
 #### Submit Verification Certificate
 
@@ -79,7 +76,8 @@ The [Edge Management API](/docs/reference/developer/api#edge-management-api) acc
 as the body:
 
 `POST /edge/management/v1/cas/<id>/verify`
-```
+
+```pem
 —–BEGIN CERTIFICATE—–
 MIIDdTCCAl2gAwIBAgILBAAAAAABFUtaw5QwDQYJKoZIhvcNAQEFBQAwVzELMAkG
 ...
@@ -87,81 +85,46 @@ HMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==
 —–END CERTIFICATE—–
 ```
 
-## External ID & X509 Claims
+## Managing Edge Identities for 3rd Party CA Enrollment
 
-The base set of capabilities of x509 certificates do not allow the inclusion of custom private claims. Ziti internally
-uses [x509-claims](https://github.com/openziti/x509-claims) to allow claims data to be parsed from SANs and other
-fields. An example of this in other projects is [SPIFFE](https://spiffe.io/). SPIFFE defines [SPIFFE IDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-id)
-which are stored in [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-verifiable-identity-document-svid).
+### OTT CA Enrollment
 
-3rd Party CAs support defining a set of x509 claims configuration that allows a claim to be matched to an identity
-`externalId`. The configuration is contained in an object in the field `externalIdClaims`. When not defined, x509
-client certificate authentication attempts to find an identity that is tied to an [authenticator](./auth#authenticators) 
-by matching client certificates. Using x509 claims, the client is matched by the identity `externalId` value.
+OTT CA Enrollment requires that the enrolling client also has an existing client certificate signed by a verified 3rd Party CA. When creating an identity the `id` of the target 3rd Party must be specified. This is not yet supported by the Ziti CLI.
 
-The fields under `externalIdClaims` is as follows:
+#### Create an Identity for a 3rd Party CA with Edge Management API
 
-- `location` - defines which value(s) in an x509 certificate will be processed: `COMMON_NAME`, `SAN_URI`, `SAN_EMAIL`
-- `matcher` - defines how values from `location` will be filtered: `ALL`, `PREFIX`, `SUFFIX`, `SCHEME`
-- `matcherCriteria` - defines the `PREFIX`, `SUFFIX`, or `SCHEME` to look for based on `matcher`
-- `parser` - defines how values from `location` filtered by `matcher` will be parsed: `NONE`, `SPLIT`
-- `parserCriteria` - defines the criteria to provide to `parser`
-- `index` - should multiple values still be available after `location`, `matcher,` and `parser` processing the integer value here will be used from the set
+`POST /edge/management/v1/identities`
 
-#### CA Create/Update REST API
 ```json
 {
-  "name": "myCA",
-  "certPem": "—–BEGIN CERTIFICATE—–\nMIIDdTCCAHMU...\n—–END CERTIFICATE—–",
-  "externalIdClaims": {
-    "location": "SAN_URI",
-    "matcher": "SCHEME",
-    "parser": "NONE",
-    "parserCriteria": "",
-    "index": 0
+  "name": "test-user10",
+  "type": "User",
+  "isAdmin": false,
+  "roleAttributes": [
+    "dial"
+  ],
+  "enrollment": {
+    "ottca": "<ott-ca-id>"
   }
 }
 ```
-#### Ziti CLI
 
-```
-ziti edge create ca myCa ca.pem -l SAN_URI -m SCHEME -x spiffe -p "NONE"
-```
+The enrollment JWT can be retrieved by fetching the created identity by ID and parsing out the `enrollment.ottca.jwt` field. 
 
-```
-ziti edge update ca myCa -l SAN_URI -m SCHEME -x spiffe -p "NONE"
-```
+### Auto CA Enrollment
 
-### Location, Matcher, Parser
+Auto CA enrollment allows a 3rd Party CA to have clients enroll with a Ziti network without first creating an identity. A signed, reusable JWT token is required for the Edge Identity to discover the client API URL and to authenticate the server certificate. 
 
-x509 claims are located, matched, and parsed. Location defines where the value(s) are sourced from, matching filters, 
-and parsing allows for a single value to yield multiple claims.
+Create a 3rd Party CA and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
 
-#### Location
+The name of enrolling clients is controlled by the `identityNameFormat` of the 3rd Party CA. The format support a number of replacement strings:
 
-Location configuration sources value(s) from the x509 certificate
+- `[caName]` - the Ziti `name` of the 3rd Party CA that validates the enrolling certificate
+- `[caId]` - the Ziti `id` of the 3rd Party CA that validates the enrolling certificate
+- `[commonName]` - the common name of the enrolling certificate
+- `[requestedName]` - clients can submit a requested name during enrollment
+- `[identityId]` - the `id` of the created identity
 
-- `COMMON_NAME` - the common name of the certificate
-- `SAN_URI` - SAN URI fields
-- `SAN_EMAIL` - SAN email fields
+The default format is `[caName] - [commonName]`.
 
-#### Matcher & Matcher Criteria
-
-Matcher and matcher criteria work together to filter fields. The `matcher` uses `matcherCritera` to perform basic
-filtering.
-
-Matcher values:
-
-- `ALL` - returns all values (i.e. no filtering)
-- `PREFIX` - matches by the string prefix defined by `matcherCriteria`
-- `SUFFIX` - matched by the string suffix defined by `matcherCriteria`
-- `SCHEME` - a matcher that specializes in matching the protocol defined in `matcherCriteria` of  a URI (used with `SAN_URI` only)
-
-#### Parser & Parser Criteria
-
-Parser and parser criteria work together to turn individual values from location and matching into multiple values.
-Parsers allow a single value to contain more than one claim.
-
-Parser values:
-- `NONE` - perform no parsing
-- `SPLIT` - perform string splitting based on the string separator defined by `parserCriteria`
+Identity names are unique and if a collision occurs, incrementing numbers are appended.

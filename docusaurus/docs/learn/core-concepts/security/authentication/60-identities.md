@@ -6,12 +6,11 @@ itself, a single account on a multi-user device, an application, or a set of app
 Identity is only limited by the intent of its use, its security configuration, and where/how it stores its credentials.
 
 If an Identity represents a human that is using an SSO provider that ties into Ziti Edge's
-[External JWT Signers](./50-external-jwt-signers.md) the human operator can move from device to device using whichever Ziti
+[External JWT Signers](./50-external-id-claims.md) the human operator can move from device to device using whichever Ziti
 enabled applications that allow them to authenticate. If the Identity can only authenticate via a x509 Client
 Certificate where the private key is stored in a hardware back keystore on a device, such that the key can not be moved,
 the identity is tied to that hardware. Further if the Identity's credentials are stored in an OS-backed user specific
 storage mechanism (e.g. Windows Credential Manager) it is that accounts Identity.
-
 
 ## Identity ER Diagram
 
@@ -46,7 +45,7 @@ The following [primary authentication](./auth#primary-authentication) mechanisms
 - 3rd Party x509 Client Certificate
 - Username Password (UPDB)
 
-The following do not require enrollment, but must have a properly configured [External JWT Signer](./external-jwt-signers)
+The following do not require enrollment, but must have a properly configured [External JWT Signer](./50-external-id-claims.md)
 
 - JWT
 
@@ -99,13 +98,14 @@ Note: This identity will be using the default [authentication policy](./auth) wh
 ### Creating w/ 3rd Party CA Client Cert Enrollment
 Note: This identity will be using the default [authentication policy](./auth) which allows certificate authentication
 
-#### Ziti CLI:
+#### Ziti CLI
 
 It is currently not possible to create identities with a 3rd party certificate enrollment through the CLI.
 
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
+
 ```json
 {
   "name": "Roger Wilco",
@@ -137,16 +137,18 @@ Note: This identity will be using the default [authentication policy](./auth) wh
 ```
 
 ### Creating w/ JWT Authenticator
-Note: A valid [External JWT Signer](./external-jwt-signers) must be created and an [authentication policy](./auth)
+
+Note: A valid [External JWT Signer](./50-external-id-claims.md) must be created and an [authentication policy](./auth.md)
 must be defined that allows the identity to authenticate with that signer.
 
-#### Ziti CLI:
+#### Ziti CLI
 
 `ziti edge create identity [device|service|user] <name> --external-id "externalJWTId"`
 
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
+
 ```json
 {
   "name": "Roger Wilco",

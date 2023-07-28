@@ -21,23 +21,24 @@ certificate issued by the Ziti PKI, they must issue the following REST request t
 [Edge Management API](/docs/reference/developer/api#edge-management-api) or [Edge Client API](/docs/reference/developer/api#edge-client-api) 
 after becoming [fully authenticated](../sessions.md#full-vs-partial-authentication).
 
-### Client Certificate Extension
-
 The Ziti SDKs provide helper functions for this process and issuing these requests manually should not be necessary.
 
 The `id` necessary to extend a specific authenticator may be obtained by listing the client's current authenticators
 with `GET edge/*/v1/current-identity/authenticators` where `*` may be `management` or `client`. The CSR provided
 must be PEM encoded.
 
-#### Request
+### Request
+
 `POST edge/client/v1/current-identity/authenticators/{id}/extend`
+
 ```json
 {
   "clientCertCsr": "-----BEGIN NEW CERTIFICATE REQUEST-----\n..."
 }
 ```
 
-#### Response:
+### Response
+
 A new CA bundle and client certificate will be returned PEM encoded.
 
 ```json

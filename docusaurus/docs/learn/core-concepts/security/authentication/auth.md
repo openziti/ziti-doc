@@ -75,7 +75,7 @@ Authenticators may be listed via the CLI:
 
 or via the [Edge Management API](docs/reference/developer/api/02-edge-management-reference.mdx):
 
-```
+```http
 GET /edge/management/v1/authenticators
 ```
 
@@ -98,14 +98,14 @@ Expired client certificates may be allowed via [Authentication Policies](30-auth
 
 ### JWT Primary Authentication
 
-JWT authentication requires that an [External JWT Signer](50-external-jwt-signers.md) be added via the Ziti Edge Management 
-API. The definition of [External JWT Signer](50-external-jwt-signers.md) allows configuration of which JWT claim should be
+JWT authentication requires that an [External JWT Signer](50-external-id-claims.md) be added via the Ziti Edge Management 
+API. The definition of [External JWT Signer](50-external-id-claims.md) allows configuration of which JWT claim should be
 used as a value to map against the unique `externalId` or `id` property on Identities. This mapping of JWT claim to 
 `externalId`/`id` is used to determine which Identity is authenticating.
 
 The JWT must be provided in the HTTP request in the `Authentication` header with a value in the format of 
 `Bearer <jwt>`. The JWT provided must pass signature, expiration, issuer, and audience validation as configured
-on the [External JWT Signer](50-external-jwt-signers.md).
+on the [External JWT Signer](50-external-id-claims.md).
 
 ### Username/password
 
