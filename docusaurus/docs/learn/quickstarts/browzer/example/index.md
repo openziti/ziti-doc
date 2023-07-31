@@ -1,6 +1,9 @@
 ---
 title: Example Enabling BrowZer 
 ---
+import MDXComponents from '@theme-original/MDXComponents';
+import Details from '@theme/MDXComponents/Details';
+import Code from '@theme/MDXComponents/Code';
 
 This page will demonstrate adding BrowZer to an existing OpenZiti overlay network that was started using the
 ["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md). It will use Ubuntu linux as well, if
@@ -8,14 +11,18 @@ your linux distribution is different, change the commands accordingly.
 
 ### Get the Wildcard Certificate
 
-First, I used Docker to run Certbot. Following the instructions [on the certbot site](https://eff-certbot.readthedocs.io/en/stable/install.html),
-I obtained a wildcard certificate key/pair from LetsEncrypt for my domain using the
-[DNS challenge method](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
+First, to obtain the needed wildcard certificate, I used Docker to run Certbot. 
+Following the instructions [on the certbot site](https://eff-certbot.readthedocs.io/en/stable/install.html),
+I was able a wildcard certificate key/pair from LetsEncrypt for my domain using the
+[DNS challenge method](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). For this example, I am using
+the domain: `hostitanywhere.demo.openziti.org`.
 
-#### Run Certbot via Docker
+<Details>
+<summary>Run Certbot via Docker</summary>
+
 ```
 wildcard_url="hostitanywhere.demo.openziti.org"
-your_email="clint@openziti.org"
+your_email="your.email@someserver.com"
 sudo docker run -it --rm --name certbot \
   -v "/etc/letsencrypt:/etc/letsencrypt" \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
@@ -26,6 +33,10 @@ sudo docker run -it --rm --name certbot \
                   --agree-tos
 ```
 
+</Details>
+
+
+
 ### Enable Certificate Access by Specific Users
 
 Since certbot will make the files available to root only (a good practice) we want to give specific users the
@@ -33,6 +44,9 @@ ability to read the files.  To do that we'll make a new group and a new user wit
 we are making a group named `zitiweb`, adding our user to that group so that "we" can see the files for debugging or
 other purposes and then making a `ziggy` user that can also read these files should we want/need that later. Please
 plan accordingly here. This is just a reasonable example to follow to get you going, change it to suit your needs.
+
+<Details>
+<summary>An Example of Changing LetsEncrypt Permissions</summary>
 
 ```bash
 sudo groupadd -g 2171 zitiweb
@@ -49,21 +63,35 @@ wildcard_url="hostitanywhere.demo.openziti.org"
 ls -l /etc/letsencrypt/live/${wildcard_url}/*
 ```
 
-### Follow the OpenZiti "host it anywhere" Quickstart
+</Details>
 
-We plan to follow the steps outlined in the ["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md)
-with __one important exception__. Since we have just obtained some LetsEncrypt certificates, we'll enable OpenZiti with
+### Install a new OpenZiti Network
+
+In this example, we'll deploy a brand new OpenZiti Network by following the steps outlined in the "host it anywhere"
+quickstart with __one important exception__! 
+
+<Details>
+<summary>Setup for Alternative Server Certs</summary>
+
+Since we have just obtained some LetsEncrypt certificates, we'll enable OpenZiti with
 [Alternative Server Certs](../../../../guides/alt-server-certs.md) __immediately__! To do that we'll set two new variables
-introduced with v0.29.0. Notice that the `${wildcard_url}` variable set above, is reused here:
+introduced with v0.29.0. Notice that the `${wildcard_url}` variable needs to be set if it's not already set. Shown here
+is the domain: `hostitanywhere.demo.openziti.org`:
 
 ```bash
+wildcard_url="hostitanywhere.demo.openziti.org"
 export ZITI_PKI_ALT_SERVER_CERT="/etc/letsencrypt/live/${wildcard_url}/fullchain.pem"
 export ZITI_PKI_ALT_SERVER_KEY="/etc/letsencrypt/live/${wildcard_url}/privkey.pem"
 ```
+</Details>
 
-Now we can follow the ["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md) instructions.
+With the `ZITI_PKI_ALT_*` environmnent variables set, we are ready to follow the 
+["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md) instructions.
 
-After the quickstart completes, you should be able to access the controller at both the alternate server cert url. 
+<Details>
+<summary>Verify the Quickstart Succeeded</summary>
+
+After completing the quickstart, you should be able to access the controller at both the alternate server cert url. 
 Notice there's no need for 'insecure' (-sk) curl mode!:
 ```bash
 curl https://ctrl.${wildcard_url}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}
@@ -73,17 +101,26 @@ be the self-signed PKI endpoint:
 ```bash
 curl -sk https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}
 ```
+</Details>
 
+### Add WebSocket Support to the OpenZiti Network
 
-### Install the Ziti Admin Console (ZAC)
+BrowZer operates in your web browser. For it to connect to a router, a router will need to be provisioned on the OpenZiti
+Network that supports [web sockets](https://en.wikipedia.org/wiki/WebSocket). We will do that by using the router
+provisioned in the quickstart
 
-We are going to expose ZAC via BrowZer! To do that, we need to install ZAC first. Follow 
-[the ZAC install guide](../../../../learn/quickstarts/zac/index.md). After installing ZAC, continue.
+<Details>
+<summary>Update Edge Router for WebSocket Support</summary>
 
-### Update Edge Router for WSS
+After completing the quickstart, you will have an edge router configuration file in the user's home directory.
+Use your favorite editor, such as [`vim`](https://en.wikipedia.org/wiki/Vim_(text_editor)) to edit the file:
 
+```bash
 vi $ZITI_HOME/${ZITI_NETWORK}-edge-router.yaml
+```
 
+Locate the "binding" section, and add a section that looks like this. Make sure to change the `address` and `advertise`
+fields accordingly:
 ```bash
   - binding: edge
     address: wss:0.0.0.0:8447
@@ -92,6 +129,17 @@ vi $ZITI_HOME/${ZITI_NETWORK}-edge-router.yaml
       connectTimeoutMs: 5000
       getSessionTimeout: 60
 ```
+
+</Details>
+
+
+
+### Install the Ziti Admin Console (ZAC)
+
+In this example, we will be protecting the Ziti Administration Console (ZAC) itself with BrowZer. To do that, 
+we need to install ZAC first. Follow [the ZAC install guide](../../../../learn/quickstarts/zac/index.md). 
+After installing ZAC, continue.
+
 
 # restart the edge router
 sudo systemctl restart ziti-router
