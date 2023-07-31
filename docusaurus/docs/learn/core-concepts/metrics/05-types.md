@@ -1,4 +1,4 @@
-# Types of Metrics Reported
+# Types
 
 OpenZiti is instrumenting more code and adding additional metrics all of the time. This section will describe the different types of metrics that OpenZiti reports, not individual metric names.
 
