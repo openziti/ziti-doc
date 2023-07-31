@@ -12,13 +12,13 @@ Alternatively to enrollment, external PKIs may be trusted to sign authenticating
 
 ### Ziti Controller
 
-A Ziti network's PKI always has at least one CA that is managed by the Ziti controller: the edge enrollment CA. The edge enrollment CA issues client authentication certificates to identities during identity enrollment. The edge enrollment CA issues client and server authentication certificates to routers during router enrollment. 
+A Ziti network's PKI always has at least one CA that is managed by the Ziti controller: the Edge enrollment CA. The Edge enrollment CA issues client authentication certificates to identities during identity enrollment. The Edge enrollment CA issues client and server authentication certificates to routers during router enrollment. 
 
-The Ziti controller's own leaf certificates are not necessarily issued by the edge enrollment CA, and they are never issued automatically by the Ziti controller. The controller's own leaf certificates' life cycles are managed externally, not by the Ziti controller. Each server certificate presented by the controller must be accompanied by a certificate chain that terminates in a root CA that is declared in the controller's `identity.ca` bundle of known CAs.
+The Ziti controller's own leaf certificates are not necessarily issued by the Edge enrollment CA, and they are never issued automatically by the Ziti controller. The controller's own leaf certificates' life cycles are managed externally, not by the Ziti controller. Each server certificate presented by the controller must be accompanied by a certificate chain that terminates in a root CA that is declared in the controller's `identity.ca` bundle of known CAs.
 
 The Ziti Controller configuration has these sections related to PKI: `identity` and `edge.enrollment.signingCert`. 
 
-* The `edge.enrollment.signingCert` section defines the edge enrollment CA's certificate and private key. 
+* The `edge.enrollment.signingCert` section defines the Edge enrollment CA's certificate and private key. 
 * The `identity` section appears at the root level of the configuration file and, optionally, in any `web[]` listener. Each appearance of `identity` defines a TLS server identity. If only the root-level `identity` secion is present, it is used whenever a TLS server identity is needed by the controller.
 
 <!-- the identity.cert property will be used to define the client authentication certificate for controller HA at which time we should update this to stop saying it's always a TLS server certificate -->
@@ -29,10 +29,10 @@ The controller provides these TLS servers:
 * One or more web listeners provide bindings for the controller's REST APIs and other web services. Each web listener presents the certificate defined in its own `web[].identity.server_cert` property, or defaults to the root-level `identity.server_cert`.
 
 :::note
-The private key of the web listener to which the client API is bound is used to sign edge enrollment tokens. During enrollment, the identity or router in possession of a token will verify that it was signed by the same key that is backing the server certificate of the controller's client API. This allows the enrolling identity to confirm the client API URL is correct before requesting authentication certificate(s).
+The private key of the web listener to which [the Edge Client API](../../reference/developer/api/index.md#edge-client-api) is bound is used to sign Edge enrollment tokens. During enrollment, the identity or router in possession of a token will verify that it was signed by the same key that is backing the server certificate of the controller's Edge Client API. This allows the enrolling identity to confirm the Edge Client API URL is correct before requesting authentication certificate(s).
 ::: 
 
-The trust bundle defined in controller config property `identity.ca` is used by the controller to bundle known CAs' certificates. This bundle is downloaded by clients during enrollment from the client API in `/edge/client/v1/.well-known/est/cacerts` and subsequently used to verify controller and router server certificate chains. These known CAs are never used by the controller to verify client certificates which are always from the controller's own edge enrollment CA or a known, verified external CA.
+The trust bundle defined in controller config property `identity.ca` is used by the controller to bundle known CAs' certificates. This bundle is downloaded by clients during enrollment from the client API in `/edge/client/v1/.well-known/est/cacerts` and subsequently used to verify controller and router server certificate chains. These known CAs are never used by the controller to verify client certificates which are always from the controller's own Edge enrollment CA or a known, verified external CA.
 
 #### Controller Configuration Reference
 
@@ -46,7 +46,7 @@ only setting that an operator may wish to provide is the `key` field of the iden
 than the other values specified.  If the `key` specified does not exist a new key will be generated. If the `key`
 provided exists the Edge Router will use it and the other fields will be **regenerated and overwritten** as necessary, if the filesystem is writable.
 
-The Ziti Controller edge enrollment signer (`edge.enrollment.signingCert`) will issue a client and server certificate during enrollment. These are written to the file paths specified in the `identity` configuration section at the same time.
+The Ziti Controller Edge enrollment CA (`edge.enrollment.signingCert`) will issue a client and server certificate during enrollment. These are written to the file paths specified in the `identity` configuration section at the same time.
 
 #### Router Configuration Reference
 
