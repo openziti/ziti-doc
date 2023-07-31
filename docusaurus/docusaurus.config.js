@@ -112,6 +112,10 @@ const config = {
         },
         redirects: [
           {
+            to: '/docs/learn/core-concepts/metrics/overview',
+            from: ['/docs/core-concepts/metrics', '/docs/core-concepts/metrics/metric-types'],
+          },
+          {
             to: '/docs/learn/core-concepts/security/authentication/external-jwt-signers',
             from: ['/ziti/security/authentication/external-jwt-signers.html'],
           },
