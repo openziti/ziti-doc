@@ -8,7 +8,7 @@ import PkiTroubleshootingMd from '../../guides/05-troubleshooting/pki-troublesho
 
 [Public Key Infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure) (PKI) is used to establish trust between all Ziti components. The Ziti controller enrolls identities with a PKI that it manages, and externally-managed PKIs may be verified with the Ziti controller and used for enrollment. Enrollment is best suited for long-lived client certificate fingerprint authentication.
 
-Alternatively to enrollment, external PKIs may be trusted to sign authentication instruments that are used to [claim an existing Ziti identity](./security/authentication/50-external-id-claims.md).
+Alternatively to enrollment, external PKIs may be trusted to sign authenticating documents, e.g., JWT or certificate, that are used to [claim an existing Ziti identity](./security/authentication/50-external-id-claims.md).
 
 ### Ziti Controller
 
