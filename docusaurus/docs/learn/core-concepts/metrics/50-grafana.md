@@ -1,4 +1,4 @@
-# Using Grafana to view OpenZiti API's
+# Using Grafana
 Grafana has a marvelous datasource type called [Infinity](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/).  It is highly flexible in it's own right, and the numerous options it provides to configure additional funcitonality makes it a great choice for interacting with APIs for various purposes.  In this case, I am using it to access the OpenZiti management API to retrieve reference information for transforming the zitiIds (Identity, Edge Router, etc.) to their human readable names.  
 
 ## Prerequisites

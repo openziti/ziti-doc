@@ -1,4 +1,4 @@
-# Ziti Metrics
+# Overview
 
 Ziti can report system metrics in a few different ways
 
