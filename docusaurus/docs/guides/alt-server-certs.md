@@ -6,7 +6,7 @@ sidebar_position: 50
 
 You can configure the Ziti controller and routers to present alternative server certificates, but it's not necessary in the most common cases. There are certain scenarios where a server certificate from a trusted third-party is necessary. 
 
-Alternative server certificates are most relevant to Ziti networks that use [BrowZer](https://blog.openziti.io/series/browzer). BrowZer is an implementation of Ziti's external ID claim feature. Unlike enrollment, which configures an explicit root of trust for mTLS, an external ID claim allows short-lived authentication instruments, e.g., JWT or x509 client cert, issued by a trusted identity provider to "claim" an existing Ziti identity. This is how a BrowZer user is able to connect to a Ziti service with an authorization token from an OIDC provider.
+Alternative server certificates are most relevant to Ziti networks that use [BrowZer](https://blog.openziti.io/series/browzer). BrowZer is an implementation of Ziti's [external ID claim feature](../learn/core-concepts/security/authentication/50-external-id-claims.md). This is how a BrowZer user is able to connect to a Ziti service with an authorization token from an OIDC provider.
 
 For Ziti networks that run the BrowZer Bootstrapper, you must configure the controller's Edge client API and the routers' WebSocket servers to present server certificates from a trusted third-party like Let's Encrypt. This allows the BrowZer runtime to verify the controller's and routers' server certitificates without any pre-configuration or additional client software.
 
