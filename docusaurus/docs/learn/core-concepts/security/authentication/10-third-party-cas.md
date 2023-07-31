@@ -109,7 +109,7 @@ OTT CA Enrollment requires that the enrolling client also has an existing client
 }
 ```
 
-The enrollment JWT can be retrieved by fetching the created identity by ID and parsing out the `enrollment.ottca.jwt` field. 
+The enrollment JWT can be retrieved by fetching the enrollments for the created identity by its ID, e.g. `GET /identities/:id/enrollments`.
 
 ### Auto CA Enrollment
 
