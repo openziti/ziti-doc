@@ -35,7 +35,7 @@ identity:
   ca: ctrl-plane-trust-bundle.pem              # bundle of root CAs that may be used to verify this identity's leaf cert chains
   alt_server_certs:
     - server_cert: lets_encrypt.cert.pem       # server cert chain from Let's Encrypt with SAN "client-pub.ziti.example.com"
-    - server_key: lets_encrypt.key.pem         # private key of alt server cert
+      server_key: lets_encrypt.key.pem         # private key of alt server cert
 ```
 
 ## Ziti Routers
@@ -50,7 +50,7 @@ identity:
   ca: ctrl-plane-trust-bundle.pem              # filepath to write known CA certs during enrollment
   alt_server_certs:
     - server_cert: lets_encrypt.cert.pem       # server cert from Let's Encrypt with a distinct DNS SAN
-    - server_key: lets_encrypt.key.pem         # private key of alt server cert
+      server_key: lets_encrypt.key.pem         # private key of alt server cert
 ```
 
 If you choose to configure alternative wildcard certificates, you may ensure a predictable server certificate selection by using a distinct DNS name for `listeners[binding=edge].options.advertise`.
