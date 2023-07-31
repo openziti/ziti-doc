@@ -125,11 +125,19 @@ The fields under `externalIdClaims` is as follows:
 #### Ziti CLI
 
 ```
-ziti edge create ca myCa ca.pem -l SAN_URI -m SCHEME -x spiffe -p "NONE"
+ziti edge create ca myCa ca.pem \
+    --location SAN_URI \
+    --matcher SCHEME \
+    --matcher-criteria spiffe \
+    --parser "NONE"
 ```
 
 ```
-ziti edge update ca myCa -l SAN_URI -m SCHEME -x spiffe -p "NONE"
+ziti edge update ca myCa \
+    --location SAN_URI \
+    --matcher SCHEME \
+    --matcher-criteria spiffe \
+    --parser "NONE"
 ```
 
 ### Location, Matcher, Parser
