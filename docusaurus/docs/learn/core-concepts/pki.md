@@ -12,7 +12,7 @@ Alternatively to enrollment, external PKIs may be trusted to sign authenticating
 
 ### Ziti Controller
 
-The certificate authority (CA) in a Ziti network's PKI is the controller's edge enrollment CA. The edge enrollment CA issues client authentication certificates to identities during identity enrollment. The edge enrollment CA issues client and server authentication certificates to routers during router enrollment. 
+A Ziti network's PKI always has at least one CA that is managed by the Ziti controller: the edge enrollment CA. The edge enrollment CA issues client authentication certificates to identities during identity enrollment. The edge enrollment CA issues client and server authentication certificates to routers during router enrollment. 
 
 The Ziti controller's own leaf certificates are not necessarily issued by the edge enrollment CA, and they are never issued automatically by the Ziti controller. The controller's own leaf certificates' life cycles are managed externally, not by the Ziti controller. Each server certificate presented by the controller must be accompanied by a certificate chain that terminates in a root CA that is declared in the controller's `identity.ca` bundle of known CAs.
 
