@@ -241,7 +241,11 @@ const config = {
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
+      metadata: [
+        {name: 'description', content: 'open source zero trust'},
+        {name: 'robots', content: 'index, follow'},
+      ],
       algolia: {
         // The application ID provided by Algolia
         appId: 'EXWPKK5PV4',
@@ -380,7 +384,7 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-    }),
+    },
 };
 
 module.exports = config;
