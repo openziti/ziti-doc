@@ -5,7 +5,7 @@ id: quickstartOverview
 # Start Cooking With Ziti
 
 Learn how to start integrating Zero Trust directly into your application! Explore our quickstarts and learn how to
-get your own zero trust overlay network setup.
+get your own open source zero trust network overlay setup.
 
 OpenZiti is bringing Zero Trust to networks all over the world! To really get the most out of Ziti, you'll want to embed
 it **directly** into your applications. Ziti provides numerous SDKs for this very purpose. If you're not ready to embed

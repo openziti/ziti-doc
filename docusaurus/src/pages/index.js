@@ -138,7 +138,7 @@ export default function Home() {
                     <WhatIsOpenZiti/>
 
                     <ul style={{margin: "var(--ifm-list-margin)"}}>
-                        <li><a href="/docs/reference/glossary#network-overlay-overlay">The overlay network</a></li>
+                        <li><a href="/docs/reference/glossary#network-overlay-overlay">The fully open source zero trust network overlay</a></li>
                         <li><a href="/docs/reference/tunnelers/">Tunneling Applications for all operating systems</a></li>
                         <li><a href="/docs/reference/developer/sdk/">Numerous SDKs making it easy to add Zero Trust concepts directly into your application</a></li>
                     </ul>
