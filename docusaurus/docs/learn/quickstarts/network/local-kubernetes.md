@@ -19,7 +19,7 @@ We'll use the preferred `minikube` Docker driver for this quickstart. You can ru
 1. [Install Helm](https://helm.sh/docs/intro/install/)
 1. [Install `minikube`](https://minikube.sigs.k8s.io/docs/start/)
 1. [Install `ziti` CLI](https://github.com/openziti/ziti/releases/latest)
-1. [Install an OpenZiti Tunneler app](https://docs.openziti.io/docs/downloads)
+1. [Install an OpenZiti Tunneler app](https://openziti.io/docs/downloads)
 1. Optional: Install `curl` and `jq` for testing an OpenZiti Service in the terminal.
 
 Make sure these command-line tools are available in your executable search `PATH`.
@@ -284,7 +284,7 @@ kubectl apply \
 Add the OpenZiti Helm Repo
 
 ```bash
-helm repo add "openziti" https://docs.openziti.io/helm-charts/
+helm repo add "openziti" https://openziti.io/helm-charts/
 ```
 
 #### Install the Controller
@@ -297,7 +297,7 @@ Let's create a Helm release named "miniziti-controller" for the OpenZiti Control
    helm install "ziti-controller" openziti/ziti-controller \
       --namespace ziti-controller --create-namespace \
       --set clientApi.advertisedHost="miniziti-controller.ziti" \
-      --values https://docs.openziti.io/helm-charts/charts/ziti-controller/values-ingress-nginx.yaml
+      --values https://openziti.io/helm-charts/charts/ziti-controller/values-ingress-nginx.yaml
    ```
 
 1. This may take a few minutes. Wait the controller's pod status progress to "Running." You can get started on the DNS set up in the next section, but you need the controller up and running to install the router.
@@ -423,7 +423,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       --set-file enrollmentJwt=/tmp/miniziti-router.jwt \
       --set edge.advertisedHost=miniziti-router.ziti \
       --set ctrl.endpoint=ziti-controller-ctrl.miniziti.svc:6262 \
-      --values https://docs.openziti.io/helm-charts/charts/ziti-router/values-ingress-nginx.yaml
+      --values https://openziti.io/helm-charts/charts/ziti-router/values-ingress-nginx.yaml
 
    kubectl wait deployments "ziti-router" \
       --namespace ziti-router \
@@ -458,7 +458,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       --namespace ziti-console --create-namespace  \
       --set ingress.advertisedHost=miniziti-console.ziti \
       --set settings.edgeControllers[0].url=https://miniziti-controller-client.miniziti.svc:443 \
-      --values https://docs.openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml
+      --values https://openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml
    ```
 
 1. Wait for deployment.
@@ -534,7 +534,7 @@ helm install "miniziti-httpbin" openziti/httpbin \
 
 Add the client identity you created to your OpenZiti Tunneler.
 
-Follow [the instructions for your tunneler OS version](https://docs.openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/miniziti-client.jwt` (or WSL's "tmp" directory, e.g., `\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
+Follow [the instructions for your tunneler OS version](https://openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/miniziti-client.jwt` (or WSL's "tmp" directory, e.g., `\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
 
 As soon as identity enrollment completes you should have a new OpenZiti DNS name available to this device. Let's test that with a DNS query.
 
