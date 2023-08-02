@@ -10,7 +10,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'OpenZiti',
   tagline: 'Replacing Infrastructure With Software',
-  url: 'https://docs.openziti.io/',
+  url: 'https://openziti.io/',
   baseUrl: '/',
   trailingSlash: undefined,
   // onBrokenLinks: 'warn',
@@ -283,7 +283,7 @@ const config = {
         title: '',
         hideOnScroll: false,
         logo: {
-          alt: 'OpenZiti Logo',
+          alt: 'The OpenZiti logo, an open source zero trust network overlay',
           src: 'img/ziti-logo-dark.svg',
           srcDark: 'img/ziti-logo-light.svg',
         },

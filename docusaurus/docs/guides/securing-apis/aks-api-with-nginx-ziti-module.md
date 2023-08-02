@@ -8,7 +8,7 @@ title: OpenZiti Ingress to Azure K8s Service
 - [OpenZiti Nginx Module Repo](https://github.com/openziti/ngx_ziti_module)
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
 - Openziti Network
-- [Desktop Tunneler](https://docs.openziti.io/docs/reference/tunnelers/)
+- [Desktop Tunneler](../../../docs/reference/tunnelers)
 
 ---
 
@@ -43,7 +43,7 @@ client name = `client-nginx` with `Attribute`: `#clients`,  server module name =
 
 Download jwt files and enroll identities. 
 
-- Windows ZDE Identity can be enrolled by following this [enrolling process](https://docs.openziti.io/docs/reference/tunnelers/windows#enrolling)
+- Windows ZDE Identity can be enrolled by following this [enrolling process](../../../docs/reference/tunnelers/02-windows.md#enrolling)
 - Nginx Module Identity can be enrolled by following [Enrolling an Identity Guide](../../learn/core-concepts/identities/20-enrolling.md)
 
 ---
