@@ -1,6 +1,7 @@
 ---
 id: overview
 title: Zero Trust Models
+description: Zero Trust Models - ZTNA, ZTHA, ZTAA
 hide_table_of_contents: true
 ---
 

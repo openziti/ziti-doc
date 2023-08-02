@@ -11,8 +11,8 @@
 
 ## Building the Doc
 
-Github offers [github pages](https://pages.github.com/) which this project uses to host the output of building the
-static content. Github has a few options for where you can put your doc at this time, the main branch, a folder on the
+GitHub offers [github pages](https://pages.github.com/) which this project uses to host the output of building the
+static content. GitHub has a few options for where you can put your doc at this time, the main branch, a folder on the
 main branch named 'docs' or a special branch that still works named "gh-pages". This project is currently configured
 to use the main branch and docs folder.
 
@@ -32,6 +32,12 @@ NOTE: you must be configured to run NodeJS >=16.14 before running the next comma
 ```
 
 You can then run `cd ./docusaurus && yarn install && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
+
+## Style Guide
+
+This site is built using [docusaurus](https://docusaurus.io/). Docusaurus has some quirks that are important to understand
+before contributing. See the [STYLEGUIDE.md](./STYLEGUIDE.md) for more details.
+
 
 ## Publishing this Site
 
