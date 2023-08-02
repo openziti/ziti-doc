@@ -185,7 +185,7 @@ Architectures available:
 
 * x86_64
 
-Use this repo with var `$releasever` on CentOS 7, Rocky 8, RHEL 7-8.
+Use this repo with var `$releasever` on CentOS 7, Rocky 8-9, and RHEL 7-9.
 
 ```ini
 [OpenZiti]
@@ -194,27 +194,6 @@ baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$release
 enabled=1
 gpgcheck=0
 gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch/repodata/repomd.xml.key
-repo_gpgcheck=1
-```
-
-</TabItem>
-<TabItem value="RedHat9">
-
-#### Red Hat 9
-
-Architectures available:
-
-* x86_64
-
-Use the the Red Hat 8 repo until a dedicated Red Hat 9 repo becomes available ([link to issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/517)).
-
-```ini
-[OpenZiti]
-name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
-enabled=1
-gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
