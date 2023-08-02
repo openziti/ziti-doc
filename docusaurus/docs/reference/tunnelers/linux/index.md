@@ -148,7 +148,6 @@ sudo apt install ziti-edge-tunnel
   defaultValue="RedHat"
   values={[
       { label: 'Red Hat', value: 'RedHat', },
-      { label: 'Red Hat 9', value: 'RedHat9', },
       { label: 'Fedora', value: 'Fedora', },
       { label: 'Amazon Linux', value: 'Amazon', },
   ]}
