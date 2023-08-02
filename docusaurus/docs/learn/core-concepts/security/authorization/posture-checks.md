@@ -216,7 +216,7 @@ sha1 fingerprints (thumbprints) of valid signing certificates.
 
 ## Windows Domain
 
-The `DOMAIN` Posture CHeck is used to verify that a Windows client has joined a specific Windows Domain.
+The `DOMAIN` Posture Check is used to verify that a Windows client has joined a specific Windows Domain.
 
 ### Creating
 
@@ -237,7 +237,7 @@ The `DOMAIN` Posture CHeck is used to verify that a Windows client has joined a 
 }
 ```
 
-# Viewing Identity Posture Data
+## Viewing Identity Posture Data
 
 For troubleshooting purposes it is possible to view an identity's current Posture Data.
 

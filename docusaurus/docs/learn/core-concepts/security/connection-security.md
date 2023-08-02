@@ -23,7 +23,7 @@ order to transport application/service data securely between the two intended pa
 
 [![image](../../../../static/img/connections-edge-sdk-sdk.png)](../../../../static/img/connections-edge-sdk-sdk.png)
 
-# Control and Link Connection Details
+## Control and Link Connection Details
 
 Routers work in concert with a controller to establish a mesh network of `link` connections between routers. Routers coordinate
 with a controller over a `control` connection. These connections are initialized and maintained while the network is in
@@ -32,7 +32,7 @@ for `control` connections are exchanged during router enrollment. The `control` 
 Edge Routers is used to continuously update routers with the proper certificate information for all other routers in
 the mesh.
 
-# Controller API Connection Details
+## Controller API Connection Details
 
 Controller APIs provide ways for clients (SDKs or otherwise) to interact with a network. The [Edge Management API](../../../reference/developer/api/02-edge-management-reference.mdx)
 is used for configuration and maintenance. The [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx)
@@ -42,7 +42,7 @@ discover Edge Routers, and to perform basic self-maintenance.
 Access to the APIs requires [authentication](authentication/auth.md) which results in an [API Session](authentication/auth.md#api-sessions)
 being returned to the client. An [API Session](authentication/auth.md#api-sessions) is required to make `edge` connections.
 
-# Edge Connection Details
+## Edge Connection Details
 
 `edge` connections are made between SDKs and Edge Routers. They require the following:
 
@@ -58,7 +58,7 @@ either be the certificate used during authentication (if used) or an [API Sessio
 `service` connections. When a [Session](sessions.md#session) is created, a list of valid Edge Router
 is included in the response.
 
-# Service Connection Details
+## Service Connection Details
 
 `service` connections represent an SDK that has connected to a service (dial) or is hosting a service (bind). To
 establish a `service` connection of either type the following is required:
