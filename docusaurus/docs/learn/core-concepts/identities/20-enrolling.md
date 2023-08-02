@@ -1,7 +1,7 @@
 ---
 title: Enrolling
 ---
-# Enrolling an Identity
+## Enrolling an Identity
 
 All connections made to the Ziti network leverage [mutual TLS](https://en.wikipedia.org/wiki/Mutual_authentication)
 which means every client needs a valid X509 certificate which it will present to the Ziti network during the connection

@@ -11,13 +11,12 @@ that the root CA is added as a 3rd Party CA and ensure authenticating clients pr
 index zero and any required intermediate certificates afterwards.
 
 
-# Usage 
+## Usage 
 
 3rd Party CAs can be used in the following manners:
 - allows clients to enroll and authenticate automatically for at-scale network boarding - [Auto CA Enrollment](../enrollment#auto-ca-enrollment)
 - allows clients to enroll pre-created identities - [OTT CA Enrollment](../enrollment#ott-ca-enrollment)
 - allows clients to map to pre-created identities using `externalId` and [X509 Claims](#external-id--x509-claims)
-
 
 ## Create
 
@@ -28,8 +27,6 @@ certificates will be validated. The following fields configure client authentica
 - `isOttCaEnrollmentEnabled` - allows client certificates of the CA to enroll if an identity with an `ottca` enrollment was created
 - `isAuthEnabled` - allows client certificates of the CA to attempt to enroll
 - `externalIdClaim` - configuration used to pull values out of the x509 client certificate used to match identity `externalId`, see [External Id & x509 Claims](#external-id--x509-claims)
-
-
 
 For [Auto CA Enrollment](../enrollment#auto-ca-enrollment) an identity is created on first authentication. 
 The following fields allow configuration of newly created identities:
