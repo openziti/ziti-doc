@@ -31,42 +31,16 @@ It is not necessary to manually enroll the identity when using the RPM or DEB pa
 1. Run the script for your OS to install `ziti-edge-tunnel`.
 
 <Tabs
-  defaultValue="Focal"
+  defaultValue="Ubuntu"
   values={[
-      { label: 'Ubuntu Jammy 22.04', value: 'Jammy', },
-      { label: 'Ubuntu Focal 20.04', value: 'Focal', },
-      { label: 'Ubuntu Bionic 18.04', value: 'Bionic', },
+      { label: 'Ubuntu', value: 'Ubuntu', },
       { label: 'Debian GNU/Linux', value: 'Debian', },
   ]}
 >
-<TabItem value="Jammy">
 
-#### Ubuntu Jammy 22.04
+<TabItem value="Ubuntu">
 
-Architectures available:
-
-* x86_64
-* arm64
-
-```bash
-(
-set -euo pipefail
-
-curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
-
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable jammy main' \
-  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
-
-sudo apt update
-sudo apt install ziti-edge-tunnel
-)
-```
-
-</TabItem>
-<TabItem value="Focal">
-
-#### Ubuntu Focal 20.04
+#### Ubuntu
 
 Architectures available:
 
@@ -75,12 +49,37 @@ Architectures available:
 
 ```bash
 (
-set -euo pipefail
+set -euxo pipefail
+
+source /etc/os-release
+[[ -n ${UBUNTU_CODENAME:-} ]] || {
+  echo "Unable to determine Ubuntu version" >&2
+  exit 1
+}
+
+case ${UBUNTU_CODENAME} in 
+  jammy|focal|bionic)
+    UBUNTU_LTS=${UBUNTU_CODENAME}
+    ;;
+  lunar|kinetic)
+    UBUNTU_LTS=jammy
+    ;;
+  impish|hirsute|groovy)
+    UBUNTU_LTS=focal
+    ;;
+  eoan|disco|cosmic)
+    UBUNTU_LTS=bionic
+    ;;
+  *)
+    echo "Unsupported Ubuntu version: ${UBUNTU_CODENAME}" >&2
+    exit 1
+    ;;
+esac
 
 curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
   | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
 
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
+echo "deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable ${UBUNTU_LTS} main" \
   | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
 
 sudo apt update
@@ -89,31 +88,7 @@ sudo apt install ziti-edge-tunnel
 ```
 
 </TabItem>
-<TabItem value="Bionic">
 
-#### Ubuntu Bionic 18.04
-
-Architectures available:
-
-* x86_64
-* arm64
-
-```bash
-(
-set -euo pipefail
-
-curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
-
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable bionic main' \
-  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
-
-sudo apt update
-sudo apt install ziti-edge-tunnel
-)
-```
-
-</TabItem>
 <TabItem value="Debian">
 
 #### Debian GNU/Linux
@@ -199,6 +174,7 @@ repo_gpgcheck=1
 ```
 
 </TabItem>
+
 <TabItem value="Fedora">
 
 #### Fedora
@@ -218,6 +194,7 @@ repo_gpgcheck=1
 ```
 
 </TabItem>
+
 <TabItem value="Amazon">
 
 #### Amazon Linux
