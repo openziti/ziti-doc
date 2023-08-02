@@ -283,7 +283,7 @@ const config = {
         title: '',
         hideOnScroll: false,
         logo: {
-          alt: 'OpenZiti Logo',
+          alt: 'The OpenZiti logo, an open source zero trust overlay network overlay',
           src: 'img/ziti-logo-dark.svg',
           srcDark: 'img/ziti-logo-light.svg',
         },
