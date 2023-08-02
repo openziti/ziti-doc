@@ -249,6 +249,7 @@ const config = {
       metadata: [
         {name: 'description', content: 'open source zero trust'},
         {name: 'robots', content: 'index, follow'},
+        {name: 'og:site_name' content: 'OpenZiti'},
       ],
       algolia: {
         // The application ID provided by Algolia
