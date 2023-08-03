@@ -71,7 +71,7 @@ You can see what your value is set to by running
 
 
 ```bash
-curl "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
+curl -sk "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
 ```
 
 Example output: 
