@@ -1,6 +1,6 @@
 {
   "label": "Local Gateway",
-  "position": 30,
+  "position": 50,
   "link": {
     "type": "generated-index"
   }

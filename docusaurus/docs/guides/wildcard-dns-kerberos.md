@@ -1,6 +1,7 @@
 ---
 title: Wildcard DNS and Kerberos
 sidebar_label: Wildcard DNS
+sidebar_position: 50
 ---
 
 ### How to Tunnel Kerberos/Active Directory DNS Queries
