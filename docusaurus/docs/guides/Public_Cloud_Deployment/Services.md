@@ -459,8 +459,11 @@ root@local-er:~# cat >hello.txt
                          \/                   \/\/
 
 This is hello from local-er.
-root@local-er:~# python3 -m http.server 8080
-Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
+```
+
+Then start the http server.
+```bash
+python3 -m http.server 8080
 ```
 
 Login to the intercept side tunneler (**egress-tunnel**) node.
@@ -478,7 +481,7 @@ root@egress-tunnel:~#
 ```
 
 ### 3.5.7 Conclusion
-In this section, we demonstrated intercepting http (port 80) request to an IP address and forward the request to a remote http server listening to port 8080 via ziti network.
+In this section, we demonstrated intercepting http (port 80) request to an IP address and forward the request to a remote http server listening on the port 8080 via ziti network.
 
 
 ## 3.6 Setup Connection from a non-OpenZiti client
@@ -583,13 +586,14 @@ root@egress-tunnel:~# cat >hello.txt
 
 
 You have reached the "egress-tunnel".
-<CTRL-D>
-root@egress-tunnel:~# sudo python3 -m http.server 80
-Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 ```
 
+Then start the http server.
+```bash
+sudo python3 -m http.server 80
+```
 
-Login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
+Then login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
 
 #### 3.6.7.2 Test IP intercept
 
@@ -729,7 +733,7 @@ sudo systemctl restart systemd-resolved.service
 ```
 DNS=10.5.0.4  #local private IP of the ER
 ```
-**NOTE, the IP address should match your Next hop in the route table**
+**NOTE, the IP address should match your "Target Selection" in the route table**
 
 Restart the systemd-resolved service
 ```bash

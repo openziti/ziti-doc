@@ -472,7 +472,8 @@ DigitalOcean does not have route table.  The routes are setup directly on the VM
 - To setup your route, choose the default route table from your VCN.
 ![Diagram](/img/public_cloud/RouteTable-OCI1.jpg)
 
-- Following is an example route for traffic for 100.64.0.0/10.
+- **Add Router Rules**
+- Following is an example route for traffic destine for 100.64.0.0/10 subnet.
 - The **Target Type** is **Private IP**
 - The **Destination Type** is **CIDR Block**
 - The **Destination CIDR Block** is the example traffic (100.64.0.0/10)
@@ -628,7 +629,8 @@ Oracle Cloud default firewall is s blocking all incoming access to the VM. You w
 - On the left side menu, select the **Network Security Group**.
 - Select **Create Network Security Group**.
 - Name the security group and select the next.
-- Now create rules for ingress traffic.
+- Now create rules for ingress traffic (port listed above).
+- Also create a rule to allow all traffic outbound (**Egress**).
 
 ![Diagram](/img/public_cloud/ER-Firewall-OCI1.jpg)
 
@@ -637,6 +639,36 @@ Oracle Cloud default firewall is s blocking all incoming access to the VM. You w
 - Select the security group from the drop down and press **Save changes**.
 
 ![Diagram](/img/public_cloud/ER-Firewall-OCI2.jpg)
+
+---
+**NOTE 1**
+```
+Oracle Cloud also uses Security Lists (on the subnet) to marshal the traffic, 
+please make sure the setting under Security Lists is not conflicting
+with your security group rules.
+```
+
+---
+**NOTE 2**
+```
+It is possible that after the security group configuration, the ufw does not
+work correctly on the VM.
+```
+
+You should **Turn on ufw** and **restart the VM** after the security group configuration.
+
+- ufw must be turned on for traffic to get to the VM.
+- after ufw is enabled, setup **allow** traffic for ports:
+
+```bash
+sudo ufw enable
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 53/udp
+sudo shutdown -r 0
+```
+
+- you also need to allow the intercept ports on the ufw also. 
 
 </TabItem>
 <TabItem value="IBM">

@@ -153,28 +153,28 @@ Now click on **Launch instance**
 - Click on **Instances** (Under **Compute** category). 
 - Create an instance.
 - Name the instance. 
-- Choose the compartment (Create a new compartment if you has not created before).
-- Select the Placement.
+- Choose the compartment.
+- Select the Availability domain under Placement.
 - Leave the security disabled
 
 ![Diagram](/img/public_cloud/Create-OCI1.jpg)
 
-- On Image and shape selection, click **Change image** icon.
+- Under the "Image and shape selection", click **Change image** icon.
 - Select the **Ubuntu** icon. 
 - Select the **Canonical Ubuntu 22.04**. 
-- Select any image build. And press *Select image**
-- On shape select, Choose lick change shape. Select **2** OCUP and 4 GB memory.
+- Select any image build. And press **Select image**
+- Under the "Shape" selection, Choose **Change shape**. 
+- Change to **2** OCUPs and **4** GB memory.
 
 ![Diagram](/img/public_cloud/Create-OCI2.jpg)
 
 - On the networking section.
-- Select the existing virtual cloud network for primary network.
-- Select the existing subnet.
-- For **Public IPv4 address**, check the **Assign a public IPv4 address**.
+- Select your **Primary network** and **Subnet**.
+- For **Public IPv4 address**, check **Assign a public IPv4 address**.
 
 ![Diagram](/img/public_cloud/Create-OCI3.jpg)
 
-- In the **Add SSH keys** section upload public key file or paste the existing public key.
+- In the **Add SSH keys** section, choose how you want your ssh keys generated. **We strongly discourage use password to login to the VM**.
 - Leave default boot volume.
 - Now click on **Create**.
 
@@ -274,20 +274,22 @@ DigitalOcean by default does not setup firewall for the VM.
 Oracle cloud by default blocks all incoming traffic to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). 
 
 - First, we need to **Create security group**
-- From **Networking** category, select the **Virtual cloud networks**. 
+- From the **Networking** category, select the **Virtual cloud networks**. 
 - Select the VCN your VM is in.
 - On the left side menu, select the **Network Security Group**.
 - Select **Create Network Security Group**.
 - Name the security group and select the next.
 - Now create rules for ingress traffic. 
-- Let everything open in the outbound direction.
+- Port 22/TCP for SSH
+- OpenZiti ports: 8440-8443/TCP (default ports from quickstart)
+- Also create a rule to allow all traffic outbound (**Egress**).
 
 Following is the example of the Security Group for the controller
 
 ![Diagram](/img/public_cloud/Firewall-OCI1.jpg)
 
-- Then attach the created security group to the instance
-- Select **Edit** under the **Network security groups** section.
+- After the security group is created, attach it to the instance.
+- From the "Instance details" screen, select **Edit** under the **Network security groups** section.
 - Select the security group from the drop down and press **Save changes**.
 
 ![Diagram](/img/public_cloud/Firewall-OCI2.jpg)
@@ -296,19 +298,29 @@ Following is the example of the Security Group for the controller
 ---
 **NOTE 1**
 ```
-Oracle Cloud also uses Security Lists to limit the traffic, 
-please make sure the setting under Security Lists is not conflict 
-with your security group setup.
+Oracle Cloud also uses Security Lists (on the subnet) to marshal the traffic, 
+please make sure the setting under Security Lists is not conflicting
+with your security group rules.
 ```
 
 ---
 **NOTE 2**
 ```
-It is possible after the security group configuration, the ufw does not
+It is possible that after the security group configuration, the ufw does not
 work correctly on the VM.
-
-Please restart the VM after the security group configuration.
 ```
+
+You should **Turn on ufw** and **restart the VM** after the security group configuration.
+
+- ufw must be turned on for traffic to get to the VM.
+- after ufw is enabled, setup **allow** traffic for OpenZiti ports:
+
+```bash
+sudo ufw enable
+sudo ufw allow 8440:8443/tcp
+sudo shutdown -r 0
+```
+
 
 </TabItem>
 <TabItem value="IBM">
@@ -319,8 +331,8 @@ If you turn on the firewall feature, you will need to config firewall rules.
 - Find the **Firewall details** at the bottom right. Open it.
 
 Add the following rules.
-- ssh: port 22 
-- OpenZiti ports: 8440-8443 (default ports from quickstart)
+- ssh: port 22/TCP
+- OpenZiti ports: 8440-8443/TCP (default ports from quickstart)
 - Deny rules to deny all other traffic
 
 Make sure the firewall is active, it should display **Processing all rules** if it is active.
@@ -393,7 +405,7 @@ ssh root@<ip>
 ```
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
-- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
+- **export ZITI_CTRL_EDGE_IP_OVERRIDE="$(curl -s eth0.me)"**
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
@@ -407,7 +419,7 @@ ssh -i <private_key> ubuntu@<ip>
 
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
-- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
+- **export ZITI_CTRL_EDGE_IP_OVERRIDE="$(curl -s eth0.me)"**
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
