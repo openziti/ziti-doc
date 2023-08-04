@@ -6,7 +6,7 @@ sidebar_label: Controller
 
 import CliLogFormats from '../../_cli-log-levels-and-formats.md'
 
-This article provides some guidance for deploying a Ziti Controller. You can go back and read [the controller component introduction](../../learn/introduction/index.mdx#openziti-controller) if needed.
+This article provides some guidance for deploying a Ziti Controller. You can go back and read [the controller component introduction](../../learn/introduction/03-components.md#openziti-controller) if needed.
 
 ## Public Key Infrastructure
 
