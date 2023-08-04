@@ -287,6 +287,7 @@ const config = {
           src: 'img/ziti-logo-dark.svg',
           srcDark: 'img/ziti-logo-light.svg',
           href: 'https://ziti-doc-git-allow-landing-page-overwritten-openziti.vercel.app/',
+          target: "_self",
         },
         items: [
           {
