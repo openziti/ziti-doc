@@ -554,7 +554,7 @@ nslookup httpbin.ziti
 curl -sSf -XPOST -d ziti=awesome http://httpbin.ziti/post | jq .data
 ```
 
-Visit [http://httpbin.ziti/get](http://httpbin.ziti/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
+Visit [http://httpbin.miniziti/get](http://httpbin.miniziti/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
 
 ## Explore the OpenZiti Console
 
