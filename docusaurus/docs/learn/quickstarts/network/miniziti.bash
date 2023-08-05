@@ -32,7 +32,7 @@ _usage(){
             "   --verbose\t\tshow DEBUG messages\n"\
             "   --profile\t\tMINIKUBE_PROFILE (miniziti)\n"\
             "   --namespace\t\tZITI_NAMESPACE (MINIKUBE_PROFILE)\n"\
-            "   --no-dns\t\tdon't use local hosts DB or ingress-dns nameserver\n"\
+            "   --no-hosts\t\tdon't use local hosts DB or ingress-dns nameserver\n"\
             "\n DEBUG\n"\
             "   --charts\t\tZITI_CHARTS (openziti) alternative charts repo\n"\
             "   --now\t\teliminate safety waits, e.g., before deleting miniziti\n"\
@@ -65,7 +65,7 @@ deleteMiniziti(){
         logDebug "no integer param detected to deleteMiniziti(), using default wait time ${WAIT}s"
     fi
     (( SAFETY_WAIT )) && {
-        echo "WARN: deleting ${MINIKUBE_PROFILE} in ${WAIT}s" >&2
+        logWarn "deleting ${MINIKUBE_PROFILE} in ${WAIT}s" >&2
         sleep "$WAIT"
     }
     logInfo "waiting for ${MINIKUBE_PROFILE} to be deleted"
