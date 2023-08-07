@@ -286,6 +286,8 @@ const config = {
           alt: 'The OpenZiti logo, an open source zero trust network overlay',
           src: 'img/ziti-logo-dark.svg',
           srcDark: 'img/ziti-logo-light.svg',
+          href: '/',
+          target: "_self",
         },
         items: [
           {
