@@ -22,6 +22,8 @@ order at this time but should be at least roughly grouped :
 * markdown: __DO__ wrap lines or format lines ___you are adding___ Consider wrapping at around 120 chars
 * markdown: __DO NOT__ wrap lines for content ___you are not touching___
 * markdown: __DO NOT__ format or wrap lines for an entire file automatically
+* markdown: __DO__ add [front matter](https://docusaurus.io/docs/next/markdown-features#front-matter) to every markdown
+            page. __Most importantly__, `title` and `description` but optionally consider adding and `image`
 * format: __DO__ format an entire markdown and NOTHING else (if trying to format a document)
 * format: __DO NOT__ format an entire markdown __and change__ content, format content __ONLY__ and with agreement from others
 * links: __DO__ use relative path links to the actual markdown file (../../../docs/some/05-markdown.md)
