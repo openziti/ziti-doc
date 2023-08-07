@@ -112,13 +112,13 @@ if you prefer.
 * `ZITI_BROWZER_RUNTIME_HOTKEY`: the hotkey to activate the BrowZer settings dialog modal. default: alt+F12
 * `ZITI_CONTROLLER_HOST`: the "alternative" address for the OpenZiti controller. example: `ctrl.openziti.io`
 * `ZITI_CONTROLLER_PORT`: the port to find the OpenZiti controller at. example: `8441`
-* `ZITI_AGENT_LOGLEVEL`: the log level for the ziti-http-agent to log at. `trace|debug|info|warn|error`
-* `ZITI_AGENT_HOST`: the address the ziti-http-agent is available at. example: `browzer.openziti.io`
-* `ZITI_AGENT_LISTEN_PORT`: the port the ziti-http-agent is available at. example: `443`
-* `ZITI_AGENT_SCHEME`: the scheme to use to access the ziti-http-agent. `http|https` (https by default)
-* `ZITI_AGENT_CERTIFICATE_PATH`: the path to the certificate the ziti-http-agent presents to clients
-* `ZITI_AGENT_KEY_PATH`: the associated key for the ZITI_AGENT_CERTIFICATE_PATH
-* `ZITI_AGENT_TARGETS`: A json block representing the services to enable BrowZer for. __more on this below__
+* `ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL`: the log level for the ziti-http-agent to log at. `trace|debug|info|warn|error`
+* `ZITI_BROWZER_BOOTSTRAPPER_HOST`: the address the ziti-http-agent is available at. example: `browzer.openziti.io`
+* `ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT`: the port the ziti-http-agent is available at. example: `443`
+* `ZITI_BROWZER_BOOTSTRAPPER_SCHEME`: the scheme to use to access the ziti-http-agent. `http|https` (https by default)
+* `ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH`: the path to the certificate the ziti-http-agent presents to clients
+* `ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH`: the associated key for the ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH
+* `ZITI_BROWZER_BOOTSTRAPPER_TARGETS`: A json block representing the services to enable BrowZer for. __more on this below__
 
 ```bash
       NODE_ENV: production
@@ -126,18 +126,18 @@ if you prefer.
       ZITI_BROWZER_RUNTIME_HOTKEY: alt+F12
       ZITI_CONTROLLER_HOST: ${ZITI_CTRL_EDGE_ALT_ADVERTISED_ADDRESS}
       ZITI_CONTROLLER_PORT: ${ZITI_CTRL_EDGE_ADVERTISED_PORT}
-      ZITI_AGENT_LOGLEVEL: debug
-      ZITI_AGENT_HOST: ${ZITI_BROWZER_HTTP_AGENT_ADDRESS}
-      ZITI_AGENT_LISTEN_PORT: ${ZITI_AGENT_LISTEN_PORT}
-      ZITI_AGENT_SCHEME: https
-      ZITI_AGENT_CERTIFICATE_PATH: /etc/letsencrypt/live/your.fqdn.here/fullchain.pem
-      ZITI_AGENT_KEY_PATH: /etc/letsencrypt/live/your.fqdn.here/privkey.pem
-      ZITI_AGENT_TARGETS: __more on this below__
+      ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL: debug
+      ZITI_BROWZER_BOOTSTRAPPER_HOST: ${ZITI_BROWZER_HTTP_AGENT_ADDRESS}
+      ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT: ${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT}
+      ZITI_BROWZER_BOOTSTRAPPER_SCHEME: https
+      ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH: /etc/letsencrypt/live/your.fqdn.here/fullchain.pem
+      ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH: /etc/letsencrypt/live/your.fqdn.here/privkey.pem
+      ZITI_BROWZER_BOOTSTRAPPER_TARGETS: __more on this below__
 ```
 
 Set these values accordingly. Also shown is the reuse of certificates provisioned in this case by LetsEncrypt. BrowZer
-requires a wildcard certificate to be provisioned that aligns to the `ZITI_AGENT_HOST` value used. For example, if you had
-set `ZITI_AGENT_HOST=my.custom.network`, the certificate must be valid for `*.my.custom.network`
+requires a wildcard certificate to be provisioned that aligns to the `ZITI_BROWZER_BOOTSTRAPPER_HOST` value used. For example, if you had
+set `ZITI_BROWZER_BOOTSTRAPPER_HOST=my.custom.network`, the certificate must be valid for `*.my.custom.network`
 
 :::note
 If you use certbot/LetsEncrypt, the certificate created are probably permissioned to be accessable by root only.
@@ -183,19 +183,19 @@ docker run \
   --name ziti-http-agent \
   --rm -v /etc/letsencrypt:/etc/letsencrypt \
   --user "1000:2171" \
-  -p ${ZITI_AGENT_LISTEN_PORT}:${ZITI_AGENT_LISTEN_PORT} \
+  -p ${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT}:${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT} \
   -e NODE_ENV="${NODE_ENV}" \
-  -e ZITI_AGENT_LOGLEVEL="${ZITI_AGENT_LOGLEVEL}" \
+  -e ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL="${ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL}" \
   -e ZITI_BROWZER_RUNTIME_LOGLEVEL="${ZITI_BROWZER_RUNTIME_LOGLEVEL}" \
   -e ZITI_BROWZER_RUNTIME_HOTKEY="${ZITI_BROWZER_RUNTIME_HOTKEY}" \
   -e ZITI_CONTROLLER_HOST="${ZITI_CONTROLLER_HOST}" \
   -e ZITI_CONTROLLER_PORT="${ZITI_CONTROLLER_PORT}" \
-  -e ZITI_AGENT_HOST="${ZITI_AGENT_HOST}" \
-  -e ZITI_AGENT_SCHEME="${ZITI_AGENT_SCHEME}" \
-  -e ZITI_AGENT_CERTIFICATE_PATH="${ZITI_AGENT_CERTIFICATE_PATH}" \
-  -e ZITI_AGENT_KEY_PATH="${ZITI_AGENT_KEY_PATH}" \
-  -e ZITI_AGENT_LISTEN_PORT="${ZITI_AGENT_LISTEN_PORT}" \
-  -e ZITI_AGENT_TARGETS="${ZITI_AGENT_TARGETS}" \
+  -e ZITI_BROWZER_BOOTSTRAPPER_HOST="${ZITI_BROWZER_BOOTSTRAPPER_HOST}" \
+  -e ZITI_BROWZER_BOOTSTRAPPER_SCHEME="${ZITI_BROWZER_BOOTSTRAPPER_SCHEME}" \
+  -e ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH="${ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH}" \
+  -e ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH="${ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH}" \
+  -e ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT="${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT}" \
+  -e ZITI_BROWZER_BOOTSTRAPPER_TARGETS="${ZITI_BROWZER_BOOTSTRAPPER_TARGETS}" \
   ghcr.io/openziti/ziti-http-agent:latest
   
 ```
