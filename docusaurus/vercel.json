@@ -7,5 +7,5 @@
     },
     "cleanUrls": false,
     "public": true,
-    "ignoreCommand": "git diff --quiet main HEAD -- ../docusaurus/ ../gendoc.sh"
+    "ignoreCommand": "git diff --quiet origin/main HEAD -- ../docusaurus/ ../gendoc.sh"
 }
