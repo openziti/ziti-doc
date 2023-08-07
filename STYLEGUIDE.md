@@ -24,7 +24,7 @@ order at this time but should be at least roughly grouped :
 * markdown: __DO NOT__ format or wrap lines for an entire file automatically
 * markdown: __DO__ add [front matter](https://docusaurus.io/docs/next/markdown-features#front-matter) to every markdown
             page. __Most importantly__, `title` and `description` but optionally consider adding and `image`
-* format: __DO__ format an entire markdown and NOTHING else (if trying to format a document)
+* format: __DO__ format an entire markdown and NOTHING else (do not reformat and change content!)
 * format: __DO NOT__ format an entire markdown __and change__ content, format content __ONLY__ and with agreement from others
 * links: __DO__ use relative path links to the actual markdown file (../../../docs/some/05-markdown.md)
 * links: __DO NOT__ use fully qualified links pointing to the docs (https://openziti.io/...)
