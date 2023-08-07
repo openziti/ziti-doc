@@ -35,7 +35,7 @@ ziti edge enroll \
     --out ${identity_config_file}
 ```
 
-:::warn
+:::caution
 The output from the `ziti` CLI is a permanent identity configuration file which
 must be stored securely. This file contains within it the private key that backs
 the certificate issued by the Ziti Controller.  This file should not be
