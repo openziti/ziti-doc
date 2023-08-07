@@ -39,7 +39,8 @@ order at this time but should be at least roughly grouped :
            pain to fix). This is done _specifically_ to allow the file system to reflect the view on site.
 * sidebar: __DO__ add a landing page to any sidebar groups via `_category_.json`. Example:
            `"link": { "type": "doc", "id": "reference/tunnelers/index" }`
-
+* diagrams: __DO__ use `mermaid` in-line fencing instead of images or links to `mermaid.ink`
+* 
 ## Types of Doc
 
 We try to adhere to the system presented at [documentation.divio.com](https://documentation.divio.com/introduction/).
