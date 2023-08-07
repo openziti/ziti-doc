@@ -7,5 +7,5 @@
     },
     "cleanUrls": false,
     "public": true,
-    "ignoreCommand": "git diff --quiet HEAD@{9} HEAD -- ../docusaurus/ ../gendoc.sh"
+    "ignoreCommand": "bash -x ../vercel-ignore.sh"
 }
