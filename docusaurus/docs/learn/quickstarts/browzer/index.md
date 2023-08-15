@@ -3,7 +3,7 @@ title: BrowZer
 ---
 
 BrowZer is a set of technologies which is capable of bootstrapping zero trust connectivity entirely in a browser,
-and withouth client-side software installation! To enable BrowZer on your OpenZiti Network the `ziti-http-agent (name tbd)`
+and without the need to install any client-side software! To enable BrowZer on your OpenZiti Network the `ziti-browzer-bootstrapper`
 will need to be deployed. This guide will show you how to deploy BrowZer to your own overlay.
 
 ## Prerequisites
@@ -31,7 +31,7 @@ concepts you will want to understand are:
 ## Configuring the OpenZiti Network
 
 With the OIDC information in hand, the next step is to actually configure OpenZiti to allow the delegation of authentication.
-To do this youwill need to:
+To do this you will need to:
 
 * create an [external jwt signer](../../../../docs/learn/core-concepts/security/authentication/50-external-jwt-signers.md)
 * create an [authentication policy](../../../../docs/learn/core-concepts/security/authentication/authentication-policies)
@@ -59,7 +59,7 @@ ziti edge create ext-jwt-signer \
 
 ### Creating the Authentication Policy
 
-Authentication policy configure the OpenZiti Network to delegate authentication one or more OIDC providers. To
+Authentication policies configure the OpenZiti Network to delegate authentication one or more OIDC providers. To
 create the authentication policy you only need the id of the external jwt signer (from above). Shown below is a `bash` 
 example. Replace the values accordingly. Capture the returned identity, it will be necessary after creating the external
 jwt signer:
@@ -84,7 +84,7 @@ ziti edge create auth-policy \
 ### Associate Identities to the Authentication Policy
 
 With an auth policy created and associated to the external jwt signer, you are now ready to create or modify identities
-with this new authentication policy. To allow a given identity to be enabled for BrowZer, you will need to first
+to use this new authentication policy. To allow a given identity to be enabled for BrowZer, you will need to first
 update (or create) the identity with an `externalId` and you will need to associate the identity with the authentication
 policy.
 
@@ -102,21 +102,20 @@ ziti edge create identity user "${identity_name}" \
 
 ## Running the Ziti BrowZer Bootstrapper
 
-Running the Ziti BrowZer Bootstrapper can be done directly using NodeJS or with a container engine such as docker. Either
+Running the Ziti BrowZer Bootstrapper can be done directly using NodeJS or with a container engine such as Docker. Either
 way you choose to run it, you will need to establish some environment variables. If you are using NodeJS, you'll `export`
-them. For Docker-based running, you can eitehr reference the environment variables (shown below) or use a `.env` file
-if you prefer.
+them. To run using Docker, you can either reference the environment variables (shown below) or use an `.env` file.
 
 * `NODE_ENV`: controls if the environment is `production` or `development`
 * `ZITI_BROWZER_RUNTIME_LOGLEVEL`: the log level for the Ziti BrowZer Runtime (ZBR) to use. `trace|debug|info|warn|error`
 * `ZITI_BROWZER_RUNTIME_HOTKEY`: the hotkey to activate the BrowZer settings dialog modal. default: alt+F12
 * `ZITI_CONTROLLER_HOST`: the "alternative" address for the OpenZiti controller. example: `ctrl.openziti.io`
 * `ZITI_CONTROLLER_PORT`: the port to find the OpenZiti controller at. example: `8441`
-* `ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL`: the log level for the ziti-http-agent to log at. `trace|debug|info|warn|error`
-* `ZITI_BROWZER_BOOTSTRAPPER_HOST`: the address the ziti-http-agent is available at. example: `browzer.openziti.io`
-* `ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT`: the port the ziti-http-agent is available at. example: `443`
-* `ZITI_BROWZER_BOOTSTRAPPER_SCHEME`: the scheme to use to access the ziti-http-agent. `http|https` (https by default)
-* `ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH`: the path to the certificate the ziti-http-agent presents to clients
+* `ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL`: the log level for the ziti-browzer-bootstrapper to log at. `trace|debug|info|warn|error`
+* `ZITI_BROWZER_BOOTSTRAPPER_HOST`: the address the ziti-browzer-bootstrapper is available at. example: `browzer.openziti.io`
+* `ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT`: the port the ziti-browzer-bootstrapper is available at. example: `443`
+* `ZITI_BROWZER_BOOTSTRAPPER_SCHEME`: the scheme to use to access the ziti-browzer-bootstrapper. `http|https` (https by default)
+* `ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH`: the path to the certificate the ziti-browzer-bootstrapper presents to clients
 * `ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH`: the associated key for the ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH
 * `ZITI_BROWZER_BOOTSTRAPPER_TARGETS`: A json block representing the services to enable BrowZer for. __more on this below__
 
@@ -140,7 +139,7 @@ requires a wildcard certificate to be provisioned that aligns to the `ZITI_BROWZ
 set `ZITI_BROWZER_BOOTSTRAPPER_HOST=my.custom.network`, the certificate must be valid for `*.my.custom.network`
 
 :::note
-If you use certbot/LetsEncrypt, the certificate created are probably permissioned to be accessable by root only.
+If you use Certbot/LetsEncrypt, the certificate created is likely to be accessible by root only.
 You will need to modify the folder/files accordingly. 
 accordingly.
 :::
@@ -151,9 +150,9 @@ Once the environment variables are set, to start the Ziti BrowZer Bootstrapper p
 
 * clone the repository and checkout the desired tag/version. `main` should be fine:
     ```
-    git clone https://github.com/openziti/ziti-http-agent.git $ZITI_HOME/ziti-http-agent
+    git clone https://github.com/openziti/ziti-browzer-bootstrapper.git $ZITI_HOME/ziti-browzer-bootstrapper
     ```
-* cd to the cloned location: `cd $ZITI_HOME/ziti-http-agent`
+* cd to the cloned location: `cd $ZITI_HOME/ziti-browzer-bootstrapper`
 * ensure the proper version of node and yarn are installed and run yarn install: `yarn install`
 * start the node server:
     ```
@@ -164,25 +163,25 @@ Once the environment variables are set, to start the Ziti BrowZer Bootstrapper p
 
 Running the Ziti BrowZer Bootstrapper using Docker is similar to running with NodeJS. Establish the environment variables
 then run the agent with a command as shown. Note that this is running in the foreground. It's up to you to decide to put
-this into daemon mode, to use docker compose, etc.
+this into daemon mode, to use `docker compose`, etc.
 
 :::note
 To work around the LetsEncrypt issue mentioned above (the certs only visible to root), this example explicitly sets the
---user the container runs as. Shown is using a group id of 2171. Not shown was the establishment of this group prior to
-running in docker. On the host os, a group was added using a command such as: `sudo groupadd -g 2171 zitiweb`. Then the
+--user the container runs as to a group id of 2171. Not shown was the creation of this group prior to running in Docker.
+In the Docker host OS, a group was added using a command such as: `sudo groupadd -g 2171 zitiweb`. Then the
 LetsEncrypt folder containing the certificates/keys was chown'ed: `sudo chown -R root:zitiweb /etc/letsencrypt/`.
-This allows the docker container that will run the bootstrapper to access the files
+This allows the Docker container that will run the bootstrapper to access the files
 
-Understanding the exact mechanics of why/how this works is beyond the scope of this page and is more relevant to linux/docker
+Understanding the exact mechanics of why/how this works is beyond the scope of this page and is more relevant to Linux/Docker
 system administration.
 :::
 
 ### Example Docker Command
 ```bash
 docker run \
-  --name ziti-http-agent \
+  --name ziti-browzer-bootstrapper \
   --rm -v /etc/letsencrypt:/etc/letsencrypt \
-  --user "1000:2171" \
+  --user "${UID}:2171" \
   -p ${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT}:${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT} \
   -e NODE_ENV="${NODE_ENV}" \
   -e ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL="${ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL}" \
@@ -196,6 +195,5 @@ docker run \
   -e ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH="${ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH}" \
   -e ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT="${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT}" \
   -e ZITI_BROWZER_BOOTSTRAPPER_TARGETS="${ZITI_BROWZER_BOOTSTRAPPER_TARGETS}" \
-  ghcr.io/openziti/ziti-http-agent:latest
-  
+  ghcr.io/openziti/ziti-browzer-bootstrapper:latest
 ```

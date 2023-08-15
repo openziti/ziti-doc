@@ -5,15 +5,15 @@ import MDXComponents from '@theme-original/MDXComponents';
 import Details from '@theme/MDXComponents/Details';
 import Code from '@theme/MDXComponents/Code';
 
-This page will demonstrate adding BrowZer to an existing OpenZiti overlay network that was started using the
-["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md). It will use Ubuntu linux as well, if
-your linux distribution is different, change the commands accordingly.
+This page will demonstrate adding BrowZer to an existing OpenZiti Network that was started using the
+["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md). It will use Ubuntu Linux as well, if
+your Linux distribution is different, change the commands accordingly.
 
 ### Get the Wildcard Certificate
 
 First, to obtain the needed wildcard certificate, I used Docker to run Certbot. 
-Following the instructions [on the certbot site](https://eff-certbot.readthedocs.io/en/stable/install.html),
-I was able a wildcard certificate key/pair from LetsEncrypt for my domain using the
+Following the instructions [on the Certbot site](https://eff-certbot.readthedocs.io/en/stable/install.html),
+I was able a wildcard certificate from LetsEncrypt for my domain using the
 [DNS challenge method](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). For this example, I am using
 the domain: `hostitanywhere.demo.openziti.org`.
 
@@ -39,7 +39,7 @@ sudo docker run -it --rm --name certbot \
 
 ### Enable Certificate Access by Specific Users
 
-Since certbot will make the files available to root only (a good practice) we want to give specific users the
+Since Certbot will make the files available to root only (a good practice) we want to give specific users the
 ability to read the files.  To do that we'll make a new group and a new user with UID 2171 and GID 2171. As shown below,
 we are making a group named `zitiweb`, adding our user to that group so that "we" can see the files for debugging or
 other purposes and then making a `ziggy` user that can also read these files should we want/need that later. Please
@@ -50,14 +50,16 @@ plan accordingly here. This is just a reasonable example to follow to get you go
 
 ```bash
 sudo groupadd -g 2171 zitiweb
-sudo useradd -u 2171 -s /bin/bash ziggy
+sudo useradd -u 2171 -s /bin/nologin ziggy
 sudo usermod -aG zitiweb ziggy
 sudo usermod -aG zitiweb $USER
 sudo chown -R root:zitiweb /etc/letsencrypt/
-sudo chmod -R g+rx /etc/letsencrypt/
+sudo chmod -R g+rX /etc/letsencrypt/
 ```
 
-Log out of the shell and log back in again to gain access to the certs (notice we need to reset the wildcard_url):
+If needed, enable the new group permissions on the current shell by executing `exec $SHELL` or by loggin out of
+the currently active shell and logging back in again. Ensure the `wildcard_url` variable is set correctly and
+verify access to the certificates:
 ```bash
 wildcard_url="hostitanywhere.demo.openziti.org"
 ls -l /etc/letsencrypt/live/${wildcard_url}/*
@@ -245,6 +247,9 @@ createService
 ```
 
 ### Associate/Update Identities with the Auth Policy
+
+WIP: explain this a bit or remove it.
+* must match the value defined by the OIDC Provider
 
 ```bash
 ZITI_BROWZER_IDENTITIES="clint.dovholuk@netfoundry.io curt.tudor@netfoundry.io"
