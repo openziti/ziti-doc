@@ -405,7 +405,7 @@ ssh root@<ip>
 ```
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
-- **export ZITI_CTRL_EDGE_IP_OVERRIDE="$(curl -s eth0.me)"**
+- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
@@ -419,7 +419,7 @@ ssh -i <private_key> ubuntu@<ip>
 
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
-- **export ZITI_CTRL_EDGE_IP_OVERRIDE="$(curl -s eth0.me)"**
+- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
 
 This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
