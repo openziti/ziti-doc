@@ -12,6 +12,7 @@ import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
 import GitHubButton from "react-github-btn";
 import StarUs from "../../components/StarUs";
+import StepperWizard from '../../components/StepperWizard';
 export default function Layout(props) {
   const {
     children,

@@ -17,11 +17,11 @@ display-flex,
 }
 
 .bg-img-1 {
-  background: url("./images/bg-img-01.jpg") center center/cover no-repeat;
+  background: url("../images/bg-img-01.jpg") center center/cover no-repeat;
 }
 
 .whitez {
-  background: url("./images/whitez.svg");
+  background: url("../images/whitez.svg");
   background-position: center;
   background-size: 55px;
   background-repeat: no-repeat;
@@ -976,7 +976,9 @@ code.prettyprint {
 pre.prettyprint {
   margin: 1em auto !important;
   padding: 1em !important;
-  white-space: pre-line !important;
+  white-space: pre !important;
+  max-width: 915px;
+  overflow: scroll;
 }
 
 
@@ -1100,28 +1102,28 @@ code {
 }
 
 .builderbutton.local {
-  background-image: url("./images/local.png");
+  background-image: url("../images/local.png");
   background-position: center;
   background-size: 135px;
   background-repeat: no-repeat;
 }
 
 .builderbutton.docker {
-  background-image: url("./images/docker.png");
+  background-image: url("../images/docker.png");
   background-position: center;
   background-size: 135px;
   background-repeat: no-repeat;
 }
 
 .builderbutton.compose {
-  background-image: url("./images/compose.png");
+  background-image: url("../images/compose.png");
   background-position: center;
   background-size: 135px;
   background-repeat: no-repeat;
 }
 
 .builderbutton.server {
-  background-image: url("./images/server.png");
+  background-image: url("../images/server.png");
   background-position: center;
   background-size: 135px;
   background-repeat: no-repeat;
@@ -1152,4 +1154,11 @@ code {
   display: inline-block;
   margin-right: -15px;
   margin-left: -15px;
+}
+
+.scroll-container {
+  overflow: scroll;
+  width: 100%;
+  height: 585px;
+  display: block;
 }

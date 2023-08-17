@@ -10,6 +10,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'OpenZiti',
   tagline: 'Replacing Infrastructure With Software',
+  staticDirectories: ["public", "static"],
   url: 'https://docs.openziti.io/',
   baseUrl: '/',
   trailingSlash: undefined,

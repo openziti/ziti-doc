@@ -5,7 +5,8 @@ import {WhatIsOpenZiti} from "../components/SharedComponents";
 import Link from '@docusaurus/Link';
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from "./index.module.css"
+import styles from "./index.module.css";
+import StepperWizard from '../components/StepperWizard';
 import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
 
 export function Highlight(props) {
@@ -132,6 +133,10 @@ export default function Home() {
                 </div>
             </OpenZitiHorizontalSection>
 
+
+
+
+
             <OpenZitiHorizontalSection style={{backgroundColor: "var(--landing-banner-1)"}}>
                 <H1>What is OpenZiti?</H1>
                 <p>
@@ -189,6 +194,9 @@ export default function Home() {
                 </div>
 
             </OpenZitiHorizontalSection>
+            
+            <StepperWizard/>
+
             <OpenZitiHorizontalSection style={{backgroundColor: "var(--background-color-1)"}}>
                 <H1 id="build-a-network">Get Started - Build a Network</H1>
                 <p>Ziti make zero trust easy but you'll need an overlay network in order to start on your zero trust
