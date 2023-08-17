@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 
 export default function Stepper() {
     const { hash } = useLocation();
-    console.log(hash);
     return (
         <Wizard hash={hash.substr(1)}></Wizard>
     )

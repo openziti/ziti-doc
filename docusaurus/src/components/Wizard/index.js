@@ -28,7 +28,6 @@ export default function Wizard(props) {
     }
 
     function next() {
-        console.log("Call Next");
         let current = index;
         current++;
         if (current>total) current = total-1;
@@ -37,7 +36,6 @@ export default function Wizard(props) {
     }
 
     function previous() {
-        console.log("Call Prev");
         let current = index;
         current--;
         if (current<0) current = 0;
