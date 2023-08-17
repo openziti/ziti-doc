@@ -50,7 +50,7 @@ plan accordingly here. This is just a reasonable example to follow to get you go
 
 ```bash
 sudo groupadd -g 2171 zitiweb
-sudo useradd -u 2171 -s /bin/nologin ziggy
+sudo useradd -u 2171 -M ziggy
 sudo usermod -aG zitiweb ziggy
 sudo usermod -aG zitiweb $USER
 sudo chown -R root:zitiweb /etc/letsencrypt/
@@ -69,7 +69,10 @@ ls -l /etc/letsencrypt/live/${wildcard_url}/*
 
 ### Install a new OpenZiti Network
 
-In this example, we'll deploy a brand new OpenZiti Network by following the steps outlined in the "host it anywhere"
+This examplerelies
+
+
+we'll deploy a brand new OpenZiti Network by following the steps outlined in the ["host it anywhere"](../../network/hosted.md)
 quickstart with __one important exception__! 
 
 <Details>
@@ -122,7 +125,7 @@ vi $ZITI_HOME/${ZITI_NETWORK}-edge-router.yaml
 ```
 
 Locate the "binding" section, and add a section that looks like this. Make sure to change the `address` and `advertise`
-fields accordingly:
+fields accordingly to fit your `${wildcard_url}` value:
 ```bash
   - binding: edge
     address: wss:0.0.0.0:8447
@@ -148,6 +151,8 @@ sudo systemctl restart ziti-router
 
 ## Create a BrowZer env File
 
+you'll need your auth0/idp client
+
 ```bash
 
 # start http agent
@@ -165,7 +170,7 @@ export ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT=8446
 export ZITI_BROWZER_SERVICE=brozac
 export ZITI_BROWZER_VHOST=${ZITI_BROWZER_SERVICE}.${wildcard_url}
 export ZITI_BROWZER_OIDC_URL=https://dev-b2q0t23rxctngxka.us.auth0.com
-export ZITI_BROWZER_CLIENT_ID=e1elIVoWGxxkBuMjpfG5GW5QD61oUuBG
+export ZITI_BROWZER_CLIENT_ID=v1pzFNuqX8R4EKyqzhtC4duJ1QNIfQ1K
 
 export ZITI_BROWZER_BOOTSTRAPPER_TARGETS="$(cat <<HERE
   {
@@ -217,7 +222,7 @@ echo "OIDC jwks url : $jwks"
 ext_jwt_signer=$(ziti edge create ext-jwt-signer "${ziti_object_prefix}-ext-jwt-signer" "${issuer}" --jwks-endpoint "${jwks}" --audience "${ZITI_BROWZER_CLIENT_ID}" --claims-property email)
 echo "ext jwt signer id: $ext_jwt_signer"
 
-auth_policy=$(ziti edge create auth-policy ${ziti_object_prefix}-auth-policy --primary-ext-jwt-allowed --primary-ext-jwt-allowed-signers ${ext_jwt_signer})
+auth_policy=$(ziti edge create auth-policy "${ziti_object_prefix}-auth-policy" --primary-ext-jwt-allowed --primary-ext-jwt-allowed-signers ${ext_jwt_signer})
 echo "auth policy id: $auth_policy"
 ```
 
@@ -268,11 +273,11 @@ ziti edge update identity "${ZITI_ROUTER_NAME}" -a "${ZITI_BROWZER_SERVICE}.bind
 ```bash
 
 # clone repo:
-git clone https://github.com/openziti/ziti-http-agent.git $ZITI_HOME/ziti-http-agent
+git clone https://github.com/openziti/ziti-browzer-bootstrapper.git $ZITI_HOME/ziti-browzer-bootstrapper
 
 # cd to repo path
 
-cd $ZITI_HOME/ziti-http-agent
+cd $ZITI_HOME/ziti-browzer-bootstrapper
 
 # install yarn if needed
 sudo npm install --global yarn
