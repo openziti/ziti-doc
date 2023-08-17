@@ -4,24 +4,35 @@ title: Example Enabling BrowZer
 import MDXComponents from '@theme-original/MDXComponents';
 import Details from '@theme/MDXComponents/Details';
 import Code from '@theme/MDXComponents/Code';
+import Highlight from "/src/components/OpenZitiHighlight";
 
 This page will demonstrate adding BrowZer to an existing OpenZiti Network that was started using the
 ["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md). It will use Ubuntu Linux as well, if
 your Linux distribution is different, change the commands accordingly.
 
+### Before you Begin
+
+This guide will use BASH. If you're using a different shell, it's up to you to translate any commands that don't work
+correctly (or run a BASH shell). This guide will expect you have set a variable named `wildcard_url` which represents
+the root domain you want to enable BrowZer with. For this example, this guide uses and references this value 
+for the `wildcard_url=browzerexample.demo.openziti.org`. <Highlight style={{fontWeight: "bold"}}>(Make sure you set 
+this value)</Highlight>
+
+
 ### Get the Wildcard Certificate
 
-First, to obtain the needed wildcard certificate, I used Docker to run Certbot. 
-Following the instructions [on the Certbot site](https://eff-certbot.readthedocs.io/en/stable/install.html),
-I was able a wildcard certificate from LetsEncrypt for my domain using the
-[DNS challenge method](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). For this example, I am using
-the domain: `hostitanywhere.demo.openziti.org`.
+First, to obtain the a wildcard certificate, I used Docker to run [Certbot](https://certbot.eff.org/). 
+On the Certbot site there are instructions illustrating how to use Certbot. I chose to use Docker to run Certbot
+instead of having to install Certbot on the machine. I was able a wildcard certificate from LetsEncrypt for the
+`${wildcard_url}` domain using the [DNS challenge method](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).  Also notice that Certbot can contact you as a 
+reminder that your certificates are expiring. LetsEncrypt certs are only valid for 90 days, if you follow these
+instructions remember that and plan on rotating the certs often. Set `your_email` as shown below and obtain
+certificates from LetsEncrypt now:
 
 <Details>
 <summary>Run Certbot via Docker</summary>
 
 ```
-wildcard_url="hostitanywhere.demo.openziti.org"
 your_email="your.email@someserver.com"
 sudo docker run -it --rm --name certbot \
   -v "/etc/letsencrypt:/etc/letsencrypt" \
@@ -39,14 +50,22 @@ sudo docker run -it --rm --name certbot \
 
 ### Enable Certificate Access by Specific Users
 
-Since Certbot will make the files available to root only (a good practice) we want to give specific users the
-ability to read the files.  To do that we'll make a new group and a new user with UID 2171 and GID 2171. As shown below,
-we are making a group named `zitiweb`, adding our user to that group so that "we" can see the files for debugging or
-other purposes and then making a `ziggy` user that can also read these files should we want/need that later. Please
-plan accordingly here. This is just a reasonable example to follow to get you going, change it to suit your needs.
+Certbot will make the files it creates available to root only (a good practice). If you run your network as root, this
+you'll have no problems but generally, it's a better practice to not run as root when you don't need to. In order to run
+this example as "us" (not the root user) we'll need to grant specific users the ability to read the files.  
+
+A flexible way to allow other processes to use/access these files is to make a new group and a new user, that is what
+is shown below. In linux, groups and users are assigned ids. 2171 looks like "ziti" so we'll use UID 2171 and GID 2171.
+The example below will make a new group named `zitiweb`. This group will then be granted ownership of the `letsencrypt`
+folder via chown. Changing the ownership of the files to the group will allow any user in that group the ability to read
+these files so be careful granting this group to users. Then we'll add the user we are currently logged in with to that 
+group so that "we" can see the files for debugging or other purposes. Finally, we'll make a `ziggy` user that is also in
+this group so that if we want to, we can run processes as ziggy. Please plan accordingly here. This is just a reasonable 
+example to follow to get you going, change it to suit your needs and do not take this example as authoritative. There
+are many ways to solve this problem, it's up to you to pick 'the best' way.
 
 <Details>
-<summary>An Example of Changing LetsEncrypt Permissions</summary>
+<summary>Example Changing LetsEncrypt Permissions</summary>
 
 ```bash
 sudo groupadd -g 2171 zitiweb
@@ -57,12 +76,19 @@ sudo chown -R root:zitiweb /etc/letsencrypt/
 sudo chmod -R g+rX /etc/letsencrypt/
 ```
 
-If needed, enable the new group permissions on the current shell by executing `exec $SHELL` or by loggin out of
-the currently active shell and logging back in again. Ensure the `wildcard_url` variable is set correctly and
-verify access to the certificates:
+You will want to enable the new group permissions in the current shell. Log out of your current session and log back
+in again. Doing so will enable the new group permission in your shell. After, set the `wildcard_url` variable again.
+Once set, verify you can access to the certificates:
 ```bash
-wildcard_url="hostitanywhere.demo.openziti.org"
 ls -l /etc/letsencrypt/live/${wildcard_url}/*
+```
+You will see files that look something like this:
+```bash
+total 16
+-rw-r-xr-- 1 root zitiweb  740 Jul 19 22:48 README
+drwxr-xr-x 2 root zitiweb 4096 Aug 17 21:12 browzerexample.demo.openziti.org
+drwxr-xr-x 2 root zitiweb 4096 Jul 19 22:48 hostitanywhere.demo.openziti.org
+drwxr-xr-x 2 root zitiweb 4096 Aug 15 18:11 zititv.demo.openziti.org
 ```
 
 </Details>
@@ -81,10 +107,9 @@ quickstart with __one important exception__!
 Since we have just obtained some LetsEncrypt certificates, we'll enable OpenZiti with
 [Alternative Server Certs](../../../../guides/alt-server-certs.md) __immediately__! To do that we'll set two new variables
 introduced with v0.29.0. Notice that the `${wildcard_url}` variable needs to be set if it's not already set. Shown here
-is the domain: `hostitanywhere.demo.openziti.org`:
+is the domain: `browzerexample.demo.openziti.org`:
 
 ```bash
-wildcard_url="hostitanywhere.demo.openziti.org"
 export ZITI_PKI_ALT_SERVER_CERT="/etc/letsencrypt/live/${wildcard_url}/fullchain.pem"
 export ZITI_PKI_ALT_SERVER_KEY="/etc/letsencrypt/live/${wildcard_url}/privkey.pem"
 ```
@@ -130,7 +155,7 @@ fields accordingly to fit your `${wildcard_url}` value:
   - binding: edge
     address: wss:0.0.0.0:8447
     options:
-      advertise: ws.hostitanywhere.demo.openziti.org:8447
+      advertise: ws.browzerexample.demo.openziti.org:8447
       connectTimeoutMs: 5000
       getSessionTimeout: 60
 ```
