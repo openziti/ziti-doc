@@ -200,7 +200,7 @@ docker run \
   ghcr.io/openziti/ziti-browzer-bootstrapper:latest
 ```
 
-## Enabling Browzer with Systemd
+## Enabling BrowZer with Systemd
 
 If you want the BrowZer Bootstrap Agent to start when the machine starts or if the process fails for some reason
 and you have [systemd](https://en.wikipedia.org/wiki/Systemd) on your system, you can enable the BrowZer Bootstrap Agent 
@@ -215,7 +215,7 @@ Ziti BrowZer Bootstrapper systemd file written to: /home/ubuntu/.ziti/quickstart
 
 Once created, you can copy that file and `enable` the unit with systemd:
 ```bash
-createZacSystemdFile
+createBrowZerSystemdFile
 sudo cp "${ZITI_HOME}/browzer-bootstrapper.service" /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable --now browzer-bootstrapper

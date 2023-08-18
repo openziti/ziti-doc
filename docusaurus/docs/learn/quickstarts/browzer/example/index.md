@@ -132,12 +132,11 @@ export ZITI_PKI_ALT_SERVER_KEY="/etc/letsencrypt/live/${wildcard_url}/privkey.pe
 ```
 </Details>
 
-<Details>
-<summary>Install the OpenZiti Network</summary>
-With the `ZITI_PKI_ALT_*` environment variables set, we are ready to follow the 
-["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md) instructions. 
-</Details>
+#### Install the OpenZiti Network
 
+With the `ZITI_PKI_ALT_*` environment variables set, we are ready to follow the 
+__["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md)__ instructions.  Run the quickstart
+and return here when complete.
 
 <Details>
 <summary>Verify the OpenZiti Network is Listening</summary>
@@ -225,7 +224,7 @@ configure Auth0 to be the BrowZer OIDC provider.
 
 * Begin by signing up and authenticating to Auth0.
 * Follow the 'vanillajs' quickstart from Auth0: https://auth0.com/docs/quickstart/spa/vanillajs/interactive
-* Configure the Callback URLs, Logout URLs and Allowed Web Origins. Replace the values accordingly, for me, I used:
+* Configure the Callback URLs and Logout URLs. Replace the values accordingly, for me, I used:
   the value `https://*.browzerexample.demo.openziti.org:8446`
 
 ---
@@ -322,8 +321,8 @@ created.
 <summary>Install BrowZer</summary>
 
 BrowZer is ready to be installed. The [main BrowZer page](../index.md) has two sections showing you how to
-install BrowZer either by [cloning from GitHub](http://localhost:3000/docs/learn/quickstarts/browzer/#cloning-from-github)
-or by [Running via Docker](http://localhost:3000/docs/learn/quickstarts/browzer/#cloning-from-github). I have
+install BrowZer either by [cloning from GitHub](../index.md#cloning-from-github)
+or by [Running via Docker](../index.md#running-via-docker). I have
 used the "clone" approach to run my BrowZer (and ZAC).
 
 Follow one of those methods and ensure BrowZer is up and running.
@@ -432,7 +431,7 @@ learn/explore/understand how the OIDC provider you're using works. It's out of s
 that sort of insight. Set a variable named `ZITI_BROWZER_IDENTITIES` and assign it an email address you plan to use:
 
 ```bash
-ZITI_BROWZER_IDENTITIES="clint.dovholuk@netfoundry.io"
+ZITI_BROWZER_IDENTITIES="clint.dovholuk@company.name"
 ```
 
 After create a __space__ delimited list (one value/email is fine too), copy and paste the following command:
