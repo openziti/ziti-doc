@@ -68,6 +68,30 @@ changes to the target application.
 
 Read more about [clients](../core-concepts/clients/choose.mdx)
 
+### OpenZiti BrowZer
+
+BrowZer is a set of optional components which facilitate the bootstrapping of trust
+in a web browser **without** the need for client-side installations. This means there is no
+need to install an extension in web browsers, nor is there a need to install one of the
+OpenZiti Mobile/Desktop Edge clients!
+
+It enables automatic embedding of zero trust networking into a web application, thus
+transforming a web browser (e.g. Chrome, Brave, or Edge) into a full-fledged OpenZiti client.
+The only software users need is the ubiquitous browser they already use every day.
+
+Also noteworthy, is that BrowZer places no burden upon web application developers to first
+instrument or otherwise make any modifications to the web application itself in order to
+enable secure remote access.
+
+BrowZer enables operating a web app licensed from a 3rd party and protecting it without the
+need for making alterations to it. Similarly, if the web app can be modified, but it is not
+desirable to do so, BrowZer allows OpenZiti to protect those apps as well. The BrowZer Bootstrapper
+does the necessary instrumentation of the web application automatically, on the fly, as it
+is being loaded from the web server to the user's browser.
+
+To enable BrowZer in a given OpenZiti Network, it must be configured. For information
+on how to add BrowZer to an OpenZiti Network, follow [the BrowZer quickstart guide](../quickstarts/browzer/index.md)
+
 ## Logical Components
 
 Once the OpenZiti Network is established and deployed the next step

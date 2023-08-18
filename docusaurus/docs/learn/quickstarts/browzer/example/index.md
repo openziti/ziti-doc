@@ -1,0 +1,491 @@
+---
+title: Example Enabling BrowZer 
+---
+import MDXComponents from '@theme-original/MDXComponents';
+import Details from '@theme/MDXComponents/Details';
+import Code from '@theme/MDXComponents/Code';
+import Highlight from "/src/components/OpenZitiHighlight";
+import ReactPlayer from 'react-player'
+
+This page will demonstrate adding BrowZer to an existing OpenZiti Network that was started using the
+["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md). It will use Ubuntu Linux as well, if
+your Linux distribution is different, change the commands accordingly. The August 18 2023 Ziti TV features a full 
+walkthrough and explanation of this whole page. If you are interested in watching a narrated and explained run
+through of this page, watch the video and follow along with the doc here.
+
+<ReactPlayer playing controls url='https://youtu.be/ZPkOQbVEnW0?t=816' />
+
+### Before you Begin
+
+This guide will use BASH. If you're using a different shell, it's up to you to translate any commands that don't work
+correctly (or run a BASH shell). This guide will expect you have set a variable named `wildcard_url` which represents
+the root domain you want to enable BrowZer with. For this example, this guide uses and references this value 
+for the `wildcard_url=browzerexample.demo.openziti.org`. <Highlight style={{fontWeight: "bold"}}>(Make sure you set 
+this value)</Highlight>
+
+This quickstart will use [Docker](https://www.docker.com/) to obtain a wildcard certificate. You'll need to be
+familiar with Docker and have it installed to proceed, or you'll need to figure out alternative ways to obtain
+a wildcard certificate.
+
+If you already have an existing OpenZiti Network, you'll likely want to skim through this document and pick out the
+sections that are relevant to your configuration.
+
+If you lose your shell, one or more important variables may be lost. It is probably easiest to start again and follow
+this guide, or you will need to ensure the variables are reset in the shell.
+
+BrowZer also leverages an OIDC provider. Configuring and picking an OIDC provider are topics largely out of scope
+for this document. This example will choose to use a provider that can delegate to other providers, hopefully making
+it simple to follow this guide. We'll be using [Auth0](https://auth0.com) in this guide. 
+
+---
+
+### Get a Wildcard Certificate
+
+First, to obtain the a wildcard certificate, I used Docker to run [Certbot](https://certbot.eff.org/). 
+On the Certbot site there are instructions illustrating how to use Certbot. I chose to use Docker to run Certbot
+instead of having to install Certbot on the machine. I was able a wildcard certificate from LetsEncrypt for the
+`${wildcard_url}` domain using the [DNS challenge method](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).  Also notice that Certbot can contact you as a 
+reminder that your certificates are expiring. LetsEncrypt certs are only valid for 90 days, if you follow these
+instructions remember that and plan on rotating the certs often. Set `your_email` as shown below and obtain
+certificates from LetsEncrypt now:
+
+<Details>
+<summary>Run Certbot via Docker</summary>
+
+```
+your_email="your.email@someserver.com"
+sudo docker run -it --rm --name certbot \
+  -v "/etc/letsencrypt:/etc/letsencrypt" \
+  -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+  certbot/certbot certonly -d "*.${wildcard_url}" \
+                  --manual \
+                  --preferred-challenges dns \
+                  --email "${your_email}" \
+                  --agree-tos
+```
+
+</Details>
+
+---
+
+### Enable Certificate Access by Specific Users
+
+Certbot will make the files it creates available to root only (a good practice). If you run your network as root, this
+you'll have no problems but generally, it's a better practice to not run as root when you don't need to. In order to run
+this example as "us" (not the root user) we'll need to grant specific users the ability to read the files.  
+
+A flexible way to allow other processes to use/access these files is to make a new group and a new user, that is what
+is shown below. In linux, groups and users are assigned ids. 2171 looks like "ziti" so we'll use UID 2171 and GID 2171.
+The example below will make a new group named `zitiweb`. This group will then be granted ownership of the `letsencrypt`
+folder via chown. Changing the ownership of the files to the group will allow any user in that group the ability to read
+these files so be careful granting this group to users. Then we'll add the user we are currently logged in with to that 
+group so that "we" can see the files for debugging or other purposes. Finally, we'll make a `ziggy` user that is also in
+this group so that if we want to, we can run processes as ziggy. Please plan accordingly here. This is just a reasonable 
+example to follow to get you going, change it to suit your needs and do not take this example as authoritative. There
+are many ways to solve this problem, it's up to you to pick 'the best' way.
+
+<Details>
+<summary>Example Changing LetsEncrypt Permissions</summary>
+
+```bash
+sudo groupadd -g 2171 zitiweb
+sudo useradd -u 2171 -M ziggy
+sudo usermod -aG zitiweb ziggy
+sudo usermod -aG zitiweb $USER
+sudo chown -R root:zitiweb /etc/letsencrypt/
+sudo chmod -R g+rX /etc/letsencrypt/
+```
+
+You will want to enable the new group permissions in the current shell. Log out of your current session and log back
+in again. Doing so will enable the new group permission in your shell. After, set the `wildcard_url` variable again.
+Once set, verify you can access to the certificates:
+```bash
+ls -l /etc/letsencrypt/live/${wildcard_url}/
+```
+You should see something similar to:
+```bash
+total 8
+-rw-r--r-- 1 root zitiweb 692 Aug 17 21:12 README
+lrwxrwxrwx 1 root zitiweb  56 Aug 17 21:12 cert.pem -> ../../archive/browzerexample.demo.openziti.org/cert1.pem
+lrwxrwxrwx 1 root zitiweb  57 Aug 17 21:12 chain.pem -> ../../archive/browzerexample.demo.openziti.org/chain1.pem
+lrwxrwxrwx 1 root zitiweb  61 Aug 17 21:12 fullchain.pem -> ../../archive/browzerexample.demo.openziti.org/fullchain1.pem
+lrwxrwxrwx 1 root zitiweb  59 Aug 17 21:12 privkey.pem -> ../../archive/browzerexample.demo.openziti.org/privkey1.pem
+```
+</Details>
+
+---
+
+### Install a new OpenZiti Network
+
+BrowZer is built around the OpenZiti overlay network. You'll need a network deployed. Since this guide is using
+a legitimate 3rd party verifiable certificate from LetsEncrypt, we'll deploy a brand new OpenZiti Network by 
+following the steps outlined in the ["host it anywhere"](../../network/hosted.md)
+quickstart with <Highlight style={{fontWeight: "bold"}}>one important exception</Highlight>! 
+We are going to set two variables before running the quickstart to allow the servers to use the LetsEncrypt
+wildcard certificate:
+
+<Details>
+<summary>Setup for Alternative Server Certs</summary>
+
+Since we have just obtained some LetsEncrypt certificates, we'll enable OpenZiti with
+[Alternative Server Certs](../../../../guides/alt-server-certs.md) __immediately__! To do that we'll set two new variables
+introduced with v0.29.0. Notice that the `${wildcard_url}` variable needs to be set if it's not already set:
+
+```bash
+export ZITI_PKI_ALT_SERVER_CERT="/etc/letsencrypt/live/${wildcard_url}/fullchain.pem"
+export ZITI_PKI_ALT_SERVER_KEY="/etc/letsencrypt/live/${wildcard_url}/privkey.pem"
+```
+</Details>
+
+#### Install the OpenZiti Network
+
+With the `ZITI_PKI_ALT_*` environment variables set, we are ready to follow the 
+__["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md)__ instructions.  Run the quickstart
+and return here when complete.
+
+<Details>
+<summary>Verify the OpenZiti Network is Listening</summary>
+
+After completing the quickstart, you should be able to access the controller at both the alternate server cert url.
+Notice there's no need for 'insecure' (-sk) curl mode for the`${wildcard_url}` URL:
+
+```bash
+curl https://ctrl.${wildcard_url}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}
+```
+and we should be able to curl to the non-alternative server url. Note for this we need to use `-sk` since this will
+be the self-signed PKI endpoint:
+```bash
+curl -sk https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}
+```
+</Details>
+
+---
+
+### Add WebSocket Support to the OpenZiti Network
+
+BrowZer operates in a web browser. For it to connect to a router, BrowZer will attempt to connect to the router
+using a [web socket](https://en.wikipedia.org/wiki/WebSocket). We'll need to provision an edge router on the OpenZiti Network that supports 
+[web sockets](https://en.wikipedia.org/wiki/WebSocket). We will do that by modifying the configuration of the router provisioned in the quickstart.
+
+<Details>
+<summary>Update Edge Router for WebSocket Support</summary>
+
+After completing the quickstart, you will have an edge router configuration file in the user's home directory.
+Use your favorite editor, such as [`vim`](https://en.wikipedia.org/wiki/Vim_(text_editor)) to edit the file:
+
+```bash
+vi $ZITI_HOME/${ZITI_NETWORK}-edge-router.yaml
+```
+
+Locate the "binding" section, and add a section that looks like this. Make sure to change the `address` and `advertise`
+fields accordingly to fit your `${wildcard_url}` value:
+```bash
+  - binding: edge
+    address: wss:0.0.0.0:8447
+    options:
+      advertise: ws.browzerexample.demo.openziti.org:8447
+      connectTimeoutMs: 5000
+      getSessionTimeout: 60
+```
+
+</Details>
+
+<Details>
+<summary>Restart the Edge Router</summary>
+
+After updating the router's configuration file you'll need to restart the router:
+```bash
+sudo systemctl restart ziti-router
+```
+</Details>
+
+<Details>
+<summary>Verify the Edge Router is Websocket Enabled</summary>
+
+After the router restarts you'll be able to verify the router is properly configured. The following curl statement
+should succeed and return a 404 message similar to the one shown below. Note port 8447 is used, if you change this
+port you will obviously need to change the port number to the one you chose:
+
+```bash
+curl https://ws.${wildcard_url}:8447
+```
+
+</Details>
+
+---
+
+### Install the Ziti Admin Console (ZAC)
+
+In this example, we will be protecting the Ziti Administration Console (ZAC) with BrowZer. That means we'll need to
+install ZAC first. Follow [the ZAC install guide](../../../../learn/quickstarts/zac/index.md).
+After installing ZAC, continue.
+
+---
+
+### Configure the OIDC Provider
+
+As stated in the ["Before You Begin"](#before-you-begin) section, we will be using Auth0 for this quickstart. Lett's
+configure Auth0 to be the BrowZer OIDC provider.
+
+* Begin by signing up and authenticating to Auth0.
+* Follow the 'vanillajs' quickstart from Auth0: https://auth0.com/docs/quickstart/spa/vanillajs/interactive
+* Configure the Callback URLs and Logout URLs. Replace the values accordingly, for me, I used:
+  the value `https://*.browzerexample.demo.openziti.org:8446`
+
+---
+
+## Create a BrowZer env File
+
+At this point we have a functioning OpenZiti Network. We're ready to start BrowZer-specific configuration.
+First we need to decide/find an OIDC provider.  
+
+Set a shell variable named `AUTH0_DOMAIN` and set it to the value shown on the "Basic Information" page in Auth0. Then
+set a shell variable named `AUTHO_CLIENTID`. For me, this looked like this:
+
+```bash
+AUTH0_DOMAIN=dev-b2q0t23rxctngxka.us.auth0.com
+AUTH0_CLIENTID=mKWvp7xJHWxHKPf4eol4VwZxRCmdJIMy
+```
+
+<Details>
+<summary>Generate the BrowZer.env File</summary>
+
+:::caution Warning
+Make sure all variables listed below are set in your shell before running
+:::
+
+Now copy and paste this command to generate the browzer.env file.
+
+```bash
+export NODE_ENV=production
+export ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL=debug
+export ZITI_BROWZER_BOOTSTRAPPER_HOST=browzer.${wildcard_url}
+export ZITI_BROWZER_RUNTIME_LOGLEVEL=debug
+export ZITI_BROWZER_RUNTIME_HOTKEY=alt+F12
+export ZITI_CONTROLLER_HOST=ctrl.${wildcard_url}
+export ZITI_CONTROLLER_PORT=${ZITI_CTRL_EDGE_ADVERTISED_PORT}
+export ZITI_BROWZER_BOOTSTRAPPER_SCHEME=https
+export ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH=/etc/letsencrypt/live/${wildcard_url}/fullchain.pem
+export ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH=/etc/letsencrypt/live/${wildcard_url}/privkey.pem
+export ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT=8446
+export ZITI_BROWZER_SERVICE=brozac
+export ZITI_BROWZER_VHOST=${ZITI_BROWZER_SERVICE}.${wildcard_url}
+export ZITI_BROWZER_OIDC_URL=https://${AUTH0_DOMAIN}
+export ZITI_BROWZER_CLIENT_ID=${AUTH0_CLIENTID}
+
+export ZITI_BROWZER_BOOTSTRAPPER_TARGETS="$(cat <<HERE
+  {
+    "targetArray": [
+      {
+        "vhost": "${ZITI_BROWZER_VHOST}",
+        "service": "${ZITI_BROWZER_SERVICE}",
+        "path": "/",
+        "scheme": "http",
+        "idp_issuer_base_url": "${ZITI_BROWZER_OIDC_URL}",
+        "idp_client_id": "${ZITI_BROWZER_CLIENT_ID}"
+      }
+    ]
+  }
+HERE
+)"
+
+cat > $ZITI_HOME/browzer.env << HERE
+ZITI_BROWZER_BOOTSTRAPPER_HOST="${ZITI_BROWZER_BOOTSTRAPPER_HOST}"
+ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL="${ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL}"
+ZITI_BROWZER_RUNTIME_LOGLEVEL="${ZITI_BROWZER_RUNTIME_LOGLEVEL}"
+ZITI_BROWZER_RUNTIME_HOTKEY="${ZITI_BROWZER_RUNTIME_HOTKEY}"
+ZITI_CONTROLLER_HOST="${ZITI_CONTROLLER_HOST}"
+ZITI_CONTROLLER_PORT="${ZITI_CONTROLLER_PORT}"
+ZITI_BROWZER_BOOTSTRAPPER_SCHEME="${ZITI_BROWZER_BOOTSTRAPPER_SCHEME}"
+ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH="${ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH}"
+ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH="${ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH}"
+ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT="${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT}"
+ZITI_BROWZER_BOOTSTRAPPER_TARGETS='${ZITI_BROWZER_BOOTSTRAPPER_TARGETS}'
+NODE_EXTRA_CA_CERTS=node_modules/node_extra_ca_certs_mozilla_bundle/ca_bundle/ca_intermediate_root_bundle.pem
+HERE
+echo browzer env file written to: $ZITI_HOME/browzer.env
+```
+
+</Details>
+
+<Details>
+<summary>Inspect the browzer.env File</summary>
+
+You should see something like:
+```bash
+browzer env file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-47-200/browzer.env
+```
+
+Open this file up and visually inspect it to verify the file seems to be full, complete and not missing anything
+obvious. If you had verified all the variables used in the previous command were set, this file will be correctly
+created.
+
+</Details>
+
+<Details>
+<summary>Install BrowZer</summary>
+
+BrowZer is ready to be installed. The [main BrowZer page](../index.md) has two sections showing you how to
+install BrowZer either by [cloning from GitHub](../index.md#cloning-from-github)
+or by [Running via Docker](../index.md#running-via-docker). I have
+used the "clone" approach to run my BrowZer (and ZAC).
+
+Follow one of those methods and ensure BrowZer is up and running.
+
+```bash
+browzer env file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-47-200/browzer.env
+```
+
+Open this file up and visually inspect it to verify the file seems to be full, complete and not missing anything
+obvious. If you had verified all the variables used in the previous command were set, this file will be correctly
+created.
+
+</Details>
+
+---
+
+## Prepare the OpenZiti Network
+
+For the following steps, make sure you have all the variables set and make sure you have logged into the controller:
+```bash
+ziti edge login -u $ZITI_USER -p $ZITI_PWD -y ${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}
+```
+
+<Details>
+<summary>Configure the External JWT Signer and Auth Policy</summary>
+
+```bash
+echo "configuring OpenZiti for BrowZer..."
+ziti_object_prefix=browzer-auth0
+issuer=$(curl -s ${ZITI_BROWZER_OIDC_URL}/.well-known/openid-configuration | jq -r .issuer)
+jwks=$(curl -s ${ZITI_BROWZER_OIDC_URL}/.well-known/openid-configuration | jq -r .jwks_uri)
+
+echo "OIDC issuer   : $issuer"
+echo "OIDC jwks url : $jwks"
+
+ext_jwt_signer=$(ziti edge create ext-jwt-signer "${ziti_object_prefix}-ext-jwt-signer" "${issuer}" --jwks-endpoint "${jwks}" --audience "${ZITI_BROWZER_CLIENT_ID}" --claims-property email)
+echo "ext jwt signer id: $ext_jwt_signer"
+
+auth_policy=$(ziti edge create auth-policy "${ziti_object_prefix}-auth-policy" --primary-ext-jwt-allowed --primary-ext-jwt-allowed-signers ${ext_jwt_signer})
+echo "auth policy id: $auth_policy"
+```
+
+After running the commands listed above, you should see output that confirms an `ext-jwt-signer` and `auth-policy` were
+created successfully. It should look similar to what is shown below. Ensure the id's for the signer and auth policy
+have some value and are not blank:
+```bash
+configuring OpenZiti for BrowZer...
+OIDC issuer   : https://dev-b2q0t23rxctngxka.us.auth0.com/
+OIDC jwks url : https://dev-b2q0t23rxctngxka.us.auth0.com/.well-known/jwks.json
+ext jwt signer id: 23sRIAoaPqh9RDoFO8iwGZ
+auth policy id: 6EbCIB8ke40SI8eQxc3O0X
+```
+
+</Details>
+
+<Details>
+<summary>Add a Service to Access an HTTP Web App</summary>
+
+To enable access to the ZAC using BrowZer we need to make a service. Things to notice here are that we are using the
+HTTP port (the BrowZer Bootstrapper will provide HTTPS) and we're using the default port of 1408. Ensure the variables
+referenced are all set accordingly and then copy/paste these commands:
+
+```bash
+intercept_address="${ZITI_BROWZER_SERVICE}.ziti"
+intercept_port=80
+offload_address=127.0.0.1
+offload_port=1408
+
+function createService {
+ziti edge create config ${ZITI_BROWZER_SERVICE}.host.config host.v1 '{"protocol":"tcp", "address":"'"${offload_address}"'", "port":'${offload_port}'}'
+ziti edge create config ${ZITI_BROWZER_SERVICE}.int.config  intercept.v1 '{"protocols":["tcp"],"addresses":["'"${intercept_address}"'"], "portRanges":[{"low":'${intercept_port}', "high":'${intercept_port}'}]}'
+ziti edge create service "${ZITI_BROWZER_SERVICE}" --configs "${ZITI_BROWZER_SERVICE}.host.config","${ZITI_BROWZER_SERVICE}.int.config"
+ziti edge create service-policy "${ZITI_BROWZER_SERVICE}.bind" Bind --service-roles "@${ZITI_BROWZER_SERVICE}" --identity-roles "#${ZITI_BROWZER_SERVICE}.binders"
+ziti edge create service-policy "${ZITI_BROWZER_SERVICE}.dial" Dial --service-roles "@${ZITI_BROWZER_SERVICE}" --identity-roles "#${ZITI_BROWZER_SERVICE}.dialers"
+}
+
+function deleteService {
+ziti edge delete config  where 'name contains "'"${ZITI_BROWZER_SERVICE}"'."'
+ziti edge delete service where 'name = "'"${ZITI_BROWZER_SERVICE}"'"'
+ziti edge delete sp      where 'name contains "'"${ZITI_BROWZER_SERVICE}"'."'
+}
+
+createService
+
+```
+
+Verify the commands all succeed (no errors shown) and the output looks similar to this after running:
+```bash
+New config brozac.host.config created with id: 5i85SF4pnehz1LEjJNvCtH
+New config brozac.int.config created with id: 2p8xuev7Vb9NzuZoEGi4tq
+New service brozac created with id: 5Ry0BOMr6VJGQjF51LdDxv
+New service policy brozac.bind created with id: 8EoBqEhKeIKQLQxY5zr3Z
+New service policy brozac.dial created with id: 1TUzPYdN3GpGdA4k9Uauv3
+```
+
+</Details>
+
+<Details>
+<summary>Associate/Update Identities with the Auth Policy</summary>
+
+Now we need to associate the claims presented by the OIDC provider with one or more identities inside the OpenZiti
+Network. Since we have decided to use Auth0, in the previous step we were able to create an `ext-jwt-signer` and 
+reference the claim named `email`. Since we chose Auth0, I know that it will provide this particular claim to OpenZiti
+after the user logs into the OIDC provider. If your OIDC provider doesn't provide `email`, you'll have to 
+learn/explore/understand how the OIDC provider you're using works. It's out of scope of this document to provide
+that sort of insight. Set a variable named `ZITI_BROWZER_IDENTITIES` and assign it an email address you plan to use:
+
+```bash
+ZITI_BROWZER_IDENTITIES="clint.dovholuk@company.name"
+```
+
+After create a __space__ delimited list (one value/email is fine too), copy and paste the following command:
+
+```bash
+echo "creating users specified by ZITI_BROWZER_IDENTITIES: ${ZITI_BROWZER_IDENTITIES}"
+for id in ${ZITI_BROWZER_IDENTITIES}; do
+ziti edge create identity user "${id}" --auth-policy ${auth_policy} --external-id "${id}" -a "${ZITI_BROWZER_SERVICE}.dialers"
+done
+
+#ziti edge update identity "${id}" -a $(ziti edge list identities 'name="'${id}'"' -j | jq -r '.data[].roleAttributes | map(. // "") | @csv'),"${ZITI_BROWZER_SERVICE}.dialers"
+ziti edge update identity "${ZITI_ROUTER_NAME}" -a "${ZITI_BROWZER_SERVICE}.binders"
+```
+
+After you run that command you should see output looking similar to this:
+```bash
+creating users specified by ZITI_BROWZER_IDENTITIES: clint.dovholuk@company.name
+New identity clint.dovholuk@company.name created with id: hmnQByTn3
+```
+
+</Details>
+
+### Try It Out
+
+This is it! This is the moment we've been working for.  Copy and paste this command to echo to the screen the url to 
+test out and let's see ZAC protected by BrowZer!!!
+
+```bash
+echo " "
+echo "now go to: https://${ZITI_BROWZER_VHOST}:${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT} and see your ${ZITI_BROWZER_SERVICE}!"
+echo " "
+```
+
+### If Needed, BrowZer Bootstrapper Logs
+
+```bash
+journalctl -fu browzer-bootstrapper
+```
+
+
+## Cleaning up and Trying Again
+
+To clean everything up and try it all over (if you need to) run these commands:
+```bash
+sudo systemctl stop browzer-bootstrapper
+sudo systemctl stop ziti-controller 
+sudo systemctl stop ziti-router
+sudo rm -rf $HOME/.ziti/quickstart
+unsetZitiEnv
+cd 
+```
+
