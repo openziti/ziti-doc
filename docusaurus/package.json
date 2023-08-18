@@ -31,6 +31,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-github-btn": "^1.4.0",
+    "react-player": "^2.12.0",
     "redocusaurus": "^1.4.0"
   },
   "devDependencies": {

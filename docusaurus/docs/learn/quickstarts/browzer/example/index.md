@@ -5,10 +5,15 @@ import MDXComponents from '@theme-original/MDXComponents';
 import Details from '@theme/MDXComponents/Details';
 import Code from '@theme/MDXComponents/Code';
 import Highlight from "/src/components/OpenZitiHighlight";
+import ReactPlayer from 'react-player'
 
 This page will demonstrate adding BrowZer to an existing OpenZiti Network that was started using the
 ["host it anywhere" quickstart](../../../../learn/quickstarts/network/hosted.md). It will use Ubuntu Linux as well, if
-your Linux distribution is different, change the commands accordingly.
+your Linux distribution is different, change the commands accordingly. The August 18 2023 Ziti TV features a full 
+walkthrough and explanation of this whole page. If you are interested in watching a narrated and explained run
+through of this page, watch the video and follow along with the doc here.
+
+<ReactPlayer playing controls url='https://youtu.be/ZPkOQbVEnW0?t=816' />
 
 ### Before you Begin
 
