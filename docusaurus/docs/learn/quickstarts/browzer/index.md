@@ -1,10 +1,12 @@
 ---
 title: BrowZer
 ---
+import Details from '@theme/MDXComponents/Details';
 
 BrowZer is a set of technologies which is capable of bootstrapping zero trust connectivity entirely in a browser,
 and without the need to install any client-side software! To enable BrowZer on your OpenZiti Network the `ziti-browzer-bootstrapper`
-will need to be deployed. This guide will show you how to deploy BrowZer to your own overlay.
+will need to be deployed. This pages outlines the steps needed to deploy BrowZer to your own overlay. For an example
+of enabling BrowZer, see the [Example Enabling BrowZer](./example/index.md) subpage showing the steps in more detail.
 
 ## Prerequisites
 
@@ -197,3 +199,51 @@ docker run \
   -e ZITI_BROWZER_BOOTSTRAPPER_TARGETS="${ZITI_BROWZER_BOOTSTRAPPER_TARGETS}" \
   ghcr.io/openziti/ziti-browzer-bootstrapper:latest
 ```
+
+## Enabling Browzer with Systemd
+
+If you want the BrowZer Bootstrap Agent to start when the machine starts or if the process fails for some reason
+and you have [systemd](https://en.wikipedia.org/wiki/Systemd) on your system, you can enable the BrowZer Bootstrap Agent 
+to start automatically on failure or reboot.
+
+If you have used the ["clone from GitHub"](#cloning-from-github) approach, you have sourced the `ziti-cli-functions.sh`
+helper script, and have the environment variables set from the quickstart installation you can execute a single function
+to create a systemd unit file: `createBrowZerSystemdFile`. Execute this now and you'll see something like:
+```bash
+Ziti BrowZer Bootstrapper systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-47-200/browzer-bootstrapper.service
+```
+
+Once created, you can copy that file and `enable` the unit with systemd:
+```bash
+createZacSystemdFile
+sudo cp "${ZITI_HOME}/browzer-bootstrapper.service" /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl enable --now browzer-bootstrapper
+```
+
+<Details>
+<summary>Verify BrowZer Started</summary>
+
+```bash
+systemctl status browzer-bootstrapper --no-pager --lines 0
+```
+
+<Details>
+<summary>Example systemctl Output</summary>
+
+You should see output that looks similar to this. Notice the "Active" status is (running) and not failed/restarting etc:
+```bash
+● browzer-bootstrapper.service - A systemd unit file for the Ziti BrowZer Bootstrapper
+     Loaded: loaded (/etc/systemd/system/browzer-bootstrapper.service; enabled; vendor preset: enabled)
+     Active: active (running) since Fri 2023-08-18 12:52:54 UTC; 1min 24s ago
+   Main PID: 54770 (node)
+      Tasks: 11 (limit: 2316)
+     Memory: 42.9M
+        CPU: 2.269s
+     CGroup: /system.slice/browzer-bootstrapper.service
+             └─54770 /usr/local/bin/node /home/ubuntu/.ziti/quickstart/ip-172-31-47-200/ziti-browzer-bootstra…
+```
+
+</Details>
+
+</Details>
