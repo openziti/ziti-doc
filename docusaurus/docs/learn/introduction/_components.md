@@ -84,7 +84,7 @@ instrument or otherwise make any modifications to the web application itself in 
 enable secure remote access.
 
 BrowZer enables operating a web app licensed from a 3rd party and protecting it without the
-need for making alterations to it. Similarly, if the web app can be modified but it is not
+need for making alterations to it. Similarly, if the web app can be modified, but it is not
 desirable to do so, BrowZer allows OpenZiti to protect those apps as well. The BrowZer Bootstrapper
 does the necessary instrumentation of the web application automatically, on the fly, as it
 is being loaded from the web server to the user's browser.

@@ -119,7 +119,7 @@ them. To run using Docker, you can either reference the environment variables (s
 * `ZITI_BROWZER_BOOTSTRAPPER_SCHEME`: the scheme to use to access the ziti-browzer-bootstrapper. `http|https` (https by default)
 * `ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH`: the path to the certificate the ziti-browzer-bootstrapper presents to clients
 * `ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH`: the associated key for the ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH
-* `ZITI_BROWZER_BOOTSTRAPPER_TARGETS`: A json block representing the services to enable BrowZer for. __more on this below__
+* `ZITI_BROWZER_BOOTSTRAPPER_TARGETS`: A json block representing the services to enable BrowZer for.
 
 ```bash
       NODE_ENV: production
