@@ -72,7 +72,7 @@ Read more about [clients](../core-concepts/clients/choose.mdx)
 
 BrowZer is a set of optional components which facilitate the bootstrapping of trust
 in a web browser **without** the need for client-side installations. This means there is no
-need to install an extension in web browsers, nor will is there a need to install one of the
+need to install an extension in web browsers, nor is there a need to install one of the
 OpenZiti Mobile/Desktop Edge clients!
 
 It enables automatic embedding of zero trust networking into a web application, thus
