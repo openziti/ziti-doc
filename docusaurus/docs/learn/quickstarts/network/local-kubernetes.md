@@ -173,8 +173,12 @@ sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) miniziti-controlle
 You can run the miniziti shell script or perform the steps manually yourself. Click the "Manual Steps" tab directly above to switch your view.
 
 It's recommended that you read the script before you run it. It's safe to re-run the script if it encounters a temporary problem.
+<br/>
 
-To run the script you'll need to [download the file](./miniziti.bash) and run it like this:
+[**DOWNLOAD: miniziti.bash**](./miniziti.bash)
+
+<br/>
+Be sure to complete the DNS setup steps above before running this command.
 
 ```bash
 bash ./miniziti.bash
@@ -232,7 +236,7 @@ CoreDNS is running at https://127.0.0.1:49439/api/v1/namespaces/kube-system/serv
 
 You will need two Minikube addons:
 
-1. `ingress`: installs the Nginx ingress controller. Ingresses provide access into the cluster and are the only things exposed to networks outside the cluster.
+1. `ingress`: installs the Nginx ingress controller. Ingresses provide access into the cluster and are the only things exposed to networks outside the cluster. This is required by the miniziti script, but the Helm charts can be configured to use other ingress controllers.
 1. `ingress-dns`: provides a DNS server that can answer queries about the cluster's ingresses, e.g. "miniziti-controller.ziti" which will be created when you install the OpenZiti Controller Helm chart.
 
 ```bash
@@ -550,7 +554,7 @@ nslookup httpbin.ziti
 curl -sSf -XPOST -d ziti=awesome http://httpbin.ziti/post | jq .data
 ```
 
-Visit [http://httpbin.ziti/get](http://httpbin.ziti/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
+Visit [http://httpbin.miniziti/get](http://httpbin.miniziti/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
 
 ## Explore the OpenZiti Console
 
@@ -620,26 +624,3 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
    ```
 
 2. In your OpenZiti Tunneler, "Forget" your Identity.
-
-## minikube `ingress-dns` nameserver
-
-This option configures your host to use use the DNS addon we enabled earlier for DNS names like *.ziti. If you do this then you don't need to edit the `/etc/hosts` file at all.
-
-1. Make sure the DNS addon is working. Send a DNS query to the  address where the ingress nameserver is running.
-
-   ```bash
-   nslookup miniziti-controller.ziti $(minikube --profile miniziti ip)
-   ```
-
-   You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
-
-1. Configure your computer to always send certain DNS queries to the `ingress-dns` nameserver. Follow the steps in [the `minikube` web site](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/#installation) to configure macOS, Windows, or Linux's DNS resolver.
-
-   Now that your computer is set up to use the `minikube` DNS server for DNS names that end in *.ziti, you can test it again without specifying where to send the DNS query.
-
-   ```bash
-   # test your DNS configuration
-   nslookup miniziti-controller.ziti
-   ```
-
-   You know it's working if you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
