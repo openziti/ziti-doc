@@ -46,7 +46,7 @@ You'll need an HTTP server which you plan to connect your HTTP client to. There 
 bring an HTTP server online but for this guide I have chosen to use docker and deploy a very simple HTTP application. The server will 
 simply print out the "docker whale" when it's connected to. (This guide will not teach you how to install docker, nor how to install an 
 HTTP server which is listening)  If you are familiar with docker and wish to use the exact same example as shown here, simply run the 
-container with: `docker run -d --rm --name web-test -p 80:8000 crccheck/hello-world`. 
+container with: `docker run -d --rm --name web-test -p 80:8000 openziti/hello-world`. 
 
 Alternatively, if you have used the [docker-compose quickstart](../network/local-docker-compose.md) to provision your 
 OpenZiti overlay network, you will have this HTTP server available to use immediately. 
