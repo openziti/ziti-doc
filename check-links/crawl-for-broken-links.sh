@@ -32,7 +32,7 @@ www\.reddit\.com/r/openziti
 .*\.zitik8s
 .*\.svc
 twitter\.com/(OpenZiggy|OpenZiti)
-landing.openziti.io/xmlrpc.php?rsd
+landing.openziti.io/xmlrpc.php\?rsd
 landing.openziti.io/wp-includes/wlwmanifest.xml
 fonts.gstatic.com/
 EOF
