@@ -13,7 +13,11 @@ your Linux distribution is different, change the commands accordingly. The Augus
 walkthrough and explanation of this whole page. If you are interested in watching a narrated and explained run
 through of this page, watch the video and follow along with the doc here.
 
+
+<Details>
+<summary>Watch a Walkthrough of These Steps</summary>
 <ReactPlayer playing controls url='https://youtu.be/ZPkOQbVEnW0?t=816' />
+</Details>
 
 ### Before you Begin
 
