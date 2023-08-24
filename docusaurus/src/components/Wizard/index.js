@@ -90,7 +90,6 @@ export default function Wizard(props) {
                                         <h2>{itemTitle}</h2>
                                     </div>
                                     <div>
-                                        <StartController></StartController>
                                         <ReactMarkdown children={md} linkTarget={'_blank'} />
                                     </div>
                                 </fieldset>
