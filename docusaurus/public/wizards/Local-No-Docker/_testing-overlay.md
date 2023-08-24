@@ -1,6 +1,6 @@
 ## Testing Your Overlay
 
-At this point you should have a functioning [Ziti Network](../../introduction/index.mdx). The script 
+At this point you should have a functioning [Ziti Network](/docs/learn/introduction/). The script 
 you sourced provides another function to login to your network. Try this now by running `zitiLogin`. You should see 
 something similar to this:
 ```bash
