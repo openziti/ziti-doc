@@ -22,8 +22,8 @@ export default function Wizard(props) {
     for (let i=0; i<wizards.length; i++) {
       if (wizards[i].hash==hash) {
           wizard = wizards[i];
-          title = wizard.name;
-          total = wizard.steps.length;
+          if (wizard && wizard.name) title = wizard.name;
+          if (wizard && wizard.steps) total = wizard.steps.length;
           break;
       }
     }
