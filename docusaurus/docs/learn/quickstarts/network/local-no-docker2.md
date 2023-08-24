@@ -1,6 +1,5 @@
 ---
 sidebar_position: 30
-description: My h1 here1
 ---
 import Intro from '@site/public/wizards/_intro.md';
 import Prereq from '@site/public/wizards/_prereq.md';
