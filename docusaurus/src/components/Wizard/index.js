@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import StartController from '@site/public/wizards/_start-controller.md';
 
 import wizards from "../../../public/wizards/wizards.json";
 
@@ -89,6 +90,7 @@ export default function Wizard(props) {
                                         <h2>{itemTitle}</h2>
                                     </div>
                                     <div>
+                                        <StartController></StartController>
                                         <ReactMarkdown children={md} linkTarget={'_blank'} />
                                     </div>
                                 </fieldset>
