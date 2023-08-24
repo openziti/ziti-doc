@@ -12,7 +12,6 @@ import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
 import GitHubButton from "react-github-btn";
 import StarUs from "../../components/StarUs";
-import StepperWizard from '../../components/StepperWizard';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import $ from 'jquery';
 

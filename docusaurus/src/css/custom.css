@@ -765,7 +765,9 @@ input {
   float: right;
   width: 75%;
   border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-right-radius: 12px;    
+  height: 890px;
+  overflow-y: auto;
 }
 
 .vertical .actions {
@@ -773,10 +775,36 @@ input {
   width: 75%;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
+  padding-top: 30px;
 }
 
 .content {
   height: 700px;
+}
+
+.wizardmodal {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
+}
+
+.wizardmodal .page-wrapper {
+  top: 0px;
+  min-height: 100vh;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+}
+
+.wizard .main {
+  padding-top: 30px;
+}
+
+.wizardmodal .bg-img-1 {
+  opacity: 0.9;
 }
 
 .steps ul {

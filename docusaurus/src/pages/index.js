@@ -6,7 +6,6 @@ import Link from '@docusaurus/Link';
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from "./index.module.css";
-import StepperWizard from '../components/StepperWizard';
 import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
 
 export function Highlight(props) {
@@ -194,8 +193,6 @@ export default function Home() {
                 </div>
 
             </OpenZitiHorizontalSection>
-            
-            <StepperWizard/>
 
             <OpenZitiHorizontalSection style={{backgroundColor: "var(--background-color-1)"}}>
                 <H1 id="build-a-network">Get Started - Build a Network</H1>

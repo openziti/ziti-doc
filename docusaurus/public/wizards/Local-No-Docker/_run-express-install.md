@@ -1,7 +1,3 @@
----
-description: Make this the title
-junk: this is junk
----
 ## Run `expressInstall` One-liner
 
 Running the latest version of Ziti locally is as simple as running this one command:

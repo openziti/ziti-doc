@@ -1,7 +1,6 @@
 import React, { Component, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-import StartController from '@site/public/wizards/_start-controller.md';
 
 import wizards from "../../../public/wizards/wizards.json";
 
@@ -18,14 +17,26 @@ export default function Wizard(props) {
     let total = 0;
     let lastIndex = -1;
     let itemTitle = "";
+    let steps = [];
 
     for (let i=0; i<wizards.length; i++) {
       if (wizards[i].hash==hash) {
           wizard = wizards[i];
           if (wizard && wizard.name) title = wizard.name;
-          if (wizard && wizard.steps) total = wizard.steps.length;
+          if (wizard && wizard.steps) {
+            total = wizard.steps.length;
+            steps = wizard.steps;
+          }
           break;
       }
+    }
+
+    function goto(e) {
+        var indexChange = Number(e.currentTarget.dataset.id);
+        let current = indexChange;
+        if (current>total) current = total-1;
+        if (current<0) current = 0;
+        if (index!=current) setIndex(current);
     }
 
     function next() {
@@ -70,15 +81,15 @@ export default function Wizard(props) {
                     <div role="application" class="wizard clearfix vertical" id="steps-uid-0">
                         <div class="steps clearfix">
                             <ul role="tablist">
-                            {wizard.steps.map((item, itemIndex) => (
+                            {steps.map((item, itemIndex) => (
                                 <li role="tab" className={((itemIndex==0) ? 'first' : '')+" "+((itemIndex==index) ? 'current' : '')} aria-disabled="false" aria-selected="true">
-                                    <a id={'#steps-'+itemIndex} href={'#steps-'+itemIndex} aria-controls="steps-">
+                                    <span onClick={goto} data-id={itemIndex}>
                                         <span class="current-info audible"> </span>
                                         <div class="title">
                                             <span class="step-number">{itemIndex+1}</span>
                                             <span class="step-text">{item}</span>
                                         </div>
-                                    </a>
+                                    </span>
                                 </li>
                             ))}
                             </ul>

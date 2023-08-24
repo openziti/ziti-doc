@@ -11,14 +11,12 @@ import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
 import StarUs from "../../components/StarUs";
-import StepperWizard from '../StepperWizard';
 
 export default function OpenZitiLayout(props) {
   const {
     children,
     noFooter,
     wrapperClassName,
-    // Not really layout-related, but kept for convenience/retro-compatibility
     title,
     description,
     bgColor,
