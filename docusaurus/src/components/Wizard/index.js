@@ -58,7 +58,7 @@ export default function Wizard(props) {
 
     return (
         <div class="page-wrapper bg-img-1">
-            <div class="main">
+            <div class="wizard main">
                 <div class="container">
                     <div class="row">
                         <a class="whitez" href="/"></a>

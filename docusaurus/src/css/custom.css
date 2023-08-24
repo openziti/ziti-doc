@@ -1407,7 +1407,7 @@ code .dec {
 /* decimal - blue */
 
 pre.prettyprint,
-code.prettyprint, pre {
+code.prettyprint, .wizard pre {
   /* background-color: #0f2438 !important; */
   background-color: #002451 !important;
   border-radius: 8px !important;
