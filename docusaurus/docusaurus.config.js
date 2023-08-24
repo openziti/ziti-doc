@@ -191,15 +191,19 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/openziti/ziti-doc/tree/main/docusaurus',
-
+            /*
+          admonitions: {
+            keywords: ['code-output'],
+            extendDefaults: true,
+          }, 
+          */
         },
         // blog: false,
         blog: {
@@ -215,7 +219,7 @@ const config = {
           trackingID: 'G-THVRRJ3GLE',
           anonymizeIP: true,
         },
-      }),
+      },
     ],
     // Redocusaurus config
     [
