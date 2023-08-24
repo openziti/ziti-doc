@@ -2,16 +2,25 @@
 title: Ziti Admin Console
 ---
 
-The Ziti Administration Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and 
+The Ziti Administration Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and
 explore a [Ziti Network](../../introduction/index.mdx).
 
 ## Prerequisites
 
-It's expected that you're using `bash` for these commands. If you're using Windows we strongly recommend that you install
-and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to
-translate to your shell accordingly.
+* It's expected that you're using `bash` for these commands. If you're using Windows we strongly recommend that you install
+  and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to
+  translate to your shell accordingly.
 
-You will need `node` and `npm` executables from Node.js v16+.
+* You will need `node` and `npm` executables from Node.js v16+. If you see an error like the one shown below you likely
+  have a version of node < v16. __You need node v16+__:
+
+      ziti = await loadModule('@openziti/ziti-sdk-nodejs')
+      ^^^^^
+
+      SyntaxError: Unexpected reserved word
+       at Loader.moduleStrategy (internal/modules/esm/translators.js:133:18)
+       at async link (internal/modules/esm/module_job.js:42:21)
+
 
 :::note
 When running Ziti Administration Console, you should also prefer using https over http. In order to do this you will need
@@ -48,7 +57,7 @@ you can perform the following steps.
    ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
    ```
 
-1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console (ZAC). If you have not sourced 
+1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console (ZAC). If you have not sourced
    [the Ziti helper script](https://get.openziti.io/quick/ziti-cli-functions.sh) and you wish to have ZAC enabled with systemd,
    you need to in order to get the necessary function. Either inspect the script and find the function, download and source it,
    or source it directly from the internet (direct sourcing from internet shown below)
@@ -70,7 +79,7 @@ you can perform the following steps.
    Ziti Server running on port 1408
    ```
 
-1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command 
+1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command
    `sudo systemctl status ziti-console --lines=0 --no-pager`
 
    ```bash
@@ -118,7 +127,7 @@ internet search should show you how to accomplish this.
 ## Docker Compose
 
 If you have followed the [docker compose quickstart](../network/local-docker-compose) you will have the ZAC
-running already. It's now included with both the default docker-compose file and the simplified-docker-compose file. 
+running already. It's now included with both the default docker-compose file and the simplified-docker-compose file.
 Both compose files will start and expose the ZAC ports on 1408/8443.
 
 :::note
