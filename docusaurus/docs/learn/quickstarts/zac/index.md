@@ -128,7 +128,7 @@ will expose the ZAC http and https ports to your local computer so that you can 
 If you customized any of these paths, you'll need to replace the paths specified accordingly (the '-v' lines).
 
  ```bash
- docker run \
+ docker run --rm \
         --name zac \
         -p 1408:1408 \
         -p 8443:8443 \
