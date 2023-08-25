@@ -36,4 +36,4 @@ connection between the SDKs will be encrypted and only readable by the intended 
 all applications that use Ziti's SDKs, including Ziti's tunneler, desktop, and mobile applications.
 
 
-Read more about end-to-end encryption and security for other connections on the [Connection Security](../core-concepts/security/connection-security.md) page.
+Read more about end-to-end encryption and security for other connections on the [Connection Security](/learn/core-concepts/security/connection-security.md) page.

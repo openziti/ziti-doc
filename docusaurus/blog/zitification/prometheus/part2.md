@@ -30,7 +30,7 @@ What we really want is to enable Prometheus to scrape data from targets without 
 even better** if we didn't have to expose any ports at all, even to the local "trusted" network. This capability is something that is 
 unique to an OpenZiti-enabled application. You can take an OpenZiti SDK and embed it into your application, and give your app zero trust 
 superpowers! If we take an OpenZiti SDK and embed it into Prometheus, we can give Prometheus the superpower of invisibility and 
-addressability. Embedding an OpenZiti SDK produces a [zitified](../index.md) version of Prometheus. With an 
+addressability. Embedding an OpenZiti SDK produces a [zitified](/zitification/index.md) version of Prometheus. With an 
 OpenZiti-powered Prometheus, no ports need to be open.
 
 The OpenZiti project has done the work to produce an OpenZiti-enabled version of Prometheus. It's also entirely open source. Check it out

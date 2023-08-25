@@ -12,8 +12,8 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [Ziti Networks](../../introduction/index.mdx) require
-a [Ziti Controller](../../../reference/deployments/01-controller.md). Without a controller, edge routers won't be able to authorize new
+All [Ziti Networks](/learn/introduction/index.mdx) require
+a [Ziti Controller](/reference/deployments/01-controller.md). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
 ### Required - Docker Named Volume
@@ -76,8 +76,8 @@ docker run \
 ```
 
 ## Create Edge Router Policies
-OpenZiti requires explicit authorization of identities using ([edge router policies](../../../reference/glossary.md#edge-router-policy)), 
-as well as authorization of services and routers using ([service edge router policies](../../../reference/glossary.md#service-edge-router-policy)). 
+OpenZiti requires explicit authorization of identities using ([edge router policies](/reference/glossary.md#edge-router-policy)), 
+as well as authorization of services and routers using ([service edge router policies](/reference/glossary.md#service-edge-router-policy)). 
 The docker-based quickstart doesn't perform these steps automatically. Run the initialization container one time, after 
 starting the controller as shown
 
@@ -94,7 +94,7 @@ docker run \
 
 ## Edge Router
 
-At this point you should have a [Ziti Controller](../../../reference/deployments/01-controller.md) running. You should have created your
+At this point you should have a [Ziti Controller](/reference/deployments/01-controller.md) running. You should have created your
 Docker network as well as creating the volume mount. Now it's time to connect your first edge router. The same Docker
 image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
@@ -193,8 +193,8 @@ results: 1-1 of 1
 ## Next Steps
 
 - Now that you have your network in place, you probably want to try it out. Head to
-[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
-- [Install the Ziti Console](../zac/index.md#docker) (web UI)
+[the services quickstart](/learn/quickstarts/services/index.md) and start learning how to use OpenZiti.
+- [Install the Ziti Console](/learn/quickstarts/zac/index.md#docker) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

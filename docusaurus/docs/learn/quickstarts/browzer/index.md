@@ -12,7 +12,7 @@ of enabling BrowZer, see the [Example Enabling BrowZer](./example/index.md) subp
 
 To deploy and enable BrowZer on your OpenZiti Network, you will need to have:
 
-* an OpenZiti Overlay Network is available and has been configured with [Alternative Server Certs](../../../guides/alt-server-certs.md)
+* an OpenZiti Overlay Network is available and has been configured with [Alternative Server Certs](/guides/alt-server-certs.md)
 * an OIDC Provider and the ability to define applications/clients for the provider
 * a wildcard certificate from a 3rd party verifiable CA
 
@@ -35,7 +35,7 @@ concepts you will want to understand are:
 With the OIDC information in hand, the next step is to actually configure OpenZiti to allow the delegation of authentication.
 To do this you will need to:
 
-* create an [external jwt signer](../../../../docs/learn/core-concepts/security/authentication/50-external-jwt-signers.md)
+* create an [external jwt signer](/learn/core-concepts/security/authentication/50-external-jwt-signers.md)
 * create an [authentication policy](../../../../docs/learn/core-concepts/security/authentication/authentication-policies)
 and associate the external jwt signer
 * associate identities with the authentication policy delegating the authentication to the specified OIDC provider
