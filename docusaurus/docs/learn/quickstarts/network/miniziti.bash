@@ -32,8 +32,10 @@ _usage(){
             "   --verbose\t\tshow DEBUG messages\n"\
             "   --profile\t\tMINIKUBE_PROFILE (miniziti)\n"\
             "   --namespace\t\tZITI_NAMESPACE (MINIKUBE_PROFILE)\n"\
+            "   --no-hosts\t\tdon't use local hosts DB or ingress-dns nameserver\n"\
             "\n DEBUG\n"\
-            "   --charts\t\tZITI_CHARTS (openziti) alternative charts repo\n"\
+            "   --charts\t\tZITI_CHARTS_REF (openziti) alternative charts repo\n"\
+            "   --now\t\teliminate safety waits, e.g., before deleting miniziti\n"\
             "   --\t\t\tMINIKUBE_START_ARGS args after -- passed to minikube start\n"
 }
 
@@ -43,13 +45,13 @@ checkDns(){
         logError "need IPv4 of miniziti ingress as only param to checkDns()"
         return 1
     }
-    logDebug "checking dns to ensure miniziti-controller.ziti resolves to $1"
-    if grep -qE "^${1//./\\.}.*miniziti-controller.ziti" /etc/hosts \
-        || nslookup miniziti-controller.ziti | grep -q "${1//./\\.}"; then
+    logDebug "checking dns to ensure miniziti-controller.${MINIZITI_INGRESS_ZONE} resolves to $1"
+    if grep -qE "^${1//./\\.}.*miniziti-controller.${MINIZITI_INGRESS_ZONE}" /etc/hosts \
+        || nslookup "miniziti-controller.${MINIZITI_INGRESS_ZONE}" | grep -q "${1//./\\.}"; then
         logDebug "host dns found expected minikube ingress IP '$1'"
         return 0
     else
-        echo "ERROR: miniziti-controller.ziti does not resolve to '$1'. Did you add the record in /etc/hosts?"
+        logError "miniziti-controller.${MINIZITI_INGRESS_ZONE} does not resolve to '$1'. Did you add the record in /etc/hosts?"
         return 1
     fi
 }
@@ -62,8 +64,10 @@ deleteMiniziti(){
     else
         logDebug "no integer param detected to deleteMiniziti(), using default wait time ${WAIT}s"
     fi
-    echo "WARN: deleting ${MINIKUBE_PROFILE} in ${WAIT}s" >&2
-    sleep "$WAIT"
+    (( SAFETY_WAIT )) && {
+        logWarn "deleting ${MINIKUBE_PROFILE} in ${WAIT}s" >&2
+        sleep "$WAIT"
+    }
     logInfo "waiting for ${MINIKUBE_PROFILE} to be deleted"
     minikube --profile "${MINIKUBE_PROFILE}" delete >&3
 }
@@ -102,7 +106,7 @@ getClientOttPath(){
 
 testClusterDns(){
     if kubectl run "dnstest" --rm --tty --stdin --image busybox --restart Never -- \
-        nslookup miniziti-controller.ziti | grep "$1" >&3; then
+        nslookup "miniziti-controller.${MINIZITI_INGRESS_ZONE}" | grep "$1" >&3; then
         logInfo "cluster dns test succeeded"
     else
         logError "cluster dns test failed"
@@ -166,8 +170,14 @@ main(){
             MINIKUBE_PROFILE="miniziti" \
             ZITI_NAMESPACE \
             DELETE_MINIZITI=0 \
+            SAFETY_WAIT=1 \
             MINIKUBE_NODE_EXTERNAL \
-            ZITI_CHARTS="openziti"
+            ZITI_CHARTS_ALT=0 \
+            ZITI_CHARTS_REF="openziti" \
+            ZITI_CHARTS_URL="https://openziti.io/helm-charts/charts" \
+            MINIZITI_HOSTS=1 \
+            MINIZITI_INGRESS_ZONE="ziti" \
+            MINIZITI_INTERCEPT_ZONE="miniziti"
     # local arrays with defaults that never produce an error
     declare -a MINIKUBE_START_ARGS=()
 
@@ -190,7 +200,9 @@ main(){
             -n|--namespace) ZITI_NAMESPACE="$2"
                             shift 2
             ;;
-            --charts)       ZITI_CHARTS="$2"
+            --charts)       ZITI_CHARTS_REF="$2"
+                            ZITI_CHARTS_URL="$2"
+                            ZITI_CHARTS_ALT=1
                             shift 2
             ;;
             -q|--quiet)     exec > /dev/null
@@ -198,6 +210,12 @@ main(){
             ;;
             -v|--verbose|--debug)
                             exec 3>&1
+                            shift
+            ;;
+            --now)          SAFETY_WAIT=0
+                            shift
+            ;;
+            --no-hosts)     MINIZITI_HOSTS=0
                             shift
             ;;
             --)             shift
@@ -258,7 +276,11 @@ main(){
     fi
 
     MINIKUBE_NODE_EXTERNAL=$(minikube --profile "${MINIKUBE_PROFILE}" ip)
-
+    # if --no-hosts then build a new zone name for RFC-1918 wildcard DNS
+    (( MINIZITI_HOSTS )) || {
+        MINIZITI_INGRESS_ZONE="${MINIKUBE_NODE_EXTERNAL}.sslip.io"
+        logDebug "DNS wildcard zone for ingresses is ${MINIZITI_INGRESS_ZONE}"
+    }
     if [[ -n "${MINIKUBE_NODE_EXTERNAL:-}" ]]; then
         logDebug "the minikube external IP is ${MINIKUBE_NODE_EXTERNAL}"
     else
@@ -281,9 +303,11 @@ main(){
         # enable minikube addons for ingress-nginx
         minikube addons enable ingress \
             --profile "${MINIKUBE_PROFILE}" >&3
-        minikube addons enable ingress-dns \
-            --profile "${MINIKUBE_PROFILE}" >&3
-
+        # enable minikube addon ingress-dns unless --no-hosts
+        (( MINIZITI_HOSTS )) && {
+            minikube addons enable ingress-dns \
+                --profile "${MINIKUBE_PROFILE}" >&3
+        }
         logDebug "patching ingress-nginx deployment to enable ssl-passthrough"
         kubectl patch deployment "ingress-nginx-controller" \
             --namespace ingress-nginx \
@@ -313,13 +337,19 @@ main(){
     kubectl apply \
         --filename https://raw.githubusercontent.com/cert-manager/trust-manager/v0.4.0/deploy/crds/trust.cert-manager.io_bundles.yaml >&3
 
-    if helm repo list | grep -q openziti; then
-        logDebug "refreshing OpenZiti Helm Charts"
-        helm repo update openziti >&3
-    else
-        logInfo "subscribing to OpenZiti Helm Charts"
-        helm repo add openziti https://openziti.io/helm-charts/ >&3
-    fi
+    declare -A HELM_REPOS
+    HELM_REPOS[openziti]="openziti.io/helm-charts"
+    HELM_REPOS[jetstack]="charts.jetstack.io"
+    HELM_REPOS[ingress-nginx]="kubernetes.github.io/ingress-nginx"
+    for REPO in "${!HELM_REPOS[@]}"; do
+        if helm repo list | cut -f1 | grep -qE "^${REPO}(\s+)?$"; then
+            logDebug "refreshing ${REPO} Helm Charts"
+            helm repo update "${REPO}" >&3
+        else
+            logInfo "subscribing to ${REPO} Helm Charts"
+            helm repo add "${REPO}" "https://${HELM_REPOS[${REPO}]}" >&3
+        fi
+    done
 
     #
     ## Ensure OpenZiti Controller is Upgraded and Ready
@@ -327,22 +357,25 @@ main(){
 
     if helm status ziti-controller --namespace "${ZITI_NAMESPACE}" &>/dev/null; then
         logInfo "upgrading openziti controller"
-        helm upgrade "ziti-controller" "${ZITI_CHARTS}/ziti-controller" \
+        helm upgrade "ziti-controller" "${ZITI_CHARTS_REF}/ziti-controller" \
             --namespace "${ZITI_NAMESPACE}" \
-            --set clientApi.advertisedHost="miniziti-controller.ziti" \
+            --set clientApi.advertisedHost="miniziti-controller.${MINIZITI_INGRESS_ZONE}" \
             --set trust-manager.app.trust.namespace="${ZITI_NAMESPACE}" \
             --set trust-manager.enabled=true \
             --set cert-manager.enabled=true \
-            --values https://openziti.io/helm-charts/charts/ziti-controller/values-ingress-nginx.yaml >&3
+            --values "${ZITI_CHARTS_URL}/ziti-controller/values-ingress-nginx.yaml" >&3
     else
         logInfo "installing openziti controller"
-        helm install "ziti-controller" "${ZITI_CHARTS}/ziti-controller" \
+        (( ZITI_CHARTS_ALT )) && {
+            helm dependency build "${ZITI_CHARTS_REF}/ziti-controller" >&3
+        }
+        helm install "ziti-controller" "${ZITI_CHARTS_REF}/ziti-controller" \
             --namespace "${ZITI_NAMESPACE}" --create-namespace \
-            --set clientApi.advertisedHost="miniziti-controller.ziti" \
+            --set clientApi.advertisedHost="miniziti-controller.${MINIZITI_INGRESS_ZONE}" \
             --set trust-manager.app.trust.namespace="${ZITI_NAMESPACE}" \
             --set trust-manager.enabled=true \
             --set cert-manager.enabled=true \
-            --values https://openziti.io/helm-charts/charts/ziti-controller/values-ingress-nginx.yaml >&3
+            --values "${ZITI_CHARTS_URL}/ziti-controller/values-ingress-nginx.yaml" >&3
     fi
 
     logDebug "setting default namespace '${ZITI_NAMESPACE}' in kubeconfig context '${MINIKUBE_PROFILE}'"
@@ -381,7 +414,7 @@ main(){
     fi
 
     #
-    ## Ensure Cluster DNS is Resolving miniziti-controller.ziti
+    ## Ensure Cluster DNS is Resolving miniziti-controller.${MINIZITI_INGRESS_ZONE}
     #
 
     if ! testClusterDns "${MINIKUBE_NODE_EXTERNAL}" 2>/dev/null; then
@@ -400,10 +433,11 @@ main(){
             exit 1
         fi
 
-        logDebug "patching coredns configmap with *.ziti forwarder to minikube ingress-dns nameserver"
-        kubectl patch configmap "coredns" \
-            --namespace kube-system \
-            --patch "
+        (( MINIZITI_HOSTS )) && {
+            logDebug "patching coredns configmap with *.${MINIZITI_INGRESS_ZONE} forwarder to minikube ingress-dns nameserver"
+            kubectl patch configmap "coredns" \
+                --namespace kube-system \
+                --patch "
         data:
             Corefile: |
                 .:53 {
@@ -431,24 +465,25 @@ main(){
                     reload
                     loadbalance
                 }
-                ziti:53 {
+                ${MINIZITI_INGRESS_ZONE}:53 {
                     errors
                     cache 30
                     forward . ${MINIKUBE_NODE_EXTERNAL}
                 }
         " >&3
 
-        logDebug "deleting coredns pod so a new one will have modified Corefile"
-        kubectl get pods \
-            --namespace kube-system \
-            | awk '/^coredns-/ {print $1}' \
-            | xargs kubectl delete pods \
-                --namespace kube-system >&3
+            logDebug "deleting coredns pod so a new one will have modified Corefile"
+            kubectl get pods \
+                --namespace kube-system \
+                | awk '/^coredns-/ {print $1}' \
+                | xargs kubectl delete pods \
+                    --namespace kube-system >&3
 
-        logDebug "waiting for cluster dns to be ready"
-        kubectl wait deployments "coredns" \
-            --namespace kube-system \
-            --for condition=Available=True >&3
+            logDebug "waiting for cluster dns to be ready"
+            kubectl wait deployments "coredns" \
+                --namespace kube-system \
+                --for condition=Available=True >&3
+        }
 
         # perform a DNS query in a pod so we know ingress-dns is working inside the cluster
         testClusterDns "${MINIKUBE_NODE_EXTERNAL}"
@@ -462,7 +497,7 @@ main(){
     kubectl get secrets "ziti-controller-admin-secret" \
         --namespace "${ZITI_NAMESPACE}" \
         --output go-template='{{index .data "admin-password" | base64decode }}' \
-        | xargs ziti edge login miniziti-controller.ziti:443 \
+        | xargs ziti edge login "miniziti-controller.${MINIZITI_INGRESS_ZONE}:443" \
             --yes --username "admin" \
             --password >&3
 
@@ -481,22 +516,25 @@ main(){
 
     if  helm status ziti-router --namespace "${ZITI_NAMESPACE}" &>/dev/null; then
         logDebug "upgrading router chart as 'ziti-router'"
-        helm upgrade "ziti-router" "${ZITI_CHARTS}/ziti-router" \
+        helm upgrade "ziti-router" "${ZITI_CHARTS_REF}/ziti-router" \
             --namespace "${ZITI_NAMESPACE}" \
             --set enrollmentJwt=\ \
-            --set edge.advertisedHost=miniziti-router.ziti \
-            --set linkListeners.transport.advertisedHost=miniziti-router-transport.ziti \
+            --set edge.advertisedHost="miniziti-router.${MINIZITI_INGRESS_ZONE}" \
+            --set linkListeners.transport.advertisedHost="miniziti-router-transport.${MINIZITI_INGRESS_ZONE}" \
             --set "ctrl.endpoint=ziti-controller-ctrl.${ZITI_NAMESPACE}.svc:443" \
-            --values https://openziti.io/helm-charts/charts/ziti-router/values-ingress-nginx.yaml >&3
+            --values "${ZITI_CHARTS_URL}/ziti-router/values-ingress-nginx.yaml" >&3
     else
         logDebug "installing router chart as 'ziti-router'"
-        helm install "ziti-router" "${ZITI_CHARTS}/ziti-router" \
+        (( ZITI_CHARTS_ALT )) && {
+            helm dependency build "${ZITI_CHARTS_REF}/ziti-router" >&3
+        }
+        helm install "ziti-router" "${ZITI_CHARTS_REF}/ziti-router" \
             --namespace "${ZITI_NAMESPACE}" \
             --set-file enrollmentJwt=/tmp/miniziti-router.jwt \
-            --set edge.advertisedHost=miniziti-router.ziti \
-            --set linkListeners.transport.advertisedHost=miniziti-router-transport.ziti \
+            --set edge.advertisedHost="miniziti-router.${MINIZITI_INGRESS_ZONE}" \
+            --set linkListeners.transport.advertisedHost="miniziti-router-transport.${MINIZITI_INGRESS_ZONE}" \
             --set "ctrl.endpoint=ziti-controller-ctrl.${ZITI_NAMESPACE}.svc:443" \
-            --values https://openziti.io/helm-charts/charts/ziti-router/values-ingress-nginx.yaml >&3
+            --values "${ZITI_CHARTS_URL}/ziti-router/values-ingress-nginx.yaml" >&3
     fi
 
     logInfo "waiting for ziti-router to be ready"
@@ -521,18 +559,21 @@ main(){
     if  helm --namespace "${ZITI_NAMESPACE}" list --all \
         | grep -q ziti-console; then
         logDebug "upgrading console chart as 'ziti-console'"
-        helm upgrade "ziti-console" "${ZITI_CHARTS}/ziti-console" \
+        helm upgrade "ziti-console" "${ZITI_CHARTS_REF}/ziti-console" \
             --namespace "${ZITI_NAMESPACE}" \
-            --set ingress.advertisedHost=miniziti-console.ziti \
+            --set ingress.advertisedHost="miniziti-console.${MINIZITI_INGRESS_ZONE}" \
             --set "settings.edgeControllers[0].url=https://ziti-controller-client.${ZITI_NAMESPACE}.svc:443" \
-            --values https://openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml >&3
+            --values "${ZITI_CHARTS_URL}/ziti-console/values-ingress-nginx.yaml" >&3
     else
         logDebug "installing console chart as 'ziti-console'"
-        helm install "ziti-console" "${ZITI_CHARTS}/ziti-console" \
+        (( ZITI_CHARTS_ALT )) && {
+            helm dependency build "${ZITI_CHARTS_REF}/ziti-console" >&3
+        }
+        helm install "ziti-console" "${ZITI_CHARTS_REF}/ziti-console" \
             --namespace "${ZITI_NAMESPACE}" \
-            --set ingress.advertisedHost=miniziti-console.ziti \
+            --set ingress.advertisedHost="miniziti-console.${MINIZITI_INGRESS_ZONE}" \
             --set "settings.edgeControllers[0].url=https://ziti-controller-client.${ZITI_NAMESPACE}.svc:443" \
-            --values https://openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml >&3
+            --values "${ZITI_CHARTS_URL}/ziti-console/values-ingress-nginx.yaml" >&3
     fi
 
     logInfo "waiting for ziti-console to be ready"
@@ -572,7 +613,7 @@ main(){
         | grep -q "httpbin-intercept-config"; then
         logDebug "creating config httpbin-intercept-config"
         ziti edge create config "httpbin-intercept-config" intercept.v1 \
-            '{"protocols":["tcp"],"addresses":["httpbin.ziti"], "portRanges":[{"low":80, "high":80}]}' >&3
+            '{"protocols":["tcp"],"addresses":["httpbin.'"${MINIZITI_INTERCEPT_ZONE}"'"], "portRanges":[{"low":80, "high":80}]}' >&3
     else
         logDebug "ignoring config httpbin-intercept-config"
     fi
@@ -651,7 +692,10 @@ main(){
 
     if [[ -s /tmp/httpbin-host.json ]]; then
         logDebug "installing httpbin chart as 'miniziti-httpbin'"
-        helm install "miniziti-httpbin" "${ZITI_CHARTS}/httpbin" \
+        (( ZITI_CHARTS_ALT )) && {
+            helm dependency build "${ZITI_CHARTS_REF}/httpbin" >&3
+        }
+        helm install "miniziti-httpbin" "${ZITI_CHARTS_REF}/httpbin" \
             --set-file zitiIdentity=/tmp/httpbin-host.json \
             --set zitiServiceName=httpbin-service >&3
         rm -f /tmp/httpbin-host.json
@@ -661,7 +705,7 @@ main(){
     kubectl get secrets "ziti-controller-admin-secret" \
         --namespace "${ZITI_NAMESPACE}" \
         --output go-template='{{"\n'\
-'INFO: Your OpenZiti Console is here:\thttps://miniziti-console.ziti\n'\
+'INFO: Your OpenZiti Console is here:\thttps://miniziti-console.'"${MINIZITI_INGRESS_ZONE}"'\n'\
 'INFO: The password for \"admin\" is:\t"}}{{index .data "admin-password" | base64decode }}'\
 '{{"\n\n"}}'
 

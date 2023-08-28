@@ -57,8 +57,8 @@ export EXTERNAL_DNS="acme.example.com"
 export EXTERNAL_IP="$(curl -s eth0.me)"       
 export ZITI_CTRL_EDGE_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
-export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${EXTERNAL_DNS}"
-export ZITI_ROUTER_ADVERTISED_ADDRESS="${EXTERNAL_DNS}"
+export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${EXTERNAL_DNS:-${EXTERNAL_IP}}"
+export ZITI_ROUTER_ADVERTISED_ADDRESS="${EXTERNAL_DNS:-${EXTERNAL_IP}}"
 export ZITI_CTRL_ADVERTISED_PORT=8440
 export ZITI_CTRL_EDGE_ADVERTISED_PORT=8441
 export ZITI_ROUTER_PORT=8442
@@ -128,24 +128,9 @@ sudo systemctl enable --now ziti-controller
 sudo systemctl enable --now ziti-router
 ```
 
-Example output:
-
-```bash
-$ sudo cp "${ZITI_HOME}/${ZITI_CTRL_NAME}.service" /etc/systemd/system/ziti-controller.service
-
-$ sudo cp "${ZITI_HOME}/${ZITI_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
-
-$ sudo systemctl daemon-reload
-
-$ sudo systemctl enable --now ziti-controller
-Created symlink from /etc/systemd/system/multi-user.target.wants/ziti-controller.service to /etc/systemd/system/ziti-controller.service.
-
-$ sudo systemctl enable --now ziti-router
-Created symlink from /etc/systemd/system/multi-user.target.wants/ziti-router.service to /etc/systemd/system/ziti-router.service.
-```
-
-Now, both the controller and the edge router will restart automatically!  After a few seconds you can then run these
-commands and verify systemd has started the processes and see the status:
+Now, both the controller and the edge router will restart automatically if the machine reboots!  
+After a few seconds you can then run these commands and verify systemd has started the processes 
+and see the status:
 
 ```bash
 sudo systemctl -q status ziti-controller --lines=0 --no-pager

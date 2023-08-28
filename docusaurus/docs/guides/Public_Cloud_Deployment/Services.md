@@ -56,7 +56,7 @@ error: error listing https://161.35.108.218:8441/edge/management/v1/config-types
 We need two routers to complete our example in this guide.
 
 - Public Edge Router (**pub-er**) was setup in the [Router setup section](Router#23-create-and-setup-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](Router#29-firewall) for this router.
-- Local Edge Router (**local-er**). Please follow the [Router guide](Router/) to setup a [Router with edge listener and tunneler](Router/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Route Table](Router#27-route-table), [Source and Destination Check](Router#28-source-and-destination-check) and [Firewall](Router#29-firewall).
+- Local Edge Router (**local-er**). Please follow the [Router guide](Router/) to setup a [Router with edge listener and tunneler](Router/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Resolver](Router#26-fix-the-resolver), [Route Table](Router#27-route-table), [Source and Destination Check](Router#28-source-and-destination-check) and [Firewall](Router#29-firewall).
 
 #### 3.2.2.1 ZAC
 On the ZAC **ROUTERS** screen, you can check your router and make sure it is created correctly. You can also check the identity associated with the router by clicked on **IDENTITIES**
@@ -459,8 +459,11 @@ root@local-er:~# cat >hello.txt
                          \/                   \/\/
 
 This is hello from local-er.
-root@local-er:~# python3 -m http.server 8080
-Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
+```
+
+Then start the http server.
+```bash
+python3 -m http.server 8080
 ```
 
 Login to the intercept side tunneler (**egress-tunnel**) node.
@@ -478,7 +481,7 @@ root@egress-tunnel:~#
 ```
 
 ### 3.5.7 Conclusion
-In this section, we demonstrated intercepting http (port 80) request to an IP address and forward the request to a remote http server listening to port 8080 via ziti network.
+In this section, we demonstrated intercepting http (port 80) request to an IP address and forward the request to a remote http server listening on the port 8080 via ziti network.
 
 
 ## 3.6 Setup Connection from a non-OpenZiti client
@@ -583,16 +586,57 @@ root@egress-tunnel:~# cat >hello.txt
 
 
 You have reached the "egress-tunnel".
-<CTRL-D>
-root@egress-tunnel:~# sudo python3 -m http.server 80
-Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 ```
 
+Then start the http server.
+```bash
+sudo python3 -m http.server 80
+```
 
-Login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
+Then login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
 
 #### 3.6.7.2 Test IP intercept
 
+<Tabs
+  defaultValue="Azure"
+  values={[
+      { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
+      { label: 'Google', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+**setup the route first**. The route is via our ER in the same DC (10.124.0.2)
+```
+root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.124.0.2
+```
+
+</TabItem>
+<TabItem value="Azure">
+
+</TabItem>
+<TabItem value="GCP">
+
+</TabItem>
+<TabItem value="OCI">
+
+</TabItem>
+<TabItem value="IBM">
+
+**setup the route first**. The route is via our ER in the same DC (10.162.209.220)
+
+```
+root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.162.209.220
+```
+</TabItem>
+</Tabs>
+
+
+**test the connection**
 ```
 root@Non-OpenZiti-Client:~# curl http://11.11.11.11/hello.txt
               _   _      _ _
@@ -603,7 +647,6 @@ root@Non-OpenZiti-Client:~# curl http://11.11.11.11/hello.txt
 
 
 You have reached the "egress-tunnel".
-Bye.
 root@Non-OpenZiti-Client:~#
 ```
 
@@ -615,7 +658,10 @@ The **Non-OpenZiti-Client**'s resolver has to point to the local-er.  So it can 
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -664,9 +710,95 @@ sudo systemctl restart systemd-resolved.service
 ```
 
 </TabItem>
+<TabItem value="DigitalOcean">
+
+Modify "/etc/systemd/resolved.conf.d/DigitalOcean.conf" to point to the local IP of the "local-er".
+```
+root@Non-OpenZiti-Client:~# cat /etc/systemd/resolved.conf.d/DigitalOcean.conf
+[Resolve]
+DNS=144.126.220.15
+```
+
+Restart the systemd-resolved service
+```bash
+sudo systemctl restart systemd-resolved.service
+```
+
+</TabItem>
+<TabItem value="OCI">
+
+- Modify **/etc/systemd/resolved.conf**.
+- Put local IP of the "local-er" into the file.
+- For example:
+```
+DNS=10.5.0.4  #local private IP of the ER
+```
+**NOTE, the IP address should match your "Target Selection" in the route table**
+
+Restart the systemd-resolved service
+```bash
+sudo systemctl restart systemd-resolved.service
+```
+</TabItem>
+<TabItem value="IBM">
+
+- Modify **/etc/systemd/resolved.conf**. 
+- Put **Public IP** of the "local-er" into the file.
+- For example:
+```
+DNS=169.45.71.226    #Public IP of the ER
+```
+Restart the systemd-resolved service
+```bash
+sudo systemctl restart systemd-resolved.service
+```
+
+</TabItem>
 </Tabs>
 
 #### 3.6.7.4 Test DNS intercept
+
+<Tabs
+  defaultValue="Azure"
+  values={[
+      { label: 'Azure', value: 'Azure', },
+      { label: 'AWS', value: 'AWS', },
+      { label: 'Google', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
+  ]}
+>
+<TabItem value="DigitalOcean">
+
+**setup the route first**.
+- The route is via our ER in the same DC (10.124.0.2)
+- We need to setup the route for 100.64/10 subnet
+```
+root@Non-OpenZiti-Client:~# sudo ip route add 100.64.0.0/10 via 10.124.0.2
+```
+
+</TabItem>
+<TabItem value="Azure">
+
+</TabItem>
+<TabItem value="GCP">
+
+</TabItem>
+<TabItem value="OCI">
+
+</TabItem>
+<TabItem value="IBM">
+
+**setup the route first**.
+- The route is via our ER in the same DC (10.162.209.220)
+- We need to setup the route for 100.64/10 subnet
+```
+root@Non-OpenZiti-Client:~# sudo ip route add 100.64.0.0/10 via 10.162.209.220
+```
+
+</TabItem>
+</Tabs>
 
 ```
 root@Non-OpenZiti-Client:~# curl http://e2thttp.ziti/hello.txt
