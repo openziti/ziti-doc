@@ -13,9 +13,7 @@ fi
 findMarkdownFiles(){
     find "$1" \
         -regextype posix-extended \
-        -regex ".*\.mdx?" \
-        -print0 \
-        | xargs -0r grep -lE '\]\(\.\./[^)]+\.mdx?\)'
+        -regex ".*\.mdx?"
 }
 
 for DOCSROOT in $DOCUSAURUS/{docs,blog,docs-policies}; do
