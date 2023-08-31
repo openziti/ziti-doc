@@ -91,7 +91,7 @@ intermediate CA, and root CA functionality supports RSA and EC keys.
 Please note that intermediate CA certificates may be provided during authentication if necessary. The client certificate
 should be in index zero and intermediate CA certificates in subsequent indexes in any order.
 
-To associate a client certificate with an Identity and Authenticator see the [Enrollment](../enrollment.md) 
+To associate a client certificate with an Identity and Authenticator see the [Enrollment](/learn/core-concepts/security/enrollment.md) 
 section.
 
 Expired client certificates may be allowed via [Authentication Policies](30-authentication-policies.md) if desired.
@@ -121,7 +121,7 @@ production environments JWT and X509 authentication is recommended.
 
 ### Secondary Authentication
 
-Secondary authentication is represented by a series of [Authentication Queries](../sessions.md#authentication-queries) on an 
+Secondary authentication is represented by a series of [Authentication Queries](/learn/core-concepts/security/sessions.md#authentication-queries) on an 
 API Session in the `authQueries` property. At present the following secondary authentication mechanisms are supported:
 
 - TOTP - Time-Based One-Time Password (aka Authenticator Apps)
@@ -135,11 +135,11 @@ many others.
 
 TOTP is configured per-identity and must be client initiated due to the symmetric key exchange that must take place.
 Administrators can enforce TOTP usage through [Authentication Policies](30-authentication-policies.md) and 
-[Posture Checks](../authorization/posture-checks.md). [Authentication Policy](30-authentication-policies.md) enforcement 
-stops the client from transitioning between [partially authenticated](../sessions.md#full-vs-partial-authentication) and
-[fully authenticated](../sessions.md#full-vs-partial-authentication) status. This stops a client from accessing any service information
-or connect to any service. [Posture Check](../authorization/posture-checks.md) enforcement allows a client to
-[fully authenticate](../sessions.md#full-vs-partial-authentication), but based on [Service Policy](../authorization/policies/overview.mdx) 
+[Posture Checks](/learn/core-concepts/security/authorization/posture-checks.md). [Authentication Policy](30-authentication-policies.md) enforcement 
+stops the client from transitioning between [partially authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication) and
+[fully authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication) status. This stops a client from accessing any service information
+or connect to any service. [Posture Check](/learn/core-concepts/security/authorization/posture-checks.md) enforcement allows a client to
+[fully authenticate](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication), but based on [Service Policy](/learn/core-concepts/security/authorization/policies/overview.mdx) 
 restrict connection to specific services.
 
 #### JWT

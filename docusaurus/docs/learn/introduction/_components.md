@@ -28,7 +28,7 @@ overall management of the network easier.
 The OpenZiti Controller uses a local database based on [bbolt](https://github.com/etcd-io/bbolt) to
 store the information needed to manage the network.
 
-[Controller Deployment Guide](../../reference/deployments/01-controller.md)
+[Controller Deployment Guide](/reference/deployments/01-controller.md)
 
 ### OpenZiti Router
 
@@ -46,7 +46,7 @@ The OpenZiti Router is the entry point to the OpenZiti Network for client connec
 The OpenZiti Router in combination with the Ziti Controller is responsible
 for authenticating and authorizing OpenZiti Edge Clients.
 
-[Router Deployment Guide](../../reference/deployments/02-router/01-deployment.md)
+[Router Deployment Guide](/reference/deployments/02-router/01-deployment.md)
 
 ### OpenZiti Edge Clients
 
@@ -66,7 +66,7 @@ OpenZiti offers specialized Edge Clients called tunnelers
 which provide seamless, secure connectivity and do not require
 changes to the target application.
 
-Read more about [clients](../core-concepts/clients/choose.mdx)
+Read more about [clients](/learn/core-concepts/clients/choose.mdx)
 
 ### OpenZiti BrowZer
 
@@ -90,7 +90,7 @@ does the necessary instrumentation of the web application automatically, on the 
 is being loaded from the web server to the user's browser.
 
 To enable BrowZer in a given OpenZiti Network, it must be configured. For information
-on how to add BrowZer to an OpenZiti Network, follow [the BrowZer quickstart guide](../quickstarts/browzer/index.md)
+on how to add BrowZer to an OpenZiti Network, follow [the BrowZer quickstart guide](/learn/quickstarts/browzer/index.md)
 
 ## Logical Components
 
@@ -116,7 +116,7 @@ OpenZiti Network Routers to reach the exit node. Simply specifying the
 node is all the end-user need do, the OpenZiti Network handles the
 rest.
 
-Read more about [services](../core-concepts/services/overview.mdx)
+Read more about [services](/learn/core-concepts/services/overview.mdx)
 
 ### Identities
 
@@ -129,7 +129,7 @@ to the OpenZiti Network. The presented certificate is used by the OpenZiti
 Network to authorize the client and enumerate the services the
 Identity is authorized to use.
 
-Read more about [identities](../core-concepts/identities/overview.mdx) and [authentication](../core-concepts/security/authentication/auth.md).
+Read more about [identities](/learn/core-concepts/identities/overview.mdx) and [authentication](/learn/core-concepts/security/authentication/auth.md).
 
 ### Policies
 
@@ -182,4 +182,4 @@ Policy access to the given edge router. Similarly, adding a service
 to a Service Edge Router Policy will grant that service access to the
 edge routers mapped in that Service Edge Router Policy.
 
-[Read more about authorization](../core-concepts/security/authorization/policies/overview.mdx)
+[Read more about authorization](/learn/core-concepts/security/authorization/policies/overview.mdx)

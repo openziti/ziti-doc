@@ -55,7 +55,7 @@ new identities, identities, policies, and other entities used to manage an OpenZ
 The Edge Client API is used by clients that wish to dial (connect) or bind (host) services. The services that the
 clients are allowed to interact with is defined by [policies](/docs/learn/core-concepts/security/authorization/policies/overview). In order
 for clients to use the client API they must first [authenticate](/docs/learn/core-concepts/security/authentication/auth) and
-obtain either a [partial or fully authenticated](../../../learn/core-concepts/security/sessions.md#full-vs-partial-authentication)
+obtain either a [partial or fully authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication)
 [API Session](/docs/learn/core-concepts/security/sessions).
 
 [Explore the latest Edge Client API Reference](./01-edge-client-reference.mdx)
@@ -81,7 +81,7 @@ APIs, Edge Client and Management included, to listen on any combination of netwo
 
 ### Controller Configuration Reference
 
-[The controller configuration reference](../../30-configuration/controller.md)
+[The controller configuration reference](/reference/30-configuration/controller.md)
 
 #### Example Controller Edge Configuration Section {#edge-configuration-section}
 
