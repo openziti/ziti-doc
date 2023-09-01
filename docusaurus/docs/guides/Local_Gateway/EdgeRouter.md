@@ -22,14 +22,15 @@ For the demonstration, we will setup the network like below:
 - The Windows machine (**Windows Client**) is in the same subnet (172.16.31.0/24) as Router (**local-router**).
 - The Ubuntu 22.04 server (**Ubuntu Server**) is in the same subnet (172.16.240.0/24) as Router (**remote-router**).
 - The data (ssh) will be passed between the Windows Client and the Ubuntu Server.
+
 ## 1.2 Prerequisite
 Please complete the following steps before continue with this demo.
-- An open-ziti network should be created already. If not, please follow this quickstart [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) guide to setup open-ziti network first.
-- Ziti Controller IP
-- Ziti Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_ADVERTISED_PORT**
-- Ziti Controller Management Port: On the controller, issue this command **echo $ZITI_CTRL_EDGE_ADVERTISED_PORT**
-- Ziti Controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
-- Created two *routers* already. The routers should be running on **Ubuntu 22.04**.
+- An open-ziti network should be created already. If not, please follow this quickstart [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) guide to setup open-ziti network first. **NOTE**, the router link listener port (**10080**) needs to be opened on the firewall if this is the only transit router you have on the network.
+- Get the Ziti Controller IP or DNS name
+- Get the Ziti Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_ADVERTISED_PORT**
+- Get the Ziti Controller Management Port: On the controller, issue this command **echo $ZITI_CTRL_EDGE_ADVERTISED_PORT**
+- Get the Ziti Controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
+- Created two target VMs to host *routers*. The VMs should be running on **Ubuntu 22.04**.
 - Created one *windows client* already. Suggested windows version Windows 10 or Windows 11. Windows servers should work fine as well.
 - Created one *ubuntu server* already. Or any linux server capable of accepting ssh and http connection.
 ## 2.0 Setup Routers
@@ -61,6 +62,7 @@ We are also going to create the router without healthcheck section and metrics, 
 - --disableHealthChecks
 - --disableMetrics
 ### 2.1.2 Create and Register Router
+#### 2.1.2.1 Create Router using one command
 ```bash
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --autoTunnelListener --routerName local-router
 ```
@@ -69,6 +71,30 @@ What this command does:
 - creates a router named "local-router" (with tunneler enabled) on the controller
 - generates the conf.yml locally
 - downloads the jwt file for the router from controller
+- enrolls the router with the jwt and the generated conf.yml
+- creates the service file to start and stop the router
+- and configured the resolver
+
+#### 2.1.2.2 Register Router using jwt
+**Skip this section if you already created router using one command**
+
+An alternative way to register router is creating it on the controller first and then register it on the router VM.
+
+Create Router and retrieve JWT on the **controller**
+```bash
+zitiLogin
+# the followin will create a edge router with tunneler enabled on the controller
+ziti edge create edge-router local-router -o local-router.jwt -t
+cat local-router.jwt
+```
+
+Copy the output of "local-router.jwt" and register the router on the **router VM**
+```bash
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441  --disableHealthChecks --disableMetrics --autoTunnelListener  <jwt content>
+```
+What this command does:
+- contacts the controller using info in the JWT.
+- generates the conf.yml locally
 - enrolls the router with the jwt and the generated conf.yml
 - creates the service file to start and stop the router
 - and configured the resolver
@@ -129,7 +155,7 @@ ziggy@local-gw:~$ /opt/ziti/ziti edge list edge-routers
 │ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
 ├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
 │ .t9Gno26Y  │ local-router              │ true   │ true          │    0 │            │
-│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ false  │ true          │    0 │ public     │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ true   │ true          │    0 │ public     │
 ╰────────────┴───────────────────────────┴────────┴───────────────┴──────┴────────────╯
 results: 1-2 of 2
 ziggy@local-gw:~$ /opt/ziti/ziti edge list identities
@@ -187,8 +213,27 @@ tar xf ziti_router_auto_enroll.tar.gz
 We are going to use Router Name: **remote-router**
 
 ### 2.2.2 Create and Register Router
+#### 2.2.2.1 Create Router using one command
 ```bash
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --autoTunnelListener --routerName remote-router
+```
+
+#### 2.2.2.2 Register Router using jwt
+**Skip this section if you already created router using one command**
+
+An alternative way to register router is creating it on the controller first and then register it on the router VM.
+
+Create Router and retrieve JWT on the **controller**
+```bash
+zitiLogin
+# the followin will create a edge router with tunneler enabled on the controller
+ziti edge create edge-router remote-router -o remote-router.jwt -t
+cat remote-router.jwt
+```
+
+Copy the output of "remote-router.jwt" and register the router on the **router VM**
+```bash
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441  --disableHealthChecks --disableMetrics --autoTunnelListener  <jwt content>
 ```
 
 ### 2.2.3 Check the installation
@@ -214,14 +259,16 @@ resolvectl
 ```
 OUTPUT:
 ```
+ziggy@remote-router:~$ /opt/ziti/ziti edge list edge-routers
 ╭────────────┬───────────────────────────┬────────┬───────────────┬──────┬────────────╮
 │ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
 ├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
 │ .t9Gno26Y  │ local-router              │ true   │ true          │    0 │            │
-│ 967-JQe6s  │ remote-router             │ false  │ true          │    0 │            │
-│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ false  │ true          │    0 │ public     │
+│ 967-JQe6s  │ remote-router             │ true   │ true          │    0 │            │
+│ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ true   │ true          │    0 │ public     │
 ╰────────────┴───────────────────────────┴────────┴───────────────┴──────┴────────────╯
 results: 1-3 of 3
+ziggy@remote-router:~$ /opt/ziti/ziti edge list identities
 ╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
 │ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
 ├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
