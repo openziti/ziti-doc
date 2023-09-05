@@ -45,7 +45,7 @@ mesh.
 
 Data links establish inter-router connectivity, but a way to establish connectivity to the
 application servers is still needed. The service definition on its own doesn't specify how to
-connections to the application servers should be made. Connectivity to the applications servers is
+connections to the application servers should be made. Connectivity to the application servers is
 handled by terminators.
 
 ![image](/img/data-flow/terminators.png)
@@ -72,7 +72,7 @@ forwarded to and what kind of health checks to run.
 ### Edge Router Hosted
 
 Edge routers running in tunneler mode (ER/T) can also host services by acting as a reverse proxy.
-They will also use the `host. v1` and `host.v2` configurations, same as the SDK based tunnelers. An
+They will also use the `host.v1` and `host.v2` configurations, same as the SDK based tunnelers. An
 ER/T will create and delete terminators as services, configurations and policies are created,
 updated or deleted.
 
@@ -96,7 +96,7 @@ of events:
 As a first step, the SDK must be authenticated to the controller. The result of a successful
 authentication is an API Session. The SDK will use the API Session to make additional requests to
 the control and to authenticate with edge routers. In order for edge routers to be able to verify
-API Session from connecting SDKs, the controller must inform routers of new API Session as they are
+API Sessions from connecting SDKs, the controller must inform routers of each new API Session as they are
 created.
 
 ![image](/img/data-flow/client-api-session.png)
@@ -130,7 +130,7 @@ routers will be notified and connections associated with that API Session will b
 
 ### Dial the Service
 
-The SDK will pick and edge router and send it a Dial request for desired service along with the
+The SDK will pick an edge router and send it a Dial request for desired service along with the
 service session token. The edge router selected is known as the initiating router. The edge router
 will translate this into a 'create circuit' request to the controller. The controller will select a
 path and will message the routers in the path, so they can update their routing tables and/or make
@@ -144,7 +144,7 @@ in the path is called the terminating router.
   A minimum cost will prevent paths from adding unnecessary hops or from bouncing between two
   similar paths.
 * Link costs are currently based on the link's round-trip latency
-* Terminators have a static cost which can be management via the management API for static
+* Terminators have a static cost which can be managed via the management API for static
   terminators, or via the SDK for dynamic terminators.
 * Terminators also have a dynamic cost. The more circuits on a terminator, the higher the cost. As
   circuits are torn down, the cost goes back down. Dial failures will also temporarily raise the
@@ -154,7 +154,7 @@ in the path is called the terminating router.
 
 ### Established Circuit
 
-One the routing and connection to application server are established, the circuit is made. The
+Once the routing and connection to the application server are established, the circuit is made. The
 controller notifies the initiating router and data can now flow between the SDK and the application
 server.
 
