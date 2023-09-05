@@ -57,18 +57,17 @@ This service is hosted by two application servers.
 Services that are forwarding traffic from an OpenZiti tunneling proxy may use the following
 properties to indicate what should be forwarded:
 
-* `forwardProtocol` - flag indicating that the protocol of the forwarded connection is to be used
-    * Must be the value `true`
+* `forwardProtocol` - flag indicating that the protocol of the forwarded connection is to be used.
+  Can only be set to true.
 * `allowedProtocols` - the list of allowed protocols. Valid values include `tcp` and `udp`
 * `forwardAddress` - flag indicating that the target address of the forwarded connection is to be
-  used
-    * Must be the value `true`
-* `allowedAddresses` - the list of allowed addresses. Valid values include ips, hostnames and CIDRs
-* `forwardPort` - flag indicating that the target port of the forwarded connection is to be used
-    * Must be the value `true`
+  used. Can only be set to true.
+* `allowedAddresses` - the list of allowed addresses. Valid values include IPs, hostnames and CIDRs
+* `forwardPort` - flag indicating that the target port of the forwarded connection is to be used.
+  Can only be set to true.
 * `allowedPortRanges` - the list of allowed port ranges.
     * Example: `allowedPortRanges: [ {"low" : 80, "high" : 80}, {"low" : 8080, "high" : 8090} ]`
-* `allowedSourceAddresses` - list of addresses in ip, hostname or CIDR
+* `allowedSourceAddresses` - list of addresses in IP, hostname or CIDR
     * hosting tunnelers establish local routes for the specified source addresses so binding will
       succeed
 
@@ -100,8 +99,9 @@ properties to indicate what should be forwarded:
 }
 ```
 
-Note that not everything must be forwarded. For example the address could be hard coded, while the
-port and protocol could be forwarded.
+Note that not everything must be forwarded. For example the address is not forwarded in the example
+below. The port and protocol are forwarded and the corresponding 'allow' is set, but the address is
+statically set to '192.168.100.1
 
 ```json
 {
@@ -128,11 +128,11 @@ port and protocol could be forwarded.
 Health checks and listen options also can be specified for each terminator.
 
 * `listenOptions` - Provides ways to customize the terminator
-    * See below for the full definition
+    * See the [full definition below](#listen-options)
 * `portChecks` - TCP port health check definitions
-    * See below for the full definition
+    * See the [full definition below](#port-checks)
 * `httpChecks` - HTTP health check definitions
-    * See below for the full definition
+    * See the [full definition below](#http-checks)
 
 ## Listen Options
 
@@ -249,10 +249,13 @@ Actions support the following properties:
         * `send event` - causes a terminator event to be emitted from the controller. Useful for
           alerting or external integrations.
 
-:::note Although multiple health checks can be configured, it's best if the actions don't overlap.
-If multiple health checks change the health status, the behavior when one check is passing and
-another is failing is undefined. It should generally be safe to have multiple checks adjusting cost
-or generating events.
+:::note
+
+Although multiple health checks can be configured, it's best if the actions don't overlap. If
+multiple health checks change the health status, the behavior when one check is passing and another
+is failing is undefined. It should generally be safe to have multiple checks adjusting cost or
+generating events.
+
 :::
 
 **Port Check Example**
