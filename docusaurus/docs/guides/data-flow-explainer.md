@@ -82,7 +82,7 @@ When an SDK wants to connect to an OpenZiti hosted service, it will initiate the
 of events:
 
 1. Authenticate to the controller
-2. Create a service session for the desired service
+2. Create a Service Session for the desired service
 3. Connect to one or more edge routers
 4. Send a Dial request to the selected edge router
 5. The edge router will send a create circuit request to the controller
@@ -96,8 +96,8 @@ of events:
 As a first step, the SDK must be authenticated to the controller. The result of a successful
 authentication is an API Session. The SDK will use the API Session to make additional requests to
 the control and to authenticate with edge routers. In order for edge routers to be able to verify
-API Sessions from connecting SDKs, the controller must inform routers of each new API Session as they are
-created.
+API Sessions from connecting SDKs, the controller must inform routers of each new API Session as
+they are created.
 
 ![image](/img/data-flow/client-api-session.png)
 
@@ -107,18 +107,18 @@ controller for an extended period of time.
 
 ### Create Service Session
 
-The SDK must now create service session. When creating a service session, the controller will verify
-that the identity used by the SDK has permission to access the service. The controller will also see
-which edge routers can be used to access the session. The set of edge routers will be returned along
-with the session token.
+The SDK must now create a Service Session. When creating a Service Session, the controller will
+verify that the identity used by the SDK has permission to access the service. The controller will
+also see which edge routers can be used to access the session. The set of edge routers will be
+returned along with the Service Session token.
 
 ![image](/img/data-flow/client-session.png)
 
 ### Connect to Edge Routers
 
-The returned session contains the edge routers that can be used for this service along with the
-address or addresses that each router is listening on for SDK connections. The SDK will connect to
-the edge routers and use whichever one connects the fastest. The edge router connections are not
+The returned Service Session contains the edge routers that can be used for this service along with
+the address or addresses that each router is listening on for SDK connections. The SDK will connect
+to the edge routers and use whichever one connects the fastest. The edge router connections are not
 per-service, but will be shared by all services. If the connections are already made, the SDK will
 prefer connections with lower latency.
 
@@ -131,7 +131,7 @@ routers will be notified and connections associated with that API Session will b
 ### Dial the Service
 
 The SDK will pick an edge router and send it a Dial request for desired service along with the
-service session token. The edge router selected is known as the initiating router. The edge router
+Service Session token. The edge router selected is known as the initiating router. The edge router
 will translate this into a 'create circuit' request to the controller. The controller will select a
 path and will message the routers in the path, so they can update their routing tables and/or make
 connections to application servers as necessary.
@@ -144,8 +144,8 @@ in the path is called the terminating router.
   A minimum cost will prevent paths from adding unnecessary hops or from bouncing between two
   similar paths.
 * Link costs are currently based on the link's round-trip latency
-* Terminators have a static cost which can be managed via the management API for static
-  terminators, or via the SDK for dynamic terminators.
+* Terminators have a static cost which can be managed via the management API for static terminators,
+  or via the SDK for dynamic terminators.
 * Terminators also have a dynamic cost. The more circuits on a terminator, the higher the cost. As
   circuits are torn down, the cost goes back down. Dial failures will also temporarily raise the
   dynamic terminator cost.
