@@ -10,7 +10,7 @@ import CliLogin from '../../../_cli-login.md'
 import CliLogFormats from '../../../_cli-log-levels-and-formats.md'
 
 The Ziti Router is the entry point for Ziti-based clients. It is responsible for authenticating incoming connections by
-verifying the connecting client has a valid network session.  It also routes traffic to whatever the
+verifying the connecting client has a valid Session.  It also routes traffic to whatever the
 destination is for the given service. In simple deployments can have a single router as is the case
 with the [Ziti Network Quickstart](/docs/learn/quickstarts/network/).
 
