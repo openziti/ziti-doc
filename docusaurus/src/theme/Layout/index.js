@@ -30,12 +30,102 @@ export default function Layout(props) {
 
     let lastPath = window.location.pathname;
     var intervalId;
+    var wizardIndex = 0;
+    var wizardTotal = 0;
 
     function UrlChanged() {
       if (lastPath!=window.location.pathname) {
         BuildMenu(); 
+        BuildWizard();
         lastPath = window.location.pathname;
       }
+    }
+
+    function ShowWizard() {
+      $(".wizardmodal").show();
+    }
+
+    function BuildWizard() {
+      if ($("#Wizardly").length>0) {
+        wizardIndex = 0;
+        wizardTotal = 0;
+        let nav = '';
+        let html = '';
+        $("article").find("h2").each((i, e) => {
+          let elem = $(e);
+          if (elem.attr("id")!="Wizardly") {
+            wizardTotal++;
+            elem.children("a").hide();
+            console.log(i);
+            nav += '<li role="tab" class="wizardNav'+i+' '+((i==0)?"first current":"")+'"><span id="WizardNav'+i+'" data-index="'+i+'" class="wizardnav"><span class="current-info audible"></span><div class="title">';
+            nav += '<span class="step-number">'+(i+1)+'</span>';
+            nav += '<span class="step-text">'+elem.text()+'</span>';
+            nav += '</div></span></li>';
+            html += '<div class="wizardContent wizard'+i+'"'+((i!=0)?'style="display:none"':"")+'>';
+            html += '<h2>'+elem.html()+'</h2>';
+            elem.nextUntil('h2').each((j, f) => {
+              console.log($(f).attr("id"));
+              if ($(f).attr("id")!="Wizardly") {
+                html += $(f).html();
+              }
+            });
+            html += '</div>';
+          }
+        });
+
+        $("#WizardTabs").html(nav);
+        $("#WizardContents").html(html);
+        $("#WizardPreviousButton").hide();
+        $("#WizardNextButton").show();
+        $(".wizardnav").off();
+        $(".whitez").off();
+        $(".whitez").click(() => {
+          $(".wizardmodal").hide();
+        });
+        window['WizardGoTo'] = WizardGoTo;
+        window['WizardNext'] = WizardNext;
+        window['WizardPrev'] = WizardPrev;
+        window['ShowWizard'] = ShowWizard;
+        $(".wizardnav").click(window.WizardGoTo);
+      }
+    }
+
+    function WizardGoTo(e) {
+      let index = $(e.currentTarget).data("index");
+      console.log($(e.currentTarget));
+      if (index>0 && index<wizardTotal) wizardIndex = index;
+      console.log(index);
+      WizardShow();
+    }
+
+
+    function WizardShow() {
+      if (wizardIndex<wizardTotal) $("#WizardNextButton").show();
+      else $("#WizardNextButton").hide();
+      if (wizardIndex==0) $("#WizardPreviousButton").hide();
+      else $("#WizardPreviousButton").show();
+      console.log("Here");
+      $(".current").removeClass("current");
+      console.log("And Here");
+      $(".wizardContent").hide();
+      $(".wizardNav"+wizardIndex).addClass("current");
+      $(".wizard"+wizardIndex).show();
+    }
+
+    function WizardPrev() {
+      console.log(wizardIndex,wizardTotal);
+      if (wizardIndex>0) wizardIndex--;
+      else wizardIndex = wizardTotal-1;
+      console.log(wizardIndex,wizardTotal);
+      WizardShow();
+    }
+
+    function WizardNext() {
+      console.log(wizardIndex,wizardTotal);
+      if (wizardIndex<wizardTotal) wizardIndex++;
+      else wizardIndex = 0;
+      console.log(wizardIndex,wizardTotal);
+      WizardShow();
     }
 
     function BuildMenu() {
@@ -63,12 +153,15 @@ export default function Layout(props) {
         });
       }
     }
+
     window.onpopstate = () => setTimeout(BuildMenu, 100);
+    window.onpopstate = () => setTimeout(BuildWizard, 100);
 
     window.addEventListener("load", (event) => {
       if (intervalId) clearInterval(intervalId);
       intervalId = setInterval(UrlChanged, 100);
       BuildMenu();
+      BuildWizard();
     });
   }
   return (

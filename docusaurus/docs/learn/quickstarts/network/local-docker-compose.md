@@ -1,7 +1,11 @@
 ---
 sidebar_position: 50
 ---
+
+import Wizardly from '@site/src/components/Wizardly';
+
 # Local - Docker Compose
+<Wizardly></Wizardly>
 
 If you are not familiar with it, [Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running
 multi-container Docker applications. It makes deploying multiple containers easy by using a declarative format defined

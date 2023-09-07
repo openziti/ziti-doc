@@ -2,7 +2,10 @@
 sidebar_position: 60
 ---
 
+import Wizardly from '@site/src/components/Wizardly';
+
 # Host OpenZiti Anywhere
+<Wizardly></Wizardly>
 
 You can absolutely choose to host your [OpenZiti Network](../../introduction/index.mdx) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your

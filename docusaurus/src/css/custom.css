@@ -789,6 +789,7 @@ input {
   height: 100vh;
   width: 100vw;
   z-index: 1000;
+  display: none;
 }
 
 .wizardmodal .page-wrapper {
@@ -878,9 +879,20 @@ input {
   font-weight: bold;
 }
 
+.openWizard {
+  position: absolute;
+  top: 30px;
+  right: 300px;
+  cursor: pointer;
+}
+
 .title .step-text {
   font-weight: 600;
   color: #8797ab;
+}
+
+.wizardnav {
+  cursor: pointer;
 }
 
 .current .title .step-number {

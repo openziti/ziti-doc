@@ -17,3 +17,5 @@ docs-local
 
 github_deploy_key
 sessions
+
+/node_modules
