@@ -32,6 +32,7 @@ _usage(){
             "   creds\t\tprints admin user updb credentials\n"\
             "   login\t\trun ziti edge login with miniziti context\n"\
             "   ziti\t\tziti cli wrapper with miniziti context\n"\
+            "   kubectl\t\tkubectl cli wrapper with miniziti context\n"\
             "   help\t\tshow these usage hints\n"\
             "\n OPTIONS\n"\
             "   --quiet\t\tsuppress INFO messages\n"\
@@ -327,6 +328,10 @@ main(){
                             shift
                             ziti_cli_args=("$@")
                             shift "${#ziti_cli_args[@]}"
+            ;;
+            kubectl)        shift
+                            kubectl_wrapper "${@:-}"
+                            exit
             ;;
             -p|--profile)   validateDnsName "$2"
                             MINIKUBE_PROFILE="$2"
@@ -667,12 +672,10 @@ main(){
         " >&3
 
             logDebug "deleting coredns pod so a new one will have modified Corefile"
-            kubectl_wrapper get pods \
+            kubectl_wrapper delete pods \
+                --context "$MINIKUBE_PROFILE" \
                 --namespace kube-system \
-                | awk '/^coredns-/ {print $1}' \
-                | xargs kubectl delete pods \
-                    --context "$MINIKUBE_PROFILE" \
-                    --namespace kube-system >&3
+                --selector k8s-app=kube-dns >&3
 
             logDebug "waiting for cluster dns to be ready"
             kubectl_wrapper wait deployments "coredns" \
