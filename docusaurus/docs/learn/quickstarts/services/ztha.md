@@ -1,5 +1,5 @@
 ---
-title: Zero Trust Host Access
+title: Your First Service
 ---
 # Your First Service - Zero Trust Host Access
 
@@ -48,8 +48,8 @@ simply print out the "docker whale" when it's connected to. (This guide will not
 HTTP server which is listening)  If you are familiar with docker and wish to use the exact same example as shown here, simply run the 
 container with: `docker run -d --rm --name web-test -p 80:8000 crccheck/hello-world`. 
 
-Alternatively, if you have used the [docker-compose quickstart](/learn/quickstarts/network/local-docker-compose.md) to provision your 
-OpenZiti overlay network, you will have this HTTP server available to use immediately. 
+If you have used the [Local - Docker Compose](/learn/quickstarts/network/local-docker-compose.md) quickstart 
+to provision your OpenZiti overlay network, you will have already this HTTP server available to use immediately. 
 
 ### Prerequisite - HTTP Client Tunneller
 You will need to install an [OpenZiti tunneler](/reference/tunnelers/index.mdx) on the machine which represents the HTTP client. Later on 
@@ -66,7 +66,7 @@ another tunneler nor will you need to create another identity.
 > 
 ### Prerequisite - CLI
 If you plan to use the `ziti` CLI tool, you will need to download and get the `ziti` executable on your path. If you have 
-followed a quickstart, this will have been done for you and the executable will be located in `~/.ziti/quickstart/$(hostname -s)/ziti-bin/`.
+followed the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) quickstart, this will have been done for you and the executable will be located in `~/.ziti/quickstart/$(hostname -s)/ziti-bin/`.
 Also, the .env file the quickstart emits can be used to put this folder on your path by simply sourcing that file. For example, if you
 followed either the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) or 
 [Host Ziti Anywhere](/learn/quickstarts/network/hosted.md) quickstart, you should have a file that can be sourced. Here is an example of 
@@ -211,5 +211,5 @@ Optionally, you may [install the ZAC](/learn/quickstarts/zac/index.md) to manage
 
 ### Testing Everything Works
 
-Once you have set everything up As shown in the last step above - at this point you should be able to run a curl statement or use a 
-browser to access "http.ziti".
+Once you have set everything up As shown in the last step above - at this point you should be able to run a curl
+statement or use a browser to access "http.ziti".

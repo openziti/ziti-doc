@@ -29,8 +29,8 @@ to either create, or copy the certificates needed. Each section below tries to s
 
 ## Cloning From GitHub
 
-These steps are applicable to both the [local, no docker](../network/local-no-docker) as well as the
-[hosted yourself](../network/hosted) deployments. Do note, these steps expect you have the necessary
+These steps are applicable to both the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) and the
+[hosted yourself](/learn/quickstarts/network/hosted.md) deployments. Do note, these steps expect you have the necessary
 environment variables established in your shell. If you used the default parameters, you can establish these variables
 using the file at `${HOME}/.ziti/quickstart/$(hostname)/$(hostname).env`. To deploy ZAC after following one of those guides,
 you can perform the following steps.
@@ -98,41 +98,61 @@ you can perform the following steps.
    LISTEN 0      511                *:1408             *:*    users:(("node",pid=26013,fd=18))
    ```
 
-## Docker
+## Using Docker
 
-Getting ZAC setup if you have followed the [docker network quickstart](../network/local-with-docker)
-should be straightforward. If you have used the default values from this quickstart you can issue the following command.
-Notice that this command uses the default path: `${HOME}/docker-volume/myFirstZitiNetwork`. If you customized the path,
-replace the paths specified in the volume mount sections below accordingly (the '-v' lines). Also note this command will
-expose the http and https ports to your local computer. This is optional, read more about using docker for more details
-if necessary.
+### Copy PKI From Controller
+It's a good idea to use TLS everywhere. To do this, you'll need to provide ZAC a key and a certificate.
+If you have used the [Local - With Docker](/learn/quickstarts/network/local-with-docker.md) quickstart to start
+the OpenZiti Network you can copy the certificates generated when the controller started.
+Shown is an example which copies the certs from the OpenZiti container and uses them with ZAC. We'll copy the files
+from the docker named volume `myPersistentZitiFiles` and put them into a folder at `$HOME/.ziti/zac-pki`.
+
+```bash
+mkdir -p $HOME/.ziti/zac-pki
+
+docker run -it --rm --name temp \
+  -v myPersistentZitiFiles:/persistent \
+  -v $HOME/.ziti/zac-pki:/zac-pki busybox \
+  cp /persistent/pki/ziti-edge-controller-intermediate/keys/ziti-edge-controller-server.key /zac-pki
+  
+docker run -it --rm --name temp \
+  -v myPersistentZitiFiles:/persistent \
+  -v $HOME/.ziti/zac-pki:/zac-pki busybox \
+  cp /persistent/pki/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem /zac-pki
+```
+
+### Starting ZAC
+
+With the certificates copied, you will be able to start the ZAC using one Docker command. Also notice the command 
+will expose the ZAC http and https ports to your local computer so that you can access the ZAC from outside of Docker.
+If you customized any of these paths, you'll need to replace the paths specified accordingly (the '-v' lines).
 
  ```bash
- docker run \
+ docker run --rm \
         --name zac \
         -p 1408:1408 \
         -p 8443:8443 \
-        -v "${HOME}/docker-volume/myFirstZitiNetwork/ziti-edge-controller-intermediate/keys/ziti-edge-controller-server.key":/usr/src/app/server.key \
-        -v "${HOME}/docker-volume/myFirstZitiNetwork/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem":/usr/src/app/server.chain.pem \
+        -v "$HOME/.ziti/zac-pki/ziti-edge-controller-server.key":/usr/src/app/server.key \
+        -v "$HOME/.ziti/zac-pki/ziti-edge-controller-server.chain.pem":/usr/src/app/server.chain.pem \
         openziti/zac
  ```
 
 :::note
 Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
-addressable by your machine in order to use docker in this way. This guide does not go into how to do this in depth.
+addressable by your machine in order to use Docker in this way. This guide does not go into how to do this in depth.
 One easy, and common mechanism to do this would be to edit the 'hosts' file of your operating system. A quick
 internet search should show you how to accomplish this.
 :::
 
 ## Docker Compose
 
-If you have followed the [docker compose quickstart](../network/local-docker-compose) you will have the ZAC
+If you have followed the [Local - Docker Compose](/learn/quickstarts/network/local-docker-compose.md) quickstart you will have the ZAC
 running already. It's now included with both the default docker-compose file and the simplified-docker-compose file.
 Both compose files will start and expose the ZAC ports on 1408/8443.
 
 :::note
 Do note that if you are exposing ports as shown above, you will need to ensure that `ziti-edge-controller` is
-addressable by your machine in order to use docker in this way. This guide does not go into how to do this in depth.
+addressable by your machine in order to use Docker in this way. This guide does not go into how to do this in depth.
 One easy, and common mechanism to do this would be to edit the 'hosts' file of your operating system. A quick
 internet search should show you how to accomplish this.
 :::
@@ -143,9 +163,9 @@ There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides
 
 ## Login and use ZAC
 
-1. At this point you should be able to navigate to both: `https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:8443`and see the ZAC login
+1. At this point you should be able to navigate to: `https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:8443`and see the ZAC login
    screen. (The TLS warnings your browser will show you are normal - it's because these steps use a self-signed certificate
-   generated in the install process)
+   generated during the installation process)
 
    :::note
    If you are using docker-compose to start your network, when you access ZAC for the first time you will need to
