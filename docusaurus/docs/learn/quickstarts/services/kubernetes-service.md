@@ -2,7 +2,7 @@
 title: Kubernetes Service
 ---
 
-This is a quick example for tunneling to a Kubernetes workload with OpenZiti that builds on [the local Kubernetes quickstart](../network/local-kubernetes.md). There are two deployments for you to deploy in the same namespace:
+This is a quick example for tunneling to a Kubernetes workload with OpenZiti that builds on [the local Kubernetes quickstart](/learn/quickstarts/network/local-kubernetes.md). There are two deployments for you to deploy in the same namespace:
 
 * a demo workload service `hello-toy`
 * an OpenZiti reverse proxy pod `ziti-host`

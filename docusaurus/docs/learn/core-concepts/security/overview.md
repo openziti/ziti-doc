@@ -72,7 +72,7 @@ in each section will lead to a more detailed explanation of the relevant topics.
 ### Identity
 
 Ziti Edge defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or 
-dial (connect) to services over a Ziti Network. Read more in the [Identity](../identities/overview.mdx) section.
+dial (connect) to services over a Ziti Network. Read more in the [Identity](/learn/core-concepts/identities/overview.mdx) section.
 
 ### Enrollment
 

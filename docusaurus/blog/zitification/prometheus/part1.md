@@ -159,10 +159,10 @@ Another significant benefit provided by OpenZiti is starting to come into focus.
 through OpenZiti, we can **stop exposing** the Kubernetes APIs for both clusters to the open internet. Prometheus will still be able to 
 monitor each Kubernetes cluster through the private Kubernetes network. Accessing Prometheus will be provided via OpenZiti, instead of 
 using a Kubernetes ingress controller. Later, we can ues the built-in capability Prometheus already provides to federate information 
-from the clusters to a centralized, [zitified](../index.md) Prometheus server.
+from the clusters to a centralized, [zitified](/zitification/index.md) Prometheus server.
 
 Once no longer exposed to the open internet, to maintain our Kubernetes cluster we could then turn to [zitified]
-(../index.md) tools. The OpenZiti project provides zitified versions of `kubectl` -
+(/zitification/index.md) tools. The OpenZiti project provides zitified versions of `kubectl` -
 [kubeztl](https://github.com/openziti-test-kitchen/kubectl) and `helm` -
 [helmz](https://github.com/openziti-test-kitchen/helm). Each of these tools have an OpenZiti SDK embedded inside them. This allows both 
 tools to connect to the private Kubernetes API over the OpenZiti overlay network. To use them, you will need a strong, OpenZiti identity 

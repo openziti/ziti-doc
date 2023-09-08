@@ -1,15 +1,15 @@
 # API Session Certificates
 
 API Session Certificates are ephemeral short-lived x509 certificates that can be created through a CSR process after
-an API Session is [fully authenticated](../sessions.md#full-vs-partial-authentication). 
+an API Session is [fully authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication). 
 
 ## Lifecycle & Scope
 
-The certificates are scoped by the "valid before" and "valid after" dates in addition to the API Session. If an [API Session](../sessions.md#api-session) is 
+The certificates are scoped by the "valid before" and "valid after" dates in addition to the API Session. If an [API Session](/learn/core-concepts/security/sessions.md#api-session) is 
 removed (expiration, logout, etc.) the API Session Certificates created by that API Session are no longer valid.
 
-API Session Certificates may only be used by the [API Session](../sessions.md#api-session) that created them. Attempting to use an [API Session](../sessions.md#api-session)
-Certificate to connect to and Edge Router without the matching [API Session](../sessions.md#api-session) security token will be rejected.
+API Session Certificates may only be used by the [API Session](/learn/core-concepts/security/sessions.md#api-session) that created them. Attempting to use an [API Session](/learn/core-concepts/security/sessions.md#api-session)
+Certificate to connect to and Edge Router without the matching [API Session](/learn/core-concepts/security/sessions.md#api-session) security token will be rejected.
 
 ## Use
 
@@ -52,7 +52,7 @@ may be added.
 
 ## List & Detail
 
-API Session Certificates for the current [API Session](../sessions.md#api-session) may be: 
+API Session Certificates for the current [API Session](/learn/core-concepts/security/sessions.md#api-session) may be: 
 
 - listed: `GET /edge/client/v1/current-api-session/certificates`
 - detailed: `GET /edge/client/v1/current-api-session/certificates/<id>`

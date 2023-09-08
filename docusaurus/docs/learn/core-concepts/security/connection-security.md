@@ -34,8 +34,8 @@ the mesh.
 
 ## Controller API Connection Details
 
-Controller APIs provide ways for clients (SDKs or otherwise) to interact with a network. The [Edge Management API](../../../reference/developer/api/02-edge-management-reference.mdx)
-is used for configuration and maintenance. The [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx)
+Controller APIs provide ways for clients (SDKs or otherwise) to interact with a network. The [Edge Management API](/reference/developer/api/02-edge-management-reference.mdx)
+is used for configuration and maintenance. The [Edge Client API](/reference/developer/api/01-edge-client-reference.mdx)
 is used to allow clients to authenticate, discover services, request service [Sessions](sessions.md#session),
 discover Edge Routers, and to perform basic self-maintenance.
 

@@ -9,7 +9,7 @@ import ApiQuickInfoMd from './api/_api-quickinfo.md';
 
 <SdkQuickInfoMd/>
 
-[Explore Edge SDKs](../../reference/developer/sdk/index.mdx)
+[Explore Edge SDKs](/reference/developer/sdk/index.mdx)
 
 ## Edge APIs
 

@@ -12,8 +12,8 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [Ziti Networks](../../introduction/index.mdx) require
-a [Ziti Controller](../../../reference/deployments/01-controller.md). Without a controller, edge routers won't be able to authorize new
+All [Ziti Networks](/learn/introduction/index.mdx) require
+a [Ziti Controller](/reference/deployments/01-controller.md). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
 ### Required - Docker Named Volume
@@ -76,8 +76,8 @@ docker run \
 ```
 
 ## Create Edge Router Policies
-OpenZiti requires explicit authorization of identities using ([edge router policies](../../../reference/glossary.md#edge-router-policy)), 
-as well as authorization of services and routers using ([service edge router policies](../../../reference/glossary.md#service-edge-router-policy)). 
+OpenZiti requires explicit authorization of identities using ([edge router policies](/reference/glossary.md#edge-router-policy)), 
+as well as authorization of services and routers using ([service edge router policies](/reference/glossary.md#service-edge-router-policy)). 
 The docker-based quickstart doesn't perform these steps automatically. Run the initialization container one time, after 
 starting the controller as shown
 
@@ -94,7 +94,7 @@ docker run \
 
 ## Edge Router
 
-At this point you should have a [Ziti Controller](../../../reference/deployments/01-controller.md) running. You should have created your
+At this point you should have a [Ziti Controller](/reference/deployments/01-controller.md) running. You should have created your
 Docker network as well as creating the volume mount. Now it's time to connect your first edge router. The same Docker
 image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
@@ -107,7 +107,7 @@ default port used by edge routers.
 docker run \
   --name ziti-edge-router-1 \
   -e ZITI_ROUTER_NAME=ziti-edge-router-1 \
-  -e ZITI_ROUTER_ADVERTISED_HOST=ziti-edge-router-1 \
+  -e ZITI_ROUTER_ADVERTISED_ADDRESS=ziti-edge-router-1 \
   -e ZITI_ROUTER_ROLES=public \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-1 \
@@ -125,7 +125,7 @@ If you want to create a second edge router, you'll need to override the router p
 docker run \
   --name ziti-edge-router-2 \
   -e ZITI_ROUTER_NAME=ziti-edge-router-2 \
-  -e ZITI_ROUTER_ADVERTISED_HOST=ziti-edge-router-2 \
+  -e ZITI_ROUTER_ADVERTISED_ADDRESS=ziti-edge-router-2 \
   -e ZITI_ROUTER_PORT=4022 \
   -e ZITI_ROUTER_ROLES=public \
   --network myFirstZitiNetwork \

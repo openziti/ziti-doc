@@ -19,7 +19,7 @@ to any network be it host network, local network, the internet, private network,
 ### Simple HTTP Solution Overview - Before Ziti<br/>
 ![before OpenZiti](./before-openziti.png)
 
-The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](../../../reference/glossary.md#underlay)
+The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](/reference/glossary.md#underlay)
 network and requires a hole through the firewall to allow clients to connect.
 
 ### Simple HTTP Solution - After Ziti
@@ -27,7 +27,7 @@ network and requires a hole through the firewall to allow clients to connect.
 
 After OpenZiti, we can see that there is no longer an open firewall to allow access to the HTTP server. Instead, the HTTP client 
 will have its network requests intercepted by an OpenZiti tunneller. Once intercepted, the packets are then delivered to the OpenZiti
-[overlay](../../../reference/glossary.md#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
+[overlay](/reference/glossary.md#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
 target identity. Once delivered to the target identity, in this example, the traffic will offload back to the underlay network to be 
 sent to the final destination: the HTTP Server.
 
@@ -39,7 +39,7 @@ With an understanding of what we are looking to accomplish in this guide, let's 
 
 ### Prerequisite - OpenZiti Network
 You will need an OpenZiti overlay network in place before you can complete this guide. If you do not have an
-OpenZiti overlay network provisioned yet, [follow a quickstart](../quickstarts.md) and get a network up and running.
+OpenZiti overlay network provisioned yet, [follow a quickstart](/learn/quickstarts/quickstarts.md) and get a network up and running.
 
 ### Prerequisite - HTTP Server
 You'll need an HTTP server which you plan to connect your HTTP client to. There are numerous ways to 
