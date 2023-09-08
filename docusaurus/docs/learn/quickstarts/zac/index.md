@@ -102,7 +102,7 @@ you can perform the following steps.
 
 ### Copy PKI From Controller
 It's a good idea to use TLS everywhere. To do this, you'll need to provide ZAC a key and a certificate.
-If you have used the [Local - With Docker](../../quickstarts/network/local-with-docker.md) quickstart to start
+If you have used the [Local - With Docker](/learn/quickstarts/network/local-with-docker.md) quickstart to start
 the OpenZiti Network you can copy the certificates generated when the controller started.
 Shown is an example which copies the certs from the OpenZiti container and uses them with ZAC. We'll copy the files
 from the docker named volume `myPersistentZitiFiles` and put them into a folder at `$HOME/.ziti/zac-pki`.
