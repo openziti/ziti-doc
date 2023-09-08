@@ -48,7 +48,7 @@ simply print out the "docker whale" when it's connected to. (This guide will not
 HTTP server which is listening)  If you are familiar with docker and wish to use the exact same example as shown here, simply run the 
 container with: `docker run -d --rm --name web-test -p 80:8000 crccheck/hello-world`. 
 
-Alternatively, if you have used the [docker-compose quickstart](../network/local-docker-compose) to provision your 
+Alternatively, if you have used the [docker-compose quickstart](/learn/quickstarts/network/local-docker-compose) to provision your 
 OpenZiti overlay network, you will have this HTTP server available to use immediately. 
 
 ### Prerequisite - HTTP Client Tunneller
