@@ -33,6 +33,8 @@ _usage(){
             "   login\t\trun ziti edge login with miniziti context\n"\
             "   ziti\t\tziti cli wrapper with miniziti context\n"\
             "   kubectl\t\tkubectl cli wrapper with miniziti context\n"\
+            "   minikube\t\tminikube cli wrapper with miniziti context\n"\
+            "   shell\t\trun interactive shell inside the ziti-controller container\n"\
             "   help\t\tshow these usage hints\n"\
             "\n OPTIONS\n"\
             "   --quiet\t\tsuppress INFO messages\n"\
@@ -210,6 +212,7 @@ showAdminCreds() {
 }
 
 miniziti_login() {
+    check_command ziti
     getAdminSecret | xargs ziti edge login  \
             --cli-identity "$MINIKUBE_PROFILE" \
             --username "admin" \
@@ -261,27 +264,43 @@ logDebug() {
     logger "$*" >&3
 }
 
+controller_pod() {
+    kubectl_wrapper get pods --selector app.kubernetes.io/component=ziti-controller --output jsonpath='{.items[0].metadata.name}'
+}
+
 ziti_wrapper() {
-    ziti "$@" --cli-identity "$MINIKUBE_PROFILE"
+    kubectl_wrapper exec "$(controller_pod)" --container ziti-controller -- bash -c "zitiLogin &>/dev/null; ziti $*"
+}
+
+shell_wrapper() {
+    kubectl_wrapper exec "$(controller_pod)" --container ziti-controller --tty --stdin -- bash
 }
 
 kubectl_wrapper() {
     minikube kubectl --profile "$MINIKUBE_PROFILE" -- --context "$MINIKUBE_PROFILE" "$@"
 }
 
+minikube_wrapper() {
+    minikube --profile "$MINIKUBE_PROFILE" "$@"
+}
+
 helm_wrapper() {
     helm --kube-context "$MINIKUBE_PROFILE" "$@"
+}
+
+check_command() {
+    if ! command -v "$1" &>/dev/null; then
+        logError "this script requires command '$1'. Please install on the search PATH and try again."
+        $1
+    fi
 }
 
 main(){
     MINIZITI_DEBUG=0
     # require commands
-    declare -a BINS=(ziti minikube kubectl helm sed)
+    declare -a BINS=(minikube helm sed nslookup xargs awk grep pgrep)
     for BIN in "${BINS[@]}"; do
-        if ! command -v "$BIN" &>/dev/null; then
-            logError "this script requires commands '${BINS[*]}'. Please install on the search PATH and try again."
-            $BIN || exit 1
-        fi
+        check_command "$BIN"
     done
 
     # open a descriptor for debug messages
@@ -331,6 +350,14 @@ main(){
             ;;
             kubectl)        shift
                             kubectl_wrapper "${@:-}"
+                            exit
+            ;;
+            minikube)       shift
+                            minikube_wrapper "${@:-}"
+                            exit
+            ;;
+            shell)          shift
+                            shell_wrapper "${@:-}"
                             exit
             ;;
             -p|--profile)   validateDnsName "$2"
@@ -442,8 +469,10 @@ main(){
             rm -f  "$CERT_FILE"
         fi
 
-        logWarn "Removing $MINIKUBE_PROFILE profile identity from ziti-cli.json"
-        ziti_wrapper edge logout --cli-identity "$MINIKUBE_PROFILE" >&3
+        if check_command ziti &>/dev/null; then
+            logWarn "Removing $MINIKUBE_PROFILE profile identity from ziti-cli.json"
+            ziti edge logout --cli-identity "$MINIKUBE_PROFILE" >&3
+        fi
 
         exit 0
     }
@@ -690,13 +719,6 @@ main(){
     #
     ## Ensure OpenZiti Router is Enrolled and Ready
     #
-
-    logDebug "fetching admin password from k8s secret to log in to ziti mgmt"
-            getAdminSecret | xargs ziti edge login "miniziti-controller.${MINIZITI_INGRESS_ZONE}:443" \
-            --yes \
-            --cli-identity "$MINIKUBE_PROFILE" \
-            --username "admin" \
-            --password >&3
 
     logInfo "Setting default ziti identity to: $MINIKUBE_PROFILE"
     ziti_wrapper edge use "$MINIKUBE_PROFILE" >&3
