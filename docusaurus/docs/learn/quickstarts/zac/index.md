@@ -29,8 +29,8 @@ to either create, or copy the certificates needed. Each section below tries to s
 
 ## Cloning From GitHub
 
-These steps are applicable to both the [Local - No Docker](../network/local-no-docker) and the
-[hosted yourself](../network/hosted) deployments. Do note, these steps expect you have the necessary
+These steps are applicable to both the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) and the
+[hosted yourself](/learn/quickstarts/network/hosted.md) deployments. Do note, these steps expect you have the necessary
 environment variables established in your shell. If you used the default parameters, you can establish these variables
 using the file at `${HOME}/.ziti/quickstart/$(hostname)/$(hostname).env`. To deploy ZAC after following one of those guides,
 you can perform the following steps.
@@ -146,7 +146,7 @@ internet search should show you how to accomplish this.
 
 ## Docker Compose
 
-If you have followed the [Local - Docker Compose](../network/local-docker-compose) quickstart you will have the ZAC
+If you have followed the [Local - Docker Compose](/learn/quickstarts/network/local-docker-compose.md) quickstart you will have the ZAC
 running already. It's now included with both the default docker-compose file and the simplified-docker-compose file.
 Both compose files will start and expose the ZAC ports on 1408/8443.
 
