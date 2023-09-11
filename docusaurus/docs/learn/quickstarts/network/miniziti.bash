@@ -4,6 +4,21 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+checkBashVersion() {
+    if (( "${BASH_VERSION%%.*}" < 4 )); then
+        echo "This script requires Bash major version 4 or greater."
+        echo "Detected version: $BASH_VERSION"
+        if [[ ${OSTYPE:-} =~ [Dd]arwin ]]; then
+            echo -e "\nOn macOS, you can install bash with Homebrew:"
+            echo "brew install bash"
+            echo -e "\nThen run:"
+            #shellcheck disable=SC2016
+            echo '"$(brew --prefix bash)" ./miniziti.bash ...'
+        fi
+        exit 1;
+    fi
+}
+
 banner(){
 
     local profile="${1-}"
@@ -26,24 +41,26 @@ _usage(){
     else
         banner
     fi
-    echo -e "\n COMMANDS\n"\
-            "   start\t\tstart miniziti (default)\n"\
+    echo -e "\n Basic Commands:\n"\
+            "   start\t\tstart miniziti\n"\
             "   delete\t\tdelete miniziti\n"\
-            "   creds\t\tprints admin user updb credentials\n"\
-            "   login\t\trun ziti edge login with miniziti context\n"\
             "   ziti\t\tziti cli wrapper with miniziti context\n"\
+            "   creds\t\tprints admin user updb credentials\n"\
+            "   help\t\tshow these usage hints\n"\
+            "\n Advanced Commands:\n"\
+            "   shell\t\trun interactive shell inside the ziti-controller container\n"\
+            "   login\t\trun local ziti binary edge login with miniziti context\n"\
+            "\n Other Commands:\n"\
             "   kubectl\t\tkubectl cli wrapper with miniziti context\n"\
             "   minikube\t\tminikube cli wrapper with miniziti context\n"\
-            "   shell\t\trun interactive shell inside the ziti-controller container\n"\
-            "   help\t\tshow these usage hints\n"\
-            "\n OPTIONS\n"\
+            "\n Options:\n"\
             "   --quiet\t\tsuppress INFO messages\n"\
             "   --verbose\t\tshow DEBUG messages\n"\
             "   --profile\t\tMINIKUBE_PROFILE (miniziti)\n"\
             "   --namespace\t\tZITI_NAMESPACE (MINIKUBE_PROFILE)\n"\
             "   --no-hosts\t\tdon't use local hosts DB or ingress-dns nameserver\n"\
             "   --modify-hosts\tadd entries to local hosts database. Requires sudo if not running as root. Linux only.\n"\
-            "\n DEBUG\n"\
+            "\n Debug:\n"\
             "   --charts\t\tZITI_CHARTS_REF (openziti) alternative charts repo\n"\
             "   --now\t\teliminate safety waits, e.g., before deleting miniziti\n"\
             "   --\t\t\tMINIKUBE_START_ARGS args after -- passed to minikube start\n"
@@ -298,6 +315,7 @@ check_command() {
 }
 
 main(){
+    checkBashVersion >&2
     MINIZITI_DEBUG=0
     # require commands
     declare -a BINS=(awk grep helm jq minikube nslookup pgrep sed xargs)
@@ -310,6 +328,7 @@ main(){
 
     # local strings with defaults that never produce an error
     declare DETECTED_OS \
+            START_MINIZITI=0 \
             DELETE_MINIZITI=0 \
             DO_ZITI_LOGIN=0 \
             MINIKUBE_NODE_EXTERNAL \
@@ -331,10 +350,10 @@ main(){
     DETECTED_OS="$(detectOs)"
     : "${DEBUG_MINIKUBE_TUNNEL:=0}"  # set env = 1 to trigger the minikube tunnel probe
 
-
     while (( $# )); do
         case "$1" in
-            start)          shift
+            start)          START_MINIZITI=1
+                            shift
             ;;
             delete)         DELETE_MINIZITI=1
                             shift
@@ -447,9 +466,8 @@ main(){
     fi
 
 
-    banner "$MINIKUBE_PROFILE"
-
     (( DELETE_MINIZITI )) && {
+        banner "$MINIKUBE_PROFILE"
         deleteMiniziti 10
 
         if (( MINIZITI_MODIFY_HOSTS )) && grep -q "$MINIZITI_PROFILE_MARKER" "$HOSTS_FILE"; then
@@ -479,6 +497,14 @@ main(){
 
         exit 0
     }
+
+    if (( START_MINIZITI != 1 )); then
+        _usage
+        exit 0;
+    fi
+
+
+    banner "$MINIKUBE_PROFILE"
 
     if [[ ! -d "$IDENTITIES_DIR" ]]; then
         logDebug "Creating miniziti identities directory: ($IDENTITIES_DIR)"
