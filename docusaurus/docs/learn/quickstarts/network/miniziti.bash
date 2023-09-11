@@ -215,6 +215,7 @@ miniziti_login() {
     check_command ziti
     getAdminSecret | xargs ziti edge login  \
             --cli-identity "$MINIKUBE_PROFILE" \
+            --yes \
             --username "admin" \
             --password
 }
@@ -269,7 +270,8 @@ controller_pod() {
 }
 
 ziti_wrapper() {
-    kubectl_wrapper exec "$(controller_pod)" --container ziti-controller -- bash -c "zitiLogin &>/dev/null; ziti $*"
+    kubectl_wrapper exec "$(controller_pod)" --container ziti-controller -- zitiLogin > /dev/null
+    kubectl_wrapper exec "$(controller_pod)" --container ziti-controller -- ziti "$@"
 }
 
 shell_wrapper() {
@@ -298,7 +300,7 @@ check_command() {
 main(){
     MINIZITI_DEBUG=0
     # require commands
-    declare -a BINS=(minikube helm sed nslookup xargs awk grep pgrep)
+    declare -a BINS=(awk grep helm jq minikube nslookup pgrep sed xargs)
     for BIN in "${BINS[@]}"; do
         check_command "$BIN"
     done
@@ -469,10 +471,11 @@ main(){
             rm -f  "$CERT_FILE"
         fi
 
-        if check_command ziti &>/dev/null; then
-            logWarn "Removing $MINIKUBE_PROFILE profile identity from ziti-cli.json"
-            ziti edge logout --cli-identity "$MINIKUBE_PROFILE" >&3
-        fi
+        # Cannot nicely call logout until https://github.com/openziti/ziti/issues/1305 is addressed.
+        # if check_command ziti &>/dev/null; then
+        #     logWarn "Removing $MINIKUBE_PROFILE profile identity from ziti-cli.json"
+        #     ziti edge logout --cli-identity "$MINIKUBE_PROFILE" >&3
+        # fi
 
         exit 0
     }
@@ -734,8 +737,11 @@ main(){
         logDebug "creating $ROUTER_NAME"
         ziti_wrapper edge create edge-router "$ROUTER_NAME" \
             --role-attributes "public-routers" \
-            --tunneler-enabled \
-            --jwt-output-file "$ROUTER_OTT" >&3
+            --tunneler-enabled >&3
+        ziti_wrapper edge list edge-routers \
+            "name=\"$ROUTER_NAME\"" \
+            --output-json \
+            | jq --exit-status --raw-output '.data[0].enrollmentJwt' > "$ROUTER_OTT"
     fi
 
     if  helm_wrapper status ziti-router --namespace "${ZITI_NAMESPACE}" &>/dev/null; then
@@ -821,7 +827,10 @@ main(){
         | grep -q "$CLIENT_NAME"; then
         logDebug "creating identity $CLIENT_NAME"
         ziti_wrapper edge create identity device "$CLIENT_NAME" \
-            --jwt-output-file "$CLIENT_OTT" --role-attributes httpbin-clients >&3
+            --role-attributes httpbin-clients >&3
+        ziti_wrapper edge list identities "name=\"$CLIENT_NAME\"" \
+            --output-json \
+        | jq --exit-status --raw-output '.data[0].enrollment.ott.jwt' > "$CLIENT_OTT"
     else
         logDebug "ignoring identity $CLIENT_NAME"
     fi
@@ -834,7 +843,11 @@ main(){
         | grep -q "$HTTPBIN_NAME"; then
         logDebug "creating identity $HTTPBIN_NAME"
         ziti_wrapper edge create identity device "$HTTPBIN_NAME" \
-            --jwt-output-file "$HTTPBIN_OTT" --role-attributes httpbin-hosts >&3
+            --role-attributes httpbin-hosts >&3
+        ziti_wrapper edge list identities "name=\"$HTTPBIN_NAME\"" \
+            --output-json \
+        | jq --exit-status --raw-output '.data[0].enrollment.ott.jwt' > "$HTTPBIN_OTT"
+
     else
         logDebug "ignoring identity $HTTPBIN_NAME"
     fi
