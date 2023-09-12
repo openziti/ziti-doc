@@ -26,9 +26,9 @@ export default function Layout(props) {
   } = props;
   useKeyboardNavigation();
 
-  if (ExecutionEnvironment.canUseDOM) {
+  if (ExecutionEnvironment.canUseDOM && ExecutionEnvironment.canUseEventListeners) {
 
-    let lastPath = window.location.pathname;
+    let lastPath = (window!=null)?window.location.pathname:'';
     var intervalId;
     var wizardIndex = 0;
     var wizardTotal = 0;
@@ -60,6 +60,7 @@ export default function Layout(props) {
     } 
 
     function BuildWizard() {
+      console.log("Build",$("#Wizardly").length);
       if ($("#Wizardly").length>0) {
         wizardIndex = 0;
         wizardTotal = 0;
@@ -123,28 +124,39 @@ export default function Layout(props) {
           }, 1000);
           navigator.clipboard.writeText(toCopy);
         });
-        window['WizardGoTo'] = WizardGoTo;
-        window['WizardNext'] = WizardNext;
-        window['WizardPrev'] = WizardPrev;
-        window['ShowWizard'] = ShowWizard;
+        console.log("Ere")
+          console.log("Erse")
+          window['WizardGoTo'] = WizardGoTo;
+          window['WizardNext'] = WizardNext;
+          window['WizardPrev'] = WizardPrev;
+          window['ShowWizard'] = ShowWizard;
+
+          $("#WizardPreviousButton").off("click");
+          $("#WizardNextButton").off("click");
+          $(".openWizard").off("click");
+
+          $("#WizardPreviousButton").click(window['WizardPrev']);
+          $("#WizardNextButton").click(window['WizardNext']);
+          $(".openWizard").click(window['ShowWizard']);
+
+          $(".wizardnav").off();
+          $(".wizardnav").click(window.WizardGoTo);
+          $(".wizardnav").show();
+
+          setTimeout(() => {
+            $(".openWizard").show();
+            $(".wizRow").each((i,e) => {
+              if ($(e).find("button").length>1) {
+                $(e).find("button")[0].remove();
+              }
+            });
+          }, 500);
+  
+  
+          let urlParams = new URLSearchParams(window.location.search);
+          let auto = urlParams.get('wizard');
+          if (auto!=null) ShowWizard();
         
-        $(".wizardnav").off();
-        $(".wizardnav").click(window.WizardGoTo);
-        $(".wizardnav").show();
-
-        setTimeout(() => {
-          $(".openWizard").show();
-          $(".wizRow").each((i,e) => {
-            if ($(e).find("button").length>1) {
-              $(e).find("button")[0].remove();
-            }
-          });
-        }, 500);
-
-
-        let urlParams = new URLSearchParams(window.location.search);
-        let auto = urlParams.get('wizard');
-        if (auto!=null) ShowWizard();
       }
     }
 

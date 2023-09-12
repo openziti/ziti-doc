@@ -1,11 +1,9 @@
 ---
 sidebar_position: 60
 ---
-
 import Wizardly from '@site/src/components/Wizardly';
 
 # Host OpenZiti Anywhere
-<Wizardly></Wizardly>
 
 You can absolutely choose to host your [OpenZiti Network](../../introduction/index.mdx) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
@@ -199,3 +197,6 @@ $ echo $ZITI_HOME
 - Help
   - [Change Admin Password](./help/change-admin-password.md)
   - [Reset the Quickstart](./help/reset-quickstart.md)
+
+
+<Wizardly></Wizardly>

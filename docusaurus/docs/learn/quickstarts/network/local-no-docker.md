@@ -5,7 +5,6 @@ sidebar_position: 30
 import Wizardly from '@site/src/components/Wizardly';
 
 # Local - No Docker
-<Wizardly></Wizardly>
 
 This page will show you how to get your [Ziti Network](../../introduction/index.mdx) up and running 
 quickly and easily, entirely locally. Since you'll be running everything locally, you'll have no issues communicating
@@ -202,3 +201,4 @@ source $HOME/.ziti/quickstart/$(hostname)/$(hostname).env
   - [Change Admin Password](./help/change-admin-password.md)
   - [Reset the Quickstart](./help/reset-quickstart.md)
 
+<Wizardly></Wizardly>

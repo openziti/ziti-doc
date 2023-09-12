@@ -27,10 +27,10 @@ export default function Wizardly(props) {
                                 <div className={'actions clearfix'}>
                                     <ul role="menu" aria-label="Pagination">
                                         <li>
-                                            <button id="WizardPreviousButton" onClick={window['WizardPrev']}>Previous</button>
+                                            <button id="WizardPreviousButton">Previous</button>
                                         </li>
                                         <li >
-                                            <button id="WizardNextButton" onClick={window['WizardNext']}>Next</button>
+                                            <button id="WizardNextButton">Next</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -39,7 +39,7 @@ export default function Wizardly(props) {
                     </div>
                 </div>
             </div>
-            <div className={'openWizard'} onClick={window['ShowWizard']}>Show As Wizard</div>
+            <div className={'openWizard'}>Show As Wizard</div>
         </div>
     )
 }

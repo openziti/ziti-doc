@@ -1,7 +1,6 @@
 ---
 sidebar_position: 40
 ---
-
 import Wizardly from '@site/src/components/Wizardly';
 
 # Local - With Docker
