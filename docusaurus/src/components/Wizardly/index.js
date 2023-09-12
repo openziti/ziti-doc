@@ -3,27 +3,28 @@ import React, { Component, useState } from 'react';
 export default function Wizardly(props) {
     return (
         <div id="Wizardly">
-            <div class="wizardmodal">
-                <div class="page-wrapper bg-img-1"></div>
-                <div class="page-wrapper">
-                    <div class="wizard main">
-                        <div class="container">
-                            <div class="row">
-                                <div class="whitez"></div>
-                                <h1 id="WizardTitle" class="header-title"></h1>
+            <div className={'wizardmodal'}>
+                <div className={'page-wrapper bg-img-1'}></div>
+                <div className={'page-wrapper'}>
+                    <div className={'wizard main'}>
+                        <div className={'container'}>
+                            <div className={'row'}>
+                                <div className={'whitez'}></div>
+                                <h1 id="WizardTitle" className={'header-title'}></h1>
+                                <div className={'wizardclose'}></div>
                             </div>
                         </div>
-                        <div class="zcontainer">
-                            <div role="application" class="wizard clearfix vertical" id="steps-uid-0">
-                                <div class="steps clearfix">
+                        <div className={'zcontainer'}>
+                            <div role="application" className={'wizard clearfix vertical'} id="steps-uid-0">
+                                <div className={'steps clearfix'}>
                                     <ul id="WizardTabs" role="tablist"></ul>
                                 </div>
-                                <div class="content clearfix">
+                                <div className={'content clearfix'}>
                                     <div>
-                                        <fieldset id="WizardContents" role="tabpanel" class="body current" aria-hidden="false"></fieldset>
+                                        <fieldset id="WizardContents" role="tabpanel" className={'body current'} aria-hidden="false"></fieldset>
                                     </div> 
                                 </div>
-                                <div class="actions clearfix">
+                                <div className={'actions clearfix'}>
                                     <ul role="menu" aria-label="Pagination">
                                         <li>
                                             <button id="WizardPreviousButton" onClick={window['WizardPrev']}>Previous</button>
@@ -38,7 +39,7 @@ export default function Wizardly(props) {
                     </div>
                 </div>
             </div>
-            <div class="openWizard" onClick={window['ShowWizard']}>Show As Wizard</div>
+            <div className={'openWizard'} onClick={window['ShowWizard']}>Show As Wizard</div>
         </div>
     )
 }

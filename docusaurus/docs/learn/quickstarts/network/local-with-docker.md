@@ -5,7 +5,6 @@ sidebar_position: 40
 import Wizardly from '@site/src/components/Wizardly';
 
 # Local - With Docker
-<Wizardly></Wizardly>
 
 [Docker](https://www.docker.com) is a popular container engine, and many developers enjoy using solutions delivered via
 Docker. Ziti provides a single Docker container which contains the entire stack of Ziti components. This is not the most
@@ -209,3 +208,5 @@ results: 1-1 of 1
 - Help
   - [Change Admin Password](./help/change-admin-password.md)
   - [Reset the Quickstart](./help/reset-quickstart.md)
+
+<Wizardly></Wizardly>

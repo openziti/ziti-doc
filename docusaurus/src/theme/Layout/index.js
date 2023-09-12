@@ -42,8 +42,22 @@ export default function Layout(props) {
     }
 
     function ShowWizard() {
+      window.WizardGoTo(0);
       $(".wizardmodal").show();
+      $("body").addClass("noscroll");
     }
+
+    function getText(node) {
+      return node.contents().map(function () {
+          if (this.nodeName === 'BR') {
+              return '\n';
+          } else if (this.nodeType === 3) {
+              return this.nodeValue;
+          } else {
+              return getText($(this));
+          }
+      }).get().join('');
+    } 
 
     function BuildWizard() {
       if ($("#Wizardly").length>0) {
@@ -51,12 +65,12 @@ export default function Layout(props) {
         wizardTotal = 0;
         let nav = '';
         let html = '';
+        $("#WizardTitle").text($("article").find("h1").text());
         $("article").find("h2").each((i, e) => {
           let elem = $(e);
           if (elem.attr("id")!="Wizardly") {
             wizardTotal++;
             elem.children("a").hide();
-            console.log(i);
             nav += '<li role="tab" class="wizardNav'+i+' '+((i==0)?"first current":"")+'"><span id="WizardNav'+i+'" data-index="'+i+'" class="wizardnav"><span class="current-info audible"></span><div class="title">';
             nav += '<span class="step-number">'+(i+1)+'</span>';
             nav += '<span class="step-text">'+elem.text()+'</span>';
@@ -64,67 +78,102 @@ export default function Layout(props) {
             html += '<div class="wizardContent wizard'+i+'"'+((i!=0)?'style="display:none"':"")+'>';
             html += '<h2>'+elem.html()+'</h2>';
             elem.nextUntil('h2').each((j, f) => {
-              console.log($(f).attr("id"));
               if ($(f).attr("id")!="Wizardly") {
-                html += $(f).html();
+                html += '<div id="Row-'+i+'-'+j+'" class="wizRow">'+f.outerHTML+'</div>';
               }
             });
             html += '</div>';
           }
-        });
-
+        }); 
         $("#WizardTabs").html(nav);
         $("#WizardContents").html(html);
+
         $("#WizardPreviousButton").hide();
         $("#WizardNextButton").show();
-        $(".wizardnav").off();
         $(".whitez").off();
-        $(".whitez").click(() => {
+        $(".wizardclose").click(() => {
           $(".wizardmodal").hide();
+          $("body").removeClass("noscroll");
+        });
+        $(".wizardmodal").find(".clean-btn").click((e) => {
+          let codeBlock = getText($(e.currentTarget).parent().parent());
+          var toCopy = "";
+          var lines = codeBlock.split('\n');
+          var hasCodeStart = false;
+          var found = 0;
+          for (var i=0; i<lines.length; i++) {
+            if (lines[i].indexOf("$")==0) {
+              hasCodeStart = true;
+              break;
+            }
+          }
+          if (hasCodeStart) {
+            for (var i=0; i<lines.length; i++) {
+              if (lines[i].indexOf("$")==0) {
+                toCopy += ((found>0)?"\n":"")+lines[i].substr(1).trim();
+                found++;
+              }
+            }
+          } else {
+            toCopy = codeBlock.trim();
+          }
+          $(e.currentTarget).addClass("copyButtonCopied_node_modules-@docusaurus-theme-classic-lib-theme-CodeBlock-CopyButton-styles-module");
+          setTimeout(() => {
+            $(e.currentTarget).removeClass("copyButtonCopied_node_modules-@docusaurus-theme-classic-lib-theme-CodeBlock-CopyButton-styles-module");
+          }, 1000);
+          navigator.clipboard.writeText(toCopy);
         });
         window['WizardGoTo'] = WizardGoTo;
         window['WizardNext'] = WizardNext;
         window['WizardPrev'] = WizardPrev;
         window['ShowWizard'] = ShowWizard;
+        
+        $(".wizardnav").off();
         $(".wizardnav").click(window.WizardGoTo);
+        $(".wizardnav").show();
+
+        setTimeout(() => {
+          $(".openWizard").show();
+          $(".wizRow").each((i,e) => {
+            if ($(e).find("button").length>1) {
+              $(e).find("button")[0].remove();
+            }
+          });
+        }, 500);
+
+
+        let urlParams = new URLSearchParams(window.location.search);
+        let auto = urlParams.get('wizard');
+        if (auto!=null) ShowWizard();
       }
     }
 
     function WizardGoTo(e) {
       let index = $(e.currentTarget).data("index");
-      console.log($(e.currentTarget));
       if (index>0 && index<wizardTotal) wizardIndex = index;
-      console.log(index);
       WizardShow();
     }
 
-
     function WizardShow() {
-      if (wizardIndex<wizardTotal) $("#WizardNextButton").show();
+      if (wizardIndex<(wizardTotal-1)) $("#WizardNextButton").show();
       else $("#WizardNextButton").hide();
       if (wizardIndex==0) $("#WizardPreviousButton").hide();
       else $("#WizardPreviousButton").show();
-      console.log("Here");
       $(".current").removeClass("current");
-      console.log("And Here");
       $(".wizardContent").hide();
       $(".wizardNav"+wizardIndex).addClass("current");
       $(".wizard"+wizardIndex).show();
     }
 
     function WizardPrev() {
-      console.log(wizardIndex,wizardTotal);
       if (wizardIndex>0) wizardIndex--;
       else wizardIndex = wizardTotal-1;
-      console.log(wizardIndex,wizardTotal);
       WizardShow();
     }
 
     function WizardNext() {
-      console.log(wizardIndex,wizardTotal);
-      if (wizardIndex<wizardTotal) wizardIndex++;
+      if (wizardIndex<(wizardTotal-1)) wizardIndex++;
       else wizardIndex = 0;
-      console.log(wizardIndex,wizardTotal);
       WizardShow();
     }
 

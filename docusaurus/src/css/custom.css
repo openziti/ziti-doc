@@ -767,7 +767,8 @@ input {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;    
   height: 890px;
-  overflow-y: auto;
+  overflow-y: auto;    
+  height: calc(70vh - 134px);
 }
 
 .vertical .actions {
@@ -790,6 +791,11 @@ input {
   width: 100vw;
   z-index: 1000;
   display: none;
+}
+
+.wizardmodal h1 {
+  padding-bottom: 0px;
+  line-height: 52px;
 }
 
 .wizardmodal .page-wrapper {
@@ -834,10 +840,10 @@ input {
   position: absolute;
   content: '';
   width: 2px;
-  height: 475px;
   background: #d4d3d9;
   left: 55px;
-  top: 300px;
+  height: 83%;
+  top: 50%;
   transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
@@ -846,15 +852,18 @@ input {
   z-index: 9;
 }
 
-.title {
+.wizardnav .title {
   align-items: center;
   -moz-align-items: center;
   -webkit-align-items: center;
   -o-align-items: center;
   -ms-align-items: center;
+  display: grid;
+  grid-template-columns: 50px auto;
+  column-gap: 20px;
 }
 
-.title .step-number {
+.wizardnav .title .step-number {
   width: 50px;
   height: 50px;
   align-items: center;
@@ -879,14 +888,37 @@ input {
   font-weight: bold;
 }
 
-.openWizard {
-  position: absolute;
-  top: 30px;
-  right: 300px;
-  cursor: pointer;
+.noscroll {
+  overflow: hidden !important;
 }
 
-.title .step-text {
+
+.openWizard {
+  display: none;
+  background-image: url(/img/wand.svg);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  width: 130px;
+  height: 60px;
+  text-align: center;
+  background-position: top center;
+  vertical-align: bottom;
+  padding-top: 43px;
+}
+
+.openWizard {
+  position: absolute;
+  top: 37px;
+  right: 27%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.openWizard:hover {
+  filter: grayscale(100%);
+}
+
+.wizardnav .title .step-text {
   font-weight: 600;
   color: #8797ab;
 }
@@ -895,12 +927,12 @@ input {
   cursor: pointer;
 }
 
-.current .title .step-number {
+.wizardmodal .current .title .step-number {
   background: #076bfe;
   color: #fff;
 }
 
-.current .title .step-text {
+.wizardmodal .current .title .step-text {
   color: #002451;
 }
 
@@ -1323,8 +1355,8 @@ input.error {
   }
 }
 
-/* Basic styling for prettyprint */
-.prettyprint {
+/* Basic styling for .wizardmodal prettyprint */
+..wizardmodal prettyprint {
   font-family: "Menlo", "Monaco", "Consolas", monospace !important;
   background: #002451;
   background-color: #002451;
@@ -1332,13 +1364,13 @@ input.error {
   border: none !important;
   padding: 20px !important;
   font-size: 16px;
-  white-space: pre-wrap;
+  white-space: .wizardmodal pre-wrap;
   /* css-3 */
-  white-space: -moz-pre-wrap;
+  white-space: -moz-.wizardmodal pre-wrap;
   /* Mozilla, since 1999 */
-  white-space: -pre-wrap;
+  white-space: -.wizardmodal pre-wrap;
   /* Opera 4-6 */
-  white-space: -o-pre-wrap;
+  white-space: -o-.wizardmodal pre-wrap;
   /* Opera 7 */
   word-wrap: break-word;
   /* Internet Explorer 5.5+ */
@@ -1358,7 +1390,7 @@ li.L9 {
   list-style-type: decimal;
 }
 
-/* Adds individual lines to prettyprint */
+/* Adds individual lines to .wizardmodal prettyprint */
 ol.linenums {
   counter-reset: linenumber;
 }
@@ -1378,89 +1410,124 @@ ol.linenums li:before {
   width: 3em;
 }
 
-pre .str,
+.wizardmodal h2 {
+  margin-bottom: 20px;
+}
+
+.wizardmodal pre {
+  text-wrap: wrap;
+  background: #333;
+  color: #fff;
+}
+
+.wizardmodal .token-line {
+  color: #fff !important;
+}
+
+.wizardclose {
+  background-image: url(/img/close.svg);
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  background-size: contain;
+  cursor: pointer;
+  opacity: 1.0;
+  transition: 0.5s;
+}
+
+.wizardclose:hover {
+  opacity: 0.8;
+}
+
+.wizRow {
+  margin-top: 10px;
+}
+
+.wizardmodal pre .str,
 code .str {
   color: #a4ff90 !important;
 }
 
 /* string  - green */
-pre .kwd,
+.wizardmodal pre .kwd,
 code .kwd {
   color: #fc568c !important;
 }
 
 /* keyword - dark pink */
-pre .com,
+.wizardmodal pre .com,
 code .com {
   color: #AEAEAE !important;
   font-style: italic !important;
 }
 
 /* comment - gray */
-pre .typ,
+.wizardmodal pre .typ,
 code .typ {
   color: #9dffff !important;
 }
 
 /* type - light blue */
-pre .lit,
+.wizardmodal pre .lit,
 code .lit {
   color: #076bfe !important;
 }
 
 /* literal - blue */
-pre .pun,
+.wizardmodal pre .pun,
 code .pun {
   color: #fff !important;
 }
 
 /* punctuation - white */
-pre .pln,
+.wizardmodal pre .pln,
 code .pln {
   color: #fff !important;
 }
 
 /* plaintext - white */
-pre .tag,
+.wizardmodal pre .tag,
 code .tag {
   color: #89bdff !important;
 }
 
 /* html/xml tag    - light blue */
-pre .atn,
+.wizardmodal pre .atn,
 code .atn {
   color: #bdb76b !important;
 }
 
 /* html/xml attribute name  - khaki */
-pre .atv,
+.wizardmodal pre .atv,
 code .atv {
   color: #65B042 !important;
 }
 
 /* html/xml attribute value - green */
-pre .dec,
+.wizardmodal pre .dec,
 code .dec {
   color: #3387CC !important;
 }
 
 /* decimal - blue */
 
-pre.prettyprint,
-code.prettyprint, .wizard pre {
+.wizardmodal pre..wizardmodal prettyprint,
+code..wizardmodal prettyprint, .wizard .wizardmodal pre {
   /* background-color: #0f2438 !important; */
   background-color: #002451 !important;
   border-radius: 8px !important;
 }
 
-pre.prettyprint, pre {
+.wizardmodal pre..wizardmodal prettyprint, .wizardmodal pre {
   margin: 1em auto !important;
   padding: 1em !important;
-  white-space: pre-line !important;
+  white-space: .wizardmodal pre-line !important;
 }
 
 
-/* Specify class=linenums on a pre to get line numbering */
+/* Specify class=linenums on a .wizardmodal pre to get line numbering */
 ol.linenums {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -1488,56 +1555,56 @@ li.L9 {}
 
 @media print {
 
-  pre .str,
+  .wizardmodal pre .str,
   code .str {
     color: #060 !important;
   }
 
-  pre .kwd,
+  .wizardmodal pre .kwd,
   code .kwd {
     color: #006 !important;
     font-weight: bold !important;
   }
 
-  pre .com,
+  .wizardmodal pre .com,
   code .com {
     color: #600 !important;
     font-style: italic !important;
   }
 
-  pre .typ,
+  .wizardmodal pre .typ,
   code .typ {
     color: #404 !important;
     font-weight: bold !important;
   }
 
-  pre .lit,
+  .wizardmodal pre .lit,
   code .lit {
     color: #044 !important;
   }
 
-  pre .pun,
+  .wizardmodal pre .pun,
   code .pun {
     color: #440 !important;
   }
 
-  pre .pln,
+  .wizardmodal pre .pln,
   code .pln {
     color: #000 !important;
   }
 
-  pre .tag,
+  .wizardmodal pre .tag,
   code .tag {
     color: #006 !important;
     font-weight: bold !important;
   }
 
-  pre .atn,
+  .wizardmodal pre .atn,
   code .atn {
     color: #404 !important;
   }
 
-  pre .atv,
+  .wizardmodal pre .atv,
   code .atv {
     color: #060 !important;
   }
