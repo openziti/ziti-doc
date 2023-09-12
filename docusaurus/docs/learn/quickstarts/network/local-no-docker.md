@@ -6,7 +6,7 @@ import Wizardly from '@site/src/components/Wizardly';
 
 # Local - No Docker
 
-This page will show you how to get your [Ziti Network](../../introduction/index.mdx) up and running 
+This page will show you how to get your [Ziti Network](/learn/introduction/index.mdx) up and running 
 quickly and easily, entirely locally. Since you'll be running everything locally, you'll have no issues communicating
 between network components. All the processes will run locally, and you'll be responsible for starting and stopping them
 when you want to turn the overlay network on or off.
@@ -65,23 +65,23 @@ After running `expressInstall`, you will have environment variables set named `Z
 `ZITI_CTRL_EDGE_ADVERTISED_PORT`. After the controller has started, your controller should be listening at that 
 address:port combination. (Note, if you do not have these environment variables, you've probably closed your shell and opened
 it up again. You can get the environment variables by sourcing the ".env" file. 
-[See the section at the bottom of the page](https://docs.openziti.io/docs/learn/quickstarts/network/local-no-docker/#sourcing-the-env-file)
+[See the section at the bottom of the page](https://openziti.io/docs/learn/quickstarts/network/local-no-docker/#sourcing-the-env-file)
 for details)
 
 You can see what your value is set to by running 
-`echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"`. This value defaults to: 
-`$(hostname -s):1280`. Make sure the controller is on and listening and then start the edge router. 
+`echo ${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}`. This value defaults to: 
+`$(hostname -s):1280`. Make sure the controller is available by trying to curl to the address, and then start the edge router. 
+
 
 ```bash
-echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
+curl -sk "https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
 ```
 
-Example output:
-
+Example output: 
 ```bash
-$ echo "${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
-My-Mac-mini:1280
+{"data":{"apiVersions":{"edge":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-client":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-management":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/management/v1"],"path":"/edge/management/v1"}}},"buildDate":"2023-06-23T15:08:25Z","revision":"65d1dda821a3","runtimeVersion":"go1.20.5","version":"v0.28.4"},"meta":{}}
 ```
+
 ### Start Your Edge Router
 
 Now that the controller is ready, you can start the edge router created with the 'express' process. You can start this 
@@ -98,7 +98,7 @@ $ startRouter
 Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
 ```
 
-You can verify the edge router is listening by finding the value of `$ZITI_ROUTER_ADVERTISED_ADDRESS:$ZITI_EDGE_ROUTER_PORT`.
+You can verify the edge router is listening by finding the value of `$ZITI_ROUTER_ADVERTISED_ADDRESS:$ZITI_ROUTER_PORT`.
 Again, this will default to using `$(hostname -s)` as the host name and port 3022.
 
 ### Stopping the Controller and Router
@@ -120,7 +120,7 @@ INFO: Controller stopped.
 
 ## Testing Your Overlay
 
-At this point you should have a functioning [Ziti Network](../../introduction/index.mdx). The script 
+At this point you should have a functioning [Ziti Network](/learn/introduction/index.mdx). The script 
 you sourced provides another function to login to your network. Try this now by running `zitiLogin`. You should see 
 something similar to this:
 ```bash
@@ -147,7 +147,7 @@ Horray! Our edge router shows up and is online!
 You can try out creating and running a simple echo service through ziti by running the `first-service` tutorial.
 
 ```bash
-$ "${ZITI_BIN_DIR-}/ziti" edge tutorial first-service
+$ "${ZITI_BIN_DIR-}/ziti" demo first-service
 ```
 
 
@@ -166,7 +166,7 @@ Please realize that if you change these variables each of the "hostname" variabl
 * ZITI_CTRL_EDGE_ADVERTISED_ADDRESS
 * ZITI_CTRL_EDGE_ADVERTISED_PORT
 * ZITI_ROUTER_ADVERTISED_ADDRESS
-* ZITI_EDGE_ROUTER_PORT
+* ZITI_ROUTER_PORT
 
 Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`, uses
 a host named 'localhost', and uses ports 8800 for the edge controller and 9090 for the edge router:
@@ -176,7 +176,7 @@ ZITI_NETWORK="newfolder"; \
 ZITI_CTRL_EDGE_ADVERTISED_ADDRESS=localhost; \
 ZITI_CTRL_EDGE_ADVERTISED_PORT=8800; \
 ZITI_ROUTER_ADVERTISED_ADDRESS=localhost; \
-ZITI_EDGE_ROUTER_PORT=9090; \
+ZITI_ROUTER_PORT=9090; \
 source ziti-cli-functions.sh; expressInstall
 ```
 
@@ -193,9 +193,9 @@ source $HOME/.ziti/quickstart/$(hostname)/$(hostname).env
 
 ## Next Steps
 
-- Now that you have your network in place, you probably want to try it out. Head to
-[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
-- [Install the Ziti Console](../zac/index.md#cloning-from-github) (web UI)
+- Now that you have your network in place, you probably want to try it out. Head to the
+  [Your First Service](/learn/quickstarts/services/index.md) quickstart and start learning how to use OpenZiti.
+- [Install the Ziti Console](/learn/quickstarts/zac/index.md#cloning-from-github) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

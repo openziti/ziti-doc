@@ -26,7 +26,7 @@ export default function OpenZitiLayout(props) {
       <LayoutProvider>
           <div className={styles.root}>
               <div className={styles.content}>
-                  <PageMetadata title="Welcome!" description="OpenZiti is dedicated to make the challenge of secure connectivity simple and accessible by replacing infrastructure with software. The world is software, your secure network needs to be software." />
+                  <PageMetadata title="OpenZiti - open source zero trust networking!" description="OpenZiti is an open source zero trust network applying zero trust principles directly into applications through SDKs or to existing networks using tunnelers" />
 
                   <SkipToContent />
 

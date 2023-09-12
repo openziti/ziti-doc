@@ -31,89 +31,34 @@ It is not necessary to manually enroll the identity when using the RPM or DEB pa
 1. Run the script for your OS to install `ziti-edge-tunnel`.
 
 <Tabs
-  defaultValue="Focal"
+  defaultValue="Ubuntu"
   values={[
-      { label: 'Ubuntu Jammy 22.04', value: 'Jammy', },
-      { label: 'Ubuntu Focal 20.04', value: 'Focal', },
-      { label: 'Ubuntu Bionic 18.04', value: 'Bionic', },
+      { label: 'Ubuntu', value: 'Ubuntu', },
       { label: 'Debian GNU/Linux', value: 'Debian', },
   ]}
 >
-<TabItem value="Jammy">
 
-#### Ubuntu Jammy 22.04
+<TabItem value="Ubuntu">
 
+#### Ubuntu
+
+Packages are available for all Ubuntu releases since 18.04 (Bionic).
+<br/>
 Architectures available:
 
 * x86_64
 * arm64
 
+:::note
+Please read this script to ensure it is safe before running it.
+:::
+
 ```bash
-(
-set -euo pipefail
-
-curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
-
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable jammy main' \
-  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
-
-sudo apt update
-sudo apt install ziti-edge-tunnel
-)
+curl -sSLf https://get.openziti.io/tun/scripts/install-ubuntu.bash | bash
 ```
 
 </TabItem>
-<TabItem value="Focal">
 
-#### Ubuntu Focal 20.04
-
-Architectures available:
-
-* x86_64
-* arm64
-
-```bash
-(
-set -euo pipefail
-
-curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
-
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
-  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
-
-sudo apt update
-sudo apt install ziti-edge-tunnel
-)
-```
-
-</TabItem>
-<TabItem value="Bionic">
-
-#### Ubuntu Bionic 18.04
-
-Architectures available:
-
-* x86_64
-* arm64
-
-```bash
-(
-set -euo pipefail
-
-curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
-  | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
-
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable bionic main' \
-  | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
-
-sudo apt update
-sudo apt install ziti-edge-tunnel
-)
-```
-
-</TabItem>
 <TabItem value="Debian">
 
 #### Debian GNU/Linux
@@ -145,11 +90,12 @@ sudo apt install ziti-edge-tunnel
 </TabItem>
 </Tabs>
 
-2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+2. Place a copy of the enrollment token JWT file in the `/opt/openziti/etc/identities` directory.
+2. Set the filemode and owner so that members of group `ziti` will be able to read and delete the token file.
 
   ```bash
-  sudo -u ziti tee /opt/openziti/etc/identities/ziti-id.jwt >/dev/null
-  # paste the contents of the enrollment token JWT file and press Ctrl+D
+  sudo chown -cR :ziti        /opt/openziti/etc/identities
+  sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
   ```
 
 2. Enable and start the service
@@ -172,7 +118,6 @@ sudo apt install ziti-edge-tunnel
   defaultValue="RedHat"
   values={[
       { label: 'Red Hat', value: 'RedHat', },
-      { label: 'Red Hat 9', value: 'RedHat9', },
       { label: 'Fedora', value: 'Fedora', },
       { label: 'Amazon Linux', value: 'Amazon', },
   ]}
@@ -185,7 +130,7 @@ Architectures available:
 
 * x86_64
 
-Use this repo with var `$releasever` on CentOS 7, Rocky 8, RHEL 7-8.
+Use this repo with var `$releasever` on CentOS 7, Rocky 8-9, and RHEL 7-9.
 
 ```ini
 [OpenZiti]
@@ -198,27 +143,7 @@ repo_gpgcheck=1
 ```
 
 </TabItem>
-<TabItem value="RedHat9">
 
-#### Red Hat 9
-
-Architectures available:
-
-* x86_64
-
-Use the the Red Hat 8 repo until a dedicated Red Hat 9 repo becomes available ([link to issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/517)).
-
-```ini
-[OpenZiti]
-name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
-enabled=1
-gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
-repo_gpgcheck=1
-```
-
-</TabItem>
 <TabItem value="Fedora">
 
 #### Fedora
@@ -238,6 +163,7 @@ repo_gpgcheck=1
 ```
 
 </TabItem>
+
 <TabItem value="Amazon">
 
 #### Amazon Linux
@@ -249,10 +175,10 @@ Architectures available:
 ```ini
 [OpenZiti]
 name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat7/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat7/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
@@ -261,11 +187,12 @@ repo_gpgcheck=1
 
 2. Run `sudo yum update` to refresh your repo data cache. Optionally, you may wish to also install all available updates.
 2. Run `sudo yum install ziti-edge-tunnel` to install the RPM.
-2. Place an enrollment token JWT file or identity config JSON file in `/opt/openziti/etc/identities`.
+2. Place a copy of the enrollment token JWT file in the `/opt/openziti/etc/identities` directory.
+2. Set the filemode and owner so that members of group `ziti` will be able to read and delete the token file.
 
   ```bash
-  sudo -u ziti tee /opt/openziti/etc/identities/ziti-id.jwt >/dev/null
-  # paste the contents of the enrollment token JWT file and press Ctrl+D
+  sudo chown -cR :ziti        /opt/openziti/etc/identities
+  sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
   ```
 
 2. Enable and start the service

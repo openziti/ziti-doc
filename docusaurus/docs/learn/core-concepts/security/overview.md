@@ -64,24 +64,24 @@ own separate section.
     1. the connection request is verified through Service Edge Router Policies
 8. the Edge Router coordinates the service connection
 
-# High Level Concepts
+## High Level Concepts
 
 Below are the major areas of Ziti Edge's security model with a minimal description of what each area covers. The link(s)
 in each section will lead to a more detailed explanation of the relevant topics.
 
-## Identity
+### Identity
 
 Ziti Edge defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or 
-dial (connect) to services over a Ziti Network. Read more in the [Identity](../identities/overview.mdx) section.
+dial (connect) to services over a Ziti Network. Read more in the [Identity](/learn/core-concepts/identities/overview.mdx) section.
 
-## Enrollment
+### Enrollment
 
 Enrollment is a client initiated process where the result is the creation of an Identity that has some manner
 of authenticating. Enrollments may be automated through [3rd Party Cas](./authentication/10-third-party-cas.md) and 
 [External JWT Signers](./authentication/50-external-jwt-signers.md)  or may be completed through pre-provisioning. Read more in the 
 [Enrollment](./enrollment.md) section.
 
-## Authentication
+### Authentication
 
 [Authentication](./authentication/auth.md) is the process of a client proving their identity through the submission of one primary credential
 and zero or more secondary credentials that are prompted by Authentication Queries. Authentication methods can be
@@ -89,7 +89,7 @@ configured through [3rd Party Cas](./authentication/10-third-party-cas.md), [Ext
 and [Authentication Policies](./authentication/30-authentication-policies.md). Read more in the
  [Authentication](./authentication/auth.md) section.
 
-## Authorization
+### Authorization
 
 [Authorization](./authorization/auth.md) in Ziti is configured for Identities and Edge Routers. Edge Router authorization only covers which
 services can be used over an Edge Router via Service Edge Router Policies. Identity authorization is covered by Service

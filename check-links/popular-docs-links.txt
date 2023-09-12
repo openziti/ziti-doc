@@ -4,7 +4,6 @@
 /api/rest/edge-apis/edge-client-reference
 /api/rest/edge-apis/edge-management-reference
 /api/rest/edge-apis/shared-api-capabilities
-/api/rest/fabric-apis
 /api/rest/shared-api-capabilities
 /api/ziti-c-sdk
 /api/ziti-sdk-csharp

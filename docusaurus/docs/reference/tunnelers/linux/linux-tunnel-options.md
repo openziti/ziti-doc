@@ -9,8 +9,7 @@
 
 `TLSUV_DEBUG=4` - set the log level of the underlying libuv library, higher is more verbose (level 4 means DEBUG)
 
-<!-- Ken will update this when a better C SDK reference becomes available; this is a full URL because Docusaurus resolves relative and absolute URL and file paths at build time, and the Vercel build will always fail because it can't resolve the linked docs sites, e.g. CLANG doxygen site -->
-For more information about configuring the underlying Ziti C SDK with environment variables, see [the Ziti C SDK documentation](https://docs.openziti.io/docs/reference/developer/sdk/clang/).
+For more information about configuring the underlying Ziti C SDK with environment variables, see [the Ziti C SDK documentation](../../../../docs/reference/developer/sdk/ziti-sdk-c).
 
 ## `ziti-edge-tunnel` Global Options
 
@@ -45,7 +44,7 @@ There are two run modes:
 
 ### `run` Mode
 
-`ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with a command-line option. The OS is automatically configured to treat the nameserver as primary. You may inspect the resulting configuration with these commands.
+`ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with command-line option `--dns-upstream`. `systemd-resolved`, if enabled, automatically configures the Ziti nameserver. You may inspect the configuration with these commands.
 
 ```bash
 resolvectl dns     # inspect the association of tun device and nameserver
@@ -61,7 +60,7 @@ If any interface has a wildcard routing domain configured, `ziti-edge-tunnel` wi
 
 #### How does `run` configure nameservers?
 
-`ziti-edge-tunnel run` provides a built-in nameserver that will answer queries that exactly match authorized OpenZiti services' intercept domain names, and will respond with a hard-fail `NXDOMAIN` code if the query does not match an authorized service.
+`ziti-edge-tunnel run` provides a built-in nameserver that will answer queries that exactly match authorized OpenZiti services' intercept domain names and will respond with a hard-fail `NXDOMAIN` code if the query does not match an authorized service.
 
 You may enable DNS recursion by specifying an upstream nameserver to answer queries for other domain names that are not services' intercept domain names: `ziti-edge-tunnel run --dns-upstream 208.67.222.222`.
 
@@ -71,7 +70,10 @@ If the DNS record exists it returns the answer and sets query status to `NO_ERRO
 
 #### System Requirements for Mode `run`
 
-`ziti-edge-tunnel run` requires elevated privileges for managing the `/dev/net/tun` device, running `resolvectl` to assign nameservers and domain routes to the tun interface, and running `ip route` to manage IP routes. This requires running as root because `setcaps` are not inherited in all of these cases, even when the inherit bit is set.
+`ziti-edge-tunnel run` requires Linux capabilities for managing the `/dev/net/tun` device, running `resolvectl` to assign nameservers and domain routes to the tun interface, and running `ip route` to manage IP routes.
+
+* tun device and route management are permitted by passing the `CAP_NET_ADMIN` to the ziti-edge-tunnel process via `AmbientCapabilities` in the systemd service unit.
+* `systemd-resolved` DNS configuration is permitted by a PolKit rule installed with the RPM or DEB package.
 
 ### `run-host` Mode
 

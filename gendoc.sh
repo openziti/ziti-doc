@@ -181,3 +181,14 @@ echo "running 'yarn build' in ${PWD}"
 yarn build
 popd
 
+echo " "
+if test -e "${script_root}/docusaurus/build/landing.html"; then
+  echo "landing.html detected. overwriting index.html with landing.html"
+  cp "${script_root}/docusaurus/build/index.html" "${script_root}/docusaurus/build/index.original.html"
+  cp "${script_root}/docusaurus/build/landing.html" "${script_root}/docusaurus/build/index.html"
+  echo "landing.html overwritten to index.html. index.html is now index.original.html"
+fi
+
+echo " "
+echo "------------------------"
+echo "gendoc complete"

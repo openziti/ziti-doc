@@ -15,6 +15,10 @@ import StarUs from "../../components/StarUs";
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import $ from 'jquery';
 
+import Hotjar from '@hotjar/browser';
+const siteId = 3576473;
+const hotjarVersion = 6;
+Hotjar.init(siteId, hotjarVersion);
 export default function Layout(props) {
   const {
     children,

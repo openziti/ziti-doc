@@ -8,7 +8,7 @@ title: OpenZiti Ingress to Azure K8s Service
 - [OpenZiti Nginx Module Repo](https://github.com/openziti/ngx_ziti_module)
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
 - Openziti Network
-- [Desktop Tunneler](https://docs.openziti.io/docs/reference/tunnelers/)
+- [Desktop Tunneler](../../../docs/reference/tunnelers)
 
 ---
 
@@ -26,7 +26,7 @@ title: OpenZiti Ingress to Azure K8s Service
 
 A couple of ways to do that:
 
-- Follow the guide @[Host OpenZiti](../../learn/quickstarts/network/hosted.md)
+- Follow the guide @[Host OpenZiti](/learn/quickstarts/network/hosted.md)
 - Follow the guide @[Terraform LKE Setup with OpenZiti](https://github.com/openziti-test-kitchen/terraform-lke-ziti/blob/main/README.md)
 
 Tested with OpenZiti Network deployed to the LKE Cluster using Terraform.
@@ -43,8 +43,8 @@ client name = `client-nginx` with `Attribute`: `#clients`,  server module name =
 
 Download jwt files and enroll identities. 
 
-- Windows ZDE Identity can be enrolled by following this [enrolling process](https://docs.openziti.io/docs/reference/tunnelers/windows#enrolling)
-- Nginx Module Identity can be enrolled by following [Enrolling an Identity Guide](../../learn/core-concepts/identities/20-enrolling.md)
+- Windows ZDE Identity can be enrolled by following this [enrolling process](/reference/tunnelers/02-windows.md#enrolling)
+- Nginx Module Identity can be enrolled by following [Enrolling an Identity Guide](/learn/core-concepts/identities/20-enrolling.md)
 
 ---
 

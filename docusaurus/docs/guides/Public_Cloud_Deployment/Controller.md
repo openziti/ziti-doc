@@ -15,7 +15,10 @@ import TabItem from '@theme/TabItem';
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -128,6 +131,87 @@ Now click on **Launch instance**
 - Now click on **CREATE** to create the virtual machine.
 
 </TabItem>
+<TabItem value="DigitalOcean">
+
+- Login to the Digital Ocean console, create a **Droplets** from the dropdown menu on the upper right hand side.
+
+![Diagram](/img/public_cloud/Create1.jpg)
+
+- On the "Create Droplets" screen, Choose "**Ubuntu**", version "**22.04**".
+- For the Size, choose the appropriate size for your application.  For this guide, a smaller size was used.
+![Diagram](/img/public_cloud/Create2.jpg)
+
+- Next, choose a ssh-key to login to the VM. (We highly discourage login to the VM using Password),
+- then **Create Droplet**
+![Diagram](/img/public_cloud/Create3.jpg)
+
+</TabItem>
+<TabItem value="OCI">
+
+- Login to the **ORACLE Cloud** console. 
+- Go to Home dashboard.
+- Click on **Instances** (Under **Compute** category). 
+- Create an instance.
+- Name the instance. 
+- Choose the compartment.
+- Select the Availability domain under Placement.
+- Leave the security disabled
+
+![Diagram](/img/public_cloud/Create-OCI1.jpg)
+
+- Under the "Image and shape selection", click **Change image** icon.
+- Select the **Ubuntu** icon. 
+- Select the **Canonical Ubuntu 22.04**. 
+- Select any image build. And press **Select image**
+- Under the "Shape" selection, Choose **Change shape**. 
+- Change to **2** OCUPs and **4** GB memory.
+
+![Diagram](/img/public_cloud/Create-OCI2.jpg)
+
+- On the networking section.
+- Select your **Primary network** and **Subnet**.
+- For **Public IPv4 address**, check **Assign a public IPv4 address**.
+
+![Diagram](/img/public_cloud/Create-OCI3.jpg)
+
+- In the **Add SSH keys** section, choose how you want your ssh keys generated. **We strongly discourage use password to login to the VM**.
+- Leave default boot volume.
+- Now click on **Create**.
+
+![Diagram](/img/public_cloud/Create-OCI4.jpg)
+
+</TabItem>
+<TabItem value="IBM">
+
+- Login to the IBM cloud.
+- Go to dashboard.
+- Click on **Create resource  +** on the top right
+- Filter on "Compute" on the Category (on the left)
+- Choose **Virtual Server for Classic**.
+
+![Diagram](/img/public_cloud/Create-IBM1.jpg)
+
+- Leave the "Type of virtual server" as **Public**. 
+- Give it your **Hostname**.
+
+![Diagram](/img/public_cloud/Create-IBM2.jpg)
+
+- Select the location. 
+- Select the profile, the size of **B1.2x4** is adequate for our exercise.
+- Choose the SSH key.
+- On the "Operating system" select the **Ubuntu**. Select the version **22.04**
+
+![Diagram](/img/public_cloud/Create-IBM3.jpg)
+
+
+- Leave everything else default except **Add-ons**, turn the **Firewall** features on.
+
+![Diagram](/img/public_cloud/Create-IBM4.jpg)
+
+- Alternative, you can select **allow_all** under the "Public security group", and leave the Add-on Firewall feature off.  **This is not recommended as it opens your VM for attacks**.
+- Press **Create** on the right side menu to create the VM.
+
+</TabItem>
 </Tabs>
 
 ## 1.2 Firewall
@@ -137,7 +221,10 @@ Now click on **Launch instance**
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },      
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -176,16 +263,95 @@ Hit **CREAETE** to create rules.
 ![Diagram](/img/public_cloud/Controller-Firewall-GCP2.jpg)
 
 </TabItem>
+<TabItem value="DigitalOcean">
+
+DigitalOcean by default does not setup firewall for the VM.
+</TabItem>
+<TabItem value="OCI">
+
+---
+
+Oracle cloud by default blocks all incoming traffic to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). 
+
+- First, we need to **Create security group**
+- From the **Networking** category, select the **Virtual cloud networks**. 
+- Select the VCN your VM is in.
+- On the left side menu, select the **Network Security Group**.
+- Select **Create Network Security Group**.
+- Name the security group and select the next.
+- Now create rules for ingress traffic. 
+- Port 22/TCP for SSH
+- OpenZiti ports: 8440-8443/TCP (default ports from quickstart)
+- Also create a rule to allow all traffic outbound (**Egress**).
+
+Following is the example of the Security Group for the controller
+
+![Diagram](/img/public_cloud/Firewall-OCI1.jpg)
+
+- After the security group is created, attach it to the instance.
+- From the "Instance details" screen, select **Edit** under the **Network security groups** section.
+- Select the security group from the drop down and press **Save changes**.
+
+![Diagram](/img/public_cloud/Firewall-OCI2.jpg)
+
+
+---
+**NOTE 1**
+```
+Oracle Cloud also uses Security Lists (on the subnet) to marshal the traffic, 
+please make sure the setting under Security Lists is not conflicting
+with your security group rules.
+```
+
+---
+**NOTE 2**
+```
+It is possible that after the security group configuration, the ufw does not
+work correctly on the VM.
+```
+
+You should **Turn on ufw** and **restart the VM** after the security group configuration.
+
+- ufw must be turned on for traffic to get to the VM.
+- after ufw is enabled, setup **allow** traffic for OpenZiti ports:
+
+```bash
+sudo ufw enable
+sudo ufw allow 8440:8443/tcp
+sudo shutdown -r 0
+```
+
+
+</TabItem>
+<TabItem value="IBM">
+
+If you turn on the firewall feature, you will need to config firewall rules. 
+
+- Open the Instance detail screen
+- Find the **Firewall details** at the bottom right. Open it.
+
+Add the following rules.
+- ssh: port 22/TCP
+- OpenZiti ports: 8440-8443/TCP (default ports from quickstart)
+- Deny rules to deny all other traffic
+
+Make sure the firewall is active, it should display **Processing all rules** if it is active.
+
+![Diagram](/img/public_cloud/Firewall-IBM-controller.jpg)
+
+</TabItem>
 </Tabs>
 
 ## 1.3 Login and Setup Controller
-
 <Tabs
   defaultValue="Azure"
   values={[
       { label: 'Azure', value: 'Azure', },
       { label: 'AWS', value: 'AWS', },
-      { label: 'Google Cloud', value: 'GCP', },
+      { label: 'Google', value: 'GCP', },
+      { label: 'Digital Ocean', value: 'DigitalOcean', },
+      { label: 'Oracle', value: 'OCI', },
+      { label: 'IBM', value: 'IBM', },
   ]}
 >
 <TabItem value="Azure">
@@ -222,6 +388,48 @@ Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/
 
 - Once the VM is created, we can login through **SSH** button on the VM instances screen.
 ![Diagram](/img/public_cloud/GCP-login1.jpg)
+
+- export the DNS record 
+```bash
+export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
+```
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
+
+</TabItem>
+<TabItem value="DigitalOcean">
+
+- Once the VM is created, we can get the IP address of the droplet from the Resources screen.
+- Login to the VM by using user "root" and IP address:
+```bash
+ssh root@<ip>
+```
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+
+- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
+This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
+</TabItem>
+<TabItem value="OCI">
+
+- Once the VM is created, we can get the IP address of the VM from the instance details screen.
+- Login to the VM by using user name "ubuntu" and the IP address:
+```bash
+ssh -i <private_key> ubuntu@<ip>
+```
+
+Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+
+- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
+
+This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
+</TabItem>
+<TabItem value="IBM">
+
+- Once the VM is created, we can get the IP address of the VM from the Devices screen.
+- Login to the VM by using user name "ubuntu" and the IP address:
+```bash
+ssh -i <private_key> ubuntu@<ip>
+```
 
 - export the DNS record 
 ```bash

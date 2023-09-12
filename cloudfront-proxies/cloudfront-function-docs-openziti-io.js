@@ -1,3 +1,4 @@
+// this script answers requests for docs.openziti.io with a redirect
 function handler(event) {
   var request = event.request;
   var uri = request.uri;
@@ -7,19 +8,20 @@ function handler(event) {
     statusDescription: 'Not Found',
     headers: {
       location: {
-        value: `https://blog.openziti.io${uri}`
+        value: `https://openziti.io${uri}`
       },
     }
   }
 
   switch (true) {
-    // requests for root to docs
-    case /^\/$/i.test(uri):
-      response.headers.location.value = `https://docs.openziti.io${uri}`;
-      response.statusDescription = 'Found'
+    // redirect to docs intro page if request for docs.openziti.io/
+    case uri == "/":
+      response.headers.location.value = `https://openziti.io/docs`;
       break;
+    // otherwise send the default response redirecting to openziti.io/*
     }
 
   console.log(`Redirecting "${uri}" to "${response.headers.location.value}"`);
   return response;
+
 }

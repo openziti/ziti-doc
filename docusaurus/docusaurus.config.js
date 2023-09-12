@@ -10,8 +10,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'OpenZiti',
   tagline: 'Replacing Infrastructure With Software',
-  staticDirectories: ["public", "static"],
-  url: 'https://docs.openziti.io/',
+  url: 'https://openziti.io/',
   baseUrl: '/',
   trailingSlash: undefined,
   // onBrokenLinks: 'warn',
@@ -113,6 +112,10 @@ const config = {
         },
         redirects: [
           {
+            to: '/docs/learn/core-concepts/metrics/overview',
+            from: ['/docs/core-concepts/metrics', '/docs/core-concepts/metrics/metric-types'],
+          },
+          {
             to: '/docs/learn/core-concepts/security/authentication/external-jwt-signers',
             from: ['/ziti/security/authentication/external-jwt-signers.html'],
           },
@@ -157,8 +160,8 @@ const config = {
             from: ['/docs', '/docs/learn', '/docs/introduction/intro', '/docusaurus/docs/overview', '/ziti/overview/', '/ziti/overview.html'],
           },
           {
-            to: '/docs/learn/quickstarts/network/',
-            from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html', '/docs/quickstarts'],
+            to: '/docs/learn/quickstarts/',
+            from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html', '/docs/learn/quickstarts/network', '/docs/quickstarts/network'],
           },
           {
             to: '/docs/learn/introduction/openziti-is-software',
@@ -246,7 +249,11 @@ const config = {
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
+      metadata: [
+        {name: 'description', content: 'open source zero trust'},
+        {name: 'robots', content: 'index, follow'},
+      ],
       algolia: {
         // The application ID provided by Algolia
         appId: 'EXWPKK5PV4',
@@ -280,9 +287,11 @@ const config = {
         title: '',
         hideOnScroll: false,
         logo: {
-          alt: 'OpenZiti Logo',
+          alt: 'The OpenZiti logo, an open source zero trust network overlay',
           src: 'img/ziti-logo-dark.svg',
           srcDark: 'img/ziti-logo-light.svg',
+          href: 'https://openziti.io',
+          target: "_self",
         },
         items: [
           {
@@ -321,7 +330,7 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<a href="https://reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/reddit-logo.png"/>Reddit</span></a>'
+                value: '<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/reddit-logo.png"/>Reddit</span></a>'
               },
               {
                 type: 'html',
@@ -385,7 +394,13 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-    }),
+    },
 };
 
 module.exports = config;
+
+{
+  plugins: [
+    'docusaurus-plugin-hotjar',
+  ]
+}

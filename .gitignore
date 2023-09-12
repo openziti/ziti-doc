@@ -19,3 +19,5 @@ github_deploy_key
 sessions
 
 /node_modules
+# use yarn, not npm, see README.md for details
+package-lock.json

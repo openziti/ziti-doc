@@ -14,46 +14,35 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [Ziti Networks](../../introduction/index.mdx) require
-a [Ziti Controller](../../../reference/deployments/01-controller.md). Without a controller, edge routers won't be able to authorize new
+All [Ziti Networks](/learn/introduction/index.mdx) require
+a [Ziti Controller](/reference/deployments/01-controller.md). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
-### Required - Volume Mount
+### Required - Docker Named Volume
 
-Running Ziti locally via Docker will require you to mount a common folder which will be used to store the PKI of your
-network. Without a volume mount, you'll be forced to figure out how to get the PKI in place correctly. While this is a
-straightforward process once you know how to do it, when you're getting started this is undoubtedly complicated. We
-recommend that if you're starting out (or if you just don't want to be bothered with these details) you should just
-create a folder and volume mount that folder. It's expected that this volume is mounted on `/persistent/pki` inside the
-container.
+Running Ziti locally via Docker will require you to create a "named volume" in docker where any and all persistent files
+will be saved.
 
-### Required - Known Name
+Create the named volume now using this command:
+```bash
+docker volume create myPersistentZitiFiles
+```
 
-Other containers on the Docker network will **need** to address the controller. To do this, we will give this container
-a network alias. At this time it would appear that this also forces you to add the container to a network which is not
-the default network. This is a very useful feature which allows your containers to be isolated from one another and also
-will allow you to have multiple networks running locally if you desire. To create a Docker network issue:
+### Required - Docker Network
 
+Other containers on the Docker network will **need** to address the controller. To do this, the container requires
+a network alias. This forces you to add the container to a network which is not the default network. 
+
+Create the docker network now using this command:
 ```bash
 docker network create myFirstZitiNetwork
 ```
 
-Next - we need to make a folder to share our PKI as well as our environment file the controller emits. We'll just 
-put it into your home directory. Move it wherever you like. 
-
-```bash
-mkdir -p ~/docker-volume/myFirstZitiNetwork
-```
-
-Finally, we need to make an empty file where we expect the controller to put the env file. Let's do that now too.
-
-```bash
-echo "#ziti.env file" > ~/docker-volume/myFirstZitiNetwork/ziti.env
-```
-
-Later, when starting the controller, we'll supply this network as a parameter to the `docker` command as well as name the
-network. That's done with these two options: `--network myFirstZitiNetwork --network-alias ziti-controller` and 
-we'll also supply the env file as the location for the controller to use to write into.
+When starting containers participating in this OpenZiti Network, the docker network name will be supplied as a parameter
+to the `docker` command. It's important for containers to be able to address other containers on the docker network,
+this requires predictable container names on the docker network. When looking at the example commands below, these
+options are the ones controlling the network name and network alias on the network:
+`--network myFirstZitiNetwork --network-alias ziti-controller`.
 
 ### Optional - Expose Controller Port
 
@@ -75,21 +64,22 @@ computer on port 1280 (the default port).
 
 ```bash
 docker run \
+  --name ziti-controller \
+  -e ZITI_CTRL_ADVERTISED_ADDRESS=ziti-edge-controller \
   --network myFirstZitiNetwork \
   --network-alias ziti-controller \
   --network-alias ziti-edge-controller \
   -p 1280:1280 \
   -it \
   --rm \
-  -v ~/docker-volume/myFirstZitiNetwork:/persistent/pki \
-  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/persistent/ziti.env \
+  -v myPersistentZitiFiles:/persistent \
   openziti/quickstart \
   /var/openziti/scripts/run-controller.sh
 ```
 
 ## Create Edge Router Policies
-OpenZiti requires explicit authorization of identities using ([edge router policies](../../../reference/glossary.md#edge-router-policy)), 
-as well as authorization of services and routers using ([service edge router policies](../../../reference/glossary.md#service-edge-router-policy)). 
+OpenZiti requires explicit authorization of identities using ([edge router policies](/reference/glossary.md#edge-router-policy)), 
+as well as authorization of services and routers using ([service edge router policies](/reference/glossary.md#service-edge-router-policy)). 
 The docker-based quickstart doesn't perform these steps automatically. Run the initialization container one time, after 
 starting the controller as shown
 
@@ -99,15 +89,14 @@ docker run \
   --network-alias ziti-controller-init-container \
   -it \
   --rm \
-  -v ~/docker-volume/myFirstZitiNetwork:/persistent/pki \
-  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/persistent/ziti.env \
+  -v myPersistentZitiFiles:/persistent \
   openziti/quickstart \
   /var/openziti/scripts/run-with-ziti-cli.sh  /var/openziti/scripts/access-control.sh
 ```
 
 ## Edge Router
 
-At this point you should have a [Ziti Controller](../../../reference/deployments/01-controller.md) running. You should have created your
+At this point you should have a [Ziti Controller](/reference/deployments/01-controller.md) running. You should have created your
 Docker network as well as creating the volume mount. Now it's time to connect your first edge router. The same Docker
 image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
@@ -118,16 +107,16 @@ default port used by edge routers.
 
 ```bash
 docker run \
-  -e ZITI_EDGE_ROUTER_NAME=ziti-edge-router-1 \
-  -e ZITI_EDGE_ROUTER_ROLES=public \
-  -e ZITI_EDGE_ROUTER_ADVERTISED_HOST=ziti-edge-router-1 \
+  --name ziti-edge-router-1 \
+  -e ZITI_ROUTER_NAME=ziti-edge-router-1 \
+  -e ZITI_ROUTER_ADVERTISED_ADDRESS=ziti-edge-router-1 \
+  -e ZITI_ROUTER_ROLES=public \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-1 \
   -p 3022:3022 \
   -it \
   --rm \
-  -v ~/docker-volume/myFirstZitiNetwork:/persistent/pki \
-  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/persistent/ziti.env \
+  -v myPersistentZitiFiles:/persistent \
   openziti/quickstart \
   /var/openziti/scripts/run-router.sh edge
 ```
@@ -136,17 +125,17 @@ If you want to create a second edge router, you'll need to override the router p
 
 ```bash
 docker run \
-  -e ZITI_EDGE_ROUTER_NAME=ziti-edge-router-2 \
-  -e ZITI_EDGE_ROUTER_ROLES=public \
-  -e ZITI_EDGE_ROUTER_PORT=4022 \
-  -e ZITI_EDGE_ROUTER_ADVERTISED_HOST=ziti-edge-router-2 \
+  --name ziti-edge-router-2 \
+  -e ZITI_ROUTER_NAME=ziti-edge-router-2 \
+  -e ZITI_ROUTER_ADVERTISED_ADDRESS=ziti-edge-router-2 \
+  -e ZITI_ROUTER_PORT=4022 \
+  -e ZITI_ROUTER_ROLES=public \
   --network myFirstZitiNetwork \
   --network-alias ziti-edge-router-2 \
   -p 4022:4022 \
   -it \
   --rm \
-  -v ~/docker-volume/myFirstZitiNetwork:/persistent/pki \
-  -v ~/docker-volume/myFirstZitiNetwork/ziti.env:/persistent/ziti.env \
+  -v myPersistentZitiFiles:/persistent \
   openziti/quickstart \
   /var/openziti/scripts/run-router.sh edge
 ```
@@ -155,11 +144,16 @@ docker run \
 
 ### Using Docker Locally
 
-A quick note. If you are not well-versed with Docker you might forget that exposing ports in Docker is one thing, 
-but you'll also need to have a hosts entry for the containers you want to access from outside of of the Docker 
-network. This quickstart will expect that you understand this and for every router you add you will want to make 
-sure you add a host entry. In the examples above we are adding three entities: `ziti-edge-controller`, 
-`ziti-edge-router-1` and `ziti-edge-router-2`.
+Using the OpenZiti Network outside the docker environment is somewhat complex. The aliases chosen when starting the docker
+containers need to be addressable from wherever a client is connecting. This includes the `ziti` CLI, tunnelers, SDKs,
+etc. This quickstart expects you understand this and every router added to the overlay will require a route to the alias
+used. The easiest way to accomplish this is to use the operating system's ["hosts file"](https://en.wikipedia.org/wiki/Hosts_(file))
+but a nameserver such as a [pi hole](https://pi-hole.net/) also works well. Understanding this concept in-depth is out
+of scope of this guide. It is assumed you have added the following entries to your operating
+system's hosts file or DNS nameserver:
+* `ziti-edge-controller`
+* `ziti-edge-router-1`
+* `ziti-edge-router-2`
 
 ### Testing
 
@@ -200,9 +194,9 @@ results: 1-1 of 1
 
 ## Next Steps
 
-- Now that you have your network in place, you probably want to try it out. Head to
-[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
-- [Install the Ziti Console](../zac/index.md#docker) (web UI)
+- Now that you have your network in place, you probably want to try it out. Head to the
+  [Your First Service](/learn/quickstarts/services/index.md) quickstart and start learning how to use OpenZiti.
+- [Install the Ziti Console](/learn/quickstarts/zac/index.md#using-docker) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

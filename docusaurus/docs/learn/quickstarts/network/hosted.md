@@ -5,7 +5,7 @@ import Wizardly from '@site/src/components/Wizardly';
 
 # Host OpenZiti Anywhere
 
-You can absolutely choose to host your [OpenZiti Network](../../introduction/index.mdx) anywhere you like.
+You can absolutely choose to host your [OpenZiti Network](/learn/introduction/index.mdx) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
 own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller and at least one edge router, which this quickstart will provide.
 
@@ -14,7 +14,7 @@ ideal scenario. With a zero trust overlay network provided by OpenZiti, you can 
 
 ## Installation
 
-When starting out deploying an [OpenZiti Network](../../introduction/index.mdx), we recommend you follow
+When starting out deploying an [OpenZiti Network](/learn/introduction/index.mdx), we recommend you follow
 and use the `expressInstall` function provided by the OpenZiti project. Once you're familiar with the network and
 the configuration options available you'll be better equipped to make changes.
 
@@ -56,13 +56,13 @@ export EXTERNAL_DNS="acme.example.com"
 
 ```bash
 export EXTERNAL_IP="$(curl -s eth0.me)"       
-export ZITI_EDGE_CONTROLLER_IP_OVERRIDE="${EXTERNAL_IP}"
-export ZITI_EDGE_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
-export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${EXTERNAL_DNS}"
-export ZITI_ROUTER_ADVERTISED_ADDRESS="${EXTERNAL_DNS}"
-export ZITI_CTRL_LISTENER_PORT=8440
+export ZITI_CTRL_EDGE_IP_OVERRIDE="${EXTERNAL_IP}"
+export ZITI_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
+export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${EXTERNAL_DNS:-${EXTERNAL_IP}}"
+export ZITI_ROUTER_ADVERTISED_ADDRESS="${EXTERNAL_DNS:-${EXTERNAL_IP}}"
+export ZITI_CTRL_ADVERTISED_PORT=8440
 export ZITI_CTRL_EDGE_ADVERTISED_PORT=8441
-export ZITI_EDGE_ROUTER_PORT=8442
+export ZITI_ROUTER_PORT=8442
 ```
 
 ### Run `expressInstall`
@@ -82,7 +82,7 @@ is useful to make sure the controller can restart automatically should you shutd
 
 ```bash
 createControllerSystemdFile
-createRouterSystemdFile "${ZITI_EDGE_ROUTER_NAME}"
+createRouterSystemdFile "${ZITI_ROUTER_NAME}"
 ```
 
 Example output:
@@ -91,11 +91,18 @@ Example output:
 $ createControllerSystemdFile
 Controller systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-controller.service
 
-$ createRouterSystemdFile "${ZITI_EDGE_ROUTER_NAME}"
+$ createRouterSystemdFile "${ZITI_ROUTER_NAME}"
 Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-router.service
 ```
 
-Before you run the controller and router with `systemd` you need to stop them if they're currently running.
+#### The helper functions vs systemd
+
+The set of startController/stopController, startRouter/stopRouter are functions declared in the 
+[the ziti-cli-function.sh helper script](https://get.openziti.io/quick/ziti-cli-functions.sh) and are useful for running
+the controller and router directly in your shell. These functions are not meant to work with systemd-enabled installs. If
+you are enabling systemd, use `systemctl` to start/stop the components. During the expressInstall, the controller and router
+were started using the helper scripts to complete the installation. Both should not be running, but before you run the 
+controller and router with `systemd` you need to stop them if they're currently running:
 
 ```bash
 stopRouter 
@@ -116,30 +123,15 @@ After the `systemd` service units are generated, you can then install them by ru
 
 ```bash
 sudo cp "${ZITI_HOME}/${ZITI_CTRL_NAME}.service" /etc/systemd/system/ziti-controller.service
-sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
+sudo cp "${ZITI_HOME}/${ZITI_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now ziti-controller
 sudo systemctl enable --now ziti-router
 ```
 
-Example output:
-
-```bash
-$ sudo cp "${ZITI_HOME}/${ZITI_CTRL_NAME}.service" /etc/systemd/system/ziti-controller.service
-
-$ sudo cp "${ZITI_HOME}/${ZITI_EDGE_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
-
-$ sudo systemctl daemon-reload
-
-$ sudo systemctl enable --now ziti-controller
-Created symlink from /etc/systemd/system/multi-user.target.wants/ziti-controller.service to /etc/systemd/system/ziti-controller.service.
-
-$ sudo systemctl enable --now ziti-router
-Created symlink from /etc/systemd/system/multi-user.target.wants/ziti-router.service to /etc/systemd/system/ziti-router.service.
-```
-
-Now, both the controller and the edge router will restart automatically!  After a few seconds you can then run these
-commands and verify systemd has started the processes and see the status:
+Now, both the controller and the edge router will restart automatically if the machine reboots!  
+After a few seconds you can then run these commands and verify systemd has started the processes 
+and see the status:
 
 ```bash
 sudo systemctl -q status ziti-controller --lines=0 --no-pager
@@ -190,9 +182,9 @@ $ echo $ZITI_HOME
 
 ## Next Steps
 
-- Now that you have your network in place, you probably want to try it out. Head to
-[the services quickstart](../services/index.md) and start learning how to use OpenZiti.
-- [Install the Ziti Console](../zac/index.md) (web UI)
+- Now that you have your network in place, you probably want to try it out. Head to the
+  [Your First Service](/learn/quickstarts/services/index.md) quickstart and start learning how to use OpenZiti.
+- [Install the Ziti Console](/learn/quickstarts/zac/index.md) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)
