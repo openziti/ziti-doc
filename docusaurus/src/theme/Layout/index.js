@@ -36,7 +36,6 @@ export default function Layout(props) {
     var intervalId;
     var wizardIndex = 0;
     var wizardTotal = 0;
-    var animating = false;
 
     function UrlChanged() {
       if (lastPath!=window.location.pathname) {
@@ -47,7 +46,7 @@ export default function Layout(props) {
     }
 
     function ShowWizard() {
-      animating = false;
+      wizardIndex = 0;
       $("#WizardNextButton").show();
       $("#WizardPreviousButton").hide();
       $(".current").removeClass("current");
