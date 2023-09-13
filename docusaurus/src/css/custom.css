@@ -1617,16 +1617,6 @@ li.L9 {}
   }
 }
 
-.wizardmodal code {
-  font-size: 87.5%;
-  color: #e83e8c;
-  word-break: break-word;
-  background-color: #ffdded;
-  border: 1px solid #e83e8c;
-  border-radius: 7px;
-  padding: 2px 4px 2px 4px;
-}
-
 .builderbox {
   margin: auto;
   text-align: center;
