@@ -36,6 +36,7 @@ export default function Layout(props) {
     var intervalId;
     var wizardIndex = 0;
     var wizardTotal = 0;
+    var animating = false;
 
     function UrlChanged() {
       if (lastPath!=window.location.pathname) {
@@ -46,8 +47,13 @@ export default function Layout(props) {
     }
 
     function ShowWizard() {
-      window.WizardGoTo(0);
-      $(".wizardmodal").show();
+      animating = false;
+      $("#WizardNextButton").show();
+      $("#WizardPreviousButton").hide();
+      $(".current").removeClass("current");
+      $(".wizardNav"+wizardIndex).addClass("current");
+      $(".wizard"+wizardIndex).show();
+      $(".wizardmodal").fadeIn();
       $("body").addClass("noscroll");
     }
 
@@ -64,7 +70,6 @@ export default function Layout(props) {
     } 
 
     function BuildWizard() {
-      console.log("Build",$("#Wizardly").length);
       if ($("#Wizardly").length>0) {
         wizardIndex = 0;
         wizardTotal = 0;
@@ -128,8 +133,6 @@ export default function Layout(props) {
           }, 1000);
           navigator.clipboard.writeText(toCopy);
         });
-        console.log("Ere")
-          console.log("Erse")
           window['WizardGoTo'] = WizardGoTo;
           window['WizardNext'] = WizardNext;
           window['WizardPrev'] = WizardPrev;
@@ -171,14 +174,15 @@ export default function Layout(props) {
     }
 
     function WizardShow() {
-      if (wizardIndex<(wizardTotal-1)) $("#WizardNextButton").show();
-      else $("#WizardNextButton").hide();
-      if (wizardIndex==0) $("#WizardPreviousButton").hide();
-      else $("#WizardPreviousButton").show();
-      $(".current").removeClass("current");
-      $(".wizardContent").hide();
-      $(".wizardNav"+wizardIndex).addClass("current");
-      $(".wizard"+wizardIndex).show();
+        if (wizardIndex<(wizardTotal-1)) $("#WizardNextButton").show();
+        else $("#WizardNextButton").hide();
+        if (wizardIndex==0) $("#WizardPreviousButton").hide();
+        else $("#WizardPreviousButton").show();
+        $(".current").removeClass("current");
+        $(".wizardNav"+wizardIndex).addClass("current");
+
+        $(".wizardContent").hide();
+        $(".wizard"+wizardIndex).fadeIn();
     }
 
     function WizardPrev() {

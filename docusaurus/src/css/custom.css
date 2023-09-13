@@ -751,6 +751,7 @@ input {
 
 .vertical .steps {
   float: left;
+  width: 25%;
 }
 
 .vertical .content {
@@ -855,6 +856,7 @@ input {
   display: grid;
   grid-template-columns: 50px auto;
   column-gap: 20px;
+  transition: .4s; 
 }
 
 .wizardnav .title .step-number {
@@ -880,6 +882,7 @@ input {
   margin-right: 15px;
   border: 5px solid #fff;
   font-weight: bold;
+  transition: .4s;
 }
 
 .noscroll {
@@ -931,6 +934,7 @@ input {
 
 .wizardnav {
   cursor: pointer;
+  transition: .4s;
 }
 
 .wizardmodal .current .title .step-number {
