@@ -789,6 +789,7 @@ input {
 .wizardmodal h1 {
   padding-bottom: 0px;
   line-height: 52px;
+  color: #000;
 }
 
 .wizardmodal .page-wrapper {
