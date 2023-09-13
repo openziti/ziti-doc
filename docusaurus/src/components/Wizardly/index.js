@@ -39,7 +39,7 @@ export default function Wizardly(props) {
                     </div>
                 </div>
             </div>
-            <div className={'openWizard'}>Show As Wizard</div>
+            <div className={'openWizard'}>Let me Guide You!</div>
         </div>
     )
 }

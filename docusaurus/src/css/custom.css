@@ -368,18 +368,18 @@ float: right;
 }
 
 
-#navbarDropdownItem {
+.wizardmodal #navbarDropdownItem {
   display: flex;
   flex-grow: 1;
   align-items: center;
   flex-wrap: nowrap;
 }
-#navbarDropdownImage {
+.wizardmodal #navbarDropdownImage {
   padding-right: 5px;
   height: 16px;
 }
 
-.dropdown__menu {
+.wizardmodal .dropdown__menu {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -387,19 +387,19 @@ float: right;
   width: 180px;
 }
 
-.text-divider {
+.wizardmodal .text-divider {
   display: flex;
   align-items: center;
 }
 
-.text-divider::before,
-.text-divider::after {
+.wizardmodal .text-divider::before,
+.wizardmodal .text-divider::after {
   content: '';
   height: 1px;
   background-color: silver;
   flex-grow: 1;
 }
-.text-divider p {
+.wizardmodal .text-divider p {
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -484,7 +484,7 @@ display-flex,
   transform: translate3d(0, 0, 0);
 }
 
-.headertitle {
+.wizardmodal .headertitle {
   margin-top: 4px;
   margin-bottom: 8px;
   text-align: left;
@@ -498,24 +498,24 @@ display-flex,
   margin-top: 20px;
 }
 
-.shadedRow {
+.wizardmodal .shadedRow {
   background-color: var(--landing-banner-1);
 }
 
-.container {
+.wizardmodal .container {
   position: relative;
   box-sizing: border-box;
   margin: auto;
 }
 
 @media (min-width: 1200px) {
-  .container {
+  .wizardmodal .container {
     width: 1387px;
   }
 }
 
 @media (min-width: 768px) {
-  .container {
+  .wizardmodal .container {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -523,7 +523,7 @@ display-flex,
   }
 }
 
-.row {
+.wizardmodal .row {
   margin-right: -15px;
   margin-left: -15px;
   display: flex;
@@ -540,38 +540,38 @@ list-type-ulli,
   padding: 0;
 }
 
-a:focus,
-a:active {
+.wizardmodal a:focus,
+.wizardmodal a:active {
   text-decoration: none;
   outline: none;
   transition: all 300ms ease 0s;
 }
 
-input,
-select,
-textarea {
+.wizardmodal input,
+.wizardmodal select,
+.wizardmodal textarea {
   outline: none;
   appearance: unset !important;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.wizardmodal input::-webkit-outer-spin-button,
+.wizardmodal input::-webkit-inner-spin-button {
   appearance: none !important;
   margin: 0;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+.wizardmodal input:focus,
+.wizardmodal select:focus,
+.wizardmodal textarea:focus {
   outline: none;
   box-shadow: none !important;
 }
 
-input[type=checkbox] {
+.wizardmodal input[type=checkbox] {
   appearance: checkbox !important;
 }
 
-input[type=radio] {
+.wizardmodal input[type=radio] {
   appearance: radio !important;
 }
 
@@ -579,18 +579,18 @@ input[type=radio] {
   clear: both;
 }
 
-h2 {
+.wizardmodal h2 {
   font-size: 30px;
   margin: 0px;
   color: #002451;
 }
 
-h3 {
+.wizardmodal h3 {
   font-size: 24px;
   margin: 0px;
 }
 
-a {
+.wizardmodal a {
   color: #006cff;
   font-size: 15px;
   font-weight: 600;
@@ -598,40 +598,28 @@ a {
   transition: all 0.3s ease;
 }
 
-a:hover {
+.wizardmodal a:hover {
   filter: brightness(95%);
   text-decoration: unset;
   transition: all 0.3s ease;
 }
 
-a:active,
-a:focus {
+.wizardmodal a:active,
+.wizardmodal a:focus {
   filter: brightness(90%);
   text-decoration: unset;
   transform: translateY(1px);
   transition: all 0.3s ease;
 }
 
-body {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #252525;
-  font-weight: 400;
-  font-family: 'Open Sans';
-  margin: 0px;
-  background: #ffffff;
-  position: relative;
-  padding: 0px;
-}
-
-.main {
+.wizardmodal .main {
   padding: 50px 0;
   padding-top: 12px;
   position: relative;
   z-index: 99;
 }
 
-.zcontainer {
+.wizardmodal .zcontainer {
   max-width: 1400px;
   min-width: 300px;
   margin: 0 auto;
@@ -640,7 +628,12 @@ body {
   border-radius: 15px;
 }
 
-fieldset {
+#navbarDropdownImage {
+  height: 16px;
+  padding-right: 5px;
+}
+
+.wizardmodal fieldset {
   padding: 0px;
   margin: 0px;
   border: none;
@@ -649,7 +642,7 @@ fieldset {
   padding-top: 45px;
 }
 
-p.desc {
+.wizardmodal p.desc {
   margin: 0px;
   margin-bottom: 15px;
   color: #252525;
@@ -810,7 +803,7 @@ input {
 }
 
 .wizardmodal .bg-img-1 {
-  opacity: 0.9;
+  opacity: 0.99;
 }
 
 .steps ul {
@@ -893,30 +886,42 @@ input {
   overflow: hidden !important;
 }
 
+@font-face {
+  font-family: 'Hand Of Sean';
+  src: url('/img/HandOfSeanDemo.eot');
+  src: url('/img/HandOfSeanDemo.eot?#iefix') format('embedded-opentype'),
+      url('/img/HandOfSeanDemo.woff2') format('woff2'),
+      url('/img/HandOfSeanDemo.woff') format('woff'),
+      url('/img/HandOfSeanDemo.ttf') format('truetype'),
+      url('/img/HandOfSeanDemo.svg#HandOfSeanDemo') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 .openWizard {
   display: none;
-  background-image: url(/img/wand.svg);
-  background-size: 40px;
+  background-image: url(/img/ziggysmalls.svg);
+  background-size: 80px;
   background-repeat: no-repeat;
-  width: 130px;
-  height: 60px;
-  text-align: center;
-  background-position: top center;
+  width: 240px;
+  height: 110px;
+  text-align: left;
+  background-position: top right;
   vertical-align: bottom;
-  padding-top: 43px;
-}
-
-.openWizard {
+  padding-top: 48px;
   position: absolute;
-  top: 37px;
-  right: 27%;
+  top: 100px;
+  right: 33%;
   cursor: pointer;
-  transition: 0.5s;
+  border-radius: 7px;
+  transition: .5s;
+  font-family: "Hand Of Sean";
 }
 
 .openWizard:hover {
-  filter: grayscale(100%);
+  opacity: 0.8;
 }
 
 .wizardnav .title .step-text {
