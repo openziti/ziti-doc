@@ -182,7 +182,7 @@ In this example you will:
 
 #### Create a cert for metric scraping
 
-```bash
+```
 # Create the certificate and signing request
 openssl req  -new  -newkey rsa:2048  -nodes  -keyout prom-client.key  -out prom-client.csr
 
@@ -219,7 +219,7 @@ Add this text to the `web` section of your network controller configuration file
 
 I use `curl` to test my keys when I set up metrics.  If Ziti is configured to bind metrics to `127.0.0.1:2112` then curl command will be:
 
-```bash
+```
 curl -i -k --cert /path/to/prom-client.crt --key /path/to/prom-client.key https://127.0.0.1:2112/metrics
 ```
 

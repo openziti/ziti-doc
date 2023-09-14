@@ -2,7 +2,7 @@
 
 Running the latest version of Ziti locally is as simple as running this one command:
 
-```bash
+```
     source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
 ```
 

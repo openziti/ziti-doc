@@ -59,7 +59,7 @@ Note: This identity will not be able to authenticate
 It is currently not possible to create and identity without an enrollment option through the CLI. It can be completed
 by creating and identity then deleting the default certificate enrollment.
 
-```bash
+```
 ziti edge create identity [device|service|user] <name>
 ziti edge delete enrollment where "identity=<id>"
 ```

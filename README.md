@@ -50,7 +50,7 @@ To run this script locally, define the necessary variables in your environment.
 
 Docusaurus plugins are distributed as NodeJS packages. This project uses `yarn`, not `npm`, to manage packages, build the project, and run the development server. To add a NodeJS package:
 
-```bash
+```
 cd ./docusaurus
 yarn add @hotjar/browser
 ```
@@ -61,7 +61,7 @@ This will update `./docusaurus/package.json` and `./docusaurus/yarn.lock`. Test 
 
 Docusaurus plugins are distributed as NodeJS packages. This project uses `yarn`, not `npm`, to manage packages, build the project, and run the development server. To upgrade a NodeJS package:
 
-```bash
+```
 cd ./docusaurus
 yarn upgrade @docusaurus/plugin-content-docs
 ```
@@ -84,7 +84,7 @@ With these scripts, you can test all the links in the site's pages and popular i
 
 * [crawl-for-broken-links.sh](./check-links/crawl-for-broken-links.sh): uses `docker` to run `muffet` which crawls the given base URL looking for broken links
 
-  ```bash
+  ```
   # check local dev server for broken outgoing links to itself and other sites, excluding a few hosts that are sensitive to being hammered by a crawler
   ./crawl-for-broken-links.sh http://127.0.0.1:3000
 
@@ -94,12 +94,12 @@ With these scripts, you can test all the links in the site's pages and popular i
 
 * [check-links.sh](./check-links/check-links.sh): uses `curl` to try a list of URL paths from a file
 
-  ```bash
+  ```
   # check a list of popular incoming links from external sites
   ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
   ```
 
-  ```bash
+  ```
   ./check-links.sh https://blog.openziti.io ./popular-blog-links.txt
   ```
 
@@ -136,14 +136,14 @@ You can perform these steps in the AWS Web Console or with `aws` CLI.
 
 * Find the name and "ETag" (changes when updated) of the CloudFront Function you wish to update.
 
-  ```bash
+  ```
   $ aws cloudfront list-functions | \
     jq '.FunctionList.Items[]|select(.FunctionMetadata.Stage == "LIVE")|.Name'
   "blog-viewer-request-function"
   "github-raw-viewer-request-router"
   ```
 
-  ```bash
+  ```
   $ aws cloudfront describe-function --name github-raw-viewer-request-router | \
     jq '.ETag'
 "E135L1TOL8QIJF"
@@ -151,7 +151,7 @@ You can perform these steps in the AWS Web Console or with `aws` CLI.
 
 * Update the function's DEVELOPMENT stage in AWS. In the console you need to paste the new script and save it to update the development stage of the CloudFront function.
 
-  ```bash
+  ```
   aws cloudfront update-function \
     --name github-raw-viewer-request-router \
     --function-code fileb://./cloudfront-proxies/cloudfront-function-github-proxy.js \
@@ -161,7 +161,7 @@ You can perform these steps in the AWS Web Console or with `aws` CLI.
 
 * Find the new ETag (version ID) of the updated function
 
-  ```bash
+  ```
   $ aws cloudfront describe-function --name github-raw-viewer-request-router | \
     jq '.ETag'
 "E3T4TT2Z381HKD"
@@ -169,7 +169,7 @@ You can perform these steps in the AWS Web Console or with `aws` CLI.
 
 * Test the function. You need to verify the request or response was handled expectedly. You can also do this in the web console with the "test" tab on the CloudFront function.
 
-  ```bash
+  ```
   aws cloudfront test-function \
       --name github-raw-viewer-request-router \
       --stage DEVELOPMENT \
@@ -195,7 +195,7 @@ You can perform these steps in the AWS Web Console or with `aws` CLI.
 
 * publish LIVE stage
 
-  ```bash
+  ```
   aws cloudfront publish-function \      
     --name github-raw-viewer-request-router \
     --if-match E3T4TT2Z381HKD

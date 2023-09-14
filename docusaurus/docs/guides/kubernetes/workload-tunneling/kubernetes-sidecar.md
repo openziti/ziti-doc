@@ -29,14 +29,14 @@ This guide will re-use the Ziti service "testapi-service", a REST API demo serve
 
 1. We will create a new identity for our client app with the correct role to grant access to the Ziti service.
 
-  ```bash
+  ```
   ziti edge create identity device sidecar-client \
     --jwt-output-file /tmp/sidecar-client.jwt --role-attributes testapi-clients
   ```
 
 1. Enroll the identity.
 
-  ```bash
+  ```
   ziti edge enroll /tmp/sidecar-client.jwt
   ```
 
@@ -44,7 +44,7 @@ This guide will re-use the Ziti service "testapi-service", a REST API demo serve
 
 You can restore the KUBECONFIG context from the Minikube quickstart like this if you switched contexts after running it.
 
-```bash
+```
 minikube --profile miniziti update-context
 ```
 
@@ -52,7 +52,7 @@ minikube --profile miniziti update-context
 
 The `ziti-tunnel` sidecar will access its identity by mounting a Kubernetes secret in the container.
 
-```bash
+```
 kubectl create secret generic "sidecar-client-identity" \
     --from-file=/tmp/sidecar-client.json
 ```
@@ -66,7 +66,7 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
 
     You need to update the deployment manifest with the CoreDNS CLUSTER-IP address before you deploy. This is because the `ziti-tunnel` sidecar provides an override nameserver for the pod, so we need to inject the CoreDNS nameserver as fallback resolver for non-Ziti names because `ziti-tunnel` itself will not answer queries for non-Ziti DNS names.
 
-    ```bash
+    ```
     kubectl --namespace kube-system get services kube-dns
     ```
 
@@ -142,7 +142,7 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
 
 1. Once the manifest YAML is saved, we can deploy the pod with `kubectl`
 
-    ```bash
+    ```
     kubectl apply -f /tmp/sidecar-demo.yaml
     ```
 
@@ -150,14 +150,14 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
 
 1. Find the name of the pod that Kubernetes deployed for us.
 
-    ```bash
+    ```
     $ kubectl get pods
     ziti-tunnel-sidecar-demo-749c476989-6wpfn   1/1     Running   0          42s
     ```
 
 1. Tail the logs for the "testclient" container inside the pod. The first few attempts didn't get a reply because the tunnel was starting up.
 
-    ```bash
+    ```
     $ kubectl logs --follow ziti-tunnel-sidecar-demo-749c476989-6wpfn --container testclient
     + wget --quiet --output-document=- --post-data ziti=awesome http://testapi.ziti/post
     + jq .data

@@ -31,7 +31,7 @@ Please follow **[Create a VM section](Controller#11-create-a-vm-to-be-used-as-th
 
 - Once the VM is created, we can get the IP address of the VM from the Virtual machine screen.
 - Login to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
-```bash
+```
 ssh -i <private_key> <username>@<ip>
 ```
 </TabItem>
@@ -40,7 +40,7 @@ ssh -i <private_key> <username>@<ip>
 - Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
 
 Login to the VM by using user name "ubuntu":
-```bash
+```
 ssh -i <private_key> ubuntu@<ip>
 ```
 </TabItem>
@@ -53,7 +53,7 @@ ssh -i <private_key> ubuntu@<ip>
 <TabItem value="DigitalOcean">
 
 - Once the VM is created, get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
-```bash
+```
 ssh root@<ip>
 ```
 </TabItem>
@@ -61,7 +61,7 @@ ssh root@<ip>
 
 - Once the VM is created, we can get the IP address of the VM from the instance details screen.
 - Login to the VM by using user name "ubuntu" and the IP address:
-```bash
+```
 ssh -i <private_key> ubuntu@<ip>
 ```
 </TabItem>
@@ -69,21 +69,21 @@ ssh -i <private_key> ubuntu@<ip>
 
 - Once the VM is created, we can get the IP address of the VM from the Devices screen.
 - Login to the VM by using user name "ubuntu" and the IP address:
-```bash
+```
 ssh -i <private_key> ubuntu@<ip>
 ```
 </TabItem>
 </Tabs>
 
 ### 2.2.1 apt update
-```bash
+```
 sudo apt update
 sudo apt upgrade
 ```
 
 ### 2.2.2 Download ziti_router_auto_enroll binary
 **ziti_router_auto_enroll** is an easy way to setup your router automatically.
-```bash
+```
 wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
 tar xf ziti_router_auto_enroll.tar.gz
 ```
@@ -121,7 +121,7 @@ If you choose to explore these two functionalities, you can remove the options (
 
 ### 2.3.3 Create the Router with link listener
 Use this procedure to create a Public Router with link listener (but without tunnel).
-```bash
+```
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --assumePublic --disableHealthChecks --disableMetrics --routerName pub-er 
 ```
 **output**
@@ -218,12 +218,12 @@ Otherwise, this section provides CLI commands to create routers on the controlle
 **login to controller**
 
 login to CLI first
-```bash
+```
 zitiLogin
 ```
 
 To create an edge router (no tunneler)
-```bash
+```
 ziti edge create edge-router pub-er -o pub-er.jwt
 ```
 **output**
@@ -233,7 +233,7 @@ Enrollment expires at 2023-04-07T03:52:03.997Z
 ```
 
 To create an edge router with tunneler
-```bash
+```
 ziti edge create edge-router pub-er -t -o pub-er.jwt
 ```
 
@@ -299,7 +299,7 @@ sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgm
 
 ## 2.5 Auto start the router
 After enroll the router, a systemd service file is automatically created and enabled. To check the status of the service file, issue the following command:
-```bash
+```
 systemctl status ziti-router
 ```
 **Output**
@@ -350,7 +350,7 @@ Current DNS Server: 67.207.67.2
 Under the Global DNS servers, it should say something like "67.207.67.2 67.207.67.3"
 
 **Now, make changes to the resolver:**
-```bash
+```
 cd /etc/systemd/resolved.conf.d/
 rm DigitalOcean.conf
 sudo ln -s /dev/null DigitalOcean.conf
@@ -660,7 +660,7 @@ You should **Turn on ufw** and **restart the VM** after the security group confi
 - ufw must be turned on for traffic to get to the VM.
 - after ufw is enabled, setup **allow** traffic for ports:
 
-```bash
+```
 sudo ufw enable
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp

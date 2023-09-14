@@ -53,7 +53,7 @@ Architectures available:
 Please read this script to ensure it is safe before running it.
 :::
 
-```bash
+```
 curl -sSLf https://get.openziti.io/tun/scripts/install-ubuntu.bash | bash
 ```
 
@@ -72,7 +72,7 @@ curl -sSLf https://get.openziti.io/tun/scripts/install-ubuntu.bash | bash
 
 This example subscribes you to the Ubuntu `focal` repo which will work well in most cases. Alternatively, you may refer to the table to find the Ubuntu release name that is the contemporary of your Debian release. Then, substitute the Ubuntu release name for `focal` in the `/etc/apt/sources.list.d/openziti.list` file.
 
-```bash
+```
 (
 set -euo pipefail
 
@@ -93,20 +93,20 @@ sudo apt install ziti-edge-tunnel
 2. Place a copy of the enrollment token JWT file in the `/opt/openziti/etc/identities` directory.
 2. Set the filemode and owner so that members of group `ziti` will be able to read and delete the token file.
 
-  ```bash
+  ```
   sudo chown -cR :ziti        /opt/openziti/etc/identities
   sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
   ```
 
 2. Enable and start the service
 
-    ```bash
+    ```
     sudo systemctl enable --now ziti-edge-tunnel.service
     ```
 
 2. The process needs to be restarted if the contents of `/opt/openziti/etc/identities` change.
 
-    ```bash
+    ```
     sudo systemctl restart ziti-edge-tunnel.service
     ```
 
@@ -190,20 +190,20 @@ repo_gpgcheck=1
 2. Place a copy of the enrollment token JWT file in the `/opt/openziti/etc/identities` directory.
 2. Set the filemode and owner so that members of group `ziti` will be able to read and delete the token file.
 
-  ```bash
+  ```
   sudo chown -cR :ziti        /opt/openziti/etc/identities
   sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
   ```
 
 2. Enable and start the service
 
-    ```bash
+    ```
     sudo systemctl enable --now ziti-edge-tunnel.service
     ```
 
 2. The process needs to be restarted if the contents of `/opt/openziti/etc/identities` change.
 
-    ```bash
+    ```
     sudo systemctl restart ziti-edge-tunnel.service
     ```
 
@@ -213,7 +213,7 @@ repo_gpgcheck=1
 
 You'll need to install the `wget` and `unzip` commands to use this example.
 
-```bash
+```
 wget -q "https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/download/ziti-edge-tunnel-Linux_$(uname -p).zip" \
   && unzip ./ziti-edge-tunnel-Linux_$(uname -p).zip \
   && rm ./ziti-edge-tunnel-Linux_$(uname -p).zip \
@@ -229,7 +229,7 @@ You will need the token file or its contents to enroll. Enrollment is the act of
 
 ### Run the Manually Installed Binary
 
-```bash
+```
 ziti-edge-tunnel run \
   --identity-dir /opt/openziti/etc/identities
 ```

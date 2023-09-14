@@ -72,7 +72,7 @@ followed either the [Local - No Docker](/learn/quickstarts/network/local-no-dock
 [Host Ziti Anywhere](/learn/quickstarts/network/hosted.md) quickstart, you should have a file that can be sourced. Here is an example of 
 my personal "Local - No Docker" result when sourcing that file:
 
-```shell
+```
 $ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 
 adding /home/cd/.ziti/quickstart/sg3/ziti-bin/ziti-v0.25.6 to the path
@@ -83,7 +83,7 @@ the env file which adds `ziti` to your path will be sourced for you as well.
 
 Here's an example command using `docker` to exec into the controller container:
 
-```shell
+```
 $ docker exec -it docker_ziti-controller_1 bash
 
 adding /var/openziti/ziti-bin to the path
@@ -134,7 +134,7 @@ Note that step 7 below requires you to have set the variable named `http_server_
 with the tunneler option (`-t`) enabled. This means that edge-router is configured to serve as a tunneller. Run `ziti edge list 
 identities` to find the name of the identity associated to the router.
 
-```shell
+```
 # login to your controller - replace the host/port with the correct value
 ziti edge login localhost:1280
 

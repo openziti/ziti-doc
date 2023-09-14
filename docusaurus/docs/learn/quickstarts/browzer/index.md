@@ -47,7 +47,7 @@ Using the OIDC discovery endpoint, discover the `issuer` and `jwks_uri` from the
 CLI, create the external jwt. Shown below is a `bash` example. Replace the values accordingly. Capture the returned
 identity, it will be necessary after creating the external jwt signer:
 
-```bash
+```
 issuer="__issuer_id_here__"
 jwks_uri="__jwks_uri_here__"
 audience="__audience_here__"
@@ -75,7 +75,7 @@ with a new authentication policy, as shown. Once you understand how authenticati
 then you can make an informed decision if you want to modify the default authentication policy or not
 :::
 
-```bash
+```
 ext_jwt_signer="__ext_jwt_signer_id_from_above__"
 ziti edge create auth-policy \
   "auth-policy-name-here" \
@@ -92,7 +92,7 @@ policy.
 
 In this example, a new identity will be created and the associated OIDC provider will be expected to provide a bearer
 token which has an `email` claim with the value `ziggy@openziti.io` and names the identity `openziti_ziggy`:
-```bash
+```
 identity_name="openziti_ziggy"
 auth_policy="__auth_policy_id_from_above__"
 external_id="ziggy@openziti.io"
@@ -121,7 +121,7 @@ them. To run using Docker, you can either reference the environment variables (s
 * `ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH`: the associated key for the ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH
 * `ZITI_BROWZER_BOOTSTRAPPER_TARGETS`: A json block representing the services to enable BrowZer for.
 
-```bash
+```
       NODE_ENV: production
       ZITI_BROWZER_RUNTIME_LOGLEVEL: debug
       ZITI_BROWZER_RUNTIME_HOTKEY: alt+F12
@@ -179,7 +179,7 @@ system administration.
 :::
 
 ### Example Docker Command
-```bash
+```
 docker run \
   --name ziti-browzer-bootstrapper \
   --rm -v /etc/letsencrypt:/etc/letsencrypt \
@@ -209,12 +209,12 @@ to start automatically on failure or reboot.
 If you have used the ["clone from GitHub"](#cloning-from-github) approach, you have sourced the `ziti-cli-functions.sh`
 helper script, and have the environment variables set from the quickstart installation you can execute a single function
 to create a systemd unit file: `createBrowZerSystemdFile`. Execute this now and you'll see something like:
-```bash
+```
 Ziti BrowZer Bootstrapper systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-47-200/browzer-bootstrapper.service
 ```
 
 Once created, you can copy that file and `enable` the unit with systemd:
-```bash
+```
 createBrowZerSystemdFile
 sudo cp "${ZITI_HOME}/browzer-bootstrapper.service" /etc/systemd/system
 sudo systemctl daemon-reload
@@ -224,7 +224,7 @@ sudo systemctl enable --now browzer-bootstrapper
 <Details>
 <summary>Verify BrowZer Started</summary>
 
-```bash
+```
 systemctl status browzer-bootstrapper --no-pager --lines 0
 ```
 
@@ -232,7 +232,7 @@ systemctl status browzer-bootstrapper --no-pager --lines 0
 <summary>Example systemctl Output</summary>
 
 You should see output that looks similar to this. Notice the "Active" status is (running) and not failed/restarting etc:
-```bash
+```
 ● browzer-bootstrapper.service - A systemd unit file for the Ziti BrowZer Bootstrapper
      Loaded: loaded (/etc/systemd/system/browzer-bootstrapper.service; enabled; vendor preset: enabled)
      Active: active (running) since Fri 2023-08-18 12:52:54 UTC; 1min 24s ago
