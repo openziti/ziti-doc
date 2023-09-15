@@ -15,7 +15,7 @@ Some global variables used throughout the overlay setup.
 - `ZITI_PWD` is the password that will be used when logging into the controller as the default user (admin).
 - `ZITI_HOSTNAME` is used throughout the setup for naming files, network elements, etc.
 
-```bash
+```
 export ZITI_HOME="${HOME}/.ziti"
 export ZITI_BIN_DIR="${ZITI_HOME}/ziti_bin"
 export ZITI_PWD=admin2
@@ -26,7 +26,7 @@ export ZITI_HOSTNAME=$(hostname -s)
 
 Create a directory where you will store your network files.
 
-```bash
+```
 mkdir -p "${ZITI_HOME}"
 ```
 
@@ -34,7 +34,7 @@ mkdir -p "${ZITI_HOME}"
 
 The ziti binary is required to setup the network. The exact URL will differ depending on your operating system and architecture. Visit the [releases](https://github.com/openziti/ziti/releases) page to get the appropriate URL.
 
-```bash
+```
 mkdir -p "${ZITI_BIN_DIR}"
 curl -L <release-url> -o "${ZITI_BIN_DIR}/ziti-bin.gz"
 tar -xf "${ZITI_BIN_DIR}/ziti-bin.gz" --directory "${ZITI_BIN_DIR}"
@@ -56,7 +56,7 @@ Set some initial environment variables for setting up the PKI. The `CA_NAME` val
 - `ZITI_EDGE_CA_NAME` is the name of the HTTP API CA
 - `ZITI_SIGN_CA_NAME` is the name of the signer CA used to sign identities created for the network.
 
-```bash
+```
 export ZITI_PKI="${ZITI_HOME}/pki"
 export ZITI_ROOT_CA_NAME="my.root.ca"
 export ZITI_EXTERNAL_CA_INTERMEDIATE_NAME="intermediate.from.external.ca"
@@ -69,7 +69,7 @@ export ZITI_SIGN_CA_NAME="${ZITI_HOSTNAME}-identities"
 
 The following creates all of the CAs and files using the environment variables set up previously.
 
-```bash
+```
 "${ZITI_BIN_DIR}/ziti" pki create ca \
   --pki-root="${ZITI_PKI}" \
   --ca-name "${ZITI_ROOT_CA_NAME}" \
@@ -112,7 +112,7 @@ Set up some initial values for the server and client certificates.
 - `ZITI_NETWORK_COMPONENTS_ADDRESSES` is a comma-separated list of DNS names to add to the SANs.
 - `ZITI_NETWORK_COMPONENTS_IPS` is a comma-separated list of IPs to add to the SANs.
 
-```bash
+```
 ZITI_NETWORK_COMPONENTS_PKI_NAME="ziti.network.components"
 ZITI_NETWORK_COMPONENTS_ADDRESSES="localhost,${ZITI_HOSTNAME},some.other.name,and.another.name"
 ZITI_NETWORK_COMPONENTS_IPS="127.0.0.1,127.0.21.71,192.168.100.100"
@@ -120,7 +120,7 @@ ZITI_NETWORK_COMPONENTS_IPS="127.0.0.1,127.0.21.71,192.168.100.100"
 
 Now we’ll create the key, client, and server certs for the control plane.
 
-```bash
+```
 "${ZITI_BIN_DIR}/ziti" pki create key \
   --pki-root="${ZITI_PKI}" \
   --ca-name "${ZITI_CTRL_CA_NAME}" \
@@ -147,7 +147,7 @@ Now we’ll create the key, client, and server certs for the control plane.
 
 Set up some initial values for the server and client certificates. As with the control plane, these are for the key file name, DNS, and IP SANs. The DNS and IP lists are reused from the control plane cert generation.
 
-```bash
+```
 ZITI_EDGE_API_PKI_NAME="ziti.edge.controller"
 ZITI_EDGE_API_ADDRESSES="${ZITI_NETWORK_COMPONENTS_ADDRESSES}"
 ZITI_EDGE_API_IPS="${ZITI_NETWORK_COMPONENTS_IPS}"
@@ -155,7 +155,7 @@ ZITI_EDGE_API_IPS="${ZITI_NETWORK_COMPONENTS_IPS}"
 
 Now we’ll create the key, client, and server certs for the HTTP API.
 
-```bash
+```
 "${ZITI_BIN_DIR}/ziti" pki create key \
   --pki-root="${ZITI_PKI}" \
   --ca-name "${ZITI_EDGE_CA_NAME}" \
@@ -182,7 +182,7 @@ Now we’ll create the key, client, and server certs for the HTTP API.
 
 Add the CAs to the CA bundle and make a copy for the HTTP API CA bundle.
 
-```bash
+```
 cat "${ZITI_PKI}/my.root.ca/certs/my.root.ca.cert" > "${ZITI_PKI}/${ZITI_HOSTNAME}-network-components/cas.pem"
 cat "${ZITI_PKI}/my.root.ca/certs/intermediate.from.external.ca.cert" >> "${ZITI_PKI}/${ZITI_HOSTNAME}-network-components/cas.pem"
 cp "${ZITI_PKI}/${ZITI_HOSTNAME}-network-components/cas.pem" "${ZITI_PKI}/${ZITI_HOSTNAME}-edge/edge.cas.pem"
@@ -212,7 +212,7 @@ The following are locations of PKI files.
 - `ZITI_PKI_SIGNER_KEY`
 - `ZITI_PKI_SIGNER_CERT`
 
-```bash
+```
 export ZITI_CTRL_ADVERTISED_ADDRESS="${ZITI_HOSTNAME}"
 export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${ZITI_HOSTNAME}"
 export ZITI_CTRL_ADVERTISED_PORT=8440
@@ -236,7 +236,7 @@ export ZITI_PKI_SIGNER_CERT="${ZITI_PKI}/${ZITI_SIGN_CA_NAME}/certs/${ZITI_SIGN_
 
 The controller config file is populated based on the values of environment variables set up to this point.
 
-```bash
+```
 "${ZITI_BIN_DIR}/ziti" create config controller >${ZITI_HOME}/${ZITI_HOSTNAME}.yaml
 ```
 
@@ -244,14 +244,14 @@ The controller config file is populated based on the values of environment varia
 
 Initializing the controller sets up database files and some of the configuration values.
 
-```bash
+```
 mkdir ${ZITI_HOME}/db
 "${ZITI_BIN_DIR}/ziti" controller edge init "${ZITI_HOME}/${ZITI_HOSTNAME}.yaml" -u "admin" -p $ZITI_PWD
 ```
 
 ### Run the Controller
 
-```bash
+```
 "${ZITI_BIN_DIR}/ziti" controller run ${ZITI_HOME}/${ZITI_HOSTNAME}.yaml &> ${ZITI_HOME}/${ZITI_HOSTNAME}.log &
 ```
 
@@ -259,7 +259,7 @@ mkdir ${ZITI_HOME}/db
 
 We want to ensure the controller is ready before creating a router, this mini loop
 
-```bash
+```
 while [[ "$(curl -w "%{http_code}" -m 1 -s -k -o /dev/null https://${ZITI_CTRL_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}/edge/client/v1/version)" != "200" ]]; do
   echo "waiting for https://${ZITI_CTRL_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
   sleep 1
@@ -272,7 +272,7 @@ done
 
 The router needs to be created through the controller. This will generate a one-time token to be used during enrollment.
 
-```bash
+```
 # We have to log in first
 "${ZITI_BIN_DIR}/ziti" edge login ${ZITI_CTRL_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT} -u admin -p $ZITI_PWD -y
 
@@ -283,7 +283,7 @@ The router needs to be created through the controller. This will generate a one-
 
 Just as with the controller, we need to create a router config file. The router config also uses values set in environment variables up to this point.
 
-```bash
+```
 "${ZITI_BIN_DIR}/ziti" create config router edge --routerName ${ZITI_HOSTNAME}-edge-router >${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.yaml
 ```
 
@@ -291,13 +291,13 @@ Just as with the controller, we need to create a router config file. The router 
 
 Enroll the router with the controller utilizing the config file and enrollment token previously generated.
 
-```bash
+```
 "${ZITI_BIN_DIR}/ziti" router enroll ${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.yaml --jwt ${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.jwt
 ```
 
 ### Run the Router
 
-```bash
+```
 "${ZITI_BIN_DIR}/ziti" router run "${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.yaml" &> ${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.log &
 ```
 
@@ -305,7 +305,7 @@ Enroll the router with the controller utilizing the config file and enrollment t
 
 Log in and run a command to list the edge routers and we should see a single edge router showing `ONLINE`.
 
-```bash
+```
 # The session may have expired, log in just to be safe
 "${ZITI_BIN_DIR}/ziti" edge login ${ZITI_CTRL_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT} -u admin -p $ZITI_PWD -y
 "${ZITI_BIN_DIR}/ziti" edge list edge-routers
