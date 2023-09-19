@@ -2,6 +2,8 @@
 title: Ziti Admin Console
 ---
 
+import Wizardly from '@site/src/components/Wizardly';
+
 The Ziti Administration Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and
 explore a [Ziti Network](/learn/introduction/index.mdx).
 
@@ -186,3 +188,5 @@ There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides
       ![host it anywhere](./zac_configure_hia.png)
 
 3. Optionally, [**change admin's password**](/learn/quickstarts/network/help/change-admin-password.md#ziti-console)
+
+<Wizardly></Wizardly>

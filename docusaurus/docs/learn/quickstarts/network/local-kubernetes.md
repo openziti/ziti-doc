@@ -5,11 +5,11 @@ sidebar_label: Kubernetes
 title: Kubernetes Quickstart
 ---
 
+import Wizardly from '@site/src/components/Wizardly';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 `minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL). This quickstart is a great way to explore running your own OpenZiti Controller, Router, and Console.
-
 ## Tools of the Trade
 
 We'll use the preferred `minikube` Docker driver for this quickstart. You can run `minikube` in WSL with Docker Engine or Docker Desktop, but keep an eye out for one extra step to run `minikube tunnel` at the necessary point in the process.
@@ -624,3 +624,5 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
    ```
 
 2. In your OpenZiti Tunneler, "Forget" your Identity.
+
+<Wizardly></Wizardly>

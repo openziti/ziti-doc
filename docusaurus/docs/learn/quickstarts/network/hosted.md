@@ -1,6 +1,7 @@
 ---
 sidebar_position: 60
 ---
+import Wizardly from '@site/src/components/Wizardly';
 
 # Host OpenZiti Anywhere
 
@@ -188,3 +189,6 @@ $ echo $ZITI_HOME
 - Help
   - [Change Admin Password](./help/change-admin-password.md)
   - [Reset the Quickstart](./help/reset-quickstart.md)
+
+
+<Wizardly></Wizardly>

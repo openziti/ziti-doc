@@ -9,6 +9,7 @@
 _site
 .vscode
 .docusaurus/
+/node_modules/*
 
 
 # ignores for content generated before the doc site
