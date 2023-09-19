@@ -10,18 +10,22 @@
   --ifm-background-surface-color: #f1f5f9;
   --ifm-background-surface-color-dark: #e1d4ee;
   --ifm-footer-background-color: #f0f0f0;
-  --ifm-color-primary: #158eed;
+  --ifm-color-primary: #0068f9;
   --ifm-color-primary-dark: #8519e7;
   --ifm-color-primary-darker: #7e17dc;
   --ifm-color-primary-darkest: #6813b5;
   --ifm-color-primary-light: #a14ded;
   --ifm-color-primary-lighter: #a85aee;
   --ifm-color-primary-lightest: #b776f1;
+  --ifm-heading-color: #002451;
   --ifm-color-banner: #edac15;
   --ifm-navbar-item-padding-horizontal: .5em;
   --background-color-1: #ffd0d0;
   --landing-banner-1: #e0e4ee;
-  --ifm-font-color-base: #3f3f3f;
+  --ifm-font-color-base: #252525;
+  --ifm-menu-color: #002451;
+  --ifm-toc-link-color: #252525;
+  --ifm-menu-link-sublist-icon: url(/img/arrow.svg);
   --ifm-code-font-size: 95%;
   --ifm-paragraph-margin-bottom: 0;
   --ifm-paragraph-margin-top: 0;
@@ -33,7 +37,16 @@
   --h1-size: 50px;
   --h2-size: 35px;
   --h3-size: 25px;
+  --docusaurus-collapse-button-bg-hover: rgb(0 0 0 / 2%);
 }
+
+html[data-theme=dark] {
+  --ifm-heading-color: #ffffff;
+  --ifm-font-color-base: #ffffff;
+  --ifm-menu-color: #ffffff;
+  --ifm-toc-link-color: #ffffff;
+}
+
 @media (max-width: 767px) {
   html[data-theme="dark"] {
     --h1-size: 30px;
@@ -94,9 +107,6 @@ html[data-theme="dark"] {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.button:hover {
-  background: linear-gradient(90deg,#0068f9 0, #fc0147 100%) ;
-}
 
 input[type="radio"]
 {
@@ -619,6 +629,11 @@ list-type-ulli,
   z-index: 99;
 }
 
+.wizardmodal .ocontainer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .wizardmodal .zcontainer {
   max-width: 1400px;
   min-width: 300px;
@@ -769,7 +784,7 @@ input {
   width: 75%;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  padding-top: 30px;
+  padding-top: 25px;
 }
 
 .content {
@@ -789,7 +804,11 @@ input {
 .wizardmodal h1 {
   padding-bottom: 0px;
   line-height: 52px;
+<<<<<<< Updated upstream
   color: #000;
+=======
+  color: #002451;
+>>>>>>> Stashed changes
 }
 
 .wizardmodal .page-wrapper {
@@ -798,6 +817,7 @@ input {
   position: absolute;
   left: 0px;
   right: 0px;
+  backdrop-filter: blur(5px);
 }
 
 .wizard .main {
@@ -817,12 +837,11 @@ input {
   position: relative;
   padding-left: 30px;
   padding-top: 40px;
-  height: 70vh;
   overflow-y: auto;
 }
 
 .steps ul li {
-  padding-bottom: 40px;
+  padding-bottom: 30px;
   position: relative;
   z-index: 99;
 }
@@ -837,7 +856,7 @@ input {
   content: '';
   width: 2px;
   background: #d4d3d9;
-  left: 55px;
+  left: 54px;
   height: 83%;
   top: 50%;
   transform: translateY(-50%);
@@ -909,23 +928,42 @@ input {
   background-image: url(/img/ziggysmalls.svg);
   background-size: 80px;
   background-repeat: no-repeat;
-  width: 240px;
-  height: 110px;
+  width: 165px;
+  padding-right: 80px;
+  height: 100px;
   text-align: left;
-  background-position: top right;
+  background-position: right;
   vertical-align: bottom;
-  padding-top: 48px;
-  position: absolute;
-  top: 100px;
-  right: 33%;
+  padding-top: 25px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   cursor: pointer;
-  border-radius: 7px;
-  transition: .5s;
+  border-radius: 20px;
+    transition: .5s;
   font-family: "Hand Of Sean";
+  background-color: #002451;
+  color: #fad82c;
+  text-align: right;
+  z-index: 500;
+}
+
+@supports ((-webkit-backdrop-filter: saturate(180%) blur(20px)) or (backdrop-filter: saturate(180%) blur(20px))) {
+  .openWizard {
+      backdrop-filter: saturate(180%) blur(20px);
+      background-color: rgba(0, 36, 81, .95)
+  }
 }
 
 .openWizard:hover {
-  opacity: 0.8;
+  filter: brightness(75%);
+  transition: all 0.3s ease;
+}
+
+.openWizard:active {
+  filter: brightness(50%);
+  transform: translateY(1px);
+  transition: all 0.3s ease
 }
 
 .wizardnav .title .step-text {
@@ -957,7 +995,7 @@ input {
 }
 
 .actions {
-  padding-bottom: 50px;
+  padding-bottom: 25px;
 }
 
 .actions ul {
@@ -995,7 +1033,10 @@ input {
   border-radius: 8px;
   transition: all 0.3s ease;
   border-width: 0px;
+  font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
+  font-family: 'Open Sans';
 }
 
 .actions ul li a:hover, .actions ul li button:hover {
@@ -1004,7 +1045,7 @@ input {
   transition: all 0.3s ease;
 }
 
-.actions ul li a:active {
+.actions ul li a:active, .actions ul li button:active {
   filter: brightness(90%);
   box-shadow: none;
   transform: translateY(1px);
@@ -1436,6 +1477,10 @@ ol.linenums li:before {
   color: #fff !important;
 }
 
+ .token-line {
+  color: #fff !important;
+}
+
 .wizardclose {
   background-image: url(/img/close.svg);
   height: 40px;
@@ -1733,4 +1778,81 @@ li.L9 {}
 }
 .hidden {
   display: none;
+}
+
+code {
+  font-family: var(--ifm-font-family-monospace);
+  vertical-align: middle;
+  font-size: 87.5%;
+  font-weight: 600;
+  color: #e83e8c;
+  word-break: break-word;
+  background-color: #ffdded;
+  border: 1px solid #e83e8c;
+  border-radius: 7px;
+  padding: 2px 4px 2px 4px;
+}
+
+pre code {
+  background-color: #002451 !important;
+}
+
+.alert {
+  --ifm-code-background: var(--ifm-alert-background-color-highlight);
+  --ifm-link-color: var(--ifm-alert-foreground-color);
+  --ifm-link-hover-color: var(--ifm-alert-foreground-color);
+  --ifm-link-decoration: underline;
+  --ifm-tabs-color: var(--ifm-alert-foreground-color);
+  --ifm-tabs-color-active: var(--ifm-alert-foreground-color);
+  --ifm-tabs-color-active-border: var(--ifm-alert-border-color);
+  background-color: #fff7af;
+  border: var(--ifm-alert-border-width) solid #ffd200;
+  border-left-width: var(--ifm-alert-border-left-width);
+  border-radius: var(--ifm-alert-border-radius);
+  box-shadow: var(--ifm-alert-shadow);
+  color: #252525;
+  padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
+}
+
+.wizardmodal pre {
+  text-wrap: wrap;
+  background: #002451 !important;
+} 
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  font-weight: 700;
+}
+
+.collapseSidebarButton_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-CollapseButton-styles-module {
+  display: block !important;
+  background-color:#f1f5f9;
+  height: 40px;
+  position: sticky;
+  bottom: 0;
+  border-radius: 0;
+  border: 1px solid var(--ifm-toc-border-color);
+}
+
+.footer {
+  background-color: var(--ifm-navbar-background-color);
+}
+
+.pagination-nav__link {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  filter: brightness(90%);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.pagination-nav__link:hover {
+  filter: brightness(85%);
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.pagination-nav__link:active {
+  filter: brightness(75%);
+  box-shadow: none;
+  transform: translateY(1px);
+  transition: all 0.3s ease;
 }

@@ -14,6 +14,7 @@ export default function Wizardly(props) {
                                 <div className={'wizardclose'}></div>
                             </div>
                         </div>
+                        <div className={'ocontainer'}>
                         <div className={'zcontainer'}>
                             <div role="application" className={'wizard clearfix vertical'} id="steps-uid-0">
                                 <div className={'steps clearfix'}>
@@ -36,10 +37,11 @@ export default function Wizardly(props) {
                                 </div>
                             </div>
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className={'openWizard'}>Let me Guide You!</div>
+            <div className={'openWizard'}>Try the Wizard</div>
         </div>
     )
 }
