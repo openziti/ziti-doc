@@ -1803,6 +1803,10 @@ li a code {
     padding: 2px 4px 2px 4px;
 }
 
+.admonitionIcon_kALy svg {
+  fill: #000000 !important;
+}
+
 pre code {
   background-color: #002451 !important;
 }
