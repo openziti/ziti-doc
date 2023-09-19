@@ -804,11 +804,7 @@ input {
 .wizardmodal h1 {
   padding-bottom: 0px;
   line-height: 52px;
-<<<<<<< Updated upstream
-  color: #000;
-=======
   color: #002451;
->>>>>>> Stashed changes
 }
 
 .wizardmodal .page-wrapper {
@@ -1409,7 +1405,7 @@ input.error {
 }
 
 /* Basic styling for .wizardmodal prettyprint */
-..wizardmodal prettyprint {
+.wizardmodal .prettyprint {
   font-family: "Menlo", "Monaco", "Consolas", monospace !important;
   background: #002451;
   background-color: #002451;
@@ -1417,13 +1413,13 @@ input.error {
   border: none !important;
   padding: 20px !important;
   font-size: 16px;
-  white-space: .wizardmodal pre-wrap;
+  white-space: pre-wrap;
   /* css-3 */
-  white-space: -moz-.wizardmodal pre-wrap;
+  white-space: -moz-pre-wrap;
   /* Mozilla, since 1999 */
-  white-space: -.wizardmodal pre-wrap;
+  white-space: -pre-wrap;
   /* Opera 4-6 */
-  white-space: -o-.wizardmodal pre-wrap;
+  white-space: -o-pre-wrap;
   /* Opera 7 */
   word-wrap: break-word;
   /* Internet Explorer 5.5+ */
@@ -1570,17 +1566,17 @@ code .dec {
 
 /* decimal - blue */
 
-.wizardmodal pre..wizardmodal prettyprint,
-code..wizardmodal prettyprint, .wizard .wizardmodal pre {
+.wizardmodal pre.wizardmodal .prettyprint,
+code.wizardmodal .prettyprint, .wizard .wizardmodal pre {
   /* background-color: #0f2438 !important; */
   background-color: #002451 !important;
   border-radius: 8px !important;
 }
 
-.wizardmodal pre..wizardmodal prettyprint, .wizardmodal pre {
+.wizardmodal pre.wizardmodal .prettyprint, .wizardmodal pre {
   margin: 1em auto !important;
   padding: 1em !important;
-  white-space: .wizardmodal pre-line !important;
+  white-space: pre-line !important;
 }
 
 
