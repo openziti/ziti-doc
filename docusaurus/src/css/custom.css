@@ -25,6 +25,7 @@
   --ifm-font-color-base: #252525;
   --ifm-menu-color: #002451;
   --ifm-toc-link-color: #252525;
+  --ifm-alert-foreground-color: #252525;
   --ifm-menu-link-sublist-icon: url(/img/arrow.svg);
   --ifm-code-font-size: 95%;
   --ifm-paragraph-margin-bottom: 0;
@@ -1789,6 +1790,19 @@ code {
   padding: 2px 4px 2px 4px;
 }
 
+li a code {
+    font-family: var(--ifm-font-family-monospace);
+    vertical-align: middle;
+    font-size: 87.5%;
+    font-weight: 600;
+    color: #e83e8c;
+    word-break: break-word;
+    background-color: #ffdded;
+    border: 1px solid #e83e8c;
+    border-radius: 7px;
+    padding: 2px 4px 2px 4px;
+}
+
 pre code {
   background-color: #002451 !important;
 }
@@ -1810,6 +1824,12 @@ pre code {
   padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
 }
 
+.admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
+  display: inline-block;
+  height: 1.6em;
+  width: 1.6em;
+  fill: #000000!important;
+}
 .wizardmodal pre {
   text-wrap: wrap;
   background: #002451 !important;
