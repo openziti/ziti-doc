@@ -175,7 +175,9 @@ You can run the miniziti shell script or perform the steps manually yourself. Cl
 It's recommended that you read the script before you run it. It's safe to re-run the script if it encounters a temporary problem.
 <br/>
 
-[**DOWNLOAD: miniziti.bash**](./miniziti.bash)
+[**DOWNLOAD: miniziti.bash**](https://raw.githubusercontent.com/openziti/ziti/release-next/quickstart/kubernetes/miniziti.bash)
+
+<!-- TODO: change URL to https://get.openziti.io/qs/kubernetes/minizti.bash when that's available because it will only be updated when labeled PRs are merged to release-next -->
 
 <br/>
 Be sure to complete the DNS setup steps above before running this command.
