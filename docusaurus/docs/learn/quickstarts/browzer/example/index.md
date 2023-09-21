@@ -128,7 +128,7 @@ wildcard certificate:
 <summary>Setup for Alternative Server Certs</summary>
 
 Since we have just obtained some LetsEncrypt certificates, we'll enable OpenZiti with
-[Alternative Server Certs](/guides/alt-server-certs.md) __immediately__! To do that we'll set two new variables
+Alternative Server Certs __immediately__! To do that we'll set two new variables
 introduced with v0.29.0. Notice that the `${wildcard_url}` variable needs to be set if it's not already set:
 
 ```bash
