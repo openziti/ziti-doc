@@ -12,7 +12,7 @@ of enabling BrowZer, see the [Example Enabling BrowZer](./example/index.md) subp
 
 To deploy and enable BrowZer on your OpenZiti Network, you will need to have:
 
-* an OpenZiti Overlay Network is available and has been configured with [Alternative Server Certs](/guides/alt-server-certs.md)
+* an OpenZiti Overlay Network is available and has been configured with alternative server certs
 * an OIDC Provider and the ability to define applications/clients for the provider
 * a wildcard certificate from a 3rd party verifiable CA
 
