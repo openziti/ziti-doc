@@ -32,6 +32,7 @@ export default function Wizardly(props) {
                                         </li>
                                         <li >
                                             <button id="WizardNextButton">Next</button>
+                                            <button id="WizarFinishButton">Finish</button>
                                         </li>
                                     </ul>
                                 </div>
