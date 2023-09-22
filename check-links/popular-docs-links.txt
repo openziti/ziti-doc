@@ -89,7 +89,6 @@
 /glossary
 /glossary/glossary
 /guides
-/guides/alt-server-certs
 /guides/hsm
 /guides/hsm/softhsm
 /guides/hsm/yubikey
