@@ -10,7 +10,7 @@ This [daemonset manifest](https://get.openziti.io/tun/docker/ziti-tun-daemonset.
 
 The default nameserver address is `100.64.0.2`, but containers don't automatically use it until you configure cluster DNS. CoreDNS doesn't currently have a fallthrough mechanism, but you can use conventional names for your OpenZiti services' like `*.ziti`, and configure CoreDNS to forward queries that match that namespace to the OpenZiti nameserver.
 
-```yaml
+```
 apiVersion: v1
 data:
   Corefile: |
@@ -41,7 +41,7 @@ data:
 
 Some Kubernetes distributions provide a method for persisting CoreDNS configuration, e.g., the `import` plugin. A common pattern is for the CoreDNS pod to mount a configmap with a particular name in the `kube-system` namespace, e.g., `coredns-custom` on a directory like `/etc/coredns/custom/` with an aligned statement in the Corefile like `import /etc/coredns/custom/*.server`. The CoreDNS customization configmap then has contents like:
 
-```yaml
+```
 apiVersion: v1
 kind: ConfigMap
 metadata:

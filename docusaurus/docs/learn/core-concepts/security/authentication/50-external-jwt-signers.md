@@ -54,7 +54,7 @@ An External JWT Signer that uses a private `email` claim and matches on `externa
 be created as follows:
 
 `POST /edge/management/v1/ext-jwt-signers`
-```json
+```
 {
   "name": "My External JWT Signer",
   "enabled": true,
@@ -70,7 +70,7 @@ An External JWT Signer that uses the `sub` claim and matches on `id` with a x509
 be created as follows:
 
 `POST /edge/management/v1/ext-jwt-signers`
-```json
+```
 {
   "name": "My External JWT Signer",
   "enabled": true,
@@ -90,7 +90,7 @@ to initiate client authentication to the target identity provider.
 Example Client External JWT Signer response:
 
 `GET /edge/client/v1/external-jwt-signers`
-```json
+```
 {
   "data": [
     {

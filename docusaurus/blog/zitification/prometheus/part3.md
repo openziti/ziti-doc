@@ -28,13 +28,13 @@ everything get installed and it all "seems to work". But how do we **know** it w
 let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](/docs/learn/core-concepts/clients/choose) running 
 locally. Once you have that installed, provision an identity and enroll it with your tunneling client. 
 
-```text
+```
 ziti edge create identity user dev.client -a "prometheus-clients","reflectz-clients"
 ```
 
 You should have access to six total services when this identity is enrolled:
 
-```text
+```
 Service Name: kubeA.prometheus.svc
    Intercept: kubeA.prometheus.svc:80
 Service Name: kubeA.reflect.svc
@@ -70,14 +70,14 @@ Neat, but this isn't what we want to actually monitor.
 What we really want to monitor is the workload we deployed: `reflectz`. We can do this by editing the Prometheus configmap using 
 `kubectl`. Let's go ahead and do this now:
 
-```text
+```
 kubectl edit cm prometheuz-prometheus-server
 ```
 
 This will open an editor in your terminal and allow you to update the config map for the pod. Once the editor is open, find the section 
 labeled "scrape_config" and add the following entry:
 
-```text
+```
     - job_name: 'kubeA.reflectz'
       scrape_interval: 5s
       honor_labels: true
@@ -109,14 +109,14 @@ location of the identity.
 If you would like to tail the `configmap-reloadz` container, you can issue this one liner. This will instruct `kubectl` to tail the logs 
 from `configmap-reloadz`. 
 
-```text
+```
 pod=$(kubectl get pods | grep server | cut -d " " -f1); echo POD: $pod; kubectl logs -f "$pod" prometheus-server-configmap-reload
 ```
 
 When the trigger happens for ClusterA you will see a message like the one below. Notice that `configmap-reloadz` is using the underlay 
 network: `http://127.0.0.1:9090/-/reload`
 
-```text
+```
 2022/04/23 20:01:23 config map updated
 2022/04/23 20:01:23 performing webhook request (1/1/http://127.0.0.1:9090/-/reload)
 2022/04/23 20:01:23 successfully triggered reload
@@ -161,7 +161,7 @@ Now we can use netcat to open a connection through this intercept a few times. T
 reflect service. Connect, send some text, the use ctrl-c to disconnect. Do that a few times then click 'execute' again on the graph page.
 You can see I did this over a minute and moved my total count on kubeA to 8, shown below.
 
-```text
+```
 /tmp/prometheus$ nc kubeA.reflect.svc.ziti 80
 kubeA reflect test
 you sent me: kubeA reflect test
@@ -184,7 +184,7 @@ Hopefully you agree with me that this is pretty neat. Well what if we take it to
 workload we deployed to ClusterB? Could we get that to work? Recall from above how we enabled the job named 'kubeA.reflectz'. What if we 
 simply copied/pasted that into the configmap changing kubeA --> kubeB. Would it work? Let's see. 
 
-```text
+```
 # edit the configmap on ClusterA:
 kubectl edit cm prometheuz-prometheus-server
 
@@ -214,7 +214,7 @@ ClusterA, we have just scraped a workload from Kubernetes ClusterB, entirely ove
 Generate some data like you did before by running a few netcat connection/disconnects and click 'Execute' again. Don't forget to send 
 the connection request to kubeB though!
 
-```text
+```
 nc kubeB.reflect.svc.ziti 80
 this is kubeb
 you sent me: this is kubeb
@@ -245,7 +245,7 @@ data from our two Prometheus instances using a locally deployed `Prometheuz` via
 GitHub has a sample Prometheus [file you can download](https://raw.githubusercontent.com/openziti/ziti-doc/main/docusaurus/blog/zitification/prometheus/scripts/local.prometheus.yml).
 Below, I used curl to download it and put it into the expected location.
 
-```text
+```
 curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docusaurus/blog/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
 
 ziti edge create identity user local.prometheus.id -o /tmp/prometheus/local.prometheus.id.jwt -a "reflectz-clients","prometheus-clients"
@@ -270,7 +270,7 @@ But wait, I'm not done. That docker instance is listening on an underlay network
 I want to fix that too. Let's start this docker container up listening only on the OpenZiti overlay. Just like in [part 2](./part2.md) 
 we will make a config, a service and two policies to enable identities on the OpenZiti overlay.
 
-```text
+```
 curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docusaurus/blog/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml
 
 # create the config and service for the local prometheus server
@@ -295,7 +295,7 @@ you're familiar with docker these will probably all make sense. The most importa
 flag. The `-p` flag is used to expose a port from inside docker, outside docker. Look at the previous docker sample and you'll find we 
 were mapping local underlay port 9090 to port 9090 in the docker container. In this example, **we will do no such thing**! :)
 
-```text
+```
 docker run \
     -e ZITI_LISTENER_SERVICE_NAME=local.prometheus.svc \
     -e ZITI_LISTENER_IDENTITY_FILE=/etc/prometheus/ziti.server.json \

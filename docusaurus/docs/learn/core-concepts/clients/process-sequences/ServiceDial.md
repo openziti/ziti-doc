@@ -1,6 +1,6 @@
 # Service Dial 
 
-```mermaid
+```
 sequenceDiagram
 title Service Dial (TCP)
 

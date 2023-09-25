@@ -11,7 +11,7 @@ available in the `enrollmentJWT` field.
 
 **Create:**
 `POST /edge/management/v1/edge-routers`
-```json
+```
 {
   "name": "test3"
 }
@@ -19,7 +19,7 @@ available in the `enrollmentJWT` field.
 
 **Get:**
 `GET /edge/management/v1/edge-routers/PYvobLGzj`
-```json
+```
 {
     "data": {
         ...,
@@ -64,7 +64,7 @@ complete enrollment.
 
 #### Edge Management API
 `POST /edge/management/v1/identities`
-```json
+```
 {
   "name": "test-user10",
   "type": "User",
@@ -87,7 +87,7 @@ complete enrollment.
 #### Edge Management API
 
 `GET /edge/management/v1/identities/-ItUkLGKUE`
-```json
+```
 {
     "data": {
         ...
@@ -122,7 +122,7 @@ OTT CA Enrollment requires that the enrolling client also has an existing client
 ##### Edge Management API
 
 `POST /edge/management/v1/identities`
-```json
+```
 {
   "name": "test-user10",
   "type": "User",

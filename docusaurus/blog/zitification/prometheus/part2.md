@@ -117,13 +117,13 @@ attribute to the identity of `kubeA.services`. This will be used later when sett
 
 #### Create the Identity
 
-```text
+```
 ziti edge create identity device kubeA.ziti.id -o /tmp/prometheus/kubeA.ziti.id.jwt -a "kubeA.services"
 ```
 
 You should see confirmation output such as:
 
-```text
+```
 New identity kubeA.ziti.id created with id: BeyyFUZFDR
 Enrollment expires at 2022-04-22T01:18:53.402Z
 ```
@@ -133,7 +133,7 @@ Once created, we can use helm to install the `ziti-host` pod. The jwt is a one-u
 `ziti-host`. As this is probably your first time running this helm chart, you will need to install it. The command is idempotent to 
 running it over and over is of no concern. Run the following:
 
-```text
+```
 helm repo add netfoundry https://netfoundry.github.io/charts/
 helm repo update
 helm install ziti-host netfoundry/ziti-host --set-file enrollmentToken="/tmp/prometheus/kubeA.ziti.id.jwt"
@@ -141,7 +141,7 @@ helm install ziti-host netfoundry/ziti-host --set-file enrollmentToken="/tmp/pro
 
 You will see the confirmation output from helm. Now when you look at your Kubernetes cluster with `kubectl`, you will see a pod deployed:
 
-```text
+```
 kubectl get pods
 NAME                        READY   STATUS    RESTARTS   AGE
 ziti-host-db55b5c4b-rpc7f   1/1     Running   0          2m40s
@@ -159,7 +159,7 @@ second service provided is a scrape target for Prometheus. There is one metric e
 
 #### Create and Enroll the Identity
 
-```text
+```
 ziti edge create identity user kubeA.reflect.id -o /tmp/prometheus/kubeA.reflect.id.jwt
 ziti edge enroll /tmp/prometheus/kubeA.reflect.id.jwt -o /tmp/prometheus/kubeA.reflect.id.json
 ```
@@ -171,7 +171,7 @@ able to test the service to ensure they work. To enable testing the services, we
 will allow identities using tunneling apps to be able to access the services, this is how we'll verify the services work. Make the 
 configs and services now.
 
-```text
+```
 # create intercept configs for the two services
 ziti edge create config kubeA.reflect.svc-intercept.v1 intercept.v1 \
   '{"protocols":["tcp"],"addresses":["kubeA.reflect.svc.ziti"],"portRanges":[{"low":80, "high":80}]}'
@@ -190,7 +190,7 @@ need to be authorized to bind these services. Tunneling apps will need to be aut
 Prometheus servers will need to be able to dial these services too. We will now create `service-policies` to authorize the tunneling 
 clients, Prometheus scrapes, and the `reflectz` server to bind the service.
 
-```text
+```
 # create the bind service policies and authorize the reflect id to bind these services
 ziti edge create service-policy "kubeA.reflect.svc.bind" Bind \
   --service-roles "@kubeA.reflect.svc" --identity-roles "@kubeA.reflect.id"
@@ -211,7 +211,7 @@ that to deploy `reflectz` we need to supply an identity to the workload using `-
 to 'Bind' the services the workload exposes. We also need to define what the service names are we want to allow that identity to bind. 
 We do this using the `--set serviceName` and `--set prometheusServiceName` flags.
 
-```text
+```
 helm repo add openziti-test-kitchen https://openziti-test-kitchen.github.io/helm-charts/
 helm repo update
 helm install reflectz openziti-test-kitchen/reflect \
@@ -222,7 +222,7 @@ helm install reflectz openziti-test-kitchen/reflect \
 
 After running helm, pod 2 should be up and running. Let's take a look using `kubectl`
 
-```text
+```
 kubectl get pods
 NAME                        READY   STATUS    RESTARTS   AGE
 reflectz-775bd45d86-4sjwh   1/1     Running   0          7s
@@ -243,7 +243,7 @@ but we can define it now.
 
 #### Create and Enroll the Identity
 
-```text
+```
 # create and enroll the identity.
 ziti edge create identity user kubeA.prometheus.id -o /tmp/prometheus/kubeA.prometheus.id.jwt -a "reflectz-clients","prometheus-clients"
 ziti edge enroll /tmp/prometheus/kubeA.prometheus.id.jwt -o /tmp/prometheus/kubeA.prometheus.id.json
@@ -251,7 +251,7 @@ ziti edge enroll /tmp/prometheus/kubeA.prometheus.id.jwt -o /tmp/prometheus/kube
 
 #### Create Configs and Services (including Tunneling-based Access)
 
-```text
+```
 # create the config and service for the kubeA prometheus server
 ziti edge create config "kubeA.prometheus.svc-intercept.v1" intercept.v1 \
   '{"protocols":["tcp"],"addresses":["kubeA.prometheus.svc"],"portRanges":[{"low":80, "high":80}]}'
@@ -263,7 +263,7 @@ ziti edge create service "kubeA.prometheus.svc" \
 
 #### Authorize the Workload and Clients
 
-```text
+```
 # grant the prometheus clients the ability to dial the service and the kubeA.prometheus.id the ability to bind
 ziti edge create service-policy "kubeA.prometheus.svc.dial" Dial \
   --service-roles "@kubeA.prometheus.svc" \
@@ -290,7 +290,7 @@ network. We're also passing one `--set-file` parameter to tell Prometheus what i
 This secret will be used when we configure Prometheus to scrape the workload. Go ahead and run this command now and run 
 `kubectl get pods` until all the containers are running.
 
-```text
+```
 helm repo add openziti-test-kitchen https://openziti-test-kitchen.github.io/helm-charts/
 helm repo update
 helm install prometheuz openziti-test-kitchen/prometheus \
@@ -327,13 +327,13 @@ we'll create that identity, authorize it to bind the services, and authorize cli
 similar to what we did for ClusterA, there's not much to explain. Setup ClusterB's `reflectz` now.
 
 #### Create the Identity
-```text
+```
 ziti edge create identity user kubeB.reflect.id -o /tmp/prometheus/kubeB.reflect.id.jwt
 ziti edge enroll /tmp/prometheus/kubeB.reflect.id.jwt -o /tmp/prometheus/kubeB.reflect.id.json
 ```
 
 #### Create Configs and Services (including Tunneling-based Access)
-```text
+```
 # create intercept configs for the two services
 ziti edge create config kubeB.reflect.svc-intercept.v1 intercept.v1 \
   '{"protocols":["tcp"],"addresses":["kubeB.reflect.svc.ziti"],"portRanges":[{"low":80, "high":80}]}'
@@ -346,7 +346,7 @@ ziti edge create service "kubeB.reflect.scrape.svc" --configs "kubeB.reflect.svc
 ```
 
 #### Authorize the Workload to Bind the Services
-```text
+```
 # create the bind service policies and authorize the reflect id to bind these services
 ziti edge create service-policy "kubeB.reflect.svc.bind" Bind \
   --service-roles "@kubeB.reflect.svc" --identity-roles "@kubeB.reflect.id"
@@ -355,7 +355,7 @@ ziti edge create service-policy "kubeB.reflect.scrape.svc.bind" Bind \
 ```
 
 #### Authorize Clients to Access the Services
-```text
+```
 # create the dial service policies and authorize the reflect id to bind these services
 ziti edge create service-policy "kubeB.reflect.svc.dial" Dial \
   --service-roles "@kubeB.reflect.svc" --identity-roles "#reflectz-clients"
@@ -364,7 +364,7 @@ ziti edge create service-policy "kubeB.reflect.svc.dial.scrape" Dial \
   ```
 
 #### Deploy `reflectz` {#deploy-reflectz-1}
-```text
+```
 helm repo add openziti-test-kitchen https://openziti-test-kitchen.github.io/helm-charts/
 helm repo update
 helm install reflectz openziti-test-kitchen/reflect \
@@ -381,7 +381,7 @@ the surface with very subtle differences. We'll explore these differences as we 
 config** (a difference from the ClusterA install), a service, and two service-policies. Let's get to it.
 
 #### Create the Identity
-```text
+```
 ziti edge create identity user kubeB.prometheus.id -o /tmp/prometheus/kubeB.prometheus.id.jwt -a "reflectz-clients","prometheus-clients"
 ziti edge enroll /tmp/prometheus/kubeB.prometheus.id.jwt -o /tmp/prometheus/kubeB.prometheus.id.json
 ```
@@ -391,7 +391,7 @@ Here's a difference from ClusterA. Since we are going to listen on the OpenZiti 
 we don't need to create a `host.v1` config. A `host.v1` config is necessary for services which have a 'Bind' configuration and are being 
 bound by a tunneling application. We're not doing that, here Prometheus will 'Bind' this service, thus we don't need that `host.v1` 
 config.
-```text
+```
 # create the config and service for the kubeB prometheus server
 ziti edge create config "kubeB.prometheus.svc-intercept.v1" intercept.v1 \
   '{"protocols":["tcp"],"addresses":["kubeB.prometheus.svc"],"portRanges":[{"low":80, "high":80}], "dialOptions": {"identity":"kubeB.prometheus.id"}}'
@@ -411,7 +411,7 @@ to be bound by the `ziti-host` identity.
 Here we are flipping that script. We are allowing Prometheus to bind this service! That means we'll need to authorize the 
 `kubeB.prometheus.id` to be able to bind the service.
 
-```text
+```
 # grant the prometheus clients the ability to dial the service and the kubeB.prometheus.id the ability to bind
 ziti edge create service-policy "kubeB.prometheus.svc.dial" Dial \
   --service-roles "@kubeB.prometheus.svc" \
@@ -442,7 +442,7 @@ Finally, to allow the server to scrape targets we need to supply a final identit
 You'll notice for simplicities sake, we are using the same identity for all three needs which is perfectly fine. If you wanted to use a 
 different identity, you could. That choice is up to you. To keep it simple we just authorized this identity for all these purposes.
 
-```text
+```
 # install prometheus
 helm repo add openziti-test-kitchen https://openziti-test-kitchen.github.io/helm-charts/
 helm repo update
@@ -470,6 +470,6 @@ All the commands above are also available in github as `.sh` scripts. If you wou
 [ziti-doc repository](https://github.com/openziti/ziti-doc) and access the scripts from the path mentioned below. "Cleanup" scripts are 
 provided if desired. 
 
-```text
+```
 ${checkout_root}/docusaurus/blog/zitification/prometheus/scripts
 ```

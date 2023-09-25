@@ -6,7 +6,7 @@ sidebar_label: Session Diagram
 
 OpenZiti has a number of different connection and session types.  It is important to understand the different scopes and uses of these connections in working with the project, developing, operating, and most importantly, troubleshooting.
 
-```mermaid
+```
 sequenceDiagram
 title Ziti Sessions and Connections
 

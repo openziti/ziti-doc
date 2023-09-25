@@ -13,7 +13,7 @@ Output from Ziti components comes in three distinct styles. Choose the style of 
 - `json` - a machine-readable format targeting automated processes for log aggregation/searching
 - `text` - a human-readable format using plain text (no ascii escape codes)
 
-```bash
+```
 ziti-router run ./router.yml --log-formatter pfxlog
 ```
 
@@ -22,7 +22,7 @@ ziti-router run ./router.yml --log-formatter pfxlog
 
 By default the Ziti components will log at the `INFO` level. This means that log messages `INFO`, `WARNING`, `ERROR`, and `FATAL` will all be emitted. Ziti components all support verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will add `DEBUG` log messages.
 
-```bash
+```
 ziti-controller run ./ctrl.yml --verbose
 ```
 

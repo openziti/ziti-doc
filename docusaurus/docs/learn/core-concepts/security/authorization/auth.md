@@ -10,7 +10,7 @@ client in the form of [Posture Checks](posture-checks.md).
 Authorization to connect to an Edge Router affects the Edge Router that are discoverable by a client. This will be 
 reflected when listing a Edge Router directly and receiving a list of them during Session creation.
 
-```mermaid
+```
 graph TD
 A[Idle] --> |Service update event| B[Check for Posture Queries]
 A --> |Interval check event| B

@@ -106,7 +106,7 @@ The fields under `externalIdClaims` is as follows:
 - `index` - should multiple values still be available after `location`, `matcher,` and `parser` processing the integer value here will be used from the set
 
 #### CA Create/Update REST API
-```json
+```
 {
   "name": "myCA",
   "certPem": "—–BEGIN CERTIFICATE—–\nMIIDdTCCAHMU...\n—–END CERTIFICATE—–",

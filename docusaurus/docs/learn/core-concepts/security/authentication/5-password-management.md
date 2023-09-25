@@ -17,7 +17,7 @@ Passwords may be reset via the [Edge Management API](docs/reference/developer/ap
 
 `POST /edge/management/v1/authenticators/<id>`
 
-```json
+```
 {
     "password": "<new-password>"
 }
@@ -36,7 +36,7 @@ Passwords may be reset via the [Edge Management API](/docs/reference/developer/a
 
 `POST /edge/client/v1/current-identity/authenticators/<id>`
 
-```json
+```
 {
     "password": "<new-password>"
 }

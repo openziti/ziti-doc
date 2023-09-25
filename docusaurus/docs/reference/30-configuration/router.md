@@ -62,7 +62,7 @@ on-ramp connections over the mesh.
 
 Example Minimum Router Configuration:
 
-```yaml
+```
 v: 3
 
 identity:
@@ -128,7 +128,7 @@ The `ctrl` section configures how the router will connect to the controller.
 
 Example:
 
-```yaml
+```
 ctrl:
   endpoint: tls:127.0.0.1:6262
 ```
@@ -156,7 +156,7 @@ routers at least one valid SAN must be provided.
 
 Example:
 
-```yaml
+```
 csr:
   country: US
   province: NC
@@ -185,7 +185,7 @@ is an array of objects that configures individual dialers specified by the prope
 
 Example:
 
-```yaml
+```
 dialers:
   - binding: binding1
     options:
@@ -217,7 +217,7 @@ fabric only" and
 
 Example:
 
-```yaml
+```
 edge: {}
 ```
 
@@ -253,7 +253,7 @@ a router.
 
 Example:
 
-```yaml
+```
 forwarder:
   latencyProbeInterval: 1000
 ```
@@ -279,7 +279,7 @@ status is available by exposing the `health-checks` API in the `web` section.
 
 Example:
 
-```yaml
+```
 healthChecks:
   ctrlPingCheck:
     interval: 30s
@@ -355,7 +355,7 @@ the [`transport` section](#transport). For both
 
 Example:
 
-```yaml
+```
 link:
   dialers:
     - binding: transport
@@ -381,7 +381,7 @@ client will use to connect to the listener.
 - `options` - (optional) options specified by the component specifically in addition to
   the [shared options](./conventions.md#xgress-options)
 
-```yaml
+```
 listeners:
   - binding: edge
     address: tls:0.0.0.0:3022
@@ -397,7 +397,7 @@ When generating a router configuration with `ziti create config router edge` the
 enabled with default mode `host`. This mode continually configures the router's tunnel to reverse
 proxy the list of services that are authorized by Bind Service Policy.
 
-```yaml
+```
 listeners:
   - binding: tunnel
     options:
@@ -409,7 +409,7 @@ will take effect when the router is restarted. For example, this configures the 
 transparently proxy all services authorized by Dial Service Policy and provide a nameserver. This
 mode also enables the reverse proxy features of `host` mode.
 
-```yaml
+```
 listeners:
   - binding: tunnel
     options:
@@ -420,7 +420,7 @@ listeners:
 In this example the router's tunnel is configured to provide a forward proxy listener for a list of
 service, TCP port pairs. This mode also enables the reverse proxy features of `host` mode.
 
-```yaml
+```
 listeners:
   - binding: tunnel
     options:
@@ -440,7 +440,7 @@ The `metrics` section controls how metrics are communicated to the connection co
 - `intervalAgeThreshold` - (optional, 80s) how old a batch of metrics must be before it's eligible
   to be sent to the controller
 
-```yaml
+```
 metrics:
   reportInterval: 1m
   messageQueueSize: 10
@@ -454,7 +454,7 @@ without careful consideration.
 
 - `path` - (required) the file to output decoded messages to
 
-```yaml
+```
 trace:
   path: /var/opt/open.ziti.router.trace
 ```
@@ -465,7 +465,7 @@ The `transport` section is for advanced configuration of underlay protocols. It 
 applies to an internally tuned TCP protocol named Transwarp and is tuned using `westworld3`
 configuration options. This section should largely be unnecessary outside of development.
 
-```yaml
+```
 transport:
   westworld3:
     profile_version: 1
@@ -492,7 +492,7 @@ careful consideration.
     - `path` - (required) the path to output the memprof data
     - `intervalMs` (optional) the frequency to output memprof data (default 15s)
 
-```yaml
+```
 profile:
   cpu:
     path: /home/user1/tmp/ctrl.cpu.pprof
@@ -516,6 +516,6 @@ Each API may have their own options, but currently do not.
 The `v` section is used to detect if the version file is supported by the OpenZiti binary read it.
 The current and only supported value is "3".
 
-```yaml
+```
 v: 3
 ```

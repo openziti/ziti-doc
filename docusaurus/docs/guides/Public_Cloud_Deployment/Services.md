@@ -33,7 +33,7 @@ Please make sure you can login to your network and see the welcome screen before
 You will need to login to controller to provision identities and service. Please make sure you are performing the action on the right node.
 
 On the controller, before performing the CLI command, you will need to login first:
-```bash
+```
 zitiLogin
 ```
 
@@ -128,7 +128,7 @@ Once the identities are created, you can check the identities and download the *
 
 #### 3.2.3.2 Create Identity with CLI
 Create two identities (ingress-tunnel, egress-tunnel) on the **controller**:
-```bash
+```
 ziti edge create identity device ingress-tunnel -o ingress-tunnel.jwt
 ziti edge create identity device egress-tunnel -o egress-tunnel.jwt
 ```
@@ -227,7 +227,7 @@ Create the configuration from **MANAGE CONFIGURATIONS** screen.
 ![Diagram](/img/public_cloud/Services10.png)
 
 #### 3.4.1.2 CLI
-```bash
+```
 ziti edge create config t2thostconf host.v1 '{"protocol":"tcp", "address":"127.0.0.1", "port":22}'
 ```
 ### 3.4.2 Create an intercept.v1 config 
@@ -241,7 +241,7 @@ Check the provisioned configs on the configuration screen:
 ![Diagram](/img/public_cloud/Services12.png)
 
 #### 3.4.2.2 CLI
-```bash
+```
 ziti edge create config t2tintconf intercept.v1 '{"protocols": ["tcp"], "addresses": ["t2tssh.ziti"], "portRanges": [{"low": 22, "high": 22}]}'
 ```
 If the command finished successfully, you will see two configs:
@@ -264,7 +264,7 @@ Create service from **Services** menu from **MANAGE EDGE SERVICES** screen.
 ![Diagram](/img/public_cloud/Services13.png)
 
 #### 3.4.3.2 CLI
-```bash
+```
 ziti edge create service t2tssh -c t2tintconf,t2thostconf
 ```
 
@@ -291,7 +291,7 @@ Create a **service policy** from **MANAGE SERVICE POLICIES** screen:
 ![Diagram](/img/public_cloud/Services15-Bind.jpg)
 
 #### 3.4.4.2 CLI
-```bash
+```
 ziti edge create service-policy t2tssh.bind Bind --service-roles '@t2tssh' --identity-roles "@egress-tunnel"
 ```
 ### 3.4.5 Create Dial Service policy
@@ -305,7 +305,7 @@ We should have two service policies created. The services name should match on t
 
 ![Diagram](/img/public_cloud/Services17.jpg)
 #### 3.4.5.2 CLI
-```bash
+```
 ziti edge create service-policy t2tssh.dial Dial --service-roles '@t2tssh' --identity-roles "@ingress-tunnel"
 ```
 Make sure both policies are setup correctly：
@@ -382,7 +382,7 @@ Please refer to [Network Diagram 2](#312-network-diagram-2) for our test setup.
 #### 3.5.1.1 ZAC
 ![Diagram](/img/public_cloud/Services20.png)
 #### 3.5.1.2 CLI
-```bash
+```
 ziti edge create config t2ehostconf host.v1 '{"protocol":"tcp", "address":"127.0.0.1", "port":8080}'
 ```
 ### 3.5.2 Create an intercept.v1 config 
@@ -394,7 +394,7 @@ And you should have two configs:
 
 ![Diagram](/img/public_cloud/Services22.png)
 #### 3.5.2.2 CLI
-```bash
+```
 ziti edge create config t2eintconf intercept.v1 '{"protocols": ["tcp"], "addresses": ["10.124.0.2"], "portRanges": [{"low": 80, "high": 80}]}'
 ```
 ```
@@ -419,7 +419,7 @@ ziti edge create service t2ehttp -c t2eintconf,t2ehostconf
 #### 3.5.4.1 ZAC
 ![Diagram](/img/public_cloud/Services25-Bind.jpg)
 #### 3.5.4.2 CLI
-```bash
+```
 ziti edge create service-policy t2ehttp.bind Bind --service-roles '@t2ehttp' --identity-roles "@local-er"
 ```
 ### 3.5.5 Create Dial Service policy
@@ -431,7 +431,7 @@ Check two service polices:
 
 ![Diagram](/img/public_cloud/Services27.jpg)
 #### 3.5.5.2 CLI
-```bash
+```
 ziti edge create service-policy t2ehttp.dial Dial --service-roles '@t2ehttp' --identity-roles "@egress-tunnel"
 ```
 Make sure both policies are setup correctly：
@@ -462,7 +462,7 @@ This is hello from local-er.
 ```
 
 Then start the http server.
-```bash
+```
 python3 -m http.server 8080
 ```
 
@@ -508,7 +508,7 @@ Used address **127.0.0.1** as host side destination, and port **80** as destinat
 #### 3.6.2.1 ZAC
 ![Diagram](/img/public_cloud/Services30.jpg)
 #### 3.6.2.2 CLI
-```bash
+```
 ziti edge create config e2thostconf host.v1 '{"protocol":"tcp", "address":"127.0.0.1", "port":80}'
 ```
 ### 3.6.3 Create an intercept.v1 config 
@@ -520,7 +520,7 @@ And you should have two configs:
 
 ![Diagram](/img/public_cloud/Services32.jpg)
 #### 3.6.3.2 CLI
-```bash
+```
 ziti edge create config e2tintconf intercept.v1 '{"protocols": ["tcp"], "addresses": ["11.11.11.11","e2thttp.ziti"], "portRanges": [{"low": 80, "high": 80}]}'
 ```
 ```
@@ -545,7 +545,7 @@ ziti edge create service e2thttp -c e2thostconf,e2tintconf
 #### 3.6.5.1 ZAC
 ![Diagram](/img/public_cloud/Services34-Bind.jpg)
 #### 3.6.5.2 CLI
-```bash
+```
 ziti edge create service-policy e2thttp.bind Bind --service-roles '@e2thttp' --identity-roles "@egress-tunnel"
 ```
 ### 3.6.6 Create Dial Service policy
@@ -557,7 +557,7 @@ Check two service polices:
 
 ![Diagram](/img/public_cloud/Services36.jpg)
 #### 3.6.6.2 CLI
-```bash
+```
 ziti edge create service-policy e2thttp.dial Dial --service-roles '@e2thttp' --identity-roles "@local-er"
 ```
 Make sure both policies are setup correctly：
@@ -589,7 +589,7 @@ You have reached the "egress-tunnel".
 ```
 
 Then start the http server.
-```bash
+```
 sudo python3 -m http.server 80
 ```
 
@@ -675,7 +675,7 @@ DNS=10.5.0.4  #local private IP of the ER
 **NOTE, the IP address should match your Next hop in the route table**
 
 Restart the systemd-resolved service 
-```bash
+```
 sudo systemctl restart systemd-resolved.service
 ```
 </TabItem>
@@ -690,7 +690,7 @@ DNS=10.5.0.4  #local private IP of the ER
 **NOTE, the IP address should match your Next hop in the route table**
 
 Restart the systemd-resolved service
-```bash
+```
 sudo systemctl restart systemd-resolved.service
 ```
 </TabItem>
@@ -705,7 +705,7 @@ DNS=10.138.0.2  #local private IP of the local ER
 **NOTE, the IP address should match your Next hop in the route table**
 
 Restart the systemd-resolved service
-```bash
+```
 sudo systemctl restart systemd-resolved.service
 ```
 
@@ -720,7 +720,7 @@ DNS=144.126.220.15
 ```
 
 Restart the systemd-resolved service
-```bash
+```
 sudo systemctl restart systemd-resolved.service
 ```
 
@@ -736,7 +736,7 @@ DNS=10.5.0.4  #local private IP of the ER
 **NOTE, the IP address should match your "Target Selection" in the route table**
 
 Restart the systemd-resolved service
-```bash
+```
 sudo systemctl restart systemd-resolved.service
 ```
 </TabItem>
@@ -749,7 +749,7 @@ sudo systemctl restart systemd-resolved.service
 DNS=169.45.71.226    #Public IP of the ER
 ```
 Restart the systemd-resolved service
-```bash
+```
 sudo systemctl restart systemd-resolved.service
 ```
 

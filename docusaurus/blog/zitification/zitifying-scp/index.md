@@ -40,19 +40,19 @@ There are two main functions of `zscp`. Just like `scp` you can send and receive
 
 To send files we use this basic syntax:
 
-```bash
+```
 ./zscp LOCAL_FILEPATHS... <REMOTE_USERNAME>@TARGET_IDENTITY:REMOTE_FILEPATH
 ```
 
 Then, to retrieve remote files we use a similar syntax:
 
-```bash
+```
 ./zscp <REMOTE_USERNAME>@TARGET_IDENTITY:REMOTE_FILEPATH LOCAL_FILEPATH
 ```
 
 Below is a working example of using `zscp` to send a file to a remote machine. In this case the remote username is not the same as my local username. Just like with `scp`, I'll need to supply the username in my command and it will use the same syntax that regular `scp` uses. Here I am `zscp'ing` as username `ubuntu` to the remote computer that is joined to the Ziti Network using the identity named `ziti-tunnel-aws`.
 
-```bash
+```
 ./zscp local/1.txt ubuntu@ziti-tunnel-aws:remote
 INFO    connection to edge router using token 6c2e8b79-ce8e-483e-a9f8-a930530e706a
 INFO    sent file: /Users/name/local/1.txt ==> /home/ubuntu/remote/1.txt
@@ -66,7 +66,7 @@ This is only a basic example on how we can use `zscp` to send a singular file to
 
 Just like `zssh`, `zscp` has the same flags to pass in: ssh key, ziti configuration file, service name, and one to toggle debug logging. All the defaults are the same as with `zssh`, thus both `zscp` and `zssh` will work without the `-i` and `-c` flag providing the files exist at the default locations. Refer to \[zitifying-ssh\]\[2\] for instructions on how to use the flags below.
 
-```bash
+```
     -i, --SshKeyPath string   Path to ssh key. default: $HOME/.ssh/id_rsa
     -c, --ZConfig string      Path to ziti config file. default: $HOME/.ziti/zssh.json
     -d, --debug               pass to enable additional debug information
@@ -75,7 +75,7 @@ Just like `zssh`, `zscp` has the same flags to pass in: ssh key, ziti configurat
 
 In addition to the flags above, `zscp` has a flag to enable recursive copying:
 
-```bash
+```
     -r, --recursive           pass to enable recursive file transfer
 ```
 
@@ -83,7 +83,7 @@ To use the recursive flag, you must input a directory into the `LOCAL_FILEPATH` 
 
 Contents of `big_directory` on local computer:
 
-```bash
+```
 tree local
 local
 └── big_directory
@@ -100,7 +100,7 @@ local
 
 Here is the command and output:
 
-```bash
+```
 $ zscp -r big_directory ubuntu@ziti-tunnel-aws:remote
 INFO    connection to edge router using token d6c268ee-e4f5-4836-bd38-2fc1558257aa
 INFO    sent file: /Users/name/local/big_directory/1.txt ==> /home/ubuntu/remote/big_directory/1.txt
@@ -113,7 +113,7 @@ INFO    sent file: /Users/name/local/big_directory/small_directory3/6.txt ==> /h
 
 After `zssh'ing` to the remote machine, we can prove that all files have been transferred to remote device:
 
-```bash
+```
 ubuntu@IP:~$ tree remote/
 remote/
 └── big_directory

@@ -6,7 +6,7 @@ A Config of Config Type `host.v1` configures a hosting Ziti tunneler to forward 
 
 This Config forwards Ziti service traffic to a server known as `tcp:localhost:54321`. The server must be reachable at that destination from the network perspective of the device where the Ziti tunneler is running.
 
-```json
+```
 {
     "address": "localhost",
     "port": 54321,
@@ -16,7 +16,7 @@ This Config forwards Ziti service traffic to a server known as `tcp:localhost:54
 
 Rather than a static destination port, this Config forwards the Ziti service traffic to the same TCP port that the initiating client was connecting to as long as it falls within the range of allowed ports.
 
-```json
+```
 {
     "address": "localhost",
     "forwardPort": true,
@@ -27,7 +27,7 @@ Rather than a static destination port, this Config forwards the Ziti service tra
 
 Rather than a static destination address, this Config forwards the Ziti service traffic to the same address that the initiating client was connecting to as long as it is in the list of allowed addresses.
 
-```json
+```
 {
     "forwardAddress": true,
     "allowedAddresses": [

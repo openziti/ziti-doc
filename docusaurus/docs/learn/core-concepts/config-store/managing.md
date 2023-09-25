@@ -3,7 +3,7 @@
 ## Managing Configurations
 Here is a JSON schema, modeled on the tunneler client configuration. 
 
-```json
+```
 {
   "$id": "http://myapp.company.com/schemas/myapp.v1.config.json",
   "additionalProperties": false,

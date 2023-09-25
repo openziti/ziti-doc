@@ -30,7 +30,7 @@ API Sessions are defined in the Client and Management Open API 2.0 specification
 
 Example `POST /edge/management/v1/authenticate` response:
 
-```json
+```
 {
   "data": {
     "_links": {
@@ -125,7 +125,7 @@ While partially authenticated, the API Session can only be used for a reduced se
 Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example
 MFA challenge represented as an Authentication Query is provided below.
 
-```json
+```
 {
   "authQueries": [
     {
@@ -171,7 +171,7 @@ the timeout has been reached, signaling an API Session removal. Activities that 
 The API Session timeout defaults to 30 minutes and can be configured in `edge.api.sessionTimeout` in the controller
 configuration file.
 
-```yaml
+```
 edge:
   api:
   ...
