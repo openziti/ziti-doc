@@ -15,6 +15,7 @@ In this guide, we will demonstrate ziti services with the following examples:
 - connection from a non-OpenZiti endpoint using router as GW([Network Diagram 2](#312-network-diagram-2))
 - access a server from a SDK enabled application ([Network Diagram 3](#313-network-diagram-3))
 - access a SDK enabled application with an ziti client ([Network Diagram 4](#314-network-diagram-4))
+- SDK client connects to SDK server ([Network Diagram 5](#315-network-diagram-5))
 
 ### 3.1.1 Network Diagram 1
 ![Diagram](/img/public_cloud/Services01.jpg)
@@ -27,6 +28,9 @@ In this guide, we will demonstrate ziti services with the following examples:
 
 ### 3.1.4 Network Diagram 4
 ![Diagram](/img/public_cloud/Services02-4.jpg)
+
+### 3.1.5 Network Diagram 5
+![Diagram](/img/public_cloud/Services02-5.jpg)
 
 This guide provides both CLI and GUI (ZAC) instructions. To use ZAC, make sure ZAC is installed. If you have not installed ZAC, and would like to use it in this section, please follow the [ZAC Setup Guide](Controller#14-setup-ziti-administration-console-zac) before continue.
 
@@ -864,7 +868,7 @@ Login to the controller
 source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 # connect to ziti cli (do this when the token expired)
 zitiLogin
-# create identity for server
+# create identity for client
 ziti edge create identity curlz-client -a curlz.clients -o curlz-client.jwt
 # enroll identity
 ziti edge enroll --jwt curlz-client.jwt
@@ -971,7 +975,7 @@ example:
 # git clone https://github.com/openziti/sdk-golang.git
 ```
 
-cd to the curlz directory (example/simple-server).
+cd to the simple-server directory (example/simple-server).
 
 example:
 ```
@@ -1094,3 +1098,132 @@ curl http://simpleService.ziti?name='the-greatest-show-on-earth'
 $ curl http://simpleService.ziti?name='the-greatest-show-on-earth'
 Hello, the-greatest-show-on-earth, from ziti
 ```
+
+
+## 3.9 Setup SDK Client to SDK Server connection
+
+### 3.9.1 Introduction
+In this section, we will demonstrate how to connect a SDK enabled application to SDK enabled server. Please refer to [Network Diagram 5](#315-network-diagram-5) for our test setup.
+
+### 3.9.2 SDK Application client and server
+
+We are going to use an existing [SDK implementation](https://github.com/openziti/sdk-golang/tree/main/example/chat) for this guide. Since this example includes both client and server code, we will show how to compile it once. You can also copy the executable to the other server.
+
+You will need two linux servers for this demo. You can use the "ingress-tunnel" (as SDK client) and "egress-tunnel" (as SDK server).
+
+Install **go** before you proceed further.
+
+Check out the code from the [github repo](https://github.com/openziti/sdk-golang.git).
+
+example:
+```
+# git clone https://github.com/openziti/sdk-golang.git
+```
+
+cd to the chat directory (example/chat).
+
+example:
+```
+# cd sdk-golang/example/chat
+```
+
+build the chat binaries
+```bash
+mkdir build
+go mod tidy
+go build -o build ./...
+```
+
+If all goes well, you will find a **chat-client** and **chat-server** binary under that directory.
+
+Next, you need to create identities for this SDK Application client ("chat.client") and server ("chat.server").
+
+Login to the controller
+```bash
+# source the aliases for ziti (do it the first time you login to the VM)
+source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
+# connect to ziti cli (do this when the token expired)
+zitiLogin
+# create identities
+ziti edge create identity chat-client -a chat.clients -o chat-client.jwt
+ziti edge create identity chat-server -a chat.servers -o chat-server.jwt
+# enroll identities
+ziti edge enroll --jwt chat-client.jwt
+ziti edge enroll --jwt chat-server.jwt
+```
+Once the enrollment is complete, there will be two json files: **chat-client.json** and **chat-server.json** under the current directory. Transfer the client file (**chat-client.json**) to your SDK Application client machine and both files to your server machine, place them under the **chat/build** directory.
+
+### 3.9.3 Create Service
+
+For SDK clent connect to SDK client, there is no config needed. We just need to create a service. Please note, the service name has to be "chat"
+
+```bash
+ziti edge create service chat --role-attributes chat-service
+```
+
+### 3.9.4 Create Bind Service policy
+
+Specify host side endpoints by using the "Bind" service policy
+```bash
+ziti edge create service-policy chat.dial Dial --identity-roles '#chat.clients' --service-roles '#chat-service'
+```
+
+### 3.9.5 Create Dial Service policy
+
+The dial policy specifies intercept side endpoints.
+
+```bash
+ziti edge create service-policy chat.bind Bind --identity-roles '#chat.servers' --service-roles '#chat-service'
+```
+
+Make sure both policies are setup correctly：
+```
+# ziti edge list service-policies |grep chat
+│ 2u9hmMVIj4B3vk016DCWAW │ chat.dial           │ AllOf    │ #chat-service      │ #chat.clients                    │                     │
+│ 7Pqk6mCdpyJ5A4cqcHaeXd │ chat.bind           │ AllOf    │ #chat-service      │ #chat.servers                    │                     │
+```
+You should also make sure the policy advisor display correctly:
+```
+# ziti edge policy-advisor services |grep chat
+OKAY : chat-client (1) -> chatService (1) Common Routers: (1/1) Dial: Y Bind: N
+OKAY : chat-server (1) -> chatService (1) Common Routers: (1/1) Dial: N Bind: Y
+```
+Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has at least 1 Common Routers.
+
+### 3.9.6 Chat Server
+
+The Chat Server relays the communicates between clients. So, let's start te server first.
+Make sure you are under the directory: "chat/build"
+
+Run the server:
+```bash
+./chat-server chat-server.json
+```
+
+As the clients login to the server, you will see output like this:
+```
+INFO[0000] binding service chat
+INFO[0000] new service session                           session token=3a3fa473-0bac-42ed-8bff-ff3d91ef7b1f
+INFO[0049] new connection
+INFO[0049] client 'Adam' connected
+INFO[0196] new connection
+INFO[0196] client 'Bryan' connected
+```
+
+### 3.9.7 Test Chat
+
+We will start the chat clients on different machines. Then you can start the chat.  Following is an example communication between two Clients (Adam and Bryan)
+```
+########### SDK Client (Adam) ############  ########### SDK Server (Bryan) ############
+# $ ./chat-client Adam chat-client.json  #  # $ ./chat-client Bryan chat-client.json  # 
+# I am Adam                              #  #                                         #
+#                                        #  # Adam: I am Adam                         #
+#                                        #  # Hi Adam                                 #
+# Bryan: Hi Adam                         #  #                                         #
+#                                        #  # I am Bryan                              #
+# Bryan: I am Bryan                      #  #                                         #
+# Nice to meet you                       #  #                                         #
+#                                        #  # Adam: Nice to meet you                  #
+#######################################################################################
+```
+
