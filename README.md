@@ -105,98 +105,12 @@ With these scripts, you can test all the links in the site's pages and popular i
 
   You will need to run `yarn serve` to crawl for broken links locally because the webpack server (`yarn start`) is not crawlable, and you will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
 
-## How the Proxies Work
+## How openziti.io Works
 
-There are a couple of reverse proxies hosted by CloudFront. Both employ CloudFront functions with a custom script. Both scripts are of type "viewer request" meaning they operate on the request of the viewer, which is on the front side of the proxy. 
+The `openziti.io` domain name resolves to GitHub Pages which hosts the static HTML that's output by the Docusaurus build that runs in a GitHub workflow. 
 
-The scripts parse the request and decide whether to return a response to the viewer or pass along the request to the origin, i.e., upstream, a.k.a backend, a.k.a. origin.
+## How docs.openziti.io Works
 
-### How the Short URL Proxy Works
+This redirector's purpose is to preserve incoming links for this domain. The `docs.openziti.io` domain name resolves to a CloudFront distribution that only responds with an HTTP redirect. If the request path is `/` then it responds with `https://openzit.io/docs` (the docs landing page). Otherwise, it responds with the same path that was requested at `https://openziti.io{path}`.
 
-`https://get.openziti.io` is a CloudFront caching proxy that runs a viewer request function ([script](./cloudfront-function-github-proxy.js)). The upstream/origin is `https://raw.githubusercontent.com`. The proxy allows for a shorter URL by mapping a URL path abbreviation to the full path.
-
-This proxy's function modifies the viewer's request if it matches one of the shortening prefixes below before passing it along to the origin, which is GitHub.
-
-|purpose|abbreviation|full URL path|
-|---|---|---|
-|quickstart functions|`/quick/`|`/openziti/ziti/main/quickstart/docker/image/`|
-|API specs|`/spec/`|`/openziti/edge-api/main/`|
-|Linux package key|`/pack/`|`/openziti/ziti-tunnel-sdk-c/main/`
-|Docker quickstart assets|`/dock/`|`/openziti/ziti/main/quickstart/docker/`|
-
-### How the openziti.io Proxy Works
-
-The `openziti.io` DNS name resolves to a proxy that redirects selectively to HashNode or GitHub Pages, depending on the request path. This preserves popular incoming links to blog articles as redirects while this docs site becomes the default destination for all other requests for `openziti.io`.
-
-Like the GitHub proxy, this proxy runs a CloudFront viewer request function ([script](./cloudfront-function-openziti-io-proxy.js)) to decide how to handle requests. This proxy's function inspects the viewer's request to see if it exactly matches the `/` root document which triggers a redirect to `https://docs.openziti.io/`. If it does not match, then the proxy responds to the viewer with a redirect to the same request path at `blog.openziti.io`.
-
-### CloudFront Proxy Deployment Notes
-
-You can perform these steps in the AWS Web Console or with `aws` CLI.
-
-* Find the name and "ETag" (changes when updated) of the CloudFront Function you wish to update.
-
-  ```bash
-  $ aws cloudfront list-functions | \
-    jq '.FunctionList.Items[]|select(.FunctionMetadata.Stage == "LIVE")|.Name'
-  "blog-viewer-request-function"
-  "github-raw-viewer-request-router"
-  ```
-
-  ```bash
-  $ aws cloudfront describe-function --name github-raw-viewer-request-router | \
-    jq '.ETag'
-"E135L1TOL8QIJF"
-  ```
-
-* Update the function's DEVELOPMENT stage in AWS. In the console you need to paste the new script and save it to update the development stage of the CloudFront function.
-
-  ```bash
-  aws cloudfront update-function \
-    --name github-raw-viewer-request-router \
-    --function-code fileb://./cloudfront-proxies/cloudfront-function-github-proxy.js \
-    --function-config '{"Runtime": "cloudfront-js-1.0","Comment": "update function"}' \
-    --if-match E135L1TOL8QIJF  # ETag from DescribeFunction
-  ```
-
-* Find the new ETag (version ID) of the updated function
-
-  ```bash
-  $ aws cloudfront describe-function --name github-raw-viewer-request-router | \
-    jq '.ETag'
-"E3T4TT2Z381HKD"
-  ```
-
-* Test the function. You need to verify the request or response was handled expectedly. You can also do this in the web console with the "test" tab on the CloudFront function.
-
-  ```bash
-  aws cloudfront test-function \
-      --name github-raw-viewer-request-router \
-      --stage DEVELOPMENT \
-      --if-match E3T4TT2Z381HKD \
-      --event-object fileb://./github/ziti-doc/cloudfront-proxies/github-test-event-object.json | jq -r '.TestResult.FunctionOutput' | jq .
-  ```
-
-  ```json
-  {
-    "request": {
-      "headers": {
-        "host": {
-          "value": "get.openziti.io"
-        }
-      },
-      "method": "GET",
-      "querystring": {},
-      "uri": "/openziti/ziti-tunnel-sdk-c/main/install.sh",
-      "cookies": {}
-    }
-  }
-  ```
-
-* publish LIVE stage
-
-  ```bash
-  aws cloudfront publish-function \      
-    --name github-raw-viewer-request-router \
-    --if-match E3T4TT2Z381HKD
-  ```
+The redirector's behavior is controlled by a Javascript CloudFront function that's deployed automatically when it is changed in this repository. The function is defined in [cloudfront-function-docs-openziti-io.js](./cloudfront/cloudfront-function-docs-openziti-io.js). The function is deployed by [a GitHub workflow](./.github/workflows/deploy-cloudfront.yml) that runs when the file is changed in the `main` branch.
