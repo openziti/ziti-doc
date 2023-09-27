@@ -72,7 +72,7 @@ the script before running it locally. This script is provided as a convenience
 method for installing an environment quickly and easily.
 
 ```bash
-source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
+source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/ziti-cli-functions.sh)"; expressInstall
 ```
 
 ### `systemd` {#systemd}
@@ -98,7 +98,7 @@ Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip
 #### The helper functions vs systemd
 
 The set of startController/stopController, startRouter/stopRouter are functions declared in the 
-[the ziti-cli-function.sh helper script](https://get.openziti.io/quick/ziti-cli-functions.sh) and are useful for running
+[the ziti-cli-function.sh helper script](https://get.openziti.io/ziti-cli-functions.sh) and are useful for running
 the controller and router directly in your shell. These functions are not meant to work with systemd-enabled installs. If
 you are enabling systemd, use `systemctl` to start/stop the components. During the expressInstall, the controller and router
 were started using the helper scripts to complete the installation. Both should not be running, but before you run the 
