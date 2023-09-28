@@ -9,7 +9,7 @@
 
 `TLSUV_DEBUG=4` - set the log level of the underlying libuv library, higher is more verbose (level 4 means DEBUG)
 
-For more information about configuring the underlying Ziti C SDK with environment variables, see [the Ziti C SDK documentation](../../../../docs/reference/developer/sdk/ziti-sdk-c).
+For more information about configuring the underlying Ziti C SDK with environment variables, see [the Ziti C SDK documentation](/reference/developer/sdk/ziti-sdk-c.mdx).
 
 ## `ziti-edge-tunnel` Global Options
 
