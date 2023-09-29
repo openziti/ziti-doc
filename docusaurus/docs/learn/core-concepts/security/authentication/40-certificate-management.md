@@ -31,7 +31,7 @@ must be PEM encoded.
 
 #### Request
 `POST edge/client/v1/current-identity/authenticators/{id}/extend`
-```json
+```text
 {
   "clientCertCsr": "-----BEGIN NEW CERTIFICATE REQUEST-----\n..."
 }
@@ -40,7 +40,7 @@ must be PEM encoded.
 #### Response:
 A new CA bundle and client certificate will be returned PEM encoded.
 
-```json
+```text
 {
   "data": {
       "ca": "-----BEGIN CERTIFICATE-----\nMIICZTCCAeygAwIBAgIUOoTKiY",

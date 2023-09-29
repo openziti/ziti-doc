@@ -68,7 +68,7 @@ ziti edge delete enrollment where "identity=<id>"
 
 `POST /edge/management/v1/identities`
 
-```json
+```text
 {
   "name": "Roger Wilco",
   "isAdmin": false
@@ -86,7 +86,7 @@ Note: This identity will be using the default [authentication policy](./auth) wh
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
-```json
+```text
 {
   "name": "Roger Wilco",
   "isAdmin": false,
@@ -106,7 +106,7 @@ It is currently not possible to create identities with a 3rd party certificate e
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
-```json
+```text
 {
   "name": "Roger Wilco",
   "isAdmin": false,
@@ -126,7 +126,7 @@ Note: This identity will be using the default [authentication policy](./auth) wh
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
-```json
+```text
 {
   "name": "Roger Wilco",
   "isAdmin": false,
@@ -147,7 +147,7 @@ must be defined that allows the identity to authenticate with that signer.
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
-```json
+```text
 {
   "name": "Roger Wilco",
   "isAdmin": false,

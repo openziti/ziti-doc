@@ -69,7 +69,7 @@ ziti router enroll config.yaml --jwt token.jwt
 ziti router run config.yaml
 ```
 
-```ini
+```text
 # /etc/systemd/system/ziti-router.service
 [Unit]
 Description=Ziti Router

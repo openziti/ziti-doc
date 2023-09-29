@@ -45,7 +45,7 @@ Enrollment status can be checked by the client themselves through the following 
 #### Responses:
 If enrolled:
 `HTTP 200 ok`
-```json
+```text
 {
   "isVerified": true
 }
@@ -53,7 +53,7 @@ If enrolled:
 
 If enrollment started:
 `HTTP 200 ok`
-```json
+```text
 {
   "isVerified": true,
   "recoveryCodes": ["code1", "..."],
@@ -86,7 +86,7 @@ Enrolment is completed by verifying the secret has been received by providing a 
 codes are not treated as a valid value.
 
 `POST /edge/client/v1/current-identity/mfa/verify`
-```json
+```text
 {
   "code": "<totp-code>"
 }
@@ -104,7 +104,7 @@ from their account as long as they have access to a recovery code or TOPT code.
 
 #### Client Removal
 `DELETE /edge/client/v1/current-identity/mfa`
-```json
+```text
 {
   "code": "<totp-or-recovery-code>"
 }
@@ -120,7 +120,7 @@ from their account as long as they have access to a recovery code or TOPT code.
 At any time the current valid list of recovery codes may be viewed by the client by issuing the following request:
 
 `GET /edge/client/v1/current-identity/mfa/recovery-codes`
-```json
+```text
 {
   "code": "<totp-or-recovery-code>"
 }
@@ -132,7 +132,7 @@ At any time the current valid list of recovery codes may be replaced by the clie
 
 
 `POST /edge/client/v1/current-identity/mfa/recovery-codes`
-```json
+```text
 {
   "code": "<totp-or-recovery-code>"
 }

@@ -30,7 +30,7 @@ API Sessions are defined in the Client and Management Open API 2.0 specification
 
 Example `POST /edge/management/v1/authenticate` response:
 
-```json
+```text
 {
   "data": {
     "_links": {
@@ -125,7 +125,7 @@ While partially authenticated, the API Session can only be used for a reduced se
 Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example
 MFA challenge represented as an Authentication Query is provided below.
 
-```json
+```text
 {
   "authQueries": [
     {

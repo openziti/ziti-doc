@@ -23,7 +23,7 @@ It is essential to build your application with respect to the specification of y
 
 `GET /`
 
-```json
+```text
 {
     "data": {
         "apiVersions": {

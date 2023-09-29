@@ -39,13 +39,13 @@ Your computer running `minikube` needs to resolve these three domain names. They
 
 1. Enable localhost binding in WSL.
 
-   ```cmd
+   ```text
    %USERPROFILE%\.wslconfig
    ```
 
    Add `localhostforwarding=true` to the `[wsl2]` section like this.
 
-   ```ini
+   ```text
    [wsl2]
    # Turn off default connection to bind WSL 2 localhost to Windows localhost
    localhostforwarding=true
@@ -55,20 +55,20 @@ Your computer running `minikube` needs to resolve these three domain names. They
 
    Edit the system hosts file.
 
-   ```cmd
+   ```text
    %SYSTEMROOT%\system32\drivers\etc\hosts
    ```
 
    Add this line to the system hosts file.
 
-   ```ini
+   ```text
    # miniziti
    127.0.0.1  miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal  miniziti-console.miniziti.internal
    ```
 
 1. Restart WSL.
 
-   ```powershell
+   ```text
    wsl --shutdown
    ```
 
@@ -89,13 +89,13 @@ Your computer running `minikube` needs to resolve these three domain names. They
 
    You can verify that the `docker-desktop-data` instance is running with this PowerShell command.
 
-   ```powershell
+   ```text
    wsl -l -v
    ```
 
    Example output:
 
-   ```powershell
+   ```text
    % wsl -l -v
    FIXME: paste output here showing WSL, docker-desktop, docker-desktop-data running
    ```
@@ -327,7 +327,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       --namespace kube-system
    ```
 
-   ```nginx
+   ```text
        miniziti.internal:53 {
           errors
           cache 30
@@ -585,13 +585,13 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
 
    Edit the system hosts file.
 
-   ```cmd
+   ```text
    %SYSTEMROOT%\system32\drivers\etc\hosts
    ```
 
    Remove this line.
 
-   ```ini
+   ```text
    # miniziti
    127.0.0.1  miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal  miniziti-console.miniziti.internal
    ```

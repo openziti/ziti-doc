@@ -132,7 +132,7 @@ Architectures available:
 
 Use this repo with var `$releasever` on CentOS 7, Rocky 8-9, and RHEL 7-9.
 
-```ini
+```text
 [OpenZiti]
 name=OpenZiti
 baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch
@@ -152,7 +152,7 @@ Architectures available:
 
 * x86_64
 
-```ini
+```text
 [OpenZiti]
 name=OpenZiti
 baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
@@ -172,7 +172,7 @@ Architectures available:
 
 * x86_64
 
-```ini
+```text
 [OpenZiti]
 name=OpenZiti
 baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
