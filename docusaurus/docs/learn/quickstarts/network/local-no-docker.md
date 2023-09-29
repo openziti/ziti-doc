@@ -28,7 +28,7 @@ are the default ports the edge router will use.
 
 Running the latest version of Ziti locally is as simple as running this one command:
 
-```bash
+```text
     source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/ziti-cli-functions.sh)"; expressInstall
 ```
 
@@ -48,13 +48,13 @@ edge-router.
 
 ## Start Your Controller
 
-```bash
+```text
 startController
 ```
 
 Example output:
 
-```bash
+```text
 $ startController
 ziti-controller started as process id: 1286. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye.log
 ```
@@ -73,12 +73,12 @@ You can see what your value is set to by running
 `$(hostname -s):1280`. Make sure the controller is available by trying to curl to the address, and then start the edge router. 
 
 
-```bash
+```text
 curl -sk "https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}"
 ```
 
 Example output: 
-```bash
+```text
 {"data":{"apiVersions":{"edge":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-client":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/client/v1"],"path":"/edge/client/v1"}},"edge-management":{"v1":{"apiBaseUrls":["https://your.hostname:1280/edge/management/v1"],"path":"/edge/management/v1"}}},"buildDate":"2023-06-23T15:08:25Z","revision":"65d1dda821a3","runtimeVersion":"go1.20.5","version":"v0.28.4"},"meta":{}}
 ```
 
@@ -87,13 +87,13 @@ Example output:
 Now that the controller is ready, you can start the edge router created with the 'express' process. You can start this 
 router locally by running:
 
-```bash
+```text
 startRouter
 ```
 
 Example output:
 
-```bash
+```text
 $ startRouter
 Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
 ```
@@ -103,14 +103,14 @@ Again, this will default to using `$(hostname -s)` as the host name and port 302
 
 ### Stopping the Controller and Router
 
-```bash
+```text
 stopRouter 
 stopController 
 ```
 
 Example output:
 
-```bash
+```text
 $ stopRouter 
 INFO: Router stopped.
 
@@ -123,7 +123,7 @@ INFO: Controller stopped.
 At this point you should have a functioning [Ziti Network](/learn/introduction/index.mdx). The script 
 you sourced provides another function to login to your network. Try this now by running `zitiLogin`. You should see 
 something similar to this:
-```bash
+```text
 $ zitiLogin
 Token: 40d2d280-a633-46c9-8499-ab2e005dd222
 Saving identity 'default' to ${HOME}/.ziti/quickstart/My-Mac-mini/ziti-cli.json
@@ -134,7 +134,7 @@ You can now use the `ziti` CLI to interact with Ziti!. The
 to your path, alias `ziti` if you like. Let's try to use this command to see if the edge router is online by running:
 `"${ZITI_BIN_DIR-}/ziti" edge list edge-routers`.
 
-```bash
+```text
 $ "${ZITI_BIN_DIR-}/ziti" edge list edge-routers
 id: rhx6687N.P    name: My-Mac-mini    isOnline: true    role attributes: {}
 results: 1-1 of 1
@@ -146,7 +146,7 @@ Horray! Our edge router shows up and is online!
 
 You can try out creating and running a simple echo service through ziti by running the `first-service` tutorial.
 
-```bash
+```text
 $ "${ZITI_BIN_DIR-}/ziti" demo first-service
 ```
 
@@ -171,7 +171,7 @@ Please realize that if you change these variables each of the "hostname" variabl
 Here is an example which allows you to put all the files into a folder called: `${HOME}/.ziti/quickstart/newfolder`, uses
 a host named 'localhost', and uses ports 8800 for the edge controller and 9090 for the edge router:
 
-```bash
+```text
 ZITI_NETWORK="newfolder"; \
 ZITI_CTRL_EDGE_ADVERTISED_ADDRESS=localhost; \
 ZITI_CTRL_EDGE_ADVERTISED_PORT=8800; \
@@ -187,7 +187,7 @@ source the "env" file that is placed into the location you specified. This file 
 `$HOME/.ziti/quickstart/$(hostname)/$(hostname).env`. You can source this file to place the environment variables back
 into your shell.
 
-```bash
+```text
 source $HOME/.ziti/quickstart/$(hostname)/$(hostname).env
 ```
 

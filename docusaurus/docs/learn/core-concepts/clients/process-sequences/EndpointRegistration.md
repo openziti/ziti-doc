@@ -1,6 +1,6 @@
 # Endpoint Registration
 
-```mermaid
+```textermaid
 sequenceDiagram
 title Ziti Nde Registration Flow
 autonumber 1

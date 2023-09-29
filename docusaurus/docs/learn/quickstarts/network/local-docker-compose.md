@@ -19,7 +19,7 @@ First, grab the compose file from the
 
 Using curl that would look like this:
 
-```bash
+```text
 curl -so docker-compose.yaml https://get.openziti.io/dock/docker-compose.yml
 ```
 
@@ -27,7 +27,7 @@ Next, grab the
 default [environment file](https://get.openziti.io/dock/.env)
 or just make a file in this folder that looks like this:
 
-```bash
+```text
 curl -so .env https://get.openziti.io/dock/.env
 ```
 or, if you would prefer to make your .env file manually, create a file in some way such as using the command shown below:
@@ -64,7 +64,7 @@ Once the compose file is downloaded and the `.env` file exists, you'll be able t
 Docker compose will name your containers based on the folder you were in when you started them. For me, I've made a folder
 named `docker` so all my containers start with `docker_`. You can influence how this works by adding
 `--project-name docker` (or whatever name you like) to your `docker compose` up/down commands
-```bash
+```text
 docker compose --project-name docker up 
 ```
 :::
@@ -157,7 +157,7 @@ To test, we will `docker exec` into the running controller. Notice we'll be spec
 that the project was named "docker". If you don't start your compose using `--project-name docker`, use the proper
 exec command:
 
-```bash
+```text
 docker exec -it docker-ziti-controller-1 bash
 ```
 
@@ -165,7 +165,7 @@ Once exec'ed into the controller, the `ziti` CLI will be added to your PATH for 
 alias to make it easy for you to authenticate to the Ziti controller. Run `zitiLogin` now and ensure you're 
 authenticated.
 
-```bash
+```text
 ziti@724087d30014:/persistent$ zitiLogin
 Token: 55ec6721-f33b-4101-970a-412331bd7578
 Saving identity 'default' to /persistent/ziti-cli.json
@@ -174,7 +174,7 @@ Saving identity 'default' to /persistent/ziti-cli.json
 ### Test - Edge Routers Online
 
 Once authenticated, let's see if all our routers are online by running `ziti edge list edge-routers`:
-```bash
+```text
 ziti@724087d30014:/persistent$ ziti edge list edge-routers
 ╭────────────┬───────────────────────┬────────┬───────────────┬──────┬───────────────────────╮
 │ ID         │ NAME                  │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES            │
@@ -195,7 +195,7 @@ We can see all the routers are online - excellent.
 In this compose file, we have used a script that adds an identity for each of our edge routers as well. We can see those
 by running `ziti edge list identities`:
 
-```bash
+```text
 ziti@724087d30014:/persistent$ ziti edge list identities
 ╭────────────┬───────────────────────┬────────┬────────────╮
 │ ID         │ NAME                  │ TYPE   │ ATTRIBUTES │
@@ -209,7 +209,7 @@ ziti@724087d30014:/persistent$ ziti edge list identities
 ╰────────────┴───────────────────────┴────────┴────────────╯
 results: 1-6 of 6
 
-````
+```
 
 Notice there is an identity for every router.
 
@@ -218,7 +218,7 @@ Notice there is an identity for every router.
 Recall that the controller should be able to contact both the red and blue edge routers using the underlay network.
 Let's use ping and verify:
 
-```bash
+```text
 ziti@724087d30014:/persistent$ ping ziti-private-red -c 1
 PING ziti-private-red (172.29.0.2): 56 data bytes
 64 bytes from 172.29.0.2: icmp_seq=0 ttl=64 time=0.387 ms
@@ -227,7 +227,7 @@ PING ziti-private-red (172.29.0.2): 56 data bytes
 round-trip min/avg/max/stddev = 0.387/0.387/0.387/0.000 ms
 ```
 
-```bash
+```text
 ziti@724087d30014:/persistent$ ping ziti-private-blue -c 1
 PING ziti-private-blue (172.28.0.6): 56 data bytes
 64 bytes from 172.28.0.6: icmp_seq=0 ttl=64 time=0.633 ms
@@ -242,7 +242,7 @@ Now let's exit the Ziti controller and instead attach to the private blue router
 `docker exec -it docker-ziti-private-blue-1 bash`.  Once attached to the blue router we'll verify that we cannot
 connect to the private red router:
 
-```bash
+```text
 ziti@e610d6b44166:/persistent$ ping ziti-private-red -c 1
 ping: unknown host
 ```
@@ -252,7 +252,7 @@ Unknown host - the private blue router cannot connect to the red router.
 ### Test - Underlay Network Web Test Blue
 
 While we're attached to the blue router - let's make sure we can connect to that `web-test-blue` server.  
-```bash
+```text
 ziti@e610d6b44166:/persistent$ curl http://web-test-blue:8000
 <pre>
 Hello World
@@ -304,7 +304,7 @@ Hello World
 ```
 
 Don't forget - you can also access this from the exported port 80 on your local machine too!
-```bash
+```text
 curl http://localhost:80
 <pre>
 Hello World

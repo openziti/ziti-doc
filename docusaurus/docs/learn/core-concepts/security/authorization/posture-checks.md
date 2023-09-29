@@ -13,7 +13,7 @@ Environmental state is saved as Posture Data - a set of values describing enviro
 to the controller via Posture Response sent from the client. Posture Responses are constructed from Posture Queries 
 which are reported to the client per service from the controller.
 
-```mermaid
+```textermaid
 sequenceDiagram
     Client->>+Controller: ListServices()
     Controller->>-Client: []Services

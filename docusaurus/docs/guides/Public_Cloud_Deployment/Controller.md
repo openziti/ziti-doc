@@ -315,7 +315,7 @@ You should **Turn on ufw** and **restart the VM** after the security group confi
 - ufw must be turned on for traffic to get to the VM.
 - after ufw is enabled, setup **allow** traffic for OpenZiti ports:
 
-```bash
+```text
 sudo ufw enable
 sudo ufw allow 8440:8443/tcp
 sudo shutdown -r 0
@@ -358,7 +358,7 @@ Make sure the firewall is active, it should display **Processing all rules** if 
 
 - Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Virtual machine screen.
 - Login to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
-```bash
+```text
 ssh -i <private_key> <username>@<ip>
 or
 ssh -i <private_key> <username>@<dns-name>
@@ -372,13 +372,13 @@ Use the DNS name to setup the controller with [Host OpenZiti Anywhere](/docs/lea
 - Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Instance detail screen.
 - **NOTE:** DNS name is only available if you enabled **DNS Hostnames** under VPC.
 - Login to the VM by using user name "ubuntu":
-```bash
+```text
 ssh -i <private_key> ubuntu@<ip>
 or
 ssh -i <private_key> ubuntu@<dns-name>
 ```
 - export the DNS record 
-```bash
+```text
 export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
 ```
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
@@ -390,7 +390,7 @@ Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/
 ![Diagram](/img/public_cloud/GCP-login1.jpg)
 
 - export the DNS record 
-```bash
+```text
 export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
 ```
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
@@ -400,7 +400,7 @@ Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/
 
 - Once the VM is created, we can get the IP address of the droplet from the Resources screen.
 - Login to the VM by using user "root" and IP address:
-```bash
+```text
 ssh root@<ip>
 ```
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
@@ -413,7 +413,7 @@ This ensures the Controller setup by the quickstart is advertising the external 
 
 - Once the VM is created, we can get the IP address of the VM from the instance details screen.
 - Login to the VM by using user name "ubuntu" and the IP address:
-```bash
+```text
 ssh -i <private_key> ubuntu@<ip>
 ```
 
@@ -427,12 +427,12 @@ This ensures the Controller setup by the quickstart is advertising the external 
 
 - Once the VM is created, we can get the IP address of the VM from the Devices screen.
 - Login to the VM by using user name "ubuntu" and the IP address:
-```bash
+```text
 ssh -i <private_key> ubuntu@<ip>
 ```
 
 - export the DNS record 
-```bash
+```text
 export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
 ```
 Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
@@ -454,14 +454,14 @@ To setup npm executables, you can follow [install Node.js guide](https://www.dig
 For example, this is how to install the version of node needed for ZAC.
 
 Setup the repo:
-```bash
+```text
 cd ~
 curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
 sudo bash nodesource_setup.sh
 ```
 
 Install nodejs:
-```bash
+```text
 sudo apt install nodejs
 ```
 
@@ -475,12 +475,12 @@ Following helpers are needed to complete the guides for router and services.
 
 ### 1.5.1 Add Environment Variables Back to the Shell
 Source the environment variables when you log back in the shell
-```bash
+```text
 source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 ```
 
 If the environment variables are sourced correctly, you can do the following to check:
-```bash
+```text
 echo $ZITI_HOME
 ```
 **Output:**
@@ -490,22 +490,22 @@ echo $ZITI_HOME
  
 ### 1.5.2 Change Ziti edge admin password
 Find the Current admin edge login password of controller (if you forget the password):
-```bash
+```text
 grep "export ZITI_PWD" ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 ```
 Or if you have environment variable setup correctly:
-```bash
+```text
 echo $ZITI_PWD
 ```
 To update the passwd
-```bash
+```text
 ziti edge update authenticator updb -s
 ```
 **Important:** if you change the password, you must update the passwd (ZITI_PWD) in the "~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env" file. 
 
 ### 1.5.3 Some useful command for the Router
 ** login the CLI**
-```bash
+```text
 zitiLogin
 ```
 

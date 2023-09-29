@@ -16,7 +16,7 @@ The Prometheus metrics api is not bound to any interface by default. The metrics
 
 The metric api can be configured to listen on its own combination of network interface and port by adding a new section under the `web` configuration
 
-```yaml
+```text
 web
   # Binding for other Ziti APIs
   - name: apis
@@ -68,7 +68,7 @@ web
 
 The metrics binding can be added to an existing listener in the controller. 
 
-```yaml
+```text
 web
   -name: apis
    bindpoints:
@@ -92,7 +92,7 @@ The certificate is completely stand-alone - it does not need to be signed by Zit
 
 The configuration is added as an option in the metrics binding.  The file must be an x509 certificate. 
 
-```yaml
+```text
      - binding: metrics
         options: {
           scrapeCert: "/etc/prometheus/prom-client.crt"
@@ -105,7 +105,7 @@ OpenZiti can export timestamps in the Prometheus metrics. These timestamps can b
 
 Timestamps are disabled by default, and can be enabled by setting a the `includeTimestamps` option to `true` in the metrics binding:
 
-```yaml
+```text
 web
   -name: apis
    bindpoints:
@@ -133,7 +133,7 @@ Prometheus will silently discard metrics that are older than five minutes.
 
 The `/metrics` api requires TLS configuration in Prometheus. The Prometheus scrape config must have the ziti web public key, or be configured to ignore private keys.
 
-```yaml
+```text
   - job_name: ziti
     scheme: https
     metrics_path: /metrics
@@ -153,7 +153,7 @@ The `/metrics` api requires TLS configuration in Prometheus. The Prometheus scra
 
 It's a good idea to have metrics protected by a certificate to prevent nefarious actors from pulling metrics about your network.  The Prometheus scrape configuration can be configured with a keystore for this purpose:
 
-```yaml
+```text
  - job_name: ziti
     scheme: https
     metrics_path: /metrics
@@ -182,7 +182,7 @@ In this example you will:
 
 #### Create a cert for metric scraping
 
-```bash
+```text
 # Create the certificate and signing request
 openssl req  -new  -newkey rsa:2048  -nodes  -keyout prom-client.key  -out prom-client.csr
 
@@ -202,7 +202,7 @@ Best practices is to use a separate metrics listener that is only accessible fro
 
 Add this text to the `web` section of your network controller configuration file
 
-```yaml
+```text
   - name: metrics-localhost
     bindPoints:
       - interface: 127.0.0.1:2112
@@ -219,7 +219,7 @@ Add this text to the `web` section of your network controller configuration file
 
 I use `curl` to test my keys when I set up metrics.  If Ziti is configured to bind metrics to `127.0.0.1:2112` then curl command will be:
 
-```bash
+```text
 curl -i -k --cert /path/to/prom-client.crt --key /path/to/prom-client.key https://127.0.0.1:2112/metrics
 ```
 
@@ -238,7 +238,7 @@ The key is added to Prometheus by referencing the crt and key files from the Zit
 
 Your scrape config will look something like this:
 
-```yaml
+```text
 global:
   scrape_interval: 10s
   scrape_timeout: 10s

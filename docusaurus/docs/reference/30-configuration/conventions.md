@@ -40,7 +40,7 @@ syntax `${VARIABLE}` is used.
 
 Example:
 
-```yaml
+```text
 db: ${ZITI_DATA}/db/ctrl.db
 ```
 
@@ -85,7 +85,7 @@ present on the host machine. This allows for access to hardware backed private k
 
 Example Identity Section (Client & Server use same key):
 
-```yaml
+```text
 identity:
   cert: "file:ctrl-client.cert.pem"
   server_cert: "pem:-----BEGIN CERTIFICATE-----\nMIIEtzCCAp+gAwIBAgICEA0wDQYJKoZIhvcNAQELBQAwgYsxCzAJBgNVBAYTAlVT..."
@@ -145,7 +145,7 @@ defined in code and exposed on multiple interfaces/networks through configuratio
 
 Example:
 
-```yaml
+```text
 web:
   - name: all-apis-localhost
     bindPoints:
@@ -173,7 +173,7 @@ web:
 
 The structure of the `web` section is an array of API exposure options:
 
-```yaml
+```text
 web:
   - name: API Exposure 1
     ...

@@ -15,7 +15,7 @@ or the Ziti [Edge Management API](docs/reference/developer/api/02-edge-managemen
 Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](docs/reference/developer/api/01-edge-client-reference.mdx)
 and [Edge Management API](docs/reference/developer/api/02-edge-management-reference.mdx).
 
-```mermaid
+```textermaid
 graph TD
 A[Unauthenticated] -->|Submit Primary Credentials| B{Valid?}
 B --> C[No] --> A

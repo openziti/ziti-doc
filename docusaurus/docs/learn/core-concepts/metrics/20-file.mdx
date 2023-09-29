@@ -14,7 +14,7 @@ The reporting interval is defined in the `metrics.reportInterval` property. Whil
 
 Example:
 
-```yaml
+```text
 metrics:
   reportInterval: 20s
 ```
@@ -23,7 +23,7 @@ Routers support an additional configuration parameter `MessageQueueSize` which i
 
 Example:
 
-```yaml
+```text
 metrics:
   reportInterval: 20s
   messageQueueSize: 20  // Default 10
@@ -53,7 +53,7 @@ The subscription has three components
 
 ##### Example:
 
-```yaml
+```text
 events:
   allControllerMetrics:
     subscriptions:
@@ -89,7 +89,7 @@ For example, `name-2022-06-07T18-50-44.568.log`
 
 Write 100mb files, saving 2 of them.
 
-```yaml
+```text
     handler:
       type: file
       format: json
@@ -103,7 +103,7 @@ Write 100mb files, saving 2 of them.
 
 Controller configuration file:
 
-```yaml
+```text
 metrics:
   reportInterval: 20s
 
@@ -135,7 +135,7 @@ events:
 
 Router configuration files:
 
-```yaml
+```text
 metrics:
   reportInterval: 20s
 ```

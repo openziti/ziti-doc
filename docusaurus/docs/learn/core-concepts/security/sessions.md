@@ -171,7 +171,7 @@ the timeout has been reached, signaling an API Session removal. Activities that 
 The API Session timeout defaults to 30 minutes and can be configured in `edge.api.sessionTimeout` in the controller
 configuration file.
 
-```yaml
+```text
 edge:
   api:
   ...
