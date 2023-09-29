@@ -4,7 +4,7 @@
 
 All responses from APIs have the following outer envelope:
 
-```json
+```text
 {
   "data": ...,
   "meta": {...},
@@ -18,7 +18,7 @@ information about the requested entity that may be useful to clients (e.g. pagin
 
 The `error` section contains errors in the following format:
 
-```json
+```text
 {
   "code": "string constant error code",
   "message": "string human readable value",
@@ -28,7 +28,7 @@ The `error` section contains errors in the following format:
 
 The `cause` field can either be another nested `error` or a `field error`:
 
-```json
+```text
 {
   "field": "the name of the field",
   "reason": "a message explaining the issue",

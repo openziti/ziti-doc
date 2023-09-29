@@ -13,7 +13,7 @@ Environmental state is saved as Posture Data - a set of values describing enviro
 to the controller via Posture Response sent from the client. Posture Responses are constructed from Posture Queries 
 which are reported to the client per service from the controller.
 
-```mermaid
+```textermaid
 sequenceDiagram
     Client->>+Controller: ListServices()
     Controller->>-Client: []Services
@@ -85,7 +85,7 @@ build number will be used instead.
 
 `POST /edge/management/v1/posture-checks`
 
-```json
+```text
 {
   "typeId": "OS",
   "name": "windows-and-android",
@@ -119,7 +119,7 @@ that are not specified will fail the check.
 
 `POST /edge/management/v1/posture-checks`
 
-```json
+```text
 {
   "typeId": "MAC",
   "name": "mac-list",
@@ -155,7 +155,7 @@ is given a five-minute grace period before the posture check begins to fail.
 
 `POST /edge/management/v1/posture-checks`
 
-```json
+```text
 {
   "typeId": "MFA",
   "timeoutSeconds": 3600,
@@ -191,7 +191,7 @@ sha1 fingerprints (thumbprints) of valid signing certificates.
 
 `POST /edge/management/v1/posture-checks`
 
-```json
+```text
 {
   "typeId": "PROCESS_MULTI",
   "name": "my-proc-multi",
@@ -228,7 +228,7 @@ The `DOMAIN` Posture Check is used to verify that a Windows client has joined a 
 
 `POST /edge/management/v1/posture-checks`
 
-```json
+```text
 {
   "typeId": "DOMAIN",
   "name": "domain-list",
@@ -251,7 +251,7 @@ For troubleshooting purposes it is possible to view an identity's current Postur
 
 #### Response
 
-```json
+```text
 {
   "data": {
     "apiSessionPostureData": {},
@@ -308,7 +308,7 @@ For troubleshooting purposes it is possible to view the last fifty failed servic
 
 #### Response
 
-```json
+```text
 {
   "meta": {},
   "data": [

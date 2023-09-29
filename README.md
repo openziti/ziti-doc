@@ -50,7 +50,7 @@ To run this script locally, define the necessary variables in your environment.
 
 Docusaurus plugins are distributed as NodeJS packages. This project uses `yarn`, not `npm`, to manage packages, build the project, and run the development server. To add a NodeJS package:
 
-```bash
+```text
 cd ./docusaurus
 yarn add @hotjar/browser
 ```
@@ -61,7 +61,7 @@ This will update `./docusaurus/package.json` and `./docusaurus/yarn.lock`. Test 
 
 Docusaurus plugins are distributed as NodeJS packages. This project uses `yarn`, not `npm`, to manage packages, build the project, and run the development server. To upgrade a NodeJS package:
 
-```bash
+```text
 cd ./docusaurus
 yarn upgrade @docusaurus/plugin-content-docs
 ```
@@ -84,7 +84,7 @@ With these scripts, you can test all the links in the site's pages and popular i
 
 * [crawl-for-broken-links.sh](./check-links/crawl-for-broken-links.sh): uses `docker` to run `muffet` which crawls the given base URL looking for broken links
 
-  ```bash
+  ```text
   # check local dev server for broken outgoing links to itself and other sites, excluding a few hosts that are sensitive to being hammered by a crawler
   ./crawl-for-broken-links.sh http://127.0.0.1:3000
 
@@ -94,12 +94,12 @@ With these scripts, you can test all the links in the site's pages and popular i
 
 * [check-links.sh](./check-links/check-links.sh): uses `curl` to try a list of URL paths from a file
 
-  ```bash
+  ```text
   # check a list of popular incoming links from external sites
   ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
   ```
 
-  ```bash
+  ```text
   ./check-links.sh https://blog.openziti.io ./popular-blog-links.txt
   ```
 

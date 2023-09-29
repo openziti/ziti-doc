@@ -4,7 +4,7 @@ authors: dovholuknf
 
 # `zscp` Cheat Sheet
 
-```bash
+```text
 # establish some variables which are used below
 service_name=zscpSvc
 client_identity="${service_name}"Client

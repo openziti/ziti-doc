@@ -29,7 +29,7 @@ Follow these steps to enroll an identity with a one-time token:
 
 **Example Usage:**
 
-```bash
+```text
 ziti edge enroll \
     --jwt ${jwt_file} \
     --out ${identity_config_file}
@@ -45,12 +45,12 @@ confident you understand the risks involved in doing so.
 
 **Example Usage for `ziti-edge-tunnel` CLI**
 
-```bash
+```text
 # enroll from a token file
 ./ziti-edge-tunnel enroll --jwt ./myTunneler.jwt --identity ./myTunneler.json
 ```
 
-```bash
+```text
 # enroll from stdin
 ./ziti-edge-tunnel enroll --jwt - --identity ./myTunneler.json < ./myTunneler.jwt
 ```
@@ -69,7 +69,7 @@ Follow these steps to enroll a 3rd Party CA - one-time token identity:
 
 **Example Usage:**
 
-```bash
+```text
 ziti edge enroll \
     --cert ${user_certificate} \
     --key ${user_private_key} \
@@ -95,7 +95,7 @@ the fully qualified address of the Ziti Controller api and `${id}` represents th
 
 **Example Usage:**
 
-```bash
+```text
 ziti edge enroll \
     --cert ${user_certificate} \
     --key ${user_private_key} \

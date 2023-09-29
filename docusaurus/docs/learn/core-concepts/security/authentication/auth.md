@@ -15,7 +15,7 @@ or the Ziti [Edge Management API](docs/reference/developer/api/02-edge-managemen
 Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](docs/reference/developer/api/01-edge-client-reference.mdx)
 and [Edge Management API](docs/reference/developer/api/02-edge-management-reference.mdx).
 
-```mermaid
+```textermaid
 graph TD
 A[Unauthenticated] -->|Submit Primary Credentials| B{Valid?}
 B --> C[No] --> A
@@ -153,7 +153,7 @@ Similar to JWT primary authentication, a valid JWT must be present in the `Authe
 
 `POST /edge/client/v1/authenticate?method=password`
 
-```json
+```text
 {
   "username": "my-name",
   "password": "my-password"
@@ -166,7 +166,7 @@ Note: The TLS connection to the controller MUST use a valid client certificate
 
 `POST /edge/management/v1/authenticate?method=cert`
 
-```json
+```text
 {}
 ```
 
@@ -175,7 +175,7 @@ Note: The TLS connection to the controller MUST use a valid client certificate
 `POST /edge/client/v1/authenticate?method=ext-jwt`
 HTTP Header: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...`
 
-```json
+```text
 {}
 ```
 
@@ -183,7 +183,7 @@ HTTP Header: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...`
 
 `POST /edge/client/v1/authenticate/mfa`
 
-```json
+```text
 {
   "code": "123456"
 }

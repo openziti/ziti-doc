@@ -39,22 +39,22 @@ you can perform the following steps.
 
 1. Clone the ziti-console repo from github:
 
-   ```bash
+   ```text
    git clone https://github.com/openziti/ziti-console.git "${ZITI_HOME}/ziti-console"
    ```
 
 1. Install Node modules:
 
-   ```bash
+   ```text
    cd "${ZITI_HOME}/ziti-console"
    npm install
-   ````
+   ```
 
 1. Use the ziti-controller certificates for the Ziti Console:
 
    Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
 
-   ```bash
+   ```text
    ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/certs/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
    ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
    ```
@@ -64,7 +64,7 @@ you can perform the following steps.
    you need to in order to get the necessary function. Either inspect the script and find the function, download and source it,
    or source it directly from the internet (direct sourcing from internet shown below)
 
-   ```bash
+   ```text
    source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/ziti-cli-functions.sh)"
    createZacSystemdFile
    sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
@@ -74,7 +74,7 @@ you can perform the following steps.
 
    If you do not have systemd installed or if you just wish to start ZAC you can simply issue:
 
-   ```bash
+   ```text
    node "${ZITI_HOME}/ziti-console/server.js"
    Initializing TLS
    TLS initialized on port: 8443
@@ -84,7 +84,7 @@ you can perform the following steps.
 1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command
    `sudo systemctl status ziti-console --lines=0 --no-pager`
 
-   ```bash
+   ```text
    $ sudo systemctl status ziti-console --lines=0 --no-pager
     ● ziti-console.service - Ziti-Console
     Loaded: loaded (/etc/systemd/system/ziti-console.service; disabled; vendor preset: enabled)
@@ -109,7 +109,7 @@ the OpenZiti Network you can copy the certificates generated when the controller
 Shown is an example which copies the certs from the OpenZiti container and uses them with ZAC. We'll copy the files
 from the docker named volume `myPersistentZitiFiles` and put them into a folder at `$HOME/.ziti/zac-pki`.
 
-```bash
+```text
 mkdir -p $HOME/.ziti/zac-pki
 
 docker run -it --rm --name temp \
@@ -129,7 +129,7 @@ With the certificates copied, you will be able to start the ZAC using one Docker
 will expose the ZAC http and https ports to your local computer so that you can access the ZAC from outside of Docker.
 If you customized any of these paths, you'll need to replace the paths specified accordingly (the '-v' lines).
 
- ```bash
+ ```text
  docker run --rm \
         --name zac \
         -p 1408:1408 \
