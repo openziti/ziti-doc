@@ -7,27 +7,28 @@ This guide will help you discover the best strategy and tool for connecting a Ku
 ```textermaid
 graph TB; 
   A{Pod connects to an </br>OpenZiti Service?}
-  A -- Yes --> B{Intercept at pod or </br>node level?}
+  A -- Yes --> B{Intercept at pod or </br>cluster level?}
   subgraph egressGraph ["&nbsp;"]
     direction BT
-    B -- NODE --> F(["transparent node proxy </br>(tunneler daemonset) </br>provides DNS and IP interception to </br>all pods on selected nodes"])
+    B -- CLUSTER --> F(["TCP proxy cluster service </br>provides cluster DNS and TCP proxy </br>for each Ziti service"])
     B -- POD ---> G{Pod uses DNS or </br>static IP to connect to </br>the OpenZiti Service?}
-    G -- YES --> H(["transparent sidecar </br>(iptables tproxy)</br> provides DNS and </br>IP interception to the pod"])
-    G -- NO ---> I(["loopback sidecar </br>(tcp proxy)</br>binds a local port to </br>each OpenZiti Service"])
+    G -- YES --> H(["tproxy sidecar</br> provides DNS and </br>IP interception to the pod"])
+    G -- NO ---> I(["tcp proxy sidecar</br>binds a local port to </br>each OpenZiti Service"])
   end
   class egressGraph subgraphClass
   A -- No --------> K{OpenZiti Router </br>is installed?}
   subgraph ingressGraph ["&nbsp;"]
-    K -- Yes --> J([OpenZiti Router provides </br>ingress to</br>cluster services])
+    K -- Yes --> J([OpenZiti Router reverse proxy </br>provides ingress to</br>cluster services])
     K -- No ---> C{Nginx </br>is </br>installed?}
     C -- Yes --> D([Nginx container with </br>OpenZiti proxy module </br>provides ingress to</br>cluster services])
-    C -- No ---> E([ziti-host </br>reverse proxy pod</br>provides ingress </br>to cluster services])
+    C -- No ---> E([reverse proxy tunnel pod</br>provides ingress </br>to cluster services])
   end
-  click D "../../securing-apis/aks-api-with-nginx-ziti-module/" "OpenZiti Nginx Module"
-  click E "./kubernetes-host/" "ziti-host"
-  click F "./kubernetes-daemonset/" "node proxy"
-  click H "./kubernetes-sidecar/" "transparent sidecar"
-  click I "#loopback-proxy-sidecar" "loopback sidecar"
+  click D "#nginx-proxy-module" "OpenZiti Nginx Module"
+  click E "#reverse-proxy-tunnel-pod" "ziti-host"
+  click F "#tcp-proxy-cluster-service" "cluster proxy"
+  click H "#transparent-proxy-sidecar" "transparent sidecar"
+  click I "#tcp-proxy-sidecar" "loopback sidecar"
+  click J "#reverse-proxy-router-pod" "cluster reverse proxy"
 ```
 
 ## Strategies and Solutions
@@ -38,15 +39,15 @@ In the chart above, there are several strategies and solutions for connecting a 
 
 An OpenZiti Tunneler can be used to intercept pod egress. One important thing to know is that the OpenZiti Tunneler that is used in this way may also be used to "host" OpenZiti Services in order to provide ingress to cluster services.
 
-#### [Node Proxy Daemonset](./kubernetes-daemonset.md)
+<!-- #### [Node Proxy Daemonset](./kubernetes-daemonset.md)
 
-Deploying a daemonset of privileged `ziti-edge-tunnel run` pods on selected nodes is a simple way to enable OpenZiti services in a cluster. The daemonset pods intercept egress from pods and provide a DNS nameserver for CoreDNS. Like any other OpenZiti Tunneler, the OpenZiti Identity used by the daemonset may be configured to host OpenZiti Services, i.e. provide OpenZiti ingress to cluster services. For more information, see the [node proxy](./kubernetes-daemonset.md) page.
+Deploying a daemonset of privileged `ziti-edge-tunnel run` pods on selected nodes is a simple way to enable OpenZiti services in a cluster. The daemonset pods intercept egress from pods and provide a DNS nameserver for CoreDNS. Like any other OpenZiti Tunneler, the OpenZiti Identity used by the daemonset may be configured to host OpenZiti Services, i.e. provide OpenZiti ingress to cluster services. For more information, see the [node proxy](./kubernetes-daemonset.md) page. -->
 
 #### [Transparent Proxy Sidecar](./kubernetes-sidecar.md)
 
 You can deploy a transparent proxy sidecar to intercept pod egress. The sidecar provides a DNS nameserver that is used by the workload application to resolve OpenZiti Service addresses. The sidecar container runs `ziti tunnel tproxy` to create IPTables TPROXY rules in the pod. For more information, see the [transparent proxy sidecar](./kubernetes-sidecar.md) quickstart.
 
-#### [Loopback Proxy Sidecar](./kubernetes-sidecar.md)
+#### [TCP Proxy Sidecar](./kubernetes-sidecar.md)
 
 You can deploy a loopback proxy sidecar for pod egress to OpenZiti Services. The sidecar binds OpenZiti Services to a local port on the pod's loopback interface, e.g., 127.0.0.1:8443. The workload application must be configured to connect to the local port. This mode of operation has a few differences in comparison to the [transparent proxy sidecar](./kubernetes-sidecar.md) quickstart.
 
@@ -54,18 +55,22 @@ You can deploy a loopback proxy sidecar for pod egress to OpenZiti Services. The
 2. The sidecar container does not need the CAP_NET_ADMIN capability.
 3. The sidecar container does not need a `dnsPolicy` or explicit nameserver.
 
+#### [TCP Proxy Cluster Service](/guides/kubernetes/hosting/kubernetes-router.mdx)
+
+The OpenZiti Router can be deployed to provide a cluster-wide proxy for OpenZiti Services, optionally exposing the Ziti Services' proxy ports with an Ingress or LoadBalancer. This is accomplished by first creating the router with tunnel mode enabled, then deploying the router Helm chart with input values specifying each Ziti Service for which the router's tunnel identity is authorized by a Dial Service Policy. For more information, see the [OpenZiti Router](/guides/kubernetes/hosting/kubernetes-router.mdx) page. 
+
 ### Ingress to Cluster Services
 
 Any OpenZiti Tunneler can be used to "host" an OpenZiti Service. This hosting begins a few moments after an OpenZiti Service becomes authorized for the OpenZiti Identity in use by the SDK. This section is about different ways to deploy an OpenZiti Tunneler to provide ingress to cluster services.
 
-#### [OpenZiti Router](/guides/kubernetes/hosting/kubernetes-router.mdx)
+#### [Reverse Proxy Router Pod](/guides/kubernetes/hosting/kubernetes-router.mdx)
 
-The OpenZiti Router's built-in tunneler can provide ingress to cluster services. This is done by creating the router with tunneler mode enabled, and then installing the OpenZiti Router with Helm with the tunneler mode set to `host` (the default). For more information, see the [OpenZiti Router](/guides/kubernetes/hosting/kubernetes-router.mdx) page.
+The OpenZiti Router's built-in tunneler can reverse-proxy cluster services for Ziti clients. This is accomplished by creating the router with tunneler mode enabled, and then installing the OpenZiti Router Helm chart with the tunneler mode set to `host` (the default). For more information, see the [OpenZiti Router](/guides/kubernetes/hosting/kubernetes-router.mdx) page.
 
 #### [Nginx Proxy Module](/guides/securing-apis/aks-api-with-nginx-ziti-module.md)
 
 The OpenZiti Nginx Proxy Module can be used to provide ingress to cluster services. The module binds OpenZiti Services to an Nginx stream context and forward requests to the configured upstreams. Unlike the rest of these solutions, the Nginx module is not a full tunneler. The main difference for writing OpenZiti configurations for the module is that it will honor the upstreams that are set in the Nginx configuration, ignoring the `host.v1` addresses set in the OpenZiti config. For more information, see the [OpenZiti Nginx Proxy Module](/guides/securing-apis/aks-api-with-nginx-ziti-module.md) guide.
 
-#### [ziti-host Reverse Proxy Pod](./kubernetes-host.mdx)
+#### [Reverse Proxy Tunnel Pod](./kubernetes-host.mdx)
 
 The `ziti-host` Helm chart deploys a headless service and can be used to provide ingress cluster services. The pod runs `ziti-edge-tunnel run-host` to bind OpenZiti Services and forwards requests arriving via OpenZiti to their configured host addresses inside the cluster. For more information, see the [ziti-host](./kubernetes-host.mdx) page.
