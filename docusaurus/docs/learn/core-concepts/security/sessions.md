@@ -1,5 +1,7 @@
 # Session Types
 
+Ziti has API Session and Session types.
+
 ## API Session
 
 API Sessions represent a client that is either partially or fully authenticated as a specific Ziti Identity.
@@ -193,11 +195,11 @@ A client may terminate its own API Session at any time by calling: `DELETE /edge
 
 ## Session
 
-Session represent access to a specific service for dialing or binding. They are scoped to the
+A Session represents access to a specific service for dialing or binding. They are scoped to the
 [API Session](#api-session) that was used to create them. They are requested from the
 controller by a client through the Edge Client API. The result of that request is a security token representing
 the Session and a list of Edge Routers that the client may use to dial or bind the target service through.
 
 Sessions are removed when the parent [API Session](authentication/auth.md#api-sessions) is removed,
-[policies](authorization/policies/overview.mdx) are changed to deny access, or when [Posture Checks](authorization/posture-checks.md) enter an
-invalid state for the target service.
+[policies](authorization/policies/overview.mdx) are changed to deny access, or when [Posture
+Checks](authorization/posture-checks.md) enter an invalid state for the target service.

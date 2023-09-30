@@ -19,7 +19,7 @@ Application Client ->Ziti SDK : TCP Connection (3 way handshake)
 note over Ziti SDK : Edge Router Selection
 Ziti SDK ->Controller : Dial Request
 
-Ziti SDK -> Controller :Initiating Edge Router\nEdge Session Token\nService ID\nDial Options
+Ziti SDK -> Controller :Initiating Edge Router's\nSession Token\nService ID\nDial Options
 
 
 

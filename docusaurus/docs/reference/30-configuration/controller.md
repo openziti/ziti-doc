@@ -256,8 +256,8 @@ omitted, it will not be output. The list of valid event types and their options 
 - `edge.entityCounts` - (optional) Edge entity counts (API Sessions, sessions, routers, etc.)
     - `interval` - (optional) the time interval to generate entity count events on (e.g. "5s", "
       5000ms", "1h")
-- `edge.sessions`  - (optional) Edge Session events
-    - `include` - (optional) a string or array of strings that specify which session events to
+- `edge.sessions`  - (optional) Session events
+    - `include` - (optional) a string or array of strings that specify which Session events to
       include ("created"
       and/or "deleted")
 - `fabric.circuits`  - (optional) Fabric circuit events

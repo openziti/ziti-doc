@@ -5,7 +5,7 @@ Metrics are reported to the log files, locale in /var/log/ziti by default.  Ther
 | Metric | Type | Source | Description|
 |------------------------|-----------|------------|-----------------------------------------------------------------------------------------------------|
 |api-session.create | Histogram | controller | Time to create api sessions|
-|api.session.enforcer.run | Timer | controller | How long it takes the api session policy enforcer to run|
+|api.session.enforcer.run | Timer | controller | How long it takes the API Session policy enforcer to run|
 |bolt.open_read_txs | Gauge | controller | Current number of open bbolt read transactions|
 |ctrl.latency | Histogram | controller | Per control channel latency|
 |ctrl.queue_time | Histogram | controller | Per control channel queue time (between send and write to wire)|
@@ -15,8 +15,8 @@ Metrics are reported to the log files, locale in /var/log/ziti by default.  Ther
 |ctrl.tx.bytesrate | Meter | controller | Per control channel send data rate|
 |ctrl.tx.msgrate | Meter | controller | Per control channel send message rate|
 |ctrl.tx.msgsize | Histogram | controller | Per control channel send messsage size distribution|
-|edge.invalid_api_tokens | Meter | router | Number of invalid api session token encountered|
-|edge.invalid_api_tokens_during_sync | Meter | router | Number of invalid api session token encountered while a sync is in progress|
+|edge.invalid_api_tokens | Meter | router | Number of invalid API Session token encountered|
+|edge.invalid_api_tokens_during_sync | Meter | router | Number of invalid API Session token encountered while a sync is in progress|
 |egress.rx.bytesrate | Meter | router | Data rate of data received via xgress, originating from terminators. Per router.|
 |egress.rx.msgrate | Meter | router | Message rate of data received via xgress, originating from terminators. Per router.|
 |egress.rx.msgsize | Histogram | router | Message size distribution of data received via xgress, originating from terminators. Per router.|
@@ -49,7 +49,7 @@ Metrics are reported to the log files, locale in /var/log/ziti by default.  Ther
 |service.policy.enforcer.run | Timer | controller | How long it takes the service policy enforcer to run|
 |service.policy.enforcer.run.deletes | Meter | controller | How many sessions are deleted by the service policy enforcer|
 |services.list | Histogram | controller | Time to list services|
-|session.create | Histogram | controller | Time to create a session|
+|session.create | Histogram | controller | Time to create an API Session|
 |xgress.ack_duplicates | Meter | router | Number of duplicate acks received. Indicates over-eager retransmission|
 |xgress.ack_failures | Meter | router | Number of failures sending acks|
 |xgress.acks.queue_size | Gauge | router | Number of acks queued to send|

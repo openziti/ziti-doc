@@ -11,7 +11,7 @@ Grafana has a marvelous datasource type called [Infinity](https://grafana.com/gr
 ### Configure the datasource
 The configuration of the datasource is simple, but a little nonintuitive.
 
-We set the name of the server, in this case our OpenZiti Network Controller, but no authentication.  This seems odd for a secure network, but the datasource does not provide (at this level) the tools we need to interact with the authentication endpoint to receive an API session token.  
+We set the name of the server, in this case our OpenZiti Network Controller, but no authentication.  This seems odd for a secure network, but the datasource does not provide (at this level) the tools we need to interact with the authentication endpoint to receive an API Session token.  
 
 ![Infinity datasource authentication configuration](/img/Infinity_noAuth.png)
 
@@ -33,7 +33,7 @@ In the network section, we can provide the CA certificate for the controller, or
  
  ![Variable query URL Options configuration](/img/bearer_token_variable_url_options.png) 
 
-- In the Parsing options and Result fields, enter the below.  The Infinity datasource provides JSONPath functionality, which is used here to extract the API session token for use in the panel queries.
+- In the Parsing options and Result fields, enter the below.  The Infinity datasource provides JSONPath functionality, which is used here to extract the API Session token for use in the panel queries.
    
    ![Variable parsing options configuration](/img/bearer_token_variable_parsing.png)
 

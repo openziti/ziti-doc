@@ -36,7 +36,7 @@ the mesh.
 
 Controller APIs provide ways for clients (SDKs or otherwise) to interact with a network. The [Edge Management API](/reference/developer/api/02-edge-management-reference.mdx)
 is used for configuration and maintenance. The [Edge Client API](/reference/developer/api/01-edge-client-reference.mdx)
-is used to allow clients to authenticate, discover services, request service [Sessions](sessions.md#session),
+is used to allow clients to authenticate, discover services, request [Sessions](sessions.md#session),
 discover Edge Routers, and to perform basic self-maintenance.
 
 Access to the APIs requires [authentication](authentication/auth.md) which results in an [API Session](authentication/auth.md#api-sessions)
@@ -67,9 +67,9 @@ establish a `service` connection of either type the following is required:
 - a [Session](sessions.md#session) for the target service and intent (dial/bind)
 
 [Sessions](sessions.md#session) are issued by the controller's Edge Client API. A valid [Sessions](sessions.md#session) token 
-must be included with dial and bind requests. Edge Routers validate Session tokens continuously. If valid, the Edge 
+must be included with dial and bind requests. Edge Routers validate API Session tokens continuously. If valid, the Edge 
 Router will facilitate the connecting the client to a service or registering the client as a host.
 
 Should a [Session](sessions.md#session) become invalid at any point, any existing `service` connection that 
-was established using the invalidated session will be terminated. Attempts to re-establish connection with the 
+was established using the invalidated Session will be terminated. Attempts to re-establish connection with the 
 invalidated [Session](sessions.md#session) will be refused.
