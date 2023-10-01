@@ -1085,7 +1085,7 @@ INFO[0000] new service session                           session token=806969a4-
 Login to the Client (**ingress-tunnel**), try the service with the service name we create and any text in the "name" field.
 
 ```
-curl http:/<service name>?name=<any name>
+curl http://<service name>?name=<any name>
 ```
 
 example:
@@ -1134,7 +1134,7 @@ go mod tidy
 go build -o build ./...
 ```
 
-If all goes well, you will find a **chat-client** and **chat-server** binary under that directory.
+If all goes well, you will find a **chat-client** and **chat-server** binary under the "build" directory.
 
 Next, you need to create identities for this SDK Application client ("chat.client") and server ("chat.server").
 
