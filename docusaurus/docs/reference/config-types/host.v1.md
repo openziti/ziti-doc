@@ -116,7 +116,8 @@ Health checks and listen options also can be specified for each terminator.
   duration. Examples: `500ms`, `5s`, `1m`. Defaults to `5s`.
 * `connectTimeoutSeconds` - Same as `connectTimeout` but specified as the number of seconds using a
   positive integer. If both `connectTimeout` and `connectTimeoutSeconds` are specified, then
-  `connectTimeout` will be used. Defaults to 5.
+  `connectTimeout` will be used. Defaults to 5. This option will be deprecated in favor of
+  `connectTimeout` in the future.
 * `cost` - Static cost of the terminator. Must be a value between 0 and 65535. Default to 0.
 * `identity` - Associate the hosting terminator with the specified identity.
     * '$tunneler_id.name' resolves to the name of the hosting tunneler's identity.
