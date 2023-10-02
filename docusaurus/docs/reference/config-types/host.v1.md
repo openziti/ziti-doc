@@ -7,11 +7,11 @@ sidebar_position: 15
 
 The `host.v1` configuration type defines how edge routers or tunnelers can make outgoing connections
 for associated services. The config type also allows specifying health checks for the service. An
-endpoint in a `host. v1` config can be specified explicitly or can be configured to use information
+endpoint in a `host.v1` config can be specified explicitly or can be configured to use information
 passed through from a tunneler intercepting traffic, allowing it to forward traffic.
 
-The `host. v1` type only allows defining a single host endpoint. If multiple endpoints are required,
-use the [`host. v2`](./host.v2.md) config type instead.
+The `host.v1` type only allows defining a single host endpoint. If multiple endpoints are required,
+use the [`host.v2`](./host.v2.md) config type instead.
 
 ## Endpoint Configuration
 
@@ -38,17 +38,17 @@ This service is hosted by one application server.
 Services that are forwarding traffic from an OpenZiti tunneling proxy may use the following
 properties to indicate what should be forwarded:
 
-* `forwardProtocol` - flag indicating that the protocol of the forwarded connection is to be used.
+* `forwardProtocol` - flag indicating that the protocol of the intercepted connection is to be used.
   Can only be set to true.
 * `allowedProtocols` - the list of allowed protocols. Valid values include `tcp` and `udp`
-* `forwardAddress` - flag indicating that the target address of the forwarded connection is to be
+* `forwardAddress` - flag indicating that the target address of the intercepted connection is to be
   used. Can only be set to true.
 * `allowedAddresses` - the list of allowed addresses. Valid values include IPs, hostnames and CIDRs
-* `forwardPort` - flag indicating that the target port of the forwarded connection is to be used.
+* `forwardPort` - flag indicating that the target port of the intercepted connection is to be used.
   Can only be set to true.
 * `allowedPortRanges` - the list of allowed port ranges.
     * Example: `allowedPortRanges: [ {"low" : 80, "high" : 80}, {"low" : 8080, "high" : 8090} ]`
-* `allowedSourceAddresses` - list of addresses in IP, hostname or CIDR
+* `allowedSourceAddresses` - list of allowed addresses in IP, hostname or CIDR
     * hosting tunnelers establish local routes for the specified source addresses so binding will
       succeed
 
@@ -98,9 +98,9 @@ statically set to '192.168.100.1
 }
 ```
 
-Health checks and listen options also can be specified for each terminator.
+Health checks and listen options also can be specified for the endpoint.
 
-* `listenOptions` - Provides ways to customize the terminator
+* `listenOptions` - Provides ways to customize the hosting endpoint
     * See the [full definition below](#listen-options)
 * `portChecks` - TCP port health check definitions
     * See the [full definition below](#port-checks)
@@ -109,7 +109,7 @@ Health checks and listen options also can be specified for each terminator.
 
 ## Listen Options
 
-* `bindUsingEdgeIdentity` - Associate the hosting terminator with the name of the hosting tunneler's
+* `bindUsingEdgeIdentity` - Associate the hosting endpoint with the name of the hosting tunneler's
   identity. Setting this to 'true' is equivalent to setting 'identity=$tunneler_id.name'",
     * Boolean value, defaults to `false`
 * `connectTimeout` - Timeout when making connections to the external server. Specified as a
@@ -118,15 +118,15 @@ Health checks and listen options also can be specified for each terminator.
   positive integer. If both `connectTimeout` and `connectTimeoutSeconds` are specified, then
   `connectTimeout` will be used. Defaults to 5. This option will be deprecated in favor of
   `connectTimeout` in the future.
-* `cost` - Static cost of the terminator. Must be a value between 0 and 65535. Default to 0.
-* `identity` - Associate the hosting terminator with the specified identity.
+* `cost` - Static cost of the endpoint. Must be a value between 0 and 65535. Default to 0.
+* `identity` - Associate the hosting endpoint with the specified identity.
     * '$tunneler_id.name' resolves to the name of the hosting tunneler's identity.
     * '$tunneler_id.tag[tagName]' resolves to the value of the 'tagName' tag on the hosting
       tunneler's identity.
-* `maxConnections` - Number of routers to create terminators on. Does not apply to hosting edge
+* `maxConnections` - Number of routers to create endpoints on. Does not apply to hosting edge
   routers, only to SDK hosted tunnelers.
-* `precedence` - Initial terminator precedence. Must be one of `default`, `required` or `failed`.
-  Defaults to `default`.
+* `precedence` - Initial precedence. Must be one of `default`, `required` or `failed`. Defaults
+  to `default`.
 
 **Example**
 
@@ -214,13 +214,12 @@ Actions support the following properties:
   and `consecutiveEvents` are met.
     * This field is required
     * Valid actions include:
-        * `mark unhealthy` - sets the associated terminator's precedence to `failed`.
-        * `mark healthy` - sets the associated terminator's precedence back from `failed` to its
-          original value.
-        * `increase cost N` - increases the cost of the associated terminator by `N`.
-        * `decrease cost N` - decreases the cost of the associated terminator by `N`.
-        * `send event` - causes a terminator event to be emitted from the controller. Useful for
-          alerting or external integrations.
+        * `mark unhealthy` - sets the precedence to `failed`.
+        * `mark healthy` - sets the precedence back from `failed` to its original value.
+        * `increase cost N` - increases the cost by `N`.
+        * `decrease cost N` - decreases the cost by `N`.
+        * `send event` - causes an event to be emitted from the controller. Useful for alerting or
+          external integrations.
 
 :::note
 
@@ -234,8 +233,8 @@ generating events.
 **Port Check Example**
 
 This config will cause a port check to run against the service every five seconds. After the check
-has failed twice in a row, the terminator will be marked failed. After the check has been passing
-for a minute, the terminator will be restored to its original precedence.
+has failed twice in a row, the endpoint will be marked failed. After the check has been passing for
+a minute, the endpoint will be restored to its original precedence.
 
 ```json
 {

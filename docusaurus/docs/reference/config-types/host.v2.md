@@ -7,11 +7,11 @@ sidebar_position: 20
 
 The `host.v2` configuration type defines how edge routers or tunnelers can make outgoing connections
 for associated services. The config type also allows specifying health checks for the service. An
-endpoint in a `host. v2` config can be specified explicitly or can be configured to use information
+endpoint in a `host.v2` config can be specified explicitly or can be configured to use information
 passed through from a tunneler intercepting traffic, allowing it to forward traffic.
 
-The `host. v2` type allows defining multiple host endpoints. If only a single endpoints is required,
-consider using the simpler [`host. v1`](./host.v1.md) config type instead.
+The `host.v2` type allows defining multiple host endpoints. If only a single endpoint is required,
+consider using the simpler [`host.v1`](./host.v1.md) config type instead.
 
 ## Endpoint Configuration
 
