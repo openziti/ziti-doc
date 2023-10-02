@@ -186,6 +186,9 @@ if test -e "${script_root}/docusaurus/build/landing.html"; then
   echo "landing.html detected. overwriting index.html with landing.html"
   cp "${script_root}/docusaurus/build/index.html" "${script_root}/docusaurus/build/index.original.html"
   cp "${script_root}/docusaurus/build/landing.html" "${script_root}/docusaurus/build/index.html"
+  echo sed -i 's/<.*class="custom-logo-link"/<a href=\"\/\" class="custom-logo-link"/g' "${script_root}/docusaurus/build/index.html"
+  sed -i 's/<.*class="custom-logo-link"/<a href=\"\/\" class="custom-logo-link"/g' "${script_root}/docusaurus/build/index.html"
+  echo "landing.html replaced href"
   echo "landing.html overwritten to index.html. index.html is now index.original.html"
 fi
 
