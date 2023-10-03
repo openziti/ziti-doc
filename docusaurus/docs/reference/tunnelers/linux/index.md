@@ -1,11 +1,9 @@
 ---
-title: Linux
+title: Linux Tunneller
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-## The Ziti Tunneller
 
 `ziti-edge-tunnel` is the tunneller CLI and daemon. The purpose of the tunneller is to configure host access. This means
 all users and all processes on the host will share the same level of access. This is accomplished by configuring the OS
