@@ -253,6 +253,7 @@ sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
 The tunneller process needs to be restarted if the contents of `/opt/openziti/etc/identities` change.
 
 ```text
+# package users can restart with systemd
 sudo systemctl restart ziti-edge-tunnel.service
 ```
 
