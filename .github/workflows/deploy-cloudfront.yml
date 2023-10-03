@@ -8,6 +8,7 @@ on:
 
 jobs:
     deploy:
+        if: github.repository_owner == 'openziti'
         name: Deploy CloudFront Function
         runs-on: ubuntu-latest
         steps:

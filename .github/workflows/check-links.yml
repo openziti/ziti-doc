@@ -9,6 +9,7 @@ on:
 
 jobs:
   broken-link-checker:
+    if: github.repository_owner == 'openziti'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
@@ -32,6 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
   popular-link-checker:
+    if: github.repository_owner == 'openziti'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
