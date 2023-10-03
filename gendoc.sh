@@ -186,10 +186,7 @@ if test -e "${script_root}/docusaurus/build/landing.html"; then
   echo "landing.html detected. overwriting index.html with landing.html"
   cp "${script_root}/docusaurus/build/index.html" "${script_root}/docusaurus/build/index.original.html"
   cp "${script_root}/docusaurus/build/landing.html" "${script_root}/docusaurus/build/index.html"
-  sed -i 's|<a href=\".* class="custom-logo-link"|<a href="/" class="custom-logo-link"|g' "${script_root}/docusaurus/build/index.html"
-  sed -i 's|link\.setAttribute("href", "https://openziti\.io/|link.setAttribute("href", "/|g' "${script_root}/docusaurus/build/index.html"
-  sed -i 's|<a itemprop="url" href="https://openziti.io/|<a itemprop="url" href="/|g' "${script_root}/docusaurus/build/index.html"
-  sed -i 's|https://openziti.io/docs/|/docs/|g' "${script_root}/docusaurus/build/index.html"
+  sed -i 's|https://openziti.io/|/|g' "${script_root}/docusaurus/build/index.html"
   echo "landing.html sed commands run"
   echo "landing.html overwritten to index.html. index.html is now index.original.html"
 fi
