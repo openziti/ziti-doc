@@ -20,7 +20,7 @@ a Ziti Network. This diagram does not show all entities, simply the ones tied cl
 the Role Attributes on an Identity are used by selectors defined on policies to act on the identity. However, the 
 policies and selectors are not modeled here.
 
-```textermaid
+```mermaid
 erDiagram
     Identity ||..o{ API-Session : has
     API-Session ||..o{ Session : has

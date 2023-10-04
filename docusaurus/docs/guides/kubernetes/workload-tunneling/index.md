@@ -4,7 +4,7 @@ title: Workload Tunneling
 
 This guide will help you discover the best strategy and tool for connecting a Kubernetes workload. This overview page links to child pages for each strategy and tool, and a summary of each is provided in the sections below. Click on the chart's outcomes to see the corresponding documentation.
 
-```textermaid
+```mermaid
 graph TB; 
   A{Pod connects to an </br>OpenZiti Service?}
   A -- Yes --> B{Intercept at pod or </br>cluster level?}
