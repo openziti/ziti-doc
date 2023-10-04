@@ -1,6 +1,6 @@
 # Endpoint  Initialization
 
-```textermaid
+```mermaid
 sequenceDiagram
 title Endpoint Initialization
 
