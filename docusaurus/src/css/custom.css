@@ -1466,7 +1466,6 @@ ol.linenums li:before {
 
 .wizardmodal pre {
   text-wrap: wrap;
-  background: #333;
   color: #fff;
 }
 
@@ -1576,7 +1575,6 @@ code.wizardmodal .prettyprint, .wizard .wizardmodal pre {
 
 .wizardmodal pre.wizardmodal .prettyprint, .wizardmodal pre {
   margin: 1em auto !important;
-  padding: 1em !important;
   white-space: pre-line !important;
 }
 
@@ -1825,11 +1823,27 @@ pre code {
   padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
 }
 
+.alert pre {
+  margin-top: 10px;
+}
+
 .alert--secondary {
   --ifm-alert-background-color: rgba(177, 34, 227, 0.15);
   --ifm-alert-background-color-highlight: rgba(177, 34, 227, 0.15);
   --ifm-alert-foreground-color: var(--ifm-color-secondary-contrast-foreground);
   --ifm-alert-border-color: rgba(184, 91, 217, 0.98);
+}
+
+.alert--secondary code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
+}
+
+.alert--secondary pre code {
+  background-color: rgba(117, 82, 136, 0.98) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: #FFF;
 }
 
 .alert--success {
@@ -1839,11 +1853,35 @@ pre code {
   --ifm-alert-border-color: rgba(48, 207, 18, 0.98);
 }
 
+.alert--success code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(29, 137, 13, 0.98);
+  color: rgba(29, 137, 13, 0.98);
+}
+
+.alert--success pre code {
+  background-color: rgba(29, 137, 13, 0.98) !important;
+  border: 1px solid rgba(29, 137, 13, 0.98);
+  color: #FFF;
+}
+
 .alert--info {
   --ifm-alert-background-color: var(--ifm-color-info-contrast-background);
   --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.15);
   --ifm-alert-foreground-color: var(--ifm-color-info-contrast-foreground);
   --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.98);
+}
+
+.alert--info code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(88, 172, 216, 0.98);
+  color: rgba(88, 172, 216, 0.98);
+}
+
+.alert--info pre code {
+  background-color: rgba(88, 172, 216, 0.98) !important;
+  border: 1px solid rgba(88, 172, 216, 0.98);
+  color: #FFF;
 }
 
 .alert--warning {
@@ -1853,11 +1891,35 @@ pre code {
   --ifm-alert-border-color: rgba(229, 165, 16, 0.98);
 }
 
+.alert--warning code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(206, 143, 14, 0.98);
+  color: rgba(206, 143, 14, 0.98);
+}
+
+.alert--warning pre code {
+  background-color: rgba(206, 143, 14, 0.98) !important;
+  border: 1px solid rgba(206, 143, 14, 0.98);
+  color: #FFF;
+}
+
 .alert--danger {
   --ifm-alert-background-color: var(--ifm-color-danger-contrast-background);
   --ifm-alert-background-color-highlight: rgba(180, 46, 46, 0.15);
   --ifm-alert-foreground-color: var(--ifm-color-danger-contrast-foreground);
   --ifm-alert-border-color: rgba(180, 46, 46, .98);
+}
+
+.alert--danger code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(152, 22, 22, .98);
+  color: rgba(152, 22, 22, .98);
+}
+
+.alert--danger pre code {
+  background-color: rgba(152, 22, 22, .98) !important;
+  border: 1px solid rgba(152, 22, 22, .98);
+  color: #FFF;
 }
 
 .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
@@ -1868,7 +1930,6 @@ pre code {
 }
 .wizardmodal pre {
   text-wrap: wrap;
-  background: #002451 !important;
 } 
 
 .breadcrumbs__item--active .breadcrumbs__link {
