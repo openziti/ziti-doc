@@ -1819,20 +1819,52 @@ pre code {
   --ifm-tabs-color: var(--ifm-alert-foreground-color);
   --ifm-tabs-color-active: var(--ifm-alert-foreground-color);
   --ifm-tabs-color-active-border: var(--ifm-alert-border-color);
-  background-color: #fff7af;
-  border: var(--ifm-alert-border-width) solid #ffd200;
   border-left-width: var(--ifm-alert-border-left-width);
   border-radius: var(--ifm-alert-border-radius);
   box-shadow: var(--ifm-alert-shadow);
-  color: #252525;
   padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
+}
+
+.alert--secondary {
+  --ifm-alert-background-color: rgba(177, 34, 227, 0.15);
+  --ifm-alert-background-color-highlight: rgba(177, 34, 227, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-secondary-contrast-foreground);
+  --ifm-alert-border-color: rgba(184, 91, 217, 0.98);
+}
+
+.alert--success {
+  --ifm-alert-background-color: var(--ifm-color-success-contrast-background);
+  --ifm-alert-background-color-highlight: rgba(48, 207, 18, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-success-contrast-foreground);
+  --ifm-alert-border-color: rgba(48, 207, 18, 0.98);
+}
+
+.alert--info {
+  --ifm-alert-background-color: var(--ifm-color-info-contrast-background);
+  --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-info-contrast-foreground);
+  --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.98);
+}
+
+.alert--warning {
+  --ifm-alert-background-color: var(--ifm-color-warning-contrast-background);
+  --ifm-alert-background-color-highlight: rgba(229, 165, 16, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-warning-contrast-foreground);
+  --ifm-alert-border-color: rgba(229, 165, 16, 0.98);
+}
+
+.alert--danger {
+  --ifm-alert-background-color: var(--ifm-color-danger-contrast-background);
+  --ifm-alert-background-color-highlight: rgba(180, 46, 46, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-danger-contrast-foreground);
+  --ifm-alert-border-color: rgba(180, 46, 46, .98);
 }
 
 .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
   display: inline-block;
   height: 1.6em;
   width: 1.6em;
-  fill: #000000!important;
+  
 }
 .wizardmodal pre {
   text-wrap: wrap;
