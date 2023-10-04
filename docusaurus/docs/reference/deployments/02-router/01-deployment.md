@@ -3,9 +3,6 @@ id: deployment
 title: Router Deployment
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import styles from './styles.module.css';
 import CliLogin from '../../../_cli-login.md'
 import CliLogFormats from '../../../_cli-log-levels-and-formats.md'
 

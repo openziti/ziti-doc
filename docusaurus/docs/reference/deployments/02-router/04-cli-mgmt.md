@@ -10,7 +10,7 @@ import CliLogin from '../../../_cli-login.md'
 
 ## Managing Routers with the CLI
 
-In this article we are highlighting the most relevant commands and options for managing routers with the `ziti` CLI.
+In this article we are highlighting the most relevant commands and options for managing routers with [the `ziti` CLI](/downloads.mdx).
 
 :::info Important Note
 Routers or their identities can be referenced by `@router_name` or `#attribute` in various policies like service policy, edge router policy, etc. Using group `#attribute` is recommended.
