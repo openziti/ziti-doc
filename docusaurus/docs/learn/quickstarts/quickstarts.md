@@ -17,23 +17,6 @@ If you get stuck on anything at all, remember that the link to the discourse sit
 pages. Don't be afraid to ask the community for help!
 :::
 
-:::tip
-Note
-:::
-
-:::info
-Note
-:::
-
-:::caution
-Note
-:::
-
-:::danger
-Note
-:::
-
-
 ## Getting Started - Network
 
 When you're just getting started, the first thing you will need is access to a
