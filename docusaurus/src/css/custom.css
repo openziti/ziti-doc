@@ -39,6 +39,7 @@
   --h2-size: 35px;
   --h3-size: 25px;
   --docusaurus-collapse-button-bg-hover: rgb(0 0 0 / 2%);
+  --ifm-tabs-color-active: var(--ifm-font-color-base);
 }
 
 html[data-theme=dark] {
@@ -601,12 +602,27 @@ list-type-ulli,
   margin: 0px;
 }
 
+a {
+  color: rgba(117, 82, 136, 0.98);;
+  text-decoration: var(--ifm-link-decoration);
+  transition: 0.5s;
+}
+
+a:hover {
+  color: rgba(217, 15, 95, 0.98);
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
 .wizardmodal a {
-  color: #006cff;
+  color: rgba(117, 82, 136, 0.98);
   font-size: 15px;
   font-weight: 600;
   text-decoration: underline;
   transition: all 0.3s ease;
+}
+
+.wizardmodal code a {
+  color: #FFF;
 }
 
 .wizardmodal a:hover {
@@ -1780,12 +1796,14 @@ code {
   vertical-align: middle;
   font-size: 87.5%;
   font-weight: 600;
-  color: #e83e8c;
   word-break: break-word;
-  background-color: #ffdded;
-  border: 1px solid #e83e8c;
   border-radius: 7px;
-  padding: 2px 4px 2px 4px;
+  padding: 2px 8px 2px 8px;
+
+  background-color: rgba(117, 82, 136, 0.2) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
+
 }
 
 li a code {
@@ -1793,12 +1811,66 @@ li a code {
     vertical-align: middle;
     font-size: 87.5%;
     font-weight: 600;
-    color: #e83e8c;
     word-break: break-word;
-    background-color: #ffdded;
-    border: 1px solid #e83e8c;
     border-radius: 7px;
     padding: 2px 4px 2px 4px;
+
+    background-color: rgba(117, 82, 136, 0.2) !important;
+    border: 1px solid rgba(117, 82, 136, 0.98);
+    color: rgba(117, 82, 136, 0.98);
+}
+
+.tabItem_node_modules {
+  background-color: rgba(117, 82, 136, 0.2) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
+
+}
+
+.tabItem_node_modules-\@docusaurus-theme-classic-lib-theme-TabItem-styles-module {
+  background-color: rgb(142,142,142, .2);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 20px;
+  border-radius: 7px;
+  margin-top: 0px;
+}
+
+.tabs__item {
+  background-color: rgba(225,225,225, 0.3);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  margin-right: 10px;
+  pointer-events: all;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.tabs {
+  padding-left: 20px;
+}
+
+.tabs__item.tabs__item--active {
+  background-color: rgb(142,142,142, .2);
+  border-bottom-width: 0px;
+  pointer-events: none;
+}
+
+.tabs__item.tabs__item--active:hover {
+  background-color: rgb(142,142,142, .2);
+  border-bottom-width: 0px;
+  pointer-events: none;
+}
+
+.margin-top--md {
+  margin-top: 0px !important;
+}
+
+.tabs__item:hover {
+  background-color: rgba(245,245,245, 0.2);
 }
 
 .admonitionIcon_kALy svg {
@@ -1806,7 +1878,7 @@ li a code {
 }
 
 pre code {
-  background-color: #002451 !important;
+  background-color: rgba(44,55,65) !important;
 }
 
 .alert {
@@ -1823,8 +1895,8 @@ pre code {
   padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
 }
 
-.alert pre {
-  margin-top: 10px;
+pre {
+  margin-top: 10px !important;
 }
 
 .alert--secondary {
@@ -1847,7 +1919,7 @@ pre code {
 }
 
 .alert--success {
-  --ifm-alert-background-color: var(--ifm-color-success-contrast-background);
+  --ifm-alert-background-color: rgba(48, 207, 18, 0.15);
   --ifm-alert-background-color-highlight: rgba(48, 207, 18, 0.15);
   --ifm-alert-foreground-color: var(--ifm-color-success-contrast-foreground);
   --ifm-alert-border-color: rgba(48, 207, 18, 0.98);
@@ -1865,8 +1937,14 @@ pre code {
   color: #FFF;
 }
 
+.details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
+  --docusaurus-details-decoration-color: rgba(88, 172, 216, 0.98) !important;
+  border: 1px solid rgba(88, 172, 216, 0.98) !important;
+  background-color: rgba(88, 172, 216, 0.4);
+}
+
 .alert--info {
-  --ifm-alert-background-color: var(--ifm-color-info-contrast-background);
+  --ifm-alert-background-color: rgba(88, 172, 216, 0.15);
   --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.15);
   --ifm-alert-foreground-color: var(--ifm-color-info-contrast-foreground);
   --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.98);
@@ -1885,10 +1963,10 @@ pre code {
 }
 
 .alert--warning {
-  --ifm-alert-background-color: var(--ifm-color-warning-contrast-background);
-  --ifm-alert-background-color-highlight: rgba(229, 165, 16, 0.15);
+  --ifm-alert-background-color: rgba(255, 146, 22, 0.15);
+  --ifm-alert-background-color-highlight: rgba(255, 146, 22, 0.15);
   --ifm-alert-foreground-color: var(--ifm-color-warning-contrast-foreground);
-  --ifm-alert-border-color: rgba(229, 165, 16, 0.98);
+  --ifm-alert-border-color: rgba(255, 146, 22, 0.98);
 }
 
 .alert--warning code {
@@ -1904,7 +1982,7 @@ pre code {
 }
 
 .alert--danger {
-  --ifm-alert-background-color: var(--ifm-color-danger-contrast-background);
+  --ifm-alert-background-color: rgba(180, 46, 46, 0.15);
   --ifm-alert-background-color-highlight: rgba(180, 46, 46, 0.15);
   --ifm-alert-foreground-color: var(--ifm-color-danger-contrast-foreground);
   --ifm-alert-border-color: rgba(180, 46, 46, .98);
