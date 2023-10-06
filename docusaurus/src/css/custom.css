@@ -49,11 +49,6 @@ html[data-theme=dark] {
   --ifm-toc-link-color: #ffffff;
 }
 
-html[data-theme=dark] a {
-  color: rgb(221,216,229) !important;
-  border-color: rgb(221,216,229) !important;
-}
-
 html[data-theme=dark] #Wizardly code {
   color: rgba(117, 82, 136, 0.98) !important;
 }
@@ -630,19 +625,42 @@ list-type-ulli,
 }
 
 a {
-  color: rgba(117, 82, 136, 0.98);;
+  color: rgba(217, 15, 95, 0.98);
   text-decoration: var(--ifm-link-decoration);
   transition: 0.5s;
 }
 
 html[data-theme=dark] #Wizardly a {
-  color: rgba(117, 82, 136, 0.98) !important;
+  color: rgba(217, 15, 95, 0.98);
   text-decoration: var(--ifm-link-decoration);
   transition: 0.5s;
 }
 
+html[data-theme=dark] .menu__link {
+  color: rgba(255, 255, 255, 0.98) !important;
+}
+
+.menu__link--active {
+  color: rgba(217, 15, 95, 0.98) !important;
+  transition: 0.5s;
+}
+
+html[data-theme=dark] a {
+  color: rgba(232, 74, 135, 1.0);
+  transition: 0.5s;
+}
+
+html[data-theme=dark] .menu__link--active {
+  color: rgba(232, 74, 135, 1.0) !important;
+  transition: 0.5s;
+}
+
+.menu__link--active:hover {
+  color: rgba(117, 82, 136, 0.98);
+}
+
 a:hover {
-  color: rgba(217, 15, 95, 0.98);
+  color: rgba(117, 82, 136, 0.98);
   text-decoration: var(--ifm-link-hover-decoration);
 }
 
