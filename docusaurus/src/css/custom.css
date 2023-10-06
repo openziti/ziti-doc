@@ -72,6 +72,10 @@ html[data-theme=dark] .alert--secondary code .token-line {
     color: rgba(117, 82, 136, 0.98) !important;
 }
 
+html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
+  fill: rgba(0,0,0) !important;
+}
+
 @media (max-width: 767px) {
   html[data-theme="dark"] {
     --h1-size: 30px;
@@ -2038,8 +2042,8 @@ pre {
   display: inline-block;
   height: 1.6em;
   width: 1.6em;
-  
 }
+
 .wizardmodal pre {
   text-wrap: wrap;
 } 
