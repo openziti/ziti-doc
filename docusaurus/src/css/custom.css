@@ -54,6 +54,10 @@ html[data-theme=dark] a {
   border-color: rgb(221,216,229) !important;
 }
 
+html[data-theme=dark] #Wizardly code {
+  color: rgba(117, 82, 136, 0.98) !important;
+}
+
 html[data-theme=dark] code { 
   color: rgb(221,216,229) !important;
 }
@@ -627,17 +631,20 @@ a {
   transition: 0.5s;
 }
 
+html[data-theme=dark] #Wizardly a {
+  color: rgba(117, 82, 136, 0.98) !important;
+  text-decoration: var(--ifm-link-decoration);
+  transition: 0.5s;
+}
+
 a:hover {
   color: rgba(217, 15, 95, 0.98);
   text-decoration: var(--ifm-link-hover-decoration);
 }
 
-.wizardmodal a {
-  color: rgba(117, 82, 136, 0.98);
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: underline;
-  transition: all 0.3s ease;
+html[data-theme=dark] a:hover {
+  color: rgba(217, 15, 95, 0.98);
+  text-decoration: var(--ifm-link-hover-decoration);
 }
 
 .wizardmodal code a {
@@ -955,7 +962,7 @@ input {
 }
 
 
-.openWizard {
+#Wizardly .openWizard {
   display: none;
   background-image: url(/img/ziggysmalls.svg);
   background-size: 80px;
@@ -975,7 +982,7 @@ input {
     transition: .5s;
   font-family: "Hand Of Sean";
   background-color: #002451;
-  color: #fad82c;
+  color: #fad82c !important;
   text-align: right;
   z-index: 500;
 }
@@ -1890,6 +1897,18 @@ li a code {
 
 .tabs__item:hover {
   background-color: rgba(245,245,245, 0.2);
+}
+
+#Wizardly div {
+  color: rgba(44,55,65) !important;
+}
+
+#Wizardly .admonitionIcon_kALy svg {
+  fill: #000000 !important;
+}
+
+#Wizardly .alert--secondary {
+  --ifm-alert-foreground-color: #b122e326;
 }
 
 pre code {
