@@ -49,6 +49,25 @@ html[data-theme=dark] {
   --ifm-toc-link-color: #ffffff;
 }
 
+html[data-theme=dark] a {
+  color: rgb(221,216,229) !important;
+  border-color: rgb(221,216,229) !important;
+}
+
+html[data-theme=dark] code { 
+  color: rgb(221,216,229) !important;
+}
+
+html[data-theme=dark] .alert--secondary code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98) !important;
+  color: rgba(117, 82, 136, 0.98) !important;
+}
+
+html[data-theme=dark] .alert--secondary code .token-line {
+    color: rgba(117, 82, 136, 0.98) !important;
+}
+
 @media (max-width: 767px) {
   html[data-theme="dark"] {
     --h1-size: 30px;
