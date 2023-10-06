@@ -1892,10 +1892,6 @@ li a code {
   background-color: rgba(245,245,245, 0.2);
 }
 
-.admonitionIcon_kALy svg {
-  fill: #000000 !important;
-}
-
 pre code {
   background-color: rgba(44,55,65) !important;
 }
