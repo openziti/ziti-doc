@@ -836,7 +836,7 @@ In this section, we will demonstrate how to setup OpenZiti service to access a s
 
 We are going to use an existing [SDK implementation](https://github.com/openziti/sdk-golang/tree/main/example/curlz) for this guide.
 
-Please create a linux server (i.e. Ubuntu22.04) that can compile golang. If you have followed the previous example, you can use any node you already created (i.e ingress-tunnel node) for this exercise.  Install **go** before you proceed further.
+Please create a linux server (i.e. Ubuntu22.04) that can compile golang. If you have followed the previous example, you can use any node you already created (i.e ingress-tunnel node) for this exercise.  Install **go** before you proceed further. You need go version *1.19* or later. To install latest go, please following [go.dev installation link](https://go.dev/doc/install).
 
 Check out the code from the [github repo](https://github.com/openziti/sdk-golang.git).
 
