@@ -4,6 +4,7 @@ title: Linux Tunneller
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Details from '@theme/MDXComponents/Details';
 
 The purpose of the tunneller is to configure host access. This means all users and all processes on the host will share
 the same level of access. This is accomplished by configuring the OS to have an OpenZiti DNS nameserver and IP routes
@@ -38,7 +39,9 @@ ARM/v7 (32bit) binaries are available from GitHub. See [manual installation](#ma
 #### Ubuntu
 
 Packages are available for all Ubuntu releases since 18.04 (Bionic).
+
 <br/>
+
 Architectures available:
 
 * x86_64
@@ -259,6 +262,61 @@ sudo systemctl restart ziti-edge-tunnel.service
 
 Reference [the article about running the Linux tunneller in a container](./container/readme.mdx) for guidance and
 examples.
+
+## Install a Pre-Release
+
+### DEB Pre-Release
+
+<Details>
+<summary>Pre-release repo for Debian-based distros</summary>
+
+You may use the following script to install the pre-release version of the tunneller for any supported Ubuntu LTS.
+
+```text
+(set -euo pipefail;
+UBUNTU_LTS=focal;
+
+curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
+| sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg;
+sudo chmod +r /usr/share/keyrings/openziti.gpg;
+
+sudo tee /etc/apt/sources.list.d/ziti-edge-tunnel-testing.list >/dev/null <<EOF;
+deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-test ${UBUNTU_LTS} main
+EOF
+
+sudo apt update;
+sudo apt install ziti-edge-tunnel;
+/opt/openziti/bin/ziti-edge-tunnel version;
+)
+```
+
+</Details>
+
+### RPM Pre-Release
+
+<Details>
+<summary>Pre-release repo for RedHat-based distros</summary>
+
+```text
+(set -euo pipefail;
+
+sudo tee /etc/yum.repos.d/ziti-edge-tunnel-testing.repo >/dev/null <<\EOF;
+[OpenZitiTunnelTesting]
+name=OpenZiti Tunnel Testing
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-test/redhat$releasever/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-test/redhat$releasever/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+EOF
+
+sudo dnf update;
+sudo dnf install ziti-edge-tunnel;
+/opt/openziti/bin/ziti-edge-tunnel version;
+)
+```
+
+</Details>
 
 ## Troubleshooting
 
