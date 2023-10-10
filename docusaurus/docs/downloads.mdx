@@ -93,15 +93,16 @@ import Details from '@theme/MDXComponents/Details';
 sudo tee /etc/yum.repos.d/openziti-release.repo >/dev/null <<\EOF;
 [OpenZitiRelease]
 name=OpenZiti Release
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/release/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/release/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 EOF
 
 sudo dnf update;
 sudo dnf install openziti;
+ziti version;
 )
 ```
 
@@ -114,15 +115,16 @@ sudo dnf install openziti;
 sudo tee /etc/yum.repos.d/openziti-testing.repo >/dev/null <<\EOF;
 [OpenZitiTesting]
 name=OpenZiti Testing
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-test/testing/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-test/redhat/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-test/testing/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-test/redhat/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 EOF
 
 sudo dnf update;
 sudo dnf install openziti;
+ziti version;
 )
 ```
 
@@ -145,18 +147,19 @@ sudo dnf install openziti;
 ### Ziti Command
 
 ```text
-(set -euo pipefail
+(set -euo pipefail;
 
 curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
 | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg;
 sudo chmod +r /usr/share/keyrings/openziti.gpg;
 
 sudo tee /etc/apt/sources.list.d/openziti-release.list >/dev/null <<EOF;
-deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable release main
+deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable debian main
 EOF
 
 sudo apt update;
 sudo apt install openziti;
+ziti version;
 )
 ```
 
@@ -171,11 +174,12 @@ curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
 sudo chmod +r /usr/share/keyrings/openziti.gpg;
 
 sudo tee /etc/apt/sources.list.d/openziti-testing.list >/dev/null <<EOF;
-deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-test testing main
+deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-test debian main
 EOF
 
 sudo apt update;
 sudo apt install openziti;
+ziti version;
 )
 ```
 
@@ -225,7 +229,6 @@ curl -sSfL \
   | tar -xz -f -;
 
 sudo install -o root -g root ./ziti /usr/local/bin/;
-
 ziti version;
 )
 ```
