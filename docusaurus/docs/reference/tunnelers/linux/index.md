@@ -141,10 +141,10 @@ Architectures available:
 ```text
 [OpenZiti]
 name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
