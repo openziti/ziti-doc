@@ -39,7 +39,7 @@ export default function Layout(props) {
 
     function UrlChanged() {
       if (lastPath!=window.location.pathname) {
-        BuildMenu(); 
+        // BuildMenu(); 
         BuildWizard();
         lastPath = window.location.pathname;
       }
@@ -236,13 +236,13 @@ export default function Layout(props) {
       }
     }
 
-    window.onpopstate = () => setTimeout(BuildMenu, 100);
+    // window.onpopstate = () => setTimeout(BuildMenu, 100);
     window.onpopstate = () => setTimeout(BuildWizard, 100);
 
     window.addEventListener("load", (event) => {
       if (intervalId) clearInterval(intervalId);
       intervalId = setInterval(UrlChanged, 100);
-      BuildMenu();
+      // BuildMenu();
       BuildWizard();
     });
   }
