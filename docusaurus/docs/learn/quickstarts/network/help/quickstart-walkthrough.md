@@ -2,29 +2,53 @@
 title: Quickstart Walkthrough
 id: quickstart-walkthrough
 ---
-The following will walk you through the manual process of creating an overlay network with your own PKI. These steps are the same steps that take place behind the scenes when running the OpenZiti Quickstart’s `expressInstall` function.
+This page is intended to explain the steps that happen automatically when the expressInstall function is executed. 
+The [Local - No Docker](/docusaurus/docs/learn/quickstarts/network/local-no-docker.md), 
+[Local - With Docker](/docusaurus/docs/learn/quickstarts/network/local-with-docker.md), 
+[Local - Docker Compose](/docusaurus/docs/learn/quickstarts/network/local-docker-compose.md), and 
+[Host OpenZiti Anywhere](/docusaurus/docs/learn/quickstarts/network/hosted.md) quickstarts all run the `expressInstall` 
+function. Each version varies slightly. This page will focus on the Host OpenZiti Anywhere quickstart.
+
+## The General Process
+1. Establish environment variables
+2. Create a directory for network related files
+3. Obtain the Ziti binary
+4. Create a PKI
+5. Create a Controller configuration
+6. Initialize the Controller
+7. Start the Controller
+8. Create a Router configuration
+9. Create a Router entity on the network (via the Controller)
+10. Enroll the Router previously created
+11. Run the Router
+12. Add default Edge Router and Service Edge Router policies.
 
 ## General Environment Setup
 
 ### Declare Variables
 
-Some global variables used throughout the overlay setup.
+The first thing `expressInstall` will do is establish numerous environment variables used throughout the script. Some 
+important variables are listed below.
 
-- `ZITI_HOME` is the directory where your network files will be stored, the directory will be created if it does not exist already.
+- `ZITI_HOME` is the directory `expressInstall` will use to create and store the network files. The directory will be 
+created if it does not exist already.
 - `ZITI_BIN_DIR` is the directory where the ziti binary will be downloaded and extracted
+- `ZITI_USER` is the username for the controller's admin user, this value defaults to `admin`
 - `ZITI_PWD` is the password that will be used when logging into the controller as the default user (admin).
-- `ZITI_HOSTNAME` is used throughout the setup for naming files, network elements, etc.
+- `ZITI_NETWORK` is used throughout the setup for naming files, network elements, etc. This value defaults to the 
+hostname of the device the network is being installed on. 
 
 ```
 export ZITI_HOME="${HOME}/.ziti"
 export ZITI_BIN_DIR="${ZITI_HOME}/ziti_bin"
+export ZITI_USER=admin
 export ZITI_PWD=admin2
-export ZITI_HOSTNAME=$(hostname -s)
+export ZITI_NETWORK=$(hostname -s)
 ```
 
-### Create Environment
+### Create Directory
 
-Create a directory where you will store your network files.
+Create a directory where the network files will be stored.
 
 ```
 mkdir -p "${ZITI_HOME}"
@@ -32,7 +56,14 @@ mkdir -p "${ZITI_HOME}"
 
 ### Obtain Ziti Binary
 
-The ziti binary is required to setup the network. The exact URL will differ depending on your operating system and architecture. Visit the [releases](https://github.com/openziti/ziti/releases) page to get the appropriate URL.
+The ziti binary is required to set up the network. The `expressInstall` function will call `getZiti` to obtain the Ziti 
+binary. The `getZiti` function detects your OS type and architecture to craft the specific download URL for the binary. 
+The binary is downloaded, and extracted to the location specified by the `ZITI_BIN_DIR` environment variable. Visit the 
+[releases](https://github.com/openziti/ziti/releases) page to get the appropriate URL.
+:::note
+you don't have to always run expressInstall when running the quickstart. you can source the ziti-cli-function.sh file 
+and run getZiti to get the latest version of ziti installed quickly and easily
+:::
 
 ```
 mkdir -p "${ZITI_BIN_DIR}"
@@ -43,7 +74,10 @@ chmod +x "${ZITI_BIN_DIR}/ziti"
 
 ## Create PKI
 
-You may use an existing PKI if you prefer, however, as part of the `expressInstall` a PKI is generated for you. The following will run through the process of generating your own PKI.
+As part of the `expressInstall` a PKI is generated automatically. The following represents the process of generating 
+the PKI. The PKI consists of a root CA, three intermediate CAs (one for each of the controller's config sections. 
+Additionally, an extra intermediate CA is created on the signing cert to demonstrate that arbitrary cert chain lengths 
+are acceptable.)
 
 ### Setup
 
@@ -60,9 +94,9 @@ Set some initial environment variables for setting up the PKI. The `CA_NAME` val
 export ZITI_PKI="${ZITI_HOME}/pki"
 export ZITI_ROOT_CA_NAME="my.root.ca"
 export ZITI_EXTERNAL_CA_INTERMEDIATE_NAME="intermediate.from.external.ca"
-export ZITI_CTRL_CA_NAME="${ZITI_HOSTNAME}-network-components"
-export ZITI_EDGE_CA_NAME="${ZITI_HOSTNAME}-edge"
-export ZITI_SIGN_CA_NAME="${ZITI_HOSTNAME}-identities"
+export ZITI_CTRL_CA_NAME="${ZITI_NETWORK}-network-components"
+export ZITI_EDGE_CA_NAME="${ZITI_NETWORK}-edge"
+export ZITI_SIGN_CA_NAME="${ZITI_NETWORK}-identities"
 ```
 
 ### Creating the Certificate Authorities
@@ -114,7 +148,7 @@ Set up some initial values for the server and client certificates.
 
 ```
 ZITI_NETWORK_COMPONENTS_PKI_NAME="ziti.network.components"
-ZITI_NETWORK_COMPONENTS_ADDRESSES="localhost,${ZITI_HOSTNAME},some.other.name,and.another.name"
+ZITI_NETWORK_COMPONENTS_ADDRESSES="localhost,${ZITI_NETWORK},some.other.name,and.another.name"
 ZITI_NETWORK_COMPONENTS_IPS="127.0.0.1,127.0.21.71,192.168.100.100"
 ```
 
@@ -180,12 +214,13 @@ Now we’ll create the key, client, and server certs for the HTTP API.
 
 ### Update the CA Bundle
 
-Add the CAs to the CA bundle and make a copy for the HTTP API CA bundle.
+The latest tunnelers require full and complete PKIs, not arbitrary trust anchors. Therefore, the root and intermediate 
+CAs must be added to the CA bundle. Additionally, the file is copied for the HTTP API CA bundle.
 
 ```
-cat "${ZITI_PKI}/my.root.ca/certs/my.root.ca.cert" > "${ZITI_PKI}/${ZITI_HOSTNAME}-network-components/cas.pem"
-cat "${ZITI_PKI}/my.root.ca/certs/intermediate.from.external.ca.cert" >> "${ZITI_PKI}/${ZITI_HOSTNAME}-network-components/cas.pem"
-cp "${ZITI_PKI}/${ZITI_HOSTNAME}-network-components/cas.pem" "${ZITI_PKI}/${ZITI_HOSTNAME}-edge/edge.cas.pem"
+cat "${ZITI_PKI}/my.root.ca/certs/my.root.ca.cert" > "${ZITI_PKI}/${ZITI_NETWORK}-network-components/cas.pem"
+cat "${ZITI_PKI}/my.root.ca/certs/intermediate.from.external.ca.cert" >> "${ZITI_PKI}/${ZITI_NETWORK}-network-components/cas.pem"
+cp "${ZITI_PKI}/${ZITI_NETWORK}-network-components/cas.pem" "${ZITI_PKI}/${ZITI_NETWORK}-edge/edge.cas.pem"
 ```
 
 ## Create Controller
@@ -213,8 +248,8 @@ The following are locations of PKI files.
 - `ZITI_PKI_SIGNER_CERT`
 
 ```
-export ZITI_CTRL_ADVERTISED_ADDRESS="${ZITI_HOSTNAME}"
-export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${ZITI_HOSTNAME}"
+export ZITI_CTRL_ADVERTISED_ADDRESS="${ZITI_NETWORK}"
+export ZITI_CTRL_EDGE_ADVERTISED_ADDRESS="${ZITI_NETWORK}"
 export ZITI_CTRL_ADVERTISED_PORT=8440
 export ZITI_CTRL_EDGE_ADVERTISED_PORT=8441
 
@@ -237,27 +272,27 @@ export ZITI_PKI_SIGNER_CERT="${ZITI_PKI}/${ZITI_SIGN_CA_NAME}/certs/${ZITI_SIGN_
 The controller config file is populated based on the values of environment variables set up to this point.
 
 ```
-"${ZITI_BIN_DIR}/ziti" create config controller >${ZITI_HOME}/${ZITI_HOSTNAME}.yaml
+"${ZITI_BIN_DIR}/ziti" create config controller >${ZITI_HOME}/${ZITI_NETWORK}.yaml
 ```
 
 ### Initialize the Controller
 
-Initializing the controller sets up database files and some of the configuration values.
+Initializing the controller initializes the database.
 
 ```
 mkdir ${ZITI_HOME}/db
-"${ZITI_BIN_DIR}/ziti" controller edge init "${ZITI_HOME}/${ZITI_HOSTNAME}.yaml" -u "admin" -p $ZITI_PWD
+"${ZITI_BIN_DIR}/ziti" controller edge init "${ZITI_HOME}/${ZITI_NETWORK}.yaml" -u $ZITI_USER -p $ZITI_PWD
 ```
 
 ### Run the Controller
 
 ```
-"${ZITI_BIN_DIR}/ziti" controller run ${ZITI_HOME}/${ZITI_HOSTNAME}.yaml &> ${ZITI_HOME}/${ZITI_HOSTNAME}.log &
+"${ZITI_BIN_DIR}/ziti" controller run ${ZITI_HOME}/${ZITI_NETWORK}.yaml &> ${ZITI_HOME}/${ZITI_NETWORK}.log &
 ```
 
 ### Wait for the Controller
 
-We want to ensure the controller is ready before creating a router, this mini loop
+The controller is used to create the router identity and therefore, must be up and running, ready to receive commands.
 
 ```
 while [[ "$(curl -w "%{http_code}" -m 1 -s -k -o /dev/null https://${ZITI_CTRL_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}/edge/client/v1/version)" != "200" ]]; do
@@ -268,6 +303,14 @@ done
 
 ## Create Router
 
+### Create the Router Config File
+
+Just as with the controller, we need to create a router config file. The router config also uses values set in environment variables up to this point.
+
+```
+"${ZITI_BIN_DIR}/ziti" create config router edge --routerName ${ZITI_NETWORK}-edge-router >${ZITI_HOME}/${ZITI_NETWORK}-edge-router.yaml
+```
+
 ### Create the Router Entity
 
 The router needs to be created through the controller. This will generate a one-time token to be used during enrollment.
@@ -276,15 +319,7 @@ The router needs to be created through the controller. This will generate a one-
 # We have to log in first
 "${ZITI_BIN_DIR}/ziti" edge login ${ZITI_CTRL_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT} -u admin -p $ZITI_PWD -y
 
-"${ZITI_BIN_DIR}/ziti" edge create edge-router ${ZITI_HOSTNAME}-edge-router -o ${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.jwt -t -a public
-```
-
-### Create the Router Config File
-
-Just as with the controller, we need to create a router config file. The router config also uses values set in environment variables up to this point.
-
-```
-"${ZITI_BIN_DIR}/ziti" create config router edge --routerName ${ZITI_HOSTNAME}-edge-router >${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.yaml
+"${ZITI_BIN_DIR}/ziti" edge create edge-router ${ZITI_NETWORK}-edge-router -o ${ZITI_HOME}/${ZITI_NETWORK}-edge-router.jwt -t -a public
 ```
 
 ### Enroll the Router with the Controller
@@ -292,13 +327,13 @@ Just as with the controller, we need to create a router config file. The router 
 Enroll the router with the controller utilizing the config file and enrollment token previously generated.
 
 ```
-"${ZITI_BIN_DIR}/ziti" router enroll ${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.yaml --jwt ${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.jwt
+"${ZITI_BIN_DIR}/ziti" router enroll ${ZITI_HOME}/${ZITI_NETWORK}-edge-router.yaml --jwt ${ZITI_HOME}/${ZITI_NETWORK}-edge-router.jwt
 ```
 
 ### Run the Router
 
 ```
-"${ZITI_BIN_DIR}/ziti" router run "${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.yaml" &> ${ZITI_HOME}/${ZITI_HOSTNAME}-edge-router.log &
+"${ZITI_BIN_DIR}/ziti" router run "${ZITI_HOME}/${ZITI_NETWORK}-edge-router.yaml" &> ${ZITI_HOME}/${ZITI_NETWORK}-edge-router.log &
 ```
 
 ## Confirm the Network is Up
