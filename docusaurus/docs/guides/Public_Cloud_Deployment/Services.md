@@ -957,7 +957,7 @@ You have reached the "egress-tunnel".
 You have successfully connected SDK application to the server.
 
 
-## 3.8 Setup SDK enabled application to access a server
+## 3.8 Access a SDK enabled application via ziti-tunnel
 
 ### 3.8.1 Introduction
 In this section, we will demonstrate how to setup OpenZiti service to access a SDK enabled application via ziti-tunnel. Please refer to [Network Diagram 4](#314-network-diagram-4) for our test setup.
@@ -1010,12 +1010,8 @@ Once the enrollment is complete, there will be a **simple-server.json** file und
 **NOTE** We will refer this node as "sdk-application-server", we will come back to this node when we are ready to test the connection.
 
 
-### 3.8.3 Create a host.v1 config
-The host config is used to instruct the server-side tunneler how to offload the traffic from the overlay, back to the underlay. We are dropping the traffic off our **loopback** interface, and since our SDK application is listening to port 8080, we will need to use the port **8080**.
-
-```bash
-ziti edge create config simple.hostv1 host.v1 '{"protocol":"tcp", "address":"localhost","port":'8080'}'
-```
+### 3.8.3 host.v1 config
+Since the server is a SDK application, there is no need for host.v1 config. 
 
 ### 3.8.4 Create an intercept.v1 config
 The intercept config is used to instruct the intercept-side tunneler how to correctly intercept the targeted traffic and put it onto the overlay. We are setting up intercept on dns name "simpleService.ziti", and we are going to intercept on port 80.
@@ -1025,10 +1021,10 @@ ziti edge create config simple.interceptv1 intercept.v1 '{"protocols": ["tcp"], 
 ```
 
 ### 3.8.5 Create Service
-Now we need to put two configs into a service. So, we know where the traffic comes from (intercept.v1) and where the traffic goes to (host.v1).
+Usually we need to put two configs (host.v1 and intercept.v1) into a service. Since the SDK application server does not need a host.v1 config, we only need to put intercept.v1 (where the traffic comes from) into the service.
 
 ```bash
-ziti edge create service simpleService --configs "simple.hostv1,simple.interceptv1" --role-attributes simple-service
+ziti edge create service simpleService --configs "simple.interceptv1" --role-attributes simple-service
 ```
 
 ### 3.8.6 Create Bind Service policy
