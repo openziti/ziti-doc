@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish-docs-from-container:
-    if: github.repository_owner == 'openziti'&& "!contains(github.event.head_commit.message, 'ci skip')"
+    if: github.repository_owner == 'openziti' && "!contains(github.event.head_commit.message, 'ci skip')"
     runs-on: ubuntu-latest
     env:
       GIT_BRANCH: main
