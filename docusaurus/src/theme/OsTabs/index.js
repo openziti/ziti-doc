@@ -20,6 +20,7 @@ function OsTabs(props) {
       <OriginalTabs {...props} defaultValue={defaultValue}>
         {props.children}
       </OriginalTabs>
+      {/* Uncomment the following line to debug the detected and selected values */}
       {/* <h2>detected={osName}, selected={defaultValue}</h2> */}
     </>
   );
