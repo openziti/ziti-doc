@@ -4,7 +4,7 @@ title: Public Key Infrastructure (PKI)
 sidebar_label: PKI
 ---
 
-import PkiTroubleshootingMd from '../../guides/05-troubleshooting/pki-troubleshooting.md'
+import PkiTroubleshootingMd from '../../guides/05-troubleshooting/pki-troubleshooting/pki-troubleshooting.md'
 
 All Ziti Networks leverage [Public Key Infrastructure (PKI)](https://en.wikipedia.org/wiki/Public_key_infrastructure) to
 provide secure network connections.  This page is not intended to be a comprehensive guide. What it is, is a set of
