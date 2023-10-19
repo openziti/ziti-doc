@@ -57,7 +57,7 @@ Inspect the identity and router info for a running tunneler process. This create
 for each loaded identity. Each file summarizes the available services and router connections for the identity.
 
 ```text
-sudo -u ziti ziti-edge-tunnel dump -d /tmp/ziti-dump-dir/
+sudo -u ziti ziti-edge-tunnel dump -p /tmp/ziti-dump-dir/
 ```
 
 Find tunneler's nameserver IP.
