@@ -5,9 +5,17 @@ hide_table_of_contents: true
 
 import {WhatIsOpenZiti} from "../../../src/components/SharedComponents";
 
+import ReactPlayer from 'react-player'
+
+import AsciinemaWidget from '../../../src/components/AsciinemaWidget';
+
 <p>
     <WhatIsOpenZiti/>
 </p>
+
+<ReactPlayer width={500} playing={true} loop={false} controls url='/AppetizerDemo.mov' />
+
+<AsciinemaWidget fit={false} src="/appetizer.cast" rows={30} loop={false} autoplay={1} preload={true} />
 
 <h3>An Example of an OpenZiti Overlay Network</h3>
 <span>

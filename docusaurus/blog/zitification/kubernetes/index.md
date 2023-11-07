@@ -57,7 +57,7 @@ as my service name. When deployed by a cloud provider, the Kubernetes API is gen
 
 #### Example Ziti CLI commands
 
-```text
+```bash
 # the name of the service
 service_name=k8s.oci
 # the name of the identity you'd like to see on the kubectl client
@@ -100,7 +100,7 @@ Once we have established the pieces of the [Ziti Network][8], we'll want to get 
 
 Notice that we are changing the file location output by these commands and they are being output as two separate Kubernetes config files. If you prefer to merge them all into one big config file and change contexts - feel free. I left them as separate files here because it provides a very clear separation as to which config is being used or modified.
 
-```text
+```bash
 # Get this value directly from Oracle
 oci_cluster_id="put-your-cluster-id-here"
 
@@ -129,7 +129,7 @@ At this point we should have all the pieces in place so that we can start puttin
 
 This step is very straight-forward for anyone who's used Kubernetes before. Issue the following commands, making sure the path is correct for your public Kubernetes config file, and verify Kubernetes works as expected.
 
-```text
+```bash
 export KUBECONFIG=/tmp/oci/config.oci.public
 kubectl get pods -v6 --request-timeout='5s'
 I1019 13:57:31.910962    3211 loader.go:372] Config loaded from file:  /tmp/oci/config.oci.public
@@ -148,7 +148,7 @@ Next we'll grab a few lines from the excellent guide NetFoundry put out for inte
 3. locate the jwt file for the Kubernetes identity. If you followed the steps above the file will be named: `"${the_kubernetes_identity}".jwt` (make sure you replace the variable with the correct value)
 4. use the jwt to add Ziti: `helm install ziti-host netfoundry/ziti-host --set-file enrollmentToken="${the_kubernetes_identity}".jwt` (again make sure you replace the variable name) If you need to, make sure you create a persistent volume. The ziti pod requires storage to store a secret.
 
-```text
+```bash
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -169,7 +169,7 @@ spec:
 
 Now consume the one time token (the jwt file) to enroll and create a client-side identity using the Ziti Desktop Edge for Windows (or MacOS or via the `ziti-edge-tunnel` if you prefer). Once you can see the identity in your tunneling app, you should be able to use the private kubernetes config file to access the same exact cluster. Remember though, we have mapped the port on the client side to use 443. That means you'll need to update your config file and change 6443 --> 443. Now when you run `get pods` you'll see the ziti-host pod deployed:
 
-```text
+```bash
 export KUBECONFIG=/tmp/oci/config.oci.private
 kubectl get pods
 NAME                        READY   STATUS    RESTARTS   AGE
@@ -185,7 +185,7 @@ If you have made it this far, you've seen us access the Kubernetes API via the p
 3. Build `kubeztl` from [the GitHub repo](https://github.com/openziti-test-kitchen/kubeztl)
 4. Use `kubeztl` to get pods!
 
-    ```text
+    ```bash
     ./kubeztl -zConfig ./id.json -service k8s.oci get pods
     NAME                        READY   STATUS    RESTARTS   AGE
     ziti-host-976b84c66-kr4bc   1/1     Running   0          101m
@@ -195,7 +195,7 @@ If you have made it this far, you've seen us access the Kubernetes API via the p
 
 The `kubeztl` command has also been modified to allow you to add the service name and config file directly into the file itself. This is convenient since you will not need to supply the ziti identity file, nor will you need to specify which service to use. Modifying the file is straight-forward. Open the config file, find the context listed under the contexts root and add two rows as shown here.
 
-```text
+```bash
 contexts
 - context:
     cluster: cluster-cjw4arxuolq
@@ -206,7 +206,7 @@ contexts
 
 Once done - you can now simply use the context the same way you have always - `kubeztl get pods`!
 
-```text
+```bash
 ./kubeztl get pods
 NAME                        READY   STATUS    RESTARTS   AGE
 ziti-host-976b84c66-kr4bc   1/1     Running   0          114m
