@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import CanvasJSReact from '@canvasjs/react-charts';
+if (ExecutionEnvironment.canUseDOM) {
+  require('@canvasjs/react-charts');
+}
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import zrok from './all.zrok.stargazers.json'
 import ziti from './all.ziti.stargazers.json'
 import others from './all.other.stargazers.json'
@@ -7,7 +12,12 @@ import others from './all.other.stargazers.json'
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-export default function StarChart(props) {   
+export default function StarChart(props) {
+    if (!ExecutionEnvironment.canUseDOM) {
+      return <p>sorry charlie</p>;
+    } else {
+      console.info("you got this");
+    }
     
     const zitiData = ziti.map((entry, index) => {
       const dateObject = new Date(entry.date);
@@ -39,8 +49,6 @@ export default function StarChart(props) {
       y: null
     };
     
-    const { children,style } = props;
-
     const options = {      
       zoomEnabled: true,
       panEnabled: true,
@@ -91,9 +99,36 @@ export default function StarChart(props) {
     
     othersData.push(lastRow);
 
+    const [chartData, setChartData] = useState(null);
     return (
-      <div>
-        <CanvasJSChart options = {options} />
-      </div>
+      <BrowserOnly fallback={<div>Loading data...</div>}>
+        {() => {
+            useEffect(() => {
+              const fetchData = async () => {
+                try {
+                  // Simulate an API request (replace with your actual API call)
+                  // const response = await fetch('https://api.example.com/chart-data');
+                  // const result = await response.json();
+                  // Set the chart data in state
+                  setChartData(othersData);
+                } catch (error) {
+                  console.error('Error fetching chart data:', error);
+                }
+              };
+              
+              fetchData();
+            }, []);
+            
+            return (
+              <div>
+                {chartData ? (
+                  <CanvasJSChart options={options} />
+                ) : (
+                  <p>Loading chart data...</p>
+                )}
+              </div>
+            );
+        }}
+      </BrowserOnly>
     );
 }
