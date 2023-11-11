@@ -1267,6 +1267,16 @@
   resolved "https://registry.yarnpkg.com/@braintree/sanitize-url/-/sanitize-url-6.0.4.tgz#923ca57e173c6b232bbbb07347b1be982f03e783"
   integrity sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==
 
+"@canvasjs/charts@^3.7.26":
+  version "3.7.26"
+  resolved "https://registry.yarnpkg.com/@canvasjs/charts/-/charts-3.7.26.tgz#6138e5a5355b5bb1667a6ddda3838aa3ace45c92"
+  integrity sha512-4BcaB0ko64NH+A4OHlKjONBEMaPDRt2V7XYTJ+lFcn0MlzzkzhWhNXGYdPL3wN9uIEkBw/1yaNZuU55cadPVpw==
+
+"@canvasjs/react-charts@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@canvasjs/react-charts/-/react-charts-1.0.0.tgz#84e97e1e3bd045cf345ac9dbe270edf11446af51"
+  integrity sha512-wGI675kz65owAwXZWzJULK9GXKCrPV59+CCawXP801f4rmYGmPskdtGrczgJhA8ThFEgIvq3K4qrkpLDPSmxCQ==
+
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
