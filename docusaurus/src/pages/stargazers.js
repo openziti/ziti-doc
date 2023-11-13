@@ -342,7 +342,7 @@ const largeAreaChartDailies = {
   ],
   series: [
     {
-      name: 'zrokDayRates',
+      name: 'zrok',
       datasetId: 'zrokDayRates',
       type: 'line',
       smooth: false,
@@ -359,7 +359,7 @@ const largeAreaChartDailies = {
       },
     },
     {
-      name: 'zitiDayRates',
+      name: 'ziti',
       datasetId: 'zitiDayRates',
       type: 'line',
       smooth: false,
@@ -376,7 +376,7 @@ const largeAreaChartDailies = {
       },
     },
     {
-      name: 'othersDayRates',
+      name: 'other repos',
       datasetId: 'othersDayRates',
       type: 'line',
       smooth: false,
