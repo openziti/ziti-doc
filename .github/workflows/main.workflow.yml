@@ -27,6 +27,8 @@ jobs:
           && npm install -g csvtojson
 
       - name: Build & Publish Docusaurus Site
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
         run: ./publish.sh
 
   check-links:
