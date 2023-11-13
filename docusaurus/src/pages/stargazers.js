@@ -162,7 +162,7 @@ const largeAreaChart = {
       },
     },*/
     {
-      name: 'zrokDayRates',
+      name: 'zrok daily stars',
       datasetId: 'zrokDayRates',
       type: 'line',
       smooth: false,
@@ -179,7 +179,7 @@ const largeAreaChart = {
       },
     },
     {
-      name: 'zitiDayRates',
+      name: 'ziti daily stars',
       datasetId: 'zitiDayRates',
       type: 'line',
       smooth: false,
@@ -196,7 +196,7 @@ const largeAreaChart = {
       },
     },
     {
-      name: 'othersDayRates',
+      name: 'other repos daily stars',
       datasetId: 'othersDayRates',
       type: 'line',
       smooth: false,
