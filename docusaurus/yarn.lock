@@ -1219,13 +1219,6 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@babel/runtime@^7.15.4":
-  version "7.23.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.2.tgz#062b0ac103261d68a966c4c7baf2ae3e62ec3885"
-  integrity sha512-mM8eg4yl5D6i3lu2QKPuPH4FArvJ8KhTofbE7jwMUv9KX5mBvwPAqnV3MlyBNqdp9RyRKP6Yck8TrfYrPvX3bg==
-  dependencies:
-    regenerator-runtime "^0.14.0"
-
 "@babel/template@^7.12.7", "@babel/template@^7.22.15", "@babel/template@^7.22.5":
   version "7.22.15"
   resolved "https://registry.npmjs.org/@babel/template/-/template-7.22.15.tgz"
@@ -3025,13 +3018,10 @@ asap@~2.0.3:
   resolved "https://registry.npmjs.org/asap/-/asap-2.0.6.tgz"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
-asciinema-player@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.0.0.tgz#ab0e1df06215211a89c971d412a54811ae87c7c7"
-  integrity sha512-YWSOvkIPzg+B88dDTfQQ9Av9r+Wj54i1iUrhxV/en/vGGjNg4XtxYQk+5XjRuhg/DRr6eiYKPu1Kp3B1YsIV8A==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    solid-js "^1.3.0"
+asciinema-player@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-2.6.1.tgz#3874c3ea5bb36583ed032a7b712af74c19c2b940"
+  integrity sha512-W6nW8+X/Krw6aRXQG45qvOZA4g765zbtjoBbjkQl1R7RLPihT00iqMHuHQYbNC1lhFg8x3MkE9ZhOELgSJQX6g==
 
 at-least-node@^1.0.0:
   version "1.0.0"
@@ -3980,7 +3970,7 @@ csso@^4.2.0:
   dependencies:
     css-tree "^1.1.2"
 
-csstype@^3.0.2, csstype@^3.1.0:
+csstype@^3.0.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.2.tgz"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
@@ -8571,11 +8561,6 @@ serialize-javascript@^6.0.0, serialize-javascript@^6.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-seroval@^0.12.0:
-  version "0.12.3"
-  resolved "https://registry.npmjs.org/seroval/-/seroval-0.12.3.tgz"
-  integrity sha512-5WDeMpv7rmEylsypRj1iwRVHE/QLsMLiZ+9savlNNQEVdgGia1iRMb7qyaAagY0wu/7+QTe6d2wldk/lgaLb6g==
-
 serve-handler@^6.1.3:
   version "6.1.5"
   resolved "https://registry.npmjs.org/serve-handler/-/serve-handler-6.1.5.tgz"
@@ -8776,14 +8761,6 @@ sockjs@^0.3.24:
     faye-websocket "^0.11.3"
     uuid "^8.3.2"
     websocket-driver "^0.7.4"
-
-solid-js@^1.3.0:
-  version "1.8.5"
-  resolved "https://registry.npmjs.org/solid-js/-/solid-js-1.8.5.tgz"
-  integrity sha512-xvtJvzJzWbsn35oKFhW9kNwaxG1Z/YLMsDp4tLVcYZTMPzvzQ8vEZuyDQ6nt7xDArVgZJ7TUFrJUwrui/oq53A==
-  dependencies:
-    csstype "^3.1.0"
-    seroval "^0.12.0"
 
 sort-css-media-queries@2.1.0:
   version "2.1.0"
