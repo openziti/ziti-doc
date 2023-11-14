@@ -3018,14 +3018,6 @@ asap@~2.0.3:
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
-asciinema-player@^3.6.3:
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.6.3.tgz#b029290df39805180c986656ce39b8517b351422"
-  integrity sha512-62aDgLpbuduhmpFfNgPOzf6fOluACLsftVnjpWJjUXX6dqhqTckFqWoJ+ayA0XjSlZ9l9wXTcJqRqvAAIpMblg==
-  dependencies:
-    "@babel/runtime" "^7.21.0"
-    solid-js "^1.3.0"
-
 at-least-node@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
