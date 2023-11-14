@@ -21,6 +21,7 @@
     "@docusaurus/theme-mermaid": "^2.4.3",
     "@hotjar/browser": "^1.0.9",
     "@mdx-js/react": "^1.6.22",
+    "asciinema-player": "^3.6.3",
     "clsx": "^1.2.1",
     "docusaurus-plugin-remote-content": "^3.1.0",
     "echarts": "^5.4.3",
