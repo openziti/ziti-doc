@@ -3018,10 +3018,10 @@ asap@~2.0.3:
   resolved "https://registry.npmjs.org/asap/-/asap-2.0.6.tgz"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
-asciinema-player@3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.6.0.tgz#00bb55894953813e3c7c21a25cf66f458108de95"
-  integrity sha512-+cScxWtyam4PBS3qv2o9n6MmF1qY8mbCMZScw3y8oEIZiyaa2busEPdUxcsI562+yyJSzzl8hnnNccna1HPhKw==
+asciinema-player@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.5.0.tgz#a4d1c01b56b72dfb6834e9ff90fee5c9652c7dae"
+  integrity sha512-o4B2AscBuCZo4+JB9TBGrfZ7GQL99wsbm08WwmuNJTPd1lyLQJq8wgacnBsdvb2sC0K875ScYr8T5XmfeH/6dg==
   dependencies:
     "@babel/runtime" "^7.21.0"
     solid-js "^1.3.0"
