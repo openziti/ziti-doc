@@ -1212,10 +1212,17 @@
     core-js-pure "^3.30.2"
     regenerator-runtime "^0.14.0"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.6", "@babel/runtime@^7.20.13", "@babel/runtime@^7.21.0", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.6", "@babel/runtime@^7.20.13", "@babel/runtime@^7.8.4":
   version "7.22.15"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.22.15.tgz"
   integrity sha512-T0O+aa+4w0u06iNmapipJXMV4HoUir03hpx3/YqXXhu9xim3w+dVphjFWl1OH8NbZHw5Lbm9k45drDkgq2VNNA==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
+"@babel/runtime@^7.15.4":
+  version "7.23.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.2.tgz#062b0ac103261d68a966c4c7baf2ae3e62ec3885"
+  integrity sha512-mM8eg4yl5D6i3lu2QKPuPH4FArvJ8KhTofbE7jwMUv9KX5mBvwPAqnV3MlyBNqdp9RyRKP6Yck8TrfYrPvX3bg==
   dependencies:
     regenerator-runtime "^0.14.0"
 
@@ -3018,12 +3025,12 @@ asap@~2.0.3:
   resolved "https://registry.npmjs.org/asap/-/asap-2.0.6.tgz"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
-asciinema-player@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.3.0.tgz#45616fa8dc3950c2be12b51d0a365ea2b9a845c2"
-  integrity sha512-4uyCGe83+5gZ06jgIGyV4vl0TS3egBgW0NXyCpDuDDvmzDGHEG8OICChrTecmTvajgLyq8YQet9nI7SYkVt8vQ==
+asciinema-player@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.2.0.tgz#9db608a2d81ff4ac235d50a88b498258bf7087fb"
+  integrity sha512-fV3Coe/UGieUy+5KCrh1qZf1lFWkuj12a6KcKrr84b61UFfUOpAZfyem4UnpczuP6cjrV3w5t0u8Wd1kTz/e7g==
   dependencies:
-    "@babel/runtime" "^7.21.0"
+    "@babel/runtime" "^7.15.4"
     solid-js "^1.3.0"
 
 at-least-node@^1.0.0:
