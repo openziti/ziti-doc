@@ -50,6 +50,18 @@ you can perform the following steps.
    npm install
    ```
 
+1. Build the core Angular library:
+
+   ```text
+   ng build ziti-console-lib
+   ```
+
+1. Build the Angular app:
+
+   ```text
+   ng build app-ziti-console
+   ```
+
 1. Use the ziti-controller certificates for the Ziti Console:
 
    Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
