@@ -35,7 +35,6 @@
     "mdx-mermaid": "^1.3.2",
     "mermaid": "^9.4.3",
     "mobx": "^6.1.0",
-    "node": "^20.5.0",
     "octokit": "^2.0.7",
     "prism-react-renderer": "^1.3.5",
     "raw-loader": "^4.0.2",
