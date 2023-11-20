@@ -31,8 +31,8 @@ function App() {
                     <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center", flexDirection: "column"}}>
                         <div className={styles.getStartedBoxes}>
                             <H1>Get a Taste of OpenZiti as an Appetizer</H1>
-                            <img src="/img/Appetizer-demo-arch.svg" alt="Appetizer Demo Architecture" style={{display: "flex", alignItems: "center", height: "300px"}}/>
 
+                            <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
                             <div style={{display: 'flex'}}>
                                 <div style={{flex: 2}}>
                                     <p>
@@ -56,8 +56,30 @@ function App() {
                                     </p>
                                 </div>
                             </div>
-                            <div style={{alignSelf: 'flex-start'}}>
-                                <Link className="button button--primary" to="https://netfoundry.io/pricing/">
+                            <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
+                            <div style={{display: 'flex'}}>
+                                <div style={{flex: 2}}>
+                                    <p>
+                                        The architectural drawing shows how there is a zero trust network allowing
+                                        two devices to connect over the OpenZiti network. There is the server host,
+                                        this is a virtual private server which has OpenZiti baked into the application
+                                        by utilizing the OpenZiti SDK. On the other hand, there is the client device,
+                                        this is the device connecting to the Appetizer demo application (like the
+                                        Reflect Demo above). The client device also has OpenZiti baked into the
+                                        application via an SDK. By utilizing the SDK on both endpoints, the traffic is
+                                        encrypted before it ever leaves the application.
+                                    </p>
+                                </div>
+
+                                <div style={{flex: 4}}>
+                                    <img src="/img/Appetizer-demo-arch.svg" alt="Appetizer Demo Architecture"
+                                         style={{display: "flex", alignItems: "center", height: "300px"}}/>
+                                </div>
+
+                            </div>
+                            <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
+                            <div style={{display: 'flex'}}>
+                                <Link className="button button--primary" to="https://appetizer-staging.openziti.io/">
                                     <p>Try the Demo</p>
                                 </Link>
                             </div>
