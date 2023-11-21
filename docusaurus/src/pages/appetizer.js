@@ -79,6 +79,62 @@ function App() {
                             </div>
                             <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
                             <div style={{display: 'flex'}}>
+                                <div style={{flex: 2}}>
+                                    <p>
+                                        Initially, the VPS is provisioned for hosting the appetizer server and providing access to the internet.
+                                    </p>
+                                </div>
+
+                                <div style={{flex: 4}}>
+                                    <img src="/img/Appetizer-demo-step1.svg" alt="Appetizer Demo Architecture"
+                                         style={{display: "flex", alignItems: "center", height: "600px"}}/>
+                                </div>
+
+                            </div>
+                            <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
+                            <div style={{display: 'flex'}}>
+                                <div style={{flex: 2}}>
+                                    <p>
+                                        An OpenZiti network is created and the appetizer demo is "zitified". OpenZiti is baked into the application by using an <a href="/docs/reference/tunnelers/">OpenZiti SDK</a>
+                                    </p>
+                                </div>
+
+                                <div style={{flex: 4}}>
+                                    <img src="/img/Appetizer-demo-step2.svg" alt="Appetizer Demo Architecture"
+                                         style={{display: "flex", alignItems: "center", height: "600px"}}/>
+                                </div>
+
+                            </div>
+                            <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
+                            <div style={{display: 'flex'}}>
+                                <div style={{flex: 2}}>
+                                    <p>
+                                        The client server (Reflect Server in this example) is started, which also has OpenZiti baked in via an SDK.
+                                    </p>
+                                </div>
+
+                                <div style={{flex: 4}}>
+                                    <img src="/img/Appetizer-demo-step3.svg" alt="Appetizer Demo Architecture"
+                                         style={{display: "flex", alignItems: "center", height: "600px"}}/>
+                                </div>
+
+                            </div>
+                            <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
+                            <div style={{display: 'flex'}}>
+                                <div style={{ flex: 2, display: 'flex', alignItems: 'center' }}>
+                                    <p>
+                                        The client server uses an identity token to enroll with the network and be given access to the appetizer server. An identity token is automatically retrieved from the appetizer server if not explicitly provided during the reflect server start up. An identity JSON file is generated during enrollment and the end to end zero trust network is fully configured.
+                                    </p>
+                                </div>
+
+                                <div style={{flex: 4}}>
+                                    <img src="/img/Appetizer-demo-step4.svg" alt="Appetizer Demo Architecture"
+                                         style={{display: "flex", alignItems: "center", height: "600px"}}/>
+                                </div>
+
+                            </div>
+                            <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
+                            <div style={{display: 'flex'}}>
                                 <Link className="button button--primary" to="https://appetizer-staging.openziti.io/">
                                     <p>Try the Demo</p>
                                 </Link>
