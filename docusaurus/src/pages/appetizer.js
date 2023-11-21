@@ -81,7 +81,7 @@ function App() {
                             <SideBySide
                                 text={`An OpenZiti network is created and the appetizer demo is 'zitified'. OpenZiti
                                         is baked into the application by using an
-                                        <a href='/docs/reference/developer/sdk/\'>OpenZiti SDK`}
+                                        <a href='/docs/reference/developer/sdk/\'>OpenZiti SDK</a>`}
                                 imagePath="/img/Appetizer-demo-step2-light.svg"
                                 altText="Appetizer Demo Architecture"
                             />
@@ -89,21 +89,22 @@ function App() {
                             <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
 
                             <SideBySide
-                                text="The client server (Reflect Server in this example) is started, which also has
-                                        OpenZiti baked in via an SDK."
-                                imagePath="/img/Appetizer-demo-step3.svg"
+                                text="The client application (Reflect Client in this example) is started, which also has
+                                        OpenZiti baked in via an SDK. If no identity token is provided, one is requested
+                                        from the controller."
+                                imagePath="/img/Appetizer-demo-step3-light.svg"
                                 altText="Appetizer Demo Architecture"
                             />
 
                             <div style={{display: 'flex', flexBasis: "100%", height: 10}}></div>
 
                             <SideBySide
-                                text="The client server uses an identity token to enroll with the network and be given
+                                text="The client application uses an identity token to enroll with the network and be given
                                         access to the appetizer server. An identity token is automatically retrieved
-                                        from the appetizer server if not explicitly provided during the reflect server
+                                        from the appetizer server if not explicitly provided during the reflect client
                                         start up. An identity JSON file is generated during enrollment and the end to
                                         end zero trust network is fully configured."
-                                imagePath="/img/Appetizer-demo-step4.svg"
+                                imagePath="/img/Appetizer-demo-step4-light.svg"
                                 altText="Appetizer Demo Architecture"
                             />
 
