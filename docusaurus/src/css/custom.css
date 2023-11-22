@@ -55,7 +55,7 @@ html[data-theme=dark] #Wizardly code {
 }
 
 html[data-theme=dark] code { 
-  color: rgb(221,216,229) !important;
+  color: var(--code-block-text-color) !important;
 }
 
 html[data-theme=dark] .alert--secondary code {
