@@ -17,6 +17,7 @@
   --ifm-color-primary-light: #a14ded;
   --ifm-color-primary-lighter: #a85aee;
   --ifm-color-primary-lightest: #b776f1;
+  --code-block-text-color: #ddd8e5;
   --ifm-heading-color: #002451;
   --ifm-color-banner: #edac15;
   --ifm-navbar-item-padding-horizontal: .5em;
@@ -1855,7 +1856,7 @@ code {
 }
 
 code p {
-  color: rgb(221,216,229);
+  color: var(--code-block-text-color);
 }
 
 li a code {
