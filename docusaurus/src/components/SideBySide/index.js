@@ -1,15 +1,13 @@
 import React from 'react';
 
-const SideBySide = ({text, imagePath, altText}) => {
+const SideBySide = ({left, right}) => {
     return (
-        <div style={{display: 'flex'}}>
-            <div style={{flex: 2, display: 'flex', alignItems: 'center'}}>
-                <p>{text}</p>
+        <div style={{display: "flex", justifyContent:"space-between"}}>
+            <div style={{display: 'flex', alignItems: "center", padding: "10px"}}>
+                {left}
             </div>
-
-            <div style={{flex: 3}}>
-                <img src={imagePath} alt={altText}
-                     style={{display: "flex", alignItems: "center", height: "250px"}}/>
+            <div style={{display: "flex"}}>
+                {right}
             </div>
         </div>
     );
