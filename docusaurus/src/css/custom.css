@@ -1854,6 +1854,10 @@ code {
 
 }
 
+code p {
+  color: rgb(221,216,229);
+}
+
 li a code {
     font-family: var(--ifm-font-family-monospace);
     vertical-align: middle;
