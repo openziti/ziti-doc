@@ -1,0 +1,33 @@
+.flexContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    flex: 1;
+    border: 1px solid #ccc;
+    width: 600px;
+}
+
+.slideStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0px 0px 0px;
+}
+
+.defaultSlideStyle {
+    display: flex;
+    margin: 5px;
+}
+
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    padding-right: 10px;
+}
+
+code {
+    white-space: pre;
+}

@@ -44,8 +44,8 @@
 }
 
 html[data-theme=dark] {
-  --ifm-heading-color: #ffffff;
-  --ifm-font-color-base: #ffffff;
+  --ifm-heading-color: #94a3b8;
+  --ifm-font-color-base: #94a3b8;
   --ifm-menu-color: #ffffff;
   --ifm-toc-link-color: #ffffff;
 }
