@@ -25,6 +25,19 @@ const Slideshow = ({ style, slideClassName, slides }) => {
         img = slides[currentPosition].img;
     }
 
+    let buttons = null;
+
+    if(slides.length > 1) {
+        buttons = <div style={{display: "flex", flexDirection: "row-reverse", margin: "5px"}}>
+            <div style={{display: "flex", marginRight: "5px"}}>
+                <button className="button button--primary" onClick={goToNextSlide}>Next</button>
+            </div>
+            <div style={{display: "flex", marginRight: "5px"}}>
+                <button className="button button--primary" onClick={goToPrevSlide}>Previous</button>
+            </div>
+        </div>
+    }
+
     return (
         <div style={style} >
             {slides[currentPosition].title}
@@ -36,14 +49,7 @@ const Slideshow = ({ style, slideClassName, slides }) => {
                     <img style={{maxWidth: "100%"}} src={img} alt={`Slide ${currentPosition + 1}`} />
                 </div>
             </div>
-            <div style={{display: "flex", flexDirection: "row-reverse", margin:"5px"}}>
-                <div style={{display: "flex", marginRight:"5px"}}>
-                    <button className="button button--primary" onClick={goToNextSlide}>Next</button>
-                </div>
-                <div style={{display: "flex", marginRight:"5px"}}>
-                    <button className="button button--primary" onClick={goToPrevSlide}>Previous</button>
-                </div>
-            </div>
+            {buttons}
         </div>
     );
 };
