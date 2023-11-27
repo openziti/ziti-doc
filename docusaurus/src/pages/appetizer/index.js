@@ -69,6 +69,17 @@ function App() {
         .split('\n') // Split the string into an array of lines
         .map(line => line.trimLeft() + '\n'); // Trim leading spaces for each line
 
+    const whatYouGet = <div>
+            <H3>What You Get by Adopting an OpenZiti SDK</H3>
+            <ul>
+                <li>Strong identities. X509 certificates guarantee all entities on the network are who they claim to be.</li>
+                <li>Segmented access. Follow the "least privileged access" model. Allow access only to exactly what is needed.</li>
+                <li>Protection from port scanning. The application has no listening ports, it's "dark". It's impossible to detect and directly attack.</li>
+                <li>Continuous authentication. The world is dynamic. Constant authentication is vital.</li>
+                <li>End-to-end encryption. Make sure the data you intend to send is only available to the intended recipient.</li>
+            </ul>
+        </div>;
+
     return (
         <OpenZitiLayout>
             <OpenZitiHorizontalSection>
@@ -85,31 +96,17 @@ function App() {
                 <div style={{display: "flex", flexWrap: "wrap", margin:"5px"}}>
                     <div className={style.leftColumn}>
                         <H2>See it in action!</H2>
-                        <p>The short video shows you just how quickly and easily you can run a sample
-                            application and experience what it's like to connect to an application
-                            protected by an OpenZiti overlay network.</p>
-                        <br/>
-                        <p>To try it yourself, clone the repo and just <code>go run</code> the client</p>
+                        <p>Experience zero trust in action for yourself! clone the golang repo, and <code>go run</code></p>
                         <div style={{marginTop: "var(--ifm-leading)"}}>
                             <CodeBlock>
                                 {trimmedCode}
                             </CodeBlock>
                         </div>
+                        {whatYouGet}
                     </div>
                     <div className={style.column}>
                         <AsciinemaWidget fit={"width"} src="/appetizer.cast" rows={13} cols={85} loop={true} autoplay={1} preload={true} />
                     </div>
-                </div>
-                <hr/>
-                <div>
-                    <H2>What You Get by Adopting an OpenZiti SDK</H2>
-                    <ul>
-                        <li>Strong identities. X509 certificates guarantee all entities on the network are who they claim to be.</li>
-                        <li>Segmented access. Follow the "least privileged access" model. Allow access only to exactly what is needed.</li>
-                        <li>Protection from port scanning. The application has no listening ports, it's "dark". It's impossible to detect and directly attack.</li>
-                        <li>Continuous authentication. The world is dynamic. Constant authentication is vital.</li>
-                        <li>End-to-end encryption. Make sure the data you intend to send is only available to the intended recipient.</li>
-                    </ul>
                 </div>
                 <hr/>
                 <H2>Taking a Look at What's Going on</H2>

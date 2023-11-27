@@ -9,7 +9,6 @@
 
 .column {
     flex: 1;
-    border: 1px solid #ccc;
     width: 600px;
 }
 
