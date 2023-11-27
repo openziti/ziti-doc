@@ -90,7 +90,7 @@ function App() {
                         alt="Ziggy Chef"
                         style={{paddingRight: "20px"}}
                     />
-                    <H1 style={{alignContent:"center"}}>Getting a Taste of OpenZiti as an Appetizer</H1>
+                    <H1 style={{alignContent:"center"}}>Appetizer: Taste OpenZiti</H1>
                 </div>
                 <hr/>
                 <div style={{display: "flex", flexWrap: "wrap", margin:"5px"}}>
@@ -109,14 +109,7 @@ function App() {
                     </div>
                 </div>
                 <hr/>
-                <H2>Taking a Look at What's Going on</H2>
-                <SlideShow slides={slideImages} slideClassName={style.defaultSlideStyle}/>
-                <hr/>
-                <SlideShow slides={[slideImages[0]]} slideClassName={style.defaultSlideStyle}/>
-                <SlideShow slides={[slideImages[1]]} slideClassName={style.defaultSlideStyle}/>
-                <SlideShow slides={[slideImages[2]]} slideClassName={style.defaultSlideStyle}/>
-                <SlideShow slides={[slideImages[3]]} slideClassName={style.defaultSlideStyle}/>
-                <SlideShow slides={[slideImages[4]]} slideClassName={style.defaultSlideStyle}/>
+                <SlideShow slides={slideImages} slideTitle={<H2>Taking a Look at What's Going on</H2>} slideClassName={style.defaultSlideStyle}/>
             </OpenZitiHorizontalSection>
         </OpenZitiLayout>
     );

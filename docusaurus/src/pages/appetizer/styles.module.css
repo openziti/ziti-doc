@@ -38,13 +38,3 @@ code {
 .theme-code-block {
     margin-top: 100px;
 }
-
-
-.docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module {
-    background: var(--prism-background-color);
-    color: var(--prism-color);
-    margin-bottom: var(--ifm-leading);
-    margin-top: var(--ifm-leading);
-    box-shadow: var(--ifm-global-shadow-lw);
-    border-radius: var(--ifm-code-border-radius);
-}
