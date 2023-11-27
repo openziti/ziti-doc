@@ -29,7 +29,7 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
     };
 
     const enableButtons = () => {
-        console.warn("enableButtons.currentPosition: " + currentPosition)
+        console.debug("enableButtons.currentPosition: " + currentPosition)
         setPreviousDisabled(currentPosition === 0);
         setNextDisabled(currentPosition < slides.length - 1);
     }
@@ -71,7 +71,7 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
     const handleOnWheel = (e) => {
         const curScroll = scrollPos + e.deltaY;
         const effectivePage = Math.floor(curScroll / 100);
-        console.warn("EFFECTIVE PAGE: " + effectivePage + " : " + curScroll + " : " + slides.length);
+        console.debug("EFFECTIVE PAGE: " + effectivePage + " : " + curScroll + " : " + slides.length);
         if(curScroll <= 0) {
             setScrollPos(0);
         } else if( effectivePage > slides.length) {
@@ -81,7 +81,7 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
                 setScrollPos(curScroll);
                 setCurrentPosition(effectivePage);
 
-                console.warn("handleOnWheel.currentPosition: " + currentPosition)
+                console.debug("handleOnWheel.currentPosition: " + currentPosition)
                 enableButtons();
             }
         }
