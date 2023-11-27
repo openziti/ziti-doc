@@ -29,8 +29,9 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
     };
 
     const enableButtons = () => {
+        console.warn("enableButtons.currentPosition: " + currentPosition)
         setPreviousDisabled(currentPosition === 0);
-        setNextDisabled(currentPosition === slides.length - 1);
+        setNextDisabled(currentPosition < slides.length - 1);
     }
 
     const showAllToggle = () => {
@@ -68,25 +69,22 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
     }
 
     const handleOnWheel = (e) => {
-        if(e.deltaY > 0) {
-            console.log('onWheel: scrolling down: ' + e.deltaY);
-        } else {
-            console.log('onWheel: scrolling up: ' + e.deltaY);
-        }
         const curScroll = scrollPos + e.deltaY;
-        const effectivePage = (curScroll / 100);
+        const effectivePage = Math.floor(curScroll / 100);
+        console.warn("EFFECTIVE PAGE: " + effectivePage + " : " + curScroll + " : " + slides.length);
         if(curScroll <= 0) {
             setScrollPos(0);
-            console.warn("A: 0");
         } else if( effectivePage > slides.length) {
             setScrollPos(100 * slides.length);
-            console.warn("B:" + (100 * slides.length));
         } else {
-            setScrollPos(curScroll);
-            console.warn("C:" + curScroll);
-            setCurrentPosition(effectivePage - 1);
+            if(effectivePage < slides.length && effectivePage >= 0) {
+                setScrollPos(curScroll);
+                setCurrentPosition(effectivePage);
+
+                console.warn("handleOnWheel.currentPosition: " + currentPosition)
+                enableButtons();
+            }
         }
-        enableButtons();
     };
 
     const [hovered, setHovered] = useState(false);
@@ -96,7 +94,6 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
     const handleMouseLeave = () => {
         setHovered(false);
     };
-    const scrollDirection = useScrollDirection();
 
     const isDark = () => {
         return colorMode === 'dark';
@@ -110,7 +107,6 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
 
     const renderSlide = (slide) => {
         const img = getImg(slide);
-
         return <>
             {slide.title}
             <div className={slideClassName}>
@@ -139,18 +135,6 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
 
     const allSlides = slides.map(slide => renderSlide(slide));
 
-    const what2 = <div
-        className={`my-element ${hovered ? 'hovered' : ''}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onWheel={handleOnWheel}
-    >
-        <h1>Hover Effect Example</h1>
-        <p>{hovered ? 'Mouse entered!' : 'Mouse left!'}</p>
-    </div>;
-
-    //return (what2);
-
     return (
         <>
             <div style={{display: "flex", justifyContent:"space-between"}}>
@@ -165,28 +149,5 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
         </>
     );
 };
-
-function useScrollDirection() {
-    const [scrollDirection, setScrollDirection] = useState(null);
-
-    useEffect(() => {
-        let lastScrollY = window.pageYOffset;
-        // function to run on scroll
-        const updateScrollDirection = () => {
-            const scrollY = window.pageYOffset;
-            const direction = scrollY > lastScrollY ? "down" : "up";
-            if (direction !== scrollDirection) {
-                setScrollDirection(direction);
-            }
-            lastScrollY = scrollY > 0 ? scrollY : 0;
-        };
-        window.addEventListener("scroll", updateScrollDirection); // add event listener
-        return () => {
-            window.removeEventListener("scroll", updateScrollDirection); // clean up
-        }
-    }, [scrollDirection]); // run when scroll direction changes
-
-    return scrollDirection;
-}
 
 export default Slideshow;
