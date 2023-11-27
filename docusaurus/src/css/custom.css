@@ -1956,7 +1956,7 @@ pre code {
   padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
 }
 
-pre {
+pre.off {
   margin-top: 10px !important;
 }
 

@@ -2,20 +2,36 @@ import React, { useState } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 
 const Slideshow = ({ style, slideClassName, slides }) => {
+    const {colorMode, setColorMode} = useColorMode();
     const [currentPosition, setCurrentPosition] = useState(0);
+    const [nextDisabled, setNextDisabled] = useState(false);
+    const [previousDisabled, setPreviousDisabled] = useState(true);
 
     const goToNextSlide = () => {
-        setCurrentPosition((prevPosition) => (prevPosition + 1) % slides.length);
+        if(currentPosition === slides.length - 1) {
+            setNextDisabled(true);
+        } else {
+            setPreviousDisabled(false);
+            setCurrentPosition(currentPosition + 1);
+        }
     };
 
     const goToPrevSlide = () => {
-        setCurrentPosition((prevPosition) => (prevPosition - 1 + slides.length) % slides.length);
+        if(currentPosition === 0) {
+            setPreviousDisabled(true);
+        } else {
+            setNextDisabled(false);
+            setCurrentPosition(currentPosition - 1);
+        }
     };
 
-    const { isDarkTheme } = useColorMode();
+    const showAllToggle = () => {
+
+    };
+
     let img = null;
 
-    if (isDarkTheme) {
+    if (colorMode === 'dark') {
         // Dark mode is enabled
         // console.log('Dark mode is enabled');
         img = slides[currentPosition].darkImg;
@@ -30,10 +46,13 @@ const Slideshow = ({ style, slideClassName, slides }) => {
     if(slides.length > 1) {
         buttons = <div style={{display: "flex", flexDirection: "row-reverse", margin: "5px"}}>
             <div style={{display: "flex", marginRight: "5px"}}>
-                <button className="button button--primary" onClick={goToNextSlide}>Next</button>
+                <button disabled={nextDisabled} className="button button--primary" onClick={showAllToggle}>Show All Slides</button>
             </div>
             <div style={{display: "flex", marginRight: "5px"}}>
-                <button className="button button--primary" onClick={goToPrevSlide}>Previous</button>
+                <button disabled={nextDisabled} className="button button--primary" onClick={goToNextSlide}>Next</button>
+            </div>
+            <div style={{display: "flex", marginRight: "5px"}}>
+                <button disabled={previousDisabled} className="button button--primary" onClick={goToPrevSlide}>Previous</button>
             </div>
         </div>
     }
