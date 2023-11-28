@@ -18,39 +18,39 @@
 		.st10 {fill:#834150;stroke:#f2f2f2;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.25}
 		.st11 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
 		.st12 {fill:#d8d8d8;font-family:Russo One;font-size:1.99999em}
-		.st13 {fill:#0273fb;stroke:none;stroke-linecap:butt;stroke-width:1.50369}
-		.st14 {fill:none;stroke:#158aff;stroke-linecap:butt;stroke-width:3.38029}
-		.st15 {fill:#6140b5;fill-opacity:0.98;stroke:none;stroke-linecap:butt;stroke-width:1.50369}
-		.st16 {fill:none;stroke:#664dc4;stroke-linecap:butt;stroke-opacity:0.98;stroke-width:3.38029}
-		.st17 {fill:#ff0d49;fill-opacity:0.98;stroke:none;stroke-linecap:butt;stroke-width:1.50369}
-		.st18 {fill:none;stroke:#fc2d81;stroke-linecap:butt;stroke-opacity:0.98;stroke-width:3.38029}
-		.st19 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:1.50369}
-		.st20 {fill:#9a6132;stroke:#513100;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
-		.st21 {fill:#ffc000;stroke:none;stroke-linecap:butt;stroke-width:2.01316}
-		.st22 {fill:#ff9900;stroke:none;stroke-linecap:butt;stroke-width:2.01316}
-		.st23 {fill:#527398;stroke:#1c3453;stroke-dasharray:6,6;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
-		.st24 {stroke:#33445b;stroke-linecap:round;stroke-linejoin:round;stroke-width:12}
-		.st25 {fill:#f2f2f2;stroke:#33445b;stroke-linecap:round;stroke-linejoin:round;stroke-width:3}
-		.st26 {fill:url(#grad0-78);stroke:none;stroke-linecap:butt;stroke-width:2.04}
-		.st27 {fill:#ffffff;marker-end:url(#mrkr42-97);stroke:#33445b;stroke-linecap:round;stroke-linejoin:round;stroke-width:5}
-		.st28 {fill:#33445b;fill-opacity:1;stroke:#33445b;stroke-opacity:1;stroke-width:0.66489361702128}
-		.st29 {fill:url(#grad0-141);stroke:none;stroke-linecap:butt;stroke-width:2.04}
-		.st30 {fill:url(#grad0-145);stroke:none;stroke-linecap:butt;stroke-width:2.04}
-		.st31 {fill:url(#grad0-149);stroke:none;stroke-linecap:butt;stroke-width:2.04}
-		.st32 {fill:url(#grad0-153);stroke:none;stroke-linecap:butt;stroke-width:2.04}
-		.st33 {fill:#000000;fill-opacity:0.18;stroke:#332741;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.92;stroke-width:3.25}
-		.st34 {fill:#374962;stroke:#343047;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
-		.st35 {fill:#273547;font-family:Russo One;font-size:3em}
-		.st36 {fill:#374962;stroke:#273547;stroke-linecap:butt;stroke-width:1.50369}
-		.st37 {fill:#374962;stroke:#273547;stroke-linecap:butt;stroke-width:3.38029}
-		.st38 {fill:#834150;stroke:#f2f2f2;stroke-dasharray:6.75,6.75;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.25}
-		.st39 {stroke:#1c3453;stroke-linecap:round;stroke-linejoin:round;stroke-width:12}
-		.st40 {fill:#ffffff;marker-end:url(#mrkr42-254);stroke:#fc0147;stroke-linecap:round;stroke-linejoin:round;stroke-width:5}
+		.st13 {fill:#9a6132;stroke:#513100;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
+		.st14 {fill:#ffc000;stroke:none;stroke-linecap:butt;stroke-width:2.01316}
+		.st15 {fill:#ff9900;stroke:none;stroke-linecap:butt;stroke-width:2.01316}
+		.st16 {fill:#527398;stroke:#1c3453;stroke-dasharray:6,6;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
+		.st17 {stroke:#33445b;stroke-linecap:round;stroke-linejoin:round;stroke-width:12}
+		.st18 {fill:#f2f2f2;stroke:#33445b;stroke-linecap:round;stroke-linejoin:round;stroke-width:3}
+		.st19 {fill:url(#grad0-59);stroke:none;stroke-linecap:butt;stroke-width:2.04}
+		.st20 {fill:#ffffff;marker-end:url(#mrkr42-78);stroke:#33445b;stroke-linecap:round;stroke-linejoin:round;stroke-width:5}
+		.st21 {fill:#33445b;fill-opacity:1;stroke:#33445b;stroke-opacity:1;stroke-width:0.66489361702128}
+		.st22 {fill:url(#grad0-122);stroke:none;stroke-linecap:butt;stroke-width:2.04}
+		.st23 {fill:url(#grad0-126);stroke:none;stroke-linecap:butt;stroke-width:2.04}
+		.st24 {fill:url(#grad0-130);stroke:none;stroke-linecap:butt;stroke-width:2.04}
+		.st25 {fill:url(#grad0-134);stroke:none;stroke-linecap:butt;stroke-width:2.04}
+		.st26 {fill:#000000;fill-opacity:0.18;stroke:#332741;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.92;stroke-width:3.25}
+		.st27 {fill:#374962;stroke:#343047;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
+		.st28 {fill:#273547;font-family:Russo One;font-size:3em}
+		.st29 {fill:#374962;stroke:#273547;stroke-linecap:butt;stroke-width:1.50369}
+		.st30 {fill:#374962;stroke:#273547;stroke-linecap:butt;stroke-width:3.38029}
+		.st31 {fill:#834150;stroke:#f2f2f2;stroke-dasharray:6.75,6.75;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.25}
+		.st32 {fill:#0273fb;stroke:none;stroke-linecap:butt;stroke-width:1.50369}
+		.st33 {fill:none;stroke:#158aff;stroke-linecap:butt;stroke-width:3.38029}
+		.st34 {fill:#6140b5;fill-opacity:0.98;stroke:none;stroke-linecap:butt;stroke-width:1.50369}
+		.st35 {fill:none;stroke:#664dc4;stroke-linecap:butt;stroke-opacity:0.98;stroke-width:3.38029}
+		.st36 {fill:#ff0d49;fill-opacity:0.98;stroke:none;stroke-linecap:butt;stroke-width:1.50369}
+		.st37 {fill:none;stroke:#fc2d81;stroke-linecap:butt;stroke-opacity:0.98;stroke-width:3.38029}
+		.st38 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:1.50369}
+		.st39 {fill:none;filter:url(#filter_16.666666030884);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.57}
+		.st40 {fill:#ffffff;marker-end:url(#mrkr42-259);stroke:#fc0147;stroke-linecap:round;stroke-linejoin:round;stroke-width:5}
 		.st41 {fill:#fc0147;fill-opacity:1;stroke:#fc0147;stroke-opacity:1;stroke-width:0.66489361702128}
 		.st42 {fill:#ffffff;stroke:#33445b;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
 		.st43 {fill:#33445b;font-family:Open Sans;font-size:1.5em;font-weight:bold}
 		.st44 {fill:#33445b;stroke:#1c2531;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.75}
-		.st45 {fill:url(#grad0-274);stroke:none;stroke-linecap:butt;stroke-width:2.04}
+		.st45 {fill:url(#grad0-279);stroke:none;stroke-linecap:butt;stroke-width:2.04}
 		.st46 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
 	]]>
 	</style>
@@ -60,31 +60,31 @@
 			<stop offset="0" stop-color="#fc0147" stop-opacity="0.15"/>
 			<stop offset="1" stop-color="#0068f9" stop-opacity="0.15"/>
 		</linearGradient>
-		<linearGradient id="grad0-78" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(50 0.5 0.5)">
+		<linearGradient id="grad0-59" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(50 0.5 0.5)">
 			<stop offset="0.34" stop-color="#0068f9" stop-opacity="1"/>
 			<stop offset="0.86" stop-color="#fc0147" stop-opacity="1"/>
 		</linearGradient>
-		<linearGradient id="grad0-141" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(-118.14215319877 0.5 0.5)">
+		<linearGradient id="grad0-122" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(-118.14215319877 0.5 0.5)">
 			<stop offset="0.005" stop-color="#fc0147" stop-opacity="1"/>
 			<stop offset="0.04" stop-color="#f4044d" stop-opacity="1"/>
 			<stop offset="0.9" stop-color="#0068f9" stop-opacity="1"/>
 		</linearGradient>
-		<linearGradient id="grad0-145" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(-135 0.5 0.5)">
+		<linearGradient id="grad0-126" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(-135 0.5 0.5)">
 			<stop offset="0.005" stop-color="#fc0147" stop-opacity="1"/>
 			<stop offset="0.04" stop-color="#f4044d" stop-opacity="1"/>
 			<stop offset="0.9" stop-color="#0068f9" stop-opacity="1"/>
 		</linearGradient>
-		<linearGradient id="grad0-149" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(-112.38354531203 0.5 0.5)">
+		<linearGradient id="grad0-130" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(-112.38354531203 0.5 0.5)">
 			<stop offset="0.005" stop-color="#fc0147" stop-opacity="1"/>
 			<stop offset="0.04" stop-color="#f4044d" stop-opacity="1"/>
 			<stop offset="0.9" stop-color="#0068f9" stop-opacity="1"/>
 		</linearGradient>
-		<linearGradient id="grad0-153" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(-112.40744476367 0.5 0.5)">
+		<linearGradient id="grad0-134" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(-112.40744476367 0.5 0.5)">
 			<stop offset="0.005" stop-color="#fc0147" stop-opacity="1"/>
 			<stop offset="0.04" stop-color="#f4044d" stop-opacity="1"/>
 			<stop offset="0.9" stop-color="#0068f9" stop-opacity="1"/>
 		</linearGradient>
-		<linearGradient id="grad0-274" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(50 0.5 0.5)">
+		<linearGradient id="grad0-279" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(50 0.5 0.5)">
 			<stop offset="0.23" stop-color="#fc0147" stop-opacity="1"/>
 			<stop offset="0.86" stop-color="#0068f9" stop-opacity="1"/>
 		</linearGradient>
@@ -95,16 +95,19 @@
 					d="M 0 0.75 C -0.414214 0.75 -0.75 0.414214 -0.75 0 -0.75 -0.414214 -0.414214 -0.75 0 -0.75 0.414214 -0.75 0.75 -0.414214 0.75 0 0.75 0.414214 0.414214 0.75 0 0.75 Z "
 					style="stroke:none"/>
 		</g>
-		<marker id="mrkr42-97" class="st28" refX="-1.128" orient="auto" markerUnits="strokeWidth" overflow="visible">
+		<marker id="mrkr42-78" class="st21" refX="-1.128" orient="auto" markerUnits="strokeWidth" overflow="visible">
 			<use xlink:href="#lend42" transform="scale(-1.504,-1.504) "/>
 		</marker>
-		<marker id="mrkr42-254" class="st41" refX="-1.128" orient="auto" markerUnits="strokeWidth" overflow="visible">
+		<marker id="mrkr42-259" class="st41" refX="-1.128" orient="auto" markerUnits="strokeWidth" overflow="visible">
 			<use xlink:href="#lend42" transform="scale(-1.504,-1.504) "/>
 		</marker>
 	</defs>
 	<defs id="Filters">
 		<filter id="filter_5.3333334922791">
 			<feGaussianBlur stdDeviation="5.3333334922791"/>
+		</filter>
+		<filter id="filter_16.666666030884">
+			<feGaussianBlur stdDeviation="16.666666030884"/>
 		</filter>
 	</defs>
 	<g>
@@ -169,72 +172,15 @@
 				<rect x="0" y="408.662" width="184.5" height="32.8378" class="st11"/>
 				<text x="8.85" y="432.28" class="st12">Reflect Client</text>			</g>
 		</g>
-		<g id="group3194-26" transform="translate(129.213,-96.2838)">
-			<title>SDKs</title>
-			<g id="group3195-27">
-				<title>CloudKit-Icon</title>
-				<g id="group3196-28">
-					<title>Bottom</title>
-					<g id="shape3197-29">
-						<title>Sheet.3197</title>
-						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.86 384.4 C44.14 379.94 34.88 379.94 29.16
-									 384.4 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
-									 437.04 L73.32 418.77 Z" class="st13"/>
-					</g>
-					<g id="shape3198-31">
-						<title>Sheet.3198</title>
-						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.86 384.4 C44.14 379.94 34.88 379.94 29.16
-									 384.4 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
-									 437.04 L73.32 418.77 Z" class="st14"/>
-					</g>
-				</g>
-				<g id="group3199-33" transform="translate(0,-12.6993)">
-					<title>Middle</title>
-					<g id="shape3200-34">
-						<title>Sheet.3200</title>
-						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.88 384.38 C44.16 379.92 34.9 379.92 29.18
-									 384.38 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
-									 437.04 L73.32 418.77 Z" class="st15"/>
-					</g>
-					<g id="shape3201-36">
-						<title>Sheet.3201</title>
-						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.88 384.38 C44.16 379.92 34.9 379.92 29.18
-									 384.38 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
-									 437.04 L73.32 418.77 Z" class="st16"/>
-					</g>
-				</g>
-				<g id="group3202-38" transform="translate(0,-25.3986)">
-					<title>Top</title>
-					<g id="shape3203-39">
-						<title>Sheet.3203</title>
-						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.88 384.38 C44.16 379.92 34.9 379.92 29.18
-									 384.38 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
-									 437.04 L73.32 418.77 Z" class="st17"/>
-					</g>
-					<g id="shape3204-41">
-						<title>Sheet.3204</title>
-						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.88 384.38 C44.16 379.92 34.9 379.92 29.18
-									 384.38 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
-									 437.04 L73.32 418.77 Z" class="st18"/>
-					</g>
-				</g>
-			</g>
-			<g id="shape3205-43" transform="translate(25.6871,-34.749)">
-				<title>Sheet.3205</title>
-				<path d="M14.24 396.46 L0 418.13 L8.09 423.42 L9.43 421.37 L13.64 441.5 L27.66 419.73 L19.79 414.6 L18.46 416.67
-							 L14.24 396.46 ZM20.62 418.21 L24.06 420.54 L14.84 434.67 L10.61 414.48 L7.21 419.73 L3.8 417.51 L13.06
-							 403.35 L17.25 423.34 L20.62 418.21 Z" class="st19"/>
-			</g>
-		</g>
-		<g id="shape3109-45" transform="translate(986.136,-12.7598)">
+		<g id="shape3109-26" transform="translate(986.136,-12.7598)">
 			<title>Rounded Rectangle.3109</title>
 			<path d="M10.58 441.5 L391.36 441.5 A10.5772 10.5772 -180 0 0 401.94 430.92 L401.94 50.34 A10.5772 10.5772 -180 0 0 391.36
 						 39.76 L10.58 39.76 A10.5772 10.5772 -180 0 0 0 50.34 L0 430.92 A10.5772 10.5772 -180 0 0 10.58 441.5 Z"
-					class="st20"/>
+					class="st13"/>
 		</g>
-		<g id="group3111-47" transform="translate(995.386,-18.5035)">
+		<g id="group3111-28" transform="translate(995.386,-18.5035)">
 			<title>Sheet.3111</title>
-			<g id="shape3112-48" transform="translate(3.35751,-20.2869)">
+			<g id="shape3112-29" transform="translate(3.35751,-20.2869)">
 				<title>Sheet.3112</title>
 				<path d="M17.09 434.71 C17.09 435.59 17.19 436.3 17.36 436.82 C17.54 437.34 17.78 437.91 18.11 438.52 C18.23 438.71
 							 18.28 438.9 18.28 439.06 C18.28 439.3 18.14 439.54 17.83 439.77 L16.34 440.77 C16.13 440.91 15.91 440.98
@@ -275,77 +221,77 @@
 							 C56.7 422.47 55.64 422.68 54.9 423.13 C54.17 423.58 53.79 424.26 53.79 425.23 C53.79 425.89 54.03 426.46
 							 54.5 426.91 C54.97 427.36 55.85 427.81 57.1 428.21 L60.46 429.28 C62.16 429.82 63.39 430.58 64.12 431.55
 							 C64.86 432.52 65.21 433.63 65.21 434.86 C65.21 435.87 65 436.79 64.6 437.6 C64.17 438.4 63.6 439.11
-							 62.87 439.68 C62.14 440.27 61.26 440.7 60.25 441 C59.18 441.33 58.07 441.5 56.86 441.5 Z" class="st21"/>
+							 62.87 439.68 C62.14 440.27 61.26 440.7 60.25 441 C59.18 441.33 58.07 441.5 56.86 441.5 Z" class="st14"/>
 			</g>
-			<g id="group3113-50">
+			<g id="group3113-31">
 				<title>Sheet.3113</title>
-				<g id="shape3114-51">
+				<g id="shape3114-32">
 					<title>Sheet.3114</title>
 					<path d="M64.69 432.7 C56.91 438.45 45.61 441.5 35.89 441.5 C22.27 441.5 10 436.46 0.73 428.09 C0 427.43 0.66
 								 426.53 1.54 427.05 C11.56 432.87 23.93 436.39 36.72 436.39 C45.35 436.39 54.83 434.6 63.56 430.91
-								 C64.86 430.32 65.97 431.76 64.69 432.7 Z" class="st22"/>
+								 C64.86 430.32 65.97 431.76 64.69 432.7 Z" class="st15"/>
 				</g>
-				<g id="shape3115-53" transform="translate(57.9525,-2.62453)">
+				<g id="shape3115-34" transform="translate(57.9525,-2.62453)">
 					<title>Sheet.3115</title>
 					<path d="M9.98 431.64 C8.98 430.36 3.4 431.03 0.87 431.33 C0.12 431.43 0 430.77 0.69 430.27 C5.13 427.15 12.44
 								 428.05 13.29 429.09 C14.14 430.15 13.05 437.46 8.89 440.96 C8.25 441.5 7.64 441.22 7.92 440.51 C8.87
-								 438.17 10.97 432.89 9.98 431.64 Z" class="st22"/>
+								 438.17 10.97 432.89 9.98 431.64 Z" class="st15"/>
 				</g>
 			</g>
 		</g>
-		<g id="shape3108-55" transform="translate(1004.14,-72.0049)">
+		<g id="shape3108-36" transform="translate(1004.14,-72.0049)">
 			<title>Rounded Rectangle.3108</title>
 			<desc>Fargate Container</desc>
 			<path d="M7.49 441.5 L358.45 441.5 A7.49405 7.49405 -180 0 0 365.94 434.01 L365.94 124.5 A7.49405 7.49405 -180 0 0 358.45
 						 117 L7.49 117 A7.49405 7.49405 -180 0 0 -0 124.5 L0 434.01 A7.49405 7.49405 -180 0 0 7.49 441.5 Z"
-					class="st23"/>
+					class="st16"/>
 			<text x="18.09" y="153.41" class="st8">Fargate Container</text>		</g>
-		<g id="shape3286-58" transform="translate(752.101,-165.822)">
+		<g id="shape3286-39" transform="translate(752.101,-165.822)">
 			<title>Dynamic connector.3286</title>
-			<path d="M0 432.5 L-253.41 432.5" class="st24"/>
+			<path d="M0 432.5 L-253.41 432.5" class="st17"/>
 		</g>
-		<g id="shape3292-61" transform="translate(568.864,-238.571)">
+		<g id="shape3292-42" transform="translate(568.864,-238.571)">
 			<title>Dynamic connector.3292</title>
-			<path d="M0 441.5 L-80.15 467.75" class="st24"/>
+			<path d="M0 441.5 L-80.15 467.75" class="st17"/>
 		</g>
-		<g id="shape3295-64" transform="translate(763.746,-212.812)">
+		<g id="shape3295-45" transform="translate(763.746,-212.812)">
 			<title>Dynamic connector.3295</title>
-			<path d="M0 441.5 L-83.2 415.1" class="st24"/>
+			<path d="M0 441.5 L-83.2 415.1" class="st17"/>
 		</g>
-		<g id="group3300-67" transform="translate(752.101,-132.072)">
+		<g id="group3300-48" transform="translate(752.101,-132.072)">
 			<title>Sheet.3300</title>
-			<g id="group3261-68" transform="translate(9,0)">
+			<g id="group3261-49" transform="translate(9,0)">
 				<title>Sheet.3261</title>
-				<g id="shape3262-69">
+				<g id="shape3262-50">
 					<title>Sheet.3262</title>
-					<ellipse cx="48.0938" cy="393.406" rx="48.0937" ry="48.0937" class="st25"/>
+					<ellipse cx="48.0938" cy="393.406" rx="48.0937" ry="48.0937" class="st18"/>
 				</g>
-				<g id="group3263-71" transform="translate(12.0937,-12.9375)">
+				<g id="group3263-52" transform="translate(12.0937,-12.9375)">
 					<title>Router Colored</title>
-					<g id="group3264-72" transform="translate(38.5398,-28.4211)">
+					<g id="group3264-53" transform="translate(38.5398,-28.4211)">
 						<title>Sheet.3264</title>
-						<g id="shape3265-73">
+						<g id="shape3265-54">
 							<title>Sheet.3265</title>
 						</g>
 					</g>
-					<g id="group3266-74">
+					<g id="group3266-55">
 						<title>Sheet.3266</title>
-						<g id="shape3267-75" transform="translate(26.4054,-24.3494)">
+						<g id="shape3267-56" transform="translate(26.4054,-24.3494)">
 							<title>Sheet.3267</title>
 							<path d="M20.64 432.39 C21.12 430.94 21.12 429.53 21.12 427.11 L21.12 424.25 C21.12 421.83 21.12 420.42
 										 19.67 418.96 C18.22 418 16.81 417.51 14.39 417.51 L0 417.51 L0 441.5 L6.73 441.5 L6.73 434.28
 										 L11.53 434.28 L15.36 441.5 L21.61 441.5 L17.29 434.28 C18.71 433.8 19.67 433.8 20.64 432.39
 										 ZM15.36 426.14 C15.36 427.59 14.88 429 13.42 429 L6.69 429 L6.69 421.79 L12.94 421.79 C14.39
-										 421.79 15.36 422.75 15.36 424.21 L15.36 426.14 Z" class="st26"/>
+										 421.79 15.36 422.75 15.36 424.21 L15.36 426.14 Z" class="st19"/>
 						</g>
-						<g id="shape3268-79" transform="translate(11.2072,-11.0862)">
+						<g id="shape3268-60" transform="translate(11.2072,-11.0862)">
 							<title>Sheet.3268</title>
 							<path d="M49.59 416.71 C49.59 403.04 38.46 391.91 24.79 391.91 C11.13 391.91 0 403.04 0 416.71 C0 430.37
 										 11.13 441.5 24.79 441.5 C38.46 441.5 49.59 430.37 49.59 416.71 ZM24.79 437.99 C13.06 437.99
 										 3.51 428.44 3.51 416.71 C3.51 404.98 13.06 395.42 24.79 395.42 C36.52 395.42 46.08 404.98
-										 46.08 416.71 C46.08 428.44 36.52 437.99 24.79 437.99 Z" class="st26"/>
+										 46.08 416.71 C46.08 428.44 36.52 437.99 24.79 437.99 Z" class="st19"/>
 						</g>
-						<g id="shape3269-82" transform="translate(36.6047,-36.5644)">
+						<g id="shape3269-63" transform="translate(36.6047,-36.5644)">
 							<title>Sheet.3269</title>
 							<path d="M1.69 414.17 C15.24 415.05 26.53 426.38 27.41 439.89 C27.49 440.81 28.26 441.5 29.15 441.5 C29.19
 										 441.5 29.23 441.5 29.27 441.5 C30.24 441.42 30.96 440.61 30.88 439.65 C30.15 428.72 23.42
@@ -353,9 +299,9 @@
 										 C23.95 418.24 24.43 418.44 24.87 418.44 C25.32 418.44 25.76 418.28 26.12 417.92 L30.44 413.6
 										 C31.12 412.92 31.12 411.83 30.44 411.14 L26.12 406.83 C25.44 406.15 24.35 406.15 23.66 406.83
 										 C22.98 407.52 22.98 408.6 23.66 409.29 L24.99 410.62 L1.81 410.62 C0.89 410.62 0.08 411.39
-										 0.08 412.31 C0 413.32 0.73 414.09 1.69 414.17 Z" class="st26"/>
+										 0.08 412.31 C0 413.32 0.73 414.09 1.69 414.17 Z" class="st19"/>
 						</g>
-						<g id="shape3270-85" transform="translate(0,-36.5644)">
+						<g id="shape3270-66" transform="translate(0,-36.5644)">
 							<title>Sheet.3270</title>
 							<path d="M4.47 439.77 C4.47 440.69 5.24 441.5 6.17 441.5 L6.21 441.5 C7.14 441.5 7.9 440.77 7.94 439.89
 										 C8.83 426.34 20.16 415.05 33.66 414.17 C34.63 414.09 35.35 413.28 35.27 412.31 C35.19 411.35
@@ -363,18 +309,18 @@
 										 C9.55 418.28 10.04 418.48 10.48 418.48 C10.92 418.48 11.37 418.32 11.73 417.96 C12.42 417.27
 										 12.42 416.18 11.73 415.5 L7.46 411.18 C6.77 410.5 5.68 410.5 5 411.18 L0.69 415.5 C0 416.18
 										 0 417.27 0.69 417.96 C1.37 418.64 2.46 418.64 3.14 417.96 L4.47 416.63 L4.47 439.77 Z"
-									class="st26"/>
+									class="st19"/>
 						</g>
-						<g id="shape3271-88" transform="translate(4.31355,0)">
+						<g id="shape3271-69" transform="translate(4.31355,0)">
 							<title>Sheet.3271</title>
 							<path d="M29.39 433.64 C15.84 432.75 4.56 421.42 3.67 407.92 C3.59 406.95 2.78 406.23 1.81 406.31 C0.85
 										 406.39 0.12 407.19 0.2 408.16 C0.93 419.09 7.66 428.72 17.01 433.68 L6.13 433.68 L7.46 432.35
 										 C8.14 431.66 8.14 430.58 7.46 429.89 C6.77 429.2 5.68 429.2 5 429.89 L0.69 434.2 C0 434.89
 										 0 435.98 0.69 436.66 L5 440.98 C5.32 441.3 5.81 441.5 6.25 441.5 C6.69 441.5 7.14 441.34
 										 7.5 440.98 C8.18 440.29 8.18 439.2 7.5 438.52 L6.17 437.19 L29.27 437.19 C30.19 437.19 31
-										 436.42 31 435.49 C31.08 434.49 30.36 433.72 29.39 433.64 Z" class="st26"/>
+										 436.42 31 435.49 C31.08 434.49 30.36 433.72 29.39 433.64 Z" class="st19"/>
 						</g>
-						<g id="shape3272-91" transform="translate(36.645,-4.35386)">
+						<g id="shape3272-72" transform="translate(36.645,-4.35386)">
 							<title>Sheet.3272</title>
 							<path d="M34.67 434.2 C33.98 433.52 32.9 433.52 32.21 434.2 L30.88 435.53 L30.88 412.39 C30.88 411.47
 										 30.11 410.66 29.19 410.66 L29.15 410.66 C28.22 410.66 27.45 411.39 27.41 412.27 C26.53 425.82
@@ -382,54 +328,54 @@
 										 441.46 C1.85 441.46 1.89 441.46 1.94 441.46 C12.86 440.73 22.49 434 27.45 424.65 L27.45
 										 435.53 L26.12 434.2 C25.44 433.52 24.35 433.52 23.66 434.2 C22.98 434.89 22.98 435.98 23.66
 										 436.66 L27.98 440.98 C28.3 441.3 28.78 441.5 29.23 441.5 C29.67 441.5 30.11 441.34 30.48
-										 440.98 L34.79 436.66 C35.35 435.98 35.35 434.85 34.67 434.2 Z" class="st26"/>
+										 440.98 L34.79 436.66 C35.35 435.98 35.35 434.85 34.67 434.2 Z" class="st19"/>
 						</g>
 					</g>
 				</g>
 			</g>
-			<g id="shape3288-94" transform="translate(0,-34.3125)">
+			<g id="shape3288-75" transform="translate(0,-34.3125)">
 				<title>Sheet.3288</title>
-				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st27"/>
+				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st20"/>
 			</g>
-			<g id="shape3297-98" transform="translate(11.25,-69.75)">
+			<g id="shape3297-79" transform="translate(11.25,-69.75)">
 				<title>Sheet.3297</title>
-				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st27"/>
+				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st20"/>
 			</g>
 		</g>
-		<g id="group3303-101" transform="translate(568.445,-192.26)">
+		<g id="group3303-82" transform="translate(568.445,-192.26)">
 			<title>Sheet.3303</title>
-			<g id="group3249-102" transform="translate(8.15627,0)">
+			<g id="group3249-83" transform="translate(8.15627,0)">
 				<title>Sheet.3249</title>
-				<g id="shape3250-103">
+				<g id="shape3250-84">
 					<title>Sheet.3250</title>
-					<ellipse cx="48.0938" cy="393.406" rx="48.0937" ry="48.0937" class="st25"/>
+					<ellipse cx="48.0938" cy="393.406" rx="48.0937" ry="48.0937" class="st18"/>
 				</g>
-				<g id="group3251-105" transform="translate(12.0937,-12.9375)">
+				<g id="group3251-86" transform="translate(12.0937,-12.9375)">
 					<title>Router Colored</title>
-					<g id="group3252-106" transform="translate(38.5398,-28.4211)">
+					<g id="group3252-87" transform="translate(38.5398,-28.4211)">
 						<title>Sheet.3252</title>
-						<g id="shape3253-107">
+						<g id="shape3253-88">
 							<title>Sheet.3253</title>
 						</g>
 					</g>
-					<g id="group3254-108">
+					<g id="group3254-89">
 						<title>Sheet.3254</title>
-						<g id="shape3255-109" transform="translate(26.4054,-24.3494)">
+						<g id="shape3255-90" transform="translate(26.4054,-24.3494)">
 							<title>Sheet.3255</title>
 							<path d="M20.64 432.39 C21.12 430.94 21.12 429.53 21.12 427.11 L21.12 424.25 C21.12 421.83 21.12 420.42
 										 19.67 418.96 C18.22 418 16.81 417.51 14.39 417.51 L0 417.51 L0 441.5 L6.73 441.5 L6.73 434.28
 										 L11.53 434.28 L15.36 441.5 L21.61 441.5 L17.29 434.28 C18.71 433.8 19.67 433.8 20.64 432.39
 										 ZM15.36 426.14 C15.36 427.59 14.88 429 13.42 429 L6.69 429 L6.69 421.79 L12.94 421.79 C14.39
-										 421.79 15.36 422.75 15.36 424.21 L15.36 426.14 Z" class="st26"/>
+										 421.79 15.36 422.75 15.36 424.21 L15.36 426.14 Z" class="st19"/>
 						</g>
-						<g id="shape3256-112" transform="translate(11.2072,-11.0862)">
+						<g id="shape3256-93" transform="translate(11.2072,-11.0862)">
 							<title>Sheet.3256</title>
 							<path d="M49.59 416.71 C49.59 403.04 38.46 391.91 24.79 391.91 C11.13 391.91 0 403.04 0 416.71 C0 430.37
 										 11.13 441.5 24.79 441.5 C38.46 441.5 49.59 430.37 49.59 416.71 ZM24.79 437.99 C13.06 437.99
 										 3.51 428.44 3.51 416.71 C3.51 404.98 13.06 395.42 24.79 395.42 C36.52 395.42 46.08 404.98
-										 46.08 416.71 C46.08 428.44 36.52 437.99 24.79 437.99 Z" class="st26"/>
+										 46.08 416.71 C46.08 428.44 36.52 437.99 24.79 437.99 Z" class="st19"/>
 						</g>
-						<g id="shape3257-115" transform="translate(36.6047,-36.5644)">
+						<g id="shape3257-96" transform="translate(36.6047,-36.5644)">
 							<title>Sheet.3257</title>
 							<path d="M1.69 414.17 C15.24 415.05 26.53 426.38 27.41 439.89 C27.49 440.81 28.26 441.5 29.15 441.5 C29.19
 										 441.5 29.23 441.5 29.27 441.5 C30.24 441.42 30.96 440.61 30.88 439.65 C30.15 428.72 23.42
@@ -437,9 +383,9 @@
 										 C23.95 418.24 24.43 418.44 24.87 418.44 C25.32 418.44 25.76 418.28 26.12 417.92 L30.44 413.6
 										 C31.12 412.92 31.12 411.83 30.44 411.14 L26.12 406.83 C25.44 406.15 24.35 406.15 23.66 406.83
 										 C22.98 407.52 22.98 408.6 23.66 409.29 L24.99 410.62 L1.81 410.62 C0.89 410.62 0.08 411.39
-										 0.08 412.31 C0 413.32 0.73 414.09 1.69 414.17 Z" class="st26"/>
+										 0.08 412.31 C0 413.32 0.73 414.09 1.69 414.17 Z" class="st19"/>
 						</g>
-						<g id="shape3258-118" transform="translate(0,-36.5644)">
+						<g id="shape3258-99" transform="translate(0,-36.5644)">
 							<title>Sheet.3258</title>
 							<path d="M4.47 439.77 C4.47 440.69 5.24 441.5 6.17 441.5 L6.21 441.5 C7.14 441.5 7.9 440.77 7.94 439.89
 										 C8.83 426.34 20.16 415.05 33.66 414.17 C34.63 414.09 35.35 413.28 35.27 412.31 C35.19 411.35
@@ -447,18 +393,18 @@
 										 C9.55 418.28 10.04 418.48 10.48 418.48 C10.92 418.48 11.37 418.32 11.73 417.96 C12.42 417.27
 										 12.42 416.18 11.73 415.5 L7.46 411.18 C6.77 410.5 5.68 410.5 5 411.18 L0.69 415.5 C0 416.18
 										 0 417.27 0.69 417.96 C1.37 418.64 2.46 418.64 3.14 417.96 L4.47 416.63 L4.47 439.77 Z"
-									class="st26"/>
+									class="st19"/>
 						</g>
-						<g id="shape3259-121" transform="translate(4.31355,0)">
+						<g id="shape3259-102" transform="translate(4.31355,0)">
 							<title>Sheet.3259</title>
 							<path d="M29.39 433.64 C15.84 432.75 4.56 421.42 3.67 407.92 C3.59 406.95 2.78 406.23 1.81 406.31 C0.85
 										 406.39 0.12 407.19 0.2 408.16 C0.93 419.09 7.66 428.72 17.01 433.68 L6.13 433.68 L7.46 432.35
 										 C8.14 431.66 8.14 430.58 7.46 429.89 C6.77 429.2 5.68 429.2 5 429.89 L0.69 434.2 C0 434.89
 										 0 435.98 0.69 436.66 L5 440.98 C5.32 441.3 5.81 441.5 6.25 441.5 C6.69 441.5 7.14 441.34
 										 7.5 440.98 C8.18 440.29 8.18 439.2 7.5 438.52 L6.17 437.19 L29.27 437.19 C30.19 437.19 31
-										 436.42 31 435.49 C31.08 434.49 30.36 433.72 29.39 433.64 Z" class="st26"/>
+										 436.42 31 435.49 C31.08 434.49 30.36 433.72 29.39 433.64 Z" class="st19"/>
 						</g>
-						<g id="shape3260-124" transform="translate(36.645,-4.35386)">
+						<g id="shape3260-105" transform="translate(36.645,-4.35386)">
 							<title>Sheet.3260</title>
 							<path d="M34.67 434.2 C33.98 433.52 32.9 433.52 32.21 434.2 L30.88 435.53 L30.88 412.39 C30.88 411.47
 										 30.11 410.66 29.19 410.66 L29.15 410.66 C28.22 410.66 27.45 411.39 27.41 412.27 C26.53 425.82
@@ -466,31 +412,31 @@
 										 441.46 C1.85 441.46 1.89 441.46 1.94 441.46 C12.86 440.73 22.49 434 27.45 424.65 L27.45
 										 435.53 L26.12 434.2 C25.44 433.52 24.35 433.52 23.66 434.2 C22.98 434.89 22.98 435.98 23.66
 										 436.66 L27.98 440.98 C28.3 441.3 28.78 441.5 29.23 441.5 C29.67 441.5 30.11 441.34 30.48
-										 440.98 L34.79 436.66 C35.35 435.98 35.35 434.85 34.67 434.2 Z" class="st26"/>
+										 440.98 L34.79 436.66 C35.35 435.98 35.35 434.85 34.67 434.2 Z" class="st19"/>
 						</g>
 					</g>
 				</g>
 			</g>
-			<g id="shape3294-127" transform="translate(0,-40.5)">
+			<g id="shape3294-108" transform="translate(0,-40.5)">
 				<title>Sheet.3294</title>
-				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st27"/>
+				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st20"/>
 			</g>
-			<g id="shape3296-130" transform="translate(95.625,-41.0625)">
+			<g id="shape3296-111" transform="translate(95.625,-41.0625)">
 				<title>Sheet.3296</title>
-				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st27"/>
+				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st20"/>
 			</g>
 		</g>
-		<g id="group3365-133" transform="translate(707.906,-276.406)">
+		<g id="group3365-114" transform="translate(707.906,-276.406)">
 			<title>Controller w/Circle</title>
-			<g id="shape3366-134">
+			<g id="shape3366-115">
 				<title>Sheet.3366</title>
-				<ellipse cx="48.0938" cy="393.406" rx="48.0937" ry="48.0937" class="st25"/>
+				<ellipse cx="48.0938" cy="393.406" rx="48.0937" ry="48.0937" class="st18"/>
 			</g>
-			<g id="group3367-136" transform="translate(11.1797,-7.51789)">
+			<g id="group3367-117" transform="translate(11.1797,-7.51789)">
 				<title>Controller</title>
-				<g id="group3368-137">
+				<g id="group3368-118">
 					<title>Sheet.3368</title>
-					<g id="shape3369-138" transform="translate(0,-45.0363)">
+					<g id="shape3369-119" transform="translate(0,-45.0363)">
 						<title>Sheet.3369</title>
 						<path d="M70.76 427.5 C68.44 423.72 64.78 421.13 60.49 420.1 C59.24 419.83 57.98 419.67 56.72 419.67 C54.28
 									 419.67 51.92 420.18 49.76 421.2 C46.22 409.48 34.34 402.01 22.03 404.25 C8.81 406.69 0 419.39
@@ -500,17 +446,17 @@
 									 426.2 49.6 425.81 C51.72 424.35 54.16 423.56 56.76 423.56 C57.7 423.56 58.68 423.68 59.63 423.92
 									 C62.89 424.7 65.69 426.71 67.46 429.58 C69.23 432.45 69.78 435.84 68.99 439.1 C68.75 440.16
 									 69.38 441.22 70.45 441.46 C70.6 441.5 70.76 441.5 70.92 441.5 C71.82 441.5 72.61 440.87 72.84
-									 439.97 C73.83 435.68 73.12 431.27 70.76 427.5 Z" class="st29"/>
+									 439.97 C73.83 435.68 73.12 431.27 70.76 427.5 Z" class="st22"/>
 					</g>
-					<g id="shape3370-142" transform="translate(11.6819,0)">
+					<g id="shape3370-123" transform="translate(11.6819,0)">
 						<title>Sheet.3370</title>
 						<path d="M42.68 388.79 L10.03 388.79 C4.48 388.79 0 393.28 0 398.82 L0 431.47 C0 437.02 4.48 441.5 10.03
 									 441.5 L42.68 441.5 C48.22 441.5 52.71 437.02 52.71 431.47 L52.71 398.82 C52.71 393.32 48.22
 									 388.79 42.68 388.79 ZM48.77 431.47 C48.77 434.85 46.02 437.57 42.68 437.57 L10.03 437.57 C6.65
 									 437.57 3.93 434.81 3.93 431.47 L3.93 398.82 C3.93 395.44 6.69 392.73 10.03 392.73 L42.68 392.73
-									 C46.06 392.73 48.77 395.48 48.77 398.82 L48.77 431.47 Z" class="st30"/>
+									 C46.06 392.73 48.77 395.48 48.77 398.82 L48.77 431.47 Z" class="st23"/>
 					</g>
-					<g id="shape3371-146" transform="translate(21.3972,-11.3672)">
+					<g id="shape3371-127" transform="translate(21.3972,-11.3672)">
 						<title>Sheet.3371</title>
 						<path d="M31.27 432.69 L19.94 432.69 C19.63 431.63 19.04 430.64 18.21 429.82 C16.91 428.52 15.22 427.81 13.37
 									 427.81 C10.27 427.81 7.67 429.86 6.8 432.69 L1.97 432.69 C0.87 432.69 0 433.55 0 434.66 C0 435.76
@@ -518,216 +464,276 @@
 									 439.45 19.94 436.62 L31.27 436.62 C32.37 436.62 33.24 435.76 33.24 434.66 C33.24 433.55 32.37
 									 432.69 31.27 432.69 ZM13.41 437.57 C11.8 437.57 10.5 436.27 10.5 434.66 C10.5 433.04 11.8 431.75
 									 13.41 431.75 C14.2 431.75 14.91 432.06 15.46 432.61 C16.01 433.16 16.32 433.91 16.32 434.66
-									 C16.32 436.27 14.99 437.57 13.41 437.57 Z" class="st31"/>
+									 C16.32 436.27 14.99 437.57 13.41 437.57 Z" class="st24"/>
 					</g>
-					<g id="shape3372-150" transform="translate(21.4365,-27.6511)">
+					<g id="shape3372-131" transform="translate(21.4365,-27.6511)">
 						<title>Sheet.3372</title>
 						<path d="M26.35 427.81 C23.25 427.81 20.65 429.86 19.78 432.69 L1.97 432.69 C0.87 432.69 0 433.55 0 434.66
 									 C0 435.76 0.87 436.62 1.97 436.62 L19.78 436.62 C20.65 439.45 23.25 441.5 26.35 441.5 C30.13
 									 441.5 33.2 438.43 33.2 434.66 C33.2 430.88 30.13 427.81 26.35 427.81 ZM26.35 437.57 C24.74 437.57
 									 23.44 436.27 23.44 434.66 C23.44 433.04 24.74 431.75 26.35 431.75 C27.97 431.75 29.26 433.04
-									 29.26 434.66 C29.26 436.27 27.97 437.57 26.35 437.57 Z" class="st32"/>
+									 29.26 434.66 C29.26 436.27 27.97 437.57 26.35 437.57 Z" class="st25"/>
 					</g>
 				</g>
 			</g>
 		</g>
-		<g id="group3489-154" transform="translate(1021.62,-86.4951)">
+		<g id="group3489-135" transform="translate(1021.62,-86.4951)">
 			<title>Sheet.3489</title>
-			<g id="group3397-155">
+			<g id="group3397-136">
 				<title>Sheet.3397</title>
-				<g id="shape3398-156" transform="translate(3.32534E-12,-206.005)">
+				<g id="shape3398-137" transform="translate(3.32534E-12,-206.005)">
 					<title>Sheet.3398</title>
 					<path d="M0 441.5 L335.4 441.5 L335.4 410.84 A13.9748 15.3314 -180 0 0 321.42 395.5 L13.97 395.5 A13.9748 15.3314
-								 -180 0 0 0 410.84 L0 441.5 Z" class="st33"/>
+								 -180 0 0 0 410.84 L0 441.5 Z" class="st26"/>
 				</g>
-				<g id="shape3399-158">
+				<g id="shape3399-139">
 					<title>Sheet.3399</title>
 					<path d="M0 235.5 L0 429.38 A13.9748 12.1177 -180 0 0 13.97 441.5 L321.42 441.5 A13.9748 12.1177 -180 0 0 335.4
-								 429.38 L335.4 235.5 L0 235.5 Z" class="st33"/>
+								 429.38 L335.4 235.5 L0 235.5 Z" class="st26"/>
 				</g>
 			</g>
-			<g id="shape3401-160" transform="translate(4.37776,-206.005)">
+			<g id="shape3401-141" transform="translate(4.37776,-206.005)">
 				<title>Virtual server.16</title>
 				<desc>Appetizer Process</desc>
 				<rect x="0" y="399.741" width="324" height="41.7587" class="st11"/>
 				<text x="49.98" y="427.82" class="st12">Appetizer Process</text>			</g>
 		</g>
-		<g id="group3433-163" transform="translate(994.37,-95.4951)">
+		<g id="group3433-144" transform="translate(994.37,-95.4951)">
 			<title>Sheet.3433</title>
-			<g id="shape3420-164" transform="translate(41.0477,-5.68434E-14)">
+			<g id="shape3420-145" transform="translate(41.0477,-5.68434E-14)">
 				<title>Rounded Rectangle.3420</title>
 				<desc>HTTP Server</desc>
 				<path d="M6.78 441.5 L300.88 441.5 A6.781 6.781 -180 0 0 307.66 434.72 L307.66 376.28 A6.781 6.781 -180 0 0 300.88
 							 369.5 L6.78 369.5 A6.781 6.781 -180 0 0 -0 376.28 L0 434.72 A6.781 6.781 -180 0 0 6.78 441.5 Z"
-						class="st34"/>
-				<text x="35" y="418.3" class="st35">HTTP Server</text>			</g>
-			<g id="group3421-167">
+						class="st27"/>
+				<text x="35" y="418.3" class="st28">HTTP Server</text>			</g>
+			<g id="group3421-148">
 				<title>SDKs.3421</title>
-				<g id="group3422-168">
+				<g id="group3422-149">
 					<title>CloudKit-Icon</title>
-					<g id="group3423-169">
+					<g id="group3423-150">
 						<title>Bottom</title>
-						<g id="shape3424-170">
+						<g id="shape3424-151">
 							<title>Sheet.3424</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.96 393.44 C37.15 389.69 29.36 389.69
 										 24.54 393.44 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st36"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st29"/>
 						</g>
-						<g id="shape3425-172">
+						<g id="shape3425-153">
 							<title>Sheet.3425</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.96 393.44 C37.15 389.69 29.36 389.69
 										 24.54 393.44 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st37"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st30"/>
 						</g>
 					</g>
-					<g id="group3426-174" transform="translate(0,-10.6879)">
+					<g id="group3426-155" transform="translate(0,-10.6879)">
 						<title>Middle</title>
-						<g id="shape3427-175">
+						<g id="shape3427-156">
 							<title>Sheet.3427</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.98 393.43 C37.16 389.68 29.37 389.68
 										 24.56 393.43 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st36"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st29"/>
 						</g>
-						<g id="shape3428-177">
+						<g id="shape3428-158">
 							<title>Sheet.3428</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.98 393.43 C37.16 389.68 29.37 389.68
 										 24.56 393.43 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st37"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st30"/>
 						</g>
 					</g>
-					<g id="group3429-179" transform="translate(0,-21.3758)">
+					<g id="group3429-160" transform="translate(0,-21.3758)">
 						<title>Top</title>
-						<g id="shape3430-180">
+						<g id="shape3430-161">
 							<title>Sheet.3430</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.98 393.43 C37.16 389.68 29.37 389.68
 										 24.56 393.43 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st36"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st29"/>
 						</g>
-						<g id="shape3431-182">
+						<g id="shape3431-163">
 							<title>Sheet.3431</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.98 393.43 C37.16 389.68 29.37 389.68
 										 24.56 393.43 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st37"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st30"/>
 						</g>
 					</g>
 				</g>
-				<g id="shape3432-184" transform="translate(21.6186,-29.2453)">
+				<g id="shape3432-165" transform="translate(21.6186,-29.2453)">
 					<title>Sheet.3432</title>
 					<path d="M11.99 403.59 L0 421.83 L6.81 426.28 L7.93 424.56 L11.48 441.5 L23.28 423.18 L16.66 418.86 L15.53 420.6
 								 L11.99 403.59 ZM17.35 421.9 L20.25 423.86 L12.49 435.75 L8.93 418.76 L6.06 423.18 L3.2 421.31 L10.99
-								 409.39 L14.52 426.22 L17.35 421.9 Z" class="st36"/>
+								 409.39 L14.52 426.22 L17.35 421.9 Z" class="st29"/>
 				</g>
 			</g>
 		</g>
-		<g id="group3434-186" transform="translate(994.327,-186.862)">
+		<g id="group3434-167" transform="translate(994.327,-186.862)">
 			<title>Sheet.3434</title>
-			<g id="shape3402-187" transform="translate(41.0477,-5.68434E-14)">
+			<g id="shape3402-168" transform="translate(41.0477,-5.68434E-14)">
 				<title>Rounded Rectangle.3402</title>
 				<desc>Reflect Server</desc>
 				<path d="M6.78 441.5 L300.92 441.5 A6.78195 6.78195 -180 0 0 307.7 434.72 L307.7 376.28 A6.78195 6.78195 -180 0 0
 							 300.92 369.5 L6.78 369.5 A6.78195 6.78195 -180 0 0 -0 376.28 L0 434.72 A6.78195 6.78195 -180 0 0 6.78
-							 441.5 Z" class="st38"/>
+							 441.5 Z" class="st31"/>
 				<text x="35" y="418.3" class="st8">Reflect Server</text>			</g>
-			<g id="group3408-190">
+			<g id="group3408-171">
 				<title>SDKs.3408</title>
-				<g id="group3409-191">
+				<g id="group3409-172">
 					<title>CloudKit-Icon</title>
-					<g id="group3410-192">
+					<g id="group3410-173">
 						<title>Bottom</title>
-						<g id="shape3411-193">
+						<g id="shape3411-174">
 							<title>Sheet.3411</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.96 393.44 C37.15 389.69 29.36 389.69
 										 24.54 393.44 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st13"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st32"/>
 						</g>
-						<g id="shape3412-195">
+						<g id="shape3412-176">
 							<title>Sheet.3412</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.96 393.44 C37.15 389.69 29.36 389.69
 										 24.54 393.44 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st14"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st33"/>
 						</g>
 					</g>
-					<g id="group3413-197" transform="translate(0,-10.6879)">
+					<g id="group3413-178" transform="translate(0,-10.6879)">
 						<title>Middle</title>
-						<g id="shape3414-198">
+						<g id="shape3414-179">
 							<title>Sheet.3414</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.98 393.43 C37.16 389.68 29.37 389.68
 										 24.56 393.43 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st15"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st34"/>
 						</g>
-						<g id="shape3415-200">
+						<g id="shape3415-181">
 							<title>Sheet.3415</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.98 393.43 C37.16 389.68 29.37 389.68
 										 24.56 393.43 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st16"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st35"/>
 						</g>
 					</g>
-					<g id="group3416-202" transform="translate(0,-21.3758)">
+					<g id="group3416-183" transform="translate(0,-21.3758)">
 						<title>Top</title>
-						<g id="shape3417-203">
+						<g id="shape3417-184">
 							<title>Sheet.3417</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.98 393.43 C37.16 389.68 29.37 389.68
 										 24.56 393.43 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st17"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st36"/>
 						</g>
-						<g id="shape3418-205">
+						<g id="shape3418-186">
 							<title>Sheet.3418</title>
 							<path d="M61.7 422.37 C66.52 418.62 66.52 412.56 61.7 408.8 L41.98 393.43 C37.16 389.68 29.37 389.68
 										 24.56 393.43 L4.81 408.8 C0 412.56 0 418.62 4.81 422.37 L24.54 437.75 C29.36 441.5 37.15
-										 441.5 41.96 437.75 L61.7 422.37 Z" class="st18"/>
+										 441.5 41.96 437.75 L61.7 422.37 Z" class="st37"/>
 						</g>
 					</g>
 				</g>
-				<g id="shape3419-207" transform="translate(21.6186,-29.2453)">
+				<g id="shape3419-188" transform="translate(21.6186,-29.2453)">
 					<title>Sheet.3419</title>
 					<path d="M11.99 403.59 L0 421.83 L6.81 426.28 L7.93 424.56 L11.48 441.5 L23.28 423.18 L16.66 418.86 L15.53 420.6
 								 L11.99 403.59 ZM17.35 421.9 L20.25 423.86 L12.49 435.75 L8.93 418.76 L6.06 423.18 L3.2 421.31 L10.99
-								 409.39 L14.52 426.22 L17.35 421.9 Z" class="st19"/>
+								 409.39 L14.52 426.22 L17.35 421.9 Z" class="st38"/>
 				</g>
 			</g>
 		</g>
-		<g id="shape3435-209" transform="translate(1001.87,-225.236)">
+		<g id="shape3435-190" transform="translate(1001.87,-225.236)">
 			<title>Dynamic connector.3435</title>
-			<path d="M0 441.5 L-137.46 489.15" class="st24"/>
+			<path d="M0 441.5 L-137.46 489.15" class="st17"/>
 		</g>
-		<g id="shape3278-212" transform="translate(206.01,-156.097)">
+		<g id="shape3278-193" transform="translate(206.01,-156.097)">
 			<title>Dynamic connector.3278</title>
-			<path d="M0 441.38 L176.85 423.62" class="st39"/>
+			<g id="shadow3278-194" transform="matrix(1.02,0,0,1.02,-1.76852,-8.65)" class="st2">
+				<path d="M0 441.38 L176.85 423.62" class="st39"/>
+			</g>
+			<path d="M0 441.38 L176.85 423.62" class="st17"/>
 		</g>
-		<g id="group3304-215" transform="translate(382.82,-132.072)">
-			<title>Sheet.3304</title>
-			<g id="group3248-216" transform="translate(10.6875,0)">
-				<title>Sheet.3248</title>
-				<g id="shape3224-217">
-					<title>Sheet.3224</title>
-					<ellipse cx="48.0938" cy="393.406" rx="48.0937" ry="48.0937" class="st25"/>
+		<g id="group3194-201" transform="translate(129.213,-96.2838)">
+			<title>SDKs</title>
+			<g id="group3195-202">
+				<title>CloudKit-Icon</title>
+				<g id="group3196-203">
+					<title>Bottom</title>
+					<g id="shape3197-204">
+						<title>Sheet.3197</title>
+						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.86 384.4 C44.14 379.94 34.88 379.94 29.16
+									 384.4 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
+									 437.04 L73.32 418.77 Z" class="st32"/>
+					</g>
+					<g id="shape3198-206">
+						<title>Sheet.3198</title>
+						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.86 384.4 C44.14 379.94 34.88 379.94 29.16
+									 384.4 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
+									 437.04 L73.32 418.77 Z" class="st33"/>
+					</g>
 				</g>
-				<g id="group3237-219" transform="translate(12.0937,-12.9375)">
+				<g id="group3199-208" transform="translate(0,-12.6993)">
+					<title>Middle</title>
+					<g id="shape3200-209">
+						<title>Sheet.3200</title>
+						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.88 384.38 C44.16 379.92 34.9 379.92 29.18
+									 384.38 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
+									 437.04 L73.32 418.77 Z" class="st34"/>
+					</g>
+					<g id="shape3201-211">
+						<title>Sheet.3201</title>
+						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.88 384.38 C44.16 379.92 34.9 379.92 29.18
+									 384.38 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
+									 437.04 L73.32 418.77 Z" class="st35"/>
+					</g>
+				</g>
+				<g id="group3202-213" transform="translate(0,-25.3986)">
+					<title>Top</title>
+					<g id="shape3203-214">
+						<title>Sheet.3203</title>
+						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.88 384.38 C44.16 379.92 34.9 379.92 29.18
+									 384.38 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
+									 437.04 L73.32 418.77 Z" class="st36"/>
+					</g>
+					<g id="shape3204-216">
+						<title>Sheet.3204</title>
+						<path d="M73.32 418.77 C79.04 414.31 79.04 407.11 73.32 402.65 L49.88 384.38 C44.16 379.92 34.9 379.92 29.18
+									 384.38 L5.72 402.65 C0 407.11 0 414.31 5.72 418.77 L29.16 437.04 C34.88 441.5 44.14 441.5 49.86
+									 437.04 L73.32 418.77 Z" class="st37"/>
+					</g>
+				</g>
+			</g>
+			<g id="shape3205-218" transform="translate(25.6871,-34.749)">
+				<title>Sheet.3205</title>
+				<path d="M14.24 396.46 L0 418.13 L8.09 423.42 L9.43 421.37 L13.64 441.5 L27.66 419.73 L19.79 414.6 L18.46 416.67
+							 L14.24 396.46 ZM20.62 418.21 L24.06 420.54 L14.84 434.67 L10.61 414.48 L7.21 419.73 L3.8 417.51 L13.06
+							 403.35 L17.25 423.34 L20.62 418.21 Z" class="st38"/>
+			</g>
+		</g>
+		<g id="group3304-220" transform="translate(382.82,-132.072)">
+			<title>Sheet.3304</title>
+			<g id="group3248-221" transform="translate(10.6875,0)">
+				<title>Sheet.3248</title>
+				<g id="shape3224-222">
+					<title>Sheet.3224</title>
+					<ellipse cx="48.0938" cy="393.406" rx="48.0937" ry="48.0937" class="st18"/>
+				</g>
+				<g id="group3237-224" transform="translate(12.0937,-12.9375)">
 					<title>Router Colored</title>
-					<g id="group3238-220" transform="translate(38.5398,-28.4211)">
+					<g id="group3238-225" transform="translate(38.5398,-28.4211)">
 						<title>Sheet.3238</title>
-						<g id="shape3239-221">
+						<g id="shape3239-226">
 							<title>Sheet.3239</title>
 						</g>
 					</g>
-					<g id="group3240-222">
+					<g id="group3240-227">
 						<title>Sheet.3240</title>
-						<g id="shape3241-223" transform="translate(26.4054,-24.3494)">
+						<g id="shape3241-228" transform="translate(26.4054,-24.3494)">
 							<title>Sheet.3241</title>
 							<path d="M20.64 432.39 C21.12 430.94 21.12 429.53 21.12 427.11 L21.12 424.25 C21.12 421.83 21.12 420.42
 										 19.67 418.96 C18.22 418 16.81 417.51 14.39 417.51 L0 417.51 L0 441.5 L6.73 441.5 L6.73 434.28
 										 L11.53 434.28 L15.36 441.5 L21.61 441.5 L17.29 434.28 C18.71 433.8 19.67 433.8 20.64 432.39
 										 ZM15.36 426.14 C15.36 427.59 14.88 429 13.42 429 L6.69 429 L6.69 421.79 L12.94 421.79 C14.39
-										 421.79 15.36 422.75 15.36 424.21 L15.36 426.14 Z" class="st26"/>
+										 421.79 15.36 422.75 15.36 424.21 L15.36 426.14 Z" class="st19"/>
 						</g>
-						<g id="shape3242-226" transform="translate(11.2072,-11.0862)">
+						<g id="shape3242-231" transform="translate(11.2072,-11.0862)">
 							<title>Sheet.3242</title>
 							<path d="M49.59 416.71 C49.59 403.04 38.46 391.91 24.79 391.91 C11.13 391.91 0 403.04 0 416.71 C0 430.37
 										 11.13 441.5 24.79 441.5 C38.46 441.5 49.59 430.37 49.59 416.71 ZM24.79 437.99 C13.06 437.99
 										 3.51 428.44 3.51 416.71 C3.51 404.98 13.06 395.42 24.79 395.42 C36.52 395.42 46.08 404.98
-										 46.08 416.71 C46.08 428.44 36.52 437.99 24.79 437.99 Z" class="st26"/>
+										 46.08 416.71 C46.08 428.44 36.52 437.99 24.79 437.99 Z" class="st19"/>
 						</g>
-						<g id="shape3243-229" transform="translate(36.6047,-36.5644)">
+						<g id="shape3243-234" transform="translate(36.6047,-36.5644)">
 							<title>Sheet.3243</title>
 							<path d="M1.69 414.17 C15.24 415.05 26.53 426.38 27.41 439.89 C27.49 440.81 28.26 441.5 29.15 441.5 C29.19
 										 441.5 29.23 441.5 29.27 441.5 C30.24 441.42 30.96 440.61 30.88 439.65 C30.15 428.72 23.42
@@ -735,9 +741,9 @@
 										 C23.95 418.24 24.43 418.44 24.87 418.44 C25.32 418.44 25.76 418.28 26.12 417.92 L30.44 413.6
 										 C31.12 412.92 31.12 411.83 30.44 411.14 L26.12 406.83 C25.44 406.15 24.35 406.15 23.66 406.83
 										 C22.98 407.52 22.98 408.6 23.66 409.29 L24.99 410.62 L1.81 410.62 C0.89 410.62 0.08 411.39
-										 0.08 412.31 C0 413.32 0.73 414.09 1.69 414.17 Z" class="st26"/>
+										 0.08 412.31 C0 413.32 0.73 414.09 1.69 414.17 Z" class="st19"/>
 						</g>
-						<g id="shape3244-232" transform="translate(0,-36.5644)">
+						<g id="shape3244-237" transform="translate(0,-36.5644)">
 							<title>Sheet.3244</title>
 							<path d="M4.47 439.77 C4.47 440.69 5.24 441.5 6.17 441.5 L6.21 441.5 C7.14 441.5 7.9 440.77 7.94 439.89
 										 C8.83 426.34 20.16 415.05 33.66 414.17 C34.63 414.09 35.35 413.28 35.27 412.31 C35.19 411.35
@@ -745,18 +751,18 @@
 										 C9.55 418.28 10.04 418.48 10.48 418.48 C10.92 418.48 11.37 418.32 11.73 417.96 C12.42 417.27
 										 12.42 416.18 11.73 415.5 L7.46 411.18 C6.77 410.5 5.68 410.5 5 411.18 L0.69 415.5 C0 416.18
 										 0 417.27 0.69 417.96 C1.37 418.64 2.46 418.64 3.14 417.96 L4.47 416.63 L4.47 439.77 Z"
-									class="st26"/>
+									class="st19"/>
 						</g>
-						<g id="shape3245-235" transform="translate(4.31355,0)">
+						<g id="shape3245-240" transform="translate(4.31355,0)">
 							<title>Sheet.3245</title>
 							<path d="M29.39 433.64 C15.84 432.75 4.56 421.42 3.67 407.92 C3.59 406.95 2.78 406.23 1.81 406.31 C0.85
 										 406.39 0.12 407.19 0.2 408.16 C0.93 419.09 7.66 428.72 17.01 433.68 L6.13 433.68 L7.46 432.35
 										 C8.14 431.66 8.14 430.58 7.46 429.89 C6.77 429.2 5.68 429.2 5 429.89 L0.69 434.2 C0 434.89
 										 0 435.98 0.69 436.66 L5 440.98 C5.32 441.3 5.81 441.5 6.25 441.5 C6.69 441.5 7.14 441.34
 										 7.5 440.98 C8.18 440.29 8.18 439.2 7.5 438.52 L6.17 437.19 L29.27 437.19 C30.19 437.19 31
-										 436.42 31 435.49 C31.08 434.49 30.36 433.72 29.39 433.64 Z" class="st26"/>
+										 436.42 31 435.49 C31.08 434.49 30.36 433.72 29.39 433.64 Z" class="st19"/>
 						</g>
-						<g id="shape3246-238" transform="translate(36.645,-4.35386)">
+						<g id="shape3246-243" transform="translate(36.645,-4.35386)">
 							<title>Sheet.3246</title>
 							<path d="M34.67 434.2 C33.98 433.52 32.9 433.52 32.21 434.2 L30.88 435.53 L30.88 412.39 C30.88 411.47
 										 30.11 410.66 29.19 410.66 L29.15 410.66 C28.22 410.66 27.45 411.39 27.41 412.27 C26.53 425.82
@@ -764,62 +770,62 @@
 										 441.46 C1.85 441.46 1.89 441.46 1.94 441.46 C12.86 440.73 22.49 434 27.45 424.65 L27.45
 										 435.53 L26.12 434.2 C25.44 433.52 24.35 433.52 23.66 434.2 C22.98 434.89 22.98 435.98 23.66
 										 436.66 L27.98 440.98 C28.3 441.3 28.78 441.5 29.23 441.5 C29.67 441.5 30.11 441.34 30.48
-										 440.98 L34.79 436.66 C35.35 435.98 35.35 434.85 34.67 434.2 Z" class="st26"/>
+										 440.98 L34.79 436.66 C35.35 435.98 35.35 434.85 34.67 434.2 Z" class="st19"/>
 						</g>
 					</g>
 				</g>
 			</g>
-			<g id="shape3287-241" transform="translate(99,-34.3125)">
+			<g id="shape3287-246" transform="translate(99,-34.3125)">
 				<title>Sheet.3287</title>
-				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st27"/>
+				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st20"/>
 			</g>
-			<g id="shape3293-244" transform="translate(89.4375,-69.1875)">
+			<g id="shape3293-249" transform="translate(89.4375,-69.1875)">
 				<title>Sheet.3293</title>
-				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st27"/>
+				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st20"/>
 			</g>
-			<g id="shape3279-247" transform="translate(0,-34.3125)">
+			<g id="shape3279-252" transform="translate(0,-34.3125)">
 				<title>Sheet.3279</title>
-				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st27"/>
+				<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st20"/>
 			</g>
 		</g>
-		<g id="group3444-250" transform="translate(141.577,-119.25)">
+		<g id="group3444-255" transform="translate(141.577,-119.25)">
 			<title>Sheet.3444</title>
 		</g>
-		<g id="shape3313-251" transform="translate(848.007,-166.385)">
+		<g id="shape3313-256" transform="translate(848.007,-166.385)">
 			<title>Sheet.3313</title>
 			<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st40"/>
 		</g>
-		<g id="shape3445-255" transform="translate(848.077,-166.5)">
+		<g id="shape3445-260" transform="translate(848.077,-166.5)">
 			<title>Sheet.3445</title>
-			<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st27"/>
+			<ellipse cx="8.4375" cy="433.062" rx="8.4375" ry="8.4375" class="st20"/>
 		</g>
-		<g id="shape3450-258" transform="translate(603,-313.055)">
+		<g id="shape3450-263" transform="translate(603,-313.055)">
 			<title>Sheet.3450</title>
 			<desc>Controller</desc>
 			<rect x="0" y="417.055" width="101.25" height="24.4451" class="st42"/>
 			<text x="4.94" y="435.68" class="st43">Controller</text>		</g>
-		<g id="shape3479-261" transform="translate(549.085,-29.25)">
+		<g id="shape3479-266" transform="translate(549.085,-29.25)">
 			<title>Sheet.3479</title>
 			<desc>Internet</desc>
 			<rect x="0" y="401" width="156.375" height="40.5" class="st44"/>
 			<text x="3.5" y="432.05" class="st6">Internet</text>		</g>
-		<g id="group3490-264" transform="translate(120.621,-153)">
+		<g id="group3490-269" transform="translate(120.621,-153)">
 			<title>Sheet.3490</title>
-			<g id="shape3491-265">
+			<g id="shape3491-270">
 				<title>Empty Circle</title>
-				<ellipse cx="16.1894" cy="425.311" rx="16.1894" ry="16.1894" class="st25"/>
+				<ellipse cx="16.1894" cy="425.311" rx="16.1894" ry="16.1894" class="st18"/>
 			</g>
-			<g id="group3492-267" transform="translate(5.68047,-5.30178)">
+			<g id="group3492-272" transform="translate(5.68047,-5.30178)">
 				<title>e2ee</title>
-				<g id="group3493-268" transform="translate(10.9725,-7.83298)">
+				<g id="group3493-273" transform="translate(10.9725,-7.83298)">
 					<title>Sheet.3493</title>
-					<g id="shape3494-269">
+					<g id="shape3494-274">
 						<title>Sheet.3494</title>
 					</g>
 				</g>
-				<g id="group3495-270">
+				<g id="group3495-275">
 					<title>Sheet.3495</title>
-					<g id="shape3496-271">
+					<g id="shape3496-276">
 						<title>Sheet.3496</title>
 						<path d="M17.57 427.12 L17.57 423.73 C17.57 419.96 14.65 416.76 10.88 416.62 C6.92 416.46 3.66 419.65 3.66
 									 423.57 L3.66 427.14 L0.3 427.14 C0.14 427.14 0 427.26 0 427.44 L0 441.2 C0 441.36 0.13 441.5
@@ -835,7 +841,7 @@
 									 L20.91 441.48 C21.07 441.48 21.21 441.36 21.21 441.19 L21.21 427.42 C21.21 427.26 21.08 427.12
 									 20.91 427.12 C20.91 427.12 17.57 427.12 17.57 427.12 Z" class="st45"/>
 					</g>
-					<g id="shape3497-275" transform="translate(9.37132,-6.23185)">
+					<g id="shape3497-280" transform="translate(9.37132,-6.23185)">
 						<title>Sheet.3497</title>
 						<path d="M0.28 441.5 L2.21 441.5 C2.37 441.5 2.5 441.37 2.5 441.22 L2.5 439.29 C2.5 439.13 2.37 439 2.21
 									 439 L0.28 439 C0.13 439 0 439.13 0 439.29 L0 441.22 C0 441.37 0.13 441.5 0.28 441.5 Z"
@@ -844,23 +850,23 @@
 				</g>
 			</g>
 		</g>
-		<g id="group3498-278" transform="translate(1038.62,-234)">
+		<g id="group3498-283" transform="translate(1038.62,-234)">
 			<title>Sheet.3498</title>
-			<g id="shape3499-279">
+			<g id="shape3499-284">
 				<title>Empty Circle</title>
-				<ellipse cx="16.1894" cy="425.311" rx="16.1894" ry="16.1894" class="st25"/>
+				<ellipse cx="16.1894" cy="425.311" rx="16.1894" ry="16.1894" class="st18"/>
 			</g>
-			<g id="group3500-281" transform="translate(5.68047,-5.30178)">
+			<g id="group3500-286" transform="translate(5.68047,-5.30178)">
 				<title>e2ee</title>
-				<g id="group3501-282" transform="translate(10.9725,-7.83298)">
+				<g id="group3501-287" transform="translate(10.9725,-7.83298)">
 					<title>Sheet.3501</title>
-					<g id="shape3502-283">
+					<g id="shape3502-288">
 						<title>Sheet.3502</title>
 					</g>
 				</g>
-				<g id="group3503-284">
+				<g id="group3503-289">
 					<title>Sheet.3503</title>
-					<g id="shape3504-285">
+					<g id="shape3504-290">
 						<title>Sheet.3504</title>
 						<path d="M17.57 427.12 L17.57 423.73 C17.57 419.96 14.65 416.76 10.88 416.62 C6.92 416.46 3.66 419.65 3.66
 									 423.57 L3.66 427.14 L0.3 427.14 C0.14 427.14 0 427.26 0 427.44 L0 441.2 C0 441.36 0.13 441.5
@@ -876,7 +882,7 @@
 									 L20.91 441.48 C21.07 441.48 21.21 441.36 21.21 441.19 L21.21 427.42 C21.21 427.26 21.08 427.12
 									 20.91 427.12 C20.91 427.12 17.57 427.12 17.57 427.12 Z" class="st45"/>
 					</g>
-					<g id="shape3505-288" transform="translate(9.37132,-6.23185)">
+					<g id="shape3505-293" transform="translate(9.37132,-6.23185)">
 						<title>Sheet.3505</title>
 						<path d="M0.28 441.5 L2.21 441.5 C2.37 441.5 2.5 441.37 2.5 441.22 L2.5 439.29 C2.5 439.13 2.37 439 2.21
 									 439 L0.28 439 C0.13 439 0 439.13 0 439.29 L0 441.22 C0 441.37 0.13 441.5 0.28 441.5 Z"
