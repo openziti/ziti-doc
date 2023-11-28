@@ -88,7 +88,7 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
 
     const renderSlide = (slide) => {
         const img = getImg(slide);
-        return <>
+        return <div style={{display: "flex", flexWrap: "wrap", marginTop: "10px"}}>
             {slide.title}
             <div className={slideClassName}>
                 <div style={{display: "flex", maxWidth:"600px", minWidth:"600px", paddingRight:"10px"}}>
@@ -98,7 +98,7 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
                     <img style={{maxWidth: "100%"}} src={img} alt={slide.text} />
                 </div>
             </div>
-        </>
+        </div>
     };
 
     const slideShow = <div style={style} onWheel={handleOnWheel}>

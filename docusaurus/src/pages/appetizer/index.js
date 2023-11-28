@@ -14,7 +14,7 @@ function App() {
 
     const slideImages = [
         {
-            title: <div><H3>Step 1 - Process Startup</H3></div>,
+            title: <div><H3 style={{marginBottom:"0px"}}>Step 1 - Process Startup</H3></div>,
             text: <p>When the Appetizer process starts, the first thing it does is create a strong identity
                 for itself. This strong identity (represented by the lock icon) will then be used by the server
                 listeners established <Highlight>inside</Highlight> the appetizer process. These server listeners
@@ -25,7 +25,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step1.svg")
         },
         {
-            title: <div><H3>Step 2 - Reflect Server Connects to the OpenZiti Network</H3></div>,
+            title: <div><H3 style={{marginBottom:"0px"}}>Step 2 - Reflect Server Connects to the OpenZiti Network</H3></div>,
             text: <p>After the process starts and bootstraps a strong identity, the <code>Reflect Server</code>
                 attaches to the overlay network by connecting to one or more routers. At this point, the
                 process is ready to accept connections over the OpenZiti overlay.</p>,
@@ -33,7 +33,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step2.svg")
         },
         {
-            title: <div><H3>Step 3 - Reflect Client Starts</H3></div>,
+            title: <div><H3 style={{marginBottom:"0px"}}>Step 3 - Reflect Client Starts</H3></div>,
             text: <p>When you run the reflect client with <code>go run clients/reflect.go</code>,
                 the first thing it does is make an HTTP request to the <Highlight>public</Highlight> appetizer http
                 server which is responsible for creating a temporary strong identity, useful for the demo.
@@ -43,7 +43,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step3.svg")
         },
         {
-            title: <div><H3>Step 4 - Reflect Client Attaches to the OpenZiti Network</H3></div>,
+            title: <div><H3 style={{marginBottom:"0px"}}>Step 4 - Reflect Client Attaches to the OpenZiti Network</H3></div>,
             text: <p>After your locally running <code>reflect client</code> starts and retrieves the strong
                 identity, it will be ready to connect to the OpenZiti overlay. The identity will also be
                 authorized to <Highlight>dial</Highlight> the <code>reflect server</code>.</p>,
@@ -51,7 +51,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step4.svg")
         },
         {
-            title: <div><H3>Step 5 - Client and Server Communicate Securely</H3></div>,
+            title: <div><H3 style={{marginBottom:"0px"}}>Step 5 - Client and Server Communicate Securely</H3></div>,
             text: <p>The client now <Highlight>dials</Highlight> the <code>reflect server</code> over
                 the OpenZiti overlay. The <code>reflect server</code> accepts the connection, reads
                 the bytes sent, and returns those bytes back to your <code>reflect client</code>.</p>,
@@ -70,7 +70,7 @@ function App() {
         .map(line => line.trimLeft() + '\n'); // Trim leading spaces for each line
 
     const whatYouGet = <div>
-            <H3>What You Get by Adopting an OpenZiti SDK</H3>
+            <H3 style={{marginBottom:"0px"}}>What You Get by Adopting an OpenZiti SDK</H3>
             <ul>
                 <li>Strong identities. X509 certificates guarantee all entities on the network are who they claim to be.</li>
                 <li>Segmented access. Follow the "least privileged access" model. Allow access only to exactly what is needed.</li>
@@ -105,7 +105,9 @@ function App() {
                         {whatYouGet}
                     </div>
                     <div className={style.column}>
-                        <AsciinemaWidget fit={"width"} src="/appetizer.cast" rows={13} cols={85} loop={true} autoplay={1} preload={true} />
+                        <br/>
+                        <br/>
+                        <AsciinemaWidget fit={"width"} src="/appetizer.cast" rows={16} cols={85} loop={true} autoplay={1} preload={true} />
                     </div>
                 </div>
                 <hr/>

@@ -21,7 +21,7 @@
 
 .defaultSlideStyle {
     display: flex;
-    margin: 5px;
+    margin-bottom: 20px;
 }
 
 .leftColumn {
@@ -37,4 +37,10 @@ code {
 
 .theme-code-block {
     margin-top: 100px;
+}
+
+@media (max-width: 1200px) {
+    .defaultSlideStyle {
+        flex-wrap: wrap;
+    }
 }
