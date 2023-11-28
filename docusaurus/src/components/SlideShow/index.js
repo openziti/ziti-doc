@@ -17,7 +17,7 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
         } else {
             setCurrentPosition(currentPosition + 1);
         }
-        enableButtons();
+        enableButtons(currentPosition + 1);
     };
 
     const goToPrevSlide = () => {
@@ -25,13 +25,13 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
         } else {
             setCurrentPosition(currentPosition - 1);
         }
-        enableButtons();
+        enableButtons(currentPosition - 1);
     };
 
-    const enableButtons = () => {
-        console.debug("enableButtons.currentPosition: " + currentPosition)
-        setPreviousDisabled(currentPosition === 0);
-        setNextDisabled(currentPosition < slides.length - 1);
+    const enableButtons = (nextPos) => {
+        console.debug("enableButtons.currentPosition: " + currentPosition + " : " + slides.length);
+        setPreviousDisabled(nextPos === 0);
+        setNextDisabled(nextPos === slides.length - 1);
     }
 
     const showAllToggle = () => {
@@ -69,20 +69,21 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
     }
 
     const handleOnWheel = (e) => {
-        const curScroll = scrollPos + e.deltaY;
+        const curScroll = Math.max(scrollPos + e.deltaY, 0);
         const effectivePage = Math.floor(curScroll / 100);
-        console.debug("EFFECTIVE PAGE: " + effectivePage + " : " + curScroll + " : " + slides.length);
-        if(curScroll <= 0) {
+        console.debug("effectivePage:" + effectivePage + " : " + ", curScroll:" + curScroll);
+        if(curScroll < 0) {
             setScrollPos(0);
         } else if( effectivePage > slides.length) {
             setScrollPos(100 * slides.length);
         } else {
             if(effectivePage < slides.length && effectivePage >= 0) {
+                console.debug("effectivePage:" + effectivePage + " : " + ", currentPos:" + currentPosition);
                 setScrollPos(curScroll);
                 setCurrentPosition(effectivePage);
 
                 console.debug("handleOnWheel.currentPosition: " + currentPosition)
-                enableButtons();
+                enableButtons(effectivePage);
             }
         }
     };
