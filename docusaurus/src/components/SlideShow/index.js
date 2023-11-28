@@ -44,18 +44,6 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
         }
     };
 
-    let img = null;
-
-    if (colorMode === 'dark') {
-        // Dark mode is enabled
-        // console.log('Dark mode is enabled');
-        img = slides[currentPosition].darkImg;
-    } else {
-        // Dark mode is not enabled
-        // console.log('Dark mode is not enabled');
-        img = slides[currentPosition].img;
-    }
-
     let buttons = null;
     if(slides.length > 1) {
         buttons = <div style={{display: "flex", flexDirection: "row-reverse", margin: "5px"}}>
@@ -88,14 +76,6 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
         }
     };
 
-    const [hovered, setHovered] = useState(false);
-    const handleMouseEnter = () => {
-        setHovered(true);
-    };
-    const handleMouseLeave = () => {
-        setHovered(false);
-    };
-
     const isDark = () => {
         return colorMode === 'dark';
     }
@@ -122,15 +102,7 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
     };
 
     const slideShow = <div style={style} onWheel={handleOnWheel}>
-        {slides[currentPosition].title}
-        <div className={slideClassName}>
-            <div style={{display: "flex", maxWidth:"600px", minWidth:"600px", paddingRight:"10px"}}>
-                {slides[currentPosition].text}
-            </div>
-            <div>
-                <img style={{maxWidth: "100%"}} src={img} alt={`Slide ${currentPosition + 1}`} />
-            </div>
-        </div>
+        <div>{renderSlide(slides[currentPosition])}</div>
         {buttons}
     </div>;
 
