@@ -73,14 +73,15 @@ release name for `focal` in the `/etc/apt/sources.list.d/openziti.list` file.
 
 ```text
 (
-UBUNTU_RELEASE=focal
+UBUNTU_LTS=focal
 
 set -euo pipefail
 
 curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
   | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
+sudo chmod -c +r /usr/share/keyrings/openziti.gpg
 
-echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable $UBUNTU_RELEASE main' \
+echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable $UBUNTU_LTS main' \
   | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
 
 sudo apt update
