@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 
-const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
+const Slideshow = (props) => {
+    const { style, slideClassName, slideTitle, slides, buttonClassName, textClassName, imgClassName } = props;
     const viewAllSlides = "View All";
     const viesAsSlideshow = "View as Slideshow"
     const {colorMode, setColorMode} = useColorMode();
@@ -48,10 +49,10 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
     if(slides.length > 1) {
         buttons = <div style={{display: "flex", flexDirection: "row-reverse", margin: "5px"}}>
             <div style={{display: "flex", marginRight: "5px"}}>
-                <button disabled={nextDisabled} className="button button--primary" onClick={goToNextSlide}>Next</button>
+                <button disabled={nextDisabled} className={buttonClassName} onClick={goToNextSlide}>Next</button>
             </div>
             <div style={{display: "flex", marginRight: "5px"}}>
-                <button disabled={previousDisabled} className="button button--primary" onClick={goToPrevSlide}>Previous</button>
+                <button disabled={previousDisabled} className={buttonClassName} onClick={goToPrevSlide}>Previous</button>
             </div>
         </div>
     }
@@ -86,16 +87,17 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
         return slide.img;
     }
 
-    const renderSlide = (slide) => {
+    const renderSlide = (slide, extra) => {
         const img = getImg(slide);
         return <div style={{display: "flex", flexWrap: "wrap", marginTop: "10px"}}>
             {slide.title}
             <div className={slideClassName}>
-                <div style={{display: "flex", maxWidth:"600px", minWidth:"600px", paddingRight:"10px"}}>
+                <div className={textClassName}>
                     {slide.text}
                 </div>
-                <div>
+                <div className={imgClassName}>
                     <img style={{maxWidth: "100%"}} src={img} alt={slide.text} />
+                    {extra}
                 </div>
             </div>
         </div>
@@ -106,14 +108,14 @@ const Slideshow = ({ style, slideClassName, slideTitle, slides }) => {
         {buttons}
     </div>;
 
-    const allSlides = slides.map(slide => renderSlide(slide));
+    const allSlides = slides.map(slide => renderSlide(slide, <hr/>));
 
     return (
         <>
             <div style={{display: "flex", justifyContent:"space-between"}}>
                 {slideTitle}
                 <div style={{display: "flex", marginRight: "5px", height:"36px"}}>
-                    <button className="button button--primary" onClick={showAllToggle}>{showAllText}</button>
+                    <button className={buttonClassName} onClick={showAllToggle}>{showAllText}</button>
                 </div>
             </div>
             <div>
