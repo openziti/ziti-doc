@@ -114,13 +114,17 @@ function App() {
         const who = parts[0];
         const what = parts.slice(1).join(':');
         const item = <div className={styles.messagebox}>
-            <span>{getCurrentTime()}: </span>
-            <span className={styles.messageName}>{who}</span>
-            <span className={styles.messageText}>{what}</span>
+            <div>
+                <div>
+                    <span className={styles.messageName}>{who} </span>
+                    <span style={{color: "#2F3F4F"}}>{getCurrentTime()}</span>
+                </div>
+                <span className={styles.messageText}>{what}</span>
+            </div>
         </div>;
 
         setItems(prevItems => {
-            const newItem = <Expire key={generateUniqueId()} delay="10000" className={styles.chatBubbles}>
+            const newItem = <Expire key={generateUniqueId()} delay="20000" className={styles.chatBubbles}>
                 {item}
             </Expire>;
             return [newItem, ...prevItems];
@@ -134,33 +138,16 @@ function App() {
         source.addEventListener('notify', notifyHandler, true);
     }, []);
 
-    const [isDivVisible, setIsDivVisible] = useState(true);
-    const toggleDivVisibility = () => {
-        setIsDivVisible(!isDivVisible);
-    };
-
+    const [liveMessageVisible, setLiveMessageVisible] = useState(true);
     const [liveMsgText, setLiveMsgText] = useState("Show Live Messages!");
-    const [liveMsgShown, setLiveMsgShown] = useState(false);
-    const [liveMsgHeight, setLiveMsgHeight] = useState("0px");
-
-
     const showLiveMessages = () => {
-        if (!liveMsgShown) {
-            setLiveMsgHeight("100px");
+        setLiveMessageVisible(!liveMessageVisible);
+        if (!liveMessageVisible) {
             setLiveMsgText("Hide Live Messages!");
         } else {
-            setLiveMsgHeight("0px");
             setLiveMsgText("Show Live Messages!");
         }
-        setLiveMsgShown(!liveMsgShown);
-        toggleDivVisibility();
-    }
-
-
-
-
-
-
+    };
 
 
 
@@ -200,6 +187,19 @@ function App() {
 
     return (
         <OpenZitiLayout>
+            <div id={"a"} style={{display: "flex", flexDirection: "column-reverse", position:"absolute", right: "10px", bottom:"10px"}}>
+                {liveMessageVisible && (
+                    <div id={"b"} className={styles.app} style={{ height: elementHeight }}>
+                        <div  id={"c"} className={`${styles.flexContainer2} ${styles.bgImg1}`}>
+                            <span className={styles.msgSpan}>👆 Realtime "Reflect" Messages</span>
+                            <div className={`${styles.pageWrapper}`}>
+                                    {items.map((item, index) => item ) }
+                            </div>
+                        </div>
+                    </div>
+                    )
+                }
+            </div>
             <OpenZitiHorizontalSection>
                 <div style={{display:"flex"}}>
                     <div style={{display: "flex", flexGrow: 1}}>
@@ -211,21 +211,23 @@ function App() {
                         />
                         <H1>Appetizer: <span style={{display: "inline-block"}}>Taste OpenZiti</span></H1>
                     </div>
-                    <div style={{display: "flex", alignItems:"center", flexDirection: "row-reverse"}}>
-                        <button className={"button button--primary"} onClick={showLiveMessages}>{liveMsgText}</button>
-                    </div>
                 </div>
                 <hr/>
                 <div className={styles.exampleContainer}>
                     <div className={styles.explainer} ref={elementRef}>
-                        <p>Experience zero trust in action for yourself! clone the golang repo, and <code>go run</code></p>
+                        <p>If you have go installed, it's as simple as clone the repo, and <code>go run</code> and you
+                        can experience application embedded zero trust in action.</p>
                         <CodeBlock>
                             {trimmedCode}
                         </CodeBlock>
                         {whatYouGet}
                     </div>
-                    {!isDivVisible && (
-                        <div className={styles.asciinema}>
+                    <div style={{display: "flex", flexGrow: 1, flexDirection: "column", position: "relative"}}>
+                        <div style={{display: "flex", flexDirection: "row-reverse", position: "absolute", top: 10, right: 10, zIndex: 10}}>
+                            <button className={styles.transparentButton} onClick={showLiveMessages}>{liveMsgText}</button>
+                        </div>
+                    {!liveMessageVisible && (
+                        <div className={`${styles.asciinema}`}>
                             <div>
                                 <div style={{display:"flex", flexBasis: "33%"}}></div>
                                 <div style={{width: "100%"}}>
@@ -235,20 +237,11 @@ function App() {
                             </div>
                         </div>
                     )
+
                     }
-                    {isDivVisible && (
-                        <div className={styles.app} style={{ height: elementHeight }}>
-                            <div className={styles.flexContainer}>
-                                <div className={styles.pageWrapper}>
-                                    <span className={styles.msgSpan}>Realtime "Reflect" Messages</span>
-                                    <div>
-                                        {items.map((item, index) => item ) }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
+                    {liveMessageVisible
                     }
+                    </div>
                 </div>
                 <hr/>
                 <SlideShow slides={slideImages}

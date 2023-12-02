@@ -42,6 +42,51 @@ code {
 
 }
 
+.transparentButton {
+    background-color: #414c58;
+    opacity: .4;
+    border: var(--ifm-button-border-width) solid var(--ifm-button-border-color);
+    border-radius: var(--ifm-button-border-radius);
+    color: var(--ifm-button-color);
+    cursor: pointer;
+    display: inline-block;
+    font-size: calc(0.875rem * var(--ifm-button-size-multiplier));
+    font-weight: var(--ifm-button-font-weight);
+    line-height: 1.5;
+    padding: calc(
+            var(--ifm-button-padding-vertical) * var(--ifm-button-size-multiplier)
+    )
+    calc(
+            var(--ifm-button-padding-horizontal) * var(--ifm-button-size-multiplier)
+    );
+    text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    transition-property: color, background, border-color;
+}
+.transparentButton:hover {
+    text-decoration: none;
+}
+
+.transparentButton--link {
+    --ifm-button-background-color: transparent;
+    --ifm-button-border-color: transparent;
+
+    color: var(--ifm-link-color);
+    /* autoprefixer: ignore next */
+    text-decoration: var(--ifm-link-decoration);
+}
+
+.transparentButton--link:hover,
+.transparentButton--link:active,
+.transparentButton--link.button--active {
+    color: var(--ifm-link-hover-color);
+    /* autoprefixer: ignore next */
+    text-decoration: var(--ifm-link-hover-decoration);
+}
+
 @media (min-width: 1100px) {
     .defaultSlideStyle {
         flex-wrap: wrap;
@@ -88,31 +133,27 @@ code {
         flex-grow: 1;
         #background: #00d084;
     }
+
+    .flexGrowNoWrap {
+        display: flex;
+        flex-grow: 1;
+        flex-wrap: nowrap;
+    }
+
+    .flexContainer2 {
+        display: flex;
+        flex-direction: column-reverse;
+        background: #6EC1E4;
+        flex-grow: 1;
+        overflow-y: auto;
+        max-height: calc(100vh - 20px); /* Adjust the value based on your needs */
+        padding: 10px;
+        align-items: flex-end;
+    }
 }
 
 
 
-
-
-
-
-/**/
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-}
-
-:root {
-    --delay-fade-const: 5000ms;
-    --delay-shrink-const: 1000ms;
-}
-
-body {
-
-    font-family: 'Open Sans',Arial, Helvetica, sans-serif;
-}
 
 .chat {
     background: #eceef2d9;
@@ -122,65 +163,6 @@ body {
     -webkit-animation: chat-popup var(--delay-fade-const) both;
     animation: chat-popup var(--delay-fade-const) both;
     transform-origin: bottom right;
-}
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: .5;
-    }
-}
-@keyframes fadeShrink {
-    0% {
-        opacity: 1;
-        height: 100px;
-    }
-    70% {
-        opacity: .8;
-    }
-    100% {
-        opacity: .5;
-        height: 0;
-    }
-}
-
-
-@supports ((-webkit-backdrop-filter: saturate(180%) blur(20px)) or (backdrop-filter: saturate(180%) blur(20px))) {
-    .chat {
-        background: rgba(250, 250, 250, 0.8);
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
-        backdrop-filter: saturate(180%) blur(20px);
-    }
-}
-
-.name {
-    display: flex;
-    flex-grow: 1;
-    margin: 0 0 0.5em;
-    font-weight: 600;
-    color:#1068fe;
-    overflow: clip;
-}
-
-@-webkit-keyframes chat-popup {
-    0% {
-        transform: scale(0);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes chat-popup {
-    0% {
-        transform: scale(0);
-    }
-
-    100% {
-        transform: scale(1);
-    }
 }
 .floating-div {
     position: fixed;
@@ -204,16 +186,16 @@ body {
 }
 .pageWrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     flex-grow: 1;
-    background-color: #6EC1E4;
+    #background-color: #6EC1E4;
     border-radius: 1em;
     align-items: stretch;
     overflow: auto;
-    padding: 20px;
+    width: 400px;
 }
 
-.bg-img-1 {
+.bgImg1 {
     background: url(https://openziti.io/assets/images/bg-img-01-d31e592729cad752f0a97013a3f2d210.jpg) no-repeat fixed;
     background-size: 100% 100%;
 }
@@ -234,14 +216,6 @@ body {
     transform-origin: bottom right;
 }
 
-.innerMsgBox {
-    display: flex;
-    flex-grow: 1;
-    overflow: auto;
-    justify-content: flex-end;
-    flex-direction: row;
-}
-
 .chat-bubbles {
     display: flex;
     flex-shrink: 1;
@@ -251,70 +225,11 @@ body {
     background: red;
 }
 
-/* CSS for the outer div */
-.fade-out-div {
-    width: 200px;
-    background-color: lightblue;
-    overflow: hidden;
-    transition: height 1s;
-}
-
-/* CSS for the inner content container */
-.inner-content {
-    padding: 10px;
-    transition: transform 1s;
-}
-
-.left-column {
-    flex: 1; /* Takes up remaining space */
-    background-color: #f0f0f0;
-    padding: 10px;
-}
-
-.middle-column {
-    flex: 8; /* Takes up 80% of available space */
-    background-color: #e0e0e0;
-    padding: 10px;
-}
-
-.right-column {
-    flex: 1; /* Takes up 10% of available space */
-    background-color: #d0d0d0;
-    padding: 10px;
-}
-
 .msgSpan {
-    color: whitesmoke;
+    color: #2f3f4f;
     font-weight: bold;
     padding: 10px 10px 0 10px;
-}
-
-/**/
-.showLiveMessages {
-
-}
-
-
-
-.fade-in {
-    opacity: 1;
-    transition: opacity 1s ease;
-    background: #00d084;
-}
-
-.message-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    max-width: 300px;
-}
-
-.message-container > div {
-    opacity: 0;
-}
-
-.message-container > div.fade-in {
-    opacity: 1;
+    align-items: flex-end;
 }
 
 
@@ -326,66 +241,10 @@ body {
     border-radius: 1em;
 }
 
-.flex-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    overflow-y: auto;
-    max-height: calc(100vh - 20px); /* Adjust the value based on your needs */
-    padding: 10px;
-}
-
 .flex-item {
     border: 1px solid #ccc;
     padding: 10px;
     margin: 5px;
-}
-
-.button {
-    margin: 10px;
-    padding: 5px;
-    cursor: pointer;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.drawer {
-    background: #06aeef;
-}
-
-
-
-
-
-
-
-.fade-out-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.fade-out-item {
-    opacity: 1;
-    transition: opacity 0.5s ease-out;
-}
-
-.fade-out-item.fade-out {
-    opacity: 0;
-}
-
-.fade-out-item.remove {
-    display: none;
 }
 
 .messageName {
@@ -393,5 +252,5 @@ body {
 }
 
 .messageText {
-    padding-left: 0px;
+    padding-left: 0;
 }
