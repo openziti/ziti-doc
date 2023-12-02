@@ -126,7 +126,7 @@ function App() {
         const toast = newToast(who, when, what);
 
         setItems(prevItems => {
-            const newItem = <Expire key={generateUniqueId()} delay="200000" className={styles.chatBubbles}>
+            const newItem = <Expire key={generateUniqueId()} delay="20000" className={styles.chatBubbles}>
                 {toast}
             </Expire>;
             return [newItem, ...prevItems];
@@ -140,46 +140,28 @@ function App() {
         source.addEventListener('notify', notifyHandler, true);
     }, []);
 
-    const [liveMessageVisible, setLiveMessageVisible] = useState(false);
-    const [liveMsgText, setLiveMsgText] = useState("Show Live Messages!");
+    const [liveMessageVisible, setLiveMessageVisible] = useState(true);
+    const [liveMsgText, setLiveMsgText] = useState("Hide Live Messages!");
     const showLiveMessages = () => {
         setLiveMessageVisible(!liveMessageVisible);
         if (!liveMessageVisible) {
-            setLiveMsgText(" Hide Live Messages!");
+            setLiveMsgText("Hide Live Messages!");
         } else {
             setLiveMsgText("Show Live Messages!");
         }
     };
 
-
-
-
-
-
-    const elementRef = useRef(null);
-
-
-
-
-
-
-
-
-    const [show, setShow] = useState(false);
-    const [position, setPosition] = useState('top-start');
-
     return (
         <OpenZitiLayout>
-            <div id={"a"} style={{display: "flex", flexDirection: "column-reverse", position:"absolute", right: "10px", bottom:"10px", zIndex:10}}>
-                {liveMessageVisible && (<div id={"b"} className={styles.app} style={{ height: "450px" }}>
-                        <div  id={"c"} className={`${styles.flexContainer2} ${styles.bgImg1}`}>
-                            <span className={styles.msgSpan}>👆 live "Reflect" messages will display here</span>
-                            <div className={`${styles.pageWrapper}`}>
-                                {items.map((item, index) => item ) }
-                            </div>
+            <div className={styles.liveMsgContainerContainer} style={{ minHeight: "100px", maxHeight: "450px" }}>
+                {liveMessageVisible && (
+                    <div className={`${styles.liveMsgContainer} ${styles.bgImg1}`}>
+                        <span className={styles.msgSpan}>👆 live "Reflect" messages will display here</span>
+                        <div className={`${styles.pageWrapper}`}>
+                            {items.map((item, index) => item ) }
                         </div>
-                    </div>)
-                }
+                    </div>
+                )}
             </div>
             <OpenZitiHorizontalSection>
                 <div style={{display:"flex"}}>
@@ -192,12 +174,9 @@ function App() {
                         />
                         <H1>Appetizer: <span style={{display: "inline-block"}}>Taste OpenZiti</span></H1>
                     </div>
-                    <div style={{display: "flex", alignItems:"center"}}>
-                        <button className={styles.transparentButton} onClick={showLiveMessages}>{liveMsgText}</button>
-                    </div>
                 </div>
                 <div className={styles.exampleContainer}>
-                    <div className={styles.explainer} ref={elementRef}>
+                    <div className={styles.explainer}>
                         <p>If you have go installed, it's as simple as clone the repo, and <code>go run</code> and you
                         can experience application embedded zero trust in action.</p>
                         <CodeBlock>
@@ -205,16 +184,15 @@ function App() {
                         </CodeBlock>
                         {whatYouGet}
                     </div>
-                    <div style={{display: "flex", flexGrow: 1, flexDirection: "column", position: "relative"}}>
-                        <div className={`${styles.asciinema}`}>
-                            <div>
-                                <div style={{display:"flex", flexBasis: "33%"}}></div>
-                                <div style={{width: "100%"}}>
-                                    <AsciinemaWidget fit={"width"} src="/appetizer.cast" loop={true} autoplay={1} preload={true} />
-                                </div>
-                                <div style={{display:"flex", flexBasis: "33%"}}></div>
+                    <div className={`${styles.asciinema}`}>
+                        <div style={{display:"flex", flexBasis: "33%"}}></div>
+                        <div style={{width: "100%", position: "relative"}}>
+                            <div style={{display: "flex", position: "absolute", right: "5px", zIndex:1, top: "5px",  alignItems:"center"}}>
+                                <button className={"button button--primary"} onClick={showLiveMessages}>{liveMsgText}</button>
                             </div>
+                            <AsciinemaWidget fit={"width"} src="/appetizer.cast" loop={true} autoplay={1} preload={true} />
                         </div>
+                        <div style={{display:"flex", flexBasis: "33%"}}></div>
                     </div>
                 </div>
                 <hr/>

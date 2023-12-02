@@ -56,120 +56,25 @@ code {
 .asciinema {
 }
 
-.buttons {
-
-}
-
-.transparentButton {
-    background-color: var(--background);
-    opacity: .4;
-    border: var(--ifm-button-border-width) solid var(--ifm-button-border-color);
-    border-radius: var(--ifm-button-border-radius);
-    color: var(--ifm-button-color);
-    cursor: pointer;
-    display: inline-block;
-    font-size: calc(0.875rem * var(--ifm-button-size-multiplier));
-    font-weight: var(--ifm-button-font-weight);
-    line-height: 1.5;
-    padding: calc(
-            var(--ifm-button-padding-vertical) * var(--ifm-button-size-multiplier)
-    )
-    calc(
-            var(--ifm-button-padding-horizontal) * var(--ifm-button-size-multiplier)
-    );
-    text-align: center;
-    -webkit-user-select: none;
-    user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    transition-property: color, background, border-color;
-}
-.transparentButton:hover {
-    text-decoration: none;
-}
-
-.transparentButton--link {
-    --ifm-button-background-color: transparent;
-    --ifm-button-border-color: transparent;
-
-    color: var(--ifm-link-color);
-    /* autoprefixer: ignore next */
-    text-decoration: var(--ifm-link-decoration);
-}
-
-.transparentButton--link:hover,
-.transparentButton--link:active,
-.transparentButton--link.button--active {
-    color: var(--ifm-link-hover-color);
-    /* autoprefixer: ignore next */
-    text-decoration: var(--ifm-link-hover-decoration);
-}
-
-.flexContainer2 {
+.liveMsgContainerContainer {
     display: flex;
     flex-direction: column-reverse;
-    background: var(--pretty-blue);
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 10;
+    flex-grow: 1;
+    overflow: auto;
+    border-radius: 1em;
+}
+.liveMsgContainer {
+    display: flex;
+    flex-direction: column-reverse;
     flex-grow: 1;
     overflow-y: auto;
-    max-height: calc(100vh - 20px); /* Adjust the value based on your needs */
-    padding: 10px;
+    padding: 6px;
     align-items: flex-end;
 }
-
-@media (min-width: 1100px) {
-    .defaultSlideStyle {
-        flex-wrap: wrap;
-    }
-
-    .exampleContainer {
-        display: flex;
-    }
-
-    .explainer {
-        display: flex;
-        flex-direction: column;
-        padding: 0 10px 0 0;
-        flex-basis: 50%;
-        min-width: 400px;
-    }
-
-    .asciinema {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        flex-basis: 50%;
-    }
-
-    .buttons {
-
-    }
-
-    .slideText{
-        max-width: 600px;
-        min-width: 400px;
-        display: flex;
-        flex-grow: 1;
-        flex-direction: column;
-        flex-basis: 50%;
-        #background: #4d4d4d;
-    }
-
-    .slideImage{
-        display: flex;
-        flex-direction: column;
-        flex-basis: 50%;
-        flex-grow: 1;
-        #background: var(--breen);
-    }
-
-    .flexGrowNoWrap {
-        display: flex;
-        flex-grow: 1;
-        flex-wrap: nowrap;
-    }
-}
-
-
 
 .pageWrapper {
     display: flex;
@@ -249,4 +154,57 @@ code {
     background: var(--toast-body);
     padding: 0 0 0 10px;
     border-radius: 0 0 5px 5px;
+}
+
+@media (min-width: 1100px) {
+    .defaultSlideStyle {
+        flex-wrap: wrap;
+    }
+
+    .exampleContainer {
+        display: flex;
+    }
+
+    .explainer {
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px 0 0;
+        flex-basis: 50%;
+        min-width: 400px;
+    }
+
+    .asciinema {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-basis: 50%;
+    }
+
+    .buttons {
+
+    }
+
+    .slideText{
+        max-width: 600px;
+        min-width: 400px;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        flex-basis: 50%;
+        #background: #4d4d4d;
+    }
+
+    .slideImage{
+        display: flex;
+        flex-direction: column;
+        flex-basis: 50%;
+        flex-grow: 1;
+        #background: var(--breen);
+    }
+
+    .flexGrowNoWrap {
+        display: flex;
+        flex-grow: 1;
+        flex-wrap: nowrap;
+    }
 }
