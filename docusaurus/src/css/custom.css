@@ -43,9 +43,25 @@
   --ifm-tabs-color-active: var(--ifm-font-color-base);
 }
 
-html[data-theme=dark] {
-  --ifm-heading-color: #94a3b8;
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+html[data-theme="dark"] {
+  --ifm-background-color: #111827;
+  --ifm-background-surface-color: #1f2937;
+  --ifm-background-surface-color-dark: #374151;
+  --ifm-footer-background-color: #1b263e;
+  --ifm-color-primary: #158eed;
+  --ifm-color-primary-dark: #b671fc;
+  --ifm-color-primary-darker: #ad5ffb;
+  --ifm-color-primary-darkest: #a34cfb;
+  --ifm-color-primary-light: #d3a9fd;
+  --ifm-color-primary-lighter: #ddbcfd;
+  --ifm-color-primary-lightest: #e6cffe;
+  --background-color-1: #434862;
+  --landing-banner-1: #38383a;
   --ifm-font-color-base: #94a3b8;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --logo-name: "ziti-logo-light.svg";
+  --ifm-heading-color: #94a3b8;
   --ifm-menu-color: #ffffff;
   --ifm-toc-link-color: #ffffff;
 }
@@ -85,25 +101,6 @@ html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-the
     --h2-size: 25px;
     --h3-size: 20px;
   }
-}
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-html[data-theme="dark"] {
-  --ifm-background-color: #111827;
-  --ifm-background-surface-color: #1f2937;
-  --ifm-background-surface-color-dark: #374151;
-  --ifm-footer-background-color: #1b263e;
-  --ifm-color-primary: #158eed;
-  --ifm-color-primary-dark: #b671fc;
-  --ifm-color-primary-darker: #ad5ffb;
-  --ifm-color-primary-darkest: #a34cfb;
-  --ifm-color-primary-light: #d3a9fd;
-  --ifm-color-primary-lighter: #ddbcfd;
-  --ifm-color-primary-lightest: #e6cffe;
-  --background-color-1: #434862;
-  --landing-banner-1: #38383a;
-  --ifm-font-color-base: #94a3b8;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --logo-name: "ziti-logo-light.svg";
 }
 
 /* cyrillic */

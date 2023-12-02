@@ -9,16 +9,6 @@ import CodeBlock from '@theme/CodeBlock'
 import SlideShow from "../../components/SlideShow";
 import Expire from "../../components/Expire";
 import styles from "./styles.module.css";
-import CloseButton from 'react-bootstrap/CloseButton';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
-
 
 function App() {
     const {siteConfig} = useDocusaurusContext();
@@ -114,30 +104,26 @@ function App() {
         const seconds = now.getSeconds().toString().padStart(2, '0');
         return `${hours}:${minutes}:${seconds}`;
     }
+
+    const newToast = (who, when, what) => {
+        return <div className={styles.toast}>
+            <div className={styles.toastHeader}>
+                <p>{who}</p>
+                <small>{when}</small>
+            </div>
+            <div className={styles.toastBody}>
+                <p>{what}</p>
+            </div>
+        </div>;
+    }
+
     const notifyHandler = (event) => {
         const parts = event.data.split(':');
         const who = parts[0];
         const what = parts.slice(1).join(':');
         const when = getCurrentTime();
-        const item = <div className={styles.messagebox}>
-            <div>
-                <div>
-                    <span className={styles.messageName}>{who} </span>
-                    <span style={{color: "#2F3F4F"}}>{}</span>
-                </div>
-                <span className={styles.messageText}>{what}</span>
-            </div>
-        </div>;
 
-        const toast = <Expire key={generateUniqueId()} delay="60000">
-            <Toast>
-                <Toast.Header closeButton={false}>
-                    <strong className="me-auto">Realtime Reflect Message</strong>
-                    <small>{when}</small>
-                </Toast.Header>
-                <Toast.Body style={{opacity: 1, background: "var(--ifm-background-color)"}}><p>{who} wrote: {what}</p></Toast.Body>
-            </Toast>
-        </Expire>;
+        const toast = newToast(who, when, what);
 
         setItems(prevItems => {
             const newItem = <Expire key={generateUniqueId()} delay="200000" className={styles.chatBubbles}>
@@ -185,22 +171,19 @@ function App() {
     return (
         <OpenZitiLayout>
             <div id={"a"} style={{display: "flex", flexDirection: "column-reverse", position:"absolute", right: "10px", bottom:"10px", zIndex:10}}>
-                {liveMessageVisible && (
-                    <div id={"b"} className={styles.app} style={{ height: "450px" }}>
+                {liveMessageVisible && (<div id={"b"} className={styles.app} style={{ height: "450px" }}>
                         <div  id={"c"} className={`${styles.flexContainer2} ${styles.bgImg1}`}>
-                            <span className={styles.msgSpan}>👆 Realtime "Reflect" Messages</span>
+                            <span className={styles.msgSpan}>👆 live "Reflect" messages will display here</span>
                             <div className={`${styles.pageWrapper}`}>
-                                    {items.map((item, index) => item ) }
+                                {items.map((item, index) => item ) }
                             </div>
                         </div>
-                    </div>
-                    )
+                    </div>)
                 }
             </div>
             <OpenZitiHorizontalSection>
                 <div style={{display:"flex"}}>
                     <div style={{display: "flex", flexGrow: 1}}>
-                        <CloseButton />
                         <img
                             src="https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png"
                             height="60px"
@@ -213,7 +196,6 @@ function App() {
                         <button className={styles.transparentButton} onClick={showLiveMessages}>{liveMsgText}</button>
                     </div>
                 </div>
-                <hr/>
                 <div className={styles.exampleContainer}>
                     <div className={styles.explainer} ref={elementRef}>
                         <p>If you have go installed, it's as simple as clone the repo, and <code>go run</code> and you
@@ -243,19 +225,6 @@ function App() {
                            imgClassName={styles.slideImage}
                            buttonClassName={"button button--primary"}
                 />
-                <ToastContainer
-                    className="p-3"
-                    position={'bottom-end'}
-                    style={{ zIndex: 10, height: "600px", overflowY: "clip" }}
-                >
-                    {(items.count > 0) && (
-                    <span>Realtime "Reflect" Messages</span>
-                    )
-                    }
-                    <div style={{display: "flex", flexDirection: "column-reverse", height: "500px", overflowY: "auto"}}>
-                        {items.map((item, index) => item ) }
-                    </div>
-                </ToastContainer>
             </OpenZitiHorizontalSection>
         </OpenZitiLayout>
     );
