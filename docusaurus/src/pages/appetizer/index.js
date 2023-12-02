@@ -16,13 +16,11 @@ function App() {
     const slideImages = [
         {
             title: <div><H3 style={extraH3Style}>Step 1 - Process Startup</H3></div>,
-            text: <p>When the Appetizer process starts, the first thing it does is create a strong identity
-                for itself. This strong identity (represented by the lock icon) will then be used by the server
-                listeners established <Highlight>inside</Highlight> the appetizer process. An important point
-                is that this server listeners on the OpenZiti Overlay network. It doesn't rely on firewalls
-                or web ACLs for securityThere are <Highlight>NO open ports</Highlight> on the
-                underlay network. These processes can <Highlight>only</Highlight> be accessed over the
-                OpenZiti Network</p>,
+            text: (<><p>When the Appetizer process starts, it first creates a <Highlight>strong identity</Highlight> for
+                itself. This strong identity (represented by the lock icon) is authorized to "bind" the reflect service,
+                creating a listener. The reflect server is then listening on the overlay and able to accept incoming
+                connections from other <Highlight>strong identities</Highlight>, authorized to participate in the
+                OpenZiti network.</p></>),
             img: useBaseUrl("/img/appetizer/step1.svg"),
             darkImg: useBaseUrl("/img/appetizer/dark-step1.svg")
         },
