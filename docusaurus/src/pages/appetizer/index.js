@@ -13,48 +13,74 @@ import styles from "./styles.module.css";
 function App() {
     const {siteConfig} = useDocusaurusContext();
     const extraH3Style = {marginBottom:"0px"}
+    const strongId = <Highlight>strong identity</Highlight>;
+    const strongIds = <Highlight>strong identities</Highlight>;
     const slideImages = [
         {
-            title: <div><H3 style={extraH3Style}>Step 1 - Process Startup</H3></div>,
-            text: (<><p>When the Appetizer process starts, it first creates a <Highlight>strong identity</Highlight> for
+            title: <div><H3 style={extraH3Style}>Step 1 - Reflect Server Strong Identity</H3></div>,
+            text: (<><p>When the Appetizer process starts, it first creates a {strongId} for
                 itself. This strong identity (represented by the lock icon) is authorized to "bind" the reflect service,
                 creating a listener. The reflect server is then listening on the overlay and able to accept incoming
-                connections from other <Highlight>strong identities</Highlight>, authorized to participate in the
+                connections from other {strongIds}, authorized to participate in the
                 OpenZiti network.</p></>),
             img: useBaseUrl("/img/appetizer/step1.svg"),
             darkImg: useBaseUrl("/img/appetizer/dark-step1.svg")
         },
         {
             title: <div><H3 style={extraH3Style}>Step 2 - Reflect Server Connects to the OpenZiti Network</H3></div>,
-            text: <p>After the process starts and bootstraps a strong identity, the <code>Reflect Server</code><span> </span>
-                attaches to the overlay network by connecting to one or more routers. At this point, the
-                process is ready to accept connections over the OpenZiti overlay.</p>,
+            text: (<><p>Now the <code>reflect server</code> is ready to connect to the overlay network. The OpenZiti SDK
+                locates any/all routers it's authorized to connect to and using the {strongId} created in step 1, it
+                attaches to the overlay network. Since it is authorized to "bind" the reflect service, other
+                {strongIds} which are authorized to access this service can do so. Following the principle of
+                <Highlight>least privileged access</Highlight>, only {strongIds} authorized to
+                access this service will be allowed to. Other {strongIds}, not authorized to connect
+                to this service, won't be allowed to access it.</p></>),
             img: useBaseUrl("/img/appetizer/step2.svg"),
             darkImg: useBaseUrl("/img/appetizer/dark-step2.svg")
         },
         {
-            title: <div><H3 style={extraH3Style}>Step 3 - Reflect Client Starts</H3></div>,
-            text: <p>When you run the reflect client with <code>go run clients/reflect.go</code>,
-                the first thing it does is make an HTTP request to the <Highlight>public</Highlight> appetizer http
-                server which is responsible for creating a temporary strong identity, useful for the demo.
-                You can try that HTTP request on your own if you want at https://appetizer.openziti.io/fixthis.
-            </p>,
+            title: <div><H3 style={extraH3Style}>Step 3 - Reflect Client Strong Identity</H3></div>,
+            text: (<>
+                <p>
+                    Your <code>reflect client</code> also needs a {strongId}. You won't be able to connect to the
+                    <code>reflect server</code> if you're not authenticated to the OpenZiti overlay, and
+                    you can't authenticate to the overlay without a {strongId}! The Appetizer exposes a public
+                    endpoint (one not protected by OpenZiti) which creates {strongIds} authorized to connect to
+                    the reflect server. The first time you run the reflect client, it will automatically make an HTTP
+                    request to retrieve a {strongId} for your use, authorized to communicate to the reflect server.
+                </p>
+            </>),
             img: useBaseUrl("/img/appetizer/step3.svg"),
             darkImg: useBaseUrl("/img/appetizer/dark-step3.svg")
         },
         {
-            title: <div><H3 style={extraH3Style}>Step 4 - Reflect Client Attaches to the OpenZiti Network</H3></div>,
-            text: <p>After your locally running <code>reflect client</code> starts and retrieves the strong
-                identity, it will be ready to connect to the OpenZiti overlay. The identity will also be
-                authorized to <Highlight>dial</Highlight> the <code>reflect server</code>.</p>,
+            title: <div><H3 style={extraH3Style}>Step 4 - Reflect Server Connects to the OpenZiti Network</H3></div>,
+            text: (<><p>Your <code>reflect client</code> now has it's own {strongId} and can connect to the
+                OpenZiti overlay! Both reflect client and reflect server established connections to routers deployed on
+                the public, open internet. By making outbound connections to edge routers in this way,
+                absolutely <Highlight>no inbound firewall holes</Highlight> are needed. The reflect server also
+                has <Highlight>no listening ports</Highlight> on the IP-based, underlay network. It only listens for
+                connections exclusively on the overlay network! This gives the reflect server and any server adopting
+                an OpenZiti SDK, total protection from <Highlight>to port scanning</Highlight>.
+            </p></>),
             img: useBaseUrl("/img/appetizer/step4.svg"),
             darkImg: useBaseUrl("/img/appetizer/dark-step4.svg")
         },
         {
             title: <div><H3 style={extraH3Style}>Step 5 - Client and Server Communicate Securely</H3></div>,
-            text: <p>The client now <Highlight>dials</Highlight> the <code>reflect server</code> over
-                the OpenZiti overlay. The <code>reflect server</code> accepts the connection, reads
-                the bytes sent, and returns those bytes back to your <code>reflect client</code>.</p>,
+            text: (<>
+                <p>The <code>reflect client</code> now <Highlight>dials</Highlight> the <code>reflect server</code>
+                    over the OpenZiti overlay. The client can connect and the server can accept the connections because
+                    both are now <Highlight>authenticated</Highlight> and <Highlight>authorized</Highlight> to do so. The
+                    client is now able to send some bytes which the server reflects back to your locally running reflect
+                    client. When the client initiates a connection, <Highlight>end to end encryption</Highlight> is then
+                    negotiated as well, further ensuring the security of the connection!
+                </p>
+                <span style={{paddingTop: "5px"}}>With the connection established, the OpenZiti overlay can now monitor
+                    the connection and apply <Highlight>continual authorization</Highlight> as well. As soon as either
+                    {strongId} is unauthorized, the connection is terminated.
+                </span>
+            </>),
             img: useBaseUrl("/img/appetizer/step5.svg"),
             darkImg: useBaseUrl("/img/appetizer/dark-step5.svg")
         },

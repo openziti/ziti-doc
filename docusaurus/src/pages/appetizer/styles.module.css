@@ -35,6 +35,7 @@ small {
 
 code {
     white-space: nowrap;
+    padding: 2px 3px 2px 3px;
 }
 
 .slideText{
