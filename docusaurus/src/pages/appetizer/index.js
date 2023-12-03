@@ -159,8 +159,8 @@ function App() {
     };
 
     useEffect(() => {
-        const source = new EventSource("http://ziti-edge-controller:18000/sse");
-        //const source = new EventSource(`https://appetizer.openziti.io/sse`);
+        //const source = new EventSource("http://ziti-edge-controller:18000/sse");
+        const source = new EventSource(`https://appetizer.openziti.io/sse`);
         source.addEventListener('notify', notifyHandler, true);
     }, []);
 
