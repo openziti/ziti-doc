@@ -54,7 +54,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step3.svg")
         },
         {
-            title: <div><H3 style={extraH3Style}>Step 4 - Reflect Server Connects to the OpenZiti Network</H3></div>,
+            title: <div><H3 style={extraH3Style}>Step 4 - Reflect Client Connects to the OpenZiti Network</H3></div>,
             text: (<><p>Your&nbsp;<code>reflect client</code>&nbsp;now has it's own {strongId} and can connect to the
                 OpenZiti overlay! Both reflect client and reflect server established connections to routers deployed on
                 the public, open internet. By making outbound connections to edge routers in this way,
