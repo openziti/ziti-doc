@@ -218,6 +218,9 @@ const config = {
           trackingID: 'G-THVRRJ3GLE',
           anonymizeIP: true,
         },
+        googleTagManager: {
+          containerId: 'GTM-5SF399H3',
+        },
       }),
     ],
     // Redocusaurus config
