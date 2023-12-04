@@ -25,7 +25,6 @@ const Slideshow = (props) => {
             html.scrollHeight,
             html.offsetHeight
         );
-        console.log(documentHeight + " > " + windowHeight + " ???");
         return documentHeight > windowHeight
     }
     const goToNextSlide = () => {
@@ -45,7 +44,7 @@ const Slideshow = (props) => {
     };
 
     const enableButtons = (nextPos) => {
-        console.debug("enableButtons.currentPosition: " + currentPosition + " : " + slides.length);
+        //console.debug("enableButtons.currentPosition: " + currentPosition + " : " + slides.length);
         setPreviousDisabled(nextPos === 0);
         setNextDisabled(nextPos === slides.length - 1);
     }
@@ -75,7 +74,7 @@ const Slideshow = (props) => {
     const handleOnWheel = (e) => {
         if (isScrollable()) {
             //bounce
-            console.log("is scrollable. not enabling scroll wheel on slides");
+            //console.log("is scrollable. not enabling scroll wheel on slides");
             return;
         }
         const curScroll = Math.max(scrollPos + e.deltaY, 0);
