@@ -13,6 +13,21 @@ const Slideshow = (props) => {
     const [showAllText, setShowAllText] = useState(viewAllSlides);
     const [scrollPos, setScrollPos] = useState(0);
 
+    const isScrollable = () => {
+        const body = document.body;
+        const html = document.documentElement;
+
+        const windowHeight = window.innerHeight || html.clientHeight || body.clientHeight;
+        const documentHeight = Math.max(
+            body.scrollHeight,
+            body.offsetHeight,
+            html.clientHeight,
+            html.scrollHeight,
+            html.offsetHeight
+        );
+        console.log(documentHeight + " > " + windowHeight + " ???");
+        return documentHeight > windowHeight
+    }
     const goToNextSlide = () => {
         if(currentPosition === slides.length - 1) {
         } else {
@@ -58,6 +73,11 @@ const Slideshow = (props) => {
     }
 
     const handleOnWheel = (e) => {
+        if (isScrollable()) {
+            //bounce
+            console.log("is scrollable. not enabling scroll wheel on slides");
+            return;
+        }
         const curScroll = Math.max(scrollPos + e.deltaY, 0);
         const effectivePage = Math.floor(curScroll / 100);
         console.debug("effectivePage:" + effectivePage + " : " + ", curScroll:" + curScroll);
