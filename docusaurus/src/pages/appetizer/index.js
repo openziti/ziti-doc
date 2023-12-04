@@ -28,7 +28,7 @@ function App() {
         },
         {
             title: <div><H3 style={extraH3Style}>Step 2 - Reflect Server Connects to the OpenZiti Network</H3></div>,
-            text: (<><p>Now the <code>reflect server</code> is ready to connect to the overlay network. The OpenZiti SDK
+            text: (<><p>Now the&nbsp;<code>reflect server</code>&nbsp;is ready to connect to the overlay network. The OpenZiti SDK
                 locates any/all routers it's authorized to connect to and using the {strongId} created in step 1, it
                 attaches to the overlay network. Since it is authorized to "bind" the reflect service, other
                 {strongIds} which are authorized to access this service can do so. Following the principle of
@@ -42,8 +42,8 @@ function App() {
             title: <div><H3 style={extraH3Style}>Step 3 - Reflect Client Strong Identity</H3></div>,
             text: (<>
                 <p>
-                    Your <code>reflect client</code> also needs a {strongId}. You won't be able to connect to the
-                    <code>reflect server</code> if you're not authenticated to the OpenZiti overlay, and
+                    Your&nbsp;<code>reflect client</code>&nbsp;also needs a {strongId}. You won't be able to connect to the
+                   &nbsp;<code>reflect server</code>&nbsp;if you're not authenticated to the OpenZiti overlay, and
                     you can't authenticate to the overlay without a {strongId}! The Appetizer exposes a public
                     endpoint (one not protected by OpenZiti) which creates {strongIds} authorized to connect to
                     the reflect server. The first time you run the reflect client, it will automatically make an HTTP
@@ -55,13 +55,13 @@ function App() {
         },
         {
             title: <div><H3 style={extraH3Style}>Step 4 - Reflect Server Connects to the OpenZiti Network</H3></div>,
-            text: (<><p>Your <code>reflect client</code> now has it's own {strongId} and can connect to the
+            text: (<><p>Your&nbsp;<code>reflect client</code>&nbsp;now has it's own {strongId} and can connect to the
                 OpenZiti overlay! Both reflect client and reflect server established connections to routers deployed on
                 the public, open internet. By making outbound connections to edge routers in this way,
                 absolutely <Highlight>no inbound firewall holes</Highlight> are needed. The reflect server also
                 has <Highlight>no listening ports</Highlight> on the IP-based, underlay network. It only listens for
                 connections exclusively on the overlay network! This gives the reflect server and any server adopting
-                an OpenZiti SDK, total protection from <Highlight>to port scanning</Highlight>.
+                an OpenZiti SDK, total protection <Highlight>from port scanning</Highlight>.
             </p></>),
             img: useBaseUrl("/img/appetizer/step4.svg"),
             darkImg: useBaseUrl("/img/appetizer/dark-step4.svg")
@@ -69,10 +69,10 @@ function App() {
         {
             title: <div><H3 style={extraH3Style}>Step 5 - Client and Server Communicate Securely</H3></div>,
             text: (<>
-                <p>The <code>reflect client</code> now <Highlight>dials</Highlight> the <code>reflect server</code>
-                    over the OpenZiti overlay. The client can connect and the server can accept the connections because
-                    both are now <Highlight>authenticated</Highlight> and <Highlight>authorized</Highlight> to do so. The
-                    client is now able to send some bytes which the server reflects back to your locally running reflect
+                <p>The&nbsp;<code>reflect client</code>&nbsp;now securely dials the&nbsp;<code>reflect server</code>
+                    &nbsp;over the OpenZiti overlay. The client can connect and the server can accept the connections because
+                    both are now <Highlight>authenticated</Highlight> and <Highlight>authorized</Highlight>. The
+                    client sends bytes to the server, which are reflected back to your locally running reflect
                     client. When the client initiates a connection, <Highlight>end to end encryption</Highlight> is then
                     negotiated as well, further ensuring the security of the connection!
                 </p>
@@ -189,7 +189,7 @@ function App() {
             </div>
         <OpenZitiLayout>
             <OpenZitiHorizontalSection>
-                <div style={{display:"flex"}}>
+                <div style={{display:"flex", paddingBottom: "10px"}}>
                     <div style={{display: "flex", flexGrow: 1}}>
                         <img
                             src="https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png"
@@ -202,8 +202,8 @@ function App() {
                 </div>
                 <div className={styles.exampleContainer}>
                     <div className={styles.explainer}>
-                        <p>If you have go installed, it's as simple as clone the repo, and <code>go run</code> and you
-                        can experience application embedded zero trust in action.</p>
+                        <p>If you have go installed, it's as simple as clone the repo, and&nbsp;<code>go run</code>&nbsp;and you
+                        can experience application embedded zero trust in action 👇.</p>
                         <CodeBlock>
                             {trimmedCode}
                         </CodeBlock>

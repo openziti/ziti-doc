@@ -47,11 +47,13 @@ code {
 
 .exampleContainer {
     #background: #00d084;
+    flex-grow: 1;
 }
 
 .explainer {
     flex-direction: row;
     #background: #6EC1E4;
+    max-width: 600px;
 }
 
 .asciinema {
