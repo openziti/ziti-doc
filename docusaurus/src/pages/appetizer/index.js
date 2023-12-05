@@ -29,12 +29,11 @@ function App() {
         {
             title: <div><H3 style={extraH3Style}>Step 2 - Reflect Server Connects to the OpenZiti Network</H3></div>,
             text: (<><p>Now the&nbsp;<code>reflect server</code>&nbsp;is ready to connect to the overlay network. The OpenZiti SDK
-                locates any/all routers it's authorized to connect to and using the {strongId} created in step 1, it
-                attaches to the overlay network. Since it is authorized to "bind" the reflect service, other
-                {strongIds} which are authorized to access this service can do so. Following the principle of
-                <Highlight>least privileged access</Highlight>, only {strongIds} authorized to
-                access this service will be allowed to. Other {strongIds}, not authorized to connect
-                to this service, won't be allowed to access it.</p></>),
+                locates any/all <a href="/docs/reference/glossary">OpenZiti Routers</a> it's authorized to connect to
+                and using the {strongId} created in step 1, it attaches to the overlay network. Following the principle
+                of <Highlight>least privileged access</Highlight>, the server must be authorized to "bind" the reflect
+                service and other {strongIds} must be authorized "dial" the service. Other {strongIds} that are not
+                authorized, will not be allowed to access the service.</p></>),
             img: useBaseUrl("/img/appetizer/step2.svg"),
             darkImg: useBaseUrl("/img/appetizer/dark-step2.svg")
         },
@@ -56,7 +55,8 @@ function App() {
         {
             title: <div><H3 style={extraH3Style}>Step 4 - Reflect Client Connects to the OpenZiti Network</H3></div>,
             text: (<><p>Your&nbsp;<code>reflect client</code>&nbsp;now has it's own {strongId} and can connect to the
-                OpenZiti overlay! Both reflect client and reflect server established connections to routers deployed on
+                OpenZiti overlay! Both reflect client and reflect server established connections to the
+                <a href="/docs/reference/glossary">OpenZiti Routers</a> deployed on
                 the public, open internet. By making outbound connections to edge routers in this way,
                 absolutely <Highlight>no inbound firewall holes</Highlight> are needed. The reflect server also
                 has <Highlight>no listening ports</Highlight> on the IP-based, underlay network. It only listens for

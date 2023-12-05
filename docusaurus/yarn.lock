@@ -3108,7 +3108,7 @@ asap@~2.0.3:
 
 asciinema-player@^3.6.3:
   version "3.6.3"
-  resolved "https://registry.npmjs.org/asciinema-player/-/asciinema-player-3.6.3.tgz"
+  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.6.3.tgz#b029290df39805180c986656ce39b8517b351422"
   integrity sha512-62aDgLpbuduhmpFfNgPOzf6fOluACLsftVnjpWJjUXX6dqhqTckFqWoJ+ayA0XjSlZ9l9wXTcJqRqvAAIpMblg==
   dependencies:
     "@babel/runtime" "^7.21.0"
