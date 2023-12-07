@@ -23,6 +23,13 @@ explore a [Ziti Network](/learn/introduction/index.mdx).
        at Loader.moduleStrategy (internal/modules/esm/translators.js:133:18)
        at async link (internal/modules/esm/module_job.js:42:21)
 
+ * You will also need the Angular CLI installed and available on your command line. If you do not have this already you can
+   run the following command:
+
+    ```text
+    npm install -g @angular/cli@16
+    ```
+    
 
 :::note
 When running Ziti Administration Console, you should also prefer using https over http. In order to do this you will need
