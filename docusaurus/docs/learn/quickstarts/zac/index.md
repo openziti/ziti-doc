@@ -60,7 +60,7 @@ you can perform the following steps.
 1. Install Angular CLI. If you already have the Angular CLI installed on your command line (min version 16.0) then you can skip to step #4.
 
     ```text
-    npm install -g @angular/cli@16.0.0-next.0
+    npm install -g @angular/cli@16
     ```
 
 1. Build the core Angular library:
