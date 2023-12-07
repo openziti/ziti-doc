@@ -23,6 +23,13 @@ explore a [Ziti Network](/learn/introduction/index.mdx).
        at Loader.moduleStrategy (internal/modules/esm/translators.js:133:18)
        at async link (internal/modules/esm/module_job.js:42:21)
 
+ * You will also need the Angular CLI installed and available on your command line. If you do not have this already you can
+   run the following command:
+
+    ```text
+    npm install -g @angular/cli@16
+    ```
+    
 
 :::note
 When running Ziti Administration Console, you should also prefer using https over http. In order to do this you will need
@@ -48,6 +55,18 @@ you can perform the following steps.
    ```text
    cd "${ZITI_HOME}/ziti-console"
    npm install
+   ```
+
+1. Build the core Angular library:
+
+   ```text
+   ng build ziti-console-lib
+   ```
+
+1. Build the Angular app:
+
+   ```text
+   ng build ziti-console
    ```
 
 1. Use the ziti-controller certificates for the Ziti Console:
@@ -125,7 +144,7 @@ docker run -it --rm --name temp \
 
 ### Starting ZAC
 
-With the certificates copied, you will be able to start the ZAC using one Docker command. Also notice the command 
+With the certificates copied, you will be able to start the ZAC using one Docker command. Also notice the command
 will expose the ZAC http and https ports to your local computer so that you can access the ZAC from outside of Docker.
 If you customized any of these paths, you'll need to replace the paths specified accordingly (the '-v' lines).
 
@@ -178,14 +197,14 @@ There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides
 
 2. Set the controller as shown (use the correct URL):
 
-   1. Example using the "everything local" quickstart:
-      ![everything local](./zac_configure_local.png)
+    1. Example using the "everything local" quickstart:
+       ![everything local](./zac_configure_local.png)
 
-   2. Example using the "docker-compose" quickstart:
-      ![docker-compose](./zac_configure_dc.png)
+    2. Example using the "docker-compose" quickstart:
+       ![docker-compose](./zac_configure_dc.png)
 
-   3. Example using AWS "host it anywhere":
-      ![host it anywhere](./zac_configure_hia.png)
+    3. Example using AWS "host it anywhere":
+       ![host it anywhere](./zac_configure_hia.png)
 
 3. Optionally, [**change admin's password**](/learn/quickstarts/network/help/change-admin-password.md#ziti-console)
 
