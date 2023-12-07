@@ -31,6 +31,10 @@ www\.reddit\.com/r/openziti
 .*\.ziti
 .*\.zitik8s
 .*\.svc
+.*\.internal
+.*\.private
+.*\.home
+.*\.lan
 twitter\.com/(OpenZiggy|OpenZiti)
 landing.openziti.io/
 fonts.gstatic.com/
