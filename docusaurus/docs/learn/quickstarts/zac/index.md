@@ -66,7 +66,7 @@ you can perform the following steps.
 1. Build the Angular app:
 
    ```text
-   ng build ziti-console
+   ng build ziti-console-node
    ```
 
 1. Use the ziti-controller certificates for the Ziti Console:
