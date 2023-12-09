@@ -57,27 +57,18 @@ function calculateRateAndStars(inp, data) {
   }
 }
 
-/*
-const othersData = calculateRateAndStars(others);
-const zitiData = calculateRateAndStars(ziti);
-const zrokData = calculateRateAndStars(zrok);
-*/
 calculateRateAndStars(zrok, zrokData)
 calculateRateAndStars(ziti, zitiData)
 calculateRateAndStars(others, othersData)
 
 const largeAreaChart = {
+  legend: {
+    data:['ziti daily stars','zrok daily stars','other repos daily stars']
+  },
+  title: {
+    text: 'Stargazer Change by Day'
+  },
   dataset: [
-    /*
-    {
-      id: 'zitiData',
-      source: monthRates/*calculateRateAndStars(ziti)* /,
-    },
-    {
-      id: 'zrokData',
-      source: calculateRateAndStars(zrok),
-    }
-    */
     {
       id: 'zitiDayRates',
       source: zitiData.dayRates,
@@ -97,10 +88,6 @@ const largeAreaChart = {
       return [pt[0], '10%'];
     }
   },
-  title: {
-    left: 'center',
-    text: 'Stargazer Change by Day'
-  },
   toolbox: {
     feature: {
       dataZoom: {
@@ -145,22 +132,6 @@ const largeAreaChart = {
     }
   ],
   series: [
-    /*{
-      name: 'ziti',
-      datasetId: 'dataset_raw',
-      type: 'line',
-      smooth: false,
-      symbolSize: 6,
-      areaStyle: {
-        color: 'rgba(0,0,0,0)',
-      },
-      encode: {
-        x: 'Date',
-        y: 'Stars',
-        itemName: 'user',
-        tooltip: ['user', 'user']
-      },
-    },*/
     {
       name: 'zrok daily stars',
       datasetId: 'zrokDayRates',
@@ -176,6 +147,12 @@ const largeAreaChart = {
         y: 'Stars',
         itemName: 'user',
         tooltip: ['user', 'user']
+      },
+      label: {
+        normal: {
+          show: true,
+          position: 'top'
+        }
       },
     },
     {
@@ -194,6 +171,12 @@ const largeAreaChart = {
         itemName: 'user',
         tooltip: ['user', 'user']
       },
+      label: {
+        normal: {
+          show: true,
+          position: 'top'
+        }
+      },
     },
     {
       name: 'other repos daily stars',
@@ -211,69 +194,23 @@ const largeAreaChart = {
         itemName: 'user',
         tooltip: ['user', 'user']
       },
+      label: {
+        normal: {
+          show: true,
+          position: 'top'
+        }
+      },
     },
-    /*
-    {
-      name: 'ziti',
-      type: 'line',
-      smooth: false,
-      symbolSize: 6,
-      areaStyle: {
-        color: 'rgba(0,0,0,0)',
-      },
-      data: zitiData
-    },
-    {
-      name: 'zrok',
-      type: 'line',
-      smooth: false,
-      symbolSize: 6,
-      areaStyle: {
-        color: 'rgba(0,0,0,0)',
-      },
-      data: zrokData
-    },
-    {
-      name: 'all other stars',
-      type: 'line',
-      smooth: false,
-      symbolSize: 6,
-      areaStyle: {
-        color: 'rgba(0,0,0,0)',
-      },
-      data: othersData
-    },*/
-    /*
-    {
-      name: 'all other stars',
-      type: 'line',
-      smooth: false,
-      symbolSize: 6,
-      areaStyle: {
-        color: 'rgba(0,0,0,0)',
-      },
-      data: othersData,e
-      encode: {
-        x: 'Date',
-        y: 'Stars',
-        itemName: 'Year',
-        tooltip: ['Year', 'Income']
-      }
-    },*/
   ]
 };
 const largeAreaChartDailies = {
+  legend: {
+    data:['ziti','zrok','other repos']
+  },
+  title: {
+    text: 'OpenZiti Stargazes by Project'
+  },
   dataset: [
-    /*
-    {
-      id: 'zitiData',
-      source: monthRates/*calculateRateAndStars(ziti)* /,
-    },
-    {
-      id: 'zrokData',
-      source: calculateRateAndStars(zrok),
-    }
-    */
     {
       id: 'zitiDayRates',
       source: zitiData.stars,
@@ -293,10 +230,6 @@ const largeAreaChartDailies = {
       return [pt[0], '10%'];
     }
   },
-  title: {
-    left: 'center',
-    text: 'OpenZiti Stargazes by Project'
-  },
   toolbox: {
     feature: {
       dataZoom: {
@@ -357,6 +290,12 @@ const largeAreaChartDailies = {
         itemName: 'user',
         tooltip: ['user', 'user']
       },
+      label: {
+        normal: {
+          show: true,
+          position: 'top'
+        }
+      },
     },
     {
       name: 'ziti',
@@ -374,6 +313,12 @@ const largeAreaChartDailies = {
         itemName: 'user',
         tooltip: ['user', 'user']
       },
+      label: {
+        normal: {
+          show: true,
+          position: 'top'
+        }
+      },
     },
     {
       name: 'other repos',
@@ -390,6 +335,12 @@ const largeAreaChartDailies = {
         y: 'Stars',
         itemName: 'user',
         tooltip: ['user', 'user']
+      },
+      label: {
+        normal: {
+          show: true,
+          position: 'top'
+        }
       },
     },
   ]
