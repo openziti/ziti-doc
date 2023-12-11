@@ -1,0 +1,19 @@
+div.container {
+    margin: 10px;
+    width: 200px;
+    height: 100px;
+    padding: 2px;
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.child {
+    flex-basis: 40%;
+    background-color: red;
+    margin: 2px;
+}

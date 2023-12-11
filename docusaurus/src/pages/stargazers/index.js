@@ -1,8 +1,8 @@
 import React from "react";
 import ReactEcharts from "echarts-for-react";
-import zrok from './all.zrok.stargazers.json'
-import ziti from './all.ziti.stargazers.json'
-import others from './all.other.stargazers.json'
+import zrok from '../all.zrok.stargazers.json'
+import ziti from '../all.ziti.stargazers.json'
+import others from '../all.other.stargazers.json'
 import { time } from "echarts";
 
 const zitiData = {
