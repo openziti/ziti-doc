@@ -5,8 +5,6 @@
   align-items: center;
   min-height: 100%;
   background-color: var(--ifm-background-color);
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 .content {
@@ -14,13 +12,13 @@
   flex-direction: column;
   flex-grow: 1;
   min-height: 100%;
-  padding: 20px 20px;
+  max-width: 100%;
+  padding: 20px;
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1420px) {
   .content {
     min-width: 1400px;
     max-width: 1400px;
-    padding: 20px 20px;
   }
 }

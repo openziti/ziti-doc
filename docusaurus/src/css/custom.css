@@ -17,6 +17,7 @@
   --ifm-color-primary-light: #a14ded;
   --ifm-color-primary-lighter: #a85aee;
   --ifm-color-primary-lightest: #b776f1;
+  --code-block-text-color: #ddd8e5;
   --ifm-heading-color: #002451;
   --ifm-color-banner: #edac15;
   --ifm-navbar-item-padding-horizontal: .5em;
@@ -42,9 +43,25 @@
   --ifm-tabs-color-active: var(--ifm-font-color-base);
 }
 
-html[data-theme=dark] {
-  --ifm-heading-color: #ffffff;
-  --ifm-font-color-base: #ffffff;
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+html[data-theme="dark"] {
+  --ifm-background-color: #111827;
+  --ifm-background-surface-color: #1f2937;
+  --ifm-background-surface-color-dark: #374151;
+  --ifm-footer-background-color: #1b263e;
+  --ifm-color-primary: #158eed;
+  --ifm-color-primary-dark: #b671fc;
+  --ifm-color-primary-darker: #ad5ffb;
+  --ifm-color-primary-darkest: #a34cfb;
+  --ifm-color-primary-light: #d3a9fd;
+  --ifm-color-primary-lighter: #ddbcfd;
+  --ifm-color-primary-lightest: #e6cffe;
+  --background-color-1: #434862;
+  --landing-banner-1: #38383a;
+  --ifm-font-color-base: #94a3b8;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --logo-name: "ziti-logo-light.svg";
+  --ifm-heading-color: #94a3b8;
   --ifm-menu-color: #ffffff;
   --ifm-toc-link-color: #ffffff;
 }
@@ -54,7 +71,7 @@ html[data-theme=dark] #Wizardly code {
 }
 
 html[data-theme=dark] code { 
-  color: rgb(221,216,229) !important;
+  color: var(--code-block-text-color) !important;
 }
 
 html[data-theme=dark] .alert--secondary code {
@@ -74,31 +91,16 @@ html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-the
 @media (max-width: 767px) {
   html[data-theme="dark"] {
     --h1-size: 30px;
+    --h2-size: 25px;
+    --h3-size: 20px;
   }
 }
 @media (max-width: 767px) {
   html[data-theme="light"] {
     --h1-size: 30px;
+    --h2-size: 25px;
+    --h3-size: 20px;
   }
-}
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-html[data-theme="dark"] {
-  --ifm-background-color: #111827;
-  --ifm-background-surface-color: #1f2937;
-  --ifm-background-surface-color-dark: #374151;
-  --ifm-footer-background-color: #1b263e;
-  --ifm-color-primary: #158eed;
-  --ifm-color-primary-dark: #b671fc;
-  --ifm-color-primary-darker: #ad5ffb;
-  --ifm-color-primary-darkest: #a34cfb;
-  --ifm-color-primary-light: #d3a9fd;
-  --ifm-color-primary-lighter: #ddbcfd;
-  --ifm-color-primary-lightest: #e6cffe;
-  --background-color-1: #434862;
-  --landing-banner-1: #38383a;
-  --ifm-font-color-base: #94a3b8;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --logo-name: "ziti-logo-light.svg";
 }
 
 /* cyrillic */
@@ -1854,6 +1856,10 @@ code {
 
 }
 
+code p {
+  color: var(--code-block-text-color);
+}
+
 li a code {
     font-family: var(--ifm-font-family-monospace);
     vertical-align: middle;
@@ -1951,7 +1957,7 @@ pre code {
   padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
 }
 
-pre {
+pre.off {
   margin-top: 10px !important;
 }
 

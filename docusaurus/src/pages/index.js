@@ -11,7 +11,7 @@ import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
 export function Highlight(props) {
     const { children } = props;
     return (
-        <span style={{color: "var(--ifm-color-primary)"}}> {children}</span>
+        <span style={{color: "var(--ifm-color-primary)", fontWeight: "bold"}}> {children}</span>
     );
 }
 export function H1(props) {

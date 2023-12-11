@@ -1,0 +1,213 @@
+:root {
+    --ifm-leading-desktop: 10px;
+    --ifm-leading: 10px;
+    --background: #414c58;
+    --breen: #00d084;
+    --some-other-grey: #2f3f4f;
+    --pretty-blue: #6EC1E4;
+    --toast-header: #b0c4d7;
+    --toast-body: var(--ifm-background-color);
+}
+
+html[data-theme="dark"] {
+    --ifm-background-color: #111827;
+    --toast-body: #2c3740;
+    --toast-header: #1f2937;
+    --small-color: white;
+}
+
+small {
+    color: var(--ifm-font-color-base);
+}
+
+.slideStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0 0 0;
+}
+
+.defaultSlideStyle {
+    display: flex;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+code {
+    white-space: nowrap;
+    padding: 2px 3px 2px 3px;
+}
+
+.slideText{
+    #background: aliceblue;
+}
+
+.slideImage{
+}
+
+.exampleContainer {
+    #background: #00d084;
+    flex-grow: 1;
+}
+
+.explainer {
+    flex-direction: row;
+    #background: #6EC1E4;
+    max-width: 600px;
+}
+
+.asciinema {
+}
+
+.liveMsgContainerContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    z-index: 10;
+    flex-grow: 1;
+    overflow: auto;
+    border-radius: 1em;
+}
+.liveMsgContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 6px;
+    align-items: flex-end;
+}
+
+.pageWrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+    #background-color: var(--pretty-blue);
+    align-items: stretch;
+    overflow: auto;
+    width: 400px;
+}
+
+.bgImg1 {
+    background: url(https://openziti.io/assets/images/bg-img-01-d31e592729cad752f0a97013a3f2d210.jpg) no-repeat fixed;
+    background-size: 100% 100%;
+}
+
+.messagebox {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-end;
+    border-radius: 1.1em;
+    margin: 5px;
+    padding:5px 5px 5px 15px;
+    background: rgba(250, 250, 250, 0.4);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    #-webkit-animation: chat-popup var(--delay-fade-const) both;
+    #animation: chat-popup var(--delay-fade-const) both;
+    transform-origin: bottom right;
+}
+
+.chat-bubbles {
+    display: flex;
+    flex-shrink: 1;
+    flex-direction: column;
+    z-index: 400;
+    align-items: flex-end;
+    background: red;
+}
+
+.msgSpan {
+    color: #d7d6d6;
+    font-weight: bold;
+    padding: 10px 10px 0 10px;
+    align-items: flex-end;
+}
+
+
+.app {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
+    border-radius: 1em;
+}
+
+.messageName {
+    font-weight: bold;
+}
+
+.messageText {
+    padding-left: 0;
+}
+
+.toast {
+    padding: 10px 0 0 0;
+}
+.toastHeader {
+    display: flex;
+    justify-content: space-between;
+    background: var(--toast-header);
+    border-radius: 5px 5px 0 0;
+    padding: 0 10px 0 10px;
+}
+.toastBody {
+    background: var(--toast-body);
+    padding: 0 0 0 10px;
+    border-radius: 0 0 5px 5px;
+}
+
+@media (min-width: 1100px) {
+    .defaultSlideStyle {
+        flex-wrap: wrap;
+    }
+
+    .exampleContainer {
+        display: flex;
+    }
+
+    .explainer {
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px 0 0;
+        flex-basis: 50%;
+        min-width: 400px;
+    }
+
+    .asciinema {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-basis: 50%;
+    }
+
+    .buttons {
+
+    }
+
+    .slideText{
+        max-width: 600px;
+        min-width: 400px;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        flex-basis: 50%;
+        #background: #4d4d4d;
+    }
+
+    .slideImage{
+        display: flex;
+        flex-direction: column;
+        flex-basis: 50%;
+        flex-grow: 1;
+        #background: var(--breen);
+    }
+
+    .flexGrowNoWrap {
+        display: flex;
+        flex-grow: 1;
+        flex-wrap: nowrap;
+    }
+}

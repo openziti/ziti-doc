@@ -14,18 +14,19 @@ import StarUs from "../../components/StarUs";
 
 export default function OpenZitiLayout(props) {
   const {
-    children,
-    noFooter,
-    wrapperClassName,
-    // Not really layout-related, but kept for convenience/retro-compatibility
-    title,
-    description,
-    bgColor,
+      children,
+      style,
+      noFooter,
+      wrapperClassName,
+      // Not really layout-related, but kept for convenience/retro-compatibility
+      title,
+      description,
+      bgColor,
   } = props;
   useKeyboardNavigation();
   return (
       <LayoutProvider>
-          <div className={styles.root}>
+          <div className={styles.root} style={style}>
               <div className={styles.content}>
                   <PageMetadata title="OpenZiti - open source zero trust networking!" description="OpenZiti is an open source zero trust network applying zero trust principles directly into applications through SDKs or to existing networks using tunnelers" />
 
