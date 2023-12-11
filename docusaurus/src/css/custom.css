@@ -2113,3 +2113,8 @@ pre.off {
   transform: translateY(1px);
   transition: all 0.3s ease;
 }
+
+/* hide the clipboard copy button on code blocks of type "buttonless" */
+.language-buttonless div > button {
+  display: none;
+}

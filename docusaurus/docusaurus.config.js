@@ -214,9 +214,8 @@ const config = {
           customCss: require.resolve('./src/css/custom.css'),
         },
         debug: true,
-        gtag: {
-          trackingID: 'G-THVRRJ3GLE',
-          anonymizeIP: true,
+        googleTagManager: {
+          containerId: 'GTM-5SF399H3',
         },
       }),
     ],

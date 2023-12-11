@@ -31,9 +31,12 @@ www\.reddit\.com/r/openziti
 .*\.ziti
 .*\.zitik8s
 .*\.svc
+.*\.internal
+.*\.private
+.*\.home
+.*\.lan
 twitter\.com/(OpenZiggy|OpenZiti)
-landing.openziti.io/xmlrpc.php\?rsd
-landing.openziti.io/wp-includes/wlwmanifest.xml
+landing.openziti.io/
 fonts.gstatic.com/
 EOF
 # github\.com/.*/releases/latest/download
