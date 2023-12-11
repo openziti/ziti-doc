@@ -1,19 +1,301 @@
 ---
 title: Downloads
 hide_table_of_contents: true
+description: Download a Ziti Tunneller or the Ziti Command
 ---
 
-import TunnelerOverviewMd from './reference/tunnelers/_tunneler-overview.mdx';
+import OsTabs from '@theme/OsTabs';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Details from '@theme/MDXComponents/Details';
 
-## Tunnelers
+<!-- the 'value' must match the osName detected by the OsTabs component -->
 
-<TunnelerOverviewMd />
+<OsTabs
+  queryString="os"
+  values={[
+    { label: 'Windows', value: 'Windows', },
+    { label: 'macOS', value: 'Mac OS', },
+    { label: 'Linux', value: 'Linux', },
+    { label: 'iOS', value: 'iOS', },
+    { label: 'Android', value: 'Android', },
+    { label: 'Docker', value: 'Docker', },
+    { label: 'Kubernetes', value: 'Kubernetes', },
+  ]}
+>
 
-[Learn more about tunnelers](./reference/tunnelers/index.mdx).
+<TabItem value="Windows">
 
-## The `ziti` Executable
+<br/>
 
-The `ziti` executable is a single binary with controller, router, and management CLI functionality.
+### Tunneller
 
-* [GitHub Release](https://github.com/openziti/ziti/releases/latest)
-* [Deployment Guides](./reference/deployments/01-controller.md)
+[Download Ziti Desktop Edge for Windows from GitHub](https://github.com/openziti/desktop-edge-win/releases/latest)
+
+[Read about tunnelling in Windows](/reference/tunnelers/02-windows.md)
+
+<br/><br/>
+
+### Ziti Command
+    
+[Download the Windows ZIP for amd64 from GitHub](https://github.com/openziti/ziti/releases/latest)
+
+</TabItem>
+
+<TabItem value="Mac OS">
+
+<br/>
+
+### Tunneller
+
+[![Ziti Desktop Edge on the Mac App Store](/img/Mac_App_Store_Badge.svg)](https://apps.apple.com/app/id1460484572)
+
+[Read about tunnelling in macOS](/reference/tunnelers/04-macos.md)
+
+
+<br/><br/>
+
+### Ziti Command
+
+[Download the Darwin TAR from GitHub](https://github.com/openziti/ziti/releases/latest)
+
+</TabItem>
+
+<!-- begin super-tab Linux -->
+<TabItem value="Linux"> 
+
+### Choose a Linux Package Manager or Manual Install
+
+<!-- begin Linux sub-tabs -->
+<Tabs
+    defaultValue="LinuxDeb"
+    values={[
+        { label: 'DEB for Debian family', value: 'LinuxDeb', },
+        { label: 'RPM for Red Hat family', value: 'LinuxRpm', },
+        { label: 'Manual Install', value: 'LinuxOther', },
+    ]}
+>
+
+<!-- begin sub-tab rpm -->
+<TabItem value="LinuxRpm">
+
+<br/>
+
+#### Tunneller
+
+[Install the `ziti-edge-tunnel` RPM](/reference/tunnelers/linux/index.md#installing-the-rpm)
+
+<br/><br/>
+
+#### Ziti Command
+
+```text
+(set -euo pipefail;
+
+sudo tee /etc/yum.repos.d/openziti-release.repo >/dev/null <<\EOF;
+[OpenZitiRelease]
+name=OpenZiti Release
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+EOF
+
+sudo dnf update;
+sudo dnf install openziti;
+ziti version;
+)
+```
+
+<Details>
+<summary>Pre-release repo for RedHat family distros</summary>
+
+```text
+(set -euo pipefail;
+
+sudo tee /etc/yum.repos.d/openziti-testing.repo >/dev/null <<\EOF;
+[OpenZitiTesting]
+name=OpenZiti Testing
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-test/redhat/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-test/redhat/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+EOF
+
+sudo dnf update;
+sudo dnf install openziti;
+ziti version;
+)
+```
+
+</Details>
+
+<!-- end sub-tab rpm -->
+</TabItem>
+
+<!-- begin sub-tab deb -->
+<TabItem value="LinuxDeb">
+
+<br/>
+
+#### Tunneller
+
+[Install the `ziti-edge-tunnel` DEB](/reference/tunnelers/linux/index.md#installing-the-deb)
+
+<br/><br/>
+
+#### Ziti Command
+
+```text
+(set -euo pipefail;
+
+curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
+| sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg;
+sudo chmod a+r /usr/share/keyrings/openziti.gpg;
+
+sudo tee /etc/apt/sources.list.d/openziti-release.list >/dev/null <<EOF;
+deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable debian main
+EOF
+
+sudo apt update;
+sudo apt install openziti;
+ziti version;
+)
+```
+
+<Details>
+<summary>Pre-release repo for Debian family distros</summary>
+
+```text
+(set -euo pipefail;
+
+curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
+| sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg;
+sudo chmod a+r /usr/share/keyrings/openziti.gpg;
+
+sudo tee /etc/apt/sources.list.d/openziti-testing.list >/dev/null <<EOF;
+deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-test debian main
+EOF
+
+sudo apt update;
+sudo apt install openziti;
+ziti version;
+)
+```
+
+</Details>
+
+<!-- end sub-tab deb -->
+
+</TabItem>
+
+<TabItem value="LinuxOther">
+
+<br/>
+
+#### Tunneller
+
+[Manually install `ziti-edge-tunnel`](/reference/tunnelers/linux/index.md#manual-installation)
+
+<br/><br/>
+
+#### Ziti Command
+
+[Download the Linux executable from GitHub](https://github.com/openziti/ziti/releases/latest) or install `jq` and `curl` and run this script.
+
+<Details>
+<summary>Install script for Linux</summary>
+
+```text
+(set -euo pipefail;
+
+cd $(mktemp -d);
+
+ZITI_VERSION=$(
+  curl -sSf https://api.github.com/repos/openziti/ziti/releases/latest \
+  | jq -r '.tag_name'
+);
+
+case $(uname -m) in
+  x86_64)          GOXARCH=amd64 ;;
+  aarch64|arm64)   GOXARCH=arm64 ;;
+  armv7|armhf|arm) GOXARCH=arm   ;;
+  *)               echo "ERROR: unknown arch '$(uname -m)'" >&2
+                   exit 1        ;;
+esac;
+
+curl -sSfL \
+  "https://github.com/openziti/ziti/releases/download/${ZITI_VERSION}/ziti-linux-${GOXARCH}-${ZITI_VERSION#v}.tar.gz" \
+  | tar -xz -f -;
+
+sudo install -o root -g root ./ziti /usr/local/bin/;
+ziti version;
+)
+```
+
+</Details>
+
+<!-- end LinuxOther sub-tab -->
+</TabItem>
+
+<!-- end Linux sub-tabs -->
+
+</Tabs>
+
+<!-- end super-tab Linux -->
+</TabItem>
+
+<TabItem value="Docker">
+
+<br/>
+
+### Tunneller
+
+[Run a tunneller with Docker](/reference/tunnelers/linux/container/readme.mdx)
+
+<br/><br/>
+
+### Ziti Command
+
+```text
+docker pull openziti/ziti-cli \
+&& docker run --rm openziti/ziti-cli version 
+```
+
+</TabItem>
+
+<TabItem value="Kubernetes">
+
+[Learn about tunnelling workloads in Kubernetes](/guides/kubernetes/workload-tunneling/index.md)
+
+[Learn about self-hosting Ziti in Kubernetes](/docs/category/hosting-openziti)
+
+</TabItem>
+
+<TabItem value="iOS">
+
+<br/>
+
+### Tunneller
+
+[![Ziti Mobile Edge on the App Store](/img/App_Store_Badge.svg)](https://apps.apple.com/app/id1460484353)
+
+[Read about tunnelling in iOS](/reference/tunnelers/05-_iOS.md)
+
+</TabItem>
+
+<TabItem value="Android">
+
+<br/>
+
+### Tunneller
+
+[![Ziti Mobile Edge on the Google Play Store](/img/google-play-badge.svg)](https://play.google.com/store/apps/details?id=org.openziti.mobile)
+
+[Read about tunnelling in Android](/reference/tunnelers/03-android.md)
+
+</TabItem>
+
+</OsTabs>

@@ -49,7 +49,7 @@ services.
 
 Example Minimum Controller Configuration:
 
-```yaml
+```text
 v: 3
 
 db: ctrl.db
@@ -103,14 +103,14 @@ This includes the protocol(s) used for router connections and how those connecti
 
 Example w/o options:
 
-```yaml
+```text
 ctrl:
   listener: tls:127.0.0.1:6262
 ```
 
 Example w/ options:
 
-```yaml
+```text
 ctrl:
   listener: tls:127.0.0.1:6262
   options:
@@ -128,7 +128,7 @@ or different drive. This section is required.
 
 Example:
 
-```yaml
+```text
 db: /mnt/fast-drive/db/ctrl.db
 ```
 
@@ -146,7 +146,7 @@ The `edge` section also has the following subsections:
 
 Example Minimum Edge:
 
-```yaml
+```text
 edge:
   enrollment:
     signingCert:
@@ -156,7 +156,7 @@ edge:
 
 Example Fully Defined:
 
-```yaml
+```text
 edge:
   api:
     activityUpdateInterval: 90s
@@ -256,8 +256,8 @@ omitted, it will not be output. The list of valid event types and their options 
 - `edge.entityCounts` - (optional) Edge entity counts (API Sessions, sessions, routers, etc.)
     - `interval` - (optional) the time interval to generate entity count events on (e.g. "5s", "
       5000ms", "1h")
-- `edge.sessions`  - (optional) Edge Session events
-    - `include` - (optional) a string or array of strings that specify which session events to
+- `edge.sessions`  - (optional) Session events
+    - `include` - (optional) a string or array of strings that specify which Session events to
       include ("created"
       and/or "deleted")
 - `fabric.circuits`  - (optional) Fabric circuit events
@@ -294,7 +294,7 @@ or `amqp`):
 
 Example JSON File Logger:
 
-```yaml
+```text
 events:
   jsonLogger:
     subscriptions:
@@ -319,7 +319,7 @@ events:
 
 Example amqp Logger:
 
-```yaml
+```text
 events:
   amqpLogger:
     subscriptions:
@@ -348,7 +348,7 @@ the [`health-checks` API](#web).
     - `timeout` - (optional, 15s) how long to wait for a transaction before timing out
     - `initialDelay` - (optional, 15s) how long to wait on startup before performing the first check
 
-```yaml
+```text
 healthChecks:
   boltCheck:
     interval: 30s
@@ -417,7 +417,7 @@ careful consideration.
     - `path` - (required) the path to output the memprof data
     - `intervalMs` (optional, 15s) the frequency to output memprof data
 
-```yaml
+```text
 profile:
   cpu:
     path: /home/user1/tmp/ctrl.cpu.pprof
@@ -464,7 +464,7 @@ The raft section enables running multiple controllers in a cluster.
   full snapshot. This is a cluster wide value and should be consistent across nodes in the cluster.
   Otherwise the value from the most recently started controller will win.
 
-```yaml
+```text
 raft:
   bootstrapMembers:
     - tls:127.0.0.1:6262
@@ -494,7 +494,7 @@ environments without careful consideration.
 
 - `path` - (required) the file to output decoded messages to
 
-```yaml
+```text
 trace:
   path: /var/opt/open.ziti.ctrl.trace
 ```
@@ -520,6 +520,6 @@ Each API may have their own options, but currently do not.
 The `v` section is used to detect if the version file is supported by the OpenZiti binary read it.
 The current and only supported value is "3".
 
-```yaml
+```text
 v: 3
 ```

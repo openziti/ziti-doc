@@ -4,7 +4,7 @@ authors: dovholuknf
 
 # Wildcard DNS Cheatsheet
 
-```bash
+```text
 # ------------- start docker 
 docker-compose up
 

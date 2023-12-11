@@ -87,7 +87,7 @@ are many ways to solve this problem, it's up to you to pick 'the best' way.
 <Details>
 <summary>Example Changing LetsEncrypt Permissions</summary>
 
-```bash
+```text
 sudo groupadd -g 2171 zitiweb
 sudo useradd -u 2171 -M ziggy
 sudo usermod -aG zitiweb ziggy
@@ -99,11 +99,11 @@ sudo chmod -R g+rX /etc/letsencrypt/
 You will want to enable the new group permissions in the current shell. Log out of your current session and log back
 in again. Doing so will enable the new group permission in your shell. After, set the `wildcard_url` variable again.
 Once set, verify you can access to the certificates:
-```bash
+```text
 ls -l /etc/letsencrypt/live/${wildcard_url}/
 ```
 You should see something similar to:
-```bash
+```text
 total 8
 -rw-r--r-- 1 root zitiweb 692 Aug 17 21:12 README
 lrwxrwxrwx 1 root zitiweb  56 Aug 17 21:12 cert.pem -> ../../archive/browzerexample.demo.openziti.org/cert1.pem
@@ -131,7 +131,7 @@ Since we have just obtained some LetsEncrypt certificates, we'll enable OpenZiti
 Alternative Server Certs __immediately__! To do that we'll set two new variables
 introduced with v0.29.0. Notice that the `${wildcard_url}` variable needs to be set if it's not already set:
 
-```bash
+```text
 export ZITI_PKI_ALT_SERVER_CERT="/etc/letsencrypt/live/${wildcard_url}/fullchain.pem"
 export ZITI_PKI_ALT_SERVER_KEY="/etc/letsencrypt/live/${wildcard_url}/privkey.pem"
 ```
@@ -149,12 +149,12 @@ and return here when complete.
 After completing the quickstart, you should be able to access the controller at both the alternate server cert url.
 Notice there's no need for 'insecure' (-sk) curl mode for the`${wildcard_url}` URL:
 
-```bash
+```text
 curl https://ctrl.${wildcard_url}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}
 ```
 and we should be able to curl to the non-alternative server url. Note for this we need to use `-sk` since this will
 be the self-signed PKI endpoint:
-```bash
+```text
 curl -sk https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}
 ```
 </Details>
@@ -173,13 +173,13 @@ using a [web socket](https://en.wikipedia.org/wiki/WebSocket). We'll need to pro
 After completing the quickstart, you will have an edge router configuration file in the user's home directory.
 Use your favorite editor, such as [`vim`](https://en.wikipedia.org/wiki/Vim_(text_editor)) to edit the file:
 
-```bash
+```text
 vi $ZITI_HOME/${ZITI_NETWORK}-edge-router.yaml
 ```
 
 Locate the "binding" section, and add a section that looks like this. Make sure to change the `address` and `advertise`
 fields accordingly to fit your `${wildcard_url}` value:
-```bash
+```text
   - binding: edge
     address: wss:0.0.0.0:8447
     options:
@@ -194,7 +194,7 @@ fields accordingly to fit your `${wildcard_url}` value:
 <summary>Restart the Edge Router</summary>
 
 After updating the router's configuration file you'll need to restart the router:
-```bash
+```text
 sudo systemctl restart ziti-router
 ```
 </Details>
@@ -206,7 +206,7 @@ After the router restarts you'll be able to verify the router is properly config
 should succeed and return a 404 message similar to the one shown below. Note port 8447 is used, if you change this
 port you will obviously need to change the port number to the one you chose:
 
-```bash
+```text
 curl https://ws.${wildcard_url}:8447
 ```
 
@@ -242,7 +242,7 @@ First we need to decide/find an OIDC provider.
 Set a shell variable named `AUTH0_DOMAIN` and set it to the value shown on the "Basic Information" page in Auth0. Then
 set a shell variable named `AUTHO_CLIENTID`. For me, this looked like this:
 
-```bash
+```text
 AUTH0_DOMAIN=dev-b2q0t23rxctngxka.us.auth0.com
 AUTH0_CLIENTID=mKWvp7xJHWxHKPf4eol4VwZxRCmdJIMy
 ```
@@ -256,7 +256,7 @@ Make sure all variables listed below are set in your shell before running
 
 Now copy and paste this command to generate the browzer.env file.
 
-```bash
+```text
 export NODE_ENV=production
 export ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL=debug
 export ZITI_BROWZER_BOOTSTRAPPER_HOST=browzer.${wildcard_url}
@@ -312,7 +312,7 @@ echo browzer env file written to: $ZITI_HOME/browzer.env
 <summary>Inspect the browzer.env File</summary>
 
 You should see something like:
-```bash
+```text
 browzer env file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-47-200/browzer.env
 ```
 
@@ -332,7 +332,7 @@ used the "clone" approach to run my BrowZer (and ZAC).
 
 Follow one of those methods and ensure BrowZer is up and running.
 
-```bash
+```text
 browzer env file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-47-200/browzer.env
 ```
 
@@ -347,14 +347,14 @@ created.
 ## Prepare the OpenZiti Network
 
 For the following steps, make sure you have all the variables set and make sure you have logged into the controller:
-```bash
+```text
 ziti edge login -u $ZITI_USER -p $ZITI_PWD -y ${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISED_PORT}
 ```
 
 <Details>
 <summary>Configure the External JWT Signer and Auth Policy</summary>
 
-```bash
+```text
 echo "configuring OpenZiti for BrowZer..."
 ziti_object_prefix=browzer-auth0
 issuer=$(curl -s ${ZITI_BROWZER_OIDC_URL}/.well-known/openid-configuration | jq -r .issuer)
@@ -373,7 +373,7 @@ echo "auth policy id: $auth_policy"
 After running the commands listed above, you should see output that confirms an `ext-jwt-signer` and `auth-policy` were
 created successfully. It should look similar to what is shown below. Ensure the id's for the signer and auth policy
 have some value and are not blank:
-```bash
+```text
 configuring OpenZiti for BrowZer...
 OIDC issuer   : https://dev-b2q0t23rxctngxka.us.auth0.com/
 OIDC jwks url : https://dev-b2q0t23rxctngxka.us.auth0.com/.well-known/jwks.json
@@ -390,7 +390,7 @@ To enable access to the ZAC using BrowZer we need to make a service. Things to n
 HTTP port (the BrowZer Bootstrapper will provide HTTPS) and we're using the default port of 1408. Ensure the variables
 referenced are all set accordingly and then copy/paste these commands:
 
-```bash
+```text
 intercept_address="${ZITI_BROWZER_SERVICE}.ziti"
 intercept_port=80
 offload_address=127.0.0.1
@@ -415,7 +415,7 @@ createService
 ```
 
 Verify the commands all succeed (no errors shown) and the output looks similar to this after running:
-```bash
+```text
 New config brozac.host.config created with id: 5i85SF4pnehz1LEjJNvCtH
 New config brozac.int.config created with id: 2p8xuev7Vb9NzuZoEGi4tq
 New service brozac created with id: 5Ry0BOMr6VJGQjF51LdDxv
@@ -435,13 +435,13 @@ after the user logs into the OIDC provider. If your OIDC provider doesn't provid
 learn/explore/understand how the OIDC provider you're using works. It's out of scope of this document to provide
 that sort of insight. Set a variable named `ZITI_BROWZER_IDENTITIES` and assign it an email address you plan to use:
 
-```bash
+```text
 ZITI_BROWZER_IDENTITIES="clint.dovholuk@company.name"
 ```
 
 After create a __space__ delimited list (one value/email is fine too), copy and paste the following command:
 
-```bash
+```text
 echo "creating users specified by ZITI_BROWZER_IDENTITIES: ${ZITI_BROWZER_IDENTITIES}"
 for id in ${ZITI_BROWZER_IDENTITIES}; do
 ziti edge create identity user "${id}" --auth-policy ${auth_policy} --external-id "${id}" -a "${ZITI_BROWZER_SERVICE}.dialers"
@@ -452,7 +452,7 @@ ziti edge update identity "${ZITI_ROUTER_NAME}" -a "${ZITI_BROWZER_SERVICE}.bind
 ```
 
 After you run that command you should see output looking similar to this:
-```bash
+```text
 creating users specified by ZITI_BROWZER_IDENTITIES: clint.dovholuk@company.name
 New identity clint.dovholuk@company.name created with id: hmnQByTn3
 ```
@@ -464,7 +464,7 @@ New identity clint.dovholuk@company.name created with id: hmnQByTn3
 This is it! This is the moment we've been working for.  Copy and paste this command to echo to the screen the url to 
 test out and let's see ZAC protected by BrowZer!!!
 
-```bash
+```text
 echo " "
 echo "now go to: https://${ZITI_BROWZER_VHOST}:${ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT} and see your ${ZITI_BROWZER_SERVICE}!"
 echo " "
@@ -472,7 +472,7 @@ echo " "
 
 ### If Needed, BrowZer Bootstrapper Logs
 
-```bash
+```text
 journalctl -fu browzer-bootstrapper
 ```
 
@@ -480,7 +480,7 @@ journalctl -fu browzer-bootstrapper
 ## Cleaning up and Trying Again
 
 To clean everything up and try it all over (if you need to) run these commands:
-```bash
+```text
 sudo systemctl stop browzer-bootstrapper
 sudo systemctl stop ziti-controller 
 sudo systemctl stop ziti-router

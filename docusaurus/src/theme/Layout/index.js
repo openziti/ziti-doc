@@ -39,7 +39,7 @@ export default function Layout(props) {
 
     function UrlChanged() {
       if (lastPath!=window.location.pathname) {
-        BuildMenu(); 
+        // BuildMenu(); 
         BuildWizard();
         lastPath = window.location.pathname;
       }
@@ -48,6 +48,7 @@ export default function Layout(props) {
     function ShowWizard() {
       wizardIndex = 0;
       $("#WizardNextButton").show();
+      $("#WizarFinishButton").hide();
       $("#WizardPreviousButton").hide();
       $(".current").removeClass("current");
       $(".wizardNav"+wizardIndex).addClass("current");
@@ -67,6 +68,11 @@ export default function Layout(props) {
           }
       }).get().join('');
     } 
+
+    function HideWizard() {
+      $(".wizardmodal").hide();
+      $("body").removeClass("noscroll");
+    }
 
     function BuildWizard() {
       if ($("#Wizardly").length>0) {
@@ -136,14 +142,17 @@ export default function Layout(props) {
           window['WizardNext'] = WizardNext;
           window['WizardPrev'] = WizardPrev;
           window['ShowWizard'] = ShowWizard;
+          window['HideWizard'] = HideWizard;
 
           $("#WizardPreviousButton").off("click");
           $("#WizardNextButton").off("click");
+          $("#WizarFinishButton").off("click");
           $(".openWizard").off("click");
 
           $("#WizardPreviousButton").click(window['WizardPrev']);
           $("#WizardNextButton").click(window['WizardNext']);
           $(".openWizard").click(window['ShowWizard']);
+          $("#WizarFinishButton").click(window['HideWizard']);
 
           $(".wizardnav").off();
           $(".wizardnav").click(window.WizardGoTo);
@@ -173,15 +182,20 @@ export default function Layout(props) {
     }
 
     function WizardShow() {
-        if (wizardIndex<(wizardTotal-1)) $("#WizardNextButton").show();
-        else $("#WizardNextButton").hide();
-        if (wizardIndex==0) $("#WizardPreviousButton").hide();
-        else $("#WizardPreviousButton").show();
-        $(".current").removeClass("current");
-        $(".wizardNav"+wizardIndex).addClass("current");
+      if (wizardIndex<(wizardTotal-1)) {
+        $("#WizardNextButton").show();
+        $("#WizarFinishButton").hide();
+      } else {
+        $("#WizardNextButton").hide();
+        $("#WizarFinishButton").show();
+      }
+      if (wizardIndex==0) $("#WizardPreviousButton").hide();
+      else $("#WizardPreviousButton").show();
+      $(".current").removeClass("current");
+      $(".wizardNav"+wizardIndex).addClass("current");
 
-        $(".wizardContent").hide();
-        $(".wizard"+wizardIndex).fadeIn();
+      $(".wizardContent").hide();
+      $(".wizard"+wizardIndex).fadeIn();
     }
 
     function WizardPrev() {
@@ -222,13 +236,13 @@ export default function Layout(props) {
       }
     }
 
-    window.onpopstate = () => setTimeout(BuildMenu, 100);
+    // window.onpopstate = () => setTimeout(BuildMenu, 100);
     window.onpopstate = () => setTimeout(BuildWizard, 100);
 
     window.addEventListener("load", (event) => {
       if (intervalId) clearInterval(intervalId);
       intervalId = setInterval(UrlChanged, 100);
-      BuildMenu();
+      // BuildMenu();
       BuildWizard();
     });
   }

@@ -39,6 +39,7 @@
   --h2-size: 35px;
   --h3-size: 25px;
   --docusaurus-collapse-button-bg-hover: rgb(0 0 0 / 2%);
+  --ifm-tabs-color-active: var(--ifm-font-color-base);
 }
 
 html[data-theme=dark] {
@@ -46,6 +47,28 @@ html[data-theme=dark] {
   --ifm-font-color-base: #ffffff;
   --ifm-menu-color: #ffffff;
   --ifm-toc-link-color: #ffffff;
+}
+
+html[data-theme=dark] #Wizardly code {
+  color: rgba(117, 82, 136, 0.98) !important;
+}
+
+html[data-theme=dark] code { 
+  color: rgb(221,216,229) !important;
+}
+
+html[data-theme=dark] .alert--secondary code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98) !important;
+  color: rgba(117, 82, 136, 0.98) !important;
+}
+
+html[data-theme=dark] .alert--secondary code .token-line {
+    color: rgba(117, 82, 136, 0.98) !important;
+}
+
+html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
+  fill: rgba(0,0,0) !important;
 }
 
 @media (max-width: 767px) {
@@ -601,12 +624,53 @@ list-type-ulli,
   margin: 0px;
 }
 
-.wizardmodal a {
-  color: #006cff;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: underline;
-  transition: all 0.3s ease;
+a {
+  color: rgba(217, 15, 95, 0.98);
+  text-decoration: var(--ifm-link-decoration);
+  transition: 0.5s;
+}
+
+html[data-theme=dark] #Wizardly a {
+  color: rgba(217, 15, 95, 0.98);
+  text-decoration: var(--ifm-link-decoration);
+  transition: 0.5s;
+}
+
+html[data-theme=dark] .menu__link {
+  color: rgba(255, 255, 255, 0.98) !important;
+}
+
+.menu__link--active {
+  color: rgba(217, 15, 95, 0.98) !important;
+  transition: 0.5s;
+}
+
+html[data-theme=dark] a {
+  color: rgba(232, 74, 135, 1.0);
+  transition: 0.5s;
+}
+
+html[data-theme=dark] .menu__link--active {
+  color: rgba(232, 74, 135, 1.0) !important;
+  transition: 0.5s;
+}
+
+.menu__link--active:hover {
+  color: rgba(117, 82, 136, 0.98);
+}
+
+a:hover {
+  color: rgba(117, 82, 136, 0.98);
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
+html[data-theme=dark] a:hover {
+  color: rgba(217, 15, 95, 0.98);
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
+.wizardmodal code a {
+  color: #FFF;
 }
 
 .wizardmodal a:hover {
@@ -920,7 +984,7 @@ input {
 }
 
 
-.openWizard {
+#Wizardly .openWizard {
   display: none;
   background-image: url(/img/ziggysmalls.svg);
   background-size: 80px;
@@ -940,7 +1004,7 @@ input {
     transition: .5s;
   font-family: "Hand Of Sean";
   background-color: #002451;
-  color: #fad82c;
+  color: #fad82c !important;
   text-align: right;
   z-index: 500;
 }
@@ -1466,7 +1530,6 @@ ol.linenums li:before {
 
 .wizardmodal pre {
   text-wrap: wrap;
-  background: #333;
   color: #fff;
 }
 
@@ -1576,7 +1639,6 @@ code.wizardmodal .prettyprint, .wizard .wizardmodal pre {
 
 .wizardmodal pre.wizardmodal .prettyprint, .wizardmodal pre {
   margin: 1em auto !important;
-  padding: 1em !important;
   white-space: pre-line !important;
 }
 
@@ -1782,12 +1844,14 @@ code {
   vertical-align: middle;
   font-size: 87.5%;
   font-weight: 600;
-  color: #e83e8c;
   word-break: break-word;
-  background-color: #ffdded;
-  border: 1px solid #e83e8c;
   border-radius: 7px;
-  padding: 2px 4px 2px 4px;
+  padding: 2px 8px 2px 8px;
+
+  background-color: rgba(117, 82, 136, 0.2) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
+
 }
 
 li a code {
@@ -1795,20 +1859,82 @@ li a code {
     vertical-align: middle;
     font-size: 87.5%;
     font-weight: 600;
-    color: #e83e8c;
     word-break: break-word;
-    background-color: #ffdded;
-    border: 1px solid #e83e8c;
     border-radius: 7px;
     padding: 2px 4px 2px 4px;
+
+    background-color: rgba(117, 82, 136, 0.2) !important;
+    border: 1px solid rgba(117, 82, 136, 0.98);
+    color: rgba(117, 82, 136, 0.98);
 }
 
-.admonitionIcon_kALy svg {
+.tabItem_node_modules {
+  background-color: rgba(117, 82, 136, 0.2) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
+
+}
+
+.tabItem_node_modules-\@docusaurus-theme-classic-lib-theme-TabItem-styles-module, .tabItem_Ymn6 {
+  background-color: rgb(142,142,142, .2);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 20px;
+  border-radius: 7px;
+  margin-top: 0px;
+}
+
+.tabs__item {
+  background-color: rgba(225,225,225, 0.3);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  margin-right: 10px;
+  pointer-events: all;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.tabs {
+  padding-left: 20px;
+}
+
+.tabs__item.tabs__item--active {
+  background-color: rgb(142,142,142, .2);
+  border-bottom-width: 0px;
+  pointer-events: none;
+}
+
+.tabs__item.tabs__item--active:hover {
+  background-color: rgb(142,142,142, .2);
+  border-bottom-width: 0px;
+  pointer-events: none;
+}
+
+.margin-top--md {
+  margin-top: 0px !important;
+}
+
+.tabs__item:hover {
+  background-color: rgba(245,245,245, 0.2);
+}
+
+#Wizardly div {
+  color: rgba(44,55,65) !important;
+}
+
+#Wizardly .admonitionIcon_kALy svg {
   fill: #000000 !important;
 }
 
+#Wizardly .alert--secondary {
+  --ifm-alert-foreground-color: #b122e326;
+}
+
 pre code {
-  background-color: #002451 !important;
+  background-color: rgba(44,55,65) !important;
 }
 
 .alert {
@@ -1819,24 +1945,129 @@ pre code {
   --ifm-tabs-color: var(--ifm-alert-foreground-color);
   --ifm-tabs-color-active: var(--ifm-alert-foreground-color);
   --ifm-tabs-color-active-border: var(--ifm-alert-border-color);
-  background-color: #fff7af;
-  border: var(--ifm-alert-border-width) solid #ffd200;
   border-left-width: var(--ifm-alert-border-left-width);
   border-radius: var(--ifm-alert-border-radius);
   box-shadow: var(--ifm-alert-shadow);
-  color: #252525;
   padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
+}
+
+pre {
+  margin-top: 10px !important;
+}
+
+.alert--secondary {
+  --ifm-alert-background-color: rgba(177, 34, 227, 0.15);
+  --ifm-alert-background-color-highlight: rgba(177, 34, 227, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-secondary-contrast-foreground);
+  --ifm-alert-border-color: rgba(184, 91, 217, 0.98);
+}
+
+.alert--secondary code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
+}
+
+.alert--secondary pre code {
+  background-color: rgba(117, 82, 136, 0.98) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: #FFF;
+}
+
+.alert--success {
+  --ifm-alert-background-color: rgba(48, 207, 18, 0.15);
+  --ifm-alert-background-color-highlight: rgba(48, 207, 18, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-success-contrast-foreground);
+  --ifm-alert-border-color: rgba(48, 207, 18, 0.98);
+}
+
+.alert--success code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(29, 137, 13, 0.98);
+  color: rgba(29, 137, 13, 0.98);
+}
+
+.alert--success pre code {
+  background-color: rgba(29, 137, 13, 0.98) !important;
+  border: 1px solid rgba(29, 137, 13, 0.98);
+  color: #FFF;
+}
+
+.details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
+  --docusaurus-details-decoration-color: rgba(88, 172, 216, 0.98) !important;
+  border: 1px solid rgba(88, 172, 216, 0.98) !important;
+  background-color: rgba(88, 172, 216, 0.4);
+}
+
+.alert--info {
+  --ifm-alert-background-color: rgba(88, 172, 216, 0.15);
+  --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-info-contrast-foreground);
+  --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.98);
+}
+
+.alert--info code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(88, 172, 216, 0.98);
+  color: rgba(88, 172, 216, 0.98);
+}
+
+.alert--info pre code {
+  background-color: rgba(88, 172, 216, 0.98) !important;
+  border: 1px solid rgba(88, 172, 216, 0.98);
+  color: #FFF;
+}
+
+.alert--warning {
+  --ifm-alert-background-color: rgba(255, 146, 22, 0.15);
+  --ifm-alert-background-color-highlight: rgba(255, 146, 22, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-warning-contrast-foreground);
+  --ifm-alert-border-color: rgba(255, 146, 22, 0.98);
+}
+
+.alert--warning code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(206, 143, 14, 0.98);
+  color: rgba(206, 143, 14, 0.98);
+}
+
+.alert--warning pre code {
+  background-color: rgba(206, 143, 14, 0.98) !important;
+  border: 1px solid rgba(206, 143, 14, 0.98);
+  color: #FFF;
+}
+
+.alert--danger {
+  --ifm-alert-background-color: rgba(180, 46, 46, 0.15);
+  --ifm-alert-background-color-highlight: rgba(180, 46, 46, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-danger-contrast-foreground);
+  --ifm-alert-border-color: rgba(180, 46, 46, .98);
+}
+
+.alert--danger code {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(152, 22, 22, .98);
+  color: rgba(152, 22, 22, .98);
+}
+
+.alert--danger pre code {
+  background-color: rgba(152, 22, 22, .98) !important;
+  border: 1px solid rgba(152, 22, 22, .98);
+  color: #FFF;
 }
 
 .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
   display: inline-block;
   height: 1.6em;
   width: 1.6em;
-  fill: #000000!important;
 }
+
+.admonition_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module {
+  margin-top: 1em;
+}
+
 .wizardmodal pre {
   text-wrap: wrap;
-  background: #002451 !important;
 } 
 
 .breadcrumbs__item--active .breadcrumbs__link {
@@ -1875,4 +2106,9 @@ pre code {
   box-shadow: none;
   transform: translateY(1px);
   transition: all 0.3s ease;
+}
+
+/* hide the clipboard copy button on code blocks of type "buttonless" */
+.language-buttonless div > button {
+  display: none;
 }

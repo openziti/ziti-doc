@@ -9,7 +9,7 @@ This is a quick example for tunneling to a Kubernetes workload with OpenZiti tha
 
 1. Create OpenZiti configs, service, and policies for the Hello demo deployment.
 
-    ```bash
+    ```text
     ziti edge create identity device "hello-host" \
         --jwt-output-file /tmp/hello-host.jwt --role-attributes hello-hosts
 
@@ -39,7 +39,7 @@ This is a quick example for tunneling to a Kubernetes workload with OpenZiti tha
 
    This chart is a regular, non-OpenZiti demo server deployment. Next we'll connect it to our OpenZiti Network with an OpenZiti Tunneler deployment.
 
-    ```bash
+    ```text
     helm install "hello-toy" openziti/hello-toy \
         --namespace hello-toy --create-namespace \
         --set serviceDomainName=minihello
@@ -47,7 +47,7 @@ This is a quick example for tunneling to a Kubernetes workload with OpenZiti tha
 
 1. Deploy an OpenZiti Tunneler Pod.
 
-    ```bash
+    ```text
     helm install "ziti-host" openziti/ziti-host \
         --namespace hello-toy \
         --set-file zitiIdentity=/tmp/hello-host.json
@@ -55,7 +55,7 @@ This is a quick example for tunneling to a Kubernetes workload with OpenZiti tha
 
 1. Wait for deployment.
 
-    ```bash
+    ```text
     kubectl wait deployments "ziti-host" \
         --namespace hello-toy \
         --for condition=Available=True \

@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish-docs-from-container:
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    if: github.repository_owner == 'openziti' && contains(github.event.head_commit.message, 'ci skip') == false
     runs-on: ubuntu-latest
     env:
       GIT_BRANCH: main
@@ -23,9 +23,12 @@ jobs:
       - name: Install Doxygen
         run: |
           sudo apt-get update \
-          && sudo apt-get install -y doxygen
+          && sudo apt-get install -y doxygen wget curl jq \
+          && npm install -g csvtojson
 
       - name: Build & Publish Docusaurus Site
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: ./publish.sh
 
   check-links:

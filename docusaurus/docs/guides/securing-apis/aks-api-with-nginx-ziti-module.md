@@ -53,12 +53,12 @@ Download jwt files and enroll identities.
 Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2~3MBs. Therefore, it can not be uploaded to the existing nginx image. One needs to build a custom docker image and add it during the build process.
 
 - Follow steps to build @[ngx-ziti-module](https://github.com/openziti/ngx_ziti_module/blob/main/README.md#user-content-build-using-cmake)
-- Follow steps to create @[nginx ingress controller image](https://docs.nginx.com/nginx-ingress-controller/installation/building-ingress-controller-image/#building-the-image-and-pushing-it-to-the-private-registry)
+- Follow steps to create @[nginx ingress controller image](https://docs.nginx.com/nginx-ingress-controller/installation/building-nginx-ingress-controller/#build-image)
 
 :::tip
 One way to update the build is to add to the Dockerfile (`build/Dockerfile`) this snippet of code under the common section, i.e. `FROM ${BUILD_OS} as common`
 
-```shell
+```textell
 # copy ziti module
 COPY  ./ngx_ziti_module.so /usr/lib/nginx/modules
 
@@ -66,13 +66,13 @@ COPY  ./ngx_ziti_module.so /usr/lib/nginx/modules
 
 Also, need to add the following package `libc6` to the debian build in the same Dockerfile, i.e. `FROM nginx:1.23.3 AS debian`. Did not try the alpine build but the assumption is that would be the same.
 
-```shell
+```textell
 && apt-get install --no-install-recommends --no-install-suggests -y libcap2-bin libc6 \
 ```
 
 Lastly, if you don't want the image name to have a postfix of`SNAPSHOT...` , comment it out in `Makefile`.
 
-```shell
+```textell
 VERSION = $(GIT_TAG)##-SNAPSHOT-$(GIT_COMMIT_SHORT)
 ```
 
@@ -82,7 +82,7 @@ Once the image is built, upload it to your container registry. You will need it 
 :::note
 if you don't have time to build your own, can use our test image based on debian 11 and nginx v1.23.3 
 
-```shell
+```textell
 set {
     name = "controller.image.repository"
     value = "docker.io/elblag91/ziti-nginx-ingress"
@@ -112,7 +112,7 @@ export ARM_TENANT_ID = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 Run terraform plan.
 :::info Steps
 
-```shell
+```textell
 git clone https://github.com/dariuszSki/openziti-nginx-ingress-terraform.git
 cd openziti-nginx-ingress-terraform/tf-provider
 terraform init
@@ -122,7 +122,7 @@ terraform apply "aks"
 
 Once completed, grab  `cluster_public_fqdn` under `outputs` as shown in the example below.
 
-```shell
+```textell
 cluster_name = "akssandeastus"
 cluster_private_fqdn = ""
 cluster_public_fqdn = "akssand-2ift1yqr.hcp.eastus.azmk8s.io"
@@ -136,7 +136,7 @@ If you are using your own deployment method, here are some configuration details
 
 - ***Ziti Nginx Module Identity***
 
-```shell
+```textell
 nginx_ziti_identity = "${file("./server-nginx.json")}"
 resource "kubernetes_secret" "ziti-identity" {
   metadata {
@@ -151,7 +151,7 @@ resource "kubernetes_secret" "ziti-identity" {
 
 - ***Image Reference***
 
-```shell
+```textell
 set {
     name = "controller.image.repository"
     value = "docker.io/elblag91/ziti-nginx-ingress"
@@ -169,7 +169,7 @@ Services are commented out until they are created. Then, terraform plan can be r
 
 :::
 
-```shell
+```textell
 controller:
   service:
     create: false
@@ -191,7 +191,7 @@ controller:
 
 - ***Volume section and path to secrets. Added openziti.io folder.***
 
-```bash
+```text
   volumes:
       - name: "ziti-nginx-files"
         projected:
@@ -215,13 +215,13 @@ controller:
 
 - ***Create configs***
 
-```shell
+```textell
 ziti edge create config k8s-api-intercept.v1 intercept.v1 "{\"protocols\": [\"tcp\"], \"addresses\": [\"akssand-2ift1yqr.hcp.eastus.azmk8s.io\"],\"portRanges\": [{\"low\": 443,\"high\": 443}]}"
 ```
 
 - ***Create Service***
 
-```shell
+```textell
 ziti edge create service k8s-api --configs "k8s-api-intercept.v1" --role-attributes "service-nginx"
 ```
 
@@ -229,7 +229,7 @@ ziti edge create service k8s-api --configs "k8s-api-intercept.v1" --role-attribu
 
 - ***Create Service Bind Policy***
 
-```shell
+```textell
 ziti edge create service-policy k8s-api-bind Bind --semantic "AnyOf" --identity-roles "#servers" --service-roles "#service-nginx"
 ```
 
@@ -237,7 +237,7 @@ ziti edge create service-policy k8s-api-bind Bind --semantic "AnyOf" --identity-
 
 - ***Create Service Dial Policy***
 
-```shell
+```textell
 ziti edge create service-policy k8s-api-dial Dial --semantic "AnyOf" --identity-roles "#clients" --service-roles "#service-nginx"
 ```
 
@@ -247,7 +247,7 @@ ziti edge create service-policy k8s-api-dial Dial --semantic "AnyOf" --identity-
 
 Uncomment `ziti identity1` block in `resource.helm_release.nginx-ingress`
 
-```shell
+```textell
 config:
     entries:
       main-snippets: |
@@ -270,11 +270,11 @@ Need to disable ZDE for this network before the next step, so the nginx updates 
 
 - ***Re-run terraform***
 
-```bash
+```text
 terraform plan  -var include_aks_nginx=true  -out aks
 ```
 
-```bash
+```text
 terraform apply "aks"
 ```
 
@@ -283,7 +283,7 @@ terraform apply "aks"
 :::tip
 If the terraform was run, the kube-config file was created in the tf root directory. One can also use `az cli` to get the kube config downloaded.
 
-```shell
+```textell
 # Configure your local kube configuration file using azure cli
 az login # if not already logged in
 # Windows WSL
@@ -296,26 +296,26 @@ az aks get-credentials --resource-group $RG_NAME --name {cluster_name} --subscri
 
 - ***Check context in the kubectl config file***
 
-```shell
+```textell
 kubectl config  get-contexts
 ```
 
 `Expected Output`
 
-```shell
+```textell
 CURRENT   NAME            CLUSTER         AUTHINFO                                           NAMESPACE
 *         akssandeastus   akssandeastus   clusterUser_nginx_module_rg_eastus_akssandeastus   
 ```
 
 - ***Let's check the status of nodes in the cluster.***
 
-```shell
+```textell
 kubectl get nodes
 ```
 
 `Expected Output`
 
-```shell
+```textell
 NAME                                STATUS   ROLES   AGE    VERSION
 aks-agentpool-20887740-vmss000000   Ready    agent   151m   v1.24.9
 aks-agentpool-20887740-vmss000001   Ready    agent   151m   v1.24.9
@@ -323,13 +323,13 @@ aks-agentpool-20887740-vmss000001   Ready    agent   151m   v1.24.9
 
 - ***List cluster info***
 
-```shell
+```textell
 kubectl cluster-info
 ```
 
 `Expected Output`
 
-```shell
+```textell
 Kubernetes control plane is running at https://akssand-2ift1yqr.hcp.eastus.azmk8s.io:443
 CoreDNS is running at https://akssand-2ift1yqr.hcp.eastus.azmk8s.io:443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 Metrics-server is running at https://akssand-2ift1yqr.hcp.eastus.azmk8s.io:443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
@@ -339,13 +339,13 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 - ***List pods***
 
-```shell
+```textell
 kubectl get pods --all-namespaces
 ```
 
 `Expected Output`
 
-```shell
+```textell
 NAMESPACE     NAME                                           READY   STATUS    RESTARTS   AGE
 default       nginx-ingress-nginx-ingress-7ffd564557-ngt69   1/1     Running   0          134m
 kube-system   azure-ip-masq-agent-9scx6                      1/1     Running   0          166m
@@ -369,13 +369,13 @@ kube-system   metrics-server-8655f897d8-tnpzt                2/2     Running   0
 
 - ***List  services***
 
-```shell
+```textell
 kubectl get services --all-namespaces
 ```
 
 `Expected Output`
 
-```shell
+```textell
 NAMESPACE     NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)         AGE
 default       kubernetes       ClusterIP   10.0.0.1       <none>        443/TCP         169m
 kube-system   kube-dns         ClusterIP   10.0.0.10      <none>        53/UDP,53/TCP   169m
@@ -390,11 +390,11 @@ At this point the public access is still available even though the API Kubectl q
 
 Pass the following variable to only allow 192.168.1.1/32 source IP to essentially disable Public Access. 
 
-```shell
+```textell
 terraform plan  -var include_aks_nginx=true -var authorized_source_ip_list=[\"192.168.1.1/32\"] -out aks
 ```
 
-```shell
+```textell
 terraform apply "aks"
 ```
 
@@ -406,16 +406,16 @@ Retest with ZDE enabled and disabled for this network.
 Run terraform to open up the AKS API to public before deleting AKS resources, so you dont get locked out.
 :::
 
-```shell
+```textell
 terraform plan  -var include_aks_nginx=true -var authorized_source_ip_list=[\"0.0.0.0/0\"] -out aks
 ```
 
-```shell
+```textell
 terraform apply "aks"
 ```
 
 Delete all resources
 
-```shell
+```textell
 terraform plan  --destroy -var include_aks_nginx=true  -out aks
 ```

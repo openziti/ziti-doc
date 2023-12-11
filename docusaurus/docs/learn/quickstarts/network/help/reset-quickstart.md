@@ -7,13 +7,13 @@ You may want to re-run `expressInstall` with different parameters or because a r
 
 1. Delete the express install directory. Delete is forever, so make sure you're deleting the right thing.
 
-    ```bash
+    ```text
     rm -rI "${ZITI_HOME}"  # probably a sub-directory of ~/.ziti/quickstart/ 
     ```
 
 1. If the current shell environment was configured by the express install you may unset vars named like `ZITI_`. This will prepare your current shell environment to set up and re-run `expressInstall`.
 
-    ```bash
+    ```text
     unsetZitiEnv
     ```
 

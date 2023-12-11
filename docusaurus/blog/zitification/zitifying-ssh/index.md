@@ -66,7 +66,7 @@ Once you have the executable download, make sure it is named `zssh` and for simp
 
 Below you can see me `zssh` from my local machine to the AWS machine secured by `ziti-tunnel`:
 
-```bash
+```text
 ./zssh ubuntu@ziti-tunnel-aws
 INFO[0000] connection to edge router using token 95c45123-9415-49d6-930a-275ada9ae06f
 connected.
@@ -93,7 +93,7 @@ The `-s/--service` flag is for passing in a different service name other than "z
 
 The `-d/--debug` flag outputs additional information to assist you with debugging. For example:
 
-```bash
+```text
 $ ./zssh ubuntu@ziti-tunnel-aws -d
 INFO[0000]     sshKeyPath set to: /home/myUser/.ssh/id_rsa
 INFO[0000]        ZConfig set to: /home/myUser/.ziti/zssh.json
@@ -106,7 +106,7 @@ ubuntu@ip-172-31-27-154:~$
 
 Shown above is also one additional piece of information, the remote username. Shown in the example above I have `zssh`ed to an ubuntu image in AWS. When it was provisioned AWS used the username `ubuntu`. In order to `zssh` to this machine I need to tell the remote `sshd` server that I wish to attach as the `ubuntu` user. If your username is the same for your local environment as the remote machine you do not need to specify the username. For example, my local username is `cd` (my initials). When I `zssh` to my dev machine I can simply use `zssh ClintLinux`:
 
-```bash
+```text
 $ ./zssh ClintLinux
 INFO[0000] connection to edge router using token 909dfb4f-fa83-4f73-af8e-ed251bcd30be
 connected.

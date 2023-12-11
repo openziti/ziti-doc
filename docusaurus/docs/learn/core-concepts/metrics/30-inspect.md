@@ -8,7 +8,7 @@ The inspections framework is part of the fabric API, hosted by the controller. T
 
 The Ziti fabric CLI has support for the inspect command built in.  Here's an example:
 
-```bash
+```text
 ziti fabric inspect '.*' metrics:json
 ```
 

@@ -23,7 +23,7 @@ It is essential to build your application with respect to the specification of y
 
 `GET /`
 
-```json
+```text
 {
     "data": {
         "apiVersions": {
@@ -85,7 +85,7 @@ APIs, Edge Client and Management included, to listen on any combination of netwo
 
 #### Example Controller Edge Configuration Section {#edge-configuration-section}
 
-```yaml
+```text
 edge:
   api:
     #(optional, default 90s) Alters how frequently heartbeat and last activity values are persisted
@@ -132,7 +132,7 @@ The `web` section of the controller is based off of the [xweb](https://github.co
 a single configuration section to be used to compose multiple APIs across any number of network interfaces. Understanding
 the xweb configuration format is essential for success with configuring the `web` section in the controller.
 
-```yaml
+```text
 # web - optional
 # Defines webListeners that will be hosted by the controller. Each webListener can host many APIs and be bound to many
 # bind points.

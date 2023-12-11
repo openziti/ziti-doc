@@ -7,7 +7,7 @@ A Config of Config Type `intercept.v1` configures an intercepting Ziti tunneler 
 
 This Config instructs the tunneler to intercept any outgoing traffic with destination `tcp:acme.example.ziti:5000`. An intercepting tunneler provides a DNS nameserver that resolves authorized Ziti services' domain names.
 
-```json
+```text
 {
     "protocols": [
         "tcp"
@@ -26,7 +26,7 @@ This Config instructs the tunneler to intercept any outgoing traffic with destin
 
 This Config has not only a Ziti domain name destination `acme.ziti` for which traffic is intercepted, but also a wildcard domain and an IP subnet. Additionally, there is a range of destination ports for which all packets will be intercepted if their destination address also matches.
 
-```json
+```text
 {
     "addresses": [
         "acme.ziti",

@@ -8,6 +8,6 @@ To create a Service Edge Router Policy using the CLI issue the following command
 
 1. Create a service edge router policy which allows all services to use all routers.
 
-    ```bash
+    ```text
     ziti edge create service-edger-router-policy 'my-policy' --service-roles '#all' --edge-router-roles '#all'
     ```

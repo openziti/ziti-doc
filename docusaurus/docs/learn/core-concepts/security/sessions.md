@@ -1,5 +1,7 @@
 # Session Types
 
+Ziti has API Session and Session types.
+
 ## API Session
 
 API Sessions represent a client that is either partially or fully authenticated as a specific Ziti Identity.
@@ -30,7 +32,7 @@ API Sessions are defined in the Client and Management Open API 2.0 specification
 
 Example `POST /edge/management/v1/authenticate` response:
 
-```json
+```text
 {
   "data": {
     "_links": {
@@ -125,7 +127,7 @@ While partially authenticated, the API Session can only be used for a reduced se
 Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example
 MFA challenge represented as an Authentication Query is provided below.
 
-```json
+```text
 {
   "authQueries": [
     {
@@ -171,7 +173,7 @@ the timeout has been reached, signaling an API Session removal. Activities that 
 The API Session timeout defaults to 30 minutes and can be configured in `edge.api.sessionTimeout` in the controller
 configuration file.
 
-```yaml
+```text
 edge:
   api:
   ...
@@ -193,11 +195,11 @@ A client may terminate its own API Session at any time by calling: `DELETE /edge
 
 ## Session
 
-Session represent access to a specific service for dialing or binding. They are scoped to the
+A Session represents access to a specific service for dialing or binding. They are scoped to the
 [API Session](#api-session) that was used to create them. They are requested from the
 controller by a client through the Edge Client API. The result of that request is a security token representing
 the Session and a list of Edge Routers that the client may use to dial or bind the target service through.
 
 Sessions are removed when the parent [API Session](authentication/auth.md#api-sessions) is removed,
-[policies](authorization/policies/overview.mdx) are changed to deny access, or when [Posture Checks](authorization/posture-checks.md) enter an
-invalid state for the target service.
+[policies](authorization/policies/overview.mdx) are changed to deny access, or when [Posture
+Checks](authorization/posture-checks.md) enter an invalid state for the target service.

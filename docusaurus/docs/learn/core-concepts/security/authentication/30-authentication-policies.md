@@ -8,7 +8,7 @@ policy is not specified.
 
 
 Example: Authentication Policy
-```json
+```text
 {
     "createdAt": "2022-05-20T14:02:53.359Z",
     "id": "default",

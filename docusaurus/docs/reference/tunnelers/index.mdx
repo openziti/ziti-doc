@@ -1,10 +1,8 @@
-import TunnelerOverviewMd from './_tunneler-overview.mdx';
+---
+title: Tunnellers
+---
 
-# Tunnelers
+Each tunneller operates similarly. The goal is to have the tunneller seamlessly intercept traffic destined for Ziti
+services and forward that traffic over the Ziti overlay instead of the [underlay](/reference/glossary.md#underlay) network. All processes on the host can access the Ziti services available to the tunneller's loaded identities.
 
-<TunnelerOverviewMd />
-
-Each tunneller operates similarly. The goal is to have the tunneler seamlessly intercept traffic destined for Ziti
-services and forward that traffic over the Ziti overlay instead of the [underlay](/docs/reference/glossary#underlay) network. All processes on the host can access the Ziti services available to the tunneler's loaded identities.
-
-A tunneler configures a Ziti nameserver for resolving Ziti service addresses and associated Ziti IP routes in a device's OS. These are quickly updated when a policy change alters the visible Ziti services for any loaded Ziti identity.
+A tunneller configures a Ziti nameserver for resolving Ziti service addresses and associated Ziti IP routes in a device's OS. These are quickly updated when a policy change alters the visible Ziti services for any loaded Ziti identity.

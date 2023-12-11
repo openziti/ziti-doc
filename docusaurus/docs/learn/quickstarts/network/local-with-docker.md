@@ -24,7 +24,7 @@ Running Ziti locally via Docker will require you to create a "named volume" in d
 will be saved.
 
 Create the named volume now using this command:
-```bash
+```text
 docker volume create myPersistentZitiFiles
 ```
 
@@ -34,7 +34,7 @@ Other containers on the Docker network will **need** to address the controller. 
 a network alias. This forces you to add the container to a network which is not the default network. 
 
 Create the docker network now using this command:
-```bash
+```text
 docker network create myFirstZitiNetwork
 ```
 
@@ -62,7 +62,7 @@ we'll use `-it` to make seeing the output from the logs easier.
 Here's an example which will use the Docker network named "myFirstZitiNetwork" and expose the controller to your local
 computer on port 1280 (the default port).
 
-```bash
+```text
 docker run \
   --name ziti-controller \
   -e ZITI_CTRL_ADVERTISED_ADDRESS=ziti-edge-controller \
@@ -83,7 +83,7 @@ as well as authorization of services and routers using ([service edge router pol
 The docker-based quickstart doesn't perform these steps automatically. Run the initialization container one time, after 
 starting the controller as shown
 
-```shell
+```textell
 docker run \
   --network myFirstZitiNetwork \
   --network-alias ziti-controller-init-container \
@@ -105,7 +105,7 @@ The first noticeable difference is that we need to pass in the name of the edge 
 network, the name supplied needs tobe addressable by clients.  Also notice the port exported is port 3022. This is the
 default port used by edge routers. 
 
-```bash
+```text
 docker run \
   --name ziti-edge-router-1 \
   -e ZITI_ROUTER_NAME=ziti-edge-router-1 \
@@ -123,7 +123,7 @@ docker run \
 
 If you want to create a second edge router, you'll need to override the router port, don't forget to export that port too
 
-```bash
+```text
 docker run \
   --name ziti-edge-router-2 \
   -e ZITI_ROUTER_NAME=ziti-edge-router-2 \
@@ -162,7 +162,7 @@ the router did indeed come online and is running as you expect. To do this, we'l
 command and `exec` into the machine. First, you'll need to know your Docker container name which you can figure out by
 running `docker ps`.
 
-```bash
+```text
 $ docker ps
 
 CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS          PORTS
@@ -177,7 +177,7 @@ container: `docker exec -it xenodochial_cori /bin/bash`
 
 Once in the container, I can now issue `zitiLogin` to authenticate the `ziti` CLI.
 
-```bash
+```text
 zitiLogin
 Token: b16f182f-88b3-4fcc-9bfc-1e32319ca486
 Saving identity 'default' to /persistent/ziti-cli.json
@@ -186,7 +186,7 @@ Saving identity 'default' to /persistent/ziti-cli.json
 And finally, once authenticated I can test to see if the edge router is online in the controller and as you'll see, the
 `isOnline` property is true!
 
-```bash
+```text
 ziti@a33d58248d6e:/persistent$ ziti edge list edge-routers
 id: qNZyqZEix3    name: ziti-edge-router-1    isOnline: true    role attributes: {}
 results: 1-1 of 1

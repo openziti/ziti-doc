@@ -26,7 +26,7 @@ Sensitive fields such as key usage will be ignored. Additional Ziti-specific SAN
 may be added.
 
 ### Request Payload
-```json
+```text
 {
   "csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICij...\n-----END CERTIFICATE REQUEST-----"
 }
@@ -34,7 +34,7 @@ may be added.
 
 ### Response Payload
 
-```json
+```text
 {
     "data": {
         "_links": {

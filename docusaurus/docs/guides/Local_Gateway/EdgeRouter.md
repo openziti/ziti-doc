@@ -39,7 +39,7 @@ Please complete the following steps before continue with this demo.
 **ssh** into your router VM (**local-router**). 
 
 Retrieve **ziti_router_auto_enroll** to setup your router.
-```bash
+```text
 wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
 tar xf ziti_router_auto_enroll.tar.gz
 ```
@@ -63,7 +63,7 @@ We are also going to create the router without healthcheck section and metrics, 
 - --disableMetrics
 ### 2.1.2 Create and Register Router
 #### 2.1.2.1 Create Router using one command
-```bash
+```text
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --autoTunnelListener --routerName local-router
 ```
 What this command does:
@@ -81,7 +81,7 @@ What this command does:
 An alternative way to register router is creating it on the controller first and then register it on the router VM.
 
 Create Router and retrieve JWT on the **controller**
-```bash
+```text
 zitiLogin
 # the followin will create a edge router with tunneler enabled on the controller
 ziti edge create edge-router local-router -o local-router.jwt -t
@@ -89,7 +89,7 @@ cat local-router.jwt
 ```
 
 Copy the output of "local-router.jwt" and register the router on the **router VM**
-```bash
+```text
 sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441  --disableHealthChecks --disableMetrics --autoTunnelListener  <jwt content>
 ```
 What this command does:
@@ -103,7 +103,7 @@ What this command does:
 You do not have to perform this step if your installation was successful. 
 
 #### 2.1.3.1 ziti-router service
-```bash
+```text
 systemctl status ziti-router
 ```
 
@@ -117,7 +117,7 @@ ziggy@local-gw:~$ systemctl status ziti-router
 ```
 
 #### 2.1.3.2 resolver
-```bash
+```text
 resolvectl
 ```
 
@@ -140,7 +140,7 @@ Current DNS Server: 8.8.8.8
 ```       
 
 #### 2.1.3.3 Check Router and Identity
-```bash
+```text
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge list edge-routers
 /opt/ziti/ziti edge list identities
@@ -170,7 +170,7 @@ results: 1-3 of 3
 ```
 ### 2.1.4 setup ufw
 The following steps turn on the ufw firewall and opens the ports for this demo.
-```bash
+```text
 sudo ufw enable
 sudo ufw allow from any to 172.16.31.173/32 port 53 proto udp
 sudo ufw allow from any to 172.16.31.173/32 port 22 proto tcp
@@ -180,7 +180,7 @@ sudo ufw allow from any to 172.16.31.173/32 port 80 proto tcp
 We want to add attribute "clients" to the identity associated with the edge router. 
 
 **You do not need to login again if your token has not expired yet**
-```bash
+```text
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge update identity local-router -a clients
 ```
@@ -203,7 +203,7 @@ results: 1-3 of 3
 **ssh** into your router VM (**remote-router**). 
 
 Retrieve **ziti_router_auto_enroll** to setup your router automatically.
-```bash
+```text
 wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
 tar xf ziti_router_auto_enroll.tar.gz
 ```
@@ -214,7 +214,7 @@ We are going to use Router Name: **remote-router**
 
 ### 2.2.2 Create and Register Router
 #### 2.2.2.1 Create Router using one command
-```bash
+```text
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --autoTunnelListener --routerName remote-router
 ```
 
@@ -224,7 +224,7 @@ sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFab
 An alternative way to register router is creating it on the controller first and then register it on the router VM.
 
 Create Router and retrieve JWT on the **controller**
-```bash
+```text
 zitiLogin
 # the followin will create a edge router with tunneler enabled on the controller
 ziti edge create edge-router remote-router -o remote-router.jwt -t
@@ -232,7 +232,7 @@ cat remote-router.jwt
 ```
 
 Copy the output of "remote-router.jwt" and register the router on the **router VM**
-```bash
+```text
 sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441  --disableHealthChecks --disableMetrics --autoTunnelListener  <jwt content>
 ```
 
@@ -240,19 +240,19 @@ sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgm
 You do not have to perform this step if your installation was successful. 
 
 #### 2.2.3.1 ziti-router service
-```bash
+```text
 systemctl status ziti-router
 ```
 **expected output:** The status should show "active (running)"
 
 #### 2.2.3.2 resolver
-```bash
+```text
 resolvectl
 ```
 **expected output:** The resolver should be set to the IP of the local LAN.
 
 #### 2.2.3.3 Check Router and Identity
-```bash
+```text
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge list edge-routers
 /opt/ziti/ziti edge list identities
@@ -282,7 +282,7 @@ results: 1-4 of 4
 
 ### 2.2.3 setup ufw
 For this demo, we only show the connection initiated from local-tunnel side towards remote-tunnel. The ufw rules below are not needed. If you want to have bidirectional connections, you will need to setup these rules.
-```bash
+```text
 sudo ufw enable
 sudo ufw allow from any to 172.16.240.128/32 port 53 proto udp
 sudo ufw allow from any to 172.16.240.128/32 port 22 proto tcp
@@ -293,7 +293,7 @@ sudo ufw allow from any to 172.16.240.128/32 port 80 proto tcp
 We want to add attribute "hosts" to the identity associated with the edge router. 
 
 **You do not need to login again if your token has not expired yet**
-```bash
+```text
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge update identity remote-router -a hosts
 ```
@@ -316,14 +316,14 @@ results: 1-4 of 4
 The Ubuntu Server needs to support **ssh** (port 22) and **http** (port 8000) for our demo.
 
 Make sure these ports are open on the firewall.
-```bash
+```text
 sudo ufw enable
 sudo ufw allow from any to 172.16.240.129/32 port 22 proto tcp
 sudo ufw allow from any to 172.16.240.129/32 port 8000 proto tcp
 ```
 
 Next, start the webserver. The web server will be listening on the port 8000.
-```bash
+```text
 echo "You have reached Remote Web Server." >hello.txt
 python3 -m http.server
 ```
@@ -340,7 +340,7 @@ The second change is to setup routing.
 - We also need to route **172.16.240.129/32** to **local-router**.  **172.16.240.129** is IP we intended to intercept and pass through ziti fabric.
 
 To do this, open an cmd window as Administrator.
-```bash
+```text
 route add 100.64.0.0 mask 255.192.0.0 172.16.31.173
 route add 172.16.240.129 mask 255.255.255.255 172.16.31.173
 ```
@@ -352,7 +352,7 @@ The service configuration can be done on either the local-router or the remote-r
 ## 4.1 Create an intercept.v1 config
 This config is used for local side connection. We are setting up intercept on dns name "mysimpleservice.ziti"
 
-```bash
+```text
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge create config ssh-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["mysimpleservice.ziti"], "portRanges": [{"low": 22, "high": 22}]}'
 ```
@@ -360,7 +360,7 @@ This config is used for local side connection. We are setting up intercept on dn
 ## 4.2 Create a host.v1 config
 This config is used for remote side connection. We are setting up the address the remote server can reach. In this demo, We are dropping the traffic off at "172.16.240.129"
 
-```bash
+```text
 /opt/ziti/ziti edge create config ssh-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":22}'
 ```
 If the config command were successfully, you will see two configs by using "list configs" command:
@@ -377,7 +377,7 @@ results: 1-2 of 2
 ## 4.3 Create ssh Service
 Now we need to put these two configs into a service. We going to name the service "ssh" and assign an attribute "rtrhosted"
 
-```bash
+```text
 /opt/ziti/ziti edge create service ssh -c ssh-intercept-config,ssh-host-config -a rtrhosted
 ```
 **Check Service** by using "list service"
@@ -396,7 +396,7 @@ This step is **optional** if you used quickstart. The service-edge-router-policy
 
 But in case you need to add a policy, here is the command to add the service tag we created (rtrhosted) to all routers
 
-```bash
+```text
 /opt/ziti/ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
 Check your service-edge-router-policy, and make sure the policy name "ssh-serp" is created. The automatically created one is called "allSvcAllRouters".
@@ -413,12 +413,12 @@ results: 1-2 of 2
 
 ## 4.5 Create Bind policies
 We need to specify which identity (in our case, **#hosts**) is going to host the service by setting up a bind service policy
-```bash
+```text
 /opt/ziti/ziti edge create service-policy ssh-bind Bind --identity-roles "#hosts" --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
 ## 4.6 Create Dial policies
 We also need to specify which identity (in this case, **#clients**) is going to intercept the service by setting up a dial service policy
-```bash
+```text
 /opt/ziti/ziti edge create service-policy ssh-dial Dial --identity-roles "#clients" --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
 If both policies are setup correctly, you should see two service-policies.
@@ -448,14 +448,14 @@ In the previous section, we showed how to configure a DNS based intercept via op
 The service configuration can be done on either the local-router or the remote-router.
 ## 5.1 Create an intercept.v1 config
 Create intercept config on IP: 172.16.240.129 and port **80** for http traffic.
-```bash
+```text
 /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 /opt/ziti/ziti edge create config http-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["172.16.240.129"], "portRanges": [{"low": 80, "high": 80}]}'
 ```
 
 ## 5.2 Create a host.v1 config
 Create Host config on IP: 172.16.240.129 and port **8000**. As you can see, we have redirected traffic intended for port 80 (from client) to port 8000 (on the host).
-```bash
+```text
 /opt/ziti/ziti edge create config http-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":8000}'
 ```
 
@@ -475,7 +475,7 @@ results: 1-4 of 4
 ## 5.3 Create http Service
 Put these two configs into a service. We going to name the service "http" and assign an attribute "rtrhosted"
 
-```bash
+```text
 /opt/ziti/ziti edge create service http -c http-intercept-config,http-host-config -a rtrhosted
 ```
 **Check Service**

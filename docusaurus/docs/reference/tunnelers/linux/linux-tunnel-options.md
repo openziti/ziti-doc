@@ -9,28 +9,28 @@
 
 `TLSUV_DEBUG=4` - set the log level of the underlying libuv library, higher is more verbose (level 4 means DEBUG)
 
-For more information about configuring the underlying Ziti C SDK with environment variables, see [the Ziti C SDK documentation](../../../../docs/reference/developer/sdk/ziti-sdk-c).
+For more information about configuring the underlying Ziti C SDK with environment variables, see [the Ziti C SDK documentation](/reference/developer/sdk/ziti-sdk-c.mdx).
 
 ## `ziti-edge-tunnel` Global Options
 
 You can start `ziti-edge-tunnel` with different options, some of the most commonly used options are listed below.
 
-```bash
+```text
 # Load a single identity.
 --identity <identity>
 ```
 
-```bash
+```text
 # Load all identities in a dir, ignoring files with a .bak or .original filename suffix.
 --identity-dir <dir>
 ```
 
-```bash
+```text
 # Set log level, higher is more verbose (default level 3 means INFO).
 --verbose N
 ```
 
-```bash
+```text
 # Set service polling interval in seconds (default 10).
 --refresh N
 ```
@@ -46,14 +46,14 @@ There are two run modes:
 
 `ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with command-line option `--dns-upstream`. `systemd-resolved`, if enabled, automatically configures the Ziti nameserver. You may inspect the configuration with these commands.
 
-```bash
+```text
 resolvectl dns     # inspect the association of tun device and nameserver
 resolvectl domain  # inspect the configuration of query routing domains
 ```
 
 If any interface has a wildcard routing domain configured, `ziti-edge-tunnel` will also configure its tun with a wildcard routing domain. If no other interface has a wildcard routing domain configured, neither will the `ziti-edge-tunnel` tun.
 
-```bash
+```text
 # Specify the tun interface address and the subnet to which Service domain names are resolved (default 100.64.0.1/10). The nameserver address is always the tun interface address +1, default is 100.64.0.2.
 --dns-ip-range <ip range>
 ```

@@ -1,0 +1,30 @@
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'cloudfront/**'
+
+jobs:
+    deploy:
+        if: github.repository_owner == 'openziti'
+        name: Deploy CloudFront Function
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout workspace
+              uses: actions/checkout@v3
+
+            - name: Configure Python
+              shell: bash
+              run: |
+                pip install --upgrade boto3
+                python --version
+              
+            - name: Deploy the CloudFront Function for docs.openziti.io
+              shell: bash
+              run: python ./cloudfront/deploy-cloudfront-function.py
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ${{ vars.AWS_REGION || secrets.AWS_REGION }}

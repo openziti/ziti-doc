@@ -36,7 +36,7 @@ BLOG_ROOT_TARGET="${script_root}/docusaurus/blog"
 
 echo "- processing opts"
 
-while getopts ":glc" OPT; do
+while getopts ":glcs" OPT; do
   case ${OPT} in
     g ) # skip git
       echo "- skipping creating and updating Git working copies"
@@ -49,6 +49,10 @@ while getopts ":glc" OPT; do
     c ) # skip clean steps
       echo "- skipping clean step that deletes Git working copies"
       SKIP_CLEAN="yes"
+      ;;
+    s ) # INCLUDE stargazer stuff
+      echo "- fetching stargazer data as well"
+      ADD_STARGAZER_DATA="yes"
       ;;
     *)
       echo "WARN: ignoring option ${OPT}" >&2
@@ -174,6 +178,12 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
   fi
 fi
 
+if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
+  echo "collecting stargazer data before building the site... "
+  echo "  - this requires the npm module cvstojson"
+  echo "  - this requires you to have a GITHUB_TOKEN environment variable exported"
+  ./gh-stats.sh
+fi
 pushd ${ZITI_DOC_GIT_LOC}/..
 echo "running 'yarn install' in ${PWD}"
 yarn install --frozen-lockfile
@@ -186,6 +196,10 @@ if test -e "${script_root}/docusaurus/build/landing.html"; then
   echo "landing.html detected. overwriting index.html with landing.html"
   cp "${script_root}/docusaurus/build/index.html" "${script_root}/docusaurus/build/index.original.html"
   cp "${script_root}/docusaurus/build/landing.html" "${script_root}/docusaurus/build/index.html"
+  sed -i -e 's|https://openziti.io/|/|g' "${script_root}/docusaurus/build/index.html"
+  sed -i -e 's|link\.setAttribute("href", "https://openziti\.io/|link.setAttribute("href", "/|g' "${script_root}/docusaurus/build/index.html"
+
+  echo "landing.html sed commands run"
   echo "landing.html overwritten to index.html. index.html is now index.original.html"
 fi
 

@@ -1,52 +1,99 @@
 
 # Troubleshooting
 
-## More Logging
+## Increase log level
 
-The simplest step you can take toward a diagnosis is to reduce the minimum message log level. This usually means lower-level DEBUG messages and above are emitted in addition to the default level of INFO level and above e.g. WARN, ERROR, etc.
+Set the log level to DEBUG to identify the activity that is occurring at the same time as the problem.
 
-  For `ziti-edge-tunnel`, `DEBUG` log level is `--verbose 4`.
+```text
+# set the logLevel to "debug" in /var/lib/ziti/config.json
+sudo -u ziti ziti-edge-tunnel set_log_level --loglevel DEBUG
+```
+
+The tunneler obeys the value of `logLevel` in `/var/lib/ziti/config.json`. The initial value may be set with `run
+--verbose 4`, but setting this option on subsequent runs has no effect on log level.
+
+Create a log file from the current systemd service invocation to share with collaborators.
+
+```bash
+(set -euxo pipefail; 
+ZITI_VERSION=$(/opt/openziti/bin/ziti-edge-tunnel version); 
+journalctl _SYSTEMD_INVOCATION_ID=$(
+  systemctl show -p InvocationID --value ziti-edge-tunnel-default.service) -l --no-pager \
+  | tee /tmp/ziti-edge-tunnel-single-${ZITI_VERSION#v}.log \
+  | gzip > /tmp/ziti-edge-tunnel-single-${ZITI_VERSION#v}.log.gz;
+)
+```
 
 ## Systemd service won't start or keeps restarting
 
-If you change your package repo subscription or install the same DEB or RPM package from another source, excluding normal upgrades and downgrades, then it may be necessary to reload the systemd service unit definitions:
+Reload the systemd service unit definitions to rule out a stale definition.
 
-  ```bash
-  sudo systemctl daemon-reload
-  ```
+```text
+sudo systemctl daemon-reload
+```
 
-You may read the logs in the systemd journal.
+Inspect the service unit.
 
-```bash
-journalctl -xeu ziti-edge-tunnel.service
+```text
+sudo systemctl cat ziti-edge-tunnel.service
+```
+
+Check the service status for an error message.
+
+```text
+sudo systemctl status ziti-edge-tunnel.service
+```
+
+Monitor the service logs.
+
+```text
+sudo journalctl -u ziti-edge-tunnel.service
 ```
 
 ## Intercepting or hosting not working
 
-You may inspect the loaded identity and router info for a running `ziti-edge-tunnel` by dumping it to stdout or the systemd journal with an IPC command, or you may signal to dump the identities' info to a file.
+Inspect the identity and router info for a running tunneler process. This creates a file named like `{{identity name}}.ziti`
+for each loaded identity. Each file summarizes the available services and router connections for the identity.
 
-  ```bash
-  # dump identities info to std our journal if systemd unit with IPC command
-  ./ziti-edge-tunnel dump
-  ```
+```text
+sudo -u ziti ziti-edge-tunnel dump -p /tmp/ziti-dump-dir/
+```
 
-  ```bash
-  # dump identities info to a file and inspect
-  sudo pkill -USR1 -f ziti-edge-tunnel
-  less /tmp/ziti-dump.964315.dump
-  ```
+Find tunneler's nameserver IP.
+
+```text
+$ resolvectl --interface=ziti0 dns
+Link 19 (tun0): 100.64.0.2
+```
+
+Query the Ziti nameserver to find the intercept IP address for a service.
+
+```text
+$ dig +noall +answer my.ziti.service.example.com @100.64.0.2
+ my.ziti.service.example.com. 60 IN    A       100.64.0.3
+```
+
+The tunneler provides end-to-end TCP handshake. Test the service's ability to accept connections even if it does not
+provide a greeting or banner as shown in the OpenSSH server example below.
+
+```text
+# wait up to 3 seconds for a TCP handshake on port 443
+$ ncat -vzw3 100.64.0.3 443
+Ncat: Connected to 100.64.0.3:443.
+Ncat: 0 bytes sent, 0 bytes received in 0.08 seconds.
+```
+
+```text
+# wait up to 3 seconds for an OpenSSH server greeting on port 22
+$ ncat -vw3 100.64.0.3 22
+SSH-2.0-OpenSSH_7.4
+```
 
 ## Process keeps crashing
 
-If the tunneller is crashing then it may be crucial to collect and analyze the core dump file. You may need to enable saving core dumps depending upon your OS configuration.
+A crash may be caused by a segmentation fault. If saving a Corefile is enabled, Linux will create a core dump file
+according to this pattern file: `/proc/sys/kernel/core_pattern`. Ubuntu configures this to use
+[Apport](https://wiki.ubuntu.com/Apport). Read more about [core dumps](https://en.wikipedia.org/wiki/Core_dump).
 
-  You can see how dump files are handled by inspecting this file, which is from Ubuntu 20.10.
-
-  ```bash
-  $ cat /proc/sys/kernel/core_pattern
-  |/usr/share/apport/apport %p %s %c %d %P %E
-  ```
-
-  In this case the dump is handled by `apport` which saves the file in `/var/crash`. I'll need to follow the `apport` documentation to learn how to unpack and parse the dump file.
-
-Please raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/) if you experience a crash.
+Please raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/) if the tunneler crashes.

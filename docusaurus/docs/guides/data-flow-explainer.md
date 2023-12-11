@@ -1,10 +1,7 @@
 ---
 title: Data Flow Explainer
-sidebar_label: Data Flow Explainer
 sidebar_position: 30
 ---
-
-# Data Flow Explainer
 
 This explainer walks through how data flow is established in an OpenZiti network.
 
@@ -19,9 +16,9 @@ It has the following components:
 * An OpenZiti controller
 * Two OpenZiti routers that are available via the public internet
 * Two private networks, each containing a router and an application server
-    * The application servers are serving up the same application. There are multiple servers, so
-      that load can be spread across them. They are in separate regions to ensure that the
-      application can still be accessed, even if a datacenter becomes unavailable.
+  * The application servers are serving up the same application. There are multiple servers, so
+    that load can be spread across them. They are in separate regions to ensure that the
+    application can still be accessed, even if a datacenter becomes unavailable.
 * An SDK application which wants to access the application hosted by the application servers
 
 ## Control Channels
@@ -82,7 +79,7 @@ When an SDK wants to connect to an OpenZiti hosted service, it will initiate the
 of events:
 
 1. Authenticate to the controller
-2. Create a Service Session for the desired service
+2. Create a Session for the desired service
 3. Connect to one or more edge routers
 4. Send a Dial request to the selected edge router
 5. The edge router will send a create circuit request to the controller
@@ -105,18 +102,18 @@ An API Session can be extended, so a single API Session can generally be used fo
 the application. A new API Session may be required if the application is unable to reach the
 controller for an extended period of time.
 
-### Create Service Session
+### Create Session
 
-The SDK must now create a Service Session. When creating a Service Session, the controller will
+The SDK must now create a Session. When creating a Session, the controller will
 verify that the identity used by the SDK has permission to access the service. The controller will
 also see which edge routers can be used to access the session. The set of edge routers will be
-returned along with the Service Session token.
+returned along with the Session token.
 
 ![image](/img/data-flow/client-session.png)
 
 ### Connect to Edge Routers
 
-The returned Service Session contains the edge routers that can be used for this service along with
+The returned Session contains the edge routers that can be used for this service along with
 the address or addresses that each router is listening on for SDK connections. The SDK will connect
 to the edge routers and use whichever one connects the fastest. The edge router connections are not
 per-service, but will be shared by all services. If the connections are already made, the SDK will
@@ -131,7 +128,7 @@ routers will be notified and connections associated with that API Session will b
 ### Dial the Service
 
 The SDK will pick an edge router and send it a Dial request for desired service along with the
-Service Session token. The edge router selected is known as the initiating router. The edge router
+Session token. The edge router selected is known as the initiating router. The edge router
 will translate this into a 'create circuit' request to the controller. The controller will select a
 path and will message the routers in the path, so they can update their routing tables and/or make
 connections to application servers as necessary.
@@ -159,4 +156,3 @@ controller notifies the initiating router and data can now flow between the SDK 
 server.
 
 ![image](/img/data-flow/circuit.png)
-

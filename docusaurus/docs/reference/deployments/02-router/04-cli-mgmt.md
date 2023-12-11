@@ -10,7 +10,7 @@ import CliLogin from '../../../_cli-login.md'
 
 ## Managing Routers with the CLI
 
-In this article we are highlighting the most relevant commands and options for managing routers with the `ziti` CLI.
+In this article we are highlighting the most relevant commands and options for managing routers with [the `ziti` CLI](/downloads.mdx).
 
 :::info Important Note
 Routers or their identities can be referenced by `@router_name` or `#attribute` in various policies like service policy, edge router policy, etc. Using group `#attribute` is recommended.
@@ -27,7 +27,7 @@ The router creation command is described with the minimum required options to cr
 <Tabs groupId="routerType">
 <TabItem value="Private" label="Private Router with Edge">
 
-```bash
+```text
 ziti edge create edge-router $ROUTER_NAME \
                             --jwt-output-file $ROUTER_NAME.jwt
 ```
@@ -40,7 +40,7 @@ ziti edge create edge-router $ROUTER_NAME \
 In other words, only connections destined for this router will be routed to it by the smart routing algorithm. `--tunneler-enabled or just -t` flag indicates the tunnel mode.
 :::
 
-```bash
+```text
 ziti edge create edge-router $ROUTER_NAME \
                             --jwt-output-file $ROUTER_NAME.jwt \
                             --tunneler-enabled --no-traversal 
@@ -49,7 +49,7 @@ ziti edge create edge-router $ROUTER_NAME \
 </TabItem>
 <TabItem value="Public-Edge" label="Public Router with Edge">
 
-```bash
+```text
 ziti edge create edge-router $ROUTER_NAME \
                             --jwt-output-file $ROUTER_NAME.jwt
 ```
@@ -59,13 +59,13 @@ ziti edge create edge-router $ROUTER_NAME \
 
 ### List Routers
 
-```bash
+```text
 ziti edge list edge-routers
 ```
 
 ### Delete Router
 
-```bash
+```text
 ziti edge delete edge-routers $ROUTER_NAME
 ziti edge delete edge-routers $ROUTER_ID
 ```
@@ -74,7 +74,7 @@ ziti edge delete edge-routers $ROUTER_ID
 
 For the more detail options list, please refer to the [Flags Section](#flags).
 
-```bash
+```text
 ziti edge update edge-router $ROUTER_NAME [flags]
 ziti edge update edge-router $ROUTER_ID [flags]
 ```
@@ -83,27 +83,27 @@ ziti edge update edge-router $ROUTER_ID [flags]
 
 - App-Data can be used to set key/value pair to be used in addressable terminator service for example.
 
-```bash
+```text
 --app-data stringToString   Custom application data (default [])
 --app-data "fqdn"="aksprod-cae02995.eastus2.azmk8s.io"
 ```
 
 - Router cost can be used to influence the smart routing to not use this router for service traversal unless no other paths are available.
 
-```bash
+```text
 --cost uint16               Specifies the router cost. Default 0.
 --cost 300
 ```
 
 - No-traversal flag means no service traversal through this router at all. Only the service termination or origination can be completed on it.
 
-```bash
+```text
 --no-traversal              Disallow traversal for this edge router. Default to allowed(false).
 ```
 
 - The role attribute flag allows to set a list of attributes that can be referenced by all policies for dialing and/or hosting services.
 
-```bash
+```text
 -a, --role-attributes strings   Set role attributes of the edge router. Use --role-attributes '' to set an empty list
  --role-attributes 'example,example2,example3'
 ```

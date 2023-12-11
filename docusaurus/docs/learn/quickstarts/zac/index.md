@@ -23,6 +23,13 @@ explore a [Ziti Network](/learn/introduction/index.mdx).
        at Loader.moduleStrategy (internal/modules/esm/translators.js:133:18)
        at async link (internal/modules/esm/module_job.js:42:21)
 
+ * You will also need the Angular CLI installed and available on your command line. If you do not have this already you can
+   run the following command:
+
+    ```text
+    npm install -g @angular/cli@16
+    ```
+    
 
 :::note
 When running Ziti Administration Console, you should also prefer using https over http. In order to do this you will need
@@ -39,33 +46,45 @@ you can perform the following steps.
 
 1. Clone the ziti-console repo from github:
 
-   ```bash
+   ```text
    git clone https://github.com/openziti/ziti-console.git "${ZITI_HOME}/ziti-console"
    ```
 
 1. Install Node modules:
 
-   ```bash
+   ```text
    cd "${ZITI_HOME}/ziti-console"
    npm install
-   ````
+   ```
+
+1. Build the core Angular library:
+
+   ```text
+   ng build ziti-console-lib
+   ```
+
+1. Build the Angular app:
+
+   ```text
+   ng build ziti-console-node
+   ```
 
 1. Use the ziti-controller certificates for the Ziti Console:
 
    Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
 
-   ```bash
+   ```text
    ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/certs/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
    ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
    ```
 
 1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console (ZAC). If you have not sourced
-   [the Ziti helper script](https://get.openziti.io/quick/ziti-cli-functions.sh) and you wish to have ZAC enabled with systemd,
+   [the Ziti helper script](https://get.openziti.io/ziti-cli-functions.sh) and you wish to have ZAC enabled with systemd,
    you need to in order to get the necessary function. Either inspect the script and find the function, download and source it,
    or source it directly from the internet (direct sourcing from internet shown below)
 
-   ```bash
-   source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"
+   ```text
+   source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/ziti-cli-functions.sh)"
    createZacSystemdFile
    sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
    sudo systemctl daemon-reload
@@ -74,7 +93,7 @@ you can perform the following steps.
 
    If you do not have systemd installed or if you just wish to start ZAC you can simply issue:
 
-   ```bash
+   ```text
    node "${ZITI_HOME}/ziti-console/server.js"
    Initializing TLS
    TLS initialized on port: 8443
@@ -84,7 +103,7 @@ you can perform the following steps.
 1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command
    `sudo systemctl status ziti-console --lines=0 --no-pager`
 
-   ```bash
+   ```text
    $ sudo systemctl status ziti-console --lines=0 --no-pager
     ● ziti-console.service - Ziti-Console
     Loaded: loaded (/etc/systemd/system/ziti-console.service; disabled; vendor preset: enabled)
@@ -109,7 +128,7 @@ the OpenZiti Network you can copy the certificates generated when the controller
 Shown is an example which copies the certs from the OpenZiti container and uses them with ZAC. We'll copy the files
 from the docker named volume `myPersistentZitiFiles` and put them into a folder at `$HOME/.ziti/zac-pki`.
 
-```bash
+```text
 mkdir -p $HOME/.ziti/zac-pki
 
 docker run -it --rm --name temp \
@@ -125,11 +144,11 @@ docker run -it --rm --name temp \
 
 ### Starting ZAC
 
-With the certificates copied, you will be able to start the ZAC using one Docker command. Also notice the command 
+With the certificates copied, you will be able to start the ZAC using one Docker command. Also notice the command
 will expose the ZAC http and https ports to your local computer so that you can access the ZAC from outside of Docker.
 If you customized any of these paths, you'll need to replace the paths specified accordingly (the '-v' lines).
 
- ```bash
+ ```text
  docker run --rm \
         --name zac \
         -p 1408:1408 \
@@ -178,14 +197,14 @@ There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides
 
 2. Set the controller as shown (use the correct URL):
 
-   1. Example using the "everything local" quickstart:
-      ![everything local](./zac_configure_local.png)
+    1. Example using the "everything local" quickstart:
+       ![everything local](./zac_configure_local.png)
 
-   2. Example using the "docker-compose" quickstart:
-      ![docker-compose](./zac_configure_dc.png)
+    2. Example using the "docker-compose" quickstart:
+       ![docker-compose](./zac_configure_dc.png)
 
-   3. Example using AWS "host it anywhere":
-      ![host it anywhere](./zac_configure_hia.png)
+    3. Example using AWS "host it anywhere":
+       ![host it anywhere](./zac_configure_hia.png)
 
 3. Optionally, [**change admin's password**](/learn/quickstarts/network/help/change-admin-password.md#ziti-console)
 

@@ -50,11 +50,11 @@ of your instance. It is possible to use an IP address, but a DNS name is a more 
 The quickest and easiest thing to do, is find your external DNS name and set it into the `EXTERNAL_DNS` environment
 variable. You may skip setting `EXTERNAL_DNS` if you don't need to configure the advertised DNS Subject Alternative Name (SAN). For example,
 
-```bash
+```text
 export EXTERNAL_DNS="acme.example.com"
 ```
 
-```bash
+```text
 export EXTERNAL_IP="$(curl -s eth0.me)"       
 export ZITI_CTRL_EDGE_IP_OVERRIDE="${EXTERNAL_IP}"
 export ZITI_ROUTER_IP_OVERRIDE="${EXTERNAL_IP}"
@@ -71,8 +71,8 @@ As with any script that is downloaded and run from the internet, we recommend yo
 the script before running it locally. This script is provided as a convenience
 method for installing an environment quickly and easily.
 
-```bash
-source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
+```text
+source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/ziti-cli-functions.sh)"; expressInstall
 ```
 
 ### `systemd` {#systemd}
@@ -80,14 +80,14 @@ source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functi
 This assumes you already ran `expressInstall` on a Linux server. If it's available on your system, then it is recommended to use `systemd` to manage your controller and router processes. This
 is useful to make sure the controller can restart automatically should you shutdown/restart the server. To generate the `systemd` unit files, run:
 
-```bash
+```text
 createControllerSystemdFile
 createRouterSystemdFile "${ZITI_ROUTER_NAME}"
 ```
 
 Example output:
 
-```bash
+```text
 $ createControllerSystemdFile
 Controller systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip-172-31-23-18-edge-controller.service
 
@@ -98,20 +98,20 @@ Router systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-23-18/ip
 #### The helper functions vs systemd
 
 The set of startController/stopController, startRouter/stopRouter are functions declared in the 
-[the ziti-cli-function.sh helper script](https://get.openziti.io/quick/ziti-cli-functions.sh) and are useful for running
+[the ziti-cli-function.sh helper script](https://get.openziti.io/ziti-cli-functions.sh) and are useful for running
 the controller and router directly in your shell. These functions are not meant to work with systemd-enabled installs. If
 you are enabling systemd, use `systemctl` to start/stop the components. During the expressInstall, the controller and router
 were started using the helper scripts to complete the installation. Both should not be running, but before you run the 
 controller and router with `systemd` you need to stop them if they're currently running:
 
-```bash
+```text
 stopRouter 
 stopController 
 ```
 
 Example output:
 
-```bash
+```text
 $ stopRouter 
 INFO: Router stopped.
 
@@ -121,7 +121,7 @@ INFO: Controller stopped.
 
 After the `systemd` service units are generated, you can then install them by running:
 
-```bash
+```text
 sudo cp "${ZITI_HOME}/${ZITI_CTRL_NAME}.service" /etc/systemd/system/ziti-controller.service
 sudo cp "${ZITI_HOME}/${ZITI_ROUTER_NAME}.service" /etc/systemd/system/ziti-router.service
 sudo systemctl daemon-reload
@@ -133,14 +133,14 @@ Now, both the controller and the edge router will restart automatically if the m
 After a few seconds you can then run these commands and verify systemd has started the processes 
 and see the status:
 
-```bash
+```text
 sudo systemctl -q status ziti-controller --lines=0 --no-pager
 sudo systemctl -q status ziti-router --lines=0 --no-pager
 ```
 
 Example output:
 
-```bash
+```text
 $ sudo systemctl -q status ziti-controller --lines=0 --no-pager
 ● ziti-controller.service - Ziti-Controller
      Loaded: loaded (/etc/systemd/system/ziti-controller.service; disabled; vendor preset: enabled)
@@ -166,13 +166,13 @@ $ sudo systemctl -q status ziti-router --lines=0 --no-pager
 
 If you log out and log back in again you can source the *.env file located in `ZITI_HOME`.
 
-```bash
+```text
 source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 ```
 
 Example output:
 
-```bash
+```text
 $ source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 adding /home/ubuntu/.ziti/quickstart/ip-10-0-0-1/ziti-bin/ziti-v0.20.2 to the path
 

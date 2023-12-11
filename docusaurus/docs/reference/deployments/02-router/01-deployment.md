@@ -3,14 +3,11 @@ id: deployment
 title: Router Deployment
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import styles from './styles.module.css';
 import CliLogin from '../../../_cli-login.md'
 import CliLogFormats from '../../../_cli-log-levels-and-formats.md'
 
 The Ziti Router is the entry point for Ziti-based clients. It is responsible for authenticating incoming connections by
-verifying the connecting client has a valid network session.  It also routes traffic to whatever the
+verifying the connecting client has a valid Session.  It also routes traffic to whatever the
 destination is for the given service. In simple deployments can have a single router as is the case
 with the [Ziti Network Quickstart](/docs/learn/quickstarts/network/).
 
@@ -43,7 +40,7 @@ The router loads its configuration from a YAML file. You may use the `ziti creat
 
 The `identity.key` field in the config behaves differently for routers. If a file exists in the path indicated by `key` then the key will be used during router enrollment. If it does not exist then a unique key will be generated.
 
-```yaml
+```text
 identity:
     cert:                 "~/.ziti/config/certs/router01.zitinetwork.example.org.cert"
     server_cert:          "~/.ziti/config/certs/router01.zitinetwork.example.org.server.chain.cert"
@@ -59,17 +56,17 @@ The life cycle of a router begins by calling the controller's management API to 
 
 Creating a router yields a one-time enrollment token that you may store as a JWT file. Enrollment consumes the token and facilitates issuing a client certificate for the router, establishing cryptographic trust with the controller.
 
-```bash
+```text
 ziti router enroll config.yaml --jwt token.jwt
 ```
 
 ### Run Router {#router-run}
 
-```bash
+```text
 ziti router run config.yaml
 ```
 
-```ini
+```text
 # /etc/systemd/system/ziti-router.service
 [Unit]
 Description=Ziti Router
