@@ -3,7 +3,7 @@ title: Expired Certs
 id: troubleshoot-expired-certs
 ---
 
-The following are examples of how an invalid server cert will present itself on a running Ziti Network. There are certs 
+The following are examples of how an invalid server cert will present itself on a running OpenZiti Network. There are certs 
 for the edge API and the control plane, so it's important to check for both as they will likely share the same expiry 
 date.
 
@@ -17,7 +17,7 @@ or something mentioning an error relating to `x509`
 Ultimately, the controller is not accessible despite being online.
 ![img.png](invalid-certificate.png)
 ![img.png](browser-cert-viewer-invalid.png)
-3. From the Ziti CLI, if you attempt to log into the controller you will get an error to the effect of 
+3. From the `ziti` CLI, if you attempt to log into the controller you will get an error to the effect of 
 `certificate is expired or invalid`, `unable to retrieve certificate authority`, or `bad certificate`
 4. Viewing the controller logs, you may see errors similar to `TLS handshake error`, `bad certificate`, or 
 `certificate failure`.
