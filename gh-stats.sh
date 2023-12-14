@@ -371,4 +371,4 @@ ls -l ${STATS_DIR}/${TODAY}/all*.stargazers.json
 
 stargazersToCsv
 toStargazerData
-cp ${STATS_DIR}/${TODAY}/all*.stargazers.json ./docusaurus/src/pages/
+cp ${STATS_DIR}/${TODAY}/all*.stargazers.json ./docusaurus/src/pages/stargazers/
