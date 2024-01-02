@@ -38,7 +38,7 @@ related configuration settings.
 - [`v`](#v) - A special section to note the version of the configuration file, only `v: 3` is
   currently supported
 
-The standard OpenZit experience minimally requires the following sections:
+The standard OpenZiti experience minimally requires the following sections:
 
 - `ctrl`
 - `csr`
