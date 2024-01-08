@@ -68,11 +68,28 @@ This app provides the Ziti tunneler background service (`ziti-edge-tunnel`) and 
 </TabItem>
 
 <!-- begin super-tab Linux -->
-<TabItem value="Linux"> 
+<TabItem value="Linux">
 
-### Install the Ziti Command
+Install the `ziti` command or the `ziti-edge-tunnel` tunneler daemon as a package or a binary.
 
-Configure the OpenZiti package repository and install the `ziti` CLI.
+<br/>
+
+<!-- begin Linux sub-tabs -->
+<Tabs
+    defaultValue="LinuxDeb"
+    values={[
+        { label: 'DEB for Debian family', value: 'LinuxDeb', },
+        { label: 'RPM for Red Hat family', value: 'LinuxRpm', },
+        { label: 'Download Binary', value: 'LinuxOther', },
+    ]}
+>
+
+<!-- begin sub-tab deb -->
+<TabItem value="LinuxDeb">
+
+### Install the `ziti` Command from the `openziti` Package
+
+Audit the script to ensure it is suitable to execute on your system as root.
 
 <br/>
 
@@ -83,26 +100,7 @@ curl -sS https://get.openziti.io/install.bash \
 
 <br/>
 
-### Download the Ziti Command
-
-[Download the Linux executable from GitHub](https://github.com/openziti/ziti/releases/latest)
-
-<br/>
-
-### Install the Tunneler Daemon
-
-<!-- begin Linux sub-tabs -->
-<Tabs
-    defaultValue="LinuxDeb"
-    values={[
-        { label: 'DEB for Debian family', value: 'LinuxDeb', },
-        { label: 'RPM for Red Hat family', value: 'LinuxRpm', },
-        { label: 'Manual Install', value: 'LinuxOther', },
-    ]}
->
-
-<!-- begin sub-tab deb -->
-<TabItem value="LinuxDeb">
+### Install the `ziti-edge-tunnel` Daemon
 
 <br/>
 
@@ -117,6 +115,21 @@ Follow the Debian instructions [to install the `ziti-edge-tunnel` DEB](/referenc
 <!-- begin sub-tab rpm -->
 <TabItem value="LinuxRpm">
 
+### Install the `ziti` Command from the `openziti` Package
+
+Audit the script to ensure it is suitable to execute on your system as root.
+
+<br/>
+
+```text
+curl -sS https://get.openziti.io/install.bash \
+| sudo bash -s openziti
+```
+
+<br/>
+
+### Install the `ziti-edge-tunnel` Daemon
+
 <br/>
 
 Follow the Red Hat instructions to [install the `ziti-edge-tunnel` RPM](/reference/tunnelers/linux/index.md#installing-the-rpm)
@@ -128,9 +141,15 @@ Follow the Red Hat instructions to [install the `ziti-edge-tunnel` RPM](/referen
 
 <TabItem value="LinuxOther">
 
+### Download the `ziti` Command
+
+[Download the Linux executable from GitHub](https://github.com/openziti/ziti/releases/latest)
+
 <br/>
 
-Download [the latest binary from GitHub](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) and follow the [manual install instructions for `ziti-edge-tunnel`](/reference/tunnelers/linux/index.md#manual-installation)
+### Download the `ziti-edge-tunnel` Daemon
+
+Download [the latest binary from GitHub](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) and follow the [manual binary install instructions](/reference/tunnelers/linux/index.md#manual-installation)
 
 <br/>
 
