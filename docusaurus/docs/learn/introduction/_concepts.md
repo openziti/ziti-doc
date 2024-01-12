@@ -31,7 +31,7 @@ Services can be completely dark if they are implemented with a Ziti SDK. If this
 
 Ziti makes sure that when you connect to a service using a Ziti network, your connection is encrypted from start to 
 finish. Each connection is secured through public-private-key cryptography provided by
-[libsodium](https://libsodium.org). This means that even if your service data is not encrypted on its own, the 
+[libsodium](https://doc.libsodium.org/). This means that even if your service data is not encrypted on its own, the 
 connection between the SDKs will be encrypted and only readable by the intended parties. This feature is available in 
 all applications that use Ziti's SDKs, including Ziti's tunneler, desktop, and mobile applications.
 

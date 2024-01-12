@@ -35,7 +35,7 @@ www\.reddit\.com/r/openziti
 twitter\.com/(OpenZiggy|OpenZiti)
 landing.openziti.io/
 fonts.gstatic.com/
-github\.com[^)]+#
+github\.com/.*#
 EOF
 # github\.com/.*/releases/latest/download
 
