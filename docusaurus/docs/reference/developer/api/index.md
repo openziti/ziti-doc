@@ -9,7 +9,7 @@ import ApiQuickInfoMd from './_api-quickinfo.md';
 ## Specifications & Documentation
 
 Both the Edge Management and Client APIs have OpenAPI 2.0, formerly Swagger, specifications. The most up-to-date versions  are
-available within the [Ziti Edge API GitHub repository](https://github.com/openziti/edge-api#user-content-versioning). There is also
+available within the [Ziti Edge API GitHub repository](https://github.com/openziti/edge-api?tab=readme-ov-file#versioning). There is also
 an API reference web site built in to the running Ziti controller:
 
 - `https://<host>:<port>/edge/client/v1/docs`
@@ -19,7 +19,7 @@ Where `<host>:<port>` should be replaced with the values configured for the APIs
 
 ### Find the Controller Version
 
-It is essential to build your application with respect to the specification of your controller version, and [the spec is versioned separately from the controller](https://github.com/openziti/edge-api#user-content-versioning).
+It is essential to build your application with respect to the specification of your controller version, and [the spec is versioned separately from the controller](https://github.com/openziti/edge-api?tab=readme-ov-file#versioning).
 
 `GET /`
 
