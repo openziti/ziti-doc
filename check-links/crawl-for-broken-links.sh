@@ -21,9 +21,6 @@ done<<EOF
 EXWPKK5PV4-dsn.algolia.net
 www\.google\.com/search
 www\.googletagmanager\.com
-mermaid-js\.github.io
-mermaid\.live
-mermaid\.ink
 play\.google\.com
 apps\.apple\.com
 www\.reddit\.com/r/openziti
@@ -38,6 +35,7 @@ www\.reddit\.com/r/openziti
 twitter\.com/(OpenZiggy|OpenZiti)
 landing.openziti.io/
 fonts.gstatic.com/
+github\.com/.*#
 EOF
 # github\.com/.*/releases/latest/download
 
@@ -45,7 +43,7 @@ EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}))"
 
 docker run --rm --network=host raviqqe/muffet "${SERVER}" \
     --buffer-size=8192 \
-    --max-connections-per-host=1 \
+    --max-connections-per-host=${MUFFET_MAX_CONNECTIONS_PER_HOST:-1} \
     --header=User-Agent:curl/7.54.0 \
     --timeout=20 \
     "--exclude=${EXCLUDE_PATTERN}" \
