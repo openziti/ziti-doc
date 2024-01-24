@@ -58,13 +58,13 @@ Test@123  <--- Controller Passwd
 ```
 We are going to use Router Name: **local-router**
 
-We are also going to create the router without healthcheck section and metrics, so the following two options will be used to create the router:
+We are also going to create the router without healthcheck section, so the following option will be used to create the router:
 - --disableHealthChecks
-- --disableMetrics
+
 ### 2.1.2 Create and Register Router
 #### 2.1.2.1 Create Router using one command
 ```text
-sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --autoTunnelListener --routerName local-router
+sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --autoTunnelListener --routerName local-router
 ```
 What this command does:
 - contacts the controller
@@ -90,7 +90,7 @@ cat local-router.jwt
 
 Copy the output of "local-router.jwt" and register the router on the **router VM**
 ```text
-sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441  --disableHealthChecks --disableMetrics --autoTunnelListener  <jwt content>
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441  --disableHealthChecks  --autoTunnelListener  <jwt content>
 ```
 What this command does:
 - contacts the controller using info in the JWT.
@@ -215,7 +215,7 @@ We are going to use Router Name: **remote-router**
 ### 2.2.2 Create and Register Router
 #### 2.2.2.1 Create Router using one command
 ```text
-sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --disableMetrics --autoTunnelListener --routerName remote-router
+sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --autoTunnelListener --routerName remote-router
 ```
 
 #### 2.2.2.2 Register Router using jwt
@@ -233,7 +233,7 @@ cat remote-router.jwt
 
 Copy the output of "remote-router.jwt" and register the router on the **router VM**
 ```text
-sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441  --disableHealthChecks --disableMetrics --autoTunnelListener  <jwt content>
+sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441  --disableHealthChecks  --autoTunnelListener  <jwt content>
 ```
 
 ### 2.2.3 Check the installation
