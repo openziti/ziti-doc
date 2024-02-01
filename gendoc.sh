@@ -31,7 +31,6 @@ echo "$script_root"
 : ${SKIP_CLEAN:=no}
 ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
 SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
-BLOG_ROOT_TARGET="${script_root}/docusaurus/blog"
 : ${ZITI_DOCUSAURUS:=yes}
 
 echo "- processing opts"
