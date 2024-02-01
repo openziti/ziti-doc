@@ -204,12 +204,6 @@ const config = {
             'https://github.com/openziti/ziti-doc/tree/main/docusaurus',
 
         },
-        // blog: false,
-        blog: {
-          blogTitle: 'OpenZiti Technical Blog',
-          blogDescription: 'Technical articles about OpenZiti',
-          showReadingTime: true,
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
