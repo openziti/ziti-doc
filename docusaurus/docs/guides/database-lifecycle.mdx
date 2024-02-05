@@ -1,0 +1,44 @@
+---
+title: Database Lifecycle Management
+sidebar_position: 30
+---
+
+The OpenZiti Controller uses a [Bolt](https://github.com/boltdb/bolt) database to store its state. The database is a writeable file in a path specified by the controller's configuration property `.db` ([link to reference](/reference/30-configuration/controller.md#db)).
+
+Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a snapshot file in the same filesystem directory as the main database file on the controller host.
+
+There are three ways to invoke the snapshot operation.
+
+1. Agent (IPC): run the `snapshot-db` command on the controller host.
+
+    ```text
+    ziti agent controller snapshot-db
+    ```
+
+    ```buttonless title="Expected output"
+    success
+    ```
+
+1. CLI (REST)
+
+    ```text
+    ziti edge db snapshot
+    ```
+
+    ```buttonless title="Expected output"
+    "" (empty string)
+    ```
+
+1. Management API (REST, [link to reference](/reference/developer/api/02-edge-management-reference.mdx#tag/Database/operation/createDatabaseSnapshot))
+
+    ```text
+    POST /edge/management/v1/database/snapshot
+    ```
+
+    ```text title="cURL Example"
+    zt_session=$(jq -r .edgeIdentities.default.token ~/.config/ziti/ziti-cli.json)
+    curl -sSfk -XPOST -H "zt-session: $zt_session" https://ziti.example.com/edge/management/v1/database/snapshot
+    ```
+    ```nobutton title="Expected response"
+    {"data":{},"meta":{}}
+    ```

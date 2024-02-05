@@ -17,7 +17,7 @@ While you can certainly back up every file relating to your network, there are o
 back up the necessary files follow these steps:
 
 1. Backup the database:
-    1. Run the following
+    1. Run the following to create a database snapshot via the REST API.
    ```
    ziti edge db snapshot
    ```
