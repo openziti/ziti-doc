@@ -111,7 +111,6 @@
 /policies/new-project-template/NF_EULA
 /ziti/overview.html
 /ziti/identities/enrolling.html
-/articles/golang-aha/article.html
 /ziti/overview
 /docs/downloads
 /docs/learn/introduction/
