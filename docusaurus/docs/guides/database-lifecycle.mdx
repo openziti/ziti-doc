@@ -1,44 +1,28 @@
 ---
-title: Database Lifecycle Management
+title: Database Lifecycle
 sidebar_position: 30
 ---
 
-The OpenZiti Controller uses a [Bolt](https://github.com/boltdb/bolt) database to store its state. The database is a writeable file in a path specified by the controller's configuration property `.db` ([link to reference](/reference/30-configuration/controller.md#db)).
+The OpenZiti Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store its state. The database is a writeable file in a path specified by the controller's configuration property `db` ([link to reference](/reference/30-configuration/controller.md#db)).
 
 Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a snapshot file in the same filesystem directory as the main database file on the controller host.
 
-There are three ways to invoke the snapshot operation.
+The most relevant way to invoke the snapshot operation is with the `ziti` CLI, which calls the management API provided by the OpenZiti Controller ([link to reference](/reference/developer/api/02-edge-management-reference.mdx#tag/Database/operation/createDatabaseSnapshot)).
 
-1. Agent (IPC): run the `snapshot-db` command on the controller host.
+```text
+ziti edge db snapshot
+```
 
-    ```text
-    ziti agent controller snapshot-db
-    ```
+```buttonless title="Expected output"
+"" (empty string)
+```
 
-    ```buttonless title="Expected output"
-    success
-    ```
+An alternative method for invoking the snapshot operation is via the IPC agent, which must be run on the same host where the OpenZiti Controller is running and does not require authentication.
 
-1. CLI (REST)
+```text
+ziti agent controller snapshot-db
+```
 
-    ```text
-    ziti edge db snapshot
-    ```
-
-    ```buttonless title="Expected output"
-    "" (empty string)
-    ```
-
-1. Management API (REST, [link to reference](/reference/developer/api/02-edge-management-reference.mdx#tag/Database/operation/createDatabaseSnapshot))
-
-    ```text
-    POST /edge/management/v1/database/snapshot
-    ```
-
-    ```text title="cURL Example"
-    zt_session=$(jq -r .edgeIdentities.default.token ~/.config/ziti/ziti-cli.json)
-    curl -sSfk -XPOST -H "zt-session: $zt_session" https://ziti.example.com/edge/management/v1/database/snapshot
-    ```
-    ```nobutton title="Expected response"
-    {"data":{},"meta":{}}
-    ```
+```buttonless title="Expected output"
+success
+```
