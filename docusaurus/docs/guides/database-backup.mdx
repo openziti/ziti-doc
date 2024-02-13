@@ -7,8 +7,6 @@ The OpenZiti Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database
 
 Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a snapshot file in the same filesystem directory as the main database file on the controller host.
 
-The most relevant way to invoke the snapshot operation is with the `ziti` CLI, which calls the management API provided by the OpenZiti Controller ([link to reference](/reference/developer/api/02-edge-management-reference.mdx#tag/Database/operation/createDatabaseSnapshot)).
-
 ```text
 ziti edge db snapshot
 ```
