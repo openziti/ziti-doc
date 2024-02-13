@@ -1,9 +1,9 @@
 ---
-title: Database Lifecycle
+title: Database Backup
 sidebar_position: 30
 ---
 
-The OpenZiti Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store its state. The database is a writeable file in a path specified by the controller's configuration property `db` ([link to reference](/reference/30-configuration/controller.md#db)).
+The OpenZiti Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store its state. The database is a writeable file in a path specified by the controller's configuration property `db` ([link to config reference](/reference/30-configuration/controller.md#db)).
 
 Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a snapshot file in the same filesystem directory as the main database file on the controller host.
 
@@ -15,14 +15,4 @@ ziti edge db snapshot
 
 ```buttonless title="Expected output"
 "" (empty string)
-```
-
-An alternative method for invoking the snapshot operation is via the IPC agent, which must be run on the same host by the same user as the running OpenZiti Controller.
-
-```text
-ziti agent controller snapshot-db
-```
-
-```buttonless title="Expected output"
-success
 ```
