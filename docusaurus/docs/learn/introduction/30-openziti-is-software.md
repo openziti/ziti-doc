@@ -78,6 +78,8 @@ fulcrum to leverage the power of an OpenZiti Network.
 The SDKs expose an API that allows endpoints to enroll, authenticate, list services, receive centralized configuration,
 and connect or host services based on security access configuration.
 
+[Check out the SDKs](/reference/developer/sdk/index.mdx).
+
 ## Clients
 
 OpenZiti clients are any code that uses an OpenZiti SDK to connect to an OpenZiti Network. The OpenZiti project can provide these
