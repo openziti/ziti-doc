@@ -88,6 +88,7 @@ function App() {
 
     const codeToCopy = `
         git clone https://github.com/openziti-test-kitchen/appetizer.git
+        cd appetizer
         go run clients/reflect.go reflectService
         `;
     const trimmedCode = codeToCopy
