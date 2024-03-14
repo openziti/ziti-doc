@@ -1,0 +1,19 @@
+---
+title: Interprocess Communication Agent
+sidebar_label: Agent
+---
+
+The controller and router provide an IPC agent for administration. The agent listens on a Unix domain socket inside the filesystem namespace of the controller service. Here's an example for querying the controller's agent for statistics.
+
+```text
+systemctl show -p MainPID --value ziti-controller.service \
+| xargs -rIPID sudo nsenter --target PID --mount -- \
+    ziti agent stats
+```
+
+```buttonless title="Output"
+goroutines: 50
+OS threads: 22
+GOMAXPROCS: 16
+num CPU: 16
+```

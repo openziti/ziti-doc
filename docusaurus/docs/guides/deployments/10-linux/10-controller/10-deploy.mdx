@@ -1,0 +1,150 @@
+---
+title: Controller Deployment
+sidebar_label: Controller
+id: deploy
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import LinuxPackageRepo from '/docs/_linux-package-repo.mdx';
+
+This article is about deploying a Ziti Controller as a Linux system service. [The controller introduction](/learn/introduction/03-components.md#openziti-controller) may be helpful to read first.
+
+We'll cover the following topics:
+
+1. [Installation](#installation)
+1. [Configuration](#configuration)
+1. [Starting Up](#starting-up)
+
+## Installation
+
+The controller package provides a service unit and, if bootstrapping is enabled, will generate a configuration based on the bootstrapping answer file. The `openziti` package provides the `ziti` CLI and is installed automatically as a dependency. Run the install script for RPM and Debian distributions or manually configure the package repo and install package `openziti-controller`.
+
+```text
+curl -sS https://get.openziti.io/install.bash \
+| sudo bash -s openziti-controller
+```
+
+<LinuxPackageRepo />
+
+## Configuration
+
+You must provide or generate a configuration. Configuration consists of a PKI, a config YAML file, and a database.
+
+### Generate a Configuration
+
+You can generate a configuration by opting-in to bootstrapping during an interactive install which prompts for the most relevant answers, or by setting these values in the answer file.
+
+1. In `/opt/openziti/etc/controller/service.env` (the answer file for the service)
+    1. Set `ZITI_BOOTSTRAP=true` to opt-in to bootstrapping.
+1. In `/opt/openziti/etc/controller/bootstrap.env` (the answer file for bootstrapping the controller)
+    1. Set `ZITI_CTRL_ADVERTISED_ADDRESS` to the FQDN of the controller.
+    1. Set `ZITI_PWD` to the desired management password for user `admin`. You may delete this after bootstrapping.
+
+#### Generating a Public Key Infrastructure
+
+The controller service will generate a root CA and issue an intermediate CA cert during the first startup.
+
+The controller needs a CA to issue certificates for edge identities during enrollment. This CA is known as the edge signer. It's a good idea to secure the root in a different location and use an intermediate CA for this purpose. This allows you to recover in a scenario where the intermediate was lost without changing the root of trust and invalidating all edge enrollments. Refer to [the article about backing up the controller](/reference/backup/10-controller.mdx) for more information.
+
+Disable bootstrapping a PKI by setting `ZITI_BOOTSTRAP_PKI=false` in `/opt/openziti/etc/controller/service.env`.
+
+Check out [the PKI page](/learn/core-concepts/pki.md) for an overview of these concepts.
+
+#### Generating a Configuration File
+
+The controller's configuration is loaded from a file ([reference](/reference/30-configuration/controller.md)). The Linux system service will generate a valid configuration during the first startup unless one already exists.
+
+The filename of the configuration file, relative to the Linux service's working directory (default: `/var/lib/ziti-controller/config.yml`). You may override this in `/etc/systemd/system/ziti-controller.service.d/override.conf` by re-initializing `ExecStart=` with an empty value followed by a second `ExecStart` directive specifying the override command.
+
+Disable bootstrapping a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in `/opt/openziti/etc/controller/service.env`.
+
+#### Bootstrapping the Database
+
+The controller requires a BoltDB database to store its state. The Linux system service will initialize a database with a default admin password during the first startup unless one already exists.
+
+You must specify the management password for the default admin user before starting the service. This is done by setting `ZITI_PWD` in `/opt/openziti/etc/controller/bootstrap.env` or in the root-only file specified by `LoadCredential` in `/etc/systemd/system/ziti-controller.service.d/override.conf`. You may delete the password after bootstrapping for security.
+
+Disable bootstrapping the database by setting `ZITI_BOOTSTRAP_DATABASE=false` in `/opt/openziti/etc/controller/service.env`.
+
+### Manual Configuration
+
+You can provide, rather than generate, any or all of the PKI, configuration file, and database. If you plan to provide all three then you can disable bootstrapping entirely by setting `ZITI_BOOTSTRAP=false` in `/opt/openziti/etc/controller/service.env`.
+
+#### Provide a Configuration File
+
+Create the file at `/var/lib/ziti-controller/config.yml` and set `ZITI_BOOTSTRAP_CONFIG=false` in `/opt/openziti/etc/controller/service.env`.
+
+#### Provide a PKI
+
+Place the intermediate CA for the controller's edge enrollment signer in `/var/lib/ziti-controller` and set `ZITI_BOOTSTRAP_PKI=false` in `/opt/openziti/etc/controller/service.env`. The file paths to the intermediate CA are specified in the configuration file.
+
+#### Provide a Database
+
+Place the BoltDB file in `/var/lib/ziti-controller` and set `ZITI_BOOTSTRAP_DATABASE=false` in `/opt/openziti/etc/controller/service.env`. The file path to the database is specified in the configuration file.
+
+#### Migration Example
+
+[This example](./15-migrate.mdx) illustrates copying the PKI, configuration, and database from a previous installation to the controller service's working directory.
+
+## Starting Up
+
+Start the controller service now and enable startup after reboot.
+
+```text
+sudo systemctl enable --now ziti-controller.service
+```
+
+## Firewall
+
+The controller listens on a single configurable TCP port: `1280/tcp`. Verify that the controller process is listening on this port and create a firewall exception if necessary.
+
+```text
+systemctl show -p MainPID --value ziti-controller.service \
+| xargs -rIPID sudo lsof -Pnp PID |& awk '$5~/IP/'
+```
+
+```buttonless title="Output"
+ziti    2694474 ziti-controller    8u     IPv6          222078013       0t0       TCP *:1280 (LISTEN)
+```
+
+You may set `ZITI_CTRL_ADVERTISED_PORT` in `/opt/openziti/etc/controller/bootstrap.env` to bootstrap with a different port.
+
+## Logging
+
+View the controller service's output with `journalctl -u ziti-controller.service`.
+
+<Tabs>
+<TabItem value="goformats" label="Log Formats">
+
+Choose the logging format (default: text).
+
+- `pfxlog` - a human-readable format leveraging ANSI escape codes to colorize log levels
+- `json` - a machine-readable format targeting automated processes for log aggregation
+- `text` - a human-readable format using plain text (no ANSI escape codes)
+
+```text title="Run without colorized log levels"
+ziti controller run config.yml --log-formatter text
+```
+
+</TabItem>
+<TabItem value="golevels" label="Log Levels">
+
+The default log level is `INFO`. This means that log messages `INFO`, `WARNING`, `ERROR`, and `FATAL` will all be emitted. Enable verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will additionally emit `DEBUG` log level messages.
+
+```text title="Run the controller with verbose (DEBUG, 4) log level"
+ziti controller run config.yml --verbose
+```
+
+</TabItem>
+</Tabs>
+
+
+## Uninstall
+
+```text
+sudo systemctl disable --now ziti-controller.service
+sudo systemctl clean --what=state ziti-controller.service
+```
+
+Remove any firewall exceptions you created for the service.

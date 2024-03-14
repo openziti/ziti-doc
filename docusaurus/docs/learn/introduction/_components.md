@@ -25,10 +25,13 @@ reuse. Utilizing a third-party CA pushes the burden of obtaining
 and distributing properly signed certificates to the operator of
 the OpenZiti Network but for sophisticated customers this might make
 overall management of the network easier.
+
 The OpenZiti Controller uses a local database based on [bbolt](https://github.com/etcd-io/bbolt) to
 store the information needed to manage the network.
 
-[Controller Deployment Guide](/reference/deployments/01-controller.md)
+The controller's TLS server employs SNI to select the correct certificate for presentation when there are multiple certificates. Ziti clients use ALPN to negotiate a connection to the control plane (`ziti-ctrl`) or the REST APIs (`h2`, `http/1.1`).
+
+[Controller Deployment Guide](/guides/deployments/10-linux/10-controller/10-deploy.mdx)
 
 ### OpenZiti Router
 
@@ -46,7 +49,7 @@ The OpenZiti Router is the entry point to the OpenZiti Network for client connec
 The OpenZiti Router in combination with the Ziti Controller is responsible
 for authenticating and authorizing OpenZiti Edge Clients.
 
-[Router Deployment Guide](/reference/deployments/02-router/01-deployment.md)
+[Router Deployment Guide](/guides/deployments/10-linux/20-router/10-deploy.mdx)
 
 ### OpenZiti Edge Clients
 

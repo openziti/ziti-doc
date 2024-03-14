@@ -47,4 +47,3 @@ This service is hosted by two application servers.
 ```
 
 See the [`host.v1`](./host.v1.md) specification for what can be done with each entry.
-

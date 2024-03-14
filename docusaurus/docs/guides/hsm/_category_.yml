@@ -1,2 +1,5 @@
-label: Hardware Security Modules (HSM)
-position: 60
+label: Hardware Keys
+position: 70
+link:
+  type: doc
+  id: guides/hsm/hsmIndex

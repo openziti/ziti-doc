@@ -25,7 +25,7 @@ For services with defined endpoints, the following three attributes are required
 
 This service is hosted by one application server.
 
-```json
+```text
 {
   "address": "192.168.100.1",
   "port": 80,
@@ -54,7 +54,7 @@ properties to indicate what should be forwarded:
 
 **Examples**
 
-```json
+```text
 {
   "forwardAddress": true,
   "allowedAddresses": [
@@ -80,7 +80,7 @@ Note that not everything must be forwarded. For example the address is not forwa
 below. The port and protocol are forwarded and the corresponding 'allow' is set, but the address is
 statically set to '192.168.100.1
 
-```json
+```text
 {
   "address": "192.168.100.1",
   "forwardPort": true,
@@ -130,7 +130,7 @@ Health checks and listen options also can be specified for the endpoint.
 
 **Example**
 
-```json
+```text
 {
   "address": "192.168.100.1",
   "port": 80,
@@ -236,7 +236,7 @@ This config will cause a port check to run against the service every five second
 has failed twice in a row, the endpoint will be marked failed. After the check has been passing for
 a minute, the endpoint will be restored to its original precedence.
 
-```json
+```text
 {
   "address": "192.168.100.1",
   "port": 80,

@@ -1,4 +1,4 @@
-import CliLoginMd from '../../../../../_cli-login.md'
+import CliLoginMd from '/docs/_cli-login.md'
 
 To create a Service Edge Router Policy using the CLI issue the following commands.
 

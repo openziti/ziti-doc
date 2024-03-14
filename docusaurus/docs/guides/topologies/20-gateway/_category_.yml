@@ -1,0 +1,6 @@
+label: Gateway
+position: 70
+link:
+  type: generated-index
+  title: Local Gateway
+  description: Use a Router or Tunneler as a Gateway for a Local Area Network

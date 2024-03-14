@@ -1,0 +1,59 @@
+
+import Details from '@theme/MDXComponents/Details';
+
+<Details>
+<summary>Configure the repository for the Debian family of distributions (Ubuntu, Mint, Pop!_OS)</summary>
+
+Install the OpenZiti repository key.
+
+```text
+curl -sSLf https://get.openziti.io/tun/package-repos.gpg | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
+```
+
+Ensure the key is readable by all users.
+
+```text
+sudo chmod a+r /usr/share/keyrings/openziti.gpg
+```
+
+Create the repository file.
+
+```text
+sudo tee /etc/apt/sources.list.d/openziti-release.list >/dev/null <<EOF
+deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable debian main
+EOF
+```
+
+Update the package list.
+
+```text
+sudo apt update
+```
+
+</Details>
+
+<Details>
+<summary>Configure the repository for the RedHat family (Fedora, Rocky, Alma)</summary>
+
+Create the repository file.
+
+```text
+sudo tee /etc/yum.repos.d/openziti-release.repo >/dev/null <<\EOF
+[OpenZitiRelease]
+name=OpenZiti Release
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+EOF
+```
+
+Update the package list.
+
+```text
+sudo dnf update
+```
+
+</Details>
+

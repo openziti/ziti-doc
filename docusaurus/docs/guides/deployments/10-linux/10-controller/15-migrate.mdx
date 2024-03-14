@@ -1,0 +1,57 @@
+---
+title: Migrate a Controller Installation
+sidebar_label: Migrate
+---
+
+Here's an example of migrating an existing controller's configuration to the Linux service's working directory.
+
+1. Ensure the controller service is disabled and state is clean.
+
+    ```text
+    sudo systemctl disable --now ziti-controller.service
+    sudo systemctl clean --what=state ziti-controller.service
+    ```
+
+1. Duplicate the controller's configuration to the working directory using the `config.yml` filename.
+
+    ```text
+    sudo mkdir -pv /var/lib/ziti-controller/
+    sudo cp -Rv ./pki ./db /var/lib/ziti-controller/
+    sudo cp -v ./ctrl.yaml /var/lib/ziti-controller/config.yml
+    ```
+
+1. Correct the file paths in `config.yml`. Ensure your current working directory matches the existing controller's
+    working directory, e.g. `ZITI_HOME`, or substitute the old working directory for `$PWD`. After completing this step,
+    verify the new `config.yml` has the correct file paths.
+
+    ```text
+    sudo sed -Ei "s|$PWD|/var/lib/ziti-controller|g" /var/lib/ziti-controller/config.yml
+    ```
+
+1. Disable bootstrapping. We're migrating a complete controller configuration (PKI, configuration file, and database) so
+    we don't need the bootstrapping process.
+
+    ```text
+    sudo sed -Ei 's|(ZITI_BOOTSTRAP_.*)=.*|\1=false|g' /opt/openziti/etc/controller/service.env
+    ```
+
+1. Start the service.
+
+    ```text
+    sudo systemctl enable --now ziti-controller.service
+    sudo systemctl status ziti-controller.service
+    ```
+
+1. Verify the controller is running and listening on the expected port.
+
+    ```text
+    journalctl -u ziti-controller.service
+    ```
+
+    ```text
+    sudo lsof -Pnp $(systemctl show -p MainPID --value ziti-controller.service) |& awk '$5~/IP/'
+    ```
+
+    ```buttonless title="Output"
+    ziti    2694474 ziti-controller    8u     IPv6          222078013       0t0       TCP *:1280 (LISTEN)
+    ```

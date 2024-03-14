@@ -1,0 +1,93 @@
+---
+title: Tunneling on RedHat and Fedora
+sidebar_label: RedHat
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+### Installing the RPM Package
+
+1. Create a repo file like `/etc/yum.repos.d/openziti.repo` matching the OS.
+
+<Tabs
+  defaultValue="RedHat"
+  values={[
+      { label: 'Red Hat', value: 'RedHat', },
+      { label: 'Fedora', value: 'Fedora', },
+      { label: 'Amazon Linux', value: 'Amazon', },
+  ]}
+>
+<TabItem value="RedHat">
+
+#### Red Hat
+
+Architectures available:
+
+* x86_64
+
+Use this repo with var `$releasever` on CentOS 7, Rocky 8-9, and RHEL 7-9.
+
+```text
+[OpenZiti]
+name=OpenZiti
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+</TabItem>
+
+<TabItem value="Fedora">
+
+#### Fedora
+
+Architectures available:
+
+* x86_64
+
+```text
+[OpenZiti]
+name=OpenZiti
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+</TabItem>
+
+<TabItem value="Amazon">
+
+#### Amazon Linux
+
+Architectures available:
+
+* x86_64
+
+```text
+[OpenZiti]
+name=OpenZiti
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+</TabItem>
+</Tabs>
+
+2. Run `sudo yum update` to refresh the repo data cache.
+2. Run `sudo yum install ziti-edge-tunnel` to install the RPM.
+2. Enable and start the service
+
+    ```text
+    sudo systemctl enable --now ziti-edge-tunnel.service
+    ```
+
+2. [Add an Identity](/reference/tunnelers/60-linux/index.mdx#adding-identities)
+
