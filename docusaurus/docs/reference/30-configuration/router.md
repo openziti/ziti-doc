@@ -415,6 +415,7 @@ listeners:
     options:
       mode: tproxy
       resolver: udp://127.0.0.1:53
+      dnsSvcIpRange: 100.80.0.0/12  # optionally customize the dynamic IP range used by Ziti DNS
 ```
 
 In this example the router's tunnel is configured to provide a forward proxy listener for a list of
