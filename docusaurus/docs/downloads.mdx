@@ -112,6 +112,19 @@ curl -sS https://get.openziti.io/install.bash \
 
 <br/>
 
+### Install the `ziti-router.service`
+
+This package depends on the `openziti` package that provides the `ziti` CLI. Follow [the deployment reference](/reference/deployments/02-router/01-deployment.md) to configure the router before starting the service.
+
+<br/>
+
+```text
+curl -sS https://get.openziti.io/install.bash \
+| sudo bash -s openziti-router
+```
+
+<br/>
+
 ### Install the `ziti-edge-tunnel` Daemon
 
 <br/>
