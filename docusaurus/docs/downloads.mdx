@@ -99,6 +99,19 @@ curl -sS https://get.openziti.io/install.bash \
 
 <br/>
 
+### Install the `ziti-controller.service`
+
+This package depends on the `openziti` package that provides the `ziti` CLI. Follow [the deployment reference](/reference/deployments/01-controller.md) to configure the controller before starting the service.
+
+<br/>
+
+```text
+curl -sS https://get.openziti.io/install.bash \
+| sudo bash -s openziti-controller
+```
+
+<br/>
+
 ### Install the `ziti-edge-tunnel` Daemon
 
 <br/>
