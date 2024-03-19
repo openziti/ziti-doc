@@ -46,7 +46,7 @@ The filename of the configuration file, relative to the Linux service's working 
 
 Disable bootstrapping a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in `/lib/systemd/system/ziti-controller.service`.
 
-### Bootstrap the Database
+### Bootstrapping the Database
 
 The controller requires a BoltDB database to store its state. The Linux system service will initialize a database with a default admin password during the first startup, unless one already exists.
 
@@ -85,6 +85,7 @@ sudo systemctl clean --what=state ziti-controller.service
 
 # duplicate the controller part of the quickstart state to the service working directory using the config.yml filename
 # expected by the controller service
+sudo mkdir -pv /var/lib/ziti-controller/
 sudo cp -Rv ./pki ./db /var/lib/ziti-controller/
 sudo cp -v ./ctrl.yaml /var/lib/ziti-controller/config.yml
 
@@ -108,6 +109,23 @@ The controller listens on a single configurable TCP port: `1280/tcp`. This TLS s
 You may set `ZITI_CTRL_ADVERTISED_PORT` in `/opt/openziti/etc/controller/env` to bootstrap with a different port.
 
 Clients "learn" the controller's address and port when they enroll, so it is necessary to re-enroll or re-create the client if the controller's address or port changes.
+
+## Agent
+
+The controller provides an IPC agent for administration. The agent listens on a Unix domain socket inside the filesystem namespace of the controller service. Here's an example for querying the controller's agent for statistics.
+
+```text
+systemctl show -p MainPID --value ziti-controller.service \
+| xargs -rIPID sudo nsenter --target PID --mount -- \
+    ziti agent stats
+```
+
+```buttonless title="Output"
+goroutines: 50
+OS threads: 22
+GOMAXPROCS: 16
+num CPU: 16
+```
 
 ## Logging
 
