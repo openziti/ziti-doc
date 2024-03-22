@@ -2,7 +2,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-All Ziti components log to standard output and standard error file descriptors.
+All Go Ziti components log to standard output and standard error file descriptors, so their output appears in the systemd journal (`journalctl -xeu ziti-controller.service`) when installed from a Linux package, and the Docker log (`docker compose logs ziti-router`) when run as a container. The C/C++ `ziti-edge-tunnel` has distinct log levels and controls, described in [Linux tunneler troubleshooting](/reference/tunnelers/linux/linux-tunnel-troubleshooting.md).
 
 <Tabs>
 <TabItem value="goformats" label="Log Formats">
@@ -13,8 +13,8 @@ Output from Ziti components comes in three distinct styles. Choose the style of 
 - `json` - a machine-readable format targeting automated processes for log aggregation/searching
 - `text` - a human-readable format using plain text (no ascii escape codes)
 
-```text
-ziti-router run ./router.yml --log-formatter pfxlog
+```text title="Run the router without colorized log levels"
+ziti router run config.yml --log-formatter text
 ```
 
 </TabItem>
@@ -22,8 +22,8 @@ ziti-router run ./router.yml --log-formatter pfxlog
 
 By default the Ziti components will log at the `INFO` level. This means that log messages `INFO`, `WARNING`, `ERROR`, and `FATAL` will all be emitted. Ziti components all support verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will add `DEBUG` log messages.
 
-```text
-ziti-controller run ./ctrl.yml --verbose
+```text title="Run the controller with verbose (DEBUG, 4) log level"
+ziti controller run config.yml --verbose
 ```
 
 </TabItem>
