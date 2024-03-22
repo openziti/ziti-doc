@@ -1,85 +1,60 @@
 ---
 id: cli-mgmt
-title: CLI Mgmt
+title: Managing Routers with the CLI
+sidebar_label: CLI Mgmt
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import styles from './styles.module.css';
 import CliLogin from '../../../_cli-login.md'
 
-## Managing Routers with the CLI
-
-In this article we are highlighting the most relevant commands and options for managing routers with [the `ziti` CLI](/downloads.mdx).
-
-:::info Important Note
-Routers or their identities can be referenced by `@router_name` or `#attribute` in various policies like service policy, edge router policy, etc. Using group `#attribute` is recommended.
-:::
-
-### Login
+## Login
 
 <CliLogin/>
 
-### Create Router
-
-The router creation command is described with the minimum required options to create the type shown. For the more detail options list, please refer to the [Flags Section](#flags). 
+## Create a Router
 
 <Tabs groupId="routerType">
-<TabItem value="Private" label="Private Router with Edge">
+
+<TabItem value="TunnelerEnabled" label="Router with Tunneler">
+
+The tunneler flag must be administratively set when the router is created or updated. There are no administrative flags pertaining to the router's listeners.
+
+<br />
 
 ```text
-ziti edge create edge-router $ROUTER_NAME \
-                            --jwt-output-file $ROUTER_NAME.jwt
+ziti edge create edge-router "router2" \
+    --jwt-output-file router2.jwt \
+    --tunneler-enabled
 ```
 
 </TabItem>
-<TabItem value="Gateway" label="Private Router with Edge and Tunneler">
 
-:::info Notes
-`--no-travesal` flag is not required, but keep in mind that private routers are stub routers and setting it to true disables transitive routing through it.
-In other words, only connections destined for this router will be routed to it by the smart routing algorithm. `--tunneler-enabled or just -t` flag indicates the tunnel mode.
-:::
+<TabItem value="NoTraversal" label="Router with No Traversal">
+
+No-traversal routers are administratively excluded from the set of routers that provide smart routing for transiting service traffic. They still provide service termination and origination.
 
 ```text
-ziti edge create edge-router $ROUTER_NAME \
-                            --jwt-output-file $ROUTER_NAME.jwt \
-                            --tunneler-enabled --no-traversal 
+ziti edge create edge-router "router3" \
+    --jwt-output-file router3.jwt \
+    --no-traversal
 ```
 
 </TabItem>
-<TabItem value="Public-Edge" label="Public Router with Edge">
 
-```text
-ziti edge create edge-router $ROUTER_NAME \
-                            --jwt-output-file $ROUTER_NAME.jwt
-```
-
-</TabItem>
 </Tabs>
 
-### List Routers
+## Update a Router
+
+The update command will replace all administrative properties of the router. This example preserves the properties from the router3 example above, adding the `--tunneler-enabled` flag.
 
 ```text
-ziti edge list edge-routers
+ziti edge update edge-router "router3" \
+    --no-traversal \
+    --tunneler-enabled
 ```
 
-### Delete Router
-
-```text
-ziti edge delete edge-routers $ROUTER_NAME
-ziti edge delete edge-routers $ROUTER_ID
-```
-
-### Update Router
-
-For the more detail options list, please refer to the [Flags Section](#flags).
-
-```text
-ziti edge update edge-router $ROUTER_NAME [flags]
-ziti edge update edge-router $ROUTER_ID [flags]
-```
-
-### Flags
+## Additional Flags
 
 - App-Data can be used to set key/value pair to be used in addressable terminator service for example.
 
@@ -108,6 +83,8 @@ ziti edge update edge-router $ROUTER_ID [flags]
  --role-attributes 'example,example2,example3'
 ```
 
-### Attributes
+## Role Attributes are Powerful
 
-Let's consider an Autoscaling Group scenario, where routers would be created or deleted as the scale-out or scale-in events occur respectively. If router names were referenced in such deployment, then all policies would need to be updated upon the scale-out event with `@router_name`. To keep the complexity of this deployment to minimum, it just makes sense to use #attribute, where no other updates would be needed.
+Consider an autoscaling group scenario where routers are created or deleted with scale-out or scale-in events. Attribute-based access control enables this scenario because the policies grant roles instead of the individual, temporary identities.
+
+If router names or IDs were referenced explicitly in such a scenario then all policies would need to be updated upon the scale-out event with new grants like `@router_name`. To keep the complexity of this deployment to minimum, it just makes sense to use role `#attributes`.
