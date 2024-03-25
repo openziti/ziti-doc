@@ -8,7 +8,7 @@ hide_table_of_contents: false
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This article expands on the [Linux and Docker router deployment](/reference/deployments/02-router/01-deployment.md) article with configuration concepts and examples. [Kubernetes is covered separately](/guides/kubernetes/hosting/kubernetes-router.mdx).
+This article expands on the [Linux and Docker router deployment](/guides/deployments/02-router/01-deployment.md) article with configuration concepts and examples. [Kubernetes is covered separately](/guides/kubernetes/hosting/kubernetes-router.mdx).
 
 ## Config Management
 
