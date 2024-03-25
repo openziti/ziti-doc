@@ -1,13 +1,12 @@
 ---
-sidebar_position: 20
-sidebar_label: Controller
-title: Controller Config 
+# sidebar_position: 20
+sidebar_label: Cloud
+title: Public Cloud Providers
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 1.0 Configure the controller
 ## 1.1 Create a VM to be used as the Controller
 
 <Tabs
@@ -364,7 +363,7 @@ or
 ssh -i <private_key> <username>@<dns-name>
 ```
 
-Use the DNS name to setup the controller with [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/). 
+Use the DNS name to setup the controller with [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md). 
 
 </TabItem>
 <TabItem value="AWS">
@@ -381,7 +380,7 @@ ssh -i <private_key> ubuntu@<dns-name>
 ```text
 export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
 ```
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
+Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) guide to setup the controller.
 
 </TabItem>
 <TabItem value="GCP">
@@ -393,7 +392,7 @@ Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/
 ```text
 export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
 ```
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
+Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) guide to setup the controller.
 
 </TabItem>
 <TabItem value="DigitalOcean">
@@ -403,7 +402,7 @@ Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/
 ```text
 ssh root@<ip>
 ```
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
 - **export EXTERNAL_DNS="$(curl -s eth0.me)"**
 
@@ -417,7 +416,7 @@ This ensures the Controller setup by the quickstart is advertising the external 
 ssh -i <private_key> ubuntu@<ip>
 ```
 
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
+Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
 - **export EXTERNAL_DNS="$(curl -s eth0.me)"**
 
@@ -435,7 +434,7 @@ ssh -i <private_key> ubuntu@<ip>
 ```text
 export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
 ```
-Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/#express-install) guide to setup the controller.
+Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) guide to setup the controller.
 
 </TabItem>
 </Tabs>
@@ -443,7 +442,7 @@ Then follow the [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/
 ## 1.4 Setup Ziti Administration Console (ZAC) 
 **Optional**
 
-ZAC provides GUI for managing the OpenZiti network. If you prefer UI over CLI to manage network, please following the [ZAC Setup Guide](/docs/learn/quickstarts/zac/) to setup ZAC before going to the next section.
+ZAC provides GUI for managing the OpenZiti network. If you prefer UI over CLI to manage network, please following the [ZAC Setup Guide](/learn/quickstarts/zac/index.md) to setup ZAC before going to the next section.
 
 **Quickfix:**
 
@@ -465,67 +464,4 @@ Install nodejs:
 sudo apt install nodejs
 ```
 
-After the nodejs is installed, following the rest of [ZAC Setup Guide](/docs/learn/quickstarts/zac/#cloning-from-github) to setup ZAC.
-
----
-
-## 1.5 Helpers
-
-Following helpers are needed to complete the guides for router and services.
-
-### 1.5.1 Add Environment Variables Back to the Shell
-Source the environment variables when you log back in the shell
-```text
-source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
-```
-
-If the environment variables are sourced correctly, you can do the following to check:
-```text
-echo $ZITI_HOME
-```
-**Output:**
-```
-/root/.ziti/quickstart/OMSINER
-```
- 
-### 1.5.2 Change Ziti edge admin password
-Find the Current admin edge login password of controller (if you forget the password):
-```text
-grep "export ZITI_PWD" ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
-```
-Or if you have environment variable setup correctly:
-```text
-echo $ZITI_PWD
-```
-To update the passwd
-```text
-ziti edge update authenticator updb -s
-```
-**Important:** if you change the password, you must update the passwd (ZITI_PWD) in the "~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env" file. 
-
-### 1.5.3 Some useful command for the Router
-** login the CLI**
-```text
-zitiLogin
-```
-
-**Verify ER status**
-```
-ziti edge list edge-routers
-```
-
-**Delete the ER**
-```
-ziti edge delete edge-routers $ROUTER_NAME
-ziti edge delete edge-routers $ROUTER_ID
-```
-
-**Update the ER**
-```
-ziti edge update edge-router $ROUTER_NAME [flags]
-ziti edge update edge-router $ROUTER_ID [flags]
-```
-example to update attributes: 
-```
-ziti edge update edge-router $ROUTER_NAME -a private
-```
+After the nodejs is installed, following the rest of [ZAC Setup Guide](/learn/quickstarts/zac/index.md) to setup ZAC.

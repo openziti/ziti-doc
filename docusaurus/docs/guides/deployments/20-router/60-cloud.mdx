@@ -1,18 +1,17 @@
 ---
-sidebar_position: 30
-sidebar_label: Router
-title: Create new router
+sidebar_label: Cloud
+title: Public Cloud Providers
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 2.0 Configure new router using OpenZiti
+## 2.0 Configure a Router
 
-In this section, we are describing how to setup the Edge Router (pub-er) for our [test network](Services#311-network-diagram-1).
+In this section, we are describing how to setup the Edge Router (pub-er) for our [test network](/guides/deployments/40-services.mdx#311-network-diagram-1).
 
 ## 2.1 Create the Edge Router VM 
-Please follow **[Create a VM section](Controller#11-create-a-vm-to-be-used-as-the-controller)** of the Controller Guide to setup a VM to be used as Router. 
+Please follow **Create a VM section** of the controller cloud guide to setup a VM to be used as router.
 
 ## 2.2 Login and Update the repo and apps on VM
 
@@ -46,7 +45,7 @@ ssh -i <private_key> ubuntu@<ip>
 </TabItem>
 <TabItem value="GCP">
 
-- Once the VM is created, we can login through **SSH** button on the VM instances screen. Make sure **ssh is allow** on the firewall before you do this. Alternatively, you can [configure firewall](Router#29-firewall) first.
+- Once the VM is created, we can login through **SSH** button on the VM instances screen. Make sure **ssh is allow** on the firewall before you do this. Alternatively, you can [configure firewall](#29-firewall) first.
 
 ![Diagram](/img/public_cloud/GCP-login1.jpg)
 </TabItem>
@@ -91,7 +90,7 @@ You should have a file **ziti_router_auto_enroll** under the directory.
 
 For detail info on ziti_router_auto_enroll, please checkout the [ziti_router_auto_enroll github page](https://github.com/netfoundry/ziti_router_auto_enroll)
 
-## 2.3 Create and setup Router directly on router VM
+## 2.3 Create and Set Up Router Directly on Router VM
 
 You can setup the router directly on the router VM with one command if you did not block your controller's edge-management port. At this time, the quickstart for setting up controller does not separate edge-management port from edge-client port, so the edge-management port has to be open. You may continue this section if you know your controller's management password, Fabric Port (default 8440) and Management Port (default 8441).
 
@@ -407,7 +406,7 @@ Now the Global DNS servers should be the IP address on your local interface.
 >
 <TabItem value="Azure">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Azure.
+- For any router setup as a local gateway (i.e. local-er in [test network 2](/guides/deployments/40-services.mdx#312-network-diagram-2)), you will need to setup routes in Azure.
 - First you need to create a **Route Table** from Marketplace.
 ![Diagram](/img/public_cloud/RouteTable-Azure1.jpg)
 
@@ -428,7 +427,7 @@ The following routes are required:
 </TabItem>
 <TabItem value="AWS">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes for your VPC.
+- For any router setup as local gateway (i.e. local-er in [test network 2](/guides/deployments/40-services.mdx#312-network-diagram-2)), you will need to setup routes for your VPC.
 - To get to the route table, click on **Subnet** from your Instances screen
 - From the Subnet screen, click on **Router table**
 - Then you can use **Edit routes** to add routes to the table.
@@ -444,7 +443,7 @@ The following routes are required:
 </TabItem>
 <TabItem value="GCP">
 
-For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in GCP.
+For any router setup as local gateway (i.e. local-er in [test network 2](/guides/deployments/40-services.mdx#312-network-diagram-2)), you will need to setup routes in GCP.
 
 - Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
 - Click on **Routes** menu on the left side to bring up the Routes screen
@@ -463,11 +462,11 @@ The following routes are required:
 </TabItem>
 <TabItem value="DigitalOcean">
 
-DigitalOcean does not have route table.  The routes are setup directly on the VM. The example is in the [test section](Services#367-verify-the-connection)
+DigitalOcean does not have route table.  The routes are setup directly on the VM. The example is in the [test section](/guides/deployments/40-services.mdx#367-verify-the-connection)
 </TabItem>
 <TabItem value="OCI">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](Services#312-network-diagram-2)), you will need to setup routes in Oracle Cloud.
+- For any router setup as local gateway (i.e. local-er in [test network 2](/guides/deployments/40-services.mdx#312-network-diagram-2)), you will need to setup routes in Oracle Cloud.
 - To setup your route, choose the default route table from your VCN.
 ![Diagram](/img/public_cloud/RouteTable-OCI1.jpg)
 
@@ -486,7 +485,7 @@ The following routes are required:
 </TabItem>
 <TabItem value="IBM">
 
-IBM Cloud does not have route table.  The routes are setup directly on the VM. The example is in the [test section](Services#367-verify-the-connection)
+IBM Cloud does not have route table.  The routes are setup directly on the VM. The example is in the [test section](/guides/deployments/40-services.mdx#367-verify-the-connection)
 </TabItem>
 </Tabs>
 
