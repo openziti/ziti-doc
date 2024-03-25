@@ -58,7 +58,7 @@ ziti edge create edge-router "AcmeRouter1" \
     --jwt-output-file path/to/token.jwt
 ```
 
-[Learn more about managing routers with the CLI](/reference/deployments/02-router/04-cli-mgmt.md).
+[Learn more about managing routers with the CLI](/guides/deployments/02-router/04-cli-mgmt.md).
 
 The systemd service looks for the token in `/opt/openziti/etc/router/.token` if env var `ZITI_ENROLL_TOKEN` is empty. The file must be readable by root (not others).
 

@@ -51,35 +51,17 @@ const config = {
       '@docusaurus/plugin-client-redirects',
       {
         createRedirects: path => {
-          if ( path.startsWith("/docs/guides/") ) {      // for each existing page
-            return [                                     // return a "from" redirect for each old path
-              path.replace("/docs/guides/","/guides/"),
-              path.replace("/docs/guides/","/operations/"),
-              path.replace("/docs/guides/","/docs/manage/"),
+          if ( path.startsWith("/docs/guides/deployments/") ) {
+            return [
+              path.replace("/docs/guides/deployments/","/docs/reference/deployments/"),
             ];
           }
-          if ( path.startsWith("/docs/reference/deployments/") ) {
-            const opsPaths = []
-            if (!(path === "/docs/reference/deployments/")) {  // do not place a redirect in /operations/index.html or /docs/manage/index.html because there can be only one "from" and it was previously created to /docs/guides/index.html
-              opsPaths.push(
-                path.replace("/docs/reference/deployments/","/operations/"),
-                path.replace("/docs/reference/deployments/","/docs/manage/")
-              )
-            }
-            return opsPaths;
-          }
-          if ( path.startsWith("/docs/reference/developer/api/") ) {
+          if ( path.startsWith("/docs/reference/developer/api/") ) {                       // for each existing page
             return [
-              path.replace("/docs/reference/developer/api/","/api/"),
+              path.replace("/docs/reference/developer/api/","/api/"),                      // return a "from" redirect for each old path
               path.replace("/docs/reference/developer/api/","/api/rest/"),
               path.replace("/docs/reference/developer/api/","/api/rest/edge-apis/")
             ];
-          }
-          if ( path.startsWith("/docs/reference/configuration/") ) {
-            return [path.replace("/docs/reference/configuration/","/operations/configuration/")];
-          }
-          if ( path.startsWith("/docs/guides/") ) {
-            return [path.replace("/docs/guides/","/operations/configuration/")];
           }
           if ( path.startsWith("/docs/learn/quickstarts/") ) {
             return [path.replace("/docs/learn/quickstarts/","/docs/quickstarts/")];
@@ -95,12 +77,6 @@ const config = {
           }
           if ( path.startsWith("/docs/learn/introduction/") ) {
             return [path.replace("/docs/learn/introduction/","/docs/introduction/")];
-          }
-          if ( path.startsWith("/docs/reference/tunnelers/") ) {
-            return [
-              path.replace("/docs/reference/tunnelers/","/docs/learn/core-concepts/clients/tunnelers/"),
-              path.replace("/docs/reference/tunnelers/","/docs/core-concepts/clients/tunnelers/")
-            ];
           }
           if ( path.startsWith("/blog/") ) {
             var regex = /^\/blog\/(.*)\/?$/;
@@ -118,10 +94,6 @@ const config = {
           {
             to: '/docs/learn/core-concepts/security/authentication/external-jwt-signers',
             from: ['/ziti/security/authentication/external-jwt-signers.html'],
-          },
-          {
-            to: '/docs/guides/kubernetes/workload-tunneling/kubernetes-sidecar',
-            from: ['/guides/kubernetes/kubernetes-sidecar-tunnel-quickstart'],
           },
           {
             to: '/docs/learn/core-concepts/identities/enrolling',
@@ -144,16 +116,8 @@ const config = {
             from: ['/api/ziti-sdk-swift', '/api/ziti-c-sdk', '/api/ziti-sdk-csharp'],
           },
           {
-            to: '/docs/reference/developer/sdk/android',
-            from: ['/guides/mobile/android'],
-          },
-          {
             to: '/docs/reference/developer/sdk',
             from: ['/docs/core-concepts/clients/sdks'],
-          },
-          {
-            to: '/docs/reference/glossary',
-            from: ['/glossary', '/glossary/glossary'],
           },
           {
             to: '/docs/learn/introduction/',
@@ -168,16 +132,8 @@ const config = {
             from: ['/docs/introduction/zitiSoftwareArchitecture', '/ziti/software-architecture.html'],
           },
           {
-            to: '/docs/reference/deployments/controller',
-            from: ['/ziti/manage/sample-controller-config.yaml'],
-          },
-          {
             to: '/policies/CODE_OF_CONDUCT',
             from: ['/policies'],
-          },
-          {
-            to: '/docs/reference/deployments/router/deployment',
-            from: ['/docs/manage/edge-router'],
           },
           {
             to: '/docs/learn/quickstarts/services/',
