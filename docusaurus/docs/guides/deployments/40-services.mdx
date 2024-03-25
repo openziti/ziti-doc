@@ -1,14 +1,18 @@
 ---
 sidebar_position: 50
 sidebar_label: Services
-title: Services
+title: Service Topologies
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 3.0 Ziti services
+## 3.0 Ziti services
+
+Ziti services take several forms in deployment environments. In this guide, we will highlight a few examples.
+
 ## 3.1 Introduction
+
 In this guide, we will demonstrate ziti services with the following examples:
 - connection between two identities running ziti-edge-tunnel ([Network Diagram 1](#311-network-diagram-1))
 - connection between ziti-edge-tunnel and a ziti-router (with tunnel enabled)([Network Diagram 2](#312-network-diagram-2))
@@ -32,12 +36,12 @@ In this guide, we will demonstrate ziti services with the following examples:
 ### 3.1.5 Network Diagram 5
 ![Diagram](/img/public_cloud/Services02-5.jpg)
 
-This guide provides both CLI and GUI (ZAC) instructions. To use ZAC, make sure ZAC is installed. If you have not installed ZAC, and would like to use it in this section, please follow the [ZAC Setup Guide](Controller#14-setup-ziti-administration-console-zac) before continue.
+This guide provides both CLI and GUI (ZAC) instructions. To use ZAC, make sure ZAC is installed. If you have not installed ZAC, and would like to use it in this section, please follow the [ZAC Setup Guide](/guides/deployments/10-controller/20-cloud.mdx#14-setup-ziti-administration-console-zac) before continuing.
 
 ## 3.2 Setup VMs for ziti network
 ### 3.2.1 Controller
 #### 3.2.1.1 ZAC
-Please make sure you can login to your network and see the welcome screen before continue.
+Please make sure you can login to your network and see the welcome screen before continuing.
 
 ![Diagram](/img/public_cloud/ZAC4.jpg)
 
@@ -67,8 +71,8 @@ error: error listing https://161.35.108.218:8441/edge/management/v1/config-types
 ### 3.2.2 Router
 We need two routers to complete our example in this guide.
 
-- Public Edge Router (**pub-er**) was setup in the [Router setup section](Router#23-create-and-setup-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](Router#29-firewall) for this router.
-- Local Edge Router (**local-er**). Please follow the [Router guide](Router/) to setup a [Router with edge listener and tunneler](Router/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Resolver](Router#26-fix-the-resolver), [Route Table](Router#27-route-table), [Source and Destination Check](Router#28-source-and-destination-check) and [Firewall](Router#29-firewall).
+- Public Edge Router (**pub-er**) was setup in the [Router setup section](/guides/deployments/20-router/60-cloud.mdx#23-create-and-setup-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](/guides/deployments/20-router/60-cloud.mdx#29-firewall) for this router.
+- Local Edge Router (**local-er**). Please follow the [Router guide](/guides/deployments/20-router/60-cloud.mdx/) to setup a [Router with edge listener and tunneler](/guides/deployments/20-router/60-cloud.mdx/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Resolver](/guides/deployments/20-router/60-cloud.mdx#26-fix-the-resolver), [Route Table](/guides/deployments/20-router/60-cloud.mdx#27-route-table), [Source and Destination Check](/guides/deployments/20-router/60-cloud.mdx#28-source-and-destination-check) and [Firewall](/guides/deployments/20-router/60-cloud.mdx#29-firewall).
 
 #### 3.2.2.1 ZAC
 On the ZAC **ROUTERS** screen, you can check your router and make sure it is created correctly. You can also check the identity associated with the router by clicked on **IDENTITIES**
