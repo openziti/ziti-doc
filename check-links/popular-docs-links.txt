@@ -94,6 +94,7 @@
 /guides/hsm/yubikey
 /guides/kubernetes/kubernetes-sidecar-tunnel-quickstart
 /guides/mobile/android
+/guides/data-flow-explainer
 /operations/configuration/controller
 /operations/configuration/conventions
 /operations/configuration/router
