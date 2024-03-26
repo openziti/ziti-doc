@@ -1,5 +1,4 @@
 ---
-id: deployment
 title: Router Deployment
 ---
 
@@ -68,7 +67,7 @@ The router will enroll with the controller during the first startup. The one-tim
 
 Disable bootstrapping enrollment by setting `ZITI_BOOTSTRAP_ENROLLMENT=false` in `/lib/systemd/system/ziti-router.service` or in the Docker environment.
 
-## Bring Your Own State
+## Migrate a Router Configuration
 
 You can bring your own configuration or enrollment by selectively disabling the respecitve `ZITI_BOOTSTRAP_*` environment variables in `/lib/systemd/system/ziti-router.service` or the Docker environment.
 

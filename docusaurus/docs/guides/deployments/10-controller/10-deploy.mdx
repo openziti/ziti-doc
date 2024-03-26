@@ -1,6 +1,7 @@
 ---
 title: Controller Deployment
 sidebar_label: Controller
+id: deploy
 ---
 
 import CliLogFormats from '../../../_cli-log-levels-and-formats.md'
@@ -53,9 +54,9 @@ You must specify the management password for the default admin user before start
 
 Disable bootstrapping the database by setting `ZITI_BOOTSTRAP_DATABASE=false` in `/lib/systemd/system/ziti-controller.service`.
 
-## Bring Your Own State
+## Migrate a Controller Configuration
 
-You can bring your own PKI, configuration, database, or all three by selectively disabling the respecitve `ZITI_BOOTSTRAP_*` environment variables in `/lib/systemd/system/ziti-controller.service` and running `sudo systemctl daemon-reload` before starting the service.
+You can bring your own PKI, configuration, database, or all three by selectively disabling the respective `ZITI_BOOTSTRAP_*` environment variables in `/lib/systemd/system/ziti-controller.service` and running `sudo systemctl daemon-reload` before starting the service.
 
 You can generate a configuration with the `ziti create config controller` command, optionally mutating the result through command-line options or environment variables. You can also find an annotated sample config file from [the Ziti repo](https://github.com/openziti/ziti/blob/main/etc/ctrl.with.edge.yml).
 
