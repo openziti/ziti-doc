@@ -3,9 +3,7 @@ title: Overview
 sidebar_position: 10
 ---
 
-## What is a Guide?
-
-A guide is like a recipe. It's a type of documentation that is more advanced and solution-focused than other types. A guide is prescriptive and procedural. For example, "How to deploy a Ziti controller with Helm."
+This section contains operations guides. These guides are intended to help you with specific tasks, such as deploying a controller with Helm or as a Linux system service, backing up the controller's database, and migrating controller or router configurations.
 
 ## Add or Request New Guides
 
