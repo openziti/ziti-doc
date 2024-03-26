@@ -88,6 +88,10 @@ const config = {
         },
         redirects: [
           {
+            to: '/docs/learn/core-concepts/data-flow-explainer',
+            from: ['/docs/guides/data-flow-explainer'],
+          },
+          {
             to: '/docs/learn/core-concepts/metrics/overview',
             from: ['/docs/core-concepts/metrics', '/docs/core-concepts/metrics/metric-types'],
           },
