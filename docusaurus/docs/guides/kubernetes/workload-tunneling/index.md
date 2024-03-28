@@ -67,9 +67,9 @@ Any OpenZiti Tunneler can be used to "host" an OpenZiti Service. This hosting be
 
 The OpenZiti Router's built-in tunneler can reverse-proxy cluster services for Ziti clients. This is accomplished by creating the router with tunneler mode enabled, and then installing the OpenZiti Router Helm chart with the tunneler mode set to `host` (the default). For more information, see the [OpenZiti Router](/guides/kubernetes/hosting/kubernetes-router.mdx) page.
 
-#### [Nginx Proxy Module](/guides/securing-apis/aks-api-with-nginx-ziti-module.md)
+#### [Nginx Proxy Module](/guides/deployments/40-services/40-aks-api-with-nginx-ziti-module.mdx)
 
-The OpenZiti Nginx Proxy Module can be used to provide ingress to cluster services. The module binds OpenZiti Services to an Nginx stream context and forward requests to the configured upstreams. Unlike the rest of these solutions, the Nginx module is not a full tunneler. The main difference for writing OpenZiti configurations for the module is that it will honor the upstreams that are set in the Nginx configuration, ignoring the `host.v1` addresses set in the OpenZiti config. For more information, see the [OpenZiti Nginx Proxy Module](/guides/securing-apis/aks-api-with-nginx-ziti-module.md) guide.
+The OpenZiti Nginx Proxy Module can be used to provide ingress to cluster services. The module binds OpenZiti Services to an Nginx stream context and forward requests to the configured upstreams. Unlike the rest of these solutions, the Nginx module is not a full tunneler. The main difference for writing OpenZiti configurations for the module is that it will honor the upstreams that are set in the Nginx configuration, ignoring the `host.v1` addresses set in the OpenZiti config. For more information, see the [Nginx Proxy Module guide](/guides/deployments/40-services/40-aks-api-with-nginx-ziti-module.mdx).
 
 #### [Reverse Proxy Tunnel Pod](./kubernetes-host.mdx)
 
