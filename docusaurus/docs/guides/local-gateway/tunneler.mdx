@@ -502,7 +502,7 @@ root@LocalGWDemoER:~# systemctl status ziti-router
      Memory: 16.5M
         CPU: 435ms
      CGroup: /system.slice/ziti-router.service
-             └─2894 /opt/ziti/ziti router run /opt/ziti/config.yml
+             └─2894 ziti router run /opt/ziti/config.yml
 ```
 
 **expected output:** The status should show "active (running)"
@@ -510,14 +510,14 @@ root@LocalGWDemoER:~# systemctl status ziti-router
 Assign the attribute (#public) to the router. Here is how to do it from **the router**.
 
 ```text
-/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
-/opt/ziti/ziti edge update edge-router DemoPublicER -a public
+ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziti edge update edge-router DemoPublicER -a public
 ```
 
 Verify the router attribute got assigned correctly.
 
 ```buttonless title=Output
-root@LocalGWDemoER:~# /opt/ziti/ziti edge list edge-routers
+root@LocalGWDemoER:~# ziti edge list edge-routers
 ╭────────────┬───────────────────────────┬────────┬───────────────┬──────┬────────────╮
 │ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
 ├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
@@ -549,14 +549,14 @@ There are many approaches on how to create policies to suit your need. For examp
 We will create an edge-router-policy for all identities to connect to public routers. Here is how to do it from the router.
 
 ```text
-/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
-/opt/ziti/ziti edge create edge-router-policy demoEdgeRouterPolicy --edge-router-roles '#public' --identity-roles '#all'
+ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziti edge create edge-router-policy demoEdgeRouterPolicy --edge-router-roles '#public' --identity-roles '#all'
 ```
 
 Check to make sure the policy was created correctly.
 
 ```buttonless title=Output
-root@LocalGWDemoER:~# /opt/ziti/ziti edge list edge-router-policies
+root@LocalGWDemoER:~# ziti edge list edge-router-policies
 ╭────────────────────────┬───────────────────────────────┬────────────────────────────┬────────────────────────────╮
 │ ID                     │ NAME                          │ EDGE ROUTER ROLES          │ IDENTITY ROLES             │
 ├────────────────────────┼───────────────────────────────┼────────────────────────────┼────────────────────────────┤
