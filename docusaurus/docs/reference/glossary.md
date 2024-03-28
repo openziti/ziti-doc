@@ -35,7 +35,7 @@ An initiating router is the router which initiates a request for a Session on be
 
 See "initiating router" and "terminating router" above. The initiating endpoint is the endpoint responsible for requesting connectivity to a service. The terminating endpoint is the endpoint that provides the service.
 
-## [Path](/guides/data-flow-explainer.md)
+## [Path](/learn/core-concepts/data-flow-explainer.md)
 
 The path is the set of Ziti Routers traversed by a Session from an initiating router to a terminating router. Ziti aggressively optimizes the path for throughput and reliability, and so it may change during the Session.
 
