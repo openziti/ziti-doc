@@ -298,7 +298,7 @@ sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgm
 ## 2.5 Auto start the router
 After enroll the router, a systemd service file is automatically created and enabled. To check the status of the service file, issue the following command:
 ```text
-systemctl status ziti-router
+systemctl status ziti-router.service
 ```
 **Output**
 ```
@@ -310,7 +310,7 @@ systemctl status ziti-router
      Memory: 16.5M
         CPU: 222ms
      CGroup: /system.slice/ziti-router.service
-             └─18381 /opt/ziti/ziti router run /opt/ziti/config.yaml
+             └─18381 ziti router run /opt/ziti/config.yaml
 ```
 If the status shows **active (running)**, then the setup finished correctly.
 

@@ -3,7 +3,7 @@ title: Overview
 sidebar_position: 10
 ---
 
-This section contains operations guides. These guides are intended to help you with specific tasks, such as deploying a controller with Helm or as a Linux system service, backing up the controller's database, and migrating controller or router configurations.
+This section contains operational guidance for specific tasks such as deploying a controller with Helm or as a Linux system service, backing up the controller's database, and migrating controller or router configurations.
 
 ## Add or Request New Guides
 

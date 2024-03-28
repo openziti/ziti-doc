@@ -1,0 +1,64 @@
+---
+title: Console Deployment
+---
+
+This article is about deploying the Ziti console as a Linux system service or Docker container. [Kubernetes is covered separately](/guides/kubernetes/hosting/kubernetes-console.mdx).
+
+The Ziti console (ZAC) provides a web-based user interface for managing Ziti networks. The console can be built to run as a single-page application that communicates with the Ziti controller via REST requests originating in the browser, or as a standalone Node.js server that initiates REST requests to the Ziti controller on behalf of the user.
+
+## Run with Node.js
+
+Clone the Git repository and follow [the steps to run the standalone Node.js web server](https://github.com/openziti/ziti-console?tab=readme-ov-file#readme).
+
+Upvote [this GitHub issue](https://github.com/openziti/ziti-console/issues/280) if you would like to see a more streamlined installation process for the console in Linux, i.e., a Debian package and RPM.
+
+## Run in Docker
+
+```text
+docker run --name ziti-console --publish "1408:1408" openziti/zac
+```
+
+## Settings
+
+You may pre-populate the URL of the Ziti controller's management API by creating a `settings.json` file. The application looks for this file in the current working directory or a path relative to the working directory specified with the `SETTINGS` environment variable.
+
+```text
+{
+    "edgeControllers": [
+        {
+            "default": true,
+            "name": "Mega Ziti",
+            "url": "https://megaziti.example.com:1280"
+        }
+    ]
+}
+```
+
+Link to [settings template in the repository](https://github.com/openziti/ziti-console/blob/main/projects/ziti-console-lib/src/lib/assets/data/settings.json).
+
+The Docker image's working directory is `/usr/src/app`, so the `settings.json` file may be mounted and referenced with the environment variable.
+
+```text
+docker run \
+    --rm --name ziti-console --publish 1408:1408 \
+    --volume /tmp/ziti-console-settings.json:/usr/src/ziti/settings.json \
+    --env SETTINGS=../ziti \
+        openziti/zac
+```
+
+```buttonless title=Output
+Running: server.js node-api
+{
+    edgeControllers: [
+        {
+            default: true,
+            name: 'Mega Ziti',
+            url: 'https://megaziti.example.com:1280'
+        }
+    ]
+}
+Ziti Admin Console is now listening on port 1408
+```
+
+## Server TLS
+

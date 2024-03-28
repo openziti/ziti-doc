@@ -25,7 +25,7 @@ For the demonstration, we will set up the network like below:
 - There are two Ziti-Edge-Routers (**local-router** and **remote-router**) as LAN gateways. 
 - The Windows machine (**Windows Client**) is in the same subnet (172.16.31.0/24) as Router (**local-router**).
 - The Ubuntu 22.04 server (**Ubuntu Server**) is in the same subnet (172.16.240.0/24) as Router (**remote-router**).
-- The data (ssh) will be passed between the Windows Client and the Ubuntu Server.
+- The data (SSH) will be passed between the Windows Client and the Ubuntu Server.
 
 ## 1.2 Prerequisite
 
@@ -37,8 +37,8 @@ Complete the following steps first.
 - Get the Ziti Controller Management Port: On the controller, issue this command **echo $ZITI_CTRL_EDGE_ADVERTISED_PORT**
 - Get the Ziti Controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
 - Created two target VMs to host *routers*. The VMs should be running on **Ubuntu 22.04**.
-- Created one *windows client* already. Suggested windows version Windows 10 or Windows 11. Windows servers should work fine as well.
-- Created one *ubuntu server* already. Or any linux server capable of accepting ssh and http connection.
+- Created one *Windows client* already. Suggested Windows version Windows 10 or Windows 11. Windows servers should work fine as well.
+- Created one *ubuntu server* already. Or any Linux server capable of accepting SSH and http connection.
 
 ## 2.0 Set Up Routers
 
@@ -46,7 +46,7 @@ Complete the following steps first.
 
 ### 2.1.1 Retrieve auto_enroll script and gather setup info
 
-**ssh** into your router VM (**local-router**). 
+**SSH** into your router VM (**local-router**). 
 
 Retrieve **ziti_router_auto_enroll** to set up your router.
 
@@ -169,16 +169,16 @@ Current DNS Server: 8.8.8.8
 #### 2.1.3.3 Check Router and Identity
 
 ```text
-/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
-/opt/ziti/ziti edge list edge-routers
-/opt/ziti/ziti edge list identities
+ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziti edge list edge-routers
+ziti edge list identities
 ```
 
 ```buttonless title=Output: a router "local-router" after "list edge-router" and an identity "local-router" after "list identities"
-ziggy@local-gw:~$ /opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziggy@local-gw:~$ ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
 Token: 0b3a8cc6-dc76-4a94-a502-04380586b49a
 Saving identity 'default' to /home/ziggy/.config/ziti/ziti-cli.json
-ziggy@local-gw:~$ /opt/ziti/ziti edge list edge-routers
+ziggy@local-gw:~$ ziti edge list edge-routers
 ╭────────────┬───────────────────────────┬────────┬───────────────┬──────┬────────────╮
 │ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
 ├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
@@ -186,7 +186,7 @@ ziggy@local-gw:~$ /opt/ziti/ziti edge list edge-routers
 │ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ true   │ true          │    0 │ public     │
 ╰────────────┴───────────────────────────┴────────┴───────────────┴──────┴────────────╯
 results: 1-2 of 2
-ziggy@local-gw:~$ /opt/ziti/ziti edge list identities
+ziggy@local-gw:~$ ziti edge list identities
 ╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
 │ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
 ├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
@@ -215,13 +215,13 @@ We want to add attribute "clients" to the identity associated with the edge rout
 ***You do not need to login again if your token has not expired yet***
 
 ```text
-/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
-/opt/ziti/ziti edge update identity local-router -a clients
+ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziti edge update identity local-router -a clients
 ```
 
 ```buttonless title=Output: You should see "clients" show up at "local-router" attribute when you list identities.
-ziggy@local-gw:~$ /opt/ziti/ziti edge update identity local-router -a clients
-ziggy@local-gw:~$ /opt/ziti/ziti edge list identities
+ziggy@local-gw:~$ ziti edge update identity local-router -a clients
+ziggy@local-gw:~$ ziti edge list identities
 ╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
 │ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
 ├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
@@ -236,7 +236,7 @@ results: 1-3 of 3
 
 ### 2.2.1 Retrieve auto_enroll script and gather setup info
 
-**ssh** into your router VM (**remote-router**). 
+**SSH** into your router VM (**remote-router**). 
 
 Retrieve **ziti_router_auto_enroll** to set up your router automatically.
 
@@ -301,13 +301,13 @@ resolvectl
 #### 2.2.3.3 Check Router and Identity
 
 ```text
-/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
-/opt/ziti/ziti edge list edge-routers
-/opt/ziti/ziti edge list identities
+ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziti edge list edge-routers
+ziti edge list identities
 ```
 
 ```buttonless title=Output
-ziggy@remote-router:~$ /opt/ziti/ziti edge list edge-routers
+ziggy@remote-router:~$ ziti edge list edge-routers
 ╭────────────┬───────────────────────────┬────────┬───────────────┬──────┬────────────╮
 │ ID         │ NAME                      │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
 ├────────────┼───────────────────────────┼────────┼───────────────┼──────┼────────────┤
@@ -316,7 +316,7 @@ ziggy@remote-router:~$ /opt/ziti/ziti edge list edge-routers
 │ xCW0lSWpcn │ LocalGWDemoNC-edge-router │ true   │ true          │    0 │ public     │
 ╰────────────┴───────────────────────────┴────────┴───────────────┴──────┴────────────╯
 results: 1-3 of 3
-ziggy@remote-router:~$ /opt/ziti/ziti edge list identities
+ziggy@remote-router:~$ ziti edge list identities
 ╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
 │ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
 ├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
@@ -346,12 +346,12 @@ We want to add attribute "hosts" to the identity associated with the edge router
 **You do not need to login again if your token has not expired yet**
 
 ```text
-/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
-/opt/ziti/ziti edge update identity remote-router -a hosts
+ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziti edge update identity remote-router -a hosts
 ```
 
 ```buttonless title=Check Identity for modified attribute
-ziggy@local-gw:~$ /opt/ziti/ziti edge list identities
+ziggy@local-gw:~$ ziti edge list identities
 ╭────────────┬───────────────────────────┬────────┬────────────┬─────────────╮
 │ ID         │ NAME                      │ TYPE   │ ATTRIBUTES │ AUTH-POLICY │
 ├────────────┼───────────────────────────┼────────┼────────────┼─────────────┤
@@ -367,7 +367,7 @@ results: 1-4 of 4
 
 ## 3.1 Ubuntu Server
 
-The Ubuntu Server needs to support **ssh** (port 22) and **http** (port 8000) for our demo.
+The Ubuntu Server needs to support **SSH** (port 22) and **http** (port 8000) for our demo.
 
 Make sure these ports are open on the firewall.
 
@@ -386,7 +386,7 @@ python3 -m http.server
 
 ## 3.2 Windows Client
 
-There are two changes we need to make on the windows side.
+There are two changes we need to make on the Windows side.
 
 The first one, we need to change the configuration of the preferred DNS to point to our **local-router** (172.16.31.173).
 
@@ -415,8 +415,8 @@ The service configuration can be done on either the local-router or the remote-r
 This config is used for local side connection. We are setting up intercept on dns name "mysimpleservice.ziti"
 
 ```text
-/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
-/opt/ziti/ziti edge create config ssh-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["mysimpleservice.ziti"], "portRanges": [{"low": 22, "high": 22}]}'
+ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziti edge create config ssh-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["mysimpleservice.ziti"], "portRanges": [{"low": 22, "high": 22}]}'
 ```
 
 ## 4.2 Create a host.v1 config
@@ -424,13 +424,13 @@ This config is used for local side connection. We are setting up intercept on dn
 This config is used for remote side connection. We are setting up the address the remote server can reach. In this demo, We are dropping the traffic off at "172.16.240.129"
 
 ```text
-/opt/ziti/ziti edge create config ssh-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":22}'
+ziti edge create config ssh-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":22}'
 ```
 
 If the config command were successfully, you will see two configs by using "list configs" command:
 
 ```buttonless
-ziggy@local-gw:~$ /opt/ziti/ziti edge list configs
+ziggy@local-gw:~$ ziti edge list configs
 ╭────────────────────────┬───────────────────────┬──────────────╮
 │ ID                     │ NAME                  │ CONFIG TYPE  │
 ├────────────────────────┼───────────────────────┼──────────────┤
@@ -440,18 +440,18 @@ ziggy@local-gw:~$ /opt/ziti/ziti edge list configs
 results: 1-2 of 2
 ```
 
-## 4.3 Create ssh Service
+## 4.3 Create SSH Service
 
 Now we need to put these two configs into a service. We going to name the service "ssh" and assign an attribute "rtrhosted"
 
 ```text
-/opt/ziti/ziti edge create service ssh -c ssh-intercept-config,ssh-host-config -a rtrhosted
+ziti edge create service "ssh" -c ssh-intercept-config,ssh-host-config -a rtrhosted
 ```
 
 **Check Service** by using "list service"
 
 ```buttonless
-ziggy@local-gw:~$ /opt/ziti/ziti edge list services
+ziggy@local-gw:~$ ziti edge list services
 ╭────────────────────────┬──────┬────────────┬─────────────────────┬────────────╮
 │ ID                     │ NAME │ ENCRYPTION │ TERMINATOR STRATEGY │ ATTRIBUTES │
 │                        │      │  REQUIRED  │                     │            │
@@ -468,13 +468,13 @@ This step is **optional** if you used quickstart. The service-edge-router-policy
 But in case you need to add a policy, here is the command to add the service tag we created (rtrhosted) to all routers
 
 ```text
-/opt/ziti/ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#rtrhosted' --semantic 'AnyOf'
+ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
 
 Check your service-edge-router-policy, and make sure the policy name "ssh-serp" is created. The automatically created one is called "allSvcAllRouters".
 
 ```
-ziggy@local-gw:~$ /opt/ziti/ziti edge list service-edge-router-policies
+ziggy@local-gw:~$ ziti edge list service-edge-router-policies
 ╭────────────────────────┬──────────────────┬───────────────┬───────────────────╮
 │ ID                     │ NAME             │ SERVICE ROLES │ EDGE ROUTER ROLES │
 ├────────────────────────┼──────────────────┼───────────────┼───────────────────┤
@@ -489,7 +489,7 @@ results: 1-2 of 2
 We need to specify which identity (in our case, **#hosts**) is going to host the service by setting up a bind service policy
 
 ```text
-/opt/ziti/ziti edge create service-policy ssh-bind Bind --identity-roles "#hosts" --service-roles '#rtrhosted' --semantic 'AnyOf'
+ziti edge create service-policy ssh-bind Bind --identity-roles "#hosts" --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
 
 ## 4.6 Create Dial policies
@@ -497,13 +497,13 @@ We need to specify which identity (in our case, **#hosts**) is going to host the
 We also need to specify which identity (in this case, **#clients**) is going to intercept the service by setting up a dial service policy
 
 ```text
-/opt/ziti/ziti edge create service-policy ssh-dial Dial --identity-roles "#clients" --service-roles '#rtrhosted' --semantic 'AnyOf'
+ziti edge create service-policy ssh-dial Dial --identity-roles "#clients" --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
 
 If both policies are set up correctly, you should see two service-policies.
 
 ```buttonless
-ziggy@local-gw:~$ /opt/ziti/ziti edge list service-policies
+ziggy@local-gw:~$ ziti edge list service-policies
 ╭────────────────────────┬──────────┬──────────┬───────────────┬────────────────┬─────────────────────╮
 │ ID                     │ NAME     │ SEMANTIC │ SERVICE ROLES │ IDENTITY ROLES │ POSTURE CHECK ROLES │
 ├────────────────────────┼──────────┼──────────┼───────────────┼────────────────┼─────────────────────┤
@@ -533,8 +533,8 @@ The service configuration can be done on either the local-router or the remote-r
 Create intercept config on IP: 172.16.240.129 and port **80** for http traffic.
 
 ```text
-/opt/ziti/ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
-/opt/ziti/ziti edge create config http-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["172.16.240.129"], "portRanges": [{"low": 80, "high": 80}]}'
+ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
+ziti edge create config http-intercept-config intercept.v1 '{"protocols": ["tcp"], "addresses": ["172.16.240.129"], "portRanges": [{"low": 80, "high": 80}]}'
 ```
 
 ## 5.2 Create a host.v1 config
@@ -542,13 +542,13 @@ Create intercept config on IP: 172.16.240.129 and port **80** for http traffic.
 Create Host config on IP: 172.16.240.129 and port **8000**. As you can see, we have redirected traffic intended for port 80 (from client) to port 8000 (on the host).
 
 ```text
-/opt/ziti/ziti edge create config http-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":8000}'
+ziti edge create config http-host-config host.v1 '{"address":"172.16.240.129", "protocol":"tcp", "port":8000}'
 ```
 
 If the command finished successfully, you will see two more configs created, their names start with "http":
 
 ```buttonless
-ziggy@local-gw:~$ /opt/ziti/ziti edge list configs
+ziggy@local-gw:~$ ziti edge list configs
 ╭────────────────────────┬───────────────────────┬──────────────╮
 │ ID                     │ NAME                  │ CONFIG TYPE  │
 ├────────────────────────┼───────────────────────┼──────────────┤
@@ -565,11 +565,11 @@ results: 1-4 of 4
 Put these two configs into a service. We going to name the service "http" and assign an attribute "rtrhosted"
 
 ```text
-/opt/ziti/ziti edge create service http -c http-intercept-config,http-host-config -a rtrhosted
+ziti edge create service http -c http-intercept-config,http-host-config -a rtrhosted
 ```
 
 ```buttonless title=Check Service
-ziggy@local-gw:~$ /opt/ziti/ziti edge list services
+ziggy@local-gw:~$ ziti edge list services
 ╭────────────────────────┬──────┬────────────┬─────────────────────┬────────────╮
 │ ID                     │ NAME │ ENCRYPTION │ TERMINATOR STRATEGY │ ATTRIBUTES │
 │                        │      │  REQUIRED  │                     │            │
@@ -583,7 +583,7 @@ results: 1-2 of 2
 
 ## 5.4 Service-Edge-Router-Policy
 
-Since we used same attribute for http service as the attribute for ssh service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
+Since we used same attribute for http service as the attribute for SSH service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
 
 ## 5.5 Bind and Dial policies
 
