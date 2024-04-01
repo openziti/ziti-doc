@@ -1,9 +1,7 @@
 ---
-sidebar_position: 3
 id: hsmIndex
+title: Hardware Security Modules
 ---
-
-# Hardware Security Modules (HSM) - PKCS11
 
 A hardware security module (HSM) is a physical piece of equipment which is designed specifically to protect cryptographic keys
 and aid with cryptographical processing. HSMs are designed to manage sensitive information and are generally able to be

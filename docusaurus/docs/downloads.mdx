@@ -101,32 +101,6 @@ curl -sS https://get.openziti.io/install.bash \
 
 <br/>
 
-### Install the `ziti-controller.service`
-
-This package depends on the `openziti` package that provides the `ziti` CLI. Follow [the deployment reference](/guides/deployments/10-controller/10-deploy.mdx) to configure the controller before starting the service.
-
-<br/>
-
-```text
-curl -sS https://get.openziti.io/install.bash \
-| sudo bash -s openziti-controller
-```
-
-<br/>
-
-### Install the `ziti-router.service`
-
-This package depends on the `openziti` package that provides the `ziti` CLI. Follow [the deployment reference](/guides/deployments/20-router/10-deploy.mdx) to configure the router before starting the service.
-
-<br/>
-
-```text
-curl -sS https://get.openziti.io/install.bash \
-| sudo bash -s openziti-router
-```
-
-<br/>
-
 ### Install the `ziti-edge-tunnel.service`
 
 <br/>
@@ -151,32 +125,6 @@ Audit the script to ensure it is suitable to execute on your system as root.
 ```text
 curl -sS https://get.openziti.io/install.bash \
 | sudo bash -s openziti
-```
-
-<br/>
-
-### Install the `ziti-controller.service`
-
-This package depends on the `openziti` package that provides the `ziti` CLI. Follow [the deployment reference](/guides/deployments/10-controller/10-deploy.mdx) to configure the controller before starting the service.
-
-<br/>
-
-```text
-curl -sS https://get.openziti.io/install.bash \
-| sudo bash -s openziti-controller
-```
-
-<br/>
-
-### Install the `ziti-router.service`
-
-This package depends on the `openziti` package that provides the `ziti` CLI. Follow [the deployment reference](/guides/deployments/20-router/10-deploy.mdx) to configure the router before starting the service.
-
-<br/>
-
-```text
-curl -sS https://get.openziti.io/install.bash \
-| sudo bash -s openziti-router
 ```
 
 <br/>
