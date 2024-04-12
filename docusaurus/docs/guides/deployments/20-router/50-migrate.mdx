@@ -40,8 +40,7 @@ sudo mv -v /var/lib/ziti-router/{quickstart-router.yaml,config.yml}
 sudo sed -Ei "s|$PWD|/var/lib/ziti-router|g" /var/lib/ziti-router/config.yml
 
 # disable bootstrapping
-sudo sed -Ei 's|(ZITI_BOOTSTRAP_.*)=.*|\1=false|g' /lib/systemd/system/ziti-router.service
-sudo systemctl daemon-reload
+sudo sed -Ei 's|(ZITI_BOOTSTRAP_.*)=.*|\1=false|g' /opt/openziti/etc/router/service.env
 
 # run only the controller in the background using the quickstart state so the enrolled router can check in
 nohup ziti controller run ctrl.yaml &

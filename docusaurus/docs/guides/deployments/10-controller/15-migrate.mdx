@@ -40,8 +40,7 @@ sudo cp -v ./ctrl.yaml /var/lib/ziti-controller/config.yml
 sudo sed -Ei "s|$PWD|/var/lib/ziti-controller|g" /var/lib/ziti-controller/config.yml
 
 # disable bootstrapping
-sudo sed -Ei 's|(ZITI_BOOTSTRAP_.*)=.*|\1=false|g' /lib/systemd/system/ziti-controller.service
-sudo systemctl daemon-reload
+sudo sed -Ei 's|(ZITI_BOOTSTRAP_.*)=.*|\1=false|g' /opt/openziti/etc/controller/service.env
 
 # start the service
 sudo systemctl enable --now ziti-controller.service

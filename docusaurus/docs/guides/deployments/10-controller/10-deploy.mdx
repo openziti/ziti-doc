@@ -19,7 +19,7 @@ curl -sS https://get.openziti.io/install.bash \
 
 You must provide these two answers to start the service.
 
-1. In `/opt/openziti/etc/controller/env` (the systemd env file for the controller service)
+1. In `/opt/openziti/etc/controller/bootstrap.env` (the answer file for bootstrapping the controller)
     1. Set `ZITI_CTRL_ADVERTISED_ADDRESS` to the FQDN of the controller
     1. Temporarily set `ZITI_PWD` to the desired management password for user `admin`. You may delete this password after bootstrapping for security.
 
@@ -49,7 +49,7 @@ The controller service will bootstrap a database during the first startup.
 
 The controller requires a BoltDB database to store its state. The Linux system service will initialize a database with a default admin password during the first startup, unless one already exists.
 
-You must specify the management password for the default admin user before starting the service. This is done by setting `ZITI_PWD` in `/opt/openziti/etc/controller/env` or one of `LoadCredential` or `SetCredential` in `/lib/systemd/system/ziti-controller.service`. You may delete the password after bootstrapping for security.
+You must specify the management password for the default admin user before starting the service. This is done by setting `ZITI_PWD` in `/opt/openziti/etc/controller/bootstrap.env` or `LoadCredential` in `/lib/systemd/system/ziti-controller.service`. You may delete the password after bootstrapping for security.
 
 Disable bootstrapping the database by setting `ZITI_BOOTSTRAP_DATABASE=false` in `/lib/systemd/system/ziti-controller.service`.
 
@@ -57,7 +57,7 @@ Disable bootstrapping the database by setting `ZITI_BOOTSTRAP_DATABASE=false` in
 
 The controller listens on a single configurable TCP port: `1280/tcp`. This TLS server employs SNI to select the correct certificate for presentation when there are multiple certificates. Ziti clients use ALPN to negotiate a connection to the router control plane (`ziti-ctrl`) or the REST APIs (`h2`, `http/1.1`).
 
-You may set `ZITI_CTRL_ADVERTISED_PORT` in `/opt/openziti/etc/controller/env` to bootstrap with a different port.
+You may set `ZITI_CTRL_ADVERTISED_PORT` in `/opt/openziti/etc/controller/bootstrap.env` to bootstrap with a different port.
 
 Clients "learn" the controller's address and port when they enroll, so it is necessary to re-enroll or re-create the client if the controller's address or port changes.
 
