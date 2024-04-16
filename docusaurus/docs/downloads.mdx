@@ -8,7 +8,7 @@ import OsTabs from '@theme/OsTabs';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<!-- the 'value' must match the osName detected by the OsTabs component -->
+{/* the 'value' must match the osName detected by the OsTabs component */}
 
 <OsTabs
   queryString="os"
@@ -66,14 +66,14 @@ This app provides the Ziti tunneler background service (`ziti-edge-tunnel`) and 
 
 </TabItem>
 
-<!-- begin super-tab Linux -->
+{/* begin super-tab Linux */}
 <TabItem value="Linux">
 
 Install the `ziti` command or the `ziti-edge-tunnel` tunneler daemon as a package or a binary.
 
 <br/>
 
-<!-- begin Linux sub-tabs -->
+{/* begin Linux sub-tabs */}
 <Tabs
     defaultValue="LinuxDeb"
     values={[
@@ -83,7 +83,7 @@ Install the `ziti` command or the `ziti-edge-tunnel` tunneler daemon as a packag
     ]}
 >
 
-<!-- begin sub-tab deb -->
+{/* begin sub-tab deb */}
 <TabItem value="LinuxDeb">
 
 ### Install the `ziti` Command from the `openziti` Package
@@ -107,11 +107,11 @@ Follow the Debian instructions [to install the `ziti-edge-tunnel` DEB](/referenc
 
 <br/>
 
-<!-- end sub-tab deb -->
+{/* end sub-tab deb */}
 
 </TabItem>
 
-<!-- begin sub-tab rpm -->
+{/* begin sub-tab rpm */}
 <TabItem value="LinuxRpm">
 
 ### Install the `ziti` Command from the `openziti` Package
@@ -135,7 +135,7 @@ Follow the Red Hat instructions to [install the `ziti-edge-tunnel` RPM](/referen
 
 <br/>
 
-<!-- end sub-tab rpm -->
+{/* end sub-tab rpm */}
 </TabItem>
 
 <TabItem value="LinuxOther">
@@ -152,15 +152,15 @@ Download [the latest binary from GitHub](https://github.com/openziti/ziti-tunnel
 
 <br/>
 
-<!-- end LinuxOther sub-tab -->
+{/* end LinuxOther sub-tab */}
 
 </TabItem>
 
-<!-- end Linux sub-tabs -->
+{/* end Linux sub-tabs */}
 
 </Tabs>
 
-<!-- end super-tab Linux -->
+{/* end super-tab Linux */}
 </TabItem>
 
 <TabItem value="Docker">

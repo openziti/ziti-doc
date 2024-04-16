@@ -31,11 +31,13 @@ Put the schema in a file named `example-config-type.json`, and you can create a 
 
 You can now create a configuration of this type
 
-    $ ziti edge create config ssh-client my-app \
-        '{  
-           "hostname" : "ssh.company.com", 
-           "port" : 22 
-         }'
+```text
+$ ziti edge create config ssh-client my-app \
+    '{  
+       "hostname" : "ssh.company.com", 
+       "port" : 22 
+     }'
+```
 
 Finally, you can reference this when creating a service.
 
@@ -43,11 +45,13 @@ Finally, you can reference this when creating a service.
 
 If a particular site wanted SSH on a different port, you could create a different configuration
 
-    $ ziti edge create config scranton-office-ssh-client my-app \
-        '{ 
-           "hostname" : "ssh.company.com", 
-           "port" : 2222 
-         }'
+```text
+$ ziti edge create config scranton-office-ssh-client my-app \
+    '{ 
+       "hostname" : "ssh.company.com", 
+       "port" : 2222 
+     }'
+```
 
 The identity corresponding to a tunneler at that site could then be configured to use that configuration.
 
@@ -61,7 +65,9 @@ The identity corresponding to a tunneler at that site could then be configured t
 
 Overrides can be removed as well, if they are no longer needed.
 
-    $ ziti edge update identity-configs scranton-office ssh scranton-office-ssh-client --remove
+```text
+$ ziti edge update identity-configs scranton-office ssh scranton-office-ssh-client --remove
 
-    $ ziti edge list identity service-configs scranton-office
-    results: none
+$ ziti edge list identity service-configs scranton-office
+results: none
+```

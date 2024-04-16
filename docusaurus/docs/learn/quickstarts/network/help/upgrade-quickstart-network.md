@@ -173,7 +173,7 @@ the files if desired.
 </TabItem>
 </Tabs>
 
-## Upgrading Versions <=`v0.28.2`
+## Upgrading Versions Before `v0.28.2`
 
 If your old Ziti network was `v0.28.3` or later, this section can be ignored
 
@@ -181,7 +181,7 @@ A major change to environment variables names was performed on `v0.28.3` so, if 
 then you may optionally run the following commands to update your env file to use the updated environment variable
 names.
 
-```
+```text
 source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"
 performMigration
 ```

@@ -23,39 +23,41 @@ values out of the given files. You can certainly do the same manually (without `
 
 In your bash prompt copy and paste these two functions:
 
-    function yaml2json()
-    {
-        ruby -ryaml -rjson -e 'puts JSON.pretty_generate(YAML.load(ARGF))' $*
-    }
+```text
+function yaml2json()
+{
+    ruby -ryaml -rjson -e 'puts JSON.pretty_generate(YAML.load(ARGF))' $*
+}
 
-    function verifyCertAgainstPool()
-    {
-        if [[ "" == "$1" ]]
-        then
-            echo "Usage: verifyCertAgainstPool [cert to test] [ca pool to use]"
-            return 1
-        fi
-        
-        if [[ "" == "$2" ]]
-        then
-            echo "Usage: verifyCertAgainstPool [cert to test] [ca pool to use]"
-            return 1
-        fi
+function verifyCertAgainstPool()
+{
+    if [[ "" == "$1" ]]
+    then
+        echo "Usage: verifyCertAgainstPool [cert to test] [ca pool to use]"
+        return 1
+    fi
+    
+    if [[ "" == "$2" ]]
+    then
+        echo "Usage: verifyCertAgainstPool [cert to test] [ca pool to use]"
+        return 1
+    fi
 
-        echo "    Verifying that this certificate:"
-        echo "        - $1"
-        echo "    is valid for this ca pool:"
-        echo "        - $2"
+    echo "    Verifying that this certificate:"
+    echo "        - $1"
+    echo "    is valid for this ca pool:"
+    echo "        - $2"
+    echo ""
+    openssl verify -partial_chain -CAfile "$2" "$1"
+    if [ $? -eq 0 ]; then
         echo ""
-        openssl verify -partial_chain -CAfile "$2" "$1"
-        if [ $? -eq 0 ]; then
-            echo ""
-            echo "============      SUCCESS!      ============"
-        else
-            echo ""
-            echo "============ FAILED TO VALIDATE ============"
-        fi
-    }
+        echo "============      SUCCESS!      ============"
+    else
+        echo ""
+        echo "============ FAILED TO VALIDATE ============"
+    fi
+}
+```
 
 ### Validating the PKI
 
