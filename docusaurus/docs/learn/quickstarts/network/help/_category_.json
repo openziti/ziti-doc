@@ -2,6 +2,9 @@
   "label": "Help",
   "position": 80,
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "title": "Network Quickstart Help",
+    "description": "Help topics for the Network Quickstarts",
+    "slug": "/category/network-quickstart-help"
   }
 }
