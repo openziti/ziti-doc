@@ -1,5 +1,4 @@
 ---
-# sidebar_position: 20
 sidebar_label: Cloud
 title: Public Cloud Providers
 ---
@@ -40,10 +39,10 @@ On the **Create a virtual machine** screen.
 
 ![Diagram](/img/public_cloud/Create-Azure2.jpg)
 
-- Next, choose **Authentication type** to login to the VM. (We highly **discourage** login to the VM using Password). 
-- Enter an username (**remember the username, you will need it to login to the VM**), or leave the default user **azureuser**
-- Choose your ssh key
-- For **inbound ports**, select the ssh. You can add extra port based on your OpenZiti setup. 
+- Next, choose **Authentication type** to log in to the VM. **Logging in with a password is insecure**.
+- Enter a username (**remember the username, you will need it to log in to the VM**), or leave the default user **azureuser**
+- Choose your SSH key
+- For **inbound ports**, select the ssh. You can add an extra port based on your OpenZiti setup. 
 - You can leave everything default.
 Press **Review + create**
 ![Diagram](/img/public_cloud/Create-Azure4.jpg)
@@ -51,7 +50,7 @@ Press **Review + create**
 - After the Validation passed. Press **Create** to create VM.
 ![Diagram](/img/public_cloud/Create-Azure5.jpg)
 
-- **Important:** If you are creating the network controller, you need to associate an DNS name to the public IP of your VM.
+- **Important:** If you are creating the network controller, you need to associate a DNS name to the public IP of your VM.
 - You can do this from "Virtual machine" page.
 ![Diagram](/img/public_cloud/Create-Azure6.jpg)
 
@@ -84,14 +83,13 @@ Press **Review + create**
 
 - Click on ** Create security group** to allow traffic into your VM.
 - Name the security group.
-- Create the Firewall rule based on controller and ER. 
-- For controller. allow the TCP port 8440-8443 (default ports from quickstart) along with SSH. 
-- For ER we have to allow TCP port 80, 443 and SSH,
+- Create the Firewall rule based on the ports you configured for the controller.
+- Allow the same TCP port you configured (e.g., 1280) for the controller along with SSH.
 
-**SG For the controller.**
+**Security Group For the controller.**
 ![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
 
-**SG for the ER**
+**Security Group for the Ziti Router**
 ![Diagram](/img/public_cloud/Firewall-AWS-ER.jpg)
 
 - Under **Configure storage** section, choose at least **20** GiB storage space.
@@ -120,7 +118,7 @@ Now click on **Launch instance**
 ![Diagram](/img/public_cloud/Create-GCP5.jpg)
 
 - Open **Advanced Options**, and then open **Networking**
-- **Highly recommended:** assign a Network tags.  This will help you configuring the firewalls later.
+- **Highly recommended:** assign a Network tags.  This will help you to configure the firewall later.
 - **For local GW VM**, **Enable** IP forwarding at this time. You will not be able to change this setting from the console after the VM is created.
 ![Diagram](/img/public_cloud/Create-GCP6.jpg)
 
@@ -132,7 +130,7 @@ Now click on **Launch instance**
 </TabItem>
 <TabItem value="DigitalOcean">
 
-- Login to the Digital Ocean console, create a **Droplets** from the dropdown menu on the upper right hand side.
+- Login to the Digital Ocean console and create a **Droplets** from the dropdown menu on the upper right-hand side.
 
 ![Diagram](/img/public_cloud/Create1.jpg)
 
@@ -140,7 +138,7 @@ Now click on **Launch instance**
 - For the Size, choose the appropriate size for your application.  For this guide, a smaller size was used.
 ![Diagram](/img/public_cloud/Create2.jpg)
 
-- Next, choose a ssh-key to login to the VM. (We highly discourage login to the VM using Password),
+- Next, choose an ssh-key to log in to the VM. (We highly discourage login to the VM using Password),
 - then **Create Droplet**
 ![Diagram](/img/public_cloud/Create3.jpg)
 
@@ -148,7 +146,7 @@ Now click on **Launch instance**
 <TabItem value="OCI">
 
 - Login to the **ORACLE Cloud** console. 
-- Go to Home dashboard.
+- Go to Home > Dashboard.
 - Click on **Instances** (Under **Compute** category). 
 - Create an instance.
 - Name the instance. 
@@ -173,7 +171,7 @@ Now click on **Launch instance**
 
 ![Diagram](/img/public_cloud/Create-OCI3.jpg)
 
-- In the **Add SSH keys** section, choose how you want your ssh keys generated. **We strongly discourage use password to login to the VM**.
+- In the **Add SSH keys** section, choose how you want your ssh keys generated. **Logging in with a password is insecure**.
 - Leave default boot volume.
 - Now click on **Create**.
 
@@ -207,7 +205,7 @@ Now click on **Launch instance**
 
 ![Diagram](/img/public_cloud/Create-IBM4.jpg)
 
-- Alternative, you can select **allow_all** under the "Public security group", and leave the Add-on Firewall feature off.  **This is not recommended as it opens your VM for attacks**.
+- Alternatively, you can select **allow_all** under the "Public security group", and leave the Add-on Firewall feature off.  **This is not recommended as it opens your VM for attacks**.
 - Press **Create** on the right side menu to create the VM.
 
 </TabItem>
@@ -228,32 +226,32 @@ Now click on **Launch instance**
 >
 <TabItem value="Azure">
 
-- Azure's firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports (TCP 8440-8443).
+- Azure's firewall is blocking all incoming access to the VM. You will need to open the ports you configured for Ziti services. Here is an example of the firewall ports.
 ![Diagram](/img/public_cloud/Controller-Firewall-Azure.jpg)
 
 </TabItem>
 <TabItem value="AWS">
 
-- The steps in the create VM section already specified the ports need to be opened on the AWS firewall.
-- You can double check if the required ports are open. Here is a example of the firewall ports if you used the default ports(TCP 8440-8443).
+- You must open the same ports in the AWS Security Group that you configured Ziti to listen for.
+- Here is an example.
 ![Diagram](/img/public_cloud/Firewall-AWS-Controller.jpg)
 
 </TabItem>
 
 <TabItem value="GCP">
 
-- GCP’s default firewall is blocking all incoming access to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). Here is a example of the firewall ports if you used the default ports.
+- GCP’s default firewall is blocking all incoming access to the VM. You will need to open the same ports you specified for the controller and ZAC (if you plan to use ZAC). Here is an example of the firewall ports if you used the default ports.
 - Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
 - Click on **Firewall** menu on the left side to bring up the firewall screen
 - On the firewall screen, click on **+ CREATE FIREWALL RULE** to create new rules
 - Give a meaningful **name** to your firewall rule
 - Choose your **Network**
-- Leave Direction of traffic as **Ingress**
+- Use traffic direction **Ingress**
 - Action **Allow**
 - Targets, you can use "All instances in the network" (if you did not specify "Network tags" for your VM). In this example, we are using **Specified target tags** option.
 - Enter **Target tags** for your VM. In this example, our tag is **nc**
 - Enter Source IPv4 ranges: **0.0.0.0/0**
-- For the controller we have to allow the **TCP** port **8440-8443** along with SSH port (**22**).
+- For the controller, you must allow the same **TCP** ports you configured Ziti to listen for along with the SSH port (**22**).
 Hit **CREAETE** to create rules.
 ![Diagram](/img/public_cloud/Controller-Firewall-GCP.jpg)
 
@@ -264,15 +262,15 @@ Hit **CREAETE** to create rules.
 </TabItem>
 <TabItem value="DigitalOcean">
 
-DigitalOcean by default does not setup firewall for the VM.
+DigitalOcean by default does not set up the firewall for the VM.
 </TabItem>
 <TabItem value="OCI">
 
 ---
 
-Oracle cloud by default blocks all incoming traffic to the VM. You will need to open ports you specified for controller and ZAC (if you plan to use ZAC). 
+Oracle cloud by default blocks all incoming traffic to the VM. You will need to open the ports you specified for the controller and ZAC (if you plan to use ZAC). 
 
-- First, we need to **Create security group**
+- First, we need to **Create a security group**
 - From the **Networking** category, select the **Virtual cloud networks**. 
 - Select the VCN your VM is in.
 - On the left side menu, select the **Network Security Group**.
@@ -280,7 +278,7 @@ Oracle cloud by default blocks all incoming traffic to the VM. You will need to 
 - Name the security group and select the next.
 - Now create rules for ingress traffic. 
 - Port 22/TCP for SSH
-- OpenZiti ports: 8440-8443/TCP (default ports from quickstart)
+- OpenZiti ports, e.g., 1280/tcp
 - Also create a rule to allow all traffic outbound (**Egress**).
 
 Following is the example of the Security Group for the controller
@@ -289,7 +287,7 @@ Following is the example of the Security Group for the controller
 
 - After the security group is created, attach it to the instance.
 - From the "Instance details" screen, select **Edit** under the **Network security groups** section.
-- Select the security group from the drop down and press **Save changes**.
+- Select the security group from the dropdown and press **Save changes**.
 
 ![Diagram](/img/public_cloud/Firewall-OCI2.jpg)
 
@@ -316,7 +314,7 @@ You should **Turn on ufw** and **restart the VM** after the security group confi
 
 ```text
 sudo ufw enable
-sudo ufw allow 8440:8443/tcp
+sudo ufw allow 1280/tcp
 sudo shutdown -r 0
 ```
 
@@ -331,7 +329,7 @@ If you turn on the firewall feature, you will need to config firewall rules.
 
 Add the following rules.
 - ssh: port 22/TCP
-- OpenZiti ports: 8440-8443/TCP (default ports from quickstart)
+- OpenZiti ports, e.g., 1280/tcp
 - Deny rules to deny all other traffic
 
 Make sure the firewall is active, it should display **Processing all rules** if it is active.
@@ -363,105 +361,52 @@ or
 ssh -i <private_key> <username>@<dns-name>
 ```
 
-Use a fully-qualified domain name (FQDN) to [deploy the controller](/guides/deployments/10-linux/10-controller/10-deploy.mdx).
+Use a fully qualified domain name (FQDN) to [deploy the controller](/guides/deployments/10-linux/10-controller/10-deploy.mdx).
 
 </TabItem>
 <TabItem value="AWS">
 
 - Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Instance detail screen.
 - **NOTE:** DNS name is only available if you enabled **DNS Hostnames** under VPC.
-- Login to the VM by using user name "ubuntu":
+- Login to the VM with username "ubuntu":
+
 ```text
 ssh -i <private_key> ubuntu@<ip>
 or
 ssh -i <private_key> ubuntu@<dns-name>
 ```
-- export the DNS record 
-```text
-export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
-```
-Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) guide to setup the controller.
-
 </TabItem>
 <TabItem value="GCP">
 
-- Once the VM is created, we can login through **SSH** button on the VM instances screen.
+- Once the VM is created, we can log in through **SSH** button on the VM instances screen.
 ![Diagram](/img/public_cloud/GCP-login1.jpg)
-
-- export the DNS record 
-```text
-export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
-```
-Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) guide to setup the controller.
 
 </TabItem>
 <TabItem value="DigitalOcean">
 
 - Once the VM is created, we can get the IP address of the droplet from the Resources screen.
-- Login to the VM by using user "root" and IP address:
+- Login to the VM with username "root" and IP address:
 ```text
 ssh root@<ip>
 ```
-Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
 
-- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
-
-This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
 <TabItem value="OCI">
 
 - Once the VM is created, we can get the IP address of the VM from the instance details screen.
-- Login to the VM by using user name "ubuntu" and the IP address:
+- Login to the VM with username "ubuntu" and the IP address:
 ```text
 ssh -i <private_key> ubuntu@<ip>
 ```
 
-Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) to setup the controller. You must replace the EXTERNAL_DNS with the following command before running the quickstart.
-
-- **export EXTERNAL_DNS="$(curl -s eth0.me)"**
-
-This ensures the Controller setup by the quickstart is advertising the external IP address of the VM.
 </TabItem>
 <TabItem value="IBM">
 
 - Once the VM is created, we can get the IP address of the VM from the Devices screen.
-- Login to the VM by using user name "ubuntu" and the IP address:
+- Login to the VM with username "ubuntu" and the IP address:
 ```text
 ssh -i <private_key> ubuntu@<ip>
 ```
 
-- export the DNS record 
-```text
-export EXTERNAL_DNS=$(dig +short -x $(curl -s icanhazip.com) | sed "s/.$//")
-```
-Then follow the [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) guide to setup the controller.
-
 </TabItem>
 </Tabs>
-
-## 1.4 Setup Ziti Administration Console (ZAC) 
-**Optional**
-
-ZAC provides GUI for managing the OpenZiti network. If you prefer UI over CLI to manage network, please following the [ZAC Setup Guide](/learn/quickstarts/zac/index.md) to setup ZAC before going to the next section.
-
-**Quickfix:**
-
----
-
-To setup npm executables, you can follow [install Node.js guide](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04).
-
-For example, this is how to install the version of node needed for ZAC.
-
-Setup the repo:
-```text
-cd ~
-curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-```
-
-Install nodejs:
-```text
-sudo apt install nodejs
-```
-
-After the nodejs is installed, following the rest of [ZAC Setup Guide](/learn/quickstarts/zac/index.md) to setup ZAC.
