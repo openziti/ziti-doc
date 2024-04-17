@@ -1,18 +1,15 @@
 ---
 title: Console Deployment
+sidebar_label: Console
 ---
 
-This article is about deploying the Ziti console as a Linux system service or Docker container. [Kubernetes is covered separately](/guides/kubernetes/hosting/kubernetes-console.mdx).
+This article is about deploying the Ziti console as a standalone Node.js server application in a Docker container.
 
 The Ziti console (ZAC) provides a web-based user interface for managing Ziti networks. The console can be built to run as a single-page application that communicates with the Ziti controller via REST requests originating in the browser, or as a standalone Node.js server that initiates REST requests to the Ziti controller on behalf of the user.
 
-## Run with Node.js
+Alternatively to Docker, clone the Git repository and follow [the steps to run the standalone Node.js web server](https://github.com/openziti/ziti-console?tab=readme-ov-file#readme).
 
-Clone the Git repository and follow [the steps to run the standalone Node.js web server](https://github.com/openziti/ziti-console?tab=readme-ov-file#readme).
-
-Upvote [this GitHub issue](https://github.com/openziti/ziti-console/issues/280) if you would like to see a more streamlined installation process for the console in Linux, i.e., a Debian package and RPM.
-
-## Run in Docker
+## Run the Console in Docker
 
 ```text
 docker run --name ziti-console --publish "1408:1408" openziti/zac

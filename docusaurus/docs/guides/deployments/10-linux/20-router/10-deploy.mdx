@@ -2,8 +2,8 @@
 title: Router Deployment
 ---
 
-import CliLogin from '../../../_cli-login.md'
-import CliLogFormats from '../../../_cli-log-levels-and-formats.md'
+import CliLogin from '/docs/_cli-login.md'
+import CliLogFormats from '/docs/_cli-log-levels-and-formats.md'
 
 This article is about deploying a Ziti router as a Linux system service or Docker container. [This page](/learn/introduction/03-components.md#openziti-router) provides an overview of these concepts.
 
@@ -59,7 +59,7 @@ ziti edge create edge-router "AcmeRouter1" \
     --jwt-output-file path/to/token.jwt
 ```
 
-[Learn more about managing routers with the CLI](/guides/deployments/20-router/40-cli-mgmt.md).
+[Learn more about managing routers with the CLI](/guides/deployments/10-linux/20-router/40-cli-mgmt.md).
 
 The systemd service looks for the token in `/opt/openziti/etc/router/.token` if env var `ZITI_ENROLL_TOKEN` is empty. The file must be readable by root (not others).
 

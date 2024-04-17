@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 ## 2.0 Configure a Router
 
-In this section, we are describing how to setup the Edge Router (pub-er) for our [test network](/guides/deployments/40-services/10-examples.mdx#311-network-diagram-1).
+In this section, we are describing how to setup the Edge Router (pub-er) for our [test network](/guides/services/10-examples.mdx#311-network-diagram-1).
 
 ## 2.1 Create the Edge Router VM 
 Please follow **Create a VM section** of the controller cloud guide to setup a VM to be used as router.
@@ -406,7 +406,7 @@ Now the Global DNS servers should be the IP address on your local interface.
 >
 <TabItem value="Azure">
 
-- For any router setup as a local gateway (i.e. local-er in [test network 2](/guides/deployments/40-services/10-examples.mdx#312-network-diagram-2)), you will need to setup routes in Azure.
+- For any router setup as a local gateway (i.e. local-er in [test network 2](/guides/services/10-examples.mdx#312-network-diagram-2)), you will need to setup routes in Azure.
 - First you need to create a **Route Table** from Marketplace.
 ![Diagram](/img/public_cloud/RouteTable-Azure1.jpg)
 
@@ -427,7 +427,7 @@ The following routes are required:
 </TabItem>
 <TabItem value="AWS">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](/guides/deployments/40-services/10-examples.mdx#312-network-diagram-2)), you will need to setup routes for your VPC.
+- For any router setup as local gateway (i.e. local-er in [test network 2](/guides/services/10-examples.mdx#312-network-diagram-2)), you will need to setup routes for your VPC.
 - To get to the route table, click on **Subnet** from your Instances screen
 - From the Subnet screen, click on **Router table**
 - Then you can use **Edit routes** to add routes to the table.
@@ -443,7 +443,7 @@ The following routes are required:
 </TabItem>
 <TabItem value="GCP">
 
-For any router setup as local gateway (i.e. local-er in [test network 2](/guides/deployments/40-services/10-examples.mdx#312-network-diagram-2)), you will need to setup routes in GCP.
+For any router setup as local gateway (i.e. local-er in [test network 2](/guides/services/10-examples.mdx#312-network-diagram-2)), you will need to setup routes in GCP.
 
 - Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
 - Click on **Routes** menu on the left side to bring up the Routes screen
@@ -462,11 +462,11 @@ The following routes are required:
 </TabItem>
 <TabItem value="DigitalOcean">
 
-DigitalOcean does not have route table.  The routes are setup directly on the VM. The example is in the [test section](/guides/deployments/40-services/10-examples.mdx#367-verify-the-connection)
+DigitalOcean does not have route table.  The routes are setup directly on the VM. The example is in the [test section](/guides/services/10-examples.mdx#367-verify-the-connection)
 </TabItem>
 <TabItem value="OCI">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](/guides/deployments/40-services/10-examples.mdx#312-network-diagram-2)), you will need to setup routes in Oracle Cloud.
+- For any router setup as local gateway (i.e. local-er in [test network 2](/guides/services/10-examples.mdx#312-network-diagram-2)), you will need to setup routes in Oracle Cloud.
 - To setup your route, choose the default route table from your VCN.
 ![Diagram](/img/public_cloud/RouteTable-OCI1.jpg)
 
@@ -485,7 +485,7 @@ The following routes are required:
 </TabItem>
 <TabItem value="IBM">
 
-IBM Cloud does not have route table.  The routes are setup directly on the VM. The example is in the [test section](/guides/deployments/40-services/10-examples.mdx#367-verify-the-connection)
+IBM Cloud does not have route table.  The routes are setup directly on the VM. The example is in the [test section](/guides/services/10-examples.mdx#367-verify-the-connection)
 </TabItem>
 </Tabs>
 

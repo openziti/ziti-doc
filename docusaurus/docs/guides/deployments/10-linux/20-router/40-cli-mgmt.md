@@ -6,7 +6,7 @@ sidebar_label: CLI Mgmt
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CliLogin from '../../../_cli-login.md'
+import CliLogin from '/docs/_cli-login.md'
 
 ## Login
 

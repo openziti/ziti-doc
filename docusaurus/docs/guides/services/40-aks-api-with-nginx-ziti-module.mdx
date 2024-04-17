@@ -1,7 +1,11 @@
 ---
-title: Tunneling to NGINX Upstreams in Kubernetes
-sidebar_label: Tunneling NGINX Upstreams
+title: Tunneling to NGINX Upstreams
+sidebar_label: NGINX Module
 ---
+
+[Ziti's NGINX module](https://github.com/openziti/ngx_ziti_module) works like a tunneler for hosting Ziti services, i.e. as a reverse proxy. This means that NGINX listens for particular, pre-configured Ziti services on the Ziti overlay (not on an IP address), and forwards the incoming requests to the NGINX upstream specified for that service in the NGINX config file.
+
+We'll run the module in Kubernetes as an example, but the module works anywhere NGINX does.
 
 ## Prerequisites
 

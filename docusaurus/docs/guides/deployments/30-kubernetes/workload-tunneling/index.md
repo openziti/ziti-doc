@@ -55,21 +55,21 @@ You can deploy a loopback proxy sidecar for pod egress to OpenZiti Services. The
 2. The sidecar container does not need the CAP_NET_ADMIN capability.
 3. The sidecar container does not need a `dnsPolicy` or explicit nameserver.
 
-#### [TCP Proxy Cluster Service](/guides/kubernetes/hosting/kubernetes-router.mdx)
+#### [TCP Proxy Cluster Service](/guides/deployments/30-kubernetes/hosting/kubernetes-router.mdx)
 
-The OpenZiti Router can be deployed to provide a cluster-wide proxy for OpenZiti Services, optionally exposing the Ziti Services' proxy ports with an Ingress or LoadBalancer. This is accomplished by first creating the router with tunnel mode enabled, then deploying the router Helm chart with input values specifying each Ziti Service for which the router's tunnel identity is authorized by a Dial Service Policy. For more information, see the [OpenZiti Router](/guides/kubernetes/hosting/kubernetes-router.mdx) page. 
+The OpenZiti Router can be deployed to provide a cluster-wide proxy for OpenZiti Services, optionally exposing the Ziti Services' proxy ports with an Ingress or LoadBalancer. This is accomplished by first creating the router with tunnel mode enabled, then deploying the router Helm chart with input values specifying each Ziti Service for which the router's tunnel identity is authorized by a Dial Service Policy. For more information, see the [OpenZiti Router](/guides/deployments/30-kubernetes/hosting/kubernetes-router.mdx) page. 
 
 ### Ingress to Cluster Services
 
 Any OpenZiti Tunneler can be used to "host" an OpenZiti Service. This hosting begins a few moments after an OpenZiti Service becomes authorized for the OpenZiti Identity in use by the SDK. This section is about different ways to deploy an OpenZiti Tunneler to provide ingress to cluster services.
 
-#### [Reverse Proxy Router Pod](/guides/kubernetes/hosting/kubernetes-router.mdx)
+#### [Reverse Proxy Router Pod](/guides/deployments/30-kubernetes/hosting/kubernetes-router.mdx)
 
-The OpenZiti Router's built-in tunneler can reverse-proxy cluster services for Ziti clients. This is accomplished by creating the router with tunneler mode enabled, and then installing the OpenZiti Router Helm chart with the tunneler mode set to `host` (the default). For more information, see the [OpenZiti Router](/guides/kubernetes/hosting/kubernetes-router.mdx) page.
+The OpenZiti Router's built-in tunneler can reverse-proxy cluster services for Ziti clients. This is accomplished by creating the router with tunneler mode enabled, and then installing the OpenZiti Router Helm chart with the tunneler mode set to `host` (the default). For more information, see the [OpenZiti Router](/guides/deployments/30-kubernetes/hosting/kubernetes-router.mdx) page.
 
-#### [Nginx Proxy Module](/guides/deployments/40-services/40-aks-api-with-nginx-ziti-module.mdx)
+#### [Nginx Proxy Module](/guides/services/40-aks-api-with-nginx-ziti-module.mdx)
 
-The OpenZiti Nginx Proxy Module can be used to provide ingress to cluster services. The module binds OpenZiti Services to an Nginx stream context and forward requests to the configured upstreams. Unlike the rest of these solutions, the Nginx module is not a full tunneler. The main difference for writing OpenZiti configurations for the module is that it will honor the upstreams that are set in the Nginx configuration, ignoring the `host.v1` addresses set in the OpenZiti config. For more information, see the [Nginx Proxy Module guide](/guides/deployments/40-services/40-aks-api-with-nginx-ziti-module.mdx).
+The OpenZiti Nginx Proxy Module can be used to provide ingress to cluster services. The module binds OpenZiti Services to an Nginx stream context and forward requests to the configured upstreams. Unlike the rest of these solutions, the Nginx module is not a full tunneler. The main difference for writing OpenZiti configurations for the module is that it will honor the upstreams that are set in the Nginx configuration, ignoring the `host.v1` addresses set in the OpenZiti config. For more information, see the [Nginx Proxy Module guide](/guides/services/40-aks-api-with-nginx-ziti-module.mdx).
 
 #### [Reverse Proxy Tunnel Pod](./kubernetes-host.mdx)
 
