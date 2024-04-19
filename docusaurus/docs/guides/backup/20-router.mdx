@@ -1,0 +1,39 @@
+---
+title: Router Backup
+sidebar_label: Router
+---
+
+
+## Recover
+
+Routers are replaceable without a backup. You can use role attributes in your policies or
+re-enroll an unavailable router.
+
+### Recover Using Role Attributes
+
+Policies that authorize routers with role attributes (e.g., `#some-role`), not mentions (e.g., `@router1`) will
+authorize a replacement router with the same roles with the same privileges.
+
+### Recover Using Re-enrollment
+
+You can administratively re-enroll a router. This will invalidate the existing enrollment and existing policy grants
+for the router's ID (e.g., `@router1`) will still be valid for the replacement.
+
+## Backup
+
+The router has two stateful elements: the configuration YAML file and the identity files mentioned in the configuration
+file. The router will cache control plane information in the same directory as the configuration file, but it's not
+essential to back it up as long as the configuration file points to a valid control plane endpoint.
+
+### Identity Files
+
+The router's identity files (keys and certs) uniquely identify the router to the controller. To recover a unique router
+identity you must back up the files mentioned in the following configuration properties:
+
+- `identity` may appear in several places and always configures keys and certs for the router
+
+### Configuration YAML
+
+The router's configuration YAML file is specified as a positional parameter when the router is run. You can edit the
+file to change the filesystem path for any files that are restored to a new location.
+

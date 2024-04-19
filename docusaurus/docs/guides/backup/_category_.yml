@@ -1,0 +1,5 @@
+label: Backup
+position: 60
+link:
+  type: generated-index
+  title: Backup and Restore the Ziti Controller or Router

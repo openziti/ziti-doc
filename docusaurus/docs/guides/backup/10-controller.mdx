@@ -1,0 +1,51 @@
+---
+title: Controller Backup
+sidebar_label: Controller
+---
+
+## Backup
+
+The three stateful aspects of the controller are the configuration YAML, PKI, and the database. Ensure you back up all
+the files mentioned in the controller's configuration YAML file (keys, certs, and the database), and the config YAML
+file itself. If you're using the Linux service you may accomplish this by backing up the entire
+`/var/lib/ziti-controller` directory.
+
+### Configuration YAML
+
+The controller's configuration YAML file is specified as a positional parameter when the controller is run. You can edit
+the file to change the filesystem path for any files that are restored to a new location.
+
+### PKI
+
+It's crucial to back up the controller's PKI because Ziti makes extensive use of TLS as an outer layer of security. The
+following configuration properties refer to PKI files.
+
+- `identity` may appear in several places and always configures keys and certs and trusted root CAs for the controller.
+- `edge.enrollment.signingCert` always appears in one place and configures the controller's edge signer CA key and cert.
+
+Only the edge signer CA key and cert must be available on the host. If the edge signer is an intermediate CA, then it's
+important to also back up the root CA key and cert.
+
+### Database
+
+The Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store its state. The database is a writeable
+file in a path specified by the controller's configuration property `db` ([link to config
+reference](/reference/30-configuration/controller.md#db)).
+
+Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a
+snapshot file in the same filesystem directory as the main database file on the controller host.
+
+```text
+ziti edge db snapshot
+```
+
+```buttonless title="Expected output"
+"" (empty string)
+```
+
+## Recovery
+
+Controller recovery involves restoring the controller's configuration YAML, PKI, and database. It's not necessary to
+use the same filesystem paths, but the configuration YAML must be edited to reflect the new paths if they change.
+Alternatively, you may use environment variables within the configuration YAML for paths within the `db` and any
+`identity` blocks.
