@@ -5,47 +5,83 @@ sidebar_label: Controller
 
 ## Backup
 
-The three stateful aspects of the controller are the configuration YAML, PKI, and the database. Ensure you back up all
-the files mentioned in the controller's configuration YAML file (keys, certs, and the database), and the config YAML
-file itself. If you're using the Linux service you may accomplish this by backing up the entire
-`/var/lib/ziti-controller` directory.
+The best way to ensure continuity is to run multiple controllers. You can recover from the catastrophic loss of all
+controllers in the cluster by creating a new single controller which can become the inaugural leader of a new cluster.
 
-### Configuration YAML
+The three stateful aspects of the controller are the configuration YAML, PKI, and the
+database. Ensure you back up all the files mentioned in the controller's configuration YAML file (keys, certs, root CA
+bundle, and the database), and the config YAML file itself.
 
-The controller's configuration YAML file is specified as a positional parameter when the controller is run. You can edit
-the file to change the filesystem path for any files that are restored to a new location.
+If you're using the Linux service you may accomplish this by triggering the database snapshot operation and backing up
+the `/var/lib/ziti-controller` directory.
 
-### PKI
+### Backing up the Configuration YAML
 
-It's crucial to back up the controller's PKI because Ziti makes extensive use of TLS as an outer layer of security. The
-following configuration properties refer to PKI files.
+The controller's configuration YAML file is specified as a positional parameter when the controller is run. You can back
+up this file or provide any valid controller configuration YAML to recover.
 
-- `identity` may appear in several places and always configures keys and certs and trusted root CAs for the controller.
-- `edge.enrollment.signingCert` always appears in one place and configures the controller's edge signer CA key and cert.
+### Backing up the PKI Files
 
-Only the edge signer CA key and cert must be available on the host. If the edge signer is an intermediate CA, then it's
-important to also back up the root CA key and cert.
+It is crucial to back up the irreplaceable root CAs. You can ease disaster recovery by issuing all leaf certificates
+from an intermediate CA and securing the root CA on a different host. This ensures that all controllers' PKI files are
+replaceable.
 
-### Database
+The controller issues leaf certificates during enrollment from its edge signer CA. If the edge signer is an
+intermediate, then it's unnecessary to back up the intermediate CA cert or private key because every part of the system
+is configured to trust the root. The controller's leaf certificate files must begin with the leaf and contain their
+intermediate issuer chain. This configures the controller to present the partial chain during the TLS handshake,
+allowing the other party to complete the chain with their copy of the root CA.
 
-The Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store its state. The database is a writeable
-file in a path specified by the controller's configuration property `db` ([link to config
+The following configuration properties refer to PKI files that must be backed up if not using an intermediate CA.
+
+-   `identity` may appear in several places and always configures keys, leaf certs, and CA certs. When this property
+    appears at the top level of the configuration YAML, its `ca` property has a special meaning and configures a bundle of
+    root CAs that all parts of the network should trust.
+-   `edge.enrollment.signingCert` always appears in one place and configures the controller's edge signer CA key and cert.
+
+### Backing up the Database
+
+The Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store its state. If you have multiple
+controllers you can back up the database of any member of the cluster and use the snapshot to initialize the inaugural
+leader during recovery. It's not valuable to backup the databases of multiple members because you can only restore one
+snapshot.
+
+The database is a writeable file in a path specified by the controller's configuration property `db` ([link to config
 reference](/reference/30-configuration/controller.md#db)).
 
 Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a
-snapshot file in the same filesystem directory as the main database file on the controller host.
+snapshot file in the same filesystem directory as the main database file on the controller host, so you can periodically
+back up the directory containing the configuration YAML and database and snapshots.
 
 ```text
 ziti edge db snapshot
 ```
 
-```buttonless title="Expected output"
-"" (empty string)
-```
-
 ## Recovery
 
-Controller recovery involves restoring the controller's configuration YAML, PKI, and database. It's not necessary to
-use the same filesystem paths, but the configuration YAML must be edited to reflect the new paths if they change.
-Alternatively, you may use environment variables within the configuration YAML for paths within the `db` and any
-`identity` blocks.
+In a scenario where all controllers' states were lost, you can recover by restoring the configuration YAML, PKI, and
+database to the inaugural leader of the recovered cluster.
+
+### Recovering Configuration YAML
+
+The path to the configuration file is a controller run parameter. You can restore the same configuration YAML file or
+provide any valid controller configuration. It's not necessary to use the same filesystem paths on the new host, but the
+configuration YAML must be edited to reflect the new paths if they change. You may use environment variables within the
+configuration YAML for paths within the `db` and any `identity` blocks.
+
+### Recovering PKI
+
+The controller's configuration YAML file contains URIs for its private keys, leaf certificates, edge signer CA
+certificate, and trust bundle. If the URI scheme is not specified it is interpreted as a `file://` URI, which may be
+relative to the directory where the configuration YAML file is located or absolute.
+
+You can restore these files from a backup, or, if using intermediate CA(s), you can instead generate new keys, issue a
+new intermediate CA cert from the same root CA, and issue new leaf certificates from the new intermediate CA.
+
+## Recovering the Database
+
+If all controllers were lost then the inaugural leader of the new cluster or a singular controller can be initialized
+with a database snapshot. Subsequent cluster members will synchronize their state with the new leader.
+
+If you backed up the directory containing the active database and snapshots, ensure you restore the latest snapshot to
+preserve data integrity. The backed-up active database file may not be internally consistent.
