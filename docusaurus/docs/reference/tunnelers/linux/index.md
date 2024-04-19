@@ -1,12 +1,12 @@
 ---
-title: Linux Tunneller
+title: Linux Tunneler
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Details from '@theme/MDXComponents/Details';
 
-The purpose of the tunneller is to configure host access. This means all users and all processes on the host will share
+The purpose of the tunneler is to configure host access. This means all users and all processes on the host will share
 the same level of access. This is accomplished by configuring the OS to have an OpenZiti DNS nameserver and IP routes
 for authorized OpenZiti Services.
 
@@ -14,10 +14,10 @@ for authorized OpenZiti Services.
 
 Reasons to use the package:
 
-1. Install the tunneller as a systemd service.
-1. Create permissions and policies for the tunneller to run as a non-root user.
+1. Install the tunneler as a systemd service.
+1. Create permissions and policies for the tunneler to run as a non-root user.
 1. Automatically enroll the identity and clean up the enrollment token in identity directory.
-1. Automatically upgrade the tunneller when a new package is available.
+1. Automatically upgrade the tunneler when a new package is available.
 
 Linux DEB packages are currently available for the x86_64 and arm64 platforms and RPM packages are available for x86_64.
 ARM/v7 (32bit) binaries are available from GitHub. See [manual installation](#manual-installation).
@@ -188,7 +188,7 @@ repo_gpgcheck=1
 ## Manual Installation
 
 [The latest binary release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is
-distributed as an executable for amd64, arm, and arm64 architectures. To upgrade the tunneller perform the installation
+distributed as an executable for amd64, arm, and arm64 architectures. To upgrade the tunneler perform the installation
 procedure again.
 
 Install the `wget` and `unzip` commands to use this example.
@@ -208,19 +208,19 @@ ziti-edge-tunnel version
 
 ### Run the Manually Installed Binary
 
-You must run the manually-installed tunneller as root because only the Linux package configures systemd ambient
+You must run the manually-installed tunneler as root because only the Linux package configures systemd ambient
 capabilities that enable managing DNS and IP routes with reduced privileges.
 
 ```text
 sudo ziti-edge-tunnel run --identity-dir /opt/openziti/etc/identities
 ```
 
-[Learn more about tunneller options and modes](./linux-tunnel-options.md).
+[Learn more about tunneler options and modes](./linux-tunnel-options.md).
 
 ## Adding Identities
 
-The tunneller can run with zero or more identities loaded, and needs at least one to make OpenZiti services available on
-the host. Adding an identity means providing a JWT enrollment token which is used by the tunneller to obtain a client
+The tunneler can run with zero or more identities loaded, and needs at least one to make OpenZiti services available on
+the host. Adding an identity means providing a JWT enrollment token which is used by the tunneler to obtain a client
 certificate from the OpenZiti controller. [Learn more about OpenZiti Identities](/learn/core-concepts/identities/overview.mdx).
 
 ### Add a Single Identity
@@ -235,7 +235,7 @@ sudo ziti-edge-tunnel add --jwt "$(< ./in-file.jwt)" --identity myIdentityName
 
 ### Load Identities Directory
 
-The tunneller will load all enrolled identities in the `--identity-dir` directory at startup. The default location for
+The tunneler will load all enrolled identities in the `--identity-dir` directory at startup. The default location for
 identities is is `/opt/openziti/etc/identities`. Add enrolled identity files to this directory by copying the JSON file
 into the directory and setting permissions for group `ziti`.
 
@@ -252,7 +252,7 @@ sudo chown -cR :ziti        /opt/openziti/etc/identities
 sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
 ```
 
-The tunneller process needs to be restarted if the contents of `/opt/openziti/etc/identities` change.
+The tunneler process needs to be restarted if the contents of `/opt/openziti/etc/identities` change.
 
 ```text
 # package users can restart with systemd
@@ -261,7 +261,7 @@ sudo systemctl restart ziti-edge-tunnel.service
 
 ## Run with Docker
 
-Reference [the article about running the Linux tunneller in a container](./container/readme.mdx) for guidance and
+Reference [the article about running the Linux tunneler in a container](./container/readme.mdx) for guidance and
 examples.
 
 ## Install a Pre-Release
@@ -271,7 +271,7 @@ examples.
 <Details>
 <summary>Pre-release repo for Debian-based distros</summary>
 
-You may use the following script to install the pre-release version of the tunneller for any supported Ubuntu LTS.
+You may use the following script to install the pre-release version of the tunneler for any supported Ubuntu LTS.
 
 ```text
 (set -euo pipefail;

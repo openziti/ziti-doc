@@ -26,7 +26,7 @@ network and requires a hole through the firewall to allow clients to connect.
 ![after OpenZiti](./after-openziti.png)
 
 After OpenZiti, we can see that there is no longer an open firewall to allow access to the HTTP server. Instead, the HTTP client 
-will have its network requests intercepted by an OpenZiti tunneller. Once intercepted, the packets are then delivered to the OpenZiti
+will have its network requests intercepted by an OpenZiti tunneler. Once intercepted, the packets are then delivered to the OpenZiti
 [overlay](/reference/glossary.md#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
 target identity. Once delivered to the target identity, in this example, the traffic will offload back to the underlay network to be 
 sent to the final destination: the HTTP Server.
@@ -51,13 +51,13 @@ container with: `docker run -d --rm --name web-test -p 80:8000 openziti/hello-wo
 If you have used the [Local - Docker Compose](/learn/quickstarts/network/local-docker-compose.md) quickstart 
 to provision your OpenZiti overlay network, you will have already this HTTP server available to use immediately. 
 
-### Prerequisite - HTTP Client Tunneller
+### Prerequisite - HTTP Client Tunneler
 You will need to install an [OpenZiti tunneler](/reference/tunnelers/index.mdx) on the machine which represents the HTTP client. Later on 
-we'll create an identity for this tunneller and use the identity to access the HTTP server. 
+we'll create an identity for this tunneler and use the identity to access the HTTP server. 
 
-### Prerequisite - HTTP Server Tunneller
+### Prerequisite - HTTP Server Tunneler
 You will need to install an [OpenZiti tunneler](/reference/tunnelers/index.mdx) on the machine which represents the HTTP server. Later on
-we'll create an identity for this tunneller and use the identity to access the HTTP server. 
+we'll create an identity for this tunneler and use the identity to access the HTTP server. 
 
 :::note
 If you used the docker-compose quickstart the "private" edge routers are configured as tunnelers and will not require you to deploy 
@@ -108,9 +108,9 @@ Here is an overview of the steps we will follow:
 5. Create a service to associate the two configs created previously into a service.
 6. Create a service-policy to authorize "HTTP Clients" to "dial" the service representing the HTTP server.
 7. Create a service-policy to authorize the "HTTP Server" to "bind" the service representing the HTTP server.
-8. Start the server-side tunneller (unless using the docker-compose quickstart) with the HTTP server identity, providing access to the 
+8. Start the server-side tunneler (unless using the docker-compose quickstart) with the HTTP server identity, providing access to the 
    HTTP server.
-9. Start the client-side tunneller using the HTTP client identity.
+9. Start the client-side tunneler using the HTTP client identity.
 10. Access the HTTP server securely over the OpenZiti zero trust overlay
 
 We can do all these steps using the OpenZiti CLI tool: `ziti`. We can also accomplish this using the OpenZiti Admin Console. We'll 
@@ -131,7 +131,7 @@ name of the container running the HTTP server.
 
 #### HTTP Server Identity
 Note that step 7 below requires you to have set the variable named `http_server_id`. All of the quickstarts provision an edge-router 
-with the tunneler option (`-t`) enabled. This means that edge-router is configured to serve as a tunneller. Run `ziti edge list 
+with the tunneler option (`-t`) enabled. This means that edge-router is configured to serve as a tunneler. Run `ziti edge list 
 identities` to find the name of the identity associated to the router.
 
 ```textell
@@ -167,7 +167,7 @@ ziti edge create service-policy http.policy.dial Dial --service-roles "@http.svc
 #7. Create a service-policy to authorize the "HTTP Server" to "bind" the service representing the HTTP server.
 ziti edge create service-policy http.policy.bind Bind --service-roles '@http.svc' --identity-roles "@${http_server_id}"
 
-#8. Start the server-side tunneller (unless using the docker-compose quickstart) with the HTTP server identity.
+#8. Start the server-side tunneler (unless using the docker-compose quickstart) with the HTTP server identity.
 #   [optional] if you don't use an edge-router as your tunneler, you will need to download and run the tunneler for your OS
 #   if you are using a ziti-router, skip to step 9 below
 # 
@@ -179,7 +179,7 @@ ziti edge create service-policy http.policy.bind Bind --service-roles '@http.svc
 # run ziti-edge-tunnel for the client
 sudo ./ziti-edge-tunnel run -i /tmp/http.server.json
 
-#9. Start the client-side tunneller using the HTTP client identity.
+#9. Start the client-side tunneler using the HTTP client identity.
 #   This step is dependant on platform. For this demo we'll be using a virtual machine running linux and we'll be using the
 #   ziti-edge-tunnel binary. Copy the http.client.jwt from step 1 to the client machine. For the example we'll use /tmp/http.client.jwt
 #

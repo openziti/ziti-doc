@@ -19,8 +19,8 @@ For the demonstration, we will set up the network like below:
 ---
 
 - There are two Ziti-Edge-Tunnels (**local-tunnel** and **remote-tunnel**) as LAN gateways. 
-- The Windows machine (**Windows Client**) is in the same subnet (172.16.31.0/24) as Tunneller (**local-tunnel**).
-- The Ubuntu 22.04 server (**Ubuntu Server**) is in the same subnet (172.16.240.0/24) as Tunneller (**remote-tunnel**).
+- The Windows machine (**Windows Client**) is in the same subnet (172.16.31.0/24) as Tunneler (**local-tunnel**).
+- The Ubuntu 22.04 server (**Ubuntu Server**) is in the same subnet (172.16.240.0/24) as Tunneler (**remote-tunnel**).
 - The data (ssh) will be passed between the Windows Client and the Ubuntu Server.
 
 
@@ -29,14 +29,14 @@ For the demonstration, we will set up the network like below:
 Complete the following steps First.
 
 - An open-ziti network should be created already. If not, please follow this quickstart [Host OpenZiti Anywhere](/learn/quickstarts/network/hosted.md) guide to set up a ziti network first.
-- Created two *tunnellers* already. The tunnelers should be running on **Ubuntu 22.04**. This demo uses Ubuntu 22.04 as an example.
+- Created two *tunnelers* already. The tunnelers should be running on **Ubuntu 22.04**. This demo uses Ubuntu 22.04 as an example.
 - Created one *windows client* already. Suggested Windows 10 or Windows 11. Windows servers should work fine as well.
 - Created one *ubuntu server* already. Or any Linux server capable of accepting SSH and HTTP connections.
 - We also need at least one transit router and one public edge router. The quickstart sets up a router with both transit and edge functionality. So if you used the quickstart guide, this should work already.
 
-## 2.0 Setup Tunnellers
+## 2.0 Setup Tunnelers
 
-## 2.1 Create Tunnellers on the Controller
+## 2.1 Create Tunnelers on the Controller
 
 Login to your controller and create two identities named **local-tunnel** and **remote-tunnel**
 
@@ -99,7 +99,7 @@ root@LocalGWDemoNC:~# ziti edge list identities
 results: 1-4 of 4
 ```
 
-## 2.2 Setup the Tunneller For Windows Subnet
+## 2.2 Setup the Tunneler For Windows Subnet
 
 ### 2.2.1 Register Identities
 
@@ -156,7 +156,7 @@ Now set up forwarding with ufw
 sudo ufw route allow in on ens160 out on tun0
 ```
 
-## 2.3 Setup the Tunneller For Ubuntu Server Subnet
+## 2.3 Setup the Tunneler For Ubuntu Server Subnet
 
 ### 2.3.1 Register Identities
 
@@ -333,7 +333,7 @@ results: 1-2 of 2
 
 ## 4.7 Create Edge-Router-Policy and Public Edge-Router
 
-The Tunnellers need to connect to Public Edge-Router to pass traffic as depict in the [network diagram](#11-network-description). 
+The Tunnelers need to connect to Public Edge-Router to pass traffic as depict in the [network diagram](#11-network-description). 
 
 **The quickstart already created an public router and the edge-router-policy.** You can check the edge-routers and edge-router-policies.
 
@@ -540,7 +540,7 @@ sudo ufw allow 443/tcp
 
 ## A.2 Create edge-router-policy
 
-The edge-router-policy sets up the access point (Edge Routers) to the ziti fabric for the identities (Tunnellers). 
+The edge-router-policy sets up the access point (Edge Routers) to the ziti fabric for the identities (Tunnelers). 
 
 There are many approaches on how to create policies to suit your need. For example, you may want to create policy for identities on the west coast to connect to ER in west coast. And policy for east coast identities to connect to east coast ER. But fine tuning edge-route-policy is beyond the scope of this demo. Here, we are going to show you a simple policy for all identities.
 
