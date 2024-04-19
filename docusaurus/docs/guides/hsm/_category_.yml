@@ -1,5 +1,5 @@
 label: Hardware Keys
-position: 60
+position: 70
 link:
   type: doc
-  id: guides/hsm/index
+  id: guides/hsm/hsmIndex
