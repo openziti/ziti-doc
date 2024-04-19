@@ -1,0 +1,35 @@
+---
+title: Manual Installation
+sidebar_label: Manual
+---
+
+## Manual Installation
+
+[The latest binary release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is
+distributed as an executable for amd64, arm, and arm64 architectures. To upgrade the tunneller perform the installation
+procedure again.
+
+Install the `wget` and `unzip` commands to use this example.
+
+```text
+(set -euo pipefail
+cd $(mktemp -d)
+wget -q "https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/download/ziti-edge-tunnel-Linux_$(uname -m).zip"
+unzip ./ziti-edge-tunnel-Linux_$(uname -m).zip
+sudo install -o root -g root ./ziti-edge-tunnel /usr/local/bin/
+grep -q '^ziti:' /etc/group || sudo groupadd --system ziti
+sudo mkdir -pv /opt/openziti/etc/identities
+ziti-edge-tunnel version
+)
+```
+
+### Run the Manually Installed Binary
+
+You must run the manually-installed tunneller as root because only the Linux package configures systemd ambient
+capabilities that enable managing DNS and IP routes with reduced privileges.
+
+```text
+sudo ziti-edge-tunnel run --identity-dir /opt/openziti/etc/identities
+```
+
+[Learn more about tunneller options and modes](./40-linux-tunnel-options.mdx).
