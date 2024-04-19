@@ -77,7 +77,7 @@ If the DNS record exists it returns the answer and sets query status to `NO_ERRO
 
 ### `run-host` Mode
 
-`ziti-edge-tunnel run-host` is a mode for hosting (listening) for services which does provide service intercepts or DNS. Services configured for 'Bind' will be hosted by the tunneller.
+`ziti-edge-tunnel run-host` is a mode for hosting (listening) for services which does provide service intercepts or DNS. Services configured for 'Bind' will be hosted by the tunneler.
 
 #### System Requirements for Mode `run-host`
 
