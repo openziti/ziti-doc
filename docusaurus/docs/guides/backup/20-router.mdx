@@ -9,15 +9,42 @@ sidebar_label: Router
 Routers are replaceable without a backup. You can use role attributes in your policies or
 re-enroll an unavailable router.
 
-### Recover Using Role Attributes
+### Role Attributes
 
-Policies that authorize routers with role attributes (e.g., `#some-role`), not mentions (e.g., `@router1`) will
-authorize a replacement router with the same roles with the same privileges.
+You can recover without a backup by creating a new router with the same roles. Policies that authorize routers with role
+attributes (e.g., `#some-role`), not mentions (e.g., `@router1`) will authorize a replacement router with the same roles
+with the same privileges.
 
-### Recover Using Re-enrollment
+Remember to delete the replaced router.
 
-You can administratively re-enroll a router. This will invalidate the existing enrollment and existing policy grants
-for the router's ID (e.g., `@router1`) will still be valid for the replacement.
+### Re-enrollment
+
+You can recover without a backup by re-enrolling an existing router. Re-enrolling a router will invalidate the existing
+enrollment and existing policy grants for the router's ID (e.g., `@router1`) will still be valid.
+
+Re-enroll with the CLI like this.
+
+```text
+ziti edge re-enroll edge-router router1 --jwt-output-file /tmp/router1.jwt
+```
+
+```buttonless title="Expected output"
+re-enroll edge-router with id XVXqEG6ANz: OK
+Enrollment expires at 2024-04-19T18:12:47.489Z
+```
+
+[Link to API reference for the re-enroll operation](/reference/developer/api/02-edge-management-reference.mdx#tag/Edge-Router/operation/reEnrollEdgeRouter).
+
+### Restore Files
+
+If you have a backup of the router's identity files, you can restore them to a new host. The router's identity files are
+the only state that must be restored. You probably also want to restore the configuration YAML, but you may use any
+valid router configuration. 
+
+The necessary files are referred to in the configuration YAML file as filesystem paths in `identity`
+blocks, of which there are one or more. If you restore the identity files to a new location, you must edit the
+configuration YAML file to reflect the new paths or use environment variables within the configuration YAML for
+paths within the `identity` block.
 
 ## Backup
 
