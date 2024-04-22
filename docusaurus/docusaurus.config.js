@@ -51,6 +51,15 @@ const config = {
       '@docusaurus/plugin-client-redirects',
       {
         createRedirects: path => {
+          if ( path.startsWith("/docs/guides/topologies/gateway/") ) {
+            return [path.replace("/docs/guides/topologies/gateway/","/docs/guides/local-gateway/")];
+          }
+          if ( path.startsWith("/docs/guides/deployments/kubernetes/") ) {
+            return [path.replace("/docs/guides/deployments/kubernetes/","/docs/guides/kubernetes/hosting/")];
+          }
+          if ( path.startsWith("/docs/reference/tunnelers/kubernetes/") ) {
+            return [path.replace("/docs/reference/tunnelers/kubernetes/","/docs/guides/kubernetes/workload-tunneling/")];
+          }
           if ( path.startsWith("/docs/guides/deployments/") ) {
             return [
               path.replace("/docs/guides/deployments/","/docs/reference/deployments/"),
@@ -78,15 +87,89 @@ const config = {
           if ( path.startsWith("/docs/learn/introduction/") ) {
             return [path.replace("/docs/learn/introduction/","/docs/introduction/")];
           }
-          if ( path.startsWith("/blog/") ) {
-            var regex = /^\/blog\/(.*)\/?$/;
-            return [
-              path.replace(regex,"/articles/$1.html")
-            ];
-          }
           return undefined;
         },
         redirects: [
+          {
+            to: '/docs/category/deployments',
+            from: ['/docs/reference/deployments']
+          },
+          {
+            to: '/docs/guides/deployments/linux/controller/deploy',
+            from: ['/docs/reference/deployments/controller']
+          },
+          {
+            to: '/docs/guides/deployments/linux/router/cli-mgmt',
+            from: ['/docs/reference/deployments/router/cli-mgmt']
+          },
+          {
+            to: '/docs/guides/deployments/linux/router/deploy',
+            from: ['/docs/reference/deployments/router/deployment']
+          },
+          {
+            to: '/docs/guides/deployments/linux/router/router-configuration',
+            from: ['/docs/reference/deployments/router/router-configuration']
+          },
+          {
+            to: '/docs/reference/tunnelers/docker',
+            from: ['/docs/reference/tunnelers/linux/container']
+          },
+          {
+            to: '/docs/category/core-concepts',
+            from: ['/docs/learn/core-concepts']
+          },
+          {
+            to: '/docs/reference/tunnelers/nginx',
+            from: ['/docs/guides/securing-apis/aks-api-with-nginx-ziti-module']
+          },
+          {
+            to: '/docs/category/cloud',
+            from: ['/docs/guides/Public_Cloud_Deployment']
+          },
+          {
+            to: '/docs/guides/topologies/services',
+            from: ['/docs/guides/Public_Cloud_Deployment/Services']
+          },
+          {
+            to: '/docs/guides/deployments/cloud/router',
+            from: ['/docs/guides/Public_Cloud_Deployment/Router']
+          },
+          {
+            to: '/docs/guides/deployments/cloud/controller',
+            from: ['/docs/guides/Public_Cloud_Deployment/Controller']
+          },
+          {
+            to: '/docs/guides/topologies/gateway/tunneler',
+            from: ['/docs/guides/Local_Gateway/EdgeTunnel']
+          },
+          {
+            to: '/docs/guides/topologies/gateway/router',
+            from: ['/docs/guides/Local_Gateway/EdgeRouter']
+          },
+          {
+            to: '/docs/reference/backup/controller',
+            from: ['/docs/guides/database-backup']
+          },
+          {
+            to: '/docs/reference/tunnelers/nginx',
+            from: ['/docs/category/securing-apis']
+          },
+          {
+            to: '/docs/category/cloud',
+            from: ['/docs/category/public-cloud-deployment']
+          },
+          {
+            to: '/docs/category/gateway',
+            from: ['/docs/category/local-gateway']
+          },
+          {
+            to: '/docs/category/kubernetes',
+            from: ['/docs/category/hosting-openziti']
+          },
+          {
+            to: '/blog/',
+            from: ['/blog/zitification/prometheus/part1']
+          },
           {
             to: '/docs/learn/core-concepts/data-flow-explainer',
             from: ['/docs/guides/data-flow-explainer'],
