@@ -2,7 +2,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-All Go Ziti components log to standard output and standard error file descriptors, so their output appears in the systemd journal (`journalctl -xeu ziti-controller.service`) when installed from a Linux package, and the Docker log (`docker compose logs ziti-router`) when run as a container. The C/C++ `ziti-edge-tunnel` has distinct log levels and controls, described in [Linux tunneler troubleshooting](/reference/tunnelers/linux/linux-tunnel-troubleshooting.md).
+All Go Ziti components log to standard output and standard error file descriptors, so their output appears in the systemd journal (`journalctl -xeu ziti-controller.service`) when installed from a Linux package, and the Docker log (`docker compose logs ziti-router`) when run as a container. The C/C++ `ziti-edge-tunnel` has distinct log levels and controls, described in [Linux tunneler troubleshooting](/reference/tunnelers/60-linux/50-linux-tunnel-troubleshooting.mdx).
 
 <Tabs>
 <TabItem value="goformats" label="Log Formats">
