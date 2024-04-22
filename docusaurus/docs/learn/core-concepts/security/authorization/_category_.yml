@@ -1,0 +1,5 @@
+label: Authorization
+position: 40
+link:
+  type: doc
+  id: learn/core-concepts/security/authorization/auth
