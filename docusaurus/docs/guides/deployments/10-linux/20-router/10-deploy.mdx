@@ -102,3 +102,11 @@ num CPU: 16
 ## Logging
 
 <CliLogFormats/>
+
+## Reset
+
+```text
+sudo systemctl disable --now ziti-router.service
+sudo systemctl clean --what=state ziti-router.service
+sudo apt install --reinstall openziti-router
+```

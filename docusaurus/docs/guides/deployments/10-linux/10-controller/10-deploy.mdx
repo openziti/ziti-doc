@@ -88,3 +88,11 @@ num CPU: 16
 ## Logging
 
 <CliLogFormats/>
+
+## Reset
+
+```text
+sudo systemctl disable --now ziti-controller.service
+sudo systemctl clean --what=state ziti-controller.service
+sudo apt install --reinstall openziti-controller
+```
