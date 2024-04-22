@@ -3,51 +3,56 @@ title: Router Deployment
 ---
 
 import CliLogin from '/docs/_cli-login.md'
+import LinuxPackageRepo from '/docs/_linux-package-repo.mdx';
 import CliLogFormats from '/docs/_cli-log-levels-and-formats.md'
 
-This article is about deploying a Ziti router as a Linux system service or Docker container. [This page](/learn/introduction/03-components.md#openziti-router) provides an overview of these concepts.
+This article is about deploying a Ziti router as a Linux system service. [This page](/learn/introduction/03-components.md#openziti-router) provides an overview of the architecture.
 
-Routers provide Ziti network entry and exit points for clients and smart routing through the mesh. You must have at least one router that is advertising an edge connection to clients. If you have more than one router, you must configure transport links between them to form the fabric mesh. This reference is about deploying a Ziti router as a Linux system service or Docker container.
+Routers provide Ziti network entry and exit points for clients and smart routing through the mesh. You must have at least one router that is advertising an edge connection to clients. If you have more than one router, you must configure transport links between them to form the fabric mesh.
 
 ## Installation
 
-The router package depends on the `openziti` package that provides the `ziti` CLI executable.
+The router package `openziti-router` provides a systemd service unit and optional bootstrapping. The package depends on the `openziti` package which provides the `ziti` CLI. The easiest way to install both is the cross-platform install script for RPM and Debian distributions.
 
 ```text
 curl -sS https://get.openziti.io/install.bash \
 | sudo bash -s openziti-router
 ```
 
+<LinuxPackageRepo />
+
 ## Bootstrapping
 
-You will be prompted for the bootstrapping configuration listed below if the Linux package is installed interactively, unless the answer is already known in the env file.
+You can opt-in to generating a configuration file and enrolling the router automatically. You will be prompted for the most relevant configuration values when installing interactively unless the answer is already known.
 
-Bootstrapping happens automatically unless you disable it before running the router service. Bootstrapping a router involves:
+Bootstrapping consists of these steps:
 
-1. Generating a one-shot configuration file from env answers and defaults
-1. Enrolling the router with the controller
+1. Generate a one-shot configuration file from env answers and defaults.
+1. Enroll the router with the controller.
 
-At a minimum, you must set these to start the service with bootstrapping enabled (the default).
+At a minimum, you must set these to opt-in to bootstrapping.
 
+1. In `/opt/openziti/etc/router/service.env` (the answer file for the service)
+    1. Set `ZITI_BOOTSTRAP=true`
 1. In `/opt/openziti/etc/router/bootstrap.env` (the answer file for bootstrapping the router)
-    1. Set `ZITI_CTRL_ADVERTISED_ADDRESS` to the FQDN of the controller.
     1. Set `ZITI_ENROLL_TOKEN` to the resulting token (JWT)
 
 Additionally, you probably want to set these:
 
 1. In `/opt/openziti/etc/router/bootstrap.env` (the answer file for bootstrapping the router)
-    1. Set `ZITI_ROUTER_ADVERTISED_ADDRESS` to the permanent FQDN of the router (default is the system's hostname, which may not be resolvable by clients). This value can not be changed after enrollment.
-    1. Set `ZITI_ROUTER_MODE` to `tproxy` (default is `host`) if this router's built-in tunneler will provide a transparent proxy for dialing services. This changes the requirements for kernel capabilities and DNS configuration.
+    1. Set `ZITI_CTRL_ADVERTISED_ADDRESS` to the FQDN of the controller (default: localhost).
+    1. Set `ZITI_ROUTER_ADVERTISED_ADDRESS` to the permanent FQDN of the router (default: localhost). This value can not be changed after enrollment.
+    1. Set `ZITI_ROUTER_MODE` (default: none) if this router's built-in tunneler will provide a proxy for services. Mode `tproxy` requires additional kernel capabilities in `/etc/systemd/system/ziti-router.service.d/override.conf` and DNS resolver configuration for the host.
 
 ### Bootstrapping the Configuration
 
-The router's configuration is loaded from a YAML file ([reference](/reference/30-configuration/router.md)). The Linux system service will generate a valid configuration during the first startup, unless one already exists. 
+The router's configuration is loaded from a YAML file ([reference](/reference/30-configuration/router.md)). The Linux system service will generate a valid configuration during the first startup, unless one already exists. You can modify the generated configuration in `/var/lib/ziti-router/config.yml`.
 
-The filename of the configuration file, relative to the router's working directory, is given as an argument, e.g., `entrypoint.bash run router1-config.yml`. The default is `config.yml`.
+The filename of the configuration file, relative to the router's working directory, is given as an argument, e.g., `entrypoint.bash run config.yml` in `/lib/systemd/system/ziti-router.service` as an argument to the `ExecStart` command. You may override this in `/etc/systemd/system/ziti-router.service.d/override.conf`.
 
-Explore configuration option variables by running `ziti create config environment --help`. Any of these may be set in the env file or the Docker environment to influence the bootstrapped configuration.
+Explore configuration option variables by running `ziti create config environment --help`. Any of these may be set in `/opt/openziti/etc/router/bootstrap.env` to influence the generated configuration.
 
-Disable bootstrapping a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in `/lib/systemd/system/ziti-router.service` or the Docker environment.
+Disable generating a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in `/opt/openziti/etc/router/service.env`.
 
 ### Bootstrapping the Enrollment
 
@@ -63,11 +68,11 @@ ziti edge create edge-router "AcmeRouter1" \
 
 The systemd service looks for the token in `/opt/openziti/etc/router/.token` if env var `ZITI_ENROLL_TOKEN` is empty. The file must be readable by root (not others).
 
-`ZITI_ENROLL_TOKEN` may be defined in `/opt/openziti/etc/router/bootstrap.env` or in the Docker environment when running as a container.
+`ZITI_ENROLL_TOKEN` may be defined in `/opt/openziti/etc/router/bootstrap.env`.
 
 The router will enroll with the controller during the first startup. The one-time enrollment token is consumed during the enrollment process and a private key is generated in the router's working directory.
 
-Disable bootstrapping enrollment by setting `ZITI_BOOTSTRAP_ENROLLMENT=false` in `/lib/systemd/system/ziti-router.service` or in the Docker environment.
+Disable bootstrapping enrollment by setting `ZITI_BOOTSTRAP_ENROLLMENT=false` in `/opt/openziti/etc/router/service.env`.
 
 ## Firewall
 

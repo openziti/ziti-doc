@@ -4,54 +4,61 @@ sidebar_label: Controller
 id: deploy
 ---
 
-import CliLogFormats from '/docs/_cli-log-levels-and-formats.md'
+import LinuxPackageRepo from '/docs/_linux-package-repo.mdx';
+import CliLogFormats from '/docs/_cli-log-levels-and-formats.md';
 
 This article is about deploying a Ziti Controller as a Linux system service. [The controller introduction](/learn/introduction/03-components.md#openziti-controller) introduces the architectural concepts used in this guide.
 
 ## Installation
 
-The controller package is installed the same way as the `ziti` CLI and depends on the `openziti` package that provides the CLI.
+The controller package `openziti-controller` provides a systemd service unit and optional bootstrapping. The package depends on the `openziti` package which provides the `ziti` CLI. The easiest way to install both is the cross-platform install script for RPM and Debian distributions.
 
 ```text
 curl -sS https://get.openziti.io/install.bash \
 | sudo bash -s openziti-controller
 ```
 
-You must provide these two answers to start the service.
+<LinuxPackageRepo />
 
+## Bootstrapping
+
+You can opt-in to generating a PKI, config, and database by installing interactively with prompts or by setting these values.
+
+1. In `/opt/openziti/etc/controller/service.env` (the answer file for the service)
+    1. Set `ZITI_BOOTSTRAP=true`
 1. In `/opt/openziti/etc/controller/bootstrap.env` (the answer file for bootstrapping the controller)
     1. Set `ZITI_CTRL_ADVERTISED_ADDRESS` to the FQDN of the controller
-    1. Temporarily set `ZITI_PWD` to the desired management password for user `admin`. You may delete this password after bootstrapping for security.
+    1. Set `ZITI_PWD` to the desired management password for user `admin`. You may delete this after bootstrapping.
 
-### Bootstrapping the Public Key Infrastructure
+### Generating a Public Key Infrastructure
 
-The controller service will bootstrap a root and intermediate CA during the first startup.
+The controller service will generate a root CA and issue an intermediate CA cert during the first startup.
 
-The controller needs a CA to issue certificates for edge identities during enrollment. This CA is known as the edge signer. It's a good idea to use an intermediate CA for this purpose, as it allows you to rotate the edge signer without changing the root of trust and invalidating all edge enrollments.
+The controller needs a CA to issue certificates for edge identities during enrollment. This CA is known as the edge signer. It's a good idea to secure the root in a different location and use an intermediate CA for this purpose. This allows you to recover in a scenario where the intermediate was lost without changing the root of trust and invalidating all edge enrollments.
 
-Disable bootstrapping a PKI by setting `ZITI_BOOTSTRAP_PKI=false` in `/lib/systemd/system/ziti-controller.service`.
+Disable bootstrapping a PKI by setting `ZITI_BOOTSTRAP_PKI=false` in `/opt/openziti/etc/controller/service.env`.
 
 Check out [the PKI page](/learn/core-concepts/pki.md) for an overview of these concepts.
 
-### Bootstrapping the Configuration
+### Generating a Configuration
 
-The controller service will bootstrap a configuration during the first startup.
+The controller service will generate a configuration during the first startup.
 
-The controller's configuration is loaded from a YAML file ([reference](/reference/30-configuration/controller.md)). The Linux system service will generate a valid configuration during the first startup, unless one already exists. 
+The controller's configuration is loaded from a YAML file ([reference](/reference/30-configuration/controller.md)). The Linux system service will generate a valid configuration during the first startup unless one already exists. 
 
-The filename of the configuration file, relative to the Linux service's working directory (`/var/lib/ziti-controller`), is specified in `/lib/systemd/system/ziti-controller.service` as an argument to the `ExecStart` command.
+The filename of the configuration file, relative to the Linux service's working directory (`/var/lib/ziti-controller`), is specified in `/lib/systemd/system/ziti-controller.service` as an argument to the `ExecStart` command. You may override this in `/etc/systemd/system/ziti-controller.service.d/override.conf`.
 
-Disable bootstrapping a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in `/lib/systemd/system/ziti-controller.service`.
+Disable bootstrapping a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in `/opt/openziti/etc/controller/service.env`.
 
 ### Bootstrapping the Database
 
 The controller service will bootstrap a database during the first startup.
 
-The controller requires a BoltDB database to store its state. The Linux system service will initialize a database with a default admin password during the first startup, unless one already exists.
+The controller requires a BoltDB database to store its state. The Linux system service will initialize a database with a default admin password during the first startup unless one already exists.
 
-You must specify the management password for the default admin user before starting the service. This is done by setting `ZITI_PWD` in `/opt/openziti/etc/controller/bootstrap.env` or `LoadCredential` in `/lib/systemd/system/ziti-controller.service`. You may delete the password after bootstrapping for security.
+You must specify the management password for the default admin user before starting the service. This is done by setting `ZITI_PWD` in `/opt/openziti/etc/controller/bootstrap.env` or in the root-only file specified by `LoadCredential` in `/etc/systemd/system/ziti-controller.service.d/override.conf`. You may delete the password after bootstrapping for security.
 
-Disable bootstrapping the database by setting `ZITI_BOOTSTRAP_DATABASE=false` in `/lib/systemd/system/ziti-controller.service`.
+Disable bootstrapping the database by setting `ZITI_BOOTSTRAP_DATABASE=false` in `/opt/openziti/etc/controller/service.env`.
 
 ## Firewall
 
@@ -59,7 +66,7 @@ The controller listens on a single configurable TCP port: `1280/tcp`. This TLS s
 
 You may set `ZITI_CTRL_ADVERTISED_PORT` in `/opt/openziti/etc/controller/bootstrap.env` to bootstrap with a different port.
 
-Clients "learn" the controller's address and port when they enroll, so it is necessary to re-enroll or re-create the client if the controller's address or port changes.
+Clients "learn" the controller's address and port when they enroll, so it is necessary to re-enroll or replace the identity if the controller's advertised address or port changes.
 
 ## Agent
 
