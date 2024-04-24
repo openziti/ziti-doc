@@ -3,8 +3,6 @@ title: Migrate a Router Installation
 sidebar_label: Migrate
 ---
 
-You can bring your own configuration or enrollment by selectively disabling the respecitve `ZITI_BOOTSTRAP_*` environment variables in `/lib/systemd/system/ziti-router.service` or the Docker environment.
-
 You can generate a configuration with the `ziti create config router` command, optionally mutating the generated config with a combination of command-line args and environment variables. Find an annotated sample config file from [the Ziti repo](https://github.com/openziti/ziti/blob/main/etc/edge.router.yml).
 
 Here's an example BASH script for migrating an existing controller state to the Linux service's working directory.

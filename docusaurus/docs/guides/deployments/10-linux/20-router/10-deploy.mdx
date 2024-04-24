@@ -78,7 +78,7 @@ Disable bootstrapping enrollment by setting `ZITI_BOOTSTRAP_ENROLLMENT=false` in
 
 The router listens on a single configurable TCP port: `3022/tcp`. Ziti clients use ALPN to negotiate a connection to the edge (`ziti-edge`), fabric links (`ziti-link`), or health-check APIs (`h2`, `http/1.1`).
 
-You may set `ZITI_ROUTER_PORT` in `/opt/openziti/etc/router/bootstrap.env` or the Docker environment to bootstrap with a different port.
+You may set `ZITI_ROUTER_PORT` in `/opt/openziti/etc/router/bootstrap.env` to bootstrap with a different port.
 
 Clients "learn" the router's address and port when they poll the controller for authorized routers, so it is not necessary to re-enroll or re-create the client if the router's address or port changes. Simply change the config, bounce the router, and it will begin advertising the new address and port. This works because the system service and Docker container both auto-renew their server certificate every startup, and the certificate's DNS subject alternative name is set in the router's config.yml file. If you set `ZITI_AUTO_RENEW_CERTS=false` then it's necessary to administratively re-create the router or run at least once with the `--extend` flag.
 
