@@ -3,7 +3,8 @@ import ReactEcharts from "echarts-for-react";
 import zrok from './all.zrok.stargazers.json'
 import ziti from './all.ziti.stargazers.json'
 import others from './all.other.stargazers.json'
-import { time } from "echarts";
+const allSourceData = [...zrok, ...ziti, ...others];
+allSourceData.sort((a, b) => new Date(a.date) - new Date(b.date));
 
 const zitiData = {
     data: ziti,
@@ -17,6 +18,11 @@ const zrokData = {
 };
 const othersData = {
     data: others,
+    stars: [],
+    dayRates: []
+};
+const allData = {
+    data: allSourceData,
     stars: [],
     dayRates: []
 };
@@ -60,10 +66,11 @@ function calculateRateAndStars(inp, data) {
 calculateRateAndStars(zrok, zrokData)
 calculateRateAndStars(ziti, zitiData)
 calculateRateAndStars(others, othersData)
+calculateRateAndStars(allSourceData, allData)
 
 const largeAreaChart = {
     legend: {
-        data:['ziti daily stars','zrok daily stars','other repos daily stars']
+        data:['ziti daily stars','zrok daily stars','other repos daily stars', 'all repos daily stars']
     },
     title: {
         text: 'Stargazer Change by Day'
@@ -80,6 +87,10 @@ const largeAreaChart = {
         {
             id: 'othersDayRates',
             source: othersData.dayRates,
+        },
+        {
+            id: 'allDayRates',
+            source: allData.dayRates,
         }
     ],
     tooltip: {
@@ -201,11 +212,34 @@ const largeAreaChart = {
                 }
             },
         },
+        {
+            name: 'all repos daily stars',
+            datasetId: 'allDayRates',
+            type: 'line',
+            smooth: false,
+            symbol: 'none',
+            symbolSize: 6,
+            areaStyle: {
+                color: 'rgba(0,0,0,0)',
+            },
+            encode: {
+                x: 'Date',
+                y: 'Stars',
+                itemName: 'user',
+                tooltip: ['user', 'user']
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+        },
     ]
 };
 const largeAreaChartDailies = {
     legend: {
-        data:['ziti','zrok','other repos']
+        data:['ziti','zrok','other repos', 'all repos']
     },
     title: {
         text: 'OpenZiti Stargazes by Project'
@@ -222,6 +256,10 @@ const largeAreaChartDailies = {
         {
             id: 'othersDayRates',
             source: othersData.stars,
+        },
+        {
+            id: 'allDataRates',
+            source: allData.stars,
         }
     ],
     tooltip: {
@@ -323,6 +361,29 @@ const largeAreaChartDailies = {
         {
             name: 'other repos',
             datasetId: 'othersDayRates',
+            type: 'line',
+            smooth: false,
+            symbol: 'none',
+            symbolSize: 6,
+            areaStyle: {
+                color: 'rgba(0,0,0,0)',
+            },
+            encode: {
+                x: 'Date',
+                y: 'Stars',
+                itemName: 'user',
+                tooltip: ['user', 'user']
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+        },
+        {
+            name: 'all repos',
+            datasetId: 'allDataRates',
             type: 'line',
             smooth: false,
             symbol: 'none',
