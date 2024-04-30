@@ -53,4 +53,4 @@ om4. The SDK will selectt he best Edge Router to initiate the fabric circuit fro
 7. The response messages from the routers, once all recieved, indicate the circuit is configure, and ready for traffic.
 8. A dial response to the initial Edge Router then begins the flow of data.
 
-There are a number of error codes associated with Service Dials.  Messages can time out, the end server may not respond to the TCP SYN packet, or send a RST, terminators can be in an unavailable state, and others.  Error codes for the fabric circuit creation process are available on [Circuit Dial Error Codes](/guides/05-troubleshooting/20-circuit-create-error-codes.md)
+There are a number of error codes associated with Service Dials.  Messages can time out, the end server may not respond to the TCP SYN packet, or send a RST, terminators can be in an unavailable state, and others.  Error codes for the fabric circuit creation process are available on [Circuit Dial Error Codes](/guides/troubleshooting/20-circuit-create-error-codes.md)

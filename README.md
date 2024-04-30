@@ -78,7 +78,7 @@ Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this sit
 
 ## Check For Broken Links
 
-[A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site and incoming links from external sites, but doesn't make any changes to the site source files. An alarm issue is raised and auto-resolved based on the result of the check.
+[A CI job](https://github.com/openziti/ziti-doc/actions/workflows/check-links.yml) periodically detects broken links in the GH Pages site and incoming links from external sites but doesn't make any changes to the site source files. An alarm issue is raised and auto-resolved based on the result of the check.
 
 With these scripts, you can test all the links in the site's pages and popular incoming request paths.
 
@@ -104,6 +104,10 @@ With these scripts, you can test all the links in the site's pages and popular i
   ```
 
   You will need to run `yarn serve` to crawl for broken links locally because the webpack server (`yarn start`) is not crawlable, and you will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
+
+### Update the List of Popular Incoming Links
+
+Use Google Analytics to build a "detail" report by modifying the standard report "Pages and screens." Add a column "Page path" to show the URL path for each record. Add a filter for the production hostname `openziti.io` to exclude test instances from the data. Click the "Share" button to export the data as a CSV file. Use a spreadsheet program to filter out redundant and irrelevant records.
 
 ## How openziti.io Works
 

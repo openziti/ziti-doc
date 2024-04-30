@@ -11,11 +11,10 @@ function clone_or_pull {
     local BRANCH="main"
   fi
   if [ -d "${dir}" ]; then
-    pushd "${dir}"
-    git fetch
+    pushd "${dir}" >/dev/null
     git checkout "${BRANCH}"
     git pull
-    popd
+    popd >/dev/null
   else
     git clone "${remote}" --branch "${BRANCH}" --single-branch "${dir}" --depth 1
   fi
@@ -68,14 +67,14 @@ if [[ "${SKIP_GIT}" == no ]]; then
     rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
   fi
   git config --global --add safe.directory $(pwd)
-  clone_or_pull "https://github.com/openziti/ziti" "ziti-cmd"
-  clone_or_pull "https://github.com/openziti/ziti-sdk-csharp" "ziti-sdk-csharp"
-  clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c"
-  clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app"
-  clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift"
-  clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c"
-  clone_or_pull "https://github.com/openziti/helm-charts" "helm-charts"
-  clone_or_pull "https://github.com/openziti-test-kitchen/kubeztl" "kubeztl"
+  clone_or_pull "https://github.com/openziti/ziti" "ziti-cmd" >/dev/null
+  clone_or_pull "https://github.com/openziti/ziti-sdk-csharp" "ziti-sdk-csharp" >/dev/null
+  clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c" >/dev/null
+  clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app" >/dev/null
+  clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift" >/dev/null
+  clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c" >/dev/null
+  clone_or_pull "https://github.com/openziti/helm-charts" "helm-charts" >/dev/null
+  clone_or_pull "https://github.com/openziti-test-kitchen/kubeztl" "kubeztl" >/dev/null
 fi
 
 if [[ "${SKIP_CLEAN}" == no ]]; then
@@ -127,7 +126,7 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
   fi
 
   if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/Doxyfile"; then
-      pushd "${ZITI_DOC_GIT_LOC}/ziti-sdk-c"
+      pushd "${ZITI_DOC_GIT_LOC}/ziti-sdk-c" >/dev/null
       doxygen
       CLANG_SOURCE="${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
       CLANG_TARGET="${SDK_ROOT_TARGET}/clang"
@@ -143,7 +142,7 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
       echo "Removing"
       echo "    ${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
       rm -rf "${ZITI_DOC_GIT_LOC}/ziti-sdk-c/api"
-      popd
+      popd >/dev/null
   else
       echo "ERROR: CSDK Doxyfile not located"
   fi
@@ -151,7 +150,7 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
   if test -f "${ZITI_DOC_GIT_LOC}/ziti-sdk-swift/CZiti.xcodeproj/project.pbxproj"; then
       SWIFT_API_TARGET="${SDK_ROOT_TARGET}/swift"
       mkdir -p "${SWIFT_API_TARGET}"
-      pushd "${SWIFT_API_TARGET}"
+      pushd "${SWIFT_API_TARGET}" >/dev/null
       swift_tgz="https://github.com/openziti/ziti-sdk-swift/releases/latest/download/ziti-sdk-swift-docs.tgz"
       echo " "
       echo "Copying Swift docs"
@@ -163,7 +162,7 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
       #wget -q -O - "${swift_tgz}" | tar -zxvC "${SWIFT_API_TARGET}"
       wget -q -O - "${swift_tgz}" | tar -zxv
       find "${SWIFT_API_TARGET}" -name "EnrollmentResponse*"
-      popd
+      popd >/dev/null
   fi
 fi
 
@@ -173,12 +172,12 @@ if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
   echo "  - this requires you to have a GITHUB_TOKEN environment variable exported"
   ./gh-stats.sh
 fi
-pushd ${ZITI_DOC_GIT_LOC}/..
+pushd ${ZITI_DOC_GIT_LOC}/.. >/dev/null
 echo "running 'yarn install' in ${PWD}"
 yarn install --frozen-lockfile
 echo "running 'yarn build' in ${PWD}"
 yarn build
-popd
+popd >/dev/null
 
 echo " "
 if test -e "${script_root}/docusaurus/build/landing.html"; then

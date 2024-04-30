@@ -1,0 +1,50 @@
+---
+title: Migrate a Router Installation
+sidebar_label: Migrate
+---
+
+You can generate a configuration with the `ziti create config router` command, optionally mutating the generated config with a combination of command-line args and environment variables. Find an annotated sample config file from [the Ziti repo](https://github.com/openziti/ziti/blob/main/etc/edge.router.yml).
+
+Here's an example BASH script for migrating an existing controller state to the Linux service's working directory.
+
+```bash
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o xtrace
+
+pushd $(mktemp -d)
+
+# install router and CLI packages
+curl -sS https://get.openziti.io/install.bash \
+| sudo bash -s openziti-router
+
+# create state with the quickstart
+timeout 10s ziti edge quickstart --home $PWD
+
+# ensure service is disabled and state is clean
+sudo systemctl disable --now ziti-router.service
+sudo systemctl clean --what=state ziti-router.service
+
+# duplicate the controller part of the quickstart state to the service working directory using the config.yml filename
+# expected by the controller service
+sudo mkdir -pv /var/lib/ziti-router/
+sudo cp -v ./quickstart-router.* /var/lib/ziti-router/
+sudo mv -v /var/lib/ziti-router/{quickstart-router.yaml,config.yml}
+
+# correct config paths
+sudo sed -Ei "s|$PWD|/var/lib/ziti-router|g" /var/lib/ziti-router/config.yml
+
+# disable bootstrapping
+sudo sed -Ei 's|(ZITI_BOOTSTRAP_.*)=.*|\1=false|g' /opt/openziti/etc/router/service.env
+
+# run only the controller in the background using the quickstart state so the enrolled router can check in
+nohup ziti controller run ctrl.yaml &
+
+# start the service
+sudo systemctl enable --now ziti-router.service
+sudo systemctl status ziti-router.service
+```
+

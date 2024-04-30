@@ -1,0 +1,66 @@
+---
+title: Router Backup
+sidebar_label: Router
+---
+
+
+## Recover
+
+Routers are replaceable without a backup. You can use role attributes in your policies or
+re-enroll an unavailable router.
+
+### Role Attributes
+
+You can recover without a backup by creating a new router with the same roles. Policies that authorize routers with role
+attributes (e.g., `#some-role`), not mentions (e.g., `@router1`) will authorize a replacement router with the same roles
+with the same privileges.
+
+Remember to delete the replaced router.
+
+### Re-enrollment
+
+You can recover without a backup by re-enrolling an existing router. Re-enrolling a router will invalidate the existing
+enrollment and existing policy grants for the router's ID (e.g., `@router1`) will still be valid.
+
+Re-enroll with the CLI like this.
+
+```text
+ziti edge re-enroll edge-router router1 --jwt-output-file /tmp/router1.jwt
+```
+
+```buttonless title="Expected output"
+re-enroll edge-router with id XVXqEG6ANz: OK
+Enrollment expires at 2024-04-19T18:12:47.489Z
+```
+
+[Link to API reference for the re-enroll operation](/reference/developer/api/02-edge-management-reference.mdx#tag/Edge-Router/operation/reEnrollEdgeRouter).
+
+### Restore Files
+
+If you have a backup of the router's identity files, you can restore them to a new host. The router's identity files are
+the only state that must be restored. You probably also want to restore the configuration file, but you may use any
+valid router configuration. 
+
+The necessary files are referred to in the configuration file as filesystem paths in `identity`
+blocks, of which there are one or more. If you restore the identity files to a new location, you must edit the
+configuration file to reflect the new paths or use environment variables within the configuration file for
+paths within the `identity` block.
+
+## Backup
+
+The router has two stateful elements: the configuration file and the identity files mentioned in the configuration
+file. The router will cache control plane information in the same directory as the configuration file, but it's not
+essential to back it up as long as the configuration file points to a valid control plane endpoint.
+
+### Identity Files
+
+The router's identity files (keys and certs) uniquely identify the router to the controller. To recover a unique router
+identity you must back up the files mentioned in the following configuration properties:
+
+- `identity` may appear in several places and always configures keys and certs for the router
+
+### Configuration File
+
+The router's configuration file is specified as a positional parameter when the router is run. You can edit the
+file to change the filesystem path for any files that are restored to a new location.
+

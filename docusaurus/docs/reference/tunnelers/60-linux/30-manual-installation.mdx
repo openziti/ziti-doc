@@ -1,0 +1,39 @@
+---
+title: Manual Installation
+sidebar_label: Manual
+---
+
+## Manual Installation
+
+[The latest binary release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is
+distributed as an executable binary in GitHub.
+
+
+Unzip the downloaded file and copy the binary to a directory in your PATH, such as `/usr/local/bin`.
+
+```text
+sudo install -o root -g root ./ziti-edge-tunnel /usr/local/bin/
+```
+
+Create a POSIX group named `ziti` if it doesn't already exist. Members of this group can access the identity files and send IPC commands to the socket server.
+
+```text
+grep -q '^ziti:' /etc/group || sudo groupadd --system ziti
+```
+
+Create a directory to hold the identity files.
+
+```text
+sudo mkdir -pv /opt/openziti/etc/identities
+```
+
+### Run the Manually Installed Binary
+
+You must run the manually installed tunneller as root because only the Linux package configures ambient
+kernel capabilities that enable managing DNS and IP routes with reduced privileges.
+
+```text
+sudo ziti-edge-tunnel run --identity-dir /opt/openziti/etc/identities
+```
+
+[Learn more about tunneller options and modes](./40-linux-tunnel-options.mdx).

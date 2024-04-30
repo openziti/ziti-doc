@@ -4,6 +4,8 @@ Enrollment is the process of some Edge client or Edge Router associating itself 
 results in the creation of an identity or associating security credentials with a pre-provisioned identity.
 Ziti Router enrollment is exclusively associating security credentials with a pre-provisioned Edge Router.
 
+Edge clients "learn" the controller's address and port when they enroll, so it is necessary to re-enroll or replace the identity if the controller's advertised address or port changes.
+
 ## Routers
 
 Upon creation of an Edge Router, enrollment details in the form of a JWT that acts as a one-time-token become 

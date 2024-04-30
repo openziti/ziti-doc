@@ -1,5 +1,6 @@
 label: Core Concepts
 position: 15
 link:
-  type: doc
-  id: learn/core-concepts/index
+  type: generated-index
+  description: Here you will find the core concepts that are composed to create, use, and maintain an OpenZiti overlay network.
+

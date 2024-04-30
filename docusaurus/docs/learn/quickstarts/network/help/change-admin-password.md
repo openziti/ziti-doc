@@ -2,7 +2,7 @@
 title: Change Password
 ---
 
-import CliLogin from '../../../../_cli-login.md'
+import CliLogin from '/docs/_cli-login.md'
 import CliChangeUpdb from '../../../../_cli-change-password.md'
 
 Follow these instructions to change your quickstart admin's password. A random password was generated for you when you ran `expressInstall` and saved in your *.env file as `ZITI_PWD`. After changing the password, also change the value of `ZITI_PWD` in `~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env` to match. This variable is used by the `zitiLogin` function.

@@ -1,0 +1,86 @@
+---
+title: Controller Backup
+sidebar_label: Controller
+---
+
+## Backup
+
+You can recover from the catastrophic loss of the controller if you back up the configuration file, root CA, and
+database.
+
+The three stateful aspects of the controller are the configuration file, PKI, and the database. Ensure you back up all
+the files mentioned in the controller's configuration file (keys, certs, root CA bundle, and the database), and the
+config YAML file itself.
+
+If you're using the Linux service you may accomplish this by triggering the database snapshot operation and backing up
+the `/var/lib/ziti-controller` directory.
+
+### Backing up the Configuration File
+
+The controller's configuration file is specified as a positional parameter when the controller is run. You can back
+up this file or provide any valid controller configuration file to recover.
+
+### Backing up the PKI Files
+
+It is crucial to back up the irreplaceable root CAs. You can ease disaster recovery by issuing all leaf certificates
+from an intermediate CA and securing the root CA on a different host. This ensures that the controller's PKI files are
+replaceable. You can safely remove the root CA from the controller host after it is secured elsewhere, or you can begin
+with the root CA on a different host and issue an intermediate CA for the first controller and any future replacement
+controllers.
+
+The controller issues leaf certificates during enrollment from its edge signer CA. If the edge signer is an
+intermediate, then it's unnecessary to back up the intermediate CA cert or private key because every part of the system
+is configured to trust the root. The controller's leaf certificate files must begin with the leaf and contain their
+intermediate issuer chain. This configures the controller to present the partial chain during the TLS handshake,
+allowing the other party to complete the chain with their copy of the root CA.
+
+The following configuration properties refer to PKI files that must be backed up if not using an intermediate CA.
+
+-   `identity` may appear in several places and always configures keys, leaf certs, and CA certs. When this property
+    appears at the top level of the configuration file, its `ca` property has a special meaning and configures a bundle of
+    root CAs that all parts of the network should trust.
+-   `edge.enrollment.signingCert` always appears in one place and configures the controller's edge signer CA key and cert.
+
+### Backing up the Database
+
+The Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store its state. You will use the database
+snapshot to initialize the replacement controller during recovery.
+
+The database is a writeable file in a path specified by the controller's configuration property `db` ([link to config
+reference](/reference/30-configuration/controller.md#db)).
+
+Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a
+snapshot file in the same filesystem directory as the main database file on the controller host, so you can periodically
+back up the directory containing the configuration file and database and snapshots.
+
+```text
+ziti edge db snapshot
+```
+
+## Recovery
+
+In a scenario where the controller's state was lost, you can recover by restoring the configuration file, PKI, and
+database snapshot.
+
+### Recovering Configuration File
+
+The path to the configuration file is a controller run parameter. You can restore the same configuration file or
+provide any valid controller configuration. It's not necessary to use the same filesystem paths on the new host, but the
+configuration file must be edited to reflect the new paths if they change. You may use environment variables within the
+configuration file for paths within the `db` and any `identity` blocks.
+
+### Recovering PKI
+
+The controller's configuration file contains URIs for its private keys, leaf certificates, edge signer CA
+certificate, and trust bundle. If the URI scheme is not specified it is interpreted as a `file://` URI, which may be
+relative to the directory where the configuration file is located or absolute.
+
+You can restore these files from a backup, or, if using intermediate CA(s), you can instead generate new keys, issue a
+new intermediate CA cert from the same root CA, and issue new leaf certificates from the new intermediate CA ([link to certificate renewal guide](/guides/troubleshooting/pki-troubleshooting/renew-cert.md)).
+
+## Recovering the Database
+
+If the controller was lost then a new controller can be initialized with a database snapshot.
+
+If you backed up the directory containing the active database and snapshots, ensure you restore the latest snapshot to
+preserve data integrity. The backed-up active database file may not be internally consistent.
