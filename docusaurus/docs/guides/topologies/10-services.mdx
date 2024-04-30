@@ -36,7 +36,7 @@ In this guide, we will demonstrate ziti services with the following examples:
 ### 3.1.5 Network Diagram 5
 ![Diagram](/img/public_cloud/Services02-5.jpg)
 
-This guide provides both CLI and GUI (ZAC) instructions. To use ZAC, make sure ZAC is installed. If you have not installed ZAC, and would like to use it in this section, please follow the [ZAC Setup Guide](/guides/deployments/40-cloud/10-controller.mdx#14-setup-ziti-administration-console-zac) before continuing.
+## 3.2 Set up VMs for ziti network
 
 ## 3.2 Setup VMs for ziti network
 ### 3.2.1 Controller
@@ -71,7 +71,7 @@ error: error listing https://161.35.108.218:8441/edge/management/v1/config-types
 ### 3.2.2 Router
 We need two routers to complete our example in this guide.
 
-- Public Edge Router (**pub-er**) was setup in the [Router setup section](/guides/deployments/40-cloud/20-router.mdx#23-create-and-setup-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](/guides/deployments/40-cloud/20-router.mdx#29-firewall) for this router.
+- Public Edge Router (**pub-er**) was setup in the [Router setup section](/guides/deployments/40-cloud/20-router.mdx#23-create-and-set-up-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](/guides/deployments/40-cloud/20-router.mdx#29-firewall) for this router.
 - Local Edge Router (**local-er**). Please follow the [Router guide](/guides/deployments/40-cloud/20-router.mdx/) to setup a [Router with edge listener and tunneler](/guides/deployments/40-cloud/20-router.mdx/#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Resolver](/guides/deployments/40-cloud/20-router.mdx#26-fix-the-resolver), [Route Table](/guides/deployments/40-cloud/20-router.mdx#27-route-table), [Source and Destination Check](/guides/deployments/40-cloud/20-router.mdx#28-source-and-destination-check) and [Firewall](/guides/deployments/40-cloud/20-router.mdx#29-firewall).
 
 #### 3.2.2.1 ZAC
