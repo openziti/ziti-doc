@@ -83,23 +83,6 @@ You may set `ZITI_ROUTER_PORT` in `/opt/openziti/etc/router/bootstrap.env` to bo
 
 Clients "learn" the router's address and port when they poll the controller for authorized routers, so it is not necessary to re-enroll or re-create the client if the router's address or port changes. Simply change the config, bounce the router, and it will begin advertising the new address and port. This works because the system service and Docker container both auto-renew their server certificate every startup, and the certificate's DNS subject alternative name is set in the router's config.yml file. If you set `ZITI_AUTO_RENEW_CERTS=false` then it's necessary to administratively re-create the router or run at least once with the `--extend` flag.
 
-## Agent
-
-The router provides an IPC agent for administration. The agent listens on a Unix domain socket inside the filesystem namespace of the router service. Here's an example for querying the router's agent for statistics.
-
-```text
-systemctl show -p MainPID --value ziti-router.service \
-| xargs -rIPID sudo nsenter --target PID --mount -- \
-    ziti agent stats
-```
-
-```buttonless title="Output"
-goroutines: 38
-OS threads: 20
-GOMAXPROCS: 16
-num CPU: 16
-```
-
 ## Logging
 
 View the router service's output with `journalctl -u ziti-router.service`.
