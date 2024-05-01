@@ -3,12 +3,10 @@ title: Interprocess Communication Agent
 sidebar_label: Agent
 ---
 
-The controller and router provide an IPC agent for administration. The agent listens on a Unix domain socket inside the filesystem namespace of the controller service. Here's an example for querying the controller's agent for statistics.
+The controller and router provide an IPC agent for administration. The agent listens on a Unix domain socket. Here's an example for querying the controller's agent for statistics.
 
 ```text
-systemctl show -p MainPID --value ziti-controller.service \
-| xargs -rIPID sudo nsenter --target PID --mount -- \
-    ziti agent stats
+ziti agent stats
 ```
 
 ```buttonless title="Output"
@@ -16,4 +14,32 @@ goroutines: 50
 OS threads: 22
 GOMAXPROCS: 16
 num CPU: 16
+```
+
+## Accessing the Agent on Linux
+
+On Linux, the agent is listening inside the filesystem namespace managed by `systemd`. You can enter the namespace with `nsenter`.
+
+```text
+systemctl show -p MainPID --value ziti-router.service \
+| xargs -rIPID sudo nsenter --target PID --mount -- \
+    ziti agent --help
+```
+
+## Accessing the Agent in Docker
+
+In Docker, the agent is listening inside the container filesystem. You can access the agent by running `ziti` inside the running container.
+
+```text
+docker compose exec ziti-controller ziti agent --help
+```
+
+## Accessing the Agent in Kubernetes
+
+Like Docker, the agent listens inside the container filesystem when running on Kubernetes.
+
+```text
+kubectl -n ziti get pods --selector app.kubernetes.io/name=ziti-controller --output jsonpath="{.items[0].metadata.name}" \
+| xargs -IPOD kubectl -n ziti -c ziti-controller exec POD -- \
+    ziti agent --help
 ```
