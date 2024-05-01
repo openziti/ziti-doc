@@ -20,9 +20,16 @@ We'll cover the following topics:
 
 The controller package provides a service unit and, if bootstrapping is enabled, will generate a configuration based on the bootstrapping answer file. The `openziti` package provides the `ziti` CLI and is installed automatically as a dependency. Run the install script for RPM and Debian distributions or manually configure the package repo and install package `openziti-controller`.
 
+Download and run the install script.
+
 ```text
-curl -sS https://get.openziti.io/install.bash \
-| sudo bash -s openziti-controller
+wget https://get.openziti.io/install.bash
+```
+
+If you install interactively then you'll have an opportunity to answer questions about generating a configuration.
+
+```text
+sudo bash ./install.bash openziti-controller
 ```
 
 <LinuxPackageRepo />
