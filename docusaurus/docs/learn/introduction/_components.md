@@ -11,7 +11,7 @@ Lastly but critically, the OpenZiti Controller is responsible for
 authentication and authorization for every connection in the OpenZiti
 Network.
 
-The OpenZiti Controller must be configured with public key infrastructure
+The OpenZiti Controller must be configured with [public key infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure)
 (PKI). The configured PKI is used to create secure, mutually-
 authenticated TLS (mTLS) network connections between any two
 pieces of the OpenZiti Network. The OpenZiti Controller does not provide its
