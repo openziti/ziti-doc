@@ -1,7 +1,7 @@
 # Identities
 
 Ziti Edge defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or
-dial (connect) to services over a Ziti Network. An Identity may be a human who uses one or more devices, a device
+dial (connect) to services over a network. An Identity may be a human who uses one or more devices, a device
 itself, a single account on a multi-user device, an application, or a set of applications. What determines what an
 Identity is only limited by the intent of its use, its security configuration, and where/how it stores its credentials.
 
@@ -16,7 +16,7 @@ storage mechanism (e.g. Windows Credential Manager) it is that accounts Identity
 ## Identity ER Diagram
 
 Below is a diagram that show the high-level relationships between an Identity and various important entities and within
-a Ziti Network. This diagram does not show all entities, simply the ones tied closest to an Identity. For example,
+a network. This diagram does not show all entities, simply the ones tied closest to an Identity. For example,
 the Role Attributes on an Identity are used by selectors defined on policies to act on the identity. However, the 
 policies and selectors are not modeled here.
 
@@ -174,5 +174,5 @@ It does not remove entities are that re-usable between Identities:
 - [Service Policies](/learn/core-concepts/security/authorization/policies/overview.mdx)
 - [Edge Router Policies](/learn/core-concepts/security/authorization/policies/overview.mdx)
 
-Deleting an Identity immediately removes it and all current and future access it would have to a Ziti Network and its
+Deleting an Identity immediately removes it and all current and future access it would have to a network and its
 Services.

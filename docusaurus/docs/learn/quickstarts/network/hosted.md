@@ -5,7 +5,7 @@ import Wizardly from '@site/src/components/Wizardly';
 
 # Host OpenZiti Anywhere
 
-You can absolutely choose to host your [OpenZiti Network](/learn/introduction/index.mdx) anywhere you like.
+You can absolutely choose to host your [network](/learn/introduction/index.mdx) anywhere you like.
 It is not necessary for the server to be on the open internet. If it works better for you to deploy OpenZiti on your
 own network, great, do that.  The only requirement to be aware of is that every piece of the a network will need to be able to communicate to the controller and at least one edge router, which this quickstart will provide.
 
@@ -14,7 +14,7 @@ ideal scenario. With a zero trust overlay network provided by OpenZiti, you can 
 
 ## Installation
 
-When starting out deploying an [OpenZiti Network](/learn/introduction/index.mdx), we recommend you follow
+When starting out deploying a [network](/learn/introduction/index.mdx), we recommend you follow
 and use the `expressInstall` function provided by the OpenZiti project. Once you're familiar with the network and
 the configuration options available you'll be better equipped to make changes.
 
@@ -24,9 +24,9 @@ The first issue you will need to deal with is opening some ports. A network will
 at least one edge router. Both of these components will require ports to be open. For the controller you will need to
 open a range of ports through your firewall:
 
-- `8440/tcp`: Edge Controller providing router control plane
-- `8441/tcp`: Edge Controller providing client sessions
-- `8442/tcp`: Edge Router providing client connections
+- `8440/tcp`: edge controller providing router control plane
+- `8441/tcp`: edge controller providing client sessions
+- `8442/tcp`: edge router providing client connections
 - `8443/tcp`: Ziti Admin Console (ZAC) [optional]
 
 These are the arbitrary ports we'll use in this example for convenience when specifying the firewall exception as a port range.
@@ -184,7 +184,7 @@ $ echo $ZITI_HOME
 
 - Now that you have your network in place, you probably want to try it out. Head to the
   [Your First Service](/learn/quickstarts/services/index.md) quickstart and start learning how to use OpenZiti.
-- [Install the Ziti Console](/learn/quickstarts/zac/index.md) (web UI)
+- [Install the console](/learn/quickstarts/zac/index.md) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

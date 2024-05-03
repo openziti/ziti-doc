@@ -34,7 +34,7 @@ have a token generated at the time of the identity's creation.  This token is th
 as part of the [enrollment](./enrolling) process.  Once an identity is successfully enrolled - the one time token is
 no longer valid and cannot be used to enroll the same identity again.
 
-One time tokens are delivered from the Ziti Controller as a [jwt](https://tools.ietf.org/html/rfc7519) and the token
+One time tokens are delivered from the controller as a [jwt](https://tools.ietf.org/html/rfc7519) and the token
 expires 24 hours after the identity is created.  The token is downloadable via the Ziti Admin Console. After you create
 a user you can go to the Identities page and click the icon that looks like a certificate to download the .jwt file.
 
@@ -46,8 +46,8 @@ the permanent identity JSON file will be installed by running the `enroll` comma
 
 ### 3rd Party CA - Overview
 
-The Ziti Controller is capable of using an existing PKI for authentication and authorization rather than to PKI
-configured in the Ziti Controller.  Certificates that are not controlled by the Ziti Controller are referred to as "3rd
+The controller is capable of using an existing PKI for authentication and authorization rather than to PKI
+configured in the controller.  Certificates that are not controlled by the controller are referred to as "3rd
 party". If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
 to use a 3rd Party CA this section is for you.
 
@@ -55,13 +55,13 @@ to use a 3rd Party CA this section is for you.
 Reusing a PKI is not a simple topic and managing and maintaining a PKI is out of the scope of this guide.
 :::
 
-A 3rd Party CA will need to be created and the public certificate uploaded into the Ziti Controller. After using an
-existing PKI to reuse/generate a certificate, the Ziti Controller will be to create identities which will be expected to
+A 3rd Party CA will need to be created and the public certificate uploaded into the controller. After using an
+existing PKI to reuse/generate a certificate, the controller will be to create identities which will be expected to
 present a certificate during the connection process that is valid per the provided certificate.
 
 #### Adding a 3rd Party CA to the Ziti Controller
 
-Adding a certificate to the Ziti Controller is easy using the Ziti Console.
+Adding a certificate to the controller is easy using the console.
 
 <Tabs>
 <TabItem value="tabid-new-ca-ui" label="New CA via UI">
@@ -83,7 +83,7 @@ Adding a certificate to the Ziti Controller is easy using the Ziti Console.
 #### 3rd Party CA - One Time Token
 
 3rd Party CA OTT enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the
-utilization of a 3rd party CA certificate rather than the configured Ziti Edge CA and PKI. In this method, the system
+utilization of a 3rd party CA certificate rather than the configured edge CA and PKI. In this method, the system
 does not have access to the 3rd party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is
 assumed that the enrolling device has a separate process to acquire signed certificates. Rather than submitting a CSR
 the client uses an already acquired signed certificate as its client certificate for the enrollment request. The client
@@ -91,17 +91,17 @@ certificate is validated against the CA certificate tied to the one time token.
 
 Similar to the [OTT Enrollment](#one-time-token-ott) process, identities must be provisioned ahead of enrollment in
 order to generate one time token required and to creat the jwt that can be delivered to enrolling devices. This means
-that the provisioning of the Ziti Edge identities and the client certificates must be coordinated. Identities can be enrolled with a one time token flow similar to the [one time token flow](#one-time-token-ott).
+that the provisioning of the identities and client certificates must be coordinated. Identities can be enrolled with a one time token flow similar to the [one time token flow](#one-time-token-ott).
 
 #### 3rd Party CA - Auto Enrolled
 
 CA Auto Enrollment is useful in situations where devices are provisioned with certificates en-mass that need to be able
-to register as identities within Ziti Edge. This enrollment method allows for device provisioning processes to skip the
-manual configuration of Ziti Edge and instead allow clients to present a signed client certificate to generate an
+to register as identities within the edge. This enrollment method allows for device provisioning processes to skip the
+manual configuration of the edge and instead allow clients to present a signed client certificate to generate an
 identity during the enrollment process. The identity will grant the client access to authenticate only - any
 authorization will need to be done after the device identities have been created.
 
-A certificate can only be used for one identity. The Ziti Edge system does not allow the same certificate to be used for
+A certificate can only be used for one identity. The edge does not allow the same certificate to be used for
 multiple identities. An enrollment request is comprised of a special enrollment URL used to perform an HTTP POST request
 using the signed client certificate as the TLS client certificate and an optional JSON payload that allows the client to
 specify the devices display name and internal username. See [enrollment](./enrolling) for more details on enrolling.

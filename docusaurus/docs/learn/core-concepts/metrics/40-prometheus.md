@@ -1,6 +1,6 @@
 # Prometheus Endpoint
 
-The Ziti Controller can expose a `/metrics` endpoint that serves network metrics in the Prometheus [text exposition format](https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format). 
+The controller can expose a `/metrics` endpoint that serves network metrics in the Prometheus [text exposition format](https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format). 
 
 The endpoint is exposed over HTTPS, and has optional support for client authentication via a certificate.
 
@@ -177,7 +177,7 @@ In this example you will:
 
 1. Create a new cert and signing request
 1. Sign the key
-1. Add the key into your Ziti Controller configuration
+1. Add the key into your controller configuration
 1. Add the key to your prometheus scrape config
 
 #### Create a cert for metric scraping
@@ -196,7 +196,7 @@ Open your ziti configuration file and set up the metrics api binding as shown in
 
 Some common things to watch out for:
 
-* The Ziti Controller will need to be restarted after editing the configuration file
+* The controller will need to be restarted after editing the configuration file
 
 Best practices is to use a separate metrics listener that is only accessible from Prometheus.  This configuration will expose the `metrics/` on the loopback address, port 2112.
 

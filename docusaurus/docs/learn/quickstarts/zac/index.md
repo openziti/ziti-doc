@@ -5,7 +5,7 @@ title: Ziti Admin Console
 import Wizardly from '@site/src/components/Wizardly';
 
 The Ziti Administration Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and
-explore a [Ziti Network](/learn/introduction/index.mdx).
+explore a [network](/learn/introduction/index.mdx).
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ you can perform the following steps.
    ng build ziti-console-node
    ```
 
-1. Use the ziti-controller certificates for the Ziti Console:
+1. Use the ziti-controller certificates for the console:
 
    Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
 
@@ -78,7 +78,7 @@ you can perform the following steps.
    ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
    ```
 
-1. [Optional] Emit the Ziti Console systemd file and update systemd to start the Ziti Console (ZAC). If you have not sourced
+1. [Optional] Emit the console systemd file and update systemd to start the console (ZAC). If you have not sourced
    [the Ziti helper script](https://get.openziti.io/ziti-cli-functions.sh) and you wish to have ZAC enabled with systemd,
    you need to in order to get the necessary function. Either inspect the script and find the function, download and source it,
    or source it directly from the internet (direct sourcing from internet shown below)
@@ -100,7 +100,7 @@ you can perform the following steps.
    Ziti Server running on port 1408
    ```
 
-1. [Optional] If using systemd - verify the Ziti Console is running by running the systemctl command
+1. [Optional] If using systemd - verify the console is running by running the systemctl command
    `sudo systemctl status ziti-console --lines=0 --no-pager`
 
    ```text
@@ -124,7 +124,7 @@ you can perform the following steps.
 ### Copy PKI From Controller
 It's a good idea to use TLS everywhere. To do this, you'll need to provide ZAC a key and a certificate.
 If you have used the [Local - With Docker](/learn/quickstarts/network/local-with-docker.md) quickstart to start
-the OpenZiti Network you can copy the certificates generated when the controller started.
+the network you can copy the certificates generated when the controller started.
 Shown is an example which copies the certs from the OpenZiti container and uses them with ZAC. We'll copy the files
 from the docker named volume `myPersistentZitiFiles` and put them into a folder at `$HOME/.ziti/zac-pki`.
 

@@ -1,6 +1,6 @@
 # Enrollment
 
-Enrollment is the process of some Edge client or Edge Router associating itself with a Ziti network. Client enrollment
+Enrollment is the process of some Edge client or edge router associating itself with a Ziti network. Client enrollment
 results in the creation of an identity or associating security credentials with a pre-provisioned identity.
 Ziti Router enrollment is exclusively associating security credentials with a pre-provisioned Edge Router.
 
@@ -36,7 +36,7 @@ available in the `enrollmentJWT` field.
 }
 ```
 
-To enroll a router, deliver the `enrollmentJWT` to the host that will run the Edge Router and perform enrollment via:
+To enroll a router, deliver the `enrollmentJWT` to the host that will run the edge router and perform enrollment via:
 
 `ziti router enroll -j <jwt_path>`
 

@@ -4,16 +4,16 @@ title: Authentication
 
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
 has begun when the client receives and API Session and is  complete when the API Session is fully authenticated.
-API Sessions are a high level security context that represents an authenticated session with either the Ziti [Edge Client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-or the Ziti [Edge Management API](docs/reference/developer/api/02-edge-management-reference.mdx).
+API Sessions are a high level security context that represents an authenticated session with either the Ziti [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
+or the Ziti [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx).
 
-- Clients that are powered by a Ziti SDK that access services will authenticate with the [Edge Client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-- Clients that are managing a Ziti Network will authenticate with the [Edge Management API](docs/reference/developer/api/02-edge-management-reference.mdx)
+- Clients that are powered by a Ziti SDK that access services will authenticate with the [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
+- Clients that are managing a network will authenticate with the [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx)
 
 ## Authentication Flow
 
-Below is diagram showing initial authentication for some client. The same model is used between the [Edge Client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-and [Edge Management API](docs/reference/developer/api/02-edge-management-reference.mdx).
+Below is diagram showing initial authentication for some client. The same model is used between the [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
+and [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx).
 
 ```mermaid
 graph TD
@@ -33,8 +33,8 @@ In the above a client has provided primary authentication credentials (certifica
 subsequently provided any secondary credentials necessary (JWT, TOTP, etc). The secondary credentials are requested 
 via Authentication Queries and enable multifactor authentication to occur.
 
-The goal of authentication is to obtain an API Session. API Sessions are used to interact with the Ziti Controller 
-and Ziti Edge Routers. API Sessions for clients are represented by opaque tokens that are provided as headers in HTTP 
+The goal of authentication is to obtain an API Session. API Sessions are used to interact with the controller 
+and edge routers. API Sessions for clients are represented by opaque tokens that are provided as headers in HTTP 
 requests and by values in protobuf messages for the Edge protocol between routers and SDKs. API Sessions represent a 
 security context that is used to determine authorization in the rest of the Ziti network.
 
@@ -49,7 +49,7 @@ API Session documentation.
 Primary authentication in Ziti establishes and API Sessions identity principal and enabled Ziti to determine which
 secondary authentication factors are necessary for an API Session to become fully authenticated. If no secondary
 authentication factors are required the API Session becomes fully authenticated immediately without any further
-interaction with the Client or Management API.
+interaction with the client or Management API.
 
 Primary authentication factors include:
 
@@ -73,7 +73,7 @@ Authenticators may be listed via the CLI:
 
 `ziti edge list authenticators`
 
-or via the [Edge Management API](docs/reference/developer/api/02-edge-management-reference.mdx):
+or via the [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx):
 
 ```
 GET /edge/management/v1/authenticators
@@ -84,7 +84,7 @@ GET /edge/management/v1/authenticators
 x509 authentication requires the client to initiate a HTTPs authentication request using a x509 client certificate that
 is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge 
 Controller's internal PKI or an external PKI. If an external PKI is being used, it must be registered as a 
-[3rd Party CA](10-third-party-cas.md) via the Ziti [Edge Management API](docs/reference/developer/api/02-edge-management-reference.mdx), verified, and
+[3rd Party CA](10-third-party-cas.md) via the Ziti [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx), verified, and
 have authentication enabled. The client certificate must pass signature and CA chain-of-trust validation. All client, 
 intermediate CA, and root CA functionality supports RSA and EC keys.
 
@@ -98,7 +98,7 @@ Expired client certificates may be allowed via [Authentication Policies](30-auth
 
 ### JWT Primary Authentication
 
-JWT authentication requires that an [External JWT Signer](50-external-jwt-signers.md) be added via the Ziti Edge Management 
+JWT authentication requires that an [External JWT Signer](50-external-jwt-signers.md) be added via the Ziti edge management 
 API. The definition of [External JWT Signer](50-external-jwt-signers.md) allows configuration of which JWT claim should be
 used as a value to map against the unique `externalId` or `id` property on Identities. This mapping of JWT claim to 
 `externalId`/`id` is used to determine which Identity is authenticating.

@@ -37,7 +37,7 @@ With an understanding of what we are looking to accomplish in this guide, let's 
 
 ## Implementing the Service
 
-### Prerequisite - OpenZiti Network
+### Prerequisite - OpenZiti
 You will need an OpenZiti overlay network in place before you can complete this guide. If you do not have an
 OpenZiti overlay network provisioned yet, [follow a quickstart](/learn/quickstarts/quickstarts.md) and get a network up and running.
 

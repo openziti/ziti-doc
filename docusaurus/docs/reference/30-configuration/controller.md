@@ -42,9 +42,9 @@ Of those values, to start the controller only the `ctrl`, `db` or `raft`, `v`, a
 sections are required. However, not including the `edge` section will start the controller in "
 fabric only" mode and will not support any edge functionality or concepts (identities, JWT
 enrollment, 3rd Party CAs, policies, etc.). Not including the `web` section will result in none of
-the REST APIs (Fabric Management API, Edge Client API, Edge Management API, Health Check API) being
-started. Without the Edge and Fabric Management APIs running administration of the network will be
-impossible. Without the Edge Client API running it will be impossible for Edge clients to connect to
+the REST APIs (fabric management API, edge client API, edge management API, health check API) being
+started. Without the edge and fabric management APIs running administration of the network will be
+impossible. Without the edge client API running it will be impossible for Edge clients to connect to
 services.
 
 Example Minimum Controller Configuration:
@@ -179,10 +179,10 @@ edge:
 The `api` section within the `edge` section defines API specific functionality.
 
 - `activityUpdateInterval` - (optional) the interval used to buffer API Session usage notices
-- `sessionTimeout` - (optional) The amount of time an Edge API Session remains alive after the last
-  REST API Request was processed or the last Edge Router connection for an API Session was closed
+- `sessionTimeout` - (optional) The amount of time an edge API Session remains alive after the last
+  REST API Request was processed or the last edge router connection for an API Session was closed
 - `address` - (required) the `<host>:<port>` combination that should be used to externally resolve
-  to the Edge Client API
+  to the edge client API
 
 For `activityUpdateInterval`, Edge Routers report connected API Sessions periodically and the
 controller tracks REST API requests. `activityUpdateInterval` defines the interval those updates are
@@ -195,7 +195,7 @@ sufficient.
 The `address` setting is unique as it must match the `address` in a `bindPoint` for
 the `edge-client` API. This is to ensure that responses and data persisted outside the system can
 reach the controller. An example of this is enrollment JWTs that contain the URL that is used to
-complete enrollment via the Edge Client API.
+complete enrollment via the edge client API.
 
 #### `enrollment`
 
@@ -248,12 +248,12 @@ The `subscriptions` section is an array of objects with fields associated with t
 Specifying an event type will cause it to be output via the defined handler. If an event type is
 omitted, it will not be output. The list of valid event types and their options is as follows:
 
-- `edge.apiSessions` - (optional) Edge API Session events
+- `edge.apiSessions` - (optional) edge API Session events
     - `include` - (optional) a string or array of strings that specify which API session events to
       include ("created"
       and/or "
       deleted")
-- `edge.entityCounts` - (optional) Edge entity counts (API Sessions, sessions, routers, etc.)
+- `edge.entityCounts` - (optional) edge entity counts (API Sessions, session entities, routers, etc.)
     - `interval` - (optional) the time interval to generate entity count events on (e.g. "5s", "
       5000ms", "1h")
 - `edge.sessions`  - (optional) Session events
@@ -506,11 +506,11 @@ following APIs defined:
 
 - `health-checks` - provides a health check API that allows remote parties to verify the health of
   the controller
-- `fabric` - the Fabric Management API which allows remote administration of a network
-- `edge-management` - the Edge Management API which allows remote administration of a network's edge
+- `fabric` - the fabric management API which allows remote administration of a network
+- `edge-management` - the edge management API which allows remote administration of a network's edge
   components (
   identities, policies, authentication, etc.)
-- `edge-client` - the Edge Client API which allows clients to authenticate and request connections
+- `edge-client` - the edge client API which allows clients to authenticate and request connections
   to services
 
 Each API may have their own options, but currently do not.

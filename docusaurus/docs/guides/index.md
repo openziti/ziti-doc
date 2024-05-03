@@ -14,4 +14,4 @@ There's lots of room in here for new guides! Want guidance before you submit? Wa
 
 ## What is a Guide?
 
-A guide is like a recipe. It's a type of documentation that is more advanced and solution-focused than other types. A guide is prescriptive and procedural. For example, "How to deploy a Ziti controller with Helm."
+A guide is like a recipe. It's a type of documentation that is more advanced and solution-focused than other types. A guide is prescriptive and procedural. For example, "How to deploy a controller with Helm."

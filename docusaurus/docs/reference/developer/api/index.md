@@ -8,7 +8,7 @@ import ApiQuickInfoMd from './_api-quickinfo.md';
 
 ## Specifications & Documentation
 
-Both the Edge Management and Client APIs have OpenAPI 2.0, formerly Swagger, specifications. The most up-to-date versions  are
+Both the edge management and client APIs have OpenAPI 2.0, formerly Swagger, specifications. The most up-to-date versions  are
 available within the [Ziti Edge API GitHub repository](https://github.com/openziti/edge-api#user-content-versioning). There is also
 an API reference web site built in to the running Ziti controller:
 
@@ -44,21 +44,21 @@ It is essential to build your application with respect to the specification of y
 
 ## Edge Management API
 
-The Edge Management API is used by clients that wish to configure an OpenZiti Network and does not facilitate to interacting
-with service for dialing (connecting) nor binding (hosting). The Edge Management API provides the ability to create
-new identities, identities, policies, and other entities used to manage an OpenZiti Network.
+The edge management API is used by clients that wish to configure a network and does not facilitate to interacting
+with service for dialing (connecting) nor binding (hosting). The edge management API provides the ability to create
+new identities, identities, policies, and other entities used to manage a network.
 
-[Explore the latest Edge Management API Reference](./02-edge-management-reference.mdx)
+[Explore the latest edge management API Reference](./02-edge-management-reference.mdx)
 
 ## Edge Client API
 
-The Edge Client API is used by clients that wish to dial (connect) or bind (host) services. The services that the
+The edge client API is used by clients that wish to dial (connect) or bind (host) services. The services that the
 clients are allowed to interact with is defined by [policies](/docs/learn/core-concepts/security/authorization/policies/overview). In order
 for clients to use the client API they must first [authenticate](/docs/learn/core-concepts/security/authentication/auth) and
 obtain either a [partial or fully authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication)
 [API Session](/docs/learn/core-concepts/security/sessions).
 
-[Explore the latest Edge Client API Reference](./01-edge-client-reference.mdx)
+[Explore the latest edge client API Reference](./01-edge-client-reference.mdx)
 
 ## Edge Client & Management Shared Capabilities
 
@@ -74,10 +74,10 @@ all Ziti APIs. Additionally, between the two the following endpoint paths are ex
 
 ## Configuring the Controller Edge APIs
 
-In order for the Edge Client and Management API to be available a controller must be configured to enable them. This 
+In order for the edge client and management API to be available a controller must be configured to enable them. This 
 requires two configuration sections `edge` and `web`. The `edge` section configures values that will affect  both the
-Edge Client API and the Edge Management API. The `web` section is used to configure and compose any of Ziti's
-APIs, Edge Client and Management included, to listen on any combination of network interface and ports.
+Edge client API and the edge management API. The `web` section is used to configure and compose any of Ziti's
+APIs, edge client and Management included, to listen on any combination of network interface and ports.
 
 ### Controller Configuration Reference
 
@@ -97,16 +97,16 @@ edge:
     # API requests and connections that are maintained to Edge Routers
     sessionTimeout: 30m
     # address - required
-    # The default address (host:port) to use for enrollment for the Client API. This value must match one of the addresses
+    # The default address (host:port) to use for enrollment for the client API. This value must match one of the addresses
     # defined in a bind point's address field for the `edge-client` API in the web section.
     address: 127.0.0.1:1280
   # enrollment - required
   # A section containing settings pertaining to enrollment.
   enrollment:
     # signingCert - required
-    # A Ziti Identity configuration section that specifically makes use of the cert and key fields to define
+    # A identity configuration section that specifically makes use of the cert and key fields to define
     # a signing certificate from the PKI that the Ziti environment is using to sign certificates. The signingCert.cert
-    # will be added to the /.well-known CA store that is used to bootstrap trust with the Ziti Controller.
+    # will be added to the /.well-known CA store that is used to bootstrap trust with the controller.
     signingCert:
       cert: ./ziti/etc/ca/intermediate/certs/intermediate.cert.pem
       key: ./ziti/etc/ca/intermediate/private/intermediate.key.pem
@@ -121,7 +121,7 @@ edge:
     # A section for edge router enrollment specific settings.
     edgeRouter:
       # duration - optional, default 5m
-      # The length of time that a Ziti Edge Router enrollment should remain valid. After
+      # The length of time that a edge router enrollment should remain valid. After
       # this duration, the enrollment will expire and not longer be usable.
       duration: 5m
 ```

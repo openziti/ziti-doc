@@ -2,10 +2,10 @@
 title: Ziti Security
 ---
 
-A Ziti Network's security setup is defined by several entities defined in the [Edge Management API](/docs/reference/developer/api#edge-management-api). The following
+A network's security setup is defined by several entities defined in the [edge management API](/docs/reference/developer/api#edge-management-api). The following
 are related to identity authentication and service access:
 
-- [Identities](#identity) - describe a human, device, or service within Ziti Edge
+- [Identities](#identity) - describe a human, device, or service within the edge
 - [Authenticators](./authentication/auth.md#authenticators) - describes the credentials of an authentication method associated with an Identity
 - [Enrollments](./enrollment.md) - describes a set of criteria necessary to create a new Identity and associated Authenticator
 - [Authentication Policy](./authentication/30-authentication-policies.md) - describes the methods available for Identity authentication
@@ -17,7 +17,7 @@ are related to identity authentication and service access:
   to a Service
 - [Service Policy](./authorization/policies/overview.mdx) - describes which Identities have access to which Services and the Posture Checks that are required to
   pass for access
-- [Edge Router Policies](./authorization/policies/overview.mdx)  - describes which Identities have access to which Edge Routers
+- [Edge Router Policies](./authorization/policies/overview.mdx)  - describes which Identities have access to which edge routers
 - [Posture Checks](./authorization/posture-checks.md) - describes additional environmental state that an Identity must have in order to obtain and maintain
   service access
 - [Posture Queries](./authorization/posture-checks.md#posture-data) - describes a request for environmental information from a client
@@ -25,9 +25,9 @@ are related to identity authentication and service access:
 - [Posture Data](./authorization/posture-checks.md#posture-data) - the current environmental state provided via Posture Responses and known information
 - [Authentication Queries](./sessions.md#authentication-queries) - additional, secondary, authentication factors required after initial, primary, authentication
 
-There is an additional policy type for Edge Routers:
+There is an additional policy type for edge routers:
 
-- [Service Edge Router Policies](./authorization/policies/overview.mdx) - determines which services can be accessed over which routers
+- [Service edge router policies](./authorization/policies/overview.mdx) - determines which services can be accessed over which routers
 
 Additionally, connection security document is provided on the [Connection Security](connection-security.md) page. 
 
@@ -55,24 +55,24 @@ own separate section.
 4. authorization: the client requests a Session for a specific Service
     1. (Continuous) the Service Policies are consulted for access additionally re-evaluating Posture Checks against the
        current know Posture Data
-    2. the list of Service Edge Router Policies and Edge Router Policies are consulted to provide a valid list Edge
-       Routers the Session security token may be used on
-    3. a Session security token and Edge Router list is provided to the client
-5. the client attempts to connect to a target Edge Router with an API Session security token
-6. the target Edge Router evaluates the credential
+    2. the list of Service edge router policies and edge router policies are consulted to provide a valid list edge
+       routers the Session security token may be used on
+    3. a Session security token and edge router list is provided to the client
+5. the client attempts to connect to a target edge router with an API Session security token
+6. the target edge router evaluates the credential
 7. the client requests a Service connection with their Session security token
-    1. the connection request is verified through Service Edge Router Policies
-8. the Edge Router coordinates the service connection
+    1. the connection request is verified through Service edge router policies
+8. the edge router coordinates the service connection
 
 ## High Level Concepts
 
-Below are the major areas of Ziti Edge's security model with a minimal description of what each area covers. The link(s)
+Below are the major areas of the edge security model with a minimal description of what each area covers. The link(s)
 in each section will lead to a more detailed explanation of the relevant topics.
 
 ### Identity
 
-Ziti Edge defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or 
-dial (connect) to services over a Ziti Network. Read more in the [Identity](/learn/core-concepts/identities/overview.mdx) section.
+The edge defines a top level entity called an identity. An identity is a security principal that can bind (host) or 
+dial (connect) to services over a network. Read more in the [Identity](/learn/core-concepts/identities/overview.mdx) section.
 
 ### Enrollment
 
@@ -91,12 +91,12 @@ and [Authentication Policies](./authentication/30-authentication-policies.md). R
 
 ### Authorization
 
-[Authorization](./authorization/auth.md) in Ziti is configured for Identities and Edge Routers. Edge Router authorization only covers which
-services can be used over an Edge Router via Service Edge Router Policies. Identity authorization is covered by Service
-Policies and Edge Router Policies.
+[Authorization](./authorization/auth.md) in Ziti is configured for identities and edge routers. Edge router authorization only covers which
+services can be used over an edge router via service edge router policies. Identity authorization is covered by service
+policies and edge router policies.
 
 All policies in Ziti are represented by a robust [attribute based access control system (ABAC)](https://en.wikipedia.org/wiki/Attribute-based_access_control) based on `roleAttributes`
-properties on entities within the [Edge Management API](/docs/reference/developer/api/index.md#edge-management-api). `roleAttributes` properties are an array of user defined strings.
+properties on entities within the [edge management API](/docs/reference/developer/api/index.md#edge-management-api). `roleAttributes` properties are an array of user defined strings.
 Policies support attribute selector properties to determine which entities a policy interacts on. Policies themselves
 are documented in [Policies](./authorization/policies/overview.mdx) section.
 

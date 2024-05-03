@@ -1,6 +1,6 @@
 # On Demand
 
-The Ziti Controller supports pulling metrics on demand via the `inspections` framework. 
+The controller supports pulling metrics on demand via the `inspections` framework. 
 
 The inspections framework is part of the fabric API, hosted by the controller. The fabric API binding will need to be enabled in the controller configuration file for this to work.
 

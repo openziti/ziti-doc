@@ -4,13 +4,13 @@ title: BrowZer
 import Details from '@theme/MDXComponents/Details';
 
 BrowZer is a set of technologies which is capable of bootstrapping zero trust connectivity entirely in a browser,
-and without the need to install any client-side software! To enable BrowZer on your OpenZiti Network the `ziti-browzer-bootstrapper`
+and without the need to install any client-side software! To enable BrowZer on your network the `ziti-browzer-bootstrapper`
 will need to be deployed. This pages outlines the steps needed to deploy BrowZer to your own overlay. For an example
 of enabling BrowZer, see the [Example Enabling BrowZer](./example/index.md) subpage showing the steps in more detail.
 
 ## Prerequisites
 
-To deploy and enable BrowZer on your OpenZiti Network, you will need to have:
+To deploy and enable BrowZer on your network, you will need to have:
 
 * an OpenZiti Overlay Network is available and has been configured with alternative server certs
 * an OIDC Provider and the ability to define applications/clients for the provider
@@ -18,19 +18,19 @@ To deploy and enable BrowZer on your OpenZiti Network, you will need to have:
 
 ### OIDC Prerequisites
 
-Enabling BrowZer will require configuring the OpenZiti Network to delegate authentication to an OIDC provider. Every OIDC
+Enabling BrowZer will require configuring the network to delegate authentication to an OIDC provider. Every OIDC
 provider is different and understanding OIDC flows is beyond this guide. There are 
 [numerous](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/), 
 [excellent](https://developer.okta.com/blog/2019/10/21/illustrated-guide-to-oauth-and-oidc)
 [posts](https://developers.google.com/identity/openid-connect/openid-connect) to find and read about OIDC. The OIDC 
 concepts you will want to understand are:
 
-* how to create/obtain the client id the OpenZiti Network will use
+* how to create/obtain the client id the network will use
 * how to learn/find/discover the OIDC discovery endpoint
 * what `audience` the OIDC provider will add to the bearer token
 * what field or `claim` the OIDC provider will add to the bearer token which will be used to locate matching identities
 
-## Configuring the OpenZiti Network
+## Configuring the Network
 
 With the OIDC information in hand, the next step is to actually configure OpenZiti to allow the delegation of authentication.
 To do this you will need to:
@@ -61,7 +61,7 @@ ziti edge create ext-jwt-signer \
 
 ### Creating the Authentication Policy
 
-Authentication policies configure the OpenZiti Network to delegate authentication one or more OIDC providers. To
+Authentication policies configure the network to delegate authentication one or more OIDC providers. To
 create the authentication policy you only need the id of the external jwt signer (from above). Shown below is a `bash` 
 example. Replace the values accordingly. Capture the returned identity, it will be necessary after creating the external
 jwt signer:

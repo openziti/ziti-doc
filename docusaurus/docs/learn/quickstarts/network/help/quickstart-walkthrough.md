@@ -19,7 +19,7 @@ the `expressInstall` function. Each version varies slightly. This page will focu
 6. Create a Router configuration
 7. Create a Router entity on the network (via the Controller)
 8. Enroll the Router previously created
-9. Add default Edge Router and Service Edge Router policies.
+9. Add default edge router and Service edge router policies.
 
 ## General Environment Setup
 
@@ -27,7 +27,7 @@ the `expressInstall` function. Each version varies slightly. This page will focu
 
 The `expressInstall` function will call `getZiti` to obtain the Ziti binary. The `getZiti` function detects your
 OS type and architecture to craft the specific download URL for the binary. The binary is downloaded, and extracted to
-a directory within the OpenZiti Network directory.
+a directory within the network directory.
 :::note
 The quickstart script isn't limited to `expressInstall`. You can source the `ziti-cli-function.sh` file and run any of
 the many helpful functions. For example, you can run `getZiti` to get the latest version of OpenZiti downloaded quickly
@@ -63,7 +63,7 @@ A controller configuration file is generated using the OpenZiti CLI binary. Afte
 controller is initialized. The process of initialization also initializes the database.
 
 The controller is then started and the quickstart waits for the controller to finish starting up before continuing as
-the controller is necessary to create the Edge Router which happens in the next steps.
+the controller is necessary to create the edge router which happens in the next steps.
 
 ### Default Policies
 
@@ -71,7 +71,7 @@ Two policies are generated to simplify the process of getting started with the n
 An [Edge Router Policy](../../../core-concepts/security/authorization/policies/overview#edge-router-policies)
 is created to allow all identities to connect to a router with a `#public` attribute. The router created during the
 `expressInstall` is populated with this attribute.
-A [Service Edge Router Policy](../../../core-concepts/security/authorization/policies/overview#service-edge-router-policies)
+A [Service edge router policy](../../../core-concepts/security/authorization/policies/overview#service-edge-router-policies)
 is also created, allowing all services to use routers with the `#public` attribute.
 
 ### Router Creating and Configuration
@@ -89,15 +89,15 @@ the most commonly used environment variables and their descriptions.
 By default, the quickstart PKI is set up with `127.0.0.1` as the default IP. The `*_IP_OVERRIDE` variables allow you
 to add an IP the PKI will be valid for.
 
-- `ZITI_CTRL_EDGE_IP_OVERRIDE` an additional IP for the OpenZiti Controller. This value is added to the PKI SANs IP
+- `ZITI_CTRL_EDGE_IP_OVERRIDE` an additional IP for the controller. This value is added to the PKI SANs IP
   field for
   the controller's edge PKI trust chain.
-- `ZITI_ROUTER_IP_OVERRIDE` is a custom IP for the OpenZiti Router.
+- `ZITI_ROUTER_IP_OVERRIDE` is a custom IP for the router.
 
 Here are a few more common variables.
 
 - `ZITI_CTRL_EDGE_ADVERTISED_ADDRESS` is the valid name for the Controller address used in the PKI.
-- `ZITI_ROUTER_ADVERTISED_ADDRESS` is the advertised address of the OpenZiti Router. This defaults to the value in
+- `ZITI_ROUTER_ADVERTISED_ADDRESS` is the advertised address of the router. This defaults to the value in
   `EXTERNAL_DNS` if set. Otherwise, the value in `EXTERNAL_IP` is used.
 - `ZITI_CTRL_ADVERTISED_PORT` is the port used for the Controller's control plane address.
 - `ZITI_CTRL_EDGE_ADVERTISED_PORT` is the port used for the Controller's Edge/API plane address.

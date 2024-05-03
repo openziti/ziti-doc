@@ -5,12 +5,12 @@ title: Enrolling
 
 All connections made to the Ziti network leverage [mutual TLS](https://en.wikipedia.org/wiki/Mutual_authentication)
 which means every client needs a valid X509 certificate which it will present to the Ziti network during the connection
-process. The process of obtaining a key/certificate pair and presenting it securely to the Ziti Controller is called
+process. The process of obtaining a key/certificate pair and presenting it securely to the controller is called
 "Enrollment".
 
 ### Overview
 
-All identities need to be enrolled with the Ziti Controller so the Ziti Controller can authenticate the incoming connection.
+All identities need to be enrolled with the controller so the controller can authenticate the incoming connection.
 This process is slightly different for each type of identity and is complex. The easiest way to enroll an identity is to 
 use either the Ziti Desktop Edge/Ziti Mobile Edge for your operating system. Alternatively, you may perform the enrollment separate 
 with the `ziti` CLI which can be downloaded from the [GitHub releases page](https://github.com/openziti/ziti/releases/latest) 
@@ -18,8 +18,8 @@ with the `ziti` CLI which can be downloaded from the [GitHub releases page](http
 ### One Time Token Enrollment - Internal PKI
 
 Perhaps the easiest path to an enrolled identity is by using the one-time token enrollment flow. This flow leverages the
-PKI configured in the Ziti Controller.  Using the one-time token flow - the `ziti` CLI will generate a private key
-and a certificate signing request for the Ziti Controller's built-in certificate authority to fulfill.
+PKI configured in the controller.  Using the one-time token flow - the `ziti` CLI will generate a private key
+and a certificate signing request for the controller's built-in certificate authority to fulfill.
 
 Follow these steps to enroll an identity with a one-time token:
 
@@ -38,7 +38,7 @@ ziti edge enroll \
 :::caution
 The output from the `ziti` CLI is a permanent identity configuration file which
 must be stored securely. This file contains within it the private key that backs
-the certificate issued by the Ziti Controller.  This file should not be
+the certificate issued by the controller.  This file should not be
 transferred or shared and should not be moved from the machine unless you are
 confident you understand the risks involved in doing so.
 :::
@@ -79,19 +79,19 @@ ziti edge enroll \
 
 ### 3rd Party CA - Auto
 
-When using a third party CA identity creation process in the Ziti Controller is
+When using a third party CA identity creation process in the controller is
 automatic. Enrolling the identity will create it with the default role attributes that were specified when the 3rd party CA was created.
 
 Like "3rd Party CA - One Time Token" - this flow expects that a private key and certificate have
 already been created on or distributed to the machine that is about to enroll.
-The certificate presented to the Ziti Controller must be issued by a [third
+The certificate presented to the controller must be issued by a [third
 party CA](/learn/core-concepts/pki.md#third-party-ca-optional) that was already
-imported and verified in the Ziti Controller with the
+imported and verified in the controller with the
 `isAutoCaEnrollmentEnabled` property set to true.
 
 Using the `ziti` CLI will also require the re-use of a permanent JWT that is unique to the external CA. The JWT
-can be downloaded from the Ziti Controller from:  `${controller_uri}/cas/${id}/jwt` where `${controller_uri}` represents
-the fully qualified address of the Ziti Controller api and `${id}` represents the identifier for the given third party CA.
+can be downloaded from the controller from:  `${controller_uri}/cas/${id}/jwt` where `${controller_uri}` represents
+the fully qualified address of the controller api and `${id}` represents the identifier for the given third party CA.
 
 **Example Usage:**
 

@@ -32,10 +32,10 @@ For the demonstration, we will set up the network like below:
 Complete the following steps first.
 
 - An open-ziti network should be created already. If not, please follow this quickstart [Host OpenZiti Anywhere](/docs/learn/quickstarts/network/hosted/) guide to set up a ziti network first. **NOTE**, the router link listener port (**10080**) needs to be opened on the firewall if this is the only transit router you have on the network.
-- Get the Ziti Controller IP or DNS name
-- Get the Ziti Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_ADVERTISED_PORT**
-- Get the Ziti Controller Management Port: On the controller, issue this command **echo $ZITI_CTRL_EDGE_ADVERTISED_PORT**
-- Get the Ziti Controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
+- Get the controller IP or DNS name
+- Get the controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_ADVERTISED_PORT**
+- Get the controller Management Port: On the controller, issue this command **echo $ZITI_CTRL_EDGE_ADVERTISED_PORT**
+- Get the controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
 - Created two target VMs to host *routers*. The VMs should be running on **Ubuntu 22.04**.
 - Created one *Windows client* already. Suggested Windows version Windows 10 or Windows 11. Windows servers should work fine as well.
 - Created one *ubuntu server* already. Or any Linux server capable of accepting SSH and http connection.
@@ -461,11 +461,7 @@ ziggy@local-gw:~$ ziti edge list services
 results: 1-1 of 1
 ```
 
-## 4.4 Create Service-Edge-Router-Policy
-
-This step is **optional** if you used quickstart. The service-edge-router-policy already includes "#all" service roles to "#all" edge router roles as displayed on the screen capture below.
-
-But in case you need to add a policy, here is the command to add the service tag we created (rtrhosted) to all routers
+## 4.4 Create Service Edge Router Policy
 
 ```text
 ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#rtrhosted' --semantic 'AnyOf'
@@ -581,7 +577,7 @@ results: 1-2 of 2
 
 ```
 
-## 5.4 Service-Edge-Router-Policy
+## 5.4 Service Edge Router Policy
 
 Since we used same attribute for http service as the attribute for SSH service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
 

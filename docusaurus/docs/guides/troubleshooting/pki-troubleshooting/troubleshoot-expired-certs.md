@@ -3,7 +3,7 @@ title: Expired Certs
 id: troubleshoot-expired-certs
 ---
 
-The following are examples of how an invalid server cert will present itself on a running OpenZiti Network. There are certs 
+The following are examples of how an invalid server cert will present itself on a running network. There are certs 
 for the edge API and the control plane, so it's important to check for both as they will likely share the same expiry 
 date.
 

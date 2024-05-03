@@ -9,7 +9,7 @@ The certificates are scoped by the "valid before" and "valid after" dates in add
 removed (expiration, logout, etc.) the API Session Certificates created by that API Session are no longer valid.
 
 API Session Certificates may only be used by the [API Session](/learn/core-concepts/security/sessions.md#api-session) that created them. Attempting to use an [API Session](/learn/core-concepts/security/sessions.md#api-session)
-Certificate to connect to and Edge Router without the matching [API Session](/learn/core-concepts/security/sessions.md#api-session) security token will be rejected.
+Certificate to connect to and edge router without the matching [API Session](/learn/core-concepts/security/sessions.md#api-session) security token will be rejected.
 
 ## Use
 

@@ -15,7 +15,7 @@ A service is defined by the following components:
 
 Ziti services must have names that are unique to their Ziti installation. Service names are how clients address services in order to consume them. Services which are provided by applications with Ziti embedded also use the service name to indicate which service is being provided.
   
-Services defined on a Ziti Network have an almost limitless "namespace" available for identifying services. A Ziti service is to be defined by a name and this name is registered with the Ziti Controller. Once declared, services can then be addressed directly by name from Ziti-aware clients. This means there are effectively a **limitless** number names available with no need for global DNS registration. The names assigned are unique to a Ziti Network and the application developer has total control over service names.
+Services defined on a network have an almost limitless "namespace" available for identifying services. A Ziti service is to be defined by a name and this name is registered with the controller. Once declared, services can then be addressed directly by name from Ziti-aware clients. This means there are effectively a **limitless** number names available with no need for global DNS registration. The names assigned are unique to a network and the application developer has total control over service names.
 
 ## Service Termination
 
@@ -60,7 +60,7 @@ Routers also have the ability to connect to applications providing services. Thi
 | -----------------| ----------------------|---------------------|-------------------------------------|-------------------------|
 | SDK Embedded     | Yes                   | Yes                 | Yes                                 | Yes                     |
 | SDK Based Proxy  | No, only to proxy     | Yes (via Proxy)     | Only to proxy. If desired, full end-to-end must be done externally | No. Can be relatively locked down, though |
-| Ziti Router      | No                    | No                  | No. If desired, end-to-end must be done externally | No. Can be relatively locked down, though. |
+| router      | No                    | No                  | No. If desired, end-to-end must be done externally | No. Can be relatively locked down, though. |
 
 ### Terminators
 
