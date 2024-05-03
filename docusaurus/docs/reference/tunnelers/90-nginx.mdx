@@ -10,9 +10,9 @@ We'll run the module in Kubernetes as an example, but the module works anywhere 
 ## Prerequisites
 
 - Azure Subscription, Resource Group and [Azure Cli](https://learn.microsoft.com/en-us/cli/azure/)
-- [OpenZiti Nginx Module Repo](https://github.com/openziti/ngx_ziti_module)
+- [NGINX Module](https://github.com/openziti/ngx_ziti_module)
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
-- Openziti Network
+- network
 - [Desktop Tunneler](/reference/tunnelers/index.mdx)
 
 ---
@@ -27,14 +27,11 @@ We'll run the module in Kubernetes as an example, but the module works anywhere 
 
 ---
 
-## Create OpenZiti Network
+## Create a Network
 
-A couple of ways to do that:
-
-- Follow the guide @[Host OpenZiti](/learn/quickstarts/network/hosted.md)
-- Follow the guide @[Terraform LKE Setup with OpenZiti](https://github.com/openziti-test-kitchen/terraform-lke-ziti/blob/main/README.md)
-
-Tested with OpenZiti Network deployed to the LKE Cluster using Terraform.
+- [Local quickstart](/docs/category/network)
+- [Linux](/docs/category/linux)
+- [Docker](/docs/category/docker)
 
 ---
 
@@ -216,7 +213,7 @@ controller:
 
 ---
 
-## OpenZiti Service Configurations
+## Service Configurations
 
 - ***Create configs***
 
@@ -388,7 +385,7 @@ kube-system   metrics-server   ClusterIP   10.0.218.224   <none>        443/TCP 
 ```
 
 :::note
-At this point the public access is still available even though the API Kubectl queries are routed through Ziti Network. You can disable ZDE client and test that.
+At this point the public access is still available even though the API Kubectl queries are routed through Ziti. You can disable ZDE client and test that.
 :::
 
 ## Block IPs to API Server

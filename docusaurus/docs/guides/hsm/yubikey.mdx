@@ -18,7 +18,7 @@ like fingerprints and pictures, and other unique identifiers. When put together 
 the capability to implement multi-factor authentication for networks, applications and buildings.
 
 In this quickstart, you will see the commands and tools needed to use a [YubiKey 5
-nfc](https://www.yubico.com/products/yubikey-5-overview/) with a Ziti Network. This document is intended to serve as a
+nfc](https://www.yubico.com/products/yubikey-5-overview/) with a network. This document is intended to serve as a
 quickstart. That means limited context will be provided for each step. When appropriate, there will be a small amount of
 context or a comment included to aid in the understanding of what is happening. Most, if not all, of these commands
 are easily found in the search engine of choice.
@@ -66,7 +66,7 @@ Here's the list of steps we'll accomplish in this quickstart:
     * initialize the PIV app
     * create a key
 * Use `ziti-tunnel` to enroll the identities using the YubiKey
-* Use `ziti-tunnel` in proxy mode to verify things are working and traffic is flowing over the Ziti Network
+* Use `ziti-tunnel` in proxy mode to verify things are working and traffic is flowing over the network
 
 :::caution
 Do *NOT* use id `2` or `02` for any keys you add. Id `02` corresponds to the YubiKey's "Management Key". You will not be

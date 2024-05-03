@@ -7,7 +7,7 @@ import Code from '@theme/MDXComponents/Code';
 import Highlight from "/src/components/OpenZitiHighlight";
 import ReactPlayer from 'react-player'
 
-This page will demonstrate adding BrowZer to an existing OpenZiti Network that was started using the
+This page will demonstrate adding BrowZer to an existing network that was started using the
 ["host it anywhere" quickstart](/learn/quickstarts/network/hosted.md). It will use Ubuntu Linux as well, if
 your Linux distribution is different, change the commands accordingly. The August 18 2023 Ziti TV features a full 
 walkthrough and explanation of this whole page. If you are interested in watching a narrated and explained run
@@ -27,7 +27,7 @@ This quickstart will use [Docker](https://www.docker.com/) to obtain a wildcard 
 familiar with Docker and have it installed to proceed, or you'll need to figure out alternative ways to obtain
 a wildcard certificate.
 
-If you already have an existing OpenZiti Network, you'll likely want to skim through this document and pick out the
+If you already have an existing network, you'll likely want to skim through this document and pick out the
 sections that are relevant to your configuration.
 
 If you lose your shell, one or more important variables may be lost. It is probably easiest to start again and follow
@@ -115,10 +115,10 @@ lrwxrwxrwx 1 root zitiweb  59 Aug 17 21:12 privkey.pem -> ../../archive/browzere
 
 ---
 
-### Install a new OpenZiti Network
+### Install Ziti
 
-BrowZer is built around the OpenZiti overlay network. You'll need a network deployed. Since this guide is using
-a legitimate 3rd party verifiable certificate from LetsEncrypt, we'll deploy a brand new OpenZiti Network by 
+BrowZer is built around OpenZiti. You'll need a network deployed. Since this guide is using
+a legitimate 3rd party verifiable certificate from LetsEncrypt, we'll deploy a brand new network by 
 following the steps outlined in the ["host it anywhere"](/learn/quickstarts/network/hosted.md)
 quickstart with <Highlight style={{fontWeight: "bold"}}>one important exception</Highlight>! 
 We are going to set two variables before running the quickstart to allow the servers to use the LetsEncrypt
@@ -137,14 +137,14 @@ export ZITI_PKI_ALT_SERVER_KEY="/etc/letsencrypt/live/${wildcard_url}/privkey.pe
 ```
 </Details>
 
-#### Install the OpenZiti Network
+#### Run the Ziti Quickstart
 
 With the `ZITI_PKI_ALT_*` environment variables set, we are ready to follow the 
 __["host it anywhere" quickstart](/learn/quickstarts/network/hosted.md)__ instructions.  Run the quickstart
 and return here when complete.
 
 <Details>
-<summary>Verify the OpenZiti Network is Listening</summary>
+<summary>Verify that Ziti is Listening</summary>
 
 After completing the quickstart, you should be able to access the controller at both the alternate server cert url.
 Notice there's no need for 'insecure' (-sk) curl mode for the`${wildcard_url}` URL:
@@ -161,14 +161,14 @@ curl -sk https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:${ZITI_CTRL_EDGE_ADVERTISE
 
 ---
 
-### Add WebSocket Support to the OpenZiti Network
+### Add WebSocket Support
 
 BrowZer operates in a web browser. For it to connect to a router, BrowZer will attempt to connect to the router
-using a [web socket](https://en.wikipedia.org/wiki/WebSocket). We'll need to provision an edge router on the OpenZiti Network that supports 
+using a [web socket](https://en.wikipedia.org/wiki/WebSocket). We'll need to provision an edge router on the network that supports 
 [web sockets](https://en.wikipedia.org/wiki/WebSocket). We will do that by modifying the configuration of the router provisioned in the quickstart.
 
 <Details>
-<summary>Update Edge Router for WebSocket Support</summary>
+<summary>Update edge router for WebSocket Support</summary>
 
 After completing the quickstart, you will have an edge router configuration file in the user's home directory.
 Use your favorite editor, such as [`vim`](https://en.wikipedia.org/wiki/Vim_(text_editor)) to edit the file:
@@ -200,7 +200,7 @@ sudo systemctl restart ziti-router
 </Details>
 
 <Details>
-<summary>Verify the Edge Router is Websocket Enabled</summary>
+<summary>Verify the edge router is Websocket Enabled</summary>
 
 After the router restarts you'll be able to verify the router is properly configured. The following curl statement
 should succeed and return a 404 message similar to the one shown below. Note port 8447 is used, if you change this
@@ -236,7 +236,7 @@ configure Auth0 to be the BrowZer OIDC provider.
 
 ## Create a BrowZer env File
 
-At this point we have a functioning OpenZiti Network. We're ready to start BrowZer-specific configuration.
+At this point we have a functioning network. We're ready to start BrowZer-specific configuration.
 First we need to decide/find an OIDC provider.  
 
 Set a shell variable named `AUTH0_DOMAIN` and set it to the value shown on the "Basic Information" page in Auth0. Then
@@ -344,7 +344,7 @@ created.
 
 ---
 
-## Prepare the OpenZiti Network
+## Prepare the Network
 
 For the following steps, make sure you have all the variables set and make sure you have logged into the controller:
 ```text
@@ -428,8 +428,8 @@ New service policy brozac.dial created with id: 1TUzPYdN3GpGdA4k9Uauv3
 <Details>
 <summary>Associate/Update Identities with the Auth Policy</summary>
 
-Now we need to associate the claims presented by the OIDC provider with one or more identities inside the OpenZiti
-Network. Since we have decided to use Auth0, in the previous step we were able to create an `ext-jwt-signer` and 
+Now we need to associate the claims presented by the OIDC provider with one or more identities inside the
+network. Since we have decided to use Auth0, in the previous step we were able to create an `ext-jwt-signer` and 
 reference the claim named `email`. Since we chose Auth0, I know that it will provide this particular claim to OpenZiti
 after the user logs into the OIDC provider. If your OIDC provider doesn't provide `email`, you'll have to 
 learn/explore/understand how the OIDC provider you're using works. It's out of scope of this document to provide

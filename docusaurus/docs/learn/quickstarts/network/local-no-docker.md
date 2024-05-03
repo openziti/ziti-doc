@@ -6,7 +6,7 @@ import Wizardly from '@site/src/components/Wizardly';
 
 # Local - No Docker
 
-This page will show you how to get your [Ziti Network](/learn/introduction/index.mdx) up and running 
+This page will show you how to get your [network](/learn/introduction/index.mdx) up and running 
 quickly and easily, entirely locally. Since you'll be running everything locally, you'll have no issues communicating
 between network components. All the processes will run locally, and you'll be responsible for starting and stopping them
 when you want to turn the overlay network on or off.
@@ -95,7 +95,7 @@ Example output:
 
 ```text
 $ startRouter
-Express Edge Router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
+Express edge router started as process id: 1296. log located at: /home/vagrant/.ziti/quickstart/bullseye/bullseye-edge-router.log
 ```
 
 You can verify the edge router is listening by finding the value of `$ZITI_ROUTER_ADVERTISED_ADDRESS:$ZITI_ROUTER_PORT`.
@@ -120,7 +120,7 @@ INFO: Controller stopped.
 
 ## Testing Your Overlay
 
-At this point you should have a functioning [Ziti Network](/learn/introduction/index.mdx). The script 
+At this point you should have a functioning [network](/learn/introduction/index.mdx). The script 
 you sourced provides another function to login to your network. Try this now by running `zitiLogin`. You should see 
 something similar to this:
 ```text
@@ -195,7 +195,7 @@ source $HOME/.ziti/quickstart/$(hostname)/$(hostname).env
 
 - Now that you have your network in place, you probably want to try it out. Head to the
   [Your First Service](/learn/quickstarts/services/index.md) quickstart and start learning how to use OpenZiti.
-- [Install the Ziti Console](/learn/quickstarts/zac/index.md#cloning-from-github) (web UI)
+- [Install the console](/learn/quickstarts/zac/index.md#cloning-from-github) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

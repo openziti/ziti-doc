@@ -11,7 +11,7 @@ Grafana has a marvelous datasource type called [Infinity](https://grafana.com/gr
 ### Configure the datasource
 The configuration of the datasource is simple, but a little nonintuitive.
 
-We set the name of the server, in this case our OpenZiti Network Controller, but no authentication.  This seems odd for a secure network, but the datasource does not provide (at this level) the tools we need to interact with the authentication endpoint to receive an API Session token.  
+We set the name of the server, in this case our network Controller, but no authentication.  This seems odd for a secure network, but the datasource does not provide (at this level) the tools we need to interact with the authentication endpoint to receive an API Session token.  
 
 ![Infinity datasource authentication configuration](/img/Infinity_noAuth.png)
 
@@ -25,7 +25,7 @@ In the network section, we can provide the CA certificate for the controller, or
   
   **We are going to use the authenticate endpoint and our credentials to retrieve the bearer token for use in the headers of the requests for actual data.  Note that thses are part of the configuration, and therefore you must be careful about editor and admin access to the Grafana instance and node to protect these credentials.**
 
-- Build the query as below, entering your Edge management API socket address 
+- Build the query as below, entering your edge management API socket address 
   
   ![Variable query configuration](/img/bearer_token_variable.png)
 

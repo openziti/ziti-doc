@@ -4,7 +4,7 @@ OpenZiti is software first and foremost. Moving at the speed of software is a vi
 modern project.
 
 This article lightly describes the internal software architecture of OpenZiti. In most scenarios, this information is not essential
-to deploy and operate an OpenZiti Network. While not strictly necessary, understanding the internal model can help operators
+to deploy and operate a network. While not strictly necessary, understanding the internal model can help operators
 understand the functionality provided by OpenZiti, understand design decisions, and smooth the road for contributors.
 
 Broadly speaking there are four major areas of concentration for the OpenZiti project: Fabric, Edge, SDKs, Clients.
@@ -52,12 +52,12 @@ sections allow type-specific custom configuration.
 
 The Fabric provides several extension points. The main consumer of those extension points is the
 Edge. The Edge extends controllers and routers to add additional security controls and enable SDK connectivity.
-The Edge adds the concepts of endpoint identities, which represent OpenZiti SDKs that can connect to an OpenZiti Network. This
+The Edge adds the concepts of endpoint identities, which represent OpenZiti SDKs that can connect to a network. This
 concept acts as a springboard for an entire suite of identity life cycle and access management features. Below are the
 Fabric extension points and what Edge features they enable.
 
 - `xctrl` - adds API Session/Session control and enforcement to the controller and router
-- `xweb` - exposes the Edge Management & Client REST APIs on the controller
+- `xweb` - exposes the edge management & Client REST APIs on the controller
 - `xgress` - defines a new protocol, `xgress_edge`, that enables SDKs to connect to routers to act as service clients
   and hosts
 
@@ -70,10 +70,10 @@ use this feature to power features such as DNS/IP intercept addresses.
 ## SDKs
 
 The Ziti SDKs come in a variety of languages. Where appropriate, they are wrappers around the Ziti C SDK. The SDKs
-make use of the Edge Client REST API on the controller and the `xgress_edge` protocol on the router to extend an OpenZiti
+make use of the edge client REST API on the controller and the `xgress_edge` protocol on the router to extend an OpenZiti
 Network beyond the mesh network of routers and into applications and devices. The SDKs rely on the Edge to enable
-service connectivity over an OpenZiti Network. The SDKs do not directly interact with the Fabric. They act as a
-fulcrum to leverage the power of an OpenZiti Network.
+service connectivity over a network. The SDKs do not directly interact with the Fabric. They act as a
+fulcrum to leverage the power of a network.
 
 The SDKs expose an API that allows endpoints to enroll, authenticate, list services, receive centralized configuration,
 and connect or host services based on security access configuration.
@@ -82,7 +82,7 @@ and connect or host services based on security access configuration.
 
 ## Clients
 
-OpenZiti clients are any code that uses an OpenZiti SDK to connect to an OpenZiti Network. The OpenZiti project can provide these
+OpenZiti clients are any code that uses an OpenZiti SDK to connect to a network. The OpenZiti project can provide these
 applications or be custom-built by any software developer. They rely directly upon an OpenZiti SDK, indirectly
 on the Edge, and subsequently the Fabric. They can serve as the initiating client or terminating host for
 services. Clients may or may not expose extension points - it is at the author's discretion.

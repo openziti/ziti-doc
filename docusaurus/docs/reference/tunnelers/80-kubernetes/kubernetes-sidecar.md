@@ -7,10 +7,10 @@ sidebar_label: Sidecar Proxy
 
 ## Overview
 
-This guide shows you how to access a Ziti service with a non-Ziti client application that's running
+This guide shows you how to access a service with a non-Ziti client application that's running
 in a Kubernetes pod. To provide access to the service, we will deploy the `ziti-tunnel` container as a sidecar in a pod with a demo client app.
 
-This guide also demonstrates `ziti-tunnel`'s internal DNS server, which allows us to access Ziti services
+This guide also demonstrates `ziti-tunnel`'s internal DNS server, which allows us to access services
 by hostname instead of IP address.
 
 ![Diagram of solution](./sidecar-diagram.svg)
@@ -20,14 +20,14 @@ by hostname instead of IP address.
 ## Prerequisites
 
 - Complete the [Minikube Quickstart](/docs/learn/quickstarts/network/local-kubernetes). This guide
-  uses the Ziti Controller and Ziti Edge Router that are created in the Minikube Quickstart.
+  uses the controller and router that are created in the Minikube Quickstart.
 - Admin-level access to a Kubernetes cluster via `kubectl`.
 
 ## Create and Enroll an Identity
 
-This guide will re-use the Ziti service "testapi-service", a REST API demo server, that was created in the quickstart.
+This guide will re-use the service "testapi-service", a REST API demo server, that was created in the quickstart.
 
-1. We will create a new identity for our client app with the correct role to grant access to the Ziti service.
+1. We will create a new identity for our client app with the correct role to grant access to the service.
 
   ```text
   ziti edge create identity device sidecar-client \
@@ -124,7 +124,7 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
           dnsPolicy: None
           dnsConfig:
             nameservers:
-              - 127.0.0.1   # used by Ziti tunnel during startup to verify own DNS for the pod
+              - 127.0.0.1   # used by the tunneler during startup to verify own DNS for the pod
               - 10.96.0.10  # change to CoreDNS cluster service address
           restartPolicy: Always
           volumes:
@@ -177,4 +177,4 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
     + jq .data
     "ziti=awesome"
 
-Notice that the `wget` client is using the DNS name that we provided in the Ziti service definition to make the request.
+Notice that the `wget` client is using the DNS name that we provided in the service definition to make the request.

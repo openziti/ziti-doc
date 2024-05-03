@@ -1,7 +1,7 @@
 1. On the left side nav bar, click "Ziti Policies"
-1. On the top nav bar, click "Service Edge Router Policies"
-1. In the top right corner of the screen click the "plus" image to add a new Service Edge Router Policy
-1. Choose a name for the Service Edge Router Policy, such as "My Service Edge Router Policy"
+1. On the top nav bar, click "Service edge router policies"
+1. In the top right corner of the screen click the "plus" image to add a new Service edge router policy
+1. Choose a name for the Service edge router policy, such as "My Service edge router policy"
 1. Enter the services you want to include in the policy
     1. Specific services can be referenced by ID or name using `@`.  For example, a service called `ssh` can be referenced using `@ssh`. 
     1. Services can be referenced by role attribute using `#`. For example, any service which has the `sales` role attribute will be included if `#sales` is included in the service roles list.

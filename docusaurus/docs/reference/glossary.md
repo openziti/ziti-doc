@@ -37,7 +37,7 @@ See "initiating router" and "terminating router" above. The initiating endpoint 
 
 ## [Path](/learn/core-concepts/data-flow-explainer.md)
 
-The path is the set of Ziti Routers traversed by a Session from an initiating router to a terminating router. Ziti aggressively optimizes the path for throughput and reliability, and so it may change during the Session.
+The path is the set of routers traversed by a Session from an initiating router to a terminating router. Ziti aggressively optimizes the path for throughput and reliability, and so it may change during the Session.
 
 ## Underlay
 We refer to lower-level network concerns as "underlay". IP networking would be an example of an underlay concept.
@@ -51,7 +51,7 @@ core of the Ziti Fabric SDK.
 
 ## Ziti Controller, Controller
 
-A Ziti Controller is a process that is installed on a host, which allows it to coordinate a Ziti network. The Ziti Controller is designed to be extensible through Ziti fabric extension mechanisms (Xctrl, Xmgmt), which means that it is capable of hosting extensions to the fabric control and management planes.
+A controller is a process that is installed on a host, which allows it to coordinate a Ziti network. The controller is designed to be extensible through Ziti fabric extension mechanisms (Xctrl, Xmgmt), which means that it is capable of hosting extensions to the fabric control and management planes.
 
 ## Ziti Edge, Edge
 
@@ -73,28 +73,28 @@ The Ziti Fabric provides the core of the network overlay. The Ziti Fabric implem
 
 Ziti is a modern, programmable network overlay with associated edge components, for application-embedded, zero trust network connectivity, written by developers for developers.
 
-Ziti is NetFoundry's next-generation programmable networking product. Ziti is used to create Ziti Networks.
+Ziti is NetFoundry's next-generation programmable networking product. Ziti is used to create networks.
 
 ## Ziti Router, Router
 
-A Ziti Router is a process that is installed on a host, which allows it to participate in a Ziti Fabric. The router is designed to be extensible through Ziti fabric extension mechanisms (Xgress), which means that it is capable of "hosting" overlay network applications like the Ziti Edge.
+A router is a process that is installed on a host, which allows it to participate in a Ziti Fabric. The router is designed to be extensible through Ziti fabric extension mechanisms (Xgress), which means that it is capable of "hosting" overlay network applications like the Ziti Edge.
 
 ## [Ziti Service, Service](/learn/core-concepts/services/overview.mdx)
 
 A Ziti network is primarily concerned with providing access to "services". A service encapsulates the definition of any
-resource that could be accessed by a client on a traditional network. A Ziti Service is defined by a strong, extensible
-identity, rather than by an expression of an underlay concept. This means that services defined on a Ziti Network have
+resource that could be accessed by a client on a traditional network. A service is defined by a strong, extensible
+identity, rather than by an expression of an underlay concept. This means that services defined on a network have
 an almost limitless "namespace" available for identifying services. A Ziti service would be defined by a name and/or a
 certificate, rather than by a DNS name or an IP address (underlay concepts).
 
 ## Ziti Service, Service - Hosted
 
-Similar to a Ziti Service however the destination is not described as an IP address and port but rather it is expressed
-as a Ziti Identity. When used with a Ziti SDK it is possible to create a truly zero trust application.
+Similar to a service however the destination is not described as an IP address and port but rather it is expressed
+as a identity. When used with a Ziti SDK it is possible to create a truly zero trust application.
 
 ## [Ziti Tunneler, Tunneler](/reference/tunnelers/index.mdx)
 
-A Ziti Tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, tproxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.
+A tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, tproxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.
 
 ## Zitification, Zitified, Zitify
 

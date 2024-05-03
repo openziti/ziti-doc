@@ -4,7 +4,7 @@ Ziti has API Session and Session types.
 
 ## API Session
 
-API Sessions represent a client that is either partially or fully authenticated as a specific Ziti Identity.
+API Sessions represent a client that is either partially or fully authenticated as a specific identity.
 They are used to:
 
 - scope [authentication](authentication/auth.md) and [Posture Data](authorization/posture-checks)
@@ -17,7 +17,7 @@ connection requests initiated by Ziti SDKs. API Sessions remain valid as long th
 
 An API Sessions:
 
-- can and are represented by a JSON data structure returned from the Client and Management APIs
+- can and are represented by a JSON data structure returned from the client and management APIs
     - returned from:
         - `POST /edge/management/v1/authenticate`
         - `GET /edge/management/v1/current-api-session`
@@ -28,7 +28,7 @@ An API Sessions:
         - `GET /edge/management/v1/api-sessions/<id>`
         - `DELETE /edge/management/v1/api-sessions/<id>`
 
-API Sessions are defined in the Client and Management Open API 2.0 specifications under `currentApiSessionDetail`.
+API Sessions are defined in the client and management Open API 2.0 specifications under `currentApiSessionDetail`.
 
 Example `POST /edge/management/v1/authenticate` response:
 
@@ -145,7 +145,7 @@ MFA challenge represented as an Authentication Query is provided below.
 
 The existence of any Authentication Query on an API Session represents a partial authentication state. API Sessions
 in this state will have reduced access to their target API. The data structure for Authentication Queries is defined
-in the Client and Management Open API 2.0 specifications under the label `authQueryDetail`.
+in the client and management Open API 2.0 specifications under the label `authQueryDetail`.
 
 #### Associated Data & Removal
 
@@ -167,8 +167,8 @@ Removal of an API Session occurs in the following scenarios:
 The controller maintains a last accessed at timestamp for every API Session. This timestamp is used to determine whether
 the timeout has been reached, signaling an API Session removal. Activities that update the timestamp include:
 
-- Any maintained Edge Router connection
-- Any valid Client or Management API interaction
+- Any maintained edge router connection
+- Any valid client or management API interaction
 
 The API Session timeout defaults to 30 minutes and can be configured in `edge.api.sessionTimeout` in the controller
 configuration file.
@@ -186,7 +186,7 @@ edge:
 
 #### Administrative Removal
 
-Through the [Edge Management API](/docs/reference/developer/api#edge-management-api) any API Session may be forcefully removed
+Through the [edge management API](/docs/reference/developer/api#edge-management-api) any API Session may be forcefully removed
 by calling `DELETE /edge/management/v1/api-sessions<id>` with an empty body.
 
 #### Client Removal (Logout)
@@ -197,7 +197,7 @@ A client may terminate its own API Session at any time by calling: `DELETE /edge
 
 A Session represents access to a specific service for dialing or binding. They are scoped to the
 [API Session](#api-session) that was used to create them. They are requested from the
-controller by a client through the Edge Client API. The result of that request is a security token representing
+controller by a client through the edge client API. The result of that request is a security token representing
 the Session and a list of Edge Routers that the client may use to dial or bind the target service through.
 
 Sessions are removed when the parent [API Session](authentication/auth.md#api-sessions) is removed,

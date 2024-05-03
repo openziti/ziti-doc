@@ -1,7 +1,7 @@
 
 import CliLoginMd from '/docs/_cli-login.md'
 
-To create an Edge Router Policy using the CLI issue the following commands.
+To create an edge router policy using the CLI issue the following commands.
 
 1. ensure you are logged in with the CLI.
 

@@ -1,7 +1,7 @@
 1. On the left side nav bar, click "Ziti Policies"
 1. It should already be selected, but if not, on the top nav bar, click "Edge Router Policies"
-1. In the top right corner of the screen click the "plus" image to add a new Edge Router Policy
-1. Choose a name for the Edge Router Policy, such as "My Edge Router Policy"
+1. In the top right corner of the screen click the "plus" image to add a new edge router policy
+1. Choose a name for the edge router policy, such as "My edge router policy"
 1. Enter the edge routers you want to include in the policy
     1. Specific edge routers can be referenced by ID or name using `@`.  For example, an edge router called `us-east-4` can be referenced using `@us-east-4`. 
     1. Edge routers can be referenced by role attribute using `#`. For example, any edge router which has the `us-seast` role attribute will be included if `#us-east` is included in the edge routers roles list.

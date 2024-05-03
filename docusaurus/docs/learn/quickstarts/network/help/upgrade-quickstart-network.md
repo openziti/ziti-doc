@@ -6,7 +6,7 @@ id: upgrade-quickstart-network
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This document explains the process for backing up, and upgrading your OpenZiti Controller and OpenZiti Router(s).
+This document explains the process for backing up, and upgrading your controller and router(s).
 
 <Tabs groupId="backup-network">
 <TabItem value="non-docker-quickstart" label="Non-Docker Quickstart">
@@ -102,7 +102,7 @@ will be updated to the following when upgrading `v0.28.1` or earlier. Notice the
 </TabItem>
 </Tabs>
 
-## Reload and Start OpenZiti Services
+## Reload and Start Services
 
 To reflect changes made to the services, reload the service daemon and start your services.
 

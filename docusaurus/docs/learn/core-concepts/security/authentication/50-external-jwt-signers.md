@@ -27,7 +27,7 @@ claim and Ziti identities with `externalId` set to email addresses.
 If the JWT provider has a static x509 certificate, it is possible define an External JWT Signer using the PEM encoded
 public certificate of the signer. If the JWT provider has JWKS endpoint support it is strongly recommended to create
 an External JWT Signer using the JWKS endpoint. External JWT Signers configured with a static x509 certificate will
-need maintenance during key rotation and certificate expiration. For these operations the Edge Management API 
+need maintenance during key rotation and certificate expiration. For these operations the edge management API 
 can be used for external automation.
 
 ### JWKS Endpoint

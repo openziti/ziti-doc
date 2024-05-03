@@ -280,11 +280,7 @@ root@LocalGWDemoNC:~# ziti edge list services
 results: 1-1 of 1
 ```
 
-## 4.4 Create Service-Edge-Router-Policy
-
-This step is **optional** if you used quickstart. The service-edge-router-policy already includes "#all" service roles to "#all" edge router roles as displayed on the screen capture below.
-
-But in case you need to add a policy, here is the command to add the service tag we created (tun-hosted) to all routers.
+## 4.4 Create Service Edge Router Policy
 
 ```text
 ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#tun-hosted' --semantic 'AnyOf'
@@ -331,13 +327,11 @@ root@LocalGWDemoNC:~# ziti edge list service-policies
 results: 1-2 of 2
 ```
 
-## 4.7 Create Edge-Router-Policy and Public Edge-Router
+## 4.7 Create Edge Router Policy and Public Edge Router
 
-The Tunnelers need to connect to Public Edge-Router to pass traffic as depict in the [network diagram](#11-network-description). 
+The tunnelers need to connect to a public edge router to pass traffic as depicted in the [network diagram](#11-network-description). 
 
-**The quickstart already created an public router and the edge-router-policy.** You can check the edge-routers and edge-router-policies.
-
-- There should be one edge router has "edge router roles" of "#public".
+- There should be at least one edge router with the role "#public".
 - One policy (named "allEdgeRouters") with "edge router roles" of "#public" and "identity roles" of "#all".
 
 ```buttonless title=Output
@@ -438,17 +432,17 @@ root@LocalGWDemoNC:~# ziti edge list services
 results: 1-2 of 2
 ```
 
-## 5.4 Service-Edge-Router-Policy
+## 5.4 Service Edge Router Policy
 
-Since we used same attribute for http service as the attribute for ssh service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
+Since we used the same role attribute for the HTTP service as the SSH service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
 
 ## 5.5 Bind and Dial policies
 
-We also do not need to create new Bind and Dial policies. Since our host identity (#hosts) and service attribute (#tun-hosted) did not change for bind policy. And our client identity (#clients) and service attribute (#tun-hosted) did not change for dial policy.
+We also do not need to create new Bind and Dial policies. Since our host identity (#hosts) and service attribute (#tun-hosted) did not change for bind policy, and our client identity (#clients) and service attribute (#tun-hosted) did not change for dial policy.
 
 ## 5.6 Test the service
 
-Connect to the Windows Client machine, open a web browser. Enter this address (http://172.16.240.129/hello.txt). You should see the text we entered earlier on the [ubuntu server](#31-ubuntu-server)
+Connect to the Windows client machine and open a web browser. Enter this address (http://172.16.240.129/hello.txt). You should see the text we entered earlier on the [ubuntu server](#31-ubuntu-server)
 
 ![Diagram](/img/local_gw/LocalGW34.png)
 
@@ -458,9 +452,9 @@ Connect to the Windows Client machine, open a web browser. Enter this address (h
 
 ### A.1.1 Create edge-router
 
-Create an VM (Ubuntu 22.04) on the public cloud. **ssh** into that machine.
+Create a VM (Ubuntu 22.04) on the public cloud. **ssh** into that machine.
 
-Retrieve **ziti_router_auto_enroll** to setup your router.
+Retrieve **ziti_router_auto_enroll** to set up your router.
 
 ```text
 wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
@@ -469,7 +463,7 @@ tar xf ziti_router_auto_enroll.tar.gz
 
 You should have a file **ziti_router_auto_enroll** under the directory.
 
-Get all the required information from controller:
+Get all the required information from the controller:
 
 ```buttonless title=Output
 root@LocalGWDemoNC:~# curl -s eth0.me

@@ -15,7 +15,7 @@ Each policy type relates two of the following entity types: identities, services
 ![image](/img/policy-entities.png)
 
 ## Service Policies
-Service policies are entities within the Ziti Controller which provide 
+Service policies are entities within the controller which provide 
 identities authorization to services. 
 
 ![image](/img/service-policies.png)
@@ -54,7 +54,7 @@ number of reasons.
   * Edge routers may be colocated with a set of identities
   * A group of identities may need to use a particular version of an edge router 
 
-Having at least one Edge Router Policy is necessary because without at least one, 
+Having at least one edge router policy is necessary because without at least one, 
 no identities will be able to send traffic over the Ziti network because traffic 
 must enter the network via an edge router.
 
@@ -69,7 +69,7 @@ particular services or service groups.
   * Resource isolation due to SLAs
   * Geographic/political boundaries. Some services may need to be accessible only from specific areas to comply with local laws 
 
-Having at least one Service Edge Router Policy is vital because without at least one, 
+Having at least one Service edge router policy is vital because without at least one, 
 no services will be able to accept traffic over the Ziti network because traffic must 
 enter the network via an edge router.
 

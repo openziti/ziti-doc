@@ -14,8 +14,8 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [Ziti Networks](/learn/introduction/index.mdx) require
-a [Ziti Controller](/guides/deployments/10-linux/10-controller/10-deploy.mdx). Without a controller, edge routers won't be able to authorize new
+All [networks](/learn/introduction/index.mdx) require
+a [controller](/guides/deployments/10-linux/10-controller/10-deploy.mdx). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
 ### Required - Docker Named Volume
@@ -38,7 +38,7 @@ Create the docker network now using this command:
 docker network create myFirstZitiNetwork
 ```
 
-When starting containers participating in this OpenZiti Network, the docker network name will be supplied as a parameter
+When starting containers participating in this network, the docker network name will be supplied as a parameter
 to the `docker` command. It's important for containers to be able to address other containers on the docker network,
 this requires predictable container names on the docker network. When looking at the example commands below, these
 options are the ones controlling the network name and network alias on the network:
@@ -96,7 +96,7 @@ docker run \
 
 ## Edge Router
 
-At this point you should have a [Ziti Controller](/guides/deployments/10-linux/10-controller/10-deploy.mdx) running. You should have created your
+At this point you should have a [controller](/guides/deployments/10-linux/10-controller/10-deploy.mdx) running. You should have created your
 Docker network as well as creating the volume mount. Now it's time to connect your first edge router. The same Docker
 image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
@@ -144,7 +144,7 @@ docker run \
 
 ### Using Docker Locally
 
-Using the OpenZiti Network outside the docker environment is somewhat complex. The aliases chosen when starting the docker
+Using the network outside the docker environment is somewhat complex. The aliases chosen when starting the docker
 containers need to be addressable from wherever a client is connecting. This includes the `ziti` CLI, tunnelers, SDKs,
 etc. This quickstart expects you understand this and every router added to the overlay will require a route to the alias
 used. The easiest way to accomplish this is to use the operating system's ["hosts file"](https://en.wikipedia.org/wiki/Hosts_(file))
@@ -196,7 +196,7 @@ results: 1-1 of 1
 
 - Now that you have your network in place, you probably want to try it out. Head to the
   [Your First Service](/learn/quickstarts/services/index.md) quickstart and start learning how to use OpenZiti.
-- [Install the Ziti Console](/learn/quickstarts/zac/index.md#using-docker) (web UI)
+- [Install the console](/learn/quickstarts/zac/index.md#using-docker) (web UI)
 - Add a Second Public Router: In order for multiple routers to form transit links, they need a firewall exception to expose the "link listener" port. The default port is `10080/tcp`.
 - Help
   - [Change Admin Password](./help/change-admin-password.md)

@@ -2,7 +2,7 @@
 
 Ziti Service Configurations, henceforth "Configs", may be associated with a service to provide metadata for the application that is being delivered by that service.
 
-Configs are created and updated through the edge-management API and consumed by Edge SDKs through the edge-client API. Configs and Config Types are Ziti entities. Each Config is an instance of a Config Type.
+Configs are created and updated through the edge-management API and consumed by edge SDKs through the edge-client API. Configs and Config Types are Ziti entities. Each Config is an instance of a Config Type.
 
 ## Overview
 

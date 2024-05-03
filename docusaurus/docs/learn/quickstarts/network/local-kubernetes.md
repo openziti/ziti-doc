@@ -9,7 +9,7 @@ import Wizardly from '@site/src/components/Wizardly';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL). This quickstart is a great way to explore running your own OpenZiti Controller, Router, and Console.
+`minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL). This quickstart is a great way to explore running your own controller, Router, and Console.
 ## Tools of the Trade
 
 We'll use the preferred `minikube` Docker driver for this quickstart. You can run `minikube` in WSL with Docker Engine or Docker Desktop, but keep an eye out for one extra step to run `minikube tunnel` at the necessary point in the process.
@@ -19,8 +19,8 @@ We'll use the preferred `minikube` Docker driver for this quickstart. You can ru
 1. [Install Helm](https://helm.sh/docs/intro/install/)
 1. [Install `minikube`](https://minikube.sigs.k8s.io/docs/start/)
 1. [Install `ziti` CLI](https://github.com/openziti/ziti/releases/latest)
-1. [Install an OpenZiti Tunneler app](https://openziti.io/docs/downloads)
-1. Optional: Install `curl` and `jq` for testing an OpenZiti Service in the terminal.
+1. [Install a tunneler app](https://openziti.io/docs/downloads)
+1. Optional: Install `curl` and `jq` for testing a service in the terminal.
 
 Make sure these command-line tools are available in your executable search `PATH`.
 
@@ -239,7 +239,7 @@ CoreDNS is running at https://127.0.0.1:49439/api/v1/namespaces/kube-system/serv
 You will need two Minikube addons:
 
 1. `ingress`: installs the Nginx ingress controller. Ingresses provide access into the cluster and are the only things exposed to networks outside the cluster. This is required by the miniziti script, but the Helm charts can be configured to use other ingress controllers.
-1. `ingress-dns`: provides a DNS server that can answer queries about the cluster's ingresses, e.g. "miniziti-controller.miniziti.internal" which will be created when you install the OpenZiti Controller Helm chart.
+1. `ingress-dns`: provides a DNS server that can answer queries about the cluster's ingresses, e.g. "miniziti-controller.miniziti.internal" which will be created when you install the controller Helm chart.
 
 ```text
 minikube --profile miniziti addons enable ingress
@@ -272,11 +272,11 @@ kubectl wait pods \
 
 Now your miniziti cluster is ready for some OpenZiti!<br/><br/>
 
-### Install the OpenZiti Controller
+### Install the Controller
 
 #### Allow Kubernetes to Manage Certificates
 
-You need to install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CRD) for the OpenZiti Controller.
+You need to install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CRD) for the controller.
 
 ```text
 kubectl apply \
@@ -295,7 +295,7 @@ helm repo add "openziti" https://openziti.io/helm-charts/
 
 #### Install the Controller
 
-Let's create a Helm release named "miniziti-controller" for the OpenZiti Controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
+Let's create a Helm release named "miniziti-controller" for the controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
 
 1. Install the Controller chart
 
@@ -388,7 +388,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       --selector k8s-app=kube-dns
    ```
 
-1. Verify that the DNS names for the ingress zone, e.g. *.miniziti.internal, are resolvable from inside your cluster. This is required for your pods to communicate with the OpenZiti Controller's advertised address.You will know it's working because you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
+1. Verify that the DNS names for the ingress zone, e.g. *.miniziti.internal, are resolvable from inside your cluster. This is required for your pods to communicate with the controller's advertised address.You will know it's working because you see the same IP address in the response as when you run `minikube --profile miniziti ip`.
 
    ```text
    kubectl run "dnstest" --rm --tty --stdin --image=busybox --restart=Never -- \
@@ -478,7 +478,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    ```text
    kubectl get secrets "ziti-controller-admin-secret" \
       --namespace miniziti \
-      --output go-template='{{"\nINFO: Your OpenZiti Console http://miniziti-console.miniziti.internal password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
+      --output go-template='{{"\nINFO: Your console http://miniziti-console.miniziti.internal password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
    ```
 
 1. Open [https://miniziti-console.miniziti.internal](https://miniziti-console.miniziti.internal) in your web browser and login with username "admin" and the password from your clipboard.
@@ -520,7 +520,7 @@ ziti edge enroll /tmp/httpbin-host.jwt
 
 ### Install the `httpbin` Demo API Server Chart
 
-This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by an OpenZiti Tunneler. We'll use it as a demo API to test the OpenZiti Service you just created named "httpbin-service".
+This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by a tunneler. We'll use it as a demo API to test the service you just created named "httpbin-service".
 
 ```text
 helm install "miniziti-httpbin" openziti/httpbin \
@@ -533,13 +533,13 @@ helm install "miniziti-httpbin" openziti/httpbin \
 
 ## Add the Client Identity
 
-Add the client identity you created to your OpenZiti Tunneler.
+Add the client identity you created to your tunneler.
 
-Follow [the instructions for your tunneler OS version](https://openziti.io/docs/reference/tunnelers/) to add the OpenZiti Identity that was saved as filename `/tmp/miniziti-client.jwt` (or WSL's "tmp" directory, e.g., `\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
+Follow [the instructions for your tunneler OS version](https://openziti.io/docs/reference/tunnelers/) to add the identity that was saved as filename `/tmp/miniziti-client.jwt` (or WSL's "tmp" directory, e.g., `\\wsl$\Ubuntu\tmp` in Desktop Edge for Windows).
 
 As soon as identity enrollment completes you should have a new OpenZiti DNS name available to this device. Let's test that with a DNS query.
 
-```text title="this DNS answer is coming from the OpenZiti Tunneler, e.g. Ziti Desktop Edge"
+```text title="this DNS answer is coming from the tunneler, e.g. Ziti Desktop Edge"
 nslookup httpbin.miniziti.private
 ```
 
@@ -551,13 +551,13 @@ curl -sSf -XPOST -d ziti=awesome http://httpbin.miniziti.private/post | jq .data
 
 Visit [http://httpbin.miniziti.private/get](http://httpbin.miniziti.private/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
 
-## Explore the OpenZiti Console
+## Explore the Console
 
-Now that you've successfully tested the OpenZiti Service, check out the various entities in your that were created by the script in [http://miniziti-console.miniziti.internal/](http://miniziti-console.miniziti.private/).
+Now that you've successfully tested the service, check out the various entities in your that were created by the script in [http://miniziti-console.miniziti.internal/](http://miniziti-console.miniziti.private/).
 
 ## Next Steps
 
-1. In the OpenZiti Console, try to revoke then restore your permission to acess the demo services.
+1. In the console, try to revoke then restore your permission to acess the demo services.
 1. Deploy a non-Ziti demo application to Kubernetes and securely [share it with a Ziti proxy pod](../services/kubernetes-service)
 1. Add a configs, service, and policies to access the Kubernetes apiserver with OpenZiti.
    1. Hint: the apiserver's address is "kubernetes.default.svc:443" inside the cluster.
@@ -568,7 +568,7 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
          --role-attributes k8sapi-hosts
       ```
 
-   1. Connect to the K8s apiserver from another computer with [`kubeztl`, the OpenZiti fork of `kubectl`](https://github.com/openziti-test-kitchen/kubeztl/). `kubeztl` works by itself without an OpenZiti Tunneler.
+   1. Connect to the K8s apiserver from another computer with [`kubeztl`, the OpenZiti fork of `kubectl`](https://github.com/openziti-test-kitchen/kubeztl/). `kubeztl` works by itself without a tunneler.
 
 ## Cleanup
 
@@ -616,6 +616,6 @@ Now that you've successfully tested the OpenZiti Service, check out the various 
    minikube --profile miniziti delete
    ```
 
-2. In your OpenZiti Tunneler, "Forget" your Identity.
+2. In your tunneler, "Forget" your Identity.
 
 <Wizardly></Wizardly>
