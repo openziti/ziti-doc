@@ -47,7 +47,6 @@ At a minimum, you must set these to opt-in to bootstrapping.
 Additionally, you probably want to set these:
 
 1. In `/opt/openziti/etc/router/bootstrap.env` (the answer file for bootstrapping the router)
-    1. Set `ZITI_CTRL_ADVERTISED_ADDRESS` to the FQDN of the controller (default: localhost).
     1. Set `ZITI_ROUTER_ADVERTISED_ADDRESS` to the permanent FQDN of the router (default: localhost). This value can not be changed after enrollment.
     1. Set `ZITI_ROUTER_MODE` (default: none) if this router's built-in tunneler will provide a proxy for services. Mode `tproxy` requires additional kernel capabilities in `/etc/systemd/system/ziti-router.service.d/override.conf` and DNS resolver configuration for the host.
 
@@ -83,7 +82,42 @@ Disable bootstrapping enrollment by setting `ZITI_BOOTSTRAP_ENROLLMENT=false` in
 
 ## Firewall
 
-The router's generated configuration always listens on a single, configurable TCP port (default: `3022`). You may set `ZITI_ROUTER_PORT` in `/opt/openziti/etc/router/bootstrap.env` to bootstrap with a different port.
+The router's generated configuration always uses a single TCP port (default: `3022`) defined by `ZITI_ROUTER_PORT` in `/opt/openziti/etc/router/bootstrap.env`.
+
+Confirm the router is running and listening on the expected port.
+
+```bash
+systemctl show -p MainPID --value ziti-router.service \
+| xargs -rIPID sudo lsof -Pnp PID \
+|& grep LISTEN
+```
+
+```buttonless title="Output"
+ziti    3574455 ziti-router    7u     IPv6           41543151       0t0      TCP *:3022 (LISTEN)
+```
+
+Substitute the router's advertised address and port for `localhost:3022` as defined in `/var/lib/ziti-router/config.yml`.
+
+```text
+EXTERNAL_URI=localhost:3022
+```
+
+Verify the router is reachable and presents a server certificate from the controller's intermediate edge signer CA for both ALPN identifiers: `ziti-edge` and `ziti-link`.
+
+```text
+for ALPN in ziti-{edge,link}; do
+    openssl s_client -connect ${EXTERNAL_URI} -alpn $ALPN -showcerts <>/dev/null \
+    |& openssl storeutl -certs -noout -text /dev/stdin \
+    | grep -E '(Subject|Issuer):'
+done
+```
+
+```buttonless title="Output"
+Issuer: C=US, L=Charlotte, O=NetFoundry, OU=ADV-DEV, CN=NetFoundry Inc. Intermediate CA 42KvRQxn.
+Subject: C=US, ST=NC, L=Charlotte, O=NetFoundry, OU=Ziti, CN=BhCjN2Rkx
+Issuer: C=US, L=Charlotte, O=NetFoundry, OU=ADV-DEV, CN=NetFoundry Inc. Intermediate CA 42KvRQxn.
+Subject: C=US, ST=NC, L=Charlotte, O=NetFoundry, OU=Ziti, CN=BhCjN2Rkx
+```
 
 ## Logging
 
