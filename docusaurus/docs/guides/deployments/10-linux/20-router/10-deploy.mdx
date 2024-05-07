@@ -82,7 +82,7 @@ Disable bootstrapping enrollment by setting `ZITI_BOOTSTRAP_ENROLLMENT=false` in
 
 ## Firewall
 
-The router's generated configuration always uses a single TCP port (default: `3022`) defined by `ZITI_ROUTER_PORT` in `/opt/openziti/etc/router/bootstrap.env`.
+The router's generated configuration uses a single TCP port (default: `3022`) defined by `ZITI_ROUTER_PORT` in `/opt/openziti/etc/router/bootstrap.env`.
 
 Confirm the router is running and listening on the expected port.
 
@@ -96,27 +96,19 @@ systemctl show -p MainPID --value ziti-router.service \
 ziti    3574455 ziti-router    7u     IPv6           41543151       0t0      TCP *:3022 (LISTEN)
 ```
 
-Substitute the router's advertised address and port for `localhost:3022` as defined in `/var/lib/ziti-router/config.yml`.
+Verify the router is reachable and presents a server certificate from the controller's intermediate edge signer CA and the intermediate CA cert. Substitute the router's advertised address and port for `localhost:3022` with the advertised address in `/var/lib/ziti-router/config.yml`.
 
 ```text
-EXTERNAL_URI=localhost:3022
-```
-
-Verify the router is reachable and presents a server certificate from the controller's intermediate edge signer CA for both ALPN identifiers: `ziti-edge` and `ziti-link`.
-
-```text
-for ALPN in ziti-{edge,link}; do
-    openssl s_client -connect ${EXTERNAL_URI} -alpn $ALPN -showcerts <>/dev/null \
-    |& openssl storeutl -certs -noout -text /dev/stdin \
-    | grep -E '(Subject|Issuer):'
-done
+openssl s_client -connect localhost:3022 -alpn ziti-ctrl -showcerts <>/dev/null \
+|& openssl storeutl -certs -noout -text /dev/stdin \
+| grep -E '(Subject|Issuer):'
 ```
 
 ```buttonless title="Output"
 Issuer: C=US, L=Charlotte, O=NetFoundry, OU=ADV-DEV, CN=NetFoundry Inc. Intermediate CA 42KvRQxn.
 Subject: C=US, ST=NC, L=Charlotte, O=NetFoundry, OU=Ziti, CN=BhCjN2Rkx
-Issuer: C=US, L=Charlotte, O=NetFoundry, OU=ADV-DEV, CN=NetFoundry Inc. Intermediate CA 42KvRQxn.
-Subject: C=US, ST=NC, L=Charlotte, O=NetFoundry, OU=Ziti, CN=BhCjN2Rkx
+Issuer: C=US, L=Charlotte, O=NetFoundry, OU=ADV-DEV, CN=NetFoundry Inc. Certificate Authority IpcOEkAR6
+Subject: C=US, ST=NC, L=Charlotte, O=NetFoundry, OU=ADV-DEV, CN=NetFoundry Inc. Intermediate CA 42KvRQxn.
 ```
 
 ## Logging
