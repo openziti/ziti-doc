@@ -86,6 +86,20 @@ The router's generated configuration uses a single TCP port (default: `3022`) de
 
 Confirm the router is running and listening on the expected port.
 
+This will list all listening TCP ports for commands that contain "ziti" in their name.
+
+```text
+sudo ss -tlnp | grep ziti
+```
+
+If you have only one process named like "ziti" running, you will see output similar to this.
+
+```buttonless title="Output"
+LISTEN 0      4096                          *:3022             *:*    users:(("ziti",pid=2166302,fd=8))         
+```
+
+For greater certainty that the router service is listening on the expected port, this one-liner uses `systemctl` to get the router's PID, and `xargs` to pass the PID to `lsof` to list its open files, and `grep` to filter for listening sockets.
+
 ```bash
 systemctl show -p MainPID --value ziti-router.service \
 | xargs -rIPID sudo lsof -Pnp PID \
@@ -99,7 +113,7 @@ ziti    3574455 ziti-router    7u     IPv6           41543151       0t0      TCP
 Verify the router is reachable and presents a server certificate from the controller's intermediate edge signer CA and the intermediate CA cert. Substitute the router's advertised address and port for `localhost:3022` with the advertised address in `/var/lib/ziti-router/config.yml`.
 
 ```text
-openssl s_client -connect localhost:3022 -alpn ziti-ctrl -showcerts <>/dev/null \
+openssl s_client -connect localhost:3022 -alpn ziti-edge -showcerts <>/dev/null \
 |& openssl storeutl -certs -noout -text /dev/stdin \
 | grep -E '(Subject|Issuer):'
 ```
