@@ -1,19 +1,20 @@
 ---
-title: Renew Client/Server Certs
+title: Renewing Leaf Certificates
+sidebar_label: Renewed Certs
 id: renew-cert
 ---
 
+The network uses a combination of client, server, and CA certificates in its PKI. The most important certificates to renew are routers' client and server certificates and identities' client certificates.
+
 ## Creating New Certs
 
-If you set up your network following the [quickstart guides](/docs/learn/quickstarts), your PKI will have client and 
-server certs for the controller's control plane and edge/API plane. 
-
 ### Setup Environment Variables
+
 The following environment variables are the minimum required to renew a cert with the `ziti-cli-functions.sh` script. 
 These can be obtained through the `.env` file for your network. However, it is recommended that the `FILE_NAME_ROOT` value is different than 
 the existing (expired) cert filenames so a new cert will be created rather than overwriting the existing cert.
 
-```
+```text
 # Path to the network PKI root folder
 export ZITI_PKI="/home/ubuntu/.ziti/quickstart/homeassistant2/pki"
 
@@ -25,17 +26,18 @@ export IP_ALLOW_LIST="127.0.0.1,150.136.141.199"
 ```
 
 ### Control Plane Certs
+
 The following values are unique to control plane certs as the edge/API plane will have its own CA and certs. Update 
 these values as they pertain to your network PKI setup.
 
-```
+```text
 export ZITI_CA_NAME="homeassistant2-intermediate"
 export FILE_NAME_ROOT="homeassistant2-new"
 ```
 
 #### Server Cert
 
-```
+```text
 source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/quick/ziti-cli-functions.sh)"; expressInstall
 ziti pki create server --pki-root="${ZITI_PKI}" --ca-name "${ZITI_CA_NAME}" \
       --server-file "${FILE_NAME_ROOT}-server" \
