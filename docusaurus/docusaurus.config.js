@@ -147,8 +147,8 @@ const config = {
             from: ['/docs/guides/Local_Gateway/EdgeRouter']
           },
           {
-            to: '/docs/reference/backup/controller',
-            from: ['/docs/guides/database-backup']
+            to: '/docs/guides/deployments/linux/controller/backup',
+            from: ['/docs/guides/database-backup', '/docs/reference/backup/controller']
           },
           {
             to: '/docs/reference/tunnelers/nginx',
