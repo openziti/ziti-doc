@@ -1,7 +1,7 @@
 
 # Troubleshooting
 
-## Increase log level
+## Increase Log Level
 
 Set the log level to DEBUG to identify the activity that is occurring at the same time as the problem.
 
@@ -13,16 +13,14 @@ sudo -u ziti ziti-edge-tunnel set_log_level --loglevel DEBUG
 The tunneler obeys the value of `logLevel` in `/var/lib/ziti/config.json`. The initial value may be set with `run
 --verbose 4`, but setting this option on subsequent runs has no effect on log level.
 
-Create a log file from the current systemd service invocation to share with collaborators.
+## Capture the Current Process Log
 
 ```text
-ZITI_VERSION=$(ziti-edge-tunnel version);
-journalctl _SYSTEMD_INVOCATION_ID=$(systemctl show -p InvocationID --value ziti-edge-tunnel-default.service) -l --no-pager \
-| tee /tmp/ziti-edge-tunnel-single-${ZITI_VERSION#v}.log \
-| gzip > /tmp/ziti-edge-tunnel-single-${ZITI_VERSION#v}.log.gz
+journalctl _SYSTEMD_INVOCATION_ID=$(systemctl show -p InvocationID --value ziti-edge-tunnel.service) -l \
+| tee /tmp/ziti-edge-tunnel.log
 ```
 
-## Systemd service won't start or keeps restarting
+## Systemd Service Won't Start or Keeps Restarting
 
 Reload the systemd service unit definitions to rule out a stale definition.
 
@@ -48,7 +46,7 @@ Monitor the service logs.
 sudo journalctl -u ziti-edge-tunnel.service
 ```
 
-## Intercepting or hosting not working
+## Intercepting or Hosting Not Working
 
 Inspect the identity and router info for a running tunneler process. This creates a file named like `{{identity name}}.ziti`
 for each loaded identity. Each file summarizes the available services and router connections for the identity.
@@ -90,7 +88,7 @@ $ ncat -vw3 100.64.0.3 22
 SSH-2.0-OpenSSH_7.4
 ```
 
-## Process keeps crashing
+## Process Keeps Crashing
 
 A crash may be caused by a segmentation fault. If saving a Corefile is enabled, Linux will create a core dump file
 according to this pattern file: `/proc/sys/kernel/core_pattern`. Ubuntu configures this to use
@@ -98,7 +96,7 @@ according to this pattern file: `/proc/sys/kernel/core_pattern`. Ubuntu configur
 
 Please raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/) if the tunneler crashes.
 
-## Operation not permitted
+## Operation Not Permitted
 
 Delete the `/tmp/.ziti` directory and restart the tunneler to solve this issue.
 
