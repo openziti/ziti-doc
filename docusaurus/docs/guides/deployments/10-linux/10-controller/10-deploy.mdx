@@ -52,7 +52,7 @@ You can generate a configuration by enabling bootstrapping during an interactive
 
 The controller service will generate a root CA and issue an intermediate CA cert during the first startup.
 
-The controller needs a CA to issue certificates for edge identities during enrollment. This CA is known as the edge signer. It's a good idea to secure the root in a different location and use an intermediate CA for this purpose. This allows you to recover in a scenario where the intermediate was lost without changing the root of trust and invalidating all edge enrollments. Refer to [the article about backing up the controller](/reference/backup/10-controller.mdx) for more information.
+The controller needs a CA to issue certificates for edge identities during enrollment. This CA is known as the edge signer. It's a good idea to secure the root in a different location and use an intermediate CA for this purpose. This allows you to recover in a scenario where the intermediate was lost without changing the root of trust and invalidating all edge enrollments. Refer to [the article about backing up the controller](/guides/deployments/10-linux/10-controller/60-backup.mdx) for more information.
 
 Disable bootstrapping a PKI by setting `ZITI_BOOTSTRAP_PKI=false` in `/opt/openziti/etc/controller/service.env`.
 

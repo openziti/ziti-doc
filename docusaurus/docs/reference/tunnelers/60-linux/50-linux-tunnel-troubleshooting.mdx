@@ -15,12 +15,11 @@ The tunneler obeys the value of `logLevel` in `/var/lib/ziti/config.json`. The i
 
 Create a log file from the current systemd service invocation to share with collaborators.
 
-```bash
+```text
 ZITI_VERSION=$(ziti-edge-tunnel version);
-journalctl _SYSTEMD_INVOCATION_ID=$(
-  systemctl show -p InvocationID --value ziti-edge-tunnel-default.service) -l --no-pager \
-  | tee /tmp/ziti-edge-tunnel-single-${ZITI_VERSION#v}.log \
-  | gzip > /tmp/ziti-edge-tunnel-single-${ZITI_VERSION#v}.log.gz
+journalctl _SYSTEMD_INVOCATION_ID=$(systemctl show -p InvocationID --value ziti-edge-tunnel-default.service) -l --no-pager \
+| tee /tmp/ziti-edge-tunnel-single-${ZITI_VERSION#v}.log \
+| gzip > /tmp/ziti-edge-tunnel-single-${ZITI_VERSION#v}.log.gz
 ```
 
 ## Systemd service won't start or keeps restarting
