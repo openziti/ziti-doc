@@ -28,7 +28,7 @@ identity:
 
 ### Private Key
 
-The [`identity`](/reference/30-configuration/conventions.md#identity) configuration section is conventional for routers and controllers, but the `key` sub-property behaves differently for routers. If a private key exists in the path, then it will be used to sign router enrollment certificate requests. If it does not exist, then a private key will be locally generated and stored in that path.
+The [`identity`](/reference/30-configuration/conventions.md#identity) configuration section is common to routers and controllers, but the `key` sub-property behaves differently for routers. If a private key exists in the path, then it will be used to sign router enrollment certificate requests. If it does not exist, then a private key will be locally generated and stored in that path.
 
 If present, the `server_key` signs the router's server certificate request. Otherwise, the `key` sub-property is used for both client and server certificate.
 
