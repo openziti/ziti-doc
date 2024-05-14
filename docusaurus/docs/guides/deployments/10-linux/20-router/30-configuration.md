@@ -8,11 +8,11 @@ hide_table_of_contents: false
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This article expands on the [Linux and Docker router deployment](/guides/deployments/10-linux/20-router/10-deploy.mdx) article with configuration concepts and examples. [Kubernetes is covered separately](/guides/deployments/30-kubernetes//kubernetes-router.mdx).
+This article expands on the [Linux router deployment](/guides/deployments/10-linux/20-router/10-deploy.mdx) article with configuration concepts and examples.
 
 ## Config Management
 
-You may create or edit the configuration file manually or run `ziti create config router` to generate one. The generator aims to accelerate developing a working configuration with the most relevant options. The output can be influenced with arguments and variables. Run `ziti create config environment` for descriptions of the available environment variables.
+Edit the generated configuration YAML file or run `ziti create config router` to generate one from scratch. Run `ziti create config environment` for descriptions of the environment variables that influence the generated output.
 
 ## Identity
 
@@ -28,7 +28,7 @@ identity:
 
 ### Private Key
 
-The shape of the [`identity`](/reference/30-configuration/conventions.md#identity) section is conventional for routers and controllers, but the `key` sub-property behaves differently for routers. If a private key exists in the path, then it will be used to sign router enrollment certificate requests. If it does not exist, then a private key will be locally generated and stored in that path.
+The [`identity`](/reference/30-configuration/conventions.md#identity) configuration section is conventional for routers and controllers, but the `key` sub-property behaves differently for routers. If a private key exists in the path, then it will be used to sign router enrollment certificate requests. If it does not exist, then a private key will be locally generated and stored in that path.
 
 If present, the `server_key` signs the router's server certificate request. Otherwise, the `key` sub-property is used for both client and server certificate.
 
@@ -100,15 +100,12 @@ link:
         outQueueSize:   4
 
 listeners:
-# bindings of edge and tunnel requires an "edge" section below
   - binding: edge
     address: tls:0.0.0.0:3022
     options:
       advertise: router1.ziti.example.org:3022
       connectTimeoutMs: 5000
       getSessionTimeout: 60
-
-
 
 edge:
   csr:
@@ -186,7 +183,6 @@ link:
     - binding: transport
 
 listeners:
-# bindings of edge and tunnel requires an "edge" section below
   - binding: edge
     address: tls:0.0.0.0:3022
     options:
