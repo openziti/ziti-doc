@@ -51,4 +51,4 @@ Other Config Types:
 * `ziti-tunneler-client.v1`: predecessor of `intercept.v1`
 * `ziti-tunneler-server.v1`: predecessor of `host.v1`
 
-The tunneler Config Types' schemas are maintained [in GitHub](https://github.com/openziti/edge/tree/main/tunnel/entities).
+The tunneler Config Types' schemas are maintained [in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/).

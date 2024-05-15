@@ -42,4 +42,4 @@ Rather than a static destination address, this Config forwards the Ziti service 
 
 ## Schema Reference
 
-The JSON schema for this tunneler Config Type is maintained [in GitHub](https://github.com/openziti/edge/blob/main/tunnel/entities/host.v1.json).
+The JSON schema for this tunneler Config Type is maintained [in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/host.v1.json).

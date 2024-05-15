@@ -47,4 +47,4 @@ This Config has not only a Ziti domain name destination `acme.ziti` for which tr
 
 ## Schema Reference
 
-The JSON schema for this tunneler Config Type is maintained [in GitHub](https://github.com/openziti/edge/blob/main/tunnel/entities/intercept.v1.json).
+The JSON schema for this tunneler Config Type is maintained [in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/intercept.v1.json).

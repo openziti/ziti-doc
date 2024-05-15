@@ -93,8 +93,6 @@ OpenZiti has grown to have many, many repositories. Here are just a few notable 
 
 * All code is found on GitHub under the [OpenZiti](https://github.com/openziti) organization.
   * [ziti](https://github.com/openziti/ziti): top level project which builds all OpenZiti executables
-  * [edge](https://github.com/openziti/edge): edge components and model which includes identity, polices and config
-  * [fabric](https://github.com/openziti/fabric): fabric project which includes core controller and router
   * [foundation](https://github.com/openziti/foundation): project which contains library code used across multiple projects
   * SDKs
     * [ziti-sdk-c](https://github.com/openziti/ziti-sdk-c): C SDK
