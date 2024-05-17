@@ -2,10 +2,7 @@
 title: Kubernetes Service
 ---
 
-This is a tutorial for tunneling a Kubernetes workload with OpenZiti that creates:
-
-* a demo service `hello-toy`
-* an OpenZiti reverse proxy pod `ziti-host`
+This is a tutorial for tunneling a Kubernetes workload with OpenZiti.
 
 ## Steps
 
