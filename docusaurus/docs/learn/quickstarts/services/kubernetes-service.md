@@ -58,10 +58,10 @@ This is a tutorial for tunneling a Kubernetes workload with OpenZiti that create
 
     ```text
     ziti edge create edge-router-policy "default" \
-    --edge-router-roles '#all' --identity-roles '#all'
+        --edge-router-roles '#all' --identity-roles '#all'
 
     ziti edge create service-edge-router-policy "default" \
-    --edge-router-roles '#all' --service-roles '#all'
+        --edge-router-roles '#all' --service-roles '#all'
     ```
 
 1. Create the service policies for the client and host identities.
@@ -74,7 +74,7 @@ This is a tutorial for tunneling a Kubernetes workload with OpenZiti that create
         --service-roles '@hello-service' --identity-roles '#hello-hosts'
     ```
 
-1. Simulate the policies to ensure your client identity has dial permission, and the router's identity has bind permission.
+1. Ensure your client identity has dial permission, and the router's identity has bind permission.
 
     ```text
     ziti edge policy-advisor services hello-service -q       
