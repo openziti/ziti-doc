@@ -38,27 +38,27 @@ Bootstrapping consists of these steps:
 
 At a minimum, you must set these to opt-in to bootstrapping.
 
-1. In `/opt/openziti/etc/router/service.env` (the answer file for the service)
+1. In **/opt/openziti/etc/router/service.env** (the answer file for the service)
     1. Set `ZITI_BOOTSTRAP=true`
-1. In `/opt/openziti/etc/router/bootstrap.env` (the answer file for bootstrapping the router)
+1. In **/opt/openziti/etc/router/bootstrap.env** (the answer file for bootstrapping the router)
     1. Set `ZITI_CTRL_ADVERTISED_ADDRESS` to the FQDN of the controller
     1. Set `ZITI_ENROLL_TOKEN` to the resulting token (JWT)
 
 Additionally, you probably want to set these:
 
-1. In `/opt/openziti/etc/router/bootstrap.env` (the answer file for bootstrapping the router)
+1. In **/opt/openziti/etc/router/bootstrap.env** (the answer file for bootstrapping the router)
     1. Set `ZITI_ROUTER_ADVERTISED_ADDRESS` to the permanent FQDN of the router (default: localhost). This value can not be changed after enrollment.
-    1. Set `ZITI_ROUTER_MODE` (default: none) if this router's built-in tunneler will provide a proxy for services. Mode `tproxy` requires additional kernel capabilities in `/etc/systemd/system/ziti-router.service.d/override.conf` and DNS resolver configuration for the host.
+    1. Set `ZITI_ROUTER_MODE` (default: none) if this router's built-in tunneler will provide a proxy for services. Mode `tproxy` requires additional kernel capabilities in **/etc/systemd/system/ziti-router.service.d/override.conf** and DNS resolver configuration for the host.
 
 ### Bootstrapping the Configuration
 
-The router's configuration is loaded from a YAML file ([reference](/reference/30-configuration/router.md)). The Linux system service will generate a valid configuration during the first startup, unless one already exists. You can modify the generated configuration in `/var/lib/ziti-router/config.yml`.
+The router's configuration is loaded from a YAML file ([reference](/reference/30-configuration/router.md)). The Linux system service will generate a valid configuration during the first startup, unless one already exists. You can modify the generated configuration in **/var/lib/ziti-router/config.yml**.
 
-The filename of the configuration file, relative to the router's working directory, is given as an argument, e.g., `entrypoint.bash run config.yml` in `/lib/systemd/system/ziti-router.service` as an argument to the `ExecStart` command. You may override this in `/etc/systemd/system/ziti-router.service.d/override.conf`.
+The filename of the configuration file, relative to the router's working directory, is given as an argument, e.g., `entrypoint.bash run config.yml` in **/lib/systemd/system/ziti-router.service** as an argument to the `ExecStart` command. You may override this in **/etc/systemd/system/ziti-router.service.d/override.conf**.
 
-Explore configuration option variables by running `ziti create config environment --help`. Any of these may be set in `/opt/openziti/etc/router/bootstrap.env` to influence the generated configuration.
+Explore configuration option variables by running `ziti create config environment --help`. Any of these may be set in **/opt/openziti/etc/router/bootstrap.env** to influence the generated configuration.
 
-Disable generating a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in `/opt/openziti/etc/router/service.env`.
+Disable generating a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in **/opt/openziti/etc/router/service.env**.
 
 ### Bootstrapping the Enrollment
 
@@ -72,17 +72,17 @@ ziti edge create edge-router "AcmeRouter1" \
 
 [Learn more about managing routers with the CLI](/guides/deployments/10-linux/20-router/40-cli-mgmt.md).
 
-The systemd service looks for the token in `/opt/openziti/etc/router/.token` if env var `ZITI_ENROLL_TOKEN` is empty. The file must be readable by root (not others).
+The systemd service looks for the token in **/opt/openziti/etc/router/.token** if env var `ZITI_ENROLL_TOKEN` is empty. The file must be readable by root (not others).
 
-`ZITI_ENROLL_TOKEN` may be defined in `/opt/openziti/etc/router/bootstrap.env`.
+`ZITI_ENROLL_TOKEN` may be defined in **/opt/openziti/etc/router/bootstrap.env**.
 
 The router will enroll with the controller during the first startup. The one-time enrollment token is consumed during the enrollment process and a private key is generated in the router's working directory.
 
-Disable bootstrapping enrollment by setting `ZITI_BOOTSTRAP_ENROLLMENT=false` in `/opt/openziti/etc/router/service.env`.
+Disable bootstrapping enrollment by setting `ZITI_BOOTSTRAP_ENROLLMENT=false` in **/opt/openziti/etc/router/service.env**.
 
 ## Firewall
 
-The router's generated configuration uses a single TCP port (default: `3022`) defined by `ZITI_ROUTER_PORT` in `/opt/openziti/etc/router/bootstrap.env`.
+The router's generated configuration uses a single TCP port (default: `3022`) defined by `ZITI_ROUTER_PORT` in **/opt/openziti/etc/router/bootstrap.env**.
 
 Confirm the router is running and listening on the expected port.
 
@@ -98,7 +98,7 @@ If you have only one process named like "ziti" running, you will see output simi
 LISTEN 0      4096                          *:3022             *:*    users:(("ziti",pid=2166302,fd=8))         
 ```
 
-Verify the router is reachable and presents a server certificate from the controller's intermediate edge signer CA and the intermediate CA cert. Substitute the router's advertised address and port for `localhost:3022` with the advertised address in `/var/lib/ziti-router/config.yml`.
+Verify the router is reachable and presents a server certificate from the controller's intermediate edge signer CA and the intermediate CA cert. Substitute the router's advertised address and port for `localhost:3022` with the advertised address in **/var/lib/ziti-router/config.yml**.
 
 ```text
 openssl s_client -connect localhost:3022 -alpn ziti-edge -showcerts <>/dev/null \

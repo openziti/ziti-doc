@@ -42,9 +42,9 @@ You must provide or generate a configuration. Configuration consists of a PKI, a
 
 You can generate a configuration by enabling bootstrapping during an interactive install which prompts for the most relevant answers, or by setting these values in the answer file.
 
-1. In `/opt/openziti/etc/controller/service.env` (the answer file for the service)
+1. In **/opt/openziti/etc/controller/service.env** (the answer file for the service)
     1. Set `ZITI_BOOTSTRAP=true` to opt-in to bootstrapping.
-1. In `/opt/openziti/etc/controller/bootstrap.env` (the answer file for bootstrapping the controller)
+1. In **/opt/openziti/etc/controller/bootstrap.env** (the answer file for bootstrapping the controller)
     1. Set `ZITI_CTRL_ADVERTISED_ADDRESS` to the FQDN of the controller.
     1. Set `ZITI_PWD` to the desired management password for user `admin`. You may delete this after bootstrapping.
 
@@ -54,7 +54,7 @@ The controller service will generate a root CA and issue an intermediate CA cert
 
 The controller needs a CA to issue certificates for edge identities during enrollment. This CA is known as the edge signer. It's a good idea to secure the root in a different location and use an intermediate CA for this purpose. This allows you to recover in a scenario where the intermediate was lost without changing the root of trust and invalidating all edge enrollments. Refer to [the article about backing up the controller](/guides/deployments/10-linux/10-controller/60-backup.mdx) for more information.
 
-Disable bootstrapping a PKI by setting `ZITI_BOOTSTRAP_PKI=false` in `/opt/openziti/etc/controller/service.env`.
+Disable bootstrapping a PKI by setting `ZITI_BOOTSTRAP_PKI=false` in **/opt/openziti/etc/controller/service.env**.
 
 Check out [the PKI page](/learn/core-concepts/pki.md) for an overview of these concepts.
 
@@ -62,33 +62,33 @@ Check out [the PKI page](/learn/core-concepts/pki.md) for an overview of these c
 
 The controller's configuration is loaded from a file ([reference](/reference/30-configuration/controller.md)). The Linux system service will generate a valid configuration during the first startup unless one already exists.
 
-The filename of the configuration file, relative to the Linux service's working directory (default: `/var/lib/ziti-controller/config.yml`). You may override this in `/etc/systemd/system/ziti-controller.service.d/override.conf` by re-initializing `ExecStart=` with an empty value followed by a second `ExecStart` directive specifying the override command.
+The filename of the configuration file, relative to the Linux service's working directory (default: **/var/lib/ziti-controller/config.yml**). You may override this in **/etc/systemd/system/ziti-controller.service.d/override.conf** by re-initializing `ExecStart=` with an empty value followed by a second `ExecStart` directive specifying the override command.
 
-Disable bootstrapping a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in `/opt/openziti/etc/controller/service.env`.
+Disable bootstrapping a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in **/opt/openziti/etc/controller/service.env**.
 
 #### Bootstrapping the Database
 
 The controller requires a BoltDB database to store its state. The Linux system service will initialize a database with a default admin password during the first startup unless one already exists.
 
-You must specify the management password for the default admin user before starting the service. This is done by setting `ZITI_PWD` in `/opt/openziti/etc/controller/bootstrap.env` or in the root-only file specified by `LoadCredential` in `/etc/systemd/system/ziti-controller.service.d/override.conf`. You may delete the password after bootstrapping for security.
+You must specify the management password for the default admin user before starting the service. This is done by setting `ZITI_PWD` in **/opt/openziti/etc/controller/bootstrap.env** or in the root-only file specified by `LoadCredential` in **/etc/systemd/system/ziti-controller.service.d/override.conf**. You may delete the password after bootstrapping for security.
 
-Disable bootstrapping the database by setting `ZITI_BOOTSTRAP_DATABASE=false` in `/opt/openziti/etc/controller/service.env`.
+Disable bootstrapping the database by setting `ZITI_BOOTSTRAP_DATABASE=false` in **/opt/openziti/etc/controller/service.env**.
 
 ### Manual Configuration
 
-You can provide, rather than generate, any or all of the PKI, configuration file, and database. If you plan to provide all three then you can disable bootstrapping entirely by setting `ZITI_BOOTSTRAP=false` in `/opt/openziti/etc/controller/service.env`.
+You can provide, rather than generate, any or all of the PKI, configuration file, and database. If you plan to provide all three then you can disable bootstrapping entirely by setting `ZITI_BOOTSTRAP=false` in **/opt/openziti/etc/controller/service.env**.
 
 #### Provide a Configuration File
 
-Create the file at `/var/lib/ziti-controller/config.yml` and set `ZITI_BOOTSTRAP_CONFIG=false` in `/opt/openziti/etc/controller/service.env`.
+Create the file at **/var/lib/ziti-controller/config.yml** and set `ZITI_BOOTSTRAP_CONFIG=false` in **/opt/openziti/etc/controller/service.env**.
 
 #### Provide a PKI
 
-Place the intermediate CA for the controller's edge enrollment signer in `/var/lib/ziti-controller` and set `ZITI_BOOTSTRAP_PKI=false` in `/opt/openziti/etc/controller/service.env`. The file paths to the intermediate CA are specified in the configuration file.
+Place the intermediate CA for the controller's edge enrollment signer in **/var/lib/ziti-controller** and set `ZITI_BOOTSTRAP_PKI=false` in **/opt/openziti/etc/controller/service.env**. The file paths to the intermediate CA are specified in the configuration file.
 
 #### Provide a Database
 
-Place the BoltDB file in `/var/lib/ziti-controller` and set `ZITI_BOOTSTRAP_DATABASE=false` in `/opt/openziti/etc/controller/service.env`. The file path to the database is specified in the configuration file.
+Place the BoltDB file in **/var/lib/ziti-controller** and set `ZITI_BOOTSTRAP_DATABASE=false` in **/opt/openziti/etc/controller/service.env**. The file path to the database is specified in the configuration file.
 
 #### Migration Example
 
@@ -115,7 +115,7 @@ systemctl show -p MainPID --value ziti-controller.service \
 ziti    2694474 ziti-controller    8u     IPv6          222078013       0t0       TCP *:1280 (LISTEN)
 ```
 
-You may set `ZITI_CTRL_ADVERTISED_PORT` in `/opt/openziti/etc/controller/bootstrap.env` to bootstrap with a different port.
+You may set `ZITI_CTRL_ADVERTISED_PORT` in **/opt/openziti/etc/controller/bootstrap.env** to bootstrap with a different port.
 
 ## Logging
 
