@@ -62,7 +62,7 @@ Check out [the PKI page](/learn/core-concepts/pki.md) for an overview of these c
 
 The controller's configuration is loaded from a file ([reference](/reference/30-configuration/controller.md)). The Linux system service will generate a valid configuration during the first startup unless one already exists.
 
-The filename of the configuration file, relative to the Linux service's working directory (default: **/var/lib/ziti-controller/config.yml**). You may override this in **/etc/systemd/system/ziti-controller.service.d/override.conf** by re-initializing `ExecStart=` with an empty value followed by a second `ExecStart` directive specifying the override command.
+The filename of the configuration file, relative to the Linux service's working directory (default: **/var/lib/ziti-controller/config.yml**). You may override this in **/etc/systemd/system/ziti-controller.service.d/override.conf**.
 
 Disable bootstrapping a configuration by setting `ZITI_BOOTSTRAP_CONFIG=false` in **/opt/openziti/etc/controller/service.env**.
 
@@ -128,14 +128,18 @@ journalctl -u ziti-controller.service
 <Tabs>
 <TabItem value="goformats" label="Log Formats">
 
-Choose the logging format (default: text).
+Choose the logging format (default: text) as an argument for the `run --log-formatter` option. The available formats are:
 
 - `pfxlog` - a human-readable format leveraging ANSI escape codes to colorize log levels
 - `json` - a machine-readable format targeting automated processes for log aggregation
 - `text` - a human-readable format using plain text (no ANSI escape codes)
 
-```text title="Run without colorized log levels"
-ziti controller run config.yml --log-formatter text
+Run options must be set in the service's override file in the `ExecStart` directive.
+
+```text title=/etc/systemd/system/ziti-controller.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/opt/openziti/etc/controller/entrypoint.bash run config.yml --log-formatter text
 ```
 
 </TabItem>
@@ -143,8 +147,10 @@ ziti controller run config.yml --log-formatter text
 
 The default log level is `INFO`. This means that log messages `INFO`, `WARNING`, `ERROR`, and `FATAL` will all be emitted. Enable verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will additionally emit `DEBUG` log level messages.
 
-```text title="Run the controller with verbose (DEBUG, 4) log level"
-ziti controller run config.yml --verbose
+```text title=/etc/systemd/system/ziti-controller.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/opt/openziti/etc/controller/entrypoint.bash run config.yml --verbose
 ```
 
 </TabItem>
@@ -153,7 +159,7 @@ ziti controller run config.yml --verbose
 
 ## Uninstall
 
-1. Clean the Service State
+1. Clean the service state.
 
     ```text
     sudo systemctl disable --now ziti-controller.service
