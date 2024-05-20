@@ -144,7 +144,26 @@ ziti router run config.yml --verbose
 
 ## Uninstall
 
-```text
-sudo systemctl disable --now ziti-router.service
-sudo systemctl clean --what=state ziti-router.service
-```
+1. Clean the Service State
+
+
+    ```text
+    sudo systemctl disable --now ziti-router.service
+    sudo systemctl clean --what=state ziti-router.service
+    ```
+
+1. Purge the package, including configuration files.
+
+    APT - Debian, Ubuntu, etc.
+
+    ```text
+    sudo apt-get purge openziti-router
+    ```
+
+    RPM - RedHat, Fedora, etc.
+
+    ```text
+    sudo dnf remove --purge openziti-router
+    ```
+
+1. Remove any firewall exceptions you created.

@@ -149,9 +149,25 @@ ziti controller run config.yml --verbose
 
 ## Uninstall
 
-```text
-sudo systemctl disable --now ziti-controller.service
-sudo systemctl clean --what=state ziti-controller.service
-```
+1. Clean the Service State
 
-Remove any firewall exceptions you created for the service.
+    ```text
+    sudo systemctl disable --now ziti-controller.service
+    sudo systemctl clean --what=state ziti-controller.service
+    ```
+
+1. Purge the package, including configuration files.
+
+    APT - Debian, Ubuntu, etc.
+
+    ```text
+    sudo apt-get purge openziti-controller
+    ```
+
+    RPM - RedHat, Fedora, etc.
+
+    ```text
+    sudo dnf remove --purge openziti-controller
+    ```
+
+1. Remove any firewall exceptions you created.
