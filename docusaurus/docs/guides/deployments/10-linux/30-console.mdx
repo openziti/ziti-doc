@@ -17,7 +17,7 @@ The console can be bound to the same web listener as the controller's management
     sudo unzip -d /var/lib/ziti-controller/zac ./ziti-console.zip
     ```
 
-1. Ensure you have an API binding `zac` on the same web listener where `edge-management` is bound. Ensure the `location` matches the path where you unzipped the console.
+1. In **/var/lib/ziti-controller/config.yml**, ensure you have an API binding `zac` on the same web listener where `edge-management` is bound. Ensure the `location` matches the path where you unzipped the console.
 
     ```text
     - binding: zac
