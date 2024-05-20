@@ -1,67 +1,31 @@
 ---
-title: Console Deployment
+title: Deploy the Console
 sidebar_label: Console
 ---
 
-This article is about deploying the Ziti console as a standalone Node.js server application in a Docker container.
+This article is about deploying the console as a single-page application (SPA) embedded in the controller's API running in a container.
 
-The Ziti console (ZAC) provides a web-based user interface for managing Ziti networks. The console can be built to run as a single-page application that communicates with the Ziti controller via REST requests originating in the browser, or as a standalone Node.js server that initiates REST requests to the Ziti controller on behalf of the user.
+1. Configure the controller
 
-Alternatively to Docker, clone the Git repository and follow [the steps to run the standalone Node.js web server](https://github.com/openziti/ziti-console?tab=readme-ov-file#readme).
+    The console's `zac` binding must be on the same web listener as the controller's management API, i.e., the `edge-management` binding.
 
-## Run the Console in Docker
+    ```text
+          - binding: zac
+            options:
+              location: /ziti-console
+              indexFile: index.html
+    ```
 
-```text
-docker run --name ziti-console --publish "1408:1408" openziti/zac
-```
+    - `location` is the filesystem path to the static files of the console. In the controller container, the usual path is `/ziti-console`.
+    - `indexFile` property is the entry point to the console.
 
-## Settings
+1. To apply the changes, the controller must be restarted.
+1. Visit the console at `/zac/` on the controller's address.
 
-You may pre-populate the URL of the Ziti controller's management API by creating a `settings.json` file. The application looks for this file in the current working directory or a path relative to the working directory specified with the `SETTINGS` environment variable.
+    The console is now available at `https://<fqdn>:<port>/zac/`.
 
-```text
-{
-    "edgeControllers": [
-        {
-            "default": true,
-            "name": "Mega Ziti",
-            "url": "https://megaziti.example.com:1280"
-        }
-    ]
-}
-```
+1. Log in to the console.
 
-Link to [settings template in the repository](https://github.com/openziti/ziti-console/blob/main/projects/ziti-console-lib/src/lib/assets/data/settings.json).
+    The only available authentication method for the console SPA is username and password.
 
-The Docker image's working directory is `/usr/src/app`, so the `settings.json` file may be mounted and referenced with the environment variable.
-
-```text
-docker run \
-    --rm --name ziti-console --publish 1408:1408 \
-    --volume /tmp/ziti-console-settings.json:/usr/src/ziti/settings.json \
-    --env SETTINGS=../ziti \
-        openziti/zac
-```
-
-```buttonless title=Output
-Running: server.js node-api
-{
-    edgeControllers: [
-        {
-            default: true,
-            name: 'Mega Ziti',
-            url: 'https://megaziti.example.com:1280'
-        }
-    ]
-}
-Ziti Admin Console is now listening on port 1408
-```
-
-## Server TLS
-
-The console server can be configured to present a TLS server certificate on a configurable TCP port. TLS is enabled when the private key and certificate files exist with the expected filenames in the working directory.
-
-- `./server.key` - private key
-- `./server.chain.pem` - server certificate chain
-
-Configure the TLS port in `settings.json` by setting `portTLS` (default: 8443).
+1. Console certificate option - The console is served from the controller's API and can be used with the default API certificate. The controller can be configured to present a different certificate for the console when the API is accessed by a distinct URL for the console. For more information about using alternative server certs with the controller, see: [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity).

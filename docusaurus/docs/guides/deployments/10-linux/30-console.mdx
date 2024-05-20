@@ -38,4 +38,4 @@ The console can be bound to the same web listener as the controller's management
     https://ziti.example.com:1280/zac
     ```
 
-1. Refer to [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity) for more information about adding a verifiable server certificate to the controller.
+1. Console certificate option - The console is served from the controller's API and can be used with the default API certificate. The controller can be configured to present a different certificate for the console when the API is accessed by a distinct URL for the console. For more information about using alternative server certs with the controller, see: [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity).
