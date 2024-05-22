@@ -115,19 +115,27 @@ Subject: C=US, ST=NC, L=Charlotte, O=NetFoundry, OU=ADV-DEV, CN=NetFoundry Inc. 
 
 ## Logging
 
-View the router service's output with `journalctl -u ziti-router.service`.
+View the service's output.
+
+```text
+journalctl -u ziti-router.service
+```
 
 <Tabs>
 <TabItem value="goformats" label="Log Formats">
 
-Choose the logging format (default: text).
+Choose the logging format (default: text) as an argument for the `run --log-formatter` option. The available formats are:
 
 - `pfxlog` - a human-readable format leveraging ANSI escape codes to colorize log levels
 - `json` - a machine-readable format targeting automated processes for log aggregation
 - `text` - a human-readable format using plain text (no ANSI escape codes)
 
-```text title="Run without colorized log levels"
-ziti router run config.yml --log-formatter text
+Run options must be set in the service's override file in the `ExecStart` directive.
+
+```text title=/etc/systemd/system/ziti-router.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/opt/openziti/etc/router/entrypoint.bash run config.yml --log-formatter text
 ```
 
 </TabItem>
@@ -135,8 +143,10 @@ ziti router run config.yml --log-formatter text
 
 The default log level is `INFO`. This means that log messages `INFO`, `WARNING`, `ERROR`, and `FATAL` will all be emitted. Enable verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will additionally emit `DEBUG` log level messages.
 
-```text title="Run the controller with verbose (DEBUG, 4) log level"
-ziti router run config.yml --verbose
+```text title=/etc/systemd/system/ziti-router.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/opt/openziti/etc/router/entrypoint.bash run config.yml --verbose
 ```
 
 </TabItem>
@@ -144,8 +154,7 @@ ziti router run config.yml --verbose
 
 ## Uninstall
 
-1. Clean the Service State
-
+1. Clean the service state.
 
     ```text
     sudo systemctl disable --now ziti-router.service
