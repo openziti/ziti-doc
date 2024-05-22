@@ -121,16 +121,19 @@ View the service's output.
 journalctl -u ziti-router.service
 ```
 
+<br />
+
+Learn more in [the logging reference](/reference/40-logging.mdx).
+
+<br />
+
 <Tabs>
+
 <TabItem value="goformats" label="Log Formats">
 
-Choose the logging format (default: text) as an argument for the `run --log-formatter` option. The available formats are:
+Set a different format in the override file's `ExecStart` directive.
 
-- `pfxlog` - a human-readable format leveraging ANSI escape codes to colorize log levels
-- `json` - a machine-readable format targeting automated processes for log aggregation
-- `text` - a human-readable format using plain text (no ANSI escape codes)
-
-Run options must be set in the service's override file in the `ExecStart` directive.
+<br />
 
 ```text title=/etc/systemd/system/ziti-router.service.d/override.conf
 [Service]
@@ -138,10 +141,14 @@ ExecStart=
 ExecStart=/opt/openziti/etc/router/entrypoint.bash run config.yml --log-formatter text
 ```
 
+<br />
+
 </TabItem>
 <TabItem value="golevels" label="Log Levels">
 
-The default log level is `INFO`. This means that log messages `INFO`, `WARNING`, `ERROR`, and `FATAL` will all be emitted. Enable verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will additionally emit `DEBUG` log level messages.
+Enable DEBUG log level with the `--verbose` flag in the override file's `ExecStart` directive.
+
+<br />
 
 ```text title=/etc/systemd/system/ziti-router.service.d/override.conf
 [Service]

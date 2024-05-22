@@ -1,0 +1,42 @@
+---
+title: Logging
+---
+
+This article is about log messages from the `ziti` CLI that is used to run the controller and router. See [the Linux tunneler reference](/reference/tunnelers/60-linux/50-linux-tunnel-troubleshooting.mdx) for details about messages from `ziti-edge-tunnel`.
+
+## Levels
+
+The default log level is `INFO`. This means that log messages `INFO`, `WARNING`, `ERROR`, and `FATAL` will all be emitted. Enable verbose logging by adding `--verbose or -v` to the command being executed. Verbose mode will additionally emit `DEBUG` messages.
+
+## Formats
+
+Adjust the log format with option `--log-formatter` (`json`, `text`, `pfxlog`). 
+
+The default log format is `json` when is running in the background (no tty).
+
+<br />
+
+```text
+{"file":"github.com/openziti/ziti/controller/network/network.go:927","func":"github.com/openziti/ziti/controller/network.(*Network).Run","level":"info","msg":"started","time":"2024-05-22T09:20:06.423Z"}
+```
+
+<br />
+
+The `text` format has the same level of detail and is the default when running in the foreground (with tty).
+
+<br />
+
+```text
+time="2024-05-22T09:23:27-04:00" level=info msg=started func="github.com/openziti/ziti/controller/network.(*Network).Run" file="github.com/openziti/ziti/controller/network/network.go:927"
+```
+
+<br />
+
+The simplified, human-friendly format is `pfxlog`. This format can also be enabled by setting environment variable `PFXLOG_NO_JSON=true`.
+
+<br />
+
+
+```text
+INFO ziti/controller/network.(*Network).Run: started
+```
