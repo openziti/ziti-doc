@@ -164,6 +164,36 @@ ExecStart=/opt/openziti/etc/controller/entrypoint.bash run config.yml --verbose
 </Tabs>
 
 
+## Upgrade
+
+### Upgrade to Latest
+
+APT - Debian, Ubuntu, etc.
+
+```text
+sudo apt-get install --only-upgrade openziti openziti-controller
+```
+
+RPM - RedHat, Fedora, etc.
+
+```text
+sudo dnf upgrade openziti openziti-controller
+```
+
+### Upgrade to Specific Version
+
+APT - Debian, Ubuntu, etc.
+
+```text
+sudo apt-get install openziti=1.0.0 openziti-controller=1.0.0
+```
+
+RPM - RedHat, Fedora, etc.
+
+```text
+sudo dnf install openziti-1.0.0 openziti-controller-1.0.0
+```
+
 ## Uninstall
 
 1. Clean the service state.

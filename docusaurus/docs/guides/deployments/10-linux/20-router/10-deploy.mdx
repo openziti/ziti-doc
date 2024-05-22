@@ -159,6 +159,38 @@ ExecStart=/opt/openziti/etc/router/entrypoint.bash run config.yml --verbose
 </TabItem>
 </Tabs>
 
+## Upgrade
+
+The two packages that provide the service and CLI should be upgraded at the same time.
+
+### Upgrade to Latest
+
+APT - Debian, Ubuntu, etc.
+
+```text
+sudo apt-get install --only-upgrade openziti openziti-router
+```
+
+RPM - RedHat, Fedora, etc.
+
+```text
+sudo dnf upgrade openziti openziti-router
+```
+
+### Upgrade to Specific Version
+
+APT - Debian, Ubuntu, etc.
+
+```text
+sudo apt-get install openziti=1.0.0 openziti-router=1.0.0
+```
+
+RPM - RedHat, Fedora, etc.
+
+```text
+sudo dnf install openziti-1.0.0 openziti-router-1.0.0
+```
+
 ## Uninstall
 
 1. Clean the service state.
