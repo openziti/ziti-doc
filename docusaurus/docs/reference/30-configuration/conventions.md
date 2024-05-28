@@ -93,7 +93,7 @@ identity:
   ca: ca-chain.cert.pem
   alt_server_certs:
     - server_cert: lets_encrypt.cert.pem
-    - server_key: lets_encrypt.key.pem
+      server_key: lets_encrypt.key.pem
 
 ```
 
