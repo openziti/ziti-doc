@@ -6,27 +6,27 @@ sidebar_label: Kubernetes
 This guide will help you discover the best strategy and tool for connecting a Kubernetes workload. This overview page links to child pages for each strategy and tool, and a summary of each is provided in the sections below. Click on the chart's outcomes to see the corresponding documentation.
 
 ```mermaid
-graph TB; 
-  A{Pod connects to a service?}
-  A -- Yes --> B{Intercept at pod or </br>cluster level?}
-  subgraph egressGraph ["&nbsp;"]
+graph TB;
+  A{Pods connect to <br/>Ziti services?}
+  A -- Yes --> B{Intercept at pod,<br/>node, or <br/>cluster level?}
+  subgraph egressGraph ["&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proxy"]
     direction BT
-    B -- CLUSTER --> F(["TCP proxy cluster service </br>provides cluster DNS and TCP proxy </br>for each Ziti service"])
-    B -- POD ---> G{Pod uses DNS or </br>static IP to connect to </br>the service?}
-    G -- YES --> H(["tproxy sidecar</br> provides DNS and </br>IP interception to the pod"])
-    G -- NO ---> I(["tcp proxy sidecar</br>binds a local port to </br>each service"])
+    B -- POD ---> H(["Ziti sidecar<br/> provides Ziti DNS and <br/>proxy to the pod"])
+    B -- CLUSTER --> F(["Ziti router<br/>provides a cluster service <br/>for each Ziti service"])
+    B -- NODE ----> G(["Ziti daemonset<br/>provides Ziti DNS and <br/>proxy to all pods"])
   end
   class egressGraph subgraphClass
-  A -- No --------> K{router </br>is installed?}
-  subgraph ingressGraph ["&nbsp;"]
-    K -- Yes --> J([router reverse proxy </br>provides ingress to</br>cluster services])
-    K -- No ---> C{NGINX </br>is </br>installed?}
-    C -- Yes --> D([NGINX container with </br>proxy module </br>provides ingress to</br>cluster services])
-    C -- No ---> E([reverse proxy tunnel pod</br>provides ingress </br>to cluster services])
+  A -- No --------> K{Ziti router <br/>in cluster?}
+  subgraph ingressGraph ["&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reverse proxy"]
+    K -- Yes --> J([Ziti router<br/>tunnel mode 'host'])
+    K -- No ---> C{NGINX <br/>in cluster?}
+    C -- Yes --> D([Ziti proxy module for NGINX])
+    C -- No ---> E([Ziti tunneler mode 'run-host'])
   end
   click D "#nginx-proxy-module" "NGINX Module"
   click E "#reverse-proxy-tunnel-pod" "ziti-host"
   click F "#tcp-proxy-cluster-service" "cluster proxy"
+  click G "#node-proxy-daemonset" "node proxy daemonset"
   click H "#transparent-proxy-sidecar" "transparent sidecar"
   click I "#tcp-proxy-sidecar" "loopback sidecar"
   click J "#reverse-proxy-router-pod" "cluster reverse proxy"
@@ -40,9 +40,9 @@ In the chart above, there are several strategies and solutions for connecting a 
 
 An tunneler can be used to intercept pod egress. One important thing to know is that the tunneler that is used in this way may also be used to "host" services in order to provide ingress to cluster services.
 
-<!-- #### [Node Proxy Daemonset](./kubernetes-daemonset.md)
+#### [Node Proxy Daemonset](./kubernetes-daemonset.md)
 
-Deploying a daemonset of privileged `ziti-edge-tunnel run` pods on selected nodes is a simple way to enable services in a cluster. The daemonset pods intercept egress from pods and provide a DNS nameserver for CoreDNS. Like any other tunneler, the identity used by the daemonset may be configured to host services, i.e. provide ingress to cluster services. For more information, see the [node proxy](./kubernetes-daemonset.md) page. -->
+Deploying a daemonset of privileged `ziti-edge-tunnel run` pods on selected nodes is a simple way to enable services in a cluster. The daemonset pods intercept egress from pods and provide Ziti DNS to CoreDNS. For more information, see the [node proxy](./kubernetes-daemonset.md) page.
 
 #### [Transparent Proxy Sidecar](./kubernetes-sidecar.md)
 
