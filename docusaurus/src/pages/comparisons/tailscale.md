@@ -51,7 +51,7 @@ to another, all over a self-healing mesh network.
 
 | Feature                                             | Tailscale                     | OpenZiti                                        |
 |-----------------------------------------------------|-------------------------------|-------------------------------------------------|
-| Mesh VPN                                            | Yes                           | Yes                                             |
+| Mesh Network                                        | Yes                           | Yes                                             |
 | Programmable Overlay                                | No                            | Yes                                             |
 | Initial Network Segmentation                        | Open                          | Closed                                          |
 | Embeddable into **your** applications               | No                            | Yes                                             |                                                     |                               |                                                 |
