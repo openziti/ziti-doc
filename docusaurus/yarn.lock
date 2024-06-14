@@ -1587,7 +1587,7 @@
     "@docusaurus/theme-search-algolia" "2.4.3"
     "@docusaurus/types" "2.4.3"
 
-"@docusaurus/react-loadable@5.5.2", react-loadable@*, "react-loadable@npm:@docusaurus/react-loadable@5.5.2":
+"@docusaurus/react-loadable@5.5.2":
   version "5.5.2"
   resolved "https://registry.npmjs.org/@docusaurus/react-loadable/-/react-loadable-5.5.2.tgz"
   integrity sha512-A3dYjdBGuy0IGT+wyLIGIKLRE+sAk1iNk0f1HjNDysO7u8lhL4N3VEm+FAubmJbAztn94F7MxBTPmnixbiyFdQ==
@@ -3826,10 +3826,15 @@ core-js-pure@^3.30.2:
   resolved "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.32.2.tgz"
   integrity sha512-Y2rxThOuNywTjnX/PgA5vWM6CZ9QB9sz9oGeCixV8MqXZO70z/5SHzf9EeBrEBK0PN36DnEBBu9O/aGWzKuMZQ==
 
-core-js@^3.1.4, core-js@^3.23.3:
+core-js@^3.23.3:
   version "3.32.2"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.32.2.tgz"
   integrity sha512-pxXSw1mYZPDGvTQqEc5vgIb83jGQKFGYWY76z4a7weZXUolw3G+OvpZqSRcfYOoOVUQJYEPsWeQK8pKEnUtWxQ==
+
+core-js@^3.37.1:
+  version "3.37.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.37.1.tgz#d21751ddb756518ac5a00e4d66499df981a62db9"
+  integrity sha512-Xn6qmxrQZyB0FFY8E3bgRXei3lWDJHhvI+u0q9TKIYM49G8pAr0FgnnrFRAmsbptZL1yxRADVXn+x5AGsbBfyw==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -8059,6 +8064,14 @@ react-loadable-ssr-addon-v5-slorber@^1.0.1:
   integrity sha512-lq3Lyw1lGku8zUEJPDxsNm1AfYHBrO9Y1+olAYwpUJ2IGFBskM0DMKok97A6LWUpHm+o7IvQBOWu9MLenp9Z+A==
   dependencies:
     "@babel/runtime" "^7.10.3"
+
+react-loadable@*, "react-loadable@npm:@docusaurus/react-loadable@5.5.2":
+  version "5.5.2"
+  resolved "https://registry.npmjs.org/@docusaurus/react-loadable/-/react-loadable-5.5.2.tgz"
+  integrity sha512-A3dYjdBGuy0IGT+wyLIGIKLRE+sAk1iNk0f1HjNDysO7u8lhL4N3VEm+FAubmJbAztn94F7MxBTPmnixbiyFdQ==
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.6.2"
 
 react-markdown@^8.0.7:
   version "8.0.7"
