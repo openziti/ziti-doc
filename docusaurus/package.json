@@ -25,7 +25,7 @@
     "@hotjar/browser": "^1.0.9",
     "@mdx-js/react": "^1.6.22",
     "@types/react": ">=16",
-    "asciinema-player": "^3.6.3",
+    "asciinema-player": "^3.7.1",
     "bootstrap": "^5.3.2",
     "clsx": "^1.2.1",
     "core-js": "^3.1.4",
