@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Crawl for Broken Links
         run: ./check-links/crawl-for-broken-links.sh https://openziti.io
       - name: Resolve Alarm Issue if Links are Not Broken
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Check popular links to new docs site
         run: ./check-links.sh https://openziti.io ./popular-docs-links.txt
         working-directory: ./check-links/
