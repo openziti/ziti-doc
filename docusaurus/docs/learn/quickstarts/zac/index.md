@@ -1,5 +1,6 @@
 ---
 title: Ziti Admin Console
+sidebar_label: Console
 ---
 
 import Wizardly from '@site/src/components/Wizardly';
@@ -7,116 +8,53 @@ import Wizardly from '@site/src/components/Wizardly';
 The Ziti Administration Console (ZAC) is a web UI provided by the OpenZiti project which will allow you to configure and
 explore a [network](/learn/introduction/index.mdx).
 
-## Prerequisites
+## Overview
 
-* It's expected that you're using `bash` for these commands. If you're using Windows we strongly recommend that you install
-  and use Windows Subsystem for Linux (WSL). Other operating systems it's recommended you use `bash` unless you are able to
-  translate to your shell accordingly.
+ These steps enable the console for a quickstart controller. Run these commands with a shell like `bash` in a Windows Subsystem for Linux (WSL), macOS, or Linux.
 
-* You will need `node` and `npm` executables from Node.js v16+. If you see an error like the one shown below you likely
-  have a version of node < v16. __You need node v16+__:
-
-      ziti = await loadModule('@openziti/ziti-sdk-nodejs')
-      ^^^^^
-
-      SyntaxError: Unexpected reserved word
-       at Loader.moduleStrategy (internal/modules/esm/translators.js:133:18)
-       at async link (internal/modules/esm/module_job.js:42:21)
-
- * You will also need the Angular CLI installed and available on your command line. If you do not have this already you can
-   run the following command:
-
-    ```text
-    npm install -g @angular/cli@16
-    ```
-    
-
-:::note
-When running Ziti Administration Console, you should also prefer using https over http. In order to do this you will need
-to either create, or copy the certificates needed. Each section below tries to show you how to accomplish this on your own.
-:::
-
-## Cloning From GitHub
+## Downloading From GitHub
 
 These steps are applicable to both the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) and the
-[hosted yourself](/learn/quickstarts/network/hosted.md) deployments. Do note, these steps expect you have the necessary
-environment variables established in your shell. If you used the default parameters, you can establish these variables
-using the file at `${HOME}/.ziti/quickstart/$(hostname)/$(hostname).env`. To deploy ZAC after following one of those guides,
-you can perform the following steps.
+[hosted yourself](/learn/quickstarts/network/hosted.md) deployments.
 
-1. Clone the ziti-console repo from github:
+1. On the controller host, download the latest release of the console from GitHub. You can use any console version >= 3.0.0.
+
+    ```text
+    wget https://github.com/openziti/ziti-console/releases/latest/download/ziti-console.zip
+    ```
+
+1. Ensure `ZITI_HOME` is set to your quickstart working directory and exported to forked processes. You can always restore the quickstart environment variables by sourcing the environment file.
 
    ```text
-   git clone https://github.com/openziti/ziti-console.git "${ZITI_HOME}/ziti-console"
+   source ${HOME}/.ziti/quickstart/$(hostname)/$(hostname).env
+   export ZITI_HOME
    ```
 
-1. Install Node modules:
+1. Unzip the console in the controller's working directory.
 
-   ```text
-   cd "${ZITI_HOME}/ziti-console"
-   npm install
-   ```
+    ```text
+    unzip -d ${ZITI_HOME}/zac ./ziti-console.zip
+    ```
 
-1. Build the core Angular library:
+1. In **${ZITI_HOME}/$(hostname -s).yaml**, add a web API binding `zac` in the list containing `edge-management`.
 
-   ```text
-   ng build ziti-console-lib
-   ```
+    ```text
+          - binding: zac
+            options:
+              location: ${ZITI_HOME}/zac
+              indexFile: index.html
+    ```
 
-1. Build the Angular app:
+1. Restart the controller service to apply the changes.
 
-   ```text
-   ng build ziti-console-node
-   ```
+    ```text
+    sudo systemctl restart ziti-controller.service
+    ```
 
-1. Use the ziti-controller certificates for the console:
+1. Navigate to the console in your web browser, e.g., `https://localhost:1280/zac/`
 
-   Link a server certificate into the `ziti-console` directory. Your web browser won't recognize it, but it's sufficient for this exercise to have server TLS for your ZAC session.
-
-   ```text
-   ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/certs/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.chain.pem" "${ZITI_HOME}/ziti-console/server.chain.pem"
-   ln -s "${ZITI_PKI}/${ZITI_CTRL_EDGE_NAME}-intermediate/keys/${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}-server.key" "${ZITI_HOME}/ziti-console/server.key"
-   ```
-
-1. [Optional] Emit the console systemd file and update systemd to start the console (ZAC). If you have not sourced
-   [the Ziti helper script](https://get.openziti.io/ziti-cli-functions.sh) and you wish to have ZAC enabled with systemd,
-   you need to in order to get the necessary function. Either inspect the script and find the function, download and source it,
-   or source it directly from the internet (direct sourcing from internet shown below)
-
-   ```text
-   source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/ziti-cli-functions.sh)"
-   createZacSystemdFile
-   sudo cp "${ZITI_HOME}/ziti-console.service" /etc/systemd/system
-   sudo systemctl daemon-reload
-   sudo systemctl enable --now ziti-console
-   ```
-
-   If you do not have systemd installed or if you just wish to start ZAC you can simply issue:
-
-   ```text
-   node "${ZITI_HOME}/ziti-console/server.js"
-   Initializing TLS
-   TLS initialized on port: 8443
-   Ziti Server running on port 1408
-   ```
-
-1. [Optional] If using systemd - verify the console is running by running the systemctl command
-   `sudo systemctl status ziti-console --lines=0 --no-pager`
-
-   ```text
-   $ sudo systemctl status ziti-console --lines=0 --no-pager
-    ● ziti-console.service - Ziti-Console
-    Loaded: loaded (/etc/systemd/system/ziti-console.service; disabled; vendor preset: enabled)
-    Active: active (running) since Wed 2021-05-19 22:04:44 UTC; 13h ago
-    Main PID: 13458 (node)
-    Tasks: 11 (limit: 1160)
-    Memory: 33.4M
-    CGroup: /system.slice/ziti-console.service
-    └─13458 /usr/bin/node /home/ubuntu/.ziti/quickstart/ip-172-31-22-212/ziti-console/server.js
-
-   $ sudo ss -lntp | grep node
-   LISTEN 0      511                *:8443             *:*    users:(("node",pid=26013,fd=19))           
-   LISTEN 0      511                *:1408             *:*    users:(("node",pid=26013,fd=18))
+   ```text title="Print the URL based on your shell env"
+   echo https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:1280/zac/
    ```
 
 ## Using Docker
@@ -180,7 +118,7 @@ internet search should show you how to accomplish this.
 
 ## Kubernetes
 
-There's [a Helm chart for deploying the Ziti console in Kubernetes](/docs/guides/deployments/30-kubernetes//kubernetes-console.mdx).
+[Kubernetes deployment guide](/docs/guides/deployments/30-kubernetes//kubernetes-console.mdx).
 
 ## Login and use ZAC
 

@@ -28,11 +28,11 @@ back up the necessary files follow these steps:
        section of your controller config.
 1. Backup the controller PKI.
     1. Copy the PKI directory to a safe backup location (Default path: `$ZITI_HOME/quickstart/$(hostname -s)/pki/`).
-1. Backup the controller config file (default path: `$ZITI_HOME/quickstart/$(hostname -s)/$(hostname -s).yaml`).
-1. Backup the environment file (default path `$ZITI_HOME/quickstart/$(hostname -s)/$(hostname -s).env`).
+1. Backup the controller config file (default path: `$ZITI_HOME/$(hostname -s).yaml`).
+1. Backup the environment file (default path `$ZITI_HOME/$(hostname -s).env`).
 1. Backup any router config files.
     1. If you used one of our quickstarts, the single edge router created defaults
-       to `$ZITI_HOME/quickstart/$(hostname -s)/$(hostname -s)-edge-router.yaml`
+       to `$ZITI_HOME/$(hostname -s)-edge-router.yaml`
 
 ## Stop Existing Services
 
@@ -132,7 +132,7 @@ the files if desired.
    ```
 1. Backup the controller PKI.
     1. Copy the PKI as was done with the database file (Default path: `/persistent/pki/`).
-1. Backup the controller config file (default path: `/persistent/siti-controller.yaml`).
+1. Backup the controller config file (default path: `/persistent/ziti-controller.yaml`).
 1. Backup the environment file (default path `/persistent/ziti.env`).
 1. Backup the router config files, depending on which quickstart you performed, you may have more than one. (default
    path `/persistent/*-router*.yaml`). Unfortunately, docker does not support wildcard characters when using

@@ -68,7 +68,6 @@ if [[ "${SKIP_GIT}" == no ]]; then
   fi
   git config --global --add safe.directory $(pwd)
   clone_or_pull "https://github.com/openziti/ziti" "ziti-cmd" >/dev/null
-  clone_or_pull "https://github.com/openziti/ziti-console" "ziti-console" >/dev/null
   clone_or_pull "https://github.com/openziti/ziti-sdk-csharp" "ziti-sdk-csharp" >/dev/null
   clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c" >/dev/null
   clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app" >/dev/null
