@@ -36,6 +36,7 @@ twitter\.com/(OpenZiggy|OpenZiti)
 landing.openziti.io/
 fonts.gstatic.com/
 github\.com/.*#
+.*\.?example\.(com|net|org)
 EOF
 # github\.com/.*/releases/latest/download
 

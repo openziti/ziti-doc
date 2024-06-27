@@ -18,7 +18,7 @@ jobs:
       ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
     steps:
       - name: Checkout Workspace
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Doxygen
         run: |
