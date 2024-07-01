@@ -9,5 +9,5 @@ ziti edge login -u admin -p admin
 
 ```text
 # implies https://
-ziti edge login ziti.example.com:8441 -u admin -p admin
+ziti edge login ctrl.ziti.example.com:8441 -u admin -p admin
 ```
