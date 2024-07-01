@@ -2,4 +2,4 @@ label: Docker
 link:
   type: generated-index
   title: Deploying with Docker
-  description: Run a controller or router as a Docker container
+  description: Run a controller or router as a Docker container or use the console in the controller container
