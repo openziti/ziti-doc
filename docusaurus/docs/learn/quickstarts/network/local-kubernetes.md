@@ -29,7 +29,6 @@ Make sure these command-line tools are available in your executable search `PATH
 Your computer running `minikube` needs to resolve these three domain names. They will all resolve to the same IP address where minikube exposes ingresses on your OS.
 
 * miniziti-controller.miniziti.internal
-* miniziti-console.miniziti.internal
 * miniziti-router.miniziti.internal
 
 <Tabs groupId="operating-systems">
@@ -62,7 +61,7 @@ Your computer running `minikube` needs to resolve these three domain names. They
    Add this line to the system hosts file.
 
    ```text
-   127.0.0.1  miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal  miniziti-console.miniziti.internal
+   127.0.0.1  miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal
    ```
 
 1. Restart WSL.
@@ -114,7 +113,7 @@ If Docker Desktop is not running then it may be necessary to start it in WSL, de
 
    ```buttonless title="Example Output"
    $ grep ziti /etc/hosts
-   127.0.0.1    miniziti-controller.miniziti.internal miniziti-router.miniziti.internal  miniziti-console.miniziti.internal
+   127.0.0.1    miniziti-controller.miniziti.internal miniziti-router.miniziti.internal
    ```
 
 1. In WSL, Run `minikube tunnel`.
@@ -139,7 +138,7 @@ In macOS, `minikube` sets up localhost port forwarding to the IP of the Docker c
 1. Add the DNS names to your system hosts file.
 
    ```text
-   sudo tee -a /etc/hosts <<< "127.0.0.1  miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal  miniziti-console.miniziti.internal"
+   sudo tee -a /etc/hosts <<< "127.0.0.1  miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal"
    ```
 
 1. Run `minikube tunnel`.
@@ -163,7 +162,7 @@ On Linux, the IP of the `minikube` node running in Docker is routeable via the b
 
 ```text
 minikube --profile miniziti start
-sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal  miniziti-console.miniziti.internal"
+sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal"
 ```
 
 </TabItem>
@@ -450,38 +449,15 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    results: 1-1 of 1
    ```
 
-### Install the Console
-
-1. Install the chart
-
-   ```text
-   helm upgrade "ziti-console" openziti/ziti-console \
-      --namespace miniziti --create-namespace --install \
-      --set ingress.advertisedHost="miniziti-console.miniziti.internal" \
-      --set "settings.edgeControllers[0].url=https://ziti-controller-client.miniziti.svc:443" \
-      --values https://openziti.io/helm-charts/charts/ziti-console/values-ingress-nginx.yaml
-   ```
-
-1. Wait for deployment.
-
-   You'll see an Nginx 503 error while the console is deploying.
-
-   ```text
-   kubectl wait deployments "ziti-console" \
-      --namespace miniziti \
-      --for condition=Available=True \
-      --timeout=240s
-   ```
-
 1. Get the admin password on your clipboard.
 
    ```text
    kubectl get secrets "ziti-controller-admin-secret" \
       --namespace miniziti \
-      --output go-template='{{"\nINFO: Your console http://miniziti-console.miniziti.internal password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
+      --output go-template='{{"\nINFO: Your console http://miniziti-controller.miniziti.internal/zac/ password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
    ```
 
-1. Open [https://miniziti-console.miniziti.internal](https://miniziti-console.miniziti.internal) in your web browser and login with username "admin" and the password from your clipboard.
+1. Open [https://miniziti-controller.miniziti.internal/zac/](https://miniziti-controller.miniziti.internal/zac/) in your web browser and login with username "admin" and the password from your clipboard.
 
 ### Create OpenZiti Identities and Services
 
@@ -553,7 +529,7 @@ Visit [http://httpbin.miniziti.private/get](http://httpbin.miniziti.private/get)
 
 ## Explore the Console
 
-Now that you've successfully tested the service, check out the various entities in your that were created by the script in [http://miniziti-console.miniziti.internal/](http://miniziti-console.miniziti.private/).
+Now that you've successfully tested the service, check out the various entities in your that were created by the script in [http://miniziti-controller.miniziti.internal/zac/](http://miniziti-controller.miniziti.private/zac/).
 
 ## Next Steps
 
@@ -586,7 +562,7 @@ Now that you've successfully tested the service, check out the various entities 
    Remove this line.
 
    ```text
-   127.0.0.1  miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal  miniziti-console.miniziti.internal
+   127.0.0.1  miniziti-controller.miniziti.internal  miniziti-router.miniziti.internal
    ```
 
 </TabItem>

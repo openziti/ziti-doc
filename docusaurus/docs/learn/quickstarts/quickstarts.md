@@ -12,7 +12,11 @@ it **directly** into your applications. Ziti provides numerous SDKs for this ver
 Zero Trust right into your application you can still get started by using one or more of the
 [tunneling apps](/learn/core-concepts/clients/choose.mdx).
 
-:::note
+:::info
+Quickstarts are short-lived networks that are great for learning how to Ziti all the thigs! For long-lived production deployments, see the [deployment guides](/docs/category/deployments).
+:::
+
+:::tip 
 If you get stuck on anything at all, remember that the link to the discourse sites is on the top right of all the doc
 pages. Don't be afraid to ask the community for help!
 :::
