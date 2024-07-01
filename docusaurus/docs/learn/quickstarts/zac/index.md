@@ -41,7 +41,7 @@ These steps are applicable to both the [Local - No Docker](/learn/quickstarts/ne
     ```text
           - binding: zac
             options:
-              location: ${ZITI_HOME}/zac
+              location: ./zac
               indexFile: index.html
     ```
 
