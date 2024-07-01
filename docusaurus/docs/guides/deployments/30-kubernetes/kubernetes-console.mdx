@@ -6,10 +6,10 @@ title: Kubernetes Console
 
 Use the console by navigating to the controller's address with path `/zac/` in a web browser. If you published the controller at `ctrl.ziti.example.com:443`, then the console URL is `https://ctrl.ziti.example.com/zac/`.
 
-View the console URL in the Helm release notes.
+The correct console URL is displayed after Helm install or upgrade and may be fetched at any time with Helm.
 
 ```text title="Substitute your Helm release name for 'ziti-controller'"
-helm get notes ziti-controller
+helm get notes "ziti-controller"
 ```
 
 ```buttonless title="Output"
