@@ -51,7 +51,7 @@ These steps are applicable to both the [Local - No Docker](/learn/quickstarts/ne
     sudo systemctl restart ziti-controller.service
     ```
 
-1. Navigate to the console in your web browser, e.g., `https://localhost:1280/zac/`
+1. Navigate to the console in your web browser, e.g., `https://ctrl.ziti.example.com:1280/zac/`
 
    ```text title="Print the URL based on your shell env"
    echo https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:1280/zac/
