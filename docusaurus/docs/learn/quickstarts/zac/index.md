@@ -53,13 +53,10 @@ These steps are applicable to both the [Local - No Docker](/learn/quickstarts/ne
 
 1. Navigate to the console in your web browser, e.g., `https://ctrl.ziti.example.com:1280/zac/`
 
-   ```text title="Print the URL based on your shell env"
-   echo https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:1280/zac/
-   ```
-
 ## Using Docker
 
 ### Copy PKI From Controller
+
 It's a good idea to use TLS everywhere. To do this, you'll need to provide ZAC a key and a certificate.
 If you have used the [Local - With Docker](/learn/quickstarts/network/local-with-docker.md) quickstart to start
 the network you can copy the certificates generated when the controller started.
