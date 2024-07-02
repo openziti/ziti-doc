@@ -242,7 +242,7 @@ const largeAreaChartDailies = {
         data:['ziti','zrok','other repos', 'all repos']
     },
     title: {
-        text: 'OpenZiti Stargazes by Project'
+        text: 'OpenZiti Stargazers by Project'
     },
     dataset: [
         {
