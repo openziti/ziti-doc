@@ -151,11 +151,14 @@ ziti edge create identity user http-client -a 'http-clients' -o http.client.jwt
 ziti edge create identity user http-server -o http.server.jwt
 
 #3. Create an intercept.v1 config. This config is used to instruct the client-side tunneler how to correctly intercept 
-#   the targeted traffic and put it onto the overlay.
+#   the targeted traffic and put it onto the overlay. 
 ziti edge create config http.intercept.v1 intercept.v1 '{"protocols":["tcp"],"addresses":["http.ziti"], "portRanges":[{"low":80, "high":80}]}'
     
 #4. Create a host.v1 config. This config is used instruct the server-side tunneler how to offload the traffic from 
-#   the overlay, back to the underlay. 
+#   the overlay, back to the underlay. Make sure the port used here is correct. For example, when running inside a 
+#   docker container, the ${http_server} variable would likely be set to web.test.blue but the port for the http server
+#   inside the container is listening on 8000, not 80. Be careful with the port and make sure the ${http_server}:port
+#   is reachable from the ${http_server_id}.  
 ziti edge create config http.host.v1 host.v1 '{"protocol":"tcp", "address":"'"${http_server}"'", "port":80}'
     
 #5. Create a service to associate the two configs created previously into a service.
