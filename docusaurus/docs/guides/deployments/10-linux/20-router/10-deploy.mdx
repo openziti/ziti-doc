@@ -22,21 +22,25 @@ You must create the router in the controller first with [the web console](/guide
 
 After creating the router, save the enrollment token (JWT) and use it to finish configuring the router deployment.
 
-## Installation
+## Install the Router Package
 
 The router package provides a systemd service unit and bootstrapping script.
 
-Run the install script.
+### One-liner Install Script
 
 ```text
 curl -sS https://get.openziti.io/install.bash | sudo bash -s openziti-router
 ```
 
-Or, manually configure the package repository and install `openziti-router`.
+### Manual Package Repo Setup
+
+Configure the package repository and install `openziti-router`.
 
 <LinuxPackageRepo />
 
-The `openziti` package provides the `ziti` CLI and is installed as a dependency.
+Finally, install the package: **openziti-router**
+
+*The `openziti` package provides the `ziti` CLI and is installed as a dependency.*
 
 ## Configuration
 
@@ -46,15 +50,39 @@ You must generate, migrate, or craft a configuration. Configuration consists of 
 
 This is the recommended approach if you are deploying a new router.
 
+#### Answer Interactively
+
+Run `bootstrap.bash` to be prompted for the required values.
+
+```text
+sudo /opt/openziti/etc/router/bootstrap.bash
+```
+
+#### Answer Non-interactively
+
 1. Set the required values in the answer file **/opt/openziti/etc/router/bootstrap.env**.
-    1. `ZITI_CTRL_ADVERTISED_ADDRESS` - the control plane DNS name
+    1. `ZITI_CTRL_ADVERTISED_ADDRESS` - the control plane DNS name or IP address (required)
     1. `ZITI_CTRL_ADVERTISED_PORT` - the control plane TCP port (default: 1280)
-    1. `ZITI_ENROLL_TOKEN` - router enrollment token (JWT) as a literal string
-    1. `ZITI_ROUTER_ADVERTISED_ADDRESS` - permanent DNS name
+    1. `ZITI_ENROLL_TOKEN` - router enrollment token (JWT) as a literal string or path to a file (required)
+    1. `ZITI_ROUTER_ADVERTISED_ADDRESS` - permanent DNS name or IP address of this router (required)
     1. `ZITI_ROUTER_PORT` - listener TCP port (default: 3022)
-    1. `ZITI_ROUTER_TYPE` - router type (default: edge)
-    1. `ZITI_ROUTER_MODE` - tunneling mode (default: none)
-1. Run `/opt/openziti/etc/router/bootstrap.bash`
+1. Run `bootstrap.bash` 
+    
+    ```text
+    sudo /opt/openziti/etc/router/bootstrap.bash
+    ```
+
+### Migrate an Existing Configuration
+
+[This example](./50-migrate.mdx) illustrates copying the configuration and identity files from a previous installation to the router service's working directory.
+
+### Craft a Configuration
+
+Craft a new configuration by running `ziti create config router edge --routerName=router`.
+
+Review the environment variables, especially those named like `ZITI_ROUTER_*`, that influence the router configuration with `ziti create config environment`.
+
+Here's a link to [the router configuration reference](/reference/30-configuration/router.md).
 
 ## Starting Up
 

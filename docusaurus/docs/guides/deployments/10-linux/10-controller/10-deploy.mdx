@@ -16,7 +16,7 @@ We'll cover the following topics:
 1. [Configuration](#configuration)
 1. [Starting Up](#starting-up)
 
-## Installation
+## Install the Controller Package
 
 The controller package provides a systemd service unit and bootstrapping script.
 
@@ -30,7 +30,9 @@ Or, manually configure the package repo and install `openziti-controller`.
 
 <LinuxPackageRepo />
 
-The `openziti` package provides the `ziti` CLI and is installed as a dependency.
+Finally, install the package: **openziti-controller**
+
+*The `openziti` package provides the `ziti` CLI and is installed as a dependency.*
 
 ## Configuration
 
@@ -40,17 +42,38 @@ You must generate, migrate, or craft a configuration. Configuration consists of 
 
 This is the recommended approach if you are installing a new controller.
 
+#### Answer Interactively
+
+Run `bootstrap.bash` to be prompted for the required values.
+
+```text
+sudo /opt/openziti/etc/controller/bootstrap.bash
+```
+
+#### Answer Non-interactively
+
 1. Set the required values in the answer file **/opt/openziti/etc/controller/bootstrap.env**.
-    1. `ZITI_CTRL_ADVERTISED_ADDRESS` - control plane permanent DNS name
+    1. `ZITI_CTRL_ADVERTISED_ADDRESS` - control plane permanent DNS name (required)
     1. `ZITI_CTRL_ADVERTISED_PORT` - listener TCP port (default: 1280)
-    1. `ZITI_CTRL_BIND_ADDRESS` - listener interface (default: 0.0.0.0)
     1. `ZITI_USER` - username (default: admin)
-    1. `ZITI_PWD` - password to initialize database
-1. Run `/opt/openziti/etc/controller/bootstrap.bash`
+    1. `ZITI_PWD` - password to initialize the database (required)
+1. Run `bootstrap.bash`
+
+    ```text
+    sudo /opt/openziti/etc/controller/bootstrap.bash
+    ```
 
 ### Migrate an Existing Configuration
 
 [This example](./15-migrate.mdx) illustrates copying the PKI, configuration, and database from a previous installation to the controller service's working directory.
+
+### Craft a Configuration
+
+Craft a new configuration by running `ziti create config controller`.
+
+Review the environment variables, especially those named like `ZITI_CTRL_*`, that influence the controller configuration with `ziti create config environment`.
+
+Here's a link to [the controller configuration reference](/reference/30-configuration/controller.md).
 
 ## Starting Up
 
