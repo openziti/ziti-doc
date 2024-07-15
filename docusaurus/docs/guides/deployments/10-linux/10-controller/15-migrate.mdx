@@ -31,10 +31,10 @@ Here's an example of migrating an existing controller's configuration to the Lin
     ```
 
 1. Disable bootstrapping. We're migrating a complete controller configuration (PKI, configuration file, and database) so
-    we don't need the bootstrapping process.
+    we don't want the bootstrapper to generate a configuration.
 
     ```text
-    sudo sed -Ei 's|(ZITI_BOOTSTRAP_.*)=.*|\1=false|g' /opt/openziti/etc/controller/service.env
+    sudo sed -Ei 's|(ZITI_BOOTSTRAP)=.*|\1=false|g' /opt/openziti/etc/controller/service.env
     ```
 
 1. Start the service.

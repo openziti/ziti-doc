@@ -31,7 +31,7 @@ Here's an example of migrating an existing router configuration to the Linux ser
 1. Disable bootstrapping. It's unnecessary because we are migrating, not generating, a complete router configuration.
 
     ```text
-    sudo sed -Ei 's|(ZITI_BOOTSTRAP_.*)=.*|\1=false|g' /opt/openziti/etc/router/service.env
+    sudo sed -Ei 's|(ZITI_BOOTSTRAP)=.*|\1=false|g' /opt/openziti/etc/router/service.env
     ```
 
 1. Start the service.
