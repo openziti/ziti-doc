@@ -37,11 +37,8 @@ This allows you to do some more complex things like actually isolate services fr
 
 ### Run on your own server
 
-This option is great for two situations. If you have a server This is great if you have other people you want to have
-access to your [network](/learn/introduction/index.mdx) and aren't on the local network.
-
-* If you would prefer not to deal with setting up the [network](/learn/introduction/index.mdx) you
-* can sign up for a free-tier account over at the [NetFoundry Console](https://nfconsole.io/signup)
+If you have a server available on the internet already, you can deploy an overlay network on it. Then, you can share the
+overlay with other people you want to have access to your [network](/learn/introduction/index.mdx) and aren't on the local network.
 
 ## Which network option sounds right for you?
 
