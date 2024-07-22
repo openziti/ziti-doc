@@ -336,6 +336,43 @@ events:
       noWait: false
 ```
 
+Example standard output logger for change events on all entity types.
+
+```text
+events:
+  stdoutLogger:
+    subscriptions:
+      - type: entityChange
+        include:
+          - apiSessionCertificates
+          - apiSessions
+          - authenticators
+          - authPolicies
+          - cas
+          - configs
+          - configTypes
+          - controllers
+          - edgeRouterPolicies
+          - enrollments
+          - eventualEvents
+          - externalJwtSigners
+          - identities
+          - identityTypes
+          - mfas
+          - postureChecks
+          - postureCheckTypes
+          - revocations
+          - routers
+          - serviceEdgeRouterPolicies
+          - servicePolicies
+          - services
+          - sessions
+          - terminators
+    handler:
+      type: stdout
+      format: json
+```
+
 ### `healthChecks`
 
 The `healthChecks` section configures how often health checking is performed. As of now, health
