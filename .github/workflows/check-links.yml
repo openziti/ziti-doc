@@ -18,7 +18,7 @@ jobs:
         run: ./check-links/crawl-for-broken-links.sh https://openziti.io
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
-        uses: netfoundry/close-matching-issues@v3
+        uses: netfoundry/close-matching-issues@v4
         with:
           query: 'is:open label:bug in:title "Broken Links Alarm"'
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -46,7 +46,7 @@ jobs:
         working-directory: ./check-links/
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
-        uses: netfoundry/close-matching-issues@v3
+        uses: netfoundry/close-matching-issues@v4
         with:
           query: 'is:open label:bug in:title "Popular Links Alarm"'
           token: ${{ secrets.GITHUB_TOKEN }}
