@@ -1,6 +1,5 @@
 ---
 title: Identity Providers for BrowZer
-sidebar_label: Identity Providers for BrowZer
 slug: /identity-providers-for-browZer
 ---
 
@@ -15,9 +14,9 @@ import DocsCards from "/src/components/DocsCards";
   />
 </head>
 
-BrowZer allows you to secure your web app using zero-trust technologies **without altering the web app itself**. 
+BrowZer allows you to secure your web app using zero-trust technologies **without altering the web app itself** and without the need for a client-side agent install. 
 
-You must bring your own identity provider, and BrowZer can integrate with all popular identity providers. 
+You must bring your own identity provider, and BrowZer can integrate with all popular identity providers that support OpenID Connect (OIDC).
 
 You can use your existing identity provider, or you can set up a new one using the instructions provided here.
 
@@ -57,6 +56,30 @@ OpenZiti BrowZer works with the identity providers (IdP) or single sign-on (SSO)
     icon="/icons/logo-okta.svg" 
     >
     <p>Okta's Workforce and Customer Identity Clouds enable secure access, authentication, and automation.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Google" 
+    href="/docs/identity-providers-for-browZer-google" 
+    icon="/icons/logo-google.svg" 
+    >
+    <p>Use Google as your identity provider.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="AWS Cognito" 
+    href="/docs/identity-providers-for-browZer-cognito" 
+    icon="/icons/logo-cognito.svg" 
+    >
+    <p>Secure, frictionless customer identity and access management that scales.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Duo" 
+    href="/docs/identity-providers-for-browZer-duo" 
+    icon="/icons/logo-duo.svg" 
+    >
+    <p>Easy to use. Incredibly effective. Cisco Duo simplifies identity security for your workforce.</p>
   </DocsCard>
 
   <br/>
@@ -112,6 +135,14 @@ OpenZiti BrowZer works with the identity providers (IdP) or single sign-on (SSO)
     icon="/icons/logo-stytch.svg" 
     >
     <p>A one-stop shop for all your authentication and security requirements.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Zitadel"
+    href="/docs/identity-providers-for-browZer-zitadel" 
+    icon="/icons/logo-zitadel.png" 
+    >
+    <p>Secure authentication management for your application.</p>
   </DocsCard>
 
 </DocsCards>
