@@ -82,8 +82,14 @@ OpenZiti BrowZer works with the identity providers (IdP) or single sign-on (SSO)
     <p>Easy to use. Incredibly effective. Cisco Duo simplifies identity security for your workforce.</p>
   </DocsCard>
 
-  <br/>
 </DocsCards>
+
+<br/>
+
+If you want to use a cloud-based identity provider that is not listed above,
+please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+
+<br/>
 
 ### Self-hosted open source identity providers
 
@@ -147,3 +153,7 @@ OpenZiti BrowZer works with the identity providers (IdP) or single sign-on (SSO)
 
 </DocsCards>
 
+<br/>
+
+If you want to use a self-hosted open source identity provider that is not listed above,
+please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
