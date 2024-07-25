@@ -12,11 +12,7 @@ slug: /identity-providers-for-browZer-auth0
   />
 </head>
 
-<p maxWidth="20%">
-
-![How to configure Auth0 for OpenZiti BrowZer](/icons/logo-auth0.svg)
-
-</p>
+<img src="/icons/logo-auth0.svg" alt="How to configure Auth0 for OpenZiti BrowZer" width="20%"/>
 
 ### Get an Auth0 Account
 
