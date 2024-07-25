@@ -4,21 +4,15 @@ sidebar_label: Google
 slug: /identity-providers-for-browZer-google
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>Google for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up Google for OpenZiti BrowZer."
+    content="How to configure Google for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="Google" 
-  href="#" 
-  icon="/icons/logo-google.svg" 
-  >
-</DocsCard>
+<img src="/icons/logo-google.svg" alt="How to configure Google for OpenZiti BrowZer" width="20%"/>
 
-coming soon...
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).

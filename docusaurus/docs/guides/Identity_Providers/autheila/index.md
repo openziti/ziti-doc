@@ -4,21 +4,19 @@ sidebar_label: Authelia
 slug: /identity-providers-for-browZer-authelia
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>Authelia for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up Authelia for OpenZiti BrowZer."
+    content="How to configure Authelia for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="Authelia" 
-  href="#" 
-  icon="/icons/logo-authelia.svg" 
-  >
-</DocsCard>
+<p maxWidth="20%">
 
-coming soon...
+![How to configure Authelia for OpenZiti BrowZer](/icons/logo-authelia.svg)
+
+</p>
+
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).

@@ -4,21 +4,15 @@ sidebar_label: Keycloak
 slug: /identity-providers-for-browZer-keycloak
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>Keycloak for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up Keycloak for OpenZiti BrowZer."
+    content="How to configure Keycloak for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="Keycloak" 
-  href="#" 
-  icon="/icons/logo-keycloak.svg" 
-  >
-</DocsCard>
+<img src="/icons/logo-keycloak.svg" alt="How to configure Keycloak for OpenZiti BrowZer" width="20%"/>
 
-coming soon...
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).

@@ -4,21 +4,15 @@ sidebar_label: Microsoft Entra ID
 slug: /identity-providers-for-browZer-entra
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>Microsoft Entra ID for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up Microsoft Entra ID for OpenZiti BrowZer."
+    content="How to configure Microsoft Entra ID for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="Microsoft Entra ID" 
-  href="#" 
-  icon="/icons/logo-entra.jpg" 
-  >
-</DocsCard>
+<img src="/icons/logo-entra.jpg" alt="How to configure Microsoft Entra ID for OpenZiti BrowZer" width="20%"/>
 
-coming soon...
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).

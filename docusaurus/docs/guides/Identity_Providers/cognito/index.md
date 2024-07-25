@@ -4,21 +4,19 @@ sidebar_label: Cognito
 slug: /identity-providers-for-browZer-cognito
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>AWS Cognito for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up AWS Cognito for OpenZiti BrowZer."
+    content="How to configure AWS Cognito for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="AWS Cognito" 
-  href="#" 
-  icon="/icons/logo-cognito.svg" 
-  >
-</DocsCard>
+<p maxWidth="20%">
 
-coming soon...
+![How to configure AWS Cognito for OpenZiti BrowZer](/icons/logo-cognito.svg)
+
+</p>
+
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).

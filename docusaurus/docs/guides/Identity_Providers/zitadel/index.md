@@ -4,21 +4,15 @@ sidebar_label: Zitadel
 slug: /identity-providers-for-browZer-zitadel
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>Zitadel for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up Zitadel for OpenZiti BrowZer."
+    content="How to configure Zitadel for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="Zitadel" 
-  href="#" 
-  icon="/icons/logo-zitadel.svg" 
-  >
-</DocsCard>
+<img src="/icons/logo-zitadel.png" alt="How to configure Zitadel for OpenZiti BrowZer" width="20%"/>
 
-coming soon...
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).

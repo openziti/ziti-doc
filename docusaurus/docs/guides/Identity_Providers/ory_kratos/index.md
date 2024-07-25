@@ -4,21 +4,15 @@ sidebar_label: Ory Kratos
 slug: /identity-providers-for-browZer-ory-kratos
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>Ory Kratos for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up Ory Kratos for OpenZiti BrowZer."
+    content="How to configure Ory Kratos for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="Ory Kratos" 
-  href="#" 
-    icon="/icons/logo-kratos.png" 
-  >
-</DocsCard>
+<img src="/icons/logo-kratos.png" alt="How to configure Ory Kratos for OpenZiti BrowZer" width="20%"/>
 
-coming soon...
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).

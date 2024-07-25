@@ -4,21 +4,15 @@ sidebar_label: Okta
 slug: /identity-providers-for-browZer-okta
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>Okta for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up Okta for OpenZiti BrowZer."
+    content="How to configure Okta for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="Okta" 
-  href="#" 
-  icon="/icons/logo-okta.svg" 
-  >
-</DocsCard>
+<img src="/icons/logo-okta.svg" alt="How to configure Okta for OpenZiti BrowZer" width="20%"/>
 
-coming soon...
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).

@@ -4,21 +4,19 @@ sidebar_label: Duo
 slug: /identity-providers-for-browZer-duo
 ---
 
-import DocsCard from "/src/components/DocsCard";
-
 <head>
   <title>Duo for OpenZiti BrowZer</title>
   <meta
     name="description"
-    content="How to set up Duo for OpenZiti BrowZer."
+    content="How to configure Duo for OpenZiti BrowZer."
   />
 </head>
 
-<DocsCard 
-  header="Duo" 
-  href="#" 
-  icon="/icons/logo-duo.svg" 
-  >
-</DocsCard>
+<p maxWidth="20%">
 
-coming soon...
+![How to configure Duo for OpenZiti BrowZer](/icons/logo-duo.svg)
+
+</p>
+
+### Express Your Interest in this Identity Provider
+If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
