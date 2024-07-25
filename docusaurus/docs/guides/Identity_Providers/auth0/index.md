@@ -50,6 +50,34 @@ Then Create a "Single Page Web Application":
 
 </p>
 
+### Add Callback & Logout URL
+
+BrowZer software will perform an OIDC/PKCE exchange with your Auth0 identity provider when your users authenticate onto your Ziti network. For this to succeed, you need to add your [wildcard domain](/docs/learn/quickstarts/browzer/example/#get-a-wildcard-certificate) to both the `Allowed Callback URLs` setting, and the `Allowed Logout URLs` setting for your Aut0 application:
+
+<p align="center">
+
+![Auth0 callbacks](/img/auth0-callbacks.jpg)
+
+</p>
+<br/>
+For example:
+<p align="center">
+
+![Auth0 callbacks](/img/auth0-callbacks-2.jpg)
+
+</p>
+<br/>
+
+Failure to properly configure the above two settings will result in the following Auth0 error page when your users visit your 
+[BrowZer URL](/docs/learn/quickstarts/browzer/example/#get-a-wildcard-certificate):
+
+<p align="center">
+
+![Auth0 callbacks](/img/auth0-callbacks-error.jpg)
+
+</p>
+<br/>
+
 ### Gather IdP Information
 
 Your OpenZiti network must be configured to become aware of your Auth0 identity provider.  OpenZiti refers to the identity provider as an `External JWT Signer`.  Before you can set up the new JWT signer, you must gather some information from the new Auth0 Application that you just created:
@@ -88,7 +116,7 @@ where the value for `<AUTH0_DOMAIN>` can be found in the `Settings` tab of the S
 
 </p>
 
-If you enter the openid-configuration endpoint URL into a browser, you will receive a response resembling the following:
+When you enter the openid-configuration endpoint URL (`https://<AUTH0_DOMAIN>/.well-known/openid-configuration`) into a browser, you will receive a response resembling the following:
 
 <p align="center">
 
