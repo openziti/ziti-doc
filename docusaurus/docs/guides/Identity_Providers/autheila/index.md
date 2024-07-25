@@ -12,11 +12,7 @@ slug: /identity-providers-for-browZer-authelia
   />
 </head>
 
-<p maxWidth="20%">
-
-![How to configure Authelia for OpenZiti BrowZer](/icons/logo-authelia.svg)
-
-</p>
+<img src="/icons/logo-authelia.svg" alt="How to configure Authelia for OpenZiti BrowZer" width="20%"/>
 
 ### Express Your Interest in this Identity Provider
 If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
