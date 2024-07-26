@@ -96,17 +96,74 @@ Let’s do it now, click on that button.
 
 - Go to the [Credentials page](https://console.developers.google.com/apis/credentials)
 ![Keycloak Google federate](/img/kc-google-8.png)
+<br/>
+<br/>
 - Click on **Create Credentials**
 ![Keycloak Google federate](/img/kc-google-9.png)
+<br/>
+<br/>
+- Click on **OAuth client ID**
+![Keycloak Google federate](/img/kc-google-10.png)
+<br/>
+<br/>
+- Select **Web Application** as the type of your application, add a name for your application, and into the **Authorized redirect URIs** field add the URL you saved near the end of the first step of this guide. It should be something like:
+`https://YOUR_KEYCLOAK_DOMAIN/auth/realms/YOUR_REALM_NAME/broker/google/endpoint`
 
+  You will get now a set of credentials, Client ID and Client Secret
+![Keycloak Google federate](/img/kc-google-11.png)
+<br/>
+<br/>
+- Leave the above Google Console page open.  You will need the **Client ID** and **Client Secret** while setting up Keycloak in the next parts of this guide.
+- Back in Keycloak admin console, click on **Identity Providers**:
 
+![Keycloak Google federate](/img/kc-identity-providers.png)
+<br/>
+<br/>
 
-
-
-
-
-
+- Click **Add provider**, then select **Google** as the provider:
  
+![Keycloak Google federate](/img/kc-add-provider.png)
+<br/>
+<br/>
 
+- Add the ClientId and Client secret from the above Google Console page into Keycloak:
+![Keycloak Google federate](/img/kc-add-provider-2.png)
+ 
+- Click on **Save**
+- In Keycloak admin console, click on **Client Scopes**:
 
+![Keycloak Google federate](/img/kc-client-scopes.png)
+
+- Click **Create Client Scope**
+- Go to **Mappers** tab for your new Scope
+
+![Keycloak Google federate](/img/kc-mappers.png)
+
+- Create a new Audience Mapper
+
+![Keycloak Google federate](/img/kc-aud-mapper.png)
+
+- Include the *browZerDemoClient*
+![Keycloak Google federate](/img/kc-browZer-demo-client.png)
+
+- Ensure the **Include in token scope** checkbox is ON
+- Go to **Clients, browZerDemoClient, Client Scopes, dedicated, Scope**, and disable the Full scope allowed checkbox:
+
+![Keycloak Google federate](/img/kc-full-scope.png)
+
+- Click on **Client scopes**:
+
+![Keycloak Google federate](/img/kc-client-scopes.png)
+
+- Click **Create client scope**, then select **browZerDemoScope**:
+![Keycloak Google federate](/img/kc-demo-scope.png)
+
+- Click on **Realm settings**, then click **OpenID Endpoint Configuration**:
+![Keycloak Google federate](/img/kc-oidc-1.png)
+
+- This will produce JSON resembling the following (take note of the `issuer` and `jwks_uri` fields. *Yours will be slightly different than what is shown here*):
+![Keycloak Google federate](/img/kc-oidc-2.png)
+
+### Create External JWT Signer
+Using the the `issuer` and `jwks_uri` values described above, use the `ziti` CLI to configure an external JWT signer that represents your Keycloak identity provider.  You can find details on how to do this in the [BrowZer Quickstart documentation](/docs/learn/quickstarts/browzer/)
 
