@@ -4,6 +4,8 @@ sidebar_label: Cognito
 slug: /identity-providers-for-browZer-cognito
 ---
 
+import IdPGeneric from '/docs/_browzer-idp-generic.mdx';
+
 <head>
   <title>AWS Cognito for OpenZiti BrowZer</title>
   <meta
@@ -12,11 +14,6 @@ slug: /identity-providers-for-browZer-cognito
   />
 </head>
 
-<p maxWidth="20%">
+<img src="/icons/logo-cognito.svg" alt="How to configure AWS Cognito for OpenZiti BrowZer" width="15%"/>
 
-![How to configure AWS Cognito for OpenZiti BrowZer](/icons/logo-cognito.svg)
-
-</p>
-
-### Express Your Interest in this Identity Provider
-If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+<IdPGeneric />

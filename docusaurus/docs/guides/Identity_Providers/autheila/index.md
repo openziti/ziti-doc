@@ -4,6 +4,8 @@ sidebar_label: Authelia
 slug: /identity-providers-for-browZer-authelia
 ---
 
+import IdPGeneric from '/docs/_browzer-idp-generic.mdx';
+
 <head>
   <title>Authelia for OpenZiti BrowZer</title>
   <meta
@@ -14,5 +16,4 @@ slug: /identity-providers-for-browZer-authelia
 
 <img src="/icons/logo-authelia.svg" alt="How to configure Authelia for OpenZiti BrowZer" width="20%"/>
 
-### Express Your Interest in this Identity Provider
-If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+<IdPGeneric />

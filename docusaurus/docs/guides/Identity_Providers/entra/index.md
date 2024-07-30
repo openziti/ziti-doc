@@ -4,6 +4,8 @@ sidebar_label: Microsoft Entra ID
 slug: /identity-providers-for-browZer-entra
 ---
 
+import IdPGeneric from '/docs/_browzer-idp-generic.mdx';
+
 <head>
   <title>Microsoft Entra ID for OpenZiti BrowZer</title>
   <meta
@@ -14,5 +16,4 @@ slug: /identity-providers-for-browZer-entra
 
 <img src="/icons/logo-entra.jpg" alt="How to configure Microsoft Entra ID for OpenZiti BrowZer" width="20%"/>
 
-### Express Your Interest in this Identity Provider
-If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+<IdPGeneric />

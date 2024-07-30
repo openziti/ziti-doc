@@ -4,6 +4,8 @@ sidebar_label: Duo
 slug: /identity-providers-for-browZer-duo
 ---
 
+import IdPGeneric from '/docs/_browzer-idp-generic.mdx';
+
 <head>
   <title>Duo for OpenZiti BrowZer</title>
   <meta
@@ -12,11 +14,6 @@ slug: /identity-providers-for-browZer-duo
   />
 </head>
 
-<p maxWidth="20%">
+<img src="/icons/logo-duo.svg" alt="How to configure Duo for OpenZiti BrowZer" width="30%"/>
 
-![How to configure Duo for OpenZiti BrowZer](/icons/logo-duo.svg)
-
-</p>
-
-### Express Your Interest in this Identity Provider
-If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+<IdPGeneric />

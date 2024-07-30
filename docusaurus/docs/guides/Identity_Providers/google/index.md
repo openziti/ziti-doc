@@ -4,6 +4,8 @@ sidebar_label: Google
 slug: /identity-providers-for-browZer-google
 ---
 
+import IdPGeneric from '/docs/_browzer-idp-generic.mdx';
+
 <head>
   <title>Google for OpenZiti BrowZer</title>
   <meta
@@ -14,5 +16,4 @@ slug: /identity-providers-for-browZer-google
 
 <img src="/icons/logo-google.svg" alt="How to configure Google for OpenZiti BrowZer" width="20%"/>
 
-### Express Your Interest in this Identity Provider
-If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+<IdPGeneric />

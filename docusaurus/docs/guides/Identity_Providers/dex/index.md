@@ -4,6 +4,8 @@ sidebar_label: Dex
 slug: /identity-providers-for-browZer-dex
 ---
 
+import IdPGeneric from '/docs/_browzer-idp-generic.mdx';
+
 <head>
   <title>Dex for OpenZiti BrowZer</title>
   <meta
@@ -12,11 +14,6 @@ slug: /identity-providers-for-browZer-dex
   />
 </head>
 
-<p maxWidth="20%">
+<img src="/icons/logo-dex.svg" alt="How to configure Dex for OpenZiti BrowZer" width="30%"/>
 
-![How to configure Dex for OpenZiti BrowZer](/icons/logo-dex.svg)
-
-</p>
-
-### Express Your Interest in this Identity Provider
-If you want to use this identity provider with your BrowZer network, please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+<IdPGeneric />
