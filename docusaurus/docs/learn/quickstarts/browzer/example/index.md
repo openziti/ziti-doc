@@ -43,7 +43,7 @@ it simple to follow this guide. We'll be using [Auth0](https://auth0.com) in thi
 
 First, to obtain the a wildcard certificate, I used Docker to run [Certbot](https://certbot.eff.org/). 
 On the Certbot site there are instructions illustrating how to use Certbot. I chose to use Docker to run Certbot
-instead of having to install Certbot on the machine. I was able a wildcard certificate from LetsEncrypt for the
+instead of having to install Certbot on the machine. I was able to generate a wildcard certificate from LetsEncrypt for the
 `${wildcard_url}` domain using the [DNS challenge method](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).  Also notice that Certbot can contact you as a 
 reminder that your certificates are expiring. LetsEncrypt certs are only valid for 90 days, if you follow these
 instructions remember that and plan on rotating the certs often. Set `your_email` as shown below and obtain
