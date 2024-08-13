@@ -152,11 +152,11 @@ web:
       - interface: 127.0.0.1:1280
         address: 127.0.0.1:1280
         newAddress: localhost:1280
-        identity:
-          cert: ctrl-client.cert.pem
-          server_cert: ctrl-server.cert.pem
-          key: ctrl.key.pem
-          ca: ca-chain.cert.pem
+    identity:
+      cert: ctrl-client.cert.pem
+      server_cert: ctrl-server.cert.pem
+      key: ctrl.key.pem
+      ca: ca-chain.cert.pem
     options:
       idleTimeout: 5000ms
       readTimeout: 5000ms
