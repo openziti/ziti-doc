@@ -384,10 +384,6 @@ const config = {
                 type: 'html',
                 value: '<a href="https://zeds.openziti.org" target="_blank" title="Developer Sandbox"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/zeds.png"/>ZEDS</span></a>'
               },
-              {
-                type: 'html',
-                value: '<a href="https://netfoundry.io/pricing/" target="_blank" title="NetFoundry-hosted Ziti"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/nf.svg"/>CloudZiti</span></a>'
-              },
             ]
           },
           {
