@@ -62,7 +62,7 @@ properties to indicate what should be forwarded:
     "10.0.0.1/16"
   ],
   "forwardPort": true,
-  "allowedPorts": [
+  "allowedPortRanges": [
     {
       "low": "1024",
       "high": 2048
@@ -84,7 +84,7 @@ statically set to '192.168.100.1
 {
   "address": "192.168.100.1",
   "forwardPort": true,
-  "allowedPorts": [
+  "allowedPortRanges": [
     {
       "low": "1024",
       "high": 2048
