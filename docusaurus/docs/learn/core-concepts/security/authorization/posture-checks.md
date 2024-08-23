@@ -61,7 +61,7 @@ Supported OS Types
 - Windows
 - Windows Server
 - Linux
-- MaxOc
+- MacOS
 - iOS
 - Android
 
