@@ -206,9 +206,29 @@ If you want the BrowZer Bootstrap Agent to start when the machine starts or if t
 and you have [systemd](https://en.wikipedia.org/wiki/Systemd) on your system, you can enable the BrowZer Bootstrap Agent 
 to start automatically on failure or reboot.
 
-If you have used the ["clone from GitHub"](#cloning-from-github) approach, you have sourced the `ziti-cli-functions.sh`
-helper script, and have the environment variables set from the quickstart installation you can execute a single function
-to create a systemd unit file: `createBrowZerSystemdFile`. Execute this now and you'll see something like:
+If you have used the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) or the
+["host it anywhere" quickstart](/learn/quickstarts/network/hosted.md) quickstarts, you would have sourced the  
+`ziti-cli-function.sh` helper script. If not, you can add the function to your shell or inspect the function and 
+replicate the output it produces. Find the function here: https://get.openziti.io/ziti-cli-functions.sh
+
+As with any script hosted on the internet, you are encouraged to download or preview the script from a browser 
+before sourcing it. Once you are comfortable with the script, you can source it directly if you wish by running:
+```text
+source /dev/stdin <<< "$(wget -qO- https://get.openziti.io/ziti-cli-functions.sh)"
+```
+
+You should also ensure you have the appropriate environment variable (`$ZITI_HOME`) in your shell before running 
+the function as it's used when creating the file or you'll see:
+```text
+  * ERROR: ZITI_HOME is not set
+```
+
+Also, if `node` is not on the path you'll see:
+```text
+ERROR: missing executable 'node'
+```
+
+You can file: `createBrowZerSystemdFile`. Execute this now and you'll see something like:
 ```text
 Ziti BrowZer Bootstrapper systemd file written to: /home/ubuntu/.ziti/quickstart/ip-172-31-47-200/browzer-bootstrapper.service
 ```
