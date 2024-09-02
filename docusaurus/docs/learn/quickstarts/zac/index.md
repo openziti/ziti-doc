@@ -14,7 +14,10 @@ explore a [network](/learn/introduction/index.mdx).
 
 ## Downloading From GitHub
 
-These steps are applicable to both the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) and the
+With ZAC 3.0+, the ZAC has been transformed to a single-page-application (SPA) allowing you to download an artifact 
+from GitHub and host the ZAC however you like. The controller was also modified to allow the ZAC to be hosted by the 
+controller. Deploying the ZAC in this way will allow the controller to host the ZAC. These steps are applicable to 
+both the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) and the
 [hosted yourself](/learn/quickstarts/network/hosted.md) deployments.
 
 1. On the controller host, download the latest release of the console from GitHub. You can use any console version >= 3.0.0.
@@ -51,7 +54,10 @@ These steps are applicable to both the [Local - No Docker](/learn/quickstarts/ne
     sudo systemctl restart ziti-controller.service
     ```
 
-1. Navigate to the console in your web browser, e.g., `https://ctrl.ziti.example.com:1280/zac/`
+1. Navigate to the console in your web browser using whatever port the management API is configured for. Depending 
+   on which quickstart you have used, the port may be different. The "Local" quickstart defaults to port 1280 while 
+   the "Host OpenZiti Anywhere" quickstart defaults to 8441 and is customizable by you. Make sure you are using the 
+   advertised host and port for your managment API, e.g., `https://ctrl.ziti.example.com:1280/zac/`
 
 ## Using Docker
 
