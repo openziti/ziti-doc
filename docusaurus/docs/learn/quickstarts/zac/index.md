@@ -16,11 +16,11 @@ explore a [network](/learn/introduction/index.mdx).
 
 With ZAC 3.0+, the ZAC has been transformed to a single-page-application (SPA) allowing you to download an artifact 
 from GitHub and host the ZAC however you like. The controller was also modified to allow the ZAC to be hosted by the 
-controller. Deploying the ZAC in this way will allow the controller to host the ZAC. These steps are applicable to 
-both the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) and the
-[hosted yourself](/learn/quickstarts/network/hosted.md) deployments.
+controller. These steps are applicable to both the [Local - No Docker](/learn/quickstarts/network/local-no-docker.md) 
+and the [hosted yourself](/learn/quickstarts/network/hosted.md) deployments. When complete, the controller will host
+the ZAC on the management API web binding.
 
-1. On the controller host, download the latest release of the console from GitHub. You can use any console version >= 3.0.0.
+1. On the controller host, download any console version >= 3.0.0 from GitHub.
 
     ```text
     wget https://github.com/openziti/ziti-console/releases/latest/download/ziti-console.zip
