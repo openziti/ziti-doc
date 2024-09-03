@@ -404,7 +404,7 @@ const config = {
             to: '/policies/CODE_OF_CONDUCT',
           },
           {
-            label: 'CloudZiti',
+            label: 'NetFoundry Cloud',
             to: 'https://netfoundry.io/pricing/'
           },
           {
