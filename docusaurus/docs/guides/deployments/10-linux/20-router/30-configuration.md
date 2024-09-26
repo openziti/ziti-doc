@@ -32,7 +32,7 @@ The [`identity`](/reference/30-configuration/conventions.md#identity) configurat
 
 If present, the `server_key` signs the router's server certificate request. Otherwise, the `key` sub-property is used for both client and server certificate.
 
-The private keys' values are assumed to be `file://` URLs if unspecified. Alternatives include `pkcs11://` and `parsec://` URLs for hardware keys.
+The private keys' values are assumed to be `file://` URLs if unspecified. Alternatives include `pkcs11://` and `parsec://` URLs for [hardware keys](/guides/hsm/index.md).
 
 ## Optional Capabilities
 

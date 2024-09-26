@@ -3,7 +3,7 @@ title: Deploy the Console
 sidebar_label: Console
 ---
 
-This article is about deploying the console as a single-page application (SPA) embedded in the controller's API running in a container.
+This article is about enabling the console on a controller that is running in a container.
 
 1. Configure the controller
 
@@ -34,9 +34,9 @@ This article is about deploying the console as a single-page application (SPA) e
 
 ## Upgrade
 
-You can mount a different version of the console on the controller container if you don't want to use the version that comes with it.
+The controller container includes the latest version of the console. You can instead mount console versions >= 3.0.0.
 
-1. On the Docker host, download the latest release of the console from GitHub. You can use any console version >= 3.0.0.
+1. Download a release.
 
     ```text
     wget https://github.com/openziti/ziti-console/releases/latest/download/ziti-console.zip
@@ -49,13 +49,13 @@ You can mount a different version of the console on the controller container if 
     chmod -R a+rX ./ziti-console
     ```
 
-1. Mount the console directory on the controller container.
+1. Mount the console files read-only on the controller container.
 
     ```text
     services:
       ziti-controller:
         volumes:
-          - ./ziti-console:/ziti-console
+          - ./ziti-console:/ziti-console:ro
     ```
 
 1. Restart the controller service to apply the changes.

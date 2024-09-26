@@ -18,7 +18,7 @@ import CliLogin from '/docs/_cli-login.md'
 
 <TabItem value="TunnelerEnabled" label="Router with Tunneler">
 
-The tunneler flag must be administratively set when the router is created or updated. There are no administrative flags pertaining to the router's listeners.
+The tunneler flag must be administratively set when the router is created or updated or the router will not start.
 
 <br />
 
