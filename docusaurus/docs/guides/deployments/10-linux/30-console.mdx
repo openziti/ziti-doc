@@ -3,30 +3,51 @@ title: Console Deployment
 sidebar_label: Console
 ---
 
-The console must be bound to the same web listener as the controller's management API.
+## Installation
 
-1. On the controller host, download the latest release of the console from GitHub. You can use any console version >= 3.0.0.
+### Install the Package
+
+The package installs the console files in `/opt/openziti/share/console`.
+
+```text title="Install the console package"
+sudo apt install openziti-console
+```
+
+Or, configure the package repository and install with this one-liner.
+
+```text title="Configure the package repository and install openziti-console"
+curl -sS https://get.openziti.io/install.bash | sudo bash -s openziti-console
+```
+
+### Install from GitHub
+
+Console versions >= 3.0.0 from GitHub may be used.
+
+1. Download a release.
 
     ```text
     wget https://github.com/openziti/ziti-console/releases/latest/download/ziti-console.zip
     ```
 
-1. Unzip the console in the controller's working directory.
+1. Unzip in a directory that is mounted the controller's filesystem namespace.
 
     ```text
-    sudo unzip -d /var/lib/ziti-controller/zac ./ziti-console.zip
+    sudo mkdir -p /opt/openziti/share/console
+    sudo unzip -d /opt/openziti/share/console ./ziti-console.zip
     ```
 
-1. In **/var/lib/ziti-controller/config.yml**, ensure you have an API binding `zac` on the same web listener where `edge-management` is bound. Ensure the `location` matches the path where you unzipped the console.
+## Configuration
+
+1. In **/var/lib/ziti-controller/config.yml**, ensure you have an API binding `zac` on the same web listener where `edge-management` is bound. Ensure the `location` matches the path to the console files.
 
     ```text
     - binding: zac
       options:
-        location: /var/lib/ziti-controller/zac
+        location: /opt/openziti/share/console
         indexFile: index.html
     ```
 
-1. Restart the controller service to apply the changes.
+1. Restart the controller service if you edited the configuration.
 
     ```text
     sudo systemctl restart ziti-controller.service
