@@ -89,17 +89,17 @@ This includes the protocol(s) used for router connections and how those connecti
 - `listener` - (required) is in the format of `<protocol>:<interface>:<port>` format. The value set
   here must be resolvable by routers and correspond the routers `ctrl.endpoint` configuration value.
   See [addressing](./conventions.md#addressing).
-- `advertiseAddress` - (required when raft is enabled) - configures the address at which this
-  controller should be reachable by other controllers in the cluster
 - `options` - a set of option which includes the below options and those defined
   in [channel options](./conventions.md#channel)
-    - `newListener` - (optional) an `<protocol>:<interface>:<port>` address that is sent to routers
-      to indicate a controller address migration. Should only be specified when the new listener
-      address is reachable as clients will begin to use the new value on restart
-- `peerHeartbeats` - (optional) set of options for configuring heartbeats to other controllers in
-  the cluster. See [heartbeats](./conventions.md/#heartbeats).
-- `routerHeartbeats` - (optional) set of options for configuring heartbeats to routers.
-  See [heartbeats](./conventions.md/#heartbeats).
+  - `advertiseAddress` - (required when raft is enabled) - configures the address at which this
+    controller should be reachable by other controllers in the cluster
+  - `newListener` - (optional) an `<protocol>:<interface>:<port>` address that is sent to routers
+        to indicate a controller address migration. Should only be specified when the new listener
+        address is reachable as clients will begin to use the new value on restart
+  - `peerHeartbeats` - (optional) set of options for configuring heartbeats to other controllers in
+    the cluster. See [heartbeats](./conventions.md/#heartbeats).
+  - `routerHeartbeats` - (optional) set of options for configuring heartbeats to routers.
+    See [heartbeats](./conventions.md/#heartbeats).
 
 Example w/o options:
 
