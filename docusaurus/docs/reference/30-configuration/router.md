@@ -170,22 +170,22 @@ Example:
 edge:
   csr:
     country: US
-  province: NC
-  locality: Charlotte
-  organization: OpenZiti
-  organizationalUnit: Ziti
-  sans:
-    dns:
-      - "localhost"
-      - "test-network"
-      - "test-network.localhost"
-      - "ziti-dev-ingress01"
-    email:
-      - "admin@example.com"
-    ip:
-      - "127.0.0.1"
-    uri:
-      - "ziti://ziti-dev-router01/made/up/example"
+    province: NC
+    locality: Charlotte
+    organization: OpenZiti
+    organizationalUnit: Ziti
+    sans:
+      dns:
+        - "localhost"
+        - "test-network"
+        - "test-network.localhost"
+        - "ziti-dev-ingress01"
+      email:
+        - "admin@example.com"
+      ip:
+        - "127.0.0.1"
+      uri:
+        - "ziti://ziti-dev-router01/made/up/example"
 ```
 
 Not specifying the
