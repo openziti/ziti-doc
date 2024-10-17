@@ -15,7 +15,6 @@ The router configuration file has several top level configuration sections that 
 related configuration settings.
 
 - [`ctrl`](#ctrl) - configuration for controller addressing/connections
-- [`csr`](#csr) - certificate fields used during enrollment (SANs, CommonName, etc.)
 - [`dialers`](#dialers) - configures dialers used when router termination is used to contact target
   services for overlay egress
 - [`edge`](#edge) - edge specific configuration, required to enable edge functionality (e.g. edge
@@ -41,7 +40,6 @@ related configuration settings.
 The standard OpenZiti experience minimally requires the following sections:
 
 - `ctrl`
-- `csr`
 - `dialers`
 - `edge`
 - `identity`
@@ -50,8 +48,7 @@ The standard OpenZiti experience minimally requires the following sections:
 - `v`
 
 Of those values, to start the controller only the `ctrl`, `v` and `identity` sections are required.
-Not specifying the
-`csr` section will not allow the router to enroll or renew existing enrollments. Not including
+Not including
 the `dialer` section will not allow the router to connect to terminate services. Not including
 the `edge` section will start the controller in
 "fabric only" mode and will not support any edge functionality or concepts (edge SDK connectivity).
@@ -74,23 +71,23 @@ identity:
 ctrl:
   endpoint: tls:127.0.0.1:6262
 
-csr:
-  country: US
-  province: NC
-  locality: Charlotte
-  organization: OpenZiti
-  organizationalUnit: Ziti
-  sans:
-    dns:
-      - "localhost"
-    ip:
-      - "127.0.0.1"
-
 dialers:
   - binding: udp
   - binding: transport
 
-edge: {}
+edge:
+  csr:
+    country: US
+    province: NC
+    locality: Charlotte
+    organization: OpenZiti
+    organizationalUnit: Ziti
+    sans:
+      dns:
+        - "localhost"
+      ip:
+        - "127.0.0.1"
+
 
 link:
   listeners:
@@ -133,50 +130,6 @@ ctrl:
   endpoint: tls:127.0.0.1:6262
 ```
 
-### `csr`
-
-The `csr` section is used during router enrollment and enrollment extension. It specifies values
-that will be used in the certificates that are the result of enrollment. This section is also
-present as a subsection under the `edge`
-section.
-
-Many of the values in this section are optional, however to accept connections from SDKs or other
-routers at least one valid SAN must be provided.
-
-- `country` - (optional) the subject information country field
-- `province` - (optional) the subject information province field
-- `locality` - (optional)  the subject information locality field
-- `organization` - (optional)  the subject information organization field
-- `organizationalUnit` - (optional)  the subject information organization unit field
-- `sans` - (optional) - a subsection used to define Subject Alternate Names
-    - `dns` - (optional) - an array of DNS SAN entries
-    - `ip` - (optional) - an array of IP SAN entries
-    - `uri` - (optional) - an array of URI SAN entries
-    - `email`  - (optional) - an array of email SAN entries
-
-Example:
-
-```text
-csr:
-  country: US
-  province: NC
-  locality: Charlotte
-  organization: OpenZiti
-  organizationalUnit: Ziti
-  sans:
-    dns:
-      - "localhost"
-      - "test-network"
-      - "test-network.localhost"
-      - "ziti-dev-ingress01"
-    email:
-      - "admin@example.com"
-    ip:
-      - "127.0.0.1"
-    uri:
-      - "ziti://ziti-dev-router01/made/up/example"
-```
-
 ### `dialers`
 
 The `dialers` sections defines the configuration for dialers that are used to dial (connect) to
@@ -209,17 +162,54 @@ Each dialer currently supports a number of [shared options](conventions.md#xgres
 ### `edge`
 
 The `edge` section contains configuration that pertain to edge functionality. This section must be
-preset and empty to enable edge functionality (e.g. SDK connectivity). At present, the only value in
-this section is a deprecated `csr`
-section. It is suggested to use the root `csr` section instead as this allows the router to run in "
-fabric only" and
-"edge mode" seamlessly.
+present to enable edge functionality (e.g. listening for edge SDK connections, tunnel binding modes).
 
 Example:
 
 ```text
-edge: {}
+edge:
+  csr:
+    country: US
+    province: NC
+    locality: Charlotte
+    organization: OpenZiti
+    organizationalUnit: Ziti
+    sans:
+      dns:
+        - "localhost"
+        - "test-network"
+        - "test-network.localhost"
+        - "ziti-dev-ingress01"
+      email:
+        - "admin@example.com"
+      ip:
+        - "127.0.0.1"
+      uri:
+        - "ziti://ziti-dev-router01/made/up/example"
 ```
+
+Not specifying the
+`edge.csr` section will not allow the router to enroll or renew existing enrollments. 
+
+#### `edge.csr`
+
+The `edge.csr` section is used during router enrollment and enrollment extension. It specifies values
+that will be used in the certificates that are the result of enrollment.
+
+Many of the values in this section are optional, however to accept connections from SDKs or other
+routers at least one valid SAN must be provided.
+
+- `country` - (optional) the subject information country field
+- `province` - (optional) the subject information province field
+- `locality` - (optional)  the subject information locality field
+- `organization` - (optional)  the subject information organization field
+- `organizationalUnit` - (optional)  the subject information organization unit field
+- `sans` - (optional) - a subsection used to define Subject Alternate Names
+    - `dns` - (optional) - an array of DNS SAN entries
+    - `ip` - (optional) - an array of IP SAN entries
+    - `uri` - (optional) - an array of URI SAN entries
+    - `email`  - (optional) - an array of email SAN entries
+
 
 ### `forwarder`
 
