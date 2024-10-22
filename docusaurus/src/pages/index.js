@@ -119,7 +119,7 @@ export default function Home() {
                             <div className={styles.installChoiceBtn} >
                                 <div style={{display: "flex", alignItems: "center"}}>
                                     <div className={styles.indexCtas}>
-                                        <Link className="button button--primary" to="https://netfoundry.io/products/netfoundry-pricing/">
+                                        <Link className="button button--primary" to="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/">
                                             <p>Try CloudZiti</p>
                                         </Link>
                                     </div>
