@@ -3,8 +3,8 @@
 BrowZer uses [JSPI](https://v8.dev/blog/jspi-newapi), or WebAssembly JSPI (JavaScript Promise Integration). This is
 a new API to bridge JavaScript Promises with WebAssembly workflows and is vital to BrowZer's workflow.
 
-JSPI is still in review and not fully adopted by chrome. Until JSPI is finalized, it needs to be externally enabled in the
-browser.
+::: note
+JSPI is still in review and not fully adopted by Chromium-based browsers
 
 JSPI can be enabled in multiple ways, including:
 
