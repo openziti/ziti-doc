@@ -12,7 +12,7 @@ JSPI can be enabled in multiple ways, including:
 * via what is known as an "Origin Trial 3" 
 
 Some browsers (like Edge) have recently stopped making the JSPI flag available in the edge://flags UI for users to 
-updated. The only way to enable JSPI for these browsers is via a Chrome Origin Trial.
+update. The only way to enable JSPI for these browsers is via a Chrome Origin Trial.
 
 It also is a better overall experience for end users. These users never need to manually enable JSPI or even know JSPI 
 exists. Origin Trials will transparently enable the JSPI flag for the end-user of your BrowZer-protected web app.
@@ -33,4 +33,4 @@ To sign up for the Origin Trial you need to:
     * Click Register
 
 After filling out the fields you'll receive a token. Save/copy the token. The token **will be needed** 
-when you configure your Browzer instance.
+when you configure your BrowZer instance.
