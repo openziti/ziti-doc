@@ -405,7 +405,7 @@ const config = {
           },
           {
             label: 'NetFoundry Cloud',
-            to: 'https://netfoundry.io/pricing/'
+            to: 'https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/'
           },
           {
             label: 'Blog',
