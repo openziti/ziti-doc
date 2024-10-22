@@ -15,6 +15,9 @@ To deploy and enable BrowZer on your network, you will need to have:
 * an OpenZiti Overlay Network is available and has been configured with alternative server certs
 * an OIDC Provider and the ability to define applications/clients for the provider
 * a wildcard certificate from a 3rd party verifiable CA
+* you have signed up with Chrome's "origin trials" to allow the BrowZer bootstrapper to automatically enable
+  [JSPI](https://v8.dev/blog/jspi) for your BrowZer users. See [the chrome-origin-trials](./chrome-origin-trials.md) 
+  for more detail 
 
 ### OIDC Prerequisites
 
@@ -133,6 +136,7 @@ them. To run using Docker, you can either reference the environment variables (s
       ZITI_BROWZER_BOOTSTRAPPER_SCHEME: https
       ZITI_BROWZER_BOOTSTRAPPER_CERTIFICATE_PATH: /etc/letsencrypt/live/your.fqdn.here/fullchain.pem
       ZITI_BROWZER_BOOTSTRAPPER_KEY_PATH: /etc/letsencrypt/live/your.fqdn.here/privkey.pem
+      ZITI_BROWZER_RUNTIME_ORIGIN_TRIAL_TOKEN=__the_token_you_received_from_the_jspi_orgin_trial_prerequisite__
       ZITI_BROWZER_BOOTSTRAPPER_TARGETS: __more on this below__
 ```
 
