@@ -22,7 +22,7 @@ exists. Origin Trials will transparently enable the JSPI flag for the end-user o
 To sign up for the Origin Trial you need to:
 
 * visit [this page](https://developer.chrome.com/origintrials/#/register_trial/1603844417297317889) and register for the
-  JSPI Trial 12. It's free.
+  JavaScript Promise Integration Trial. It's free.
 * Sign in to Google using the button in the upper right corner
 * fill in the fields
     * Web Origin: this should be your "wildcard url". If you obtained a wildcard cert for `*.mybrowzer.example.com`, 
@@ -32,4 +32,5 @@ To sign up for the Origin Trial you need to:
     * Check all the checkboxes for the disclosures and acknowledgements after understanding them
     * Click Register
 
-After filling out the fields you'll receive a token. Copy the token and use this token in your Browzer configuration
+After filling out the fields you'll receive a token. Save/copy the token. The token **will be needed** 
+when you configure your Browzer instance.
