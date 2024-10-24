@@ -13,7 +13,8 @@ else
     shift
 fi
 
-# ignore all http:// links and selected https:// links
+# ignores all http:// links because they're probably examples, not functioning links
+# ignores https:// links matching EXCLUDE_PATTERN
 EXCLUDE_PATTERN="(http://|https://("
 while read -r; do
     EXCLUDE_PATTERN+="${REPLY}|"
@@ -37,9 +38,11 @@ landing.openziti.io/
 fonts.gstatic.com/
 github\.com/.*#
 .*\.?example\.(com|net|org)
+openziti.io(/comments)?/feed/
+developer.chrome.com/origintrials/#/register_trial/.*
 EOF
-# github\.com/.*/releases/latest/download
 
+# drop the trailing pipe
 EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}))"
 
 docker run --rm --network=host raviqqe/muffet "${SERVER}" \
