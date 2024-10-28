@@ -30,7 +30,7 @@ the ZAC on the management API web binding.
 
    ```text
    source ${HOME}/.ziti/quickstart/$(hostname)/$(hostname).env
-   export ZITI_HOME
+   echo $ZITI_HOME
    ```
 
 1. Unzip the console in the controller's working directory.
