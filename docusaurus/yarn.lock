@@ -10180,7 +10180,7 @@ __metadata:
     react-github-btn: "npm:^1.4.0"
     react-helmet: "npm:^6.1.0"
     react-is: "npm:>= 16.8.0"
-    react-loadable: "npm:^5.5.0"
+    react-loadable: "npm:*"
     react-markdown: "npm:^8.0.7"
     react-player: "npm:^2.12.0"
     react-render-markup: "npm:^3.6.1"
@@ -11486,7 +11486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-loadable@npm:^5.5.0":
+"react-loadable@npm:*":
   version: 5.5.0
   resolution: "react-loadable@npm:5.5.0"
   dependencies:
