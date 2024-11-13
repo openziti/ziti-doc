@@ -180,7 +180,7 @@ Now click `Deploy`:
 </p>
 <br/>
 
-Return to the `post-login` Trigger, theh click on `Custom`:
+Return to the `post-login` Trigger, then click on `Custom`:
 
 <p align="center">
 
