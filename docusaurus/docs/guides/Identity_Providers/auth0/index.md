@@ -74,6 +74,131 @@ Failure to properly configure the above two settings will result in the followin
 </p>
 <br/>
 
+### Add a new API
+
+Click on `APIs` in the left navbar:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-1.jpg)
+
+</p>
+<br/>
+
+Then click the `Create API` button:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-2.jpg)
+
+</p>
+<br/>
+
+In the form, use whatever name you like, but make sure the `Identifier` is `https://<YOUR_BROWZER_URL>`. For the example used in this documentation, we will use `https://demo.ziti.netfoundry.io`
+
+Then click the "Create" button:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-3.jpg)
+
+</p>
+<br/>
+
+### Add a new Post Login Trigger
+
+Click on `Actions` in the left navbar, then click `Triggers`:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-4.jpg)
+
+</p>
+<br/>
+
+Now click on `post-login`:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-5.jpg)
+
+</p>
+<br/>
+
+Now click on `+`:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-6.jpg)
+
+</p>
+<br/>
+
+Now select `Build from scratch`:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-7.jpg)
+
+</p>
+<br/>
+
+Name the action `Add Email to Access Token`, then click `Create`
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-7.1.jpg)
+
+</p>
+<br/>
+
+Delete any boilerplate code that appears, and replace it with the following:
+
+```
+/**
+ * Handler called during a PostLogin flow.
+ *
+ * @param {Event} event - Details about the user and the 
+ *                        context in which they are logging in.
+ * @param {PostLoginAPI} api - Interface whose methods can be 
+ *                             used to change the behavior of the login.
+ */
+exports.onExecutePostLogin = async (event, api) => {
+
+  if (event.authorization) {
+    api.accessToken.setCustomClaim(`email`, event.user.email);
+  }
+};
+```
+
+Now click `Deploy`:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-9.jpg)
+
+</p>
+<br/>
+
+Return to the `post-login` Trigger, then click on `Custom`:
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-10.jpg)
+
+</p>
+<br/>
+
+Click and drag your `Add Email to Access Token` Action onto the Trigger, then drop it into place, then click `Apply` in teh top right.
+
+<p align="center">
+
+![Auth0 Applications](/img/auth0-11.jpg)
+
+</p>
+<br/>
+
+
 ### Gather IdP Information
 
 Your OpenZiti network must be configured to become aware of your Auth0 identity provider.  OpenZiti refers to the identity provider as an `External JWT Signer`.  Before you can set up the new JWT signer, you must gather some information from the new Auth0 Application that you just created:
@@ -132,3 +257,8 @@ Take note of the `jwks_uri` value returned from the above openid-configuration e
 ### Create External JWT Signer
 Using the values described above, use the `ziti` CLI to configure an external JWT signer that represents your Auth0 identity provider.  You can find details on how to do this in the [BrowZer Quickstart documentation](/docs/learn/quickstarts/browzer/)
 
+`IMPORTANT NOTE:`
+
+For external JWT signer's that refer to Auth0, the `audience` value must be the same value you used to create the above Auth0 `API`. For the example used in this documentation, it is `https://demo.ziti.netfoundry.io`.  
+
+When using the CLI to create the ext-jwt-signer, make sure you use `--audience https://<YOUR_BROWZER_URL>`.
