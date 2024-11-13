@@ -259,6 +259,6 @@ Using the values described above, use the `ziti` CLI to configure an external JW
 
 `IMPORTANT NOTE:`
 
-For Ziti External JWT Signer's that refer to Auth0, the `audience` value must be the same value you used to create the above Auth0 `API`. For the example used in this documentation, it is `https://demo.ziti.netfoundry.io`.  
+For external JWT signer's that refer to Auth0, the `audience` value must be the same value you used to create the above Auth0 `API`. For the example used in this documentation, it is `https://demo.ziti.netfoundry.io`.  
 
-So when using the CLI to create the ext-jwt-signer, make sure you use `--audience https://<YOUR_BROWZER_URL>`.
+When using the CLI to create the ext-jwt-signer, make sure you use `--audience https://<YOUR_BROWZER_URL>`.
