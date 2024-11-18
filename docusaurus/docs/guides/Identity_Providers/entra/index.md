@@ -127,14 +127,20 @@ Click  `Add a scope`
 </p>
 <br/>
 
-For the `Application ID URI`, enter the URL where you will be hosting your browZer bootstrapper. For the example used in this documentation, we will use `https://entra-demo.ziti.netfoundry.io`
+For the `Application ID URI`, Entra will default to `api://<YOUR_CLIENT_ID>`. **You should accept this default value and not alter it.**
+
+For example:
 
 <p align="center">
 
-![Entra icon](/img/entra-13.jpg)
+![Entra icon](/img/entra-scope.jpg)
 
 </p>
 <br/>
+
+Click `Save and continue`.
+
+Then, on the next form:
 
 For the `Scope name`, enter `OpenZiti.BrowZer`.
 
