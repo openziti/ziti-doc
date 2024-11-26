@@ -36,7 +36,7 @@ the ZAC on the management API web binding.
 1. Unzip the console in the controller's working directory.
 
     ```text
-    unzip -d ${ZITI_HOME}/zac ./ziti-console.zip
+    unzip -d ${ZITI_HOME}/console ./ziti-console.zip
     ```
 
 1. In **${ZITI_HOME}/$(hostname -s).yaml**, add a web API binding `zac` in the list containing `edge-management`.
@@ -44,7 +44,7 @@ the ZAC on the management API web binding.
     ```text
           - binding: zac
             options:
-              location: ./zac
+              location: ./console
               indexFile: index.html
     ```
 
