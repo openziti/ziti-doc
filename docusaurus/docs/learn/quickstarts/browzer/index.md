@@ -116,7 +116,7 @@ them. To run using Docker, you can either reference the environment variables (s
 * `ZITI_BROWZER_RUNTIME_HOTKEY`: the hotkey to activate the BrowZer settings dialog modal. default: alt+F12
 * `ZITI_CONTROLLER_HOST`: the "alternative" address for the OpenZiti controller. example: `ctrl.openziti.io`
 * `ZITI_CONTROLLER_PORT`: the port to find the OpenZiti controller at. example: `8441`
-* `ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL`: the log level for the ziti-browzer-bootstrapper to log at. `trace|debug|info|warn|error`
+* `ZITI_BROWZER_BOOTSTRAPPER_LOGLEVEL`: the log level for the ziti-browzer-bootstrapper to log at. `silly|debug|info|warn|error`
 * `ZITI_BROWZER_BOOTSTRAPPER_HOST`: the address the ziti-browzer-bootstrapper is available at. example: `browzer.openziti.io`
 * `ZITI_BROWZER_BOOTSTRAPPER_LISTEN_PORT`: the port the ziti-browzer-bootstrapper is available at. example: `443`
 * `ZITI_BROWZER_BOOTSTRAPPER_SCHEME`: the scheme to use to access the ziti-browzer-bootstrapper. `http|https` (https by default)
