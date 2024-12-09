@@ -16,8 +16,8 @@ Reasons to use the package:
 
 1. Install the tunneller as a systemd service.
 1. Create permissions and policies for the tunneller to run as a non-root user.
-1. Automatically enroll the identity and clean up the enrollment token in identity directory.
-1. Automatically upgrade the tunneller when a new package is available.
+1. Enroll the identity and clean up the enrollment token in identity directory.
+1. Upgrade the tunneller when a new package is available.
 
 Linux DEB packages are currently available for the x86_64 and arm64 platforms and RPM packages are available for x86_64.
 ARM/v7 (32bit) binaries are available from GitHub.
@@ -25,48 +25,6 @@ ARM/v7 (32bit) binaries are available from GitHub.
 - [Debian](./10-debian-package.mdx)
 - [RedHat](./20-redhat-package.mdx)
 - [GitHub](./30-manual-installation.mdx)
-
-## Adding Identities
-
-The tunneller can run with zero or more identities loaded, and needs at least one to make OpenZiti services available on
-the host. Adding an identity means providing a JWT enrollment token which is used by the tunneller to obtain a client
-certificate from the OpenZiti controller. [Learn more about OpenZiti Identities](/learn/core-concepts/identities/overview.mdx).
-
-### Add a Single Identity
-
-Root and members of group `ziti` may add an identity without restarting. 
-
-```text
-sudo ziti-edge-tunnel add --jwt "$(< ./in-file.jwt)" --identity myIdentityName
-```
-
-[Learn more about enrolling](/learn/core-concepts/identities/20-enrolling.md).
-
-### Load Identities Directory
-
-The tunneller will load all enrolled identities in the `--identity-dir` directory at startup. The default location for
-identities is is `/opt/openziti/etc/identities`. Add enrolled identity files to this directory by copying the JSON file
-into the directory and setting permissions for group `ziti`.
-
-:::note
-Linux package users may place enrollment tokens named `*.jwt` in this directory for automatic enrollment at next
-startup.
-:::
-
-Ensure the identities directory is writable by group `ziti` and not readable by others to protect the confidentiality of
-the identities.
-
-```text
-sudo chown -cR :ziti        /opt/openziti/etc/identities
-sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
-```
-
-The tunneller process needs to be restarted if the contents of `/opt/openziti/etc/identities` change.
-
-```text
-# package users can restart with systemd
-sudo systemctl restart ziti-edge-tunnel.service
-```
 
 ## Run with Docker
 
