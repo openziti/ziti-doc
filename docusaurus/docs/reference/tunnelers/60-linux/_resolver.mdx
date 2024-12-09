@@ -1,0 +1,12 @@
+
+`ziti-edge-tunnel run` provides a built-in nameserver for the services it is authorized to dial. The nameserver is automatically configured by `systemd-resolved`, if enabled.
+
+If `systemd-resolved` is not enabled, you must configure your resolver to query the tunneler's nameserver. Add Ziti's nameserver to the connection manager, e.g., NetworkManager, Netplan, or by directly editing `/etc/resolv.conf`.
+
+You may configure the system resolver to use the tunneler's nameserver as the first or only nameserver.
+
+When the tunneler nameserver is the first of multiple nameservers and the requested DNS record does not match an authorized service's intercept domain name, it sets the query status to `REFUSE`. This implies that the caller *should* keep trying to resolve the domain name with other nameservers.
+
+To use the tunneler nameserver as the only nameserver, you must specify an upstream nameserver for recursion: `ziti-edge-tunnel run --dns-upstream 208.67.222.222`. In this configuration, the query status from the upstream nameserver is returned, e.g., `NXDOMAIN` if the domain name is not found in the tunneler nameserver or the upstream nameserver.
+
+The IP address of the nameserver (default: `100.64.0.2`) is determined by the tunneler's dns-ip-range (default: `100.64.0.1/10`).

@@ -1,3 +1,4 @@
+import LinuxResolverConfig from '/docs/reference/tunnelers/60-linux/_resolver.mdx'
 
 # Options and Modes
 
@@ -60,13 +61,7 @@ If any interface has a wildcard routing domain configured, `ziti-edge-tunnel` wi
 
 #### How does `run` configure nameservers?
 
-`ziti-edge-tunnel run` provides a built-in nameserver that will answer queries that exactly match authorized OpenZiti services' intercept domain names and will respond with a hard-fail `NXDOMAIN` code if the query does not match an authorized service.
-
-You may enable DNS recursion by specifying an upstream nameserver to answer queries for other domain names that are not services' intercept domain names: `ziti-edge-tunnel run --dns-upstream 208.67.222.222`.
-
-`ziti-edge-tunnel` uses the `libsystemd` D-Bus RPC client and will try to configure the OS's resolvers with `systemd-resolved`. If that's not possible for any reason then `ziti-edge-tunnel run` will fall back to shell commands like `resolvectl`. If `resolvectl` fails then `ziti-edge-tunnel run` will attempt to modify `/etc/resolv.conf` directly to install the built-in nameserver as the primary resolver.
-
-If the DNS record exists it returns the answer and sets query status to `NO_ERROR`. If it does not exist then it sends the query to an upstream DNS server if configured. Otherwise, it sets the query status to `REFUSE`. This implies that the caller *should* keep trying to resolve the domain name with other nameservers.
+<LinuxResolverConfig/>
 
 #### System Requirements for Mode `run`
 

@@ -5,6 +5,8 @@ sidebar_label: RedHat
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import LinuxResolverConfig from '/docs/reference/tunnelers/60-linux/_resolver.mdx'
+import LinuxAddIdentities from '/docs/reference/tunnelers/60-linux/_add_identities.mdx'
 
 ### Installing the RPM Package
 
@@ -89,5 +91,10 @@ repo_gpgcheck=1
     sudo systemctl enable --now ziti-edge-tunnel.service
     ```
 
-2. [Add an Identity](/reference/tunnelers/60-linux/index.mdx#adding-identities)
+2. Add an Identity.
 
+    <LinuxAddIdentities/>
+
+2. Configure the Resolver.
+
+    <LinuxResolverConfig/>
