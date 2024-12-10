@@ -5,6 +5,8 @@ sidebar_label: Debian
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import LinuxResolverConfig from '/docs/reference/tunnelers/60-linux/_resolver.mdx'
+import LinuxAddIdentities from '/docs/reference/tunnelers/60-linux/_add_identities.mdx'
 
 ### Installing the Debian Package
 
@@ -86,16 +88,6 @@ curl -sSLf https://get.openziti.io/tun/scripts/install-ubuntu.bash | bash
     sudo apt install ziti-edge-tunnel
     ```
 
-1. Replace resolveconf with systemd-resolved and delegate management of `/etc/resolv.conf` to systemd-resolved.
-
-    Debian ships without systemd-resolved, which is the only resolver that can be automatically configured by the tunnel service. You must choose between installing and enabling systemd-resolved (preferred for security and performance) or run the tunneler as root to enable legacy resolver configurations, e.g., resolveconf.
-
-    ```text
-    sudo apt install systemd-resolved
-    ```
-
-1. Reboot to ensure the new resolver configuration is in full effect.
-
 </TabItem>
 </Tabs>
 
@@ -105,4 +97,11 @@ curl -sSLf https://get.openziti.io/tun/scripts/install-ubuntu.bash | bash
     sudo systemctl enable --now ziti-edge-tunnel.service
     ```
 
-2. [Add an Identity](/reference/tunnelers/60-linux/index.mdx#adding-identities)
+2. Add an Identity.
+
+    <LinuxAddIdentities/>
+
+2. Configure the Resolver.
+
+    <LinuxResolverConfig/>
+
