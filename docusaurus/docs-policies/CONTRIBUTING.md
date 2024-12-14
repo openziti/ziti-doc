@@ -42,7 +42,7 @@ Additional guidelines:
 
 ## Code Contributions
 
-Before a contribution can be accepted there is some bookeeping that needs to occur. NetFoundry requires external contributors to sign a Contributor License Agreement (CLA) in order to ensure our products can remain open sourece while still allowing NetFoundry to advance the products forward.
+Before a contribution can be accepted there is some bookeeping that needs to occur. NetFoundry requires external contributors to sign a Contributor License Agreement (CLA) in order to ensure our products can remain open source while still allowing NetFoundry to advance the products forward.
 
 ### Contributor License Agreement
 
