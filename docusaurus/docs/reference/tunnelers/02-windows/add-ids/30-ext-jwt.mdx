@@ -1,0 +1,46 @@
+import Details from '@theme/MDXComponents/Details';
+import ExtAuthNew from './_about-ext-jwt.md'
+import ExtJwtFlow from './_ext-jwt-flow.md'
+
+# External Provider - JWT
+
+<ExtAuthNew />
+
+## Prerequisites
+* OpenZiti Controller 1.2+
+* ZDEW 2.5.2+
+* an `external-jwt-provider` is properly configured
+* an identity exists with an `external-id` field set to a value provided from the external provider
+* the OpenZiti network operator has sent the Windows machine the network jwt file
+
+<Details>
+<summary><b>Obtaining the Network JWT</b></summary>
+
+### Obtain the Network JWT - ZAC
+
+Adding an identity to a Windows machine that uses an external provider as the primary authentication mechanism with a JWT
+requires the user or an operator to obtain a JWT ahead of time. This can be done in two different ways.
+
+Obtain a controller's network JWT using the Ziti Admin Console. From the Authentication->JWT Signers page, click on 
+"Download Network JWT" located on the top right, near the "plus" icon.
+
+![ext-jwt-signer-basic](/img/ext-jwt-signer/ext-jwt-signer-basic.png)
+
+### Obtain the Network JWT - Shell
+
+Alternatively, a request can be made to the OpenZiti controller's API to return the JWT. Make an HTTP GET to the controller's
+`/network-jwts` endpoint and extract the `token` field and save this content to a JWT. Using bash, `curl` and `jq` this
+might look something like:
+```text
+curl -s https://my.openziti.controller.local:443/network-jwts | jq -r .data[].token > my-network-jwt
+```
+</Details>
+
+## Adding the Identity
+
+ the user to click on the "ADD IDENTITY" button in the top right of the screen. After the context menu pops up,
+select the JWT file and the identity will be added to the system.
+
+![windows-with-jwt](/img/clients/windows-with-jwt.png)
+
+<ExtJwtFlow/>

@@ -1,0 +1,19 @@
+import Details from '@theme/MDXComponents/Details';
+import ExtAuthNew from './_about-ext-jwt.md'
+import ExtJwtFlow from './_ext-jwt-flow.md'
+
+
+# External Provider - URL
+
+<ExtAuthNew />
+
+## Prerequisites
+* OpenZiti Controller 1.2+
+* ZDEW 2.5.2+
+* an `external-jwt-provider` is properly configured
+* an identity exists with an `external-id` field set to a value provided from the external provider
+* the OpenZiti Controller is configured to serve a pre-configured trusted certificate. The certificate must be verifiable
+  by the OS without additional information such as using a widely trusted CA or the Windows administrator has
+  added the certificate chain to the OS trust store
+
+<ExtJwtFlow/>
