@@ -2,10 +2,12 @@ import Details from '@theme/MDXComponents/Details';
 import ExtAuthNew from './_about-ext-jwt.md'
 import ExtJwtFlow from './_ext-jwt-flow.md'
 
-
 # External Provider - URL
 
 <ExtAuthNew />
+
+Adding an identity by URL is very straight-forward. Deliver the root URL of the OpenZiti controller to the user, and
+send them the following instructions.
 
 ## Prerequisites
 * OpenZiti Controller 1.2+
@@ -16,4 +18,16 @@ import ExtJwtFlow from './_ext-jwt-flow.md'
   by the OS without additional information such as using a widely trusted CA or the Windows administrator has
   added the certificate chain to the OS trust store
 
+## Adding the Identity
+
+To add an identity to Windows by URL, first start by clicking on the "ADD IDENTITY" button in the top right of the screen.
+After the context menu pops up, select the "With URL" option. 
+
+![With URL](/img/ext-jwt-signer/windows-with-url.png)
+
+A dialog will appear. Enter a valid https url to a controller and click
+
+![With URL](/img/ext-jwt-signer/windows-with-url-dialog.png)
+
+## Authenticating with the External Provider
 <ExtJwtFlow/>

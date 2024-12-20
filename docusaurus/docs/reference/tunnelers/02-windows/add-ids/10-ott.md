@@ -12,7 +12,7 @@ create an identity and one-time token. Once created, transfer the JWT file to th
 ## Adding the Identity
 
 Go to the **Ziti Desktop Edge for Windows** and click **ADD IDENTITY** in the top right of the UI.
-![windows-with-jwt](/img/clients/windows-with-jwt.png)
+![windows-with-jwt](/img/ext-jwt-signer/windows-with-jwt.png)
 
 After the context menu pops up, choose "With JWT". Select the JWT file and your identity will be enrolled.
 You can now selectively enable/disable the service and see how many individual services your identity has access to.
