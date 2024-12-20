@@ -13,7 +13,7 @@ function clone_or_pull {
   if [ -d "${dir}" ]; then
     pushd "${dir}" >/dev/null
     git checkout "${BRANCH}"
-    git pull
+    git pull --ff-only
     popd >/dev/null
   else
     git clone "${remote}" --branch "${BRANCH}" --single-branch "${dir}" --depth 1
@@ -31,10 +31,11 @@ echo "$script_root"
 ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
 SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
 : ${ZITI_DOCUSAURUS:=yes}
+: ${SKIP_DOCUSAURUS_GEN:=no}
 
 echo "- processing opts"
 
-while getopts ":glcs" OPT; do
+while getopts ":glcsd" OPT; do
   case ${OPT} in
     g ) # skip git
       echo "- skipping creating and updating Git working copies"
@@ -51,6 +52,10 @@ while getopts ":glcs" OPT; do
     s ) # INCLUDE stargazer stuff
       echo "- fetching stargazer data as well"
       ADD_STARGAZER_DATA="yes"
+      ;;
+    d ) # skip docusaurus gen
+      echo "- skipping docusaurus generation"
+      SKIP_DOCUSAURUS_GEN="yes"
       ;;
     *)
       echo "WARN: ignoring option ${OPT}" >&2
@@ -75,6 +80,7 @@ if [[ "${SKIP_GIT}" == no ]]; then
   clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c" >/dev/null
   clone_or_pull "https://github.com/openziti/helm-charts" "helm-charts" >/dev/null
   clone_or_pull "https://github.com/openziti-test-kitchen/kubeztl" "kubeztl" >/dev/null
+  clone_or_pull "https://github.com/openziti/desktop-edge-win" "desktop-edge-win" >/dev/null
 fi
 
 if [[ "${SKIP_CLEAN}" == no ]]; then
@@ -172,25 +178,27 @@ if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
   echo "  - this requires you to have a GITHUB_TOKEN environment variable exported"
   ./gh-stats.sh
 fi
-pushd ${ZITI_DOC_GIT_LOC}/.. >/dev/null
-echo "running 'yarn install' in ${PWD}"
-yarn install --frozen-lockfile
-echo "running 'yarn build' in ${PWD}"
-yarn build
-popd >/dev/null
 
-echo " "
-if test -e "${script_root}/docusaurus/build/landing.html"; then
-  echo "landing.html detected. overwriting index.html with landing.html"
-  cp "${script_root}/docusaurus/build/index.html" "${script_root}/docusaurus/build/index.original.html"
-  cp "${script_root}/docusaurus/build/landing.html" "${script_root}/docusaurus/build/index.html"
-  sed -i -e 's|https://openziti.io/|/|g' "${script_root}/docusaurus/build/index.html"
-  sed -i -e 's|link\.setAttribute("href", "https://openziti\.io/|link.setAttribute("href", "/|g' "${script_root}/docusaurus/build/index.html"
+if [[ "${SKIP_DOCUSAURUS_GEN}" == no ]]; then
+    pushd ${ZITI_DOC_GIT_LOC}/.. >/dev/null
+    echo "running 'yarn install' in ${PWD}"
+    yarn install --frozen-lockfile
+    echo "running 'yarn build' in ${PWD}"
+    yarn build
+    popd >/dev/null
 
-  echo "landing.html sed commands run"
-  echo "landing.html overwritten to index.html. index.html is now index.original.html"
+    echo " "
+    if test -e "${script_root}/docusaurus/build/landing.html"; then
+      echo "landing.html detected. overwriting index.html with landing.html"
+      cp "${script_root}/docusaurus/build/index.html" "${script_root}/docusaurus/build/index.original.html"
+      cp "${script_root}/docusaurus/build/landing.html" "${script_root}/docusaurus/build/index.html"
+      sed -i -e 's|https://openziti.io/|/|g' "${script_root}/docusaurus/build/index.html"
+      sed -i -e 's|link\.setAttribute("href", "https://openziti\.io/|link.setAttribute("href", "/|g' "${script_root}/docusaurus/build/index.html"
+
+      echo "landing.html sed commands run"
+      echo "landing.html overwritten to index.html. index.html is now index.original.html"
+    fi
 fi
-
 echo " "
 echo "------------------------"
 echo "gendoc complete"

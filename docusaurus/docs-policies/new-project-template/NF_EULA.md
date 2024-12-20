@@ -1,6 +1,6 @@
 # NetFoundry End User License Agreement
 
-This End User License Agreement (&quot; **Agreement**&quot;) is between NetFoundry, Inc. (&quot; **NetFoundry**&quot;),
+This End User License Agreement (&quot; **Agreement**&quot;) is between NetFoundry Inc. (&quot; **NetFoundry**&quot;),
 and the individual, organization, or entity using the NetFoundry software (the &quot; **Software**&quot;) pursuant to
 this Agreement (&quot; **Customer**&quot;).
 
