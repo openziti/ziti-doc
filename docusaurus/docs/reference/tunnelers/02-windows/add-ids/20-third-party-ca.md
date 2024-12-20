@@ -1,7 +1,6 @@
 # Third-Party CA
 
-Enrolling an identity with a classic "one time token" is possibly the most common form of adding an identity to
-a tunneler.
+OpenZiti supports adding identities where the key and certificate are provided by a third-party CA.
 
 is the act of bootstrapping trust between your computer and the OpenZiti Controller.
 After creating an identity, or if you are given and identity in the form of a JWT file you can properly

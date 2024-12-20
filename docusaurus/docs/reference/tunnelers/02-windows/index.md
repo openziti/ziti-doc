@@ -20,8 +20,8 @@ tampered with from when it was released. Once installed, enroll your first ident
 
 * [One-Time Token](./add-ids/ott) - Add an identity with a single use token. The most common option
 * [Third-Party CA](./add-ids/third-party-ca) - Add an identity using a third-party CA
-* [External JWT Provider - JWT](./ext-jwt) - Add an identity using the configured provider and network JWT
-* [External JWT Provider - URL](./ext-jwt-url) - Add an identity using the configured provider and URL
+* [External JWT Provider - JWT](./add-ids/ext-jwt) - Add an identity using the configured provider and network JWT
+* [External JWT Provider - URL](./add-ids/ext-jwt-url) - Add an identity using the configured provider and URL
 
 ## Architecture
 The ZDEW is composed of three main components: the data service, the monitor service, the UI. Communication among
