@@ -1,3 +1,5 @@
+import Details from '@theme/MDXComponents/Details';
+
 # Third-Party CA
 
 OpenZiti supports adding identities where the key and certificate are provided by a third-party CA.
@@ -8,6 +10,37 @@ OpenZiti supports adding identities where the key and certificate are provided b
 * an identity exists with an `external-id` properly mapped to a claim, 
   see [External Id & x509 Claims](/docs/learn/core-concepts/security/authentication/10-third-party-cas.md#external-id--x509-claims)
 * The CA's JWT has been transferred to the computer running the ZDEW
+
+<Details>
+<summary><b>Obtaining the Third-Party CA JWT</b></summary>
+
+Adding an identity to a Windows machine that uses a third party CA requires the user or an operator to obtain a JWT
+ahead of time. This can be done in two different ways.
+<hr/>
+
+### Obtain the Third-Party CA JWT - ZAC
+
+Obtain a third party CA's JWT using the Ziti Admin Console. From the Authentication->Certificate Authorities page, 
+click on the icon in the JWT column for the appropriate CA and send the JWT to the user trying to add an
+identity.
+
+![ext-jwt-signer-basic](/img/zac-3rd-party-ca-jwt.png)
+
+<hr/>
+
+### Obtain the Third-Party CA JWT - Shell
+
+Alternatively, a request can be made to the OpenZiti controller's API to return the JWT. Make an HTTP GET to the controller's
+`/edge/management/v1/cas/${ca_id}/jwt` endpoint and save the JWT into a file. Using bash with `curl` this  might look
+something like:
+```text
+curl -X GET -sk \
+    -H "Content-Type: application/json" \
+    -H "zt-session: ${zt_session}" \
+    -o ${pki_root}/auto.jwt \
+    "https://my.openziti.controller.local:443/cas/${ca_id}/jwt"
+```
+</Details>
 
 ## Adding the Identity
 

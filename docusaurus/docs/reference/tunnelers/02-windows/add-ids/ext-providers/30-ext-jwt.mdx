@@ -15,15 +15,18 @@ import AboutExtAuth from './_about-ext-jwt.md'
 <Details>
 <summary><b>Obtaining the Network JWT</b></summary>
 
-### Obtain the Network JWT - ZAC
-
 Adding an identity to a Windows machine that uses an external provider as the primary authentication mechanism with a JWT
 requires the user or an operator to obtain a JWT ahead of time. This can be done in two different ways.
+<hr/>
+
+### Obtain the Network JWT - ZAC
 
 Obtain a controller's network JWT using the Ziti Admin Console. From the Authentication->JWT Signers page, click on 
-"Download Network JWT" located on the top right, near the "plus" icon.
+"Download Network JWT" located on the top right, near the "plus" icon and send the JWT to the user trying to add an
+identity.
 
 ![ext-jwt-signer-basic](/img/ext-jwt-signer/zac-ext-jwt-signer-basic.png)
+<hr/>
 
 ### Obtain the Network JWT - Shell
 

@@ -14,10 +14,17 @@ appear looking like the image shown below.
 
 To assign a default provider, click the desired provider and click the "Default provider?" checkbox. The UI will remember
 the setting when it is clicked. There is no need to 'save' this setting. When a default provider is selected on a network
-with multiple providers, no popup will be shown when hovering over the "authorize IdP" icon. Users may still elect to
-authenticate with a 
+with multiple providers, no popup will be shown when hovering over the "authorize IdP" icon.
 
 
+### Resetting a Preferred Provider
 
-Unchecking the checkbox will clear the default
-provider.
+To reset the default provider simply uncheck the "Default provider" checkbox. When first opening the identity details
+page, the default provider will be automatically selected. If another provider is highlighted, choose the default provider
+and uncheck the "Default provider" box. There is no need to 'save' this setting, the values is stored immediately.
+
+### Non-Default Provider
+
+If a default provider has been selected, users may still elect to authenticate with a different provider. To use a
+different provider than the default, open the identity details page and select the provider to authenticate with. Once
+selected, click "Authenticate With Provider" and the selected provider will be used to authenticate.
