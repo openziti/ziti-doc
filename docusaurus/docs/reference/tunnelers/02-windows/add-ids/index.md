@@ -11,5 +11,5 @@ enrollment comes in the form of a JWT with one notable exception - the URL.
 
 * [One-Time Token](./ott) - Add an identity with a single use token. The most common option
 * [Third-Party CA](./third-party-ca) - Add an identity using a third-party CA
-* [External JWT Provider - JWT](./ext-jwt) - Add an identity using the configured provider and network JWT
-* [External JWT Provider - URL](./ext-jwt-url) - Add an identity using the configured provider and URL
+* [External JWT Provider - JWT](./ext-providers/ext-jwt) - Add an identity using the configured provider and network JWT
+* [External JWT Provider - URL](./ext-providers/ext-jwt-url) - Add an identity using the configured provider and URL
