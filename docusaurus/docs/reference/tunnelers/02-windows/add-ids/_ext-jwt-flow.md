@@ -15,3 +15,4 @@ result in the tab automatically closing.
 Assuming everything succeeds, the user will see the normal information shown by an authenticated identity.
 
 ![after-pkce-success.png](/img/ext-jwt-signer/windows-after-pkce-success.png)
+

@@ -51,7 +51,7 @@ The `ziti` CLI will indicate success/failure of the opeation.
 
 Navigate to the Authentication page, choose JWT Signers and click the plus in the upper right<br/>
 
-![Add External JWT Signer](/img/ext-jwt-signer/ext-jwt-signer-basic.png)
+![Add External JWT Signer](/img/ext-jwt-signer/zac-ext-jwt-signer-basic.png)
 
 ---
 
@@ -60,7 +60,7 @@ Navigate to the Authentication page, choose JWT Signers and click the plus in th
 Fill out the Name, Issuer, Audience, Claims Property and toggle "Use External Id" to on. Then, add the JWKS endpoint
 on the right side of the screen.<br/>
 
-![Initial Fields](/img/ext-jwt-signer/create-initial-fields.png)
+![Initial Fields](/img/ext-jwt-signer/zac-create-initial-fields.png)
 
 ---
 
@@ -69,4 +69,4 @@ on the right side of the screen.<br/>
 Toggle the "Show More Options" and fill out the Client ID, External Auth URL and add scopes. When done click "Save" in
 the top right corner.<br/>
 
-![More Option Fields](/img/ext-jwt-signer/create-ext-jwt-signer-3.png)
+![More Option Fields](/img/ext-jwt-signer/zac-create-ext-jwt-signer-3.png)

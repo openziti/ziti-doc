@@ -29,9 +29,10 @@ these processes is handled through IPC and requires the process to have been sta
 channels are not meant for direct use and using them outside of the overall tunneler is discouraged.
 
 ### The Data Service
-The data service is the main workhorse of the ZDEW. It is built around the `ziti-tunneler-sdk-c` (and subsequently the
-`ziti-sdk-c`). It is responsible for creating the "TUN" (virtual network interface) as well as for configuring any
-routes necessary for IP-based intercepts.
+The data service is the main workhorse of the ZDEW. It is an instance of `ziti-edge-tunnel` built for Windows. The code
+is delivered from the [ziti-tunneler-sdk-c](https://github.com/openziti/ziti-tunnel-sdk-c/) repository. It integrates the
+[Ziti C SDK](https://github.com/openziti/ziti-sdk-c/) as well and is responsible for creating the "TUN" 
+(virtual network interface) as well as for configuring any routes necessary for IP-based intercepts.
 
 #### DNS
 The data service also has a DNS server listening at $TUN_IP + 1. For example, if the data service is configured to use

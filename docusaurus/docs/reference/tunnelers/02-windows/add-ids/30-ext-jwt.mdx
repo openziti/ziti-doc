@@ -1,6 +1,7 @@
 import Details from '@theme/MDXComponents/Details';
 import ExtAuthNew from './_about-ext-jwt.md'
 import ExtJwtFlow from './_ext-jwt-flow.md'
+import ExtJwtFlowMulti from './_ext-jwt-flow-multi.md'
 
 # External Provider - JWT
 
@@ -24,7 +25,7 @@ requires the user or an operator to obtain a JWT ahead of time. This can be done
 Obtain a controller's network JWT using the Ziti Admin Console. From the Authentication->JWT Signers page, click on 
 "Download Network JWT" located on the top right, near the "plus" icon.
 
-![ext-jwt-signer-basic](/img/ext-jwt-signer/ext-jwt-signer-basic.png)
+![ext-jwt-signer-basic](/img/ext-jwt-signer/zac-ext-jwt-signer-basic.png)
 
 ### Obtain the Network JWT - Shell
 
@@ -44,5 +45,9 @@ be added to the system.
 
 ![windows-with-jwt](/img/ext-jwt-signer/windows-with-jwt.png)
 
-## Authenticating with the External Provider~~~~
+## Authenticating with the External Provider
 <ExtJwtFlow/>
+
+
+## More Than One External Provider
+<ExtJwtFlowMulti/>
