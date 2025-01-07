@@ -1,11 +1,11 @@
 import Details from '@theme/MDXComponents/Details';
-import ExtAuthNew from './_about-ext-jwt.md'
+import AboutExtAuth from './_about-ext-jwt.md'
 import ExtJwtFlow from './_ext-jwt-flow.md'
 import ExtJwtFlowMulti from './_ext-jwt-flow-multi.md'
 
-# External Provider - URL
+# By URL
 
-<ExtAuthNew />
+<AboutExtAuth />
 
 Adding an identity by URL is very straight-forward. Deliver the root URL of the OpenZiti controller to the user, and
 send them the following instructions.
@@ -30,8 +30,7 @@ A dialog will appear. Enter a valid https url to a controller and click
 
 ![With URL](/img/ext-jwt-signer/windows-with-url-dialog.png)
 
-## Authenticating with the External Provider
-<ExtJwtFlow/>
+## Authenticating
 
-## More Than One External Provider
-<ExtJwtFlowMulti/>
+Once an identity is added for a network leveraging an external provider. [See Authenticating](./authenticating)
+for more details about how to authenticate to the network.

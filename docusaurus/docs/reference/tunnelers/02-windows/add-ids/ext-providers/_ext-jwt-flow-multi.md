@@ -13,4 +13,11 @@ appear looking like the image shown below.
 ![more than one provider](/img/ext-jwt-signer/windows-provider-prefs.png)
 
 To assign a default provider, click the desired provider and click the "Default provider?" checkbox. The UI will remember
-the setting when it is clicked. There is no need to 'save' this setting.
+the setting when it is clicked. There is no need to 'save' this setting. When a default provider is selected on a network
+with multiple providers, no popup will be shown when hovering over the "authorize IdP" icon. Users may still elect to
+authenticate with a 
+
+
+
+Unchecking the checkbox will clear the default
+provider.

@@ -1,11 +1,9 @@
 import Details from '@theme/MDXComponents/Details';
-import ExtAuthNew from './_about-ext-jwt.md'
-import ExtJwtFlow from './_ext-jwt-flow.md'
-import ExtJwtFlowMulti from './_ext-jwt-flow-multi.md'
+import AboutExtAuth from './_about-ext-jwt.md'
 
-# External Provider - JWT
+# By JWT
 
-<ExtAuthNew />
+<AboutExtAuth />
 
 ## Prerequisites
 * OpenZiti Controller 1.2+
@@ -45,9 +43,7 @@ be added to the system.
 
 ![windows-with-jwt](/img/ext-jwt-signer/windows-with-jwt.png)
 
-## Authenticating with the External Provider
-<ExtJwtFlow/>
+## Authenticating
 
-
-## More Than One External Provider
-<ExtJwtFlowMulti/>
+Once an identity is added for a network leveraging an external provider. [See Authenticating](./authenticating)
+for more details about how to authenticate to the network.
