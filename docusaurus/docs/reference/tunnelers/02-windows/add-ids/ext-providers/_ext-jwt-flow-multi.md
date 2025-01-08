@@ -1,4 +1,4 @@
-If your network is configured with more than one external provider, a popup will be shown when the mouse hovers over
+If your network is configured with more than one external provider, a popup will be shown when clicking on
 the "authorize IdP" icon. The popup will contain a list of the providers to select from. Choosing a provider from the
 list will begin the authorization flow for the selected provider.
 
@@ -14,7 +14,7 @@ appear looking like the image shown below.
 
 To assign a default provider, click the desired provider and click the "Default provider?" checkbox. The UI will remember
 the setting when it is clicked. There is no need to 'save' this setting. When a default provider is selected on a network
-with multiple providers, no popup will be shown when hovering over the "authorize IdP" icon.
+with multiple providers, no popup will be shown when clicking the "authorize IdP" icon.
 
 
 ### Resetting a Preferred Provider
