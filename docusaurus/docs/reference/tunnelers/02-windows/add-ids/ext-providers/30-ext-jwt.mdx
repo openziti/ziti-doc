@@ -1,0 +1,52 @@
+import Details from '@theme/MDXComponents/Details';
+import AboutExtAuth from './_about-ext-jwt.md'
+
+# By JWT
+
+<AboutExtAuth />
+
+## Prerequisites
+* OpenZiti Controller 1.2+
+* ZDEW 2.5.2+
+* an `external-jwt-provider` is properly configured
+* an identity exists with an `external-id` field set to a value provided from the external provider
+* the OpenZiti network operator has sent the Windows machine the network jwt file
+
+<Details>
+<summary><b>Obtaining the Network JWT</b></summary>
+
+Adding an identity to a Windows machine that uses an external provider as the primary authentication mechanism with a JWT
+requires the user or an operator to obtain a JWT ahead of time. This can be done in two different ways.
+<hr/>
+
+### Obtain the Network JWT - ZAC
+
+Obtain a controller's network JWT using the Ziti Admin Console. From the Authentication->JWT Signers page, click on 
+"Download Network JWT" located on the top right, near the "plus" icon and send the JWT to the user trying to add an
+identity.
+
+![ext-jwt-signer-basic](/img/ext-jwt-signer/zac-ext-jwt-signer-basic.png)
+<hr/>
+
+### Obtain the Network JWT - Shell
+
+Alternatively, a request can be made to the OpenZiti controller's API to return the JWT. Make an HTTP GET to the controller's
+`/network-jwts` endpoint and extract the `token` field and save this content to a JWT. Using bash, `curl` and `jq` this
+might look something like:
+```text
+curl -s https://my.openziti.controller.local:443/network-jwts | jq -r .data[].token > my-network-jwt
+```
+</Details>
+
+## Adding the Identity
+
+With the JWT on the Windows machine to be added, click on the "ADD IDENTITY" button in the top right of the screen. 
+After the context menu pops up choose "With JWT". In the file dialog, select the network JWT file and the identity will
+be added to the system.
+
+![windows-with-jwt](/img/ext-jwt-signer/windows-with-jwt.png)
+
+## Authenticating
+
+Once an identity is added for a network leveraging an external provider. [See Authenticating](./authenticating)
+for more details about how to authenticate to the network.
