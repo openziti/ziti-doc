@@ -236,7 +236,7 @@ This config will cause a port check to run against the service every five second
 has failed twice in a row, the endpoint will be marked failed. After the check has been passing for
 a minute, the endpoint will be restored to its original precedence.
 
-```json
+```text
 {
   "address": "192.168.100.1",
   "port": 80,
