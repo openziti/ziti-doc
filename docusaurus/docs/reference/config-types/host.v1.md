@@ -236,27 +236,29 @@ This config will cause a port check to run against the service every five second
 has failed twice in a row, the endpoint will be marked failed. After the check has been passing for
 a minute, the endpoint will be restored to its original precedence.
 
-```text
+```json
 {
   "address": "192.168.100.1",
   "port": 80,
   "protocol": "tcp",
-  "portChecks": {
-    "address": "192.168.100.1:80",
-    "interval": "5s",
-    "timeout": "1s",
-    "actions": [
-      {
-        "trigger": "fail",
-        "action": "mark unhealthy",
-        "consecutiveEvents": 2
-      },
-      {
-        "trigger": "pass",
-        "duration": "1m",
-        "action": "mark healthy"
-      }
-    ]
-  }
+  "portChecks": [
+    {
+      "address": "192.168.100.1:80",
+      "interval": "5s",
+      "timeout": "1s",
+      "actions": [
+        {
+          "trigger": "fail",
+          "action": "mark unhealthy",
+          "consecutiveEvents": 2
+        },
+        {
+          "trigger": "pass",
+          "duration": "1m",
+          "action": "mark healthy"
+        }
+      ]
+    }
+  ]
 }
 ```
