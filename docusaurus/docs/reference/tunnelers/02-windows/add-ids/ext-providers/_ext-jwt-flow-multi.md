@@ -35,3 +35,11 @@ and uncheck the "Default provider" box. There is no need to 'save' this setting,
 If a default provider has been selected, users may still elect to authenticate with a different provider. To use a
 different provider than the default, open the identity details page and select the provider to authenticate with. Once
 selected, click "Authenticate With Provider" and the selected provider will be used to authenticate.
+
+## External Provider as Secondary Auth
+
+OpenZiti supports using external providers as a second form of authentication. When an identity is configured to use an
+auth-policy requiring secondary authentication via external provider, the same "authorize IdP" icon and text will be 
+displayed. There is no need to configure a default provider for this situation. Any given identity can only be mapped to
+a single auth-policy and an auth-policy can only specify a single external provider for secondary auth. Clicking the icon
+will initiate the proper external provider flow.
