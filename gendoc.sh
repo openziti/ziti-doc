@@ -23,7 +23,7 @@ function clone_or_pull {
 fix_helm_ziti_edge_tunnel() {
   local _target="${ZITI_DOC_GIT_LOC}/helm-charts/charts/ziti-edge-tunnel/README.md"
   echo "fixing $_target to work with docusaurus"
-  sed -i 's|<https://openziti.io>|\&lt;https://openziti.io&gt;|g' "$_target"
+  sed -i 's|<https://openziti.io>|\&lt;https://openziti.io\&gt;|g' "$_target"
   sed -i 's|<https://github.com/openziti/ziti-tunnel-sdk-c>|\&lt;https://github.com/openziti/ziti-tunnel-sdk-c>|g' "$_target"
   sed -i 's#sresponse\\\\s<|>\$#sresponse\\\\s\&lt;|>\$#g' "$_target"
 }
