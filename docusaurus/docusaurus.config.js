@@ -359,7 +359,7 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<a href="https://twitter.com/OpenZiti" target="_blank" title="OpenZiti on Twitter"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/twit.svg"/>Twitter</span></a>'
+                value: '<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/twit.svg"/>Twitter</span></a>'
               },
               {
                 type: 'html',
@@ -367,7 +367,7 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/ziggy.png"/><a href="https://twitter.com/OpenZiggy" target="_blank" title="OpenZiggy on Twitter">Ziggy</span></a>'
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/ziggy.png"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on Twitter">Ziggy</span></a>'
               },
               {
                 type: 'html',
