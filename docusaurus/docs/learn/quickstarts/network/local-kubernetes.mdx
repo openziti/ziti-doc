@@ -281,7 +281,7 @@ You need to install the required [Custom Resource Definitions](https://kubernete
 kubectl apply \
    --filename https://github.com/cert-manager/cert-manager/releases/latest/download/cert-manager.crds.yaml
 kubectl apply \
-   --filename https://raw.githubusercontent.com/cert-manager/trust-manager/v0.4.0/deploy/crds/trust.cert-manager.io_bundles.yaml
+   --filename https://raw.githubusercontent.com/cert-manager/trust-manager/v0.7.0/deploy/crds/trust.cert-manager.io_bundles.yaml
 ```
 
 #### Add the OpenZiti Helm Repository
@@ -454,7 +454,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
    ```text
    kubectl get secrets "ziti-controller-admin-secret" \
       --namespace miniziti \
-      --output go-template='{{"\nINFO: Your console http://miniziti-controller.miniziti.internal/zac/ password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
+      --output go-template='{{"\nINFO: Your console https://miniziti-controller.miniziti.internal/zac/ password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
    ```
 
 1. Open [https://miniziti-controller.miniziti.internal/zac/](https://miniziti-controller.miniziti.internal/zac/) in your web browser and login with username "admin" and the password from your clipboard.
@@ -464,10 +464,10 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
 Here's a BASH script that runs several `ziti` CLI commands to illustrate a minimal set of identities, services, and policies.
 
 ```text
-ziti edge create identity device "miniziti-client" \
+ziti edge create identity "miniziti-client" \
     --jwt-output-file /tmp/miniziti-client.jwt --role-attributes httpbin-clients
 
-ziti edge create identity device "httpbin-host" \
+ziti edge create identity "httpbin-host" \
     --jwt-output-file /tmp/httpbin-host.jwt --role-attributes httpbin-hosts
 
 ziti edge create config "httpbin-intercept-config" intercept.v1 \
@@ -519,6 +519,8 @@ As soon as identity enrollment completes you should have a new OpenZiti DNS name
 nslookup httpbin.miniziti.private
 ```
 
+The expected output includes an IP address like `100.64.0.4`.
+
 ## Test the Demo API Service
 
 ```text title="macOS or Linux, including WSL"
@@ -529,7 +531,7 @@ Visit [http://httpbin.miniziti.private/get](http://httpbin.miniziti.private/get)
 
 ## Explore the Console
 
-Now that you've successfully tested the service, check out the various entities in your that were created by the script in [http://miniziti-controller.miniziti.internal/zac/](http://miniziti-controller.miniziti.private/zac/).
+Now that you've successfully tested the service, check out the various entities in your that were created by the script in [https://miniziti-controller.miniziti.internal/zac/](https://miniziti-controller.miniziti.private/zac/).
 
 ## Next Steps
 
