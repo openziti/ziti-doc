@@ -30,7 +30,7 @@ This guide will re-use the service "testapi-service", a REST API demo server, th
 1. We will create a new identity for our client app with the correct role to grant access to the service.
 
   ```text
-  ziti edge create identity device sidecar-client \
+  ziti edge create identity sidecar-client \
     --jwt-output-file /tmp/sidecar-client.jwt --role-attributes testapi-clients
   ```
 

@@ -99,7 +99,7 @@ token which has an `email` claim with the value `ziggy@openziti.io` and names th
 identity_name="openziti_ziggy"
 auth_policy="__auth_policy_id_from_above__"
 external_id="ziggy@openziti.io"
-ziti edge create identity user "${identity_name}" \
+ziti edge create identity "${identity_name}" \
   --auth-policy ${auth_policy} \
   --external-id "${external_id}" \
   -a docker.whale.dialers

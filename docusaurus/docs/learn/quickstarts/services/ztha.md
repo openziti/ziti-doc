@@ -145,10 +145,10 @@ ziti edge login localhost:1280
 
 # 1. Create an identity for the HTTP client and assign an attribute "http-clients". We'll use this attribute when authorizing the clients to
 #  access the HTTP service
-ziti edge create identity user http-client -a 'http-clients' -o http.client.jwt 
+ziti edge create identity http-client -a 'http-clients' -o http.client.jwt 
 
 #2. Create an identity for the HTTP server if you are not using an edge-router with the tunneling option enabled
-ziti edge create identity user http-server -o http.server.jwt
+ziti edge create identity http-server -o http.server.jwt
 
 #3. Create an intercept.v1 config. This config is used to instruct the client-side tunneler how to correctly intercept 
 #   the targeted traffic and put it onto the overlay. 

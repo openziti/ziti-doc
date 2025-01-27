@@ -1,4 +1,4 @@
 ```
 #creates a new user named "NewUser"
-ziti edge create identity user "NewUser" -o NewUser.jwt
+ziti edge create identity "NewUser" -o NewUser.jwt
 ```

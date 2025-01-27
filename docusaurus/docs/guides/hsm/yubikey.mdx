@@ -217,10 +217,10 @@ you update the path to include the folder of libykcs11-1.dll as additional libra
     ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD
 
     # create a new identity and output the jwt to a known location
-    ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    ziti edge create identity "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
+    ziti edge create identity "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
 ```
 
 </TabItem>
@@ -230,10 +230,10 @@ you update the path to include the folder of libykcs11-1.dll as additional libra
     ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD%
 
     REM create a new identity and output the jwt to a known location
-    ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
+    ziti edge create identity "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
 
     REM create a second new identity and output the jwt to a known location
-    ziti edge create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
+    ziti edge create identity "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
 ```
 
 </TabItem>
@@ -436,18 +436,18 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     cd@cd-ubuntuvm: cd ${HSM_NAME}
     cd@cd-ubuntuvm: ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD
     # create a new identity and output the jwt to a known location
-    ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    ziti edge create identity "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"Token: 7083e601-cc2f-4636-94c0-959174e76264
+    ziti edge create identity "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"Token: 7083e601-cc2f-4636-94c0-959174e76264
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # create a new identity and output the jwt to a known location
-    cd@cd-ubuntuvm: ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    cd@cd-ubuntuvm: ziti edge create identity "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
     76877717-9bce-4f34-ae7a-2ce313b8267a
     Enrollment expires at 2020-02-24T14:56:19.961322754Z
     cd@cd-ubuntuvm:
     cd@cd-ubuntuvm: # create a second new identity and output the jwt to a known location
-    cd@cd-ubuntuvm: ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
+    cd@cd-ubuntuvm: ziti edge create identity "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
     bdd18e58-e474-4ed3-98eb-c68ed96377be
     Enrollment expires at 2020-02-24T14:56:21.673599433Z
     cd@cd-ubuntuvm: p --init-token --label "ziti-test-token" --so-pin $HSM_SOPIN
@@ -816,7 +816,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>REM create a new identity and output the jwt to a known location
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge create identity "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
     43b76397-c65e-43a9-a326-b58f83cacfea
     Enrollment expires at 2020-02-24T14:47:02.783676578Z
 
@@ -824,7 +824,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
 
     c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>REM create a second new identity and output the jwt to a known location
 
-    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
+    c:\path\to\yubico-piv-tool-2.0.0\yubikey_windemo>ziti edge create identity "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
     fa116b87-d322-4058-a8c1-d41f21a9e051
     Enrollment expires at 2020-02-24T14:47:03.521726623Z
 
