@@ -210,10 +210,10 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD
 
     # create a new identity and output the jwt to a known location
-    ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    ziti edge create identity "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
+    ziti edge create identity "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
 ```
 
 </TabItem>
@@ -223,10 +223,10 @@ Ensure you use the correct dll. If you use an x86 dll with x64 binaries you'll g
     ziti edge login %ZITI_CTRL%:1280 -u %ZITI_USER% -p %ZITI_PWD%
 
     REM create a new identity and output the jwt to a known location
-    ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
+    ziti edge create identity "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
 
     REM create a second new identity and output the jwt to a known location
-    ziti edge create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
+    ziti edge create identity "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
 ```
 
 </TabItem>
@@ -538,10 +538,10 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     cd@sg1 ~/.softhsm/softhsm_demo
     $ ziti edge login $ZITI_CTRL:1280 -u $ZITI_USER -p $ZITI_PWD
     # create a new identity and output the jwt to a known location
-    ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    ziti edge create identity "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
 
     # create a second new identity and output the jwt to a known location
-    ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"Token: 28da1089-1636-4e6b-b5c7-96edc8d6162f
+    ziti edge create identity "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"Token: 28da1089-1636-4e6b-b5c7-96edc8d6162f
 
     cd@sg1 ~/.softhsm/softhsm_demo
     $
@@ -550,7 +550,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     $ # create a new identity and output the jwt to a known location
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge create identity device "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
+    $ ziti edge create identity "${RSA_ID}" -o "${HSM_DEST}/${RSA_ID}.jwt"
     dbf953bc-a987-4a89-a93d-0d6dac13150f
     Enrollment expires at 2020-02-23T13:31:35.306053182Z
 
@@ -561,7 +561,7 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     $ # create a second new identity and output the jwt to a known location
 
     cd@sg1 ~/.softhsm/softhsm_demo
-    $ ziti edge create identity device "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
+    $ ziti edge create identity "${EC_ID}" -o "${HSM_DEST}/${EC_ID}.jwt"
     cfffe40d-b859-4a5a-ab4f-c9621a57ec85
     Enrollment expires at 2020-02-23T13:31:36.676560457Z
 
@@ -1020,14 +1020,14 @@ output would likely look like click one of the tabs to the right. Reminder - it'
     c:\path\to\softhsm\softhsm_demo>
     c:\path\to\softhsm\softhsm_demo>REM create a new identity and output the jwt to a known location
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge create identity device "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
+    c:\path\to\softhsm\softhsm_demo>ziti edge create identity "%RSA_ID%" -o "%HSM_DEST%\%RSA_ID%.jwt"
     a625ee46-b799-4e9f-a92c-59a579cb9756
     Enrollment expires at 2020-02-23T14:22:08.902166003Z
 
     c:\path\to\softhsm\softhsm_demo>
     c:\path\to\softhsm\softhsm_demo>REM create a second new identity and output the jwt to a known location
 
-    c:\path\to\softhsm\softhsm_demo>ziti edge create identity device "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
+    c:\path\to\softhsm\softhsm_demo>ziti edge create identity "%EC_ID%" -o "%HSM_DEST%\%EC_ID%.jwt"
     08889f51-1639-4cd0-9c18-ffcc5e315f3e
     Enrollment expires at 2020-02-23T14:22:09.634832703Z
 

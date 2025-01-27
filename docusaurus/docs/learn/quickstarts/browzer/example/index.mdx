@@ -444,7 +444,7 @@ After create a __space__ delimited list (one value/email is fine too), copy and 
 ```text
 echo "creating users specified by ZITI_BROWZER_IDENTITIES: ${ZITI_BROWZER_IDENTITIES}"
 for id in ${ZITI_BROWZER_IDENTITIES}; do
-ziti edge create identity user "${id}" --auth-policy ${auth_policy} --external-id "${id}" -a "${ZITI_BROWZER_SERVICE}.dialers"
+ziti edge create identity "${id}" --auth-policy ${auth_policy} --external-id "${id}" -a "${ZITI_BROWZER_SERVICE}.dialers"
 done
 
 #ziti edge update identity "${id}" -a $(ziti edge list identities 'name="'${id}'"' -j | jq -r '.data[].roleAttributes | map(. // "") | @csv'),"${ZITI_BROWZER_SERVICE}.dialers"

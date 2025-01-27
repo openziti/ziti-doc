@@ -59,17 +59,17 @@ zitiLogin
 Create identities and save the enrollment token to files.
 
 ```text
-ziti edge create identity user local-tunnel -o local-tunnel.jwt
-ziti edge create identity user remote-tunnel -o remote-tunnel.jwt
+ziti edge create identity local-tunnel -o local-tunnel.jwt
+ziti edge create identity remote-tunnel -o remote-tunnel.jwt
 ```
 
 **output**
 
 ```
-root@LocalGWDemoNC:~# ziti edge create identity user local-tunnel -o local-tunnel.jwt
+root@LocalGWDemoNC:~# ziti edge create identity local-tunnel -o local-tunnel.jwt
 New identity local-tunnel created with id: PVen7KeIY5
 Enrollment expires at 2023-04-26T23:02:10.200Z
-root@LocalGWDemoNC:~# ziti edge create identity user remote-tunnel -o remote-tunnel.jwt
+root@LocalGWDemoNC:~# ziti edge create identity remote-tunnel -o remote-tunnel.jwt
 New identity remote-tunnel created with id: LtnYRL2IY
 Enrollment expires at 2023-04-26T23:06:01.955Z
 root@LocalGWDemoNC:~# ls -l *jwt
