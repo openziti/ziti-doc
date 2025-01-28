@@ -40,6 +40,8 @@ github\.com/.*#
 .*\.?example\.(com|net|org)
 openziti.io(/comments)?/feed/
 developer.chrome.com/origintrials/#/register_trial/.*
+entra\.microsoft\.com
+https://github.com/openziti/ziti-tunnel-sdk-c%3E
 EOF
 
 # drop the trailing pipe
