@@ -237,6 +237,11 @@ The `edgeRouter` section controls the lifetime of router enrollment JWTs. It has
 
 ### `events`
 
+See [the events reference](../50-events.mdx) for a full description of each event type.
+
+**Note:** Many of the event type names changed in OpenZiti v1.4.0. See the events reference
+for old namespaces.
+
 The `events` section allows for the definition of multiple event loggers with their own handler and
 event subscriptions. Handlers define the type, format, and destination for events. Subscriptions
 handle which events are routed to the handler. This allows different events to be output in
@@ -248,31 +253,36 @@ The `subscriptions` section is an array of objects with fields associated with t
 Specifying an event type will cause it to be output via the defined handler. If an event type is
 omitted, it will not be output. The list of valid event types and their options is as follows:
 
-- `edge.apiSessions` - (optional) edge API Session events
+- `apiSession` - (optional) edge API Session events
     - `include` - (optional) a string or array of strings that specify which API session events to
       include ("created"
       and/or "
       deleted")
-- `edge.entityCounts` - (optional) edge entity counts (API Sessions, session entities, routers, etc.)
-    - `interval` - (optional) the time interval to generate entity count events on (e.g. "5s", "
-      5000ms", "1h")
-- `edge.sessions`  - (optional) Session events
-    - `include` - (optional) a string or array of strings that specify which Session events to
-      include ("created"
-      and/or "deleted")
-- `fabric.circuits`  - (optional) Fabric circuit events
+- `circuit`  - (optional) Fabric circuit events
     - `include` - (optional) a string or array of strings that specify which circuit events to
       include ("created", "
       pathUpdated", "
       deleted", "failed")
-- `fabric.links` - - (optional) Fabric link events
-- `fabric.routers` - (optional) Fabric router events
-- `fabric.usage` - (optional) Fabric usage events
-    - `version` - (optional) a string representing the value of the usage event to use ("2' or "3")
+- `cluster` - (optional) cluster events, emitted when there are changes to state of an HA controller cluster
+- `connect` - (optional) connect events, emitted when connetions are made to controllers and routers
+- `entityChange` - (optional) entity change events, emitted when there are changes to the data model
+- `entityCount` - (optional) edge entity counts (API Sessions, session entities, routers, etc.)
+    - `interval` - (optional) the time interval to generate entity count events on (e.g. "5s", "
+      5000ms", "1h")
+- `link` - - (optional) Fabric link events
 - `metrics` - (optional) - System-wide metrics
     - `sourceFilter` - (optional) a regular expression to match the source name value on
     - `metricFilter` - (optional) a regular expression to match the metric name value on
-- `services` - (optional) Service events
+- `router` - (optional) Fabric router events
+- `sdk` - (optional) emitted when an sdk's connectivity to routers changes.
+- `session`  - (optional) Session events
+    - `include` - (optional) a string or array of strings that specify which Session events to
+      include ("created"
+      and/or "deleted")
+- `service` - (optional) Service events
+- `terminator` - (optional) emitted at various points in the terminator lifecycle
+- `usage` - (optional) Fabric usage events
+    - `version` - (optional) a string representing the value of the usage event to use ("2' or "3")
 
 The properties in the `handler` section depend on handler `type` (one of `file`, `stdout`,
 or `amqp`):
@@ -298,18 +308,18 @@ Example JSON File Logger:
 events:
   jsonLogger:
     subscriptions:
-      - type: fabric.circuits
-      - type: fabric.links
-      - type: fabric.routers
-      - type: fabric.terminators
-      - type: metrics
+      - type: circuit
+      - type: link
+      - type: router
+      - type: terminator
+      - type: metric
         sourceFilter: .*
         metricFilter: .*
-      - type: edge.sessions
-      - type: edge.apiSessions
-      - type: fabric.usage
-      - type: services
-      - type: edge.entityCounts
+      - type: session
+      - type: apiSession
+      - type: usage
+      - type: service
+      - type: entityCount
         interval: 5s
     handler:
       type: file
@@ -323,7 +333,7 @@ Example amqp Logger:
 events:
   amqpLogger:
     subscriptions:
-      - type: fabric.usage
+      - type: usage
         interval: 5s
     handler:
       type: amqp

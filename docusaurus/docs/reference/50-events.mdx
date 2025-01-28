@@ -1,0 +1,1452 @@
+---
+title: Events
+---
+
+# Events
+
+## Introduction
+The controller can emit many kinds of events, useful for monitoring, management and integration with other systems.
+They can be enabled in the controller configuration. 
+
+### Common Fields
+
+All events have the following fields:
+
+| Type | Description | Type |
+|------|-------------|----------|
+| **namespace** | The name indicating the overall event type | string |
+| **timestamp** | The date/time when the event was generated | timestamp |
+| **event_src_id** | The id of the controller which emitted the event | string |
+
+### Time Related Types
+
+| Type | Description | Examples |
+|------|-------------|----------|
+| **timestamp** | RFC3339 formatted timestamp string | "2024-10-02T12:17:39.501821249-04:00" |
+| **duration** | Number representing a duration in nanoseconds | 104100 |
+
+## Event Types
+
+* [ApiSession](#apisession)
+* [Circuit](#circuit)
+* [Cluster](#cluster)
+* [Connect](#connect)
+* [EntityChange](#entitychange)
+* [EntityCount](#entitycount)
+* [Link](#link)
+* [Metrics](#metrics)
+* [Router](#router)
+* [Sdk](#sdk)
+* [Service](#service)
+* [Session](#session)
+* [Terminator](#terminator)
+* [UsageV2](#usagev2)
+* [UsageV3](#usagev3)
+
+
+
+## Event Configuration
+
+For a complete event configuration reference, please refer to the 
+[controller event configuration](configuration/controller#events).
+
+**Note**: Many namespaces changed in OpenZiti v1.4.0. Old namespaces are noted below.
+
+Example Configuration
+
+```
+events:
+  jsonLogger:
+    subscriptions:
+      - apiSession
+      - circuit
+      - cluster
+      - connect
+      - entityChange
+      - entityCount
+      - link
+      - metrics
+      - router
+      - sdk
+      - service
+      - session
+      - terminator
+      - usage
+```
+
+## ApiSession
+
+**Namespace:** `apiSession` 
+
+An ApiSessionEvent is emitted whenever an api session is created, deleted, refreshed or exchanged.
+Legacy sessions are only ever created or deleted. JWT sessions are created, refreshed and exchanged.
+
+Note: In version prior to 1.4.0, the namespace was `edge.apiSessions`
+
+Valid api session event types are:
+  - created
+  - deleted
+  - refreshed
+  - exchanged
+
+Valid api session types are:
+  - jwt
+  - legacy
+
+
+<details>
+<summary>Example: Api Session Created Event</summary>
+```text
+{
+    "namespace": "apiSession",
+    "event_src_id" : "ctrl1",
+    "timestamp": "2021-11-08T14:45:45.785561479-05:00",
+    "event_type": "created",
+    "id": "ckvr2r4fs0001oigd6si4akc8",
+    "token": "77cffde5-f68e-4ef0-bbb5-731db36145f5",
+    "identity_id": "76BB.shC0",
+    "ip_address": "127.0.0.1"
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for ApiSessionEvents is apiSession|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **event_type** |The type api session event. See above for valid values.|string|
+| **id** |id is the api session id.|string|
+| **type** |type is the api session type. See above for valid values.|string|
+| **token** |The api session token.|string|
+| **identity_id** |The id of the identity that the api session belongs to.|string|
+| **ip_address** |The IP address from which the identity to connected to require the api session.|string|
+
+
+## Circuit
+
+**Namespace:** `circuit` 
+
+A CircuitEvent is emitted for various stages of a circuit lifecycle.
+
+Note: In version prior to 1.4.0, the namespace was `fabric.circuits`
+
+Valid circuit event types are:
+  - created
+  - pathUpdated
+  - deleted
+  - failed
+
+
+<details>
+<summary>Example: Circuit Created Event</summary>
+```text
+{
+    "namespace": "circuit",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T14:09:13.603009739-05:00",
+    "version": 2,
+    "event_type": "created",
+    "circuit_id": "rqrucElFe",
+    "client_id": "cm614ve9h00fb1xj9dfww20le",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "terminator_id": "7JgrjMgEAis7V5q1wjvoB4",
+    "instance_id": "",
+    "creation_timespan": 1035941,
+    "path": {
+        "nodes": [
+            "5g2QrZxFcw"
+        ],
+        "links": null,
+        "ingress_id": "8dN7",
+        "egress_id": "ZnXG"
+    },
+    "link_count": 0,
+    "path_cost": 262140,
+    "tags": {
+        "clientId": "haxn9lB0uc",
+        "hostId": "IahyE.5Scw",
+        "serviceId": "3pjMOKY2icS8fkQ1lfHmrP"
+    }
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Circuit Deleted Event</summary>
+```text
+{
+    "namespace": "circuit",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T14:09:15.138049308-05:00",
+    "version": 2,
+    "event_type": "deleted",
+    "circuit_id": "rqrucElFe",
+    "client_id": "cm614ve9h00fb1xj9dfww20le",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "terminator_id": "7JgrjMgEAis7V5q1wjvoB4",
+    "instance_id": "",
+    "path": {
+        "nodes": [
+            "5g2QrZxFcw"
+        ],
+        "links": null,
+        "ingress_id": "8dN7",
+        "egress_id": "ZnXG"
+    },
+    "link_count": 0,
+    "duration": 1535040544,
+    "tags": {
+        "clientId": "haxn9lB0uc",
+        "hostId": "IahyE.5Scw",
+        "serviceId": "3pjMOKY2icS8fkQ1lfHmrP"
+    }
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Circuit Failed Event</summary>
+```text
+{
+    "namespace": "circuit",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T14:09:30.563045771-05:00",
+    "version": 2,
+    "event_type": "failed",
+    "circuit_id": "JvIucEQHe",
+    "client_id": "cm614vrcd00fu1xj931hzepec",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "terminator_id": "",
+    "instance_id": "",
+    "creation_timespan": 20701,
+    "path": {
+        "nodes": null,
+        "links": null,
+        "ingress_id": "",
+        "egress_id": ""
+    },
+    "link_count": 0,
+    "failure_cause": "NO_TERMINATORS",
+    "tags": {
+        "clientId": "haxn9lB0uc",
+        "serviceId": "3pjMOKY2icS8fkQ1lfHmrP"
+    }
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for CircuitEvents is circuit|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **version** |The event format version. Currently 2.|number (uint32)|
+| **event_type** |The circuit event type. See above for valid circuit event types.|string|
+| **circuit_id** |The circuit id.|string|
+| **client_id** |Who the circuit was created for. Usually an edge session id.|string|
+| **service_id** |The id of the circuit's service.|string|
+| **terminator_id** |The terminator the circuit is using.|string|
+| **instance_id** |The instance id of the terminator.|string|
+| **creation_timespan** |How long it look to create the circuit.|duration|
+| **path** |The circuit's path.|[CircuitPath](#circuitpath)|
+| **link_count** |How many links the circuit is using.|number (int)|
+| **path_cost** |The circuit's cost at the time of creation or update.|number (uint32)|
+| **failure_cause** |The reason the circuit failed. Only populated for circuit failures.|string|
+| **duration** |How long the circuit has been up. Not populated for circuit creates.|duration|
+| **tags** |Contains circuit enrichment data. May contain information like the client and/or host identity ids.|map of string -> string|
+
+### CircuitPath
+
+A CircuitPath encapsulates information about the circuit's path.
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **nodes** |The routers traversed in the path, going from initiating router to terminating router. |list of string|
+| **links** |The links traversed in the path, going from initiating router to terminating router. If the initiating and terminating routers are the same, this will be empty. |list of string|
+| **ingress_id** |The xgress identifier used on the initiating router. |string|
+| **egress_id** |The xgress identifier used on the terminating router. |string|
+| **initiator_local_addr** |The local address of the connection to the first ziti component. |string|
+| **initiator_remote_addr** |The remote address of the connection to the first ziti component. |string|
+| **terminator_local_addr** |The local address on the terminating ziti component. |string|
+| **terminator_remote_addr** |The remote address on the terminating ziti component. |string|
+
+
+## Cluster
+
+**Namespace:** `cluster` 
+
+A ClusterEvent marks a change to the controller HA cluster.
+ClusterEvents can be of the following types:
+  - peer.connected
+  - peer.disconnected
+  - members.changed
+  - leadership.gained
+  - leadership.lost
+  - state.has_leader
+  - state.is_leaderless
+  - state.ro
+  - state.rw
+
+
+<details>
+<summary>Example: Cluster Members Changed Event</summary>
+```text
+{
+    "namespace": "cluster",
+    "event_src_id": "ctrl1",
+    "timestamp": "2025-01-17T13:41:25.817205826-05:00",
+    "eventType": "members.changed",
+    "index": 7,
+    "peers": [
+        {
+            "id": "ctrl1",
+            "addr": "tls:localhost:6262",
+            "apiAddresses": null
+        },
+        {
+            "id": "ctrl2",
+            "addr": "tls:localhost:6363",
+            "apiAddresses": null
+        }
+    ]
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Peer Connected Event</summary>
+```text
+{
+    "namespace": "cluster",
+    "event_src_id": "ctrl1",
+    "timestamp": "2025-01-17T13:41:25.838625953-05:00",
+    "eventType": "peer.connected",
+    "peers": [
+        {
+            "id": "ctrl2",
+            "addr": "tls:localhost:6363",
+            "version": "v0.0.0",
+            "apiAddresses": {
+                "edge-client": [
+                    {
+                        "url": "https://127.0.0.1:1380/edge/client/v1",
+                        "version": "v1"
+                    }
+                ],
+                "edge-management": [
+                    {
+                        "url": "https://127.0.0.1:1380/edge/management/v1",
+                        "version": "v1"
+                    }
+                ],
+                "edge-oidc": [
+                    {
+                        "url": "https://127.0.0.1:1380/oidc",
+                        "version": "v1"
+                    }
+                ],
+                "fabric": [
+                    {
+                        "url": "https://127.0.0.1:1380/fabric/v1",
+                        "version": "v1"
+                    }
+                ],
+                "health-checks": [
+                    {
+                        "url": "https://127.0.0.1:1380/health-checks",
+                        "version": "v1"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for ClusterEvents is cluster|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **eventType** |The cluster event type. See above for set of valid types.|string|
+| **index** |The raft index associated with the event.|number (uint64)|
+| **peers** |This field is populated with all peers when membership change events or leadership is gained. It is populated with the connecting peer for connect events and the disconnecting peer for disconnect events. For other types it is omitted.|list of [ClusterPeer](#clusterpeer)|
+| **leaderId** |The leader id. Only populated for state.has_leader events.|string|
+
+### ApiAddress
+
+An ApiAddress represents an endpoint on a controller. This may include things
+like REST management services and health checks.
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **url** |The URL of the API endpoint. |string|
+| **version** |The version of the API endpoint. Endpoints are versioned independently of the controller version as these are expected to be stable over long periods. |string|
+
+### ClusterPeer
+
+A ClusterPeer represents a controller which is a member of the cluster.
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **id** |The controller id. |string|
+| **addr** |The address at which the controller can be reached. |string|
+| **version** |The version of the controller. |string|
+| **apiAddresses** |The set of api addresses presented by the controller. |map of string -> list of [ApiAddress](#apiaddress)|
+
+
+## Connect
+
+**Namespace:** `connect` 
+
+A ConnectEvent is emitted when a connection is made to a ziti controller or router.
+
+Valid source types are:
+  - router - router connecting to a controller or another router)
+  - peer - controller connecting to another controller
+  - identity - identity connecting to a router or controller
+
+Valid destination types are:
+  - ctrl - connection is being made to a controller
+  - router - connection is being made to a router
+
+
+<details>
+<summary>Example: Identity Connected to Controller Event</summary>
+```text
+{
+    "namespace": "connect",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2024-10-02T12:17:39.501821249-04:00"
+    "src_type": "identity",
+    "src_id": "ji2Rt8KJ4",
+    "src_addr": "127.0.0.1:59336",
+    "dst_id": "ctrl_client",
+    "dst_addr": "localhost:1280/edge/management/v1/edge-routers/2L7NeVuGBU",
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Router Connected to Controller Event</summary>
+```text
+{
+    "namespace": "connect",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2024-10-02T12:17:40.529865849-04:00"
+    "src_type": "router",
+    "src_id": "2L7NeVuGBU",
+    "src_addr": "127.0.0.1:42702",
+    "dst_id": "ctrl_client",
+    "dst_addr": "127.0.0.1:6262",
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Controller Connected to Controller Event</summary>
+```text
+{
+    "namespace": "connect",
+    "event_src_id": "ctrl1",
+    "timestamp": "2024-10-02T12:37:04.490859197-04:00"
+    "src_type": "peer",
+    "src_id": "ctrl2",
+    "src_addr": "127.0.0.1:40056",
+    "dst_id": "ctrl1",
+    "dst_addr": "127.0.0.1:6262",
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for ConnectEvents is connect|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **src_type** |The type of software initiating the connection.|string|
+| **dst_type** |The type of software receiving the connection.|string|
+| **src_id** |The id of the initiating component.|string|
+| **src_addr** |The source address of the connection.|string|
+| **dst_id** |The id of the receiving component.|string|
+| **dst_addr** |The destination address of the connection.|string|
+
+
+## EntityChange
+
+**Namespace:** `entityChange` 
+
+An EntityChangeEvent is emitted when a entity in the data model changes.
+
+Valid entity change event types are:
+  - created
+  - updated
+  - deleted
+  - committed
+
+Entity change events happen in two parts. First the created,updated or deleted event is
+emitted. This happens inside a transaction. After the transaction is committed, a
+committed event with the same event id is generated. This lets the event consumer know
+that the event is finalized. All changes within a transaction will share the same event
+id. If a new event id is seen before the previous event is committed, that indicates
+that the transaction was rolled back.
+
+
+<details>
+<summary>Example: Service Created Event</summary>
+```text
+{
+    "namespace": "entityChange",
+    "event_src_id": "ctrl1",
+    "timestamp": "2023-05-11T21:41:47.128588927-04:00",
+    "eventId": "326faf6c-8123-42ae-9ed8-6fd9560eb567",
+    "eventType": "created",
+    "metadata": {
+        "author": {
+            "type": "identity",
+            "id": "ji2Rt8KJ4",
+            "name": "Default Admin"
+        },
+        "source": {
+            "type": "rest",
+            "auth": "edge",
+            "localAddr": "localhost:1280",
+            "remoteAddr": "127.0.0.1:37578",
+            "method": "POST"
+        },
+        "version": "v0.0.0"
+    },
+    "entityType": "services",
+    "isParentEvent": false,
+    "initialState": null,
+    "finalState": {
+        "id": "6S0bCGWb6yrAutXwSQaLiv",
+        "createdAt": "2023-05-12T01:41:47.128138887Z",
+        "updatedAt": "2023-05-12T01:41:47.128138887Z",
+        "tags": {},
+        "isSystem": false,
+        "name": "test",
+        "terminatorStrategy": "smartrouting",
+        "roleAttributes": [
+            "goodbye",
+            "hello"
+        ],
+        "configs": null,
+        "encryptionRequired": true
+    }
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Change Committed Event</summary>
+```text
+{
+    "namespace": "entityChange",
+    "event_src_id": "ctrl1",
+    "timestamp": "2023-05-11T21:41:47.129235443-04:00"
+    "eventId": "326faf6c-8123-42ae-9ed8-6fd9560eb567",
+    "eventType": "committed",
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for EntityChangeEvents is entityChange|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **eventId** |An identifier shared by all changes in a given transaction.|string|
+| **eventType** |The entity change event type. See above for valid values.|string|
+| **metadata** |metadata will include information about who initiated the change and how.|map of string -> object|
+| **entityType** |The type of the entity being changed.|string|
+| **isParentEvent** |True if the entity type has a parent type (like services and routers), and this event only contains the parent data.|boolean|
+| **initialState** |The state before the change. Will be empty for creates.|object|
+| **finalState** |The state after the change. Will be empty for deletes.|object|
+
+
+## EntityCount
+
+**Namespace:** `entityCount` 
+
+A EntityCountEvent is emitted on a configurable interval. It contains
+the entity counts for all the entity types in the data model.
+
+Note: In version prior to 1.4.0, the namespace was `edge.entityCounts`
+
+
+<details>
+<summary>Example: Entity Count Event</summary>
+```text
+{
+    "namespace": "entityCount",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-16T20:34:47.281325752-05:00",
+    "counts": {
+        "apiSessionCertificates": 0,
+        "apiSessions": 1,
+        "authPolicies": 1,
+        "authenticators": 5,
+        "cas": 0,
+        "configTypes": 6,
+        "configs": 4,
+        "controllers": 0,
+        "edgeRouterPolicies": 7,
+        "enrollments": 11,
+        "eventualEvents": 0,
+        "externalJwtSigners": 0,
+        "identities": 16,
+        "identityTypes": 2,
+        "mfas": 0,
+        "postureCheckTypes": 5,
+        "postureChecks": 0,
+        "revocations": 0,
+        "routers": 7,
+        "routers.edge": 7,
+        "serviceEdgeRouterPolicies": 1,
+        "servicePolicies": 4,
+        "services": 2,
+        "services.edge": 2,
+        "sessions": 0,
+        "terminators": 0
+    },
+    "error": ""
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for EntityCountEvents is entityCount|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **counts** |Map of entity type to the number of entities of that type that currently exist in the data model.|map of string -> number (int64)|
+| **error** |If an error is encountered while collecting entity counts, it will be reported here.|string|
+
+
+## Link
+
+**Namespace:** `link` 
+
+A LinkEvent will be emitted for various link lifecycle events.
+
+Note: In version prior to 1.4.0, the namespace was `fabric.links`
+
+Valid values for link event types are:
+  - routerLinkNew - A router established a new link, or is syncing the controller with link information after a restart/reconnect.
+  - fault - a link has closed due to a link fault
+  - duplicate - a link was removed because it was a duplicate. Happens when routers dial each other at the same time.
+  - routerLinkKnown - A router informed the controller of a link, but the controller already knew about it.
+  - routerLinkDisconnectedDest - A router created a link, but the destination router isn't currently connected to the controller.
+  - dialed - Deprecated. Happens when a link listener has been dialed. Only relevant if using legacy controller managed links.
+  - connected - Deprecated. Happens when a link is connected. Only generated when using legacy controller managed links.
+
+
+<details>
+<summary>Example: Router Link New Event</summary>
+```text
+{
+    "namespace": "fabric.links",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-23T16:19:26.879417243-05:00",
+    "event_type": "routerLinkNew",
+    "link_id": "2Wea35TgSfWbh3P1wmEyLd",
+    "src_router_id": "5g2QrZxFcw",
+    "dst_router_id": "E0IAgBVdmn",
+    "protocol": "dtls",
+    "dial_address": "dtls:127.0.0.1:4024",
+    "cost": 1
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Link Faulted Event</summary>
+```text
+{
+    "namespace": "link",
+    "event_src_id": "ctrl1",
+    "timestamp": "2022-07-15T18:10:19.973867809-04:00",
+    "event_type": "fault",
+    "link_id": "6slUYCqOB85YTfdiD8I5pl",
+    "src_router_id": "YPpTEd8JP",
+    "dst_router_id": "niY.XmLArx",
+    "protocol": "tls",
+    "dial_address": "tls:127.0.0.1:4023",
+    "cost": 1
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Router Link Known Event</summary>
+```text
+{
+    "namespace": "link",
+    "event_src_id": "ctrl1",
+    "timestamp": "2022-07-15T18:10:19.974177638-04:00",
+    "event_type": "routerLinkKnown",
+    "link_id": "47kGIApCXI29VQoCA1xXWI",
+    "src_router_id": "niY.XmLArx",
+    "dst_router_id": "YPpTEd8JP",
+    "protocol": "tls",
+    "dial_address": "tls:127.0.0.1:4024",
+    "cost": 1
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for LinkEvents is link|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **event_type** |The link event type. See above for valid values.|string|
+| **link_id** |The link identifier.|string|
+| **src_router_id** |The id of the dialing router.|string|
+| **dst_router_id** |The id of the accepting router.|string|
+| **protocol** |The link protocol.|string|
+| **dial_address** |The address dialed.|string|
+| **cost** |The link cost.|number (int32)|
+| **connections** |The connections making up the link.|list of [LinkConnection](#linkconnection)|
+
+### LinkConnection
+
+A LinkConnection describes a physical connection that forms a link. A Link may be made
+up of multiple LinkConnections.
+
+Link ids currently have three valid values:
+  - single - meaning the link has a single connection
+  - payload - a connection used only for payloads
+  - ack - a connection used only for acks
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **id** |The connection identifier. |string|
+| **local_addr** |The connection address on dialing router side. |string|
+| **remote_addr** |The connection address on accepting router side. |string|
+
+
+## Metrics
+
+**Namespace:** `metrics` 
+
+A MetricsEvent represents a point in time snapshot of a metric from a controller or router.
+
+Valid values for metric type are:
+  - intValue
+  - floatValue
+  - meter
+  - histogram
+  - timer
+
+
+<details>
+<summary>Example: The service policy enforcer deletes meter</summary>
+```text
+{
+    "namespace": "metrics",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T02:45:21.890823877Z",
+    "metric_type": "meter",
+    "source_id": "ctrl_client",
+    "version": 3,
+    "metric": "service.policy.enforcer.run.deletes",
+    "metrics": {
+        "count": 0,
+        "m15_rate": 0,
+        "m1_rate": 0,
+        "m5_rate": 0,
+        "mean_rate": 0
+    },
+    "source_event_id": "c41fbf8d-cd14-4b8b-ae7b-0f0e93e2021d"
+}
+```
+</details>
+
+
+<details>
+<summary>Example: The api session create timer</summary>
+```text
+{
+    "namespace": "metrics",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T02:45:21.890823877Z",
+    "metric_type": "timer",
+    "source_id": "ctrl_client",
+    "version": 3,
+    "metric": "api-session.create",
+    "metrics": {
+        "count": 1,
+        "m15_rate": 0.0006217645754885097,
+        "m1_rate": 0.000002754186169011774,
+        "m5_rate": 0.0005841004612303224,
+        "max": 7598246,
+        "mean": 7598246,
+        "mean_rate": 0.0018542395091967903,
+        "min": 7598246,
+        "p50": 7598246,
+        "p75": 7598246,
+        "p95": 7598246,
+        "p99": 7598246,
+        "p999": 7598246,
+        "p9999": 7598246,
+        "std_dev": 0,
+        "variance": 0
+    },
+    "source_event_id": "c41fbf8d-cd14-4b8b-ae7b-0f0e93e2021d"
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for MetricsEvents is metrics|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **metric_type** |The type of metrics event. See above for valid values.|string|
+| **source_id** |The id of the router or controller which emitted the metric.|string|
+| **source_entity_id** |If this metric is associated with an entity, such as link, this will contain the entity id.|string|
+| **version** |The version of the metrics format. The current version is 3.|number (uint32)|
+| **metric** |The name of the metric.|string|
+| **metrics** |The values that copmrise the metrics.|map of string -> object|
+| **tags** |Some metrics include additional metadata. For example link metrics may include source and destination.|map of string -> string|
+| **source_event_id** |Events will often be collected together on a schedule. This is a correlation id so that events can be tied together with other events emitted at the same time.|string|
+
+
+## Router
+
+**Namespace:** `router` 
+
+A RouterEvent is generated when a router comes online or goes offline.
+
+Note: In version prior to 1.4.0, the namespace was `fabric.routers`
+
+Valid values for router event type are:
+  - router-online
+  - router-offline
+
+
+<details>
+<summary>Example: Router online event</summary>
+```text
+{
+    "namespace": "router",
+    "event_src_id": "ctrl1",
+    "timestamp": "2021-04-22T11:26:31.99299884-04:00",
+    "event_type": "router-online",
+    "router_id": "JAoyjafljO",
+    "router_online": true
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Router offline event</summary>
+```text
+{
+    "namespace": "router",
+    "event_src_id": "ctrl1",
+    "timestamp": "2021-04-22T11:26:41.335114358-04:00",
+    "event_type": "router-offline",
+    "router_id": "JAoyjafljO",
+    "router_online": false
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for RouterEvents is router|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **event_type** |The router event type.|string|
+| **router_id** |The router identifier.|string|
+| **router_online** |Indicates whether the router is online or not. Redundant given the router event type. Should likely be removed.|boolean|
+
+
+## Sdk
+
+**Namespace:** `sdk` 
+
+An SdkEvent is emitted when an sdk's connectivity to routers changes.
+
+Valid values for sdk event type are:
+  - sdk-online - identity is online
+  - sdk-offline - identity is offline
+  - sdk-status-unknown - status is unknown because the routers that reported the identity online are not connected to the controller
+
+
+<details>
+<summary>Example: SDK identity is online</summary>
+```text
+{
+    "namespace": "sdk",
+    "event_src_id": "ctrl1",
+    "event_type" : "sdk-online",
+    "identity_id": "ji2Rt8KJ4",
+    "timestamp": "2024-10-02T12:17:39.501821249-04:00"
+}
+```
+</details>
+
+
+<details>
+<summary>Example: SDK identity online status is unknown</summary>
+```text
+{
+    "namespace": "sdk",
+    "event_src_id": "ctrl1",
+    "event_type" : "sdk-status-unknown",
+    "identity_id": "ji2Rt8KJ4",
+    "timestamp": "2024-10-02T12:17:40.501821249-04:00"
+}
+```
+</details>
+
+
+<details>
+<summary>Example: SDK identit is offline</summary>
+```text
+{
+    "namespace": "sdk",
+    "event_src_id": "ctrl1",
+    "event_type" : "sdk-offline",
+    "identity_id": "ji2Rt8KJ4",
+    "timestamp": "2024-10-02T12:17:41.501821249-04:00"
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for SdkEvents is sdk|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **event_type** |The sdk event type. See above for valid values.|string|
+| **identity_id** |The id of the identity whose connectivity state has changed.|string|
+
+
+## Service
+
+**Namespace:** `service` 
+
+A ServiceEvent is emitted for service and terminator level metrics which are collected per some interval.
+
+Note: In version prior to 1.4.0, the config key was `services`, but the namespace was `service.events`
+
+Value values for the service event type are:
+  - service.dial.success
+  - service.dial.fail
+  - service.dial.timeout
+  - service.dial.error_other
+  - service.dial.terminator.timeout
+  - service.dial.terminator.connection_refused
+  - service.dial.terminator.invalid
+  - service.dial.terminator.misconfigured
+
+
+<details>
+<summary>Example: Dial Success for a specific service and terminator</summary>
+```text
+{
+    "namespace": "service",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2024-10-02T12:17:40.501821249-04:00"
+    "version": 2,
+    "event_type": "service.dial.success",
+    "terminator_id": "2xFBuwwzJzAXuw5lOPnDwr",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "count": 1,
+    "interval_start_utc": 1737140460,
+    "interval_length": 60
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Dail failures or type 'Other' for a specific service</summary>
+```text
+{
+    "namespace": "service",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2024-10-02T12:17:40.501821249-04:00"
+    "version": 2,
+    "event_type": "service.dial.error_other",
+    "terminator_id": "",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "count": 1,
+    "interval_start_utc": 1737140580,
+    "interval_length": 60
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for ServiceEvents is service|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **version** |The event version. The current version is 2.|number (uint32)|
+| **event_type** |The services event type. See above for valid values.|string|
+| **terminator_id** |The terminator id, if this is representing a terminator specific metric.|string|
+| **service_id** |The service identifier.|string|
+| **count** |The number of events that have happened in the given time interval|number (uint64)|
+| **interval_start_utc** |The start time of the interval. It is represented as Unix time, number of seconds since the beginning of the current epoch.|number (int64)|
+| **interval_length** |The interval length in seconds.|number (uint64)|
+
+
+## Session
+
+**Namespace:** `session` 
+
+A SessionEvent is emitted when a session is created or deleted.
+
+Note: In version prior to 1.4.0, the namespace was `edge.sessions`
+
+Valid values for session type are:
+  - created
+  - deleted
+
+
+<details>
+<summary>Example: Bind Session created event</summary>
+```text
+{
+    "namespace": "session",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:29:53.204988284-05:00",
+    "event_type": "created",
+    "session_type": "Bind",
+    "id": "cm611bn75000jdhj9s5xrwynr",
+    "token": "4ed77b84-650e-4b4b-9fbb-2466c9c94abb",
+    "api_session_id": "cm611bn6l000hdhj9urp9xlnw",
+    "identity_id": "IahyE.5Scw",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP"
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Bind session deleted event</summary>
+```text
+{
+    "namespace": "session",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:30:08.593650693-05:00",
+    "event_type": "deleted",
+    "session_type": "Bind",
+    "id": "cm611bgxa0008dhj9k3yo3vox",
+    "token": "f8a447a2-2bd0-4821-8142-27c1770d06ab",
+    "api_session_id": "cm611bgwn0006dhj9m4cv1obf",
+    "identity_id": "IahyE.5Scw",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP"
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for SessionEvents is session|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **event_type** |The type of session event. See above for valid values.|string|
+| **session_type** |The session type (dial or bind).|string|
+| **id** |The session identifier.|string|
+| **token** |The session token.|string|
+| **api_session_id** |The id of the api session used to create this session.|string|
+| **identity_id** |The if of the identity on whose behalf the session was created.|string|
+| **service_id** |The id of the service that this session is claiming access to.|string|
+
+
+## Terminator
+
+**Namespace:** `terminator` 
+
+A TerminatorEvent is emitted at various points in the terminator lifecycle.
+
+Note: In version prior to 1.4.0, the namespace was `fabric.terminators`
+
+Valid values for terminator event types are:
+  - created - Note: replaced by entity change events
+  - updated - Note: replaced by entity changes events
+  - deleted - Note: replaced by entity change events
+  - router-online
+  - router-offline
+
+
+<details>
+<summary>Example: Terminator created event</summary>
+```text
+{
+    "namespace": "terminator",
+    "event_type": "created",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:35:33.691240129-05:00",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "terminator_id": "2c9DGllUFx2GIFWFF5g5FP",
+    "router_id": "5g2QrZxFcw",
+    "host_id": "IahyE.5Scw",
+    "router_online": true,
+    "precedence": "default",
+    "static_cost": 0,
+    "dynamic_cost": 0,
+    "total_terminators": 1,
+    "usable_default_terminators": 1,
+    "usable_required_terminators": 0
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Terminator router offline event</summary>
+```text
+{
+    "namespace": "terminator",
+    "event_type": "router-offline",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:35:41.120951142-05:00",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "terminator_id": "2c9DGllUFx2GIFWFF5g5FP",
+    "router_id": "5g2QrZxFcw",
+    "host_id": "IahyE.5Scw",
+    "router_online": false,
+    "precedence": "default",
+    "static_cost": 0,
+    "dynamic_cost": 0,
+    "total_terminators": 1,
+    "usable_default_terminators": 0,
+    "usable_required_terminators": 0
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Terminator router online event</summary>
+```text
+{
+    "namespace": "terminator",
+    "event_type": "router-online",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:35:42.438815052-05:00",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "terminator_id": "2c9DGllUFx2GIFWFF5g5FP",
+    "router_id": "5g2QrZxFcw",
+    "host_id": "IahyE.5Scw",
+    "router_online": true,
+    "precedence": "default",
+    "static_cost": 0,
+    "dynamic_cost": 0,
+    "total_terminators": 1,
+    "usable_default_terminators": 1,
+    "usable_required_terminators": 0
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Terminator Deleted Event</summary>
+```text
+{
+    "namespace": "terminator",
+    "event_type": "deleted",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:35:42.448238469-05:00",
+    "service_id": "3pjMOKY2icS8fkQ1lfHmrP",
+    "terminator_id": "2c9DGllUFx2GIFWFF5g5FP",
+    "router_id": "5g2QrZxFcw",
+    "host_id": "IahyE.5Scw",
+    "router_online": true,
+    "precedence": "default",
+    "static_cost": 0,
+    "dynamic_cost": 0,
+    "total_terminators": 0,
+    "usable_default_terminators": 0,
+    "usable_required_terminators": 0
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for TerminatorEvents is terminator|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **event_type** |The type of terminator event. For valid values see above.|string|
+| **service_id** |The id of the service that this terminator belongs to.|string|
+| **terminator_id** |The terminator's identifier.|string|
+| **router_id** |The id of router that the terminator lives on.|string|
+| **host_id** |Optional identifier indicating what is hosting the terminator. If hosted by the edge, will be an identity id.|string|
+| **router_online** |Indicates if the terminator's router is online.|boolean|
+| **precedence** |The terminator precedence.|string|
+| **static_cost** |The terminator's static cost.|number (uint16)|
+| **dynamic_cost** |The terminator's dynamic cost (usually based on the number of circuits currently on the terminator).|number (uint16)|
+| **total_terminators** |The total number of terminators that the service has.|number (int)|
+| **usable_default_terminators** |The number of online terminators with a default precedence for the service.|number (int)|
+| **usable_required_terminators** |The number of online terminators with a required precedence for the service.|number (int)|
+
+
+## UsageV2
+
+**Namespace:** `usage` 
+
+A UsageEventV2 is emitted for service usage interval metrics in the v2 format.
+
+Note: In version prior to 1.4.0, the namespace was `fabric.usage`
+
+Valid values for the usage event v2 type are:
+  - usage.ingress.rx - A read from an external connection to an initiating router
+  - usage.ingress.tx - A write to an external connection from an initiating router
+  - usage.egress.rx  - A read from an external connection to an egress router
+  - usage.egress.tx  - A write to an external connection from an egress router
+  - usage.fabric.rx  - A read from a fabric link to a router
+  - usage.fabric.tx  - A write to a fabric link from a router
+
+
+<details>
+<summary>Example: Ingress Data Received Usage Event</summary>
+```text
+{
+    "namespace": "usage",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:35:42.448238469-05:00",
+    "version": 2,
+    "event_type": "usage.ingress.rx",
+    "source_id": "5g2QrZxFcw",
+    "circuit_id": "gZrStElHY",
+    "usage": 47,
+    "interval_start_utc": 1737145920,
+    "interval_length": 60,
+    "tags": {
+        "clientId": "haxn9lB0uc",
+        "hostId": "IahyE.5Scw",
+        "serviceId": "3pjMOKY2icS8fkQ1lfHmrP"
+    }
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Fabric Data Sent Usage Event</summary>
+```text
+{
+    "namespace": "usage",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:35:42.448238469-05:00",
+    "version": 2,
+    "event_type": "usage.fabric.tx",
+    "source_id": "5g2QrZxFcw",
+    "circuit_id": "gZrStElHY",
+    "usage": 47,
+    "interval_start_utc": 1737145920,
+    "interval_length": 60,
+    "tags": null
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for UsageEventV2s is usage|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **version** |The usage events version, which will always be 2 for this format.|number (uint32)|
+| **event_type** |The type of usage. For valid values see above.|string|
+| **source_id** |The id of the router reporting the usage|string|
+| **circuit_id** |The circuit id whose usage is being reported.|string|
+| **usage** |The number of bytes of usage in the interval.|number (uint64)|
+| **interval_start_utc** |The start time of the interval. It is represented as Unix time, number of seconds since the beginning of the current epoch.|number (int64)|
+| **interval_length** |The interval length in seconds.|number (uint64)|
+| **tags** |Metadata, which may include things like the client and hosting identities and the service id.|map of string -> string|
+
+
+## UsageV3
+
+**Namespace:** `usage` 
+
+A UsageEventV3 is emitted for service usage interval metrics in the v3 format.
+
+Note: In version prior to 1.4.0, the namespace was `fabric.usage`
+
+Valid values for the usage types are:
+  - ingress.rx - A read from an external connection to an initiating router
+  - ingress.tx - A write to an external connection from an initiating router
+  - egress.rx  - A read from an external connection to an egress router
+  - egress.tx  - A write to an external connection from an egress router
+  - fabric.rx  - A read from a fabric link to a router
+  - fabric.tx  - A write to a fabric link from a router
+
+
+<details>
+<summary>Example: Untagged Usage Data Event</summary>
+```text
+{
+    "namespace": "usage",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:35:42.448238469-05:00",
+    "version": 3,
+    "source_id": "5g2QrZxFcw",
+    "circuit_id": "bcRu0EQFe",
+    "usage": {
+        "fabric.rx": 47,
+        "fabric.tx": 47
+    },
+    "interval_start_utc": 1737146220,
+    "interval_length": 60,
+    "tags": null
+}
+```
+</details>
+
+
+<details>
+<summary>Example: Tagged Usage Data Event</summary>
+```text
+{
+    "namespace": "usage",
+    "event_src_id": "ctrl_client",
+    "timestamp": "2025-01-17T12:35:42.448238469-05:00",
+    "version": 3,
+    "source_id": "5g2QrZxFcw",
+    "circuit_id": "bcRu0EQFe",
+    "usage": {
+        "ingress.rx": 47,
+        "ingress.tx": 47
+    },
+    "interval_start_utc": 1737146220,
+    "interval_length": 60,
+    "tags": {
+        "clientId": "haxn9lB0uc",
+        "hostId": "IahyE.5Scw",
+        "serviceId": "3pjMOKY2icS8fkQ1lfHmrP"
+    }
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for UsageEventV3s is usage|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **version** |The usage events version, which will always be 3 for this format.|number (uint32)|
+| **source_id** |The id of the router reporting the usage|string|
+| **circuit_id** |The circuit id whose usage is being reported.|string|
+| **usage** |Map of usage type to amount number of bytes used in the given interval. For valid values for usage type, see above.|map of string -> number (uint64)|
+| **interval_start_utc** |The start time of the interval. It is represented as Unix time, number of seconds since the beginning of the current epoch.|number (int64)|
+| **interval_length** |The interval length in seconds.|number (uint64)|
+| **tags** |Metadata, which may include things like the client and hosting identities and the service id.|map of string -> string|
+
+
