@@ -19,7 +19,6 @@ EXCLUDE_PATTERN="(http://|https://("
 while read -r; do
     EXCLUDE_PATTERN+="${REPLY}|"
 done<<EOF
-EXWPKK5PV4-dsn.algolia.net
 www\.google\.com/search
 www\.googletagmanager\.com
 play\.google\.com
@@ -34,6 +33,7 @@ www\.reddit\.com/r/openziti
 .*\.home
 .*\.lan
 twitter\.com/(OpenZiggy|OpenZiti)
+x\.com/(OpenZiggy|OpenZiti)
 landing.openziti.io/
 fonts.gstatic.com/
 github\.com/.*#
@@ -41,6 +41,7 @@ github\.com/.*#
 openziti.io(/comments)?/feed/
 developer.chrome.com/origintrials/#/register_trial/.*
 entra\.microsoft\.com
+github\.com/openziti/ziti-tunnel-sdk-c%3E
 EOF
 
 # drop the trailing pipe
