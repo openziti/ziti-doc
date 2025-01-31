@@ -131,3 +131,8 @@ The following limitations currently apply:
 
 Improving routing is an ongoing focus for the OpenZiti project. 
 Issues related to routing improvments can be found on the [Routing Project Board](https://github.com/orgs/openziti/projects/13/views/1).
+
+## Quickstart
+
+The quickstart supports running in clustered mode, see 
+[this guide for more information](https://github.com/openziti/ziti/blob/main/doc/ha/quickstart.md).
