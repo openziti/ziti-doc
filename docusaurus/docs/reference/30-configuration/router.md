@@ -122,6 +122,8 @@ The `ctrl` section configures how the router will connect to the controller.
   See [heartbeats](./conventions.md#heartbeats).
 - `options` - a set of option which includes the below options and those defined
   in [channel options](conventions.md#channel)
+- `endpointsFile` - (optional, 'config file dir'/endpoints) - File location to save the current 
+  known set of controller endpoints, when an endpoints update has been received from a controller.
 
 Example:
 
@@ -163,6 +165,9 @@ Each dialer currently supports a number of [shared options](conventions.md#xgres
 
 The `edge` section contains configuration that pertain to edge functionality. This section must be
 present to enable edge functionality (e.g. listening for edge SDK connections, tunnel binding modes).
+
+- `db` - (optional, `<path-to-config-file>.proto.gzip`) - Configures where the router data model will be snapshotted to
+- `dbSaveIntervalSeconds` - (optional, 30s) - Configures how the router data model will be snapshotted
 
 Example:
 
@@ -209,7 +214,6 @@ routers at least one valid SAN must be provided.
     - `ip` - (optional) - an array of IP SAN entries
     - `uri` - (optional) - an array of URI SAN entries
     - `email`  - (optional) - an array of email SAN entries
-
 
 ### `forwarder`
 

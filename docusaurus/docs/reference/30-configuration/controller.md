@@ -477,7 +477,7 @@ profile:
 
 The raft section enables running multiple controllers in a cluster.
 
-- `bootstrapMembers` - (optional) Only used when bootstrapping the cluster. List of initial clusters
+- `initialMembers` - (optional) Only used when bootstrapping the cluster. List of initial clusters
   members. Should only be set on one of the controllers in the cluster.
 - `commandHandler` - (optional)
     - `maxQueueSize` - (optional, 1000) max size of the queue for processing incoming raft log
@@ -510,10 +510,12 @@ The raft section enables running multiple controllers in a cluster.
   be used to bring other nodes up to date that are only slightly behind, without having to send the
   full snapshot. This is a cluster wide value and should be consistent across nodes in the cluster.
   Otherwise the value from the most recently started controller will win.
+- `warnWhenLeaderlessFor` - (optional, 1m) - Emits a warning log message if a controller is part of
+   a cluster with no leader for a duration which exceeds this threshold. 
 
 ```text
 raft:
-  bootstrapMembers:
+  initialMembers:
     - tls:127.0.0.1:6262
     - tls:127.0.0.1:6363
     - tls:127.0.0.1:6464

@@ -1,0 +1,5 @@
+label: Controller HA
+position: 22
+link:
+  type: doc
+  id: reference/ha/overview

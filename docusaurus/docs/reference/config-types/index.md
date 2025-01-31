@@ -1,6 +1,6 @@
 ---
 title: Builtin Config Types
-sidebar_position: 10
+sidebar_position: 20
 ---
 
 ## Overview
