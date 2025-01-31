@@ -26,9 +26,9 @@ be configured.
 
 ```yaml
 ctrl:
-  listener: tls:0.0.0.0:6262
+  listener: tls:0.0.0.0:1280
   options:
-    advertiseAddress: tls:ctrl1.ziti.example.com:6262
+    advertiseAddress: tls:ctrl1.ziti.example.com:1280
 ```
  
 Finally, cluster-capable SDK clients use OIDC for authentication, so an OIDC endpoint must be configured.
