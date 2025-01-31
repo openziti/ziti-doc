@@ -1,0 +1,6 @@
+label: Bootstrapping
+position: 10
+link:
+  type: doc
+  id: reference/ha/bootstrapping/overview
+

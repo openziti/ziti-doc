@@ -1,4 +1,9 @@
-# Controller HA 
+---
+sidebar_label: Overview
+sidebar_position: 5
+---
+
+# Controller Clustering
 
 ## Overview
 

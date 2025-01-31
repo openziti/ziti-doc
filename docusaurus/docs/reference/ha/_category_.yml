@@ -1,5 +1,2 @@
-label: Controller HA
+label: Controller Clustering
 position: 22
-link:
-  type: doc
-  id: reference/ha/overview
