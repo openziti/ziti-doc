@@ -2170,6 +2170,7 @@ pre.off {
   border-bottom: 1px solid #ccc;
 }
 
-pre code {
+.theme-code-block {
   border: 1px solid var(--ifm-background-surface-color-dark);
+  margin-top: 5px;
 }
