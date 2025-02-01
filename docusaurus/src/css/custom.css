@@ -2169,3 +2169,8 @@ pre.off {
   font-size: 1.1em;
   border-bottom: 1px solid #ccc;
 }
+
+.theme-code-block {
+  border: 1px solid var(--ifm-background-surface-color-dark);
+  margin-top: 5px;
+}
