@@ -3,6 +3,8 @@ title: Console Deployment
 sidebar_label: Console
 ---
 
+import ConsoleAuthAdminClientCertificate from '/docs/reference/40-command-line/_console-auth-admin-client-certificate.mdx';
+
 ## Installation
 
 ### Install the Package
@@ -60,3 +62,7 @@ Console versions >= 3.0.0 from GitHub may be used.
     ```
 
 1. Console certificate option - The console is served from the controller's API and can be used with the default API certificate. The controller can be configured to present a different certificate for the console when the API is accessed by a distinct URL for the console. For more information about using alternative server certs with the controller, see: [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity).
+
+## Authenticate with an Admin Client Certificate
+
+<ConsoleAuthAdminClientCertificate />
