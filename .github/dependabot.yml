@@ -1,7 +1,7 @@
 version: 2
 updates:
-  - package-ecosystem: "npm" # Change this based on your dependency type
-    directory: "/" # Adjust based on where your dependencies are
+  - package-ecosystem: "npm"
+    directory: "/docusaurus"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 1
