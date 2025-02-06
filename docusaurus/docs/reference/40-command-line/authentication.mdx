@@ -3,24 +3,18 @@ title: Authentication
 sidebar_label: Authentication
 ---
 
+import CliDefaultAdminLogin from './_cli-default-admin-login.md'
+import CliAdmin2CertLogin from './_cli-admin2-cert-login.mdx';
 import ConsoleAuthAdminClientCertificate from './_console-auth-admin-client-certificate.mdx';
 
-## Create an Admin Identity
+## Login as the Default Admin
 
-The default admin identity is initialized with a password. Store the password in a secure location and create a new admin identity for certificate authentication.
+<CliDefaultAdminLogin/>
 
-```text title="Create an admin2 identity for certificate authentication"
-ziti edge create identity admin2 --admin --jwt-output-file admin2.jwt
-```
+## Create a Second Admin Identity for Certificate Authentication
 
-```text title="Copy token to the admin device and enroll"
-ziti edge enroll admin2.jwt
-```
+<CliAdmin2CertLogin/>
 
-```text title="Log in to https://ctrl1.ziti.example.com:443 with an identity file"
-ziti edge login ctrl1.ziti.example.com --file admin2.json
-```
-
-## Authenticate with an Admin Client Certificate
+## Login to the Console with an Admin Client Certificate
 
 <ConsoleAuthAdminClientCertificate />
