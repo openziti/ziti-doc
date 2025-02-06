@@ -4,7 +4,8 @@ title: Router Deployment
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CliLogin from '/docs/_cli-login.md'
+import CliDefaultAdminLogin from '/docs/reference/40-command-line/_cli-default-admin-login.md';
+import CliAdmin2CertLogin from '/docs/reference/40-command-line/_cli-admin2-cert-login.mdx';
 import LinuxPackageRepo from '/docs/_linux-package-repo.mdx';
 
 This article is about deploying a router as a Linux system service. [The router introduction](/learn/introduction/03-components.mdx#router) may be helpful to read first.
@@ -228,3 +229,11 @@ Learn more in [the logging reference](/reference/40-logging.mdx).
     ```
 
 1. Remove any firewall exceptions you created.
+
+## Log in with the Default Admin Password
+
+<CliDefaultAdminLogin/>
+
+## Create a Second Admin Identity for Certificate Authentication
+
+<CliAdmin2CertLogin/>
