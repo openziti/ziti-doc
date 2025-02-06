@@ -15,6 +15,7 @@ The controller configuration file has several top level configuration sections t
 related configuration settings.
 
 - [`ctrl`](#ctrl) - define control channel listener
+- [`cluster`](#cluster) - allows configuring the controller in an controller cluster
 - [`db`](#db) - specifies database file location
 - [`edge`](#edge) - configures edge specific functionality
 - [`events`](#events) - allows configuration of event output
@@ -23,7 +24,6 @@ related configuration settings.
   listening, and CA bundles
 - [`network`](#network) - set network level cost values
 - [`profile`](#profile) - enables profiling of controller memory and CPU statistics
-- [`raft`](#raft) - allows configuring the controller in an HA cluster
 - [`trace`](#trace) - adds a peek handler to all controller messaging for debug purposes
 - [`web`](#web) - configures API presentation exposure
 - [`v`](#v) - A special section to note the version of the configuration file, only `v: 3` is
@@ -32,13 +32,13 @@ related configuration settings.
 The standard OpenZiti experience minimally requires the following sections:
 
 - `ctrl`
-- `db` or `raft`
+- `db` or `cluster`
 - `identity`
 - `edge`
 - `web`
 - `v`
 
-Of those values, to start the controller only the `ctrl`, `db` or `raft`, `v`, and `identity`
+Of those values, to start the controller only the `ctrl`, `db` or `cluster`, `v`, and `identity`
 sections are required. However, not including the `edge` section will start the controller in "
 fabric only" mode and will not support any edge functionality or concepts (identities, JWT
 enrollment, 3rd Party CAs, policies, etc.). Not including the `web` section will result in none of
@@ -91,7 +91,7 @@ This includes the protocol(s) used for router connections and how those connecti
   See [addressing](./conventions.md#addressing).
 - `options` - a set of option which includes the below options and those defined
   in [channel options](./conventions.md#channel)
-  - `advertiseAddress` - (required when raft is enabled) - configures the address at which this
+  - `advertiseAddress` - (required when controller clustering is enabled) - configures the address at which this
     controller should be reachable by other controllers in the cluster
   - `newListener` - (optional) an `<protocol>:<interface>:<port>` address that is sent to routers
         to indicate a controller address migration. Should only be specified when the new listener
@@ -473,12 +473,10 @@ profile:
     intervalMs: 150000
 ```
 
-### `raft`
+### `cluster`
 
-The raft section enables running multiple controllers in a cluster.
+The cluster section enables running multiple controllers in a cluster.
 
-- `initialMembers` - (optional) Only used when bootstrapping the cluster. List of initial clusters
-  members. Should only be set on one of the controllers in the cluster.
 - `commandHandler` - (optional)
     - `maxQueueSize` - (optional, 1000) max size of the queue for processing incoming raft log
       entries
@@ -514,11 +512,7 @@ The raft section enables running multiple controllers in a cluster.
    a cluster with no leader for a duration which exceeds this threshold. 
 
 ```text
-raft:
-  initialMembers:
-    - tls:127.0.0.1:6262
-    - tls:127.0.0.1:6363
-    - tls:127.0.0.1:6464
+cluster:
   commandHandler:
     maxQueueSize: 1000
   commitTimeout: 50ms

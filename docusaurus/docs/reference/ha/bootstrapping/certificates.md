@@ -6,48 +6,59 @@ sidebar_position: 20
 # Controller Certificates
 
 For controllers to communicate and trust one another, they need certificates that have
-been generated with the correct attribute and relationships.
+been generated with the correct attributes and relationships.
+
+## Glossary
+
+### SPIFFE ID
+
+A SPIFFE ID is a specially formatted URI which is intended to be embedded in a certificates. Applications
+use these identifiers to figure out the following about the applications connecting to them.
+
+1. What organization the peer belongs to
+1. What type of application the peer is
+1. The application's unique identifier
+
+Controller certificates use SPIFFE IDs to allow the controllers to identify each during mTLS negotiation.
+
+See [SPIFFE IDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-id) for more information.
+
+### Trust domain
+
+A [trust domain](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#trust-domain)
+ is the part of a SPIFFE ID that indicates the organization that an identity belongs to. 
 
 ## Requirements
 
 1. The certificates must have a shared root of trust
-2. The controller client and server certificates must contain a 
-   [SPIFFE ID](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-id)
+1. The controller client and server certificates must contain a SPIFFE ID.
+1. The SPIFFE ID must be set as the only URI in the `X509v3 Subject Alternative Name` field in the
+   certificate.
+1. The SPIFFE ID must have the following format: `spiffe://<trust domain>/controller/<controller id>`
 
-## Steps to Certificate Creation
-There are many ways to set up certificates, so this will just cover a recommended configuration.
-
-The primary thing to ensure is that controllers have a shared root of trust. 
-A standard way of generating certs would be as follows:
-
-1. Create a self-signed root CA
-1. Create an intermediate CA for each controller
-1. Issue a server cert using the intermediate CA for each controller
-1. Issue a client cert using the intermediate CA for each controller
-
-Note that controller server and client certs must contain a SPIFFE id of the form
-
-```
-spiffe://<trust domain>/controller/<controller id>
-```
-
-So if your trust domain is `example.com` and your controller id is `ctrl1`, then your SPIFFE id
+So if the trust domain is `example.com` and the controller id is `ctrl1`, then the SPIFFE id
 would be:
 
 ```
 spiffe://example.com/controller/ctrl1
 ```
 
-**SPIFFE ID Notes:**
+## Steps to Certificate Creation
+There are many ways to set up certificates, so this will just cover an example configuration.
 
-* This ID must be set as the only URI in the `X509v3 Subject Alternative Name` field in the
-  certificate.
-* These IDs are used to allow the controllers to identify each during the mTLS negotiation.
-* The OpenZiti CLI supports creating SPIFFE IDs in your certs
-    * Use the `--trust-domain` flag when creating CAs
-    * Use the `--spiffe-id` flag when creating server or client certificates
+The primary thing to ensure is that controllers have a shared root of trust. 
+One way of generating certs would be as follows:
+
+1. Create a root CA
+1. Create an intermediate CA for each controller
+1. Issue a server cert using the intermediate CA for each controller
+1. Issue a client cert using the intermediate CA for each controller
 
 ## Example
+
+* The OpenZiti CLI supports creating SPIFFE IDs in certificates
+    * Use the `--trust-domain` flag when creating CAs
+    * Use the `--spiffe-id` flag when creating server or client certificates
 
 Using the OpenZiti PKI tool, certificates for a three node cluster could be created as follows:
 

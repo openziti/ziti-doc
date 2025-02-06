@@ -17,8 +17,8 @@ and wait for initialization. While waiting it will periodically emit a message:
 
 ```buttonless title="Output"
 [   3.323] WARNING ziti/controller/server.(*Controller).checkEdgeInitialized: the 
-Ziti Edge has not been initialized, no default admin exists.  Add this node to a 
-cluster using 'ziti agent cluster add tls:localhost:6262' against an existing 
+controller has not been initialized, no default admin exists.  Add this node to a 
+cluster using 'ziti agent cluster add tls:ctrl1.ziti.example.com:1280' against an existing 
 cluster member, or if this is the bootstrap node, run 'ziti agent controller init' 
 to configure the default admin and bootstrap the cluster
 ```
@@ -28,7 +28,7 @@ As this is the first node in the cluster, there's no existing cluster to add it 
 To add the default administrator, run:
 
 ```
-ziti agent controller init <admin username> <admin password> <admin identity name>
+ziti agent cluster init <admin username> <admin password> <admin identity name>
 ```
 
 This initializes an admin user that can be used to manage the network.
