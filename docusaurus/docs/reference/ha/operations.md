@@ -52,7 +52,6 @@ Usage:
 Available Commands:
   add                 adds a node to the controller cluster
   init                Initializes a cluster with a default administrator
-  init-from-db        Initializes a cluster using an existing database snapshot
   list                lists the nodes in the controller cluster
   remove              removes a node from the controller cluster
   restore-from-db     Restores a cluster to the state in the given database snapshot
