@@ -36,11 +36,11 @@ A [trust domain](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#tru
    certificate.
 1. The SPIFFE ID must have the following format: `spiffe://<trust domain>/controller/<controller id>`
 
-So if the trust domain is `example.com` and the controller id is `ctrl1`, then the SPIFFE id
+So if the trust domain is `ziti.example.com` and the controller id is `ctrl1`, then the SPIFFE id
 would be:
 
 ```
-spiffe://example.com/controller/ctrl1
+spiffe://ziti.example.com/controller/ctrl1
 ```
 
 ## Steps to Certificate Creation

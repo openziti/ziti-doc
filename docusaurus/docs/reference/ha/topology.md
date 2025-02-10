@@ -5,7 +5,7 @@ sidebar_position: 60
 
 # Controller Topology
 
-his document discusses cluster size and member placement.
+This document discusses cluster size and member placement.
 
 ## Number of Controllers
 
@@ -22,7 +22,7 @@ of 3 nodes is recommended.
 
 The functionality that controllers provide to clients doesn't require any specific number of controllers.
 A network manager will want to scale the number controllers based on client demand and may want to 
-place additional controllers geographically close to clusters of clients for better performance.
+place additional controllers geographically close to clients for better performance.
 
 ## Voting vs Non-Voting Members
 
@@ -41,7 +41,7 @@ reducing availability.
 
 **Requirements**
 
-1. The network should be able to withstand the loss of one voting member
+1. The network should be able to withstand the loss of one voting member.
 1. Controllers should exist in the US, EU and Asia, with two in each region. 
 
 To be able to lose one voting member, we need three voting nodes, with six nodes total.
