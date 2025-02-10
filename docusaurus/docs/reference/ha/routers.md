@@ -37,10 +37,10 @@ Note that:
 
 #### Location
 
-By defaul the endpoints file will be named `endpoints` and will be placed
+By default, the endpoints file will be named `endpoints` and will be placed
 in the same directory as the router config file.
 
-However, the file can be customized using a config file settings.
+Customize the path of the endpoints file in the config file.
 
 ```yaml
 ctrl:

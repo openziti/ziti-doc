@@ -166,7 +166,8 @@ Each dialer currently supports a number of [shared options](conventions.md#xgres
 The `edge` section contains configuration that pertain to edge functionality. This section must be
 present to enable edge functionality (e.g. listening for edge SDK connections, tunnel binding modes).
 
-- `db` - (optional, `<path-to-config-file>.proto.gzip`) - Configures where the router data model will be snapshotted to
+- `db` - (optional, `<path-to-config-file>.proto.gzip`) - path to file name where the router data model 
+  will be written as a gzipped snapshot
 - `dbSaveIntervalSeconds` - (optional, 30s) - Configures how the router data model will be snapshotted
 
 Example:
