@@ -1,0 +1,5 @@
+label: CLI
+position: 40
+link:
+  type: doc
+  id: reference/command-line/login
