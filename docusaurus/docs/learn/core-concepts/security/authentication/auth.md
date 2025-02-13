@@ -144,7 +144,7 @@ restrict connection to specific services.
 
 #### JWT
 
-Similar to JWT primary authentication, a valid JWT must be present in the `Authentication` header in the format of
+Similar to JWT primary authentication, a valid JWT must be present in the `Authorization` header in the format of
 `bearer <JWT>` on every request.
 
 ### Authentication Requests
