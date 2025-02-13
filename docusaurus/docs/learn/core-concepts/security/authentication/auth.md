@@ -103,7 +103,7 @@ API. The definition of [External JWT Signer](50-external-jwt-signers.md) allows 
 used as a value to map against the unique `externalId` or `id` property on Identities. This mapping of JWT claim to 
 `externalId`/`id` is used to determine which Identity is authenticating.
 
-The JWT must be provided in the HTTP request in the `Authentication` header with a value in the format of 
+The JWT must be provided in the HTTP request in the `Authorization` header with a value in the format of 
 `Bearer <jwt>`. The JWT provided must pass signature, expiration, issuer, and audience validation as configured
 on the [External JWT Signer](50-external-jwt-signers.md).
 
@@ -144,7 +144,7 @@ restrict connection to specific services.
 
 #### JWT
 
-Similar to JWT primary authentication, a valid JWT must be present in the `Authentication` header in the format of
+Similar to JWT primary authentication, a valid JWT must be present in the `Authorization` header in the format of
 `bearer <JWT>` on every request.
 
 ### Authentication Requests
