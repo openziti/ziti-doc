@@ -3,6 +3,8 @@ title: Deploy the Console
 sidebar_label: Console
 ---
 
+import ConsoleAuthAdminClientCertificate from '/docs/reference/40-command-line/_console-auth-admin-client-certificate.mdx';
+
 This article is about enabling the console on a controller that is running in a container.
 
 1. Configure the controller
@@ -63,3 +65,7 @@ The controller container includes the latest version of the console. You can ins
     ```text
     docker compose up ziti-controller --force-recreate
     ```
+
+## Authenticate with an Admin Client Certificate
+
+<ConsoleAuthAdminClientCertificate />
