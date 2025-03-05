@@ -14,6 +14,7 @@ import GitHubButton from "react-github-btn";
 import StarUs from "../../components/StarUs";
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import $ from 'jquery';
+import CustomizeDoc from '@site/src/components/CustomizeDoc';
 
 import Hotjar from '@hotjar/browser';
 const siteId = 3576473;
@@ -268,6 +269,7 @@ export default function Layout(props) {
           {children}
         </ErrorBoundary>
       </div>
+      <CustomizeDoc />
 
       {!noFooter && <Footer />}
     </LayoutProvider>
