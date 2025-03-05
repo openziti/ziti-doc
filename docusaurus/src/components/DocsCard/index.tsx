@@ -24,13 +24,15 @@ function DocsCard(props: Props): JSX.Element {
 
   const content = (
     <>
-      {props.img && <img src={useBaseUrl(props.img)} className="Card-image" />}
       <div className="Card-container">
-        {(props.icon || hoverIcon) && (
-          <div className="Card-icon-row">
-            {props.icon && <img src={useBaseUrl(props.icon)} className="Card-icon Card-icon-default" />}
-          </div>
-        )}
+        <div className="Card-icon-row">
+          {props.img && <img src={useBaseUrl(props.img)} className="Card-image" />}
+          {(props.icon || hoverIcon) && (
+              <>
+              {props.icon && <img src={useBaseUrl(props.icon)} className="Card-icon Card-icon-default" />}
+              </>
+          )}
+        </div>
         {props.ionicon && <ion-icon name={props.ionicon} className="Card-ionicon"></ion-icon>}
         {props.iconset && (
           <div className="Card-iconset__container">

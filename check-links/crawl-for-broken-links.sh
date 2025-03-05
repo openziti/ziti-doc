@@ -41,6 +41,7 @@ github\.com/.*#
 openziti.io(/comments)?/feed/
 developer.chrome.com/origintrials/#/register_trial/.*
 entra\.microsoft\.com
+example.*openziti\.io
 EOF
 
 # drop the trailing pipe

@@ -63,11 +63,10 @@ docs-card.disabled::after, docs-card[disabled]::after {
     font-size: 12px;
 }
 :global .Card-container {
-    padding: 1.5rem;
+    padding: 1.15rem;
 }
 :global .Card-image {
-    width: 100%;
-    height: auto;
+    max-height: 100%;
 }
 :global .Card-icon, :global .Card-iconset__container {
     width: 48px;
@@ -86,7 +85,9 @@ docs-card.disabled::after, docs-card[disabled]::after {
     transition: opacity 150ms ease-out;
 }
 :global .Card-icon-row {
-    position: relative;
+    display: flex;
+    max-height: 50px;
+    height: 48px;
 }
 :global .Card-iconset__container {
     position: relative;

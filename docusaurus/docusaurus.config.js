@@ -33,6 +33,28 @@ const config = {
   },
 
   markdown: {
+    // parseFrontMatter: async (params) => {
+    //   // Reuse the default parser
+    //   const result = await params.defaultParseFrontMatter(params);
+    //
+    //   // Process front matter description placeholders
+    //   result.frontMatter.description =
+    //       result.frontMatter.description?.replaceAll('{{MY_VAR}}', 'MY_VALUE');
+    //
+    //   // Create your own front matter shortcut
+    //   if (result.frontMatter.i_do_not_want_docs_pagination) {
+    //     result.frontMatter.pagination_prev = null;
+    //     result.frontMatter.pagination_next = null;
+    //   }
+    //
+    //   // Rename an unsupported front matter coming from another system
+    //   if (result.frontMatter.cms_seo_summary) {
+    //     result.frontMatter.description = result.frontMatter.cms_seo_summary;
+    //     delete result.frontMatter.cms_seo_summary;
+    //   }
+    //
+    //   return result;
+    // },
     mermaid: true,
   },
   themes: ['@docusaurus/theme-mermaid'],
@@ -45,6 +67,11 @@ const config = {
         path: 'docs-policies',
         routeBasePath: 'policies',
         sidebarPath: require.resolve('./sidebar-policies.js'),
+        beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives, ],
+        remarkPlugins: [
+          require('./src/plugins/remark/remark-yaml-table'),
+          require('./src/plugins/remark/remark-code-block'),
+        ],
       },
     ],
     [
@@ -230,6 +257,10 @@ const config = {
             to: '/docs/learn/quickstarts/zac/',
             from: ['/docs/quickstarts/zac/installation'],
           },
+          {
+            to: '/docs/guides/external-auth/browzer/',
+            from: ['/docs/identity-providers-for-browZer']
+          }
         ],
       },
     ],
@@ -249,6 +280,7 @@ const config = {
             require('./src/plugins/remark/remark-yaml-table'),
             require('./src/plugins/remark/remark-code-block'),
           ],
+          showLastUpdateTime: true
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

@@ -7,6 +7,7 @@ import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from "./index.module.css"
 import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
+import { Redirect } from '@docusaurus/router';
 
 export function Highlight(props) {
     const { children } = props;
@@ -42,6 +43,8 @@ export default function Home() {
         fontFamily: "Arial"
     };
 
+    return <Redirect to="docs/learn/introduction/" />;
+    
     return (
         <OpenZitiLayout>
             <OpenZitiHorizontalSection style={{padding: "40px"}}>

@@ -6,6 +6,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-leading: 35px;
   --ifm-background-color: #f8fafc;
   --ifm-background-surface-color: #f1f5f9;
   --ifm-background-surface-color-dark: #e1d4ee;
@@ -17,14 +18,13 @@
   --ifm-color-primary-light: #a14ded;
   --ifm-color-primary-lighter: #a85aee;
   --ifm-color-primary-lightest: #b776f1;
-  --code-block-text-colora: #ddd8e5;
-  --code-block-text-colorb: #add8e5;
+  --ifm-heading-color: 0 36 81;
   --code-block-text-color: var(--ifm-heading-color);
+  --lighter-code-block-text-color: color-mix(in srgb, var(--ifm-heading-color) 70%, white 30%);
   --code-block-background-color: #ECEEEF;
   --ifm-font-family-monospace: "Consolas", monospace;
   --ifm-font-family-sans: "Open Sans", sans-serif;
   --ifm-font-family-sans-default: sans-serif;
-  --ifm-heading-color: #002451;
   --ifm-color-banner: #edac15;
   --ifm-navbar-item-padding-horizontal: .5em;
   --background-color-1: #ffd0d0;
@@ -47,11 +47,19 @@
   --h3-size: 25px;
   --docusaurus-collapse-button-bg-hover: rgb(0 0 0 / 2%);
   --ifm-tabs-color-active: var(--ifm-font-color-base);
-  --ifm-global-shadow-lw: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+  --ifm-global-shadow-lw: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --ifm-menu-color-background-hover: #f1f5f9;
+  --ifm-menu-left-border-color: #002451;
+  --ifm-link-color: rgba(217, 15, 95, 0.98);
+  --ifm-breadcrumb-color-actives: rgba(217, 15, 95, 0.98);
+  --ifm-breadcrumb-color-active: color-mix(in srgb, var(--ifm-link-color) 75%, white 25%);
 }
-
+html:not([data-theme="dark"]) {
+  --ifm-leading: 15px;
+}
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme="dark"] {
+  --ifm-leading: 15px;
   --ifm-background-color: #111827;
   --ifm-background-surface-color: #1f2937;
   --ifm-background-surface-color-dark: #374151;
@@ -68,11 +76,19 @@ html[data-theme="dark"] {
   --ifm-font-color-base: #94a3b8;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --logo-name: "ziti-logo-light.svg";
-  --ifm-heading-color: #94a3b8;
+  --ifm-heading-color: 148 163 184;
   --ifm-menu-color: #ffffff;
   --ifm-toc-link-color: #ffffff;
   --code-block-text-color: var(--ifm-heading-color);
   --code-block-background-color: #434862;
+  --ifm-alert-foreground-color: #cbd5e1;
+  --ifm-docusaurus-collapse-button-bg-hover: rgba(255, 255, 255, 0.05);
+  --ifm-tabs-color-active: #e2e8f0;
+  --ifm-global-shadow-lw: 3px 3px 10px 0 rgba(255, 255, 255, 0.2);
+  --ifm-menu-color-background-hover: #1f2937;
+  --ifm-menu-left-border-color: #94a3b8;
+  --ifm-link-color: rgba(21, 142, 237, 1);
+  --ifm-breadcrumb-color-active: color-mix(in srgb, var(--ifm-link-color) 75%, white 25%);
 }
 
 html[data-theme=dark] #Wizardly code {
@@ -648,7 +664,7 @@ html[data-theme=dark] #Wizardly a {
 }
 
 html[data-theme=dark] .menu__link {
-  color: rgba(255, 255, 255, 0.98) !important;
+  color: var(--ifm-font-color-base) !important;
 }
 
 .menu__link--active {
@@ -657,12 +673,12 @@ html[data-theme=dark] .menu__link {
 }
 
 html[data-theme=dark] a {
-  color: rgba(232, 74, 135, 1.0);
+  color: var(--ifm-link-color);
   transition: 0.5s;
 }
 
 html[data-theme=dark] .menu__link--active {
-  color: rgba(232, 74, 135, 1.0) !important;
+  color: var(--ifm-link-color) !important;
   transition: 0.5s;
 }
 
@@ -2148,10 +2164,30 @@ pre.off {
   border-right: 1px solid var(--code-block-text-color);
   border-bottom: 1px solid var(--code-block-text-color);
   margin: 16px 0;
-  background: var(--code-block-background-color); /* Light gray background */
+  background: var(--code-block-background-color);
+  border-radius: 4px;
+  padding-top: 5px;
+  padding-bottom: 1px;
+}
+
+.code-section-desc {
   padding-left: 12px;
   padding-right: 12px;
-  border-radius: 4px;
+}
+
+.code-section-command {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.code-section-code {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.code-section-results {
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .code-section pre {
@@ -2167,5 +2203,11 @@ pre.off {
 
 .code-section-desc p {
   font-size: 1.1em;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px groove var(--code-block-text-color);
+}
+
+.theme-doc-sidebar-item-category[class*="theme-doc-sidebar-item-category-level-"].menu__list-item:not(.menu__list-item--collapsed) > ul {
+  padding-left: 1px;
+  margin-left: 13px;
+  border-left: 2px solid  rgb(var(--code-block-text-color) / 15%);
 }

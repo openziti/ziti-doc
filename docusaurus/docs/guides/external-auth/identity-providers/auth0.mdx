@@ -1,0 +1,86 @@
+---
+title: Auth0
+description: Configure Auth0 for with OpenZiti
+hide_table_of_contents: true
+---
+
+# Auth0
+
+<img src="/icons/logo-auth0.svg" alt="How to configure Auth0 for OpenZiti" height="100px"/>
+
+This section illustrates where the expected values are found within the [Auth0 dashboards](https://auth0.com/). For a 
+more detailed guide on creating an Auth0 application and API, see below.  Use these values to configure an external JWT
+signer.
+
+| Field                 | Where to Find the Value                                                                           | Example                                                         |
+|-----------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| **Issuer**            | Application Settings in "Basic Information". The "**Domain**" of the app prefixed with "https://" | https://dev-k1gpd4wpyslypklr.us.auth0.com/                      |
+| **Client ID**         | Application Settings in "Basic Information". The "**Client ID**"                                  | HTgNgEjHR9Q3krXiShYsrVOh6pRNrtH0q                               |
+| **Audience**          | APIs dashboard or in "General Settings" as the "**Identifier**" of the API                        | https://your.openziti.controller.example.io                     |
+| **External Auth URL** | The same value as the Issuer                                                                      | https://dev-k1gpd4wpyslypklr.us.auth0.com/                      |
+| **JWKS Endpoint**     | Use the `jwks_uri` field from the './well-known/openid-configuration' endpoint.                   | https://dev-k0qmk4wpyslypklr.us.auth0.com/.well-known/jwks.json |
+| **Claims Property**   | Typically 'email', but can also be 'sub' or any other claim contained in the JWT                  | email                                                           |
+| **Scopes**            | `openid` is always included. Typically 'email' but 'profile' or any standard or custom scope      | profile offline_access                                          |
+
+---
+
+## Get an Auth0 Account
+
+If you don't already have an account you can sign up for a free account at https://auth0.com/signup
+
+## Add an Application (if necessary)
+
+Once you have an Auth0 account, expand "Application", choose "Applications" in the left navbar then find the 
+"Create Application" button and click it:
+
+![Auth0 Applications](/img/idps/auth0/create-app.png)
+
+### Choose the Type of Application
+
+Give the application a name, then choose "Single Page Web Applications" and click "Create":
+
+![Auth0 Applications](/img/idps/auth0/create-spa.png)
+
+### Callback URLs
+
+The [Authorization Code Flow with PKCE or PKCE flow](https://oauth.net/2/pkce/) requires configuring callback URLs the
+Identity Provider (IdP) will allow redirecting to. If the URL for a specific client is not specifically listed, the IdP
+will deny the authentication request. Depending on the technology used to authenticate to the OpenZiti Network, 
+different URLs need to be specified. More than one URL is allowed to be configured. Decide if you are configuring the 
+IdP for use with tunnelers, with BrowZer or with both and add the appropriate callback urls.
+
+In the Auth0 dashboard, with the application selected, choose the "Settings" tab and scroll down to the "Application
+URIs" section and add the URLs.
+
+#### For Tunnelers
+
+Tunnelers require an allowed callback URL of: `http://localhost:20314/auth/callback`.
+
+#### For BrowZer
+
+The URL to configure for BrowZer will vary depending on the BrowZer configuration. BrowZer requires a wildcard 
+certificate in order to be deployed and all services are delivered from this wildcard domain. You will need to add 
+the configured [wildcard domain](/docs/learn/quickstarts/browzer/example/#get-a-wildcard-certificate) as the 
+callback url.
+
+#### Example Callback URLs
+
+This example demonstrates configuring this Auth0 application for both tunnelers and a BrowZer setup where the BrowZer
+bootstrapper is located at `https://*.browzer.example.com`:
+
+![Auth0 callbacks](/img/idps/auth0/callbacks.jpg)
+
+## Add a new API
+
+When using ext-jwt-signers for OIDC, OpenZiti requires the security token presented to be intended for OpenZiti. 
+This requires the token (the JWT) to have an audience specified by the ext-jwt-signer. For Auth0, this is 
+accomplished by creating an "API".
+
+From the left navbar in the Auth0 dashboard, click on `Application` -> `APIs` -> `Create API`
+
+![Auth0 Applications](/img/idps/auth0/create-api.png)
+
+Any name can be used but as the UI indicates the `Identifier*` field is used as the `aud`ience field of the JWT 
+after successful authentication. Choose RFC 9068 as the JSON Web Token Profile.
+
+![Auth0 clientId](/img/idps/auth0/api-details.png)
