@@ -1,16 +1,16 @@
 import { visit } from 'unist-util-visit';
 
 module.exports = function remarkCodeSections() {
-    const desc_text = "description:";
-    const command_text = "command:";
-    const code_text = "code:";
-    const results_text = "results:";
+    const desc_text = "@desc:";
+    const command_text = "@command:";
+    const code_text = "@code:";
+    const results_text = "@results:";
     return (tree) => {
         visit(tree, 'code', (node, index, parent) => {
             if (node.lang && node.lang.startsWith('example-')) {
                 const lang = node.lang.replace('example-', '').trim(); // Extract language (e.g., "bash", "go")
                 const lines = node.value.split('\n');
-                let description = '', command = '', code = '', results = '';
+                let description = '', command = '', code = '', results = '', codeTitle = '';
                 let currentSection = '';
 
                 lines.forEach((line) => {
@@ -22,7 +22,12 @@ module.exports = function remarkCodeSections() {
                         command = line.replace(command_text, '').trim();
                     } else if (line.startsWith(code_text)) {
                         currentSection = 'code';
-                        code = line.replace(code_text, '').trim();
+                        const remaining = line.replace(code_text, '').trim();
+                        if (remaining) {
+                            codeTitle = remaining;
+                        } else {
+                            codeTitle = remaining;
+                        }
                     } else if (line.startsWith(results_text)) {
                         currentSection = 'results';
                         results = line.replace(results_text, '').trim();
@@ -85,9 +90,10 @@ module.exports = function remarkCodeSections() {
                         children: [],
                     };
                     codeDiv.children.push(
-                        { type: 'paragraph', children: [{ type: 'strong', children: [{ type: 'text', value: 'Code:' }] }] },
+                        { type: 'paragraph', children: [{ type: 'strong', children: [{ type: 'text', value: codeTitle }] }] },
                         { type: 'code', lang: lang, value: code.trim() } // Uses detected language
                     );
+                    
                     divWrapper.children.push(codeDiv);
                 }
 

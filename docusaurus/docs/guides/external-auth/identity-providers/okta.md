@@ -1,117 +1,60 @@
 ---
 title: How to set up Okta
 sidebar_label: Okta
+hide_table_of_contents: true
 ---
 
-<head>
-  <title>Okta for OpenZiti BrowZer</title>
-  <meta
-    name="description"
-    content="How to configure Okta for OpenZiti BrowZer."
-  />
-</head>
+import CallbackUrls from '/docs/guides/external-auth/identity-providers/_callback_urls.mdx';
 
-<img src="/icons/logo-okta.svg" alt="How to configure Okta for OpenZiti BrowZer" width="20%"/>
+# AWS Cognito
 
-### Get an Okta Account
+<img src="/icons/logo-cognito.svg" alt="AWS Cognito logo" height="100px"/>
 
-If you don't already have an account you can sign up for a free Okta account at https://developer.okta.com/signup
+This section illustrates where the expected values are found within
+[the Cognito config](https://docs.goCognito.io/docs/). For a more detailed guide on enabling Cognito with
+OpenZiti, see below. Use these values to configure an external JWT signer. All of these values are found from the
+Cognito "Admin interface" in the corresponding provider's overview page.
 
-![Okta Free Account](/img/okta-free.jpg)
+| Field                 | Where to Find the Value in the Cognito Configuration                                       | Example                                                      |
+|-----------------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| **Issuer**            | Shown on the right as the "OpenID Configuration Issuer"                                      | https://my.Cognito.server:9243/application/o/openziti-api/ |
+| **Client ID**         | Shown in the left column as the "Client ID"                                                  | openziti_client_id                                           |
+| **Audience**          | Unless overridden, the same value as the "Client ID"                                         | openziti_client_id                                           |
+| **External Auth URL** | The same value as the Issuer                                                                 | https://my.Cognito.server:9243/application/o/openziti-api/ |
+| **JWKS Endpoint**     | Shown on the right as the "JWKS URL"                                                         | https://Cognito.example.com/jwks.json                      |
+| **Claims Property**   | Typically 'email', but can also be 'sub' or any other claim contained in the JWT             | email                                                        |
+| **Scopes**            | `openid` is always included. Typically 'email' but 'profile' or any standard or custom scope | profile offline_access                                       |
 
-### Add a new Application
+---
 
-Once you have an Okta account, click on **Applications** in the left navbar:
+## Create an Application with Provider
 
-![Okta Applications](/img/okta-apps.jpg)
-<br/>
+Begin by creating an application with provider. Go to the admin interface, on the left expand "Applications", click
+on "Applications" an then click on "Create with Provider" and complete the wizard that pops up.
 
-Then click on the **Create App Integration**:
-<br/>
+![create app with provider](/img/idps/authentik/create-app-provider.png)
 
-![Okta Applications](/img/okta-create-app.jpg)
+## Configure the Application
 
-Next, select the type of SSO protocol to implement. 
+Enter the "Name" of the application and click the "Next" button.
 
-Okta supports two SSO standards: 
-- `OpenID Connect (OIDC)` and 
-- `Security Assertion Markup Language (SAML)`
+![img](/img/idps/authentik/new-app-1.png)
 
-Okta recommends using `OIDC` for new SSO integrations, and, ***BrowZer requires OIDC***, so select `OIDC`:
+## Choose a Provider
 
-<br/>
+When choosing a provider, choose the "OAuth2/OpenID Provider" option and click the "Next" button.
 
-![Okta OIDC](/img/okta-oidc.jpg)
-<br/>
-
-Now, select the **Application type** of `Single-Page Application`
-
-<br/>
-
-![Okta OIDC](/img/okta-spa.jpg)
-
-<br/>
-
-Click **Next**
-
-Give your SPA a name.
-
-Ensure **Grant type** is *Authorization Code*
-
-Set **Sign-in Redirect URIs** to `https://<YOUR_BROWZER_DOMAIN>/login/callback` (where YOUR_BROWZER_DOMAIN is [determined here](/docs/learn/quickstarts/browzer/example/#before-you-begin))
-
-Set **Sign-out Redirect URIs** to `https://<YOUR_BROWZER_DOMAIN>` (where YOUR_BROWZER_DOMAIN is [determined here](/docs/learn/quickstarts/browzer/example/#before-you-begin))
-
-Set **COntrolled access** to `Skip group assignment for now` 
+![img](/img/idps/authentik/new-app-2.png)
 
 
-<br/>
+## Configure the Provider
 
-![Okta OIDC](/img/okta-spa-2.jpg)
+On the "Configure Provider" screen, enter a "Name" for the provider (or leave it as the default). When choosing the
+authorization flow, select "default-provider-authorization-explicit-consent (Authorize Application)". The "Client
+type" should be set to "Public". Allow for the "Client ID" to be automatically generated, or assign a meaningful
+name to the provider. Note that this will also become the `aud`ience used when configuring OpenZiti. Enter the expected
+redirect URLs. OpenZiti tunnelers expect to have `http://localhost:20314/auth/callback` specified as a valid callback URL.
 
-<br/>
+<CallbackUrls/>
 
-Click **Save**
-
-### Gather IdP Information
-
-Your OpenZiti network must be configured to become aware of your Okta identity provider.  OpenZiti refers to the identity provider as an `External JWT Signer`.  Before you can set up the new JWT signer, you must gather some information from the new Okta Application that you just created:
-- the `clientId`
-- the `issuer`
-- the `jwks_uri`
-<br/>
-<br/>
-
-#### Gather `clientId`
-
-The `clientID` value can be found in the `general` tab of the SPA you created above:
-
-<br/>
-
-![Okta clientId](/img/okta-clientid.jpg)
-
-<br/>
-
-#### Gather `issuer`
-
-The `issuer` can be found via the openid-configuration endpoint that all OIDC-compliant identity providers expose.  The openid-configuration endpoint URL for Okta looks like this:
-
-`https://<OKTA_DOMAIN>/.well-known/openid-configuration` (where `OKTA_DOMAIN` for a free dev account will resemble `dev-12345678.okta.com`)
-
-When you enter the openid-configuration endpoint URL (`https://<OKTA_DOMAIN>/.well-known/openid-configuration`) into a browser, you will receive a response resembling the following:
-
-![Okta OIDC config](/img/okta-oidc-config.jpg)
-
-<br/>
-
-Take note of the `issuer` value.
-<br/>
-
-
-#### Gather `jwks_uri`
-Take note of the `jwks_uri` value returned from the above openid-configuration endpoint URL.
-<br/>
-
-### Create External JWT Signer
-Using the values described above, use the `ziti` CLI to configure an external JWT signer that represents your Okta identity provider.  You can find details on how to do this in the [BrowZer Quickstart documentation](/docs/learn/quickstarts/browzer/)
-
+![img](/img/idps/authentik/new-app-3.png)

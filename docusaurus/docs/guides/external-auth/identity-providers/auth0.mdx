@@ -6,7 +6,7 @@ hide_table_of_contents: true
 
 # Auth0
 
-<img src="/icons/logo-auth0.svg" alt="How to configure Auth0 for OpenZiti" height="100px"/>
+<img src="/icons/logo-auth0.svg" alt="Auth0 logo" height="100px"/>
 
 This section illustrates where the expected values are found within the [Auth0 dashboards](https://auth0.com/). For a 
 more detailed guide on creating an Auth0 application and API, see below.  Use these values to configure an external JWT
@@ -33,13 +33,17 @@ If you don't already have an account you can sign up for a free account at https
 Once you have an Auth0 account, expand "Application", choose "Applications" in the left navbar then find the 
 "Create Application" button and click it:
 
+:::info[Add Application]
 ![Auth0 Applications](/img/idps/auth0/create-app.png)
+:::
 
 ### Choose the Type of Application
 
 Give the application a name, then choose "Single Page Web Applications" and click "Create":
 
+:::info[Choose Application Type]
 ![Auth0 Applications](/img/idps/auth0/create-spa.png)
+:::
 
 ### Callback URLs
 
@@ -68,9 +72,11 @@ callback url.
 This example demonstrates configuring this Auth0 application for both tunnelers and a BrowZer setup where the BrowZer
 bootstrapper is located at `https://*.browzer.example.com`:
 
+:::info[Example Callback URLs]
 ![Auth0 callbacks](/img/idps/auth0/callbacks.jpg)
+:::
 
-## Add a new API
+## Add a New API
 
 When using ext-jwt-signers for OIDC, OpenZiti requires the security token presented to be intended for OpenZiti. 
 This requires the token (the JWT) to have an audience specified by the ext-jwt-signer. For Auth0, this is 
@@ -78,9 +84,13 @@ accomplished by creating an "API".
 
 From the left navbar in the Auth0 dashboard, click on `Application` -> `APIs` -> `Create API`
 
+:::info[Create API]
 ![Auth0 Applications](/img/idps/auth0/create-api.png)
+:::
 
 Any name can be used but as the UI indicates the `Identifier*` field is used as the `aud`ience field of the JWT 
 after successful authentication. Choose RFC 9068 as the JSON Web Token Profile.
 
+:::info[Create API]
 ![Auth0 clientId](/img/idps/auth0/api-details.png)
+:::
