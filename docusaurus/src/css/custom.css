@@ -2211,3 +2211,9 @@ pre.off {
   margin-left: 13px;
   border-left: 2px solid  rgb(var(--code-block-text-color) / 15%);
 }
+
+p > img {
+  width: auto;
+  border-radius: 5px;  /* Optional: Rounded corners */
+  box-shadow: 5px 5px 5px rgba(30, 30, 20, 0.25); /* Optional: Adds shadow */
+}
