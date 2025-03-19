@@ -131,9 +131,9 @@ necessary. If you prefer to use the user's email address, expand this section an
 From the main ZITADEL overview page, find the "Actions" tab and select it. On the new page that pops up, click the 
 "New" button to being the process of adding a new "Action".
 
-:::info[Create a New Action]
 ![Create a New Action](/img/idps/zitadel/new-action.png)
-:::
+
+---
 
 ### Add Action 
 
@@ -148,32 +148,26 @@ function addEmailToAccessToken(ctx, api) {
 }
 ```
 
-:::info[Create Action Details]
 ![Create Action Details](/img/idps/zitadel/new-action-details.png)
-:::
+
+---
 
 ### Add Action Trigger
 
 With the action in place, it now needs to be assigned to a flow in the ZITADEL admin interface. At the bottom of the 
 screen, find the "Flows" section. Select the "Compliment Token" flow from the dropdown and click "Add Trigger".
 
-:::info[Add trigger to Flow]
 ![Add trigger to Flow](/img/idps/zitadel/add-trigger.png)
-:::
 
 A modal will pop up, for the **Trigger Type** choose "Pre access token creation" then choose the `addEmailToAccessToken`
 action for the **Action** and click "Save"
 
-:::info[Finish Assigning Action to Flow]
 ![Finish Assigning Action to Flow](/img/idps/zitadel/add-trigger-finish.png)
-:::
 
 With the action assigned, the ZITADEL server should be ready to deliver properly configured tokens to the OpenZiti 
 controller for authentication.
 
-:::info[Action Assigned]
 ![Action Assigned](/img/idps/zitadel/add-trigger-finish.png)
-:::
 
 </Details>
 
