@@ -9,27 +9,33 @@ import Wizardly from '@site/src/components/Wizardly';
 
 ## Alternative Server Certificates
 
-At the time of writing the ZAC is deployed as part of the controller, which is the likely direction of travel
-for the future.
+At the time of writing, ZAC 3.0+ is hosted by the controller, which is the likely direction of travel
+for the future, and the current preferred configuration.
 
 As mentioned in the [identity](conventions.md#identity) section of the Conventions reference document, you can
-use externally provided certificates from public CAs like Let's Encrypt and associate them with the controller
-config in order to present valid certificates for the ZAC single page application.
+use certificates from public CAs like Let's Encrypt and associate them with the controller config in order to
+present valid certificates for the ZAC single page application.
 
 The `alt_server_certs` configuration key is an array of certificate information, so the first-matched server
 certificate is presented to the TLS client (in this case, a browser).
 
+To configure this correctly for the ZAC, the certificate paths need to be added to the `alt_server_certs` array
+in the `web` section, under the `client-management` named config section. See the details at the end of this document
+for an example.
+
 ## Short Steps to achieve valid certificates:
 
+This is a brief overview, and due to your infrastructure configuration, and organisation's processes you may need
+to perform alternative steps. Also, the required Certbot DNS plugin will be specific to your choice of DNS provider.
+
 1. Configure a DNS address for the IP of your server
-1. Install [Certbot](https://certbot.eff.org/instructions)
 1. Create a DNS access token for your given DNS provider
-1. Generate the certificates and validate via the
-[CertBot DNS Plugins](https://eff-certbot.readthedocs.io/en/latest/using.html#dns-plugins)
+1. Install [CertBot DNS Plugins](https://eff-certbot.readthedocs.io/en/latest/using.html#dns-plugins)
+1. Generate the certificates and validate via Certbot command line
 1. Alter the controller configuration as per the detailed example below (altering the paths if necessary)
 
-At this point, the file watcher should automatically see the configuration change, and restart the controller
-service.
+At this point, restarting the controller service should cause the ZAC to pick up the valid certificates, removing any
+"Potential Security Risk" warnings.
 
 ## Further details:
 
@@ -44,6 +50,17 @@ Ensure you wait for DNS propagation to complete before attempting ACME DNS-based
 This may take a few minutes to a few hours, but you can use tools like [whatsmydns](https://whatsmydns.com/)
 to track the progress on the propagation.
 
+### Configure DNS Provider Authentication
+
+CertBot requires access to your DNS provider’s API to perform DNS-based domain validation. This is because
+it provisions a TXT resource in the domain, as per [RFC8555](https://datatracker.ietf.org/doc/html/rfc8555#section-8.4).
+For this you will need to look up how to create the token from your DNS provider.
+
+Other mechanisms of satifying the challenge are available. However, this method allows for better automation.
+
+Again, read the documentation from [CertBot DNS Plugins](https://eff-certbot.readthedocs.io/en/latest/using.html#dns-plugins)
+to determine how to configure this correctly for your setup.
+
 ### Install Let’s Encrypt CertBot
 
 General instructions for this can be found by visiting the
@@ -56,17 +73,6 @@ A simple way to satisfy the DNS-based challenge from Let's Encrypt is to use the
 
 These are specific to DNS providers, but you can see an example of how they should be used in
 [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot)
-
-### Configure DNS Provider Authentication
-
-CertBot requires access to your DNS provider’s API to perform DNS-based domain validation. This is because
-it provisions a TXT resource in the domain, as per [RFC8555](https://datatracker.ietf.org/doc/html/rfc8555#section-8.4).
-For this you will need to look up how to create the token from your DNS provider.
-
-Other mechanisms of satifying the challenge are available. However, this method allows for better automation.
-
-Again, read the documentation from [CertBot DNS Plugins](https://eff-certbot.readthedocs.io/en/latest/using.html#dns-plugins)
-to determine how to configure this correctly for your setup.
 
 ### Obtain an SSL Certificate
 
