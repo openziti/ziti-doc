@@ -1,9 +1,8 @@
 ---
-sidebar_label: Console
-sidebar_position: 40
+sidebar_label: Alternative Server Certificates
+sidebar_position: 50
 ---
 
-import Wizardly from '@site/src/components/Wizardly';
 import ConsolePublicCertsBasicSteps from './_console-public-certs-basic-steps.mdx'
 
 # Console Configuration
@@ -13,7 +12,7 @@ import ConsolePublicCertsBasicSteps from './_console-public-certs-basic-steps.md
 At the time of writing, ZAC 3.0+ is hosted by the controller, which is the likely direction of travel
 for the future, and the current preferred configuration.
 
-As mentioned in the [identity](conventions.md#identity) section of the Conventions reference document, you can
+As mentioned in the [identity](/docs/reference/30-configuration/conventions.md#identity) section of the Conventions reference document, you can
 use certificates from public CAs like Let's Encrypt and associate them with the controller config in order to
 present valid certificates for the ZAC single page application.
 
@@ -83,5 +82,3 @@ sudo certbot certonly \
 
 If all goes well, this request will generate an SSL certificate for your domain, which by default
 will be stored in `/etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/`, matching the example configuration given above.
-
-<Wizardly></Wizardly>
