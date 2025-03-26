@@ -15,15 +15,15 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@algolia/client-search": "^5.20.1",
+    "@algolia/client-search": "^5.23.0",
     "@docusaurus/core": "3.7.0",
     "@docusaurus/plugin-client-redirects": "^3.7.0",
     "@docusaurus/preset-classic": "3.7.0",
     "@docusaurus/theme-mermaid": "^3.7.0",
     "@hotjar/browser": "^1.0.9",
     "@mdx-js/react": "^3.0.0",
-    "@types/react": "^19.0.7",
-    "asciinema-player": "^3.8.2",
+    "@types/react": "^19.0.12",
+    "asciinema-player": "^3.9.0",
     "clsx": "^2.0.0",
     "echarts": "^5.6.0",
     "echarts-for-react": "^3.0.2",
@@ -36,7 +36,7 @@
     "react-github-btn": "^1.4.0",
     "react-helmet": "^6.1.0",
     "react-player": "^2.16.0",
-    "redocusaurus": "^2.2.1",
+    "redocusaurus": "^2.2.2",
     "remark-github-admonitions-to-directives": "^2.1.0",
     "unist-util-visit": "^5.0.0"
   },
@@ -44,7 +44,7 @@
     "@docusaurus/module-type-aliases": "3.7.0",
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "3.7.0",
-    "typescript": "~5.6.2"
+    "typescript": "~5.8.2"
   },
   "browserslist": {
     "production": [

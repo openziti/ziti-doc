@@ -54,10 +54,10 @@
   resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.19.0.tgz#efddaaf28f0f478117c2aab22d19c99b06f99761"
   integrity sha512-2ERRbICHXvtj5kfFpY5r8qu9pJII/NAHsdgUXnUitQFwPdPL7wXiupcvZJC7DSntOnE8AE0lM7oDsPhrJfj5nQ==
 
-"@algolia/client-common@5.20.1":
-  version "5.20.1"
-  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.20.1.tgz#727f1255d1b8824ce6cab24d89bc5746625596ea"
-  integrity sha512-Dk4RhklaAbqLzOeJO/MoIFUjcKYGECiAJYYqDzmE/sbXICk5Uo6dGlv8w4z09lmvsASpNUoMvGYHGBK+WkEGpA==
+"@algolia/client-common@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.23.0.tgz#01012818c01792415438e6b05dd05a0b8c8d86cf"
+  integrity sha512-9jacdC44vXLSaYKNLkFpbU1J4BbBPi/N7uoPhcGO//8ubRuVzigH6+RfK5FbudmQlqFt0J5DGUCVeTlHtgyUeg==
 
 "@algolia/client-insights@5.19.0":
   version "5.19.0"
@@ -99,15 +99,15 @@
     "@algolia/requester-fetch" "5.19.0"
     "@algolia/requester-node-http" "5.19.0"
 
-"@algolia/client-search@^5.20.1":
-  version "5.20.1"
-  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-5.20.1.tgz#5079c854043418fc28e0bead6b56ca3e85c9c4da"
-  integrity sha512-YzHD0Nqp7AjvzbFrMIjhCUl6apHkWfZxKDSlMqf80mXkuG52wY289zFlvTfHjHK1nEiDslH3uHYAR/poOOa21Q==
+"@algolia/client-search@^5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-5.23.0.tgz#bf327c2fbbb30622f4b2279b81c53198757506a6"
+  integrity sha512-XAYWUYUhEG4OIdo/N7H/OFFRD9fokfv3bBTky+4Y4/q07bxhnrGSUvcrU6JQ2jJTQyg6kv0ke1EIfiTO/Xxb+g==
   dependencies:
-    "@algolia/client-common" "5.20.1"
-    "@algolia/requester-browser-xhr" "5.20.1"
-    "@algolia/requester-fetch" "5.20.1"
-    "@algolia/requester-node-http" "5.20.1"
+    "@algolia/client-common" "5.23.0"
+    "@algolia/requester-browser-xhr" "5.23.0"
+    "@algolia/requester-fetch" "5.23.0"
+    "@algolia/requester-node-http" "5.23.0"
 
 "@algolia/events@^4.0.1":
   version "4.0.1"
@@ -151,12 +151,12 @@
   dependencies:
     "@algolia/client-common" "5.19.0"
 
-"@algolia/requester-browser-xhr@5.20.1":
-  version "5.20.1"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-5.20.1.tgz#1440c26b39469bddfbb86d778b4c059b20352e47"
-  integrity sha512-+RaJa5MpJqPHaSbBw0nrHeyIAd5C4YC9C1LfDbZJqrn5ZwOvHMUTod852XmzX/1S8oi1jTynB4FjicmauZIKwA==
+"@algolia/requester-browser-xhr@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-5.23.0.tgz#41ea2f3702b8eec0451e0efbab971bbdeeb0e2e0"
+  integrity sha512-bacOsX41pnsupNB0k0Ny+1JDchQxIsZIcp69GKDBT0NgTHG8OayEO141eFalNmGil+GXPY0NUPRpx+5s4RdhGA==
   dependencies:
-    "@algolia/client-common" "5.20.1"
+    "@algolia/client-common" "5.23.0"
 
 "@algolia/requester-fetch@5.19.0":
   version "5.19.0"
@@ -165,12 +165,12 @@
   dependencies:
     "@algolia/client-common" "5.19.0"
 
-"@algolia/requester-fetch@5.20.1":
-  version "5.20.1"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-fetch/-/requester-fetch-5.20.1.tgz#fb7caa702d010f4684c98fd597e13346df8cc89d"
-  integrity sha512-4l1cba8t02rNkLeX/B7bmgDg3CwuRunmuCSgN2zORDtepjg9YAU1qcyRTyc/rAuNJ54AduRfoBplmKXjowYzbQ==
+"@algolia/requester-fetch@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-fetch/-/requester-fetch-5.23.0.tgz#7a784bcf5da0288f4eb0437338fe1c5314cc7064"
+  integrity sha512-tVNFREexJWDrvc23evmRgAcb2KLZuVilOIB/rVnQCl0GDbqIWJuQ1lG22HKqvCEQFthHkgVFGLYE74wQ96768g==
   dependencies:
-    "@algolia/client-common" "5.20.1"
+    "@algolia/client-common" "5.23.0"
 
 "@algolia/requester-node-http@5.19.0":
   version "5.19.0"
@@ -179,12 +179,12 @@
   dependencies:
     "@algolia/client-common" "5.19.0"
 
-"@algolia/requester-node-http@5.20.1":
-  version "5.20.1"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-5.20.1.tgz#082b0a209215c5f0eea4028f5cf3b5984d4e6213"
-  integrity sha512-4npKo1qpLG5xusFoFUj4xIIR/6y3YoCuS/uhagv2blGFotDj+D6OLTML3Pp6JCVcES4zDbkoY7pmNBA8ARtidQ==
+"@algolia/requester-node-http@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-5.23.0.tgz#46a410d7885b8a0a02a6cc8a30c1dd4825791921"
+  integrity sha512-XXHbq2heOZc9EFCc4z+uyHS9YRBygZbYQVsWjWZWx8hdAz+tkBX/jLHM9Xg+3zO0/v8JN6pcZzqYEVsdrLeNLg==
   dependencies:
-    "@algolia/client-common" "5.20.1"
+    "@algolia/client-common" "5.23.0"
 
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"
@@ -2906,17 +2906,10 @@
     "@types/history" "^4.7.11"
     "@types/react" "*"
 
-"@types/react@*":
-  version "19.0.7"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.0.7.tgz#c451968b999d1cb2d9207dc5ff56496164cf511d"
-  integrity sha512-MoFsEJKkAtZCrC1r6CM8U22GzhG7u2Wir8ons/aCKH6MBdD1ibV24zOSSkdZVUKqN5i396zG5VKLYZ3yaUZdLA==
-  dependencies:
-    csstype "^3.0.2"
-
-"@types/react@^19.0.7":
-  version "19.0.8"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.0.8.tgz#7098e6159f2a61e4f4cef2c1223c044a9bec590e"
-  integrity sha512-9P/o1IGdfmQxrujGbIMDyYaaCykhLKc0NGCtYcECNUr9UAaDe4gwvV9bR6tvd5Br1SG0j+PBpbKr2UYY8CwqSw==
+"@types/react@*", "@types/react@^19.0.12":
+  version "19.0.12"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.0.12.tgz#338b3f7854adbb784be454b3a83053127af96bd3"
+  integrity sha512-V6Ar115dBDrjbtXSrS+/Oruobc+qVbbUxDFC1RSbRqLt5SYvxxyIDrSC85RWml54g+jfNeEMZhEj7wW07ONQhA==
   dependencies:
     csstype "^3.0.2"
 
@@ -3322,10 +3315,10 @@ array-union@^2.1.0:
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-2.1.0.tgz#b798420adbeb1de828d84acd8a2e23d3efe85e8d"
   integrity sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==
 
-asciinema-player@^3.8.2:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.8.2.tgz#12fbf475ddaeee0051ace17532e5f003475f6dfa"
-  integrity sha512-Lgcnj9u/H6sRpGRX1my7Azcay6llLmB/GVkCGcDbPwdTVTisS1ir8SQ9jRWRvjlLUjpSJkN0euruvy3sLRM8tw==
+asciinema-player@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/asciinema-player/-/asciinema-player-3.9.0.tgz#c60742f85978e861b878fc7eb6289a5622c298af"
+  integrity sha512-SXVFImVzeNr8ZUdNIHABGuzlbnGWTKy245AquAjODsAnv+Lp6vxjYGN0LfA8ns30tnx/ag/bMrTbLq13TpHE6w==
   dependencies:
     "@babel/runtime" "^7.21.0"
     solid-js "^1.3.0"
@@ -4700,18 +4693,18 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-docusaurus-plugin-redoc@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/docusaurus-plugin-redoc/-/docusaurus-plugin-redoc-2.2.1.tgz#9c9ec63cf1c31151d7c3cbdcc01864563897f1ee"
-  integrity sha512-zwP5RfTLH3C4fAzCbOzJ0UJFNQ7rT1CU0C5rAWDiB86m9p2fKWS05NHeDdGE+tOsOjzEBBMSky8ooEFzo78yXA==
+docusaurus-plugin-redoc@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/docusaurus-plugin-redoc/-/docusaurus-plugin-redoc-2.2.2.tgz#d208a52756a2e7bb84d0d35c710c857c168ebc53"
+  integrity sha512-hS/h6SYwBV+5Hihe98RPbrHp3j276yMSVaXyDjkLz/vNZJ30661uDWfb1LPqZn8nCC86lxbtnwuJgnaEM8DtLw==
   dependencies:
     "@redocly/openapi-core" "1.16.0"
     redoc "2.1.5"
 
-docusaurus-theme-redoc@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/docusaurus-theme-redoc/-/docusaurus-theme-redoc-2.2.1.tgz#c8f9b05023735a5f07faa2471be5e04fdaf209f2"
-  integrity sha512-QO9ZU4/vWJTuCYiE4S14u4xEZEOHRNCqdT4wvPma0J8YII+z1kNSk2IIDSJDFMVHVZbOVc0KsUh7YpWrCh54nw==
+docusaurus-theme-redoc@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/docusaurus-theme-redoc/-/docusaurus-theme-redoc-2.2.2.tgz#7e516427c6252a00a23f318904e0e11a576928aa"
+  integrity sha512-VulnYwqwxWoCOCBjICIL9UDHojkEoerAvyrLX2DJPzijnjHrJgrYz1Rb2ekqm0rOhN90NiDUSnCzeghdSRhckw==
   dependencies:
     "@redocly/openapi-core" "1.16.0"
     clsx "^1.2.1"
@@ -9060,13 +9053,13 @@ redoc@2.1.5:
     swagger2openapi "^7.0.8"
     url-template "^2.0.8"
 
-redocusaurus@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/redocusaurus/-/redocusaurus-2.2.1.tgz#2b3c7df8d6c6749caaa40b9b72e5a9f1323db3eb"
-  integrity sha512-eYk807UrZ2/gWX3DoK/NxnmVNCeOuJI9o7rsUwDFkkVMIRDEiwpF/qy/5tSLKQvn7pqmHNxFONqsAozzoDK7Fw==
+redocusaurus@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/redocusaurus/-/redocusaurus-2.2.2.tgz#2fc32ceec0e9e04f436d98dde36ab89fa78f9f23"
+  integrity sha512-s+Pqvbt7Q28zK665rvTnyZJwH8VaZaITTQA1S9HxTws9x88fWdOtrUMhZVrhGseInDHMlAQ4XOrq5gn8BOS/5w==
   dependencies:
-    docusaurus-plugin-redoc "2.2.1"
-    docusaurus-theme-redoc "2.2.1"
+    docusaurus-plugin-redoc "2.2.2"
+    docusaurus-theme-redoc "2.2.2"
 
 reftools@^1.1.9:
   version "1.1.9"
@@ -10165,10 +10158,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@~5.6.2:
-  version "5.6.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.6.3.tgz#5f3449e31c9d94febb17de03cc081dd56d81db5b"
-  integrity sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==
+typescript@~5.8.2:
+  version "5.8.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.8.2.tgz#8170b3702f74b79db2e5a96207c15e65807999e4"
+  integrity sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==
 
 ua-parser-js@^1.0.33:
   version "1.0.40"
