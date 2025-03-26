@@ -8,10 +8,14 @@ import ExternalAuthConfigExample from '../../../_ext-auth-config_example.mdx'
 
 # External Providers
 
-The Ziti Desktop Edge for Windows (ZDEW) 2.5.2+ supports integrating with external identity providers such as Google, Auth0,
-Yahoo, Facebook, etc. The OpenZiti Controller has an authentication system utilizing JWTs as authentication tokens.
-The [External JWT Signers](/docs/learn/core-concepts/security/authentication/50-external-jwt-signers.md) functionality
-allows an OpenZiti operator to configure the OpenZiti overlay to use external providers as sources of authentication.
+The Ziti Desktop Edge for Windows (ZDEW) 2.5.2+ supports integrating with external identity providers such 
+[Auth0](../../../../../guides/external-auth/identity-providers/auth0.mdx),
+[Okta](../../../../../guides/external-auth/identity-providers/okta.md),
+[Zitadel](../../../../../guides/external-auth/identity-providers/zitadel.mdx) and others. 
+The OpenZiti Controller has an authentication system utilizing JWTs as authentication tokens.
+The [External JWT Signers](../../../../../learn/core-concepts/security/authentication/50-external-jwt-signers.md) 
+functionality allows an OpenZiti operator to configure the OpenZiti overlay to use external providers as sources of 
+authentication.
 
 External providers can now be used for primary authentication with the Ziti Desktop Edge for Windows. The default authorization
 policy for an OpenZiti controller will allow external authentication by default. If preferred, a new auth-policy can be

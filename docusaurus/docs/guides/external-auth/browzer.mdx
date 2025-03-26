@@ -1,0 +1,31 @@
+---
+title: Configuring OpenZiti BrowZer for OIDC
+sidebar_position: 50
+sidebar_label: BrowZer
+description: OpenZiti BrowZer is an open source platform that enables you to protect your web app using zero-trust technologies that integrate with popular Identity Providers you already use.
+---
+
+# BrowZer
+
+BrowZer allows you to secure your web app using zero-trust technologies **without altering the web app itself** and 
+without the need for a client-side agent install. 
+
+You must bring your own identity provider, and BrowZer can integrate with all popular identity providers that support 
+OpenID Connect (OIDC). You can use your existing identity provider, or you can set up a new one using the instructions 
+in the [Identity Providers](./identity-providers/README.mdx) section.
+
+Once your identity provider is set up, you can then authenticate your web app users onto your OpenZiti BrowZer overlay
+network.  
+
+Only authenticated users of your network will be able to see your web app -- it is safe and secure because it remains
+hidden and undetectable by malicious actors.
+
+If you want to use a self-hosted open source identity provider that is not listed above,
+please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+
+## Misconfigured Identity Providers
+
+If the identity provider is misconfigured, BrowZer will surface the error shown below.
+
+![Auth0 callbacks](/img/idps/callbacks-error.jpg)
+

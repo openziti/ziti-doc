@@ -1,0 +1,83 @@
+---
+title: Troubleshooting Using the ziti CLI
+sidebar_position: 200
+sidebar_label: Troubleshooting
+hide_table_of_contents: true
+---
+
+import Details from '@theme/MDXComponents/Details';
+
+# Troubleshooting OIDC
+
+Getting an external authentication to successfully configured can be a difficult process. The 1.5+ version of the `ziti`
+CLI contains a subcommand that will hopefully help administrators get the configuration correct.
+
+The `ziti ops verify ext-jwt-signer oidc` subcommand is specifically useful to iterate through the process of setting up
+an external JWT signer for OIDC.
+
+## Usage
+
+:::info
+_All `ziti` CLI commands and subcommands have very good help available by simply typing `--help`._
+```text
+aaa
+bbb
+ccc
+```
+:::
+
+<Details>
+
+<summary>ziti ops verify ext-jwt-signer oidc</summary>
+
+```
+Usage:
+  ziti ops verify ext-jwt-signer oidc [flags]
+
+Available Commands:
+
+
+Flags:
+      --access-token          Display the full Access Token to the screen. Use caution.
+  -s, --additional-scopes     List of additional scopes to add
+      --authenticate          Also attempt to authenticate using the supplied ext-jwt-signer
+      --controller-url        The url of the controller
+      --id-token              Display the full ID Token to the screen. Use caution.
+  -r, --redirect-url          The expected redirect URL to listen to
+      --refresh-token         Display the full Refresh Token to the screen. Use caution.
+
+Flags related to logging in:
+      --ca                    additional root certificates used by the Ziti Edge Controller
+  -c, --client-cert           A certificate used to authenticate
+  -k, --client-key            The key to use with certificate authentication
+  -e, --ext-jwt               A file containing a JWT from an external provider to be used for authentication
+  -f, --file                  An identity file to use for authentication
+      --ignore-config         If set, does not use values from nor write the config file. Required values not specified will be prompted for.
+  -p, --password              password to use for authenticating to the Ziti Edge Controller, if -u is supplied and -p is not, a value will be prompted for
+      --read-only             marks this login as read-only. Note: this is not a guarantee that nothing can be changed on the server. Care should still be taken!
+  -t, --token                 if an api token has already been acquired, it can be set in the config with this option. This will set the session to read only by default
+  -u, --username              username to use for authenticating to the Ziti Edge Controller
+  -y, --yes                   If set, responds to prompts with yes. This will result in untrusted certs being accepted or updated.
+
+Common flags for all commands:
+  -i, --cli-identity          Specify the saved identity you want the CLI to use when connect to the controller with
+  -j, --output-json           Output the full JSON response from the Ziti Edge Controller
+      --output-request-json   Output the full JSON request to the Ziti Edge Controller
+      --timeout               Timeout for REST operations (specified in seconds)
+      --verbose               Enable verbose logging
+```
+
+</Details>
+
+The `verify ext-jwt-signer oidc` subcommand allows you to supply a few key values to initiate and complete an
+[Authorization Code Flow with PKCE or PKCE flow](https://oauth.net/2/pkce/). Running the command will produce output into the terminal including:
+* the ID token
+* the Access token
+* the Refresh token
+
+Optionally, you can supply the following 
+
+
+```text
+tests and verifies an external JWT signer is configured correctly to authenticate using OIDC
+```

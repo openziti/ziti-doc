@@ -1,0 +1,186 @@
+---
+title: ZITADEL
+sidebar_label: ZITADEL
+hide_table_of_contents: true
+---
+
+import CallbackUrls from '/docs/guides/external-auth/identity-providers/_callback_urls.mdx';
+import Details from '@theme/MDXComponents/Details';
+
+# ZITADEL
+
+<img src="/icons/logo-zitadel.png" alt="ZITADEL logo" height="100px"/>
+
+The following fields are necessary in order to configure an external JWT signer with OpenZiti. This configuration will
+enable authentication via JWTs obtained through an
+[Authorization Code Flow with PKCE or PKCE flow](https://oauth.net/2/pkce/). ZITADEL allows you to 
+[self-host your own ZITADEL instance](https://github.com/zitadel/zitadel) or use a version from 
+[their SAAS provider (sign up here)](https://zitadel.com/signin). Regardless of how you get an instance of ZITADEL, 
+the UIs should be identical. 
+
+ZITADEL also provides an OpenID discovery endpoint at the base of your ZITIADEL server URL + 
+`.well-known/openid-configuration`. For example, if you self-hosted a ZITADEL instance at 
+https://zitadel.example.com, the discovery document will be located at 
+https://zitadel.example.com/.well-known/openid-configuration.
+
+At this time, ZITADEL does not allow for customizing the audience (`aud`) claim within the JWTs. It is recommended 
+you create a new ZITADEL Project for this reason as you will need to add this generated Client Id from ZITADEL as 
+the **Audience** mapped to the external JWT signer. 
+
+| Field                 | Where to Find the Value in the ZITADEL UI                                          | Example                                   |
+|-----------------------|------------------------------------------------------------------------------------|-------------------------------------------|
+| **Issuer**            | Use the OpenID discovery document, expected to be the URL of the ZITADEL instance  | https://zitadel.example.com               |
+| **Client ID**         | The ZITADEL Application page, within the ZITADEL project has a **Client Id** field | 311640049412276226                        |
+| **Audience**          | Same as the **Client ID**                                                          | 311640049412276226                        |
+| **External Auth URL** | Same as the **Issuer**                                                             | https://zitadel.example.com               |
+| **JWKS Endpoint**     | Use the OpenID discovery document, see above for the location                      | https://zitadel.example.com/oauth/v2/keys |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT       | email                                     |
+| **Scopes**            | `openid` is always included.                                                       | profile offline_access                    |
+
+---
+
+### Create an Application
+
+From the ZITADEL web portal, if necessary, create an application by clicking the **Create Application** button. 
+
+:::info[Create Application]
+![Create Application](/img/idps/zitadel/create-app.png)
+:::
+
+### Create a Project
+On the popup, enter a **Project Name** and select a framework by choosing **Other** and click the button to **Create 
+Project $\{YourProjectName}**
+
+:::info[Create a Project]
+![Create a Project](/img/idps/zitadel/create-project.png)
+:::
+
+### Create a Project
+
+Following the wizard, add a **Name** for the ZITADEL Application you're creating and choose the **Type of 
+Application** as **User Agent**. Other types will work but each of the types have small subtleties to be aware of. If 
+you are familiar with the various types and the implications, by all means use the type that works for you. The only 
+OpenZiti requirement is that whatever type you choose will allow you to add the appropriate callback URLs to the 
+ZITADEL configuration and allows for the PKCE flow to be selected. Select the type and click **Continue**. 
+
+:::info[Application Details - Name and Type]
+![Application Details - Name and Type](/img/idps/zitadel/wizard-name-and-type.png)
+:::
+
+### Choose Authentication Method
+
+All OpenZiti flows will follow the PKCE flow. Ensure you select PKCE and click **Continue**.
+
+:::info[Application Details - Authentication Method]
+![Application Details - Authentication Method](/img/idps/zitadel/wizard-auth-method.png)
+:::
+
+### Add Allowed Redirects
+
+:::note
+As mentioned before, the ZITADEL types enforce different rules. The **User Agent** flow will not allow for 
+local redirects that use the insecure `http` protocol unless the **Development Mode** toggle is toggled. Since 
+OpenZiti is following a PKCE flow even if an attacker were to intercept the code it is insufficient to compromise 
+the flow. An attacker would need to be able to dump the memory of the running tunneler and obtain the code verifier 
+to be able to compromise the PKCE flow. This is **required** if using ZITADEL with OpenZiti tunnelers.
+:::
+
+### Callback URLs
+
+<CallbackUrls/>
+
+Enter the **Redirect URIs** for the OpenZiti solutions you want to enable, toggle **Developer Mode** if you plan to 
+use OpenZiti tunneling solutions, and click **Continue**.
+
+:::info[Application Details - URI Redirects]
+![Application Details - URI Redirects](/img/idps/zitadel/wizard-redirects.png)
+:::
+
+### Finish Creating the Project
+
+The final wizard page is simply an overview of the configuration as you have entered it. Click **Create** to create 
+the project.
+
+:::info[Application Details - Create]
+![Application Details - Create](/img/idps/zitadel/wizard-create.png)
+:::
+
+After clicking **Create**, you will see a confirmation dialog indicating the Client Id. Simply click **Close**.
+
+:::info[Application Details - Confirmation]
+![Application Details - Confirmation](/img/idps/zitadel/wizard-confirmation.png)
+:::
+
+### Use JWT Token Type
+
+On the ZITADEL Project overview page, find the **Token Settings** option toward the bottom of the screen and select it.
+Once the form appears, change the **Auth Token Type** from **Bearer Token** to **JWT** and click the **Save** button.
+
+:::info[Token Type - JWT]
+![Token Type - JWT](/img/idps/zitadel/jwt-tokens.png)
+:::
+
+### Create an Action Adding Email to Tokens (Optional)
+
+It's quite common to want to use a user's email address as the external id for users in your OpenZiti Network. 
+ZITADEL does support adding email addresses to tokens however it will require a ZITADEL action to be created and 
+assigned to the proper flow. If you use the `sub` claim as the external id for identities, these steps are not 
+necessary. If you prefer to use the user's email address, expand this section and follow the steps therein.
+
+<Details>
+<summary>Create an Action to Add Email to Tokens</summary>
+
+From the main ZITADEL overview page, find the **Actions** tab and select it. On the new page that pops up, click the 
+**New** button to being the process of adding a new **Action**.
+
+![Create a New Action](/img/idps/zitadel/new-action.png)
+
+---
+
+### Add Action 
+
+A new modal will pop up on the page. Here, enter the **Name** of the action (`addEmailToAccessToken`). Take note, 
+the name must match the name of the function. In the multi-line text block, copy and paste the following code. This 
+code will add an **email** claim to all access tokens using the ZITADEL v1 api, then click **Add** to add the action.
+
+```example-javascript
+@code: addEmailToAccessToken action function
+function addEmailToAccessToken(ctx, api) {
+  api.v1.claims.setClaim('email', ctx.v1.getUser().human.email);
+}
+```
+
+![Create Action Details](/img/idps/zitadel/new-action-details.png)
+
+---
+
+### Add Action Trigger
+
+With the action in place, it now needs to be assigned to a flow in the ZITADEL admin interface. At the bottom of the 
+screen, find the **Flows** section. Select the **Compliment Token** flow from the dropdown and click **Add Trigger**.
+
+![Add trigger to Flow](/img/idps/zitadel/add-trigger.png)
+
+A modal will pop up, for the **Trigger Type** choose **Pre access token creation** then choose the `addEmailToAccessToken`
+action for the **Action** and click **Save**.
+
+![Finish Assigning Action to Flow](/img/idps/zitadel/add-trigger-finish.png)
+
+With the action assigned, the ZITADEL server should be ready to deliver properly configured tokens to the OpenZiti 
+controller for authentication.
+
+![Action Assigned](/img/idps/zitadel/add-trigger-finish.png)
+
+</Details>
+
+
+
+
+
+
+
+
+
+
+
+

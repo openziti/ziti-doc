@@ -1,0 +1,19 @@
+## Required Fields
+
+The following fields are necessary in order to configure an external JWT signer with OpenZiti. This configuration will
+enable authentication via JWTs obtained through an 
+[Authorization Code Flow with PKCE or PKCE flow](https://oauth.net/2/pkce/). OpenID Connect providers will provide a 
+discovery endpoint that is useful for discovering the **Issuer** and the **JWKS Endpoint** needed to complete the 
+external jwt signer setup.
+
+---
+
+| Field                 | Description                                                                                                                                 | Example                                                            |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| **Issuer**            | The issuer field is a unique HTTPS URL that identifies the OpenID Provider. It must match the `iss` claim provided in the JWT               | https://my.identity.provider:2345                                  |
+| **Client ID**         | The unique value provided by the OIDC provider used to identify the application within the provider to use                                  | openziti_client_id                                                 |
+| **Audience**          | The audience, specified as the `aud` field in the JWT, used to verify the JWT is intended for the OpenZiti Controller                       | openziti_client_id                                                 |
+| **External Auth URL** | For OIDC, this is the same value as the issuer and should be the base url of the OIDC discovery endpoint (.well-known/openid-configuration) | https://my.identity.provider:2345                                  |
+| **JWKS Endpoint**     | A url the OpenZiti Controller can use to retrieve a [JSON Web Key Set](https://en.wikipedia.org/wiki/JSON_Web_Token), used to verify JWTs   | https://my.identity.provider:2345/.well-known/openid-configuration |
+| **Claims Property**   | The property within the JWT returned from the OIDC provider that will map to the external ID field of an identity                           | email                                                              |
+| **Scopes**            | The set of scopes to request when generating the authentication request to the OIDC provider                                                | profile offline_access                                             |

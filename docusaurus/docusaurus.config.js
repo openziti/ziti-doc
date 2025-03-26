@@ -45,6 +45,11 @@ const config = {
         path: 'docs-policies',
         routeBasePath: 'policies',
         sidebarPath: require.resolve('./sidebar-policies.js'),
+        beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives, ],
+        remarkPlugins: [
+          require('./src/plugins/remark/remark-yaml-table'),
+          require('./src/plugins/remark/remark-code-block'),
+        ],
       },
     ],
     [
@@ -230,6 +235,10 @@ const config = {
             to: '/docs/learn/quickstarts/zac/',
             from: ['/docs/quickstarts/zac/installation'],
           },
+          {
+            to: '/docs/guides/external-auth/browzer/',
+            from: ['/docs/identity-providers-for-browZer']
+          }
         ],
       },
     ],
@@ -249,6 +258,7 @@ const config = {
             require('./src/plugins/remark/remark-yaml-table'),
             require('./src/plugins/remark/remark-code-block'),
           ],
+          showLastUpdateTime: true
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

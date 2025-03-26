@@ -1,0 +1,89 @@
+---
+title: Auth0
+description: Configure Auth0 for with OpenZiti
+hide_table_of_contents: true
+---
+
+import CallbackUrls from '/docs/guides/external-auth/identity-providers/_callback_urls.mdx';
+import Details from '@theme/MDXComponents/Details';
+
+# Auth0
+
+<img src="/icons/logo-auth0.svg" alt="Auth0 logo" height="100px"/>
+
+This section illustrates where the expected values are found within the [Auth0 dashboards](https://auth0.com/). For a 
+more detailed guide on creating an Auth0 application and API, see below.  Use these values to configure an external JWT
+signer.
+
+```example-text
+@code: Example Auth0 OpenID Discovery Endpoint
+https://${tenant}.${region}.auth0.com/.well-known/openid-configuration
+```
+
+| Field                 | Where to Find the Value                                                                                       | Example                                                         |
+|-----------------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| **Issuer**            | Application Settings in **Basic Information**. The **Domain** of the app prefixed with "https://"             | https://dev-k1gpd4wpyslypklr.us.auth0.com/                      |
+| **Client ID**         | Application Settings in **Basic Information**. The **Client ID**                                              | HTgNgEjHR9Q3krXiShYsrVOh6pRNrtH0q                               |
+| **Audience**          | The **API Audience** on the APIs dashboard or in **General Settings** as the **Identifier** of the API        | https://your.openziti.controller.example.io                     |
+| **External Auth URL** | The same value as the **Issuer**                                                                              | https://dev-k1gpd4wpyslypklr.us.auth0.com/                      |
+| **JWKS Endpoint**     | Use the `jwks_uri` field from the OpenID discovery endpoint. Often the Auth0 domain + ".well-known/jwks.json" | https://dev-k1gpd4wpyslypklr.us.auth0.com/.well-known/jwks.json |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT                                  | email                                                           |
+| **Scopes**            | `openid` included by default then any other standard or custom scope such as `email`, `profile`etc.           | profile offline_access                                          |
+
+---
+
+## Get an Auth0 Account
+
+If you don't already have an account you can sign up for a free account at https://auth0.com/signup
+
+## Add an Application (if necessary)
+
+Once you have an Auth0 account, expand **Application**, choose **Applications** again in the left navbar then find the 
+**Create Application** button and click it:
+
+:::info[Add Application]
+![Auth0 Applications](/img/idps/auth0/create-app.png)
+:::
+
+### Choose the Type of Application
+
+Give the application a name, then choose **Single Page Web Applications** and click **Create**.
+
+:::info[Choose Application Type]
+![Auth0 Applications](/img/idps/auth0/create-spa.png)
+:::
+
+Ignore the Quickstart tab and simply select the **Settings** tab to proceed.
+:::info[Skip Quickstart Type Selection]
+![Auth0 Applications](/img/idps/auth0/skip-quickstart.png)
+:::
+
+### Callback URLs
+
+<CallbackUrls/>
+
+From the **Settings** tab in the Auth0 portal, scroll down until you find the **Application URIs** section and add the 
+URIs appropriate for the features you are enabling.
+
+:::info[Example Callback URLs]
+![Auth0 callbacks](/img/idps/auth0/callbacks.png)
+:::
+
+## Add a New API
+
+When using ext-jwt-signers with OIDC, OpenZiti validates the security token presented is intended for OpenZiti by 
+looking for and using the `aud` (audience) field of the JWT.  This requires the token (the JWT) to have an audience 
+specified and the ext-jwt-signer to match that audience. For Auth0, this is accomplished by creating an **API**.
+
+From the left navbar in the Auth0 dashboard, click on `Application` -> `APIs` -> `Create API`
+
+:::info[Create API]
+![Auth0 Applications](/img/idps/auth0/create-api.png)
+:::
+
+Any name can be used but as the UI indicates the `Identifier*` field is used as the `aud`ience field of the JWT 
+after successful authentication. Choose RFC 9068 as the JSON Web Token Profile.
+
+:::info[Create API]
+![Auth0 clientId](/img/idps/auth0/api-details.png)
+:::
