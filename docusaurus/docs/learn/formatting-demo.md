@@ -2,6 +2,8 @@
 draft: 'true'
 ---
 
+import DetailsExample from './_detail_example.mdx'
+
 # Code Block Formatting Demo
 
 This is `what` a `regular` code block `that is inline` will look like.
@@ -71,173 +73,39 @@ echo "Hello, World!" # Bash
 regular, text here
 ```
 
-
-
 :::note
-Here is a line of regular text
-`inline code` blocks `are` here `to see`
-```
-this is the first line
 
-    security_opt:
-      - seccomp:unconfined
-```
-
-<Details>
-<summary>summary1</summary>
-this is some text `and an inline code block`
-
-```text
-here is more text code
-and more code
-````
-
-```bash
-here is more text code
-and more code
-````
-
-</Details>
+<DetailsExample/>
 
 :::
 
 :::tip
-Here is a line of regular text
-`inline code` blocks `are` here `to see`
-```
-this is the first line
 
-    security_opt:
-      - seccomp:unconfined
-```
-
-<Details>
-<summary>summary1</summary>
-this is some text `and an inline code block`
-
-```text
-here is more text code
-and more code
-````
-
-```bash
-this is bash
-while true; do echo "stuff"; echo "more stuff"; done
-````
-
-</Details>
+<DetailsExample/>
 
 :::
 
 :::info
-Here is a line of regular text
-`inline code` blocks `are` here `to see`
-```
-this is the first line
 
-    security_opt:
-      - seccomp:unconfined
-```
-
-<Details>
-<summary>summary1</summary>
-this is some text `and an inline code block`
-
-```text
-here is more text code
-and more code
-````
-
-```bash
-this is bash
-while true; do echo "stuff"; echo "more stuff"; done
-````
-
-</Details>
+<DetailsExample/>
 
 :::
 
 :::warning
-Here is a line of regular text
-`inline code` blocks `are` here `to see`
-```
-this is the first line
 
-    security_opt:
-      - seccomp:unconfined
-```
-
-<Details>
-<summary>summary1</summary>
-this is some text `and an inline code block`
-
-```text
-here is more text code
-and more code
-````
-
-```bash
-this is bash
-while true; do echo "stuff"; echo "more stuff"; done
-````
-
-</Details>
+<DetailsExample/>
 
 :::
 
 :::danger
-Here is a line of regular text
-`inline code` blocks `are` here `to see`
-```
-this is the first line
 
-    security_opt:
-      - seccomp:unconfined
-```
-
-<Details>
-<summary>summary1</summary>
-this is some text `and an inline code block`
-
-```text
-here is more text code
-and more code
-````
-
-```bash
-this is bash
-while true; do echo "stuff"; echo "more stuff"; done
-````
-
-</Details>
+<DetailsExample/>
 
 :::
 
 :::important
-Here is a line of regular text
-`inline code` blocks `are` here `to see`
-```
-this is the first line
 
-    security_opt:
-      - seccomp:unconfined
-```
-
-<Details>
-<summary>summary1</summary>
-this is some text `and an inline code block`
-
-```text
-here is more text code
-and more code
-````
-
-```bash
-this is bash
-while true; do echo "stuff"; echo "more stuff"; done
-````
-
-</Details>
+<DetailsExample/>
 
 :::
 
@@ -245,34 +113,7 @@ while true; do echo "stuff"; echo "more stuff"; done
 
 
 :::caution
-Here is a line of regular text
-`inline code` blocks `are` here `to see`
-```
-this is the first line
 
-    security_opt:
-      - seccomp:unconfined
-```
-
-```bash
-this is bash
-while true; do echo "stuff"; echo "more stuff"; done
-````
-
-<Details>
-<summary>summary1</summary>
-this is some text `and an inline code block`
-
-```text
-here is more text code
-and more code
-````
-
-```bash
-this is bash
-while true; do echo "stuff"; echo "more stuff"; done
-````
-
-</Details>
+<DetailsExample/>
 
 :::

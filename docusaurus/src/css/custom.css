@@ -95,11 +95,6 @@ html[data-theme=dark] #Wizardly code {
   color: rgba(117, 82, 136, 0.98) !important;
 }
 
-html[data-theme=dark] p code { 
-  color: var(--inline-code-block-color);
-  background: var(--inline-code-block-background-color);
-}
-
 html[data-theme=dark] .alert--secondary code {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(117, 82, 136, 0.98);
@@ -1874,7 +1869,7 @@ code {
   font-size: 87.5%;
   font-weight: 600;
   word-break: break-word;
-  border-radius: 7px;
+  border-radius: 5px;
   padding: 1px 4px 1px 4px;
 }
 
@@ -2131,6 +2126,9 @@ p > img {
   background: var(--ifm-alert-background-color) !important;
 }
 
+.alert details {
+  margin-top: 10px;
+}
 
 html:not([data-theme="dark"]) {
   .alert--success, .alert--success pre code, .alert--success .alert--info, .alert--success .alert--info pre code {
@@ -2161,16 +2159,16 @@ html[data-theme="dark"] {
     --inline-code-block-background-color: var(--alert-border-color);
     --inline-code-block-color: var(--alert-background-color);
   }
+  .theme-admonition p code, details > summary > code {
+    color: var(--inline-code-block-color);
+    background: var(--inline-code-block-background-color);
+  }
   .alert.alert--success {
     --alert-background-color: rgb(10, 60, 4);
   }
   .alert--success, .alert--success pre code, .alert--success .alert--info, .alert--success .alert--info pre code, .alert.alert--success details {
     --alert-border-color: rgba(36, 167, 12, 1.0);
     --alert-background-color: rgba(15, 80, 6, 1.0);
-  }
-  .alert.alert-success code {
-    --alert-border-color: rgba(236, 167, 12, 1.0);
-    --alert-background-color: rgba(215, 80, 6, 1.0);
   }
 
   .alert.alert--secondary {
@@ -2179,6 +2177,7 @@ html[data-theme="dark"] {
   .alert--secondary, .alert--secondary pre code, .alert--secondary .alert--info, .alert--secondary .alert--info pre code, .alert.alert--secondary details {
     --alert-border-color: rgba(184, 91, 217, 1.0);
     --alert-background-color: rgba(50, 30, 85, 1.0);
+    --inline-code-block-color: #white;
   }
 
   .alert.alert--danger {
@@ -2205,6 +2204,11 @@ html[data-theme="dark"] {
     --alert-border-color: rgba(204, 153, 0, 1.0);
     --alert-background-color: rgb(100, 80, 65);
   }
+  .theme-admonition details > summary > code, .theme-admonition code {
+    background: var(--alert-border-color);
+    color: var(--inline-code-block-color);
+  }
+  
   .theme-code-block > div > pre > code { /*fixes a strange render issue in prism/docusaurus' :::note admonition*/
     background: var(--alert-background-color);
   }
