@@ -6,6 +6,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-leading: 35px;
   --ifm-background-color: #f8fafc;
   --ifm-background-surface-color: #f1f5f9;
   --ifm-background-surface-color-dark: #e1d4ee;
@@ -17,14 +18,13 @@
   --ifm-color-primary-light: #a14ded;
   --ifm-color-primary-lighter: #a85aee;
   --ifm-color-primary-lightest: #b776f1;
-  --code-block-text-colora: #ddd8e5;
-  --code-block-text-colorb: #add8e5;
-  --code-block-text-color: var(--ifm-heading-color);
+  --ifm-heading-color: 0 36 81;
+  --code-block-color: var(--ifm-heading-color);
+  --lighter-code-block-color: color-mix(in srgb, var(--ifm-heading-color) 70%, white 30%);
   --code-block-background-color: #ECEEEF;
   --ifm-font-family-monospace: "Consolas", monospace;
   --ifm-font-family-sans: "Open Sans", sans-serif;
   --ifm-font-family-sans-default: sans-serif;
-  --ifm-heading-color: #002451;
   --ifm-color-banner: #edac15;
   --ifm-navbar-item-padding-horizontal: .5em;
   --background-color-1: #ffd0d0;
@@ -47,11 +47,19 @@
   --h3-size: 25px;
   --docusaurus-collapse-button-bg-hover: rgb(0 0 0 / 2%);
   --ifm-tabs-color-active: var(--ifm-font-color-base);
-  --ifm-global-shadow-lw: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+  --ifm-global-shadow-lw: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --ifm-menu-color-background-hover: #f1f5f9;
+  --ifm-menu-left-border-color: #002451;
+  --ifm-link-color: rgba(217, 15, 95, 0.98);
+  --ifm-breadcrumb-color-actives: rgba(217, 15, 95, 0.98);
+  --ifm-breadcrumb-color-active: color-mix(in srgb, var(--ifm-link-color) 75%, white 25%);
 }
-
+html:not([data-theme="dark"]) {
+  --ifm-leading: 15px;
+}
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme="dark"] {
+  --ifm-leading: 15px;
   --ifm-background-color: #111827;
   --ifm-background-surface-color: #1f2937;
   --ifm-background-surface-color-dark: #374151;
@@ -68,29 +76,33 @@ html[data-theme="dark"] {
   --ifm-font-color-base: #94a3b8;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --logo-name: "ziti-logo-light.svg";
-  --ifm-heading-color: #94a3b8;
+  --ifm-heading-color: 148 163 184;
   --ifm-menu-color: #ffffff;
   --ifm-toc-link-color: #ffffff;
-  --code-block-text-color: var(--ifm-heading-color);
+  --code-block-color: var(--ifm-heading-color);
   --code-block-background-color: #434862;
+  --ifm-alert-foreground-color: #cbd5e1;
+  --ifm-docusaurus-collapse-button-bg-hover: rgba(255, 255, 255, 0.05);
+  --ifm-tabs-color-active: #e2e8f0;
+  --ifm-global-shadow-lw: 3px 3px 10px 0 rgba(255, 255, 255, 0.2);
+  --ifm-menu-color-background-hover: #1f2937;
+  --ifm-menu-left-border-color: #94a3b8;
+  --ifm-link-color: rgba(21, 142, 237, 1);
+  --ifm-breadcrumb-color-active: color-mix(in srgb, var(--ifm-link-color) 75%, white 25%);
 }
 
 html[data-theme=dark] #Wizardly code {
   color: rgba(117, 82, 136, 0.98) !important;
 }
 
-html[data-theme=dark] code { 
-  color: var(--code-block-text-color) !important;
-}
-
 html[data-theme=dark] .alert--secondary code {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid rgba(117, 82, 136, 0.98) !important;
-  color: rgba(117, 82, 136, 0.98) !important;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
 }
 
 html[data-theme=dark] .alert--secondary code .token-line {
-    color: rgba(117, 82, 136, 0.98) !important;
+    color: rgba(117, 82, 136, 0.98);
 }
 
 html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
@@ -648,7 +660,7 @@ html[data-theme=dark] #Wizardly a {
 }
 
 html[data-theme=dark] .menu__link {
-  color: rgba(255, 255, 255, 0.98) !important;
+  color: var(--ifm-font-color-base) !important;
 }
 
 .menu__link--active {
@@ -657,12 +669,12 @@ html[data-theme=dark] .menu__link {
 }
 
 html[data-theme=dark] a {
-  color: rgba(232, 74, 135, 1.0);
+  color: var(--ifm-link-color);
   transition: 0.5s;
 }
 
 html[data-theme=dark] .menu__link--active {
-  color: rgba(232, 74, 135, 1.0) !important;
+  color: var(--ifm-link-color) !important;
   transition: 0.5s;
 }
 
@@ -1851,16 +1863,14 @@ li.L9 {}
 }
 
 code {
+  /*GENERIC CODE BLOCK*/
   font-family: var(--ifm-font-family-monospace), monospace;
   vertical-align: middle;
   font-size: 87.5%;
   font-weight: 600;
   word-break: break-word;
-  border-radius: 7px;
-  padding: 2px 8px 2px 8px;
-
-  /*background-color: rgba(117, 82, 136, 0.2) !important;*/
-  border: 1px solid rgba(117, 82, 136, 0.98);
+  border-radius: 5px;
+  padding: 1px 4px 1px 4px;
 }
 
 code p {
@@ -1947,123 +1957,14 @@ li a code {
 }
 
 
-.alert {
-  --ifm-code-background: var(--ifm-alert-background-color-highlight);
-  --ifm-link-color: var(--ifm-alert-foreground-color);
-  --ifm-link-hover-color: var(--ifm-alert-foreground-color);
-  --ifm-link-decoration: underline;
-  --ifm-tabs-color: var(--ifm-alert-foreground-color);
-  --ifm-tabs-color-active: var(--ifm-alert-foreground-color);
-  --ifm-tabs-color-active-border: var(--ifm-alert-border-color);
-  border-left-width: var(--ifm-alert-border-left-width);
-  border-radius: var(--ifm-alert-border-radius);
-  box-shadow: var(--ifm-alert-shadow);
-  padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
-}
-
 pre.off {
   margin-top: 10px !important;
-}
-
-.alert--secondary {
-  --ifm-alert-background-color: rgba(177, 34, 227, 0.15);
-  --ifm-alert-background-color-highlight: rgba(177, 34, 227, 0.15);
-  --ifm-alert-foreground-color: var(--ifm-color-secondary-contrast-foreground);
-  --ifm-alert-border-color: rgba(184, 91, 217, 0.98);
-}
-
-.alert--secondary code {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid rgba(117, 82, 136, 0.98);
-  color: rgba(117, 82, 136, 0.98);
-}
-
-.alert--secondary pre code {
-  background-color: rgba(117, 82, 136, 0.98) !important;
-  border: 1px solid rgba(117, 82, 136, 0.98);
-  color: #FFF;
-}
-
-.alert--success {
-  --ifm-alert-background-color: rgba(48, 207, 18, 0.15);
-  --ifm-alert-background-color-highlight: rgba(48, 207, 18, 0.15);
-  --ifm-alert-foreground-color: var(--ifm-color-success-contrast-foreground);
-  --ifm-alert-border-color: rgba(48, 207, 18, 0.98);
-}
-
-.alert--success code {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid rgba(29, 137, 13, 0.98);
-  color: rgba(29, 137, 13, 0.98);
-}
-
-.alert--success pre code {
-  background-color: rgba(29, 137, 13, 0.98) !important;
-  border: 1px solid rgba(29, 137, 13, 0.98);
-  color: #FFF;
 }
 
 .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
   --docusaurus-details-decoration-color: rgba(88, 172, 216, 0.98) !important;
   border: 1px solid rgba(88, 172, 216, 0.98) !important;
   background-color: rgba(88, 172, 216, 0.4);
-}
-
-.alert--info {
-  --ifm-alert-background-color: rgba(88, 172, 216, 0.15);
-  --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.15);
-  --ifm-alert-foreground-color: var(--ifm-color-info-contrast-foreground);
-  --ifm-alert-background-color-highlight: rgba(88, 172, 216, 0.98);
-}
-
-.alert--info code {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid rgba(88, 172, 216, 0.98);
-  color: rgba(88, 172, 216, 0.98);
-}
-
-.alert--info pre code {
-  background-color: rgba(88, 172, 216, 0.98) !important;
-  border: 1px solid rgba(88, 172, 216, 0.98);
-  color: #FFF;
-}
-
-.alert--warning {
-  --ifm-alert-background-color: rgba(255, 146, 22, 0.15);
-  --ifm-alert-background-color-highlight: rgba(255, 146, 22, 0.15);
-  --ifm-alert-foreground-color: var(--ifm-color-warning-contrast-foreground);
-  --ifm-alert-border-color: rgba(255, 146, 22, 0.98);
-}
-
-.alert--warning code {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid rgba(206, 143, 14, 0.98);
-  color: rgba(206, 143, 14, 0.98);
-}
-
-.alert--warning pre code {
-  background-color: rgba(206, 143, 14, 0.98) !important;
-  border: 1px solid rgba(206, 143, 14, 0.98);
-  color: #FFF;
-}
-
-.alert--danger {
-  --ifm-alert-background-color: rgba(180, 46, 46, 0.15);
-  --ifm-alert-background-color-highlight: rgba(180, 46, 46, 0.15);
-  --ifm-alert-foreground-color: var(--ifm-color-danger-contrast-foreground);
-  --ifm-alert-border-color: rgba(180, 46, 46, .98);
-}
-
-.alert--danger code {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid rgba(152, 22, 22, .98);
-  color: rgba(152, 22, 22, .98);
-}
-
-.alert--danger pre code {
-  background-color: rgba(152, 22, 22, .98) !important;
-  border: 1px solid rgba(152, 22, 22, .98);
-  color: #FFF;
 }
 
 .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
@@ -2143,34 +2044,172 @@ pre.off {
 }
 
 .code-section {
-  border-left: 3px solid var(--code-block-text-color);
-  border-top: 1px solid var(--code-block-text-color);
-  border-right: 1px solid var(--code-block-text-color);
-  border-bottom: 1px solid var(--code-block-text-color);
+  border-left: 3px solid var(--code-block-color);
+  border-top: 1px solid var(--code-block-color);
+  border-right: 1px solid var(--code-block-color);
+  border-bottom: 1px solid var(--code-block-color);
   margin: 16px 0;
-  background: var(--code-block-background-color); /* Light gray background */
+  background: var(--code-block-background-color);
+  border-radius: 4px;
+  padding-top: 5px;
+  padding-bottom: 1px;
+}
+
+.code-section-desc {
   padding-left: 12px;
   padding-right: 12px;
-  border-radius: 4px;
+}
+
+.code-section-command {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.code-section-code {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.code-section-results {
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .code-section pre {
   background: var(--code-block-background-color);
-  color: var(--code-block-text-color);
+  color: var(--code-block-color);
   _padding: 8px;
   border-radius: 4px;
 }
 
 .code-section p {
-  color: var(--code-block-text-color);
+  color: var(--code-block-color);
 }
 
 .code-section-desc p {
   font-size: 1.1em;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px groove var(--code-block-color);
 }
 
-.theme-code-block {
-  border: 1px solid var(--ifm-background-surface-color-dark);
-  margin-top: 5px;
+.theme-doc-sidebar-item-category[class*="theme-doc-sidebar-item-category-level-"].menu__list-item:not(.menu__list-item--collapsed) > ul {
+  padding-left: 1px;
+  margin-left: 13px;
+  border-left: 2px solid  rgb(var(--code-block-color) / 15%);
+}
+
+p > img {
+  width: auto;
+  border-radius: 5px;  /* Optional: Rounded corners */
+  box-shadow: 5px 5px 5px rgba(30, 30, 20, 0.25); /* Optional: Adds shadow */
+}
+
+.alert {
+  --alert-dark-shadow: rgba(50, 30, 5, .5);
+  --ifm-global-shadow-lw: 3px 3px 10px 0 var(--alert-dark-shadow);
+  --ifm-alert-shadow: var(--ifm-global-shadow-lw);
+  --ifm-alert-border-color: var(--alert-border-color);
+  --ifm-code-background: var(--alert-background-color);
+  --ifm-alert-background-color:var(--alert-background-color);
+}
+
+.token-line span {
+  color: var(--code-block-color);
+}
+
+.alert pre code {
+  background: var(--ifm-alert-background-color);
+  border: 1px solid var(--alert-border-color);
+}
+.alert pre {
+  margin-top: 10px;
+  --ifm-code-background: var(--ifm-alert-background-color);
+  background: var(--ifm-alert-background-color) !important;
+}
+
+.alert details {
+  margin-top: 10px;
+}
+
+html:not([data-theme="dark"]) {
+  .alert--success, .alert--success pre code, .alert--success .alert--info, .alert--success .alert--info pre code {
+    --alert-border-color: rgba(48, 207, 18, 1.0);
+    --alert-background-color: rgba(48, 207, 18, 0.2);
+  }
+  .alert--secondary, .alert--secondary pre code, .alert--secondary .alert--info, .alert--secondary .alert--info pre code {
+    --alert-border-color: rgba(184, 91, 217, 1.0);
+    --alert-background-color: rgba(184, 91, 217, 0.2);
+  }
+  .alert--danger, .alert--danger pre code, .alert--danger .alert--info, .alert--danger .alert--info pre code {
+    --alert-border-color: rgba(180, 46, 46, 1.0);
+    --alert-background-color: rgba(180, 46, 46, 0.2);
+  }
+  .alert--warning, .alert--warning pre code, .alert--warning .alert--info, .alert--warning .alert--info pre code { /**/
+    --alert-border-color: rgba(255, 146, 22, 1.0);
+    --alert-background-color: rgba(255, 146, 22, 0.2);
+  }
+  .alert--info, .alert--info pre code, .alert--info .alert--info {
+    --alert-border-color: rgba(6, 179, 212, 1.0);
+    --alert-background-color: rgba(6, 179, 212, 0.2);
+  }
+}
+
+html[data-theme="dark"] {
+  .alert {
+    --code-block-background-color: var(--alert-border-color);
+    --inline-code-block-background-color: var(--alert-border-color);
+    --inline-code-block-color: var(--alert-background-color);
+  }
+  .theme-admonition p code, details > summary > code {
+    color: var(--inline-code-block-color);
+    background: var(--inline-code-block-background-color);
+  }
+  .alert.alert--success {
+    --alert-background-color: rgb(10, 60, 4);
+  }
+  .alert--success, .alert--success pre code, .alert--success .alert--info, .alert--success .alert--info pre code, .alert.alert--success details {
+    --alert-border-color: rgba(36, 167, 12, 1.0);
+    --alert-background-color: rgba(15, 80, 6, 1.0);
+  }
+
+  .alert.alert--secondary {
+    --alert-background-color: rgb(40, 25, 67);
+  }
+  .alert--secondary, .alert--secondary pre code, .alert--secondary .alert--info, .alert--secondary .alert--info pre code, .alert.alert--secondary details {
+    --alert-border-color: rgba(184, 91, 217, 1.0);
+    --alert-background-color: rgba(50, 30, 85, 1.0);
+    --inline-code-block-color: #white;
+  }
+
+  .alert.alert--danger {
+    --alert-background-color: rgb(80, 38, 38);
+  }
+  .alert--danger, .alert--danger pre code, .alert--danger .alert--info, .alert--danger .alert--info pre code, .alert.alert--danger details {
+    --alert-border-color: rgba(180, 46, 46, 1.0);
+    --alert-background-color: rgba(100, 48, 48, 1.0);
+    --inline-code-block-color: #white;
+  }
+
+  .alert.alert--info {
+    --alert-background-color: rgb(27, 46, 65);
+  }
+  .alert--info, .alert--info pre code, .alert--info .alert--info, .alert--info .alert--info pre code, .alert.alert--info details {
+    --alert-border-color: rgba(86, 168, 212, 1.0);
+    --alert-background-color: rgba(40, 60, 90, 1.0);
+  }
+
+  .alert.alert--warning {
+    --alert-background-color: rgb(74, 60, 51);
+  }
+  .alert--warning, .alert--warning pre code, .alert--warning .alert--info, .alert--warning .alert--info pre code {
+    --alert-border-color: rgba(204, 153, 0, 1.0);
+    --alert-background-color: rgb(100, 80, 65);
+  }
+  .theme-admonition details > summary > code, .theme-admonition code {
+    background: var(--alert-border-color);
+    color: var(--inline-code-block-color);
+  }
+  
+  .theme-code-block > div > pre > code { /*fixes a strange render issue in prism/docusaurus' :::note admonition*/
+    background: var(--alert-background-color);
+  }
 }

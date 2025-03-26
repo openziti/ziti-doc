@@ -1,0 +1,68 @@
+---
+title: Authentik
+sidebar_label: Authentik
+hide_table_of_contents: true
+---
+import CallbackUrls from '/docs/guides/external-auth/identity-providers/_callback_urls.mdx';
+
+# Authentik
+
+<img src="/icons/logo-authentik.svg" alt="HAuthentik logo" height="100px"/>
+
+This section illustrates where the expected values are found within 
+[the Authentik config](https://docs.goauthentik.io/docs/). For a more detailed guide on enabling Authentik with 
+OpenZiti, see below. Use these values to configure an external JWT signer. All of these values are found from the 
+Authentik **Admin interface** in the corresponding provider's overview page.
+
+| Field                 | Where to Find the Value in the Authentik UI                                              | Example                                                                       |
+|-----------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| **Issuer**            | Shown on the right as the **OpenID Configuration Issuer**                                | https://authentik.doc.demo.openziti.org:9243/application/o/openziti-api/      |
+| **Client ID**         | Shown in the left column as the **Client ID**                                            | authentik_openziti                                                            |
+| **Audience**          | Unless overridden, the same value as the **Client ID**                                   | authentik_openziti                                                            |
+| **External Auth URL** | The same value as the **Issuer**                                                         | https://authentik.doc.demo.openziti.org:9243/application/o/openziti-api/      |
+| **JWKS Endpoint**     | Shown on the right as the **JWKS URL**                                                   | https://authentik.doc.demo.openziti.org:9243/application/o/openziti-api/jwks/ |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT             | email                                                                         |
+| **Scopes**            | `openid` is always included. Often 'email' but 'profile' or any standard or custom scope | email offline_access                                                          |
+
+---
+
+## Create an Application with Provider
+
+Begin by creating an application with provider. Go to the admin interface, on the left expand **Applications**, click 
+on **Applications** and then click on **Create with Provider** and complete the wizard that pops up.
+
+:::info[Create Application]
+![create app with provider](/img/idps/authentik/create-app-provider.png)
+:::
+
+## Configure the Application
+
+Enter the **Name** of the application and click the **Next** button.
+
+:::info[Configure the Application]
+![img](/img/idps/authentik/new-app-1.png)
+:::
+
+## Choose a Provider
+
+When choosing a provider, choose the **OAuth2/OpenID Provider** option and click the **Next** button.
+
+:::info[Choose a Provider]
+![img](/img/idps/authentik/new-app-2.png)
+:::
+
+## Configure the Provider
+
+On the **Configure Provider** screen, enter a **Name** for the provider (or leave it as the default). When choosing the 
+authorization flow, select "default-provider-authorization-explicit-consent (Authorize Application)". The **Client 
+type** should be set to **Public**. Allow for the **Client ID** to be automatically generated, or assign a meaningful 
+name to the provider. Note that this will also become the `aud`ience used when configuring OpenZiti. Enter the expected
+redirect URLs. OpenZiti tunnelers expect to have `http://localhost:20314/auth/callback` specified as a valid callback URL.
+
+### Callback URLs
+
+<CallbackUrls/>
+
+:::info[Configure the Provider]
+![img](/img/idps/authentik/new-app-3.png)
+:::

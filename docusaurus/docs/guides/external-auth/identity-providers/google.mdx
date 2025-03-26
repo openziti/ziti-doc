@@ -1,0 +1,94 @@
+---
+title: Google Workspace
+sidebar_label: Google
+hide_table_of_contents: true
+---
+
+import CallbackUrls from '/docs/guides/external-auth/identity-providers/_callback_urls.mdx';
+import Details from '@theme/MDXComponents/Details';
+
+# Google Workspace
+
+<img src="/icons/logo-google.svg" alt="Google logo" height="100px"/>
+
+This section illustrates where the expected values are found within the Google dashboards. There are at least two 
+different consoles for Google, the [Google Auth Platform](https://console.cloud.google.com/auth/overview) 
+and [Google Cloud APIs & Services](https://console.cloud.google.com/apis/credentials). For a more detailed guide on 
+enabling Google with OpenZiti, see below. Use these values to configure an external JWT signer. All of these values 
+are found from the **client** or **credentials** screen in the corresponding overview page. 
+
+:::warning
+Most of the errors when using Google as an identity provider are due to selecting/using the wrong type of client.
+The only client type that currently works with OpenZiti is the **Universal Windows Platform** client type. If you use any 
+of the other client types you will experience one sort of error or another. Also, only OpenZiti tunnelers will work with
+this configuration. Google does not function standalone with BrowZer or Ziti Admin Console (ZAC)
+:::
+
+| Field                 | Where to Find the Value in the Google UI                                                 | Example                                                                  |
+|-----------------------|------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| **Issuer**            | The issuer for all Google tokens is constant: https://accounts.google.com                | https://accounts.google.com                                              |
+| **Client ID**         | Found on the client/credentials screen                                                   | 264297154877-lni3d11teird99mhkmches566dmt0f3i.apps.googleusercontent.com |
+| **Audience**          | Unless overridden, the same value as the **Client ID**                                   | 264297154877-lni3d11teird99mhkmches566dmt0f3i.apps.googleusercontent.com |
+| **External Auth URL** | The same value as the Issuer. Always https://accounts.google.com                         | https://accounts.google.com                                              |
+| **JWKS Endpoint**     | Same value for all tokens. Found using the OpenID configuration URL                      | https://www.googleapis.com/oauth2/v3/certs                               |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT             | email                                                                    |
+| **Scopes**            | `openid` is always included. Often `email` but `profile` or any standard or custom scope | profile offline_access                                                   |
+
+---
+
+## Create a Client/Credential
+
+[Google Auth Platform](https://console.cloud.google.com/auth/overview)
+and [Google Cloud APIs & Services](https://console.cloud.google.com/apis/credentials) both allow you to generate 
+credentials or clients. Although the terminology changes, both are the same at the end. If you create a credential 
+in the APIs & Services screen, it will appear in the Google Auth Platform as a client. 
+
+:::note
+The screens shown below are from the [Google Cloud APIs & Services](https://console.cloud.google.com/apis/credentials)
+console. If the screens do not look very close or identical you may be looking at the 
+[Google Auth Platform](https://console.cloud.google.com/auth/overview)
+:::
+
+Begin, by creating a credential. From the APIs & Services console, click on Credentials, Create Credentials and 
+choose OAuth client ID:
+
+:::info[Create a Client/Credential]
+![Auth0 Applications](/img/idps/google/create-credentials.png)
+:::
+
+## Select Credential Type
+
+When creating a credential/client there are different types available to select. Depending on the OpenZiti tech
+you are trying to enable, you will need to select a different type. To enable authentication for BrowZer or the Ziti
+Admin Console (ZAC) you will need to select the **Web application** type. For use with an OpenZiti tunneler you will
+need to select **Universal Windows Platform (UWP)**.
+
+Begin by creating an application with provider. Go to the admin interface, on the left expand **Applications**, click
+on **Applications** an then click on **Create with Provider** and complete the wizard that pops up.
+
+
+<Details>
+<summary>Universal Windows Platform (UWP)</summary>
+
+![Auth0 Applications](/img/idps/google/create-uwp-type.png)
+
+</Details>
+<Details>
+<summary>Web Application</summary>
+
+![Auth0 Applications](/img/idps/google/create-web-type.png)
+
+</Details>
+
+## Common Errors With Google
+
+If you are using any client type other than **Universal Windows Platform (UWP)** and trying to use Google with anything 
+other than the OpenZiti tunnelers clients will likely experience errors. One such example is shown below.
+
+```example-text
+@code: Example error
+{
+  "error": "invalid_request",
+  "error_description": "client_secret is missing."
+}
+```

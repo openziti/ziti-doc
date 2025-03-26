@@ -1,0 +1,25 @@
+The [Authorization Code Flow with PKCE or PKCE flow](https://oauth.net/2/pkce/) requires configuring callback URLs the
+Identity Provider (IdP) will allow redirecting to. If the URL for a specific client is not specifically listed, the IdP
+will deny the authentication request. Depending on the technology used to authenticate to the OpenZiti Network,
+different URLs need to be specified. More than one URL is allowed to be configured. Decide if you are configuring the
+IdP for use with tunnelers, with BrowZer or with both and add the appropriate callback urls.
+
+In the Auth0 dashboard, with the application selected, choose the "Settings" tab and scroll down to the "Application
+URIs" section and add the URLs.
+
+#### For Tunnelers
+
+Tunnelers require an allowed callback URL of: `http://localhost:20314/auth/callback`.
+
+#### For BrowZer
+
+The URL to configure for BrowZer will vary depending on the BrowZer configuration. BrowZer requires a wildcard
+certificate in order to be deployed and all services are delivered from this wildcard domain. You will need to add
+the configured [wildcard domain](/docs/learn/quickstarts/browzer/example/#get-a-wildcard-certificate) as the
+callback url.
+
+#### For Ziti Admin Console (ZAC)
+
+The URL to configure an IdP for so that ZAC will be able to authenticate will depend on how you deploy your ZAC. The 
+current method recommended to deploy ZAC will deploy it on the same URL as the controller. For example: 
+https://controller.example.com/zac/callback

@@ -1,0 +1,102 @@
+---
+title: dex
+sidebar_label: dex
+hide_table_of_contents: true
+---
+
+import CallbackUrls from '/docs/guides/external-auth/identity-providers/_callback_urls.mdx';
+
+# dex
+
+<img src="/icons/logo-dex.svg" alt="dex logo" height="100px"/>
+
+The [dex IdP](https://dexidp.io/docs/configuration/) can be configured to federate identity to other IdPs. Doing so 
+will allow you to provide a single identity back to OpenZiti. There is no dashboard need to configure OpenZiti with 
+dex. All the values you need to come from the dex config file. For a more detailed guide on enabling dex with OpenZiti, 
+see below. Use these values to configure an external JWT signer with dex.
+
+:::note[a note about dex]
+The dex IdP exclusively is a federating IdP. You must have a client id and secret from another IdP in order to 
+authenticate.
+:::
+
+| Field                 | Where to Find the Value in the dex Configuration                                         | Example                                     |
+|-----------------------|------------------------------------------------------------------------------------------|---------------------------------------------|
+| **Issuer**            | In the dex config.yaml file, key **issuer** or from the `jwks_uri`                       | https://dex.doc.demo.openziti.org:5556      |
+| **Client ID**         | In the dex config.yaml file, key staticClients.id                                        | openziti-dex-client                         |
+| **Audience**          | Unless overridden, the same value as the **Client ID**                                   | openziti-dex-client                         |
+| **External Auth URL** | The same value as the **Issuer**                                                         | https://dex.doc.demo.openziti.org:5556      |
+| **JWKS Endpoint**     | Use the `jwks_uri` field from the './well-known/openid-configuration' endpoint           | https://dex.doc.demo.openziti.org:5556/keys |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT             | email                                       |
+| **Scopes**            | `openid` is always included. Often `email` but `profile` or any standard or custom scope | profile offline_access                      |
+
+---
+
+## Configure dex to Federate to GitHub
+
+Since dex is entirely configured via the dex configuration file all examples will be shown as dex config file. The 
+`config.yaml` file and `.env` file are show along with a sample docker command to run dex. Notice in the docker 
+command a volume mount containing valid certificates is mounted allowing for dex to serve TLS from a public CA. Also 
+worth noting is this configuration federates through to GitHub and requires the user to be part of the `openziti` org.
+
+```example-yaml
+@code: dex config.yaml File
+
+issuer: https://dex.doc.demo.openziti.org:5556
+
+web:
+  http: ""  # Disable HTTP
+  https: 0.0.0.0:5556
+  tlsCert: /certs/live/doc.demo.openziti.org/fullchain.pem
+  tlsKey: /certs/live/doc.demo.openziti.org/privkey.pem
+storage:
+  type: sqlite3
+  config:
+    file: /var/dex/dex.db
+
+staticClients:
+  - id: openziti-dex-client
+    redirectURIs:
+      - 'http://localhost:20314/auth/callback'
+    name: 'OpenZiti DEX Integration'
+    public: true
+
+connectors:
+- type: github
+  id: github
+  name: GitHub
+  config:
+    clientID: ${GITHUB_CLIENT}
+    clientSecret: ${GITHUB_CLIENTSECRET}
+    redirectURI: https://dex.doc.demo.openziti.org:5556/callback
+
+    # List of org and team names.
+    #  - If specified, a user MUST be a member of at least ONE of these orgs
+    #    and teams (if set) to authenticate with dex.
+    #  - Dex queries the following organizations for group information if the
+    #    "groups" scope is requested. Group claims are formatted as "(org):(team)".
+    #    For example if a user is part of the "engineering" team of the "coreos" org,
+    #    the group claim would include "coreos:engineering".
+    #  - If teams are specified, dex only returns group claims for those teams.
+    orgs:
+    - name: ${GITHUB_REQUIRED_ORG}
+```
+
+```example-text
+@code: Docker .env File
+GITHUB_CLIENT=_GITHUB_CLIENT_HERE_
+GITHUB_CLIENTSECRET=_GITHUB_SECRET_HERE_
+GITHUB_REQUIRED_ORG=openziti
+```
+
+Verify the proper volume mount exists and the dex container has access.
+```example-text
+@code: Example Docker Command
+docker run --rm \
+  --name dex \
+  -v certs:/certs \
+  --env-file .env \
+  -v ./config.yaml:/dex-config.yaml \
+  -p 5556:5556 \
+  ghcr.io/dexidp/dex:latest dex serve /dex-config.yaml
+```

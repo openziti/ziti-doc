@@ -1,0 +1,165 @@
+---
+title: Authelia
+description: Configure Authelia for with OpenZiti
+hide_table_of_contents: true
+---
+
+# Authelia
+
+<img src="/icons/logo-authelia.svg" alt="Authelia logo" height="100px"/>
+
+This section illustrates where the expected values are found within 
+[the Authelia config](https://www.authelia.com/integration/prologue/get-started/#configuration). For a more detailed 
+guide on enabling Authelia with OpenZiti, see below.  Use these values to configure an external JWT signer. For 
+Authelia, there is currently no dashboard. All settings are derived from the Authelia configuration file. 
+
+:::note[Authelia-specific]
+* The **audience** and **client id** fields must be the same. If you get an error when authenticating it's possible 
+  these two fields are not the same.
+* Authelia does not support using **Access** tokens. You must configure the ext-jwt-signer with the **ID** token 
+  type.
+:::
+
+| Field                 | Where to Find the Value in the Authelia Configuration                                    | Example                                               |
+|-----------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------|
+| **Issuer**            | The address of the Authelia server                                                       | https://authelia.doc.demo.openziti.org:9100           |
+| **Client ID**         | Specified in the Authelia `configuration.yml`. The **client_id** of the oidc client      | openziti                                              |
+| **Audience**          | Specified in the Authelia `configuration.yml`. The **audience** of the oidc client       | openziti                                              |
+| **External Auth URL** | The same value as the **Issuer**                                                         | https://authelia.doc.demo.openziti.org:9100           |
+| **JWKS Endpoint**     | Use the `jwks_uri` field from the './well-known/openid-configuration' endpoint           | https://authelia.doc.demo.openziti.org:9100/jwks.json |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT             | email                                                 |
+| **Scopes**            | `openid` is always included. Often 'email' but 'profile' or any standard or custom scope | email offline_access                                  |
+
+---
+
+## Enable OIDC Within Authelia
+
+Authelia supports acting as an identity provider. The 
+[Authelia documentation for providers](https://www.authelia.com/configuration/identity-providers/openid-connect/provider/)
+contains an example `identity_providers.oidc` configuration section and describes how to configure Authelia.
+
+### Generate a Key/Cert
+
+Authelia also provides helper functionality to generate a cert/key in your configuration. For example, a command can be
+issued using a temporary Authelia container to generate a cert and key. That cert and key can then be used with
+Authelia. Adapt the command shown below for your Authelia deployment and emit the cert and key into a location your
+Authelia server will be able to access the files. For example, this may be your `secrets` directory as shown:
+
+```bash title="Use Docker to Generate Cert/Key"
+docker run --rm \
+    -v "/path/to/the/authelia/secrets:/output" \
+    authelia/authelia \
+    authelia crypto certificate rsa generate \
+        --common-name authelia.example.com \
+        --bits 2048 \
+        --file.private-key rsa.2048.key \
+        --file.certificate rsa.2048.cert \
+        --directory /output
+```
+
+### Generate an HMAC Secret
+
+Leverage openssl and generate a random set of 32 characters to serve as the HMAC secret for the OIDC configuration.
+```bash
+openssl rand -hex 32 > /path/to/the/authelia/secrets/identity_providers.hmac
+```
+
+### Add the OIDC Configuration
+
+Using the cert and key generated above and the HMAC secret, configure Authelia as an identity provider. 
+
+#### An Example Configuration
+
+Below is a very simple example configuration that would work with Authelia and OpenZiti. The following config also
+leverages the Authelia templating functionality and expects the following and environment variable named `DOMAIN` is
+set with the Authelia domain. A directory exists named `/authelia/secrets` where the following secrets are kept:
+* the key and certificate to use for TLS
+* a storage.encryption_key file 
+* an identity_validation.jwt_secret file
+* an identity_providers.hmac (from the example command above)
+* rsa.2048.key and rsa.2048.cert files (from the example command above)
+
+```
+server:
+  address: "tcp://0.0.0.0:443"
+  tls:
+    certificate: "/authelia/secrets/certificate_chain.pem"
+    key: "/authelia/secrets/private.key"
+
+authentication_backend:
+  file:
+    path: /config/users_database.yml
+
+access_control:
+  default_policy: one_factor
+
+session:
+  cookies:
+    - domain: "{{ env DOMAIN }}"
+      authelia_url: "https://{{ env DOMAIN }}"
+
+storage:
+  local:
+    path: /config/db
+  encryption_key: {{ secret "/authelia/secrets/storage.encryption_key" | msquote }}
+
+notifier:
+  filesystem:
+    filename: /config/notification.log
+
+identity_validation:
+  reset_password:
+    jwt_secret: {{ secret "/authelia/secrets/identity_validation.jwt_secret" | msquote }}
+
+identity_providers:
+  oidc:
+    hmac_secret: {{ secret "/authelia/secrets/identity_providers.hmac" | msquote }}
+    jwks:
+      - key_id: 'authelia'
+        algorithm: 'RS256'
+        use: 'sig'
+        key: {{ secret "/authelia/secrets/rsa.2048.key" | mindent 10 "|" | msquote }}
+        certificate_chain: {{ secret "/authelia/secrets/rsa.2048.cert" | mindent 10 "|" | msquote }}
+    enable_client_debug_messages: false
+    require_pushed_authorization_requests: false
+    lifespans:
+      access_token: '1h'
+      authorize_code: '1m'
+      id_token: '1h'
+      refresh_token: '90m'
+    cors:
+      endpoints:
+        - 'authorization'
+        - 'token'
+        - 'revocation'
+        - 'introspection'
+    clients:
+      - client_id: openziti
+        client_name: "OpenZiti Auth"
+        audience: "openziti"
+        public: true
+        authorization_policy: one_factor
+        consent_mode: pre-configured
+        response_types:
+          - "code"
+        scopes:
+          - openid
+          - groups
+          - email
+          - profile
+          - offline_access
+        redirect_uris:
+          - http://localhost:20314/auth/callback
+          - https://*.browzer.example.com
+        grant_types:
+          - refresh_token
+          - authorization_code
+```
+
+## Common Problems
+
+If you do not set the client id and the audience to the same value, you may encounter an error such as:
+
+> invalid_request: The request is missing a required parameter, includes an invalid parameter value, includes a 
+> parameter more than once, or is otherwise malformed. Requested audience 'openziti_client_id' has not been 
+> whitelisted by the OAuth 2.0 Client.

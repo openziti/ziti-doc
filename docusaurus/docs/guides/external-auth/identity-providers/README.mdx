@@ -1,0 +1,133 @@
+---
+title: Identity Providers
+---
+
+import DocsCard from "/src/components/DocsCard";
+import DocsCards from "/src/components/DocsCards";
+
+# Identity Providers
+
+Every OIDC provider has specific rules and flows one needs to follow when configuring the provider for authentication.
+Here, you will find specific examples of how to configure each provider to work with OpenZiti. These pages are not 
+intended to be a complete guide. You are responsible for making good choices for your own deployments. These guides will
+illustrate how to interact with the identity provider (IdP) and how to configure it with OpenZiti. 
+
+These instructions are likely to become out of date at some point. The identity provider may update their user interfaces,
+and these pages may become stale. Each page has a last-modified date at the bottom indicating when it was last updated. If
+it has been a substantial amount of time and the pages don't provide exactly the information needed, please reach out
+through our official [Discourse support forum](https://openziti.discourse.group/). Alternatively, 
+[file a GitHub issue](https://github.com/openziti/ziti-doc/issues) and provide as much detail as possible. You can also
+find an "Edit this page" link at the bottom of each document page allowing you to start a pull request to help us improve
+our doc.
+
+## Cloud-based Identity Providers
+
+OpenZiti works with the cloud identity providers (IdP) or single sign-on (SSO) providers listed below. Find your provider
+and follow the instructions within. If you want to use an identity provider that is not listed,
+please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+
+<DocsCards>
+  <DocsCard 
+    header="Auth0" 
+    href="auth0" 
+    img="/icons/logo-auth0.svg" 
+    >
+    <p>Secure access for everyone. But not just anyone.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Microsoft Entra ID" 
+    href="msentra" 
+    img="/icons/logo-msentra.svg"
+    >
+    <p>(formerly Azure Active Directory) A cloud identity and access management solution.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Okta" 
+    href="okta" 
+    img="/icons/logo-okta.svg" 
+    >
+    <p>Okta's Workforce and Customer Identity Clouds enable secure access, authentication, and automation.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Google" 
+    href="google" 
+    img="/icons/logo-google.svg" 
+    >
+    <p>Use Google as your identity provider.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="AWS Cognito" 
+    href="cognito" 
+    img="/icons/logo-cognito.svg" 
+    >
+    <p>Secure, frictionless customer identity and access management that scales.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Duo" 
+    href="duo" 
+    img="/icons/logo-duo.svg" 
+    >
+    <p>Easy to use. Incredibly effective. Cisco Duo simplifies identity security for your workforce.</p>
+  </DocsCard>
+
+</DocsCards>
+
+<br/>
+
+## Self-hosted Identity Providers
+
+OpenZiti works with the self-hosted identity providers (IdP) or single sign-on (SSO) providers listed below. Find your provider
+and follow the instructions within. If you want to use an identity provider that is not listed,
+please express your interest over in our [Discourse forum](https://openziti.discourse.group/).
+
+<DocsCards>
+
+  <DocsCard 
+    header="Keycloak" 
+    href="keycloak" 
+    img="/icons/logo-keycloak.svg" 
+    >
+    <p>An open source identity and access management solution.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Authentik" 
+    href="authentik" 
+    img="/icons/logo-authentik.svg" 
+    >
+    <p>An open-source Identity Provider that emphasizes flexibility and versatility.</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Authelia"
+    href="authelia" 
+    img="/icons/logo-authelia.svg" 
+    >
+    <p>A Federated OpenID Connect Provider</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="Dex"
+    href="dex" 
+    img="/icons/logo-dex.svg" 
+    >
+    <p>A Federated OpenID Connect Provider</p>
+  </DocsCard>
+
+  <DocsCard 
+    header="ZITADEL"
+    href="zitadel" 
+    img="/icons/logo-zitadel.png" 
+    >
+    <p>Secure authentication management for your application.</p>
+  </DocsCard>
+
+</DocsCards>
+
+<br/>
+
