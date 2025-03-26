@@ -187,7 +187,7 @@ INFO    login succeeded
 Saving identity 'default' to C:\Users\user\.ziti\ziti-cli.json
 INFO    using supplied redirect url: http://localhost:20314/auth/callback
 INFO    found external JWT signer
-INFO      - issuer: https://keycloak.zrok.clint.demo.openziti.org:8446/realms/zitirealm/
+INFO      - issuer: https://keycloak.example.com/realms/demo/
 INFO      - clientId: browzer-keycloak-ext-jwt-signer
 FATAL   error creating relying party error creating relyingParty issuer does not match
 ```
@@ -207,7 +207,7 @@ The tool will check the issuer that is mapped with the issuer discovered by the 
 Saving identity 'default' to C:\Users\user\.ziti\ziti-cli.json
 INFO    using supplied redirect url: http://localhost:20314/auth/callback
 INFO    found external JWT signer
-INFO      - issuer: https://keycloak.zrok.clint.demo.openziti.org:8446/realms/zitirealm/
+INFO      - issuer: https://keycloak.example.com/realms/demo/
 INFO      - clientId: browzer-keycloak-ext-jwt-signer
 FATAL   error creating relying party error creating relyingParty issuer does not match
 ```
@@ -253,7 +253,7 @@ requested. For example, many IdPs do not allow requesting the `offline_access` s
 
 This error results in a generic error:
 ```text
-FATAL   error authenticating with token: unable to authenticate to https://ec2-3-142-245-63.us-east-2.compute.amazonaws.com:8441/edge/management/v1. Status code: 401 Unauthorized, Server returned: {
+FATAL   error authenticating with token: unable to authenticate to https://ctrl.example.com/edge/management/v1. Status code: 401 Unauthorized, Server returned: {
     "error": {
         "code": "INVALID_AUTH",
         "message": "The authentication request failed",
@@ -283,7 +283,7 @@ claims property [emaila] was not found in the claims
 
 This error results in a generic error:
 ```text
-FATAL   error authenticating with token: unable to authenticate to https://ec2-3-142-245-63.us-east-2.compute.amazonaws.com:8441/edge/management/v1. Status code: 401 Unauthorized, Server returned: {
+FATAL   error authenticating with token: unable to authenticate to https://ctrl.example.com/edge/management/v1. Status code: 401 Unauthorized, Server returned: {
     "error": {
         "code": "INVALID_AUTH",
         "message": "The authentication request failed",
