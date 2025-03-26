@@ -476,6 +476,60 @@ echo " "
 journalctl -fu browzer-bootstrapper
 ```
 
+## BrowZer UI Controls & White Labeling
+
+By default, BrowZer renders some things in the browser-client that you may wish to change, or disable. 
+
+These items include:
+- whether or not the browZer button appears
+- the logo in the browZer button if it is present
+- whether or not the bootstrapping splash text appears
+- the text of the bootstrapping splash text if it is present
+- whether or not the the browZer toast messages appear
+- whether or not the the browZer throughput chart appears
+
+You can control all this by using the `ZITI_BROWZER_WHITELABEL` env var. 
+
+For example:
+
+```text
+export ZITI_BROWZER_WHITELABEL="$(cat <<HERE
+{
+    "enable": {
+        "browZerButton":            false,
+        "browZerToastMessages":     true,
+        "browZerSplashScreen":      true,
+        "browZerThroughputChart":   false
+    },
+    "branding": {
+        "browZerName":              "WebCloak",
+        "browZerSplashMessage":     "Hang Tight while we Bootstrap your private web app",
+        "browZerButtonIconSvgUrl":  "https://netfoundry.io/wp-content/uploads/2024/07/netfoundry-icon-color.svg",
+        "browZerCSS":               "https://<YOUR_BOOTSTRAPPER_HOST>/ziti-browzer-css.css"
+    }
+}
+HERE
+)"
+```
+
+Where:
+
+`enable.browZerButton` is either `true` or `false`
+
+`enable.browZerToastMessages` is either `true` or `false`
+
+`enable.browZerSplashScreen` is either `true` or `false`
+
+`enable.browZerThroughputChart` is either `true` or `false`
+
+`branding.browZerName` is an arbitrary name you chose.
+
+`branding.browZerSplashMessage` is arbitrary text you chose.
+
+`branding.browZerButtonIconSvgUrl` is the URL of the logo SVG you want rendered inside the browZer button.
+
+`branding.browZerCSS` must be specified, but cannot be set to an arbitrary URL at this time.
+
 
 ## Cleaning up and Trying Again
 
