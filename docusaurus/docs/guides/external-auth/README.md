@@ -16,8 +16,8 @@ and what it entails. The guides here focuses on correctly configuring an OpenZit
 [external JWT signer](../../learn/core-concepts/security/authentication/50-external-jwt-signers.md) for use with an OIDC 
 provider. 
 
-Correctly configuring an external jwt signer requires the following fields to be correctly configured. These fields will
-correspond to fields within the JWT returned from the OIDC provider.
+Correctly configuring an external jwt signer requires the careful attention. The fields below all correspond to fields 
+within the JWT returned from the OIDC provider and must be exactly correct.
 
 | Field                 | Description                                                                                                                                 |
 |-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
