@@ -52,6 +52,7 @@ EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}))"
 docker run --rm --network=host raviqqe/muffet "${SERVER}" \
     --buffer-size=8192 \
     --max-connections-per-host=${MUFFET_MAX_CONNECTIONS_PER_HOST:-1} \
+    --rate-limit=10 \
     --header=User-Agent:curl/7.54.0 \
     --timeout=20 \
     "--exclude=${EXCLUDE_PATTERN}" \
