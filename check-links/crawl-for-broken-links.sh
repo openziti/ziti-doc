@@ -59,4 +59,4 @@ EOF
 EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}))"
 
 CMD="npm install -g linkinator && linkinator \"${SERVER}\" --skip \"${EXCLUDE_PATTERN}\" $*"
-docker run --rm -t --name linkinator node:18-alpine sh -c "$CMD"
+docker run --rm -t --name linkinator node:22-alpine sh -c "$CMD"
