@@ -6,7 +6,7 @@ set -o pipefail
 set -o xtrace
 
 if [[ $# -eq 0 || $1 =~ -h|(--)?help ]]; then
-    echo "ERROR: need URL to check as first param. Extra params are passed to muffet" >&2
+    echo "ERROR: need URL to check as first param. Extra params are passed" >&2
     exit 1
 else
     SERVER="$1"
@@ -44,16 +44,19 @@ developer.chrome.com/origintrials/#/register_trial/.*
 entra\.microsoft\.com
 github\.com/openziti/ziti-tunnel-sdk-c%3E
 example.*openziti\.io
+my.identity.provider.*
+your.openziti.controller.example.io.*
+trial-z520298.okta.com.*
+dev-k1gpd4wpyslypklr.us.auth0.com.*
+authelia.doc.demo.openziti.org.*
+authentik.doc.demo.openziti.org.*
+dex.doc.demo.openziti.org.*
+cognito-idp.us-east-2.amazonaws.com.*
+.*23f45e36-2ae6-4434-b116-25c66c27168d.*
 EOF
 
 # drop the trailing pipe
 EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}))"
 
-docker run --rm --network=host raviqqe/muffet "${SERVER}" \
-    --buffer-size=8192 \
-    --max-connections-per-host=${MUFFET_MAX_CONNECTIONS_PER_HOST:-1} \
-    --rate-limit=10 \
-    --header=User-Agent:curl/7.54.0 \
-    --timeout=20 \
-    "--exclude=${EXCLUDE_PATTERN}" \
-    "${@}"
+CMD="npm install -g linkinator && linkinator \"${SERVER}\" --skip \"${EXCLUDE_PATTERN}\" $*"
+docker run --rm -t --name linkinator node:22-alpine sh -c "$CMD"

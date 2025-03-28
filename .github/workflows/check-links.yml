@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Workspace
         uses: actions/checkout@v4
       - name: Crawl for Broken Links
-        run: ./check-links/crawl-for-broken-links.sh https://openziti.io
+        run: ./check-links/crawl-for-broken-links.sh https://openziti.io --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v4
