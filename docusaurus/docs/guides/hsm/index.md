@@ -33,7 +33,7 @@ We have included a couple of quickstarts illustrating two different PKCS#11 driv
 You will want to go to [the OpenSC Project](https://github.com/OpenSC/OpenSC/wiki) as it is what provides the
 `pkcs11-tool` which is used to interact with the HSMs.
 
-The [first quickstart](./softhsm.mdx) is based on [softhsm](https://www.opendnssec.org/softhsm/). This one focuses on software that
+The [first quickstart](./softhsm.mdx) is based on [softhsm](https://www.opendnssec.org/en/latest/softhsm/). This one focuses on software that
 provides an *emulated* HSM. This is useful for learning and understanding but it is not an actual HSM. Being software it
 doesn't have the important benefit of being a physical device but it does have one substantial advantage; it's entirely
 free.
