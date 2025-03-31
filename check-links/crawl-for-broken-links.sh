@@ -46,13 +46,15 @@ github\.com/openziti/ziti-tunnel-sdk-c%3E
 example.*openziti\.io
 my.identity.provider.*
 your.openziti.controller.example.io.*
-trial-z520298.okta.com.*
+trial-3520298.okta.com.*
 dev-k1gpd4wpyslypklr.us.auth0.com.*
 authelia.doc.demo.openziti.org.*
 authentik.doc.demo.openziti.org.*
 dex.doc.demo.openziti.org.*
 cognito-idp.us-east-2.amazonaws.com.*
 .*23f45e36-2ae6-4434-b116-25c66c27168d.*
+blog.openziti.io/
+auth0.com/docs/quickstart/spa/vanillajs/interactive
 EOF
 
 # drop the trailing pipe
