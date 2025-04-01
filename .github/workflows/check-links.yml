@@ -6,10 +6,21 @@ on:
   push:
     paths:
       - .github/workflows/check-links.yml
+  issue_comment:
+    types: [created, edited]
+
+env:
+  IS_VERCEL_READY: >
+    ${{ 
+      github.event_name == 'issue_comment' &&
+      github.event.comment.user.login == 'vercel' &&
+      github.event.comment.user.type == 'Bot' &&
+      contains(github.event.comment.body, 'Ready')
+    }}
 
 jobs:
   broken-link-checker:
-    if: github.repository_owner == 'openziti'
+    if: ${{ github.repository_owner == 'openziti' && (env.IS_VERCEL_READY == 'true' || github.event_name != 'issue_comment') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
@@ -32,8 +43,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
   popular-link-checker:
-    if: github.repository_owner == 'openziti'
+    if: ${{ github.repository_owner == 'openziti' && (env.IS_VERCEL_READY == 'true' || github.event_name != 'issue_comment') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
