@@ -55,6 +55,7 @@ cognito-idp.us-east-2.amazonaws.com.*
 .*23f45e36-2ae6-4434-b116-25c66c27168d.*
 blog.openziti.io/
 auth0.com/docs/quickstart/spa/vanillajs/interactive
+openziti.io/assets/js/.*
 EOF
 
 # drop the trailing pipe
