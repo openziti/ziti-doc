@@ -27,23 +27,28 @@ jobs:
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v4
+
       - name: Extract Preview URL
         id: extract
         run: |
-          echo "preview_url=$(grep -oP '\[Visit Preview\]\(\K[^)]+' <<< \"$COMMENT_BODY\")" >> "$GITHUB_OUTPUT"
+          url=$(grep -oP '\[Visit Preview\]\(\K[^)]+' <<< "$COMMENT_BODY" || true)
+          echo "URL_TO_CHECK=${url:-https://openziti.io}" >> "$GITHUB_OUTPUT"
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
+
       - name: Crawl for Broken Links
-        run: ./check-links/crawl-for-broken-links.sh "$PREVIEW_URL" \
+        run: ./check-links/crawl-for-broken-links.sh "$URL_TO_CHECK" \
           --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3
         env:
-          PREVIEW_URL: ${{ steps.extract.outputs.preview_url }} 
+          URL_TO_CHECK: ${{ steps.extract.outputs.URL_TO_CHECK }} 
+          
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v4
         with:
           query: 'is:open label:bug in:title "Broken Links Alarm"'
           token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Raise an Alarm Issue if Links are Broken
         if: ${{ failure() }}
         uses: JasonEtco/create-an-issue@v2.9.1
