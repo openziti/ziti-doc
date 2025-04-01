@@ -27,17 +27,17 @@ jobs:
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v4
-      - name: Extract Inspect URL
+      - name: Extract Preview URL
         id: extract
         run: |
-          echo "inspect_url=$(grep -oP '\[Inspect\]\(\K[^)]+' <<< \"$COMMENT_BODY\")" >> "$GITHUB_OUTPUT"
+          echo "preview_url=$(grep -oP '\[Visit Preview\]\(\K[^)]+' <<< \"$COMMENT_BODY\")" >> "$GITHUB_OUTPUT"
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
       - name: Crawl for Broken Links
-        run: ./check-links/crawl-for-broken-links.sh "$INSPECT_URL" \
+        run: ./check-links/crawl-for-broken-links.sh "$PREVIEW_URL" \
           --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3
         env:
-          INSPECT_URL: ${{ steps.extract.outputs.inspect_url }} 
+          PREVIEW_URL: ${{ steps.extract.outputs.preview_url }} 
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v4
