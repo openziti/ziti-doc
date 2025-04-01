@@ -23,10 +23,17 @@ jobs:
     if: ${{ github.repository_owner == 'openziti' && (env.IS_VERCEL_READY == 'true' || github.event_name != 'issue_comment') }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Workspace
-        uses: actions/checkout@v4
+      - name: Extract Inspect URL
+        id: extract
+        run: |
+          echo "inspect_url=$(grep -oP '\[Inspect\]\(\K[^)]+' <<< \"$COMMENT_BODY\")" >> "$GITHUB_OUTPUT"
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
       - name: Crawl for Broken Links
-        run: ./check-links/crawl-for-broken-links.sh https://openziti.io --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3
+        run: ./check-links/crawl-for-broken-links.sh "$INSPECT_URL" \
+          --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3
+        env:
+          INSPECT_URL: ${{ steps.extract.outputs.inspect_url }}
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v4
