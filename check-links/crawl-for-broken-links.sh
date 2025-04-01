@@ -61,5 +61,5 @@ EOF
 # drop the trailing pipe
 EXCLUDE_PATTERN="${EXCLUDE_PATTERN%|}))"
 
-CMD="npm install -g linkinator && linkinator \"${SERVER}\" --skip \"${EXCLUDE_PATTERN}\" $*"
+CMD="npm install -g linkinator && linkinator \"${SERVER}\" --skip \"${EXCLUDE_PATTERN}\" --no-progress $*; exit \$?"
 docker run --rm -t --name linkinator node:22-alpine sh -c "$CMD"
