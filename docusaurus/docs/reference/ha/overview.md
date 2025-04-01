@@ -9,7 +9,7 @@ sidebar_position: 5
 
 :::warning
 
-**NOTE: Controller HA is still in Beta** 
+**NOTE: Controller HA is still in Beta**
 
 It's quite functional now, but we are continuing to test and refine before we mark it GA.
 :::

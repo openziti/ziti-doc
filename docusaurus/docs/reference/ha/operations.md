@@ -116,7 +116,7 @@ the database which has changed.
 
 ## Snapshot Application and Restarts
 
-If a controller is out of communcation for a while, it may receive a snapshot to apply, rather
+If a controller is out of communication for a while, it may receive a snapshot to apply, rather
 than a stream of events.
 
 If a controller receives a snapshot to apply after startup is complete, it will apply the snapshot and then
