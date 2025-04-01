@@ -10,7 +10,7 @@ on:
     types: [created, edited]
 jobs:
   broken-link-checker:
-    if: ${{ github.repository_owner == 'openziti' && (github.event_name == 'issue_comment' || (github.event.comment.user.login == 'vercel' && github.event.comment.user.type == 'Bot' && contains(github.event.comment.body, 'Ready'))) }}
+    if: ${{ github.repository_owner == 'openziti' && (github.ref == 'refs/heads/main' || github.event_name == 'issue_comment' || (github.event.comment.user.login == 'vercel' && github.event.comment.user.type == 'Bot' && contains(github.event.comment.body, 'Ready'))) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
@@ -44,7 +44,7 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
   popular-link-checker:
-    if: ${{ github.repository_owner == 'openziti' && (github.event_name == 'issue_comment' || (github.event.comment.user.login == 'vercel' && github.event.comment.user.type == 'Bot' && contains(github.event.comment.body, 'Ready'))) }}
+    if: ${{ github.repository_owner == 'openziti' && (github.ref == 'refs/heads/main' || github.event_name == 'issue_comment' || (github.event.comment.user.login == 'vercel' && github.event.comment.user.type == 'Bot' && contains(github.event.comment.body, 'Ready'))) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
