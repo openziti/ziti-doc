@@ -6,16 +6,26 @@ on:
   push:
     paths:
       - .github/workflows/check-links.yml
-
+  issue_comment:
+    types: [created, edited]
 jobs:
   broken-link-checker:
-    if: github.repository_owner == 'openziti'
+    if: ${{ github.repository_owner == 'openziti' && (github.event_name == 'issue_comment' || (github.event.comment.user.login == 'vercel' && github.event.comment.user.type == 'Bot' && contains(github.event.comment.body, 'Ready'))) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v4
+      - name: Extract Inspect URL
+        id: extract
+        run: |
+          echo "inspect_url=$(grep -oP '\[Inspect\]\(\K[^)]+' <<< \"$COMMENT_BODY\")" >> "$GITHUB_OUTPUT"
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
       - name: Crawl for Broken Links
-        run: ./check-links/crawl-for-broken-links.sh https://openziti.io --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3
+        run: ./check-links/crawl-for-broken-links.sh "$INSPECT_URL" \
+          --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3
+        env:
+          INSPECT_URL: ${{ steps.extract.outputs.inspect_url }} 
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v4
@@ -32,8 +42,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
   popular-link-checker:
-    if: github.repository_owner == 'openziti'
+    if: ${{ github.repository_owner == 'openziti' && (github.event_name == 'issue_comment' || (github.event.comment.user.login == 'vercel' && github.event.comment.user.type == 'Bot' && contains(github.event.comment.body, 'Ready'))) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
