@@ -8,19 +8,9 @@ on:
       - .github/workflows/check-links.yml
   issue_comment:
     types: [created, edited]
-
-env:
-  IS_VERCEL_READY: >
-    ${{ 
-      github.event_name == 'issue_comment' &&
-      github.event.comment.user.login == 'vercel' &&
-      github.event.comment.user.type == 'Bot' &&
-      contains(github.event.comment.body, 'Ready')
-    }}
-
 jobs:
   broken-link-checker:
-    if: ${{ github.repository_owner == 'openziti' && (env.IS_VERCEL_READY == 'true' || github.event_name != 'issue_comment') }}
+    if: ${{ github.repository_owner == 'openziti' && (github.event_name != 'issue_comment' || (github.event.comment.user.login == 'vercel' && github.event.comment.user.type == 'Bot' && contains(github.event.comment.body, 'Ready'))) }}
     runs-on: ubuntu-latest
     steps:
       - name: Extract Inspect URL
@@ -34,6 +24,7 @@ jobs:
           --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3
         env:
           INSPECT_URL: ${{ steps.extract.outputs.inspect_url }}
+          IS_VERCEL_READY: $IS_VERCEL_READY
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v4
@@ -52,7 +43,7 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
   popular-link-checker:
-    if: ${{ github.repository_owner == 'openziti' && (env.IS_VERCEL_READY == 'true' || github.event_name != 'issue_comment') }}
+    if: ${{ github.repository_owner == 'openziti' && (github.event_name != 'issue_comment' || (github.event.comment.user.login == 'vercel' && github.event.comment.user.type == 'Bot' && contains(github.event.comment.body, 'Ready'))) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Workspace
