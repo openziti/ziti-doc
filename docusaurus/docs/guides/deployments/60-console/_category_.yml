@@ -1,0 +1,6 @@
+label: Console
+position: 60
+link:
+  type: generated-index
+  title: Deploying the Console
+  description: Deploy the OpenZiti Administration Console (ZAC) as a Linux package, with Docker, or deployed to Kubernetes.

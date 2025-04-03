@@ -20,7 +20,7 @@ This is a tutorial for tunneling a Kubernetes workload with OpenZiti.
     ziti edge list edge-routers 'isTunnelerEnabled=true'
     ```
 
-    If none of the routers shown are in your cluster, then refer to [the router deployment guide](/guides/deployments/30-kubernetes/kubernetes-router.mdx) for more information on how to deploy a router.
+    If none of the routers shown are in your cluster, then refer to [the router deployment guide](/guides/deployments/40-router/60-kubernetes.mdx) for more information on how to deploy a router.
 
 1. Add a role to the tunneler identity of the router you selected from the list above, e.g. "router1." This step adds a role to the router's identity that we'll use later to grant it permission to bind the service.
 

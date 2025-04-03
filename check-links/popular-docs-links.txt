@@ -29,7 +29,6 @@
 /docs/learn/quickstarts/services/ztha
 /docs/learn/core-concepts/identities/overview
 /docs/guides
-/docs/category/kubernetes
 /docs/learn/core-concepts/zero-trust-models/overview
 /docs/learn/quickstarts/browzer/example
 /docs/guides/Public_Cloud_Deployment/Controller
