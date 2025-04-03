@@ -1,0 +1,30 @@
+---
+title: Controller Deployment Overview
+sidebar_label: Overview
+---
+
+## Requirements
+
+1. a root CA for the cluster
+1. a signer CA certificate, identity certificate, and configuration YAML file for each node
+1. an initialized database on the first node, replicated to subsequent nodes
+
+## The Cluster Root CA Certificate
+
+Before provisioning your first node, you must [create a new public key infrastructure](/reference/ha/bootstrapping/certificates.md) (PKI) for the cluster. This includes a root CA certificate and private key.
+
+The cluster's root CA is never required on any node. For security, secure the root CA separately from the deployment environment, not on the first node. For convenience, the root CA may be co-located with the first node in the cluster.
+
+## The Edge Enrollment Signer CA Certificate
+
+Each node must have an edge enrollment signer CA certificate issued by [the cluster's root CA](/reference/ha/bootstrapping/certificates.md). In the configuration YAML file, [the property `edge.enrollment.signingCert`](/reference/30-configuration/controller.md) configures the edge signer CA certificate and private key. The edge signer CA issues leaf certificates during identity and router enrollment.
+
+## The Controller's Identity Certificate
+
+This is a leaf certificate from the edge enrollment signer CA. In the configuration YAML file, [the property `identity`](/reference/30-configuration/conventions.md) configures the controller's identity certificate and private key.
+
+## The Configuration YAML File
+
+[The configuration YAML file](/reference/30-configuration/controller.md) is required for all nodes. It is used to configure the controller's signing cert, identity, database, listener addresses, and more.
+
+A utility or template is provided for each type of deployment to assist with generating a valid configuration YAML file.

@@ -2,4 +2,4 @@ label: Guides
 position: 60
 link:
   type: doc
-  id: guides/index
+  id: guides/deployments/index
