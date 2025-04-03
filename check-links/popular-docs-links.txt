@@ -17,12 +17,9 @@
 /docs/reference/configuration/conventions
 /docs/learn/introduction/openziti-is-software
 /docs/learn/core-concepts/clients/choose
-/docs/reference/deployments/controller
-/docs/category/public-cloud-deployment
 /docs/learn/quickstarts/network/local-with-docker
 /docs/reference/tunnelers/windows
 /docs/category/local-gateway
-/docs/reference/deployments/router/deployment
 /docs/reference
 /docs/reference/config-types
 /docs/reference/developer
@@ -129,4 +126,3 @@
 /docs/learn/core-concepts/security/authorization/policies/creating-service-policies
 /blog/zitification/prometheus/part1
 /docs/reference/developer/sdk/android
-/docs/category/deployments
