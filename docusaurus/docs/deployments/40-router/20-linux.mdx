@@ -1,5 +1,6 @@
 ---
-title: Router Deployment
+title: Linux Router
+sidebar_label: Linux
 ---
 
 import Tabs from '@theme/Tabs';
@@ -17,9 +18,9 @@ We'll cover the following topics:
 
 ## Router Creation
 
-You must create the router in the controller first with [the web console](/guides/deployments/60-console/20-linux.mdx) or [the CLI](/guides/deployments/40-router/75-cli-mgmt.mdx).
+You must create the router in the controller first with [the web console](/deployments/60-console/20-linux.mdx) or [the CLI](/deployments/40-router/75-cli-mgmt.mdx).
 
-After [creating the router](/guides/deployments/40-router/75-cli-mgmt.mdx#create-a-router), save the enrollment token (JWT) and provide the file path to the router during the configuration step below.
+After [creating the router](/deployments/40-router/75-cli-mgmt.mdx#create-a-router), save the enrollment token (JWT) and provide the file path to the router during the configuration step below.
 
 ## Install the Router Package
 
@@ -100,7 +101,7 @@ sudo systemctl restart ziti-router.service
 ```
 Here's a link to [the configuration reference](/reference/30-configuration/router.md).
 
-Learn more about [managing routers with the CLI](/guides/deployments/40-router/75-cli-mgmt.mdx).
+Learn more about [managing routers with the CLI](/deployments/40-router/75-cli-mgmt.mdx).
 
 ## Firewall
 
