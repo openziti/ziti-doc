@@ -59,15 +59,15 @@ const config = {
           // if ( path.startsWith("/docs/guides/topologies/gateway/") ) {
           //   return [path.replace("/docs/guides/topologies/gateway/","/docs/guides/local-gateway/")];
           // }
-          // if ( path.startsWith("/docs/guides/deployments/kubernetes/") ) {
-          //   return [path.replace("/docs/guides/deployments/kubernetes/","/docs/guides/kubernetes/hosting/")];
+          // if ( path.startsWith("/docs/deployments/kubernetes/") ) {
+          //   return [path.replace("/docs/deployments/kubernetes/","/docs/guides/kubernetes/hosting/")];
           // }
           // if ( path.startsWith("/docs/reference/tunnelers/kubernetes/") ) {
           //   return [path.replace("/docs/reference/tunnelers/kubernetes/","/docs/guides/kubernetes/workload-tunneling/")];
           // }
-          // if ( path.startsWith("/docs/guides/deployments/") ) {
+          // if ( path.startsWith("/docs/deployments/") ) {
           //   return [
-          //     path.replace("/docs/guides/deployments/","/docs/reference/deployments/"),
+          //     path.replace("/docs/deployments/","/docs/reference/deployments/"),
           //   ];
           // }
           // if ( path.startsWith("/docs/reference/developer/api/") ) {                       // for each existing page
@@ -100,19 +100,19 @@ const config = {
         //     from: ['/docs/reference/deployments']
         //   },
         //   {
-        //     to: '/docs/guides/deployments/linux/controller/deploy',
+        //     to: '/docs/deployments/linux/controller/deploy',
         //     from: ['/docs/reference/deployments/controller']
         //   },
         //   {
-        //     to: '/docs/guides/deployments/linux/router/cli-mgmt',
+        //     to: '/docs/deployments/linux/router/cli-mgmt',
         //     from: ['/docs/reference/deployments/router/cli-mgmt']
         //   },
         //   {
-        //     to: '/docs/guides/deployments/linux/router/deploy',
+        //     to: '/docs/deployments/linux/router/deploy',
         //     from: ['/docs/reference/deployments/router/deployment']
         //   },
         //   {
-        //     to: '/docs/guides/deployments/linux/router/router-configuration',
+        //     to: '/docs/deployments/linux/router/router-configuration',
         //     from: ['/docs/reference/deployments/router/router-configuration']
         //   },
         //   {
@@ -136,11 +136,11 @@ const config = {
         //     from: ['/docs/guides/Public_Cloud_Deployment/Services']
         //   },
         //   {
-        //     to: '/docs/guides/deployments/cloud/router',
+        //     to: '/docs/deployments/cloud/router',
         //     from: ['/docs/guides/Public_Cloud_Deployment/Router']
         //   },
         //   {
-        //     to: '/docs/guides/deployments/cloud/controller',
+        //     to: '/docs/deployments/cloud/controller',
         //     from: ['/docs/guides/Public_Cloud_Deployment/Controller']
         //   },
         //   {
@@ -152,7 +152,7 @@ const config = {
         //     from: ['/docs/guides/Local_Gateway/EdgeRouter']
         //   },
         //   {
-        //     to: '/docs/guides/deployments/linux/controller/backup',
+        //     to: '/docs/deployments/linux/controller/backup',
         //     from: ['/docs/guides/database-backup', '/docs/reference/backup/controller']
         //   },
         //   {
