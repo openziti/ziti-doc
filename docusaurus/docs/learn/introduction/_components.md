@@ -31,7 +31,7 @@ store the information needed to manage the network.
 
 The controller's TLS server employs SNI to select the correct certificate for presentation when there are multiple certificates. Ziti clients use ALPN to negotiate a connection to the control plane (`ziti-ctrl`) or the REST APIs (`h2`, `http/1.1`).
 
-[Controller Deployment Guide](/docs/category/controller)
+[Controller Deployment Guide](/deployments/20-controller/index.mdx)
 
 ### Router
 
@@ -49,7 +49,7 @@ The router is the entry point to the network for client connections.
 The router in combination with the controller is responsible
 for authenticating and authorizing clients.
 
-[Router Deployment Guide](/docs/category/router)
+[Router Deployment Guide](/deployments/40-router/index.mdx)
 
 ### Edge Clients
 

@@ -1,5 +1,0 @@
-label: Controller
-link:
-  type: generated-index
-  title: Deploying an OpenZiti Controller
-  description: Run an OpenZiti controller as a Linux service, with Docker, or deployed to Kubernetes.
