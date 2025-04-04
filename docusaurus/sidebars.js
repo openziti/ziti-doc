@@ -16,7 +16,7 @@ const sidebars = {
   docsSidebar: [
     {
       type: 'html',
-      value: '<a class="menu__link" href="/docs/deployments/controller/overview">DEPLOY</a>', // The HTML to be rendered
+      value: '<a class="menu__link" href="/docs/deployments/controller/">DEPLOY</a>', // The HTML to be rendered
       className: 'sidebar-title'
     },
     {

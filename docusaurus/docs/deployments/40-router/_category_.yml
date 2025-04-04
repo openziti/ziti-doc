@@ -1,6 +1,0 @@
-label: Router
-position: 40
-link:
-  type: generated-index
-  title: Deploying an OpenZiti Router
-  description: Run an OpenZiti router as a Linux service, with Docker, or deployed to Kubernetes.
