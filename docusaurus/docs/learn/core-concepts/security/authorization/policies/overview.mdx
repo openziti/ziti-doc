@@ -102,8 +102,8 @@ in the policy. All Ziti policies work the same way.
  order for a connection to be made. 
  
 When an identity is trying to establish an API Session to use or host a service, the Ziti
-controller will verify that they access via service policy. Once the API Session is 
-established, the controller will return a list of edge routers that the identity 
+controller will verify that it has been granted access to the service via service policy. Once the API Session is
+established, the controller will return a list of edge routers that the identity
 can use to connect to that service. The list will be all edge routers which **both**
 the identity and service have access to. It is possible that an identity may have
 access to a service and access to edge routers, but none of those edge routers
