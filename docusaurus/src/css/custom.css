@@ -2251,8 +2251,3 @@ aside .button:hover {
 aside nav {
   /* this selector will get the sidebar if needed */
 }
-.theme-doc-sidebar-container {
-  background-color: orange;
-  display: flex !important;
-  height: 100%;
-}
