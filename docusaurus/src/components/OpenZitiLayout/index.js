@@ -25,22 +25,18 @@ export default function OpenZitiLayout(props) {
   } = props;
   useKeyboardNavigation();
   return (
-      <LayoutProvider>
-          <div className={styles.root} style={style}>
-              <div className={styles.content}>
-                  <PageMetadata title="OpenZiti - open source zero trust networking!" description="OpenZiti is an open source zero trust network applying zero trust principles directly into applications through SDKs or to existing networks using tunnelers" />
-
-                  <SkipToContent />
-
-                  <AnnouncementBar />
-
-                  <StarUs/>
-
-                  <Navbar />
-              </div>
+    <LayoutProvider>
+      <PageMetadata title={title} description={description} />
+      <SkipToContent />
+      <AnnouncementBar />
+      <StarUs/>
+      <Navbar />
+      <div className={clsx(ThemeClassNames.wrapper.main, styles.ozLayoutMainWrapper, wrapperClassName,)}>
+          <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
               {children}
-              <Footer />
-          </div>
-      </LayoutProvider>
+          </ErrorBoundary>
+          {!noFooter && <Footer />}
+      </div>
+    </LayoutProvider>
   );
 }

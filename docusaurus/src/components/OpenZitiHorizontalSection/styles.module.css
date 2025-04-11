@@ -1,4 +1,4 @@
-.root {
+.ozHorizontalSectionRoot {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -7,17 +7,15 @@
   background-color: var(--ifm-background-color);
 }
 
-.content {
+.ozhsContent {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  min-height: 100%;
   max-width: 100%;
   padding: 20px;
 }
 
 @media (min-width: 1420px) {
-  .content {
+  .ozhsContent {
     min-width: 1400px;
     max-width: 1400px;
   }

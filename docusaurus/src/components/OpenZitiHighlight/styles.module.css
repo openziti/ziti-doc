@@ -1,4 +1,4 @@
-.root {
+.ozHighLightRoot {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -9,7 +9,7 @@
   padding-bottom: 20px;
 }
 
-.content {
+.ozHighLightContent {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -18,7 +18,7 @@
 }
 
 @media (min-width: 1400px) {
-  .content {
+  .ozHighLightContent {
     min-width: 1400px;
     max-width: 1400px;
     padding: 20px 20px;
