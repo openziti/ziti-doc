@@ -248,29 +248,26 @@ export default function Layout(props) {
     });
   }
   return (
-    <LayoutProvider style={{backgroundColor: "orange"}}>
+    <LayoutProvider>
       <PageMetadata title={title} description={description} />
-
       <SkipToContent />
-
       <AnnouncementBar />
-
       <StarUs/>
-
       <Navbar />
-
       <div
         className={clsx(
           ThemeClassNames.wrapper.main,
           styles.mainWrapper,
           wrapperClassName,
         )}>
+        <div className={styles.wrapperDiv}>
         <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
           {children}
         </ErrorBoundary>
-      </div>
+        </div>
 
-      {!noFooter && <Footer />}
+        {!noFooter && <Footer />}
+      </div>
     </LayoutProvider>
   );
 }

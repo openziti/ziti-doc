@@ -47,7 +47,7 @@ export default function Home() {
     
     return (
         <OpenZitiLayout>
-            <OpenZitiHorizontalSection style={{padding: "40px"}}>
+            <OpenZitiHorizontalSection >
                 <div className={styles.getStartedRow}>
 
                     <div className={styles.getStartedBlurb}>
