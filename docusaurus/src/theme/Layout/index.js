@@ -261,9 +261,9 @@ export default function Layout(props) {
           wrapperClassName,
         )}>
         <div className={styles.wrapperDiv}>
-        <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
-          {children}
-        </ErrorBoundary>
+          <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
+            {children}
+          </ErrorBoundary>
         </div>
 
         {!noFooter && <Footer />}

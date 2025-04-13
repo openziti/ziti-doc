@@ -2239,15 +2239,24 @@ html[data-theme="dark"] {
 }
 
 aside .button {
-  /* this just allows the button on the bottom of the navbar to render properly */
+  /* render the button on the bottom of the left nav to render properly */
   margin: 5px 25px;
   padding: 5px 25px;
   background: var(--ifm-background-color);
 }
 aside .button:hover {
-  /* this just allows the button on the bottom of the navbar to render properly */
+  /* render the button on the bottom of the left nav to render properly */
   background: var(--ifm-background-color);
 }
+
 aside nav {
-  /* this selector will get the sidebar if needed */
+  /* this selector gets the sidebar */
+  height: 100%;
+  margin-bottom: 30px; /* with the hide menu button on small screens, it obscures the last menu item without this */
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 }
