@@ -26,6 +26,7 @@ while read; do
     else
         FAILURES+=("${HTTP_CODE} ${REPLY}")
     fi
+    sleep 0.1 #no more than 10/s
 done < "${2}"
 
 if ! (( ${#FAILURES[*]} )); then
