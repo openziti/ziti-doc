@@ -340,10 +340,9 @@ const config = {
         },
         items: [
           {
-            to: 'https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/',
-            label: 'NetFoundry',
-            position: 'right',
-            target: '_blank',
+            type: 'html',
+            value: '<a class="navbar__item navbar__link header-netfoundry-link" href="https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/" target="_blank">NetFoundry</a>',
+            position: 'right'
           },
           {
             to: '/docs/learn/introduction/',
@@ -358,8 +357,8 @@ const config = {
             activeBaseRegex: '/docs/downloads',
           },
           {
-            to: 'https://blog.openziti.io/',
-            label: 'Blog',
+            type: 'html',
+            value: '<a class="navbar__item navbar__link header-netfoundry-link" href="https://blog.openziti.io/" target="_blank">Blog</a>',
             position: 'right'
           },
           {
