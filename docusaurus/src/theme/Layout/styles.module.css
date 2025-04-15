@@ -1,10 +1,7 @@
 html,
 body {
   height: 100%;
-}
-
-.mainWrapper {
-  flex: 1 0 auto;
+  overflow: hidden;
 }
 
 /* Docusaurus-specific utility class */
@@ -13,7 +10,13 @@ body {
 }
 
 :global(#__docusaurus) {
-  min-height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+.wrapperDiv {
+  max-width: 1400px;
+}
+.mainWrapper {
 }

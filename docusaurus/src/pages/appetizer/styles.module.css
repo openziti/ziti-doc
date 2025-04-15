@@ -47,7 +47,6 @@ small {
 
 .exampleContainer {
     /* background: #00d084; */
-    flex-grow: 1;
 }
 
 .explainer {
@@ -172,15 +171,13 @@ small {
         display: flex;
         flex-direction: column;
         padding: 0 10px 0 0;
-        flex-basis: 50%;
         min-width: 400px;
     }
 
     .asciinema {
         display: flex;
         flex-direction: column;
-        flex-grow: 1;
-        flex-basis: 50%;
+        width: 100%;
     }
 
     .buttons {
@@ -210,4 +207,20 @@ small {
         flex-grow: 1;
         flex-wrap: nowrap;
     }
+}
+
+.appetizerTitle {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.slideShow {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.ozhs {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }

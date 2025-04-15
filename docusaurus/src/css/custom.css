@@ -6,6 +6,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-navbar-height: 40;
   --ifm-leading: 35px;
   --ifm-background-color: #f8fafc;
   --ifm-background-surface-color: #f1f5f9;
@@ -102,7 +103,7 @@ html[data-theme=dark] .alert--secondary code {
 }
 
 html[data-theme=dark] .alert--secondary code .token-line {
-    color: rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
 }
 
 html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
@@ -249,7 +250,8 @@ input[type="radio"]:checked+label:after {
 /**
  Footer
  */
- .footer, .footer.container {
+.footer, .footer.container {
+  display: flex;
   padding: calc(var(--ifm-spacing-vertical) * 0.2)
   var(--ifm-footer-padding-horizontal);
 }
@@ -273,8 +275,12 @@ input[type="radio"]:checked+label:after {
 @media (min-width: 1416px) {
   .main-wrapper {
     align-self: center;
-    max-width: 1400px;
-    width: 1400px;
+    width: 100%;
+    overflow: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -421,7 +427,7 @@ input[type="radio"]:checked+label:after {
   margin-top: -35px;
 }
 .flr {
-float: right;
+  float: right;
 }
 
 
@@ -550,7 +556,7 @@ div > aside > div > nav > ul > li > a:active {
   display: inline-block;
   line-height: initial;
 }
- 
+
 .mt20 {
   margin-top: 20px;
 }
@@ -861,9 +867,9 @@ input {
   float: right;
   width: 75%;
   border-top-left-radius: 12px;
-  border-top-right-radius: 12px;    
+  border-top-right-radius: 12px;
   height: 890px;
-  overflow-y: auto;    
+  overflow-y: auto;
   height: calc(70vh - 134px);
 }
 
@@ -960,7 +966,7 @@ input {
   display: grid;
   grid-template-columns: 50px auto;
   column-gap: 20px;
-  transition: .4s; 
+  transition: .4s;
 }
 
 .wizardnav .title .step-number {
@@ -997,10 +1003,10 @@ input {
   font-family: 'Hand Of Sean';
   src: url('/img/HandOfSeanDemo.eot');
   src: url('/img/HandOfSeanDemo.eot?#iefix') format('embedded-opentype'),
-      url('/img/HandOfSeanDemo.woff2') format('woff2'),
-      url('/img/HandOfSeanDemo.woff') format('woff'),
-      url('/img/HandOfSeanDemo.ttf') format('truetype'),
-      url('/img/HandOfSeanDemo.svg#HandOfSeanDemo') format('svg');
+  url('/img/HandOfSeanDemo.woff2') format('woff2'),
+  url('/img/HandOfSeanDemo.woff') format('woff'),
+  url('/img/HandOfSeanDemo.ttf') format('truetype'),
+  url('/img/HandOfSeanDemo.svg#HandOfSeanDemo') format('svg');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -1024,7 +1030,7 @@ input {
   right: 20px;
   cursor: pointer;
   border-radius: 20px;
-    transition: .5s;
+  transition: .5s;
   font-family: "Hand Of Sean";
   background-color: #002451;
   color: #fad82c !important;
@@ -1034,8 +1040,8 @@ input {
 
 @supports ((-webkit-backdrop-filter: saturate(180%) blur(20px)) or (backdrop-filter: saturate(180%) blur(20px))) {
   .openWizard {
-      backdrop-filter: saturate(180%) blur(20px);
-      background-color: rgba(0, 36, 81, .95)
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: rgba(0, 36, 81, .95)
   }
 }
 
@@ -1786,7 +1792,7 @@ li.L9 {}
   cursor: pointer;
 }
 
-.scrollcontainer { 
+.scrollcontainer {
   overflow: scroll;
   width: 100%;
   height: 585px;
@@ -1874,21 +1880,21 @@ code {
 }
 
 code p {
-  
+
 }
 
 li a code {
-    font-family: var(--ifm-font-family-monospace), monospace;
-    vertical-align: middle;
-    font-size: 87.5%;
-    font-weight: 600;
-    word-break: break-word;
-    border-radius: 7px;
-    padding: 2px 4px 2px 4px;
+  font-family: var(--ifm-font-family-monospace), monospace;
+  vertical-align: middle;
+  font-size: 87.5%;
+  font-weight: 600;
+  word-break: break-word;
+  border-radius: 7px;
+  padding: 2px 4px 2px 4px;
 
-    background-color: rgba(117, 82, 136, 0.2) !important;
-    border: 1px solid rgba(117, 82, 136, 0.98);
-    color: rgba(117, 82, 136, 0.98);
+  background-color: rgba(117, 82, 136, 0.2) !important;
+  border: 1px solid rgba(117, 82, 136, 0.98);
+  color: rgba(117, 82, 136, 0.98);
 }
 
 .tabItem_node_modules {
@@ -1979,24 +1985,15 @@ pre.off {
 
 .wizardmodal pre {
   text-wrap: wrap;
-} 
+}
 
 .breadcrumbs__item--active .breadcrumbs__link {
   font-weight: 700;
 }
 
-.collapseSidebarButton_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-CollapseButton-styles-module {
-  display: block !important;
-  background-color:#f1f5f9;
-  height: 40px;
-  position: sticky;
-  bottom: 0;
-  border-radius: 0;
-  border: 1px solid var(--ifm-toc-border-color);
-}
-
 .footer {
   background-color: var(--ifm-navbar-background-color);
+  width: 100%;
 }
 
 .pagination-nav__link {
@@ -2208,8 +2205,58 @@ html[data-theme="dark"] {
     background: var(--alert-border-color);
     color: var(--inline-code-block-color);
   }
-  
+
   .theme-code-block > div > pre > code { /*fixes a strange render issue in prism/docusaurus' :::note admonition*/
     background: var(--alert-background-color);
   }
+}
+
+.collapseSidebarButton {
+  background-color: #f5f5f5;
+}
+
+
+/* Example: Custom styles for the DocSidebar */
+:global(.doc-sidebar) {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Custom styles for sidebar items */
+.doc-sidebar .menu__link {
+  font-size: 16px;
+  font-weight: bold;
+}
+.sidebar__scroll-top {
+  background-color: #ff5733;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar__scroll-top:hover {
+  background-color: #c04e2d;
+}
+
+aside .button {
+  /* render the button on the bottom of the left nav to render properly */
+  margin: 5px 25px;
+  padding: 5px 25px;
+  background: var(--ifm-background-color);
+}
+aside .button:hover {
+  /* render the button on the bottom of the left nav to render properly */
+  background: var(--ifm-background-color);
+}
+
+aside nav {
+  /* this selector gets the sidebar */
+  height: 100%;
+  margin-bottom: 30px; /* with the hide menu button on small screens, it obscures the last menu item without this */
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 }

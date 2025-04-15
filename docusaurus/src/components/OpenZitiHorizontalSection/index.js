@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import {useKeyboardNavigation} from '@docusaurus/theme-common/internal';
 import styles from './styles.module.css';
 
@@ -17,13 +18,11 @@ export default function OpenZitiHorizontalSection(props) {
     if (wrapperClassName) {
         cn = wrapperClassName;
     } else {
-        cn = styles.root;
+        cn = styles.ozHorizontalSectionRoot;
     }
     return (
-        <div className={cn} style={style}>
-            <div className={styles.content}>
-                {children}
-            </div>
+        <div className={clsx(styles.ozhsContent, cn)} style={style}>
+            {children}
         </div>
     );
 

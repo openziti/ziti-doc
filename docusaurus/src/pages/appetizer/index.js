@@ -17,7 +17,7 @@ function App() {
     const strongIds = <Highlight>strong identities</Highlight>;
     const slideImages = [
         {
-            title: <div><H3 style={extraH3Style}>Step 1 - Reflect Server Strong Identity</H3></div>,
+            title: <H3 style={extraH3Style}>Step 1 - Reflect Server Strong Identity</H3>,
             text: (<><p>When the Appetizer process starts, it first creates a {strongId} for
                 itself. This strong identity (represented by the lock icon) is authorized to "bind" the reflect service,
                 creating a listener. The reflect server is then listening on the overlay and able to accept incoming
@@ -27,7 +27,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step1.svg")
         },
         {
-            title: <div><H3 style={extraH3Style}>Step 2 - Reflect Server Connects to the OpenZiti Network</H3></div>,
+            title: <H3 style={extraH3Style}>Step 2 - Reflect Server Connects to the OpenZiti Network</H3>,
             text: (<><p>Now the&nbsp;<code>reflect server</code>&nbsp;is ready to connect to the overlay network. The OpenZiti SDK
                 locates any/all <a href="/docs/reference/glossary">OpenZiti Routers</a> it's authorized to connect to
                 and using the {strongId} created in step 1, it attaches to the overlay network. Following the principle
@@ -38,7 +38,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step2.svg")
         },
         {
-            title: <div><H3 style={extraH3Style}>Step 3 - Reflect Client Strong Identity</H3></div>,
+            title: <H3 style={extraH3Style}>Step 3 - Reflect Client Strong Identity</H3>,
             text: (<>
                 <p>
                     Your&nbsp;<code>reflect client</code>&nbsp;also needs a {strongId}. You won't be able to connect to the
@@ -53,7 +53,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step3.svg")
         },
         {
-            title: <div><H3 style={extraH3Style}>Step 4 - Reflect Client Connects to the OpenZiti Network</H3></div>,
+            title: <H3 style={extraH3Style}>Step 4 - Reflect Client Connects to the OpenZiti Network</H3>,
             text: (<><p>Your&nbsp;<code>reflect client</code>&nbsp;now has it's own {strongId} and can connect to the
                 OpenZiti overlay! Both reflect client and reflect server established connections to the
                 <a href="/docs/reference/glossary">OpenZiti Routers</a> deployed on
@@ -67,7 +67,7 @@ function App() {
             darkImg: useBaseUrl("/img/appetizer/dark-step4.svg")
         },
         {
-            title: <div><H3 style={extraH3Style}>Step 5 - Client and Server Communicate Securely</H3></div>,
+            title: <H3 style={extraH3Style}>Step 5 - Client and Server Communicate Securely</H3>,
             text: (<>
                 <p>The&nbsp;<code>reflect client</code>&nbsp;now securely dials the&nbsp;<code>reflect server</code>
                     &nbsp;over the OpenZiti overlay. The client can connect and the server can accept the connections because
@@ -106,16 +106,16 @@ function App() {
             <li>End-to-end encryption. Make sure the data you intend to send is only available to the intended recipient.</li>
         </ul>
     </div>;
-
-
+    
     const [items, setItems] = useState([
-        /*
-        <div className={styles.messagebox}>
-            <p className={styles.messageName}>randomizer_1235</p>
-            <p className={styles.messageText}>here we go</p>
-        </div>
-         */
+      /*
+      <div className={styles.messagebox}>
+        <p className={styles.messageName}>randomizer_1235</p>
+        <p className={styles.messageText}>here we go</p>
+      </div>
+      */
     ]);
+    
     function generateUniqueId() {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
@@ -177,7 +177,7 @@ function App() {
     };
 
     return (
-        <div>
+        <OpenZitiLayout>
             <div className={styles.liveMsgContainerContainer} style={{ minHeight: "100px", maxHeight: "450px" }}>
                 {liveMessageVisible && (
                     <div className={`${styles.liveMsgContainer} ${styles.bgImg1}`}>
@@ -188,18 +188,15 @@ function App() {
                     </div>
                 )}
             </div>
-        <OpenZitiLayout>
-            <OpenZitiHorizontalSection>
-                <div style={{display:"flex", paddingBottom: "10px"}}>
-                    <div style={{display: "flex", flexGrow: 1}}>
-                        <img
-                            src="https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png"
-                            height="60px"
-                            alt="Ziggy Chef"
-                            style={{padding: "0 10px 0 0"}}
-                        />
-                        <H1>Appetizer: <span style={{display: "inline-block"}}>Taste OpenZiti</span></H1>
-                    </div>
+            <OpenZitiHorizontalSection wrapperClassName={styles.ozhs}>
+                <div className={styles.appetizerTitle}>
+                    <img
+                        src="https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png"
+                        height="60px"
+                        alt="Ziggy Chef"
+                        style={{padding: "0 10px 0 0"}}
+                    />
+                    <H1>Appetizer: <span style={{display: "inline-block"}}>Taste OpenZiti</span></H1>
                 </div>
                 <div className={styles.exampleContainer}>
                     <div className={styles.explainer}>
@@ -210,19 +207,15 @@ function App() {
                         </CodeBlock>
                         {whatYouGet}
                     </div>
-                    <div className={`${styles.asciinema}`}>
-                        <div style={{display:"flex", flexBasis: "33%"}}></div>
-                        <div style={{width: "100%", position: "relative"}}>
-                            <div style={{display: "flex", position: "absolute", right: "5px", zIndex:1, top: "5px",  alignItems:"center"}}>
-                                <button className={"button button--primary"} onClick={showLiveMessages}>{liveMsgText}</button>
-                            </div>
-                            <AsciinemaWidget fit={"width"} src="/appetizer.cast" loop={true} autoplay={1} preload={true} />
+                    <div className={`${styles.asciinema}`} style={{position: 'relative'}}>
+                        <div style={{position: 'absolute', top: '5px', right: '5px', zIndex: 1, flexDirection: 'column'}}>
+                            <button className={"button button--primary"} onClick={showLiveMessages}>{liveMsgText}</button>
                         </div>
-                        <div style={{display:"flex", flexBasis: "33%"}}></div>
+                        <AsciinemaWidget fit={"width"} src="/appetizer.cast" loop={true} autoplay={1} preload={true} />
                     </div>
                 </div>
                 <hr/>
-                <SlideShow slides={slideImages}
+                <SlideShow slides={slideImages} className={styles.slideShow}
                            slideTitle={<H2>Taking a Closer Look</H2>}
                            slideClassName={styles.defaultSlideStyle}
                            textClassName={styles.slideText}
@@ -231,7 +224,6 @@ function App() {
                 />
             </OpenZitiHorizontalSection>
         </OpenZitiLayout>
-        </div>
     );
 }
 
