@@ -1,5 +1,6 @@
 ---
 draft: 'true'
+hide_table_of_contents: true
 ---
 
 import DetailsExample from './_detail_example.mdx'

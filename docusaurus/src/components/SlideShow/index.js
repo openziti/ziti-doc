@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 
 const Slideshow = (props) => {
-    const { style, slideClassName, slideTitle, slides, buttonClassName, textClassName, imgClassName } = props;
+    const { style, slideClassName, slideTitle, slides, buttonClassName, textClassName, imgClassName, className } = props;
     const viewAllSlides = "View All";
     const viesAsSlideshow = "View as Slideshow"
     const {colorMode, setColorMode} = useColorMode();
@@ -130,7 +130,7 @@ const Slideshow = (props) => {
     const allSlides = slides.map(slide => renderSlide(slide, <hr/>));
 
     return (
-        <>
+        <div className={className}>
             <div style={{display: "flex", justifyContent:"space-between"}}>
                 {slideTitle}
                 <div style={{display: "flex", marginRight: "5px", height:"36px"}}>
@@ -140,7 +140,7 @@ const Slideshow = (props) => {
             <div>
                 {showAll ? allSlides : slideShow}
             </div>
-        </>
+        </div>
     );
 };
 

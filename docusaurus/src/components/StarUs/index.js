@@ -10,7 +10,7 @@ export default function OpenZitiLayout(props) {
   const {
     children,
     noFooter,
-    wrapperClassName,
+    className,
     // Not really layout-related, but kept for convenience/retro-compatibility
     title,
     description,
@@ -18,7 +18,7 @@ export default function OpenZitiLayout(props) {
   } = props;
   useKeyboardNavigation();
   return (
-      <div className={styles.root}>
+      <div className={styles.starUsRoot}>
           <span style={{color: "whitesmoke"}}>Star us on GitHub&nbsp;</span>
           <span style={{height: "20px"}}>
             <GitHubButton href="https://github.com/openziti/ziti" data-icon="octicon-star" data-show-count="true" aria-label="Star buttons/github-buttons on GitHub">Star</GitHubButton>

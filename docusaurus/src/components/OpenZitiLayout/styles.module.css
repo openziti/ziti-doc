@@ -1,13 +1,25 @@
-.root {
+.ozLayoutRoot {
   display: flex;
   flex-grow: 1;
-  min-height: 100%;
+  height: 100%;
   flex-direction: column;
 }
 
-.content {
+.ozLayoutContent {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
+}
+
+.ozLayoutWrapperDiv {
+  display: flex;
+  height: 100%;
+}
+
+.ozLayoutMainWrapper {
+  
+}
+.ozLayoutFooter {
+  display: flex;
 }

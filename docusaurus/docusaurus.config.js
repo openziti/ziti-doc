@@ -340,6 +340,12 @@ const config = {
         },
         items: [
           {
+            to: 'https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/',
+            label: 'NetFoundry',
+            position: 'right',
+            target: '_blank',
+          },
+          {
             to: '/docs/learn/introduction/',
             label: 'Documentation',
             position: 'right',

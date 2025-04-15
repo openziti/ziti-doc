@@ -14,7 +14,7 @@ import GitHubButton from "react-github-btn";
 import StarUs from "../../components/StarUs";
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import $ from 'jquery';
-//import CustomizeDoc from '@site/src/components/CustomizeDoc';
+import OpenZitiFooter from "../../components/OpenZitiFooter";
 
 import Hotjar from '@hotjar/browser';
 const siteId = 3576473;
@@ -24,7 +24,7 @@ export default function Layout(props) {
   const {
     children,
     noFooter,
-    wrapperClassName,
+    className,
     // Not really layout-related, but kept for convenience/retro-compatibility
     title,
     description,
@@ -248,29 +248,26 @@ export default function Layout(props) {
     });
   }
   return (
-    <LayoutProvider style={{backgroundColor: "orange"}}>
+    <LayoutProvider>
       <PageMetadata title={title} description={description} />
-
       <SkipToContent />
-
       <AnnouncementBar />
-
       <StarUs/>
-
       <Navbar />
-
       <div
         className={clsx(
           ThemeClassNames.wrapper.main,
           styles.mainWrapper,
-          wrapperClassName,
+          className,
         )}>
-        <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
-          {children}
-        </ErrorBoundary>
-      </div>
+        <div className={styles.wrapperDiv}>
+          <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
+            {children}
+          </ErrorBoundary>
+        </div>
 
-      {!noFooter && <Footer />}
+        {!noFooter && <OpenZitiFooter />}
+      </div>
     </LayoutProvider>
   );
 }
