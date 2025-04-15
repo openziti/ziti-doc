@@ -18,7 +18,7 @@ const HeroSection = () => (
                 <a href="/docs/learn/quickstarts/network/hosted" className={styles.aaBtn}>Get Started Hosting OpenZiti Yourself</a>
                 <a href="https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/" className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry Cloud For Free</a>
             </div>
-
+            <div className={styles.aaHeroGraphic}>
             <ThemedImage
                 alt="OpenZiti Network Visualization"
                 sources={{
@@ -27,6 +27,7 @@ const HeroSection = () => (
                 }}
                 className={styles.aaHeroGraphicImg}
             />
+            </div>
         </section>
     </OpenZitiHorizontalSection>
 );
