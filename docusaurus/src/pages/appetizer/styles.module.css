@@ -212,6 +212,7 @@ small {
 .appetizerTitle {
     display: flex;
     padding-bottom: 10px;
+    width: 100%;
 }
 
 .slideShow {
