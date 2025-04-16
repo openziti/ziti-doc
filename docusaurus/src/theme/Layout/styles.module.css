@@ -16,7 +16,8 @@ body {
 }
 
 .wrapperDiv {
-  max-width: 1400px;
+  max-width: var(--ziti-max-width);
+  width: 100%;
 }
 .mainWrapper {
 }

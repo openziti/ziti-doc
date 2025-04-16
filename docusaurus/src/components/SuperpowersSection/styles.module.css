@@ -1,0 +1,75 @@
+.aaSuperpowers {
+  padding: var(--aaSpaceLg) 0;
+}
+
+.aaSectionHeader {
+  text-align: center;
+  margin-bottom: var(--aaSpaceLg);
+}
+
+.aaSectionHeader h2 {
+  font-size: 2rem;
+  margin-bottom: var(--aaSpaceSm);
+}
+
+.aaSectionHeader p {
+  font-size: 1.125rem;
+  color: var(--ziti-text-muted);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.aaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--aaSpaceMd);
+}
+
+.aaSuperpowerCard {
+  border: 1px solid #b5b5c5;
+  border-radius: var(--aaRadiusMd);
+  box-shadow: var(--aaShadowMd);
+  padding: var(--aaSpaceMd);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aaSuperpowerCard:hover {
+  box-shadow: var(--aaShadowMd);
+  transform: translateY(-4px);
+}
+.aaSuperpowerIconOld {
+  font-size: 3rem;
+  margin-bottom: var(--aaSpaceSm);
+}
+.aaSuperpowerIcon {
+  background: rgba(76, 45, 179, 0.1);
+  border-radius: 50%;  /* Ensures the icon is circular */
+  color: var(--aaPrimary);
+  display: inline-flex;
+  font-size: 1.5rem;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--aaSpaceSm);
+  width: 48px;
+}
+
+.aaSuperpowerCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-xs);
+}
+
+.aaSuperpowerCard p {
+  font-size: 1rem;
+  color: var(--aaTextMuted);
+  margin-bottom: 0;
+}
+.aaContainer {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 var(--aaSpaceSm);
+}

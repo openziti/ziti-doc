@@ -194,7 +194,7 @@ body {
 }
 
 .zcontainer {
-  max-width: 1400px;
+  var(--ziti-max-width);
   min-width: 300px;
   margin: 0 auto;
   background: rgba(236, 238, 242, .85);

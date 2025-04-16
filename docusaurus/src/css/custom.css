@@ -6,12 +6,20 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-font-color-base: #252525;
+  --ifm-font-color-inverse: #94a3b8;
+  --ifm-font-family-monospace: "Consolas", monospace;
+  --ifm-font-family-sans: "Open Sans", sans-serif;
+  --ifm-font-family-sans-default: sans-serif;
+  --ziti-landing-max-width: 1200px;
+  --ziti-max-width: 1400px;
   --ifm-navbar-height: 40;
   --ifm-leading: 35px;
   --ifm-background-color: #f8fafc;
   --ifm-background-surface-color: #f1f5f9;
   --ifm-background-surface-color-dark: #e1d4ee;
   --ifm-footer-background-color: #f0f0f0;
+  --ifm-color-banner: #edac15;
   --ifm-color-primary: #0068f9;
   --ifm-color-primary-dark: #8519e7;
   --ifm-color-primary-darker: #7e17dc;
@@ -23,14 +31,9 @@
   --code-block-color: var(--ifm-heading-color);
   --lighter-code-block-color: color-mix(in srgb, var(--ifm-heading-color) 70%, white 30%);
   --code-block-background-color: #ECEEEF;
-  --ifm-font-family-monospace: "Consolas", monospace;
-  --ifm-font-family-sans: "Open Sans", sans-serif;
-  --ifm-font-family-sans-default: sans-serif;
-  --ifm-color-banner: #edac15;
   --ifm-navbar-item-padding-horizontal: .5em;
   --background-color-1: #ffd0d0;
   --landing-banner-1: #e0e4ee;
-  --ifm-font-color-base: #252525;
   --ifm-menu-color: #002451;
   --ifm-toc-link-color: #252525;
   --ifm-alert-foreground-color: #252525;
@@ -54,12 +57,22 @@
   --ifm-link-color: rgba(217, 15, 95, 0.98);
   --ifm-breadcrumb-color-actives: rgba(217, 15, 95, 0.98);
   --ifm-breadcrumb-color-active: color-mix(in srgb, var(--ifm-link-color) 75%, white 25%);
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1.0rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
 }
 html:not([data-theme="dark"]) {
   --ifm-leading: 15px;
 }
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme="dark"] {
+  --ifm-font-color-base: #94a3b8;
   --ifm-leading: 15px;
   --ifm-background-color: #111827;
   --ifm-background-surface-color: #1f2937;
@@ -74,7 +87,6 @@ html[data-theme="dark"] {
   --ifm-color-primary-lightest: #e6cffe;
   --background-color-1: #434862;
   --landing-banner-1: #38383a;
-  --ifm-font-color-base: #94a3b8;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --logo-name: "ziti-logo-light.svg";
   --ifm-heading-color: 148 163 184;
@@ -90,6 +102,8 @@ html[data-theme="dark"] {
   --ifm-menu-left-border-color: #94a3b8;
   --ifm-link-color: rgba(21, 142, 237, 1);
   --ifm-breadcrumb-color-active: color-mix(in srgb, var(--ifm-link-color) 75%, white 25%);
+
+  --ziti-text-muted: #8e8ea0;
 }
 
 html[data-theme=dark] #Wizardly code {
@@ -247,6 +261,33 @@ input[type="radio"]:checked+label:after {
   width: 1.25rem;
 }
 
+.header-netfoundry-link {
+  display: flex !important;
+}
+.header-netfoundry-link::after {
+  position: relative;
+  right: -3px;
+  top: 5px;
+}
+.header-netfoundry-link:hover {
+  opacity: 0.6;
+}
+.header-netfoundry-link::after {
+  background: url('/img/new-window.svg?v=3') no-repeat;
+  content: "";
+  display: flex;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+[data-theme="dark"] .header-netfoundry-link::after {
+  background: url('/img/new-window.svg') no-repeat;
+  content: "";
+  display: flex;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+
 /**
  Footer
  */
@@ -281,6 +322,7 @@ input[type="radio"]:checked+label:after {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--ifm-background-color);
   }
 }
 
@@ -653,7 +695,7 @@ list-type-ulli,
   margin: 0;
 }
 
-a {
+.wizardmodal a {
   color: rgba(217, 15, 95, 0.98);
   text-decoration: var(--ifm-link-decoration);
   transition: 0.5s;
@@ -669,7 +711,7 @@ html[data-theme=dark] .menu__link {
   color: var(--ifm-font-color-base) !important;
 }
 
-.menu__link--active {
+.wizardmodal .menu__link--active {
   color: rgba(217, 15, 95, 0.98) !important;
   transition: 0.5s;
 }
@@ -688,12 +730,12 @@ html[data-theme=dark] .menu__link--active {
   color: rgba(117, 82, 136, 0.98);
 }
 
-a:hover {
+.wizardmodal a:hover {
   color: rgba(117, 82, 136, 0.98);
   text-decoration: var(--ifm-link-hover-decoration);
 }
 
-html[data-theme=dark] a:hover {
+html[data-theme=dark] .wizardmodal a:hover {
   color: rgba(217, 15, 95, 0.98);
   text-decoration: var(--ifm-link-hover-decoration);
 }
@@ -729,7 +771,7 @@ html[data-theme=dark] a:hover {
 }
 
 .wizardmodal .zcontainer {
-  max-width: 1400px;
+  max-width: var(--ziti-max-width);
   min-width: 300px;
   margin: 0 auto;
   background: rgba(236, 238, 242, .85);
@@ -2252,11 +2294,19 @@ aside .button:hover {
 aside nav {
   /* this selector gets the sidebar */
   height: 100%;
-  margin-bottom: 30px; /* with the hide menu button on small screens, it obscures the last menu item without this */
+  /*margin-bottom: 70px;*/ /* only do this when it's small */
 }
 
 .main-wrapper {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  background: var(--ifm-background-color);
+}
+
+@media (max-height: 1200px) {
+  aside nav {
+    /* this selector gets the sidebar */
+    margin-bottom: 70px; /* with the hide menu button on small screens, it obscures the last menu item without this */
+  }
 }

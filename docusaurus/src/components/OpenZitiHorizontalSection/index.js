@@ -7,23 +7,18 @@ export default function OpenZitiHorizontalSection(props) {
     const {
         children,
         noFooter,
-        wrapperClassName,
+        className,
         // Not really layout-related, but kept for convenience/retro-compatibility
         title,
         description,
         style,
     } = props;
     useKeyboardNavigation();
-    let cn = null;
-    if (wrapperClassName) {
-        cn = wrapperClassName;
-    } else {
-        cn = styles.ozHorizontalSectionRoot;
-    }
+    
     return (
-        <div className={clsx(styles.ozhsContent, cn)} style={style}>
+        <section className={clsx(className, styles.ozHorizontalSectionRoot, styles.ozhsContent)} style={style}>
             {children}
-        </div>
+        </section>
     );
 
 }

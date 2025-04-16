@@ -43,13 +43,12 @@ export default function Home() {
         fontFamily: "Arial"
     };
 
-    return <Redirect to="docs/learn/introduction/" />;
+    // return <Redirect to="docs/learn/introduction/" />;
     
     return (
         <OpenZitiLayout>
             <OpenZitiHorizontalSection >
                 <div className={styles.getStartedRow}>
-
                     <div className={styles.getStartedBlurb}>
                         <H2>Secure by design networking, anywhere, as <Highlight>software</Highlight></H2>
 
