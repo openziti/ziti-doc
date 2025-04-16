@@ -262,7 +262,7 @@ input[type="radio"]:checked+label:after {
 }
 
 .header-netfoundry-link {
-  display: flex;
+  display: flex !important;
 }
 .header-netfoundry-link::after {
   position: relative;
