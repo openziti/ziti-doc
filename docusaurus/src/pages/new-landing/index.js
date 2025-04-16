@@ -129,7 +129,7 @@ const TimeLineSection = () => (
 
 function App() {
     return (
-        <OpenZitiLayout className={styles.landing}>
+        <OpenZitiLayout className={styles.landing} footerClassName={styles.footer}>
             <HeroSection />
             <SuperPowerSection />
             <TimeLineSection />
