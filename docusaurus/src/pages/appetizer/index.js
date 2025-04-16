@@ -177,7 +177,7 @@ function App() {
     };
 
     return (
-        <OpenZitiLayout>
+        <OpenZitiLayout className={styles.appetizer}>
             <div className={styles.liveMsgContainerContainer} style={{ minHeight: "100px", maxHeight: "450px" }}>
                 {liveMessageVisible && (
                     <div className={`${styles.liveMsgContainer} ${styles.bgImg1}`}>

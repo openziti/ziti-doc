@@ -17,7 +17,7 @@ export default function OpenZitiFooter(props) {
     useKeyboardNavigation();
     
     return (
-        <footer className={styles.footer}>
+        <footer className={clsx(className, styles.ozFooter)} style={style}>
             <OpenZitiHorizontalSection className={styles.footer}>
                 <div className={styles.footerContainer}>
                     <div className={styles.footerGrid}>

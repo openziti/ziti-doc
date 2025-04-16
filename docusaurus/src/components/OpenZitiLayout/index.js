@@ -19,6 +19,7 @@ export default function OpenZitiLayout(props) {
       style,
       noFooter,
       className,
+      footerClassName,
       // Not really layout-related, but kept for convenience/retro-compatibility
       title,
       description,
@@ -36,7 +37,7 @@ export default function OpenZitiLayout(props) {
           <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
               {children}
           </ErrorBoundary>
-          {!noFooter && <OpenZitiFooter />}
+          {!noFooter && <OpenZitiFooter className={footerClassName} />}
       </div>
     </LayoutProvider>
   );

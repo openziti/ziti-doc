@@ -60,7 +60,7 @@
 
 .aaSuperpowerCard h3 {
   font-size: 1.25rem;
-  margin-bottom: var(--aaSpaceXs);
+  margin-bottom: var(--space-xs);
 }
 
 .aaSuperpowerCard p {

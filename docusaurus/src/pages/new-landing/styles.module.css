@@ -31,6 +31,11 @@
 
   --btnPrimaryLight: #158eed;
   --btnPrimary: #00569a;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
   
   a:hover, a:focus, p {
     /*color: var(--ifm-background-color);*/
@@ -44,7 +49,7 @@
   h1, h2, h3, h4, h5 {
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: var(--aaSpaceXs);
+    margin-bottom: var(--space-xs);
   }
 
   p {
@@ -72,10 +77,10 @@
     display: inline-flex;
     font-size: 1rem;
     font-weight: 600;
-    gap: var(--aaSpaceXs);
+    gap: var(--space-xs);
     justify-content: center;
     min-width: 180px;
-    padding: var(--aaSpaceXs) var(--aaSpaceSm);
+    padding: var(--space-xs) var(--aaSpaceSm);
     text-align: center;
     transition: var(--aaTransition);
     transform: scale(1.05);
@@ -350,7 +355,7 @@
 
   .aaSuperpowerCard h3 {
     font-size: 1.25rem;
-    margin-bottom: var(--aaSpaceXs);
+    margin-bottom: var(--space-xs);
   }
 
   .aaSuperpowerCard p {
@@ -522,5 +527,28 @@
     a {
       color: aliceblue;
     }
+  }
+
+
+
+
+  .heroTextContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .heroText {
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+    padding: var(--aaSpaceSm);
+  }
+
+  .heroText.fadeIn {
+    opacity: 1;
+  }
+
+  .heroText.fadeOut {
+    opacity: 0;
   }
 }
