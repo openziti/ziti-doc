@@ -9,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--ifm-background-color);
+    width: 100%;
   }
 
   /* Footer Styles */

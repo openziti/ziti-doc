@@ -25,6 +25,7 @@ export default function Layout(props) {
     children,
     noFooter,
     className,
+    footerClassName,
     // Not really layout-related, but kept for convenience/retro-compatibility
     title,
     description,
@@ -266,7 +267,7 @@ export default function Layout(props) {
           </ErrorBoundary>
         </div>
 
-        {!noFooter && <OpenZitiFooter />}
+        {!noFooter && <OpenZitiFooter className={clsx(styles.layoutFooter, footerClassName)} />}
       </div>
     </LayoutProvider>
   );

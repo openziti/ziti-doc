@@ -18,6 +18,11 @@ body {
 .wrapperDiv {
   max-width: var(--ziti-max-width);
   width: 100%;
+  display: flex;
+  flex-grow: 1;
 }
 .mainWrapper {
+  .layoutFooter {
+    width: 100%;
+  }
 }

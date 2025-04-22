@@ -6,11 +6,7 @@ import styles from './styles.module.css';
 export default function OpenZitiHorizontalSection(props) {
     const {
         children,
-        noFooter,
         className,
-        // Not really layout-related, but kept for convenience/retro-compatibility
-        title,
-        description,
         style,
     } = props;
     useKeyboardNavigation();
@@ -20,5 +16,4 @@ export default function OpenZitiHorizontalSection(props) {
             {children}
         </section>
     );
-
 }

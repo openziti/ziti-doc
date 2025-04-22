@@ -74,6 +74,8 @@ echo "Hello, World!" # Bash
 regular, text here
 ```
 
+Regular paragraph here `with a small code chuck` in between.
+
 :::note
 
 <DetailsExample/>

@@ -5,7 +5,7 @@
   --aaSecondary: #0ebce0;
   --aaSecondaryLight: #48d8fc;
   --aaSecondaryDark: #0a8ca8;
-  --aaAccent: #ff3e82;
+  /*--aaAccent: #ff3e82;*/
   --aaAccentHover: #ff6699;
   --aaBgDark: #121219;
   --aaBgCard: #f7f8fc;
@@ -20,8 +20,6 @@
   --aaRadiusSm: 6px;
   --aaRadiusMd: 12px;
   --aaRadiusLg: 24px;
-  --aaFontSans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --aaFontMono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", "Courier New", monospace;
   --aaSpaceXs: 0.5rem;
   --aaSpaceSm: 1rem;
   --aaSpaceMd: 2rem;
@@ -93,7 +91,7 @@
   }
 
   .aaBtnAccent {
-    background: var(--aaAccent);
+    background: var(--color-ziti-red);
   }
 
   .aaBtnAccent:hover, .aaBtnAccent:focus {
@@ -146,12 +144,23 @@
   /* Hero Section */
 
   .aaHero {
-    padding: var(--aaSpaceLg) 0 0;
-    align-items: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     text-align: center;
+  }
+  
+  .aaHeroBadgeDiv {
+    display: flex;
+    justify-content: flex-end;
+    width:100%;
+  }
+  .aaHeroBadgeSpan {
+    background: rgba(var(--ziti-color-red), 0.15);
+    padding: 3px var(--space-xs);
+    /*background: var(--ifm-font-color-inverse);*/
+    border-radius: var(--radius-md);
   }
 
   .aaHeroContent {
@@ -163,30 +172,32 @@
   }
 
   .aaHero h1 {
-    background: linear-gradient(to right, var(--aaSecondary), var(--aaPrimary), var(--aaAccent));
+    background: linear-gradient(to right, var(--aaSecondary), var(--aaPrimary), var(--ziti-rgb-red));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: var(--aaSpaceSm);
+    margin-bottom: 0;
   }
 
   .aaHero p {
     color: var(--aaTextMuted);
     font-size: clamp(1.125rem, 2vw, 1.5rem);
     max-width: 800px;
-    margin: 0 auto var(--aaSpaceMd);
+    margin: var(--aaSpaceMd) auto var(--aaSpaceMd);
   }
 
   .aaHeroButtons {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--aaSpaceLg);
+    /*gap: 15px; var(--aaSpaceLg);*/
+    gap: 20px;
     justify-content: center;
+    flex-shrink: 1;
   }
 
   .aaHeroGraphic {
-    margin: var(--aaSpaceLg) auto 0;
     max-width: 800px;
     position: relative;
     width: 100%;
@@ -264,7 +275,7 @@
 
   .aaTimeline:before {
     content: "";
-    background: linear-gradient(to bottom, var(--aaPrimary), var(--aaSecondary), var(--aaAccent));
+    background: linear-gradient(to bottom, var(--aaPrimary), var(--aaSecondary), var(--ziti-rgb-red));
     width: 4px;
     height: 80%;
     position: absolute;
@@ -292,8 +303,7 @@
   .aaSection {
     max-width: var(--ziti-landing-max-width);
     width: 100%;
-    margin-top: var(--aaSpaceMd);
-    margin-bottom: var(--aaSpaceXl);
+    flex-wrap: wrap;
   }
 
   .aaSectionHeader {
@@ -551,4 +561,11 @@
   .heroText.fadeOut {
     opacity: 0;
   }
+}
+
+.aaHeroSection {
+  max-width: var(--ziti-landing-max-width);
+  width: 100%;
+  margin-top: 5em;
+  margin-bottom: 5em;
 }

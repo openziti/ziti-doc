@@ -22,4 +22,5 @@
 }
 .ozLayoutFooter {
   display: flex;
+  width: 100%;
 }

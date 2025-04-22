@@ -1,15 +1,15 @@
 .aaSuperpowers {
-  padding: var(--aaSpaceLg) 0;
+  padding: var(--space-lg) 0;
 }
 
 .aaSectionHeader {
   text-align: center;
-  margin-bottom: var(--aaSpaceLg);
+  margin-bottom: var(--space-lg);
 }
 
 .aaSectionHeader h2 {
   font-size: 2rem;
-  margin-bottom: var(--aaSpaceSm);
+  margin-bottom: var(--space-sm);
 }
 
 .aaSectionHeader p {
@@ -22,14 +22,14 @@
 .aaGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: var(--aaSpaceMd);
+  gap: var(--space-md);
 }
 
 .aaSuperpowerCard {
   border: 1px solid #b5b5c5;
   border-radius: var(--aaRadiusMd);
   box-shadow: var(--aaShadowMd);
-  padding: var(--aaSpaceMd);
+  padding: var(--space-md);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +43,7 @@
 }
 .aaSuperpowerIconOld {
   font-size: 3rem;
-  margin-bottom: var(--aaSpaceSm);
+  margin-bottom: var(--space-sm);
 }
 .aaSuperpowerIcon {
   background: rgba(76, 45, 179, 0.1);
@@ -54,7 +54,7 @@
   height: 48px;
   justify-content: center;
   align-items: center;
-  margin-bottom: var(--aaSpaceSm);
+  margin-bottom: var(--space-sm);
   width: 48px;
 }
 
@@ -71,5 +71,5 @@
 .aaContainer {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 0 var(--aaSpaceSm);
+  padding: 0 var(--space-sm);
 }

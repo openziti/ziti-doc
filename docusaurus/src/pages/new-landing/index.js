@@ -8,17 +8,22 @@ import styles from './styles.module.css';
 import timeline from './timeline.module.css';
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
-const HeroSection = () => (
-    <OpenZitiHorizontalSection>
+function HeroSection({ className }) {
+    return (
+    <OpenZitiHorizontalSection className={className}>
+        <div className={styles.aaHero}>
+            <h1>Cloak Your Network. <br/> Secure Services not IPs</h1>
+            <div className={styles.aaHeroBadgeDiv}><span className={styles.aaHeroBadgeSpan}>Sponsored by NetFoundry</span></div>
+        </div>
         <section className={clsx(styles.aaSection, styles.aaHero)}>
-            <h1>Kill the VPN. Cloak Your Network. Embed Zero Trust.</h1>
-            <p>OpenZiti is the OSS platform to make your apps invisible, secured by design. Powered by
-                NetFoundry.</p>
+            <p>Managing IP addresses is now, not the future. Stop trying to manage and segment IPs. Manage identities 
+                and services using easy-to-understand policies.</p>
             <div className={styles.aaHeroButtons}>
-                <a href="/docs/learn/quickstarts/network/hosted" className={styles.aaBtn}>Get Started Hosting OpenZiti Yourself</a>
+                <a href="/docs/learn/quickstarts/network/hosted" className={styles.aaBtn}>Host OpenZiti Yourself</a>
                 <a href="https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/" className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry Cloud For Free</a>
             </div>
-            <div className={styles.aaHeroGraphic}>
+        </section>
+        <div className={styles.aaHeroGraphic}>
             <ThemedImage
                 alt="OpenZiti Network Visualization"
                 sources={{
@@ -27,10 +32,10 @@ const HeroSection = () => (
                 }}
                 className={styles.aaHeroGraphicImg}
             />
-            </div>
-        </section>
+        </div>
     </OpenZitiHorizontalSection>
-);
+    );
+}
 
 const TimelineItem = ({ icon, title, description }) => (
     <div className={timeline.timelineItem}>
@@ -84,6 +89,7 @@ const SuperPowerSection = () => (
             title="Why OpenZiti"
             description="OpenZiti's unique capabilities redefine secure networking for the modern age."
             superpowers={[
+                { icon: '🧬', title: 'Strong Identities', description: 'IP can\'t be used for identity. PKCS 11, X.509, JWT. OpenZiti leverages cryptographically verifiable identities.' },
                 { icon: '🔒', title: 'No Open Ports', description: 'Services completely vanish from the internet, becoming invisible to attackers and scan tools.' },
                 { icon: '📦', title: 'App-Level Embedding', description: 'SDK integration brings zero trust directly into your applications, no agents required.' },
                 { icon: '🧠', title: 'Identity-Aware Access', description: 'Fine-grained authorization with posture checking ensures only valid users and devices connect.' },
@@ -91,7 +97,6 @@ const SuperPowerSection = () => (
                 { icon: '🔐', title: 'End-to-End Encryption', description: 'Libsodium-powered cryptography ensures data is secure in transit, always.' },
                 { icon: '🧭', title: 'Private DNS', description: 'Authenticated, private DNS resolves service names to secure overlay tunnels, not IP addresses.' },
                 { icon: '🕵️‍♂️', title: 'No Port Inference', description: 'Single-port transport prevents service fingerprinting and port scanning vulnerabilities.' },
-                { icon: '🧬', title: 'Workflow Integration', description: 'Seamlessly connects with existing identity providers and DevOps pipelines.' },
             ]}
         />
     </OpenZitiHorizontalSection>
@@ -129,8 +134,8 @@ const TimeLineSection = () => (
 
 function App() {
     return (
-        <OpenZitiLayout className={styles.landing} footerClassName={styles.footer}>
-            <HeroSection />
+        <OpenZitiLayout className={styles.landing}>
+            <HeroSection className={styles.aaHeroSection}/>
             <SuperPowerSection />
             <TimeLineSection />
             <GetStartedSection />
