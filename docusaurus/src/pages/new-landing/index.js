@@ -16,11 +16,11 @@ function HeroSection({ className }) {
             <div className={styles.aaHeroBadgeDiv}><span className={styles.aaHeroBadgeSpan}>Sponsored by NetFoundry</span></div>
         </div>
         <section className={clsx(styles.aaSection, styles.aaHero)}>
-            <p>Managing IP addresses is now, not the future. Stop trying to manage and segment IPs. Manage identities 
-                and services using easy-to-understand policies.</p>
+            <p>Managing IP addresses is now, not the future. OpenZiti allows you to move away from IPs towards managing 
+                strong identities and services using easy-to-understand policies, backed by a fully-meshed, zero trust overlay network.</p>
             <div className={styles.aaHeroButtons}>
+                <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/" className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry Cloud For Free</a>
                 <a href="/docs/learn/quickstarts/network/hosted" className={styles.aaBtn}>Host OpenZiti Yourself</a>
-                <a href="https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/" className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry Cloud For Free</a>
             </div>
         </section>
         <div className={styles.aaHeroGraphic}>
@@ -44,12 +44,12 @@ const TimelineItem = ({ icon, title, description }) => (
                 <div className={timeline.timelineIcon}>{icon}</div>
                 <h3>{title}</h3>
             </div>
-            <p>{description}</p>
+            {description}
         </div>
     </div>
 );
 
-let btns = clsx(styles.btn, styles.btnSecondary);
+const btns = clsx(styles.btn, styles.btnSecondary);
 const GetStartedSection = () => (
     <OpenZitiHorizontalSection className={clsx(styles.aaGetStarted2)} >
         <section className={clsx(styles.aaSection, styles.aaGetStarted)} id="get-started">
@@ -65,17 +65,17 @@ const GetStartedSection = () => (
                             <p className={styles.aaStartOptionText}>
                                 Get fully managed zero trust networking with NetFoundry's enterprise offering, complete with SLAs and 24/7 support.
                             </p>
-                            <a href="#" className={btns}>Learn More</a>
+                            <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/" className={btns}>Learn More</a>
                         </div>
                         <div className={styles.aaStartOption}>
                             <h3 className={styles.aaStartOptionTitle}>Self-Hosted</h3>
                             <p className={styles.aaStartOptionText}>
                                 Deploy and manage your own OpenZiti network with our comprehensive documentation and community support.
                             </p>
-                            <a href="#" className={btns}>View Deployment Guide</a>
+                            <a href="/docs/learn/quickstarts/network/hosted" className={btns}>View Deployment Guide</a>
                         </div>
                     </div>
-                    <a href="#" className={btns}>Join the Community</a>
+                    <a href="https://openziti.discourse.group/" className={btns}>Join the Community</a>
                 </div>
             </div>
         </section>
@@ -89,14 +89,14 @@ const SuperPowerSection = () => (
             title="Why OpenZiti"
             description="OpenZiti's unique capabilities redefine secure networking for the modern age."
             superpowers={[
-                { icon: '🧬', title: 'Strong Identities', description: 'IP can\'t be used for identity. PKCS 11, X.509, JWT. OpenZiti leverages cryptographically verifiable identities.' },
-                { icon: '🔒', title: 'No Open Ports', description: 'Services completely vanish from the internet, becoming invisible to attackers and scan tools.' },
-                { icon: '📦', title: 'App-Level Embedding', description: 'SDK integration brings zero trust directly into your applications, no agents required.' },
-                { icon: '🧠', title: 'Identity-Aware Access', description: 'Fine-grained authorization with posture checking ensures only valid users and devices connect.' },
-                { icon: '🔁', title: 'Smart Routing', description: 'Ziti Fabric intelligently routes traffic through the optimal path for security and performance.' },
-                { icon: '🔐', title: 'End-to-End Encryption', description: 'Libsodium-powered cryptography ensures data is secure in transit, always.' },
-                { icon: '🧭', title: 'Private DNS', description: 'Authenticated, private DNS resolves service names to secure overlay tunnels, not IP addresses.' },
-                { icon: '🕵️‍♂️', title: 'No Port Inference', description: 'Single-port transport prevents service fingerprinting and port scanning vulnerabilities.' },
+                { icon: '🧬', title: 'Strong Identities', description: <p>IPs are not identities. OpenZiti leverages proven cryptographically verifiable identities.</p> },
+                { icon: '🧠', title: 'Identity-Aware Access', description: <p>Fine-grained authorization with posture checking ensures only valid identities are allowed to connect to services.</p> },
+                { icon: '🔒', title: 'No Open Ports', description: <p>Services completely vanish from the internet, becoming invisible to attackers and scan tools.</p> },
+                { icon: '📦', title: 'App-Level Embedding', description: <p>SDK integration brings zero trust directly into your applications, no agents required.</p> },
+                { icon: '🔁', title: 'Smart Routing', description: <p>The OpenZiti Fabric intelligently routes traffic through the optimal path for security and performance.</p> },
+                { icon: '🔐', title: 'End-to-End Encryption', description: <p>Libsodium-powered cryptography ensures data is secure in transit, <b>always</b>.</p> },
+                { icon: '🧭', title: 'Private DNS', description: <p>Authenticated, private DNS resolves service names to secure overlay tunnels, not IP addresses.</p> },
+                { icon: '🕵️‍♂️', title: 'No Port Inference', description: <p>Single-port transport prevents service fingerprinting and port scanning vulnerabilities.</p> },
             ]}
         />
     </OpenZitiHorizontalSection>
@@ -108,23 +108,23 @@ const TimeLineSection = () => (
             <div className={styles.aaContainer}>
                 <div className={styles.aaSectionHeader}>
                     <h2>Zero Trust Evolution</h2>
-                    <p>The journey from traditional networking to true embedded zero trust.</p>
+                    <p>The journey from traditional networking to embedded zero trust.</p>
                 </div>
                 <div className={styles.aaTimeline}>
                     <TimelineItem icon="1" title="IP Underlay / Legacy VPNs"
-                                  description="Traditional networks expose services to the internet. VPNs provide access to entire network segments rather than specific services."
+                                  description={<p>Traditional networks expose services to the internet. VPNs provide access to entire network segments rather than specific services.</p>}
                     />
                     <TimelineItem icon="2" title="Ziti Tunnelers"
-                                  description="Deploy tunnelers to eliminate open ports and enable zero trust access without modifying applications."
+                                  description={<p>Deploy tunnelers to eliminate open ports and enable zero trust access without modifying applications.</p>}
                     />
                     <TimelineItem icon="3" title="Hybrid Approach"
-                                  description="Some applications use embedded SDKs while others leverage tunnelers, providing flexibility during transition."
+                                  description={<p>Some applications use embedded SDKs while others leverage tunnelers, providing flexibility during transition.</p>}
                     />
                     <TimelineItem icon="4" title="Embedded SDK"
-                                  description="True zero trust at the application level with SDKs integrated directly into your code. No agents, no tunnelers."
+                                  description={<p>True zero trust at the application level with SDKs integrated directly into your code. No agents, no tunnelers.</p>}
                     />
                     <TimelineItem icon="5" title="Fully Abstracted Services"
-                                  description="Identity-bound, protocol-agnostic services with completely invisible infrastructure. The future of secure networking."
+                                  description={<p>Identity-bound, protocol-agnostic services with completely invisible infrastructure. The future of secure networking.</p>}
                     />
                 </div>
             </div>

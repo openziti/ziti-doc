@@ -201,7 +201,7 @@ html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-the
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--ifm-font-family-sans), sans-serif;
 }
 
 
@@ -1951,8 +1951,6 @@ code {
   vertical-align: middle;
   font-size: 87.5%;
   font-weight: 600;
-  /*word-break: break-word;*/
-  /*border-radius: 5px;*/
   padding: 1px 5px;
   background: var(--ziti-code-block-background-color);
   color: var(--ziti-code-block-font-color);
@@ -1967,8 +1965,6 @@ li a code {
   vertical-align: middle;
   font-size: 87.5%;
   font-weight: 600;
-  /*word-break: break-word;*/
-  /*border-radius: 7px;*/
   padding: 2px 4px 2px 4px;
 
   background-color: rgba(117, 82, 136, 0.2) !important;
@@ -2204,10 +2200,11 @@ p > img {
 pre code {
   /*border-radius: 43px;*/
   background: var(--ziti-code-block-background-color);
+  font-family: var(--ifm-font-family-monospace), monospace;
 }
 
-.token-line span {
-  color: var(--code-block-color);
+.token-line * {
+  font-family: var(--ifm-font-family-monospace), monospace;
 }
 
 

@@ -6,7 +6,7 @@ const SuperpowerCard = ({ icon, title, description }) => (
     <div className={clsx(styles.aaSuperpowerCard)}>
         <div className={styles.aaSuperpowerIcon}>{icon}</div>
         <h3>{title}</h3>
-        <p>{description}</p>
+        {description}
     </div>
 );
 

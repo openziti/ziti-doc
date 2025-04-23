@@ -29,11 +29,6 @@
 
   --btnPrimaryLight: #158eed;
   --btnPrimary: #00569a;
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 2rem;
-  --space-lg: 4rem;
-  --space-xl: 8rem;
   
   a:hover, a:focus, p {
     /*color: var(--ifm-background-color);*/
@@ -49,13 +44,16 @@
     line-height: 1.2;
     margin-bottom: var(--space-xs);
   }
+  
+  h2 {
+    font-size: 3rem;
+  }
 
   p {
-    margin-bottom: var(--aaSpaceSm);
+    /*margin-bottom: var(--aaSpaceSm);*/
   }
 
   a {
-    color: aliceblue;
     text-decoration: none;
     transition: var(--aaTransition);
   }
@@ -182,7 +180,7 @@
 
   .aaHero p {
     color: var(--aaTextMuted);
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-size: 1.25em;
     max-width: 800px;
     margin: var(--aaSpaceMd) auto var(--aaSpaceMd);
   }
@@ -312,7 +310,7 @@
   }
 
   .aaSectionHeader h2 {
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: var(--aaSpaceSm);
   }
 
@@ -426,11 +424,6 @@
 
   .aaStartContent {
     margin: 0 auto;
-  }
-
-  .aaStartTitle {
-    font-size: 36px;
-    margin-bottom: 20px;
   }
 
   .aaStartText {
