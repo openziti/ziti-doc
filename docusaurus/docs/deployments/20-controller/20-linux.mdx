@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import LinuxPackageRepo from '/docs/_linux-package-repo.mdx';
 
-This article is about deploying a controller as a Linux system service. [The controller introduction](/learn/introduction/03-components.mdx#controller) may be helpful to read first.
+This article is about deploying a controller as a Linux system service.
 
 We'll cover the following topics:
 
@@ -40,30 +40,40 @@ Finally, install the package: **openziti-controller**
 
 You must generate, migrate, or craft a configuration. Configuration consists of a PKI, a config YAML file, and a database.
 
-### Generate a Configuration
+### Generate a Configuration for the First Node in a New Cluster
 
-This is the recommended approach if you are installing a new controller.
+This is the simplest approach if you are installing a new controller as the first node in a new cluster and do not wish to craft a configuration from scratch.
 
 #### Answer Interactively
 
-Run `bootstrap.bash` to be prompted for the required values.
+Run `bootstrap.bash` and answer prompts.
 
 ```text
 sudo /opt/openziti/etc/controller/bootstrap.bash
 ```
 
+```buttonless title="Output"
+Create a new cluster (NO if joining a cluster) [Y/n]: 
+```
+
 #### Answer Non-interactively
 
-1. Set the required values in the answer file **/opt/openziti/etc/controller/bootstrap.env**.
-    1. `ZITI_CTRL_ADVERTISED_ADDRESS` - control plane permanent DNS name (required)
+1. Set the required values in the answer file **/opt/openziti/etc/controller/bootstrap.env** or export as environment variables.
+    1. `ZITI_CTRL_ADVERTISED_ADDRESS` - control plane address (required, ex: `ctrl1.ziti.example.com`)
     1. `ZITI_CTRL_ADVERTISED_PORT` - listener TCP port (default: 1280)
+    1. `ZITI_CLUSTER_TRUST_DOMAIN` - SPIFFEE trust domain (required, ex: `ziti.example.com`)
+    1. `ZITI_CLUSTER_NODE_NAME` - SPIFFEE node name (required, ex: `ctrl1`)
     1. `ZITI_USER` - username (default: admin)
     1. `ZITI_PWD` - password to initialize the database (required)
-1. Run `bootstrap.bash`
+1. Run `bootstrap.bash`.
 
     ```text
-    sudo /opt/openziti/etc/controller/bootstrap.bash
+    sudo -E /opt/openziti/etc/controller/bootstrap.bash < /dev/null
     ```
+
+### Generate a Configuration for a New Node in an Existing Cluster
+
+
 
 ### Migrate an Existing Configuration
 
@@ -71,9 +81,7 @@ sudo /opt/openziti/etc/controller/bootstrap.bash
 
 ### Craft a Configuration
 
-Craft a new configuration by running `ziti create config controller`.
-
-Review the environment variables, especially those named like `ZITI_CTRL_*`, that influence the controller configuration with `ziti create config environment`.
+Craft a new configuration from scratch or start with a sane set of default values by running `ziti create config controller --clustered`.
 
 Here's a link to [the controller configuration reference](/reference/30-configuration/controller.md).
 
