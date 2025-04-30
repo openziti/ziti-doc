@@ -250,8 +250,12 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            '**/_remotes/**'
+          ],
           editUrl: 'https://github.com/openziti/ziti-doc/tree/main/docusaurus',
           beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives, ],
           remarkPlugins: [

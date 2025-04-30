@@ -19,8 +19,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-_remotes
-remotes
-all/docs/_remotes
+/docs/_remotes
 ziti
 static/docs/reference/developer/sdk

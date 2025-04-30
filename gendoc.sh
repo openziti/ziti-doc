@@ -37,7 +37,7 @@ echo "$script_root"
 : ${SKIP_GIT:=no}
 : ${SKIP_LINKED_DOC:=no}
 : ${SKIP_CLEAN:=no}
-ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
+ZITI_DOC_GIT_LOC="${script_root}/docusaurus/docs/_remotes"
 SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
 : ${ZITI_DOCUSAURUS:=yes}
 : ${SKIP_DOCUSAURUS_GEN:=no}
@@ -86,7 +86,7 @@ if [[ "${SKIP_GIT}" == no ]]; then
   clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c" >/dev/null
   clone_or_pull "https://github.com/openziti/ziti-android-app" "ziti-android-app" >/dev/null
   clone_or_pull "https://github.com/openziti/ziti-sdk-swift" "ziti-sdk-swift" >/dev/null
-  clone_or_pull "https://github.com/openziti/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c" >/dev/null
+  clone_or_pull "file:///home/kbingham/Sites/netfoundry/github/ziti-tunnel-sdk-c" "ziti-tunnel-sdk-c" "docker-no-clobber-json" >/dev/null
   clone_or_pull "https://github.com/openziti/helm-charts" "helm-charts" >/dev/null
   clone_or_pull "https://github.com/openziti-test-kitchen/kubeztl" "kubeztl" >/dev/null
   clone_or_pull "https://github.com/openziti/desktop-edge-win" "desktop-edge-win" >/dev/null
