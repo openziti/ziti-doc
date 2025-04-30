@@ -44,7 +44,7 @@ properties to indicate what should be forwarded:
 * `forwardAddress` - flag indicating that the target address of the intercepted connection is to be
   used. Can only be set to true.
 * `forwardAddressTranslations` - the list of translations that specify which address to connect
-  to for a given target address.
+  to for a given target address. See [below example](#forward-all-address-components-with-ip-translation)
 * `allowedAddresses` - the list of allowed addresses. Valid values include IPs, hostnames and CIDRs
 * `forwardPort` - flag indicating that the target port of the intercepted connection is to be used.
   Can only be set to true.
@@ -56,6 +56,7 @@ properties to indicate what should be forwarded:
 
 **Examples**
 
+#### Forward All Address Components, with IP Translation
 ```text
 {
   "forwardAddress": true,
@@ -101,6 +102,7 @@ Note that not everything must be forwarded. For example the address is not forwa
 below. The port and protocol are forwarded and the corresponding 'allow' is set, but the address is
 statically set to '192.168.100.1
 
+#### Forward Destination Port
 ```text
 {
   "address": "192.168.100.1",
