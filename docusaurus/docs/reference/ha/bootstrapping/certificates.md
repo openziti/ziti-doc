@@ -32,6 +32,7 @@ A [trust domain](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#tru
 
 1. The certificates must have a shared root of trust
 1. The controller client and server certificates must contain a SPIFFE ID.
+1. The controller client certificate's Common Name must exactly match the controller ID part of the SPIFFE ID.
 1. The SPIFFE ID must be set as the only URI in the `X509v3 Subject Alternative Name` field in the
    certificate.
 1. The SPIFFE ID must have the following format: `spiffe://<trust domain>/controller/<controller id>`

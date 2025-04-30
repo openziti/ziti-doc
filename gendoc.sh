@@ -37,7 +37,7 @@ echo "$script_root"
 : ${SKIP_GIT:=no}
 : ${SKIP_LINKED_DOC:=no}
 : ${SKIP_CLEAN:=no}
-ZITI_DOC_GIT_LOC="${script_root}/docusaurus/_remotes"
+ZITI_DOC_GIT_LOC="${script_root}/docusaurus/docs/_remotes"
 SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
 : ${ZITI_DOCUSAURUS:=yes}
 : ${SKIP_DOCUSAURUS_GEN:=no}

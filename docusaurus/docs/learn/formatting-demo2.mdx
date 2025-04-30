@@ -199,3 +199,47 @@ echo "Inside admonition, inside details"
 - [x] HTML buttons
 - [x] `<details>` block
 
+## Import GitHub Markdown
+
+You can import Markdown from other repositories, e.g., README.md, by adding the Git remote to `gendoc.sh`, then importing the Markdown with the `import` component from the correlated path within the `_remotes` directory.
+
+```md
+import SomeMd from '/docs/_remotes/some-remote/README.md';
+
+<SomeMd />
+```
+
+See GitHub Markdown admonition examples in the [Code Block Formatting Demo](/learn/formatting-demo.mdx#github-markdown-examples)
+
+### When to Use the MarkdownWithoutH1 Component with Imported Markdown
+
+When importing GitHub Markdown as MDX, you have two choices for the H1 page title: use the title from the imported Markdown or set an alternative title. 
+
+Typically, setting any title in Docsaurus will display both, even if `title` is not set in the front matter, because the default title is the page name.
+
+To use the imported title, set `hide_title: true` in front matter to hide the Docusaurus title.
+
+```yaml
+---
+hide_title: true
+---
+
+import SomeMd from '/docs/_remotes/some-remote/README.md';
+
+<SomeMd />
+```
+
+To hide the imported title and use the Docusaurus title, set `hide_title: false`, `title: My Alt Title`, and enclose the imported Markdown with `<MarkdownWithoutH1>`.
+
+```yaml
+---
+title: A Descriptive Title 
+---
+
+import SomeMd from '/docs/_remotes/some-remote/README.md';
+import MarkdownWithoutH1 from '@site/src/components/MarkdownWithoutH1';
+
+<MarkdownWithoutH1>
+<SomeMd />
+</MarkdownWithoutH1>
+```
