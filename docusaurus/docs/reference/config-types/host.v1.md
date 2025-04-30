@@ -43,6 +43,8 @@ properties to indicate what should be forwarded:
 * `allowedProtocols` - the list of allowed protocols. Valid values include `tcp` and `udp`
 * `forwardAddress` - flag indicating that the target address of the intercepted connection is to be
   used. Can only be set to true.
+* `forwardAddressTranslations` - the list of translations that specify which address to connect
+  to for a given target address.
 * `allowedAddresses` - the list of allowed addresses. Valid values include IPs, hostnames and CIDRs
 * `forwardPort` - flag indicating that the target port of the intercepted connection is to be used.
   Can only be set to true.
@@ -57,6 +59,10 @@ properties to indicate what should be forwarded:
 ```text
 {
   "forwardAddress": true,
+  "forwardAddressTranslations": [
+     { "from": "192.168.1.0", "to": "172.16.4.0", "prefixLength": 24 },
+     { "from": "10.0.0.0", "to": "10.10.0.0", "prefixLength": 16 }
+  ],
   "allowedAddresses": [
     "192.168.1.0/24",
     "10.0.0.1/16"
@@ -75,6 +81,21 @@ properties to indicate what should be forwarded:
   ]
 }
 ```
+
+This example "forwards" all components (protocol, host, port) of the address that was intercepted by
+by the client tunneler. Additionally, the destination IP address is translated as specified by
+`forwardAddressTranslations`. The hosting tunneler will make the following connections when using
+this example configuration:
+
+| target/intercepted address | final connection destination |
+|----------------------------|------------------------------|
+| tcp:192.168.1.8:1032       | tcp:172.16.4.8:1032          |
+| tcp:10.0.2.32:1500         | tcp:10.10.2.32:1500          |
+--------------------------------------------------------------
+
+A target address is only translated if it matches the "from" value of an address translation. If no
+translations have a matching "from" address (or no translations are specified) then the hosting
+tunneler will use the target address that was intercepted by the client tunneler.
 
 Note that not everything must be forwarded. For example the address is not forwarded in the example
 below. The port and protocol are forwarded and the corresponding 'allow' is set, but the address is
