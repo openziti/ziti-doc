@@ -38,7 +38,7 @@ jobs:
 
       - name: Crawl for Broken Links
         run: ./check-links/crawl-for-broken-links.sh "$URL_TO_CHECK" \
-          --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3 --concurrency 4
+          --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3 --concurrency 1
         env:
           URL_TO_CHECK: ${{ steps.extract.outputs.URL_TO_CHECK }} 
           
