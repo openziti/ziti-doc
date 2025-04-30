@@ -177,7 +177,7 @@ function App() {
     };
 
     return (
-        <OpenZitiLayout>
+        <OpenZitiLayout className={styles.appetizer}>
             <div className={styles.liveMsgContainerContainer} style={{ minHeight: "100px", maxHeight: "450px" }}>
                 {liveMessageVisible && (
                     <div className={`${styles.liveMsgContainer} ${styles.bgImg1}`}>
@@ -188,7 +188,7 @@ function App() {
                     </div>
                 )}
             </div>
-            <OpenZitiHorizontalSection wrapperClassName={styles.ozhs}>
+            <OpenZitiHorizontalSection className={styles.ozhs}>
                 <div className={styles.appetizerTitle}>
                     <img
                         src="https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png"
