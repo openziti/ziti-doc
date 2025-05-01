@@ -24,8 +24,7 @@ Linux package users may place enrollment tokens named `*.jwt` in this directory 
 startup.
 :::
 
-Ensure the identities directory is writable by group `ziti` and not readable by others to protect the confidentiality of
-the identities.
+Ensure the identities directory and its contents are writable by group `ziti` to allow the tunneler to manage identities, e.g., renew certificates, and not readable by others to protect the confidentiality of the identities.
 
 ```text
 sudo chown -cR :ziti        /opt/openziti/etc/identities

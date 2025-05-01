@@ -46,7 +46,7 @@ The following configuration properties refer to PKI files that must be backed up
 The Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store its state. You will use the database
 snapshot to initialize the replacement controller during recovery.
 
-The database is a writeable file in a path specified by the controller's configuration property `db` ([link to config
+The database is a writable file in a path specified by the controller's configuration property `db` ([link to config
 reference](/reference/30-configuration/controller.md#db)).
 
 Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a
