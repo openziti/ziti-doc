@@ -299,7 +299,6 @@
   }
 
   .aaSection {
-    max-width: var(--ziti-landing-max-width);
     width: 100%;
     flex-wrap: wrap;
   }
@@ -401,8 +400,6 @@
   }
 
   .aaSuperpowersSection {
-    /* max-width: var(--ziti-max-width); can't use the variable */
-    max-width: var(--ziti-landing-max-width); /* this keeps the cards to 2 rows of 4 */
     width: 100%;
   }
 
@@ -554,11 +551,15 @@
   .heroText.fadeOut {
     opacity: 0;
   }
-}
 
-.aaHeroSection {
-  max-width: var(--ziti-landing-max-width);
-  width: 100%;
-  margin-top: 5em;
-  margin-bottom: 5em;
+  .aaHeroSection {
+    width: 100%;
+    margin-top: 5em;
+    margin-bottom: 5em;
+  }
+
+  .ozHorizontalSectionRoot {
+    background: #0D9488;
+    max-width: var(--ziti-landing-max-width);
+  }
 }
