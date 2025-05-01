@@ -1,4 +1,3 @@
-
 import LinuxResolverConfig from '/docs/reference/tunnelers/60-linux/_resolver.mdx'
 
 # Troubleshooting
@@ -12,12 +11,9 @@ import LinuxResolverConfig from '/docs/reference/tunnelers/60-linux/_resolver.md
 Set the log level to DEBUG to identify the activity that is occurring at the same time as the problem.
 
 ```text
-# set the logLevel to "debug" in /var/lib/ziti/config.json
+# set the logLevel to "debug" in /opt/openziti/etc/ziti-edge-tunnel/config.json
 sudo -u ziti ziti-edge-tunnel set_log_level --loglevel DEBUG
 ```
-
-The tunneler obeys the value of `logLevel` in `/var/lib/ziti/config.json`. The initial value may be set with `run
---verbose 4`, but setting this option on subsequent runs has no effect on log level.
 
 ## Capture the Current Process Log
 
@@ -40,7 +36,7 @@ Inspect the service unit.
 sudo systemctl cat ziti-edge-tunnel.service
 ```
 
-Check the service status for an error message.
+Check the service status for events.
 
 ```text
 sudo systemctl status ziti-edge-tunnel.service
@@ -50,6 +46,12 @@ Monitor the service logs.
 
 ```text
 sudo journalctl -u ziti-edge-tunnel.service
+```
+
+Edit the service unit.
+
+```text
+sudo systemctl edit ziti-edge-tunnel.service
 ```
 
 ## Intercepting or Hosting Not Working
@@ -104,9 +106,7 @@ Please raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issu
 
 ## Operation Not Permitted
 
-Delete the `/tmp/.ziti` directory and restart the tunneler to solve this issue.
-
-The tunneler may log a warning about an operation not permitted and failure to start the socket server if the hard-coded path `/tmp/.ziti` is not owned by the run-as user. This can happen if you first run the tunneler as root and then as a non-root user. 
+Deleting the `/tmp/.ziti` directory and restarting the tunneler may solve this issue if the tunneler was previously run as root.
 
 ```text
 WARN ziti-edge-tunnel:ziti-edge-tunnel.c:1686 make_socket_path() failed to set ownership of /tmp/.ziti to 1003:1003: Operation not permitted (errno=1)
@@ -118,3 +118,16 @@ Another symptom of the same issue is this error when attempting to send a messag
 ```text
 failed to connect: -111/connection refused
 ```
+
+<!-- uncomment when ZET warns about non-writable identity directory
+## Identity Directory not Writable
+
+The tunneler will warn if the identity directory is not writable by the run-as user because it needs to manage identity files, e.g., to renew certificates.
+
+Correct the filemode and owner.
+
+```text
+sudo chown -cR :ziti        /opt/openziti/etc/identities
+sudo chmod -cR ug=rwX,o-rwx /opt/openziti/etc/identities
+```
+-->
