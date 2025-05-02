@@ -6,6 +6,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Details from '@theme/MDXComponents/Details';
 
+:::important
+Persistent, writable volumes are necessary for the tunneler to manage identity files, e.g., certificate renewal.
+:::
+
 The purpose of the tunneller is to configure host access. This means all users and all processes on the host will share
 the same level of access. This is accomplished by configuring the OS to have an OpenZiti DNS nameserver and IP routes
 for authorized services.
