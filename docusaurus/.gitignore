@@ -24,3 +24,5 @@ remotes
 all/docs/_remotes
 ziti
 static/docs/reference/developer/sdk
+
+*.bkp
