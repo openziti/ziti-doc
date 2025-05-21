@@ -17,7 +17,7 @@ Keycloak realm Clients page on the specified client settings page or via the dis
 servers the discovery endpoint is generally at `https://${keycloak.server}/${realm}/.well-known/openid-configuration`.
 
 The **OpenID discovery endpoint** can contain fields needed to configure the external jwt signer. Verify the URL used by
-your Okta instance. Often the realm URL + '.well-known/openid-configuration' such as
+your Keycloak instance. Often the realm URL + '.well-known/openid-configuration' such as
 https://keycloak.example.com/realms/zitirealm/.well-known/openid-configuration
 
 | Field                 | Where to Find the Value in the Keycloak UI                                                                    | Example                                                                     |
