@@ -16,15 +16,19 @@ enable authentication via JWTs obtained through an
 [Authorization Code Flow with PKCE or PKCE flow](https://oauth.net/2/pkce/). The fields below are found in the Okta
 admin web interface either under the **Applications** or **Security** sections on the left navigation.
 
-| Field                 | Where to Find the Value in the Okta UI                                                                                     | Example                                                                        |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| **Issuer**            | Security->API, from the list of Authorization Servers, the **Issuer URI** column                                           | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697                     |
-| **Client ID**         | Applications->Applications, from the list of Applications the **Client ID**                                                | 0oapqjp4snmzqejuh197                                                           |
-| **Audience**          | Security->API, from the list of Authorization Servers, the **Audience** column                                             | openziti-aud                                                                   |
-| **External Auth URL** | Same as the **Issuer**                                                                                                     | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697                     |
-| **JWKS Endpoint**     | Use the `jwks_uri` field from the OpenID discovery endpoint. Generally the **Issuer** + '.well-known/openid-configuration' | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697/.well-known/v1/keys |
-| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT                                               | email                                                                          |
-| **Scopes**            | `openid` is always included.                                                                                               | profile offline_access                                                         |
+The **OpenID discovery endpoint** can contain fields needed to configure the external jwt signer. Verify the URL used by
+your Okta instance. Often this is the main tenant URL concatenated with '.well-known/openid-configuration' such as
+https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697/.well-known/openid-configuration
+
+| Field                 | Where to Find the Value in the Okta UI                                         | Example                                                                        |
+|-----------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| **Issuer**            | Security->API, from the list of Authorization Servers, the **Issuer URI** column | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697                     |
+| **Client ID**         | Applications->Applications, from the list of Applications the **Client ID**    | 0oapqjp4snmzqejuh197                                                           |
+| **Audience**          | Security->API, from the list of Authorization Servers, the **Audience** column | openziti-aud                                                                   |
+| **External Auth URL** | Same as the **Issuer**                                                         | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697                     |
+| **JWKS Endpoint**     | Use the `jwks_uri` field from the OpenID discovery endpoint.                   | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697/.well-known/v1/keys |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT   | email                                                                          |
+| **Scopes**            | `openid` is always included.                                                   | profile offline_access                                                         |
 
 ---
 

@@ -16,15 +16,19 @@ enable authentication via JWTs obtained through an
 Keycloak realm Clients page on the specified client settings page or via the discovery endpoint. For Keycloak 
 servers the discovery endpoint is generally at `https://${keycloak.server}/${realm}/.well-known/openid-configuration`.
 
-| Field                 | Where to Find the Value in the Keycloak UI                                                                    | Example                                                                         |
-|-----------------------|---------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| **Issuer**            | The Keycloak realm URL                                                                                        | https://keycloak.example.com/realms/zitirealm                                   |
-| **Client ID**         | Set when creating the client, also on the Clients list page                                                   | openziti-client                                                                 |
-| **Audience**          | From the Client Details->Client Scopes tab->Evaluate tab, pick a user and view the **Generated access token** | openziti-client                                                                 |
-| **External Auth URL** | The Keycloak realm URL                                                                                        | https://keycloak.example.com/realms/zitirealm                                   |
-| **JWKS Endpoint**     | Found using the OpenID configuration URL. Often the realm URL + '.well-known/openid-configuration'            | https://keycloak.example.com/realms/zitirealm/.well-known/openid-configuration  |
-| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT                                  | email                                                                           |
-| **Scopes**            | `openid` included by default then any other standard or custom scope such as `email`, `profile`etc.           | profile offline_access                                                          |
+The **OpenID discovery endpoint** can contain fields needed to configure the external jwt signer. Verify the URL used by
+your Keycloak instance. Often the realm URL + '.well-known/openid-configuration' such as
+https://keycloak.example.com/realms/zitirealm/.well-known/openid-configuration
+
+| Field                 | Where to Find the Value in the Keycloak UI                                                                    | Example                                                                     |
+|-----------------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| **Issuer**            | The Keycloak realm URL                                                                                        | https://keycloak.example.com/realms/zitirealm                               |
+| **Client ID**         | Set when creating the client, also on the Clients list page                                                   | openziti-client                                                             |
+| **Audience**          | From the Client Details->Client Scopes tab->Evaluate tab, pick a user and view the **Generated access token** | openziti-client                                                             |
+| **External Auth URL** | The Keycloak realm URL                                                                                        | https://keycloak.example.com/realms/zitirealm                               |
+| **JWKS Endpoint**     | Use the `jwks_uri` field from the OpenID discovery endpoint.                                                  | https://keycloak.example.com/realms/zitirealm/protocol/openid-connect/certs |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT                                  | email                                                                       |
+| **Scopes**            | `openid` included by default then any other standard or custom scope such as `email`, `profile`etc.           | profile offline_access                                                      |
 
 ---
 
