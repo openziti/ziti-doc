@@ -54,10 +54,10 @@
   resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.19.0.tgz#efddaaf28f0f478117c2aab22d19c99b06f99761"
   integrity sha512-2ERRbICHXvtj5kfFpY5r8qu9pJII/NAHsdgUXnUitQFwPdPL7wXiupcvZJC7DSntOnE8AE0lM7oDsPhrJfj5nQ==
 
-"@algolia/client-common@5.24.0":
-  version "5.24.0"
-  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.24.0.tgz#c869068f112473e43e39ae7c5dd4fada07053cf0"
-  integrity sha512-p8K6tiXQTebRBxbrzWIfGCvfkT+Umml+2lzI92acZjHsvl6KYH6igOfVstKqXJRei9pvRzEEvVDNDLXDVleGTA==
+"@algolia/client-common@5.25.0":
+  version "5.25.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.25.0.tgz#2def8947efe849266057d92f67d1b8d83de0c005"
+  integrity sha512-il1zS/+Rc6la6RaCdSZ2YbJnkQC6W1wiBO8+SH+DE6CPMWBU6iDVzH0sCKSAtMWl9WBxoN6MhNjGBnCv9Yy2bA==
 
 "@algolia/client-insights@5.19.0":
   version "5.19.0"
@@ -99,15 +99,15 @@
     "@algolia/requester-fetch" "5.19.0"
     "@algolia/requester-node-http" "5.19.0"
 
-"@algolia/client-search@^5.24.0":
-  version "5.24.0"
-  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-5.24.0.tgz#41ae3cf81af73e00696e4961257c97eb8ed49cc1"
-  integrity sha512-k+nuciQuq7WERNNE+hsx3DX636zIy+9R4xdtvW3PANT2a2BDGOv3fv2mta8+QUMcVTVcGe/Mo3QCb4pc1HNoxA==
+"@algolia/client-search@^5.25.0":
+  version "5.25.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-5.25.0.tgz#dc38ca1015f2f4c9f5053a4517f96fb28a2117f8"
+  integrity sha512-9rUYcMIBOrCtYiLX49djyzxqdK9Dya/6Z/8sebPn94BekT+KLOpaZCuc6s0Fpfq7nx5J6YY5LIVFQrtioK9u0g==
   dependencies:
-    "@algolia/client-common" "5.24.0"
-    "@algolia/requester-browser-xhr" "5.24.0"
-    "@algolia/requester-fetch" "5.24.0"
-    "@algolia/requester-node-http" "5.24.0"
+    "@algolia/client-common" "5.25.0"
+    "@algolia/requester-browser-xhr" "5.25.0"
+    "@algolia/requester-fetch" "5.25.0"
+    "@algolia/requester-node-http" "5.25.0"
 
 "@algolia/events@^4.0.1":
   version "4.0.1"
@@ -151,12 +151,12 @@
   dependencies:
     "@algolia/client-common" "5.19.0"
 
-"@algolia/requester-browser-xhr@5.24.0":
-  version "5.24.0"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-5.24.0.tgz#f99dfb92dfb2ff213127672d532316a95d926acc"
-  integrity sha512-B2Gc+iSxct1WSza5CF6AgfNgmLvVb61d5bqmIWUZixtJIhyAC6lSQZuF+nvt+lmKhQwuY2gYjGGClil8onQvKQ==
+"@algolia/requester-browser-xhr@5.25.0":
+  version "5.25.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-5.25.0.tgz#c194fa5f49206b9343e6646c41bfbca2a3f2ac54"
+  integrity sha512-JLaF23p1SOPBmfEqozUAgKHQrGl3z/Z5RHbggBu6s07QqXXcazEsub5VLonCxGVqTv6a61AAPr8J1G5HgGGjEw==
   dependencies:
-    "@algolia/client-common" "5.24.0"
+    "@algolia/client-common" "5.25.0"
 
 "@algolia/requester-fetch@5.19.0":
   version "5.19.0"
@@ -165,12 +165,12 @@
   dependencies:
     "@algolia/client-common" "5.19.0"
 
-"@algolia/requester-fetch@5.24.0":
-  version "5.24.0"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-fetch/-/requester-fetch-5.24.0.tgz#1540bcf8e800beb64bc2426afede678276df928a"
-  integrity sha512-6E5+hliqGc5w8ZbyTAQ+C3IGLZ/GiX623Jl2bgHA974RPyFWzVSj4rKqkboUAxQmrFY7Z02ybJWVZS5OhPQocA==
+"@algolia/requester-fetch@5.25.0":
+  version "5.25.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-fetch/-/requester-fetch-5.25.0.tgz#231a2d0da2397d141f80b8f28e2cb6e3d219d38d"
+  integrity sha512-rtzXwqzFi1edkOF6sXxq+HhmRKDy7tz84u0o5t1fXwz0cwx+cjpmxu/6OQKTdOJFS92JUYHsG51Iunie7xbqfQ==
   dependencies:
-    "@algolia/client-common" "5.24.0"
+    "@algolia/client-common" "5.25.0"
 
 "@algolia/requester-node-http@5.19.0":
   version "5.19.0"
@@ -179,12 +179,12 @@
   dependencies:
     "@algolia/client-common" "5.19.0"
 
-"@algolia/requester-node-http@5.24.0":
-  version "5.24.0"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-5.24.0.tgz#3cf9beb49250a63ecaf6945f0f45cd12ee5195aa"
-  integrity sha512-zM+nnqZpiQj20PyAh6uvgdSz+hD7Rj7UfAZwizqNP+bLvcbGXZwABERobuilkCQqyDBBH4uv0yqIcPRl8dSBEg==
+"@algolia/requester-node-http@5.25.0":
+  version "5.25.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-5.25.0.tgz#0ce13c550890de21c558b04381535d2d245a3725"
+  integrity sha512-ZO0UKvDyEFvyeJQX0gmZDQEvhLZ2X10K+ps6hViMo1HgE2V8em00SwNsQ+7E/52a+YiBkVWX61pJJJE44juDMQ==
   dependencies:
-    "@algolia/client-common" "5.24.0"
+    "@algolia/client-common" "5.25.0"
 
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"
@@ -2895,10 +2895,10 @@
     "@types/history" "^4.7.11"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^19.1.3":
-  version "19.1.3"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.1.3.tgz#c75a24b775a63280b02c66a55a3cfa04f4022cf7"
-  integrity sha512-dLWQ+Z0CkIvK1J8+wrDPwGxEYFA4RAyHoZPxHVGspYmFVnwGSNT24cGIhFJrtfRnWVuW8X7NO52gCXmhkVUWGQ==
+"@types/react@*", "@types/react@^19.1.5":
+  version "19.1.5"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.1.5.tgz#9feb3bdeb506d0c79d8533b6ebdcacdbcb4756db"
+  integrity sha512-piErsCVVbpMMT2r7wbawdZsq4xMvIAhQuac2gedQHysu1TZYEigE6pnFfgZT+/jQnrRuF5r+SHzuehFjfRjr4g==
   dependencies:
     csstype "^3.0.2"
 
@@ -4690,10 +4690,10 @@ docusaurus-plugin-redoc@2.2.3:
     "@redocly/openapi-core" "1.16.0"
     redoc "2.4.0"
 
-docusaurus-theme-redoc@2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/docusaurus-theme-redoc/-/docusaurus-theme-redoc-2.2.3.tgz#883a90cc4086d73669c8ea77857301fb8cb9b77c"
-  integrity sha512-n0pseml+Z4JD/nVehGxb8EZzrmI5krJc05P+B7JIV4NEGoLtUab455UxANXMGel1JnsNem0aplxWrY1fskccOw==
+docusaurus-theme-redoc@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/docusaurus-theme-redoc/-/docusaurus-theme-redoc-2.3.0.tgz#364d272dfd46aec49188418f195f707699935e3e"
+  integrity sha512-miCdFUZhma2Wm41sYWO3SMegf5hw5qoQEtd2N3TpDQBpAoAT7tVXvCee0pnKZIXXu8IDNU7f1mtAMOoHrm6Xug==
   dependencies:
     "@redocly/openapi-core" "1.16.0"
     clsx "^1.2.1"
@@ -8985,13 +8985,13 @@ redoc@2.4.0:
     swagger2openapi "^7.0.8"
     url-template "^2.0.8"
 
-redocusaurus@^2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/redocusaurus/-/redocusaurus-2.2.3.tgz#a4bb1a6c12e2a7533c22975312c97de237783dea"
-  integrity sha512-WpmgC+/TS7yEtlV11TJarQU7xhD13HjOwWVwB2g2S3MsZ7KKcKt7eDMTqHWMQV7D4j4uvhzlGjut9knstN+Q9g==
+redocusaurus@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redocusaurus/-/redocusaurus-2.3.0.tgz#c8b5df096cf6c45d1b80a83fe80fb3fd5e537893"
+  integrity sha512-vYTx6biW9q5Lcqe7YagrItqovGTTWniUbEcYDmh5C6EM3NHJ4rhhhVxCAseTliyk5BkNOC5kim6pzwLZZfUx1g==
   dependencies:
     docusaurus-plugin-redoc "2.2.3"
-    docusaurus-theme-redoc "2.2.3"
+    docusaurus-theme-redoc "2.3.0"
 
 reftools@^1.1.9:
   version "1.1.9"
