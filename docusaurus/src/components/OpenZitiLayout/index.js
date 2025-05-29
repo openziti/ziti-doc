@@ -6,14 +6,39 @@ import {useKeyboardNavigation} from '@docusaurus/theme-common/internal';
 import SkipToContent from '@theme/SkipToContent';
 import AnnouncementBar from '@theme/AnnouncementBar';
 import Navbar from '@theme/Navbar';
-import Footer from '@theme/Footer'
 import OpenZitiFooter from "../../components/OpenZitiFooter";
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
 import StarUs from "../../components/StarUs";
 
-export default function OpenZitiLayout(props) {
+
+export function H1(props) {
+    const {children, id} = props;
+    return (
+        <p id={id} className={styles.h1}>{children}</p>
+    );
+}
+export function H2(props) {
+    const {children} = props;
+    return (
+        <p className={styles.h2}>{children}</p>
+    );
+}
+export function H3(props) {
+    const {children,style} = props;
+    return (
+        <h3 className={styles.h3} style={style}>{children}</h3>
+    );
+}
+export function Highlight(props) {
+    const { children } = props;
+    return (
+        <span style={{color: "var(--ifm-color-primary)", fontWeight: "bold"}}> {children}</span>
+    );
+}
+
+export function OpenZitiLayout(props) {
   const {
       children,
       style,
@@ -42,3 +67,5 @@ export default function OpenZitiLayout(props) {
     </LayoutProvider>
   );
 }
+
+export default OpenZitiLayout;

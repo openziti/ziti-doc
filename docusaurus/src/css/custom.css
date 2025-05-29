@@ -7,10 +7,19 @@
 /* You can override the default Infima variables here. */
 :root {
   --light-gray: 148, 163, 184;
-  --ziti-color-primary: 0, 104, 249;
-  --ziti-rgb-primary: rgb(0, 104, 249);
+  --ziti-color-blue: 0, 104, 249;
   --ziti-color-red: 217, 15, 95;
+  --ziti-color-mid1: 72, 74, 172;
+  --ziti-color-mid2: 144, 44, 133;
+  --ziti-rgb-primary: rgb(var(--ziti-color-blue));
+  --ziti-rgb-primary-a: rgb(var(--ziti-color-blue), .1);
   --ziti-rgb-red: rgb(217, 15, 95);
+  --ziti-rgb-secondary: rgb(var(--ziti-color-red));
+  --ziti-rgb-secondary-a: rgb(var(--ziti-color-red), .1);
+  --ziti-rgb-mid1: rgb(var(--ziti-color-mid1));
+  --ziti-rgb-mid1-a: rgb(var(--ziti-color-mid1), .1);
+  --ziti-rgb-mid2: rgb(var(--ziti-color-mid2));
+  --ziti-rgb-mid2-a: rgb(var(--ziti-color-mid2), .1);
   --ifm-font-color-base: #252525;
   --ifm-font-color-inverse: #94a3b8;
   --ifm-font-family-monospace: "Consolas", monospace;
@@ -71,11 +80,22 @@
   --space-md: 2rem;
   --space-lg: 4rem;
   --space-xl: 8rem;
+  --space-xxl: 16rem;
 
   --ziti-code-block-border-thickness: 1px;
   --ziti-code-block-background-color: rgb(243, 243, 243);
   --ziti-code-block-border-color: rgb(197, 199, 201);
   --ziti-code-block-font-color: rgb(57, 58, 52);
+}
+@media (max-height: 1024px) {
+  /*for smaller screens, reduce space definitions*/
+  :root {
+    --space-sm: 1rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 4rem;
+    --space-xxl: 8rem;
+  }
 }
 html:not([data-theme="dark"]) {
   --ifm-leading: 15px;
@@ -859,7 +879,7 @@ input {
   border: 1px solid #ebebeb;
   height: 50px;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding: 0 var(--space-md);
   color: #222;
   font-weight: bold;
   font-size: 14px;
@@ -910,7 +930,7 @@ input {
   background: 0 0;
   z-index: 10;
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0 var(--space-md);
   height: 50px;
   font-size: 14px;
   font-family: 'Open Sans';
@@ -2314,6 +2334,11 @@ aside nav {
   overflow: auto;
   background: var(--ifm-background-color);
   flex-grow: 1;
+
+  align-self: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
 }
 
 @media (max-height: 1200px) {

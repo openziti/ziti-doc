@@ -17,22 +17,22 @@
   .footer {
     background-color: var(--ziti-footer-background-color);
     color: var(--ziti-footer-color);
-    padding: var(--space-lg) 0 var(--space-md);
+    padding: var(--space-md) var(--space-md);
     width: 100%;
   }
 
   .footerContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
     max-width: var(--ziti-landing-max-width);
     width: 100%;
+    align-content: center;
   }
 
   .footerGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
   .footerColumn h3 {
@@ -87,5 +87,12 @@
   .footerSocialLink:hover {
     background-color: var(--primary);
     transform: translateY(-3px);
+  }
+  
+  @media (max-width: 850px) {
+    .footerGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
   }
 }

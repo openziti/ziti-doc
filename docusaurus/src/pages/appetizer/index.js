@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef} from "react";
 import AsciinemaWidget from '../../components/AsciinemaWidget';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import OpenZitiHorizontalSection from "../../components/OpenZitiHorizontalSection";
-import OpenZitiLayout from "../../components/OpenZitiLayout";
-import {H1, H2, H3, Highlight} from "../index.js";
+import {OpenZitiLayout, H1, H2, H3, Highlight} from "../../components/OpenZitiLayout";
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import CodeBlock from '@theme/CodeBlock'
 import SlideShow from "../../components/SlideShow";
