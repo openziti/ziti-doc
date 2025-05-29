@@ -28,6 +28,7 @@ All events have the following fields:
 ## Event Types
 
 * [ApiSession](#apisession)
+* [Authentication](#authentication)
 * [Circuit](#circuit)
 * [Cluster](#cluster)
 * [Connect](#connect)
@@ -59,6 +60,7 @@ events:
   jsonLogger:
     subscriptions:
       - apiSession
+      - authentication
       - circuit
       - cluster
       - connect
@@ -126,6 +128,65 @@ Valid api session types are:
 | **token** |The api session token.|string|
 | **identity_id** |The id of the identity that the api session belongs to.|string|
 | **ip_address** |The IP address from which the identity to connected to require the api session.|string|
+
+
+## Authentication
+
+**Namespace:** `authentication` 
+
+An AuthenticationEvent is emitted when an authentication attempt is made
+
+Types of authentication events
+  - fail - authentication failed
+  - success - authentication succeeded
+
+Types of authentication methods
+  - updb - username password from the internal database
+  - cert - a certificate, either first party or 3rd party
+  - ext-jwt - an external JWT from an IDP
+
+
+<details>
+<summary>Example: Authentication Failed Event</summary>
+```text
+{
+    "namespace": "authentication",
+    "event_src_id": "ctrl1",
+    "timestamp": "2025-05-12T14:30:00Z",
+    "event_type": "failed",
+    "type": "updb",
+    "authenticator_id": "auth01",
+    "external_jwt_signer_id": "",
+    "identity_id": "id42",
+    "auth_policy_id": "pol7",
+    "ip_address": "192.0.2.10",
+    "success": false,
+    "reason": "invalid password",
+    "improper_client_cert_chain": "false"
+}
+```
+</details>
+
+
+*******************
+
+**Fields**
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| **namespace** |The event group. The namespace for AuthenticationEvents is authentication|string|
+| **event_src_id** |The identifier of the controller which emitted the event|string|
+| **timestamp** |The datetime that the event was generated|timestamp|
+| **event_type** |The type of the authentication event. See above for valid values.|string|
+| **type** |method is the authentication method type. See above for valid values.|string|
+| **authenticator_id** |The id of the authenticator associated with the authentication attempt, may be empty (e.g. for etx-jwt)|string|
+| **external_jwt_signer_id** |external_jwt_signer_id is the external jwt signer id triggered, may be empty (e.g. for cert)|string|
+| **identity_id** |The id of the identity that the authentication is attempted for, may be blank of no identity is resolved|string|
+| **auth_policy_id** |The id of the authentication policy which allowed access, may be blank if no auth policy is resolved (e.g. identity is also blank)|string|
+| **remote_address** |The remote address from which the authentication request was issues|string|
+| **success** |success is true if the Authentication and associated authentication policies provide access, false otherwise|boolean|
+| **reason** |reason contains the reason the Authentication failed|string|
+| **improper_client_cert_chain** |improper_client_cert_chain is false for all authentication methods other than cert. When true, it indicates a network issued certificate was used during authentication and its chain was not provided or did not map to the network root CA. This indicates enrollment with an older controller or SDK that did not send/save the proper chain.|boolean|
 
 
 ## Circuit
@@ -295,15 +356,16 @@ A CircuitPath encapsulates information about the circuit's path.
 
 A ClusterEvent marks a change to the controller HA cluster.
 ClusterEvents can be of the following types:
-  - peer.connected
-  - peer.disconnected
-  - members.changed
-  - leadership.gained
-  - leadership.lost
-  - state.has_leader
-  - state.is_leaderless
-  - state.ro
-  - state.rw
+  - peer.connected - a peer connected
+  - peer.disconnected - a peer disconnected
+  - peer.not_member - a peer connected, but was not a member and didn't join the cluster
+  - members.changed - A peer was added to or removed from the cluster
+  - leadership.gained - The node become the cluster leader
+  - leadership.lost - The node lost cluster leadership
+  - state.has_leader - The cluster gained a leader
+  - state.is_leaderless - The cluster became leaderless
+  - state.ro - The cluster is not accepting state changes, likely due to version mismatches in cluster members
+  - state.rw - The cluster is accepting state changes
 
 
 <details>
@@ -1278,6 +1340,7 @@ Valid values for terminator event types are:
 | **terminator_id** |The terminator's identifier.|string|
 | **router_id** |The id of router that the terminator lives on.|string|
 | **host_id** |Optional identifier indicating what is hosting the terminator. If hosted by the edge, will be an identity id.|string|
+| **instance_id** |The instance id of the terminator|string|
 | **router_online** |Indicates if the terminator's router is online.|boolean|
 | **precedence** |The terminator precedence.|string|
 | **static_cost** |The terminator's static cost.|number (uint16)|
