@@ -44,18 +44,6 @@ function HeroSection({ className }) {
     );
 }
 
-const TimelineItem = ({ icon, title, description }) => (
-    <div className={timeline.timelineItem}>
-        <div className={timeline.timelineContent}>
-            <div className={timeline.timelineHeader}>
-                <div className={timeline.timelineIcon}>{icon}</div>
-                <h3>{title}</h3>
-            </div>
-            {description}
-        </div>
-    </div>
-);
-
 function GetStartedSection ({className}) {
     const btns = clsx(styles.btn, styles.btnSecondary);
     return <OpenZitiHorizontalSection className={clsx(styles.aaGetStarted2, styles.ozHorizontalSectionRoot, className)}>
@@ -113,7 +101,8 @@ const SuperPowerSection = ({className}) => (
     </OpenZitiHorizontalSection>
 );
 
-function ZeroTrustModel({ className, model, side }) {
+function ZeroTrustModel({ className, model, side, windowSize }) {
+    const isClient = windowSize && windowSize.width !== undefined;
     return (
         <OpenZitiHorizontalSection
             className={clsx(
@@ -129,7 +118,7 @@ function ZeroTrustModel({ className, model, side }) {
                 <div className={zt.zeroTrustInner}>
                     <div className={zt.modelsGrid}>
                             <div key={model.id} className={clsx(zt.modelCard)} >
-                                {side === 'left' && window.innerWidth >= 850 && (
+                                {side === 'left' && isClient && windowSize.width >= 850 && (
                                     <ThemedImage style={{"maxHeight": "500px"}}
                                         alt="OpenZiti Network Visualization"
                                         sources={{
@@ -155,7 +144,7 @@ function ZeroTrustModel({ className, model, side }) {
                                     <p className={zt.idealText}>{model.ideal}</p>
                                 </div>
 
-                                {(side !== 'left' || window.innerWidth <= 850) && (
+                                {(side !== 'left' || (isClient && windowSize.width) <= 850) && (
                                     <ThemedImage style={{"maxHeight": "500px"}}
                                         alt="OpenZiti Network Visualization"
                                         sources={{
@@ -214,7 +203,7 @@ const ztModels = {
     },
 };
 
-function ZeroTrustModels () {
+function ZeroTrustModels ({ windowSize }) {
     return <>
         <section className={clsx(styles.aaSection)}>
             <h2 className={zt.sectionTitle}>The Right Model For Your Needs</h2>
@@ -225,16 +214,11 @@ function ZeroTrustModels () {
             </p>
         </section>
         <TransitionSection className={clsx(styles.transitionSection, styles.transitionToZeroTrustModels)}/>
-        <ZeroTrustModel model={ztModels.ztaa} side='right' className={styles.ztModelZtaa} />
+        <ZeroTrustModel model={ztModels.ztaa} side='right' className={styles.ztModelZtaa} windowSize={windowSize} />
         <ZeroTrustModel model={ztModels.ztha} side='left' className={styles.ztModelZtha}  />
         <ZeroTrustModel model={ztModels.ztna} side='right' className={styles.ztModelZtna}  />
         <TransitionSection className={clsx(styles.transitionSection, styles.transitionFromZeroTrustModels)}/>
     </>;
-};
-
-function getWindowSize() {
-    const {innerWidth, innerHeight} = window;
-    return {innerWidth, innerHeight};
 }
 
 function TransitionSection({ children, className }) {
@@ -243,6 +227,17 @@ function TransitionSection({ children, className }) {
             {children}
         </OpenZitiHorizontalSection>
     );
+}
+
+
+function getWindowSize() {
+    if (typeof window !== 'undefined') {
+        return {
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+    }
+    return { width: 0, height: 0 }; // Default for SSR
 }
 
 function App() {
@@ -257,7 +252,7 @@ function App() {
     return (
         <OpenZitiLayout className={styles.landing}>
             <HeroSection className={styles.aaabbb}/>
-            <ZeroTrustModels />
+            <ZeroTrustModels windowSize={windowSize} />
             <SuperPowerSection />
             <GetStartedSection />
         </OpenZitiLayout>
