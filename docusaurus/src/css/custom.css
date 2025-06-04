@@ -6,12 +6,34 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --light-gray: 148, 163, 184;
+  --ziti-color-blue: 0, 104, 249;
+  --ziti-color-red: 217, 15, 95;
+  --ziti-color-mid1: 72, 74, 172;
+  --ziti-color-mid2: 144, 44, 133;
+  --ziti-rgb-primary: rgb(var(--ziti-color-blue));
+  --ziti-rgb-primary-a: rgb(var(--ziti-color-blue), .1);
+  --ziti-rgb-red: rgb(217, 15, 95);
+  --ziti-rgb-secondary: rgb(var(--ziti-color-red));
+  --ziti-rgb-secondary-a: rgb(var(--ziti-color-red), .1);
+  --ziti-rgb-mid1: rgb(var(--ziti-color-mid1));
+  --ziti-rgb-mid1-a: rgb(var(--ziti-color-mid1), .1);
+  --ziti-rgb-mid2: rgb(var(--ziti-color-mid2));
+  --ziti-rgb-mid2-a: rgb(var(--ziti-color-mid2), .1);
+  --ifm-font-color-base: #252525;
+  --ifm-font-color-inverse: #94a3b8;
+  --ifm-font-family-monospace: "Consolas", monospace;
+  --ifm-font-family-sans: "Open Sans", sans-serif;
+  --ifm-font-family-sans-default: sans-serif;
+  --ziti-landing-max-width: 1200px;
+  --ziti-max-width: 1400px;
   --ifm-navbar-height: 40;
   --ifm-leading: 35px;
   --ifm-background-color: #f8fafc;
   --ifm-background-surface-color: #f1f5f9;
   --ifm-background-surface-color-dark: #e1d4ee;
   --ifm-footer-background-color: #f0f0f0;
+  --ifm-color-banner: #edac15;
   --ifm-color-primary: #0068f9;
   --ifm-color-primary-dark: #8519e7;
   --ifm-color-primary-darker: #7e17dc;
@@ -23,14 +45,9 @@
   --code-block-color: var(--ifm-heading-color);
   --lighter-code-block-color: color-mix(in srgb, var(--ifm-heading-color) 70%, white 30%);
   --code-block-background-color: #ECEEEF;
-  --ifm-font-family-monospace: "Consolas", monospace;
-  --ifm-font-family-sans: "Open Sans", sans-serif;
-  --ifm-font-family-sans-default: sans-serif;
-  --ifm-color-banner: #edac15;
   --ifm-navbar-item-padding-horizontal: .5em;
   --background-color-1: #ffd0d0;
   --landing-banner-1: #e0e4ee;
-  --ifm-font-color-base: #252525;
   --ifm-menu-color: #002451;
   --ifm-toc-link-color: #252525;
   --ifm-alert-foreground-color: #252525;
@@ -54,12 +71,38 @@
   --ifm-link-color: rgba(217, 15, 95, 0.98);
   --ifm-breadcrumb-color-actives: rgba(217, 15, 95, 0.98);
   --ifm-breadcrumb-color-active: color-mix(in srgb, var(--ifm-link-color) 75%, white 25%);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1.0rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+  --space-xxl: 16rem;
+
+  --ziti-code-block-border-thickness: 1px;
+  --ziti-code-block-background-color: rgb(243, 243, 243);
+  --ziti-code-block-border-color: rgb(197, 199, 201);
+  --ziti-code-block-font-color: rgb(57, 58, 52);
+}
+@media (max-height: 1024px) {
+  /*for smaller screens, reduce space definitions*/
+  :root {
+    --space-sm: 1rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 4rem;
+    --space-xxl: 8rem;
+  }
 }
 html:not([data-theme="dark"]) {
   --ifm-leading: 15px;
 }
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme="dark"] {
+  --ifm-font-color-base: #94a3b8;
   --ifm-leading: 15px;
   --ifm-background-color: #111827;
   --ifm-background-surface-color: #1f2937;
@@ -74,7 +117,6 @@ html[data-theme="dark"] {
   --ifm-color-primary-lightest: #e6cffe;
   --background-color-1: #434862;
   --landing-banner-1: #38383a;
-  --ifm-font-color-base: #94a3b8;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --logo-name: "ziti-logo-light.svg";
   --ifm-heading-color: 148 163 184;
@@ -82,28 +124,24 @@ html[data-theme="dark"] {
   --ifm-toc-link-color: #ffffff;
   --code-block-color: var(--ifm-heading-color);
   --code-block-background-color: #434862;
-  --ifm-alert-foreground-color: #cbd5e1;
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
   --ifm-docusaurus-collapse-button-bg-hover: rgba(255, 255, 255, 0.05);
   --ifm-tabs-color-active: #e2e8f0;
-  --ifm-global-shadow-lw: 3px 3px 10px 0 rgba(255, 255, 255, 0.2);
+  --ifm-global-shadow-lw: 3px 3px 10px 0 rgb(31, 41, 55);
   --ifm-menu-color-background-hover: #1f2937;
   --ifm-menu-left-border-color: #94a3b8;
   --ifm-link-color: rgba(21, 142, 237, 1);
   --ifm-breadcrumb-color-active: color-mix(in srgb, var(--ifm-link-color) 75%, white 25%);
+
+  --ziti-text-muted: #8e8ea0;
+
+  --ziti-code-block-background-color: rgb(33, 47, 77);
+  --ziti-code-block-border-color: rgb(33, 47, 77);
+  --ziti-code-block-font-color: rgb(148, 163, 184);
 }
 
 html[data-theme=dark] #Wizardly code {
   color: rgba(117, 82, 136, 0.98) !important;
-}
-
-html[data-theme=dark] .alert--secondary code {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(117, 82, 136, 0.98);
-  color: rgba(117, 82, 136, 0.98);
-}
-
-html[data-theme=dark] .alert--secondary code .token-line {
-  color: rgba(117, 82, 136, 0.98);
 }
 
 html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module svg {
@@ -149,10 +187,41 @@ html[data-theme=dark] .wizardmodal .admonitionIcon_node_modules-\@docusaurus-the
   src: url(https://fonts.gstatic.com/s/russoone/v14/Z9XUDmZRWg6M1LvRYsHOz8mJ.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+/* cyrillic */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  src: url(https://fonts.gstatic.com/s/opensans/v29/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu0SC55K5gw.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  src: url(https://fonts.gstatic.com/s/opensans/v29/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu0SC55K5gw.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  src: url(https://fonts.gstatic.com/s/opensans/v29/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: var(--ifm-font-family-sans), sans-serif;
 }
 
 
@@ -247,6 +316,33 @@ input[type="radio"]:checked+label:after {
   width: 1.25rem;
 }
 
+.header-netfoundry-link {
+  display: flex !important;
+}
+.header-netfoundry-link::after {
+  position: relative;
+  right: -3px;
+  top: 5px;
+}
+.header-netfoundry-link:hover {
+  opacity: 0.6;
+}
+.header-netfoundry-link::after {
+  background: url('/img/new-window.svg?v=3') no-repeat;
+  content: "";
+  display: flex;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+[data-theme="dark"] .header-netfoundry-link::after {
+  background: url('/img/new-window.svg') no-repeat;
+  content: "";
+  display: flex;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+
 /**
  Footer
  */
@@ -281,6 +377,7 @@ input[type="radio"]:checked+label:after {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--ifm-background-color);
   }
 }
 
@@ -653,7 +750,7 @@ list-type-ulli,
   margin: 0;
 }
 
-a {
+.wizardmodal a {
   color: rgba(217, 15, 95, 0.98);
   text-decoration: var(--ifm-link-decoration);
   transition: 0.5s;
@@ -669,7 +766,7 @@ html[data-theme=dark] .menu__link {
   color: var(--ifm-font-color-base) !important;
 }
 
-.menu__link--active {
+.wizardmodal .menu__link--active {
   color: rgba(217, 15, 95, 0.98) !important;
   transition: 0.5s;
 }
@@ -688,12 +785,12 @@ html[data-theme=dark] .menu__link--active {
   color: rgba(117, 82, 136, 0.98);
 }
 
-a:hover {
+.wizardmodal a:hover {
   color: rgba(117, 82, 136, 0.98);
   text-decoration: var(--ifm-link-hover-decoration);
 }
 
-html[data-theme=dark] a:hover {
+html[data-theme=dark] .wizardmodal a:hover {
   color: rgba(217, 15, 95, 0.98);
   text-decoration: var(--ifm-link-hover-decoration);
 }
@@ -729,7 +826,7 @@ html[data-theme=dark] a:hover {
 }
 
 .wizardmodal .zcontainer {
-  max-width: 1400px;
+  max-width: var(--ziti-max-width);
   min-width: 300px;
   margin: 0 auto;
   background: rgba(236, 238, 242, .85);
@@ -782,7 +879,7 @@ input {
   border: 1px solid #ebebeb;
   height: 50px;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding: 0 var(--space-md);
   color: #222;
   font-weight: bold;
   font-size: 14px;
@@ -833,7 +930,7 @@ input {
   background: 0 0;
   z-index: 10;
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0 var(--space-md);
   height: 50px;
   font-size: 14px;
   font-family: 'Open Sans';
@@ -1874,13 +1971,13 @@ code {
   vertical-align: middle;
   font-size: 87.5%;
   font-weight: 600;
-  word-break: break-word;
-  border-radius: 5px;
-  padding: 1px 4px 1px 4px;
+  padding: 1px 5px;
+  background: var(--ziti-code-block-background-color);
+  color: var(--ziti-code-block-font-color);
+  border-color: var(--ziti-code-block-border-color);
 }
 
 code p {
-
 }
 
 li a code {
@@ -1888,8 +1985,6 @@ li a code {
   vertical-align: middle;
   font-size: 87.5%;
   font-weight: 600;
-  word-break: break-word;
-  border-radius: 7px;
   padding: 2px 4px 2px 4px;
 
   background-color: rgba(117, 82, 136, 0.2) !important;
@@ -2104,110 +2199,88 @@ p > img {
   --alert-dark-shadow: rgba(50, 30, 5, .5);
   --ifm-global-shadow-lw: 3px 3px 10px 0 var(--alert-dark-shadow);
   --ifm-alert-shadow: var(--ifm-global-shadow-lw);
-  --ifm-alert-border-color: var(--alert-border-color);
-  --ifm-code-background: var(--alert-background-color);
-  --ifm-alert-background-color:var(--alert-background-color);
+  --ifm-alert-border-color: var(--ziti-code-block-border-color);
+  --ifm-code-background: var(--ziti-code-block-background-color);
+  --ifm-alert-background-color:var(--ziti-code-block-background-color);
+  details {
+    border: var(--ziti-code-block-border-thickness) solid var(--ziti-code-block-border-color);
+  }
+  div {
+    background: var(--ziti-code-block-background-color);
+  }
+}
+.theme-code-block {
+  margin: 10px 0;
+  border: var(--ziti-code-block-border-thickness) solid var(--ziti-code-block-border-color);
+  > div > pre {
+    background: transparent !important;
+  }
 }
 
-.token-line span {
-  color: var(--code-block-color);
+pre code {
+  /*border-radius: 43px;*/
+  background: var(--ziti-code-block-background-color);
+  font-family: var(--ifm-font-family-monospace), monospace;
 }
 
-.alert pre code {
-  background: var(--ifm-alert-background-color);
-  border: 1px solid var(--alert-border-color);
-}
-.alert pre {
-  margin-top: 10px;
-  --ifm-code-background: var(--ifm-alert-background-color);
-  background: var(--ifm-alert-background-color) !important;
+.token-line * {
+  font-family: var(--ifm-font-family-monospace), monospace;
 }
 
-.alert details {
-  margin-top: 10px;
-}
 
 html:not([data-theme="dark"]) {
-  .alert--success, .alert--success pre code, .alert--success .alert--info, .alert--success .alert--info pre code {
-    --alert-border-color: rgba(48, 207, 18, 1.0);
-    --alert-background-color: rgba(48, 207, 18, 0.2);
+  .alert--success, .alert--success .theme-code-block, .alert--success .alert--info, .alert--success .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(23, 92, 10);
+    --ziti-code-block-background-color: rgb(208, 242, 205);
+    --ziti-code-block-font-color: rgb(76, 88, 75);
   }
-  .alert--secondary, .alert--secondary pre code, .alert--secondary .alert--info, .alert--secondary .alert--info pre code {
-    --alert-border-color: rgba(184, 91, 217, 1.0);
-    --alert-background-color: rgba(184, 91, 217, 0.2);
+  .alert--secondary, .alert--secondary .theme-code-block, .alert--secondary .alert--info, .alert--secondary .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(184, 91, 217);
+    --ziti-code-block-background-color: rgb(236, 218, 246);
+    --ziti-code-block-font-color: rgb(119, 58, 140);
   }
-  .alert--danger, .alert--danger pre code, .alert--danger .alert--info, .alert--danger .alert--info pre code {
-    --alert-border-color: rgba(180, 46, 46, 1.0);
-    --alert-background-color: rgba(180, 46, 46, 0.2);
+  .alert--danger, .alert--danger .theme-code-block, .alert--danger .alert--info, .alert--danger .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(207, 104, 104);
+    --ziti-code-block-background-color: rgb(244, 177, 177);
+    --ziti-code-block-font-color: rgb(130, 65, 65);
   }
-  .alert--warning, .alert--warning pre code, .alert--warning .alert--info, .alert--warning .alert--info pre code { /**/
-    --alert-border-color: rgba(255, 146, 22, 1.0);
-    --alert-background-color: rgba(255, 146, 22, 0.2);
+  .alert--warning, .alert--warning .theme-code-block, .alert--warning .alert--info, .alert--warning .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(255, 146, 22);
+    --ziti-code-block-background-color: rgb(250, 229, 206);
+    --ziti-code-block-font-color: rgb(178, 102, 15);
   }
-  .alert--info, .alert--info pre code, .alert--info .alert--info {
-    --alert-border-color: rgba(6, 179, 212, 1.0);
-    --alert-background-color: rgba(6, 179, 212, 0.2);
+  .alert--info, .alert--info .theme-code-block, .alert--info .alert--info, .alert--info .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(6, 179, 212);
+    --ziti-code-block-background-color: rgb(200, 236, 245);
+    --ziti-code-block-font-color: rgb(3, 113, 133);
   }
 }
 
 html[data-theme="dark"] {
-  .alert {
-    --code-block-background-color: var(--alert-border-color);
-    --inline-code-block-background-color: var(--alert-border-color);
-    --inline-code-block-color: var(--alert-background-color);
+  .alert--success, .alert--success .theme-code-block, .alert--success .alert--info, .alert--success .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(26, 116, 8);
+    --ziti-code-block-background-color: rgb(34, 66, 31);
+    --ziti-code-block-font-color: rgb(73, 142, 66);
   }
-  .theme-admonition p code, details > summary > code {
-    color: var(--inline-code-block-color);
-    background: var(--inline-code-block-background-color);
+  .alert--secondary, .alert--secondary .theme-code-block, .alert--secondary .alert--info, .alert--secondary .alert--info .theme-code-block, .alert--secondary section {
+    --ziti-code-block-border-color: rgb(98, 51, 127);
+    --ziti-code-block-background-color: rgb(40, 25, 67);
+    --ziti-code-block-font-color: rgb(157, 81, 203);
   }
-  .alert.alert--success {
-    --alert-background-color: rgb(10, 60, 4);
+  .alert--danger, .alert--danger .theme-code-block, .alert--danger .alert--info, .alert--danger .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(129, 32, 32);
+    --ziti-code-block-background-color: rgb(76, 31, 41);
+    --ziti-code-block-font-color: rgb(205, 50, 50);
   }
-  .alert--success, .alert--success pre code, .alert--success .alert--info, .alert--success .alert--info pre code, .alert.alert--success details {
-    --alert-border-color: rgba(36, 167, 12, 1.0);
-    --alert-background-color: rgba(15, 80, 6, 1.0);
+  .alert--warning, .alert--warning .theme-code-block, .alert--warning .alert--info, .alert--warning .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(121, 73, 22);
+    --ziti-code-block-background-color: rgb(64, 48, 35);
+    --ziti-code-block-font-color: rgb(197, 119, 35);
   }
-
-  .alert.alert--secondary {
-    --alert-background-color: rgb(40, 25, 67);
-  }
-  .alert--secondary, .alert--secondary pre code, .alert--secondary .alert--info, .alert--secondary .alert--info pre code, .alert.alert--secondary details {
-    --alert-border-color: rgba(184, 91, 217, 1.0);
-    --alert-background-color: rgba(50, 30, 85, 1.0);
-    --inline-code-block-color: #white;
-  }
-
-  .alert.alert--danger {
-    --alert-background-color: rgb(80, 38, 38);
-  }
-  .alert--danger, .alert--danger pre code, .alert--danger .alert--info, .alert--danger .alert--info pre code, .alert.alert--danger details {
-    --alert-border-color: rgba(180, 46, 46, 1.0);
-    --alert-background-color: rgba(100, 48, 48, 1.0);
-    --inline-code-block-color: #white;
-  }
-
-  .alert.alert--info {
-    --alert-background-color: rgb(27, 46, 65);
-  }
-  .alert--info, .alert--info pre code, .alert--info .alert--info, .alert--info .alert--info pre code, .alert.alert--info details {
-    --alert-border-color: rgba(86, 168, 212, 1.0);
-    --alert-background-color: rgba(40, 60, 90, 1.0);
-  }
-
-  .alert.alert--warning {
-    --alert-background-color: rgb(74, 60, 51);
-  }
-  .alert--warning, .alert--warning pre code, .alert--warning .alert--info, .alert--warning .alert--info pre code {
-    --alert-border-color: rgba(204, 153, 0, 1.0);
-    --alert-background-color: rgb(100, 80, 65);
-  }
-  .theme-admonition details > summary > code, .theme-admonition code {
-    background: var(--alert-border-color);
-    color: var(--inline-code-block-color);
-  }
-
-  .theme-code-block > div > pre > code { /*fixes a strange render issue in prism/docusaurus' :::note admonition*/
-    background: var(--alert-background-color);
+  .alert--info, .alert--info .theme-code-block, .alert--info .alert--info, .alert--info .alert--info .theme-code-block {
+    --ziti-code-block-border-color: rgb(10, 117, 143);
+    --ziti-code-block-background-color: rgb(15, 55, 74);
+    --ziti-code-block-font-color: rgb(15, 179, 219);
   }
 }
 
@@ -2252,11 +2325,25 @@ aside .button:hover {
 aside nav {
   /* this selector gets the sidebar */
   height: 100%;
-  margin-bottom: 30px; /* with the hide menu button on small screens, it obscures the last menu item without this */
+  /*margin-bottom: 70px;*/ /* only do this when it's small */
 }
 
 .main-wrapper {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  background: var(--ifm-background-color);
+  flex-grow: 1;
+
+  align-self: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+@media (max-height: 1200px) {
+  aside nav {
+    /* this selector gets the sidebar */
+    margin-bottom: 70px; /* with the hide menu button on small screens, it obscures the last menu item without this */
+  }
 }

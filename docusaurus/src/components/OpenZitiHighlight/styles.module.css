@@ -19,8 +19,8 @@
 
 @media (min-width: 1400px) {
   .ozHighLightContent {
-    min-width: 1400px;
-    max-width: 1400px;
+    min-width: var(--ziti-max-width);
+    max-width: var(--ziti-max-width);
     padding: 20px 20px;
   }
 }

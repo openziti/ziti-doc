@@ -21,7 +21,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'OpenZiti', // Usually your GitHub org/user name.
+  organizationName: 'OpenZiti', // Usually your GitHub org/username.
   projectName: 'ziti', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
@@ -315,7 +315,7 @@ const config = {
         // Optional: see doc section below
         contextualSearch: true,
   
-        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites, and we want to navigate with window.location.href to them.
         // externalUrlRegex: 'external\\.example\\.com|thirdparty\\.example\\.com',
   
         // Optional: Algolia search parameters
@@ -344,6 +344,11 @@ const config = {
         },
         items: [
           {
+            type: 'html',
+            value: '<a class="navbar__item navbar__link header-netfoundry-link" href="https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/" target="_blank">NetFoundry</a>',
+            position: 'right'
+          },
+          {
             to: '/docs/learn/introduction/',
             label: 'Documentation',
             position: 'right',
@@ -356,8 +361,8 @@ const config = {
             activeBaseRegex: '/docs/downloads',
           },
           {
-            to: 'https://blog.openziti.io/',
-            label: 'Blog',
+            type: 'html',
+            value: '<a class="navbar__item navbar__link header-netfoundry-link" href="https://blog.openziti.io/" target="_blank">Blog</a>',
             position: 'right'
           },
           {
@@ -375,7 +380,7 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/twit.svg"/>Twitter</span></a>'
+                value: '<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/twit.svg"/>X (Twitter)</span></a>'
               },
               {
                 type: 'html',
@@ -383,7 +388,7 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/ziggy.png"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on Twitter">Ziggy</span></a>'
+                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/ziggy.png"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>'
               },
               {
                 type: 'html',
