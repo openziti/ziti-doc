@@ -3,8 +3,9 @@
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
-  min-height: 100%;
   background-color: var(--ifm-background-color);
+  max-width: var(--ziti-max-width);
+  width: 100%;
 }
 
 .ozhsContent {
@@ -16,7 +17,7 @@
 
 @media (min-width: 1420px) {
   .ozhsContent {
-    min-width: 1400px;
-    max-width: 1400px;
+    min-width: var(--ziti-max-width);
+    width: 100%;
   }
 }

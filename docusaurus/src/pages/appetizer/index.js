@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef} from "react";
 import AsciinemaWidget from '../../components/AsciinemaWidget';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import OpenZitiHorizontalSection from "../../components/OpenZitiHorizontalSection";
-import OpenZitiLayout from "../../components/OpenZitiLayout";
-import {H1, H2, H3, Highlight} from "../index.js";
+import {OpenZitiLayout, H1, H2, H3, Highlight} from "../../components/OpenZitiLayout";
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import CodeBlock from '@theme/CodeBlock'
 import SlideShow from "../../components/SlideShow";
@@ -177,7 +176,7 @@ function App() {
     };
 
     return (
-        <OpenZitiLayout>
+        <OpenZitiLayout className={styles.appetizer}>
             <div className={styles.liveMsgContainerContainer} style={{ minHeight: "100px", maxHeight: "450px" }}>
                 {liveMessageVisible && (
                     <div className={`${styles.liveMsgContainer} ${styles.bgImg1}`}>
@@ -188,7 +187,7 @@ function App() {
                     </div>
                 )}
             </div>
-            <OpenZitiHorizontalSection wrapperClassName={styles.ozhs}>
+            <OpenZitiHorizontalSection className={styles.ozhs}>
                 <div className={styles.appetizerTitle}>
                     <img
                         src="https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png"
