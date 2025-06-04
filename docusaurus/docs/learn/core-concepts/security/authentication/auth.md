@@ -3,17 +3,17 @@ title: Authentication
 ---
 
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
-has begun when the client receives an API Session and is complete when the API Session is fully authenticated.
-API Sessions are a high level security context that represents an authenticated session with either the Ziti [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-or the Ziti [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx).
+has begun when the client receives and API Session and is complete when the API Session is fully authenticated.
+API Sessions are a high level security context that represents an authenticated session with either the Ziti [edge client API](/reference/developer/api/01-edge-client-reference.mdx)
+or the Ziti [edge management API](/reference/developer/api/02-edge-management-reference.mdx).
 
-- Clients that are powered by a Ziti SDK that access services will authenticate with the [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-- Clients that are managing a network will authenticate with the [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx)
+- Clients that are powered by a Ziti SDK that access services will authenticate with the [edge client API](/reference/developer/api/01-edge-client-reference.mdx)
+- Clients that are managing a network will authenticate with the [edge management API](/reference/developer/api/02-edge-management-reference.mdx)
 
 ## Authentication Flow
 
-Below is diagram showing initial authentication for some client. The same model is used between the [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-and [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx).
+Below is diagram showing initial authentication for some client. The same model is used between the [edge client API](/reference/developer/api/01-edge-client-reference.mdx)
+and [edge management API](/reference/developer/api/02-edge-management-reference.mdx).
 
 ```mermaid
 graph TD
@@ -73,7 +73,7 @@ Authenticators may be listed via the CLI:
 
 `ziti edge list authenticators`
 
-or via the [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx):
+or via the [edge management API](/reference/developer/api/02-edge-management-reference.mdx):
 
 ```
 GET /edge/management/v1/authenticators
@@ -84,7 +84,7 @@ GET /edge/management/v1/authenticators
 x509 authentication requires the client to initiate a HTTPs authentication request using a x509 client certificate that
 is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge 
 Controller's internal PKI or an external PKI. If an external PKI is being used, it must be registered as a 
-[3rd Party CA](10-third-party-cas.md) via the Ziti [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx), verified, and
+[3rd Party CA](10-third-party-cas.md) via the Ziti [edge management API](/reference/developer/api/02-edge-management-reference.mdx), verified, and
 have authentication enabled. The client certificate must pass signature and CA chain-of-trust validation. All client, 
 intermediate CA, and root CA functionality supports RSA and EC keys.
 
