@@ -108,10 +108,12 @@ Here is an overview of the steps we will follow:
 5. Create a service to associate the two configs created previously into a service.
 6. Create a service-policy to authorize "HTTP Clients" to "dial" the service representing the HTTP server.
 7. Create a service-policy to authorize the "HTTP Server" to "bind" the service representing the HTTP server.
-8. Start the server-side tunneler (unless using the docker-compose quickstart) with the HTTP server identity, providing access to the 
+8. Create an edge-router-policy to grant all routers access to all identities
+9. Create a service-edge-router-policy to grant all routers access to all services
+10. Start the server-side tunneler (unless using the docker-compose quickstart) with the HTTP server identity, providing access to the 
    HTTP server.
-9. Start the client-side tunneler using the HTTP client identity.
-10. Access the HTTP server securely over the OpenZiti zero trust overlay
+11. Start the client-side tunneler using the HTTP client identity.
+12. Access the HTTP server securely over the OpenZiti zero trust overlay
 
 We can do all these steps using the OpenZiti CLI tool: `ziti`. We can also accomplish this using the OpenZiti Admin Console. We'll 
 demonstrate doing it both ways now.
@@ -170,7 +172,13 @@ ziti edge create service-policy http.policy.dial Dial --service-roles "@http.svc
 #7. Create a service-policy to authorize the "HTTP Server" to "bind" the service representing the HTTP server.
 ziti edge create service-policy http.policy.bind Bind --service-roles '@http.svc' --identity-roles "@${http_server_id}"
 
-#8. Start the server-side tunneler (unless using the docker-compose quickstart) with the HTTP server identity.
+#8. Create an edge-router-policy to grant all routers access to all identities.
+ziti edge create edge-router-policy "all-routers-all-identities" --edge-router-roles '#all' --identity-roles '#all'
+
+#9. Create a service-edge-router-policy to grant all routers access to all services.
+ziti edge create service-edge-router-policy "all-routers-all-services" --edge-router-roles '#all' --service-roles '#all'
+
+#10. Start the server-side tunneler (unless using the docker-compose quickstart) with the HTTP server identity.
 #   [optional] if you don't use an edge-router as your tunneler, you will need to download and run the tunneler for your OS
 #   if you are using a ziti-router, skip to step 9 below
 # 
@@ -182,7 +190,7 @@ ziti edge create service-policy http.policy.bind Bind --service-roles '@http.svc
 # run ziti-edge-tunnel for the client
 sudo ./ziti-edge-tunnel run -i /tmp/http.server.json
 
-#9. Start the client-side tunneler using the HTTP client identity.
+#11. Start the client-side tunneler using the HTTP client identity.
 #   This step is dependant on platform. For this demo we'll be using a virtual machine running linux and we'll be using the
 #   ziti-edge-tunnel binary. Copy the http.client.jwt from step 1 to the client machine. For the example we'll use /tmp/http.client.jwt
 #
@@ -191,7 +199,7 @@ sudo ./ziti-edge-tunnel run -i /tmp/http.server.json
 # run ziti-edge-tunnel for the client
 sudo ./ziti-edge-tunnel run -i /tmp/http.client.json
 
-#10. Access the HTTP server securely over the OpenZiti zero trust overlay
+#12. Access the HTTP server securely over the OpenZiti zero trust overlay
 curl http.ziti
 <pre>
 Hello World

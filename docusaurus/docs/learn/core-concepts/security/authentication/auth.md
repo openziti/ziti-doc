@@ -3,7 +3,7 @@ title: Authentication
 ---
 
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
-has begun when the client receives and API Session and is  complete when the API Session is fully authenticated.
+has begun when the client receives an API Session and is complete when the API Session is fully authenticated.
 API Sessions are a high level security context that represents an authenticated session with either the Ziti [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
 or the Ziti [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx).
 
