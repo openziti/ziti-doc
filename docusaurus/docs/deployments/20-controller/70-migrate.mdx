@@ -3,10 +3,10 @@ title: Migrate a Controller Installation
 sidebar_label: Migrate
 ---
 
-Here's an example of migrating an existing controller's configuration to the Linux service's working directory.
+Here's an example of migrating an existing controller's configuration to the Linux service's working directory. Similarly, you could migrate a configuration to a Docker volume.
 
 1. Remove the quickstart controller service if you followed the BASH quickstart to create **/etc/systemd/system/ziti-controller.service**.
-1. Follow [the Linux controller deployment guide](/guides/deployments/10-linux/10-controller/10-deploy.mdx) to install the controller service.
+1. Follow [the Linux controller deployment guide](/deployments/20-controller/20-linux.mdx) to install the controller service.
 1. Ensure the controller service is disabled and the state is clean.
 
     ```text

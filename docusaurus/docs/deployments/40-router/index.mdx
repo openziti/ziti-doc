@@ -1,0 +1,18 @@
+---
+title: Router Deployment Overview
+sidebar_label: Router
+---
+
+## Requirements
+
+Each router must have a unique identity and configuration YAML file.
+
+## The Router's Identity Certificates
+
+Each router is issued a client and server certificate from a controller's edge enrollment signer intermediate CA. In the configuration YAML file, [the property `identity`](/reference/30-configuration/conventions.md) configures the router's identity certificate and private key.
+
+## The Configuration YAML File
+
+[The configuration YAML file](/reference/30-configuration/router.md) is required for all routers. It is used to configure the router's identity, controller endpoints file, listener addresses, and more.
+
+A utility or template is provided for each type of deployment to assist with generating a valid configuration YAML file.
