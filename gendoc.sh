@@ -44,7 +44,7 @@ SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
 
 echo "- processing opts"
 
-while getopts ":glcsd" OPT; do
+while getopts ":glcsdz" OPT; do
   case ${OPT} in
     g ) # skip git
       echo "- skipping creating and updating Git working copies"
@@ -66,6 +66,10 @@ while getopts ":glcsd" OPT; do
       echo "- skipping docusaurus generation"
       SKIP_DOCUSAURUS_GEN="yes"
       ;;
+    z ) # generate a zip file
+      echo "- generating a zip file after build"
+      ZITI_GEN_ZIP="yes"
+      ;;
     *)
       echo "WARN: ignoring option ${OPT}" >&2
       ;;
@@ -78,9 +82,9 @@ if [[ "${SKIP_GIT}" == no ]]; then
   echo "updating dependencies by rm/checkout"
   mkdir -p "${ZITI_DOC_GIT_LOC}"
   if [[ "${SKIP_CLEAN}" == no ]]; then
-    rm -rf ${ZITI_DOC_GIT_LOC}/ziti-*
+    rm -rf "${ZITI_DOC_GIT_LOC}"/ziti-*
   fi
-  git config --global --add safe.directory $(pwd)
+  git config --global --add safe.directory "$PWD"
   clone_or_pull "https://github.com/openziti/ziti" "ziti-cmd" >/dev/null
   clone_or_pull "https://github.com/openziti/ziti-sdk-csharp" "ziti-sdk-csharp" >/dev/null
   clone_or_pull "https://github.com/openziti/ziti-sdk-c" "ziti-sdk-c" >/dev/null
@@ -191,14 +195,23 @@ if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
 fi
 
 if [[ "${SKIP_DOCUSAURUS_GEN}" == no ]]; then
-    pushd ${ZITI_DOC_GIT_LOC}/.. >/dev/null
+    pushd "${ZITI_DOC_GIT_LOC}/../.." >/dev/null
     echo "running 'yarn install' in ${PWD}"
     yarn install --frozen-lockfile
     echo "running 'yarn build' in ${PWD}"
     yarn build
-    popd >/dev/null
-
     echo " "
+
+    if [[ "${ZITI_GEN_ZIP}" == "yes" ]]; then
+        sed -i "s|baseUrl: '/'|baseUrl: '/openziti'|g" docusaurus.config.js
+        echo "generating docs into ${script_root}/docusaurus/openziti"
+        yarn build --out-dir=openziti
+        git checkout docusaurus.config.js
+        echo "zipping build directory: ${script_root}/docusaurus/openziti"
+        pushd "${script_root}/docusaurus/openziti"
+        zip -r "${script_root}/docs-openziti.zip" .
+    fi
+    popd >/dev/null
 fi
 echo " "
 echo "------------------------"
