@@ -17,6 +17,12 @@ jobs:
       gh_ci_key: ${{ secrets.GH_CI_KEY }}
       ziti_ci_gpg_key: ${{ secrets.ZITI_CI_GPG_KEY }}
       ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
+      
+      # these are defined in a github environment: ziti-doc/settings/environments
+      DOC_SSH_HOST: ${{ secrets.DOC_SSH_HOST }}
+      DOC_SSH_PORT: ${{ secrets.DOC_SSH_PORT }}
+      DOC_SSH_TARGET_DIR: ${{ secrets.DOC_SSH_TARGET_DIR }}
+      DOC_SSH_USER: ${{ secrets.DOC_SSH_USER }}
     environment: ${{ github.ref_name == 'main' && 'main' || 'stg' }}
     steps:
       - name: Checkout Workspace
