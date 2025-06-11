@@ -60,24 +60,7 @@ publish_to_openziti_github_io() {
 }
 
 publish_to_nfio() {
-  echo "doc publication begins"
-  cat "$HOME/.ssh/known_hosts"
-  
-  echo "===================================================="
-  echo "Host SSH key fingerprint for DOC_SSH_HOST"
-  ssh-keyscan -p "$DOC_SSH_PORT" "$DOC_SSH_HOST" | ssh-keygen -lf /dev/stdin
-  echo "===================================================="
-  
-  if ! ssh-keygen -p "$DOC_SSH_PORT" -F "$DOC_SSH_HOST" > /dev/null; then
-    echo "using ssh-keyscan to add DOC_SSH_HOST to known hosts"
-    ssh-keyscan "$DOC_SSH_HOST" >> ~/.ssh/known_hosts
-  fi
-  if ! ssh-keygen -F "[$DOC_SSH_HOST]:$DOC_SSH_PORT" > /dev/null; then
-    echo "using ssh-keyscan to add [$DOC_SSH_HOST]:$DOC_SSH_PORT to known_hosts"
-    ssh-keyscan -p "$DOC_SSH_PORT" "$DOC_SSH_HOST" >> ~/.ssh/known_hosts
-  fi
-
-  
+  echo "doc publication begins"  
   echo "=================== scp begins ================================="
   scp -o StrictHostKeyChecking=accept-new \
     -P "$DOC_SSH_PORT" -i ./github_deploy_key \
