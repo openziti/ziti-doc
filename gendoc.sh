@@ -41,6 +41,7 @@ ZITI_DOC_GIT_LOC="${script_root}/docusaurus/docs/_remotes"
 SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
 : ${ZITI_DOCUSAURUS:=yes}
 : ${SKIP_DOCUSAURUS_GEN:=no}
+: ${ZITI_GEN_ZIP:=no}
 
 echo "- processing opts"
 
