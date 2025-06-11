@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - landing.redo
   schedule:
     - cron: '0 2 * * *' # run at 2 AM UTC to keep companion microsites updated e.g. swift SDK docs
 
@@ -12,13 +13,19 @@ jobs:
     if: github.repository_owner == 'openziti' && contains(github.event.head_commit.message, 'ci skip') == false
     runs-on: ubuntu-latest
     env:
-      GIT_BRANCH: main
+      ACTIVE_ENV: ${{ github.ref_name == 'main' && 'main' || 'stg' }}
+      GIT_BRANCH: ${{ github.ref_name }}
       gh_ci_key: ${{ secrets.GH_CI_KEY }}
       ziti_ci_gpg_key: ${{ secrets.ZITI_CI_GPG_KEY }}
       ziti_ci_gpg_key_id: ${{ secrets.ZITI_CI_GPG_KEY_ID }}
+    environment: ${{ env.ACTIVE_ENV }}
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v4
+
+      - name: Show active environment
+        run: |
+          echo "Active environment: $ACTIVE_ENV"
 
       - name: Install Doxygen
         run: |
@@ -29,7 +36,7 @@ jobs:
       - name: Build & Publish Docusaurus Site
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: ./publish.sh
+        run: ./publish-2025.sh
 
   check-links:
     needs: publish-docs-from-container

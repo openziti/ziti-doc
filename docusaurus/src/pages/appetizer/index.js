@@ -10,6 +10,7 @@ import Expire from "../../components/Expire";
 import styles from "./styles.module.css";
 
 function App() {
+    const castUrl = useBaseUrl('/appetizer.cast');
     const {siteConfig} = useDocusaurusContext();
     const extraH3Style = {marginBottom:"0px"}
     const strongId = <Highlight>strong identity</Highlight>;
@@ -210,7 +211,7 @@ function App() {
                         <div style={{position: 'absolute', top: '5px', right: '5px', zIndex: 1, flexDirection: 'column'}}>
                             <button className={"button button--primary"} onClick={showLiveMessages}>{liveMsgText}</button>
                         </div>
-                        <AsciinemaWidget fit={"width"} src="/appetizer.cast" loop={true} autoplay={1} preload={true} />
+                        <AsciinemaWidget fit={"width"} src={castUrl} loop={true} autoplay={1} preload={true} />
                     </div>
                 </div>
                 <hr/>
