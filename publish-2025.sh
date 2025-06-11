@@ -60,18 +60,28 @@ publish_to_openziti_github_io() {
 }
 
 publish_to_nfio() {
+  echo "doc publication begins"
   cat "$HOME/.ssh/known_hosts"
+  
+  echo "===================================================="
+  echo "Host SSH key fingerprint for DOC_SSH_HOST"
+  ssh-keyscan -p "$DOC_SSH_PORT" "$DOC_SSH_HOST" | ssh-keygen -lf /dev/stdin
+  echo "===================================================="
   
   if ! ssh-keygen -F "$DOC_SSH_HOST" > /dev/null; then
     echo "using ssh-keyscan to add DOC_SSH_HOST to known hosts"
     ssh-keyscan "$DOC_SSH_HOST" >> ~/.ssh/known_hosts
   fi
+  
+  echo "=================== scp begins ================================="
   scp -P "$DOC_SSH_PORT" -i ./github_deploy_key \
     docs-openziti.zip "$DOC_SSH_USER@$DOC_SSH_HOST:/tmp"
+  echo "=================== ssh commands ================================="
   ssh -p "$DOC_SSH_PORT" -i ./github_deploy_key "$DOC_SSH_USER@$DOC_SSH_HOST" \
     rm -r "${DOC_SSH_TARGET_DIR}/openziti"
   ssh -p "$DOC_SSH_PORT" -i ./github_deploy_key "$DOC_SSH_USER@$DOC_SSH_HOST" \
     unzip -oq /tmp/docs-openziti.zip -d "${DOC_SSH_TARGET_DIR}/openziti"
+  echo "===================================================="
   echo "doc published"
 }
 
