@@ -9,6 +9,18 @@ on:
   issue_comment:
     types: [created, edited]
 jobs:
+  extract-url:
+    runs-on: ubuntu-latest
+    outputs:
+      URL_TO_CHECK: ${{ steps.extract.outputs.URL_TO_CHECK }}
+    steps:
+      - name: Extract Preview URL
+        id: extract
+        run: |
+          url=$(grep -oP '\[Visit Preview\]\(\K[^)]+' <<< "$COMMENT_BODY" || true)
+          echo "::set-output name=URL_TO_CHECK::${url:-https://openziti.io}"
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
   broken-link-checker:
     if: >
       ${{
@@ -23,18 +35,17 @@ jobs:
           )
         )
       }}
+    needs: extract-url
     runs-on: ubuntu-latest
+    env:
+      URL_TO_CHECK: ${{ needs.extract-url.outputs.URL_TO_CHECK }}
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v4
 
-      - name: Extract Preview URL
-        id: extract
+      - name: Echo URL
         run: |
-          url=$(grep -oP '\[Visit Preview\]\(\K[^)]+' <<< "$COMMENT_BODY" || true)
-          echo "URL_TO_CHECK=${url:-https://openziti.io}" >> "$GITHUB_OUTPUT"
-        env:
-          COMMENT_BODY: ${{ github.event.comment.body }}
+          echo "URL_TO_CHECK is: $URL_TO_CHECK"
 
       - name: Crawl for Broken Links
         run: ./check-links/crawl-for-broken-links.sh "$URL_TO_CHECK" \
@@ -74,22 +85,29 @@ jobs:
           )
         )
       }}
+    needs: extract-url
     runs-on: ubuntu-latest
+    env:
+      URL_TO_CHECK: ${{ needs.extract-url.outputs.URL_TO_CHECK }}
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v4
+        
+      - name: Echo URL
+        run: |
+          echo "URL_TO_CHECK is: $URL_TO_CHECK"
+          
       - name: Check popular links to new docs site
-        run: ./check-links.sh https://openziti.io ./popular-docs-links.txt
+        run: ./check-links.sh $URL_TO_CHECK ./popular-docs-links.txt
         working-directory: ./check-links/
-      - name: Check popular links to old docs site
-        run: ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
-        working-directory: ./check-links/
+        
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
         uses: netfoundry/close-matching-issues@v4
         with:
           query: 'is:open label:bug in:title "Popular Links Alarm"'
           token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Raise an Alarm Issue if Links are Broken
         if: ${{ failure() }}
         uses: JasonEtco/create-an-issue@v2.9.1
