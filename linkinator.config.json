@@ -41,10 +41,17 @@
     "dex.doc.demo.openziti.org.*",
     "cognito-idp.us-east-2.amazonaws.com.*",
     ".*23f45e36-2ae6-4434-b116-25c66c27168d.*",
-    "blog.openziti.io/",
+    ".*blog.openziti.io.*",
+    ".*youtube.com.*",
+    ".*x.com.*",
+    ".*reddit.com.*",
+    ".*discourse.*",
+    ".*netfoundry.io.*",
     "auth0.com/docs/quickstart/spa/vanillajs/interactive",
     "openziti.io/assets/js/.*",
-    "http://172.16.240.129"
+    "http://172.16.240.129",
+    ".*new-project-template.*",
+    ".*landing.openziti.io.*"
   ],
   "markdown": false,
   "retry": true,
@@ -52,6 +59,6 @@
   "retryErrors": true,
   "retryErrorsCount": 3,
   "retryErrorsJitter": 10,
-  "timeout": "2000",
-  "verbosity": "info"
+  "timeout": "10000",
+  "verbosity": "DEBUG"
 }
