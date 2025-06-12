@@ -5,7 +5,7 @@
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 
 const { themes: prismThemes } = require('prism-react-renderer');
-const baseUrlConst = '/openziti/';
+const baseUrlConst = '/';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
