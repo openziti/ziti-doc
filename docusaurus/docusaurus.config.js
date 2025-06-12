@@ -5,13 +5,14 @@
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 
 const { themes: prismThemes } = require('prism-react-renderer');
+const baseUrlConst = '/openziti/';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'OpenZiti',
   tagline: 'Replacing Infrastructure With Software',
   url: 'https://openziti.io/',
-  baseUrl: '/',
+  baseUrl: baseUrlConst,
   trailingSlash: undefined,
   // onBrokenLinks: 'warn',
   onBrokenLinks: 'throw',
@@ -376,19 +377,19 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/yt.svg"/>YouTube</span></a>'
+                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/yt.svg"/>YouTube</span></a>`
               },
               {
                 type: 'html',
-                value: '<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/twit.svg"/>X (Twitter)</span></a>'
+                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/twit.svg"/>X (Twitter)</span></a>`
               },
               {
                 type: 'html',
-                value: '<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/reddit-logo.png"/>Reddit</span></a>'
+                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/${baseUrlConst}img/reddit-logo.png"/>Reddit</span></a>`
               },
               {
                 type: 'html',
-                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/ziggy.png"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>'
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/ziggy.png"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
               },
               {
                 type: 'html',
@@ -396,11 +397,11 @@ const config = {
               },
               {
                 type: 'html',
-                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/blog-icon.png"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>'
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/blog-icon.png"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
               },
               {
                 type: 'html',
-                value: '<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>'
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
               },
             ]
           },

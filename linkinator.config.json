@@ -1,5 +1,5 @@
 {
-  "concurrency": 1,
+  "concurrency": 10,
   "skip": [
     "^(?!http)",
     "recomedicales.fr",
@@ -52,6 +52,6 @@
   "retryErrors": true,
   "retryErrorsCount": 3,
   "retryErrorsJitter": 10,
-  "timeout": "5000",
-  "verbosity": "debug"
+  "timeout": "2000",
+  "verbosity": "info"
 }
