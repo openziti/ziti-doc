@@ -47,7 +47,7 @@
   margin-bottom: var(--space-sm);
 }
 .aaSuperpowerIcon {
-  background: rgba(76, 45, 179, 0.1);
+  background: var(--zitiSuperpowerBg);
   border-radius: 50%;  /* Ensures the icon is circular */
   color: var(--aaPrimary);
   display: inline-flex;

@@ -14,7 +14,7 @@
   --aaBgCard: #f7f8fc;
   --aaBgLight: #f7f8fc;
   --aaTextLight: #ffffff;
-  --aaTextDark: #121219;
+  --aaTextDark: var(--ifm-font-color-base);
   --aaBorder: #2a2a38;
   --aaBorderLight: #e0e1e6;
   --aaShadowSm: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -34,6 +34,8 @@
   --btnPrimary: #00569a;
   --getStartedStartColor: #3498dbFF;
   --getStartedEndColor: #2c3e50FF;
+  
+  --zitiSuperpowerBg: rgba(76, 45, 179, 0.1);
   
   a:hover, a:focus, p {
     /*color: var(--ifm-background-color);*/
@@ -379,7 +381,7 @@
   }
 
   .aaSuperpowerIcon {
-    background: rgba(76, 45, 179, 0.1);
+    background: var(--zitiSuperpowerBg);
     border-radius: 50%; /* Ensures the icon is circular */
     color: var(--aaPrimary);
     display: inline-flex;
@@ -657,5 +659,12 @@
       min-width: 30%;
       padding-top: var(--space-lg);
     }
+  }
+}
+
+
+html[data-theme="dark"] {
+  .landing {
+    --zitiSuperpowerBg: rgba(255, 255, 255, 0.2);
   }
 }
