@@ -59,39 +59,48 @@ publish_to_openziti_github_io() {
   git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
 }
 
-publish_to_nfio() {
-  echo "doc publication begins"  
-  echo "=================== scp begins ================================="
+publish_docs() {
+  local HOST=$1 PORT=$2 USER=$3 TARGET_DIR=$4
+  echo "doc publication begins"
+  echo "=== scp begins ==="
   scp -o StrictHostKeyChecking=accept-new \
-    -P "$DOC_SSH_PORT" -i ./github_deploy_key \
-    docs-openziti.zip "$DOC_SSH_USER@$DOC_SSH_HOST:/tmp"
-  echo "=================== ssh commands ================================="
-  ssh -p "$DOC_SSH_PORT" -i ./github_deploy_key "$DOC_SSH_USER@$DOC_SSH_HOST" \
-    rm -r "${DOC_SSH_TARGET_DIR}/openziti"
-  ssh -p "$DOC_SSH_PORT" -i ./github_deploy_key "$DOC_SSH_USER@$DOC_SSH_HOST" \
-    unzip -oq /tmp/docs-openziti.zip -d "${DOC_SSH_TARGET_DIR}/openziti"
-  echo "===================================================="
+    -P "$PORT" -i ./github_deploy_key \
+    docs-openziti.zip \
+    "$USER@$HOST:/tmp" \
+    2>&1
+  echo "=== ssh commands ==="
+  for CMD in \
+    "rm -rf ${TARGET_DIR}/openziti" \
+    "unzip -oq /tmp/docs-openziti.zip -d ${TARGET_DIR}/openziti"
+  do
+    ssh -p "$PORT" -i ./github_deploy_key \
+      "$USER@$HOST" "$CMD" 2>&1
+  done
+  echo "=== done ==="
   echo "doc published"
 }
 
 pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "publish script located in: $pub_script_root"
-  
-target_branch="landing.redo"
+
+fetch_ziti_ci
+configure_git $target_branch
+
+setup_ssh "."
+echo "$(date)" > docusaurus/static/build-time.txt
+./gendoc.sh -z
+
+target_branch="main"
 if [ "${GIT_BRANCH:-}" == "${target_branch}" ]; then
-  echo "========= on ${target_branch} branch - publish can proceed"
-  fetch_ziti_ci
-  configure_git $target_branch
-  
-  setup_ssh "."
-  echo "$(date)" > docusaurus/static/build-time.txt
-  ./gendoc.sh -z
-#  clone_publish_repo
-#  finalize_and_push
-  publish_to_nfio
+  echo "========= on ${target_branch} branch - publishing to both main and staging"
+  publish_docs "$STG_DOC_SSH_HOST" "$STG_DOC_SSH_PORT" \
+               "$STG_DOC_SSH_USER" "$STG_DOC_SSH_TARGET_DIR"
+  publish_docs "$PROD_DOC_SSH_HOST" "$PROD_DOC_SSH_PORT" \
+               "$PROD_DOC_SSH_USER" "$PROD_DOC_SSH_TARGET_DIR"
 else
-  echo "========= cannot publish from branch that is not ${target_branch} : ${GIT_BRANCH}"
-  echo "========= publish considered successful though no op"
+  echo "========= on ${target_branch} branch - publishing to staging only"
+  publish_docs "$STG_DOC_SSH_HOST" "$STG_DOC_SSH_PORT" \
+               "$STG_DOC_SSH_USER" "$STG_DOC_SSH_TARGET_DIR"
 fi
 
 rm ./github_deploy_key
