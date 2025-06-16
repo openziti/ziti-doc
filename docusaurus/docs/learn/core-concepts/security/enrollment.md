@@ -116,8 +116,8 @@ Alternatively, enrollments for an identity can be reviewed at `/edge/management/
 ### OTT CA Enrollment
 
 OTT CA Enrollment requires that the enrolling client also has an existing client certificate signed by a 
-[3rd Party CA](./authentication/third-party-cas). When creating an identity the `id` of the target
-[3rd Party CA](./authentication/third-party-cas) is specified.
+[3rd Party CA](./authentication/10-third-party-cas.md). When creating an identity the `id` of the target
+[3rd Party CA](./authentication/10-third-party-cas.md) is specified.
 
 #### Create
 
@@ -142,15 +142,15 @@ An enrollment JWT can be retrieved in the same manner as [OTT Enrollment](#ott-e
 
 ### Auto CA Enrollment
 
-Auto CA enrollment allows a [3rd Party CA](./authentication/third-party-cas) to have clients enroll with a
+Auto CA enrollment allows a [3rd Party CA](./authentication/10-third-party-cas.md) to have clients enroll with a
 Ziti network without first creating an identity or distributing a JWT enrollment token. Create a
-[3rd Party CA](./authentication/third-party-cas) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
+[3rd Party CA](./authentication/10-third-party-cas.md) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
 
-The name of enrolling clients is controlled by the `identityNameFormat` of the [3rd Party CA](./authentication/third-party-cas).
+The name of enrolling clients is controlled by the `identityNameFormat` of the [3rd Party CA](./authentication/10-third-party-cas.md).
 The format support a number of replacement strings:
 
-- `[caName]` - the Ziti `name` of the [3rd Party CA](./authentication/third-party-cas) that validates the enrolling certificate
-- `[caId]` - the Ziti `id` of the [3rd Party CA](./authentication/third-party-cas) that validates the enrolling certificate
+- `[caName]` - the Ziti `name` of the [3rd Party CA](./authentication/10-third-party-cas.md) that validates the enrolling certificate
+- `[caId]` - the Ziti `id` of the [3rd Party CA](./authentication/10-third-party-cas.md) that validates the enrolling certificate
 - `[commonName]` - the common name of the enrolling certificate
 - `[requestedName]` - clients can submit a requested name during enrollment
 - `[identityId]` - the `id` of the created identity
@@ -162,5 +162,5 @@ Identity names are unique and if a collision occurs, incrementing numbers are ap
 ### Client Re-Enrollment
 
 Clients may request to extend enrollments that generated x509 certificates if the client certificate was issued by
-Ziti. If the client's certificate was issued by a [3rd Party CA](./authentication/third-party-cas), the
+Ziti. If the client's certificate was issued by a [3rd Party CA](./authentication/10-third-party-cas.md), the
 client certificate renewal must be handled outside of Ziti.
