@@ -71,6 +71,7 @@ publish_docs() {
   echo "=== ssh commands ==="
   for CMD in \
     "rm -rf ${TARGET_DIR}/docs/openziti" \
+    "mkdir -p ${TARGET_DIR}/docs/openziti" \
     "unzip -oq /tmp/docs-openziti.zip -d ${TARGET_DIR}/docs/openziti"
   do
     ssh -p "$PORT" -i ./github_deploy_key \
