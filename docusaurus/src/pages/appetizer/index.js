@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef} from "react";
 import AsciinemaWidget from '../../components/AsciinemaWidget';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import OpenZitiHorizontalSection from "../../components/OpenZitiHorizontalSection";
-import OpenZitiLayout from "../../components/OpenZitiLayout";
-import {H1, H2, H3, Highlight} from "../index.js";
+import {OpenZitiLayout, H1, H2, H3, Highlight} from "../../components/OpenZitiLayout";
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import CodeBlock from '@theme/CodeBlock'
 import SlideShow from "../../components/SlideShow";
@@ -11,6 +10,7 @@ import Expire from "../../components/Expire";
 import styles from "./styles.module.css";
 
 function App() {
+    const castUrl = useBaseUrl('/appetizer.cast');
     const {siteConfig} = useDocusaurusContext();
     const extraH3Style = {marginBottom:"0px"}
     const strongId = <Highlight>strong identity</Highlight>;
@@ -29,7 +29,7 @@ function App() {
         {
             title: <H3 style={extraH3Style}>Step 2 - Reflect Server Connects to the OpenZiti Network</H3>,
             text: (<><p>Now the&nbsp;<code>reflect server</code>&nbsp;is ready to connect to the overlay network. The OpenZiti SDK
-                locates any/all <a href="/docs/reference/glossary">OpenZiti Routers</a> it's authorized to connect to
+                locates any/all <a href={useBaseUrl("/docs/reference/glossary")}>OpenZiti Routers</a> it's authorized to connect to
                 and using the {strongId} created in step 1, it attaches to the overlay network. Following the principle
                 of <Highlight>least privileged access</Highlight>, the server must be authorized to "bind" the reflect
                 service and other {strongIds} must be authorized "dial" the service. Other {strongIds} that are not
@@ -56,7 +56,7 @@ function App() {
             title: <H3 style={extraH3Style}>Step 4 - Reflect Client Connects to the OpenZiti Network</H3>,
             text: (<><p>Your&nbsp;<code>reflect client</code>&nbsp;now has it's own {strongId} and can connect to the
                 OpenZiti overlay! Both reflect client and reflect server established connections to the
-                <a href="/docs/reference/glossary">OpenZiti Routers</a> deployed on
+                <a href={useBaseUrl("/docs/reference/glossary")}>OpenZiti Routers</a> deployed on
                 the public, open internet. By making outbound connections to edge routers in this way,
                 absolutely <Highlight>no inbound firewall holes</Highlight> are needed. The reflect server also
                 has <Highlight>no listening ports</Highlight> on the IP-based, underlay network. It only listens for
@@ -177,7 +177,7 @@ function App() {
     };
 
     return (
-        <OpenZitiLayout>
+        <OpenZitiLayout className={styles.appetizer}>
             <div className={styles.liveMsgContainerContainer} style={{ minHeight: "100px", maxHeight: "450px" }}>
                 {liveMessageVisible && (
                     <div className={`${styles.liveMsgContainer} ${styles.bgImg1}`}>
@@ -188,7 +188,7 @@ function App() {
                     </div>
                 )}
             </div>
-            <OpenZitiHorizontalSection wrapperClassName={styles.ozhs}>
+            <OpenZitiHorizontalSection className={styles.ozhs}>
                 <div className={styles.appetizerTitle}>
                     <img
                         src="https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png"
@@ -211,7 +211,7 @@ function App() {
                         <div style={{position: 'absolute', top: '5px', right: '5px', zIndex: 1, flexDirection: 'column'}}>
                             <button className={"button button--primary"} onClick={showLiveMessages}>{liveMsgText}</button>
                         </div>
-                        <AsciinemaWidget fit={"width"} src="/appetizer.cast" loop={true} autoplay={1} preload={true} />
+                        <AsciinemaWidget fit={"width"} src={castUrl} loop={true} autoplay={1} preload={true} />
                     </div>
                 </div>
                 <hr/>

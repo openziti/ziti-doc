@@ -22,3 +22,5 @@ yarn-error.log*
 /docs/_remotes
 ziti
 static/docs/reference/developer/sdk
+
+*.bkp

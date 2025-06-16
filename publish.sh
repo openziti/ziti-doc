@@ -16,7 +16,7 @@ cd $pub_script_root
 if [ "${GIT_BRANCH:-}" == "main" ]; then
   echo on main branch - publish can proceed
 
-  ./gendoc.sh -s # clone and build companion microsites and build Docusaurus
+  ./gendoc.sh -sz # clone and build companion microsites and build Docusaurus. also build a zip file of artifacts
 
   wget https://github.com/openziti/ziti-ci/releases/latest/download/ziti-ci  # fetch latest release
   install ./ziti-ci /usr/local/bin/  # set executable bit and copy to executable search path

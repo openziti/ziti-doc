@@ -10,7 +10,7 @@ export default function OpenZitiLayout(props) {
   const {
     children,
     noFooter,
-    wrapperClassName,
+    className,
     // Not really layout-related, but kept for convenience/retro-compatibility
     title,
     description,

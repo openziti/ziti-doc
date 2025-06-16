@@ -19,6 +19,8 @@ set -euo pipefail
 
 TOTAL=0
 typeset -a SUCCESSES=() FAILURES=()
+START_TIME=$(date +%s)
+echo "Starting the process at $(date)..."
 while read; do
     (( ++TOTAL ))
     if HTTP_CODE=$(curl -sfLw '%{http_code}' -o/dev/null "${1}${REPLY}" 2>/dev/null); then
@@ -26,8 +28,12 @@ while read; do
     else
         FAILURES+=("${HTTP_CODE} ${REPLY}")
     fi
-    sleep 0.1 #no more than 10/s
+    sleep 0.25 #no more than 4/s
 done < "${2}"
+
+END_TIME=$(date +%s)
+ELAPSED_TIME=$((END_TIME - START_TIME))
+echo "Process completed at $(date). Total entries: ${TOTAL}. Elapsed time: ${ELAPSED_TIME} seconds."
 
 if ! (( ${#FAILURES[*]} )); then
     echo "INFO: all ${TOTAL} links succeeded!"
