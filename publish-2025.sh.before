@@ -1,0 +1,82 @@
+#!/bin/bash
+set -eu
+
+init_ssh() {
+  mkdir -p ~/.ssh
+  echo "running ssh-keyscan to add github.com to known hosts"
+  ssh-keyscan github.com >> ~/.ssh/known_hosts
+  chmod -R u=rwX,go-rwx ~/.ssh/
+}
+
+locate_script() {
+  pub_script_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+  echo "publish script located in: $pub_script_root"
+  cd "$pub_script_root"
+}
+
+ensure_main_branch() {
+  if [ "${GIT_BRANCH:-}" != "main" ]; then
+    echo "========= cannot publish from branch that is not main : ${GIT_BRANCH}"
+    echo "========= publish considered successful though no op"
+    exit 0
+  fi
+  echo "on main branch - publish can proceed"
+}
+
+setup_ci_tools() {
+  ./gendoc.sh -sz
+  wget https://github.com/openziti/ziti-ci/releases/latest/download/ziti-ci
+  install ./ziti-ci /usr/local/bin/
+}
+
+configure_git() {
+  echo "configuring git..."
+  ziti-ci configure-git
+  [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]] && ./changeToSsh.sh
+  git checkout main
+}
+
+clone_publish_repo() {
+  echo "cloning actual github pages now to push docs into"
+  git clone https://github.com/openziti/openziti.github.io.git
+  rm -rf ./openziti.github.io/*
+  cp -rT ./docusaurus/build/ ./openziti.github.io/
+  cd ./openziti.github.io/
+  echo "openziti.io" > ./CNAME
+}
+
+publish_docs() {
+  git add -A
+  [[ "$(git config --get remote.origin.url | cut -b1-3)" == "htt" ]] && ../changeToSsh.sh
+
+  GH_KEY="${pub_script_root}/github_deploy_key"
+  if [ ! -f "$GH_KEY" ]; then
+    echo "$GH_KEY DID NOT exist???"
+  else
+    echo "git push should succeed: $GH_KEY exists..."
+  fi
+
+  if [[ ${EUID} -eq 0 ]]; then
+    mkdir -p /root/.ssh
+    cp "${HOME}/.ssh/known_hosts" /root/.ssh/known_hosts
+    chown -R root:root /root/.ssh/
+    chmod -R u=rwX,go-rwx /root/.ssh/
+  fi
+
+  echo __________________________________________________________________________
+  git status
+  git config user.name ziti-ci
+  git config user.email ziti-ci@netfoundry.io
+  git config core.sshCommand "ssh -i ${GH_KEY}"
+  git config --get remote.origin.url
+  git diff-index --quiet HEAD || git commit -m "[ci skip] publish docs from CI" && git push
+  echo __________________________________________________________________________
+}
+
+init_ssh
+locate_script
+ensure_main_branch
+setup_ci_tools
+configure_git
+clone_publish_repo
+publish_docs
