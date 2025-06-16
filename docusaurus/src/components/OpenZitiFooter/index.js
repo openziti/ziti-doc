@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import OpenZitiHorizontalSection from "../../components/OpenZitiHorizontalSection";
 import {useKeyboardNavigation} from '@docusaurus/theme-common/internal';
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from './styles.module.css';
 
 export default function OpenZitiFooter(props) {
@@ -47,9 +48,9 @@ export default function OpenZitiFooter(props) {
                         <div className={styles.footerColumn}>
                             <h3>Documentation</h3>
                             <ul className={styles.footerLinks}>
-                                <li><a href="/docs/learn/quickstarts/services/ztha">Getting Started</a></li>
-                                <li><a href="/docs/reference/developer/api/">API Reference</a></li>
-                                <li><a href="/docs/reference/developer/sdk/">SDK Integration</a></li>
+                                <li><a href={useBaseUrl("/docs/learn/quickstarts/services/ztha")}>Getting Started</a></li>
+                                <li><a href={useBaseUrl("/docs/reference/developer/api/")}>API Reference</a></li>
+                                <li><a href={useBaseUrl("/docs/reference/developer/sdk/")}>SDK Integration</a></li>
                             </ul>
                         </div>
                         <div className={styles.footerColumn}>
@@ -57,7 +58,7 @@ export default function OpenZitiFooter(props) {
                             <ul className={styles.footerLinks}>
                                 <li><a href="https://github.com/openziti/ziti">GitHub</a></li>
                                 <li><a href="https://openziti.discourse.group/">Discourse Forum</a></li>
-                                <li><a href="/policies/CONTRIBUTING">Contributing</a></li>
+                                <li><a href={useBaseUrl("/policies/CONTRIBUTING")}>Contributing</a></li>
                             </ul>
                         </div>
                         <div className={styles.footerColumn}>

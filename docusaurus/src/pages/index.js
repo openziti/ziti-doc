@@ -25,7 +25,7 @@ function HeroSection({ className }) {
                         <p>Managing networks with static IPs, subnets, NAT, and firewalls is complex, fragile, and error-prone. As environments scale across cloud, hybrid, and mobile, traditional IP-based control falls apart. OpenZiti eliminates this headache by making identity—not IP—the core of your network. No more IP conflicts, no more guessing, just secure, zero-trust connectivity that works anywhere.</p>
                         <div className={styles.aaHeroButtons}>
                             <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/" className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry Cloud For Free</a>
-                            <a href="/docs/learn/quickstarts/network/hosted" className={styles.aaBtn}>Host OpenZiti Yourself</a>
+                            <a href={useBaseUrl("/docs/learn/quickstarts/network/hosted")} className={styles.aaBtn}>Host OpenZiti Yourself</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ function GetStartedSection ({className}) {
                                 Deploy and manage your own OpenZiti network with our comprehensive documentation and
                                 community support.
                             </p>
-                            <a href="/docs/learn/quickstarts/network/hosted" className={btns}>View Deployment Guide</a>
+                            <a href={useBaseUrl("/docs/learn/quickstarts/network/hosted")} className={btns}>View Deployment Guide</a>
                         </div>
                     </div>
                     <a href="https://openziti.discourse.group/" className={btns}>Join the Community</a>
