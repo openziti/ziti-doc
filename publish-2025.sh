@@ -83,6 +83,8 @@ publish_docs() {
 pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "publish script located in: $pub_script_root"
 
+target_branch="main"
+
 fetch_ziti_ci
 configure_git $target_branch
 
@@ -90,7 +92,6 @@ setup_ssh "."
 echo "$(date)" > docusaurus/static/build-time.txt
 ./gendoc.sh -z
 
-target_branch="main"
 if [ "${GIT_BRANCH:-}" == "${target_branch}" ]; then
   echo "========= on ${target_branch} branch - publishing to both main and staging"
   publish_docs "$STG_DOC_SSH_HOST" "$STG_DOC_SSH_PORT" \
