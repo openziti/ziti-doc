@@ -17,4 +17,4 @@ echo "Link to check: ${SERVER}"
 
 # see root checkout, linkinator.config.json for linkinator config
 CMD="npm install -g linkinator && linkinator \"${SERVER}\"; exit \$?"
-docker run --rm -t --name linkinator -v $PWD/linkinator.config.json:/linkinator.config.json node:22-alpine sh -c "$CMD"
+docker run --rm -t --name linkinator -v $PWD/linkinator.config.json:/linkinator.config.json node:22-slim bash -c "$CMD"

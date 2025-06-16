@@ -43,6 +43,12 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: ./publish-2025.sh ${{github.ref_name}}
 
+      - name: Build & Publish Docusaurus Sites (legacy)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./publish.sh
+
+
   check-links:
     if: github.ref_name == 'main'
     needs: publish-docs-from-container
