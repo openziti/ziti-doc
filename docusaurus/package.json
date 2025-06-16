@@ -22,7 +22,7 @@
     "@docusaurus/theme-mermaid": "^3.8.1",
     "@hotjar/browser": "^1.0.9",
     "@mdx-js/react": "^3.0.0",
-    "@types/react": "^19.1.6",
+    "@types/react": "^19.1.8",
     "asciinema-player": "^3.10.0",
     "clsx": "^2.0.0",
     "echarts": "^5.6.0",
