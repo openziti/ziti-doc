@@ -83,7 +83,9 @@ publish_docs() {
 pub_script_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "publish script located in: $pub_script_root"
 
-target_branch="main"
+target_branch="$1"
+
+echo "incoming branch named: $target_branch"
 
 fetch_ziti_ci
 configure_git $target_branch

@@ -37,7 +37,7 @@ jobs:
       - name: Build & Publish Docusaurus Site
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: ./publish-2025.sh
+        run: ./publish-2025.sh ${{github.ref_name}}
 
   check-links:
     if: github.ref_name == 'main'
