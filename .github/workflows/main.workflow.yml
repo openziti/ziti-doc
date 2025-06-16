@@ -40,6 +40,7 @@ jobs:
         run: ./publish-2025.sh
 
   check-links:
+    if: github.ref_name == 'main'
     needs: publish-docs-from-container
     name: Check for Broken Links
     uses: ./.github/workflows/check-links.yml
