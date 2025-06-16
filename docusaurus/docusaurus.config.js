@@ -385,7 +385,7 @@ const config = {
               },
               {
                 type: 'html',
-                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="/${baseUrlConst}img/reddit-logo.png"/>Reddit</span></a>`
+                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/reddit-logo.png"/>Reddit</span></a>`
               },
               {
                 type: 'html',
