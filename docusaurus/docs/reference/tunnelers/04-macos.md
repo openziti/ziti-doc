@@ -35,3 +35,5 @@ The Enrollment Status will show **Enrolled** once it's completed. Once the ident
 ## Troubleshooting
 
 Logs are available from the menubar icon in `Logs > Packet Tunnel`. Alternatively, you can check the file in `~/Library/Group\ Containers/MN5S649TXM.ZitiPacketTunnel.group/logs/appex.log` for any errors.
+
+Crash reports are available in macOS Console.app under `Crash Reports > PacketTunnelProvider`. The associated files are also available in `~/Library/Logs/DiagnosticReports/PacketTunnelProvider*.crash`.
