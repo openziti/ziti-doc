@@ -31,3 +31,7 @@ In the left side list, the added jwt will be displayed. Finish the enrollment pr
 The Enrollment Status will show **Enrolled** once it's completed. Once the identity has been enrolled, the **Ziti Desktop Edge for Mac** UI will display the services authorized for the identity. 
 
 ![image](/img/clients/mac-install7.png) 
+
+## Troubleshooting
+
+Logs are available from the menubar icon in `Logs > Packet Tunnel`. Alternatively, you can check the file in `~/Library/Group\ Containers/MN5S649TXM.ZitiPacketTunnel.group/logs/appex.log` for any errors.
