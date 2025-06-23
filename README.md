@@ -52,7 +52,7 @@ Docusaurus plugins are distributed as NodeJS packages. This project uses `yarn`,
 
 ```text
 cd ./docusaurus
-yarn add @whaterver
+yarn add @whatever
 ```
 
 This will update `./docusaurus/package.json` and `./docusaurus/yarn.lock`. Test and commit these changes.
