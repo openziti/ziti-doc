@@ -52,7 +52,7 @@ Docusaurus plugins are distributed as NodeJS packages. This project uses `yarn`,
 
 ```text
 cd ./docusaurus
-yarn add @hotjar/browser
+yarn add @whaterver
 ```
 
 This will update `./docusaurus/package.json` and `./docusaurus/yarn.lock`. Test and commit these changes.
@@ -72,7 +72,7 @@ This will update `./docusaurus/package.json` and `./docusaurus/yarn.lock`. Test 
 
 Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this site.
 
-* Docusaurus v2's classic preset theme provides an integration with Algolia DocSearch v3 as a built-in plugin. The public search API key and application ID are properties in `docusaurus.config.js`. That plugin provides [the site's `/search` URL](/search) and a search widget in the main navigation ribbon that's visible on all pages. The Javascript running in these elements returns search results from the DocSearch API.
+* Docusaurus v2's classic preset theme provides an integration with Algolia DocSearch v3 as a built-in plugin. The public search API key and application ID are properties in `docusaurus.config.ts`. That plugin provides [the site's `/search` URL](/search) and a search widget in the main navigation ribbon that's visible on all pages. The Javascript running in these elements returns search results from the DocSearch API.
 
 * The DocSearch API fetches records from an Algolia index that is populated by [an Algolia crawler](https://crawler.algolia.com/). Search results may be tuned by adjusting the crawler config. The crawler is specifically configured for the Docusaurus theme. If the theme changes structurally then it will be necessary to adjust the crawler config to suit. Changes to the site will not be reflected in the search results if the crawler config does not match the theme. The current config is based on [this configuration template for Docusaurus v2](https://docsearch.algolia.com/docs/templates/#docusaurus-v2-template).
 

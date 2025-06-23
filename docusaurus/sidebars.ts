@@ -1,5 +1,5 @@
 // sidebars.js
-const { baseUrl } = require('./docusaurus.config.js');
+const { baseUrl } = require('./docusaurus.config.ts');
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {

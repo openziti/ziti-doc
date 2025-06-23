@@ -93,7 +93,7 @@ configure_git $target_branch
 
 setup_ssh "."
 echo "$(date)" > docusaurus/static/build-time.txt
-./gendoc.sh -z
+./gendoc.sh -zs
 
 if [ "${GIT_BRANCH:-}" == "${target_branch}" ]; then
   echo "========= on ${target_branch} branch - publishing to both main and staging"

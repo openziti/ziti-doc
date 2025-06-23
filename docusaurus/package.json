@@ -20,7 +20,6 @@
     "@docusaurus/plugin-client-redirects": "^3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
     "@docusaurus/theme-mermaid": "^3.8.1",
-    "@hotjar/browser": "^1.0.9",
     "@mdx-js/react": "^3.0.0",
     "@types/react": "^19.1.6",
     "asciinema-player": "^3.10.0",

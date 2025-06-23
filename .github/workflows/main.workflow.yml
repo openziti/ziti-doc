@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - '*-stg'     # any branch that ends with -stg
   schedule:
     - cron: '0 2 * * *' # run at 2 AM UTC to keep companion microsites updated e.g. swift SDK docs
 
