@@ -1,16 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
-import OpenZitiHorizontalSection from "../../components/OpenZitiHorizontalSection";
-import {useKeyboardNavigation} from '@docusaurus/theme-common/internal';
+import OpenZitiHorizontalSection from "../OpenZitiHorizontalSection";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from './styles.module.css';
 
-export default function OpenZitiFooter(props) {
+export default function OpenZitiFooter(props: { className: any; style: any; }) {
     const {
         className,
         style,
     } = props;
-    useKeyboardNavigation();
     
     return (
         <footer className={clsx(className, styles.ozFooter)} style={style}>

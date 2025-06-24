@@ -1,6 +1,3 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
-
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 
 import {themes as prismThemes} from 'prism-react-renderer';
@@ -9,7 +6,7 @@ import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
 const baseUrlConst = '/';
-const hotjarId = process.env.HOTJAR_ID || "6443327";
+const hotjarId = process.env.ZITI_HOTJAR_APPID || "6443327"; //default is localdev hotjarId
 
 const config: Config = {
   title: 'OpenZiti',
@@ -17,7 +14,6 @@ const config: Config = {
   url: 'https://openziti.io/',
   baseUrl: baseUrlConst,
   trailingSlash: undefined,
-  // onBrokenLinks: 'warn',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
