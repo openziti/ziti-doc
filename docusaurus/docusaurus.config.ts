@@ -1,20 +1,21 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
-
-// This docusaurus.config.js is used by GitHub Pages to build the site with baseUrl: '/docusaurus/'
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 
-const { themes: prismThemes } = require('prism-react-renderer');
-const baseUrlConst = '/';
+import {themes as prismThemes} from 'prism-react-renderer';
+import {Config} from "@docusaurus/types";
+import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
+import pluginHotjar from './src/plugins/hotjar';
+import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
 
-/** @type {import('@docusaurus/types').Config} */
-const config = {
+
+const baseUrlConst = '/';
+const hotjarId = process.env.ZITI_HOTJAR_APPID || "6443327"; //default localdev hotjarId
+
+const config: Config = {
   title: 'OpenZiti',
   tagline: 'Replacing Infrastructure With Software',
   url: 'https://openziti.io/',
   baseUrl: baseUrlConst,
   trailingSlash: undefined,
-  // onBrokenLinks: 'warn',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
@@ -39,13 +40,14 @@ const config = {
   themes: ['@docusaurus/theme-mermaid'],
   
   plugins: [
+    [pluginHotjar, {}],
     [
       '@docusaurus/plugin-content-docs',
       {
         id: 'docs-policies',
         path: 'docs-policies',
         routeBasePath: 'policies',
-        sidebarPath: require.resolve('./sidebar-policies.js'),
+        sidebarPath: require.resolve('./sidebar-policies.ts'),
         beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives, ],
         remarkPlugins: [
           require('./src/plugins/remark/remark-yaml-table'),
@@ -241,16 +243,15 @@ const config = {
             from: ['/docs/identity-providers-for-browZer']
           }
         ],
-      },
+      } satisfies ClientRedirectsOptions,
     ],
   ],
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./sidebars.ts'),
           exclude: [
             '**/_*.{js,jsx,ts,tsx,md,mdx}',
             '**/*.test.{js,jsx,ts,tsx}',
@@ -272,7 +273,7 @@ const config = {
         googleTagManager: {
           containerId: 'GTM-5SF399H3',
         },
-      }),
+      } satisfies Options),
     ],
     // Redocusaurus config
     [
@@ -298,8 +299,8 @@ const config = {
     ],
   ],
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      hotjar: { applicationId: hotjarId },
       metadata: [
         {name: 'description', content: 'open source zero trust'},
         {name: 'robots', content: 'index, follow'},
@@ -377,19 +378,19 @@ const config = {
               },
               {
                 type: 'html',
-                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/yt.svg"/>YouTube</span></a>`
+                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/yt.svg" alt="YouTube logo"/>YouTube</span></a>`
               },
               {
                 type: 'html',
-                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/twit.svg"/>X (Twitter)</span></a>`
+                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/twit.svg" alt="X/Twitter logo"/>X (Twitter)</span></a>`
               },
               {
                 type: 'html',
-                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/reddit-logo.png"/>Reddit</span></a>`
+                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/reddit-logo.png" alt="Reddit logo"/>Reddit</span></a>`
               },
               {
                 type: 'html',
-                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/ziggy.png"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/ziggy.png" alt="X/Twitter Ziggy logo"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
               },
               {
                 type: 'html',
@@ -397,11 +398,11 @@ const config = {
               },
               {
                 type: 'html',
-                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/blog-icon.png"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/blog-icon.png" alt="OpenZiti blog logo"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
               },
               {
                 type: 'html',
-                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/oz-test-kitchen.png"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/oz-test-kitchen.png" alt="OpenZiti Test Kitchen logo"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
               },
             ]
           },
@@ -444,13 +445,7 @@ const config = {
         // see https://github.com/Redocly/redoc/issues/2511
         additionalLanguages: ['python', 'java', 'csharp', 'go', 'bash', 'scala'],
       },
-    },
+    } satisfies ThemeConfig,
 };
 
 module.exports = config;
-
-{
-  plugins: [
-    'docusaurus-plugin-hotjar',
-  ]
-}

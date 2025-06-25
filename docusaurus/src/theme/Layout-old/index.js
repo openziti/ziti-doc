@@ -2,11 +2,9 @@ import React from 'react';
 import clsx from 'clsx';
 import ErrorBoundary from '@docusaurus/ErrorBoundary';
 import {PageMetadata, ThemeClassNames} from '@docusaurus/theme-common';
-import {useKeyboardNavigation} from '@docusaurus/theme-common/internal';
 import SkipToContent from '@theme/SkipToContent';
 import AnnouncementBar from '@theme/AnnouncementBar';
 import Navbar from '@theme/Navbar';
-import Footer from '@theme/Footer';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
@@ -16,10 +14,6 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import $ from 'jquery';
 import OpenZitiFooter from "../../components/OpenZitiFooter";
 
-import Hotjar from '@hotjar/browser';
-const siteId = 3576473;
-const hotjarVersion = 6;
-Hotjar.init(siteId, hotjarVersion);
 export default function Layout(props) {
   const {
     children,
@@ -30,7 +24,6 @@ export default function Layout(props) {
     title,
     description,
   } = props;
-  useKeyboardNavigation();
 
   if (ExecutionEnvironment.canUseDOM && ExecutionEnvironment.canUseEventListeners) {
 

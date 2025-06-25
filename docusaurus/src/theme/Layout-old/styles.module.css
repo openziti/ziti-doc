@@ -22,7 +22,19 @@ body {
   flex-grow: 1;
 }
 .mainWrapper {
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
+  
   .layoutFooter {
     width: 100%;
   }
+}
+
+
+
+
+.docsWrapper {
+  background: #0a8ca8;
 }
