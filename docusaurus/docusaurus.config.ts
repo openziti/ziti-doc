@@ -5,8 +5,10 @@ import {Config} from "@docusaurus/types";
 import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
+
+
 const baseUrlConst = '/';
-const hotjarId = process.env.ZITI_HOTJAR_APPID || "6443327"; //default is localdev hotjarId
+const hotjarId = process.env.ZITI_HOTJAR_APPID || "6443327"; //default localdev hotjarId
 
 const config: Config = {
   title: 'OpenZiti',

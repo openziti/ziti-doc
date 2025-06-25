@@ -4,7 +4,7 @@ import OpenZitiHorizontalSection from "../OpenZitiHorizontalSection";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from './styles.module.css';
 
-export default function OpenZitiFooter(props: { className: any; style: any; }) {
+export default function OpenZitiFooter(props: { className?: any; style?: any; }) {
     const {
         className,
         style,

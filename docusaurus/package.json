@@ -37,6 +37,7 @@
     "react-helmet": "^6.1.0",
     "react-player": "^2.16.0",
     "redocusaurus": "^2.5.0",
+    "remark-emoji": "^5.0.1",
     "remark-github-admonitions-to-directives": "^2.1.0",
     "unist-util-visit": "^5.0.0"
   },
