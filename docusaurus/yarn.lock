@@ -54,6 +54,11 @@
   resolved "https://registry.npmjs.org/@algolia/client-common/-/client-common-5.28.0.tgz"
   integrity sha512-lqa0Km1/YWfPplNB8jX9kstaCl2LO6ziQAJEBtHxw2sJp/mlxJIAuudBUbEhoUrKQvI7N4erNYawl6ejic7gfw==
 
+"@algolia/client-common@5.29.0":
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.29.0.tgz#0908e90c5dc881be08eab4e595bf981e23525474"
+  integrity sha512-T0lzJH/JiCxQYtCcnWy7Jf1w/qjGDXTi2npyF9B9UsTvXB97GRC6icyfXxe21mhYvhQcaB1EQ/J2575FXxi2rA==
+
 "@algolia/client-insights@5.28.0":
   version "5.28.0"
   resolved "https://registry.npmjs.org/@algolia/client-insights/-/client-insights-5.28.0.tgz"
@@ -84,7 +89,7 @@
     "@algolia/requester-fetch" "5.28.0"
     "@algolia/requester-node-http" "5.28.0"
 
-"@algolia/client-search@5.28.0", "@algolia/client-search@^5.27.0":
+"@algolia/client-search@5.28.0":
   version "5.28.0"
   resolved "https://registry.npmjs.org/@algolia/client-search/-/client-search-5.28.0.tgz"
   integrity sha512-zLEddu9TEwFT/YUJkA3oUwqQYHeGEj64fi0WyVRq+siJVfxt4AYkFfcMBcSr2iR1Wo9Mk10IPOhk3DUr0TSncg==
@@ -93,6 +98,16 @@
     "@algolia/requester-browser-xhr" "5.28.0"
     "@algolia/requester-fetch" "5.28.0"
     "@algolia/requester-node-http" "5.28.0"
+
+"@algolia/client-search@^5.29.0":
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-5.29.0.tgz#91c9a036b6677d954cd87d9262850f73f145bf81"
+  integrity sha512-cZ0Iq3OzFUPpgszzDr1G1aJV5UMIZ4VygJ2Az252q4Rdf5cQMhYEIKArWY/oUjMhQmosM8ygOovNq7gvA9CdCg==
+  dependencies:
+    "@algolia/client-common" "5.29.0"
+    "@algolia/requester-browser-xhr" "5.29.0"
+    "@algolia/requester-fetch" "5.29.0"
+    "@algolia/requester-node-http" "5.29.0"
 
 "@algolia/events@^4.0.1":
   version "4.0.1"
@@ -136,6 +151,13 @@
   dependencies:
     "@algolia/client-common" "5.28.0"
 
+"@algolia/requester-browser-xhr@5.29.0":
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-5.29.0.tgz#c3cec914716160d3d972ff09b3b35093916cb5bb"
+  integrity sha512-og+7Em75aPHhahEUScq2HQ3J7ULN63Levtd87BYMpn6Im5d5cNhaC4QAUsXu6LWqxRPgh4G+i+wIb6tVhDhg2A==
+  dependencies:
+    "@algolia/client-common" "5.29.0"
+
 "@algolia/requester-fetch@5.28.0":
   version "5.28.0"
   resolved "https://registry.npmjs.org/@algolia/requester-fetch/-/requester-fetch-5.28.0.tgz"
@@ -143,12 +165,26 @@
   dependencies:
     "@algolia/client-common" "5.28.0"
 
+"@algolia/requester-fetch@5.29.0":
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-fetch/-/requester-fetch-5.29.0.tgz#3d885d73ab116c4c1ae88e7e6fb3b022cba45ce8"
+  integrity sha512-JCxapz7neAy8hT/nQpCvOrI5JO8VyQ1kPvBiaXWNC1prVq0UMYHEL52o1BsPvtXfdQ7BVq19OIq6TjOI06mV/w==
+  dependencies:
+    "@algolia/client-common" "5.29.0"
+
 "@algolia/requester-node-http@5.28.0":
   version "5.28.0"
   resolved "https://registry.npmjs.org/@algolia/requester-node-http/-/requester-node-http-5.28.0.tgz"
   integrity sha512-U3F4WeExiKx1Ig6OxO9dDzzk04HKgtEn47TwjgKmGSDPFM7WZ5KyP1EAZEbfd3/nw6hp0z9RKdTfMql6Sd1/2Q==
   dependencies:
     "@algolia/client-common" "5.28.0"
+
+"@algolia/requester-node-http@5.29.0":
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-5.29.0.tgz#9e8fb975c392ba1a99b8774856cfc892ed17819e"
+  integrity sha512-lVBD81RBW5VTdEYgnzCz7Pf9j2H44aymCP+/eHGJu4vhU+1O8aKf3TVBgbQr5UM6xoe8IkR/B112XY6YIG2vtg==
+  dependencies:
+    "@algolia/client-common" "5.29.0"
 
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"
@@ -6375,10 +6411,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lucide-react@^0.508.0:
-  version "0.508.0"
-  resolved "https://registry.npmjs.org/lucide-react/-/lucide-react-0.508.0.tgz"
-  integrity sha512-gcP16PnexqtOFrTtv98kVsGzTfnbPekzZiQfByi2S89xfk7E/4uKE1USZqccIp58v42LqkO7MuwpCqshwSrJCg==
+lucide-react@^0.523.0:
+  version "0.523.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.523.0.tgz#a855a3b5b6fdcdee597ecbbd3c16141711a1d974"
+  integrity sha512-rUjQoy7egZT9XYVXBK1je9ckBnNp7qzRZOhLQx5RcEp2dCGlXo+mv6vf7Am4LimEcFBJIIZzSGfgTqc9QCrPSw==
 
 lunr@^2.3.9:
   version "2.3.9"

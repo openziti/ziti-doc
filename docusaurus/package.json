@@ -15,7 +15,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@algolia/client-search": "^5.27.0",
+    "@algolia/client-search": "^5.29.0",
     "@docusaurus/core": "3.8.1",
     "@docusaurus/plugin-client-redirects": "^3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
@@ -28,7 +28,7 @@
     "echarts-for-react": "^3.0.2",
     "jquery": "^3.7.1",
     "js-yaml": "^4.1.0",
-    "lucide-react": "^0.508.0",
+    "lucide-react": "^0.523.0",
     "prism-react-renderer": "2.4.1",
     "react": "^19.1.0",
     "react-device-detect": "^2.2.3",
