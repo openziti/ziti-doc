@@ -17,6 +17,12 @@ and [Google Cloud APIs & Services](https://console.cloud.google.com/apis/credent
 enabling Google with OpenZiti, see below. Use these values to configure an external JWT signer. All of these values 
 are found from the **client** or **credentials** screen in the corresponding overview page. 
 
+:::note
+Many people have reported Google is using opaque access tokens. If your controller logs an error similar to
+`jwt failed to parse: token is malformed: token contains an invalid number of segments` change the token type from
+**ACCESS** to **ID** on your ext-jwt-signer
+:::
+
 :::warning
 Most of the errors when using Google as an identity provider are due to selecting/using the wrong type of client.
 The only client type that currently works with OpenZiti is the **Universal Windows Platform** client type. If you use any 
