@@ -13,7 +13,6 @@ import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
 import StarUs from "../../components/StarUs";
 
-
 export function H1(props?:any) {
     const {children, id} = props;
     return (
@@ -57,7 +56,7 @@ export function OpenZitiLayout(props?:any): JSX.Element {
       <AnnouncementBar />
       <StarUs/>
       <Navbar />
-      <div className={clsx(styles.ozLayoutMainWrapper, className)}>
+      <div className={clsx(ThemeClassNames.wrapper.main, styles.ozLayoutMainWrapper, className,)}>
           <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
               {children}
           </ErrorBoundary>

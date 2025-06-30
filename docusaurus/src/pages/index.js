@@ -22,10 +22,15 @@ function HeroSection({ className }) {
                         <div className={styles.aaHeroBadgeDiv}><span className={styles.aaHeroBadgeSpan}>Sponsored by NetFoundry</span></div>
                     </div>
                     <div className={clsx(styles.aaSection, styles.aaHeroText)}>
-                        <p>Managing networks with static IPs, subnets, NAT, and firewalls is complex, fragile, and error-prone. As environments scale across cloud, hybrid, and mobile, traditional IP-based control falls apart. OpenZiti eliminates this headache by making identity—not IP—the core of your network. No more IP conflicts, no more guessing, just secure, zero-trust connectivity that works anywhere.</p>
+                        <p>Managing networks with static IPs, subnets, NAT, and firewalls is complex, fragile, and error-prone.
+                            As environments scale across cloud, hybrid, and mobile, traditional IP-based control falls apart.
+                            OpenZiti eliminates this headache by making identity—not IP—the core of your network.
+                            No more IP conflicts, no more guessing, just secure, zero-trust connectivity that works anywhere.</p>
                         <div className={styles.aaHeroButtons}>
-                            <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/" className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry Cloud For Free</a>
-                            <a href={useBaseUrl("/docs/learn/quickstarts/network/hosted")} className={styles.aaBtn}>Host OpenZiti Yourself</a>
+                            <a href="#deploy_an_overlay"
+                               className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry For Free</a>
+                            <a href={useBaseUrl("/docs/learn/quickstarts/network/hosted")}
+                               className={styles.aaBtn}>Host OpenZiti Yourself</a>
                         </div>
                     </div>
                 </div>
@@ -46,8 +51,8 @@ function HeroSection({ className }) {
 
 function GetStartedSection ({className}) {
     const btns = clsx(styles.btn, styles.btnSecondary);
-    return <OpenZitiHorizontalSection className={clsx(styles.aaGetStarted2, styles.ozHorizontalSectionRoot, className)}>
-        <section className={clsx(styles.aaSection, styles.aaGetStarted)} id="get-started">
+    return <OpenZitiHorizontalSection className={clsx(styles.aaGetStarted2, styles.ozHorizontalSectionRoot, className)} id="deploy_an_overlay">
+        <section className={clsx(styles.aaSection, styles.aaGetStarted)}>
             <div className={styles.aaContainer}>
                 <div className={styles.aaStartContent}>
                     <h2 className={styles.aaStartTitle}>Ready to Deploy Your Overlay?</h2>
@@ -57,19 +62,25 @@ function GetStartedSection ({className}) {
                     </p>
                     <div className={styles.aaStartOptions}>
                         <div className={styles.aaStartOption}>
-                            <h3 className={styles.aaStartOptionTitle}>Enterprise Managed</h3>
+                            <h3 className={styles.aaStartOptionTitle}>NetFoundry<br />Managed SaaS</h3>
                             <p className={styles.aaStartOptionText}>
-                                Get fully managed zero trust networking with NetFoundry's enterprise offering, complete
-                                with SLAs and 24/7 support.
+                                Cloud-hosted and fully operated by NetFoundry. No infrastructure to manage—just secure, scalable networking with SLAs and 24/7 support.
                             </p>
                             <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/"
-                               className={btns}>Learn More</a>
+                               className={btns}>Deploy an Overlay</a>
                         </div>
                         <div className={styles.aaStartOption}>
-                            <h3 className={styles.aaStartOptionTitle}>Self-Hosted</h3>
+                            <h3 className={styles.aaStartOptionTitle}>NetFoundry<br />Supported On-Prem</h3>
                             <p className={styles.aaStartOptionText}>
-                                Deploy and manage your own OpenZiti network with our comprehensive documentation and
-                                community support.
+                                Self-hosted by you, with full support from NetFoundry. Ideal for regulated environments or where you need to control infrastructure.
+                            </p>
+                            <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-on-premise/"
+                               className={btns}>Get Started</a>
+                        </div>
+                        <div className={styles.aaStartOption}>
+                            <h3 className={styles.aaStartOptionTitle}>Community<br />Self-Hosted</h3>
+                            <p className={styles.aaStartOptionText}>
+                                Deploy and operate your own OpenZiti network using our documentation and community support—no commercial support included.
                             </p>
                             <a href={useBaseUrl("/docs/learn/quickstarts/network/hosted")} className={btns}>View Deployment Guide</a>
                         </div>
@@ -118,11 +129,11 @@ function ZeroTrustModel({ className, model, side, windowSize }) {
                         <div key={model.id} className={clsx(zt.modelCard)} >
                             {side === 'left' && isClient && windowSize.width >= 850 && (
                                 <ThemedImage style={{"maxHeight": "500px"}}
-                                    alt="OpenZiti Network Visualization"
-                                    sources={{
-                                        light: useBaseUrl("/img/zt-model-" + model.id + "-light.svg"),
-                                        dark: useBaseUrl("/img/zt-model-" + model.id + "-dark.svg"),
-                                    }}
+                                             alt="OpenZiti Network Visualization"
+                                             sources={{
+                                                 light: useBaseUrl("/img/zt-model-" + model.id + "-light.svg"),
+                                                 dark: useBaseUrl("/img/zt-model-" + model.id + "-dark.svg"),
+                                             }}
                                 />
                             )}
 
@@ -144,11 +155,11 @@ function ZeroTrustModel({ className, model, side, windowSize }) {
 
                             {(side !== 'left' || (isClient && windowSize.width) <= 850) && (
                                 <ThemedImage style={{"maxHeight": "500px"}}
-                                    alt="OpenZiti Network Visualization"
-                                    sources={{
-                                        light: useBaseUrl("/img/zt-model-" + model.id + "-light.svg"),
-                                        dark: useBaseUrl("/img/zt-model-" + model.id + "-dark.svg"),
-                                    }}
+                                             alt="OpenZiti Network Visualization"
+                                             sources={{
+                                                 light: useBaseUrl("/img/zt-model-" + model.id + "-light.svg"),
+                                                 dark: useBaseUrl("/img/zt-model-" + model.id + "-dark.svg"),
+                                             }}
                                 />
                             )}
                         </div>

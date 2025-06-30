@@ -482,6 +482,8 @@
     max-width: 350px;
     transition: transform 0.3s, background 0.3s;
     color: white;
+    display: flex;
+    flex-direction: column;
   }
 
   .aaStartOption:hover {
@@ -496,6 +498,7 @@
   }
 
   .aaStartOptionText {
+    flex-grow: 1;
     margin-bottom: 25px;
     opacity: 0.8;
   }
