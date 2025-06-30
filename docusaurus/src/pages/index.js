@@ -74,7 +74,7 @@ function GetStartedSection ({className}) {
                             <p className={styles.aaStartOptionText}>
                                 Self-hosted by you, with full support from NetFoundry. Ideal for regulated environments or where you need to control infrastructure.
                             </p>
-                            <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/"
+                            <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-on-premise/"
                                className={btns}>Learn More</a>
                         </div>
                         <div className={styles.aaStartOption}>
