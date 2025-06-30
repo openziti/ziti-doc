@@ -18,7 +18,7 @@ jobs:
         id: extract
         run: |
           url=$(grep -oP '\[Visit Preview\]\(\K[^)]+' <<< "$COMMENT_BODY" || true)
-          echo "::set-output name=URL_TO_CHECK::${url:-https://openziti.io}"
+          echo "URL_TO_CHECK=${url:-https://openziti.io}" >> $GITHUB_ENV
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
   broken-link-checker:
