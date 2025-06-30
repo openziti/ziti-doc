@@ -5,6 +5,7 @@ import {Config} from "@docusaurus/types";
 import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
+import remarkReplaceMetaUrl from './src/plugins/remark/remark-replace-meta-url';
 
 
 const baseUrlConst = '/';
@@ -263,6 +264,7 @@ const config: Config = {
           remarkPlugins: [
             require('./src/plugins/remark/remark-yaml-table'),
             require('./src/plugins/remark/remark-code-block'),
+            [remarkReplaceMetaUrl, { from: '_baseurl_', to: baseUrlConst }],
           ],
           showLastUpdateTime: true
         },

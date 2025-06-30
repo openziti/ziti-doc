@@ -18,7 +18,7 @@ jobs:
         id: extract
         run: |
           url=$(grep -oP '\[Visit Preview\]\(\K[^)]+' <<< "$COMMENT_BODY" || true)
-          echo "::set-output name=URL_TO_CHECK::${url:-https://openziti.io}"
+          echo "URL_TO_CHECK=${url:-https://openziti.io}" >> $GITHUB_ENV
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
   broken-link-checker:
@@ -72,6 +72,7 @@ jobs:
   popular-link-checker:
     if: >
       ${{
+        needs.extract-url.outputs.URL_TO_CHECK != '' &&
         github.repository_owner == 'openziti' &&
         (
           (github.event_name == 'push' && github.ref == 'refs/heads/main') ||

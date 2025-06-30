@@ -1,8 +1,8 @@
-// sidebars.js
+import {SidebarsConfig} from "@docusaurus/plugin-content-docs";
+
 const { baseUrl } = require('./docusaurus.config.ts');
 
-/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
-const sidebars = {
+const sidebars: SidebarsConfig = {
   docsSidebar: [
     {
       type: 'html',
