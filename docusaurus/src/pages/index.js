@@ -67,7 +67,7 @@ function GetStartedSection ({className}) {
                                 Cloud-hosted and fully operated by NetFoundry. No infrastructure to manage—just secure, scalable networking with SLAs and 24/7 support.
                             </p>
                             <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/"
-                               className={btns}>Learn More</a>
+                               className={btns}>Deploy an Overlay</a>
                         </div>
                         <div className={styles.aaStartOption}>
                             <h3 className={styles.aaStartOptionTitle}>NetFoundry<br />Supported On-Prem</h3>
@@ -75,7 +75,7 @@ function GetStartedSection ({className}) {
                                 Self-hosted by you, with full support from NetFoundry. Ideal for regulated environments or where you need to control infrastructure.
                             </p>
                             <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-on-premise/"
-                               className={btns}>Learn More</a>
+                               className={btns}>Get Started</a>
                         </div>
                         <div className={styles.aaStartOption}>
                             <h3 className={styles.aaStartOptionTitle}>Community<br />Self-Hosted</h3>
