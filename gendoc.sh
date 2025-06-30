@@ -16,7 +16,7 @@ function clone_or_pull {
     git pull --ff-only
     popd >/dev/null
   else
-    git clone "${remote}" --branch "${BRANCH}" --single-branch "${dir}" --depth 1
+    git clone "${remote}" --branch "${BRANCH}" --single-branch "${dir}" --no-tags --depth 1
   fi
 }
 
