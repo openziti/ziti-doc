@@ -72,6 +72,7 @@ jobs:
   popular-link-checker:
     if: >
       ${{
+        needs.extract-url.outputs.URL_TO_CHECK != '' &&
         github.repository_owner == 'openziti' &&
         (
           (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
