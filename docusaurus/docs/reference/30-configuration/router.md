@@ -499,11 +499,11 @@ profile:
 
 ### `web`
 
-The `web` section follows the [conventions of XWeb](conventions.md#xweb). The controller has the
+The `web` section follows the [conventions of XWeb](conventions.md#xweb). The router has the
 following APIs defined:
 
 - `health-checks` - provides a health check API that allows remote parties to verify the health of
-  the controller
+  the router
 
 Each API may have their own options, but currently do not.
 
