@@ -157,7 +157,7 @@ const config: Config = {
             from: [docUrl('/guides/Local_Gateway/EdgeTunnel')]
           },
           {
-            to: docUrl('/guides/topologies/gateway/router)'),
+            to: docUrl('/guides/topologies/gateway/router'),
             from: [docUrl('/guides/Local_Gateway/EdgeRouter')]
           },
           {
@@ -225,7 +225,7 @@ const config: Config = {
             from: [docUrl('/learn'), docUrl('/introduction/intro'), '/docusaurus/docs/overview', '/ziti/overview/', '/ziti/overview.html'],
           },
           {
-            to: docUrl('/learn/quickstarts/)'),
+            to: docUrl('/learn/quickstarts/'),
             from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html', docUrl('/learn/quickstarts/network'), docUrl('/quickstarts/network')],
           },
           {
