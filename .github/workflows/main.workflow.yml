@@ -45,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           ZITI_HOTJAR_APPID: ${{ secrets.STG_DOC_HOTJAR_APPID }}
-          DEPLOY_ENVL: 'kinsta'
+          DEPLOY_ENV: 'kinsta'
         run: ./publish-2025.sh ${{github.ref_name}}
 
       - name: Build & Publish Docusaurus Sites (legacy)
