@@ -7,11 +7,7 @@ import ThemedImage from '@theme/ThemedImage';
 import styles from './new-landing/styles.module.css';
 import zt from './new-landing/zt-models.module.css';
 import useBaseUrl from "@docusaurus/useBaseUrl";
-
-
 import { ArrowRight, Shield, Lock, Globe } from 'lucide-react';
-import {docUrl} from "../components/DocUrl";
-
 
 function HeroSection({ className }) {
     return (
@@ -30,7 +26,7 @@ function HeroSection({ className }) {
                         <div className={styles.aaHeroButtons}>
                             <a href="#deploy_an_overlay"
                                className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry For Free</a>
-                            <a href={useBaseUrl(docUrl("/learn/quickstarts/network/hosted"))}
+                            <a href={useBaseUrl("learn/quickstarts/network/hosted")}
                                className={styles.aaBtn}>Host OpenZiti Yourself</a>
                         </div>
                     </div>
@@ -83,7 +79,7 @@ function GetStartedSection ({className}) {
                             <p className={styles.aaStartOptionText}>
                                 Deploy and operate your own OpenZiti network using our documentation and community support—no commercial support included.
                             </p>
-                            <a href={useBaseUrl(docUrl("/learn/quickstarts/network/hosted"))} className={btns}>View Deployment Guide</a>
+                            <a href={useBaseUrl("learn/quickstarts/network/hosted")} className={btns}>View Deployment Guide</a>
                         </div>
                     </div>
                     <a href="https://openziti.discourse.group/" className={btns}>Join the Community</a>
