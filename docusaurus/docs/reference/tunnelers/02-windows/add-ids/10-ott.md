@@ -6,7 +6,7 @@ for a user. This process results in a single use (one-time) token that can be us
 allowing the process to be trusted by the OpenZiti overlay network.
 
 ## Prerequisites
-* An identity has been created and the one-time use JWT captured. If needed, follow this [guide](@openzitidocs/learn/core-concepts/identities/creating) to
+* An identity has been created and the one-time use JWT captured. If needed, follow this [guide](../../../../learn/core-concepts/identities/10-creating.mdx) to
 create an identity and one-time token. Once created, transfer the JWT file to the Windows machine you want to enroll.
 
 ## Adding the Identity
