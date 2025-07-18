@@ -205,6 +205,8 @@ if [[ "${SKIP_DOCUSAURUS_GEN}" == no ]]; then
 
     if [[ "${ZITI_GEN_ZIP}" == "yes" ]]; then
         sed -i "s|baseUrlConst = '/'|baseUrlConst = '/openziti/'|g" docusaurus.config.ts
+        sed -i -e 's#/docs/#/#g' docusaurus.config.ts
+
         echo "generating docs into ${script_root}/docusaurus/openziti"
         yarn build --out-dir=openziti
         git checkout docusaurus.config.ts
