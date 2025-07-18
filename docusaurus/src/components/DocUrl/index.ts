@@ -1,0 +1,1 @@
+export { docUrl } from './DocUrl';

@@ -7,13 +7,13 @@ import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
 import remarkReplaceMetaUrl from './src/plugins/remark/remark-replace-meta-url';
 import {remarkScopedPath} from "./src/plugins/remark/remarkScopedPath";
-
+import { docUrl } from './src/components/DocUrl'
 
 const baseUrlConst = '/';
 const hotjarId = process.env.ZITI_HOTJAR_APPID || "6443327"; //default localdev hotjarId
 
 const docsBase = process.env.DEPLOY_ENV === 'kinsta' ? '' : '/docs'
-function docUrl(path:string): string {
+function docUrlOg(path:string): string {
   return docsBase + path;
 }
 
