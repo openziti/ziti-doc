@@ -2,7 +2,7 @@
 title: Ziti Security
 ---
 
-A network's security setup is defined by several entities defined in the [edge management API](/docs/reference/developer/api#edge-management-api). The following
+A network's security setup is defined by several entities defined in the [edge management API](../../../reference/developer/api/index.mdx#edge-management-api). The following
 are related to identity authentication and service access:
 
 - [Identities](#identity) - describe a human, device, or service within the edge
@@ -96,7 +96,7 @@ services can be used over an edge router via service edge router policies. Ident
 policies and edge router policies.
 
 All policies in Ziti are represented by a robust [attribute based access control system (ABAC)](https://en.wikipedia.org/wiki/Attribute-based_access_control) based on `roleAttributes`
-properties on entities within the [edge management API](/docs/reference/developer/api/index.mdx#edge-management-api). `roleAttributes` properties are an array of user defined strings.
+properties on entities within the [edge management API](../../../reference/developer/api/index.mdx#edge-management-api). `roleAttributes` properties are an array of user defined strings.
 Policies support attribute selector properties to determine which entities a policy interacts on. Policies themselves
 are documented in [Policies](./authorization/policies/overview.mdx) section.
 

@@ -6,6 +6,7 @@ import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
 import remarkReplaceMetaUrl from './src/plugins/remark/remark-replace-meta-url';
+import {remarkScopedPath} from "./src/plugins/remark/remarkScopedPath";
 
 
 const baseUrlConst = '/';
@@ -271,6 +272,14 @@ const config: Config = {
             require('./src/plugins/remark/remark-yaml-table'),
             require('./src/plugins/remark/remark-code-block'),
             [remarkReplaceMetaUrl, { from: '_baseurl_', to: baseUrlConst }],
+            [remarkScopedPath,
+              {
+                debug: false,
+                mappings: [
+                  { from: '@openzitidocs', to: docsBase },
+                ],
+              },
+            ]
           ],
           showLastUpdateTime: true
         },

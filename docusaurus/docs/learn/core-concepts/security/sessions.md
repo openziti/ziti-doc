@@ -186,7 +186,7 @@ edge:
 
 #### Administrative Removal
 
-Through the [edge management API](/docs/reference/developer/api#edge-management-api) any API Session may be forcefully removed
+Through the [edge management API](@openzitidocs/reference/developer/api#edge-management-api) any API Session may be forcefully removed
 by calling `DELETE /edge/management/v1/api-sessions<id>` with an empty body.
 
 #### Client Removal (Logout)
