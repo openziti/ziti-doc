@@ -14,7 +14,7 @@ And after the download and installation is complete, click on **open**
 
 ## Enrolling 
 
-Following this [guide](/docs/learn/core-concepts/identities/creating) to create an identity and transfer the jwt file to your MAC.
+Following this [guide](../../learn/core-concepts/identities/10-creating.mdx) to create an identity and transfer the jwt file to your MAC.
 
 From the **Ziti Desktop Edge for Mac** UI, click on **Turn Ziti On**. Add an identity by clicking the **+** in the lower left of the UI. Choose the jwt downloaded to your Mac in the previous step.
 

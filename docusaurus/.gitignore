@@ -24,3 +24,4 @@ ziti
 static/docs/reference/developer/sdk
 
 *.bkp
+remarkScopedPath.log
