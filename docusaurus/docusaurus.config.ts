@@ -8,7 +8,7 @@ import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-clien
 import remarkReplaceMetaUrl from './src/plugins/remark/remark-replace-meta-url';
 import {remarkScopedPath} from "./src/plugins/remark/remarkScopedPath";
 
-const baseUrlConst = '/';
+const baseUrlConst = '/docs';
 const hotjarId = process.env.ZITI_HOTJAR_APPID || "6443327"; //default localdev hotjarId
 
 const docsBase = process.env.DEPLOY_ENV === 'kinsta' ? '' : '/docs'
