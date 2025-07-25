@@ -28,7 +28,7 @@ Architectures available:
 
 * x86_64
 
-Use this repo with var `$releasever` on CentOS 7, Rocky 8-9, and RHEL 7-9.
+Use this repo with var `$releasever` on Red Hat 8-10 (RHEL, Rocky Linux, AlmaLinux).
 
 ```text
 [OpenZiti]
@@ -53,10 +53,10 @@ Architectures available:
 ```text
 [OpenZiti]
 name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat10/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat10/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
@@ -64,7 +64,9 @@ repo_gpgcheck=1
 
 <TabItem value="Amazon">
 
-#### Amazon Linux
+#### Amazon Linux 2023
+
+Amazon Linux 2023 has GLIBC 2.34 which is compatible with the Red Hat 9 build.
 
 Architectures available:
 
@@ -73,10 +75,10 @@ Architectures available:
 ```text
 [OpenZiti]
 name=OpenZiti
-baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch
 enabled=1
 gpgcheck=0
-gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat8/$basearch/repodata/repomd.xml.key
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch/repodata/repomd.xml.key
 repo_gpgcheck=1
 ```
 
