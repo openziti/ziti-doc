@@ -102,8 +102,56 @@ With these scripts, you can test all the links in the site's pages and popular i
   ```text
   ./check-links.sh https://blog.openziti.io ./popular-blog-links.txt
   ```
+  
+### Running the Checkers
 
-  You will need to run `yarn serve` to crawl for broken links locally because the webpack server (`yarn start`) is not crawlable, and you will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The `docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect (HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of a page. 
+You will need to run `yarn serve` to crawl for broken links locally because the webpack server (`yarn start`) is not 
+crawlable, and you will probably have to deploy to Vercel or GH Pages to test comprehensively for broken links. The 
+`docusaurus` CLI's built-in development server preempts any request for a path ending `.html` with a permanent redirect
+(HTTP 301) to the same path without the suffix. This prevents the redirects plugin from placing effective redirects as
+files with `.html` suffixes and employing the meta refresh technique for redirecting user agents to the new location of
+a page.
+
+Also note that the tests are run inside docker so you **must** provide the --host to use when running the serve command.
+
+To run the tests, first start docusaurus:
+```text
+yarn build
+yarn serve --host 192.168.253.239
+```
+
+With docusaurus running the built site, then run the tests. 
+
+Run the link crawler:
+```text
+./check-links/crawl-for-broken-links.sh http://192.168.253.239:3000
+...
+...
+http://192.168.253.239:3000/learn/core-concepts/zero-trust-models/ztha
+  [200] http://192.168.253.239:3000/assets/images/client_to_host_a_deploy-7f12913d21af9895978bdbcaf5d6a485.png
+  [SKP] https://github.com/openziti/ziti-doc/tree/main/docusaurus/docs/learn/core-concepts/zero-trust-models/03-ztha.mdx
+  [200] http://192.168.253.239:3000/assets/images/router_to_host_deploy-be9be23f7637508450f80535494f1ac6.png
+  [200] http://192.168.253.239:3000/assets/images/client_to_host_b_deploy-de7416ca10da9162a3a56f86a065b957.png
+  [200] http://192.168.253.239:3000/assets/images/client_to_router_deploy-5dc3be4d91266c234523ad145daf9745.png
+http://192.168.253.239:3000/learn/core-concepts/zero-trust-models/ztna
+  [SKP] https://github.com/openziti/ziti-doc/tree/main/docusaurus/docs/learn/core-concepts/zero-trust-models/04-ztna.mdx
+  [200] http://192.168.253.239:3000/assets/images/router_to_router_deploy-f2f27b8febfe6594a1aea487003db7ba.png
+🤖 Successfully scanned 589 links in 4.645 seconds.
+```
+
+Run the popular links check:
+```text
+./check-links/check-links.sh http://192.168.253.239:3000 check-links/popular-docs-links.txt 0
+...
+...
+INFO : delay set to 0
+checking: http://192.168.253.239:3000/blog/zitification/prometheus/part1
+checking: http://192.168.253.239:3000/docs/reference/developer/sdk/android
+checking: http://192.168.253.239:3000/docs/category/deployments
+Process completed at Tue Aug  5 14:59:47 EDT 2025. Total entries: 133. Elapsed time: 1 seconds.
+INFO: all 133 links succeeded!
+```
+
 
 ### Update the List of Popular Incoming Links
 
