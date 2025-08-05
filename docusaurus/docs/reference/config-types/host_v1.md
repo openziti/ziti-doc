@@ -11,7 +11,7 @@ endpoint in a `host.v1` config can be specified explicitly or can be configured 
 passed through from a tunneler intercepting traffic, allowing it to forward traffic.
 
 The `host.v1` type only allows defining a single host endpoint. If multiple endpoints are required,
-use the [`host.v2`](./host.v2.md) config type instead.
+use the [`host.v2`](./host_v2.md) config type instead.
 
 ## Endpoint Configuration
 

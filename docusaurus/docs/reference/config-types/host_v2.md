@@ -11,7 +11,7 @@ endpoint in a `host.v2` config can be specified explicitly or can be configured 
 passed through from a tunneler intercepting traffic, allowing it to forward traffic.
 
 The `host.v2` type allows defining multiple host endpoints. If only a single endpoint is required,
-consider using the simpler [`host.v1`](./host.v1.md) config type instead.
+consider using the simpler [`host.v1`](./host_v1.md) config type instead.
 
 ## Endpoint Configuration
 
@@ -23,7 +23,7 @@ application.
 
 A `host.v2` configuration only has one field.
 
-* `terminators` - an array of [`host.v1`](./host.v1.md) entries, one per endpoint
+* `terminators` - an array of [`host.v1`](./host_v1.md) entries, one per endpoint
 
 **Example**
 
@@ -46,4 +46,4 @@ This service is hosted by two application servers.
 }
 ```
 
-See the [`host.v1`](./host.v1.md) specification for what can be done with each entry.
+See the [`host.v1`](./host_v1.md) specification for what can be done with each entry.
