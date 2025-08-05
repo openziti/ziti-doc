@@ -96,7 +96,7 @@ jobs:
           echo "URL_TO_CHECK_ENV is: ${URL_TO_CHECK_ENV}"
           
       - name: Check popular links to new docs site
-        run: ./check-links.sh "${URL_TO_CHECK_ENV}" ./popular-docs-links.txt
+        run: ./check-links.sh ${URL_TO_CHECK_ENV} ./popular-docs-links.txt
         working-directory: ./check-links/
         
       - name: Resolve Alarm Issue if Links are Not Broken
