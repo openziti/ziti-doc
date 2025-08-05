@@ -4,6 +4,7 @@ import { Image, Link } from 'mdast'
 import { MdxJsxFlowElement, MdxjsEsm } from 'mdast-util-mdx'
 import { writeFileSync, appendFileSync } from 'fs'
 import { join } from 'path'
+import {cleanUrl} from "../../../shared";
 
 interface ScopedPathOptions {
     from: string
@@ -29,7 +30,7 @@ export const remarkScopedPath: Plugin<[Options]> = ({ mappings, debug }) => {
             if (debug) { log("url before: " + node.url) }
             for (const { from, to } of mappings) {
                 if (node.url.startsWith(from)) {
-                    node.url = node.url.replace(from, to)
+                    node.url = cleanUrl(node.url.replace(from, to))
                 }
             }
             if (debug) { log("url after: " + node.url) }
@@ -38,7 +39,7 @@ export const remarkScopedPath: Plugin<[Options]> = ({ mappings, debug }) => {
         visit(tree, 'link', (node: Link) => {
             for (const { from, to } of mappings) {
                 if (node.url.startsWith(from)) {
-                    node.url = node.url.replace(from, to)
+                    node.url = cleanUrl(node.url.replace(from, to))
                 }
             }
         })
@@ -53,7 +54,7 @@ export const remarkScopedPath: Plugin<[Options]> = ({ mappings, debug }) => {
                     ) {
                         for (const { from, to } of mappings) {
                             if (attr.value.startsWith(from)) {
-                                attr.value = attr.value.replace(from, to)
+                                attr.value = cleanUrl(attr.value.replace(from, to))
                             }
                         }
                     }
@@ -66,7 +67,7 @@ export const remarkScopedPath: Plugin<[Options]> = ({ mappings, debug }) => {
                 log(`    from='${from}'`)
                 log(`    to='${to}`)
                 const re = new RegExp(`(['"])${from}/`, 'g')
-                node.value = node.value.replace(re, `$1${to}/`)
+                node.value = cleanUrl(node.value.replace(re, `$1${to}/`))
             }
         })
         log(` `)

@@ -15,7 +15,7 @@ const remarkReplaceMetaUrl: Plugin<[Options], Root> = (options: Options) => {
                 for (const attr of node.attributes) {
                     if (attr.name === 'content' && typeof attr.value === 'string') {
                         if (attr.value.includes(options.from)) {
-                            console.log("replacing meta from" + options.from + " to " + options.to)
+                            // console.debug("remarkReplaceMetaUrl: replacing meta from" + options.from + " to " + options.to)
                             attr.value = attr.value.replace(options.from, options.to);
                         }
                     }

@@ -26,7 +26,7 @@ function HeroSection({ className }) {
                         <div className={styles.aaHeroButtons}>
                             <a href="#deploy_an_overlay"
                                className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry For Free</a>
-                            <a href={useBaseUrl("docs/learn/quickstarts/network/hosted")}
+                            <a href={useBaseUrl("/learn/quickstarts/network/hosted")}
                                className={styles.aaBtn}>Host OpenZiti Yourself</a>
                         </div>
                     </div>
