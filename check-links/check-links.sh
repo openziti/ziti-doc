@@ -3,7 +3,7 @@
 set -euo pipefail
 
 [[ $# -eq 2 || $# -eq 3 ]] || {
-    echo "ERROR: need base URL to check as \$1 [$1] and links file (one URL path per line) as \$2" >&2
+    echo "ERROR: need base URL to check as \$1 and links file (one URL path per line) as \$2" >&2
     exit 1
 } 
 
