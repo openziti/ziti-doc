@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import clsx from "clsx";
 import OpenZitiLayout from "../components/OpenZitiLayout";
 import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
@@ -261,7 +261,6 @@ function TransitionSection({children, className, }: { children?: React.ReactNode
     );
 }
 
-
 function getWindowSize() {
     if (typeof window !== 'undefined') {
         return {
@@ -277,7 +276,7 @@ function App() {
     function handleWindowResize() {
         setWindowSize(getWindowSize());
     }
-    useEffect(() => {
+    useLayoutEffect(() => {
         window.addEventListener('resize', handleWindowResize);
     }, []);
 
