@@ -261,7 +261,6 @@ function TransitionSection({children, className, }: { children?: React.ReactNode
     );
 }
 
-
 function getWindowSize() {
     if (typeof window !== 'undefined') {
         return {
