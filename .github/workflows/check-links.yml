@@ -37,16 +37,18 @@ jobs:
       }}
     needs: extract-url
     runs-on: ubuntu-latest
+    env:
+      URL_TO_CHECK_ENV: ${{ needs.extract-url.outputs.URL_TO_CHECK }}
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v4
 
       - name: Echo URL
         run: |
-          echo "URL_TO_CHECK is: ${{ needs.extract-url.outputs.URL_TO_CHECK }}"
+          echo "URL_TO_CHECK_ENV is: ${URL_TO_CHECK_ENV}"
 
       - name: Crawl for Broken Links
-        run: ./check-links/crawl-for-broken-links.sh "${{ needs.extract-url.outputs.URL_TO_CHECK }}"
+        run: ./check-links/crawl-for-broken-links.sh "${URL_TO_CHECK_ENV}"
           
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}
@@ -83,16 +85,18 @@ jobs:
       }}
     needs: extract-url
     runs-on: ubuntu-latest
+    env:
+      URL_TO_CHECK_ENV: ${{ needs.extract-url.outputs.URL_TO_CHECK }}
     steps:
       - name: Checkout Workspace
         uses: actions/checkout@v4
         
       - name: Echo URL
         run: |
-          echo "URL_TO_CHECK is: ${{ needs.extract-url.outputs.URL_TO_CHECK }}"
+          echo "URL_TO_CHECK_ENV is: ${URL_TO_CHECK_ENV}"
           
       - name: Check popular links to new docs site
-        run: ./check-links.sh "${{ needs.extract-url.outputs.URL_TO_CHECK }}" ./popular-docs-links.txt
+        run: ./check-links.sh "${URL_TO_CHECK_ENV}" ./popular-docs-links.txt
         working-directory: ./check-links/
         
       - name: Resolve Alarm Issue if Links are Not Broken
