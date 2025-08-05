@@ -2,14 +2,24 @@ import React, { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 import OpenZitiLayout from "../components/OpenZitiLayout";
 import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
+// @ts-ignore
 import SuperpowersSection  from "../components/SuperpowersSection";
 import ThemedImage from '@theme/ThemedImage';
 import styles from './new-landing/styles.module.css';
 import zt from './new-landing/zt-models.module.css';
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { ArrowRight, Shield, Lock, Globe } from 'lucide-react';
+import {cleanUrl} from "../shared";
+import siteConfig from "@generated/docusaurus.config";
 
-function HeroSection({ className }) {
+const docsBase = siteConfig?.customFields?.docsBase || "/build-error";
+
+interface WindowSize {
+    width: number
+    height: number
+}
+
+function HeroSection({ className }: { className?: string }) {
     return (
         <OpenZitiHorizontalSection className={clsx(styles.ozHorizontalSectionRoot, className)}>
             <section className={clsx(styles.aaHeroSection, styles.aaSection)} >
@@ -26,7 +36,7 @@ function HeroSection({ className }) {
                         <div className={styles.aaHeroButtons}>
                             <a href="#deploy_an_overlay"
                                className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry For Free</a>
-                            <a href={useBaseUrl("docs/learn/quickstarts/network/hosted")}
+                            <a href={cleanUrl(`${docsBase}/learn/quickstarts/network/hosted`)}
                                className={styles.aaBtn}>Host OpenZiti Yourself</a>
                         </div>
                     </div>
@@ -46,7 +56,7 @@ function HeroSection({ className }) {
     );
 }
 
-function GetStartedSection ({className}) {
+function GetStartedSection ({ className }: { className?: string }) {
     const btns = clsx(styles.btn, styles.btnSecondary);
     return <OpenZitiHorizontalSection className={clsx(styles.aaGetStarted2, styles.ozHorizontalSectionRoot, className)} id="deploy_an_overlay">
         <section className={clsx(styles.aaSection, styles.aaGetStarted)}>
@@ -79,7 +89,7 @@ function GetStartedSection ({className}) {
                             <p className={styles.aaStartOptionText}>
                                 Deploy and operate your own OpenZiti network using our documentation and community support—no commercial support included.
                             </p>
-                            <a href={useBaseUrl("learn/quickstarts/network/hosted")} className={btns}>View Deployment Guide</a>
+                            <a href={cleanUrl(`${docsBase}/learn/quickstarts/network/hosted`)} className={btns}>View Deployment Guide</a>
                         </div>
                     </div>
                     <a href="https://openziti.discourse.group/" className={btns}>Join the Community</a>
@@ -89,7 +99,7 @@ function GetStartedSection ({className}) {
     </OpenZitiHorizontalSection>
 }
 
-function SuperPowerSection ({className}) {
+function SuperPowerSection ({ className }: { className?: string }) {
     return <OpenZitiHorizontalSection className={clsx(styles.ozHorizontalSectionRoot, className)}>
         <SuperpowersSection
             className={clsx(styles.aaSection, styles.aaSuperpowersSection)}
@@ -109,7 +119,17 @@ function SuperPowerSection ({className}) {
     </OpenZitiHorizontalSection>
 }
 
-function ZeroTrustModel({ className, model, side, windowSize }) {
+function ZeroTrustModel({
+                            className,
+                            model,
+                            side,
+                            windowSize,
+                        }: {
+    className: string;
+    model: typeof ztModels[keyof typeof ztModels];
+    side: string;
+    windowSize: WindowSize;
+}) {
     const isClient = windowSize && windowSize.width !== undefined;
     return (
         <OpenZitiHorizontalSection
@@ -150,7 +170,7 @@ function ZeroTrustModel({ className, model, side, windowSize }) {
                                 <span className={zt.idealText}>{model.ideal}</span>
                             </div>
 
-                            {(side !== 'left' || (isClient && windowSize.width) <= 850) && (
+                            {(side !== 'left' || (isClient && windowSize.width <= 850)) && (
                                 <ThemedImage style={{"maxHeight": "500px"}}
                                              alt="OpenZiti Network Visualization"
                                              sources={{
@@ -215,7 +235,7 @@ const ztModels = {
     },
 };
 
-function ZeroTrustModels ({ windowSize }) {
+function ZeroTrustModels({ windowSize }: { windowSize: WindowSize }) {
     return <>
         <section className={clsx(styles.aaSection, zt.zeroTrustModelIntro)}>
             <h2 className={zt.sectionTitle}>The Right Model For Your Needs</h2>
@@ -233,7 +253,7 @@ function ZeroTrustModels ({ windowSize }) {
     </>;
 }
 
-function TransitionSection({ children, className }) {
+function TransitionSection({children, className, }: { children?: React.ReactNode; className?: string;}) {
     return (
         <OpenZitiHorizontalSection className={className}>
             {children}
@@ -253,7 +273,7 @@ function getWindowSize() {
 }
 
 function App() {
-    const [windowSize, setWindowSize] = useState(getWindowSize());
+    const [windowSize, setWindowSize] = useState<WindowSize>(getWindowSize());
     function handleWindowResize() {
         setWindowSize(getWindowSize());
     }

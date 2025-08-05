@@ -9,7 +9,7 @@ OpenZiti comes with some builtin configuration types. These are used to describe
 host services.
 
 * `intercept.v1` - used for configuring tunneler intercepts
-* [`host.v2`](./host.v2.md) - used for configuring a tunneler or edge router/tunneler service
+* [`host.v2`](./host_v2.md) - used for configuring a tunneler or edge router/tunneler service
   hosting
 * `host.v1` - used for configuring a tunneler or edge router/tunneler service hosting, similar to
   `host.v2`, but only allows configuration a single service endpoint

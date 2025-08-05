@@ -48,8 +48,7 @@ jobs:
           echo "URL_TO_CHECK is: $URL_TO_CHECK"
 
       - name: Crawl for Broken Links
-        run: ./check-links/crawl-for-broken-links.sh "$URL_TO_CHECK" \
-          --recurse --timeout 10000 --retry --retry-errors --retry-errors-count 3 --concurrency 1
+        run: ./check-links/crawl-for-broken-links.sh "$URL_TO_CHECK"
           
       - name: Resolve Alarm Issue if Links are Not Broken
         if: ${{ success() }}

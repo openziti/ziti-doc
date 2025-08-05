@@ -1,15 +1,17 @@
 import React from 'react';
 import clsx from 'clsx';
 import OpenZitiHorizontalSection from "../OpenZitiHorizontalSection";
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import siteConfig from '@generated/docusaurus.config';
 import styles from './styles.module.css';
+import {baseUrlConst, cleanUrl} from "../../shared";
 
 export default function OpenZitiFooter(props: { className?: any; style?: any; }) {
     const {
         className,
         style,
     } = props;
-    
+    const docsBase = siteConfig?.customFields?.docsBase || "/build-error";
+
     return (
         <footer className={clsx(className, styles.ozFooter)} style={style}>
             <OpenZitiHorizontalSection className={styles.footer}>
@@ -46,9 +48,9 @@ export default function OpenZitiFooter(props: { className?: any; style?: any; })
                         <div className={styles.footerColumn}>
                             <h3>Documentation</h3>
                             <ul className={styles.footerLinks}>
-                                <li><a href={useBaseUrl("learn/quickstarts/services/ztha")}>Getting Started</a></li>
-                                <li><a href={useBaseUrl("reference/developer/api/")}>API Reference</a></li>
-                                <li><a href={useBaseUrl("reference/developer/sdk/")}>SDK Integration</a></li>
+                                <li><a href={cleanUrl(`${docsBase}/learn/quickstarts/services/ztha`)}>Getting Started</a></li>
+                                <li><a href={cleanUrl(`${docsBase}/reference/developer/api/`)}>API Reference</a></li>
+                                <li><a href={cleanUrl(`${docsBase}/reference/developer/sdk/`)}>SDK Integration</a></li>
                             </ul>
                         </div>
                         <div className={styles.footerColumn}>
@@ -56,7 +58,7 @@ export default function OpenZitiFooter(props: { className?: any; style?: any; })
                             <ul className={styles.footerLinks}>
                                 <li><a href="https://github.com/openziti/ziti">GitHub</a></li>
                                 <li><a href="https://openziti.discourse.group/">Discourse Forum</a></li>
-                                <li><a href={useBaseUrl("policies/CONTRIBUTING")}>Contributing</a></li>
+                                <li><a href={cleanUrl(`${baseUrlConst}policies/CONTRIBUTING`)}>Contributing</a></li>
                             </ul>
                         </div>
                         <div className={styles.footerColumn}>

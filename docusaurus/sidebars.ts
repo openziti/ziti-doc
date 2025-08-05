@@ -1,12 +1,11 @@
 import {SidebarsConfig} from "@docusaurus/plugin-content-docs";
-
-const { baseUrl } = require('./docusaurus.config.ts');
+import {docUrl} from "./src/shared";
 
 const sidebars: SidebarsConfig = {
   docsSidebar: [
     {
       type: 'html',
-      value: `<a class="menu__link" href="${baseUrl}docs/learn/introduction/">LEARN</a>`,
+      value: `<a class="menu__link" href="` + docUrl("learn/introduction") + `">LEARN</a>`,
       className: 'sidebar-title',
     },
     {
@@ -15,7 +14,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'html',
-      value: `<a class="menu__link" href="${baseUrl}docs/reference/">REFERENCE</a>`,
+      value: `<a class="menu__link" href="` + docUrl("reference") + `">REFERENCE</a>`,
       className: 'sidebar-title',
     },
     {
@@ -24,7 +23,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'html',
-      value: `<a class="menu__link" href="${baseUrl}docs/guides/">GUIDES</a>`,
+      value: `<a class="menu__link" href="` + docUrl("guides") + `">GUIDES</a>`,
       className: 'sidebar-title',
     },
     {

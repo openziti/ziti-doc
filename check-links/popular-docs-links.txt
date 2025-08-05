@@ -80,7 +80,7 @@
 /docs/learn/quickstarts/network/help/quickstart-walkthrough
 /docs/reference/developer/api/edge-client-reference
 /docs/reference/tunnelers/linux/linux-tunnel-troubleshooting
-/docs/reference/config-types/host.v1
+/docs/reference/config-types/host_v1
 /docs/category/troubleshooting
 /docs/learn/core-concepts/config-store/config-type-host-v1
 /docs/guides/securing-apis/aks-api-with-nginx-ziti-module
@@ -91,7 +91,7 @@
 /docs/learn/core-concepts/security/authorization/policies/overview
 /docs/learn/quickstarts/network/help/reset-quickstart
 /docs/guides/hsm/yubikey
-/docs/reference/config-types/host.v2
+/docs/reference/config-types/host_v2
 /docs/guides/kubernetes/hosting/kubernetes-console
 /docs/learn/core-concepts/security/SessionsAndConnections
 /docs/guides/hsm/softhsm

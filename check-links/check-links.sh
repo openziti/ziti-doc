@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-[[ $# -eq 2 ]] || {
+[[ $# -eq 3 ]] || {
     echo "ERROR: need base URL to check as \$1 and links file (one URL path per line) as \$2" >&2
     exit 1
 } 
@@ -17,18 +17,22 @@ set -euo pipefail
     exit 1
 }
 
+_delay="${3:-0.25}"  #no more than 4/s by default
+echo "INFO : delay set to ${_delay}" >&2
+
 TOTAL=0
 typeset -a SUCCESSES=() FAILURES=()
 START_TIME=$(date +%s)
 echo "Starting the process at $(date)..."
 while read; do
+    echo "checking: ${1}${REPLY}"
     (( ++TOTAL ))
     if HTTP_CODE=$(curl -sfLw '%{http_code}' -o/dev/null "${1}${REPLY}" 2>/dev/null); then
         SUCCESSES+=("${HTTP_CODE} ${REPLY}")
     else
         FAILURES+=("${HTTP_CODE} ${REPLY}")
     fi
-    sleep 0.25 #no more than 4/s
+    sleep "$_delay"
 done < "${2}"
 
 END_TIME=$(date +%s)
