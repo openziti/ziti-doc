@@ -17,4 +17,12 @@ echo "Link to check: ${SERVER}"
 
 # see root checkout, linkinator.config.json for linkinator config
 CMD="npm install -g linkinator && linkinator \"${SERVER}\"; exit \$?"
-docker run --rm -t --name linkinator -v $PWD/linkinator.config.json:/linkinator.config.json node:22-slim bash -c "$CMD"
+
+# use this line to mount /tmp and send the output to json which is sometimes easier to parse
+#CMD="npm install -g linkinator && linkinator \"${SERVER}\" --format JSON > /mount/out.json; exit \$?"
+docker run --rm -t --name linkinator -v "/tmp:/mount" -v "$PWD/linkinator.config.json":/linkinator.config.json node:22-slim bash -c "$CMD"
+
+# leaving this jq in the file to work with the above format JSON output should it ever be useful
+#jq -r '["status","state","parent","url"], (.links | sort_by(.status, .state, .parent, .url)[] | [.status, .state, .parent, .url]) | @csv' /tmp/out.json > /tmp/out.csv
+
+
