@@ -1,16 +1,21 @@
 import React from 'react';
 import clsx from 'clsx';
-import OpenZitiHorizontalSection from "../OpenZitiHorizontalSection";
 import siteConfig from '@generated/docusaurus.config';
+import OpenZitiHorizontalSection from "../OpenZitiHorizontalSection";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from './styles.module.css';
-import {baseUrlConst, cleanUrl} from "../../shared";
+import {cleanUrl, docUrl, DOCUSAURUS_BASE_PATH, DOCUSAURUS_DOCS_PATH} from "../../shared";
+
+const _docUrl = DOCUSAURUS_BASE_PATH.includes("unset") || DOCUSAURUS_DOCS_PATH.includes("unset")
+    ? (p: string) => cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
+    : (p: string) => docUrl(p);
+
 
 export default function OpenZitiFooter(props: { className?: any; style?: any; }) {
     const {
         className,
         style,
     } = props;
-    const docsBase = siteConfig?.customFields?.docsBase || "/build-error";
 
     return (
         <footer className={clsx(className, styles.ozFooter)} style={style}>
@@ -48,9 +53,9 @@ export default function OpenZitiFooter(props: { className?: any; style?: any; })
                         <div className={styles.footerColumn}>
                             <h3>Documentation</h3>
                             <ul className={styles.footerLinks}>
-                                <li><a href={cleanUrl(`${docsBase}/learn/quickstarts/services/ztha`)}>Getting Started</a></li>
-                                <li><a href={cleanUrl(`${docsBase}/reference/developer/api/`)}>API Reference</a></li>
-                                <li><a href={cleanUrl(`${docsBase}/reference/developer/sdk/`)}>SDK Integration</a></li>
+                                <li><a href={_docUrl(`/learn/quickstarts/services/ztha`)}>Getting Started</a></li>
+                                <li><a href={_docUrl(`/reference/developer/api/`)}>API Reference</a></li>
+                                <li><a href={_docUrl(`/reference/developer/sdk/`)}>SDK Integration</a></li>
                             </ul>
                         </div>
                         <div className={styles.footerColumn}>
@@ -58,7 +63,7 @@ export default function OpenZitiFooter(props: { className?: any; style?: any; })
                             <ul className={styles.footerLinks}>
                                 <li><a href="https://github.com/openziti/ziti">GitHub</a></li>
                                 <li><a href="https://openziti.discourse.group/">Discourse Forum</a></li>
-                                <li><a href={cleanUrl(`${baseUrlConst}policies/CONTRIBUTING`)}>Contributing</a></li>
+                                <li><a href={useBaseUrl(`/policies/CONTRIBUTING`)}>Contributing</a></li>
                             </ul>
                         </div>
                         <div className={styles.footerColumn}>

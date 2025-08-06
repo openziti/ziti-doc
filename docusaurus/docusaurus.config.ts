@@ -7,9 +7,18 @@ import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
 import remarkReplaceMetaUrl from './src/plugins/remark/remark-replace-meta-url';
 import {remarkScopedPath} from "./src/plugins/remark/remarkScopedPath";
-import {docUrl, docsBase, baseUrlConst, hotjarId, DOCUSAURUS_DEBUG} from "./src/shared";
+import {
+    docUrl,
+    baseUrl,
+    addDocsRedir,
+    hotjarId,
+    DOCUSAURUS_BASE_PATH,
+    DOCUSAURUS_DOCS_PATH,
+    DOCUSAURUS_DEBUG,
+    DOCUSAURUS_URL,
+} from "./src/shared";
 
-const redirectsArr = [
+const redirectsArr: { to: string; from: string[] }[] = [
   {
     to: docUrl('/category/deployments'),
     from: [docUrl('/reference/deployments')]
@@ -156,12 +165,7 @@ const redirectsArr = [
   }
 ];
 
-if (process.env.DEPLOY_ENV === 'kinsta') {
-  redirectsArr.push({
-    to: docUrl('/learn/introduction/'),
-    from: [docUrl('/docs')],
-  });
-}
+addDocsRedir(redirectsArr); //add a redirect from /docs to the actual docs path if needed
 
 const port =
     (() => {
@@ -172,8 +176,8 @@ const port =
 const config: Config = {
   title: 'OpenZiti',
   tagline: 'Replacing Infrastructure With Software',
-  url: process.env.DOCUSAURUS_URL || `http://docusaurus.local:${port}`,
-  baseUrl: baseUrlConst,
+  url: DOCUSAURUS_URL || `http://docusaurus.local:${port}`,
+  baseUrl: DOCUSAURUS_BASE_PATH,
   trailingSlash: undefined,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
@@ -198,7 +202,8 @@ const config: Config = {
   },
   themes: ['@docusaurus/theme-mermaid'],
   customFields: {
-    docsBase: docsBase,
+      DOCUSAURUS_BASE_PATH: DOCUSAURUS_BASE_PATH,
+      DOCUSAURUS_DOCS_PATH: DOCUSAURUS_DOCS_PATH,
   },
   plugins: [
     [pluginHotjar, {}],
@@ -268,7 +273,7 @@ const config: Config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.ts'),
-          routeBasePath: docsBase,
+          routeBasePath: DOCUSAURUS_DOCS_PATH,
           exclude: [
             '**/_*.{js,jsx,ts,tsx,md,mdx}',
             '**/*.test.{js,jsx,ts,tsx}',
@@ -280,12 +285,12 @@ const config: Config = {
           remarkPlugins: [
             require('./src/plugins/remark/remark-yaml-table'),
             require('./src/plugins/remark/remark-code-block'),
-            [remarkReplaceMetaUrl, { from: '_baseurl_', to: baseUrlConst }],
+            [remarkReplaceMetaUrl, { from: '_baseurl_', to: DOCUSAURUS_BASE_PATH }],
             [remarkScopedPath,
               {
                 debug: DOCUSAURUS_DEBUG,
                 mappings: [
-                  { from: '@openzitidocs', to: docsBase },
+                  { from: '@openzitidocs', to: DOCUSAURUS_DOCS_PATH },
                 ],
               },
             ]
@@ -403,19 +408,19 @@ const config: Config = {
               },
               {
                 type: 'html',
-                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/yt.svg" alt="YouTube logo"/>YouTube</span></a>`
+                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/yt.svg") + `" alt="YouTube logo"/>YouTube</span></a>`
               },
               {
                 type: 'html',
-                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/twit.svg" alt="X/Twitter logo"/>X (Twitter)</span></a>`
+                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/twit.svg") + `" alt="X/Twitter logo"/>X (Twitter)</span></a>`
               },
               {
                 type: 'html',
-                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/reddit-logo.png" alt="Reddit logo"/>Reddit</span></a>`
+                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/reddit-logo.png") + `" alt="Reddit logo"/>Reddit</span></a>`
               },
               {
                 type: 'html',
-                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/ziggy.png" alt="X/Twitter Ziggy logo"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/ziggy.png") + `" alt="X/Twitter Ziggy logo"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
               },
               {
                 type: 'html',
@@ -423,11 +428,11 @@ const config: Config = {
               },
               {
                 type: 'html',
-                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/blog-icon.png" alt="OpenZiti blog logo"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/blog-icon.png") + `" alt="OpenZiti blog logo"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
               },
               {
                 type: 'html',
-                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="${baseUrlConst}img/oz-test-kitchen.png" alt="OpenZiti Test Kitchen logo"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
+                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/oz-test-kitchen.png") + `" alt="OpenZiti Test Kitchen logo"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
               },
             ]
           },

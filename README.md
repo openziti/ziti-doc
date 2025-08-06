@@ -83,25 +83,7 @@ Algolia [DocSearch](https://docsearch.algolia.com/) provides search for this sit
 With these scripts, you can test all the links in the site's pages and popular incoming request paths.
 
 * [crawl-for-broken-links.sh](./check-links/crawl-for-broken-links.sh): uses `docker` to run `muffet` which crawls the given base URL looking for broken links
-
-  ```text
-  # check local dev server for broken outgoing links to itself and other sites, excluding a few hosts that are sensitive to being hammered by a crawler
-  ./crawl-for-broken-links.sh http://127.0.0.1:3000
-
-  # check the GH Pages site for broken links to anywhere
-  ./crawl-for-broken-links.sh https://openziti.github.io --rate-limit=11
-  ```
-
 * [check-links.sh](./check-links/check-links.sh): uses `curl` to try a list of URL paths from a file
-
-  ```text
-  # check a list of popular incoming links from external sites
-  ./check-links.sh https://docs.openziti.io ./popular-docs-links.txt
-  ```
-
-  ```text
-  ./check-links.sh https://blog.openziti.io ./popular-blog-links.txt
-  ```
   
 ### Running the Checkers
 

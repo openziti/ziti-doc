@@ -46,7 +46,9 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           ZITI_HOTJAR_APPID: ${{ secrets.STG_DOC_HOTJAR_APPID }}
           DEPLOY_ENV: 'kinsta'
-          DOCUSAURUS_URL: 'https://netfoundry.io/openziti/docs'
+          DOCUSAURUS_URL: 'https://netfoundry.io'
+          DOCUSAURUS_BASE_PATH: '/openziti/docs'
+          DOCUSAURUS_DOCS_PATH: '/'
         run: ./publish-2025.sh ${{github.ref_name}}
 
       - name: Build & Publish Docusaurus Sites (legacy)
@@ -55,6 +57,8 @@ jobs:
           ZITI_HOTJAR_APPID: ${{ secrets.PROD_DOC_HOTJAR_APPID }}
           DEPLOY_ENV: 'github'
           DOCUSAURUS_URL: 'https://openziti.io'
+          DOCUSAURUS_BASE_PATH: '/'
+          DOCUSAURUS_DOCS_PATH: '/docs'
         run: ./publish.sh
 
 
