@@ -1,6 +1,7 @@
 {
   "concurrency": 10,
   "skip": [
+    ".*wiki.ubuntu.com.*",
     "^(?!http)",
     "^https://github\\.com/",
     "^http://docusaurus\\.local.*",
