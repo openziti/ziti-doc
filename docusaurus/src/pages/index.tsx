@@ -9,12 +9,12 @@ import styles from './new-landing/styles.module.css';
 import zt from './new-landing/zt-models.module.css';
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { ArrowRight, Shield, Lock, Globe } from 'lucide-react';
-import {cleanUrl, docUrl, DOCUSAURUS_BASE_PATH, DOCUSAURUS_DOCS_PATH} from "../shared";
+import {cleanUrl} from "../shared";
 import siteConfig from "@generated/docusaurus.config";
 
-const _docUrl = DOCUSAURUS_BASE_PATH.includes("unset") || DOCUSAURUS_DOCS_PATH.includes("unset")
-    ? (p: string) => cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
-    : (p: string) => docUrl(p);
+function _docUrl(p:string) {
+    return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
+}
 
 interface WindowSize {
     width: number
