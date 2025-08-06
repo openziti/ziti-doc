@@ -28,7 +28,3 @@ export function addDocsRedir(redirectsArr:{ to: string; from: string[] }[]) {
         });
     }
 }
-
-
-
-
