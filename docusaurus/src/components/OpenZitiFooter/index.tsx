@@ -1,15 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
-import siteConfig from '@generated/docusaurus.config';
 import OpenZitiHorizontalSection from "../OpenZitiHorizontalSection";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from './styles.module.css';
-import {cleanUrl, docUrl, DOCUSAURUS_BASE_PATH, DOCUSAURUS_DOCS_PATH} from "../../shared";
+import {cleanUrl} from "../../shared";
+import siteConfig from "@generated/docusaurus.config";
 
-const _docUrl = DOCUSAURUS_BASE_PATH.includes("unset") || DOCUSAURUS_DOCS_PATH.includes("unset")
-    ? (p: string) => cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
-    : (p: string) => docUrl(p);
-
+function _docUrl(p:string) {
+    return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
+}
 
 export default function OpenZitiFooter(props: { className?: any; style?: any; }) {
     const {
