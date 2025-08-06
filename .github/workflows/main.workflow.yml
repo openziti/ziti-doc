@@ -47,7 +47,7 @@ jobs:
           ZITI_HOTJAR_APPID: ${{ secrets.STG_DOC_HOTJAR_APPID }}
           DEPLOY_ENV: 'kinsta'
           DOCUSAURUS_URL: 'https://netfoundry.io'
-          DOCUSAURUS_BASE_PATH: '/openziti/docs'
+          DOCUSAURUS_BASE_PATH: '/docs/openziti'
           DOCUSAURUS_DOCS_PATH: '/'
         run: ./publish-2025.sh ${{github.ref_name}}
 
