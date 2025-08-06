@@ -25,4 +25,4 @@ docker run --rm -t --name linkinator -v "/tmp:/mount" -v "$PWD/linkinator.config
 # leaving this jq in the file to work with the above format JSON output should it ever be useful
 #jq -r '["status","state","parent","url"], (.links | sort_by(.status, .state, .parent, .url)[] | [.status, .state, .parent, .url]) | @csv' /tmp/out.json > /tmp/out.csv
 
-
+echo "✅ Docker run completed. See above for results"
