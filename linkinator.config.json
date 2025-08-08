@@ -3,6 +3,7 @@
   "skip": [
     ".*wiki.ubuntu.com.*",
     ".*developers.google.com.*",
+    ".*certbot.eff.org/.*",
     "^(?!http)",
     "^https://github\\.com/",
     "^http://docusaurus\\.local.*",
