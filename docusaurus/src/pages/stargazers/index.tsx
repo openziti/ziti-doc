@@ -88,9 +88,16 @@ function Pill({label, color}:{label:string;color:string}) {
     return <span style={{background: color, color:'#fff', padding:'2px 8px', borderRadius:999}}>{label}</span>;
 }
 
-function StatsTable({rows}:{rows:{label:string; color:string; s:any}[]}) {
+function StatsTable({rows, range}:{rows:{label:string;color:string;s:any}[]; range:Range}) {
+    const formatDate = (t:number) => new Date(t).toISOString().slice(0,10);
+
     return (
         <div style={{margin:'8px 0 12px', border:'1px solid var(--ifm-table-border-color, #e3e3e3)', borderRadius:8, padding:12}}>
+            {range && (
+                <div style={{marginBottom:8, fontWeight:600}}>
+                    Date range: {formatDate(range[0])} → {formatDate(range[1])}
+                </div>
+            )}
             <table style={{width:'100%', borderCollapse:'separate', borderSpacing:0}}>
                 <thead>
                 <tr>
@@ -106,7 +113,7 @@ function StatsTable({rows}:{rows:{label:string; color:string; s:any}[]}) {
                 <tbody>
                 {rows.map(({label, color, s}) => (
                     <tr key={label}>
-                        <td><Pill label={label} color={color} /></td>
+                        <td><span style={{background:color, color:'#fff', padding:'2px 8px', borderRadius:999}}>{label}</span></td>
                         <td style={{textAlign:'center'}}>{s?.stars?.toLocaleString?.() ?? 0}</td>
                         <td style={{textAlign:'center'}}>{s?.days?.toLocaleString?.() ?? 0}</td>
                         <td style={{textAlign:'center'}}>{s?.avgPerDay ?? 0}</td>
@@ -120,6 +127,7 @@ function StatsTable({rows}:{rows:{label:string; color:string; s:any}[]}) {
         </div>
     );
 }
+
 
 export default function Stargazers(): JSX.Element {
     const chartRef = useRef<ECharts|null>(null);
@@ -245,7 +253,7 @@ export default function Stargazers(): JSX.Element {
     return (
         <>
             <ReactEcharts option={option} style={{width:'100%', height: 620}} onChartReady={onReady} onEvents={onEvents}/>
-            <StatsTable rows={rows} />
+            <StatsTable rows={rows} range={range} />
         </>
     );
 }
