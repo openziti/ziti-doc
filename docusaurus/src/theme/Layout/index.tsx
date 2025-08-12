@@ -11,7 +11,7 @@ export default function LayoutWrapper(props: Props): ReactNode {
     } = props;
 
     return (
-        <OpenZitiLayout>
+        <OpenZitiLayout {...props}>
             {children}
         </OpenZitiLayout>
     );
