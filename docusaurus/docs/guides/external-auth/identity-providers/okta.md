@@ -4,7 +4,7 @@ sidebar_label: Okta
 hide_table_of_contents: true
 ---
 
-import { CallbackUrls } from '../../../_partials.tsx';
+import { CallbackUrls } from '../../../_imports';
 import Details from '@theme/MDXComponents/Details';
 
 # Okta

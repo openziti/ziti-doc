@@ -1,4 +1,4 @@
-// @site/_partials.tsx
+// @site/__imports
 import React from 'react';
 
 // helper to find/throw errors with missing import/exports
