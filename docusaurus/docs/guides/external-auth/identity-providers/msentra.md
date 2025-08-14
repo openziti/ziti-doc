@@ -4,7 +4,7 @@ sidebar_label: Microsoft Entra ID
 hide_table_of_contents: true
 ---
 
-import CallbackUrls from '/docs/guides/external-auth/identity-providers/_callback_urls.mdx';
+import { CallbackUrls } from '../../../_partials.tsx';
 
 # Microsoft Entra IDP
 
