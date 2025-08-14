@@ -306,6 +306,28 @@ const config: Config = {
         },
       } satisfies Options),
     ],
+    // Redocusaurus config
+    [
+      'redocusaurus',
+      {
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            id: 'edge-client',
+            spec: 'https://get.openziti.io/spec/client.yml',
+          },
+          {
+            id: 'edge-management',
+            spec: 'https://get.openziti.io/spec/management.yml',
+          },
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#1890ff',
+        },
+      },
+    ],
   ],
   themeConfig:
     {
