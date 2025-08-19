@@ -1,18 +1,10 @@
 import React, {type ReactNode} from 'react';
-import type LayoutType from '@theme/Layout';
-import type {WrapperProps} from '@docusaurus/types';
-import OpenZitiLayout from "../../components/OpenZitiLayout";
+import { NetFoundryLayout, NetFoundryLayoutProps } from '@openclint/docusaurus-shared';
 
-type Props = WrapperProps<typeof LayoutType>;
-
-export default function LayoutWrapper(props: Props): ReactNode {
-    const {
-        children,
-    } = props;
-
+export default function LayoutWrapper(props: NetFoundryLayoutProps): ReactNode {
     return (
-        <OpenZitiLayout {...props}>
-            {children}
-        </OpenZitiLayout>
+        <NetFoundryLayout starProps={{repoUrl:"https://github.com/openziti/ziti", label:"Star Us on GitHub"}}>
+            {props.children}
+        </NetFoundryLayout>
     );
 }

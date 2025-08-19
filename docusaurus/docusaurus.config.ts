@@ -17,6 +17,7 @@ import {
     DOCUSAURUS_DEBUG,
     DOCUSAURUS_URL,
 } from "./src/shared";
+import path from "node:path";
 
 const redirectsArr: { to: string; from: string[] }[] = [
   {
@@ -177,7 +178,7 @@ const config: Config = {
   title: 'OpenZiti',
   tagline: 'Replacing Infrastructure With Software',
   url: DOCUSAURUS_URL || `http://docusaurus.local:${port}`,
-  baseUrl: DOCUSAURUS_BASE_PATH,
+  baseUrl: DOCUSAURUS_BASE_PATH || `/unset-docusaurus-base-path`,
   trailingSlash: undefined,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
@@ -206,6 +207,20 @@ const config: Config = {
       DOCUSAURUS_DOCS_PATH: DOCUSAURUS_DOCS_PATH,
   },
   plugins: [
+    function webpackAliases() {
+      return {
+        name: 'unified-doc-webpack-aliases',
+        configureWebpack() {
+          return {
+            resolve: {
+              alias: {
+                '@openziti': path.resolve(__dirname, `./`),
+              },
+            },
+          };
+        },
+      };
+    },
     [pluginHotjar, {}],
     [
       '@docusaurus/plugin-content-docs',

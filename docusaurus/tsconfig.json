@@ -11,5 +11,8 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["src", "docusaurus.config.ts", "plugins"]
+  "include": ["src", "docusaurus.config.ts", "plugins"],
+  "paths": {
+    "@openziti/*": ["./*"]
+  }
 }
