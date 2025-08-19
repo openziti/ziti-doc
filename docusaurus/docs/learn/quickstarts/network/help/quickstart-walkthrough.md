@@ -4,10 +4,10 @@ id: quickstart-walkthrough
 ---
 
 The following explains the steps that happen automatically when the expressInstall function is executed.
-The [Local - No Docker](../local-no-docker), [Local - With Docker](../local-with-docker), 
-[Local - Docker Compose](../local-docker-compose), and [Host OpenZiti Anywhere](../hosted.mdx) quickstarts all run 
+The [Local - No Docker](../local-no-docker.mdx), [Local - With Docker](../local-with-docker.mdx), 
+[Local - Docker Compose](../local-docker-compose.mdx), and [Host OpenZiti Anywhere](../hosted.mdx) quickstarts all run 
 the `expressInstall` function. Each version varies slightly. This page will focus on the 
-[Local - No Docker](../local-no-docker) quickstart.
+[Local - No Docker](../local-no-docker.mdx) quickstart.
 
 ## The General Process
 
@@ -68,10 +68,10 @@ the controller is necessary to create the edge router which happens in the next 
 ### Default Policies
 
 Two policies are generated to simplify the process of getting started with the network.
-An [Edge Router Policy](../../../core-concepts/security/authorization/policies/overview#edge-router-policies)
+An [Edge Router Policy](../../../core-concepts/security/authorization/policies/overview.mdx#edge-router-policies)
 is created to allow all identities to connect to a router with a `#public` attribute. The router created during the
 `expressInstall` is populated with this attribute.
-A [Service edge router policy](../../../core-concepts/security/authorization/policies/overview#service-edge-router-policies)
+A [Service edge router policy](../../../core-concepts/security/authorization/policies/overview.mdx#service-edge-router-policies)
 is also created, allowing all services to use routers with the `#public` attribute.
 
 ### Router Creating and Configuration
