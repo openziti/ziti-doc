@@ -1,4 +1,4 @@
-import {defaultNetFoundryFooterProps, defaultSocialProps} from "@openclint/docusaurus-shared";
+import {defaultNetFoundryFooterProps, defaultSocialProps} from "@openclint/docusaurus-shared/ui";
 import React from "react";
 
 export const openZitiFooter = {

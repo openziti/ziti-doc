@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import OpenZitiHorizontalSection from "../OpenZitiHorizontalSection";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from './styles.module.css';
-import {cleanUrl} from "../../shared";
+import {cleanUrl} from "@openclint/docusaurus-shared/node";
 import siteConfig from "@generated/docusaurus.config";
 
 function _docUrl(p:string) {

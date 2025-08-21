@@ -8,15 +8,9 @@ import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-clien
 import remarkReplaceMetaUrl from './src/plugins/remark/remark-replace-meta-url';
 import {remarkScopedPath} from "./src/plugins/remark/remarkScopedPath";
 import {
-    docUrl,
-    baseUrl,
-    addDocsRedir,
-    hotjarId,
-    DOCUSAURUS_BASE_PATH,
-    DOCUSAURUS_DOCS_PATH,
-    DOCUSAURUS_DEBUG,
-    DOCUSAURUS_URL,
-} from "./src/shared";
+    docUrl, baseUrl, addDocsRedir,
+    DOCUSAURUS_URL, DOCUSAURUS_BASE_PATH, DOCUSAURUS_DOCS_PATH, DOCUSAURUS_DEBUG, hotjarId
+} from "@openclint/docusaurus-shared/node";
 import path from "node:path";
 
 const redirectsArr: { to: string; from: string[] }[] = [

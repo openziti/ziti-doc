@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect} from "react";
 import clsx from "clsx";
 import OpenZitiLayout from "../components/OpenZitiLayout";
 import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
@@ -9,8 +9,9 @@ import styles from './new-landing/styles.module.css';
 import zt from './new-landing/zt-models.module.css';
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { ArrowRight, Shield, Lock, Globe } from 'lucide-react';
-import {cleanUrl} from "../shared";
+
 import siteConfig from "@generated/docusaurus.config";
+import {cleanUrl} from "@openclint/docusaurus-shared/node";
 
 function _docUrl(p:string) {
     return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)

@@ -1,5 +1,4 @@
-// src/pages/stargazers/index.tsx
-import React, {useMemo, useRef, useState, useCallback, useEffect} from 'react';
+import React, {useMemo, useRef, useState, useCallback, useEffect, JSX} from 'react';
 import ReactEcharts from 'echarts-for-react';
 import type {ECharts, EChartsOption, SeriesOption} from 'echarts';
 

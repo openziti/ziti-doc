@@ -4,7 +4,7 @@ import { Image, Link } from 'mdast'
 import { MdxJsxFlowElement, MdxjsEsm } from 'mdast-util-mdx'
 import { writeFileSync, appendFileSync } from 'fs'
 import { join } from 'path'
-import {cleanUrl} from "../../../shared";
+import {cleanUrl} from "@openclint/docusaurus-shared/node";
 
 interface ScopedPathOptions {
     from: string
