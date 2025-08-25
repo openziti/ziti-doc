@@ -1,5 +1,5 @@
 import {SidebarsConfig} from "@docusaurus/plugin-content-docs";
-import {absoluteUrl} from "./src/shared";
+import {absoluteUrl} from "@openclint/docusaurus-shared/node";
 
 const sidebars: SidebarsConfig = {
   docsSidebar: [
