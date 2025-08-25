@@ -8,6 +8,7 @@ import CodeBlock from '@theme/CodeBlock'
 import SlideShow from "../../components/SlideShow";
 import Expire from "../../components/Expire";
 import styles from "./styles.module.css";
+import {NetFoundryHorizontalSection, NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
 
 function App() {
     const castUrl = useBaseUrl('/appetizer.cast');
@@ -177,7 +178,8 @@ function App() {
     };
 
     return (
-        <OpenZitiLayout className={styles.appetizer}>
+        <NetFoundryLayout className={styles.appetizer}>
+            <NetFoundryHorizontalSection>
             <div className={styles.liveMsgContainerContainer} style={{ minHeight: "100px", maxHeight: "450px" }}>
                 {liveMessageVisible && (
                     <div className={`${styles.liveMsgContainer} ${styles.bgImg1}`}>
@@ -188,7 +190,8 @@ function App() {
                     </div>
                 )}
             </div>
-            <OpenZitiHorizontalSection className={styles.ozhs}>
+            </NetFoundryHorizontalSection>
+            <NetFoundryHorizontalSection className={styles.ozhs}>
                 <div className={styles.appetizerTitle}>
                     <img
                         src="https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png"
@@ -222,8 +225,8 @@ function App() {
                            imgClassName={styles.slideImage}
                            buttonClassName={"button button--primary"}
                 />
-            </OpenZitiHorizontalSection>
-        </OpenZitiLayout>
+            </NetFoundryHorizontalSection>
+        </NetFoundryLayout>
     );
 }
 

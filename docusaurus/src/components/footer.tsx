@@ -4,7 +4,7 @@ import React from "react";
 export const openZitiFooter = {
     ...defaultNetFoundryFooterProps(),
     description:
-        'Cloud isn’t always viable. NetFoundry On-Prem™ lets you control and manage your own OpenZiti overlay network.',
+        'An open source project enabling developers to embed zero trust networking directly into applications.',
     socialProps: {
         ...defaultSocialProps,
         githubUrl: 'https://github.com/openziti/ziti',
@@ -23,7 +23,7 @@ export const openZitiFooter = {
         <a href="/policies/CONTRIBUTING">Contributing</a>,
     ],
     resourceLinks: [
-        <a href="https://blog.openziti.io/tomato">OpenZiti Tech Blog</a>,
+        <a href="https://blog.openziti.io">OpenZiti Tech Blog</a>,
         <a href="https://netfoundry.io/">NetFoundry</a>,
     ],
 }

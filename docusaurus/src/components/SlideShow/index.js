@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useColorMode } from '@docusaurus/theme-common';
+import ThemedImage from "@theme/ThemedImage";
 
 const Slideshow = (props) => {
     const { style, slideClassName, slideTitle, slides, buttonClassName, textClassName, imgClassName, className } = props;
     const viewAllSlides = "View All";
     const viesAsSlideshow = "View as Slideshow"
-    const {colorMode, setColorMode} = useColorMode();
     const [currentPosition, setCurrentPosition] = useState(0);
     const [nextDisabled, setNextDisabled] = useState(false);
     const [previousDisabled, setPreviousDisabled] = useState(true);
@@ -96,18 +95,7 @@ const Slideshow = (props) => {
         }
     };
 
-    const isDark = () => {
-        return colorMode === 'dark';
-    }
-    const getImg = (slide) => {
-        if (isDark()) {
-            return slide.darkImg;
-        }
-        return slide.img;
-    }
-
     const renderSlide = (slide, extra) => {
-        const img = getImg(slide);
         return <div style={{display: "flex", flexWrap: "wrap", marginTop: "10px"}}>
             {slide.title}
             <div className={slideClassName}>
@@ -115,7 +103,11 @@ const Slideshow = (props) => {
                     {slide.text}
                 </div>
                 <div className={imgClassName}>
-                    <img style={{maxWidth: "100%"}} src={img} alt={slide.text} />
+                    <ThemedImage
+                        sources={{light: slide.img, dark: slide.darkImg ?? slide.img}}
+                        alt={slide.alt ?? (typeof slide.text === 'string' ? slide.text : 'slide')}
+                        style={{maxWidth: '100%'}}
+                    />
                     {extra}
                 </div>
             </div>
