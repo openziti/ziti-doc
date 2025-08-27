@@ -82,7 +82,7 @@ function DocsCard(props: Props): JSX.Element {
 
   return (
       <div className={className}>
-        <Link to={props.href} className={clsx(styles.layoutCard)}>
+        <Link to={useBaseUrl(props.href)} className={clsx(styles.layoutCard)}>
           {content}
         </Link>
       </div>
