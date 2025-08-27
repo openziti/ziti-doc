@@ -199,6 +199,7 @@ const config: Config = {
     customFields: {
         DOCUSAURUS_BASE_PATH: DOCUSAURUS_BASE_PATH,
         DOCUSAURUS_DOCS_PATH: DOCUSAURUS_DOCS_PATH,
+        OPENZITI_DOCS_BASE: '/openziti'
     },
     plugins: [
         function webpackAliases() {

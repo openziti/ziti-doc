@@ -82,8 +82,8 @@ function DocsCard(props: Props): JSX.Element {
   }
 
   const {siteConfig} = useDocusaurusContext();
-  const url = siteConfig.customFields?.DOCUSAURUS_DOCS_PATH
-      ? useBaseUrl('/' + siteConfig.customFields.DOCUSAURUS_DOCS_PATH + '/' + props.href)
+  const url = siteConfig.customFields?.OPENZITI_DOCS_BASE
+      ? useBaseUrl('/' + siteConfig.customFields.OPENZITI_DOCS_BASE + '/' + props.href)
       : props.href;
   return (
       <div className={className}>
