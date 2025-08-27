@@ -93,7 +93,7 @@ which are stored in [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-co
 
 3rd Party CAs support defining a set of x509 claims configuration that allows a claim to be matched to an identity
 `externalId`. The configuration is contained in an object in the field `externalIdClaims`. When not defined, x509
-client certificate authentication attempts to find an identity that is tied to an [authenticator](./auth#authenticators) 
+client certificate authentication attempts to find an identity that is tied to an [authenticator](./auth.md#authenticators) 
 by matching client certificates. Using x509 claims, the client is matched by the identity `externalId` value.
 
 The fields under `externalIdClaims` is as follows:

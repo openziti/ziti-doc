@@ -1,7 +1,7 @@
 # Authentication Policies
 
-Authentication Policies restrict the [primary authentication](./auth#primary-authentication) methods available to 
-identities and may enforce additional [secondary authentication](./auth#secondary-authentication) factors. Ziti is
+Authentication Policies restrict the [primary authentication](./auth.md#primary-authentication) methods available to 
+identities and may enforce additional [secondary authentication](./auth.md#secondary-authentication) factors. Ziti is
 deployed with a default authentication policy that has the id `default`. This authentication policy may be updated,
 but not deleted. This default authentication policy is used when identities are created and an authentication
 policy is not specified.

@@ -36,7 +36,7 @@ erDiagram
 ## Creating
 
 Creating an identity alone may not be enough to make it usable. An identity will also need a valid primary
-authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](/learn/core-concepts/security/enrollment.md#clients).
+authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment.md#clients).
 
 Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth.md)
 
@@ -159,20 +159,20 @@ must be defined that allows the identity to authenticate with that signer.
 
 Deleting an Identity removes all directly associated data. This includes:
 
-- [API Sessions](/learn/core-concepts/security/sessions.md#api-session)
-  - [Sessions](../sessions#session)
-  - [Posture Data](/learn/core-concepts/security/authorization/posture-checks.md#posture-data)
+- [API Sessions](../sessions.md#api-session)
+  - [Sessions](../sessions.md#session)
+  - [Posture Data](../authorization/posture-checks.md#posture-data)
   - [Session Certificates](./20-api-session-certificates.md)
 - Identity Role Attributes
 - [Authenticators](./auth.md#authenticators)
-- [Enrollments](/learn/core-concepts/security/enrollment.md)
+- [Enrollments](../enrollment.md)
 - [MFA TOTP Configuration](./70-totp.md)
 
 It does not remove entities are that re-usable between Identities:
 
 - [Authentication Policies](./30-authentication-policies.md)
-- [Service Policies](/learn/core-concepts/security/authorization/policies/overview.mdx)
-- [Edge Router Policies](/learn/core-concepts/security/authorization/policies/overview.mdx)
+- [Service Policies](../authorization/policies/overview.mdx)
+- [Edge Router Policies](../authorization/policies/overview.mdx)
 
 Deleting an Identity immediately removes it and all current and future access it would have to a network and its
 Services.
