@@ -38,11 +38,11 @@ This allows you to do some more complex things like actually isolate services fr
 ### Run on your own server
 
 If you have a server available on the internet already, you can deploy an overlay network on it. Then, you can share the
-overlay with other people you want to have access to your [network](/learn/introduction/index.mdx) and aren't on the local network.
+overlay with other people you want to have access to your [network](../../learn/introduction/index.mdx) and aren't on the local network.
 
 ## Which network option sounds right for you?
 
-* [Run Everything Locally - no Docker](./network/local-no-docker)
-* [Run Everything Locally - using Docker](./network/local-with-docker)
-* [Run Everything Locally - Docker Compose](./network/local-docker-compose)
+* [Run Everything Locally - no Docker](./network/local-no-docker.mdx)
+* [Run Everything Locally - using Docker](./network/local-with-docker.mdx)
+* [Run Everything Locally - Docker Compose](./network/local-docker-compose.mdx)
 * [Run Everything Hosted](./network/hosted.mdx)

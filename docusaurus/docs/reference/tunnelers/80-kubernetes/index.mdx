@@ -44,7 +44,7 @@ In the chart above, there are several strategies and solutions for connecting a 
 
 An tunneler can be used to intercept pod egress. One important thing to know is that the tunneler that is used in this way may also be used to "host" services in order to provide ingress to cluster services.
 
-#### [Node Proxy Daemonset](./kubernetes-daemonset)
+#### [Node Proxy Daemonset](./kubernetes-daemonset.mdx)
 
 Deploying a daemonset of privileged `ziti-edge-tunnel run` pods on selected nodes is a simple way to enable services in a cluster. The daemonset pods intercept egress from pods and provide Ziti DNS to CoreDNS. For more information, see the [node proxy](./kubernetes-daemonset) page.
 
@@ -60,7 +60,7 @@ You can deploy a loopback proxy sidecar for pod egress to services. The sidecar 
 2. The sidecar container does not need the CAP_NET_ADMIN capability.
 3. The sidecar container does not need a `dnsPolicy` or explicit nameserver.
 
-#### [TCP Proxy Cluster Service](/guides/deployments/30-kubernetes//kubernetes-router.mdx)
+#### [TCP Proxy Cluster Service](../../../guides/deployments/30-kubernetes/kubernetes-router.mdx)
 
 The router can be deployed to provide a cluster-wide proxy for services, optionally exposing the services' proxy ports with an Ingress or LoadBalancer. This is accomplished by first creating the router with tunnel mode enabled, then deploying the router Helm chart with input values specifying each service for which the router's tunnel identity is authorized by a Dial Service Policy. For more information, see the [router](/guides/deployments/30-kubernetes//kubernetes-router.mdx) page. 
 
@@ -68,9 +68,9 @@ The router can be deployed to provide a cluster-wide proxy for services, optiona
 
 Any tunneler can be used to "host" a service. This hosting begins a few moments after a service becomes authorized for the identity in use by the SDK. This section is about different ways to deploy a tunneler to provide ingress to cluster services.
 
-#### [Reverse Proxy Router Pod](/guides/deployments/30-kubernetes//kubernetes-router.mdx)
+#### [Reverse Proxy Router Pod](../../..//deployments/30-kubernetes/kubernetes-router.mdx)
 
-The router's built-in tunneler can reverse-proxy cluster services for Ziti clients. This is accomplished by creating the router with tunneler mode enabled, and then installing the router Helm chart with the tunneler mode set to `host` (the default). For more information, see [the router](/guides/deployments/30-kubernetes//kubernetes-router.mdx) page.
+The router's built-in tunneler can reverse-proxy cluster services for Ziti clients. This is accomplished by creating the router with tunneler mode enabled, and then installing the router Helm chart with the tunneler mode set to `host` (the default). For more information, see [the router](../../..//deployments/30-kubernetes//kubernetes-router.mdx) page.
 
 #### [NGINX Proxy Module](/reference/tunnelers/90-nginx.mdx)
 
