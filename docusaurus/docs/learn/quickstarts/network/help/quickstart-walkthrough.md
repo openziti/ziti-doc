@@ -4,7 +4,7 @@ id: quickstart-walkthrough
 ---
 
 The following explains the steps that happen automatically when the expressInstall function is executed.
-The [Local - No Docker](../local-no-docker.mdx), [Local - With Docker](../local-with-docker), 
+The [Local - No Docker](../local-no-docker.mdx), [Local - With Docker](../local-with-docker.mdx), 
 [Local - Docker Compose](../local-docker-compose.mdx), and [Host OpenZiti Anywhere](../hosted.mdx) quickstarts all run 
 the `expressInstall` function. Each version varies slightly. This page will focus on the 
 [Local - No Docker](../local-no-docker.mdx) quickstart.
