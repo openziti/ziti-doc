@@ -38,15 +38,15 @@ erDiagram
 Creating an identity alone may not be enough to make it usable. An identity will also need a valid primary
 authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](/learn/core-concepts/security/enrollment.md#clients).
 
-Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth)
+Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth.md)
 
-The following [primary authentication](./auth#primary-authentication) mechanisms require post-creation enrollment:
+The following [primary authentication](./auth.md#primary-authentication) mechanisms require post-creation enrollment:
 
 - Ziti PKI x509 Client Certificate
 - 3rd Party x509 Client Certificate
 - Username Password (UPDB)
 
-The following do not require enrollment, but must have a properly configured [External JWT Signer](./external-jwt-signers)
+The following do not require enrollment, but must have a properly configured [External JWT Signer](./50-external-jwt-signers.md)
 
 - JWT
 
@@ -77,7 +77,7 @@ ziti edge delete enrollment where "identity=<id>"
 
 ### Creating w/ Ziti PKI Client Cert Enrollment
 
-Note: This identity will be using the default [authentication policy](./auth) which allows certificate authentication
+Note: This identity will be using the default [authentication policy](./auth.md) which allows certificate authentication
 
 #### Ziti CLI
 
@@ -97,7 +97,7 @@ Note: This identity will be using the default [authentication policy](./auth) wh
 ```
 
 ### Creating w/ 3rd Party CA Client Cert Enrollment
-Note: This identity will be using the default [authentication policy](./auth) which allows certificate authentication
+Note: This identity will be using the default [authentication policy](./auth.md) which allows certificate authentication
 
 #### Ziti CLI:
 
@@ -117,7 +117,7 @@ It is currently not possible to create identities with a 3rd party certificate e
 ```
 
 ### Creating w/ Username/Password Enrollment
-Note: This identity will be using the default [authentication policy](./auth) which allows UPDB authentication
+Note: This identity will be using the default [authentication policy](./auth.md) which allows UPDB authentication
 
 #### Ziti CLI:
 
@@ -137,7 +137,7 @@ Note: This identity will be using the default [authentication policy](./auth) wh
 ```
 
 ### Creating w/ JWT Authenticator
-Note: A valid [External JWT Signer](./external-jwt-signers) must be created and an [authentication policy](./auth)
+Note: A valid [External JWT Signer](./50-external-jwt-signers.md) must be created and an [authentication policy](./auth.md)
 must be defined that allows the identity to authenticate with that signer.
 
 #### Ziti CLI:

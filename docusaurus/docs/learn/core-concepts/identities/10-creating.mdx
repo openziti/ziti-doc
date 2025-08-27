@@ -31,7 +31,7 @@ you don't know - just use the One Time Token (OTT) method. The identity can alwa
 
 The One Time Token method is available to all Ziti networks.  A one time token enrolled identity will
 have a token generated at the time of the identity's creation.  This token is then submitted at some point in the future
-as part of the [enrollment](./enrolling) process.  Once an identity is successfully enrolled - the one time token is
+as part of the [enrollment](./20-enrolling.md) process.  Once an identity is successfully enrolled - the one time token is
 no longer valid and cannot be used to enroll the same identity again.
 
 One time tokens are delivered from the controller as a [jwt](https://tools.ietf.org/html/rfc7519) and the token
@@ -104,7 +104,7 @@ authorization will need to be done after the device identities have been created
 A certificate can only be used for one identity. The edge does not allow the same certificate to be used for
 multiple identities. An enrollment request is comprised of a special enrollment URL used to perform an HTTP POST request
 using the signed client certificate as the TLS client certificate and an optional JSON payload that allows the client to
-specify the devices display name and internal username. See [enrollment](./enrolling) for more details on enrolling.
+specify the devices display name and internal username. See [enrollment](./20-enrolling.md) for more details on enrolling.
 
 <Tabs>
 <TabItem label="New 3rd Party CA Identity via UI" value="tabid-new-identity-ui">
