@@ -47,7 +47,7 @@ The Controller uses a [Bolt](https://github.com/etcd-io/bbolt) database to store
 snapshot to initialize the replacement controller during recovery.
 
 The database is a writable file in a path specified by the controller's configuration property `db` ([link to config
-reference](/reference/30-configuration/controller.md#db)).
+reference](../../../../reference/30-configuration/controller.md#db)).
 
 Use the controller's built-in database snapshot operation to preserve data integrity. The snapshot operation creates a
 snapshot file in the same filesystem directory as the main database file on the controller host, so you can periodically

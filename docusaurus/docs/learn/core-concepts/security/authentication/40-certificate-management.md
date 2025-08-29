@@ -5,14 +5,14 @@ methods include certificates, but router and controller authentication always us
 
 Client and Routers with certificates from the internal Edge signer PKI may request new certificates by calling the Edge API.
 Routers always have certificates from the internal Edge signer PKI. Clients can also be created with certificates from external
-PKIs via [3rd Party CAs](./third-party-cas). Ziti can trust certificates from a configured external CA, but can not revoke or issue those certificates.
+PKIs via [3rd Party CAs](./10-third-party-cas.md). Ziti can trust certificates from a configured external CA, but can not revoke or issue those certificates.
 
 ## Router Certificate Extension
 
 Routers will attempt to extend their current client and server certificates one week prior to expiration. No
 intervention is necessary on behalf of the network administrator. The request must be sent to the controller via a 
 pre-authenticated connection. If a router has been disconnected from the Ziti network and their client certificates
-have expired, the router must be [re-enrolled](../enrollment#router-enrollment-extension).
+have expired, the router must be [re-enrolled](../enrollment.md#router-enrollment-extension).
 
 ## Client Certificate Extension
 
