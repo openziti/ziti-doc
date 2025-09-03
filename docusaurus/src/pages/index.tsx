@@ -12,6 +12,7 @@ import { ArrowRight, Shield, Lock, Globe } from 'lucide-react';
 
 import siteConfig from "@generated/docusaurus.config";
 import {cleanUrl} from "@openclint/docusaurus-shared/node";
+import {NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
 
 function _docUrl(p:string) {
     return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
@@ -284,12 +285,12 @@ function App() {
     }, []);
 
     return (
-        <OpenZitiLayout className={styles.landing}>
+        <NetFoundryLayout className={styles.landing}>
             <HeroSection className={styles.aaabbb}/>
             <ZeroTrustModels windowSize={windowSize} />
             <SuperPowerSection />
             <GetStartedSection />
-        </OpenZitiLayout>
+        </NetFoundryLayout>
     );
 }
 
