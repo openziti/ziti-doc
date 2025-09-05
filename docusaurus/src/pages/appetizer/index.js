@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef} from "react";
 import AsciinemaWidget from '../../components/AsciinemaWidget';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import OpenZitiHorizontalSection from "../../components/OpenZitiHorizontalSection";
-import {OpenZitiLayout, H1, H2, H3, Highlight} from "../../components/OpenZitiLayout";
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import CodeBlock from '@theme/CodeBlock'
 import SlideShow from "../../components/SlideShow";
 import Expire from "../../components/Expire";
 import styles from "./styles.module.css";
-import {NetFoundryHorizontalSection, NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
+import {H1,H2,H3, NetFoundryHorizontalSection, NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
 
 function App() {
     const castUrl = useBaseUrl('/appetizer.cast');
