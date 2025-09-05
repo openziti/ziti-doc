@@ -4,6 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import CodeBlock from '@theme/CodeBlock'
 import SlideShow from "../../components/SlideShow";
+import Highlight from "../../components/OpenZitiHighlight";
 import Expire from "../../components/Expire";
 import styles from "./styles.module.css";
 import {H1,H2,H3, NetFoundryHorizontalSection, NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
