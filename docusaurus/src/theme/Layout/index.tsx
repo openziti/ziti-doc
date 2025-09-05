@@ -1,6 +1,7 @@
 import React, {type ReactNode} from 'react';
 import { NetFoundryLayout, NetFoundryLayoutProps } from '@openclint/docusaurus-shared/ui';
 import {openZitiFooter} from "@openziti/src/components/footer";
+import ozstyles from '../../styles/openziti.layout.module.css'
 
 export default function LayoutWrapper(props: NetFoundryLayoutProps): ReactNode {
     return (

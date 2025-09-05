@@ -8,6 +8,9 @@ import Highlight from "../../components/OpenZitiHighlight";
 import Expire from "../../components/Expire";
 import styles from "./styles.module.css";
 import {H1,H2,H3, NetFoundryHorizontalSection, NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
+import {starProps} from "@openziti/src/components/consts"
+import {openZitiFooter} from "@openziti/src/components/footer";
+import ozstyles from '../../styles/openziti.layout.module.css'
 
 function App() {
     const castUrl = useBaseUrl('/appetizer.cast');
@@ -177,8 +180,8 @@ function App() {
     };
 
     return (
-        <NetFoundryLayout className={styles.appetizer}>
-            <NetFoundryHorizontalSection>
+        <NetFoundryLayout className={styles.appetizer} starProps={starProps} footerProps={openZitiFooter}>
+            <div id="dont-remove-this-is-here-to-prevent-a-styling-issue">
             <div className={styles.liveMsgContainerContainer} style={{ minHeight: "100px", maxHeight: "450px" }}>
                 {liveMessageVisible && (
                     <div className={`${styles.liveMsgContainer} ${styles.bgImg1}`}>
@@ -189,7 +192,7 @@ function App() {
                     </div>
                 )}
             </div>
-            </NetFoundryHorizontalSection>
+            </div>
             <NetFoundryHorizontalSection className={styles.ozhs}>
                 <div className={styles.appetizerTitle}>
                     <img
@@ -198,7 +201,7 @@ function App() {
                         alt="Ziggy Chef"
                         style={{padding: "0 10px 0 0"}}
                     />
-                    <H1>Appetizer: <span style={{display: "inline-block"}}>Taste OpenZiti</span></H1>
+                    <H1 className={ozstyles.h1}>Appetizer: <span style={{display: "inline-block"}}>Taste OpenZiti</span></H1>
                 </div>
                 <div className={styles.exampleContainer}>
                     <div className={styles.explainer}>
@@ -218,7 +221,7 @@ function App() {
                 </div>
                 <hr/>
                 <SlideShow slides={slideImages} className={styles.slideShow}
-                           slideTitle={<H2>Taking a Closer Look</H2>}
+                           slideTitle={<H2 className={ozstyles.h2}>Taking a Closer Look</H2>}
                            slideClassName={styles.defaultSlideStyle}
                            textClassName={styles.slideText}
                            imgClassName={styles.slideImage}

@@ -1,7 +1,6 @@
 import React, { useState, useLayoutEffect} from "react";
 import clsx from "clsx";
-import OpenZitiLayout from "../components/OpenZitiLayout";
-import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
+
 // @ts-ignore
 import SuperpowersSection  from "../components/SuperpowersSection";
 import ThemedImage from '@theme/ThemedImage';
@@ -14,6 +13,7 @@ import siteConfig from "@generated/docusaurus.config";
 import {cleanUrl} from "@openclint/docusaurus-shared/node";
 import {NetFoundryHorizontalSection, NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
 import {useLocation} from "@docusaurus/router";
+import {starProps} from "../components/consts";
 
 function _docUrl(p:string) {
     return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
@@ -285,12 +285,7 @@ function App() {
         window.addEventListener('resize', handleWindowResize);
     }, []);
 
-    const starProps: StarUsProps = {}
     const {pathname} = useLocation();
-    if (pathname.startsWith('/docs/openziti')) {
-        starProps.repoUrl = 'https://github.com/openziti/ziti';
-        starProps.label = 'Support OpenZiti, give us a GitHub Star';
-    }
     return (
         <NetFoundryLayout className={styles.landing} starProps={starProps} >
             <HeroSection className={styles.aaabbb}/>

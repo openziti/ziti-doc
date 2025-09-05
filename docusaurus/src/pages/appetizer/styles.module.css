@@ -67,6 +67,7 @@
         flex-grow: 1;
         overflow: auto;
         border-radius: 1em;
+        /*max-width: 400px;*/
     }
     .liveMsgContainer {
         display: flex;
@@ -88,7 +89,7 @@
     }
     
     .bgImg1 {
-        background: url(https://openziti.io/assets/images/bg-img-01-d31e592729cad752f0a97013a3f2d210.jpg) no-repeat fixed;
+        background: url('/img/bg-img-01.jpg') no-repeat fixed;
         background-size: 100% 100%;
     }
     

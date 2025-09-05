@@ -608,11 +608,11 @@ div > aside > div > nav > ul > li > a:active {
 }
 
 .bg-img-1 {
-  background: url("/public/images/bg-img-01.jpg") center center/cover no-repeat;
+  background: url("/img/bg-img-01.jpg") center center/cover no-repeat;
 }
 
 .whitez {
-  background: url("/public/images/whitez.svg");
+  background: url("/img/whitez.svg");
   background-position: center;
   background-size: 55px;
   background-repeat: no-repeat;
@@ -1909,28 +1909,28 @@ li.L9 {}
   transition: all 0.3s ease;
   transform: translate3d(0, 0, 0);
   cursor: pointer;
-  background-image: url("/public/images/local.png");
+  background-image: url("/img/local.png");
   background-position: center;
   background-size: 135px;
   background-repeat: no-repeat;
 }
 
 .builderbutton.docker {
-  background-image: url("/public/images/docker.png");
+  background-image: url("/img/docker.png");
   background-position: center;
   background-size: 135px;
   background-repeat: no-repeat;
 }
 
 .builderbutton.compose {
-  background-image: url("/public/images/compose.png");
+  background-image: url("/img/compose.png");
   background-position: center;
   background-size: 135px;
   background-repeat: no-repeat;
 }
 
 .builderbutton.server {
-  background-image: url("/public/images/server.png");
+  background-image: url("/img/server.png");
   background-position: center;
   background-size: 135px;
   background-repeat: no-repeat;
