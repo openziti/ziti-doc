@@ -91,10 +91,6 @@ const redirectsArr: { to: string; from: string[] }[] = [
     from: [docUrl('/category/hosting-openziti')]
   },
   {
-    to: '/blog/',
-    from: ['/blog/zitification/prometheus/part1']
-  },
-  {
     to: docUrl('/learn/core-concepts/data-flow-explainer'),
     from: [docUrl('/guides/data-flow-explainer')],
   },
