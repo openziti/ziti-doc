@@ -36,17 +36,17 @@ erDiagram
 ## Creating
 
 Creating an identity alone may not be enough to make it usable. An identity will also need a valid primary
-authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](/learn/core-concepts/security/enrollment.md#clients).
+authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment.md#clients).
 
-Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth)
+Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth.md)
 
-The following [primary authentication](./auth#primary-authentication) mechanisms require post-creation enrollment:
+The following [primary authentication](./auth.md#primary-authentication) mechanisms require post-creation enrollment:
 
 - Ziti PKI x509 Client Certificate
 - 3rd Party x509 Client Certificate
 - Username Password (UPDB)
 
-The following do not require enrollment, but must have a properly configured [External JWT Signer](./external-jwt-signers)
+The following do not require enrollment, but must have a properly configured [External JWT Signer](./50-external-jwt-signers.md)
 
 - JWT
 
@@ -77,7 +77,7 @@ ziti edge delete enrollment where "identity=<id>"
 
 ### Creating w/ Ziti PKI Client Cert Enrollment
 
-Note: This identity will be using the default [authentication policy](./auth) which allows certificate authentication
+Note: This identity will be using the default [authentication policy](./auth.md) which allows certificate authentication
 
 #### Ziti CLI
 
@@ -97,7 +97,7 @@ Note: This identity will be using the default [authentication policy](./auth) wh
 ```
 
 ### Creating w/ 3rd Party CA Client Cert Enrollment
-Note: This identity will be using the default [authentication policy](./auth) which allows certificate authentication
+Note: This identity will be using the default [authentication policy](./auth.md) which allows certificate authentication
 
 #### Ziti CLI:
 
@@ -117,7 +117,7 @@ It is currently not possible to create identities with a 3rd party certificate e
 ```
 
 ### Creating w/ Username/Password Enrollment
-Note: This identity will be using the default [authentication policy](./auth) which allows UPDB authentication
+Note: This identity will be using the default [authentication policy](./auth.md) which allows UPDB authentication
 
 #### Ziti CLI:
 
@@ -137,7 +137,7 @@ Note: This identity will be using the default [authentication policy](./auth) wh
 ```
 
 ### Creating w/ JWT Authenticator
-Note: A valid [External JWT Signer](./external-jwt-signers) must be created and an [authentication policy](./auth)
+Note: A valid [External JWT Signer](./50-external-jwt-signers.md) must be created and an [authentication policy](./auth.md)
 must be defined that allows the identity to authenticate with that signer.
 
 #### Ziti CLI:
@@ -159,20 +159,20 @@ must be defined that allows the identity to authenticate with that signer.
 
 Deleting an Identity removes all directly associated data. This includes:
 
-- [API Sessions](/learn/core-concepts/security/sessions.md#api-session)
-  - [Sessions](../sessions#session)
-  - [Posture Data](/learn/core-concepts/security/authorization/posture-checks.md#posture-data)
+- [API Sessions](../sessions.md#api-session)
+  - [Sessions](../sessions.md#session)
+  - [Posture Data](../authorization/posture-checks.md#posture-data)
   - [Session Certificates](./20-api-session-certificates.md)
 - Identity Role Attributes
 - [Authenticators](./auth.md#authenticators)
-- [Enrollments](/learn/core-concepts/security/enrollment.md)
+- [Enrollments](../enrollment.md)
 - [MFA TOTP Configuration](./70-totp.md)
 
 It does not remove entities are that re-usable between Identities:
 
 - [Authentication Policies](./30-authentication-policies.md)
-- [Service Policies](/learn/core-concepts/security/authorization/policies/overview.mdx)
-- [Edge Router Policies](/learn/core-concepts/security/authorization/policies/overview.mdx)
+- [Service Policies](../authorization/policies/overview.mdx)
+- [Edge Router Policies](../authorization/policies/overview.mdx)
 
 Deleting an Identity immediately removes it and all current and future access it would have to a network and its
 Services.

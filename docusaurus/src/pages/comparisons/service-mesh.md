@@ -1,3 +1,0 @@
-# OpenZiti Compared to Service Mesh
-
-Words here...

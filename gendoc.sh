@@ -189,11 +189,18 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
 fi
 
 if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
-  echo "collecting stargazer data before building the site... "
-  echo "  - this requires the npm module cvstojson"
-  echo "  - this requires you to have a GITHUB_TOKEN environment variable exported"
-  ./gh-stats.sh
+  if ! command -v csvtojson >/dev/null 2>&1; then
+    echo "❌ csvtojson not installed, skipping stargazer data"
+    ADD_STARGAZER_DATA=no
+  elif [[ -z "${GITHUB_TOKEN:-}" ]]; then
+    echo "❌ GITHUB_TOKEN not set, skipping stargazer data"
+    ADD_STARGAZER_DATA=no
+  else
+    echo "collecting stargazer data before building the site..."
+    "$script_root/gh-stats.sh"
+  fi
 fi
+
 
 if [[ "${SKIP_DOCUSAURUS_GEN}" == no ]]; then
     pushd "${ZITI_DOC_GIT_LOC}/../.." >/dev/null

@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import styles from './styles.module.css';
 
@@ -80,9 +81,13 @@ function DocsCard(props: Props): JSX.Element {
     );
   }
 
+  const {siteConfig} = useDocusaurusContext();
+  const url = siteConfig.customFields?.OPENZITI_DOCS_BASE
+      ? useBaseUrl('/' + siteConfig.customFields.OPENZITI_DOCS_BASE + '/' + props.href)
+      : props.href;
   return (
       <div className={className}>
-        <Link to={props.href} className={clsx(styles.layoutCard)}>
+        <Link to={url} className={clsx(styles.layoutCard)}>
           {content}
         </Link>
       </div>

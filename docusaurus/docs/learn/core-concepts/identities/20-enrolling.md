@@ -23,7 +23,7 @@ and a certificate signing request for the controller's built-in certificate auth
 
 Follow these steps to enroll an identity with a one-time token:
 
-* [create the Identity](./creating)
+* [create the Identity](./10-creating.mdx)
 * download or copy the JWT - this file contains the single use token
 * run the `ziti` CLI:
 
@@ -63,7 +63,7 @@ issued by a validated, [third party CA](../../../learn/core-concepts/pki.mdx#thi
 
 Follow these steps to enroll a 3rd Party CA - one-time token identity:
 
-* [create the Identity](./creating)
+* [create the Identity](./10-creating.mdx)
 * download or copy the JWT - this file contains the one-time token
 * run the `ziti` CLI. Notice you can provide the filename of the identity config JSON file to output:
 

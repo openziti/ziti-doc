@@ -116,7 +116,7 @@ the database which has changed.
 
 ## Snapshot Application and Restarts
 
-If a controller is out of communcation for a while, it may receive a snapshot to apply, rather
+If a controller is out of communication for a while, it may receive a snapshot to apply, rather
 than a stream of events.
 
 If a controller receives a snapshot to apply after startup is complete, it will apply the snapshot and then
@@ -131,7 +131,7 @@ controller don't have to worry about replacing the bolt DB underneath a running 
 
 All events now contain a `event_src_id` to indicate which controller emitted them.
 
-There are some new events which are specific to clusters. See [Cluster Events](../events#cluster) 
+There are some new events which are specific to clusters. See [Cluster Events](../50-events.mdx#cluster) 
 for more detail.
 
 ## Metrics
@@ -174,7 +174,7 @@ An HA setup will have:
   bolt db
 * ctrl.db - the controller bolt db, with the current state of the model
 
-The location of all three is controlled by the [cluster/dataDir](../configuration/controller#cluster) config property.
+The location of all three is controlled by the [cluster/dataDir](../30-configuration/controller.md#cluster) config property.
 
 ```yaml
 raft:

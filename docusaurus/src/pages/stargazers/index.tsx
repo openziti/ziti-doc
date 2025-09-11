@@ -1,11 +1,15 @@
-// src/pages/stargazers/index.tsx
-import React, {useMemo, useRef, useState, useCallback, useEffect} from 'react';
+import React, {useMemo, useRef, useState, useCallback, useEffect, JSX} from 'react';
 import ReactEcharts from 'echarts-for-react';
 import type {ECharts, EChartsOption, SeriesOption} from 'echarts';
 
 import ziti from './all.ziti.stargazers.json';
 import zrok from './all.zrok.stargazers.json';
 import others from './all.other.stargazers.json';
+import styles from "../new-landing/styles.module.css";
+import {NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
+
+import {starProps} from "@openziti/src/components/consts"
+import {openZitiFooter} from "@openziti/src/components/footer";
 
 type StarEvent = { date: string };
 type Point = [number, number];
@@ -251,9 +255,9 @@ export default function Stargazers(): JSX.Element {
     ]), [range]);
 
     return (
-        <>
+        <NetFoundryLayout className={styles.landing} starProps={starProps} footerProps={openZitiFooter}>
             <ReactEcharts option={option} style={{width:'100%', height: 620}} onChartReady={onReady} onEvents={onEvents}/>
             <StatsTable rows={rows} range={range} />
-        </>
+        </NetFoundryLayout>
     );
 }

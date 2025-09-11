@@ -77,11 +77,11 @@ The data model on the router is periodically snapshotted, so it doesn't need to
 be fully restored from a controller on every restart. 
 
 The location and frequency of snapshotting can be 
-[configured using the db and dbSaveIntervalSeconds properties](../configuration/router#edge).
+[configured using the db and dbSaveIntervalSeconds properties](../30-configuration/router.md#edge).
 
 ## Controller Selection
 
-When creating [circuits](/learn/core-concepts/security/SessionsAndConnections.md#data-plane), 
+When creating [circuits](../../learn/core-concepts/security/SessionsAndConnections.md#data-plane), 
 routers will chose the most responsive controller, based on latency. Network operators will
 want to keep an eye on controllers to make sure they can keep up with the circuit creation
 load they receive.

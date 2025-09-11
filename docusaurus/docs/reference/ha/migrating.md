@@ -20,8 +20,8 @@ a migration.
 ### Requirements
 First, ensure that the controller's certificates and configuration meet the requirements.
 
-* For certificate requirements see [Bootstrapping/Certificates](./bootstrapping/certificates).
-* For configuration requirements see [Bootstrapping/Configuration](./bootstrapping/configuration).
+* For certificate requirements see [Bootstrapping/Certificates](./bootstrapping/certificates.md).
+* For configuration requirements see [Bootstrapping/Configuration](./bootstrapping/configuration.md).
 
 ### Data Model Migration
 The controller's data can be imported by using the `db:` setting in the config file.
