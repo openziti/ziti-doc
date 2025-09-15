@@ -15,106 +15,243 @@ import {openZitiFooter} from "@openziti/src/components/footer";
 /* ------------------ Types & Constants ------------------ */
 type StarEvent = { date: string };
 type Point = [number, number];
-type Range = [number, number] | null;
+type DateRange = [number, number] | null;
 
 const DAY = 86_400_000;
 const YEAR = 365 * DAY;
-const COLORS: Record<'ziti'|'zrok'|'others'|'TOTAL', string> = {
+const CHART_HEIGHT = 620;
+const DEBOUNCE_MS = 300;
+
+const COLORS = {
     ziti: '#4F46E5',
     zrok: '#10B981',
     others: '#F59E0B',
     TOTAL: '#111',
+} as const;
+
+const REPOS = {
+    ziti: { data: ziti as StarEvent[], label: 'openziti / ziti', color: COLORS.ziti },
+    zrok: { data: zrok as StarEvent[], label: 'openziti / zrok', color: COLORS.zrok },
+    others: { data: others as StarEvent[], label: 'openziti / others', color: COLORS.others },
+} as const;
+
+/* ------------------ Date Utilities ------------------ */
+const dateUtils = {
+    stripTime: (d: Date): Date =>
+        new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())),
+
+    byDate: (a: StarEvent, b: StarEvent) =>
+        new Date(a.date).getTime() - new Date(b.date).getTime(),
+
+    parseLocalToUtc: (val: string): number => {
+        if (!val) return NaN;
+        const [date, time] = val.split("T");
+        const [y, m, d] = date.split("-").map(Number);
+        const [hh, mm] = time.split(":").map(Number);
+        return Date.UTC(y, m - 1, d, hh, mm);
+    },
+
+    toInputValue: (ms: number): string =>
+        new Date(ms).toISOString().slice(0, 16),
+
+    formatDisplay: (ms: number): string =>
+        new Date(ms).toISOString().slice(0, 10),
+
+    tickFormat: (ts: number, span: number): string => {
+        const d = new Date(ts);
+        if (span > 2 * YEAR) {
+            return d.getUTCMonth() === 0 && d.getUTCDate() === 1
+                ? String(d.getUTCFullYear()) : '';
+        }
+        if (span > 90 * DAY) {
+            return d.getUTCDate() === 1
+                ? `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}` : '';
+        }
+        return `${String(d.getUTCMonth() + 1).padStart(2, '0')}-${String(d.getUTCDate()).padStart(2, '0')}`;
+    }
 };
 
-/* ------------------ Helpers ------------------ */
-function stripTime(d: Date): Date {
-    return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
-}
-function byDate(a: StarEvent, b: StarEvent) {
-    return new Date(a.date).getTime() - new Date(b.date).getTime();
-}
-function tickFormat(ts: number, span: number) {
-    const d = new Date(ts);
-    if (span > 2 * YEAR) return d.getUTCMonth()===0&&d.getUTCDate()===1?String(d.getUTCFullYear()):'';
-    if (span > 90 * DAY) return d.getUTCDate()===1?`${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}`:'';
-    return `${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
+/* ------------------ Data Processing ------------------ */
+function processStarData(events: StarEvent[]) {
+    const sorted = [...events].sort(dateUtils.byDate);
+
+    // Daily counts
+    const dailyMap = new Map<number, number>();
+    for (const { date } of events) {
+        const t = dateUtils.stripTime(new Date(date)).getTime();
+        dailyMap.set(t, (dailyMap.get(t) || 0) + 1);
+    }
+    const daily = Array.from(dailyMap.entries()).sort((a, b) => a[0] - b[0]) as Point[];
+
+    // Cumulative counts
+    const cumulative: Point[] = [];
+    let count = 0;
+    for (const { date } of sorted) {
+        count++;
+        cumulative.push([new Date(date).getTime(), count]);
+    }
+
+    return { daily, cumulative };
 }
 
-/* ------------------ Data Transforms ------------------ */
-function dailyCounts(events: StarEvent[]): Point[] {
-    const map = new Map<number, number>();
-    for (const {date} of events) {
-        const t = stripTime(new Date(date)).getTime();
-        map.set(t, (map.get(t) ?? 0) + 1);
-    }
-    return Array.from(map.entries()).sort((a,b)=>a[0]-b[0]) as Point[];
-}
-function cumulative(events: StarEvent[]): Point[] {
-    const out: Point[] = []; let n=0;
-    for (const {date} of [...events].sort(byDate)) {
-        n+=1; out.push([new Date(date).getTime(), n]);
-    }
-    return out;
-}
-function statsInRange(events: StarEvent[], range: Range) {
+function calculateStats(events: StarEvent[], range: DateRange) {
     if (!events.length) return null;
-    const times = events.map(e=>stripTime(new Date(e.date)).getTime()).sort((a,b)=>a-b);
-    const [minT, maxT] = range ?? [times[0], times[times.length-1]];
-    const inWin = times.filter(t=>t>=minT && t<=maxT);
-    if (!inWin.length) return {stars:0,days:0,avgPerDay:0,daysWithStars:0,maxInOneDay:0,dayWithMost:'—'};
-    const first = inWin[0], last = inWin[inWin.length-1];
-    const numDays = Math.max(1, Math.floor((last-first)/DAY)+1);
+
+    const times = events
+        .map(e => dateUtils.stripTime(new Date(e.date)).getTime())
+        .sort((a, b) => a - b);
+
+    const [minT, maxT] = range || [times[0], times[times.length - 1]];
+    const inWindow = times.filter(t => t >= minT && t <= maxT);
+
+    if (!inWindow.length) {
+        return { stars: 0, days: 0, avgPerDay: 0, daysWithStars: 0, maxInOneDay: 0, dayWithMost: '—' };
+    }
+
+    const first = inWindow[0];
+    const last = inWindow[inWindow.length - 1];
+    const numDays = Math.max(1, Math.floor((last - first) / DAY) + 1);
+
     const dayMap = new Map<number, number>();
-    for (const t of inWin) dayMap.set(t, (dayMap.get(t) ?? 0)+1);
-    let maxDay=first, maxCount=0;
-    for (const [t,c] of dayMap) if (c>maxCount) { maxCount=c; maxDay=t; }
+    for (const t of inWindow) {
+        dayMap.set(t, (dayMap.get(t) || 0) + 1);
+    }
+
+    let maxDay = first;
+    let maxCount = 0;
+    for (const [t, c] of dayMap) {
+        if (c > maxCount) {
+            maxCount = c;
+            maxDay = t;
+        }
+    }
+
     return {
-        stars: inWin.length, days: numDays,
-        avgPerDay:+(inWin.length/numDays).toFixed(3),
-        daysWithStars: dayMap.size, maxInOneDay:maxCount,
-        dayWithMost:new Date(maxDay).toISOString().slice(0,10),
+        stars: inWindow.length,
+        days: numDays,
+        avgPerDay: +(inWindow.length / numDays).toFixed(3),
+        daysWithStars: dayMap.size,
+        maxInOneDay: maxCount,
+        dayWithMost: dateUtils.formatDisplay(maxDay),
     };
 }
 
-/* ------------------ Chart Series ------------------ */
-function seriesPair(
-    name: 'ziti'|'zrok'|'others', color: string, daily: Point[], total: Point[]
+function createSeriesPair(
+    name: keyof typeof REPOS,
+    color: string,
+    daily: Point[],
+    cumulative: Point[]
 ): SeriesOption[] {
     return [
-        { name, xAxisIndex:0,yAxisIndex:0, type:'line', smooth:true, showSymbol:false,
-            itemStyle:{color}, lineStyle:{color,width:2}, areaStyle:{color:color+'22'}, data: total },
-        { name, xAxisIndex:1,yAxisIndex:1, type:'bar', itemStyle:{color}, data: daily }
+        {
+            name, xAxisIndex: 0, yAxisIndex: 0, type: 'line', smooth: true, showSymbol: false,
+            itemStyle: { color }, lineStyle: { color, width: 2 },
+            areaStyle: { color: color + '22' }, data: cumulative
+        },
+        {
+            name, xAxisIndex: 1, yAxisIndex: 1, type: 'bar',
+            itemStyle: { color }, data: daily
+        }
     ];
 }
 
-/* ------------------ Stats Table ------------------ */
-function StatsTable({rows, range}:{rows:{label:string;color:string;s:any}[]; range:Range}) {
-    const formatDate = (t:number)=>new Date(t).toISOString().slice(0,10);
+/* ------------------ UI Components ------------------ */
+interface ControlsProps {
+    snapMidnight: boolean;
+    setSnapMidnight: (snap: boolean) => void;
+    startDate: string;
+    setStartDate: (date: string) => void;
+    endDate: string;
+    setEndDate: (date: string) => void;
+    setIsDateEditing: (editing: boolean) => void;
+}
+
+function Controls({
+                      snapMidnight, setSnapMidnight, startDate, setStartDate,
+                      endDate, setEndDate, setIsDateEditing
+                  }: ControlsProps) {
     return (
-        <div style={{margin:'8px 0 12px',border:'1px solid var(--ifm-table-border-color,#e3e3e3)',
-            borderRadius:8,padding:12}}>
+        <div style={{
+            display: 'flex', alignItems: 'center', gap: '12px',
+            margin: '4px 0 12px', fontSize: '0.9rem'
+        }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <input
+                    type="checkbox"
+                    style={{ width: 14, height: 14 }}
+                    checked={snapMidnight}
+                    onChange={e => setSnapMidnight(e.target.checked)}
+                />
+                Snap to midnight UTC
+            </label>
+            <label>Start:&nbsp;
+                <input
+                    type="datetime-local"
+                    value={startDate}
+                    onFocus={() => setIsDateEditing(true)}
+                    onBlur={() => setIsDateEditing(false)}
+                    onChange={e => setStartDate(e.target.value)}
+                />
+            </label>
+            <label>End:&nbsp;
+                <input
+                    type="datetime-local"
+                    value={endDate}
+                    onFocus={() => setIsDateEditing(true)}
+                    onBlur={() => setIsDateEditing(false)}
+                    onChange={e => setEndDate(e.target.value)}
+                />
+            </label>
+        </div>
+    );
+}
+
+interface StatsTableProps {
+    rows: Array<{ label: string; color: string; stats: any }>;
+    range: DateRange;
+}
+
+function StatsTable({ rows, range }: StatsTableProps) {
+    return (
+        <div style={{
+            margin: '8px 0 12px',
+            border: '1px solid var(--ifm-table-border-color,#e3e3e3)',
+            borderRadius: 8, padding: 12
+        }}>
             {range && (
-                <div style={{marginBottom:8,fontWeight:600}}>
-                    Date range: {formatDate(range[0])} → {formatDate(range[1])}
+                <div style={{ marginBottom: 8, fontWeight: 600 }}>
+                    Date range: {dateUtils.formatDisplay(range[0])} → {dateUtils.formatDisplay(range[1])}
                 </div>
             )}
-            <table style={{width:'100%',borderCollapse:'separate',borderSpacing:0}}>
-                <thead><tr>
-                    <th style={{textAlign:'left'}}>Repo</th>
-                    <th>Number of stars</th><th>Number of days</th>
-                    <th>Average stars per day</th><th>Days with stars</th>
-                    <th>Max stars in one day</th><th>Day with most stars</th>
-                </tr></thead>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0 }}>
+                <thead>
+                <tr>
+                    <th style={{ textAlign: 'left' }}>Repo</th>
+                    <th>Stars</th>
+                    <th>Days</th>
+                    <th>Avg/day</th>
+                    <th>Days w/ stars</th>
+                    <th>Max/day</th>
+                    <th>Peak day</th>
+                </tr>
+                </thead>
                 <tbody>
-                {rows.map(({label,color,s})=>(
+                {rows.map(({ label, color, stats }) => (
                     <tr key={label}>
-                        <td><span style={{background:color,color:'#fff',padding:'2px 8px',borderRadius:999}}>{label}</span></td>
-                        <td style={{textAlign:'center'}}>{s?.stars??0}</td>
-                        <td style={{textAlign:'center'}}>{s?.days??0}</td>
-                        <td style={{textAlign:'center'}}>{s?.avgPerDay??0}</td>
-                        <td style={{textAlign:'center'}}>{s?.daysWithStars??0}</td>
-                        <td style={{textAlign:'center'}}>{s?.maxInOneDay??0}</td>
-                        <td style={{textAlign:'center'}}>{s?.dayWithMost??'—'}</td>
+                        <td>
+                                <span style={{
+                                    background: color, color: '#fff',
+                                    padding: '2px 8px', borderRadius: 999
+                                }}>
+                                    {label}
+                                </span>
+                        </td>
+                        <td style={{ textAlign: 'center' }}>{stats?.stars ?? 0}</td>
+                        <td style={{ textAlign: 'center' }}>{stats?.days ?? 0}</td>
+                        <td style={{ textAlign: 'center' }}>{stats?.avgPerDay ?? 0}</td>
+                        <td style={{ textAlign: 'center' }}>{stats?.daysWithStars ?? 0}</td>
+                        <td style={{ textAlign: 'center' }}>{stats?.maxInOneDay ?? 0}</td>
+                        <td style={{ textAlign: 'center' }}>{stats?.dayWithMost ?? '—'}</td>
                     </tr>
                 ))}
                 </tbody>
@@ -123,211 +260,214 @@ function StatsTable({rows, range}:{rows:{label:string;color:string;s:any}[]; ran
     );
 }
 
-/* ------------------ Controls ------------------ */
-function Controls({
-                      snapMidnight, setSnapMidnight,
-                      startDate, setStartDate,
-                      endDate, setEndDate,
-                      setIsDateEditing
-                  }: any) {
-    return (
-        <div style={{display:'flex',alignItems:'center',gap:'12px',
-            margin:'4px 0 12px',fontSize:'0.9rem'}}>
-            <label style={{display:'flex',alignItems:'center',gap:4}}>
-                <input type="checkbox" style={{width:14,height:14}}
-                       checked={snapMidnight} onChange={e=>setSnapMidnight(e.target.checked)}/>
-                Snap to midnight UTC
-            </label>
-            <label>Start:&nbsp;
-                <input
-                    type="datetime-local"
-                    value={startDate}
-                    onFocus={()=>setIsDateEditing(true)}
-                    onBlur={()=>setIsDateEditing(false)}
-                    onChange={e=>setStartDate(e.target.value)}
-                />
-            </label>
-            <label>End:&nbsp;
-                <input
-                    type="datetime-local"
-                    value={endDate}
-                    onFocus={()=>setIsDateEditing(true)}
-                    onBlur={()=>setIsDateEditing(false)}
-                    onChange={e=>setEndDate(e.target.value)}
-                />
-            </label>
-        </div>
-    );
-}
-
 /* ------------------ Main Component ------------------ */
 export default function Stargazers(): JSX.Element {
-    const chartRef = useRef<ECharts|null>(null);
-    const [range, setRange] = useState<Range>(null);
+    const chartRef = useRef<ECharts | null>(null);
+    const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const [range, setRange] = useState<DateRange>(null);
     const [liveSpan, setLiveSpan] = useState<number>(0);
     const [snapMidnight, setSnapMidnight] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [legendSelected, setLegendSelected] = useState<Record<string, boolean>>({
+    const [isDateEditing, setIsDateEditing] = useState(false);
+    const [legendSelected, setLegendSelected] = useState({
         ziti: true, zrok: true, others: true, TOTAL: false
     });
-    const pendingRange = useRef<Range>(null);
-    const debounceRef = useRef<ReturnType<typeof setTimeout>|null>(null);
-    const [isDateEditing, setIsDateEditing] = useState(false);
 
-    const zitiDaily = useMemo(()=>dailyCounts(ziti as StarEvent[]),[]);
-    const zrokDaily = useMemo(()=>dailyCounts(zrok as StarEvent[]),[]);
-    const othersDaily = useMemo(()=>dailyCounts(others as StarEvent[]),[]);
-    const zitiTotal = useMemo(()=>cumulative(ziti as StarEvent[]),[]);
-    const zrokTotal = useMemo(()=>cumulative(zrok as StarEvent[]),[]);
-    const othersTotal = useMemo(()=>cumulative(others as StarEvent[]),[]);
-    const totalAll = useMemo(()=>cumulative([...ziti as StarEvent[],...zrok as StarEvent[],...others as StarEvent[]]),[]);
-    const totalDaily = useMemo(()=>dailyCounts([...ziti as StarEvent[],...zrok as StarEvent[],...others as StarEvent[]]),[]);
+    // Process all data once
+    const processedData = useMemo(() => {
+        const allEvents = [...REPOS.ziti.data, ...REPOS.zrok.data, ...REPOS.others.data];
+        const totalData = processStarData(allEvents);
 
-    const globalMin = useMemo(()=>Math.min(...[...zitiTotal,...zrokTotal,...othersTotal].map(p=>p[0])),[zitiTotal,zrokTotal,othersTotal]);
-    const globalMax = useMemo(()=>Math.max(...[...zitiTotal,...zrokTotal,...othersTotal].map(p=>p[0])),[zitiTotal,zrokTotal,othersTotal]);
+        return {
+            ziti: processStarData(REPOS.ziti.data),
+            zrok: processStarData(REPOS.zrok.data),
+            others: processStarData(REPOS.others.data),
+            total: totalData,
+        };
+    }, []);
 
-    useEffect(()=>{
-        if (!Number.isFinite(globalMin)||!Number.isFinite(globalMax)) return;
-        const s = stripTime(new Date(globalMin)).getTime();
-        const e = stripTime(new Date(globalMax)).getTime();
-        setRange([s,e]);
-        setLiveSpan(globalMax-globalMin);
-        setStartDate(new Date(s).toISOString().slice(0,16));
-        setEndDate(new Date(e).toISOString().slice(0,16));
-    },[globalMin,globalMax]);
-    useEffect(()=>{
-        if (!Number.isFinite(globalMin)||!Number.isFinite(globalMax)) return;
-        setRange([stripTime(new Date(globalMin)).getTime(), stripTime(new Date(globalMax)).getTime()]);
-        setLiveSpan(globalMax-globalMin);
-    },[globalMin,globalMax]);
-    useEffect(()=>{
-        if (startDate&&endDate){
-            const s=new Date(startDate).getTime(), e=new Date(endDate).getTime();
-            setRange([s,e]);
-        }
-    },[startDate,endDate]);
-    useEffect(()=>{
-        if (!isDateEditing) return;   // skip auto-updates while editing
-        if (startDate || endDate) {
-            console.log('[DATE WIDGET CHANGE]', {startDate, endDate});
-            const s = new Date(startDate).getTime();
-            const e = new Date(endDate).getTime();
-            if (!isNaN(s) && !isNaN(e) && e > s) {
-                setRange([s,e]);
-                setLiveSpan(e-s);                 // keep span in sync
-                console.log('[DATE → CHART]', {s,e});
-                if (chartRef.current) {
-                    chartRef.current.dispatchAction({
-                        type: 'dataZoom',
-                        startValue: s,
-                        endValue: e
-                    });
-                    console.log("chartRef modified? :(");
-                } else {
-                    console.log("chartRef not set? :(");
-                }
+    // Calculate global min/max
+    const { globalMin, globalMax } = useMemo(() => {
+        const allPoints = [
+            ...processedData.ziti.cumulative,
+            ...processedData.zrok.cumulative,
+            ...processedData.others.cumulative
+        ];
+        return {
+            globalMin: Math.min(...allPoints.map(p => p[0])),
+            globalMax: Math.max(...allPoints.map(p => p[0]))
+        };
+    }, [processedData]);
+
+    // Initialize date range
+    useEffect(() => {
+        if (!Number.isFinite(globalMin) || !Number.isFinite(globalMax)) return;
+
+        const startMs = dateUtils.stripTime(new Date(globalMin)).getTime();
+        const endMs = dateUtils.stripTime(new Date(globalMax)).getTime();
+
+        setRange([startMs, endMs]);
+        setLiveSpan(globalMax - globalMin);
+        setStartDate(dateUtils.toInputValue(startMs));
+        setEndDate(dateUtils.toInputValue(endMs));
+    }, [globalMin, globalMax]);
+
+    // Handle date input changes
+    useEffect(() => {
+        if (!startDate || !endDate) return;
+
+        const start = dateUtils.parseLocalToUtc(startDate);
+        const end = dateUtils.parseLocalToUtc(endDate);
+
+        if (!isNaN(start) && !isNaN(end) && end > start) {
+            setRange([start, end]);
+            if (isDateEditing && chartRef.current) {
+                chartRef.current.dispatchAction({
+                    type: 'dataZoom',
+                    startValue: start,
+                    endValue: end
+                });
             }
         }
-    },[startDate,endDate]);
+    }, [startDate, endDate, isDateEditing]);
+
+    const handleZoom = useCallback((e: any) => {
+        const batch = (e?.batch && e.batch[0]) ? e.batch[0] : e || {};
+        let { startValue, endValue, start, end } = batch;
+
+        // Calculate values from percentages if needed
+        if (startValue == null || endValue == null) {
+            const spanAll = globalMax - globalMin;
+            startValue = Math.round(globalMin + ((start ?? 0) / 100) * spanAll);
+            endValue = Math.round(globalMin + ((end ?? 100) / 100) * spanAll);
+        }
+
+        // Snap to midnight if enabled
+        if (snapMidnight) {
+            startValue = dateUtils.stripTime(new Date(startValue)).getTime();
+            endValue = dateUtils.stripTime(new Date(endValue)).getTime() + (DAY - 1);
+        }
+
+        setLiveSpan(Math.max(1, endValue - startValue));
+
+        const startDay = dateUtils.stripTime(new Date(startValue)).getTime();
+        const endDay = dateUtils.stripTime(new Date(endValue)).getTime() + (DAY - 1);
+
+        // Debounced range update
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        debounceRef.current = setTimeout(() => setRange([startDay, endDay]), DEBOUNCE_MS);
+
+        // Update date inputs only when zoom comes from chart interaction, not date editing
+        setStartDate(dateUtils.toInputValue(startDay));
+        setEndDate(dateUtils.toInputValue(endDay));
+    }, [globalMin, globalMax, snapMidnight]);
+
+    const chartOption: EChartsOption = useMemo(() => {
+        const span = liveSpan || (globalMax - globalMin);
+        const minSpan = Math.max(DAY, Math.floor(span * 0.01));
+
+        const xAxisConfig = {
+            type: 'time' as const,
+            minInterval: DAY,
+            axisLabel: {
+                hideOverlap: true,
+                showMinLabel: true,
+                showMaxLabel: true,
+                formatter: (val: number) => dateUtils.tickFormat(val, span)
+            },
+            axisTick: { alignWithLabel: true }
+        };
+
+        return {
+            title: { text: 'OpenZiti Repos — Stars (Total & Daily)', left: 8, top: 2, padding: [0, 0, 6, 0] },
+            legend: {
+                top: 28, right: 8,
+                data: [{ name: 'ziti' }, { name: 'zrok' }, { name: 'others' }, { name: 'TOTAL' }],
+                selected: legendSelected,
+                selectedMode: 'multiple'
+            },
+            tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+            grid: [
+                { left: 48, right: 16, top: 64, height: '48%', containLabel: true },
+                { left: 48, right: 16, top: '66%', height: '24%', containLabel: true }
+            ],
+            xAxis: [{ ...xAxisConfig, gridIndex: 0 }, { ...xAxisConfig, gridIndex: 1 }],
+            yAxis: [
+                { type: 'value', name: 'Total Stars', gridIndex: 0, min: 'dataMin' },
+                { type: 'value', name: 'Daily Stars', gridIndex: 1, min: 0 }
+            ],
+            color: [COLORS.ziti, COLORS.zrok, COLORS.others, COLORS.TOTAL],
+            dataZoom: [
+                { type: 'inside', xAxisIndex: [0, 1] },
+                {
+                    type: 'slider', xAxisIndex: [0, 1], height: 36, bottom: 52, showDetail: true,
+                    handleSize: '140%', minValueSpan: minSpan, startValue: range?.[0], endValue: range?.[1],
+                    borderRadius: 6, fillerColor: 'rgba(84,132,255,0.25)', handleStyle: { borderWidth: 1 }
+                }
+            ],
+            series: [
+                ...createSeriesPair('ziti', COLORS.ziti, processedData.ziti.daily, processedData.ziti.cumulative),
+                ...createSeriesPair('zrok', COLORS.zrok, processedData.zrok.daily, processedData.zrok.cumulative),
+                ...createSeriesPair('others', COLORS.others, processedData.others.daily, processedData.others.cumulative),
+                {
+                    id: 'TOTAL-line', name: 'TOTAL', xAxisIndex: 0, yAxisIndex: 0, type: 'line',
+                    smooth: true, showSymbol: false, legendHoverLink: false,
+                    itemStyle: { color: COLORS.TOTAL },
+                    lineStyle: { color: COLORS.TOTAL, width: 2, type: 'dashed' },
+                    data: processedData.total.cumulative
+                },
+                {
+                    id: 'TOTAL-bar', name: 'TOTAL', xAxisIndex: 1, yAxisIndex: 1, type: 'bar',
+                    legendHoverLink: false, itemStyle: { color: COLORS.TOTAL },
+                    data: processedData.total.daily
+                }
+            ]
+        };
+    }, [processedData, liveSpan, globalMin, globalMax, range, legendSelected]);
+
+    const onEvents = useMemo(() => ({
+        datazoom: handleZoom,
+        dataZoom: handleZoom,
+        legendselectchanged: (e: any) => {
+            setLegendSelected(prev => ({ ...prev, [e.name]: e.selected[e.name] }));
+        }
+    }), [handleZoom]);
+
+    const statsRows = useMemo(() => [
+        { label: REPOS.ziti.label, color: REPOS.ziti.color, stats: calculateStats(REPOS.ziti.data, range) },
+        { label: REPOS.zrok.label, color: REPOS.zrok.color, stats: calculateStats(REPOS.zrok.data, range) },
+        { label: REPOS.others.label, color: REPOS.others.color, stats: calculateStats(REPOS.others.data, range) },
+        {
+            label: 'TOTAL',
+            color: COLORS.TOTAL,
+            stats: calculateStats([...REPOS.ziti.data, ...REPOS.zrok.data, ...REPOS.others.data], range)
+        },
+    ], [range]);
 
     const handleReady = useCallback((chart: ECharts) => {
         chartRef.current = chart;
     }, []);
 
-    const option: EChartsOption = useMemo(()=>{
-        const span = liveSpan||(globalMax-globalMin);
-        const minSpan = Math.max(DAY, Math.floor(span*0.01));
-        const xCommon = { type:'time', minInterval:DAY,
-            axisLabel:{hideOverlap:true,showMinLabel:true,showMaxLabel:true,
-                formatter:(val:number)=>tickFormat(+val,span)},
-            axisTick:{alignWithLabel:true}
-        } as const;
-        return {
-            title:{text:'OpenZiti Repos — Stars (Total & Daily)',left:8,top:2,padding:[0,0,6,0]},
-            legend:{
-                top:28, right:8,
-                data:[{name:'ziti'},{name:'zrok'},{name:'others'},{name:'TOTAL'}],
-                selected: legendSelected,            // ← persist selection
-                selectedMode: 'multiple'
-            },
-            tooltip:{trigger:'axis',axisPointer:{type:'cross'}},
-            grid:[{left:48,right:16,top:64,height:'48%',containLabel:true},
-                {left:48,right:16,top:'66%',height:'24%',containLabel:true}],
-            xAxis:[{...xCommon,gridIndex:0},{...xCommon,gridIndex:1}],
-            yAxis:[{type:'value',name:'Total Stars',gridIndex:0,min:'dataMin'},
-                {type:'value',name:'Daily Stars',gridIndex:1,min:0}],
-            color:[COLORS.ziti,COLORS.zrok,COLORS.others,COLORS.TOTAL],
-            dataZoom:[
-                {type:'inside',xAxisIndex:[0,1]},
-                {type:'slider',xAxisIndex:[0,1],height:36,bottom:52,showDetail:true,
-                    handleSize:'140%',minValueSpan:minSpan,startValue:range?.[0],endValue:range?.[1],
-                    borderRadius:6,fillerColor:'rgba(84,132,255,0.25)',handleStyle:{borderWidth:1}}
-            ],
-            series:[
-                ...seriesPair('ziti',COLORS.ziti,zitiDaily,zitiTotal),
-                ...seriesPair('zrok',COLORS.zrok,zrokDaily,zrokTotal),
-                ...seriesPair('others',COLORS.others,othersDaily,othersTotal),
-                { id:'TOTAL-line', name:'TOTAL', xAxisIndex:0, yAxisIndex:0, type:'line', smooth:true, showSymbol:false,
-                    legendHoverLink:false, itemStyle:{color:COLORS.TOTAL},
-                    lineStyle:{color:COLORS.TOTAL,width:2,type:'dashed'}, data:totalAll },
-                { id:'TOTAL-bar', name:'TOTAL', xAxisIndex:1, yAxisIndex:1, type:'bar',
-                    legendHoverLink:false, itemStyle:{color:COLORS.TOTAL}, data:totalDaily }
-            ]
-        };
-    },[zitiDaily,zrokDaily,othersDaily,zitiTotal,zrokTotal,othersTotal,liveSpan,globalMin,globalMax,range,totalAll,totalDaily,legendSelected]);
-
-    const handleZoom = useCallback((e:any)=>{
-        const b=(e?.batch&&e.batch[0])?e.batch[0]:e||{};
-        let {startValue,endValue,start,end}=b;
-        if(startValue==null||endValue==null){
-            const spanAll=globalMax-globalMin;
-            startValue=Math.round(globalMin+((start??0)/100)*spanAll);
-            endValue=Math.round(globalMin+((end??100)/100)*spanAll);
-        }
-        if(snapMidnight){
-            startValue=stripTime(new Date(startValue)).getTime();
-            endValue=stripTime(new Date(endValue)).getTime()+(DAY-1);
-        }
-        setLiveSpan(Math.max(1,endValue-startValue));
-        const sDay=stripTime(new Date(startValue)).getTime();
-        const eDay=stripTime(new Date(endValue)).getTime()+(DAY-1);
-        pendingRange.current=[sDay,eDay];
-        if(debounceRef.current) clearTimeout(debounceRef.current);
-        debounceRef.current=setTimeout(()=>setRange(pendingRange.current),300);
-        setStartDate(new Date(sDay).toISOString().slice(0,16));
-        setEndDate(new Date(eDay).toISOString().slice(0,16));
-    },[globalMin,globalMax,snapMidnight]);
-
-    const onEvents = useMemo(() => ({
-        datazoom: handleZoom,
-        dataZoom: handleZoom,
-        legendselectchanged: (e:any) => {
-            setLegendSelected(prev => ({ ...prev, [e.name]: e.selected[e.name] })); // ← keep selection on zoom/rerenders
-        }
-    }), [handleZoom]);
-
-    const rows = useMemo(()=>[
-        {label:'openziti / ziti',color:COLORS.ziti,s:statsInRange(ziti as StarEvent[],range)},
-        {label:'openziti / zrok',color:COLORS.zrok,s:statsInRange(zrok as StarEvent[],range)},
-        {label:'openziti / others',color:COLORS.others,s:statsInRange(others as StarEvent[],range)},
-        {label:'TOTAL',color:COLORS.TOTAL,s:statsInRange([...ziti as StarEvent[],...zrok as StarEvent[],...others as StarEvent[]],range)},
-    ],[range]);
-
     return (
         <NetFoundryLayout className={styles.landing} starProps={starProps} footerProps={openZitiFooter}>
             <ReactEcharts
-                option={option}
-                style={{width:'100%',height:620}}
+                option={chartOption}
+                style={{ width: '100%', height: CHART_HEIGHT }}
                 onEvents={onEvents}
                 onChartReady={handleReady}
             />
-            <Controls snapMidnight={snapMidnight} setSnapMidnight={setSnapMidnight}
-                      startDate={startDate} setStartDate={setStartDate}
-                      endDate={endDate} setEndDate={setEndDate}
-                      setIsDateEditing={setIsDateEditing}
+            <Controls
+                snapMidnight={snapMidnight}
+                setSnapMidnight={setSnapMidnight}
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                setIsDateEditing={setIsDateEditing}
             />
-            <StatsTable rows={rows} range={range}/>
+            <StatsTable rows={statsRows} range={range} />
         </NetFoundryLayout>
     );
 }
