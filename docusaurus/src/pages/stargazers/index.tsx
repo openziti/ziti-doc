@@ -127,7 +127,8 @@ function StatsTable({rows, range}:{rows:{label:string;color:string;s:any}[]; ran
 function Controls({
                       snapMidnight, setSnapMidnight,
                       startDate, setStartDate,
-                      endDate, setEndDate
+                      endDate, setEndDate,
+                      setIsDateEditing
                   }: any) {
     return (
         <div style={{display:'flex',alignItems:'center',gap:'12px',
@@ -138,14 +139,22 @@ function Controls({
                 Snap to midnight UTC
             </label>
             <label>Start:&nbsp;
-                <input type="datetime-local" value={startDate}
-                       style={{fontSize:'0.85rem'}}
-                       onChange={e=>setStartDate(e.target.value)}/>
+                <input
+                    type="datetime-local"
+                    value={startDate}
+                    onFocus={()=>setIsDateEditing(true)}
+                    onBlur={()=>setIsDateEditing(false)}
+                    onChange={e=>setStartDate(e.target.value)}
+                />
             </label>
             <label>End:&nbsp;
-                <input type="datetime-local" value={endDate}
-                       style={{fontSize:'0.85rem'}}
-                       onChange={e=>setEndDate(e.target.value)}/>
+                <input
+                    type="datetime-local"
+                    value={endDate}
+                    onFocus={()=>setIsDateEditing(true)}
+                    onBlur={()=>setIsDateEditing(false)}
+                    onChange={e=>setEndDate(e.target.value)}
+                />
             </label>
         </div>
     );
@@ -164,6 +173,7 @@ export default function Stargazers(): JSX.Element {
     });
     const pendingRange = useRef<Range>(null);
     const debounceRef = useRef<ReturnType<typeof setTimeout>|null>(null);
+    const [isDateEditing, setIsDateEditing] = useState(false);
 
     const zitiDaily = useMemo(()=>dailyCounts(ziti as StarEvent[]),[]);
     const zrokDaily = useMemo(()=>dailyCounts(zrok as StarEvent[]),[]);
@@ -179,6 +189,15 @@ export default function Stargazers(): JSX.Element {
 
     useEffect(()=>{
         if (!Number.isFinite(globalMin)||!Number.isFinite(globalMax)) return;
+        const s = stripTime(new Date(globalMin)).getTime();
+        const e = stripTime(new Date(globalMax)).getTime();
+        setRange([s,e]);
+        setLiveSpan(globalMax-globalMin);
+        setStartDate(new Date(s).toISOString().slice(0,16));
+        setEndDate(new Date(e).toISOString().slice(0,16));
+    },[globalMin,globalMax]);
+    useEffect(()=>{
+        if (!Number.isFinite(globalMin)||!Number.isFinite(globalMax)) return;
         setRange([stripTime(new Date(globalMin)).getTime(), stripTime(new Date(globalMax)).getTime()]);
         setLiveSpan(globalMax-globalMin);
     },[globalMin,globalMax]);
@@ -188,6 +207,33 @@ export default function Stargazers(): JSX.Element {
             setRange([s,e]);
         }
     },[startDate,endDate]);
+    useEffect(()=>{
+        if (!isDateEditing) return;   // skip auto-updates while editing
+        if (startDate || endDate) {
+            console.log('[DATE WIDGET CHANGE]', {startDate, endDate});
+            const s = new Date(startDate).getTime();
+            const e = new Date(endDate).getTime();
+            if (!isNaN(s) && !isNaN(e) && e > s) {
+                setRange([s,e]);
+                setLiveSpan(e-s);                 // keep span in sync
+                console.log('[DATE → CHART]', {s,e});
+                if (chartRef.current) {
+                    chartRef.current.dispatchAction({
+                        type: 'dataZoom',
+                        startValue: s,
+                        endValue: e
+                    });
+                    console.log("chartRef modified? :(");
+                } else {
+                    console.log("chartRef not set? :(");
+                }
+            }
+        }
+    },[startDate,endDate]);
+
+    const handleReady = useCallback((chart: ECharts) => {
+        chartRef.current = chart;
+    }, []);
 
     const option: EChartsOption = useMemo(()=>{
         const span = liveSpan||(globalMax-globalMin);
@@ -270,10 +316,17 @@ export default function Stargazers(): JSX.Element {
 
     return (
         <NetFoundryLayout className={styles.landing} starProps={starProps} footerProps={openZitiFooter}>
-            <ReactEcharts option={option} style={{width:'100%',height:620}} onEvents={onEvents}/>
+            <ReactEcharts
+                option={option}
+                style={{width:'100%',height:620}}
+                onEvents={onEvents}
+                onChartReady={handleReady}
+            />
             <Controls snapMidnight={snapMidnight} setSnapMidnight={setSnapMidnight}
                       startDate={startDate} setStartDate={setStartDate}
-                      endDate={endDate} setEndDate={setEndDate}/>
+                      endDate={endDate} setEndDate={setEndDate}
+                      setIsDateEditing={setIsDateEditing}
+            />
             <StatsTable rows={rows} range={range}/>
         </NetFoundryLayout>
     );
