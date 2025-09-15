@@ -37,8 +37,8 @@ echo "$script_root"
 : ${SKIP_GIT:=no}
 : ${SKIP_LINKED_DOC:=no}
 : ${SKIP_CLEAN:=no}
-ZITI_DOC_GIT_LOC="${script_root}/docusaurus/docs/_remotes"
-SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
+: ${ZITI_DOC_GIT_LOC:="${script_root}/docusaurus/docs/_remotes"}
+: ${SDK_ROOT_TARGET:="${script_root}/docusaurus/static/docs/reference/developer/sdk"}
 : ${ZITI_DOCUSAURUS:=yes}
 : ${SKIP_DOCUSAURUS_GEN:=no}
 : ${ZITI_GEN_ZIP:=no}
@@ -102,8 +102,10 @@ fi
 if [[ "${SKIP_CLEAN}" == no ]]; then
   if test -d "${SDK_ROOT_TARGET}"; then
     # specifically using ../ziti-doc just to remove any chance to rm something unintended
-    echo removing previous build at: rm -r "${SDK_ROOT_TARGET}"
+    echo "SDK_ROOT_TARGET exists. removing previous build at: rm -r ${SDK_ROOT_TARGET}"
     rm -r "${SDK_ROOT_TARGET}" || true
+  else
+    echo "SDK_ROOT_TARGET [${SDK_ROOT_TARGET}] does not exist"
   fi
 fi
 
