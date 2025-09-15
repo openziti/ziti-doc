@@ -391,7 +391,7 @@ export default function Stargazers(): JSX.Element {
             tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
             grid: [
                 { left: 48, right: 16, top: 64, height: '48%', containLabel: true },
-                { left: 48, right: 16, top: '66%', height: '24%', containLabel: true }
+                { left: 54, right: 16, top: '66%', height: '24%', containLabel: true }
             ],
             xAxis: [{ ...xAxisConfig, gridIndex: 0 }, { ...xAxisConfig, gridIndex: 1 }],
             yAxis: [
@@ -421,6 +421,8 @@ export default function Stargazers(): JSX.Element {
                 {
                     id: 'TOTAL-bar', name: 'TOTAL', xAxisIndex: 1, yAxisIndex: 1, type: 'bar',
                     legendHoverLink: false, itemStyle: { color: COLORS.TOTAL },
+                    barWidth: '80%', // Fixed bar width for alignment
+                    barMaxWidth: 20, // Prevent bars from getting too wide when zoomed in
                     data: processedData.total.daily
                 }
             ]
