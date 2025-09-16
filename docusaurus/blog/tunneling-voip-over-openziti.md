@@ -4,7 +4,7 @@ date: 2022-08-05T15:43:13Z
 cuid: cl6gmz8i302jtxvnv7bxk7c79
 slug: tunneling-voip-over-openziti
 authors: [ShawnCarey]
-image: /res/hashnode/image/unsplash/l4z7A2bl0oE/upload/v1659714491474/EAmibi9_df.jpeg
+image: /blogs/openziti/EAmibi9_df.jpeg
 tags: 
   - security
   - networking
