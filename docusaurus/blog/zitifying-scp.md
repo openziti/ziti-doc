@@ -4,7 +4,7 @@ date: 2021-08-12T14:45:18Z
 cuid: cl475237g030diunv9eu78yn8
 slug: zitifying-scp
 authors: [ClintDovholuk]
-image: /docs/blogs/openziti/5dcfe6cb113284b378817a8ad5878f98.jpeg
+image: /blogs/openziti//5dcfe6cb113284b378817a8ad5878f98.jpeg
 tags: 
   - security
   - zero-trust

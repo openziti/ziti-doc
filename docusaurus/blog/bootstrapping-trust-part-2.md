@@ -4,7 +4,7 @@ date: 2022-06-03T12:42:37Z
 cuid: cl3yfsb8900joemnv4jk46g98
 slug: bootstrapping-trust-part-2-a-primer-on-public-key-cryptography
 authors: [AndrewMartinez]
-image: /docs/blogs/openzitiv1654265273968/JSUhAzpL_.jpeg
+image: /blogs/openziti/v1654265273968/JSUhAzpL_.jpeg
 tags: 
   - security
 
@@ -69,7 +69,7 @@ The data that will be signed can be anything. What it represents is not importan
 
 For example, here is the Ziti logo:
 
-![](/docs/blogs/openziti/v1654257666736/kPJ_N4wis.png align="left")
+![](/blogs/openziti/v1654257666736/kPJ_N4wis.png align="left")
 
 This logo's file can be hashed using SHA-256 via the `sha256sum` command commonly found on Linux.
 

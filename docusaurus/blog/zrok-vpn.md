@@ -4,7 +4,7 @@ date: 2024-05-21T15:17:50Z
 cuid: clwgjhize000d0ck18y703n52
 slug: zrok-vpn
 authors: [EugeneKobyakov]
-image: /docs/blogs/openzitiv1716212137599/451cee0f-8d37-4ab2-8548-8a62b42656af.png
+image: /blogs/openziti/v1716212137599/451cee0f-8d37-4ab2-8548-8a62b42656af.png
 tags: 
   - zerotrust
   - zrok

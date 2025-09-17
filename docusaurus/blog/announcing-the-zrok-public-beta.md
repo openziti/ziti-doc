@@ -4,7 +4,7 @@ date: 2023-07-25T15:15:12Z
 cuid: clkifuqp8000009mmc6jcau1w
 slug: announcing-the-zrok-public-beta
 authors: [MichaelQuigley]
-image: /docs/blogs/openzitiv1690218347002/fb39d742-b2a5-45c8-ab30-f782f588b794.avif
+image: /blogs/openziti/v1690218347002/fb39d742-b2a5-45c8-ab30-f782f588b794.avif
 tags: 
   - opensource
   - networking
@@ -32,11 +32,11 @@ invitation sent to 'michael.quigley@netfoundry.io'!
 
 After you submit your email, you'll receive an email with a link to complete your registration through the `zrok` web console.
 
-![](/docs/blogs/openziti/v1690217651594/1c8a7251-410a-4134-8b1f-ad2ea28fcacb.png)
+![](/blogs/openziti/v1690217651594/1c8a7251-410a-4134-8b1f-ad2ea28fcacb.png)
 
 After you've logged in through the web console, use the "Enable Your Environment" function in the drop-down menu by clicking on your email address. The Enable Your Environment dialog contains a shortcut to the `zrok enable` command that you'll use to link your shell environment to your `zrok` account.
 
-![](/docs/blogs/openziti/v1690217712774/3bce830b-2848-4466-9e5b-6ab7db442974.png)
+![](/blogs/openziti/v1690217712774/3bce830b-2848-4466-9e5b-6ab7db442974.png)
 
 Once your shell environment is enabled, you're free to create and access shares. See the [getting started guide](https://docs.zrok.io/docs/getting-started) for more details.
 

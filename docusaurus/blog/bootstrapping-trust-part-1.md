@@ -4,7 +4,7 @@ date: 2022-06-03T12:20:35Z
 cuid: cl3yezz5h0071jenv50mr48ia
 slug: bootstrapping-trust-part-1-encryption-everywhere
 authors: [AndrewMartinez]
-image: /docs/blogs/openzitiv1654265273968/JSUhAzpL_.jpeg
+image: /blogs/openziti/v1654265273968/JSUhAzpL_.jpeg
 tags: 
   - security
 
@@ -55,7 +55,7 @@ In a Zero Trust model, there needs to exist mechanisms to verify identities such
 
 This process is not the typical connection order on a network. Most connections on a network are made in the reverse order. At first, this may seem counter-intuitive. To help make Zero Trust and bootstrapping trust a bit clearer, it helps to have a concrete system to use an example. It just so happens that the Ziti software system makes a great example!
 
-![Ziti System Diagram](/docs/blogs/openziti/v1654257671096/sxd8XxGHc.png align="left")
+![Ziti System Diagram](/blogs/openziti/v1654257671096/sxd8XxGHc.png align="left")
 
 In Ziti, all of the above steps require interacting with a Ziti Controller. The Ziti Controller manages the Ziti overlay network by maintaining a list of known network services, SDK clients, routers, enrollments, policies, and much more! All of these pieces working together to create a Ziti Network. A Ziti Network is an overlay network - meaning it creates a virtual network on top of a concrete network. The concrete network may be the internet, a university network, or your own home network. Whatever it is, it is referred to as the underlay network.
 
@@ -89,7 +89,7 @@ So we have decided that public-key cryptography is the answer. What does that me
 
 Consider the following diagram of a "mesh" distributed system. This mesh could be any type of system such as a mesh of Ziti Routers, or maybe it is a system of sensors on an airplane. What they do does not matter. What matters is that this system has multiple pieces of software connecting amongst themselves. Consider what it means to accomplish this using public-key cryptography.
 
-![](/docs/blogs/openziti/v1654257672325/FSrRyzXGm.png align="left")
+![](/blogs/openziti/v1654257672325/FSrRyzXGm.png align="left")
 
 In the diagram above, each system needs:
 

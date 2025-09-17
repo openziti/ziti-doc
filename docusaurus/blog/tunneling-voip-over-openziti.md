@@ -4,7 +4,7 @@ date: 2022-08-05T15:43:13Z
 cuid: cl6gmz8i302jtxvnv7bxk7c79
 slug: tunneling-voip-over-openziti
 authors: [ShawnCarey]
-image: /docs/blogs/openziti/EAmibi9_df.jpeg
+image: /blogs/openziti//EAmibi9_df.jpeg
 tags: 
   - security
   - networking
@@ -22,7 +22,7 @@ This will include a how-to guide on standing up an OpenZiti network and using Op
 
 ## My VoIP is working perfectly right now… what’s the problem?
 
-![voip-vulnerability-architecture.png](/docs/blogs/openziti/v1660750218633/HCbn-iFaF.png align="left")
+![voip-vulnerability-architecture.png](/blogs/openziti/v1660750218633/HCbn-iFaF.png align="left")
 
 VoIP inherently relies on a strong and stable internet connection with low latency. Any disruption can impact performance and service availability. VoIP systems have critical components which need to be open to networks to operate – including SIP servers, SBCs, IP-PBX, proxies and TURN servers. By being exposed to the network (and internet) these systems are vulnerable to external attack, including DoS/DDoS. In 2021 we saw an [upsurge in the number of damaging DoS, DDoS and ransomware type cyberattacks](https://www.techradar.com/news/ddos-attack-takes-yet-another-voip-provider-offline) against VoIP systems.
 
@@ -32,7 +32,7 @@ While not a problem for all VoIP users, some have stringent availability require
 
 We created OpenZiti to provide the next generation of secure, open-source networking for any application. It allows you to easily apply zero-trust principles, and high-performance mesh networking on any Internet connection, without VPNs.
 
-![secure-voip-architecture.png](/docs/blogs/openziti/v1660750445519/vwC0Tlg8z.png align="right")
+![secure-voip-architecture.png](/blogs/openziti/v1660750445519/vwC0Tlg8z.png align="right")
 
 Both sides of the application, VoIP in this case, use strong identity (X.509 certificate; bi-directionally authenticated and authorized) to build outbound-only overlays – we call this [dark or invisible networks](https://www.youtube.com/watch?v=ygHTixbra6A&list=PLMUj_5fklasKF1oisSSuLwSzLVxuL9JbC&index=5&t=3s&ab_channel=OpenZiti). As a result, our critical components do not need to be exposed to the internet - closed inbound ports or deny all inbound on the firewall.  
 An application using a Ziti Network configured with a truly zero-trust mindset will be IMMUNE to the "expand/multiply" phases of classic ransomware attacks.
@@ -175,23 +175,23 @@ ext 6001 Asterisk ext 6002 \_\_\_\_\_ \_\_\_\_\_ \_\_\_\_\_ (.---.)-.*.-. |=====
 
 Setting up Linphone is pretty straightforward; you just need to create a SIP account that connects to the intercepted address that's specified in the Ziti service:
 
-![linphone-macos-setup.png](/docs/blogs/openziti/v1659554018888/Xr1ffyp4Z.png align="left")
+![linphone-macos-setup.png](/blogs/openziti/v1659554018888/Xr1ffyp4Z.png align="left")
 
 The service will show a green checkmark if everything is working ok:
 
-![linphone-macos-connected.png](/docs/blogs/openziti/v1659554272258/aGNgDcXKZ.png align="left")
+![linphone-macos-connected.png](/blogs/openziti/v1659554272258/aGNgDcXKZ.png align="left")
 
 If Linphone isn't connecting for some reason, a quick look in the tunneler logs might be helpful.
 
 On macOS the logs are available from the Ziti menu bar icon:
 
-![ziti-macos-logs.png](/docs/blogs/openziti/v1659554458239/ID_-s3cND.png align="left")
+![ziti-macos-logs.png](/blogs/openziti/v1659554458239/ID_-s3cND.png align="left")
 
 You'll probably want to start with the "Packet Tunnel" logs.
 
 On Windows you'll want to look at the "Service" logs under "Main Menu" -&gt; "Advanced Settings"
 
-![ziti-windows-menu.png](/docs/blogs/openziti/v1659555106171/kw4XEmo1A.png align="left")
+![ziti-windows-menu.png](/blogs/openziti/v1659555106171/kw4XEmo1A.png align="left")
 
 On Linux the tunneler logs are visible from the console that was used to launch `ziti-edge-tunnel`, or in `journalctl` if the tunneler was started as a systemd service.
 

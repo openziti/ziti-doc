@@ -6,7 +6,7 @@ date: 2022-11-03T17:06:18Z
 cuid: cla1bkqn0000q08jvbdf0bn1l
 slug: browzer-gateway-fqdn-certs
 authors: [CurtTudor]
-image: /docs/blogs/openzitiv1667494026072/ewG54FUJv.jpg
+image: /blogs/openziti/v1667494026072/ewG54FUJv.jpg
 tags: 
   - javascript
   - web-development
@@ -61,7 +61,7 @@ openssl req -new -x509 -sha256 -newkey rsa:2048 \
 
 The problem with using a self-signed cert to host the BrowZer Gateway is that doing so will result in the client-side browser rendering something resembling the following when it visits a web server that uses a self-signed cert:
 
-![image.png](/docs/blogs/openziti/v1666373910089/OTYczI-mw.png?width=500)
+![image.png](/blogs/openziti/v1666373910089/OTYczI-mw.png?width=500)
 
 That's an obvious show-stopper.
 
@@ -184,11 +184,11 @@ Press Enter to Continue
 
 Using the values certbot specified, I enter them into the AWS Route53 console, like this:
 
-![image.png](/docs/blogs/openziti/v1666380266489/jQxckv0iS.png)
+![image.png](/blogs/openziti/v1666380266489/jQxckv0iS.png)
 
 I then click the "Create" button, and then Route53 will produce the TXT record, like this:
 
-![image.png](/docs/blogs/openziti/v1666380502004/g8mYmuuDR.png)
+![image.png](/blogs/openziti/v1666380502004/g8mYmuuDR.png)
 
 Now that the DNS challenge record is in place, I can return to the certbot prompt, and press ENTER. It will then respond like this:
 
@@ -215,7 +215,7 @@ lrwxr-xr-x  1 curt  staff   61 Oct 21 13:29 privkey.pem -> ../../archive/browzer
 
 If you paste the contents of the `fullchain.pem` file into a cert validator (e.g. [https://www.sslchecker.com/certdecoder](https://www.sslchecker.com/certdecoder)), you will then see the following:
 
-![image.png](/docs/blogs/openziti/v1666381231538/d3dV6UhXs.png)
+![image.png](/blogs/openziti/v1666381231538/d3dV6UhXs.png)
 
 ### Manual Cert Generation (Linux)
 

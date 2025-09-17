@@ -12,11 +12,11 @@ tags:
 
 # NGINX & ZeroTrust API Security
 
-![ngx_simple_pre@2x.png](/docs/blogs/openziti/v1669908439678/tz_p-x3qS.png align="left")
+![ngx_simple_pre@2x.png](/blogs/openziti/v1669908439678/tz_p-x3qS.png align="left")
 
 *With the first version of* [*ngx\_ziti\_module*](https://github.com/openziti/ngx_ziti_module)*, it is possible to take an NGINX-exposed Web API and make it completely dark. This means no open ports in NGINX, and it brings the Zero Trust capabilities of [OpenZiti](https://github.com/openziti) to any NGINX deployment. Yes, replace open ports with open source! OpenZiti works in existing applications or new ones.*
 
-![ngx_simple_post@2x.png](/docs/blogs/openziti/v1669908465505/gf5pDUJQn.png align="left")
+![ngx_simple_post@2x.png](/blogs/openziti/v1669908465505/gf5pDUJQn.png align="left")
 
 The [OpenZiti](https://github.com/openziti/) team was pondering how to make it drop-dead simple for existing API deployments sitting on the open Internet to benefit from OpenZiti. OpenZiti allows new forms of API Security in scenarios where the API is only intended for usage by a controlled set of clients or when access needs to be tightly controlled. APIs deployed permissively listening on any network are attack vectors. The reason they are deployed in this fashion is a false sense of security. For internally exposed APIs, the common idea is that "the corporate network is safe." For internet-exposed APIs, it is usually "my service is safe." Both of those concepts are never genuinely correct. The [corporate network is only safe until it is breached](https://auth0.com/blog/the-death-of-the-corporate-network/), and internet APIs have [bugs that allow remote access](https://owasp.org/www-project-top-ten). 
 
@@ -34,7 +34,7 @@ Now, for this setup, we aren't eliminating all of the trusted networks, which me
 
 Consider the following deployment of NGINX, which has three upstream services.
 
-![ngx_simple_pre@2x.png](/docs/blogs/openziti/v1669834189600/RCThUvpKI.png?height=450 align="left")
+![ngx_simple_pre@2x.png](/blogs/openziti/v1669834189600/RCThUvpKI.png?height=450 align="left")
 
 
 *The NGINX configuration for this deployment may look like this:*

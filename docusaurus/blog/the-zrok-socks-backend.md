@@ -4,7 +4,7 @@ date: 2024-03-20T15:26:19Z
 cuid: cltzyhmeo000408l66jxqc3do
 slug: the-zrok-socks-backend
 authors: [MichaelQuigley]
-image: /docs/blogs/openzitiv1710175565287/a8245615-e2da-4e08-a8d8-494cc919ff40.png
+image: /blogs/openziti/v1710175565287/a8245615-e2da-4e08-a8d8-494cc919ff40.png
 tags: 
   - privacy
   - internet
@@ -34,7 +34,7 @@ The zrok implementation of SOCKS (v5) allows you to split the sharing and access
 
 In practice, it looks like this:
 
-![](/docs/blogs/openziti/v1710945991755/f045989c-aed6-4840-8f37-f55adb84c4bf.png)
+![](/blogs/openziti/v1710945991755/f045989c-aed6-4840-8f37-f55adb84c4bf.png)
 
 If the environment running the `zrok share private -b socks` were running on a host in Japan, and the `zrok access private` was running on a host in the United States, and the user's web browser (in the United States) is configured to use the local SOCKS access (on `127.0.0.1`), then the end user will appear to be browsing from the host in Japan.
 
@@ -48,7 +48,7 @@ Here is a recent [zrok Office Hours](https://www.youtube.com/watch?v=5Vi8GKuTi_I
 
 Be aware that fully securing your traffic using SOCKS can be tricky in some cases. Modern web browsers allow you to configure a SOCKS host and also allow you to configure whether or not DNS resolution is also routed through SOCKS:
 
-![](/docs/blogs/openziti/v1710865302956/4f7889c8-4334-45b6-ab0f-48e20f44757f.png)
+![](/blogs/openziti/v1710865302956/4f7889c8-4334-45b6-ab0f-48e20f44757f.png)
 
 Notice that Firefox includes a checkbox to enable "Proxy DNS when using SOCKS v5". Like any security or tunneling solution, you'll want to be sure that you understand the implications of various configuration options and audit that they're working correctly in your environment.
 

@@ -22,7 +22,7 @@ This blog summarizes use of the Ziti SDK in a mobile point of sale application (
 
 This is a relatively simple mPOS application with the front-end mobile application written in Java.  The backend application features a mongo DB cluster that is used as a repository of merchant transactions. The application server side can also use the Ziti zero trust, cloud native networking for simple, secure integrations with banking providers (not in scope for this post).
 
-![](/docs/blogs/openziti/v1653224174107/oS2wUTgbT.png)
+![](/blogs/openziti/v1653224174107/oS2wUTgbT.png)
 
 The basic use of the mPOS solution:
 
@@ -71,7 +71,7 @@ Identity - Leave as it is
 
 Sample reference configuration:
 
-![](/docs/blogs/openziti/v1653224176290/BCbr4KcjC.png)
+![](/blogs/openziti/v1653224176290/BCbr4KcjC.png)
 
 ### Create Identity
 

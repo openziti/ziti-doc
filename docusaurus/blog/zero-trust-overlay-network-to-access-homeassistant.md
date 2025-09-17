@@ -15,7 +15,7 @@ tags:
 ### Solving Problems
 I wanted a way to check on my house (mainly my dogs) while I was away. So, I did what any trendy person would do and bought an IP camera with pan and tilt, which was great. A quick sign-up to their proprietary app, and I could view live video of my pups tearing apart my house from anywhere in the world.
 
-![image.png](/docs/blogs/openziti/v1661350622005/r1QoFC6Lq.png?height=300)
+![image.png](/blogs/openziti/v1661350622005/r1QoFC6Lq.png?height=300)
 
 ### Somebody's Watching Me
 The camera happened to sit atop my computer desk, and I kept hearing a buzzing noise one day while working. After searching frantically for every brief moment I heard this noise, to my surprise I saw it was my IP cam panning. I thought, hmm, that's odd... I'll turn it off and back on again, maybe a motor started going haywire. After its boot sequence it seemed stable _pats self on back, you did it buddy_.
@@ -41,7 +41,7 @@ There's a lot of debate and confusion surrounding the term "Zero Trust" since it
 
 ## How I Implemented My Own Zero Trust Network to Access HomeAssistant
 ### The Network Before
-![OpenZiti HomeAssistant Network Architecture - Without Ziti.png](/docs/blogs/openziti/v1662473588022/e1yBYsYn8.png)
+![OpenZiti HomeAssistant Network Architecture - Without Ziti.png](/blogs/openziti/v1662473588022/e1yBYsYn8.png)
 
 ### Planning The Network
 To build the network, I need to know three things:
@@ -99,10 +99,10 @@ I used my mobile phone, so I sent the JWT to my phone. This JWT was created when
 **Note:** There is a time limit on enrollment; this is given to you when you create the identity. It will also show when you load the JWT into the phone app.
 
 #### The New Network Using OpenZiti
-![OpenZiti HomeAssistant Network Architecture - With Ziti.png](/docs/blogs/openziti/v1662473614565/gyGvTqVYP.png)
+![OpenZiti HomeAssistant Network Architecture - With Ziti.png](/blogs/openziti/v1662473614565/gyGvTqVYP.png)
 
 #### Check Out My Feed
-![Ziti Camera View.png](/docs/blogs/openziti/v1661535186931/AWIoUlOKY.png)
+![Ziti Camera View.png](/blogs/openziti/v1661535186931/AWIoUlOKY.png)
 
 ## What's Next?
 How cool is it that anyone I identify as `#berl.household.member` in my household now has access to my cameras once provided an identity token? But what's even cooler is, say I go on vacation for a week, I can temporarily grant access to a house sitter by giving them the same attribute. Or I could also create another attribute or grant them permission explicitly based on their identity. Best of all, this was entirely free!

@@ -21,7 +21,7 @@ For OpenZiti to validate both of those new data model entities were created to s
 Both have several options that are documented in the above links. The main goal of both of these entities is to allow external systems to generate signed documents (certificates and JWTs) that can be verified (if you need a refresher on this, please see this [article](https://openziti.io/high-level-publicprivate-cryptography)). These documents can have variable length lifetimes and other qualities that are outside the control of OpenZiti, we must delegate trust upwards to some higher authority, a "signer." For x509 certificates, this is either an intermediate Certificate Authority (CA) or a root CA. For JWTs this is simply a certificate that creates digital signatures.
 
 
-![3rd party id.png](/docs/blogs/openziti/v1666618727994/u2laPGD0G.png align="left")
+![3rd party id.png](/blogs/openziti/v1666618727994/u2laPGD0G.png align="left")
 
 ### Example Public Key Infrastructure
 [![](https://mermaid.ink/img/pako:eNplkD0PgjAQhv8KuQkSGFSmDiZAUUmc1M06NPQQogWCZTCE_-4RPmLCTZfneXN3bQdppRAYPBtZ59aNi9KiCu6XqjJWFDw8bx_aSWmw0agKaZCgtXGmGNloZbd_lq_sbrKcbDzZRfqTDEke7DPKbNk1oOOI5gURodOI5qkxoWREvgMuaJouC0UP7IaAAJOjRgGMWiWblwBR9pSTramu3zIFZpoWXWhrRSfxQtK_aGCZfH-w_wFth1dP?type=png)](https://mermaid.live/edit#pako:eNplkD0PgjAQhv8KuQkSGFSmDiZAUUmc1M06NPQQogWCZTCE_-4RPmLCTZfneXN3bQdppRAYPBtZ59aNi9KiCu6XqjJWFDw8bx_aSWmw0agKaZCgtXGmGNloZbd_lq_sbrKcbDzZRfqTDEke7DPKbNk1oOOI5gURodOI5qkxoWREvgMuaJouC0UP7IaAAJOjRgGMWiWblwBR9pSTramu3zIFZpoWXWhrRSfxQtK_aGCZfH-w_wFth1dP)

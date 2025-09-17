@@ -3,7 +3,7 @@ title: "Introducing zrok"
 date: 2023-02-07T15:22:31Z
 cuid: cldue515r000509l04jhy0c8q
 slug: introducing-zrok
-image: /docs/blogs/openzitiv1674827219782/e0a7faf4-3645-4289-b8a0-84536277f4d0.png
+image: /blogs/openziti/v1674827219782/e0a7faf4-3645-4289-b8a0-84536277f4d0.png
 tags: 
   - golang
   - openziti
@@ -17,7 +17,7 @@ I'm fortunate that I've had the opportunity to work on many interesting projects
 
 For the last six months, I've had the opportunity to re-approach the world of zero-trust and next-generation networking from the other side of the stack. Instead of working in the lowest layers of protocols and abstractions, I'm working from the perspective of end users and enabling an amazing end-user experience. I'm excited to introduce you to a new set of tools designed to empower end users at the network edge to seamlessly and transparently share resources. Imagine network sharing that is equally secure and transparent.
 
-![](/docs/blogs/openziti/v1674828434457/eb0a6668-f227-44af-94e4-e639fff0cea2.png)
+![](/blogs/openziti/v1674828434457/eb0a6668-f227-44af-94e4-e639fff0cea2.png)
 
 This new project is called... `zrok`.
 
@@ -51,7 +51,7 @@ Once `zrok` and `zrok.io` are out of beta, we'll be opening it up to the public.
 
 `zrok.io` runs on top of the open-source version of `zrok`. We're building out a production environment to make sure we can properly operationalize it, but it's the same code you can run in your own environments.
 
-![](/docs/blogs/openziti/v1674828293204/5ba67a95-c7bf-4efd-9a52-f160c7f60924.png)
+![](/blogs/openziti/v1674828293204/5ba67a95-c7bf-4efd-9a52-f160c7f60924.png)
 
 ## Open-Source; Self-Host
 

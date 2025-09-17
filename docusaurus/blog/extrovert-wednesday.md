@@ -88,7 +88,7 @@ Moving forward, you can expect me to deliver on tech topics that include:
 * much more
 
 I hope you come back here often to see what we're cookin' up for you here in the OpenZiti kitchen.
-![image.png](/docs/blogs/openziti/v1661373062401/ZlzNy_oxv.png)
+![image.png](/blogs/openziti/v1661373062401/ZlzNy_oxv.png)
 
 ---
 

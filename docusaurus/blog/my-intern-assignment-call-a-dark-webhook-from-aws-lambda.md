@@ -6,7 +6,7 @@ date: 2022-08-25T01:11:42Z
 cuid: cl78cngvf02tr36nvc56efb0j
 slug: my-intern-assignment-call-a-dark-webhook-from-aws-lambda
 authors: [ClintDovholuk]
-image: /docs/blogs/openziti/kOMCC0op3.jpeg
+image: /blogs/openziti//kOMCC0op3.jpeg
 tags: 
   - webhooks
   - aws-lambda
@@ -42,7 +42,7 @@ At this point, you might be asking yourself, what’s a CVE? I didn’t know eit
 
 This might surprise you, I didn’t know what CVSS was either. As I mentioned previously, CVSS is a way of scoring the CVE. CVSS stands for “Common Vulnerability Scoring System” and the latest version, version 3.1, is the one we focused on. CVSS takes eight common properties of the vulnerability and somehow (I didn’t research how) uses the results to calculate a score from 0.0 to 10.0, with 10.0 being a show-stopper, you really need to patch this vulnerability immediately! Anything over a 9 is really critical, but a 10.0 is earth-shattering. As an example, you almost certainly heard about “[log4shell](https://en.wikipedia.org/wiki/Log4Shell)”? Here’s the [NIST CVE for log4shell](https://nvd.nist.gov/vuln/detail/CVE-2021-44228). As you can see, it was a 10.0, ooph.
 
-![image.png](/docs/blogs/openziti/v1661374704921/4dfRMttjq.png align="left")
+![image.png](/blogs/openziti/v1661374704921/4dfRMttjq.png align="left")
 
 As mentioned, the CVSS is calculated using eight different fields. The two fields I focused on were the “Attack Vector” and the “Privileges Required” fields. You can see from the log4shell CVE that when the attack vector is network, and the privileges required are none, you already have a particularly sensitive CVE to mitigate. These sorts of CVEs are exploited routinely by attackers as it often permits them to “land and expand”. If you’re interested in playing around with CVSS, there are at least two really good calculators, one [from NIST itself](https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator), and the other from [first.org](https://www.first.org/cvss/), try it out.
 
@@ -60,13 +60,13 @@ Luckily, when I finished the script's first revision, the OpenZiti project had j
 
 ## Adding Zero Trust to the Lambda
 
-![](/docs/blogs/openziti/v1661429495524/R5PsrBJou.png align="left")
+![](/blogs/openziti/v1661429495524/R5PsrBJou.png align="left")
 
 The process to '[zitify](https://blog.openziti.io/zitification)' the script (i.e., put an OpenZiti SDK inside) is very straightforward and was so simple even an intern could do it! First, I received an OpenZiti strong identity which was authorized to hook into the Mattermost server. I enrolled it using the OpenZiti [Command Line Interface (CLI)](https://openziti.github.io/ziti/identities/enrolling.html) using one command. From that, I received a JSON file containing the enrolled, strong identity. I stored this JSON document using AWS secrets manager which is easily accessed from AWS Lambda. In my Lambda script, I created an environment variable named "ZITI\_IDENTITIES", which stores the path to a file containing the JSON from the enrolled identity. Note that the name of this variable is specific and must be used when zitifying a python script using the SDK. Initially, this file did not exist, so when running the script, I had it create the file, pull the identity JSON from AWS Secrets Manager, and populate the new file. After that, I imported the OpenZiti SDK, which validates the identity provided.
 
 #### The Code:
 
-![image.png](/docs/blogs/openziti/v1661374430916/EE4XTdpby.png align="left")
+![image.png](/blogs/openziti/v1661374430916/EE4XTdpby.png align="left")
 
 Check out the actual code over on github at https://github.com/openziti-test-kitchen/ziggy-fodder/blob/main/cve-alert-zitified.py
 
@@ -78,7 +78,7 @@ Once I had OpenZiti imported, it was as simple as using the openziti.monkeypatch
 
 With my Lambda zitified, now the communication looks like this. No holes in the private data center are needed and the Lambda can send webhook payloads every 15 minutes successfully. The solution looks like this:
 
-![](/docs/blogs/openziti/v1661374132819/pMR9FS30j.png align="left")
+![](/blogs/openziti/v1661374132819/pMR9FS30j.png align="left")
 
 ## Reflections on the Process
 
@@ -86,7 +86,7 @@ Overall the process was easy and smooth and though my script was straightforward
 
 ## The Payoff
 
-![image.png](/docs/blogs/openziti/v1661374025216/lNxwSTAja.png align="left")
+![image.png](/blogs/openziti/v1661374025216/lNxwSTAja.png align="left")
 
 And there it is. Now, with our new zitified CVE finding script, [Ziggy](https://twitter.com/OpenZiggy) has a constantly growing feed of CVEs he can comment on. This image shows the Mattermost channel where all the CVEs appear and shows you what the messages look like when formatted. Each number hyperlinks to the page with more details - see [an example](https://nvd.nist.gov/vuln/detail/CVE-2022-36272). Overall this was an enjoyable project and a great introduction to AWS Lambda and using OpenZiti.
 

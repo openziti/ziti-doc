@@ -4,8 +4,8 @@ date: 2023-12-04T03:00:12Z
 cuid: clpqbpz5r000h0al0gq673ks7
 slug: zrok-frontdoor
 authors: [KennethBingham]
-image: /docs/blogs/openzitiv1701362109736/d1421e32-6573-4cf4-933f-4878ce549965.png
-ogimage: /docs/blogs/openzitiv1701631475557/a539001d-b5c9-4144-9307-9ee59adc4ce8.png
+image: /blogs/openziti/v1701362109736/d1421e32-6573-4cf4-933f-4878ce549965.png
+ogimage: /blogs/openziti/v1701631475557/a539001d-b5c9-4144-9307-9ee59adc4ce8.png
 tags: 
   - zrok
 
@@ -79,7 +79,7 @@ Setting up **zrok frontdoor** is a straightforward process.
 4. **Service Initiation**: Finally, start the service. The zrok service reserves a dedicated public subdomain, which appears in the zrok console as a new share dangling from the service's zrok environment.
     
 
-![](/docs/blogs/openziti/v1701360384297/ee1315cc-809a-4c30-a1d6-67980d2ad44b.png)
+![](/blogs/openziti/v1701360384297/ee1315cc-809a-4c30-a1d6-67980d2ad44b.png)
 
 ## What will you share today?
 

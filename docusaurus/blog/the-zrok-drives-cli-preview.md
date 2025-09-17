@@ -4,7 +4,7 @@ date: 2024-01-25T20:08:29Z
 cuid: clrtncncs000809lg42ombo9g
 slug: the-zrok-drives-cli-preview
 authors: [MichaelQuigley]
-image: /docs/blogs/openzitiv1706115688489/7aef0bb7-51e7-45e2-bc95-f65ec3149116.png
+image: /blogs/openziti/v1706115688489/7aef0bb7-51e7-45e2-bc95-f65ec3149116.png
 tags: 
   - security
   - networking

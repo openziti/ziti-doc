@@ -6,13 +6,13 @@ date: 2024-04-01T13:14:45Z
 cuid: clugz2njn000008l5e2nv3w3a
 slug: secure-remote-development-with-zrok-and-jetbrains
 authors: [RussellAllen]
-image: /docs/blogs/openzitiv1711649779549/c013ad52-1fb9-4943-9d47-3b65d4a12c03.png
+image: /blogs/openziti/v1711649779549/c013ad52-1fb9-4943-9d47-3b65d4a12c03.png
 tags: 
   - zrok
 
 ---
 
-![](/docs/blogs/openziti/v1711594239215/cf4f8574-25e1-4c7f-8f0d-54496b93f579.jpeg)
+![](/blogs/openziti/v1711594239215/cf4f8574-25e1-4c7f-8f0d-54496b93f579.jpeg)
 
 <center>I took this photo while working remote. Can you guess the location?<br />If you can secure your remote work, you, too, can work anywhere.</center>
 
@@ -22,7 +22,7 @@ Getting connected is easy. There’s open internet access just about everywhere 
 
 Fortunately, a set of easy-to-use tools allows me to gallivant around the world and remain confident in my connection and its security. Namely, [zrok.io](http://zrok.io/) and JetBrains [remote development](https://www.jetbrains.com/remote-development/).
 
-![](/docs/blogs/openziti/v1711650045396/40aad101-90ed-4d21-8a67-2178b6a43a22.png)
+![](/blogs/openziti/v1711650045396/40aad101-90ed-4d21-8a67-2178b6a43a22.png)
 
 I combine these tools to ensure I can always connect securely from my laptop to my development workstation at home without an open port on my home network, a static IP, or a domain name to call back to. My home network *does not listen* for connections from the Internet and *is dark*.
 
@@ -76,17 +76,17 @@ The following assumes your project files are on the “hosting” device and tha
 
 Start your IDE on the remote device. If it opens straight into an existing local project, that’s okay; select `Remote Development` from the `File` menu. Either way, you should see a dialog similar to these:
 
-![](/docs/blogs/openziti/v1711597369268/a1cdc724-1b4c-447e-825c-5c5aca08029a.png)
+![](/blogs/openziti/v1711597369268/a1cdc724-1b4c-447e-825c-5c5aca08029a.png)
 
 Under SSH, click to create a new connection or a new project. You will be prompted for a username, host, and port.
 
-![](/docs/blogs/openziti/v1711597438003/6b05aa72-afef-4b21-a3da-fcf7123870e7.png)
+![](/blogs/openziti/v1711597438003/6b05aa72-afef-4b21-a3da-fcf7123870e7.png)
 
 For the host IP and Port, enter the values from the local zrok access, which is shown at the top of the terminal window while it is running. In my case, that URL is shown as `tcp://127.0.0.1:9191`, so I've entered the Host as `127.0.0.1` and the Port as `9191`. This tells JetBrains to talk to the local zrok tunnel as if it were the remote SSH host.
 
 Click “Check Connection and Continue” and after a minute of setup, you’ll be prompted to select a project to open.
 
-![](/docs/blogs/openziti/v1711597557843/e073a36b-ba4c-4628-a4de-76dbce900613.png)
+![](/blogs/openziti/v1711597557843/e073a36b-ba4c-4628-a4de-76dbce900613.png)
 
 The project directory you choose from is on the remote hosting device where, as the name implies, you are hosting your project files. Select the root directory of an existing project and click the Start IDE and Connect button.
 
@@ -94,7 +94,7 @@ And BAM! You are now in your familiar IDE in the project you love to work on, ye
 
 When you start your IDE in the future, JetBrains will remember and offer all the remote projects you’ve connected to in the past, saving you from repeating the connection setup.
 
-![](/docs/blogs/openziti/v1711597634947/bcd07285-2c28-47ca-92e4-0f82a7a7ad0b.png)
+![](/blogs/openziti/v1711597634947/bcd07285-2c28-47ca-92e4-0f82a7a7ad0b.png)
 
 A single click on the project launches the IDE for that project. Clicking the terminal icon at the top right opens a terminal on the remote machine. Clicking the + icon allows you to add new projects to the remote host from this device.
 

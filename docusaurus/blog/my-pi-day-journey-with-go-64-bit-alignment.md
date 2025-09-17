@@ -4,7 +4,7 @@ date: 2023-03-17T13:07:52Z
 cuid: clfck29eh000309lkfcoc0ekh
 slug: my-pi-day-journey-with-go-64-bit-alignment
 authors: [GeoffBerl]
-image: /docs/blogs/openzitiv1678975036152/5a834580-b0f3-481b-9409-61c697ed719b.png
+image: /blogs/openziti/v1678975036152/5a834580-b0f3-481b-9409-61c697ed719b.png
 tags: 
   - go
   - golang
@@ -213,7 +213,7 @@ grep --include=\*.go -irn ./ -e "atomic\.[^6]*64("
 
 This resulted in the following, a quick copy-paste into Sublime Text and regex to extract the variable names.
 
-![](/docs/blogs/openziti/v1678906066090/0335faba-14a4-4457-bebd-7e9f2f80c67d.png)
+![](/blogs/openziti/v1678906066090/0335faba-14a4-4457-bebd-7e9f2f80c67d.png)
 
 There's no quick way to determine if they are in a data structure so I just used a search across the project for each variable, then jumped to the declaration of that variable. There were only nine results, and of those, only three distinct variables. I wrote a test that attempted to perform an atomic operation on any variable that I found to be in a struct, and checked if it failed. After collecting them all, and running the test, I investigated any failures and left the rest alone.
 

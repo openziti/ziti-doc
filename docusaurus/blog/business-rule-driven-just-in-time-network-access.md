@@ -5,7 +5,7 @@ date: 2023-11-29T11:46:11Z
 cuid: clpjpb4q2000u09l75j1v8nn0
 slug: business-rule-driven-just-in-time-network-access
 authors: [MikeGorman]
-image: /docs/blogs/openzitiv1698936177885/46a3121d-b2d2-4808-a98f-e182f841378e.png
+image: /blogs/openziti/v1698936177885/46a3121d-b2d2-4808-a98f-e182f841378e.png
 tags: 
   - zerotrust
   - just-in-time
@@ -33,7 +33,7 @@ Detailed information regarding the details of this particular solution design is
 
 ### Process Flow
 
-![](/docs/blogs/openziti/v1698861596567/070dd4cd-2849-4b95-a44e-604213c0c887.png)
+![](/blogs/openziti/v1698861596567/070dd4cd-2849-4b95-a44e-604213c0c887.png)
 
 When a new ticket is opened, the Network ID is selected for the ticket when relevant. This list is updated every few hours by a separate Lambda function as the list is highly dynamic, and must be kept current.   The engineer that "caught" the ticket is assigned by the system when it is opened. When the ticket moves from a status of "New" to "Open", or a new user is assigned, the webhook is sent to the Lambda.
 
@@ -55,4 +55,4 @@ This process allows us to provide frictionless access to relevant resources for 
 
 A simple entry point to this sort of just-in-time access is the [zrok](https://zrok.io) project.  Zrok is a solution built with OpenZiti and its original purpose was to provide an easily consumed solution for ephemeral access.  In the short time it has been available, it has already started to grow in some amazing directions, with new features and improvements to the user experience.  Available for free, users can set up and run public or private endpoint access to any system, from anywhere, in almost no time at all.  Very useful in its own right, zrok also evidences the capabilities of OpenZiti in this space very well, as the base network access is achieved using the available functions of the OpenZiti solution.
 
-![](/docs/blogs/openziti/v1699626139236/f26e259c-9111-440c-b8ff-fa71768e2183.gif)
+![](/blogs/openziti/v1699626139236/f26e259c-9111-440c-b8ff-fa71768e2183.gif)

@@ -4,7 +4,7 @@ date: 2023-08-23T20:09:05Z
 cuid: cllo64dtc000n09mc96du917a
 slug: the-zrok-sdk
 authors: [MichaelQuigley]
-image: /docs/blogs/openzitiv1692720007733/fa2b143a-5887-4e7a-9476-a3d531ab662b.png
+image: /blogs/openziti/v1692720007733/fa2b143a-5887-4e7a-9476-a3d531ab662b.png
 tags: 
   - developer
   - networking
@@ -50,11 +50,11 @@ oh, wow!
 
 Neither `copyto` nor `pastefrom` require any network security accommodations. No firewall rules or holes. They both connect from your local environment to the OpenZiti zero-trust network overlay used by `zrok`:
 
-![](/docs/blogs/openziti/v1692807490897/adc76ef9-ead1-4453-82d2-f79839d18c14.png)
+![](/blogs/openziti/v1692807490897/adc76ef9-ead1-4453-82d2-f79839d18c14.png)
 
 Once connectivity is established with the overlay, an end-to-end encrypted network tunnel is established between `copyto` and `pastefrom` to securely transfer the pastebin buffer contents between them.
 
-![](/docs/blogs/openziti/v1692812967928/96a6f7e6-1aae-434d-9065-52a78ecfaa32.png)
+![](/blogs/openziti/v1692812967928/96a6f7e6-1aae-434d-9065-52a78ecfaa32.png)
 
 Hitting `CTRL-C` to exit the `copyto` utility will automatically clean up the `zrok` share that it created. Then trying to access the pastebin buffer with the same share token will result in an error:
 

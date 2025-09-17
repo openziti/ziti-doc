@@ -43,7 +43,7 @@ Everything is based on trusted identity, and we take it a step further by provid
 
 Here's an overview of an OpenZiti network:
 
-![image.png](/docs/blogs/openziti/v1663946224862/C-eySQ1IN.png)
+![image.png](/blogs/openziti/v1663946224862/C-eySQ1IN.png)
 
 If you want to learn more about what an OpenZiti network is, and the various ways we make it programmable, we invite you to visit our main [OpenZiti documentation site](https://openziti.github.io/ziti/overview.html).
 
@@ -53,13 +53,13 @@ You can begin by running our [Ziti Desktop Edge](https://apps.apple.com/app/id14
 
 That approach would look like this:
 
-![image.png](/docs/blogs/openziti/v1664213475093/cePW5PfP0.png)
+![image.png](/blogs/openziti/v1664213475093/cePW5PfP0.png)
 
 Once you're up, running, and comfortable with your OpenZiti network, you would then work towards the ***ultimate goal*** of having app-embedded zero trust networking built directly into both your client and server software, by using our OpenZiti SDKs.  
 
 That would look like this:
 
-![image.png](/docs/blogs/openziti/v1664214142956/ZmA3_879t.png)
+![image.png](/blogs/openziti/v1664214142956/ZmA3_879t.png)
 
 No more need to run VPN-like OpenZiti edge software.
 
@@ -88,7 +88,7 @@ The OpenZiti SDK for NodeJS is implemented as a [NodeJS Addon](https://nodejs.or
 
 This is why our NodeJS SDK is actually implemented in C. Here's how GitHub breaks it down:
 
-![image.png](/docs/blogs/openziti/v1663801229089/K2VwyFi2B.png?width=400)
+![image.png](/blogs/openziti/v1663801229089/K2VwyFi2B.png?width=400)
 
 Internally, the OpenZiti SDK for NodeJS embeds the [OpenZiti SDK for C-language](https://github.com/openziti/ziti-sdk-c).  
 
@@ -103,7 +103,7 @@ The OpenZiti SDK for NodeJS leverages the [N-API](https://nodejs.org/api/n-api.h
 
 Details surrounding the N-API are beyond the scope of this article, but if you're curious about architectural structure and flow and about what actually happens when your NodeJS code calls one of our APIs, like `ziti_dial` for example,  take a peek at the following diagram:
 
-![image.png](/docs/blogs/openziti/v1663862820471/SgksvyXlp.png)
+![image.png](/blogs/openziti/v1663862820471/SgksvyXlp.png)
 
 We'll cover this in greater detail in future articles.
 
@@ -132,9 +132,9 @@ There are many server-side web application platforms built upon NodeJS.  You may
 
 Spoiler alert... the answer is ***yes***!
 
-![image.png](/docs/blogs/openziti/v1663857963037/IfNqwmW1l.png)
+![image.png](/blogs/openziti/v1663857963037/IfNqwmW1l.png)
 
-![image.png](/docs/blogs/openziti/v1663799247907/l0bwWvRBp.png)
+![image.png](/blogs/openziti/v1663799247907/l0bwWvRBp.png)
 
 Except for a couple JavaScript-related server-side frameworks (circled above in red), all others are currently supported by the OpenZiti SDK for NodeJS.
 

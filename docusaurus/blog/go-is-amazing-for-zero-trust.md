@@ -6,8 +6,8 @@ date: 2023-12-14T02:45:46Z
 cuid: clq4llx30000108jp8lhp7iy8
 slug: go-is-amazing-for-zero-trust
 authors: [ClintDovholuk]
-image: /docs/blogs/openzitiv1702331268646/98f54fa9-a33d-4fa9-91bf-ad88d936ed5a.jpeg
-ogimage: /docs/blogs/openzitiv1702331780840/80987396-5227-4fd6-8544-dc7c67a6e331.jpeg
+image: /blogs/openziti/v1702331268646/98f54fa9-a33d-4fa9-91bf-ad88d936ed5a.jpeg
+ogimage: /blogs/openziti/v1702331780840/80987396-5227-4fd6-8544-dc7c67a6e331.jpeg
 tags: 
   - golang
   - appsec
@@ -35,7 +35,7 @@ With the standard library using `net.Conn` and `net.Listener` throughout, third 
 
 ## Go - Server Apps
 
-![](/docs/blogs/openziti/v1702330009801/bf998c1a-90b6-43e7-8cb4-343bae8fc66f.png)
+![](/blogs/openziti/v1702330009801/bf998c1a-90b6-43e7-8cb4-343bae8fc66f.png)
 
 It doesn't take much code to update an existing application with an OpenZiti SDK and make it secure-by-default. Somewhere in the codebase, there will be a server. Go provides a great implementation in the standard library already, so it will often be an `http.Server`. You'll also frequently see `Server` instructed to `ListenAndServe` (or `ListenAndServeTLS`), starting a process that can handle HTTP connections on the IP-based underlay network. That code, at a basic level, will resemble something like the following:
 
@@ -81,7 +81,7 @@ Not much difference, is there? So what changed?
 
 ## Go - Client Apps
 
-![](/docs/blogs/openziti/v1702330101777/9650046c-b610-422c-ae99-a5636e4014c1.png)
+![](/blogs/openziti/v1702330101777/9650046c-b610-422c-ae99-a5636e4014c1.png)
 
 Go's standard library also fits clients perfectly. If you've created a server that listens on the OpenZiti overlay, the next step will be to make a client that connects to that server. Perhaps it's from a CLI, or perhaps it's connecting to a microservice. Regardless of the use case, you'll need to be able to connect to the server somehow. As that server is listening on the OpenZiti overlay, we know that a regular IP-based connection isn't going to work!
 
@@ -143,7 +143,7 @@ You might notice that this appetizer demo doesn't use HTTP. OpenZiti is not limi
 
 ## Share the Project
 
-![](/docs/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png)
+![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png)
 
 If you find this interesting, please consider [starring us on GitHub](https://github.com/openziti/ziti/). It really does help to support the project! And if you haven't seen it yet, check out [https://zrok.io](https://zrok.io). It's totally free sharing platform built on OpenZiti! It uses the Go SDK **a lot** since it's a ziti-native application. It's also [all open source too!](https://github.com/openziti/zrok/)
 

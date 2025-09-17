@@ -6,7 +6,7 @@ date: 2024-09-09T00:09:12Z
 cuid: cm0u8wknc000109mk6xivbmlq
 slug: zero-trust-sshclient
 authors: [ClintDovholuk]
-image: /docs/blogs/openzitiv1725370192508/92d59b16-3273-4213-9918-01a0dc5ba343.png
+image: /blogs/openziti/v1725370192508/92d59b16-3273-4213-9918-01a0dc5ba343.png
 tags: 
   - golang
   - ssh
@@ -17,7 +17,7 @@ tags:
 
 A few years ago, the [OpenZiti project](https://github.com/openziti/ziti) developed and published two client tools to make ssh and scp available over an OpenZiti overlay network without requiring the sshd port to be exposed to the internet. If interested, read the original posts [about zssh](https://blog.openziti.io/zitifying-ssh) and [zscp](https://blog.openziti.io/zitifying-scp). Continuing with the belief that security-related code should be open source and auditable, the project is [available on GitHub](https://github.com/openziti-test-kitchen/zssh).
 
-![](/docs/blogs/openziti/v1725040827487/7810a66b-c739-43d9-b7a8-fd607adb04e6.gif)
+![](/blogs/openziti/v1725040827487/7810a66b-c739-43d9-b7a8-fd607adb04e6.gif)
 
 The [OpenZiti](https://openziti.io/docs/learn/introduction/) project provides SDKs that developers can use to create secure connections. The `zssh` client demonstrates that adopting an OpenZiti SDK into an application is no harder than developing any application that uses traditional IP-based, underlay connectivity.
 
@@ -96,7 +96,7 @@ If you're interested in `zssh`, the OpenZiti project and zero trust in general, 
 
 ## **Share the Project**
 
-![](/docs/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
+![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 
 If you find this interesting, please consider [**starring the projects on GitHub**](https://github.com/openziti/ziti/). It really does help to support the project! And if you haven't seen it yet, check out [**https://zrok.io**](https://github.com/openziti/ziti/). It's a totally free sharing platform built on OpenZiti and uses the OpenZiti Golang SDK and is also [**all open source!**](https://github.com/openziti/zrok/)
 

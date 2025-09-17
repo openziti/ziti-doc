@@ -4,7 +4,7 @@ date: 2023-02-02T03:28:34Z
 cuid: cldmgr6yi000309l2af9p25zs
 slug: connecting-to-local-development-environment-from-cloud-hosts-with-zrok
 authors: [JensAlm]
-image: /docs/blogs/openzitiv1675019484328/e1156433-d3b2-4a5d-b709-1679afe76be3.jpeg
+image: /blogs/openziti/v1675019484328/e1156433-d3b2-4a5d-b709-1679afe76be3.jpeg
 tags: 
   - opensource
   - openziti
@@ -71,7 +71,7 @@ Next, we start sharing. The token `u4eh9mnwl4jb` is our reserved share from the 
 You can now access your hosted service from anywhere with a URL like `https://u4eh9mnwl4jb.in.zrok.io`, including from any cloud-provided host.  
 In our Salt use case, this means we configure the Salt master to connect to this URL.
 
-![](/docs/blogs/openziti/v1675096019317/c7851a8a-c71a-4afb-b7e0-087b18991a53.png)
+![](/blogs/openziti/v1675096019317/c7851a8a-c71a-4afb-b7e0-087b18991a53.png)
 
 The output in the terminal will show every request routed to your hosted service.  
 A simple `ctrl + c` will stop the share and you no longer have anything open for anyone to take advantage of.

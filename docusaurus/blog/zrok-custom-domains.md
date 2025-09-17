@@ -5,7 +5,7 @@ date: 2025-02-12T20:17:23Z
 cuid: cm72cr7mq000408la89h44kh2
 slug: zrok-custom-domains
 authors: [NickPieros]
-image: /docs/blogs/openzitiv1739389834988/18400a05-53fc-45ca-b458-c4c56b7b4b81.png
+image: /blogs/openziti/v1739389834988/18400a05-53fc-45ca-b458-c4c56b7b4b81.png
 tags: 
   - dns
   - zrok
@@ -50,11 +50,11 @@ Let’s take a look at how custom domains make zrok even more useful. Let’s sa
 
 To do this I first create a zrok custom domain `demo.acme-corp.com` using the `acme-corp.com` domain.
 
-![](/docs/blogs/openziti/v1739205451276/20f27da7-7f4e-4f77-90da-eb3ec06b4cd8.png)
+![](/blogs/openziti/v1739205451276/20f27da7-7f4e-4f77-90da-eb3ec06b4cd8.png)
 
 Once the custom domain is created, I simply create a few DNS records for `acme-corp.com`. Within a few minutes I’m able to use the `demo.acme-corp.com` domain in my zrok shares!
 
-![](/docs/blogs/openziti/v1739205561400/54eb0324-fcfa-4fff-9ef4-afc54bd352c8.png)
+![](/blogs/openziti/v1739205561400/54eb0324-fcfa-4fff-9ef4-afc54bd352c8.png)
 
 By creating a custom domain, I have also created a [zrok frontend](https://docs.zrok.io/docs/guides/self-hosting/personalized-frontend/). This will create shares in the form of `<token>.demo.acme-corp.com`. This is much more identifiable to my company however, it still leaves me with the share token at the start of my share. I can improve this by creating a [reserved share](https://docs.zrok.io/docs/concepts/sharing-reserved/). This will reserve a unique identifier for me to use in place of my share token. Not only can I make my share even more branded towards my specific use case, but I can also start and stop it and still maintain the same link!
 
@@ -74,11 +74,11 @@ zrok share reserved "summit"
 
 I can then have people visit `summit.demo.acme-corp.com` to check my demo
 
-![](/docs/blogs/openziti/v1739206842262/d9f16273-9aa1-4d66-bbce-eb4f744a36f2.png)
+![](/blogs/openziti/v1739206842262/d9f16273-9aa1-4d66-bbce-eb4f744a36f2.png)
 
 Success!
 
-![](/docs/blogs/openziti/v1739206905400/6c6c4029-af97-4ece-9f7a-d95d4fab185e.png)
+![](/blogs/openziti/v1739206905400/6c6c4029-af97-4ece-9f7a-d95d4fab185e.png)
 
 This is a relatively simple example of how custom domains can be used to enhance your zrok experience. There are many times where I might want to share something a bit more permanent than a demo, such as a production app. This is where I could take advantage of [zrok frontdoor](https://docs.zrok.io/docs/guides/frontdoor/) alongside my custom domain. A zrok frontdoor would allow me to run zrok alongside my production app, enabling me to publicly expose access to it via a reserved share!
 

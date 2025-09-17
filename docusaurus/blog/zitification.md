@@ -4,7 +4,7 @@ date: 2021-07-19T15:01:35Z
 cuid: cl474tt6y02vs82nvanu32thu
 slug: zitification
 authors: [ClintDovholuk]
-image: /docs/blogs/openzitiv1654785931484/SGu2ETR_s.jpeg
+image: /blogs/openziti/v1654785931484/SGu2ETR_s.jpeg
 tags: 
   - security
 

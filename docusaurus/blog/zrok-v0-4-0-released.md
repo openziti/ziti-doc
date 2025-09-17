@@ -4,7 +4,7 @@ date: 2023-06-27T18:48:03Z
 cuid: cljen4m08000009li4hl1fz7c
 slug: zrok-v040-released
 authors: [MichaelQuigley]
-image: /docs/blogs/openzitiv1687898203990/c35b6581-ab18-4f3d-80b7-8b2bfb7035cc.avif
+image: /blogs/openziti/v1687898203990/c35b6581-ab18-4f3d-80b7-8b2bfb7035cc.avif
 tags: 
   - network
   - security
@@ -26,19 +26,19 @@ In addition to HTTP-based resources, `zrok` now allows users to share local TCP 
 
 The TCP and UDP tunnels work very similarly. Here's how you can use the `tcpTunnel` backend in `v0.4.0`:
 
-![`zrok share` command for creating a TCP tunnel.](/docs/blogs/openziti/v1687806922797/0e19e031-b673-4ec3-b416-9703af9c7713.png)
+![`zrok share` command for creating a TCP tunnel.](/blogs/openziti/v1687806922797/0e19e031-b673-4ec3-b416-9703af9c7713.png)
 
 We'll use the `tcpTunnel` backend mode with our `private` share. The target is the `<host>:<port>` destination for the tunnel.
 
-![](/docs/blogs/openziti/v1687886605811/9280f0cf-496d-45b3-b454-eb44fd53fff4.png)
+![](/blogs/openziti/v1687886605811/9280f0cf-496d-45b3-b454-eb44fd53fff4.png)
 
 Running that launches our `zrok share` client, and gives us the *share token* and the full command to give to remote users to access our TCP tunnel.
 
-![](/docs/blogs/openziti/v1687886726762/268bc129-df9c-4d55-a635-69d43536396e.png)
+![](/blogs/openziti/v1687886726762/268bc129-df9c-4d55-a635-69d43536396e.png)
 
 Our remote user runs the `zrok access private f4ke09rk2vat` command to access the tunnel, creating a local listener on their system at `127.0.0.1:9191`, which allows them to access our remote TCP resource.
 
-![Using netcat locally to access the tunneled SSH server endpoint.](/docs/blogs/openziti/v1687807081992/cdf0073e-e1c0-4caf-82ce-a6acb19002c4.png)
+![Using netcat locally to access the tunneled SSH server endpoint.](/blogs/openziti/v1687807081992/cdf0073e-e1c0-4caf-82ce-a6acb19002c4.png)
 
 The remote user can use regular networking tools like `netcat` to access the tunnel locally on their system. In this case, we see the announcement from the SSH listener on the other end of the tunnel.
 
@@ -57,11 +57,11 @@ The updates include:
 * new metrics visualizations show historical telemetry for the last 30 days, 7 days, and 24 hours; telemetry is available at the account, environment, and share levels
     
 
-![The `zrok` `v0.4.0` web console, showing the new access endpoints and the private links between share and access.](/docs/blogs/openziti/v1687802216025/c81239e3-d488-4caf-882d-af88c523dea5.png)
+![The `zrok` `v0.4.0` web console, showing the new access endpoints and the private links between share and access.](/blogs/openziti/v1687802216025/c81239e3-d488-4caf-882d-af88c523dea5.png)
 
 In the screenshot above, a dashed green line shows a connection between a `zrok share private` and a `zrok access`.
 
-![](/docs/blogs/openziti/v1687886867051/c6b3dc7d-efff-467f-a127-59d45ed007ae.png)
+![](/blogs/openziti/v1687886867051/c6b3dc7d-efff-467f-a127-59d45ed007ae.png)
 
 `v0.4.0` includes refreshed metrics views. These capabilities will continue to grow as `zrok` matures.
 

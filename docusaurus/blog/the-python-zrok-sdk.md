@@ -4,7 +4,7 @@ date: 2024-02-29T20:30:28Z
 cuid: clt7ojqne000009l55fwz4dgu
 slug: the-python-zrok-sdk
 authors: [CameronOtts]
-image: /docs/blogs/openzitiv1701893161134/a2cd088f-0260-4ce7-9ea2-26a1a97a23db.webp
+image: /blogs/openziti/v1701893161134/a2cd088f-0260-4ce7-9ea2-26a1a97a23db.webp
 tags: 
   - python
   - openziti
@@ -20,7 +20,7 @@ Today we'll be talking about the exciting news of the `zrok` python SDK! We will
 
 Check out the [Getting Started](https://docs.zrok.io/docs/getting-started/) guide for more information.
 
-![](/docs/blogs/openziti/v1701893410612/3adab72c-f78a-4cfc-b4e3-d4c645a70376.png)
+![](/blogs/openziti/v1701893410612/3adab72c-f78a-4cfc-b4e3-d4c645a70376.png)
 
 ## **Expanding into Python**
 

@@ -5,7 +5,7 @@ date: 2024-09-05T15:00:56Z
 cuid: cm0pezxy3000p0alch287g2lt
 slug: effortless-docker-management-with-private-web-access
 authors: [CurtTudor]
-image: /docs/blogs/openzitiv1725481068115/9bc5870f-011f-4890-8487-23369499b5da.jpeg
+image: /blogs/openziti/v1725481068115/9bc5870f-011f-4890-8487-23369499b5da.jpeg
 tags: 
   - docker
   - opensource
@@ -47,7 +47,7 @@ But hang on. What if you had all the information you needed in a single *magical
 
 Picture this:
 
-![](/docs/blogs/openziti/v1725034531527/33cfddf1-4849-4995-a5c4-18ee4df9e8a8.gif)
+![](/blogs/openziti/v1725034531527/33cfddf1-4849-4995-a5c4-18ee4df9e8a8.gif)
 
 If that got your attention, Now, imagine if you could access the *magical* terminal window by simply opening a web browser, on any laptop or mobile device, and then navigating to a URL representing the remote host where your containers run. Everything is right there in the browser tab.
 
@@ -104,7 +104,7 @@ As you can see, this compose file will have Isaiah listening on HTTP, without TL
 
 If the `AUTHENTICATION_SECRET` env var is configured, it tells Isaiah to require visitors to enter the secret when they arrive, like this:
 
-![](/docs/blogs/openziti/v1725117677807/06d61b16-4a94-4116-b9f3-87466ad91d82.png)
+![](/blogs/openziti/v1725117677807/06d61b16-4a94-4116-b9f3-87466ad91d82.png)
 
 But even with the `AUTHENTICATION_SECRET` in place, and HTTP visitors hitting your host being prompted as shown above...this is still not as secure as we need it to be.
 
@@ -181,7 +181,7 @@ services:
 
 Here is what it looks like to use browZer to access a private-to-the-internet instance of Isaiah:
 
-![](/docs/blogs/openziti/v1725469319491/f2d0112a-e120-41da-8030-95624e4ff713.gif)
+![](/blogs/openziti/v1725469319491/f2d0112a-e120-41da-8030-95624e4ff713.gif)
 
 Here's what happens above:
 

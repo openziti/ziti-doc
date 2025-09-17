@@ -4,7 +4,7 @@ date: 2024-04-11T01:11:05Z
 cuid: cluujmixu000108jlcumufydf
 slug: announcing-openziti-v1
 authors: [DaveHart]
-image: /docs/blogs/openzitiv1712766359966/2d5059cd-e7d7-4aa0-bc79-4a428a90710e.png
+image: /blogs/openziti/v1712766359966/2d5059cd-e7d7-4aa0-bc79-4a428a90710e.png
 tags: 
   - opensource
   - zerotrust

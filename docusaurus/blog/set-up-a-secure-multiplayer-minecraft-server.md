@@ -4,7 +4,7 @@ date: 2022-10-14T17:03:01Z
 cuid: cl98qngwj000m09le2qf7ay1l
 slug: set-up-a-secure-multiplayer-minecraft-server
 authors: [GeoffBerl]
-image: /docs/blogs/openzitiv1665606377950/M5Imv9fw6.png
+image: /blogs/openziti/v1665606377950/M5Imv9fw6.png
 tags: 
   - minecraft
   - networking
@@ -18,7 +18,7 @@ Many kids love [Minecraft](https://www.minecraft.net) for many different reasons
 
 If these aspiring server hosters get ambitious enough, they'll figure out a way to make it work. Take my son for example; walking by him one day he says "Hey dad, I've hosted my own Minecraft server" to which I replied "Cool, are you playing a LAN party with your brother or something?" (a LAN party is a term for when you play with a group of friends on a local network, like your home wifi). He then replied, "Yeah, I'm playing with Brett and Xavier." After a short pause to process this information I say "Why isn't Brett down here playing with you?" (Brett is his friend after all). My son replies "Brett's at home, I sent him a program that lets him connect to my server."
 
-![You did what now 2.jpg](/docs/blogs/openziti/v1665497114782/No7U8v5FY.jpg?height=300 align="left")
+![You did what now 2.jpg](/blogs/openziti/v1665497114782/No7U8v5FY.jpg?height=300 align="left")
 
 > "You did what now?"
 
@@ -30,7 +30,7 @@ I told him we would need to quickly remedy that situation as I was not comfortab
 
 The way the network is right now, there is no way for people outside of the home network to reach the Minecraft server because it's not exposed to the internet. There are a number of ways to give someone access, such as opening the port on your firewall allowing anyone in, using VPN allowing anyone with permission in, a zero trust network allowing anyone with permission in. Though, in the case of zero trust, only those with permission can access Minecraft, they can't access any other device or service provided inside my home network. Here's a simple image to illustrate the network as is, Mr. Enderman wants to connect to my local Minecraft instance but my firewall is blocking the connection.
 
-![OpenZiti HomeAssistant Network Architecture - Minecraft Without Ziti.png](/docs/blogs/openziti/v1665671198902/2-dQ11FBa.png)
+![OpenZiti HomeAssistant Network Architecture - Minecraft Without Ziti.png](/blogs/openziti/v1665671198902/2-dQ11FBa.png)
 
 ## Getting Started
 
@@ -48,7 +48,7 @@ export PORT=25565
 
 For example, in the screen captures going forward, you'll see what would result from using the following values which I used
 
-![image.png](/docs/blogs/openziti/v1665514471708/gwyRJcMtL.png)
+![image.png](/blogs/openziti/v1665514471708/gwyRJcMtL.png)
 
 ## Configuring the Network
 
@@ -60,7 +60,7 @@ Identities are what identify users and devices that you want to connect to somet
 
 To see the list of identities use `ziti edge list identities`, here is an example of my *before* output.
 
-![image.png](/docs/blogs/openziti/v1665512404482/9t6t1iAd3.png)
+![image.png](/blogs/openziti/v1665512404482/9t6t1iAd3.png)
 
 #### Create an Identity for the Host
 
@@ -82,11 +82,11 @@ ziti edge create identity user ${MY_NAME} -o ${MY_NAME}.jwt -a "${DEVICE_NAME}.c
 
 You should see two new identities, here's another screenshot showing my output afterward.
 
-![image.png](/docs/blogs/openziti/v1665512560404/BeIng6PWX.png)
+![image.png](/blogs/openziti/v1665512560404/BeIng6PWX.png)
 
 You should also see two new files in your current working directory with the extension `jwt`. These are Java Web Tokens and are used to authenticate identity enrollment. Keep these output files handy, we'll need them in order to enroll and get access to the server. They have a timeout for security purposes but the default timeout will give plenty of time for enrollment before expiring.
 
-![image.png](/docs/blogs/openziti/v1665512646430/5iBesKmhV.png)
+![image.png](/blogs/openziti/v1665512646430/5iBesKmhV.png)
 
 ### Create a Service and Configurations
 
@@ -109,7 +109,7 @@ ziti edge create service ${DEVICE_NAME} --configs "${DEVICE_NAME}.hostv1,${DEVIC
 
 #### Example Output
 
-![image.png](/docs/blogs/openziti/v1665515474563/Nn9tnA79o.png)
+![image.png](/blogs/openziti/v1665515474563/Nn9tnA79o.png)
 
 ### Create the Service Policies
 
@@ -122,7 +122,7 @@ ziti edge create service-policy "${DEVICE_NAME}.dial" Dial --service-roles "@${D
 
 #### Example Output
 
-![image.png](/docs/blogs/openziti/v1665667125801/EL3NcxMCw.png)
+![image.png](/blogs/openziti/v1665667125801/EL3NcxMCw.png)
 
 ### Enroll the Identities
 
@@ -156,7 +156,7 @@ Again, open the Ziti Desktop Edge app, click the "Add an Identity" button, click
 
 Now that we've configured all of this, I'll revisit that image of the network from before. Only now, we can see that through the use of ziti desktop edge, and our hosted zero trust overlay network Mr. Enderman would have access to play on my server (assuming I gave him a token with the right attribute).
 
-![OpenZiti HomeAssistant Network Architecture - Minecraft With Ziti.png](/docs/blogs/openziti/v1665672104968/TarU6rpXk.png)
+![OpenZiti HomeAssistant Network Architecture - Minecraft With Ziti.png](/blogs/openziti/v1665672104968/TarU6rpXk.png)
 
 ## Testing Your Zero Trust Minecraft Server
 
@@ -166,14 +166,14 @@ Ensure your Minecraft server is running on the host machine. Connect to the host
 
 Select multiplayer and enter your server address. The server address will be the value you put in `DEVICE_NAME` plus ".ziti". For example, in my case, I had "`berlhome.mc.server`" as the `DEVICE_NAME` so my address is `berlhome.mc.server.ziti`.
 
-![image.png](/docs/blogs/openziti/v1665583029690/33jAA-8pA.png)
+![image.png](/blogs/openziti/v1665583029690/33jAA-8pA.png)
 
 Now backing out to the multiplayer menu again, I can see that the server is online, exciting!
 
-![image.png](/docs/blogs/openziti/v1665588063386/vWiGu64yz.png)
+![image.png](/blogs/openziti/v1665588063386/vWiGu64yz.png)
 
 Here's a little proof I was able to connect, I only played for about 20 minutes but it works great. Now, if I want to invite friends I just ask them to download the Ziti Desktop Edge, create an identity token for them, making sure they have the attribute `#${DEVICE_NAME}.clients` so they are authorized, and send it their way. At any time I can issue a new one or revoke permissions.
 
-![Screenshot 2022-10-12 091403.png](/docs/blogs/openziti/v1665597926195/tTNxDByaf.png)
+![Screenshot 2022-10-12 091403.png](/blogs/openziti/v1665597926195/tTNxDByaf.png)
 
-![Screenshot 2022-10-12 135859.png](/docs/blogs/openziti/v1665597910252/XBKP0vrrA.png)
+![Screenshot 2022-10-12 135859.png](/blogs/openziti/v1665597910252/XBKP0vrrA.png)
