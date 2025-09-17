@@ -168,7 +168,7 @@ const config: Config = {
     title: 'OpenZiti',
     tagline: 'Replacing Infrastructure With Software',
     url: DOCUSAURUS_URL || `http://docusaurus.local:${port}`,
-    baseUrl: DOCUSAURUS_BASE_PATH || `/unset-docusaurus-base-path`,
+    baseUrl: `/`,
     trailingSlash: undefined,
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
@@ -279,7 +279,7 @@ const config: Config = {
             ({
                 docs: {
                     sidebarPath: require.resolve('./sidebars.ts'),
-                    routeBasePath: DOCUSAURUS_DOCS_PATH,
+                    routeBasePath: '/docs/openziti',
                     exclude: [
                         '**/_*.{js,jsx,ts,tsx,md,mdx}',
                         '**/*.test.{js,jsx,ts,tsx}',
@@ -387,13 +387,13 @@ const config: Config = {
                         position: 'right'
                     },
                     {
-                        to: docUrl('/learn/introduction/'),
+                        to: '/docs/openziti/learn/introduction/',
                         label: 'Documentation',
                         position: 'right',
                         activeBaseRegex: docUrl('/(?!downloads)'),
                     },
                     {
-                        to: docUrl('/downloads'),
+                        to: '/docs/openziti/downloads',
                         label: 'Downloads',
                         position: 'right',
                         activeBaseRegex: docUrl('/downloads'),
