@@ -13,7 +13,16 @@ tags:
 
 ---
 
-Hopefully, by now, we all know that we shouldn't download and run random, untrusted executables from the internet. Users want to feel good that the code they are executing is authentic and free from malware. [Windows Defender](https://en.wikipedia.org/wiki/Microsoft_Defender_Antivirus) is one of the better things Microsoft has done to keep the world safe. Defender is a free anti-virus application that scans executables for malicious code. Often criticized for its intrusiveness (among other reasons), it's still a vital tool for millions of Windows users around the globe. While it's not the only anti-virus/endpoint protection tool around, it comes with Windows by default so making sure it doesn't tell your users your application is suspicious by popping up some scary modal dialog is important!
+Hopefully, by now, we all know that we shouldn't download and run random, untrusted executables from the internet. 
+Users want to feel good that the code they are executing is authentic and free from malware. 
+[Windows Defender](https://en.wikipedia.org/wiki/Microsoft_Defender_Antivirus) is one of the better things Microsoft 
+has done to keep the world safe. Defender is a free anti-virus application that scans executables for malicious code. 
+Often criticized for its intrusiveness (among other reasons), it's still a vital tool for millions of Windows users 
+around the globe. While it's not the only anti-virus/endpoint protection tool around, it comes with Windows by 
+default so making sure it doesn't tell your users your application is suspicious by popping up some scary modal 
+dialog is important!
+
+<!-- truncate -->
 
 [Signing an executable](https://en.wikipedia.org/wiki/Code_signing) is a cryptographic process that embeds information into the executable, allowing users to verify the software's author and ensure that the software has not been modified/tampered with after the author created and published it. Once signed, inside the file, there will be one or more digital signatures that contain an encrypted version of the file's hash. For a Windows executable, [calculating the file's hash](https://github.com/openziti/desktop-edge-win/blob/release-next/ZitiUpdateService/checkers/PeFile/SignedFileValidator.cs) is [too complex to outline here](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format), but the important point is that one must be able to calculate the same hash for a given file before and after signatures are added, which the PE32 format accounts for.
 

@@ -16,6 +16,8 @@ A private S3 bucket protects against a data leak by denying all public access. T
 
 ![](/blogs/openziti/v1721754674859/9428a427-5a2f-41f0-ac30-af0c83a09c69.png)
 
+<!-- truncate -->
+
 The OpenZiti Python SDK (`import openziti`) makes it easy to use the AWS Python SDK (`import boto3`) through an OpenZiti tunnel using only Python. No sidecar, agent, or client proxy is needed!
 
 Here's an example of a bucket policy that allows any S3 bucket action for any AWS caller identity as long as the request arrives via the VPC endpoint (VPCE).

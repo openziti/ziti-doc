@@ -17,6 +17,8 @@ tags:
 
 I am pleased to introduce you to `BrowZer`, a new group of open source components that collectively enable you and your organization, enterprises and self-hosting enthusiasts alike, in the cloud or at home, to operate private-to-the-internet web applications while still easily providing secure access for your authorized internet-based remote users.
 
+<!-- truncate -->
+
 The `Z` in this article's title, within the word normally spelled "*browser*", is not a typo. It is a purposeful indication that we are bringing you a solution, unique in today's technology offerings, for securing browser-based applications. This solution is built as part of the [Open**Z**iti](https://github.com/openziti/) project.
 
 OpenZiti enables developers to embed secure networking into their applications, as code. With BrowZer, we extend that revolution by also enabling developers to automatically embed [zero trust](https://openziti.github.io/ziti/overview.html) networking in the browser, transforming it into a full-fledged OpenZiti client.

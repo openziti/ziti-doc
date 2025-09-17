@@ -15,7 +15,11 @@ tags:
 
 ---
 
-This one's for the shell ninjas. The `ziti` CLI comes with auto-complete! You can use completions in any shell supported by [Cobra](https://cobra.dev/#generating-bash-completions). This post will distill the Cobra instructions with correct examples for `ziti` in BASH and ZSH.
+This one's for the shell ninjas. The `ziti` CLI comes with auto-complete! You can use completions in any shell 
+supported by [Cobra](https://cobra.dev/#generating-bash-completions). This post will distill the Cobra instructions 
+with correct examples for `ziti` in BASH and ZSH.
+
+<!-- truncate -->
 
 ## Install `ziti`
 

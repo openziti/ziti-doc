@@ -23,6 +23,8 @@ Commercial backing does complicate community engagement somewhat. As soon as the
 2. Respect people’s time
     
 3. Be nice
+
+<!-- truncate -->
     
 
 These rules should apply to everyone, of course, but people tend to be more forgiving when you’re not associated with a company.

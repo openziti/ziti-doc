@@ -14,6 +14,8 @@ tags:
 
 At the [OpenZiti project](https://github.com/openziti), we heavily rely on OpenAPI specifications to streamline our development process. The OpenAPI project provides [code generators](https://openapi-generator.tech/docs/generators/) that support a variety of programming languages. In this blog, we'll focus on a practical guide for using a generated OpenAPI Python client library. Using a generated client as a user of an API is not entirely a straightforward process. Investing some time upfront to understand the translation between the spec and the code will help you establish the right mental model and kickstart your development.
 
+<!-- truncate -->
+
 We'll generate an OpenAPI Python client library from our [OpenZiti Edge Client API spec](https://github.com/openziti/edge-api/blob/main/client.yml). This API allows OpenZiti clients to create OpenZiti [controller](https://docs.openziti.io/docs/learn/introduction/components#openziti-controller) sessions to gather information needed for them to do work. We'll map what we define in the spec to the concepts expressed in the generated client. We'll step through a basic authentication and request/response example to help you understand what is going on.
 
 ## Generating an OpenAPI Python Client:

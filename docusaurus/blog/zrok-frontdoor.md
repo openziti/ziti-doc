@@ -11,9 +11,12 @@ tags:
 
 ---
 
-**zrok frontdoor** is the heavy-duty front door to your app or site. It makes your website or app available to your online audience through the shield of [zrok.io](http://zrok.io)'s hardened, managed frontends.
+**zrok frontdoor** is the heavy-duty front door to your app or site. It makes your website or app available to your 
+online audience through the shield of [zrok.io](http://zrok.io)'s hardened, managed frontends.
 
 %[https://youtu.be/5Vi8GKuTi_I] 
+
+<!-- truncate -->
 
 ## More Than the zrok Command
 

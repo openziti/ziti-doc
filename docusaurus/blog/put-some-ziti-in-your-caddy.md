@@ -15,6 +15,8 @@ tags:
 
 In this post I'll continue showing the power of OpenZiti and its SDK. This time I'll show you how we [zitified](https://openziti.io/docs/reference/glossary/#zitification-zitified-zitify) [Caddy Server](https://caddyserver.com/).
 
+<!-- truncate -->
+
 If you're a regular reader of this blog, the concept of `zitification`, i.e. embedding OpenZiti SDK into you application, should be familiar to you. We've covered this topic before -- here are some links if you're new to this blog, or missed them:
 
 * [Zitifying SSH](https://openziti.io/blog/zitification/zitifying-ssh/)

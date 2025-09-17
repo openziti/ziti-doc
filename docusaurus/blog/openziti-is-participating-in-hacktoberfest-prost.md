@@ -13,6 +13,8 @@ tags:
 ## What's Hacktoberfest?
 Hacktoberfest is a month long journey many take to get a free t-shirt. Wait, no, it's a community gathering to support the open source community and projects. Every year, during the month of October, [DigitalOcean](https://www.digitalocean.com/) hosts an event in which developers around the world join together to contribute to open source. You can contribute by submitting changes ranging in difficulty from fixing a typo to implementing a full-fledged feature on a project. As the official [Hacktoberfest website](https://hacktoberfest.com/participation/) says, "Quantity is fun, Quality is key."
 
+<!-- truncate -->
+
 ## I Want a Free T-Shirt, How Do I Participate?
 It's coming up fast, your first step is to get acquainted with the process; "Hello Preptember." Preptember is just a fancy way of saying, start getting ready now, find open source projects you're interested in, and take a look at the issues. 
 1. The first step would be to check out the [official Hacktoberfest website](https://hacktoberfest.com/participation/). 

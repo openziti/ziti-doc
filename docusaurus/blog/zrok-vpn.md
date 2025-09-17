@@ -13,6 +13,8 @@ tags:
 
 The latest version of [`zrok`](https://zrok.io/) has a new capability -- host-to-host VPN tunnel.
 
+<!-- truncate -->
+
 ## TL;DR version
 
 On VPN *host*

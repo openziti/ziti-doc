@@ -18,7 +18,11 @@ tags:
 
 ## Introduction
 
-eBPF enables you to safely run sandboxed programs for functions like security and networking in the OS kernel, without changing kernel source code or loading kernel modules. eBPF-TC specifically has robust packet mangling capability, and enables ingress and egress operations, with high performance.
+eBPF enables you to safely run sandboxed programs for functions like security and networking in the OS kernel, without 
+changing kernel source code or loading kernel modules. eBPF-TC specifically has robust packet mangling capability, and 
+enables ingress and egress operations, with high performance.
+
+<!-- truncate -->
 
 This is how I used TC-eBPF to build a Plugin TPROXY Interception Firewall (IFW) to intercept and deliver packets to my target application - OpenZiti Edge Routers. You can use a similar eBPF-TC implementation to intercept packets to send to your specific observability, security or networking application. The code is here: [https://github.com/netfoundry/zfw](https://github.com/netfoundry/zfw). Process flow and packet flow diagrams are at the end of this article.
 

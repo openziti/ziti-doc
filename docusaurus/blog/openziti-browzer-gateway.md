@@ -18,6 +18,8 @@ tags:
 
 Welcome back to the next article concerning **BrowZer**, a new group of open-source components from the [OpenZiti project](https://github.com/openziti/) that enables [**automatic embedding of zero trust networking into web applications**](https://blog.openziti.io/introducing-openziti-browzer). The reason **BrowZer** exists, and the problem it aims to solve is preventing your internet-facing web applications from being attacked by malicious threat actors.
 
+<!-- truncate -->
+
 This article is part of the ongoing [web application security](https://blog.openziti.io/series/browzer) series concerning **BrowZer**, and here I will provide instructions concerning how to acquire TLS certificates for its *gateway* component — or what we internally refer to as the HTTP Agent.
 
 Before proceeding below, you may be interested in reading the [architectural overview of the OpenZiti BrowZer Gateway](https://blog.openziti.io/openziti-browzer-gateway) to get some broader context if you haven't already read it.

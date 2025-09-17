@@ -14,7 +14,10 @@ tags:
 
 ## **Where we started**
 
-If you were using `zrok` &lt;=`v0.3.3` you might have noticed that websockets weren't exactly behaving quite like we were expecting. We decided to quickly fix that to get users the features they want.
+If you were using `zrok` &lt;=`v0.3.3` you might have noticed that websockets weren't exactly behaving quite like we 
+were expecting. We decided to quickly fix that to get users the features they want.
+
+<!-- truncate -->
 
 ## **How we got to now**
 

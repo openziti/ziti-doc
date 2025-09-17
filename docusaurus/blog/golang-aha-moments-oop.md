@@ -16,6 +16,8 @@ Moving to Go as my primary development language was a surprisingly easy transiti
 
 This article walks through some of Go’s object oriented features and also discusses how some patterns common in other languages can be written in a way that’s closer to idiomatic Go. It also covers some features of Go that surprised and (in some cases) delighted me.
 
+<!-- truncate -->
+
 # Is Go Object Oriented?
 
 Go allows you to group data into structs, and to associate logic to those structs.

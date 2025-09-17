@@ -9,14 +9,15 @@ authors: [ClintDovholuk]
 image: /blogs/openziti/v1725453901119/410a39f8-eaf7-4c9f-bbba-ae547eb78d94.webp
 tags: 
   - ssh
-  - zero-trust
   - openziti
-  - zerotrust
+  - zero-trust
   - zero-trust-security
 
 ---
 
 [The previous post](https://blog.openziti.io/zero-trust-sshclient) revisited the `zssh` project and demonstrated how to implement a simple ssh client using the extended modules provided by the Golang project. It also modified that simple program and showed what it takes to incorporate OpenZiti, creating a zero trust ssh client. This post focuses on another aspect of `zssh` and OpenZiti: multi-factor authentication.
+
+<!-- truncate -->
 
 [OpenZiti](https://openziti.io/docs/learn/introduction/) has a powerful and flexible authentication system. It allows an OpenZiti overlay network operator to decide what authentication mechanisms any given identity must satisfy before being authenticated to the overlay network. OpenZiti is a zero trust overlay network; authentication is only half of the equation. Once authenticated, identities still require authorization before accessing services secured by the overlay following the zero trust pillar of "least privilege".
 

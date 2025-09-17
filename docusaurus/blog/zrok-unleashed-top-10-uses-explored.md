@@ -13,7 +13,12 @@ tags:
 
 ---
 
-As we roll into 2025, we’re entering into an exciting time for the world of zrok. We’ve just recently added [support for custom domains](https://blog.openziti.io/zrok-custom-domains), and with the 1.0 release right around the corner, zrok is more powerful than it has ever been. We thought this was a good time to zoom out and take a look at how users are actually using our [hosted zrok as a service](https://myzrok.io).
+As we roll into 2025, we’re entering into an exciting time for the world of zrok. We’ve just recently 
+added [support for custom domains](https://blog.openziti.io/zrok-custom-domains), and with the 1.0 release right 
+around the corner, zrok is more powerful than it has ever been. We thought this was a good time to zoom out and 
+take a look at how users are actually using our [hosted zrok as a service](https://myzrok.io).
+
+<!-- truncate -->
 
 As part of the larger open source [OpenZiti project](https://github.com/openziti/zrok/), zrok uses an [OpenZiti overlay network](https://openziti.io/docs/learn/introduction/) for any secure communications. When you start an instance of zrok, zrok will create a secure zero trust connection to the OpenZiti overlay. This connection is also how zrok can provide truly end-to-end encrypted tunnels with the `--tcpTunnel` [backend mode](https://docs.zrok.io/docs/getting-started#share-backend-modes). Given its nature, it’s difficult to know what services zrok is providing, but we were able to run some statistics based on the terminating port and make some inferences on whether or not the port was exposed as a public or private share. Here’s the list that we came up with. I found some of these use cases particularly cool, and I discovered some use cases in the process I’d never actually thought of. We’re hoping this post gives you some fresh eyes with zrok and you discover some new possibilities for how powerful it can be for resource sharing!
 

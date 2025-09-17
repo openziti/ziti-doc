@@ -25,6 +25,8 @@ If you have read through the entire series up to here, welcome! If you have not,
 
 This article makes implicit heavy use of [part 2](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography) and [part 3](/bootstrapping-trust-part-3-certificates) of this series.
 
+<!-- truncate -->
+
 ### Root & Intermediate Certificate Authorities (CAs)
 
 Not all certificates are the same! Certificates have different capabilities depending on their usage attributes and extensions. The previous article in this series mentioned a few of those attributes and extensions. Two of those were `clientAuth`, for client certificates, and `serverAuth`, for server certificates, which play an essential role in how a certificate is used during network authentication negotiations. These roles are crucial, as they are a contract for what attributes and extensions should be included in the certificate to make it useful. For example, a server certificate usually finds it useful to include Subject Alternate Names (SANs). A SAN can be used to tie a certificate to a specific domain name (like ziti.dev). However, a client certificate will not have use for those same fields.

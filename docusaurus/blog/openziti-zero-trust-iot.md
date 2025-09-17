@@ -16,6 +16,8 @@ tags:
 
 IoT devices are commonplace in most home networks and while they provide many useful features they can also open your network to vulnerabilities, especially if they are connected via Wi-Fi. For starters most legacy devices don’t support advanced features like wpa3 and 802.11w Wi-Fi protected management frames \*e.g. Google Nest Gen 2 thermostats, Carrier Infinity touch series a/b and Ring security devices. A general recommendation is to only add IoT devices to your guest Wi-Fi network. While this helps to isolate the IoT devices from your home network it does not stop hackers from using that Wi-Fi network to perform illegal activities if it becomes compromised. In this article, we will show you how to set up an OpenZiti Zero trust Wi-Fi gateway using a Raspberry Pi 4 running Ubuntu Server 22.04(64 bit) that will restrict devices attached to the IoT Wi-Fi network to only the set of required IoT cloud servers. To do this we use a combination of OpenZiti DNS-based services which provide a form of DNAT and restrictive fire-walling which limits inbound traffic to only the OpenZiti DNS DNAT range. We will use the hostapd Linux package to provide Wi-Fi access point functionality.
 
+<!-- truncate -->
+
 ###### \*at the time of writing
 
 ![](/blogs/openziti/v1695064156479/7b2f7b92-a3dd-49f7-8819-377cf546e328.png)

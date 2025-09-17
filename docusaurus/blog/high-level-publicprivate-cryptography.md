@@ -5,12 +5,14 @@ authors: [AndrewMartinez]
 date: 2022-10-19
 tags:
   - cryptography
-  - public key
+  - pki
   - security
 ---
 # High-Level Public/Private Cryptography
 
 I find myself writing this high-level overview of public/private key cryptography often. Sometimes I even call it "an overview of asymmetric encryption." It depends on my mood. Rather than hunt for a simple overview and fail to find one I like, I created this. An article that I can control and point to in the future. Welcome. This is my high-level overview of public-private key cryptography.
+
+<!-- truncate -->
 
 # Public Private Key Cryptography
 

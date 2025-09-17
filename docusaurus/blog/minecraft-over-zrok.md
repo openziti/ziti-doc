@@ -17,6 +17,8 @@ tags:
 
 In 2022, we showed you [how to run a Minecraft server privately and securely using OpenZiti](https://blog.openziti.io/set-up-a-secure-multiplayer-minecraft-server).
 
+<!-- truncate -->
+
 Since then, we have released `zrok`, a really cool service that's built on top of OpenZiti as a ziti-native application. We also made it a free service for the world to use. If this is your first time hearing about zrok, it has some really exciting features. Read more about `zrok` over at the main site [https://zrok.io](https://zrok.io) or by [checking out previous blog posts in the `zrok` series](https://blog.openziti.io/series/zrok).
 
 We're back with a new blog showing you how you can share your Minecraft server safely and securely using `zrok`. If you want, you can watch a video covering the process here.

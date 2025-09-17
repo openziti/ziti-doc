@@ -17,6 +17,8 @@ tags:
 
 Postman can build a collection of API requests and has a friendly interface for walking the API specification. This article aims to accelerate your timeline for productively exploring the API and developing an integration.
 
+<!-- truncate -->
+
 ## About the Management API
 
 The [OpenZiti](https://docs.openziti.io/docs/learn/introduction/) controller provides an edge-management API for creating, reading, updating, and deleting (CRUD) OpenZiti resources, e.g., Services, Edge Router Policies, etc. The simplest way to use the edge-management API is through [the `ziti` CLI](https://docs.openziti.io/docs/downloads#the-ziti-executable) or [the console](https://github.com/openziti/ziti-console#readme).

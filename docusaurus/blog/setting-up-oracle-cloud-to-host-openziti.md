@@ -14,7 +14,14 @@ tags:
 
 ---
 
-For a long time, I've been concerned about relying on a company's focus on security. I generally expect the least focus on security as many companies just want to be first to market. Yikes, that sounds bad, but many companies indeed focus too little on security. I do not expose my internal network to the world by opening ports on my firewall. While I'd like access to a few things like my security camera system, network storage device, home assistant, etc., I am very concerned that some bad actor will somehow find my hosted service and find a way in because of some CVE that hasn't been patched. Now that I've drawn a severely dark picture let's bring some light in, haha.
+For a long time, I've been concerned about relying on a company's focus on security. I generally expect the least 
+focus on security as many companies just want to be first to market. Yikes, that sounds bad, but many companies 
+indeed focus too little on security. I do not expose my internal network to the world by opening ports on my firewall. 
+While I'd like access to a few things like my security camera system, network storage device, home assistant, etc., 
+I am very concerned that some bad actor will somehow find my hosted service and find a way in because of some CVE 
+that hasn't been patched. Now that I've drawn a severely dark picture let's bring some light in, haha.
+
+<!-- truncate -->
 
 I started working for a company called [NetFoundry](https://netfoundry.io/), which develops an open source project, [OpenZiti](https://openziti.github.io/). The product is a [zero trust network overlay](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) that allows you private and secure access to your hosted services without having to add firewall rules to allow traffic on specific ports/addresses. Hosting my own network requires a virtual private server; as you may know, many different options are available. I ultimately settled on [Oracle's Cloud Infrastructure](https://www.oracle.com/cloud/) because they have a free tier like many other cloud providers. [Oracle's free tier](https://www.oracle.com/cloud/free/) is different. However, their free tier won't allow you to accidentally use paid services if you don't upgrade your account to a paid account. You can host up to two instances totally free, and there's no expiration where you'll have to pay for services going forward. Read on to see how I set up my OpenZiti zero trust network on Oracle's Cloud Infrastructure.
 

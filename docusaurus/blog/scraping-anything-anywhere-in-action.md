@@ -13,6 +13,8 @@ tags:
 
 *This is part three of a three-part article. This article builds on the previous two articles. Here we will take a look at what we built and use it to explore the power of a zitified Prometheus. See* [*part one*](https://blog.openziti.io/prometheus-scrape-anything-from-anywhere) *for the necessary background about the series. See* [*part two*](https://blog.openziti.io/configuring-openziti-to-enable-prometheus) *for detailed instructions covering how to setup the environment you're about to explore*
 
+<!-- truncate -->
+
 ## The Payoff
 
 Ok. Here it is. We are at the end of the series and here is where we'll put it all together and really start to understand the sort of innovations you can create when you zitify an application. As a reminder, we are working with [Prometheus](https://prometheus.io/), a CNCF project that we will use to monitor a workload deployed in two separate [Kubernetes](https://kubernetes.io) clusters. To save you from flipping back to a previous article, here is what that solution looks like.

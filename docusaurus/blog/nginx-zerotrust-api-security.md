@@ -5,8 +5,8 @@ authors: [AndrewMartinez]
 date: 2022-12-01
 tags:
   - nginx
-  - zero trust
-  - api
+  - zero-trust
+  - apis
   - security
 ---
 
@@ -15,6 +15,8 @@ tags:
 ![ngx_simple_pre@2x.png](/blogs/openziti/v1669908439678/tz_p-x3qS.png align="left")
 
 *With the first version of* [*ngx\_ziti\_module*](https://github.com/openziti/ngx_ziti_module)*, it is possible to take an NGINX-exposed Web API and make it completely dark. This means no open ports in NGINX, and it brings the Zero Trust capabilities of [OpenZiti](https://github.com/openziti) to any NGINX deployment. Yes, replace open ports with open source! OpenZiti works in existing applications or new ones.*
+
+<!-- truncate -->
 
 ![ngx_simple_post@2x.png](/blogs/openziti/v1669908465505/gf5pDUJQn.png align="left")
 

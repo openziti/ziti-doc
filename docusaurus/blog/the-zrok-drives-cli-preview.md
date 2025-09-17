@@ -14,7 +14,10 @@ tags:
 
 ---
 
-With the release of `v0.4.23`, zrok now includes a set of CLI commands that simplifies the management of zrok virtual drives. This is an early preview of the full set of zrok Drives tools.
+With the release of `v0.4.23`, zrok now includes a set of CLI commands that simplifies the management of zrok virtual 
+drives. This is an early preview of the full set of zrok Drives tools.
+
+<!-- truncate -->
 
 If this is your first time enountering zrok, check out the [entire zrok series](https://blog.openziti.io/series/zrok) here on the [OpenZiti blog](https://blog.openziti.io/). Also take a look at the [Getting Started guide](https://docs.zrok.io/docs/getting-started).
 

@@ -14,7 +14,10 @@ tags:
 
 ---
 
-Today we celebrate the initial release of `zrok` `v0.4.0`. This new release of `zrok` introduces important new features and provides a stronger more extensible foundation for future growth.
+Today we celebrate the initial release of `zrok` `v0.4.0`. This new release of `zrok` introduces important new 
+features and provides a stronger more extensible foundation for future growth.
+
+<!-- truncate -->
 
 If you're just tuning in now and want to learn more about `zrok`, visit the website at https://zrok.io/ for an overview and https://docs.zrok.io/ for details.
 

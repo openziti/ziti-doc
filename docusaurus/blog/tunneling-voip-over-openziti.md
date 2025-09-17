@@ -12,9 +12,13 @@ tags:
 
 ---
 
-In this article we will look at what is VoIP (voice over IP), why it is inherently vulnerable to network based attacks, and how we can stop these attacks by closing inbound ports using open-source OpenZiti.
+In this article we will look at what is VoIP (voice over IP), why it is inherently vulnerable to network based attacks, 
+and how we can stop these attacks by closing inbound ports using open-source OpenZiti.
 
-This will include a how-to guide on standing up an OpenZiti network and using OpenZiti tunnelers to connect IP phones from anywhere in the world using a Asterisk PBX server.
+This will include a how-to guide on standing up an OpenZiti network and using OpenZiti tunnelers to connect IP phones 
+from anywhere in the world using a Asterisk PBX server.
+
+<!-- truncate -->
 
 # VoIP Introduction
 

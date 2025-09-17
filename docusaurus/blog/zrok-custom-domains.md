@@ -13,7 +13,10 @@ tags:
 
 ---
 
-With the latest release of [myzrok.io](http://myzrok.io) we are excited to announce the introduction of [custom domains](https://docs.zrok.io/docs/myzrok/custom-domains/)!
+With the latest release of [myzrok.io](http://myzrok.io) we are excited to announce the introduction of 
+[custom domains](https://docs.zrok.io/docs/myzrok/custom-domains/)!
+
+<!-- truncate -->
 
 ## TL;DR
 

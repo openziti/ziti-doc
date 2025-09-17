@@ -14,7 +14,11 @@ tags:
 
 ---
 
-With the `v0.4.7` release we now support authenticating users of your public `zrok` shares using either Google or GitHub. This new authentication capability is in addition to the basic HTTP authentication functionality that was available in previous releases.
+With the `v0.4.7` release we now support authenticating users of your public `zrok` shares using either Google or 
+GitHub. This new authentication capability is in addition to the basic HTTP authentication functionality that was 
+available in previous releases.
+
+<!-- truncate -->
 
 Here's an overview of where this new capability fits into the `zrok` architecture:
 

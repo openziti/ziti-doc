@@ -12,6 +12,8 @@ tags:
 
 [Jitsi Meet](https://jitsi.github.io/handbook/) is an open-source video conferencing server. I've wanted to run Jitsi behind zrok and [someone asked about it today in the forum](https://openziti.discourse.group/t/local-jitsi-meet-zrok/2900/4?u=qrkourier) and we got it working! Here's how I conveniently self-host Jitsi with zrok.
 
+<!-- truncate -->
+
 ## Why zrok?
 
 [zrok.io](https://zrok.io) makes it easy to self-host web applications while obscuring your real public IP and protecting your private network. Your visitors will see a trusted certificate with the name `*.share.zrok.io` provided by zrok.io as a service when they visit your Jitsi Meet instance's public URL.

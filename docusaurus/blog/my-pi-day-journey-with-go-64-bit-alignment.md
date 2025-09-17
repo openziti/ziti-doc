@@ -16,6 +16,8 @@ tags:
 
 A few days ago, we had a user bring to our attention, a failure of OpenZiti on a Raspberry Pi 4 running a 32-bit operating system. As I got started investigating the bug, I smirked a little as it just so happened to be Pi day (March 14th).
 
+<!-- truncate -->
+
 In any case, the error presented looked like this.
 
 ```bash

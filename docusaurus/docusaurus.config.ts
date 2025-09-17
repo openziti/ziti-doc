@@ -222,20 +222,14 @@ const config: Config = {
         OPENZITI_DOCS_BASE: '/openziti'
     },
     plugins: [
-        function webpackAliases() {
-            return {
-                name: 'unified-doc-webpack-aliases',
-                configureWebpack() {
-                    return {
-                        resolve: {
-                            alias: {
-                                '@openziti': path.resolve(__dirname, `./`),
-                            },
-                        },
-                    };
-                },
-            };
-        },
+        () => ({
+            name: 'unified-doc-webpack-aliases',
+            configureWebpack() {
+                return {
+                    resolve: { alias: { '@openziti': path.resolve(__dirname, './') } },
+                };
+            },
+        }),
         [pluginHotjar, {}],
         [
             '@docusaurus/plugin-content-docs',
@@ -296,81 +290,82 @@ const config: Config = {
                 redirects: redirectsArr,
             } satisfies ClientRedirectsOptions,
         ],
-    ],
-    presets: [
+    ],plugins: [
         [
-            'classic',
-            ({
-                docs: {
-                    sidebarPath: require.resolve('./sidebars.ts'),
-                    routeBasePath: '/docs/openziti',
-                    exclude: [
-                        '**/_*.{js,jsx,ts,tsx,md,mdx}',
-                        '**/*.test.{js,jsx,ts,tsx}',
-                        '**/__tests__/**',
-                        '**/_remotes/**'
+            '@docusaurus/plugin-content-docs',
+            {
+                id: 'default',
+                sidebarPath: require.resolve('./sidebars.ts'),
+                routeBasePath: 'docs/openziti',
+                exclude: [
+                    '**/_*.{js,jsx,ts,tsx,md,mdx}',
+                    '**/*.test.{js,jsx,ts,tsx}',
+                    '**/__tests__/**',
+                    '**/_remotes/**',
+                ],
+                editUrl: 'https://github.com/openziti/ziti-doc/tree/main/docusaurus',
+                beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives],
+                remarkPlugins: [
+                    require('./src/plugins/remark/remark-yaml-table'),
+                    require('./src/plugins/remark/remark-code-block'),
+                    [remarkReplaceMetaUrl, { from: '_baseurl_', to: DOCUSAURUS_BASE_PATH }],
+                    [
+                        remarkScopedPath,
+                        {
+                            debug: DOCUSAURUS_DEBUG,
+                            mappings: [{ from: '@openzitidocs', to: '/docs/openziti' }],
+                        },
                     ],
-                    editUrl: 'https://github.com/openziti/ziti-doc/tree/main/docusaurus',
-                    beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives,],
-                    remarkPlugins: [
-                        require('./src/plugins/remark/remark-yaml-table'),
-                        require('./src/plugins/remark/remark-code-block'),
-                        [remarkReplaceMetaUrl, {from: '_baseurl_', to: DOCUSAURUS_BASE_PATH}],
-                        [remarkScopedPath,
-                            {
-                                debug: DOCUSAURUS_DEBUG,
-                                mappings: [
-                                    {from: '@openzitidocs', to: '/docs/openziti'},
-                                ],
-                            },
-                        ]
-                    ],
-                    showLastUpdateTime: true
-                },
-                blog: {
-                    routeBasePath: '/docs/openziti/blog',
-                    showReadingTime: true,
-                    include: ['**/*.{md,mdx}'],
-                    path: '_remotes/openziti/docusaurus/blog',
-                    remarkPlugins: [
-                        remarkYouTube
-                    ],
-                    blogSidebarCount: 'ALL',
-                    blogSidebarTitle: 'All posts',
-
-                },
-                theme: {
-                    customCss: require.resolve('./src/css/custom.css'),
-                },
-                debug: true,
-                googleTagManager: {
-                    containerId: 'GTM-5SF399H3',
-                },
-            } satisfies Options),
+                ],
+                showLastUpdateTime: true,
+            },
         ],
-        // Redocusaurus config
+        [
+            '@docusaurus/plugin-content-blog',
+            {
+                routeBasePath: 'docs/openziti/blog',
+                showReadingTime: true,
+                include: ['**/*.{md,mdx}'],
+                path: '_remotes/openziti/docusaurus/blog',
+                remarkPlugins: [remarkYouTube],
+                blogSidebarCount: 'ALL',
+                blogSidebarTitle: 'All posts',
+            },
+        ],
+        [
+            '@docusaurus/plugin-content-pages',
+            {
+                path: 'src/pages',
+                remarkPlugins: [],
+            },
+        ],
+        [
+            '@docusaurus/plugin-google-tag-manager',
+            {
+                containerId: 'GTM-5SF399H3',
+            },
+        ],
         [
             'redocusaurus',
             {
-                // Plugin Options for loading OpenAPI files
                 specs: [
-                    {
-                        id: 'edge-client',
-                        spec: 'https://get.openziti.io/spec/client.yml',
-                    },
-                    {
-                        id: 'edge-management',
-                        spec: 'https://get.openziti.io/spec/management.yml',
-                    },
+                    { id: 'edge-client', spec: 'https://get.openziti.io/spec/client.yml' },
+                    { id: 'edge-management', spec: 'https://get.openziti.io/spec/management.yml' },
                 ],
-                // Theme Options for modifying how redoc renders them
-                theme: {
-                    // Change with your site colors
-                    primaryColor: '#1890ff',
-                },
+                theme: { primaryColor: '#1890ff' },
             },
         ],
     ],
+    themes: [
+        [
+            '@docusaurus/theme-classic',
+            {
+                customCss: require.resolve('./src/css/custom.css'),
+            },
+        ],
+        '@docusaurus/theme-mermaid',
+    ],
+
     themeConfig:
         {
             hotjar: {applicationId: hotjarId},

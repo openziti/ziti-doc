@@ -18,6 +18,8 @@ tags:
 
 OpenZiti project adds security layers that make your service available without exposing incoming ports, provides identity-specific end-to-end encryption, masks your network traffic protocols/ports, and allows developers to be more agile and secure than ever in all networking scenarios.
 
+<!-- truncate -->
+
 In our previous posts, we introduced the concept of [Zitification](https://openziti.io/docs/reference/glossary/#zitification-zitified-zitify) -- taking an app and changing it to use a secure, zero-trust, overlay network -- and shared a [few](https://openziti.io/blog/zitification/zitifying-ssh/) [examples](https://openziti.io/blog/zitification/zitifying-scp/) we developed internally.
 
 This article will show how to *zitify* your Python applications with minor code changes.

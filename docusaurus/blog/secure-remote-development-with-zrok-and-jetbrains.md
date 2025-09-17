@@ -18,6 +18,8 @@ tags:
 
 I love working remotely, and sometimes, ‘remote’ is truly out there. I’ve worked from faraway islands and foreign countries to your local coffee shop and campground. Regardless of where I’m at, I need one thing in particular: a secure connection to my workstation and development environment at home.
 
+<!-- truncate -->
+
 Getting connected is easy. There’s open internet access just about everywhere I go, and when there’s not, I can point a Starlink terminal towards the sky. The less obvious but tremendously important part is securing that connection. Can you imagine the personal and professional harm it would cause if I took this work-from-anywhere privilege for granted and I was the engineer whose access was used to compromise my employer or our clients? That’s nightmare fuel.
 
 Fortunately, a set of easy-to-use tools allows me to gallivant around the world and remain confident in my connection and its security. Namely, [zrok.io](http://zrok.io/) and JetBrains [remote development](https://www.jetbrains.com/remote-development/).

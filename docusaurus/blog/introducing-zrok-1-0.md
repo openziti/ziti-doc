@@ -16,7 +16,10 @@ tags:
 
 # What does version 1.0 mean?
 
-It’s always a big deal when a project releases “version 1.0”. Our version 1.0 release validates all of the good things about zrok while improving a few areas that needed it, and also brings several exciting new features.
+It’s always a big deal when a project releases “version 1.0”. Our version 1.0 release validates all of the good things 
+about zrok while improving a few areas that needed it, and also brings several exciting new features.
+
+<!-- truncate -->
 
 The initial release of 1.0 includes major new features like:
 

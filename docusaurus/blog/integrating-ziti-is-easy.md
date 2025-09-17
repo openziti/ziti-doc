@@ -4,15 +4,17 @@ title: "Integrating Ziti is Easy! How we got our app tested with go-httpbin"
 authors: [CameronOtts]
 date: 2022-10-11
 tags:
-  - integration
-  - go-httpbin
-  - app
+  - integrations
+  - application-security
+  - appsec
   - ziti
 ---
 # Integrating Ziti is Easy!
 
 # Integrating with Ziti? An Introduction
 What is something everyone wants but can be difficult or cumbersome to implement? Better security practices. Here we are going to explore [Zero Trust](https://en.wikipedia.org/wiki/Zero_trust_security_model) via OpenZiti. Zero Trust is a concept where a network is never trusted and always reverified. Constantly revalidating all connections and participants to validate they should be there. OpenZiti seeks to alleviate the hassle of setting up a zero trust network and putting the power in developers to create more secure apps  If you haven't heard of OpenZiti then you can check out the [project here](https://github.com/openziti) as well as [an overview](https://openziti.github.io/ziti/overview.html). Today we are going to be extending a very helpful http testing tool to talk over Ziti.
+
+<!-- truncate -->
 
 ## Why?
 Sometimes we get a little excited when learning about a new technology or concept. Like learning about zero trust and finding OpenZiti! So we make a plan to setup our apps to use ziti Soon enough the engineering team had everything sorted out with their main application talking through a Ziti network, however, this was a small realization: what about all the testing infrastructure that relied on the app just reaching out to a web server? Well, luckily there are plenty of ways to still test an app over a Ziti network.

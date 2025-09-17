@@ -19,6 +19,8 @@ So, why the long wait? Well, making secure connectivity simple at scale is non-t
 
 We’ve proved, and our users have proved, that OpenZiti stands up to large-scale production use. But one of the most important things we wanted to do before flipping to v1.0 was show off OpenZiti in action in its most potent use case: as a foundation for what we call “ziti-native apps.” These are applications built from the ground up with security, privacy, and resilience designed in.
 
+<!-- truncate -->
+
 zrok - a peer-to-peer sharing application - is the first ziti-native app we built.  It’s completely open source, and we’ve made it available as a [free service](https://zrok.io). zrok has been a tremendous success in its own right, but it also serves as a reference application. Check it out on [GitHub](https://github.com/openziti/zrok) to see how we did it and for inspiration on how you could use OpenZiti in your applications.
 
 We're excited to announce v1.0. It's a milestone marking our commitment to users for system quality, stability, and compatibility throughout major release cycles. It's a proven foundation for the next generation of distributed applications featuring security as a first-class design goal.

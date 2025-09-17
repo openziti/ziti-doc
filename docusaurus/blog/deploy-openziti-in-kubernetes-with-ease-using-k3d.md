@@ -17,6 +17,8 @@ tags:
 
 k3d is a Kubernetes distribution for Docker that makes it easy to replicate a production-like environment in a local container environment. It's great for local development and familiarizing yourself with [OpenZiti's deployment options](https://openziti.io/docs/category/deployments).
 
+<!-- truncate -->
+
 ## The Plan
 
 1. Create a k3d cluster.

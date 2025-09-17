@@ -14,9 +14,12 @@ tags:
 
 ---
 
-If you run Portainer, and you seek a modern, flexible recipe for how to make it secure while also providing flexible access to your authorized users, this article is for you.
+If you run Portainer, and you seek a modern, flexible recipe for how to make it secure while also providing flexible 
+access to your authorized users, this article is for you.
 
 A question that sometimes gets asked is: *What types of companies, self-hosters, or general use cases, will gain the greatest benefit from using* [*OpenZiti BrowZer*](https://blog.openziti.io/introducing-openziti-browzer)?
+
+<!-- truncate -->
 
 To help answer the “*who benefits*” question, much like I did in a [previous article](https://blog.openziti.io/effortless-docker-management-with-private-web-access), this article will frame the answer in the context of a web application named [Portainer](https://www.portainer.io/) (a web-accessible container management platform) when it needs to be internet-facing.
 

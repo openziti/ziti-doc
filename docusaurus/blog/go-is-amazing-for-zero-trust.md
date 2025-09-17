@@ -23,6 +23,8 @@ The [Appetizer Demo doc page](https://openziti.io/appetizer) is live. You can go
 
 ![[object Object]](https://openziti.io/img/appetizer/step4.svg align="left")
 
+<!-- truncate -->
+
 ## Go Standard Library - `package net`
 
 A year or two before the pandemic, OpenZiti began development with the premise that security should be embedded into, not bolted onto, applications. Naturally, this means the project would need SDKs for people to use. The project decided to migrate towards Go, which was relatively mature but still an "up-and-coming" language (and continues to gain popularity). Go was also gaining substantial traction in network-centric use cases. The team started to develop the SDK for Go and discovered the standard library contained the perfect abstractions necessary to implement zero-trust principles.

@@ -14,7 +14,10 @@ tags:
 
 ---
 
-zrok is a powerful platform for sharing. The latest releases of zrok allow you to get granular about which other zrok accounts are allowed to privately access your shares.
+zrok is a powerful platform for sharing. The latest releases of zrok allow you to get granular about which other 
+zrok accounts are allowed to privately access your shares.
+
+<!-- truncate -->
 
 In all current zrok versions, the `zrok share private` command will allocate an ephemeral share. The allocated share is accessible by any user on that zrok service instance (zrok.io, for example) as long as they know the share token. This model is now referred to as the "open permission mode". This will remain the default behavior for a while still (probably until the `v0.5` release of zrok).
 

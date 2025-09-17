@@ -16,6 +16,8 @@ tags:
 
 You can conveniently run a zrok instance on a Linux server. The Caddy option makes it easy to auto-renew a wildcard certificate to protect the zrok API and your public shares with TLS.
 
+<!-- truncate -->
+
 ## What's This Good For?
 
 * [You can publicly share websites, files, etc.](https://docs.zrok.io/docs/concepts/sharing-public/), with auth from your computers without punching holes in their inbound firewalls. This is called reverse tunneling. Your Linux server is public and acts as a relay.

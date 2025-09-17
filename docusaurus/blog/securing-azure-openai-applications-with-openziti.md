@@ -17,7 +17,16 @@ tags:
 
 ### Scope
 
-Once the initial release of ChatGPT happened at the end of 2022, a new wave of optimism and excitement started to sweep through Enterprises. Artificial Intelligence, more specifically generative AI, finally arrived in the mainstream. Company Executives pretty much everywhere in the world are trying to understand how it can be used to help their workforce and businesses be more productive and efficient. It was quickly realized that the data Enterprises own is very valuable and important. The large language models will help them greatly in their day-to-day decisions on whether to drive efficiency, lower costs on the supply chain or understand customer behavior and their consumption patterns to name a few. One thing is very clear, data security is of paramount importance not just at rest but in transit as well.
+Once the initial release of ChatGPT happened at the end of 2022, a new wave of optimism and excitement started to sweep 
+through Enterprises. Artificial Intelligence, more specifically generative AI, finally arrived in the mainstream. 
+Company Executives pretty much everywhere in the world are trying to understand how it can be used to help their 
+workforce and businesses be more productive and efficient. It was quickly realized that the data Enterprises own 
+is very valuable and important. The large language models will help them greatly in their day-to-day decisions on 
+whether to drive efficiency, lower costs on the supply chain or understand customer behavior and their consumption 
+patterns to name a few. One thing is very clear, data security is of paramount importance not just at rest but in 
+transit as well.
+
+<!-- truncate -->
 
 In this article, I will show how [OpenZiti](https://openziti.io/docs/learn/introduction/) Overlay Network can secure the data forwarded between applications and users across the Internet. One will learn how two different personas within the same company (i.e. DevOps Engineering and Apps Consumers) can manage the infrastructure or just access the privately hosted Application through the same OpenZiti Overlay without opening any network ports on the service side and segmenting their access through different OpenZiti [Services](https://openziti.io/docs/learn/core-concepts/services/overview) and [Service/Access Policies](https://openziti.io/docs/learn/core-concepts/security/authorization/policies/overview). The architecture section will further highlight the differences before and after OpenZiti. We all know a diagram is worth 10,000 words.
 

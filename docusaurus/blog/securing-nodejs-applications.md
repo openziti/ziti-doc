@@ -6,14 +6,17 @@ date: 2022-09-28
 tags:
   - nodejs
   - openziti
-  - zero trust
+  - zero-trust
   - sdk
 ---
 ## Securing NodeJS Applications
 
 # Welcome
 
-If you are a **NodeJS** app developer or DevSecOps practitioner, and application security and business agility is important to you, then you're in the right place. 
+If you are a **NodeJS** app developer or DevSecOps practitioner, and application security and business agility is 
+important to you, then you're in the right place.
+
+<!-- truncate -->
 
 Here I will take the abstract notion of app-embedded zero trust, and show you how OpenZiti uniquely positions you to achieve it in ***your NodeJS applications***.
 <table>

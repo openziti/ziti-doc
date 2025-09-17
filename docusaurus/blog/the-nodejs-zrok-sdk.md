@@ -14,7 +14,11 @@ tags:
 
 ---
 
-You may be familiar with `zrok`, the open-source solution built on [OpenZiti](https://openziti.io), which makes it very easy to securely share resources over the internet. If you are already a `zrok` fan, that's great news -- Thank you for being part of our community!
+You may be familiar with `zrok`, the open-source solution built on [OpenZiti](https://openziti.io), which makes it very 
+easy to securely share resources over the internet. If you are already a `zrok` fan, that's great news -- Thank you for 
+being part of our community!
+
+<!-- truncate -->
 
 If `zrok` is new to you, please check out this post [**introducing**`zrok`](https://blog.openziti.io/introducing-zrok).
 

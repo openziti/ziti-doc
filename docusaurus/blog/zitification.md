@@ -14,6 +14,8 @@ tags:
 application has a Ziti SDK incorporated into it, that application can now access network resources securely from anywhere in  
 the world provided that the computer has internet access: NO VPN NEEDED, NO ADDITIONAL SOFTWARE NEEDED.
 
+<!-- truncate -->
+
 Integrating a Ziti SDK into your application and enrolling the application itself into a Ziti Network provides you with_  
 tremendous_ additional security. An application using a [Ziti Network](https://openziti.github.io/docs/introduction/intro/) configured with a truly zero-trust mindset will be  
 **IMMUNE** to the "expand/multiply" phases of classic [ransomware attacks](https://netfoundry.io/ztna-ransomware/). As recent events have shown, it's probably not  

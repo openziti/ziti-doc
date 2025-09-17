@@ -8,6 +8,11 @@ aks:
   permalink: /tags/aks
   description: Azure Kubernetes Service
 
+android:
+  label: Android
+  permalink: /tags/android
+  description: Android development and integrations
+
 announcement:
   label: Announcement
   permalink: /tags/announcement
@@ -37,6 +42,11 @@ aws-lambda:
   label: AWS Lambda
   permalink: /tags/aws-lambda
   description: AWS Lambda content
+
+authentication:
+  label: Authentication
+  permalink: /tags/authentication
+  description: Authentication methods and systems
 
 autocomplete:
   label: Autocomplete
@@ -88,11 +98,15 @@ community:
   permalink: /tags/community
   description: Community topics
 
+cryptography:
+  label: Cryptography
+  permalink: /tags/cryptography
+  description: Cryptography topics and encryption methods
+
 cve:
   label: CVE
   permalink: /tags/cve
   description: Common Vulnerabilities and Exposures
-
 
 cybersecurity-1:
   label: Cybersecurity
@@ -189,15 +203,30 @@ gpg:
   permalink: /tags/gpg
   description: GNU Privacy Guard content
 
+hacktoberfest:
+  label: Hacktoberfest
+  permalink: /tags/hacktoberfest
+  description: Hacktoberfest participation and contributions
+
 hardware:
   label: Hardware
   permalink: /tags/hardware
   description: Hardware-related content
 
+homeassistant:
+  label: Home Assistant
+  permalink: /tags/homeassistant
+  description: Home Assistant integrations
+
 hsm:
   label: HSM
   permalink: /tags/hsm
   description: Hardware Security Modules
+
+integrations:
+  label: Integrations
+  permalink: /tags/integrations
+  description: Third-party integrations
 
 internet:
   label: Internet
@@ -244,6 +273,16 @@ minecraft:
   permalink: /tags/minecraft
   description: Minecraft content
 
+mobile:
+  label: Mobile
+  permalink: /tags/mobile
+  description: Mobile application development and usage
+
+monitoring:
+  label: Monitoring
+  permalink: /tags/monitoring
+  description: Monitoring and observability
+
 myzrok:
   label: myzrok
   permalink: /tags/myzrok
@@ -268,6 +307,11 @@ networking:
   label: Networking
   permalink: /tags/networking
   description: Networking related posts
+
+nginx:
+  label: Nginx
+  permalink: /tags/nginx
+  description: Nginx web server and integrations
 
 nodejs:
   label: NodeJS
@@ -348,6 +392,11 @@ pkce:
   label: PKCE
   permalink: /tags/pkce
   description: OAuth PKCE flow
+
+pki:
+  label: Public Key Infrastructure
+  permalink: /tags/pki
+  description: Public key infrastructure and usage
 
 portainer:
   label: Portainer

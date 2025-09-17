@@ -19,6 +19,8 @@ tags:
 
 If you're involved with software creation or deployment, you likely use Docker. If so, the following *saga* probably rings some bells with you:
 
+<!-- truncate -->
+
 ---
 
 ### A common, painful scenario

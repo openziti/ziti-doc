@@ -4,7 +4,7 @@ title: "Zero Trust Monitoring with OpenZiti"
 authors: [EugeneKobyakov]
 date: 2023-01-09
 tags:
-  - zero trust
+  - zero-trust
   - monitoring
   - openziti
 ---
@@ -19,6 +19,8 @@ Monitoring is very important in today's technology world. It allows system admin
 * improve resource utilization
     
 * reduce time spent on active monitoring and instead be alert-driven
+
+<!-- truncate -->
     
 
 Monitoring systems are usually deployed alongside the main system or software that is being monitored. What this means is that monitoring systems must have the same security requirements as any other production system. If your monitoring system is vulnerable a sophisticated attacker can launch a multi-prong attack on your whole infrastructure. Disabling or impairing monitoring can lead to a delayed discovery of incidents or missing them altogether.

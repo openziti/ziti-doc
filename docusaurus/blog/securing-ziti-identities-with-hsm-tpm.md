@@ -14,7 +14,12 @@ tags:
 
 ---
 
-Regular readers of this blog know that OpenZiti provides secure overlay networking between Ziti identities. You can improve security of your OpenZiti edge identities by using hardware-based private keys. This guide provides step-by-step instructions on integrating hardware security with OpenZiti. It uses Linux built-in TPM as a hardware security device. Similar steps will also work with other HSM devices.
+Regular readers of this blog know that OpenZiti provides secure overlay networking between Ziti identities. 
+You can improve security of your OpenZiti edge identities by using hardware-based private keys. 
+This guide provides step-by-step instructions on integrating hardware security with OpenZiti. 
+It uses Linux built-in TPM as a hardware security device. Similar steps will also work with other HSM devices.
+
+<!-- truncate -->
 
 ## This is How I (en)Roll
 

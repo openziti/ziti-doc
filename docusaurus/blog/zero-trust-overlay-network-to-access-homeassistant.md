@@ -4,8 +4,8 @@ title: "I Created a Zero Trust Overlay Network to Access HomeAssistant"
 authors: [GeoffBerl]
 date: 2022-08-31
 tags:
-  - zero trust
-  - overlay network
+  - zero-trust
+  - overlaynetworking
   - homeassistant
   - security
 ---
@@ -13,7 +13,11 @@ tags:
 
 ## Backstory
 ### Solving Problems
-I wanted a way to check on my house (mainly my dogs) while I was away. So, I did what any trendy person would do and bought an IP camera with pan and tilt, which was great. A quick sign-up to their proprietary app, and I could view live video of my pups tearing apart my house from anywhere in the world.
+I wanted a way to check on my house (mainly my dogs) while I was away. So, I did what any trendy person would do and 
+bought an IP camera with pan and tilt, which was great. A quick sign-up to their proprietary app, and I could view 
+live video of my pups tearing apart my house from anywhere in the world.
+
+<!-- truncate -->
 
 ![image.png](/blogs/openziti/v1661350622005/r1QoFC6Lq.png?height=300)
 

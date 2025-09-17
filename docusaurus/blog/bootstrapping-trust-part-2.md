@@ -25,6 +25,8 @@ If you have read through the entire series up to here, welcome! If you have not,
 
 It isn't easy to talk about bootstrapping trust without covering the basics of public-key cryptography. The reader may skip this article if the concepts of encryption, signing, and public/private keys are familiar. However, if not, I implore that you bear the brunt of this article as later parts will heavily rely on it.
 
+<!-- truncate -->
+
 If you wish, you can dive into the mathematics behind it to prove it to yourself, but I promise, no math here. When necessary, I will wave my hands at it, point into the distance, and let the reader journey out.
 
 ### Keys

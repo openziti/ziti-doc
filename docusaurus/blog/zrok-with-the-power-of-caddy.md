@@ -14,7 +14,11 @@ tags:
 
 ---
 
-It's that time again... we've just dropped a new `zrok` release! This time the marquee features are based on Caddy (https://caddyserver.com/). Caddy is a powerful Swiss Army Knife for serving and proxying HTTP resources, and we've integrated that power into the `zrok` ecosystem.
+It's that time again... we've just dropped a new `zrok` release! This time the marquee features are based on 
+Caddy (https://caddyserver.com/). Caddy is a powerful Swiss Army Knife for serving and proxying HTTP resources, 
+and we've integrated that power into the `zrok` ecosystem.
+
+<!-- truncate -->
 
 # The Open-ended Caddyfile
 

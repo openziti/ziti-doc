@@ -13,7 +13,11 @@ tags:
 
 ---
 
-Assigning the author on a commit is an essential feature of Git that allows you to send a commit on behalf of someone while preserving their authorship. I speculate this was the norm when the Linux Kernel authors, who also created Git, still received many contributions via email.
+Assigning the author on a commit is an essential feature of Git that allows you to send a commit on behalf of someone 
+while preserving their authorship. I speculate this was the norm when the Linux Kernel authors, who also 
+created Git, still received many contributions via email.
+
+<!-- truncate -->
 
 GitHub automatically links the commit to the attributed author's and committer's GitHub profile(s). By default, there's no visible indication that a commit was attributed.
 

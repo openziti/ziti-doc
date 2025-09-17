@@ -13,7 +13,10 @@ tags:
 
 ---
 
-I like playing survival games, and my adult sons and I have been looking for a game we could play together. This weekend, we discovered Palworld, a new MMO available as an early release on Steam.
+I like playing survival games, and my adult sons and I have been looking for a game we could play together. This 
+weekend, we discovered Palworld, a new MMO available as an early release on Steam.
+
+<!-- truncate -->
 
 We wanted to play on a dedicated server. I recently purchased a gaming laptop, so I set up a dedicated server on the gaming PC I was no longer using. I won't get into setting up the dedicated server - I learned all about it by watching [this YouTube video.](https://www.youtube.com/watch?v=7Erzg2HcBHI&t=182s&ab_channel=TroubleChute) You can also checkout the developer's docs on setting one up [here](https://tech.palworldgame.com/)
 

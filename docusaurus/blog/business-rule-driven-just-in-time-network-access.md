@@ -10,12 +10,15 @@ tags:
   - zerotrust
   - just-in-time
   - privileged-access-management
+  - zero-trust
   - zero-trust-security
   - business-rule-driven-access
 
 ---
 
 One of the most incredible achievements of the late 20th century is the internet.  It has connected the world in ways never imagined and enabled businesses, organizations, and individuals to do incredible things efficiently and at a global scale.  One of the groups it has enabled, unfortunately, is criminals.  Since the first networks were connected, criminals and malicious users have exploited weaknesses in software and configuration to disrupt business and steal money, technology, and peace of mind.  The connectivity of the modern world is the greatest feature and the greatest weakness.  Recently, Zero Trust has become the new security model.  Zero Trust is an evolution of earlier models, addressing their weaknesses and giving a framework to deliver much more secure systems and networks.  NetFoundry, the sponsor of the free and open-source OpenZiti project, is at the forefront of this movement, providing many Zero Trust features, and enabling others.  The API-driven and software-embeddable nature of the OpenZiti project gives flexibility for simple solutions that have outsized impacts in reducing some of the most common risks seen in information systems today.
+
+<!-- truncate -->
 
 ## The Problem
 

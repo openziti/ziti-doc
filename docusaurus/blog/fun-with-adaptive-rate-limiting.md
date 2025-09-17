@@ -20,6 +20,8 @@ We recently had an issue where an [OpenZiti network](http://openziti.io) was ove
 
 I had a fun day solving the problem, and while I'm sure that nothing here is new, I thought others might be interested in where I landed and some ideas that were rejected along the way.
 
+<!-- truncate -->
+
 # Starting Point
 
 A rate limiter seems like an obvious answer. Better to reject requests that you know you won't be able to service than to do extra work that will just be discarded.

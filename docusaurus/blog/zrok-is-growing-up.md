@@ -14,7 +14,10 @@ tags:
 
 ---
 
-zrok has been growing pretty steadily throughout 2024. As we've grown, we've started having to deal with abuse, phishing, and other similar types of issues showing up on the service at zrok.io.
+zrok has been growing pretty steadily throughout 2024. As we've grown, we've started having to deal with abuse, 
+phishing, and other similar types of issues showing up on the service at zrok.io.
+
+<!-- truncate -->
 
 Over the last weeks, the team has worked together to figure out the best compromise to continue offering our users the best free sharing solution possible, while also offering a reasonable level of protection against abuse. We've batted around a number of different ideas.
 

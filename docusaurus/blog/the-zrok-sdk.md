@@ -14,7 +14,12 @@ tags:
 
 ---
 
-Hopefully, you're already familiar with `zrok`, our open-source solution for easy and secure sharing. If you're not, check out the initial post [introducing `zrok`](https://hashnode.com/post/cldue515r000509l04jhy0c8q). There's also a more recent post describing some of the new [features in the latest v0.4.0 version](https://hashnode.com/post/cljen4m08000009li4hl1fz7c).
+Hopefully, you're already familiar with `zrok`, our open-source solution for easy and secure sharing. If you're not, 
+check out the initial post [introducing `zrok`](https://hashnode.com/post/cldue515r000509l04jhy0c8q). There's also a 
+more recent post describing some of the new 
+[features in the latest v0.4.0 version](https://hashnode.com/post/cljen4m08000009li4hl1fz7c).
+
+<!-- truncate -->
 
 `zrok` is an open-source, self-hostable platform combined with a frictionless command-line client, that makes sharing resources like HTTP servers, TCP and UDP tunnels, and files simple, fast, and secure.
 

@@ -30,6 +30,8 @@ enter and confirm your email address...
 invitation sent to 'michael.quigley@netfoundry.io'!
 ```
 
+<!-- truncate -->
+
 After you submit your email, you'll receive an email with a link to complete your registration through the `zrok` web console.
 
 ![](/blogs/openziti/v1690217651594/1c8a7251-410a-4134-8b1f-ad2ea28fcacb.png)

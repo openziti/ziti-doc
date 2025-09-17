@@ -4,14 +4,19 @@ title: "Securing Web APIs With OpenZiti — Zero Trust For Web APIs"
 authors: [AndrewMartinez]
 date: 2022-08-16
 tags:
-  - web api
-  - zero trust
+  - apis
+  - zerotrust
   - security
   - openziti
 ---
 # Securing Web APIs With OpenZiti
 
-In the late 2000s, I was a software engineer in the telecom industry, working on large data pipelines that would aggregate billing data from any carrier. The older the carrier, the more likely we would write a web scrapper to automate data retrieval. The new carriers had Web APIs. It was exciting and abundantly clear that these servers were exposed publicly on the internet.
+In the late 2000s, I was a software engineer in the telecom industry, working on large data pipelines that would 
+aggregate billing data from any carrier. The older the carrier, the more likely we would write a web scrapper to 
+automate data retrieval. The new carriers had Web APIs. It was exciting and abundantly clear that these servers were 
+exposed publicly on the internet.
+
+<!-- truncate -->
 
 These Web APIs weren't servicing commercial or residential applications for consumer billing. These were data pipelines to detailed call records and other private data. A treasure trove of information for partners and data subscribers. Needless to say, it was amusing that this attack surface was exposed so cavalierly. The only reason it was exposed on the public internet was that it was convenient.
 

@@ -12,7 +12,12 @@ tags:
 
 ---
 
-If you are reading this, hopefully, you are familiar with `zrok`: an open source solution for easy and secure sharing built on OpenZiti. If not you can check out this post [introducing `zrok`](https://blog.openziti.io/introducing-zrok). If you have then that's great news! You might be familiar with the Golang SDK that was [recently released](https://blog.openziti.io/the-zrok-sdk).
+If you are reading this, hopefully, you are familiar with `zrok`: an open source solution for easy and secure sharing 
+built on OpenZiti. If not you can check out this post [introducing `zrok`](https://blog.openziti.io/introducing-zrok). 
+If you have then that's great news! You might be familiar with the Golang SDK that was 
+[recently released](https://blog.openziti.io/the-zrok-sdk).
+
+<!-- truncate -->
 
 `zrok` is built to enable developers to seamlessly and securely share their applications. We are expanding that philosophy by supporting a Python SDK. Using just a little code enables you to share your app through `zrok`'s robust network.
 

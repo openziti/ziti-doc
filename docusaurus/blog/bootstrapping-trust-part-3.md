@@ -20,6 +20,8 @@ If you have read through the entire series up to here, welcome! If you have not,
 
 In the series, we have covered public-key cryptography, where we learned about public keys, private keys, and their uses for encryption and signing. Using keys to sign data will play an essential role in this article. It is vital that the reader understand that signatures verify both the content of the data and its source. For a refresher, see [part two](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography) of this series.
 
+<!-- truncate -->
+
 This article covers how certificates and certificate authorities (CAs) work as "trust anchors." When a CA is a trust anchor, it means that a system can trust the CA to sign certificates that it can, in turn, trust. Throughout this entire article, "trusting certificates" is mentioned. Trusting a certificate (CA or otherwise) is a software or operating system configuration process. This configuration tells the system that the specified certificates are trustworthy in the eyes of the operator.
 
 ### Certificates

@@ -15,7 +15,11 @@ tags:
 
 ---
 
-zrok provides a number of powerful tools for [sharing private resources](https://docs.zrok.io/docs/getting-started). In addition to our multiple flavors of proxy support, web hosting, low level TCP and UDP sharing, and network drives support, zrok now includes the ability to hide or alter your IP address.
+zrok provides a number of powerful tools for [sharing private resources](https://docs.zrok.io/docs/getting-started). 
+In addition to our multiple flavors of proxy support, web hosting, low level TCP and UDP sharing, and network drives 
+support, zrok now includes the ability to hide or alter your IP address.
+
+<!-- truncate -->
 
 zrok facilitates this type of privacy by layering on another type of tunneling callled SOCKS. SOCKS is a protocol that was developed in the mid-1990's, and according to Wikipedia "is a de facto standard for circuit-level gateways (level 5 gateways)."
 

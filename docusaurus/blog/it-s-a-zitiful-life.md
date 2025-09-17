@@ -21,6 +21,8 @@ Once the Plex media server is running in the home, many people then want to take
 
 In this article, I discuss that while self-hosting your Plex media server is *easy*, the traditional techniques for providing remote access to it *arenot.* The good news is that there is a modern approach to securely sharing web apps that is worth your attention.
 
+<!-- truncate -->
+
 Here I'll introduce you to [BrowZer](https://blog.openziti.io/introducing-openziti-browzer), a novel group of open-source components from the [OpenZiti project](https://github.com/openziti/) that collectively enables you to operate private-to-the-internet web applications like Plex while still easily providing secure access for your authorized internet-based remote users using just a browser. No VPN. No plugins. No installation. No hassle.
 
 ## Remote Access?

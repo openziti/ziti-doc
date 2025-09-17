@@ -18,6 +18,8 @@ tags:
 
 To put it plainly, I don't like opening up ports on my local firewall. However, I have a network attached storage (NAS) device that I want accessible from the internet so I have access from anywhere. So, how can I access my private network from anywhere without opening ports?
 
+<!-- truncate -->
+
 ## Backstory
 
 #### ([Skip if you don't care about me and my life](#heading-so-howd-you-do-it))

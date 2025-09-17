@@ -14,7 +14,12 @@ tags:
 ---
 
 ## Introduction
-I work with Golang every day as a developer on the [OpenZiti project](http://openziti.io). In learning Go, I've hit various stumbling blocks, settled on some best practices and hopefully gotten better at writing Go code. This series exists to share some of the 'Aha!' moments I've had overcoming obstacles and finding solutions that sparked joy. 
+I work with Golang every day as a developer on the [OpenZiti project](http://openziti.io). In learning Go, 
+I've hit various stumbling blocks, settled on some best practices and hopefully gotten better at writing Go code. 
+This series exists to share some of the 'Aha!' moments I've had overcoming obstacles and finding solutions that 
+sparked joy.
+
+<!-- truncate -->
 
 This [series](https://blog.openziti.io/series/golang-aha) is targeted both at new team members and for anyone in the Go community who might be interested. I'm very happy to hear from others about their own 'aha'
 moments and also how the solutions presented strike your sensibilities. Suggested improvements, corrections and constructive criticism are welcome.    

@@ -12,7 +12,15 @@ tags:
 
 ---
 
-The [previous post](/zitifying-scp) showed how to use a zero trust overlay like Ziti for transferring files by zitifying `scp`. Next up in the list of zitifications is `kubectl`. [Kubernetes](https://Kubernetes.io/) is a container orchestration system. Its purpose is to deploy, scale, and manage the deployment containers. Containers are self-contained, pre-built images of software generally with a singular purpose. [Developers often like using containers for various reasons](https://appfleet.com/blog/10-reasons-why-developers-love-docker/). One major reason developers like containers is because it simplifies the deployment of the solutions they are developing. This is where Kubernetes starts to come into focus.
+The [previous post](/zitifying-scp) showed how to use a zero trust overlay like Ziti for transferring files by 
+zitifying `scp`. Next up in the list of zitifications is `kubectl`. [Kubernetes](https://Kubernetes.io/) is a 
+container orchestration system. Its purpose is to deploy, scale, and manage the deployment containers. Containers 
+are self-contained, pre-built images of software generally with a singular purpose. 
+[Developers often like using containers for various reasons](https://appfleet.com/blog/10-reasons-why-developers-love-docker/). 
+One major reason developers like containers is because it simplifies the deployment of the solutions 
+they are developing. This is where Kubernetes starts to come into focus.
+
+<!-- truncate -->
 
 In this article we'll use a cloud provider to create a Kubernetes cluster to use. I'm using Oracle OKE in this article but there are [numerous Kubernetes providers](https://www.google.com/search?q=kubernetes+cloud+providers&oq=kubernetes+cloud+providers) and any of them will work but clearly the commands I'm running here are Oracle specific. Once created we will then access the cluster three ways:
 

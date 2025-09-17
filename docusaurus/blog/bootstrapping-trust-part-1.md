@@ -23,6 +23,8 @@ The parts are as follows.
 * [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust)
     
 * [Part 5: Bootstrapping Trust](/bootstrapping-trust-part-5-bootstrapping-trust)
+
+<!-- truncate -->
     
 
 ### Zero Trust

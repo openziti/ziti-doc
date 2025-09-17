@@ -5,13 +5,15 @@ authors: [AndrewMartinez]
 date: 2022-10-20
 tags:
   - authentication
-  - api
+  - apis
   - integrations
   - openziti
 ---
 # OpenZiti Authentication API Integrations
 
-In the OpenZiti project, we have created an overlay network that makes network services dark. Part of that system is authenticating devices and users before they connect. The challenge is that most companies already have methods to authenticate human users and hardware devices. The challenge we faced with OpenZiti was to provide ways to integrate both users and devices through external Identity Providers (IdP). Our solution was to allow two of the fundamental building blocks of modern authentication systems to be validated by OpenZiti: x509 certificates and JWTs. 
+In the OpenZiti project, we have created an overlay network that makes network services dark. Part of that system is authenticating devices and users before they connect. The challenge is that most companies already have methods to authenticate human users and hardware devices. The challenge we faced with OpenZiti was to provide ways to integrate both users and devices through external Identity Providers (IdP). Our solution was to allow two of the fundamental building blocks of modern authentication systems to be validated by OpenZiti: x509 certificates and JWTs.
+
+<!-- truncate -->
 
 For OpenZiti to validate both of those new data model entities were created to support them:
 

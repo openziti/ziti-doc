@@ -14,6 +14,8 @@ tags:
 
 The web has revolutionized how the world operates, enabling everything from banking and shopping to social media and general business transactions. However, as with all technological advancements, malicious actors quickly found ways to exploit the web for fraudulent activities. The anonymity provided by internet usage allowed criminals to deceive users and providers, leading to significant financial losses. In response, technologies like SSL/TLS and public trust architectures were developed to enhance security, helping users verify the servers they communicate with and feel more secure in their online interactions. Despite these measures, software is inherently fallible, as it is created by humans who can make mistakes.
 
+<!-- truncate -->
+
 Criminals continually discover and exploit these vulnerabilities, using sophisticated techniques to steal information and steal or extort money. Rather than defraud users directly, they turned to stealing information by attacking the applications. BrowZer, part of the OpenZiti project, prevents one of the most common attack techniques listed in the [OWASP Top 10](https://owasp.org/www-project-top-ten/) and elsewhere, Broken Access Control.
 
 %%[request-browzer-demo] 

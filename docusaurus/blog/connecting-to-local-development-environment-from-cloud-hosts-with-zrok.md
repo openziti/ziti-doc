@@ -15,6 +15,8 @@ All developers have at some point used cloud-provided compute hosts. It's very e
 
 At work, we use cloud-provided hosts extensively and I often need the hosts to connect back to my local environment to read data. One such example is when we use the Salt stack to manage software on the hosts.
 
+<!-- truncate -->
+
 ## How We Use Salt
 
 Salt ([https://saltproject.io/](https://saltproject.io/)) is an open-source software project for configuration management and remote execution of commands, designed to manage and automate large-scale infrastructure. Salt needs configuration data to execute those commands. In our case, we need data to configure the [OpenZiti](https://github.com/openziti/) software we're installing on the host.  

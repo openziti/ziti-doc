@@ -15,7 +15,13 @@ tags:
 
 ---
 
-A few years ago, the [OpenZiti project](https://github.com/openziti/ziti) developed and published two client tools to make ssh and scp available over an OpenZiti overlay network without requiring the sshd port to be exposed to the internet. If interested, read the original posts [about zssh](https://blog.openziti.io/zitifying-ssh) and [zscp](https://blog.openziti.io/zitifying-scp). Continuing with the belief that security-related code should be open source and auditable, the project is [available on GitHub](https://github.com/openziti-test-kitchen/zssh).
+A few years ago, the [OpenZiti project](https://github.com/openziti/ziti) developed and published two client tools to 
+make ssh and scp available over an OpenZiti overlay network without requiring the sshd port to be exposed to the 
+internet. If interested, read the original posts [about zssh](https://blog.openziti.io/zitifying-ssh) and 
+[zscp](https://blog.openziti.io/zitifying-scp). Continuing with the belief that security-related code should be open 
+source and auditable, the project is [available on GitHub](https://github.com/openziti-test-kitchen/zssh).
+
+<!-- truncate -->
 
 ![](/blogs/openziti/v1725040827487/7810a66b-c739-43d9-b7a8-fd607adb04e6.gif)
 

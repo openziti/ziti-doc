@@ -21,6 +21,8 @@ If you have read through the entire series up to here, welcome! If you have not,
 * [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust)
     
 * [Part 5: Bootstrapping Trust](/bootstrapping-trust-part-5-bootstrapping-trust)
+
+<!-- truncate -->
     
 
 ### Ziti

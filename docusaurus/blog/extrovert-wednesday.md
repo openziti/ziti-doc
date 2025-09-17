@@ -18,6 +18,8 @@ Perhaps you are dealing with this issue as well, and are holding yourself back, 
 
 If so, here are some thoughts concerning how I have managed to overcome my fear, and have transitioned into actually enjoying producing technical blog content, as a vehicle to share and collaborate on the software I build.
 
+<!-- truncate -->
+
 ---
 
 # Overthink

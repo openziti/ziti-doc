@@ -14,7 +14,12 @@ tags:
 
 ---
 
-If you've been following my ["office hours" video series](https://www.youtube.com/watch?v=Edqv7yRmXb0&list=PLMUj_5fklasLuM6XiCNqwAFBuZD1t2lO2), you know that I've been mentioning something called "zrok Drives" for weeks now. With the release of `v0.4.14`, we've got our first look at some of the things that are to come.
+If you've been following my 
+["office hours" video series](https://www.youtube.com/watch?v=Edqv7yRmXb0&list=PLMUj_5fklasLuM6XiCNqwAFBuZD1t2lO2), you 
+know that I've been mentioning something called "zrok Drives" for weeks now. With the release of `v0.4.14`, 
+we've got our first look at some of the things that are to come.
+
+<!-- truncate -->
 
 > *In case you're not sure what zrok is, take a look at the* [*documentation site*](https://docs.zrok.io/)*. There is also a full playlist of* [*videos on YouTube*](https://www.youtube.com/playlist?list=PLMUj_5fklasLuM6XiCNqwAFBuZD1t2lO2)*.*
 

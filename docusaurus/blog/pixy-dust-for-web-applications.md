@@ -20,6 +20,8 @@ tags:
 
 Articles about [OpenZiti](https://openziti.io/) often discuss application and network security, and this article will follow that trend.
 
+<!-- truncate -->
+
 Here I discuss how PKCE enhances the security of authorization code grant flows used in web applications. I will explore some benefits, best practices, and challenges of working with PKCE.
 
 Perhaps best of all, I will also highlight how OpenZiti [BrowZer](https://blog.openziti.io/introducing-openziti-browzer) automatically brings you the power of PKCE... and how BrowZer facilitates an easy way to put a web-based cloak of invisibility around your application, further protecting it from malicious threat actors.

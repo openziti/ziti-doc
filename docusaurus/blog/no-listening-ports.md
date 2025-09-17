@@ -14,6 +14,8 @@ tags:
 
 Not too long ago, I authored a post about why [Go is Amazing for Zero Trust](https://blog.openziti.io/go-is-amazing-for-zero-trust). In that post, I write about one of OpenZiti's superpowers that allows your applications to have no listening ports by integrating an OpenZiti SDK into it. It's always interesting writing content that makes perfect sense to you but after you publish it, someone immediately asks a question that's so obvious, you wonder how it is you, and everyone that reviewed it missed it. I published that blog post, and the first (well-deserved) [response was](https://www.reddit.com/r/golang/comments/18hykre/comment/kdb2ftb/?utm_source=reddit&utm_medium=web2x&context=3):
 
+<!-- truncate -->
+
 ![](/blogs/openziti/v1702558877739/79b66b3b-bf99-49eb-88ec-d30ffa66a808.png)
 
 This question is very common because it sounds totally impossible that a server could have no listening ports. It's not impossible, and it's not something novel; it uses a technique where your clients and servers securely connect to an intermediary server that **does listen** on the IP-based underlay network and brokers the connection. (OpenZiti calls these edge routers)

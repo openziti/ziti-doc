@@ -14,6 +14,8 @@ tags:
 
 The great thing about the `zrok-share.service` is that it comes with the `zrok` binary and is always on in the background, so it's a good fit for a reliable VPN connection. Let's install the service and configure it to auto-start after a reboot.
 
+<!-- truncate -->
+
 ```bash
 curl -sSLf https://get.openziti.io/install.bash | sudo bash -s zrok-share
 ```

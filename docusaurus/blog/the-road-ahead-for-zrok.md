@@ -22,6 +22,8 @@ As always, our [project board](https://github.com/orgs/openziti/projects/16) on 
 
 Here's a high-level preview of some of the things that we're working on for `zrok v0.4`.
 
+<!-- truncate -->
+
 ## TCP and UDP Tunneling
 
 In `v0.4`, you're going to be able to create low-level network tunnels like this:

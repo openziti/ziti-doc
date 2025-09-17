@@ -5,8 +5,7 @@ authors: [CurtTudor]
 date: 2020-03-19
 tags:
   - mobile
-  - point of sale
-  - zero trust
+  - zero-trust
   - android
   - java
   - sdk
@@ -17,6 +16,8 @@ tags:
 _Written with Sagarkumar S of Enlume Technologies_
 
 Point of sale application developers and solution providers need to provide secure, reliable applications to retailers.  However, retailers need to create duplicate networks with extra hardware and configuration to separate their point of sale (POS) data for PCI compliance.  **Now, there is a better way.  Use the simple Ziti SDKs to embed zero trust networking, inside the POS app, so that the POS app is secure on any network - micro-segmented and zero trust.**
+
+<!-- truncate -->
 
 This blog summarizes use of the Ziti SDK in a mobile point of sale application (mPOS) that is based on Java and built specifically for Android tablets and phones.  Ziti SDKs can also be used for Apple iOS, Mac, Windows and Linux environments.
 

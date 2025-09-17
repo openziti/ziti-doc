@@ -20,6 +20,8 @@ tags:
 
 This summer, I had the pleasure of working at NetFoundry, a company that is trying to keep the world secure by providing and supporting a totally free and open source, zero trust overlay network called OpenZiti. OpenZiti is on GitHub, you can go and fork it right now and run your own network if you like. Since I worked for NetFoundry, I was able to use their SaaS offering for free and let them manage the OpenZiti overlay (which you could also do too if interested, they have a free tier).
 
+<!-- truncate -->
+
 ## The Assignment
 
 Naturally, as the summer intern responsible for odd jobs, I was tasked with creating a script to automate finding CVEs that OpenZiti could quickly solve - i.e., CVEs that, from their CVSS metrics, have an attack vector of network and no privileges required. The zero trust overlay network OpenZiti provides allows you to close any and all open ports from your servers. That means firewalls only require outbound connectivity, nothing inbound at all, blocking unknown attackers from accessing your data on your network (as well as a bunch of other [superpowers](https://www.youtube.com/playlist?list=PLMUj_5fklasKF1oisSSuLwSzLVxuL9JbC)).
