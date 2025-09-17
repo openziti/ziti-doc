@@ -9,152 +9,176 @@ import remarkReplaceMetaUrl from './src/plugins/remark/remark-replace-meta-url';
 import {remarkScopedPath} from "./src/plugins/remark/remarkScopedPath";
 import {
     docUrl, baseUrl, addDocsRedir,
-    DOCUSAURUS_URL, DOCUSAURUS_BASE_PATH, DOCUSAURUS_DOCS_PATH, DOCUSAURUS_DEBUG, hotjarId
+    DOCUSAURUS_URL, DOCUSAURUS_BASE_PATH, DOCUSAURUS_DEBUG, hotjarId
 } from "@openclint/docusaurus-shared/node";
 import path from "node:path";
+import { remarkYouTube } from "@openclint/docusaurus-shared/plugins";
 
-const redirectsArr: { to: string; from: string[] }[] = [
-  {
-    to: docUrl('/category/deployments'),
-    from: [docUrl('/reference/deployments')]
-  },
-  {
-    to: docUrl('/guides/deployments/linux/controller/deploy'),
-    from: [docUrl('/reference/deployments/controller')]
-  },
-  {
-    to: docUrl('/guides/deployments/linux/router/cli-mgmt'),
-    from: [docUrl('/reference/deployments/router/cli-mgmt')]
-  },
-  {
-    to: docUrl('/guides/deployments/linux/router/deploy'),
-    from: [docUrl('/reference/deployments/router/deployment')]
-  },
-  {
-    to: docUrl('/guides/deployments/linux/router/router-configuration'),
-    from: [docUrl('/reference/deployments/router/router-configuration')]
-  },
-  {
-    to: docUrl('/reference/tunnelers/docker'),
-    from: [docUrl('/reference/tunnelers/linux/container')]
-  },
-  {
-    to: docUrl('/category/core-concepts'),
-    from: [docUrl('/learn/core-concepts')]
-  },
-  {
-    to: docUrl('/reference/tunnelers/nginx'),
-    from: [docUrl('/guides/securing-apis/aks-api-with-nginx-ziti-module')]
-  },
-  {
-    to: docUrl('/category/cloud'),
-    from: [docUrl('/guides/Public_Cloud_Deployment')]
-  },
-  {
-    to: docUrl('/guides/topologies/services'),
-    from: [docUrl('/guides/Public_Cloud_Deployment/Services')]
-  },
-  {
-    to: docUrl('/guides/deployments/cloud/router'),
-    from: [docUrl('/guides/Public_Cloud_Deployment/Router')]
-  },
-  {
-    to: docUrl('/guides/deployments/cloud/controller'),
-    from: [docUrl('/guides/Public_Cloud_Deployment/Controller')]
-  },
-  {
-    to: docUrl('/guides/topologies/gateway/tunneler'),
-    from: [docUrl('/guides/Local_Gateway/EdgeTunnel')]
-  },
-  {
-    to: docUrl('/guides/topologies/gateway/router'),
-    from: [docUrl('/guides/Local_Gateway/EdgeRouter')]
-  },
-  {
-    to: docUrl('/guides/deployments/linux/controller/backup'),
-    from: [docUrl('/guides/database-backup'), docUrl('/reference/backup/controller')]
-  },
-  {
-    to: docUrl('/reference/tunnelers/nginx'),
-    from: [docUrl('/category/securing-apis')]
-  },
-  {
-    to: docUrl('/category/cloud'),
-    from: [docUrl('/category/public-cloud-deployment')]
-  },
-  {
-    to: docUrl('/category/gateway'),
-    from: [docUrl('/category/local-gateway')]
-  },
-  {
-    to: docUrl('/category/kubernetes'),
-    from: [docUrl('/category/hosting-openziti')]
-  },
-  {
-    to: docUrl('/learn/core-concepts/data-flow-explainer'),
-    from: [docUrl('/guides/data-flow-explainer')],
-  },
-  {
-    to: docUrl('/learn/core-concepts/metrics/overview'),
-    from: [docUrl('/core-concepts/metrics'), docUrl('/core-concepts/metrics/metric-types')],
-  },
-  {
-    to: docUrl('/learn/core-concepts/security/authentication/external-jwt-signers'),
-    from: ['/ziti/security/authentication/external-jwt-signers.html'],
-  },
-  {
-    to: docUrl('/learn/core-concepts/identities/enrolling'),
-    from: ['/ziti/identities/enrolling.html'],
-  },
-  {
-    to: docUrl('/reference/tunnelers/'),
-    from: ['/ziti/clients/tunneler.html'],
-  },
-  {
-    to: docUrl('/reference/tunnelers/linux/'),
-    from: ['/ziti/clients/linux.html'],
-  },
-  {
-    to: docUrl('/learn/core-concepts/pki'),
-    from: [docUrl('/manage/pki'), '/operations/pki'],
-  },
-  {
-    to: docUrl('/reference/developer/sdk'),
-    from: ['/api/ziti-sdk-swift', '/api/ziti-c-sdk', '/api/ziti-sdk-csharp'],
-  },
-  {
-    to: docUrl('/reference/developer/sdk'),
-    from: [docUrl('/core-concepts/clients/sdks')],
-  },
-  {
-    to: docUrl('/learn/introduction/'),
-    from: [docUrl('/learn'), docUrl('/introduction/intro'), '/docusaurus/docs/overview', '/ziti/overview/', '/ziti/overview.html'],
-  },
-  {
-    to: docUrl('/learn/quickstarts/'),
-    from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html', docUrl('/learn/quickstarts/network'), docUrl('/quickstarts/network')],
-  },
-  {
-    to: docUrl('/learn/introduction/openziti-is-software'),
-    from: [docUrl('/introduction/zitiSoftwareArchitecture'), '/ziti/software-architecture.html'],
-  },
-  {
-    to: '/policies/CODE_OF_CONDUCT',
-    from: ['/policies'],
-  },
-  {
-    to: docUrl('/learn/quickstarts/services/'),
-    from: [docUrl('/quickstarts/services/ztna')],
-  },
-  {
-    to: docUrl('/learn/quickstarts/zac/'),
-    from: [docUrl('/quickstarts/zac/installation')],
-  },
-  {
-    to: docUrl('/guides/external-auth/browzer/'),
-    from: [docUrl('/identity-providers-for-browZer')]
-  }
-];
+const docsBase = '/docs/openziti';
+
+interface Redirect {
+    to: string;
+    from: string[];
+}
+
+function makeRedirects(base: string, redirects: Redirect[]): Redirect[] {
+    const withBase = (p: string) => {
+        if (p.startsWith("/") && !p.startsWith("/ziti") && !p.startsWith("/api") && !p.startsWith("/policies")) {
+            return base + p; // drop docUrl
+        } else {
+            return p;
+        }
+    };
+
+    return redirects.map(r => ({
+        to: withBase(r.to),
+        from: r.from.map(withBase),
+    }));
+}
+
+const redirectsArr = makeRedirects("/docs/openziti", [
+    {
+        to: "/category/deployments",
+        from: ["/reference/deployments"],
+    },
+    {
+        to: "/guides/deployments/linux/controller/deploy",
+        from: ["/reference/deployments/controller"],
+    },
+    {
+        to: "/guides/deployments/linux/router/cli-mgmt",
+        from: ["/reference/deployments/router/cli-mgmt"],
+    },
+    {
+        to: "/guides/deployments/linux/router/deploy",
+        from: ["/reference/deployments/router/deployment"],
+    },
+    {
+        to: "/guides/deployments/linux/router/router-configuration",
+        from: ["/reference/deployments/router/router-configuration"],
+    },
+    {
+        to: "/reference/tunnelers/docker",
+        from: ["/reference/tunnelers/linux/container"],
+    },
+    {
+        to: "/category/core-concepts",
+        from: ["/learn/core-concepts"],
+    },
+    {
+        to: "/reference/tunnelers/nginx",
+        from: ["/guides/securing-apis/aks-api-with-nginx-ziti-module"],
+    },
+    {
+        to: "/category/cloud",
+        from: ["/guides/Public_Cloud_Deployment"],
+    },
+    {
+        to: "/guides/topologies/services",
+        from: ["/guides/Public_Cloud_Deployment/Services"],
+    },
+    {
+        to: "/guides/deployments/cloud/router",
+        from: ["/guides/Public_Cloud_Deployment/Router"],
+    },
+    {
+        to: "/guides/deployments/cloud/controller",
+        from: ["/guides/Public_Cloud_Deployment/Controller"],
+    },
+    {
+        to: "/guides/topologies/gateway/tunneler",
+        from: ["/guides/Local_Gateway/EdgeTunnel"],
+    },
+    {
+        to: "/guides/topologies/gateway/router",
+        from: ["/guides/Local_Gateway/EdgeRouter"],
+    },
+    {
+        to: "/guides/deployments/linux/controller/backup",
+        from: ["/guides/database-backup", "/reference/backup/controller"],
+    },
+    {
+        to: "/reference/tunnelers/nginx",
+        from: ["/category/securing-apis"],
+    },
+    {
+        to: "/category/cloud",
+        from: ["/category/public-cloud-deployment"],
+    },
+    {
+        to: "/category/gateway",
+        from: ["/category/local-gateway"],
+    },
+    {
+        to: "/category/kubernetes",
+        from: ["/category/hosting-openziti"],
+    },
+    {
+        to: "/learn/core-concepts/data-flow-explainer",
+        from: ["/guides/data-flow-explainer"],
+    },
+    {
+        to: "/learn/core-concepts/metrics/overview",
+        from: ["/core-concepts/metrics", "/core-concepts/metrics/metric-types"],
+    },
+    {
+        to: "/learn/core-concepts/security/authentication/external-jwt-signers",
+        from: ["/ziti/security/authentication/external-jwt-signers.html"],
+    },
+    {
+        to: "/learn/core-concepts/identities/enrolling",
+        from: ["/ziti/identities/enrolling.html"],
+    },
+    {
+        to: "/reference/tunnelers/",
+        from: ["/ziti/clients/tunneler.html"],
+    },
+    {
+        to: "/reference/tunnelers/linux/",
+        from: ["/ziti/clients/linux.html"],
+    },
+    {
+        to: "/learn/core-concepts/pki",
+        from: ["/manage/pki", "/operations/pki"],
+    },
+    {
+        to: "/reference/developer/sdk",
+        from: ["/api/ziti-sdk-swift", "/api/ziti-c-sdk", "/api/ziti-sdk-csharp"],
+    },
+    {
+        to: "/reference/developer/sdk",
+        from: ["/core-concepts/clients/sdks"],
+    },
+    {
+        to: "/learn/introduction/",
+        from: ["/learn", "/introduction/intro", "/docusaurus/docs/overview", "/ziti/overview/", "/ziti/overview.html"],
+    },
+    {
+        to: "/learn/quickstarts/",
+        from: ["/ziti/quickstarts/quickstart-overview.html", "/ziti/quickstarts/networks-overview.html", "/learn/quickstarts/network", "/quickstarts/network"],
+    },
+    {
+        to: "/learn/introduction/openziti-is-software",
+        from: ["/introduction/zitiSoftwareArchitecture", "/ziti/software-architecture.html"],
+    },
+    {
+        to: "/policies/CODE_OF_CONDUCT",
+        from: ["/policies"],
+    },
+    {
+        to: "/learn/quickstarts/services/",
+        from: ["/quickstarts/services/ztna"],
+    },
+    {
+        to: "/learn/quickstarts/zac/",
+        from: ["/quickstarts/zac/installation"],
+    },
+    {
+        to: "/guides/external-auth/browzer/",
+        from: ["/identity-providers-for-browZer"],
+    },
+]);
+
 
 addDocsRedir(redirectsArr); //add a redirect from /docs to the actual docs path if needed
 
@@ -193,8 +217,8 @@ const config: Config = {
     },
     themes: ['@docusaurus/theme-mermaid'],
     customFields: {
-        DOCUSAURUS_BASE_PATH: DOCUSAURUS_BASE_PATH,
-        DOCUSAURUS_DOCS_PATH: DOCUSAURUS_DOCS_PATH,
+        DOCUSAURUS_BASE_PATH: '/docs',
+        DOCUSAURUS_DOCS_PATH: '/docs/openziti',
         OPENZITI_DOCS_BASE: '/openziti'
     },
     plugins: [
@@ -296,12 +320,24 @@ const config: Config = {
                             {
                                 debug: DOCUSAURUS_DEBUG,
                                 mappings: [
-                                    {from: '@openzitidocs', to: DOCUSAURUS_DOCS_PATH},
+                                    {from: '@openzitidocs', to: '/docs/openziti'},
                                 ],
                             },
                         ]
                     ],
                     showLastUpdateTime: true
+                },
+                blog: {
+                    routeBasePath: '/docs/openziti/blog',
+                    showReadingTime: true,
+                    include: ['**/*.{md,mdx}'],
+                    path: '_remotes/openziti/docusaurus/blog',
+                    remarkPlugins: [
+                        remarkYouTube
+                    ],
+                    blogSidebarCount: 'ALL',
+                    blogSidebarTitle: 'All posts',
+
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
@@ -414,19 +450,19 @@ const config: Config = {
                             },
                             {
                                 type: 'html',
-                                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/yt.svg") + `" alt="YouTube logo"/>YouTube</span></a>`
+                                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/yt.svg") + `" alt="YouTube logo"/>YouTube</span></a>`
                             },
                             {
                                 type: 'html',
-                                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/twit.svg") + `" alt="X/Twitter logo"/>X (Twitter)</span></a>`
+                                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/twit.svg") + `" alt="X/Twitter logo"/>X (Twitter)</span></a>`
                             },
                             {
                                 type: 'html',
-                                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/reddit-logo.png") + `" alt="Reddit logo"/>Reddit</span></a>`
+                                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/reddit-logo.png") + `" alt="Reddit logo"/>Reddit</span></a>`
                             },
                             {
                                 type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/ziggy.png") + `" alt="X/Twitter Ziggy logo"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
+                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/ziggy.png") + `" alt="X/Twitter Ziggy logo"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
                             },
                             {
                                 type: 'html',
@@ -434,11 +470,11 @@ const config: Config = {
                             },
                             {
                                 type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/blog-icon.png") + `" alt="OpenZiti blog logo"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
+                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/blog-icon.png") + `" alt="OpenZiti blog logo"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
                             },
                             {
                                 type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + baseUrl("img/oz-test-kitchen.png") + `" alt="OpenZiti Test Kitchen logo"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
+                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/oz-test-kitchen.png") + `" alt="OpenZiti Test Kitchen logo"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
                             },
                         ]
                     },

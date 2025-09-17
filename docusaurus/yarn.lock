@@ -2217,10 +2217,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@openclint/docusaurus-shared@^0.0.69":
-  version "0.0.69"
-  resolved "https://registry.yarnpkg.com/@openclint/docusaurus-shared/-/docusaurus-shared-0.0.69.tgz#47928b71187c092cb1638dde5f0a6bc3a44e97c5"
-  integrity sha512-akCIe6C8ak7ZkG7nYj2jbefUc6wTng8mA9F2E/+1/pUQDqs3QsR5b+Fh8cW24L2fZbVxI4XlwbC59djj6fgUPA==
+"@openclint/docusaurus-shared@^0.0.123":
+  version "0.0.123"
+  resolved "https://registry.yarnpkg.com/@openclint/docusaurus-shared/-/docusaurus-shared-0.0.123.tgz#7152c57fcd415282e238455626fd36f64f36a6b8"
+  integrity sha512-7OwsFGQY4AArgA2RelOXgARrZXGt2ayHgEj92RD6bPzJT14RAuYs3weSo3AnkOQUS0KMKipYRF5FCOIjQbVG7A==
   dependencies:
     react-device-detect "^2.2.3"
     react-github-btn "^1.4.0"
@@ -8795,6 +8795,11 @@ react-json-view-lite@^2.3.0:
   version "2.4.1"
   resolved "https://registry.npmjs.org/react-json-view-lite/-/react-json-view-lite-2.4.1.tgz"
   integrity sha512-fwFYknRIBxjbFm0kBDrzgBy1xa5tDg2LyXXBepC5f1b+MY3BUClMCsvanMPn089JbV1Eg3nZcrp0VCuH43aXnA==
+
+react-lite-youtube-embed@^2.5.6:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/react-lite-youtube-embed/-/react-lite-youtube-embed-2.5.6.tgz#05f9802e7a3b13da0d5d6e3ae11cf467db802c89"
+  integrity sha512-gbV2SCpAqZOJ/p8wsIbXahONtX3ofh7WZfOR9pCK5kXEbDhTh+bFTOT/fyE+v3ZP4loQkZRqfp8H67gEcGz74w==
 
 react-loadable-ssr-addon-v5-slorber@^1.0.1:
   version "1.0.1"
