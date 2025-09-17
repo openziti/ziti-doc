@@ -4,7 +4,7 @@ date: 2024-11-01T14:05:06Z
 cuid: cm2yt3p2r000109kzfpv88qvp
 slug: golang-aha-moments-oop
 authors: [PaulLorenz]
-image: /blog/v1730383460910/9b2d0062-8b76-47c6-b68d-24810fca9f8b.webp
+image: /docs/blogs/openzitiv1730383460910/9b2d0062-8b76-47c6-b68d-24810fca9f8b.webp
 tags: 
   - go
   - java

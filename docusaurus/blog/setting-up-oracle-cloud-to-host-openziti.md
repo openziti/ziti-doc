@@ -4,7 +4,7 @@ date: 2022-10-14T12:55:39Z
 cuid: cl98htd35000a09ld3o9b110i
 slug: setting-up-oracle-cloud-to-host-openziti
 authors: [GeoffBerl]
-image: /blog/v1665675327581/brOl0o0pl.png
+image: /docs/blogs/openzitiv1665675327581/brOl0o0pl.png
 tags: 
   - oracle
   - opensource
@@ -26,7 +26,7 @@ On the left sidebar, you should see an "instances" option; go ahead a select tha
 
 ### Name and Compartment
 
-![image.png](/blog/v1663268339377/4i6-HpNYt.png)
+![image.png](/docs/blogs/openziti/v1663268339377/4i6-HpNYt.png)
 
 #### Name
 
@@ -38,7 +38,7 @@ Without going into too much detail, compartments allow you to organize your reso
 
 ### Image and Shape
 
-![image.png](/blog/v1663270206709/boT3NyGlH.png)
+![image.png](/docs/blogs/openziti/v1663270206709/boT3NyGlH.png)
 
 I've skipped over"placement" for brevity and accepted the defaults; it allows you to specifically choose an availability domain.
 
@@ -55,13 +55,13 @@ The shape defines the characteristics of your virtual machine, such as how much 
 
 ### Networking
 
-![image.png](/blog/v1663269806073/Ol_I1Zx4Z.png)
+![image.png](/docs/blogs/openziti/v1663269806073/Ol_I1Zx4Z.png)
 
 As with many cloud service providers, the networking bit is pretty much automatic. The nice thing about Oracle's (that I've noticed) is that it uses your existing virtual network and subnet if you've already created these services from another project. You can also define whether or not you want a publicly accessible IP address which we do, so leave that the default.
 
 ### SSH Keys
 
-![image.png](/blog/v1663269918604/t7gHDIEQD.png)
+![image.png](/docs/blogs/openziti/v1663269918604/t7gHDIEQD.png)
 
 I want an SSH key, so I can SSH into my machine. If you already have an SSH key set up for something else, you can use an existing SSH key by pasting or uploading the public key.
 
@@ -111,7 +111,7 @@ Here is the first ingress rule we need.
 * Description: **Controller Edge Traffic**
     
 
-![image.png](/blog/v1663595681462/NM_Pt7e4N.png)
+![image.png](/docs/blogs/openziti/v1663595681462/NM_Pt7e4N.png)
 
 This process needs to be repeated for the remaining ports required for my overlay network; here are the remaining ports:
 
@@ -152,7 +152,7 @@ I want to allow all outbound traffic. The security list already contains a rule 
 
 #### Here are all of the inbound rules
 
-![image.png](/blog/v1663597412650/P-3TGPZKW.png)
+![image.png](/docs/blogs/openziti/v1663597412650/P-3TGPZKW.png)
 
 ## Installing the Ziti Network Overlay
 

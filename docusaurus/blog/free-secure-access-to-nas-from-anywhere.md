@@ -4,7 +4,7 @@ date: 2022-09-15T13:34:40Z
 cuid: cl833ftkq00301hnv4uk00ynp
 slug: free-secure-access-to-nas-from-anywhere
 authors: [GeoffBerl]
-image: /blog/v1662661576643/TBtuZgOgd.png
+image: /docs/blogs/openzitiv1662661576643/TBtuZgOgd.png
 tags: 
   - opensource
   - secure
@@ -36,7 +36,7 @@ Now, I know what you're thinking, "Why don't you just use a VPN?". Well, VPNs ar
 
 The way it stands now, I can only access my NAS from home.
 
-![OpenZiti HomeAssistant Network Architecture - NAS Without Ziti.png](/blog/v1662648067724/X4tRrDGBK.png)
+![OpenZiti HomeAssistant Network Architecture - NAS Without Ziti.png](/docs/blogs/openziti/v1662648067724/X4tRrDGBK.png)
 
 ## So How'd You Do It?
 
@@ -114,7 +114,7 @@ Okay, I've been known to ramble, if you just want the code and want to work your
 
 ## The New Network
 
-![OpenZiti HomeAssistant Network Architecture - NAS With Ziti.png](/blog/v1663003673358/YO8IQD_W2.png)
+![OpenZiti HomeAssistant Network Architecture - NAS With Ziti.png](/docs/blogs/openziti/v1663003673358/YO8IQD_W2.png)
 
 ## Conclusion
 

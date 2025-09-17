@@ -4,7 +4,7 @@ date: 2024-07-31T18:25:02Z
 cuid: clza6fr0v000608l2cnqjamv9
 slug: jitsi-meet-zrok
 authors: [KennethBingham]
-image: /blog/v1722450203675/ee7c2e5c-4ef2-46e7-a05d-767cf2e7ab58.png
+image: /docs/blogs/openzitiv1722450203675/ee7c2e5c-4ef2-46e7-a05d-767cf2e7ab58.png
 tags: 
   - self-hosted
 
@@ -120,6 +120,6 @@ zrok is built with OpenZiti. Here's [another post about running an Asterisk PBX 
 
 ## **Share the Project**
 
-![](/blog/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
+![](/docs/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 
 If you find this interesting, please consider [**starring us on GitHub**](https://github.com/openziti/ziti/). It helps. Let us know if you found a good use for this or have an improvement or question in mind on [**X <s>twitter</s>**](https://twitter.com/openziti), in [/r/openziti](https://www.reddit.com/r/openziti/), or the [Discourse forum](https://openziti.discourse.group/). We upload and stream [**on YouTube**](https://youtube.com/openziti) too. We'd love to hear from you!

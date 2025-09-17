@@ -4,7 +4,7 @@ date: 2024-10-03T16:15:23Z
 cuid: cm1thzk20000908jq6fic8x00
 slug: the-safest-way-to-make-portainer-internet-accessible
 authors: [CurtTudor]
-image: /blog/v1727532608880/5fb5b813-b9cf-4fe7-9d36-ffb921cda67a.jpeg
+image: /docs/blogs/openzitiv1727532608880/5fb5b813-b9cf-4fe7-9d36-ffb921cda67a.jpeg
 tags: 
   - security
   - web-security
@@ -112,13 +112,13 @@ NOTE: If you like what you read about OpenZiti, or what you saw in the above Zit
 
 Here is a diagram that describes at a high level how browZer operates:
 
-![](/blog/v1727968501738/3fa80598-cf57-48f0-9fe3-c3dae201a33d.png)
+![](/docs/blogs/openziti/v1727968501738/3fa80598-cf57-48f0-9fe3-c3dae201a33d.png)
 
 ### Example of Accessing Portainer over BrowZer
 
 Here is what a user would experience using browZer to access a private-to-the-internet instance of Portainer:
 
-![](/blog/v1727804563586/4b5e5d9a-5a4f-461a-8bb7-cfe4232d091a.gif)
+![](/docs/blogs/openziti/v1727804563586/4b5e5d9a-5a4f-461a-8bb7-cfe4232d091a.gif)
 
 Here's what happens above:
 

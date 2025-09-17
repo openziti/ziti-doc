@@ -30,7 +30,7 @@ tags:
 
 As described in [the previous article](https://blog.openziti.io/prometheus-scrape-anything-from-anywhere), Prometheus really prefers to be able to gather metrics from the targets it is monitoring. When the target is behind a firewall, you will be left with two choices.
 
-![](/blog/v1712853892186/74523233-0c1a-4a09-bb26-9eb1d5cd92c4.png)
+![](/docs/blogs/openziti/v1712853892186/74523233-0c1a-4a09-bb26-9eb1d5cd92c4.png)
 
 You can choose to open a hole in the firewall granting access (a generally bad idea), or you can use a PushGateway. Even if you choose to use the PushGateway, Prometheus will still need to be able to access and pull from the PushGateway so you'll still need some port open and listening for Prometheus to collect data.
 
@@ -58,7 +58,7 @@ Let's get to work and build this solution. We'll need some legwork done first.
 
 ### Prerequisites
 
-* ![](/blog/v1712854086884/8b08379c-00c2-4e12-a2fb-cb9f0a3bc975.png)
+* ![](/docs/blogs/openziti/v1712854086884/8b08379c-00c2-4e12-a2fb-cb9f0a3bc975.png)
     
     You have an OpenZiti overlay network available. If not, for this scenario you will want to use ["host your own"](/docs/learn/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
     

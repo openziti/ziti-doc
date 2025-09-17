@@ -1,3 +1,13 @@
+---
+slug: openziti-is-participating-in-hacktoberfest-prost
+title: "OpenZiti is Participating in Hacktoberfest, Prost!"
+authors: [GeoffBerl]
+date: 2022-09-27
+tags:
+  - hacktoberfest
+  - openziti
+  - community
+---
 ## OpenZiti is Participating in Hacktoberfest, Prost!
 
 ## What's Hacktoberfest?

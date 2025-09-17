@@ -3,7 +3,7 @@ title: "Zitifying SSH"
 date: 2021-07-19T17:01:13Z
 cuid: cl474zpmo02wf82nvgfg5ay8i
 slug: zitifying-ssh
-image: /blog/v1702472610269/e0723aac-2386-4a55-b6cb-9aad978e36c1.png
+image: /docs/blogs/openzitiv1702472610269/e0723aac-2386-4a55-b6cb-9aad978e36c1.png
 tags: 
   - security
 
@@ -34,7 +34,7 @@ Cool right? Let's see how we did it and how you can do the same thing using a [Z
 
 #### Overview of SSH - notice how port 22 is open to inbound connections:
 
-![](/blog/v1715775317970/ef9d66ab-193b-4768-81e1-f6bd1915cbcc.png align="left")
+![](/docs/blogs/openziti/v1715775317970/ef9d66ab-193b-4768-81e1-f6bd1915cbcc.png align="left")
 
 ---
 
@@ -59,7 +59,7 @@ There are a few steps necessary before being able to use `zssh`:
 
 #### Overview of ZSSH - notice port 22 is no longer open to inbound connections:
 
-![](/blog/v1715775306181/b102647e-44cb-4dc1-841f-50ec7ca14d2b.png align="left")
+![](/docs/blogs/openziti/v1715775306181/b102647e-44cb-4dc1-841f-50ec7ca14d2b.png align="left")
 
 After performing these steps you'll have an `sshd` server that is dark to the internet. Accessing the server via `ssh`  
 must now occur using the Ziti Network. Since the service is no longer accessible directly through a network, it is no longer susceptible to the attacks mentioned previously!

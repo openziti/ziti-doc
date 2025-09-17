@@ -6,7 +6,7 @@ date: 2024-09-09T00:10:41Z
 cuid: cm0u8yhfd000008kzezx739qf
 slug: multifactor-zero-trust-ssh
 authors: [ClintDovholuk]
-image: /blog/v1725453901119/410a39f8-eaf7-4c9f-bbba-ae547eb78d94.webp
+image: /docs/blogs/openzitiv1725453901119/410a39f8-eaf7-4c9f-bbba-ae547eb78d94.webp
 tags: 
   - ssh
   - zero-trust
@@ -26,7 +26,7 @@ Perhaps the most common type of authentication, OpenZiti supports authentication
 
 When [enrolling an identity](https://openziti.io/docs/learn/core-concepts/identities/enrolling/), the output of the enrollment flow will be an OpenZiti identity file containing a certificate, key, and CA bundle. This identity can then be used to authenticate connections to the target OpenZiti overlay network. If you are interested in learning how this process works, you can read about it in [Andrew's five-part series about bootstrapping trust](https://blog.openziti.io/bootstrapping-trust-part-1-encryption-everywhere). Using `zssh` with an identity file and certificate-based authentication looks something like this (examples are taken [directly from the GitHub repo](https://github.com/openziti-test-kitchen/zssh?tab=readme-ov-file#identity-based-certificate-authentication)):
 
-![](/blog/v1725132017881/75590748-1fb6-4616-bf1a-4fc59b31975b.png)
+![](/docs/blogs/openziti/v1725132017881/75590748-1fb6-4616-bf1a-4fc59b31975b.png)
 
 ```go
 zssh \
@@ -42,7 +42,7 @@ In this example, `zssh` is accepting the ssh key to use to authenticate to `sshd
 
 The `zssh` executable was recently enhanced to support OIDC-only-based authentication. Using [external JWT signers](https://openziti.io/docs/learn/core-concepts/security/authentication/external-jwt-signers/), you can configure an OpenZIti overlay network to trust JWTs from configured IdPs as authentication tokens. This allows the operator to create [authentication policies](https://openziti.io/docs/learn/core-concepts/security/authentication/authentication-policies/) allowing for external, OIDC-based integrations. This is interesting because it allows you to authenticate to the OpenZiti overlay network without needing to enroll the client ahead of time. Instead, `zssh` users complete an [Authorization Code Flow with PKCE](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce). In this scenario, the user will see the familiar flow of a browser window popping up and asking the user to authenticate to an identity provider configured to be trusted by OpenZiti. When the flow completes, the `zssh` binary will have a JWT that can be used to authenticate to the OpenZiti controller.
 
-![](/blog/v1725132084008/92208900-0593-410c-9305-b4b3b63821ce.png)
+![](/docs/blogs/openziti/v1725132084008/92208900-0593-410c-9305-b4b3b63821ce.png)
 
 ```go
 zssh \
@@ -62,7 +62,7 @@ In this example, `zssh` is given the same `-i` and `-s` parameters as the certif
 
 OpenZiti can also be configured to support OIDC as a secondary form of authentication. Accordingly, the `zssh` binary can be configured to use certificate-based authentication as a primary authentication source and an OIDC-based flow for secondary authentication. In the scenario, connecting to the OpenZiti overlay itself would require multiple forms of authentication. These mechanisms are a great way to prove there's both a human and a device. The device provides the certificate, while the human interacts with Keycloak/GitHub's OIDC to verify a human is indeed in the loop.
 
-![](/blog/v1725132167930/c0f03fe3-0d55-4046-846c-0a8df3715e50.png)
+![](/docs/blogs/openziti/v1725132167930/c0f03fe3-0d55-4046-846c-0a8df3715e50.png)
 
 ```go
 zssh \
@@ -81,7 +81,7 @@ In this example, `zssh` is given the all the same parameters as the OIDC-only ex
 
 Also added in this release was support for OpenZiti's [TOTP-based](https://en.wikipedia.org/wiki/Time-based_one-time_password) authentication. Users can now be required to enter their TOTP code before making a connection, allowing for multi-factor authentication to the OpenZiti overlay without using an IdP. Or, if using the OIDC-only based flow with an IdP that doesn't support TOTP (for reasons), OpenZiti's TOTP can be used as a secondary form of authentication to the overlay. For TOTP example usage have a look at [the readme on the repository](https://github.com/openziti-test-kitchen/zssh?tab=readme-ov-file#adding-totp). There, you’ll find the commands shown in the example gif below.
 
-![](/blog/v1725543173600/84bb2bc3-e5ba-45d4-9f3c-dccc08e6b0d6.gif)
+![](/docs/blogs/openziti/v1725543173600/84bb2bc3-e5ba-45d4-9f3c-dccc08e6b0d6.gif)
 
 ## Download zssh/zscp
 
@@ -89,7 +89,7 @@ If you are interested in trying out `zssh` and it's partner `zscp`, you can down
 
 ## **Share the Project**
 
-![](/blog/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
+![](/docs/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 
 If you find this interesting, please consider [**starring the projects on GitHub**](https://github.com/openziti/ziti/). It really does help to support the project! And if you haven't seen it yet, check out [**https://zrok.io**](https://github.com/openziti/ziti/). It's a totally free sharing platform built on OpenZiti and uses the OpenIti SDK! It uses the OpenZiti Go SDK since it's a ziti-native application. It's also [**all open source too!**](https://github.com/openziti/zrok/)
 

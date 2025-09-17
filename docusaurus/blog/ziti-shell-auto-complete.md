@@ -6,8 +6,8 @@ date: 2023-02-22T15:47:45Z
 cuid: clefun9ff000009jj6du9fwil
 slug: auto-complete
 authors: [KennethBingham]
-image: /blog/v1677080778065/71fdf983-8355-486e-bb8a-fb57861ea45a.png
-ogImage: /blog/v1677080756391/8f849497-c588-4a59-bf63-108bd522d8f0.png
+image: /docs/blogs/openzitiv1677080778065/71fdf983-8355-486e-bb8a-fb57861ea45a.png
+ogimage: /docs/blogs/openzitiv1677080756391/8f849497-c588-4a59-bf63-108bd522d8f0.png
 tags: 
   - bash
   - zsh

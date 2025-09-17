@@ -4,7 +4,7 @@ date: 2025-04-09T19:48:24Z
 cuid: cm9acdmkq000e08jr6pyc0zj7
 slug: introducing-zrok-10
 authors: [MichaelQuigley]
-image: /blog/v1744209956458/656a2fe0-41e5-4628-bd06-a9b3267df001.png
+image: /docs/blogs/openzitiv1744209956458/656a2fe0-41e5-4628-bd06-a9b3267df001.png
 tags: 
   - software-development
   - tools
@@ -37,19 +37,19 @@ I keep a detailed journal of my work. I like to save screenshots documenting int
 
 First, starting in 2022, here is a `v0.2` screenshot. `v0.2` predates [zrok.io](https://zrok.io/) and the hosted service. This is the very first version of zrok that had a “console” and integrated metrics:
 
-![](/blog/v1744133087807/9da95d37-6436-49c6-967a-21f74f292e92.png)
+![](/docs/blogs/openziti/v1744133087807/9da95d37-6436-49c6-967a-21f74f292e92.png)
 
 `v0.2` also predates `private` sharing in zrok. This was just a proof-of-concept exercise to see what a secure public reverse proxy solution on top of OpenZiti might look like.
 
 Then we developed `v0.3`, which added private sharing and introduced the concept of a “backend mode”:
 
-![](/blog/v1744133265428/52aa2f76-017c-4336-8a54-b1775041c49b.gif)
+![](/docs/blogs/openziti/v1744133265428/52aa2f76-017c-4336-8a54-b1775041c49b.gif)
 
 The “visualizer” concept was first introduced in `v0.3`. This version of the visualizer is similar to what we ended up with in `v0.4`.
 
 The main goal of the `v0.4` series was to develop zrok into a platform that could support a zrok as a service ([zrok.io](https://zrok.io/)). A lot of refinement and polish went into making `v0.4` usable and useful for a wider range of users:
 
-![](/blog/v1744133390425/30237eb1-fa20-483c-86e9-25b1be9a8b68.png)
+![](/docs/blogs/openziti/v1744133390425/30237eb1-fa20-483c-86e9-25b1be9a8b68.png)
 
 Every time there is a major refresh of the zrok user interface, I feel like the new version feels like a substantial leap forward.
 
@@ -59,7 +59,7 @@ This brings us to the first major feature of zrok `v1.0`, which is the updated A
 
 The new zrok API console (the primary “web interface”) has received a major refresh for `v1.0`. In addition to new branding, the technology under the covers has been streamlined as well. Here are some screenshots so you can get the vibes:
 
-![](/blog/v1744134630638/d2d3ba1c-f4e7-4f93-b094-1e9c013c7052.png)
+![](/docs/blogs/openziti/v1744134630638/d2d3ba1c-f4e7-4f93-b094-1e9c013c7052.png)
 
 These things are subjective, but I very much look at this new user interface and feel the same way about it that I’ve felt about previous iterations… it looks like a substantial improvement in polish and usability versus the previous version.
 
@@ -67,7 +67,7 @@ Under the covers the API console has been re-developed in Typescript using Vite.
 
 The new API console retains the same visual approach to navigating your zrok resources as the previous release… but in addition, the new API console provides a “tabular” mode to easily filter and sort the contents of your account:
 
-![](/blog/v1744134838383/6ac1f878-3e82-4fef-b862-c6ca674c14ce.png)
+![](/docs/blogs/openziti/v1744134838383/6ac1f878-3e82-4fef-b862-c6ca674c14ce.png)
 
 When sorted by activity, the tabular mode operates kind of like a “top” command for your zrok account.
 
@@ -75,7 +75,7 @@ For users with large, active accounts, the sorting and filtering features can he
 
 The forms and dialogs have also received a lot of attention and polish:
 
-![](/blog/v1744134927112/36f17c1f-ebc7-4d88-8537-7d5dcc6d7eca.png)
+![](/docs/blogs/openziti/v1744134927112/36f17c1f-ebc7-4d88-8537-7d5dcc6d7eca.png)
 
 We’re excited about the new streamlined look-and-feel, too.
 
@@ -87,11 +87,11 @@ zrok v1.0 introduces a new “zrok Agent” to make this situation much simpler.
 
 When you’re not running the zrok Agent, the v1.0 command-line works the way it always has… If you run a `zrok share`, you’ll end up with a single process for that share, like this:
 
-![](/blog/v1744135682541/8178eb22-1424-4dfb-8f32-4bea6987dc6b.png)
+![](/docs/blogs/openziti/v1744135682541/8178eb22-1424-4dfb-8f32-4bea6987dc6b.png)
 
 But when I start the new zrok Agent using the `zrok agent start` command, we get a different operating mode. With the zrok Agent running, if I do a `zrok share`, I get a different result:
 
-![](/blog/v1744135820048/21f79d74-b5bd-4cfe-becf-4d1454bcf487.png)
+![](/docs/blogs/openziti/v1744135820048/21f79d74-b5bd-4cfe-becf-4d1454bcf487.png)
 
 Notice that the `zrok share public` command above returned immediately, displaying the share token and the URL for my new share. When I ran `zrok share public` with the Agent running, the Agent was detected and the process for my new share was managed by the Agent automatically.
 
@@ -101,13 +101,13 @@ You might also notice the `zrok agent status` command in the terminal above. Tha
 
 There are additional commands under the `zrok agent` tree for managing shares and accesses:
 
-![](/blog/v1744135943261/4141ac00-4a3d-4801-aa52-6d6d0c19b6bf.png)
+![](/docs/blogs/openziti/v1744135943261/4141ac00-4a3d-4801-aa52-6d6d0c19b6bf.png)
 
 And the `zrok agent release share` command can direct the agent to release the share.
 
 The zrok Agent also includes a `localhost` web interface, which can be used to create and remove shares from the agent… yes, when you’re running the zrok Agent you can create new shares *without using the command-line* interface!
 
-![](/blog/v1744136149257/08b3caad-b8c5-4741-9e95-ec497afd5fff.png)
+![](/docs/blogs/openziti/v1744136149257/08b3caad-b8c5-4741-9e95-ec497afd5fff.png)
 
 The zrok “Agent console” is an early preview and a work-in-progress. There are currently a limited subset of share types that can be created through the Agent console, but we expect to elaborate this into a first-class interface over the next handful of releases.
 

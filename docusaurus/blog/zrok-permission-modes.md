@@ -4,7 +4,7 @@ date: 2024-03-28T15:38:17Z
 cuid: clubeftvl000208jtghim4481
 slug: zrok-permission-modes
 authors: [MichaelQuigley]
-image: /blog/v1710955657342/eeab3265-3689-45b5-983b-83b06ee7fdb7.png
+image: /docs/blogs/openzitiv1710955657342/eeab3265-3689-45b5-983b-83b06ee7fdb7.png
 tags: 
   - security
   - networking

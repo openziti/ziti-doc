@@ -4,7 +4,7 @@ date: 2023-03-03T20:06:20Z
 cuid: clesyuhca000009lcf8f79ub7
 slug: openapi-python-clients
 authors: [StevenBroderick]
-image: /blog/v1677866933476/6a4428fe-aa77-489d-b4f3-f8251969f8df.png
+image: /docs/blogs/openzitiv1677866933476/6a4428fe-aa77-489d-b4f3-f8251969f8df.png
 tags: 
   - python
   - openapi

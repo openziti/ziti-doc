@@ -5,7 +5,7 @@ date: 2022-09-12T21:49:23Z
 cuid: cl7zashi604a0fxnv038w59b1
 slug: introducing-openziti-browzer
 authors: [CurtTudor]
-image: /blog/v1662574403443/kofV_IBBh.jpg
+image: /docs/blogs/openzitiv1662574403443/kofV_IBBh.jpg
 tags: 
   - web-development
   - security
@@ -41,7 +41,7 @@ To help you better understand how BrowZer works, and why we are building it, let
 
 Usually, some kind of gateway bridges access into a private network. For example, the gateway could be a VPN or an SSH bastion host. Both solutions offer varying degrees of security, but, the side effects might not be acceptable.
 
-![image.png](/blog/v1662656432216/z6354leaK.png)
+![image.png](/docs/blogs/openziti/v1662656432216/z6354leaK.png)
 
 This traditional access model is not well suited for cloud-native highly ephemeral environments (like K8S). Also, scaling this type of solution as company workforces and infrastructure grows or fluctuates also creates substantial pain points and complexity for administrators.
 
@@ -71,7 +71,7 @@ This model allows BrowZer to define logical sets of web applications and removes
 
 The diagram below depicts how various components connect to each other in a BrowZer deployment.
 
-![image.png](/blog/v1663013534461/fw9fqJOaE.png)
+![image.png](/docs/blogs/openziti/v1663013534461/fw9fqJOaE.png)
 
 Although this diagram shows the target web app example is [Apache Guacamole](https://guacamole.apache.org/), BrowZer supports any web app. If you are unfamiliar with Guacamole, it is an open-source RDP, VNC, and SSH gateway. And yes, BrowZer supports HTML5-based RDP.
 
@@ -85,7 +85,7 @@ Now let's discuss the various BrowZer components.
 
 Below is a (*simplified*) diagram depicting the network-auth flow from user to a web application in a BrowZer environment.
 
-![image.png](/blog/v1662733522760/XoZApNB43.png)
+![image.png](/docs/blogs/openziti/v1662733522760/XoZApNB43.png)
 
 You'll notice that similar to the traditional model, there is still a gateway (*more details on that below*). But with BrowZer, the user doesn't provide a unique VPN credential or SSH key.
 
@@ -99,7 +99,7 @@ The example in the above diagram shows BrowZer using Auth0 which in turn federat
 
 > *While there are no burdensome VPN credentials or SSH bastion host keys to manage, BrowZer does involve a little upfront administration in the Ziti network to inform the control plane about the IdP. Note that my upcoming blog articles will do deep technical dives into BrowZer-IdP integration, so be sure to subscribe to this blog to receive further educational materials*
 
-![image.png](/blog/v1662670313410/t71lKyYuC.png)
+![image.png](/docs/blogs/openziti/v1662670313410/t71lKyYuC.png)
 
 With a small amount of network admin work out of the way, the user-facing flow that BrowZer enables for your dark web application is intentionally designed to be very simple, and friction-free.
 

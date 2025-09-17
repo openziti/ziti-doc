@@ -4,8 +4,8 @@ date: 2024-07-23T17:05:14Z
 cuid: clyyo2bjs000909kybcio718z
 slug: extend-access-to-a-private-s3-bucket-using-python
 authors: [KennethBingham]
-image: /blog/v1721753949507/7351140d-d4d4-4531-b56d-c2bfa9f4bb17.png
-ogImage: /blog/v1721754283206/4a5bea22-a608-4c1d-b323-47b9067cbd1e.png
+image: /docs/blogs/openzitiv1721753949507/7351140d-d4d4-4531-b56d-c2bfa9f4bb17.png
+ogimage: /docs/blogs/openzitiv1721754283206/4a5bea22-a608-4c1d-b323-47b9067cbd1e.png
 tags: 
   - python
   - boto3
@@ -14,7 +14,7 @@ tags:
 
 A private S3 bucket protects against a data leak by denying all public access. This approach moves access control from the public S3 API to the network layer. We can use OpenZiti's cryptographic identity and attribute-based policies to securely extend access to a trusted Python program at a remote site.
 
-![](/blog/v1721754674859/9428a427-5a2f-41f0-ac30-af0c83a09c69.png)
+![](/docs/blogs/openziti/v1721754674859/9428a427-5a2f-41f0-ac30-af0c83a09c69.png)
 
 The OpenZiti Python SDK (`import openziti`) makes it easy to use the AWS Python SDK (`import boto3`) through an OpenZiti tunnel using only Python. No sidecar, agent, or client proxy is needed!
 
@@ -73,6 +73,6 @@ These Python snippets are representative of a functioning sample, `s3z.py` ([lin
 
 ## **Share the Project**
 
-![](/blog/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
+![](/docs/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 
 If you find this interesting, please consider [**starring us on GitHub**](https://github.com/openziti/ziti/). It helps. Let us know if you found a good use for this or have an improvement or question in mind on [**X <s>twitter</s>**](https://twitter.com/openziti), in [/r/openziti](https://www.reddit.com/r/openziti/), or the [Discourse forum](https://openziti.discourse.group/). We upload and stream [**on YouTube**](https://youtube.com/openziti) too. We'd love to hear from you!

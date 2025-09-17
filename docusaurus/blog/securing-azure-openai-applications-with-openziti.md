@@ -4,8 +4,8 @@ date: 2023-10-15T23:07:06Z
 cuid: clns2tgr1000309jwfpyngao7
 slug: securing-azure-openai-applications-with-openziti
 authors: [DariuszSliwinski]
-image: /blog/v1697652544795/ec49e795-33bd-4a09-aa16-96f4c80d2dc6.jpeg
-ogImage: /blog/v1697652407252/6a647546-7930-4b48-bd16-e85779dbf127.jpeg
+image: /docs/blogs/openzitiv1697652544795/ec49e795-33bd-4a09-aa16-96f4c80d2dc6.jpeg
+ogimage: /docs/blogs/openzitiv1697652407252/6a647546-7930-4b48-bd16-e85779dbf127.jpeg
 tags: 
   - openai
   - application-security
@@ -32,11 +32,11 @@ One quick note before we get started. I used CloudZiti for this article, which i
 * container-apps-openai example
     
 
-![](/blog/v1696619268733/c223b85b-44fc-4529-b068-d1cc5c48891e.png)
+![](/docs/blogs/openziti/v1696619268733/c223b85b-44fc-4529-b068-d1cc5c48891e.png)
 
 * aks-openai-terraform example
     
-    ![](/blog/v1696619803335/abbc91cf-4430-4af6-8f3c-5f7cea75d19e.png)
+    ![](/docs/blogs/openziti/v1696619803335/abbc91cf-4430-4af6-8f3c-5f7cea75d19e.png)
     
 
 ### With OpenZiti Overlay
@@ -45,13 +45,13 @@ One quick note before we get started. I used CloudZiti for this article, which i
 
 It depicts the access to the hosted applications through the Ziti Tunnel deployed in the cluster at a node level set to the hosted mode (similar to ingress controller-like access). In this scenario, one does not have to manage the TLS Certs, since the authentication and encryption are already built-in to the Overlay.
 
-![](/blog/v1697206053414/db3b5722-fa5a-409e-9e27-2828350ae0be.png)
+![](/docs/blogs/openziti/v1697206053414/db3b5722-fa5a-409e-9e27-2828350ae0be.png)
 
 #### Option II
 
 It depicts the access to the hosted applications through the Ziti Edge Router using the Private Ingress Nginx Proxy and TLS termination (i.e. Publicly signed Certs with Private IP Address). In this scenario, the ingress nginx manages the TLS termination and the Built-in End-to-End Overlay Encryption can be used for 2 layers of security or disabled.
 
-![](/blog/v1697206121637/aa55c58b-bcac-4ba9-89b4-46682c7053a7.png)
+![](/docs/blogs/openziti/v1697206121637/aa55c58b-bcac-4ba9-89b4-46682c7053a7.png)
 
 ## Infrastructure Deployment
 
@@ -439,11 +439,11 @@ Both apps are now private and can be accessed through the overlay and all ports 
 
 [http://chatapp.ziti](http://chatapp.ziti)
 
-![](/blog/v1696625163323/27790c9b-ba1b-4b9d-bec1-d2c473d80ccd.png)
+![](/docs/blogs/openziti/v1696625163323/27790c9b-ba1b-4b9d-bec1-d2c473d80ccd.png)
 
 [http://docapp.ziti](http://docapp.ziti)
 
-![](/blog/v1696625182210/494519a6-064f-4138-a5a2-aecb81bb76d2.png)
+![](/docs/blogs/openziti/v1696625182210/494519a6-064f-4138-a5a2-aecb81bb76d2.png)
 
 #### Cluster Private Ingress with Public Certs
 
@@ -562,11 +562,11 @@ Once the certs are loaded and the ingress controller set up,  the web browser s
 
 [https://chatapp.dariuszski.dev/](https://chatapp.dariuszski.dev/)
 
-![](/blog/v1696624891569/470957ae-b818-4b02-9303-983f32fa7a1e.png)
+![](/docs/blogs/openziti/v1696624891569/470957ae-b818-4b02-9303-983f32fa7a1e.png)
 
 [https://docapp.dariuszski.dev/](https://docapp.dariuszski.dev/)
 
-![](/blog/v1696624940888/c827e209-ee04-4f68-9996-9e5ada4442e7.png)
+![](/docs/blogs/openziti/v1696624940888/c827e209-ee04-4f68-9996-9e5ada4442e7.png)
 
 ### Final Word
 

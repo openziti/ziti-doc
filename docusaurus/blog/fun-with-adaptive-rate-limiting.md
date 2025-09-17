@@ -4,7 +4,7 @@ date: 2024-01-26T17:44:12Z
 cuid: clruxmy03000408gr7rdb2mk3
 slug: fun-with-adaptive-rate-limiting
 authors: [PaulLorenz]
-image: /blog/v1706152812055/f1c7ece1-5bee-41f9-864a-1cabc710bb41.png
+image: /docs/blogs/openzitiv1706152812055/f1c7ece1-5bee-41f9-864a-1cabc710bb41.png
 tags: 
   - performance
   - golang
@@ -24,7 +24,7 @@ I had a fun day solving the problem, and while I'm sure that nothing here is new
 
 A rate limiter seems like an obvious answer. Better to reject requests that you know you won't be able to service than to do extra work that will just be discarded.
 
-![small robot on beach holding a stop sign](/blog/v1706157396114/16e07758-817e-4992-b12b-9fb9c41c5749.png)
+![small robot on beach holding a stop sign](/docs/blogs/openziti/v1706157396114/16e07758-817e-4992-b12b-9fb9c41c5749.png)
 
 The requests take a relatively consistent amount of time to process. We also know when we've taken too long, as writing the response back to the client will fail. These two characteristics will shape our implementation.
 
@@ -39,13 +39,13 @@ Other notes:
 
 ## Static
 
-![](/blog/v1706194973630/6f4db0d5-b664-45bf-aebf-981cdcc975cb.png)
+![](/docs/blogs/openziti/v1706194973630/6f4db0d5-b664-45bf-aebf-981cdcc975cb.png)
 
 I started with a statically sized queue, just to get an initial implementation in place and working. However, a static rate limiter doesn't work well for this use case. Crucially, if you pick a window size that's too large, the application can fail in the same way as if there were no rate limiter. Picking the correct size is very difficult. You have to account for different hardware and other tasks in the application will change how many requests can be processed, so any number you pick won't be optimal. It would be better if we could adapt to the circumstances.
 
 ## Basic Adaptability
 
-![](/blog/v1706194987127/25e26525-808a-4093-afc5-f3e130d271ff.gif)
+![](/docs/blogs/openziti/v1706194987127/25e26525-808a-4093-afc5-f3e130d271ff.gif)
 
 The first step was allowing requests to report their success or failure back to the rate limiter.
 
@@ -186,4 +186,4 @@ Thanks!
 
 Tell us how you're using OpenZiti on [**X**](https://twitter.com/openziti)**<s>Twitter</s>**, **Reddit**, or over at our [**Discourse**](https://openziti.discourse.group/). Or you can check out [**our content on YouTube**](https://youtube.com/openziti) if that's more your speed. Regardless of how, we'd love to hear from you.
 
-![](/blog/v1706218321488/06727c10-f73d-4425-9bd9-32561df17a02.png)
+![](/docs/blogs/openziti/v1706218321488/06727c10-f73d-4425-9bd9-32561df17a02.png)

@@ -6,7 +6,7 @@ date: 2024-04-04T16:38:22Z
 cuid: clulgo2ea000109lc1lnq3tkx
 slug: pixy-dust-for-web-applications-pkce
 authors: [CurtTudor]
-image: /blog/v1707662249548/d6905ce3-a16a-4e08-8d81-5055a3da8bef.jpeg
+image: /docs/blogs/openzitiv1707662249548/d6905ce3-a16a-4e08-8d81-5055a3da8bef.jpeg
 tags: 
   - web
   - security
@@ -34,7 +34,7 @@ An attacker can potentially intercept the authorization code that is sent back t
 
 One popular method malicious actors use to intercept authorization codes is by registering a malicious application on the user’s device (e.g. a browser extension). This malicious application will register and use the same custom URL scheme as the client application, allowing it to intercept redirect URLs on that URL scheme and extract the authorization code:
 
-![](/blog/v1707663725015/8e0798d9-2992-493b-9d28-34bcf57da8e8.png)
+![](/docs/blogs/openziti/v1707663725015/8e0798d9-2992-493b-9d28-34bcf57da8e8.png)
 
 ## **How does PKCE work?**
 
@@ -70,7 +70,7 @@ Intercepting the `code challenge` is also useless because SHA256 is a one-way ha
 
 The following diagram represents the PKCE protocol flow:
 
-![](/blog/v1707664593271/95f591a4-717d-4626-a880-94e5a0657219.png)
+![](/docs/blogs/openziti/v1707664593271/95f591a4-717d-4626-a880-94e5a0657219.png)
 
 ## **PKCE Benefits**
 
@@ -155,7 +155,7 @@ You may recall that [BrowZer's zero-trust capabilities](https://blog.openziti.io
 
 The Identity Provider (IDP) you associate with your network is up to you. It could be a cloud-based instance of AzureAD, Okta, or Auth0 (and these IDPs could even federate out to Google, GitHub, or dozens of other providers)...
 
-![image.png](/blog/v1662733522760/XoZApNB43.png?auto=compress,format&format=webp align="left")
+![image.png](/docs/blogs/openziti/v1662733522760/XoZApNB43.png?auto=compress,format&format=webp align="left")
 
 ...Alternatively, you can also self-host an open-source IDP instance of Keycloak, Authentik, ...whatever. If the IDP is OIDC-compliant, browZer will work with it.
 
@@ -165,7 +165,7 @@ When the PKCE flow completes, the IDP delivers the access token, and BrowZer sto
 
 e.g.:
 
-![](/blog/v1712246242470/0217910c-ed58-4963-a7b3-f76b1811ba30.png)
+![](/docs/blogs/openziti/v1712246242470/0217910c-ed58-4963-a7b3-f76b1811ba30.png)
 
 This access token is subsequently used to authenticate the user onto the Ziti Overlay network where your web app resides.
 

@@ -4,7 +4,7 @@ date: 2024-05-15T02:28:38Z
 cuid: clw77d8aa00070ammccc55jhc
 slug: signing-executables-from-github-actions
 authors: [ClintDovholuk]
-image: /blog/v1715610928648/e1bf8444-484c-440c-ad00-4669c493ff94.jpeg
+image: /docs/blogs/openzitiv1715610928648/e1bf8444-484c-440c-ad00-4669c493ff94.jpeg
 tags: 
   - digital-signature
   - aws-kms
@@ -31,7 +31,7 @@ Microsoft provides a tool to sign executables called `signtool`. Getting Signtoo
 
 At some point in the past, signtool [was upgraded](https://learn.microsoft.com/en-us/windows/win32/seccrypto/signtool#sign-command-options) to allow for the digest to be generated out-of-band from the overall signing process. Signing the digest out-of-band makes the overall process of signing an executable only slightly more complex, but has a big benefit. With this process, **you will no longer need to keep the private key on the machine running signtool**. This is *particularly* valuable when signing files from a cloud CI/CD pipeline like GitHub's Actions. Recently, I upgraded the process of how the [OpenZiti project signs](https://github.com/openziti/desktop-edge-win/blob/release-next/Installer/build.ps1#L10-L33) the [Ziti Desktop Edge for Windows](https://github.com/openziti/desktop-edge-win/releases/tag/2.1.16) to leverage detached digest signing.
 
-![](/blog/v1715622984201/de8bf432-8f2e-412c-b200-a3125c7d39bd.jpeg)
+![](/docs/blogs/openziti/v1715622984201/de8bf432-8f2e-412c-b200-a3125c7d39bd.jpeg)
 
 ### AWS KMS Prerequisites
 
@@ -106,7 +106,7 @@ The last step is to use the signed data file produced in the last step, incorpor
 
 Notice that to ingest the signed digest into the file you only need to provide the path to the signed digest (and `p7u` file generated in the first step) and the executable itself. When these steps finish, you'll have a signed binary!
 
-![](/blog/v1715626991639/0ca65ace-4ee1-4656-b90d-c745eaba593f.png)
+![](/docs/blogs/openziti/v1715626991639/0ca65ace-4ee1-4656-b90d-c745eaba593f.png)
 
 It's a good idea to add a timestamp to your signed binary using a Time Stamping Authority (TSA) of your choice. Normally, a digital signature is only considered valid as long as the signing certificate is valid. Once the certificate expires, the signature can no longer be verified. However, if the signature includes a timestamp, it shows that the code was signed while the certificate was still valid, extending the trustworthiness of the signature beyond the certificate's expiration date.
 
@@ -116,7 +116,7 @@ Using EV certificates isn't for everyone, it's expensive. However, using an EV c
 
 ## **Share the Project**
 
-![](/blog/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
+![](/docs/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 
 If you find this interesting, please consider [**starring us on GitHub**](https://github.com/openziti/ziti/). It really does help to support the project! And if you haven't seen it yet, check out [**https://zrok.io**](https://github.com/openziti/ziti/). It's totally free sharing platform built on OpenZiti! It uses the OpenZiti Go SDK since it's a ziti-native application. It's also [**all open source too!**](https://github.com/openziti/zrok/)
 

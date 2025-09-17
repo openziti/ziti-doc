@@ -5,7 +5,7 @@ date: 2022-09-20T17:51:44Z
 cuid: cl8ahtom3080fu5nv6bxr6ylc
 slug: openziti-python-sdk-introduction
 authors: [EugeneKobyakov]
-image: /blog/v1663698832345/Nj2I2jCi0.jpg
+image: /docs/blogs/openzitiv1663698832345/Nj2I2jCi0.jpg
 tags: 
   - python
   - opensource
@@ -22,7 +22,7 @@ In our previous posts, we introduced the concept of [Zitification](https://openz
 
 This article will show how to *zitify* your Python applications with minor code changes.
 
-![Ziggy Loves Python.jpg](/blog/v1663167906947/aDQdNSiXW.jpg align="left")
+![Ziggy Loves Python.jpg](/docs/blogs/openziti/v1663167906947/aDQdNSiXW.jpg align="left")
 
 ## Setup
 

@@ -4,7 +4,7 @@ date: 2023-10-24T12:29:14Z
 cuid: clo4aztln000e08l82w2lb5fg
 slug: put-some-ziti-in-your-caddy
 authors: [EugeneKobyakov]
-image: /blog/v1698150167579/59e96908-6587-4f29-b51b-73e523108133.png
+image: /docs/blogs/openzitiv1698150167579/59e96908-6587-4f29-b51b-73e523108133.png
 tags: 
   - caddy
   - openziti
@@ -44,12 +44,12 @@ Typically, if you have a website or a web application in a data center (or at ho
     
 
 **common deployment with Ziti Edge Tunnel**
-![Common OpenZiti Host Access deployment](/blog/v1697632056486/244e5ebb-8767-4477-98ae-3350e99d68e0.png)
+![Common OpenZiti Host Access deployment](/docs/blogs/openziti/v1697632056486/244e5ebb-8767-4477-98ae-3350e99d68e0.png)
 
 By embedding OpenZiti SDK into your server, you solve both problems at the same time.
 
 **app-embedded deployment**
-![Zitified Caddyserver deployment](/blog/v1697632190555/f8a81c74-df47-4870-8644-2082ebd8bfec.png)
+![Zitified Caddyserver deployment](/docs/blogs/openziti/v1697632190555/f8a81c74-df47-4870-8644-2082ebd8bfec.png)
 
 # Caddy Server plugin
 

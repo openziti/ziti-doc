@@ -6,7 +6,7 @@ date: 2024-08-02T17:10:31Z
 cuid: clzcynn3a000009kwfowoela4
 slug: zrok-vpn-linux-service
 authors: [KennethBingham]
-image: /blog/v1722617478239/b985c30b-aae1-42c1-a450-b3fd255b14a3.avif
+image: /docs/blogs/openzitiv1722617478239/b985c30b-aae1-42c1-a450-b3fd255b14a3.avif
 tags: 
   - vpn
 
@@ -73,7 +73,7 @@ Aug 02 16:33:08 ubuntu zrok-share.bash[6243]: {"level":"info","ts":1722616388.27
 
 The zrok console looks like this for an account with two environments, one per VPN peer, and one VPN share.
 
-![](/blog/v1722617910042/3972fae3-e826-402f-82e9-9c3514f0bfe4.png)
+![](/docs/blogs/openziti/v1722617910042/3972fae3-e826-402f-82e9-9c3514f0bfe4.png)
 
 To temporarily join the zrok VPN you only need to run this command.
 
@@ -85,11 +85,11 @@ You will see zrok's terminal user interface (TUI) telling you what is happening.
 
 Now, this second device is joined to the VPN, so it has a dashed line to the VPN share indicating a zrok "private access."
 
-![](/blog/v1722618841867/969509da-0a39-4a4b-ad76-0c0dc0a524c9.png)
+![](/docs/blogs/openziti/v1722618841867/969509da-0a39-4a4b-ad76-0c0dc0a524c9.png)
 
 ## **Share the Project**
 
-![](/blog/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
+![](/docs/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 
 If you find this interesting, please [give zrok a star on GitHub](https://github.com/openziti/zrok)!
 

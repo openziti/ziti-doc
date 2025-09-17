@@ -4,7 +4,7 @@ date: 2024-05-22T18:49:58Z
 cuid: clwi6i6r100040ajobbs12wyv
 slug: how-to-prevent-path-traversal-attacks-with-openziti-browzer
 authors: [MikeGorman]
-image: /blog/v1716212854203/849ab21c-0082-49fb-9a05-a52dd554bb41.png
+image: /docs/blogs/openzitiv1716212854203/849ab21c-0082-49fb-9a05-a52dd554bb41.png
 tags: 
   - opensource
   - security
@@ -24,7 +24,7 @@ Some of the worst incidents occur when simple mistakes are made in software desi
 
 There are 3 separate CWE's mapped to Broken Access Control specifically tied to path traversal, CWEs [22](https://cwe.mitre.org/data/definitions/22.html), [23](https://cwe.mitre.org/data/definitions/23.html), and [35](https://cwe.mitre.org/data/definitions/35.html).   Tools like [DirBuster](https://www.kali.org/tools/dirbuster/) and [ffuf](https://github.com/ffuf/ffuf) take in wordlists and can run thousands of paths against a site automatically, logging any path that receives something other than an error, and giving malicious actors a list of potentially exploitable paths.  Highly automated systems can do much more, scraping and analyzing the data for value, allowing the actor to scan large numbers of sites and receive a list of targets ranked by potential value.  More so, when particular exploits are located, these actors can scan the Web and automatically scrape data in known instances of the vulnerable sites.
 
-[![](/blog/v1716216190969/7b88062c-3f06-47a2-95c8-25cc7696acb8.png)](https://www.hackingarticles.in/comprehensive-guide-on-path-traversal/)
+[![](/docs/blogs/openziti/v1716216190969/7b88062c-3f06-47a2-95c8-25cc7696acb8.png)](https://www.hackingarticles.in/comprehensive-guide-on-path-traversal/)
 
 These types of vulnerabilities and attacks they enable are not trivial.  As of 5/17/24, there are [4,846 CVEs](https://nvd.nist.gov/vuln/search/results?isCpeNameSearch=false&query=directory+traversal&results_type=overview&form_type=Basic&search_type=all&startIndex=0) in the CVE database referring to directory traversal.  These attacks are at the root of some of the largest incidents, [Equifax](https://www.infosecinstitute.com/resources/hacking/equifax-breach-exploit/), and [Synology NAS](https://www.exploit-db.com/exploits/30475) devices, as well as popular tools like [Jenkins](https://www.securityweek.com/poc-published-for-critical-fortra-code-execution-vulnerability/).  Even applications meant to protect corporate data, [Fortinet](https://nvd.nist.gov/vuln/detail/CVE-2018-13379) and [Pulse Secure VPNs](https://www.tenable.com/cve/CVE-2019-11510), fell victim to these types of attacks.    There have been vulnerabilities in frameworks, like Apache Struts, used to create web applications, meaning those built with these frameworks are likely to be vulnerable; this is the root vulnerability of the Equifax breach. 
 
@@ -36,6 +36,6 @@ The fundamental problem is that the authentication and authorization functions, 
 
 BrowZer allows a completely clientless connection to protected systems by dynamically loading into the web browser a package that creates a secure connection to assets protected by OpenZiti.  How is this different than Pulse Secure or Foritnet which also create secured tunnels?  The BrowZer agent is completely independent of the application it is placed in front of.  Once authenticated, using one of a multitude of authentication services, the system loads the client dynamically into the local browser and creates a new connection from that software to the OpenZiti network, which provides connectivity to the application.  This prevents any unauthenticated user from reaching the application in question.  Actors can't initiate a path traversal or other unauthenticated attack because it can't reach the actual application until the authentication and authorization have occurred.
 
-![](/blog/v1716219804073/1292c372-d81a-45d7-896f-9c0b6f2ef782.png)
+![](/docs/blogs/openziti/v1716219804073/1292c372-d81a-45d7-896f-9c0b6f2ef782.png)
 
 [OpenZiti](https://openziti.io) is a software network overlay providing secure communication through a true network, with provisioning, monitoring, and highly granular communication permissions allowing microsegmentation and other Zero Trust features to be applied to networks and applications at a network connectivity level.  This allows for a common centralized platform to allow and monitor traffic throughout a dispersed network of applications, devices, users, and workloads.  BrowZer is one method of accessing the network's resources without having to control the system or application used to access it to load a client or embed into the software using the available SDKs.

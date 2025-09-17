@@ -4,7 +4,7 @@ date: 2024-02-13T23:12:04Z
 cuid: clskz9wz8000009ju1kt7e0ha
 slug: securing-dedicated-palworld-server-with-zrok
 authors: [EdwardThompson]
-image: /blog/v1706800178582/3fa8b1ea-7c9f-4fcc-9245-375f5df55448.jpeg
+image: /docs/blogs/openzitiv1706800178582/3fa8b1ea-7c9f-4fcc-9245-375f5df55448.jpeg
 tags: 
   - security
   - openziti
@@ -94,9 +94,9 @@ This command tells your laptop to access the server connection at 127.0.0.1:8211
 
 That leaves us with this: start the game, select Join Multiplayer, enter 127.0.0.1:8211, and connect! You are now playing over a secure network connection that no one can hijack.
 
-![](/blog/v1706798561233/fbea7523-6653-45cb-8353-04070b5fd207.png)
+![](/docs/blogs/openziti/v1706798561233/fbea7523-6653-45cb-8353-04070b5fd207.png)
 
-![](/blog/v1707865105231/af7b7fc8-2852-4d41-abac-dc05eec59f97.png)
+![](/docs/blogs/openziti/v1707865105231/af7b7fc8-2852-4d41-abac-dc05eec59f97.png)
 
 ## Summary
 

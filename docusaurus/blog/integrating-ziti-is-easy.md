@@ -1,3 +1,14 @@
+---
+slug: integrating-ziti-is-easy
+title: "Integrating Ziti is Easy! How we got our app tested with go-httpbin"
+authors: [CameronOtts]
+date: 2022-10-11
+tags:
+  - integration
+  - go-httpbin
+  - app
+  - ziti
+---
 # Integrating Ziti is Easy!
 
 # Integrating with Ziti? An Introduction
@@ -10,7 +21,7 @@ Sometimes we get a little excited when learning about a new technology or concep
 Let me introduce you to [go-httpbin](https://github.com/mccutchen/go-httpbin). There are a few reasons I went with this over the main httpbin. This fork is much more recent and actively being maintained. It also doesn't user any external packages, though that is about to change. Finally its in Go which happens to be my favorite language (a very subjective reason, I know). With OpenZiti's [go-sdk](https://github.com/openziti/sdk-golang) this should be a very simple task! Now let's get to some code.
 
 
-![cup-of-coffee-1280537_1280.jpg](/blog/v1664985400182/_O6OC_fG5.jpg)
+![cup-of-coffee-1280537_1280.jpg](/docs/blogs/openziti/v1664985400182/_O6OC_fG5.jpg)
 
 ## How
 We are pretty much going to apply the go-sdk outlined in [this repository](https://github.com/openziti-test-kitchen/go-http). If you'd like to follow along, then the finished code is in the [Ziti Test Kitchen](https://github.com/openziti-test-kitchen/go-httpbin)!

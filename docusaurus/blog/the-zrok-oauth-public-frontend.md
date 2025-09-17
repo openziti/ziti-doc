@@ -4,7 +4,7 @@ date: 2023-10-20T13:42:46Z
 cuid: clnynuz3f000909l01il80lcy
 slug: the-zrok-oauth-public-frontend
 authors: [MichaelQuigley]
-image: /blog/v1697044959110/120ae30d-9a5b-470f-b7ca-7689135f300a.png
+image: /docs/blogs/openzitiv1697044959110/120ae30d-9a5b-470f-b7ca-7689135f300a.png
 tags: 
   - proxy
   - security
@@ -18,7 +18,7 @@ With the `v0.4.7` release we now support authenticating users of your public `zr
 
 Here's an overview of where this new capability fits into the `zrok` architecture:
 
-![](/blog/v1697129004226/c7204767-10dd-4d17-854f-3a25bea604b4.png)
+![](/docs/blogs/openziti/v1697129004226/c7204767-10dd-4d17-854f-3a25bea604b4.png)
 
 The golden-colored boxes represent the *frontend* components where these new capabilities are implemented. This new authentication feature is primarily focused on authenticating anonymous users from the internet, requiring that they authenticate with Google or GitHub and potentially limiting allowed users to specific email address domains.
 

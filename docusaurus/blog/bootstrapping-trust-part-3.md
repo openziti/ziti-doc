@@ -3,7 +3,7 @@ title: "Bootstrapping Trust Part 3 - Certificates"
 date: 2022-06-03T12:50:35Z
 slug: bootstrapping-trust-part-3-certificates
 authors: [AndrewMartinez]
-image: /blog/v1654265273968/JSUhAzpL_.jpeg
+image: /docs/blogs/openzitiv1654265273968/JSUhAzpL_.jpeg
 tags: 
   - security
 

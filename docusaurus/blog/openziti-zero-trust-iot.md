@@ -5,7 +5,7 @@ date: 2023-09-20T14:08:50Z
 cuid: clmrtkyar000209mh1yq1fybs
 slug: openziti-zero-trust-iot-wi-fi-gateway
 authors: [RobertCaamano]
-image: /blog/v1695128197082/cec3ab0f-80e7-48fb-aced-f45fe933aedb.jpeg
+image: /docs/blogs/openzitiv1695128197082/cec3ab0f-80e7-48fb-aced-f45fe933aedb.jpeg
 tags: 
   - iot
   - openziti
@@ -18,7 +18,7 @@ IoT devices are commonplace in most home networks and while they provide many us
 
 ###### \*at the time of writing
 
-![](/blog/v1695064156479/7b2f7b92-a3dd-49f7-8819-377cf546e328.png)
+![](/docs/blogs/openziti/v1695064156479/7b2f7b92-a3dd-49f7-8819-377cf546e328.png)
 
 ## **Prerequisites:**
 

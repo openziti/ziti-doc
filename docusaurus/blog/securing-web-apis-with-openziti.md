@@ -1,3 +1,14 @@
+---
+slug: securing-web-apis-with-openziti
+title: "Securing Web APIs With OpenZiti — Zero Trust For Web APIs"
+authors: [AndrewMartinez]
+date: 2022-08-16
+tags:
+  - web api
+  - zero trust
+  - security
+  - openziti
+---
 # Securing Web APIs With OpenZiti
 
 In the late 2000s, I was a software engineer in the telecom industry, working on large data pipelines that would aggregate billing data from any carrier. The older the carrier, the more likely we would write a web scrapper to automate data retrieval. The new carriers had Web APIs. It was exciting and abundantly clear that these servers were exposed publicly on the internet.
@@ -59,7 +70,7 @@ Additionally, the following components are used in the following diagrams:
 
 ## SDK Host & Client Public Router
 
-![SDK-SDK-Public Router@4x.png](/blog/v1660143492122/A-IxGQkAi.png align="left")
+![SDK-SDK-Public Router@4x.png](/docs/blogs/openziti/v1660143492122/A-IxGQkAi.png align="left")
 
 - Uses SDKs for both the host and client, which associates processes to identities in OpenZiti for the highest level of security
 - Uses a public router deployed by the API provider
@@ -68,7 +79,7 @@ Additionally, the following components are used in the following diagrams:
 
 ## SDK Host & Client Private Router
 
-![SDK-SDK-Private Routers@4x.png](/blog/v1660143484083/TG8M_jfa1.png align="left")
+![SDK-SDK-Private Routers@4x.png](/docs/blogs/openziti/v1660143484083/TG8M_jfa1.png align="left")
 
 - Uses SDKs for both the host and client, which associates processes to identities in OpenZiti for the highest level of security
 - Uses a private router that requires a client to deploy the router (dial-out is required)
@@ -77,7 +88,7 @@ Additionally, the following components are used in the following diagrams:
 ## Tunneler Host & Client Public Router
 
 
-![TUN-TUN-Public Router@4x.png](/blog/v1660143502983/20FsHrueq.png align="left")
+![TUN-TUN-Public Router@4x.png](/docs/blogs/openziti/v1660143502983/20FsHrueq.png align="left")
 
 - Uses Tunellers for both the host and client, which associates hosts to identities in OpenZiti
 - Uses a public router deployed by the API provider
@@ -85,7 +96,7 @@ Additionally, the following components are used in the following diagrams:
 
 ## Tunneler Host & Client Private Router
 
-![TUN-TUN-Private Router@4x.png](/blog/v1660143496703/cVbNoLM2t.png align="left")
+![TUN-TUN-Private Router@4x.png](/docs/blogs/openziti/v1660143496703/cVbNoLM2t.png align="left")
 
 - Uses Tunellers for both the host and client, which associates hosts to identities in OpenZiti
 - Uses a private router that requires a client to deploy the router (dial-out is required)

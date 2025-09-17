@@ -4,7 +4,7 @@ date: 2023-11-20T19:22:36Z
 cuid: clp7anfg800070al4hqmwf29o
 slug: zrok-drives-an-early-preview
 authors: [MichaelQuigley]
-image: /blog/v1700235073954/cdeb4c90-ffed-461e-85f1-51340728e3cd.png
+image: /docs/blogs/openzitiv1700235073954/cdeb4c90-ffed-461e-85f1-51340728e3cd.png
 tags: 
   - cloud
   - golang
@@ -30,7 +30,7 @@ The first storage protocol offered by zrok Drives is powered by WebDAV. We're st
 
 Mount zrok Drives storage directly through things like Windows Explorer, and interact with your files using any Windows applications:
 
-![A Windows Explorer window showing a mounted zrok drive.](/blog/v1700503752861/77e81e88-28bb-4ec0-ab65-29592e4666e8.png)
+![A Windows Explorer window showing a mounted zrok drive.](/docs/blogs/openziti/v1700503752861/77e81e88-28bb-4ec0-ab65-29592e4666e8.png)
 
 We envision using these new zrok capabilities to augment and replace other complicated storage workflows using our own storage and our own resources. Like other zrok concepts, "Drives" is a primitive that can be used to build really clever and powerful storage sharing solutions.
 
@@ -42,7 +42,7 @@ We're cooking up some interesting new tooling and use cases designed to support 
 
 Like all of the other zrok facilities, these new "Drives" storage capabilities will integrate into your data center workloads using all of these same new data center tools that we're developing.
 
-![](/blog/v1700505083899/64e6a7af-6a14-4e4f-ab4e-af48a8c61791.png)
+![](/docs/blogs/openziti/v1700505083899/64e6a7af-6a14-4e4f-ab4e-af48a8c61791.png)
 
 Coming next year will be an S3 storage model. We envision being able to simultaneously share your storage resources using WebDAV for end users, and S3 for your truly production workloads. Personally, I'm starting to think of zrok Drives like a crazy, next-generation, "anywhere to anywhere" NAS-like system from the future.
 

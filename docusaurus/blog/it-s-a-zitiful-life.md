@@ -6,7 +6,7 @@ date: 2022-12-19T18:00:42Z
 cuid: clbv3rvhf02u6p2nvat895sfh
 slug: its-a-zitiful-life
 authors: [CurtTudor]
-image: /blog/v1671286570889/kpfd19y_F.jpg
+image: /docs/blogs/openzitiv1671286570889/kpfd19y_F.jpg
 tags: 
   - web
   - security
@@ -33,7 +33,7 @@ There are multiple reasons for hesitation.
 
 To illustrate my point, here's a snippet from the [Plex Remote-Access setup guide](https://support.plex.tv/articles/200289506-remote-access/):
 
-![](/blog/v1671291804369/QOCHtR1Af.png)
+![](/docs/blogs/openziti/v1671291804369/QOCHtR1Af.png)
 
 After reading the above snippet, there's no doubt some people would then be thinking...
 
@@ -61,7 +61,7 @@ And you can realize this reality without requiring your friends or family to ins
 
 The reality I refer to is enabled by our open-source [OpenZiti](https://github.com/openziti/) project and some of its components that we collectively refer to as [BrowZer](https://blog.openziti.io/introducing-openziti-browzer).
 
-![](/blog/v1671318547985/kIttXBpOF.png)
+![](/docs/blogs/openziti/v1671318547985/kIttXBpOF.png)
 
 More background and detail on BrowZer can be read in my introductory article where I discuss [modern web app security](https://blog.openziti.io/introducing-openziti-browzer).
 

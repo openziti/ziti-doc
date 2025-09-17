@@ -4,7 +4,7 @@ date: 2024-08-02T20:07:40Z
 cuid: clzd4zgd4000109l58wnp7wue
 slug: zrok-is-growing-up
 authors: [MichaelQuigley]
-image: /blog/v1722357921994/c2ddeddd-f52e-41a9-ace8-26ce7bb0259c.png
+image: /docs/blogs/openzitiv1722357921994/c2ddeddd-f52e-41a9-ace8-26ce7bb0259c.png
 tags: 
   - network
   - browsers
@@ -20,7 +20,7 @@ Over the last weeks, the team has worked together to figure out the best comprom
 
 The solution we've settled on is to introduce an "interstitial page" for free-tier accounts using public sharing. The interstitial page will be shown the first time an internet user visits a zrok public share (with a timer resetting every week). The page is there to make sure that the user visiting your share is very clear that the web resource they're visiting is shared through zrok, and very likely *not* a financial institution (or at least that they should be careful with personal information).
 
-![](/blog/v1722361596170/898a7bec-d03b-4aef-80bc-5860547001ef.png)
+![](/docs/blogs/openziti/v1722361596170/898a7bec-d03b-4aef-80bc-5860547001ef.png)
 
 The interstitial page is designed to only be displayed to interactive clients (web browsers presenting with a `User-Agent` header starting with `Mozilla/5.0`). Other clients like `curl`, or HTTP clients from various programming langues will bypass the interstitial page.
 

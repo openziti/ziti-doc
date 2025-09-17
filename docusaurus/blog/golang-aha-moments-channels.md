@@ -4,7 +4,7 @@ date: 2022-09-09T00:40:45Z
 cuid: cl7tr5gdz01hqpgnv7zbl75uh
 slug: golang-aha-moments-channels
 authors: [PaulLorenz]
-image: /blog/v1662683219596/YY8xRufSo.jpg
+image: /docs/blogs/openzitiv1662683219596/YY8xRufSo.jpg
 tags: 
   - golang
   - developer

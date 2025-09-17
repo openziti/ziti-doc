@@ -4,7 +4,7 @@ date: 2023-08-08T17:24:45Z
 cuid: cll2kn9yd000908mp7xv27s1k
 slug: got-5-minutes-secure-your-python-website-with-zero-trust
 authors: [GeoffBerl]
-image: /blog/v1681502054184/49a0e1d5-8cf8-46b9-81ce-101311ab78fa.png
+image: /docs/blogs/openzitiv1681502054184/49a0e1d5-8cf8-46b9-81ce-101311ab78fa.png
 tags: 
   - python
   - opensource
@@ -17,7 +17,7 @@ I have a website I built using Django; it's just a personal site meant to be use
 
 Well, why not, indeed? But as it stands, my current zero trust resources are using [ZTHA](https://openziti.io/docs/learn/core-concepts/zero-trust-models/ztha) (Zero Trust Host Access) or [ZTNA](https://openziti.io/docs/learn/core-concepts/zero-trust-models/ztna) (Zero Trust Network Access). Since my website is an application I manage, and I control the source, which is written in Python, I thought I would give the [OpenZiti Python SDK](https://github.com/openziti/ziti-sdk-py) a try. Using the SDK will give me [ZTAA](https://openziti.io/docs/learn/core-concepts/zero-trust-models/ztaa) (Zero Trust App Access). Details between the different models can be found [here](https://docs.openziti.io/docs/learn/core-concepts/zero-trust-models/overview), but as a summary, ZTNA is like a basic VPN, where one would have access to something on the network, but unencrypted traffic travels through one or more hosts. ZTHA is more like remote PC access; it narrows that access down to a specific host or IP and port on the network. ZTAA is the most secure; it restricts access down to a specific application, and it's integrated into the application, so all data is encrypted before it ever leaves the app. After I incorporate zero-trust on my website, I'll have users download the [Ziti Tunneler App](https://docs.openziti.io/docs/reference/tunnelers/) on their desktop or phone, and I'll give them an identity file that can be used to grant that user, on that device, access to my website directly, not the network, not the host, but directly into the application itself.
 
-![](/blog/v1691514336525/4b4a2bed-dffc-47c4-a708-c7f2ded56958.png)
+![](/docs/blogs/openziti/v1691514336525/4b4a2bed-dffc-47c4-a708-c7f2ded56958.png)
 
 In the image above, I am depicting the Oracle VPS running my existing network. The Controller and an Edge Router reside on this VPS. My phone connects to the network via a tunneler app called Ziti Mobile Edge. Other devices on my Ziti Network would each have their own identity and either tunneler or router to connect to the network. With the Ziti Python SDK, the tunneling is built into the source of my website by using the SDK, no extra router or tunneler is needed. The dashed lines simply show how I set my network up to allow either direct or relayed connection to the Django site, depending on which method is more efficient, but that's determined by the controller, so no need to worry about that. Just to clarify, though, I don't have to provide multiple routes, I could have skipped the step of giving my "Public Edge Router" the ability to access the service and, therefore, would only have one path to the site, the direct path.
 
@@ -124,9 +124,9 @@ Assuming we counted correctly, that's two, yes, two lines of code to add zero tr
 
 BaBAM!
 
-![](/blog/v1682352217190/2a924b25-14f4-436d-8e4e-ad2ae7a0e9fa.png)
+![](/docs/blogs/openziti/v1682352217190/2a924b25-14f4-436d-8e4e-ad2ae7a0e9fa.png)
 
-![](/blog/v1681415161388/5cf881e1-44b6-4b24-b15b-651ab3972071.png)
+![](/docs/blogs/openziti/v1681415161388/5cf881e1-44b6-4b24-b15b-651ab3972071.png)
 
 Now, my website is totally dark to the outside world but it still runs on a public VPS for access anywhere. Only people I trust will be authorized to access my site.
 

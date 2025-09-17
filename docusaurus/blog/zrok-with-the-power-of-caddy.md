@@ -4,7 +4,7 @@ date: 2023-09-08T15:24:23Z
 cuid: clmaqzvmg000808l2b8ij7yw8
 slug: zrok-with-the-power-of-caddy
 authors: [MichaelQuigley]
-image: /blog/v1694020472308/0ab25cb6-f4ef-4227-b487-5bc6a0b5c621.png
+image: /docs/blogs/openzitiv1694020472308/0ab25cb6-f4ef-4227-b487-5bc6a0b5c621.png
 tags: 
   - security
   - networking
@@ -199,7 +199,7 @@ Alternatively, if the tree of files contains `index.html` in any of the folders,
 
 Here's what it looks like:
 
-![](/blog/v1694111195934/b31243c9-c793-4873-9319-506aec9e312b.gif)
+![](/docs/blogs/openziti/v1694111195934/b31243c9-c793-4873-9319-506aec9e312b.gif)
 
 Caddy gives `zrok` a much nicer-looking file server experience. Built-in searching. Better MIME types. All together this makes for a much smoother and nicer experience.
 

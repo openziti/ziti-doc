@@ -1,3 +1,13 @@
+---
+slug: zero-trust-monitoring-with-openziti
+title: "Zero Trust Monitoring with OpenZiti"
+authors: [EugeneKobyakov]
+date: 2023-01-09
+tags:
+  - zero trust
+  - monitoring
+  - openziti
+---
 # Zero Trust monitoring with OpenZiti
 
 # Intro
@@ -13,7 +23,7 @@ Monitoring is very important in today's technology world. It allows system admin
 
 Monitoring systems are usually deployed alongside the main system or software that is being monitored. What this means is that monitoring systems must have the same security requirements as any other production system. If your monitoring system is vulnerable a sophisticated attacker can launch a multi-prong attack on your whole infrastructure. Disabling or impairing monitoring can lead to a delayed discovery of incidents or missing them altogether.
 
-![](/blog/v1672149178577/1otp4yY5I.png)
+![](/docs/blogs/openziti/v1672149178577/1otp4yY5I.png)
 
 This is a typical monitoring system at a very high level. The link from `Agent` to `Collector` is likely to go over the public Internet, which means that `Collector` endpoints are vulnerable to attacks by malevolent actors. These attacks can range from [DDOS](https://en.wikipedia.org/wiki/Denial-of-service_attack) to targeting vulnerabilities in `Collector` software (e.g. [Log4Shell](https://en.wikipedia.org/wiki/Log4Shell)). When the collector becomes compromised or impaired, your `Analytics` engine cannot trigger appropriate alerts. While these attack vectors can be mitigated with VPNs, firewalls with port-forwarding/ACL/IP-whitelists, etc., those solutions are non-trivial to implement and maintain.
 
@@ -21,7 +31,7 @@ OpenZiti is offering a solution that avoids deploying additional software (e.g V
 
 The rest of this article will walk through connecting modified popular agent and collector software over OpenZiti overlay network. It makes `Collector` inaccessible from the public Internet and makes it available only to `Agents` with proper permissions.
 
-![](/blog/v1670514568002/2iIdy5Ep1.png)
+![](/docs/blogs/openziti/v1670514568002/2iIdy5Ep1.png)
 
 # Implementation Overview
 
@@ -57,7 +67,7 @@ github.com/elastic/elastic-agent-libs => github.com/openziti-test-kitchen/elasti
 
 In the modified library the only code [change](https://github.com/elastic/elastic-agent-libs/compare/main...openziti-test-kitchen:elastic-agent-libs:zitify-transport?diff=unified) (aside from added dependency in `go.mod`) is this:
 
-![](/blog/v1672929730994/7b56ef69-a963-485e-aa4a-f0e7be490a47.png)
+![](/docs/blogs/openziti/v1672929730994/7b56ef69-a963-485e-aa4a-f0e7be490a47.png)
 
 The Ziti dialer takes care of matching the target address to the service with a matching intercept.
 
@@ -100,7 +110,7 @@ To tie it all together, the OpenZiti network has to be configured with appropria
 
 The diagram below shows how ziti configuration is mapped/used in the LogStash/Beats deployments.
 
-![](/blog/v1671648706947/ZzjDwkvvM.png)
+![](/docs/blogs/openziti/v1671648706947/ZzjDwkvvM.png)
 
 ## Running Zitified LogStash
 

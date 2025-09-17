@@ -4,7 +4,7 @@ date: 2023-02-22T17:55:42Z
 cuid: clefz7tjy000409l2fd68ako3
 slug: the-road-ahead-for-zrok
 authors: [MichaelQuigley]
-image: /blog/v1676487591508/4549ff85-029e-442a-bcbc-94db870e9d63.jpeg
+image: /docs/blogs/openzitiv1676487591508/4549ff85-029e-442a-bcbc-94db870e9d63.jpeg
 tags: 
   - networking
   - roadmap

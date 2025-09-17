@@ -6,7 +6,7 @@ date: 2023-03-15T21:06:11Z
 cuid: clfa69o4m000509lbe5qagw7h
 slug: private-dns-on-windows
 authors: [ClintDovholuk]
-image: /blog/v1678971944159/0a3cfe23-5f9a-4576-a89d-e272b3b360d4.png
+image: /docs/blogs/openzitiv1678971944159/0a3cfe23-5f9a-4576-a89d-e272b3b360d4.png
 tags: 
   - dns
   - security
@@ -34,11 +34,11 @@ The NRPT is really neat. Through the NRPT, we can provide instructions to the op
 
 Last year I needed to do some remote work on my mother's computer. Instead of using one of the existing remote desktop solutions out there, I used OpenZiti. I didn't feel like trying to get my mother to download and install the **correct** app, the correct version, etc. I was able to send her an email with the exact link to install and a one-use token to use. Here's what I wanted to do:
 
-![](/blog/v1678898953353/2f0dff3a-bf7c-463e-9bc4-bcbeb4bac89c.png)
+![](/docs/blogs/openziti/v1678898953353/2f0dff3a-bf7c-463e-9bc4-bcbeb4bac89c.png)
 
 Once enrolled, her RDP service (and only her RDP service) was available to me via my OpenZiti overlay network. I defined a single service so I could use RDP to remote into her machine. To make it easy for me to remember, I defined a private DNS entry called "mom.rdp", I authorized my identity to dial and hers to host and then I was able to RDP to mom.rdp!
 
-![](/blog/v1678898585739/e840fe62-290a-482d-a7e5-2597e1d47c94.png)
+![](/docs/blogs/openziti/v1678898585739/e840fe62-290a-482d-a7e5-2597e1d47c94.png)
 
 In this example, I need my operating system to be able to resolve "mom.rdp" to an IP address so that my computer knows how to send data across the OpenZiti overlay.
 

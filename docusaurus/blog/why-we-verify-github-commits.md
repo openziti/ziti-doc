@@ -4,7 +4,7 @@ date: 2024-05-24T16:00:14Z
 cuid: clwkvbmet00000ak6d5z5btad
 slug: why-we-verify-github-commits
 authors: [KennethBingham]
-image: /blog/v1716320888402/f7bcebeb-a9e6-4094-8e6c-fac73ce8a9c5.png
+image: /docs/blogs/openzitiv1716320888402/f7bcebeb-a9e6-4094-8e6c-fac73ce8a9c5.png
 tags: 
   - github
   - git
@@ -55,7 +55,7 @@ CommitDate: Tue May 21 09:52:06 2024 -0400
 
 In the above example, Bob specifies the committer and author metadata of the next commit to match a known email address before pushing it to GitHub, which displays the commit as if that bot had sent it.
 
-![](/blog/v1716492848880/f969b51e-be03-4a7a-923e-f3250601dc69.png)
+![](/docs/blogs/openziti/v1716492848880/f969b51e-be03-4a7a-923e-f3250601dc69.png)
 
 Bob can also update the author and committer metadata on the last commit (`HEAD`, or any commit during a rebase) and push it to GitHub.
 
