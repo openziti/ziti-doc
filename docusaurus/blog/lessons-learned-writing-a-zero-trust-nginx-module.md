@@ -11,7 +11,7 @@ tags:
 
 # Lessons Learned Writing A Zero Trust NGINX Module
 
-I authored my first NGINX module to offload [OpenZiti](http://openziti.io) connections into a legacy application deployment. That work can be seen in Github in the OpenZiti [`ngx_ziti_module`](https://github.com/openziti/ngx_ziti_module) and an article explaining its operation can be found here: [NGINX& ZeroTrust API Security](https://blog.openziti.io/nginx-zerotrust-api-security)
+I authored my first NGINX module to offload [OpenZiti](http://openziti.io) connections into a legacy application deployment. That work can be seen in Github in the OpenZiti [`ngx_ziti_module`](https://github.com/openziti/ngx_ziti_module) and an article explaining its operation can be found here: [NGINX& ZeroTrust API Security](./nginx-zerotrust-api-security.mdx)
 
 <!-- truncate -->
 

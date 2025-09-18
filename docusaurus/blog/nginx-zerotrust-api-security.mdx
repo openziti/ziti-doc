@@ -70,7 +70,7 @@ stream {
 
 This NGINX instance listens on three ports: 8080, 8081, and 8082. If this NGINX instance is hosted in the cloud and listening openly on the internet, anyone can attempt to connect. This leaves the instance and its back-end services open to attack - including the [top ten OWASP](https://owasp.org/www-project-top-ten/) attack vectors. Using OpenZiti the NGINX instance can be instructed to load `ngx_ziti_module` and any number of identities hosting any number of services defined in the OpenZiti network. Implementing OpenZiti via NGINX would change our scenario diagram to the following:
 
-<img src="/blog/v1669834486585/vXVR-gs9R.png" style="height:150px"/>
+<img src="/blog/v1669834486585/vXVR-gs9R.png" style={{ height: '150px' }} />
 
 To bind (host) the OpenZiti Services via the NGINX instance, we need the following configuration.
 
