@@ -6,11 +6,11 @@ slug: golang-aha-moments-generics
 authors: [PaulLorenz]
 image: /blogs/openziti/v1663771708776/OXjhFrMmZ.jpg
 tags: 
-  - go
+  - golang
   - developer
   - generics
   - openziti
-
+  - golang-aha
 ---
 
 ## Introduction
@@ -21,7 +21,7 @@ sparked joy.
 
 <!-- truncate -->
 
-This [series](https://blog.openziti.io/series/golang-aha) is targeted both at new team members and for anyone in the Go community who might be interested. I'm very happy to hear from others about their own 'aha'
+This [series](./tags/golangaha) is targeted both at new team members and for anyone in the Go community who might be interested. I'm very happy to hear from others about their own 'aha'
 moments and also how the solutions presented strike your sensibilities. Suggested improvements, corrections and constructive criticism are welcome.    
 
 This second installment will cover various topics related to Go generics.
@@ -29,14 +29,14 @@ This second installment will cover various topics related to Go generics.
 ## Generics Overview
 Generics were introduced into the Go language in version 1.18 after years of debate and discussion. 
 
-This article assumes you are already familiar with generics from other languages and is not focused on the basics of using generics. Other than a brief overview, it it is focused on shortcomings, workarounds and considerations more specific to Go. For some links to more introductory works, please see the [further reading](https://blog.openziti.io/golang-aha-moments-generics#heading-further-readingviewing) section at the end.
+This article assumes you are already familiar with generics from other languages and is not focused on the basics of using generics. Other than a brief overview, it it is focused on shortcomings, workarounds and considerations more specific to Go. For some links to more introductory works, please see the [further reading](./golang-aha-moments-generics.md#heading-further-readingviewing) section at the end.
 
 The initial release of Go generics seems focused on two things.
 
 * Reducing copy/paste code
 * Better type safety and removing casts for container types
 
-If you're already familiar with these, feel free to skip ahead to the [learnings section](https://blog.openziti.io/golang-aha-moments-generics#heading-generics-learnings).
+If you're already familiar with these, feel free to skip ahead to the [learnings section](./golang-aha-moments-generics.md#heading-generics-learnings).
 
 ### Copy/Paste Reduction
 For an example of copy/paste reduction, take the classic `math.Min` function. The standard library (as of Go 1.19) only has `math.Min(x, y float64) float64`. If you want to find the minimum of any other types you either need to do some casting or write your own. 

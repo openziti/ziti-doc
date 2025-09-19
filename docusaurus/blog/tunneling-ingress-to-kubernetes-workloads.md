@@ -12,7 +12,7 @@ tags:
 
 ---
 
-The [previous post](/zitifying-scp) showed how to use a zero trust overlay like Ziti for transferring files by 
+The [previous post](./zitifying-scp.md) showed how to use a zero trust overlay like Ziti for transferring files by 
 zitifying `scp`. Next up in the list of zitifications is `kubectl`. [Kubernetes](https://Kubernetes.io/) is a 
 container orchestration system. Its purpose is to deploy, scale, and manage the deployment containers. Containers 
 are self-contained, pre-built images of software generally with a singular purpose. 

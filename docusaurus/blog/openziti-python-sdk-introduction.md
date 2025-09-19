@@ -20,7 +20,7 @@ OpenZiti project adds security layers that make your service available without e
 
 <!-- truncate -->
 
-In our previous posts, we introduced the concept of [Zitification](https://openziti.io/docs/reference/glossary/#zitification-zitified-zitify) -- taking an app and changing it to use a secure, zero-trust, overlay network -- and shared a [few](https://openziti.io/blog/zitification/zitifying-ssh/) [examples](https://openziti.io/blog/zitification/zitifying-scp/) we developed internally.
+In our previous posts, we introduced the concept of [Zitification](https://openziti.io/docs/reference/glossary/#zitification-zitified-zitify) -- taking an app and changing it to use a secure, zero-trust, overlay network -- and shared a [few](./zitifying-ssh.md) [examples](./zitifying-scp.md) we developed internally.
 
 This article will show how to *zitify* your Python applications with minor code changes.
 
@@ -168,7 +168,7 @@ We would love to hear from you about your applications and if decide that [OpenZ
 
 Checkout some of our projects that use OpenZiti Python SDK:
 
-* [Call a Dark Webhook from AWS Lambda](https://blog.openziti.io/my-intern-assignment-call-a-dark-webhook-from-aws-lambda)
+* [Call a Dark Webhook from AWS Lambda](./my-intern-assignment-call-a-dark-webhook-from-aws-lambda)
     
 * [Zitified Ansible/Paramiko](https://github.com/openziti-test-kitchen/ansible-paramikoz-demo)
     

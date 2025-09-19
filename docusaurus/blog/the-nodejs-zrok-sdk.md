@@ -20,9 +20,9 @@ being part of our community!
 
 <!-- truncate -->
 
-If `zrok` is new to you, please check out this post [**introducing**`zrok`](https://blog.openziti.io/introducing-zrok).
+If `zrok` is new to you, please check out this post [**introducing**`zrok`](./introducing-zrok.md).
 
-`zrok` is built to enable developers to seamlessly and securely share their applications (we previously released our [`zrok` Golang SDK](https://blog.openziti.io/the-zrok-sdk), and our [`zrok` Python SDK](https://blog.openziti.io/the-python-zrok-sdk)). Using just a little code enables you to share your app through `zrok`'s robust network.
+`zrok` is built to enable developers to seamlessly and securely share their applications (we previously released our [`zrok` Golang SDK](./the-zrok-sdk.md), and our [`zrok` Python SDK](./the-python-zrok-sdk)). Using just a little code enables you to share your app through `zrok`'s robust network.
 
 Today we are excited to expand our `zrok` SDK philosophy by introducing a NodeJS SDK (available as of `zrok` `0.4.30`), and that is what we'll discuss in this article.
 
@@ -73,7 +73,7 @@ First, we use the `zrok` object to load the root config and initialize, and then
 
 We create a private `zrok` share, and then we call `zrok.express` using the share token we just created.
 
-This `zrok.express` call spins up a NodeJS Express server, ***however***, the Express server is transparently instrumented by the `zrok` SDK (and its embedded [Ziti SDK for NodeJS](https://blog.openziti.io/securing-nodejs-applications)) to enable the Express web server to "bind" (i.e. host) the Ziti Service represented by the `zrok` share.
+This `zrok.express` call spins up a NodeJS Express server, ***however***, the Express server is transparently instrumented by the `zrok` SDK (and its embedded [Ziti SDK for NodeJS](./securing-nodejs-applications)) to enable the Express web server to "bind" (i.e. host) the Ziti Service represented by the `zrok` share.
 
 In other words, the NodeJS Express web server does ***NOT*** listen on an open TCP port as traditional NodeJS Express servers do (*because that's way too insecure*).
 
@@ -81,7 +81,7 @@ Instead, a `zrok`\-enabled NodeJS Express server listens ***ONLY*** for incoming
 
 The `SIGINT` handler at the end just handles a CTRL-C event, and tears down the `zrok` share.
 
-The above example employs a `private` share. You can opt to use a `public` share if you like; in that case, you can find it [here](https://blog.openziti.io/the-zrok-oauth-public-frontend).
+The above example employs a `private` share. You can opt to use a `public` share if you like; in that case, you can find it [here](./the-zrok-oauth-public-frontend).
 
 To expand this example from here you would simply declare any routes your app wants to expose and it's just like producing a typical Express server. No additional complications!
 
@@ -124,7 +124,7 @@ The URL you will share with people will resemble this: `https://<SOME_SHARE_TOKE
 
 (`SOME_SHARE_TOKEN` is produced by your `zrok share private` command)
 
-[OpenZiti BrowZer provides the magic](https://blog.openziti.io/introducing-openziti-browzer) that ties everything together. We are currently testing this new `zrok+BrowZer` functionality and we will release it soon.
+[OpenZiti BrowZer provides the magic](./introducing-openziti-browzer.md) that ties everything together. We are currently testing this new `zrok+BrowZer` functionality and we will release it soon.
 
 Once it has been shipped, we will be back here posting articles that discuss all the details, so be sure to subscribe to this blog's newsletter so you don't miss the announcements.
 

@@ -5,15 +5,16 @@ import {Config} from "@docusaurus/types";
 import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
-import remarkReplaceMetaUrl from './src/plugins/remark/remark-replace-meta-url';
 import {remarkScopedPath} from "./src/plugins/remark/remarkScopedPath";
 import {
     docUrl, addDocsRedir,
     DOCUSAURUS_URL, DOCUSAURUS_DEBUG, hotjarId
 } from "@openclint/docusaurus-shared/node";
 import path from "node:path";
-import remarkYouTube from "../../../src/plugins/remarkYouTube";
-const docsBase = '/docs/openziti';
+import {remarkYouTube, remarkReplaceMetaUrl} from "@openclint/docusaurus-shared/plugins";
+const baseUrl = '/docs';
+const openziti = 'openziti';
+const docsBase = `${baseUrl}/${openziti}`;
 
 const REMARK_MAPPINGS = [
     { from: '@onpremdocs',   to: '/onprem' },
@@ -22,143 +23,11 @@ const REMARK_MAPPINGS = [
 
 const redirectsArr: { to: string; from: string[] }[] = [
   {
-    to: docUrl(docsBase, '/category/deployments'),
+    to: docUrl(openziti, '/category/deployments'),
     from: [docUrl(docsBase, '/reference/deployments')]
   },
   {
-    to: docUrl(docsBase, '/guides/deployments/linux/controller/deploy'),
-    from: [docUrl(docsBase, '/reference/deployments/controller')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/deployments/linux/router/cli-mgmt'),
-    from: [docUrl(docsBase, '/reference/deployments/router/cli-mgmt')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/deployments/linux/router/deploy'),
-    from: [docUrl(docsBase, '/reference/deployments/router/deployment')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/deployments/linux/router/router-configuration'),
-    from: [docUrl(docsBase, '/reference/deployments/router/router-configuration')]
-  },
-  {
-    to: docUrl(docsBase, '/reference/tunnelers/docker'),
-    from: [docUrl(docsBase, '/reference/tunnelers/linux/container')]
-  },
-  {
-    to: docUrl(docsBase, '/category/core-concepts'),
-    from: [docUrl(docsBase, '/learn/core-concepts')]
-  },
-  {
-    to: docUrl(docsBase, '/reference/tunnelers/nginx'),
-    from: [docUrl(docsBase, '/guides/securing-apis/aks-api-with-nginx-ziti-module')]
-  },
-  {
-    to: docUrl(docsBase, '/category/cloud'),
-    from: [docUrl(docsBase, '/guides/Public_Cloud_Deployment')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/topologies/services'),
-    from: [docUrl(docsBase, '/guides/Public_Cloud_Deployment/Services')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/deployments/cloud/router'),
-    from: [docUrl(docsBase, '/guides/Public_Cloud_Deployment/Router')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/deployments/cloud/controller'),
-    from: [docUrl(docsBase, '/guides/Public_Cloud_Deployment/Controller')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/topologies/gateway/tunneler'),
-    from: [docUrl(docsBase, '/guides/Local_Gateway/EdgeTunnel')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/topologies/gateway/router'),
-    from: [docUrl(docsBase, '/guides/Local_Gateway/EdgeRouter')]
-  },
-  {
-    to: docUrl(docsBase, '/guides/deployments/linux/controller/backup'),
-    from: [docUrl(docsBase, '/guides/database-backup'), docUrl(docsBase, '/reference/backup/controller')]
-  },
-  {
-    to: docUrl(docsBase, '/reference/tunnelers/nginx'),
-    from: [docUrl(docsBase, '/category/securing-apis')]
-  },
-  {
-    to: docUrl(docsBase, '/category/cloud'),
-    from: [docUrl(docsBase, '/category/public-cloud-deployment')]
-  },
-  {
-    to: docUrl(docsBase, '/category/gateway'),
-    from: [docUrl(docsBase, '/category/local-gateway')]
-  },
-  {
-    to: docUrl(docsBase, '/category/kubernetes'),
-    from: [docUrl(docsBase, '/category/hosting-openziti')]
-  },
-  {
-    to: docUrl(docsBase, '/learn/core-concepts/data-flow-explainer'),
-    from: [docUrl(docsBase, '/guides/data-flow-explainer')],
-  },
-  {
-    to: docUrl(docsBase, '/learn/core-concepts/metrics/overview'),
-    from: [docUrl(docsBase, '/core-concepts/metrics'), docUrl(docsBase, '/core-concepts/metrics/metric-types')],
-  },
-  {
-    to: docUrl(docsBase, '/learn/core-concepts/security/authentication/external-jwt-signers'),
-    from: ['/ziti/security/authentication/external-jwt-signers.html'],
-  },
-  {
-    to: docUrl(docsBase, '/learn/core-concepts/identities/enrolling'),
-    from: ['/ziti/identities/enrolling.html'],
-  },
-  {
-    to: docUrl(docsBase, '/reference/tunnelers/'),
-    from: ['/ziti/clients/tunneler.html'],
-  },
-  {
-    to: docUrl(docsBase, '/reference/tunnelers/linux/'),
-    from: ['/ziti/clients/linux.html'],
-  },
-  {
-    to: docUrl(docsBase, '/learn/core-concepts/pki'),
-    from: [docUrl(docsBase, '/manage/pki'), '/operations/pki'],
-  },
-  {
-    to: docUrl(docsBase, '/reference/developer/sdk'),
-    from: ['/api/ziti-sdk-swift', '/api/ziti-c-sdk', '/api/ziti-sdk-csharp'],
-  },
-  {
-    to: docUrl(docsBase, '/reference/developer/sdk'),
-    from: [docUrl(docsBase, '/core-concepts/clients/sdks')],
-  },
-  {
-    to: docUrl(docsBase, '/learn/introduction/'),
-    from: [docUrl(docsBase, '/learn'), docUrl(docsBase, '/introduction/intro'), '/docusaurus/docs/overview', '/ziti/overview/', '/ziti/overview.html'],
-  },
-  {
-    to: docUrl(docsBase, '/learn/quickstarts/'),
-    from: ['/ziti/quickstarts/quickstart-overview.html', '/ziti/quickstarts/networks-overview.html', docUrl(docsBase, '/learn/quickstarts/network'), docUrl(docsBase, '/quickstarts/network')],
-  },
-  {
-    to: docUrl(docsBase, '/learn/introduction/openziti-is-software'),
-    from: [docUrl(docsBase, '/introduction/zitiSoftwareArchitecture'), '/ziti/software-architecture.html'],
-  },
-  {
-    to: '/policies/CODE_OF_CONDUCT',
-    from: ['/policies'],
-  },
-  {
-    to: docUrl(docsBase, '/learn/quickstarts/services/'),
-    from: [docUrl(docsBase, '/quickstarts/services/ztna')],
-  },
-  {
-    to: docUrl(docsBase, '/learn/quickstarts/zac/'),
-    from: [docUrl(docsBase, '/quickstarts/zac/installation')],
-  },
-  {
-    to: docUrl(docsBase, '/guides/external-auth/browzer/'),
+    to: docUrl(openziti, '/guides/external-auth/browzer/'),
     from: [docUrl(docsBase, '/identity-providers-for-browZer')]
   }
 ];
@@ -174,7 +43,7 @@ const port =
 const config: Config = {
     title: 'OpenZiti',
     tagline: 'Replacing Infrastructure With Software',
-    url: DOCUSAURUS_URL || `http://docusaurus.local:${port}`,
+    url: `http://localhost:${port}`,
     baseUrl: '/docs',
     trailingSlash: undefined,
     onBrokenLinks: 'throw',
@@ -244,10 +113,13 @@ const config: Config = {
             {
                 showReadingTime: true,
                 routeBasePath: 'openziti/blog',
+                tagsBasePath: 'tags',
                 include: ['**/*.{md,mdx}'],
                 path: 'blog',
                 remarkPlugins: [
-                    remarkYouTube
+                    remarkYouTube,
+                    [remarkReplaceMetaUrl, {from: '@staticoz', to: 'openziti'}],
+                    [remarkScopedPath, { mappings: REMARK_MAPPINGS }],
                 ],
                 blogSidebarCount: 'ALL',
                 blogSidebarTitle: 'All posts',
@@ -299,7 +171,8 @@ const config: Config = {
             } satisfies ClientRedirectsOptions,
         ],
         ['@docusaurus/plugin-google-tag-manager', {id: `openziti-gtm`, containerId: 'GTM-5SF399H3'}],
-        ['@docusaurus/plugin-content-pages',{id: `openziti-pages`, path: `src/pages`, routeBasePath: '/openziti'}],
+        ['@docusaurus/plugin-content-pages',{id: `openziti-root-pages`, path: `src/pages`, routeBasePath: '/'}],
+        ['@docusaurus/plugin-content-pages',{id: `openziti-pages`, path: `src/pages`, routeBasePath: 'openziti'}],
         [
             '@docusaurus/plugin-content-docs',
             {

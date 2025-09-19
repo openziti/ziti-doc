@@ -31,7 +31,7 @@ Also noteworthy is that BrowZer places no burden upon web application developers
 
 This is a great enabler. For example, if you are operating a web app licensed from a 3rd party that you want to make dark (e.g. [Mattermost](https://netfoundry.io/why-we-switched-to-mattermost/)), and you can't make alterations to it, there's no problem. The same goes for a web app you *can* alter, but elect not to.
 
-BrowZer has you covered because it does the necessary [Zitification](https://blog.openziti.io/zitification) instrumentation of your web application automatically, on the fly, as it is being loaded from the web server to the user's browser. It's what I call touchless-Zitification. More details on how this is accomplished are discussed below.
+BrowZer has you covered because it does the necessary [Zitification](./zitification.md) instrumentation of your web application automatically, on the fly, as it is being loaded from the web server to the user's browser. It's what I call touchless-Zitification. More details on how this is accomplished are discussed below.
 
 %%[browzer-canny-feedback] 
 

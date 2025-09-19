@@ -19,11 +19,11 @@ In this post I'll continue showing the power of OpenZiti and its SDK. This time 
 
 If you're a regular reader of this blog, the concept of `zitification`, i.e. embedding OpenZiti SDK into you application, should be familiar to you. We've covered this topic before -- here are some links if you're new to this blog, or missed them:
 
-* [Zitifying SSH](https://openziti.io/blog/zitification/zitifying-ssh/)
+* [Zitifying SSH](./zitifying-ssh.md)
     
-* [Securing NodeJS Apps](https://blog.openziti.io/securing-nodejs-applications)
+* [Securing NodeJS Apps](./securing-nodejs-applications.md)
     
-* [Secure Python Website](https://blog.openziti.io/got-5-minutes-secure-your-python-website-with-zero-trust)
+* [Secure Python Website](./got-5-minutes-secure-your-python-website-with-zero-trust.md)
     
 
 Zitification allows you as a developer to achieve a true end-to-end secure overlay connectivity between your applications.
@@ -88,6 +88,6 @@ Try it out and give us feedback on [Discourse](https://openziti.discourse.group/
 
 Further reading:
 
-* [Securing Web APIs With OpenZiti](https://blog.openziti.io/securing-web-apis-with-openziti)
+* [Securing Web APIs With OpenZiti](./securing-web-apis-with-openziti)
     
-* [zrok with the Power of Caddy](https://blog.openziti.io/zrok-with-the-power-of-caddy)
+* [zrok with the Power of Caddy](./zrok-with-the-power-of-caddy)

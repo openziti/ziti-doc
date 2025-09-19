@@ -62,7 +62,7 @@ So, you want a VPN I'll build you a VPN. How hard can it really be??
 
 ## Enter zrok
 
-If you have not yet tried or heard about zrok, I invite you to read the [zrok series](https://blog.openziti.io/series/zrok) on this very blog.
+If you have not yet tried or heard about zrok, I invite you to read the [zrok series](./tags/zrok) on this very blog.
 
 The reasons we chose to implement VPN as part of [zrok](https://zrok.io/) are the following:
 

@@ -10,7 +10,7 @@ tags:
   - developer
   - channels
   - openziti
-
+  - golang-aha
 ---
 
 ## Introduction
@@ -22,7 +22,7 @@ sparked joy.
 
 <!-- truncate -->
 
-This [series](https://blog.openziti.io/series/golang-aha) is targeted both at new team members and for anyone in the Go community who might be interested. We'd be very happy to hear from others about their own 'aha' moments and also how the solutions presented strike your sensibilities. Suggested improvements, corrections and constructive criticism are welcome.
+This [series](./tags/golangaha) is targeted both at new team members and for anyone in the Go community who might be interested. We'd be very happy to hear from others about their own 'aha' moments and also how the solutions presented strike your sensibilities. Suggested improvements, corrections and constructive criticism are welcome.
 
 This first installment will cover various topics related to Go channels.
 

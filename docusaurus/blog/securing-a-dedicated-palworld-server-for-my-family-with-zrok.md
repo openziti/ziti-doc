@@ -26,7 +26,7 @@ Enter [zrok](https://zrok.io).
 
 ## Securing Palworld
 
-The company I work for, [NetFoundry](https://netfoundry.io), created zrok, but I hadn't had a chance to use it in the wild yet. I read an article by Clint Dovholuk explaining how to use zrok to secure a Minecraft server - you can read that article [here](https://blog.openziti.io/minecraft-over-zrok). I followed the steps as a zrok "newbie" to do the same for Palworld.
+The company I work for, [NetFoundry](https://netfoundry.io), created zrok, but I hadn't had a chance to use it in the wild yet. I read an article by Clint Dovholuk explaining how to use zrok to secure a Minecraft server - you can read that article [here](./minecraft-over-zrok). I followed the steps as a zrok "newbie" to do the same for Palworld.
 
 *The instructions below are for setting up zrok and Palworld on a PC. zrok can be run in Windows/Mac/Linux, but Palworld is a PC game.*
 

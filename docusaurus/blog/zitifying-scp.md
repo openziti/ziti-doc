@@ -11,13 +11,13 @@ tags:
 
 ---
 
-In the [previous post](https://blog.openziti.io/zitifying-ssh) we talked about how we could take a well-known 
+In the [previous post](./zitifying-ssh.md) we talked about how we could take a well-known 
 application and improve its security by zitifying it, producing `zssh`. The logical next step after zitifying `ssh` 
 would be to extend the functionality of `zssh` to cover moving files securely as well, enter `zscp`. A zitified `scp` 
 effectively creates a more secure command line tool for sending and receiving files between ziti-empowered devices. 
 Once zitified, we can use `zscp` using ziti identity names just like we did in 
-[zitifying ssh](https://blog.openziti.io/zitifying-ssh). I recommend reading the 
-[previous article](https://blog.openziti.io/zitifying-ssh)) if you haven't to learn more about the benefits of 
+[zitifying ssh](./zitifying-ssh.md). I recommend reading the 
+[previous article](./zitifying-ssh.md) if you haven't to learn more about the benefits of 
 zitifying tools like `ssh` and `scp`.
 
 <!-- truncate -->
@@ -110,4 +110,4 @@ Recursive copying also works to retrieve all contents of a directory on the remo
 
 I hope this post has helped you get familiar with another ziti-empowered developer's tool and hopefully it's becoming more clear why zitifying your application will make it more resilient to attack and make the act of connecting to remote services trivial.
 
-Have a look at the code over at [GitHub](https://github.com/openziti-test-kitchen/zssh/blob/main/zssh/zscp/main.go) or continue reading on to the next zitification - [kubectl](https://blog.openziti.io/kubernetes)!
+Have a look at the code over at [GitHub](https://github.com/openziti-test-kitchen/zssh/blob/main/zssh/zscp/main.go) or continue reading on to the next zitification - [kubectl](./kubernetes)!

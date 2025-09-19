@@ -12,7 +12,7 @@ tags:
 
 ---
 
-Not too long ago, I authored a post about why [Go is Amazing for Zero Trust](https://blog.openziti.io/go-is-amazing-for-zero-trust). In that post, I write about one of OpenZiti's superpowers that allows your applications to have no listening ports by integrating an OpenZiti SDK into it. It's always interesting writing content that makes perfect sense to you but after you publish it, someone immediately asks a question that's so obvious, you wonder how it is you, and everyone that reviewed it missed it. I published that blog post, and the first (well-deserved) [response was](https://www.reddit.com/r/golang/comments/18hykre/comment/kdb2ftb/?utm_source=reddit&utm_medium=web2x&context=3):
+Not too long ago, I authored a post about why [Go is Amazing for Zero Trust](./go-is-amazing-for-zero-trust.md). In that post, I write about one of OpenZiti's superpowers that allows your applications to have no listening ports by integrating an OpenZiti SDK into it. It's always interesting writing content that makes perfect sense to you but after you publish it, someone immediately asks a question that's so obvious, you wonder how it is you, and everyone that reviewed it missed it. I published that blog post, and the first (well-deserved) [response was](https://www.reddit.com/r/golang/comments/18hykre/comment/kdb2ftb/?utm_source=reddit&utm_medium=web2x&context=3):
 
 <!-- truncate -->
 

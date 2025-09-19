@@ -9,7 +9,7 @@ tags:
 
 ---
 
-As we learned in the [opening post](https://blog.openziti.io/zitification), "zitifying" an application means to embed a 
+As we learned in the [opening post](./zitification.md), "zitifying" an application means to embed a 
 Ziti SDK into an application and leverage the power of a [Ziti Network](https://openziti.io/docs) to provide secure, 
 truly zero-trust access to your application no matter where in the world that application goes. In this post, we will 
 see how we have zitified `ssh` and why. Future posts will expand on this even further by showing how NetFoundry 
@@ -117,6 +117,6 @@ $ ./zssh ClintLinux INFO\[0000\] connection to edge router using token 909dfb4f-
 
 Hopefully this post has been helpful and insightful. Zitifying an application is *POWERFUL*!!!!
 
-The next post in this series will cover how we extended the same code we used for `zssh` and [zitified scp](https://blog.openziti.io/zitifying-scp).
+The next post in this series will cover how we extended the same code we used for `zssh` and [zitified scp](./zitifying-scp).
 
 Have a look at the code over at [GitHub](https://github.com/openziti-test-kitchen/zssh/blob/main/zssh/zssh/main.go)

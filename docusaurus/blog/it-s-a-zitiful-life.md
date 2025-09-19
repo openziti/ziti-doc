@@ -23,7 +23,7 @@ In this article, I discuss that while self-hosting your Plex media server is *ea
 
 <!-- truncate -->
 
-Here I'll introduce you to [BrowZer](https://blog.openziti.io/introducing-openziti-browzer), a novel group of open-source components from the [OpenZiti project](https://github.com/openziti/) that collectively enables you to operate private-to-the-internet web applications like Plex while still easily providing secure access for your authorized internet-based remote users using just a browser. No VPN. No plugins. No installation. No hassle.
+Here I'll introduce you to [BrowZer](./introducing-openziti-browzer.md), a novel group of open-source components from the [OpenZiti project](https://github.com/openziti/) that collectively enables you to operate private-to-the-internet web applications like Plex while still easily providing secure access for your authorized internet-based remote users using just a browser. No VPN. No plugins. No installation. No hassle.
 
 ## Remote Access?
 
@@ -61,11 +61,11 @@ There is a way to make your Plex server invisible on the internet, secure and un
 
 And you can realize this reality without requiring your friends or family to install any additional software (*like a VPN, yuck*) on their client-side laptop, tablet, or mobile phone. And all they'd need is the browser they already use every day.
 
-The reality I refer to is enabled by our open-source [OpenZiti](https://github.com/openziti/) project and some of its components that we collectively refer to as [BrowZer](https://blog.openziti.io/introducing-openziti-browzer).
+The reality I refer to is enabled by our open-source [OpenZiti](https://github.com/openziti/) project and some of its components that we collectively refer to as [BrowZer](./introducing-openziti-browzer.md).
 
 ![](/blogs/openziti/v1671318547985/kIttXBpOF.png)
 
-More background and detail on BrowZer can be read in my introductory article where I discuss [modern web app security](https://blog.openziti.io/introducing-openziti-browzer).
+More background and detail on BrowZer can be read in my introductory article where I discuss [modern web app security](./introducing-openziti-browzer.md).
 
 %%[browzer-canny-feedback] 
 

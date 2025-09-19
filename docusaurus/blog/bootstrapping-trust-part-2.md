@@ -12,15 +12,11 @@ tags:
 
 If you have read through the entire series up to here, welcome! If you have not, please consider reading the whole series:
 
-* [Part 1: Encryption Everywhere](/bootstrapping-trust-part-1-encryption-everywhere)
-    
-* [Part 2: A Primer On Public-Key Cryptography](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography)
-    
-* [Part 3: Certificates](/bootstrapping-trust-part-3-certificates)
-    
-* [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust)
-    
-* [Part 5: Bootstrapping Trust](/bootstrapping-trust-part-5-bootstrapping-trust)
+* [Part 1: Encryption Everywhere](./bootstrapping-trust-part-1.md)
+* [Part 2: A Primer On Public-Key Cryptography](./bootstrapping-trust-part-2.md)
+* [Part 3: Certificates](./bootstrapping-trust-part-3.md)
+* [Part 4: Certificate Authorities & Chains Of Trust](./bootstrapping-trust-part-4.md)
+* [Part 5: Bootstrapping Trust](./bootstrapping-trust-part-5.md)
     
 
 It isn't easy to talk about bootstrapping trust without covering the basics of public-key cryptography. The reader may skip this article if the concepts of encryption, signing, and public/private keys are familiar. However, if not, I implore that you bear the brunt of this article as later parts will heavily rely on it.
@@ -105,4 +101,4 @@ A JWT specifies the format of the bearer token as a header, payload, and signatu
 
 # Closing
 
-This article should have shed light on public-key cryptography by explaining the roles of the public and private keys. It should have also provided a glimpse at the power of encryption and digital signatures. In [part three](/bootstrapping-trust-part-3-certificates/) we will see how key pairs can be combined with certificates!
+This article should have shed light on public-key cryptography by explaining the roles of the public and private keys. It should have also provided a glimpse at the power of encryption and digital signatures. In [part three](./bootstrapping-trust-part-3.md) we will see how key pairs can be combined with certificates!

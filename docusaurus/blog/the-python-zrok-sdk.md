@@ -13,9 +13,9 @@ tags:
 ---
 
 If you are reading this, hopefully, you are familiar with `zrok`: an open source solution for easy and secure sharing 
-built on OpenZiti. If not you can check out this post [introducing `zrok`](https://blog.openziti.io/introducing-zrok). 
+built on OpenZiti. If not you can check out this post [introducing `zrok`](./introducing-zrok.md). 
 If you have then that's great news! You might be familiar with the Golang SDK that was 
-[recently released](https://blog.openziti.io/the-zrok-sdk).
+[recently released](./the-zrok-sdk.md).
 
 <!-- truncate -->
 
@@ -85,7 +85,7 @@ Just a few calls and we're running! Let's quickly go over what's happening here:
 
 The `zrok` decorator takes a config dictionary to allow users to easily input their own settings. Taking in the root config, share token, and the bind port and you're off to the races.
 
-We create a share (and setup a callback to clean up after ourselves once the server closes) which we then use to populate our options struct for our decorator. Thats it! That share is then accessed via some sort of share. In this case we're using a public share which you can find if on [here](https://blog.openziti.io/the-zrok-oauth-public-frontend).
+We create a share (and setup a callback to clean up after ourselves once the server closes) which we then use to populate our options struct for our decorator. Thats it! That share is then accessed via some sort of share. In this case we're using a public share which you can find if on [here](./the-zrok-oauth-public-frontend).
 
 To expand from here you would declare any routes your app wants to expose and it's just like producing a typical web server. No additional complications!
 

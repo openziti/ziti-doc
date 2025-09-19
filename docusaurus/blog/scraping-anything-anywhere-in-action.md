@@ -11,7 +11,7 @@ tags:
 
 ---
 
-*This is part three of a three-part article. This article builds on the previous two articles. Here we will take a look at what we built and use it to explore the power of a zitified Prometheus. See* [*part one*](https://blog.openziti.io/prometheus-scrape-anything-from-anywhere) *for the necessary background about the series. See* [*part two*](https://blog.openziti.io/configuring-openziti-to-enable-prometheus) *for detailed instructions covering how to setup the environment you're about to explore*
+*This is part three of a three-part article. This article builds on the previous two articles. Here we will take a look at what we built and use it to explore the power of a zitified Prometheus. See* [*part one*](./prometheus-scrape-anything-from-anywhere.md) *for the necessary background about the series. See* [*part two*](./configuring-openziti-to-enable-prometheus.md) *for detailed instructions covering how to setup the environment you're about to explore*
 
 <!-- truncate -->
 
@@ -25,7 +25,7 @@ Now we are ready to start using our Prometheus servers. We'll use our OpenZiti o
 
 ## Developer Access
 
-In the [previous article](https://blog.openziti.io/configuring-openziti-to-enable-prometheus), we established our entire solution using the OpenZiti overlay, `kubectl` and `helm`. We saw everything get installed and it all "seems to work". But how do we **know** it works? Let's provision an identity for yourself now and let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](https://openziti.io/docs/reference/tunnelers/) running locally. Once you have that installed, provision an identity and enroll it with your tunneling client.
+In the [previous article](./configuring-openziti-to-enable-prometheus.md), we established our entire solution using the OpenZiti overlay, `kubectl` and `helm`. We saw everything get installed and it all "seems to work". But how do we **know** it works? Let's provision an identity for yourself now and let's enroll it in your local tunneling app and find out. Go out and get [a tunneling client](https://openziti.io/docs/reference/tunnelers/) running locally. Once you have that installed, provision an identity and enroll it with your tunneling client.
 
 ```text
 ziti edge create identity user dev.client -a "prometheus-clients","reflectz-clients"
@@ -222,7 +222,7 @@ Look at what we've just done. We have started a Prometheus instance locally, and
 
 ## Taking it to 11
 
-But wait, I'm not done. That docker instance is listening on an underlay network. It's exposed to attack by anything on my local network. I want to fix that too. Let's start this docker container up listening only on the OpenZiti overlay. Just like in [part 2](https://blog.openziti.io/configuring-openziti-to-enable-prometheus) we will make a config, a service and two policies to enable identities on the OpenZiti overlay.
+But wait, I'm not done. That docker instance is listening on an underlay network. It's exposed to attack by anything on my local network. I want to fix that too. Let's start this docker container up listening only on the OpenZiti overlay. Just like in [part 2](./configuring-openziti-to-enable-prometheus.md) we will make a config, a service and two policies to enable identities on the OpenZiti overlay.
 
 ```text
 curl -s https://raw.githubusercontent.com/openziti/ziti-doc/main/docusaurus/blog/zitification/prometheus/scripts/local.prometheus.yml > /tmp/prometheus/prometheus.config.yml

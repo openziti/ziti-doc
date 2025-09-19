@@ -14,15 +14,11 @@ Whether you are an encryption expert or a newcomer, welcome! This series is for 
 
 The parts are as follows.
 
-* [Part 1: Encryption Everywhere](/bootstrapping-trust-part-1-encryption-everywhere)
-    
-* [Part 2: A Primer On Public-Key Cryptography](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography)
-    
-* [Part 3: Certificates](/bootstrapping-trust-part-3-certificates)
-    
-* [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust)
-    
-* [Part 5: Bootstrapping Trust](/bootstrapping-trust-part-5-bootstrapping-trust)
+* [Part 1: Encryption Everywhere](./bootstrapping-trust-part-1.md)
+* [Part 2: A Primer On Public-Key Cryptography](./bootstrapping-trust-part-2.md)
+* [Part 3: Certificates](./bootstrapping-trust-part-3.md)
+* [Part 4: Certificate Authorities & Chains Of Trust](./bootstrapping-trust-part-4.md)
+* [Part 5: Bootstrapping Trust](./bootstrapping-trust-part-5.md)
 
 <!-- truncate -->
     
@@ -106,17 +102,17 @@ openssl ecparam -name secp256k1-genkey -param\_enc explicit -out private-key.pem
 
 openssl req -new -x509 -key private-key.pem -out server.pem -days 360
 
-Voila - you now have a self-signed certificate! What is a self-signed certificate? For now, let us understand it means that no other system has expressed trust in your public certificate. In [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust) we will cover them in more detail.
+Voila - you now have a self-signed certificate! What is a self-signed certificate? For now, let us understand it means that no other system has expressed trust in your public certificate. In [Part 4: Certificate Authorities & Chains Of Trust](./bootstrapping-trust-part-4.md) we will cover them in more detail.
 
 You can repeat the above process for every piece of software in your mesh network. Preferably, you log into each machine and generate the private key there. Moving private keys on and off devices is a security risk and frowned upon. For maximum security, hardware, such as [Hardware Security Modules (HSMs)](https://en.wikipedia.org/wiki/Hardware_security_module) and [Trusted Platform Modules (TPMs)](https://en.wikipedia.org/wiki/Trusted_Platform_Module), can be used to store the private keys in a manner that does not make them directly accessible.
 
 Then you will need to copy each public certificate to every other machine and configure your software so that it trusts that certificate. The system will need to repeat this process any time the system adds a piece of software. If a machine is compromised, the analogous public certificate will need to be untrusted on every node in the mesh. Adding or removing trust in a public certificate involves configuring software or operating systems. There are many ways it can be implemented, including configuration files, files stored in specific directories, and even via configuration tools such as Windows Certificate Manager snap-in.
 
-This is a log of careful work to get a simple system running. Consider what this means when adding or removing many nodes? Visiting each machine and reconfiguring them each time is quite a bit of overhead. There is a solution to these woes. While it is elegant on its own, it does add complexity. Let us see how Certificate Authorities (CAs) can help! In the next section, we will hit the highlights of CAs. For more detail, look forward to [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust).
+This is a log of careful work to get a simple system running. Consider what this means when adding or removing many nodes? Visiting each machine and reconfiguring them each time is quite a bit of overhead. There is a solution to these woes. While it is elegant on its own, it does add complexity. Let us see how Certificate Authorities (CAs) can help! In the next section, we will hit the highlights of CAs. For more detail, look forward to [Part 4: Certificate Authorities & Chains Of Trust](./bootstrapping-trust-part-4.md).
 
 #### CAs & Adding Complexity
 
-A CA enables trust deferral from multiple individual certificates to a single certificate, which means that instead of trusting each certificate, each piece of software will trust the CA. The CA will be used to sign every public certificate our software pieces need to use. How does "signing" work? We will cover that in [part three](/bootstrapping-trust-part-3-certificates) and why it matters part in [four](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust). For now, the basics will be provided.
+A CA enables trust deferral from multiple individual certificates to a single certificate, which means that instead of trusting each certificate, each piece of software will trust the CA. The CA will be used to sign every public certificate our software pieces need to use. How does "signing" work? We will cover that in [part three](./bootstrapping-trust-part-3.md) and why it matters part in [four](./bootstrapping-trust-part-4.md). For now, the basics will be provided.
 
 Here are the high-level steps of using a CA:
 
@@ -131,7 +127,7 @@ Here are the high-level steps of using a CA:
 5. configure the machines certificate store or configure the software
     
 
-For items one and two, the process can be a bit mystical. There is a multitude of options involved in managing a CA. To perform number three, you will need to go through the processing of creating certificate signing requests (CSRs, see [parts three](/bootstrapping-trust-part-3-certificates) for more detail) on behalf of the piece of software, and someone or something will have to play the role of the CA and resolve the CSRs. The last two steps will depend on the operating system and software being used.
+For items one and two, the process can be a bit mystical. There is a multitude of options involved in managing a CA. To perform number three, you will need to go through the processing of creating certificate signing requests (CSRs, see [parts three](./bootstrapping-trust-part-3.md) for more detail) on behalf of the piece of software, and someone or something will have to play the role of the CA and resolve the CSRs. The last two steps will depend on the operating system and software being used.
 
 All of these actions can be done via a CLI or programmatically. You will have to spend time and energy, making sure the options are correctly set and learning about all the different capabilities and extensions. Mistakes will inevitably occur. It is time-consuming to debug why a specific public certificate is not working as intended. The tools and systems that use the certificates are purposely vague in error messages as not to reveal too much information to attackers.
 
@@ -152,4 +148,4 @@ CAs do not automatically handle the propagation of these types of events. CAs ar
 
 Even if we ignore all of those concerns, who did we trust to get this system setup? What was the seed of trust used to bootstrap trust? So far, you could have imagined that a human was doing all of this work. In that case, a human operator is trusted to properly configure all of the systems - trusting them with access to all of the private keys. The seed of trust is in that human. If this is a software system performing these actions, that means that the system has to be trusted and most likely have access to every other system coming online. That is workable, but what happens when your system can have external systems request to be added to the network? How can that be handled? How do you trust that system in the first place? Using a secret password creates a single, exploitable, weak point. Public-key cryptography could be put in place, but then we are in a chicken-and-egg scenario. We are putting public-key cryptography in place to automate public-key cryptography.
 
-There are many caveats to bootstrapping trust. In a dynamic distributed system where pieces of software can come and go at the whim of network operators, the issues become a mountain of concerns. Thankfully in Ziti, a mechanism is provided that abstracts all of these issues. To understand how Ziti accomplishes this, we have a few more topics to discuss. In [part two](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography), we will chip away at those topics by covering public-key cryptography in more detail to understand its powers and applications.
+There are many caveats to bootstrapping trust. In a dynamic distributed system where pieces of software can come and go at the whim of network operators, the issues become a mountain of concerns. Thankfully in Ziti, a mechanism is provided that abstracts all of these issues. To understand how Ziti accomplishes this, we have a few more topics to discuss. In [part two](./bootstrapping-trust-part-2.md), we will chip away at those topics by covering public-key cryptography in more detail to understand its powers and applications.

@@ -17,11 +17,11 @@ tags:
 If you run Portainer, and you seek a modern, flexible recipe for how to make it secure while also providing flexible 
 access to your authorized users, this article is for you.
 
-A question that sometimes gets asked is: *What types of companies, self-hosters, or general use cases, will gain the greatest benefit from using* [*OpenZiti BrowZer*](https://blog.openziti.io/introducing-openziti-browzer)?
+A question that sometimes gets asked is: *What types of companies, self-hosters, or general use cases, will gain the greatest benefit from using* [*OpenZiti BrowZer*](./introducing-openziti-browzer.md)?
 
 <!-- truncate -->
 
-To help answer the “*who benefits*” question, much like I did in a [previous article](https://blog.openziti.io/effortless-docker-management-with-private-web-access), this article will frame the answer in the context of a web application named [Portainer](https://www.portainer.io/) (a web-accessible container management platform) when it needs to be internet-facing.
+To help answer the “*who benefits*” question, much like I did in a [previous article](./effortless-docker-management-with-private-web-access), this article will frame the answer in the context of a web application named [Portainer](https://www.portainer.io/) (a web-accessible container management platform) when it needs to be internet-facing.
 
 `NOTE: Upcoming articles will describe how similar techniques employing BrowZer can be used to protect and secure other popular web applications. So be sure to subscribe to this blog to be notified when those articles are published.`
 
@@ -103,7 +103,7 @@ The `Z` in this component's name (within the word normally spelled "*browser*") 
 
 BrowZer enables you and your organization, enterprises, and self-hosting enthusiasts alike, in the cloud or at home, to operate private-to-the-internet web applications while still easily providing secure access for your authorized internet-based remote users.
 
-I previously published a lengthy article that introduced the [**concept of browZer**](https://blog.openziti.io/introducing-openziti-browzer). I recommend giving it a read.
+I previously published a lengthy article that introduced the [**concept of browZer**](./introducing-openziti-browzer.md). I recommend giving it a read.
 
 There is a vast amount of documentation, as well as [**quick starts for BrowZer**](https://openziti.io/docs/learn/quickstarts/browzer/example/), on the OpenZiti site.
 

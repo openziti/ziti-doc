@@ -15,7 +15,7 @@ tags:
 
 ---
 
-[The previous post](https://blog.openziti.io/zero-trust-sshclient) revisited the `zssh` project and demonstrated how to implement a simple ssh client using the extended modules provided by the Golang project. It also modified that simple program and showed what it takes to incorporate OpenZiti, creating a zero trust ssh client. This post focuses on another aspect of `zssh` and OpenZiti: multi-factor authentication.
+[The previous post](./zero-trust-ssh-client.md) revisited the `zssh` project and demonstrated how to implement a simple ssh client using the extended modules provided by the Golang project. It also modified that simple program and showed what it takes to incorporate OpenZiti, creating a zero trust ssh client. This post focuses on another aspect of `zssh` and OpenZiti: multi-factor authentication.
 
 <!-- truncate -->
 
@@ -25,7 +25,7 @@ tags:
 
 Perhaps the most common type of authentication, OpenZiti supports authentication to the the OpenZiti overlay network using certificates. It might not be obvious, but a `zssh` user using an [enrolled an OpenZiti identity](https://openziti.io/docs/learn/core-concepts/identities/enrolling/) to authenticate to the overlay network **is already implicitly** using multi-factor authentication. The first authentication factor is OpenZiti itself. OpenZiti requires connections to be both authenticated and authorized before being allowed to connect to the target service. Once authenticated and authorized, `zssh` can connect to `sshd` and attempt to authenticate. Just by using `zssh`, users are protected with two factors of authentication but `zssh` (and OpenZiti) offers other factors of authentication as well.
 
-When [enrolling an identity](https://openziti.io/docs/learn/core-concepts/identities/enrolling/), the output of the enrollment flow will be an OpenZiti identity file containing a certificate, key, and CA bundle. This identity can then be used to authenticate connections to the target OpenZiti overlay network. If you are interested in learning how this process works, you can read about it in [Andrew's five-part series about bootstrapping trust](https://blog.openziti.io/bootstrapping-trust-part-1-encryption-everywhere). Using `zssh` with an identity file and certificate-based authentication looks something like this (examples are taken [directly from the GitHub repo](https://github.com/openziti-test-kitchen/zssh?tab=readme-ov-file#identity-based-certificate-authentication)):
+When [enrolling an identity](https://openziti.io/docs/learn/core-concepts/identities/enrolling/), the output of the enrollment flow will be an OpenZiti identity file containing a certificate, key, and CA bundle. This identity can then be used to authenticate connections to the target OpenZiti overlay network. If you are interested in learning how this process works, you can read about it in [Andrew's five-part series about bootstrapping trust](./bootstrapping-trust-part-1.md). Using `zssh` with an identity file and certificate-based authentication looks something like this (examples are taken [directly from the GitHub repo](https://github.com/openziti-test-kitchen/zssh?tab=readme-ov-file#identity-based-certificate-authentication)):
 
 ![](/blogs/openziti/v1725132017881/75590748-1fb6-4616-bf1a-4fc59b31975b.png)
 

@@ -128,7 +128,7 @@ The `Z` in this component's name (within the word normally spelled "*browser*") 
 
 BrowZer enables you and your organization, enterprises and self-hosting enthusiasts alike, in the cloud or at home, to operate private-to-the-internet web applications while still easily providing secure access for your authorized internet-based remote users.
 
-I previously published a lengthy article that introduced the [concept of browZer](https://blog.openziti.io/introducing-openziti-browzer). I recommend giving it a read.
+I previously published a lengthy article that introduced the [concept of browZer](./introducing-openziti-browzer.md). I recommend giving it a read.
 
 ## Forward Proxy Authentication / Trusted SSO
 

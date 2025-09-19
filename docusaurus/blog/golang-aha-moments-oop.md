@@ -6,10 +6,10 @@ slug: golang-aha-moments-oop
 authors: [PaulLorenz]
 image: /blogs/openziti/v1730383460910/9b2d0062-8b76-47c6-b68d-24810fca9f8b.webp
 tags: 
-  - go
+  - golang
   - java
   - object-oriented-programming
-
+  - golang-aha
 ---
 
 Moving to Go as my primary development language was a surprisingly easy transition. Coming from a language with strong OOP roots, like Java, I quickly found many analogs for the OOP constructs I was used to, but also had to adjust my thinking.

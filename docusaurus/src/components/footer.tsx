@@ -13,9 +13,9 @@ export const openZitiFooter = {
         twitterUrl: 'https://twitter.com/openziti/',
     },
     documentationLinks: [
-        <a href="/docs/learn/quickstarts/services/ztha">Getting Started</a>,
-        <a href="/docs/reference/developer/api/">API Reference</a>,
-        <a href="/docs/reference/developer/sdk/">SDK Integration</a>,
+        <a href="/docs/openziti/learn/quickstarts/services/ztha">Getting Started</a>,
+        <a href="/docs/openziti/reference/developer/api/">API Reference</a>,
+        <a href="/docs/openziti/reference/developer/sdk/">SDK Integration</a>,
     ],
     communityLinks: [
         <a href="https://github.com/openziti/ziti">GitHub</a>,

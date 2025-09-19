@@ -270,4 +270,4 @@ source "./${INSTANCE_HOSTNAME}.env"
 
 ## Now What?
 
-Check out my other articles in this series (see series links below) where I add to this network and start adding many of the devices and services I host at home so that I can access them from anywhere. If you're having trouble finding the series articles, start with one of these articles; [I Created a Zero Trust Overlay Network to Access HomeAssistant](https://blog.openziti.io/zero-trust-overlay-network-to-access-homeassistant), [Free Secure Access to NAS From Anywhere](https://blog.openziti.io/free-secure-access-to-nas-from-anywhere).
+Check out my other articles in this series (see series links below) where I add to this network and start adding many of the devices and services I host at home so that I can access them from anywhere. If you're having trouble finding the series articles, start with one of these articles; [I Created a Zero Trust Overlay Network to Access HomeAssistant](./zero-trust-overlay-network-to-access-homeassistant), [Free Secure Access to NAS From Anywhere](./free-secure-access-to-nas-from-anywhere).

@@ -19,7 +19,7 @@ drives. This is an early preview of the full set of zrok Drives tools.
 
 <!-- truncate -->
 
-If this is your first time enountering zrok, check out the [entire zrok series](https://blog.openziti.io/series/zrok) here on the [OpenZiti blog](https://blog.openziti.io/). Also take a look at the [Getting Started guide](https://docs.zrok.io/docs/getting-started).
+If this is your first time enountering zrok, check out the [entire zrok series](./tags/zrok) here on the [OpenZiti blog](./). Also take a look at the [Getting Started guide](https://docs.zrok.io/docs/getting-started).
 
 ## zrok Drives
 
@@ -29,7 +29,7 @@ The short version of the story is that the zrok drives feature introduces the ab
 
 The first preview of zrok drives allowed a zrok drives share to be accessed by any software or system that can work with WebDAV. This includes Windows Explorer, macOS Finder, and various Linux graphical desktops including Gnome Nautilus.
 
-Check out the previous [blog post](https://blog.openziti.io/zrok-drives-an-early-preview) for more details about [zrok Drives](https://blog.openziti.io/zrok-drives-an-early-preview).
+Check out the previous [blog post](./zrok-drives-an-early-preview) for more details about [zrok Drives](./zrok-drives-an-early-preview).
 
 ## The New CLI
 

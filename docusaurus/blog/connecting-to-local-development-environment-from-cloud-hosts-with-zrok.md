@@ -40,7 +40,7 @@ Unless you also have a static IP, it will change quite frequently and you may ha
 
 ## With zrok
 
-zrok will let us skip parts of the setup above. If you haven't already read the [Introducing zrok](https://blog.openziti.io/introducing-zrok) I suggest you do so, it will give a lot more information about the underlying technology.  
+zrok will let us skip parts of the setup above. If you haven't already read the [Introducing zrok](./introducing-zrok.md) I suggest you do so, it will give a lot more information about the underlying technology.  
 Here are the steps we need to do:
 
 * Create a reserved share
@@ -86,7 +86,7 @@ zrok simplifies local development while also making it more secure. In our scena
 
 Further reading on the technologies involved in this blog:
 
-* Introducing zrok - [https://blog.openziti.io/introducing-zrok](https://blog.openziti.io/introducing-zrok)
+* Introducing zrok - [./introducing-zrok](./introducing-zrok.md)
     
 * OpenZiti - [https://github.com/openziti/](https://github.com/openziti/)
     

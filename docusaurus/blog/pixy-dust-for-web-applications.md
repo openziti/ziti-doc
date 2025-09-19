@@ -24,7 +24,7 @@ Articles about [OpenZiti](https://openziti.io/) often discuss application and ne
 
 Here I discuss how PKCE enhances the security of authorization code grant flows used in web applications. I will explore some benefits, best practices, and challenges of working with PKCE.
 
-Perhaps best of all, I will also highlight how OpenZiti [BrowZer](https://blog.openziti.io/introducing-openziti-browzer) automatically brings you the power of PKCE... and how BrowZer facilitates an easy way to put a web-based cloak of invisibility around your application, further protecting it from malicious threat actors.
+Perhaps best of all, I will also highlight how OpenZiti [BrowZer](./introducing-openziti-browzer.md) automatically brings you the power of PKCE... and how BrowZer facilitates an easy way to put a web-based cloak of invisibility around your application, further protecting it from malicious threat actors.
 
 ## Auth code grant flow security vulnerabilities
 
@@ -153,7 +153,7 @@ PKCE offers numerous benefits, but it still presents many challenges you should 
 
 The tie-in between OpenZiti BrowZer and PKCE is how this kind of authorization flow is used to enable your authorized users (who exist out on the internet) to simply use a browser, and a couple of clicks, to gain visibility, and access, to a web application that is otherwise **completely invisible** to everyone else (notably, malicious actors).
 
-You may recall that [BrowZer's zero-trust capabilities](https://blog.openziti.io/introducing-openziti-browzer#heading-authentication-in-a-browzer-environment) enforce an "*authenticate before connect*" flow. Users of your web app must first perform a successful **single sign-on** (SSO) that provides a strong assertion of the user's identity.
+You may recall that [BrowZer's zero-trust capabilities](./introducing-openziti-browzer.md#heading-authentication-in-a-browzer-environment) enforce an "*authenticate before connect*" flow. Users of your web app must first perform a successful **single sign-on** (SSO) that provides a strong assertion of the user's identity.
 
 The Identity Provider (IDP) you associate with your network is up to you. It could be a cloud-based instance of AzureAD, Okta, or Auth0 (and these IDPs could even federate out to Google, GitHub, or dozens of other providers)...
 

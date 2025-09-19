@@ -12,18 +12,13 @@ tags:
 
 If you have read through the entire series up to here, welcome! If you have not, please consider reading the whole series:
 
-* [Part 1: Encryption Everywhere](/bootstrapping-trust-part-1-encryption-everywhere)
-    
-* [Part 2: A Primer On Public-Key Cryptography](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography)
-    
-* [Part 3: Certificates](/bootstrapping-trust-part-3-certificates)
-    
-* [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust)
-    
-* [Part 5: Bootstrapping Trust](/bootstrapping-trust-part-5-bootstrapping-trust)
-
 <!-- truncate -->
-    
+
+* [Part 1: Encryption Everywhere](./bootstrapping-trust-part-1.md)
+* [Part 2: A Primer On Public-Key Cryptography](./bootstrapping-trust-part-2.md)
+* [Part 3: Certificates](./bootstrapping-trust-part-3.md)
+* [Part 4: Certificate Authorities & Chains Of Trust](./bootstrapping-trust-part-4.md)
+* [Part 5: Bootstrapping Trust](./bootstrapping-trust-part-5.md)
 
 ### Ziti
 

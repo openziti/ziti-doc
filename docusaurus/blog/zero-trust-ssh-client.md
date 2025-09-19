@@ -17,8 +17,8 @@ tags:
 
 A few years ago, the [OpenZiti project](https://github.com/openziti/ziti) developed and published two client tools to 
 make ssh and scp available over an OpenZiti overlay network without requiring the sshd port to be exposed to the 
-internet. If interested, read the original posts [about zssh](https://blog.openziti.io/zitifying-ssh) and 
-[zscp](https://blog.openziti.io/zitifying-scp). Continuing with the belief that security-related code should be open 
+internet. If interested, read the original posts [about zssh](./zitifying-ssh.md) and 
+[zscp](./zitifying-scp.md). Continuing with the belief that security-related code should be open 
 source and auditable, the project is [available on GitHub](https://github.com/openziti-test-kitchen/zssh).
 
 <!-- truncate -->
@@ -68,7 +68,7 @@ Try it out! That's really all there is to it. You'll be able to ssh to any machi
 
 ## Layering in Zero Trust Connectivity
 
-The Golang standard library is well thought out. The [abstractions in place make it amazing for building applications embedding zero trust](https://blog.openziti.io/go-is-amazing-for-zero-trust). Adapting an application that uses normal IP-based connectivity (like the ssh example shown above that uses "tcp") to use an OpenZiti SDK is generally straightforward. From the example above, a single line needs to be changed: the line that creates the `ssh.Client`. This line:
+The Golang standard library is well thought out. The [abstractions in place make it amazing for building applications embedding zero trust](./go-is-amazing-for-zero-trust). Adapting an application that uses normal IP-based connectivity (like the ssh example shown above that uses "tcp") to use an OpenZiti SDK is generally straightforward. From the example above, a single line needs to be changed: the line that creates the `ssh.Client`. This line:
 
 ```go
 	sshClient, _ := ssh.Dial("tcp", host, config)
@@ -98,7 +98,7 @@ With the IP-based underlay `net.Conn` connection replaced with a zero trust conn
 
 Everything else in the example remains identical; these are the only lines that need to change! The full source for `zssh` is available on GitHub at [https://github.com/openziti-test-kitchen/zssh](https://github.com/openziti-test-kitchen/zssh). You'll find the examples shown above in that repo as individual, compilable go files available in [the `example` folder](https://github.com/openziti-test-kitchen/zssh/tree/main/zssh/example).
 
-If you're interested in `zssh`, the OpenZiti project and zero trust in general, check out [the next article](https://blog.openziti.io/multifactor-zero-trust-ssh). It focuses on using `zssh` and using OpenZiti's OIDC-based authentication mechanisms and uses [Keycloak](https://www.keycloak.org/) for federated authentication to GitHub or Google.
+If you're interested in `zssh`, the OpenZiti project and zero trust in general, check out [the next article](./multifactor-zero-trust-ssh). It focuses on using `zssh` and using OpenZiti's OIDC-based authentication mechanisms and uses [Keycloak](https://www.keycloak.org/) for federated authentication to GitHub or Google.
 
 ## **Share the Project**
 

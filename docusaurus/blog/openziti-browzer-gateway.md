@@ -13,18 +13,18 @@ tags:
   - security
   - openziti
   - zerotrust
-
+  - browzer
 ---
 
-Welcome back to the next article concerning **BrowZer**, a new group of open-source components from the [OpenZiti project](https://github.com/openziti/) that enables [**automatic embedding of zero trust networking into web applications**](https://blog.openziti.io/introducing-openziti-browzer). The reason **BrowZer** exists, and the problem it aims to solve is preventing your internet-facing web applications from being attacked by malicious threat actors.
+Welcome back to the next article concerning **BrowZer**, a new group of open-source components from the [OpenZiti project](https://github.com/openziti/) that enables [**automatic embedding of zero trust networking into web applications**](./introducing-openziti-browzer.md). The reason **BrowZer** exists, and the problem it aims to solve is preventing your internet-facing web applications from being attacked by malicious threat actors.
 
 <!-- truncate -->
 
-This article is part of the ongoing [web application security](https://blog.openziti.io/series/browzer) series concerning **BrowZer**, and here I will provide instructions concerning how to acquire TLS certificates for its *gateway* component — or what we internally refer to as the HTTP Agent.
+This article is part of the ongoing [web application security](./openziti-browzer-gateway.md) series concerning **BrowZer**, and here I will provide instructions concerning how to acquire TLS certificates for its *gateway* component — or what we internally refer to as the HTTP Agent.
 
-Before proceeding below, you may be interested in reading the [architectural overview of the OpenZiti BrowZer Gateway](https://blog.openziti.io/openziti-browzer-gateway) to get some broader context if you haven't already read it.
+Before proceeding below, you may be interested in reading the [architectural overview of the OpenZiti BrowZer Gateway](./openziti-browzer-gateway.md) to get some broader context if you haven't already read it.
 
-This article describes how to acquire fully qualified domain name ([FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name)) certs for use with BrowZer, but you may also be interested in Part-1 of this article where I describe [how to acquire wildcard certs for use with BrowZer](https://blog.openziti.io/browzer-gateway-wildcard-certs).
+This article describes how to acquire fully qualified domain name ([FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name)) certs for use with BrowZer, but you may also be interested in Part-1 of this article where I describe [how to acquire wildcard certs for use with BrowZer](./openziti-browzer-gateway.md).
 
 # BrowZer Gateway Internet-Facing TLS
 
@@ -32,7 +32,7 @@ Customers of our CloudZiti offering will have everything described below automat
 
 The educational material contained in this article will certainly help enable you to deploy your own instance of the BrowZer Gateway, but please note that it is not exhaustive. Here we limit discussion to tooling you can use to acquire the necessary TLS certs you need to use with the BrowZer Gateway.
 
-Upcoming articles in the [series](https://blog.openziti.io/series/browzer) will be published soon and they will close the remaining gap and describe all the IdP integration/configuration details, the BrowZer Gateway Docker container, and all BrowZer Gateway configuration details related to the OpenZiti overlay network it will be a part of.
+Upcoming articles in the [series](./tags/browzer) will be published soon and they will close the remaining gap and describe all the IdP integration/configuration details, the BrowZer Gateway Docker container, and all BrowZer Gateway configuration details related to the OpenZiti overlay network it will be a part of.
 
 ### HTTPS
 
@@ -45,7 +45,7 @@ Not using HTTPS causes nasty things to happen:
 * users are exposed to security issues (e.g man-in-the-middle attacks).
     
 
-As discussed earlier in the [architectural overview of the OpenZiti BrowZer Gateway](https://blog.openziti.io/openziti-browzer-gateway), in a BrowZer environment your web app will be invisible to the internet, and the BrowZer Gateway is deployed such that ***it*** is the web server that your users will point their browsers to in order to reach your dark web app.
+As discussed earlier in the [architectural overview of the OpenZiti BrowZer Gateway](./openziti-browzer-gateway.md), in a BrowZer environment your web app will be invisible to the internet, and the BrowZer Gateway is deployed such that ***it*** is the web server that your users will point their browsers to in order to reach your dark web app.
 
 ## Self-signed Cert? That's a No-No!
 
@@ -90,7 +90,7 @@ I'll skip any discussion of item #1 (hosting providers) since self-hosting BrowZ
 
 If you wish to serve a ***single*** dark web app via the BrowZer gateway, item #2 (Manual Cert Generation) will suffice, and this is what we will describe in the subsections below.
 
-If you wish to serve ***multiple*** dark web apps via a single BrowZer gateway, item #3 (Automatic Wildcard Cert Generation) is the recipe you'll need, since wildcard certs are a key underpinning of how the BrowZer Gateway facilitates hosting multiple dark web apps. In that case, click over to the article where I describe [how to acquire wildcard certs for use with BrowZer](https://blog.openziti.io/browzer-gateway-wildcard-certs).
+If you wish to serve ***multiple*** dark web apps via a single BrowZer gateway, item #3 (Automatic Wildcard Cert Generation) is the recipe you'll need, since wildcard certs are a key underpinning of how the BrowZer Gateway facilitates hosting multiple dark web apps. In that case, click over to the article where I describe [how to acquire wildcard certs for use with BrowZer](./openziti-browzer-gateway.md).
 
 ### Manual Cert Generation (Mac)
 

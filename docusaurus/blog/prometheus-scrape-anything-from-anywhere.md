@@ -11,7 +11,7 @@ tags:
 
 ---
 
-*This is part one of a three-part article. This article provides the necessary background and rationale for the series.* [*The next article*](https://blog.openziti.io/configuring-openziti-to-enable-prometheus) *will be a detailed explanation of the actual steps necessary to implement the solution. In* [*the final article*](https://blog.openziti.io/scraping-anything-anywhere-in-action)*, we will explore what we have just created and understand what was just created*
+*This is part one of a three-part article. This article provides the necessary background and rationale for the series.* [*The next article*](./configuring-openziti-to-enable-prometheus.md) *will be a detailed explanation of the actual steps necessary to implement the solution. In* [*the final article*](./scraping-anything-anywhere-in-action.md)*, we will explore what we have just created and understand what was just created*
 
 <!-- truncate -->
 
@@ -121,4 +121,4 @@ Contrast ClusterA with ClusterB. ClusterB deployed a Prometheus server with an e
 
 We are now coming to the final piece of the puzzle. We have protected both Kubernetes clusters using OpenZiti. Now we want to bring all this data back to a centralized Prometheus server to make it easier on our user base. To do this, we'll again deploy an OpenZiti-enabled Prometheus server. This time we don't care where it is deployed except that we know we are not deploying it into either of the Kubernetes clusters we are already using. Since the Prometheus servers are all now accessible via the overlay network, we can literally deploy our server anywhere in the world. It could be on development server, it could be deployed in some other cloud, it could be deployed in our private data center. Because it's part of the overlay network, it no longer matters where we deploy the server. Wherever deployed, all it will need is outbound internet access, a strong identity, and access and authorization to services defined in the OpenZiti overlay network. Once that's done, OpenZiti will take care of the rest.
 
-If you have made it this far, you might want to try all this for yourself. The [next article](https://blog.openziti.io/configuring-openziti-to-enable-prometheus) will go into the details necessary to implement this solution. When complete you'll be able to deploy a zitified version of Prometheus and give Prometheus the power to scrape anything from anywhere using OpenZiti.
+If you have made it this far, you might want to try all this for yourself. The [next article](./configuring-openziti-to-enable-prometheus.md) will go into the details necessary to implement this solution. When complete you'll be able to deploy a zitified version of Prometheus and give Prometheus the power to scrape anything from anywhere using OpenZiti.

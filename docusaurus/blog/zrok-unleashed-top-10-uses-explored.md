@@ -14,7 +14,7 @@ tags:
 ---
 
 As we roll into 2025, we’re entering into an exciting time for the world of zrok. We’ve just recently 
-added [support for custom domains](https://blog.openziti.io/zrok-custom-domains), and with the 1.0 release right 
+added [support for custom domains](./zrok-custom-domains.md), and with the 1.0 release right 
 around the corner, zrok is more powerful than it has ever been. We thought this was a good time to zoom out and 
 take a look at how users are actually using our [hosted zrok as a service](https://myzrok.io).
 
@@ -36,7 +36,7 @@ No surprise here! This is probably the original use case that zrok was built aro
 
 Still one of the best games of all time, and considering how easy it is to run your own server and add custom mods, zrok provides an easy way to share a private game server with your friends without having to open up your firewall ports to the world.
 
-See [this tutorial](https://blog.openziti.io/minecraft-over-zrok) for full details on how to run your minecraft server over zrok!
+See [this tutorial](./minecraft-over-zrok) for full details on how to run your minecraft server over zrok!
 
 ## #3. AWS Sagemaker Notebooks
 

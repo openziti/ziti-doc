@@ -13,7 +13,7 @@ tags:
 
 ---
 
-I have a website I built using Django; it's just a personal site meant to be used by friends and family. This makes it a perfect fit for zero trust as, I can hide it from the world and hand out specific access to friends and family I want to allow to use it. The site has all sorts of tools to keep track of things as a family. We have the "Tool Pool" so each friend or family member can see who has what special tools so they can borrow them instead of buying their own, and it keeps track of who borrowed what. There's another called "Packer Tracker" which keeps track of what you bring on a camping trip (personal or shared trip) so you can review what was missing or isn't needed for future trips and see what other people are bringing on a shared trip. There are many others, but, in any case, this site is just a personal site to be used on an invite-only basis, so I don't need the world to have access to it, but I do want it publicly available for those using it. So, I spun up an [Oracle cloud instance](https://www.oracle.com/cloud/) (totally free "forever") and hosted it there. Currently, I create an account and send a link to anyone who wants to use it. The problem is it's still publicly accessible and prone to security issues from unwanted guests and/or web crawlers. I already have an [OpenZiti](https://openziti.github.io/) zero trust network running in another Oracle cloud instance where I've secured my NAS, CCTV, and [HomeAssistant](https://blog.openziti.io/zero-trust-overlay-network-to-access-homeassistant) access with zero trust, so why not just add this?
+I have a website I built using Django; it's just a personal site meant to be used by friends and family. This makes it a perfect fit for zero trust as, I can hide it from the world and hand out specific access to friends and family I want to allow to use it. The site has all sorts of tools to keep track of things as a family. We have the "Tool Pool" so each friend or family member can see who has what special tools so they can borrow them instead of buying their own, and it keeps track of who borrowed what. There's another called "Packer Tracker" which keeps track of what you bring on a camping trip (personal or shared trip) so you can review what was missing or isn't needed for future trips and see what other people are bringing on a shared trip. There are many others, but, in any case, this site is just a personal site to be used on an invite-only basis, so I don't need the world to have access to it, but I do want it publicly available for those using it. So, I spun up an [Oracle cloud instance](https://www.oracle.com/cloud/) (totally free "forever") and hosted it there. Currently, I create an account and send a link to anyone who wants to use it. The problem is it's still publicly accessible and prone to security issues from unwanted guests and/or web crawlers. I already have an [OpenZiti](https://openziti.github.io/) zero trust network running in another Oracle cloud instance where I've secured my NAS, CCTV, and [HomeAssistant](./zero-trust-overlay-network-to-access-homeassistant.md) access with zero trust, so why not just add this?
 
 <!-- truncate -->
 
@@ -25,7 +25,7 @@ In the image above, I am depicting the Oracle VPS running my existing network. T
 
 ## Get the SDK
 
-If you need an OpenZiti network, check out my [blog article](https://blog.openziti.io/setting-up-oracle-cloud-to-host-openziti) and set one up, for free, on Oracle. The next step is to integrate OpenZiti into my web application using the `openziti` module from the OpenZiti Python SDK. Anyone with any experience with Python will likely be familiar with `pip`, the Python package manager; let me install the Python SDK.
+If you need an OpenZiti network, check out my [blog article](./setting-up-oracle-cloud-to-host-openziti.md) and set one up, for free, on Oracle. The next step is to integrate OpenZiti into my web application using the `openziti` module from the OpenZiti Python SDK. Anyone with any experience with Python will likely be familiar with `pip`, the Python package manager; let me install the Python SDK.
 
 ```bash
 pip install openziti
@@ -61,7 +61,7 @@ The moment you've been waiting for has finally come. Get to the point and show m
 
 ### The Overlay Network
 
-As mentioned, I already have an existing overlay network so all I have to do is create a service, the appropriate service configs, policies, and the identities that I want to have access to host and/or dial my website service. Again, if you don't have a network of your own, check out my [blog article](https://blog.openziti.io/setting-up-oracle-cloud-to-host-openziti), where I set one up totally free on Oracle.
+As mentioned, I already have an existing overlay network so all I have to do is create a service, the appropriate service configs, policies, and the identities that I want to have access to host and/or dial my website service. Again, if you don't have a network of your own, check out my [blog article](./setting-up-oracle-cloud-to-host-openziti.md), where I set one up totally free on Oracle.
 
 ```bash
 # Create and enroll the binding identity

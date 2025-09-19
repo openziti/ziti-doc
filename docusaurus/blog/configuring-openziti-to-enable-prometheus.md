@@ -11,7 +11,7 @@ tags:
 
 ---
 
-*This is part two of a three-part article. This article provides the technical deep dive into the steps necessary to implement the vision outlined in* [*part one.*](https://blog.openziti.io/prometheus-scrape-anything-from-anywhere) *This article will be heavy on OpenZiti CLI commands, explaining what we are doing to configure the overlay network, and why. In* [*the final article*](https://blog.openziti.io/scraping-anything-anywhere-in-action)*, we will explore what we have just created and understand what was just created*
+*This is part two of a three-part article. This article provides the technical deep dive into the steps necessary to implement the vision outlined in* [*part one.*](./prometheus-scrape-anything-from-anywhere.md) *This article will be heavy on OpenZiti CLI commands, explaining what we are doing to configure the overlay network, and why. In* [*the final article*](./scraping-anything-anywhere-in-action.md)*, we will explore what we have just created and understand what was just created*
 
 ---
 
@@ -30,7 +30,7 @@ tags:
 
 ## Zitified Prometheus
 
-As described in [the previous article](https://blog.openziti.io/prometheus-scrape-anything-from-anywhere), Prometheus really prefers to be able to gather metrics from the targets it is monitoring. When the target is behind a firewall, you will be left with two choices.
+As described in [the previous article](./prometheus-scrape-anything-from-anywhere.md), Prometheus really prefers to be able to gather metrics from the targets it is monitoring. When the target is behind a firewall, you will be left with two choices.
 
 ![](/blogs/openziti/v1712853892186/74523233-0c1a-4a09-bb26-9eb1d5cd92c4.png)
 
@@ -42,7 +42,7 @@ The OpenZiti project has done the work to produce an OpenZiti-enabled version of
 
 ## Solution Overview
 
-As you'll recall from [part1](https://blog.openziti.io/prometheus-scrape-anything-from-anywhere), we are trying to use Prometheus to monitor workloads in two different Kubernetes clusters. We are going to deploy one cluster which will represent a first step of an OpenZiti solution. It will use a Prometheus server that is OpenZiti-enabled, but it will still listen on the underlay network and be available to local devices on an ip:port. This Prometheus server will use OpenZiti to scrape targets which are available anywhere on the OpenZiti overlay network and we'll refer to this as "ClusterA".
+As you'll recall from [part1](./prometheus-scrape-anything-from-anywhere.md), we are trying to use Prometheus to monitor workloads in two different Kubernetes clusters. We are going to deploy one cluster which will represent a first step of an OpenZiti solution. It will use a Prometheus server that is OpenZiti-enabled, but it will still listen on the underlay network and be available to local devices on an ip:port. This Prometheus server will use OpenZiti to scrape targets which are available anywhere on the OpenZiti overlay network and we'll refer to this as "ClusterA".
 
 We'll also deploy a second OpenZiti-enabled Prometheus server, in a totally separate Kubernetes cluster. This Prometheus server will **not** listen on an ip:port. Instead, it will listen exclusively on the OpenZiti overlay. This Prometheus server will have no ports available to attack and will only be accessible via a properly authorized and authenticated OpenZiti client. This will be our "ClusterB"
 
@@ -56,13 +56,13 @@ This is what the solution we'll build looks like:
 
 Let's get to work and build this solution. We'll need some legwork done first.
 
-> It's going to get deep in this article with CLI commands. You'll see what the OpenZiti objects are that get created and learn why. You might not want to replicate the solution on your own and instead are looking for "the big reveal". If that describes you, just skim this article lightly and get on to [part3](https://blog.openziti.io/scraping-anything-anywhere-in-action). In part 3 we'll explore the deployed solution and see what makes it so interesting and cool.
+> It's going to get deep in this article with CLI commands. You'll see what the OpenZiti objects are that get created and learn why. You might not want to replicate the solution on your own and instead are looking for "the big reveal". If that describes you, just skim this article lightly and get on to [part3](./scraping-anything-anywhere-in-action.md). In part 3 we'll explore the deployed solution and see what makes it so interesting and cool.
 
 ### Prerequisites
 
 * ![](/blogs/openziti/v1712854086884/8b08379c-00c2-4e12-a2fb-cb9f0a3bc975.png)
     
-    You have an OpenZiti overlay network available. If not, for this scenario you will want to use ["host your own"](/docs/learn/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
+    You have an OpenZiti overlay network available. If not, for this scenario you will want to use ["host your own"](@openzitidocs/learn/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
     
 * Two Kubernetes clusters provisioned
     
@@ -392,7 +392,7 @@ helm install prometheuz openziti-test-kitchen/prometheus \
 
 ## What's Next
 
-In this article we've done a lot of OpenZiti CLI work, run some `kubectl` and `helm` commands but we still haven't explored what it is we are building and why it's so cool. We'll do that in the [last, and final](https://blog.openziti.io/scraping-anything-anywhere-in-action) article. Hopefully, the payoff for you will be as rewarding as it was for me while building this article series.
+In this article we've done a lot of OpenZiti CLI work, run some `kubectl` and `helm` commands but we still haven't explored what it is we are building and why it's so cool. We'll do that in the [last, and final](./scraping-anything-anywhere-in-action.md) article. Hopefully, the payoff for you will be as rewarding as it was for me while building this article series.
 
 ---
 

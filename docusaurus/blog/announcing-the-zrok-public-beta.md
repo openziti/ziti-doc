@@ -44,7 +44,7 @@ Once your shell environment is enabled, you're free to create and access shares.
 
 This public beta includes all of the capabilities of `zrok`, including HTTP endpoint sharing, file and website sharing, and the new [TCP and UDP "tunnel" capability](https://docs.zrok.io/docs/concepts/tunnels/) recently introduced in the `v0.4.0` release.
 
-See the previous blog post on the [`v0.4.0` release](https://blog.openziti.io/zrok-v040-released) for more detail.
+See the previous blog post on the [`v0.4.0` release](./zrok-v0-4-0-released.md) for more detail.
 
 `zrok` is deeply committed to open source. If you like the `zrok` concept, but don't want to use the service hosted by [NetFoundry](https://netfoundry.io/), you can fully [self-host](https://docs.zrok.io/docs/guides/self-hosting/self_hosting_guide/) `zrok` in your environment.
 

@@ -12,13 +12,13 @@ tags:
 
 If you have read through the entire series up to here, welcome! If you have not, please consider reading the whole series:
 
-*   [Part 1: Encryption Everywhere](/bootstrapping-trust-part-1-encryption-everywhere)
-*   [Part 2: A Primer On Public-Key Cryptography](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography)
-*   [Part 3: Certificates](/bootstrapping-trust-part-3-certificates)
-*   [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust)
-*   [Part 5: Bootstrapping Trust](/bootstrapping-trust-part-5-bootstrapping-trust)
+* [Part 1: Encryption Everywhere](./bootstrapping-trust-part-1.md)
+* [Part 2: A Primer On Public-Key Cryptography](./bootstrapping-trust-part-2.md)
+* [Part 3: Certificates](./bootstrapping-trust-part-3.md)
+* [Part 4: Certificate Authorities & Chains Of Trust](./bootstrapping-trust-part-4.md)
+* [Part 5: Bootstrapping Trust](./bootstrapping-trust-part-5.md)
 
-In the series, we have covered public-key cryptography, where we learned about public keys, private keys, and their uses for encryption and signing. Using keys to sign data will play an essential role in this article. It is vital that the reader understand that signatures verify both the content of the data and its source. For a refresher, see [part two](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography) of this series.
+In the series, we have covered public-key cryptography, where we learned about public keys, private keys, and their uses for encryption and signing. Using keys to sign data will play an essential role in this article. It is vital that the reader understand that signatures verify both the content of the data and its source. For a refresher, see [part two](./bootstrapping-trust-part-2.md) of this series.
 
 <!-- truncate -->
 
@@ -92,4 +92,4 @@ The movement of the public certificate between systems is facilitated by Certifi
 
 ### Conclusion
 
-Certificates are keys, usually public ones, with additional metadata that adds conventions and restrictions around certificate usages. They provide a place for signatures to resides and, through CSRs, provide a vehicle to request additional signatures. Certificates are useful because they package all of these concerns into a neat single file. In [part four](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust), we will explore how to create a formidable chain of trust by linking multiple certificates together.
+Certificates are keys, usually public ones, with additional metadata that adds conventions and restrictions around certificate usages. They provide a place for signatures to resides and, through CSRs, provide a vehicle to request additional signatures. Certificates are useful because they package all of these concerns into a neat single file. In [part four](./bootstrapping-trust-part-4.md), we will explore how to create a formidable chain of trust by linking multiple certificates together.

@@ -155,4 +155,4 @@ OpenZiti SDKs make it easy to embed Zero Trust networking right into your applic
 
 See all of them on [GitHub](https://github.com/orgs/openziti/repositories?q=sdk).
 
-Want to learn more or provide feedback? Head to our [docs](https://openziti.github.io/) and discussion [forum](https://openziti.discourse.group/top?period=quarterly), and follow this very [blog](https://blog.openziti.io/).
+Want to learn more or provide feedback? Head to our [docs](https://openziti.github.io/) and discussion [forum](https://openziti.discourse.group/top?period=quarterly), and follow this very [blog](./).

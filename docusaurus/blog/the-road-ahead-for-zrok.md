@@ -14,7 +14,7 @@ tags:
 
 ---
 
-> If you're not sure what `zrok` is, see our blog post [introducing `zrok`](https://blog.openziti.io/introducing-zrok).
+> If you're not sure what `zrok` is, see our blog post [introducing `zrok`](./introducing-zrok.md).
 
 Now that `v0.3` has been released the `zrok` team is spending time collecting feedback and building our roadmap for what's coming next in `v0.4`.
 

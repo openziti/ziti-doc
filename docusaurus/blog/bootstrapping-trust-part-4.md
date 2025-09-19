@@ -12,18 +12,14 @@ tags:
 
 If you have read through the entire series up to here, welcome! If you have not, please consider reading the whole series:
 
-* [Part 1: Encryption Everywhere](/bootstrapping-trust-part-1-encryption-everywhere)
-    
-* [Part 2: A Primer On Public-Key Cryptography](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography)
-    
-* [Part 3: Certificates](/bootstrapping-trust-part-3-certificates)
-    
-* [Part 4: Certificate Authorities & Chains Of Trust](/bootstrapping-trust-part-4-certificate-authorities-chains-of-trust)
-    
-* [Part 5: Bootstrapping Trust](/bootstrapping-trust-part-5-bootstrapping-trust)
+* [Part 1: Encryption Everywhere](./bootstrapping-trust-part-1.md)
+* [Part 2: A Primer On Public-Key Cryptography](./bootstrapping-trust-part-2.md)
+* [Part 3: Certificates](./bootstrapping-trust-part-3.md)
+* [Part 4: Certificate Authorities & Chains Of Trust](./bootstrapping-trust-part-4.md)
+* [Part 5: Bootstrapping Trust](./bootstrapping-trust-part-5.md)
     
 
-This article makes implicit heavy use of [part 2](/bootstrapping-trust-part-2-a-primer-on-public-key-cryptography) and [part 3](/bootstrapping-trust-part-3-certificates) of this series.
+This article makes implicit heavy use of [part 2](./bootstrapping-trust-part-2.md) and [part 3](./bootstrapping-trust-part-3.md) of this series.
 
 <!-- truncate -->
 
@@ -45,7 +41,7 @@ Public CAs are maintained by organizations such as DigiCert, Let's Encrypt, and 
 
 ### Chains of Trust & PKIs
 
-[Part three](/bootstrapping-trust-part-3-certificates) of this series introduced that certificates self-sign or sign another certificate. Certificates are usually signed via Certificate Signing Requests (CSRs). A certificate signing itself is called a "self-signed certificate" and is an indicator of it being a root CA if the CA flag is also set to true. A root CA can sign other certificates that also have the CA flag set to true. Those types of certificates are intermediate CAs. Any CA, root or intermediate, that fulfills a CSR and signs the enclosed certificate will generate a non-CA certificate as long as the CA flag is false. These certificates are "leaf certificates."
+[Part three](./bootstrapping-trust-part-3.md) of this series introduced that certificates self-sign or sign another certificate. Certificates are usually signed via Certificate Signing Requests (CSRs). A certificate signing itself is called a "self-signed certificate" and is an indicator of it being a root CA if the CA flag is also set to true. A root CA can sign other certificates that also have the CA flag set to true. Those types of certificates are intermediate CAs. Any CA, root or intermediate, that fulfills a CSR and signs the enclosed certificate will generate a non-CA certificate as long as the CA flag is false. These certificates are "leaf certificates."
 
 The term Public Key Infrastructure (PKI) is used to describe all of the outputs that are generated when a CA is created. That includes the root, intermediates, and leaf certificates. It also optionally includes all of the systems, processes, procedures, and data used to manage them. For the purpose of this article, and simplicity, let us stick to the certificates only.
 
@@ -97,4 +93,4 @@ Trusting a CA that has signed many certificates allows public certificate trust 
 
 The goal for any private distributed system should be to have certificates verified on both sides: clients verify servers and vice versa. This behavior is a tenant of Zero Trust - do not trust, verify. Verification should be done on every connection before any data exchange. Over TLS, which secures HTTPS, this would be "mutual TLS" or "mTLS." Most public websites do not require mTLS. Instead, they use TLS with the client validating the server. For public web traffic, the server wishes to be trusted widely. The reverse is not necessary. If it is, websites use an additional form of authentications, like usernames and passwords, to verify the client's identity. Public key cryptography is a stronger authentication mechanism, but it is also difficult for the general public to set up, manage, and maintain.
 
-The same is true for distributed systems. Most don't secure anything at all or only verify servers. It is inherently insecure and can cause issues depending on the setup of the system. Ziti is a distributed system that abstracts away this security setup for both its internal routers and client SDKs. This setup allows application-specific networking with strong identity verification, powerful policy management, flexible mesh routing, and more. The goal of this series is to focus on bootstrapping trust. So in the [last article](/bootstrapping-trust-part-5-bootstrapping-trust) we will come full circle and see how all of this relates to bootstrapping trust for Zero Trust networks.
+The same is true for distributed systems. Most don't secure anything at all or only verify servers. It is inherently insecure and can cause issues depending on the setup of the system. Ziti is a distributed system that abstracts away this security setup for both its internal routers and client SDKs. This setup allows application-specific networking with strong identity verification, powerful policy management, flexible mesh routing, and more. The goal of this series is to focus on bootstrapping trust. So in the [last article](./bootstrapping-trust-part-5.md) we will come full circle and see how all of this relates to bootstrapping trust for Zero Trust networks.
