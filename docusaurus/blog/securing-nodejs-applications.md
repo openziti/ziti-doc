@@ -143,8 +143,6 @@ Except for a couple JavaScript-related server-side frameworks (circled above in 
 
 > *Note that one of my upcoming blog articles will do a deep technical dive into the underpinnings of the OpenZiti NodeJS SDK, how it transparently integrates with ExpressJS, and how with just a couple lines of code the SDK makes it trivial for a Node/Express web server to host a Ziti service and listen for incoming Ziti connections instead of listening on a port open to the internet.  Be sure to subscribe to this blog to to ensure you won't miss these further educational materials*
 
-%%[star-us-on-github]
-
 # Basic usage
 
 The OpenZiti SDK for NodeJS can be used with apps written in the [CJS style](https://nodejs.org/api/modules.html#modules-commonjs-modules) as well as the more modern [ESM style](https://nodejs.org/api/esm.html#modules-ecmascript-modules).

@@ -195,6 +195,3 @@ Do you want to do all this without making any modifications to your web app?
 
 If you are nodding yes, then we hope you'll [start a conversation with us about BrowZe](https://openziti.discourse.group/)r.
 
-%%[curt-hs-test] 
-
-%%[star-us-on-github]

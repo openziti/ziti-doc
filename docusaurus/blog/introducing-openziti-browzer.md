@@ -33,8 +33,6 @@ This is a great enabler. For example, if you are operating a web app licensed fr
 
 BrowZer has you covered because it does the necessary [Zitification](./zitification.md) instrumentation of your web application automatically, on the fly, as it is being loaded from the web server to the user's browser. It's what I call touchless-Zitification. More details on how this is accomplished are discussed below.
 
-%%[browzer-canny-feedback] 
-
 OK, that was a mouthful, so let's unpack what was just said.
 
 # Traditional Web App Security
@@ -76,8 +74,6 @@ The diagram below depicts how various components connect to each other in a Brow
 ![image.png](/blogs/openziti/v1663013534461/fw9fqJOaE.png)
 
 Although this diagram shows the target web app example is [Apache Guacamole](https://guacamole.apache.org/), BrowZer supports any web app. If you are unfamiliar with Guacamole, it is an open-source RDP, VNC, and SSH gateway. And yes, BrowZer supports HTML5-based RDP.
-
-%%[star-us-on-github] 
 
 > *Note that my upcoming blog articles will do deep technical dives into BrowZer RDP support, so be sure to subscribe to this blog to receive further educational materials*
 
@@ -184,7 +180,5 @@ Do you want your users to have easy access from anywhere with no additional soft
 Do you want to do all this without making any modifications to your web app?
 
 If you are nodding yes, then we hope you'll reach out for a conversation about BrowZer.
-
-%%[curt-hs-test] 
 
 Please stay tuned to this blog for more information concerning how you can get started.

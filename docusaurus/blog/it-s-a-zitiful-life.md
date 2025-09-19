@@ -67,8 +67,6 @@ The reality I refer to is enabled by our open-source [OpenZiti](https://github.c
 
 More background and detail on BrowZer can be read in my introductory article where I discuss [modern web app security](./introducing-openziti-browzer.md).
 
-%%[browzer-canny-feedback] 
-
 ## Companion Video Demo
 
 Here is a 3-min video that demonstrates streaming a movie (the holiday movie classic ***It's A Wonderful Life***) from a Plex media server to a remote user using OpenZiti BrowZer.

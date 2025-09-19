@@ -18,8 +18,6 @@ The web has revolutionized how the world operates, enabling everything from bank
 
 Criminals continually discover and exploit these vulnerabilities, using sophisticated techniques to steal information and steal or extort money. Rather than defraud users directly, they turned to stealing information by attacking the applications. BrowZer, part of the OpenZiti project, prevents one of the most common attack techniques listed in the [OWASP Top 10](https://owasp.org/www-project-top-ten/) and elsewhere, Broken Access Control.
 
-%%[request-browzer-demo] 
-
 ## The Threat of Path Traversal
 
 Some of the worst incidents occur when simple mistakes are made in software design, allowing vulnerabilities like path traversal attacks.  For those unfamiliar with the term, path traversal is a relatively simple attack strategy of appending paths to the URL of a website.  For example, one might usually go to [https://www.mywebsite.com](https://www.mywebsite.com).  One can append a path, like [https://www.mywebsite.com/users](https://www.mywebsite.com/users). In a vulnerable application, these requests or uploads will return data or take actions without the user having logged in.
