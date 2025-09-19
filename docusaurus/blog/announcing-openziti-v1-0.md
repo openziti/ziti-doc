@@ -25,7 +25,7 @@ zrok - a peer-to-peer sharing application - is the first ziti-native app we buil
 
 We're excited to announce v1.0. It's a milestone marking our commitment to users for system quality, stability, and compatibility throughout major release cycles. It's a proven foundation for the next generation of distributed applications featuring security as a first-class design goal.
 
-## **Background: Some OpenZiti use cases**
+## Background: Some OpenZiti use cases
 
 OpenZiti approaches networking from a software perspective. Solutions can ‘embed’ full mesh, zero trust overlay networks as software for use cases such as:
 
@@ -40,7 +40,7 @@ OpenZiti approaches networking from a software perspective. Solutions can ‘emb
 
 These are just examples, and you can see more [here](https://github.com/openziti/ziti/blob/release-next/ADOPTERS.md). Secure networking is now software you control. You can use it as you wish.
 
-## **Background: What does OpenZiti provide to enable secure networking as software?**
+## Background: What does OpenZiti provide to enable secure networking as software?
 
 One way to think about OpenZiti is to ask: If I assume the networks I run on are already compromised, how would I design my application?
 
@@ -63,7 +63,7 @@ OpenZiti answers with the following:
 8. **Software SDKs, agents, and containers** easily integrate with your applications and networking solutions. The most secure implementations embed the network directly in your code.
     
 
-## **We’re Not Done...**
+## We’re Not Done...
 
 Far from it! We continue to evolve OpenZiti, including:
 

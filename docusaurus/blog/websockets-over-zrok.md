@@ -12,18 +12,18 @@ tags:
 
 ---
 
-## **Where we started**
+## Where we started
 
 If you were using `zrok` &lt;=`v0.3.3` you might have noticed that websockets weren't exactly behaving quite like we 
 were expecting. We decided to quickly fix that to get users the features they want.
 
 <!-- truncate -->
 
-## **How we got to now**
+## How we got to now
 
 Conversely, you'll notice come the `zrok` `v0.3.4` [release](https://github.com/openziti/zrok/releases/tag/v0.3.4) websockets are in a much better place. We strive to give users the best experience we possibly can. Let me take you on the journey that got us here and show you the debugging steps we took.  
 
-### **Digging Strategy**
+### Digging Strategy
 
 To assist with testing we developed 3 test commands (one of which we decided to not ship with `zrok`).
 

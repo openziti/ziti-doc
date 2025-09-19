@@ -38,7 +38,7 @@ One popular method malicious actors use to intercept authorization codes is by r
 
 ![](/blogs/openziti/v1707663725015/8e0798d9-2992-493b-9d28-34bcf57da8e8.png)
 
-## **How does PKCE work?**
+## How does PKCE work?
 
 PKCE addresses the above vulnerability by introducing a new flow and three new parameters:
 
@@ -74,7 +74,7 @@ The following diagram represents the PKCE protocol flow:
 
 ![](/blogs/openziti/v1707664593271/95f591a4-717d-4626-a880-94e5a0657219.png)
 
-## **PKCE Benefits**
+## PKCE Benefits
 
 PKCE offers many security benefits that have made it a widely adopted standard among developers that implement OAuth 2.0. These benefits include:
 
@@ -91,7 +91,7 @@ PKCE offers many security benefits that have made it a widely adopted standard a
     PKCE uses a dynamic secret that’s generated for each authorization request, which reduces the risk associated with a compromised client secret.
     
 
-## **PKCE Best Practices**
+## PKCE Best Practices
 
 If you are implementing a PKCE protocol flow, you should adhere to the following best practices to ensure that your application is properly secured:
 
@@ -115,7 +115,7 @@ If you are implementing a PKCE protocol flow, you should adhere to the following
     <mark>OpenZiti BrowZer implements unique, per-auth-attempt, ephemeral auth flows, and no security-related data is stored outside of session storage. The data only exists in session storage during the PKCE protocol flow (</mark>*<mark>typically less than one second</mark>*<mark>).</mark>
     
 
-## **PKCE Implementation Challenges**
+## PKCE Implementation Challenges
 
 PKCE offers numerous benefits, but it still presents many challenges you should note if you attempt to implement it. These challenges include:
 
@@ -153,11 +153,11 @@ PKCE offers numerous benefits, but it still presents many challenges you should 
 
 The tie-in between OpenZiti BrowZer and PKCE is how this kind of authorization flow is used to enable your authorized users (who exist out on the internet) to simply use a browser, and a couple of clicks, to gain visibility, and access, to a web application that is otherwise **completely invisible** to everyone else (notably, malicious actors).
 
-You may recall that [BrowZer's zero-trust capabilities](./introducing-openziti-browzer.md#heading-authentication-in-a-browzer-environment) enforce an "*authenticate before connect*" flow. Users of your web app must first perform a successful **single sign-on** (SSO) that provides a strong assertion of the user's identity.
+You may recall that [BrowZer's zero-trust capabilities](./introducing-openziti-browzer.md#authentication-in-a-browzer-environment) enforce an "*authenticate before connect*" flow. Users of your web app must first perform a successful **single sign-on** (SSO) that provides a strong assertion of the user's identity.
 
 The Identity Provider (IDP) you associate with your network is up to you. It could be a cloud-based instance of AzureAD, Okta, or Auth0 (and these IDPs could even federate out to Google, GitHub, or dozens of other providers)...
 
-![image.png](/blogs/openziti/v1662733522760/XoZApNB43.png?auto=compress,format&format=webp align="left")
+![image.png](/blogs/openziti/v1662733522760/XoZApNB43.png)
 
 ...Alternatively, you can also self-host an open-source IDP instance of Keycloak, Authentik, ...whatever. If the IDP is OIDC-compliant, browZer will work with it.
 

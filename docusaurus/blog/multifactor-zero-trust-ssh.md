@@ -88,7 +88,7 @@ Also added in this release was support for OpenZiti's [TOTP-based](https://en.wi
 
 If you are interested in trying out `zssh` and it's partner `zscp`, you can download the latest releases from GitHub at [https://github.com/openziti-test-kitchen/zssh/releases/latest](https://github.com/openziti-test-kitchen/zssh/releases/latest), right next to the source code for the project.
 
-## **Share the Project**
+## Share the Project
 
 ![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 

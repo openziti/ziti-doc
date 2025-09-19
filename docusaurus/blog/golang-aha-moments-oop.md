@@ -172,7 +172,7 @@ I found circular package dependency errors to be very frustrating when I first s
 
 I’m still occasionally annoyed by circular dependency errors, but overall feel that the limitation promotes package decoupling and coherency.
 
-### **Requiring Type Interface Conformance**
+### Requiring Type Interface Conformance
 
 In most cases, if your type doesn’t match up with your interface, you’ll get a compile error. In some cases, where you may be doing runtime checks before converting, you might not notice that your type no longer fits the interface.
 
@@ -455,7 +455,7 @@ Rather than trying to shape these as overrides in a convoluted type hierarchy, e
 
 Every language has some inbuilt preferences. If you’re coming from a heavily object-oriented language, it can take time to adapt how you design your data types in Go. However, I think Go pushes you towards code that is less fragile and cleaner. If I were to write Java code again, it would be positively influenced by the habits I’ve picked up from Go.
 
-## **About OpenZiti**
+## About OpenZiti
 
 [OpenZiti](http://github.com/openziti/ziti) is an open-source platform for providing secure and reliable access to network applications. It does this using strong, certificate-based identities, end-to-end encryption, mesh networking, policy-based access control, and app-embedded SDKs. If you find this interesting, please consider [**starring us on GitHub**](https://github.com/openziti/ziti/). It helps to support the project! And if you haven't seen it yet, check out [**zrok.io**](https://zrok.io). It's a free sharing platform built on OpenZiti! It uses the OpenZiti Go SDK since it's a ziti-native application. It's also [**all open source too!**](https://github.com/openziti/zrok/)
 

@@ -93,7 +93,7 @@ zrok access private mypalworldwerver --bind 127.0.0.1:8211
 
 This command tells your laptop to access the server connection at 127.0.0.1:8211, which happens to be the default for Palworld.
 
-### **Important: do not close the resulting terminal windows!**
+### Important: do not close the resulting terminal windows!
 
 That leaves us with this: start the game, select Join Multiplayer, enter 127.0.0.1:8211, and connect! You are now playing over a secure network connection that no one can hijack.
 

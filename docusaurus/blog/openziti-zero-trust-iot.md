@@ -22,7 +22,7 @@ IoT devices are commonplace in most home networks and while they provide many us
 
 ![](/blogs/openziti/v1695064156479/7b2f7b92-a3dd-49f7-8819-377cf546e328.png)
 
-## **Prerequisites:**
+## Prerequisites
 
 1. Install Ubuntu 22.04 Server (64 bit) on a Raspberry Pi 4: [https://www.raspberrypi.com/software](https://www.raspberrypi.com/software/). We strongly suggest that you set up SSH to only use public key authentication as described in this article  
     [How to Set Up SSH Keys on Ubuntu 22.04 | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-22-04) Note: in addition to setting `PasswordAuthentication no` in `/etc/ssh/sshd_config` you will also need to set it in `/etc/ssh/sshd_config.d/50-cloud-init.conf.`
@@ -39,7 +39,7 @@ zitiLogin
 ziti edge create identity wifi-gateway -o wifi-gateway.jwt
 ```
 
-## **Create IoT Wi-Fi Router (updated)**
+## Create IoT Wi-Fi Router (updated)
 
 ssh or log into the console of the Raspberry Pi 4
 
@@ -218,7 +218,7 @@ sudo systemctl start hostapd.service
 sudo systemctl start isc-dhcp-server`
 ```
 
-## **Discover IoT Service Requirements:**
+## Discover IoT Service Requirements
 
 At this point, you should be able to connect your Wi-Fi IoT devices to the Wi-Fi access point but we have not built any Openziti services yet.
 

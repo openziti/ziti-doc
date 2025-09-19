@@ -89,13 +89,13 @@ I hear you thinking: *How do I access Portainer over the web if it’s invisible
 
 The answer is via a zero-trust overlay network that requires authentication before you (or anyone) can connect to it.
 
-### **How to Easily Deploy a Zero-Trust Overlay Network**
+### How to Easily Deploy a Zero-Trust Overlay Network
 
 The component that implements the zero-trust overlay network solution is OpenZiti.
 
 [**OpenZiti**](https://openziti.io/) is an open-source project that brings zero-trust networking principles directly into any application. The project provides all the pieces required to implement a zero-trust overlay network and provides all the tools necessary to integrate zero trust into your existing solutions.
 
-### **BrowZer**
+### BrowZer
 
 The next component involved in the solution is `BrowZer`.
 

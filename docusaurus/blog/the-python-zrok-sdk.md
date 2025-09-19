@@ -27,7 +27,7 @@ Check out the [Getting Started](https://docs.zrok.io/docs/getting-started/) guid
 
 ![](/blogs/openziti/v1701893410612/3adab72c-f78a-4cfc-b4e3-d4c645a70376.png)
 
-## **Expanding into Python**
+## Expanding into Python
 
 Here is all it takes to spin up a `zrok` enabled server using flask and waitress:
 
@@ -95,7 +95,7 @@ Well, the big reason is we want this to be easy above all else. Sharing what you
 
 Plus you can deploy your application anywhere. So long as the environment can reach out to the `zrok` host controller it can be wherever you need it to be. It can live in a container, cloud hosted, or even running nicely at home.
 
-## **Moving Forward**
+## Moving Forward
 
 Moving forward we want `zrok` to be as accesible as possible, both in options and ease of use. Support for more languages is coming! If you would like to talk about languages to support, or friction points then please reach out to us on [Discourse](https://openziti.discourse.group/c/zrok/24)!
 

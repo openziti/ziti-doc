@@ -36,7 +36,7 @@ Check out the [**Getting Started**](https://docs.zrok.io/docs/getting-started/) 
 
 ![File:Node.js logo.svg - Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/2560px-Node.js_logo.svg.png align="left")
 
-## **Expanding into NodeJS**
+## Expanding into NodeJS
 
 Here is all it takes to spin up a `zrok`\-enabled web server using Express:
 
@@ -128,7 +128,7 @@ The URL you will share with people will resemble this: `https://<SOME_SHARE_TOKE
 
 Once it has been shipped, we will be back here posting articles that discuss all the details, so be sure to subscribe to this blog's newsletter so you don't miss the announcements.
 
-## **Moving Forward**
+## Moving Forward
 
 Moving forward we want `zrok` to be as accessible as possible, both in options and ease of use. Support for more languages is coming! If you want to talk about languages to support or friction points, please reach out on [Discourse](https://openziti.discourse.group/c/zrok/24)!
 

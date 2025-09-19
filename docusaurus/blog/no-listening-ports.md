@@ -78,7 +78,7 @@ The OpenZiti mesh network is responsible for delivering the packets from an Open
 
 So the next time you see or read, "your server has no listening server ports," hopefully, it will make more sense!
 
-## **Share the Project**
+## Share the Project
 
 ![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 

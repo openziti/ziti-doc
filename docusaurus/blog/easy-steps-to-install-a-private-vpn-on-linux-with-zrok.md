@@ -89,7 +89,7 @@ Now, this second device is joined to the VPN, so it has a dashed line to the VPN
 
 ![](/blogs/openziti/v1722618841867/969509da-0a39-4a4b-ad76-0c0dc0a524c9.png)
 
-## **Share the Project**
+## Share the Project
 
 ![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 

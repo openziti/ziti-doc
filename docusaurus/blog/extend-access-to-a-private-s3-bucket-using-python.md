@@ -73,7 +73,7 @@ with openziti.monkeypatch():
 
 These Python snippets are representative of a functioning sample, `s3z.py` ([link to OpenZiti Python SDK](https://github.com/openziti/ziti-sdk-py/tree/main/sample/s3z#readme)). The README contains a list of the AWS and OpenZiti entities and configurations that make this possible.
 
-## **Share the Project**
+## Share the Project
 
 ![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 

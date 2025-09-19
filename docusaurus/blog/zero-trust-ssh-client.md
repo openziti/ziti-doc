@@ -100,7 +100,7 @@ Everything else in the example remains identical; these are the only lines that 
 
 If you're interested in `zssh`, the OpenZiti project and zero trust in general, check out [the next article](./multifactor-zero-trust-ssh). It focuses on using `zssh` and using OpenZiti's OIDC-based authentication mechanisms and uses [Keycloak](https://www.keycloak.org/) for federated authentication to GitHub or Google.
 
-## **Share the Project**
+## Share the Project
 
 ![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 

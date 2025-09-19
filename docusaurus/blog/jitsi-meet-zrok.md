@@ -120,7 +120,7 @@ This tutorial for Jitsi Meet is a great example of [zrok frontdoor](https://docs
 
 zrok is built with OpenZiti. Here's [another post about running an Asterisk PBX without published ports](https://medium.com/netfoundry/tunneling-voip-over-openziti-69d6487605e4), just as your Jitsi Meet instance has no open ports on the Docker Host's outward-facing interfaces.
 
-## **Share the Project**
+## Share the Project
 
 ![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 

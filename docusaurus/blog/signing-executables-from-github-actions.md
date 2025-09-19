@@ -123,7 +123,7 @@ It's a good idea to add a timestamp to your signed binary using a Time Stamping 
 
 Using EV certificates isn't for everyone, it's expensive. However, using an EV cert will gain you instant reputation with Defender and for some people, that price is worth it. Even if you're not using an EV cert, using AWS KMS to sign your binaries has the added benefit of keeping your private key safer. Yes, you still need to give GitHub credentials to list the key and sign data, but if there's a catastrophic bug with GitHub actions, you can feel good that it's impossible to extract the key!
 
-## **Share the Project**
+## Share the Project
 
 ![](/blogs/openziti/v1702330572628/7bb2b76c-af3f-45c6-83ab-d519f183024d.png?auto=compress,format&format=webp)
 

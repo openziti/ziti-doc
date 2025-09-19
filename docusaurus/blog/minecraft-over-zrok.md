@@ -71,7 +71,7 @@ Once you see that, you're ready to connect in Minecraft! Open up Minecraft, clic
 
 ![](/blogs/openziti/v1704565346389/46285049-0628-4e0d-9bf5-8b96f61e9029.gif)
 
-## **Summary - Share the Project**
+## Summary - Share the Project
 
 That's all there is to it! Now you can run your Minecraft server wherever you like and have your friends join your game!
 

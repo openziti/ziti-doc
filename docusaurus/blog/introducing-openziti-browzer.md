@@ -83,7 +83,7 @@ Although this diagram shows the target web app example is [Apache Guacamole](htt
 
 Now let's discuss the various BrowZer components.
 
-# Authentication in a BrowZer Environment
+## Authentication in a BrowZer Environment
 
 Below is a (*simplified*) diagram depicting the network-auth flow from user to a web application in a BrowZer environment.
 

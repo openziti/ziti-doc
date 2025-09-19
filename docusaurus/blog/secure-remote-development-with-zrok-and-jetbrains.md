@@ -32,7 +32,7 @@ I combine these tools to ensure I can always connect securely from my laptop to 
 
 If, on the other hand, you just want to secure your remote development before your next adventure, I have you covered. Here are three easy steps to do it.
 
-## **Step 1 - zrok Install & Setup**
+## Step 1 - zrok Install & Setup
 
 [Install the zrok command](https://docs.zrok.io/docs/getting-started/#installing-the-zrok-command) onto each device that you want to be able to connect to or from.
 
@@ -46,7 +46,7 @@ It will ask you to enter your email address, and then you will receive an email 
 
 Select “Enable Your Environment” from your account menu (click your email address) on the zrok web portal. The portal will display a zrok command like `zrok enable l2Ndsa92r7j3`, which you must copy and run on one of your devices. Repeat this process of generating and running the command for each device you intend to use.
 
-## **Step 2 - Sharing is Caring**
+## Step 2 - Sharing is Caring
 
 Now that your devices are registered, you must create a “share” on the device hosting your project files. Execute the following in a terminal on that device:
 
@@ -70,7 +70,7 @@ Just like the sharing (hosting) side, this creates a foreground process that you
 
 Both the share and access side display information about the connection, including connection setup details in case you’ve forgotten the commands. On your roaming device where the `zrok access` command is running, it will print a local url where the tunnel is listening, like: `tcp://127.0.0.1:9191 -> 5adagwfl888k` We'll use that in our JetBrains IDE during the next and final step.
 
-## **Step 3 - JetBrains Remote Development**
+## Step 3 - JetBrains Remote Development
 
 [JetBrains](https://jetbrains.com) support for [remote development](https://jetbrains.com/remote-development/) is one of those features that you don’t realize how much you need until you start using it. And to JetBrains’ credit, it is intuitive and easy to set up no matter how you plan to structure it. Take my advice and just try it first; don’t worry about which software runs where, if you need a JetBrains gateway, or anything else. Just start this way, and you can adjust from there.
 

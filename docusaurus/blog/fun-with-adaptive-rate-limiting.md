@@ -182,7 +182,7 @@ If anyone has feedback, I'm curious to hear it. Do you have a favorite rate-limi
 
 Thanks!
 
-## **About OpenZiti**
+## About OpenZiti
 
 [OpenZiti](http://github.com/openziti/ziti) is an open-source platform for providing secure and reliable access to network applications. It does this using strong, certificate-based identities, end-to-end encryption, mesh networking, policy-based access control, and app-embedded SDKs. If you find this interesting, please consider [**starring us on GitHub**](https://github.com/openziti/ziti/). It helps to support the project! And if you haven't seen it yet, check out [**https://zrok.io**](https://github.com/openziti/ziti/). It's a free sharing platform built on OpenZiti! It uses the OpenZiti Go SDK since it's a ziti-native application. It's also [**all open source too!**](https://github.com/openziti/zrok/)
 
