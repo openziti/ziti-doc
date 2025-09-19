@@ -22,7 +22,7 @@ To put it plainly, I don't like opening up ports on my local firewall. However, 
 
 ## Backstory
 
-#### ([Skip if you don't care about me and my life](#heading-so-howd-you-do-it))
+#### ([Skip if you don't care about me and my life](#so-howd-you-do-it))
 
 I finally got around to using a NAS device ([Synology DS220j](https://www.synology.com/en-us/products/DS220j) to be exact) instead of fiddling with USB backup drives. It was an exciting time (I get overly excited about organization since I'm a naturally messy person) since I could now centralize my data storage and backups, I could create users, quotas, you know, all the stuff about which my wife could not care less.
 
