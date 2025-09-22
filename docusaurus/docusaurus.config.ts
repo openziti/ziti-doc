@@ -11,9 +11,9 @@ import {
 } from "@openclint/docusaurus-shared/node";
 import path from "node:path";
 import {remarkYouTube, remarkReplaceMetaUrl, remarkScopedPath} from "@openclint/docusaurus-shared/plugins";
-const baseUrl = '/docs';
+const baseUrl = '/';
 const openziti = 'openziti';
-const docsBase = `${baseUrl}/${openziti}`;
+const docsBase = `${baseUrl}/docs/${openziti}`;
 
 const REMARK_MAPPINGS = [
     { from: '@onpremdocs',   to: '/onprem' },
