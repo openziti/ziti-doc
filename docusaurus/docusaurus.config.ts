@@ -43,7 +43,7 @@ const config: Config = {
     title: 'OpenZiti',
     tagline: 'Replacing Infrastructure With Software',
     url: `http://localhost:${port}`,
-    baseUrl: '/docs',
+    baseUrl: '/',
     trailingSlash: undefined,
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
