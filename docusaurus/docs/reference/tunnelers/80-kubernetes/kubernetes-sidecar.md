@@ -124,8 +124,10 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
           dnsPolicy: None
           dnsConfig:
             nameservers:
-              - 127.0.0.1   # used by the tunneler during startup to verify own DNS for the pod
-              - 10.96.0.10  # change to CoreDNS cluster service address
+              - 127.0.0.1   # all containers in pod must try this nameserver first
+              - 10.96.0.10  # change this to match the CoreDNS cluster service address you found in the first step
+            searches:
+              - cluster.local  # you must supply all search domains when overriding cluster DNS
           restartPolicy: Always
           volumes:
           - name: sidecar-client-identity
