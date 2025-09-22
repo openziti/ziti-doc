@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "scripts": {
-    "build": "echo '\n🚨 You are in the WRONG directory. Run build from the docusaurus folder.\n' && exit 1",
-    "start": "echo '\n🚨 You are in the WRONG directory. Run build from the docusaurus folder.\n' && exit 1"
-  }
-}
