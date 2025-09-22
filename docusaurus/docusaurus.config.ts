@@ -111,7 +111,7 @@ const config: Config = {
             '@docusaurus/plugin-content-blog',
             {
                 showReadingTime: true,
-                routeBasePath: 'openziti/blog',
+                routeBasePath: 'docs/openziti/blog',
                 tagsBasePath: 'tags',
                 include: ['**/*.{md,mdx}'],
                 path: 'blog',
@@ -177,7 +177,7 @@ const config: Config = {
             {
                 id: 'openziti',
                 path: `docs`,
-                routeBasePath: 'openziti',
+                routeBasePath: 'docs/openziti',
                 sidebarPath: `sidebars.ts`,
                 includeCurrentVersion: true,
                 remarkPlugins: [
