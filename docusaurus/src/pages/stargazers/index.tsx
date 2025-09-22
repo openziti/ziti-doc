@@ -11,6 +11,7 @@ import styles from "../new-landing/styles.module.css";
 import {NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
 import {starProps} from "@openziti/src/components/consts"
 import {openZitiFooter} from "@openziti/src/components/footer";
+import Head from "@docusaurus/Head";
 
 /* ------------------ Types & Constants ------------------ */
 type StarEvent = { date: string };
@@ -454,6 +455,10 @@ export default function Stargazers(): JSX.Element {
 
     return (
         <NetFoundryLayout className={styles.landing} starProps={starProps} footerProps={openZitiFooter}>
+            <Head>
+                {/* docusaurus doesn't seem to want to add this using the layout, need on pages too*/}
+                <meta data-rh="true" name="nf-pages-version" content="NFLayoutVersion" />
+            </Head>
             <ReactEcharts
                 option={chartOption}
                 style={{ width: '100%', height: CHART_HEIGHT }}

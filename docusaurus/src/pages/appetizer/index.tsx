@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, JSX} from "react";
 import AsciinemaWidget from "../../components/AsciinemaWidget";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
@@ -13,10 +13,12 @@ import {
     H3, MetaProps,
     NetFoundryHorizontalSection,
     NetFoundryLayout,
+    version as NFLayoutVersion,
 } from "@openclint/docusaurus-shared/ui";
 import {starProps} from "@openziti/src/components/consts";
 import {openZitiFooter} from "@openziti/src/components/footer";
 import ozstyles from "../../styles/openziti.layout.module.css";
+import Head from "@docusaurus/Head";
 
 function App(): JSX.Element {
     const castUrl = useBaseUrl("/appetizer.cast");
@@ -184,19 +186,20 @@ function App(): JSX.Element {
     };
 
     const m: MetaProps = {
-        title: "High-Level Public/Private Cryptography",
-        description: "Exploring core concepts of cryptography in OpenZiti.",
-        url: "https://openziti.io/docs/openziti/blog/cryptography",
-        image: "https://openziti.io/img/cryptography.png",
-        siteName: "OpenZiti",
+        title: "Appetizer · OpenZiti Documentation",
+        description: "Get started with the Appetizer guide in OpenZiti to learn real-time communication using overlay identities and reflect server.",
+        url: "https://netfoundry.io/docs/openziti/appetizer",
+        image: "https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/closeups/Ziggy-Chef-Closeup.png",
+        siteName: "NetFoundry OpenZiti",
         locale: "en_US",
         twitterX: {
             card: "summary_large_image",
             site: "@OpenZiti",
-            creator: "@AndrewMartinez",
-            imageAlt: "Diagram illustrating public/private key cryptography",
+            creator: "@openziti",
+            imageAlt: "OpenZiti Appetizer guide page preview",
         },
     };
+
 
     return (
         <NetFoundryLayout
@@ -205,6 +208,10 @@ function App(): JSX.Element {
             footerProps={openZitiFooter}
             meta={m}
         >
+            <Head>
+                {/* docusaurus doesn't seem to want to add this using the layout, need on pages too*/}
+                <meta data-rh="true" name="nf-pages-version" content="NFLayoutVersion" />
+            </Head>
             <div id="dont-remove-this-is-here-to-prevent-a-styling-issue">
                 <div className={styles.liveMsgContainerContainer} style={{minHeight: "100px", maxHeight: "450px"}}>
                     {liveMessageVisible && (

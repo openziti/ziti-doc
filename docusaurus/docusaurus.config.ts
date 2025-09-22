@@ -5,13 +5,12 @@ import {Config} from "@docusaurus/types";
 import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
-import {remarkScopedPath} from "./src/plugins/remark/remarkScopedPath";
 import {
     docUrl, addDocsRedir,
     DOCUSAURUS_URL, DOCUSAURUS_DEBUG, hotjarId
 } from "@openclint/docusaurus-shared/node";
 import path from "node:path";
-import {remarkYouTube, remarkReplaceMetaUrl} from "@openclint/docusaurus-shared/plugins";
+import {remarkYouTube, remarkReplaceMetaUrl, remarkScopedPath} from "@openclint/docusaurus-shared/plugins";
 const baseUrl = '/docs';
 const openziti = 'openziti';
 const docsBase = `${baseUrl}/${openziti}`;
@@ -74,9 +73,9 @@ const config: Config = {
         '@docusaurus/theme-search-algolia',
     ],
     customFields: {
-        DOCUSAURUS_BASE_PATH: '/docs',
+        DOCUSAURUS_BASE_PATH: '/',
         DOCUSAURUS_DOCS_PATH: docsBase,
-        OPENZITI_DOCS_BASE: '/openziti'
+        OPENZITI_DOCS_BASE: '/docs/openziti',
     },
     plugins: [
         function webpackAliases() {

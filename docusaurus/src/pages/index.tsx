@@ -14,9 +14,13 @@ import {cleanUrl} from "@openclint/docusaurus-shared/node";
 import {NetFoundryHorizontalSection, NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
 import {useLocation} from "@docusaurus/router";
 import {starProps} from "../components/consts";
+import Head from "@docusaurus/Head";
 
 function _docUrl(p:string) {
-    return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
+    if(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH) {
+        return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
+    }
+    return p;
 }
 
 interface WindowSize {
@@ -41,7 +45,7 @@ function HeroSection({ className }: { className?: string }) {
                         <div className={styles.aaHeroButtons}>
                             <a href="#deploy_an_overlay"
                                className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry For Free</a>
-                            <a href={_docUrl(`/learn/quickstarts/network/hosted`)}
+                            <a href={`/docs/openziti/learn/quickstarts/network/hosted`}
                                className={styles.aaBtn}>Host OpenZiti Yourself</a>
                         </div>
                     </div>
@@ -94,7 +98,7 @@ function GetStartedSection ({ className }: { className?: string }) {
                             <p className={styles.aaStartOptionText}>
                                 Deploy and operate your own OpenZiti network using our documentation and community support—no commercial support included.
                             </p>
-                            <a href={_docUrl(`/learn/quickstarts/network/hosted`)} className={btns}>View Deployment Guide</a>
+                            <a href={`/docs/openziti/learn/quickstarts/network/hosted`} className={btns}>View Deployment Guide</a>
                         </div>
                     </div>
                     <a href="https://openziti.discourse.group/" className={btns}>Join the Community</a>
@@ -288,6 +292,10 @@ function App() {
     const {pathname} = useLocation();
     return (
         <NetFoundryLayout className={styles.landing} starProps={starProps} >
+            <Head>
+                {/* docusaurus doesn't seem to want to add this using the layout, need on pages too*/}
+                <meta data-rh="true" name="nf-pages-version" content="NFLayoutVersion" />
+            </Head>
             <HeroSection className={styles.aaabbb}/>
             <ZeroTrustModels windowSize={windowSize} />
             <SuperPowerSection />
