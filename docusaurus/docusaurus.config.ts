@@ -31,8 +31,6 @@ const redirectsArr: { to: string; from: string[] }[] = [
   }
 ];
 
-addDocsRedir(redirectsArr); //add a redirect from /docs to the actual docs path if needed
-
 const port =
     (() => {
       const idx = process.argv.indexOf('--port');
