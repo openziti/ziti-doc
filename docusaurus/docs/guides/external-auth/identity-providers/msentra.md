@@ -8,7 +8,7 @@ import { CallbackUrls } from '../../../_imports';
 
 # Microsoft Entra IDP
 
-<img src="/icons/logo-msentra.svg" alt="MS Entra logo" height="100px"/>
+<img src="@static/icons/logo-msentra.svg" alt="MS Entra logo" height="100px"/>
 
 The following fields are necessary in order to configure an external JWT signer with OpenZiti. This configuration will
 enable authentication via JWTs obtained through an

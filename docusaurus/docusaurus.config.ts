@@ -18,6 +18,7 @@ const docsBase = `/docs/${openziti}`;
 const REMARK_MAPPINGS = [
     { from: '@onpremdocs',   to: '/onprem' },
     { from: '@openzitidocs', to: `/docs/openziti`},
+    { from: '@static', to: `/docs`},
 ];
 
 const redirectsArr: { to: string; from: string[] }[] = [
