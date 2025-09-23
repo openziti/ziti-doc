@@ -22,7 +22,7 @@
     "@docusaurus/theme-common": "3.8.1",
     "@docusaurus/theme-mermaid": "^3.8.1",
     "@mdx-js/react": "^3.0.0",
-    "@openclint/docusaurus-shared": "^0.0.130",
+    "@openclint/docusaurus-shared": "^0.0.153",
     "@types/react": "^19.1.9",
     "asciinema-player": "^3.10.0",
     "clsx": "^2.0.0",

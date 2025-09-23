@@ -5,12 +5,9 @@ import {Config} from "@docusaurus/types";
 import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
-import {
-    docUrl, addDocsRedir,
-    DOCUSAURUS_URL, DOCUSAURUS_DEBUG, hotjarId
-} from "@openclint/docusaurus-shared/node";
+import { docUrl, hotjarId } from "@openclint/docusaurus-shared/node";
 import path from "node:path";
-import {remarkYouTube, remarkReplaceMetaUrl, remarkScopedPath} from "@openclint/docusaurus-shared/plugins";
+import {remarkYouTube, remarkReplaceMetaUrl, remarkScopedPath, remarkCodeSections, remarkYamlTable} from "@openclint/docusaurus-shared/plugins";
 
 const openziti = 'openziti';
 const docsBase = `/docs/${openziti}`;
@@ -18,7 +15,7 @@ const docsBase = `/docs/${openziti}`;
 const REMARK_MAPPINGS = [
     { from: '@onpremdocs',   to: '/onprem' },
     { from: '@openzitidocs', to: `/docs/openziti`},
-    { from: '@static', to: `/docs`},
+    { from: '@static', to: ``},
 ];
 
 const redirectsArr: { to: string; from: string[] }[] = [
@@ -101,8 +98,8 @@ const config: Config = {
                 sidebarPath: require.resolve('./sidebar-policies.ts'),
                 beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives,],
                 remarkPlugins: [
-                    require('./src/plugins/remark/remark-yaml-table'),
-                    require('./src/plugins/remark/remark-code-block'),
+                    remarkYamlTable,
+                    remarkCodeSections,
                 ],
             },
         ],
@@ -117,7 +114,7 @@ const config: Config = {
                 remarkPlugins: [
                     remarkYouTube,
                     [remarkReplaceMetaUrl, {from: '@staticoz', to: 'openziti'}],
-                    [remarkScopedPath, { mappings: REMARK_MAPPINGS }],
+                    [remarkScopedPath, { mappings: REMARK_MAPPINGS, debug: false }],
                 ],
                 blogSidebarCount: 'ALL',
                 blogSidebarTitle: 'All posts',
@@ -181,7 +178,7 @@ const config: Config = {
                 includeCurrentVersion: true,
                 remarkPlugins: [
                     [remarkReplaceMetaUrl, {from: '@staticoz', to: 'openziti'}],
-                    [remarkScopedPath, { mappings: REMARK_MAPPINGS }],
+                    [remarkScopedPath, { mappings: REMARK_MAPPINGS, debug: false }],
                 ],
             },
         ],
