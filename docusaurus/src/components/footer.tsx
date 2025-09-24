@@ -20,7 +20,7 @@ export const openZitiFooter = {
     communityLinks: [
         <a href="https://github.com/openziti/ziti">GitHub</a>,
         <a href="https://openziti.discourse.group/">Discourse Forum</a>,
-        <a href="/policies/CONTRIBUTING">Contributing</a>,
+        <a href="/docs/openziti/policies/CONTRIBUTING">Contributing</a>,
     ],
     resourceLinks: [
         <a href="https://blog.openziti.io">OpenZiti Tech Blog</a>,

@@ -16,7 +16,7 @@ findMarkdownFiles(){
         -regex ".*\.mdx?"
 }
 
-for DOCSROOT in $DOCUSAURUS/{docs,docs-policies}; do
+for DOCSROOT in $DOCUSAURUS/{docs}; do
     while read -r MARKDOWNFILE; do 
         while read -r RELATIVELINK; do 
             ABSOLUTEPATH=$(realpath "$(dirname "${MARKDOWNFILE}")/${RELATIVELINK}")

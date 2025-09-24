@@ -98,20 +98,6 @@ const config: Config = {
         },
         [pluginHotjar, {}],
         [
-            '@docusaurus/plugin-content-docs',
-            {
-                id: 'docs-policies',
-                path: 'docs-policies',
-                routeBasePath: 'policies',
-                sidebarPath: require.resolve('./sidebar-policies.ts'),
-                beforeDefaultRemarkPlugins: [
-                    remarkGithubAdmonitionsToDirectives,
-                ],
-                remarkPlugins: [
-                ],
-            },
-        ],
-        [
             '@docusaurus/plugin-content-blog',
             {
                 showReadingTime: true,
