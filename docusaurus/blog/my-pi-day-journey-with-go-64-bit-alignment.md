@@ -35,11 +35,11 @@ Well, it seemed it was time to dig my raspberry pi out of the abyss of untouched
 
 ### 64 Bit Raspbian
 
-The 64-bit [expressInstall](https://docs.openziti.io/docs/learn/quickstarts/network/local-no-docker) process went swimmingly, with no issues at all. I started up the router, and zipped through some boilerplate commands I have to test out an OpenZiti network locally. No problems, I hadn't expected any since the user seeing the issue is running a 32-bit OS, but I had to be sure.
+The 64-bit [expressInstall](https://netfoundry.io/docs/openziti/learn/quickstarts/network/local-no-docker) process went swimmingly, with no issues at all. I started up the router, and zipped through some boilerplate commands I have to test out an OpenZiti network locally. No problems, I hadn't expected any since the user seeing the issue is running a 32-bit OS, but I had to be sure.
 
 ### 32 Bit Raspbian
 
-Onto the 32-bit Raspbian, I went, again, [expressInstall](https://docs.openziti.io/docs/learn/quickstarts/network/local-no-docker) is no problem. I start up the router, annnnd there it is.
+Onto the 32-bit Raspbian, I went, again, [expressInstall](https://netfoundry.io/docs/openziti/learn/quickstarts/network/local-no-docker) is no problem. I start up the router, annnnd there it is.
 
 ```bash
 $ startRouter

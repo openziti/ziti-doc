@@ -16,7 +16,7 @@ At the [OpenZiti project](https://github.com/openziti), we heavily rely on OpenA
 
 <!-- truncate -->
 
-We'll generate an OpenAPI Python client library from our [OpenZiti Edge Client API spec](https://github.com/openziti/edge-api/blob/main/client.yml). This API allows OpenZiti clients to create OpenZiti [controller](https://docs.openziti.io/docs/learn/introduction/components#openziti-controller) sessions to gather information needed for them to do work. We'll map what we define in the spec to the concepts expressed in the generated client. We'll step through a basic authentication and request/response example to help you understand what is going on.
+We'll generate an OpenAPI Python client library from our [OpenZiti Edge Client API spec](https://github.com/openziti/edge-api/blob/main/client.yml). This API allows OpenZiti clients to create OpenZiti [controller](https://netfoundry.io/docs/openziti/learn/introduction/components#openziti-controller) sessions to gather information needed for them to do work. We'll map what we define in the spec to the concepts expressed in the generated client. We'll step through a basic authentication and request/response example to help you understand what is going on.
 
 ## Generating an OpenAPI Python Client:
 
@@ -181,7 +181,7 @@ Here, we see that requests to this endpoint must include a header named `zt-sess
 
 OpenZiti Edge clients can authenticate using either the `password` or `cert` method. In practice, most OpenZiti clients will create a session with the controller by performing an mTLS handshake, reading a client `credentials.json` file after JWT enrollment. We'll add these credentials to our `api_client`'s `configuration`.
 
-Once we authenticate, we'll gather the `zt-session` token out of the response and add it to our client `configuration` so that it is used in subsequent requests. We can then finally make a request with our `ServicesApi` class using the `list_services()` method, which will return a `ListServicesEnvelope` model to grant us access to our service information. OpenZiti [services](https://docs.openziti.io/docs/learn/core-concepts/services/overview) are container types that encapsulate information needed by OpenZiti clients to operate on the network.
+Once we authenticate, we'll gather the `zt-session` token out of the response and add it to our client `configuration` so that it is used in subsequent requests. We can then finally make a request with our `ServicesApi` class using the `list_services()` method, which will return a `ListServicesEnvelope` model to grant us access to our service information. OpenZiti [services](https://netfoundry.io/docs/openziti/learn/core-concepts/services/overview) are container types that encapsulate information needed by OpenZiti clients to operate on the network.
 
 ```python
 import json

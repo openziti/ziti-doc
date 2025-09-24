@@ -21,11 +21,11 @@ Postman can build a collection of API requests and has a friendly interface for 
 
 ## About the Management API
 
-The [OpenZiti](https://docs.openziti.io/docs/learn/introduction/) controller provides an edge-management API for creating, reading, updating, and deleting (CRUD) OpenZiti resources, e.g., Services, Edge Router Policies, etc. The simplest way to use the edge-management API is through [the `ziti` CLI](https://docs.openziti.io/docs/downloads#the-ziti-executable) or [the console](https://github.com/openziti/ziti-console#readme).
+The [OpenZiti](https://netfoundry.io/docs/openziti/learn/introduction/) controller provides an edge-management API for creating, reading, updating, and deleting (CRUD) OpenZiti resources, e.g., Services, Edge Router Policies, etc. The simplest way to use the edge-management API is through [the `ziti` CLI](https://netfoundry.io/docs/openziti/downloads#the-ziti-executable) or [the console](https://github.com/openziti/ziti-console#readme).
 
 ### What about the Client API?
 
-The edge-management API is distinct from the edge-client API. [Edge SDKs](https://docs.openziti.io/docs/reference/developer/sdk/) use the edge-client API to authenticate and find services and routers. The OpenZiti Controller can be configured to provide both APIs on the same server port. Whether the two APIs are combined or split, their URL paths are discrete. You can learn more about both APIs in [the developer references](https://ziti-doc-git-kube-guide-openziti.vercel.app/docs/reference/developer/).
+The edge-management API is distinct from the edge-client API. [Edge SDKs](https://netfoundry.io/docs/openziti/reference/developer/sdk/) use the edge-client API to authenticate and find services and routers. The OpenZiti Controller can be configured to provide both APIs on the same server port. Whether the two APIs are combined or split, their URL paths are discrete. You can learn more about both APIs in [the developer references](https://ziti-doc-git-kube-guide-openziti.vercel.app/docs/reference/developer/).
 
 ## Generated Clients
 
@@ -33,7 +33,7 @@ Before you write an edge-management client, could you use the [Go client (`go-sw
 
 ## Get the OpenAPI 2.0 Specification
 
-The best place to get the specification is your running OpenZiti Controller. That way, you know the specification matches the version you are using. The controller publishes the spec in the edge-management API at the path `/edge/management/v1/swagger.json`. There's also a built-in API reference website at the path `/edge/management/v1/docs`. If you don't have a running controller, browse [the latest spec and API reference on the docs site](https://docs.openziti.io/docs/reference/developer/api/edge-management-reference).
+The best place to get the specification is your running OpenZiti Controller. That way, you know the specification matches the version you are using. The controller publishes the spec in the edge-management API at the path `/edge/management/v1/swagger.json`. There's also a built-in API reference website at the path `/edge/management/v1/docs`. If you don't have a running controller, browse [the latest spec and API reference on the docs site](https://netfoundry.io/docs/openziti/reference/developer/api/edge-management-reference).
 
 ## Import to Postman
 
