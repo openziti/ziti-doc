@@ -23,7 +23,7 @@ can collaboratively search for hidden caves or build giant pyramids with mazes o
 
 If these aspiring server hosters get ambitious enough, they'll figure out a way to make it work. Take my son for example; walking by him one day he says "Hey dad, I've hosted my own Minecraft server" to which I replied "Cool, are you playing a LAN party with your brother or something?" (a LAN party is a term for when you play with a group of friends on a local network, like your home wifi). He then replied, "Yeah, I'm playing with Brett and Xavier." After a short pause to process this information I say "Why isn't Brett down here playing with you?" (Brett is his friend after all). My son replies "Brett's at home, I sent him a program that lets him connect to my server."
 
-![You did what now 2.jpg](/blogs/openziti/v1665497114782/No7U8v5FY.jpg?height=300 align="left")
+![You did what now 2.jpg](/blogs/openziti/v1665497114782/No7U8v5FY.jpg?height=300)
 
 > "You did what now?"
 

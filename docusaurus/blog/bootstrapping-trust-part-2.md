@@ -67,7 +67,7 @@ The data that will be signed can be anything. What it represents is not importan
 
 For example, here is the Ziti logo:
 
-![](/blogs/openziti/v1654257666736/kPJ_N4wis.png align="left")
+![](/blogs/openziti/v1654257666736/kPJ_N4wis.png)
 
 This logo's file can be hashed using SHA-256 via the `sha256sum` command commonly found on Linux.
 

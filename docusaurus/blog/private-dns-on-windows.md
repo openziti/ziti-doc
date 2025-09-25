@@ -24,7 +24,7 @@ OpenZiti's tunnelers have a killer feature, [a superpower](https://www.youtube.c
 
 Capturing DNS requests is somewhat tricky, as you might expect. Compounding the problem, each operating system works differently. To make matters worse, DNS is such a fundamental part of your (or your users') operating system, when you get it wrong, it's very disruptive! When DNS isn't working, it seems like your whole network doesn't work! (Depicted is Ziggy wondering why his network doesn't work because DNS is broken)
 
-![](https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/png/Ziggy-has-a-Question-Closeup.png align="left")
+![](https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/png/Ziggy-has-a-Question-Closeup.png)
 
 So how does OpenZiti accomplish intercepting any DNS entry at all, including overriding existing DNS entries? We first tried to use the API provided by Microsoft for creating a VPN. That API was poorly documented, difficult to implement and didn't do exactly what we wanted. We had to find a better way, and we did! On the Windows operating system, we were able to successfully use a feature called the [Name Resolution Policy Table, or NRPT for short](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/dn593632(v=ws.11)).
 

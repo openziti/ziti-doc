@@ -37,7 +37,7 @@ Prometheus is also tremendously flexible. It has numerous available plugins and 
 
 I don't know about you, but historically, when I've thought about a metrics collection agent, I tend to think of an agent that reads a log file or some library that pushes rows into a giant data lake in the cloud. I don't generally think about a solution that implements poll-based metrics. This is often because the target of a poll-based collecting agent will probably be behind a firewall.
 
-![FW](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/fw.png align="left")
+![FW](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/fw.png)
 
 As you would expect, firewalls make it exceptionally difficult to implement a poll-based solution as firewalls have been known to make a habit of preventing external actors from accessing random http servers behind it! After all, that is their primary function!
 
@@ -63,7 +63,7 @@ Let's imagine that we have already deployed a solution using two Kubernetes clus
 
 #### Figure 1 - Before OpenZiti
 
-![Before OpenZiti](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubernetes-prometheus-before.svg align="left")
+![Before OpenZiti](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubernetes-prometheus-before.svg)
 
 ### Taking a Closer Look
 
@@ -87,7 +87,7 @@ Now that we understand the basic setup and understand some possible problems, le
 
 #### Figure 2 - After OpenZiti
 
-![after](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubernetes-prometheus-after.svg align="left")
+![after](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubernetes-prometheus-after.svg)
 
 ### Taking a Closer Look After OpenZiti
 

@@ -19,7 +19,7 @@ tags:
 
 Ok. Here it is. We are at the end of the series and here is where we'll put it all together and really start to understand the sort of innovations you can create when you zitify an application. As a reminder, we are working with [Prometheus](https://prometheus.io/), a CNCF project that we will use to monitor a workload deployed in two separate [Kubernetes](https://kubernetes.io) clusters. To save you from flipping back to a previous article, here is what that solution looks like.
 
-![overview](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubernetes-prometheus-after.svg align="left")
+![overview](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubernetes-prometheus-after.svg)
 
 Now we are ready to start using our Prometheus servers. We'll use our OpenZiti overlay network to connect to a workload which will generate a metric we want to display in Prometheus. We'll then configure Prometheus to scrape the workload and put it on a graph to prove it works. Once that's complete, we'll play around with the setup and see if we really can scrape anything, anywhere. Let's begin.
 
@@ -55,7 +55,7 @@ With your developer access you should be able to navigate your browser to http:/
 
 > We won't dwell on this for long in this article but notice that this is showing off another superpower of OpenZiti, private DNS. Notice that you were able to browse to a totally fictitious domain name: kubea.prometheus.svc. ".svc" is **not** a legitimate top level domain. [Look at the full list of top level domains starting with S](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#S). You won't find ".svc" on that list at this time
 
-![kubea.prom.init](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubea.prom.init.png align="left")
+![kubea.prom.init](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubea.prom.init.png)
 
 You should see the following. You might have noticed that the chart deployed has a few other containers we have not discussed yet. We'll not go into those containers in this article. What's important is that this Prometheus server has a few targets already for us to access. Neat, but this isn't what we want to actually monitor.
 
@@ -104,7 +104,7 @@ When the trigger happens for ClusterA you will see a message like the one below.
 
 Once you've correctly updated the configmap, and `configmap-reloadz` detected the change and told Prometheus to reload. You'll see a new target has been reported by Prometheus at http://kubea.prometheus.svc/targets. You should now see "kubeA.reflectz (1/1 up)" showing. Congratulations! You have just successfully scraped a target from zitified Prometheus! Remember this workload does not listen on the Kubernetes underlay network. It's only accessible from the OpenZiti overlay.
 
-![kubea.target1.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubea.target1.png align="left")
+![kubea.target1.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubea.target1.png)
 
 ### Let's Graph It!
 
@@ -121,7 +121,7 @@ Cool, we have a target. The target can be scraped by Prometheus over the OpenZit
 5. Notice there are no connections (0)
     
 
-![grpah it](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubea.graph.png align="left")
+![grpah it](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubea.graph.png)
 
 ### Generate Some Data
 
@@ -146,7 +146,7 @@ you sent me: another reflect test
 ^C
 ```
 
-![kubea.more.total.conn.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubea.more.total.conn.png align="left")
+![kubea.more.total.conn.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubea.more.total.conn.png)
 
 ### Scrape Something Else
 
@@ -174,7 +174,7 @@ kubectl edit cm prometheuz-prometheus-server
 
 After watching the logs from `configmap-reloadz` on ClusterA and seeing the webhook trigger. Just go back to the Prometheus server in the browser. You should be at the 'graph' url but if not navigate back and execute another graph for `reflect_total_connections`. When we do that it probably doesn't look much different but... Wait a second? In the legend? Can it be? That's right. From Kubernetes ClusterA, we have just scraped a workload from Kubernetes ClusterB, entirely over the OpenZiti overlay.
 
-![kubeA-and-kubeB.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubeA-and-kubeB.png align="left")
+![kubeA-and-kubeB.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubeA-and-kubeB.png)
 
 Generate some data like you did before by running a few netcat connection/disconnects and click 'Execute' again. Don't forget to send the connection request to kubeB though!
 
@@ -193,7 +193,7 @@ you sent me: one more for fun and profit
 ^C
 ```
 
-![kubeB from kubeA](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubeB-from-kubeA.png align="left")
+![kubeB from kubeA](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubeB-from-kubeA.png)
 
 ## Scraping All the Things!
 
@@ -216,7 +216,7 @@ docker run \
   openziti/prometheuz
 ```
 
-![local-docker-targets.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/local-docker-targets.png align="left")
+![local-docker-targets.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/local-docker-targets.png)
 
 Look at what we've just done. We have started a Prometheus instance locally, and used it to connect to four Prometheus targets via scrape configurations when all four targets are hidden entirely from my local computer (and any computer) unless the computer has an OpenZiti identity. I personally think that is incredibly cool!
 
@@ -260,11 +260,11 @@ docker run \
 
 After configuring the OpenZiti overlay, we just need to open a browser and navigate to http://local.prometheus.svc/targets. SUCCESS!
 
-![local-docker-targets-no-listener.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/local-docker-targets-no-listener.png align="left")
+![local-docker-targets-no-listener.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/local-docker-targets-no-listener.png)
 
 ### SUCCESS!
 
-![local-docker-graph-no-listener.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/local-docker-graph-no-listener.png align="left")
+![local-docker-graph-no-listener.png](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/local-docker-graph-no-listener.png)
 
 ## Wrap Up
 

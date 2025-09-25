@@ -75,7 +75,7 @@ Additionally, the following components are used in the following diagrams:
 
 ## SDK Host & Client Public Router
 
-![SDK-SDK-Public Router@4x.png](/blogs/openziti/v1660143492122/A-IxGQkAi.png align="left")
+![SDK-SDK-Public Router@4x.png](/blogs/openziti/v1660143492122/A-IxGQkAi.png)
 
 - Uses SDKs for both the host and client, which associates processes to identities in OpenZiti for the highest level of security
 - Uses a public router deployed by the API provider
@@ -84,7 +84,7 @@ Additionally, the following components are used in the following diagrams:
 
 ## SDK Host & Client Private Router
 
-![SDK-SDK-Private Routers@4x.png](/blogs/openziti/v1660143484083/TG8M_jfa1.png align="left")
+![SDK-SDK-Private Routers@4x.png](/blogs/openziti/v1660143484083/TG8M_jfa1.png)
 
 - Uses SDKs for both the host and client, which associates processes to identities in OpenZiti for the highest level of security
 - Uses a private router that requires a client to deploy the router (dial-out is required)
@@ -93,7 +93,7 @@ Additionally, the following components are used in the following diagrams:
 ## Tunneler Host & Client Public Router
 
 
-![TUN-TUN-Public Router@4x.png](/blogs/openziti/v1660143502983/20FsHrueq.png align="left")
+![TUN-TUN-Public Router@4x.png](/blogs/openziti/v1660143502983/20FsHrueq.png)
 
 - Uses Tunellers for both the host and client, which associates hosts to identities in OpenZiti
 - Uses a public router deployed by the API provider
@@ -101,7 +101,7 @@ Additionally, the following components are used in the following diagrams:
 
 ## Tunneler Host & Client Private Router
 
-![TUN-TUN-Private Router@4x.png](/blogs/openziti/v1660143496703/cVbNoLM2t.png align="left")
+![TUN-TUN-Private Router@4x.png](/blogs/openziti/v1660143496703/cVbNoLM2t.png)
 
 - Uses Tunellers for both the host and client, which associates hosts to identities in OpenZiti
 - Uses a private router that requires a client to deploy the router (dial-out is required)

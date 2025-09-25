@@ -204,7 +204,7 @@ With `unrespondedHeartbeat` having an offset of 24, all is right with the world,
 
 This [xkcd](https://xkcd.com/) sums up my pragmatic decision nicely.
 
-![Efficiency](https://imgs.xkcd.com/comics/efficiency.png align="left")
+![Efficiency](https://imgs.xkcd.com/comics/efficiency.png)
 
 I knew this wasn't going to be the only case, there was no way that more wouldn't appear in this project and many other projects used by OpenZiti. So, the easiest way I could come up with to solve this across the board was to, as before, find all variables which have atomic 64-bit operations performed on them, and check if they are in a data structure. To start this venture, I put together a quick little regex and grepped it across the project, to pull out all 64-bit variables having atomic operations performed on them. Unfortunately, Mac grep doesn't have Perl regex so there's a little quirk in my regex to make it "non-greedy".
 

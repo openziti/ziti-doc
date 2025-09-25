@@ -34,7 +34,7 @@ If you want to follow along you'll need to have a `zrok` environment set up. If 
 
 Check out the [**Getting Started**](https://docs.zrok.io/docs/getting-started/) guide for more information.
 
-![File:Node.js logo.svg - Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/2560px-Node.js_logo.svg.png align="left")
+![File:Node.js logo.svg - Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/2560px-Node.js_logo.svg.png)
 
 ## Expanding into NodeJS
 

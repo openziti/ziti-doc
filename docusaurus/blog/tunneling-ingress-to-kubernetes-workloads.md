@@ -53,11 +53,11 @@ If you'd prefer to watch a video that goes over the same content contained in th
 
 Below is an overview of the [Ziti Network](https://openziti.github.io/ziti/overview.html#overview-of-a-ziti-network) I created for this article. On the left you can see that the client, my computer, runs Windows 10. Inside Windows 10 I run linux and bash using Ubuntu via [Windows Subsystem For Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install). If you run Windows and don't have WSL installed I would encourage you to install and learn it! In my bash shell I have downloaded the linux version of `kubectl` created by combining the Ziti Golang SDK into it. You can grab it from [this link](https://github.com/openziti-incubator/kubectl/releases/latest/download/kubectl-linux-amd64) if you like or go check out [the code on GitHub](https://github.com/openziti-incubator/kubectl) and build it yourself!
 
-![🙂](/blogs/openziti/v1653224133689/DoisPrjcH.png align="left")
+![🙂](/blogs/openziti/v1653224133689/DoisPrjcH.png)
 
 ### Solution Overview
 
-![image.png](/blogs/openziti/v1654786613938/D7i8n0NOP.png align="left")
+![image.png](/blogs/openziti/v1654786613938/D7i8n0NOP.png)
 
 ### Basic Ziti Setup
 
@@ -263,7 +263,7 @@ ziti-host-976b84c66-kr4bc   1/1     Running   0          114m
 
 We've seen in this post how you can not only secure your Kubernetes API with the normal Kubernetes mechanisms. You can also take your Kubernetes API off the internet **ENTIRELY**. No need to deploy and maintain a special bastion node. Now by having a secure, zero-trust overlay in place you can safely and securely access your Kubernetes API without the fear of that public, high-value API getting attacked.
 
-![](/blogs/openziti/v1653224136599/XaHdVbzL4.jpeg align="left")
+![](/blogs/openziti/v1653224136599/XaHdVbzL4.jpeg)
 
 Once you've deployed Ziti into the Kubernetes cluster you're not done there. Now you can also use Ziti to span cloud networks. You can use it to easily link private data centers or other private Kubernetes clusters all into one secure, zero-trust overlay network! Use Ziti to expose workloads that are **TRULY** private! In future articles we might explore how we can bring Ziti to bear on these topics, stay tuned!
 

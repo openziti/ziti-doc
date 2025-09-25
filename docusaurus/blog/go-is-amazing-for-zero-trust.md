@@ -21,7 +21,7 @@ Recently, I used our [SDK based on Go](https://github.com/openziti/sdk-golang/) 
 
 The [Appetizer Demo doc page](https://openziti.io/appetizer) is live. You can go there and experience it now if you like or later after reading a bit more about it here. It'll hopefully take five minutes or less, depending on how fast you are! If you'd prefer to look at the source from GitHub first, have a look at [the reflect server](https://github.com/openziti-test-kitchen/appetizer/blob/main/overlay/reflectServer.go) and/or the [reflect client](https://github.com/openziti-test-kitchen/appetizer/blob/main/clients/reflect.go).
 
-![[object Object]](https://openziti.io/img/appetizer/step4.svg align="left")
+![[object Object]](https://openziti.io/img/appetizer/step4.svg)
 
 <!-- truncate -->
 

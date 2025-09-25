@@ -24,7 +24,7 @@ In our previous posts, we introduced the concept of [Zitification](https://openz
 
 This article will show how to *zitify* your Python applications with minor code changes.
 
-![Ziggy Loves Python.jpg](/blogs/openziti/v1663167906947/aDQdNSiXW.jpg align="left")
+![Ziggy Loves Python.jpg](/blogs/openziti/v1663167906947/aDQdNSiXW.jpg)
 
 ## Setup
 
