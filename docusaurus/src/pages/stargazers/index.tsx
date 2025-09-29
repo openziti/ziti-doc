@@ -110,9 +110,8 @@ function calculateStats(events: StarEvent[], range: DateRange) {
     }
 
     const first = inWindow[0];
-    const last = inWindow[inWindow.length - 1];
-    
-    const numDays = Math.max(1, Math.floor((maxT - minT) / DAY) + 1);
+    const effectiveStart = Math.max(minT, first); // Later of: range start OR first star
+    const numDays = Math.max(1, Math.floor((maxT - effectiveStart) / DAY) + 1);
 
     const dayMap = new Map<number, number>();
     for (const t of inWindow) {
