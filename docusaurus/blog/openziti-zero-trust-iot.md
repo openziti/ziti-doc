@@ -5,7 +5,7 @@ date: 2023-09-20T14:08:50Z
 cuid: clmrtkyar000209mh1yq1fybs
 slug: openziti-zero-trust-iot-wi-fi-gateway
 authors: [RobertCaamano]
-image: /blogs/openziti/v1695128197082/cec3ab0f-80e7-48fb-aced-f45fe933aedb.jpeg
+image: "@site/blogs/openziti/v1695128197082/cec3ab0f-80e7-48fb-aced-f45fe933aedb.jpeg"
 tags: 
   - iot
   - openziti

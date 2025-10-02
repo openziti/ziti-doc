@@ -5,7 +5,7 @@ date: 2025-02-12T20:17:23Z
 cuid: cm72cr7mq000408la89h44kh2
 slug: zrok-custom-domains
 authors: [NickPieros]
-image: /blogs/openziti/v1739389834988/18400a05-53fc-45ca-b458-c4c56b7b4b81.png
+image: "@site/blogs/openziti/v1739389834988/18400a05-53fc-45ca-b458-c4c56b7b4b81.png"
 tags: 
   - dns
   - zrok

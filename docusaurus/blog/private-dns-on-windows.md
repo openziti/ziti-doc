@@ -6,7 +6,7 @@ date: 2023-03-15T21:06:11Z
 cuid: clfa69o4m000509lbe5qagw7h
 slug: private-dns-on-windows
 authors: [ClintDovholuk]
-image: /blogs/openziti/v1678971944159/0a3cfe23-5f9a-4576-a89d-e272b3b360d4.png
+image: "@site/blogs/openziti/v1678971944159/0a3cfe23-5f9a-4576-a89d-e272b3b360d4.png"
 tags: 
   - dns
   - security

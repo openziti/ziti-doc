@@ -5,7 +5,7 @@ date: 2022-11-09T22:10:42Z
 cuid: claa73b5k000509l012jsa3ic
 slug: using-ebpf-tc-to-securely-mangle-packets-in-the-kernel-and-pass-them-to-my-secure-networking-application
 authors: [RobertCaamano]
-image: /blogs/openziti/v1668008121762/C4XmMYoVT.jpg
+image: "@site/blogs/openziti/v1668008121762/C4XmMYoVT.jpg"
 tags: 
   - opensource
   - firewall

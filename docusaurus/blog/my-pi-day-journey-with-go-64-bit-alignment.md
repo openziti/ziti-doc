@@ -4,7 +4,7 @@ date: 2023-03-17T13:07:52Z
 cuid: clfck29eh000309lkfcoc0ekh
 slug: my-pi-day-journey-with-go-64-bit-alignment
 authors: [GeoffBerl]
-image: /blogs/openziti/v1678975036152/5a834580-b0f3-481b-9409-61c697ed719b.png
+image: "@site/blogs/openziti/v1678975036152/5a834580-b0f3-481b-9409-61c697ed719b.png"
 tags:
   - golang
   - raspberry-pi

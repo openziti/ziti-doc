@@ -4,7 +4,7 @@ date: 2024-05-24T16:00:14Z
 cuid: clwkvbmet00000ak6d5z5btad
 slug: why-we-verify-github-commits
 authors: [KennethBingham]
-image: /blogs/openziti/v1716320888402/f7bcebeb-a9e6-4094-8e6c-fac73ce8a9c5.png
+image: "@site/blogs/openziti/v1716320888402/f7bcebeb-a9e6-4094-8e6c-fac73ce8a9c5.png"
 tags: 
   - github
   - git

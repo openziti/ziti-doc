@@ -4,7 +4,7 @@ date: 2023-12-04T03:00:12Z
 cuid: clpqbpz5r000h0al0gq673ks7
 slug: zrok-frontdoor
 authors: [KennethBingham]
-image: /blogs/openziti/v1701362109736/d1421e32-6573-4cf4-933f-4878ce549965.png
+image: "@site/blogs/openziti/v1701362109736/d1421e32-6573-4cf4-933f-4878ce549965.png"
 ogimage: /blogs/openziti/v1701631475557/a539001d-b5c9-4144-9307-9ee59adc4ce8.png
 tags: 
   - zrok

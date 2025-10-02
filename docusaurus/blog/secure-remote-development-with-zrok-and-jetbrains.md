@@ -6,7 +6,7 @@ date: 2024-04-01T13:14:45Z
 cuid: clugz2njn000008l5e2nv3w3a
 slug: secure-remote-development-with-zrok-and-jetbrains
 authors: [RussellAllen]
-image: /blogs/openziti/v1711649779549/c013ad52-1fb9-4943-9d47-3b65d4a12c03.png
+image: "@site/blogs/openziti/v1711649779549/c013ad52-1fb9-4943-9d47-3b65d4a12c03.png"
 tags: 
   - zrok
 

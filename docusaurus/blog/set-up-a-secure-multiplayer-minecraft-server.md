@@ -4,7 +4,7 @@ date: 2022-10-14T17:03:01Z
 cuid: cl98qngwj000m09le2qf7ay1l
 slug: set-up-a-secure-multiplayer-minecraft-server
 authors: [GeoffBerl]
-image: /blogs/openziti/v1665606377950/M5Imv9fw6.png
+image: "@site/blogs/openziti/v1665606377950/M5Imv9fw6.png"
 tags: 
   - minecraft
   - networking

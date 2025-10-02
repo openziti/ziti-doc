@@ -4,7 +4,7 @@ date: Fri Jun 03 2022 14:02:35 GMT+0000 (Coordinated Universal Time)
 cuid: cl3yin5gw009jodnv0lv08r2r
 slug: bootstrapping-trust-part-5-bootstrapping-trust
 authors: [AndrewMartinez]
-image: /blogs/openziti/v1654265273968/JSUhAzpL_.jpeg
+image: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
 tags: 
   - security
 

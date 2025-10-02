@@ -4,7 +4,7 @@ date: 2022-06-03T13:57:36Z
 cuid: cl3yigq5d008xodnvbyiwfve3
 slug: bootstrapping-trust-part-4-certificate-authorities-chains-of-trust
 authors: [AndrewMartinez]
-image: /blogs/openziti/v1654265273968/JSUhAzpL_.jpeg
+image: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
 tags: 
   - security
 

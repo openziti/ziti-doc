@@ -6,7 +6,7 @@ date: 2022-12-19T18:00:42Z
 cuid: clbv3rvhf02u6p2nvat895sfh
 slug: its-a-zitiful-life
 authors: [CurtTudor]
-image: /blogs/openziti/v1671286570889/kpfd19y_F.jpg
+image: "@site/blogs/openziti/v1671286570889/kpfd19y_F.jpg"
 tags: 
   - web
   - security

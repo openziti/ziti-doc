@@ -108,6 +108,7 @@ const config: Config = {
                 remarkPlugins: [
                     remarkYouTube,
                     [remarkReplaceMetaUrl, { from: '@staticoz', to: `${ozDocs}` }],
+                    [remarkReplaceMetaUrl, { from: '@site', to: `/docs` }],
                     [remarkScopedPath, { mappings: REMARK_MAPPINGS }],
                 ],
                 blogSidebarCount: 'ALL',

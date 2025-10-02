@@ -4,7 +4,7 @@ date: 2024-07-31T18:25:02Z
 cuid: clza6fr0v000608l2cnqjamv9
 slug: jitsi-meet-zrok
 authors: [KennethBingham]
-image: /blogs/openziti/v1722450203675/ee7c2e5c-4ef2-46e7-a05d-767cf2e7ab58.png
+image: "@site/blogs/openziti/v1722450203675/ee7c2e5c-4ef2-46e7-a05d-767cf2e7ab58.png"
 tags: 
   - self-hosted
 

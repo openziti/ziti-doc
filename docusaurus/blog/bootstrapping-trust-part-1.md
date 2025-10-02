@@ -4,7 +4,7 @@ date: 2022-06-03T12:20:35Z
 cuid: cl3yezz5h0071jenv50mr48ia
 slug: bootstrapping-trust-part-1-encryption-everywhere
 authors: [AndrewMartinez]
-image: /blogs/openziti/v1654265273968/JSUhAzpL_.jpeg
+image: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
 tags: 
   - security
 

@@ -4,7 +4,7 @@ date: 2024-10-03T16:15:23Z
 cuid: cm1thzk20000908jq6fic8x00
 slug: the-safest-way-to-make-portainer-internet-accessible
 authors: [CurtTudor]
-image: /blogs/openziti/v1727532608880/5fb5b813-b9cf-4fe7-9d36-ffb921cda67a.jpeg
+image: "@site/blogs/openziti/v1727532608880/5fb5b813-b9cf-4fe7-9d36-ffb921cda67a.jpeg"
 tags: 
   - security
   - web-security

@@ -6,7 +6,7 @@ date: 2024-01-06T18:29:48Z
 cuid: clr2egjw2000809jp0l2a50qy
 slug: minecraft-over-zrok
 authors: [ClintDovholuk]
-image: /blogs/openziti/v1704562456124/51580b28-4e9f-4c26-9cc0-5f1a508f42cb.png
+image: "@site/blogs/openziti/v1704562456124/51580b28-4e9f-4c26-9cc0-5f1a508f42cb.png"
 tags: 
   - minecraft
   - opensource

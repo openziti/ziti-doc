@@ -6,7 +6,7 @@ date: 2024-09-09T00:10:41Z
 cuid: cm0u8yhfd000008kzezx739qf
 slug: multifactor-zero-trust-ssh
 authors: [ClintDovholuk]
-image: /blogs/openziti/v1725453901119/410a39f8-eaf7-4c9f-bbba-ae547eb78d94.webp
+image: "@site/blogs/openziti/v1725453901119/410a39f8-eaf7-4c9f-bbba-ae547eb78d94.webp"
 tags: 
   - ssh
   - openziti

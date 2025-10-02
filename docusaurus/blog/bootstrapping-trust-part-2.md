@@ -4,7 +4,7 @@ date: 2022-06-03T12:42:37Z
 cuid: cl3yfsb8900joemnv4jk46g98
 slug: bootstrapping-trust-part-2-a-primer-on-public-key-cryptography
 authors: [AndrewMartinez]
-image: /blogs/openziti/v1654265273968/JSUhAzpL_.jpeg
+image: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
 tags: 
   - security
 

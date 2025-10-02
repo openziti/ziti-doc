@@ -4,7 +4,7 @@ date: 2023-10-20T13:42:46Z
 cuid: clnynuz3f000909l01il80lcy
 slug: the-zrok-oauth-public-frontend
 authors: [MichaelQuigley]
-image: /blogs/openziti/v1697044959110/120ae30d-9a5b-470f-b7ca-7689135f300a.png
+image: "@site/blogs/openziti/v1697044959110/120ae30d-9a5b-470f-b7ca-7689135f300a.png"
 tags: 
   - proxy
   - security

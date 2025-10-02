@@ -6,7 +6,7 @@ date: 2022-11-03T17:06:18Z
 cuid: cla1bkqn0000q08jvbdf0bn1l
 slug: browzer-gateway-fqdn-certs
 authors: [CurtTudor]
-image: /blogs/openziti/v1667494026072/ewG54FUJv.jpg
+image: "@site/blogs/openziti/v1667494026072/ewG54FUJv.jpg"
 tags: 
   - javascript
   - web-development

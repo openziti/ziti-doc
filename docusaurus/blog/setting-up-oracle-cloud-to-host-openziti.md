@@ -4,7 +4,7 @@ date: 2022-10-14T12:55:39Z
 cuid: cl98htd35000a09ld3o9b110i
 slug: setting-up-oracle-cloud-to-host-openziti
 authors: [GeoffBerl]
-image: /blogs/openziti/v1665675327581/brOl0o0pl.png
+image: "@site/blogs/openziti/v1665675327581/brOl0o0pl.png"
 tags: 
   - oracle
   - opensource
