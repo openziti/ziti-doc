@@ -5,6 +5,7 @@ cuid: clruxmy03000408gr7rdb2mk3
 slug: fun-with-adaptive-rate-limiting
 authors: [PaulLorenz]
 image: "@site/blogs/openziti/v1706152812055/f1c7ece1-5bee-41f9-864a-1cabc710bb41.png"
+imageDark: "@site/blogs/openziti/v1706152812055/f1c7ece1-5bee-41f9-864a-1cabc710bb41.png"
 tags: 
   - performance
   - golang

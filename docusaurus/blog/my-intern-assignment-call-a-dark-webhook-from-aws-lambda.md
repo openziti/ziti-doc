@@ -7,6 +7,7 @@ cuid: cl78cngvf02tr36nvc56efb0j
 slug: my-intern-assignment-call-a-dark-webhook-from-aws-lambda
 authors: [ClintDovholuk]
 image: "@site/blogs/openziti//kOMCC0op3.jpeg"
+imageDark: "@site/blogs/openziti//kOMCC0op3.jpeg"
 tags: 
   - webhooks
   - aws-lambda

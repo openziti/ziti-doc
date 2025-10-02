@@ -5,6 +5,7 @@ cuid: clesyuhca000009lcf8f79ub7
 slug: openapi-python-clients
 authors: [StevenBroderick]
 image: "@site/blogs/openziti/v1677866933476/6a4428fe-aa77-489d-b4f3-f8251969f8df.png"
+imageDark: "@site/blogs/openziti/v1677866933476/6a4428fe-aa77-489d-b4f3-f8251969f8df.png"
 tags: 
   - python
   - openapi

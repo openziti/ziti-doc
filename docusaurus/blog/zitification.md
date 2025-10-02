@@ -5,6 +5,7 @@ cuid: cl474tt6y02vs82nvanu32thu
 slug: zitification
 authors: [ClintDovholuk]
 image: "@site/blogs/openziti/v1654785931484/SGu2ETR_s.jpeg"
+imageDark: "@site/blogs/openziti/v1654785931484/SGu2ETR_s.jpeg"
 tags: 
   - security
 

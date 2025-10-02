@@ -5,6 +5,7 @@ cuid: clwgjhize000d0ck18y703n52
 slug: zrok-vpn
 authors: [EugeneKobyakov]
 image: "@site/blogs/openziti/v1716212137599/451cee0f-8d37-4ab2-8548-8a62b42656af.png"
+imageDark: "@site/blogs/openziti/v1716212137599/451cee0f-8d37-4ab2-8548-8a62b42656af.png"
 tags: 
   - zerotrust
   - zrok

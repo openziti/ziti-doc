@@ -5,6 +5,7 @@ cuid: clns2tgr1000309jwfpyngao7
 slug: securing-azure-openai-applications-with-openziti
 authors: [DariuszSliwinski]
 image: "@site/blogs/openziti/v1697652544795/ec49e795-33bd-4a09-aa16-96f4c80d2dc6.jpeg"
+imageDark: "@site/blogs/openziti/v1697652544795/ec49e795-33bd-4a09-aa16-96f4c80d2dc6.jpeg"
 ogimage: /blogs/openziti/v1697652407252/6a647546-7930-4b48-bd16-e85779dbf127.jpeg
 tags: 
   - openai

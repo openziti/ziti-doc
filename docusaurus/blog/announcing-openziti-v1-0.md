@@ -5,6 +5,7 @@ cuid: cluujmixu000108jlcumufydf
 slug: announcing-openziti-v1
 authors: [DaveHart]
 image: "@site/blogs/openziti/v1712766359966/2d5059cd-e7d7-4aa0-bc79-4a428a90710e.png"
+imageDark: "@site/blogs/openziti/v1712766359966/2d5059cd-e7d7-4aa0-bc79-4a428a90710e.png"
 tags: 
   - opensource
   - zerotrust

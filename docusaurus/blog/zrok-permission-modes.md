@@ -5,6 +5,7 @@ cuid: clubeftvl000208jtghim4481
 slug: zrok-permission-modes
 authors: [MichaelQuigley]
 image: "@site/blogs/openziti/v1710955657342/eeab3265-3689-45b5-983b-83b06ee7fdb7.png"
+imageDark: "@site/blogs/openziti/v1710955657342/eeab3265-3689-45b5-983b-83b06ee7fdb7.png"
 tags: 
   - security
   - networking

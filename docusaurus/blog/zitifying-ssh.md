@@ -4,6 +4,7 @@ date: 2021-07-19T17:01:13Z
 cuid: cl474zpmo02wf82nvgfg5ay8i
 slug: zitifying-ssh
 image: "@site/blogs/openziti/v1702472610269/e0723aac-2386-4a55-b6cb-9aad978e36c1.png"
+imageDark: "@site/blogs/openziti/v1702472610269/e0723aac-2386-4a55-b6cb-9aad978e36c1.png"
 tags: 
   - security
 

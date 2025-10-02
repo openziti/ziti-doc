@@ -5,6 +5,7 @@ cuid: cm7m2kag7000009l5ahicajw9
 slug: securing-ziti-identities-with-hsmtpm
 authors: [EugeneKobyakov]
 image: "@site/blogs/openziti/v1740433372226/36a74b0f-3dfc-496f-8907-00e6fb0aabfd.jpeg"
+imageDark: "@site/blogs/openziti/v1740433372226/36a74b0f-3dfc-496f-8907-00e6fb0aabfd.jpeg"
 tags: 
   - security
   - hardware

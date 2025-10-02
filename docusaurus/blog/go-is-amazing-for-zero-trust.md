@@ -7,6 +7,7 @@ cuid: clq4llx30000108jp8lhp7iy8
 slug: go-is-amazing-for-zero-trust
 authors: [ClintDovholuk]
 image: "@site/blogs/openziti/v1702331268646/98f54fa9-a33d-4fa9-91bf-ad88d936ed5a.jpeg"
+imageDark: "@site/blogs/openziti/v1702331268646/98f54fa9-a33d-4fa9-91bf-ad88d936ed5a.jpeg"
 ogimage: /blogs/openziti/v1702331780840/80987396-5227-4fd6-8544-dc7c67a6e331.jpeg
 tags: 
   - golang

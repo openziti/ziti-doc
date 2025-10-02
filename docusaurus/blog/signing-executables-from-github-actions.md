@@ -5,6 +5,7 @@ cuid: clw77d8aa00070ammccc55jhc
 slug: signing-executables-from-github-actions
 authors: [ClintDovholuk]
 image: "@site/blogs/openziti/v1715610928648/e1bf8444-484c-440c-ad00-4669c493ff94.jpeg"
+imageDark: "@site/blogs/openziti/v1715610928648/e1bf8444-484c-440c-ad00-4669c493ff94.jpeg"
 tags: 
   - digital-signature
   - aws-kms

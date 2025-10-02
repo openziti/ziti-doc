@@ -5,6 +5,7 @@ cuid: cm9acdmkq000e08jr6pyc0zj7
 slug: introducing-zrok-10
 authors: [MichaelQuigley]
 image: "@site/blogs/openziti/v1744209956458/656a2fe0-41e5-4628-bd06-a9b3267df001.png"
+imageDark: "@site/blogs/openziti/v1744209956458/656a2fe0-41e5-4628-bd06-a9b3267df001.png"
 tags: 
   - software-development
   - tools

@@ -5,6 +5,7 @@ cuid: clrtncncs000809lg42ombo9g
 slug: the-zrok-drives-cli-preview
 authors: [MichaelQuigley]
 image: "@site/blogs/openziti/v1706115688489/7aef0bb7-51e7-45e2-bc95-f65ec3149116.png"
+imageDark: "@site/blogs/openziti/v1706115688489/7aef0bb7-51e7-45e2-bc95-f65ec3149116.png"
 tags: 
   - security
   - networking

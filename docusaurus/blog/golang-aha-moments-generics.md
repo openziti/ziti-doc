@@ -5,6 +5,7 @@ cuid: cl8xcodj6000c09mi9gbne8el
 slug: golang-aha-moments-generics
 authors: [PaulLorenz]
 image: "@site/blogs/openziti/v1663771708776/OXjhFrMmZ.jpg"
+imageDark: "@site/blogs/openziti/v1663771708776/OXjhFrMmZ.jpg"
 tags: 
   - golang
   - developer

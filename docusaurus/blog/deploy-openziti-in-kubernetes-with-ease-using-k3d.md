@@ -5,6 +5,7 @@ cuid: clwb24maj00010amp786bh8gw
 slug: deploy-openziti-in-kubernetes-with-ease-using-k3d
 authors: [KennethBingham]
 image: "@site/blogs/openziti/v1715957663205/30f837ad-feba-47f8-9678-09a0b08ae781.png"
+imageDark: "@site/blogs/openziti/v1715957663205/30f837ad-feba-47f8-9678-09a0b08ae781.png"
 tags: 
   - docker
   - kubernetes

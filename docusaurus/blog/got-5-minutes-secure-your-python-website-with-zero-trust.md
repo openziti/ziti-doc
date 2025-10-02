@@ -5,6 +5,7 @@ cuid: cll2kn9yd000908mp7xv27s1k
 slug: got-5-minutes-secure-your-python-website-with-zero-trust
 authors: [GeoffBerl]
 image: "@site/blogs/openziti/v1681502054184/49a0e1d5-8cf8-46b9-81ce-101311ab78fa.png"
+imageDark: "@site/blogs/openziti/v1681502054184/49a0e1d5-8cf8-46b9-81ce-101311ab78fa.png"
 tags: 
   - python
   - opensource

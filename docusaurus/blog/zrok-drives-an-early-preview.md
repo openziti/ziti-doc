@@ -5,6 +5,7 @@ cuid: clp7anfg800070al4hqmwf29o
 slug: zrok-drives-an-early-preview
 authors: [MichaelQuigley]
 image: "@site/blogs/openziti/v1700235073954/cdeb4c90-ffed-461e-85f1-51340728e3cd.png"
+imageDark: "@site/blogs/openziti/v1700235073954/cdeb4c90-ffed-461e-85f1-51340728e3cd.png"
 tags: 
   - cloud
   - golang

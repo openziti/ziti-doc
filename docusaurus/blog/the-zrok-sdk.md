@@ -5,6 +5,7 @@ cuid: cllo64dtc000n09mc96du917a
 slug: the-zrok-sdk
 authors: [MichaelQuigley]
 image: "@site/blogs/openziti/v1692720007733/fa2b143a-5887-4e7a-9476-a3d531ab662b.png"
+imageDark: "@site/blogs/openziti/v1692720007733/fa2b143a-5887-4e7a-9476-a3d531ab662b.png"
 tags: 
   - developer
   - networking

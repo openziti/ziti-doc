@@ -5,6 +5,7 @@ cuid: clt7ojqne000009l55fwz4dgu
 slug: the-python-zrok-sdk
 authors: [CameronOtts]
 image: "@site/blogs/openziti/v1701893161134/a2cd088f-0260-4ce7-9ea2-26a1a97a23db.webp"
+imageDark: "@site/blogs/openziti/v1701893161134/a2cd088f-0260-4ce7-9ea2-26a1a97a23db.webp"
 tags: 
   - python
   - openziti

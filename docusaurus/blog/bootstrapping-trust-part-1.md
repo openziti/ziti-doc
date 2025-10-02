@@ -5,6 +5,7 @@ cuid: cl3yezz5h0071jenv50mr48ia
 slug: bootstrapping-trust-part-1-encryption-everywhere
 authors: [AndrewMartinez]
 image: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
+imageDark: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
 tags: 
   - security
 

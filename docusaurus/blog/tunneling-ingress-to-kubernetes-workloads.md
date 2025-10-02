@@ -5,6 +5,7 @@ cuid: cl4758oa9030tiunvbtg82umz
 slug: kubernetes
 authors: [ClintDovholuk]
 image: "@site/blogs/openziti/v1653224137964/I7QcSkiM3.jpeg"
+imageDark: "@site/blogs/openziti/v1653224137964/I7QcSkiM3.jpeg"
 tags: 
   - security
   - kubernetes

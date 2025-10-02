@@ -5,6 +5,7 @@ cuid: clo4aztln000e08l82w2lb5fg
 slug: put-some-ziti-in-your-caddy
 authors: [EugeneKobyakov]
 image: "@site/blogs/openziti/v1698150167579/59e96908-6587-4f29-b51b-73e523108133.png"
+imageDark: "@site/blogs/openziti/v1698150167579/59e96908-6587-4f29-b51b-73e523108133.png"
 tags: 
   - caddy
   - openziti

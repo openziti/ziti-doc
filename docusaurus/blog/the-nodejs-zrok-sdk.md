@@ -6,6 +6,7 @@ cuid: clvvfsgjz00040ak37yl2b0xf
 slug: the-nodejs-zrok-sdk
 authors: [CurtTudor]
 image: "@site/blogs/openziti/v1712869619931/10e487f3-ddb6-4d9e-ab48-0774a3bbfb2a.jpeg"
+imageDark: "@site/blogs/openziti/v1712869619931/10e487f3-ddb6-4d9e-ab48-0774a3bbfb2a.jpeg"
 tags: 
   - web-development
   - security

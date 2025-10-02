@@ -7,6 +7,7 @@ cuid: cm0u8wknc000109mk6xivbmlq
 slug: zero-trust-sshclient
 authors: [ClintDovholuk]
 image: "@site/blogs/openziti/v1725370192508/92d59b16-3273-4213-9918-01a0dc5ba343.png"
+imageDark: "@site/blogs/openziti/v1725370192508/92d59b16-3273-4213-9918-01a0dc5ba343.png"
 tags: 
   - golang
   - ssh

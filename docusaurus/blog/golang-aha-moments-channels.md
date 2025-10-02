@@ -5,6 +5,7 @@ cuid: cl7tr5gdz01hqpgnv7zbl75uh
 slug: golang-aha-moments-channels
 authors: [PaulLorenz]
 image: "@site/blogs/openziti/v1662683219596/YY8xRufSo.jpg"
+imageDark: "@site/blogs/openziti/v1662683219596/YY8xRufSo.jpg"
 tags: 
   - golang
   - developer

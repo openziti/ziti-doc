@@ -7,6 +7,7 @@ cuid: cla1bkqn0000q08jvbdf0bn1l
 slug: browzer-gateway-fqdn-certs
 authors: [CurtTudor]
 image: "@site/blogs/openziti/v1667494026072/ewG54FUJv.jpg"
+imageDark: "@site/blogs/openziti/v1667494026072/ewG54FUJv.jpg"
 tags: 
   - javascript
   - web-development

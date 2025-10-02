@@ -5,6 +5,7 @@ cuid: clyyo2bjs000909kybcio718z
 slug: extend-access-to-a-private-s3-bucket-using-python
 authors: [KennethBingham]
 image: "@site/blogs/openziti/v1721753949507/7351140d-d4d4-4531-b56d-c2bfa9f4bb17.png"
+imageDark: "@site/blogs/openziti/v1721753949507/7351140d-d4d4-4531-b56d-c2bfa9f4bb17.png"
 ogimage: /blogs/openziti/v1721754283206/4a5bea22-a608-4c1d-b323-47b9067cbd1e.png
 tags: 
   - python

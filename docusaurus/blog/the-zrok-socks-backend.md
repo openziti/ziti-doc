@@ -5,6 +5,7 @@ cuid: cltzyhmeo000408l66jxqc3do
 slug: the-zrok-socks-backend
 authors: [MichaelQuigley]
 image: "@site/blogs/openziti/v1710175565287/a8245615-e2da-4e08-a8d8-494cc919ff40.png"
+imageDark: "@site/blogs/openziti/v1710175565287/a8245615-e2da-4e08-a8d8-494cc919ff40.png"
 tags: 
   - privacy
   - internet

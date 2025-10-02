@@ -5,6 +5,7 @@ cuid: cl3yin5gw009jodnv0lv08r2r
 slug: bootstrapping-trust-part-5-bootstrapping-trust
 authors: [AndrewMartinez]
 image: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
+imageDark: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
 tags: 
   - security
 

@@ -5,6 +5,7 @@ cuid: clkifuqp8000009mmc6jcau1w
 slug: announcing-the-zrok-public-beta
 authors: [MichaelQuigley]
 image: "@site/blogs/openziti/v1690218347002/fb39d742-b2a5-45c8-ab30-f782f588b794.avif"
+imageDark: "@site/blogs/openziti/v1690218347002/fb39d742-b2a5-45c8-ab30-f782f588b794.avif"
 tags: 
   - opensource
   - networking

@@ -5,6 +5,7 @@ cuid: clskz9wz8000009ju1kt7e0ha
 slug: securing-dedicated-palworld-server-with-zrok
 authors: [EdwardThompson]
 image: "@site/blogs/openziti/v1706800178582/3fa8b1ea-7c9f-4fcc-9245-375f5df55448.jpeg"
+imageDark: "@site/blogs/openziti/v1706800178582/3fa8b1ea-7c9f-4fcc-9245-375f5df55448.jpeg"
 tags: 
   - security
   - openziti

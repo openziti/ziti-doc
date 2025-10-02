@@ -5,6 +5,7 @@ cuid: clf2qjqxx000109id6rmz1dfm
 slug: websockets-over-zrok
 authors: [CameronOtts]
 image: "@site/blogs/openziti/v1678297112797/d3f17b17-22f7-40ef-aac4-a581a9ab19ea.jpeg"
+imageDark: "@site/blogs/openziti/v1678297112797/d3f17b17-22f7-40ef-aac4-a581a9ab19ea.jpeg"
 tags: 
   - debugging
   - openziti

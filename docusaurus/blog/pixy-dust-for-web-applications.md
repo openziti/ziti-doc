@@ -7,6 +7,7 @@ cuid: clulgo2ea000109lc1lnq3tkx
 slug: pixy-dust-for-web-applications-pkce
 authors: [CurtTudor]
 image: "@site/blogs/openziti/v1707662249548/d6905ce3-a16a-4e08-8d81-5055a3da8bef.jpeg"
+imageDark: "@site/blogs/openziti/v1707662249548/d6905ce3-a16a-4e08-8d81-5055a3da8bef.jpeg"
 tags: 
   - web
   - security

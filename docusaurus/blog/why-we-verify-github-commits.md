@@ -5,6 +5,7 @@ cuid: clwkvbmet00000ak6d5z5btad
 slug: why-we-verify-github-commits
 authors: [KennethBingham]
 image: "@site/blogs/openziti/v1716320888402/f7bcebeb-a9e6-4094-8e6c-fac73ce8a9c5.png"
+imageDark: "@site/blogs/openziti/v1716320888402/f7bcebeb-a9e6-4094-8e6c-fac73ce8a9c5.png"
 tags: 
   - github
   - git

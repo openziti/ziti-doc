@@ -5,6 +5,7 @@ cuid: cl833ftkq00301hnv4uk00ynp
 slug: free-secure-access-to-nas-from-anywhere
 authors: [GeoffBerl]
 image: "@site/blogs/openziti/v1662661576643/TBtuZgOgd.png"
+imageDark: "@site/blogs/openziti/v1662661576643/TBtuZgOgd.png"
 tags: 
   - opensource
   - secure

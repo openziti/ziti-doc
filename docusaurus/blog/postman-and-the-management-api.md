@@ -5,6 +5,7 @@ cuid: cler8r24d000n09ichw8y48u8
 slug: postman-mgmt
 authors: [KennethBingham]
 image: "@site/blogs/openziti/v1677732038328/f6149856-e282-4451-b1a4-f278eff9f11b.png"
+imageDark: "@site/blogs/openziti/v1677732038328/f6149856-e282-4451-b1a4-f278eff9f11b.png"
 ogimage: /blogs/openziti/v1677731728423/ba352516-83a5-48a8-a41b-e028c2dad45e.png
 tags: 
   - postman

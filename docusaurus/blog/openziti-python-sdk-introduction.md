@@ -6,6 +6,7 @@ cuid: cl8ahtom3080fu5nv6bxr6ylc
 slug: openziti-python-sdk-introduction
 authors: [EugeneKobyakov]
 image: "@site/blogs/openziti/v1663698832345/Nj2I2jCi0.jpg"
+imageDark: "@site/blogs/openziti/v1663698832345/Nj2I2jCi0.jpg"
 tags: 
   - python
   - opensource

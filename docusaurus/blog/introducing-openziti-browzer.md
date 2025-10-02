@@ -6,6 +6,7 @@ cuid: cl7zashi604a0fxnv038w59b1
 slug: introducing-openziti-browzer
 authors: [CurtTudor]
 image: "@site/blogs/openziti/v1662574403443/kofV_IBBh.jpg"
+imageDark: "@site/blogs/openziti/v1662574403443/kofV_IBBh.jpg"
 tags: 
   - web-development
   - security

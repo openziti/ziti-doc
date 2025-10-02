@@ -5,6 +5,7 @@ cuid: cl6gmz8i302jtxvnv7bxk7c79
 slug: tunneling-voip-over-openziti
 authors: [ShawnCarey]
 image: "@site/blogs/openziti//EAmibi9_df.jpeg"
+imageDark: "@site/blogs/openziti//EAmibi9_df.jpeg"
 tags: 
   - security
   - networking

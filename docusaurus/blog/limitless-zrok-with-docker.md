@@ -5,6 +5,7 @@ cuid: clwi90z8q000e09m6bzop4hr1
 slug: limitless-zrok-with-docker
 authors: [KennethBingham]
 image: "@site/blogs/openziti/v1716328568062/8df0ac72-be9a-471b-ac5e-3f03e21a8ae3.png"
+imageDark: "@site/blogs/openziti/v1716328568062/8df0ac72-be9a-471b-ac5e-3f03e21a8ae3.png"
 tags: 
   - self-hosted
   - docker-compose

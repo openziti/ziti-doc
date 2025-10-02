@@ -5,6 +5,7 @@ cuid: cljen4m08000009li4hl1fz7c
 slug: zrok-v040-released
 authors: [MichaelQuigley]
 image: "@site/blogs/openziti/v1687898203990/c35b6581-ab18-4f3d-80b7-8b2bfb7035cc.avif"
+imageDark: "@site/blogs/openziti/v1687898203990/c35b6581-ab18-4f3d-80b7-8b2bfb7035cc.avif"
 tags: 
   - network
   - security

@@ -7,6 +7,7 @@ cuid: clbv3rvhf02u6p2nvat895sfh
 slug: its-a-zitiful-life
 authors: [CurtTudor]
 image: "@site/blogs/openziti/v1671286570889/kpfd19y_F.jpg"
+imageDark: "@site/blogs/openziti/v1671286570889/kpfd19y_F.jpg"
 tags: 
   - web
   - security

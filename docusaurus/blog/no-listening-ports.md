@@ -5,6 +5,7 @@ cuid: clvfy2395000009jr8jb1hy8b
 slug: no-listening-ports
 authors: [ClintDovholuk]
 image: "@site/blogs/openziti/v1702587204755/fa35d4ba-8bea-412b-91be-298e9db9d73b.png"
+imageDark: "@site/blogs/openziti/v1702587204755/fa35d4ba-8bea-412b-91be-298e9db9d73b.png"
 tags: 
   - appsec
   - zerotrust
