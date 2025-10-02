@@ -17,6 +17,7 @@ import {
     timedPlugin
 } from "@openclint/docusaurus-shared/plugins";
 
+const baseUrl = '/';
 const openziti = 'openziti';
 const ozDocs = `/docs/${openziti}`;
 
@@ -47,7 +48,7 @@ const config: Config = {
     title: 'OpenZiti',
     tagline: 'Replacing Infrastructure With Software',
     url: `http://localhost:${port}`,
-    baseUrl: '/',
+    baseUrl: `${baseUrl}`,
     trailingSlash: undefined,
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
@@ -108,7 +109,7 @@ const config: Config = {
                 remarkPlugins: [
                     remarkYouTube,
                     [remarkReplaceMetaUrl, { from: '@staticoz', to: `${ozDocs}` }],
-                    [remarkReplaceMetaUrl, { from: '@site', to: `/docs` }],
+                    [remarkReplaceMetaUrl, { from: '@site', to: `${baseUrl}` }],
                     [remarkScopedPath, { mappings: REMARK_MAPPINGS }],
                 ],
                 blogSidebarCount: 'ALL',
