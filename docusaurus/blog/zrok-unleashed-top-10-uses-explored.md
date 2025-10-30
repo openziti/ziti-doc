@@ -6,7 +6,8 @@ date: 2025-03-05T14:23:33Z
 cuid: cm7w0d1v100020al7041bczp2
 slug: zrok-unleashed-top-10-uses-explored
 authors: [MikeGuthrie]
-image: /blogs/openziti/v1741184699506/3d770cf5-535b-4f7d-8bc7-9ebbba03ebcd.png
+image: "@site/blogs/openziti/v1741184699506/3d770cf5-535b-4f7d-8bc7-9ebbba03ebcd.png"
+imageDark: "@site/blogs/openziti/v1741184699506/3d770cf5-535b-4f7d-8bc7-9ebbba03ebcd.png"
 ogimage: /blogs/openziti/v1741182634716/ac0a43f9-bcaa-492b-abde-5bb558a07181.png
 tags: 
   - zrok

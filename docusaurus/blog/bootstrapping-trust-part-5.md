@@ -4,7 +4,8 @@ date: Fri Jun 03 2022 14:02:35 GMT+0000 (Coordinated Universal Time)
 cuid: cl3yin5gw009jodnv0lv08r2r
 slug: bootstrapping-trust-part-5-bootstrapping-trust
 authors: [AndrewMartinez]
-image: /blogs/openziti/v1654265273968/JSUhAzpL_.jpeg
+image: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
+imageDark: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
 tags: 
   - security
 
@@ -26,11 +27,11 @@ In this series of articles, we are exploring bootstrapping trust, what that mean
 
 Ziti has a concept called the "Edge." The Edge is a set of software features that sit on top of the "Fabric." The Fabric is the core of each Ziti component, and it provides long haul mesh routing while the Edge focuses on enrolling Ziti components, managing access via policies, and maintaining the trust necessary to provide the foundation of a Zero Trust network without the hassle of setting it up yourself. Together they are a powerful combo of optimized long halt routing and trust management.
 
-![](/blogs/openziti/v1654257650307/yK04Reo05.png align="left")
+![](/blogs/openziti/v1654257650307/yK04Reo05.png)
 
 A small scale example Ziti system appears as follows:
 
-![](/blogs/openziti/v1654257651564/s2sDvUeqe.png align="left")
+![](/blogs/openziti/v1654257651564/s2sDvUeqe.png)
 
 Ziti Edge has the concepts of identities for endpoint SDKs and routers. Both require certificates signed by a trusted CA. Ziti can generate the PKI necessary to manage that trust. The PKI and its CAs will form the backbone of the trust system that Ziti will deploy for you. In the system diagram above, the Ziti Controller will manage an intermediate CA and a secure enrollment process that will bootstrap trust for each router and SDK. After bootstrapping trust, the controller will maintain data to manage the entire life cycle of the certificates it generates. This life cycle encompasses all the concerns from part one of this series, including bootstrapping, revoking, renewing, and rotating keys.
 
@@ -85,7 +86,7 @@ In those steps, we have performed many complex interactions.
 
 All of these items are performed making no assumptions and securely verifying each step. This process does not suffer from man-in-the-middle attacks. It provides many benefits! Below is a detailed image of each step of the enrollment process.
 
-![](/blogs/openziti/v1654257653691/DBRXUelWS.png align="left")
+![](/blogs/openziti/v1654257653691/DBRXUelWS.png)
 
 Let's break those steps down:
 

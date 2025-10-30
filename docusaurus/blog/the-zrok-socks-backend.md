@@ -4,7 +4,8 @@ date: 2024-03-20T15:26:19Z
 cuid: cltzyhmeo000408l66jxqc3do
 slug: the-zrok-socks-backend
 authors: [MichaelQuigley]
-image: /blogs/openziti/v1710175565287/a8245615-e2da-4e08-a8d8-494cc919ff40.png
+image: "@site/blogs/openziti/v1710175565287/a8245615-e2da-4e08-a8d8-494cc919ff40.png"
+imageDark: "@site/blogs/openziti/v1710175565287/a8245615-e2da-4e08-a8d8-494cc919ff40.png"
 tags: 
   - privacy
   - internet

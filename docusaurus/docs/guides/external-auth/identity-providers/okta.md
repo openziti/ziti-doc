@@ -9,7 +9,7 @@ import Details from '@theme/MDXComponents/Details';
 
 # Okta
 
-<img src="/icons/logo-okta.svg" alt="Okta logo" height="100px"/>
+<img src="@static/icons/logo-okta.svg" alt="Okta logo" height="100px"/>
 
 The following fields are necessary in order to configure an external JWT signer with OpenZiti. This configuration will
 enable authentication via JWTs obtained through an

@@ -6,7 +6,8 @@ date: 2024-08-02T17:10:31Z
 cuid: clzcynn3a000009kwfowoela4
 slug: zrok-vpn-linux-service
 authors: [KennethBingham]
-image: /blogs/openziti/v1722617478239/b985c30b-aae1-42c1-a450-b3fd255b14a3.avif
+image: "@site/blogs/openziti/v1722617478239/b985c30b-aae1-42c1-a450-b3fd255b14a3.avif"
+imageDark: "@site/blogs/openziti/v1722617478239/b985c30b-aae1-42c1-a450-b3fd255b14a3.avif"
 tags: 
   - vpn
 

@@ -4,7 +4,8 @@ date: 2023-02-02T03:28:34Z
 cuid: cldmgr6yi000309l2af9p25zs
 slug: connecting-to-local-development-environment-from-cloud-hosts-with-zrok
 authors: [JensAlm]
-image: /blogs/openziti/v1675019484328/e1156433-d3b2-4a5d-b709-1679afe76be3.jpeg
+image: "@site/blogs/openziti/v1675019484328/e1156433-d3b2-4a5d-b709-1679afe76be3.jpeg"
+imageDark: "@site/blogs/openziti/v1675019484328/e1156433-d3b2-4a5d-b709-1679afe76be3.jpeg"
 tags: 
   - opensource
   - openziti

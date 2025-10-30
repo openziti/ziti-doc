@@ -4,7 +4,8 @@ date: 2023-03-17T13:07:52Z
 cuid: clfck29eh000309lkfcoc0ekh
 slug: my-pi-day-journey-with-go-64-bit-alignment
 authors: [GeoffBerl]
-image: /blogs/openziti/v1678975036152/5a834580-b0f3-481b-9409-61c697ed719b.png
+image: "@site/blogs/openziti/v1678975036152/5a834580-b0f3-481b-9409-61c697ed719b.png"
+imageDark: "@site/blogs/openziti/v1678975036152/5a834580-b0f3-481b-9409-61c697ed719b.png"
 tags:
   - golang
   - raspberry-pi
@@ -35,11 +36,11 @@ Well, it seemed it was time to dig my raspberry pi out of the abyss of untouched
 
 ### 64 Bit Raspbian
 
-The 64-bit [expressInstall](https://docs.openziti.io/docs/learn/quickstarts/network/local-no-docker) process went swimmingly, with no issues at all. I started up the router, and zipped through some boilerplate commands I have to test out an OpenZiti network locally. No problems, I hadn't expected any since the user seeing the issue is running a 32-bit OS, but I had to be sure.
+The 64-bit [expressInstall](https://netfoundry.io/docs/openziti/learn/quickstarts/network/local-no-docker) process went swimmingly, with no issues at all. I started up the router, and zipped through some boilerplate commands I have to test out an OpenZiti network locally. No problems, I hadn't expected any since the user seeing the issue is running a 32-bit OS, but I had to be sure.
 
 ### 32 Bit Raspbian
 
-Onto the 32-bit Raspbian, I went, again, [expressInstall](https://docs.openziti.io/docs/learn/quickstarts/network/local-no-docker) is no problem. I start up the router, annnnd there it is.
+Onto the 32-bit Raspbian, I went, again, [expressInstall](https://netfoundry.io/docs/openziti/learn/quickstarts/network/local-no-docker) is no problem. I start up the router, annnnd there it is.
 
 ```bash
 $ startRouter
@@ -204,7 +205,7 @@ With `unrespondedHeartbeat` having an offset of 24, all is right with the world,
 
 This [xkcd](https://xkcd.com/) sums up my pragmatic decision nicely.
 
-![Efficiency](https://imgs.xkcd.com/comics/efficiency.png align="left")
+![Efficiency](https://imgs.xkcd.com/comics/efficiency.png)
 
 I knew this wasn't going to be the only case, there was no way that more wouldn't appear in this project and many other projects used by OpenZiti. So, the easiest way I could come up with to solve this across the board was to, as before, find all variables which have atomic 64-bit operations performed on them, and check if they are in a data structure. To start this venture, I put together a quick little regex and grepped it across the project, to pull out all 64-bit variables having atomic operations performed on them. Unfortunately, Mac grep doesn't have Perl regex so there's a little quirk in my regex to make it "non-greedy".
 

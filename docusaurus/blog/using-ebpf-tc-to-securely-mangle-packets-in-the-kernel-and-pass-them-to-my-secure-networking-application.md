@@ -5,7 +5,8 @@ date: 2022-11-09T22:10:42Z
 cuid: claa73b5k000509l012jsa3ic
 slug: using-ebpf-tc-to-securely-mangle-packets-in-the-kernel-and-pass-them-to-my-secure-networking-application
 authors: [RobertCaamano]
-image: /blogs/openziti/v1668008121762/C4XmMYoVT.jpg
+image: "@site/blogs/openziti/v1668008121762/C4XmMYoVT.jpg"
+imageDark: "@site/blogs/openziti/v1668008121762/C4XmMYoVT.jpg"
 tags: 
   - opensource
   - firewall
@@ -30,7 +31,7 @@ This is how I used TC-eBPF to build a Plugin TPROXY Interception Firewall (IFW) 
 
 OpenZiti (open source zero trust networking platform) enables private connections across full mesh Internet overlay networks. Ziti endpoints are embedded in applications as code (via Ziti SDKs), and deployed as OS agents, daemons, containers or VMs. You can spin up any number of Ziti routers in your private mesh - it looks like this if you deploy two routers:
 
-![OpenZiti End to End Encryption Terminating at the Routers](/blogs/openziti/v1668007504136/qJTZ9uPxE.png align="left")
+![OpenZiti End to End Encryption Terminating at the Routers](/blogs/openziti/v1668007504136/qJTZ9uPxE.png)
 
 Ziti Edge Routers are often used on Linux and default to iptables to map incoming interesting traffic toward service listening ports using [IP Table Tproxy Target](https://docs.kernel.org/networking/tproxy.html). This works great if for example you are running Ubuntu and FWD. However, there are many Linux distros with key variances. I therefore used TC-eBPF to build a more universal option for Linux distros which support eBPF, enabling those distros to intercept traffic of interest. The eBPF feature set also enabled additional packet filtering and manipulation not natively supported in iptables/nftables.
 
@@ -310,9 +311,9 @@ Feb 24 20:21:32 ebpf-router ziti-router[30284]: {"command":"/opt/openziti/bin/zf
 
 ## TC-eBPF IFW – process and packet flow diagrams
 
-![TC-eBPF IFW – process diagram](/blogs/openziti/v1668007360611/6LzUjyxVe.jpg align="left")
+![TC-eBPF IFW – process diagram](/blogs/openziti/v1668007360611/6LzUjyxVe.jpg)
 
-![TC-eBPF IFW – packet flow diagram](/blogs/openziti/v1668007368128/DlMW3rsU9.jpg align="left")
+![TC-eBPF IFW – packet flow diagram](/blogs/openziti/v1668007368128/DlMW3rsU9.jpg)
 
 ## Summary
 

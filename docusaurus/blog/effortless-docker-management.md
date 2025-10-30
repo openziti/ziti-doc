@@ -5,7 +5,8 @@ date: 2024-09-05T15:00:56Z
 cuid: cm0pezxy3000p0alch287g2lt
 slug: effortless-docker-management-with-private-web-access
 authors: [CurtTudor]
-image: /blogs/openziti/v1725481068115/9bc5870f-011f-4890-8487-23369499b5da.jpeg
+image: "@site/blogs/openziti/v1725481068115/9bc5870f-011f-4890-8487-23369499b5da.jpeg"
+imageDark: "@site/blogs/openziti/v1725481068115/9bc5870f-011f-4890-8487-23369499b5da.jpeg"
 tags: 
   - docker
   - opensource

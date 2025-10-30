@@ -3,7 +3,8 @@ title: "Introducing zrok"
 date: 2023-02-07T15:22:31Z
 cuid: cldue515r000509l04jhy0c8q
 slug: introducing-zrok
-image: /blogs/openziti/v1674827219782/e0a7faf4-3645-4289-b8a0-84536277f4d0.png
+image: "@site/blogs/openziti/v1674827219782/e0a7faf4-3645-4289-b8a0-84536277f4d0.png"
+imageDark: "@site/blogs/openziti/v1674827219782/e0a7faf4-3645-4289-b8a0-84536277f4d0.png"
 tags: 
   - golang
   - openziti

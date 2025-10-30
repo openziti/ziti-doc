@@ -4,7 +4,8 @@ date: 2024-08-02T20:07:40Z
 cuid: clzd4zgd4000109l58wnp7wue
 slug: zrok-is-growing-up
 authors: [MichaelQuigley]
-image: /blogs/openziti/v1722357921994/c2ddeddd-f52e-41a9-ace8-26ce7bb0259c.png
+image: "@site/blogs/openziti/v1722357921994/c2ddeddd-f52e-41a9-ace8-26ce7bb0259c.png"
+imageDark: "@site/blogs/openziti/v1722357921994/c2ddeddd-f52e-41a9-ace8-26ce7bb0259c.png"
 tags: 
   - network
   - browsers

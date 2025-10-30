@@ -4,7 +4,8 @@ date: 2023-09-08T15:24:23Z
 cuid: clmaqzvmg000808l2b8ij7yw8
 slug: zrok-with-the-power-of-caddy
 authors: [MichaelQuigley]
-image: /blogs/openziti/v1694020472308/0ab25cb6-f4ef-4227-b487-5bc6a0b5c621.png
+image: "@site/blogs/openziti/v1694020472308/0ab25cb6-f4ef-4227-b487-5bc6a0b5c621.png"
+imageDark: "@site/blogs/openziti/v1694020472308/0ab25cb6-f4ef-4227-b487-5bc6a0b5c621.png"
 tags: 
   - security
   - networking

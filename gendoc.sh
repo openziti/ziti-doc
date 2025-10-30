@@ -72,7 +72,7 @@ while getopts ":glcsdz" OPT; do
       ZITI_GEN_ZIP="yes"
       ;;
     *)
-      echo "WARN: ignoring option ${OPT}" >&2
+      echo "WARN: ignoring option: -$OPTARG" >&2
       ;;
   esac
 done

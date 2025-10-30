@@ -5,7 +5,8 @@ date: 2023-11-29T11:46:11Z
 cuid: clpjpb4q2000u09l75j1v8nn0
 slug: business-rule-driven-just-in-time-network-access
 authors: [MikeGorman]
-image: /blogs/openziti/v1698936177885/46a3121d-b2d2-4808-a98f-e182f841378e.png
+image: "@site/blogs/openziti/v1698936177885/46a3121d-b2d2-4808-a98f-e182f841378e.png"
+imageDark: "@site/blogs/openziti/v1698936177885/46a3121d-b2d2-4808-a98f-e182f841378e.png"
 tags: 
   - zerotrust
   - just-in-time

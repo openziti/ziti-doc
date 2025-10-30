@@ -6,7 +6,8 @@ date: 2023-03-15T21:06:11Z
 cuid: clfa69o4m000509lbe5qagw7h
 slug: private-dns-on-windows
 authors: [ClintDovholuk]
-image: /blogs/openziti/v1678971944159/0a3cfe23-5f9a-4576-a89d-e272b3b360d4.png
+image: "@site/blogs/openziti/v1678971944159/0a3cfe23-5f9a-4576-a89d-e272b3b360d4.png"
+imageDark: "@site/blogs/openziti/v1678971944159/0a3cfe23-5f9a-4576-a89d-e272b3b360d4.png"
 tags: 
   - dns
   - security
@@ -16,7 +17,7 @@ tags:
 
 ---
 
-OpenZiti's tunnelers have a killer feature, [a superpower](https://www.youtube.com/playlist?list=PLMUj_5fklasKF1oisSSuLwSzLVxuL9JbC), if you will: "Private" DNS. "Private DNS," I hear you ask with a subtle tone of disbelief, "what does *that* mean?" When you have an OpenZiti tunneler running on your system with one or more enrolled [identities](https://docs.openziti.io/docs/learn/core-concepts/identities/overview/), it's likely those [services](https://docs.openziti.io/docs/learn/core-concepts/services/overview/) have "intercepts" configured. Those intercepts are often in the form of some DNS entry and those DNS entries are only available to your system when OpenZiti is running. **That**, is what it means to have "Private DNS". These private DNS entries are valuable because they are only available to people who are authenticated and authorized to have them. If you're not authorized, you won't see the entry at all. That's very cool!
+OpenZiti's tunnelers have a killer feature, [a superpower](https://www.youtube.com/playlist?list=PLMUj_5fklasKF1oisSSuLwSzLVxuL9JbC), if you will: "Private" DNS. "Private DNS," I hear you ask with a subtle tone of disbelief, "what does *that* mean?" When you have an OpenZiti tunneler running on your system with one or more enrolled [identities](https://netfoundry.io/docs/openziti/learn/core-concepts/identities/overview/), it's likely those [services](https://netfoundry.io/docs/openziti/learn/core-concepts/services/overview/) have "intercepts" configured. Those intercepts are often in the form of some DNS entry and those DNS entries are only available to your system when OpenZiti is running. **That**, is what it means to have "Private DNS". These private DNS entries are valuable because they are only available to people who are authenticated and authorized to have them. If you're not authorized, you won't see the entry at all. That's very cool!
 
 <!-- truncate -->
 
@@ -24,7 +25,7 @@ OpenZiti's tunnelers have a killer feature, [a superpower](https://www.youtube.c
 
 Capturing DNS requests is somewhat tricky, as you might expect. Compounding the problem, each operating system works differently. To make matters worse, DNS is such a fundamental part of your (or your users') operating system, when you get it wrong, it's very disruptive! When DNS isn't working, it seems like your whole network doesn't work! (Depicted is Ziggy wondering why his network doesn't work because DNS is broken)
 
-![](https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/png/Ziggy-has-a-Question-Closeup.png align="left")
+![](https://raw.githubusercontent.com/openziti/branding/main/images/ziggy/png/Ziggy-has-a-Question-Closeup.png)
 
 So how does OpenZiti accomplish intercepting any DNS entry at all, including overriding existing DNS entries? We first tried to use the API provided by Microsoft for creating a VPN. That API was poorly documented, difficult to implement and didn't do exactly what we wanted. We had to find a better way, and we did! On the Windows operating system, we were able to successfully use a feature called the [Name Resolution Policy Table, or NRPT for short](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/dn593632(v=ws.11)).
 

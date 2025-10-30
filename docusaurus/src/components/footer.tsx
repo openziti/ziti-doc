@@ -13,14 +13,14 @@ export const openZitiFooter = {
         twitterUrl: 'https://twitter.com/openziti/',
     },
     documentationLinks: [
-        <a href="/docs/openziti/learn/quickstarts/services/ztha">Getting Started</a>,
-        <a href="/docs/openziti/reference/developer/api/">API Reference</a>,
-        <a href="/docs/openziti/reference/developer/sdk/">SDK Integration</a>,
+        // <a href="/docs/openziti/learn/quickstarts/services/ztha">Getting Started</a>,
+        // <a href="/docs/openziti/reference/developer/api/">API Reference</a>,
+        // <a href="/docs/openziti/reference/developer/sdk/">SDK Integration</a>,
     ],
     communityLinks: [
         <a href="https://github.com/openziti/ziti">GitHub</a>,
         <a href="https://openziti.discourse.group/">Discourse Forum</a>,
-        <a href="/policies/CONTRIBUTING">Contributing</a>,
+        <a href="/docs/openziti/policies/CONTRIBUTING">Contributing</a>,
     ],
     resourceLinks: [
         <a href="https://blog.openziti.io">OpenZiti Tech Blog</a>,

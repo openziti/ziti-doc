@@ -5,7 +5,8 @@ date: 2024-05-06T20:51:11Z
 cuid: clvvfsgjz00040ak37yl2b0xf
 slug: the-nodejs-zrok-sdk
 authors: [CurtTudor]
-image: /blogs/openziti/v1712869619931/10e487f3-ddb6-4d9e-ab48-0774a3bbfb2a.jpeg
+image: "@site/blogs/openziti/v1712869619931/10e487f3-ddb6-4d9e-ab48-0774a3bbfb2a.jpeg"
+imageDark: "@site/blogs/openziti/v1712869619931/10e487f3-ddb6-4d9e-ab48-0774a3bbfb2a.jpeg"
 tags: 
   - web-development
   - security
@@ -34,7 +35,7 @@ If you want to follow along you'll need to have a `zrok` environment set up. If 
 
 Check out the [**Getting Started**](https://docs.zrok.io/docs/getting-started/) guide for more information.
 
-![File:Node.js logo.svg - Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/2560px-Node.js_logo.svg.png align="left")
+![File:Node.js logo.svg - Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/2560px-Node.js_logo.svg.png)
 
 ## Expanding into NodeJS
 

@@ -4,7 +4,8 @@ date: 2025-04-09T19:48:24Z
 cuid: cm9acdmkq000e08jr6pyc0zj7
 slug: introducing-zrok-10
 authors: [MichaelQuigley]
-image: /blogs/openziti/v1744209956458/656a2fe0-41e5-4628-bd06-a9b3267df001.png
+image: "@site/blogs/openziti/v1744209956458/656a2fe0-41e5-4628-bd06-a9b3267df001.png"
+imageDark: "@site/blogs/openziti/v1744209956458/656a2fe0-41e5-4628-bd06-a9b3267df001.png"
 tags: 
   - software-development
   - tools
@@ -14,7 +15,7 @@ tags:
 
 ---
 
-# What does version 1.0 mean?
+## What does version 1.0 mean?
 
 It’s always a big deal when a project releases “version 1.0”. Our version 1.0 release validates all of the good things 
 about zrok while improving a few areas that needed it, and also brings several exciting new features.

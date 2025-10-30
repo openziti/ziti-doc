@@ -50,7 +50,7 @@ Finally, we'll stand up a third Prometheus server and use it to federate metrics
 
 This is what the solution we'll build looks like:
 
-![after](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubernetes-prometheus-after.svg align="left")
+![after](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/kubernetes-prometheus-after.svg)
 
 ## Digging In
 
@@ -85,7 +85,7 @@ Let's get to work and build this solution. We'll need some legwork done first.
 
 ## ClusterA - Using `ziti-host`
 
-![clusterA](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/clusterA.svg align="left")
+![clusterA](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/clusterA.svg)
 
 We start with an empty OpenZiti network, and two empty Kubernetes clusters. Let's start by populating ClusterA. We will deploy three pods into this Kubernetes cluster. When done, the Kubernetes cluster will look similar to the image to the right.
 
@@ -260,7 +260,7 @@ helm install prometheuz openziti-test-kitchen/prometheus \
 
 ## ClusterB - Fully Dark
 
-![clusterB](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/clusterB.svg align="left")
+![clusterB](https://github.com/dovholuknf/ziti-doc/raw/main/docusaurus/blog/zitification/prometheus/clusterB.svg)
 
 Now that we have deployed our first Kubernetes cluster, it's now time to deploy the second Kubernetes cluster. This time, we are going to keep our entire deployment **fully dark**! There will be no listening ports, not even local to the Kubernetes cluster itself. To get any traffic to this Prometheus server, you will need a strong identity and need to be authorized on the OpenZiti overlay. When complete, ClusterB will look like the image to the right.
 

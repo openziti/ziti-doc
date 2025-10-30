@@ -5,7 +5,8 @@ date: 2022-09-12T21:49:23Z
 cuid: cl7zashi604a0fxnv038w59b1
 slug: introducing-openziti-browzer
 authors: [CurtTudor]
-image: /blogs/openziti/v1662574403443/kofV_IBBh.jpg
+image: "@site/blogs/openziti/v1662574403443/kofV_IBBh.jpg"
+imageDark: "@site/blogs/openziti/v1662574403443/kofV_IBBh.jpg"
 tags: 
   - web-development
   - security

@@ -4,7 +4,8 @@ date: 2022-06-03T13:57:36Z
 cuid: cl3yigq5d008xodnvbyiwfve3
 slug: bootstrapping-trust-part-4-certificate-authorities-chains-of-trust
 authors: [AndrewMartinez]
-image: /blogs/openziti/v1654265273968/JSUhAzpL_.jpeg
+image: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
+imageDark: "@site/blogs/openziti/v1654265273968/JSUhAzpL_.jpeg"
 tags: 
   - security
 
@@ -72,7 +73,7 @@ Consider the following PKI setup:
 
 Visually this would appear as follows:
 
-![](/blogs/openziti/v1654257659271/JAGd2gVAS.png align="left")
+![](/blogs/openziti/v1654257659271/JAGd2gVAS.png)
 
 This PKI has two chains of trust: Chain A and Chain B. They are called chains because the signatures link the certificates together. Root A has signed Intermediate A's certificate and Intermediate A has signed Server A's certificate. Programmatically we can traverse these signatures and verify them using the public certificates of each signatory. Trusting Root A will trust Server A.
 

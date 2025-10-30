@@ -106,12 +106,12 @@ function calculateStats(events: StarEvent[], range: DateRange) {
     const inWindow = times.filter(t => t >= minT && t <= maxT);
 
     if (!inWindow.length) {
-        return { stars: 0, days: 0, avgPerDay: 0, daysWithStars: 0, maxInOneDay: 0, dayWithMost: '—' };
+        return { stars: 0, avgPerDay: 0, daysWithStars: 0, maxInOneDay: 0, dayWithMost: '—' };
     }
 
     const first = inWindow[0];
-    const last = inWindow[inWindow.length - 1];
-    const numDays = Math.max(1, Math.floor((last - first) / DAY) + 1);
+    const effectiveStart = Math.max(minT, first); // Later of: range start OR first star
+    const numDays = Math.max(1, Math.floor((maxT - effectiveStart) / DAY) + 1);
 
     const dayMap = new Map<number, number>();
     for (const t of inWindow) {
@@ -129,7 +129,6 @@ function calculateStats(events: StarEvent[], range: DateRange) {
 
     return {
         stars: inWindow.length,
-        days: numDays,
         avgPerDay: +(inWindow.length / numDays).toFixed(3),
         daysWithStars: dayMap.size,
         maxInOneDay: maxCount,
@@ -229,7 +228,6 @@ function StatsTable({ rows, range }: StatsTableProps) {
                 <tr>
                     <th style={{ textAlign: 'left' }}>Repo</th>
                     <th>Stars</th>
-                    <th>Days</th>
                     <th>Avg/day</th>
                     <th>Days w/ stars</th>
                     <th>Max/day</th>
@@ -248,7 +246,6 @@ function StatsTable({ rows, range }: StatsTableProps) {
                                 </span>
                         </td>
                         <td style={{ textAlign: 'center' }}>{stats?.stars ?? 0}</td>
-                        <td style={{ textAlign: 'center' }}>{stats?.days ?? 0}</td>
                         <td style={{ textAlign: 'center' }}>{stats?.avgPerDay ?? 0}</td>
                         <td style={{ textAlign: 'center' }}>{stats?.daysWithStars ?? 0}</td>
                         <td style={{ textAlign: 'center' }}>{stats?.maxInOneDay ?? 0}</td>

@@ -4,7 +4,8 @@ date: 2022-10-14T12:55:39Z
 cuid: cl98htd35000a09ld3o9b110i
 slug: setting-up-oracle-cloud-to-host-openziti
 authors: [GeoffBerl]
-image: /blogs/openziti/v1665675327581/brOl0o0pl.png
+image: "@site/blogs/openziti/v1665675327581/brOl0o0pl.png"
+imageDark: "@site/blogs/openziti/v1665675327581/brOl0o0pl.png"
 tags: 
   - oracle
   - opensource
@@ -191,7 +192,7 @@ sudo systemctl restart firewalld
 
 ### Run Express Install
 
-Now, you'll run the express install. Rather than including those commands here, you can follow the guide [here](https://docs.openziti.io/docs/learn/quickstarts/network/hosted) and come back. But WAIT, one thing to note is that Oracle does not provide an external DNS, so when the guide asks you to set that value, use the public IP instead. For the record, I would recommend following the instructions to set up the systemd service so the controller and routers will start up with the instance if it's ever shut down.
+Now, you'll run the express install. Rather than including those commands here, you can follow the guide [here](https://netfoundry.io/docs/openziti/learn/quickstarts/network/hosted) and come back. But WAIT, one thing to note is that Oracle does not provide an external DNS, so when the guide asks you to set that value, use the public IP instead. For the record, I would recommend following the instructions to set up the systemd service so the controller and routers will start up with the instance if it's ever shut down.
 
 ### Change The Admin Password
 

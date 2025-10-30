@@ -4,7 +4,8 @@ date: 2024-05-22T18:49:58Z
 cuid: clwi6i6r100040ajobbs12wyv
 slug: how-to-prevent-path-traversal-attacks-with-openziti-browzer
 authors: [MikeGorman]
-image: /blogs/openziti/v1716212854203/849ab21c-0082-49fb-9a05-a52dd554bb41.png
+image: "@site/blogs/openziti/v1716212854203/849ab21c-0082-49fb-9a05-a52dd554bb41.png"
+imageDark: "@site/blogs/openziti/v1716212854203/849ab21c-0082-49fb-9a05-a52dd554bb41.png"
 tags: 
   - opensource
   - security
