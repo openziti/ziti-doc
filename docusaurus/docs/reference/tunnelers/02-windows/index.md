@@ -1,6 +1,6 @@
 # Windows
 
-The Ziti Desk for Windows (ZDEW) is the tunneler targeting the Windows operating system. The project is fully
+The Ziti Desktop Edge for Windows (ZDEW) is the tunneler targeting the Windows operating system. The project is fully
 open source and can be found on GitHub at https://github.com/openziti/desktop-edge-win
 
 ## Installation
