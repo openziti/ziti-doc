@@ -20,6 +20,25 @@ function clone_or_pull {
   fi
 }
 
+function _fix_helm_examples {
+  local HELM_ROUTER_README="${script_root}/docusaurus/docs/_remotes/helm-charts/charts/ziti-router/README.md"
+  local HELM_ROUTER_README_EXAMPLES_URL="https://github.com/openziti/helm-charts/tree/main/charts/ziti-router/examples"
+
+  echo "🔧 _fix_helm_readme: checking file: $HELM_ROUTER_README"
+  if [ -f "$HELM_ROUTER_README" ]; then
+    echo "✅ found file, running sed..."
+    set -x
+    sed -i -E "s@\]\(\.?/examples/?\)@](${HELM_ROUTER_README_EXAMPLES_URL})@g" "$HELM_ROUTER_README"
+    set +x
+    echo "✅ sed completed successfully."
+  else
+    echo "❌ file not found: $HELM_ROUTER_README"
+    echo "📂 available dirs under ${script_root}/docusaurus/docs/:"
+    ls -R docs || true
+    exit 1
+  fi
+}
+
 fix_helm_ziti_edge_tunnel() {
   local _target="${ZITI_DOC_GIT_LOC}/helm-charts/charts/ziti-edge-tunnel/README.md"
   echo "fixing $_target to work with docusaurus"
@@ -95,9 +114,10 @@ if [[ "${SKIP_GIT}" == no ]]; then
   clone_or_pull "https://github.com/openziti/helm-charts" "helm-charts" >/dev/null
   clone_or_pull "https://github.com/openziti-test-kitchen/kubeztl" "kubeztl" >/dev/null
   clone_or_pull "https://github.com/openziti/desktop-edge-win" "desktop-edge-win" >/dev/null
-
-  fix_helm_ziti_edge_tunnel
 fi
+
+fix_helm_ziti_edge_tunnel
+_fix_helm_examples
 
 if [[ "${SKIP_CLEAN}" == no ]]; then
   if test -d "${SDK_ROOT_TARGET}"; then
