@@ -27,7 +27,7 @@ network and requires a hole through the firewall to allow clients to connect.
 
 After OpenZiti, we can see that there is no longer an open firewall to allow access to the HTTP server. Instead, the HTTP client 
 will have its network requests intercepted by an OpenZiti tunneler. Once intercepted, the packets are then delivered to the OpenZiti
-[overlay](../../../reference/glossary#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
+[overlay](../../../reference/glossary.mdx#network-overlay-overlay) fabric which has the responsibility to deliver the intercepted packets to the
 target identity. Once delivered to the target identity, in this example, the traffic will offload back to the underlay network to be 
 sent to the final destination: the HTTP Server.
 

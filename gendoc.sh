@@ -37,8 +37,8 @@ echo "$script_root"
 : ${SKIP_GIT:=no}
 : ${SKIP_LINKED_DOC:=no}
 : ${SKIP_CLEAN:=no}
-ZITI_DOC_GIT_LOC="${script_root}/docusaurus/docs/_remotes"
-SDK_ROOT_TARGET="${script_root}/docusaurus/static/docs/reference/developer/sdk"
+: ${ZITI_DOC_GIT_LOC:="${script_root}/docusaurus/docs/_remotes"}
+: ${SDK_ROOT_TARGET:="${script_root}/docusaurus/static/docs/reference/developer/sdk"}
 : ${ZITI_DOCUSAURUS:=yes}
 : ${SKIP_DOCUSAURUS_GEN:=no}
 : ${ZITI_GEN_ZIP:=no}
@@ -72,7 +72,7 @@ while getopts ":glcsdz" OPT; do
       ZITI_GEN_ZIP="yes"
       ;;
     *)
-      echo "WARN: ignoring option ${OPT}" >&2
+      echo "WARN: ignoring option: -$OPTARG" >&2
       ;;
   esac
 done
@@ -102,8 +102,10 @@ fi
 if [[ "${SKIP_CLEAN}" == no ]]; then
   if test -d "${SDK_ROOT_TARGET}"; then
     # specifically using ../ziti-doc just to remove any chance to rm something unintended
-    echo removing previous build at: rm -r "${SDK_ROOT_TARGET}"
+    echo "SDK_ROOT_TARGET exists. removing previous build at: rm -r ${SDK_ROOT_TARGET}"
     rm -r "${SDK_ROOT_TARGET}" || true
+  else
+    echo "SDK_ROOT_TARGET [${SDK_ROOT_TARGET}] does not exist"
   fi
 fi
 
@@ -189,11 +191,18 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
 fi
 
 if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
-  echo "collecting stargazer data before building the site... "
-  echo "  - this requires the npm module cvstojson"
-  echo "  - this requires you to have a GITHUB_TOKEN environment variable exported"
-  ./gh-stats.sh
+  if ! command -v csvtojson >/dev/null 2>&1; then
+    echo "❌ csvtojson not installed, skipping stargazer data"
+    ADD_STARGAZER_DATA=no
+  elif [[ -z "${GITHUB_TOKEN:-}" ]]; then
+    echo "❌ GITHUB_TOKEN not set, skipping stargazer data"
+    ADD_STARGAZER_DATA=no
+  else
+    echo "collecting stargazer data before building the site..."
+    "$script_root/gh-stats.sh"
+  fi
 fi
+
 
 if [[ "${SKIP_DOCUSAURUS_GEN}" == no ]]; then
     pushd "${ZITI_DOC_GIT_LOC}/../.." >/dev/null

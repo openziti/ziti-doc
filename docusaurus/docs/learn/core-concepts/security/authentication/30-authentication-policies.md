@@ -1,7 +1,7 @@
 # Authentication Policies
 
-Authentication Policies restrict the [primary authentication](./auth#primary-authentication) methods available to 
-identities and may enforce additional [secondary authentication](./auth#secondary-authentication) factors. Ziti is
+Authentication Policies restrict the [primary authentication](./auth.md#primary-authentication) methods available to 
+identities and may enforce additional [secondary authentication](./auth.md#secondary-authentication) factors. Ziti is
 deployed with a default authentication policy that has the id `default`. This authentication policy may be updated,
 but not deleted. This default authentication policy is used when identities are created and an authentication
 policy is not specified.
@@ -61,13 +61,13 @@ Fields:
 - `allowExpiredCerts` - allows expired client certificates to authenticate
 
 When certificate authentication is `allowed`, client certificates issued by the Ziti PKI and any verified and enabled
-[3rd Party CAs](./third-party-cas) become valid authentication paths. When disabled an identity will not be able
+[3rd Party CAs](./10-third-party-cas.md) become valid authentication paths. When disabled an identity will not be able
 to authenticate with any client certificate.
 
 If `allowExpiredCerts` is true, client certificate expiration will be ignored during validation. This setting is 
 useful in scenarios where client are running software that has lapsed and cannot be re-enrolled or their client
 certificates cannot be updated. Clients do have an API available to them to roll existing Ziti PKI issued client 
-certificates forward. Client certificates issued by a [3rd Party CAs](./third-party-cas) must have an external
+certificates forward. Client certificates issued by a [3rd Party CAs](./10-third-party-cas.md) must have an external
 process to maintain client certificate validity if `allowExpiredCerts` is false.
 
 
@@ -76,9 +76,9 @@ process to maintain client certificate validity if `allowExpiredCerts` is false.
 Fields:
 
 - `allowed` - whether external JWTs may be used for authentication
-- `allowedSigners` - the ids of valid [External JWT Signers](./external-jwt-signers)
+- `allowedSigners` - the ids of valid [External JWT Signers](./50-external-jwt-signers.md)
 
-If `allowed` is true the [External JWT Signers](./external-jwt-signers) specified in the `allowedSigners` field
+If `allowed` is true the [External JWT Signers](./50-external-jwt-signers.md) specified in the `allowedSigners` field
 may be used for authentication.
 
 #### Username Password (updb)
@@ -91,5 +91,5 @@ may be used for authentication.
 
 The secondary section contain only two top-level configuration values:
 
-- `requireTotp` - if true authenticating clients must have [MFA TOTP](./totp) enabled
-- `requireExtJwt` - if set to an id of an [External JWT Signer](./external-jwt-signers) every request must have a valid JWT in the HTTP `Authentication` header
+- `requireTotp` - if true authenticating clients must have [MFA TOTP](./70-totp.md) enabled
+- `requireExtJwt` - if set to an id of an [External JWT Signer](./50-external-jwt-signers.md) every request must have a valid JWT in the HTTP `Authentication` header

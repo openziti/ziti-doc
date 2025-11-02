@@ -1,7 +1,6 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect} from "react";
 import clsx from "clsx";
-import OpenZitiLayout from "../components/OpenZitiLayout";
-import OpenZitiHorizontalSection from "../components/OpenZitiHorizontalSection";
+
 // @ts-ignore
 import SuperpowersSection  from "../components/SuperpowersSection";
 import ThemedImage from '@theme/ThemedImage';
@@ -9,11 +8,19 @@ import styles from './new-landing/styles.module.css';
 import zt from './new-landing/zt-models.module.css';
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { ArrowRight, Shield, Lock, Globe } from 'lucide-react';
-import {cleanUrl} from "../shared";
+
 import siteConfig from "@generated/docusaurus.config";
+import {cleanUrl} from "@openclint/docusaurus-shared/node";
+import {NetFoundryHorizontalSection, NetFoundryLayout} from "@openclint/docusaurus-shared/ui";
+import {useLocation} from "@docusaurus/router";
+import {starProps} from "../components/consts";
+import Head from "@docusaurus/Head";
 
 function _docUrl(p:string) {
-    return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
+    if(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH) {
+        return cleanUrl(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH + '/' + siteConfig?.customFields?.DOCUSAURUS_DOCS_PATH + '/' + p)
+    }
+    return p;
 }
 
 interface WindowSize {
@@ -23,7 +30,7 @@ interface WindowSize {
 
 function HeroSection({ className }: { className?: string }) {
     return (
-        <OpenZitiHorizontalSection className={clsx(styles.ozHorizontalSectionRoot, className)}>
+        <NetFoundryHorizontalSection className={clsx(styles.ozHorizontalSectionRoot, className)}>
             <section className={clsx(styles.aaHeroSection, styles.aaSection)} >
                 <div className={clsx(styles.aaHero, styles.aaHeroLeft)}>
                     <div className={styles.aaHeroTitle}>
@@ -38,7 +45,7 @@ function HeroSection({ className }: { className?: string }) {
                         <div className={styles.aaHeroButtons}>
                             <a href="#deploy_an_overlay"
                                className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry For Free</a>
-                            <a href={_docUrl(`/learn/quickstarts/network/hosted`)}
+                            <a href={`/docs/openziti/learn/quickstarts/network/hosted`}
                                className={styles.aaBtn}>Host OpenZiti Yourself</a>
                         </div>
                     </div>
@@ -54,13 +61,13 @@ function HeroSection({ className }: { className?: string }) {
                     />
                 </div>
             </section>
-        </OpenZitiHorizontalSection>
+        </NetFoundryHorizontalSection>
     );
 }
 
 function GetStartedSection ({ className }: { className?: string }) {
     const btns = clsx(styles.btn, styles.btnSecondary);
-    return <OpenZitiHorizontalSection className={clsx(styles.aaGetStarted2, styles.ozHorizontalSectionRoot, className)} id="deploy_an_overlay">
+    return <NetFoundryHorizontalSection className={clsx(styles.aaGetStarted2, styles.ozHorizontalSectionRoot, className)} id="deploy_an_overlay">
         <section className={clsx(styles.aaSection, styles.aaGetStarted)}>
             <div className={styles.aaContainer}>
                 <div className={styles.aaStartContent}>
@@ -91,18 +98,18 @@ function GetStartedSection ({ className }: { className?: string }) {
                             <p className={styles.aaStartOptionText}>
                                 Deploy and operate your own OpenZiti network using our documentation and community support—no commercial support included.
                             </p>
-                            <a href={_docUrl(`/learn/quickstarts/network/hosted`)} className={btns}>View Deployment Guide</a>
+                            <a href={`/docs/openziti/learn/quickstarts/network/hosted`} className={btns}>View Deployment Guide</a>
                         </div>
                     </div>
                     <a href="https://openziti.discourse.group/" className={btns}>Join the Community</a>
                 </div>
             </div>
         </section>
-    </OpenZitiHorizontalSection>
+    </NetFoundryHorizontalSection>
 }
 
 function SuperPowerSection ({ className }: { className?: string }) {
-    return <OpenZitiHorizontalSection className={clsx(styles.ozHorizontalSectionRoot, className)}>
+    return <NetFoundryHorizontalSection className={clsx(styles.ozHorizontalSectionRoot, className)}>
         <SuperpowersSection
             className={clsx(styles.aaSection, styles.aaSuperpowersSection)}
             title="Why OpenZiti"
@@ -118,7 +125,7 @@ function SuperPowerSection ({ className }: { className?: string }) {
                 { icon: '🕵️‍♂️', title: 'No Port Inference', description: <p>Single-port transport prevents service fingerprinting and port scanning vulnerabilities.</p> },
             ]}
         />
-    </OpenZitiHorizontalSection>
+    </NetFoundryHorizontalSection>
 }
 
 function ZeroTrustModel({
@@ -134,7 +141,7 @@ function ZeroTrustModel({
 }) {
     const isClient = windowSize && windowSize.width !== undefined;
     return (
-        <OpenZitiHorizontalSection
+        <NetFoundryHorizontalSection
             className={clsx(
                 styles.transitionSection,
                 styles.ozHorizontalSectionRoot,
@@ -185,7 +192,7 @@ function ZeroTrustModel({
                     </div>
                 </div>
             </section>
-        </OpenZitiHorizontalSection>
+        </NetFoundryHorizontalSection>
     )
 }
 
@@ -257,9 +264,9 @@ function ZeroTrustModels({ windowSize }: { windowSize: WindowSize }) {
 
 function TransitionSection({children, className, }: { children?: React.ReactNode; className?: string;}) {
     return (
-        <OpenZitiHorizontalSection className={className}>
+        <NetFoundryHorizontalSection className={className}>
             {children}
-        </OpenZitiHorizontalSection>
+        </NetFoundryHorizontalSection>
     );
 }
 
@@ -282,13 +289,18 @@ function App() {
         window.addEventListener('resize', handleWindowResize);
     }, []);
 
+    const {pathname} = useLocation();
     return (
-        <OpenZitiLayout className={styles.landing}>
+        <NetFoundryLayout className={styles.landing} starProps={starProps} >
+            <Head>
+                {/* docusaurus doesn't seem to want to add this using the layout, need on pages too*/}
+                <meta data-rh="true" name="nf-pages-version" content="NFLayoutVersion" />
+            </Head>
             <HeroSection className={styles.aaabbb}/>
             <ZeroTrustModels windowSize={windowSize} />
             <SuperPowerSection />
             <GetStartedSection />
-        </OpenZitiLayout>
+        </NetFoundryLayout>
     );
 }
 

@@ -19,8 +19,10 @@
     "@docusaurus/core": "3.8.1",
     "@docusaurus/plugin-client-redirects": "^3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
+    "@docusaurus/theme-common": "3.8.1",
     "@docusaurus/theme-mermaid": "^3.8.1",
     "@mdx-js/react": "^3.0.0",
+    "@openclint/docusaurus-shared": "^0.0.168",
     "@types/react": "^19.1.9",
     "asciinema-player": "^3.10.0",
     "clsx": "^2.0.0",
@@ -35,6 +37,7 @@
     "react-dom": "^19.1.1",
     "react-github-btn": "^1.4.0",
     "react-helmet": "^6.1.0",
+    "react-lite-youtube-embed": "^2.5.6",
     "react-player": "^3.3.1",
     "redocusaurus": "^2.5.0",
     "remark-emoji": "^5.0.1",
@@ -61,5 +64,6 @@
   },
   "engines": {
     "node": ">=18.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

@@ -4,12 +4,12 @@ sidebar_label: Okta
 hide_table_of_contents: true
 ---
 
-import CallbackUrls from '/docs/guides/external-auth/identity-providers/_callback_urls.mdx';
+import { CallbackUrls } from '../../../_imports';
 import Details from '@theme/MDXComponents/Details';
 
 # Okta
 
-<img src="/icons/logo-okta.svg" alt="Okta logo" height="100px"/>
+<img src="@static/icons/logo-okta.svg" alt="Okta logo" height="100px"/>
 
 The following fields are necessary in order to configure an external JWT signer with OpenZiti. This configuration will
 enable authentication via JWTs obtained through an

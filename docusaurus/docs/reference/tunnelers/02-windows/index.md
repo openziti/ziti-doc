@@ -1,6 +1,6 @@
 # Windows
 
-The Ziti Desk for Windows (ZDEW) is the tunneler targeting the Windows operating system. The project is fully
+The Ziti Desktop Edge for Windows (ZDEW) is the tunneler targeting the Windows operating system. The project is fully
 open source and can be found on GitHub at https://github.com/openziti/desktop-edge-win
 
 ## Installation
@@ -18,10 +18,10 @@ tampered with from when it was released. Once installed, enroll your first ident
 
 ## Adding Identities
 
-* [One-Time Token](./add-ids/ott) - Add an identity with a single use token. The most common option
-* [Third-Party CA](./add-ids/third-party-ca) - Add an identity using a third-party CA
-* [External JWT Provider - JWT](./add-ids/ext-providers/ext-jwt) - Add an identity using the configured provider and network JWT
-* [External JWT Provider - URL](./add-ids/ext-providers/ext-jwt-url) - Add an identity using the configured provider and URL
+* [One-Time Token](./add-ids/10-ott.md) - Add an identity with a single use token. The most common option
+* [Third-Party CA](./add-ids/20-third-party-ca.mdx) - Add an identity using a third-party CA
+* [External JWT Provider - JWT](./add-ids/ext-providers/30-ext-jwt.mdx) - Add an identity using the configured provider and network JWT
+* [External JWT Provider - URL](./add-ids/ext-providers/40-ext-jwt-url.mdx) - Add an identity using the configured provider and URL
 
 ## Architecture
 The ZDEW is composed of three main components: the data service, the monitor service, the UI. Communication among

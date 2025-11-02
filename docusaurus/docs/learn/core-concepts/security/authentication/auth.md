@@ -4,16 +4,16 @@ title: Authentication
 
 Authentication in Ziti Edge occurs when a client wishes to interact with the Ziti Edge Controller. Authentication
 has begun when the client receives an API Session and is complete when the API Session is fully authenticated.
-API Sessions are a high level security context that represents an authenticated session with either the Ziti [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-or the Ziti [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx).
+API Sessions are a high level security context that represents an authenticated session with either the Ziti [edge client API](../../../../reference/developer/api/01-edge-client-reference.mdx)
+or the Ziti [edge management API](../../../../reference/developer/api/02-edge-management-reference.mdx).
 
-- Clients that are powered by a Ziti SDK that access services will authenticate with the [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-- Clients that are managing a network will authenticate with the [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx)
+- Clients that are powered by a Ziti SDK that access services will authenticate with the [edge client API](../../../../reference/developer/api/01-edge-client-reference.mdx)
+- Clients that are managing a network will authenticate with the [edge management API](../../../../reference/developer/api/02-edge-management-reference.mdx)
 
 ## Authentication Flow
 
-Below is diagram showing initial authentication for some client. The same model is used between the [edge client API](docs/reference/developer/api/01-edge-client-reference.mdx)
-and [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx).
+Below is diagram showing initial authentication for some client. The same model is used between the [edge client API](../../../../reference/developer/api/01-edge-client-reference.mdx)
+and [edge management API](../../../../reference/developer/api/02-edge-management-reference.mdx).
 
 ```mermaid
 graph TD
@@ -73,7 +73,7 @@ Authenticators may be listed via the CLI:
 
 `ziti edge list authenticators`
 
-or via the [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx):
+or via the [edge management API](../../../../reference/developer/api/02-edge-management-reference.mdx):
 
 ```
 GET /edge/management/v1/authenticators
@@ -84,14 +84,14 @@ GET /edge/management/v1/authenticators
 x509 authentication requires the client to initiate a HTTPs authentication request using a x509 client certificate that
 is associated to the target Identity on an Authenticator. The client certificate can be issued by the Ziti Edge 
 Controller's internal PKI or an external PKI. If an external PKI is being used, it must be registered as a 
-[3rd Party CA](10-third-party-cas.md) via the Ziti [edge management API](docs/reference/developer/api/02-edge-management-reference.mdx), verified, and
+[3rd Party CA](10-third-party-cas.md) via the Ziti [edge management API](../../../../reference/developer/api/02-edge-management-reference.mdx), verified, and
 have authentication enabled. The client certificate must pass signature and CA chain-of-trust validation. All client, 
 intermediate CA, and root CA functionality supports RSA and EC keys.
 
 Please note that intermediate CA certificates may be provided during authentication if necessary. The client certificate
 should be in index zero and intermediate CA certificates in subsequent indexes in any order.
 
-To associate a client certificate with an Identity and Authenticator see the [Enrollment](/learn/core-concepts/security/enrollment.md) 
+To associate a client certificate with an Identity and Authenticator see the [Enrollment](../enrollment.md) 
 section.
 
 Expired client certificates may be allowed via [Authentication Policies](30-authentication-policies.md) if desired.
@@ -121,7 +121,7 @@ production environments JWT and X509 authentication is recommended.
 
 ### Secondary Authentication
 
-Secondary authentication is represented by a series of [Authentication Queries](/learn/core-concepts/security/sessions.md#authentication-queries) on an 
+Secondary authentication is represented by a series of [Authentication Queries](../sessions.md#authentication-queries) on an 
 API Session in the `authQueries` property. At present the following secondary authentication mechanisms are supported:
 
 - TOTP - Time-Based One-Time Password (aka Authenticator Apps)
@@ -135,11 +135,11 @@ many others.
 
 TOTP is configured per-identity and must be client initiated due to the symmetric key exchange that must take place.
 Administrators can enforce TOTP usage through [Authentication Policies](30-authentication-policies.md) and 
-[Posture Checks](/learn/core-concepts/security/authorization/posture-checks.md). [Authentication Policy](30-authentication-policies.md) enforcement 
-stops the client from transitioning between [partially authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication) and
-[fully authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication) status. This stops a client from accessing any service information
-or connect to any service. [Posture Check](/learn/core-concepts/security/authorization/posture-checks.md) enforcement allows a client to
-[fully authenticate](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication), but based on [Service Policy](/learn/core-concepts/security/authorization/policies/overview.mdx) 
+[Posture Checks](../authorization/posture-checks.md). [Authentication Policy](30-authentication-policies.md) enforcement 
+stops the client from transitioning between [partially authenticated](../sessions.md#full-vs-partial-authentication) and
+[fully authenticated](../sessions.md#full-vs-partial-authentication) status. This stops a client from accessing any service information
+or connect to any service. [Posture Check](../authorization/posture-checks.md) enforcement allows a client to
+[fully authenticate](../sessions.md#full-vs-partial-authentication), but based on [Service Policy](../authorization/policies/overview.mdx) 
 restrict connection to specific services.
 
 #### JWT

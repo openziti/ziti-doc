@@ -6,7 +6,7 @@ id: deploy
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import LinuxPackageRepo from '/docs/_linux-package-repo.mdx';
+import LinuxPackageRepo from '../../../../_linux-package-repo.mdx';
 
 This article is about deploying a controller as a Linux system service. [The controller introduction](/learn/introduction/03-components.mdx#controller) may be helpful to read first.
 
@@ -75,7 +75,7 @@ Craft a new configuration by running `ziti create config controller`.
 
 Review the environment variables, especially those named like `ZITI_CTRL_*`, that influence the controller configuration with `ziti create config environment`.
 
-Here's a link to [the controller configuration reference](/reference/30-configuration/controller.md).
+Here's a link to [the controller configuration reference](../../../../reference/30-configuration/controller.md).
 
 ## Starting Up
 
@@ -109,7 +109,7 @@ Customize **/var/lib/ziti-controller/config.yml** as needed and restart the serv
 sudo systemctl restart ziti-controller.service
 ```
 
-Here's a link to [the configuration reference](/reference/30-configuration/controller.md).
+Here's a link to [the configuration reference](../../../../reference/30-configuration/controller.md).
 
 ## Logging
 
@@ -151,7 +151,7 @@ ZITI_ARGS='--verbose'
 
 <br />
 
-Learn more in [the logging reference](/reference/40-logging.mdx).
+Learn more in [the logging reference](../../../../reference/40-logging.mdx).
 
 ## Uninstall
 

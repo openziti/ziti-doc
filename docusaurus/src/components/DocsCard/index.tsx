@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {JSX} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import styles from './styles.module.css';
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -29,10 +29,10 @@ function DocsCard(props: Props): JSX.Element {
       <>
         <div className={clsx(styles.layoutCardContainer)}>
           <div className={clsx(styles.layoutCardIconRow)}>
-            {props.img && <img src={useBaseUrl(props.img)} className={clsx(styles.layoutCardImage)} />}
+            {props.img && <img src={props.img} className={clsx(styles.layoutCardImage)} />}
             {(props.icon || hoverIcon) && (
                 <>
-                  {props.icon && <img src={useBaseUrl(props.icon)} className={clsx(styles.layoutCardIcon, styles.layoutCardIconDefault)} />}
+                  {props.icon && <img src={props.icon} className={clsx(styles.layoutCardIcon, styles.layoutCardIconDefault)} />}
                 </>
             )}
           </div>
@@ -41,7 +41,7 @@ function DocsCard(props: Props): JSX.Element {
               <div className={clsx(styles.layoutCardIconsetContainer)}>
                 {props.iconset.split(',').map((icon, index) => (
                     <img
-                        src={useBaseUrl(icon)}
+                        src={icon}
                         className={clsx(styles.layoutCardIcon, { [styles.layoutCardIconActive]: index === props.activeIndex })}
                         data-index={index}
                         key={index}

@@ -14,8 +14,8 @@ index zero and any required intermediate certificates afterwards.
 ## Usage 
 
 3rd Party CAs can be used in the following manners:
-- allows clients to enroll and authenticate automatically for at-scale network boarding - [Auto CA Enrollment](../enrollment#auto-ca-enrollment)
-- allows clients to enroll pre-created identities - [OTT CA Enrollment](../enrollment#ott-ca-enrollment)
+- allows clients to enroll and authenticate automatically for at-scale network boarding - [Auto CA Enrollment](../enrollment.md#auto-ca-enrollment)
+- allows clients to enroll pre-created identities - [OTT CA Enrollment](../enrollment.md#ott-ca-enrollment)
 - allows clients to map to pre-created identities using `externalId` and [X509 Claims](#external-id--x509-claims)
 
 ## Create
@@ -28,11 +28,11 @@ certificates will be validated. The following fields configure client authentica
 - `isAuthEnabled` - allows client certificates of the CA to attempt to enroll
 - `externalIdClaim` - configuration used to pull values out of the x509 client certificate used to match identity `externalId`, see [External Id & x509 Claims](#external-id--x509-claims)
 
-For [Auto CA Enrollment](../enrollment#auto-ca-enrollment) an identity is created on first authentication. 
+For [Auto CA Enrollment](../enrollment.md#auto-ca-enrollment) an identity is created on first authentication. 
 The following fields allow configuration of newly created identities:
 
 - `identityRoles` - the identity roles to give to automatically enrolling identities
-- `identityNameFormat` - the identity name format used to name [automatically enrolling identities](../enrollment#auto-ca-enrollment)
+- `identityNameFormat` - the identity name format used to name [automatically enrolling identities](../enrollment.md#auto-ca-enrollment)
 
 On initial creation of a 3rd Party CA it will be in an unverified stated and must undergo [verification](#verification).
 The following fields relate to [verification](#verification):
@@ -93,7 +93,7 @@ which are stored in [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-co
 
 3rd Party CAs support defining a set of x509 claims configuration that allows a claim to be matched to an identity
 `externalId`. The configuration is contained in an object in the field `externalIdClaims`. When not defined, x509
-client certificate authentication attempts to find an identity that is tied to an [authenticator](./auth#authenticators) 
+client certificate authentication attempts to find an identity that is tied to an [authenticator](./auth.md#authenticators) 
 by matching client certificates. Using x509 claims, the client is matched by the identity `externalId` value.
 
 The fields under `externalIdClaims` is as follows:

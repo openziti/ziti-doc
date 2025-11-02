@@ -1,0 +1,624 @@
+access-control:
+  label: Access Control
+  permalink: /access-control
+  description: Access control
+
+aks:
+  label: AKS
+  permalink: /aks
+  description: Azure Kubernetes Service
+
+android:
+  label: Android
+  permalink: /android
+  description: Android development and integrations
+
+announcement:
+  label: Announcement
+  permalink: /announcement
+  description: Announcements
+
+apis:
+  label: APIs
+  permalink: /apis
+  description: API development
+
+application-security:
+  label: Application Security
+  permalink: /application-security
+  description: Application security
+
+appsec:
+  label: AppSec
+  permalink: /appsec
+  description: Application security
+
+aws-kms:
+  label: AWS KMS
+  permalink: /aws-kms
+  description: AWS Key Management Service
+
+aws-lambda:
+  label: AWS Lambda
+  permalink: /aws-lambda
+  description: AWS Lambda content
+
+authentication:
+  label: Authentication
+  permalink: /authentication
+  description: Authentication methods and systems
+
+autocomplete:
+  label: Autocomplete
+  permalink: /autocomplete
+  description: Autocomplete features
+
+bash:
+  label: Bash
+  permalink: /bash
+  description: Bash shell content
+
+boto3:
+  label: Boto3
+  permalink: /boto3
+  description: Boto3 library
+
+browsers:
+  label: Browsers
+  permalink: /browsers
+  description: Web browsers
+
+browzer:
+  label: Browzer
+  permalink: /browzer
+  description: Browzer related content
+
+business-rule-driven-access:
+  label: Business Rule Driven Access
+  permalink: /business-rule-driven-access
+  description: Access controlled by business rules
+
+caddy:
+  label: Caddy
+  permalink: /caddy
+  description: Caddy server
+
+channels:
+  label: Channels
+  permalink: /channels
+  description: Communication channels
+
+cloud:
+  label: Cloud
+  permalink: /cloud
+  description: Cloud computing
+
+codegeneration:
+  label: Code Generation
+  permalink: /codegeneration
+  description: Code generation content
+
+community:
+  label: Community
+  permalink: /community
+  description: Community topics
+
+cryptography:
+  label: Cryptography
+  permalink: /cryptography
+  description: Cryptography topics and encryption methods
+
+cve:
+  label: CVE
+  permalink: /cve
+  description: Common Vulnerabilities and Exposures
+
+cybersecurity-1:
+  label: Cybersecurity
+  permalink: /cybersecurity
+  description: Cybersecurity content
+
+debugging:
+  label: Debugging
+  permalink: /debugging
+  description: Debugging topics
+
+developer:
+  label: Developer
+  permalink: /developer
+  description: Developer topics
+
+developers:
+  label: Developers
+  permalink: /developers
+  description: Developer community content
+
+digital-signature:
+  label: Digital Signature
+  permalink: /digital-signature
+  description: Digital signature topics
+
+dns:
+  label: DNS
+  permalink: /dns
+  description: DNS topics
+
+docker:
+  label: Docker
+  permalink: /docker
+  description: Docker content
+
+docker-compose:
+  label: Docker Compose
+  permalink: /docker-compose
+  description: Docker Compose
+
+ebpf:
+  label: eBPF
+  permalink: /ebpf
+  description: eBPF tech
+
+firewall:
+  label: Firewall
+  permalink: /firewall
+  description: Firewall technologies
+
+gaming:
+  label: Gaming
+  permalink: /gaming
+  description: Gaming topics
+
+generics:
+  label: Generics
+  permalink: /generics
+  description: Programming generics
+
+geolocation:
+  label: Geolocation
+  permalink: /geolocation
+  description: Geolocation topics
+
+git:
+  label: Git
+  permalink: /git
+  description: Git content
+
+github:
+  label: GitHub
+  permalink: /github
+  description: GitHub content
+
+githubactions:
+  label: GitHub Actions
+  permalink: /github-actions
+  description: GitHub Actions automation
+
+golang:
+  label: golang
+  permalink: /golang
+  description: Go/Golang content
+
+golang-aha:
+  label: golang-aha
+  permalink: /golang-aha
+  description: Golang Ahas!
+
+gpg:
+  label: GPG
+  permalink: /gpg
+  description: GNU Privacy Guard content
+
+hacktoberfest:
+  label: Hacktoberfest
+  permalink: /hacktoberfest
+  description: Hacktoberfest participation and contributions
+
+hardware:
+  label: Hardware
+  permalink: /hardware
+  description: Hardware-related content
+
+homeassistant:
+  label: Home Assistant
+  permalink: /homeassistant
+  description: Home Assistant integrations
+
+hsm:
+  label: HSM
+  permalink: /hsm
+  description: Hardware Security Modules
+
+integrations:
+  label: Integrations
+  permalink: /integrations
+  description: Third-party integrations
+
+internet:
+  label: Internet
+  permalink: /internet
+  description: Internet related
+
+iot:
+  label: IoT
+  permalink: /iot
+  description: Internet of Things
+
+java:
+  label: Java
+  permalink: /java
+  description: Java content
+
+javascript:
+  label: JavaScript
+  permalink: /javascript
+  description: JavaScript content
+
+just-in-time:
+  label: Just-in-Time
+  permalink: /just-in-time
+  description: Just-in-time access
+
+k3d:
+  label: k3d
+  permalink: /k3d
+  description: Lightweight Kubernetes in Docker
+
+kubernetes:
+  label: Kubernetes
+  permalink: /kubernetes
+  description: Kubernetes content
+
+mattermost:
+  label: Mattermost
+  permalink: /mattermost
+  description: Mattermost content
+
+minecraft:
+  label: Minecraft
+  permalink: /minecraft
+  description: Minecraft content
+
+mobile:
+  label: Mobile
+  permalink: /mobile
+  description: Mobile application development and usage
+
+monitoring:
+  label: Monitoring
+  permalink: /monitoring
+  description: Monitoring and observability
+
+myzrok:
+  label: myzrok
+  permalink: /myzrok
+  description: MyZrok custom tag
+
+netsec:
+  label: NetSec
+  permalink: /netsec
+  description: Network security
+
+network:
+  label: Network
+  permalink: /network
+  description: Network related posts
+
+network-attached-storage:
+  label: Network Attached Storage
+  permalink: /nas
+  description: NAS content
+
+networking:
+  label: Networking
+  permalink: /networking
+  description: Networking related posts
+
+nginx:
+  label: Nginx
+  permalink: /nginx
+  description: Nginx web server and integrations
+
+nodejs:
+  label: NodeJS
+  permalink: /nodejs
+  description: NodeJS content
+
+nrpt:
+  label: NRPT
+  permalink: /nrpt
+  description: Windows NRPT
+
+oauth:
+  label: OAuth
+  permalink: /oauth
+  description: OAuth authentication
+
+object-oriented-programming:
+  label: Object Oriented Programming
+  permalink: /object-oriented-programming
+  description: OOP content
+
+openai:
+  label: OpenAI
+  permalink: /openai
+  description: OpenAI content
+
+openapi:
+  label: OpenAPI
+  permalink: /openapi
+  description: OpenAPI specification
+
+opensource:
+  label: Open Source
+  permalink: /opensource
+  description: Open Source content
+
+openziti:
+  label: OpenZiti
+  permalink: /openziti
+  description: OpenZiti related content
+
+oracle:
+  label: Oracle
+  permalink: /oracle
+  description: Oracle content
+
+oracle-cloud:
+  label: Oracle Cloud
+  permalink: /oracle-cloud
+  description: Oracle Cloud content
+
+overlaynetworking:
+  label: Overlay Networking
+  permalink: /overlaynetworking
+  description: Overlay networking
+
+palworld:
+  label: Palworld
+  permalink: /palworld
+  description: Palworld game
+
+peer-to-peer:
+  label: Peer-to-Peer
+  permalink: /peer-to-peer
+  description: Peer-to-peer networking
+
+performance:
+  label: Performance
+  permalink: /performance
+  description: Performance optimization
+
+permissions:
+  label: Permissions
+  permalink: /permissions
+  description: Permission management
+
+pkce:
+  label: PKCE
+  permalink: /pkce
+  description: OAuth PKCE flow
+
+pki:
+  label: Public Key Infrastructure
+  permalink: /pki
+  description: Public key infrastructure and usage
+
+portainer:
+  label: Portainer
+  permalink: /portainer
+  description: Portainer container management
+
+postman:
+  label: Postman
+  permalink: /postman
+  description: Postman API client
+
+privacy:
+  label: Privacy
+  permalink: /privacy
+  description: Privacy related
+
+privileged-access-management:
+  label: Privileged Access Management
+  permalink: /privileged-access-management
+  description: PAM content
+
+prometheus:
+  label: Prometheus
+  permalink: /prometheus
+  description: Prometheus monitoring
+
+proxy:
+  label: Proxy
+  permalink: /proxy
+  description: Proxy content
+
+python:
+  label: Python
+  permalink: /python
+  description: Python content
+
+raspberry-pi:
+  label: Raspberry Pi
+  permalink: /raspberry-pi
+  description: Raspberry Pi content
+
+rest-api:
+  label: REST API
+  permalink: /rest-api
+  description: REST APIs
+
+roadmap:
+  label: Roadmap
+  permalink: /roadmap
+  description: Project roadmaps
+
+sdk:
+  label: SDK
+  permalink: /sdk
+  description: Software Development Kits
+
+sdlc:
+  label: SDLC
+  permalink: /sdlc
+  description: Software Development Lifecycle
+
+secure:
+  label: Secure
+  permalink: /secure
+  description: Security enhancements
+
+securenetworks:
+  label: Secure Networks
+  permalink: /securenetworks
+  description: Secure networking
+
+security:
+  label: Security
+  permalink: /security
+  description: Security-related posts
+
+self-hosted:
+  label: Self Hosted
+  permalink: /self-hosted
+  description: Self-hosted setups
+
+signtool:
+  label: Signtool
+  permalink: /signtool
+  description: Windows signtool
+
+software-development:
+  label: Software Development
+  permalink: /software-development
+  description: Software development practices
+
+ssh:
+  label: SSH
+  permalink: /ssh
+  description: SSH topics
+
+storage:
+  label: Storage
+  permalink: /storage
+  description: Storage topics
+
+swagger:
+  label: Swagger
+  permalink: /swagger
+  description: Swagger / OpenAPI tools
+
+synology:
+  label: Synology
+  permalink: /synology
+  description: Synology NAS content
+
+tc:
+  label: tc
+  permalink: /tc
+  description: Linux tc
+
+tools:
+  label: Tools
+  permalink: /tools
+  description: Tools and utilities
+
+tpm:
+  label: TPM
+  permalink: /tpm
+  description: Trusted Platform Module
+
+tproxy:
+  label: TProxy
+  permalink: /tproxy
+  description: Transparent proxy
+
+troubleshooting:
+  label: Troubleshooting
+  permalink: /troubleshooting
+  description: Troubleshooting guides
+
+tunneling:
+  label: Tunneling
+  permalink: /tunneling
+  description: Network tunneling
+
+uncategorized:
+  label: Uncategorized
+  permalink: /uncategorized
+  description: Uncategorized posts
+
+voip:
+  label: VoIP
+  permalink: /voip
+  description: VoIP and communications
+
+vpn:
+  label: VPN
+  permalink: /vpn
+  description: VPN related content
+
+web:
+  label: Web
+  permalink: /web
+  description: Web content
+
+webdev:
+  label: WebDev
+  permalink: /webdev
+  description: Web development shorthand
+
+webhooks:
+  label: Webhooks
+  permalink: /webhooks
+  description: Webhooks integrations
+
+web-development:
+  label: Web Development
+  permalink: /web-development
+  description: Web development content
+
+web-security:
+  label: Web Security
+  permalink: /web-security
+  description: Web security content
+
+windows:
+  label: Windows
+  permalink: /windows
+  description: Windows topics
+
+workload-identity:
+  label: Workload Identity
+  permalink: /workload-identity
+  description: Workload Identity in AKS
+
+ziti:
+  label: Ziti
+  permalink: /ziti
+  description: Ziti related posts
+
+zerotrust:
+  label: Zero Trust
+  permalink: /zerotrust
+  description: Zero Trust Networking
+
+zero-trust:
+  label: Zero Trust
+  permalink: /zero-trust
+  description: Zero Trust Security
+
+zero-trust-security:
+  label: Zero Trust Security
+  permalink: /zero-trust-security
+  description: Zero Trust Security Topics
+
+zrok:
+  label: zrok
+  permalink: /zrok
+  description: zrok related content
+
+zsh:
+  label: Zsh
+  permalink: /zsh
+  description: Z shell content

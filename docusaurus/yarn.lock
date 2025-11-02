@@ -2217,6 +2217,14 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@openclint/docusaurus-shared@^0.0.168":
+  version "0.0.168"
+  resolved "https://registry.yarnpkg.com/@openclint/docusaurus-shared/-/docusaurus-shared-0.0.168.tgz#f6a0dd58535393f9961f311e7ba24704945aee43"
+  integrity sha512-uITA4Xf3ItQ8TKZR/N8IkWZDJaXoJQ7PntPIB8vjlH4qBkIIRVn3Gnc5eRt/hgRnUnK2Jxy5Gr0znS0M58NYyA==
+  dependencies:
+    react-device-detect "^2.2.3"
+    react-github-btn "^1.4.0"
+
 "@pnpm/config.env-replace@^1.1.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@pnpm/config.env-replace/-/config.env-replace-1.1.0.tgz"
@@ -8787,6 +8795,11 @@ react-json-view-lite@^2.3.0:
   version "2.4.1"
   resolved "https://registry.npmjs.org/react-json-view-lite/-/react-json-view-lite-2.4.1.tgz"
   integrity sha512-fwFYknRIBxjbFm0kBDrzgBy1xa5tDg2LyXXBepC5f1b+MY3BUClMCsvanMPn089JbV1Eg3nZcrp0VCuH43aXnA==
+
+react-lite-youtube-embed@^2.5.6:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/react-lite-youtube-embed/-/react-lite-youtube-embed-2.5.6.tgz#05f9802e7a3b13da0d5d6e3ae11cf467db802c89"
+  integrity sha512-gbV2SCpAqZOJ/p8wsIbXahONtX3ofh7WZfOR9pCK5kXEbDhTh+bFTOT/fyE+v3ZP4loQkZRqfp8H67gEcGz74w==
 
 react-loadable-ssr-addon-v5-slorber@^1.0.1:
   version "1.0.1"

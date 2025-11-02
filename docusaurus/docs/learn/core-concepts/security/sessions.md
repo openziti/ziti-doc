@@ -7,7 +7,7 @@ Ziti has API Session and Session types.
 API Sessions represent a client that is either partially or fully authenticated as a specific identity.
 They are used to:
 
-- scope [authentication](authentication/auth.md) and [Posture Data](authorization/posture-checks)
+- scope [authentication](authentication/auth.md) and [Posture Data](authorization/posture-checks.md)
 - to make [authorization](authorization/auth.md) decisions.
 
 Clients interact with API Sessions via an opaque security token value and is received during authentication via `/edge/client|management/v1/authenticate`.
