@@ -19,22 +19,22 @@ import {
 
 const baseUrl = '/';
 const openziti = 'openziti';
-const ozDocs = `/docs/${openziti}`;
+const docsBase = `/docs/${openziti}`;
 
 const REMARK_MAPPINGS = [
     { from: '@onpremdocs',   to: '/onprem' },
-    { from: '@openzitidocs', to: `${ozDocs}`},
+    { from: '@openzitidocs', to: `${docsBase}`},
     { from: '@static', to: ``},
 ];
 
 const redirectsArr: { to: string; from: string[] }[] = [
   {
     to: docUrl(openziti, '/category/deployments'),
-    from: [docUrl(ozDocs, '/reference/deployments')]
+    from: [docUrl(docsBase, '/reference/deployments')]
   },
   {
     to: docUrl(openziti, '/guides/external-auth/browzer/'),
-    from: [docUrl(ozDocs, '/identity-providers-for-browZer')]
+    from: [docUrl(docsBase, '/identity-providers-for-browZer')]
   }
 ];
 
@@ -48,7 +48,7 @@ const config: Config = {
     title: 'OpenZiti',
     tagline: 'Replacing Infrastructure With Software',
     url: `http://localhost:${port}`,
-    baseUrl: `${baseUrl}`,
+    baseUrl: `/`,
     trailingSlash: undefined,
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
@@ -78,9 +78,9 @@ const config: Config = {
         '@docusaurus/theme-search-algolia',
     ],
     customFields: {
-        DOCUSAURUS_BASE_PATH: '/',
-        DOCUSAURUS_DOCS_PATH: ozDocs,
-        OPENZITI_DOCS_BASE: ozDocs,
+        DOCUSAURUS_BASE_PATH: '/docs',
+        DOCUSAURUS_DOCS_PATH: docsBase,
+        OPENZITI_DOCS_BASE: docsBase,
     },
     plugins: [
         function webpackAliases() {
@@ -102,13 +102,13 @@ const config: Config = {
             '@docusaurus/plugin-content-blog',
             {
                 showReadingTime: true,
-                routeBasePath: `${ozDocs}/blog`,
+                routeBasePath: `${docsBase}/blog`,
                 tagsBasePath: 'tags',
                 include: ['**/*.{md,mdx}'],
                 path: 'blog',
                 remarkPlugins: [
                     remarkYouTube,
-                    [remarkReplaceMetaUrl, { from: '@staticoz', to: `${ozDocs}` }],
+                    [remarkReplaceMetaUrl, { from: '@staticoz', to: `${docsBase}` }],
                     [remarkReplaceMetaUrl, { from: '@site', to: `${baseUrl}` }],
                     [remarkScopedPath, { mappings: REMARK_MAPPINGS }],
                 ],
@@ -120,41 +120,41 @@ const config: Config = {
             '@docusaurus/plugin-client-redirects',
             {
                 createRedirects: path => {
-                    if (path.startsWith(docUrl(ozDocs, "/guides/topologies/gateway/"))) {
-                        return [path.replace(docUrl(ozDocs, "/guides/topologies/gateway/"), docUrl(ozDocs, "/guides/local-gateway/"))];
+                    if (path.startsWith(docUrl(docsBase, "/guides/topologies/gateway/"))) {
+                        return [path.replace(docUrl(docsBase, "/guides/topologies/gateway/"), docUrl(docsBase, "/guides/local-gateway/"))];
                     }
-                    if (path.startsWith(docUrl(ozDocs, "/guides/deployments/kubernetes/"))) {
-                        return [path.replace(docUrl(ozDocs, "/guides/deployments/kubernetes/"), docUrl(ozDocs, "/guides/kubernetes/hosting/"))];
+                    if (path.startsWith(docUrl(docsBase, "/guides/deployments/kubernetes/"))) {
+                        return [path.replace(docUrl(docsBase, "/guides/deployments/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/hosting/"))];
                     }
-                    if (path.startsWith(docUrl(ozDocs, "/reference/tunnelers/kubernetes/"))) {
-                        return [path.replace(docUrl(ozDocs, "/reference/tunnelers/kubernetes/"), docUrl(ozDocs, "/guides/kubernetes/workload-tunneling/"))];
+                    if (path.startsWith(docUrl(docsBase, "/reference/tunnelers/kubernetes/"))) {
+                        return [path.replace(docUrl(docsBase, "/reference/tunnelers/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/workload-tunneling/"))];
                     }
-                    if (path.startsWith(docUrl(ozDocs, "/guides/deployments/"))) {
+                    if (path.startsWith(docUrl(docsBase, "/guides/deployments/"))) {
                         return [
-                            path.replace(docUrl(ozDocs, "/guides/deployments/"), docUrl(ozDocs, "/reference/deployments/")),
+                            path.replace(docUrl(docsBase, "/guides/deployments/"), docUrl(docsBase, "/reference/deployments/")),
                         ];
                     }
-                    if (path.startsWith(docUrl(ozDocs, "/reference/developer/api/"))) {                       // for each existing page
+                    if (path.startsWith(docUrl(docsBase, "/reference/developer/api/"))) {                       // for each existing page
                         return [
-                            path.replace(docUrl(ozDocs, "/reference/developer/api/"), "/api/"),                      // return a "from" redirect for each old path
-                            path.replace(docUrl(ozDocs, "/reference/developer/api/"), "/api/rest/"),
-                            path.replace(docUrl(ozDocs, "/reference/developer/api/"), "/api/rest/edge-apis/")
+                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/"),                      // return a "from" redirect for each old path
+                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/"),
+                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/edge-apis/")
                         ];
                     }
-                    if (path.startsWith(docUrl(ozDocs, "/learn/quickstarts/"))) {
-                        return [path.replace(docUrl(ozDocs, "/learn/quickstarts/"), docUrl(ozDocs, "/quickstarts/"))];
+                    if (path.startsWith(docUrl(docsBase, "/learn/quickstarts/"))) {
+                        return [path.replace(docUrl(docsBase, "/learn/quickstarts/"), docUrl(docsBase, "/quickstarts/"))];
                     }
-                    if (path.startsWith(docUrl(ozDocs, "/learn/core-concepts/zero-trust-models/"))) {
+                    if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"))) {
                         return [
-                            path.replace(docUrl(ozDocs, "/learn/core-concepts/zero-trust-models/"), docUrl(ozDocs, "/deployment-architecture/")),
-                            path.replace(docUrl(ozDocs, "/learn/core-concepts/zero-trust-models/"), docUrl(ozDocs, "/core-concepts/zero-trust-models/"))
+                            path.replace(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"), docUrl(docsBase, "/deployment-architecture/")),
+                            path.replace(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"), docUrl(docsBase, "/core-concepts/zero-trust-models/"))
                         ];
                     }
-                    if (path.startsWith(docUrl(ozDocs, "/learn/core-concepts/"))) {
-                        return [path.replace(docUrl(ozDocs, "/learn/core-concepts/"), docUrl(ozDocs, "/core-concepts/"))];
+                    if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/"))) {
+                        return [path.replace(docUrl(docsBase, "/learn/core-concepts/"), docUrl(docsBase, "/core-concepts/"))];
                     }
-                    if (path.startsWith(docUrl(ozDocs, "/learn/introduction/"))) {
-                        return [path.replace(docUrl(ozDocs, "/learn/introduction/"), docUrl(ozDocs, "/introduction/"))];
+                    if (path.startsWith(docUrl(docsBase, "/learn/introduction/"))) {
+                        return [path.replace(docUrl(docsBase, "/learn/introduction/"), docUrl(docsBase, "/introduction/"))];
                     }
                     return undefined;
                 },
@@ -169,11 +169,11 @@ const config: Config = {
             {
                 id: 'openziti',
                 path: `docs`,
-                routeBasePath: `${ozDocs}`,
+                routeBasePath: `${docsBase}`,
                 sidebarPath: `sidebars.ts`,
                 includeCurrentVersion: true,
                 remarkPlugins: [
-                    [remarkReplaceMetaUrl, {from: '@staticoz', to: `${ozDocs}`}],
+                    [remarkReplaceMetaUrl, {from: '@staticoz', to: `${docsBase}`}],
                     [remarkScopedPath, { mappings: REMARK_MAPPINGS }],
                     [remarkCodeSections, { logLevel: LogLevel.Debug }],
                 ],
@@ -255,16 +255,16 @@ const config: Config = {
                         position: 'right'
                     },
                     {
-                        to: docUrl(ozDocs, '/learn/introduction/'),
+                        to: docUrl(docsBase, '/learn/introduction/'),
                         label: 'Documentation',
                         position: 'right',
-                        activeBaseRegex: docUrl(ozDocs, '/(?!downloads)'),
+                        activeBaseRegex: docUrl(docsBase, '/(?!downloads)'),
                     },
                     {
-                        to: docUrl(ozDocs, '/downloads'),
+                        to: docUrl(docsBase, '/downloads'),
                         label: 'Downloads',
                         position: 'right',
-                        activeBaseRegex: docUrl(ozDocs, '/downloads'),
+                        activeBaseRegex: docUrl(docsBase, '/downloads'),
                     },
                     {
                         type: 'html',
@@ -282,19 +282,19 @@ const config: Config = {
                             },
                             {
                                 type: 'html',
-                                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(ozDocs, "img/yt.svg") + `" alt="YouTube logo"/>YouTube</span></a>`
+                                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/yt.svg") + `" alt="YouTube logo"/>YouTube</span></a>`
                             },
                             {
                                 type: 'html',
-                                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(ozDocs, "img/twit.svg") + `" alt="X/Twitter logo"/>X (Twitter)</span></a>`
+                                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/twit.svg") + `" alt="X/Twitter logo"/>X (Twitter)</span></a>`
                             },
                             {
                                 type: 'html',
-                                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(ozDocs, "img/reddit-logo.png") + `" alt="Reddit logo"/>Reddit</span></a>`
+                                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/reddit-logo.png") + `" alt="Reddit logo"/>Reddit</span></a>`
                             },
                             {
                                 type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(ozDocs, "img/ziggy.png") + `" alt="X/Twitter Ziggy logo"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
+                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/ziggy.png") + `" alt="X/Twitter Ziggy logo"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
                             },
                             {
                                 type: 'html',
@@ -302,11 +302,11 @@ const config: Config = {
                             },
                             {
                                 type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(ozDocs, "img/blog-icon.png") + `" alt="OpenZiti blog logo"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
+                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/blog-icon.png") + `" alt="OpenZiti blog logo"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
                             },
                             {
                                 type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(ozDocs, "img/oz-test-kitchen.png") + `" alt="OpenZiti Test Kitchen logo"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
+                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/oz-test-kitchen.png") + `" alt="OpenZiti Test Kitchen logo"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
                             },
                         ]
                     },
