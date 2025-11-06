@@ -159,6 +159,140 @@ The default format is `[caName] - [commonName]`.
 
 Identity names are unique and if a collision occurs, incrementing numbers are appended.
 
+### Auto External JWT Signer Enrollment
+
+[External JWT Signers](./authentication/50-external-jwt-signers.md) represent an external IdP that can sign JWTs 
+as proof of identity (includinig OAuth/OIDC servers). Auto Ext-JWT-Signer enrollment allows a client with a JWT from a
+configured [External JWT Signers](./authentication/50-external-jwt-signers.md) to enroll without and administrator
+preconfiguring an identity for them.
+
+For this to function, the following must be true:
+- the External JWT Signer is configured to validate incoming JWTs
+- the External JWT Signer is enabled
+- the External JWT Signer has a `claimsProperty` set that maps to an id value to use as `externalId` of enrolling 
+    identities.
+- either the `enrollToCertEnable` or `enrollToTokenEnabled` are set to `true`
+
+
+The [External JWT Signers](./authentication/50-external-jwt-signers.md) options `enrollToCertEnable` and
+`enrollToTokenEnabled` are defined as follows:
+
+- `enrollToCertEnabled` - Allows clients with valid JWTs to request a certificate from the controller by providing a 
+        CSR. The resulting certificate will be used for authentication. The target `enrollAuthPolicyId` must be set
+        to a policy that allows certificate authentication. If `enrollAuthPolicyId` is not set, the default policy
+        will be used and must allow certificate authentication.
+- `enrollToTokenEnabled`- Allows clients with valid JWTs to continue to use JWTs for authentication. The target
+        policy must be set to a policy that allows External JWT Signer authentication. If `enrollAuthPolicyId` is not
+        set, the default policy will be used and must allow External JWT Signer authentication.
+
+
+Additionally, there are optional values that can be used to control which claims within the JWT are significant:
+
+- `enrollAttributeClaimsSelector` - a root level property name (e.g. `claims`) or a JSON pointer (e.g. `/claims`) that
+        points to a string or array of strings that will be used to populate the `attributes` field of the enrolling
+        identity. Defaults to no value set and identities will enroll without attributes.
+- `enrollAuthPolicyId` - the id of the authentication policy to use for the enrolling identity. Defaults to no value set
+        and the identity will enroll with the default authentication policy.
+- `enrollNameClaimsSelector` - the root level property name (e.g. `claims`) or a JSON pointer (e.g. `/claims`) that
+        points to a string that will be used to populate the `name` field of the enrolling identity.
+        Defaults to the subject property of the JWT (e.g. `/sub`)
+
+These values are included on the OpenZiti CLI command `ziti edge create ext-jwt-signer`.
+
+#### Identity Uniqueness
+
+The `claimsProperty` that selects the external id of the enrolling identity must be unique. Attempting to enroll
+with further duplicate external ids will result in an error. If desired, remove the previously enrolled identity
+to allow re-enrollment.
+
+#### Enrollment Process
+
+In order for Auto External JWT Signer Enrollment to happen, a client must be used that implements the enrollment flow.
+This process is similar to External JWT Signer authentication (e.g. OIDC or OAuth).
+
+1. The client queries the public External JWT Signers list on the Client API
+    ```http request
+    GET /edge/client/v1/external-jwt-signers
+    ```
+    
+    ```http response
+    200 OK
+    Content-Type: application/json
+    
+    {
+        meta: {...},
+        data: [
+            {
+                id: "20jgir0ji02",
+                  "name": "Example 1",
+                  "externalAuthUrl": "https://auth.example.com/login",
+                  "clientId": "native",
+                  "scopes": "openid profile email",
+                  "openIdConfigurationUrl": "https://auth.example.com/.well-known/openid-configuration",
+                  "audience": "myAudience",
+                  "targetToken": "ACCESS",
+                  "enrollToCertEnabled": true,
+                  "enrollToTokenEnabled": false,
+            },
+            ...
+        ]
+    }
+    ```
+2. The client presents a list to be selected from or selects a specific one.
+3. The client follows the authentication flow, enabling user input where necessary.
+4. The client receives a JWT from the external IdP.
+5. The client uses the JWT for enrollment. (see below)
+
+#### Enrollment Token Submission
+
+The client can submit the JWT to the controller for enrollment that results in either certificate based authentication
+(`enrollToCert` is true) or token based authentication (`enrollToToken` is true).
+
+
+##### Certificate Enrollment
+
+Certificate enrollment requries the creation of a CSR. The CSR can contain any values desired, however they will
+be ignored by the controller. The only requirement is that a properly configured key set was used to create and sign
+the CSR.
+
+```http request
+POST /edge/client/v1/enroll/token
+Authorization: Bearer <jwt from IdP>
+
+<CSR>
+```
+
+```http response
+200 OK
+Content-Type: application/json
+
+{
+    "meta":{},
+    "data":{}
+}
+```
+
+```http response
+200 OK
+Content-Type: application/json
+
+{
+    "meta": {...},
+    "data": {
+        "cert": "<PEM encoded certificate chain>",
+        "ca": "<PEM encoded CA certificate bundle>"
+    }
+}
+```
+
+##### Token Enrollment
+
+Token enrollment is a simple request to the controller with the JWT.
+```http request
+POST /edge/client/v1/enroll/token
+Authorization: Bearer <jwt from IdP>
+```
+
 ### Client Re-Enrollment
 
 Clients may request to extend enrollments that generated x509 certificates if the client certificate was issued by
