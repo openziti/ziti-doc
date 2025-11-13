@@ -1,3 +1,5 @@
+import ExtJwtDocEnrollDetails from '../_ext-jwt-enroll-details.md'
+
 # External JWT Signers
 
 External JWT Signers allow external identity providers to facilitate authentication with a Ziti network. External
@@ -23,30 +25,12 @@ claim and Ziti identities with `externalId` set to email addresses.
 
 ### Enrollment
 
-External JWT Signers can be used to enroll identities that are no pre-created by administrators. Enrollment is 
+External JWT Signers can be used to enroll identities that are not pre-created by administrators. Enrollment is 
 controlled by the `enrollToCertEnabled` and `enrollToTokenEnabled` fields on `enabled` External JWT Signers. See the 
-[Enrollment - Auto External JWT Signer Enrollment](../enrollment.md#auto-external-jwt-signer-enrollment) 
+[Enrollment - Auto External JWT Signer Enrollment](../enrollment.mdx#auto-external-jwt-signer-enrollment) 
 documentation for more information.
 
-- `enrollToCertEnabled` - Allows clients with valid JWTs to request a certificate from the controller by providing a
-  CSR. The resulting certificate will be used for authentication. The target `enrollAuthPolicyId` must be set
-  to a policy that allows certificate authentication. If `enrollAuthPolicyId` is not set, the default policy
-  will be used and must allow certificate authentication.
-- `enrollToTokenEnabled`- Allows clients with valid JWTs to continue to use JWTs for authentication. The target
-  policy must be set to a policy that allows External JWT Signer authentication. If `enrollAuthPolicyId` is not
-  set, the default policy will be used and must allow External JWT Signer authentication.
-
-
-Additionally, there are optional values that can be used to control which claims within the JWT are significant:
-
-- `enrollAttributeClaimsSelector` - a root level property name (e.g. `claims`) or a JSON pointer (e.g. `/claims`) that
-  points to a string or array of strings that will be used to populate the `attributes` field of the enrolling
-  identity. Defaults to no value set and identities will enroll without attributes.
-- `enrollAuthPolicyId` - the id of the authentication policy to use for the enrolling identity. Defaults to no value set
-  and the identity will enroll with the default authentication policy.
-- `enrollNameClaimsSelector` - the root level property name (e.g. `claims`) or a JSON pointer (e.g. `/claims`) that
-  points to a string that will be used to populate the `name` field of the enrolling identity.
-  Defaults to the subject property of the JWT (e.g. `/sub`)
+<ExtJwtDocEnrollDetails />
 
 ### x509 Certificate
 

@@ -1,3 +1,5 @@
+import ExtJwtDocEnrollDetails from './_ext-jwt-enroll-details.md'
+
 # Enrollment
 
 Enrollment is the process of some Edge client or edge router associating itself with a Ziti network. Client enrollment
@@ -46,7 +48,7 @@ Routers will automatically maintain their enrollment by refreshing their certifi
 
 ## Clients
 
-Client enroll in one of two major categories:
+Clients enroll in one of two major categories:
 
 - pre-provisioned - identities are created before the client attempts to run and are provided with one-time-tokens to enroll
   - OTT, OTT CA
@@ -147,7 +149,7 @@ Ziti network without first creating an identity or distributing a JWT enrollment
 [3rd Party CA](./authentication/10-third-party-cas.md) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
 
 The name of enrolling clients is controlled by the `identityNameFormat` of the [3rd Party CA](./authentication/10-third-party-cas.md).
-The format support a number of replacement strings:
+The /format supports a number of replacement strings:
 
 - `[caName]` - the Ziti `name` of the [3rd Party CA](./authentication/10-third-party-cas.md) that validates the enrolling certificate
 - `[caId]` - the Ziti `id` of the [3rd Party CA](./authentication/10-third-party-cas.md) that validates the enrolling certificate
@@ -157,13 +159,13 @@ The format support a number of replacement strings:
 
 The default format is `[caName] - [commonName]`.
 
-Identity names are unique and if a collision occurs, incrementing numbers are appended.
+Identity names are unique, and if a collision occurs, incrementing numbers are appended.
 
 ### Auto External JWT Signer Enrollment
 
 [External JWT Signers](./authentication/50-external-jwt-signers.md) represent an external IdP that can sign JWTs 
-as proof of identity (includinig OAuth/OIDC servers). Auto Ext-JWT-Signer enrollment allows a client with a JWT from a
-configured [External JWT Signers](./authentication/50-external-jwt-signers.md) to enroll without and administrator
+as proof of identity (including OAuth/OIDC servers). Auto Ext-JWT-Signer enrollment allows a client with a JWT from a
+configured [External JWT Signers](./authentication/50-external-jwt-signers.md) to enroll without an administrator
 preconfiguring an identity for them.
 
 For this to function, the following must be true:
@@ -177,25 +179,7 @@ For this to function, the following must be true:
 The [External JWT Signers](./authentication/50-external-jwt-signers.md) options `enrollToCertEnable` and
 `enrollToTokenEnabled` are defined as follows:
 
-- `enrollToCertEnabled` - Allows clients with valid JWTs to request a certificate from the controller by providing a 
-        CSR. The resulting certificate will be used for authentication. The target `enrollAuthPolicyId` must be set
-        to a policy that allows certificate authentication. If `enrollAuthPolicyId` is not set, the default policy
-        will be used and must allow certificate authentication.
-- `enrollToTokenEnabled`- Allows clients with valid JWTs to continue to use JWTs for authentication. The target
-        policy must be set to a policy that allows External JWT Signer authentication. If `enrollAuthPolicyId` is not
-        set, the default policy will be used and must allow External JWT Signer authentication.
-
-
-Additionally, there are optional values that can be used to control which claims within the JWT are significant:
-
-- `enrollAttributeClaimsSelector` - a root level property name (e.g. `claims`) or a JSON pointer (e.g. `/claims`) that
-        points to a string or array of strings that will be used to populate the `attributes` field of the enrolling
-        identity. Defaults to no value set and identities will enroll without attributes.
-- `enrollAuthPolicyId` - the id of the authentication policy to use for the enrolling identity. Defaults to no value set
-        and the identity will enroll with the default authentication policy.
-- `enrollNameClaimsSelector` - the root level property name (e.g. `claims`) or a JSON pointer (e.g. `/claims`) that
-        points to a string that will be used to populate the `name` field of the enrolling identity.
-        Defaults to the subject property of the JWT (e.g. `/sub`)
+<ExtJwtDocEnrollDetails />
 
 These values are included on the OpenZiti CLI command `ziti edge create ext-jwt-signer`.
 
@@ -211,11 +195,11 @@ In order for Auto External JWT Signer Enrollment to happen, a client must be use
 This process is similar to External JWT Signer authentication (e.g. OIDC or OAuth).
 
 1. The client queries the public External JWT Signers list on the Client API
-    ```http request
+    ```text
     GET /edge/client/v1/external-jwt-signers
     ```
     
-    ```http response
+    ```text
     200 OK
     Content-Type: application/json
     
@@ -245,24 +229,24 @@ This process is similar to External JWT Signer authentication (e.g. OIDC or OAut
 
 #### Enrollment Token Submission
 
-The client can submit the JWT to the controller for enrollment that results in either certificate based authentication
-(`enrollToCert` is true) or token based authentication (`enrollToToken` is true).
+The client can submit the JWT to the controller for enrollment that results in either certificate-based authentication
+(`enrollToCert` is true) or token-based authentication (`enrollToToken` is true).
 
 
 ##### Certificate Enrollment
 
-Certificate enrollment requries the creation of a CSR. The CSR can contain any values desired, however they will
+Certificate enrollment requires the creation of a [Certificate Signing Request (CSR)](https://en.wikipedia.org/wiki/Certificate_signing_request). The CSR can contain any values desired. However, they will
 be ignored by the controller. The only requirement is that a properly configured key set was used to create and sign
 the CSR.
 
-```http request
+```text
 POST /edge/client/v1/enroll/token
 Authorization: Bearer <jwt from IdP>
 
 <CSR>
 ```
 
-```http response
+```text
 200 OK
 Content-Type: application/json
 
@@ -272,7 +256,7 @@ Content-Type: application/json
 }
 ```
 
-```http response
+```text
 200 OK
 Content-Type: application/json
 
@@ -288,7 +272,7 @@ Content-Type: application/json
 ##### Token Enrollment
 
 Token enrollment is a simple request to the controller with the JWT.
-```http request
+```text
 POST /edge/client/v1/enroll/token
 Authorization: Bearer <jwt from IdP>
 ```

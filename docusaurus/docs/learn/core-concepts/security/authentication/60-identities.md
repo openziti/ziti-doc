@@ -6,7 +6,7 @@ itself, a single account on a multi-user device, an application, or a set of app
 Identity is only limited by the intent of its use, its security configuration, and where/how it stores its credentials.
 
 If an Identity represents a human that is using an SSO provider that ties into Ziti Edge's
-[External JWT Signers](./50-external-jwt-signers.md) the human operator can move from device to device using whichever Ziti
+[External JWT Signers](50-external-jwt-signers.mdx) the human operator can move from device to device using whichever Ziti
 enabled applications that allow them to authenticate. If the Identity can only authenticate via a x509 Client
 Certificate where the private key is stored in a hardware back keystore on a device, such that the key can not be moved,
 the identity is tied to that hardware. Further if the Identity's credentials are stored in an OS-backed user specific
@@ -36,7 +36,7 @@ erDiagram
 ## Creating
 
 Creating an identity alone may not be enough to make it usable. An identity will also need a valid primary
-authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment.md#clients).
+authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment.mdx#clients).
 
 Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth.md)
 
@@ -46,7 +46,7 @@ The following [primary authentication](./auth.md#primary-authentication) mechani
 - 3rd Party x509 Client Certificate
 - Username Password (UPDB)
 
-The following do not require enrollment, but must have a properly configured [External JWT Signer](./50-external-jwt-signers.md)
+The following do not require enrollment, but must have a properly configured [External JWT Signer](50-external-jwt-signers.mdx)
 
 - JWT
 
@@ -137,7 +137,7 @@ Note: This identity will be using the default [authentication policy](./auth.md)
 ```
 
 ### Creating w/ JWT Authenticator
-Note: A valid [External JWT Signer](./50-external-jwt-signers.md) must be created and an [authentication policy](./auth.md)
+Note: A valid [External JWT Signer](50-external-jwt-signers.mdx) must be created and an [authentication policy](./auth.md)
 must be defined that allows the identity to authenticate with that signer.
 
 #### Ziti CLI:
@@ -165,7 +165,7 @@ Deleting an Identity removes all directly associated data. This includes:
   - [Session Certificates](./20-api-session-certificates.md)
 - Identity Role Attributes
 - [Authenticators](./auth.md#authenticators)
-- [Enrollments](../enrollment.md)
+- [Enrollments](../enrollment.mdx)
 - [MFA TOTP Configuration](./70-totp.md)
 
 It does not remove entities are that re-usable between Identities:
