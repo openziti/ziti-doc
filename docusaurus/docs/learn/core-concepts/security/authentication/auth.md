@@ -91,21 +91,21 @@ intermediate CA, and root CA functionality supports RSA and EC keys.
 Please note that intermediate CA certificates may be provided during authentication if necessary. The client certificate
 should be in index zero and intermediate CA certificates in subsequent indexes in any order.
 
-To associate a client certificate with an Identity and Authenticator see the [Enrollment](../enrollment.md) 
+To associate a client certificate with an Identity and Authenticator see the [Enrollment](../enrollment.mdx) 
 section.
 
 Expired client certificates may be allowed via [Authentication Policies](30-authentication-policies.md) if desired.
 
 ### JWT Primary Authentication
 
-JWT authentication requires that an [External JWT Signer](50-external-jwt-signers.md) be added via the Ziti edge management 
-API. The definition of [External JWT Signer](50-external-jwt-signers.md) allows configuration of which JWT claim should be
+JWT authentication requires that an [External JWT Signer](50-external-jwt-signers.mdx) be added via the Ziti edge management 
+API. The definition of [External JWT Signer](50-external-jwt-signers.mdx) allows configuration of which JWT claim should be
 used as a value to map against the unique `externalId` or `id` property on Identities. This mapping of JWT claim to 
 `externalId`/`id` is used to determine which Identity is authenticating.
 
 The JWT must be provided in the HTTP request in the `Authorization` header with a value in the format of 
 `Bearer <jwt>`. The JWT provided must pass signature, expiration, issuer, and audience validation as configured
-on the [External JWT Signer](50-external-jwt-signers.md).
+on the [External JWT Signer](50-external-jwt-signers.mdx).
 
 ### Username/password
 

@@ -12,7 +12,7 @@ applications and allows users to sign in one place to gain access to an OpenZiti
 
 OpenZiti has a flexible design for integrating with external identity providers. An overlay can be configured to 
 extend authentication to external identity providers using 
-[external jwt signers](../../learn/core-concepts/security/authentication/50-external-jwt-signers.md). OpenZiti also 
+[external jwt signers](../core-concepts/security/authentication/50-external-jwt-signers.mdx). OpenZiti also 
 allows an administrator to configure these identity providers as either the primary or secondary authentication 
 mechanism by defining additional 
 [authentication policies](../../learn/core-concepts/security/authentication/30-authentication-policies.md)

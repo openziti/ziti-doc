@@ -12,7 +12,7 @@ PKIs via [3rd Party CAs](./10-third-party-cas.md). Ziti can trust certificates f
 Routers will attempt to extend their current client and server certificates one week prior to expiration. No
 intervention is necessary on behalf of the network administrator. The request must be sent to the controller via a 
 pre-authenticated connection. If a router has been disconnected from the Ziti network and their client certificates
-have expired, the router must be [re-enrolled](../enrollment.md#router-enrollment-extension).
+have expired, the router must be [re-enrolled](../enrollment.mdx#router-enrollment-extension).
 
 ## Client Certificate Extension
 

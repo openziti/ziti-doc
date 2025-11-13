@@ -76,9 +76,9 @@ process to maintain client certificate validity if `allowExpiredCerts` is false.
 Fields:
 
 - `allowed` - whether external JWTs may be used for authentication
-- `allowedSigners` - the ids of valid [External JWT Signers](./50-external-jwt-signers.md)
+- `allowedSigners` - the ids of valid [External JWT Signers](50-external-jwt-signers.mdx)
 
-If `allowed` is true the [External JWT Signers](./50-external-jwt-signers.md) specified in the `allowedSigners` field
+If `allowed` is true the [External JWT Signers](50-external-jwt-signers.mdx) specified in the `allowedSigners` field
 may be used for authentication.
 
 #### Username Password (updb)
@@ -92,4 +92,4 @@ may be used for authentication.
 The secondary section contain only two top-level configuration values:
 
 - `requireTotp` - if true authenticating clients must have [MFA TOTP](./70-totp.md) enabled
-- `requireExtJwt` - if set to an id of an [External JWT Signer](./50-external-jwt-signers.md) every request must have a valid JWT in the HTTP `Authentication` header
+- `requireExtJwt` - if set to an id of an [External JWT Signer](50-external-jwt-signers.mdx) every request must have a valid JWT in the HTTP `Authentication` header

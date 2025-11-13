@@ -7,10 +7,10 @@ are related to identity authentication and service access:
 
 - [Identities](#identity) - describe a human, device, or service within the edge
 - [Authenticators](./authentication/auth.md#authenticators) - describes the credentials of an authentication method associated with an Identity
-- [Enrollments](./enrollment.md) - describes a set of criteria necessary to create a new Identity and associated Authenticator
+- [Enrollments](enrollment.mdx) - describes a set of criteria necessary to create a new Identity and associated Authenticator
 - [Authentication Policy](./authentication/30-authentication-policies.md) - describes the methods available for Identity authentication
 - [3rd Party CAs](./authentication/10-third-party-cas.md) - allows external x509 PKIs to be used for authentication
-- [External JWT Signers](./authentication/50-external-jwt-signers.md) - allows external JWT signers to be used for authentication
+- [External JWT Signers](authentication/50-external-jwt-signers.mdx) - allows external JWT signers to be used for authentication
 - [API Session](./sessions.md) - a security context represented by a security token (JWT, secret, etc) that represents
   Identity authentication
 - [Session](./sessions.md) - a security context represented by a security token (JWT, secret, etc) that represents access
@@ -78,14 +78,14 @@ dial (connect) to services over a network. Read more in the [Identity](/learn/co
 
 Enrollment is a client initiated process where the result is the creation of an Identity that has some manner
 of authenticating. Enrollments may be automated through [3rd Party Cas](./authentication/10-third-party-cas.md) and 
-[External JWT Signers](./authentication/50-external-jwt-signers.md)  or may be completed through pre-provisioning. Read more in the 
-[Enrollment](./enrollment.md) section.
+[External JWT Signers](authentication/50-external-jwt-signers.mdx) or may be completed through pre-provisioning. Read more in the 
+[Enrollment](enrollment.mdx) section.
 
 ### Authentication
 
 [Authentication](./authentication/auth.md) is the process of a client proving their identity through the submission of one primary credential
 and zero or more secondary credentials that are prompted by Authentication Queries. Authentication methods can be
-configured through [3rd Party Cas](./authentication/10-third-party-cas.md), [External JWT Signers](./authentication/50-external-jwt-signers.md),
+configured through [3rd Party Cas](./authentication/10-third-party-cas.md), [External JWT Signers](authentication/50-external-jwt-signers.mdx),
 and [Authentication Policies](./authentication/30-authentication-policies.md). Read more in the
  [Authentication](./authentication/auth.md) section.
 

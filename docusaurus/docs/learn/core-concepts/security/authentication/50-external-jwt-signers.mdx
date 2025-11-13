@@ -1,3 +1,5 @@
+import ExtJwtDocEnrollDetails from '../_ext_jwt_enroll_details.md'
+
 # External JWT Signers
 
 External JWT Signers allow external identity providers to facilitate authentication with a Ziti network. External
@@ -21,6 +23,14 @@ _Note: `externalId` values on identities are enforced to be unique._
 `claimsProperty` can contain JWT standard claims or private claims. An example usage would be an `email` JWT private
 claim and Ziti identities with `externalId` set to email addresses.
 
+### Enrollment
+
+External JWT Signers can be used to enroll identities that are not pre-created by administrators. Enrollment is 
+controlled by the `enrollToCertEnabled` and `enrollToTokenEnabled` fields on `enabled` External JWT Signers. See the 
+[Enrollment - Auto External JWT Signer Enrollment](../enrollment.mdx#auto-external-jwt-signer-enrollment) 
+documentation for more information.
+
+<ExtJwtDocEnrollDetails />
 
 ### x509 Certificate
 
