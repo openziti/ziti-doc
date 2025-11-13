@@ -78,7 +78,7 @@ dial (connect) to services over a network. Read more in the [Identity](/learn/co
 
 Enrollment is a client initiated process where the result is the creation of an Identity that has some manner
 of authenticating. Enrollments may be automated through [3rd Party Cas](./authentication/10-third-party-cas.md) and 
-[External JWT Signers](authentication/50-external-jwt-signers.mdx)  or may be completed through pre-provisioning. Read more in the 
+[External JWT Signers](authentication/50-external-jwt-signers.mdx) or may be completed through pre-provisioning. Read more in the 
 [Enrollment](enrollment.mdx) section.
 
 ### Authentication
