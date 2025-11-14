@@ -39,6 +39,10 @@ Before generating an SSL certificate, ensure you have a valid DNS record pointin
 your server. This can be done through your DNS provider’s control panel, dashboard, or directly via a domain
 registrar.
 
+:::note Important note on DNS
+Ensure the DNS record for the Alternative Server Certificate is not the same DNS record used for the controller. This can cause issues when validating JWT tokens on the clients. This may show as `key is of invalid type: RSA verify expects *rsa.PublicKey` when enrolling a router.
+:::
+
 Ensure you wait for DNS propagation to complete before attempting ACME DNS-based challenge.
 
 This may take a few minutes to a few hours, but you can use tools like [Google Admin Toolbox Dig](https://toolbox.googleapps.com/apps/dig/#TXT/)
