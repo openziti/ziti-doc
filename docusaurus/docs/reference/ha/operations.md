@@ -140,7 +140,7 @@ In an HA system, routers will send metrics to all controllers to which they are 
 a new `doNotPropagate` flag in the metrics message, which will be set to false until the router has
 successfully delivered the metrics message to a controller. The flag will then be set to true. So
 the first controller to get the metrics message is expected to deliver the metrics message to the
-events system for external integrators. The other controllers will have `doNotPropage` set to true,
+events system for external integrators. The other controllers will have `doNotPropagate` set to true,
 and will only use the metrics message internally, to update routing data.
 
 ## Open Ports
