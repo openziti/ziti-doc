@@ -1,6 +1,7 @@
 ---
 sidebar_label: Controller
 sidebar_position: 20
+toc_max_heading_level: 4
 ---
 
 # Controller Configuration Reference
