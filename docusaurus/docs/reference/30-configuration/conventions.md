@@ -230,8 +230,8 @@ providing the following options:
 - `tlsClientAuthenticationPolicy` - (optional) the TLS client authentication policy to use. Defaults to VerifyClientCertIfGiven.
   For additional information on TLS client authentication policies, see [ClientAuthType](https://pkg.go.dev/crypto/tls#ClientAuthType).
 - `listenOptions` - necessary to specify the following options (all optional)
-  - `bindUsingEdgeIdentity` - (optional) if true, the controller will bind using the edge identity instead binding the service.
-
+  - `bindUsingEdgeIdentity` - (optional) if true, the sdk hosted service will be addressable using a combination of the edge identity and service name, rather than just the service name.
+    
 ### `apis`
 
 The `apis` section defines which APIs will be hosted on this exposure. Different OpenZiti components
