@@ -1,6 +1,7 @@
 ---
 sidebar_label: Conventions
 sidebar_position: 10
+toc_max_heading_level: 4
 ---
 
 # Conventions
@@ -141,7 +142,8 @@ Supported units:
 ## XWeb
 
 The `web` section is powered by [XWeb](https://github.com/openziti/xweb). XWeb allows web APIs to be
-defined in code and exposed on multiple interfaces/networks through configuration alone.
+defined in code and exposed on multiple interfaces/networks through configuration alone. Starting with
+version 1.8+, XWeb also supports binding APIs as OpenZiti services.
 
 Example:
 
@@ -152,6 +154,11 @@ web:
       - interface: 127.0.0.1:1280
         address: 127.0.0.1:1280
         newAddress: localhost:1280
+      - interface: public.fqdn.example:8441
+        address: public.fqdn.example:8441
+      - identity:
+          file: "/path/to/identity.json"
+          service: "zitified-apis"
     identity:
       cert: ctrl-client.cert.pem
       server_cert: ctrl-server.cert.pem
@@ -192,8 +199,15 @@ Each exposure has the following configuration options:
 ### `bindPoints`
 
 `bindPoints` are used to instruct XWeb on where to listen for new connections. Each exposure can
-have multiple bind pints to have the same API listen on one or more interfaces/networks.
-Additionally, each interface listened on can have its own external address and migration address.
+have multiple bind pints to have the same API listen on one or more interfaces/networks or port 
+combinations. Additionally, each interface listened on can have its own external address and 
+migration address, supporting the migration of a controller to a new IP address or hostname.
+Starting with version 1.8+, bindPoints can also declare the APIs are to be bound to an OpenZiti
+service by specifying one or more `identity` sections.
+
+#### Underlay-based bindPoints
+
+For underlay-based bindPoints, the following options are supported:
 
 - `interface` - (required) the interface and port to listen on ("0.0.0.0" for all IPv4
   interfaces, "::" for all IPv6 interfaces
@@ -205,6 +219,18 @@ Additionally, each interface listened on can have its own external address and m
 
 `newAddress` should only be specified when clients can use the new host:port combination to reach
 the specified APIs. This setting is used to migrate APIs between ip/hostnames.
+
+#### Overlay-based bindPoints (v1.8+)
+
+To configure the controller to bind APIs using an OpenZiti overlay, specify an `identity` block by
+providing the following options:
+- `file` - (required without `env`) the path to the OpenZiti identity file to use
+- `env` - (required without `file`) name of an environment variable containing a base-64 encoded OpenZiti identity file
+- `service` - (required) the name of the service the identity is authorized to bind
+- `tlsClientAuthenticationPolicy` - (optional) the TLS client authentication policy to use. Defaults to VerifyClientCertIfGiven.
+  For additional information on TLS client authentication policies, see [ClientAuthType](https://pkg.go.dev/crypto/tls#ClientAuthType).
+- `listenOptions` - necessary to specify the following options (all optional)
+  - `bindUsingEdgeIdentity` - (optional) if true, the controller will bind using the edge identity instead binding the service.
 
 ### `apis`
 

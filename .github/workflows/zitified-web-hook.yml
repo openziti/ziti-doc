@@ -24,7 +24,7 @@ jobs:
         run:   echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-      - uses: openziti/ziti-mattermost-action-py@main
+      - uses: openziti/ziti-mattermost-action-py@v1
         if: |
           env.ZHOOK_URL != null
           && !(
