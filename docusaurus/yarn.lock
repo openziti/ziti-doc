@@ -2196,14 +2196,6 @@
     hls.js "~1.6.6"
     mux-embed "^5.8.3"
 
-"@netfoundry/docusaurus-shared@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@netfoundry/docusaurus-shared/-/docusaurus-shared-0.1.1.tgz#0efcf8db940c05fa476e48dce1d2631bc95d23c7"
-  integrity sha512-/bccmd8ZSCX47ebbtcMLyq73BLkLQO2p7qa11oX793PP9kAtVHZA1aAfo0bfQDX/sMQxQ0mrT1sGvDT7t57myg==
-  dependencies:
-    react-device-detect "^2.2.3"
-    react-github-btn "^1.4.0"
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"

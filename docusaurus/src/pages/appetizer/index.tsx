@@ -14,7 +14,7 @@ import {
     NetFoundryHorizontalSection,
     NetFoundryLayout,
     version as NFLayoutVersion,
-} from "@netfoundry/docusaurus-shared/ui";
+} from "@netfoundry/docusaurus-theme/ui";
 import {starProps} from "@openziti/src/components/consts";
 import {openZitiFooter} from "@openziti/src/components/footer";
 import ozstyles from "../../styles/openziti.layout.module.css";

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "@docusaurus/Link";
 import type {Props} from "@theme/BlogListPage";
-import {NetFoundryHorizontalSection, NetFoundryLayout} from "@netfoundry/docusaurus-shared/ui";
+import {NetFoundryHorizontalSection, NetFoundryLayout} from "@netfoundry/docusaurus-theme/ui";
 import styles from "../new-landing/styles.module.css";
 import {starProps} from "../../components/consts";
 import {openZitiFooter} from "@openziti/src/components/footer";

@@ -10,8 +10,8 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import { ArrowRight, Shield, Lock, Globe } from 'lucide-react';
 
 import siteConfig from "@generated/docusaurus.config";
-import {cleanUrl} from "@netfoundry/docusaurus-shared/node";
-import {NetFoundryHorizontalSection, NetFoundryLayout} from "@netfoundry/docusaurus-shared/ui";
+import {cleanUrl} from "@netfoundry/docusaurus-theme/node";
+import {NetFoundryHorizontalSection, NetFoundryLayout} from "@netfoundry/docusaurus-theme/ui";
 import {useLocation} from "@docusaurus/router";
 import {starProps} from "../components/consts";
 import Head from "@docusaurus/Head";

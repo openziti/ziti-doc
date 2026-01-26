@@ -1,4 +1,4 @@
-import {defaultNetFoundryFooterProps, defaultSocialProps} from "@netfoundry/docusaurus-shared/ui";
+import {defaultNetFoundryFooterProps, defaultSocialProps} from "@netfoundry/docusaurus-theme/ui";
 import React from "react";
 
 export const openZitiFooter = {

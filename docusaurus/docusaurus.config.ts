@@ -5,7 +5,7 @@ import {Config} from "@docusaurus/types";
 import type {ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-redirects';
-import {docUrl, hotjarId} from "@netfoundry/docusaurus-shared/node";
+import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
 import path from "node:path";
 import {
     LogLevel,
@@ -15,7 +15,7 @@ import {
     remarkYamlTable,
     remarkYouTube,
     timedPlugin
-} from "@netfoundry/docusaurus-shared/plugins";
+} from "@netfoundry/docusaurus-theme/plugins";
 
 const baseUrl = '/';
 const openziti = 'openziti';

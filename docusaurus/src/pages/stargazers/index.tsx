@@ -8,7 +8,7 @@ import ziti from './all.ziti.stargazers.json';
 import zrok from './all.zrok.stargazers.json';
 import others from './all.other.stargazers.json';
 import styles from "../new-landing/styles.module.css";
-import {NetFoundryLayout} from "@netfoundry/docusaurus-shared/ui";
+import {NetFoundryLayout} from "@netfoundry/docusaurus-theme/ui";
 import {starProps} from "@openziti/src/components/consts"
 import {openZitiFooter} from "@openziti/src/components/footer";
 import Head from "@docusaurus/Head";
