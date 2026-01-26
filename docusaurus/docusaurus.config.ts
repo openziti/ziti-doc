@@ -7,6 +7,7 @@ import pluginHotjar from './src/plugins/hotjar';
 import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-redirects';
 import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
 import path from "node:path";
+import {openZitiFooter} from "./src/components/footer";
 import {
     LogLevel,
     remarkCodeSections,
@@ -71,6 +72,7 @@ const config: Config = {
         mermaid: true,
     },
     themes: [
+        '@netfoundry/docusaurus-theme',
         ['@docusaurus/theme-classic', {
             customCss: require.resolve('./src/css/custom.css'),
         }],
@@ -205,6 +207,15 @@ const config: Config = {
     ],
     themeConfig:
         {
+            // NetFoundry theme configuration
+            netfoundry: {
+                showStarBanner: true,
+                starBanner: {
+                    repoUrl: 'https://github.com/openziti/ziti',
+                    label: 'Star OpenZiti on GitHub',
+                },
+                footer: openZitiFooter,
+            },
             hotjar: {applicationId: hotjarId},
             metadata: [
                 {name: 'description', content: 'open source zero trust'},
@@ -323,24 +334,6 @@ const config: Config = {
                         title: 'GitHub'
                     },
                 ],
-            },
-            footer: {
-                style: 'light',
-                links: [
-                    {
-                        label: 'Policies',
-                        to: '/policies/CODE_OF_CONDUCT',
-                    },
-                    {
-                        label: 'NetFoundry Cloud',
-                        to: 'https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/'
-                    },
-                    {
-                        label: 'Blog',
-                        to: 'https://blog.openziti.io'
-                    },
-                ],
-                copyright: `Copyright © ${new Date().getFullYear()} NetFoundry Inc.`,
             },
             prism: {
                 theme: prismThemes.github,

@@ -17,7 +17,6 @@ import {
 } from "@netfoundry/docusaurus-theme/ui";
 import {starProps} from "@openziti/src/components/consts";
 import {openZitiFooter} from "@openziti/src/components/footer";
-import ozstyles from "../../styles/openziti.layout.module.css";
 import Head from "@docusaurus/Head";
 
 function App(): JSX.Element {
@@ -230,7 +229,7 @@ function App(): JSX.Element {
                         alt="Ziggy Chef"
                         style={{padding: "0 10px 0 0"}}
                     />
-                    <H1 className={ozstyles.h1}>
+                    <H1>
                         Appetizer: <span style={{display: "inline-block"}}>Taste OpenZiti</span>
                     </H1>
                 </div>
@@ -254,7 +253,7 @@ function App(): JSX.Element {
                 <SlideShow
                     slides={slideImages}
                     className={styles.slideShow}
-                    slideTitle={<H2 className={ozstyles.h2}>Taking a Closer Look</H2>}
+                    slideTitle={<H2>Taking a Closer Look</H2>}
                     slideClassName={styles.defaultSlideStyle}
                     textClassName={styles.slideText}
                     imgClassName={styles.slideImage}
