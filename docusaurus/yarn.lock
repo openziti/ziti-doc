@@ -2196,6 +2196,15 @@
     hls.js "~1.6.6"
     mux-embed "^5.8.3"
 
+"@netfoundry/docusaurus-theme@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@netfoundry/docusaurus-theme/-/docusaurus-theme-0.3.0.tgz#d97ab0dba03f7258dd04b9e1ebeb1ab9c16129d7"
+  integrity sha512-UTzF7ommUlabiEB+NO4d8NIsH2YZ/wK8uXwpWuJzd/1zHotRCYFRtk8amfTU9+A8dzgQGvff2X8mrCQ31yoxnA==
+  dependencies:
+    clsx "^2.0.0"
+    react-device-detect "^2.2.3"
+    react-github-btn "^1.4.0"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
