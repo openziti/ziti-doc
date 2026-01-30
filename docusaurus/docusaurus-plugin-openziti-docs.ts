@@ -12,7 +12,16 @@ export function openzitiDocsPluginConfig(
     routeBasePath: string = 'docs/openziti',
     staticozTarget?: string
 ): PluginConfig {
-    const remarkPlugins: any[] = [];
+    const remarkPlugins: any[] = [
+        function forbidSite() {
+            return (tree: any, file: any) => {
+                const src = String(file);
+                if (src.includes('@site')) {
+                    throw new Error(`[FORBIDDEN] @site is not allowed - use @openziti.\nFile: ${file.path}`);
+                }
+            };
+        },
+    ];
     if (staticozTarget) {
         remarkPlugins.push([remarkReplaceMetaUrl, { from: '@staticoz', to: staticozTarget, logLevel: LogLevel.Silent }]);
     }
@@ -22,7 +31,7 @@ export function openzitiDocsPluginConfig(
     return [
         '@docusaurus/plugin-content-docs',
         {
-            id: 'openziti',
+            id: 'openziti', // do not change - affects algolia search
             path: `${rootDir}/docs`,
             routeBasePath,
             sidebarPath: `${rootDir}/sidebars.ts`,
