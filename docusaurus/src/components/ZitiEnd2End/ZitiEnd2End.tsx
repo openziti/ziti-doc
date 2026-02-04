@@ -30,7 +30,6 @@ const ZitiEnd2End = () => {
     { id: 5, from: 'Alice', to: 'Alice', message: '[Alice connects to service hosted by Bob]', note: '[Alice connects to service hosted by Bob]', phase: 'connect' },
     { id: 6, from: 'Alice', to: 'Alice', message: 'Alice generates ephemeral key pair: P(Alice)/S(Alice)', phase: 'connect' },
     { id: 7, from: 'Alice', to: 'Controller', message: '3. GetSession(service)', phase: 'connect' },
-    { id: 7, from: 'Alice', to: 'Controller', message: '3. GetSession(service)', phase: 'connect' },
     { id: 8, from: 'Controller', to: 'Alice', message: '4. Session(tok, EdgeRouter)', phase: 'connect' },
     { id: 9, from: 'Alice', to: 'EdgeRouter', message: '5. Dial(tok, P(Alice))', phase: 'connect' },
     { id: 10, from: 'EdgeRouter', to: 'Controller', message: '6. CreateSession(service, P(Alice))', phase: 'connect' },

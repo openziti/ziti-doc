@@ -394,7 +394,7 @@
   position: absolute;
   top: 18px;
   height: 3px;
-  z-index: 5;
+  z-index: 2;
 }
 
 .arrowLine {
@@ -453,7 +453,7 @@
   top: 12px;
   width: 35px;
   height: 35px;
-  z-index: 5;
+  z-index: 2;
 }
 
 .selfArrowLine {
@@ -492,7 +492,7 @@
   position: absolute;
   top: 0;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 20;
   background: rgba(15, 23, 42, 0.95);
   padding: 6px 10px;
   border-radius: 8px;
