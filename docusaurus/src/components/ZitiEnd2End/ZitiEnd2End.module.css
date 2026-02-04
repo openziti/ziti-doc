@@ -1,0 +1,689 @@
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.container {
+  max-width: 100%;
+  margin: 20px 0;
+  padding: 16px 12px;
+  background: linear-gradient(165deg, #0a0e1a 0%, #1a1f35 50%, #0f1419 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='light'] .container {
+  background: linear-gradient(165deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+}
+
+/* ============================================
+   CONTROLS
+   ============================================ */
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.controlGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.playButton,
+.pauseButton,
+.resetButton {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 2px solid;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+.playButton {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-color: #10b981;
+  color: white;
+}
+
+.playButton:hover {
+  transform: translateY(-1px);
+}
+
+.pauseButton {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-color: #f59e0b;
+  color: white;
+}
+
+.resetButton {
+  background: rgba(100, 116, 139, 0.2);
+  border-color: rgba(148, 163, 184, 0.3);
+  color: #cbd5e1;
+}
+
+[data-theme='light'] .resetButton {
+  color: #475569;
+}
+
+.speedSelect {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 2px solid rgba(148, 163, 184, 0.3);
+  background: rgba(30, 41, 59, 0.5);
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+[data-theme='light'] .speedSelect {
+  background: rgba(241, 245, 249, 0.8);
+  color: #334155;
+}
+
+/* ============================================
+   PROGRESS
+   ============================================ */
+
+.progressBar {
+  height: 4px;
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+[data-theme='light'] .progressBar {
+  background: rgba(226, 232, 240, 0.8);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  transition: width 0.4s ease;
+}
+
+.progressText {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+  margin-bottom: 12px;
+  font-family: 'SF Mono', Monaco, monospace;
+  text-transform: uppercase;
+}
+
+[data-theme='light'] .progressText {
+  color: #475569;
+}
+
+/* ============================================
+   DIAGRAM AREA WITH LIFELINES
+   ============================================ */
+
+.diagramArea {
+  position: relative;
+  min-height: 450px;
+  background: rgba(15, 23, 42, 0.3);
+  border-radius: 10px;
+  padding: 12px 8px;
+}
+
+[data-theme='light'] .diagramArea {
+  background: rgba(248, 250, 252, 0.5);
+}
+
+/* ============================================
+   PARTICIPANTS HEADER
+   ============================================ */
+
+.participantsHeader {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 20;
+}
+
+.participantColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.participantIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border: 2px solid;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.participantIcon:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.participantAlice {
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  border-color: #f472b6;
+}
+
+.participantBob {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-color: #fbbf24;
+}
+
+.participantEdgeRouter {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-color: #60a5fa;
+}
+
+.participantController {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  border-color: #a78bfa;
+}
+
+.participantName {
+  font-size: 11px;
+  font-weight: 700;
+  color: #cbd5e1;
+  font-family: 'SF Mono', Monaco, monospace;
+  text-align: center;
+}
+
+[data-theme='light'] .participantName {
+  color: #334155;
+}
+
+/* ============================================
+   LIFELINES - VERTICAL LINES
+   ============================================ */
+
+.lifelinesContainer {
+  position: absolute;
+  top: 70px;
+  left: 8px;
+  right: 8px;
+  bottom: 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.lifeline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    rgba(148, 163, 184, 0.4) 0%,
+    rgba(148, 163, 184, 0.2) 50%,
+    rgba(148, 163, 184, 0.1) 100%
+  );
+  transform: translateX(-50%);
+}
+
+.lifeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: rgba(59, 130, 246, 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+  animation: lifelinePulse 2s infinite;
+}
+
+@keyframes lifelinePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+/* ============================================
+   MESSAGES CONTAINER
+   ============================================ */
+
+.messagesContainer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 6px;
+}
+
+.messageRow {
+  position: relative;
+  min-height: 40px;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.messageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.messageRow:hover {
+  opacity: 0.7;
+}
+
+.messageActive {
+  opacity: 1;
+}
+
+.messageCurrent {
+  animation: highlightPulse 0.6s ease;
+}
+
+@keyframes highlightPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* ============================================
+   PHASE SEPARATORS
+   ============================================ */
+
+.phaseSeparator {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'SF Mono', Monaco, monospace;
+  z-index: 15;
+}
+
+.phaseTitle {
+  flex-shrink: 0;
+}
+
+.phaseDivider {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+}
+
+.phaseNote {
+  text-transform: none;
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.9;
+  letter-spacing: 0;
+}
+
+.phaseBind {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  border: 2px solid rgba(167, 139, 250, 0.5);
+}
+
+.phaseConnect {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border: 2px solid rgba(96, 165, 250, 0.5);
+}
+
+.noteBox {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 4px;
+  font-size: 9px;
+  color: #94a3b8;
+  font-style: italic;
+  padding: 3px 6px;
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 2px solid rgba(59, 130, 246, 0.5);
+  border-radius: 3px;
+  font-family: 'SF Mono', Monaco, monospace;
+  z-index: 15;
+  max-width: 90%;
+}
+
+[data-theme='light'] .noteBox {
+  color: #64748b;
+}
+
+/* ============================================
+   MESSAGE VISUALIZATION
+   ============================================ */
+
+.messageViz {
+  position: relative;
+  height: 100%;
+  min-height: 40px;
+}
+
+/* Regular arrows */
+.arrow {
+  position: absolute;
+  top: 18px;
+  height: 3px;
+  z-index: 5;
+}
+
+.arrowLine {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.arrowBind .arrowLine {
+  background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.arrowConnect .arrowLine {
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.arrowDashed .arrowLine {
+  background: repeating-linear-gradient(
+    90deg,
+    currentColor 0px,
+    currentColor 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  opacity: 0.7;
+}
+
+.arrowHead {
+  position: absolute;
+  top: 50%;
+  font-size: 10px;
+  color: inherit;
+  transform: translateY(-50%);
+}
+
+.messageActive .arrowLine {
+  animation: arrowFlow 0.8s ease;
+}
+
+@keyframes arrowFlow {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Self message arrows */
+.selfArrow {
+  position: absolute;
+  top: 12px;
+  width: 35px;
+  height: 35px;
+  z-index: 5;
+}
+
+.selfArrowLine {
+  width: 100%;
+  height: 100%;
+  border: 2px solid;
+  border-radius: 18px;
+  border-left: none;
+  position: relative;
+}
+
+.selfArrowLine.arrowBind {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+}
+
+.selfArrowLine.arrowConnect {
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.selfArrowSymbol {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: inherit;
+}
+
+/* ============================================
+   MESSAGE LABELS
+   ============================================ */
+
+.messageLabel {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(15, 23, 42, 0.95);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  min-width: 150px;
+  max-width: 300px;
+}
+
+[data-theme='light'] .messageLabel {
+  background: rgba(248, 250, 252, 0.95);
+  border-color: rgba(203, 213, 225, 0.4);
+}
+
+.messageActive .messageLabel {
+  animation: labelFadeIn 0.4s ease;
+}
+
+@keyframes labelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.messageBadges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 9px;
+  border: 1px solid;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+.badgeAlice {
+  background: rgba(236, 72, 153, 0.2);
+  color: #ec4899;
+  border-color: #ec4899;
+}
+
+.badgeBob {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.badgeEdgeRouter {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.badgeController {
+  background: rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+  border-color: #8b5cf6;
+}
+
+[data-theme='light'] .badgeAlice {
+  background: rgba(236, 72, 153, 0.1);
+  color: #be185d;
+}
+
+[data-theme='light'] .badgeBob {
+  background: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+}
+
+[data-theme='light'] .badgeEdgeRouter {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1e40af;
+}
+
+[data-theme='light'] .badgeController {
+  background: rgba(139, 92, 246, 0.1);
+  color: #6d28d9;
+}
+
+.arrowSymbol {
+  color: #64748b;
+  font-size: 10px;
+}
+
+.messageText {
+  font-size: 11px;
+  color: #cbd5e1;
+  font-family: 'SF Mono', Monaco, monospace;
+  line-height: 1.4;
+}
+
+[data-theme='light'] .messageText {
+  color: #334155;
+}
+
+/* ============================================
+   LEGEND
+   ============================================ */
+
+.legend {
+  margin-top: 12px;
+  padding: 8px 10px;
+  background: rgba(30, 41, 59, 0.3);
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  font-size: 10px;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+[data-theme='light'] .legend {
+  background: rgba(248, 250, 252, 0.5);
+}
+
+.legendTitle {
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+[data-theme='light'] .legendTitle {
+  color: #64748b;
+}
+
+.legendItem {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+[data-theme='light'] .legendItem {
+  color: #64748b;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .diagramArea {
+    min-height: 800px;
+  }
+
+  .participantsHeader {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 8px;
+  }
+
+  .participantIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .participantName {
+    font-size: 10px;
+  }
+
+  .messageLabel {
+    min-width: 120px;
+    max-width: 200px;
+    font-size: 10px;
+  }
+
+  .lifeline {
+    display: none;
+  }
+
+  .arrow {
+    display: none;
+  }
+
+  .selfArrow {
+    display: none;
+  }
+
+  .messageLabel {
+    position: relative;
+    left: 0 !important;
+    transform: none !important;
+    margin: 10px 0;
+  }
+}

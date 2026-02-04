@@ -1,5 +1,7 @@
 # End-to-end encryption
 
+import ZitiEnd2End from '@site/src/components/ZitiEnd2End/ZitiEnd2End';
+
 End-to-end encryption (E2Ee) ensures that data is encrypted at the source and only decrypted by the intended recipient.
 This ensures that data remains secure even if the underlying transport or physical infrastructure is compromised along
 the communication path.
@@ -62,35 +64,7 @@ latency.
 4. **Key derivation**: Both parties derive symmetric session keys from their own private keys and the received public
    key.
 
-```mermaid
-sequenceDiagram
-    participant Alice
-    participant Bob
-    participant EdgeRouter
-    participant Controller
-
-    rect rgb(240, 240, 240)
-        note over Bob: [Bob binds the service]
-        note over Bob: Bob generates ephemeral key pair:<br/>P(Bob)/S(Bob)
-        Bob->>EdgeRouter: 1 Bind(service,P(bob))
-        EdgeRouter->>Controller: 2 Bind(Bob.service, P(Bob))
-        note over Controller: Bob is registered to host service
-    end
-
-    rect rgb(240, 240, 240)
-        note over Alice: [Alice connects to service hosted by Bob]
-        note over Alice: Alice generates ephemeral key pair:<br/>P(Alice)/S(Alice)
-        Alice->>Controller: 3 GetSession(service)
-        Controller->>Alice: 4 Session(tok,EdgeRouter)
-        Alice->>EdgeRouter: 5 Dial(tok,P(Alice))
-        EdgeRouter->>Controller: 6 CreateSession(service, P(Alice))
-        note over Controller: magic of routing
-        Controller->>EdgeRouter: 7 Session(Route,P(bob))
-        EdgeRouter->>Alice: 8 DialSuccess(P(bob))
-        Controller-->>EdgeRouter: 9 Egress(service,P(Alice))
-        EdgeRouter->>Bob: 10 Dial(P(Alice))
-    end
-```
+<ZitiEnd2End />
 
 ### Message exchange and forward secrecy
 
