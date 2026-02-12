@@ -86,7 +86,7 @@ function GetStartedSection ({ className }: { className?: string }) {
                                className={btns}>Deploy an Overlay</a>
                         </div>
                         <div className={styles.aaStartOption}>
-                            <h3 className={styles.aaStartOptionTitle}>NetFoundry<br />Supported On-Prem</h3>
+                            <h3 className={styles.aaStartOptionTitle}>NetFoundry<br />Self-Hosted</h3>
                             <p className={styles.aaStartOptionText}>
                                 Self-hosted by you, with full support from NetFoundry. Ideal for regulated environments or where you need to control infrastructure.
                             </p>
