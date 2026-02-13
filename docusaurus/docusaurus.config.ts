@@ -23,7 +23,7 @@ const openziti = 'openziti';
 const docsBase = `/docs/${openziti}`;
 
 const REMARK_MAPPINGS = [
-    { from: '@onpremdocs',   to: '/onprem' },
+    { from: '@selfhosteddocs',   to: '/selfhosted' },
     { from: '@openzitidocs', to: `${docsBase}`},
     { from: '@static', to: ``},
 ];
