@@ -23,17 +23,54 @@ flavor of BASH. If the script doesn't function - open an [issue](./issues).
 
 After cloning this repository, open the BASH shell and execute the [gendoc.sh](./gendoc.sh) script. The script has a few
 flags to pass that control the cleanup of what the script does. In general, it's recommended you use the -w flag
-so that warnings are treated as errors. 
+so that warnings are treated as errors.
 
 Expected usage: `./gendoc.sh -c`
 
 > [!NOTE]\
-> you must configure NodeJS >=16.14 before running `yarn`
+> you must configure NodeJS >=18.0 before running `yarn`
 
 > [!WARNING]\
 > Do not use `npm` to build this project or add a plugin. Always use `yarn`.
 
-You can then run `cd ./docusaurus && yarn install --frozen-lockfile && yarn start` to serve the Docusaurus site from webpack. If you're testing configuration changes you will need to serve the production build with `yarn serve` instead.
+### Local Development Server
+
+If you only need to preview changes to docs you're editing, you can skip `gendoc.sh` and run the dev server directly. Some pages import content from external repos (cloned into `docusaurus/docs/_remotes/` by `gendoc.sh`). To satisfy those imports without cloning, create stub files:
+
+```text
+cd docusaurus/docs
+mkdir -p \
+  _remotes/ziti-cmd/dist/docker-images/ziti-router \
+  _remotes/ziti-cmd/dist/docker-images/ziti-controller \
+  _remotes/helm-charts/charts/ziti-host \
+  _remotes/helm-charts/charts/ziti-controller \
+  _remotes/helm-charts/charts/ziti-router \
+  _remotes/helm-charts/charts/ziti-edge-tunnel \
+  _remotes/ziti-android-app \
+  _remotes/ziti-tunnel-sdk-c/docker
+
+for dir in \
+  _remotes/ziti-cmd/dist/docker-images/ziti-router \
+  _remotes/ziti-cmd/dist/docker-images/ziti-controller \
+  _remotes/helm-charts/charts/ziti-host \
+  _remotes/helm-charts/charts/ziti-controller \
+  _remotes/helm-charts/charts/ziti-router \
+  _remotes/helm-charts/charts/ziti-edge-tunnel \
+  _remotes/ziti-android-app \
+  _remotes/ziti-tunnel-sdk-c/docker; do
+  echo "# Placeholder" > "$dir/README.md"
+done
+```
+
+Then install dependencies and start the dev server:
+
+```text
+cd docusaurus
+yarn install --frozen-lockfile
+yarn start
+```
+
+The dev server hot-reloads as you edit. Pages that depend on stub content will render a placeholder heading instead of the real external content. If you're testing configuration changes, serve the production build with `yarn serve` instead.
 
 ## Publishing this Site
 
