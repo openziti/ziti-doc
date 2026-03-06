@@ -185,3 +185,4 @@ The `openziti.io` domain name resolves to GitHub Pages which hosts the static HT
 This redirector's purpose is to preserve incoming links for this domain. The `docs.openziti.io` domain name resolves to a CloudFront distribution that only responds with an HTTP redirect. If the request path is `/` then it responds with `https://openzit.io/docs` (the docs landing page). Otherwise, it responds with the same path that was requested at `https://openziti.io{path}`.
 
 The redirector's behavior is controlled by a Javascript CloudFront function that's deployed automatically when it is changed in this repository. The function is defined in [cloudfront-function-docs-openziti-io.js](./cloudfront/cloudfront-function-docs-openziti-io.js). The function is deployed by [a GitHub workflow](./.github/workflows/deploy-cloudfront.yml) that runs when the file is changed in the `main` branch.
+
