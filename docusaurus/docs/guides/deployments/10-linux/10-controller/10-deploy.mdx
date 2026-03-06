@@ -8,25 +8,25 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import LinuxPackageRepo from '../../../../_linux-package-repo.mdx';
 
-This article is about deploying a controller as a Linux system service. [The controller introduction](/learn/introduction/03-components.mdx#controller) may be helpful to read first.
+Deploy a controller as a Linux system service. [The controller introduction](/learn/introduction/03-components.mdx#controller) may help to read first.
 
-We'll cover the following topics:
+This guide applies to Ziti version 2.0 and newer. Older Linux packages are still available and work similarly but ignore the cluster-related answers.
 
 1. [Installation](#install-the-controller-package)
 1. [Configuration](#configuration)
 1. [Starting Up](#starting-up)
 
-## Install the Controller Package
+## Install the controller package
 
 The controller package provides a systemd service unit and bootstrapping script.
 
-### One-liner Install Script
+### One-liner install script
 
 ```text
 curl -sS https://get.openziti.io/install.bash | sudo bash -s openziti-controller
 ```
 
-### Manual Package Repo Setup
+### Manual package repo setup
 
 Configure the package repository and install `openziti-controller`.
 
@@ -38,48 +38,103 @@ Finally, install the package: **openziti-controller**
 
 ## Configuration
 
-You must generate, migrate, or craft a configuration. Configuration consists of a PKI, a config YAML file, and a database.
+You need a PKI, a config file, and a database. The easiest way to get all three is to [run the bootstrap script](#run-the-bootstrap-script). You can also [migrate from an existing installation](#migrate-an-existing-configuration) or [craft a config by hand](#craft-a-configuration). The bootstrap script is a convenience — it is not required.
 
-### Generate a Configuration
-
-This is the recommended approach if you are installing a new controller.
-
-#### Answer Interactively
-
-Run `bootstrap.bash` to be prompted for the required values.
+### Run the bootstrap script
 
 ```text
 sudo /opt/openziti/etc/controller/bootstrap.bash
 ```
 
-#### Answer Non-interactively
+The script walks you through creating a PKI, config file, and database. It prompts for any answers it needs. If an answer has already been supplied (through the answer file, environment, or stdin), the script skips that prompt.
 
-1. Set the required values in the answer file **/opt/openziti/etc/controller/bootstrap.env**.
-    1. `ZITI_CTRL_ADVERTISED_ADDRESS` - control plane permanent DNS name (required)
-    1. `ZITI_CTRL_ADVERTISED_PORT` - listener TCP port (default: 1280)
-    1. `ZITI_USER` - username (default: admin)
-    1. `ZITI_PWD` - password to initialize the database (required)
-1. Run `bootstrap.bash`
+The controller always runs in clustered mode, even for a single-node deployment.
 
-    ```text
-    sudo /opt/openziti/etc/controller/bootstrap.bash
-    ```
+#### New cluster
 
-### Migrate an Existing Configuration
+This is the common case — a single controller, or the first node of a multi-node cluster. The script asks for:
 
-[This example](./15-migrate.mdx) illustrates copying the PKI, configuration, and database from a previous installation to the controller service's working directory.
+- **Create a new cluster** — **Y** (default)
+- **Node name** — unique name for this controller (default: first label of the FQDN, e.g., `ctrl1`)
+- **Trust domain** — shared by all cluster nodes (default: everything after the first dot, e.g., `ziti.example.com`). Used for SPIFFE identity
+- **Controller address** — permanent DNS name (default: `{node name}.{trust domain}`)
+- **Port** — TCP port (default: 1280)
+- **Admin username** (default: admin)
+- **Admin password** — initializes the cluster (a random password is offered if you press Enter)
 
-### Craft a Configuration
+#### Join an existing cluster
 
-Craft a new configuration by running `ziti create config controller`.
+Answer **N** at the first prompt. The script asks for:
 
-Review the environment variables, especially those named like `ZITI_CTRL_*`, that influence the controller configuration with `ziti create config environment`.
+- **Node name** — must be unique across all nodes in the cluster
+- **PKI directory** — path to a copy of the first node's **pki/** directory (from **/var/lib/ziti-controller/**), containing the root CA cert and key (`root/certs/root.cert` and `root/keys/root.key`). The join script uses the root CA to issue this node's unique intermediate CA (edge enrollment signer) during the initial join, and the root CA is also required later to renew that signer (default intermediate expiry is 10 years). The join script does not delete the root CA from the provided PKI directory or automatically renew the intermediate CA, so you can reuse the same PKI directory for future joins and renewals.
+- **Controller address** — this node's permanent DNS name
+- **Port** — TCP port (default: 1280)
 
-Here's a link to [the controller configuration reference](../../../../reference/30-configuration/controller.md).
+### Migrate an existing configuration
 
-## Starting Up
+[This example](./15-migrate.mdx) illustrates copying the PKI, configuration, and database from a previous installation.
 
-Run the service now and after every reboot
+### Craft a configuration
+
+Create a config file directly with `ziti create config controller --clustered`. Run `ziti create config environment` to see the available environment variables. See [the controller configuration reference](../../../../reference/30-configuration/controller.md) for details.
+
+### Automation
+
+If you're scripting deployments or using configuration management, you can supply answers ahead of time and run the bootstrap script without prompts. You can also choose which components to bootstrap.
+
+#### How to supply answers
+
+Answers can come from any combination of:
+
+- **Answer file** — write answers in **/opt/openziti/etc/controller/bootstrap.env**
+- **Environment** — export answers as environment variables and pass them with `sudo -E`
+- **Stdin** — pipe answers as `KEY=VALUE` lines (one per line) into the script
+
+All answers are persisted to **bootstrap.env** regardless of how they were supplied.
+
+To run without prompts, redirect stdin:
+
+```text
+sudo -E /opt/openziti/etc/controller/bootstrap.bash < /dev/null
+```
+
+#### New cluster answers
+
+1. `ZITI_CTRL_ADVERTISED_ADDRESS` — permanent DNS name (required)
+1. `ZITI_CTRL_ADVERTISED_PORT` — TCP port (default: 1280)
+1. `ZITI_CLUSTER_NODE_NAME` — unique node name (required)
+1. `ZITI_CLUSTER_TRUST_DOMAIN` — cluster trust domain for SPIFFE identity (required)
+1. `ZITI_USER` — admin username (default: admin)
+1. `ZITI_PWD` — admin password (required)
+
+#### Join cluster answers
+
+1. `ZITI_BOOTSTRAP_CLUSTER` — set to `false` (required)
+1. `ZITI_CTRL_ADVERTISED_ADDRESS` — this node's permanent DNS name (required)
+1. `ZITI_CTRL_ADVERTISED_PORT` — TCP port (default: 1280)
+1. `ZITI_CLUSTER_NODE_NAME` — unique node name (required)
+1. `ZITI_CLUSTER_NODE_PKI` — path to a copy of the existing cluster's PKI directory containing the root CA cert and key (required). The root CA key is deleted after generating this node's intermediate CA.
+
+#### Selective bootstrapping
+
+You don't have to bootstrap everything at once. Each component can be enabled or disabled independently in **/opt/openziti/etc/controller/service.env**:
+
+| Answer | Default | What it does |
+| --- | --- | --- |
+| `ZITI_BOOTSTRAP_PKI` | `true` | Generate root CA, intermediate CA, and leaf certificates |
+| `ZITI_BOOTSTRAP_CONFIG` | `true` | Generate config.yml (set to `force` to regenerate) |
+| `ZITI_BOOTSTRAP_DATABASE` | `true` | Initialize the database with a default admin |
+
+Each component uses specific answers:
+
+- **PKI** — `ZITI_CTRL_ADVERTISED_ADDRESS`, `ZITI_CLUSTER_NODE_NAME`, `ZITI_CLUSTER_TRUST_DOMAIN`
+- **Config** — `ZITI_CTRL_ADVERTISED_ADDRESS`, `ZITI_CTRL_ADVERTISED_PORT` (PKI must already exist)
+- **Database** — `ZITI_USER`, `ZITI_PWD`
+
+## Starting up
+
+Enable and start the service:
 
 ```text
 sudo systemctl enable --now ziti-controller.service
@@ -87,21 +142,19 @@ sudo systemctl enable --now ziti-controller.service
 
 ## Firewall
 
-The controller listens on a single configurable TCP port: `1280/tcp`. Verify that the controller process is listening on this port and create a firewall exception if necessary.
+The controller listens on a single configurable TCP port (default: `1280`). Create a firewall exception if needed.
 
-This will list all TCP listeners for "ziti" commands.
+Confirm the controller is listening:
 
 ```text
 sudo ss -tlnp | grep ziti
 ```
 
-If you have only one process named like "ziti" running, you will see output similar to this.
-
 ```buttonless title="Output"
 LISTEN 0      4096                          *:1280             *:*    users:(("ziti",pid=2004302,fd=8))
 ```
 
-## Further Configuration
+## Further configuration
 
 Customize **/var/lib/ziti-controller/config.yml** as needed and restart the service.
 
@@ -110,6 +163,17 @@ sudo systemctl restart ziti-controller.service
 ```
 
 Here's a link to [the configuration reference](../../../../reference/30-configuration/controller.md).
+
+### Customize the systemd service
+
+Use `systemctl edit` to override service directives like capabilities or the startup command. Pass `-E` to `sudo` so your shell's `SYSTEMD_EDITOR` (or `EDITOR` / `VISUAL`) is used.
+
+```text
+sudo -E systemctl edit ziti-controller.service
+sudo systemctl restart ziti-controller.service
+```
+
+An example drop-in with commented directives is included at **/opt/openziti/etc/controller/override.conf.example**.
 
 ## Logging
 
@@ -181,7 +245,7 @@ Learn more in [the logging reference](../../../../reference/40-logging.mdx).
 
 ## Troubleshooting
 
-Verify the control plane is reachable by routers. The control plane must terminate TLS for routers because they will authenticate with a client certificate for all post-erollment interactions.
+Verify the control plane is reachable by routers. The control plane must terminate TLS for routers because they will authenticate with a client certificate for all post-enrollment interactions.
 
 The server certificate must be issued by the controller's edge signer CA (`edge.enrollment.signerCert` in **/var/lib/ziti-controller/config.yml**).
 
@@ -202,7 +266,7 @@ Subject: C=US, ST=NC, L=Charlotte, O=NetFoundry, OU=ADV-DEV, CN=NetFoundry Inc. 
 
 Verify the controller's `edge-client` web API is reachable by identities and routers. This API must terminate TLS for any identities that enroll because they will authenticate with a client certificate for post-enrollment interactions.
 
-Enrollment tokens are signed with the key of the controller's server certificate that matches the `edge.api.address` in **/var/lib/ziti-controller/config.yml**. 
+Enrollment tokens are signed with the key of the controller's server certificate that matches the `edge.api.address` in **/var/lib/ziti-controller/config.yml**.
 
 Substitute the value of `edge.api.address` from **/var/lib/ziti-controller/config.yml**:
 

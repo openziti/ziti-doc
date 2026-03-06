@@ -16,17 +16,19 @@ GOMAXPROCS: 16
 num CPU: 16
 ```
 
-## Accessing the Agent on Linux
+## Accessing the agent on Linux
 
-On Linux, the agent is listening inside the filesystem namespace managed by `systemd`. You can enter the namespace with `nsenter`.
+On Linux, the agent socket is in the service's working directory (e.g., `/var/lib/ziti-controller/` or `/var/lib/ziti-router/`). Agent commands work directly as the service user or with `sudo`.
 
 ```text
-systemctl show -p MainPID --value ziti-router.service \
-| xargs -rIPID sudo nsenter --target PID --mount -- \
-    ziti agent --help
+sudo -u ziti-controller ziti agent stats
 ```
 
-## Accessing the Agent in Docker
+```text
+sudo -u ziti-router ziti agent stats
+```
+
+## Accessing the agent in Docker
 
 In Docker, the agent is listening inside the container filesystem. You can access the agent by running `ziti` inside the running container.
 
@@ -34,7 +36,7 @@ In Docker, the agent is listening inside the container filesystem. You can acces
 docker compose exec ziti-controller ziti agent --help
 ```
 
-## Accessing the Agent in Kubernetes
+## Accessing the agent in Kubernetes
 
 Like Docker, the agent listens inside the container filesystem when running on Kubernetes.
 
