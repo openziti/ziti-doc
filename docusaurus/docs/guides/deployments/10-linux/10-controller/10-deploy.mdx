@@ -67,10 +67,7 @@ This is the common case — a single controller, or the first node of a multi-no
 Answer **N** at the first prompt. The script asks for:
 
 - **Node name** — must be unique across all nodes in the cluster
-- **PKI directory** — path to a copy of the first node's **pki/** directory (from **/var/lib/ziti-controller/**), containing:
-  - `root/certs/root.cert`
-  - `intermediate/certs/intermediate.cert`
-  - `intermediate/keys/intermediate.key`
+- **PKI directory** — path to a copy of the first node's **pki/** directory (from **/var/lib/ziti-controller/**), containing the root CA cert and key (`root/certs/root.cert` and `root/keys/root.key`). The script uses the root CA to generate a unique intermediate CA (edge enrollment signer) for this node, then deletes the root CA private key from the working directory. The root key is only needed during this join step and can be kept offline between cluster join events.
 - **Controller address** — this node's permanent DNS name
 - **Port** — TCP port (default: 1280)
 
@@ -117,7 +114,7 @@ sudo -E /opt/openziti/etc/controller/bootstrap.bash < /dev/null
 1. `ZITI_CTRL_ADVERTISED_ADDRESS` — this node's permanent DNS name (required)
 1. `ZITI_CTRL_ADVERTISED_PORT` — TCP port (default: 1280)
 1. `ZITI_CLUSTER_NODE_NAME` — unique node name (required)
-1. `ZITI_CLUSTER_NODE_PKI` — path to a copy of the existing cluster's PKI directory (required)
+1. `ZITI_CLUSTER_NODE_PKI` — path to a copy of the existing cluster's PKI directory containing the root CA cert and key (required). The root CA key is deleted after generating this node's intermediate CA.
 
 #### Selective Bootstrapping
 

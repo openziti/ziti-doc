@@ -7,11 +7,10 @@ sidebar_position: 5
 
 ## Overview
 
-:::warning
+:::info
 
-**NOTE: Controller HA is still in Beta** 
-
-It's quite functional now, but we are continuing to test and refine before we mark it GA.
+Controller high availability (HA) became generally available in OpenZiti `2.0.0`.
+It is no longer in beta or preview status.
 :::
 
 ### What Do Controllers Do?
