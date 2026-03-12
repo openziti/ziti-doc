@@ -22,7 +22,7 @@ fields. `claimsProperty` can change which field in the JWT is matched to the `id
 `useExternalId` when true will match the `claimsProperty` to an Identity's `externalId` field. If false, it will match
 to the `id` field.
 
-_Note: `externalId` values on [Identities](./80-identities.md) are enforced to be unique._
+_Note: `externalId` values on [Identities](./80-identities.md) are enforced to be unique and are matched case-sensitively. The value from the JWT claim must match the identity's `externalId` exactly._
 
 `claimsProperty` can contain JWT standard claims or private claims. An example usage would be an `email` JWT private
 claim and OpenZiti [Identities](./80-identities.md) with `externalId` set to email addresses.
