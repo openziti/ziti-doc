@@ -1,3 +1,7 @@
+---
+sidebar_position: 95
+---
+
 # Password Management
 
 For identities using username password (UPDB) authenticators the following actions are supported:
@@ -7,15 +11,15 @@ For identities using username password (UPDB) authenticators the following actio
 
 ## Administrative Password Reset
 
-Passwords may be reset via the [edge management API](../../../../reference/developer/api/02-edge-management-reference.mdx) by an administrative client.
+Passwords may be reset via the [Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx) by an administrative client.
 
-### Ziti CLI
+### OpenZiti CLI
 
 `ziti edge update authenticator updb --identity <identityIdOrName> -p <newPassword>`
 
 ### Management API
 
-`POST /edge/management/v1/authenticators/<id>`
+`PUT /edge/management/v1/authenticators/<id>`
 
 ```text
 {
@@ -25,19 +29,20 @@ Passwords may be reset via the [edge management API](../../../../reference/devel
 
 ## Client Password Change
 
-Passwords may be reset via the [edge management API](../../../../reference/developer/api/index.mdx#edge-management-api) or 
-[edge client API](../../../../reference/developer/api/index.mdx#edge-client-api) by the currently authenticated client.
+Passwords may be reset via the [Edge Management API](../../../../reference/developer/api/index.mdx#edge-management-api) or 
+[Edge Client API](../../../../reference/developer/api/index.mdx#edge-client-api) by the currently authenticated client.
 
-### Ziti CLI
+### OpenZiti CLI
 
 `ziti edge update authenticator updb -c <currentPassword> -n <newPassword>`
 
 ### Client or Management API
 
-`POST /edge/client/v1/current-identity/authenticators/<id>`
+`PUT /edge/client/v1/current-identity/authenticators/<id>`
 
 ```text
 {
+    "currentPassword": "<current-password>",
     "password": "<new-password>"
 }
 ```

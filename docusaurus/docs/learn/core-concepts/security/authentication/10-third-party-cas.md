@@ -1,8 +1,13 @@
+---
+sidebar_position: 30
+---
+
 # 3rd Party CAs
 
-3rd Party CAs allow external private key infrastructures (PKIs) to be imported into Ziti and used for client enrollment
-and authentication. Ziti does not allow external private keys from PKIs to be imported for 3rd party CAs. Creation and
-distribution of client certificates must be handled outside of Ziti.
+3rd Party CAs allow external private key infrastructures (PKIs) to be imported into OpenZiti and used for client enrollment
+and authentication. OpenZiti does not allow external private keys from PKIs to be imported for 3rd party CAs. Creation,
+distribution, renewal, and revocation of client certificates must all be handled outside of OpenZiti by the external CA.
+Ziti trusts certificates signed by a registered 3rd Party CA but has no ability to revoke them.
 
 3rd Party CAs represent x509 Certificate chains that have the `CA:true` constraint. It is worth noting
 that adding a x509 certificate as a 3rd Party CA will treat it as a trust anchor even if it is an intermediate CA.
@@ -23,9 +28,14 @@ index zero and any required intermediate certificates afterwards.
 Creating a 3rd Party CA has various option that will determine how the 3rd Party CA will be used and how client
 certificates will be validated. The following fields configure client authentication:
 
-- `isAutoCaEnrollmentEnabled` - allows client certificates of the CA to automatically enroll when encountered
-- `isOttCaEnrollmentEnabled` - allows client certificates of the CA to enroll if an identity with an `ottca` enrollment was created
-- `isAuthEnabled` - allows client certificates of the CA to attempt to enroll
+- `isAutoCaEnrollmentEnabled` - when true, a client presenting a certificate signed by this CA that has no existing
+  identity will have one created automatically on first authentication. No pre-created identity or enrollment JWT is
+  required. See [Auto CA Enrollment](../enrollment.mdx#auto-ca-enrollment).
+- `isOttCaEnrollmentEnabled` - when true, a client may enroll using a certificate signed by this CA, but only if an
+  administrator has pre-created an identity with an `ottca` enrollment token referencing this CA. The client
+  presents both the enrollment JWT and their CA-signed certificate to complete enrollment. See
+  [OTT CA Enrollment](../enrollment.mdx#ott-ca-enrollment).
+- `isAuthEnabled` - allows already-enrolled clients with certificates signed by this CA to authenticate
 - `externalIdClaim` - configuration used to pull values out of the x509 client certificate used to match identity `externalId`, see [External Id & x509 Claims](#external-id--x509-claims)
 
 For [Auto CA Enrollment](../enrollment.mdx#auto-ca-enrollment) an identity is created on first authentication. 
@@ -53,9 +63,9 @@ state `isVerfieid` will be false and `verificationToken` will contain a random s
 the 3rd Party CA a certificate with the `verificationToken` set as the common name must be signed by the certificate
 provided for the 3rd Party CA.
 
-### Ziti CLI
+### OpenZiti CLI
 
-The Ziti CLI can assist with creating a verification certificate in two ways. It can create the verification certificate
+The OpenZiti CLI can assist with creating a verification certificate in two ways. It can create the verification certificate
 and submit it or submit an already created certificate.
 
 #### Create Verification Certificate & Submit
@@ -72,7 +82,7 @@ Access to a certificate with the `verifiationToken` set as the common name and s
 
 ### Edge Management API
 
-The [edge management API](../../../../reference/developer/api/index.mdx#edge-management-api) accepts and `id` in the URL path and x509 certificate PEM
+The [Edge Management API](../../../../reference/developer/api/index.mdx#edge-management-api) accepts and `id` in the URL path and x509 certificate PEM
 as the body:
 
 `POST /edge/management/v1/cas/<id>/verify`
@@ -86,17 +96,23 @@ HMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==
 
 ## External ID & X509 Claims
 
-The base set of capabilities of x509 certificates do not allow the inclusion of custom private claims. Ziti internally
+The base set of capabilities of x509 certificates do not allow the inclusion of custom private claims. OpenZiti internally
 uses [x509-claims](https://github.com/openziti/x509-claims) to allow claims data to be parsed from SANs and other
 fields. An example of this in other projects is [SPIFFE](https://spiffe.io/). SPIFFE defines [SPIFFE IDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-id)
 which are stored in [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-verifiable-identity-document-svid).
 
 3rd Party CAs support defining a set of x509 claims configuration that allows a claim to be matched to an identity
-`externalId`. The configuration is contained in an object in the field `externalIdClaims`. When not defined, x509
-client certificate authentication attempts to find an identity that is tied to an [authenticator](./auth.md#authenticators) 
-by matching client certificates. Using x509 claims, the client is matched by the identity `externalId` value.
+`externalId`. The configuration is contained in an object in the field `externalIdClaim`. When not defined, x509
+client certificate authentication attempts to find an Identity that is tied to an [Authenticator](./auth.md#authenticators)
+by matching the raw certificate body. Using x509 claims, the client is matched by the Identity `externalId` value.
 
-The fields under `externalIdClaims` is as follows:
+This distinction matters when certificates need to be reissued. Without x509 claims, a reissued certificate has a
+different raw body and will not match the existing Authenticator, requiring the Identity to re-enroll with the new
+certificate. With x509 claims configured, authentication matches on specific claim values extracted from the
+certificate — such as a SPIFFE ID in a SAN URI — so the 3rd Party CA can issue a replacement certificate carrying
+the same claims and authentication continues without re-enrollment.
+
+The fields under `externalIdClaim` are as follows:
 
 - `location` - defines which value(s) in an x509 certificate will be processed: `COMMON_NAME`, `SAN_URI`, `SAN_EMAIL`
 - `matcher` - defines how values from `location` will be filtered: `ALL`, `PREFIX`, `SUFFIX`, `SCHEME`
@@ -110,7 +126,7 @@ The fields under `externalIdClaims` is as follows:
 {
   "name": "myCA",
   "certPem": "—–BEGIN CERTIFICATE—–\nMIIDdTCCAHMU...\n—–END CERTIFICATE—–",
-  "externalIdClaims": {
+  "externalIdClaim": {
     "location": "SAN_URI",
     "matcher": "SCHEME",
     "parser": "NONE",
@@ -119,7 +135,7 @@ The fields under `externalIdClaims` is as follows:
   }
 }
 ```
-#### Ziti CLI
+#### OpenZiti CLI
 
 ```
 ziti edge create ca myCa ca.pem \

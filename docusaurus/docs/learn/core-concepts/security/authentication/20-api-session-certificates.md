@@ -1,3 +1,7 @@
+---
+sidebar_position: 40
+---
+
 # API Session Certificates
 
 API Session Certificates are ephemeral short-lived x509 certificates that can be created through a CSR process after

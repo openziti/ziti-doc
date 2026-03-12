@@ -1,10 +1,14 @@
+---
+sidebar_position: 50
+---
+
 # Authentication Policies
 
-Authentication Policies restrict the [primary authentication](./auth.md#primary-authentication) methods available to 
-identities and may enforce additional [secondary authentication](./auth.md#secondary-authentication) factors. Ziti is
-deployed with a default authentication policy that has the id `default`. This authentication policy may be updated,
-but not deleted. This default authentication policy is used when identities are created and an authentication
-policy is not specified.
+Authentication Policies restrict the [primary authentication](./auth.md#primary-authentication) methods available to
+[Identities](./60-identities.md) and may enforce additional [secondary authentication](./auth.md#secondary-authentication) factors. OpenZiti is
+deployed with a default [Authentication Policy](#) that has the id `default`. This Authentication Policy may be updated,
+but not deleted. This default Authentication Policy is used when Identities are created and an Authentication
+Policy is not specified.
 
 
 Example: Authentication Policy
@@ -32,7 +36,7 @@ Example: Authentication Policy
     },
     "secondary": {
         "requireTotp": false,
-        "requireExtJwt": ""
+        "requireExtJwtSigner": ""
     }
 }
 ```
@@ -40,7 +44,7 @@ Example: Authentication Policy
 
 ## Sections
 
-An authentication policy is split into two separate major sections:
+An Authentication Policy is split into two separate major sections:
 
 - `primary` - initial authentication to establish the authenticating principal
 - `secondary` - additional MFA authentication challenges
@@ -48,7 +52,7 @@ An authentication policy is split into two separate major sections:
 ### Primary
 
 The primary section allow or disposals various authentication mechanisms used to establish the initial principal
-(identity) authenticating. A viable authentication policy must allow at least one primary authentication mechanism.
+(identity) authenticating. A viable Authentication Policy must allow at least one primary authentication mechanism.
 
 - `cert` - x509 certificate based authentication
 - `extJwt` - externally signed JWT bearer tokens
@@ -60,13 +64,13 @@ Fields:
 - `allowed` - enables/disabled x509 certificate authentication
 - `allowExpiredCerts` - allows expired client certificates to authenticate
 
-When certificate authentication is `allowed`, client certificates issued by the Ziti PKI and any verified and enabled
+When certificate authentication is `allowed`, client certificates issued by the OpenZiti PKI and any verified and enabled
 [3rd Party CAs](./10-third-party-cas.md) become valid authentication paths. When disabled an identity will not be able
 to authenticate with any client certificate.
 
 If `allowExpiredCerts` is true, client certificate expiration will be ignored during validation. This setting is 
 useful in scenarios where client are running software that has lapsed and cannot be re-enrolled or their client
-certificates cannot be updated. Clients do have an API available to them to roll existing Ziti PKI issued client 
+certificates cannot be updated. Clients do have an API available to them to roll existing OpenZiti PKI issued client 
 certificates forward. Client certificates issued by a [3rd Party CAs](./10-third-party-cas.md) must have an external
 process to maintain client certificate validity if `allowExpiredCerts` is false.
 
@@ -76,10 +80,11 @@ process to maintain client certificate validity if `allowExpiredCerts` is false.
 Fields:
 
 - `allowed` - whether external JWTs may be used for authentication
-- `allowedSigners` - the ids of valid [External JWT Signers](50-external-jwt-signers.mdx)
+- `allowedSigners` - the ids of valid [External JWT Signers](50-external-jwt-signers.mdx); when `null` or empty, all
+  configured and enabled External JWT Signers are permitted
 
-If `allowed` is true the [External JWT Signers](50-external-jwt-signers.mdx) specified in the `allowedSigners` field
-may be used for authentication.
+If `allowed` is true, authentication is accepted from the External JWT Signers listed in `allowedSigners`. If
+`allowedSigners` is `null`, any enabled External JWT Signer may be used.
 
 #### Username Password (updb)
 
@@ -92,4 +97,58 @@ may be used for authentication.
 The secondary section contain only two top-level configuration values:
 
 - `requireTotp` - if true authenticating clients must have [MFA TOTP](./70-totp.md) enabled
-- `requireExtJwt` - if set to an id of an [External JWT Signer](50-external-jwt-signers.mdx) every request must have a valid JWT in the HTTP `Authentication` header
+- `requireExtJwtSigner` - if set to an id of an [External JWT Signer](50-external-jwt-signers.mdx) every request must have a valid JWT in the HTTP `Authorization` header
+
+## Creating and Updating
+
+
+Authentication policies are managed via the [Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx).
+
+### Create
+
+`POST /edge/management/v1/auth-policies`
+```text
+{
+  "name": "require-totp",
+  "primary": {
+    "cert": {
+      "allowed": true,
+      "allowExpiredCerts": false
+    },
+    "extJwt": {
+      "allowed": false,
+      "allowedSigners": null
+    },
+    "updb": {
+      "allowed": true,
+      "maxAttempts": 5,
+      "lockoutDurationMinutes": 10
+    }
+  },
+  "secondary": {
+    "requireTotp": true,
+    "requireExtJwtSigner": ""
+  }
+}
+```
+
+### Update
+
+`PATCH /edge/management/v1/auth-policies/<id>`
+```text
+{
+  "secondary": {
+    "requireTotp": true
+  }
+}
+```
+
+`PUT /edge/management/v1/auth-policies/<id>` replaces the full policy. `PATCH` updates only the supplied fields.
+
+## Effect on Existing Sessions
+
+
+Authentication Policy changes take effect on **new authentications only**. Existing fully authenticated [API Sessions](../sessions.md) are not re-evaluated when a policy changes. Clients that are already authenticated continue to operate under the
+policy that was in effect when they authenticated. To force re-authentication, the existing [API Sessions](../sessions.md) must be
+terminated administratively via `DELETE /edge/management/v1/api-sessions/<id>` (legacy) or by issuing a
+[revocation](../sessions.md#api-session) (OIDC).

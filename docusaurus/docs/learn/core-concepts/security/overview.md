@@ -2,7 +2,7 @@
 title: Ziti Security
 ---
 
-A network's security setup is defined by several entities defined in the [edge management API](../../../reference/developer/api/index.mdx#edge-management-api). The following
+A network's security setup is defined by several entities defined in the [Edge Management API](../../../reference/developer/api/index.mdx#edge-management-api). The following
 are related to identity authentication and service access:
 
 - [Identities](#identity) - describe a human, device, or service within the edge
@@ -18,16 +18,16 @@ are related to identity authentication and service access:
 - [Service Policy](./authorization/policies/overview.mdx) - describes which Identities have access to which Services and the Posture Checks that are required to
   pass for access
 - [Edge Router Policies](./authorization/policies/overview.mdx)  - describes which Identities have access to which edge routers
-- [Posture Checks](./authorization/posture-checks.md) - describes additional environmental state that an Identity must have in order to obtain and maintain
+- [Posture Checks](./authorization/posture-checks/overview.md) - describes additional environmental state that an Identity must have in order to obtain and maintain
   service access
-- [Posture Queries](./authorization/posture-checks.md#posture-data) - describes a request for environmental information from a client
-- [Posture Responses](./authorization/posture-checks.md#posture-data) - a response to a Posture Query provided by a client
-- [Posture Data](./authorization/posture-checks.md#posture-data) - the current environmental state provided via Posture Responses and known information
+- [Posture Queries](./authorization/posture-checks/overview.md#posture-data) - describes a request for environmental information from a client
+- [Posture Responses](./authorization/posture-checks/overview.md#posture-data) - a response to a Posture Query provided by a client; submitted to the controller (legacy) or each connected edge router (OIDC)
+- [Posture Data](./authorization/posture-checks/overview.md#posture-data) - the current environmental state provided via Posture Responses
 - [Authentication Queries](./sessions.md#authentication-queries) - additional, secondary, authentication factors required after initial, primary, authentication
 
 There is an additional policy type for edge routers:
 
-- [Service edge router policies](./authorization/policies/overview.mdx) - determines which services can be accessed over which routers
+- [Service Edge Router Policies](./authorization/policies/overview.mdx) - determines which services can be accessed over which routers
 
 Additionally, connection security document is provided on the [Connection Security](connection-security.md) page. 
 
@@ -51,17 +51,17 @@ own separate section.
     2. the Service Policies are also used to evaluate the Posture Checks associated with a Service Policy
     3. the Posture Checks are converted to Posture Queries with type, pass/fail state, and criteria information
     4. The Services and Posture Queries are returned to the client 
-    5. (Continuous) the client submits any Posture Responses to Posture Queries as necessary
+    5. (Continuous) the client submits Posture Responses to the controller (legacy sessions) or to each connected edge router (OIDC sessions)
 4. authorization: the client requests a Session for a specific Service
     1. (Continuous) the Service Policies are consulted for access additionally re-evaluating Posture Checks against the
        current know Posture Data
-    2. the list of Service edge router policies and edge router policies are consulted to provide a valid list edge
+    2. the list of Service Edge Router Policies and Edge Router Policies are consulted to provide a valid list edge
        routers the Session security token may be used on
     3. a Session security token and edge router list is provided to the client
 5. the client attempts to connect to a target edge router with an API Session security token
 6. the target edge router evaluates the credential
 7. the client requests a Service connection with their Session security token
-    1. the connection request is verified through Service edge router policies
+    1. the connection request is verified through Service Edge Router Policies
 8. the edge router coordinates the service connection
 
 ## High Level Concepts
@@ -71,7 +71,7 @@ in each section will lead to a more detailed explanation of the relevant topics.
 
 ### Identity
 
-The edge defines a top level entity called an identity. An identity is a security principal that can bind (host) or 
+The edge defines a top level entity called an [Identity](./authentication/60-identities.md). An Identity is a security principal that can bind (host) or
 dial (connect) to services over a network. Read more in the [Identity](/learn/core-concepts/identities/overview.mdx) section.
 
 ### Enrollment
@@ -92,18 +92,17 @@ and [Authentication Policies](./authentication/30-authentication-policies.md). R
 ### Authorization
 
 [Authorization](./authorization/auth.md) in Ziti is configured for identities and edge routers. Edge router authorization only covers which
-services can be used over an edge router via service edge router policies. Identity authorization is covered by service
-policies and edge router policies.
+services can be used over an edge router via Service Edge Router Policies. Identity authorization is covered by Service
+Policies and Edge Router Policies.
 
 All policies in Ziti are represented by a robust [attribute based access control system (ABAC)](https://en.wikipedia.org/wiki/Attribute-based_access_control) based on `roleAttributes`
-properties on entities within the [edge management API](../../../reference/developer/api/index.mdx#edge-management-api). `roleAttributes` properties are an array of user defined strings.
+properties on entities within the [Edge Management API](../../../reference/developer/api/index.mdx#edge-management-api). `roleAttributes` properties are an array of user defined strings.
 Policies support attribute selector properties to determine which entities a policy interacts on. Policies themselves
 are documented in [Policies](./authorization/policies/overview.mdx) section.
 
 Additionally, Service Policies can require additional environmental states to be satisfied by Posture Checks.
-Posture Checks analyze Posture Data. Posture Data is a collection of server side information and data harvested from
-Posture Responses sent by client endpoints in response to Posture Queries. More can be found in
-the [Posture Check](./authorization/posture-checks.md) 
-section.
+Posture Checks evaluate Posture Data — environmental state collected by the client and submitted as Posture
+Responses. For legacy sessions, posture evaluation occurs at the controller; for OIDC sessions, it occurs at each
+edge router. More can be found in the [Posture Checks](./authorization/posture-checks/overview.md) section.
 
 Read more in the [Authorization](./authorization/auth.md) section.
