@@ -103,14 +103,14 @@ which are stored in [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-co
 
 3rd Party CAs support defining a set of x509 claims configuration that allows a claim to be matched to an identity
 `externalId`. The configuration is contained in an object in the field `externalIdClaim`. When not defined, x509
-client certificate authentication attempts to find an Identity that is tied to an [Authenticator](./auth.md#authenticators)
+client certificate authentication attempts to find an Identity that is tied to an [Authenticator](00-auth.md#authenticators)
 by matching the raw certificate body. Using x509 claims, the client is matched by the Identity `externalId` value.
 
 This distinction matters when certificates need to be reissued. Without x509 claims, a reissued certificate has a
 different raw body and will not match the existing Authenticator, requiring the Identity to re-enroll with the new
 certificate. With x509 claims configured, authentication matches on specific claim values extracted from the
-certificate — such as a SPIFFE ID in a SAN URI — so the 3rd Party CA can issue a replacement certificate carrying
-the same claims and authentication continues without re-enrollment.
+certificate, such as a SPIFFE ID in a SAN URI, and the 3rd Party CA can issue a replacement certificate carrying
+the same claims without disrupting authentication.
 
 The fields under `externalIdClaim` are as follows:
 

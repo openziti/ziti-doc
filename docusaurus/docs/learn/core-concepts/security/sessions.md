@@ -4,21 +4,21 @@ Ziti has API Session and Session types.
 
 ## API Session
 
-API Sessions represent a client that is either partially or fully authenticated as a specific [Identity](authentication/60-identities.md).
+API Sessions represent a client that is either partially or fully authenticated as a specific [Identity](authentication/80-identities.md).
 They are used to:
 
-- scope [authentication](authentication/auth.md) and [Posture Data](authorization/posture-checks/overview.md)
-- to make [authorization](authorization/auth.md) decisions.
+- scope [authentication](authentication/00-auth.md) and [Posture Data](authorization/posture-checks/00-overview.md)
+- to make [authorization](authorization/00-auth.md) decisions.
 
 Clients interact with API Sessions via a security token received during authentication. The token format depends on
 the authentication system in use:
 
-- **[OIDC Authentication](authentication/80-oidc.md)** (preferred) - the token is a short-lived JWT access token
+- **[OIDC Authentication](authentication/10-oidc.md)** (preferred) - the token is a short-lived JWT access token
   provided as an `Authorization: Bearer <token>` header. Token lifetime is governed by
   `edge.oidc.accessTokenDuration` (default 30 minutes) and is independent of `sessionTimeout`. When the access
   token expires, clients use a refresh token (valid for `edge.oidc.refreshTokenDuration`, default 24 hours) to
   obtain a new access token without re-authenticating. See
-  [OIDC Authentication - Refreshing Tokens](authentication/80-oidc.md#refreshing-an-access-token) for details.
+  [OIDC Authentication - Refreshing Tokens](authentication/10-oidc.md#refreshing-an-access-token) for details.
 - **[Legacy Authentication](authentication/20-legacy-auth.md)** (deprecated) - the token is an opaque UUID provided
   in the `zt-session` HTTP header, received from `POST /edge/client|management/v1/authenticate`. Legacy API Sessions
   remain valid as long as they have not timed out (see [Timeout](#timeout) below).
@@ -34,7 +34,7 @@ An API Session:
     - also returned from legacy authenticate endpoints:
         - `POST /edge/management/v1/authenticate`
         - `POST /edge/client/v1/authenticate`
-- can be referenced by an internal `id` *(legacy auth only - OIDC sessions are not tracked as API Sessions)*
+- can be referenced by an internal `id` *(legacy auth only, OIDC sessions are not tracked as API Sessions)*
     - the `id` can be used on the following endpoints:
         - `GET /edge/management/v1/api-sessions/<id>`
         - `DELETE /edge/management/v1/api-sessions/<id>`
@@ -53,13 +53,13 @@ OIDC tokens can be revoked administratively using the [Edge Management API](../.
 Revocations can target three scopes:
 
 - **Identity** (`ziti edge create revocation identity <identityId>`) - revokes all outstanding tokens for the
-  identity; the revocation entry expires at `now + max(accessTokenDuration, refreshTokenDuration)`
+  identity. The revocation entry expires at `now + max(accessTokenDuration, refreshTokenDuration)`
 - **API Session** (`ziti edge create revocation api-session <apiSessionId>`) - revokes all tokens sharing the same
-  session ID (`z_asid` claim); expires at `now + refreshTokenDuration`
-- **Token** (`ziti edge create revocation jti <jti>`) - revokes a single specific token by its `jti` claim; expires
+  session ID (`z_asid` claim). Expires at `now + refreshTokenDuration`
+- **Token** (`ziti edge create revocation jti <jti>`) - revokes a single specific token by its `jti` claim. Expires
   at `now + refreshTokenDuration`
 
-Revocation entries are self-expiring - once all tokens that could reference them have expired, the entry is
+Revocation entries expire on their own. Once all tokens that could reference them have expired, the entry is
 automatically cleaned up. Revocations can be issued (created) but not retracted (deleted).
 :::
 
@@ -152,7 +152,7 @@ The meaning of partial authentication differs by authentication system:
 **OIDC Authentication** - partial authentication occurs mid-PKCE-flow, before any token has been issued. The client
 has been redirected into the OIDC login sequence but has not yet completed it (for example, a TOTP challenge is
 outstanding). During this state, only the `/oidc/login/*` endpoints are accessible. No `zt-session` or JWT token
-exists yet. See [OIDC Authentication - Partial Authentication](authentication/80-oidc.md#partial-authentication) for
+exists yet. See [OIDC Authentication - Partial Authentication](authentication/10-oidc.md#partial-authentication) for
 details.
 
 **Legacy Authentication** - partial authentication occurs when a `zt-session` has been issued but secondary
@@ -192,8 +192,8 @@ in the client and management Open API 2.0 specifications under the label `authQu
 
 #### Associated Data & Removal
 
-API Sessions, may be used to create ephemeral certificates called [API Session Certificates](authentication/20-api-session-certificates.md)
-and Sessions for service access. Additionally, API Sessions are used to scope [Posture Data](authorization/posture-checks/overview.md#posture-data).
+API Sessions, may be used to create ephemeral certificates called [API Session Certificates](authentication/40-api-session-certificates.md)
+and Sessions for service access. Additionally, API Sessions are used to scope [Posture Data](authorization/posture-checks/00-overview.md#posture-data).
 When an API Session is removed for any reason, all associated data is also removed. As an example, when removing an
 API Session used to create a [Session](#session) the [Session](#session) will also be removed. Removing a [Session](#session) will also terminate any
 existing connections that used the security token associated with that [Session](#session) and prevent it from being used to
@@ -210,8 +210,8 @@ Removal of an API Session occurs in the following scenarios:
 **Legacy authentication only.** The `sessionTimeout` configuration applies exclusively to legacy `zt-session` based
 API Sessions. OIDC access tokens have their own fixed lifetime (`edge.oidc.accessTokenDuration`, default 30 minutes)
 encoded in the JWT itself and are not affected by `sessionTimeout`. When an OIDC access token expires, the client
-must use its refresh token to obtain a new one without re-authenticating; see
-[OIDC Authentication - Refreshing Tokens](authentication/80-oidc.md#refreshing-an-access-token) for details.
+must use its refresh token to obtain a new one without re-authenticating. See
+[OIDC Authentication - Refreshing Tokens](authentication/10-oidc.md#refreshing-an-access-token) for details.
 
 The controller maintains a last accessed at timestamp for every legacy API Session. This timestamp is used to
 determine whether the timeout has been reached, signaling an API Session removal. Activities that update the
@@ -250,6 +250,6 @@ A Session represents access to a specific service for dialing or binding. They a
 controller by a client through the [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx). The result of that request is a security token representing
 the Session and a list of Edge Routers that the client may use to dial or bind the target service through.
 
-Sessions are removed when the parent [API Session](authentication/auth.md#api-sessions) is removed,
+Sessions are removed when the parent [API Session](authentication/00-auth.md#api-sessions) is removed,
 [policies](authorization/policies/overview.mdx) are changed to deny access, or when [Posture
-Checks](authorization/posture-checks/overview.md) enter an invalid state for the target service.
+Checks](authorization/posture-checks/00-overview.md) enter an invalid state for the target service.

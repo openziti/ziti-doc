@@ -12,7 +12,7 @@ Additionally, there are optional values that can be used to control which claims
 - `enrollAttributeClaimsSelector` - a root level property name (e.g. `claims`) or a JSON pointer (e.g. `/claims`) that
   points to a string or array of strings that will be used to populate the `attributes` field of the enrolling
   identity. Defaults to no value set and identities will enroll without attributes.
-- `enrollAuthPolicyId` - the id of the [Authentication Policy](./authentication/30-authentication-policies.md) to use for the enrolling identity. Defaults to no value set
+- `enrollAuthPolicyId` - the id of the [Authentication Policy](authentication/50-authentication-policies.md) to use for the enrolling identity. Defaults to no value set
   and the identity will enroll with the default Authentication Policy.
 - `enrollNameClaimsSelector` - the root level property name (e.g. `claims`) or a JSON pointer (e.g. `/claims`) that
   points to a string that will be used to populate the `name` field of the enrolling identity.

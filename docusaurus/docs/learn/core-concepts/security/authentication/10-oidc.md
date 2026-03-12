@@ -15,12 +15,12 @@ flow automatically. The PKCE flow is designed for public clients that cannot saf
 
 Upon successful authentication, the controller issues three tokens:
 
-- **Access Token** — a short-lived JWT used to authorize all API requests
-- **ID Token** — a JWT containing identity information about the authenticated user
-- **Refresh Token** — a longer-lived token used to obtain a new access token when the current one expires
+- **Access Token** - a short-lived JWT used to authorize all API requests
+- **ID Token** - a JWT containing identity information about the authenticated user
+- **Refresh Token** - a longer-lived token used to obtain a new access token when the current one expires
 
 The access token replaces the legacy `zt-session` opaque token as the primary credential for API requests. Both
-mechanisms remain supported; see [Using Tokens](#using-tokens) for details.
+mechanisms remain supported. See [Using Tokens](#using-tokens) for details.
 
 ## OIDC Endpoints
 
@@ -41,7 +41,7 @@ Key endpoints returned by the discovery document include:
 | Endpoint | Path | Purpose |
 |----------|------|---------|
 | Authorization | `/oidc/authorization` | Initiates the PKCE authentication flow |
-| Token | `/oidc/token` | Exchanges a code for tokens; also used for token refresh |
+| Token | `/oidc/token` | Exchanges a code for tokens, also used for token refresh |
 | JWKS | `/oidc/keys` | Returns the public keys used to verify tokens |
 | End Session | `/oidc/end_session` | Terminates the OIDC session (logout) |
 | Userinfo | `/oidc/userinfo` | Returns claims about the authenticated identity |
@@ -79,7 +79,7 @@ edge:
 
 Shortening `accessTokenDuration` reduces the window during which a stolen access token is usable.
 Shortening `refreshTokenDuration` forces clients to re-authenticate more frequently. When `refreshTokenDuration`
-is set, it must be at least one minute longer than `accessTokenDuration`; the controller enforces this and
+is set, it must be at least one minute longer than `accessTokenDuration`. The controller enforces this and
 adjusts values that violate the constraint.
 
 ### OIDC Bind Point
@@ -88,7 +88,7 @@ The `edge-oidc` binding is the API binding label for the OIDC server. By default
 adds the `edge-oidc` binding to any web listener that hosts `edge-client`, even when it is not explicitly listed.
 This automatic co-location is the recommended approach for most deployments.
 
-To configure the OIDC binding explicitly — for example, to specify allowed redirect URIs — add it to the `apis`
+To configure the OIDC binding explicitly, for example to specify allowed redirect URIs, add it to the `apis`
 list of the appropriate web listener:
 
 ```yaml
@@ -108,7 +108,7 @@ web:
 
 The `redirectURIs` option controls which callback URLs the OIDC provider will accept. Wildcard `*` is supported
 in the port position to allow clients that listen on a dynamically assigned local port (common in native
-application flows). The defaults permit localhost callbacks; production deployments should review this list.
+application flows). The defaults permit localhost callbacks. Production deployments should review this list.
 
 #### Disabling Auto-Binding
 
@@ -166,12 +166,12 @@ Clients must use the same address for token verification as they used for authen
 
 :::note
 When `disableOidcAutoBinding` is false (the default) and `edge-oidc` is listed explicitly in at least one
-listener, auto-binding is suppressed — the explicit configuration is used as-is.
+listener, auto-binding is suppressed and the explicit configuration is used as-is.
 :::
 
 ## Authentication Flow
 
-Authentication proceeds in two phases: primary authentication establishes the identity; secondary authentication
+Authentication proceeds in two phases: primary authentication establishes the identity. Secondary authentication
 (if required) satisfies additional factors such as TOTP or a required external JWT.
 
 ```mermaid
@@ -198,7 +198,7 @@ sequenceDiagram
     Ctrl-->>C: { access_token, id_token, refresh_token, expires_in }
 ```
 
-### Step 1 — Discover Endpoints
+### Step 1 - Discover Endpoints
 
 Clients retrieve the OIDC discovery document to learn the authorization and token endpoint URLs:
 
@@ -206,7 +206,7 @@ Clients retrieve the OIDC discovery document to learn the authorization and toke
 GET /.well-known/openid-configuration
 ```
 
-### Step 2 — Initiate Authorization
+### Step 2 - Initiate Authorization
 
 The client constructs a PKCE authorization request. The controller's OIDC client ID is `openziti`.
 
@@ -225,7 +225,7 @@ The optional `method` parameter hints at the intended primary authentication met
 `ext-jwt`). If omitted, the controller selects the method based on whether a client TLS certificate was presented.
 The authorization endpoint responds with a redirect to the appropriate login URL.
 
-### Step 3 — Submit Primary Credentials
+### Step 3 - Submit Primary Credentials
 
 The controller redirects the client to a login URL of the form:
 
@@ -236,14 +236,14 @@ The controller redirects the client to a login URL of the form:
 The `authRequestID` value identifies the in-progress authentication request. The client POSTs credentials to the
 same URL. See [Primary Authentication](#primary-authentication) for method-specific request formats.
 
-### Step 4 — Satisfy Secondary Factors (if required)
+### Step 4 - Satisfy Secondary Factors (if required)
 
-If the identity's [Authentication Policy](./30-authentication-policies.md) requires secondary factors, the login
+If the identity's [Authentication Policy](50-authentication-policies.md) requires secondary factors, the login
 endpoint returns HTTP `200` with a JSON body listing the outstanding
 [Authentication Queries](../sessions.md#authentication-queries) rather than redirecting to the callback. The client
 satisfies each query and resubmits. See [Secondary Authentication](#secondary-authentication) for details.
 
-### Step 5 — Exchange Code for Tokens
+### Step 5 - Exchange Code for Tokens
 
 Once all authentication factors are satisfied, the controller redirects to the client's `redirect_uri` with an
 authorization code. The client exchanges the code for tokens:
@@ -274,7 +274,7 @@ A successful response:
 
 ## Primary Authentication
 
-Primary authentication establishes which [Identity](./60-identities.md) is authenticating. The method is determined by the login
+Primary authentication establishes which [Identity](80-identities.md) is authenticating. The method is determined by the login
 URL path and the credentials submitted. All login endpoints accept either `application/json` or
 `application/x-www-form-urlencoded` request bodies.
 
@@ -294,7 +294,7 @@ the request body (POST).
 ```
 
 Username/password is the simplest primary method. It is disabled by default in production-oriented
-[Authentication Policies](./30-authentication-policies.md) in favor of certificate or JWT authentication.
+[Authentication Policies](50-authentication-policies.md) in favor of certificate or JWT authentication.
 
 ### Client Certificate
 
@@ -307,9 +307,9 @@ Username/password is the simplest primary method. It is disabled by default in p
 ```
 
 Certificate authentication requires that the HTTP connection to the controller use a client TLS certificate
-associated with the target identity. The body is empty — the controller reads the certificate from the TLS
+associated with the target identity. The body is empty. The controller reads the certificate from the TLS
 handshake. The certificate must be issued by the OpenZiti PKI or a registered and enabled
-[3rd Party CA](./10-third-party-cas.md).
+[3rd Party CA](30-third-party-cas.md).
 
 ### External JWT (ext-jwt)
 
@@ -324,13 +324,13 @@ HTTP Header: `Authorization: Bearer <jwt-from-external-provider>`
 ```
 
 External JWT authentication requires a valid JWT from a configured
-[External JWT Signer](./50-external-jwt-signers.mdx) in the `Authorization` header. The controller validates the
+[External JWT Signer](70-external-jwt-signers.mdx) in the `Authorization` header. The controller validates the
 JWT's signature, expiration, issuer, and audience against the matching External JWT Signer configuration, then
 maps the configured claim to an identity.
 
 ## Secondary Authentication
 
-Secondary authentication is triggered when the identity's [Authentication Policy](./30-authentication-policies.md)
+Secondary authentication is triggered when the identity's [Authentication Policy](50-authentication-policies.md)
 requires additional factors beyond the primary credential. Outstanding secondary factors are represented as
 Authentication Queries on the in-progress auth request.
 
@@ -369,7 +369,7 @@ Clients can use this header to detect that TOTP is required without parsing the 
 
 ### TOTP (Time-Based One-Time Password)
 
-If the [Authentication Policy](./30-authentication-policies.md)'s `secondary.requireTotp` is `true`, the client must provide a TOTP code generated
+If the [Authentication Policy](50-authentication-policies.md)'s `secondary.requireTotp` is `true`, the client must provide a TOTP code generated
 by an authenticator application (Google Authenticator, Authy, Microsoft Authenticator, etc.) after primary
 authentication succeeds.
 
@@ -387,7 +387,7 @@ returns HTTP `400` with an error indicating the code was invalid.
 
 #### TOTP Enrollment During an OIDC Flow
 
-If the identity's [Authentication Policy](./30-authentication-policies.md) requires TOTP but the identity has not yet enrolled in TOTP, enrollment
+If the identity's [Authentication Policy](50-authentication-policies.md) requires TOTP but the identity has not yet enrolled in TOTP, enrollment
 can be completed mid-OIDC-flow. The auth request remains active while enrollment is completed.
 
 **Start enrollment:**
@@ -442,7 +442,7 @@ This abandons the in-progress enrollment and allows a fresh enrollment to be sta
 
 ### External JWT as a Secondary Factor
 
-When the [Authentication Policy](./30-authentication-policies.md)'s `secondary.requireExtJwt` is set to an External JWT Signer ID, every API
+When the [Authentication Policy](50-authentication-policies.md)'s `secondary.requireExtJwt` is set to an External JWT Signer ID, every API
 request must include a valid JWT from that signer in addition to the primary access token. During an OIDC flow,
 the controller checks for the secondary JWT at the time of primary authentication.
 
@@ -464,7 +464,7 @@ on every subsequent API request (see [WWW-Authenticate Headers](#www-authenticat
 
 An OIDC authentication request is **partially authenticated** when primary credentials have been accepted but one or
 more secondary factors remain outstanding. The authorization code has not yet been issued, so no access token
-exists yet — the client is still in the middle of the OIDC login flow.
+exists yet. The client is still in the middle of the OIDC login flow.
 
 During partial authentication, only the OIDC login endpoints are accessible. These include:
 
@@ -480,7 +480,7 @@ The primary authentication endpoints (`/oidc/login/username`, `/oidc/login/cert`
 retried with corrected credentials if the initial attempt failed, but the authorization code is only issued once
 all secondary factors are satisfied and the controller redirects to the callback URL.
 
-No Edge Client or Edge Management API calls can be made during partial authentication in OIDC — there is no token to
+No Edge Client or Edge Management API calls can be made during partial authentication in OIDC. There is no token to
 present until the full OIDC flow completes.
 
 ## Tokens
@@ -494,7 +494,7 @@ The access token is a short-lived JWT that authorizes API requests. It is used a
 Authorization: Bearer <access-token>
 ```
 
-The access token's `sub` claim contains the OpenZiti [Identity](./60-identities.md) ID. The token also carries OpenZiti-specific custom
+The access token's `sub` claim contains the OpenZiti [Identity](80-identities.md) ID. The token also carries OpenZiti-specific custom
 claims (prefixed `z_`) used by the controller to reconstruct session context without a database lookup on every
 request. Access tokens expire after `edge.oidc.accessTokenDuration` (default 30 minutes).
 
@@ -643,7 +643,7 @@ WWW-Authenticate: Bearer realm="openziti-secondary-ext-jwt"
                          issuer="<ext-jwt-signer-issuer>"
 ```
 
-The `id` field contains the ID of the [External JWT Signer](./50-external-jwt-signers.mdx) that must be satisfied.
+The `id` field contains the ID of the [External JWT Signer](70-external-jwt-signers.mdx) that must be satisfied.
 The `issuer` field contains the expected JWT issuer, which clients can use to initiate the correct OIDC flow with
 the appropriate identity provider.
 

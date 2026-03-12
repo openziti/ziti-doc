@@ -11,7 +11,7 @@ to scale horizontally with edge routers.
 ## Posture Data {#posture-data}
 
 Posture Check definitions are created and managed on the controller (or on any controller in an HA deployment).
-The controller distributes these definitions to all edge routers via the **Router Data Model (RDM)** — a
+The controller distributes these definitions to all edge routers via the **Router Data Model (RDM)**, a
 synchronized state that routers subscribe to and keep current. Each edge router stores the full set of Posture
 Check definitions locally.
 
@@ -66,8 +66,8 @@ services whose Posture Checks are no longer satisfied are terminated.
 ## Access
 
 A single service may be granted to a client through multiple Service Policies. Only one of those policies needs
-to be in a passing state for access to be granted. Creating two Service Policies — one with Posture Checks and
-one without — for the same service and client will result in the client always having access, because the policy
+to be in a passing state for access to be granted. Creating two Service Policies, one with Posture Checks and
+one without, for the same service and client will result in the client always having access, because the policy
 without Posture Checks always passes.
 
 ## Associating
@@ -83,11 +83,11 @@ Identities.
 The following Posture Check types are supported. Definitions are created on the controller and synchronized to
 edge routers automatically.
 
-- [OS / OS Version](#os-os-version) — requires a specific operating system and optionally a specific version or versions
-- [MAC Address](#mac-address) — requires the client has a specific MAC address associated with its hardware
-- [MFA](#mfa) — requires the client currently has MFA TOTP enabled
-- [Multi Process](#multi-process) — requires a client be running one or more applications
-- [Windows Domain](#windows-domain) — requires the client be a member of a specific domain
+- [OS / OS Version](#os-os-version) - requires a specific operating system and optionally a specific version or versions
+- [MAC Address](#mac-address) - requires the client has a specific MAC address associated with its hardware
+- [MFA](#mfa) - requires the client currently has MFA TOTP enabled
+- [Multi Process](#multi-process) - requires a client be running one or more applications
+- [Windows Domain](#windows-domain) - requires the client be a member of a specific domain
 
 ### Operating System {#os-os-version}
 
@@ -114,7 +114,7 @@ the build number is used instead.
 
 #### Creating
 
-##### Ziti CLI
+##### OpenZiti CLI
 
 ```
 ziti edge create posture-check os windows-and-android -o "WINDOWS:>10.0.0,ANDROID:>6.0.0" -a check-attribute1
@@ -149,7 +149,7 @@ addresses not included in the check will fail.
 
 #### Creating
 
-##### Ziti CLI
+##### OpenZiti CLI
 
 ```
 ziti edge create posture-check mac mac-list -m "14-B2-2C-E5-F0-61" -m "D5-22-E8-B7-FF-48" -a check-attribute1
@@ -170,22 +170,22 @@ ziti edge create posture-check mac mac-list -m "14-B2-2C-E5-F0-61" -m "D5-22-E8-
 
 ### MFA {#mfa}
 
-The `MFA` Posture Check type enforces [MFA TOTP](/learn/core-concepts/security/authentication/70-totp.md)
+The `MFA` Posture Check type enforces [MFA TOTP](/learn/core-concepts/security/authentication/90-totp.md)
 configuration on a client. Posture Checks enforce access authorization. For authentication-level MFA enforcement,
-see [Authentication Policies](/learn/core-concepts/security/authentication/30-authentication-policies.md#secondary).
+see [Authentication Policies](/learn/core-concepts/security/authentication/50-authentication-policies.md#secondary).
 
 MFA Posture Checks support forcing a client to re-submit a valid TOTP on timeout, after locking/unlocking a
 device, or waking a device from sleep.
 
-- `timeoutSeconds` — how long a TOTP submission is valid. Values `0` and `-1` represent no timeout.
-- `promptOnUnlock` — when `true`, requires re-submission after a lock/unlock event. The client is given a
+- `timeoutSeconds` - how long a TOTP submission is valid. Values `0` and `-1` represent no timeout.
+- `promptOnUnlock` - when `true`, requires re-submission after a lock/unlock event. The client is given a
   five-minute grace period before the check begins to fail.
-- `promptOnWake` — when `true`, requires re-submission after a wake event. The client is given a five-minute
+- `promptOnWake` - when `true`, requires re-submission after a wake event. The client is given a five-minute
   grace period before the check begins to fail.
 
 #### Creating
 
-##### Ziti CLI
+##### OpenZiti CLI
 
 ```
 ziti edge create posture-check mfa my-mfa-check -s 3600 -w -u -a check-attribute1
@@ -211,14 +211,14 @@ ziti edge create posture-check mfa my-mfa-check -s 3600 -w -u -a check-attribute
 The `PROCESS_MULTI` Posture Check type verifies that one or more programs are running on the client. It can
 optionally check a SHA-256 hash and digital signers on Windows.
 
-- `semantic` — `AllOf` requires all listed processes to be running; `OneOf` requires at least one.
-- `path` — the binary path to check.
-- `hashes` — valid SHA-256 hashes of the binary.
-- `signerFingerprints` — SHA-1 thumbprints of valid signing certificates (Windows only).
+- `semantic` - `AllOf` requires all listed processes to be running. `OneOf` requires at least one.
+- `path` - the binary path to check.
+- `hashes` - valid SHA-256 hashes of the binary.
+- `signerFingerprints` - SHA-1 thumbprints of valid signing certificates (Windows only).
 
 #### Creating
 
-##### Ziti CLI
+##### OpenZiti CLI
 
 ```
 ziti edge create posture-check process-multi my-proc-multi AnyOf "Windows,Linux" "C:\\program1.exe,/usr/local/program1" -a check-attribute1
@@ -257,7 +257,7 @@ The `DOMAIN` Posture Check type verifies that a Windows client has joined a spec
 
 #### Creating
 
-##### Ziti CLI
+##### OpenZiti CLI
 
 ```
 ziti edge create posture-check domain domain-list -d domain1 -d "domain2" -a check-attribute1

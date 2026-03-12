@@ -8,11 +8,11 @@ API requests to access services and manage the network.
 
 OpenZiti supports two authentication systems:
 
-- **[OIDC Authentication](./80-oidc.md)** — the current, preferred authentication system. The controller acts as an
+- **[OIDC Authentication](10-oidc.md)** - the current, preferred authentication system. The controller acts as an
   [OpenID Connect](https://openid.net/connect/) provider. Clients authenticate through a PKCE flow and receive
   standard JWT access, ID, and refresh tokens. All new clients and SDKs use OIDC authentication.
 
-- **[Legacy Authentication](./20-legacy-auth.md)** — the original authentication system. Clients submit credentials
+- **[Legacy Authentication](./20-legacy-auth.md)** - the original authentication system. Clients submit credentials
   directly to the Edge Client or Edge Management API and receive an opaque `zt-session` token. Legacy authentication is
   **deprecated** and will be removed in a future release. Existing clients should migrate to OIDC.
 
@@ -37,20 +37,20 @@ I --> F
 
 While partially authenticated, a client has proven its primary identity but has not yet satisfied all required
 secondary factors. The set of operations available during partial authentication differs between OIDC and legacy
-authentication — see each section for details.
+authentication. See each section for details.
 
 ## Primary Authentication
 
-Primary authentication establishes the authenticating [Identity](./60-identities.md). It is the first step in all authentication flows.
+Primary authentication establishes the authenticating [Identity](80-identities.md). It is the first step in all authentication flows.
 
 Primary authentication factors include:
 
-- **x509 certificates** — the client presents a TLS client certificate associated with an [Identity](./60-identities.md)
-- **External JWTs** — the client presents a JWT issued by a configured [External JWT Signer](./50-external-jwt-signers.mdx)
-- **Username/password** — the client submits a username and password stored in the internal UPDB authenticator
+- **x509 certificates** - the client presents a TLS client certificate associated with an [Identity](80-identities.md)
+- **External JWTs** - the client presents a JWT issued by a configured [External JWT Signer](70-external-jwt-signers.mdx)
+- **Username/password** - the client submits a username and password stored in the internal UPDB authenticator
 
-Valid primary authentication methods for an [Identity](./60-identities.md) are controlled by its
-[Authentication Policy](./30-authentication-policies.md). If no [Authentication Policy](./30-authentication-policies.md) is assigned to an [Identity](./60-identities.md),
+Valid primary authentication methods for an [Identity](80-identities.md) are controlled by its
+[Authentication Policy](50-authentication-policies.md). If no [Authentication Policy](50-authentication-policies.md) is assigned to an [Identity](80-identities.md),
 the system `default` policy applies.
 
 ### Authenticators
@@ -59,11 +59,11 @@ Some primary authentication mechanisms require per-identity credentials to be st
 credentials are stored as **authenticators** and are associated with the identity that owns them.
 
 - **x509 certificate** authenticators are created through the [enrollment](../enrollment.mdx) process.
-- **Username/password** authenticators are managed through [password management](./5-password-management.md) and
-  [certificate management](./40-certificate-management.md).
+- **Username/password** authenticators are managed through [password management](95-password-management.md) and
+  [certificate management](60-certificate-management.md).
 - **External JWT** authentication does not use an authenticator. Instead, the identity is matched at authentication
   time by comparing a claim from the presented JWT (identified by `claimsProperty` on the
-  [External JWT Signer](./50-external-jwt-signers.mdx)) against the identity's `externalId` field. No persistent
+  [External JWT Signer](70-external-jwt-signers.mdx)) against the identity's `externalId` field. No persistent
   credential is stored on the controller.
 
 Authenticators for an identity may be listed via the CLI:
@@ -86,11 +86,11 @@ authentication. The client must satisfy all outstanding queries before becoming 
 
 Supported secondary authentication factors:
 
-- **TOTP** — a time-based one-time password from an authenticator app (Google Authenticator, Authy, etc.)
-- **External JWT** — a JWT from a required [External JWT Signer](./50-external-jwt-signers.mdx) that must be
+- **TOTP** - a time-based one-time password from an authenticator app (Google Authenticator, Authy, etc.)
+- **External JWT** - a JWT from a required [External JWT Signer](70-external-jwt-signers.mdx) that must be
   present on every request
 
-Secondary factors are configured per-identity through [Authentication Policies](./30-authentication-policies.md).
+Secondary factors are configured per-identity through [Authentication Policies](50-authentication-policies.md).
 
 ## API Sessions
 

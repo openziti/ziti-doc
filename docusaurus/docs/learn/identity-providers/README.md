@@ -12,10 +12,10 @@ applications and allows users to sign in one place to gain access to an OpenZiti
 
 OpenZiti has a flexible design for integrating with external identity providers. An overlay can be configured to 
 extend authentication to external identity providers using 
-[external jwt signers](../core-concepts/security/authentication/50-external-jwt-signers.mdx). OpenZiti also 
+[external jwt signers](../core-concepts/security/authentication/70-external-jwt-signers.mdx). OpenZiti also 
 allows an administrator to configure these identity providers as either the primary or secondary authentication 
 mechanism by defining additional 
-[authentication policies](../../learn/core-concepts/security/authentication/30-authentication-policies.md)
+[authentication policies](../core-concepts/security/authentication/50-authentication-policies.md)
 
 OpenZiti integrates with any identity provider that can supports
 [Authorization Code Flow with Proof Key for Code Exchange flow](https://www.oauth.com/oauth2-servers/pkce/).
@@ -57,7 +57,7 @@ OpenZiti components all support using an external identity provider for authenti
 The OpenZiti Controller will come with a default authorization policy that allows for all primary authentication
 methods: username/password, certificate-based, exteral-jwt-signer. If you are familiar with OpenZiti concepts,
 additional auth-policies can be created and the default policy modified. If you are new to OpenZiti, it's recommended
-you leave the default [authentication policy](../../learn/core-concepts/security/authentication/30-authentication-policies.md)
+you leave the default [authentication policy](../core-concepts/security/authentication/50-authentication-policies.md)
 intact.
 
 > [!TIP]

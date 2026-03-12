@@ -1,6 +1,6 @@
 # Connection Security
 
-Ziti networks use robust modern cryptography and security mechanisms. Each component within a Ziti network uses
+OpenZiti networks use robust modern cryptography and security mechanisms. Each component within an OpenZiti network uses
 security technology that fits its role and use-cases.
 
 Here are the different types of connections:
@@ -39,20 +39,20 @@ is used for configuration and maintenance. The [Edge Client API](/reference/deve
 is used to allow clients to authenticate, discover services, request [Sessions](sessions.md#session),
 discover Edge Routers, and to perform basic self-maintenance.
 
-Access to the APIs requires [authentication](authentication/auth.md) which results in an [API Session](authentication/auth.md#api-sessions)
-being returned to the client. An [API Session](authentication/auth.md#api-sessions) is required to make `edge` connections.
+Access to the APIs requires [authentication](authentication/00-auth.md) which results in an [API Session](authentication/00-auth.md#api-sessions)
+being returned to the client. An [API Session](authentication/00-auth.md#api-sessions) is required to make `edge` connections.
 
 ## Edge Connection Details
 
 `edge` connections are made between SDKs and Edge Routers. They require the following:
 
-- a valid [API Session](authentication/auth.md#api-sessions) represented by a token
-- a valid x509 certificate associated with the supplied [API Session](authentication/auth.md#api-sessions)
+- a valid [API Session](authentication/00-auth.md#api-sessions) represented by a token
+- a valid x509 certificate associated with the supplied [API Session](authentication/00-auth.md#api-sessions)
 - a target Edge Router
 
-An [API Session](authentication/auth.md#api-sessions) is obtained during authentication with either the Edge Client
+An [API Session](authentication/00-auth.md#api-sessions) is obtained during authentication with either the Edge Client
 or Edge Management APIs. It is represented as a token. The x509 certificate used to establish the mTLS connection may 
-either be the certificate used during authentication (if used) or an [API Session Certificate](authentication/20-api-session-certificates.md).
+either be the certificate used during authentication (if used) or an [API Session Certificate](authentication/40-api-session-certificates.md).
 
 `edge` connections once establish allow the use of [Session](sessions.md#session) tokens to establish
 `service` connections. When a [Session](sessions.md#session) is created, a list of valid Edge Router

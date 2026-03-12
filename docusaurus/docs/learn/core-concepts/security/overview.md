@@ -1,16 +1,16 @@
 ---
-title: Ziti Security
+title: OpenZiti Security
 ---
 
 A network's security setup is defined by several entities defined in the [Edge Management API](../../../reference/developer/api/index.mdx#edge-management-api). The following
 are related to identity authentication and service access:
 
 - [Identities](#identity) - describe a human, device, or service within the edge
-- [Authenticators](./authentication/auth.md#authenticators) - describes the credentials of an authentication method associated with an Identity
+- [Authenticators](authentication/00-auth.md#authenticators) - describes the credentials of an authentication method associated with an Identity
 - [Enrollments](enrollment.mdx) - describes a set of criteria necessary to create a new Identity and associated Authenticator
-- [Authentication Policy](./authentication/30-authentication-policies.md) - describes the methods available for Identity authentication
-- [3rd Party CAs](./authentication/10-third-party-cas.md) - allows external x509 PKIs to be used for authentication
-- [External JWT Signers](authentication/50-external-jwt-signers.mdx) - allows external JWT signers to be used for authentication
+- [Authentication Policy](authentication/50-authentication-policies.md) - describes the methods available for Identity authentication
+- [3rd Party CAs](authentication/30-third-party-cas.md) - allows external x509 PKIs to be used for authentication
+- [External JWT Signers](authentication/70-external-jwt-signers.mdx) - allows external JWT signers to be used for authentication
 - [API Session](./sessions.md) - a security context represented by a security token (JWT, secret, etc) that represents
   Identity authentication
 - [Session](./sessions.md) - a security context represented by a security token (JWT, secret, etc) that represents access
@@ -18,11 +18,11 @@ are related to identity authentication and service access:
 - [Service Policy](./authorization/policies/overview.mdx) - describes which Identities have access to which Services and the Posture Checks that are required to
   pass for access
 - [Edge Router Policies](./authorization/policies/overview.mdx)  - describes which Identities have access to which edge routers
-- [Posture Checks](./authorization/posture-checks/overview.md) - describes additional environmental state that an Identity must have in order to obtain and maintain
+- [Posture Checks](authorization/posture-checks/00-overview.md) - describes additional environmental state that an Identity must have in order to obtain and maintain
   service access
-- [Posture Queries](./authorization/posture-checks/overview.md#posture-data) - describes a request for environmental information from a client
-- [Posture Responses](./authorization/posture-checks/overview.md#posture-data) - a response to a Posture Query provided by a client; submitted to the controller (legacy) or each connected edge router (OIDC)
-- [Posture Data](./authorization/posture-checks/overview.md#posture-data) - the current environmental state provided via Posture Responses
+- [Posture Queries](authorization/posture-checks/00-overview.md#posture-data) - describes a request for environmental information from a client
+- [Posture Responses](authorization/posture-checks/00-overview.md#posture-data) - a response to a Posture Query provided by a client, submitted to the controller (legacy) or each connected edge router (OIDC)
+- [Posture Data](authorization/posture-checks/00-overview.md#posture-data) - the current environmental state provided via Posture Responses
 - [Authentication Queries](./sessions.md#authentication-queries) - additional, secondary, authentication factors required after initial, primary, authentication
 
 There is an additional policy type for edge routers:
@@ -71,38 +71,38 @@ in each section will lead to a more detailed explanation of the relevant topics.
 
 ### Identity
 
-The edge defines a top level entity called an [Identity](./authentication/60-identities.md). An Identity is a security principal that can bind (host) or
+The edge defines a top level entity called an [Identity](authentication/80-identities.md). An Identity is a security principal that can bind (host) or
 dial (connect) to services over a network. Read more in the [Identity](/learn/core-concepts/identities/overview.mdx) section.
 
 ### Enrollment
 
 Enrollment is a client initiated process where the result is the creation of an Identity that has some manner
-of authenticating. Enrollments may be automated through [3rd Party Cas](./authentication/10-third-party-cas.md) and 
-[External JWT Signers](authentication/50-external-jwt-signers.mdx) or may be completed through pre-provisioning. Read more in the 
+of authenticating. Enrollments may be automated through [3rd Party Cas](authentication/30-third-party-cas.md) and 
+[External JWT Signers](authentication/70-external-jwt-signers.mdx) or may be completed through pre-provisioning. Read more in the 
 [Enrollment](enrollment.mdx) section.
 
 ### Authentication
 
-[Authentication](./authentication/auth.md) is the process of a client proving their identity through the submission of one primary credential
+[Authentication](authentication/00-auth.md) is the process of a client proving their identity through the submission of one primary credential
 and zero or more secondary credentials that are prompted by Authentication Queries. Authentication methods can be
-configured through [3rd Party Cas](./authentication/10-third-party-cas.md), [External JWT Signers](authentication/50-external-jwt-signers.mdx),
-and [Authentication Policies](./authentication/30-authentication-policies.md). Read more in the
- [Authentication](./authentication/auth.md) section.
+configured through [3rd Party Cas](authentication/30-third-party-cas.md), [External JWT Signers](authentication/70-external-jwt-signers.mdx),
+and [Authentication Policies](authentication/50-authentication-policies.md). Read more in the
+ [Authentication](authentication/00-auth.md) section.
 
 ### Authorization
 
-[Authorization](./authorization/auth.md) in Ziti is configured for identities and edge routers. Edge router authorization only covers which
+[Authorization](authorization/00-auth.md) in OpenZiti is configured for identities and edge routers. Edge router authorization only covers which
 services can be used over an edge router via Service Edge Router Policies. Identity authorization is covered by Service
 Policies and Edge Router Policies.
 
-All policies in Ziti are represented by a robust [attribute based access control system (ABAC)](https://en.wikipedia.org/wiki/Attribute-based_access_control) based on `roleAttributes`
+All policies in OpenZiti are represented by a robust [attribute based access control system (ABAC)](https://en.wikipedia.org/wiki/Attribute-based_access_control) based on `roleAttributes`
 properties on entities within the [Edge Management API](../../../reference/developer/api/index.mdx#edge-management-api). `roleAttributes` properties are an array of user defined strings.
 Policies support attribute selector properties to determine which entities a policy interacts on. Policies themselves
 are documented in [Policies](./authorization/policies/overview.mdx) section.
 
 Additionally, Service Policies can require additional environmental states to be satisfied by Posture Checks.
-Posture Checks evaluate Posture Data — environmental state collected by the client and submitted as Posture
-Responses. For legacy sessions, posture evaluation occurs at the controller; for OIDC sessions, it occurs at each
-edge router. More can be found in the [Posture Checks](./authorization/posture-checks/overview.md) section.
+Posture Checks evaluate Posture Data. Posture Data is environmental state collected by the client and submitted as Posture
+Responses. For legacy sessions posture evaluation occurs at the controller and for OIDC sessions it occurs at each
+edge router. More can be found in the [Posture Checks](authorization/posture-checks/00-overview.md) section.
 
-Read more in the [Authorization](./authorization/auth.md) section.
+Read more in the [Authorization](authorization/00-auth.md) section.

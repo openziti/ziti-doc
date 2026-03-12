@@ -5,7 +5,7 @@ import ERPBrief from './_edge-router-policy-brief.md'
 import SERPBrief from './_service-edge-router-policy-brief.md'
 
 # Policies
-Ziti policies control which [Identities](../../authentication/60-identities.md) can access or host which services
+Ziti policies control which [Identities](../../authentication/80-identities.md) can access or host which services
 via which edge routers. There are three kinds of policies, and we'll walk
 through what kind of access each policy type grants, as well as walk through
 some use cases.
@@ -37,8 +37,8 @@ Service Policies. With roles and role attributes (described below), it's
 easy to group entities and minimize manual maintenance of groups.
 
 Having at least one Service Policy is vital because without any 
-Service Policies the Ziti network will have no Identities authorized 
-to send traffic over the Ziti network.
+Service Policies the OpenZiti network will have no Identities authorized 
+to send traffic over the OpenZiti network.
 
 ## Edge Router Policies
 <ERPBrief />
@@ -55,7 +55,7 @@ number of reasons.
   * A group of Identities may need to use a particular version of an edge router 
 
 Having at least one edge router policy is necessary because without at least one, 
-no Identities will be able to send traffic over the Ziti network because traffic 
+no Identities will be able to send traffic over the OpenZiti network because traffic 
 must enter the network via an edge router.
 
 ## Service Edge Router Policies
@@ -70,12 +70,12 @@ particular services or service groups.
   * Geographic/political boundaries. Some services may need to be accessible only from specific areas to comply with local laws 
 
 Having at least one Service Edge Router Policy is vital because without at least one,
-no services will be able to accept traffic over the Ziti network because traffic must 
+no services will be able to accept traffic over the OpenZiti network because traffic must 
 enter the network via an edge router.
 
 ## Roles and Role Attributes
 In order for policies to work they need a way to specify which entities to include
-in the policy. All Ziti policies work the same way. 
+in the policy. All OpenZiti policies work the same way. 
 
   * The entities included in policies (Identities, services and edge routers) can all be assigned role attributes
       * For example: an Identity could be given the attributes `sales`, `eu` if that Identity belongs to a sales person from the European Union
@@ -101,7 +101,7 @@ in the policy. All Ziti policies work the same way.
 and service must have at least one on-line edge router in common in
 order for a connection to be made.
 
-When an Identity is trying to establish an [API Session](../../sessions.md#api-session) to use or host a service, the Ziti
+When an Identity is trying to establish an [API Session](../../sessions.md#api-session) to use or host a service, the OpenZiti
 controller will verify that it has been granted access to the service via Service Policy. Once the [API Session](../../sessions.md#api-session) is
 established, the controller will return a list of edge routers that the Identity
 can use to connect to that service. The list will be all edge routers which **both**

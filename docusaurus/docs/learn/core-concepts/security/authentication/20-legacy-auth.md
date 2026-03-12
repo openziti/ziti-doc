@@ -5,7 +5,7 @@ sidebar_position: 20
 
 :::warning[Deprecated]
 Legacy authentication is deprecated and will be removed in a future release. New clients and SDKs should use
-[OIDC authentication](./80-oidc.md). Existing clients using legacy authentication should migrate to OIDC.
+[OIDC authentication](10-oidc.md). Existing clients using legacy authentication should migrate to OIDC.
 :::
 
 Legacy authentication is the original authentication system for the OpenZiti edge APIs. Clients submit credentials
@@ -36,7 +36,7 @@ This token value is the `zt-session` and is used on all subsequent requests.
 ### x509 Certificate
 
 Certificate authentication requires the HTTP connection to the controller to use a client TLS certificate
-associated with the target identity. The request body is empty — the controller reads the certificate from the
+associated with the target identity. The request body is empty. The controller reads the certificate from the
 TLS handshake.
 
 `POST /edge/client/v1/authenticate?method=cert`
@@ -46,8 +46,8 @@ TLS handshake.
 ```
 
 The client certificate must be issued by the OpenZiti PKI or a registered and enabled
-[3rd Party CA](./10-third-party-cas.md). Intermediate CA certificates may be included in the TLS handshake if
-necessary; the client certificate must be at index zero with intermediates in subsequent positions.
+[3rd Party CA](30-third-party-cas.md). Intermediate CA certificates may be included in the TLS handshake if
+necessary. The client certificate must be at index zero with intermediates in subsequent positions.
 
 ### Username/Password (UPDB)
 
@@ -61,11 +61,11 @@ necessary; the client certificate must be at index zero with intermediates in su
 ```
 
 Password policies and account lockout behavior are configured via
-[Authentication Policies](./30-authentication-policies.md).
+[Authentication Policies](50-authentication-policies.md).
 
 ### External JWT
 
-JWT authentication requires a valid JWT from a configured [External JWT Signer](./50-external-jwt-signers.mdx)
+JWT authentication requires a valid JWT from a configured [External JWT Signer](70-external-jwt-signers.mdx)
 in the `Authorization` header.
 
 `POST /edge/client/v1/authenticate?method=ext-jwt`
@@ -124,7 +124,7 @@ DELETE /edge/client/v1/current-api-session
 
 ## Secondary Authentication
 
-If the identity's [Authentication Policy](./30-authentication-policies.md) requires secondary factors, the
+If the identity's [Authentication Policy](50-authentication-policies.md) requires secondary factors, the
 authentication response includes an `authQueries` array listing the outstanding challenges. The session is
 [partially authenticated](#partial-authentication) until all queries are satisfied.
 
@@ -162,5 +162,4 @@ A legacy API Session is **partially authenticated** when primary credentials hav
 All other operations require a fully authenticated session. Attempts to call other endpoints while partially
 authenticated return `401 Unauthorized`.
 
-Once all `authQueries` are satisfied the session becomes fully authenticated with no further action required —
-the same token is used for all subsequent requests.
+Once all `authQueries` are satisfied, the session becomes fully authenticated. The same token is used for all subsequent requests.

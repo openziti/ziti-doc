@@ -4,8 +4,8 @@ sidebar_position: 50
 
 # Authentication Policies
 
-Authentication Policies restrict the [primary authentication](./auth.md#primary-authentication) methods available to
-[Identities](./60-identities.md) and may enforce additional [secondary authentication](./auth.md#secondary-authentication) factors. OpenZiti is
+Authentication Policies restrict the [primary authentication](00-auth.md#primary-authentication) methods available to
+[Identities](80-identities.md) and may enforce additional [secondary authentication](00-auth.md#secondary-authentication) factors. OpenZiti is
 deployed with a default [Authentication Policy](#) that has the id `default`. This Authentication Policy may be updated,
 but not deleted. This default Authentication Policy is used when Identities are created and an Authentication
 Policy is not specified.
@@ -65,13 +65,13 @@ Fields:
 - `allowExpiredCerts` - allows expired client certificates to authenticate
 
 When certificate authentication is `allowed`, client certificates issued by the OpenZiti PKI and any verified and enabled
-[3rd Party CAs](./10-third-party-cas.md) become valid authentication paths. When disabled an identity will not be able
+[3rd Party CAs](30-third-party-cas.md) become valid authentication paths. When disabled an identity will not be able
 to authenticate with any client certificate.
 
 If `allowExpiredCerts` is true, client certificate expiration will be ignored during validation. This setting is 
 useful in scenarios where client are running software that has lapsed and cannot be re-enrolled or their client
 certificates cannot be updated. Clients do have an API available to them to roll existing OpenZiti PKI issued client 
-certificates forward. Client certificates issued by a [3rd Party CAs](./10-third-party-cas.md) must have an external
+certificates forward. Client certificates issued by a [3rd Party CAs](30-third-party-cas.md) must have an external
 process to maintain client certificate validity if `allowExpiredCerts` is false.
 
 
@@ -80,7 +80,7 @@ process to maintain client certificate validity if `allowExpiredCerts` is false.
 Fields:
 
 - `allowed` - whether external JWTs may be used for authentication
-- `allowedSigners` - the ids of valid [External JWT Signers](50-external-jwt-signers.mdx); when `null` or empty, all
+- `allowedSigners` - the ids of valid [External JWT Signers](70-external-jwt-signers.mdx). When `null` or empty, all
   configured and enabled External JWT Signers are permitted
 
 If `allowed` is true, authentication is accepted from the External JWT Signers listed in `allowedSigners`. If
@@ -96,8 +96,8 @@ If `allowed` is true, authentication is accepted from the External JWT Signers l
 
 The secondary section contain only two top-level configuration values:
 
-- `requireTotp` - if true authenticating clients must have [MFA TOTP](./70-totp.md) enabled
-- `requireExtJwtSigner` - if set to an id of an [External JWT Signer](50-external-jwt-signers.mdx) every request must have a valid JWT in the HTTP `Authorization` header
+- `requireTotp` - if true authenticating clients must have [MFA TOTP](90-totp.md) enabled
+- `requireExtJwtSigner` - if set to an id of an [External JWT Signer](70-external-jwt-signers.mdx) every request must have a valid JWT in the HTTP `Authorization` header
 
 ## Creating and Updating
 
