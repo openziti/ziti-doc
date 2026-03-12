@@ -72,11 +72,11 @@ If you're scripting deployments or using configuration management, you can suppl
 
 Answers can come from any combination of:
 
-- **Answer file** — write answers in **/opt/openziti/etc/router/bootstrap.env**
+- **Answer file** — use **/opt/openziti/etc/router/bootstrap.env** as a reference template for the available variables
 - **Environment** — export answers as environment variables and pass them with `sudo -E`
 - **Stdin** — pipe answers as `KEY=VALUE` lines (one per line) into the script
 
-All answers are persisted to **bootstrap.env** regardless of how they were supplied.
+Answers are written to a temporary file during bootstrap and deleted automatically on success. If bootstrap fails, the temporary file is preserved in `/tmp/` for debugging.
 
 To run without prompts, redirect stdin:
 
@@ -148,7 +148,7 @@ LISTEN 0      4096                          *:3022             *:*    users:(("z
 
 ### Controller address override
 
-The router learns the controller's address from the enrollment token, so you don't normally need to supply it. If you need to override the address in the enrollment token, set these answers in **/opt/openziti/etc/router/bootstrap.env** or supply them to the bootstrap script:
+The router learns the controller's address from the enrollment token, so you don't normally need to supply it. If you need to override the address in the enrollment token, supply these answers via environment variables or stdin:
 
 - `ZITI_CTRL_ADVERTISED_ADDRESS` — controller DNS name or IP address
 - `ZITI_CTRL_ADVERTISED_PORT` — controller port (default: 1280)
