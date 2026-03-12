@@ -4,13 +4,13 @@ sidebar_position: 80
 
 # Identities
 
-Ziti Edge defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or
+OpenZiti defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or
 dial (connect) to services over a network. An Identity may be a human who uses one or more devices, a device
 itself, a single account on a multi-user device, an application, or a set of applications. What determines what an
 Identity is only limited by the intent of its use, its security configuration, and where/how it stores its credentials.
 
 If an Identity represents a human that is using an SSO provider that ties into OpenZiti's
-[External JWT Signers](70-external-jwt-signers.mdx) the human operator can move from device to device using whichever Ziti
+[External JWT Signers](70-external-jwt-signers.mdx) the human operator can move from device to device using whichever OpenZiti
 enabled applications that allow them to authenticate. If the Identity can only authenticate via a x509 Client
 Certificate where the private key is stored in a hardware back keystore on a device, such that the key can not be moved,
 the identity is tied to that hardware. Further if the Identity's credentials are stored in an OS-backed user specific

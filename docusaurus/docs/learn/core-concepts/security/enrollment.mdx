@@ -145,7 +145,7 @@ An enrollment JWT can be retrieved in the same manner as [OTT Enrollment](#ott-e
 ### Auto CA Enrollment
 
 Auto CA enrollment allows a [3rd Party CA](./authentication/30-third-party-cas.md) to have clients enroll with a
-Ziti network without first creating an [Identity](./authentication/80-identities.md) or distributing a JWT enrollment token. Create a
+OpenZiti network without first creating an [Identity](./authentication/80-identities.md) or distributing a JWT enrollment token. Create a
 [3rd Party CA](./authentication/30-third-party-cas.md) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
 
 The name of enrolling clients is controlled by the `identityNameFormat` of the [3rd Party CA](./authentication/30-third-party-cas.md).
@@ -270,5 +270,5 @@ Authorization: Bearer <jwt from IdP>
 ### Client Re-Enrollment
 
 Clients may request to extend enrollments that generated x509 certificates if the client certificate was issued by
-Ziti. If the client's certificate was issued by a [3rd Party CA](./authentication/30-third-party-cas.md), the
+OpenZiti. If the client's certificate was issued by a [3rd Party CA](./authentication/30-third-party-cas.md), the
 client certificate renewal must be handled outside of OpenZiti.

@@ -1,6 +1,6 @@
 # Session Types
 
-Ziti has API Session and Session types.
+OpenZiti has API Session and Session types.
 
 ## API Session
 

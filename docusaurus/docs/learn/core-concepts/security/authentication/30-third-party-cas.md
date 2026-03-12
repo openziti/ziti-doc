@@ -7,7 +7,7 @@ sidebar_position: 30
 3rd Party CAs allow external private key infrastructures (PKIs) to be imported into OpenZiti and used for client enrollment
 and authentication. OpenZiti does not allow external private keys from PKIs to be imported for 3rd party CAs. Creation,
 distribution, renewal, and revocation of client certificates must all be handled outside of OpenZiti by the external CA.
-Ziti trusts certificates signed by a registered 3rd Party CA but has no ability to revoke them.
+OpenZiti trusts certificates signed by a registered 3rd Party CA but has no ability to revoke them.
 
 3rd Party CAs represent x509 Certificate chains that have the `CA:true` constraint. It is worth noting
 that adding a x509 certificate as a 3rd Party CA will treat it as a trust anchor even if it is an intermediate CA.
