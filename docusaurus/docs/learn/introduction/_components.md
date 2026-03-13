@@ -132,7 +132,7 @@ to the network. The presented certificate is used by the
 network to authorize the client and enumerate the services the
 Identity is authorized to use.
 
-Read more about [identities](/learn/core-concepts/identities/overview.mdx) and [authentication](/learn/core-concepts/security/authentication/auth.md).
+Read more about [identities](/learn/core-concepts/identities/overview.mdx) and [authentication](/learn/core-concepts/security/authentication/00-auth.md).
 
 ### Policies
 

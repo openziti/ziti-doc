@@ -1,19 +1,24 @@
+---
+sidebar_position: 80
+---
+
 # Identities
 
-Ziti Edge defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or
+OpenZiti defines a top level entity called an Identity. An Identity is a security principal that can bind (host) or
 dial (connect) to services over a network. An Identity may be a human who uses one or more devices, a device
 itself, a single account on a multi-user device, an application, or a set of applications. What determines what an
 Identity is only limited by the intent of its use, its security configuration, and where/how it stores its credentials.
 
-If an Identity represents a human that is using an SSO provider that ties into Ziti Edge's
-[External JWT Signers](50-external-jwt-signers.mdx) the human operator can move from device to device using whichever Ziti
-enabled applications that allow them to authenticate. If the Identity can only authenticate via a x509 Client
+If an Identity represents a human that is using an SSO provider that ties into OpenZiti's
+[External JWT Signers](70-external-jwt-signers.mdx) the human operator can move from device to device using
+whichever OpenZiti enabled applications that allow them to authenticate. If the Identity can only authenticate via
+a x509 Client
 Certificate where the private key is stored in a hardware back keystore on a device, such that the key can not be moved,
 the identity is tied to that hardware. Further if the Identity's credentials are stored in an OS-backed user specific
 storage mechanism (e.g. Windows Credential Manager) it is that accounts Identity.
 
 
-## Identity ER Diagram
+## Identity ER diagram
 
 Below is a diagram that show the high-level relationships between an Identity and various important entities and within
 a network. This diagram does not show all entities, simply the ones tied closest to an Identity. For example,
@@ -35,31 +40,34 @@ erDiagram
 
 ## Creating
 
-Creating an identity alone may not be enough to make it usable. An identity will also need a valid primary
-authentication mechanism. Depending on that mechanism it may also need to complete [enrollment](../enrollment.mdx#clients).
+Creating an Identity alone may not be enough to make it usable. An Identity will also need a valid primary
+authentication mechanism. Depending on that mechanism it may also need to complete
+[enrollment](../enrollment.mdx#clients).
 
-Please note that all authentication mechanisms also require a properly configured [authentication policy](./auth.md)
+Please note that all authentication mechanisms also require a properly configured
+[Authentication Policy](50-authentication-policies.md)
 
-The following [primary authentication](./auth.md#primary-authentication) mechanisms require post-creation enrollment:
+The following [primary authentication](00-auth.md#primary-authentication) mechanisms require post-creation enrollment:
 
-- Ziti PKI x509 Client Certificate
+- OpenZiti PKI x509 Client Certificate
 - 3rd Party x509 Client Certificate
 - Username Password (UPDB)
 
-The following do not require enrollment, but must have a properly configured [External JWT Signer](50-external-jwt-signers.mdx)
+The following do not require enrollment, but must have a properly configured
+[External JWT Signer](70-external-jwt-signers.mdx)
 
 - JWT
 
-### Creating w/ No Authenticators/Enrollments
+### Creating with No Authenticators/Enrollments
 
-Note: This identity will not be able to authenticate
+Note: This Identity will not be able to authenticate
 
-#### Ziti CLI
+#### OpenZiti CLI
 
 It is currently not possible to create and identity without an enrollment option through the CLI. It can be completed
-by creating and identity then deleting the default certificate enrollment.
+by creating an Identity then deleting the default certificate enrollment.
 
-```text
+```bash
 ziti edge create identity [device|service|user] <name>
 ziti edge delete enrollment where "identity=<id>"
 ```
@@ -68,25 +76,26 @@ ziti edge delete enrollment where "identity=<id>"
 
 `POST /edge/management/v1/identities`
 
-```text
+```json
 {
   "name": "Roger Wilco",
   "isAdmin": false
 }
 ```
 
-### Creating w/ Ziti PKI Client Cert Enrollment
+### Creating with OpenZiti PKI Client Cert Enrollment
 
-Note: This identity will be using the default [authentication policy](./auth.md) which allows certificate authentication
+Note: This identity will be using the default [Authentication Policy](50-authentication-policies.md) which allows
+certificate authentication
 
-#### Ziti CLI
+#### OpenZiti CLI
 
-`ziti edge create identity [device|service|user] <name> `
+`ziti edge create identity [device|service|user] <name>`
 
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
-```text
+```json
 {
   "name": "Roger Wilco",
   "isAdmin": false,
@@ -96,17 +105,18 @@ Note: This identity will be using the default [authentication policy](./auth.md)
 }
 ```
 
-### Creating w/ 3rd Party CA Client Cert Enrollment
-Note: This identity will be using the default [authentication policy](./auth.md) which allows certificate authentication
+### Creating with 3rd Party CA Client Cert Enrollment
+Note: This identity will be using the default [Authentication Policy](50-authentication-policies.md) which allows
+certificate authentication
 
-#### Ziti CLI:
+#### OpenZiti CLI
 
 It is currently not possible to create identities with a 3rd party certificate enrollment through the CLI.
 
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
-```text
+```json
 {
   "name": "Roger Wilco",
   "isAdmin": false,
@@ -116,17 +126,18 @@ It is currently not possible to create identities with a 3rd party certificate e
 }
 ```
 
-### Creating w/ Username/Password Enrollment
-Note: This identity will be using the default [authentication policy](./auth.md) which allows UPDB authentication
+### Creating with Username/Password Enrollment
+Note: This identity will be using the default [Authentication Policy](50-authentication-policies.md) which allows
+UPDB authentication
 
-#### Ziti CLI:
+#### OpenZiti CLI
 
 `ziti edge create identity [device|service|user] <name> --updb <username>`
 
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
-```text
+```json
 {
   "name": "Roger Wilco",
   "isAdmin": false,
@@ -136,18 +147,20 @@ Note: This identity will be using the default [authentication policy](./auth.md)
 }
 ```
 
-### Creating w/ JWT Authenticator
-Note: A valid [External JWT Signer](50-external-jwt-signers.mdx) must be created and an [authentication policy](./auth.md)
-must be defined that allows the identity to authenticate with that signer.
+### Creating with JWT Authenticator
 
-#### Ziti CLI:
+Note: A valid [External JWT Signer](70-external-jwt-signers.mdx) must be created and an
+[Authentication Policy](50-authentication-policies.md) must be defined that allows the identity to authenticate with
+that signer.
+
+#### OpenZiti CLI
 
 `ziti edge create identity [device|service|user] <name> --external-id "externalJWTId"`
 
 #### Edge Management API
 
 `POST /edge/management/v1/identities`
-```text
+```json
 {
   "name": "Roger Wilco",
   "isAdmin": false,
@@ -161,16 +174,16 @@ Deleting an Identity removes all directly associated data. This includes:
 
 - [API Sessions](../sessions.md#api-session)
   - [Sessions](../sessions.md#session)
-  - [Posture Data](../authorization/posture-checks.md#posture-data)
-  - [Session Certificates](./20-api-session-certificates.md)
+  - [Posture Data](../authorization/posture-checks/00-overview.md#posture-data)
+  - [Session Certificates](40-api-session-certificates.md)
 - Identity Role Attributes
-- [Authenticators](./auth.md#authenticators)
+- [Authenticators](00-auth.md#authenticators)
 - [Enrollments](../enrollment.mdx)
-- [MFA TOTP Configuration](./70-totp.md)
+- [MFA TOTP Configuration](90-totp.md)
 
 It does not remove entities are that re-usable between Identities:
 
-- [Authentication Policies](./30-authentication-policies.md)
+- [Authentication Policies](50-authentication-policies.md)
 - [Service Policies](../authorization/policies/overview.mdx)
 - [Edge Router Policies](../authorization/policies/overview.mdx)
 
