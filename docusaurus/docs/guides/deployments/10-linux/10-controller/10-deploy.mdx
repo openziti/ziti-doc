@@ -114,7 +114,7 @@ sudo -E /opt/openziti/etc/controller/bootstrap.bash < /dev/null
 1. `ZITI_CTRL_ADVERTISED_ADDRESS` — this node's permanent DNS name (required)
 1. `ZITI_CTRL_ADVERTISED_PORT` — TCP port (default: 1280)
 1. `ZITI_CLUSTER_NODE_NAME` — unique node name (required)
-1. `ZITI_CLUSTER_NODE_PKI` — path to a copy of the existing cluster's PKI directory containing the root CA cert and key (required). The root CA key is deleted after generating this node's intermediate CA.
+1. `ZITI_CLUSTER_NODE_PKI` — path to a copy of the existing cluster's PKI directory containing the root CA cert and key (required)
 
 #### Selective bootstrapping
 
@@ -134,7 +134,7 @@ Each component uses specific answers:
 
 ## Starting up
 
-Enable and start the service:
+The bootstrap script automatically enables and starts the service on success. If you need to start it manually (for example, after crafting a configuration by hand):
 
 ```text
 sudo systemctl enable --now ziti-controller.service
@@ -173,7 +173,7 @@ sudo -E systemctl edit ziti-controller.service
 sudo systemctl restart ziti-controller.service
 ```
 
-An example drop-in with commented directives is included at **/opt/openziti/etc/controller/override.conf.example**.
+The package includes a drop-in file with commented example directives at **/etc/systemd/system/ziti-controller.service.d/override.conf**. Your edits to this file are preserved across package upgrades.
 
 ## Logging
 

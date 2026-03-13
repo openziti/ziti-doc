@@ -53,7 +53,7 @@ The script creates a config file and enrolls the router with the controller. It 
 
 The script asks for:
 
-- **Router address** — permanent DNS name or IP address (default: localhost)
+- **Router address** — permanent DNS name or IP address (default: system hostname)
 - **Enrollment token** — the JWT from the controller (as a string or file path)
 
 ### Migrate an existing configuration
@@ -87,7 +87,7 @@ sudo -E /opt/openziti/etc/router/bootstrap.bash < /dev/null
 #### Router answers
 
 1. `ZITI_ENROLL_TOKEN` — enrollment token as a string or file path (required)
-1. `ZITI_ROUTER_ADVERTISED_ADDRESS` — permanent DNS name or IP address (required)
+1. `ZITI_ROUTER_ADVERTISED_ADDRESS` — permanent DNS name or IP address (default: system hostname)
 1. `ZITI_ROUTER_PORT` — TCP port for routers (default: 3022)
 
 #### Selective bootstrapping
@@ -101,7 +101,7 @@ You don't have to bootstrap everything at once. Each component can be enabled or
 
 ## Starting up
 
-Enable and start the service:
+The bootstrap script automatically enables and starts the service on success. If you need to start it manually (for example, after crafting a configuration by hand):
 
 ```text
 sudo systemctl enable --now ziti-router.service
@@ -128,7 +128,7 @@ sudo -E systemctl edit ziti-router.service
 sudo systemctl restart ziti-router.service
 ```
 
-An example drop-in with commented directives is included at **/opt/openziti/etc/router/override.conf.example**.
+The package includes a drop-in file with commented example directives at **/etc/systemd/system/ziti-router.service.d/override.conf**. Your edits to this file are preserved across package upgrades.
 
 ## Firewall
 
