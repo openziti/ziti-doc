@@ -56,7 +56,7 @@ $SKIP_LINKED_DOC  = "no"
 $SKIP_CLEAN       = "no"
 $ZITI_GEN_ZIP     = "no"
 $env:ZITI_DOC_GIT_LOC  = "$scriptRoot\docusaurus\docs\_remotes"
-$env:SDK_ROOT_TARGET   = "$scriptRoot\docusaurus\static\docs\reference\developer\sdk"
+if (-not $env:SDK_ROOT_TARGET) { $env:SDK_ROOT_TARGET = "$scriptRoot\docusaurus\static\docs\reference\developer\sdk" }
 $ZITI_DOCUSAURUS       = "yes"
 $SKIP_DOCUSAURUS_GEN   = "no"
 
