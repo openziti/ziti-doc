@@ -170,9 +170,9 @@ ziti edge create posture-check mac mac-list -m "14-B2-2C-E5-F0-61" -m "D5-22-E8-
 
 ### MFA {#mfa}
 
-The `MFA` Posture Check type enforces [MFA TOTP](/learn/core-concepts/security/authentication/90-totp.md)
+The `MFA` Posture Check type enforces [MFA TOTP](../../authentication/90-totp.md)
 configuration on a client. Posture Checks enforce access authorization. For authentication-level MFA enforcement,
-see [Authentication Policies](/learn/core-concepts/security/authentication/50-authentication-policies.md#secondary).
+see [Authentication Policies](../../authentication/50-authentication-policies.md#secondary).
 
 MFA Posture Checks support forcing a client to re-submit a valid TOTP on timeout, after locking/unlocking a
 device, or waking a device from sleep.

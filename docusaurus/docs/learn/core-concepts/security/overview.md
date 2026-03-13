@@ -86,7 +86,7 @@ in each section will lead to a more detailed explanation of the relevant topics.
 
 The edge defines a top level entity called an [Identity](authentication/80-identities.md). An Identity is a security
 principal that can bind (host) or dial (connect) to services over a network. Read more in the
-[Identity](/learn/core-concepts/identities/overview.mdx) section.
+[Identity](../identities/overview.mdx) section.
 
 ### Enrollment
 
