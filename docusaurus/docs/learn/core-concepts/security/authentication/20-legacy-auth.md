@@ -16,12 +16,12 @@ The same legacy authentication endpoints and `zt-session` mechanism apply to bot
 [Edge Client API](../../../../reference/developer/api/01-edge-client-reference.mdx) and the
 [Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx).
 
-## Authentication Endpoint
+## Authentication endpoint
 
 All legacy authentication is submitted to a single endpoint, with the authentication method specified as a query
 parameter:
 
-```
+```http
 POST /edge/client/v1/authenticate?method=<method>
 POST /edge/management/v1/authenticate?method=<method>
 ```
@@ -80,9 +80,10 @@ The JWT must pass signature, expiration, issuer, and audience validation as conf
 External JWT Signer. The signer's `claimsProperty` maps a claim in the JWT to the `id` or `externalId` on an
 identity to determine which identity is authenticating.
 
-## Authentication Response
+## Authentication response
 
-A successful authentication returns an [API Session](../sessions.md#api-session) object. The `token` field is the `zt-session` value.
+A successful authentication returns an [API Session](../sessions.md#api-session) object.
+The `token` field is the `zt-session` value.
 
 ```json
 {
@@ -101,24 +102,26 @@ A successful authentication returns an [API Session](../sessions.md#api-session)
 }
 ```
 
-When `authQueries` is non-empty, the [API Session](../sessions.md#api-session) is [partially authenticated](#partial-authentication) and secondary
-factors must be satisfied before full access is granted.
+When `authQueries` is non-empty, the [API Session](../sessions.md#api-session) is
+[partially authenticated](#partial-authentication) and secondary factors must be
+satisfied before full access is granted.
 
 ## Using the zt-session Token
 
 Include the `zt-session` token in all subsequent API requests:
 
-```
+```http
 zt-session: 44a20395-1a0e-469d-ad9b-80df8dbbf8c4
 ```
 
-The [API Session](../sessions.md#api-session) remains valid until it times out due to inactivity, is removed administratively, or the client
-explicitly logs out. The default session timeout is 30 minutes and is reset by any API activity or maintained
-edge router connection.
+The [API Session](../sessions.md#api-session) remains valid until it times out due to
+inactivity, is removed administratively, or the client explicitly logs out. The default
+session timeout is 30 minutes and is reset by any API activity or maintained edge router
+connection.
 
 Logout:
 
-```
+```http
 DELETE /edge/client/v1/current-api-session
 ```
 
@@ -143,7 +146,7 @@ authentication response includes an `authQueries` array listing the outstanding 
 When an Authentication Policy requires a secondary External JWT, the JWT must be included in the `Authorization`
 header on every API request:
 
-```
+```http
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...
 ```
 
@@ -162,4 +165,5 @@ A legacy API Session is **partially authenticated** when primary credentials hav
 All other operations require a fully authenticated session. Attempts to call other endpoints while partially
 authenticated return `401 Unauthorized`.
 
-Once all `authQueries` are satisfied, the session becomes fully authenticated. The same token is used for all subsequent requests.
+Once all `authQueries` are satisfied, the session becomes fully authenticated.
+The same token is used for all subsequent requests.

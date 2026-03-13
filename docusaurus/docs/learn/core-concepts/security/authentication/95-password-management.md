@@ -9,9 +9,11 @@ For identities using username password (UPDB) authenticators the following actio
 - administrative password resets
 - client initiated password rotation
 
-## Administrative Password Reset
+## Administrative Password reset
 
-Passwords may be reset via the [Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx) by an administrative client.
+Passwords may be reset via the
+[Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx) by an administrative
+client.
 
 ### OpenZiti CLI
 
@@ -21,16 +23,17 @@ Passwords may be reset via the [Edge Management API](../../../../reference/devel
 
 `PUT /edge/management/v1/authenticators/<id>`
 
-```text
+```json
 {
     "password": "<new-password>"
 }
 ```
 
-## Client Password Change
+## Client Password change
 
-Passwords may be reset via the [Edge Management API](../../../../reference/developer/api/index.mdx#edge-management-api) or 
-[Edge Client API](../../../../reference/developer/api/index.mdx#edge-client-api) by the currently authenticated client.
+Passwords may be reset via the [Edge Management API](../../../../reference/developer/api/index.mdx#edge-management-api)
+or [Edge Client API](../../../../reference/developer/api/index.mdx#edge-client-api) by the currently authenticated
+client.
 
 ### OpenZiti CLI
 
@@ -40,7 +43,7 @@ Passwords may be reset via the [Edge Management API](../../../../reference/devel
 
 `PUT /edge/client/v1/current-identity/authenticators/<id>`
 
-```text
+```json
 {
     "currentPassword": "<current-password>",
     "password": "<new-password>"

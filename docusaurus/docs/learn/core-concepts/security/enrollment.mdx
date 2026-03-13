@@ -2,11 +2,13 @@ import ExtJwtDocEnrollDetails from './_ext_jwt_enroll_details.md'
 
 # Enrollment
 
-Enrollment is the process of some Edge client or edge router associating itself with an OpenZiti network. Client enrollment
-results in the creation of an [Identity](./authentication/80-identities.md) or associating security credentials with a pre-provisioned [Identity](./authentication/80-identities.md).
+Enrollment is the process of some Edge client or edge router associating itself with an OpenZiti network. Client
+enrollment results in the creation of an [Identity](./authentication/80-identities.md) or associating security
+credentials with a pre-provisioned [Identity](./authentication/80-identities.md).
 OpenZiti Router enrollment is exclusively associating security credentials with a pre-provisioned Edge Router.
 
-Edge clients "learn" the controller's address and port when they enroll, so it is necessary to re-enroll or replace the [Identity](./authentication/80-identities.md) if the controller's advertised address or port changes.
+Edge clients "learn" the controller's address and port when they enroll, so it is necessary to re-enroll or replace
+the [Identity](./authentication/80-identities.md) if the controller's advertised address or port changes.
 
 ## Routers
 
@@ -15,7 +17,7 @@ available in the `enrollmentJWT` field.
 
 **Create:**
 `POST /edge/management/v1/edge-routers`
-```text
+```json
 {
   "name": "test3"
 }
@@ -23,7 +25,7 @@ available in the `enrollmentJWT` field.
 
 **Get:**
 `GET /edge/management/v1/edge-routers/PYvobLGzj`
-```text
+```json
 {
     "data": {
         ...,
@@ -42,7 +44,7 @@ To enroll a router, deliver the `enrollmentJWT` to the host that will run the ed
 
 `ziti router enroll -j <jwt_path>`
 
-### Router Enrollment Extension
+### Router Enrollment extension
 
 Routers will automatically maintain their enrollment by refreshing their certificates seven days before they expire.
 
@@ -50,15 +52,16 @@ Routers will automatically maintain their enrollment by refreshing their certifi
 
 Clients enroll in one of two major categories:
 
-- pre-provisioned - Identities are created before the client attempts to run and are provided with one-time-tokens to enroll
+- pre-provisioned - Identities are created before the client attempts to run and are provided with one-time-tokens
+  to enroll
   - OTT, OTT CA
 - post-provisioned - an [Identity](./authentication/80-identities.md) is created during enrollment
   - Auto CA
 
 ### OTT Enrollment
 
-OTT Enrollment involves creating an [Identity](./authentication/80-identities.md) and then delivering the enrollment JWT to client software that can then
-complete enrollment.
+OTT Enrollment involves creating an [Identity](./authentication/80-identities.md) and then delivering the enrollment
+JWT to client software that can then complete enrollment.
 
 #### Create
 
@@ -68,7 +71,7 @@ complete enrollment.
 
 #### Edge Management API
 `POST /edge/management/v1/identities`
-```text
+```json
 {
   "name": "test-user10",
   "type": "User",
@@ -91,7 +94,7 @@ complete enrollment.
 #### Edge Management API
 
 `GET /edge/management/v1/identities/-ItUkLGKUE`
-```text
+```json
 {
     "data": {
         ...
@@ -112,8 +115,9 @@ complete enrollment.
 }
 ```
 
-Alternatively, enrollments for an [Identity](./authentication/80-identities.md) can be reviewed at `/edge/management/v1/identities/<id>/enrollments` or
-`/edge/management/v1/enrollments` or `ziti edge list enrollments`.
+Alternatively, enrollments for an [Identity](./authentication/80-identities.md) can be reviewed at
+`/edge/management/v1/identities/<id>/enrollments` or `/edge/management/v1/enrollments` or
+`ziti edge list enrollments`.
 
 ### OTT CA Enrollment
 
@@ -126,7 +130,7 @@ OTT CA Enrollment requires that the enrolling client also has an existing client
 ##### Edge Management API
 
 `POST /edge/management/v1/identities`
-```text
+```json
 {
   "name": "test-user10",
   "type": "User",
@@ -145,14 +149,18 @@ An enrollment JWT can be retrieved in the same manner as [OTT Enrollment](#ott-e
 ### Auto CA Enrollment
 
 Auto CA enrollment allows a [3rd Party CA](./authentication/30-third-party-cas.md) to have clients enroll with a
-OpenZiti network without first creating an [Identity](./authentication/80-identities.md) or distributing a JWT enrollment token. Create a
+OpenZiti network without first creating an [Identity](./authentication/80-identities.md) or distributing a JWT
+enrollment token. Create a
 [3rd Party CA](./authentication/30-third-party-cas.md) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
 
-The name of enrolling clients is controlled by the `identityNameFormat` of the [3rd Party CA](./authentication/30-third-party-cas.md).
+The name of enrolling clients is controlled by the `identityNameFormat` of the
+[3rd Party CA](./authentication/30-third-party-cas.md).
 The /format supports a number of replacement strings:
 
-- `[caName]` - the OpenZiti `name` of the [3rd Party CA](./authentication/30-third-party-cas.md) that validates the enrolling certificate
-- `[caId]` - the OpenZiti `id` of the [3rd Party CA](./authentication/30-third-party-cas.md) that validates the enrolling certificate
+- `[caName]` - the OpenZiti `name` of the [3rd Party CA](./authentication/30-third-party-cas.md) that validates the
+  enrolling certificate
+- `[caId]` - the OpenZiti `id` of the [3rd Party CA](./authentication/30-third-party-cas.md) that validates the
+  enrolling certificate
 - `[commonName]` - the common name of the enrolling certificate
 - `[requestedName]` - clients can submit a requested name during enrollment
 - `[identityId]` - the `id` of the created Identity
@@ -183,26 +191,24 @@ The [External JWT Signers](./authentication/70-external-jwt-signers.mdx) options
 
 These values are included on the OpenZiti CLI command `ziti edge create ext-jwt-signer`.
 
-#### Identity Uniqueness
+#### Identity uniqueness
 
-The `claimsProperty` that selects the external id of the enrolling [Identity](./authentication/80-identities.md) must be unique. Attempting to enroll
-with further duplicate external ids will result in an error. If desired, remove the previously enrolled [Identity](./authentication/80-identities.md)
-to allow re-enrollment.
+The `claimsProperty` that selects the external id of the enrolling [Identity](./authentication/80-identities.md)
+must be unique. Attempting to enroll with further duplicate external ids will result in an error. If desired, remove
+the previously enrolled [Identity](./authentication/80-identities.md) to allow re-enrollment.
 
-#### Enrollment Process
+#### Enrollment process
 
 In order for Auto External JWT Signer Enrollment to happen, a client must be used that implements the enrollment flow.
 This process is similar to External JWT Signer authentication (e.g. OIDC or OAuth).
 
-1. The client queries the public External JWT Signers list on the [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx)
-    ```text
+1. The client queries the public External JWT Signers list on the
+   [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx)
+    ```http
     GET /edge/client/v1/external-jwt-signers
     ```
-    
-    ```text
-    200 OK
-    Content-Type: application/json
-    
+
+    ```json
     {
         meta: {...},
         data: [
@@ -227,29 +233,27 @@ This process is similar to External JWT Signer authentication (e.g. OIDC or OAut
 4. The client receives a JWT from the external IdP.
 5. The client uses the JWT for enrollment. (see below)
 
-#### Enrollment Token Submission
+#### Enrollment token submission
 
 The client can submit the JWT to the controller for enrollment that results in either certificate-based authentication
 (`enrollToCert` is true) or token-based authentication (`enrollToToken` is true).
 
 
-##### Certificate Enrollment
+##### Certificate enrollment
 
-Certificate enrollment requires the creation of a [Certificate Signing Request (CSR)](https://en.wikipedia.org/wiki/Certificate_signing_request). The CSR can contain any values desired. However, they will
-be ignored by the controller. The only requirement is that a properly configured key set was used to create and sign
-the CSR.
+Certificate enrollment requires the creation of a
+[Certificate Signing Request (CSR)](https://en.wikipedia.org/wiki/Certificate_signing_request). The CSR can contain
+any values desired. However, they will be ignored by the controller. The only requirement is that a properly
+configured key set was used to create and sign the CSR.
 
-```text
+```http
 POST /edge/client/v1/enroll/token
 Authorization: Bearer <jwt from IdP>
 
 <CSR>
 ```
 
-```text
-200 OK
-Content-Type: application/json
-
+```json
 {
     "meta": {},
     "data": {
@@ -259,15 +263,15 @@ Content-Type: application/json
 }
 ```
 
-##### Token Enrollment
+##### Token enrollment
 
 Token enrollment is a simple request to the controller with the JWT.
-```text
+```http
 POST /edge/client/v1/enroll/token
 Authorization: Bearer <jwt from IdP>
 ```
 
-### Client Re-Enrollment
+### Client re-Enrollment
 
 Clients may request to extend enrollments that generated x509 certificates if the client certificate was issued by
 OpenZiti. If the client's certificate was issued by a [3rd Party CA](./authentication/30-third-party-cas.md), the

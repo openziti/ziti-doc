@@ -4,7 +4,8 @@ OpenZiti has API Session and Session types.
 
 ## API Session
 
-API Sessions represent a client that is either partially or fully authenticated as a specific [Identity](authentication/80-identities.md).
+API Sessions represent a client that is either partially or fully authenticated as a specific
+[Identity](authentication/80-identities.md).
 They are used to:
 
 - scope [authentication](authentication/00-auth.md) and [Posture Data](authorization/posture-checks/00-overview.md)
@@ -44,7 +45,8 @@ OpenZiti does not track API Sessions for OIDC-authenticated clients. The `/edge/
 reflect only legacy `zt-session` based sessions. OIDC access tokens are self-contained JWTs and are not enumerable
 via these endpoints.
 
-OIDC tokens can be revoked administratively using the [Edge Management API](../../../reference/developer/api/02-edge-management-reference.mdx) and CLI:
+OIDC tokens can be revoked administratively using the
+[Edge Management API](../../../reference/developer/api/02-edge-management-reference.mdx) and CLI:
 
 - `GET /edge/management/v1/revocations` - list active revocation entries
 - `GET /edge/management/v1/revocations/{id}` - get a single revocation entry
@@ -67,7 +69,7 @@ API Sessions are defined in the client and management Open API 2.0 specification
 
 Example `GET /edge/management/v1/current-api-session` response (legacy auth):
 
-```text
+```json
 {
   "data": {
     "_links": {
@@ -140,7 +142,7 @@ Example `GET /edge/management/v1/current-api-session` response (legacy auth):
 }
 ```
 
-#### Full vs Partial Authentication
+#### Full vs. partial Authentication
 
 API Sessions may exist in two states:
 
@@ -170,7 +172,7 @@ While partially authenticated under legacy auth, the API Session can only be use
 Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example
 MFA challenge represented as an Authentication Query is provided below.
 
-```text
+```json
 {
   "authQueries": [
     {
@@ -190,14 +192,15 @@ The existence of any Authentication Query on an API Session represents a partial
 in this state will have reduced access to their target API. The data structure for Authentication Queries is defined
 in the client and management Open API 2.0 specifications under the label `authQueryDetail`.
 
-#### Associated Data & Removal
+#### Associated data and removal
 
-API Sessions, may be used to create ephemeral certificates called [API Session Certificates](authentication/40-api-session-certificates.md)
-and Sessions for service access. Additionally, API Sessions are used to scope [Posture Data](authorization/posture-checks/00-overview.md#posture-data).
+API Sessions may be used to create ephemeral certificates called
+[API Session Certificates](authentication/40-api-session-certificates.md) and Sessions for service access.
+Additionally, API Sessions are used to scope [Posture Data](authorization/posture-checks/00-overview.md#posture-data).
 When an API Session is removed for any reason, all associated data is also removed. As an example, when removing an
-API Session used to create a [Session](#session) the [Session](#session) will also be removed. Removing a [Session](#session) will also terminate any
-existing connections that used the security token associated with that [Session](#session) and prevent it from being used to
-establish new connections.
+API Session used to create a [Session](#session) the [Session](#session) will also be removed. Removing a
+[Session](#session) will also terminate any existing connections that used the security token associated with that
+[Session](#session) and prevent it from being used to establish new connections.
 
 Removal of an API Session occurs in the following scenarios:
 
@@ -223,7 +226,7 @@ timestamp include:
 The legacy API Session timeout defaults to 30 minutes and can be configured in `edge.api.sessionTimeout` in the
 controller configuration file.
 
-```text
+```yaml
 edge:
   api:
   ...
@@ -234,12 +237,12 @@ edge:
     ...
 ```
 
-#### Administrative Removal
+#### Administrative removal
 
-Through the [Edge Management API](../../../reference/developer/api/index.mdx#edge-management-api) any API Session may be forcefully removed
-by calling `DELETE /edge/management/v1/api-sessions/<id>` with an empty body.
+Through the [Edge Management API](../../../reference/developer/api/index.mdx#edge-management-api) any API Session may be
+forcefully removed by calling `DELETE /edge/management/v1/api-sessions/<id>` with an empty body.
 
-#### Client Removal (Logout)
+#### Client removal (logout)
 
 A client may terminate its own API Session at any time by calling: `DELETE /edge/client/v1/current-api-session`
 
@@ -247,8 +250,9 @@ A client may terminate its own API Session at any time by calling: `DELETE /edge
 
 A Session represents access to a specific service for dialing or binding. They are scoped to the
 [API Session](#api-session) that was used to create them. They are requested from the
-controller by a client through the [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx). The result of that request is a security token representing
-the Session and a list of Edge Routers that the client may use to dial or bind the target service through.
+controller by a client through the [Edge Client API](../../../reference/developer/api/01-edge-client-reference.mdx).
+The result of that request is a security token representing the Session and a list of Edge Routers that the client
+may use to dial or bind the target service through.
 
 Sessions are removed when the parent [API Session](authentication/00-auth.md#api-sessions) is removed,
 [policies](authorization/policies/overview.mdx) are changed to deny access, or when [Posture

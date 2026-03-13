@@ -23,7 +23,7 @@ The Posture Check system provides continuous, device-aware access control:
 - **Separation of concerns**: Posture Checks are defined and managed independently from service access policies,
   enabling reuse and flexible composition across many policies.
 
-## Two Posture Check Systems
+## Two Posture Check systems
 
 OpenZiti supports two posture check enforcement models, selected automatically based on the type of API Session in use:
 
@@ -62,8 +62,8 @@ The following Posture Check types are supported by both systems:
 - **Windows Domain** - requires the client be a member of a specific domain
 
 Posture Check definitions are created and managed through the Edge Management API or CLI regardless of which
-enforcement system is in use. See the [Legacy](10-legacy-posture.md#types) or [OIDC](20-oidc-posture.md#types) pages for type details
-and creation examples.
+enforcement system is in use. See the [Legacy](10-legacy-posture.md#types) or [OIDC](20-oidc-posture.md#types) pages
+for type details and creation examples.
 
 ## Associating with Service Policies
 
@@ -82,6 +82,6 @@ without Posture Checks will always pass.
 ## Evaluation
 
 Posture Checks are evaluated as events are encountered rather than on a fixed polling interval. Once a failure state
-is detected, access restrictions begin immediately as the Service Policy fails its associated Posture Checks. The MFA Posture Check
-(see [Legacy](10-legacy-posture.md#mfa) / [OIDC](20-oidc-posture.md#mfa)) is one exception. It defines grace
-periods for lock/unlock and wake events before the check begins to fail.
+is detected, access restrictions begin immediately as the Service Policy fails its associated Posture Checks. The
+MFA Posture Check (see [Legacy](10-legacy-posture.md#mfa) / [OIDC](20-oidc-posture.md#mfa)) is one exception. It
+defines grace periods for lock/unlock and wake events before the check begins to fail.

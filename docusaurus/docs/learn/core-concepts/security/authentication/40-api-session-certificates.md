@@ -7,17 +7,21 @@ sidebar_position: 40
 API Session Certificates are ephemeral short-lived x509 certificates that can be created through a CSR process after
 an API Session is [fully authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication). 
 
-## Lifecycle & Scope
+## Lifecycle and scope
 
-The certificates are scoped by the "valid before" and "valid after" dates in addition to the API Session. If an [API Session](/learn/core-concepts/security/sessions.md#api-session) is 
-removed (expiration, logout, etc.) the API Session Certificates created by that API Session are no longer valid.
+The certificates are scoped by the "valid before" and "valid after" dates, in addition to the
+API Session. If an [API Session](/learn/core-concepts/security/sessions.md#api-session) is
+removed (expiration, logout, etc.) the API Session Certificates created by that API Session
+are no longer valid.
 
-API Session Certificates may only be used by the [API Session](/learn/core-concepts/security/sessions.md#api-session) that created them. Attempting to use an [API Session](/learn/core-concepts/security/sessions.md#api-session)
-Certificate to connect to and edge router without the matching [API Session](/learn/core-concepts/security/sessions.md#api-session) security token will be rejected.
+API Session Certificates may only be used by the [API Session](/learn/core-concepts/security/sessions.md#api-session)
+that created them. Attempting to use an API Session Certificate to connect to an edge router without the matching
+[API Session](/learn/core-concepts/security/sessions.md#api-session) security token will be rejected.
 
 ## Use
 
-API Session Certificates are useful for identities that do not use x509 certificates as a primary authentication mechanism.
+API Session Certificates are useful for identities that do not use x509 certificates as a primary
+Authentication mechanism.
 API Sessions that use x509 certificates during primary authentication can use that  certificate for connections to
 Edge Routers. For non-x509 primary authentication mechanisms (JWT, UPDB, etc.) API Session Certificates must be used
 as no certificates will be available for use to connect to Edge Routers.
@@ -29,16 +33,16 @@ needs to be a valid PEM-encoded CSR in the `csr` field. The CSR should contain a
 Sensitive fields such as key usage will be ignored. Additional OpenZiti-specific SANs
 may be added.
 
-### Request Payload
-```text
+### Request payload
+```json
 {
   "csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICij...\n-----END CERTIFICATE REQUEST-----"
 }
 ```
 
-### Response Payload
+### Response payload
 
-```text
+```json
 {
     "data": {
         "_links": {
@@ -54,7 +58,7 @@ may be added.
 }
 ```
 
-## List & Detail
+## List and detail
 
 API Session Certificates for the current [API Session](/learn/core-concepts/security/sessions.md#api-session) may be: 
 

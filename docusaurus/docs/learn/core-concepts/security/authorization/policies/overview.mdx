@@ -67,18 +67,20 @@ There are a few reasons you might want to have pools of edge routers dedicated
 particular services or service groups.
 
   * Resource isolation due to SLAs
-  * Geographic/political boundaries. Some services may need to be accessible only from specific areas to comply with local laws 
+  * Geographic/political boundaries. Some services may need to be accessible only from specific areas to comply with
+    local laws
 
 Having at least one Service Edge Router Policy is vital because without at least one,
 no services will be able to accept traffic over the OpenZiti network because traffic must 
 enter the network via an edge router.
 
-## Roles and Role Attributes
+## Roles and role attributes
 In order for policies to work they need a way to specify which entities to include
 in the policy. All OpenZiti policies work the same way. 
 
   * The entities included in policies (Identities, services and edge routers) can all be assigned role attributes
-      * For example: an Identity could be given the attributes `sales`, `eu` if that Identity belongs to a sales person from the European Union
+      * For example: an Identity could be given the attributes `sales`, `eu` if that Identity belongs to a sales
+        person from the European Union
   * Each policy has two list of roles, one for each entity type that the policy is relating 
       * Service policies have identityRoles and serviceRoles
       * Edge router policies have identityRoles and edgeRouterRoles
@@ -87,29 +89,34 @@ in the policy. All OpenZiti policies work the same way.
       * For example: a service policy might have 
           * `identityRoles = [#sales, #north-america, @81cc68d0-700a-491f-8e98-4b43a0b30a9f]` 
           * `serviceRoles = [#office, @738006f2-e33e-4964-945f-7431000d229f]`
-      * Note that external tools such as the CLI and the ZAC will likely use names instead of IDs. So the roles might instead look like 
+      * Note that external tools such as the CLI and the ZAC will likely use names instead of IDs. So the roles might
+        instead look like
           * `identityRoles = [#sales, #north-america, @jsmith-laptop]` 
           * `serviceRoles = [#office, @crm-suite]`
-  * Each policy also has a semantic. The semantic dictates how multiple role attributes will be interpreted. `[#sales, #eu]` could mean every Identity which has `#sales` *and* `#eu`, or it could mean every Identity which has `#sales` *or* `#eu`
+  * Each policy also has a semantic. The semantic dictates how multiple role attributes will be interpreted.
+    `[#sales, #eu]` could mean every Identity which has `#sales` *and* `#eu`, or it could mean every Identity which
+    has `#sales` *or* `#eu`
       * The `allOf` semantic will include only entities have *all* the listed role attributes
       * The `anyOf` semantic will include all entities that have *any of* the listed role attributes
   * No matter the semantic, any entities which are listed by `@id` will be included in the policy
-  * There is a special role attribute `#all` which will include all entities of a given type. This is useful for simpler setups which may not be segmenting edge routers, as well as for development and testing.
+  * There is a special role attribute `#all` which will include all entities of a given type. This is useful for
+    simpler setups which may not be segmenting edge routers, as well as for development and testing.
 
-## Policy Interaction
+## Policy interaction
 **Important Note:** When an Identity is using a service, the Identity
 and service must have at least one on-line edge router in common in
 order for a connection to be made.
 
-When an Identity is trying to establish an [API Session](../../sessions.md#api-session) to use or host a service, the OpenZiti
-controller will verify that it has been granted access to the service via Service Policy. Once the [API Session](../../sessions.md#api-session) is
-established, the controller will return a list of edge routers that the Identity
+When an Identity is trying to establish an [API Session](../../sessions.md#api-session) to use or host a service,
+the OpenZiti controller will verify that it has been granted access to the service via Service Policy. Once the
+[API Session](../../sessions.md#api-session) is established, the controller will return a list of edge routers that
+the Identity
 can use to connect to that service. The list will be all edge routers which **both**
 the Identity and service have access to. It is possible that an Identity may have
 access to a service and access to edge routers, but none of those edge routers
 can be used to access that particular service. 
 
-### Policy Advisor 
+### Policy advisor
 To help diagnose issues there is a policy advisor API which the CLI has a wrapper for.
 
     $ ziti edge policy-advisor services -q
@@ -130,7 +137,7 @@ and Identity, and see if there are any common problems, such as:
   * Do a service and Identity have no edge routers in common?
   * Do a service and Identity have edge routers in common, but they are all off-line?
 
-## Managing Policies
+## Managing policies
 
 ### Creating a Service Policy
 <CreateSPsMd />

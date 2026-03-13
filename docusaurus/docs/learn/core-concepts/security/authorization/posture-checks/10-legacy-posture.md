@@ -71,7 +71,7 @@ Versions may be validated with any valid [Semver 2.0](https://semver.org/) state
 specify ranges by major, minor, and patch levels. For operating systems that do not have an explicit patch level,
 the build number is used instead.
 
-#### Semver Examples
+#### Semver examples
 
 - `>=1.2.7 <1.3.0` matches 1.2.7, 1.2.8, and 1.2.99, but not 1.2.6, 1.3.0, or 1.1.0
 - `>=1.2.7` matches 1.2.7, 1.2.8, 2.5.3, and 1.3.9, but not 1.2.6 or 1.1.0
@@ -81,7 +81,7 @@ the build number is used instead.
 
 ##### OpenZiti CLI
 
-```
+```bash
 ziti edge create posture-check os windows-and-android -o "WINDOWS:>10.0.0,ANDROID:>6.0.0" -a check-attribute1
 ```
 
@@ -116,7 +116,7 @@ MAC addresses not included in the check will fail.
 
 ##### OpenZiti CLI
 
-```
+```bash
 ziti edge create posture-check mac mac-list -m "14-B2-2C-E5-F0-61" -m "D5-22-E8-B7-FF-48" -a check-attribute1
 ```
 
@@ -152,7 +152,7 @@ device, or waking a device from sleep.
 
 ##### OpenZiti CLI
 
-```
+```bash
 ziti edge create posture-check mfa my-mfa-check -s 3600 -w -u -a check-attribute1
 ```
 
@@ -185,7 +185,7 @@ optionally check a SHA-256 hash and digital signers on Windows.
 
 ##### OpenZiti CLI
 
-```
+```bash
 ziti edge create posture-check process-multi my-proc-multi AnyOf "Windows,Linux" "C:\\program1.exe,/usr/local/program1" -a check-attribute1
 ```
 
@@ -224,7 +224,7 @@ The `DOMAIN` Posture Check type verifies that a Windows client has joined a spec
 
 ##### OpenZiti CLI
 
-```
+```bash
 ziti edge create posture-check domain domain-list -d domain1 -d "domain2" -a check-attribute1
 ```
 
@@ -293,7 +293,7 @@ the controller.
 }
 ```
 
-### Viewing Failed Service Requests
+### Viewing failed service requests
 
 It is possible to view the last fifty failed service requests due to Posture Check failure for an Identity.
 

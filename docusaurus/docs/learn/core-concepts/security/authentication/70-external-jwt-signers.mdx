@@ -8,29 +8,35 @@ import ExtJwtDocEnrollDetails from '../_ext_jwt_enroll_details.md'
 
 External JWT Signers allow external identity providers to facilitate authentication with an OpenZiti network. External
 JWT Signers can be added as a static x509 certificate or via a JWKS endpoint. Authenticating clients can provide
-a JWT as a primary authentication mechanism to obtain an [API Session](/learn/core-concepts/security/sessions.md#api-session). Additionally, the JWT can be required on
-all REST API calls if desired by using an Authentication Policy that requires it as a secondary factor.
+a JWT as a primary authentication mechanism to obtain an
+[API Session](/learn/core-concepts/security/sessions.md#api-session).
+Additionally, the JWT can be required on all REST API calls if desired by using an Authentication Policy that requires
+it as a secondary factor.
 
-JWT is described in [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519) and on [Wikipedia](https://en.wikipedia.org/wiki/JSON_Web_Token).
-X509 PKI is described in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) an on [Wikipedia](https://en.wikipedia.org/wiki/X.509)
+JWT is described in [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519) and on
+[Wikipedia](https://en.wikipedia.org/wiki/JSON_Web_Token).
+X509 PKI is described in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and on
+[Wikipedia](https://en.wikipedia.org/wiki/X.509)
 
 ## Usage
 
-External JWT Signers are used in conjunction with Authentication Policies to allow [Identities](./80-identities.md) to authenticate using a
-JWT. External JWT Signers can be configured to match an [Identity](./80-identities.md) through the `claimsProperty` and `useExternalId`
-fields. `claimsProperty` can change which field in the JWT is matched to the `id` or `externalId` on an [Identity](./80-identities.md).
-`useExternalId` when true will match the `claimsProperty` to an Identity's `externalId` field. If false, it will match
-to the `id` field.
+External JWT Signers are used in conjunction with Authentication Policies to allow [Identities](./80-identities.md)
+to authenticate using a JWT. External JWT Signers can be configured to match an [Identity](./80-identities.md)
+through the `claimsProperty` and `useExternalId` fields. `claimsProperty` can change which field in the JWT is
+matched to the `id` or `externalId` on an [Identity](./80-identities.md). `useExternalId` when true will match the
+`claimsProperty` to an Identity's `externalId` field. If false, it will match to the `id` field.
 
-_Note: `externalId` values on [Identities](./80-identities.md) are enforced to be unique and are matched case-sensitively. The value from the JWT claim must match the identity's `externalId` exactly._
+_Note: `externalId` values on [Identities](./80-identities.md) are enforced to be unique and are matched
+case-sensitively. The value from the JWT claim must match the identity's `externalId` exactly._
 
 `claimsProperty` can contain JWT standard claims or private claims. An example usage would be an `email` JWT private
 claim and OpenZiti [Identities](./80-identities.md) with `externalId` set to email addresses.
 
 ### Enrollment
 
-External JWT Signers can be used to enroll [Identities](./80-identities.md) that are not pre-created by administrators. Enrollment is 
-controlled by the `enrollToCertEnabled` and `enrollToTokenEnabled` fields on `enabled` External JWT Signers. See the 
+External JWT Signers can be used to enroll [Identities](./80-identities.md) that are not pre-created by
+administrators. Enrollment is controlled by the `enrollToCertEnabled` and `enrollToTokenEnabled` fields on `enabled`
+External JWT Signers. See the
 [Enrollment - Auto External JWT Signer Enrollment](../enrollment.mdx#auto-external-jwt-signer-enrollment) 
 documentation for more information.
 
@@ -58,7 +64,8 @@ External JTW Signers are used to validate JWTs for authentication. This validati
 
 - the `iss` field on the JWT must match the `issuer` field on the External JWT Signer
 - the `aud` field on the JWT must match the `audience` field on the External JWT Signer
-- the `sub` or field defined by `claimsProperty` must match the `id` field on an [Identity](./80-identities.md) (or `externalId` if `useExternalId` is true)
+- the `sub` or field defined by `claimsProperty` must match the `id` field on an [Identity](./80-identities.md)
+  (or `externalId` if `useExternalId` is true)
 - the JWT must be signed by the x509 certificate or a JWK from the JWKS endpoint defined on the External JWT Signer
 - the JWT `kid` must match the External JWT `kid` field for x509 certificates or the `kid` in a JWKS response
 - the JWT must not be expired
@@ -69,7 +76,7 @@ An External JWT Signer that uses a private `email` claim and matches on `externa
 be created as follows:
 
 `POST /edge/management/v1/ext-jwt-signers`
-```text
+```json
 {
   "name": "My External JWT Signer",
   "enabled": true,
@@ -85,7 +92,7 @@ An External JWT Signer that uses the `sub` claim and matches on `id` with a x509
 be created as follows:
 
 `POST /edge/management/v1/ext-jwt-signers`
-```text
+```json
 {
   "name": "My External JWT Signer",
   "enabled": true,
@@ -98,12 +105,13 @@ be created as follows:
 
 ## Client Authentication Fields
 
-Unauthenticated clients can enumerate External JWT Signers via the [Edge Client API](../../../../reference/developer/api/01-edge-client-reference.mdx). The response contains only the fields
-necessary for a client to initiate authentication with the target identity provider - management fields such as
+Unauthenticated clients can enumerate External JWT Signers via the
+[Edge Client API](../../../../reference/developer/api/01-edge-client-reference.mdx). The response contains only the
+fields necessary for a client to initiate authentication with the target identity provider — management fields such as
 `issuer`, `audience`, and `certPem` are not exposed.
 
 `GET /edge/client/v1/external-jwt-signers`
-```text
+```json
 {
   "data": [
     {

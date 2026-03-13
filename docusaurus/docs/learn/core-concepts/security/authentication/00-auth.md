@@ -16,7 +16,7 @@ OpenZiti supports two authentication systems:
   directly to the Edge Client or Edge Management API and receive an opaque `zt-session` token. Legacy authentication is
   **deprecated** and will be removed in a future release. Existing clients should migrate to OIDC.
 
-## Authentication Flow
+## Authentication flow
 
 Both OIDC and legacy authentication follow the same conceptual flow: a client submits a primary credential to
 establish its identity, then satisfies any secondary factors requested by the controller before gaining full access.
@@ -41,17 +41,20 @@ authentication. See each section for details.
 
 ## Primary Authentication
 
-Primary authentication establishes the authenticating [Identity](80-identities.md). It is the first step in all authentication flows.
+Primary authentication establishes the authenticating [Identity](80-identities.md). It is the first step in all
+authentication flows.
 
 Primary authentication factors include:
 
 - **x509 certificates** - the client presents a TLS client certificate associated with an [Identity](80-identities.md)
-- **External JWTs** - the client presents a JWT issued by a configured [External JWT Signer](70-external-jwt-signers.mdx)
+- **External JWTs** - the client presents a JWT issued by a configured
+  [External JWT Signer](70-external-jwt-signers.mdx)
 - **Username/password** - the client submits a username and password stored in the internal UPDB authenticator
 
 Valid primary authentication methods for an [Identity](80-identities.md) are controlled by its
-[Authentication Policy](50-authentication-policies.md). If no [Authentication Policy](50-authentication-policies.md) is assigned to an [Identity](80-identities.md),
-the system `default` policy applies.
+[Authentication Policy](50-authentication-policies.md). If no
+[Authentication Policy](50-authentication-policies.md) is assigned to an
+[Identity](80-identities.md), the system `default` policy applies.
 
 ### Authenticators
 
@@ -68,13 +71,13 @@ credentials are stored as **authenticators** and are associated with the identit
 
 Authenticators for an identity may be listed via the CLI:
 
-```
+```bash
 ziti edge list authenticators
 ```
 
 or via the [Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx):
 
-```
+```http
 GET /edge/management/v1/authenticators
 ```
 

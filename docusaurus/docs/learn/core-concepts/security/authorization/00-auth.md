@@ -1,8 +1,9 @@
 
 # Authorization
 
-After becoming [fully authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication), an [Identity](../authentication/80-identities.md) may now 
-discover services and Edge Routers available on the network via the Edge Client API they are authorized to access.
+After becoming [fully authenticated](/learn/core-concepts/security/sessions.md#full-vs-partial-authentication), an
+[Identity](../authentication/80-identities.md) may now discover services and Edge Routers available on the network
+via the Edge Client API they are authorized to access.
 Both service and edge router authorization are controlled through [policies](policies/overview.mdx). Additionally,
 Service Policies may have additional requirements for authorization based on the environment or attributes of a
 client in the form of [Posture Checks](posture-checks/00-overview.md).

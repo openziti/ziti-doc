@@ -5,14 +5,16 @@ sidebar_position: 50
 # Authentication Policies
 
 Authentication Policies restrict the [primary authentication](00-auth.md#primary-authentication) methods available to
-[Identities](80-identities.md) and may enforce additional [secondary authentication](00-auth.md#secondary-authentication) factors. OpenZiti is
-deployed with a default [Authentication Policy](#) that has the id `default`. This Authentication Policy may be updated,
+[Identities](80-identities.md) and may enforce additional
+[secondary authentication](00-auth.md#secondary-authentication)
+factors. OpenZiti is deployed with a default [Authentication Policy](#) that has the id `default`. This Authentication
+Policy may be updated,
 but not deleted. This default Authentication Policy is used when Identities are created and an Authentication
 Policy is not specified.
 
 
 Example: Authentication Policy
-```text
+```json
 {
     "createdAt": "2022-05-20T14:02:53.359Z",
     "id": "default",
@@ -64,9 +66,9 @@ Fields:
 - `allowed` - enables/disabled x509 certificate authentication
 - `allowExpiredCerts` - allows expired client certificates to authenticate
 
-When certificate authentication is `allowed`, client certificates issued by the OpenZiti PKI and any verified and enabled
-[3rd Party CAs](30-third-party-cas.md) become valid authentication paths. When disabled an identity will not be able
-to authenticate with any client certificate.
+When certificate authentication is `allowed`, client certificates issued by the OpenZiti PKI and any verified and
+enabled [3rd Party CAs](30-third-party-cas.md) become valid authentication paths. When disabled an identity will
+not be able to authenticate with any client certificate.
 
 If `allowExpiredCerts` is true, client certificate expiration will be ignored during validation. This setting is 
 useful in scenarios where client are running software that has lapsed and cannot be re-enrolled or their client
@@ -89,7 +91,8 @@ If `allowed` is true, authentication is accepted from the External JWT Signers l
 #### Username Password (updb)
 
 - `allowed` - whether UPDB may be used for authentication
-- `maxAttempts` - the maximum number of invalid logins allowed before an identity is locked for `lockoutDurationMinutes`, 0 for never
+- `maxAttempts` - the maximum number of invalid logins allowed before an identity is locked for
+  `lockoutDurationMinutes`, 0 for never
 - `lockoutDurationMinutes` - the number of minutes to lock identities after `maxAttempts` is reached, 0 for forever
 
 ### Secondary
@@ -97,17 +100,19 @@ If `allowed` is true, authentication is accepted from the External JWT Signers l
 The secondary section contain only two top-level configuration values:
 
 - `requireTotp` - if true authenticating clients must have [MFA TOTP](90-totp.md) enabled
-- `requireExtJwtSigner` - if set to an id of an [External JWT Signer](70-external-jwt-signers.mdx) every request must have a valid JWT in the HTTP `Authorization` header
+- `requireExtJwtSigner` - if set to an id of an [External JWT Signer](70-external-jwt-signers.mdx), every request
+  must have a valid JWT in the HTTP `Authorization` header
 
-## Creating and Updating
+## Creating and updating
 
 
-Authentication policies are managed via the [Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx).
+Authentication policies are managed via the
+[Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx).
 
 ### Create
 
 `POST /edge/management/v1/auth-policies`
-```text
+```json
 {
   "name": "require-totp",
   "primary": {
@@ -135,7 +140,7 @@ Authentication policies are managed via the [Edge Management API](../../../../re
 ### Update
 
 `PATCH /edge/management/v1/auth-policies/<id>`
-```text
+```json
 {
   "secondary": {
     "requireTotp": true
@@ -145,10 +150,12 @@ Authentication policies are managed via the [Edge Management API](../../../../re
 
 `PUT /edge/management/v1/auth-policies/<id>` replaces the full policy. `PATCH` updates only the supplied fields.
 
-## Effect on Existing Sessions
+## Effect on existing Sessions
 
 
-Authentication Policy changes take effect on **new authentications only**. Existing fully authenticated [API Sessions](../sessions.md) are not re-evaluated when a policy changes. Clients that are already authenticated continue to operate under the
-policy that was in effect when they authenticated. To force re-authentication, the existing [API Sessions](../sessions.md) must be
-terminated administratively via `DELETE /edge/management/v1/api-sessions/<id>` (legacy) or by issuing a
+Authentication Policy changes take effect on **new authentications only**. Existing fully authenticated
+[API Sessions](../sessions.md) are not re-evaluated when a policy changes. Clients that are already authenticated
+continue to operate under the policy that was in effect when they authenticated. To force re-authentication, the
+existing [API Sessions](../sessions.md) must be terminated administratively via
+`DELETE /edge/management/v1/api-sessions/<id>` (legacy) or by issuing a
 [revocation](../sessions.md#api-session) (OIDC).
