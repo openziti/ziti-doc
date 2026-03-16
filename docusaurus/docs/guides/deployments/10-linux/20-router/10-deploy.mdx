@@ -49,11 +49,14 @@ You need a config file and an enrollment with the controller. The easiest way to
 sudo /opt/openziti/etc/router/bootstrap.bash
 ```
 
-The script creates a config file and enrolls the router with the controller. It prompts for any answers it needs. If an answer has already been supplied (through the answer file, environment, or stdin), the script skips that prompt.
+The script creates a config file and enrolls the router with the controller. It prompts for answers interactively. When run non-interactively (e.g., with an answer file), it uses the provided values without prompting.
+
+On success, the script enables and starts the service.
 
 The script asks for:
 
-- **Router address** — permanent DNS name or IP address (default: system hostname)
+- **Permanent external address** — DNS name or IP of this router (required, no default)
+- **Port** — TCP port (default: 3022)
 - **Enrollment token** — the JWT from the controller (as a string or file path)
 
 ### Migrate an existing configuration
@@ -72,23 +75,24 @@ If you're scripting deployments or using configuration management, you can suppl
 
 Answers can come from any combination of:
 
-- **Answer file** — use **/opt/openziti/etc/router/bootstrap.env** as a reference template for the available variables
+- **Answer file** — copy **/opt/openziti/etc/router/bootstrap.env** as a template, fill in the values, and pass it as the first argument. The bootstrap script reads the file but never modifies it.
 - **Environment** — export answers as environment variables and pass them with `sudo -E`
-- **Stdin** — pipe answers as `KEY=VALUE` lines (one per line) into the script
 
-Answers are written to a temporary file during bootstrap and deleted automatically on success. If bootstrap fails, the temporary file is preserved in `/tmp/` for debugging.
+Precedence (highest to lowest): environment variables → answer file → service.env defaults.
 
-To run without prompts, redirect stdin:
+Answers are written to a temporary file during bootstrap and deleted automatically on success. If bootstrap fails, the temporary file is preserved and a re-run command is printed.
 
 ```text
-sudo -E /opt/openziti/etc/router/bootstrap.bash < /dev/null
+cp /opt/openziti/etc/router/bootstrap.env /tmp/my-answers.env
+# edit /tmp/my-answers.env with your values
+sudo -E /opt/openziti/etc/router/bootstrap.bash /tmp/my-answers.env
 ```
 
 #### Router answers
 
+1. `ZITI_ROUTER_ADVERTISED_ADDRESS` — permanent external address of this router (required)
+1. `ZITI_ROUTER_PORT` — TCP port (default: 3022)
 1. `ZITI_ENROLL_TOKEN` — enrollment token as a string or file path (required)
-1. `ZITI_ROUTER_ADVERTISED_ADDRESS` — permanent DNS name or IP address (default: system hostname)
-1. `ZITI_ROUTER_PORT` — TCP port for routers (default: 3022)
 
 #### Selective bootstrapping
 
@@ -148,7 +152,7 @@ LISTEN 0      4096                          *:3022             *:*    users:(("z
 
 ### Controller address override
 
-The router learns the controller's address from the enrollment token, so you don't normally need to supply it. If you need to override the address in the enrollment token, supply these answers via environment variables or stdin:
+The router learns the controller's address from the enrollment token, so you don't normally need to supply it. If you need to override the address in the enrollment token, supply these answers via the answer file or environment variables:
 
 - `ZITI_CTRL_ADVERTISED_ADDRESS` — controller DNS name or IP address
 - `ZITI_CTRL_ADVERTISED_PORT` — controller port (default: 1280)
