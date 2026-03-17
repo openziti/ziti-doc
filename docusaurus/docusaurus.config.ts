@@ -52,7 +52,6 @@ const config: Config = {
     baseUrl: `/`,
     trailingSlash: undefined,
     onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'throw',
     favicon: 'img/favicon.ico',
     onDuplicateRoutes: 'throw',
 
@@ -70,6 +69,9 @@ const config: Config = {
     },
     markdown: {
         mermaid: true,
+        hooks: {
+            onBrokenMarkdownLinks: 'throw',
+        },
     },
     themes: [
         ['@docusaurus/theme-classic', {
