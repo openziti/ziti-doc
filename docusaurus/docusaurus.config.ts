@@ -23,8 +23,8 @@ const openziti = 'openziti';
 const docsBase = `/docs/${openziti}`;
 
 const REMARK_MAPPINGS = [
-    { from: '@selfhosteddocs',  to: 'https://netfoundry.io/docs/selfhosted' },
     { from: '@openzitidocs',    to: `${docsBase}`},
+    { from: '@selfhosteddocs',  to: 'https://netfoundry.io/docs/selfhosted' },
     { from: '@zrokdocs',        to: 'https://netfoundry.io/docs/zrok' },
     { from: '@frontdoordocs',   to: 'https://netfoundry.io/docs/frontdoor' },
     { from: '@zlandocs',        to: 'https://netfoundry.io/docs/zlan' },
