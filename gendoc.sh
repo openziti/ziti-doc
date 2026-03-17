@@ -2,6 +2,13 @@
 
 shopt -s expand_aliases
 
+# Make sed work on both macOS (BSD) and Linux (GNU)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  SED_INPLACE_FLAG="-i ''"
+else
+  SED_INPLACE_FLAG="-i"
+fi
+
 function clone_or_pull {
   remote=$1
   dir="${ZITI_DOC_GIT_LOC}/${2}"
@@ -28,7 +35,7 @@ function _fix_helm_examples {
   if [ -f "$HELM_ROUTER_README" ]; then
     echo "✅ found file, running sed..."
     set -x
-    sed -i -E "s@\]\(\.?/examples/?\)@](${HELM_ROUTER_README_EXAMPLES_URL})@g" "$HELM_ROUTER_README"
+    sed ${SED_INPLACE_FLAG} -E "s@\]\(\.?/examples/?\)@](${HELM_ROUTER_README_EXAMPLES_URL})@g" "$HELM_ROUTER_README"
     set +x
     echo "✅ sed completed successfully."
   else
@@ -42,11 +49,24 @@ function _fix_helm_examples {
 fix_helm_ziti_edge_tunnel() {
   local _target="${ZITI_DOC_GIT_LOC}/helm-charts/charts/ziti-edge-tunnel/README.md"
   echo "fixing $_target to work with docusaurus"
-  sed -i 's|<https://openziti.io>|\&lt;https://openziti.io\&gt;|g' "$_target"
-  sed -i 's|<https://github.com/openziti/ziti-tunnel-sdk-c>|\&lt;https://github.com/openziti/ziti-tunnel-sdk-c>|g' "$_target"
-  sed -i 's#sresponse\\\\s<|>\$#sresponse\\\\s\&lt;|>\$#g' "$_target"
+  sed ${SED_INPLACE_FLAG} 's|<https://openziti.io>|\&lt;https://openziti.io\&gt;|g' "$_target"
+  sed ${SED_INPLACE_FLAG} 's|<https://github.com/openziti/ziti-tunnel-sdk-c>|\&lt;https://github.com/openziti/ziti-tunnel-sdk-c>|g' "$_target"
+  sed ${SED_INPLACE_FLAG} 's#sresponse\\\\s<|>\$#sresponse\\\\s\&lt;|>\$#g' "$_target"
 }
 
+fix_docker_router_readme() {
+  local DOCKER_ROUTER_README="${ZITI_DOC_GIT_LOC}/ziti-cmd/dist/docker-images/ziti-router/README.md"
+
+  echo "🔧 fix_docker_router_readme: checking file: $DOCKER_ROUTER_README"
+  if [ -f "$DOCKER_ROUTER_README" ]; then
+    echo "✅ found file, running sed to fix broken link..."
+    sed ${SED_INPLACE_FLAG} 's|/docs/guides/deployments/linux/router/deploy/|/guides/deployments/10-linux/20-router/10-deploy.mdx|g' "$DOCKER_ROUTER_README"
+    echo "✅ sed completed successfully."
+  else
+    echo "❌ file not found: $DOCKER_ROUTER_README"
+    exit 1
+  fi
+}
 
 set -e
 
@@ -118,6 +138,7 @@ fi
 
 fix_helm_ziti_edge_tunnel
 _fix_helm_examples
+fix_docker_router_readme
 
 if [[ "${SKIP_CLEAN}" == no ]]; then
   if test -d "${SDK_ROOT_TARGET}"; then
