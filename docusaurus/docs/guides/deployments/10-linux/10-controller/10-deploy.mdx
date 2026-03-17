@@ -46,29 +46,32 @@ You need a PKI, a config file, and a database. The easiest way to get all three 
 sudo /opt/openziti/etc/controller/bootstrap.bash
 ```
 
-The script walks you through creating a PKI, config file, and database. It prompts for any answers it needs. If an answer has already been supplied (through the answer file, environment, or stdin), the script skips that prompt.
+The script creates a PKI, config file, and database. It prompts for answers interactively. When run non-interactively (e.g., with an answer file), it uses the provided values without prompting.
 
 The controller always runs in clustered mode, even for a single-node deployment.
+
+On success, the script enables and starts the service, then prints a `ziti edge login` command you can copy-paste.
 
 #### New cluster
 
 This is the common case — a single controller, or the first node of a multi-node cluster. The script asks for:
 
-- **Create a new cluster** — **Y** (default)
-- **Node name** — unique name for this controller (default: first label of the FQDN, e.g., `ctrl1`)
-- **Trust domain** — shared by all cluster nodes (default: everything after the first dot, e.g., `ziti.example.com`). Used for SPIFFE identity
-- **Controller address** — permanent DNS name (default: `{node name}.{trust domain}`)
+- **Are you joining an existing cluster?** — **N** (default = new cluster)
+- **Permanent external address** — DNS name of this controller (required)
+- **Node name** — unique name for this controller (default: first label of the address, e.g., `ctrl1` from `ctrl1.example.com`)
+- **Trust domain** — shared by all cluster nodes (default: remaining labels of the address, e.g., `example.com`). Used for SPIFFE identity
 - **Port** — TCP port (default: 1280)
-- **Admin username** (default: admin)
-- **Admin password** — initializes the cluster (a random password is offered if you press Enter)
+- **Admin password** — generate a random password (default), or enter manually
+- **Console** — configure the OpenZiti Console web UI binding (installs the `openziti-console` package separately)
+- **Certificate renewal timer** — enable automatic monthly leaf cert renewal
 
 #### Join an existing cluster
 
-Answer **N** at the first prompt. The script asks for:
+Answer **Y** at the "joining an existing cluster" prompt. The script asks for:
 
+- **Permanent external address** — this node's DNS name
 - **Node name** — must be unique across all nodes in the cluster
 - **PKI directory** — path to a copy of the first node's **pki/** directory (from **/var/lib/ziti-controller/**), containing the root CA cert and key (`root/certs/root.cert` and `root/keys/root.key`). The join script uses the root CA to issue this node's unique intermediate CA (edge enrollment signer) during the initial join, and the root CA is also required later to renew that signer (default intermediate expiry is 10 years). The join script does not delete the root CA from the provided PKI directory or automatically renew the intermediate CA, so you can reuse the same PKI directory for future joins and renewals.
-- **Controller address** — this node's permanent DNS name
 - **Port** — TCP port (default: 1280)
 
 ### Migrate an existing configuration
@@ -87,33 +90,34 @@ If you're scripting deployments or using configuration management, you can suppl
 
 Answers can come from any combination of:
 
-- **Answer file** — use **/opt/openziti/etc/controller/bootstrap.env** as a reference template for the available variables
+- **Answer file** — copy **/opt/openziti/etc/controller/bootstrap.env** as a template, fill in the values, and pass it as the first argument. The bootstrap script reads the file but never modifies it.
 - **Environment** — export answers as environment variables and pass them with `sudo -E`
-- **Stdin** — pipe answers as `KEY=VALUE` lines (one per line) into the script
 
-Answers are written to a temporary file during bootstrap and deleted automatically on success. If bootstrap fails, the temporary file is preserved in `/tmp/` for debugging.
+Precedence (highest to lowest): environment variables → answer file → service.env defaults.
 
-To run without prompts, redirect stdin:
+Answers are written to a temporary file during bootstrap and deleted automatically on success. If bootstrap fails, the temporary file is preserved and a re-run command is printed.
 
 ```text
-sudo -E /opt/openziti/etc/controller/bootstrap.bash < /dev/null
+cp /opt/openziti/etc/controller/bootstrap.env /tmp/my-answers.env
+# edit /tmp/my-answers.env with your values
+sudo -E /opt/openziti/etc/controller/bootstrap.bash /tmp/my-answers.env
 ```
 
 #### New cluster answers
 
-1. `ZITI_CTRL_ADVERTISED_ADDRESS` — permanent DNS name (required)
+1. `ZITI_CTRL_ADVERTISED_ADDRESS` — permanent external address (required)
 1. `ZITI_CTRL_ADVERTISED_PORT` — TCP port (default: 1280)
-1. `ZITI_CLUSTER_NODE_NAME` — unique node name (required)
-1. `ZITI_CLUSTER_TRUST_DOMAIN` — cluster trust domain for SPIFFE identity (required)
+1. `ZITI_CLUSTER_NODE_NAME` — unique node name (default: first label of the address)
+1. `ZITI_CLUSTER_TRUST_DOMAIN` — cluster trust domain for SPIFFE identity (default: remaining labels of the address)
+1. `ZITI_PWD` — admin password (default: generated random password)
 1. `ZITI_USER` — admin username (default: admin)
-1. `ZITI_PWD` — admin password (required)
 
 #### Join cluster answers
 
 1. `ZITI_BOOTSTRAP_CLUSTER` — set to `false` (required)
-1. `ZITI_CTRL_ADVERTISED_ADDRESS` — this node's permanent DNS name (required)
+1. `ZITI_CTRL_ADVERTISED_ADDRESS` — this node's permanent external address (required)
 1. `ZITI_CTRL_ADVERTISED_PORT` — TCP port (default: 1280)
-1. `ZITI_CLUSTER_NODE_NAME` — unique node name (required)
+1. `ZITI_CLUSTER_NODE_NAME` — unique node name (default: first label of the address)
 1. `ZITI_CLUSTER_NODE_PKI` — path to a copy of the existing cluster's PKI directory containing the root CA cert and key (required)
 
 #### Selective bootstrapping
