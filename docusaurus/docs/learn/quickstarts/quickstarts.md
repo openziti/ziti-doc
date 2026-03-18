@@ -4,13 +4,9 @@ sidebar_position: 3
 id: quickstartOverview
 ---
 
-Learn how to start integrating Zero Trust directly into your application! Explore our quickstarts and learn how to
-get your own open source zero trust network overlay setup.
+Learn how to set up your own open-source zero-trust network overlay and start securing your applications, whether you're working with existing software or building something new.
 
-OpenZiti is bringing Zero Trust to networks all over the world! To really get the most out of Ziti, you'll want to embed
-it **directly** into your applications. Ziti provides numerous SDKs for this very purpose. If you're not ready to embed
-Zero Trust right into your application you can still get started by using one or more of the
-[tunneling apps](/learn/core-concepts/clients/choose.mdx).
+OpenZiti works with your applications at whatever level makes sense. Use lightweight [tunnelers](/reference/tunnelers/index.mdx) to add zero trust to existing applications with no code changes, or embed our [SDKs](/reference/developer/sdk/index.mdx) directly for the strongest security posture. Either way, your services stay dark: no open ports, no public endpoints, no exposure to unauthorized users.
 
 :::info
 Quickstarts are short-lived networks that are great for learning how to use OpenZiti. For long-lived production deployments, see the [deployment guides](@openzitidocs/category/deployments).

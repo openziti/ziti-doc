@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 export function WhatIsOpenZiti() {
     return (
         <div>
-            <span style={{color: "var(--ifm-color-primary)", fontWeight:"bold"}}>OpenZiti</span> is a free and open source project focused on bringing zero trust networking principles directly into any application. The project provides all the pieces required to implement a zero trust overlay network and provides all the tools necessary to integrate zero trust into your existing solutions. The OpenZiti project believes the principles of zero trust shouldn't stop at your network, those ideas belong <span style={{color: "var(--ifm-color-primary)", fontWeight:"bold"}}>in your application</span>.
+            <span style={{color: "var(--ifm-color-primary)", fontWeight:"bold"}}>OpenZiti</span> is a free, open-source zero-trust networking platform that makes network services <span style={{color: "var(--ifm-color-primary)", fontWeight:"bold"}}>invisible to unauthorized users</span>. The project provides everything you need to create a zero trust overlay network - controllers, routers, tunnelers, and SDKs - so you can secure both existing applications and new ones. Whether you add zero trust at the network level, the host level, or directly inside your application, every connection is authenticated, authorized, and encrypted end to end.
         </div>
     )
 }

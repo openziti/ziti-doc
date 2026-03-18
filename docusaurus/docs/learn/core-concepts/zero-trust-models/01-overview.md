@@ -4,7 +4,7 @@ title: Zero Trust Models
 hide_table_of_contents: true
 ---
 
-All OpenZiti deployment architectures can be categorized by three types of Zero Trust Edge Access Security Models. Many of them will be overlapping at least 2 of these initially, especially the brownfield deployments.  That gives customers a great deal of flexibility in terms of deployment options depending on where they are in the journey to eventually reach the ZiTi Application Access Security Model, i.e most secured.
+All OpenZiti deployment architectures can be categorized by three Zero Trust Edge Access Security Models. Many deployments will use more than one model, especially in brownfield environments. Each model offers a different tradeoff between integration effort and security posture - choose the one that fits your requirements, or mix and match across services.
 
 ## App Access (ZTAA)
 

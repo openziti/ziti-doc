@@ -118,7 +118,7 @@ function SuperPowerSection ({ className }: { className?: string }) {
                 { icon: '🧬', title: 'Strong Identities', description: <p>IPs are not identities. OpenZiti leverages proven cryptographically verifiable identities.</p> },
                 { icon: '🧠', title: 'Identity-Aware Access', description: <p>Fine-grained authorization with posture checking ensures only valid identities are allowed to connect to services.</p> },
                 { icon: '🔒', title: 'No Open Ports', description: <p>Services completely vanish from the internet, becoming invisible to attackers and scan tools.</p> },
-                { icon: '📦', title: 'App-Level Embedding', description: <p>SDK integration brings zero trust directly into your applications, no agents required.</p> },
+                { icon: '🔌', title: 'Flexible Integration', description: <p>Add zero trust with tunnelers for existing apps, or embed SDKs directly for the strongest posture. No VPN clients required.</p> },
                 { icon: '🔁', title: 'Smart Routing', description: <p>The OpenZiti Fabric intelligently routes traffic through the optimal path for security and performance.</p> },
                 { icon: '🔐', title: 'End-to-End Encryption', description: <p>Libsodium-powered cryptography ensures data is secure in transit, <b>always</b>.</p> },
                 { icon: '🧭', title: 'Private DNS', description: <p>Authenticated, private DNS resolves service names to secure overlay tunnels, not IP addresses.</p> },
@@ -209,7 +209,7 @@ const ztModels = {
             <p>OS firewalls require <span className={styles.trustedNetwork}>inbound port rules</span> per service</p>,
             "Allows zero trust network access on devices that can't install an OpenZiti Tunneler",
         ],
-        ideal: "Ideal for organizations beginning their zero trust journey with immediate security needs.",
+        ideal: "Ideal for organizations that need zero trust access without modifying applications or hosts.",
     },
     ztha: {
         id: 'ztha',
@@ -224,7 +224,7 @@ const ztModels = {
             <p>OS firewall operates in <span className={styles.zeroTrustNetwork}>deny-by-default mode</span> (unauthorized east-west traffic is impossible)</p>,
             <p><b>Only</b> the host network is a <span className={styles.trustedNetwork}>trusted network zone</span></p>
         ],
-        ideal: "Perfect for organizations looking to secure traffic in complex environments.",
+        ideal: "The most common production model. Secures existing applications with no code changes.",
     },
     ztaa: {
         id: 'ztaa',
@@ -240,7 +240,7 @@ const ztModels = {
             "Compiled into applications by leveraging OpenZiti SDKs",
             "Achieves true process to process, end-to-end encryption"
         ],
-        ideal: <p>The <b>ultimate</b> goal for organizations seeking comprehensive zero trust security.</p>,
+        ideal: "The strongest security posture. Applications hold their own cryptographic identity.",
     },
 };
 
