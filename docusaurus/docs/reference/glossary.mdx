@@ -55,7 +55,7 @@ A controller is a process that is installed on a host, which allows it to coordi
 
 ## Ziti Edge, Edge
 
-The Ziti Edge implements the zero trust connectivity framework as an overlay application on top of the Ziti Fabric. The Ziti Edge provides connectivity implementations for a number of important endpoint types, including applications that embed Ziti connectivity through the Ziti Edge SDK. The Ziti Edge provides fallback connectivity solutions for non-Ziti applications using components like the Ziti tunnelers, and the Ziti proxy.
+The Ziti Edge implements the zero trust connectivity framework as an overlay application on top of the Ziti Fabric. The Ziti Edge provides connectivity for endpoints through two primary mechanisms: tunnelers that add zero trust to existing applications with no code changes, and the Ziti Edge SDK for embedding zero trust directly into applications. Both approaches provide authentication, authorization, and end-to-end encryption.
 
 ## Ziti Enabled Application
 
@@ -71,7 +71,7 @@ The Ziti Fabric provides the core of the network overlay. The Ziti Fabric implem
 
 ## Ziti Network, Ziti
 
-Ziti is a modern, programmable network overlay with associated edge components, for application-embedded, zero trust network connectivity, written by developers for developers.
+Ziti is a modern, programmable zero trust network overlay. It provides authenticated, authorized, and encrypted connectivity for any application - whether integrated via tunnelers, SDKs, or edge routers.
 
 Ziti is NetFoundry's next-generation programmable networking product. Ziti is used to create networks.
 
@@ -94,7 +94,7 @@ as a identity. When used with a Ziti SDK it is possible to create a truly zero t
 
 ## [Ziti Tunneler, Tunneler](/reference/tunnelers/index.mdx)
 
-A tunneler provides connectivity for applications that are not Ziti enabled. Our tunneler implementations provide an underlay connectivity component (TUN, tproxy, etc.), and then use the Ziti Endpoint SDK such that they can bridge connectivity onto the Ziti network.
+A tunneler adds zero trust connectivity to existing applications with no code changes. Tunnelers provide an underlay connectivity component (TUN, tproxy, etc.) and use the Ziti Endpoint SDK to bridge application traffic onto the Ziti network.
 
 ## Zitification, Zitified, Zitify
 
