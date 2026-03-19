@@ -30,10 +30,10 @@
   --aaSpaceXl: 8rem;
   --aaTransition: all 0.3s ease;
 
-  --btnPrimaryLight: #158eed;
-  --btnPrimary: #00569a;
-  --getStartedStartColor: #3498dbFF;
-  --getStartedEndColor: #2c3e50FF;
+  --btnPrimaryLight: var(--aaPrimaryLight);
+  --btnPrimary: var(--aaPrimary);
+  --getStartedStartColor: var(--aaPrimary);
+  --getStartedEndColor: var(--aaSecondaryDark);
   
   --zitiSuperpowerBg: rgba(76, 45, 179, 0.1);
   
@@ -83,7 +83,7 @@
   .aaBtn {
     align-items: center;
     background: var(--btnPrimary);
-    border: none;
+    border: 2px solid var(--btnPrimaryLight);
     border-radius: var(--aaRadiusSm);
     color: var(--aaTextLight);
     cursor: pointer;
@@ -503,6 +503,15 @@
     opacity: 0.8;
   }
 
+  .aaStartOptionText a {
+    color: var(--aaSecondaryLight);
+    text-decoration: underline;
+  }
+
+  .aaStartOptionText a:hover {
+    color: var(--aaSecondary);
+  }
+
   @media (max-width: 768px) {
     .aaStartOptions {
       flex-direction: column;
@@ -593,7 +602,7 @@
   .aaHeroSection {
     width: 100%;
     margin-top: var(--space-xxl);
-    margin-bottom: var(--space-xxl);
+    margin-bottom: var(--space-md);
     flex-direction: row;
     display: flex;
   }

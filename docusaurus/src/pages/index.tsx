@@ -44,9 +44,7 @@ function HeroSection({ className }: { className?: string }) {
                             No more IP conflicts, no more guessing, just secure, zero-trust connectivity that works anywhere.</p>
                         <div className={styles.aaHeroButtons}>
                             <a href="#deploy_an_overlay"
-                               className={clsx(styles.aaBtn, styles.aaBtnOutline)}>Try NetFoundry For Free</a>
-                            <a href={`/docs/openziti/learn/quickstarts/network/hosted`}
-                               className={styles.aaBtn}>Host OpenZiti Yourself</a>
+                               className={styles.aaBtn}>Get Started</a>
                         </div>
                     </div>
                 </div>
@@ -82,7 +80,7 @@ function GetStartedSection ({ className }: { className?: string }) {
                             <p className={styles.aaStartOptionText}>
                                 Cloud-hosted and fully operated by NetFoundry. No infrastructure to manage—just secure, scalable networking with SLAs and 24/7 support.
                             </p>
-                            <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/"
+                            <a href="https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/"
                                className={btns}>Deploy an Overlay</a>
                         </div>
                         <div className={styles.aaStartOption}>
@@ -90,15 +88,16 @@ function GetStartedSection ({ className }: { className?: string }) {
                             <p className={styles.aaStartOptionText}>
                                 Self-hosted by you, with full support from NetFoundry. Ideal for regulated environments or where you need to control infrastructure.
                             </p>
-                            <a href="https://netfoundry.io/products/netfoundry-platform/netfoundry-on-premise/"
+                            <a href="https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/"
                                className={btns}>Get Started</a>
                         </div>
                         <div className={styles.aaStartOption}>
                             <h3 className={styles.aaStartOptionTitle}>Community<br />Self-Hosted</h3>
                             <p className={styles.aaStartOptionText}>
-                                Deploy and operate your own OpenZiti network using our documentation and community support—no commercial support included.
+                                Deploy and operate your own OpenZiti network using our documentation and community support - no commercial support included.
+                                Start with a quickstart, then see our <a href="/docs/openziti/category/deployments/">deployment guides</a> when you're ready for production.
                             </p>
-                            <a href={`/docs/openziti/learn/quickstarts/network/hosted`} className={btns}>View Deployment Guide</a>
+                            <a href="/docs/openziti/learn/quickstarts/" className={btns}>View Quickstarts</a>
                         </div>
                     </div>
                     <a href="https://openziti.discourse.group/" className={btns}>Join the Community</a>
@@ -297,9 +296,9 @@ function App() {
                 <meta data-rh="true" name="nf-pages-version" content="NFLayoutVersion" />
             </Head>
             <HeroSection className={styles.aaabbb}/>
+            <GetStartedSection />
             <ZeroTrustModels windowSize={windowSize} />
             <SuperPowerSection />
-            <GetStartedSection />
         </NetFoundryLayout>
     );
 }
