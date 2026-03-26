@@ -1,0 +1,81 @@
+---
+title: Get started
+sidebar_position: 0
+id: get-started
+---
+
+import { DownloadSection } from '@netfoundry/docusaurus-theme/ui';
+
+Start an OpenZiti overlay in just a couple of minutes and start exploring. The `ziti edge quickstart` command runs a 
+short-lived controller and router together in a single process, perfect for learning OpenZiti and exploring zero trust 
+firsthand. When you cancel the process (using `ctrl+c`) the overlay cleans up after itself. When you're ready to go 
+further and want to make a long-lived overlay, check out the [deployment guides](@openzitidocs/category/deployments) 
+to stand up a network that will last.
+
+## 1. Download the `ziti` CLI
+
+<DownloadSection
+  windows={{ links: [
+    { arch: 'x86_64', url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-windows-amd64.zip' },
+    { arch: 'ARM64',  url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-windows-arm64.zip' },
+  ]}}
+  macos={{ links: [
+    { arch: 'x86_64', url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-darwin-amd64.tar.gz' },
+    { arch: 'ARM64',  url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-darwin-arm64.tar.gz' },
+  ]}}
+  linux={{ links: [
+    { arch: 'x86_64', url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-linux-amd64.tar.gz' },
+    { arch: 'ARM64',  url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-linux-arm64.tar.gz' },
+    { arch: 'ARM',    url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-linux-arm.tar.gz' },
+  ]}}
+/>
+
+## 2. Run the quickstart
+
+By default, the controller and router will be configured to use the machine's hostname as the address advertised to clients.
+This often works fine for local dev or on a local network, but it might not be sufficient. Use the `--ctrl-address` and 
+`--router-address` flags to set an advertised address that every device you want on the overlay can actually reach.
+
+```bash
+ziti edge quickstart \
+  --ctrl-address "quickstart.demo.openziti.io" \
+  --router-address "quickstart.demo.openziti.io"
+```
+
+That's it. The controller and router will both start up and be ready to secure your traffic.
+
+## 3. Verify using `ziti`
+
+After about 10 seconds your overlay will be up and running. Confirm the controller's management API is ready for you to
+start exploring by logging in.
+
+```bash
+ziti edge login --username admin --password admin
+```
+
+Check the `router-quickstart` edge router is online.
+
+```bash
+$ ziti edge list edge-routers
+
+╭────────────┬───────────────────┬────────┬───────────────┬──────┬────────────╮
+│ ID         │ NAME              │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
+├────────────┼───────────────────┼────────┼───────────────┼──────┼────────────┤
+│ evaPs5.hzn │ router-quickstart │ true   │ true          │    0 │ public     │
+╰────────────┴───────────────────┴────────┴───────────────┴──────┴────────────╯
+results: 1-1 of 1
+```
+
+### Optional flags
+
+| Flag                | Default      | Purpose                                                          |
+|---------------------|--------------|------------------------------------------------------------------|
+| `--ctrl-address`    | *(hostname)* | advertised address for the control plane and API                 |
+| `--ctrl-port`       | `1280`       | listen port for the control plane and API                        |
+| `--router-address`  | *(hostname)* | advertised address for the integrated router                     |
+| `--router-port`     | `3022`       | listen port for the integrated router                            |
+| `--username` / `-u` | `admin`      | admin username                                                   |
+| `--password` / `-p` | `admin`      | admin password                                                   |
+| `--home`            | *(temp dir)* | write config to a permanent directory so state survives restarts |
+| `--no-router`       | —            | start the controller only, without an integrated router          |
+| `--verbose`         | —            | show additional output                                           |
