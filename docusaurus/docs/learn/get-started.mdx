@@ -6,9 +6,11 @@ id: get-started
 
 import { DownloadSection } from '@netfoundry/docusaurus-theme/ui';
 
+# Get started with OpenZiti
+
 Start an OpenZiti overlay in just a couple of minutes and start exploring. The `ziti edge quickstart` command runs a 
 short-lived controller and router together in a single process, perfect for learning OpenZiti and exploring zero trust 
-firsthand. When you cancel the process (using `ctrl+c`) the overlay cleans up after itself. When you're ready to go 
+firsthand. When you cancel the process (using `ctrl+c`), the overlay cleans up after itself. When you're ready to go 
 further and want to make a long-lived overlay, check out the [deployment guides](@openzitidocs/category/deployments) 
 to stand up a network that will last.
 
@@ -32,7 +34,7 @@ to stand up a network that will last.
 
 ## 2. Run the quickstart
 
-By default, the controller and router will be configured to use the machine's hostname as the address advertised to clients.
+By default, the controller and router are configured to use the machine's hostname as the address advertised to clients.
 This often works fine for local dev or on a local network, but it might not be sufficient. Use the `--ctrl-address` and 
 `--router-address` flags to set an advertised address that every device you want on the overlay can actually reach.
 
@@ -46,14 +48,14 @@ That's it. The controller and router will both start up and be ready to secure y
 
 ## 3. Verify using `ziti`
 
-After about 10 seconds your overlay will be up and running. Confirm the controller's management API is ready for you to
-start exploring by logging in.
+After about 10 seconds, your overlay will be up and running. Confirm the controller's management API is ready for you to
+start exploring.
 
 ```bash
 ziti edge login --username admin --password admin
 ```
 
-Check the `router-quickstart` edge router is online.
+Check that the `router-quickstart` edge router is online.
 
 ```bash
 $ ziti edge list edge-routers
