@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 ## Creating an Identity
 
 The mechanism for creating identities is influenced by how your Ziti network is setup, specifically how the PKI is
-established. Identities are integrally linked to the PKI configured in a given Ziti network and directly affects how
+established. Identities are integrally linked to the PKI configured in a given Ziti network and directly affect how
 identities are created and enrolled. There are generally three enrollment methods for identities:
 
 * One Time Token (ott) identities using the configured PKI
@@ -46,7 +46,7 @@ the permanent identity JSON file will be installed by running the `enroll` comma
 
 ### 3rd Party CA - Overview
 
-The controller is capable of using an existing PKI for authentication and authorization rather than to PKI
+The controller is capable of using an existing PKI for authentication and authorization rather than the PKI
 configured in the controller.  Certificates that are not controlled by the controller are referred to as "3rd
 party". If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
 to use a 3rd Party CA this section is for you.
@@ -56,7 +56,7 @@ Reusing a PKI is not a simple topic and managing and maintaining a PKI is out of
 :::
 
 A 3rd Party CA will need to be created and the public certificate uploaded into the controller. After using an
-existing PKI to reuse/generate a certificate, the controller will be to create identities which will be expected to
+existing PKI to reuse/generate a certificate, the controller will be able to create identities which will be expected to
 present a certificate during the connection process that is valid per the provided certificate.
 
 #### Adding a 3rd Party CA to the Ziti Controller
@@ -90,7 +90,7 @@ the client uses an already acquired signed certificate as its client certificate
 certificate is validated against the CA certificate tied to the one time token.
 
 Similar to the [OTT Enrollment](#one-time-token-ott) process, identities must be provisioned ahead of enrollment in
-order to generate one time token required and to creat the jwt that can be delivered to enrolling devices. This means
+order to generate one time token required and to create the jwt that can be delivered to enrolling devices. This means
 that the provisioning of the identities and client certificates must be coordinated. Identities can be enrolled with a one time token flow similar to the [one time token flow](#one-time-token-ott).
 
 #### 3rd Party CA - Auto Enrolled
