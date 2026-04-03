@@ -22,10 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     name: POST Webhook
     steps:
-      - name: debug
-        run:   echo "$GITHUB_CONTEXT"
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
       - uses: openziti/ziti-mattermost-action-py@v1
         if: |
           env.ZHOOK_URL != null
@@ -35,8 +31,6 @@ jobs:
             && (contains(github.event.comment.body, 'Building') || contains(github.event.comment.body, 'Ignored'))
           )
           && !(github.event_name == 'pull_request_review' && github.event.review.state != 'approved')
-        env:
-          ZHOOK_URL: ${{ secrets.ZHOOK_URL }}
         with:
           zitiId: ${{ secrets.ZITI_MATTERMOST_IDENTITY }}
           webhookUrl: ${{ secrets.ZHOOK_URL_DEV_NOTIFICATIONS }}

@@ -9,14 +9,13 @@ import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
 import path from "node:path";
 import {openZitiFooter} from "./src/components/footer";
 import {
-    LogLevel,
-    remarkCodeSections,
     remarkReplaceMetaUrl,
     remarkScopedPath,
     remarkYamlTable,
     remarkYouTube,
     timedPlugin
 } from "@netfoundry/docusaurus-theme/plugins";
+import { openZitiDocsPluginConfig } from './docusaurus-plugin-openziti-docs';
 
 const baseUrl = '/';
 const openziti = 'openziti';
@@ -170,21 +169,7 @@ const config: Config = {
         ['@docusaurus/plugin-google-tag-manager', {id: `openziti-gtm`, containerId: 'GTM-5SF399H3'}],
         ['@docusaurus/plugin-content-pages',{id: `openziti-root-pages`, path: `src/pages`, routeBasePath: '/'}],
         ['@docusaurus/plugin-content-pages',{id: `openziti-pages`, path: `src/pages`, routeBasePath: 'openziti'}],
-        [
-            '@docusaurus/plugin-content-docs',
-            {
-                id: 'openziti',
-                path: `docs`,
-                routeBasePath: `${docsBase}`,
-                sidebarPath: `sidebars.ts`,
-                includeCurrentVersion: true,
-                remarkPlugins: [
-                    [remarkReplaceMetaUrl, {from: '@staticoz', to: `${docsBase}`}],
-                    [remarkScopedPath, { mappings: REMARK_MAPPINGS }],
-                    [remarkCodeSections, { logLevel: LogLevel.Debug }],
-                ],
-            },
-        ],
+        openZitiDocsPluginConfig(path.resolve(__dirname), REMARK_MAPPINGS, docsBase),
     ],
     presets: [
         [ // Redocusaurus config
