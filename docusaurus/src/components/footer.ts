@@ -1,7 +1,7 @@
 // Footer configuration for openziti - uses plain objects for docusaurus.config.ts compatibility
 export const openZitiFooter = {
     description:
-        'OpenZiti is an open source project that enables developers to embed zero trust networking directly into applications.',
+        'OpenZiti is an open source project that enables developers to embed zero-trust networking directly into applications.',
     socialProps: {
         githubUrl: 'https://github.com/openziti/ziti',
         youtubeUrl: 'https://youtube.com/openziti/',
