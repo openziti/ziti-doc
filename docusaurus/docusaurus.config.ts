@@ -8,6 +8,7 @@ import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-
 import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
 import path from "node:path";
 import {openZitiFooter} from "./src/components/footer";
+import {openzitiRedocSpecs} from "./docusaurus-plugin-openziti-docs";
 import {
     LogLevel,
     remarkCodeSections,
@@ -191,16 +192,7 @@ const config: Config = {
             'redocusaurus',
             {
                 // Plugin Options for loading OpenAPI files
-                specs: [
-                    {
-                        id: 'edge-client',
-                        spec: 'https://get.openziti.io/spec/client.yml',
-                    },
-                    {
-                        id: 'edge-management',
-                        spec: 'https://get.openziti.io/spec/management.yml',
-                    },
-                ],
+                specs: openzitiRedocSpecs(),
                 // Theme Options for modifying how redoc renders them
                 theme: {
                     // Change with your site colors
