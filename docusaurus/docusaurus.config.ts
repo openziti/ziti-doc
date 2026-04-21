@@ -192,7 +192,7 @@ const config: Config = {
             'redocusaurus',
             {
                 // Plugin Options for loading OpenAPI files
-                specs: openzitiRedocSpecs(__dirname),
+                specs: openzitiRedocSpecs(),
                 // Theme Options for modifying how redoc renders them
                 theme: {
                     // Change with your site colors

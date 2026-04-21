@@ -1,8 +1,6 @@
-import * as path from 'path';
-
-export function openzitiRedocSpecs(rootDir: string) {
+export function openzitiRedocSpecs() {
     return [
-        { id: 'edge-client',     spec: path.resolve(rootDir, 'static/edge-client.yml') },
-        { id: 'edge-management', spec: path.resolve(rootDir, 'static/edge-management.yml') },
+        { id: 'edge-client',     spec: 'https://get.openziti.io/spec/client.yml' },
+        { id: 'edge-management', spec: 'https://get.openziti.io/spec/management.yml' },
     ];
 }
