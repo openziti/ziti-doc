@@ -26,7 +26,7 @@ jobs:
           TEXT=$(printf '📤 **Push** to `%s` / `%s` by @%s\n> %s\n[View commit](%s/%s/commit/%s) | [Compare](%s)' \
             "$REPO" "$BRANCH" "$ACTOR" "$FIRST_LINE" "$SERVER_URL" "$REPO" "$SHA" "$COMPARE_URL")
           jq -n --arg text "$TEXT" '{text: $text}' | \
-            curl -s -X POST "$WEBHOOK" -H 'Content-Type: application/json' -d @-
+            curl -s -X POST "$WEBHOOK" -H 'Content-Type: application/json' -d @- || true
 
   notify-vercel-preview:
     if: |
