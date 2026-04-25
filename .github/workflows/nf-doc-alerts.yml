@@ -46,4 +46,4 @@ jobs:
           TEXT=$(printf '🔍 **Vercel preview ready** — `%s` / `%s`\n[Open preview](%s)' \
             "$REPO" "$BRANCH" "$PREVIEW_URL")
           jq -n --arg text "$TEXT" '{text: $text}' | \
-            curl -s -X POST "$WEBHOOK" -H 'Content-Type: application/json' -d @-
+            curl -s -X POST "$WEBHOOK" -H 'Content-Type: application/json' -d @- || true
