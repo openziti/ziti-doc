@@ -62,7 +62,7 @@ Let's get to work and build this solution. We'll need some legwork done first.
 
 * ![](/blogs/openziti/v1712854086884/8b08379c-00c2-4e12-a2fb-cb9f0a3bc975.png)
     
-    You have an OpenZiti overlay network available. If not, for this scenario you will want to use ["host your own"](@openzitidocs/learn/quickstarts/network/hosted). You'll also want to have the ziti cli tool on your path
+    You have an OpenZiti overlay network available. If not, for this scenario you will want to use ["host your own"](@openzitidocs/intro/get-started/network/hosted). You'll also want to have the ziti cli tool on your path
     
 * Two Kubernetes clusters provisioned
     

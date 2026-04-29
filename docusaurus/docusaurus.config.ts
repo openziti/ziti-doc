@@ -40,7 +40,7 @@ const redirectsArr: { to: string; from: string[] }[] = [
     from: [docUrl(docsBase, '/reference/deployments')]
   },
   {
-    to: docUrl(openziti, '/guides/external-auth/browzer/'),
+    to: docUrl(docsBase, '/how-to-guides/external-auth/browzer'),
     from: [docUrl(docsBase, '/identity-providers-for-browZer')]
   }
 ];
@@ -133,30 +133,21 @@ const config: Config = {
             '@docusaurus/plugin-client-redirects',
             {
                 createRedirects: path => {
-                    if (path.startsWith(docUrl(docsBase, "/guides/topologies/gateway/"))) {
-                        return [path.replace(docUrl(docsBase, "/guides/topologies/gateway/"), docUrl(docsBase, "/guides/local-gateway/"))];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/guides/deployments/kubernetes/"))) {
-                        return [path.replace(docUrl(docsBase, "/guides/deployments/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/hosting/"))];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/reference/tunnelers/kubernetes/"))) {
-                        return [path.replace(docUrl(docsBase, "/reference/tunnelers/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/workload-tunneling/"))];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/guides/deployments/"))) {
+                    // intro/what-is-openziti/ came from learn/introduction/ and the old /introduction/ redirect alias
+                    if (path.startsWith(docUrl(docsBase, "/intro/what-is-openziti/"))) {
                         return [
-                            path.replace(docUrl(docsBase, "/guides/deployments/"), docUrl(docsBase, "/reference/deployments/")),
+                            path.replace(docUrl(docsBase, "/intro/what-is-openziti/"), docUrl(docsBase, "/learn/introduction/")),
+                            path.replace(docUrl(docsBase, "/intro/what-is-openziti/"), docUrl(docsBase, "/introduction/")),
                         ];
                     }
-                    if (path.startsWith(docUrl(docsBase, "/reference/developer/api/"))) {                       // for each existing page
+                    // intro/get-started/ came from learn/quickstarts/ and the even older /quickstarts/
+                    if (path.startsWith(docUrl(docsBase, "/intro/get-started/"))) {
                         return [
-                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/"),                      // return a "from" redirect for each old path
-                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/"),
-                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/edge-apis/")
+                            path.replace(docUrl(docsBase, "/intro/get-started/"), docUrl(docsBase, "/learn/quickstarts/")),
+                            path.replace(docUrl(docsBase, "/intro/get-started/"), docUrl(docsBase, "/quickstarts/")),
                         ];
                     }
-                    if (path.startsWith(docUrl(docsBase, "/learn/quickstarts/"))) {
-                        return [path.replace(docUrl(docsBase, "/learn/quickstarts/"), docUrl(docsBase, "/quickstarts/"))];
-                    }
+                    // unchanged: learn/core-concepts/ paths didn't move
                     if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"))) {
                         return [
                             path.replace(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"), docUrl(docsBase, "/deployment-architecture/")),
@@ -166,8 +157,41 @@ const config: Config = {
                     if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/"))) {
                         return [path.replace(docUrl(docsBase, "/learn/core-concepts/"), docUrl(docsBase, "/core-concepts/"))];
                     }
-                    if (path.startsWith(docUrl(docsBase, "/learn/introduction/"))) {
-                        return [path.replace(docUrl(docsBase, "/learn/introduction/"), docUrl(docsBase, "/introduction/"))];
+                    // unchanged: reference/developer/api/ didn't move
+                    if (path.startsWith(docUrl(docsBase, "/reference/developer/api/"))) {
+                        return [
+                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/"),
+                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/"),
+                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/edge-apis/")
+                        ];
+                    }
+                    // how-to-guides/tunnelers/kubernetes/ — chain: reference/tunnelers/kubernetes/ ← guides/kubernetes/workload-tunneling/
+                    if (path.startsWith(docUrl(docsBase, "/how-to-guides/tunnelers/kubernetes/"))) {
+                        return [path.replace(docUrl(docsBase, "/how-to-guides/tunnelers/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/workload-tunneling/"))];
+                    }
+                    // how-to-guides/tunnelers/ came from reference/tunnelers/
+                    if (path.startsWith(docUrl(docsBase, "/how-to-guides/tunnelers/"))) {
+                        return [path.replace(docUrl(docsBase, "/how-to-guides/tunnelers/"), docUrl(docsBase, "/reference/tunnelers/"))];
+                    }
+                    // how-to-guides/topologies/gateway/ — chain preserving the oldest /guides/local-gateway/ alias
+                    if (path.startsWith(docUrl(docsBase, "/how-to-guides/topologies/gateway/"))) {
+                        return [path.replace(docUrl(docsBase, "/how-to-guides/topologies/gateway/"), docUrl(docsBase, "/guides/local-gateway/"))];
+                    }
+                    // how-to-guides/deployments/kubernetes/ — chain preserving the oldest /guides/kubernetes/hosting/ alias
+                    if (path.startsWith(docUrl(docsBase, "/how-to-guides/deployments/kubernetes/"))) {
+                        return [path.replace(docUrl(docsBase, "/how-to-guides/deployments/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/hosting/"))];
+                    }
+                    // how-to-guides/deployments/ came from reference/deployments/ (oldest alias)
+                    if (path.startsWith(docUrl(docsBase, "/how-to-guides/deployments/"))) {
+                        return [path.replace(docUrl(docsBase, "/how-to-guides/deployments/"), docUrl(docsBase, "/reference/deployments/"))];
+                    }
+                    // support/ came from guides/troubleshooting/
+                    if (path.startsWith(docUrl(docsBase, "/support/"))) {
+                        return [path.replace(docUrl(docsBase, "/support/"), docUrl(docsBase, "/guides/troubleshooting/"))];
+                    }
+                    // how-to-guides/ came from guides/ (general — must come after all specific how-to rules above)
+                    if (path.startsWith(docUrl(docsBase, "/how-to-guides/"))) {
+                        return [path.replace(docUrl(docsBase, "/how-to-guides/"), docUrl(docsBase, "/guides/"))];
                     }
                     return undefined;
                 },
@@ -213,7 +237,7 @@ const config: Config = {
                     { header: 'Cloud SaaS',              links: [consoleLinkAbs,    frontdoorLinkAbs] },
                     { header: 'Self-Hosted Licensed',    links: [selfhostedLinkAbs, zlanLinkAbs]      },
                     { header: 'Self-Hosted Open Source', links: [
-                        { ...openzitiLinkAbs, to: docUrl(docsBase, '/learn/introduction') },
+                        { ...openzitiLinkAbs, to: docUrl(docsBase, '/intro/what-is-openziti/') },
                         zrokLinkAbs,
                     ]},
                 ],
