@@ -95,7 +95,8 @@ const config: Config = {
                     return {
                         resolve: {
                             alias: {
-                                '@openziti': path.resolve(__dirname, `./`),
+                                '@openziti':         path.resolve(__dirname, `./`),
+                                '@openziti_remotes': path.resolve(__dirname, `./docs/_remotes`),
                             },
                         },
                     };
