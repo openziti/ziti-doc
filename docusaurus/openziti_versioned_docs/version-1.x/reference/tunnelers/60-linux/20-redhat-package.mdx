@@ -1,0 +1,103 @@
+---
+title: Tunneling on RedHat and Fedora
+sidebar_label: RedHat
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { LinuxResolverConfig, LinuxAddIdentities } from "../../../_imports";
+
+### Installing the RPM Package
+
+1. Create a repo file like `/etc/yum.repos.d/openziti.repo` matching the OS.
+
+<Tabs
+  defaultValue="RedHat"
+  values={[
+      { label: 'Red Hat', value: 'RedHat', },
+      { label: 'Fedora', value: 'Fedora', },
+      { label: 'Amazon Linux', value: 'Amazon', },
+  ]}
+>
+<TabItem value="RedHat">
+
+#### Red Hat
+
+Architectures available:
+
+* x86_64
+
+Use this repo with var `$releasever` on Red Hat 8-10 (RHEL, Rocky Linux, AlmaLinux).
+
+```text
+[OpenZiti]
+name=OpenZiti
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat$releasever/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+</TabItem>
+
+<TabItem value="Fedora">
+
+#### Fedora 40+
+
+You can use an older repo, e.g., `redhat9`, if using an older Fedora, e.g., 39.
+
+Architectures available:
+
+* x86_64
+
+```text
+[OpenZiti]
+name=OpenZiti
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat10/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat10/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+</TabItem>
+
+<TabItem value="Amazon">
+
+#### Amazon Linux 2023
+
+Amazon Linux 2023 has GLIBC 2.34 which is compatible with the Red Hat 9 build.
+
+Architectures available:
+
+* x86_64
+
+```text
+[OpenZiti]
+name=OpenZiti
+baseurl=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.openziti.org/zitipax-openziti-rpm-stable/redhat9/$basearch/repodata/repomd.xml.key
+repo_gpgcheck=1
+```
+
+</TabItem>
+</Tabs>
+
+2. Run `sudo yum update` to refresh the repo data cache.
+2. Run `sudo yum install ziti-edge-tunnel` to install the RPM.
+2. Enable and start the service
+
+    ```text
+    sudo systemctl enable --now ziti-edge-tunnel.service
+    ```
+
+2. Add an Identity.
+
+    <LinuxAddIdentities/>
+
+2. Configure the Resolver.
+
+    <LinuxResolverConfig/>

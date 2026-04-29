@@ -1,0 +1,19 @@
+## Steps
+
+1. Create and validate your certificates (for example with Let's Encrypt Certbot)
+1. Alter the controller configuration using example below as a guide
+1. Restart the `ziti-controller` service
+
+See the example configuration here:
+
+```yaml
+web:
+  - name: client-management
+    identity:
+      ...
+      alt_server_certs:
+      - server_cert: "/etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem"
+        server_key:  "/etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem"
+```
+At this point, the controller service should use the certificates for the ZAC, removing any "Potential Security
+Risk" warnings.

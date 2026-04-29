@@ -1,0 +1,25 @@
+
+# Authorization
+
+After becoming [fully authenticated](../sessions.md#full-vs-partial-authentication), an
+[Identity](../authentication/80-identities.md) may now discover services and Edge Routers available on the network
+via the Edge Client API they are authorized to access.
+Both service and edge router authorization are controlled through [policies](policies/overview.mdx). Additionally,
+Service Policies may have additional requirements for authorization based on the environment or attributes of a
+client in the form of [Posture Checks](posture-checks/00-overview.md).
+
+Authorization to connect to an edge router affects the edge router that are discoverable by a client. This will be 
+reflected when listing a edge router directly and receiving a list of them during Session creation.
+
+```mermaid
+graph TD
+A[Idle] --> |Service update event| B[Check for Posture Queries]
+A --> |Interval check event| B
+B --> C{New/Changed Posture Data?}
+C --> D[No]
+D --> A
+C --> E[Yes]
+E --> F[Collected Posture Data]
+F --> G[Submit Posture Responses]
+G --> A
+```

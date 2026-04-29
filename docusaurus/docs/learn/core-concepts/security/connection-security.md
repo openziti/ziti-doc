@@ -17,14 +17,14 @@ Here are the different types of connections:
 Below is a diagram showing the `control`, `link`, `edge`, and `controller API` connections. The `service` connections
 exist within an `edge` connection and are pictured in more detail in the second diagram.
 
-[![image](../../../../static/img/connections.png)](../../../../static/img/connections.png)
+[![image](@openziti_img/connections.png)](../../../../static/img/connections.png)
 
 
 Connections between SDKs and Edge Routers are called `edge` connections. `edge` connections are multiplexed and carry
 multiple `service` connections. Each connection is for a specific service and secured with end-to-end encryption in 
 order to transport application/service data securely between the two intended parties only.
 
-[![image](../../../../static/img/connections-edge-sdk-sdk.png)](../../../../static/img/connections-edge-sdk-sdk.png)
+[![image](@openziti_img/connections-edge-sdk-sdk.png)](@openziti_img/connections-edge-sdk-sdk.png)
 
 ## Control and Link connection details
 

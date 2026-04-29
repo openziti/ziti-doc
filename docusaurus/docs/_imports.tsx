@@ -26,9 +26,9 @@ export { default as LinuxAddIdentities } from './reference/tunnelers/60-linux/_a
 export { default as DockerMd } from './_remotes/ziti-tunnel-sdk-c/docker/README.md';
 export { default as TunHelmChartReadme } from './_remotes/helm-charts/charts/ziti-edge-tunnel/README.md';
 
-// components: use ../site not @site so they import properly to the aggregate docs site
-export { default as MarkdownWithoutH1 } from '../src/components/MarkdownWithoutH1';
-export { default as Highlight } from '../src/components/OpenZitiHighlight';
+// components: use @openziti so they import properly in both standalone and unified-doc builds
+export { default as MarkdownWithoutH1 } from '@openziti/src/components/MarkdownWithoutH1';
+export { default as Highlight } from '@openziti/src/components/OpenZitiHighlight';
 
 // guarded wrappers to pinpoint failures during build
 export const _verifyPartials = () => (

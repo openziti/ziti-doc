@@ -1,0 +1,43 @@
+---
+title: Manual Installation
+sidebar_label: Manual
+---
+import { LinuxResolverConfig, LinuxAddIdentities } from "../../../_imports";
+
+[The latest stable release](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) of `ziti-edge-tunnel` is
+distributed as an executable binary in GitHub.
+
+
+1. Unzip the downloaded file and copy the binary to a directory in your PATH, such as `/usr/local/bin`.
+
+    ```text
+    sudo install -o root -g root ./ziti-edge-tunnel /usr/local/bin/
+    ```
+
+1. Create a POSIX group named `ziti` if it doesn't already exist. Members of this group can access the identity files and send IPC commands to the socket server.
+
+    ```text
+    sudo groupadd --system ziti
+    ```
+
+1. Create a directory to hold the identity files. The tunneler will manage the contents of the identity directory.
+
+    ```text
+    sudo mkdir -pv /opt/openziti/etc/identities
+    ```
+
+1. Run the Manually Installed Binary
+
+    When not using the Linux package, you must run the tunneler as root so it will have permission to manage IP routes and the resolver configuration.
+
+    ```text
+    sudo ziti-edge-tunnel run --identity-dir /opt/openziti/etc/identities
+    ```
+
+1. Add an Identity
+
+    <LinuxAddIdentities/>
+
+1. Configure the Resolver
+
+    <LinuxResolverConfig/>

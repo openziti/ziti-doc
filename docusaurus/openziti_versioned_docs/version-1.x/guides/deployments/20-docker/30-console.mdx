@@ -1,0 +1,82 @@
+---
+title: Deploy the Console
+sidebar_label: Console
+---
+
+import { 
+    ConsoleAuthAdminClientCertificate, 
+    ConsolePublicCertsPlatformIntro, 
+    ConsolePublicCertsBasicSteps, 
+    ConsolePublicCertsConfigurationLink 
+} from '../../../_imports';
+
+This article is about enabling the console on a controller that is running in a container.
+
+1. Configure the controller
+
+    The console's `zac` binding must be on the same web listener as the controller's management API, i.e., the `edge-management` binding.
+
+    <br />
+
+    ```text
+          - binding: zac
+            options:
+              location: /ziti-console
+              indexFile: index.html
+    ```
+
+    - `location` is the filesystem path to the static files of the console. In the controller container, the usual path is `/ziti-console`.
+    - `indexFile` property is the entry point to the console.
+
+1. To apply the changes, the controller must be restarted.
+1. Visit the console at `/zac/` on the controller's address.
+
+    The console is now available at `https://<fqdn>:<port>/zac/`.
+
+1. Log in to the console.
+
+    The only available authentication method for the console SPA is username and password.
+
+1. Console certificate option - The console is served from the controller's API and can be used with the default API certificate. The controller can be configured to present a different certificate for the console when the API is accessed by a distinct URL for the console. For more information about using alternative server certs with the controller, see: [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity).
+
+## Upgrade
+
+The controller container includes the latest version of the console. You can instead mount console versions >= 3.0.0.
+
+1. Download a release.
+
+    ```text
+    wget https://github.com/openziti/ziti-console/releases/latest/download/ziti-console.zip
+    ```
+
+1. Unzip the static files and set read and list permission.
+
+    ```text
+    unzip -d ./ziti-console ./ziti-console.zip
+    chmod -R a+rX ./ziti-console
+    ```
+
+1. Mount the console files read-only on the controller container.
+
+    ```text
+    services:
+      ziti-controller:
+        volumes:
+          - ./ziti-console:/ziti-console:ro
+    ```
+
+1. Restart the controller service to apply the changes.
+
+    ```text
+    docker compose up ziti-controller --force-recreate
+    ```
+
+## Authenticate with an Admin Client Certificate
+
+<ConsoleAuthAdminClientCertificate />
+
+<ConsolePublicCertsPlatformIntro />
+
+<ConsolePublicCertsBasicSteps />
+
+<ConsolePublicCertsConfigurationLink />

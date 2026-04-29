@@ -1,0 +1,5 @@
+label: Cloud
+link:
+  type: generated-index
+  title: Working with Public Clouds
+  description: Run a Ziti controller or router on a Linux VM in a public cloud.

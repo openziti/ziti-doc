@@ -1,0 +1,145 @@
+---
+sidebar_position: 70
+---
+
+import ExtJwtDocEnrollDetails from '../_ext_jwt_enroll_details.md'
+
+# External JWT Signers
+
+External JWT Signers allow external identity providers to facilitate authentication with an OpenZiti network. External
+JWT Signers can be added as a static x509 certificate or via a JWKS endpoint. Authenticating clients can provide
+a JWT as a primary authentication mechanism to obtain an
+[API Session](../sessions.md#api-session).
+Additionally, the JWT can be required on all REST API calls if desired by using an Authentication Policy that requires
+it as a secondary factor.
+
+JWT is described in [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519) and on
+[Wikipedia](https://en.wikipedia.org/wiki/JSON_Web_Token).
+X509 PKI is described in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and on
+[Wikipedia](https://en.wikipedia.org/wiki/X.509)
+
+## Usage
+
+External JWT Signers are used in conjunction with Authentication Policies to allow [Identities](./80-identities.md)
+to authenticate using a JWT. External JWT Signers can be configured to match an [Identity](./80-identities.md)
+through the `claimsProperty` and `useExternalId` fields. `claimsProperty` can change which field in the JWT is
+matched to the `id` or `externalId` on an [Identity](./80-identities.md). `useExternalId` when true will match the
+`claimsProperty` to an Identity's `externalId` field. If false, it will match to the `id` field.
+
+_Note: `externalId` values on [Identities](./80-identities.md) are enforced to be unique and are matched
+case-sensitively. The value from the JWT claim must match the identity's `externalId` exactly._
+
+`claimsProperty` can contain JWT standard claims or private claims. An example usage would be an `email` JWT private
+claim and OpenZiti [Identities](./80-identities.md) with `externalId` set to email addresses.
+
+### Enrollment
+
+External JWT Signers can be used to enroll [Identities](./80-identities.md) that are not pre-created by
+administrators. Enrollment is controlled by the `enrollToCertEnabled` and `enrollToTokenEnabled` fields on `enabled`
+External JWT Signers. See the
+[Enrollment - Auto External JWT Signer Enrollment](../enrollment.mdx#auto-external-jwt-signer-enrollment) 
+documentation for more information.
+
+<ExtJwtDocEnrollDetails />
+
+### x509 Certificate
+
+If the JWT provider has a static x509 certificate, it is possible define an External JWT Signer using the PEM encoded
+public certificate of the signer. If the JWT provider has JWKS endpoint support it is strongly recommended to create
+an External JWT Signer using the JWKS endpoint. External JWT Signers configured with a static x509 certificate will
+need maintenance during key rotation and certificate expiration. For these operations the
+[Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx)
+can be used for external automation.
+
+### JWKS Endpoint
+
+JSON Web Key Sets (JWKS) is defined in [RFC7517 Section 5](https://datatracker.ietf.org/doc/html/rfc7517#section-5)
+and is used by many popular IdPs (Auth0, Okta) in order to enable external JWT verification. External JWT Signers
+configured with a JWKS endpoint allows an identity provider to rotate keys and bridge signer certificate expiration
+windows.
+
+## JWT Validation
+
+External JTW Signers are used to validate JWTs for authentication. This validation requires the following:
+
+- the `iss` field on the JWT must match the `issuer` field on the External JWT Signer
+- the `aud` field on the JWT must match the `audience` field on the External JWT Signer
+- the `sub` or field defined by `claimsProperty` must match the `id` field on an [Identity](./80-identities.md)
+  (or `externalId` if `useExternalId` is true)
+- the JWT must be signed by the x509 certificate or a JWK from the JWKS endpoint defined on the External JWT Signer
+- the JWT `kid` must match the External JWT `kid` field for x509 certificates or the `kid` in a JWKS response
+- the JWT must not be expired
+
+## Creation 
+
+An External JWT Signer that uses a private `email` claim and matches on `externalId` with a JWKS endpoint can
+be created as follows:
+
+`POST /edge/management/v1/ext-jwt-signers`
+```json
+{
+  "name": "My External JWT Signer",
+  "enabled": true,
+  "issuer": "my-issuer",
+  "audience": "my-audience",
+  "jwksEndpoint": "https://example.com/.well-known/jwks.json",
+  "claimsProperty": "email",
+  "useExternalId": true
+}
+```
+
+An External JWT Signer that uses the `sub` claim and matches on `id` with a x509 certificate can
+be created as follows:
+
+`POST /edge/management/v1/ext-jwt-signers`
+```json
+{
+  "name": "My External JWT Signer",
+  "enabled": true,
+  "issuer": "my-issuer",
+  "audience": "my-audience",
+  "kid": "2gh80220",
+  "certPem": "-----BEGIN CERTIFICATE-----\nMII...\n-----END CERTIFICATE-----\n"
+}
+```
+
+## Client Authentication Fields
+
+Unauthenticated clients can enumerate External JWT Signers via the
+[Edge Client API](../../../../reference/developer/api/01-edge-client-reference.mdx). The response contains only the
+fields necessary for a client to initiate authentication with the target identity provider — management fields such as
+`issuer`, `audience`, and `certPem` are not exposed.
+
+`GET /edge/client/v1/external-jwt-signers`
+```json
+{
+  "data": [
+    {
+      "id": "eZjzX3U1u",
+      "name": "my-ext-jwt-signer",
+      "externalAuthUrl": "https://auth.example.com/login",
+      "openIdConfigurationUrl": "https://auth.example.com/.well-known/openid-configuration",
+      "clientId": "my-client-id",
+      "scopes": "openid profile email",
+      "audience": "my-audience",
+      "targetToken": "ACCESS",
+      "enrollToCertEnabled": true,
+      "enrollToTokenEnabled": false
+    }
+  ],
+  "meta": {}
+}
+```
+
+Client-facing fields:
+
+- `externalAuthUrl` - a generic URL clients can use to initiate authentication if OIDC discovery is not available
+- `openIdConfigurationUrl` - the URL to the IdP's OIDC discovery document (`.well-known/openid-configuration`);
+  preferred over `externalAuthUrl` for OIDC-capable providers as it allows full PKCE flow discovery
+- `clientId` - the OAuth2/OIDC client ID the client should use when initiating the authentication flow
+- `scopes` - the OAuth2 scopes the client should request (e.g. `openid profile email`)
+- `audience` - the audience value the resulting JWT must contain
+- `targetToken` - which token from the OIDC response to submit to OpenZiti for authentication: `ACCESS` (access token)
+  or `ID` (ID token)
+- `enrollToCertEnabled` - whether this signer supports auto-enrollment resulting in a certificate-based authenticator
+- `enrollToTokenEnabled` - whether this signer supports auto-enrollment resulting in a token-based authenticator
