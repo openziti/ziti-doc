@@ -40,8 +40,8 @@ export function openzitiDocsPluginConfig(
             lastVersion: '1.x',
             includeCurrentVersion: true,
             versions: {
-                'current': { label: '2.x (upcoming)',   path: 'next', banner: 'unreleased' },
-                '1.x':     { label: '1.x (current)', path: '',     banner: 'none' },
+                'current': { label: '2.x',   path: 'next', banner: 'unreleased' },
+                '1.x':     { label: '1.x', path: '',     banner: 'none' },
             },
             beforeDefaultRemarkPlugins: [
                 // Must run before Docusaurus's default broken-image / broken-link check,

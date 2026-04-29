@@ -77,7 +77,10 @@ const config: Config = {
     },
     themes: [
         ['@docusaurus/theme-classic', {
-            customCss: require.resolve('./src/css/custom.css'),
+            customCss: [
+                require.resolve('./src/css/custom.css'),
+                require.resolve('@netfoundry/docusaurus-theme/css/product-picker.css'),
+            ],
         }],
         '@docusaurus/theme-mermaid',
         '@netfoundry/docusaurus-theme',
@@ -188,7 +191,10 @@ const config: Config = {
     ],
     themeConfig:
         {
-            // NetFoundry theme configuration
+            // NetFoundry theme configuration — mirrors unified-doc so the standalone
+            // OpenZiti site presents the same navbar (Products / Resources / icons).
+            // Cross-product links point at the live netfoundry.io/docs/... URLs because
+            // those products don't exist in the standalone build.
             netfoundry: {
                 showStarBanner: true,
                 starBanner: {
@@ -196,6 +202,111 @@ const config: Config = {
                     label: 'Star OpenZiti on GitHub',
                 },
                 footer: openZitiFooter,
+                // ProductPicker requires every link to use `to:` (not `href:`) — the theme's
+                // pathLabel reads link.to.replace(...) and crashes on undefined. The theme strips
+                // the scheme/host from absolute URLs internally, so external links work fine here.
+                productPickerColumns: [
+                    {
+                        header: 'Managed Cloud',
+                        links: [
+                            {
+                                label: 'NetFoundry Console',
+                                to: 'https://netfoundry.io/docs/platform/intro',
+                                logo: 'https://raw.githubusercontent.com/netfoundry/branding/refs/heads/main/images/svg/icon/netfoundry-icon-color.svg',
+                                description: 'Cloud-managed orchestration and global fabric control.',
+                            },
+                            {
+                                label: 'Frontdoor',
+                                to: 'https://netfoundry.io/docs/frontdoor/intro',
+                                logo: 'https://netfoundry.io/docs/img/frontdoor-sm-logo.svg',
+                                description: 'Secure application access gateway.',
+                            },
+                        ],
+                    },
+                    {
+                        header: 'Open Source',
+                        links: [
+                            {
+                                label: 'OpenZiti',
+                                to: docUrl(docsBase, '/learn/introduction'),
+                                logo: 'https://netfoundry.io/docs/img/openziti-sm-logo.svg',
+                                description: 'Programmable zero-trust mesh infrastructure.',
+                            },
+                            {
+                                label: 'zrok',
+                                to: 'https://netfoundry.io/docs/zrok/get-started',
+                                logo: 'https://netfoundry.io/docs/img/zrok-1.0.0-rocket-purple.svg',
+                                logoDark: 'https://netfoundry.io/docs/img/zrok-1.0.0-rocket-green.svg',
+                                description: 'Secure peer-to-peer sharing built on OpenZiti.',
+                            },
+                        ],
+                    },
+                    {
+                        header: 'Your own infrastructure',
+                        links: [
+                            {
+                                label: 'Self-Hosted',
+                                to: 'https://netfoundry.io/docs/selfhosted/intro',
+                                logo: 'https://netfoundry.io/docs/img/onprem-sm-logo.svg',
+                                description: 'Deploy the full stack in your own environment.',
+                            },
+                            {
+                                label: 'zLAN',
+                                to: 'https://netfoundry.io/docs/zlan/intro',
+                                logo: 'https://netfoundry.io/docs/img/zlan/zlan-logo.svg',
+                                description: 'Zero-trust access for OT networks.',
+                            },
+                        ],
+                    },
+                ],
+                resourcesPickerSections: [
+                    {
+                        header: 'Learn & Engage',
+                        links: [
+                            {
+                                label: 'NetFoundry Blog',
+                                description: 'Latest news, updates, and insights from NetFoundry.',
+                                href: 'https://netfoundry.io/blog/',
+                                logoUrl: 'https://raw.githubusercontent.com/netfoundry/branding/refs/heads/main/images/svg/icon/netfoundry-icon-color.svg',
+                            },
+                            {
+                                label: 'OpenZiti Tech Blog',
+                                description: 'Technical articles and community updates.',
+                                href: 'https://blog.openziti.io/',
+                                logoUrl: 'https://netfoundry.io/docs/img/openziti-sm-logo.svg',
+                            },
+                        ],
+                    },
+                    {
+                        header: 'Community & Support',
+                        links: [
+                            {
+                                label: 'NetFoundry YouTube',
+                                description: 'Video tutorials, demos, and technical deep dives.',
+                                href: 'https://www.youtube.com/c/NetFoundry',
+                                logoUrl: 'https://raw.githubusercontent.com/netfoundry/branding/refs/heads/main/images/svg/icon/netfoundry-icon-color.svg',
+                                badge: 'youtube',
+                            },
+                            {
+                                label: 'OpenZiti YouTube',
+                                description: 'OpenZiti community videos and project updates.',
+                                href: 'https://www.youtube.com/openziti',
+                                logoUrl: 'https://netfoundry.io/docs/img/openziti-sm-logo.svg',
+                                badge: 'youtube',
+                            },
+                            {
+                                label: 'OpenZiti Discourse',
+                                description: 'Ask questions and connect with the community.',
+                                href: 'https://openziti.discourse.group/',
+                                iconName: 'discourse',
+                            },
+                        ],
+                    },
+                ],
+                navbarIconLinks: [
+                    { href: 'https://github.com/openziti/ziti',  title: 'GitHub',    iconName: 'github' },
+                    { href: 'https://openziti.discourse.group/', title: 'Discourse', iconName: 'discourse' },
+                ],
             },
             hotjar: {applicationId: hotjarId},
             metadata: [
@@ -209,93 +320,15 @@ const config: Config = {
                 },
             },
             navbar: {
-                title: '',
                 hideOnScroll: false,
-                logo: {
-                    alt: 'The OpenZiti logo, an open source zero trust network overlay',
-                    src: 'img/ziti-logo-dark.svg',
-                    srcDark: 'img/ziti-logo-light.svg',
-                    target: "_self",
-                },
+                title: '',
+                // Logos are rendered by the swizzled src/theme/Navbar/Logo/index.tsx
+                // (NetFoundry + OpenZiti), matching the unified-doc deployment.
                 items: [
-                    {
-                        type: 'docsVersionDropdown',
-                        docsPluginId: 'openziti',
-                        position: 'right',
-                    },
-                    {
-                        type: 'html',
-                        value: '<a class="navbar__item navbar__link header-netfoundry-link" href="https://netfoundry.io/products/netfoundry-cloud-30-day-free-trial/" target="_blank">NetFoundry</a>',
-                        position: 'right'
-                    },
-                    {
-                        to: docUrl(docsBase, '/learn/introduction/'),
-                        label: 'Documentation',
-                        position: 'right',
-                        activeBaseRegex: docUrl(docsBase, '/(?!downloads)'),
-                    },
-                    {
-                        to: docUrl(docsBase, '/downloads'),
-                        label: 'Downloads',
-                        position: 'right',
-                        activeBaseRegex: docUrl(docsBase, '/downloads'),
-                    },
-                    {
-                        type: 'html',
-                        value: '<a class="navbar__item navbar__link header-netfoundry-link" href="https://blog.openziti.io/" target="_blank">Blog</a>',
-                        position: 'right'
-                    },
-                    {
-                        type: 'dropdown',
-                        label: 'Links',
-                        position: 'right',
-                        items: [
-                            {
-                                type: 'html',
-                                value: '<div class="text-divider"><p>Socials</p></div>'
-                            },
-                            {
-                                type: 'html',
-                                value: `<a href="https://www.youtube.com/OpenZiti" target="_blank" title="OpenZiti on YouTube"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/yt.svg") + `" alt="YouTube logo"/>YouTube</span></a>`
-                            },
-                            {
-                                type: 'html',
-                                value: `<a href="https://x.com/OpenZiti" target="_blank" title="OpenZiti on X(formerly Twitter)"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/twit.svg") + `" alt="X/Twitter logo"/>X (Twitter)</span></a>`
-                            },
-                            {
-                                type: 'html',
-                                value: `<a href="https://www.reddit.com/r/openziti" target="_blank" title="OpenZiti Subreddit"><span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/reddit-logo.png") + `" alt="Reddit logo"/>Reddit</span></a>`
-                            },
-                            {
-                                type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/ziggy.png") + `" alt="X/Twitter Ziggy logo"/><a href="https://x.com/OpenZiggy" target="_blank" title="OpenZiggy on X(formerly Twitter)">Ziggy</span></a>`
-                            },
-                            {
-                                type: 'html',
-                                value: '<div class="text-divider"><p>Other</p></div>'
-                            },
-                            {
-                                type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/blog-icon.png") + `" alt="OpenZiti blog logo"/><a href="https://blog.openziti.io/" target="_blank" title="Blog">Blog</span></a>`
-                            },
-                            {
-                                type: 'html',
-                                value: `<span id="navbarDropdownItem"><img id="navbarDropdownImage" src="` + docUrl(docsBase, "img/oz-test-kitchen.png") + `" alt="OpenZiti Test Kitchen logo"/><a href="https://github.com/openziti-test-kitchen" target="_blank" title="Git project for the test kitchen">Test Kitchen</span></a>`
-                            },
-                        ]
-                    },
-                    {
-                        href: 'https://openziti.discourse.group/',
-                        position: 'right',
-                        className: 'header-discourse-link',
-                        title: 'Discourse'
-                    },
-                    {
-                        href: 'https://github.com/openziti/ziti',
-                        position: 'right',
-                        className: 'header-github-link',
-                        title: 'GitHub'
-                    },
+                    { type: 'custom-productPicker',   position: 'left',  label: 'Products' },
+                    { type: 'custom-versionDropdown', position: 'left',  docsPluginId: 'openziti', pathPrefix: docsBase },
+                    { type: 'custom-resourcesPicker', position: 'left' },
+                    { type: 'custom-iconLinks',       position: 'right' },
                 ],
             },
             prism: {
