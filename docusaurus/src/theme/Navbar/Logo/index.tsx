@@ -13,7 +13,7 @@ export default function NavbarLogo(): JSX.Element {
             <Link className="navbar__brand" to="https://netfoundry.io">
                 <img className="navbar__logo_nf" alt="NetFoundry" src={nfLogo} />
             </Link>
-            <Link className="navbar__brand" to="/docs/openziti/learn/introduction">
+            <Link className="navbar__brand" to="/docs/openziti/intro/what-is-openziti">
                 <img className="navbar__logo" alt="OpenZiti" src={openzitiLogo} />
             </Link>
         </>
