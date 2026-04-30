@@ -1,0 +1,36 @@
+---
+sidebar_position: 30
+sidebar_label: Console
+title: Kubernetes Console
+---
+
+import ConsoleAuthAdminClientCertificate from '../../../reference/40-command-line/_console-auth-admin-client-certificate.mdx';
+
+## Find the Console URL
+
+Use the console by navigating to the controller's address with path `/zac/` in a web browser. If you published the controller at `ctrl.ziti.example.com:443`, then the console URL is `https://ctrl.ziti.example.com/zac/`.
+
+The correct console URL is displayed after Helm install or upgrade and may be fetched at any time with Helm.
+
+```text title="Substitute your Helm release name for 'ziti-controller'"
+helm get notes "ziti-controller"
+```
+
+## Authenticate with a Username and Password
+
+```text title="Print the username and password"
+kubectl get secrets ziti-controller-admin-secret \
+--output go-template=\
+'{{range $k,$v := .data}}'\
+'{{printf "%s: " $k}}{{if not $v}}{{$v}}{{else}}{{$v|base64decode}}{{end}}{{"\n"}}'\
+'{{end}}'
+```
+
+```buttonless title="Output"
+admin-password: UJ2Z4xK1OpagXG94GkAXkR0M4MRNvcOh
+admin-user: admin
+```
+
+## Authenticate with an Admin Client Certificate
+
+<ConsoleAuthAdminClientCertificate />

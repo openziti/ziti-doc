@@ -1,0 +1,102 @@
+---
+title: Tunneling on Debian GNU/Linux
+sidebar_label: Debian
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { LinuxResolverConfig, LinuxAddIdentities } from "../../../_imports";
+
+### Installing the Debian Package
+
+1. Select an OS to see the appropriate steps.
+
+<Tabs
+  defaultValue="Ubuntu"
+  values={[
+      { label: 'Ubuntu', value: 'Ubuntu', },
+      { label: 'Debian GNU/Linux', value: 'Debian', },
+  ]}
+>
+
+<TabItem value="Ubuntu">
+
+#### Ubuntu
+
+<br/>
+
+Architectures available:
+
+* x86_64
+* arm64
+
+:::note
+Please read this script to ensure it is safe before running it.
+:::
+
+```text
+curl -sSLf https://get.openziti.io/tun/scripts/install-ubuntu.bash | bash
+```
+
+</TabItem>
+
+<TabItem value="Debian">
+
+#### Debian GNU/Linux
+
+| Debian      | UBUNTU_LTS   | Archs         |
+|-------------|--------------|---------------|
+| 13 Trixie   | jammy        | x86_64, arm64 |
+| 12 Bookworm | jammy        | x86_64, arm64 |
+| 11 Bullseye | focal        | x86_64, arm64 |
+
+1. Refer to the table to find the Ubuntu release name that is the contemporary of the Debian release. Substitute the Ubuntu release name for `jammy` in the `/etc/apt/sources.list.d/openziti.list` file.
+
+    ```text
+    UBUNTU_LTS=jammy
+    ```
+
+1. Subscribe the system to the OpenZiti package repository for the UBUNTU_LTS specified above.
+
+    ```text
+    echo "deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable $UBUNTU_LTS main" \
+    | sudo tee /etc/apt/sources.list.d/openziti.list >/dev/null
+    ```
+
+1. Install the package signing pubkey.
+
+    ```text
+    curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
+    | sudo gpg --dearmor --output /usr/share/keyrings/openziti.gpg
+    ```
+
+1. Ensure the pubkey is readable by all.
+
+    ```text
+    sudo chmod -c +r /usr/share/keyrings/openziti.gpg
+    ```
+
+1. Refresh the package list and install ziti-edge-tunnel.
+
+    ```text
+    sudo apt update
+    sudo apt install ziti-edge-tunnel
+    ```
+
+</TabItem>
+</Tabs>
+
+2. Enable and start the service
+
+    ```text
+    sudo systemctl enable --now ziti-edge-tunnel.service
+    ```
+
+2. Add an Identity.
+
+    <LinuxAddIdentities/>
+
+2. Configure the Resolver.
+
+    <LinuxResolverConfig/>
+

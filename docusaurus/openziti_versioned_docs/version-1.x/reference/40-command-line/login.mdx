@@ -1,0 +1,25 @@
+---
+title: Login
+---
+
+## Username and Password
+
+```text
+ziti edge login ctrl1.ziti.example.com:1280 -u admin -p admin
+```
+
+## Identity File
+
+Enroll an admin identity.
+
+```text title="Create an admin2 identity for certificate authentication"
+ziti edge create identity admin2 --admin --jwt-output-file admin2.jwt
+```
+
+```text title="Copy token to the admin device and enroll"
+ziti edge enroll admin2.jwt
+```
+
+```text
+ziti edge login ctrl1.ziti.example.com:1280 --file admin2.json
+```
