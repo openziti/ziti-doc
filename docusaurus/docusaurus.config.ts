@@ -6,6 +6,10 @@ import type {ThemeConfig} from '@docusaurus/preset-classic';
 import pluginHotjar from './src/plugins/hotjar';
 import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-redirects';
 import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
+import {
+    consoleLinkAbs, frontdoorLinkAbs, selfhostedLinkAbs,
+    zlanLinkAbs, openzitiLinkAbs, zrokLinkAbs,
+} from "@netfoundry/docusaurus-theme";
 import path from "node:path";
 import {openZitiFooter} from "./src/components/footer";
 import {openzitiDocsPluginConfig, openzitiRedocSpecs} from "./docusaurus-plugin-openziti-docs";
@@ -206,58 +210,12 @@ const config: Config = {
                 // pathLabel reads link.to.replace(...) and crashes on undefined. The theme strips
                 // the scheme/host from absolute URLs internally, so external links work fine here.
                 productPickerColumns: [
-                    {
-                        header: 'Managed Cloud',
-                        links: [
-                            {
-                                label: 'NetFoundry Console',
-                                to: 'https://netfoundry.io/docs/platform/intro',
-                                logo: 'https://raw.githubusercontent.com/netfoundry/branding/refs/heads/main/images/svg/icon/netfoundry-icon-color.svg',
-                                description: 'Cloud-managed orchestration and global fabric control.',
-                            },
-                            {
-                                label: 'Frontdoor',
-                                to: 'https://netfoundry.io/docs/frontdoor/intro',
-                                logo: 'https://netfoundry.io/docs/img/frontdoor-sm-logo.svg',
-                                description: 'Secure application access gateway.',
-                            },
-                        ],
-                    },
-                    {
-                        header: 'Open Source',
-                        links: [
-                            {
-                                label: 'OpenZiti',
-                                to: docUrl(docsBase, '/learn/introduction'),
-                                logo: 'https://netfoundry.io/docs/img/openziti-sm-logo.svg',
-                                description: 'Programmable zero-trust mesh infrastructure.',
-                            },
-                            {
-                                label: 'zrok',
-                                to: 'https://netfoundry.io/docs/zrok/get-started',
-                                logo: 'https://netfoundry.io/docs/img/zrok-1.0.0-rocket-purple.svg',
-                                logoDark: 'https://netfoundry.io/docs/img/zrok-1.0.0-rocket-green.svg',
-                                description: 'Secure peer-to-peer sharing built on OpenZiti.',
-                            },
-                        ],
-                    },
-                    {
-                        header: 'Your own infrastructure',
-                        links: [
-                            {
-                                label: 'Self-Hosted',
-                                to: 'https://netfoundry.io/docs/selfhosted/intro',
-                                logo: 'https://netfoundry.io/docs/img/onprem-sm-logo.svg',
-                                description: 'Deploy the full stack in your own environment.',
-                            },
-                            {
-                                label: 'zLAN',
-                                to: 'https://netfoundry.io/docs/zlan/intro',
-                                logo: 'https://netfoundry.io/docs/img/zlan/zlan-logo.svg',
-                                description: 'Zero-trust access for OT networks.',
-                            },
-                        ],
-                    },
+                    { header: 'Cloud SaaS',              links: [consoleLinkAbs,    frontdoorLinkAbs] },
+                    { header: 'Self-Hosted Licensed',    links: [selfhostedLinkAbs, zlanLinkAbs]      },
+                    { header: 'Self-Hosted Open Source', links: [
+                        { ...openzitiLinkAbs, to: docUrl(docsBase, '/learn/introduction') },
+                        zrokLinkAbs,
+                    ]},
                 ],
                 resourcesPickerSections: [
                     {
