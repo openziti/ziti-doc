@@ -2,6 +2,24 @@
  * OpenZiti project-specific CSS overrides.
  * Base styling comes from @netfoundry/docusaurus-theme
  */
+
+/* sidebar section separators — TODO: move to theme once confirmed */
+.theme-doc-sidebar-item-link-level-1.sidebar-title {
+    margin-top: 1.5rem;
+    margin-left: 0;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.theme-doc-sidebar-item-link-level-1.sidebar-title > .menu__link {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ifm-color-emphasis-600);
+    padding-left: 0.25rem;
+    cursor: default;
+    pointer-events: none;
+}
 @import "@netfoundry/docusaurus-theme/css/tabs-v8-float.css";
 @import "@netfoundry/docusaurus-theme/css/layout.css";
 @import "@netfoundry/docusaurus-theme/css/legacy.css";

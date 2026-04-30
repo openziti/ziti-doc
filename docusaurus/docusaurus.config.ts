@@ -36,10 +36,6 @@ const REMARK_MAPPINGS = [
 
 const redirectsArr: { to: string; from: string[] }[] = [
   {
-    to: docUrl(openziti, '/category/deployments'),
-    from: [docUrl(docsBase, '/reference/deployments')]
-  },
-  {
     to: docUrl(docsBase, '/how-to-guides/external-auth/browzer'),
     from: [docUrl(docsBase, '/identity-providers-for-browZer')]
   }

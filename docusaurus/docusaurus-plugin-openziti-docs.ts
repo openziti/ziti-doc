@@ -37,11 +37,11 @@ export function openzitiDocsPluginConfig(
             path: op,
             routeBasePath,
             sidebarPath: osbp,
-            lastVersion: '1.x',
+            lastVersion: 'current',
             includeCurrentVersion: true,
             versions: {
-                'current': { label: '2.x',   path: 'next', banner: 'unreleased' },
-                '1.x':     { label: '1.x', path: '',     banner: 'none' },
+                'current': { label: '2.x', path: '',    banner: 'none' },
+                '1.x':     { label: '1.x', path: '1.x', banner: 'unmaintained' },
             },
             beforeDefaultRemarkPlugins: [
                 // Must run before Docusaurus's default broken-image / broken-link check,

@@ -4,7 +4,7 @@ const sidebars: SidebarsConfig = {
     docsSidebar: [
         {
             type: 'html',
-            value: `<a class="menu__link" href="/docs/openziti/intro/what-is-openziti">INTRO</a>`,
+            value: `<span class="menu__link">INTRO</span>`,
             className: 'sidebar-title',
         },
         {
@@ -13,7 +13,7 @@ const sidebars: SidebarsConfig = {
         },
         {
             type: 'html',
-            value: `<a class="menu__link" href="/docs/openziti/how-to-guides">HOW-TO</a>`,
+            value: `<span class="menu__link">HOW-TO</span>`,
             className: 'sidebar-title',
         },
         {
@@ -22,7 +22,7 @@ const sidebars: SidebarsConfig = {
         },
         {
             type: 'html',
-            value: `<a class="menu__link" href="/docs/openziti/learn">LEARN</a>`,
+            value: `<span class="menu__link">LEARN</span>`,
             className: 'sidebar-title',
         },
         {
@@ -31,7 +31,7 @@ const sidebars: SidebarsConfig = {
         },
         {
             type: 'html',
-            value: `<a class="menu__link" href="/docs/openziti/reference">REFERENCE</a>`,
+            value: `<span class="menu__link">REFERENCE</span>`,
             className: 'sidebar-title',
         },
         {
@@ -40,7 +40,7 @@ const sidebars: SidebarsConfig = {
         },
         {
             type: 'html',
-            value: `<a class="menu__link" href="/docs/openziti/support">SUPPORT</a>`,
+            value: `<span class="menu__link">SUPPORT</span>`,
             className: 'sidebar-title',
         },
         {
