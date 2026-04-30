@@ -9,7 +9,7 @@ on:
   pull_request:
     types: [opened, reopened, ready_for_review, closed]
     paths:
-      - docusaurus/docs/**
+      - docusaurus/**
   fork:
   release:
     types: [released]
