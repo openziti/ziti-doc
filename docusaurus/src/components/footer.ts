@@ -9,7 +9,7 @@ export const openZitiFooter = {
         twitterUrl: 'https://twitter.com/openziti/',
     },
     documentationLinks: [
-        { href: '/docs/openziti/learn/introduction/', label: 'Getting Started' },
+        { href: '/docs/openziti/intro/what-is-openziti/', label: 'Getting Started' },
         { href: '/docs/openziti/reference/developer/api/', label: 'API Reference' },
     ],
     communityLinks: [
