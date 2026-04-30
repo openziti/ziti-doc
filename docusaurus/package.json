@@ -22,7 +22,7 @@
     "@docusaurus/theme-common": "3.9.2",
     "@docusaurus/theme-mermaid": "3.9.2",
     "@mdx-js/react": "^3.0.0",
-    "@netfoundry/docusaurus-theme": "^0.10.20",
+    "@netfoundry/docusaurus-theme": "^0.11.4",
     "@types/react": "^19.1.9",
     "asciinema-player": "^3.10.0",
     "clsx": "^2.0.0",
@@ -66,18 +66,18 @@
     "node": ">=18.0"
   },
   "resolutions": {
-    "@docusaurus/core":              "3.9.2",
+    "@docusaurus/core": "3.9.2",
     "@docusaurus/plugin-client-redirects": "3.9.2",
-    "@docusaurus/preset-classic":    "3.9.2",
-    "@docusaurus/theme-classic":     "3.9.2",
-    "@docusaurus/theme-common":      "3.9.2",
-    "@docusaurus/theme-mermaid":     "3.9.2",
+    "@docusaurus/preset-classic": "3.9.2",
+    "@docusaurus/theme-classic": "3.9.2",
+    "@docusaurus/theme-common": "3.9.2",
+    "@docusaurus/theme-mermaid": "3.9.2",
     "@docusaurus/theme-search-algolia": "3.9.2",
-    "@docusaurus/types":             "3.9.2",
-    "@docusaurus/utils":             "3.9.2",
-    "@docusaurus/utils-common":      "3.9.2",
+    "@docusaurus/types": "3.9.2",
+    "@docusaurus/utils": "3.9.2",
+    "@docusaurus/utils-common": "3.9.2",
     "@docusaurus/utils-validation": "3.9.2",
-    "webpack":                       "5.101.1"
+    "webpack": "5.101.1"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
