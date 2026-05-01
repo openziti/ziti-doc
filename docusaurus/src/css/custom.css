@@ -7,7 +7,6 @@
 @import "@netfoundry/docusaurus-theme/css/legacy.css";
 @import '@docsearch/css';
 
-
 :root {
     --ziti-landing-max-width: 1800px;
     --ifm-container-width-xl: 1400px;
