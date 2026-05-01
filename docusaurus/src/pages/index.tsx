@@ -97,7 +97,7 @@ function GetStartedSection ({ className }: { className?: string }) {
                                 Deploy and operate your own OpenZiti network using our documentation and community support - no commercial support included.
                                 Start with a quickstart, then see our <a href="/docs/openziti/category/deployments/">deployment guides</a> when you're ready for production.
                             </p>
-                            <a href="/docs/openziti/learn/quickstarts/" className={btns}>View Quickstarts</a>
+                            <a href="/docs/openziti/intro/get-started/" className={btns}>View Quickstarts</a>
                         </div>
                     </div>
                     <a href="https://openziti.discourse.group/" className={btns}>Join the Community</a>
