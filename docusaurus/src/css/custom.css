@@ -7,24 +7,7 @@
 @import "@netfoundry/docusaurus-theme/css/legacy.css";
 @import '@docsearch/css';
 
-/* sidebar section separators — TODO: move to theme once confirmed */
-html .theme-doc-sidebar-item-link-level-1.sidebar-title {
-    margin-top: 0.75rem;
-    margin-left: 0;
-    padding-top: 0.25rem;
-    margin-bottom: -0.25rem;
-    border-top: 1px solid var(--ifm-color-emphasis-300);
-}
 
-html .theme-doc-sidebar-item-link-level-1.sidebar-title > .menu__link {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--ifm-color-emphasis-800);
-    padding-left: 0.25rem;
-    cursor: default;
-    pointer-events: none;
-}
 
 :root {
     --ziti-landing-max-width: 1800px;
