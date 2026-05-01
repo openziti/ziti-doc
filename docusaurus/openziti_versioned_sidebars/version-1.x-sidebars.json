@@ -2,7 +2,7 @@
   "docsSidebar": [
     {
       "type": "html",
-      "value": "<span class=\"menu__link\">LEARN</span>",
+      "value": "<a class=\"menu__link\" href=\"/docs/openziti/1.x/learn/introduction/\">LEARN</a>",
       "className": "sidebar-title"
     },
     {
@@ -11,7 +11,7 @@
     },
     {
       "type": "html",
-      "value": "<span class=\"menu__link\">REFERENCE</span>",
+      "value": "<a class=\"menu__link\" href=\"/docs/openziti/1.x/reference/\">REFERENCE</a>",
       "className": "sidebar-title"
     },
     {
@@ -20,7 +20,7 @@
     },
     {
       "type": "html",
-      "value": "<span class=\"menu__link\">GUIDES</span>",
+      "value": "<a class=\"menu__link\" href=\"/docs/openziti/1.x/guides/\">GUIDES</a>",
       "className": "sidebar-title"
     },
     {
