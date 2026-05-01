@@ -9,7 +9,7 @@ Learn how to set up your own open-source zero-trust network overlay and start se
 OpenZiti works with your applications at whatever level makes sense. Use lightweight [tunnelers](/reference/tunnelers/index.mdx) to add zero trust to existing applications with no code changes, or embed our [SDKs](/reference/developer/sdk/index.mdx) directly for the strongest security posture. Either way, your services stay dark: no open ports, no public endpoints, no exposure to unauthorized users.
 
 :::info
-Quickstarts are short-lived networks that are great for learning how to use OpenZiti. For long-lived production deployments, see the [deployment guides](@openzitidocs/category/deployments).
+Quickstarts are short-lived networks that are great for learning how to use OpenZiti. For long-lived production deployments, see the [deployment guides](/docs/openziti/1.x/category/deployments).
 :::
 
 :::tip 
