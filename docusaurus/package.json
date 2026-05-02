@@ -6,6 +6,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
+    "build:spa": "cross-env USE_DOCS_FOR_BASE_URL=true docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -22,7 +23,7 @@
     "@docusaurus/theme-common": "3.9.2",
     "@docusaurus/theme-mermaid": "3.9.2",
     "@mdx-js/react": "^3.0.0",
-    "@netfoundry/docusaurus-theme": "^0.11.4",
+    "@netfoundry/docusaurus-theme": "^0.11.5",
     "@types/react": "^19.1.9",
     "asciinema-player": "^3.10.0",
     "clsx": "^2.0.0",
@@ -48,6 +49,7 @@
     "@docusaurus/module-type-aliases": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
+    "cross-env": "^7.0.3",
     "typescript": "~5.9.2"
   },
   "browserslist": {
