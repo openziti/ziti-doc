@@ -10,7 +10,6 @@ on:
     types: [opened, reopened, ready_for_review, closed]
     paths:
       - docusaurus/**
-  fork:
   release:
     types: [released]
   workflow_dispatch:
