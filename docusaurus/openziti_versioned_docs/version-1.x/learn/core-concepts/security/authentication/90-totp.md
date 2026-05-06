@@ -56,7 +56,7 @@ Enrollment can be performed at different points depending on the authentication 
   [Legacy Authentication - Partial Authentication](./20-legacy-auth.md#partial-authentication)).
   It can also be performed any time after becoming fully authenticated.
 - **Any time when fully authenticated** - available to both OIDC and legacy authenticated clients via the
-  [Edge Client API](../../../../reference/developer/api/01-edge-client-reference.mdx) endpoints below.
+  [Edge Client API](/api/edge-client) endpoints below.
 
 ### Enrollment status
 

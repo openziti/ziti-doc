@@ -12,7 +12,7 @@ For identities using username password (UPDB) authenticators the following actio
 ## Administrative Password reset
 
 Passwords may be reset via the
-[Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx) by an administrative
+[Edge Management API](/api/edge-management) by an administrative
 client.
 
 ### OpenZiti CLI

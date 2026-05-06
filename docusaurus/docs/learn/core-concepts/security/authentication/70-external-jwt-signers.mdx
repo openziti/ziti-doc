@@ -48,7 +48,7 @@ If the JWT provider has a static x509 certificate, it is possible define an Exte
 public certificate of the signer. If the JWT provider has JWKS endpoint support it is strongly recommended to create
 an External JWT Signer using the JWKS endpoint. External JWT Signers configured with a static x509 certificate will
 need maintenance during key rotation and certificate expiration. For these operations the
-[Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx)
+[Edge Management API](/api/edge-management)
 can be used for external automation.
 
 ### JWKS Endpoint
@@ -106,7 +106,7 @@ be created as follows:
 ## Client Authentication Fields
 
 Unauthenticated clients can enumerate External JWT Signers via the
-[Edge Client API](../../../../reference/developer/api/01-edge-client-reference.mdx). The response contains only the
+[Edge Client API](/api/edge-client). The response contains only the
 fields necessary for a client to initiate authentication with the target identity provider — management fields such as
 `issuer`, `audience`, and `certPem` are not exposed.
 
