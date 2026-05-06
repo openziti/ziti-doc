@@ -10,25 +10,6 @@ export default function EdgeManagementApiReference(): JSX.Element {
     useEffect(() => {
         if (!ref.current) return;
 
-        function injectBackLink(container: HTMLElement) {
-            if (container.querySelector('#nf-back-to-docs')) return;
-            const sidebar = container.querySelector<HTMLElement>('.t-doc__sidebar');
-            if (!sidebar) return;
-            const link = document.createElement('a');
-            link.id = 'nf-back-to-docs';
-            link.href = '/docs/openziti';
-            link.textContent = '← Back to docs';
-            Object.assign(link.style, {
-                display: 'block',
-                padding: '6px 16px',
-                fontSize: '13px',
-                color: 'var(--scalar-color-2)',
-                textDecoration: 'none',
-                borderBottom: '1px solid var(--scalar-border-color)',
-            });
-            sidebar.insertBefore(link, sidebar.firstChild);
-        }
-
         function mount() {
             const scalar = (window as any).Scalar;
             if (!scalar || !ref.current) return;
@@ -36,12 +17,6 @@ export default function EdgeManagementApiReference(): JSX.Element {
                 spec: {url: 'https://get.openziti.io/spec/management.yml'},
                 hideDarkModeToggle: true,
             });
-            const observer = new MutationObserver(() => {
-                if (!ref.current) return;
-                injectBackLink(ref.current);
-                if (ref.current.querySelector('#nf-back-to-docs')) observer.disconnect();
-            });
-            observer.observe(ref.current, {childList: true, subtree: true});
         }
 
         if ((window as any).Scalar) {
