@@ -15,7 +15,7 @@ export default function EdgeClientApiReference(): JSX.Element {
             if (!sidebar) return;
             const link = document.createElement('a');
             link.id = 'nf-back-to-docs';
-            link.href = '/docs/openziti';
+            link.href = '/docs/openziti/learn/introduction';
             link.textContent = '← Back to docs';
             Object.assign(link.style, {
                 display: 'block',
