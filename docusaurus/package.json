@@ -39,7 +39,7 @@
     "react-helmet": "^6.1.0",
     "react-lite-youtube-embed": "^2.5.6",
     "react-player": "^3.3.1",
-    "redocusaurus": "^2.5.0",
+    "@scalar/docusaurus": "^0.8.13",
     "remark-emoji": "^5.0.1",
     "remark-github-admonitions-to-directives": "^2.1.0",
     "unist-util-visit": "^5.0.0"

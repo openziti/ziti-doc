@@ -12,7 +12,7 @@ import {
 } from "@netfoundry/docusaurus-theme";
 import path from "node:path";
 import {openZitiFooter} from "./src/components/footer";
-import {openzitiDocsPluginConfig, openzitiRedocSpecs} from "./docusaurus-plugin-openziti-docs";
+import {openzitiDocsPluginConfig} from "./docusaurus-plugin-openziti-docs";
 import {
     remarkReplaceMetaUrl,
     remarkScopedPath,
@@ -179,20 +179,7 @@ const config: Config = {
         ['@docusaurus/plugin-content-pages',{id: `openziti-pages`, path: `src/pages`, routeBasePath: 'openziti'}],
         openzitiDocsPluginConfig(__dirname, REMARK_MAPPINGS, `docs/${openziti}`),
     ],
-    presets: [
-        [ // Redocusaurus config
-            'redocusaurus',
-            {
-                // Plugin Options for loading OpenAPI files
-                specs: openzitiRedocSpecs(),
-                // Theme Options for modifying how redoc renders them
-                theme: {
-                    // Change with your site colors
-                    primaryColor: '#1890ff',
-                },
-            },
-        ],
-    ],
+    presets: [],
     themeConfig:
         {
             // NetFoundry theme configuration — mirrors unified-doc so the standalone
