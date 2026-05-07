@@ -3,6 +3,7 @@ import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-di
 import {themes as prismThemes} from 'prism-react-renderer';
 import {Config} from "@docusaurus/types";
 import type {ThemeConfig} from '@docusaurus/preset-classic';
+import type {ScalarOptions} from '@scalar/docusaurus';
 import pluginHotjar from './src/plugins/hotjar';
 import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-redirects';
 import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
@@ -35,6 +36,14 @@ const REMARK_MAPPINGS = [
 ];
 
 const redirectsArr: { to: string; from: string[] }[] = [
+  {
+    to: docUrl(openziti, '/reference/developer/api/edge-client-api-reference'),
+    from: ['/api/edge-client'],
+  },
+  {
+    to: docUrl(openziti, '/reference/developer/api/edge-management-api-reference'),
+    from: ['/api/edge-management'],
+  },
   {
     to: docUrl(openziti, '/category/deployments'),
     from: [docUrl(docsBase, '/reference/deployments')]
@@ -179,6 +188,30 @@ const config: Config = {
         ['@docusaurus/plugin-content-pages',{id: `openziti-root-pages`, path: `src/pages`, routeBasePath: '/'}],
         ['@docusaurus/plugin-content-pages',{id: `openziti-pages`, path: `src/pages`, routeBasePath: 'openziti'}],
         openzitiDocsPluginConfig(__dirname, REMARK_MAPPINGS, `docs/${openziti}`),
+        [
+            '@scalar/docusaurus',
+            {
+                id: 'edge-client',
+                label: 'Edge Client API reference',
+                route: '/docs/openziti/reference/developer/api/edge-client-api-reference',
+                showNavLink: false,
+                configuration: {
+                    url: 'https://get.openziti.io/spec/client.yml',
+                },
+            } as ScalarOptions,
+        ],
+        [
+            '@scalar/docusaurus',
+            {
+                id: 'edge-management',
+                label: 'Edge Management API reference',
+                route: '/docs/openziti/reference/developer/api/edge-management-api-reference',
+                showNavLink: false,
+                configuration: {
+                    url: 'https://get.openziti.io/spec/management.yml',
+                },
+            } as ScalarOptions,
+        ],
     ],
     presets: [],
     themeConfig:
