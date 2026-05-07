@@ -17,9 +17,6 @@ export default function EdgeClientApiReference(): JSX.Element {
             link.id = 'nf-back-to-docs';
             link.href = '/docs/openziti/learn/introduction';
             link.textContent = '← Back to docs';
-            link.addEventListener('click', (e) => {
-                if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
-            });
             Object.assign(link.style, {
                 display: 'block',
                 padding: '6px 16px',
@@ -36,7 +33,6 @@ export default function EdgeClientApiReference(): JSX.Element {
             if (!scalar || !ref.current) return;
             scalar.createApiReference(ref.current, {
                 spec: {url: 'https://get.openziti.io/spec/client.yml'},
-                darkMode: document.documentElement.getAttribute('data-theme') === 'dark',
                 hideDarkModeToggle: true,
             });
             const observer = new MutationObserver(() => {

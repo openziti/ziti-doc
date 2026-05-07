@@ -84,6 +84,7 @@ const config: Config = {
             customCss: [
                 require.resolve('./src/css/custom.css'),
                 require.resolve('@netfoundry/docusaurus-theme/css/product-picker.css'),
+                require.resolve('@scalar/docusaurus/dist/theme.css'),
             ],
         }],
         '@docusaurus/theme-mermaid',
