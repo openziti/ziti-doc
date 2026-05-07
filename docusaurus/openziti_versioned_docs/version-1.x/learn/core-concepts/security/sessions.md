@@ -46,7 +46,7 @@ reflect only legacy `zt-session` based sessions. OIDC access tokens are self-con
 via these endpoints.
 
 OIDC tokens can be revoked administratively using the
-[Edge Management API](/api/edge-management) and CLI:
+[Edge Management API](/docs/openziti/reference/developer/api/edge-management-api-reference) and CLI:
 
 - `GET /edge/management/v1/revocations` - list active revocation entries
 - `GET /edge/management/v1/revocations/{id}` - get a single revocation entry
@@ -250,7 +250,7 @@ A client may terminate its own API Session at any time by calling: `DELETE /edge
 
 A Session represents access to a specific service for dialing or binding. They are scoped to the
 [API Session](#api-session) that was used to create them. They are requested from the
-controller by a client through the [Edge Client API](/api/edge-client).
+controller by a client through the [Edge Client API](/docs/openziti/reference/developer/api/edge-client-api-reference).
 The result of that request is a security token representing the Session and a list of Edge Routers that the client
 may use to dial or bind the target service through.
 

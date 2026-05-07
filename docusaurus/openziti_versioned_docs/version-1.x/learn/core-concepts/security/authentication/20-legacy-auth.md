@@ -13,8 +13,8 @@ directly to the Edge Client or Edge Management API and receive an opaque `zt-ses
 in subsequent API requests in the `zt-session` HTTP header.
 
 The same legacy authentication endpoints and `zt-session` mechanism apply to both the
-[Edge Client API](/api/edge-client) and the
-[Edge Management API](/api/edge-management).
+[Edge Client API](/docs/openziti/reference/developer/api/edge-client-api-reference) and the
+[Edge Management API](/docs/openziti/reference/developer/api/edge-management-api-reference).
 
 ## Authentication endpoint
 
