@@ -20,6 +20,25 @@ jobs:
     runs-on: ubuntu-latest
     name: POST to doc-alerts
     steps:
+      - name: Strip Vercel HTML from event JSON
+        id: preprocess
+        env:
+          EVENT_JSON: ${{ toJson(github.event) }}
+        run: |
+          python3 - << 'PYEOF'
+          import os, json, re
+          event = json.loads(os.environ['EVENT_JSON'])
+          body = (event.get('comment') or {}).get('body') or ''
+          if body:
+              event['comment']['body'] = re.sub(
+                  r'\s*<a\b[^>]*vercel\.com[^>]*>.*?</a>',
+                  '',
+                  body,
+                  flags=re.DOTALL | re.IGNORECASE,
+              ).rstrip()
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+              fh.write(f"event_json<<DELIM\n{json.dumps(event)}\nDELIM\n")
+          PYEOF
       - uses: openziti/ziti-mattermost-action-py@v1
         if: |
           !(
@@ -31,5 +50,5 @@ jobs:
         with:
           zitiId: ${{ secrets.ZITI_MATTERMOST_IDENTITY }}
           webhookUrl: ${{ secrets.ZHOOK_URL_DOC_NOTIFICATIONS }}
-          eventJson: ${{ toJson(github.event) }}
+          eventJson: ${{ steps.preprocess.outputs.event_json }}
           senderUsername: "GitHubZ"
