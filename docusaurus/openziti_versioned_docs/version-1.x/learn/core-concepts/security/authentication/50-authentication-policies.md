@@ -107,7 +107,7 @@ The secondary section contain only two top-level configuration values:
 
 
 Authentication policies are managed via the
-[Edge Management API](/docs/openziti/reference/developer/api/edge-management-api-reference).
+[Edge Management API](@openzitidocs/reference/developer/api/edge-management-api-reference).
 
 ### Create
 

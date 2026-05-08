@@ -39,8 +39,8 @@ the mesh.
 ## Controller API connection details
 
 Controller APIs provide ways for clients (SDKs or otherwise) to interact with a network. The
-[Edge Management API](/docs/openziti/reference/developer/api/edge-management-api-reference) is used for configuration and
-maintenance. The [Edge Client API](/docs/openziti/reference/developer/api/edge-client-api-reference)
+[Edge Management API](@openzitidocs/reference/developer/api/edge-management-api-reference) is used for configuration and
+maintenance. The [Edge Client API](@openzitidocs/reference/developer/api/edge-client-api-reference)
 is used to allow clients to authenticate, discover services, request [Sessions](sessions.md#session),
 discover Edge Routers, and to perform basic self-maintenance.
 

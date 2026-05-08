@@ -34,8 +34,8 @@ This section applies only to client certificates issued by the OpenZiti internal
 
 Clients may determine their own client certificate extension frequency. In order to extend their current client
 certificate, they must issue the following REST request to either the
-[Edge Management API](/docs/openziti/reference/developer/api/edge-management-api-reference) or
-[Edge Client API](/docs/openziti/reference/developer/api/edge-client-api-reference)
+[Edge Management API](@openzitidocs/reference/developer/api/edge-management-api-reference) or
+[Edge Client API](@openzitidocs/reference/developer/api/edge-client-api-reference)
 after becoming [fully authenticated](../../security/sessions.md#full-vs-partial-authentication).
 
 ### Client Certificate extension

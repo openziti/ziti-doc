@@ -48,7 +48,7 @@ If the JWT provider has a static x509 certificate, it is possible define an Exte
 public certificate of the signer. If the JWT provider has JWKS endpoint support it is strongly recommended to create
 an External JWT Signer using the JWKS endpoint. External JWT Signers configured with a static x509 certificate will
 need maintenance during key rotation and certificate expiration. For these operations the
-[Edge Management API](/docs/openziti/reference/developer/api/edge-management-api-reference)
+[Edge Management API](@openzitidocs/reference/developer/api/edge-management-api-reference)
 can be used for external automation.
 
 ### JWKS Endpoint
@@ -106,7 +106,7 @@ be created as follows:
 ## Client Authentication Fields
 
 Unauthenticated clients can enumerate External JWT Signers via the
-[Edge Client API](/docs/openziti/reference/developer/api/edge-client-api-reference). The response contains only the
+[Edge Client API](@openzitidocs/reference/developer/api/edge-client-api-reference). The response contains only the
 fields necessary for a client to initiate authentication with the target identity provider — management fields such as
 `issuer`, `audience`, and `certPem` are not exposed.
 
