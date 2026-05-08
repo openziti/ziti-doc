@@ -37,14 +37,6 @@ const REMARK_MAPPINGS = [
 
 const redirectsArr: { to: string; from: string[] }[] = [
   {
-    to: docUrl(openziti, '/reference/developer/api/edge-client-api-reference'),
-    from: ['/api/edge-client'],
-  },
-  {
-    to: docUrl(openziti, '/reference/developer/api/edge-management-api-reference'),
-    from: ['/api/edge-management'],
-  },
-  {
     to: docUrl(openziti, '/category/deployments'),
     from: [docUrl(docsBase, '/reference/deployments')]
   },
