@@ -3,6 +3,7 @@ import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-di
 import {themes as prismThemes} from 'prism-react-renderer';
 import {Config} from "@docusaurus/types";
 import type {ThemeConfig} from '@docusaurus/preset-classic';
+import type {ScalarOptions} from '@scalar/docusaurus';
 import pluginHotjar from './src/plugins/hotjar';
 import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-redirects';
 import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
@@ -12,7 +13,7 @@ import {
 } from "@netfoundry/docusaurus-theme";
 import path from "node:path";
 import {openZitiFooter} from "./src/components/footer";
-import {openzitiDocsPluginConfig, openzitiRedocSpecs} from "./docusaurus-plugin-openziti-docs";
+import {openzitiDocsPluginConfig} from "./docusaurus-plugin-openziti-docs";
 import {
     remarkReplaceMetaUrl,
     remarkScopedPath,
@@ -84,6 +85,7 @@ const config: Config = {
             customCss: [
                 require.resolve('./src/css/custom.css'),
                 require.resolve('@netfoundry/docusaurus-theme/css/product-picker.css'),
+                require.resolve('@scalar/docusaurus/dist/theme.css'),
             ],
         }],
         '@docusaurus/theme-mermaid',
@@ -178,21 +180,36 @@ const config: Config = {
         ['@docusaurus/plugin-content-pages',{id: `openziti-root-pages`, path: `src/pages`, routeBasePath: '/'}],
         ['@docusaurus/plugin-content-pages',{id: `openziti-pages`, path: `src/pages`, routeBasePath: 'openziti'}],
         openzitiDocsPluginConfig(__dirname, REMARK_MAPPINGS, `docs/${openziti}`),
-    ],
-    presets: [
-        [ // Redocusaurus config
-            'redocusaurus',
+        [
+            '@scalar/docusaurus',
             {
-                // Plugin Options for loading OpenAPI files
-                specs: openzitiRedocSpecs(),
-                // Theme Options for modifying how redoc renders them
-                theme: {
-                    // Change with your site colors
-                    primaryColor: '#1890ff',
+                id: 'edge-client',
+                label: 'Edge Client API reference',
+                route: '/docs/openziti/reference/developer/api/edge-client-api-reference',
+                showNavLink: false,
+                configuration: {
+                    url: 'https://get.openziti.io/spec/client.yml',
+                    hideClientButton: true,
+                    hideTestRequestButton: true,
                 },
-            },
+            } as ScalarOptions,
+        ],
+        [
+            '@scalar/docusaurus',
+            {
+                id: 'edge-management',
+                label: 'Edge Management API reference',
+                route: '/docs/openziti/reference/developer/api/edge-management-api-reference',
+                showNavLink: false,
+                configuration: {
+                    url: 'https://get.openziti.io/spec/management.yml',
+                    hideClientButton: true,
+                    hideTestRequestButton: true,
+                },
+            } as ScalarOptions,
         ],
     ],
+    presets: [],
     themeConfig:
         {
             // NetFoundry theme configuration — mirrors unified-doc so the standalone

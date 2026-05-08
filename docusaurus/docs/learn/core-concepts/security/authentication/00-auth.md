@@ -75,7 +75,7 @@ Authenticators for an identity may be listed via the CLI:
 ziti edge list authenticators
 ```
 
-or via the [Edge Management API](../../../../reference/developer/api/02-edge-management-reference.mdx):
+or via the [Edge Management API](@openzitidocs/reference/developer/api/edge-management-api-reference):
 
 ```http
 GET /edge/management/v1/authenticators
