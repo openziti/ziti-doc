@@ -189,6 +189,8 @@ const config: Config = {
                 showNavLink: false,
                 configuration: {
                     url: 'https://get.openziti.io/spec/client.yml',
+                    hideClientButton: true,
+                    hideTestRequestButton: true,
                 },
             } as ScalarOptions,
         ],
@@ -201,6 +203,8 @@ const config: Config = {
                 showNavLink: false,
                 configuration: {
                     url: 'https://get.openziti.io/spec/management.yml',
+                    hideClientButton: true,
+                    hideTestRequestButton: true,
                 },
             } as ScalarOptions,
         ],
