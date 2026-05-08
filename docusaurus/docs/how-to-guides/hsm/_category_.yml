@@ -2,4 +2,4 @@ label: Hardware Keys
 position: 60
 link:
   type: doc
-  id: guides/hsm/hsmIndex
+  id: how-to-guides/hsm/index
