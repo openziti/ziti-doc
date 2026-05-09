@@ -8,7 +8,7 @@ hide_table_of_contents: false
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This article expands on the [Linux router deployment](/guides/deployments/10-linux/20-router/10-deploy.mdx) article with configuration concepts and examples.
+This article expands on the [Linux router deployment](/how-to-guides/deployments/10-linux/20-router/10-deploy.mdx) article with configuration concepts and examples.
 
 ## Config Management
 
@@ -32,7 +32,7 @@ The [`identity`](/reference/30-configuration/conventions.md#identity) configurat
 
 If present, the `server_key` signs the router's server certificate request. Otherwise, the `key` sub-property is used for both client and server certificate.
 
-The private keys' values are assumed to be `file://` URLs if unspecified. Alternatives include `pkcs11://` and `parsec://` URLs for [hardware keys](/guides/hsm/index.md).
+The private keys' values are assumed to be `file://` URLs if unspecified. Alternatives include `pkcs11://` and `parsec://` URLs for [hardware keys](/how-to-guides/hsm/index.md).
 
 ## Optional Capabilities
 

@@ -17,8 +17,8 @@ containers for each component in the future but for now it's a single container.
 
 ## Starting the Controller
 
-All [networks](../../../learn/introduction/index.mdx) require
-a [controller](../../../guides/deployments/10-linux/10-controller/10-deploy.mdx). Without a controller, edge routers won't be able to authorize new
+All [networks](../../../intro/what-is-openziti/index.mdx) require
+a [controller](../../../how-to-guides/deployments/10-linux/10-controller/10-deploy.mdx). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
 ### Required - Docker Named Volume
@@ -99,7 +99,7 @@ docker run \
 
 ## Edge Router
 
-At this point you should have a [controller](../../../guides/deployments/10-linux/10-controller/10-deploy.mdx) running. You should have created your
+At this point you should have a [controller](../../../how-to-guides/deployments/10-linux/10-controller/10-deploy.mdx) running. You should have created your
 Docker network as well as creating the volume mount. Now it's time to connect your first edge router. The same Docker
 image that runs the controller can run an edge router. To start an edge router, you will run a very similar command as
 the one to start the controller with a couple of key differences.
