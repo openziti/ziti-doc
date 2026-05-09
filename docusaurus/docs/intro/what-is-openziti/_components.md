@@ -31,7 +31,7 @@ store the information needed to manage the network.
 
 The controller's TLS server employs SNI to select the correct certificate for presentation when there are multiple certificates. Ziti clients use ALPN to negotiate a connection to the control plane (`ziti-ctrl`) or the REST APIs (`h2`, `http/1.1`).
 
-[Controller Deployment Guide](/how-to-guides/deployments/10-linux/10-controller/10-deploy.mdx)
+[Controller Deployment Guide](@openzitidocs/how-to-guides/deployments/10-linux/10-controller/10-deploy)
 
 ### Router
 
@@ -49,7 +49,7 @@ The router is the entry point to the network for client connections.
 The router in combination with the controller is responsible
 for authenticating and authorizing clients.
 
-[Router Deployment Guide](/how-to-guides/deployments/10-linux/20-router/10-deploy.mdx)
+[Router Deployment Guide](@openzitidocs/how-to-guides/deployments/10-linux/20-router/10-deploy)
 
 ### Edge Clients
 
@@ -69,7 +69,7 @@ OpenZiti offers specialized Edge Clients called tunnelers
 which provide seamless, secure connectivity and do not require
 changes to the target application.
 
-Read more about [clients](/learn/core-concepts/clients/choose.mdx)
+Read more about [clients](@openzitidocs/learn/core-concepts/clients/choose)
 
 ### BrowZer
 
@@ -119,7 +119,7 @@ network Routers to reach the exit node. Simply specifying the
 node is all the end-user need do, the network handles the
 rest.
 
-Read more about [services](/learn/core-concepts/services/overview.mdx)
+Read more about [services](@openzitidocs/learn/core-concepts/services/overview)
 
 ### Identities
 
@@ -132,7 +132,7 @@ to the network. The presented certificate is used by the
 network to authorize the client and enumerate the services the
 Identity is authorized to use.
 
-Read more about [identities](/learn/core-concepts/identities/overview.mdx) and [authentication](/learn/core-concepts/security/authentication/00-auth.md).
+Read more about [identities](@openzitidocs/learn/core-concepts/identities/overview) and [authentication](@openzitidocs/learn/core-concepts/security/authentication/00-auth).
 
 ### Policies
 
@@ -185,4 +185,4 @@ Policy access to the given edge router. Similarly, adding a service
 to a Service edge router policy will grant that service access to the
 edge routers mapped in that Service edge router policy.
 
-[Read more about authorization](/learn/core-concepts/security/authorization/policies/overview.mdx)
+[Read more about authorization](@openzitidocs/learn/core-concepts/security/authorization/policies/overview)
