@@ -44,7 +44,7 @@ Additional guidelines:
 * Keep responses in the issues specifically about the issue itself. If another issue arises or if discussion is
   warranted open a new issue and use the [discourse group](https://openziti.discourse.group/) accordingly.
 
-### Example Bug Report {#example-bug-report}
+### Example Bug Report
 
 ```
 Title: 
