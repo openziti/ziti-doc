@@ -252,7 +252,7 @@ Hello World
 
 ### Ziti Admin Console (ZAC)
 
-Optionally, you may [install the ZAC](../../quickstarts/zac/index.mdx) to manage your network with a UI.
+Optionally, you may [install the ZAC](../zac/index.mdx) to manage your network with a UI.
 
 ### Testing Everything Works
 

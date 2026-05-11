@@ -14,18 +14,18 @@ const ensure = <T,>(x: T, name: string): T => {
 export { default as DockerRouterReadme } from '@openziti_remotes/ziti-cmd/dist/docker-images/ziti-router/README.md';
 export { default as DockerControllerReadme } from '@openziti_remotes/ziti-cmd/dist/docker-images/ziti-controller/README.md';
 export { default as ConsoleAuthAdminClientCertificate } from './reference/40-command-line/_console-auth-admin-client-certificate.mdx';
-export { default as ConsolePublicCertsPlatformIntro } from './guides/deployments/_console-public-certs-platform-intro.mdx';
-export { default as ConsolePublicCertsBasicSteps } from './guides/deployments/_console-public-certs-basic-steps.mdx';
-export { default as ConsolePublicCertsConfigurationLink } from './guides/deployments/_console-public-certs-configuration-link.mdx';
+export { default as ConsolePublicCertsPlatformIntro } from './how-to-guides/deployments/_console-public-certs-platform-intro.mdx';
+export { default as ConsolePublicCertsBasicSteps } from './how-to-guides/deployments/_console-public-certs-basic-steps.mdx';
+export { default as ConsolePublicCertsConfigurationLink } from './how-to-guides/deployments/_console-public-certs-configuration-link.mdx';
 export { default as HostHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-host/README.md';
 export { default as ControllerHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-controller/README.md';
 export { default as RouterHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-router/README.md';
-export { default as CallbackUrls } from './guides/external-auth/identity-providers/_callback_urls.mdx';
-export { default as UnlistedIdp } from './guides/external-auth/identity-providers/_unlisted.mdx';
-export { default as ConsolePublicCertsNote } from './guides/deployments/_console-public-certs-note.mdx';
+export { default as CallbackUrls } from './how-to-guides/external-auth/identity-providers/_callback_urls.mdx';
+export { default as UnlistedIdp } from './how-to-guides/external-auth/identity-providers/_unlisted.mdx';
+export { default as ConsolePublicCertsNote } from './how-to-guides/deployments/_console-public-certs-note.mdx';
 export { default as AndroidMd } from '@openziti_remotes/ziti-android-app/README.md';
-export { default as LinuxResolverConfig } from './reference/tunnelers/60-linux/_resolver.mdx';
-export { default as LinuxAddIdentities } from './reference/tunnelers/60-linux/_add_identities.mdx';
+export { default as LinuxResolverConfig } from './how-to-guides/tunnelers/60-linux/_resolver.mdx';
+export { default as LinuxAddIdentities } from './how-to-guides/tunnelers/60-linux/_add_identities.mdx';
 export { default as DockerMd } from '@openziti_remotes/ziti-tunnel-sdk-c/docker/README.md';
 export { default as TunHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-edge-tunnel/README.md';
 
