@@ -65,7 +65,7 @@ A Ziti Enabled Application is an application that embeds the Ziti Endpoint SDK, 
 
 The Ziti Endpoint SDK provides software components that are designed to be embedded into customer applications so that they can participate natively in a Ziti network. The SDK targets golang, Swift, C, C#, and potentially other programming languages, allowing programs in those languages to work with idioms and concepts native to those environments. The SDK provides support for both accessing and hosting services that are available on a Ziti network.
 
-## [Ziti Fabric, Fabric](/learn/introduction/30-openziti-is-software.md#fabric)
+## [Ziti Fabric, Fabric](/intro/what-is-openziti/30-openziti-is-software.md#fabric)
 
 The Ziti Fabric provides the core of the network overlay. The Ziti Fabric implements a routable mesh network, which can provide reliable connectivity between any two points on the network. The fabric provides software extension mechanisms that allow the overlay to be embedded into new overlay applications. The Ziti Edge is an example of an overlay application implemented on top of Ziti Fabric extension mechanisms (Xgress, Xctrl, Xmgmt).
 
@@ -92,7 +92,7 @@ certificate, rather than by a DNS name or an IP address (underlay concepts).
 Similar to a service however the destination is not described as an IP address and port but rather it is expressed
 as a identity. When used with a Ziti SDK it is possible to create a truly zero trust application.
 
-## [Ziti Tunneler, Tunneler](/reference/tunnelers/index.mdx)
+## [Ziti Tunneler, Tunneler](/how-to-guides/tunnelers/index.mdx)
 
 A tunneler adds zero trust connectivity to existing applications with no code changes. Tunnelers provide an underlay connectivity component (TUN, tproxy, etc.) and use the Ziti Endpoint SDK to bridge application traffic onto the Ziti network.
 

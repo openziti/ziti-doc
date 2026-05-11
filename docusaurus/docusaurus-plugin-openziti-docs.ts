@@ -40,7 +40,7 @@ export function openzitiDocsPluginConfig(
             lastVersion: '1.x',
             includeCurrentVersion: true,
             versions: {
-                'current': { label: '2.x',   path: 'next', banner: 'unreleased' },
+                'current': { label: '2.x', path: 'next', banner: 'unreleased', noIndex: true },
                 '1.x':     { label: '1.x', path: '',     banner: 'none' },
             },
             beforeDefaultRemarkPlugins: [
