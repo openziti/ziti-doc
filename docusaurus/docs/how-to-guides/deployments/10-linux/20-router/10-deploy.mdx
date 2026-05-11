@@ -6,7 +6,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import LinuxPackageRepo from '../../../../_linux-package-repo.mdx';
 
-Deploy a router as a Linux system service. [The router introduction](@openzitidocs/intro/what-is-openziti/03-components#router) may help to read first.
+Deploy a router as a Linux system service. [The router introduction](/intro/what-is-openziti/03-components.mdx#router) may help to read first.
 
 1. [Creation](#router-creation)
 1. [Installation](#install-the-router-package)
@@ -15,9 +15,9 @@ Deploy a router as a Linux system service. [The router introduction](@openzitido
 
 ## Router creation
 
-Create the router in the controller first with [the web console](@openzitidocs/how-to-guides/deployments/10-linux/30-console) or [the CLI](@openzitidocs/how-to-guides/deployments/10-linux/20-router/40-cli-mgmt).
+Create the router in the controller first with [the web console](/how-to-guides/deployments/10-linux/30-console.mdx) or [the CLI](/how-to-guides/deployments/10-linux/20-router/40-cli-mgmt.mdx).
 
-After [creating the router](@openzitidocs/how-to-guides/deployments/10-linux/20-router/40-cli-mgmt#create-a-router), save the enrollment token (JWT) for the configuration step below.
+After [creating the router](/how-to-guides/deployments/10-linux/20-router/40-cli-mgmt.mdx#create-a-router), save the enrollment token (JWT) for the configuration step below.
 
 ## Install the router package
 
@@ -76,7 +76,7 @@ The script asks for:
 
 ### Craft a configuration
 
-Create a config file directly with `ziti create config router edge --routerName=router`. Run `ziti create config environment` to see the available environment variables. See [the router configuration reference](@openzitidocs/reference/30-configuration/router) for details.
+Create a config file directly with `ziti create config router edge --routerName=router`. Run `ziti create config environment` to see the available environment variables. See [the router configuration reference](/reference/30-configuration/router.md) for details.
 
 ### Automation
 
@@ -130,9 +130,9 @@ Customize **/var/lib/ziti-router/config.yml** as needed and restart the service.
 sudo systemctl restart ziti-router.service
 ```
 
-Here's a link to [the configuration reference](@openzitidocs/reference/30-configuration/router).
+Here's a link to [the configuration reference](/reference/30-configuration/router.md).
 
-Learn more about [managing routers with the CLI](@openzitidocs/how-to-guides/deployments/10-linux/20-router/40-cli-mgmt).
+Learn more about [managing routers with the CLI](/how-to-guides/deployments/10-linux/20-router/40-cli-mgmt.mdx).
 
 ### Customize the systemd service
 
@@ -252,7 +252,7 @@ ZITI_ARGS='--verbose'
 
 <br />
 
-Learn more in [the logging reference](@openzitidocs/reference/40-logging).
+Learn more in [the logging reference](/reference/40-logging.mdx).
 
 ## Uninstall
 

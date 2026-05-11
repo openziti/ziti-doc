@@ -62,7 +62,7 @@ You can deploy a loopback proxy sidecar for pod egress to services. The sidecar 
 
 #### [TCP Proxy Cluster Service](../../../how-to-guides/deployments/30-kubernetes/kubernetes-router.mdx)
 
-The router can be deployed to provide a cluster-wide proxy for services, optionally exposing the services' proxy ports with an Ingress or LoadBalancer. This is accomplished by first creating the router with tunnel mode enabled, then deploying the router Helm chart with input values specifying each service for which the router's tunnel identity is authorized by a Dial Service Policy. For more information, see the [router](@openzitidocs/how-to-guides/deployments/30-kubernetes//kubernetes-router) page. 
+The router can be deployed to provide a cluster-wide proxy for services, optionally exposing the services' proxy ports with an Ingress or LoadBalancer. This is accomplished by first creating the router with tunnel mode enabled, then deploying the router Helm chart with input values specifying each service for which the router's tunnel identity is authorized by a Dial Service Policy. For more information, see the [router](/how-to-guides/deployments/30-kubernetes/kubernetes-router.mdx) page. 
 
 ### Ingress to Cluster Services
 
@@ -74,7 +74,7 @@ The router's built-in tunneler can reverse-proxy cluster services for Ziti clien
 
 #### [NGINX Proxy Module](../../../how-to-guides/tunnelers/90-nginx.mdx)
 
-The NGINX Proxy Module can be used to provide ingress to cluster services. The module binds services to an NGINX stream context and forward requests to the configured upstreams. Unlike the rest of these solutions, the NGINX module is not a full tunneler. The main difference for writing configurations for the module is that it will honor the upstreams that are set in the NGINX configuration, ignoring the `host.v1` addresses set in the config. For more information, see the [NGINX Proxy Module guide](@openzitidocs/how-to-guides/tunnelers/90-nginx).
+The NGINX Proxy Module can be used to provide ingress to cluster services. The module binds services to an NGINX stream context and forward requests to the configured upstreams. Unlike the rest of these solutions, the NGINX module is not a full tunneler. The main difference for writing configurations for the module is that it will honor the upstreams that are set in the NGINX configuration, ignoring the `host.v1` addresses set in the config. For more information, see the [NGINX Proxy Module guide](/how-to-guides/tunnelers/90-nginx.mdx).
 
 #### [Reverse Proxy Tunnel Pod](./kubernetes-host.mdx)
 

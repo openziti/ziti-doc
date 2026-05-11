@@ -78,7 +78,7 @@ fulcrum to leverage the power of a network.
 The SDKs expose an API that allows endpoints to enroll, authenticate, list services, receive centralized configuration,
 and connect or host services based on security access configuration.
 
-[Check out the SDKs](@openzitidocs/reference/developer/sdk/index).
+[Check out the SDKs](/reference/developer/sdk/index.mdx).
 
 ## Clients
 

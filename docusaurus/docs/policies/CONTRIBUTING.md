@@ -87,8 +87,8 @@ signing. This summary is not legal advice
 ### Submitting the CLA
 
 In order to have a CLA on file you must download the CLA and sign it. If you are an individual you can download
-the [Individual Contributor License Agreement](@openzitidocs/policies/NetFoundry-ICLA.pdf). For contributors contributing on behalf
-of a corporation there exists a [Corporate Contributor License Agreement](@openzitidocs/policies/NetFoundry-CCLA.pdf). Once signed
+the [Individual Contributor License Agreement](/policies/NetFoundry-ICLA.pdf). For contributors contributing on behalf
+of a corporation there exists a [Corporate Contributor License Agreement](/policies/NetFoundry-CCLA.pdf). Once signed
 you will send the CLA to [cla@netfoundry.io](mailto:cla@netfoundry.io). We will process your request and add you as a
 contributor to the project. Note that submitting an issue does not require a CLA be signed. You also will only have to
 sign a single CLA regardless of which repository you are contributing to.

@@ -53,4 +53,4 @@ note over Application Client,Application Server : Data Flow
 8. The response messages from the routers, once all received, indicate the circuit is configured, and ready for traffic.
 9. A dial response to the initial edge router then begins the flow of data.
 
-There are a number of error codes associated with Service Dials.  Messages can time out, the end server may not respond to the TCP SYN packet, or send a RST, terminators can be in an unavailable state, and others.  Error codes for the fabric circuit creation process are available on [Circuit Dial Error Codes](@openzitidocs/support/20-circuit-create-error-codes)
+There are a number of error codes associated with Service Dials.  Messages can time out, the end server may not respond to the TCP SYN packet, or send a RST, terminators can be in an unavailable state, and others.  Error codes for the fabric circuit creation process are available on [Circuit Dial Error Codes](/support/20-circuit-create-error-codes.md)
