@@ -22,23 +22,11 @@ jobs:
     steps:
       - name: Strip Vercel HTML from event JSON
         id: preprocess
-        env:
-          EVENT_JSON: ${{ toJson(github.event) }}
         run: |
-          python3 - << 'PYEOF'
-          import os, json, re
-          event = json.loads(os.environ['EVENT_JSON'])
-          body = (event.get('comment') or {}).get('body') or ''
-          if body:
-              event['comment']['body'] = re.sub(
-                  r'\s*<a\b[^>]*vercel\.com[^>]*>.*?</a>',
-                  '',
-                  body,
-                  flags=re.DOTALL | re.IGNORECASE,
-              ).rstrip()
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-              fh.write(f"event_json<<DELIM\n{json.dumps(event)}\nDELIM\n")
-          PYEOF
+          CLEANED_JSON=$(jq -c 'if .comment.body then .comment.body |= gsub("\\s*<a\\b[^>]*vercel\\.com[^>]*>.*?</a>"; ""; "ig") else . end' "$GITHUB_EVENT_PATH")
+          echo "event_json<<DELIM" >> "$GITHUB_OUTPUT"
+          echo "$CLEANED_JSON" >> "$GITHUB_OUTPUT"
+          echo "DELIM" >> "$GITHUB_OUTPUT"
       - uses: openziti/ziti-mattermost-action-py@v1
         if: |
           !(
