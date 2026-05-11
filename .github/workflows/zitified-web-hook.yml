@@ -8,7 +8,11 @@ on:
   pull_request_review_comment:
   pull_request:
     types: [opened, reopened]
+    paths-ignore:
+      - 'docusaurus/**'
   push:
+    paths-ignore:
+      - 'docusaurus/**'
   fork:
   release:
     types: [released]
