@@ -49,7 +49,7 @@ Three logical constructs govern access once the network is running:
   determine what services are in use or infer source and destination. See
   [connection security](@openzitidocs/learn/core-concepts/security/connection-security).
 
-Ready to deploy your first network? Follow one of the [quickstart guides](../../intro/get-started/quickstarts.md).
+Ready to deploy your first network? Follow one of the [quickstart guides](@openzitidocs/intro/get-started/quickstarts).
 
 ## NetFoundry Cloud
 
