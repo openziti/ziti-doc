@@ -1,42 +1,35 @@
 ---
 title: What is OpenZiti?
-hide_table_of_contents: true
 ---
 
-import {WhatIsOpenZiti} from "@openziti/src/components/SharedComponents";
+OpenZiti is a free, open-source zero-trust networking platform that makes network services invisible to unauthorized
+users. The project provides everything you need to create a zero-trust overlay network — controllers, routers,
+tunnelers, and SDKs — so you can secure both existing applications and new ones. Whether you add zero trust at the
+network level, the host level, or directly inside your application, every connection is authenticated, authorized,
+and encrypted end to end.
 
-<WhatIsOpenZiti></WhatIsOpenZiti>
+### An example of an OpenZiti overlay network
 
-<h3>An Example of an OpenZiti Overlay Network</h3>
-<span>
+![OpenZiti overlay network diagram](@openziti_img/ziti-overview.svg)
 
-![image](@openziti_img/ziti-overview.svg)
-
-</span>
-
-<h3>In OpenZiti You Will Find</h3>
-
-* A zero trust [overlay mesh network](../../reference/glossary.mdx#network-overlay-overlay) composed of a controller, edge routers, and fabric routers
-* Lightweight [tunnelers](../../how-to-guides/tunnelers/index.mdx) that add zero trust to existing applications with no code changes
-* [SDKs](../../reference/developer/sdk/index.mdx) for embedding zero trust directly into your application for the strongest security posture
-* Zero trust principles such as [authorize before connect](../../learn/core-concepts/security/authentication/00-auth.md),
-[continual authorization](../../learn/core-concepts/security/authorization/00-auth.md),
-[least-privilege access](../../learn/core-concepts/security/authorization/policies/overview.mdx)
-
-OpenZiti gives you **zero trust, high performance networking on any Internet connection**, without VPNs. Add it to existing applications with tunnelers, or embed it directly with our SDKs for the strongest posture.
+OpenZiti gives you **zero trust, high performance networking on any Internet connection**, without VPNs. Add it to
+existing applications with tunnelers, or embed it directly with our SDKs for the strongest posture.
 
 ## Components
 
 An OpenZiti network has a few key deployed pieces:
 
-- **Controller**: The central coordination point. It manages configuration, identity, authentication, and authorization for the entire network. Every connection is validated by the controller.
+- **Controller**: The central coordination point. It manages configuration, identity, authentication, and authorization
+  for the entire network. Every connection is validated by the controller.
   See the [controller deployment guide](@openzitidocs/how-to-guides/deployments/10-linux/10-controller/10-deploy).
-- **Routers**: Form the mesh fabric that relays traffic between endpoints. Routers continuously monitor latency and select the fastest path, with automatic failover.
+- **Routers**: Form the mesh fabric that relays traffic between endpoints. Routers continuously monitor latency and
+  select the fastest path, with automatic failover.
   See the [router deployment guide](@openzitidocs/how-to-guides/deployments/10-linux/20-router/10-deploy).
-- **Edge clients**: Connect endpoints to the network. Use an [SDK](@openzitidocs/reference/developer/sdk) to embed zero trust directly into your application, or use a
-  [tunneler](@openzitidocs/how-to-guides/tunnelers) to add zero trust to existing apps without code changes.
-- **BrowZer** (optional): Bootstraps zero trust in a standard web browser — no browser extension or client install needed.
-  See the [BrowZer quickstart](@openzitidocs/intro/get-started/browzer).
+- **Edge clients**: Connect endpoints to the network. Use an [SDK](@openzitidocs/reference/developer/sdk) to embed
+  zero trust directly into your application, or use a [tunneler](@openzitidocs/how-to-guides/tunnelers) to add zero
+  trust to existing apps without code changes.
+- **BrowZer** (optional): Bootstraps zero trust in a standard web browser — no browser extension or client install
+  needed. See the [BrowZer quickstart](@openzitidocs/intro/get-started/browzer).
 
 Three logical constructs govern access once the network is running:
 
@@ -48,18 +41,21 @@ Three logical constructs govern access once the network is running:
 
 ## Key concepts
 
-- **Zero trust / application segmentation**: OpenZiti doesn't just gate access to a network — it enforces access to individual applications within it. Every identity requires a certificate,
-  and access can be revoked at any time, closing existing connections immediately.
-- **Dark services and routers**: Services and routers can be made "dark" — no open listening ports, no public exposure. They reach out to the fabric rather than accepting inbound connections,
-  so nothing in your private network needs to receive inbound traffic.
-- **End-to-end encryption**: Every connection is encrypted from endpoint to endpoint using public-private-key cryptography via [libsodium](https://doc.libsodium.org/), regardless of whether
-  the underlying service encrypts its own traffic. See [connection security](@openzitidocs/learn/core-concepts/security/connection-security).
+- **Zero trust / application segmentation**: OpenZiti doesn't just gate access to a network — it enforces access to
+  individual applications within it. Every identity requires a certificate, and access can be revoked at any time,
+  closing existing connections immediately.
+- **Dark services and routers**: Services and routers can be made "dark" — no open listening ports, no public
+  exposure. They reach out to the fabric rather than accepting inbound connections, so nothing in your private network
+  needs to receive inbound traffic.
+- **End-to-end encryption**: Every connection is encrypted from endpoint to endpoint using public-private-key
+  cryptography via [libsodium](https://doc.libsodium.org/), regardless of whether the underlying service encrypts its
+  own traffic. See [connection security](@openzitidocs/learn/core-concepts/security/connection-security).
 
 Ready to deploy your first network? Follow one of the [quickstart guides](../../intro/get-started/quickstarts.md).
 
-<h3>Start Now on the NetFoundry Cloud</h3>
+## NetFoundry Cloud
 
-NetFoundry sponsors the OpenZiti project and offers a hosted version of the OpenZiti platform great for teams that 
-don't want to host their own. It's free to get started and has an in-place upgrade to a paid enterprise option. 
+NetFoundry sponsors the OpenZiti project and offers a hosted version of the OpenZiti platform, great for teams that
+don't want to host their own. It's free to get started and has an in-place upgrade to a paid enterprise option.
 
-[Get Started With the NetFoundry Cloud](https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/)
+[Get started with the NetFoundry Cloud](https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/)
