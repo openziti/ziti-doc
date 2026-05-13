@@ -1,14 +1,15 @@
-# It's All Software
+---
+title: Software architecture
+sidebar_label: Software architecture
+---
 
-OpenZiti is software first and foremost. Moving at the speed of software is a vital characteristic of any
-modern project.
+# Software architecture
 
-This article lightly describes the internal software architecture of OpenZiti. In most scenarios, this information is not essential
-to deploy and operate a network. While not strictly necessary, understanding the internal model can help operators
-understand the functionality provided by OpenZiti, understand design decisions, and smooth the road for contributors.
+OpenZiti is built in four layered areas of concentration: Fabric, Edge, SDKs, and Clients. Each layer builds on the
+one below it. This page describes how those layers fit together and the extension points that connect them.
 
-Broadly speaking there are four major areas of concentration for the OpenZiti project: Fabric, Edge, SDKs, Clients.
-These areas are expanded on below.
+In most scenarios this is not essential reading to deploy and operate a network, but understanding the internal model
+can help operators understand design decisions and smooth the road for contributors.
 
 ## Fabric
 
@@ -87,22 +88,3 @@ applications or be custom-built by any software developer. They rely directly up
 on the Edge, and subsequently the Fabric. They can serve as the initiating client or terminating host for
 services. Clients may or may not expose extension points - it is at the author's discretion.
 
-## Contributing
-The OpenZiti project welcomes contributions including, but not limited to, code, documentation and bug reports.
-OpenZiti has grown to have many, many repositories. Here are just a few notable repositories, there are many more:
-
-* All code is found on GitHub under the [OpenZiti](https://github.com/openziti) organization.
-  * [ziti](https://github.com/openziti/ziti): top level project which builds all OpenZiti executables
-  * [foundation](https://github.com/openziti/foundation): project which contains library code used across multiple projects
-  * SDKs
-    * [ziti-sdk-c](https://github.com/openziti/ziti-sdk-c): C SDK
-    * [ziti-sdk-golang](https://github.com/openziti/sdk-golang): Go SDK
-    * [ziti-sdk-jvm](https://github.com/openziti/ziti-sdk-jvm): SDK for JVM based languages
-    * [ziti-sdk-py](https://github.com/openziti/ziti-sdk-py): Python SDK
-    * [ziti-sdk-swift](https://github.com/openziti/ziti-sdk-swift): Swift SDK
-    * [ziti-sdk-nodejs](https://github.com/openziti/ziti-sdk-nodejs): NodeJS SDK
-    * [ziti-sdk-csharp](https://github.com/openziti/ziti-sdk-csharp): C# SDK
-  * [ziti-doc](https://github.com/openziti/ziti-doc): Documentation (which you are currently reading)
-* A [Discourse forum](https://openziti.discourse.group/) is available
-
-OpenZiti was developed and open sourced by [NetFoundry Inc.](https://netfoundry.io). NetFoundry continues to fund and contribute to OpenZiti.
