@@ -60,6 +60,18 @@ const redirectsArr: { to: string; from: string[] }[] = [
   {
     to: docUrl(openziti, '/intro/get-started'),
     from: [docUrl(docsBase, '/intro/get-started/quickstartOverview')]
+  },
+  {
+    to: docUrl(openziti, '/how-to-guides/browzer'),
+    from: [docUrl(docsBase, '/intro/get-started/browzer')]
+  },
+  {
+    to: docUrl(openziti, '/how-to-guides/tunnelers/80-kubernetes/kubernetes-service'),
+    from: [docUrl(docsBase, '/intro/get-started/services/kubernetes-service')]
+  },
+  {
+    to: docUrl(openziti, '/intro/get-started/services'),
+    from: [docUrl(docsBase, '/intro/get-started/services/ztha')]
   }
 ];
 
