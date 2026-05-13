@@ -1,3 +1,8 @@
+---
+sidebar_label: Overview
+sidebar_position: 1
+---
+
 # OpenZiti overview
 
 OpenZiti is a free, open-source zero-trust networking platform that makes network services invisible to unauthorized
