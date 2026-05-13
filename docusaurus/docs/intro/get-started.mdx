@@ -4,7 +4,7 @@ sidebar_position: 0
 id: get-started
 ---
 
-import { DownloadSection } from '@netfoundry/docusaurus-theme/ui';
+import { GitHubReleaseDownloads } from '@netfoundry/docusaurus-theme/ui';
 import Details from '@theme/MDXComponents/Details';
 
 # Get started with OpenZiti
@@ -17,20 +17,14 @@ to stand up a network that will last.
 
 ## 1. Download the `ziti` CLI
 
-<DownloadSection
-  windows={{ links: [
-    { arch: 'x86_64', url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-windows-amd64.zip' },
-    { arch: 'ARM64',  url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-windows-arm64.zip' },
-  ]}}
-  macos={{ links: [
-    { arch: 'x86_64', url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-darwin-amd64.tar.gz' },
-    { arch: 'ARM64',  url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-darwin-arm64.tar.gz' },
-  ]}}
-  linux={{ links: [
-    { arch: 'x86_64', url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-linux-amd64.tar.gz' },
-    { arch: 'ARM64',  url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-linux-arm64.tar.gz' },
-    { arch: 'ARM',    url: 'https://github.com/openziti/ziti/releases/latest/download/ziti-linux-arm.tar.gz' },
-  ]}}
+<GitHubReleaseDownloads
+  repo="openziti/ziti"
+  channel="stable"
+  platforms={{
+    windows: { 'x86_64': /windows-amd64.*\.zip$/ },
+    macos:   { 'x86_64': /darwin-amd64.*\.tar\.gz$/, 'ARM64': /darwin-arm64.*\.tar\.gz$/ },
+    linux:   { 'x86_64': /linux-amd64.*\.tar\.gz$/, 'ARM64': /linux-arm64.*\.tar\.gz$/, 'ARM': /linux-arm-.*\.tar\.gz$/ },
+  }}
 />
 
 ## 2. Run the quickstart
