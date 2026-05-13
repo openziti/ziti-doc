@@ -3,8 +3,8 @@
 OpenZiti is a free, open-source zero-trust networking platform that makes network services invisible to unauthorized
 users. The project provides everything you need to create a zero-trust overlay network — controllers, routers,
 tunnelers, and SDKs — so you can secure both existing applications and new ones. Whether you add zero trust at the
-network level, the host level, or directly inside your application, every connection is authenticated, authorized,
-and encrypted end to end.
+network level, the host level, or directly inside your application, every connection is authenticated, authorized, and
+encrypted end to end.
 
 ![OpenZiti overlay network diagram](@openziti_img/ziti-overview.svg)
 
@@ -45,7 +45,9 @@ Three logical constructs govern access once the network is running:
   needs to receive inbound traffic.
 - **End-to-end encryption**: Every connection is encrypted from endpoint to endpoint using public-private-key
   cryptography via [libsodium](https://doc.libsodium.org/), regardless of whether the underlying service encrypts its
-  own traffic. See [connection security](@openzitidocs/learn/core-concepts/security/connection-security).
+  own traffic. All traffic is synthesized to port 443 and metadata is encrypted in transit, so attackers can't
+  determine what services are in use or infer source and destination. See
+  [connection security](@openzitidocs/learn/core-concepts/security/connection-security).
 
 Ready to deploy your first network? Follow one of the [quickstart guides](../../intro/get-started/quickstarts.md).
 

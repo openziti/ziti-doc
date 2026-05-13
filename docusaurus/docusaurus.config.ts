@@ -53,6 +53,7 @@ const redirectsArr: { to: string; from: string[] }[] = [
     from: [
       docUrl(docsBase, '/intro/what-is-openziti/components'),
       docUrl(docsBase, '/intro/what-is-openziti/key_concepts'),
+      docUrl(docsBase, '/intro/what-is-openziti/features'),
     ]
   }
 ];
