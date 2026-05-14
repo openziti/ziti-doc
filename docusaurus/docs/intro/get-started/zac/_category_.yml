@@ -1,2 +1,5 @@
-label: "2. Install ZAC"
+label: "2. Install the ZAC"
 position: 30
+link:
+  type: doc
+  id: intro/get-started/zac/index

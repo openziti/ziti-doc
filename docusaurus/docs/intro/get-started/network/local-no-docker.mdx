@@ -1,15 +1,17 @@
 ---
-title: Local - No Docker
 sidebar_position: 30
+sidebar_label: "Local: No Docker"
 ---
 
 import Wizardly from '@openziti/src/components/Wizardly';
+
+# Run locally without Docker
 
 :::info
 Quickstarts are short-lived networks that are great for learning how to use OpenZiti. For long-lived production deployments, see [the deployment guides](@openzitidocs/category/deployments).
 :::
 
-This page will show you how to get your [network](../../../intro/what-is-openziti/index.mdx) up and running 
+This page will show you how to get your [network](@openzitidocs/intro/intro) up and running 
 quickly and easily, entirely locally. Since you'll be running everything locally, you'll have no issues communicating
 between network components. All the processes will run locally, and you'll be responsible for starting and stopping them
 when you want to turn the overlay network on or off.
@@ -123,7 +125,7 @@ INFO: Controller stopped.
 
 ## Testing Your Overlay
 
-At this point you should have a functioning [network](../../../intro/what-is-openziti/index.mdx). The script 
+At this point you should have a functioning [network](@openzitidocs/intro/intro). The script 
 you sourced provides another function to login to your network. Try this now by running `zitiLogin`. You should see 
 something similar to this:
 ```text

@@ -1,7 +1,6 @@
 ---
-title: Your First Service
 ---
-# Your First Service - Zero Trust Host Access
+# 3. Create your first service
 
 This document will demonstrate how to successfully deploy and secure an existing, "brown field" application using OpenZiti. You want to 
 secure an application where you don't control the source or where you don't want to (or cannot) integrate an OpenZiti SDK into the 
