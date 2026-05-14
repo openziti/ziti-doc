@@ -266,7 +266,7 @@ const config: Config = {
                     { header: 'Cloud SaaS',              links: [consoleLinkAbs,    frontdoorLinkAbs] },
                     { header: 'Self-Hosted Licensed',    links: [selfhostedLinkAbs, zlanLinkAbs]      },
                     { header: 'Self-Hosted Open Source', links: [
-                        { ...openzitiLinkAbs, to: docUrl(docsBase, '/learn/introduction') },
+                        { ...openzitiLinkAbs, to: docUrl(docsBase, '/intro') },
                         zrokLinkAbs,
                     ]},
                 ],
