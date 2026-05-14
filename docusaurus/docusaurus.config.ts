@@ -28,8 +28,8 @@ const docsBase = `/docs/${openziti}`;
 
 const REMARK_MAPPINGS = [
     { from: '@openzitidocs',    to: `${docsBase}`},
-    { from: '@openziti2x',      to: `${docsBase}/next`},
-    { from: '@openziti1x',      to: `${docsBase}`},
+    { from: '@openziti2x',      to: `${docsBase}`},
+    { from: '@openziti1x',      to: `${docsBase}/1.x`},
     { from: '@selfhosteddocs',  to: 'https://netfoundry.io/docs/selfhosted' },
     { from: '@zrokdocs',        to: 'https://netfoundry.io/docs/zrok' },
     { from: '@frontdoordocs',   to: 'https://netfoundry.io/docs/frontdoor' },
@@ -202,6 +202,10 @@ const config: Config = {
                     }
                     if (path.startsWith(docUrl(docsBase, "/learn/introduction/"))) {
                         return [path.replace(docUrl(docsBase, "/learn/introduction/"), docUrl(docsBase, "/introduction/"))];
+                    }
+                    // Redirect /next/* → /* after promoting 2.x to the default version
+                    if (!path.startsWith(docUrl(docsBase, "/1.x"))) {
+                        return [path.replace(docUrl(docsBase, "/"), docUrl(docsBase, "/next/"))];
                     }
                     return undefined;
                 },
