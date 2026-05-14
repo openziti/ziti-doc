@@ -38,7 +38,7 @@ With an understanding of what we are looking to accomplish in this guide, let's 
 
 ### Prerequisite - OpenZiti
 You will need an OpenZiti overlay network in place before you can complete this guide. If you do not have an
-OpenZiti overlay network provisioned yet, [follow a quickstart](@openzitidocs/intro/get-started) and get a network up and running.
+OpenZiti overlay network provisioned yet, [follow a quickstart](@openziti2x/intro/get-started) and get a network up and running.
 
 ### Prerequisite - HTTP Server
 You'll need an HTTP server which you plan to connect your HTTP client to. There are numerous ways to 

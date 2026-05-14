@@ -6,7 +6,7 @@ import Details from '@theme/MDXComponents/Details';
 BrowZer is a set of technologies which is capable of bootstrapping zero trust connectivity entirely in a browser,
 and without the need to install any client-side software! To enable BrowZer on your network the `ziti-browzer-bootstrapper`
 will need to be deployed. This pages outlines the steps needed to deploy BrowZer to your own overlay. For an example
-of enabling BrowZer, see the [Example Enabling BrowZer](@openzitidocs/how-to-guides/browzer/example) subpage showing the steps in more detail.
+of enabling BrowZer, see the [Example Enabling BrowZer](@openziti2x/how-to-guides/browzer/example) subpage showing the steps in more detail.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ To deploy and enable BrowZer on your network, you will need to have:
 * an OIDC Provider and the ability to define applications/clients for the provider
 * a wildcard certificate from a 3rd party verifiable CA
 * you have signed up with Chrome's "origin trials" to allow the BrowZer bootstrapper to automatically enable
-  [JSPI](https://v8.dev/blog/jspi) for your BrowZer users. See [the chrome-origin-trials](@openzitidocs/how-to-guides/browzer/chrome-origin-trials)
+  [JSPI](https://v8.dev/blog/jspi) for your BrowZer users. See [the chrome-origin-trials](@openziti2x/how-to-guides/browzer/chrome-origin-trials)
   for more detail 
 
 ### OIDC Prerequisites
@@ -38,8 +38,8 @@ concepts you will want to understand are:
 With the OIDC information in hand, the next step is to actually configure OpenZiti to allow the delegation of authentication.
 To do this you will need to:
 
-* create an [external jwt signer](@openzitidocs/learn/core-concepts/security/authentication/70-external-jwt-signers)
-* create an [authentication policy](@openzitidocs/learn/core-concepts/security/authentication/50-authentication-policies)
+* create an [external jwt signer](@openziti2x/learn/core-concepts/security/authentication/external-jwt-signers)
+* create an [authentication policy](@openziti2x/learn/core-concepts/security/authentication/authentication-policies)
 and associate the external jwt signer
 * associate identities with the authentication policy delegating the authentication to the specified OIDC provider
 
@@ -212,8 +212,8 @@ If you want the BrowZer Bootstrap Agent to start when the machine starts or if t
 and you have [systemd](https://en.wikipedia.org/wiki/Systemd) on your system, you can enable the BrowZer Bootstrap Agent 
 to start automatically on failure or reboot.
 
-If you have used the [Local - No Docker](@openzitidocs/intro/get-started/network/local-no-docker) or the
-["host it anywhere" quickstart](@openzitidocs/intro/get-started/network/hosted) quickstarts, you would have sourced the 
+If you have used the [Local - No Docker](@openziti2x/intro/get-started/network/local-no-docker) or the
+["host it anywhere" quickstart](@openziti2x/intro/get-started/network/hosted) quickstarts, you would have sourced the 
 `ziti-cli-function.sh` helper script. If not, you can add the function to your shell or inspect the function and 
 replicate the output it produces. Find the function here: https://get.openziti.io/ziti-cli-functions.sh
 

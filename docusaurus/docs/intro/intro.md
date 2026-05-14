@@ -22,15 +22,15 @@ An OpenZiti network has a few key deployed pieces:
 
 - **Controller**: The central coordination point. It manages configuration, identity, authentication, and authorization
   for the entire network. Every connection is validated by the controller.
-  See the [controller deployment guide](@openzitidocs/how-to-guides/deployments/10-linux/10-controller/10-deploy).
+  See the [controller deployment guide](@openziti2x/how-to-guides/deployments/linux/controller/deploy).
 - **Routers**: Form the mesh fabric that relays traffic between endpoints. Routers continuously monitor latency and
   select the fastest path, with automatic failover.
-  See the [router deployment guide](@openzitidocs/how-to-guides/deployments/10-linux/20-router/10-deploy).
+  See the [router deployment guide](@openziti2x/how-to-guides/deployments/linux/router/deploy).
 - **Edge clients**: Connect endpoints to the network. Use an [SDK](@openzitidocs/reference/developer/sdk) to embed
-  zero trust directly into your application, or use a [tunneler](@openzitidocs/how-to-guides/tunnelers) to add zero
+  zero trust directly into your application, or use a [tunneler](@openziti2x/how-to-guides/tunnelers) to add zero
   trust to existing apps without code changes.
 - **BrowZer** (optional): Bootstraps zero trust in a standard web browser — no browser extension or client install
-  needed. See the [BrowZer quickstart](@openzitidocs/intro/get-started/browzer).
+  needed. See the [BrowZer quickstart](@openziti2x/how-to-guides/browzer).
 
 Three logical constructs govern access once the network is running:
 
@@ -54,7 +54,7 @@ Three logical constructs govern access once the network is running:
   determine what services are in use or infer source and destination. See
   [connection security](@openzitidocs/learn/core-concepts/security/connection-security).
 
-Ready to deploy your first network? Follow one of the [quickstart guides](@openzitidocs/intro/get-started/quickstarts).
+Ready to deploy your first network? Follow one of the [quickstart guides](@openziti2x/intro/get-started).
 
 ## NetFoundry Cloud
 
