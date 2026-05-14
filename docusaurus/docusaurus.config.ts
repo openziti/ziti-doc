@@ -34,6 +34,7 @@ const REMARK_MAPPINGS = [
     { from: '@zrokdocs',        to: 'https://netfoundry.io/docs/zrok' },
     { from: '@frontdoordocs',   to: 'https://netfoundry.io/docs/frontdoor' },
     { from: '@zlandocs',        to: 'https://netfoundry.io/docs/zlan' },
+    { from: '@platformdocs',    to: 'https://netfoundry.io/docs/platform' },
     { from: '@static', to: ``},
 ];
 

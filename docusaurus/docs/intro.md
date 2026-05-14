@@ -61,4 +61,5 @@ Ready to deploy your first network? Follow one of the [quickstart guides](@openz
 NetFoundry sponsors the OpenZiti project and offers a hosted version of the OpenZiti platform, great for teams that
 don't want to host their own. It's free to get started and has an in-place upgrade to a paid enterprise option.
 
-[Get started with the NetFoundry Cloud](https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/)
+- [Sign up for NetFoundry Cloud](https://netfoundry.io/products/netfoundry-platform/netfoundry-cloud-for-openziti/)
+- [NetFoundry Console docs](@platformdocs/intro)
