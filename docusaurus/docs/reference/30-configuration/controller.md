@@ -479,55 +479,64 @@ profile:
 The cluster section enables running multiple controllers in a cluster.
 
 - `commandHandler` - (optional)
-    - `maxQueueSize` - (optional, 1000) max size of the queue for processing incoming raft log
+    - `maxQueueSize` - (optional, 250) max size of the queue for processing incoming raft log
       entries
 - `commitTimeout` - (optional, 50ms) how long the leader should wait without receiving an Apply
   before sending an AppendEntry message to followers to ensure that log entries are committed in a
   reasonable time frame.
 - `dataDir` - (required) directory in which to store the bolt DB, the raft journal and snapshots
-- `electionTimeout` - (optional, 1s) how long candidates will wait without communications from the
+- `electionTimeout` - (optional, 5s) how long candidates will wait without communications from the
   leader before starting a leader election
-- `heartbeatTimeout` - (optional, 1s) How long for followers will wait without communications from
-- the leader before starting a leader election.
-- `leaderLeaseTimeout` - (optional, 500ms) How long a leader will keep leadership before stepping
+- `heartbeatTimeout` - (optional, 3s) How long followers will wait without communications from
+  the leader before starting a leader election.
+- `leaderLeaseTimeout` - (optional, 3s) How long a leader will keep leadership before stepping
   down, when it's unable to reach a quorum of nodes in the cluster
-- `logLevel` - (optional, DEBUG) The minimum level of raft log messages to emit
+- `logLevel` - (optional) The minimum level of raft log messages to emit. If unset, raft uses its
+  library default.
 - `logFile` - (optional) If not specified, raft log messages will be emitted along with all other
   ziti log messages. If specified, raft log messages will be emitted to the given log file.
-- `minClusterSize` - (optional, 1) Only used when bootstrapping the cluster. The minimum number of
-  nodes before attempting to form a raft cluster
 - `maxAppendEntries` - (optional, 64) - Maximum number of log append entries to send at any given
   time
+- `preferredLeader` - (optional, false) - If true, this node is marked as a preferred leader. A
+  non-preferred leader will automatically transfer leadership to a preferred peer when one is
+  available. Useful for steering leadership toward a specific voter, such as one co-located with
+  ops or in a chosen region.
+- `restartSelfOnSnapshot` - (optional, false) - Controls behavior after applying a raft snapshot
+  received from the leader. Applying a snapshot replaces the underlying bolt DB and requires a
+  controller restart. If true, the controller restarts itself in-process. If false, the controller
+  exits; a process manager is expected to restart it.
 - `snapshotInterval` - (optional, 2m) - How often to check to see if a new snapshot needs to be
   made. Checks will happen between `snapshotInterval` and 2 x `snapshotInterval`. This is a cluster
   wide value and should be consistent across nodes in the cluster. Otherwise the value from the most
   recently started controller will win.
-- `snapshotThreshold` - (optional, 8192) - Minimum number of new long entries before a new snapshot
+- `snapshotThreshold` - (optional, 500) - Minimum number of new log entries before a new snapshot
   will be created. This is a cluster wide value and should be consistent across nodes in the
   cluster. Otherwise the value from the most recently started controller will win.
-- `trailingLogs` - (optional, 10240) - How many logs to leave in place after a snapshot. These can
+- `trailingLogs` - (optional, 500) - How many logs to leave in place after a snapshot. These can
   be used to bring other nodes up to date that are only slightly behind, without having to send the
   full snapshot. This is a cluster wide value and should be consistent across nodes in the cluster.
   Otherwise the value from the most recently started controller will win.
 - `warnWhenLeaderlessFor` - (optional, 1m) - Emits a warning log message if a controller is part of
-   a cluster with no leader for a duration which exceeds this threshold. 
+   a cluster with no leader for a duration which exceeds this threshold. Minimum 10s.
 
 ```text
 cluster:
   commandHandler:
-    maxQueueSize: 1000
+    maxQueueSize: 250
   commitTimeout: 50ms
   dataDir: ./data
-  electionTimeout: 1s
-  heartbeatTimeout: 1s
-  leaderLeaseTimeout: 500ms
+  electionTimeout: 5s
+  heartbeatTimeout: 3s
+  leaderLeaseTimeout: 3s
   logLevel: INFO
   logFile: ./raft.log
-  minClusterSize: 3
   maxAppendEntries: 64
+  preferredLeader: false
+  restartSelfOnSnapshot: false
   snapshotInterval: 2m
-  snapshotThreshold: 8192
-  trailingLogs: 10240
+  snapshotThreshold: 500
+  trailingLogs: 500
+  warnWhenLeaderlessFor: 1m
 ```
 
 ### `trace`
