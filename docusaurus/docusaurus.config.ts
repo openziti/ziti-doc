@@ -28,10 +28,13 @@ const docsBase = `/docs/${openziti}`;
 
 const REMARK_MAPPINGS = [
     { from: '@openzitidocs',    to: `${docsBase}`},
+    { from: '@openziti2x',      to: `${docsBase}/next`},
+    { from: '@openziti1x',      to: `${docsBase}`},
     { from: '@selfhosteddocs',  to: 'https://netfoundry.io/docs/selfhosted' },
     { from: '@zrokdocs',        to: 'https://netfoundry.io/docs/zrok' },
     { from: '@frontdoordocs',   to: 'https://netfoundry.io/docs/frontdoor' },
     { from: '@zlandocs',        to: 'https://netfoundry.io/docs/zlan' },
+    { from: '@platformdocs',    to: 'https://netfoundry.io/docs/platform' },
     { from: '@static', to: ``},
 ];
 
@@ -43,6 +46,35 @@ const redirectsArr: { to: string; from: string[] }[] = [
   {
     to: docUrl(openziti, '/guides/external-auth/browzer/'),
     from: [docUrl(docsBase, '/identity-providers-for-browZer')]
+  },
+  {
+    to: docUrl(openziti, '/learn/software-architecture'),
+    from: [docUrl(docsBase, '/intro/what-is-openziti/30-openziti-is-software')]
+  },
+  {
+    to: docUrl(openziti, '/intro/intro'),
+    from: [
+      docUrl(docsBase, '/intro/what-is-openziti'),
+      docUrl(docsBase, '/intro/what-is-openziti/components'),
+      docUrl(docsBase, '/intro/what-is-openziti/key_concepts'),
+      docUrl(docsBase, '/intro/what-is-openziti/features'),
+    ]
+  },
+  {
+    to: docUrl(openziti, '/intro/get-started'),
+    from: [docUrl(docsBase, '/intro/get-started/quickstartOverview')]
+  },
+  {
+    to: docUrl(openziti, '/how-to-guides/browzer'),
+    from: [docUrl(docsBase, '/intro/get-started/browzer')]
+  },
+  {
+    to: docUrl(openziti, '/how-to-guides/tunnelers/80-kubernetes/kubernetes-service'),
+    from: [docUrl(docsBase, '/intro/get-started/services/kubernetes-service')]
+  },
+  {
+    to: docUrl(openziti, '/intro/get-started/services'),
+    from: [docUrl(docsBase, '/intro/get-started/services/ztha')]
   }
 ];
 

@@ -19,7 +19,7 @@ by hostname instead of IP address.
 
 ## Prerequisites
 
-- Complete the [Minikube Quickstart](../../../intro/get-started/network/local-kubernetes.mdx). This guide
+- Complete the [Minikube Quickstart](../../../get-started/network/local-kubernetes.mdx). This guide
   uses the controller and router that are created in the Minikube Quickstart.
 - Admin-level access to a Kubernetes cluster via `kubectl`.
 
