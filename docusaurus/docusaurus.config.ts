@@ -204,7 +204,7 @@ const config: Config = {
                         return [path.replace(docUrl(docsBase, "/learn/introduction/"), docUrl(docsBase, "/introduction/"))];
                     }
                     // Redirect /next/* → /* after promoting 2.x to the default version
-                    if (!path.startsWith(docUrl(docsBase, "/1.x"))) {
+                    if (path.startsWith(docUrl(docsBase, "/")) && !path.startsWith(docUrl(docsBase, "/1.x"))) {
                         return [path.replace(docUrl(docsBase, "/"), docUrl(docsBase, "/next/"))];
                     }
                     return undefined;
