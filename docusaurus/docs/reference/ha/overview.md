@@ -128,6 +128,11 @@ The following limitations currently apply:
    to that controller. This means that routers should generally be connected to
    all controllers.
 
+1. Downstream tools that build on OpenZiti may not yet explicitly support an HA
+   control plane. [zrok](https://zrok.io/) is one current example; see
+   [zrok#721](https://github.com/openziti/zrok/issues/721) for status. Check
+   downstream-tool release notes if you need HA at every layer of your stack.
+
 Improving routing is an ongoing focus for the OpenZiti project. 
 Issues related to routing improvments can be found on the [Routing Project Board](https://github.com/orgs/openziti/projects/13/views/1).
 

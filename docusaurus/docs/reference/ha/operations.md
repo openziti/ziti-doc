@@ -63,6 +63,32 @@ Flags:
 Use "ziti agent cluster [command] --help" for more information about a command.
 ```
 
+#### Reaching the IPC socket under systemd
+
+The OpenZiti-packaged systemd service runs the controller with `PrivateTmp=true`,
+which gives the unit its own private `/tmp` namespace. The controller writes its
+agent socket to `/tmp/gops-agent.<pid>.sock` inside that namespace, where commands
+run from outside the namespace can't see it. `ziti agent cluster ...` invoked from
+a normal shell will fail with a "could not find agent" error.
+
+The workaround is to enter the controller's mount namespace before running the
+agent command:
+
+```
+systemctl show -p MainPID --value ziti-controller.service \
+  | xargs -rIPID sudo nsenter --target PID --mount -- \
+    ziti agent cluster list
+```
+
+Replace `cluster list` with whatever agent command you need. The same pattern
+works for any other `ziti agent ...` invocation against a controller running
+under the packaged systemd unit.
+
+If you'd rather not nsenter every time, an alternative is to run the controller
+from the binary directly with a config file (no systemd), which avoids the
+namespace isolation entirely. That trades operational hygiene for convenience,
+and is generally only a good idea on development hosts.
+
 ## Growing the Cluster
 
 After at least one controller is running as part of a cluster and initialized, 
