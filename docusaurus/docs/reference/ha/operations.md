@@ -114,8 +114,22 @@ The new node, which is not yet part of the cluster, can also be directed to reac
 out to an existing cluster node and request to be joined.
 
 ```
-user@node2$ ziti agent cluser add tls:ctrl1.ziti.example.com:1280
+user@node2$ ziti agent cluster add tls:ctrl1.ziti.example.com:1280
 ```
+
+### Voter vs Non-Voter
+
+By default, `ziti agent cluster add` adds the new node as a **voter** (`--voter=true`).
+To add a node as a non-voter -- for example, an additional controller that exists for
+regional read coverage but shouldn't participate in raft consensus -- pass
+`--voter=false`:
+
+```
+ziti agent cluster add --voter=false tls:ctrl4.ziti.example.com:1280
+```
+
+See [Topology -> Voters and Non-Voters](./topology.md#voters-and-non-voters) for
+guidance on when to add which.
 
 ## Shrinking the Cluster
 
@@ -125,20 +139,102 @@ From any node in the cluster, nodes can be removed as follows:
 user@node1$ ziti agent cluster remove ctrl2
 ```
 
+## Changing Voter Status
+
+There is no dedicated command to promote a non-voter to a voter or demote a voter to
+a non-voter. Instead, re-run `ziti agent cluster add` against the existing node with
+the desired `--voter` value:
+
+```
+# promote an existing non-voter to a voter
+ziti agent cluster add --voter=true tls:ctrl4.ziti.example.com:1280
+
+# demote an existing voter to a non-voter
+ziti agent cluster add --voter=false tls:ctrl4.ziti.example.com:1280
+```
+
+When the controller sees that a node with the same ID and address is already in the
+cluster but with the opposite voter status, it removes the existing membership and
+re-adds the node with the requested suffrage. The node itself stays running; only the
+raft configuration entry changes.
+
+If the address has changed (e.g., you've moved the node to a new host), use
+`ziti agent cluster remove <id>` first, then `cluster add` the new address with the
+desired voter status. Re-adding by address relies on the node already being reachable
+at exactly that address.
+
 ## Restoring from Backup
 
-To restore from a database snapshot, use the following CLI command:
+Two restore paths exist, and they're complementary: `restore-from-db` is the more
+versatile tool, and the `db:` config setting is a simpler way to do the same restore
+at startup when you're bringing up a fresh node.
+
+### `restore-from-db`
 
 ```
-ziti agent controller restore-from-db /path/to/backup.db
+ziti agent cluster restore-from-db /path/to/backup.db
 ```
 
-As this is an agent command, it must be run on the same machine as the controller. The path
-provided will be read by the controller process, not the CLI.
+This is an IPC agent command, so it must be run on the same host as a controller,
+and the path is interpreted by the controller process rather than the CLI. It works
+in two situations:
 
-The controller will apply the snapshot and then terminate. All controllers in the cluster will
-terminate and expect to be restarted. This is so in memory caches won't be out of sync with
-the database which has changed.
+* **Against an initialized cluster with a working leader.** The controller packages
+  the snapshot into a raft command and dispatches it through raft, so the snapshot
+  is applied on every controller in the cluster. Each controller replaces its bolt
+  DB with the snapshot's contents and then terminates so the process manager can
+  restart it cleanly -- this avoids in-memory caches drifting from the new database
+  state. Use this when you want to roll a healthy cluster back to a known good
+  model (e.g., reverting after a bad change).
+* **Against a fresh, uninitialized controller.** When the receiving controller has
+  no raft state, the command bootstraps a new single-node cluster with itself as
+  leader and applies the snapshot to that single-node cluster. Use this when you're
+  recovering from total cluster loss -- start a fresh controller, then run
+  `restore-from-db` against it to bring up a one-node cluster from the snapshot,
+  then grow the cluster with `cluster add`.
+
+What `restore-from-db` does **not** help with is a partially-alive cluster that has
+lost quorum. There's no leader to dispatch through on the existing nodes, and
+pointing the command at a fresh node wouldn't help reconstitute the broken
+cluster -- you'd just end up with a separate new cluster. For lost quorum without
+recoverable voters, see
+[Failure Scenarios -> Loss of Quorum](./failure-scenarios.md#loss-of-quorum) and
+treat it as total cluster loss.
+
+### `db:` config setting
+
+The `db:` setting was originally added to support migrating a non-HA controller into
+a cluster: in a standalone deployment, `db:` already points at the controller's
+bolt database, and adding a `cluster:` section alongside it converts the controller
+to HA without losing the existing model. The same mechanism doubles as a way to
+seed a fresh HA controller from any bolt DB snapshot.
+
+When you're standing up a fresh controller from a snapshot, you can skip the
+`restore-from-db` step by setting `db: /path/to/backup.db` in the controller
+config. On the first startup with an empty `cluster.dataDir`, the controller
+detects that it's running in HA mode but isn't initialized, reads the backup, and
+bootstraps a single-node cluster from it. The end state is identical to running
+`restore-from-db` against a fresh node.
+
+The `db:` setting is only consulted while raft has no state; on subsequent restarts
+it's ignored, so it's safe to leave in the config.
+
+Use whichever is more convenient: if you can edit the config before the first
+startup (or you're coming from a non-HA controller that already has `db:` set),
+the `db:` path is natural; if the controller is already running and you want to
+seed it from a snapshot, use `restore-from-db`. Either way, follow the
+[Total Cluster Loss](./failure-scenarios.md#total-cluster-loss) procedure for the
+full sequence (clear `dataDir`, bring up the first controller, grow the cluster,
+routers reconnect).
+
+### Which path for which situation
+
+| Situation | Use |
+| --- | --- |
+| Cluster has a leader; want to roll the data model back to a snapshot | `restore-from-db` against any cluster member |
+| Bringing up a fresh deployment from an existing snapshot | `db:` config or `restore-from-db` against a fresh node -- either works |
+| All controllers destroyed; restoring from off-host backup | Same as fresh deployment: `db:` config or `restore-from-db` against a fresh node |
+| Quorum lost on a partially-alive cluster, voters unrecoverable | Treat as total cluster loss; see [Failure Scenarios](./failure-scenarios.md#loss-of-quorum) |
 
 ## Snapshot Application and Restarts
 
