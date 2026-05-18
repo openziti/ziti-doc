@@ -265,6 +265,87 @@ If a router loses contact with every controller, existing circuits keep flowing
 traffic, but the router can't create new circuits or update terminators until at
 least one controller becomes reachable again.
 
+## SDK Client Behavior During Failures
+
+SDK clients keep a list of controllers and rotate between them automatically when
+the current one becomes unreachable. From the application's perspective, most
+failure scenarios are invisible: requests just take longer than usual while the
+SDK fails over, and resume normally once it finds a healthy controller.
+
+The behaviors described below are based on the Go SDK, which is the reference
+implementation. Other language SDKs (TypeScript, Swift, Java, C, etc.) follow the
+same general model but may differ in specifics -- retry policies, timeout
+defaults, refresh intervals, and pool-selection details vary. Check the
+language-specific SDK documentation when you need exact numbers; treat what
+follows as the conceptual model that all SDKs implement.
+
+### Endpoint discovery
+
+An SDK identity contains one or more initial controller endpoints, which the SDK
+uses to make first contact. After a successful authentication, the SDK can
+discover additional controller endpoints from the controller it connected to, and
+adds them to its pool of candidate endpoints.
+
+The implication: as long as at least one of the initial endpoints in the identity
+is reachable when the SDK starts, the SDK will pick up the full current cluster
+automatically. If you bring up an entirely new set of controllers without
+updating the identities, the SDKs won't know about them.
+
+### Leader change
+
+If the SDK's currently-connected controller is still reachable but loses
+leadership, the SDK sees nothing different. Model updates triggered by SDK
+actions -- the SDK's own data being updated during authentication, a terminator
+created when the SDK binds a service via a router, etc. -- are routed to the new
+leader by the controller (or router) handling them; the SDK doesn't have to know
+which controller is leader.
+
+### Controller becomes unreachable
+
+When the SDK's current controller becomes unreachable, the SDK switches to
+another endpoint from its pool. Whether the in-flight request that triggered the
+failure is transparently retried against the new controller, or returned to the
+application as an error and only the next request goes to the new controller,
+depends on the SDK implementation. Either way, the SDK doesn't stay stuck on the
+unreachable controller -- subsequent requests will be routed to a healthy one.
+
+The application sees:
+
+* **In the best case**, the SDK transparently retries and a single SDK call takes
+  longer than usual but ultimately succeeds.
+* **Otherwise**, the failed call returns an error and the application is
+  responsible for retrying. The next call goes through cleanly against a
+  different controller.
+* **If every endpoint in the pool is unreachable**, all calls fail until at least
+  one controller becomes reachable again.
+
+### Authentication continuity
+
+OIDC session tokens are JWTs, signed by the cluster's OIDC issuer and
+independently verifiable by any controller against that issuer's public key.
+They aren't stored in the raft journal -- verification is stateless and doesn't
+depend on any specific controller. When the SDK fails over to a different
+endpoint, the same token works against the new controller, and no
+re-authentication is required.
+
+This statelessness is one of the reasons OIDC is the required auth path for HA
+(see [Bootstrapping -> Configuration](./bootstrapping/configuration.md)) --
+non-JWT session tokens would have to be replicated across controllers, which
+would add latency to every auth check.
+
+### Cached state and refresh
+
+The SDK caches services, sessions, and other model data locally. Cached data
+isn't invalidated by controller failover, because the cluster shares model state
+and any controller can serve it. The SDK refreshes its API session periodically
+by polling whichever controller it's currently connected to.
+
+Pushed updates aren't part of the SDK protocol today; failover and refresh are
+both pull-based. This means the SDK doesn't learn about cluster-membership
+changes between refreshes, but it doesn't need to -- the change becomes visible
+at the next refresh, and the failover-on-error path handles cases where the SDK
+happens to talk to a controller that's no longer in the cluster.
+
 ## Total Cluster Loss
 
 If every controller in the cluster is lost (e.g., destroyed underlying storage on all
