@@ -11,7 +11,7 @@ const starProps = {
 
 export default function Layout({ children }: { children: ReactNode }): ReactNode {
     const { pathname } = useLocation();
-    const isApiPage = /\/(api-reference|openapi-reference)$/.test(pathname);
+    const isApiPage = /(api-reference|openapi-reference)$/.test(pathname);
     const backUrl = isApiPage ? pathname.split('/').slice(0, -1).join('/') || '/' : '/';
 
     return (
