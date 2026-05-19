@@ -351,7 +351,7 @@ happens to talk to a controller that's no longer in the cluster.
 If every controller in the cluster is lost (e.g., destroyed underlying storage on all
 of them), you recover from a database snapshot. This requires that you've been taking
 backups: see [Operations -> Restoring from Backup](./operations.md#restoring-from-backup)
-and the [Backup guide](../../guides/deployments/10-linux/10-controller/60-backup.mdx).
+and the [Backup guide](../../how-to-guides/deployments/10-linux/10-controller/60-backup.mdx).
 
 Either of two recovery paths gets you back. Both start the same way: bring up a fresh
 controller process with `cluster.dataDir` empty (no `raft.db`, no `snapshots/`, no

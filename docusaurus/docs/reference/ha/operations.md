@@ -5,6 +5,10 @@ sidebar_position: 50
 
 # Operating a Controller Cluster
 
+For rolling upgrades specifically, see [Upgrading](./upgrading.md), which covers
+the per-node procedure, the version-mismatch read-only window, snapshotting before
+upgrade, and rollback.
+
 ## Cluster Management APIs 
 
 A cluster can be managed via the REST endpoint and via the IPC agent. 

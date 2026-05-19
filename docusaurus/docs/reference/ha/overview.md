@@ -136,6 +136,19 @@ The following limitations currently apply:
 Improving routing is an ongoing focus for the OpenZiti project. 
 Issues related to routing improvments can be found on the [Routing Project Board](https://github.com/orgs/openziti/projects/13/views/1).
 
+## Operating an HA Cluster
+
+Once a cluster is up, the day-2 documentation lives in a few places:
+
+* [Failure Scenarios](./failure-scenarios.md) -- what works (and doesn't) in
+  scenarios like single-voter loss, lost quorum, network partitions, and total
+  cluster loss; covers router and SDK client behavior during these events.
+* [Upgrading](./upgrading.md) -- rolling upgrade procedure, the version-mismatch
+  read-only window, snapshotting before upgrade, router draining, and rollback.
+* [Monitoring and Troubleshooting](./monitoring-and-troubleshooting.md) -- what to
+  watch, what a healthy cluster looks like, a symptom-driven troubleshooting
+  guide, and a tiered alerting recipe.
+
 ## Quickstart
 
 The quickstart supports running in clustered mode, see 
