@@ -265,6 +265,26 @@ the first controller to get the metrics message is expected to deliver the metri
 events system for external integrators. The other controllers will have `doNotPropagate` set to true,
 and will only use the metrics message internally, to update routing data.
 
+## Rate Limiting and `TooManyUpdatesError`
+
+The controller protects itself against runaway write load with an adaptive rate limiter on the
+raft command path. Under sustained heavy write activity -- large batch identity provisioning,
+terminator churn from many SDK hosting apps reconnecting at once, etc. -- incoming write requests
+can be rejected with the error `apierror.TooManyUpdatesError`. This is distinct from
+`ClusterHasNoLeaderError`: the cluster is healthy and has a leader; it's just signalling that it
+can't take on any more work right now.
+
+Clients receiving `TooManyUpdatesError` should back off and retry. The condition is transient --
+the rate limiter's adaptive window will widen again as soon as the in-flight load drops. SDKs
+typically handle this transparently. If you're writing custom code against the management API,
+exponential backoff with jitter is the right pattern.
+
+Three metrics (`raft.rate_limiter.queue_size`, `raft.rate_limiter.work_timer`,
+`raft.rate_limiter.window_size`) show the rate limiter's current state. See
+[Monitoring and Troubleshooting -> Metrics](./monitoring-and-troubleshooting.md#metrics) for what
+to watch and [the cluster config reference](../30-configuration/controller.md#cluster) for the
+tuning knob (`commandHandler.maxQueueSize`).
+
 ## Open Ports
 
 Controllers now establish connections with each other, for two purposes.
