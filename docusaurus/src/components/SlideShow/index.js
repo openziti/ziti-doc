@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ThemedImage from "@theme/ThemedImage";
 
 const Slideshow = (props) => {
-    const { style, slideClassName, slideTitle, slides, buttonClassName, textClassName, imgClassName, className } = props;
+    const { style, slideClassName, slideTitle, slides, buttonClassName, textClassName, imgClassName, className, textStyle, slideStyle, imgStyle } = props;
     const viewAllSlides = "View All";
     const viesAsSlideshow = "View as Slideshow"
     const [currentPosition, setCurrentPosition] = useState(0);
@@ -98,11 +98,11 @@ const Slideshow = (props) => {
     const renderSlide = (slide, extra) => {
         return <div style={{display: "flex", flexWrap: "wrap", marginTop: "10px"}}>
             {slide.title}
-            <div className={slideClassName}>
-                <div className={textClassName}>
+            <div className={slideClassName} style={slideStyle}>
+                <div className={textClassName} style={textStyle}>
                     {slide.text}
                 </div>
-                <div className={imgClassName}>
+                <div className={imgClassName} style={imgStyle}>
                     <ThemedImage
                         sources={{light: slide.img, dark: slide.darkImg ?? slide.img}}
                         alt={slide.alt ?? (typeof slide.text === 'string' ? slide.text : 'slide')}
