@@ -56,6 +56,8 @@ function HeroSection({ className }: { className?: string }) {
                             dark: useBaseUrl("/img/zt-model-overview-dark.svg"),
                         }}
                         style={{display: "flex", paddingLeft: "25px"}}
+                        width={1263}
+                        height={1316}
                     />
                 </div>
             </section>
@@ -65,7 +67,7 @@ function HeroSection({ className }: { className?: string }) {
 
 function GetStartedSection ({ className }: { className?: string }) {
     const btns = clsx(styles.btn, styles.btnSecondary);
-    return <NetFoundryHorizontalSection className={clsx(styles.aaGetStarted2, styles.ozHorizontalSectionRoot, className)} id="deploy_an_overlay">
+    return <NetFoundryHorizontalSection className={clsx(styles.aaGetStarted2, styles.ozHorizontalSectionRoot, className)} id="deploy_an_overlay" style={{ scrollMarginTop: 'var(--ifm-navbar-height)' }}>
         <section className={clsx(styles.aaSection, styles.aaGetStarted)}>
             <div className={styles.aaContainer}>
                 <div className={styles.aaStartContent}>
