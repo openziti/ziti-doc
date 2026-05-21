@@ -38,6 +38,9 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 if (existingPath.startsWith(`${base}/how-to-guides/tunnelers/linux`)) {
                     return [existingPath.replace(`${base}/how-to-guides/tunnelers/linux`, `${base}/reference/tunnelers/linux`)];
                 }
+                if (existingPath.startsWith(`${base}/learn/core-concepts/`)) {
+                    return [existingPath.replace(`${base}/learn/core-concepts/`, `${base}/core-concepts/`)];
+                }
                 return undefined;
             },
         },
