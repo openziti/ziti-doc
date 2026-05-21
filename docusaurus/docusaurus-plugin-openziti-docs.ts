@@ -35,17 +35,31 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                         existingPath.replace(`${base}/get-started/`, `${base}/quickstarts/`),
                     ];
                 }
-                if (existingPath.startsWith(`${base}/how-to-guides/tunnelers/linux`)) {
-                    return [existingPath.replace(`${base}/how-to-guides/tunnelers/linux`, `${base}/reference/tunnelers/linux`)];
+                // tunnelers moved from /reference/tunnelers/ to /how-to-guides/tunnelers/
+                if (existingPath.startsWith(`${base}/how-to-guides/tunnelers/`)) {
+                    return [existingPath.replace(`${base}/how-to-guides/tunnelers/`, `${base}/reference/tunnelers/`)];
+                }
+                // guides/ renamed to how-to-guides/ (deployments, external-auth, hsm, topologies, etc.)
+                if (existingPath.startsWith(`${base}/how-to-guides/`)) {
+                    return [existingPath.replace(`${base}/how-to-guides/`, `${base}/guides/`)];
                 }
                 if (existingPath.startsWith(`${base}/learn/core-concepts/`)) {
                     return [existingPath.replace(`${base}/learn/core-concepts/`, `${base}/core-concepts/`)];
+                }
+                // troubleshooting moved from /guides/troubleshooting/ to /support/
+                if (existingPath.startsWith(`${base}/support/`)) {
+                    return [existingPath.replace(`${base}/support/`, `${base}/guides/troubleshooting/`)];
                 }
                 if (existingPath === `${base}/intro`) {
                     return [`${base}/learn/introduction`, `${base}/introduction`];
                 }
                 return undefined;
             },
+            redirects: [
+                { from: `${base}/reference/developer/api/edge-client-reference`,     to: `${base}/reference/developer/api/edge-client-api-reference` },
+                { from: `${base}/reference/developer/api/edge-management-reference`, to: `${base}/reference/developer/api/edge-management-api-reference` },
+                { from: `${base}/learn/core-concepts/security/authorization/posture-checks`, to: `${base}/learn/core-concepts/security/authorization/posture-checks/overview` },
+            ],
         },
     ];
 }
