@@ -27,7 +27,7 @@ Many people have reported Google is using opaque access tokens. If your controll
 Most of the errors when using Google as an identity provider are due to selecting/using the wrong type of client.
 The only client type that currently works with OpenZiti is the **Universal Windows Platform** client type. If you use any 
 of the other client types you will experience one sort of error or another. Also, only OpenZiti tunnelers will work with
-this configuration. Google does not function standalone with BrowZer or Ziti Admin Console (ZAC)
+this configuration. Google does not function standalone with Ziti Admin Console (ZAC)
 :::
 
 | Field                 | Where to Find the Value in the Google UI                                                 | Example                                                                  |
@@ -65,7 +65,7 @@ choose OAuth client ID:
 ## Select Credential Type
 
 When creating a credential/client there are different types available to select. Depending on the OpenZiti tech
-you are trying to enable, you will need to select a different type. To enable authentication for BrowZer or the Ziti
+you are trying to enable, you will need to select a different type. To enable authentication for the Ziti
 Admin Console (ZAC) you will need to select the **Web application** type. For use with an OpenZiti tunneler you will
 need to select **Universal Windows Platform (UWP)**.
 

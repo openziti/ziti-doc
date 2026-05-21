@@ -55,7 +55,7 @@ Find **App registrations** under **Manage** and select it and click **New regist
 Registering an application will generate the Client ID necessary for configuring the ext-jwt-signer. 
 
 Enter a **Name** for the application and select the appropriate bullet for the **Supported account types**. If you 
-are only enabling one OpenZiti technology for OIDC auth (OpenZiti tunnelers, ZAC, BrowZer), you can skip the next 
+are only enabling one OpenZiti technology for OIDC auth (OpenZiti tunnelers, ZAC), you can skip the next 
 section and set the **Redirect URI** accordingly. Once finished, click the **Register** button at the bottom of the 
 form. (You can optionally add a single callback here)
 
@@ -80,7 +80,7 @@ After creating the App registration, from the **Overview** page click **Add a Re
 Under **Platform configurations**, find the **Add a platform** button and click it. Depending on the OpenZiti technology 
 being enabled, choose the appropriate option:
 * For OpenZiti Tunnelers, choose **Mobile and desktop applications**
-* For BrowZer or Ziti Admin Console (ZAC), choose **Single-page application**
+* For Ziti Admin Console (ZAC), choose **Single-page application**
 
 Choose the type of token desired. Ideally, an access token will be used with OpenZiti but if necessary ID tokens can be
 used.

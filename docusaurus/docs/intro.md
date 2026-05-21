@@ -29,8 +29,6 @@ An OpenZiti network has a few key deployed pieces:
 - **Edge clients**: Connect endpoints to the network. Use an [SDK](@openzitidocs/reference/developer/sdk) to embed
   zero trust directly into your application, or use a [tunneler](@openziti2x/how-to-guides/tunnelers) to add zero
   trust to existing apps without code changes.
-- **BrowZer** (optional): Bootstraps zero trust in a standard web browser — no browser extension or client install
-  needed. See the [BrowZer quickstart](@openziti2x/how-to-guides/browzer).
 
 Three logical constructs govern access once the network is running:
 
