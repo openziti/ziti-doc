@@ -282,12 +282,14 @@ function getWindowSize() {
 }
 
 function App() {
-    const [windowSize, setWindowSize] = useState<WindowSize>(getWindowSize());
+    const [windowSize, setWindowSize] = useState<WindowSize>({ width: 0, height: 0 });
     function handleWindowResize() {
         setWindowSize(getWindowSize());
     }
     useLayoutEffect(() => {
+        setWindowSize(getWindowSize());
         window.addEventListener('resize', handleWindowResize);
+        return () => window.removeEventListener('resize', handleWindowResize);
     }, []);
 
     const {pathname} = useLocation();
