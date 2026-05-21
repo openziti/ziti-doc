@@ -41,6 +41,9 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 if (existingPath.startsWith(`${base}/learn/core-concepts/`)) {
                     return [existingPath.replace(`${base}/learn/core-concepts/`, `${base}/core-concepts/`)];
                 }
+                if (existingPath === `${base}/intro`) {
+                    return [`${base}/learn/introduction`, `${base}/introduction`];
+                }
                 return undefined;
             },
         },
