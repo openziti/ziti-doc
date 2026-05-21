@@ -45,7 +45,6 @@ Many popular identity providers already have guides on how to use them with Open
 
 OpenZiti provides numerous clients that support using external jwt signers for authentication. The following 
 OpenZiti components all support using an external identity provider for authentication:
-* [BrowZer](../../guides/external-auth/browzer.mdx)
 * [Ziti Desktop Edge for Windows](../../reference/tunnelers/02-windows/add-ids/ext-providers/index.mdx)
 * [ziti-edge-tunnel for Linux](../../reference/tunnelers/60-linux/index.mdx)
 * [Ziti Mobile Edge for Android](../../reference/tunnelers/03-android.md)

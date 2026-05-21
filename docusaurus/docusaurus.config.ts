@@ -44,10 +44,6 @@ const redirectsArr: { to: string; from: string[] }[] = [
     from: [docUrl(docsBase, '/reference/deployments')]
   },
   {
-    to: docUrl(openziti, '/guides/external-auth/browzer/'),
-    from: [docUrl(docsBase, '/identity-providers-for-browZer')]
-  },
-  {
     to: docUrl(openziti, '/learn/software-architecture'),
     from: [docUrl(docsBase, '/intro/what-is-openziti/30-openziti-is-software')]
   },
@@ -63,10 +59,6 @@ const redirectsArr: { to: string; from: string[] }[] = [
   {
     to: docUrl(openziti, '/intro/get-started'),
     from: [docUrl(docsBase, '/intro/get-started/quickstartOverview')]
-  },
-  {
-    to: docUrl(openziti, '/how-to-guides/browzer'),
-    from: [docUrl(docsBase, '/intro/get-started/browzer')]
   },
   {
     to: docUrl(openziti, '/how-to-guides/tunnelers/80-kubernetes/kubernetes-service'),
