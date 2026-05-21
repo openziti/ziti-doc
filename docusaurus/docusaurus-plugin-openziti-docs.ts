@@ -22,6 +22,25 @@ export const openzitiImageAliases = [
     { from: '@openziti_img', to: OPENZITI_IMG },
 ];
 
+export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): PluginConfig {
+    const base = '/' + routeBasePath;
+    return [
+        '@docusaurus/plugin-client-redirects',
+        {
+            id: 'openziti-redirects',
+            createRedirects(existingPath: string) {
+                if (existingPath.startsWith(`${base}/get-started/`)) {
+                    return [
+                        existingPath.replace(`${base}/get-started/`, `${base}/learn/quickstarts/`),
+                        existingPath.replace(`${base}/get-started/`, `${base}/quickstarts/`),
+                    ];
+                }
+                return undefined;
+            },
+        },
+    ];
+}
+
 export function openzitiDocsPluginConfig(
     rootDir: string,
     linkMappings: { from: string; to: string }[],
