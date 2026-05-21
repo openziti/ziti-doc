@@ -180,8 +180,11 @@ const config: Config = {
                             path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/edge-apis/")
                         ];
                     }
-                    if (path.startsWith(docUrl(docsBase, "/learn/quickstarts/"))) {
-                        return [path.replace(docUrl(docsBase, "/learn/quickstarts/"), docUrl(docsBase, "/quickstarts/"))];
+                    if (path.startsWith(docUrl(docsBase, "/get-started/"))) {
+                        return [
+                            path.replace(docUrl(docsBase, "/get-started/"), docUrl(docsBase, "/learn/quickstarts/")),
+                            path.replace(docUrl(docsBase, "/get-started/"), docUrl(docsBase, "/quickstarts/")),
+                        ];
                     }
                     if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"))) {
                         return [

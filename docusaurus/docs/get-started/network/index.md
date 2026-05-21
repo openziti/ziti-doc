@@ -14,4 +14,4 @@ Quickstarts are short-lived networks great for learning. For production deployme
 | [Local — with Docker](./local-with-docker.mdx) | Single container with the full stack |
 | [Local — Docker Compose](./local-docker-compose.mdx) | Multi-container setup with better service isolation |
 | [Local — Kubernetes](./local-kubernetes.mdx) | Run on a local minikube cluster |
-| [Remote server](./hosted.mdx) | Deploy on an internet-accessible server; sharable with others |
+| [Run OpenZiti anywhere](./hosted.mdx) | Deploy on an internet-accessible server; sharable with others |
