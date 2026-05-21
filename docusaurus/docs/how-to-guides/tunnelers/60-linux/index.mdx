@@ -1,5 +1,5 @@
 ---
-title: Linux Tunneller
+title: Linux Tunneler
 ---
 
 import Tabs from '@theme/Tabs';
@@ -10,7 +10,7 @@ import Details from '@theme/MDXComponents/Details';
 Persistent, writable volumes are necessary for the tunneler to manage identity files, e.g., certificate renewal.
 :::
 
-The purpose of the tunneller is to configure host access. This means all users and all processes on the host will share
+The purpose of the tunneler is to configure host access. This means all users and all processes on the host will share
 the same level of access. This is accomplished by configuring the OS to have an OpenZiti DNS nameserver and IP routes
 for authorized services.
 
@@ -18,10 +18,10 @@ for authorized services.
 
 Reasons to use the package:
 
-1. Install the tunneller as a systemd service.
-1. Create permissions and policies for the tunneller to run as a non-root user.
+1. Install the tunneler as a systemd service.
+1. Create permissions and policies for the tunneler to run as a non-root user.
 1. Enroll the identity and clean up the enrollment token in identity directory.
-1. Upgrade the tunneller when a new package is available.
+1. Upgrade the tunneler when a new package is available.
 
 Linux DEB packages are currently available for the x86_64 and arm64 platforms and RPM packages are available for x86_64.
 ARM/v7 (32bit) binaries are available from GitHub.
@@ -32,7 +32,7 @@ ARM/v7 (32bit) binaries are available from GitHub.
 
 ## Run with Docker
 
-Reference [the article about running the Linux tunneller in a container](/how-to-guides/tunnelers/70-docker/readme.mdx) for guidance and
+Reference [the article about running the Linux tunneler in a container](/how-to-guides/tunnelers/70-docker/readme.mdx) for guidance and
 examples.
 
 ## Install a Pre-Release
@@ -42,7 +42,7 @@ examples.
 <Details>
 <summary>Pre-release repo for Debian-based distros</summary>
 
-You may use the following script to install the pre-release version of the tunneller for any supported Ubuntu LTS.
+You may use the following script to install the pre-release version of the tunneler for any supported Ubuntu LTS.
 
 ```text
 UBUNTU_LTS=focal;
