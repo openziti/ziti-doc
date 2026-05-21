@@ -68,7 +68,7 @@ If you plan to use the `ziti` CLI tool, you will need to download and get the `z
 followed the [Local - No Docker](../network/local-no-docker.mdx) quickstart, this will have been done for you and the executable will be located in `~/.ziti/quickstart/$(hostname -s)/ziti-bin/`.
 Also, the .env file the quickstart emits can be used to put this folder on your path by simply sourcing that file. For example, if you
 followed either the [Local - No Docker](../network/local-no-docker.mdx) or 
-[Host Ziti Anywhere](../network/hosted.mdx) quickstart, you should have a file that can be sourced. Here is an example of 
+[Run OpenZiti anywhere](../network/hosted.mdx) quickstart, you should have a file that can be sourced. Here is an example of 
 my personal "Local - No Docker" result when sourcing that file:
 
 ```textell
