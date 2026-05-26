@@ -11,13 +11,17 @@ const ensure = <T,>(x: T, name: string): T => {
 //   - sibling .mdx files: relative paths (those move with this file when versioned)
 //   - external _remotes content: @openziti_remotes alias resolves to docs/_remotes regardless of
 //     which version's _imports.tsx is being built; gendoc only ever populates docs/_remotes.
+export { default as DockerRouterReadme } from '@openziti_remotes/ziti-cmd/dist/docker-images/ziti-router/README.md';
+export { default as DockerControllerReadme } from '@openziti_remotes/ziti-cmd/dist/docker-images/ziti-controller/README.md';
 export { default as ConsoleAuthAdminClientCertificate } from './reference/40-command-line/_console-auth-admin-client-certificate.mdx';
 export { default as ConsolePublicCertsPlatformIntro } from './how-to-guides/deployments/_console-public-certs-platform-intro.mdx';
 export { default as ConsolePublicCertsBasicSteps } from './how-to-guides/deployments/_console-public-certs-basic-steps.mdx';
 export { default as ConsolePublicCertsConfigurationLink } from './how-to-guides/deployments/_console-public-certs-configuration-link.mdx';
 export { default as HostHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-host/README.md';
-export { default as CallbackUrls } from './how-to-guides/external-auth/identity-providers/_callback_urls.mdx';
-export { default as UnlistedIdp } from './how-to-guides/external-auth/identity-providers/_unlisted.mdx';
+export { default as ControllerHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-controller/README.md';
+export { default as RouterHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-router/README.md';
+export { default as CallbackUrls } from './how-to-guides/identity-providers/_callback_urls.mdx';
+export { default as UnlistedIdp } from './how-to-guides/identity-providers/_unlisted.mdx';
 export { default as ConsolePublicCertsNote } from './how-to-guides/deployments/_console-public-certs-note.mdx';
 export { default as AndroidMd } from '@openziti_remotes/ziti-android-app/README.md';
 export { default as LinuxResolverConfig } from './how-to-guides/tunnelers/60-linux/_resolver.mdx';
@@ -32,11 +36,15 @@ export { default as Highlight } from '@openziti/src/components/OpenZitiHighlight
 // guarded wrappers to pinpoint failures during build
 export const _verifyPartials = () => (
     <>
+        {ensure(DockerRouterReadme, 'DockerRouterReadme') && null}
+        {ensure(DockerControllerReadme, 'DockerControllerReadme') && null}
         {ensure(ConsoleAuthAdminClientCertificate, 'ConsoleAuthAdminClientCertificate') && null}
         {ensure(ConsolePublicCertsPlatformIntro, 'ConsolePublicCertsPlatformIntro') && null}
         {ensure(ConsolePublicCertsBasicSteps, 'ConsolePublicCertsBasicSteps') && null}
         {ensure(ConsolePublicCertsConfigurationLink, 'ConsolePublicCertsConfigurationLink') && null}
         {ensure(HostHelmChartReadme, 'HostHelmChartReadme') && null}
+        {ensure(ControllerHelmChartReadme, 'ControllerHelmChartReadme') && null}
+        {ensure(RouterHelmChartReadme, 'RouterHelmChartReadme') && null}
         {ensure(CallbackUrls, 'CallbackUrls') && null}
         {ensure(UnlistedIdp, 'UnlistedIdp') && null}
         {ensure(ConsolePublicCertsNote, 'ConsolePublicCertsNote') && null}

@@ -40,6 +40,36 @@ const REMARK_MAPPINGS = [
 
 const redirectsArr: { to: string; from: string[] }[] = [
   {
+    to: docUrl(openziti, '/how-to-guides/zac'),
+    from: [docUrl(docsBase, '/how-to-guides/external-auth/zac')]
+  },
+  {
+    to: docUrl(openziti, '/how-to-guides/identity-providers/'),
+    from: [
+      docUrl(docsBase, '/how-to-guides/external-auth/'),
+      docUrl(docsBase, '/how-to-guides/external-auth/tunnelers'),
+    ]
+  },
+  {
+    to: docUrl(openziti, '/support/troubleshooting/oidc-troubleshooting'),
+    from: [
+      docUrl(docsBase, '/how-to-guides/external-auth/ziti-cli'),
+      docUrl(docsBase, '/support/oidc-troubleshooting'),
+    ]
+  },
+  {
+    to: docUrl(openziti, '/support/troubleshooting/pki-troubleshooting/'),
+    from: [docUrl(docsBase, '/support/pki-troubleshooting/')]
+  },
+  {
+    to: docUrl(openziti, '/support/troubleshooting/pki-troubleshooting/renew-cert'),
+    from: [docUrl(docsBase, '/support/pki-troubleshooting/renew-cert')]
+  },
+  {
+    to: docUrl(openziti, '/support/troubleshooting/pki-troubleshooting/troubleshoot-expired-certs'),
+    from: [docUrl(docsBase, '/support/pki-troubleshooting/troubleshoot-expired-certs')]
+  },
+  {
     to: docUrl(openziti, '/category/deployments'),
     from: [docUrl(docsBase, '/reference/deployments')]
   },
@@ -67,6 +97,13 @@ const redirectsArr: { to: string; from: string[] }[] = [
   {
     to: docUrl(openziti, '/intro/get-started/services'),
     from: [docUrl(docsBase, '/intro/get-started/services/ztha')]
+  },
+  {
+    to: docUrl(openziti, '/reference/oidc-reference'),
+    from: [
+      docUrl(docsBase, '/how-to-guides/external-auth/extAuthOidc'),
+      docUrl(docsBase, '/how-to-guides/external-auth/oidc-reference'),
+    ]
   }
 ];
 
@@ -185,6 +222,9 @@ const config: Config = {
                             path.replace(docUrl(docsBase, "/get-started/"), docUrl(docsBase, "/learn/quickstarts/")),
                             path.replace(docUrl(docsBase, "/get-started/"), docUrl(docsBase, "/quickstarts/")),
                         ];
+                    }
+                    if (path.startsWith(docUrl(docsBase, "/how-to-guides/identity-providers/"))) {
+                        return [path.replace(docUrl(docsBase, "/how-to-guides/identity-providers/"), docUrl(docsBase, "/how-to-guides/external-auth/identity-providers/"))];
                     }
                     if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"))) {
                         return [

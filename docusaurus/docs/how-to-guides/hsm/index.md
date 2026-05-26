@@ -1,6 +1,6 @@
 ---
 id: hsmIndex
-title: Hardware Security Modules
+title: Use hardware keys
 ---
 
 A hardware security module (HSM) is a physical piece of equipment which is designed specifically to protect cryptographic keys

@@ -3,7 +3,7 @@ title: External Authentication
 sidebar_position: 100
 ---
 
-[_skip to the guide on configuring OpenZiti with OIDC_](../../how-to-guides/external-auth/README.md)
+[_skip to the guide on configuring OpenZiti with OIDC_](@openzitidocs/reference/oidc-reference)
 
 An Identity Provider (IdP) is a system that manages and authenticates the identity of users. It handles login 
 credentials and facilitates Single Sign-On (SSO) by verifying user identities across multiple applications or services.
@@ -32,14 +32,14 @@ OpenID Connect, OpenZiti should be able to integrate with the provider. If a pro
 the generic instructions for configuring an external jwt signer with OpenZiti.
 
 For a complete list of identity providers along with a guide demonstrating how to integrate OpenZiti with the given provider, 
-see the [Identity Providers](../../how-to-guides/external-auth/identity-providers/README.mdx) section under External Authentication 
+see the [Identity Providers](@openzitidocs/how-to-guides/identity-providers/) section under External Authentication 
 guides.
 
 Many popular identity providers already have guides on how to use them with OpenZiti such as: 
-* [Auth0](../../how-to-guides/external-auth/identity-providers/auth0.mdx),
-* [Okta](../../how-to-guides/external-auth/identity-providers/okta.md)
-* [Zitadel](../../how-to-guides/external-auth/identity-providers/zitadel.mdx)
-* [... **View the full list of Identity Providers**](../../how-to-guides/external-auth/identity-providers/README.mdx)
+* [Auth0](@openzitidocs/how-to-guides/identity-providers/auth0),
+* [Okta](@openzitidocs/how-to-guides/identity-providers/okta)
+* [Zitadel](@openzitidocs/how-to-guides/identity-providers/zitadel)
+* [... **View the full list of Identity Providers**](@openzitidocs/how-to-guides/identity-providers/)
 
 ## Clients Supporting External Authentication
 
@@ -64,4 +64,4 @@ intact.
 > authentication scheme. The certificate provides an identity to the device while the identity provider ensures 
 > a trusted human is using the device at that time: human + device.
 
-[Click here to learn more or to configure an external jwt signer for OIDC-based authentication](../../how-to-guides/external-auth/README.md)
+[Click here to learn more or to configure an external jwt signer for OIDC-based authentication](@openzitidocs/reference/oidc-reference)
