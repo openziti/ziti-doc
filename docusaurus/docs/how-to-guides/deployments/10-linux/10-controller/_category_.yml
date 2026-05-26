@@ -1,5 +1,6 @@
 label: Controller
 link:
-  type: doc
-  id: deploy
+  type: generated-index
+  title: Controller
+  description: Deploy, migrate, and back up the controller as a Linux service.
 

@@ -1,9 +1,389 @@
 ---
 sidebar_position: 20
-sidebar_label: Router
-title: Install the Router in Kubernetes
+sidebar_label: Install the router
+title: Install the router
 ---
 
-import {RouterHelmChartReadme} from '../../../_imports';
+![Version: 3.0.0-pre5](https://img.shields.io/badge/Version-3.0.0--pre5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.0-pre10](https://img.shields.io/badge/AppVersion-2.0.0--pre10-informational?style=flat-square)
 
-<RouterHelmChartReadme/>
+Host an OpenZiti router in Kubernetes
+
+> [!IMPORTANT]
+> **Compatibility:** As of chart v3, the router and controller chart major versions must match. The chart major version pins a compatible Ziti major version (e.g., chart v3 pins Ziti v2). If you override `image.tag`, the same rule applies at the Ziti level: Ziti v2 routers require a Ziti v2 controller. **Upgrade the controller first** -- older routers continue to work with the upgraded controller.
+
+## Add the OpenZiti Charts Repo to Helm
+
+```bash
+helm repo add openziti https://docs.openziti.io/helm-charts/
+```
+
+## Public Router
+
+The default configuration listens for incoming edge connections and router links. Set a public address for this listener (`edge.advertisedHost`) or disable it (`linkListeners.transport.enabled`) to avoid routers continually failing to dial into it.
+
+```bash
+# get a router enrollment token from the controller's management API
+ziti edge create edge-router "router1" \
+  --tunneler-enabled --jwt-output-file /tmp/router1.jwt
+
+# subscribe to the openziti Helm repo
+helm repo add openziti https://openziti.github.io/helm-charts/
+
+# install the router chart with a public address
+helm upgrade \
+  --install \
+  --version "^1.0.0" \
+  "ziti-router-123456789" \
+  openziti/ziti-router \
+    --set-file enrollmentJwt=/tmp/router1.jwt \
+    --set edge.advertisedHost=router1.ziti.example.com
+```
+
+### Ingress TLS Passthrough
+
+All router TLS listeners must terminate TLS, so it's essential that north-south routing uses TLS passthrough.
+
+Recommended default: use Traefik IngressRouteTCP.
+
+Create a Helm chart values file for this router chart.
+
+```yaml
+# router-values.yml
+ctrl:
+  endpoint: ziti-controller-ctrl.ziti-controller.svc:1280
+advertisedHost: router1.ziti.example.com
+edge:
+  advertisedPort: 443
+  service:
+    type: ClusterIP
+  traefikTcpRoute:
+    enabled: true
+    entryPoints:
+      - websecure
+```
+
+Now upgrade your router chart release with the values file.
+
+```bash
+helm upgrade \
+  --install \
+  --version "^1.0.0" \
+  "ziti-router-1" \
+  openziti/ziti-router \
+    --set-file enrollmentJwt=/tmp/router1.jwt \
+    --values /tmp/router-values.yml
+```
+
+## Private Router
+
+Disable the link listener if the router does not have a public address set (`edge.advertisedHost`). Ziti identities inside the cluster can still use the private router's edge listener ClusterIP service by authorizing them with a Ziti edge router policy.
+
+```bash
+helm upgrade \
+  --install \
+  --version "^1.0.0" \
+  "ziti-router-1" \
+  openziti/ziti-router \
+    --set-file enrollmentJwt=/tmp/router1.jwt \
+    --set linkListeners.transport.enabled=false
+```
+
+## Tunnel Modes
+
+You may disable tunneling with input value `tunnel.mode=none`.
+
+### Host tunnel mode
+
+This is the default mode for the chart, i.e., `tunnel.mode=host`, because it supports hosting Ziti services targeting servers on this router's regular network and does not require any special privileges beyond outgoing network access. Enable this mode by administratively creating or updating the Ziti edge router to enable tunneling.
+
+```bash
+ziti edge update edge-router "router1" --tunneler-enabled
+```
+
+### Proxy tunnel mode
+
+Input value: `tunnel.mode=proxy`
+
+Proxy mode creates a default headless service `<release>-proxy-default.<namespace>.svc` that resolves to the pod IP. Any Ziti service with config type `proxy.v1` will dynamically bind its TCP or UDP port on the pod IP.
+
+```yaml
+tunnel:
+  mode: proxy
+```
+
+Alternatively, you may override the port specified in the `proxy.v1` config to bind specific Ziti services to specific ports on the default proxy service. This provisions a ClusterIP load balancer with address: `<release>-proxy-default.<namespace>.svc`.
+
+```yaml
+tunnel:
+  mode: proxy
+  proxyServices:
+    - zitiService: my-ziti-service.svc
+      containerPort: 10443
+      advertisedPort: 443
+      protocol: tcp  # Optional: tcp or udp, defaults to tcp if omitted
+    - zitiService: my-other-service.svc
+      containerPort: 10022
+      advertisedPort: 22
+```
+
+The `protocol` field is optional and defaults to `tcp`. You can specify `udp` for UDP services. The protocol determines both the router's listener type and the Kubernetes service port protocol.
+
+#### Proxy Mode Examples
+
+See the [examples directory](https://github.com/openziti/helm-charts/tree/main/charts/ziti-router/examples) for complete proxy mode configuration scenarios:
+
+- **[scenario-1-dynamic.yaml](./examples/scenario-1-dynamic.yaml)** - Dynamic proxy mode with headless service (no static port mappings)
+- **[scenario-2-single-default.yaml](./examples/scenario-2-single-default.yaml)** - Single service on default ClusterIP service
+- **[scenario-3-two-default.yaml](./examples/scenario-3-two-default.yaml)** - Two services on the same default ClusterIP service
+- **[scenario-4-mixed-one-each.yaml](./examples/scenario-4-mixed-one-each.yaml)** - Mixed: one service on default, one on additional service
+- **[scenario-5-one-additional-only.yaml](./examples/scenario-5-one-additional-only.yaml)** - Single service on additional service (default disabled)
+- **[scenario-6-one-explicit-one-implicit-default.yaml](./examples/scenario-6-one-explicit-one-implicit-default.yaml)** - Explicit vs implicit default service mapping
+
+Finally, it is also possible to provision separate cluster services for certain Ziti services, optionally overriding any TCP ports configured in a `proxy.v1`. The `name` in `proxyAdditionalK8sServices` must match a `k8sService` in `proxyServices` to map its advertised port on the additional service to the appropriate container port.
+
+```yaml
+tunnel:
+  mode: proxy
+  proxyServices:
+    - zitiService: my-ziti-service.svc
+      containerPort: 10443
+      advertisedPort: 443
+      k8sService: myservice
+  proxyDefaultK8sService:
+    enabled: false
+  proxyAdditionalK8sServices:
+    - name: myservice
+      type: LoadBalancer
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: 192.168.1.100
+```
+
+## Additional Listeners and Volumes
+
+You can configure an additional edge listener by setting `edge.additionalListeners`. This is useful for making a WebSocket edge listener with a different server certificate.
+
+This example configures a wss listener and requests a certificate from cert-manager. The alternative certificate must have a DNS SAN that is distinct from the public address of the default edge listener (`edge.advertisedHost`). This cert-manager approach has the advantage of automatically renewing the certificate and ensuring the DNS SAN of the certificate matches an additional listener's advertised host.
+
+```yaml
+edge:
+  advertisedHost: router1.ziti.example.com
+  advertisedPort: 443
+  ingress:
+    annotations:
+      kubernetes.io/ingress.allow-http: "false"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    enabled: true
+    ingressClassName: nginx
+  service:
+    enabled: true
+    type: ClusterIP
+  additionalListeners:
+    - name: router1-edge-wss
+      protocol: wss
+      containerPort: 3023                           # must be unique
+      advertisedHost: router1-wss.ziti.example.com  # must be distinct from edge.advertisedHost
+      advertisedPort: 443
+      addHostToSan: false                           # must be false to avoid colliding DNS SANs between listeners
+      service:
+        enabled: true
+        type: ClusterIP
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.allow-http: "false"
+          nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+        ingressClassName: nginx
+
+identity:
+  altServerCerts:
+    - name: alt-server-cert-1
+      mode: certManager
+      secretName: ziti-router1-alt-server-certs1
+      additionalListenerName: router1-edge-wss
+      mountPath: /etc/ziti/alt-server-cert-1
+      issuerRef:
+        group: cert-manager.io
+        kind: ClusterIssuer
+        name: cloudflare-dns01-issuer-staging
+```
+
+You don't have to use cert-manager. If you have a TLS secret named `ziti-router1-alt-server-certs1` from some other issuer in the same namespace as the router containing the certificate and key, you can use it by setting values like these. You must also configure the additional listener as in the prior example with an advertisedHost that matches a DNS SAN of the alternative certificate.
+
+```yaml
+# this is an generic approach for mounting configmaps, secrets, csi volumes, etc.
+additionalVolumes:
+  - name: alt-server-cert-2
+    volumeType: secret
+    mountPath: /etc/ziti/alt-server-cert-2
+    secretName: ziti-router1-alt-server-cert-2
+
+# this looks up a TLS secret's mountpoint to configure the router's identity
+identity:
+  altServerCerts:
+    - mode: secret
+      secretName: ziti-router1-alt-server-cert-2
+```
+
+You may also specify matching file paths for an additional volume and alternative certificate if the volume is not a TLS secret.
+
+```yaml
+additionalVolumes:
+  - name: alt-server-cert-3
+    volumeType: csi
+    driverName: csi.bpfd.dev
+    attributes: volumeAttributes
+    mountPath: /etc/ziti/alt-server-cert-3
+
+identity:
+  altServerCerts:
+    - mode: localFile
+      serverCert: /etc/ziti/alt-server-cert-3/server3.crt
+      serverKey: /etc/ziti/alt-server-cert-3/server3.key
+```
+
+## Values Reference
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| additionalVolumes | list | `[]` | additional volumes to mount to ziti-router container |
+| affinity | object | `{}` | deployment template spec affinity |
+| bootstrapEnv | object | `{"ZITI_AUTO_RENEW_CERTS":"true","ZITI_BOOTSTRAP":"true","ZITI_BOOTSTRAP_CONFIG":"false","ZITI_BOOTSTRAP_ENROLLMENT":"true","ZITI_ENROLL_TOKEN":""}` | default env vars for router bootstrapping in Kubernetes |
+| bootstrapEnv.ZITI_BOOTSTRAP | string | `"true"` | must be true or enroll() will not be called |
+| bootstrapEnv.ZITI_BOOTSTRAP_CONFIG | string | `"false"` | "false" to suppress generating a config.yml because in K8s we mount a configMap rendered by Helm |
+| bootstrapEnv.ZITI_BOOTSTRAP_ENROLLMENT | string | `"true"` | enroll with controller if "true," overwrite if "force"; requires ZITI_BOOTSTRAP=true |
+| bootstrapEnv.ZITI_ENROLL_TOKEN | string | `""` | override enrollmentJwt - not currently used, possibly useful for re-enroll |
+| configFile | string | `"ziti-router.yaml"` | filename of router config YAML |
+| configMountDir | string | `"/etc/ziti/config"` | writable mountpoint where read-only config file is projected to allow router to write ./endpoints.yml statefile in same dir |
+| csr | object | `{"country":"","locality":"","organization":"","organizationalUnit":"","province":"","sans":{"dns":[],"email":[],"ip":[],"noDefaults":false,"uri":[]}}` | Certificate signing request distinguished name and subject alternative names |
+| csr.country | string | `""` | country |
+| csr.locality | string | `""` | city |
+| csr.organization | string | `""` | organization |
+| csr.organizationalUnit | string | `""` | organizational unit |
+| csr.province | string | `""` | state |
+| csr.sans.dns | list | `[]` | additional DNS SANs |
+| csr.sans.email | list | `[]` | additional email SANs |
+| csr.sans.ip | list | `[]` | additional IP SANs |
+| csr.sans.noDefaults | bool | `false` | if true, disable computing default SANs from the advertisedHost, etc. |
+| csr.sans.uri | list | `[]` | additional URI SANs |
+| ctrl.endpoint | string | `""` | optionally override the endpoint(s) from the enrollment token, e.g., ctrl.ziti.example.com:443 |
+| ctrl.endpointsFile | string | `"endpoints.yml"` |  |
+| dnsConfig | object | `{}` | it allows to override dns options when dnsPolicy is set to None. |
+| dnsPolicy | string | `"ClusterFirstWithHostNet"` |  |
+| edge.additionalListeners | list | `[]` | additional edge listeners have the same shape as the default edge listener, except they're enabled if defined, and you must specify a unique name for each additional edge listener. The name distinguishes their respective cluster services. This is useful for BrowZer clients that require a trusted certificate for the edge WebSocket and advertisedHost must resolve to a public IP that presents a trusted certificate, e.g., an Ingress with TLS termination. |
+| edge.advertisedHost | string | `""` | Domain name that edge clients will use to reach this router's edge listener. Default is cluster-internal service DNS name:port. |
+| edge.advertisedPort | int | `443` | cluster service, node port, load balancer, and ingress port |
+| edge.containerPort | int | `3022` | cluster service target port on the container |
+| edge.enabled | bool | `true` | enable the edge listener in the router config; usually true because tunnel bindings require the edge which must have at least on listener |
+| edge.gatewayTlsRoute.apiVersion | string | `"gateway.networking.k8s.io/v1alpha2"` | API version for TLSRoute (depends on installed Gateway API CRDs) |
+| edge.gatewayTlsRoute.enabled | bool | `false` | EXPERIMENTAL: enable Gateway API TLSRoute for the edge listener |
+| edge.gatewayTlsRoute.labels | object | `{}` | TLSRoute labels |
+| edge.gatewayTlsRoute.parentRefs | list | `[]` | parentRefs for TLSRoute, usually a Traefik-managed Gateway listener parentRefs:   - name: traefik-gateway     namespace: traefik     sectionName: websecure |
+| edge.heartbeatIntervalSeconds | int | `60` | heartbeat interval in seconds (min: 10, max: 60, default: 60) |
+| edge.ingress.annotations | object | `{}` | ingress annotations |
+| edge.ingress.enabled | bool | `false` | create an ingress for the cluster service; typically paired with a ClusterIP service type when enabled |
+| edge.ingress.ingressClassName | string | `""` | ingress class name |
+| edge.ingress.labels | object | `{}` | ingress labels |
+| edge.options | object | `{}` | additional common xgress options |
+| edge.protocol | string | `"tls"` | edge listener protocol: tls, wss; usually tls because additionalListeners can be used to provide a wss listener |
+| edge.service.annotations | object | `{}` | service annotations |
+| edge.service.enabled | bool | `true` | create a cluster service for the edge listener; usually true, but you can disable this to effectively un-publish the edge listener |
+| edge.service.labels | object | `{}` | service labels |
+| edge.service.type | string | `"ClusterIP"` | expose the service as a ClusterIP, NodePort, or LoadBalancer; default is ClusterIP, but you could use NodePort or LoadBalancer instead of an ingress controller |
+| edge.traefikTcpRoute.enabled | bool | `false` | enable Traefik IngressRouteTCP |
+| edge.traefikTcpRoute.entryPoints | list | `["websecure"]` | IngressRouteTCP entrypoints |
+| edge.traefikTcpRoute.labels | object | `{}` | IngressRouteTCP labels |
+| enrollmentJwt | string | `nil` | enrollment one time token from the controller's management API |
+| enrollmentJwtFromSecret | bool | `false` | allow for using a secret to specify the enrollment token instead of using the enrollmentJwt field if enabled, setting the enrollment token on the enrollmentJwt field has no effect |
+| enrollmentJwtSecretName | string | `""` | set the enrollment jwt from a secret The enrollment token secret must be of the following format: apiVersion: v1 kind: Secret metadata:   name: myEnrollmentJwtSecret type: Opaque data:   enrollmentJwt: |
+| env | object | `{}` | additional env vars for the router pod that are not already defined in bootstrapEnv |
+| execMountDir | string | `"/usr/local/bin"` | read-only mountpoint for executables (must be in image's executable search PATH) |
+| fabric.metrics.enabled | bool | `false` | configure fabric metrics in the router config |
+| forwarder.latencyProbeInterval | int | `10` |  |
+| forwarder.linkDialQueueLength | int | `1000` |  |
+| forwarder.linkDialWorkerCount | int | `32` |  |
+| forwarder.rateLimitedQueueLength | int | `5000` |  |
+| forwarder.rateLimitedWorkerCount | int | `64` |  |
+| forwarder.xgressDialQueueLength | int | `1000` |  |
+| forwarder.xgressDialWorkerCount | int | `128` |  |
+| hostNetwork | bool | `false` | Host networking requested for a pod if set, i.e. tproxy ports enabled in the host namespace. i.e. egress gateway |
+| identity.altServerCerts | list | `[]` |  |
+| identityMountDir | string | `"/etc/ziti/identity"` | read-only mountpoint for router identity secret specified in deployment for use by router run container |
+| image.additionalArgs | list | `[]` | additional arguments can be passed directly to the container to modify ziti runtime arguments |
+| image.args | list | `["run","{{ .Values.configMountDir }}/{{ .Values.configFile }}"]` | deployment container command args and opts |
+| image.command | list | `["/entrypoint.bash"]` | deployment container command |
+| image.pullPolicy | string | `""` | deployment image pull policy; leave empty to use the Kubernetes default |
+| image.repository | string | `"docker.io/openziti/ziti-router"` | container image tag for deployment |
+| image.tag | string | `nil` | container image tag (default is Chart's appVersion) |
+| linkDialers.transport.extraProps | object | `{}` | extra properties to define for the transport link dialer, e.g., groups |
+| linkListeners.additionalListeners | list | `[]` | Additional link listeners. Each entry defines an extra 'link' binding in the router config. |
+| linkListeners.transport.advertisedHost | string | `"{{ .Values.edge.advertisedHost }}"` | DNS name that other routers will use to form mesh transport links to this listener |
+| linkListeners.transport.advertisedPort | string | `"{{ .Values.edge.advertisedPort }}"` | cluster service, node port, load balancer, and ingress port for this listener; default is edge.advertisedPort |
+| linkListeners.transport.containerPort | string | `"{{ .Values.edge.containerPort }}"` | cluster service target port on the container; default is to share a listener with the edge, providing ziti-link ALPN |
+| linkListeners.transport.enabled | bool | `true` | enable the transport listener in the router config; set false for a private router that only connects to other routers and does not accept incoming links |
+| linkListeners.transport.extraProps | object | `{}` | extra properties to define for the transport link listener, e.g., groups |
+| linkListeners.transport.gatewayTlsRoute.apiVersion | string | `"gateway.networking.k8s.io/v1alpha2"` | API version for TLSRoute (depends on installed Gateway API CRDs) |
+| linkListeners.transport.gatewayTlsRoute.enabled | bool | `false` | EXPERIMENTAL: enable Gateway API TLSRoute for the transport listener |
+| linkListeners.transport.gatewayTlsRoute.labels | object | `{}` | TLSRoute labels |
+| linkListeners.transport.gatewayTlsRoute.parentRefs | list | `[]` | parentRefs for TLSRoute, usually a Traefik-managed Gateway listener parentRefs:   - name: traefik-gateway     namespace: traefik     sectionName: websecure |
+| linkListeners.transport.ingress.annotations | object | `{}` | ingress annotations |
+| linkListeners.transport.ingress.enabled | bool | `false` | create an ingress for the cluster service |
+| linkListeners.transport.ingress.ingressClassName | string | `""` | ingress class name |
+| linkListeners.transport.ingress.labels | object | `{}` | ingress labels |
+| linkListeners.transport.options | object | `{}` | link listener options |
+| linkListeners.transport.service.annotations | object | `{}` | service annotations |
+| linkListeners.transport.service.enabled | bool | `true` | create a cluster service for the router transport link listener; unnecessary if advertisedHost is shared with edge listener (the default) |
+| linkListeners.transport.service.labels | object | `{}` | service labels |
+| linkListeners.transport.service.type | string | `"ClusterIP"` | expose the service as a ClusterIP, NodePort, or LoadBalancer |
+| linkListeners.transport.traefikTcpRoute.enabled | bool | `false` | enable Traefik IngressRouteTCP |
+| linkListeners.transport.traefikTcpRoute.entryPoints | list | `["websecure"]` | IngressRouteTCP entrypoints |
+| linkListeners.transport.traefikTcpRoute.labels | object | `{}` | IngressRouteTCP labels |
+| livenessProbe | object | `{"active":true,"command":["/bin/sh","-c","ziti agent stats"],"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | deployment container liveness probe config |
+| livenessProbe.active | bool | `true` | enables the liveness probe for the deployment |
+| livenessProbe.command | list | `["/bin/sh","-c","ziti agent stats"]` | command to run to determine if the container is ready |
+| livenessProbe.failureThreshold | int | `5` | Number of consecutive probe failures before K8s marks the check as failed |
+| livenessProbe.initialDelaySeconds | int | `10` | seconds to wait before the first probe |
+| livenessProbe.periodSeconds | int | `10` | how often (in seconds) to perform the probe |
+| livenessProbe.successThreshold | int | `1` | minimum consecutive successes for the probe to be considered successful |
+| livenessProbe.timeoutSeconds | int | `5` | number of seconds after which the probe times out |
+| noHelmHooks | bool | `false` | disable the execution of hooks, defined within this chart This chart makes use of Helm hooks. Setting this to true will prevent the hooks from being deployed. This is useful when using the chart with tools like ArgoCD |
+| nodeSelector | object | `{}` | deployment template spec node selector |
+| persistence.accessMode | string | `"ReadWriteOnce"` | PVC access mode: ReadWriteOnce (concurrent mounts not allowed), ReadWriteMany (concurrent allowed) |
+| persistence.annotations | object | `{}` | annotations for the PVC |
+| persistence.enabled | bool | `true` | required: place a storage claim for the ctrl endpoints.yml state file |
+| persistence.existingClaim | string | `""` | A manually managed Persistent Volume and Claim Requires persistence.enabled: true If defined, PVC must be created manually before volume will be bound |
+| persistence.size | string | `"50Mi"` | 50Mi is plenty for this state file |
+| persistence.storageClass | string | `""` | Storage class of PV to bind. By default it looks for the default storage class. If the PV uses a different storage class, specify that here. |
+| persistence.volumeName | string | `nil` | PVC volume name |
+| podAnnotations | object | `{}` | annotations to apply to all pods deployed by this chart |
+| podSecurityContext | object | `{"fsGroup":2171}` | deployment template spec security context |
+| podSecurityContext.fsGroup | int | `2171` | this is the GID of "ziggy" run-as user in the container that has access to any files created by the router process in the emptyDir volume used to persist the list of ctrl endpoints |
+| proxy | object | `{}` | Explicit proxy setting in the router configuration. Router can be deployed in a site where all egress traffic is forwarded through an explicit proxy. The enrollment will also be forwarded through the proxy. |
+| readinessProbe | object | `{"active":true,"command":["/bin/sh","-c","ziti agent stats"],"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | deployment container readiness probe config |
+| readinessProbe.active | bool | `true` | enables the readiness probe for the deployment |
+| readinessProbe.command | list | `["/bin/sh","-c","ziti agent stats"]` | command to run to determine if the container is ready |
+| readinessProbe.failureThreshold | int | `5` | Number of consecutive probe failures before K8s marks the check as failed |
+| readinessProbe.initialDelaySeconds | int | `10` | seconds to wait before the first probe |
+| readinessProbe.periodSeconds | int | `10` | how often (in seconds) to perform the probe |
+| readinessProbe.successThreshold | int | `1` | minimum consecutive successes for the probe to be considered successful |
+| readinessProbe.timeoutSeconds | int | `5` | number of seconds after which the probe times out |
+| resources | object | `{}` | deployment container resources |
+| securityContext | string | `nil` | deployment container security context |
+| tolerations | list | `[]` | deployment template spec tolerations |
+| tunnel.diverterPath | string | `nil` | the tproxy mode can be switched from iptables based interception to bpf interception by passing the user space bpf program path. bpf kernel space program is expected to be loaded prior or during router deployment, e.g. bpfman agent, hostpath, etc |
+| tunnel.dnsSvcIpRange | string | `nil` | CIDR range for the internal service fqdn to dynamic intercept IP address resolution (default: 100.64.0.0/10) |
+| tunnel.lanIf | string | `"lo"` | interface device name for setting up INPUT firewall rules if fw enabled. It must be set but not needed in containers. Thus, it is set to lo by default |
+| tunnel.mode | string | `"host"` | run mode for the router's built-in tunnel component: host, tproxy, proxy, or none |
+| tunnel.proxyAdditionalK8sServices | list | `[]` | this is a list of additional K8s service configurations to provision and map to a Ziti service if tunnel mode is "proxy"; for each Ziti service in "proxyServices", where .k8sService != "default" and for which an item in proxyAdditionalK8sService[].name == .k8sService in proxyServices |
+| tunnel.proxyDefaultK8sService | object | `{"enabled":true,"type":"ClusterIP"}` | if tunnel mode is "proxy", create the a cluster service named `{{ release }}-proxy-default` listening on each "advertisedPort" defined in "proxyServices" or as a headless service on all TCP and UDP ports on the pod IP if no Ziti services are specified, i.e., dynamic reverse-proxy mode where all dialable services with config type proxy.v1 are bound to their respective ports and protocols on the pod IP |
+| tunnel.proxyServices | list | `[]` | optional list of Ziti service:port mappings to publish via the K8s service named `<release>-proxy-default`, unless .k8sService names another service to map to the Ziti service. If the list is empty, then no TCP load balancer is provisioned and `<release>-proxy-default` resolves to the pod IP, and all Ziti services with proxy.v1 configs that are dialable by the router's identity can be reached on their respective reverse-proxy ports at the headless service address. |
+| tunnel.resolver | string | `nil` | Ziti nameserver listener where OS must be configured to send DNS queries (default: udp://127.0.0.1:53) |
+| websocket.enableCompression | bool | `true` | enable compression on websocket |
+| websocket.enabled | bool | `false` | enable the websocket transport. Also requires an appropriate edge.additionalListeners entry. |
+| websocket.handshakeTimeout | int | `10` | websocket handshake timeout |
+| websocket.idleTimeout | int | `5` | websocket idle timeout |
+| websocket.pingInterval | int | `54` | websocket ping timeout |
+| websocket.pongTimeout | int | `60` | websocket pong timeout |
+| websocket.readBufferSize | int | `4096` | websocket read buffer size |
+| websocket.readTimeout | int | `5` | websocket read timeout |
+| websocket.writeBufferSize | int | `4096` | websocket write buffer size |
+| websocket.writeTimeout | int | `10` | websocket write timeout |
