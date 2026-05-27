@@ -1,14 +1,14 @@
 ---
-title: Configuring Ziti Admin Console for OIDC
-sidebar_position: 60
-sidebar_label: Ziti Admin Console (ZAC)
+title: Configure ZAC for OIDC
+sidebar_position: 80
+sidebar_label: Configure ZAC for OIDC
 ---
 
-# Ziti Admin Console (ZAC)
+# Configure ZAC for OIDC
 
-The Zit Admin Console (ZAC) allows using external JWT signers for authentication. To use the ZAC with an external
+The Ziti Admin Console (ZAC) allows using external JWT signers for authentication. To use the ZAC with an external
 authentication provider, an external JWT signer must be configured. There are numerous 
-[Identity Providers](./identity-providers/README.mdx) documented.
+[Identity Providers](@openzitidocs/how-to-guides/identity-providers/) documented.
 
 If you want to use an identity provider that is not documented, please express your interest over in our 
 [Discourse forum](https://openziti.discourse.group/).
@@ -22,7 +22,7 @@ To use an external JWT signer for authentication with the ZAC you will need to d
    For example, if your ZAC is located at `http://controller.example.com` the callback URL to configure in the IdP would
    be `http://controller.example.com/zac/callback`.
 2. If necessary, create a new identity that is an administrator.
-3. Configure the external JWT signer correctly. See the [Identity Providers Guides](./identity-providers/README.mdx) for
+3. Configure the external JWT signer correctly. See the [Identity Providers Guides](@openzitidocs/how-to-guides/identity-providers/) for
    assistance.
 4. Navigate to the root of your ZAC at http://controller.example.com/zac. You will see a button for each of the external
    JWT signers configured.

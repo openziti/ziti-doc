@@ -20,8 +20,8 @@ export { default as ConsolePublicCertsConfigurationLink } from './how-to-guides/
 export { default as HostHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-host/README.md';
 export { default as ControllerHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-controller/README.md';
 export { default as RouterHelmChartReadme } from '@openziti_remotes/helm-charts/charts/ziti-router/README.md';
-export { default as CallbackUrls } from './how-to-guides/external-auth/identity-providers/_callback_urls.mdx';
-export { default as UnlistedIdp } from './how-to-guides/external-auth/identity-providers/_unlisted.mdx';
+export { default as CallbackUrls } from './how-to-guides/identity-providers/_callback_urls.mdx';
+export { default as UnlistedIdp } from './how-to-guides/identity-providers/_unlisted.mdx';
 export { default as ConsolePublicCertsNote } from './how-to-guides/deployments/_console-public-certs-note.mdx';
 export { default as AndroidMd } from '@openziti_remotes/ziti-android-app/README.md';
 export { default as LinuxResolverConfig } from './how-to-guides/tunnelers/60-linux/_resolver.mdx';

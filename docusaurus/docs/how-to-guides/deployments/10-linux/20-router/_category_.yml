@@ -1,4 +1,5 @@
 label: Router
 link:
-  type: doc
-  id: deploy
+  type: generated-index
+  title: Router
+  description: Deploy, configure, migrate, and back up the router as a Linux service.

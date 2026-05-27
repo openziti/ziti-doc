@@ -1,5 +1,5 @@
 label: Linux
 link:
   type: generated-index
-  title: Deploying on Linux
+  title: Deploy on Linux
   description: Run a controller or router as a Linux service

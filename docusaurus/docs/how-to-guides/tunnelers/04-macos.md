@@ -1,4 +1,6 @@
-# MacOS
+# macOS
+
+Ziti Desktop Edge for Mac is the tunneler for macOS.
 
 ## Installation
 

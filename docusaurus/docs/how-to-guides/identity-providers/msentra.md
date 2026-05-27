@@ -4,7 +4,7 @@ sidebar_label: Microsoft Entra ID
 hide_table_of_contents: true
 ---
 
-import { CallbackUrls } from '../../../_imports';
+import { CallbackUrls } from '../../_imports';
 
 # Microsoft Entra IDP
 

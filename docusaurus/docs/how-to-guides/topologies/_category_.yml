@@ -1,4 +1,6 @@
 label: Topologies
-position: 70
+position: 40
 link:
   type: generated-index
+  title: Topologies
+  description: Guides for common OpenZiti network topology patterns, from service configurations to local gateways.

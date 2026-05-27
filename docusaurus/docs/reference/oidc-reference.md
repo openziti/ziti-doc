@@ -1,19 +1,20 @@
 ---
-id: extAuthOidc
-title: Configuring OIDC
-sidebar_position: 100
+title: OIDC configuration reference
+sidebar_label: OIDC reference
+sidebar_position: 60
 ---
 
-# Configuring for OIDC
+# OIDC configuration reference
 
 :::note
-_click here to see a list of guides to help you configure your selected [Identity Provider](./identity-providers/README.mdx)_ 
+_click here to see a list of guides to help you configure your selected
+[Identity Provider](@openzitidocs/how-to-guides/identity-providers/)_
 :::
 
 OpenZiti utilizes and implements the [Authorization Code Flow with PKCE or PKCE flow](https://oauth.net/2/pkce/) 
 for authentication. This flow is well-known and numerous excellent resources on the internet explain what PKCE is 
 and what it entails. The guides here focuses on correctly configuring an OpenZiti 
-[external JWT signer](../../learn/core-concepts/security/authentication/70-external-jwt-signers.mdx) for use with an OIDC 
+[external JWT signer](@openzitidocs/learn/core-concepts/security/authentication/external-jwt-signers) for use with an OIDC 
 provider. 
 
 Correctly configuring an external jwt signer requires the careful attention. The fields below all correspond to fields 

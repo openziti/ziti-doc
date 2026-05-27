@@ -1,10 +1,10 @@
 ---
-title: How to set up Okta
+title: Configure Okta
 sidebar_label: Okta
 hide_table_of_contents: true
 ---
 
-import { CallbackUrls } from '../../../_imports';
+import { CallbackUrls } from '../../_imports';
 import Details from '@theme/MDXComponents/Details';
 
 # Okta
