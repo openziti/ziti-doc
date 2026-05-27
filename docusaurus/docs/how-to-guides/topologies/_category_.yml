@@ -1,6 +1,6 @@
-label: Configure a topology
+label: Topologies
 position: 40
 link:
   type: generated-index
-  title: Configure a topology
+  title: Topologies
   description: Guides for common OpenZiti network topology patterns, from service configurations to local gateways.

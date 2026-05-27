@@ -1,6 +1,6 @@
-label: Deploy to production
+label: Deployments
 position: 10
 link:
   type: generated-index
-  title: Deploy to production
+  title: Deployments
   description: Run a controller or router as a Linux service, with Docker, or deployed to Kubernetes.
