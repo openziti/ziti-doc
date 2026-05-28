@@ -1,10 +1,10 @@
 .aaSuperpowers {
-  padding: var(--space-lg) 0;
+  padding: 4rem 0;
 }
 
 .aaSectionHeader {
   text-align: center;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .aaSectionHeader h2 {

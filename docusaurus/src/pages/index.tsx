@@ -45,6 +45,8 @@ function HeroSection({ className }: { className?: string }) {
                         <div className={styles.aaHeroButtons}>
                             <a href="#deploy_an_overlay"
                                className={styles.aaBtn}>Get Started</a>
+                            <a href="/docs/openziti/intro"
+                               className={styles.aaBtn}>Read the Docs</a>
                         </div>
                     </div>
                 </div>
@@ -55,7 +57,7 @@ function HeroSection({ className }: { className?: string }) {
                             light: useBaseUrl("/img/zt-model-overview-light.svg"),
                             dark: useBaseUrl("/img/zt-model-overview-dark.svg"),
                         }}
-                        style={{display: "flex", paddingLeft: "25px"}}
+                        style={{paddingLeft: "25px", height: "auto"}}
                         width={1263}
                         height={1316}
                     />
