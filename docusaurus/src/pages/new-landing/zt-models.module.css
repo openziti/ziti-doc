@@ -194,8 +194,8 @@
 
 .zeroTrustModelIntro {
     padding: 0 var(--space-md);
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
     text-align: center;
     font-size: 1.25rem;
     color: var(--ifm-font-color-base);

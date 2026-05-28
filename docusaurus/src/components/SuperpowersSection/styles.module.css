@@ -1,5 +1,5 @@
 .aaSuperpowers {
-  padding: 4rem 0;
+  padding: var(--space-lg) 0;
 }
 
 .aaSectionHeader {
