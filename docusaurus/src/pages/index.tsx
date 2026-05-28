@@ -210,16 +210,16 @@ const ztModels = {
             <p>Works with <b>existing</b> solutions by using an OpenZiti Router in <span className={styles.trustedNetwork}>trusted network space</span> </p>,
             <p>Network firewall operates in <span className={styles.zeroTrustNetwork}>deny-by-default mode</span></p>,
             <p>OS firewalls require <span className={styles.trustedNetwork}>inbound port rules</span> per service</p>,
-            "Allows zero trust network access on devices that can't install an OpenZiti Tunneler",
+            "Allows zero-trust network access on devices that can't install an OpenZiti Tunneler",
         ],
-        ideal: "Ideal for organizations that need zero trust access without modifying applications or hosts.",
+        ideal: "Ideal for organizations that need zero-trust access without modifying applications or hosts.",
     },
     ztha: {
         id: 'ztha',
         name: "ZTHA",
         fullName: "Zero Trust Host Access",
         icon: <Lock className={clsx(zt.cardIcon, zt.green)} />,
-        description: "Extends zero trust principles to secure host communications",
+        description: "Extends zero-trust principles to secure host communications",
         benefits: [
             <p>Works with <b>existing</b> solutions by using an OpenZiti Tunneler</p>,
             <p>Eliminates network-related trust</p>,
@@ -250,11 +250,11 @@ const ztModels = {
 function ZeroTrustModels({ windowSize }: { windowSize: WindowSize }) {
     return <>
         <section className={clsx(styles.aaSection, zt.zeroTrustModelIntro)}>
-            <h2 className={zt.sectionTitle}>The Right Model For Your Needs</h2>
+            <h2 className={zt.sectionTitle}>The Right Model for Your Needs</h2>
             <p>
-                Implementing zero trust is a journey and every organization has different needs. Depending on your needs, one zero trust model may be better than
-                another. Some organizations require different models for different needs. OpenZiti offers three distinct zero trust models, allowing your organization to form a zero trust
-                overlay network that works best for you and allowing you to transform to a zero trust implementation at your own pace.
+                Implementing zero trust is a journey and every organization has different needs. Depending on your needs, one zero-trust model may be better than
+                another. Some organizations require different models for different needs. OpenZiti offers three distinct zero-trust models, allowing your organization to form a zero-trust
+                overlay network that works best for you and allowing you to transform to a zero-trust implementation at your own pace.
             </p>
         </section>
         <TransitionSection className={clsx(styles.transitionSection, styles.transitionToZeroTrustModels)}/>
