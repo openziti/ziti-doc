@@ -45,6 +45,8 @@ function HeroSection({ className }: { className?: string }) {
                         <div className={styles.aaHeroButtons}>
                             <a href="#deploy_an_overlay"
                                className={styles.aaBtn}>Get Started</a>
+                            <a href="/docs/openziti/intro"
+                               className={styles.aaBtn}>Read the Docs</a>
                         </div>
                     </div>
                 </div>
@@ -55,7 +57,7 @@ function HeroSection({ className }: { className?: string }) {
                             light: useBaseUrl("/img/zt-model-overview-light.svg"),
                             dark: useBaseUrl("/img/zt-model-overview-dark.svg"),
                         }}
-                        style={{display: "flex", paddingLeft: "25px"}}
+                        style={{paddingLeft: "25px", height: "auto"}}
                         width={1263}
                         height={1316}
                     />
@@ -248,7 +250,7 @@ const ztModels = {
 function ZeroTrustModels({ windowSize }: { windowSize: WindowSize }) {
     return <>
         <section className={clsx(styles.aaSection, zt.zeroTrustModelIntro)}>
-            <h2 className={zt.sectionTitle}>The Right Model For Your Needs</h2>
+            <h2 className={zt.sectionTitle}>The Right Model for Your Needs</h2>
             <p>
                 Implementing zero trust is a journey and every organization has different needs. Depending on your needs, one zero trust model may be better than
                 another. Some organizations require different models for different needs. OpenZiti offers three distinct zero trust models, allowing your organization to form a zero trust

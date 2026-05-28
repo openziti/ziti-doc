@@ -322,7 +322,7 @@
   }
 
   .aaCta, .aaEvolution {
-    padding: var(--aaSpaceMd);
+    padding: var(--aaSpaceSm);
   }
 
 
@@ -434,14 +434,14 @@
 
   .aaSuperpowersSection {
     width: 100%;
-    padding: var(--space-xl) 0;
+    padding: var(--space-lg) 0;
   }
 
 
   /*---------- get started ---------*/
 
   .aaGetStarted2 {
-    padding: var(--space-xl) 0;
+    padding: var(--space-lg) 0;
     background: linear-gradient(135deg, var(--getStartedStartColor), var(--getStartedEndColor));
   }
 
@@ -601,10 +601,11 @@
 
   .aaHeroSection {
     width: 100%;
-    margin-top: var(--space-xxl);
-    margin-bottom: var(--space-md);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
     flex-direction: row;
     display: flex;
+    align-items: flex-start;
   }
 
   .ozHorizontalSectionRoot {
@@ -614,12 +615,12 @@
   .transitionToZeroTrustModels {
     --ziti_timeline_section_start: var(--ifm-background-color);
     --ziti_timeline_section_stop: var(--ziti-rgb-primary-a);
-    min-height: var(--space-xl);
+    min-height: var(--space-md);
   }
   .transitionFromZeroTrustModels {
     --ziti_timeline_section_start: var(--ziti-rgb-secondary-a);
     --ziti_timeline_section_stop: var(--ifm-background-color);
-    min-height: var(--space-xl);
+    min-height: var(--space-md);
   }
 
   .aaabbb {
@@ -628,12 +629,13 @@
     flex-wrap: nowrap;
     width: 100%;
     justify-content: center;
-    padding-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
   }
   .aaHeroLeft {
     display:flex;
     flex-direction: column;
     flex:17;
+    justify-content: flex-start;
   }
   .aaHeroRight {
     flex:12;

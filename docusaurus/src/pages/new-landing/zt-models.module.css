@@ -3,7 +3,7 @@
 /* Main container */
 .zeroTrustContainer {
     width: 100%;
-    padding: 4rem 1rem;
+    padding: 0.5rem 1rem;
     text-align: center;
 }
 
@@ -194,10 +194,10 @@
 
 .zeroTrustModelIntro {
     padding: 0 var(--space-md);
-    padding-top: var(--space-xxl);
-    text-align: left;
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    text-align: center;
     font-size: 1.25rem;
-    margin-bottom: 3rem;
     color: var(--ifm-font-color-base);
 }
 
