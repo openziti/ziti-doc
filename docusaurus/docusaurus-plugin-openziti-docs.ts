@@ -39,6 +39,13 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 if (existingPath.startsWith(`${base}/how-to-guides/tunnelers/`)) {
                     return [existingPath.replace(`${base}/how-to-guides/tunnelers/`, `${base}/reference/tunnelers/`)];
                 }
+                // identity-providers moved from how-to-guides/external-auth/identity-providers/ to how-to-guides/identity-providers/
+                if (existingPath.startsWith(`${base}/how-to-guides/identity-providers/`)) {
+                    return [
+                        existingPath.replace(`${base}/how-to-guides/identity-providers/`, `${base}/how-to-guides/external-auth/identity-providers/`),
+                        existingPath.replace(`${base}/how-to-guides/identity-providers/`, `${base}/guides/identity-providers/`),
+                    ];
+                }
                 // guides/ renamed to how-to-guides/ (deployments, external-auth, hsm, topologies, etc.)
                 if (existingPath.startsWith(`${base}/how-to-guides/`)) {
                     return [existingPath.replace(`${base}/how-to-guides/`, `${base}/guides/`)];
@@ -59,6 +66,16 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 { from: `${base}/reference/developer/api/edge-client-reference`,     to: `${base}/reference/developer/api/edge-client-api-reference` },
                 { from: `${base}/reference/developer/api/edge-management-reference`, to: `${base}/reference/developer/api/edge-management-api-reference` },
                 { from: `${base}/learn/core-concepts/security/authorization/posture-checks`, to: `${base}/learn/core-concepts/security/authorization/posture-checks/overview` },
+                // external-auth section restructured: identity-providers moved up, others split out
+                { from: `${base}/how-to-guides/external-auth`,                        to: `${base}/how-to-guides/identity-providers` },
+                { from: `${base}/how-to-guides/external-auth/identity-providers`,     to: `${base}/how-to-guides/identity-providers` },
+                { from: `${base}/how-to-guides/external-auth/tunnelers`,              to: `${base}/how-to-guides/tunnelers` },
+                { from: `${base}/how-to-guides/external-auth/zac`,                    to: `${base}/how-to-guides/zac` },
+                { from: `${base}/how-to-guides/external-auth/ziti-cli`,               to: `${base}/reference/oidc-reference` },
+                // pki-troubleshooting moved from /support/ to /support/troubleshooting/
+                { from: `${base}/support/pki-troubleshooting`,                         to: `${base}/support/troubleshooting/pki-troubleshooting` },
+                { from: `${base}/support/pki-troubleshooting/renew-cert`,              to: `${base}/support/troubleshooting/pki-troubleshooting/renew-cert` },
+                { from: `${base}/support/pki-troubleshooting/troubleshoot-expired-certs`, to: `${base}/support/troubleshooting/pki-troubleshooting/troubleshoot-expired-certs` },
             ],
         },
     ];
