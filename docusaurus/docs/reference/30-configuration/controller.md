@@ -479,55 +479,124 @@ profile:
 The cluster section enables running multiple controllers in a cluster.
 
 - `commandHandler` - (optional)
-    - `maxQueueSize` - (optional, 1000) max size of the queue for processing incoming raft log
-      entries
+    - `maxQueueSize` - (optional, 250) how many pending raft journal entries the controller will
+      buffer for processing before the adaptive rate limiter starts rejecting incoming commands.
+      The right value balances burst tolerance against responsiveness under load: a larger queue
+      absorbs more bursts without rejecting, but commands can sit in the queue long enough to go
+      stale (an update applied minutes after it was submitted may no longer reflect the operator's
+      intent), and the cluster takes longer to surface "I'm overloaded" back to the caller. A
+      smaller queue fails fast under sustained load. Watch `raft.rate_limiter.queue_size`: a queue
+      that's consistently full means either you need more buffer or your load is genuinely beyond
+      what the cluster can apply.
 - `commitTimeout` - (optional, 50ms) how long the leader should wait without receiving an Apply
   before sending an AppendEntry message to followers to ensure that log entries are committed in a
-  reasonable time frame.
+  reasonable time frame. This is the timer that bumps along pending writes on a low-activity
+  cluster: under normal write load, AppendEntries are sent continually as Apply calls happen, and
+  this timer never fires. Due to random staggering, the actual interval can extend to as much as
+  2x this value. The default keeps writes responsive without flooding followers with empty
+  heartbeats; raise it slightly to reduce per-write network chatter on a quiet cluster, or lower
+  it if you want the leader to be more aggressive about pushing out pending writes during write
+  lulls.
 - `dataDir` - (required) directory in which to store the bolt DB, the raft journal and snapshots
-- `electionTimeout` - (optional, 1s) how long candidates will wait without communications from the
-  leader before starting a leader election
-- `heartbeatTimeout` - (optional, 1s) How long for followers will wait without communications from
-- the leader before starting a leader election.
-- `leaderLeaseTimeout` - (optional, 500ms) How long a leader will keep leadership before stepping
-  down, when it's unable to reach a quorum of nodes in the cluster
-- `logLevel` - (optional, DEBUG) The minimum level of raft log messages to emit
+- `electionTimeout` - (optional, 5s) how long a candidate will spend trying to win an election
+  before giving up and starting a fresh attempt. After `heartbeatTimeout` trips and a follower
+  becomes a candidate, the candidate sends RequestVote RPCs, waits for responses, and if it hasn't
+  either won the election or seen a new leader within this window, it abandons the current attempt
+  and starts over. The default is comfortable for typical intra-region and same-continent voter
+  placements. Raise it if you see repeated election attempts failing to complete in the cluster
+  events (a sign that elections are timing out before they can finish on a high-latency or lossy
+  network); changes here are independent of changing how quickly the cluster *notices* a leader
+  is gone -- that's governed by `heartbeatTimeout`.
+- `heartbeatTimeout` - (optional, 3s) how long followers will wait without communications from
+  the leader before starting a leader election. This is the primary leaderless-detection timer:
+  a healthy cluster never trips it except briefly during a real leader transition. Tuning it
+  tunes how quickly the cluster reacts to a leader becoming unreachable. The default is
+  comfortable for typical intra-region and same-continent voter placements. Raise it if your
+  network has occasional latency spikes longer than 3s that trigger spurious elections; lower it
+  if you can guarantee tight voter-to-voter latency and want faster recovery from a real leader
+  loss. Setting it close to the actual network round-trip will cause elections to fire on normal
+  jitter.
+- `leaderLeaseTimeout` - (optional, 3s) how long a leader will keep leadership before stepping
+  down, when it's unable to reach a quorum of nodes in the cluster. This is the safety valve that
+  prevents a leader from continuing to serve writes when it's been isolated from the majority of
+  the cluster: if the leader hasn't heard back from a quorum within this window, it voluntarily
+  steps down so the majority side can elect a new leader. Tune it together with `heartbeatTimeout`
+  and `electionTimeout`; setting it longer than `electionTimeout` defeats the purpose, and setting
+  it very short makes leadership flap on transient network blips. Default works for typical
+  placements.
+- `logLevel` - (optional) The minimum level of raft log messages to emit. If unset, raft uses its
+  library default.
 - `logFile` - (optional) If not specified, raft log messages will be emitted along with all other
   ziti log messages. If specified, raft log messages will be emitted to the given log file.
-- `minClusterSize` - (optional, 1) Only used when bootstrapping the cluster. The minimum number of
-  nodes before attempting to form a raft cluster
-- `maxAppendEntries` - (optional, 64) - Maximum number of log append entries to send at any given
-  time
-- `snapshotInterval` - (optional, 2m) - How often to check to see if a new snapshot needs to be
-  made. Checks will happen between `snapshotInterval` and 2 x `snapshotInterval`. This is a cluster
-  wide value and should be consistent across nodes in the cluster. Otherwise the value from the most
-  recently started controller will win.
-- `snapshotThreshold` - (optional, 8192) - Minimum number of new long entries before a new snapshot
-  will be created. This is a cluster wide value and should be consistent across nodes in the
-  cluster. Otherwise the value from the most recently started controller will win.
-- `trailingLogs` - (optional, 10240) - How many logs to leave in place after a snapshot. These can
-  be used to bring other nodes up to date that are only slightly behind, without having to send the
-  full snapshot. This is a cluster wide value and should be consistent across nodes in the cluster.
-  Otherwise the value from the most recently started controller will win.
-- `warnWhenLeaderlessFor` - (optional, 1m) - Emits a warning log message if a controller is part of
-   a cluster with no leader for a duration which exceeds this threshold. 
+- `maxAppendEntries` - (optional, 64) maximum number of log entries the leader will pack into a
+  single AppendEntries RPC to a follower. Trades RPC efficiency against wasted work on rejection:
+  a larger batch reduces the number of RPCs needed to bring a lagging follower current, but if
+  the follower's log is divergent and rejects the batch (the leader then needs to find the
+  divergence point and resend), more data is wasted per failed attempt. The default is
+  well-balanced for typical workloads. Consider raising it if you frequently see followers
+  catching up after long disconnects on a clean network and want fewer round-trips; consider
+  lowering it if you have very tight latency targets or have observed frequent log divergence
+  during recovery.
+- `preferredLeader` - (optional, false) - If true, this node is marked as a preferred leader. A
+  non-preferred leader will automatically transfer leadership to a preferred peer when one is
+  available. Useful for steering leadership toward a specific voter, such as one co-located with
+  ops or in a chosen region.
+- `restartSelfOnSnapshot` - (optional, false) - Controls behavior after applying a raft snapshot
+  received from the leader. Applying a snapshot replaces the underlying bolt DB and requires a
+  controller restart. If true, the controller restarts itself in-process. If false, the controller
+  exits; a process manager is expected to restart it.
+- `snapshotInterval` - (optional, 2m) how often to check whether a new snapshot needs to be made.
+  Actual checks happen at a random point between `snapshotInterval` and 2 x `snapshotInterval`
+  (the jitter prevents every controller from snapshotting at the same wall-clock moment). A
+  snapshot is only created if at least `snapshotThreshold` new log entries have accumulated since
+  the last one, so `snapshotInterval` bounds how stale a snapshot can be on a busy cluster, not
+  how often snapshots actually get taken. This is a cluster-wide value and should be consistent
+  across nodes in the cluster. Otherwise the value from the most recently started controller will
+  win.
+- `snapshotThreshold` - (optional, 500) minimum number of new log entries before a new snapshot
+  will be created. Trades snapshot frequency against journal size: a lower threshold means more
+  frequent snapshots and a smaller journal on disk, but more I/O spent on snapshot creation; a
+  higher threshold means a larger journal but less snapshot churn. The default is conservative
+  and works for most clusters. Consider raising it if you have plenty of disk and want to
+  minimize snapshot I/O on a high-write cluster, or lowering it if disk is tight and you want to
+  keep the journal compact. This is a cluster-wide value and should be consistent across nodes in
+  the cluster. Otherwise the value from the most recently started controller will win.
+- `trailingLogs` - (optional, 500) how many log entries to keep in the journal after a snapshot.
+  These trailing entries let a follower that's only slightly behind catch up by replaying journal
+  entries instead of receiving a full snapshot, which is much cheaper. The right value depends on
+  how far behind your followers can fall during normal operation: too small, and any follower
+  that disconnects briefly forces a full snapshot transfer when it returns; too large, and you're
+  storing entries that will never be needed. The default works for typical disconnect patterns;
+  raise it if you have followers that occasionally disconnect for longer periods and want to
+  avoid the snapshot-transfer-and-restart dance described in [HA -> Failure Scenarios](../ha/failure-scenarios.md#lagging-or-disconnected-controllers).
+  This is a cluster-wide value and should be consistent across nodes in the cluster. Otherwise
+  the value from the most recently started controller will win.
+- `warnWhenLeaderlessFor` - (optional, 1m) emits a warning log message (`cluster running without
+  leader for longer than configured threshold`) if the controller has been part of a cluster with
+  no leader for this duration. Minimum 10s. This is the primary log-based hook for alerting on
+  leaderless clusters; lower it if you want faster alerting (down to the 10s floor), raise it if
+  your cluster regularly has short leaderless windows during normal operation and you only want
+  to be alerted on extended outages. See [HA -> Monitoring and Troubleshooting](../ha/monitoring-and-troubleshooting.md#what-to-alert-on)
+  for how to wire this into alerting.
 
 ```text
 cluster:
   commandHandler:
-    maxQueueSize: 1000
+    maxQueueSize: 250
   commitTimeout: 50ms
   dataDir: ./data
-  electionTimeout: 1s
-  heartbeatTimeout: 1s
-  leaderLeaseTimeout: 500ms
+  electionTimeout: 5s
+  heartbeatTimeout: 3s
+  leaderLeaseTimeout: 3s
   logLevel: INFO
   logFile: ./raft.log
-  minClusterSize: 3
   maxAppendEntries: 64
+  preferredLeader: false
+  restartSelfOnSnapshot: false
   snapshotInterval: 2m
-  snapshotThreshold: 8192
-  trailingLogs: 10240
+  snapshotThreshold: 500
+  trailingLogs: 500
+  warnWhenLeaderlessFor: 1m
 ```
 
 ### `trace`

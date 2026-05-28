@@ -34,6 +34,9 @@ Once the controller is initialized, it should start up as normal and be usable.
 The cluster can now be expanded as explained in 
 [Operations/Growing the Cluster](./operations.md#growing-the-cluster).
 
+Once the cluster is established, future binary upgrades follow the rolling-upgrade
+procedure in [Upgrading](./upgrading.md), not the standalone-upgrade pattern.
+
 ## HA to Standalone
 
 This assumes that you have a database snapshot from an HA cluster. This could either

@@ -87,4 +87,8 @@ want to keep an eye on controllers to make sure they can keep up with the circui
 load they receive.
 
 When managing terminators, routers will try to talk directly to the current 
-cluster leader, since updates have to go through the leader. 
+cluster leader, since updates have to go through the leader.
+
+For what a router does when its current controller becomes unreachable, the leader
+changes, or the cluster enters read-only mode, see
+[Failure Scenarios -> Router Behavior During Failures](./failure-scenarios.md#router-behavior-during-failures).
