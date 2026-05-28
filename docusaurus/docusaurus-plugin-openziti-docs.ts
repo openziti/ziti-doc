@@ -39,13 +39,6 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 if (existingPath.startsWith(`${base}/how-to-guides/tunnelers/`)) {
                     return [existingPath.replace(`${base}/how-to-guides/tunnelers/`, `${base}/reference/tunnelers/`)];
                 }
-                // identity-providers moved from how-to-guides/external-auth/identity-providers/ to how-to-guides/identity-providers/
-                if (existingPath.startsWith(`${base}/how-to-guides/identity-providers/`)) {
-                    return [
-                        existingPath.replace(`${base}/how-to-guides/identity-providers/`, `${base}/how-to-guides/external-auth/identity-providers/`),
-                        existingPath.replace(`${base}/how-to-guides/identity-providers/`, `${base}/guides/identity-providers/`),
-                    ];
-                }
                 // guides/ renamed to how-to-guides/ (deployments, external-auth, hsm, topologies, etc.)
                 if (existingPath.startsWith(`${base}/how-to-guides/`)) {
                     return [existingPath.replace(`${base}/how-to-guides/`, `${base}/guides/`)];
