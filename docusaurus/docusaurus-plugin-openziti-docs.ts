@@ -67,13 +67,13 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 { from: `${base}/reference/developer/api/edge-management-reference`, to: `${base}/reference/developer/api/edge-management-api-reference` },
                 { from: `${base}/learn/core-concepts/security/authorization/posture-checks`, to: `${base}/learn/core-concepts/security/authorization/posture-checks/overview` },
                 // external-auth section restructured: identity-providers moved up, others split out
-                { from: `${base}/how-to-guides/external-auth`,                        to: `${base}/how-to-guides/identity-providers` },
-                { from: `${base}/how-to-guides/external-auth/identity-providers`,     to: `${base}/how-to-guides/identity-providers` },
-                { from: `${base}/how-to-guides/external-auth/tunnelers`,              to: `${base}/how-to-guides/tunnelers` },
+                { from: `${base}/how-to-guides/external-auth`,                        to: `${base}/how-to-guides/identity-providers/` },
+                { from: `${base}/how-to-guides/external-auth/identity-providers`,     to: `${base}/how-to-guides/identity-providers/` },
+                { from: `${base}/how-to-guides/external-auth/tunnelers`,              to: `${base}/how-to-guides/tunnelers/` },
                 { from: `${base}/how-to-guides/external-auth/zac`,                    to: `${base}/how-to-guides/zac` },
                 { from: `${base}/how-to-guides/external-auth/ziti-cli`,               to: `${base}/reference/oidc-reference` },
                 // pki-troubleshooting moved from /support/ to /support/troubleshooting/
-                { from: `${base}/support/pki-troubleshooting`,                         to: `${base}/support/troubleshooting/pki-troubleshooting` },
+                { from: `${base}/support/pki-troubleshooting`,                         to: `${base}/support/troubleshooting/pki-troubleshooting/` },
                 { from: `${base}/support/pki-troubleshooting/renew-cert`,              to: `${base}/support/troubleshooting/pki-troubleshooting/renew-cert` },
                 { from: `${base}/support/pki-troubleshooting/troubleshoot-expired-certs`, to: `${base}/support/troubleshooting/pki-troubleshooting/troubleshoot-expired-certs` },
             ],
