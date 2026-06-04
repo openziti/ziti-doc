@@ -1,0 +1,29 @@
+
+
+1. Enroll an admin identity. [Link to instructions](/reference/40-command-line/login.mdx)
+1. Unwrap the JSON file to obtain the certificate and private key.
+
+    ```text
+    ziti ops unwrap admin2.json
+    ```
+
+1. Compose a keystore from the certificate and private key. The `-legacy` flag is necessary when importing the keystore into some versions of macOS Keychain Access.
+
+    ```text
+    openssl pkcs12 -export -in admin2.cert -inkey admin2.key -out admin2.p12 -name "admin2" -legacy -password 'pass:mypassword'
+    ```
+
+1. Import the keystore:
+
+    * macOS: Import into System Keychain via Keychain Access application for Google Chrome. You can run a terminal command or double-click the keystore file or drag it onto the login keychain to import it.
+
+        ```text
+        security import admin2.p12 -k ~/Library/Keychains/login.keychain -T /Applications/Google\ Chrome.app -P 'mypass'
+        ```
+
+    * Windows: Import into the Windows Certificate Store (Personal store) via certmgr.msc.
+    * Linux: Import into your browser's certificate store or system certificate store (e.g., Chrome Settings > Privacy and Security > Security > Manage certificates).
+
+1. Visit the console in your web browser. The browser will prompt with a list of imported client certificates. Select the one you imported in the previous step.
+
+1. Press the "LOGIN" button without entering a password.

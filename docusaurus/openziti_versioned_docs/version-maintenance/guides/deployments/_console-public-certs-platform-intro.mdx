@@ -1,0 +1,14 @@
+## Using Public Certificates
+
+It is possible to remove certificate based security warnings.
+
+By default, the OpenZiti Controller is configured with a certificate issued by its self-signed PKI. Unless
+you've specifically added this certificate to all your web browsers, this will result in modern browsers showing
+a warning when accessing the console UI.
+
+Although not strictly a security issue, it's convenient to use certificates from a widely trusted CA such
+as [Let's Encrypt](https://letsencrypt.org/), [ZeroSSL](https://zerossl.com/), etc. Using a certificate from
+a widely trusted CA will very likely ensure any console user does not receive this warning.
+
+Assuming you are serving the console from the controller, you can configure the OpenZiti Controller to serve
+an alternate server certificate using the `alt_server_certs` configuration stanza.

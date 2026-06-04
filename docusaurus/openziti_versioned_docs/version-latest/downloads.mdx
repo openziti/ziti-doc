@@ -1,0 +1,227 @@
+---
+title: Downloads
+hide_table_of_contents: true
+description: Install Ziti
+---
+
+import OsTabs from '@theme/OsTabs';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<!-- the 'value' must match the osName detected by the OsTabs component -->
+
+<OsTabs
+  queryString="os"
+  values={[
+    { label: 'Windows', value: 'Windows', },
+    { label: 'macOS', value: 'Mac OS', },
+    { label: 'Linux', value: 'Linux', },
+    { label: 'iOS', value: 'iOS', },
+    { label: 'Android', value: 'Android', },
+    { label: 'Docker', value: 'Docker', },
+    { label: 'Kubernetes', value: 'Kubernetes', },
+  ]}
+>
+
+<TabItem value="Windows">
+
+<br/>
+
+### Ziti Desktop Edge
+
+This app provides the Ziti tunneler background service (`ziti-edge-tunnel`) and a control panel GUI.
+
+[Download Ziti Desktop Edge for Windows from GitHub](https://github.com/openziti/desktop-edge-win/releases/latest)
+
+[Read about tunneling in Windows](./how-to-guides/tunnelers/02-windows/index.md)
+
+<br/><br/>
+
+### Ziti Command
+    
+[Download the Windows ZIP for amd64 from GitHub](https://github.com/openziti/ziti/releases/latest)
+
+</TabItem>
+
+<TabItem value="Mac OS">
+
+<br/>
+
+### Ziti Desktop Edge
+
+This app provides the Ziti tunneler background service (`ziti-edge-tunnel`) and a control panel GUI.
+
+<br/>
+
+[![Ziti Desktop Edge on the Mac App Store](@openziti_img/Mac_App_Store_Badge.svg)](https://apps.apple.com/app/id1460484572)
+
+[Read about tunneling in macOS](./how-to-guides/tunnelers/04-macos.md)
+
+
+<br/><br/>
+
+### Ziti Command
+
+[Download the Darwin TAR from GitHub](https://github.com/openziti/ziti/releases/latest)
+
+</TabItem>
+
+<!-- begin super-tab Linux -->
+<TabItem value="Linux">
+
+Install the `ziti` command or the `ziti-edge-tunnel` tunneler as a package or a binary.
+
+There are systemd service packages available for `ziti-controller.service` and `ziti-router.service` too.
+
+<br/>
+
+<!-- begin Linux sub-tabs -->
+<Tabs
+    defaultValue="LinuxDeb"
+    values={[
+        { label: 'DEB for Debian family', value: 'LinuxDeb', },
+        { label: 'RPM for Red Hat family', value: 'LinuxRpm', },
+        { label: 'Download Binary', value: 'LinuxOther', },
+    ]}
+>
+
+<!-- begin sub-tab deb -->
+<TabItem value="LinuxDeb">
+
+### Install the `ziti` Command from the `openziti` Package
+
+Audit the script to ensure it is suitable to execute on your system as root.
+
+<br/>
+
+```text
+curl -sS https://get.openziti.io/install.bash \
+| sudo bash -s openziti
+```
+
+<br/>
+
+### Install the `ziti-edge-tunnel.service`
+
+<br/>
+
+Follow the Debian instructions [to install the `ziti-edge-tunnel` DEB](./how-to-guides/tunnelers/60-linux/10-debian-package.mdx)
+
+<br/>
+
+<!-- end sub-tab deb -->
+
+</TabItem>
+
+<!-- begin sub-tab rpm -->
+<TabItem value="LinuxRpm">
+
+### Install the `ziti` Command from the `openziti` Package
+
+Audit the script to ensure it is suitable to execute on your system as root.
+
+<br/>
+
+```text
+curl -sS https://get.openziti.io/install.bash \
+| sudo bash -s openziti
+```
+
+<br/>
+
+### Install the `ziti-edge-tunnel.service`
+
+<br/>
+
+Follow the Red Hat instructions to [install the `ziti-edge-tunnel` RPM](./how-to-guides/tunnelers/60-linux/20-redhat-package.mdx)
+
+<br/>
+
+<!-- end sub-tab rpm -->
+</TabItem>
+
+<TabItem value="LinuxOther">
+
+### Download the `ziti` Command
+
+[Download the Linux executable from GitHub](https://github.com/openziti/ziti/releases/latest)
+
+<br/>
+
+### Download the `ziti-edge-tunnel` Daemon
+
+Download [the latest binary from GitHub](https://github.com/openziti/ziti-tunnel-sdk-c/releases/latest/) and follow the [manual binary install instructions](./how-to-guides/tunnelers/60-linux/30-manual-installation.mdx)
+
+<br/>
+
+<!-- end LinuxOther sub-tab -->
+
+</TabItem>
+
+<!-- end Linux sub-tabs -->
+
+</Tabs>
+
+<!-- end super-tab Linux -->
+</TabItem>
+
+<TabItem value="Docker">
+
+<br/>
+
+### Tunneler Daemon
+
+[Run a tunneler with Docker](./how-to-guides/tunnelers/70-docker/readme.mdx)
+
+<br/><br/>
+
+### Ziti Command
+
+```text
+docker pull openziti/ziti-cli \
+&& docker run --rm openziti/ziti-cli version 
+```
+
+</TabItem>
+
+<TabItem value="Kubernetes">
+
+[Learn about tunneling workloads in Kubernetes](./how-to-guides/tunnelers/80-kubernetes/index.mdx)
+
+[Learn about self-hosting Ziti in Kubernetes](@openzitidocs/category/kubernetes)
+
+</TabItem>
+
+<TabItem value="iOS">
+
+<br/>
+
+### Ziti Mobile Edge
+
+This app provides a VPN that makes your authorized services available on mobile.
+
+<br/>
+
+[![Ziti Mobile Edge on the App Store](@openziti_img/App_Store_Badge.svg)](https://apps.apple.com/app/id1460484353)
+
+[Read about tunneling in iOS](./how-to-guides/tunnelers/05-_iOS.md)
+
+</TabItem>
+
+<TabItem value="Android">
+
+<br/>
+
+### Ziti Mobile Edge
+
+This app provides a VPN that makes your authorized Ziti Services available on mobile.
+
+<br/>
+
+[![Ziti Mobile Edge on the Google Play Store](@openziti_img/google-play-badge.svg)](https://play.google.com/store/apps/details?id=org.openziti.mobile)
+
+[Read about tunneling in Android](./how-to-guides/tunnelers/03-android.md)
+
+</TabItem>
+
+</OsTabs>

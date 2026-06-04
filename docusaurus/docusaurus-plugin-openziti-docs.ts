@@ -97,8 +97,9 @@ export function openzitiDocsPluginConfig(
             lastVersion: 'current',
             includeCurrentVersion: true,
             versions: {
-                'current': { label: '2.x', path: '',    banner: 'none' },
-                '1.x':     { label: '1.x', path: '1.x', banner: 'unmaintained' },
+                'current':     { label: 'Active LTS (2.0.x)',      path: '',       banner: 'none'         },
+                'latest':      { label: 'Latest',                  path: 'latest', banner: 'unreleased'   },
+                'maintenance': { label: 'Maintenance LTS (1.6.x)', path: 'maint',  banner: 'unmaintained' },
             },
             beforeDefaultRemarkPlugins: [
                 // Must run before Docusaurus's default broken-image / broken-link check,

@@ -1,0 +1,5 @@
+label: Configuration
+position: 15
+link:
+  type: doc
+  id: reference/configuration/conventions

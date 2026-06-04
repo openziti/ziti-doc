@@ -29,7 +29,7 @@ const docsBase = `/docs/${openziti}`;
 const REMARK_MAPPINGS = [
     { from: '@openzitidocs',    to: `${docsBase}`},
     { from: '@openziti2x',      to: `${docsBase}`},
-    { from: '@openziti1x',      to: `${docsBase}/1.x`},
+    { from: '@openziti1x',      to: `${docsBase}/maint`},
     { from: '@selfhosteddocs',  to: 'https://netfoundry.io/docs/selfhosted' },
     { from: '@zrokdocs',        to: 'https://netfoundry.io/docs/zrok' },
     { from: '@frontdoordocs',   to: 'https://netfoundry.io/docs/frontdoor' },
@@ -238,9 +238,13 @@ const config: Config = {
                     if (path.startsWith(docUrl(docsBase, "/learn/introduction/"))) {
                         return [path.replace(docUrl(docsBase, "/learn/introduction/"), docUrl(docsBase, "/introduction/"))];
                     }
-                    // Redirect /next/* → /* after promoting 2.x to the default version
-                    if (path.startsWith(docUrl(docsBase, "/")) && !path.startsWith(docUrl(docsBase, "/1.x"))) {
-                        return [path.replace(docUrl(docsBase, "/"), docUrl(docsBase, "/next/"))];
+                    // /next/* → /latest/* (Docusaurus previously served dev version at /next/)
+                    if (path.startsWith(docUrl(docsBase, "/latest/"))) {
+                        return [path.replace(docUrl(docsBase, "/latest/"), docUrl(docsBase, "/next/"))];
+                    }
+                    // /1.x/* → /maint/* (maintenance version path rename)
+                    if (path.startsWith(docUrl(docsBase, "/maint/"))) {
+                        return [path.replace(docUrl(docsBase, "/maint/"), docUrl(docsBase, "/1.x/"))];
                     }
                     return undefined;
                 },
@@ -295,6 +299,18 @@ const config: Config = {
                     repoUrl: 'https://github.com/openziti/ziti',
                     label: 'Star OpenZiti on GitHub',
                 },
+                versionBanners: [
+                    {
+                        pathPrefix: `${docsBase}/latest`,
+                        message: 'Latest (development) — features here may not be available in any released version. For stable documentation, see Active LTS (2.0.x).',
+                        type: 'info',
+                    },
+                    {
+                        pathPrefix: `${docsBase}/maint`,
+                        message: 'Maintenance LTS (1.6.x) — receives security fixes and critical production defect patches only. For new features and active support, see Active LTS (2.0.x).',
+                        type: 'warning',
+                    },
+                ],
                 footer: openZitiFooter,
                 // ProductPicker requires every link to use `to:` (not `href:`) — the theme's
                 // pathLabel reads link.to.replace(...) and crashes on undefined. The theme strips

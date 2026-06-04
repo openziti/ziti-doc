@@ -1,0 +1,5 @@
+label: "2. Install the ZAC"
+position: 30
+link:
+  type: doc
+  id: get-started/zac/index

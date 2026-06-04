@@ -1,0 +1,5 @@
+label: "1. Set up a network"
+position: 0
+link:
+  type: doc
+  id: get-started/network/index
