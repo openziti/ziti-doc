@@ -306,8 +306,11 @@ const config: Config = {
                         type: 'info',
                         links: [
                             { text: 'release policy', href: 'https://github.com/openziti/ziti/blob/main/RELEASE_POLICY.md' },
-                            { text: OPENZITI_VERSION_LABELS.current, href: `${docsBase}/intro` },
                         ],
+                        versionLink: {
+                            text: OPENZITI_VERSION_LABELS.current,
+                            fallbackHref: `${docsBase}/intro`,
+                        },
                     },
                     {
                         pathPrefix: `${docsBase}/maint`,
@@ -315,8 +318,11 @@ const config: Config = {
                         type: 'warning',
                         links: [
                             { text: 'release policy', href: 'https://github.com/openziti/ziti/blob/main/RELEASE_POLICY.md' },
-                            { text: OPENZITI_VERSION_LABELS.current, href: `${docsBase}/intro` },
                         ],
+                        versionLink: {
+                            text: OPENZITI_VERSION_LABELS.current,
+                            fallbackHref: `${docsBase}/intro`,
+                        },
                     },
                 ],
                 footer: openZitiFooter,
