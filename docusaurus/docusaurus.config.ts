@@ -13,7 +13,7 @@ import {
 } from "@netfoundry/docusaurus-theme";
 import path from "node:path";
 import {openZitiFooter} from "./src/components/footer";
-import {openzitiDocsPluginConfig} from "./docusaurus-plugin-openziti-docs";
+import {openzitiDocsPluginConfig, OPENZITI_VERSION_LABELS} from "./docusaurus-plugin-openziti-docs";
 import {
     remarkReplaceMetaUrl,
     remarkScopedPath,
@@ -302,13 +302,21 @@ const config: Config = {
                 versionBanners: [
                     {
                         pathPrefix: `${docsBase}/latest`,
-                        message: 'Latest (development) — features here may not be available in any released version. For stable documentation, see Active LTS (2.0.x).',
+                        message: `This is the latest development documentation and may describe features not yet available in a long-term-stable (LTS) release. See the release policy for more information. For stable documentation, see ${OPENZITI_VERSION_LABELS.current}.`,
                         type: 'info',
+                        links: [
+                            { text: 'release policy', href: 'https://github.com/openziti/ziti/blob/main/RELEASE_POLICY.md' },
+                            { text: OPENZITI_VERSION_LABELS.current, href: docsBase },
+                        ],
                     },
                     {
                         pathPrefix: `${docsBase}/maint`,
-                        message: 'Maintenance LTS (1.6.x) — receives security fixes and critical production defect patches only. For new features and active support, see Active LTS (2.0.x).',
+                        message: `Maintenance LTS (1.6.x) — receives security fixes and critical production defect patches only. See the release policy for more information. For new features and active support, see ${OPENZITI_VERSION_LABELS.current}.`,
                         type: 'warning',
+                        links: [
+                            { text: 'release policy', href: 'https://github.com/openziti/ziti/blob/main/RELEASE_POLICY.md' },
+                            { text: OPENZITI_VERSION_LABELS.current, href: docsBase },
+                        ],
                     },
                 ],
                 footer: openZitiFooter,
