@@ -1,0 +1,10 @@
+
+To create an Edge Router Policy using the CLI issue the following commands.
+
+1. To use the CLI, you'll need to be logged in. [Link to instructions](../../../../../reference/40-command-line/login.mdx)
+
+1. Create an Edge Router Policy named `my-policy` which allows all Identities to use all routers.
+
+    ```text
+    ziti edge create edge-router-policy my-policy --identity-roles '#all' --edge-router-roles '#all'
+    ```

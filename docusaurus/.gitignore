@@ -26,3 +26,8 @@ static/docs/reference/developer/sdk
 *.bkp
 remark*.log
 static/build-time.txt
+
+# TypeScript compile artifacts (tsc emits these alongside .ts source files)
+docusaurus-plugin-*.js
+docusaurus.config.js
+src/**/*.js

@@ -22,6 +22,12 @@ export const openzitiImageAliases = [
     { from: '@openziti_img', to: OPENZITI_IMG },
 ];
 
+export const OPENZITI_VERSION_LABELS = {
+    current:     'Active LTS (2.0.x)',
+    latest:      'Latest',
+    maintenance: 'Maintenance LTS (1.6.x)',
+} as const;
+
 export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): PluginConfig {
     const base = '/' + routeBasePath;
     return [
@@ -97,8 +103,9 @@ export function openzitiDocsPluginConfig(
             lastVersion: 'current',
             includeCurrentVersion: true,
             versions: {
-                'current': { label: '2.x', path: '',    banner: 'none' },
-                '1.x':     { label: '1.x', path: '1.x', banner: 'unmaintained' },
+                'current':     { label: OPENZITI_VERSION_LABELS.current,     path: '',       banner: 'none'         },
+                'latest':      { label: OPENZITI_VERSION_LABELS.latest,      path: 'latest', banner: 'unreleased'   },
+                'maintenance': { label: OPENZITI_VERSION_LABELS.maintenance,  path: 'maint',  banner: 'unmaintained' },
             },
             beforeDefaultRemarkPlugins: [
                 // Must run before Docusaurus's default broken-image / broken-link check,
