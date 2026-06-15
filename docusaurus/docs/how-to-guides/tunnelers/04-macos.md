@@ -6,7 +6,7 @@ Ziti Desktop Edge for Mac is the tunneler for macOS.
 
 **Ziti Desktop Edge** on the [Mac App Store](https://apps.apple.com/us/app/ziti-tunnel/id1460484572?mt=12)
 
-:::info[Note]
+:::note
 
 If you already have **Ziti Desktop Edge for Mac** installed and you are updating it, please make sure to turn off your **Ziti Desktop Edge for Mac** before updating it
 
