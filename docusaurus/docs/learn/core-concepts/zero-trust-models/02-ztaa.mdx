@@ -12,7 +12,7 @@ import Share13Md from './share/_app_to_host_a_deploy.mdx';
 
 This article describes the various edge deployments of ZiTi App Access. In all cases, the Controller and at least 2 Public Edge Routers are to be deployed for redundancy. The Ziti Fabric connections are established between all Edge Routers but not Clients/SDKs. The Public Edge Routers would provide connection between Private Edge Routers and/or Clients/SDKs.
 
-:::info Note
+:::info[Note]
 
 - *Recommended configuration deployment of Public Edge Routers is to have only Ziti Edge enabled and of Private Edge Routers is to have Ziti Edge enabled with Tunnel option being required for cases where the Zero Trust domain ends at the private edge router.*
 
@@ -29,14 +29,14 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     ![image](/img/deployment-architecture/app_to_app_a_deploy.png)
 
-    :::info Details
+    :::info[Details]
     - Client is SDK integrated.
     - Application is SDK integrated.
     :::
 
     &nbsp;
 
-    :::tip Advantages
+    :::tip[Advantages]
     - Application to Application Encryption 
     - No additional routing needed
     - No additional DNS entries needed
@@ -44,7 +44,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     &nbsp;
 
-    :::caution Things to consider while deciding
+    :::caution[Things to consider while deciding]
     - SDK and Application source code availability
     :::
 
@@ -56,14 +56,14 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     ![image](/img/deployment-architecture/app_to_app_b_deploy.png)
 
-    :::info Details
+    :::info[Details]
     - Client is SDK integrated
     - Application is SDK integrated
     :::
 
     &nbsp;
 
-    :::tip Advantages
+    :::tip[Advantages]
     - Application to Application Encryption 
     - No additional routing needed
     - No additional DNS entries needed
@@ -71,7 +71,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     &nbsp;
 
-    :::caution Things to consider while deciding
+    :::caution[Things to consider while deciding]
     - SDK and Application source code availability
     :::
 
@@ -83,14 +83,14 @@ This article describes the various edge deployments of ZiTi App Access. In all c
     
     ![image](/img/deployment-architecture/app_to_app_c_deploy.png)
 
-    :::info Details
+    :::info[Details]
     - Client is SDK integrated
     - Application is SDK integrated.
     :::
 
     &nbsp;
     
-    :::tip Advantages
+    :::tip[Advantages]
     - No need to deploy private edge routers
     - Application to Application Encryption 
     - No additional routing needed
@@ -99,7 +99,7 @@ This article describes the various edge deployments of ZiTi App Access. In all c
 
     &nbsp;
         
-    :::caution Things to consider while deciding
+    :::caution[Things to consider while deciding]
     - Fabric is not extended into application network
     - SDK and Application source code availability
     :::

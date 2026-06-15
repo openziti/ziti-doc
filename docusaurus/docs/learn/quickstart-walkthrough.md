@@ -104,11 +104,11 @@ Here are a few more common variables.
 - `ZITI_ROUTER_PORT` is the port used for the Router's advertised address.
 
 The following are PKI related customization variables
-:::caution PKI Generation Only Happens Once
+:::caution[PKI Generation Only Happens Once]
 It is extremely important that quickstart has the relevant information to set up your PKI. This generation is only
 performed once so, if it is incorrect, the entire PKI needs to be regenerated.
 :::
-:::caution DNS is Preferred Over IP
+:::caution[DNS is Preferred Over IP]
 It is highly recommended to use DNS over IP as this is a one time setup, if your IP changes, then your PKI is rendered
 useless.
 :::
