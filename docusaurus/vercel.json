@@ -6,6 +6,5 @@
         "silent": false
     },
     "cleanUrls": false,
-    "public": true,
     "ignoreCommand": "bash -x ../vercel-ignore.sh"
 }
