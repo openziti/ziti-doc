@@ -1,0 +1,9 @@
+node_modules/
+playwright-report/
+test-results/
+package-lock.json
+
+# Baselines are never committed. They live as a tarball on a GitHub release and are
+# pulled/pushed by run.sh (--pull-baselines / --publish-baselines).
+snapshots/
+baselines.tgz

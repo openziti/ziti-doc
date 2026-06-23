@@ -1,0 +1,64 @@
+name: visual-regression
+
+# Spot-checks the overall design/look/feel of the Docusaurus site. Baselines are NOT
+# committed: they live as a tarball on a GitHub release (tag "vrt-baselines"). PRs pull
+# those baselines and compare; pushes to main regenerate and republish them. All logic
+# lives in visual-regression/run.sh so it can be run locally; this workflow only checks
+# out the code, provides gh auth, and invokes the script.
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Regenerate and publish baselines instead of verifying"
+        type: boolean
+        default: false
+  pull_request:
+    paths:
+      - "docusaurus/src/**"
+      - "docusaurus/static/**"
+      - "docusaurus/docusaurus.config.ts"
+      - "visual-regression/**"
+      - ".github/workflows/visual-regression.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docusaurus/src/**"
+      - "docusaurus/static/**"
+      - "docusaurus/docusaurus.config.ts"
+      - "visual-regression/**"
+
+jobs:
+  verify:
+    # PRs (and a plain manual run) compare the current site against published baselines.
+    if: ${{ github.repository_owner == 'openziti' && !(github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish)) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify against published baselines
+        run: ./visual-regression/run.sh --docker --gendoc --pull-baselines
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: visual-regression-report
+          path: |
+            visual-regression/playwright-report/
+            visual-regression/test-results/
+          retention-days: 14
+
+  publish:
+    # Pushes to main (and a manual run with publish=true) regenerate and republish baselines.
+    if: ${{ github.repository_owner == 'openziti' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish)) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate and publish baselines
+        run: ./visual-regression/run.sh --docker --gendoc --update --publish-baselines
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
