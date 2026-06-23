@@ -1,0 +1,14 @@
+{
+  "name": "openziti-docs-visual-regression",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Visual regression spot-check for the openziti.io Docusaurus site",
+  "scripts": {
+    "test": "playwright test",
+    "update": "playwright test --update-snapshots",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.50.1"
+  }
+}
