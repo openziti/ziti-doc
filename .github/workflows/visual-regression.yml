@@ -38,9 +38,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Verify against published baselines
-        run: ./visual-regression/run.sh --docker --gendoc --pull-baselines
+        # The 'visual-baseline-update' PR label marks an intentional redesign: skip the
+        # comparison so a required check can still pass; baselines update on merge to main.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCEPT: ${{ contains(github.event.pull_request.labels.*.name, 'visual-baseline-update') }}
+        run: |
+          extra=""
+          [ "$ACCEPT" = "true" ] && extra="--accept-visual-changes"
+          ./visual-regression/run.sh --docker --gendoc --pull-baselines $extra
       - uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
