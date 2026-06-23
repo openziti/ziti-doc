@@ -74,11 +74,28 @@ SNAPSHOTS_DIR="$VR_DIR/snapshots"
 pull_baselines() {
   echo ">> Pulling baselines from release '$BASELINES_TAG'"
   command -v gh >/dev/null || { echo "ERROR: gh (GitHub CLI) is required for --pull-baselines." >&2; exit 1; }
+
+  # Soft-skip bootstrap: if the release or its baselines.tgz asset doesn't exist yet,
+  # there is nothing to compare against, so exit 0 (verify passes) with a clear note.
+  # Any OTHER gh failure (auth, network) is a hard error. This lets the very first PR go
+  # green; merging to main publishes the first set and every later PR verifies for real.
+  local err
+  if ! err="$(gh release view "$BASELINES_TAG" "${GH_REPO_FLAG[@]}" 2>&1 >/dev/null)"; then
+    if echo "$err" | grep -qi "not found\|release not found\|no release"; then
+      echo ">> No '$BASELINES_TAG' release yet; skipping verification (soft pass)."
+      echo ">> Merge to main (or run the publish job) to create the first baselines."
+      exit 0
+    fi
+    echo "ERROR: gh release view failed: $err" >&2; exit 1
+  fi
+
   local tmp; tmp="$(mktemp -d)"
-  if ! gh release download "$BASELINES_TAG" "${GH_REPO_FLAG[@]}" --pattern baselines.tgz --dir "$tmp"; then
-    echo "ERROR: could not download 'baselines.tgz' from release '$BASELINES_TAG'." >&2
-    echo "       Generate and publish baselines first:" >&2
-    echo "         ./run.sh --docker --gendoc --update --publish-baselines" >&2
+  if ! err="$(gh release download "$BASELINES_TAG" "${GH_REPO_FLAG[@]}" --pattern baselines.tgz --dir "$tmp" 2>&1)"; then
+    if echo "$err" | grep -qi "no assets\|asset not found\|not found\|no such"; then
+      echo ">> Release '$BASELINES_TAG' has no baselines.tgz yet; skipping verification (soft pass)."
+      rm -rf "$tmp"; exit 0
+    fi
+    echo "ERROR: could not download baselines.tgz: $err" >&2
     rm -rf "$tmp"; exit 1
   fi
   rm -rf "$SNAPSHOTS_DIR"
