@@ -77,10 +77,12 @@ Everything goes through [`run.sh`](./run.sh).
 ./visual-regression/run.sh --base-url https://openziti.io --pull-baselines
 
 # Useful extras
-./visual-regression/run.sh ... --skip-build            # reuse an existing docusaurus/build
-./visual-regression/run.sh ... --port 5000             # change the static-server port
-./visual-regression/run.sh ... --baselines-tag my-tag  # use a different release tag
-./visual-regression/run.sh ... --repo owner/repo       # target a specific repo for gh
+./visual-regression/run.sh ... --skip-build              # reuse an existing docusaurus/build
+./visual-regression/run.sh ... --port 5000               # change the static-server port
+./visual-regression/run.sh ... --baselines-tag my-tag    # use a different release tag
+./visual-regression/run.sh ... --repo owner/repo         # target a specific repo for gh
+./visual-regression/run.sh ... --mount-path /mnt/d/repo  # override the --docker bind-mount source
+./visual-regression/run.sh ... --accept-visual-changes   # skip the comparison and pass (intentional redesign)
 ```
 
 On Windows, run from **WSL**: Docker bind-mount paths (`/d/...`) and `gh` behave correctly there, whereas Git Bash can
@@ -93,10 +95,16 @@ The spec (`tests/visual.spec.ts`) stabilizes each page before capture:
 - Disables CSS animations/transitions and hides scrollbars and text carets.
 - Sets the Docusaurus theme via `localStorage` before first paint, and matches the browser color scheme, so
   `ThemedImage` assets resolve correctly.
-- Waits for web fonts (`document.fonts.ready`) and network idle.
+- Navigates with `domcontentloaded` (not `networkidle`, which never settles on pages with analytics/embeds), then
+  waits for web fonts and for every `<img>` to finish loading/decoding (each capped so a hung image can't stall it).
 - Scrolls the full page to trigger lazy-loaded content, then returns to the top.
+- Intercepts the navbar brand logos (loaded from an external host that returns 403 to non-interactive clients) and
+  fulfills them with a blank fixed-size SVG, so they don't capture as broken-image glyphs.
 - **Masks** volatile regions instead of comparing them: `iframe` (GitHub star buttons, YouTube), `video`,
   `.asciinema-player`, and `canvas` (ECharts). Add `data-vrt-mask` to any other element that proves unstable.
+
+Pages whose total height is non-deterministic are captured at viewport size instead of full page (set
+`fullPage: false` on the page in `pages.ts`; the Scalar API reference uses this).
 
 The pass/fail threshold is `maxDiffPixelRatio: 0.01` (1% of pixels). Tune it in `playwright.config.ts` (global) or
 per-assertion in the spec.
@@ -109,16 +117,28 @@ On a mismatch, Playwright writes the expected/actual/diff images and an HTML rep
 npx playwright show-report      # run from this directory
 ```
 
-In CI the report and diffs are uploaded as the `visual-regression-report` artifact. If a diff is an intended design
-change, republish the baselines with `--update --publish-baselines` (or merge to main, which republishes automatically).
+In CI the report and diffs are uploaded as the `visual-regression-report` artifact.
+
+### Intentional design changes
+
+`main` defines the truth, so a PR that deliberately changes the look will diff against the *old* baselines and turn
+`verify` red. To merge it (including past a required status check), add the **`visual-baseline-update`** label to the
+PR: `verify` then skips the comparison and passes. After merge, the `publish` job regenerates the baselines on `main`,
+and later PRs verify against the new look. You do not hand-regenerate baselines.
 
 ## CI
 
 [`.github/workflows/visual-regression.yml`](../.github/workflows/visual-regression.yml) checks out the repo, provides
-`gh` auth, and invokes `run.sh`:
+`gh` auth, and invokes `run.sh`. It contains no logic of its own.
 
-- **Pull requests** run `--docker --gendoc --pull-baselines` (verify against published baselines).
-- **Pushes to `main`** run `--docker --gendoc --update --publish-baselines` (main defines the truth).
-- **Manual dispatch** verifies by default, or republishes when run with `publish=true`.
+- **Pull requests** run `--docker --gendoc --pull-baselines` (verify against published baselines). With the
+  `visual-baseline-update` label, the comparison is skipped and the check passes (see above).
+- **Pushes to `main`** run `--docker --gendoc --update --publish-baselines` (main defines the truth). Baselines are
+  uploaded to a single rolling release tag (`vrt-baselines`), overwritten in place each time (no history).
+- **Manual dispatch** verifies by default, or republishes when run with `publish=true` (used to bootstrap the first
+  set, or from the Actions tab once the workflow is on `main`).
+
+If no baselines exist yet (before the first publish), `verify` soft-passes rather than failing, so the bootstrapping
+PR isn't blocked.
 
 The workflow contains no logic of its own; everything lives in `run.sh` so it is reproducible locally.
