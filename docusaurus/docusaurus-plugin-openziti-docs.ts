@@ -75,7 +75,9 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 // Preserve old /docs/openziti/latest/* URLs by redirecting them to the new root location.
                 if (existingPath.startsWith(`${base}/`)
                     && !existingPath.startsWith(`${base}/2.0/`)
-                    && !existingPath.startsWith(`${base}/maint/`)) {
+                    && !existingPath.startsWith(`${base}/maint/`)
+                    && existingPath !== `${base}/reference/config-types/host.v1`
+                    && existingPath !== `${base}/reference/config-types/host.v2`) {
                     out.push(existingPath.replace(`${base}/`, `${base}/latest/`));
                 }
                 return out.length ? out : undefined;
@@ -94,6 +96,8 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 { from: `${base}/support/pki-troubleshooting`,                         to: `${base}/support/troubleshooting/pki-troubleshooting/` },
                 { from: `${base}/support/pki-troubleshooting/renew-cert`,              to: `${base}/support/troubleshooting/pki-troubleshooting/renew-cert` },
                 { from: `${base}/support/pki-troubleshooting/troubleshoot-expired-certs`, to: `${base}/support/troubleshooting/pki-troubleshooting/troubleshoot-expired-certs` },
+                { from: `${base}/latest/reference/config-types/host.v1`, to: `${base}/reference/config-types/host_v1` },
+                { from: `${base}/latest/reference/config-types/host.v2`, to: `${base}/reference/config-types/host_v2` },
             ],
         },
     ];
