@@ -35,36 +35,50 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
         {
             id: 'openziti-redirects',
             createRedirects(existingPath: string) {
-                if (existingPath.startsWith(`${base}/get-started/`)) {
-                    return [
-                        existingPath.replace(`${base}/get-started/`, `${base}/learn/quickstarts/`),
-                        existingPath.replace(`${base}/get-started/`, `${base}/quickstarts/`),
-                    ];
+                // Structural redirects from past content reshuffles. Mutually exclusive by prefix
+                // (note identity-providers is nested under how-to-guides), so keep the early-return chain.
+                const structural = (): string[] | undefined => {
+                    if (existingPath.startsWith(`${base}/get-started/`)) {
+                        return [
+                            existingPath.replace(`${base}/get-started/`, `${base}/learn/quickstarts/`),
+                            existingPath.replace(`${base}/get-started/`, `${base}/quickstarts/`),
+                        ];
+                    }
+                    // tunnelers moved from /reference/tunnelers/ to /how-to-guides/tunnelers/
+                    if (existingPath.startsWith(`${base}/how-to-guides/tunnelers/`)) {
+                        return [existingPath.replace(`${base}/how-to-guides/tunnelers/`, `${base}/reference/tunnelers/`)];
+                    }
+                    // identity-providers sub-pages moved from external-auth/identity-providers/ to identity-providers/.
+                    // Excludes the index page (handled by explicit entry) to avoid EEXIST from duplicate stub generation.
+                    if (existingPath.startsWith(`${base}/how-to-guides/identity-providers/`) && existingPath !== `${base}/how-to-guides/identity-providers/`) {
+                        return [existingPath.replace(`${base}/how-to-guides/identity-providers/`, `${base}/how-to-guides/external-auth/identity-providers/`)];
+                    }
+                    // guides/ renamed to how-to-guides/ (deployments, external-auth, hsm, topologies, etc.)
+                    if (existingPath.startsWith(`${base}/how-to-guides/`)) {
+                        return [existingPath.replace(`${base}/how-to-guides/`, `${base}/guides/`)];
+                    }
+                    if (existingPath.startsWith(`${base}/learn/core-concepts/`)) {
+                        return [existingPath.replace(`${base}/learn/core-concepts/`, `${base}/core-concepts/`)];
+                    }
+                    // troubleshooting moved from /guides/troubleshooting/ to /support/
+                    if (existingPath.startsWith(`${base}/support/`)) {
+                        return [existingPath.replace(`${base}/support/`, `${base}/guides/troubleshooting/`)];
+                    }
+                    if (existingPath === `${base}/intro`) {
+                        return [`${base}/learn/introduction`, `${base}/introduction`];
+                    }
+                    return undefined;
+                };
+
+                const out = structural() ?? [];
+                // 'latest' moved from /latest to the site root when it became the default version.
+                // Preserve old /docs/openziti/latest/* URLs by redirecting them to the new root location.
+                if (existingPath.startsWith(`${base}/`)
+                    && !existingPath.startsWith(`${base}/2.0/`)
+                    && !existingPath.startsWith(`${base}/maint/`)) {
+                    out.push(existingPath.replace(`${base}/`, `${base}/latest/`));
                 }
-                // tunnelers moved from /reference/tunnelers/ to /how-to-guides/tunnelers/
-                if (existingPath.startsWith(`${base}/how-to-guides/tunnelers/`)) {
-                    return [existingPath.replace(`${base}/how-to-guides/tunnelers/`, `${base}/reference/tunnelers/`)];
-                }
-                // identity-providers sub-pages moved from external-auth/identity-providers/ to identity-providers/.
-                // Excludes the index page (handled by explicit entry) to avoid EEXIST from duplicate stub generation.
-                if (existingPath.startsWith(`${base}/how-to-guides/identity-providers/`) && existingPath !== `${base}/how-to-guides/identity-providers/`) {
-                    return [existingPath.replace(`${base}/how-to-guides/identity-providers/`, `${base}/how-to-guides/external-auth/identity-providers/`)];
-                }
-                // guides/ renamed to how-to-guides/ (deployments, external-auth, hsm, topologies, etc.)
-                if (existingPath.startsWith(`${base}/how-to-guides/`)) {
-                    return [existingPath.replace(`${base}/how-to-guides/`, `${base}/guides/`)];
-                }
-                if (existingPath.startsWith(`${base}/learn/core-concepts/`)) {
-                    return [existingPath.replace(`${base}/learn/core-concepts/`, `${base}/core-concepts/`)];
-                }
-                // troubleshooting moved from /guides/troubleshooting/ to /support/
-                if (existingPath.startsWith(`${base}/support/`)) {
-                    return [existingPath.replace(`${base}/support/`, `${base}/guides/troubleshooting/`)];
-                }
-                if (existingPath === `${base}/intro`) {
-                    return [`${base}/learn/introduction`, `${base}/introduction`];
-                }
-                return undefined;
+                return out.length ? out : undefined;
             },
             redirects: [
                 { from: `${base}/reference/developer/api/edge-client-reference`,     to: `${base}/reference/developer/api/edge-client-api-reference` },
@@ -100,12 +114,12 @@ export function openzitiDocsPluginConfig(
             path: op,
             routeBasePath,
             sidebarPath: osbp,
-            lastVersion: 'current',
+            lastVersion: 'latest',
             includeCurrentVersion: true,
             versions: {
-                'current':     { label: OPENZITI_VERSION_LABELS.current,     path: '',       banner: 'none'         },
-                'latest':      { label: OPENZITI_VERSION_LABELS.latest,      path: 'latest', banner: 'unreleased'   },
-                'maintenance': { label: OPENZITI_VERSION_LABELS.maintenance,  path: 'maint',  banner: 'unmaintained' },
+                'latest':      { label: OPENZITI_VERSION_LABELS.latest,      path: '',      banner: 'none'         },
+                'current':     { label: OPENZITI_VERSION_LABELS.current,     path: '2.0',   banner: 'none'         },
+                'maintenance': { label: OPENZITI_VERSION_LABELS.maintenance, path: 'maint', banner: 'unmaintained' },
             },
             beforeDefaultRemarkPlugins: [
                 // Must run before Docusaurus's default broken-image / broken-link check,

@@ -14,6 +14,7 @@ on:
         type: boolean
         default: false
   pull_request:
+    types: [opened, synchronize, reopened, labeled]
     paths:
       - "docusaurus/src/**"
       - "docusaurus/static/**"

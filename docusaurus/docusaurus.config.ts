@@ -196,57 +196,69 @@ const config: Config = {
             '@docusaurus/plugin-client-redirects',
             {
                 createRedirects: path => {
-                    if (path.startsWith(docUrl(docsBase, "/guides/topologies/gateway/"))) {
-                        return [path.replace(docUrl(docsBase, "/guides/topologies/gateway/"), docUrl(docsBase, "/guides/local-gateway/"))];
+                    // Structural redirects from past content reshuffles. Mutually exclusive by prefix
+                    // (note the nested zero-trust-models / core-concepts pair), so keep the early-return chain.
+                    const structural = (): string[] | undefined => {
+                        if (path.startsWith(docUrl(docsBase, "/guides/topologies/gateway/"))) {
+                            return [path.replace(docUrl(docsBase, "/guides/topologies/gateway/"), docUrl(docsBase, "/guides/local-gateway/"))];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/guides/deployments/kubernetes/"))) {
+                            return [path.replace(docUrl(docsBase, "/guides/deployments/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/hosting/"))];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/reference/tunnelers/kubernetes/"))) {
+                            return [path.replace(docUrl(docsBase, "/reference/tunnelers/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/workload-tunneling/"))];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/guides/deployments/"))) {
+                            return [
+                                path.replace(docUrl(docsBase, "/guides/deployments/"), docUrl(docsBase, "/reference/deployments/")),
+                            ];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/reference/developer/api/"))) {                       // for each existing page
+                            return [
+                                path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/"),                      // return a "from" redirect for each old path
+                                path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/"),
+                                path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/edge-apis/")
+                            ];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/get-started/"))) {
+                            return [
+                                path.replace(docUrl(docsBase, "/get-started/"), docUrl(docsBase, "/learn/quickstarts/")),
+                                path.replace(docUrl(docsBase, "/get-started/"), docUrl(docsBase, "/quickstarts/")),
+                            ];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/how-to-guides/identity-providers/"))) {
+                            return [path.replace(docUrl(docsBase, "/how-to-guides/identity-providers/"), docUrl(docsBase, "/how-to-guides/external-auth/identity-providers/"))];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"))) {
+                            return [
+                                path.replace(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"), docUrl(docsBase, "/deployment-architecture/")),
+                                path.replace(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"), docUrl(docsBase, "/core-concepts/zero-trust-models/"))
+                            ];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/"))) {
+                            return [path.replace(docUrl(docsBase, "/learn/core-concepts/"), docUrl(docsBase, "/core-concepts/"))];
+                        }
+                        if (path.startsWith(docUrl(docsBase, "/learn/introduction/"))) {
+                            return [path.replace(docUrl(docsBase, "/learn/introduction/"), docUrl(docsBase, "/introduction/"))];
+                        }
+                        // /1.x/* → /maint/* (maintenance version path rename)
+                        if (path.startsWith(docUrl(docsBase, "/maint/"))) {
+                            return [path.replace(docUrl(docsBase, "/maint/"), docUrl(docsBase, "/1.x/"))];
+                        }
+                        return undefined;
+                    };
+
+                    const out = structural() ?? [];
+                    // 'latest' moved from /latest to the site root when it became the default version.
+                    // Reclaim the old dev-docs URLs: /latest/* (previous default) and the even older /next/*.
+                    const root = docUrl(docsBase, "/");
+                    if (path.startsWith(root)
+                        && !path.startsWith(docUrl(docsBase, "/2.0/"))
+                        && !path.startsWith(docUrl(docsBase, "/maint/"))) {
+                        out.push(path.replace(root, docUrl(docsBase, "/latest/")));
+                        out.push(path.replace(root, docUrl(docsBase, "/next/")));
                     }
-                    if (path.startsWith(docUrl(docsBase, "/guides/deployments/kubernetes/"))) {
-                        return [path.replace(docUrl(docsBase, "/guides/deployments/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/hosting/"))];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/reference/tunnelers/kubernetes/"))) {
-                        return [path.replace(docUrl(docsBase, "/reference/tunnelers/kubernetes/"), docUrl(docsBase, "/guides/kubernetes/workload-tunneling/"))];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/guides/deployments/"))) {
-                        return [
-                            path.replace(docUrl(docsBase, "/guides/deployments/"), docUrl(docsBase, "/reference/deployments/")),
-                        ];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/reference/developer/api/"))) {                       // for each existing page
-                        return [
-                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/"),                      // return a "from" redirect for each old path
-                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/"),
-                            path.replace(docUrl(docsBase, "/reference/developer/api/"), "/api/rest/edge-apis/")
-                        ];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/get-started/"))) {
-                        return [
-                            path.replace(docUrl(docsBase, "/get-started/"), docUrl(docsBase, "/learn/quickstarts/")),
-                            path.replace(docUrl(docsBase, "/get-started/"), docUrl(docsBase, "/quickstarts/")),
-                        ];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/how-to-guides/identity-providers/"))) {
-                        return [path.replace(docUrl(docsBase, "/how-to-guides/identity-providers/"), docUrl(docsBase, "/how-to-guides/external-auth/identity-providers/"))];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"))) {
-                        return [
-                            path.replace(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"), docUrl(docsBase, "/deployment-architecture/")),
-                            path.replace(docUrl(docsBase, "/learn/core-concepts/zero-trust-models/"), docUrl(docsBase, "/core-concepts/zero-trust-models/"))
-                        ];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/learn/core-concepts/"))) {
-                        return [path.replace(docUrl(docsBase, "/learn/core-concepts/"), docUrl(docsBase, "/core-concepts/"))];
-                    }
-                    if (path.startsWith(docUrl(docsBase, "/learn/introduction/"))) {
-                        return [path.replace(docUrl(docsBase, "/learn/introduction/"), docUrl(docsBase, "/introduction/"))];
-                    }
-                    // /next/* → /latest/* (Docusaurus previously served dev version at /next/)
-                    if (path.startsWith(docUrl(docsBase, "/latest/"))) {
-                        return [path.replace(docUrl(docsBase, "/latest/"), docUrl(docsBase, "/next/"))];
-                    }
-                    // /1.x/* → /maint/* (maintenance version path rename)
-                    if (path.startsWith(docUrl(docsBase, "/maint/"))) {
-                        return [path.replace(docUrl(docsBase, "/maint/"), docUrl(docsBase, "/1.x/"))];
-                    }
-                    return undefined;
+                    return out.length ? out : undefined;
                 },
                 redirects: redirectsArr,
             } satisfies ClientRedirectsOptions,
@@ -299,19 +311,9 @@ const config: Config = {
                     repoUrl: 'https://github.com/openziti/ziti',
                     label: 'Star OpenZiti on GitHub',
                 },
+                // Matched first-to-last by path prefix (see theme DocVersionBanner), so order
+                // most-specific first: /maint and /2.0 must precede the root catch-all for Latest.
                 versionBanners: [
-                    {
-                        pathPrefix: `${docsBase}/latest`,
-                        message: `This is the latest development documentation and may describe features not yet available in a long-term-stable (LTS) release. See the release policy for more information. For stable documentation, see ${OPENZITI_VERSION_LABELS.current}.`,
-                        type: 'info',
-                        links: [
-                            { text: 'release policy', href: 'https://github.com/openziti/ziti/blob/main/RELEASE_POLICY.md' },
-                        ],
-                        versionLink: {
-                            text: OPENZITI_VERSION_LABELS.current,
-                            fallbackHref: `${docsBase}/intro`,
-                        },
-                    },
                     {
                         pathPrefix: `${docsBase}/maint`,
                         message: `Maintenance LTS (1.6.x) — receives security fixes and critical production defect patches only. See the release policy for more information. For new features and active support, see ${OPENZITI_VERSION_LABELS.current}.`,
@@ -321,7 +323,24 @@ const config: Config = {
                         ],
                         versionLink: {
                             text: OPENZITI_VERSION_LABELS.current,
-                            fallbackHref: `${docsBase}/intro`,
+                            fallbackHref: `${docsBase}/2.0/intro`,
+                        },
+                    },
+                    {
+                        pathPrefix: `${docsBase}/2.0`,
+                        message: `This is the Active LTS (2.0.x) release. For the newest features, see Latest.`,
+                        type: 'note',
+                        links: [
+                            { text: 'Latest', href: `${docsBase}/intro` },
+                        ],
+                    },
+                    {
+                        pathPrefix: `${docsBase}/`,
+                        message: `You're viewing the latest docs, which may cover features not yet in a stable release. For production, see ${OPENZITI_VERSION_LABELS.current}.`,
+                        type: 'info',
+                        versionLink: {
+                            text: OPENZITI_VERSION_LABELS.current,
+                            fallbackHref: `${docsBase}/2.0/intro`,
                         },
                     },
                 ],
