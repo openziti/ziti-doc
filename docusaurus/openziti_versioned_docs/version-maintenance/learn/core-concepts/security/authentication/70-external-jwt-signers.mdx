@@ -2,8 +2,6 @@
 sidebar_position: 70
 ---
 
-import ExtJwtDocEnrollDetails from '../_ext_jwt_enroll_details.md'
-
 # External JWT Signers
 
 External JWT Signers allow external identity providers to facilitate authentication with an OpenZiti network. External
@@ -31,16 +29,6 @@ case-sensitively. The value from the JWT claim must match the identity's `extern
 
 `claimsProperty` can contain JWT standard claims or private claims. An example usage would be an `email` JWT private
 claim and OpenZiti [Identities](./80-identities.md) with `externalId` set to email addresses.
-
-### Enrollment
-
-External JWT Signers can be used to enroll [Identities](./80-identities.md) that are not pre-created by
-administrators. Enrollment is controlled by the `enrollToCertEnabled` and `enrollToTokenEnabled` fields on `enabled`
-External JWT Signers. See the
-[Enrollment - Auto External JWT Signer Enrollment](../enrollment.mdx#auto-external-jwt-signer-enrollment) 
-documentation for more information.
-
-<ExtJwtDocEnrollDetails />
 
 ### x509 Certificate
 
