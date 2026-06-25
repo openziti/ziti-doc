@@ -37,7 +37,7 @@ guides.
 
 Many popular identity providers already have guides on how to use them with OpenZiti such as: 
 * [Auth0](../../guides/external-auth/identity-providers/auth0.mdx),
-* [Okta](../../guides/external-auth/identity-providers/okta.md)
+* [Okta](../../guides/external-auth/identity-providers/okta.mdx)
 * [Zitadel](../../guides/external-auth/identity-providers/zitadel.mdx)
 * [... **View the full list of Identity Providers**](../../guides/external-auth/identity-providers/README.mdx)
 
