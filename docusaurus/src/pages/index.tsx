@@ -14,7 +14,6 @@ import {cleanUrl} from "@netfoundry/docusaurus-theme/node";
 import {NetFoundryHorizontalSection, NetFoundryLayout} from "@netfoundry/docusaurus-theme/ui";
 import {useLocation} from "@docusaurus/router";
 import {starProps} from "../components/consts";
-import Head from "@docusaurus/Head";
 
 function _docUrl(p:string) {
     if(siteConfig?.customFields?.DOCUSAURUS_BASE_PATH) {
@@ -295,10 +294,6 @@ function App() {
     const {pathname} = useLocation();
     return (
         <NetFoundryLayout className={styles.landing} starProps={starProps} >
-            <Head>
-                {/* docusaurus doesn't seem to want to add this using the layout, need on pages too*/}
-                <meta data-rh="true" name="nf-pages-version" content="NFLayoutVersion" />
-            </Head>
             <HeroSection className={styles.aaabbb}/>
             <GetStartedSection />
             <ZeroTrustModels windowSize={windowSize} />
