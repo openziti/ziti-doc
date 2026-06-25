@@ -19,6 +19,12 @@ on:
       - "docusaurus/src/**"
       - "docusaurus/static/**"
       - "docusaurus/docusaurus.config.ts"
+      - "docusaurus/docusaurus-plugin-openziti-docs.ts"
+      - "docusaurus/sidebars.ts"
+      - "docusaurus/sidebar-policies.ts"
+      - "docusaurus/babel.config.js"
+      - "docusaurus/package.json"
+      - "docusaurus/yarn.lock"
       - "visual-regression/**"
       - ".github/workflows/visual-regression.yml"
   push:
@@ -27,6 +33,12 @@ on:
       - "docusaurus/src/**"
       - "docusaurus/static/**"
       - "docusaurus/docusaurus.config.ts"
+      - "docusaurus/docusaurus-plugin-openziti-docs.ts"
+      - "docusaurus/sidebars.ts"
+      - "docusaurus/sidebar-policies.ts"
+      - "docusaurus/babel.config.js"
+      - "docusaurus/package.json"
+      - "docusaurus/yarn.lock"
       - "visual-regression/**"
 
 jobs:
