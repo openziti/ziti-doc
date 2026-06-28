@@ -106,10 +106,7 @@ export function openzitiDocsPluginConfig(
 ): PluginConfig {
     const op = path.resolve(rootDir, 'docs');
     const osbp = path.resolve(rootDir, 'sidebars.ts');
-    // @staticoz resolves to the OpenZiti docs root, the same destination as @openzitidocs.
-    // Derive it from the caller's mappings so the meta-refresh redirects (the SDK reference
-    // stubs) inherit the correct base. In the unified build /docs/ lives in baseUrl rather
-    // than routeBasePath, so '/' + routeBasePath would drop it and the redirects would 404.
+    // @staticoz resolves to the same base as @openzitidocs (carries the build's baseUrl).
     const staticBase = linkMappings.find(m => m.from === '@openzitidocs')?.to ?? '/' + routeBasePath;
     return [
         '@docusaurus/plugin-content-docs',
