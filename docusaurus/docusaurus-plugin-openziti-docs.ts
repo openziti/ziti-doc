@@ -106,7 +106,11 @@ export function openzitiDocsPluginConfig(
 ): PluginConfig {
     const op = path.resolve(rootDir, 'docs');
     const osbp = path.resolve(rootDir, 'sidebars.ts');
-    const docsBase = '/' + routeBasePath;
+    // @staticoz resolves to the OpenZiti docs root, the same destination as @openzitidocs.
+    // Derive it from the caller's mappings so the meta-refresh redirects (the SDK reference
+    // stubs) inherit the correct base. In the unified build /docs/ lives in baseUrl rather
+    // than routeBasePath, so '/' + routeBasePath would drop it and the redirects would 404.
+    const staticBase = linkMappings.find(m => m.from === '@openzitidocs')?.to ?? '/' + routeBasePath;
     return [
         '@docusaurus/plugin-content-docs',
         {
@@ -125,7 +129,7 @@ export function openzitiDocsPluginConfig(
                 // Must run before Docusaurus's default broken-image / broken-link check,
                 // otherwise alias URLs (`@openziti_img/...`, `@openzitidocs/...`) fail validation.
                 [remarkScopedPath, { mappings: [...linkMappings, ...openzitiImageAliases], logLevel: LogLevel.Silent }],
-                [remarkReplaceMetaUrl, { from: '@staticoz', to: docsBase }],
+                [remarkReplaceMetaUrl, { from: '@staticoz', to: staticBase }],
             ],
             remarkPlugins: [
                 function forbidSite() {
