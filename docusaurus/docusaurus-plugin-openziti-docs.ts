@@ -110,7 +110,8 @@ export function openzitiDocsPluginConfig(
 ): PluginConfig {
     const op = path.resolve(rootDir, 'docs');
     const osbp = path.resolve(rootDir, 'sidebars.ts');
-    const docsBase = '/' + routeBasePath;
+    // @staticoz resolves to the same base as @openzitidocs (carries the build's baseUrl).
+    const staticBase = linkMappings.find(m => m.from === '@openzitidocs')?.to ?? '/' + routeBasePath;
     return [
         '@docusaurus/plugin-content-docs',
         {
@@ -129,7 +130,7 @@ export function openzitiDocsPluginConfig(
                 // Must run before Docusaurus's default broken-image / broken-link check,
                 // otherwise alias URLs (`@openziti_img/...`, `@openzitidocs/...`) fail validation.
                 [remarkScopedPath, { mappings: [...linkMappings, ...openzitiImageAliases], logLevel: LogLevel.Silent }],
-                [remarkReplaceMetaUrl, { from: '@staticoz', to: docsBase }],
+                [remarkReplaceMetaUrl, { from: '@staticoz', to: staticBase }],
             ],
             remarkPlugins: [
                 function forbidSite() {
