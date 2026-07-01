@@ -23,8 +23,8 @@ export const openzitiImageAliases = [
 ];
 
 export const OPENZITI_VERSION_LABELS = {
-    current:     'Active LTS (2.0.x)',
     latest:      'Latest',
+    activeLts:   'Active LTS (2.0.x)',
     maintenance: 'Maintenance LTS (1.6.x)',
 } as const;
 
@@ -119,11 +119,11 @@ export function openzitiDocsPluginConfig(
             path: op,
             routeBasePath,
             sidebarPath: osbp,
-            lastVersion: 'latest',
+            lastVersion: 'current',
             includeCurrentVersion: true,
             versions: {
-                'latest':      { label: OPENZITI_VERSION_LABELS.latest,      path: '',      banner: 'none'         },
-                'current':     { label: OPENZITI_VERSION_LABELS.current,     path: '2.0',   banner: 'none'         },
+                'current':     { label: OPENZITI_VERSION_LABELS.latest,      path: '',      banner: 'none'         },
+                '2.0':         { label: OPENZITI_VERSION_LABELS.activeLts,   path: '2.0',   banner: 'none'         },
                 'maintenance': { label: OPENZITI_VERSION_LABELS.maintenance, path: 'maint', banner: 'unmaintained' },
             },
             beforeDefaultRemarkPlugins: [

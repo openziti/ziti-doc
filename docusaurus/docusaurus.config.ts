@@ -316,13 +316,13 @@ const config: Config = {
                 versionBanners: [
                     {
                         pathPrefix: `${docsBase}/maint`,
-                        message: `Maintenance LTS (1.6.x) — receives security fixes and critical production defect patches only. See the release policy for more information. For new features and active support, see ${OPENZITI_VERSION_LABELS.current}.`,
+                        message: `Maintenance LTS (1.6.x) — receives security fixes and critical production defect patches only. See the release policy for more information. For new features and active support, see ${OPENZITI_VERSION_LABELS.activeLts}.`,
                         type: 'warning',
                         links: [
                             { text: 'release policy', href: 'https://github.com/openziti/ziti/blob/main/RELEASE_POLICY.md' },
                         ],
                         versionLink: {
-                            text: OPENZITI_VERSION_LABELS.current,
+                            text: OPENZITI_VERSION_LABELS.activeLts,
                             fallbackHref: `${docsBase}/2.0/intro`,
                         },
                     },
@@ -336,10 +336,10 @@ const config: Config = {
                     },
                     {
                         pathPrefix: `${docsBase}/`,
-                        message: `You're viewing the latest docs, which may cover features not yet in a stable release. For production, see ${OPENZITI_VERSION_LABELS.current}.`,
+                        message: `You're viewing the latest docs, which may cover features not yet in a stable release. For production, see ${OPENZITI_VERSION_LABELS.activeLts}.`,
                         type: 'info',
                         versionLink: {
-                            text: OPENZITI_VERSION_LABELS.current,
+                            text: OPENZITI_VERSION_LABELS.activeLts,
                             fallbackHref: `${docsBase}/2.0/intro`,
                         },
                     },
