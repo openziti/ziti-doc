@@ -71,10 +71,14 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 };
 
                 const out = structural() ?? [];
+                // The Active LTS URL moved from /2.0 to /active. Preserve the old /2.0/* URLs.
+                if (existingPath.startsWith(`${base}/active/`)) {
+                    out.push(existingPath.replace(`${base}/active/`, `${base}/2.0/`));
+                }
                 // 'latest' moved from /latest to the site root when it became the default version.
                 // Preserve old /docs/openziti/latest/* URLs by redirecting them to the new root location.
                 if (existingPath.startsWith(`${base}/`)
-                    && !existingPath.startsWith(`${base}/2.0/`)
+                    && !existingPath.startsWith(`${base}/active/`)
                     && !existingPath.startsWith(`${base}/maint/`)
                     && existingPath !== `${base}/reference/config-types/host.v1`
                     && existingPath !== `${base}/reference/config-types/host.v2`) {
@@ -122,9 +126,9 @@ export function openzitiDocsPluginConfig(
             lastVersion: 'current',
             includeCurrentVersion: true,
             versions: {
-                'current':     { label: OPENZITI_VERSION_LABELS.latest,      path: '',      banner: 'none'         },
-                '2.0':         { label: OPENZITI_VERSION_LABELS.activeLts,   path: '2.0',   banner: 'none'         },
-                'maintenance': { label: OPENZITI_VERSION_LABELS.maintenance, path: 'maint', banner: 'unmaintained' },
+                'current':     { label: OPENZITI_VERSION_LABELS.latest,      path: '',       banner: 'none'         },
+                'active':      { label: OPENZITI_VERSION_LABELS.activeLts,   path: 'active', banner: 'none'         },
+                'maintenance': { label: OPENZITI_VERSION_LABELS.maintenance, path: 'maint',  banner: 'unmaintained' },
             },
             beforeDefaultRemarkPlugins: [
                 // Must run before Docusaurus's default broken-image / broken-link check,

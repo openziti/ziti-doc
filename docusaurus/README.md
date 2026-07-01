@@ -24,7 +24,7 @@ version you mean to change:
 | Version | Edit here | Served at |
 |---|---|---|
 | Latest (default) | `docs/` | `/docs/openziti` (site root) |
-| Active LTS (2.0.x) | `openziti_versioned_docs/version-2.0/` | `/docs/openziti/2.0` |
+| Active LTS (2.0.x) | `openziti_versioned_docs/version-active/` | `/docs/openziti/active` |
 | Maintenance LTS (1.6.x) | `openziti_versioned_docs/version-maintenance/` | `/docs/openziti/maint` |
 
 **Latest is the `docs/` folder** — it's the default you land on with `yarn start`, so that's where most edits

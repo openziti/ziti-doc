@@ -249,11 +249,15 @@ const config: Config = {
                     };
 
                     const out = structural() ?? [];
+                    // The Active LTS URL moved from /2.0 to /active. Preserve the old /2.0/* URLs.
+                    if (path.startsWith(docUrl(docsBase, "/active/"))) {
+                        out.push(path.replace(docUrl(docsBase, "/active/"), docUrl(docsBase, "/2.0/")));
+                    }
                     // 'latest' moved from /latest to the site root when it became the default version.
                     // Reclaim the old dev-docs URLs: /latest/* (previous default) and the even older /next/*.
                     const root = docUrl(docsBase, "/");
                     if (path.startsWith(root)
-                        && !path.startsWith(docUrl(docsBase, "/2.0/"))
+                        && !path.startsWith(docUrl(docsBase, "/active/"))
                         && !path.startsWith(docUrl(docsBase, "/maint/"))) {
                         out.push(path.replace(root, docUrl(docsBase, "/latest/")));
                         out.push(path.replace(root, docUrl(docsBase, "/next/")));
@@ -312,7 +316,7 @@ const config: Config = {
                     label: 'Star OpenZiti on GitHub',
                 },
                 // Matched first-to-last by path prefix (see theme DocVersionBanner), so order
-                // most-specific first: /maint and /2.0 must precede the root catch-all for Latest.
+                // most-specific first: /maint and /active must precede the root catch-all for Latest.
                 versionBanners: [
                     {
                         pathPrefix: `${docsBase}/maint`,
@@ -320,11 +324,11 @@ const config: Config = {
                         type: 'warning',
                         links: [
                             { text: 'release policy', href: 'https://github.com/openziti/ziti/blob/main/RELEASE_POLICY.md' },
-                            { text: OPENZITI_VERSION_LABELS.activeLts, href: `${docsBase}/2.0/intro` },
+                            { text: OPENZITI_VERSION_LABELS.activeLts, href: `${docsBase}/active/intro` },
                         ],
                     },
                     {
-                        pathPrefix: `${docsBase}/2.0`,
+                        pathPrefix: `${docsBase}/active`,
                         message: `This is the Active LTS (2.0.x) release. For the newest features, see Latest.`,
                         type: 'note',
                         links: [
@@ -336,7 +340,7 @@ const config: Config = {
                         message: `You're viewing the latest docs, which may cover features not yet in a stable release. For production, see ${OPENZITI_VERSION_LABELS.activeLts}.`,
                         type: 'info',
                         links: [
-                            { text: OPENZITI_VERSION_LABELS.activeLts, href: `${docsBase}/2.0/intro` },
+                            { text: OPENZITI_VERSION_LABELS.activeLts, href: `${docsBase}/active/intro` },
                         ],
                     },
                 ],
