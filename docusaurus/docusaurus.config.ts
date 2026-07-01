@@ -320,11 +320,8 @@ const config: Config = {
                         type: 'warning',
                         links: [
                             { text: 'release policy', href: 'https://github.com/openziti/ziti/blob/main/RELEASE_POLICY.md' },
+                            { text: OPENZITI_VERSION_LABELS.activeLts, href: `${docsBase}/2.0/intro` },
                         ],
-                        versionLink: {
-                            text: OPENZITI_VERSION_LABELS.activeLts,
-                            fallbackHref: `${docsBase}/2.0/intro`,
-                        },
                     },
                     {
                         pathPrefix: `${docsBase}/2.0`,
@@ -338,10 +335,9 @@ const config: Config = {
                         pathPrefix: `${docsBase}/`,
                         message: `You're viewing the latest docs, which may cover features not yet in a stable release. For production, see ${OPENZITI_VERSION_LABELS.activeLts}.`,
                         type: 'info',
-                        versionLink: {
-                            text: OPENZITI_VERSION_LABELS.activeLts,
-                            fallbackHref: `${docsBase}/2.0/intro`,
-                        },
+                        links: [
+                            { text: OPENZITI_VERSION_LABELS.activeLts, href: `${docsBase}/2.0/intro` },
+                        ],
                     },
                 ],
                 footer: openZitiFooter,
