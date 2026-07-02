@@ -50,7 +50,7 @@ Please note that all authentication mechanisms also require a properly configure
 The following [primary authentication](00-auth.md#primary-authentication) mechanisms require post-creation enrollment:
 
 - OpenZiti PKI x509 Client Certificate
-- 3rd Party x509 Client Certificate
+- Third-party x509 Client Certificate
 - Username Password (UPDB)
 
 The following do not require enrollment, but must have a properly configured
@@ -111,7 +111,7 @@ certificate authentication
 
 #### OpenZiti CLI
 
-It is currently not possible to create identities with a 3rd party certificate enrollment through the CLI.
+It is currently not possible to create identities with a third-party certificate enrollment through the CLI.
 
 #### Edge Management API
 

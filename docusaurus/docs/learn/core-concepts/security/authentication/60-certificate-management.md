@@ -9,11 +9,11 @@ methods include certificates, but router and controller authentication always us
 
 Client and Routers with certificates from the internal signer PKI may request new certificates.
 Routers always have certificates from the internal signer PKI. Clients can also be created with certificates from
-external PKIs via [3rd Party CAs](30-third-party-cas.md). OpenZiti can trust certificates from a configured external
+external PKIs via [third-party CAs](30-third-party-cas.md). OpenZiti can trust certificates from a configured external
 CA, but cannot revoke or reissue them.
 
 :::warning
-When a client certificate issued by a 3rd Party CA expires, OpenZiti cannot renew it. Authentication will fail until the
+When a client certificate issued by a third-party CA expires, OpenZiti cannot renew it. Authentication will fail until the
 certificate is renewed externally and re-presented. If certificate expiry is a concern and renewal cannot be guaranteed,
 set `allowExpiredCerts: true` on the [Identity's](80-identities.md)
 [Authentication Policy](50-authentication-policies.md) to allow expired certificates to authenticate. The external CA
@@ -30,7 +30,7 @@ have expired, the router must be [re-enrolled](../enrollment.mdx#router-enrollme
 ## Client certificate extension
 
 This section applies only to client certificates issued by the OpenZiti internal PKI. Certificates issued by a
-[3rd Party CA](30-third-party-cas.md) must be renewed externally.
+[third-party CA](30-third-party-cas.md) must be renewed externally.
 
 Clients may determine their own client certificate extension frequency. In order to extend their current client
 certificate, they must issue the following REST request to either the

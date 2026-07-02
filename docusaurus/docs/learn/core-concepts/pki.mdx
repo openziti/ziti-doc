@@ -85,11 +85,11 @@ configuration file.
 communicate to the edge router over the IP and port specified in the `ctrl.listener` or `mgmt.listener` fields of the Edge Router
 configuration file.
 
-### Third party CA (optional)
+### Third-party CA (optional)
 
-A third party CA is one which is maintained and managed entirely outside of the network. This is an important
+A third-party CA is one which is maintained and managed entirely outside of the network. This is an important
 feature for organizations wishing to administer and maintain the certificates used by the different pieces of the Ziti
-Network. A network is capable of using third party PKIs as the trust mechanism for enrollment and authentication of
+Network. A network is capable of using third-party PKIs as the trust mechanism for enrollment and authentication of
 clients for a network.
 
 With the PKI being managed externally a network is never in possession of the private key. This means the Ziti
@@ -97,16 +97,16 @@ Network cannot maintain nor distribute certificates necessary for creating secur
 only capable of verifying if the certificate presented was signed by the externally managed PKI.
 
 Maintaining a PKI outside of the network is a more complex configuration. If a PKI is already established
-and maintained externally setting up a network with a third party CA may be desired.
+and maintained externally setting up a network with a third-party CA may be desired.
 
 #### Registering the CA
 
-A network will not trust any third party CA implicitly. Before a third party CA can be used for enrollment and
+A network will not trust any third-party CA implicitly. Before a third-party CA can be used for enrollment and
 authentication of clients in a network it must be registered with the controller to ensure certificates signed
-by the third party CA can be trusted.  
+by the third-party CA can be trusted.  
 
-Registering a third party CA is done by using the REST endpoint `/cas` from the controller. To register a third
-party CA the following information is required to be posted to the endpoint:
+Registering a third-party CA is done by using the REST endpoint `/cas` from the controller. To register a third-party
+CA the following information is required to be posted to the endpoint:
 
 * **name**: the desired name of the CA
 * **isEnrollmentEnabled**: a boolean value indicating if the CA can be used for enrollment. Defaults to true. Set to false
@@ -115,24 +115,24 @@ party CA the following information is required to be posted to the endpoint:
   prevent all authentication from endpoints signed by this certificate
 
 Assuming the create request was well formed and successful, the response from this invocation will contain a field
-representing the `id` of the third party CA at `data.id`. The id of the third party CA will be needed when validating
-the third party CA.
+representing the `id` of the third-party CA at `data.id`. The id of the third-party CA will be needed when validating
+the third-party CA.
 
 #### Validating the CA
 
-After being submitted to the controller, the third party CA will have the isCsrValidated field set to false
-indicating it is not yet ready for use. A second step is needed to ensure the third party CA is setup properly as a CA.
-This step ensures the third party CA provided is capable of fulfilling CSR requests. Clients attempting to connect to a
-Ziti Network using the third party CA will be rejected.
+After being submitted to the controller, the third-party CA will have the isCsrValidated field set to false
+indicating it is not yet ready for use. A second step is needed to ensure the third-party CA is setup properly as a CA.
+This step ensures the third-party CA provided is capable of fulfilling CSR requests. Clients attempting to connect to a
+Ziti Network using the third-party CA will be rejected.
 
-To validate the third party CA a CSR must be generated and fulfilled by the third party CA to generate a certificate
+To validate the third-party CA a CSR must be generated and fulfilled by the third-party CA to generate a certificate
 with the common name (CN) field set to a value assigned by the controller. The controller `/cas`
-REST endpoint can be interrogated to retrieve the details for a specific third party CA. The field necessary to validate
-the third party CA is `data.verificationToken` and is obtained at this endpoint. A certificate is then created and
-signed by the third party CA with the common name field set to the verificationToken.
+REST endpoint can be interrogated to retrieve the details for a specific third-party CA. The field necessary to validate
+the third-party CA is `data.verificationToken` and is obtained at this endpoint. A certificate is then created and
+signed by the third-party CA with the common name field set to the verificationToken.
 
-To finish verifying the third party CA, the certificate created with the verificationToken is posted back to the Ziti
+To finish verifying the third-party CA, the certificate created with the verificationToken is posted back to the Ziti
 Controller at `/cas/${id}/verify`. The `id` is also obtained during the creation process. After posting the certificate
-with the `verificationToken` as the common name the third party CA will change from `isVerified=false` to `isVerified=true`.
+with the `verificationToken` as the common name the third-party CA will change from `isVerified=false` to `isVerified=true`.
 
 <PkiTroubleshootingMd />

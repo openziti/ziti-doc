@@ -42,7 +42,7 @@ The standard OpenZiti experience minimally requires the following sections:
 Of those values, to start the controller only the `ctrl`, `db` or `cluster`, `v`, and `identity`
 sections are required. However, not including the `edge` section will start the controller in "
 fabric only" mode and will not support any edge functionality or concepts (identities, JWT
-enrollment, 3rd Party CAs, policies, etc.). Not including the `web` section will result in none of
+enrollment, third-party CAs, policies, etc.). Not including the `web` section will result in none of
 the REST APIs (fabric management API, edge client API, edge management API, health check API) being
 started. Without the edge and fabric management APIs running administration of the network will be
 impossible. Without the edge client API running it will be impossible for Edge clients to connect to
@@ -137,7 +137,7 @@ db: /mnt/fast-drive/db/ctrl.db
 
 The `edge` section instructs the controller to start the edge components. If the section is not
 defined, all edge functionality will be disabled. This includes all features associated with
-identities (e.g. identity enrollment), 3rd Party CAs, policies, edge router connections, posture
+identities (e.g. identity enrollment), third-party CAs, policies, edge router connections, posture
 checks, and more. It is highly unlikely that this section should be omitted.
 
 The `edge` section also has the following subsections:

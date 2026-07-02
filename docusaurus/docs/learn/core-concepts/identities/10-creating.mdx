@@ -13,53 +13,53 @@ The mechanism for creating identities is influenced by how your Ziti network is 
 established. Identities are integrally linked to the PKI configured in a given Ziti network and directly affect how
 identities are created and enrolled. There are generally three enrollment methods for identities:
 
-* One Time Token (ott) identities using the configured PKI
-* One Time Token (ott) identities using a 3rd Party CA
-* 3rd Party auto-enrolled identities
+* One-time token (ott) identities using the configured PKI
+* One-time token (ott) identities using a third-party CA
+* Third-party auto-enrolled identities
 
 ## Choosing an enrollment method
 
-Choosing which type of enrollment your identity will use comes down to whether you are using a 3rd Party CA or not. If the
-network does not have a 3rd Party Certificate configured the only option is to use the One Time Token (OTT) enrollment method.
+Choosing which type of enrollment your identity will use comes down to whether you are using a third-party CA or not. If the
+network does not have a third-party certificate configured the only option is to use the one-time token (OTT) enrollment method.
 
-If one or more 3rd Party CA is installed you will need to understand the intention of each 3rd Party certificate.
+If one or more third-party CA is installed you will need to understand the intention of each third-party certificate.
 
 Each of the types of enrollments are secure it just depends on your actual network setup as to which type to choose. If
-you don't know - just use the One Time Token (OTT) method. The identity can always be recreated at a later date if necessary.
+you don't know - just use the one-time token (OTT) method. The identity can always be recreated at a later date if necessary.
 
-### One time token (OTT)
+### One-time token (OTT)
 
-The One Time Token method is available to all Ziti networks.  A one time token enrolled identity will
+The one-time token method is available to all Ziti networks.  A one-time token enrolled identity will
 have a token generated at the time of the identity's creation.  This token is then submitted at some point in the future
-as part of the [enrollment](./20-enrolling.md) process.  Once an identity is successfully enrolled - the one time token is
+as part of the [enrollment](./20-enrolling.md) process.  Once an identity is successfully enrolled - the one-time token is
 no longer valid and cannot be used to enroll the same identity again.
 
-One time tokens are delivered from the controller as a [jwt](https://tools.ietf.org/html/rfc7519) and the token
+One-time tokens are delivered from the controller as a [jwt](https://tools.ietf.org/html/rfc7519) and the token
 expires 24 hours after the identity is created.  The token is downloadable via the Ziti Admin Console. After you create
 a user you can go to the Identities page and click the icon that looks like a certificate to download the .jwt file.
 
-You can also create an identity for one time token enrollment using the `ziti` cli tool.  This command will
+You can also create an identity for one-time token enrollment using the `ziti` cli tool.  This command will
 create a new identity and output the jwt to the selected path. You can then transfer the .jwt file to the device where
 the permanent identity JSON file will be installed by running the `enroll` command.
 
 <CreateCliExampleMd/>
 
-### 3rd party CA: Overview
+### Third-party CA: Overview
 
 The controller is capable of using an existing PKI for authentication and authorization rather than the PKI
-configured in the controller.  Certificates that are not controlled by the controller are referred to as "3rd
+configured in the controller.  Certificates that are not controlled by the controller are referred to as "third
 party". If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
-to use a 3rd Party CA this section is for you.
+to use a third-party CA this section is for you.
 
 :::info
 Reusing a PKI is not a simple topic and managing and maintaining a PKI is out of the scope of this guide.
 :::
 
-A 3rd Party CA will need to be created and the public certificate uploaded into the controller. After using an
+A third-party CA will need to be created and the public certificate uploaded into the controller. After using an
 existing PKI to reuse/generate a certificate, the controller will be able to create identities which will be expected to
 present a certificate during the connection process that is valid per the provided certificate.
 
-#### Adding a 3rd party CA to the Ziti controller
+#### Adding a third-party CA to the Ziti controller
 
 Adding a certificate to the controller is easy using the console.
 
@@ -80,20 +80,20 @@ Adding a certificate to the controller is easy using the console.
 </TabItem>
 </Tabs>
 
-#### 3rd party CA: One time token
+#### Third-party CA: One-time token
 
-3rd Party CA OTT enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the
-utilization of a 3rd party CA certificate rather than the configured edge CA and PKI. In this method, the system
-does not have access to the 3rd party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is
+Third-party CA OTT enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the
+utilization of a third-party CA certificate rather than the configured edge CA and PKI. In this method, the system
+does not have access to the third-party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is
 assumed that the enrolling device has a separate process to acquire signed certificates. Rather than submitting a CSR
 the client uses an already acquired signed certificate as its client certificate for the enrollment request. The client
-certificate is validated against the CA certificate tied to the one time token.
+certificate is validated against the CA certificate tied to the one-time token.
 
 Similar to the [OTT Enrollment](#one-time-token-ott) process, identities must be provisioned ahead of enrollment in
-order to generate one time token required and to create the jwt that can be delivered to enrolling devices. This means
-that the provisioning of the identities and client certificates must be coordinated. Identities can be enrolled with a one time token flow similar to the [one time token flow](#one-time-token-ott).
+order to generate one-time token required and to create the jwt that can be delivered to enrolling devices. This means
+that the provisioning of the identities and client certificates must be coordinated. Identities can be enrolled with a one-time token flow similar to the [one-time token flow](#one-time-token-ott).
 
-#### 3rd party CA: Auto enrolled
+#### Third-party CA: Auto enrolled
 
 CA Auto Enrollment is useful in situations where devices are provisioned with certificates en-mass that need to be able
 to register as identities within the edge. This enrollment method allows for device provisioning processes to skip the
@@ -107,7 +107,7 @@ using the signed client certificate as the TLS client certificate and an optiona
 specify the devices display name and internal username. See [enrollment](./20-enrolling.md) for more details on enrolling.
 
 <Tabs>
-<TabItem label="New 3rd Party CA Identity via UI" value="tabid-new-identity-ui">
+<TabItem label="New third-party CA identity via UI" value="tabid-new-identity-ui">
 
 1. On the left side click "Certificate Authorities"
 1. In the top right corner of the screen click the "plus" image to add a new Certificate Authority
@@ -116,7 +116,7 @@ specify the devices display name and internal username. See [enrollment](./20-en
 1. Click save
 
 </TabItem>
-<TabItem label="New 3rd Party Identity via CLI" value="tabid-new-identity-cli">
+<TabItem label="New third-party identity via CLI" value="tabid-new-identity-cli">
 
 <CreateIdCliMd/>
 

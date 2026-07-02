@@ -109,7 +109,7 @@ It is extremely important that quickstart has the relevant information to set up
 performed once so, if it is incorrect, the entire PKI needs to be regenerated.
 :::
 :::caution[DNS is Preferred Over IP]
-It is highly recommended to use DNS over IP as this is a one time setup, if your IP changes, then your PKI is rendered
+It is highly recommended to use DNS over IP as this is a one-time setup, if your IP changes, then your PKI is rendered
 useless.
 :::
 

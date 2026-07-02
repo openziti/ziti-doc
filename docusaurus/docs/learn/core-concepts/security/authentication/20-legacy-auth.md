@@ -46,7 +46,7 @@ TLS handshake.
 ```
 
 The client certificate must be issued by the OpenZiti PKI or a registered and enabled
-[3rd Party CA](30-third-party-cas.md). Intermediate CA certificates may be included in the TLS handshake if
+[third-party CA](30-third-party-cas.md). Intermediate CA certificates may be included in the TLS handshake if
 necessary. The client certificate must be at index zero with intermediates in subsequent positions.
 
 ### Username/password (UPDB)

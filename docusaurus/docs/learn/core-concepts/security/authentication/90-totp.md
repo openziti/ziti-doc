@@ -5,7 +5,7 @@ sidebar_position: 90
 # MFA TOTP
 
 OpenZiti authentication allows for n-factors of authentication - meaning that it is possible to support 1FA, 2FA, ...nFA
-authentication. One common setup for multi-factor authentication (MFA) is time-based one time passwords (TOTP).
+authentication. One common setup for multi-factor authentication (MFA) is time-based one-time passwords (TOTP).
 TOTP is commonly seen in "authenticator" applications (e.g. Google Authenticator, Authy, Microsoft Authenticator, etc).
 All "authenticator" applications support the same core [TOTP RFC 6238](https://www.rfc-editor.org/rfc/rfc6238)
 specification.

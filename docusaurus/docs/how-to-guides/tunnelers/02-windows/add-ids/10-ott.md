@@ -1,6 +1,6 @@
-# One time tokens
+# One-time tokens
 
-Enrolling an identity with a "one time token" is possibly the most common form of adding an identity to
+Enrolling an identity with a "one-time token" is possibly the most common form of adding an identity to
 a tunneler. This token is the original form supported by OpenZiti. It entails an operator provisioning an identity
 for a user. This process results in a single use (one-time) token that can be used to generated an OpenZiti identity,
 allowing the process to be trusted by the OpenZiti overlay network.
