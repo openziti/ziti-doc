@@ -72,7 +72,9 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
 
                 const out = structural() ?? [];
                 // The Active LTS URL moved from /2.0 to /active. Preserve the old /2.0/* URLs.
-                if (existingPath.startsWith(`${base}/active/`)) {
+                if (existingPath.startsWith(`${base}/active/`)
+                    && existingPath !== `${base}/active/reference/config-types/host.v1`
+                    && existingPath !== `${base}/active/reference/config-types/host.v2`) {
                     out.push(existingPath.replace(`${base}/active/`, `${base}/2.0/`));
                 }
                 // 'latest' moved from /latest to the site root when it became the default version.
@@ -102,6 +104,8 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 { from: `${base}/support/pki-troubleshooting/troubleshoot-expired-certs`, to: `${base}/support/troubleshooting/pki-troubleshooting/troubleshoot-expired-certs` },
                 { from: `${base}/latest/reference/config-types/host.v1`, to: `${base}/reference/config-types/host_v1` },
                 { from: `${base}/latest/reference/config-types/host.v2`, to: `${base}/reference/config-types/host_v2` },
+                { from: `${base}/2.0/reference/config-types/host.v1`, to: `${base}/active/reference/config-types/host_v1` },
+                { from: `${base}/2.0/reference/config-types/host.v2`, to: `${base}/active/reference/config-types/host_v2` },
             ],
         },
     ];
