@@ -8,7 +8,7 @@ The endpoint is exposed over HTTPS, and has optional support for client authenti
 
 The Prometheus metric binding is configured as part of the controller configuration file.
 
-### Binding
+### Metrics API binding
 
 The Prometheus metrics api is not bound to any interface by default. The metrics api can be bound to the same network interface and port as the other Ziti APIs, or it can be set up on its own interface and/or port.   
 
