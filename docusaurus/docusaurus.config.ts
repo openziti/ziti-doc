@@ -104,6 +104,14 @@ const redirectsArr: { to: string; from: string[] }[] = [
       docUrl(docsBase, '/how-to-guides/external-auth/extAuthOidc'),
       docUrl(docsBase, '/how-to-guides/external-auth/oidc-reference'),
     ]
+  },
+  {
+    to: docUrl(docsBase, '/active/reference/config-types/host_v1'),
+    from: [docUrl(docsBase, '/2.0/reference/config-types/host.v1')]
+  },
+  {
+    to: docUrl(docsBase, '/active/reference/config-types/host_v2'),
+    from: [docUrl(docsBase, '/2.0/reference/config-types/host.v2')]
   }
 ];
 
@@ -250,7 +258,9 @@ const config: Config = {
 
                     const out = structural() ?? [];
                     // The Active LTS URL moved from /2.0 to /active. Preserve the old /2.0/* URLs.
-                    if (path.startsWith(docUrl(docsBase, "/active/"))) {
+                    if (path.startsWith(docUrl(docsBase, "/active/"))
+                        && path !== docUrl(docsBase, "/active/reference/config-types/host.v1")
+                        && path !== docUrl(docsBase, "/active/reference/config-types/host.v2")) {
                         out.push(path.replace(docUrl(docsBase, "/active/"), docUrl(docsBase, "/2.0/")));
                     }
                     // 'latest' moved from /latest to the site root when it became the default version.
