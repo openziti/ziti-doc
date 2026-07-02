@@ -195,7 +195,7 @@ You can create the router on the controller first then register the router on th
 
     ![Diagram](/img/public_cloud/ZAC01-router.png)
 
-2.  Click on **+** to bring up the **CREATE EDGE ROUTER** widget. The **NAME** of Router is required, and it has to be unique. Also choose whether you want the tunneler to be enable or not on the router.  Enter other optional fields and hit **SAVE**
+2.  Click **+** to bring up the **CREATE EDGE ROUTER** widget. The **NAME** of Router is required, and it has to be unique. Also choose whether you want the tunneler to be enable or not on the router.  Enter other optional fields and hit **SAVE**
 
     ![Diagram](/img/public_cloud/ZAC02-router.jpg)
 
@@ -203,7 +203,7 @@ You can create the router on the controller first then register the router on th
 
     ![Diagram](/img/public_cloud/ZAC03-router.jpg)
 
-4.  Click on the **JWT ICON**, the JWT will be downloaded to your machine. On Chrome browser, the downloaded file will appear on the bottom left corner of the browser like picture below.
+4.  Click the **JWT ICON**, the JWT will be downloaded to your machine. On Chrome browser, the downloaded file will appear on the bottom left corner of the browser like picture below.
 
     ![Diagram](/img/public_cloud/ZAC04-router.jpg)
 
@@ -424,7 +424,7 @@ Now the Global DNS servers should be the IP address on your local interface.
 
     ![Diagram](/img/public_cloud/RouteTable-Azure2.jpg)
 
-4.  Click on the route table, then choose **Routes** from the left side menu.
+4.  Click the route table, then choose **Routes** from the left side menu.
 5.  Now you will be presented a screen like below, you can then add your route.
 6.  Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32.
 7.  The **Next hop address** is local IP of our local gateway ER.
@@ -439,8 +439,8 @@ The following routes are required:
 <TabItem value="AWS">
 
 1.  For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes for your VPC.
-2.  To get to the route table, click on **Subnet** from your Instances screen
-3.  From the Subnet screen, click on **Router table**
+2.  To get to the route table, click **Subnet** from your Instances screen
+3.  From the Subnet screen, click **Router table**
 4.  Then you can use **Edit routes** to add routes to the table.
 5.  Following is an example routes for intercepting traffic destine for IP subnet: 10.10.0.0/24 and 100.64.0.1/32.
 6.  The Target is **Instance** (our local gateway ER).
@@ -456,8 +456,8 @@ The following routes are required:
 
 For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in GCP.
 
-1.  Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
-2.  Click on **Routes** menu on the left side to bring up the Routes screen
+1.  Go to your VM screen, click the **Network interfaces** name (i.e. nic0)
+2.  Click **Routes** menu on the left side to bring up the Routes screen
 3.  Click **ROUTE MANAGEMENT** and **+ CREATE ROUTE** to bring up a dialog to create a route
 4.  Specify your **Network** and **Destination IP range**
 5.  **Next hop** is our **local-er** instance.
@@ -521,7 +521,7 @@ Most cloud provider checks the source and destination of the traffic to make sur
 <TabItem value="Azure">
 
 1.  In Azure, the "Source and Destination Check" is called **IP forwarding**
-2.  From your Virtual machine screen, click on the **Network Interface** of that VM. 
+2.  From your Virtual machine screen, click the **Network Interface** of that VM. 
 3.  On the left side menu, choose **IP configurations** (like the picture below). 
 4.  **Enable** the **IP forwarding**
 5.  **Save**
@@ -531,8 +531,8 @@ Most cloud provider checks the source and destination of the traffic to make sur
 </TabItem>
 <TabItem value="AWS">
 
-1.  From your Instance screen, Under **Networking** tab, click on the **Network Interface** of that VM. 
-2.  Click on **Actions** on the right side to bring up a dropdown menu. 
+1.  From your Instance screen, Under **Networking** tab, click the **Network Interface** of that VM. 
+2.  Click **Actions** on the right side to bring up a dropdown menu. 
 3.  Select **Change source/dest. check**
 4.  **uncheck** Enable and then press **Save**
 
@@ -556,7 +556,7 @@ DigitalOcean does not have this feature.
 </TabItem>
 <TabItem value="OCI">
 
-1.  From the Instance details screen, click on the **Attached VNICs** from the left side menu
+1.  From the Instance details screen, click the **Attached VNICs** from the left side menu
 2.  On the right side menu, choose **3 dots** (like the picture below), Click **Edit VNIC** 
 
     ![Diagram](/img/public_cloud/SrcDestCheck-OCI1.jpg)
@@ -596,8 +596,8 @@ Azure's default firewall is blocking all incoming access to the VM. You will nee
 
 To open ports:
 
-1.  From your Virtual machine page, click on **Networking** from the left side menu.
-2.  Under the **Inbound port rules**, you can click on **Add inbound port rule** to allow traffic in. Like example here.
+1.  From your Virtual machine page, click **Networking** from the left side menu.
+2.  Under the **Inbound port rules**, you can click **Add inbound port rule** to allow traffic in. Like example here.
 
     ![Diagram](/img/public_cloud/Firewall-Azure.jpg)
 

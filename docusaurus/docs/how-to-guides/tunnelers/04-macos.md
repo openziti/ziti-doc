@@ -12,17 +12,17 @@ If you already have **Ziti Desktop Edge for Mac** installed and you are updating
 
 :::
 
-And after the download and installation is complete, click on **open**
+And after the download and installation is complete, click **open**
 
 ## Enroll an identity
 
 Following this [guide](../../learn/core-concepts/identities/10-creating.mdx) to create an identity and transfer the jwt file to your MAC.
 
-From the **Ziti Desktop Edge for Mac** UI, click on **Turn Ziti On**. Add an identity by clicking the **+** in the lower left of the UI. Choose the jwt downloaded to your Mac in the previous step.
+From the **Ziti Desktop Edge for Mac** UI, click **Turn Ziti On**. Add an identity by clicking the **+** in the lower left of the UI. Choose the jwt downloaded to your Mac in the previous step.
 
 ![image](/img/clients/mac-install4.png) 
  
-Find and select the downloaded jwt file and then click on **Open**
+Find and select the downloaded jwt file and then click **Open**
 
 ![image](/img/clients/mac-install5.png) 
 

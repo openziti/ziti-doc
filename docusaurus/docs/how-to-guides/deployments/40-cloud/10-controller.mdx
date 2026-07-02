@@ -65,7 +65,7 @@ It is easier to use a **resource group** to organize and manage all your resourc
 
 1. Sign in to the **AWS console**.
 2. Go to the **EC2 dashboard**.
-3. Click on the **Instances**.
+3. Click the **Instances**.
 4. **Launch the instances**.
 
     ![Diagram](/img/public_cloud/Create-AWS1.jpg)
@@ -91,7 +91,7 @@ It is easier to use a **resource group** to organize and manage all your resourc
     ![Diagram](/img/public_cloud/Create-AWS4.jpg)
 
 8. Create a security group:
-    - Click on **Create security group** to allow traffic into your VM.
+    - Click **Create security group** to allow traffic into your VM.
     - Name the security group.
     - Create the Firewall rule based on the ports you configured for the controller.
     - Allow the same TCP port you configured (e.g., 1280) for the controller along with SSH.
@@ -103,14 +103,14 @@ It is easier to use a **resource group** to organize and manage all your resourc
     ![Diagram](/img/public_cloud/Firewall-AWS-ER.jpg)
 
 9. Under **Configure storage** section, choose at least **20** GiB storage space.
-10. Now click on **Launch instance**.
+10. Now click **Launch instance**.
 
 </TabItem>
 <TabItem value="GCP">
 
 1. Sign in to the GCP console.
 2. Go to **COMPUTE ENGINE** dashboard.
-3. Click on **CREATE INSTANCE**.
+3. Click **CREATE INSTANCE**.
 
     ![Diagram](/img/public_cloud/Create-GCP1.jpg)
 
@@ -141,7 +141,7 @@ It is easier to use a **resource group** to organize and manage all your resourc
 
     ![Diagram](/img/public_cloud/Create-GCP7.jpg)
 
-8. Now click on **CREATE** to create the virtual machine.
+8. Now click **CREATE** to create the virtual machine.
 
 </TabItem>
 <TabItem value="DigitalOcean">
@@ -165,7 +165,7 @@ It is easier to use a **resource group** to organize and manage all your resourc
 
 1. Sign in to the **ORACLE Cloud** console.
 2. Go to Home > Dashboard.
-3. Click on **Instances** (Under **Compute** category).
+3. Click **Instances** (Under **Compute** category).
 4. Create an instance.
 5. Configure the instance:
     - Name the instance.
@@ -194,7 +194,7 @@ It is easier to use a **resource group** to organize and manage all your resourc
 8. Configure SSH keys and boot volume:
     - In the **Add SSH keys** section, choose how you want your ssh keys generated. **Logging in with a password is insecure**.
     - Leave default boot volume.
-9. Now click on **Create**.
+9. Now click **Create**.
 
     ![Diagram](/img/public_cloud/Create-OCI4.jpg)
 
@@ -203,7 +203,7 @@ It is easier to use a **resource group** to organize and manage all your resourc
 
 1. Sign in to the IBM cloud.
 2. Go to dashboard.
-3. Click on **Create resource +** on the top right.
+3. Click **Create resource +** on the top right.
 4. Filter on "Compute" on the Category (on the left).
 5. Choose **Virtual Server for Classic**.
 
@@ -265,9 +265,9 @@ You must open the same ports in the AWS Security Group that you configured Ziti 
 
 GCP’s default firewall is blocking all incoming access to the VM. You will need to open the same ports you specified for the controller and ZAC (if you plan to use ZAC). Here is an example of the firewall ports if you used the default ports.
 
-1. Go to your VM screen, click on the **Network interfaces** name (i.e. nic0).
-2. Click on **Firewall** menu on the left side to bring up the firewall screen.
-3. On the firewall screen, click on **+ CREATE FIREWALL RULE** to create new rules.
+1. Go to your VM screen, click the **Network interfaces** name (i.e. nic0).
+2. Click **Firewall** menu on the left side to bring up the firewall screen.
+3. On the firewall screen, click **+ CREATE FIREWALL RULE** to create new rules.
 4. Configure the firewall rule:
     - Give a meaningful **name** to your firewall rule.
     - Choose your **Network**.
@@ -281,7 +281,7 @@ GCP’s default firewall is blocking all incoming access to the VM. You will nee
 
     ![Diagram](/img/public_cloud/Controller-Firewall-GCP.jpg)
 
-6. The firewall rule also shows up on your "Network interface details" screen. From your VM screen, click on the **Network interfaces** name (i.e. nic0).
+6. The firewall rule also shows up on your "Network interface details" screen. From your VM screen, click the **Network interfaces** name (i.e. nic0).
 
     ![Diagram](/img/public_cloud/Controller-Firewall-GCP2.jpg)
 

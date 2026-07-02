@@ -7,7 +7,7 @@ list will begin the authorization flow for the selected provider.
 ### Save a default provider
 
 When using external providers, it's likely users will want to assign a provider as a default. Before
-authenticating, click on the detail entry for the given identity a default should be assigned to. A new screen will
+authenticating, click the detail entry for the given identity a default should be assigned to. A new screen will
 appear looking like the image shown below.
 
 ![more than one provider](/img/ext-jwt-signer/windows-provider-prefs.png)
