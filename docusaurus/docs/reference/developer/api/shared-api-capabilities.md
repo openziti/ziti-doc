@@ -36,7 +36,7 @@ The `cause` field can either be another nested `error` or a `field error`:
 }
 ```
 
-## Filtering, sorting, & pagination
+## Filtering, sorting, and pagination
 
 API support rich filtering, sorting and pagination on queries that return lists/arrays of objects in the `data` fields. 
 On list responses the `meta` section contains a list of `sortableFields` which can filtered and sorted upon. 

@@ -86,7 +86,7 @@ edge routers automatically.
 - [OS / OS Version](#os-os-version) - requires a specific operating system and optionally a specific version or versions
 - [MAC address](#mac-address) - requires the client has a specific MAC address associated with its hardware
 - [MFA](#mfa) - requires the client currently has MFA TOTP enabled
-- [Multi process](#multi-process) - requires a client be running one or more applications
+- [Multi-process](#multi-process) - requires a client be running one or more applications
 - [Windows domain](#windows-domain) - requires the client be a member of a specific domain
 
 ### Operating system {#os-os-version}
@@ -206,7 +206,7 @@ ziti edge create posture-check mfa my-mfa-check -s 3600 -w -u -a check-attribute
 }
 ```
 
-### Multi process {#multi-process}
+### Multi-process {#multi-process}
 
 The `PROCESS_MULTI` Posture Check type verifies that one or more programs are running on the client. It can
 optionally check a SHA-256 hash and digital signers on Windows.

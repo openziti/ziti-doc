@@ -115,7 +115,7 @@ ziggy@local-tunnel:~$ systemctl status ziti-edge-tunnel
 <... output truncated ...>
 ```     
 
-### 2.2.2 Set up ufw
+### 2.2.2 Set up `ufw`
 
 The following steps turn on the ufw firewall and opens the ports for this demo.
 
@@ -162,7 +162,7 @@ sudo ufw route allow in on ens160 out on tun0
 
 Log in to your **remote-tunnel** machine/VM. Register the tunneler by using **remote-tunnel.jwt** token with the instructions mentioned in [this section](#221-register-identities).
 
-### 2.3.2 Set up ufw
+### 2.3.2 Set up `ufw`
 
 For this demo, we only show the connection initiated from local-tunnel side towards remote-tunnel. The ufw rules below are not needed. If you want to have bidirectional connections, you will need to set up these rules.
 

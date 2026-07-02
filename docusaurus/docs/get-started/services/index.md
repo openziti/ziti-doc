@@ -117,7 +117,7 @@ Here is an overview of the steps we will follow:
 We can do all these steps using the OpenZiti CLI tool: `ziti`. We can also accomplish this using the OpenZiti Admin Console. We'll 
 demonstrate doing it both ways now.
 
-### Configuring the overlay using Ziti CLI
+### Configuring the overlay using the `ziti` CLI
 
 Here you can find the steps necessary to configure your overlay network. You can copy/paste and run them all at once, or you can go 
 slowly and run one command at a time to see how each command works. These commands are all based on a shell similar to bash. If you are 
