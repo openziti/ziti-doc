@@ -8,7 +8,7 @@ The network uses a combination of client, server, and CA certificates in its PKI
 
 ## Creating new certs
 
-### Setup environment variables
+### Set up environment variables
 
 The following environment variables are the minimum required to renew a cert with the `ziti-cli-functions.sh` script. 
 These can be obtained through the `.env` file for your network. However, it is recommended that the `FILE_NAME_ROOT` value is different than 

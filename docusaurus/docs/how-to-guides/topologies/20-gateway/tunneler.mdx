@@ -34,11 +34,11 @@ Complete the following steps First.
 - Created one *ubuntu server* already. Or any Linux server capable of accepting SSH and HTTP connections.
 - We also need at least one transit router and one public edge router. The quickstart sets up a router with both transit and edge functionality. So if you used the quickstart guide, this should work already.
 
-## 2.0 Setup tunnelers
+## 2.0 Set up tunnelers
 
 ## 2.1 Create tunnelers on the controller
 
-Login to your controller and create two identities named **local-tunnel** and **remote-tunnel**
+Log in to your controller and create two identities named **local-tunnel** and **remote-tunnel**
 
 ```text
 ssh <user>@68.183.139.122
@@ -50,7 +50,7 @@ Then source the environmental file (only need to perform once per login).
 source ~/.ziti/quickstart/$(hostname -s)/$(hostname -s).env
 ```
 
-Login to ziti cli.
+Log in to ziti cli.
 
 ```text
 zitiLogin
@@ -99,11 +99,11 @@ root@LocalGWDemoNC:~# ziti edge list identities
 results: 1-4 of 4
 ```
 
-## 2.2 Setup the tunneler for Windows subnet
+## 2.2 Set up the tunneler for Windows subnet
 
 ### 2.2.1 Register identities
 
-Login to your **local-tunnel** machine/VM. Follow [Install Linux Package:](../../../how-to-guides/tunnelers/60-linux/index.mdx) **Ubuntu Jammy 22.04** section to install and register your `ziti-edge-tunnel`. Use the **local-tunnel.jwt** created earlier for its identity token.
+Log in to your **local-tunnel** machine/VM. Follow [Install Linux Package:](../../../how-to-guides/tunnelers/60-linux/index.mdx) **Ubuntu Jammy 22.04** section to install and register your `ziti-edge-tunnel`. Use the **local-tunnel.jwt** created earlier for its identity token.
 
 After the tunnel is registered, check the status and make sure it is running correctly. The status should show "active (running)"
 
@@ -156,15 +156,15 @@ Now set up forwarding with ufw
 sudo ufw route allow in on ens160 out on tun0
 ```
 
-## 2.3 Setup the tunneler for Ubuntu server subnet
+## 2.3 Set up the tunneler for Ubuntu server subnet
 
 ### 2.3.1 Register identities
 
-Login to your **remote-tunnel** machine/VM. Register the tunneler by using **remote-tunnel.jwt** token with the instructions mentioned in [this section](#221-register-identities).
+Log in to your **remote-tunnel** machine/VM. Register the tunneler by using **remote-tunnel.jwt** token with the instructions mentioned in [this section](#221-register-identities).
 
 ### 2.3.2 Set up ufw
 
-For this demo, we only show the connection initiated from local-tunnel side towards remote-tunnel. The ufw rules below are not needed. If you want to have bidirectional connections, you will need to setup these rules.
+For this demo, we only show the connection initiated from local-tunnel side towards remote-tunnel. The ufw rules below are not needed. If you want to have bidirectional connections, you will need to set up these rules.
 
 ```text
 sudo ufw enable
@@ -366,7 +366,7 @@ Then you should be able ssh to mysimpleservice.ziti.
 
 ## 5.0 http service configuration
 
-In the previous section, we showed how to configure a DNS based intercept via open-ziti. In this section, we going to show how to setup interception via IP address. If you followed the instruction in the [3.2 Windows Client](#32-windows-client) section, the routing for the intercept traffic to local-tunnel node is ready set. (*route add 172.16.240.129 mask 255.255.255.255 172.16.31.175*)
+In the previous section, we showed how to configure a DNS based intercept via open-ziti. In this section, we going to show how to set up interception via IP address. If you followed the instruction in the [3.2 Windows client](#32-windows-client) section, the routing for the intercept traffic to local-tunnel node is ready set. (*route add 172.16.240.129 mask 255.255.255.255 172.16.31.175*)
 
 We can log in to the controller to perform the configurations.
 

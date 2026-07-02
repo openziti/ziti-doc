@@ -18,13 +18,13 @@ people to get started with deploying Ziti components using Docker. We will certa
 containers for each component in the future but for now it's a single container. You can get this container by issuing
 `docker pull openziti/quickstart:latest`.
 
-## Starting the Controller
+## Starting the controller
 
 All [networks](@openziti2x/intro) require
 a [controller](../../how-to-guides/deployments/10-linux/10-controller/10-deploy.mdx). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
-### Required - Docker Named Volume
+### Required - Docker named volume
 
 Running Ziti locally via Docker will require you to create a "named volume" in docker where any and all persistent files
 will be saved.
@@ -34,7 +34,7 @@ Create the named volume now using this command:
 docker volume create myPersistentZitiFiles
 ```
 
-### Required - Docker Network
+### Required - Docker network
 
 Other containers on the Docker network will **need** to address the controller. To do this, the container requires
 a network alias. This forces you to add the container to a network which is not the default network. 
@@ -50,13 +50,13 @@ this requires predictable container names on the docker network. When looking at
 options are the ones controlling the network name and network alias on the network:
 `--network myFirstZitiNetwork --network-alias ziti-controller`.
 
-### Optional - Expose Controller Port
+### Optional - expose controller port
 
 Docker containers by default won't expose any ports that you could use from your local machine. If you want to be able
 to use this controller from outside of Docker, you'll need to export the controller's API port. That's easy to do, 
 simply pass one more parameter to the `docker` command: `-p ${externalPort}:${internalPort}`
 
-### Running the Controller
+### Running the controller
 
 Here's an example of how to launch a controller using the folder created in the steps above. Also, notice this command
 passes a couple extra flags you'll see used on this page. Notably
@@ -83,7 +83,7 @@ docker run \
   /var/openziti/scripts/run-controller.sh
 ```
 
-## Create Edge Router Policies
+## Create edge router policies
 OpenZiti requires explicit authorization of identities using ([edge router policies](../../reference/glossary.mdx#edge-router-policy)), 
 as well as authorization of services and routers using ([service edge router policies](../../reference/glossary.mdx#service-edge-router-policy)). 
 The docker-based quickstart doesn't perform these steps automatically. Run the initialization container one time, after 
@@ -100,7 +100,7 @@ docker run \
   /var/openziti/scripts/run-with-ziti-cli.sh  /var/openziti/scripts/access-control.sh
 ```
 
-## Edge Router
+## Edge router
 
 At this point you should have a [controller](../../how-to-guides/deployments/10-linux/10-controller/10-deploy.mdx) running. You should have created your
 Docker network as well as creating the volume mount. Now it's time to connect your first edge router. The same Docker
@@ -146,9 +146,9 @@ docker run \
   /var/openziti/scripts/run-router.sh edge
 ```
 
-## Testing the Network
+## Testing the network
 
-### Using Docker Locally
+### Using Docker locally
 
 Using the network outside the docker environment is somewhat complex. The aliases chosen when starting the docker
 containers need to be addressable from wherever a client is connecting. This includes the `ziti` CLI, tunnelers, SDKs,

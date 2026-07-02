@@ -44,9 +44,9 @@ In this guide, we will demonstrate ziti services with the following examples:
 
 #### 3.2.1.2 CLI
 
-You will need to login to controller to provision identities and service. Please make sure you are performing the action on the right node.
+You will need to log in to the controller to provision identities and service. Please make sure you are performing the action on the right node.
 
-On the controller, before performing the CLI command, you will need to login first:
+On the controller, before performing the CLI command, you will need to log in first:
 ```text
 zitiLogin
 ```
@@ -70,7 +70,7 @@ error: error listing https://161.35.108.218:8441/edge/management/v1/config-types
 We need two routers to complete our example in this guide.
 
 - Public edge router (**pub-er**) was setup in the [Router setup section](../deployments/40-cloud/20-router.mdx#23-create-and-set-up-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](/how-to-guides/deployments/40-cloud/20-router.mdx#29-firewall) for this router.
-- Local edge router (**local-er**). Please follow the [Router guide](../deployments/40-cloud/20-router.mdx) to setup a [Router with edge listener and tunneler](../deployments/40-cloud/20-router.mdx#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Resolver](/how-to-guides/deployments/40-cloud/20-router.mdx#26-fix-the-resolver), [Route Table](/how-to-guides/deployments/40-cloud/20-router.mdx#27-route-table), [Source and Destination Check](/how-to-guides/deployments/40-cloud/20-router.mdx#28-source-and-destination-check) and [Firewall](/how-to-guides/deployments/40-cloud/20-router.mdx#29-firewall).
+- Local edge router (**local-er**). Please follow the [Router guide](../deployments/40-cloud/20-router.mdx) to set up a [Router with edge listener and tunneler](../deployments/40-cloud/20-router.mdx#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to set up [Resolver](/how-to-guides/deployments/40-cloud/20-router.mdx#26-fix-the-resolver), [Route Table](/how-to-guides/deployments/40-cloud/20-router.mdx#27-route-table), [Source and Destination Check](/how-to-guides/deployments/40-cloud/20-router.mdx#28-source-and-destination-check) and [Firewall](/how-to-guides/deployments/40-cloud/20-router.mdx#29-firewall).
 
 #### 3.2.2.1 ZAC
 On the ZAC **ROUTERS** screen, you can check your router and make sure it is created correctly. You can also check the identity associated with the router by clicked on **IDENTITIES**
@@ -156,7 +156,7 @@ ziti edge create identity egress-tunnel -o egress-tunnel.jwt
 
 #### 3.2.3.3 Register identities
 
-Login to your VMs created earlier, follow [Install Linux Package](../../how-to-guides/tunnelers/60-linux/index.mdx) **Ubuntu Jammy 22.04** section to install and register your ziti-edge-tunnel.
+Log in to your VMs created earlier, follow [Install Linux Package](../../how-to-guides/tunnelers/60-linux/index.mdx) **Ubuntu Jammy 22.04** section to install and register your ziti-edge-tunnel.
 
 After the tunnel is registered, check the status and make sure it is running
 
@@ -382,7 +382,7 @@ Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has
 
 ### 3.4.6 Verify the connection
 
-Login to the intercept side tunneler (**ingress-tunnel**) node, you should be able to ssh to the server (**egress-tunnel**) by using dns name "t2tssh.ziti"
+Log in to the intercept side tunneler (**ingress-tunnel**) node, you should be able to ssh to the server (**egress-tunnel**) by using dns name "t2tssh.ziti"
 
 ```
 root@ingress-tunnel:~# ssh t2tssh.ziti
@@ -541,7 +541,7 @@ Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has
 
 ### 3.5.6 Verify the connection
 
-Login to the router (**local-er**), setup a file to send via http.
+Log in to the router (**local-er**), set up a file to send via http.
 
 ```
 root@local-er:~# cat >hello.txt
@@ -561,7 +561,7 @@ Then start the http server.
 python3 -m http.server 8080
 ```
 
-Login to the intercept side tunneler (**egress-tunnel**) node.
+Log in to the intercept side tunneler (**egress-tunnel**) node.
 
 ```
 root@egress-tunnel:~# curl http://10.124.0.2/hello.txt
@@ -584,7 +584,7 @@ In this section, we demonstrated intercepting http (port 80) request to an IP ad
 
 ### 3.6.1 Introduction
 
-In this section, we will demonstrate how to setup non-OpenZiti client to use the ziti service. Please refer to [Network diagram 2](#312-network-diagram-2) for our test setup.
+In this section, we will demonstrate how to set up non-OpenZiti client to use the ziti service. Please refer to [Network diagram 2](#312-network-diagram-2) for our test setup.
 
 **You need to create a VM (Non-OpenZiti-Client) in the same data center as "local-er" for this test.**
 
@@ -713,7 +713,7 @@ Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has
 
 #### 3.6.7.1 Setup server side
 
-Login to the Client (**egress-tunnel**), setup a file to send via http.
+Log in to the client (**egress-tunnel**), set up a file to send via http.
 
 ```
 root@egress-tunnel:~# cat >hello.txt
@@ -749,7 +749,7 @@ Then login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
 >
 <TabItem value="DigitalOcean">
 
-**setup the route first**. The route is via our ER in the same DC (10.124.0.2)
+**set up the route first**. The route is via our ER in the same DC (10.124.0.2)
 
 ```
 root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.124.0.2
@@ -767,7 +767,7 @@ root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.124.0.2
 </TabItem>
 <TabItem value="IBM">
 
-**setup the route first**. The route is via our ER in the same DC (10.162.209.220)
+**set up the route first**. The route is via our ER in the same DC (10.162.209.220)
 
 ```
 root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.162.209.220
@@ -939,7 +939,7 @@ sudo systemctl restart systemd-resolved.service
 **Set up the route first**.
 
 - The route is via our ER in the same DC (10.124.0.2)
-- We need to setup the route for 100.64/10 subnet
+- We need to set up the route for 100.64/10 subnet
 
     ```
     root@Non-OpenZiti-Client:~# sudo ip route add 100.64.0.0/10 via 10.124.0.2
@@ -964,7 +964,7 @@ sudo systemctl restart systemd-resolved.service
 **Set up the route first**.
 
 - The route is via our ER in the same DC (10.162.209.220)
-- We need to setup the route for 100.64/10 subnet
+- We need to set up the route for 100.64/10 subnet
 
     ```
     root@Non-OpenZiti-Client:~# sudo ip route add 100.64.0.0/10 via 10.162.209.220
@@ -993,7 +993,7 @@ root@Non-OpenZiti-Client:~#
 
 ### 3.7.1 Introduction
 
-In this section, we will demonstrate how to setup OpenZiti service to access a server from a SDK enabled application. Please refer to [Network diagram 3](#313-network-diagram-3) for our test setup.
+In this section, we will demonstrate how to set up OpenZiti service to access a server from a SDK enabled application. Please refer to [Network diagram 3](#313-network-diagram-3) for our test setup.
 
 ### 3.7.2 SDK application client
 
@@ -1028,7 +1028,7 @@ If all goes well, you will find a **curlz** binary under that directory.
 
 Next, you need to create an identity for this SDK Application.
 
-Login to the controller
+Log in to the controller
 
 ```bash
 # source the aliases for ziti (do it the first time you login to the VM)
@@ -1097,7 +1097,7 @@ Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has
 
 ### 3.7.7 Setup server side
 
-Login to the Client (**egress-tunnel**), make sure "hello.txt" is still there from previous step. If not, [recreate it](#367-verify-the-connection).
+Log in to the client (**egress-tunnel**), make sure "hello.txt" is still there from previous step. If not, [recreate it](#367-verify-the-connection).
 
 Then start the http server.
 
@@ -1142,7 +1142,7 @@ You have successfully connected SDK application to the server.
 
 ### 3.8.1 Introduction
 
-In this section, we will demonstrate how to setup OpenZiti service to access a SDK enabled application via ziti-tunnel. Please refer to [Network diagram 4](#314-network-diagram-4) for our test setup.
+In this section, we will demonstrate how to set up OpenZiti service to access a SDK enabled application via ziti-tunnel. Please refer to [Network diagram 4](#314-network-diagram-4) for our test setup.
 
 ### 3.8.2 SDK application server
 
@@ -1179,7 +1179,7 @@ By examining the code (simple-server.go), you can see we are using port **8080**
 
 Next, you need to create an identity for this SDK Application server.
 
-Login to the controller
+Log in to the controller
 
 ```bash
 # source the aliases for ziti (do it the first time you login to the VM)
@@ -1253,7 +1253,7 @@ Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has
 
 ### 3.8.8 Setup server side
 
-Login to the "[sdk-application-server](#382-sdk-application-server)" node, make sure you are under the "simple-server" directory, start the server by using the registered server identity and service name.
+Log in to the "[sdk-application-server](#382-sdk-application-server)" node, make sure you are under the "simple-server" directory, start the server by using the registered server identity and service name.
 
 ```
 ./simple-server <identity> <service name>
@@ -1275,7 +1275,7 @@ INFO[0000] new service session                           session token=806969a4-
 
 ### 3.8.9 Verify the connection
 
-Login to the Client (**ingress-tunnel**), try the service with the service name we create and any text in the "name" field.
+Log in to the client (**ingress-tunnel**), try the service with the service name we create and any text in the "name" field.
 
 ```
 curl http://<service name>?name=<any name>
@@ -1337,7 +1337,7 @@ If all goes well, you will find a **chat-client** and **chat-server** binary und
 
 Next, you need to create identities for this SDK Application client ("chat.client") and server ("chat.server").
 
-Login to the controller
+Log in to the controller
 
 ```bash
 # source the aliases for ziti (do it the first time you login to the VM)

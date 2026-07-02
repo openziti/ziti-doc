@@ -9,19 +9,19 @@ that OpenZiti is a holistic zero trust networking solution. You can absolutely e
 
 ---
 
-## Solution Overview
+## Solution overview
 
 Before we get into using OpenZiti, let's take a moment and review what the solution is like before we apply any zero trust networking 
 principles. We will use some sort of http client, connect it over a network. The exact network does not matter. OpenZiti is applicable 
 to any network be it host network, local network, the internet, private network, etc. 
 
-### Simple HTTP Solution Overview - Before Ziti<br/>
+### Simple HTTP solution overview - before Ziti<br/>
 ![before OpenZiti](./before-openziti.png)
 
 The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](../../reference/glossary.mdx#underlay)
 network and requires a hole through the firewall to allow clients to connect.
 
-### Simple HTTP Solution - After Ziti
+### Simple HTTP solution - after Ziti
 ![after OpenZiti](./after-openziti.png)
 
 After OpenZiti, we can see that there is no longer an open firewall to allow access to the HTTP server. Instead, the HTTP client 
@@ -34,13 +34,13 @@ With an understanding of what we are looking to accomplish in this guide, let's 
 
 ---
 
-## Implementing the Service
+## Implementing the service
 
 ### Prerequisite - OpenZiti
 You will need an OpenZiti overlay network in place before you can complete this guide. If you do not have an
 OpenZiti overlay network provisioned yet, [follow a quickstart](@openziti2x/get-started) and get a network up and running.
 
-### Prerequisite - HTTP Server
+### Prerequisite - HTTP server
 You'll need an HTTP server which you plan to connect your HTTP client to. There are numerous ways to 
 bring an HTTP server online but for this guide I have chosen to use docker and deploy a very simple HTTP application. The server will 
 simply print out the "docker whale" when it's connected to. (This guide will not teach you how to install docker, nor how to install an 
@@ -50,11 +50,11 @@ container with: `docker run -d --rm --name web-test -p 80:8000 openziti/hello-wo
 If you have used the [Local - Docker Compose](../network/local-docker-compose.mdx) quickstart 
 to provision your OpenZiti overlay network, you will have already this HTTP server available to use immediately. 
 
-### Prerequisite - HTTP Client Tunneler
+### Prerequisite - HTTP client tunneler
 You will need to install an [OpenZiti tunneler](../../how-to-guides/tunnelers/index.mdx) on the machine which represents the HTTP client. Later on 
 we'll create an identity for this tunneler and use the identity to access the HTTP server. 
 
-### Prerequisite - HTTP Server Tunneler
+### Prerequisite - HTTP server tunneler
 You will need to install an [OpenZiti tunneler](../../how-to-guides/tunnelers/index.mdx) on the machine which represents the HTTP server. Later on
 we'll create an identity for this tunneler and use the identity to access the HTTP server. 
 
@@ -90,7 +90,7 @@ adding /var/openziti/ziti-bin to the path
 
 ---
 
-### Configuring the Overlay - Overview
+### Configuring the overlay - overview
 
 With our overlay network ready and with two tunneling applications deployed and ready to be used, we can start to configure our solution.
 
@@ -117,20 +117,20 @@ Here is an overview of the steps we will follow:
 We can do all these steps using the OpenZiti CLI tool: `ziti`. We can also accomplish this using the OpenZiti Admin Console. We'll 
 demonstrate doing it both ways now.
 
-### Configuring the Overlay Using Ziti CLI
+### Configuring the overlay using Ziti CLI
 
 Here you can find the steps necessary to configure your overlay network. You can copy/paste and run them all at once, or you can go 
 slowly and run one command at a time to see how each command works. These commands are all based on a shell similar to bash. If you are 
 not using bash you'll need to adapt these scripts to your shell.
 
-#### HTTP Server IP/DNS
+#### HTTP server IP/DNS
 Note that step 4 below requires you to have set the variable named `http_server`. This variable represents the location of the HTTP 
 server relative to the OpenZiti tunneler you're using. Look at the diagram above. You will want to supply the IP/FQDN of the server 
 which runs the HTTP server that is relative to the tunneler. As an example, if you were to use the docker-compose quickstart and are 
 going to reference the pre-deployed HTTP server that comes with it, you'd set `http_server` to `web-test-blue` since that is a valid 
 name of the container running the HTTP server.
 
-#### HTTP Server Identity
+#### HTTP server identity
 Note that step 7 below requires you to have set the variable named `http_server_id`. All of the quickstarts provision an edge-router 
 with the tunneler option (`-t`) enabled. This means that edge-router is configured to serve as a tunneler. Run `ziti edge list 
 identities` to find the name of the identity associated to the router.
@@ -253,7 +253,7 @@ Hello World
 
 Optionally, you may [install the ZAC](../zac/index.mdx) to manage your network with a UI.
 
-### Testing Everything Works
+### Testing everything works
 
 Once you have set everything up As shown in the last step above - at this point you should be able to run a curl
 statement or use a browser to access "http.ziti".

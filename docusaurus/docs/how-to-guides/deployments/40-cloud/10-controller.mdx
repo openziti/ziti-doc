@@ -59,7 +59,7 @@ Press **Review + create**
 </TabItem>
 <TabItem value="AWS">
 
-- login to the **AWS console**. 
+- sign in to the **AWS console**. 
 - go to the **EC2 dashboard**. 
 - Click on the **Instances**. 
 - **Launch the instances**
@@ -101,7 +101,7 @@ Now click on **Launch instance**
 </TabItem>
 <TabItem value="GCP">
 
-- Login to the GCP console. 
+- Sign in to the GCP console. 
 - Go to **COMPUTE ENGINE** dashboard. 
 - Click on **CREATE INSTANCE**.
 ![Diagram](/img/public_cloud/Create-GCP1.jpg)
@@ -132,7 +132,7 @@ Now click on **Launch instance**
 </TabItem>
 <TabItem value="DigitalOcean">
 
-- Login to the Digital Ocean console and create a **Droplets** from the dropdown menu on the upper right-hand side.
+- Sign in to the Digital Ocean console and create a **Droplets** from the dropdown menu on the upper right-hand side.
 
 ![Diagram](/img/public_cloud/Create1.jpg)
 
@@ -147,7 +147,7 @@ Now click on **Launch instance**
 </TabItem>
 <TabItem value="OCI">
 
-- Login to the **ORACLE Cloud** console. 
+- Sign in to the **ORACLE Cloud** console. 
 - Go to Home > Dashboard.
 - Click on **Instances** (Under **Compute** category). 
 - Create an instance.
@@ -182,7 +182,7 @@ Now click on **Launch instance**
 </TabItem>
 <TabItem value="IBM">
 
-- Login to the IBM cloud.
+- Sign in to the IBM cloud.
 - Go to dashboard.
 - Click on **Create resource  +** on the top right
 - Filter on "Compute" on the Category (on the left)
@@ -341,7 +341,7 @@ Make sure the firewall is active, it should display **Processing all rules** if 
 </TabItem>
 </Tabs>
 
-## 1.3 Login and setup controller
+## 1.3 Log in and set up the controller
 <Tabs
   defaultValue="Azure"
   values={[
@@ -356,7 +356,7 @@ Make sure the firewall is active, it should display **Processing all rules** if 
 <TabItem value="Azure">
 
 - Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Virtual machine screen.
-- Login to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
+- Log in to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
 ```text
 ssh -i <private_key> <username>@<ip>
 or
@@ -370,7 +370,7 @@ Use a fully qualified domain name (FQDN) to [deploy the controller](/how-to-guid
 
 - Once the VM is created, we can get the IP address (and the DNS name) of the VM from the Instance detail screen.
 - **NOTE:** DNS name is only available if you enabled **DNS Hostnames** under VPC.
-- Login to the VM with username "ubuntu":
+- Log in to the VM with username "ubuntu":
 
 ```text
 ssh -i <private_key> ubuntu@<ip>
@@ -387,7 +387,7 @@ ssh -i <private_key> ubuntu@<dns-name>
 <TabItem value="DigitalOcean">
 
 - Once the VM is created, we can get the IP address of the droplet from the Resources screen.
-- Login to the VM with username "root" and IP address:
+- Log in to the VM with username "root" and IP address:
 ```text
 ssh root@<ip>
 ```
@@ -396,7 +396,7 @@ ssh root@<ip>
 <TabItem value="OCI">
 
 - Once the VM is created, we can get the IP address of the VM from the instance details screen.
-- Login to the VM with username "ubuntu" and the IP address:
+- Log in to the VM with username "ubuntu" and the IP address:
 ```text
 ssh -i <private_key> ubuntu@<ip>
 ```
@@ -405,7 +405,7 @@ ssh -i <private_key> ubuntu@<ip>
 <TabItem value="IBM">
 
 - Once the VM is created, we can get the IP address of the VM from the Devices screen.
-- Login to the VM with username "ubuntu" and the IP address:
+- Log in to the VM with username "ubuntu" and the IP address:
 ```text
 ssh -i <private_key> ubuntu@<ip>
 ```

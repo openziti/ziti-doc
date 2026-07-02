@@ -10,10 +10,10 @@ Deploy a router on a Linux VM in a public cloud. These steps cover Azure and AWS
 
 ## 2.0 Configure a router
 
-In this section, we are describing how to setup the edge router (pub-er) for our [test network](/how-to-guides/topologies/10-services.mdx#311-network-diagram-1).
+In this section, we are describing how to set up the edge router (pub-er) for our [test network](/how-to-guides/topologies/10-services.mdx#311-network-diagram-1).
 
 ## 2.1 Create the edge router VM 
-Please follow **Create a VM section** of the controller cloud guide to setup a VM to be used as router.
+Please follow **Create a VM section** of the controller cloud guide to set up a VM to be used as router.
 
 ## 2.2 Login and update the repo and apps on VM
 
@@ -31,7 +31,7 @@ Please follow **Create a VM section** of the controller cloud guide to setup a V
 <TabItem value="Azure">
 
 - Once the VM is created, we can get the IP address of the VM from the Virtual machine screen.
-- Login to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
+- Log in to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
 ```text
 ssh -i <private_key> <username>@<ip>
 ```
@@ -40,7 +40,7 @@ ssh -i <private_key> <username>@<ip>
 
 - Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
 
-Login to the VM by using user name "ubuntu":
+Log in to the VM by using user name "ubuntu":
 ```text
 ssh -i <private_key> ubuntu@<ip>
 ```
@@ -53,7 +53,7 @@ ssh -i <private_key> ubuntu@<ip>
 </TabItem>
 <TabItem value="DigitalOcean">
 
-- Once the VM is created, get the IP address of the droplet from the Resources screen. Login to the VM by using user "root" and IP address:
+- Once the VM is created, get the IP address of the droplet from the Resources screen. Log in to the VM by using user "root" and IP address:
 ```text
 ssh root@<ip>
 ```
@@ -61,7 +61,7 @@ ssh root@<ip>
 <TabItem value="OCI">
 
 - Once the VM is created, we can get the IP address of the VM from the instance details screen.
-- Login to the VM by using user name "ubuntu" and the IP address:
+- Log in to the VM by using user name "ubuntu" and the IP address:
 ```text
 ssh -i <private_key> ubuntu@<ip>
 ```
@@ -69,7 +69,7 @@ ssh -i <private_key> ubuntu@<ip>
 <TabItem value="IBM">
 
 - Once the VM is created, we can get the IP address of the VM from the Devices screen.
-- Login to the VM by using user name "ubuntu" and the IP address:
+- Log in to the VM by using user name "ubuntu" and the IP address:
 ```text
 ssh -i <private_key> ubuntu@<ip>
 ```
@@ -83,7 +83,7 @@ sudo apt upgrade
 ```
 
 ### 2.2.2 Download ziti_router_auto_enroll binary
-**ziti_router_auto_enroll** is an easy way to setup your router automatically.
+**ziti_router_auto_enroll** is an easy way to set up your router automatically.
 ```text
 wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
 tar xf ziti_router_auto_enroll.tar.gz
@@ -94,7 +94,7 @@ For detail info on ziti_router_auto_enroll, please checkout the [ziti_router_aut
 
 ## 2.3 Create and set up router directly on router VM
 
-You can setup the router directly on the router VM with one command if you did not block your controller's edge-management port. At this time, the quickstart for setting up controller does not separate edge-management port from edge-client port, so the edge-management port has to be open. You may continue this section if you know your controller's management password, Fabric Port (default 8440) and Management Port (default 8441).
+You can set up the router directly on the router VM with one command if you did not block your controller's edge-management port. At this time, the quickstart for setting up controller does not separate edge-management port from edge-client port, so the edge-management port has to be open. You may continue this section if you know your controller's management password, Fabric Port (default 8440) and Management Port (default 8441).
 
 You can also choose to create router on the controller and then register with the jwt file (created when creating the router) on the router. The procedure for this is detailed in ["Create Router On the Controller"](#24-creating-router-on-the-controller-first) section.
 
@@ -180,7 +180,7 @@ sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabr
 ```
 
 ## 2.4 Creating router on the controller first
-**If you already setup the router directly on the VM, you can skip to the next [section 2.5](#25-auto-start-the-router)**
+**If you already set up the router directly on the VM, you can skip to the next [section 2.5](#25-auto-start-the-router)**
 
 You can create the router on the controller first then register the router on the router VM.
 
@@ -215,9 +215,9 @@ Open the JWT file, and copy the content.  Now you are ready for the registration
 
 Otherwise, this section provides CLI commands to create routers on the controller.
 
-**login to controller**
+**log in to the controller**
 
-login to CLI first
+log in to the CLI first
 ```text
 zitiLogin
 ```
@@ -408,7 +408,7 @@ Now the Global DNS servers should be the IP address on your local interface.
 >
 <TabItem value="Azure">
 
-- For any router setup as a local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to setup routes in Azure.
+- For any router setup as a local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in Azure.
 - First you need to create a **Route Table** from Marketplace.
 ![Diagram](/img/public_cloud/RouteTable-Azure1.jpg)
 
@@ -429,7 +429,7 @@ The following routes are required:
 </TabItem>
 <TabItem value="AWS">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to setup routes for your VPC.
+- For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes for your VPC.
 - To get to the route table, click on **Subnet** from your Instances screen
 - From the Subnet screen, click on **Router table**
 - Then you can use **Edit routes** to add routes to the table.
@@ -445,7 +445,7 @@ The following routes are required:
 </TabItem>
 <TabItem value="GCP">
 
-For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to setup routes in GCP.
+For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in GCP.
 
 - Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
 - Click on **Routes** menu on the left side to bring up the Routes screen
@@ -468,8 +468,8 @@ DigitalOcean does not have route table.  The routes are setup directly on the VM
 </TabItem>
 <TabItem value="OCI">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to setup routes in Oracle Cloud.
-- To setup your route, choose the default route table from your VCN.
+- For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in Oracle Cloud.
+- To set up your route, choose the default route table from your VCN.
 ![Diagram](/img/public_cloud/RouteTable-OCI1.jpg)
 
 - **Add Router Rules**
@@ -623,7 +623,7 @@ Oracle Cloud default firewall is s blocking all incoming access to the VM. You w
 - 22/TCP (SSH access, this rule by default allowed in iptable rule)
 - any intercept ports. (i.e. if you want to intercept RDP traffic, you will need to open port 3389)
 
-**To setup the security group**
+**To set up the security group**
 - From **Networking** category, select the **Virtual cloud networks**. 
 - Select the VCN your VM is in.
 - On the left side menu, select the **Network Security Group**.

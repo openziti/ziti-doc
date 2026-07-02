@@ -1,4 +1,4 @@
-# Adding identities
+# Add identities
 
 Adding an identity is often referred to as enrolling an identity. This is the act of bootstrapping trust between
 the computer adding an identity and the OpenZiti Controller.
