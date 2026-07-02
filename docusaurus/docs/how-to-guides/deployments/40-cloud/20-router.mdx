@@ -30,49 +30,54 @@ Please follow **Create a VM section** of the controller cloud guide to set up a 
 >
 <TabItem value="Azure">
 
-- Once the VM is created, we can get the IP address of the VM from the Virtual machine screen.
-- Log in to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
-```text
-ssh -i <private_key> <username>@<ip>
-```
+1.  Once the VM is created, we can get the IP address of the VM from the Virtual machine screen.
+2.  Log in to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
+
+    ```text
+    ssh -i <private_key> <username>@<ip>
+    ```
 </TabItem>
 <TabItem value="AWS">
 
-- Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
+1.  Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
+2.  Log in to the VM by using user name "ubuntu":
 
-Log in to the VM by using user name "ubuntu":
-```text
-ssh -i <private_key> ubuntu@<ip>
-```
+    ```text
+    ssh -i <private_key> ubuntu@<ip>
+    ```
 </TabItem>
 <TabItem value="GCP">
 
-- Once the VM is created, we can login through **SSH** button on the VM instances screen. Make sure **ssh is allow** on the firewall before you do this. Alternatively, you can [configure firewall](#29-firewall) first.
+1.  Once the VM is created, we can login through **SSH** button on the VM instances screen. Make sure **ssh is allow** on the firewall before you do this. Alternatively, you can [configure firewall](#29-firewall) first.
 
-![Diagram](/img/public_cloud/GCP-login1.jpg)
+    ![Diagram](/img/public_cloud/GCP-login1.jpg)
 </TabItem>
 <TabItem value="DigitalOcean">
 
-- Once the VM is created, get the IP address of the droplet from the Resources screen. Log in to the VM by using user "root" and IP address:
-```text
-ssh root@<ip>
-```
+1.  Once the VM is created, get the IP address of the droplet from the Resources screen.
+2.  Log in to the VM by using user "root" and IP address:
+
+    ```text
+    ssh root@<ip>
+    ```
 </TabItem>
 <TabItem value="OCI">
 
-- Once the VM is created, we can get the IP address of the VM from the instance details screen.
-- Log in to the VM by using user name "ubuntu" and the IP address:
-```text
-ssh -i <private_key> ubuntu@<ip>
-```
+1.  Once the VM is created, we can get the IP address of the VM from the instance details screen.
+2.  Log in to the VM by using user name "ubuntu" and the IP address:
+
+    ```text
+    ssh -i <private_key> ubuntu@<ip>
+    ```
 </TabItem>
 <TabItem value="IBM">
 
-- Once the VM is created, we can get the IP address of the VM from the Devices screen.
-- Log in to the VM by using user name "ubuntu" and the IP address:
-```text
-ssh -i <private_key> ubuntu@<ip>
-```
+1.  Once the VM is created, we can get the IP address of the VM from the Devices screen.
+2.  Log in to the VM by using user name "ubuntu" and the IP address:
+
+    ```text
+    ssh -i <private_key> ubuntu@<ip>
+    ```
 </TabItem>
 </Tabs>
 
@@ -83,7 +88,7 @@ sudo apt upgrade
 ```
 
 ### 2.2.2 Download ziti_router_auto_enroll binary
-**ziti_router_auto_enroll** is an easy way to set up your router automatically.
+**ziti_router_auto_enroll** is an easy way to set up your router automatically:
 ```text
 wget https://github.com/netfoundry/ziti_router_auto_enroll/releases/latest/download/ziti_router_auto_enroll.tar.gz
 tar xf ziti_router_auto_enroll.tar.gz
@@ -120,11 +125,11 @@ We are also going to create the router without healthcheck section, so the follo
 If you choose to explore these two functionalities, you can remove the options (from command line) when creating router.
 
 ### 2.3.3 Create the router with link listener
-Use this procedure to create a Public Router with link listener (but without tunnel).
+Use this procedure to create a Public Router with link listener (but without tunnel):
 ```text
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --assumePublic --disableHealthChecks --routerName pub-er 
 ```
-**output**
+This produces output similar to:
 ```
 2023-04-05-04:07:44-INFO-Writing jwt file: pub-er_enrollment.jwt
 2023-04-05-04:07:44-INFO-Version not specified, going to check with controller
@@ -144,7 +149,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/ziti-router.service 
 
 **Alternative way of creating router**
 
-Instead of passing parameters through the command line to create routers, the parameters can be specified via environmental variables. Here is example on how to accomplish that.
+Instead of passing parameters through the command line to create routers, the parameters can be specified via environmental variables. Here is example on how to accomplish that:
 ```
 export CONTROLLER="68.183.52.206"
 export CONTROLLERFABRICPORT="8440"
@@ -155,12 +160,9 @@ export ADMINPASSWORD="Test@123"
 sudo -E ./ziti_router_auto_enroll -f -n --assumePublic --disableHealthChecks --routerName pub-er
 ```
 
----
-**NOTE**
-```
-When using the environmental variable for ziti_router_auto_enroll, you must
-use "-E" option to pass the environmental value to sudo.
-```
+:::note
+When using the environmental variable for `ziti_router_auto_enroll`, you must use the `-E` option to pass the environmental value to `sudo`.
+:::
 
 ### 2.3.4 Other router creation options
 If you need to create router with difference options than the one mentioned above, please choose one of the options from this section.
@@ -189,25 +191,25 @@ You can create the router on the controller first then register the router on th
 
 **In order to complete the procedures in this section, you need to install ZAC first and have access to the controller using the ZAC. If you have trouble using ZAC, you can use the [CLI procedures](#242-creating-router-on-the-controller-using-cli) to create router.**
 
-From the ZAC welcome screen, choose the **ROUTERS**
+1.  From the ZAC welcome screen, choose the **ROUTERS**
 
-![Diagram](/img/public_cloud/ZAC01-router.png)
+    ![Diagram](/img/public_cloud/ZAC01-router.png)
 
-Click on **+** to bring up the **CREATE EDGE ROUTER** widget. The **NAME** of Router is required, and it has to be unique. Also choose whether you want the tunneler to be enable or not on the router.  Enter other optional fields and hit **SAVE**
+2.  Click on **+** to bring up the **CREATE EDGE ROUTER** widget. The **NAME** of Router is required, and it has to be unique. Also choose whether you want the tunneler to be enable or not on the router.  Enter other optional fields and hit **SAVE**
 
-![Diagram](/img/public_cloud/ZAC02-router.jpg)
+    ![Diagram](/img/public_cloud/ZAC02-router.jpg)
 
-If the router is created successfully, you will be back to the **MANAGE EDGE ROUTERS** screen.  From the list of edge routers, you will see the **JWT** icon on the newly created router. You need this JWT for the registration.
+3.  If the router is created successfully, you will be back to the **MANAGE EDGE ROUTERS** screen.  From the list of edge routers, you will see the **JWT** icon on the newly created router. You need this JWT for the registration.
 
-![Diagram](/img/public_cloud/ZAC03-router.jpg)
+    ![Diagram](/img/public_cloud/ZAC03-router.jpg)
 
-Click on the **JWT ICON**, the JWT will be downloaded to your machine. On Chrome browser, the downloaded file will appear on the bottom left corner of the browser like picture below.
+4.  Click on the **JWT ICON**, the JWT will be downloaded to your machine. On Chrome browser, the downloaded file will appear on the bottom left corner of the browser like picture below.
 
-![Diagram](/img/public_cloud/ZAC04-router.jpg)
+    ![Diagram](/img/public_cloud/ZAC04-router.jpg)
 
-Open the JWT file, and copy the content.  Now you are ready for the registration.
+5.  Open the JWT file, and copy the content.  Now you are ready for the registration.
 
-![Diagram](/img/public_cloud/ZAC05-router.jpg)
+    ![Diagram](/img/public_cloud/ZAC05-router.jpg)
 
 
 ### 2.4.2 Creating router on the controller using CLI
@@ -215,56 +217,62 @@ Open the JWT file, and copy the content.  Now you are ready for the registration
 
 Otherwise, this section provides CLI commands to create routers on the controller.
 
-**log in to the controller**
+1.  Log in to the controller:
 
-log in to the CLI first
-```text
-zitiLogin
-```
+    ```text
+    zitiLogin
+    ```
 
-To create an edge router (no tunneler)
-```text
-ziti edge create edge-router pub-er -o pub-er.jwt
-```
-**output**
-```
-New edge router pub-er2 created with id: BzUtjC7E.
-Enrollment expires at 2023-04-07T03:52:03.997Z
-```
+2.  To create an edge router (no tunneler):
 
-To create an edge router with tunneler
-```text
-ziti edge create edge-router pub-er -t -o pub-er.jwt
-```
+    ```text
+    ziti edge create edge-router pub-er -o pub-er.jwt
+    ```
 
-Cat out the content of the jwt file. We will need to use the jwt to register router
-```
-# cat  pub-er.jwt
-eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImVyb3R0IiwiZXhwIjoxNjgwODM5NjA4LCJpc3MiOiJodHRwczovLzE2MS4zNS4xMDguMjE4Ojg0NDEiLCJqdGkiOiJhNDg5N2Q0ZS1lZTY4LTQ1M2UtYjY1NS03MGU0YjgyZTllNDciLCJzdWIiOiJpY2JLakM3RS5QIn0.Y6DohYyWEeJQmRMe29v4cL3Y1APCnBlrv_-S_941au2OESuQdt2CS4C4djvESYzV5vbnbgZgyU5xtNvb4lW5Uv2HP3XUGQNVsWjpwZbazNoTXg1IX6hhWb7T6u1AhS4xnJ3jpoapKsdOkUSqeQNUMSiN3aeLNcGVA_XK1-utCYjVsHDC90M1ZYZqgd8C9IKziDI10XQVlKTqosv8hoJD0OKIu7WZMslweRSMBtQUA2lZ2QSkIhFr2bvtgPll-5aBnG7eo6Ka_WtEW6EikU2fxgpNaVVBEIdZs1tkdGU6dfBDA6j5wA1TBI0FZnuKlNW24bMZCWKy2B_AMqJW1a80I0qNDx-QHEy-pt8FzZ-eqXWyfhc_nYzwT9kr6hO9VJrrD81hboCeTl8G6EXZjwCi2lPbKHROtkQu08-Ns1Kps7R3GILeNMltW9tKApP746ek4DVxm2cKqiB1Axcb0tNjDWTthjyp8m40aSiiqOPIoQbwa43JLqbHcuhZOSBLQNb_bwzkxBSf34D2w5eVETWy9VX-lgHwM-uhT5SfZIWdnWtO7-Cxn-cqgz89twtOim-yc5j0p0ieAbrOArbjKFBXiQjP8yWkorQKlj5PTSk7vyb3X4q6p--RxP2Z5F8alCPQx3XiVcohvIJnrJiEP86myNIYcKhhJ4OB4r9iOr0qTc8
-```
+    This produces output similar to:
 
-We also need the management port (default 8441) and fabric port (default 8440) of the controller to register the router
-```
-# echo $ZITI_EDGE_CONTROLLER_PORT
-8441
-# echo $ZITI_CTRL_PORT
-8440
-```
+    ```
+    New edge router pub-er2 created with id: BzUtjC7E.
+    Enrollment expires at 2023-04-07T03:52:03.997Z
+    ```
+
+3.  To create an edge router with tunneler:
+
+    ```text
+    ziti edge create edge-router pub-er -t -o pub-er.jwt
+    ```
+
+4.  Cat out the content of the jwt file. We will need to use the jwt to register router:
+
+    ```
+    # cat  pub-er.jwt
+    eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImVyb3R0IiwiZXhwIjoxNjgwODM5NjA4LCJpc3MiOiJodHRwczovLzE2MS4zNS4xMDguMjE4Ojg0NDEiLCJqdGkiOiJhNDg5N2Q0ZS1lZTY4LTQ1M2UtYjY1NS03MGU0YjgyZTllNDciLCJzdWIiOiJpY2JLakM3RS5QIn0.Y6DohYyWEeJQmRMe29v4cL3Y1APCnBlrv_-S_941au2OESuQdt2CS4C4djvESYzV5vbnbgZgyU5xtNvb4lW5Uv2HP3XUGQNVsWjpwZbazNoTXg1IX6hhWb7T6u1AhS4xnJ3jpoapKsdOkUSqeQNUMSiN3aeLNcGVA_XK1-utCYjVsHDC90M1ZYZqgd8C9IKziDI10XQVlKTqosv8hoJD0OKIu7WZMslweRSMBtQUA2lZ2QSkIhFr2bvtgPll-5aBnG7eo6Ka_WtEW6EikU2fxgpNaVVBEIdZs1tkdGU6dfBDA6j5wA1TBI0FZnuKlNW24bMZCWKy2B_AMqJW1a80I0qNDx-QHEy-pt8FzZ-eqXWyfhc_nYzwT9kr6hO9VJrrD81hboCeTl8G6EXZjwCi2lPbKHROtkQu08-Ns1Kps7R3GILeNMltW9tKApP746ek4DVxm2cKqiB1Axcb0tNjDWTthjyp8m40aSiiqOPIoQbwa43JLqbHcuhZOSBLQNb_bwzkxBSf34D2w5eVETWy9VX-lgHwM-uhT5SfZIWdnWtO7-Cxn-cqgz89twtOim-yc5j0p0ieAbrOArbjKFBXiQjP8yWkorQKlj5PTSk7vyb3X4q6p--RxP2Z5F8alCPQx3XiVcohvIJnrJiEP86myNIYcKhhJ4OB4r9iOr0qTc8
+    ```
+
+5.  We also need the management port (default 8441) and fabric port (default 8440) of the controller to register the router:
+
+    ```
+    # echo $ZITI_EDGE_CONTROLLER_PORT
+    8441
+    # echo $ZITI_CTRL_PORT
+    8440
+    ```
 
 ### 2.4.3 Register the router with link listener
 **Perform this on the Router VM**
 
-Use this procedure to create a Public Router with link listener (but without tunnel).
+Use this procedure to create a Public Router with link listener (but without tunnel):
 
-**command**
 ```
 sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks <jwt content>
 ```
 
+For example, with the actual jwt content:
+
 ```
 sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImVyb3R0IiwiZXhwIjoxNjgwODM5NjA4LCJpc3MiOiJodHRwczovLzE2MS4zNS4xMDguMjE4Ojg0NDEiLCJqdGkiOiJhNDg5N2Q0ZS1lZTY4LTQ1M2UtYjY1NS03MGU0YjgyZTllNDciLCJzdWIiOiJpY2JLakM3RS5QIn0.Y6DohYyWEeJQmRMe29v4cL3Y1APCnBlrv_-S_941au2OESuQdt2CS4C4djvESYzV5vbnbgZgyU5xtNvb4lW5Uv2HP3XUGQNVsWjpwZbazNoTXg1IX6hhWb7T6u1AhS4xnJ3jpoapKsdOkUSqeQNUMSiN3aeLNcGVA_XK1-utCYjVsHDC90M1ZYZqgd8C9IKziDI10XQVlKTqosv8hoJD0OKIu7WZMslweRSMBtQUA2lZ2QSkIhFr2bvtgPll-5aBnG7eo6Ka_WtEW6EikU2fxgpNaVVBEIdZs1tkdGU6dfBDA6j5wA1TBI0FZnuKlNW24bMZCWKy2B_AMqJW1a80I0qNDx-QHEy-pt8FzZ-eqXWyfhc_nYzwT9kr6hO9VJrrD81hboCeTl8G6EXZjwCi2lPbKHROtkQu08-Ns1Kps7R3GILeNMltW9tKApP746ek4DVxm2cKqiB1Axcb0tNjDWTthjyp8m40aSiiqOPIoQbwa43JLqbHcuhZOSBLQNb_bwzkxBSf34D2w5eVETWy9VX-lgHwM-uhT5SfZIWdnWtO7-Cxn-cqgz89twtOim-yc5j0p0ieAbrOArbjKFBXiQjP8yWkorQKlj5PTSk7vyb3X4q6p--RxP2Z5F8alCPQx3XiVcohvIJnrJiEP86myNIYcKhhJ4OB4r9iOr0qTc8 
 ```
-**output**
+This produces output similar to:
 ```
 2023-04-07-01:07:49-INFO-Version not specified, going to check with controller
 2023-04-07-01:07:49-INFO-Found version 0.27.7
@@ -302,7 +310,7 @@ After enroll the router, a systemd service file is automatically created and ena
 ```text
 systemctl status ziti-router.service
 ```
-**Output**
+The output is similar to:
 ```
 ● ziti-router.service - Ziti-Router
      Loaded: loaded (/etc/systemd/system/ziti-router.service; enabled; vendor preset: enabled)
@@ -349,7 +357,7 @@ Current DNS Server: 67.207.67.2
 ```
 Under the Global DNS servers, it should say something like "67.207.67.2 67.207.67.3"
 
-**Now, make changes to the resolver:**
+Now, make changes to the resolver:
 ```text
 cd /etc/systemd/resolved.conf.d/
 rm DigitalOcean.conf
@@ -357,7 +365,7 @@ sudo ln -s /dev/null DigitalOcean.conf
 systemctl restart systemd-resolved.service
 ```
 
-Check resolver again
+Check resolver again:
 ```
 # resolvectl
 Global
@@ -408,19 +416,21 @@ Now the Global DNS servers should be the IP address on your local interface.
 >
 <TabItem value="Azure">
 
-- For any router setup as a local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in Azure.
-- First you need to create a **Route Table** from Marketplace.
-![Diagram](/img/public_cloud/RouteTable-Azure1.jpg)
+1.  For any router setup as a local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in Azure.
+2.  First you need to create a **Route Table** from Marketplace.
 
-- Then go to your subnet of your VM, associate the Route Table just created to the subnet.
-![Diagram](/img/public_cloud/RouteTable-Azure2.jpg)
+    ![Diagram](/img/public_cloud/RouteTable-Azure1.jpg)
 
-- Click on the route table, then choose **Routes** from the left side menu.
-- Now you will be presented a screen like below, you can then add your route.
-- Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32.
-- The **Next hop address** is local IP of our local gateway ER.
+3.  Then go to your subnet of your VM, associate the Route Table just created to the subnet.
 
-![Diagram](/img/public_cloud/RouteTable-Azure3.jpg)
+    ![Diagram](/img/public_cloud/RouteTable-Azure2.jpg)
+
+4.  Click on the route table, then choose **Routes** from the left side menu.
+5.  Now you will be presented a screen like below, you can then add your route.
+6.  Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32.
+7.  The **Next hop address** is local IP of our local gateway ER.
+
+    ![Diagram](/img/public_cloud/RouteTable-Azure3.jpg)
 
 The following routes are required:
 - any intercept address cidr
@@ -429,14 +439,14 @@ The following routes are required:
 </TabItem>
 <TabItem value="AWS">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes for your VPC.
-- To get to the route table, click on **Subnet** from your Instances screen
-- From the Subnet screen, click on **Router table**
-- Then you can use **Edit routes** to add routes to the table.
-- Following is an example routes for intercepting traffic destine for IP subnet: 10.10.0.0/24 and 100.64.0.1/32.
-- The Target is **Instance** (our local gateway ER).
+1.  For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes for your VPC.
+2.  To get to the route table, click on **Subnet** from your Instances screen
+3.  From the Subnet screen, click on **Router table**
+4.  Then you can use **Edit routes** to add routes to the table.
+5.  Following is an example routes for intercepting traffic destine for IP subnet: 10.10.0.0/24 and 100.64.0.1/32.
+6.  The Target is **Instance** (our local gateway ER).
 
-![Diagram](/img/public_cloud/RouteTable-AWS1.jpg)
+    ![Diagram](/img/public_cloud/RouteTable-AWS1.jpg)
 
 The following routes are required:
 - any intercept address CIDR
@@ -447,14 +457,15 @@ The following routes are required:
 
 For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in GCP.
 
-- Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
-- Click on **Routes** menu on the left side to bring up the Routes screen
-- Click **ROUTE MANAGEMENT** and **+ CREATE ROUTE** to bring up a dialog to create a route
-- Specify your **Network** and **Destination IP range**
-- **Next hop** is our **local-er** instance.
-- Click **CREATE** to generate the route.
+1.  Go to your VM screen, click on the **Network interfaces** name (i.e. nic0)
+2.  Click on **Routes** menu on the left side to bring up the Routes screen
+3.  Click **ROUTE MANAGEMENT** and **+ CREATE ROUTE** to bring up a dialog to create a route
+4.  Specify your **Network** and **Destination IP range**
+5.  **Next hop** is our **local-er** instance.
+6.  Click **CREATE** to generate the route.
 
 Following is an example route for intercepting traffic destine for ip: 11.11.11.11/32. The next hop is our local gateway ER.
+
 ![Diagram](/img/public_cloud/RouteTable-GCP.jpg)
 
 The following routes are required:
@@ -468,17 +479,19 @@ DigitalOcean does not have route table.  The routes are setup directly on the VM
 </TabItem>
 <TabItem value="OCI">
 
-- For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in Oracle Cloud.
-- To set up your route, choose the default route table from your VCN.
-![Diagram](/img/public_cloud/RouteTable-OCI1.jpg)
+1.  For any router setup as local gateway (i.e. local-er in [test network 2](/how-to-guides/topologies/10-services.mdx#312-network-diagram-2)), you will need to set up routes in Oracle Cloud.
+2.  To set up your route, choose the default route table from your VCN.
 
-- **Add Router Rules**
-- Following is an example route for traffic destine for 100.64.0.0/10 subnet.
-- The **Target Type** is **Private IP**
-- The **Destination Type** is **CIDR Block**
-- The **Destination CIDR Block** is the example traffic (100.64.0.0/10)
-- The **Target Selection** is the IP of our local gateway ER.
-![Diagram](/img/public_cloud/RouteTable-OCI2.jpg)
+    ![Diagram](/img/public_cloud/RouteTable-OCI1.jpg)
+
+3.  **Add Router Rules**
+4.  Following is an example route for traffic destine for 100.64.0.0/10 subnet.
+5.  The **Target Type** is **Private IP**
+6.  The **Destination Type** is **CIDR Block**
+7.  The **Destination CIDR Block** is the example traffic (100.64.0.0/10)
+8.  The **Target Selection** is the IP of our local gateway ER.
+
+    ![Diagram](/img/public_cloud/RouteTable-OCI2.jpg)
 
 The following routes are required:
 - any intercept address CIDR
@@ -508,32 +521,34 @@ Most cloud provider checks the source and destination of the traffic to make sur
 >
 <TabItem value="Azure">
 
-- In Azure, the "Source and Destination Check" is called **IP forwarding**
-- From your Virtual machine screen, click on the **Network Interface** of that VM. 
-- On the left side menu, choose **IP configurations** (like the picture below). 
-- **Enable** the **IP forwarding**
-- **Save**
-![Diagram](/img/public_cloud/SrcDestCheck-Azure.jpg)
+1.  In Azure, the "Source and Destination Check" is called **IP forwarding**
+2.  From your Virtual machine screen, click on the **Network Interface** of that VM. 
+3.  On the left side menu, choose **IP configurations** (like the picture below). 
+4.  **Enable** the **IP forwarding**
+5.  **Save**
+
+    ![Diagram](/img/public_cloud/SrcDestCheck-Azure.jpg)
 
 </TabItem>
 <TabItem value="AWS">
 
-- From your Instance screen, Under **Networking** tab, click on the **Network Interface** of that VM. 
-- Click on **Actions** on the right side to bring up a dropdown menu. 
-- Select **Change source/dest. check**
-- **uncheck** Enable and then press **Save**
+1.  From your Instance screen, Under **Networking** tab, click on the **Network Interface** of that VM. 
+2.  Click on **Actions** on the right side to bring up a dropdown menu. 
+3.  Select **Change source/dest. check**
+4.  **uncheck** Enable and then press **Save**
 
-![Diagram](/img/public_cloud/SrcDestCheck-AWS1.jpg)
-![Diagram](/img/public_cloud/SrcDestCheck-AWS2.jpg)
+    ![Diagram](/img/public_cloud/SrcDestCheck-AWS1.jpg)
+    ![Diagram](/img/public_cloud/SrcDestCheck-AWS2.jpg)
 </TabItem>
 
 <TabItem value="GCP">
 
-- In GCP, the "Source and Destination Check" is named **IP forwarding**
-- During the VM creation, from the VM configuration screen, choose the **ADVANCED OPTIONS** & under the **NETWORKING** section (like the picture below). **Enable** the **IP forwarding**
-![Diagram](/img/public_cloud/SrcDestCheck-GCP.jpg)
+1.  In GCP, the "Source and Destination Check" is named **IP forwarding**
+2.  During the VM creation, from the VM configuration screen, choose the **ADVANCED OPTIONS** & under the **NETWORKING** section (like the picture below). **Enable** the **IP forwarding**
 
-- If the **IP forwarding** was not enabled during VM creation, you can follow [this procedure](https://cloud.google.com/compute/docs/instances/update-instance-properties) to enable it.
+    ![Diagram](/img/public_cloud/SrcDestCheck-GCP.jpg)
+
+3.  If the **IP forwarding** was not enabled during VM creation, you can follow [this procedure](https://cloud.google.com/compute/docs/instances/update-instance-properties) to enable it.
 
 </TabItem>
 <TabItem value="DigitalOcean">
@@ -542,13 +557,15 @@ DigitalOcean does not have this feature.
 </TabItem>
 <TabItem value="OCI">
 
-- From the Instance details screen, click on the **Attached VNICs** from the left side menu
-- On the right side menu, choose **3 dots** (like the picture below), Click **Edit VNIC** 
-![Diagram](/img/public_cloud/SrcDestCheck-OCI1.jpg)
+1.  From the Instance details screen, click on the **Attached VNICs** from the left side menu
+2.  On the right side menu, choose **3 dots** (like the picture below), Click **Edit VNIC** 
 
-- Select **Skip Source/Destination Check** 
-- Click **Save changes**
-![Diagram](/img/public_cloud/SrcDestCheck-OCI2.jpg)
+    ![Diagram](/img/public_cloud/SrcDestCheck-OCI1.jpg)
+
+3.  Select **Skip Source/Destination Check** 
+4.  Click **Save changes**
+
+    ![Diagram](/img/public_cloud/SrcDestCheck-OCI2.jpg)
 
 </TabItem>
 <TabItem value="IBM">
@@ -580,9 +597,10 @@ Azure's default firewall is blocking all incoming access to the VM. You will nee
 
 To open ports:
 
-- From your Virtual machine page, click on **Networking** from the left side menu.
-- Under the **Inbound port rules**, you can click on **Add inbound port rule** to allow traffic in. Like example here.
-![Diagram](/img/public_cloud/Firewall-Azure.jpg)
+1.  From your Virtual machine page, click on **Networking** from the left side menu.
+2.  Under the **Inbound port rules**, you can click on **Add inbound port rule** to allow traffic in. Like example here.
+
+    ![Diagram](/img/public_cloud/Firewall-Azure.jpg)
 
 </TabItem>
 <TabItem value="AWS">
@@ -624,51 +642,44 @@ Oracle Cloud default firewall is s blocking all incoming access to the VM. You w
 - any intercept ports. (i.e. if you want to intercept RDP traffic, you will need to open port 3389)
 
 **To set up the security group**
-- From **Networking** category, select the **Virtual cloud networks**. 
-- Select the VCN your VM is in.
-- On the left side menu, select the **Network Security Group**.
-- Select **Create Network Security Group**.
-- Name the security group and select the next.
-- Now create rules for ingress traffic (port listed above).
-- Also create a rule to allow all traffic outbound (**Egress**).
 
-![Diagram](/img/public_cloud/ER-Firewall-OCI1.jpg)
+1.  From **Networking** category, select the **Virtual cloud networks**. 
+2.  Select the VCN your VM is in.
+3.  On the left side menu, select the **Network Security Group**.
+4.  Select **Create Network Security Group**.
+5.  Name the security group and select the next.
+6.  Now create rules for ingress traffic (port listed above).
+7.  Also create a rule to allow all traffic outbound (**Egress**).
+
+    ![Diagram](/img/public_cloud/ER-Firewall-OCI1.jpg)
 
 **Then attach the created security group to the instance**
-- Select **Edit** under the **Network security groups** section.
-- Select the security group from the drop down and press **Save changes**.
 
-![Diagram](/img/public_cloud/ER-Firewall-OCI2.jpg)
+1.  Select **Edit** under the **Network security groups** section.
+2.  Select the security group from the drop down and press **Save changes**.
 
----
-**NOTE 1**
-```
-Oracle Cloud also uses Security Lists (on the subnet) to marshal the traffic, 
-please make sure the setting under Security Lists is not conflicting
-with your security group rules.
-```
+    ![Diagram](/img/public_cloud/ER-Firewall-OCI2.jpg)
 
----
-**NOTE 2**
-```
-It is possible that after the security group configuration, the ufw does not
-work correctly on the VM.
-```
+:::note
+Oracle Cloud also uses Security Lists (on the subnet) to marshal the traffic. Make sure the setting under Security Lists is not conflicting with your security group rules.
+:::
 
-You should **Turn on ufw** and **restart the VM** after the security group configuration.
+:::note
+After the security group configuration, `ufw` may not work correctly on the VM. Turn on `ufw` and restart the VM after configuring the security group.
+:::
 
-- ufw must be turned on for traffic to get to the VM.
-- after ufw is enabled, setup **allow** traffic for ports:
+1. Turn on `ufw` so traffic can reach the VM.
+2. Set up `ufw` to allow traffic for the ports:
 
-```text
-sudo ufw enable
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 53/udp
-sudo shutdown -r 0
-```
+    ```text
+    sudo ufw enable
+    sudo ufw allow 80/tcp
+    sudo ufw allow 443/tcp
+    sudo ufw allow 53/udp
+    sudo shutdown -r 0
+    ```
 
-- you also need to allow the intercept ports on the ufw also. 
+3. You also need to allow the intercept ports on `ufw` as well.
 
 </TabItem>
 <TabItem value="IBM">
@@ -676,10 +687,10 @@ sudo shutdown -r 0
 
 If you turn on the firewall feature, you will need to config firewall rules. 
 
-- Open the Instance detail screen
-- Find the **Firewall details** at the bottom right. Open it.
+1.  Open the Instance detail screen
+2.  Find the **Firewall details** at the bottom right. Open it.
 
-Add the following rules.
+Add the following rules:
 - 443/TCP (default port for edge listener)
 - 80/TCP (default port for link listener)
 - 53/UDP (when using as local gw)
