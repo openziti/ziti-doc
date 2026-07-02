@@ -5,8 +5,8 @@ sidebar_position: 1
 
 # OpenZiti overview
 
-OpenZiti is a free, open-source zero-trust networking platform that makes network services invisible to unauthorized
-users. The project provides everything you need to create a zero-trust overlay network — controllers, routers,
+OpenZiti is a free, open-source zero trust networking platform that makes network services invisible to unauthorized
+users. The project provides everything you need to create a zero trust overlay network — controllers, routers,
 tunnelers, and SDKs — so you can secure both existing applications and new ones. Whether you add zero trust at the
 network level, the host level, or directly inside your application, every connection is authenticated, authorized, and
 encrypted end to end.

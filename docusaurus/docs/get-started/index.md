@@ -1,6 +1,6 @@
 # Get started with OpenZiti
 
-Learn how to set up your own open-source zero-trust network overlay and start securing your applications, whether
+Learn how to set up your own open-source zero trust network overlay and start securing your applications, whether
 you're working with existing software or building something new.
 
 OpenZiti works with your applications at whatever level makes sense. Use lightweight

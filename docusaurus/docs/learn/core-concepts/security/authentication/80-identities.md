@@ -105,7 +105,7 @@ certificate authentication
 }
 ```
 
-### Creating with 3rd party CA client cert enrollment
+### Third-party CA client-certificate enrollment
 Note: This identity will be using the default [Authentication Policy](50-authentication-policies.md) which allows
 certificate authentication
 

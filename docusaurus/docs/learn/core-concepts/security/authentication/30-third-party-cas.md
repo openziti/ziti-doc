@@ -128,7 +128,7 @@ The fields under `externalIdClaim` are as follows:
 - `index` - should multiple values still be available after `location`, `matcher,` and `parser` processing, the
   integer value here will be used from the set
 
-#### CA create/update REST API
+#### Create or update a CA (REST API)
 ```json
 {
   "name": "myCA",
