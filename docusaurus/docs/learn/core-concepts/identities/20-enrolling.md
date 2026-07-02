@@ -55,13 +55,13 @@ confident you understand the risks involved in doing so.
 ./ziti-edge-tunnel enroll --jwt - --identity ./myTunneler.json < ./myTunneler.jwt
 ```
 
-### Third-party CA: One-time token
+### 3rd-party CA: One-time token
 
-This flow allows you to pre-create identities for a third-party CA with distinct role attributes. This flow is similar to the one-time token flow from above except that it expects that a private key and certificate have
+This flow allows you to pre-create identities for a 3rd-party CA with distinct role attributes. This flow is similar to the one-time token flow from above except that it expects that a private key and certificate have
 already been created on or distributed to the machine that is about to enroll and that the certificate presented is
-issued by a validated, [third-party CA](../../../learn/core-concepts/pki.mdx#third-party-ca-optional).
+issued by a validated, [3rd-party CA](../../../learn/core-concepts/pki.mdx#3rd-party-ca-optional).
 
-Follow these steps to enroll a third-party CA - one-time token identity:
+Follow these steps to enroll a 3rd-party CA - one-time token identity:
 
 * [create the Identity](./10-creating.mdx)
 * download or copy the JWT - this file contains the one-time token
@@ -77,21 +77,21 @@ ziti edge enroll \
     --out ${identity_config_file}
 ```
 
-### Third-party CA: Auto
+### 3rd-party CA: Auto
 
-When using a third-party CA identity creation process in the controller is
-automatic. Enrolling the identity will create it with the default role attributes that were specified when the third-party CA was created.
+When using a 3rd-party CA identity creation process in the controller is
+automatic. Enrolling the identity will create it with the default role attributes that were specified when the 3rd-party CA was created.
 
-Like "third-party CA - one-time token" - this flow expects that a private key and certificate have
+Like "3rd-party CA - one-time token" - this flow expects that a private key and certificate have
 already been created on or distributed to the machine that is about to enroll.
-The certificate presented to the controller must be issued by a [third-party
-CA](../../../learn/core-concepts/pki.mdx#third-party-ca-optional) that was already
+The certificate presented to the controller must be issued by a [3rd-party
+CA](../../../learn/core-concepts/pki.mdx#3rd-party-ca-optional) that was already
 imported and verified in the controller with the
 `isAutoCaEnrollmentEnabled` property set to true.
 
 Using the `ziti` CLI will also require the re-use of a permanent JWT that is unique to the external CA. The JWT
 can be downloaded from the controller from:  `${controller_uri}/cas/${id}/jwt` where `${controller_uri}` represents
-the fully qualified address of the controller api and `${id}` represents the identifier for the given third-party CA.
+the fully qualified address of the controller api and `${id}` represents the identifier for the given 3rd-party CA.
 
 **Example Usage:**
 

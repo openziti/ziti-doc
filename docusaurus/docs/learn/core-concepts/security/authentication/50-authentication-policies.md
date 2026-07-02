@@ -67,13 +67,13 @@ Fields:
 - `allowExpiredCerts` - allows expired client certificates to authenticate
 
 When certificate authentication is `allowed`, client certificates issued by the OpenZiti PKI and any verified and
-enabled [third-party CAs](30-third-party-cas.md) become valid authentication paths. When disabled an identity will
+enabled [3rd-party CAs](30-third-party-cas.md) become valid authentication paths. When disabled an identity will
 not be able to authenticate with any client certificate.
 
 If `allowExpiredCerts` is true, client certificate expiration will be ignored during validation. This setting is 
 useful in scenarios where client are running software that has lapsed and cannot be re-enrolled or their client
 certificates cannot be updated. Clients do have an API available to them to roll existing OpenZiti PKI issued client 
-certificates forward. Client certificates issued by a [third-party CAs](30-third-party-cas.md) must have an external
+certificates forward. Client certificates issued by a [3rd-party CAs](30-third-party-cas.md) must have an external
 process to maintain client certificate validity if `allowExpiredCerts` is false.
 
 

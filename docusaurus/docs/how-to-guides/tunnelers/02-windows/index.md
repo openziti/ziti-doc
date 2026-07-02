@@ -8,7 +8,7 @@ open source and can be found on GitHub at https://github.com/openziti/desktop-ed
 The ZDEW has an installer available for download from GitHub.
 [Download the latest release here](https://github.com/openziti/desktop-edge-win/releases/latest).
 
-The executable is signed by a third-party using GitHub actions. [NetFoundry](https://netfoundry.io) is
+The executable is signed by a 3rd-party using GitHub actions. [NetFoundry](https://netfoundry.io) is
 the primary supporter of the project and purchases an extended validation (EV) certificate for the 
 executable. This EV certificate, should prevent the [Microsoft Defender](https://learn.microsoft.com/en-us/defender-endpoint/) 
 software from identifying the executable as malicious.
@@ -19,7 +19,7 @@ tampered with from when it was released. Once installed, enroll your first ident
 ## Add identities
 
 * [One-Time Token](./add-ids/10-ott.md) - Add an identity with a single use token. The most common option
-* [Third-Party CA](./add-ids/20-third-party-ca.mdx) - Add an identity using a third-party CA
+* [Third-Party CA](./add-ids/20-third-party-ca.mdx) - Add an identity using a 3rd-party CA
 * [External JWT Provider - JWT](./add-ids/ext-providers/30-ext-jwt.mdx) - Add an identity using the configured provider and network JWT
 * [External JWT Provider - URL](./add-ids/ext-providers/40-ext-jwt-url.mdx) - Add an identity using the configured provider and URL
 

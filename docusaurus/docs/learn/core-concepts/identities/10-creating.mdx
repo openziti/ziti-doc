@@ -14,15 +14,15 @@ established. Identities are integrally linked to the PKI configured in a given Z
 identities are created and enrolled. There are generally three enrollment methods for identities:
 
 * One-time token (ott) identities using the configured PKI
-* One-time token (ott) identities using a third-party CA
-* Third-party auto-enrolled identities
+* One-time token (ott) identities using a 3rd-party CA
+* 3rd-party auto-enrolled identities
 
 ## Choosing an enrollment method
 
-Choosing which type of enrollment your identity will use comes down to whether you are using a third-party CA or not. If the
-network does not have a third-party certificate configured the only option is to use the one-time token (OTT) enrollment method.
+Choosing which type of enrollment your identity will use comes down to whether you are using a 3rd-party CA or not. If the
+network does not have a 3rd-party certificate configured the only option is to use the one-time token (OTT) enrollment method.
 
-If one or more third-party CA is installed you will need to understand the intention of each third-party certificate.
+If one or more 3rd-party CA is installed you will need to understand the intention of each 3rd-party certificate.
 
 Each of the types of enrollments are secure it just depends on your actual network setup as to which type to choose. If
 you don't know - just use the one-time token (OTT) method. The identity can always be recreated at a later date if necessary.
@@ -44,22 +44,22 @@ the permanent identity JSON file will be installed by running the `enroll` comma
 
 <CreateCliExampleMd/>
 
-### Third-party CA: Overview
+### 3rd-party CA: Overview
 
 The controller is capable of using an existing PKI for authentication and authorization rather than the PKI
 configured in the controller.  Certificates that are not controlled by the controller are referred to as "third
 party". If you have an existing PKI setup you wish to reuse or if you are just interested in learning how
-to use a third-party CA this section is for you.
+to use a 3rd-party CA this section is for you.
 
 :::info
 Reusing a PKI is not a simple topic and managing and maintaining a PKI is out of the scope of this guide.
 :::
 
-A third-party CA will need to be created and the public certificate uploaded into the controller. After using an
+A 3rd-party CA will need to be created and the public certificate uploaded into the controller. After using an
 existing PKI to reuse/generate a certificate, the controller will be able to create identities which will be expected to
 present a certificate during the connection process that is valid per the provided certificate.
 
-#### Adding a third-party CA to the Ziti controller
+#### Adding a 3rd-party CA to the Ziti controller
 
 Adding a certificate to the controller is easy using the console.
 
@@ -80,11 +80,11 @@ Adding a certificate to the controller is easy using the console.
 </TabItem>
 </Tabs>
 
-#### Third-party CA: One-time token
+#### 3rd-party CA: One-time token
 
-Third-party CA OTT enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the
-utilization of a third-party CA certificate rather than the configured edge CA and PKI. In this method, the system
-does not have access to the third-party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is
+3rd-party CA OTT enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the
+utilization of a 3rd-party CA certificate rather than the configured edge CA and PKI. In this method, the system
+does not have access to the 3rd-party CA private key and thus cannot provide CSR fulfillment capabilities. Instead it is
 assumed that the enrolling device has a separate process to acquire signed certificates. Rather than submitting a CSR
 the client uses an already acquired signed certificate as its client certificate for the enrollment request. The client
 certificate is validated against the CA certificate tied to the one-time token.
@@ -93,7 +93,7 @@ Similar to the [OTT Enrollment](#one-time-token-ott) process, identities must be
 order to generate one-time token required and to create the jwt that can be delivered to enrolling devices. This means
 that the provisioning of the identities and client certificates must be coordinated. Identities can be enrolled with a one-time token flow similar to the [one-time token flow](#one-time-token-ott).
 
-#### Third-party CA: Auto enrolled
+#### 3rd-party CA: Auto enrolled
 
 CA Auto Enrollment is useful in situations where devices are provisioned with certificates en-mass that need to be able
 to register as identities within the edge. This enrollment method allows for device provisioning processes to skip the
@@ -107,7 +107,7 @@ using the signed client certificate as the TLS client certificate and an optiona
 specify the devices display name and internal username. See [enrollment](./20-enrolling.md) for more details on enrolling.
 
 <Tabs>
-<TabItem label="New third-party CA identity via UI" value="tabid-new-identity-ui">
+<TabItem label="New 3rd-party CA identity via UI" value="tabid-new-identity-ui">
 
 1. On the left side click "Certificate Authorities"
 1. In the top right corner of the screen click the "plus" image to add a new Certificate Authority
@@ -116,7 +116,7 @@ specify the devices display name and internal username. See [enrollment](./20-en
 1. Click save
 
 </TabItem>
-<TabItem label="New third-party identity via CLI" value="tabid-new-identity-cli">
+<TabItem label="New 3rd-party identity via CLI" value="tabid-new-identity-cli">
 
 <CreateIdCliMd/>
 

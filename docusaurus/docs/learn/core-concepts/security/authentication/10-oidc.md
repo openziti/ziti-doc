@@ -309,7 +309,7 @@ Username/password is the simplest primary method. It is disabled by default in p
 Certificate authentication requires that the HTTP connection to the controller use a client TLS certificate
 associated with the target identity. The body is empty. The controller reads the certificate from the TLS
 handshake. The certificate must be issued by the OpenZiti PKI or a registered and enabled
-[third-party CA](30-third-party-cas.md).
+[3rd-party CA](30-third-party-cas.md).
 
 ### External JWT (ext-jwt)
 

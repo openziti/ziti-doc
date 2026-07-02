@@ -191,7 +191,7 @@ SDK versions, and you can upgrade routers without first upgrading controllers.
 
 Of the three components, the SDK has the strongest backward-compatibility
 commitment. Once an SDK is shipped into client applications, it can be effectively
-impossible to upgrade (mobile apps, embedded devices, third-party integrations), so
+impossible to upgrade (mobile apps, embedded devices, 3rd-party integrations), so
 the project treats SDK API breakage as a serious bug. You should generally be able
 to upgrade controllers and routers without touching the SDK side at all.
 

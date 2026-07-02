@@ -2,24 +2,24 @@
 sidebar_position: 30
 ---
 
-# Third-party CAs
+# 3rd-party CAs
 
-Third-party CAs allow external private key infrastructures (PKIs) to be imported into OpenZiti and used for client
-enrollment and authentication. OpenZiti does not allow external private keys from PKIs to be imported for third-party
+3rd-party CAs allow external private key infrastructures (PKIs) to be imported into OpenZiti and used for client
+enrollment and authentication. OpenZiti does not allow external private keys from PKIs to be imported for 3rd-party
 CAs. Creation, distribution, renewal, and revocation of client certificates must all be handled outside of OpenZiti
 by the external CA.
-OpenZiti trusts certificates signed by a registered third-party CA but has no ability to revoke them.
+OpenZiti trusts certificates signed by a registered 3rd-party CA but has no ability to revoke them.
 
-Third-party CAs represent x509 Certificate chains that have the `CA:true` constraint. It is worth noting
-that adding a x509 certificate as a third-party CA will treat it as a trust anchor even if it is an intermediate CA.
-Third-party CAs validate partial chains back to a registered third-party CA. If full chain validation is required, ensure
-that the root CA is added as a third-party CA and ensure authenticating clients provide their client certificate in
+3rd-party CAs represent x509 Certificate chains that have the `CA:true` constraint. It is worth noting
+that adding a x509 certificate as a 3rd-party CA will treat it as a trust anchor even if it is an intermediate CA.
+3rd-party CAs validate partial chains back to a registered 3rd-party CA. If full chain validation is required, ensure
+that the root CA is added as a 3rd-party CA and ensure authenticating clients provide their client certificate in
 index zero and any required intermediate certificates afterwards.
 
 
 ## Usage 
 
-Third-party CAs can be used in the following manners:
+3rd-party CAs can be used in the following manners:
 - allows clients to enroll and authenticate automatically for at-scale network boarding —
   [Auto CA Enrollment](../enrollment.mdx#auto-ca-enrollment)
 - allows clients to enroll pre-created identities - [OTT CA Enrollment](../enrollment.mdx#ott-ca-enrollment)
@@ -27,7 +27,7 @@ Third-party CAs can be used in the following manners:
 
 ## Create
 
-Creating a third-party CA has various option that will determine how the third-party CA will be used and how client
+Creating a 3rd-party CA has various option that will determine how the 3rd-party CA will be used and how client
 certificates will be validated. The following fields configure client authentication:
 
 - `isAutoCaEnrollmentEnabled` - when true, a client presenting a certificate signed by this CA that has no existing
@@ -48,7 +48,7 @@ The following fields allow configuration of newly created identities:
 - `identityNameFormat` - the identity name format used to name
   [automatically enrolling identities](../enrollment.mdx#auto-ca-enrollment)
 
-On initial creation of a third-party CA it will be in an unverified stated and must undergo [verification](#verification).
+On initial creation of a 3rd-party CA it will be in an unverified stated and must undergo [verification](#verification).
 The following fields relate to [verification](#verification):
 
 - `isVerified` - read only field of whether this CA has been verified
@@ -62,10 +62,10 @@ All other fields are for informational purposes:
 
 ## Verification 
 
-In order for a third-party CA to be used authentication and enrollment it must first be verified. While in an unverified
+In order for a 3rd-party CA to be used authentication and enrollment it must first be verified. While in an unverified
 state `isVerfieid` will be false and `verificationToken` will contain a random security token. In order to verify
-the third-party CA a certificate with the `verificationToken` set as the common name must be signed by the certificate
-provided for the third-party CA.
+the 3rd-party CA a certificate with the `verificationToken` set as the common name must be signed by the certificate
+provided for the 3rd-party CA.
 
 ### OpenZiti CLI
 
@@ -80,7 +80,7 @@ Access to the CA's certificate and private key is required.
 
 #### Submit verification certificate
 
-Access to a certificate with the `verifiationToken` set as the common name and signed by the third-party CA is required
+Access to a certificate with the `verifiationToken` set as the common name and signed by the 3rd-party CA is required
 
 `ziti edge verify ca <name> --cert <pemCertFile>`
 
@@ -106,7 +106,7 @@ and other fields. An example of this in other projects is [SPIFFE](https://spiff
 [SPIFFE IDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-id) which are stored in
 [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-verifiable-identity-document-svid).
 
-Third-party CAs support defining a set of x509 claims configuration that allows a claim to be matched to an identity
+3rd-party CAs support defining a set of x509 claims configuration that allows a claim to be matched to an identity
 `externalId`. The configuration is contained in an object in the field `externalIdClaim`. When not defined, x509
 client certificate authentication attempts to find an Identity that is tied to an
 [Authenticator](00-auth.md#authenticators) by matching the raw certificate body. Using x509 claims, the client is
@@ -115,7 +115,7 @@ matched by the Identity `externalId` value. This match is case-sensitive.
 This distinction matters when certificates need to be reissued. Without x509 claims, a reissued certificate has a
 different raw body and will not match the existing Authenticator, requiring the Identity to re-enroll with the new
 certificate. With x509 claims configured, authentication matches on specific claim values extracted from the
-certificate, such as a SPIFFE ID in a SAN URI, and the third-party CA can issue a replacement certificate carrying
+certificate, such as a SPIFFE ID in a SAN URI, and the 3rd-party CA can issue a replacement certificate carrying
 the same claims without disrupting authentication.
 
 The fields under `externalIdClaim` are as follows:
