@@ -1,9 +1,9 @@
 ---
-sidebar_label: Data Model
+sidebar_label: Data model
 sidebar_position: 80
 ---
 
-# Controller HA Data Model
+# Controller HA data model
 
 :::info
 
@@ -13,9 +13,9 @@ about how data is distributed in OpenZiti.
 
 :::
 
-## Model Data
+## Model data
 
-### Model Data Characteristics
+### Model data characteristics
 
 * All data required on every controller
 * Read characteristics
@@ -34,14 +34,14 @@ about how data is distributed in OpenZiti.
 
 Of the distribution mechanisms we looked at, Raft had the best fit.
 
-### Raft Resources
+### Raft resources
 
 For a more in-depth look at Raft, see
 
 * https://raft.github.io/
 * http://thesecretlivesofdata.com/raft/
 
-### Raft Characteristics
+### Raft characteristics
 
 * Writes
     * Consistency over availability
@@ -79,7 +79,7 @@ Reads are always done to the local bolt database for performance. The assumption
 something like a policy change is delayed, it may temporarily allow a circuit to be created, but as
 soon as the policy update is applied, it will make changes to circuits as necessary.
 
-## Runtime Data
+## Runtime data
 
 In addition to model data, the controller also manages some amount of runtime data. This data is for
 running OpenZiti's core functions, i.e. managing the flow of data across the mesh, along with
@@ -91,7 +91,7 @@ related authentication data. So this includes things like:
 * Sessions
 * Posture Data
 
-### Runtime Data Characteristics
+### Runtime data characteristics
 
 Runtime data has different characteristics than the model data does.
 
@@ -130,6 +130,6 @@ This gets routing working with multiple controllers without a major refactor. Fu
 likely delegate more routing control to the routers, so routing should get more robust and
 distributed over time.
 
-### Api Sessions, Sessions, Posture Data
+### API sessions, sessions, posture data
 
 API Sessions and Sessions are moving to bearer tokens. Posture Data is now handled in the routers.

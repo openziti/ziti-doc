@@ -3,7 +3,7 @@ sidebar_label: host.v2
 sidebar_position: 20
 ---
 
-# The `host.v2` Config Type
+# The `host.v2` config type
 
 The `host.v2` configuration type defines how edge routers or tunnelers can make outgoing connections
 for associated services. The config type also allows specifying health checks for the service. An
@@ -13,7 +13,7 @@ passed through from a tunneler intercepting traffic, allowing it to forward traf
 The `host.v2` type allows defining multiple host endpoints. If only a single endpoint is required,
 consider using the simpler [`host.v1`](./host_v1.md) config type instead.
 
-## Endpoint Configuration
+## Endpoint configuration
 
 Each config can define one or more endpoints. If a service is hosted by multiple servers, the
 configuration can have an endpoint defined for each hosting server.

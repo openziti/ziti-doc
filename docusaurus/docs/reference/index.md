@@ -3,12 +3,12 @@ title: Overview
 sidebar_position: 10
 ---
 
-## What is a Reference?
+## What is a reference?
 
 A reference is a specific type of documentation that is an accurate and complete description of
 something.
 
-## Add or Request New Reference Documentation
+## Add or request new reference documentation
 
 There's still room in here for new reference documentation! Want guidance before you submit? Want
 someone else to submit? No problem. Follow the link to create a GitHub issue, label it "reference",

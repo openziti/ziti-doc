@@ -3,7 +3,7 @@ sidebar_label: Overview
 sidebar_position: 5
 ---
 
-# Controller Clustering
+# Controller clustering
 
 ## Overview
 
@@ -13,23 +13,23 @@ Controller high availability (HA) became generally available in OpenZiti `2.0.0`
 It is no longer in beta or preview status.
 :::
 
-### What Do Controllers Do?
+### What do controllers do?
 
 OpenZiti controllers have two primary functions.
 
-#### Data Model
+#### Data model
 
 Controller maintain the data model, which tracks services, routers, policies, etc. They provide
 this information to sdk clients, tunnelers and routers so that those applications know what 
 their capabilities are. 
 
-#### Establish Routes
+#### Establish routes
 
 Controllers establish routes for services on the behalf of clients and routers. They also 
 update routes when better paths are available or when network topology changes, i.e. a link
 is broken or a router goes down.
 
-### Why Cluster Controllers?
+### Why cluster controllers?
 
 Every SDK client and tunneler adds load to controllers. It's important to be able to add 
 controllers to ensure good performance for clients. 
@@ -41,7 +41,7 @@ upgrades, hardware or network failures and other unexpected failure conditions.
 Having multiple controllers also allows network operators to place controllers geographically
 close to clusters of clients to reduce latency.
 
-### For SDK Clients/Tunnelers
+### For SDK clients/tunnelers
 
 A controller cluster offers the following advantages:
 
@@ -53,7 +53,7 @@ A controller cluster offers the following advantages:
 This means that for everything that SDK clients and tunnelers depend on, controllers
 can be scaled out and placed strategically to meet user demand. 
 
-### For Management Operations
+### For management operations
 
 The HA controller cluster makes the data model available on all controllers in the cluster.
 This means that clients can connect to any controller and be able to function. 
@@ -71,7 +71,7 @@ up and connected for updates to work.
 
 ### Glossary
 
-#### Distributed Journal
+#### Distributed journal
 
 OpenZiti uses a distributed journal to keep the data model in sync across controllers.
 
@@ -108,7 +108,7 @@ For example:
 The general formula is that a cluster with N voting members must have (N/2)+1 voting members
 up and connected in order to elect a leader and accept updates to the data model.
 
-#### Non-Voting Members
+#### Non-voting members
 
 If more voting members means better availability, why not make all members voting?
 
@@ -136,16 +136,16 @@ The following limitations currently apply:
 Improving routing is an ongoing focus for the OpenZiti project. 
 Issues related to routing improvments can be found on the [Routing Project Board](https://github.com/orgs/openziti/projects/13/views/1).
 
-## Operating an HA Cluster
+## Operating an HA cluster
 
 Once a cluster is up, the day-2 documentation lives in a few places:
 
-* [Failure Scenarios](./failure-scenarios.md) -- what works (and doesn't) in
+* [Failure scenarios](./failure-scenarios.md) -- what works (and doesn't) in
   scenarios like single-voter loss, lost quorum, network partitions, and total
   cluster loss; covers router and SDK client behavior during these events.
 * [Upgrading](./upgrading.md) -- rolling upgrade procedure, the version-mismatch
   read-only window, snapshotting before upgrade, router draining, and rollback.
-* [Monitoring and Troubleshooting](./monitoring-and-troubleshooting.md) -- what to
+* [Monitoring and troubleshooting](./monitoring-and-troubleshooting.md) -- what to
   watch, what a healthy cluster looks like, a symptom-driven troubleshooting
   guide, and a tiered alerting recipe.
 

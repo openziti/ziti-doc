@@ -1,5 +1,5 @@
 ---
-title: OpenZiti Security
+title: OpenZiti security
 ---
 
 A network's security setup is defined by several entities defined in the
@@ -42,7 +42,7 @@ There is an additional policy type for edge routers:
 
 Additionally, connection security document is provided on the [Connection Security](connection-security.md) page. 
 
-## Authentication and Authorization high level flow
+## Authentication and authorization high level flow
 
 The following is a high level overview of how these entities interact. Each interaction is further detailed in their
 own separate section.

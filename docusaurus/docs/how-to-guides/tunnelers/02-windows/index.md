@@ -16,7 +16,7 @@ software from identifying the executable as malicious.
 Download the executable from GitHub and verify the SHA256 hash of the file to ensure it has not been
 tampered with from when it was released. Once installed, enroll your first identity.
 
-## Adding Identities
+## Adding identities
 
 * [One-Time Token](./add-ids/10-ott.md) - Add an identity with a single use token. The most common option
 * [Third-Party CA](./add-ids/20-third-party-ca.mdx) - Add an identity using a third-party CA
@@ -28,7 +28,7 @@ The ZDEW is composed of three main components: the data service, the monitor ser
 these processes is handled through IPC and requires the process to have been started by an interactive login. The IPC
 channels are not meant for direct use and using them outside of the overall tunneler is discouraged.
 
-### The Data Service
+### The data service
 The data service is the main workhorse of the ZDEW. It is an instance of `ziti-edge-tunnel` built for Windows. The code
 is delivered from the [ziti-tunneler-sdk-c](https://github.com/openziti/ziti-tunnel-sdk-c/) repository. It integrates the
 [Ziti C SDK](https://github.com/openziti/ziti-sdk-c/) as well and is responsible for creating the "TUN" 
@@ -38,15 +38,15 @@ is delivered from the [ziti-tunneler-sdk-c](https://github.com/openziti/ziti-tun
 The data service also has a DNS server listening at $TUN_IP + 1. For example, if the data service is configured to use
 the default IP 100.64.0.1, there will be a DNS server listening on 100.64.0.2.
 
-### The Monitor Service
+### The monitor service
 This component is delivered as a Windows service and is set to automatic, delayed startup. It has two main functions:
 automatic upgrades and diagnostic information.
 
-#### Automatic Upgrades
+#### Automatic upgrades
 This service will monitor the GitHub releases for new updates. It does this every ten minutes by default but could be
 configured if the user wants to change this to be longer. Shorter is not recommended.
 
-#### Diagnostic Information
+#### Diagnostic information
 When the ZDEW runs into problems. The UI has a 'feedback' option in the main menu to generate diagnostic information,
 collect logs etc. This service performs that work resulting in a zip file saved into the `logs` folder.
 
@@ -64,7 +64,7 @@ The logs directory has three subdirectories for each of the main components:
 * ZitiMonitorService - the logs for the monitor service
 * UI - the logs from the UI
 
-## Configuration and Identity Files
+## Configuration and identity files
 
 The ZDEW runs as a service on the machine it is installed on. It will save enrolled identities in a file in
 the SYSTEM profile's `APPDIR`. Generally, this will be located at `%WINDIR%\System32\config\systemprofile\AppData\Roaming\NetFoundry`.
@@ -72,7 +72,7 @@ the SYSTEM profile's `APPDIR`. Generally, this will be located at `%WINDIR%\Syst
 This location will also contain a file that captures the state of the ZitiUpdateService in a file named `ZitiUpdateService\settings.json`
 in that location.
 
-## Multiple Users
+## Multiple users
 
 The ZDEW runs as a service on the machine it is installed on. This means it is a **SYSTEM WIDE** installation. The identities
 added to the service will be available to any users that can authenticate to the machine. Tunnelers intercept all underlay

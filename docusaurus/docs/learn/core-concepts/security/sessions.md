@@ -1,8 +1,8 @@
-# Session Types
+# Session types
 
 OpenZiti has API Session and Session types.
 
-## API Session
+## API session
 
 API Sessions represent a client that is either partially or fully authenticated as a specific
 [Identity](authentication/80-identities.md).
@@ -142,7 +142,7 @@ Example `GET /edge/management/v1/current-api-session` response (legacy auth):
 }
 ```
 
-#### Full vs. partial Authentication
+#### Full vs. partial authentication
 
 API Sessions may exist in two states:
 
@@ -167,7 +167,7 @@ While partially authenticated under legacy auth, the API Session can only be use
 - answering Authentication Queries
 - enrolling in MFA TOTP
 
-##### Authentication Queries
+##### Authentication queries
 
 Authentication Queries are represented on an API Session the property `authQueries` which is an array. An example
 MFA challenge represented as an Authentication Query is provided below.
@@ -249,7 +249,7 @@ A client may terminate its own API Session at any time by calling: `DELETE /edge
 ## Session
 
 A Session represents access to a specific service for dialing or binding. They are scoped to the
-[API Session](#api-session) that was used to create them. They are requested from the
+[API session](#api-session) that was used to create them. They are requested from the
 controller by a client through the [Edge Client API](@openzitidocs/reference/developer/api/edge-client-api-reference).
 The result of that request is a security token representing the Session and a list of Edge Routers that the client
 may use to dial or bind the target service through.

@@ -1,5 +1,5 @@
 ---
-title: Data Flow Explainer
+title: Data flow explainer
 sidebar_position: 30
 ---
 
@@ -21,7 +21,7 @@ It has the following components:
     application can still be accessed, even if a datacenter becomes unavailable.
 * An SDK application which wants to access the application hosted by the application servers
 
-## Control Channels
+## Control channels
 
 When a router starts up it will attempt to make a connection to the controller(s) in its
 configuration file. This establishes the control plane, which allows controllers to update router
@@ -29,7 +29,7 @@ state as needed and allows routers to report changes, metrics and events back to
 
 ![image](/img/data-flow/ctrl-to-router.png)
 
-## Data Links
+## Data links
 
 Once a router is connected to the controller, the controller will inform the router of other routers
 along with information about if and how those routers are listening for data links connections. The
@@ -38,7 +38,7 @@ mesh.
 
 ![image](/img/data-flow/router-links.png)
 
-## Terminators/Last Hop
+## Terminators/last hop
 
 Data links establish inter-router connectivity, but a way to establish connectivity to the
 application servers is still needed. The service definition on its own doesn't specify how to
@@ -49,13 +49,13 @@ handled by terminators.
 
 There are three common ways in which this is done.
 
-### Static Terminators
+### Static terminators
 
 A static terminator can be created by an OpenZiti admin. The terminator will specify the address to
 dial. Statically created terminators will exist until they are deleted or their related service or
 router is deleted.
 
-### SDK Hosted
+### SDK hosted
 
 When an SDK application hosts (or binds, in OpenZiti terms) a service, it will first connect to one
 or more edge routers. It can then request those edge routers to create terminators on its behalf.
@@ -66,14 +66,14 @@ may bridge the connection to another application server. The OpenZiti tunneler a
 this and will use the `host.v1` or `host.v2` configurations to define how and where connections are
 forwarded to and what kind of health checks to run.
 
-### Edge Router Hosted
+### Edge router hosted
 
 Edge routers running in tunneler mode (ER/T) can also host services by acting as a reverse proxy.
 They will also use the `host.v1` and `host.v2` configurations, same as the SDK based tunnelers. An
 ER/T will create and delete terminators as services, configurations and policies are created,
 updated or deleted.
 
-## Client Connections
+## Client connections
 
 When an SDK wants to connect to an OpenZiti hosted service, it will initiate the following sequence
 of events:
@@ -102,7 +102,7 @@ An API Session can be extended, so a single API Session can generally be used fo
 the application. A new API Session may be required if the application is unable to reach the
 controller for an extended period of time.
 
-### Create Session
+### Create session
 
 The SDK must now create a Session. When creating a Session, the controller will
 verify that the identity used by the SDK has permission to access the service. The controller will
@@ -111,7 +111,7 @@ returned along with the Session token.
 
 ![image](/img/data-flow/client-session.png)
 
-### Connect to Edge Routers
+### Connect to edge routers
 
 The returned Session contains the edge routers that can be used for this service along with
 the address or addresses that each router is listening on for SDK connections. The SDK will connect
@@ -125,7 +125,7 @@ routers will be notified and connections associated with that API Session will b
 
 ![image](/img/data-flow/edge-router-connect.png)
 
-### Dial the Service
+### Dial the service
 
 The SDK will pick an edge router and send it a Dial request for desired service along with the
 Session token. The edge router selected is known as the initiating router. The edge router
@@ -149,7 +149,7 @@ in the path is called the terminating router.
 
 ![image](/img/data-flow/dial.png)
 
-### Established Circuit
+### Established circuit
 
 Once the routing and connection to the application server are established, the circuit is made. The
 controller notifies the initiating router and data can now flow between the SDK and the application

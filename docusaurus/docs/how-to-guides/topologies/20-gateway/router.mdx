@@ -8,11 +8,11 @@ title: Use a router as a local gateway
 
 Run `ziti router run` in TPROXY mode to set up an infrastructure gateway providing an IP route and nameserver for Ziti services on a local subnet.
 
-## 1.1 Network Description
+## 1.1 Network description
 
 <iframe width="100%" height="315" src="https://www.youtube.com/embed/H0qGRBMGNIA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-In addition to the setup discussed in the video, this guide also demonstrates IP intercept in [Section 5.0 http Service Configuration](#50-http-service-configuration).
+In addition to the setup discussed in the video, this guide also demonstrates IP intercept in [Section 5.0 http service configuration](#50-http-service-configuration).
 
 For the demonstration, we will set up the network like below:
 
@@ -40,9 +40,9 @@ Complete the following steps first.
 - Created one *Windows client* already. Suggested Windows version Windows 10 or Windows 11. Windows servers should work fine as well.
 - Created one *ubuntu server* already. Or any Linux server capable of accepting SSH and http connection.
 
-## 2.0 Set Up Routers
+## 2.0 Set up routers
 
-## 2.1 Set Up the Router For Windows Subnet
+## 2.1 Set up the router for Windows subnet
 
 ### 2.1.1 Retrieve auto_enroll script and gather setup info
 
@@ -76,9 +76,9 @@ We are also going to create the router without healthcheck section, so the follo
 
 - --disableHealthChecks
 
-### 2.1.2 Create and Register Router
+### 2.1.2 Create and register router
 
-#### 2.1.2.1 Create Router using one command
+#### 2.1.2.1 Create router using one command
 
 ```text
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --autoTunnelListener --routerName local-router
@@ -94,7 +94,7 @@ What this command does:
 - creates the service file to start and stop the router
 - and configured the resolver
 
-#### 2.1.2.2 Register Router using jwt
+#### 2.1.2.2 Register router using JWT
 
 ***Skip this section if you already created router using one command***
 
@@ -166,7 +166,7 @@ Current DNS Server: 8.8.8.8
        DNS Servers: 8.8.8.8
 ```
 
-#### 2.1.3.3 Check Router and Identity
+#### 2.1.3.3 Check router and identity
 
 ```text
 ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
@@ -197,7 +197,7 @@ ziggy@local-gw:~$ ziti edge list identities
 results: 1-3 of 3
 ```
 
-### 2.1.4 Set Up ufw
+### 2.1.4 Set up ufw
 
 The following steps turn on the ufw firewall and opens the ports for this demo.
 
@@ -232,7 +232,7 @@ ziggy@local-gw:~$ ziti edge list identities
 results: 1-3 of 3
 ```
 
-## 2.2 Set Up the Router For Ubuntu Server Subnet
+## 2.2 Set up the router for Ubuntu server subnet
 
 ### 2.2.1 Retrieve auto_enroll script and gather setup info
 
@@ -249,15 +249,15 @@ tar xf ziti_router_auto_enroll.tar.gz
 
 We are going to use Router Name: **remote-router**
 
-### 2.2.2 Create and Register Router
+### 2.2.2 Create and register router
 
-#### 2.2.2.1 Create Router using one command
+#### 2.2.2.1 Create router using one command
 
 ```text
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.139.122 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --autoTunnelListener --routerName remote-router
 ```
 
-#### 2.2.2.2 Register Router using jwt
+#### 2.2.2.2 Register router using JWT
 
 **Skip this section if you already created router using one command**
 
@@ -298,7 +298,7 @@ resolvectl
 
 **expected output:** The resolver should be set to the IP of the local LAN.
 
-#### 2.2.3.3 Check Router and Identity
+#### 2.2.3.3 Check router and identity
 
 ```text
 ziti edge login 68.183.139.122:8441 -u admin -p Test@123 -y
@@ -328,7 +328,7 @@ ziggy@remote-router:~$ ziti edge list identities
 results: 1-4 of 4
 ```
 
-### 2.2.3 Set Up ufw
+### 2.2.3 Set up ufw
 
 For this demo, we only show the connection initiated from local-tunnel side towards remote-tunnel. The ufw rules below are not needed. If you want to have bidirectional connections, you will need to set up these rules.
 
@@ -363,9 +363,9 @@ ziggy@local-gw:~$ ziti edge list identities
 results: 1-4 of 4
 ```
 
-## 3.0 Set Up Client and Server
+## 3.0 Set up client and server
 
-## 3.1 Ubuntu Server
+## 3.1 Ubuntu server
 
 The Ubuntu Server needs to support **SSH** (port 22) and **http** (port 8000) for our demo.
 
@@ -384,7 +384,7 @@ echo "You have reached Remote Web Server." >hello.txt
 python3 -m http.server
 ```
 
-## 3.2 Windows Client
+## 3.2 Windows client
 
 There are two changes we need to make on the Windows side.
 
@@ -406,7 +406,7 @@ route add 172.16.240.129 mask 255.255.255.255 172.16.31.173
 
 ![Diagram](/img/local_gw/LocalGW10.png)
 
-## 4.0 Service Configuration
+## 4.0 Service configuration
 
 The service configuration can be done on either the local-router or the remote-router.
 
@@ -440,7 +440,7 @@ ziggy@local-gw:~$ ziti edge list configs
 results: 1-2 of 2
 ```
 
-## 4.3 Create SSH Service
+## 4.3 Create SSH service
 
 Now we need to put these two configs into a service. We going to name the service "ssh" and assign an attribute "rtrhosted"
 
@@ -461,7 +461,7 @@ ziggy@local-gw:~$ ziti edge list services
 results: 1-1 of 1
 ```
 
-## 4.4 Create Service Edge Router Policy
+## 4.4 Create service edge router policy
 
 ```text
 ziti edge create service-edge-router-policy ssh-serp --edge-router-roles '#all' --service-roles '#rtrhosted' --semantic 'AnyOf'
@@ -480,7 +480,7 @@ ziggy@local-gw:~$ ziti edge list service-edge-router-policies
 results: 1-2 of 2
 ```
 
-## 4.5 Create Bind policies
+## 4.5 Create bind policies
 
 We need to specify which identity (in our case, **#hosts**) is going to host the service by setting up a bind service policy
 
@@ -488,7 +488,7 @@ We need to specify which identity (in our case, **#hosts**) is going to host the
 ziti edge create service-policy ssh-bind Bind --identity-roles "#hosts" --service-roles '#rtrhosted' --semantic 'AnyOf'
 ```
 
-## 4.6 Create Dial policies
+## 4.6 Create dial policies
 
 We also need to specify which identity (in this case, **#clients**) is going to intercept the service by setting up a dial service policy
 
@@ -519,7 +519,7 @@ Then you should be able ssh to mysimpleservice.ziti.
 
 ![Diagram](/img/local_gw/LocalGW15.png)
 
-## 5.0 http Service Configuration
+## 5.0 http service configuration
 
 In the previous section, we showed how to configure a DNS based intercept via open-ziti. In this section, we going to show how to set up interception via IP address. If you followed the instruction in the [3.2 Windows Client](#32-windows-client) section, the routing for the intercept traffic to local-tunnel node is ready set. (*route add 172.16.240.129 mask 255.255.255.255 172.16.31.173*)
 
@@ -556,7 +556,7 @@ ziggy@local-gw:~$ ziti edge list configs
 results: 1-4 of 4
 ```
 
-## 5.3 Create http Service
+## 5.3 Create http service
 
 Put these two configs into a service. We going to name the service "http" and assign an attribute "rtrhosted"
 
@@ -577,11 +577,11 @@ results: 1-2 of 2
 
 ```
 
-## 5.4 Service Edge Router Policy
+## 5.4 Service edge router policy
 
 Since we used same attribute for http service as the attribute for SSH service, we don't need another service-edge-router-policy. The original service-edge-router-policy was done in [this section](#44-create-service-edge-router-policy).
 
-## 5.5 Bind and Dial policies
+## 5.5 Bind and dial policies
 
 We also do not need to create new Bind and Dial policies. Since our host identity (#hosts) and service attribute (#rtrhosted) did not change for bind policy. And our client identity (#clients) and service attribute (#rtrhosted) did not change for dial policy. You can review the policies from the [previous section](#46-create-dial-policies).
 

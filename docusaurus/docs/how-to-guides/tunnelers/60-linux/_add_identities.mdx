@@ -3,7 +3,7 @@ The tunneler can run with zero or more identities loaded, and needs at least one
 the host. Adding an identity means providing a JWT enrollment token which is used by the tunneler to obtain a client
 certificate from the OpenZiti controller. [Learn more about OpenZiti Identities](../../../learn/core-concepts/identities/overview.mdx).
 
-### Add a Single Identity
+### Add a single identity
 
 Root and members of group `ziti` may add an identity without restarting. 
 
@@ -13,7 +13,7 @@ sudo ziti-edge-tunnel add --jwt "$(< ./in-file.jwt)" --identity myIdentityName
 
 [Learn more about enrolling](../../../learn/core-concepts/identities/20-enrolling.md).
 
-### Load Identities Directory
+### Load identities directory
 
 The tunneler will load all enrolled identities in the `--identity-dir` directory at startup. The default location for
 identities is is `/opt/openziti/etc/identities`. Add enrolled identity files to this directory by copying the JSON file

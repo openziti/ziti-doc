@@ -1,4 +1,4 @@
-# OIDC Posture Checks
+# OIDC posture checks
 
 OIDC Posture Checks apply to [API Sessions](../../sessions.md#api-session) established using OIDC authentication
 (JWT bearer tokens). In this model, the SDK submits Posture Data directly to **each edge router** it connects
@@ -8,7 +8,7 @@ time of each dial or bind and continuously throughout the connection.
 This design reduces controller load, moves enforcement closer to the data plane, and enables posture evaluation
 to scale horizontally with edge routers.
 
-## Posture Data {#posture-data}
+## Posture data {#posture-data}
 
 Posture Check definitions are created and managed on the controller (or on any controller in an HA deployment).
 The controller distributes these definitions to all edge routers via the **Router Data Model (RDM)**, a
@@ -84,12 +84,12 @@ The following Posture Check types are supported. Definitions are created on the 
 edge routers automatically.
 
 - [OS / OS Version](#os-os-version) - requires a specific operating system and optionally a specific version or versions
-- [MAC Address](#mac-address) - requires the client has a specific MAC address associated with its hardware
+- [MAC address](#mac-address) - requires the client has a specific MAC address associated with its hardware
 - [MFA](#mfa) - requires the client currently has MFA TOTP enabled
-- [Multi Process](#multi-process) - requires a client be running one or more applications
-- [Windows Domain](#windows-domain) - requires the client be a member of a specific domain
+- [Multi process](#multi-process) - requires a client be running one or more applications
+- [Windows domain](#windows-domain) - requires the client be a member of a specific domain
 
-### Operating System {#os-os-version}
+### Operating system {#os-os-version}
 
 The `OS` Posture Check type verifies a client's operating system and optionally its version.
 
@@ -142,7 +142,7 @@ ziti edge create posture-check os windows-and-android -o "WINDOWS:>10.0.0,ANDROI
 }
 ```
 
-### MAC Address {#mac-address}
+### MAC address {#mac-address}
 
 The `MAC` Posture Check type verifies a client's network interface MAC addresses. A client presenting MAC
 addresses not included in the check will fail.
@@ -206,7 +206,7 @@ ziti edge create posture-check mfa my-mfa-check -s 3600 -w -u -a check-attribute
 }
 ```
 
-### Multi Process {#multi-process}
+### Multi process {#multi-process}
 
 The `PROCESS_MULTI` Posture Check type verifies that one or more programs are running on the client. It can
 optionally check a SHA-256 hash and digital signers on Windows.
@@ -251,7 +251,7 @@ ziti edge create posture-check process-multi my-proc-multi AnyOf "Windows,Linux"
 }
 ```
 
-### Windows Domain {#windows-domain}
+### Windows domain {#windows-domain}
 
 The `DOMAIN` Posture Check type verifies that a Windows client has joined a specific Windows domain.
 
@@ -276,7 +276,7 @@ ziti edge create posture-check domain domain-list -d domain1 -d "domain2" -a che
 }
 ```
 
-## Edge Router capability
+## Edge router capability
 
 OIDC posture check submission requires the connecting edge router to support it. The SDK checks for a
 `SupportsPostureChecks` capability header advertised by the router during connection establishment. If a router

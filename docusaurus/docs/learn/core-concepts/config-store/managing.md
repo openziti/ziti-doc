@@ -1,6 +1,6 @@
 # Managing
 
-## Managing Configurations
+## Managing configurations
 Here is a JSON schema, modeled on the tunneler client configuration. 
 
 ```text

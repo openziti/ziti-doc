@@ -35,7 +35,7 @@ on the overview page of the **App registration**
 
 ---
 
-## Get a Microsoft Entra ID Account
+## Get a Microsoft Entra ID account
 
 If you don't already have an account you can sign up at https://entra.microsoft.com/. After logging into the Azure 
 console, find and click on the **Microsoft Entra ID** icon in the navbar:
@@ -50,7 +50,7 @@ Find **App registrations** under **Manage** and select it and click **New regist
 ![Entra icon](/img/idps/msentra/new-registration.png)
 :::
 
-## Register an Application
+## Register an application
 
 Registering an application will generate the Client ID necessary for configuring the ext-jwt-signer. 
 
@@ -75,7 +75,7 @@ After creating the App registration, from the **Overview** page click **Add a Re
 
 <CallbackUrls/>
 
-### Add Redirect URIs
+### Add redirect URIs
 
 Under **Platform configurations**, find the **Add a platform** button and click it. Depending on the OpenZiti technology 
 being enabled, choose the appropriate option:
@@ -117,7 +117,7 @@ Continue filling out the other fields, add display names and consent description
 ![Entra icon](/img/idps/msentra/add-api-scope.png)
 :::
 
-### A Note About Audiences
+### A note about audiences
 
 When creating the App Registration, it seems that the value selected for the **Supported account types** influences 
 the ability to change the audience. If "Accounts in this organizational directory only (Your Company only - 
@@ -145,9 +145,9 @@ After successfully authenticating, the access token will have the audience of `a
 
 ---
 
-## Common Errors
+## Common errors
 
-### Using SPA for Tunnelers
+### Using SPA for tunnelers
 
 > failed to exchange token: oauth2: "invalid_request" "AADSTS9002327: Tokens issued for the 'Single-Page Application' 
 > client-type may only be redeemed via cross-origin requests.

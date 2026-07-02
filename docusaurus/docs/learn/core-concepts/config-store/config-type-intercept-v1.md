@@ -1,5 +1,5 @@
 
-# Tunneler Config Type `intercept.v1`
+# Tunneler config type `intercept.v1`
 
 A Config of Config Type `intercept.v1` configures an intercepting Ziti tunneler as a proxy for a particular Ziti service.
 
@@ -45,6 +45,6 @@ This Config has not only a Ziti domain name destination `acme.ziti` for which tr
 }
 ```
 
-## Schema Reference
+## Schema reference
 
 The JSON schema for this tunneler Config Type is maintained [in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/intercept.v1.json).

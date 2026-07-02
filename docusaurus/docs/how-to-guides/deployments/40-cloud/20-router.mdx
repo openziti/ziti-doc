@@ -8,14 +8,14 @@ import TabItem from '@theme/TabItem';
 
 Deploy a router on a Linux VM in a public cloud. These steps cover Azure and AWS.
 
-## 2.0 Configure a Router
+## 2.0 Configure a router
 
 In this section, we are describing how to setup the edge router (pub-er) for our [test network](/how-to-guides/topologies/10-services.mdx#311-network-diagram-1).
 
-## 2.1 Create the Edge Router VM 
+## 2.1 Create the edge router VM 
 Please follow **Create a VM section** of the controller cloud guide to setup a VM to be used as router.
 
-## 2.2 Login and Update the repo and apps on VM
+## 2.2 Login and update the repo and apps on VM
 
 <Tabs
   defaultValue="Azure"
@@ -92,13 +92,13 @@ You should have a file **ziti_router_auto_enroll** under the directory.
 
 For detail info on ziti_router_auto_enroll, please checkout the [ziti_router_auto_enroll github page](https://github.com/netfoundry/ziti_router_auto_enroll)
 
-## 2.3 Create and Set Up Router Directly on Router VM
+## 2.3 Create and set up router directly on router VM
 
 You can setup the router directly on the router VM with one command if you did not block your controller's edge-management port. At this time, the quickstart for setting up controller does not separate edge-management port from edge-client port, so the edge-management port has to be open. You may continue this section if you know your controller's management password, Fabric Port (default 8440) and Management Port (default 8441).
 
 You can also choose to create router on the controller and then register with the jwt file (created when creating the router) on the router. The procedure for this is detailed in ["Create Router On the Controller"](#24-creating-router-on-the-controller-first) section.
 
-### 2.3.1 Info needed for creating Router
+### 2.3.1 Info needed for creating router
 In order to create the Router, the VM needs to contact controller. We need the following information before we can continue:
 - Controller IP or Controller NDS
 - Controller Fabric Port: On the controller, issue this command **echo $ZITI_CTRL_PORT**
@@ -106,7 +106,7 @@ In order to create the Router, the VM needs to contact controller. We need the f
 - Controller Passwd: On the controller, issue this command **echo $ZITI_PWD**
 - Router Name: Name for this router
 
-### 2.3.2 Info gathered for creating Router
+### 2.3.2 Info gathered for creating router
 Here is information I gathered from previous step:
 - Controller IP: 68.183.52.206
 - Controller Fabric Port: 8440 **(default value if following controller setup guide)**
@@ -119,7 +119,7 @@ We are also going to create the router without healthcheck section, so the follo
 
 If you choose to explore these two functionalities, you can remove the options (from command line) when creating router.
 
-### 2.3.3 Create the Router with link listener
+### 2.3.3 Create the router with link listener
 Use this procedure to create a Public Router with link listener (but without tunnel).
 ```text
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --assumePublic --disableHealthChecks --routerName pub-er 
@@ -162,29 +162,29 @@ When using the environmental variable for ziti_router_auto_enroll, you must
 use "-E" option to pass the environmental value to sudo.
 ```
 
-### 2.3.4 Other Router creation options
+### 2.3.4 Other router creation options
 If you need to create router with difference options than the one mentioned above, please choose one of the options from this section.
 
-#### 2.3.4.1 Create the Router with link listener and tunneler
+#### 2.3.4.1 Create the router with link listener and tunneler
 ```
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --assumePublic --disableHealthChecks --autoTunnelListener --routerName pub-er
 ```
 
-#### 2.3.4.2 Create the Router with edge listener only (no link listener)
+#### 2.3.4.2 Create the router with edge listener only (no link listener)
 ```
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --routerName pub-er 
 ```
-#### 2.3.4.3 Create the Router with edge listener and tunneler
+#### 2.3.4.3 Create the router with edge listener and tunneler
 ```
 sudo ./ziti_router_auto_enroll -f -n --controller 68.183.52.206 --controllerFabricPort 8440 --controllerMgmtPort 8441 --adminUser admin --adminPassword Test@123 --disableHealthChecks --autoTunnelListener --routerName pub-er
 ```
 
-## 2.4 Creating Router on the Controller first
+## 2.4 Creating router on the controller first
 **If you already setup the router directly on the VM, you can skip to the next [section 2.5](#25-auto-start-the-router)**
 
 You can create the router on the controller first then register the router on the router VM.
 
-### 2.4.1 Creating Router on the controller Using ZAC
+### 2.4.1 Creating router on the controller using ZAC
 **If you prefer to create router using CLI, you can jump to [cli section](#242-creating-router-on-the-controller-using-cli).**
 
 **In order to complete the procedures in this section, you need to install ZAC first and have access to the controller using the ZAC. If you have trouble using ZAC, you can use the [CLI procedures](#242-creating-router-on-the-controller-using-cli) to create router.**
@@ -210,7 +210,7 @@ Open the JWT file, and copy the content.  Now you are ready for the registration
 ![Diagram](/img/public_cloud/ZAC05-router.jpg)
 
 
-### 2.4.2 Creating Router on the controller Using CLI
+### 2.4.2 Creating router on the controller using CLI
 **If you already created router using ZAC, you can skip ahead to [register the router](#243-register-the-router-with-link-listener).** 
 
 Otherwise, this section provides CLI commands to create routers on the controller.
@@ -251,7 +251,7 @@ We also need the management port (default 8441) and fabric port (default 8440) o
 8440
 ```
 
-### 2.4.3 Register the Router with link listener
+### 2.4.3 Register the router with link listener
 **Perform this on the Router VM**
 
 Use this procedure to create a Public Router with link listener (but without tunnel).
@@ -280,19 +280,19 @@ Downloading: 100%|████████████████████�
 2023-04-07-01:07:57-INFO-Service ziti-router.service start successful.
 2023-04-07-01:07:57-INFO-Service ziti-router.service enable successful.
 ```
-### 2.4.4 Other Router creation options
+### 2.4.4 Other router creation options
 If you need to create router with difference options than the one mentioned above, please choose one of the options from this section.
 
-#### 2.4.4.1 Register the Router with link listener and tunneler
+#### 2.4.4.1 Register the router with link listener and tunneler
 ```
 sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks --autoTunnelListener <jwt content>
 ```
 
-#### 2.4.4.2 Register the Router with edge listener only (no link listener)
+#### 2.4.4.2 Register the router with edge listener only (no link listener)
 ```
 sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --disableHealthChecks  <jwt content>
 ```
-#### 2.4.4.3 Register the Router with edge listener and tunneler
+#### 2.4.4.3 Register the router with edge listener and tunneler
 ```
 sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --disableHealthChecks --autoTunnelListener <jwt content>
 ```
@@ -393,7 +393,7 @@ Now the Global DNS servers should be the IP address on your local interface.
 </TabItem>
 </Tabs>
 
-## 2.7 Route Table 
+## 2.7 Route table 
 
 <Tabs
   defaultValue="Azure"
@@ -491,7 +491,7 @@ IBM Cloud does not have route table.  The routes are setup directly on the VM. T
 </TabItem>
 </Tabs>
 
-## 2.8 Source and Destination Check
+## 2.8 Source and destination check
 
 Most cloud provider checks the source and destination of the traffic to make sure it is either originated or terminated at the VM. When our ER is used as a local GW, it is neither the source or the destination of the traffic. Therefore, the source and destination check must be disabled. 
 

@@ -32,7 +32,7 @@ https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697/.well-known/openid-co
 
 ---
 
-## Create App Integration
+## Create app integration
 
 From the Okta admin dashboard, expand the Applications left-side navigation and click **Applications** and click the 
 **Create App Integration** button.
@@ -60,7 +60,7 @@ Finally, add the redirect URIs for the specific OpenZiti technology you are look
 ![Add Application](/img/idps/okta/finalize-app-integration.png)
 :::
 
-## Add an Authorization Server
+## Add an authorization server
 
 Within the Okta platform, an **Authorization Server** is used to control the audience (`aud` field) added to security 
 tokens. To create an audience usable by an external JWT signer for your OpenZiti Network, create a new 
@@ -78,7 +78,7 @@ In the popup, enter values for the **Name**, **Audience** and **Description**. A
 ![Add Authorization Server Details](/img/idps/okta/add-auth-server-popup.png)
 :::
 
-## Add an Authorization Server Policy
+## Add an authorization server policy
 
 Okta will require you to add an **Access Policy** to the **Authorization Server** mapping it to a particular set of 
 users. Here you can choose any user or more finely control which Okta clients will leverage this **Authorization Server**.
@@ -88,7 +88,7 @@ Add a **Name** and **Description** and choose which clients to assign the policy
 ![Add Authorization Server Policy](/img/idps/okta/add-auth-server-policy.png)
 :::
 
-## Add an Authorization Server Policy Rule
+## Add an authorization server policy rule
 
 After adding the new **Access Policy**, you also need to add a **Rule** which decides when the **Authorization Server** is 
 used. Click the **Add rule** button to add a new rule to the **Authorization Server**. Here, make the appropriate 
@@ -100,7 +100,7 @@ click **Create Rule** at the bottom of the form.
 ![Add Authorization Server Policy Rule](/img/idps/okta/add-auth-server-rule.png)
 :::
 
-## Adding an Email Claim to the Access Token
+## Adding an email claim to the access token
 
 If you want to use the user's email address as a claim in your access token, this can be accomplished by creating a 
 **Claim** on the **Authorization Server**. From the **Authorization Server** detail page, find the **Claims** tab and select 
@@ -120,7 +120,7 @@ To finalize the claim fill out the fields shown and click **Create** when done:
 ![Add Email Claim](/img/idps/okta/add-email-claim-detail.png)
 :::
 
-## Verify Token in Okta Web Portal
+## Verify token in Okta web portal
 
 The Okta web portal can also help verify tokens before using them with OpenZiti. This functionality can be quite 
 helpful. From the **Authorization Server**, click the **Token Preview** tab. Fill out the **OAuth/OIDC client**, **Grant 

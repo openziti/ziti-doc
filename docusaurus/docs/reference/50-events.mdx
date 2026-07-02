@@ -8,7 +8,7 @@ title: Events
 The controller can emit many kinds of events, useful for monitoring, management and integration with other systems.
 They can be enabled in the controller configuration. 
 
-### Common Fields
+### Common fields
 
 All events have the following fields:
 
@@ -18,14 +18,14 @@ All events have the following fields:
 | **timestamp** | The date/time when the event was generated | timestamp |
 | **event_src_id** | The id of the controller which emitted the event | string |
 
-### Time Related Types
+### Time related types
 
 | Type | Description | Examples |
 |------|-------------|----------|
 | **timestamp** | RFC3339 formatted timestamp string | "2024-10-02T12:17:39.501821249-04:00" |
 | **duration** | Number representing a duration in nanoseconds | 104100 |
 
-## Event Types
+## Event types
 
 * [ApiSession](#apisession)
 * [Authentication](#authentication)
@@ -46,7 +46,7 @@ All events have the following fields:
 
 
 
-## Event Configuration
+## Event configuration
 
 For a complete event configuration reference, please refer to the 
 [controller event configuration](30-configuration/controller.md#events).

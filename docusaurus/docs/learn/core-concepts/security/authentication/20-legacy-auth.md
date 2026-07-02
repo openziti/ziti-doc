@@ -1,5 +1,5 @@
 ---
-title: Legacy Authentication
+title: Legacy authentication
 sidebar_position: 20
 ---
 
@@ -31,9 +31,9 @@ Supported `method` values: `cert`, `password`, `ext-jwt`
 A successful response returns an [API Session](../sessions.md#api-session) object containing the `token` field.
 This token value is the `zt-session` and is used on all subsequent requests.
 
-## Primary Authentication
+## Primary authentication
 
-### x509 Certificate
+### x509 certificate
 
 Certificate authentication requires the HTTP connection to the controller to use a client TLS certificate
 associated with the target identity. The request body is empty. The controller reads the certificate from the
@@ -49,7 +49,7 @@ The client certificate must be issued by the OpenZiti PKI or a registered and en
 [3rd Party CA](30-third-party-cas.md). Intermediate CA certificates may be included in the TLS handshake if
 necessary. The client certificate must be at index zero with intermediates in subsequent positions.
 
-### Username/Password (UPDB)
+### Username/password (UPDB)
 
 `POST /edge/client/v1/authenticate?method=password`
 
@@ -106,7 +106,7 @@ When `authQueries` is non-empty, the [API Session](../sessions.md#api-session) i
 [partially authenticated](#partial-authentication) and secondary factors must be
 satisfied before full access is granted.
 
-## Using the zt-session Token
+## Using the zt-session token
 
 Include the `zt-session` token in all subsequent API requests:
 
@@ -125,7 +125,7 @@ Logout:
 DELETE /edge/client/v1/current-api-session
 ```
 
-## Secondary Authentication
+## Secondary authentication
 
 If the identity's [Authentication Policy](50-authentication-policies.md) requires secondary factors, the
 authentication response includes an `authQueries` array listing the outstanding challenges. The session is
@@ -153,7 +153,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...
 The controller validates the secondary JWT on each request. If it is missing, expired, or invalid, the request
 returns `401 Unauthorized` with a `WWW-Authenticate` header identifying the required signer.
 
-## Partial Authentication
+## Partial authentication
 
 A legacy API Session is **partially authenticated** when primary credentials have been accepted but one or more
 `authQueries` remain outstanding. During partial authentication the following operations are available:

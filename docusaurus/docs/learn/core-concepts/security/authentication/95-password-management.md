@@ -2,14 +2,14 @@
 sidebar_position: 95
 ---
 
-# Password Management
+# Password management
 
 For identities using username password (UPDB) authenticators the following actions are supported:
 
 - administrative password resets
 - client initiated password rotation
 
-## Administrative Password reset
+## Administrative password reset
 
 Passwords may be reset via the
 [Edge Management API](@openzitidocs/reference/developer/api/edge-management-api-reference) by an administrative
@@ -29,7 +29,7 @@ client.
 }
 ```
 
-## Client Password change
+## Client password change
 
 Passwords may be reset via the [Edge Management API](../../../../reference/developer/api/index.mdx#edge-management-api)
 or [Edge Client API](../../../../reference/developer/api/index.mdx#edge-client-api) by the currently authenticated

@@ -1,7 +1,7 @@
 ---
 title: Enrolling
 ---
-## Enrolling an Identity
+## Enrolling an identity
 
 All connections made to the Ziti network leverage [mutual TLS](https://en.wikipedia.org/wiki/Mutual_authentication)
 which means every client needs a valid X509 certificate which it will present to the Ziti network during the connection
@@ -15,7 +15,7 @@ This process is slightly different for each type of identity and is complex. The
 use either the Ziti Desktop Edge/Ziti Mobile Edge for your operating system. Alternatively, you may perform the enrollment separate 
 with the `ziti` CLI which can be downloaded from the [GitHub releases page](https://github.com/openziti/ziti/releases/latest) 
 
-### One Time Token Enrollment - Internal PKI
+### One time token enrollment - internal PKI
 
 Perhaps the easiest path to an enrolled identity is by using the one-time token enrollment flow. This flow leverages the
 PKI configured in the controller.  Using the one-time token flow - the `ziti` CLI will generate a private key
@@ -55,7 +55,7 @@ confident you understand the risks involved in doing so.
 ./ziti-edge-tunnel enroll --jwt - --identity ./myTunneler.json < ./myTunneler.jwt
 ```
 
-### 3rd Party CA - One Time Token
+### 3rd party CA - one time token
 
 This flow allows you to pre-create identities for a 3rd party CA with distinct role attributes. This flow is similar to the One Time Token flow from above except that it expects that a private key and certificate have
 already been created on or distributed to the machine that is about to enroll and that the certificate presented is
@@ -77,7 +77,7 @@ ziti edge enroll \
     --out ${identity_config_file}
 ```
 
-### 3rd Party CA - Auto
+### 3rd party CA - auto
 
 When using a third party CA identity creation process in the controller is
 automatic. Enrolling the identity will create it with the default role attributes that were specified when the 3rd party CA was created.

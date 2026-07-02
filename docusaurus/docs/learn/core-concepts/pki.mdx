@@ -1,6 +1,6 @@
 ---
 id: pki
-title: Public Key Infrastructure (PKI)
+title: Public key infrastructure (PKI)
 sidebar_label: PKI
 ---
 
@@ -24,7 +24,7 @@ these trust anchors can be configured.
 Ziti Network components are required to present a certificate to other network components during the connection
 establishment. This certificate will need to be valid per the configured trust anchor store being connected to.
 
-### Ziti Controller
+### Ziti controller
 
 The controller has three distinct sections related to PKI: `identity`, `edge.api.identity`,
 `edge.enrollment.signingCert`. The `edge.api.identity` configuration section is optional and is provided to allow the external
@@ -34,7 +34,7 @@ Connections to the controller are considered valid if the certificate presented 
 trust anchor declared within the identity.ca configuration or if the certificate presented is signed by the certificate
 specified in the `edge.enrollment.signingCert`.
 
-#### PKI Configuration
+#### PKI configuration
 
 The identity section of the controller configuration is used by the controller when connections are
 established to or from other components of a network. There are four sections in the identity block:
@@ -55,7 +55,7 @@ communicate to the controller over the IP and port specified in the `ctrl.listen
 configuration file. If an edge section is present in the configuration file and no edge.api.identity section exists this
 certificate is also returned to incoming connections to the `edge.api.advertise` endpoint.
 
-### Edge Router
+### Edge router
 
 An edge router has one section related to PKI: `identity`. It is important to note that an edge router will
 manage its own PKI. Allowing the edge router to manage its own PKI is almost certainly desired. The
@@ -65,7 +65,7 @@ provided exists the edge router will use it and the other fields will be **regen
 
 The certificate generated will be signed by the controller using the certificate specified in `edge.enrollment.signingCert`.
 
-#### PKI Configuration
+#### PKI configuration
 
 The `identity` section of the edge router configuration is used by the edge router when connections are
 established to or from the other components of a network. There are four sections in the identity block:
@@ -85,7 +85,7 @@ configuration file.
 communicate to the edge router over the IP and port specified in the `ctrl.listener` or `mgmt.listener` fields of the Edge Router
 configuration file.
 
-### Third Party CA (optional)
+### Third party CA (optional)
 
 A third party CA is one which is maintained and managed entirely outside of the network. This is an important
 feature for organizations wishing to administer and maintain the certificates used by the different pieces of the Ziti

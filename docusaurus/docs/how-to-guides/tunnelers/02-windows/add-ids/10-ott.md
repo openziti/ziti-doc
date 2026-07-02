@@ -1,4 +1,4 @@
-# One Time Tokens
+# One time tokens
 
 Enrolling an identity with a "one time token" is possibly the most common form of adding an identity to
 a tunneler. This token is the original form supported by OpenZiti. It entails an operator provisioning an identity
@@ -9,7 +9,7 @@ allowing the process to be trusted by the OpenZiti overlay network.
 * An identity has been created and the one-time use JWT captured. If needed, follow this [guide](../../../../learn/core-concepts/identities/10-creating.mdx) to
 create an identity and one-time token. Once created, transfer the JWT file to the Windows machine you want to enroll.
 
-## Adding the Identity
+## Adding the identity
 
 Go to the **Ziti Desktop Edge for Windows** and click **ADD IDENTITY** in the top right of the UI.
 ![windows-with-jwt](/img/ext-jwt-signer/windows-with-jwt.png)

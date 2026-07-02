@@ -33,7 +33,7 @@ connection. It may be one of the following values, however `tls` is suggested fo
 - `transwarp`
 - `transwarptls`
 
-## Environment Variables
+## Environment variables
 
 All values in the configuration file support environment variable replacement. The environment
 variables are sourced from the scope of the executing process (i.e. controller, router). The
@@ -124,7 +124,7 @@ the following properties.
 - `closeUnresponsiveTimeout` - (optional, 30s) How to long to wait after the last heartbeat response
   arrived before closing the channel
 
-## Time Units
+## Time units
 
 Configurations that do not specify a unit of time in their name, support a variety of human-readable
 time units. The format supports single and combinations of values (
@@ -247,7 +247,7 @@ support different APIs. See their documentation for a list of APIs supported.
 - `minTLSVersion` - (optional) the minimum TLS version to support (TLS1.1, TLS1.2, TLS1.3)
 - `maxTLSVersion` - (optional) the maximum TLS version to support (TLS1.1, TLS1.2, TLS1.3)
 
-## xgress Components
+## xgress components
 
 "xgress" is an internal OpenZiti set of components that facilitate ingress and egress traffic from
 the OpenZiti mesh overlay network. Ingress traffic is handled by "listeners" and egress traffic is
@@ -270,7 +270,7 @@ currently defined:
   for external linking
 - `tunnel` - a special type of binding [used by routers](./router.md#tunnel-listeners)
 
-## xgress Options
+## xgress options
 
 Each xgress component can have its own options in addition to the following shared options:
 

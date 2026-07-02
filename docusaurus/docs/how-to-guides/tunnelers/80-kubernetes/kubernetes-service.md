@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Service
+title: Kubernetes service
 ---
 
 This is a tutorial for tunneling a Kubernetes workload with OpenZiti.

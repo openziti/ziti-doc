@@ -2,7 +2,7 @@
 sidebar_position: 50
 ---
 
-# Authentication Policies
+# Authentication policies
 
 Authentication Policies restrict the [primary authentication](00-auth.md#primary-authentication) methods available to
 [Identities](80-identities.md) and may enforce additional
@@ -77,7 +77,7 @@ certificates forward. Client certificates issued by a [3rd Party CAs](30-third-p
 process to maintain client certificate validity if `allowExpiredCerts` is false.
 
 
-#### External JWT Signers (extJwt)
+#### External JWT signers (extJwt)
 
 Fields:
 
@@ -88,7 +88,7 @@ Fields:
 If `allowed` is true, authentication is accepted from the External JWT Signers listed in `allowedSigners`. If
 `allowedSigners` is `null`, any enabled External JWT Signer may be used.
 
-#### Username Password (updb)
+#### Username password (updb)
 
 - `allowed` - whether UPDB may be used for authentication
 - `maxAttempts` - the maximum number of invalid logins allowed before an identity is locked for
@@ -150,7 +150,7 @@ Authentication policies are managed via the
 
 `PUT /edge/management/v1/auth-policies/<id>` replaces the full policy. `PATCH` updates only the supplied fields.
 
-## Effect on existing Sessions
+## Effect on existing sessions
 
 
 Authentication Policy changes take effect on **new authentications only**. Existing fully authenticated

@@ -3,7 +3,7 @@ sidebar_label: Initialization
 sidebar_position: 40
 ---
 
-# Initializing the First Controller
+# Initializing the first controller
 
 First start the controller:
 

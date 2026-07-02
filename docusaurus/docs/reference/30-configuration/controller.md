@@ -4,7 +4,7 @@ sidebar_position: 20
 toc_max_heading_level: 4
 ---
 
-# Controller Configuration Reference
+# Controller configuration reference
 
 OpenZiti uses configuration files for controllers that are in the [YAML](https://yaml.org/) format.
 All configuration files are also subject to a set of [conventions](conventions.md) such as

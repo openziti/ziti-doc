@@ -2,7 +2,7 @@
 sidebar_position: 60
 ---
 
-# Certificate Management
+# Certificate management
 
 Clients, routers, and the controller use x509 client and server certificates. Client authentication
 methods include certificates, but router and controller authentication always uses certificates.
@@ -20,14 +20,14 @@ set `allowExpiredCerts: true` on the [Identity's](80-identities.md)
 remains responsible for managing the certificate lifecycle.
 :::
 
-## Router Certificate extension
+## Router certificate extension
 
 Routers will attempt to extend their current client and server certificates one week prior to expiration. No
 intervention is necessary on behalf of the network administrator. The request must be sent to the controller via a
 pre-authenticated connection. If a router has been disconnected from the OpenZiti network and their client certificates
 have expired, the router must be [re-enrolled](../enrollment.mdx#router-enrollment-extension).
 
-## Client Certificate extension
+## Client certificate extension
 
 This section applies only to client certificates issued by the OpenZiti internal PKI. Certificates issued by a
 [3rd Party CA](30-third-party-cas.md) must be renewed externally.
@@ -38,7 +38,7 @@ certificate, they must issue the following REST request to either the
 [Edge Client API](@openzitidocs/reference/developer/api/edge-client-api-reference)
 after becoming [fully authenticated](../../security/sessions.md#full-vs-partial-authentication).
 
-### Client Certificate extension
+### Client certificate extension
 
 The OpenZiti SDKs provide helper functions for this process and issuing these requests manually should not be necessary.
 

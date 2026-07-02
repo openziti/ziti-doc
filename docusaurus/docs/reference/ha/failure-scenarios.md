@@ -1,16 +1,16 @@
 ---
-sidebar_label: Failure Scenarios
+sidebar_label: Failure scenarios
 sidebar_position: 70
 ---
 
-# Failure Scenarios
+# Failure scenarios
 
 This page walks through what a controller cluster does when things go wrong: a node
 crashes, the network splits, the leader disappears, two nodes die at once. The goal is
 to give operators a clear picture of what still works in each case and what to do about
 it.
 
-## The Short Version
+## The short version
 
 In a controller cluster:
 
@@ -36,7 +36,7 @@ In a controller cluster:
 
 Most failure scenarios reduce to one of those statements.
 
-## Voter Failure Tolerance
+## Voter failure tolerance
 
 The number of voting members the cluster has determines how many can be offline and
 still accept writes. Non-voting members don't count toward this calculation.
@@ -55,7 +55,7 @@ Stick with odd voter counts.
 Non-voting members can come and go freely without affecting write availability. They
 catch up via raft log replay or snapshot when they reconnect.
 
-## Single Voter Lost
+## Single voter lost
 
 The common case in a 3-voter cluster.
 
@@ -73,7 +73,7 @@ The common case in a 3-voter cluster.
 You are now running at zero spare voters. Plan to replace the lost member before the
 next failure.
 
-## Loss of Quorum
+## Loss of quorum
 
 This is the case the cluster sizing decision is really about. In a 3-voter cluster,
 losing two voters; in a 5-voter cluster, losing three; and so on.
@@ -105,14 +105,14 @@ Recovery options:
    `cluster remove` requires a leader to commit the membership change, and
    `restore-from-db` against the surviving cluster also requires a leader to dispatch
    the snapshot through raft. Treat this as total cluster loss and rebuild from your
-   most recent backup; see [Total Cluster Loss](#total-cluster-loss).
+   most recent backup; see [Total cluster loss](#total-cluster-loss).
 
 The takeaway is that quorum is a hard line. The bigger your voter count, the more
 failures it takes to cross it, but every additional voter also adds latency to every
 write. See [Topology](./topology.md) for the trade-off, and take backups frequently
 enough that the recovery-point cost of falling back to a snapshot is acceptable.
 
-## Network Partitions
+## Network partitions
 
 A partition divides the voters into a majority side and a minority side (or several
 minority sides).
@@ -129,7 +129,7 @@ missed (or applying a snapshot if it fell too far behind, see below). Split-brai
 possible: raft guarantees only one leader per term, and a partition with no quorum
 can't elect one.
 
-## Leader Loss and Elections
+## Leader loss and elections
 
 Once a leader is elected, it stays leader as long as it can reach a quorum of voters.
 The cluster does not hold elections on a schedule, and leadership does not migrate on
@@ -188,7 +188,7 @@ This is useful for planned maintenance (stop the leader after transferring leade
 off it, so the cluster doesn't have to hold an election) or for moving leadership
 closer to the operator before a long batch of updates.
 
-## Read-Only Mode (Version Mismatch)
+## Read-only mode (version mismatch)
 
 This is a distinct mode from "lost quorum." The cluster transitions to read-only when
 voters running different software versions are present in the cluster.
@@ -213,7 +213,7 @@ only ordering concern.
 Operationally, you'll see this as the cluster being read-write, then read-only for
 the duration of the rolling upgrade, then read-write again.
 
-## Lagging or Disconnected Controllers
+## Lagging or disconnected controllers
 
 A controller that's out of touch for a while will lag the journal. When it reconnects,
 one of two things happens:
@@ -230,7 +230,7 @@ one of two things happens:
 This is normal recovery behavior, not a failure. The controller restart that follows a
 snapshot apply is the system's way of cleanly swapping the database underneath itself.
 
-## Existing Circuits When a Controller Goes Down
+## Existing circuits when a controller goes down
 
 Circuits are owned by the controller that created them. When that controller goes
 down:
@@ -248,7 +248,7 @@ This is identical to the standalone-controller behavior. See the
 [Routing Project Board](https://github.com/orgs/openziti/projects/13/views/1) for the
 ongoing work to make circuit management more resilient.
 
-## Router Behavior During Failures
+## Router behavior during failures
 
 Routers connect to all controllers they know about (via their endpoints file). When a
 controller becomes unreachable:
@@ -265,7 +265,7 @@ If a router loses contact with every controller, existing circuits keep flowing
 traffic, but the router can't create new circuits or update terminators until at
 least one controller becomes reachable again.
 
-## SDK Client Behavior During Failures
+## SDK client behavior during failures
 
 SDK clients keep a list of controllers and rotate between them automatically when
 the current one becomes unreachable. From the application's perspective, most
@@ -346,11 +346,11 @@ changes between refreshes, but it doesn't need to -- the change becomes visible
 at the next refresh, and the failover-on-error path handles cases where the SDK
 happens to talk to a controller that's no longer in the cluster.
 
-## Total Cluster Loss
+## Total cluster loss
 
 If every controller in the cluster is lost (e.g., destroyed underlying storage on all
 of them), you recover from a database snapshot. This requires that you've been taking
-backups: see [Operations -> Restoring from Backup](./operations.md#restoring-from-backup)
+backups: see [Operations -> Restoring from backup](./operations.md#restoring-from-backup)
 and the [Backup guide](../../how-to-guides/deployments/10-linux/10-controller/60-backup.mdx).
 
 Either of two recovery paths gets you back. Both start the same way: bring up a fresh
@@ -379,7 +379,7 @@ After either path:
 The recovery point is the moment of the most recent snapshot. Anything committed to
 the journal after that snapshot is lost.
 
-## What to Monitor
+## What to monitor
 
 A short list of signals worth alerting on:
 
@@ -387,7 +387,7 @@ A short list of signals worth alerting on:
   seen for the configured duration (default 1m). Treat this as a quorum-health alert.
 * Cluster events (`peer.connected`, `peer.disconnected`, `leadership.gained`,
   `state.has_leader`, `members.changed`) are emitted by the controller's event system.
-  See [Cluster Events](../50-events.mdx#cluster).
+  See [Cluster events](../50-events.mdx#cluster).
 * The `ziti agent cluster list` command shows each member's voter status, leader flag,
   version, and connectivity. It's the fastest way to confirm cluster health from a
   single command.

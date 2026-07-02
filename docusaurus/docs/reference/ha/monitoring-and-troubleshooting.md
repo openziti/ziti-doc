@@ -1,9 +1,9 @@
 ---
-sidebar_label: Monitoring and Troubleshooting
+sidebar_label: Monitoring and troubleshooting
 sidebar_position: 90
 ---
 
-# Monitoring and Troubleshooting an HA Cluster
+# Monitoring and troubleshooting an HA cluster
 
 This page is for operators of a running HA controller cluster: what to watch, what's
 healthy, and what to look at first when something looks wrong.
@@ -45,7 +45,7 @@ run `cluster list` against the leader when you need an authoritative answer.
 Sections below walk through what healthy looks like, the diagnostic toolkit, common
 symptoms and their causes, and the minimal set of things worth alerting on.
 
-## What a Healthy Cluster Looks Like
+## What a healthy cluster looks like
 
 Before alerting on what's wrong, it helps to know what right looks like.
 
@@ -116,7 +116,7 @@ Steady-state `raft.rate_limiter.queue_size` should be 0 or near-0; the
 the cluster is lightly loaded. A queue size that consistently sits above zero or a
 shrunken window means the cluster is processing close to its commit capacity.
 
-## The Diagnostic Toolkit
+## The diagnostic toolkit
 
 When something looks wrong, these are the tools, roughly in the order you'd reach
 for them.
@@ -144,7 +144,7 @@ mesh topology and isn't expected to agree across nodes in current releases.
 The cluster event namespace is the right alerting surface for state transitions.
 Subscribe to the `cluster` event type in the controller's event config and route to
 your observability system. The full event list is in
-[Cluster Events](../50-events.mdx#cluster); the operationally important ones are:
+[Cluster events](../50-events.mdx#cluster); the operationally important ones are:
 
 * `state.is_leaderless` / `state.has_leader` -- leader presence transitions.
 * `state.ro` / `state.rw` -- read-only mode transitions (version mismatch).
@@ -246,7 +246,7 @@ pinpoint it. Useful substrings to grep for on a controller's log:
 | `ClusterHasNoLeaderError` | Some write attempt was rejected because no leader exists. |
 | `restored snapshot to initialized system, restart required` | This controller received a snapshot from the leader and is about to terminate for restart. |
 
-## Symptom -> Cause -> Fix
+## Symptom -> cause -> fix
 
 Common operator-facing symptoms, what tends to cause them, and how to confirm and
 remediate.
@@ -272,7 +272,7 @@ than configured threshold`.
 
 **Fix.** If a brief election, no action needed. If quorum loss, restore enough
 voters to make quorum, then writes resume automatically. See
-[Failure Scenarios -> Loss of Quorum](./failure-scenarios.md#loss-of-quorum) for
+[Failure scenarios -> Loss of quorum](./failure-scenarios.md#loss-of-quorum) for
 the recovery procedure if voters can't be recovered.
 
 ### Cluster in read-only mode
@@ -283,7 +283,7 @@ different versions detected in cluster`. Read traffic continues working everywhe
 **Cause.** At least one peer is reporting a different software version from the
 others. Exact-string match on the version field; even a patch-level difference
 triggers it. See
-[Upgrading -> The Read-Only Window](./upgrading.md#the-read-only-window) for the
+[Upgrading -> The read-only window](./upgrading.md#the-read-only-window) for the
 full mechanics.
 
 **Confirm.** `cluster list` shows the version column for each member; the cluster
@@ -307,7 +307,7 @@ seconds-to-minutes between transitions. Writes occasionally fail with
   with the events.
 * A misconfigured `preferredLeader` setup: if only one node is preferred and it's
   unreachable but flickering, leadership will keep bouncing back to it. See
-  [Topology -> Steering Leadership](./topology.md#steering-leadership-with-preferredleader)
+  [Topology -> Steering leadership](./topology.md#steering-leadership-with-preferredleader)
   for the mark-all-close-voters-as-preferred pattern.
 * Leader getting starved out by load. Combined with elevated
   `raft.rate_limiter.queue_size` and a shrinking `raft.rate_limiter.window_size`,
@@ -377,7 +377,7 @@ Slow-but-successful writes have different causes.
   p99 climbing while load is high is the signal. This is rare under normal use.
 
 **Confirm.** Use the external commit-lag recipe from
-[The Diagnostic Toolkit](#tracking-commit-lag-externally-via-entity-change-events)
+[The diagnostic toolkit](#tracking-commit-lag-externally-via-entity-change-events)
 to check whether one specific voter is lagging behind the others. The rate-limiter
 metrics distinguish "leader can't keep up with apply" from "one follower is slow to
 ACK." Peer-latency metrics on the receiving controller distinguish "client
@@ -423,7 +423,7 @@ mesh that exists in current releases, not an actual join problem.
 * Certificate mismatch -- most commonly the new node's identity doesn't share the
   trust domain or doesn't match the SPIFFE ID format expected by the rest of the
   cluster. See [Bootstrapping -> Certificates](./bootstrapping/certificates.md)
-  and the [Common Bootstrapping Errors](./bootstrapping/certificates.md#common-bootstrapping-errors)
+  and the [Common bootstrapping errors](./bootstrapping/certificates.md#common-bootstrapping-errors)
   section.
 * Network reachability -- the new node can't reach existing controllers on the
   advertise port, or vice versa.
@@ -436,9 +436,9 @@ matched the CA for this node`). Check existing controllers' logs for matching
 errors when the join was attempted.
 
 **Fix.** Match the symptoms to the appropriate entry in
-[Common Bootstrapping Errors](./bootstrapping/certificates.md#common-bootstrapping-errors).
+[Common bootstrapping errors](./bootstrapping/certificates.md#common-bootstrapping-errors).
 
-## What to Alert On
+## What to alert on
 
 A minimal alerting setup that covers the operationally important cases without
 producing noise:
@@ -481,7 +481,7 @@ producing noise:
 ### Worth tracking but not alerting
 
 * **External commit-lag tracker** (see
-  [The Diagnostic Toolkit](#tracking-commit-lag-externally-via-entity-change-events))
+  [The diagnostic toolkit](#tracking-commit-lag-externally-via-entity-change-events))
   -- useful in dashboards and during incident investigation, but the lag values
   themselves are noisy and rate-of-change is what matters. Set alerts based on
   sustained lag (e.g., one controller more than N entries behind for more than M

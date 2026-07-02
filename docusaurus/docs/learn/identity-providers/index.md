@@ -1,5 +1,5 @@
 ---
-title: External Authentication
+title: External authentication
 sidebar_position: 100
 ---
 
@@ -25,7 +25,7 @@ provider.
 There are numerous excellent resources on the internet to learn more about OpenID Connect (OIDC), OAuth 2, and the 
 PKCE flow if you need or want to learn more.
  
-## Supported Identity Providers
+## Supported identity providers
 
 It is impossible to test all identity providers to ensure compatibility with OpenZiti. If the provider supports 
 OpenID Connect, OpenZiti should be able to integrate with the provider. If a provider is not listed below, follow 
@@ -41,7 +41,7 @@ Many popular identity providers already have guides on how to use them with Open
 * [Zitadel](@openzitidocs/how-to-guides/identity-providers/zitadel)
 * [... **View the full list of Identity Providers**](@openzitidocs/how-to-guides/identity-providers/)
 
-## Clients Supporting External Authentication
+## Clients supporting external authentication
 
 OpenZiti provides numerous clients that support using external jwt signers for authentication. The following 
 OpenZiti components all support using an external identity provider for authentication:
@@ -51,7 +51,7 @@ OpenZiti components all support using an external identity provider for authenti
 * [Ziti Desktop Edge for MacOS \[coming soon\]](../../how-to-guides/tunnelers/04-macos.md)
 * [Ziti Mobile Edge for iOS \[coming soon\]](../../how-to-guides/tunnelers/05-_iOS.md)
 
-## Authentication Policies
+## Authentication policies
 
 The OpenZiti Controller will come with a default authorization policy that allows for all primary authentication
 methods: username/password, certificate-based, exteral-jwt-signer. If you are familiar with OpenZiti concepts,

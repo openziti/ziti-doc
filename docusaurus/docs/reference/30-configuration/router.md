@@ -3,7 +3,7 @@ sidebar_label: Router
 sidebar_position: 30
 ---
 
-# Router Configuration Reference
+# Router configuration reference
 
 OpenZiti uses configuration files for controllers that are in the [YAML](https://yaml.org/) format.
 All configuration files are also subject to a set of [conventions](conventions.md) such as

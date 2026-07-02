@@ -1,8 +1,8 @@
 ---
-sidebar_label: Session Diagram
+sidebar_label: Session diagram
 ---
 
-# Sessions and Connections sequence diagram
+# Sessions and connections sequence diagram
 
 OpenZiti has a number of different connection and session types. It is important to understand the different scopes
 and uses of these connections in working with the project, developing, operating, and most importantly,

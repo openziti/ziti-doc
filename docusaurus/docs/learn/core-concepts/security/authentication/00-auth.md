@@ -39,7 +39,7 @@ While partially authenticated, a client has proven its primary identity but has 
 secondary factors. The set of operations available during partial authentication differs between OIDC and legacy
 authentication. See each section for details.
 
-## Primary Authentication
+## Primary authentication
 
 Primary authentication establishes the authenticating [Identity](80-identities.md). It is the first step in all
 authentication flows.
@@ -81,7 +81,7 @@ or via the [Edge Management API](@openzitidocs/reference/developer/api/edge-mana
 GET /edge/management/v1/authenticators
 ```
 
-## Secondary Authentication
+## Secondary authentication
 
 Secondary authentication provides additional assurance beyond the primary credential. It is represented as a set of
 [Authentication Queries](../sessions.md#authentication-queries) that the controller returns after successful primary
@@ -95,7 +95,7 @@ Supported secondary authentication factors:
 
 Secondary factors are configured per-identity through [Authentication Policies](50-authentication-policies.md).
 
-## API Sessions
+## API sessions
 
 After successful authentication, the controller issues a security token representing the authenticated session. This
 token is used to authorize all subsequent requests. The format of the token differs between OIDC and legacy

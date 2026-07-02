@@ -32,13 +32,13 @@ Authelia, there is currently no dashboard. All settings are derived from the Aut
 
 ---
 
-## Enable OIDC Within Authelia
+## Enable OIDC within Authelia
 
 Authelia supports acting as an identity provider. The 
 [Authelia documentation for providers](https://www.authelia.com/configuration/identity-providers/openid-connect/provider/)
 contains an example `identity_providers.oidc` configuration section and describes how to configure Authelia.
 
-### Generate a Key/Cert
+### Generate a key/cert
 
 Authelia also provides helper functionality to generate a cert/key in your configuration. For example, a command can be
 issued using a temporary Authelia container to generate a cert and key. That cert and key can then be used with
@@ -57,18 +57,18 @@ docker run --rm \
         --directory /output
 ```
 
-### Generate an HMAC Secret
+### Generate an HMAC secret
 
 Leverage openssl and generate a random set of 32 characters to serve as the HMAC secret for the OIDC configuration.
 ```bash
 openssl rand -hex 32 > /path/to/the/authelia/secrets/identity_providers.hmac
 ```
 
-### Add the OIDC Configuration
+### Add the OIDC configuration
 
 Using the cert and key generated above and the HMAC secret, configure Authelia as an identity provider. 
 
-#### An Example Configuration
+#### An example configuration
 
 Below is a very simple example configuration that would work with Authelia and OpenZiti. The following config also
 leverages the Authelia templating functionality and expects the following and environment variable named `DOMAIN` is
@@ -155,7 +155,7 @@ identity_providers:
           - authorization_code
 ```
 
-## Common Problems
+## Common problems
 
 If you do not set the client id and the audience to the same value, you may encounter an error such as:
 

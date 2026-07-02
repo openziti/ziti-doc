@@ -1,4 +1,4 @@
-# Endpoint Registration
+# Endpoint registration
 
 ```mermaid
 sequenceDiagram

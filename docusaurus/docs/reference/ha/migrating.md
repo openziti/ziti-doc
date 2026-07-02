@@ -3,12 +3,12 @@ sidebar_label: Migrating
 sidebar_position: 80
 ---
 
-# Migrating Controllers
+# Migrating controllers
 
 A controller can be moved from standalone mode to HA mode. It can also be returned
 from HA mode back to standalone mode.
 
-## Always Backup First!
+## Always backup first!
 
 :::warning
 Always back up controller configuration and create a database snapshot before attempting
@@ -23,7 +23,7 @@ First, ensure that the controller's certificates and configuration meet the requ
 * For certificate requirements see [Bootstrapping/Certificates](./bootstrapping/certificates.md).
 * For configuration requirements see [Bootstrapping/Configuration](./bootstrapping/configuration.md).
 
-### Data Model Migration
+### Data model migration
 The controller's data can be imported by using the `db:` setting in the config file.
 
 Leave the `db: </path/to/ctrl.db/>` setting in the controller config. When the controller
@@ -32,12 +32,12 @@ try to use the database in the configuration to initialize its data model.
 
 Once the controller is initialized, it should start up as normal and be usable.
 The cluster can now be expanded as explained in 
-[Operations/Growing the Cluster](./operations.md#growing-the-cluster).
+[Operations/Growing the cluster](./operations.md#growing-the-cluster).
 
 Once the cluster is established, future binary upgrades follow the rolling-upgrade
 procedure in [Upgrading](./upgrading.md), not the standalone-upgrade pattern.
 
-## HA to Standalone
+## HA to standalone
 
 This assumes that you have a database snapshot from an HA cluster. This could either
 be the ctrl-ha.db from the `dataDir`, or a snapshot created using the snapshot 

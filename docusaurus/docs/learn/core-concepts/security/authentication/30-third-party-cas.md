@@ -2,7 +2,7 @@
 sidebar_position: 30
 ---
 
-# 3rd Party CAs
+# 3rd party CAs
 
 3rd Party CAs allow external private key infrastructures (PKIs) to be imported into OpenZiti and used for client
 enrollment and authentication. OpenZiti does not allow external private keys from PKIs to be imported for 3rd party
@@ -128,7 +128,7 @@ The fields under `externalIdClaim` are as follows:
 - `index` - should multiple values still be available after `location`, `matcher,` and `parser` processing, the
   integer value here will be used from the set
 
-#### CA Create/Update REST API
+#### CA create/update REST API
 ```json
 {
   "name": "myCA",

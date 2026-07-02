@@ -3,7 +3,7 @@ sidebar_label: Upgrading
 sidebar_position: 75
 ---
 
-# Upgrading an HA Controller Cluster
+# Upgrading an HA controller cluster
 
 Upgrading a running HA cluster is a node-by-node rolling operation. There's no special
 cluster-wide procedure; you bring each controller down, replace its binary, and bring
@@ -29,7 +29,7 @@ At a glance:
 The rest of this page walks through each step, then covers routers and SDK clients,
 the Helm chart, and what to do if the upgrade goes wrong.
 
-## Before You Upgrade: Snapshot the Cluster
+## Before you upgrade: Snapshot the cluster
 
 Take a database snapshot before any controller binary upgrade. The controller will
 apply schema migrations on startup the first time the new binary runs, and that
@@ -62,7 +62,7 @@ Either way:
   directory must be writable from the controller's perspective. (For REST, the CLI
   just passes the path through; nothing is written on the client.)
 * The output is a bolt DB snapshot in the format the
-  [Total Cluster Loss](./failure-scenarios.md#total-cluster-loss) recovery paths
+  [Total cluster loss](./failure-scenarios.md#total-cluster-loss) recovery paths
   consume.
 * You only need one snapshot per upgrade -- the cluster's model is consistent across
   all controllers, so snapshotting more than one node is redundant.
@@ -70,7 +70,7 @@ Either way:
 Keep both the snapshot and the previous controller binary somewhere safe until
 you've confirmed the upgrade is working. They're the two ingredients of a rollback.
 
-## The Procedure: Rolling Upgrade
+## The procedure: Rolling upgrade
 
 Once you have a snapshot, upgrade controllers one at a time. Pick whichever node you
 want to upgrade first; the order doesn't change the read-only window or the end
@@ -119,7 +119,7 @@ Repeat for each remaining controller. When the last node finishes its upgrade an
 reports the new version, the cluster automatically exits read-only mode and writes
 work again.
 
-### Don't Worry About Order
+### Don't worry about order
 
 Two notes about ordering that come up:
 
@@ -133,7 +133,7 @@ Two notes about ordering that come up:
 The leadership-transfer step in (1) is purely about avoiding a brief leaderless
 window, not about ordering correctness.
 
-## The Read-Only Window
+## The read-only window
 
 The cluster enters read-only mode the moment any peer reports a different version
 from the local controller's, and stays there until every peer reports the same
@@ -179,7 +179,7 @@ total read-only duration. The window starts when the first upgraded peer joins a
 ends when the last unupgraded peer is replaced. The only way to make it shorter is
 to make the rolling upgrade itself faster.
 
-## Routers and SDK Clients
+## Routers and SDK clients
 
 Routers and SDK clients have no hard version gate with controllers. An older router
 can connect to a newer controller and vice versa; the connection succeeds and
@@ -266,7 +266,7 @@ single hosting router has nowhere to drain to, so quiesce on it will just stop n
 connections from being accepted until the upgrade finishes and the terminators come
 back.
 
-## Helm Chart Upgrades
+## Helm chart upgrades
 
 The official OpenZiti Helm chart (`openziti/helm-charts/charts/ziti-controller`)
 deploys an HA cluster as **one Helm release per controller node**, not one release
@@ -357,8 +357,8 @@ and is usually fast. Don't count on being able to catch the upgrade here.
 Once the new binary has run its schema migration, the on-disk state is in the new
 schema and the old binary won't understand it. The migration is one-way. Rollback
 means restoring from the pre-upgrade snapshot you took in
-[Before You Upgrade](#before-you-upgrade-snapshot-the-cluster), following the
-[Total Cluster Loss](./failure-scenarios.md#total-cluster-loss) procedure with the
+[Before you upgrade](#before-you-upgrade-snapshot-the-cluster), following the
+[Total cluster loss](./failure-scenarios.md#total-cluster-loss) procedure with the
 previous binary installed on each host.
 
 You'll lose anything written to the journal between when the snapshot was taken
