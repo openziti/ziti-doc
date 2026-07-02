@@ -77,7 +77,7 @@ The data model on the router is periodically snapshotted, so it doesn't need to
 be fully restored from a controller on every restart. 
 
 The location and frequency of snapshotting can be 
-[configured using the db and dbsaveintervalseconds properties](../30-configuration/router.md#edge).
+[configured using the db and dbSaveIntervalSeconds properties](../30-configuration/router.md#edge).
 
 ## Controller selection
 
