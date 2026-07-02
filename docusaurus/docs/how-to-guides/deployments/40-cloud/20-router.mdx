@@ -147,7 +147,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/ziti-router.service 
 2023-04-05-04:07:55-INFO-Service ziti-router.service enable successful.
 ```
 
-**Alternative way of creating router**
+#### Alternative way to create the router
 
 Instead of passing parameters through the command line to create routers, the parameters can be specified via environmental variables. Here is example on how to accomplish that:
 ```
@@ -259,9 +259,8 @@ Otherwise, this section provides CLI commands to create routers on the controlle
     ```
 
 ### 2.4.3 Register the router with link listener
-**Perform this on the Router VM**
 
-Use this procedure to create a Public Router with link listener (but without tunnel):
+Perform this procedure on the router VM to create a public router with a link listener (but without a tunnel):
 
 ```
 sudo ./ziti_router_auto_enroll -f -n --controllerFabricPort 8440 --controllerMgmtPort 8441 --assumePublic --disableHealthChecks <jwt content>
