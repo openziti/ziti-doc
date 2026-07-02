@@ -198,7 +198,7 @@ sequenceDiagram
     Ctrl-->>C: { access_token, id_token, refresh_token, expires_in }
 ```
 
-### Step 1 - Discover endpoints
+### Step 1: Discover endpoints
 
 Clients retrieve the OIDC discovery document to learn the authorization and token endpoint URLs:
 
@@ -206,7 +206,7 @@ Clients retrieve the OIDC discovery document to learn the authorization and toke
 GET /.well-known/openid-configuration
 ```
 
-### Step 2 - Initiate authorization
+### Step 2: Initiate authorization
 
 The client constructs a PKCE authorization request. The controller's OIDC client ID is `openziti`.
 
@@ -225,7 +225,7 @@ The optional `method` parameter hints at the intended primary authentication met
 `ext-jwt`). If omitted, the controller selects the method based on whether a client TLS certificate was presented.
 The authorization endpoint responds with a redirect to the appropriate login URL.
 
-### Step 3 - Submit primary credentials
+### Step 3: Submit primary credentials
 
 The controller redirects the client to a login URL of the form:
 
@@ -236,14 +236,14 @@ The controller redirects the client to a login URL of the form:
 The `authRequestID` value identifies the in-progress authentication request. The client POSTs credentials to the
 same URL. See [Primary authentication](#primary-authentication) for method-specific request formats.
 
-### Step 4 - Satisfy secondary factors (if required)
+### Step 4: Satisfy secondary factors (if required)
 
 If the identity's [Authentication Policy](50-authentication-policies.md) requires secondary factors, the login
 endpoint returns HTTP `200` with a JSON body listing the outstanding
 [Authentication Queries](../sessions.md#authentication-queries) rather than redirecting to the callback. The client
 satisfies each query and resubmits. See [Secondary authentication](#secondary-authentication) for details.
 
-### Step 5 - Exchange code for tokens
+### Step 5: Exchange code for tokens
 
 Once all authentication factors are satisfied, the controller redirects to the client's `redirect_uri` with an
 authorization code. The client exchanges the code for tokens:

@@ -24,7 +24,7 @@ All [networks](@openziti2x/intro) require
 a [controller](../../how-to-guides/deployments/10-linux/10-controller/10-deploy.mdx). Without a controller, edge routers won't be able to authorize new
 connections rendering a new network useless. You must have a controller running.
 
-### Required - Docker named volume
+### Required: Docker named volume
 
 Running Ziti locally via Docker will require you to create a "named volume" in docker where any and all persistent files
 will be saved.
@@ -34,7 +34,7 @@ Create the named volume now using this command:
 docker volume create myPersistentZitiFiles
 ```
 
-### Required - Docker network
+### Required: Docker network
 
 Other containers on the Docker network will **need** to address the controller. To do this, the container requires
 a network alias. This forces you to add the container to a network which is not the default network. 
@@ -50,7 +50,7 @@ this requires predictable container names on the docker network. When looking at
 options are the ones controlling the network name and network alias on the network:
 `--network myFirstZitiNetwork --network-alias ziti-controller`.
 
-### Optional - expose controller port
+### Optional: Expose controller port
 
 Docker containers by default won't expose any ports that you could use from your local machine. If you want to be able
 to use this controller from outside of Docker, you'll need to export the controller's API port. That's easy to do, 

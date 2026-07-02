@@ -44,7 +44,7 @@ the permanent identity JSON file will be installed by running the `enroll` comma
 
 <CreateCliExampleMd/>
 
-### 3rd party CA - overview
+### 3rd party CA: Overview
 
 The controller is capable of using an existing PKI for authentication and authorization rather than the PKI
 configured in the controller.  Certificates that are not controlled by the controller are referred to as "3rd
@@ -80,7 +80,7 @@ Adding a certificate to the controller is easy using the console.
 </TabItem>
 </Tabs>
 
-#### 3rd party CA - one time token
+#### 3rd party CA: One time token
 
 3rd Party CA OTT enrollment is closely related to [OTT Enrollment](#one-time-token-ott). The main difference is the
 utilization of a 3rd party CA certificate rather than the configured edge CA and PKI. In this method, the system
@@ -93,7 +93,7 @@ Similar to the [OTT Enrollment](#one-time-token-ott) process, identities must be
 order to generate one time token required and to create the jwt that can be delivered to enrolling devices. This means
 that the provisioning of the identities and client certificates must be coordinated. Identities can be enrolled with a one time token flow similar to the [one time token flow](#one-time-token-ott).
 
-#### 3rd party CA - auto enrolled
+#### 3rd party CA: Auto enrolled
 
 CA Auto Enrollment is useful in situations where devices are provisioned with certificates en-mass that need to be able
 to register as identities within the edge. This enrollment method allows for device provisioning processes to skip the

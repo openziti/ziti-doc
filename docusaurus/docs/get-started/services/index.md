@@ -15,13 +15,13 @@ Before we get into using OpenZiti, let's take a moment and review what the solut
 principles. We will use some sort of http client, connect it over a network. The exact network does not matter. OpenZiti is applicable 
 to any network be it host network, local network, the internet, private network, etc. 
 
-### Simple HTTP solution overview - before Ziti<br/>
+### Simple HTTP solution overview: Before OpenZiti
 ![before OpenZiti](./before-openziti.png)
 
 The important aspect of this diagram is to notice that the HTTP server is provisioned on the [underlay](../../reference/glossary.mdx#underlay)
 network and requires a hole through the firewall to allow clients to connect.
 
-### Simple HTTP solution - after Ziti
+### Simple HTTP solution: After OpenZiti
 ![after OpenZiti](./after-openziti.png)
 
 After OpenZiti, we can see that there is no longer an open firewall to allow access to the HTTP server. Instead, the HTTP client 
@@ -36,11 +36,11 @@ With an understanding of what we are looking to accomplish in this guide, let's 
 
 ## Implementing the service
 
-### Prerequisite - OpenZiti
+### Prerequisite: OpenZiti
 You will need an OpenZiti overlay network in place before you can complete this guide. If you do not have an
 OpenZiti overlay network provisioned yet, [follow a quickstart](@openziti2x/get-started) and get a network up and running.
 
-### Prerequisite - HTTP server
+### Prerequisite: HTTP server
 You'll need an HTTP server which you plan to connect your HTTP client to. There are numerous ways to 
 bring an HTTP server online but for this guide I have chosen to use docker and deploy a very simple HTTP application. The server will 
 simply print out the "docker whale" when it's connected to. (This guide will not teach you how to install docker, nor how to install an 
@@ -50,11 +50,11 @@ container with: `docker run -d --rm --name web-test -p 80:8000 openziti/hello-wo
 If you have used the [Local - Docker Compose](../network/local-docker-compose.mdx) quickstart 
 to provision your OpenZiti overlay network, you will have already this HTTP server available to use immediately. 
 
-### Prerequisite - HTTP client tunneler
+### Prerequisite: HTTP client tunneler
 You will need to install an [OpenZiti tunneler](../../how-to-guides/tunnelers/index.mdx) on the machine which represents the HTTP client. Later on 
 we'll create an identity for this tunneler and use the identity to access the HTTP server. 
 
-### Prerequisite - HTTP server tunneler
+### Prerequisite: HTTP server tunneler
 You will need to install an [OpenZiti tunneler](../../how-to-guides/tunnelers/index.mdx) on the machine which represents the HTTP server. Later on
 we'll create an identity for this tunneler and use the identity to access the HTTP server. 
 
@@ -63,7 +63,7 @@ If you used the docker-compose quickstart the "private" edge routers are configu
 another tunneler nor will you need to create another identity.
 :::
 > 
-### Prerequisite - CLI
+### Prerequisite: CLI
 If you plan to use the `ziti` CLI tool, you will need to download and get the `ziti` executable on your path. If you have 
 followed the [Local - No Docker](../network/local-no-docker.mdx) quickstart, this will have been done for you and the executable will be located in `~/.ziti/quickstart/$(hostname -s)/ziti-bin/`.
 Also, the .env file the quickstart emits can be used to put this folder on your path by simply sourcing that file. For example, if you
@@ -90,7 +90,7 @@ adding /var/openziti/ziti-bin to the path
 
 ---
 
-### Configuring the overlay - overview
+### Configuring the overlay: Overview
 
 With our overlay network ready and with two tunneling applications deployed and ready to be used, we can start to configure our solution.
 
