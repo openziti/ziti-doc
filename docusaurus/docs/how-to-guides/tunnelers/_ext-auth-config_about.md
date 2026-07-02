@@ -1,4 +1,4 @@
-## Configuring external auth in OpenZiti
+## Configure external auth in OpenZiti
 
 To configure an External Provider for use with an OpenZiti tunneler, create an `ext-jwt-signer`.
 

@@ -16,7 +16,7 @@ software from identifying the executable as malicious.
 Download the executable from GitHub and verify the SHA256 hash of the file to ensure it has not been
 tampered with from when it was released. Once installed, enroll your first identity.
 
-## Adding identities
+## Add identities
 
 * [One-Time Token](./add-ids/10-ott.md) - Add an identity with a single use token. The most common option
 * [Third-Party CA](./add-ids/20-third-party-ca.mdx) - Add an identity using a third-party CA

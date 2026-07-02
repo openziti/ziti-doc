@@ -1,12 +1,12 @@
 ---
-title: Renewing leaf certificates
+title: Renew leaf certificates
 sidebar_label: Renewed certs
 id: renew-cert
 ---
 
 The network uses a combination of client, server, and CA certificates in its PKI. The most important certificates to renew are routers' client and server certificates and identities' client certificates.
 
-## Creating new certs
+## Create new certs
 
 ### Set up environment variables
 

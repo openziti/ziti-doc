@@ -38,7 +38,7 @@ curl -s https://my.openziti.controller.local:443/network-jwts | jq -r .data[].to
 ```
 </Details>
 
-## Adding the identity
+## Add the identity
 
 With the JWT on the Windows machine to be added, click on the "ADD IDENTITY" button in the top right of the screen. 
 After the context menu pops up choose "With JWT". In the file dialog, select the network JWT file and the identity will
@@ -46,7 +46,7 @@ be added to the system.
 
 ![windows-with-jwt](/img/ext-jwt-signer/windows-with-jwt.png)
 
-## Authenticating
+## Authenticate
 
 Once an identity is added for a network leveraging an external provider. [See Authenticating](./50-authenticating.mdx)
 for more details about how to authenticate to the network.

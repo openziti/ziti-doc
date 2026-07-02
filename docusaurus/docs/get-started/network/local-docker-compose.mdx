@@ -60,7 +60,7 @@ If you are running Void linux, you need to modify the docker-compose file, other
 Please see [this discussion](https://openziti.discourse.group/t/docker-compose-quickstart-setup-edge-controller-issue/601/10) for more information
 :::
 
-## Running via Docker Compose
+## Run via Docker Compose
 
 Once the compose file is downloaded and the `.env` file exists, you'll be able to start this network using
 `docker compose` just like you can with any other compose file: `docker compose up`
@@ -74,7 +74,7 @@ docker compose --project-name docker up
 ```
 :::
 
-### Stopping the network
+### Stop the network
 
 This docker-compose file will generate a volume mount as well as a **two** docker networks. When you issue 
 `  --project-name docker down` the volume mapping will not be removed. If you wish to remove the volume, 
@@ -110,7 +110,7 @@ topology is designed to approximate, very loosely, what it would be like to have
 network would approximate the internet itself, the blue network would represent a cloud provider's private network 
 (such as AWS) and the red network could represent another cloud provider network (like Azure). Those details are not 
 important, the important part is that the networks are totally private to one another. See more on this topic below in 
-the "Testing" section.
+the "Test the network" section.
 
 ####  Purple network
 
@@ -118,7 +118,7 @@ There is no Docker network named "purple" in the compose file, it's entirely a l
 clarity. All the assets in the purple network are in both the blue and red docker networks (which is why it's
 referred to as purple). The assets in the purple network need to be in both the red and blue networks because the 
 assets located in the blue and red networks need to communicate to the public edge routers and also need to communicate 
-to the controller. If that's confusing, see the "Testing" section below which will hopefully make this more clear.
+to the controller. If that's confusing, see the "Test the network" section below which will hopefully make this more clear.
 
 #### Red network
 
@@ -139,9 +139,9 @@ The `ziti-fabric-router-br` exists to illustrate that you can create edge router
 This is the only router which can communicate to **all** the other routers. The Ziti mesh may choose to use this router
 if the algorithm indicates it's the fastest path. Perhaps we'll see more about this in future docs.
 
-## Testing the network
+## Test the network
 
-### Using Docker locally
+### Use Docker locally
 
 A quick note. If you are not well-versed with Docker you might forget that exposing ports in Docker is one thing,
 but you'll also need to have a hosts entry for the containers you want to access from outside the Docker
@@ -153,7 +153,7 @@ sure you add a host entry. In the `docker compose` example you will want/need ho
 
 And if you want to expose any other routers - of course you'll need/want to have entries for those as well.
 
-### Testing
+### Test
 
 Now that we have used `docker compose` to deploy a relatively complicated network, we can start testing it out to make
 sure everything is in place and looks correct. Let's try it out.

@@ -19,7 +19,7 @@ Another benefit of HSMs is that they are focused on security. The keys stored in
 designed to not be able to be exported. This means that there's no chance for these keys to be extracted remotely and
 used outside of the HSM itself, further increasing the security of these important keys.
 
-## Enabling a Ziti endpoint using an HSM
+## Enable a Ziti endpoint using an HSM
 
 Enabling a Ziti endpoint to utilize an HSM is straight forward but does require a bit of technical understanding. We
 have provided a couple of guides on how to enable an HSM with Ziti. The Ziti SDKs all interact with HSMs which support

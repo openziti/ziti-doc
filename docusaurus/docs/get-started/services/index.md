@@ -34,7 +34,7 @@ With an understanding of what we are looking to accomplish in this guide, let's 
 
 ---
 
-## Implementing the service
+## Implement the service
 
 ### Prerequisite: OpenZiti
 You will need an OpenZiti overlay network in place before you can complete this guide. If you do not have an
@@ -90,7 +90,7 @@ adding /var/openziti/ziti-bin to the path
 
 ---
 
-### Configuring the overlay: Overview
+### Configure the overlay: Overview
 
 With our overlay network ready and with two tunneling applications deployed and ready to be used, we can start to configure our solution.
 
@@ -117,7 +117,7 @@ Here is an overview of the steps we will follow:
 We can do all these steps using the OpenZiti CLI tool: `ziti`. We can also accomplish this using the OpenZiti Admin Console. We'll 
 demonstrate doing it both ways now.
 
-### Configuring the overlay using the `ziti` CLI
+### Configure the overlay using the `ziti` CLI
 
 Here you can find the steps necessary to configure your overlay network. You can copy/paste and run them all at once, or you can go 
 slowly and run one command at a time to see how each command works. These commands are all based on a shell similar to bash. If you are 
@@ -253,7 +253,7 @@ Hello World
 
 Optionally, you may [install the ZAC](../zac/index.mdx) to manage your network with a UI.
 
-### Testing everything works
+### Test everything works
 
 Once you have set everything up As shown in the last step above - at this point you should be able to run a curl
 statement or use a browser to access "http.ziti".
