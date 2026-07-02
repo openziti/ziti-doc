@@ -16,26 +16,26 @@ Ziti services take several forms in deployment environments. In this guide, we w
 ## 3.1 Introduction
 
 In this guide, we will demonstrate ziti services with the following examples:
-- connection between two identities running ziti-edge-tunnel ([Network Diagram 1](#311-network-diagram-1))
-- connection between ziti-edge-tunnel and a ziti-router (with tunnel enabled)([Network Diagram 2](#312-network-diagram-2))
-- connection from a non-OpenZiti endpoint using router as GW([Network Diagram 2](#312-network-diagram-2))
-- access a server from a SDK enabled application ([Network Diagram 3](#313-network-diagram-3))
-- access a SDK enabled application with an ziti client ([Network Diagram 4](#314-network-diagram-4))
-- SDK client connects to SDK server ([Network Diagram 5](#315-network-diagram-5))
+- connection between two identities running ziti-edge-tunnel ([Network diagram 1](#311-network-diagram-1))
+- connection between ziti-edge-tunnel and a ziti-router (with tunnel enabled)([Network diagram 2](#312-network-diagram-2))
+- connection from a non-OpenZiti endpoint using router as GW([Network diagram 2](#312-network-diagram-2))
+- access a server from a SDK enabled application ([Network diagram 3](#313-network-diagram-3))
+- access a SDK enabled application with an ziti client ([Network diagram 4](#314-network-diagram-4))
+- SDK client connects to SDK server ([Network diagram 5](#315-network-diagram-5))
 
-### 3.1.1 Network Diagram 1
+### 3.1.1 Network diagram 1
 ![Diagram](/img/public_cloud/Services01.jpg)
 
-### 3.1.2 Network Diagram 2
+### 3.1.2 Network diagram 2
 ![Diagram](/img/public_cloud/Services02.jpg)
 
-### 3.1.3 Network Diagram 3
+### 3.1.3 Network diagram 3
 ![Diagram](/img/public_cloud/Services02-3.jpg)
 
-### 3.1.4 Network Diagram 4
+### 3.1.4 Network diagram 4
 ![Diagram](/img/public_cloud/Services02-4.jpg)
 
-### 3.1.5 Network Diagram 5
+### 3.1.5 Network diagram 5
 ![Diagram](/img/public_cloud/Services02-5.jpg)
 
 ## 3.2 Set up VMs for ziti network
@@ -44,9 +44,9 @@ In this guide, we will demonstrate ziti services with the following examples:
 
 #### 3.2.1.2 CLI
 
-You will need to login to controller to provision identities and service. Please make sure you are performing the action on the right node.
+You will need to log in to the controller to provision identities and service. Please make sure you are performing the action on the right node.
 
-On the controller, before performing the CLI command, you will need to login first:
+On the controller, before performing the CLI command, you will need to log in first:
 ```text
 zitiLogin
 ```
@@ -70,7 +70,7 @@ error: error listing https://161.35.108.218:8441/edge/management/v1/config-types
 We need two routers to complete our example in this guide.
 
 - Public edge router (**pub-er**) was setup in the [Router setup section](../deployments/40-cloud/20-router.mdx#23-create-and-set-up-router-directly-on-router-vm), this router provides fabric and edge connection. It does not have tunneler functionality. Make sure you also modify the [Firewall](/how-to-guides/deployments/40-cloud/20-router.mdx#29-firewall) for this router.
-- Local edge router (**local-er**). Please follow the [Router guide](../deployments/40-cloud/20-router.mdx) to setup a [Router with edge listener and tunneler](../deployments/40-cloud/20-router.mdx#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to setup [Resolver](/how-to-guides/deployments/40-cloud/20-router.mdx#26-fix-the-resolver), [Route Table](/how-to-guides/deployments/40-cloud/20-router.mdx#27-route-table), [Source and Destination Check](/how-to-guides/deployments/40-cloud/20-router.mdx#28-source-and-destination-check) and [Firewall](/how-to-guides/deployments/40-cloud/20-router.mdx#29-firewall).
+- Local edge router (**local-er**). Please follow the [Router guide](../deployments/40-cloud/20-router.mdx) to set up a [Router with edge listener and tunneler](../deployments/40-cloud/20-router.mdx#2343-create-the-router-with-edge-listener-and-tunneler). For this router, you will need to set up [Resolver](/how-to-guides/deployments/40-cloud/20-router.mdx#26-fix-the-resolver), [Route Table](/how-to-guides/deployments/40-cloud/20-router.mdx#27-route-table), [Source and Destination Check](/how-to-guides/deployments/40-cloud/20-router.mdx#28-source-and-destination-check) and [Firewall](/how-to-guides/deployments/40-cloud/20-router.mdx#29-firewall).
 
 #### 3.2.2.1 ZAC
 On the ZAC **ROUTERS** screen, you can check your router and make sure it is created correctly. You can also check the identity associated with the router by clicked on **IDENTITIES**
@@ -126,11 +126,11 @@ Since the **pub-er** is also a link listener, you should also check the link lis
 results: 1-3 of 3
 ```
 
-### 3.2.3 Tunnelers/Identities
+### 3.2.3 Tunnelers/identities
 
 We need two tunnelers for our testing. Please follow **[Create a VM section](/how-to-guides/deployments/40-cloud/10-controller.mdx#11-create-a-vm-to-be-used-as-the-controller)** of the Controller Guide to create two VMs running Ubuntu 22.04.
 
-#### 3.2.3.1 Create Identity with ZAC
+#### 3.2.3.1 Create identity with ZAC
 
 To create Identities on ZAC, go to the Identities screen, and press **+** icon. On the **CREATE IDENTITY** widget, enter the **NAME** of the identity (Required and has to be unique). Leave the **IDENTITY TYPE** as "Device". Leave the **ENROLLMENT TYPE** as "One Time Token". Fill in other optional fields and press **SAVE**.
 
@@ -145,7 +145,7 @@ Once the identities are created, you can check the identities and download the *
 ![Diagram](/img/public_cloud/Services06-CreateService.jpg)
 
 
-#### 3.2.3.2 Create Identity with CLI
+#### 3.2.3.2 Create identity with CLI
 
 Create two identities (ingress-tunnel, egress-tunnel) on the **controller**:
 
@@ -154,9 +154,9 @@ ziti edge create identity ingress-tunnel -o ingress-tunnel.jwt
 ziti edge create identity egress-tunnel -o egress-tunnel.jwt
 ```
 
-#### 3.2.3.3 Register Identities
+#### 3.2.3.3 Register identities
 
-Login to your VMs created earlier, follow [Install Linux Package](../../how-to-guides/tunnelers/60-linux/index.mdx) **Ubuntu Jammy 22.04** section to install and register your ziti-edge-tunnel.
+Log in to your VMs created earlier, follow [Install Linux Package](../../how-to-guides/tunnelers/60-linux/index.mdx) **Ubuntu Jammy 22.04** section to install and register your ziti-edge-tunnel.
 
 After the tunnel is registered, check the status and make sure it is running
 
@@ -174,7 +174,7 @@ After the tunnel is registered, check the status and make sure it is running
              └─2641 /opt/openziti/bin/ziti-edge-tunnel run --verbose=2 --dns-ip-range=100.64.0.1/10 --identity-dir=/opt/openziti/etc/identities
 ```
 
-## 3.3 Create Edge Router Policy
+## 3.3 Create edge router policy
 
 By default, the system created an edge router policy to bind all identities to any routers tag with **#public** attribute. So, we need to add #public to our router (pub-er). 
 
@@ -184,7 +184,7 @@ From the **ROUTERS** screen, you can choose **Router Policies** to display the e
 
 ![Diagram](/img/public_cloud/Services07-router-policy.jpg)
 
-To add attribute "public" to the router, choose your router from the **ROUTERS** screen, click on **...** and choose **Edit**
+To add attribute "public" to the router, choose your router from the **ROUTERS** screen, click **...** and choose **Edit**
 
 ![Diagram](/img/public_cloud/Services08-router-update.jpg)
 
@@ -239,7 +239,7 @@ Add "public" attribute to "pub-er" router.
 results: 1-3 of 3
 ```
 
-## 3.4 Set up Tunneled SSH Connection
+## 3.4 Set up tunneled SSH connection
 
 In this section, we will be showing how to configure ziti to establish ssh service via our network. We will be using a pseudo dns name (t2tssh.ziti) to establish this connection.  The intercept side (ingress) will be ingress-tunnel, the server side (egress) will be egress-tunnel.
 
@@ -292,7 +292,7 @@ If the command finished successfully, you will see two configs.
 results: 1-2 of 2
 ```
 
-### 3.4.3 Create Service
+### 3.4.3 Create service
 
 Now we need to put these two configs into a service. We going to name the service "t2tssh":
 
@@ -323,7 +323,7 @@ results: 1-1 of 1
 
 Please note, the **Encryption = true** and **smartrouting** are default setting.
 
-### 3.4.4 Create Bind Service policy
+### 3.4.4 Create bind service policy
 
 Now we need to specify which tunneler (in our case, **egress-tunnel**)is going to host the service by setting up a bind service policy
 
@@ -339,7 +339,7 @@ Create a **service policy** from **MANAGE SERVICE POLICIES** screen:
 ziti edge create service-policy t2tssh.bind Bind --service-roles '@t2tssh' --identity-roles "@egress-tunnel"
 ```
 
-### 3.4.5 Create Dial Service policy
+### 3.4.5 Create dial service policy
 
 Now we need to specify the intercept side tunneler (**ingress-tunnel**) for the service by setting up a dial service policy
 
@@ -382,7 +382,7 @@ Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has
 
 ### 3.4.6 Verify the connection
 
-Login to the intercept side tunneler (**ingress-tunnel**) node, you should be able to ssh to the server (**egress-tunnel**) by using dns name "t2tssh.ziti"
+Log in to the intercept side tunneler (**ingress-tunnel**) node, you should be able to ssh to the server (**egress-tunnel**) by using dns name "t2tssh.ziti"
 
 ```
 root@ingress-tunnel:~# ssh t2tssh.ziti
@@ -426,13 +426,13 @@ Connection to t2tssh.ziti closed.
 root@ingress-tunnel:~#
 ```
 
-## 3.5 Setup Tunnel to ERT http connection
+## 3.5 Setup tunnel to ERT http connection
 
 Routers have an optional tunneler function. In this section, we will demonstrate a connection between a tunneler and such a router with an enabled tunneler.
 
 The procedure is similar to tunnel to tunnel service, so please refer to that section for a detailed explanation of each step.
 
-Please refer to [Network Diagram 2](#312-network-diagram-2) for our test setup.
+Please refer to [Network diagram 2](#312-network-diagram-2) for our test setup.
 
 ### 3.5.1 Create a host.v1 config
 
@@ -470,7 +470,7 @@ ziti edge create config t2eintconf intercept.v1 '{"protocols": ["tcp"], "address
 │ uJUtyXI5XH1wSsSCiCARp  │ t2ehostconf │ host.v1      │
 ```
 
-### 3.5.3 Create Service
+### 3.5.3 Create service
 
 Now we need to put these two configs into a service. We going to name the service "t2ehttp":
 
@@ -491,7 +491,7 @@ ziti edge create service t2ehttp -c t2eintconf,t2ehostconf
 │ 5FI8Aw0IQ7xaUMgH2rKvps │ t2ehttp │ true       │ smartrouting        │            │
 ```
 
-### 3.5.4 Create Bind Service policy
+### 3.5.4 Create bind service policy
 
 #### 3.5.4.1 ZAC
 
@@ -503,7 +503,7 @@ ziti edge create service t2ehttp -c t2eintconf,t2ehostconf
 ziti edge create service-policy t2ehttp.bind Bind --service-roles '@t2ehttp' --identity-roles "@local-er"
 ```
 
-### 3.5.5 Create Dial Service policy
+### 3.5.5 Create dial service policy
 
 Now we need to specify the intercept side tunneler (**egress-tunnel**) for the service by setting up a dial service policy
 
@@ -541,7 +541,7 @@ Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has
 
 ### 3.5.6 Verify the connection
 
-Login to the router (**local-er**), setup a file to send via http.
+Log in to the router (**local-er**), set up a file to send via http.
 
 ```
 root@local-er:~# cat >hello.txt
@@ -561,7 +561,7 @@ Then start the http server.
 python3 -m http.server 8080
 ```
 
-Login to the intercept side tunneler (**egress-tunnel**) node.
+Log in to the intercept side tunneler (**egress-tunnel**) node.
 
 ```
 root@egress-tunnel:~# curl http://10.124.0.2/hello.txt
@@ -580,11 +580,11 @@ root@egress-tunnel:~#
 
 In this section, we demonstrated intercepting http (port 80) request to an IP address and forward the request to a remote http server listening on the port 8080 via ziti network.
 
-## 3.6 Setup Connection from a non-OpenZiti client
+## 3.6 Setup connection from a non-OpenZiti client
 
 ### 3.6.1 Introduction
 
-In this section, we will demonstrate how to setup non-OpenZiti client to use the ziti service. Please refer to [Network Diagram 2](#312-network-diagram-2) for our test setup.
+In this section, we will demonstrate how to set up non-OpenZiti client to use the ziti service. Please refer to [Network diagram 2](#312-network-diagram-2) for our test setup.
 
 **You need to create a VM (Non-OpenZiti-Client) in the same data center as "local-er" for this test.**
 
@@ -640,7 +640,7 @@ ziti edge create config e2tintconf intercept.v1 '{"protocols": ["tcp"], "address
 │ 5kXnoEoMrfReOou8lty9zj │ e2tintconf  │ intercept.v1 │
 ```
 
-### 3.6.4 Create Service
+### 3.6.4 Create service
 
 Now we need to put these two configs into a service. We going to name the service "t2ehttp":
 
@@ -661,7 +661,7 @@ ziti edge create service e2thttp -c e2thostconf,e2tintconf
 │ 2uphDaBfIo7ubj6GhV8r93 │ e2thttp │ true       │ smartrouting        │            │
 ```
 
-### 3.6.5 Create Bind Service policy
+### 3.6.5 Create bind service policy
 
 #### 3.6.5.1 ZAC
 
@@ -673,7 +673,7 @@ ziti edge create service e2thttp -c e2thostconf,e2tintconf
 ziti edge create service-policy e2thttp.bind Bind --service-roles '@e2thttp' --identity-roles "@egress-tunnel"
 ```
 
-### 3.6.6 Create Dial Service policy
+### 3.6.6 Create dial service policy
 
 Now we need to specify the intercept side tunneler (**local-er**) for the service by setting up a dial service policy
 
@@ -711,9 +711,9 @@ Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has
 
 ### 3.6.7 Verify the connection
 
-#### 3.6.7.1 Setup Server Side
+#### 3.6.7.1 Setup server side
 
-Login to the Client (**egress-tunnel**), setup a file to send via http.
+Log in to the client (**egress-tunnel**), set up a file to send via http.
 
 ```
 root@egress-tunnel:~# cat >hello.txt
@@ -749,7 +749,7 @@ Then login to the non-OpenZiti client machine (**Non-OpenZiti-Client**).
 >
 <TabItem value="DigitalOcean">
 
-**setup the route first**. The route is via our ER in the same DC (10.124.0.2)
+**set up the route first**. The route is via our ER in the same DC (10.124.0.2)
 
 ```
 root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.124.0.2
@@ -767,7 +767,7 @@ root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.124.0.2
 </TabItem>
 <TabItem value="IBM">
 
-**setup the route first**. The route is via our ER in the same DC (10.162.209.220)
+**set up the route first**. The route is via our ER in the same DC (10.162.209.220)
 
 ```
 root@Non-OpenZiti-Client:~# sudo ip route add 11.11.11.11/32 via 10.162.209.220
@@ -939,7 +939,7 @@ sudo systemctl restart systemd-resolved.service
 **Set up the route first**.
 
 - The route is via our ER in the same DC (10.124.0.2)
-- We need to setup the route for 100.64/10 subnet
+- We need to set up the route for 100.64/10 subnet
 
     ```
     root@Non-OpenZiti-Client:~# sudo ip route add 100.64.0.0/10 via 10.124.0.2
@@ -964,7 +964,7 @@ sudo systemctl restart systemd-resolved.service
 **Set up the route first**.
 
 - The route is via our ER in the same DC (10.162.209.220)
-- We need to setup the route for 100.64/10 subnet
+- We need to set up the route for 100.64/10 subnet
 
     ```
     root@Non-OpenZiti-Client:~# sudo ip route add 100.64.0.0/10 via 10.162.209.220
@@ -993,9 +993,9 @@ root@Non-OpenZiti-Client:~#
 
 ### 3.7.1 Introduction
 
-In this section, we will demonstrate how to setup OpenZiti service to access a server from a SDK enabled application. Please refer to [Network Diagram 3](#313-network-diagram-3) for our test setup.
+In this section, we will demonstrate how to set up OpenZiti service to access a server from a SDK enabled application. Please refer to [Network diagram 3](#313-network-diagram-3) for our test setup.
 
-### 3.7.2 SDK Application client
+### 3.7.2 SDK application client
 
 We are going to use an existing [SDK implementation](https://github.com/openziti/sdk-golang/tree/main/example/curlz) for this guide.
 
@@ -1028,7 +1028,7 @@ If all goes well, you will find a **curlz** binary under that directory.
 
 Next, you need to create an identity for this SDK Application.
 
-Login to the controller
+Log in to the controller
 
 ```bash
 # source the aliases for ziti (do it the first time you login to the VM)
@@ -1053,7 +1053,7 @@ Used address **loopback** as host side destination, and port **8000** as destina
 ziti edge create config curlz.hostv1 host.v1 '{"protocol":"tcp", "address":"localhost","port":'8000'}'
 ```
 
-### 3.7.4 Create Service
+### 3.7.4 Create service
 
 Now we need to put the config into a service. We going to name the service "curlzService":
 
@@ -1061,7 +1061,7 @@ Now we need to put the config into a service. We going to name the service "curl
 ziti edge create service curlzService --configs "curlz.hostv1"
 ```
 
-### 3.7.5 Create Bind Service policy
+### 3.7.5 Create bind service policy
 
 Specify host-side endpoints by using the "Bind" service policy
 
@@ -1069,7 +1069,7 @@ Specify host-side endpoints by using the "Bind" service policy
 ziti edge create service-policy curlz-client-bind Bind --identity-roles '@egress-tunnel' --service-roles '@curlzService'
 ```
 
-### 3.7.6 Create Dial Service policy
+### 3.7.6 Create dial service policy
 
 Now we need to specify the intercept side SDK application (**#curlz.clients**) for the service by setting up a dial service policy
 
@@ -1095,9 +1095,9 @@ OKAY : egress-tunnel (1) -> curlzService (1) Common Routers: (1/1) Dial: N Bind:
 
 Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has at least 1 Common Routers.
 
-### 3.7.7 Setup Server Side
+### 3.7.7 Setup server side
 
-Login to the Client (**egress-tunnel**), make sure "hello.txt" is still there from previous step. If not, [recreate it](#367-verify-the-connection).
+Log in to the client (**egress-tunnel**), make sure "hello.txt" is still there from previous step. If not, [recreate it](#367-verify-the-connection).
 
 Then start the http server.
 
@@ -1142,9 +1142,9 @@ You have successfully connected SDK application to the server.
 
 ### 3.8.1 Introduction
 
-In this section, we will demonstrate how to setup OpenZiti service to access a SDK enabled application via ziti-tunnel. Please refer to [Network Diagram 4](#314-network-diagram-4) for our test setup.
+In this section, we will demonstrate how to set up OpenZiti service to access a SDK enabled application via ziti-tunnel. Please refer to [Network diagram 4](#314-network-diagram-4) for our test setup.
 
-### 3.8.2 SDK Application server
+### 3.8.2 SDK application server
 
 We are going to use an existing [SDK implementation](https://github.com/openziti/sdk-golang/tree/main/example/simple-server) for this guide.
 
@@ -1179,7 +1179,7 @@ By examining the code (simple-server.go), you can see we are using port **8080**
 
 Next, you need to create an identity for this SDK Application server.
 
-Login to the controller
+Log in to the controller
 
 ```bash
 # source the aliases for ziti (do it the first time you login to the VM)
@@ -1209,7 +1209,7 @@ The intercept config is used to instruct the intercept-side tunneler how to corr
 ziti edge create config simple.interceptv1 intercept.v1 '{"protocols": ["tcp"], "addresses": ["simpleService.ziti"], "portRanges": [{"low": 80, "high": 80}]}'
 ```
 
-### 3.8.5 Create Service
+### 3.8.5 Create service
 
 Usually we need to put two configs (host.v1 and intercept.v1) into a service. Since the SDK application server does not need a host.v1 config, we only need to put intercept.v1 (where the traffic comes from) into the service.
 
@@ -1217,7 +1217,7 @@ Usually we need to put two configs (host.v1 and intercept.v1) into a service. Si
 ziti edge create service simpleService --configs "simple.interceptv1" --role-attributes simple-service
 ```
 
-### 3.8.6 Create Bind Service policy
+### 3.8.6 Create bind service policy
 
 Specify host side endpoints by using the "Bind" service policy
 
@@ -1225,7 +1225,7 @@ Specify host side endpoints by using the "Bind" service policy
 ziti edge create service-policy simple-client-bind Bind --identity-roles '#simpleserver.servers' --service-roles '#simple-service'
 ```
 
-### 3.8.7 Create Dial Service policy
+### 3.8.7 Create dial service policy
 
 The dial policy specifies intercept side endpoints.
 
@@ -1251,9 +1251,9 @@ OKAY : ingress-tunnel (1) -> simpleService (1) Common Routers: (1/1) Dial: Y Bin
 
 Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has at least 1 Common Routers.
 
-### 3.8.8 Setup Server Side
+### 3.8.8 Setup server side
 
-Login to the "[sdk-application-server](#382-sdk-application-server)" node, make sure you are under the "simple-server" directory, start the server by using the registered server identity and service name.
+Log in to the "[sdk-application-server](#382-sdk-application-server)" node, make sure you are under the "simple-server" directory, start the server by using the registered server identity and service name.
 
 ```
 ./simple-server <identity> <service name>
@@ -1275,7 +1275,7 @@ INFO[0000] new service session                           session token=806969a4-
 
 ### 3.8.9 Verify the connection
 
-Login to the Client (**ingress-tunnel**), try the service with the service name we create and any text in the "name" field.
+Log in to the client (**ingress-tunnel**), try the service with the service name we create and any text in the "name" field.
 
 ```
 curl http://<service name>?name=<any name>
@@ -1295,13 +1295,13 @@ Hello, the-greatest-show-on-earth, from ziti
 ```
 
 
-## 3.9 Setup SDK Client to SDK Server connection
+## 3.9 Setup SDK client to SDK server connection
 
 ### 3.9.1 Introduction
 
-In this section, we will demonstrate how to connect a SDK enabled application to SDK enabled server. Please refer to [Network Diagram 5](#315-network-diagram-5) for our test setup.
+In this section, we will demonstrate how to connect a SDK enabled application to SDK enabled server. Please refer to [Network diagram 5](#315-network-diagram-5) for our test setup.
 
-### 3.9.2 SDK Application client and server
+### 3.9.2 SDK application client and server
 
 We are going to use an existing [SDK implementation](https://github.com/openziti/sdk-golang/tree/main/example/chat) for this guide. Since this example includes both client and server code, we will show how to compile it once. You can also copy the executable to the other server.
 
@@ -1337,7 +1337,7 @@ If all goes well, you will find a **chat-client** and **chat-server** binary und
 
 Next, you need to create identities for this SDK Application client ("chat.client") and server ("chat.server").
 
-Login to the controller
+Log in to the controller
 
 ```bash
 # source the aliases for ziti (do it the first time you login to the VM)
@@ -1354,7 +1354,7 @@ ziti edge enroll --jwt chat-server.jwt
 
 Once the enrollment is complete, there will be two json files: **chat-client.json** and **chat-server.json** under the current directory. Transfer the client file (**chat-client.json**) to your SDK Application client machine and both files to your server machine, place them under the **chat/build** directory.
 
-### 3.9.3 Create Service
+### 3.9.3 Create service
 
 For SDK clent connect to SDK client, there is no config needed. We just need to create a service. Please note, the service name has to be "chat"
 
@@ -1362,7 +1362,7 @@ For SDK clent connect to SDK client, there is no config needed. We just need to 
 ziti edge create service chat --role-attributes chat-service
 ```
 
-### 3.9.4 Create Bind Service policy
+### 3.9.4 Create bind service policy
 
 Specify host side endpoints by using the "Bind" service policy
 
@@ -1370,7 +1370,7 @@ Specify host side endpoints by using the "Bind" service policy
 ziti edge create service-policy chat.dial Dial --identity-roles '#chat.clients' --service-roles '#chat-service'
 ```
 
-### 3.9.5 Create Dial Service policy
+### 3.9.5 Create dial service policy
 
 The dial policy specifies intercept side endpoints.
 
@@ -1396,7 +1396,7 @@ OKAY : chat-server (1) -> chatService (1) Common Routers: (1/1) Dial: N Bind: Y
 
 Make sure there is a "Dial" line and a "Bind" line. They are both "OKAY" and has at least 1 Common Routers.
 
-### 3.9.6 Chat Server
+### 3.9.6 Chat server
 
 The Chat Server relays the communicates between clients. So, let's start te server first.
 Make sure you are under the directory: "chat/build"
@@ -1418,7 +1418,7 @@ INFO[0196] new connection
 INFO[0196] client 'Bryan' connected
 ```
 
-### 3.9.7 Test Chat
+### 3.9.7 Test chat
 
 We will start the chat clients on different machines. Then you can start the chat.  Following is an example communication between two Clients (Adam and Bryan)
 

@@ -12,7 +12,7 @@ the [Identity](./authentication/80-identities.md) if the controller's advertised
 
 ## Routers
 
-Upon creation of an Edge Router, enrollment details in the form of a JWT that acts as a one-time-token become 
+Upon creation of an Edge Router, enrollment details in the form of a JWT that acts as a one-time token become 
 available in the `enrollmentJWT` field.
 
 **Create:**
@@ -44,7 +44,7 @@ To enroll a router, deliver the `enrollmentJWT` to the host that will run the ed
 
 `ziti router enroll -j <jwt_path>`
 
-### Router Enrollment extension
+### Router enrollment extension
 
 Routers will automatically maintain their enrollment by refreshing their certificates seven days before they expire.
 
@@ -52,13 +52,13 @@ Routers will automatically maintain their enrollment by refreshing their certifi
 
 Clients enroll in one of two major categories:
 
-- pre-provisioned - Identities are created before the client attempts to run and are provided with one-time-tokens
+- pre-provisioned - Identities are created before the client attempts to run and are provided with one-time tokens
   to enroll
   - OTT, OTT CA
 - post-provisioned - an [Identity](./authentication/80-identities.md) is created during enrollment
   - Auto CA
 
-### OTT Enrollment
+### OTT enrollment
 
 OTT Enrollment involves creating an [Identity](./authentication/80-identities.md) and then delivering the enrollment
 JWT to client software that can then complete enrollment.
@@ -119,11 +119,11 @@ Alternatively, enrollments for an [Identity](./authentication/80-identities.md) 
 `/edge/management/v1/identities/<id>/enrollments` or `/edge/management/v1/enrollments` or
 `ziti edge list enrollments`.
 
-### OTT CA Enrollment
+### OTT CA enrollment
 
 OTT CA Enrollment requires that the enrolling client also has an existing client certificate signed by a 
-[3rd Party CA](./authentication/30-third-party-cas.md). When creating an identity the `id` of the target
-[3rd Party CA](./authentication/30-third-party-cas.md) is specified.
+[3rd-party CA](./authentication/30-third-party-cas.md). When creating an identity the `id` of the target
+[3rd-party CA](./authentication/30-third-party-cas.md) is specified.
 
 #### Create
 
@@ -144,22 +144,22 @@ OTT CA Enrollment requires that the enrolling client also has an existing client
 }
 ```
 
-An enrollment JWT can be retrieved in the same manner as [OTT Enrollment](#ott-enrollment)
+An enrollment JWT can be retrieved in the same manner as [OTT enrollment](#ott-enrollment)
 
-### Auto CA Enrollment
+### Auto CA enrollment
 
-Auto CA enrollment allows a [3rd Party CA](./authentication/30-third-party-cas.md) to have clients enroll with a
+Auto CA enrollment allows a [3rd-party CA](./authentication/30-third-party-cas.md) to have clients enroll with a
 OpenZiti network without first creating an [Identity](./authentication/80-identities.md) or distributing a JWT
 enrollment token. Create a
-[3rd Party CA](./authentication/30-third-party-cas.md) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
+[3rd-party CA](./authentication/30-third-party-cas.md) and ensure that `isAutoCaEnrollmentEnabled` is set to `true`.
 
 The name of enrolling clients is controlled by the `identityNameFormat` of the
-[3rd Party CA](./authentication/30-third-party-cas.md).
+[3rd-party CA](./authentication/30-third-party-cas.md).
 The /format supports a number of replacement strings:
 
-- `[caName]` - the OpenZiti `name` of the [3rd Party CA](./authentication/30-third-party-cas.md) that validates the
+- `[caName]` - the OpenZiti `name` of the [3rd-party CA](./authentication/30-third-party-cas.md) that validates the
   enrolling certificate
-- `[caId]` - the OpenZiti `id` of the [3rd Party CA](./authentication/30-third-party-cas.md) that validates the
+- `[caId]` - the OpenZiti `id` of the [3rd-party CA](./authentication/30-third-party-cas.md) that validates the
   enrolling certificate
 - `[commonName]` - the common name of the enrolling certificate
 - `[requestedName]` - clients can submit a requested name during enrollment
@@ -169,7 +169,7 @@ The default format is `[caName]-[commonName]`.
 
 Identity names are unique, and if a collision occurs, incrementing numbers are appended.
 
-### Auto External JWT Signer Enrollment
+### Auto external JWT signer enrollment
 
 [External JWT Signers](./authentication/70-external-jwt-signers.mdx) represent an external IdP that can sign JWTs
 as proof of identity (including OAuth/OIDC servers). Auto Ext-JWT-Signer enrollment allows a client with a JWT from a
@@ -274,5 +274,5 @@ Authorization: Bearer <jwt from IdP>
 ### Client re-Enrollment
 
 Clients may request to extend enrollments that generated x509 certificates if the client certificate was issued by
-OpenZiti. If the client's certificate was issued by a [3rd Party CA](./authentication/30-third-party-cas.md), the
+OpenZiti. If the client's certificate was issued by a [3rd-party CA](./authentication/30-third-party-cas.md), the
 client certificate renewal must be handled outside of OpenZiti.

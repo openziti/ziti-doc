@@ -9,11 +9,11 @@ import TabItem from '@theme/TabItem';
 
 Use the `ziti` CLI to create, update, and delete routers on a Linux controller.
 
-## Login
+## Log in
 
 To use the CLI, you'll need to be logged in. [Link to instructions](/reference/40-command-line/login.mdx)
 
-## Create a Router
+## Create a router
 
 <Tabs groupId="routerType">
 
@@ -45,7 +45,7 @@ ziti edge create edge-router "router3" \
 
 </Tabs>
 
-## Update a Router
+## Update a router
 
 The update command will replace all administrative properties of the router. This example preserves the properties from the router3 example above, adding the `--tunneler-enabled` flag.
 
@@ -55,7 +55,7 @@ ziti edge update edge-router "router3" \
     --tunneler-enabled
 ```
 
-## Additional Flags
+## Additional flags
 
 - App-Data can be used to set key/value pair to be used in addressable terminator service for example.
 
@@ -84,7 +84,7 @@ ziti edge update edge-router "router3" \
  --role-attributes 'example,example2,example3'
 ```
 
-## Role Attributes are Powerful
+## Role attributes are powerful
 
 Consider an autoscaling group scenario where routers are created or deleted with scale-out or scale-in events. Attribute-based access control enables this scenario because the policies grant roles instead of the individual, temporary identities.
 

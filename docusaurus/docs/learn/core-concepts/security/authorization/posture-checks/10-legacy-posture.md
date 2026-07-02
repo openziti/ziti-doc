@@ -1,10 +1,10 @@
-# Legacy Posture Checks
+# Legacy posture checks
 
 Legacy Posture Checks apply to [API Sessions](../../sessions.md#api-session) established using the legacy
 `zt-session` authentication method. In this model, the SDK submits Posture Data to the **controller** via REST API,
 and the controller is responsible for evaluating all Posture Checks and determining whether service access is granted.
 
-## Posture Data {#posture-data}
+## Posture data {#posture-data}
 
 Environmental state is saved as Posture Data, a set of values describing the current state of the client device.
 Posture Data is provided to the controller via Posture Responses sent from the client. Posture Responses are
@@ -49,12 +49,12 @@ Identities.
 The following Posture Check types are currently defined:
 
 - [OS / OS Version](#os-os-version) - requires a specific operating system and optionally a specific version or versions
-- [MAC Address](#mac-address) - requires the client has a specific MAC address associated with its hardware
+- [MAC address](#mac-address) - requires the client has a specific MAC address associated with its hardware
 - [MFA](#mfa) - requires the client currently has MFA TOTP enabled
-- [Multi Process](#multi-process) - requires a client be running one or more applications
-- [Windows Domain](#windows-domain) - requires the client be a member of a specific domain
+- [Multi-process](#multi-process) - requires a client be running one or more applications
+- [Windows domain](#windows-domain) - requires the client be a member of a specific domain
 
-### Operating System {#os-os-version}
+### Operating system {#os-os-version}
 
 The `OS` Posture Check type is used to verify a client's operating system and optionally its version.
 
@@ -107,7 +107,7 @@ ziti edge create posture-check os windows-and-android -o "WINDOWS:>10.0.0,ANDROI
 }
 ```
 
-### MAC Address {#mac-address}
+### MAC address {#mac-address}
 
 The `MAC` Posture Check type is used to verify a client's network interface MAC addresses. A client presenting
 MAC addresses not included in the check will fail.
@@ -171,7 +171,7 @@ ziti edge create posture-check mfa my-mfa-check -s 3600 -w -u -a check-attribute
 }
 ```
 
-### Multi Process {#multi-process}
+### Multi-process {#multi-process}
 
 The `PROCESS_MULTI` Posture Check type verifies that one or more programs are running on the client. It can
 optionally check a SHA-256 hash and digital signers on Windows.
@@ -216,7 +216,7 @@ ziti edge create posture-check process-multi my-proc-multi AnyOf "Windows,Linux"
 }
 ```
 
-### Windows Domain {#windows-domain}
+### Windows domain {#windows-domain}
 
 The `DOMAIN` Posture Check type verifies that a Windows client has joined a specific Windows domain.
 
@@ -245,7 +245,7 @@ ziti edge create posture-check domain domain-list -d domain1 -d "domain2" -a che
 
 The following Edge Management API endpoints are available for diagnosing posture check issues with legacy sessions.
 
-### Viewing Identity Posture Data
+### Viewing identity posture data
 
 It is possible to view an [Identity](../../authentication/80-identities.md)'s current Posture Data as reported to
 the controller.

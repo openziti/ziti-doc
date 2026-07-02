@@ -1,9 +1,9 @@
 ---
-title: OIDC Authentication
+title: OIDC authentication
 sidebar_position: 10
 ---
 
-# OIDC Authentication
+# OIDC authentication
 
 The OpenZiti controller is an [OpenID Connect (OIDC)](https://openid.net/connect/) provider. It exposes a 
 standards-compliant OIDC server that clients use to authenticate and receive security tokens. These
@@ -22,7 +22,7 @@ Upon successful authentication, the controller issues three tokens:
 The access token replaces the legacy `zt-session` opaque token as the primary credential for API requests. Both
 mechanisms remain supported. See [Using Tokens](#using-tokens) for details.
 
-## OIDC Endpoints
+## OIDC endpoints
 
 The controller exposes a standard OIDC discovery document that clients use to locate all authentication endpoints.
 The discovery document is available at:
@@ -198,7 +198,7 @@ sequenceDiagram
     Ctrl-->>C: { access_token, id_token, refresh_token, expires_in }
 ```
 
-### Step 1 - Discover endpoints
+### Step 1: Discover endpoints
 
 Clients retrieve the OIDC discovery document to learn the authorization and token endpoint URLs:
 
@@ -206,7 +206,7 @@ Clients retrieve the OIDC discovery document to learn the authorization and toke
 GET /.well-known/openid-configuration
 ```
 
-### Step 2 - Initiate Authorization
+### Step 2: Initiate authorization
 
 The client constructs a PKCE authorization request. The controller's OIDC client ID is `openziti`.
 
@@ -225,7 +225,7 @@ The optional `method` parameter hints at the intended primary authentication met
 `ext-jwt`). If omitted, the controller selects the method based on whether a client TLS certificate was presented.
 The authorization endpoint responds with a redirect to the appropriate login URL.
 
-### Step 3 - Submit Primary credentials
+### Step 3: Submit primary credentials
 
 The controller redirects the client to a login URL of the form:
 
@@ -234,16 +234,16 @@ The controller redirects the client to a login URL of the form:
 ```
 
 The `authRequestID` value identifies the in-progress authentication request. The client POSTs credentials to the
-same URL. See [Primary Authentication](#primary-authentication) for method-specific request formats.
+same URL. See [Primary authentication](#primary-authentication) for method-specific request formats.
 
-### Step 4 - Satisfy Secondary factors (if required)
+### Step 4: Satisfy secondary factors (if required)
 
 If the identity's [Authentication Policy](50-authentication-policies.md) requires secondary factors, the login
 endpoint returns HTTP `200` with a JSON body listing the outstanding
 [Authentication Queries](../sessions.md#authentication-queries) rather than redirecting to the callback. The client
-satisfies each query and resubmits. See [Secondary Authentication](#secondary-authentication) for details.
+satisfies each query and resubmits. See [Secondary authentication](#secondary-authentication) for details.
 
-### Step 5 - Exchange code for tokens
+### Step 5: Exchange code for tokens
 
 Once all authentication factors are satisfied, the controller redirects to the client's `redirect_uri` with an
 authorization code. The client exchanges the code for tokens:
@@ -272,7 +272,7 @@ A successful response:
 }
 ```
 
-## Primary Authentication
+## Primary authentication
 
 Primary Authentication establishes which [Identity](80-identities.md) is authenticating. The method is determined by
 the login URL path and the credentials submitted. All login endpoints accept either `application/json` or
@@ -281,7 +281,7 @@ the login URL path and the credentials submitted. All login endpoints accept eit
 All requests include the `authRequestID` from the authorization redirect, either as a query parameter (GET) or in
 the request body (POST).
 
-### Username / Password (UPDB)
+### Username / password (UPDB)
 
 `POST /oidc/login/username`
 
@@ -296,7 +296,7 @@ the request body (POST).
 Username/password is the simplest primary method. It is disabled by default in production-oriented
 [Authentication Policies](50-authentication-policies.md) in favor of certificate or JWT authentication.
 
-### Client Certificate
+### Client certificate
 
 `POST /oidc/login/cert`
 
@@ -309,7 +309,7 @@ Username/password is the simplest primary method. It is disabled by default in p
 Certificate authentication requires that the HTTP connection to the controller use a client TLS certificate
 associated with the target identity. The body is empty. The controller reads the certificate from the TLS
 handshake. The certificate must be issued by the OpenZiti PKI or a registered and enabled
-[3rd Party CA](30-third-party-cas.md).
+[3rd-party CA](30-third-party-cas.md).
 
 ### External JWT (ext-jwt)
 
@@ -328,7 +328,7 @@ External JWT authentication requires a valid JWT from a configured
 JWT's signature, expiration, issuer, and audience against the matching External JWT Signer configuration, then
 maps the configured claim to an identity.
 
-## Secondary Authentication
+## Secondary authentication
 
 Secondary authentication is triggered when the identity's [Authentication Policy](50-authentication-policies.md)
 requires additional factors beyond the primary credential. Outstanding secondary factors are represented as
@@ -367,7 +367,7 @@ totp-required: true
 
 Clients can use this header to detect that TOTP is required without parsing the `authQueries` body.
 
-### TOTP (Time-Based One-Time Password)
+### TOTP (time-based one-time password)
 
 If the [Authentication Policy](50-authentication-policies.md)'s `secondary.requireTotp` is `true`, the client must
 provide a TOTP code generated by an authenticator application (Google Authenticator, Authy, Microsoft Authenticator,
@@ -385,7 +385,7 @@ etc.) after primary Authentication succeeds.
 On success, the controller redirects to the callback URL with the authorization code. On failure, the response
 returns HTTP `400` with an error indicating the code was invalid.
 
-#### TOTP Enrollment during an OIDC flow
+#### TOTP enrollment during an OIDC flow
 
 If the identity's [Authentication Policy](50-authentication-policies.md) requires TOTP but the identity has not yet
 enrolled in TOTP, enrollment can be completed mid-OIDC-flow. The auth request remains active while enrollment is
@@ -461,7 +461,7 @@ authentication is blocked and the applicable `WWW-Authenticate` challenge is ret
 After the OIDC flow is complete and an access token has been issued, the secondary JWT requirement is re-evaluated
 on every subsequent API request (see [WWW-Authenticate Headers](#www-authenticate-headers)).
 
-## Partial Authentication
+## Partial authentication
 
 An OIDC authentication request is **partially authenticated** when primary credentials have been accepted but one or
 more secondary factors remain outstanding. The authorization code has not yet been issued, so no access token
@@ -486,7 +486,7 @@ present until the full OIDC flow completes.
 
 ## Tokens
 
-### Access Token
+### Access token
 
 The access token is a short-lived JWT that authorizes API requests. It is used as a Bearer token in the
 `Authorization` header:
@@ -509,20 +509,20 @@ Selected custom claims in the access token:
 | `z_t`    | Token type (`a` for access)                            |
 | `z_ice`  | Whether the API session certificate is extendable      |
 
-### ID Token
+### ID token
 
 The ID token is a standard OIDC JWT that contains identity information about the authenticated user. It is
 returned alongside the access token but is not used to authorize API calls. SDKs may use the ID token to display
 user information or to confirm the identity of the authenticated user.
 
-### Refresh Token
+### Refresh token
 
 The refresh token is an opaque token (not a JWT) that can be exchanged for a new access token without requiring
 the user to re-authenticate. It expires after `edge.oidc.refreshTokenDuration` (default 24 hours).
 
 ## Using tokens
 
-### OIDC Bearer token (current)
+### OIDC bearer token (current)
 
 Include the access token in the `Authorization` header for all API calls:
 
@@ -545,7 +545,7 @@ zt-session: <token>
 New clients and SDKs should use OIDC bearer tokens. The legacy `zt-session` mechanism may be deprecated in a
 future release.
 
-## Refreshing an Access Token
+## Refreshing an access token
 
 When an access token expires, use the refresh token to obtain a new one without re-authentication. This requires
 the `offline_access` scope to have been requested during the initial authorization.
@@ -607,7 +607,7 @@ WWW-Authenticate: zt-session realm="zt-session" error="missing" error_descriptio
                   Bearer realm="openziti-oidc" error="missing" error_description="no matching token was provided"
 ```
 
-### OIDC Access Token errors
+### OIDC access token errors
 
 When a Bearer token is provided but is invalid or expired:
 

@@ -30,7 +30,7 @@ within the JWT returned from the OIDC provider and must be exactly correct.
 | **Scopes**            | The set of scopes to request when generating the authentication request to the OIDC provider                                                |
 | **JWKS Endpoint**     | A url the OpenZiti Controller can use to retrieve a [JSON Web Key Set](https://en.wikipedia.org/wiki/JSON_Web_Token), used to verify JWTs   |
 
-## The OIDC Provider Endpoint
+## The OIDC provider endpoint
 
 OIDC Providers will often provide an OIDC discovery endpoint. Generally, this will be a URl accessible at the well-known
 location `./.well-known/openid-discovery` appended to the OIDC provider issuer URL. For example, if the OIDC provider 
@@ -58,7 +58,7 @@ the ext-jwt-signer for use with an OIDC flow, the `issuer` and `external auth ur
 The remaining fields will need to be returned from the OIDC provider itself and there is no standard way to
 determine the fields. The values supplied will be driven entirely from the configuration of the OIDC provider.
 
-### Callback / Redirect URL Configuration
+### Callback / redirect URL configuration
 
 When configuring the OIDC provider, a callback URL is necessary. This URL specifies to the OIDC provider and the
 subsequent clients what URL the OIDC provider will allow redirecting the client to in order to continue the PKCE 
@@ -66,7 +66,7 @@ flow. Different pieces of the OpenZiti overlay network will require different re
 OpenZiti tunnelers expect to have `http://localhost:20314/auth/callback` specified as a valid callback URL. Ensure 
 the OIDC provider is configured to allow this URL callback. 
 
-## Information from the OIDC Provider
+## Information from the OIDC provider
 
 The following fields are obtained directly from the OIDC provider configuration. Every provider provides this 
 information in different ways. See the specific providers list for more information as to configuring a specific 
@@ -77,7 +77,7 @@ provider. The following fields are obtained from the OIDC provider:
 * audience
 * claims property
 
-### The Authorization Request
+### The authorization request
 
 The `client_id` is a unique id assigned by the OIDC provider for a given application. This id will be sent to 
 clients and used when initiating the PKCE flow, It is public and not considered a secret. It is used by the OIDC 

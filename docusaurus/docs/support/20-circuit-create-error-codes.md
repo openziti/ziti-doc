@@ -1,7 +1,7 @@
 ---
 hide_table_of_contents: true
 ---
-# Circuit Create Error Codes
+# Circuit create error codes
 
 The most fundamental action of a working OpenZiti instance is the dialing of services to create connections and pass data.  This action crosses a few borders, but the central process is the creation of a fabric circuit to carry the traffic between the initiating edge node (SDK embedded application, client, tunneler, etc.) and the terminating edge node.  When this process fails, it is important to understand why it failed, to properly troubleshoot the issue.  Below is a table of the various cause codes emitted by the controller, and a brief description of the context of the error.
 

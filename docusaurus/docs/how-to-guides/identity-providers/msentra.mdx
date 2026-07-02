@@ -35,10 +35,10 @@ on the overview page of the **App registration**
 
 ---
 
-## Get a Microsoft Entra ID Account
+## Get a Microsoft Entra ID account
 
 If you don't already have an account you can sign up at https://entra.microsoft.com/. After logging into the Azure 
-console, find and click on the **Microsoft Entra ID** icon in the navbar:
+console, find and click the **Microsoft Entra ID** icon in the navbar:
 
 :::info[Open Entra]
 ![Entra icon](/img/idps/msentra/open-entra.jpg)
@@ -50,7 +50,7 @@ Find **App registrations** under **Manage** and select it and click **New regist
 ![Entra icon](/img/idps/msentra/new-registration.png)
 :::
 
-## Register an Application
+## Register an application
 
 Registering an application will generate the Client ID necessary for configuring the ext-jwt-signer. 
 
@@ -75,7 +75,7 @@ After creating the App registration, from the **Overview** page click **Add a Re
 
 <CallbackUrls/>
 
-### Add Redirect URIs
+### Add redirect URIs
 
 Under **Platform configurations**, find the **Add a platform** button and click it. Depending on the OpenZiti technology 
 being enabled, choose the appropriate option:
@@ -106,7 +106,7 @@ URI**. A form will pop up on the side, enter a URI. It's common to prefix the UR
 ### Add a scope
 
 Adding a scope to an exposed API is what instructs Microsoft Entra to add an audience claim to the access token 
-which is specific to OpenZiti. Click on **Add a scope** and the **Add a scope** popup form will come up. Fill out the 
+which is specific to OpenZiti. Click **Add a scope** and the **Add a scope** popup form will come up. Fill out the 
 fields accordingly. The **Scope name** is probably the most important as this is what you will reference on the 
 external JWT signer in the controller. For example, as shown `auth` is used, but it can be any value.
 
@@ -117,7 +117,7 @@ Continue filling out the other fields, add display names and consent description
 ![Entra icon](/img/idps/msentra/add-api-scope.png)
 :::
 
-### A Note About Audiences
+### A note about audiences
 
 When creating the App Registration, it seems that the value selected for the **Supported account types** influences 
 the ability to change the audience. If "Accounts in this organizational directory only (Your Company only - 
@@ -145,9 +145,9 @@ After successfully authenticating, the access token will have the audience of `a
 
 ---
 
-## Common Errors
+## Common errors
 
-### Using SPA for Tunnelers
+### Use SPA for tunnelers
 
 > failed to exchange token: oauth2: "invalid_request" "AADSTS9002327: Tokens issued for the 'Single-Page Application' 
 > client-type may only be redeemed via cross-origin requests.

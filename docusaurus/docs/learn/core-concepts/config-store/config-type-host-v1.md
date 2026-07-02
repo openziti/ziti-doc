@@ -1,4 +1,4 @@
-# Tunneler Config Type `host.v1`
+# Tunneler config type `host.v1`
 
 A Config of Config Type `host.v1` configures a hosting Ziti tunneler to forward connections to the destination server for a particular Ziti service.
 
@@ -40,6 +40,6 @@ Rather than a static destination address, this Config forwards the Ziti service 
 }
 ```
 
-## Schema Reference
+## Schema reference
 
 The JSON schema for this tunneler Config Type is maintained [in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/host.v1.json).

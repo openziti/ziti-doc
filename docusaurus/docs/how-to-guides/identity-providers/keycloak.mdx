@@ -32,7 +32,7 @@ https://keycloak.example.com/realms/zitirealm/.well-known/openid-configuration
 
 ---
 
-## Create a Realm
+## Create a realm
 
 A dedicated realm in Keycloak ensures **isolation, security, and better management** of users and applications. The  
 **master realm** is generally used for admin tasks, not hosting apps. Creating a separate realm reduces security risks, 
@@ -46,7 +46,7 @@ and click the **Create** button.
 ![Auth0 Applications](/img/idps/keycloak/create-realm.png)
 :::
 
-## Create a Client
+## Create a client
 
 From the dedicated realm, click **Clients** and then choose **Create client**
 
@@ -54,7 +54,7 @@ From the dedicated realm, click **Clients** and then choose **Create client**
 ![Auth0 Applications](/img/idps/keycloak/create-client.png)
 :::
 
-## Create Client - General Settings
+## Create client: General settings
 
 Under **General Settings**, ensure the **Client type** is set to **OpenID Connect**, enter a **Client ID** name and
 click the **Next** button.
@@ -63,7 +63,7 @@ click the **Next** button.
 ![Auth0 Applications](/img/idps/keycloak/create-client-1.png)
 :::
 
-## Create Client - Capability Config
+## Create client: Capability config
 
 On the **Capability Config** screen, ensure the **Authentication flow** has at a minimum the **Standard flow** selected.
 It is the only flow that is required to be checked. Click **Next**.
@@ -72,7 +72,7 @@ It is the only flow that is required to be checked. Click **Next**.
 ![Auth0 Applications](/img/idps/keycloak/create-client-2.png)
 :::
 
-## Create Client - Login Settings
+## Create client: Login settings
 
 Finish creating the client by adding **Valid redirect URIs**, **Valid post logout redirect URIs** and **Web 
 origins** as necessary.
@@ -85,7 +85,7 @@ origins** as necessary.
 ![Auth0 Applications](/img/idps/keycloak/create-client-3.png)
 :::
 
-## Assign an Audience
+## Assign an audience
 
 Access tokens are expected generated for a specific audience. This requires the access token to have an `aud` 
 claim that is targeted for the API it's being sent to. To customize the access token's audience in Keycloak, after 
@@ -113,13 +113,13 @@ Audience** field. Ensure the audience is added to the access token and optionall
 ![Auth0 Applications](/img/idps/keycloak/configure-aud-mapper-2.png)
 :::
 
-### Verifying Tokens in Keycloak
+### Verify tokens in Keycloak
 
 Keycloak has a very useful feature to allow you to view the tokens that will be generated. While on the client 
-detail screen and **Client scopes** tab a somewhat hard to see sub-tab is available titled **Evaluate**, click on this tab.
+detail screen and **Client scopes** tab a somewhat hard to see sub-tab is available titled **Evaluate**, click this tab.
 
 From the next screen, choose any extra scopes you want to see applied to the token request, choose a user to view the 
-token for and then click on the corresponding token to view, for example the **Generated access token** as shown below.
+token for and then click the corresponding token to view, for example the **Generated access token** as shown below.
 
 :::info[Evaluate Tokens]
 ![Auth0 Applications](/img/idps/keycloak/evaluate-tokens.png) 

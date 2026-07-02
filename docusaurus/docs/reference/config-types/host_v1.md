@@ -3,7 +3,7 @@ sidebar_label: host.v1
 sidebar_position: 15
 ---
 
-# The `host.v1` Config Type
+# The `host.v1` config type
 
 The `host.v1` configuration type defines how edge routers or tunnelers can make outgoing connections
 for associated services. The config type also allows specifying health checks for the service. An
@@ -13,7 +13,7 @@ passed through from a tunneler intercepting traffic, allowing it to forward traf
 The `host.v1` type only allows defining a single host endpoint. If multiple endpoints are required,
 use the [`host.v2`](./host_v2.md) config type instead.
 
-## Endpoint Configuration
+## Endpoint configuration
 
 For services with defined endpoints, the following three attributes are required:
 
@@ -33,7 +33,7 @@ This service is hosted by one application server.
 }
 ```
 
-## Forwarding Configuration
+## Forwarding configuration
 
 Services that are forwarding traffic from an OpenZiti tunneling proxy may use the following
 properties to indicate what should be forwarded:
@@ -56,7 +56,7 @@ properties to indicate what should be forwarded:
 
 **Examples**
 
-#### Forward All Address Components, with IP Translation
+#### Forward all address components, with IP translation
 ```text
 {
   "forwardAddress": true,
@@ -102,7 +102,7 @@ Note that not everything must be forwarded. For example the address is not forwa
 below. The port and protocol are forwarded and the corresponding 'allow' is set, but the address is
 statically set to '192.168.100.1
 
-#### Forward Destination Port
+#### Forward destination port
 ```text
 {
   "address": "192.168.100.1",
@@ -130,7 +130,7 @@ Health checks and listen options also can be specified for the endpoint.
 * `httpChecks` - HTTP health check definitions
     * See the [full definition below](#http-checks)
 
-## Listen Options
+## Listen options
 
 * `bindUsingEdgeIdentity` - Associate the hosting endpoint with the name of the hosting tunneler's
   identity. Setting this to 'true' is equivalent to setting 'identity=$tunneler_id.name'",
@@ -166,11 +166,11 @@ Health checks and listen options also can be specified for the endpoint.
 }
 ```
 
-## Health Checks
+## Health checks
 
 There are two kinds of health checks supported, port check and http checks.
 
-### Port Checks
+### Port checks
 
 Port checks verify if a given port is accepting TCP connections. The check does not attempt to send
 or receive any data. Port check definitions support the following properties:
@@ -189,7 +189,7 @@ or receive any data. Port check definitions support the following properties:
     * Example: `10s` (10 seconds)
 * `actions` - how to react to health check result. Covered in more detail below.
 
-### HTTP Checks
+### HTTP checks
 
 HTTP checks make a call to an HTTP endpoint, which may include submitting a static body and checking
 the check results. HTTP check definitions support the following properties:

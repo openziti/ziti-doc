@@ -4,7 +4,7 @@ sidebar_position: 70
 
 import ExtJwtDocEnrollDetails from '../_ext_jwt_enroll_details.md'
 
-# External JWT Signers
+# External JWT signers
 
 External JWT Signers allow external identity providers to facilitate authentication with an OpenZiti network. External
 JWT Signers can be added as a static x509 certificate or via a JWKS endpoint. Authenticating clients can provide
@@ -42,7 +42,7 @@ documentation for more information.
 
 <ExtJwtDocEnrollDetails />
 
-### x509 Certificate
+### x509 certificate
 
 If the JWT provider has a static x509 certificate, it is possible define an External JWT Signer using the PEM encoded
 public certificate of the signer. If the JWT provider has JWKS endpoint support it is strongly recommended to create
@@ -51,14 +51,14 @@ need maintenance during key rotation and certificate expiration. For these opera
 [Edge Management API](@openzitidocs/reference/developer/api/edge-management-api-reference)
 can be used for external automation.
 
-### JWKS Endpoint
+### JWKS endpoint
 
 JSON Web Key Sets (JWKS) is defined in [RFC7517 Section 5](https://datatracker.ietf.org/doc/html/rfc7517#section-5)
 and is used by many popular IdPs (Auth0, Okta) in order to enable external JWT verification. External JWT Signers
 configured with a JWKS endpoint allows an identity provider to rotate keys and bridge signer certificate expiration
 windows.
 
-## JWT Validation
+## JWT validation
 
 External JTW Signers are used to validate JWTs for authentication. This validation requires the following:
 
@@ -103,7 +103,7 @@ be created as follows:
 }
 ```
 
-## Client Authentication Fields
+## Client authentication fields
 
 Unauthenticated clients can enumerate External JWT Signers via the
 [Edge Client API](@openzitidocs/reference/developer/api/edge-client-api-reference). The response contains only the

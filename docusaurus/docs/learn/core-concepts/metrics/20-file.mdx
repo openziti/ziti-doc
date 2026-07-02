@@ -1,15 +1,15 @@
-# File Reporter
+# File reporter
 
 The controller event system can write metrics to a file for direct viewing or post-processing into a metrics system of your choice.
 
-## Ziti Configuration
+## Ziti configuration
 
 There are two independent configurations that need to be set up for metric event reporting to work:
 
 1. **Report Interval:** The controller and routers need to have a metric reporting interval set.  The interval determines how often metrics will be sent to the controller and possibly written out to file
 1. **Event Subscription:** The subscription is configured in the controller, and determines which of the reported metrics are written.
 
-### Metrics Reporting
+### Metrics reporting
 The reporting interval is defined in the `metrics.reportInterval` property. While the controller and each router can have a different reporting interval, we suggest that you set them all the same to make lining up metrics across the cluster easier.
 
 Example:
@@ -30,14 +30,14 @@ metrics:
 ```
 
 
-### Metrics Writing
+### Metrics writing
 
 Writing of metrics is broken into two pieces:
 
 1. **subscription:** Which metrics will be written
 1. **hander:** how the metrics will be written
 
-#### Metrics Subscription
+#### Metrics subscription
 The metrics subscription defines which metrics will be written and how they will be written. 
 
 There are two parts to a metrics event reporter
@@ -67,7 +67,7 @@ events:
         metricFilter: .*pool.*
 ```
 
-#### Metrics Handling
+#### Metrics handling
 
 The metrics handler defined how metrics are to be written.  It is comprised of:
 
@@ -79,7 +79,7 @@ The metrics handler defined how metrics are to be written.  It is comprised of:
 1. **path:** The name of the file to write metrics to
 
 
-##### File Rolling
+##### File rolling
 
 files are rolled when they reach a size of `maxsizemb`. Files are renamed from `name.log` to `name-iso8601.log`
 
@@ -140,7 +140,7 @@ metrics:
   reportInterval: 20s
 ```
 
-## Metric Examples
+## Metric examples
 
 ### intValue
 

@@ -3,7 +3,7 @@ sidebar_label: Topology
 sidebar_position: 60
 ---
 
-# Controller Topology
+# Controller topology
 
 This document is about how to size and place the controllers in an HA cluster. The
 decisions break down into four:
@@ -23,7 +23,7 @@ walks through why, with the nuances.
 
 The rest of this page walks through each decision, with worked examples at the end.
 
-## Picking a Cluster Size: 3 vs 5 vs 7 Voters
+## Picking a cluster size: 3 vs 5 vs 7 voters
 
 Voters are the controllers that participate in raft consensus. Every model update
 needs an ACK from a majority of voters before it commits, so the voter count drives
@@ -58,7 +58,7 @@ cluster tolerates 2 (same as 5) and needs 4 ACKs. Stick to 3, 5, or 7.
 If you need more controllers than your chosen voter count -- for read scale,
 regional coverage, or both -- add them as non-voters. That's the next section.
 
-## Voters and Non-Voters
+## Voters and non-voters
 
 A cluster has two kinds of members.
 
@@ -77,7 +77,7 @@ difference between connecting to a voter follower and connecting to a non-voter.
 The voter/non-voter distinction only matters for raft itself: whether the node's
 vote counts toward quorum, and whether it's eligible to be elected leader.
 
-### When to Add Non-Voters Instead of More Voters
+### When to add non-voters instead of more voters
 
 Once your voter count meets your failure-tolerance needs, additional controllers
 should be non-voters. Two reasons:
@@ -93,7 +93,7 @@ should be non-voters. Two reasons:
 So the pattern is: pick a voter count for failure tolerance (3, 5, or 7), then add
 non-voters wherever you need more local read capacity or regional coverage.
 
-## Geographic Placement
+## Geographic placement
 
 The leader has to wait for ACKs from a quorum of voters before every write commits.
 That ACK round trip is real network time. If your voters are spread across
@@ -111,7 +111,7 @@ Some ballpark numbers:
 Those are per-write, and they add up fast when you're provisioning identities or
 doing batch policy changes.
 
-### Keep a Quorum Close
+### Keep a quorum close
 
 The trick is to put a *quorum's worth* of voters geographically close together, so
 a write can commit on local-region latency. Voters beyond that quorum can be
@@ -128,7 +128,7 @@ in the next section.
 In a 5-voter cluster, the quorum is 3. Put three voters in the same region, with
 the remaining two anywhere. Same principle.
 
-### Spread Non-Voters Wherever Clients Are
+### Spread non-voters wherever clients are
 
 Non-voters don't enter into the write-latency calculation at all, so you can put
 them wherever your clients are. Each region with significant client population gets
@@ -140,7 +140,7 @@ need a non-voter -- the same controller does both jobs for the clients in that
 region. The only reason to add non-voters in a voter region is to handle more
 client load than a single controller can serve.
 
-## Steering Leadership with `preferredLeader`
+## Steering leadership with `preferredLeader`
 
 Geographic placement only helps if the leader happens to be in the close-together
 region. If raft picks the distant voter as leader (which it can, since any voter is
@@ -160,7 +160,7 @@ elected leader, the cluster automatically transfers leadership to a preferred pe
 about 10 seconds after the election. The end state is that leadership lives on a
 preferred voter whenever one is available.
 
-### Mark the Whole Close Quorum, Not Just One Node
+### Mark the whole close quorum, not just one node
 
 The natural inclination is to pick one specific voter and make it preferred. Don't.
 If exactly one node is preferred and that node goes down, leadership will move to a
@@ -176,23 +176,23 @@ voter in region B. Mark both region-A voters as preferred. Leadership stays in
 region A as long as either of them is up. Writes always commit on intra-region
 latency unless both region-A voters are simultaneously down.
 
-### Manual Transfers Still Work, but Bounce Back
+### Manual transfers still work, but bounce back
 
 If you run `ziti agent cluster transfer-leadership` to move leadership manually, the
 auto-transfer logic still applies. If the target you picked isn't preferred (and a
 preferred peer is up), leadership will bounce back about 10 seconds later. To park
 leadership on a specific non-preferred node deliberately, you'd have to disable the
 preferred flag on the others, which is more trouble than it's worth in normal
-operation. See [Failure Scenarios -> Leader Loss and
-Elections](./failure-scenarios.md#leader-loss-and-elections) for the full mechanics.
+operation. See [Failure scenarios -> Leader loss and
+elections](./failure-scenarios.md#leader-loss-and-elections) for the full mechanics.
 
-## Don't Front Controllers with a Load Balancer
+## Don't front controllers with a load balancer
 
 The cluster handles its own endpoint distribution and client failover, so it
 doesn't need an external load balancer. More importantly, putting one in the path
 breaks several things that depend on direct controller connectivity.
 
-### What Won't Work
+### What won't work
 
 **Enrollment.** Enrollment JWTs are signed with each controller's server cert/key
 pair. A TLS-terminating load balancer presents its own certificate to clients,
@@ -210,7 +210,7 @@ terminates TLS or passes it through; the control-plane protocol isn't HTTP.
 between controllers is similarly direct, persistent, mTLS-authenticated, and not a
 fit for any kind of LB.
 
-### What Could Work but Doesn't Help
+### What could work but doesn't help
 
 Post-enrollment SDK traffic to the edge client API would technically function
 through a TLS pass-through LB (mTLS is preserved, the request is plain HTTPS, and
@@ -227,7 +227,7 @@ a layer of state that has to be kept in sync with cluster membership, all for ze
 functional gain. The cluster's own discovery mechanism is doing the same job
 better.
 
-### What to Do Instead
+### What to do instead
 
 If you want a single DNS name that points clients at the cluster, use plain DNS --
 round-robin records or a health-checked DNS resolver are both fine, because they
@@ -235,9 +235,9 @@ don't sit in the path of the actual connection. They give clients an initial
 address to hit; from there, the cluster takes over via
 `/edge/client/v1/controllers` and the router endpoints file.
 
-## Worked Examples
+## Worked examples
 
-### Single Region, Three Voters
+### Single region, three voters
 
 Simplest production-ready layout. Three voters in the same region, in different
 availability zones so an AZ failure doesn't take the cluster down.
@@ -253,7 +253,7 @@ latency. Tolerates one AZ failure.
 If clients are concentrated in us-east, no non-voters are needed. If clients also
 exist in other regions, add non-voters near them -- see the next example.
 
-### Multi-Region, Six Nodes
+### Multi-region, six nodes
 
 **Requirements**
 
@@ -277,7 +277,7 @@ intra-continent latency. The EU voter is there to keep quorum reachable if the
 entire US region partitions away. Clients in EU and Asia connect to local
 non-voters for low-latency reads.
 
-### Multi-Region, Tighter Quorum
+### Multi-region, tighter quorum
 
 Same shape as the previous example, but pays for one extra controller to put the
 two US voters in the same metro area. us-east-1 and us-east-2 are both voters now
@@ -299,9 +299,9 @@ from eu-west-3) until the missing East voter comes back. If both US voters go
 down, the cluster loses quorum: eu-west-3 is the only surviving voter, and
 non-voters don't count toward quorum no matter how many of them are reachable.
 Recovery in that case is either to bring a US voter back or to treat it as total
-cluster loss; see [Failure Scenarios](./failure-scenarios.md#loss-of-quorum).
+cluster loss; see [Failure scenarios](./failure-scenarios.md#loss-of-quorum).
 
-### Single Region, Five Voters
+### Single region, five voters
 
 Use this when you want intra-region write latency in the common case *and* the
 ability to survive simultaneous voter losses. The classic case is a network where

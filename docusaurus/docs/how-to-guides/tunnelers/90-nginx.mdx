@@ -1,6 +1,6 @@
 ---
 title: Tunnel to NGINX upstreams
-sidebar_label: NGINX Module
+sidebar_label: NGINX module
 ---
 
 [Ziti's NGINX module](https://github.com/openziti/ngx_ziti_module) works like a tunneler for hosting Ziti services, i.e. as a reverse proxy. This means that NGINX listens for particular, pre-configured Ziti services on the Ziti overlay (not on an IP address), and forwards the incoming requests to the NGINX upstream specified for that service in the NGINX config file.
@@ -27,7 +27,7 @@ We'll run the module in Kubernetes as an example, but the module works anywhere 
 
 ---
 
-## Create a Network
+## Create a network
 
 - [Local quickstart](@openzitidocs/get-started/network)
 - [Linux](@openzitidocs/category/linux)
@@ -35,7 +35,7 @@ We'll run the module in Kubernetes as an example, but the module works anywhere 
 
 ---
 
-## Create Identities
+## Create identities
 
 Follow the guide @[Create Identities](/learn/core-concepts/identities/overview.mdx#creating-an-identity) for the ngx-ziti-module and windows client.
 
@@ -50,7 +50,7 @@ Download jwt files and enroll identities.
 
 ---
 
-## Build Docker Image
+## Build Docker image
 
 Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2~3MBs. Therefore, it can not be uploaded to the existing nginx image. One needs to build a custom docker image and add it during the build process.
 
@@ -92,7 +92,7 @@ set {
 ```
 :::
 
-## Deploy AKS Cluster
+## Deploy AKS cluster
 
 Deploy the AKS Infrustructure in Azure using terraform. The terraform code is located @[OpenZiti Nginx Ingress Terraform Repo](https://github.com/dariuszSki/openziti-nginx-ingress-terraform.git). The following resources will be created, when the plan is applied.
 
@@ -136,7 +136,7 @@ cluster_public_fqdn = "akssand-2ift1yqr.hcp.eastus.azmk8s.io"
 ```
 :::
 
-## Configuration Code Snippets
+## Configuration code snippets
 
 If you are using your own deployment method, here are some configuration details from helm chart that need to be passed to the nginx ingress controller deployment.
 
@@ -217,7 +217,7 @@ controller:
 
 ---
 
-## Service Configurations
+## Service configurations
 
 - ***Create configs***
 
@@ -249,7 +249,7 @@ ziti edge create service-policy k8s-api-dial Dial --semantic "AnyOf" --identity-
 
 ---
 
-## Enable Ziti Service in Ingress Controller
+## Enable Ziti service in ingress controller
 
 Uncomment `ziti identity1` block in `resource.helm_release.nginx-ingress`
 
@@ -392,7 +392,7 @@ kube-system   metrics-server   ClusterIP   10.0.218.224   <none>        443/TCP 
 At this point the public access is still available even though the API Kubectl queries are routed through Ziti. You can disable ZDE client and test that.
 :::
 
-## Block IPs to API Server
+## Block IPs to API server
 
 Pass the following variable to only allow 192.168.1.1/32 source IP to essentially disable Public Access. 
 

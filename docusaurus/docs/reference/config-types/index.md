@@ -1,5 +1,5 @@
 ---
-title: Builtin Config Types
+title: Builtin config types
 sidebar_position: 20
 ---
 

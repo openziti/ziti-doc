@@ -1,4 +1,4 @@
-# Endpoint  Initialization
+# Endpoint initialization
 
 ```mermaid
 sequenceDiagram

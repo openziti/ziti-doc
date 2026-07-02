@@ -3,17 +3,17 @@ sidebar_label: Operations
 sidebar_position: 50
 ---
 
-# Operating a Controller Cluster
+# Operating a controller cluster
 
 For rolling upgrades specifically, see [Upgrading](./upgrading.md), which covers
 the per-node procedure, the version-mismatch read-only window, snapshotting before
 upgrade, and rollback.
 
-## Cluster Management APIs 
+## Cluster management APIs 
 
 A cluster can be managed via the REST endpoint and via the IPC agent. 
 
-### REST Operations
+### REST operations
 
 The REST operations can be invoked remotely using the `ziti` CLI as long as the 
 the CLI is logged in.
@@ -39,7 +39,7 @@ Flags:
 Use "ziti ops cluster [command] --help" for more information about a command.
 ```
 
-### IPC Operations
+### IPC operations
 
 The IPC versions can be invoked via the CLI and don't require any authentication,
 but need to be run on the same machine as the controller, by a user with access
@@ -93,7 +93,7 @@ from the binary directly with a config file (no systemd), which avoids the
 namespace isolation entirely. That trades operational hygiene for convenience,
 and is generally only a good idea on development hosts.
 
-## Growing the Cluster
+## Growing the cluster
 
 After at least one controller is running as part of a cluster and initialized, 
 additional nodes may be added to the cluster. Additional nodes should be configured 
@@ -104,7 +104,7 @@ Assume a network where the first node has been initialized, and is available at 
 If the second node is running at `ctrl2.ziti.example.com:1280`, then it can be added to the 
 cluster in one of two ways. 
 
-### From An Existing Node
+### From an existing node
 
 From a node already in the cluster, in this case the initial node, the new node can be added as follows:
 
@@ -112,7 +112,7 @@ From a node already in the cluster, in this case the initial node, the new node 
 user@node1$ ziti agent cluster add tls:ctrl2.ziti.example.com:1280
 ```
 
-### From A New Node
+### From a new node
 
 The new node, which is not yet part of the cluster, can also be directed to reach
 out to an existing cluster node and request to be joined.
@@ -121,7 +121,7 @@ out to an existing cluster node and request to be joined.
 user@node2$ ziti agent cluster add tls:ctrl1.ziti.example.com:1280
 ```
 
-### Voter vs Non-Voter
+### Voter vs non-voter
 
 By default, `ziti agent cluster add` adds the new node as a **voter** (`--voter=true`).
 To add a node as a non-voter -- for example, an additional controller that exists for
@@ -132,10 +132,10 @@ regional read coverage but shouldn't participate in raft consensus -- pass
 ziti agent cluster add --voter=false tls:ctrl4.ziti.example.com:1280
 ```
 
-See [Topology -> Voters and Non-Voters](./topology.md#voters-and-non-voters) for
+See [Topology -> Voters and non-voters](./topology.md#voters-and-non-voters) for
 guidance on when to add which.
 
-## Shrinking the Cluster
+## Shrinking the cluster
 
 From any node in the cluster, nodes can be removed as follows:
 
@@ -143,7 +143,7 @@ From any node in the cluster, nodes can be removed as follows:
 user@node1$ ziti agent cluster remove ctrl2
 ```
 
-## Changing Voter Status
+## Changing voter status
 
 There is no dedicated command to promote a non-voter to a voter or demote a voter to
 a non-voter. Instead, re-run `ziti agent cluster add` against the existing node with
@@ -167,7 +167,7 @@ If the address has changed (e.g., you've moved the node to a new host), use
 desired voter status. Re-adding by address relies on the node already being reachable
 at exactly that address.
 
-## Restoring from Backup
+## Restoring from backup
 
 Two restore paths exist, and they're complementary: `restore-from-db` is the more
 versatile tool, and the `db:` config setting is a simpler way to do the same restore
@@ -202,7 +202,7 @@ lost quorum. There's no leader to dispatch through on the existing nodes, and
 pointing the command at a fresh node wouldn't help reconstitute the broken
 cluster -- you'd just end up with a separate new cluster. For lost quorum without
 recoverable voters, see
-[Failure Scenarios -> Loss of Quorum](./failure-scenarios.md#loss-of-quorum) and
+[Failure scenarios -> Loss of quorum](./failure-scenarios.md#loss-of-quorum) and
 treat it as total cluster loss.
 
 ### `db:` config setting
@@ -227,7 +227,7 @@ Use whichever is more convenient: if you can edit the config before the first
 startup (or you're coming from a non-HA controller that already has `db:` set),
 the `db:` path is natural; if the controller is already running and you want to
 seed it from a snapshot, use `restore-from-db`. Either way, follow the
-[Total Cluster Loss](./failure-scenarios.md#total-cluster-loss) procedure for the
+[Total cluster loss](./failure-scenarios.md#total-cluster-loss) procedure for the
 full sequence (clear `dataDir`, bring up the first controller, grow the cluster,
 routers reconnect).
 
@@ -238,9 +238,9 @@ routers reconnect).
 | Cluster has a leader; want to roll the data model back to a snapshot | `restore-from-db` against any cluster member |
 | Bringing up a fresh deployment from an existing snapshot | `db:` config or `restore-from-db` against a fresh node -- either works |
 | All controllers destroyed; restoring from off-host backup | Same as fresh deployment: `db:` config or `restore-from-db` against a fresh node |
-| Quorum lost on a partially-alive cluster, voters unrecoverable | Treat as total cluster loss; see [Failure Scenarios](./failure-scenarios.md#loss-of-quorum) |
+| Quorum lost on a partially-alive cluster, voters unrecoverable | Treat as total cluster loss; see [Failure scenarios](./failure-scenarios.md#loss-of-quorum) |
 
-## Snapshot Application and Restarts
+## Snapshot application and restarts
 
 If a controller is out of communication for a while, it may receive a snapshot to apply, rather
 than a stream of events.
@@ -257,7 +257,7 @@ controller don't have to worry about replacing the bolt DB underneath a running 
 
 All events now contain a `event_src_id` to indicate which controller emitted them.
 
-There are some new events which are specific to clusters. See [Cluster Events](../50-events.mdx#cluster) 
+There are some new events which are specific to clusters. See [Cluster events](../50-events.mdx#cluster) 
 for more detail.
 
 ## Metrics
@@ -269,7 +269,7 @@ the first controller to get the metrics message is expected to deliver the metri
 events system for external integrators. The other controllers will have `doNotPropagate` set to true,
 and will only use the metrics message internally, to update routing data.
 
-## Rate Limiting and `TooManyUpdatesError`
+## Rate limiting and `TooManyUpdatesError`
 
 The controller protects itself against runaway write load with an adaptive rate limiter on the
 raft command path. Under sustained heavy write activity -- large batch identity provisioning,
@@ -285,11 +285,11 @@ exponential backoff with jitter is the right pattern.
 
 Three metrics (`raft.rate_limiter.queue_size`, `raft.rate_limiter.work_timer`,
 `raft.rate_limiter.window_size`) show the rate limiter's current state. See
-[Monitoring and Troubleshooting -> Metrics](./monitoring-and-troubleshooting.md#metrics) for what
+[Monitoring and troubleshooting -> Metrics](./monitoring-and-troubleshooting.md#metrics) for what
 to watch and [the cluster config reference](../30-configuration/controller.md#cluster) for the
 tuning knob (`commandHandler.maxQueueSize`).
 
-## Open Ports
+## Open ports
 
 Controllers now establish connections with each other, for two purposes.
 
@@ -303,7 +303,7 @@ to listen to both router and controller connections. As part of the connection p
 connection type is provided and the appropriate authentication and connection setup happens based on
 the connection type. If no connection type is provided, it's assumed to be a router.
 
-## System of Record
+## System of record
 
 In a controller that's not configured for HA, the bolt database is the system of record. In an HA
 setup, the distributed journal (managed via RAFT) is the system of record. The raft journal is 

@@ -7,7 +7,7 @@ import { LinuxResolverConfig } from "../../../_imports";
 
 # Options and modes
 
-## `ziti-edge-tunnel` Environment Variables
+## `ziti-edge-tunnel` environment variables
 
 `ZITI_TIME_FORMAT=utc` - set the log message time format to UTC timestamp instead of milliseconds since start
 
@@ -17,7 +17,7 @@ import { LinuxResolverConfig } from "../../../_imports";
 
 For more information about configuring the underlying Ziti C SDK with environment variables, see [the Ziti C SDK documentation](/reference/developer/sdk/ziti-sdk-c.mdx).
 
-## `ziti-edge-tunnel` Global Options
+## `ziti-edge-tunnel` global options
 
 You can start `ziti-edge-tunnel` with different options, some of the most commonly used options are listed below.
 
@@ -41,14 +41,14 @@ You can start `ziti-edge-tunnel` with different options, some of the most common
 --refresh N
 ```
 
-## Run Modes
+## Run modes
 
 There are two run modes:
 
 * `run`: transparent proxy with DNS nameserver
 * `run-host`: hosting-only without proxy or nameserver
 
-### `run` Mode
+### `run` mode
 
 `ziti-edge-tunnel run` provides a transparent proxy and nameserver. The nameserver may be configured to be authoritative (the default) or recursive with command-line option `--dns-upstream`. `systemd-resolved`, if enabled, automatically configures the Ziti nameserver. You may inspect the configuration with these commands.
 
@@ -68,17 +68,17 @@ If any interface has a wildcard routing domain configured, `ziti-edge-tunnel` wi
 
 <LinuxResolverConfig/>
 
-#### System Requirements for Mode `run`
+#### System requirements for mode `run`
 
 `ziti-edge-tunnel run` requires Linux capabilities for managing the `/dev/net/tun` device, running `resolvectl` to assign nameservers and domain routes to the tun interface, and running `ip route` to manage IP routes.
 
 * tun device and route management are permitted by passing the `CAP_NET_ADMIN` to the ziti-edge-tunnel process via `AmbientCapabilities` in the systemd service unit.
 * `systemd-resolved` DNS configuration is permitted by a PolKit rule installed with the RPM or DEB package.
 
-### `run-host` Mode
+### `run-host` mode
 
 `ziti-edge-tunnel run-host` is a mode for hosting (listening) for services which does provide service intercepts or DNS. Services configured for 'Bind' will be hosted by the tunneler.
 
-#### System Requirements for Mode `run-host`
+#### System requirements for mode `run-host`
 
 `ziti-edge-tunnel run-host` does not require elevated privileges or the above device or socket, only network egress to the servers for which it is hosting Services.

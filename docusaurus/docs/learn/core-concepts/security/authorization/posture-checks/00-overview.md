@@ -2,7 +2,7 @@
 uid: zitiSecurityPostureChecks
 ---
 
-# Posture Checks
+# Posture checks
 
 Posture Checks represent environmental state (posture) that an endpoint must be in for a
 [Service Policy](../policies/overview.mdx) to grant access to a service as either a client or host. They allow
@@ -23,7 +23,7 @@ The Posture Check system provides continuous, device-aware access control:
 - **Separation of concerns**: Posture Checks are defined and managed independently from service access policies,
   enabling reuse and flexible composition across many policies.
 
-## Two Posture Check systems
+## Two posture check systems
 
 OpenZiti supports two posture check enforcement models, selected automatically based on the type of API Session in use:
 
@@ -38,7 +38,7 @@ OpenZiti supports two posture check enforcement models, selected automatically b
 Both systems support the same Posture Check types and use the same configuration workflow through the controller (or
 controllers in an HA deployment).
 
-## Posture Data {#posture-data}
+## Posture data {#posture-data}
 
 Environmental state is captured as **Posture Data**, a set of values describing the current state of the client
 device. The SDK collects this data and submits it as **Posture Responses**. The controller informs the client which
@@ -65,7 +65,7 @@ Posture Check definitions are created and managed through the Edge Management AP
 enforcement system is in use. See the [Legacy](10-legacy-posture.md#types) or [OIDC](20-oidc-posture.md#types) pages
 for type details and creation examples.
 
-## Associating with Service Policies
+## Associating with service policies
 
 Posture Checks are associated to [Service Policies](../policies/overview.mdx) through
 [Roles and Role Attributes](../policies/overview.mdx#roles-and-role-attributes). Each Posture Check has a set of

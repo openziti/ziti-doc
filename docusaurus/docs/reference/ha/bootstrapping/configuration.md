@@ -3,9 +3,9 @@ sidebar_label: Configuration
 sidebar_position: 30
 ---
 
-# Controller Configuration
+# Controller configuration
 
-### Config File
+### Config file
 
 The controller requires a `cluster` section.
 

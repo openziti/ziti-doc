@@ -1,4 +1,4 @@
-# Connection Security
+# Connection security
 
 OpenZiti networks use robust modern cryptography and security mechanisms. Each component within an OpenZiti network uses
 security technology that fits its role and use-cases.
@@ -26,7 +26,7 @@ order to transport application/service data securely between the two intended pa
 
 [![image](@openziti_img/connections-edge-sdk-sdk.png)](@openziti_img/connections-edge-sdk-sdk.png)
 
-## Control and Link connection details
+## Control and link connection details
 
 Routers work in concert with a controller to establish a mesh network of `link` connections between routers. Routers
 coordinate with a controller over a `control` connection. These connections are initialized and maintained while the

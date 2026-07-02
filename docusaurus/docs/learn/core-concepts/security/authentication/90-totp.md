@@ -5,7 +5,7 @@ sidebar_position: 90
 # MFA TOTP
 
 OpenZiti authentication allows for n-factors of authentication - meaning that it is possible to support 1FA, 2FA, ...nFA
-authentication. One common setup for multi-factor authentication (MFA) is time-based one time passwords (TOTP).
+authentication. One common setup for multi-factor authentication (MFA) is time-based one-time passwords (TOTP).
 TOTP is commonly seen in "authenticator" applications (e.g. Google Authenticator, Authy, Microsoft Authenticator, etc).
 All "authenticator" applications support the same core [TOTP RFC 6238](https://www.rfc-editor.org/rfc/rfc6238)
 specification.
@@ -16,14 +16,14 @@ OpenZiti allows individual clients to enroll or un-enroll from MFA TOTP. Adminis
 through [Authentication Policies](50-authentication-policies.md) and
 [Posture Checks](../authorization/posture-checks/00-overview.md).
 
-### Authentication Policies
+### Authentication policies
 
 When enforced at authentication via an [Authentication Policy](50-authentication-policies.md), clients are unable to
 transition from [partially authenticated to fully
 authenticated](../sessions.md#full-vs-partial-authentication)
 without enrolling in MFA TOTP - leaving them unable to list services or connect to them.
 
-### MFA Posture Check
+### MFA posture check
 
 When enforced through the
 [MFA Posture Check](../authorization/posture-checks/00-overview.md), clients still must
@@ -31,7 +31,7 @@ become fully authenticated according to their [Authentication Policy](50-authent
 to services is determined by their policy and posture check access. If a service is granted only through a service
 policy that has an MFA posture check, they will not be able to connect to that service without enrolling in MFA TOTP.
 
-## Submitting TOTP during Authentication
+## Submitting TOTP during authentication
 
 When TOTP is required during authentication, how the code is submitted depends on the authentication system in use:
 
@@ -97,7 +97,7 @@ Fields:
   completed.
 - `provisioningUrl` - an `otpauth` url used by authenticator applications, normally shown as a QR code
 
-### Start Enrollment
+### Start enrollment
 
 Enrollment is started by the client. This endpoint is available when fully authenticated and also during a legacy
 partial-auth session (when the [Authentication Policy](50-authentication-policies.md) requires TOTP but the
@@ -111,7 +111,7 @@ partial-auth session (when the [Authentication Policy](50-authentication-policie
 
 The response contains a provisioning URL, QR code URL, and 20 single-use recovery codes.
 
-### Verify and complete Enrollment
+### Verify and complete enrollment
 
 Enrollment is completed by verifying the secret has been received by providing a currently valid TOTP code. Recovery
 codes are not treated as a valid value here. A live TOTP code is required.
@@ -124,7 +124,7 @@ codes are not treated as a valid value here. A live TOTP code is required.
 }
 ```
 
-### Restart Enrollment
+### Restart enrollment
 
 If enrollment has been started but not completed, the in-progress enrollment must be cancelled before starting a new
 one. To cancel an in-progress enrollment:

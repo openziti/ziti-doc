@@ -9,10 +9,10 @@ import LinuxPackageRepo from '../../../../_linux-package-repo.mdx';
 
 Deploy a router as a Linux system service. [The router introduction](@openziti2x/intro#components) may help to read first.
 
-1. [Creation](#router-creation)
-1. [Installation](#install-the-router-package)
-1. [Configuration](#configuration)
-1. [Starting Up](#starting-up)
+1. [Router creation](#router-creation)
+2. [Install the router package](#install-the-router-package)
+3. [Configuration](#configuration)
+4. [Start the router](#start-the-router)
 
 ## Router creation
 
@@ -115,7 +115,7 @@ You don't have to bootstrap everything at once. Each component can be enabled or
 | `ZITI_BOOTSTRAP_CONFIG` | `true` | Generate config.yml (set to `force` to regenerate) |
 | `ZITI_BOOTSTRAP_ENROLLMENT` | `true` | Enroll with the controller (set to `force` to re-enroll) |
 
-## Starting up
+## Start the router
 
 The bootstrap script automatically enables and starts the service on success. If you need to start it manually (for example, after crafting a configuration by hand):
 

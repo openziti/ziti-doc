@@ -7,11 +7,11 @@ import { LinuxResolverConfig } from "../../../_imports";
 
 # Troubleshoot the Linux tunneler
 
-## DNS Not Working
+## DNS not working
 
 <LinuxResolverConfig/>
 
-## Increase Log Level
+## Increase log level
 
 Set the log level to DEBUG to identify the activity that is occurring at the same time as the problem.
 
@@ -20,14 +20,14 @@ Set the log level to DEBUG to identify the activity that is occurring at the sam
 sudo -u ziti ziti-edge-tunnel set_log_level --loglevel DEBUG
 ```
 
-## Capture the Current Process Log
+## Capture the current process log
 
 ```text
 journalctl _SYSTEMD_INVOCATION_ID=$(systemctl show -p InvocationID --value ziti-edge-tunnel.service) -l \
 | tee /tmp/ziti-edge-tunnel.log
 ```
 
-## Systemd Service Won't Start or Keeps Restarting
+## Systemd service won't start or keeps restarting
 
 Reload the systemd service unit definitions to rule out a stale definition.
 
@@ -59,7 +59,7 @@ Edit the service unit.
 sudo systemctl edit ziti-edge-tunnel.service
 ```
 
-## Intercepting or Hosting Not Working
+## Intercepting or hosting not working
 
 Inspect the identity and router info for a running tunneler process. This creates a file named like `{{identity name}}.ziti`
 for each loaded identity. Each file summarizes the available services and router connections for the identity.
@@ -101,7 +101,7 @@ $ ncat -vw3 100.64.0.3 22
 SSH-2.0-OpenSSH_7.4
 ```
 
-## Process Keeps Crashing
+## Process keeps crashing
 
 A crash may be caused by a segmentation fault. If saving a Corefile is enabled, Linux will create a core dump file
 according to this pattern file: `/proc/sys/kernel/core_pattern`. Ubuntu configures this to use
@@ -109,7 +109,7 @@ according to this pattern file: `/proc/sys/kernel/core_pattern`. Ubuntu configur
 
 Please raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/) if the tunneler crashes.
 
-## Operation Not Permitted
+## Operation not permitted
 
 Deleting the `/tmp/.ziti` directory and restarting the tunneler may solve this issue if the tunneler was previously run as root.
 
@@ -125,7 +125,7 @@ failed to connect: -111/connection refused
 ```
 
 <!-- uncomment when ZET warns about non-writable identity directory
-## Identity Directory not Writable
+## Identity directory not writable
 
 The tunneler will warn if the identity directory is not writable by the run-as user because it needs to manage identity files, e.g., to renew certificates.
 

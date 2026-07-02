@@ -1,6 +1,6 @@
 ---
 id: host.v1
-title: Host v1 Redirect
+title: Host v1 redirect
 unlisted: true
 ---
 

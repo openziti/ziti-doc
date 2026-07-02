@@ -1,18 +1,18 @@
-# Prometheus Endpoint
+# Prometheus endpoint
 
 The controller can expose a `/metrics` endpoint that serves network metrics in the Prometheus [text exposition format](https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format). 
 
 The endpoint is exposed over HTTPS, and has optional support for client authentication via a certificate.
 
-## Ziti Configuration
+## Ziti configuration
 
 The Prometheus metric binding is configured as part of the controller configuration file.
 
-### Binding
+### Metrics API binding
 
 The Prometheus metrics api is not bound to any interface by default. The metrics api can be bound to the same network interface and port as the other Ziti APIs, or it can be set up on its own interface and/or port.   
 
-#### Listener Just for Metrics
+#### Listener just for metrics
 
 The metric api can be configured to listen on its own combination of network interface and port by adding a new section under the `web` configuration
 
@@ -64,7 +64,7 @@ web
         options: { }
 ```
 
-#### Add Metrics API to an Existing Listener
+#### Add metrics API to an existing listener
 
 The metrics binding can be added to an existing listener in the controller. 
 
@@ -127,9 +127,9 @@ web
 Prometheus will silently discard metrics that are older than five minutes.
 :::
 
-### Prometheus Configuration
+### Prometheus configuration
 
-#### TLS Configuration
+#### TLS configuration
 
 The `/metrics` api requires TLS configuration in Prometheus. The Prometheus scrape config must have the ziti web public key, or be configured to ignore private keys.
 
@@ -149,7 +149,7 @@ The `/metrics` api requires TLS configuration in Prometheus. The Prometheus scra
         - '127.0.0.1:2112'
 ```
 
-#### With Authentication
+#### With authentication
 
 It's a good idea to have metrics protected by a certificate to prevent nefarious actors from pulling metrics about your network.  The Prometheus scrape configuration can be configured with a keystore for this purpose:
 
@@ -171,7 +171,7 @@ It's a good idea to have metrics protected by a certificate to prevent nefarious
 
 ## Examples
 
-### Setup Metrics Authentication
+### Setup metrics authentication
 
 In this example you will:
 
@@ -190,7 +190,7 @@ openssl req  -new  -newkey rsa:2048  -nodes  -keyout prom-client.key  -out prom-
 openssl  x509  -req  -days 3650 -in /tmp/prom-client.csr  -signkey prom-client.key  -out prom-client.crt 
 ```
 
-#### Add the Cert to Ziti
+#### Add the cert to Ziti
 
 Open your ziti configuration file and set up the metrics api binding as shown in the `Authentication` section above. 
 
@@ -215,7 +215,7 @@ Add this text to the `web` section of your network controller configuration file
 
 ```
 
-#### Test the Key
+#### Test the key
 
 I use `curl` to test my keys when I set up metrics.  If Ziti is configured to bind metrics to `127.0.0.1:2112` then curl command will be:
 
@@ -232,7 +232,7 @@ The options to the curl command mean:
 
 The result should spit out a bunch of metrics.   If you see a `401` response then double-check that you've copied all of the bits from the certificate into the controller configuration file.
 
-#### Add the Key to Prometheus
+#### Add the key to Prometheus
 
 The key is added to Prometheus by referencing the crt and key files from the Ziti scrape configuration. 
 

@@ -14,7 +14,7 @@ Quickstarts are short-lived networks that are great for learning how to use Open
 :::
 
 `minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL). This quickstart is a great way to explore running your own controller, Router, and Console.
-## Tools of the Trade
+## Tools of the trade
 
 We'll use the preferred `minikube` Docker driver for this quickstart. You can run `minikube` in WSL with Docker Engine or Docker Desktop, but keep an eye out for one extra step to run `minikube tunnel` at the necessary point in the process.
 
@@ -175,7 +175,7 @@ sudo tee -a /etc/hosts <<< "$(minikube --profile miniziti ip) miniziti-controlle
 <Tabs>
   <TabItem value="miniziti.bash" label="miniziti script" default>
 
-## miniziti Script
+## miniziti script
 
 You can run the miniziti shell script or perform the steps manually yourself. Click the "Manual Steps" tab directly above to switch your view.
 
@@ -194,11 +194,11 @@ bash ./miniziti.bash
 </TabItem>
 <TabItem value="manual" label="Manual Steps" default>
 
-## Manual Steps to Learn by Doing
+## Manual steps to learn by doing
 
 This section explains the actions performed by the `miniziti.bash` script.You need a BASH or ZSH terminal for pasting commands.<br/><br/>
 
-### Create the `miniziti` Cluster
+### Create the `miniziti` cluster
 
 First, let's create a brand new `minikube` profile named "miniziti".
 
@@ -237,7 +237,7 @@ Kubernetes control plane is running at https://127.0.0.1:49439
 CoreDNS is running at https://127.0.0.1:49439/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
 
-### Install Ingress Addons
+### Install ingress addons
 
 You will need two Minikube addons:
 
@@ -275,9 +275,9 @@ kubectl wait pods \
 
 Now your miniziti cluster is ready for some OpenZiti!<br/><br/>
 
-### Install the Controller
+### Install the controller
 
-#### Allow Kubernetes to Manage Certificates
+#### Allow Kubernetes to manage certificates
 
 You need to install the required [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (CRD) for the controller.
 
@@ -288,7 +288,7 @@ kubectl apply \
    --filename https://raw.githubusercontent.com/cert-manager/trust-manager/v0.7.0/deploy/crds/trust.cert-manager.io_bundles.yaml
 ```
 
-#### Add the OpenZiti Helm Repository
+#### Add the OpenZiti Helm repository
 
 Add the OpenZiti Helm Repo
 
@@ -296,7 +296,7 @@ Add the OpenZiti Helm Repo
 helm repo add "openziti" https://openziti.io/helm-charts/
 ```
 
-#### Install the Controller
+#### Install the controller
 
 Let's create a Helm release named "miniziti-controller" for the controller. This will also install sub-charts `cert-manager` and `trust-manager` in the same Kubernetes namespace "ziti-controller."
 
@@ -398,7 +398,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
          nslookup miniziti-controller.miniziti.internal
    ```
 
-### Install the Router
+### Install the router
 
 1. Log in to OpenZiti.
 
@@ -411,7 +411,7 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
          --password
    ```
 
-1. Create a Router with role "public-routers" and save the enrollment one-time-token as a temporary file.
+1. Create a Router with role "public-routers" and save the enrollment one-time token as a temporary file.
 
    ```text
    ziti edge create edge-router "miniziti-router" \
@@ -461,9 +461,9 @@ Configure CoreDNS in the miniziti cluster. This is necessary no matter which hos
       --output go-template='{{"\nINFO: Your console https://miniziti-controller.miniziti.internal/zac/ password for \"admin\" is: "}}{{index .data "admin-password" | base64decode }}{{"\n\n"}}'
    ```
 
-1. Open [https://miniziti-controller.miniziti.internal/zac/](https://miniziti-controller.miniziti.internal/zac/) in your web browser and login with username "admin" and the password from your clipboard.
+1. Open [https://miniziti-controller.miniziti.internal/zac/](https://miniziti-controller.miniziti.internal/zac/) in your web browser and sign in with username "admin" and the password from your clipboard.
 
-### Create OpenZiti Identities and Services
+### Create OpenZiti identities and services
 
 Here's a BASH script that runs several `ziti` CLI commands to illustrate a minimal set of identities, services, and policies.
 
@@ -498,7 +498,7 @@ ziti edge create service-edge-router-policy "public-routers" \
 ziti edge enroll /tmp/httpbin-host.jwt
 ```
 
-### Install the `httpbin` Demo API Server Chart
+### Install the `httpbin` demo API server chart
 
 This Helm chart installs an OpenZiti fork of `go-httpbin`, so it doesn't need to be accompanied by a tunneler. We'll use it as a demo API to test the service you just created named "httpbin-service".
 
@@ -511,7 +511,7 @@ helm install "miniziti-httpbin" openziti/httpbin \
 </TabItem>
 </Tabs>
 
-## Add the Client Identity
+## Add the client identity
 
 Add the client identity you created to your tunneler.
 
@@ -525,7 +525,7 @@ nslookup httpbin.miniziti.private
 
 The expected output includes an IP address like `100.64.0.4`.
 
-## Test the Demo API Service
+## Test the demo API service
 
 ```text title="macOS or Linux, including WSL"
 curl -sSf -XPOST -d ziti=awesome http://httpbin.miniziti.private/post | jq .data
@@ -533,11 +533,11 @@ curl -sSf -XPOST -d ziti=awesome http://httpbin.miniziti.private/post | jq .data
 
 Visit [http://httpbin.miniziti.private/get](http://httpbin.miniziti.private/get) in your web browser in macOS, Linux, or Windows to see a JSON test response from the demo server.
 
-## Explore the Console
+## Explore the console
 
 Now that you've successfully tested the service, check out the various entities in your that were created by the script in [https://miniziti-controller.miniziti.internal/zac/](https://miniziti-controller.miniziti.private/zac/).
 
-## Next Steps
+## Next steps
 
 1. In the console, try to revoke then restore your permission to acess the demo services.
 1. Deploy a non-Ziti demo application to Kubernetes and securely [share it with a Ziti proxy pod](@openziti2x/how-to-guides/tunnelers/kubernetes/kubernetes-service)

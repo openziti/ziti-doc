@@ -3,7 +3,7 @@ sidebar_label: Certificates
 sidebar_position: 20
 ---
 
-# Controller Certificates
+# Controller certificates
 
 For controllers to communicate and trust one another, they need certificates that have
 been generated with the correct attributes and relationships.
@@ -44,7 +44,7 @@ would be:
 spiffe://ziti.example.com/controller/ctrl1
 ```
 
-## Steps to Certificate Creation
+## Steps to certificate creation
 There are many ways to set up certificates, so this will just cover an example configuration.
 
 The primary thing to ensure is that controllers have a shared root of trust. 
@@ -95,7 +95,7 @@ ziti pki create server --pki-root ./pki --ca-name ctrl3 --dns "localhost,ctrl3.z
 ziti pki create client --pki-root ./pki --ca-name ctrl3 --client-name ctrl3 --spiffe-id 'controller/ctrl3'
 ```
 
-## Controller Identity Configuration
+## Controller identity configuration
 
 Once the certificates exist on disk, the controller config's `identity:` block tells the
 controller where to find them. We recommend the four-field form: separate certs and
@@ -121,7 +121,7 @@ Two things worth highlighting:
   generate separate keys by default (`server.key` and `client.key` under the
   controller's `keys/` directory), and the config above expects exactly that layout.
 
-### Simpler Variant: One Cert for Both Roles
+### Simpler variant: One cert for both roles
 
 If you don't need the role separation, you can omit `server_cert` and `server_key`, in
 which case `cert` and `key` are used for both incoming and outgoing mTLS. Functionally
@@ -131,7 +131,7 @@ keeps the client and server key material independent, which is a healthier defau
 security-sensitive deployments and generalizes to other OpenZiti identity
 configurations (routers, SDK identities) where the separation matters more.
 
-## Common Bootstrapping Errors
+## Common bootstrapping errors
 
 A few PKI-related errors come up regularly when bringing up a new HA cluster for the
 first time. Each one below lists the symptoms, the root cause, and the fix.
@@ -163,7 +163,7 @@ own newly-generated key -- which is what `ziti pki create client` does by defaul
 Two options.
 
 * **Use the four-field identity form** with separate `key:` and `server_key:`, as
-  shown in [Controller Identity Configuration](#controller-identity-configuration).
+  shown in [Controller identity configuration](#controller-identity-configuration).
   Each field then refers to the key that actually matches its cert.
 * **Or, if you want to keep a single key**, re-issue the client cert from the
   server's key by adding `--key-file server` to the `ziti pki create client` command:
@@ -212,7 +212,7 @@ identity:
 ```
 
 The recommended layout in
-[Controller Identity Configuration](#controller-identity-configuration) already uses
+[Controller identity configuration](#controller-identity-configuration) already uses
 chain files; this error usually comes from copying parts of older example configs
 that referenced `.cert` directly.
 

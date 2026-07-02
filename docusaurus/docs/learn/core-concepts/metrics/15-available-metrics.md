@@ -1,4 +1,4 @@
-# Available Metrics
+# Available metrics
 
 Metrics are reported to the log files, locale in /var/log/ziti by default.  There are 2 primary log files for metrics, utilization-metrics.log and utilization-usage.log.  These logs may be shipped to various reporting systems for easier visibility and monitoring.
 

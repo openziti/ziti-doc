@@ -50,7 +50,7 @@ Please note that all authentication mechanisms also require a properly configure
 The following [primary authentication](00-auth.md#primary-authentication) mechanisms require post-creation enrollment:
 
 - OpenZiti PKI x509 Client Certificate
-- 3rd Party x509 Client Certificate
+- 3rd-party x509 Client Certificate
 - Username Password (UPDB)
 
 The following do not require enrollment, but must have a properly configured
@@ -58,7 +58,7 @@ The following do not require enrollment, but must have a properly configured
 
 - JWT
 
-### Creating with No Authenticators/Enrollments
+### Creating with no authenticators/enrollments
 
 Note: This Identity will not be able to authenticate
 
@@ -83,7 +83,7 @@ ziti edge delete enrollment where "identity=<id>"
 }
 ```
 
-### Creating with OpenZiti PKI Client Cert Enrollment
+### Creating with OpenZiti PKI client cert enrollment
 
 Note: This identity will be using the default [Authentication Policy](50-authentication-policies.md) which allows
 certificate authentication
@@ -105,13 +105,13 @@ certificate authentication
 }
 ```
 
-### Creating with 3rd Party CA Client Cert Enrollment
+### 3rd-party CA client-certificate enrollment
 Note: This identity will be using the default [Authentication Policy](50-authentication-policies.md) which allows
 certificate authentication
 
 #### OpenZiti CLI
 
-It is currently not possible to create identities with a 3rd party certificate enrollment through the CLI.
+It is currently not possible to create identities with a 3rd-party certificate enrollment through the CLI.
 
 #### Edge Management API
 
@@ -126,7 +126,7 @@ It is currently not possible to create identities with a 3rd party certificate e
 }
 ```
 
-### Creating with Username/Password Enrollment
+### Creating with username/password enrollment
 Note: This identity will be using the default [Authentication Policy](50-authentication-policies.md) which allows
 UPDB authentication
 
@@ -147,7 +147,7 @@ UPDB authentication
 }
 ```
 
-### Creating with JWT Authenticator
+### Creating with JWT authenticator
 
 Note: A valid [External JWT Signer](70-external-jwt-signers.mdx) must be created and an
 [Authentication Policy](50-authentication-policies.md) must be defined that allows the identity to authenticate with

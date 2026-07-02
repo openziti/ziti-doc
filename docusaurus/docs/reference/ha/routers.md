@@ -3,7 +3,7 @@ sidebar_label: Routers
 sidebar_position: 40
 ---
 
-# Routers in Controller HA
+# Routers in controller HA
 
 There are only a few differences in how routers work in an HA cluster.
 
@@ -16,7 +16,7 @@ configuration file is initialized with the list of controllers.
 This means that manually configuring the controllers for a router should
 no longer be required.
 
-### Endpoints File
+### Endpoints file
 
 The router stores the current known controllers in an endpoints configuration
 file.
@@ -49,7 +49,7 @@ ctrl:
   endpointsFile: /var/run/ziti/endpoints.yaml
 ```
 
-### Manual Controller Configuration
+### Manual controller configuration
 
 Instead of specifying a single controller, multiple controllers can be specified
 in the router configuration.
@@ -65,7 +65,7 @@ ctrl:
 If the controller cluster changes, it will notify routers of the updated 
 controller endpoints. 
 
-## Router Data Model
+## Router data model
 
 The router receives a stripped down version of the controller data model. 
 
@@ -79,7 +79,7 @@ be fully restored from a controller on every restart.
 The location and frequency of snapshotting can be 
 [configured using the db and dbSaveIntervalSeconds properties](../30-configuration/router.md#edge).
 
-## Controller Selection
+## Controller selection
 
 When creating [circuits](../../learn/core-concepts/security/SessionsAndConnections.md#data-plane), 
 routers will chose the most responsive controller, based on latency. Network operators will
@@ -91,4 +91,4 @@ cluster leader, since updates have to go through the leader.
 
 For what a router does when its current controller becomes unreachable, the leader
 changes, or the cluster enters read-only mode, see
-[Failure Scenarios -> Router Behavior During Failures](./failure-scenarios.md#router-behavior-during-failures).
+[Failure scenarios -> Router behavior during failures](./failure-scenarios.md#router-behavior-during-failures).

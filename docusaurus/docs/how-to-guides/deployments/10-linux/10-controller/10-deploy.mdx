@@ -12,9 +12,9 @@ Deploy a controller as a Linux system service. [The controller introduction](@op
 
 This guide applies to Ziti version 2.0 and newer. Older Linux packages are still available and work similarly but ignore the cluster-related answers.
 
-1. [Installation](#install-the-controller-package)
-1. [Configuration](#configuration)
-1. [Starting Up](#starting-up)
+1. [Install the controller package](#install-the-controller-package)
+2. [Configuration](#configuration)
+3. [Start the controller](#start-the-controller)
 
 ## Install the controller package
 
@@ -147,7 +147,7 @@ Each component uses specific answers:
 - **Config** — `ZITI_CTRL_ADVERTISED_ADDRESS`, `ZITI_CTRL_ADVERTISED_PORT` (PKI must already exist)
 - **Database** — `ZITI_USER`, `ZITI_PWD`
 
-## Starting up
+## Start the controller
 
 The bootstrap script automatically enables and starts the service on success. If you need to start it manually (for example, after crafting a configuration by hand):
 

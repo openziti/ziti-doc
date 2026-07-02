@@ -1,4 +1,4 @@
-# Service Dial 
+# Service dial 
 
 ```mermaid
 sequenceDiagram

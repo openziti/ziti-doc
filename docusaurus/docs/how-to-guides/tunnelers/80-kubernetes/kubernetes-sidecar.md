@@ -1,9 +1,9 @@
 ---
 sidebar_position: 70
-sidebar_label: Sidecar Proxy
+sidebar_label: Sidecar proxy
 ---
 
-# Kubernetes Sidecar Proxy
+# Kubernetes sidecar proxy
 
 ## Overview
 
@@ -23,7 +23,7 @@ by hostname instead of IP address.
   uses the controller and router that are created in the Minikube Quickstart.
 - Admin-level access to a Kubernetes cluster via `kubectl`.
 
-## Create and Enroll an Identity
+## Create and enroll an identity
 
 This guide will re-use the service "testapi-service", a REST API demo server, that was created in the quickstart.
 
@@ -40,7 +40,7 @@ This guide will re-use the service "testapi-service", a REST API demo server, th
   ziti edge enroll /tmp/sidecar-client.jwt
   ```
 
-## Restore the Quickstart KUBECONFIG If Necessary
+## Restore the quickstart KUBECONFIG if necessary
 
 You can restore the KUBECONFIG context from the Minikube quickstart like this if you switched contexts after running it.
 
@@ -48,7 +48,7 @@ You can restore the KUBECONFIG context from the Minikube quickstart like this if
 minikube --profile miniziti update-context
 ```
 
-## Save the Identity in a Kubernetes Secret
+## Save the identity in a Kubernetes secret
 
 The `ziti-tunnel` sidecar will access its identity by mounting a Kubernetes secret in the container.
 
@@ -57,7 +57,7 @@ kubectl create secret generic "sidecar-client-identity" \
     --from-file=/tmp/sidecar-client.json
 ```
 
-## Deploy the Pod
+## Deploy the pod
 
 Deploy a Pod that runs a non-Ziti demo client application and `ziti-tunnel` as a sidecar proxy. For this
 demonstration, the client application is `wget`. Our Pod sends a `POST` request to the demo testapi server in a loop so we can see the response in the log.
@@ -148,7 +148,7 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
     kubectl apply -f /tmp/sidecar-demo.yaml
     ```
 
-## Check the Logs
+## Check the logs
 
 1. Find the name of the pod that Kubernetes deployed for us.
 

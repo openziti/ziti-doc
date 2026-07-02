@@ -1,5 +1,5 @@
 ---
-title: Expired Certs
+title: Expired certs
 id: troubleshoot-expired-certs
 ---
 
@@ -33,7 +33,7 @@ openssl s_client -connect 150.136.141.199:8441 | grep "NotBefore"
 # Example for control plane
 openssl s_client -connect localhost:6262 | grep "NotBefore"
 ```
-### Example Output
+### Example output
 As shown, the start and end dates for all certificates in the chain will be displayed.
 ```
 v:NotBefore: Sep 12 13:36:59 2023 GMT; NotAfter: Sep 11 13:37:55 2024 GMT

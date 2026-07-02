@@ -1,5 +1,5 @@
 ---
-title: Quickstart Walkthrough
+title: Quickstart walkthrough
 id: quickstart-walkthrough
 ---
 
@@ -9,7 +9,7 @@ The [Local - No Docker](../get-started/network/local-no-docker.mdx), [Local - Wi
 the `expressInstall` function. Each version varies slightly. This page will focus on the 
 [Local - No Docker](../get-started/network/local-no-docker.mdx) quickstart.
 
-## The General Process
+## The general process
 
 1. Obtain the OpenZiti binary
 2. Create a PKI
@@ -21,9 +21,9 @@ the `expressInstall` function. Each version varies slightly. This page will focu
 8. Enroll the Router previously created
 9. Add default edge router and Service edge router policies.
 
-## General Environment Setup
+## General environment setup
 
-### Obtain the OpenZiti Binary
+### Obtain the OpenZiti binary
 
 The `expressInstall` function will call `getZiti` to obtain the Ziti binary. The `getZiti` function detects your
 OS type and architecture to craft the specific download URL for the binary. The binary is downloaded, and extracted to
@@ -46,7 +46,7 @@ sections. The following image represents the overall PKI architecture.
 
 ![quickstart-pki-full.png](./quickstart-pki-full.png)
 
-### Update the CA Bundle
+### Update the CA bundle
 
 The latest tunnelers require full and complete PKIs, not arbitrary trust anchors. Therefore, the root and intermediate
 CAs must be added to the CA bundle. Additionally, the file is copied for the Edge/API CA bundle.
@@ -57,7 +57,7 @@ cat "${ZITI_PKI}/my.root.ca/certs/intermediate.from.external.ca.cert" >> "${ZITI
 cp "${ZITI_PKI}/${ZITI_NETWORK}-network-components/cas.pem" "${ZITI_PKI}/${ZITI_NETWORK}-edge/edge.cas.pem"
 ```
 
-### Controller Creation and Configuration
+### Controller creation and configuration
 
 A controller configuration file is generated using the OpenZiti CLI binary. After the configuration is created, the
 controller is initialized. The process of initialization also initializes the database.
@@ -65,7 +65,7 @@ controller is initialized. The process of initialization also initializes the da
 The controller is then started and the quickstart waits for the controller to finish starting up before continuing as
 the controller is necessary to create the edge router which happens in the next steps.
 
-### Default Policies
+### Default policies
 
 Two policies are generated to simplify the process of getting started with the network.
 An [Edge Router Policy](./core-concepts/security/authorization/policies/overview.mdx#edge-router-policies)
@@ -74,7 +74,7 @@ is created to allow all identities to connect to a router with a `#public` attri
 A [Service edge router policy](./core-concepts/security/authorization/policies/overview.mdx#service-edge-router-policies)
 is also created, allowing all services to use routers with the `#public` attribute.
 
-### Router Creating and Configuration
+### Router creating and configuration
 
 Just as with the controller, a config file is generated for the router. The router also needs to be created through the
 controller. This will generate a one-time token (OTT) to be used during router enrollment.
@@ -109,7 +109,7 @@ It is extremely important that quickstart has the relevant information to set up
 performed once so, if it is incorrect, the entire PKI needs to be regenerated.
 :::
 :::caution[DNS is Preferred Over IP]
-It is highly recommended to use DNS over IP as this is a one time setup, if your IP changes, then your PKI is rendered
+It is highly recommended to use DNS over IP as this is a one-time setup, if your IP changes, then your PKI is rendered
 useless.
 :::
 

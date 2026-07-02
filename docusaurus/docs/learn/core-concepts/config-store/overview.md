@@ -1,4 +1,4 @@
-# Service Configurations
+# Service configurations
 
 Ziti Service Configurations, henceforth "Configs", may be associated with a service to provide metadata for the application that is being delivered by that service.
 
@@ -31,7 +31,7 @@ This configuration model has the following properties:
 * There are tunneler Config Types for intercept (client) side and hosting (server) side
 * Since an application can support multiple Config Types, applications can version their Config Types as their needs change
 
-## Tunneler Config Types
+## Tunneler config types
 
 The Ziti tunnelers are themselves SDK applications and so they serve as an example of how configuration data can be used.
 

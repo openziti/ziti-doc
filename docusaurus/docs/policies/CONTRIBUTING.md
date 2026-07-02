@@ -2,7 +2,7 @@
 title: Contributing
 ---
 
-# Contributing to NetFoundry Open-Source Projects
+# Contributing to NetFoundry open-source projects
 
 NetFoundry welcomes all contributions large or small from the community. If you want to contribute to a NetFoundry
 repository this document will serve as a guide. Contributions can come in various forms such
@@ -10,7 +10,7 @@ as [bug reports](#example-bug-report), engaging with other users by offering hel
 the [discourse group](https://openziti.discourse.group/) and of course as code submissions. Please take a moment and
 read this document to see how you can help out.
 
-## Bug Reports
+## Bug reports
 
 If you have discovered a potential issue with any of the NetFoundry projects on GitHub please file a GitHub issue for
 the possible problem. We realize you are taking time out of your day to file the issue (thank you!) however we do ask
@@ -44,7 +44,7 @@ Additional guidelines:
 * Keep responses in the issues specifically about the issue itself. If another issue arises or if discussion is
   warranted open a new issue and use the [discourse group](https://openziti.discourse.group/) accordingly.
 
-### Example Bug Report
+### Example bug report
 
 ```
 Title: 
@@ -63,7 +63,7 @@ Here's what I did:
 # Click save - observe the error
 ```
 
-## Code Contributions
+## Code contributions
 
 Before a contribution can be accepted there is some bookkeeping that needs to occur. NetFoundry requires external
 contributors to sign a Contributor License Agreement (CLA) in order to ensure our products can remain open source while

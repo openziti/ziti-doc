@@ -13,7 +13,7 @@ explore a [network](@openziti2x/intro).
 
  These steps enable the console for a quickstart controller. Run these commands with a shell like `bash` in a Windows Subsystem for Linux (WSL), macOS, or Linux.
 
-## Downloading From GitHub
+## Download from GitHub
 
 With ZAC 3.0+, the ZAC has been transformed to a single-page-application (SPA) allowing you to download an artifact 
 from GitHub and host the ZAC however you like. The controller was also modified to allow the ZAC to be hosted by the 
@@ -60,9 +60,9 @@ the ZAC on the management API web binding.
    the "Host OpenZiti Anywhere" quickstart defaults to 8441 and is customizable by you. Make sure you are using the 
    advertised host and port for your managment API, e.g., `https://ctrl.ziti.example.com:1280/zac/`
 
-## Using Docker
+## Use Docker
 
-### Copy PKI From Controller
+### Copy PKI from controller
 
 It's a good idea to use TLS everywhere. To do this, you'll need to provide ZAC a key and a certificate.
 If you have used the [Local - With Docker](../network/local-with-docker.mdx) quickstart to start
@@ -84,7 +84,7 @@ docker run -it --rm --name temp \
   cp /persistent/pki/ziti-edge-controller-intermediate/certs/ziti-edge-controller-server.chain.pem /zac-pki
 ```
 
-### Starting ZAC
+### Start ZAC
 
 With the certificates copied, you will be able to start the ZAC using one Docker command. Also notice the command
 will expose the ZAC http and https ports to your local computer so that you can access the ZAC from outside of Docker.
@@ -124,7 +124,7 @@ internet search should show you how to accomplish this.
 
 [Kubernetes deployment guide](../../how-to-guides/deployments/30-kubernetes/kubernetes-console.mdx).
 
-## Login and use ZAC
+## Sign in and use ZAC
 
 1. At this point you should be able to navigate to: `https://${ZITI_CTRL_EDGE_ADVERTISED_ADDRESS}:8443`and see the ZAC login
    screen. (The TLS warnings your browser will show you are normal - it's because these steps use a self-signed certificate

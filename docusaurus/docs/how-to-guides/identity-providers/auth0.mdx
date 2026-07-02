@@ -32,11 +32,11 @@ https://${tenant}.${region}.auth0.com/.well-known/openid-configuration
 
 ---
 
-## Get an Auth0 Account
+## Get an Auth0 account
 
 If you don't already have an account you can sign up for a free account at https://auth0.com/signup
 
-## Add an Application (if necessary)
+## Add an application (if necessary)
 
 Once you have an Auth0 account, expand **Application**, choose **Applications** again in the left navbar then find the 
 **Create Application** button and click it:
@@ -45,7 +45,7 @@ Once you have an Auth0 account, expand **Application**, choose **Applications** 
 ![Auth0 Applications](/img/idps/auth0/create-app.png)
 :::
 
-### Choose the Type of Application
+### Choose the type of application
 
 Give the application a name, then choose **Single Page Web Applications** and click **Create**.
 
@@ -69,13 +69,13 @@ URIs appropriate for the features you are enabling.
 ![Auth0 callbacks](/img/idps/auth0/callbacks.png)
 :::
 
-## Add a New API
+## Add a new API
 
 When using ext-jwt-signers with OIDC, OpenZiti validates the security token presented is intended for OpenZiti by 
 looking for and using the `aud` (audience) field of the JWT.  This requires the token (the JWT) to have an audience 
 specified and the ext-jwt-signer to match that audience. For Auth0, this is accomplished by creating an **API**.
 
-From the left navbar in the Auth0 dashboard, click on `Application` -> `APIs` -> `Create API`
+From the left navbar in the Auth0 dashboard, click `Application` -> `APIs` -> `Create API`
 
 :::info[Create API]
 ![Auth0 Applications](/img/idps/auth0/create-api.png)

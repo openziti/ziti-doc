@@ -8,7 +8,7 @@ import ConsoleAuthAdminClientCertificate from '../../../reference/40-command-lin
 
 The Ziti Admin Console (ZAC) is bundled with the `ziti-controller` Helm chart and is available once the controller is deployed.
 
-## Find the Console URL
+## Find the console URL
 
 Use the console by navigating to the controller's address with path `/zac/` in a web browser. If you published the controller at `ctrl.ziti.example.com:443`, then the console URL is `https://ctrl.ziti.example.com/zac/`.
 
@@ -18,7 +18,7 @@ The correct console URL is displayed after Helm install or upgrade and may be fe
 helm get notes "ziti-controller"
 ```
 
-## Authenticate with a Username and Password
+## Authenticate with a username and password
 
 ```text title="Print the username and password"
 kubectl get secrets ziti-controller-admin-secret \
@@ -33,6 +33,6 @@ admin-password: UJ2Z4xK1OpagXG94GkAXkR0M4MRNvcOh
 admin-user: admin
 ```
 
-## Authenticate with an Admin Client Certificate
+## Authenticate with an admin client certificate
 
 <ConsoleAuthAdminClientCertificate />

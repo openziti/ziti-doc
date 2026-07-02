@@ -1,6 +1,6 @@
-# Shared API Capabilities
+# Shared API capabilities
 
-## API Response Envelopes
+## API response envelopes
 
 All responses from APIs have the following outer envelope:
 
@@ -36,7 +36,7 @@ The `cause` field can either be another nested `error` or a `field error`:
 }
 ```
 
-## Filtering, Sorting, & Pagination
+## Filtering, sorting, and pagination
 
 API support rich filtering, sorting and pagination on queries that return lists/arrays of objects in the `data` fields. 
 On list responses the `meta` section contains a list of `sortableFields` which can filtered and sorted upon. 
@@ -62,7 +62,7 @@ Data can be sorted on fields by providing a `sort by` clause:
 
 ### Filtering
 
-#### Logical Operations
+#### Logical operations
 
 The following comparisons are allowed:
 
@@ -73,7 +73,7 @@ The following comparisons are allowed:
  | `contains`, `not contains` | `name contains "hi"`                   |
 
 
-#### Logical Conjunctions
+#### Logical conjunctions
 | Conjunction                | Example                                      |
 |----------------------------|----------------------------------------------|
 | `and`                      | `firstName = "bob" and lastName = "builder"` |

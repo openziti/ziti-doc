@@ -1,4 +1,4 @@
-# Endpoint Registration
+# Endpoint registration
 
 ```mermaid
 sequenceDiagram
@@ -20,7 +20,7 @@ note over SDK: Endpoint Registered
 ## Steps
 
 1. A person with administrative rights to the Network instance creates a new identity.
-2. The Ziti controller returns a JWT to be used as a one time token to register the new identity.
+2. The Ziti controller returns a JWT to be used as a one-time token to register the new identity.
 3. The administrator delivers the JWT to the endpoint by whatever means required.  This is the true bootstrapping of the trust model, and should be well defined.
 4. The JWT is parsed and information, such as the name of the identity and the address of the controller are parsed from the token
 5. The server certificate is retrieved from the controller.

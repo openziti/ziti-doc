@@ -9,7 +9,7 @@ import ConsolePublicCertsBasicSteps from './_console-public-certs-basic-steps.md
 
 Use this guide to configure the Ziti Admin Console (ZAC) after deployment.
 
-## Alternative Server Certificates
+## Alternative server certificates
 
 At the time of writing, ZAC 3.0+ is hosted by the controller, which is the likely direction of travel
 for the future, and the current preferred configuration.
@@ -35,7 +35,7 @@ web listeners) then you must bind the ZAC to the listener where `edge-management
 
 ## Further details:
 
-### Creating a DNS Record
+### Create a DNS record
 
 Before generating an SSL certificate, ensure you have a valid DNS record pointing to the public IP address of
 your server. This can be done through your DNS provider’s control panel, dashboard, or directly via a domain
@@ -59,7 +59,7 @@ A simple way to satisfy the DNS-based challenge from Let's Encrypt is to use the
 These are specific to DNS providers, but you can see an example of how they should be used in
 [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot)
 
-### Configure DNS Provider Authentication
+### Configure DNS provider authentication
 
 CertBot requires access to your DNS provider’s API to perform DNS-based domain validation. This is because
 it provisions a TXT resource in the domain, as per [RFC8555](https://datatracker.ietf.org/doc/html/rfc8555#section-8.4).
@@ -70,7 +70,7 @@ Other mechanisms of satisfying the challenge are available. However, this method
 Read the documentation from [CertBot DNS Plugins](https://eff-certbot.readthedocs.io/en/latest/using.html#dns-plugins)
 to determine how to configure this correctly for your setup.
 
-### Obtain an SSL Certificate
+### Obtain an SSL certificate
 
 Once all the above is correct, you can run CertBot using the DNS-based challenge. The following command
 demonstrates the principle. You should change the DNS provider specific arguments to match your scenario.
