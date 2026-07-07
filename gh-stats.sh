@@ -4,7 +4,11 @@ export REPO=ziti
 export TODAY=$(date '+%Y%m%d')
 export SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 export STATS_DIR="/tmp/stats"
-export GH_TOKEN="${GITHUB_TOKEN}"
+# The GitHub "List stargazers" endpoint is restricted to repo admins/collaborators
+# (see github.blog changelog 2026-06-30), so this needs a token with metadata:read on
+# every openziti repo -- an org member's fine-grained PAT or an org-installed App.
+# Prefer that dedicated token; fall back to GITHUB_TOKEN for local/legacy use.
+export GH_TOKEN="${STARGAZERS_READ_TOKEN:-${GITHUB_TOKEN}}"
 
 function outputFileExists {
 if [[ -f $1 ]]; then
