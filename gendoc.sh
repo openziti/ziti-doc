@@ -232,11 +232,11 @@ if [[ "${SKIP_LINKED_DOC}" == no ]]; then
 fi
 
 if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
-  if ! command -v csvtojson >/dev/null 2>&1; then
-    echo "❌ csvtojson not installed, skipping stargazer data"
+  if ! command -v gh >/dev/null 2>&1; then
+    echo "❌ gh CLI not installed, skipping stargazer data"
     ADD_STARGAZER_DATA=no
-  elif [[ -z "${STARGAZERS_READ_TOKEN:-${GITHUB_TOKEN:-}}" ]]; then
-    echo "❌ neither STARGAZERS_READ_TOKEN nor GITHUB_TOKEN set, skipping stargazer data"
+  elif [[ -z "${STARGAZERS_READ_TOKEN:-${GITHUB_TOKEN:-}}" ]] && ! gh auth status >/dev/null 2>&1; then
+    echo "❌ no stargazer token and gh is not logged in, skipping stargazer data"
     ADD_STARGAZER_DATA=no
   else
     echo "collecting stargazer data before building the site..."
