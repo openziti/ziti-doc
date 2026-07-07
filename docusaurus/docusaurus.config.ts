@@ -1,13 +1,10 @@
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
-
-import prismLight from './src/prism-light';
-import prismDark from './src/prism-dark';
 import {Config} from "@docusaurus/types";
 import type {ThemeConfig} from '@docusaurus/preset-classic';
 import type {ScalarOptions} from '@scalar/docusaurus';
 import pluginHotjar from './src/plugins/hotjar';
 import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-redirects';
-import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
+import {docUrl, hotjarId, prismTheme, prismAdditionalLanguages} from "@netfoundry/docusaurus-theme/node";
 import {
     consoleLinkAbs, frontdoorLinkAbs, selfhostedLinkAbs,
     zlanLinkAbs, openzitiLinkAbs, zrokLinkAbs,
@@ -441,11 +438,11 @@ const config: Config = {
                 ],
             },
             prism: {
-                theme: prismLight,
-                darkTheme: prismDark,
+                theme: prismTheme,
+                darkTheme: prismTheme,
                 // scala necessary to avoid Cannot set properties of undefined (setting 'triple-quoted-string')
                 // see https://github.com/Redocly/redoc/issues/2511
-                additionalLanguages: ['python', 'java', 'csharp', 'go', 'bash', 'scala'],
+                additionalLanguages: prismAdditionalLanguages,
             },
         } satisfies ThemeConfig,
 };
