@@ -1,6 +1,7 @@
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import prismLight from './src/prism-light';
+import prismDark from './src/prism-dark';
 import {Config} from "@docusaurus/types";
 import type {ThemeConfig} from '@docusaurus/preset-classic';
 import type {ScalarOptions} from '@scalar/docusaurus';
@@ -440,8 +441,8 @@ const config: Config = {
                 ],
             },
             prism: {
-                theme: prismThemes.github,
-                darkTheme: prismThemes.dracula,
+                theme: prismLight,
+                darkTheme: prismDark,
                 // scala necessary to avoid Cannot set properties of undefined (setting 'triple-quoted-string')
                 // see https://github.com/Redocly/redoc/issues/2511
                 additionalLanguages: ['python', 'java', 'csharp', 'go', 'bash', 'scala'],

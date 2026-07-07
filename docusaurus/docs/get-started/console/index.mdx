@@ -1,0 +1,100 @@
+---
+title: Add the admin console
+---
+
+# Add the admin console
+
+The [quickstart](../index.mdx) is great for a first look, but it runs everything in one throwaway process and tears
+itself down when you stop it. This page takes the next step: it generates a persistent controller configuration, has the
+controller host the Ziti Admin Console (ZAC) at `/zac/`, and starts the controller on its own so your setup survives a
+restart.
+
+You only need the `ziti` CLI for this. If you do not have it yet, grab it from the [quickstart](../index.mdx#1-download-the-ziti-cli).
+
+## 1. Generate the configuration
+
+The `--configure-and-exit` flag runs the full quickstart setup (PKI, controller and router config, and the database),
+then exits instead of staying up. Point `--home` at a directory you want to keep.
+
+```bash
+ziti edge quickstart --configure-and-exit --home ./ziti-home
+```
+
+When it finishes, the controller config is at `./ziti-home/instance-1/ctrl.yaml`. That is the file the next steps edit
+and run.
+
+## 2. Download the console
+
+`ziti ops console download` fetches the latest ZAC release and extracts it into a directory. The target directory must
+be empty or not yet exist, so the command never overwrites files you already have.
+
+```bash
+ziti ops console download --location ./ziti-home/console
+```
+
+## 3. Point the controller at the console
+
+`ziti ops console configure` edits the controller config in place, adding a `spa` binding to a web listener so the
+controller serves the console. The quickstart's listener is named `client-management`.
+
+```bash
+ziti ops console configure ./ziti-home/instance-1/ctrl.yaml \
+  --name client-management \
+  --location ./ziti-home/console
+```
+
+This adds the following to the `client-management` listener. You can also add it by hand instead of running the command.
+
+```yaml
+- binding: spa
+  options:
+    path: zac
+    location: ./ziti-home/console
+    indexFile: index.html
+```
+
+## 4. Start the controller
+
+```bash
+ziti run controller ./ziti-home/instance-1/ctrl.yaml
+```
+
+The controller comes up and serves the console. Leave this running and open a second terminal for the next step.
+
+## 5. Log in and open the console
+
+```bash
+ziti edge login --username admin --password admin
+```
+
+Now browse to the console at `https://localhost:1280/zac/`. The browser will warn about the certificate because the
+quickstart uses a self-signed one. That is expected for a local setup, so accept it and continue. Log in with the same
+`admin` / `admin` credentials.
+
+:::note
+The controller advertises the machine's hostname by default. `localhost` works from the same machine. To reach the
+console from another device, pass `--ctrl-address` when you generate the configuration in step 1 and use that address
+here instead.
+:::
+
+## Alternative: run the console as a separate process
+
+If you would rather keep the console out of the controller config, `ziti run console` serves it as its own process. By
+default it generates a fresh self-signed certificate, which means the browser prompts you to trust a second certificate
+on the console's port. To avoid that, point it at the controller's own certificate and key from the `--home` PKI so both
+use the same trusted certificate.
+
+```bash
+ziti run console \
+  --location ./ziti-home/console \
+  --tls-cert ./ziti-home/pki/intermediate-ca-instance-1/certs/server.chain.pem \
+  --tls-key ./ziti-home/pki/intermediate-ca-instance-1/keys/server.key
+```
+
+The console listens on `https://localhost:8443/` by default. Because it now serves the controller's certificate, trusting
+that certificate once covers both the controller and the console.
+
+## What's next
+
+- **[Create your first service](../services/index.md)**: secure an existing app with zero trust.
+- **[Deployment guides](@openzitidocs/category/deployments)**: stand up a long-lived overlay for production.
