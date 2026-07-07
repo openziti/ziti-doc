@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Run locally on Kubernetes
 
 :::info
-Quickstarts are short-lived networks that are great for learning how to use OpenZiti. For long-lived production deployments, see [the deployment guides](@openzitidocs/category/kubernetes).
+Quickstarts are short-lived networks that are great for learning how to use OpenZiti. For long-lived production deployments, see [the deployment guides](@openzitiactive/category/kubernetes).
 :::
 
 `minikube` quickly sets up a local Kubernetes cluster on macOS, Linux, or Windows (WSL). This quickstart is a great way to explore running your own controller, Router, and Console.
@@ -540,7 +540,7 @@ Now that you've successfully tested the service, check out the various entities 
 ## Next Steps
 
 1. In the console, try to revoke then restore your permission to acess the demo services.
-1. Deploy a non-Ziti demo application to Kubernetes and securely [share it with a Ziti proxy pod](@openziti2x/how-to-guides/tunnelers/kubernetes/kubernetes-service)
+1. Deploy a non-Ziti demo application to Kubernetes and securely [share it with a Ziti proxy pod](../../how-to-guides/tunnelers/80-kubernetes/kubernetes-service.md)
 1. Add a configs, service, and policies to access the Kubernetes apiserver with OpenZiti.
    1. Hint: the apiserver's address is "kubernetes.default.svc:443" inside the cluster.
    1. Hint: After you create the configs, service, and policies, grant "Bind" permission for the service to "miniziti-router" by adding a role.
