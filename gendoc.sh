@@ -235,8 +235,8 @@ if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
   if ! command -v csvtojson >/dev/null 2>&1; then
     echo "❌ csvtojson not installed, skipping stargazer data"
     ADD_STARGAZER_DATA=no
-  elif [[ -z "${GITHUB_TOKEN:-}" ]]; then
-    echo "❌ GITHUB_TOKEN not set, skipping stargazer data"
+  elif [[ -z "${STARGAZERS_READ_TOKEN:-${GITHUB_TOKEN:-}}" ]]; then
+    echo "❌ neither STARGAZERS_READ_TOKEN nor GITHUB_TOKEN set, skipping stargazer data"
     ADD_STARGAZER_DATA=no
   else
     echo "collecting stargazer data before building the site..."

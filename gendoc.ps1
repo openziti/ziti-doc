@@ -183,8 +183,8 @@ if ($SKIP_LINKED_DOC -eq "no") {
 if ($ADD_STARGAZER_DATA -eq "yes") {
     if (!(Get-Command csvtojson -ErrorAction SilentlyContinue)) {
         Write-Host "csvtojson not installed, skipping stargazer data"
-    } elseif (-not $env:GITHUB_TOKEN) {
-        Write-Host "GITHUB_TOKEN not set, skipping stargazer data"
+    } elseif (-not ($env:STARGAZERS_READ_TOKEN -or $env:GITHUB_TOKEN)) {
+        Write-Host "neither STARGAZERS_READ_TOKEN nor GITHUB_TOKEN set, skipping stargazer data"
     } else {
         Write-Host "collecting stargazer data before building the site..."
         & "$scriptRoot\gh-stats.ps1"

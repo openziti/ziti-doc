@@ -44,6 +44,10 @@ jobs:
       - name: Build & Publish Docusaurus Site
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          # Collaborator-scoped token for the restricted List stargazers API (metadata:read
+          # across the openziti org). github.token can't read cross-repo stargazers since
+          # GitHub's 2026-06-30 restriction. Falls back to GITHUB_TOKEN if the secret is unset.
+          STARGAZERS_READ_TOKEN: ${{ secrets.STARGAZERS_READ_TOKEN }}
           ZITI_HOTJAR_APPID: ${{ secrets.STG_DOC_HOTJAR_APPID }}
           DEPLOY_ENV: 'kinsta'
           DOCUSAURUS_URL: 'https://netfoundry.io'
@@ -54,6 +58,7 @@ jobs:
       - name: Build & Publish Docusaurus Sites (legacy)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STARGAZERS_READ_TOKEN: ${{ secrets.STARGAZERS_READ_TOKEN }}
           ZITI_HOTJAR_APPID: ${{ secrets.PROD_DOC_HOTJAR_APPID }}
           DEPLOY_ENV: 'github'
           DOCUSAURUS_URL: 'https://openziti.io'
