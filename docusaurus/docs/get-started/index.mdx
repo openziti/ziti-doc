@@ -1,0 +1,109 @@
+---
+title: Get started with OpenZiti
+---
+
+import { GitHubReleaseDownloads } from '@netfoundry/docusaurus-theme/ui';
+import Details from '@theme/MDXComponents/Details';
+
+# Get started with OpenZiti
+
+OpenZiti is an open-source zero trust overlay that secures your applications, whether they are apps you
+build and maintain yourself or ones you simply operate. When protected via OpenZiti, the services those applications
+would normally expose no longer need firewall changes to open or allow incoming traffic, and may not even require any
+ports listening on the IP-based underlay at all. The best way to wrap your head around it is to run it. In a couple of 
+minutes you'll have a working zero-trust network up on your laptop, ready to explore.
+
+The `ziti run quickstart` command is all you need to start up a controller and router together in a single process. By
+default the quickstart is ephemeral, so when you are done with it, cancel it using `ctrl+c` and the overlay cleans up
+after itself. If you know you'll want something longer-lived, follow up with one of the
+[deployment guides](@openzitidocs/category/deployments).
+
+---
+
+## 1. Download the `ziti` CLI
+
+Pick the operating system you want to run the quickstart on, then download and extract the `ziti` binary into any folder.
+Open your terminal and `cd` into that folder:
+
+<GitHubReleaseDownloads
+  repo="openziti/ziti"
+  channel="stable"
+  platforms={{
+    windows: { 'x86_64': /windows-amd64.*\.zip$/ },
+    macos:   { 'ARM64': /darwin-arm64.*\.tar\.gz$/, 'x86_64': /darwin-amd64.*\.tar\.gz$/ },
+    linux:   { 'x86_64': /linux-amd64.*\.tar\.gz$/, 'ARM64': /linux-arm64.*\.tar\.gz$/, 'ARM': /linux-arm-.*\.tar\.gz$/ },
+  }}
+/>
+
+## 2. Run the quickstart
+
+By default, the controller and router advertise the machine's hostname to clients. That works fine when everything runs
+on one machine and usually works on your local network, but if you run the `ziti` binary on an internet-routable host,
+you need to advertise an address every device on the overlay can actually reach. Use the `--ctrl-address` and
+`--router-address` flags to set it:
+
+```bash
+ziti run quickstart --zac \
+  --ctrl-address "quickstart.demo.openziti.io" \
+  --router-address "quickstart.demo.openziti.io" \
+  --zac
+```
+
+:::warning
+The quickstart uses `admin` / `admin` by default. That is fine for a local, throwaway overlay. If you run the quickstart
+on an internet-accessible host, you are **highly encouraged** to set a strong password with `-p` (`--password`). Anyone 
+who can reach the controller with the default credentials can take over your overlay.
+:::
+
+Once executed, the controller and router will both start up and be ready to secure your traffic. The `--zac` flag downloads
+the Ziti Admin Console (ZAC) and configures the controller to serve it, giving you a web UI to manage the overlay. If you
+don't want the admin console, remove the `--zac` flag from the quickstart command.
+
+## 3. Verify using `ziti`
+
+After about 10 seconds, your overlay will be up and running. Log in to confirm the controller's management API is ready
+for you to start exploring using the `ziti` command. Once authenticated, explore the API using the following command.
+
+```bash
+ziti login --username admin --password admin  # or the password you set with --password
+```
+
+After logging in, verify that the `router-quickstart` edge router is online.
+
+```bash
+$ ziti list edge-routers
+
+╭────────────┬───────────────────┬────────┬───────────────┬──────┬────────────╮
+│ ID         │ NAME              │ ONLINE │ ALLOW TRANSIT │ COST │ ATTRIBUTES │
+├────────────┼───────────────────┼────────┼───────────────┼──────┼────────────┤
+│ evaPs5.hzn │ router-quickstart │ true   │ true          │    0 │ public     │
+╰────────────┴───────────────────┴────────┴───────────────┴──────┴────────────╯
+results: 1-1 of 1
+```
+
+<Details>
+<summary>Optional flags</summary>
+
+| Flag                | Default      | Purpose                                                          |
+|---------------------|--------------|------------------------------------------------------------------|
+| `--ctrl-address`    | *(hostname)* | advertised address for the control plane and API                 |
+| `--ctrl-port`       | `1280`       | listen port for the control plane and API                        |
+| `--router-address`  | *(hostname)* | advertised address for the integrated router                     |
+| `--router-port`     | `3022`       | listen port for the integrated router                            |
+| `--username` / `-u` | `admin`      | admin username                                                   |
+| `--password` / `-p` | `admin`      | admin password                                                   |
+| `--home`            | *(temp dir)* | write config to a permanent directory so state survives restarts |
+| `--no-router`       | *(none)*     | start the controller only, without an integrated router          |
+| `--zac`             | *(none)*     | download the admin console (ZAC) and have the controller serve it at `/zac/` |
+| `--zac-version`     | `latest`     | ZAC version to download when `--zac` is set                      |
+| `--zac-location`    | `<home>/console` | directory to install ZAC into                                |
+| `--verbose`         | *(none)*     | show additional output                                           |
+
+</Details>
+
+## What's next
+
+Now you have a real zero trust overlay running on your machine, with a controller, a router, and the admin console all
+wired together ready to explore further. Explore and learn about OpenZiti services by making a service.
+
+- **[Create your first service](./services/index.md)**: secure an existing app with zero trust.

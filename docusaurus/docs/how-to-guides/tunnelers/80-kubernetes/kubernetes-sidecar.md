@@ -19,8 +19,8 @@ by hostname instead of IP address.
 
 ## Prerequisites
 
-- Complete the [Minikube Quickstart](../../../get-started/network/local-kubernetes.mdx). This guide
-  uses the controller and router that are created in the Minikube Quickstart.
+- Deploy a controller and router on Kubernetes using the
+  [Kubernetes deployment guide](../../deployments/30-kubernetes/kubernetes-controller.mdx).
 - Admin-level access to a Kubernetes cluster via `kubectl`.
 
 ## Create and enroll an identity
