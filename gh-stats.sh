@@ -3,9 +3,13 @@ export ORG=openziti
 export TODAY=$(date '+%Y%m%d')
 export SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 export STATS_DIR="/tmp/stats"
-# The GitHub "List stargazers" endpoint is restricted to repo admins/collaborators
-# (see github.blog changelog 2026-06-30), so this needs a token with metadata:read on
-# every openziti repo -- an org-installed GitHub App token (PATs are blocked). Prefer
+# The GitHub REST "List stargazers" endpoint (/repos/{o}/{r}/stargazers) is now
+# gated on repo admin/collaborator identity (github.blog changelog 2026-06-30) and
+# returns 403 for API tokens -- even an org-installed App token with metadata:read
+# (the x-accepted-github-permissions: metadata=read header is misleading; the gate
+# is identity, not a grantable permission). The GraphQL `stargazers` connection is
+# NOT restricted, so buildStargazerJson reads stars via GraphQL (see fetchRepoStars)
+# -- any authenticated token works, including the org-installed App token. Prefer
 # the dedicated token, then GITHUB_TOKEN. If neither is set (e.g. running locally),
 # leave GH_TOKEN unset so `gh` uses your stored `gh auth login` instead.
 STAR_TOKEN="${STARGAZERS_READ_TOKEN:-${GITHUB_TOKEN:-}}"
@@ -16,16 +20,15 @@ mkdir -p ${STATS_DIR}/${TODAY}
 }
 
 # ---------------------------------------------------------------------------
-# Stargazer collection (gh-based). Replaces the older curl-per-page pipeline,
-# which had no rate-limit handling and silently wrote API error objects into
-# the data whenever GitHub returned a secondary-rate-limit 403 -- jq then
-# choked on those objects and produced an empty chart.
-#
-# `gh api --paginate` walks the Link header and merges pages for us. We wrap it
-# with retry/backoff so a transient 403/429 doesn't corrupt output, validate
-# that each response really is a JSON array, throttle between repos, and emit a
-# flat {date,user,repo} stream. The build fails hard if ziti or zrok come back
-# empty so we never deploy a blank chart on top of good data.
+# Stargazer collection (GraphQL-based). The REST list-stargazers endpoint was
+# restricted in 2026 (see the top-of-file note) and now 403s for API tokens, so
+# we read the GraphQL `stargazers` connection instead -- same data (starredAt +
+# login), no restriction. `gh api graphql --paginate` walks the connection via
+# the $endCursor variable + pageInfo; we wrap it with retry/backoff so a transient
+# 403/429 doesn't corrupt output, map each page into the REST star+json shape
+# (so the downstream jq is unchanged), throttle between repos, and emit a flat
+# {date,user,repo} stream. The build fails hard if ziti or zrok come back empty
+# so we never deploy a blank chart on top of good data.
 # ---------------------------------------------------------------------------
 
 STAR_PARALLEL="${STAR_PARALLEL:-6}"      # repos fetched concurrently (raise to go faster, lower if rate-limited)
@@ -41,27 +44,41 @@ function listOrgRepos {
 }
 
 function fetchRepoStars {
-  # $1 repo, $2 output file. Retries with exponential backoff. On success,
-  # writes a validated JSON array and returns 0; on give-up, writes nothing
-  # and returns 1 so the caller can record the failure instead of ingesting
-  # a rate-limit error object.
+  # $1 repo, $2 output file. Reads the repo's stargazers via GraphQL (the REST
+  # endpoint is 403-gated now -- see the top-of-file note) and writes a validated
+  # JSON array in the REST star+json shape ([{starred_at, user:{login}}, ...]) so
+  # the phase-2 assembly below stays unchanged. Retries with exponential backoff
+  # on rate limiting; a permanent error (missing repo, etc.) is skipped at once.
   local repo="$1" out="$2" attempt=1 delay=10 err
+  local query='query($owner:String!,$name:String!,$endCursor:String){
+    repository(owner:$owner,name:$name){
+      stargazers(first:100, after:$endCursor, orderBy:{field:STARRED_AT,direction:ASC}){
+        pageInfo{ hasNextPage endCursor }
+        edges{ starredAt node{ login } }
+      }
+    }
+  }'
   while (( attempt <= STAR_MAX_RETRY )); do
-    # Capture stderr (the error reason) while stdout goes to the file.
-    if err="$(gh api --paginate \
-                -H "Accept: application/vnd.github.star+json" \
-                "repos/${ORG}/${repo}/stargazers?per_page=${GH_PAGE_SIZE}" \
+    # --paginate walks pages via $endCursor + pageInfo, emitting one response
+    # object per page; `jq -s` merges them and maps edges to the REST shape.
+    # Capture stderr (the error reason) while the page stream goes to .tmp.
+    if err="$(gh api graphql --paginate \
+                -f query="$query" -f owner="$ORG" -f name="$repo" \
                 2>&1 >"${out}.tmp")" \
-       && jq -e 'type == "array"' "${out}.tmp" >/dev/null 2>&1; then
-      mv "${out}.tmp" "$out"
+       && jq -s '[ .[] | .data.repository.stargazers.edges[]?
+                   | {starred_at: .starredAt, user: {login: .node.login}} ]' \
+            "${out}.tmp" > "${out}.arr" 2>/dev/null \
+       && jq -e 'type == "array"' "${out}.arr" >/dev/null 2>&1; then
+      mv "${out}.arr" "$out"
+      rm -f "${out}.tmp"
       return 0
     fi
-    rm -f "${out}.tmp"
+    rm -f "${out}.tmp" "${out}.arr"
     err="${err//$'\n'/ }"   # flatten to one line for logging
-    # Only rate limiting is worth retrying. A 404 / 403-no-access is permanent
-    # (e.g. GHSA advisory forks, repos the token can't see), so skip it now
-    # instead of burning the whole backoff schedule.
-    if ! grep -qiE 'rate limit|secondary|HTTP 429' <<< "$err"; then
+    # Only rate limiting is worth retrying. A permanent error (missing repo, a
+    # repo the token can't resolve, etc.) is skipped now instead of burning the
+    # whole backoff schedule.
+    if ! grep -qiE 'rate limit|secondary|HTTP 429|RATE_LIMITED' <<< "$err"; then
       echo "  ⏭️  ${repo}: skipped -- ${err:-unknown error}" >&2
       return 1
     fi
