@@ -30,7 +30,7 @@
     "echarts": "^6.1.0",
     "echarts-for-react": "^3.0.2",
     "jquery": "^4.0.0",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^4.3.0",
     "lucide-react": "^1.17.0",
     "prism-react-renderer": "2.4.1",
     "react": "^19.2.7",
