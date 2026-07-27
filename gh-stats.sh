@@ -31,8 +31,9 @@ mkdir -p ${STATS_DIR}/${TODAY}
 # so we never deploy a blank chart on top of good data.
 # ---------------------------------------------------------------------------
 
-STAR_PARALLEL="${STAR_PARALLEL:-6}"      # repos fetched concurrently (raise to go faster, lower if rate-limited)
-STAR_MAX_RETRY="${STAR_MAX_RETRY:-5}"    # attempts per repo before giving up
+STAR_PARALLEL="${STAR_PARALLEL:-6}"        # repos fetched concurrently (raise to go faster, lower if rate-limited)
+STAR_MAX_RETRY="${STAR_MAX_RETRY:-5}"      # rate-limit attempts per repo before giving up
+STAR_SERVER_RETRY="${STAR_SERVER_RETRY:-3}"  # attempts per repo on a 5xx / transport blip
 
 function listOrgRepos {
   # Every repo name in the org, one per line. Paginated -- the org has >100
@@ -48,8 +49,11 @@ function fetchRepoStars {
   # endpoint is 403-gated now -- see the top-of-file note) and writes a validated
   # JSON array in the REST star+json shape ([{starred_at, user:{login}}, ...]) so
   # the phase-2 assembly below stays unchanged. Retries with exponential backoff
-  # on rate limiting; a permanent error (missing repo, etc.) is skipped at once.
-  local repo="$1" out="$2" attempt=1 delay=10 err
+  # on rate limiting and on server-side/transport failures (5xx, EOF, timeouts);
+  # a permanent error (missing repo, etc.) is skipped at once.
+  local repo="$1" out="$2" err
+  local rl_attempt=1 rl_delay=10       # rate-limit budget: slow, GitHub wants us to wait
+  local srv_attempt=1 srv_delay=5      # 5xx budget: quick retries, GitHub hiccuped
   local query='query($owner:String!,$name:String!,$endCursor:String){
     repository(owner:$owner,name:$name){
       stargazers(first:100, after:$endCursor, orderBy:{field:STARRED_AT,direction:ASC}){
@@ -58,7 +62,7 @@ function fetchRepoStars {
       }
     }
   }'
-  while (( attempt <= STAR_MAX_RETRY )); do
+  while :; do
     # --paginate walks pages via $endCursor + pageInfo, emitting one response
     # object per page; `jq -s` merges them and maps edges to the REST shape.
     # Capture stderr (the error reason) while the page stream goes to .tmp.
@@ -75,20 +79,38 @@ function fetchRepoStars {
     fi
     rm -f "${out}.tmp" "${out}.arr"
     err="${err//$'\n'/ }"   # flatten to one line for logging
-    # Only rate limiting is worth retrying. A permanent error (missing repo, a
-    # repo the token can't resolve, etc.) is skipped now instead of burning the
-    # whole backoff schedule.
-    if ! grep -qiE 'rate limit|secondary|HTTP 429|RATE_LIMITED' <<< "$err"; then
-      echo "  ⏭️  ${repo}: skipped -- ${err:-unknown error}" >&2
-      return 1
+    # Two classes are worth retrying, on separate budgets:
+    #   - rate limiting: GitHub is telling us to slow down, so back off hard.
+    #   - server-side/transport failures: 5xx (incl. gh's "We had issues
+    #     producing the response ... (HTTP 502)"), EOF, resets, timeouts. These
+    #     are momentary; retry a few times, quickly.
+    # Anything else (missing repo, a repo the token can't resolve, etc.) is
+    # permanent and is skipped now instead of burning a backoff schedule.
+    if grep -qiE 'rate limit|secondary|HTTP 429|RATE_LIMITED' <<< "$err"; then
+      if (( rl_attempt >= STAR_MAX_RETRY )); then
+        echo "  ❌ ${repo}: gave up after ${STAR_MAX_RETRY} rate-limited attempts -- ${err}" >&2
+        return 1
+      fi
+      echo "  ⚠️  ${repo}: rate-limited (attempt ${rl_attempt}/${STAR_MAX_RETRY}), backing off ${rl_delay}s -- ${err}" >&2
+      sleep "$rl_delay"
+      rl_delay=$(( rl_delay * 2 ))
+      rl_attempt=$(( rl_attempt + 1 ))
+      continue
     fi
-    echo "  ⚠️  ${repo}: rate-limited (attempt ${attempt}/${STAR_MAX_RETRY}), backing off ${delay}s -- ${err}" >&2
-    sleep "$delay"
-    delay=$(( delay * 2 ))
-    attempt=$(( attempt + 1 ))
+    if grep -qiE 'HTTP (5[0-9][0-9])|issues producing the response|bad gateway|service unavailable|gateway time-?out|internal server error|unexpected EOF|connection reset|connection refused|timeout awaiting|i/o timeout|TLS handshake|EOF$' <<< "$err"; then
+      if (( srv_attempt >= STAR_SERVER_RETRY )); then
+        echo "  ❌ ${repo}: gave up after ${STAR_SERVER_RETRY} server-error attempts -- ${err}" >&2
+        return 1
+      fi
+      echo "  ⚠️  ${repo}: server error (attempt ${srv_attempt}/${STAR_SERVER_RETRY}), retrying in ${srv_delay}s -- ${err}" >&2
+      sleep "$srv_delay"
+      srv_delay=$(( srv_delay * 2 ))
+      srv_attempt=$(( srv_attempt + 1 ))
+      continue
+    fi
+    echo "  ⏭️  ${repo}: skipped -- ${err:-unknown error}" >&2
+    return 1
   done
-  echo "  ❌ ${repo}: gave up after ${STAR_MAX_RETRY} attempts -- ${err}" >&2
-  return 1
 }
 
 function buildStargazerJson {
