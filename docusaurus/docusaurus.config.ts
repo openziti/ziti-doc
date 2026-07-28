@@ -1,12 +1,10 @@
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
-
-import {themes as prismThemes} from 'prism-react-renderer';
 import {Config} from "@docusaurus/types";
 import type {ThemeConfig} from '@docusaurus/preset-classic';
 import type {ScalarOptions} from '@scalar/docusaurus';
 import pluginHotjar from './src/plugins/hotjar';
 import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-redirects';
-import {docUrl, hotjarId} from "@netfoundry/docusaurus-theme/node";
+import {docUrl, hotjarId, prismTheme, prismAdditionalLanguages} from "@netfoundry/docusaurus-theme/node";
 import {
     consoleLinkAbs, frontdoorLinkAbs, selfhostedLinkAbs,
     zlanLinkAbs, openzitiLinkAbs, zrokLinkAbs,
@@ -28,8 +26,8 @@ const docsBase = `/docs/${openziti}`;
 
 const REMARK_MAPPINGS = [
     { from: '@openzitidocs',    to: `${docsBase}`},
-    { from: '@openziti2x',      to: `${docsBase}`},
-    { from: '@openziti1x',      to: `${docsBase}/maint`},
+    { from: '@openzitiactive',      to: `${docsBase}/active`},
+    { from: '@openzitimaint',      to: `${docsBase}/maint`},
     { from: '@selfhosteddocs',  to: 'https://netfoundry.io/docs/selfhosted' },
     { from: '@zrokdocs',        to: 'https://netfoundry.io/docs/zrok' },
     { from: '@frontdoordocs',   to: 'https://netfoundry.io/docs/frontdoor' },
@@ -440,11 +438,11 @@ const config: Config = {
                 ],
             },
             prism: {
-                theme: prismThemes.github,
-                darkTheme: prismThemes.dracula,
+                theme: prismTheme,
+                darkTheme: prismTheme,
                 // scala necessary to avoid Cannot set properties of undefined (setting 'triple-quoted-string')
                 // see https://github.com/Redocly/redoc/issues/2511
-                additionalLanguages: ['python', 'java', 'csharp', 'go', 'bash', 'scala'],
+                additionalLanguages: prismAdditionalLanguages,
             },
         } satisfies ThemeConfig,
 };

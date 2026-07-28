@@ -22,21 +22,21 @@ An OpenZiti network has a few key deployed pieces:
 
 - **Controller**: The central coordination point. It manages configuration, identity, authentication, and authorization
   for the entire network. Every connection is validated by the controller.
-  See the [controller deployment guide](@openziti2x/how-to-guides/deployments/linux/controller/deploy).
+  See the [controller deployment guide](how-to-guides/deployments/10-linux/10-controller/10-deploy.mdx).
 - **Routers**: Form the mesh fabric that relays traffic between endpoints. Routers continuously monitor latency and
   select the fastest path, with automatic failover.
-  See the [router deployment guide](@openziti2x/how-to-guides/deployments/linux/router/deploy).
-- **Edge clients**: Connect endpoints to the network. Use an [SDK](@openzitidocs/reference/developer/sdk) to embed
-  zero trust directly into your application, or use a [tunneler](@openziti2x/how-to-guides/tunnelers) to add zero
+  See the [router deployment guide](how-to-guides/deployments/10-linux/20-router/10-deploy.mdx).
+- **Edge clients**: Connect endpoints to the network. Use an [SDK](reference/developer/sdk/index.mdx) to embed
+  zero trust directly into your application, or use a [tunneler](how-to-guides/tunnelers/index.mdx) to add zero
   trust to existing apps without code changes.
 
 Three logical constructs govern access once the network is running:
 
-- **Services**: The resources identities connect to. See [Services](@openzitidocs/learn/core-concepts/services/overview).
+- **Services**: The resources identities connect to. See [Services](learn/core-concepts/services/overview.mdx).
 - **Identities**: Authenticated endpoints — every connection in an OpenZiti network is mutually authenticated.
-  See [Identities](@openzitidocs/learn/core-concepts/identities/overview).
+  See [Identities](learn/core-concepts/identities/overview.mdx).
 - **Policies**: Govern which identities can access which services via which edge routers.
-  See [Policies](@openzitidocs/learn/core-concepts/security/authorization/policies/overview).
+  See [Policies](learn/core-concepts/security/authorization/policies/overview.mdx).
 
 ## Key concepts
 
@@ -50,9 +50,9 @@ Three logical constructs govern access once the network is running:
   cryptography via [libsodium](https://doc.libsodium.org/), regardless of whether the underlying service encrypts its
   own traffic. All traffic is synthesized to port 443 and metadata is encrypted in transit, so attackers can't
   determine what services are in use or infer source and destination. See
-  [connection security](@openzitidocs/learn/core-concepts/security/connection-security).
+  [connection security](learn/core-concepts/security/connection-security.md).
 
-Ready to deploy your first network? Follow one of the [quickstart guides](@openziti2x/get-started).
+Ready to deploy your first network? Follow one of the [quickstart guides](get-started/index.mdx).
 
 ## NetFoundry Cloud
 

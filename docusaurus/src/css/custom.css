@@ -163,3 +163,6 @@ html, body, #__docusaurus {
   height: 700px;
 }
 
+.thin-scrollbar {
+    margin: 10px 2px;
+}

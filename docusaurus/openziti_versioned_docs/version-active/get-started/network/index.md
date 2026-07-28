@@ -5,7 +5,7 @@ one that fits your environment.
 
 :::info
 Quickstarts are short-lived networks great for learning. For production deployments, see the
-[deployment guides](@openzitidocs/category/deployments).
+[deployment guides](@openzitiactive/category/deployments).
 :::
 
 | Option | Best for |
