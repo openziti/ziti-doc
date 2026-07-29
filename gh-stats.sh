@@ -155,7 +155,16 @@ function buildStargazerJson {
   # for analysis; not consumed by the site.
   jq -s 'sort_by(.date)' "$jsonl" > "${dir}/all.stargazers.detail.json"
 
-  # The three files the chart imports. "others" is everything but ziti and zrok.
+  # The file the chart imports: {repo: [starredAt, ...]} for every repo in the
+  # org, dates sorted. The page picks which repos get their own line and lumps
+  # the rest into "other", so the chart is no longer hard-wired to ziti/zrok.
+  # Dates only -- the logins in all.stargazers.detail.json would quadruple the
+  # bundle for data the chart never reads.
+  jq -s 'group_by(.repo) | map({key: .[0].repo, value: (map(.date) | sort)}) | from_entries' \
+    "$jsonl" > "${dir}/all.repos.stargazers.json"
+
+  # Legacy fixed split, still emitted for the publish workflow's artifact and
+  # anyone doing ad-hoc analysis. Not read by the chart anymore.
   jq -s 'map(select(.repo == "ziti")) | sort_by(.date)' "$jsonl" > "${dir}/all.ziti.stargazers.json"
   jq -s 'map(select(.repo == "zrok")) | sort_by(.date)' "$jsonl" > "${dir}/all.zrok.stargazers.json"
   jq -s 'map(select(.repo != "ziti" and .repo != "zrok")) | sort_by(.date)' "$jsonl" > "${dir}/all.other.stargazers.json"
@@ -178,8 +187,6 @@ function buildStargazerJson {
 }
 
 buildStargazerJson
-cp "${STATS_DIR}/${TODAY}/all.ziti.stargazers.json" \
-   "${STATS_DIR}/${TODAY}/all.zrok.stargazers.json" \
-   "${STATS_DIR}/${TODAY}/all.other.stargazers.json" \
+cp "${STATS_DIR}/${TODAY}/all.repos.stargazers.json" \
    "${SCRIPT_DIR}/docusaurus/src/pages/stargazers/"
 echo "copied stargazer json to ${SCRIPT_DIR}/docusaurus/src/pages/stargazers/"
