@@ -613,7 +613,7 @@ Now that you've successfully tested the service, check out the various entities 
 </TabItem>
 <TabItem value="mac" label="macOS">
 
-2. Remove the relevant `*.miniziti.internal` names from `/etc/hosts`.
+1. Remove the relevant `*.miniziti.internal` names from `/etc/hosts`.
 
    ```text
    sudo sed -iE '/miniziti.*\.internal/d' /etc/hosts
@@ -622,7 +622,7 @@ Now that you've successfully tested the service, check out the various entities 
 </TabItem>
 <TabItem value="linux" label="Linux">
 
-2. Remove the relevant `*.miniziti.internal` names from `/etc/hosts`.
+1. Remove the relevant `*.miniziti.internal` names from `/etc/hosts`.
 
    ```text
    sudo sed -iE '/miniziti.*\.internal/d' /etc/hosts
@@ -631,12 +631,12 @@ Now that you've successfully tested the service, check out the various entities 
 </TabItem>
 </Tabs>
 
-3. Delete the cluster.
+1. Delete the cluster.
 
    ```text
    minikube --profile miniziti delete
    ```
 
-4. In your tunneler, click **Forget** to remove your identity.
+1. In your tunneler, click **Forget** to remove your identity.
 
 <Wizardly></Wizardly>
