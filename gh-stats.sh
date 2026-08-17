@@ -2,17 +2,21 @@ export GH_PAGE_SIZE=100
 export ORG=openziti
 export TODAY=$(date '+%Y%m%d')
 export SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-export STATS_DIR="/tmp/stats"
-# The GitHub REST "List stargazers" endpoint (/repos/{o}/{r}/stargazers) is now
-# gated on repo admin/collaborator identity (github.blog changelog 2026-06-30) and
-# returns 403 for API tokens -- even an org-installed App token with metadata:read
-# (the x-accepted-github-permissions: metadata=read header is misleading; the gate
-# is identity, not a grantable permission). The GraphQL `stargazers` connection is
-# NOT restricted, so buildStargazerJson reads stars via GraphQL (see fetchRepoStars)
-# -- any authenticated token works, including the org-installed App token. Prefer
-# the dedicated token, then GITHUB_TOKEN. If neither is set (e.g. running locally),
-# leave GH_TOKEN unset so `gh` uses your stored `gh auth login` instead.
-STAR_TOKEN="${STARGAZERS_READ_TOKEN:-${GITHUB_TOKEN:-}}"
+# Overridable: on Windows, Git Bash and an msys64 jq resolve /tmp to different
+# roots, so point this at a drive path (/d/...) for local runs. See STARGAZERS.md.
+export STATS_DIR="${STATS_DIR:-/tmp/stats}"
+# Reading stargazers needs a CLASSIC PAT. GitHub gates stargazer data on repo
+# admin/collaborator identity, and the gate keys on token class -- all three of
+# these are the same repo admin:
+#
+#   classic PAT (repo + read:org)                            -> works
+#   fine-grained PAT, viewerPermission ADMIN                 -> FORBIDDEN
+#   App installation token, metadata:read, org-wide install  -> FORBIDDEN
+#
+# So there is nothing grantable that makes an App or fine-grained token work.
+# GITHUB_TOKEN is a last resort; with nothing set, `gh` falls back to your
+# `gh auth login`, which also has to be a classic PAT. See STARGAZERS.md.
+STAR_TOKEN="${ZITI_CI_STARGAZERS_READ_TOKEN:-${STARGAZERS_READ_TOKEN:-${GITHUB_TOKEN:-}}}"
 if [[ -n "${STAR_TOKEN}" ]]; then export GH_TOKEN="${STAR_TOKEN}"; fi
 
 function makeOutputDir {
@@ -20,15 +24,16 @@ mkdir -p ${STATS_DIR}/${TODAY}
 }
 
 # ---------------------------------------------------------------------------
-# Stargazer collection (GraphQL-based). The REST list-stargazers endpoint was
-# restricted in 2026 (see the top-of-file note) and now 403s for API tokens, so
-# we read the GraphQL `stargazers` connection instead -- same data (starredAt +
-# login), no restriction. `gh api graphql --paginate` walks the connection via
-# the $endCursor variable + pageInfo; we wrap it with retry/backoff so a transient
-# 403/429 doesn't corrupt output, map each page into the REST star+json shape
-# (so the downstream jq is unchanged), throttle between repos, and emit a flat
-# {date,user,repo} stream. The build fails hard if ziti or zrok come back empty
-# so we never deploy a blank chart on top of good data.
+# Stargazer collection (GraphQL-based). REST and GraphQL carry the same gate (see
+# the top-of-file note) and both need a classic PAT. GraphQL is used because REST
+# returns a full user object per star: a 100-star page is ~118 KB over REST and
+# ~7 KB over GraphQL, and only the date is kept. `gh api graphql --paginate` walks the
+# connection via the $endCursor variable + pageInfo; we wrap it with retry/backoff
+# so a transient 403/429 doesn't corrupt output, map each page into the REST
+# star+json shape (so the downstream jq doesn't care which API produced it),
+# throttle between repos, and emit a flat {date,user,repo} stream. The build fails
+# hard if ziti or zrok come back empty so we never deploy a blank chart on top of
+# good data.
 # ---------------------------------------------------------------------------
 
 STAR_PARALLEL="${STAR_PARALLEL:-6}"        # repos fetched concurrently (raise to go faster, lower if rate-limited)
@@ -36,17 +41,35 @@ STAR_MAX_RETRY="${STAR_MAX_RETRY:-5}"      # rate-limit attempts per repo before
 STAR_SERVER_RETRY="${STAR_SERVER_RETRY:-3}"  # attempts per repo on a 5xx / transport blip
 
 function listOrgRepos {
-  # Every repo name in the org, one per line. Paginated -- the org has >100
-  # repos and the old single-page fetch silently dropped everything past 100.
+  # Every repo name in the org, one per line. Paginated -- the org has >100 repos.
   # Exclude GHSA security-advisory forks (names like <repo>-ghsa-xxxx-xxxx-xxxx):
   # they aren't real repos, have no stargazers endpoint, and 404.
-  gh api --paginate "orgs/${ORG}/repos?per_page=${GH_PAGE_SIZE}" \
-    --jq '.[] | select(.name | test("-ghsa-"; "i") | not) | .name' | sort
+  #
+  # `gh` writes its error payload to stdout, which parses as repo names. Reject
+  # output with whitespace or quotes in it, and retry.
+  local attempt=1 delay=5 out
+  while :; do
+    if out="$(gh api --paginate "orgs/${ORG}/repos?per_page=${GH_PAGE_SIZE}" \
+                --jq '.[] | select(.name | test("-ghsa-"; "i") | not) | .name' 2>&1)" \
+       && [[ -n "$out" ]] \
+       && ! grep -qE '[[:space:]"{}]|^$' <<< "$out"; then
+      sort <<< "$out"
+      return 0
+    fi
+    if (( attempt >= STAR_SERVER_RETRY )); then
+      echo "❌ could not list ${ORG} repos after ${STAR_SERVER_RETRY} attempts -- ${out//$'\n'/ }" >&2
+      return 1
+    fi
+    echo "⚠️  org repo listing failed (attempt ${attempt}/${STAR_SERVER_RETRY}), retrying in ${delay}s -- ${out//$'\n'/ }" >&2
+    sleep "$delay"
+    delay=$(( delay * 2 ))
+    attempt=$(( attempt + 1 ))
+  done
 }
 
 function fetchRepoStars {
   # $1 repo, $2 output file. Reads the repo's stargazers via GraphQL (the REST
-  # endpoint is 403-gated now -- see the top-of-file note) and writes a validated
+  # endpoint is 403-gated -- see the top-of-file note) and writes a validated
   # JSON array in the REST star+json shape ([{starred_at, user:{login}}, ...]) so
   # the phase-2 assembly below stays unchanged. Retries with exponential backoff
   # on rate limiting and on server-side/transport failures (5xx, EOF, timeouts);
@@ -123,7 +146,11 @@ function buildStargazerJson {
   local jsonl="${dir}/all.stargazers.jsonl"
   : > "$jsonl"
 
-  local repos; repos="$(listOrgRepos)"
+  local repos
+  if ! repos="$(listOrgRepos)"; then
+    echo "❌ aborting: no repo list, so the site keeps its last good chart" >&2
+    exit 1
+  fi
   local repo raw
 
   # Phase 1: fetch repos concurrently, capped at STAR_PARALLEL in flight.
@@ -157,14 +184,14 @@ function buildStargazerJson {
 
   # The file the chart imports: {repo: [starredAt, ...]} for every repo in the
   # org, dates sorted. The page picks which repos get their own line and lumps
-  # the rest into "other", so the chart is no longer hard-wired to ziti/zrok.
-  # Dates only -- the logins in all.stargazers.detail.json would quadruple the
-  # bundle for data the chart never reads.
+  # the rest into "other", so no repo is hard-wired here. Dates only -- the logins
+  # in all.stargazers.detail.json would quadruple the bundle for data the chart
+  # never reads.
   jq -s 'group_by(.repo) | map({key: .[0].repo, value: (map(.date) | sort)}) | from_entries' \
     "$jsonl" > "${dir}/all.repos.stargazers.json"
 
-  # Legacy fixed split, still emitted for the publish workflow's artifact and
-  # anyone doing ad-hoc analysis. Not read by the chart anymore.
+  # Fixed per-repo split: feeds the publish workflow's artifact and ad-hoc
+  # analysis. The chart doesn't read these.
   jq -s 'map(select(.repo == "ziti")) | sort_by(.date)' "$jsonl" > "${dir}/all.ziti.stargazers.json"
   jq -s 'map(select(.repo == "zrok")) | sort_by(.date)' "$jsonl" > "${dir}/all.zrok.stargazers.json"
   jq -s 'map(select(.repo != "ziti" and .repo != "zrok")) | sort_by(.date)' "$jsonl" > "${dir}/all.other.stargazers.json"

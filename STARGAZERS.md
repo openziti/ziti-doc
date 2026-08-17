@@ -10,10 +10,10 @@ to fix it when it breaks.
 - It reads every `openziti` repo's stargazers and writes one JSON file the chart page imports,
   `docusaurus/src/pages/stargazers/all.repos.stargazers.json`, shaped `{"<repo>": ["<starredAt>", ...]}` — dates only,
   every repo in the org. The page decides which repos get their own line; "other" is whatever is left over.
-- Since **2026-06-30** GitHub restricts that API to repo admins/collaborators and **blocks personal access tokens**
-  (both classic and fine-grained). So the build authenticates as a **GitHub App**, not a PAT.
-- The App is **`openziti-stargazer-audit`** (App ID `4239701`), owned by the `openziti` org, `Metadata: read-only`,
-  installed on **all** repositories.
+- GitHub restricts stargazer data to repo admins and collaborators, and admin access alone isn't enough: a **classic
+  PAT** on an admin account works, while a fine-grained PAT on the same account and an org-wide GitHub App installation
+  token are both refused.
+- So the build authenticates with a classic PAT in `ZITI_CI_STARGAZERS_READ_TOKEN`.
 
 ## Where the pieces live (two repos)
 
@@ -23,44 +23,60 @@ to fix it when it breaks.
 | Chart page (React/ECharts) | `openziti/ziti-doc` | `docusaurus/src/pages/stargazers/index.tsx` |
 | Build + deploy that runs it | `netfoundry/docusaurus-shared` | `.github/workflows/publish.yml` |
 
-The live site is built by **`netfoundry/docusaurus-shared`'s `publish.yml`** (green daily builds; publishes to
-netfoundry.io). It clones this repo into `unified-doc/_remotes/openziti` (from `main`) and runs our `gendoc.sh -s`,
-which calls `gh-stats.sh`. So **changes to `gh-stats.sh` must be on `ziti-doc` `main`** to affect the live site.
+The live site is built by **`netfoundry/docusaurus-shared`'s `publish.yml`**, which publishes to netfoundry.io nightly.
+It clones this repo into `unified-doc/_remotes/openziti` (from `main`) and runs our `gendoc.sh -s`, which calls
+`gh-stats.sh`. So **changes to `gh-stats.sh` must be on `ziti-doc` `main`** to affect the live site.
 
-> **Ignore ziti-doc's own `main.workflow.yml`** (which runs `publish-2025.sh` / `publish.sh`). It is dead — its last
-> run was 2025-11 and its recent runs all failed. It still shows the *old* pre-fix wiring (installs `csvtojson`, reads
-> a `STARGAZERS_READ_TOKEN` PAT secret with a "collaborator-scoped token" comment). Don't be fooled into "fixing" the
-> token setup there; the App-based flow below lives entirely in `docusaurus-shared`.
+> **Ignore ziti-doc's own `main.workflow.yml`.** It is disabled, and its stargazer token wiring does not match anything
+> described here. The live flow lives entirely in `docusaurus-shared`.
 
 ## The token flow
 
 ```
 publish.yml
-  └─ actions/create-github-app-token@v1   (app-id + private-key secrets, owner: openziti)
-        └─ mints a short-lived App installation token (ghs_…)
-              └─ passed to the build as env STARGAZERS_READ_TOKEN
-                    └─ gh-stats.sh maps it to GH_TOKEN, which `gh` uses for the API
+  └─ ZITI_CI_STARGAZERS_READ_TOKEN secret (classic PAT, scopes: repo + read:org)
+        └─ passed to the build as env ZITI_CI_STARGAZERS_READ_TOKEN
+              └─ gh-stats.sh maps it to GH_TOKEN, which `gh` uses for the API
 ```
 
-**Secrets** (on `netfoundry/docusaurus-shared`, Actions secrets):
+**Secret** (on `netfoundry/docusaurus-shared`, Actions secrets):
 
-- `STARGAZER_APP_ID` — `4239701` (not secret, just stored as one).
-- `STARGAZER_APP_PRIVATE_KEY` — the App's `.pem` private key.
+- `ZITI_CI_STARGAZERS_READ_TOKEN` — a classic PAT on an account with **admin** on the `openziti` repos, scopes `repo`
+  and `read:org`.
 
-The installation token is minted fresh each build and expires in ~1 hour; there is **no long-lived PAT to rotate**.
-The only credential to safeguard/rotate is the App private key.
+`gh-stats.sh` also accepts `STARGAZERS_READ_TOKEN`, then `GITHUB_TOKEN`, in that order.
 
-## Why a GitHub App (and not a PAT)
+This is a long-lived personal credential tied to one human, so set its expiry deliberately and put a reminder on it: the
+day it expires, the collector's fail-on-empty guard takes the whole docs deploy down with it.
 
-GitHub's [2026-06-30 change](https://github.blog/changelog/2026-06-30-upcoming-access-restrictions-to-public-api-endpoints-and-ui-views/)
-locked the List Stargazers endpoint to admins/collaborators and returns `403 "Resource not accessible by personal
-access token"` for PATs — verified for both fine-grained and classic tokens, even when the token's account had
-**write** access to the repo. GitHub **App installation tokens** are a different class and are accepted with just
-`Metadata: read`. An "All repositories" install also means **new repos are covered automatically** — no per-repo
-collaborator grants, no team to maintain, no personal account in the loop.
+## Why a classic PAT
 
-(Before this, the build used the Actions `GITHUB_TOKEN`; it worked only because pre-restriction GitHub let any
-authenticated token read public stargazers.)
+GitHub's [access restrictions](https://github.blog/changelog/2026-06-30-upcoming-access-restrictions-to-public-api-endpoints-and-ui-views/)
+limit stargazer data to "admins and collaborators", on both the REST *List stargazers* endpoint and the GraphQL
+`stargazers` connection. The changelog describes that in terms of access; in practice the credential type decides.
+Measured with three credentials for one account, `viewerPermission: ADMIN` on the repo:
+
+| Credential | GraphQL `stargazers` | REST `/stargazers` |
+| --- | --- | --- |
+| Classic PAT (`repo`, `read:org`) | works — full edges with `starredAt` | 200 |
+| Fine-grained PAT, same account | `FORBIDDEN` | 403 |
+| App installation token (`Metadata: read`, org-wide install) | `FORBIDDEN` | 403 |
+
+Admin access alone is not enough, so don't "simplify" the credential to a fine-grained PAT or a GitHub App: for the App,
+`Metadata: read` on an org-wide install is refused, and no other App permission grants stargazer access to try. The HTML
+view (`github.com/<org>/<repo>/stargazers`) 404s both anonymously and with an `Authorization` header; it renders in a
+logged-in admin's browser, so a token can't scrape it either.
+
+What is left ungated is `repository.stargazerCount` — a scalar with no timestamps, useless for a stars-over-time chart.
+
+### If the classic PAT stops working too
+
+Assume this gate keeps tightening. The fallback that survives without any privileged credential is the per-repo events
+feed: `GET /repos/{owner}/{repo}/events` returns `WatchEvent` entries carrying `actor.login` and `created_at`, and it
+works **anonymously**. Its limits are 300 events / 90 days per repo — on a busy repo like `ziti` that's about six days of
+history — so it works only as an append-forward source polled at least weekly, and it can never backfill. The public
+firehose looks closed: in the hours sampled, GH Archive carried ~20 `WatchEvent` records where it once carried thousands,
+and a star that `openziti/ziti`'s own events feed reported was absent from the matching archive hour.
 
 ## Loading data locally from a downloaded artifact (no token needed)
 
@@ -87,41 +103,52 @@ It writes `src/pages/stargazers/all.repos.stargazers.json` and prints what it fo
   top:       zrok (4585), ziti (4314), goroutine-analyzer (141), sdk-golang (129), ziti-sdk-py (95)
 ```
 
-Details worth knowing:
+Behavior:
 
 - **No `unzip`, `jq`, or PowerShell required** — `scripts/load-stargazer-data.mjs` reads the zip itself via
   `node:zlib`, so it behaves the same in Git Bash, WSL, PowerShell, and CI.
 - **Reads whichever file the artifact happens to have**, newest source first: `all.repos.stargazers.json` as-is, else
-  `all.stargazers.detail.json` regrouped by repo, else the pre-2026-07 `all.{ziti,zrok,other}.stargazers.json` trio
-  recombined (each record still names its own repo, so the three merge losslessly — verified to produce identical
-  totals to the detail file).
+  `all.stargazers.detail.json` regrouped by repo, else the `all.{ziti,zrok,other}.stargazers.json` trio recombined
+  (each record names its own repo, so the three merge losslessly).
 - **Multi-snapshot zips**: only the newest dated directory is used; the names sort chronologically.
 - **Refuses to write empty data**, same guard as `gh-stats.sh` — a truncated download leaves your working chart alone
   and exits non-zero.
-- **This is not part of `gendoc.sh`** on purpose. `./gendoc.sh -s` is the fetch-live path and needs a GitHub App token;
-  this is the offline alternative for when you just want the chart populated.
+- **This is not part of `gendoc.sh`** on purpose. `./gendoc.sh -s` is the fetch-live path and needs a classic PAT; this
+  is the offline alternative for when you just want the chart populated.
 
 ## Running it locally
 
-Needs `gh`, `jq`, and a way to authenticate. Easiest is an App installation token:
+Needs `gh`, `jq`, and a classic PAT (Settings → Developer settings → Personal access tokens → **Tokens (classic)**,
+scopes `repo` + `read:org`) on an account with admin on the org's repos:
 
 ```bash
-# mint an App token (needs the Link-/gh-token gh extension: gh extension install Link-/gh-token)
-export STARGAZERS_READ_TOKEN="$(gh token generate --app-id 4239701 --installation-id <INSTALLATION_ID> \
-  --key /path/to/openziti-stargazer-audit.private-key.pem | jq -r .token)"
-
-export STAR_PARALLEL=10        # optional: repos fetched concurrently (default 6)
-./gh-stats.sh                  # writes the three JSON files into docusaurus/src/pages/stargazers/
+export ZITI_CI_STARGAZERS_READ_TOKEN="ghp_..."  # classic PAT; a fine-grained one 403s on every repo
+export STAR_PARALLEL=10                         # optional: repos fetched concurrently (default 6)
+./gh-stats.sh                                   # writes the JSON into docusaurus/src/pages/stargazers/
 ```
 
-Find `<INSTALLATION_ID>` at: openziti org → Settings → GitHub Apps → the app → Configure (it's in the URL).
+A full org run takes a few minutes and ends with the totals:
 
-If `STARGAZERS_READ_TOKEN`/`GITHUB_TOKEN` are unset, `gh-stats.sh` falls back to your `gh auth login` — but a normal
-user login will `403` on the stargazers API, so use the App token.
+```
+stargazer totals -> ziti:4351 zrok:4623 others:1654
+copied stargazer json to .../docusaurus/src/pages/stargazers/
+```
 
-> **Windows note:** the local `gendoc.ps1 -s` path is **broken** for stargazers — it guards on the retired
-> `csvtojson` dependency and then calls a `gh-stats.ps1` that doesn't exist. Collect stargazer data on Windows by
-> running `bash ./gh-stats.sh` directly (Git Bash/WSL). CI is unaffected: the netfoundry build runs the `.sh`.
+With no token in the environment, `gh-stats.sh` falls back to your `gh auth login` — which works only if that login is
+itself a classic PAT.
+
+> **Windows notes.** The local `gendoc.ps1 -s` path is **broken** for stargazers: it guards on a `csvtojson` dependency
+> and then calls a `gh-stats.ps1` that doesn't exist. Collect stargazer data on Windows by running `bash ./gh-stats.sh`
+> directly (Git Bash). CI is unaffected — the netfoundry build runs the `.sh`. Two Windows-only traps fail quietly and
+> look like API problems:
+>
+> - **`/tmp` is not one place.** Git Bash and an msys64 `jq` resolve it to different roots, so the shell writes files
+>   `jq` then "cannot open". Set `STATS_DIR` to a drive path — `export STATS_DIR=/d/tmp/stargazer-stats` — which both
+>   agree on.
+> - **msys64's `jq` 1.8.1 segfaults** under Git Bash on some filters, including the plain `jq -c '.[]'` that assembles
+>   the flat stream. The run prints `✅ <repo>: N stars` for every repo while dropping nearly all of them, and the totals
+>   come out with one repo populated and the rest at zero. Put the official Windows build (`jq-windows-amd64.exe` from
+>   the jqlang releases) ahead of msys64 on `PATH`.
 
 To preview the chart in the unified site, copy `all.repos.stargazers.json` into
 `docusaurus-shared/unified-doc/_remotes/openziti/docusaurus/src/pages/stargazers/` and `yarn start` there
@@ -134,11 +161,16 @@ Delete them (`git clean -fX docusaurus/src`) if that happens.
 
 ## How `gh-stats.sh` behaves (deliberately)
 
-- Fetches every org repo with `gh api --paginate` (handles >100 repos and Link-header paging).
+- Fetches every org repo with `gh api --paginate` (handles >100 repos and Link-header paging). The listing is retried,
+  and its output checked: `gh` writes API errors to stdout, where they parse as repo names, so output containing
+  whitespace or quotes is rejected and the run aborts.
 - **Concurrent** fetch, capped at `STAR_PARALLEL`; each repo retried with backoff **only on rate limits**.
   Permanent errors (404/403) are skipped immediately with the reason logged.
-- **Fails the build** (`exit 1`) if `ziti` or `zrok` come back empty — so a throttled/blocked run can never overwrite
-  a good chart with a blank one. This is the guard that would have caught the original silent breakage.
+- **Fails the build** (`exit 1`) if `ziti` or `zrok` come back empty, so a throttled or blocked run can never overwrite a
+  good chart with a blank one.
+- Reads stars over GraphQL rather than REST. Both need the same classic PAT, but REST returns a full user object per
+  star: a 100-star page of `openziti/ziti` is ~118 KB over REST against ~7 KB over GraphQL, and the collector keeps only
+  the date. Each page is mapped into the REST `star+json` shape so the downstream `jq` doesn't care which was used.
 - Emits `all.stargazers.detail.json` ({date,user,repo} for every star). The netfoundry build uploads it as the
   `stargazer-data` artifact (downloadable by anyone with read access to that repo) for ad-hoc analysis.
 - Skips GHSA security-advisory forks (`*-ghsa-*`) — they have no stargazers endpoint and 404.
@@ -160,32 +192,29 @@ Delete them (`git clean -fX docusaurus/src`) if that happens.
   saved ranges outside the current data are dropped/clamped on load, so a rebuild can't leave you on a blank chart.
   **Reset** restores the defaults.
 
-Two things about the ECharts wiring are load-bearing, and undoing them makes the slider feel sluggish again:
+Two things about the ECharts wiring are load-bearing, and undoing either makes the range slider feel sluggish:
 
-1. The chart option is memoized on the **series only** — not on the date range or the live span. Zoom is pushed in
-   imperatively with `dispatchAction`. The old code kept the live span in React state and rebuilt the whole option on
-   every zoom tick.
-2. `minValueSpan` is a fixed `DAY`. The old code derived it from the live span, so the minimum window shrank as you
-   zoomed in and the handle fought back.
+1. The chart option is memoized on the **series only** — not on the date range or the live span — and zoom is pushed in
+   imperatively with `dispatchAction`. Keeping the live span in React state instead rebuilds the whole option on every
+   zoom tick.
+2. `minValueSpan` is a fixed `DAY`. Deriving it from the live span shrinks the minimum window as you zoom in, and the
+   handle fights back.
 
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
-| Chart empty / build aborts "ziti or zrok … empty" | App uninstalled, key rotated, or lost access | Check the App is still installed org-wide with `Metadata: read`; re-generate the key + update `STARGAZER_APP_PRIVATE_KEY` |
-| `403 Resource not accessible by personal access token` | Something reverted to a PAT | Confirm `publish.yml` still mints the App token and passes it as `STARGAZERS_READ_TOKEN` |
-| A specific repo missing from "others" | New repo not yet covered | With an "All repositories" install this shouldn't happen; verify the install scope |
-| `totals` all zero locally | No App token loaded (fell back to your `gh` login) | Load an App token as shown above |
+| Chart empty / build aborts "ziti or zrok … empty" | The classic PAT expired, was revoked, or its account lost admin | Mint a new classic PAT (`repo` + `read:org`) on an org admin account and update the `ZITI_CI_STARGAZERS_READ_TOKEN` secret |
+| `Resource not accessible by personal access token` on every repo | The token is fine-grained, not classic | Swap it for a classic PAT; see "Why a classic PAT" |
+| `Resource not accessible by integration` on every repo | The build is passing a GitHub App installation token | Pass the classic PAT instead, from `publish.yml` |
+| Repo names in the log look like `openziti/Sorry`, `openziti/couldn't` | The org listing failed and its error text was parsed as names | `listOrgRepos` validates against this — if you see it, that check is gone |
+| A specific repo missing from "others" | New repo the token's account can't see, or a GHSA fork | Confirm the account has access; `*-ghsa-*` forks are skipped on purpose |
+| `totals` show one repo populated, everything else zero (local) | msys64 `jq` segfaulting | Use the official Windows `jq`; see the Windows notes |
+| `totals` all zero locally | No token loaded, so it fell back to a `gh` login that isn't a classic PAT | Export `ZITI_CI_STARGAZERS_READ_TOKEN` as shown above |
 
 ## Making the collector reusable
 
-The collection half of this (App auth + GraphQL + retry budgets + fail-on-empty) is not OpenZiti-specific and is the
-part outsiders can't easily rediscover. There's a proposal to extract it as a GitHub Action in
-[`STARGAZER-ACTION-PLAN.md`](./STARGAZER-ACTION-PLAN.md) — scope, ~1–1.5 days of work, and the documentation plan. Not
-started.
-
-## History / gotcha
-
-This chart silently broke on ~2026-06-30 (empty data, green CI) because the old `curl`-based collector wrote GitHub's
-error objects straight into the data and never failed. The current design (App auth + fail-on-empty) is the fix. If
-you're tempted to "simplify" back to a PAT, re-read the "Why a GitHub App" section — PATs are blocked.
+The collection half of this (GraphQL + retry budgets + fail-on-empty + which credential the API accepts) is not
+OpenZiti-specific. There's a proposal to extract it as a GitHub Action
+in [`STARGAZER-ACTION-PLAN.md`](./STARGAZER-ACTION-PLAN.md) — scope, ~1–1.5 days of work, and the documentation plan.
+Not started; it assumes GitHub App auth, which does not work, so it needs a rewrite first.
