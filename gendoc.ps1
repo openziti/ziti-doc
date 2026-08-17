@@ -181,13 +181,23 @@ if ($SKIP_LINKED_DOC -eq "no") {
 }
 
 if ($ADD_STARGAZER_DATA -eq "yes") {
-    if (!(Get-Command csvtojson -ErrorAction SilentlyContinue)) {
-        Write-Host "csvtojson not installed, skipping stargazer data"
-    } elseif (-not ($env:STARGAZERS_READ_TOKEN -or $env:GITHUB_TOKEN)) {
-        Write-Host "neither STARGAZERS_READ_TOKEN nor GITHUB_TOKEN set, skipping stargazer data"
+    # Collection lives in gh-stats.sh; there is no PowerShell port, so run that one
+    # under bash rather than keeping two collectors in sync. Same guards as
+    # gendoc.sh: gh on PATH, and a token (or a gh login) to authenticate with.
+    $bash = Get-Command bash -ErrorAction SilentlyContinue
+    $haveToken = $env:ZITI_CI_STARGAZERS_READ_TOKEN -or $env:STARGAZERS_READ_TOKEN -or $env:GITHUB_TOKEN
+    if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
+        Write-Host "gh CLI not installed, skipping stargazer data"
+    } elseif (-not $bash) {
+        Write-Host "bash not found (needed to run gh-stats.sh), skipping stargazer data"
+    } elseif (-not $haveToken -and -not (gh auth status 2>$null)) {
+        Write-Host "no stargazer token and gh is not logged in, skipping stargazer data"
     } else {
         Write-Host "collecting stargazer data before building the site..."
-        & "$scriptRoot\gh-stats.ps1"
+        & $bash.Source (Join-Path $scriptRoot "gh-stats.sh")
+        if ($LASTEXITCODE -ne 0) {
+            throw "gh-stats.sh failed with exit code $LASTEXITCODE"
+        }
     }
 }
 
