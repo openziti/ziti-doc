@@ -10,8 +10,8 @@ Quickstarts are short-lived networks great for learning. For production deployme
 
 | Option | Best for |
 |---|---|
-| [Local: No Docker](./local-no-docker.mdx) | Fastest start; run all binaries directly on your machine |
-| [Local: With Docker](./local-with-docker.mdx) | Single container with the full stack |
-| [Local: Docker Compose](./local-docker-compose.mdx) | Multi-container setup with better service isolation |
-| [Local: Kubernetes](./local-kubernetes.mdx) | Run on a local minikube cluster |
+| [Local — no Docker](./local-no-docker.mdx) | Fastest start; run all binaries directly on your machine |
+| [Local — with Docker](./local-with-docker.mdx) | Single container with the full stack |
+| [Local — Docker Compose](./local-docker-compose.mdx) | Multi-container setup with better service isolation |
+| [Local — Kubernetes](./local-kubernetes.mdx) | Run on a local minikube cluster |
 | [Run OpenZiti anywhere](./hosted.mdx) | Deploy on an internet-accessible server; sharable with others |
