@@ -24,16 +24,16 @@ mkdir -p ${STATS_DIR}/${TODAY}
 }
 
 # ---------------------------------------------------------------------------
-# Stargazer collection (GraphQL-based). REST and GraphQL are gated identically
-# (see the top-of-file note), so either needs a classic PAT; GraphQL wins on
-# payload -- REST returns a full user object per star (~850 bytes) where GraphQL
-# returns starredAt + login (~60 bytes), and only the date is kept. `gh api graphql
-# --paginate` walks the connection via the $endCursor variable + pageInfo; we wrap
-# it with retry/backoff so a transient 403/429 doesn't corrupt output, map each
-# page into the REST star+json shape (so the downstream jq doesn't care which API
-# produced it), throttle between repos, and emit a flat {date,user,repo} stream.
-# The build fails hard if ziti or zrok come back empty so we never deploy a blank
-# chart on top of good data.
+# Stargazer collection (GraphQL-based). REST and GraphQL carry the same gate (see
+# the top-of-file note) and both need a classic PAT. GraphQL is used because REST
+# returns a full user object per star: a 100-star page is ~118 KB over REST and
+# ~7 KB over GraphQL, and only the date is kept. `gh api graphql --paginate` walks the
+# connection via the $endCursor variable + pageInfo; we wrap it with retry/backoff
+# so a transient 403/429 doesn't corrupt output, map each page into the REST
+# star+json shape (so the downstream jq doesn't care which API produced it),
+# throttle between repos, and emit a flat {date,user,repo} stream. The build fails
+# hard if ziti or zrok come back empty so we never deploy a blank chart on top of
+# good data.
 # ---------------------------------------------------------------------------
 
 STAR_PARALLEL="${STAR_PARALLEL:-6}"        # repos fetched concurrently (raise to go faster, lower if rate-limited)
@@ -45,9 +45,8 @@ function listOrgRepos {
   # Exclude GHSA security-advisory forks (names like <repo>-ghsa-xxxx-xxxx-xxxx):
   # they aren't real repos, have no stargazers endpoint, and 404.
   #
-  # Validated, not just retried: `gh` prints its error payload on stdout, so an
-  # unchecked 401/504 turns "Bad credentials" into repo names and the run goes off
-  # fetching stars for `openziti/couldn't`. Real names have no spaces or quotes.
+  # `gh` writes its error payload to stdout, which parses as repo names. Reject
+  # output with whitespace or quotes in it, and retry.
   local attempt=1 delay=5 out
   while :; do
     if out="$(gh api --paginate "orgs/${ORG}/repos?per_page=${GH_PAGE_SIZE}" \
@@ -70,7 +69,7 @@ function listOrgRepos {
 
 function fetchRepoStars {
   # $1 repo, $2 output file. Reads the repo's stargazers via GraphQL (the REST
-  # endpoint is 403-gated now -- see the top-of-file note) and writes a validated
+  # endpoint is 403-gated -- see the top-of-file note) and writes a validated
   # JSON array in the REST star+json shape ([{starred_at, user:{login}}, ...]) so
   # the phase-2 assembly below stays unchanged. Retries with exponential backoff
   # on rate limiting and on server-side/transport failures (5xx, EOF, timeouts);
