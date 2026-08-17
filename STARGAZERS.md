@@ -137,10 +137,8 @@ copied stargazer json to .../docusaurus/src/pages/stargazers/
 With no token in the environment, `gh-stats.sh` falls back to your `gh auth login` — which works only if that login is
 itself a classic PAT.
 
-> **Windows notes.** The local `gendoc.ps1 -s` path is **broken** for stargazers: it guards on a `csvtojson` dependency
-> and then calls a `gh-stats.ps1` that doesn't exist. Collect stargazer data on Windows by running `bash ./gh-stats.sh`
-> directly (Git Bash). CI is unaffected — the netfoundry build runs the `.sh`. Two Windows-only traps fail quietly and
-> look like API problems:
+> **Windows notes.** `gendoc.ps1 -s` runs `gh-stats.sh` under bash — there is no PowerShell collector — so bash has to be
+> on `PATH`. Two Windows-only traps fail quietly and look like API problems:
 >
 > - **`/tmp` is not one place.** Git Bash and an msys64 `jq` resolve it to different roots, so the shell writes files
 >   `jq` then "cannot open". Set `STATS_DIR` to a drive path — `export STATS_DIR=/d/tmp/stargazer-stats` — which both
