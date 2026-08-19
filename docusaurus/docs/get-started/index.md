@@ -15,7 +15,6 @@ the community for help!
 
 ## What you'll do
 
-1. **[Set up a network](./network/index.md)** — pick a quickstart to get your overlay network running.
-2. **[Install the ZAC](./zac/index.mdx)** — optional web UI for managing your network.
-3. **[Create your first service](./services/index.md)** — secure an existing app with zero trust.
-
+1. **[Set up a network](./network/index.md)**: pick a quickstart to get your overlay network running.
+2. **[Install the ZAC](./zac/index.mdx)**: optional web UI for managing your network.
+3. **[Create your first service](./services/index.md)**: secure an existing app with zero trust.
