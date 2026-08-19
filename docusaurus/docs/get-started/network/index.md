@@ -1,7 +1,7 @@
 # 1. Set up a network
 
-Choose a quickstart to get your OpenZiti overlay network running. All options result in a working network — pick the
-one that fits your environment.
+Choose a quickstart to get your OpenZiti overlay network running. All options result in a working network, so pick
+the one that fits your environment.
 
 :::info
 Quickstarts are short-lived networks great for learning. For production deployments, see the
