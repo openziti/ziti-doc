@@ -1,7 +1,8 @@
 ---
-title: Back up the controller
 sidebar_label: Back up
 ---
+
+# Back up the controller
 
 ## Backup
 
@@ -36,10 +37,11 @@ allowing the other party to complete the chain with their copy of the root CA.
 
 The following configuration properties refer to PKI files that must be backed up if not using an intermediate CA.
 
--   `identity` may appear in several places and always configures keys, leaf certs, and CA certs. When this property
-    appears at the top level of the configuration file, its `ca` property has a special meaning and configures a bundle of
-    root CAs that all parts of the network should trust.
--   `edge.enrollment.signingCert` always appears in one place and configures the controller's edge signer CA key and cert.
+- `identity` may appear in several places and always configures keys, leaf certs, and CA certs. When this property
+  appears at the top level of the configuration file, its `ca` property has a special meaning and configures a
+  bundle of root CAs that all parts of the network should trust.
+- `edge.enrollment.signingCert` always appears in one place and configures the controller's edge signer CA key and
+  cert.
 
 ### Back up the database
 
@@ -75,10 +77,11 @@ The controller's configuration file contains URIs for its private keys, leaf cer
 certificate, and trust bundle. If the URI scheme is not specified it is interpreted as a `file://` URI, which may be
 relative to the directory where the configuration file is located or absolute.
 
-You can restore these files from a backup, or, if using intermediate CA(s), you can instead generate new keys, issue a
-new intermediate CA cert from the same root CA, and issue new leaf certificates from the new intermediate CA ([link to certificate renewal guide](@openzitidocs/support/troubleshooting/pki-troubleshooting/renew-cert)).
+You can restore these files from a backup, or, if using intermediate CA(s), you can instead generate new keys,
+issue a new intermediate CA cert from the same root CA, and issue new leaf certificates from the new intermediate
+CA ([link to certificate renewal guide](@openzitidocs/support/troubleshooting/pki-troubleshooting/renew-cert)).
 
-## Recover the database
+### Recover the database
 
 If the controller was lost then a new controller can be initialized with a database snapshot.
 
