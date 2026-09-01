@@ -30,7 +30,7 @@
   "indexFilesTitle": "Files",
   "indexGroupsName": "index_groups",
   "indexGroupsTitle": "Modules",
-  "indexInFolders": false,
+  "indexInFolders": true,
   "indexNamespacesName": "index_namespaces",
   "indexNamespacesTitle": "Namespaces",
   "indexRelatedPagesName": "index_pages",
@@ -40,7 +40,7 @@
   "linkSuffix": ".md",
   "mainPageInRoot": true,
   "mainPageName": "index",
-  "replaceUnderscoresInAnchors": true,
+  "replaceUnderscoresInAnchors": false,
   "sort": false,
   "templateIndexClasses": "index_classes",
   "templateIndexExamples": "index_examples",
@@ -58,5 +58,5 @@
   "templateKindPage": "kind_page",
   "templateKindStruct": "kind_class",
   "templateKindUnion": "kind_class",
-  "useFolders": false
+  "useFolders": true
 }

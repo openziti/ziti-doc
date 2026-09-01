@@ -41,6 +41,21 @@ jobs:
           && sudo apt-get install -y doxygen wget curl jq \
           && npm install -g csvtojson
 
+      # doxybook2 turns the C SDK's Doxygen XML into native Markdown. It has no
+      # apt package, so pull the release binary. Without it on the PATH,
+      # sdk-docgen-fixups/c/generate.mjs degrades to a placeholder page and the
+      # published site would quietly lose the whole C SDK reference.
+      - name: Install doxybook2
+        env:
+          DOXYBOOK2_VERSION: v1.5.0
+        run: |
+          set -euo pipefail
+          curl -sSfL -o /tmp/doxybook2.zip \
+            "https://github.com/matusnovak/doxybook2/releases/download/${DOXYBOOK2_VERSION}/doxybook2-linux-amd64-${DOXYBOOK2_VERSION}.zip"
+          unzip -q /tmp/doxybook2.zip -d /tmp/doxybook2
+          sudo install -m 0755 /tmp/doxybook2/bin/doxybook2 /usr/local/bin/doxybook2
+          doxybook2 --version
+
       - name: Build & Publish Docusaurus Site
         env:
           GITHUB_TOKEN: ${{ github.token }}
