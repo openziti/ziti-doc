@@ -1,5 +1,4 @@
 ---
-title: Deploy the console
 sidebar_label: Console
 ---
 
@@ -7,6 +6,8 @@ import ConsoleAuthAdminClientCertificate from '../../../reference/40-command-lin
 import ConsolePublicCertsPlatformIntro from '../_console-public-certs-platform-intro.mdx'
 import ConsolePublicCertsBasicSteps from '../_console-public-certs-basic-steps.mdx'
 import ConsolePublicCertsConfigurationLink from '../_console-public-certs-configuration-link.mdx'
+
+# Deploy the console
 
 Deploy the Ziti Admin Console (ZAC) as a Linux service alongside the controller.
 
@@ -45,7 +46,8 @@ Console versions >= 3.0.0 from GitHub may be used.
 
 ## Configuration
 
-1. In **/var/lib/ziti-controller/config.yml**, ensure you have an API binding `zac` on the same web listener where `edge-management` is bound. Ensure the `location` matches the path to the console files.
+1. In **/var/lib/ziti-controller/config.yml**, ensure you have an API binding `zac` on the same web listener where
+   `edge-management` is bound. Ensure the `location` matches the path to the console files.
 
     ```text
     - binding: zac
@@ -66,7 +68,11 @@ Console versions >= 3.0.0 from GitHub may be used.
     https://ctrl.ziti.example.com:1280/zac/
     ```
 
-1. Console certificate option - The console is served from the controller's API and can be used with the default API certificate. The controller can be configured to present a different certificate for the console when the API is accessed by a distinct URL for the console. For more information about using alternative server certs with the controller, see: [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity).
+1. Console certificate option: the console is served from the controller's API and can be used with the default
+   API certificate. The controller can be configured to present a different certificate for the console when the
+   API is accessed by a distinct URL for the console. For more information about using alternative server certs
+   with the controller, see
+   [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity).
 
 ## Authenticate with an admin client certificate
 

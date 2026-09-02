@@ -1,20 +1,22 @@
 ---
-title: Deploy the console
 sidebar_label: Console
 ---
 
-import { 
-    ConsoleAuthAdminClientCertificate, 
-    ConsolePublicCertsPlatformIntro, 
-    ConsolePublicCertsBasicSteps, 
-    ConsolePublicCertsConfigurationLink 
+import {
+    ConsoleAuthAdminClientCertificate,
+    ConsolePublicCertsPlatformIntro,
+    ConsolePublicCertsBasicSteps,
+    ConsolePublicCertsConfigurationLink
 } from '../../../_imports';
+
+# Deploy the console
 
 This article is about enabling the console on a controller that is running in a container.
 
 1. Configure the controller
 
-    The console's `zac` binding must be on the same web listener as the controller's management API, i.e., the `edge-management` binding.
+    The console's `zac` binding must be on the same web listener as the controller's management API, i.e., the
+    `edge-management` binding.
 
     <br />
 
@@ -25,7 +27,8 @@ This article is about enabling the console on a controller that is running in a 
               indexFile: index.html
     ```
 
-    - `location` is the filesystem path to the static files of the console. In the controller container, the usual path is `/ziti-console`.
+    - `location` is the filesystem path to the static files of the console. In the controller container, the
+      usual path is `/ziti-console`.
     - `indexFile` property is the entry point to the console.
 
 1. To apply the changes, the controller must be restarted.
@@ -37,7 +40,11 @@ This article is about enabling the console on a controller that is running in a 
 
     The only available authentication method for the console SPA is username and password.
 
-1. Console certificate option - The console is served from the controller's API and can be used with the default API certificate. The controller can be configured to present a different certificate for the console when the API is accessed by a distinct URL for the console. For more information about using alternative server certs with the controller, see: [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity).
+1. Console certificate option: the console is served from the controller's API and can be used with the default
+   API certificate. The controller can be configured to present a different certificate for the console when the
+   API is accessed by a distinct URL for the console. For more information about using alternative server certs
+   with the controller, see
+   [the configuration reference for the `identity` property](/reference/30-configuration/conventions.md#identity).
 
 ## Upgrade
 
