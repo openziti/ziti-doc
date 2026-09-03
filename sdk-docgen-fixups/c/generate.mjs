@@ -436,6 +436,27 @@ n = editFiles(mdFiles, (text, file) => {
 });
 log(`  re-based root-relative cross-references in ${n} file(s)`);
 
+// 4g. Doxygen documents README.md twice: once as the main page (already
+//     handled above, and it renders fine) and again as an ordinary input
+//     file, because it is listed in both Doxyfile's INPUT and
+//     USE_MDFILE_AS_MAINPAGE. Doxygen has no markdown-aware "source view" for
+//     that second copy, so it just dumps the raw file text into one code
+//     fence -- pure duplicate content with no unique value over the real
+//     overview page.
+//
+//     Tried removing README.md from INPUT instead of doing this: it also
+//     breaks the main page, because USE_MDFILE_AS_MAINPAGE requires the file
+//     to be scanned as regular input too. So this drops the redundant copy
+//     after the fact instead of trying to stop Doxygen from creating it.
+const readmeDump = mdFiles.find((f) => /README_8md\.md$/.test(f));
+if (readmeDump) {
+  rmSync(readmeDump);
+  const remaining = mdFiles.filter((f) => f !== readmeDump);
+  n = editFiles(remaining, (text) =>
+    text.replace(/^.*\[README\.md\]\([^)]*README_8md\.md\).*\n?/m, ""));
+  log(`  dropped the duplicate raw-text README page and its ${n} index reference(s)`);
+}
+
 // =============================================================================
 // 5. SIDEBAR STRUCTURE
 // =============================================================================
