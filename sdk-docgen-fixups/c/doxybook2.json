@@ -13,9 +13,7 @@
     "modules",
     "classes",
     "files",
-    "pages",
-    "namespaces",
-    "examples"
+    "pages"
   ],
   "formulaBlockEnd": "\\]",
   "formulaBlockStart": "\\[",
