@@ -1,20 +1,24 @@
 ---
-title: Migrate the router installation
 sidebar_label: Migrate
 ---
 
+# Migrate the router installation
+
 Here's an example of migrating an existing router configuration to the Linux service's working directory.
 
-1. Remove the quickstart router service if you followed the BASH quickstart to create **/etc/systemd/system/ziti-router.service**.
-1. Follow [the Linux router deployment guide](/how-to-guides/deployments/10-linux/20-router/10-deploy.mdx) to install the controller service.
+1. Remove the quickstart router service if you followed the Bash quickstart to create
+   **/etc/systemd/system/ziti-router.service**.
+1. Follow [the Linux router deployment guide](/how-to-guides/deployments/10-linux/20-router/10-deploy.mdx) to
+   install the controller service.
 1. Ensure service is disabled and state is clean.
-    
+
     ```text
     sudo systemctl disable --now ziti-router.service
     sudo systemctl clean --what=state ziti-router.service
     ```
 
-1. Copy the router-related parts of the configuration to the service's working directory and rename the configuration file to `config.yml`.
+1. Copy the router-related parts of the configuration to the service's working directory and rename the
+   configuration file to `config.yml`.
 
     ```text
     sudo mkdir -pv /var/lib/ziti-router/
