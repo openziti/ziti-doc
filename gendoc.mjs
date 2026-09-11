@@ -329,16 +329,6 @@ if (existsSync(staleClangHtml)) {
 const cSdkGenerator = join(scriptRoot, "sdk-docgen-fixups", "c", "generate.mjs");
 
 if (!opts.skipLinkedDoc) {
-  if (!has("wget")) {
-    console.error("");
-    console.error("The commands listed below are required to be on the path for this");
-    console.error("script to function properly. Please ensure they are on the path and");
-    console.error("then try again.");
-    console.error(" * wget");
-    console.error("");
-    process.exit(1);
-  }
-
   console.log("==================================================");
   const csharpSource = join(remotesDir, "ziti-sdk-csharp", "docs");
   const csharpTarget = join(sdkRootTarget, "csharp");
@@ -364,22 +354,28 @@ if (!opts.skipLinkedDoc) {
 
   const swiftProj = join(remotesDir, "ziti-sdk-swift", "CZiti.xcodeproj", "project.pbxproj");
   if (existsSync(swiftProj)) {
-    const swiftTarget = join(sdkRootTarget, "swift");
-    const swiftTgz =
-      "https://github.com/openziti/ziti-sdk-swift/releases/latest/download/ziti-sdk-swift-docs.tgz";
-    mkdirSync(swiftTarget, { recursive: true });
-    console.log("");
-    console.log("Copying Swift docs");
-    console.log(`    from: ${swiftTgz}`);
-    console.log(`      to: ${swiftTarget}`);
-    // The shell version piped wget into tar. Node has no shell pipe here, so
-    // buffer the tarball and hand it to tar on stdin instead.
-    const dl = capture("wget", ["-q", "-O", "-", swiftTgz], { encoding: "buffer" });
-    if (dl.error || dl.status !== 0 || !dl.stdout?.length) {
-      console.error(`ERROR: failed to download Swift docs from ${swiftTgz}`);
-      process.exit(1);
+    if (!has("wget")) {
+      console.warn("");
+      console.warn("WARNING: Swift SDK docs will NOT be copied - `wget` is not on the PATH.");
+      console.warn("");
+    } else {
+      const swiftTarget = join(sdkRootTarget, "swift");
+      const swiftTgz =
+        "https://github.com/openziti/ziti-sdk-swift/releases/latest/download/ziti-sdk-swift-docs.tgz";
+      mkdirSync(swiftTarget, { recursive: true });
+      console.log("");
+      console.log("Copying Swift docs");
+      console.log(`    from: ${swiftTgz}`);
+      console.log(`      to: ${swiftTarget}`);
+      // The shell version piped wget into tar. Node has no shell pipe here, so
+      // buffer the tarball and hand it to tar on stdin instead.
+      const dl = capture("wget", ["-q", "-O", "-", swiftTgz], { encoding: "buffer" });
+      if (dl.error || dl.status !== 0 || !dl.stdout?.length) {
+        console.error(`ERROR: failed to download Swift docs from ${swiftTgz}`);
+        process.exit(1);
+      }
+      run("tar", ["-xz"], { cwd: swiftTarget, input: dl.stdout, stdio: ["pipe", "inherit", "inherit"] });
     }
-    run("tar", ["-xz"], { cwd: swiftTarget, input: dl.stdout, stdio: ["pipe", "inherit", "inherit"] });
   }
 } else {
   // sidebars.ts hard-requires reference/developer/sdk/clang/index, so skipping
