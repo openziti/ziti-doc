@@ -5,8 +5,8 @@ sidebar_position: 10
 
 # The `intercept.v1` config type
 
-The `intercept.v1` configuration type defines what traffic an intercepting Ziti tunneler should capture and turn into
-a connection to a Ziti service: which protocols, destination addresses, and ports to intercept, plus optional
+The `intercept.v1` configuration type defines what traffic an intercepting OpenZiti tunneler should capture and turn
+into a connection to an OpenZiti service: which protocols, destination addresses, and ports to intercept, plus optional
 controls for source address filtering, dial behavior, and source IP handling.
 
 `intercept.v1` is the successor to the deprecated `ziti-tunneler-client.v1` config type and configures the client
@@ -21,7 +21,7 @@ An `intercept.v1` config requires the following three properties.
   * Valid values include `tcp` and `udp`.
   * This field is required. At least one protocol must be specified.
 * `addresses`: the destination addresses to intercept.
-  * Valid values include IPs, DNS/Ziti hostnames, wildcard domains (e.g. `*.acme.ziti`), and CIDR
+  * Valid values include IPs, DNS/OpenZiti hostnames, wildcard domains (e.g. `*.acme.ziti`), and CIDR
     (Classless Inter-Domain Routing) subnets.
   * This field is required. At least one address must be specified.
 * `portRanges`: the destination port ranges to intercept, inclusive of both the `low` and `high` bounds.
@@ -69,6 +69,15 @@ This config only intercepts connections originating from the `192.168.1.0/24` su
   * `$tunneler_id.tag[tagName]` resolves to the value of the `tagName` tag on the client tunneler's identity.
   * `$src_ip` and `$src_port` resolve to the source IP and port of the originating client connection.
   * `$dst_port` resolves to the port the client is trying to connect to.
+
+:::info
+
+The value the intercepting tunneler renders into `sourceIp` must also be present in the hosting tunneler's
+[`host.v1`](./host_v1.md#forwarding-configuration) (or [`host.v2`](./host_v2.md)) `allowedSourceAddresses` list. The
+hosting tunneler only establishes local routes for the source addresses listed there, so binding fails for a spoofed
+source IP that isn't included.
+
+:::
 
 ## Dial options
 
