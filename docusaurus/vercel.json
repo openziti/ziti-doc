@@ -1,5 +1,5 @@
 {
-    "buildCommand": "../gendoc.sh -l",
+    "buildCommand": "bash ../vercel-build.sh",
     "framework": "docusaurus-2",
     "outputDirectory": "build",
     "github": {
