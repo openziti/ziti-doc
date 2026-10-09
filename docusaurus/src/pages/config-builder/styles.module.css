@@ -1,0 +1,8 @@
+/* the builder is an app, not a document: index.tsx sets the height to the viewport left under the navbar and banner */
+.frame {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 6rem);
+    min-height: 30rem;
+    border: 0;
+}
