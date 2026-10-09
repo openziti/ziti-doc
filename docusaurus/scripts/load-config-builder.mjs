@@ -12,22 +12,23 @@
  * config-builder.zip to each config-builder-v* release). Output is static/tools/config-builder-app/, which is
  * replaced wholesale so stale hashed bundles never linger. GITHUB_TOKEN or GH_TOKEN, if set, lifts the API rate limit.
  *
- * Dependency-free, same as load-stargazer-data.mjs: a small central-directory reader over node:zlib.
+ * --repo, --tag-prefix, --asset and --out (relative to docusaurus/) retarget it at another release zip.
+ * Dependency-free: the zip reader is lib/zip.mjs, shared with load-stargazer-data.mjs.
  */
 
 import {existsSync, mkdirSync, readFileSync, rmSync, writeFileSync} from 'node:fs';
 import {dirname, join, resolve, sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {inflateRawSync} from 'node:zlib';
+import {readZip} from './lib/zip.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
-const OUT_DIR = resolve(SCRIPT_DIR, '..', 'static', 'tools', 'config-builder-app');
-const REPO = 'openziti/ziti-console';
-const TAG_PREFIX = 'config-builder-v';
-const ASSET = 'config-builder.zip';
-
 const args = process.argv.slice(2);
-const value = name => (args.includes(name) ? args[args.indexOf(name) + 1] : undefined);
+const value = (name, fallback) => (args.includes(name) ? args[args.indexOf(name) + 1] : fallback);
+
+const REPO = value('--repo', 'openziti/ziti-console');
+const TAG_PREFIX = value('--tag-prefix', 'config-builder-v');
+const ASSET = value('--asset', 'config-builder.zip');
+const OUT_DIR = resolve(SCRIPT_DIR, '..', value('--out', 'static/tools/config-builder-app'));
 
 function die(msg) {
     console.error(`\n  ${msg}\n`);
@@ -56,47 +57,6 @@ async function findRelease(tag) {
     return release;
 }
 
-/** Read a zip's entries as {name, buffer}. Handles stored + deflated members. */
-function readZip(buf, label) {
-    const tail = Math.max(0, buf.length - 65_557);
-    let eocd = -1;
-    for (let i = buf.length - 22; i >= tail; i--) {
-        if (buf.readUInt32LE(i) === 0x06054b50) {
-            eocd = i;
-            break;
-        }
-    }
-    if (eocd < 0) die(`not a zip file (no end-of-central-directory record): ${label}`);
-
-    const count = buf.readUInt16LE(eocd + 10);
-    let p = buf.readUInt32LE(eocd + 16);
-    const entries = [];
-
-    for (let i = 0; i < count; i++) {
-        if (buf.readUInt32LE(p) !== 0x02014b50) die(`corrupt central directory in ${label}`);
-        const method = buf.readUInt16LE(p + 10);
-        const compressedSize = buf.readUInt32LE(p + 20);
-        const nameLen = buf.readUInt16LE(p + 28);
-        const extraLen = buf.readUInt16LE(p + 30);
-        const commentLen = buf.readUInt16LE(p + 32);
-        const localOffset = buf.readUInt32LE(p + 42);
-        const name = buf.toString('utf8', p + 46, p + 46 + nameLen).replace(/\\/g, '/');
-        p += 46 + nameLen + extraLen + commentLen;
-
-        if (name.endsWith('/')) continue;
-
-        const lhNameLen = buf.readUInt16LE(localOffset + 26);
-        const lhExtraLen = buf.readUInt16LE(localOffset + 28);
-        const start = localOffset + 30 + lhNameLen + lhExtraLen;
-        const raw = buf.subarray(start, start + compressedSize);
-
-        if (method === 0) entries.push({name, buffer: raw});
-        else if (method === 8) entries.push({name, buffer: inflateRawSync(raw)});
-        else die(`unsupported compression method ${method} for ${name} in ${label}`);
-    }
-    return entries;
-}
-
 if (args.includes('--if-missing') && existsSync(join(OUT_DIR, 'index.html'))) {
     console.log(`config-builder: already installed in ${OUT_DIR}, skipping`);
     process.exit(0);
@@ -115,7 +75,12 @@ if (value('--zip')) {
     zip = Buffer.from(await (await get(asset.browser_download_url)).arrayBuffer());
 }
 
-const entries = readZip(zip, label);
+let entries;
+try {
+    entries = readZip(zip);
+} catch (e) {
+    die(`${e.message}: ${label}`);
+}
 if (!entries.some(e => e.name === 'index.html')) die(`${label} has no index.html at its root`);
 
 rmSync(OUT_DIR, {recursive: true, force: true});

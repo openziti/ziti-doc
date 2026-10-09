@@ -245,10 +245,6 @@ if [[ "${ADD_STARGAZER_DATA-}" == "yes" ]]; then
   fi
 fi
 
-if [[ "${SKIP_CONFIG_BUILDER:-no}" == "no" ]]; then
-  echo "installing the latest config builder release into docusaurus/static/tools/config-builder-app"
-  node "$script_root/docusaurus/scripts/load-config-builder.mjs"
-fi
 
 if [[ "${SKIP_DOCUSAURUS_GEN}" == no ]]; then
     pushd "${ZITI_DOC_GIT_LOC}/../.." >/dev/null
