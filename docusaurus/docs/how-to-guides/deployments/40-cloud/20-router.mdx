@@ -1,10 +1,11 @@
 ---
 sidebar_label: Router
-title: Deploy the router
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+# Deploy the router
 
 Deploy a router on a Linux VM in a public cloud. These steps cover Azure and AWS.
 
@@ -31,7 +32,7 @@ Please follow **Create a VM section** of the controller cloud guide to set up a 
 <TabItem value="Azure">
 
 1.  Once the VM is created, we can get the IP address of the VM from the Virtual machine screen.
-2.  Log in to the VM by using defined user "username" (default username is azureuser) and the private sshkey:
+2.  Log in to the VM by using defined user `username` (default username is azureuser) and the private sshkey:
 
     ```text
     ssh -i <private_key> <username>@<ip>
@@ -40,7 +41,7 @@ Please follow **Create a VM section** of the controller cloud guide to set up a 
 <TabItem value="AWS">
 
 1.  Once the VM is created, we can get the IP address of the VM from the Instance(s) screen.
-2.  Log in to the VM by using user name "ubuntu":
+2.  Log in to the VM by using user name `ubuntu`:
 
     ```text
     ssh -i <private_key> ubuntu@<ip>
@@ -55,7 +56,7 @@ Please follow **Create a VM section** of the controller cloud guide to set up a 
 <TabItem value="DigitalOcean">
 
 1.  Once the VM is created, get the IP address of the droplet from the Resources screen.
-2.  Log in to the VM by using user "root" and IP address:
+2.  Log in to the VM by using user `root` and IP address:
 
     ```text
     ssh root@<ip>
@@ -64,7 +65,7 @@ Please follow **Create a VM section** of the controller cloud guide to set up a 
 <TabItem value="OCI">
 
 1.  Once the VM is created, we can get the IP address of the VM from the instance details screen.
-2.  Log in to the VM by using user name "ubuntu" and the IP address:
+2.  Log in to the VM by using user name `ubuntu` and the IP address:
 
     ```text
     ssh -i <private_key> ubuntu@<ip>
@@ -73,7 +74,7 @@ Please follow **Create a VM section** of the controller cloud guide to set up a 
 <TabItem value="IBM">
 
 1.  Once the VM is created, we can get the IP address of the VM from the Devices screen.
-2.  Log in to the VM by using user name "ubuntu" and the IP address:
+2.  Log in to the VM by using user name `ubuntu` and the IP address:
 
     ```text
     ssh -i <private_key> ubuntu@<ip>
