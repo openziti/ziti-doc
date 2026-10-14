@@ -1,5 +1,4 @@
 ---
-title: Use SoftHSMv2
 sidebar_label: Use SoftHSMv2
 ---
 
@@ -19,35 +18,35 @@ context will be provided for each step. When appropriate there will be a small a
 understanding of what is happening and why.
 
 :::caution
-This quickstart intended audience is for more technically savvy individuals. You will need to be familiar with the command
-line interface of your operating system.
+This quickstart's intended audience is more technically savvy individuals. You will need to be familiar with the
+command line interface of your operating system.
 :::
 
 ## Prerequisites
 
-* [SoftHSMv2](https://www.opendnssec.org/en/latest/softhsm/) is downloaded and installed in a known location
-* [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a known
-  location
-* ziti and ziti-tunnel are both on the path.
+- [SoftHSMv2](https://www.opendnssec.org/en/latest/softhsm/) is downloaded and installed in a known location
+- [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a
+  known location
+- `ziti` and `ziti-tunnel` are both on the path.
 
 ## Let's do this: SoftHSMv2
 
 Here's the list of steps we'll accomplish in this quickstart:
 
-* Establish a bunch of environment variables to make it easy to copy/paste the other commands. You'll want to *look at
-  these environment variables*. They need to be setup properly. If you have problems with this guide it is almost
-  certainly because you have an environment variable setup incorrectly. Double check them.
-* Make a directory and generate a configuration file for SoftHSM
-* Use the [Ziti CLI](https://github.com/openziti/ziti/releases/latest) to:
-    * create two identities - one demonstrating an RSA key, one EC
-    * enroll the identities
-    * create a test service
-    * create test router/service policies
-* Use the pkcs11-tool provided by OpenSC to interact with SoftHSM to:
-    * initialize the SoftHSM driver
-    * create a key
-* Use `ziti-tunnel` to enroll the identities using SoftHSM
-* Use `ziti-tunnel` in proxy mode to verify things are working and traffic is flowing over the network
+- Establish a bunch of environment variables to make it easy to copy/paste the other commands. You'll want to
+  *look at these environment variables*. They need to be setup properly. If you have problems with this guide it
+  is almost certainly because you have an environment variable setup incorrectly. Double check them.
+- Make a directory and generate a configuration file for SoftHSM
+- Use the [Ziti CLI](https://github.com/openziti/ziti/releases/latest) to:
+  - create two identities: one demonstrating an RSA key, one EC
+  - enroll the identities
+  - create a test service
+  - create test router/service policies
+- Use the pkcs11-tool provided by OpenSC to interact with SoftHSM to:
+  - initialize the SoftHSM driver
+  - create a key
+- Use `ziti-tunnel` to enroll the identities using SoftHSM
+- Use `ziti-tunnel` in proxy mode to verify things are working and traffic is flowing over the network
 
 ### Establish environment variables
 

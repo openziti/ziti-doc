@@ -1,5 +1,4 @@
 ---
-title: Use a YubiKey
 sidebar_label: Use a YubiKey
 ---
 
@@ -9,14 +8,14 @@ import TabItem from '@theme/TabItem';
 # Use a YubiKey
 
 [Yubico](https://www.yubico.com/) is a manufacturer of HSM devices. A popular line of HSM produced by Yubico is the
-YubiKey. This quickstart guide will use specific device from Yubico - the [YubiKey 5
-nfc](https://www.yubico.com/products/yubikey-5-overview/).
+YubiKey. This quickstart guide will use a specific device from Yubico: the
+[YubiKey 5 nfc](https://www.yubico.com/products/yubikey-5-overview/).
 
 ## Overview
 
-The [YubiKey 5 nfc](https://www.yubico.com/products/yubikey-5-overview/) is a multi-purpose device with a few different
-security-minded uses. One of the applications on the device is an application called PIV or "Personal Identity
-Verification". PIV is a [standard published by
+The [YubiKey 5 nfc](https://www.yubico.com/products/yubikey-5-overview/) is a multi-purpose device with a few
+different security-minded uses. One of the applications on the device is an application called Personal Identity
+Verification (PIV). PIV is a [standard published by
 NIST](https://www.nist.gov/identity-access-management/personal-identity-verification-piv) and describes the kinds of
 credentials which make up the standard. PIV credentials have certificates and key pairs, pin numbers, biometrics
 like fingerprints and pictures, and other unique identifiers. When put together into a PIV credential, it provides
@@ -30,48 +29,49 @@ are easily found in the search engine of choice.
 
 ## Prerequisites
 
-* [YubiKey 5 nfc](https://www.yubico.com/products/yubikey-5-overview/) - You'll need one to use this
-  quickstart!
-* [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a known
-  location. Not required however this quickstart uses the `pkcs11-tool` to illustrate that the device is PKCS#11
-  compliant. HSM manufacturers will generally provide a similar tool and often expand it's usage. See more below.
-  [yubico-piv-tool](https://developers.yubico.com/yubico-piv-tool/) - YubiKey provides a similar tool to the
-  `pkcs11-tool`. This tool is needed to be installed because it contains the pkcs#11 module (driver) for the HSM. As
-  this is a tool specific to Yubico we've chosen to not use this in the following commands.
-* Ensure the YubiKey is factory reset. To avoid any complications with existing information in the YubiKey ensure the
-  device is factory reset using the [YubiKey
-  Manager](https://www.yubico.com/support/download/yubikey-manager/).
-* To successfully use the YubiKey, the libraries provided by the `yubico-piv-tool` must either be on the path
-  or in a location that is known to the OS. On Linux, this is likely done by the YubiKey software installation, but
-  on Windows, you'll need to take any additional actions highlighted in the Windows-specific sections.
-* Linux Only: If you're using Linux, you'll need to follow the [build
-  instructions](https://developers.yubico.com/yubico-piv-tool/) provided by Yubico. Before you can do anything with the
-  Yubikey you'll need to make sure the `libykcs11.so` exists on your system. When creating this quickstart the library
-  was built to `./yubico-piv-tool-2.0.0/ykcs11/.libs/libykcs11.so`.
-* [Ubuntu](https://ubuntu.com/) was used to test this guide. An attempt was also made with [linux
-  mint](https://linuxmint.com/) however the attempt failed when trying to compile the Yubikey software and was aborted.
-  It would likely have worked if enough effort was put into discovering why that linux variant had issues pulling and
-  compiling the necessary software. If you see strange errors when following this guide and are not using Ubuntu it may
-  be related.
-* ziti and ziti-tunnel are both downloaded and on the path.
+- [YubiKey 5 nfc](https://www.yubico.com/products/yubikey-5-overview/): you'll need one to use this quickstart!
+- [OpenSC](https://github.com/OpenSC/OpenSC/wiki) is installed and `pkcs11-tool` is either on the PATH or at a
+  known location. Not required, however this quickstart uses the `pkcs11-tool` to illustrate that the device is
+  PKCS#11 compliant. HSM manufacturers will generally provide a similar tool and often expand its usage. See more
+  below.
+- [yubico-piv-tool](https://developers.yubico.com/yubico-piv-tool/): YubiKey provides a similar tool to the
+  `pkcs11-tool`. This tool needs to be installed because it contains the PKCS#11 module (driver) for the HSM. As
+  this is a tool specific to Yubico, we've chosen to not use it in the following commands.
+- Ensure the YubiKey is factory reset. To avoid any complications with existing information in the YubiKey ensure
+  the device is factory reset using the
+  [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/).
+- To successfully use the YubiKey, the libraries provided by the `yubico-piv-tool` must either be on the path
+  or in a location that is known to the OS. On Linux, this is likely done by the YubiKey software installation,
+  but on Windows, you'll need to take any additional actions highlighted in the Windows-specific sections.
+- Linux only: if you're using Linux, you'll need to follow the
+  [build instructions](https://developers.yubico.com/yubico-piv-tool/) provided by Yubico. Before you can do
+  anything with the Yubikey you'll need to make sure the `libykcs11.so` exists on your system. When creating this
+  quickstart the library was built to `./yubico-piv-tool-2.0.0/ykcs11/.libs/libykcs11.so`.
+- [Ubuntu](https://ubuntu.com/) was used to test this guide. An attempt was also made with
+  [linux mint](https://linuxmint.com/) however the attempt failed when trying to compile the Yubikey software and
+  was aborted. It would likely have worked if enough effort was put into discovering why that linux variant had
+  issues pulling and compiling the necessary software. If you see strange errors when following this guide and are
+  not using Ubuntu it may be related.
+- `ziti` and `ziti-tunnel` are both downloaded and on the path.
 
-## Let's use the YubiKey!
+## Let's use the YubiKey
 
 Here's the list of steps we'll accomplish in this quickstart:
 
-* Establish a bunch of environment variables to make it easy to copy/paste the other commands. You'll want to *look at
-  these environment variables*. If you have problems with this guide, it is almost certainly because you have an environment variable set up incorrectly.
-* Make a directory and generate a configuration file for Ziti
-* Use the [Ziti CLI](https://github.com/openziti/ziti/releases/latest) to:
-    * create two identities - one demonstrating an RSA key, one EC
-    * enroll the identities
-    * create a test service
-    * create test router/service policies
-* Use the pkcs11-tool provided by OpenSC to interact with the YubiKey to:
-    * initialize the PIV app
-    * create a key
-* Use `ziti-tunnel` to enroll the identities using the YubiKey
-* Use `ziti-tunnel` in proxy mode to verify things are working and traffic is flowing over the network
+- Establish a bunch of environment variables to make it easy to copy/paste the other commands. You'll want to
+  *look at these environment variables*. If you have problems with this guide, it is almost certainly because you
+  have an environment variable set up incorrectly.
+- Make a directory and generate a configuration file for Ziti
+- Use the [Ziti CLI](https://github.com/openziti/ziti/releases/latest) to:
+  - create two identities: one demonstrating an RSA key, one EC
+  - enroll the identities
+  - create a test service
+  - create test router/service policies
+- Use the pkcs11-tool provided by OpenSC to interact with the YubiKey to:
+  - initialize the PIV app
+  - create a key
+- Use `ziti-tunnel` to enroll the identities using the YubiKey
+- Use `ziti-tunnel` in proxy mode to verify things are working and traffic is flowing over the network
 
 :::caution
 Do *NOT* use id `2` or `02` for any keys you add. Id `02` corresponds to the YubiKey's "Management Key". You will not be
@@ -80,9 +80,10 @@ able to write a key into this location. The error you will see will indicate: `C
 
 ### Establish environment variables
 
-Open a command line and establish the following environment variables. Note that for the YubiKey we do _not_ use id `02`
-as it appears to be reserved by the YubiKey.  The default SOPIN and PIN are used as well. When using the YubiKey Manager
-software the "SO PIN" corresponds to the "Management Key" while "pin" is the same both here and in the YubiKey Manager.
+Open a command line and establish the following environment variables. Note that for the YubiKey we do *not* use
+id `02` as it appears to be reserved by the YubiKey. The default SOPIN and PIN are used as well. When using the
+YubiKey Manager software the "SO PIN" corresponds to the "Management Key" while "pin" is the same both here and in
+the YubiKey Manager.
 
 <Tabs
     defaultValue="notwindows"
