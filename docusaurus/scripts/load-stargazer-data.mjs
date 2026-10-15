@@ -11,8 +11,8 @@
  * a GitHub App token to hit the API. Output is always
  * src/pages/stargazers/all.repos.stargazers.json, the file the page imports.
  *
- * Deliberately dependency-free: it reads the zip with a ~60-line central
- * directory parser over node:zlib rather than pulling adm-zip into the site's
+ * Deliberately dependency-free: it reads the zip with a small central
+ * directory parser (lib/zip.mjs) over node:zlib rather than pulling adm-zip into the site's
  * package.json for a dev-only tool.
  */
 
@@ -20,7 +20,7 @@ import {existsSync, readdirSync, readFileSync, statSync, writeFileSync} from 'no
 import {basename, dirname, join, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {homedir} from 'node:os';
-import {inflateRawSync} from 'node:zlib';
+import {readZip} from './lib/zip.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const DOCUSAURUS_DIR = resolve(SCRIPT_DIR, '..');
@@ -35,55 +35,6 @@ const LEGACY = ['all.ziti.stargazers.json', 'all.zrok.stargazers.json', 'all.oth
 function die(msg) {
     console.error(`\n  ${msg}\n`);
     process.exit(1);
-}
-
-/* ------------------ zip reading ------------------ */
-
-/** Read a zip's entries as {name, buffer}. Handles stored + deflated members. */
-function readZip(file) {
-    const buf = readFileSync(file);
-
-    // End of central directory: scan back from the tail for its signature. The
-    // trailing comment is almost always empty, but 64KB is its maximum.
-    const tail = Math.max(0, buf.length - 65_557);
-    let eocd = -1;
-    for (let i = buf.length - 22; i >= tail; i--) {
-        if (buf.readUInt32LE(i) === 0x06054b50) {
-            eocd = i;
-            break;
-        }
-    }
-    if (eocd < 0) die(`not a zip file (no end-of-central-directory record): ${file}`);
-
-    const count = buf.readUInt16LE(eocd + 10);
-    let p = buf.readUInt32LE(eocd + 16);
-    const entries = [];
-
-    for (let i = 0; i < count; i++) {
-        if (buf.readUInt32LE(p) !== 0x02014b50) die(`corrupt central directory in ${file}`);
-        const method = buf.readUInt16LE(p + 10);
-        const compressedSize = buf.readUInt32LE(p + 20);
-        const nameLen = buf.readUInt16LE(p + 28);
-        const extraLen = buf.readUInt16LE(p + 30);
-        const commentLen = buf.readUInt16LE(p + 32);
-        const localOffset = buf.readUInt32LE(p + 42);
-        const name = buf.toString('utf8', p + 46, p + 46 + nameLen);
-        p += 46 + nameLen + extraLen + commentLen;
-
-        if (name.endsWith('/')) continue; // directory entry
-
-        // The local header repeats the name and carries its own extra field,
-        // whose length can differ from the central one -- read it, don't assume.
-        const lhNameLen = buf.readUInt16LE(localOffset + 26);
-        const lhExtraLen = buf.readUInt16LE(localOffset + 28);
-        const start = localOffset + 30 + lhNameLen + lhExtraLen;
-        const raw = buf.subarray(start, start + compressedSize);
-
-        if (method === 0) entries.push({name, buffer: raw});
-        else if (method === 8) entries.push({name, buffer: inflateRawSync(raw)});
-        else die(`unsupported compression method ${method} for ${name} in ${file}`);
-    }
-    return entries;
 }
 
 /* ------------------ source discovery ------------------ */
@@ -135,7 +86,11 @@ function collect(src) {
     } else if (src.toLowerCase().endsWith('.json')) {
         files = [{name: basename(src), buffer: readFileSync(src)}];
     } else {
-        files = readZip(src);
+        try {
+            files = readZip(readFileSync(src));
+        } catch (e) {
+            die(`${e.message}: ${src}`);
+        }
         const dirs = [...new Set(files.map(f => f.name.includes('/') ? f.name.split('/')[0] : ''))].sort();
         const newest = dirs[dirs.length - 1];
         if (newest) {
