@@ -1,5 +1,4 @@
 ---
-title: dex
 sidebar_label: dex
 hide_table_of_contents: true
 ---
@@ -10,34 +9,35 @@ import { CallbackUrls } from '../../_imports';
 
 <img src="@static/icons/logo-dex.svg" alt="dex logo" height="100px"/>
 
-The [dex IdP](https://dexidp.io/docs/configuration/) can be configured to federate identity to other IdPs. Doing so 
-will allow you to provide a single identity back to OpenZiti. There is no dashboard need to configure OpenZiti with 
-dex. All the values you need to come from the dex config file. For a more detailed guide on enabling dex with OpenZiti, 
-see below. Use these values to configure an external JWT signer with dex.
+The [dex IdP](https://dexidp.io/docs/configuration/) can be configured to federate identity to other IdPs. Doing
+so will allow you to provide a single identity back to OpenZiti. There is no dashboard needed to configure
+OpenZiti with dex. All the values you need come from the dex config file. For a more detailed guide on enabling
+dex with OpenZiti, see below. Use these values to configure an external JWT signer with dex.
 
-:::note[a note about dex]
-The dex IdP exclusively is a federating IdP. You must have a client id and secret from another IdP in order to 
+:::note[A note about dex]
+The dex IdP exclusively is a federating IdP. You must have a client id and secret from another IdP in order to
 authenticate.
 :::
 
-| Field                 | Where to Find the Value in the dex Configuration                                         | Example                                     |
+| Field                 | Where to find the value in the dex configuration                                         | Example                                     |
 |-----------------------|------------------------------------------------------------------------------------------|---------------------------------------------|
-| **Issuer**            | In the dex config.yaml file, key **issuer** or from the `jwks_uri`                       | https://dex.doc.demo.openziti.org:5556      |
-| **Client ID**         | In the dex config.yaml file, key staticClients.id                                        | openziti-dex-client                         |
-| **Audience**          | Unless overridden, the same value as the **Client ID**                                   | openziti-dex-client                         |
-| **External Auth URL** | The same value as the **Issuer**                                                         | https://dex.doc.demo.openziti.org:5556      |
-| **JWKS Endpoint**     | Use the `jwks_uri` field from the './well-known/openid-configuration' endpoint           | https://dex.doc.demo.openziti.org:5556/keys |
-| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT             | email                                       |
-| **Scopes**            | `openid` is always included. Often `email` but `profile` or any standard or custom scope | profile offline_access                      |
+| **Issuer**            | In the dex config.yaml file, key **issuer** or from the `jwks_uri`                       | `https://dex.doc.demo.openziti.org:5556`      |
+| **Client ID**         | In the dex config.yaml file, key `staticClients.id`                                      | `openziti-dex-client`                         |
+| **Audience**          | Unless overridden, the same value as the **Client ID**                                   | `openziti-dex-client`                         |
+| **External Auth URL** | The same value as the **Issuer**                                                         | `https://dex.doc.demo.openziti.org:5556`      |
+| **JWKS Endpoint**     | Use the `jwks_uri` field from the `/.well-known/openid-configuration` endpoint           | `https://dex.doc.demo.openziti.org:5556/keys` |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT             | `email`                                       |
+| **Scopes**            | `openid` is always included. Often `email` but `profile` or any standard or custom scope | `profile offline_access`                      |
 
 ---
 
 ## Configure dex to federate to GitHub
 
-Since dex is entirely configured via the dex configuration file all examples will be shown as dex config file. The 
-`config.yaml` file and `.env` file are show along with a sample docker command to run dex. Notice in the docker 
-command a volume mount containing valid certificates is mounted allowing for dex to serve TLS from a public CA. Also 
-worth noting is this configuration federates through to GitHub and requires the user to be part of the `openziti` org.
+Since dex is entirely configured via the dex configuration file all examples will be shown as dex config file. The
+`config.yaml` file and `.env` file are shown along with a sample Docker command to run dex. Notice in the Docker
+command a volume mount containing valid certificates is mounted allowing for dex to serve TLS from a public CA.
+Also worth noting is this configuration federates through to GitHub and requires the user to be part of the
+`openziti` org.
 
 ```example-yaml
 @code: dex config.yaml File
@@ -90,6 +90,7 @@ GITHUB_REQUIRED_ORG=openziti
 ```
 
 Verify the proper volume mount exists and the dex container has access.
+
 ```example-text
 @code: Example Docker Command
 docker run --rm \
