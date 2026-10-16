@@ -1,5 +1,4 @@
 ---
-title: AWS Cognito
 sidebar_label: Cognito
 hide_table_of_contents: true
 ---
@@ -20,32 +19,34 @@ AWS Cognito dashboard for the corresponding **User Pool** screen or via the Open
 https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/openid-configuration
 ```
 
-:::note[notes about cognito]
-* By default, Cognito will only work with **ID** tokens. You'll likely need to change the ext-jwt-signer token type 
-  from **Access** to **ID**.
-* Cognito's access token will not contain the user's email nor an audience. The audience field is mandatory as 
-OpenZiti validates this claim within the JWT. **[This blog from AWS security](https://aws.amazon.com/blogs/security/how-to-customize-access-tokens-in-amazon-cognito-user-pools/)** 
-illustrates how one can modify access tokens and add an audience.
+:::note[Notes about Cognito]
+- By default, Cognito will only work with **ID** tokens. You'll likely need to change the ext-jwt-signer token
+  type from **Access** to **ID**.
+- Cognito's access token will not contain the user's email nor an audience. The audience field is mandatory as
+  OpenZiti validates this claim within the JWT.
+  [This blog from AWS security](https://aws.amazon.com/blogs/security/how-to-customize-access-tokens-in-amazon-cognito-user-pools/)
+  illustrates how one can modify access tokens and add an audience.
 :::
 
-| Field                 | Where to Find the Value in the Cognito UI                                                | Example                                                                               |
+| Field                 | Where to find the value in the Cognito UI                                                | Example                                                                               |
 |-----------------------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| **Issuer**            | From the OpenID discovery endpoint, the **issuer** field                                 | https://cognito-idp.us-east-2.amazonaws.com/us-east-2_6X1AbJGPY                       |
-| **Client ID**         | Shown on the **Applications -> App clients** overview page in the **Client ID** column   | 5eac6vbnu75cems4pen2taggvr                                                            |
-| **Audience**          | Unless overridden, the same value as the **Client ID**                                   | 5eac6vbnu75cems4pen2taggvr                                                            |
-| **External Auth URL** | The same value as the **Issuer**                                                         | https://cognito-idp.us-east-2.amazonaws.com/us-east-2_6X1AbJGPY                       |
-| **JWKS Endpoint**     | Shown on the **Overview** page of the user pool as the as the **Token signing key URL**  | https://cognito-idp.us-east-2.amazonaws.com/us-east-2_6X1AbJGPY/.well-known/jwks.json |
-| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT             | email                                                                                 |
-| **Scopes**            | `openid` is always included. Often `email` but `profile` or any standard or custom scope | profile                                                                               |
+| **Issuer**            | From the OpenID discovery endpoint, the **issuer** field                                 | `https://cognito-idp.us-east-2.amazonaws.com/us-east-2_6X1AbJGPY`                     |
+| **Client ID**         | Shown on the **Applications** → **App clients** overview page in the **Client ID** column | `5eac6vbnu75cems4pen2taggvr`                                                          |
+| **Audience**          | Unless overridden, the same value as the **Client ID**                                   | `5eac6vbnu75cems4pen2taggvr`                                                          |
+| **External Auth URL** | The same value as the **Issuer**                                                         | `https://cognito-idp.us-east-2.amazonaws.com/us-east-2_6X1AbJGPY`                     |
+| **JWKS Endpoint**     | Shown on the **Overview** page of the user pool as the **Token signing key URL**         | `https://cognito-idp.us-east-2.amazonaws.com/us-east-2_6X1AbJGPY/.well-known/jwks.json` |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT             | `email`                                                                               |
+| **Scopes**            | `openid` is always included. Often `email` but `profile` or any standard or custom scope | `profile`                                                                             |
 
 ---
 
 ## Create a user pool
 
-Begin by creating a User Pool within Cognito. When prompted, choose a **Single-page application (SPA)**. Enter a name 
-for the application and select **email** when configuring options. For required attributes for sign-up, also choose email.
+Begin by creating a User Pool within Cognito. When prompted, choose a **Single-page application (SPA)**. Enter a
+name for the application and select **email** when configuring options. For required attributes for sign-up, also
+choose email.
 
-:::info[Create a User Pool]
+:::info[Create a user pool]
 ![create app with provider](/img/idps/cognito/create-user-pool.png)
 :::
 
@@ -57,7 +58,7 @@ Add the callback you want to enable and click **Create user directory**.
 
 <CallbackUrls/>
 
-:::info[Add Callback URL]
+:::info[Add callback URL]
 ![img](/img/idps/cognito/add-callback-url.png)
 :::
 
@@ -66,7 +67,7 @@ Add the callback you want to enable and click **Create user directory**.
 To add additional callback URLs, go back to the Cognito App client overview page. From there
 find the **Login pages** tab and choose **Edit**.
 
-:::info[Edit Login Pages]
+:::info[Edit login pages]
 ![img](/img/idps/cognito/add-callback-url-2a.png)
 :::
 
@@ -74,6 +75,6 @@ find the **Login pages** tab and choose **Edit**.
 
 On the **Edit** page, first click **Add another URL** and then enter the second callback URL to allow.
 
-:::info[Add Additional Callback URL]
+:::info[Add additional callback URL]
 ![img](/img/idps/cognito/add-callback-url-2b.png)
 :::
