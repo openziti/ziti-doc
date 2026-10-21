@@ -1,5 +1,4 @@
 ---
-title: Configure Okta
 sidebar_label: Okta
 hide_table_of_contents: true
 ---
@@ -16,28 +15,28 @@ enable authentication via JWTs obtained through an
 [Authorization Code Flow with PKCE or PKCE flow](https://oauth.net/2/pkce/). The fields below are found in the Okta
 admin web interface either under the **Applications** or **Security** sections on the left navigation.
 
-The **OpenID discovery endpoint** can contain fields needed to configure the external jwt signer. Verify the URL used by
-your Okta instance. Often this is the main tenant URL concatenated with '.well-known/openid-configuration' such as
-https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697/.well-known/openid-configuration
+The **OpenID discovery endpoint** can contain fields needed to configure the external jwt signer. Verify the URL
+used by your Okta instance. Often this is the main tenant URL concatenated with `.well-known/openid-configuration`,
+such as `https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697/.well-known/openid-configuration`.
 
-| Field                 | Where to Find the Value in the Okta UI                                         | Example                                                                        |
-|-----------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| **Issuer**            | Security->API, from the list of Authorization Servers, the **Issuer URI** column | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697                     |
-| **Client ID**         | Applications->Applications, from the list of Applications the **Client ID**    | 0oapqjp4snmzqejuh197                                                           |
-| **Audience**          | Security->API, from the list of Authorization Servers, the **Audience** column | openziti-aud                                                                   |
-| **External Auth URL** | Same as the **Issuer**                                                         | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697                     |
-| **JWKS Endpoint**     | Use the `jwks_uri` field from the OpenID discovery endpoint.                   | https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697/.well-known/v1/keys |
-| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT   | email                                                                          |
-| **Scopes**            | `openid` is always included.                                                   | profile offline_access                                                         |
+| Field                 | Where to find the value in the Okta UI                                       | Example                                                                          |
+|-----------------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| **Issuer**            | **Security** → **API**, from the list of Authorization Servers, the **Issuer URI** column | `https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697`                      |
+| **Client ID**         | **Applications** → **Applications**, from the list of Applications the **Client ID** | `0oapqjp4snmzqejuh197`                                                            |
+| **Audience**          | **Security** → **API**, from the list of Authorization Servers, the **Audience** column   | `openziti-aud`                                                                    |
+| **External Auth URL** | Same as the **Issuer**                                                           | `https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697`                      |
+| **JWKS Endpoint**     | Use the `jwks_uri` field from the OpenID discovery endpoint                      | `https://trial-3520298.okta.com/oauth2/auspqk0v3fpttP8fZ697/.well-known/v1/keys`  |
+| **Claims Property**   | Often `email`, but can also be `sub` or any other claim contained in the JWT      | `email`                                                                           |
+| **Scopes**            | `openid` is always included                                                      | `profile offline_access`                                                          |
 
 ---
 
 ## Create app integration
 
-From the Okta admin dashboard, expand the Applications left-side navigation and click **Applications** and click the 
-**Create App Integration** button.
+From the Okta admin dashboard, expand the **Applications** left-side navigation and click **Applications** and
+click the **Create App Integration** button.
 
-:::info[Create Application]
+:::info[Create application]
 ![Create Application](/img/idps/okta/create-app.png)
 :::
 
@@ -56,77 +55,79 @@ Finally, add the redirect URIs for the specific OpenZiti technology you are look
 
 <CallbackUrls/>
 
-:::info[Add Application]
+:::info[Add application]
 ![Add Application](/img/idps/okta/finalize-app-integration.png)
 :::
 
 ## Add an authorization server
 
-Within the Okta platform, an **Authorization Server** is used to control the audience (`aud` field) added to security 
-tokens. To create an audience usable by an external JWT signer for your OpenZiti Network, create a new 
-**Authorization Server** by going to the admin interface, click **Security** on the left navigation and find and click 
-**API**. On the resultant page, click **Add Authorization Server**.
+Within the Okta platform, an **Authorization Server** is used to control the audience (`aud` field) added to
+security tokens. To create an audience usable by an external JWT signer for your OpenZiti network, create a new
+**Authorization Server** by going to the admin interface, click **Security** on the left navigation and find and
+click **API**. On the resultant page, click **Add Authorization Server**.
 
-:::info[Add Authorization Server]
+:::info[Add authorization server]
 ![Add Authorization Server](/img/idps/okta/add-auth-server.png)
 :::
 
-In the popup, enter values for the **Name**, **Audience** and **Description**. Any values are acceptable. Whatever 
+In the popup, enter values for the **Name**, **Audience** and **Description**. Any values are acceptable. Whatever
 **Audience** used will be the value that needs to be assigned to the external JWT signer.
 
-:::info[Add Authorization Server Details]
+:::info[Add authorization server details]
 ![Add Authorization Server Details](/img/idps/okta/add-auth-server-popup.png)
 :::
 
 ## Add an authorization server policy
 
-Okta will require you to add an **Access Policy** to the **Authorization Server** mapping it to a particular set of 
-users. Here you can choose any user or more finely control which Okta clients will leverage this **Authorization Server**.
-Add a **Name** and **Description** and choose which clients to assign the policy to.
+Okta will require you to add an **Access Policy** to the **Authorization Server** mapping it to a particular set of
+users. Here you can choose any user or more finely control which Okta clients will leverage this **Authorization
+Server**. Add a **Name** and **Description** and choose which clients to assign the policy to.
 
-:::info[Add Authorization Server Policy]
+:::info[Add authorization server policy]
 ![Add Authorization Server Policy](/img/idps/okta/add-auth-server-policy.png)
 :::
 
 ## Add an authorization server policy rule
 
-After adding the new **Access Policy**, you also need to add a **Rule** which decides when the **Authorization Server** is 
-used. Click the **Add rule** button to add a new rule to the **Authorization Server**. Here, make the appropriate 
-decisions. If you're not sure what to use, talk to your IdP administrator and ask for guidance. Add a **Rule Name**, 
-decide which **Grants** to allow, which **Users** are assigned and which **Scopes** will activate the rule and then 
-click **Create Rule** at the bottom of the form.
+After adding the new **Access Policy**, you also need to add a **Rule** which decides when the **Authorization
+Server** is used. Click the **Add rule** button to add a new rule to the **Authorization Server**. Here, make the
+appropriate decisions. If you're not sure what to use, talk to your IdP administrator and ask for guidance. Add a
+**Rule Name**, decide which **Grants** to allow, which **Users** are assigned and which **Scopes** will activate
+the rule and then click **Create Rule** at the bottom of the form.
 
-:::info[Add Authorization Server Policy Rule]
+:::info[Add authorization server policy rule]
 ![Add Authorization Server Policy Rule](/img/idps/okta/add-auth-server-rule.png)
 :::
 
 ## Add an email claim to the access token
 
-If you want to use the user's email address as a claim in your access token, this can be accomplished by creating a 
-**Claim** on the **Authorization Server**. From the **Authorization Server** detail page, find the **Claims** tab and select 
-it. On the form, under **Claim type** click **Access** to select the Access token then click **Add Claim**.
+If you want to use the user's email address as a claim in your access token, this can be accomplished by creating
+a **Claim** on the **Authorization Server**. From the **Authorization Server** detail page, find the **Claims** tab
+and select it. On the form, under **Claim type** click **Access** to select the access token then click **Add
+Claim**.
 
-:::info[Add Claim]
+:::info[Add claim]
 ![Add Email Claim](/img/idps/okta/add-email-claim.png)
 :::
 
 To finalize the claim fill out the fields shown and click **Create** when done:
-* **Name** - the name of the claim **as it appears in the JWT**. You likely want this to be `email`
-* **Value** - use the expression/value of `user.email` as the **Value** to get the user's email
-* **Include in** - what scopes if requested will activate the claim. Using `openid` alone is sufficient to always 
-  return it in tokens. Assign other claims such as `profile` or `email` to activate the claim more specifically
+- **Name**: the name of the claim **as it appears in the JWT**. You likely want this to be `email`
+- **Value**: use the expression/value of `user.email` as the **Value** to get the user's email
+- **Include in**: what scopes if requested will activate the claim. Using `openid` alone is sufficient to always
+  return it in tokens. Assign other claims such as `profile` or `email` to activate the claim more specifically.
 
-:::info[Add Email Claim - Details]
+:::info[Add email claim details]
 ![Add Email Claim](/img/idps/okta/add-email-claim-detail.png)
 :::
 
 ## Verify token in Okta web portal
 
-The Okta web portal can also help verify tokens before using them with OpenZiti. This functionality can be quite 
-helpful. From the **Authorization Server**, click the **Token Preview** tab. Fill out the **OAuth/OIDC client**, **Grant 
-type**, **User** and **Scopes**, then click **Preview Token**. The resulting `id_token` or (access) `token` will be 
-shown in the **Preview** pane to the right. Use this preview to ensure the OpenZiti overlay is configured correctly.
+The Okta web portal can also help verify tokens before using them with OpenZiti. This functionality can be quite
+helpful. From the **Authorization Server**, click the **Token Preview** tab. Fill out the **OAuth/OIDC client**,
+**Grant type**, **User** and **Scopes**, then click **Preview Token**. The resulting `id_token` or (access) `token`
+will be shown in the **Preview** pane to the right. Use this preview to ensure the OpenZiti overlay is configured
+correctly.
 
-:::info[Verify Token in Okta Web Portal]
+:::info[Verify token in Okta web portal]
 ![Verify Token in Okta Web Portal](/img/idps/okta/verify-token.png)
 :::
