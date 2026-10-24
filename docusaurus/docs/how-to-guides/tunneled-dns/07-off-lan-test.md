@@ -1,5 +1,7 @@
 # Step 7: Test from off your LAN
 
+![The full path highlighted: client off the LAN, through the edge router, to Pi-hole.](./img/step-07-off-lan-test.svg)
+
 On your LAN, the client could reach the Pi-hole directly if the overlay failed, so a working answer there proves less
 than it looks. Off the LAN, the overlay is the only way to `192.168.1.53`. If it works here, it works.
 

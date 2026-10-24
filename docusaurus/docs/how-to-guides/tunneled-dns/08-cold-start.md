@@ -1,5 +1,7 @@
 # Step 8: Cold start without a fallback resolver
 
+![The client's hosts file highlighted, resolving the controller and router names.](./img/step-08-cold-start.svg)
+
 Step 6 kept `1.1.1.1` as a secondary so the tunneler can find the controller and routers before the overlay is up.
 This step removes the secondary and shows why you need it. Then it fixes the problem a stricter way: put the
 controller and router names in the hosts file, and send every other lookup to the Pi-hole.

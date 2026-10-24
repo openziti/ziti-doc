@@ -1,5 +1,7 @@
 # Step 6: Point the client's DNS at the Pi-hole
 
+![The client's OS DNS setting highlighted, pointing at 192.168.1.53.](./img/step-06-client-dns.svg)
+
 Step 5 proved the overlay path to `192.168.1.53:53` works. Now make the OS use it for every lookup.
 
 ## The fallback trade-off

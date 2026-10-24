@@ -1,5 +1,7 @@
 # Step 2: Put the DNS server on the overlay
 
+![The Pi-hole host's tunneler highlighted, dialing out to the edge router.](./img/step-02-dns-server-identity.svg)
+
 The overlay can only send traffic to your Pi-hole if something on your LAN takes it off the overlay and hands it to
 the Pi-hole. That "something" is a **hosting identity**. The simplest choice is a tunneler (`ziti-edge-tunnel`)
 running on the Pi-hole box itself. A tunneler can hold identities from more than one network at once, so an existing

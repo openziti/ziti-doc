@@ -1,5 +1,7 @@
 # Step 5: Enroll a client
 
+![The client's tunneler highlighted, dialing out to the edge router.](./img/step-05-client.svg)
+
 Every client gets its own identity, tagged `dnslab-clients` so the Dial policy from step 4 picks it up. One identity
 per device, never shared. That way you can see each one in ZAC and revoke one without touching the others.
 

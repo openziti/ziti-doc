@@ -23,6 +23,8 @@ and the home network makes outbound connections only. Nothing listens on your pu
 
 ## How it works
 
+![The client's tunneler and the Pi-hole host's tunneler both dial out to the edge router. DNS queries cross the overlay between them.](./img/tunneled-dns-overview.svg)
+
 1. The client keeps using the Pi-hole's LAN address (`192.168.1.53` in this lab) as its DNS server, at home or not.
 2. The tunneler on the client intercepts traffic to that address on port 53 and sends it over the overlay.
 3. A tunneler on the Pi-hole box hosts the service. It hands each query to the Pi-hole on `127.0.0.1:53`.

@@ -1,5 +1,7 @@
 # Step 4: Grant access with policies
 
+![The controller's bind and dial policies highlighted, with both tunnelers' connections to the router.](./img/step-04-policies.svg)
+
 A service does nothing until policies say who may use it. There are two kinds:
 
 - **Bind**: who may *host* the service (the Pi-hole's tunneler).

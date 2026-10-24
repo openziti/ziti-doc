@@ -1,5 +1,7 @@
 # Step 9: Reach your LAN web apps through one wildcard service
 
+![The web request path highlighted: client, edge router, Pi-hole host's tunneler, web apps.](./img/step-09-wildcard-web.svg)
+
 Your web apps already sit behind one name pattern on the LAN. One Ziti service with a wildcard intercept carries all
 of them. The Pi-hole's tunneler hosts it: it receives the connection from the overlay and opens a normal connection
 to whatever name the client asked for. Whatever answers there (NGINX, the app itself) works exactly as it does on

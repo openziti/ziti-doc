@@ -1,5 +1,7 @@
 # Step 3: Create the DNS service
 
+![The controller's DNS service highlighted: clients intercept 192.168.1.53:53, the host sends to 127.0.0.1:53.](./img/step-03-dns-service.svg)
+
 A service is two halves, each a **config**:
 
 - **intercept.v1**: what the *client* grabs. Here: anything sent to the Pi-hole's IP on port 53, TCP or UDP.

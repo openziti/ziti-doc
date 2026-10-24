@@ -1,5 +1,7 @@
 # Step 1: Set up your overlay network
 
+![The controller and public edge router highlighted on the overlay.](./img/step-01-overlay.svg)
+
 You need two things before anything else: a **controller** (the brain: identities, services, policies) and at least
 one **public edge router** (the thing clients connect to). Both need to be reachable from wherever your clients will
 be, so in practice that means a public address or a port forward.
