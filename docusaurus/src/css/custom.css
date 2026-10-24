@@ -47,7 +47,8 @@
 .nf-picker-trigger,
 .nf-resources-dropdown { padding-left: 0.75rem; }
 
-.clean-btn svg {
+/* Light/dark toggle size. Scoped: bare .clean-btn also matches the code-block copy button. */
+[class*='colorModeToggle'] .clean-btn svg {
     height: 30px;
     width: 30px;
 }
@@ -162,4 +163,3 @@ html, body, #__docusaurus {
 .content {
   height: 700px;
 }
-
