@@ -8,24 +8,24 @@ import ExternalAuthConfigExample from '../../../_ext-auth-config_example.mdx'
 
 # External providers
 
-The Ziti Desktop Edge for Windows (ZDEW) 2.5.2+ supports integrating with external identity providers such 
+The Ziti Desktop Edge for Windows (ZDEW) 2.5.2+ supports integrating with external identity providers such as
 [Auth0](@openzitidocs/how-to-guides/identity-providers/auth0),
 [Okta](@openzitidocs/how-to-guides/identity-providers/okta),
-[Zitadel](@openzitidocs/how-to-guides/identity-providers/zitadel) and others. 
+[Zitadel](@openzitidocs/how-to-guides/identity-providers/zitadel) and others.
 The OpenZiti Controller has an authentication system utilizing JWTs as authentication tokens.
 The [External JWT Signers](../../../../../learn/core-concepts/security/authentication/70-external-jwt-signers.mdx)
-functionality allows an OpenZiti operator to configure the OpenZiti overlay to use external providers as sources of 
+functionality allows an OpenZiti operator to configure the OpenZiti overlay to use external providers as sources of
 authentication.
 
-External providers can now be used for primary authentication with the Ziti Desktop Edge for Windows. The default authorization
-policy for an OpenZiti controller will allow external authentication by default. If preferred, a new auth-policy can be
-declared and assigned to identities, restricting those identities from using other authentication mechanisms and
-exclusively rely on external authentication providers.
+External providers can now be used for primary authentication with the Ziti Desktop Edge for Windows. The default
+authorization policy for an OpenZiti Controller will allow external authentication by default. If preferred, a new
+auth-policy can be declared and assigned to identities, restricting those identities from using other
+authentication mechanisms and forcing them to rely exclusively on external authentication providers.
 
 <ExternalAuthConfigAbout />
 
 <Details>
-<summary>Example Configuring OpenZiti for External Auth</summary>
+<summary>Example: configuring OpenZiti for external auth</summary>
 
 <ExternalAuthConfigExample />
 
@@ -33,8 +33,8 @@ exclusively rely on external authentication providers.
 
 ## Add an externally authenticated identity
 
-After configuring the OpenZiti Controller with an external JWT signer, the ZDEW can be used to add an identity using the
-external provider.
+After configuring the OpenZiti Controller with an external JWT signer, the ZDEW can be used to add an identity
+using the external provider.
 
-* [External JWT Provider - JWT](./30-ext-jwt.mdx) - Add an identity using the configured provider and network JWT
-* [External JWT Provider - URL](./40-ext-jwt-url.mdx) - Add an identity using the configured provider and URL
+- [By JWT](./30-ext-jwt.mdx): Add an identity using the configured provider and network JWT.
+- [By URL](./40-ext-jwt-url.mdx): Add an identity using the configured provider and URL.

@@ -1,7 +1,7 @@
-Once the JWT is accepted, a new identity will be added to the ZDEW. Initially, the identity will not be authorized and a
-new icon will show up indicating the user needs to authorize via the external provider. If a single external provider is
-configured for this OpenZiti overlay network, clicking the icon will being the Auth Flow with PKCE process. During this
-time, the ZDEW will be listening on port 20314.
+Once the JWT is accepted, a new identity will be added to the ZDEW. Initially, the identity will not be authorized
+and a new icon will show up indicating the user needs to authorize via the external provider. If a single external
+provider is configured for this OpenZiti overlay network, clicking the icon will begin the authentication flow
+with PKCE. During this time, the ZDEW will be listening on port 20314.
 
 ![Authenticating 1](/img/ext-jwt-signer/windows-auth-1.png)
 
@@ -14,5 +14,4 @@ result in the tab automatically closing.
 
 Assuming everything succeeds, the user will see the normal information shown by an authenticated identity.
 
-![after-pkce-success.png](/img/ext-jwt-signer/windows-after-pkce-success.png)
-
+![after-pkce-success](/img/ext-jwt-signer/windows-after-pkce-success.png)
