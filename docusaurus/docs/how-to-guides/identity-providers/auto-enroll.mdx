@@ -1,0 +1,202 @@
+---
+title: Auto-enroll identities with an external identity provider
+sidebar_label: Auto-enroll identities
+sidebar_position: 1
+description: Let users enroll in OpenZiti with a JWT from your identity provider, without pre-creating identities
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Auto-enroll identities with an external identity provider
+
+Auto-enrollment lets users join your OpenZiti network by signing in to your identity provider (IdP), such as
+Keycloak, Microsoft Entra ID, or Okta. The first time a user signs in, the controller creates an identity for them
+from the claims in their JSON Web Token (JWT). You don't need to create identities ahead of time or send out one-time
+enrollment tokens.
+
+You turn on auto-enrollment on an
+[external JWT signer](../../learn/core-concepts/security/authentication/70-external-jwt-signers.mdx), the controller
+object that tells OpenZiti to trust JWTs from your IdP. For background, see how the
+[auto-enrollment flow](../../learn/core-concepts/security/enrollment.mdx#auto-external-jwt-signer-enrollment) works.
+
+## Prerequisites
+
+- An OpenZiti controller running version 2.0.0 or later.
+- An IdP client configured for OpenZiti. You need its issuer, audience, client ID, and JSON Web Key Set (JWKS)
+  endpoint. See the [identity provider guides](./index.mdx) for where to find these values.
+- Ziti Admin Console (ZAC) 4.2.0 or later, if you configure the signer in the console. The **Auto Enrollment**
+  section only appears when ZAC is connected to a controller running 2.0.0 or later.
+- A client that supports auto-enrollment, such as Ziti Desktop Edge for Windows 2.11.2.4 or later.
+
+## Choose certificate or token enrollment
+
+Each external JWT signer can allow one or both enrollment types. The type determines how the new identity
+authenticates after it enrolls.
+
+{/* REVIEW (maintainer): the "Use it when" row for token enrollment says disabling the user's IdP account cuts off
+access. Inferred from token-enrolled identities needing a fresh IdP JWT to authenticate; confirm there's no cached
+session or refresh path that keeps access alive after the account is disabled. */}
+
+| | Certificate enrollment | Token enrollment |
+|:--|:--|:--|
+| Signer field | `enrollToCertEnabled` | `enrollToTokenEnabled` |
+| ZAC toggle | **Auto-Enroll to Cert** | **Auto-Enroll to Token** |
+| What the client gets | A client certificate, signed by the controller in exchange for a certificate signing request (CSR) | Nothing new. The client keeps using JWTs from the IdP. |
+| How the identity authenticates afterward | With its certificate. Users don't sign in to the IdP again. | With a fresh JWT from the IdP each time |
+| Ziti Desktop Edge for Windows option | **Device certificate** | **User session** |
+| Use it when | The device is the thing you trust, and you want no re-authentication | Access should follow the user's IdP account, and disabling the account should cut off access |
+
+If you enable both, the client chooses. Ziti Desktop Edge for Windows asks the user to pick **User session** or
+**Device certificate** during enrollment.
+
+:::caution
+The client's choice must match a type the signer allows. For example, if the signer allows only certificate
+enrollment and the user picks **User session**, enrollment fails and the controller logs
+`identity not found by externalId`. Some Desktop Edge versions show both choices even when the signer allows only
+one.
+:::
+
+## Configure the signer
+
+Create a new external JWT signer with auto-enrollment turned on, or update an existing one.
+
+<Tabs>
+<TabItem value="zac" label="ZAC">
+
+1. In ZAC, go to **Authentication** > **JWT Signers**.
+1. Click the plus icon to add a signer, or click an existing signer to edit it.
+1. Fill in the standard signer fields from your IdP: **Name**, **Issuer**, **Audience**, **Claims Property**,
+    **Client ID**, **External Auth Url**, **Scopes**, and either **JWKS Endpoint** or **Cert PEM**.
+1. Leave **Use External ID** set to **YES**. The controller stores the value of the **Claims Property** claim as
+    each new identity's external ID, and matches on it when the user signs in again.
+
+    {/* REVIEW (maintainer): not stated in the changelog or existing docs. Inferred from claimsProperty populating
+    externalId and later logins matching on it. Confirm auto-enrollment requires useExternalId=true, or what happens
+    when it's false. */}
+1. In the **Auto Enrollment** section, turn on **Auto-Enroll to Cert**, **Auto-Enroll to Token**, or both.
+1. Optionally, set the fields under **Auto Enrollment Options**. See
+    [Map JWT claims to identities](#map-jwt-claims-to-identities).
+1. Save the signer.
+
+{/* TODO: add a screenshot of the Auto Enrollment and Auto Enrollment Options sections of the JWT signer form */}
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Create a signer with certificate enrollment turned on:
+
+```text
+ziti edge create ext-jwt-signer my-idp https://idp.example.com/realms/ziti \
+  --jwks-endpoint https://idp.example.com/realms/ziti/protocol/openid-connect/certs \
+  --audience openziti \
+  --client-id openziti-client \
+  --external-auth-url https://idp.example.com/realms/ziti \
+  --scopes openid,email \
+  --claims-property email \
+  --enroll-to-cert \
+  --enroll-name-claims-selector preferred_username \
+  --enroll-attr-claims-selector /realm_access/roles
+```
+
+Turn on auto-enrollment for an existing signer:
+
+```text
+ziti edge update ext-jwt-signer my-idp --enroll-to-token --enroll-auth-policy my-auth-policy
+```
+
+| Flag | Signer field | Default |
+|:--|:--|:--|
+| `--enroll-to-cert` | `enrollToCertEnabled` | `false` |
+| `--enroll-to-token` | `enrollToTokenEnabled` | `false` |
+| `--enroll-name-claims-selector` | `enrollNameClaimsSelector` | `/sub` |
+| `--enroll-attr-claims-selector` | `enrollAttributeClaimsSelector` | None. Identities enroll without attributes. |
+| `--enroll-auth-policy` | `enrollAuthPolicyId` (name or ID) | `default` |
+
+</TabItem>
+</Tabs>
+
+## Map JWT claims to identities
+
+Each new identity gets its name, external ID, attributes, and authentication policy from the signer. Claim
+selectors accept either a top-level claim name, such as `email`, or a JSON pointer, such as `/realm_access/roles`. A
+plain name is converted to a JSON pointer, so `email` and `/email` are the same.
+
+| Signer field | ZAC field | What it sets on the new identity |
+|:--|:--|:--|
+| `claimsProperty` | **Claims Property** | The external ID. Must be unique across identities. |
+| `enrollNameClaimsSelector` | **Name Claims Selector** | The identity name. Defaults to `/sub`. |
+| `enrollAttributeClaimsSelector` | **Attribute Claims Selector** | The identity's role attributes. Must point to a string or an array of strings. |
+| `enrollAuthPolicyId` | **Enrollment Auth Policy** | The [authentication policy](../../learn/core-concepts/security/authentication/50-authentication-policies.md). Defaults to `default`. |
+
+{/* REVIEW (maintainer): illustrative example, adapted from the Keycloak setup in
+https://openziti.discourse.group/t/jwt-signer-in-ziti-2-0/6148 (that thread used enrollNameClaimsSelector=/sub and no
+attribute selector). The token claims are a typical Keycloak access token shape, not captured from a real login.
+Confirm /realm_access/roles works as an attribute selector against a real Keycloak token. */}
+
+For example, a Keycloak access token might include these claims:
+
+```json
+{
+  "sub": "4f1c2a9e-7b3d-4e8a-9c21-0d5e6f7a8b9c",
+  "email": "alice@example.com",
+  "preferred_username": "alice",
+  "realm_access": {
+    "roles": ["engineering", "vpn-users"]
+  }
+}
+```
+
+With `claimsProperty` set to `email`, `enrollNameClaimsSelector` set to `preferred_username`, and
+`enrollAttributeClaimsSelector` set to `/realm_access/roles`, the user enrolls as an identity named `alice`, with
+external ID `alice@example.com` and attributes `engineering` and `vpn-users`. You can then grant access with service
+policies that match `#engineering` or `#vpn-users`.
+
+The authentication policy must allow the type of authentication the identity enrolls with: certificate
+authentication for certificate enrollment, and external JWT authentication for token enrollment. The `default`
+policy allows both unless you've changed it.
+
+## Enroll a client
+
+How a user enrolls depends on the client. In Ziti Desktop Edge for Windows:
+
+{/* REVIEW (maintainer): steps not tested on a live client. Pieced together from the Desktop Edge source
+(AddIdentitySignerChoice.xaml labels: "Configure Enrollment", "Identity Provider", "User session",
+"Device certificate") and the pre-2.0 Windows add-identity pages. Confirm the order, and whether both
+"With URL" and "With JWT" lead to the Configure Enrollment dialog. */}
+
+1. Click **ADD IDENTITY**, then click **With URL** and enter the controller's URL, or click **With JWT** and choose
+    the network JWT file. To get the network JWT, in ZAC go to **Authentication** > **JWT Signers** and click
+    **Download Network JWT**.
+1. In the **Configure Enrollment** dialog, select the **Identity Provider**.
+1. If the signer allows both enrollment types, click **User session** or **Device certificate**.
+1. Sign in to the IdP in the browser window that opens.
+
+{/* TODO: add a screenshot of the Desktop Edge Configure Enrollment dialog */}
+
+Clients built on the OpenZiti SDKs can also enroll by calling the Edge Client API directly. See
+[Enrollment process](../../learn/core-concepts/security/enrollment.mdx#enrollment-process).
+
+## Verify the enrollment
+
+After the user signs in, confirm the controller created the identity:
+
+- In ZAC, go to **Identities** and look for the new identity name.
+- With the CLI, run `ziti edge list identities 'name contains "alice"'`.
+
+Check that the identity has the expected name and attributes, and that its service policies grant access to the
+services the user needs.
+
+## Troubleshoot
+
+{/* REVIEW (maintainer): the "enrolls but can't authenticate afterward" row is inferred from the enrollAuthPolicyId
+requirements in _ext_jwt_enroll_details.md, not from a reported case. Confirm the symptom and whether the
+controller logs a specific error for it. */}
+
+| Symptom | Cause and fix |
+|:--|:--|
+| Enrollment fails and the controller logs `identity not found by externalId` | The enrollment type the client chose isn't allowed on the signer. Turn on the matching toggle, or choose the other option in the client. |
+| Enrollment fails for a user who enrolled before | An identity with the same external ID already exists. Delete the old identity to let the user enroll again. |
+| The identity has an unexpected name, or no attributes | Check that the claim selectors match the claims in the token. Decode a token from your IdP and compare the claim paths. |
+| The identity enrolls but can't authenticate afterward | The enrollment authentication policy doesn't allow the identity's authentication type. Update the policy, or set a different **Enrollment Auth Policy** on the signer. |
+| No **Auto Enrollment** section in ZAC | ZAC is older than 4.2.0, or the controller is older than 2.0.0. |
