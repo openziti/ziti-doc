@@ -6,14 +6,24 @@ sidebar_label: 2. Identity provider (Keycloak)
 
 ![Keycloak and its users highlighted: the acme realm, with groups the tokens carry.](/img/add-by-url/step-02-identity-provider.svg)
 
+Users sign in to the IdP, and the controller creates their identities from its tokens. The tokens must carry an
+audience the controller accepts and the user's groups. This step builds the IdP that sends them.
+
 The lab runs Keycloak in Docker at `idp.example.com`, with the same Let's Encrypt certificate as the controller:
 
-```bash
-docker run -d --name kc-acme -p 8443:8443 -v /opt/ziti/le:/le:ro \
-  -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin-demo-pw \
-  -e KC_HTTPS_CERTIFICATE_FILE=/le/fullchain.pem -e KC_HTTPS_CERTIFICATE_KEY_FILE=/le/privkey.pem \
-  -e KC_HOSTNAME=https://idp.example.com:8443 \
-  quay.io/keycloak/keycloak:26.0 start-dev
+```text
+docker run \
+  --detach \
+  --name kc-acme \
+  --publish 8443:8443 \
+  --volume /opt/ziti/le:/le:ro \
+  --env KC_BOOTSTRAP_ADMIN_USERNAME=admin \
+  --env KC_BOOTSTRAP_ADMIN_PASSWORD=admin-demo-pw \
+  --env KC_HTTPS_CERTIFICATE_FILE=/le/fullchain.pem \
+  --env KC_HTTPS_CERTIFICATE_KEY_FILE=/le/privkey.pem \
+  --env KC_HOSTNAME=https://idp.example.com:8443 \
+  quay.io/keycloak/keycloak:26.0 \
+  start-dev
 ```
 
 `start-dev` is for the lab only. For production, see the
@@ -22,46 +32,130 @@ docker run -d --name kc-acme -p 8443:8443 -v /opt/ziti/le:/le:ro \
 ## Create the realm, groups, and users
 
 The lab realm is `acme`, with two groups and three users. `alice` is in `engineering`, `bob` is in `finance`, and
-`carol` is in no group. Each password is `<user>-demo-pw`. Run `kcadm.sh` inside the container:
+`carol` is in no group. `carol` will be used in step 8, where the administrator creates her identity by hand. Each
+password is `<user>-demo-pw`.
 
-```bash
-K="docker exec kc-acme /opt/keycloak/bin/kcadm.sh"
-$K config credentials --server http://localhost:8080 --realm master --user admin --password admin-demo-pw
+The commands below use Keycloak's admin CLI, `kcadm.sh`, inside the container. Define a shell function for it and
+sign in as the Keycloak admin:
 
-$K create realms -s realm=acme -s enabled=true
-ENG=$($K create groups -r acme -s name=engineering -i)
-FIN=$($K create groups -r acme -s name=finance -i)
+```text
+kcadm() { docker exec kc-acme /opt/keycloak/bin/kcadm.sh "$@"; }
 
-for u in alice:$ENG bob:$FIN carol:; do
-  name=${u%%:*}; group=${u#*:}
-  id=$($K create users -r acme -i -s username=$name -s enabled=true \
-    -s email=$name@acme.example -s emailVerified=true -s firstName=${name^} -s lastName=Acme)
-  $K set-password -r acme --username $name --new-password $name-demo-pw
-  if [ -n "$group" ]; then
-    $K update users/$id/groups/$group -r acme -s realm=acme -s userId=$id -s groupId=$group -n
-  fi
-done
+kcadm config credentials \
+  --server http://localhost:8080 \
+  --realm master \
+  --user admin \
+  --password admin-demo-pw
+```
+
+Create the realm and the two groups. `-i` prints the new object's ID, which the group membership commands need:
+
+```text
+kcadm create realms \
+  -s realm=acme \
+  -s enabled=true
+
+ENG=$(kcadm create groups -r acme -i -s name=engineering)
+FIN=$(kcadm create groups -r acme -i -s name=finance)
+```
+
+Create `alice` and put her in `engineering`:
+
+```text
+ALICE=$(kcadm create users -r acme -i \
+  -s username=alice \
+  -s enabled=true \
+  -s email=alice@acme.example \
+  -s emailVerified=true \
+  -s firstName=Alice \
+  -s lastName=Acme)
+
+kcadm set-password -r acme \
+  --username alice \
+  --new-password alice-demo-pw
+
+kcadm update users/$ALICE/groups/$ENG -r acme -n \
+  -s realm=acme \
+  -s userId=$ALICE \
+  -s groupId=$ENG
+```
+
+Create `bob` and put him in `finance`:
+
+```text
+BOB=$(kcadm create users -r acme -i \
+  -s username=bob \
+  -s enabled=true \
+  -s email=bob@acme.example \
+  -s emailVerified=true \
+  -s firstName=Bob \
+  -s lastName=Acme)
+
+kcadm set-password -r acme \
+  --username bob \
+  --new-password bob-demo-pw
+
+kcadm update users/$BOB/groups/$FIN -r acme -n \
+  -s realm=acme \
+  -s userId=$BOB \
+  -s groupId=$FIN
+```
+
+Create `carol` with no group:
+
+```text
+kcadm create users -r acme \
+  -s username=carol \
+  -s enabled=true \
+  -s email=carol@acme.example \
+  -s emailVerified=true \
+  -s firstName=Carol \
+  -s lastName=Acme
+
+kcadm set-password -r acme \
+  --username carol \
+  --new-password carol-demo-pw
 ```
 
 ## Create the client
 
-The tunnelers sign in through `openziti`, a public client with PKCE and the tunneler callback URL. It has two Keycloak
-mappers. An **Audience** mapper adds `openziti` to the access token. A **Group Membership** mapper named `groups`, with
-**Full group path** turned off, sends `engineering` instead of `/engineering`:
+The tunnelers sign in through `openziti`, a public client with PKCE and the tunneler callback URL:
 
-```bash
-CID=$($K create clients -r acme -i \
-  -s clientId=openziti -s publicClient=true -s standardFlowEnabled=true -s directAccessGrantsEnabled=false \
+```text
+CID=$(kcadm create clients -r acme -i \
+  -s clientId=openziti \
+  -s publicClient=true \
+  -s standardFlowEnabled=true \
+  -s directAccessGrantsEnabled=false \
   -s 'redirectUris=["http://localhost:20314/auth/callback"]' \
   -s 'attributes={"pkce.code.challenge.method":"S256"}')
+```
 
-$K create clients/$CID/protocol-mappers/models -r acme \
-  -s name=openziti-audience -s protocol=openid-connect -s protocolMapper=oidc-audience-mapper \
-  -s 'config={"included.client.audience":"openziti","access.token.claim":"true","id.token.claim":"false"}'
+The client has two mappers. An **Audience** mapper adds `openziti` to the access token:
 
-$K create clients/$CID/protocol-mappers/models -r acme \
-  -s name=groups -s protocol=openid-connect -s protocolMapper=oidc-group-membership-mapper \
-  -s 'config={"claim.name":"groups","full.path":"false","access.token.claim":"true","id.token.claim":"true","userinfo.token.claim":"true"}'
+```text
+kcadm create clients/$CID/protocol-mappers/models -r acme \
+  -s name=openziti-audience \
+  -s protocol=openid-connect \
+  -s protocolMapper=oidc-audience-mapper \
+  -s 'config."included.client.audience"=openziti' \
+  -s 'config."access.token.claim"=true' \
+  -s 'config."id.token.claim"=false'
+```
+
+A **Group Membership** mapper named `groups`, with **Full group path** turned off, sends `engineering` instead of
+`/engineering`:
+
+```text
+kcadm create clients/$CID/protocol-mappers/models -r acme \
+  -s name=groups \
+  -s protocol=openid-connect \
+  -s protocolMapper=oidc-group-membership-mapper \
+  -s 'config."claim.name"=groups' \
+  -s 'config."full.path"=false' \
+  -s 'config."access.token.claim"=true' \
+  -s 'config."id.token.claim"=true' \
+  -s 'config."userinfo.token.claim"=true'
 ```
 
 ## Done when

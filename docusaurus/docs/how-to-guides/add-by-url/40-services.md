@@ -4,41 +4,96 @@ sidebar_label: 4. Services
 
 # Step 4: Host the services
 
+The lab needs one service for each IdP group, so step 6 can show that `alice` reaches only the Engineering Wiki and
+`bob` reaches only the Finance Ledger.
+
 The lab serves both services from one machine: one web page, run in two nginx containers. The page reads the
 intercept hostname and shows the Engineering Wiki or the Finance Ledger.
 
-```bash
+```text
 mkdir -p pages
-curl -sSLo pages/index.html https://openziti.io/docs/add-by-url/acme-pages/index.html
+curl -sSL \
+  -o pages/index.html \
+  https://openziti.io/docs/add-by-url/acme-pages/index.html
 
-for svc in eng-wiki:9781 finance-ledger:9782; do
-  name=${svc%%:*}; port=${svc##*:}
-  docker run -d --name "acme-$name" -p "127.0.0.1:$port:80" -v "$PWD/pages:/usr/share/nginx/html:ro" nginx:alpine
-done
+docker run \
+  --detach \
+  --name acme-eng-wiki \
+  --publish 127.0.0.1:9781:80 \
+  --volume "$PWD/pages:/usr/share/nginx/html:ro" \
+  nginx:alpine
+
+docker run \
+  --detach \
+  --name acme-finance-ledger \
+  --publish 127.0.0.1:9782:80 \
+  --volume "$PWD/pages:/usr/share/nginx/html:ro" \
+  nginx:alpine
 ```
 
-Create a service for each page, and a host identity that binds both:
+Create the `eng-wiki` service:
 
-```bash
-for svc in eng-wiki:9781 finance-ledger:9782; do
-  name=${svc%%:*}; port=${svc##*:}
-  ziti edge create config "$name.intercept" intercept.v1 \
-    "{\"protocols\":[\"tcp\"],\"addresses\":[\"$name.acme.ziti\"],\"portRanges\":[{\"low\":80,\"high\":80}]}"
-  ziti edge create config "$name.host" host.v1 \
-    "{\"protocol\":\"tcp\",\"address\":\"127.0.0.1\",\"port\":$port}"
-  ziti edge create service "$name" --configs "$name.intercept,$name.host"
-done
+```text
+ziti edge create config eng-wiki.intercept intercept.v1 \
+  '{
+    "protocols": ["tcp"],
+    "addresses": ["eng-wiki.acme.ziti"],
+    "portRanges": [{"low": 80, "high": 80}]
+  }'
 
-ziti edge create identity acme-host --role-attributes host -o acme-host.jwt
+ziti edge create config eng-wiki.host host.v1 \
+  '{
+    "protocol": "tcp",
+    "address": "127.0.0.1",
+    "port": 9781
+  }'
+
+ziti edge create service eng-wiki \
+  --configs eng-wiki.intercept,eng-wiki.host
+```
+
+Create the `finance-ledger` service:
+
+```text
+ziti edge create config finance-ledger.intercept intercept.v1 \
+  '{
+    "protocols": ["tcp"],
+    "addresses": ["finance-ledger.acme.ziti"],
+    "portRanges": [{"low": 80, "high": 80}]
+  }'
+
+ziti edge create config finance-ledger.host host.v1 \
+  '{
+    "protocol": "tcp",
+    "address": "127.0.0.1",
+    "port": 9782
+  }'
+
+ziti edge create service finance-ledger \
+  --configs finance-ledger.intercept,finance-ledger.host
+```
+
+Create a host identity, and a Bind policy that lets it host both services:
+
+```text
+ziti edge create identity acme-host \
+  --role-attributes host \
+  -o acme-host.jwt
+
 ziti edge create service-policy acme-host-bind Bind \
-  --identity-roles '#host' --service-roles '@eng-wiki,@finance-ledger'
+  --identity-roles '#host' \
+  --service-roles '@eng-wiki,@finance-ledger'
 ```
 
 Enroll the host identity and run it on the same machine:
 
-```bash
-ziti-edge-tunnel enroll -j acme-host.jwt -i acme-host.json
-ziti-edge-tunnel run-host -i acme-host.json
+```text
+ziti-edge-tunnel enroll \
+  -j acme-host.jwt \
+  -i acme-host.json
+
+ziti-edge-tunnel run-host \
+  -i acme-host.json
 ```
 
 ## Done when

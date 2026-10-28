@@ -10,17 +10,34 @@ You don't have to turn on auto enrollment. Without `--enroll-to-token` and `--en
 works, but an administrator creates each identity ahead of time. The identity's external ID has to match the claim
 the signer reads, which is `email` here, and its auth policy has to allow ext-jwt sign-ins.
 [External JWT signers](../../learn/core-concepts/security/authentication/70-external-jwt-signers.mdx#usage) covers
-how that match works. Role attributes are set by hand, the same as for any other identity:
+how that match works.
 
-```bash
-ziti edge create identity carol --external-id carol@acme.example \
-  --auth-policy idp-users --role-attributes engineering
-```
+This step maps `carol`, who has no IdP group, to an identity the administrator creates.
 
-In the lab, with both switches off, `carol` added the network by URL and signed in to Keycloak. The tunneler logged
+1. Turn off auto enrollment on the signer from step 3:
+
+   ```text
+   ziti edge update ext-jwt-signer acme-idp \
+     --enroll-to-token=false \
+     --enroll-to-cert=false
+   ```
+
+2. Create the identity for `carol`. Role attributes are set by hand, the same as for any other identity:
+
+   ```text
+   ziti edge create identity carol \
+     --external-id carol@acme.example \
+     --auth-policy idp-users \
+     --role-attributes engineering
+   ```
+
+3. As `carol`, add the network by URL and sign in to Keycloak, as in [step 6](./60-join.md#join).
+
+In the lab, `carol` added the network by URL and signed in to Keycloak. The tunneler logged
 `enroll_mode=none, skipping enrollment` and signed in as the `carol` identity created above. `carol` stayed one
 identity and could reach `eng-wiki`.
 
 ## Done when
 
-- The user signs in as the identity you created, and no second identity appears
+- `carol` signs in as the identity you created, and no second identity appears
+- `carol` reaches `http://eng-wiki.acme.ziti`

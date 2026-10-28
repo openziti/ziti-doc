@@ -42,5 +42,5 @@ created the identity.
 
 ## Done when
 
-- Each user who signed in has an identity with the `idp-users` auth policy
-- Each identity's role attributes match its IdP groups
+- `alice` and `bob` each have an identity with the `idp-users` auth policy
+- `alice` has the `engineering` attribute and `bob` has `finance`, the groups they had when they enrolled

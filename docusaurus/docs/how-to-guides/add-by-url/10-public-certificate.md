@@ -29,6 +29,10 @@ these examples throughout, so swap in your own names wherever they appear:
 
 ## Done when
 
+The first check proves devices trust the public name. The second proves no public root went into the controller's
+`ca` bundle. Every enrolled client trusts that bundle, so it must hold only your private PKI.
+[Add a public certificate](../deployments/public-certificate.md) explains why.
+
 - The browser opens `https://ctrl.example.com:1280` with no certificate warning
 - The controller's CA bundle lists only the private PKI:
 

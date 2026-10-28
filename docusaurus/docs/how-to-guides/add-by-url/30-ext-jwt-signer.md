@@ -6,35 +6,43 @@ sidebar_label: 3. External JWT signer
 
 ![The external JWT signer on the controller and the IdP highlighted.](/img/add-by-url/step-03-ext-jwt-signer.svg)
 
-OpenZiti 2.0 added another ease-of-use feature: creating the identity during that enrollment. In the Ziti Admin
+The external JWT signer is the controller object that says which IdP's tokens to accept. It points the controller at
+the Keycloak realm from step 2.
+
+Since OpenZiti 2.0, the signer can also create the identity the first time a user signs in. In the Ziti Admin
 Console, it's called **Auto Enrollment** (**Auto-Enroll to Cert** and **Auto-Enroll to Token**). In the API, it's
-`enrollToCertEnabled` and `enrollToTokenEnabled` on the external JWT signer, the controller object that says which
-IdP's tokens to accept. When it's on, the administrator doesn't have to create identities ahead of time. They
-configure the external JWT signer once, and each user's identity is created automatically the first time that user
-signs in.
+`enrollToCertEnabled` and `enrollToTokenEnabled`. When it's on, the administrator doesn't have to create identities
+ahead of time. They configure the external JWT signer once.
+
+The two switches are the two ways a user can enroll: a user session (token) or a device certificate (cert). With both
+on, the tunneler asks the user to pick one. The lab uses user sessions.
 
 ## Create the signer and auth policy
 
 Create the signer for the lab's Keycloak realm with auto enrollment turned on:
 
-```bash
-IDP=https://idp.example.com:8443/realms/acme
-
-SIGNER_ID=$(ziti edge create ext-jwt-signer acme-idp "$IDP" \
-  --jwks-endpoint "$IDP/protocol/openid-connect/certs" \
+```text
+SIGNER_ID=$(ziti edge create ext-jwt-signer acme-idp https://idp.example.com:8443/realms/acme \
+  --jwks-endpoint https://idp.example.com:8443/realms/acme/protocol/openid-connect/certs \
+  --external-auth-url https://idp.example.com:8443/realms/acme \
   --audience openziti \
   --claims-property email \
-  --external-auth-url "$IDP" \
-  --client-id openziti --scopes openid --scopes profile --scopes email \
-  --enroll-to-token --enroll-to-cert \
+  --client-id openziti \
+  --scopes openid \
+  --scopes profile \
+  --scopes email \
+  --enroll-to-token \
+  --enroll-to-cert \
   --enroll-name-claims-selector preferred_username \
   --enroll-attr-claims-selector groups)
 
-POLICY_ID=$(ziti edge create auth-policy idp-users \
+ziti edge create auth-policy idp-users \
   --primary-cert-allowed \
-  --primary-ext-jwt-allowed --primary-ext-jwt-allowed-signers "$SIGNER_ID")
+  --primary-ext-jwt-allowed \
+  --primary-ext-jwt-allowed-signers $SIGNER_ID
 
-ziti edge update ext-jwt-signer acme-idp --enroll-auth-policy "$POLICY_ID"
+ziti edge update ext-jwt-signer acme-idp \
+  --enroll-auth-policy idp-users
 ```
 
 Every new identity gets its fields from the token. `externalId` comes from `email`, the name comes from
@@ -50,11 +58,8 @@ For every signer field, see
 For how the controller names and matches auto-enrolled identities, see
 [Auto external JWT signer enrollment](../../learn/core-concepts/security/enrollment.mdx#auto-external-jwt-signer-enrollment).
 
-## Configure the IdP client
-
-Set up the Keycloak client, `openziti`, as [Keycloak](../identity-providers/keycloak.mdx) describes: a public client
-with the tunneler callback URL and an **Audience** mapper that adds `openziti` to the access token. For auto
-enrollment, add one more mapper: a **Group Membership** mapper named `groups`, with **Full group path** turned off.
+The signer reads what the step 2 client puts in the token: `--audience openziti` matches the **Audience** mapper,
+and `--enroll-attr-claims-selector groups` reads the **Group Membership** mapper.
 
 ## Done when
 

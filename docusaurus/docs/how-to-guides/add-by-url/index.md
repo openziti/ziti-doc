@@ -39,15 +39,26 @@ before they first sign in, they can reach engineering services right away.
 4. With auto enrollment on, the controller creates the identity and copies the token's groups into its role
    attributes.
 
+## The lab
+
+The lab builds this for a company called Acme, with three users in Keycloak and two web services:
+
+| User | IdP group | Identity | Reaches |
+| --- | --- | --- | --- |
+| `alice` | `engineering` | Created at sign-in, in step 6 | Engineering Wiki (`eng-wiki`) |
+| `bob` | `finance` | Created at sign-in, in step 6 | Finance Ledger (`finance-ledger`) |
+| `carol` | None | Created by the administrator, in step 8 | Engineering Wiki (`eng-wiki`) |
+
 ## What you need
 
 - An OpenZiti 2.0 or later network with a controller and a public edge router. To create one, see
   [Set up a network](../../get-started/network/index.md).
 - A certificate for the controller's client API that your devices already trust: a public CA such as Let's Encrypt,
   or an enterprise CA your MDM deployed. [Step 1](./10-public-certificate.md) adds it to the controller.
-- An OIDC IdP with a public client for the tunnelers. The lab is built with Keycloak, but any OIDC IdP works. To set up
-  Keycloak, see [Keycloak](../identity-providers/keycloak.mdx).
-- Docker on the machine that hosts the services. Step 4 runs them in nginx containers.
+- Docker on the machine that runs the IdP. [Step 2](./20-identity-provider.md) runs Keycloak in a container and
+  creates the realm, users, and client. Any OIDC IdP works. With another IdP, create what step 2 creates there.
+- Docker and `ziti-edge-tunnel` on the machine that hosts the services. Step 4 runs the services in nginx containers
+  and hosts them with `ziti-edge-tunnel`.
 - A tunneler that supports add by URL. Step 6 lists the versions.
 
 ## Steps
