@@ -1,9 +1,12 @@
 ---
 title: Add by URL
 sidebar_label: Add by URL
+pagination_prev: null
 ---
 
-# Add by URL: join with a URL and an IdP sign-in
+# Add by URL
+
+*Join with a URL and an IdP sign-in*
 
 **TL;DR**: Users can join an OpenZiti network with a URL and their identity provider (IdP) sign-in, with no enrollment
 JSON Web Token (JWT) to deliver. Since OpenZiti 2.0, the controller can also create the identity at first sign-in.
@@ -38,17 +41,22 @@ before they first sign in, they can reach engineering services right away.
 
 ## What you need
 
-- An OpenZiti 2.0 or later network with a controller and a public edge router.
+- An OpenZiti 2.0 or later network with a controller and a public edge router. To create one, see
+  [Set up a network](../../get-started/network/index.md).
 - A certificate for the controller's client API that your devices already trust: a public CA such as Let's Encrypt,
-  or an enterprise CA your MDM deployed.
-- An OIDC IdP with a public client for the tunnelers. This guide uses Keycloak.
-- A tunneler that supports add by URL. Step 4 lists the versions.
+  or an enterprise CA your MDM deployed. [Step 1](./10-public-certificate.md) adds it to the controller.
+- An OIDC IdP with a public client for the tunnelers. The lab is built with Keycloak, but any OIDC IdP works. To set up
+  Keycloak, see [Keycloak](../identity-providers/keycloak.mdx).
+- Docker on the machine that hosts the services. Step 4 runs them in nginx containers.
+- A tunneler that supports add by URL. Step 6 lists the versions.
 
 ## Steps
 
-1. [Give the controller a public certificate](./01-public-certificate.md)
-2. [Create the external JWT signer](./02-ext-jwt-signer.md)
-3. [Grant access by IdP group](./03-policies.md)
-4. [Join from a tunneler](./04-join.md)
-5. [Check the new identities](./05-check-identities.md)
-6. [Map existing identities instead](./06-map-existing-identities.md) (optional)
+1. [Give the controller a public certificate](./10-public-certificate.md)
+2. [Set up the identity provider](./20-identity-provider.md)
+3. [Create the external JWT signer](./30-ext-jwt-signer.md)
+4. [Host the services](./40-services.md)
+5. [Grant access by IdP group](./50-policies.md)
+6. [Join from a tunneler](./60-join.md)
+7. [Check the new identities](./70-check-identities.md)
+8. [Map existing identities instead](./80-map-existing-identities.md) (optional)

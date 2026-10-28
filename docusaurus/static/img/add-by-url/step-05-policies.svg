@@ -41,7 +41,7 @@
   <rect width="1920" height="1080" fill="url(#bg)"/>
   <rect width="1920" height="1080" fill="url(#grid)"/>
   <ellipse cx="960" cy="600" rx="560" ry="460" fill="url(#glow)"/>
-  <text x="120" y="130" fill="#7FA6C4" font-size="28" font-weight="600" letter-spacing="7">STEP 3 · ADD BY URL</text>
+  <text x="120" y="130" fill="#7FA6C4" font-size="28" font-weight="600" letter-spacing="7">STEP 5 · ADD BY URL</text>
   <rect x="120" y="152" width="132" height="10" rx="5" fill="url(#accent)"/>
   <text x="116" y="248" fill="#F2F8FF" font-size="76" font-weight="800" letter-spacing="-2">Grant access by <tspan fill="url(#accent)">IdP group</tspan></text>
   <rect x="96" y="300" width="470" height="600" rx="30" fill="url(#shellFill)" stroke="#1A4C9A" stroke-width="2"/>

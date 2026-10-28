@@ -1,6 +1,10 @@
-# Step 4: Join from a tunneler
+---
+sidebar_label: 6. Join
+---
 
-![The user's device highlighted, adding the network by URL and signing in to the IdP.](/img/add-by-url/step-04-join.svg)
+# Step 6: Join from a tunneler
+
+![The user's device highlighted, adding the network by URL and signing in to the IdP.](/img/add-by-url/step-06-join.svg)
 
 The user adds the network by URL, picks user session or device certificate if the tunneler asks, and signs in to the
 IdP in the browser the tunneler opens.
@@ -18,7 +22,7 @@ asks the user to pick one of two ways to enroll:
 - A **user session** identity is the *person*. The user signs in to the IdP each time they need to authenticate to
   the overlay, so disabling the account in the IdP stops the next sign-in. Nothing on the device is tied to the
   identity, so the user can connect from as many devices as they need to. On a new laptop or a reinstalled
-  OS, the user enters the same URL and signs in as the identity they already have. I ran two tunnelers
+  OS, the user enters the same URL and signs in as the identity they already have. The lab ran two tunnelers
   side by side as `alice`. Both of them reached `eng-wiki`, and the controller still had only one `alice` identity.
 
   From a user's perspective, there is one small tradeoff. A user who enrolls with a JWT logs in with a certificate
@@ -30,7 +34,7 @@ asks the user to pick one of two ways to enroll:
 - A **device certificate** identity is the *machine*. The user signs in to the IdP once, during enrollment, and the
   tunneler generates a key on that machine *only*. It'll come up on boot with nobody logged in, and it keeps working
   when the IdP is down. Disabling the account in the IdP doesn't stop it, either. An administrator has to disable or
-  delete the identity in OpenZiti. In my demo, `alice` picked user session and `bob` picked device certificate. The
+  delete the identity in OpenZiti. In the lab, `alice` picked user session and `bob` picked device certificate. The
   `alice` identity file has no key in it at all. The `bob` file has a private key and a certificate.
 
 :::warning A device certificate is one device
@@ -58,9 +62,12 @@ In Ziti Desktop Edge for Windows 2.11.1.0 and later, the user picks **With URL**
 controller URL. On 2.11.2.9 and later, a user on a network that requires multi-factor authentication (MFA) is walked
 into MFA setup right after adding the identity.
 
-<!-- WIN_PLACEHOLDER_ADD_BY_URL -->
+For the full Windows walkthrough, see
+[By URL](../tunnelers/02-windows/add-ids/ext-providers/40-ext-jwt-url.mdx).
 
 ### Linux
+
+These steps were tested with `ziti-edge-tunnel` 1.18.7.
 
 On Linux, `ziti-edge-tunnel` does the same from the command line. With the tunneler running, the user adds the
 network by URL. The command returns the IdP URL to open in a browser, and that sign-in enrolls the identity:
@@ -81,11 +88,7 @@ one each time the tunneler restarts:
 sudo ziti-edge-tunnel ext-jwt-login -i /opt/openziti/etc/identities/alice.json -p acme-idp
 ```
 
-`ext-jwt-login` takes the path to the identity file, not the name you gave `add`. With only the name, it fails with
-`ziti context not found`. The first `ext-jwt-login` after the tunneler starts also needs `-p` with the signer name,
-even when the controller has only one signer. Without it, the login fails with `failed to start external auth`.
-
 ## Done when
 
-- [x] The tunneler shows the identity, signed in
-- [x] The user reaches the services their IdP group allows
+- The tunneler shows the identity, signed in
+- The user reaches the services their IdP group allows

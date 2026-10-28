@@ -1,6 +1,10 @@
-# Step 2: Create the external JWT signer
+---
+sidebar_label: 3. External JWT signer
+---
 
-![The external JWT signer on the controller and the IdP highlighted.](/img/add-by-url/step-02-ext-jwt-signer.svg)
+# Step 3: Create the external JWT signer
+
+![The external JWT signer on the controller and the IdP highlighted.](/img/add-by-url/step-03-ext-jwt-signer.svg)
 
 OpenZiti 2.0 added another ease-of-use feature: creating the identity during that enrollment. In the Ziti Admin
 Console, it's called **Auto Enrollment** (**Auto-Enroll to Cert** and **Auto-Enroll to Token**). In the API, it's
@@ -11,7 +15,7 @@ signs in.
 
 ## Create the signer and auth policy
 
-I created the signer for my demo Keycloak realm with auto enrollment turned on:
+Create the signer for the lab's Keycloak realm with auto enrollment turned on:
 
 ```bash
 IDP=https://idp.example.com:8443/realms/acme
@@ -38,14 +42,21 @@ Every new identity gets its fields from the token. `externalId` comes from `emai
 It allows both certificate and ext-jwt authentication, which covers both ways a new identity might authenticate
 later. The signer and the policy point at each other, so create the signer first, then the policy, then link them.
 
+If you set `--jwks-endpoint`, as shown above, the controller fetches the IdP's signing keys from that URL. The
+controller must reach the URL and trust its certificate.
+
+For every signer field, see
+[External JWT signers](../../learn/core-concepts/security/authentication/70-external-jwt-signers.mdx).
+For how the controller names and matches auto-enrolled identities, see
+[Auto external JWT signer enrollment](../../learn/core-concepts/security/enrollment.mdx#auto-external-jwt-signer-enrollment).
+
 ## Configure the IdP client
 
-The Keycloak client, `openziti`, is a public client that uses Proof Key for Code Exchange (PKCE) with S256. It has
-one redirect URI, `http://localhost:20314/auth/callback`, and that's where the tunnelers listen for the browser to
-come back. An **Audience** mapper adds `openziti` to the access token. A **Group Membership** mapper named `groups`
-has **Full group path** turned off.
+Set up the Keycloak client, `openziti`, as [Keycloak](../identity-providers/keycloak.mdx) describes: a public client
+with the tunneler callback URL and an **Audience** mapper that adds `openziti` to the access token. For auto
+enrollment, add one more mapper: a **Group Membership** mapper named `groups`, with **Full group path** turned off.
 
 ## Done when
 
-- [x] `ziti edge list ext-jwt-signers` shows `acme-idp`
-- [x] The signer's enroll auth policy is `idp-users`
+- `ziti edge list ext-jwt-signers` shows `acme-idp`
+- The signer's enroll auth policy is `idp-users`

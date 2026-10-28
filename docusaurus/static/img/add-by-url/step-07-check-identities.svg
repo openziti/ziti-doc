@@ -41,9 +41,9 @@
   <rect width="1920" height="1080" fill="url(#bg)"/>
   <rect width="1920" height="1080" fill="url(#grid)"/>
   <ellipse cx="1300" cy="600" rx="560" ry="460" fill="url(#glow)"/>
-  <text x="120" y="130" fill="#7FA6C4" font-size="28" font-weight="600" letter-spacing="7">STEP 2 · ADD BY URL</text>
+  <text x="120" y="130" fill="#7FA6C4" font-size="28" font-weight="600" letter-spacing="7">STEP 7 · ADD BY URL</text>
   <rect x="120" y="152" width="132" height="10" rx="5" fill="url(#accent)"/>
-  <text x="116" y="248" fill="#F2F8FF" font-size="76" font-weight="800" letter-spacing="-2">Create the <tspan fill="url(#accent)">external JWT signer</tspan></text>
+  <text x="116" y="248" fill="#F2F8FF" font-size="76" font-weight="800" letter-spacing="-2">Check the new <tspan fill="url(#accent)">identities</tspan></text>
   <rect x="96" y="300" width="470" height="600" rx="30" fill="url(#shellFill)" stroke="#1A4C9A" stroke-width="2"/>
   <text x="130" y="352" fill="#7FA6C4" font-size="25" font-weight="700" letter-spacing="5">USER DEVICE</text>
   <rect x="700" y="300" width="520" height="600" rx="30" fill="url(#shellFill)" stroke="#1A4C9A" stroke-width="2"/>
@@ -65,44 +65,44 @@
   <circle cx="780" cy="426" r="15" fill="#0068F9"/>
   <text x="816" y="436" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">PUBLIC CERTIFICATE</text>
   <text x="770" y="472" fill="#5E819C" font-size="21" font-weight="500">trusted by the OS, client API</text>
-  <g filter="url(#lift)">
-    <rect x="734" y="505" width="452" height="110" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
+  <g >
+    <rect x="734" y="505" width="452" height="110" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
   </g>
-  <circle cx="780" cy="551" r="15" fill="#FF3E82"/>
-  <text x="816" y="561" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">EXT JWT SIGNER</text>
-  <text x="770" y="597" fill="#FFB3C8" font-size="21" font-weight="500">acme-idp, auto enrollment on</text>
+  <circle cx="780" cy="551" r="15" fill="#0068F9"/>
+  <text x="816" y="561" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">EXT JWT SIGNER</text>
+  <text x="770" y="597" fill="#5E819C" font-size="21" font-weight="500">acme-idp, auto enrollment on</text>
   <g >
     <rect x="734" y="630" width="452" height="110" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
   </g>
   <circle cx="780" cy="676" r="15" fill="#0068F9"/>
   <text x="816" y="686" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">SERVICE POLICIES</text>
   <text x="770" y="722" fill="#5E819C" font-size="21" font-weight="500">#engineering → eng-wiki</text>
-  <g >
-    <rect x="734" y="755" width="452" height="110" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
-  </g>
-  <circle cx="780" cy="801" r="15" fill="#0068F9"/>
-  <text x="816" y="811" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">IDENTITIES</text>
-  <text x="770" y="847" fill="#5E819C" font-size="21" font-weight="500">alice #engineering · bob #finance</text>
   <g filter="url(#lift)">
-    <rect x="1388" y="390" width="402" height="230" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
+    <rect x="734" y="755" width="452" height="110" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
   </g>
-  <circle cx="1434" cy="436" r="15" fill="#FF3E82"/>
-  <text x="1470" y="446" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">KEYCLOAK</text>
-  <text x="1424" y="500" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">realm acme</text>
-  <text x="1424" y="540" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">groups claim</text>
+  <circle cx="780" cy="801" r="15" fill="#FF3E82"/>
+  <text x="816" y="811" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">IDENTITIES</text>
+  <text x="770" y="847" fill="#FFB3C8" font-size="21" font-weight="500">alice #engineering · bob #finance</text>
   <g >
-    <rect x="1388" y="660" width="402" height="200" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
+    <rect x="1388" y="390" width="402" height="230" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
   </g>
-  <circle cx="1434" cy="706" r="15" fill="#0068F9"/>
-  <text x="1470" y="716" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">USERS</text>
-  <text x="1424" y="770" fill="#5E819C" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">alice · engineering</text>
-  <text x="1424" y="810" fill="#5E819C" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">bob · finance</text>
+  <circle cx="1434" cy="436" r="15" fill="#0068F9"/>
+  <text x="1470" y="446" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">KEYCLOAK</text>
+  <text x="1424" y="500" fill="#5E819C" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">realm acme</text>
+  <text x="1424" y="540" fill="#5E819C" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">groups claim</text>
+  <g filter="url(#lift)">
+    <rect x="1388" y="660" width="402" height="200" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
+  </g>
+  <circle cx="1434" cy="706" r="15" fill="#FF3E82"/>
+  <text x="1470" y="716" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">USERS</text>
+  <text x="1424" y="770" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">alice · engineering</text>
+  <text x="1424" y="810" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">bob · finance</text>
   <path d="M534 435 L728 435" fill="none" stroke="#2F5A94" stroke-width="4" marker-end="url(#arrowDim)"/>
   <text x="590" y="420" fill="#4A72A8" font-size="23" font-weight="600" text-anchor="start">URL</text>
-  <path d="M1188 560 C1290 560 1290 470 1382 470" fill="none" stroke="#FF3E82" stroke-width="4" marker-end="url(#arrowPink)"/>
-  <text x="1300" y="590" fill="#FF3E82" font-size="23" font-weight="600" text-anchor="start">JWKS</text>
+  <path d="M1188 560 C1290 560 1290 470 1382 470" fill="none" stroke="#2F5A94" stroke-width="4" marker-end="url(#arrowDim)"/>
+  <text x="1300" y="590" fill="#4A72A8" font-size="23" font-weight="600" text-anchor="start">JWKS</text>
   <path d="M330 694 L330 940 L1590 940 L1590 864" fill="none" stroke="#2F5A94" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrowDim)"/>
   <text x="960" y="928" fill="#4A72A8" font-size="23" font-weight="600" text-anchor="middle">browser sign-in</text>
-  <text x="96" y="1006" fill="#9FBDD4" font-size="30" font-weight="500">The controller accepts sign-ins from one IdP and creates identities from its tokens.</text>
+  <text x="96" y="1006" fill="#9FBDD4" font-size="30" font-weight="500">Each identity is created at first sign-in, with its groups as role attributes.</text>
   <text x="1800" y="1042" fill="#4E7391" font-size="30" font-weight="700" text-anchor="end" letter-spacing="4">OPENZITI</text>
 </svg>

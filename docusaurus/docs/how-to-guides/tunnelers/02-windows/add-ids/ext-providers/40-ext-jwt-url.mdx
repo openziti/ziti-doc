@@ -15,7 +15,9 @@ send them the following instructions.
 - OpenZiti Controller 1.2+.
 - ZDEW 2.5.2+.
 - An `external-jwt-provider` is properly configured.
-- An identity exists with an `external-id` field set to a value provided from the external provider.
+- An identity exists with an `external-id` field set to a value provided from the external provider, or the external
+  JWT signer has [auto enrollment](../../../../../learn/core-concepts/security/enrollment.mdx#auto-external-jwt-signer-enrollment)
+  turned on (OpenZiti 2.0+).
 - The OpenZiti Controller is configured to serve a pre-configured trusted certificate. The certificate must be
   verifiable by the OS without additional information such as using a widely trusted CA or the Windows
   administrator has added the certificate chain to the OS trust store.
