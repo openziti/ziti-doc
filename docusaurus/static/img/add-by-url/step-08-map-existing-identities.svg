@@ -64,12 +64,12 @@
   <circle cx="780" cy="426" r="15" fill="#0068F9"/>
   <text x="816" y="436" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">PUBLIC CERTIFICATE</text>
   <text x="770" y="472" fill="#5E819C" font-size="21" font-weight="500">trusted by the OS, client API</text>
-  <g >
-    <rect x="734" y="505" width="452" height="110" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
+  <g filter="url(#lift)">
+    <rect x="734" y="505" width="452" height="110" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
   </g>
-  <circle cx="780" cy="551" r="15" fill="#0068F9"/>
-  <text x="816" y="561" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">EXT JWT SIGNER</text>
-  <text x="770" y="597" fill="#5E819C" font-size="21" font-weight="500">acme-idp, auto enrollment off</text>
+  <circle cx="780" cy="551" r="15" fill="#FF3E82"/>
+  <text x="816" y="561" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">EXT JWT SIGNER</text>
+  <text x="770" y="597" fill="#FFB3C8" font-size="21" font-weight="500">acme-idp, auto enrollment off</text>
   <g >
     <rect x="734" y="630" width="452" height="110" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
   </g>
@@ -81,7 +81,7 @@
   </g>
   <circle cx="780" cy="801" r="15" fill="#FF3E82"/>
   <text x="816" y="811" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">IDENTITIES</text>
-  <text x="770" y="847" fill="#FFB3C8" font-size="21" font-weight="500">carol, created by an admin</text>
+  <text x="770" y="847" fill="#FFB3C8" font-size="21" font-weight="500">carol, external ID set by admin</text>
   <g >
     <rect x="1388" y="390" width="402" height="230" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
   </g>
@@ -94,13 +94,19 @@
   </g>
   <circle cx="1434" cy="706" r="15" fill="#FF3E82"/>
   <text x="1470" y="716" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">USERS</text>
-  <text x="1424" y="770" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">carol · engineering</text>
+  <text x="1424" y="770" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">carol@acme.example</text>
+  <text x="1424" y="810" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">no group</text>
   <path d="M534 435 L728 435" fill="none" stroke="#2F5A94" stroke-width="4" marker-end="url(#arrowDim)"/>
   <text x="590" y="420" fill="#4A72A8" font-size="23" font-weight="600" text-anchor="start">URL</text>
   <path d="M1188 560 C1290 560 1290 470 1382 470" fill="none" stroke="#2F5A94" stroke-width="4" marker-end="url(#arrowDim)"/>
   <text x="1300" y="590" fill="#4A72A8" font-size="23" font-weight="600" text-anchor="start">JWKS</text>
   <path d="M330 694 L330 940 L1590 940 L1590 864" fill="none" stroke="#2F5A94" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrowDim)"/>
   <text x="960" y="928" fill="#4A72A8" font-size="23" font-weight="600" text-anchor="middle">browser sign-in</text>
+  <text x="633" y="770" fill="#FF3E82" font-size="23" font-weight="700" letter-spacing="3" text-anchor="middle">ADMIN</text>
+  <path d="M580 800 L728 800" fill="none" stroke="#FF3E82" stroke-width="4" marker-end="url(#arrowPink)"/>
+  <path d="M1386 800 L1192 800" fill="none" stroke="#FF3E82" stroke-width="4" marker-end="url(#arrowPink)"/>
+  <text x="1287" y="750" fill="#FF3E82" font-size="21" font-weight="600" text-anchor="middle">email =</text>
+  <text x="1287" y="776" fill="#FF3E82" font-size="21" font-weight="600" text-anchor="middle">external ID</text>
   <text x="96" y="1006" fill="#9FBDD4" font-size="30" font-weight="500">An admin creates the identity. The sign-in matches its external ID.</text>
   <text x="1800" y="1042" fill="#4E7391" font-size="30" font-weight="700" text-anchor="end" letter-spacing="4">OPENZITI</text>
 </svg>

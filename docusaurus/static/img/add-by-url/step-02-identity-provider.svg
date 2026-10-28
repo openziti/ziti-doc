@@ -56,7 +56,7 @@
   <circle cx="176" cy="436" r="15" fill="#0068F9"/>
   <text x="212" y="446" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">TUNNELER</text>
   <text x="166" y="500" fill="#5E819C" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">1. enter controller URL</text>
-  <text x="166" y="544" fill="#5E819C" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">2. session or device cert</text>
+  <text x="166" y="544" fill="#5E819C" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">2. user session</text>
   <text x="166" y="588" fill="#5E819C" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">3. sign in to the IdP</text>
   <text x="166" y="655" fill="#5E819C" font-size="19" font-weight="500">Windows · Linux</text>
   <g filter="url(#lift)">
@@ -82,7 +82,7 @@
   </g>
   <circle cx="780" cy="801" r="15" fill="#0068F9"/>
   <text x="816" y="811" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">IDENTITIES</text>
-  <text x="770" y="847" fill="#5E819C" font-size="21" font-weight="500">alice #engineering · bob #finance</text>
+  <text x="770" y="847" fill="#5E819C" font-size="21" font-weight="500">alice #engineering · bob #hr</text>
   <g filter="url(#lift)">
     <rect x="1388" y="390" width="402" height="230" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
   </g>
@@ -96,7 +96,7 @@
   <circle cx="1434" cy="706" r="15" fill="#FF3E82"/>
   <text x="1470" y="716" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">USERS</text>
   <text x="1424" y="770" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">alice · engineering</text>
-  <text x="1424" y="810" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">bob · finance</text>
+  <text x="1424" y="810" fill="#FFB3C8" font-size="22" font-weight="500" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">bob · hr</text>
   <path d="M534 435 L728 435" fill="none" stroke="#2F5A94" stroke-width="4" marker-end="url(#arrowDim)"/>
   <text x="590" y="420" fill="#4A72A8" font-size="23" font-weight="600" text-anchor="start">URL</text>
   <path d="M1188 560 C1290 560 1290 470 1382 470" fill="none" stroke="#2F5A94" stroke-width="4" marker-end="url(#arrowDim)"/>

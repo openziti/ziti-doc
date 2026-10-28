@@ -36,19 +36,20 @@ SIGNER_ID=$(ziti edge create ext-jwt-signer acme-idp https://idp.example.com:844
   --enroll-name-claims-selector preferred_username \
   --enroll-attr-claims-selector groups)
 
-ziti edge create auth-policy idp-users \
+ziti edge create auth-policy acme-users \
   --primary-cert-allowed \
   --primary-ext-jwt-allowed \
   --primary-ext-jwt-allowed-signers $SIGNER_ID
 
 ziti edge update ext-jwt-signer acme-idp \
-  --enroll-auth-policy idp-users
+  --enroll-auth-policy acme-users
 ```
 
 Every new identity gets its fields from the token. `externalId` comes from `email`, the name comes from
-`preferred_username`, and the role attributes come from `groups`. New identities land in the `idp-users` auth policy.
+`preferred_username`, and the role attributes come from `groups`. New identities land in the `acme-users` auth policy.
 It allows both certificate and ext-jwt authentication, which covers both ways a new identity might authenticate
-later. The signer and the policy point at each other, so create the signer first, then the policy, then link them.
+later. The policy needs the signer's ID, so the signer comes first, on the `default` enroll auth policy. The last
+command moves it to `acme-users`.
 
 If you set `--jwks-endpoint`, as shown above, the controller fetches the IdP's signing keys from that URL. The
 controller must reach the URL and trust its certificate.
@@ -64,4 +65,4 @@ and `--enroll-attr-claims-selector groups` reads the **Group Membership** mapper
 ## Done when
 
 - `ziti edge list ext-jwt-signers` shows `acme-idp`
-- The signer's enroll auth policy is `idp-users`
+- The signer's enroll auth policy column shows the ID that `ziti edge list auth-policies` lists for `acme-users`

@@ -31,7 +31,7 @@ docker run \
 
 ## Create the realm, groups, and users
 
-The lab realm is `acme`, with two groups and three users. `alice` is in `engineering`, `bob` is in `finance`, and
+The lab realm is `acme`, with two groups and three users. `alice` is in `engineering`, `bob` is in `hr`, and
 `carol` is in no group. `carol` will be used in step 8, where the administrator creates her identity by hand. Each
 password is `<user>-demo-pw`.
 
@@ -56,7 +56,7 @@ kcadm create realms \
   -s enabled=true
 
 ENG=$(kcadm create groups -r acme -i -s name=engineering)
-FIN=$(kcadm create groups -r acme -i -s name=finance)
+HR=$(kcadm create groups -r acme -i -s name=hr)
 ```
 
 Create `alice` and put her in `engineering`:
@@ -80,7 +80,7 @@ kcadm update users/$ALICE/groups/$ENG -r acme -n \
   -s groupId=$ENG
 ```
 
-Create `bob` and put him in `finance`:
+Create `bob` and put him in `hr`:
 
 ```text
 BOB=$(kcadm create users -r acme -i \
@@ -95,10 +95,10 @@ kcadm set-password -r acme \
   --username bob \
   --new-password bob-demo-pw
 
-kcadm update users/$BOB/groups/$FIN -r acme -n \
+kcadm update users/$BOB/groups/$HR -r acme -n \
   -s realm=acme \
   -s userId=$BOB \
-  -s groupId=$FIN
+  -s groupId=$HR
 ```
 
 Create `carol` with no group:
@@ -163,6 +163,6 @@ kcadm create clients/$CID/protocol-mappers/models -r acme \
 - The browser opens `https://idp.example.com:8443/realms/acme/.well-known/openid-configuration` with no certificate
   warning
 - `alice` is in `engineering`
-- `bob` is in `finance`
+- `bob` is in `hr`
 - `carol` is in no group
 - The `openziti` client has the `openziti-audience` and `groups` mappers

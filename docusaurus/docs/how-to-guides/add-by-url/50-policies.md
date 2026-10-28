@@ -17,16 +17,16 @@ When `alice` signs in during step 6, the controller creates her identity with th
 IdP groups, and this policy already covers her. The administrator writes one policy per group, once, instead of
 granting each new user by hand.
 
-The lab's Keycloak realm has two groups, `engineering` and `finance`. Each group gets one service:
+The lab's Keycloak realm has two groups, `engineering` and `hr`. Each group gets one service:
 
 ```text
 ziti edge create service-policy engineering-dial Dial \
   --identity-roles '#engineering' \
   --service-roles '@eng-wiki'
 
-ziti edge create service-policy finance-dial Dial \
-  --identity-roles '#finance' \
-  --service-roles '@finance-ledger'
+ziti edge create service-policy hr-dial Dial \
+  --identity-roles '#hr' \
+  --service-roles '@hr-portal'
 ```
 
 ## Done when

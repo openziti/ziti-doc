@@ -46,20 +46,22 @@ The lab builds this for a company called Acme, with three users in Keycloak and 
 | User | IdP group | Identity | Reaches |
 | --- | --- | --- | --- |
 | `alice` | `engineering` | Created at sign-in, in step 6 | Engineering Wiki (`eng-wiki`) |
-| `bob` | `finance` | Created at sign-in, in step 6 | Finance Ledger (`finance-ledger`) |
+| `bob` | `hr` | Created at sign-in, in step 6 | HR Portal (`hr-portal`) |
 | `carol` | None | Created by the administrator, in step 8 | Engineering Wiki (`eng-wiki`) |
 
 ## What you need
 
-- An OpenZiti 2.0 or later network with a controller and a public edge router. To create one, see
-  [Set up a network](../../get-started/network/index.md).
+- An OpenZiti 2.0 or later network with a controller and a public edge router, and router policies that let every
+  identity and service use that router. To create one, see [Set up a network](../../get-started/network/index.md) or
+  use one of the [deployment guides](@openzitidocs/category/deployments).
 - A certificate for the controller's client API that your devices already trust: a public CA such as Let's Encrypt,
   or an enterprise CA your MDM deployed. [Step 1](./10-public-certificate.md) adds it to the controller.
-- Docker on the machine that runs the IdP. [Step 2](./20-identity-provider.md) runs Keycloak in a container and
-  creates the realm, users, and client. Any OIDC IdP works. With another IdP, create what step 2 creates there.
-- Docker and `ziti-edge-tunnel` on the machine that hosts the services. Step 4 runs the services in nginx containers
-  and hosts them with `ziti-edge-tunnel`.
-- A tunneler that supports add by URL. Step 6 lists the versions.
+- **Docker**, on the machine that runs the IdP and on the machine that hosts the services. They can be the same
+  machine. [Step 2](./20-identity-provider.md) runs Keycloak in a container, and [step 4](./40-services.md) runs the
+  two services in nginx containers. Any OIDC IdP works in place of Keycloak. With another IdP, create what step 2
+  creates there.
+- `ziti-edge-tunnel` on the machine that hosts the services. Step 4 hosts the services with it.
+- A tunneler that supports add by URL on each user's device. Step 6 lists the versions.
 
 ## Steps
 

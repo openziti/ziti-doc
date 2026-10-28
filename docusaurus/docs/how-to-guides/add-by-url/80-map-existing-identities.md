@@ -1,4 +1,5 @@
 ---
+pagination_next: null
 sidebar_label: 8. Map existing identities
 ---
 
@@ -27,11 +28,23 @@ This step maps `carol`, who has no IdP group, to an identity the administrator c
    ```text
    ziti edge create identity carol \
      --external-id carol@acme.example \
-     --auth-policy idp-users \
+     --auth-policy acme-users \
      --role-attributes engineering
    ```
 
-3. As `carol`, add the network by URL and sign in to Keycloak, as in [step 6](./60-join.md#join).
+3. As `carol`, add the network by URL without `--enroll-to-mode`, then sign in:
+
+   ```text
+   sudo ziti-edge-tunnel add \
+     -i carol \
+     -u https://ctrl.example.com:1280
+
+   sudo ziti-edge-tunnel ext-jwt-login \
+     -i /opt/openziti/etc/identities/carol.json \
+     -p acme-idp
+   ```
+
+   With auto enrollment off, `--enroll-to-mode token` fails with `no compatible ext JWT signer`.
 
 In the lab, `carol` added the network by URL and signed in to Keycloak. The tunneler logged
 `enroll_mode=none, skipping enrollment` and signed in as the `carol` identity created above. `carol` stayed one

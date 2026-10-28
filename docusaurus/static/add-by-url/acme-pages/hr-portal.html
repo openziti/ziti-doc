@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Acme</title>
+<title>HR Portal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  :root { --a1: #0068F9; --a2: #5aa2ff; --other: #F4044D; --text: #ffffff; --muted: #a9b1d6; --dim: #5b6390; }
+  :root { --a1: #F4044D; --a2: #ff6f98; --other: #0068F9; --text: #ffffff; --muted: #a9b1d6; --dim: #5b6390; }
   * { box-sizing: border-box; }
   html, body { margin: 0; min-height: 100%; }
   body {
@@ -71,90 +71,27 @@
     stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="11" width="15" height="10" rx="2.5"/>
     <path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
   <span><b>Reached over OpenZiti.</b> This server has no open ports.</span>
-  <span class="host mono" id="host"></span>
+  <span class="host mono">served by acme-hr-portal</span>
 </div>
 
 <header class="rise" style="animation-delay:.15s">
-  <div class="kicker" id="kicker"></div>
-  <h1 id="title"></h1>
-  <p class="tagline" id="tagline"></p>
+  <div class="kicker">Acme · People</div>
+  <h1>HR Portal</h1>
+  <p class="tagline">Payroll, time off and benefits.</p>
 </header>
 
-<section class="stats" id="stats"></section>
+<section class="stats">
+  <div class="stat glass rise" style="animation-delay:0.30s"><div class="label">Next payroll</div><div class="big">Nov 14</div><div class="sub">Direct deposit</div></div>
+  <div class="stat glass rise" style="animation-delay:0.45s"><div class="label">Time-off requests</div><div class="big">5</div><div class="sub">Waiting for approval</div></div>
+  <div class="stat glass rise" style="animation-delay:0.60s"><div class="label">Open enrollment</div><div class="big">Nov 1–30</div><div class="sub">Two new dental plans</div></div>
+</section>
 <section class="wide glass rise" style="animation-delay:.75s">
-  <div class="label" id="listTitle"></div>
-  <div id="rows"></div>
+  <div class="label">Announcements</div>
+  <div class="row"><div class="icon">H</div><div><div class="what">Holiday calendar for 2027</div><div class="meta">Published</div></div><div class="when">today</div></div>
+  <div class="row"><div class="icon">B</div><div><div class="what">Benefits fair</div><div class="meta">Nov 6, main office and online</div></div><div class="when">2 days ago</div></div>
+  <div class="row"><div class="icon">W</div><div><div class="what">Welcome our new hires</div><div class="meta">Four people start Monday</div></div><div class="when">last week</div></div>
 </section>
 
-<footer class="rise" style="animation-delay:.9s"><span>Acme Corp internal</span><span id="clock"></span></footer>
-
-<script>
-  // One page for every service: the intercept hostname picks the content. ?svc=hr-portal previews a page locally.
-  const sites = {
-    "eng-wiki": {
-      a1: "#0068F9", a2: "#5aa2ff", other: "#F4044D",
-      kicker: "Acme · Engineering", title: "Engineering Wiki", tagline: "Runbooks, design docs and who is on call.",
-      stats: [
-        ["On call this week", "Dave", "Backup: Alice"],
-        ["Open incidents", "0", "Last one closed 6 days ago"],
-        ["Next deploy freeze", "Thu 17:00", "Canary 10% → 50% → 100%"],
-      ],
-      listTitle: "Recently updated",
-      rows: [
-        ["R", "Deploy runbook", "Rollback is now one command", "2h ago"],
-        ["D", "Design: service mesh migration", "Status: approved", "yesterday"],
-        ["P", "Postmortem: cache stampede", "3 action items open", "3 days ago"],
-      ],
-    },
-    "hr-portal": {
-      a1: "#F4044D", a2: "#ff6f98", other: "#0068F9",
-      kicker: "Acme · People", title: "HR Portal", tagline: "Payroll, time off and benefits.",
-      stats: [
-        ["Next payroll", "Nov 14", "Direct deposit"],
-        ["Time-off requests", "5", "Waiting for approval"],
-        ["Open enrollment", "Nov 1–30", "Two new dental plans"],
-      ],
-      listTitle: "Announcements",
-      rows: [
-        ["H", "Holiday calendar for 2027", "Published", "today"],
-        ["B", "Benefits fair", "Nov 6, main office and online", "2 days ago"],
-        ["W", "Welcome our new hires", "Four people start Monday", "last week"],
-      ],
-    },
-    "finance-ledger": {
-      a1: "#8b3dff", a2: "#c39bff", other: "#F4044D",
-      kicker: "Acme · Finance", title: "Finance Ledger", tagline: "General ledger and the Q4 close.",
-      stats: [
-        ["Q4 revenue", "$4.82M", "+12% over Q3"],
-        ["Open invoices", "37", "$612,400 outstanding"],
-        ["Audit pack", "Dec 15", "Accruals in review"],
-      ],
-      listTitle: "Recent entries",
-      rows: [
-        ["$", "Cloud hosting, October", "Operating expense", "−$48,210"],
-        ["$", "Initech, invoice 4471", "Accounts receivable", "+$96,000"],
-        ["$", "Payroll, Oct 31", "Salaries", "−$311,950"],
-      ],
-    },
-  };
-  const key = new URLSearchParams(location.search).get("svc") || location.hostname.split(".")[0];
-  const s = sites[key] || sites["eng-wiki"];
-  const root = document.documentElement.style;
-  root.setProperty("--a1", s.a1); root.setProperty("--a2", s.a2); root.setProperty("--other", s.other);
-  const $ = id => document.getElementById(id);
-  document.title = s.title;
-  $("host").textContent = location.host || `${key}.acme.ziti`;
-  $("kicker").textContent = s.kicker;
-  $("title").textContent = s.title;
-  $("tagline").textContent = s.tagline;
-  $("stats").innerHTML = s.stats.map(([l, b, sub], i) =>
-    `<div class="stat glass rise" style="animation-delay:${.3 + i * .15}s"><div class="label">${l}</div>` +
-    `<div class="big">${b}</div><div class="sub">${sub}</div></div>`).join("");
-  $("listTitle").textContent = s.listTitle;
-  $("rows").innerHTML = s.rows.map(([i, w, m, t]) =>
-    `<div class="row"><div class="icon">${i}</div><div><div class="what">${w}</div><div class="meta">${m}</div></div>` +
-    `<div class="when">${t}</div></div>`).join("");
-  $("clock").textContent = "Loaded " + new Date().toLocaleString();
-</script>
+<footer class="rise" style="animation-delay:.9s"><span>Acme Corp internal</span><span>hr-portal</span></footer>
 </body>
 </html>
