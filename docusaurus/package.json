@@ -13,7 +13,8 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "stargazers:load": "node scripts/load-stargazer-data.mjs"
+    "stargazers:load": "node scripts/load-stargazer-data.mjs",
+    "view:visual-regression": "node ../visual-regression/diff-view.mjs"
   },
   "dependencies": {
     "@algolia/client-search": "^5.56.0",

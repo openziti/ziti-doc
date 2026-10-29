@@ -12,7 +12,8 @@ pwsh docusaurus/scripts/zac-screenshots/capture.ps1 -Flow add-by-url -Runtime ws
 ```
 
 The [`zac-screenshots`](../../../.github/workflows/zac-screenshots.yml) workflow runs the same script on a GitHub runner
-and uploads the shots as an artifact. Start it from the Actions tab and pick the flow.
+and uploads the shots as an artifact. Start it from the Actions tab and pick the flow. It also runs the `add-by-url`
+flow on any pull request that changes this directory or the workflow, so a change to the harness gets tested.
 
 ## Layout
 

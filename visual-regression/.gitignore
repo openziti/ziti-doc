@@ -7,3 +7,7 @@ package-lock.json
 # pulled/pushed by run.sh (--pull-baselines / --publish-baselines).
 snapshots/
 baselines.tgz
+
+# diff-view.mjs output, and the run reports it downloads
+diff-view/
+.runs/

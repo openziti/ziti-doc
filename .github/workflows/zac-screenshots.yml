@@ -11,6 +11,11 @@ on:
         description: Flow under docusaurus/scripts/zac-screenshots/flows
         required: true
         default: add-by-url
+  # proves the harness still works when a PR changes it; runs the default flow
+  pull_request:
+    paths:
+      - "docusaurus/scripts/zac-screenshots/**"
+      - ".github/workflows/zac-screenshots.yml"
 
 jobs:
   capture:
@@ -22,10 +27,10 @@ jobs:
       - name: Capture
         shell: pwsh
         env:
-          FLOW: ${{ inputs.flow }}
+          FLOW: ${{ inputs.flow || 'add-by-url' }}
         run: ./docusaurus/scripts/zac-screenshots/capture.ps1 -Flow $env:FLOW -Runtime docker -Out "$env:RUNNER_TEMP/zac-screenshots"
       - uses: actions/upload-artifact@v4
         with:
-          name: zac-screenshots-${{ inputs.flow }}
+          name: zac-screenshots-${{ inputs.flow || 'add-by-url' }}
           path: ${{ runner.temp }}/zac-screenshots/*.png
           if-no-files-found: error

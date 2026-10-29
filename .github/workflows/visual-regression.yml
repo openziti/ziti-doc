@@ -67,6 +67,7 @@ jobs:
           path: |
             visual-regression/playwright-report/
             visual-regression/test-results/
+            visual-regression/diff-view/
           retention-days: 14
 
   publish:
