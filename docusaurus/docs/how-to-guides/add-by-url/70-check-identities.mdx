@@ -48,7 +48,7 @@ created the identity.
 ## What to know
 
 - **Attributes based on IdP groups are currently only added to the OpenZiti identity once, at enrollment time.** If you
-  add alice to `hr` in Keycloak and alice then enrolls on a second device, alice still has only the
+  add `alice` to `hr` in Keycloak and `alice` then enrolls on a second device, `alice` still has only the
   `engineering` attribute. OpenZiti does not sync group state between the IdP and OpenZiti.
   The [NetFoundry platform](https://netfoundry.io/docs/platform/access-management/integrations/scim) offers that sync as
   an enterprise feature through SCIM.

@@ -15,37 +15,37 @@ The lab needs one service for each IdP group, so step 6 can show that `alice` re
 The lab serves both services from one machine, each from its own nginx container with its own page. Each page names
 the container that serves it, so a request routed to the wrong container shows the wrong page.
 
-Save these two pages in the current directory:
+1. Save these two pages in the current directory:
 
-- [`eng-wiki.html`](pathname:///add-by-url/acme-pages/eng-wiki.html)
-- [`hr-portal.html`](pathname:///add-by-url/acme-pages/hr-portal.html)
+   - [`eng-wiki.html`](pathname:///add-by-url/acme-pages/eng-wiki.html)
+   - [`hr-portal.html`](pathname:///add-by-url/acme-pages/hr-portal.html)
 
-Then start the two containers:
+2. Start the two containers:
 
-```text
-docker run \
-  --detach \
-  --name acme-eng-wiki \
-  --publish 127.0.0.1:9781:80 \
-  --volume "$PWD/eng-wiki.html:/usr/share/nginx/html/index.html:ro" \
-  nginx:alpine
+   ```text
+   docker run \
+     --detach \
+     --name acme-eng-wiki \
+     --publish 127.0.0.1:9781:80 \
+     --volume "$PWD/eng-wiki.html:/usr/share/nginx/html/index.html:ro" \
+     nginx:alpine
 
-docker run \
-  --detach \
-  --name acme-hr-portal \
-  --publish 127.0.0.1:9782:80 \
-  --volume "$PWD/hr-portal.html:/usr/share/nginx/html/index.html:ro" \
-  nginx:alpine
-```
+   docker run \
+     --detach \
+     --name acme-hr-portal \
+     --publish 127.0.0.1:9782:80 \
+     --volume "$PWD/hr-portal.html:/usr/share/nginx/html/index.html:ro" \
+     nginx:alpine
+   ```
 
-Before going on, check that each port serves its own page:
+3. Check that each port serves its own page:
 
-```text
-curl -s http://127.0.0.1:9781 | grep 'served by'
-curl -s http://127.0.0.1:9782 | grep 'served by'
-```
+   ```text
+   curl -s http://127.0.0.1:9781 | grep 'served by'
+   curl -s http://127.0.0.1:9782 | grep 'served by'
+   ```
 
-The first line contains `served by acme-eng-wiki`, the second `served by acme-hr-portal`.
+   The first line contains `served by acme-eng-wiki`, the second `served by acme-hr-portal`.
 
 Create the services, the host identity, and the Bind policy that lets the host identity host both services. Each
 service has an `intercept.v1` config, the address clients dial, and a `host.v1` config, where the host identity
@@ -59,59 +59,59 @@ sends the traffic:
 <AdminToolTabs>
 <TabItem value="cli" label="ziti CLI">
 
-Create the `eng-wiki` service:
+1. Create the `eng-wiki` service:
 
-```text
-ziti edge create config eng-wiki.intercept intercept.v1 \
-  '{
-    "protocols": ["tcp"],
-    "addresses": ["eng-wiki.acme.ziti"],
-    "portRanges": [{"low": 80, "high": 80}]
-  }'
+   ```text
+   ziti edge create config eng-wiki.intercept intercept.v1 \
+     '{
+       "protocols": ["tcp"],
+       "addresses": ["eng-wiki.acme.ziti"],
+       "portRanges": [{"low": 80, "high": 80}]
+     }'
 
-ziti edge create config eng-wiki.host host.v1 \
-  '{
-    "protocol": "tcp",
-    "address": "127.0.0.1",
-    "port": 9781
-  }'
+   ziti edge create config eng-wiki.host host.v1 \
+     '{
+       "protocol": "tcp",
+       "address": "127.0.0.1",
+       "port": 9781
+     }'
 
-ziti edge create service eng-wiki \
-  --configs eng-wiki.intercept,eng-wiki.host
-```
+   ziti edge create service eng-wiki \
+     --configs eng-wiki.intercept,eng-wiki.host
+   ```
 
-Create the `hr-portal` service:
+2. Create the `hr-portal` service:
 
-```text
-ziti edge create config hr-portal.intercept intercept.v1 \
-  '{
-    "protocols": ["tcp"],
-    "addresses": ["hr-portal.acme.ziti"],
-    "portRanges": [{"low": 80, "high": 80}]
-  }'
+   ```text
+   ziti edge create config hr-portal.intercept intercept.v1 \
+     '{
+       "protocols": ["tcp"],
+       "addresses": ["hr-portal.acme.ziti"],
+       "portRanges": [{"low": 80, "high": 80}]
+     }'
 
-ziti edge create config hr-portal.host host.v1 \
-  '{
-    "protocol": "tcp",
-    "address": "127.0.0.1",
-    "port": 9782
-  }'
+   ziti edge create config hr-portal.host host.v1 \
+     '{
+       "protocol": "tcp",
+       "address": "127.0.0.1",
+       "port": 9782
+     }'
 
-ziti edge create service hr-portal \
-  --configs hr-portal.intercept,hr-portal.host
-```
+   ziti edge create service hr-portal \
+     --configs hr-portal.intercept,hr-portal.host
+   ```
 
-Create a host identity, and a Bind policy that lets it host both services:
+3. Create a host identity, and a Bind policy that lets it host both services:
 
-```text
-ziti edge create identity acme-host \
-  --role-attributes host \
-  -o acme-host.jwt
+   ```text
+   ziti edge create identity acme-host \
+     --role-attributes host \
+     -o acme-host.jwt
 
-ziti edge create service-policy acme-host-bind Bind \
-  --identity-roles '#host' \
-  --service-roles '@eng-wiki,@hr-portal'
-```
+   ziti edge create service-policy acme-host-bind Bind \
+     --identity-roles '#host' \
+     --service-roles '@eng-wiki,@hr-portal'
+   ```
 
 </TabItem>
 <TabItem value="zac" label="ZAC">
