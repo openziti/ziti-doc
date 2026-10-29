@@ -2,6 +2,9 @@
 sidebar_label: 4. Services
 ---
 
+import TabItem from '@theme/TabItem';
+import { AdminToolTabs } from '../../_imports';
+
 # Step 4: Host the services
 
 ![The services on the controller highlighted, one for each IdP group.](/img/add-by-url/step-04-services.svg)
@@ -43,6 +46,18 @@ curl -s http://127.0.0.1:9782 | grep 'served by'
 ```
 
 The first line contains `served by acme-eng-wiki`, the second `served by acme-hr-portal`.
+
+Create the services, the host identity, and the Bind policy that lets the host identity host both services. Each
+service has an `intercept.v1` config, the address clients dial, and a `host.v1` config, where the host identity
+sends the traffic:
+
+| Service | Intercept address | Intercept port | Host address | Host port |
+| --- | --- | --- | --- | --- |
+| `eng-wiki` | `eng-wiki.acme.ziti` | 80 | `127.0.0.1` | 9781 |
+| `hr-portal` | `hr-portal.acme.ziti` | 80 | `127.0.0.1` | 9782 |
+
+<AdminToolTabs>
+<TabItem value="cli" label="ziti CLI">
 
 Create the `eng-wiki` service:
 
@@ -97,6 +112,19 @@ ziti edge create service-policy acme-host-bind Bind \
   --identity-roles '#host' \
   --service-roles '@eng-wiki,@hr-portal'
 ```
+
+</TabItem>
+<TabItem value="zac" label="ZAC">
+
+1. Under **Services**, click **+** and pick **Create Advanced Service**. For each service, add its `intercept.v1` and
+   `host.v1` configs with **Create and Attach**, using the values in the table.
+2. Under **Identities**, add `acme-host` with the `host` attribute. Download `acme-host.jwt` from the icon in its
+   **Token** column.
+3. Under **Policies > Service Policies**, add the Bind policy `acme-host-bind` for `#host`, `@eng-wiki`, and
+   `@hr-portal`.
+
+</TabItem>
+</AdminToolTabs>
 
 Enroll the host identity and run it on the same machine:
 

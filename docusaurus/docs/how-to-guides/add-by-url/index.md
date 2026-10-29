@@ -57,7 +57,7 @@ The lab builds this for a company called Acme, with three users in Keycloak and 
 - A certificate for the controller's client API that your devices already trust: a public CA such as Let's Encrypt,
   or an enterprise CA your MDM deployed. [Step 1](./10-public-certificate.md) adds it to the controller.
 - **Docker**, on the machine that runs the IdP and on the machine that hosts the services. They can be the same
-  machine. [Step 2](./20-identity-provider.md) runs Keycloak in a container, and [step 4](./40-services.md) runs the
+  machine. [Step 2](./20-identity-provider.md) runs Keycloak in a container, and [step 4](./40-services.mdx) runs the
   two services in nginx containers. Any OIDC IdP works in place of Keycloak. With another IdP, create what step 2
   creates there.
 - `ziti-edge-tunnel` on the machine that hosts the services. Step 4 hosts the services with it.
@@ -67,9 +67,9 @@ The lab builds this for a company called Acme, with three users in Keycloak and 
 
 1. [Give the controller a public certificate](./10-public-certificate.md)
 2. [Set up the identity provider](./20-identity-provider.md)
-3. [Create the external JWT signer](./30-ext-jwt-signer.md)
-4. [Host the services](./40-services.md)
-5. [Grant access by IdP group](./50-policies.md)
+3. [Create the external JWT signer](./30-ext-jwt-signer.mdx)
+4. [Host the services](./40-services.mdx)
+5. [Grant access by IdP group](./50-policies.mdx)
 6. [Join from a tunneler](./60-join.md)
-7. [Check the new identities](./70-check-identities.md)
-8. [Map existing identities instead](./80-map-existing-identities.md) (optional)
+7. [Check the new identities](./70-check-identities.mdx)
+8. [Map existing identities instead](./80-map-existing-identities.mdx) (optional)

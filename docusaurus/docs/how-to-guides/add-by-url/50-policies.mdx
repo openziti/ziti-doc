@@ -2,6 +2,9 @@
 sidebar_label: 5. Policies by group
 ---
 
+import TabItem from '@theme/TabItem';
+import { AdminToolTabs, ThemedScreenshot } from '../../_imports';
+
 # Step 5: Grant access by IdP group
 
 ![The service policies on the controller highlighted, matching IdP groups.](/img/add-by-url/step-05-policies.svg)
@@ -19,6 +22,9 @@ granting each new user by hand.
 
 The lab's Keycloak realm has two groups, `engineering` and `hr`. Each group gets one service:
 
+<AdminToolTabs>
+<TabItem value="cli" label="ziti CLI">
+
 ```text
 ziti edge create service-policy engineering-dial Dial \
   --identity-roles '#engineering' \
@@ -28,6 +34,17 @@ ziti edge create service-policy hr-dial Dial \
   --identity-roles '#hr' \
   --service-roles '@hr-portal'
 ```
+
+</TabItem>
+<TabItem value="zac" label="ZAC">
+
+Under **Policies > Service Policies**, add a Dial policy for each group: `engineering-dial` for `#engineering` and
+`@eng-wiki`, and `hr-dial` for `#hr` and `@hr-portal`:
+
+<ThemedScreenshot src="/img/add-by-url/zac-dial-policy.png" width={500} alt="The engineering-dial service policy in ZAC: type Dial, service @eng-wiki, identity attribute #engineering."/>
+
+</TabItem>
+</AdminToolTabs>
 
 ## Done when
 

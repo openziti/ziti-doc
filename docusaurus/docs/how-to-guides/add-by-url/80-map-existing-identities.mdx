@@ -3,6 +3,9 @@ pagination_next: null
 sidebar_label: 8. Map existing identities
 ---
 
+import TabItem from '@theme/TabItem';
+import { AdminToolTabs, ThemedScreenshot } from '../../_imports';
+
 # Step 8 (optional): Map existing identities instead
 
 ![An identity the administrator created highlighted, matched to the IdP sign-in by external ID.](/img/add-by-url/step-08-map-existing-identities.svg)
@@ -14,6 +17,9 @@ the signer reads, which is `email` here, and its auth policy has to allow ext-jw
 how that match works.
 
 This step maps `carol`, who has no IdP group, to an identity the administrator creates.
+
+<AdminToolTabs>
+<TabItem value="cli" label="ziti CLI">
 
 1. Turn off auto enrollment on the signer from step 3:
 
@@ -31,6 +37,19 @@ This step maps `carol`, who has no IdP group, to an identity the administrator c
      --auth-policy acme-users \
      --role-attributes engineering
    ```
+
+</TabItem>
+<TabItem value="zac" label="ZAC">
+
+1. Under **Authentication > JWT Signers**, open `acme-idp` and turn off **Auto-Enroll to Cert** and
+   **Auto-Enroll to Token**.
+2. Under **Identities**, add `carol` with the `engineering` attribute, the `acme-users` auth policy, and the
+   external ID `carol@acme.example`:
+
+   <ThemedScreenshot src="/img/add-by-url/zac-carol.png" width={500} alt="The carol identity form in ZAC: engineering attribute, acme-users auth policy, external ID carol@acme.example."/>
+
+</TabItem>
+</AdminToolTabs>
 
 3. As `carol`, add the network by URL without `--enroll-to-mode`, then sign in:
 

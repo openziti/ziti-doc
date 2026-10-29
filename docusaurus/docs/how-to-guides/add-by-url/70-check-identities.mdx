@@ -2,6 +2,9 @@
 sidebar_label: 7. Check identities
 ---
 
+import TabItem from '@theme/TabItem';
+import { AdminToolTabs, ThemedScreenshot } from '../../_imports';
+
 # Step 7: Check the new identities
 
 ![The identities the controller created highlighted, with role attributes from IdP groups.](/img/add-by-url/step-07-check-identities.svg)
@@ -9,12 +12,25 @@ sidebar_label: 7. Check identities
 Neither `alice` nor `bob` existed in OpenZiti when the lab started. Each of them added the network by URL and signed
 in. Nobody ran `ziti edge create identity` for either of them, but the controller has both now:
 
+<AdminToolTabs>
+<TabItem value="cli" label="ziti CLI">
+
 ```text
 $ ziti edge list identities
 │ NAME  │ ATTRIBUTES  │ AUTH-POLICY │
 │ alice │ engineering │ acme-users  │
 │ bob   │ hr          │ acme-users  │
 ```
+
+</TabItem>
+<TabItem value="zac" label="ZAC">
+
+Under **Identities**, `alice` and `bob` appear with the roles from their IdP groups:
+
+<ThemedScreenshot src="/img/add-by-url/zac-identities.png" width={500} alt="The ZAC identities list: alice with the engineering role and bob with the hr role, next to acme-host and admin."/>
+
+</TabItem>
+</AdminToolTabs>
 
 The policy advisor shows which services each identity is allowed to dial or bind:
 

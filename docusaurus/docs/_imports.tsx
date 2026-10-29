@@ -32,6 +32,8 @@ export { default as TunHelmChartReadme } from '@openziti_remotes/helm-charts/cha
 // components: use @openziti so they import properly in both standalone and unified-doc builds
 export { default as MarkdownWithoutH1 } from '@openziti/src/components/MarkdownWithoutH1';
 export { default as Highlight } from '@openziti/src/components/OpenZitiHighlight';
+export { default as AdminToolTabs } from '@openziti/src/components/AdminToolTabs';
+export { ThemedScreenshot } from '@netfoundry/docusaurus-theme/ui';
 
 // guarded wrappers to pinpoint failures during build
 export const _verifyPartials = () => (
