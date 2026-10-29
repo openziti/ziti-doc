@@ -35,128 +35,132 @@ The lab realm is `acme`, with two groups and three users. `alice` is in `enginee
 `carol` is in no group. `carol` will be used in step 8, where the administrator creates her identity by hand. Each
 password is `<user>-demo-pw`.
 
-The commands below use Keycloak's admin CLI, `kcadm.sh`, inside the container. Define a shell function for it and
-sign in as the Keycloak admin:
+The commands below use Keycloak's admin CLI, `kcadm.sh`, inside the container.
 
-```text
-kcadm() { docker exec kc-acme /opt/keycloak/bin/kcadm.sh "$@"; }
+1. Define a shell function for `kcadm.sh` and sign in as the Keycloak admin:
 
-kcadm config credentials \
-  --server http://localhost:8080 \
-  --realm master \
-  --user admin \
-  --password admin-demo-pw
-```
+   ```text
+   kcadm() { docker exec kc-acme /opt/keycloak/bin/kcadm.sh "$@"; }
 
-Create the realm and the two groups. `-i` prints the new object's ID, which the group membership commands need:
+   kcadm config credentials \
+     --server http://localhost:8080 \
+     --realm master \
+     --user admin \
+     --password admin-demo-pw
+   ```
 
-```text
-kcadm create realms \
-  -s realm=acme \
-  -s enabled=true
+2. Create the realm and the two groups. `-i` prints the new object's ID, which the group membership commands need:
 
-ENG=$(kcadm create groups -r acme -i -s name=engineering)
-HR=$(kcadm create groups -r acme -i -s name=hr)
-```
+   ```text
+   kcadm create realms \
+     -s realm=acme \
+     -s enabled=true
 
-Create `alice` and put her in `engineering`:
+   ENG=$(kcadm create groups -r acme -i -s name=engineering)
+   HR=$(kcadm create groups -r acme -i -s name=hr)
+   ```
 
-```text
-ALICE=$(kcadm create users -r acme -i \
-  -s username=alice \
-  -s enabled=true \
-  -s email=alice@acme.example \
-  -s emailVerified=true \
-  -s firstName=Alice \
-  -s lastName=Acme)
+3. Create `alice` and put her in `engineering`:
 
-kcadm set-password -r acme \
-  --username alice \
-  --new-password alice-demo-pw
+   ```text
+   ALICE=$(kcadm create users -r acme -i \
+     -s username=alice \
+     -s enabled=true \
+     -s email=alice@acme.example \
+     -s emailVerified=true \
+     -s firstName=Alice \
+     -s lastName=Acme)
 
-kcadm update users/$ALICE/groups/$ENG -r acme -n \
-  -s realm=acme \
-  -s userId=$ALICE \
-  -s groupId=$ENG
-```
+   kcadm set-password -r acme \
+     --username alice \
+     --new-password alice-demo-pw
 
-Create `bob` and put him in `hr`:
+   kcadm update users/$ALICE/groups/$ENG -r acme -n \
+     -s realm=acme \
+     -s userId=$ALICE \
+     -s groupId=$ENG
+   ```
 
-```text
-BOB=$(kcadm create users -r acme -i \
-  -s username=bob \
-  -s enabled=true \
-  -s email=bob@acme.example \
-  -s emailVerified=true \
-  -s firstName=Bob \
-  -s lastName=Acme)
+4. Create `bob` and put him in `hr`:
 
-kcadm set-password -r acme \
-  --username bob \
-  --new-password bob-demo-pw
+   ```text
+   BOB=$(kcadm create users -r acme -i \
+     -s username=bob \
+     -s enabled=true \
+     -s email=bob@acme.example \
+     -s emailVerified=true \
+     -s firstName=Bob \
+     -s lastName=Acme)
 
-kcadm update users/$BOB/groups/$HR -r acme -n \
-  -s realm=acme \
-  -s userId=$BOB \
-  -s groupId=$HR
-```
+   kcadm set-password -r acme \
+     --username bob \
+     --new-password bob-demo-pw
 
-Create `carol` with no group:
+   kcadm update users/$BOB/groups/$HR -r acme -n \
+     -s realm=acme \
+     -s userId=$BOB \
+     -s groupId=$HR
+   ```
 
-```text
-kcadm create users -r acme \
-  -s username=carol \
-  -s enabled=true \
-  -s email=carol@acme.example \
-  -s emailVerified=true \
-  -s firstName=Carol \
-  -s lastName=Acme
+5. Create `carol` with no group:
 
-kcadm set-password -r acme \
-  --username carol \
-  --new-password carol-demo-pw
-```
+   ```text
+   kcadm create users -r acme \
+     -s username=carol \
+     -s enabled=true \
+     -s email=carol@acme.example \
+     -s emailVerified=true \
+     -s firstName=Carol \
+     -s lastName=Acme
+
+   kcadm set-password -r acme \
+     --username carol \
+     --new-password carol-demo-pw
+   ```
 
 ## Create the client
 
-The tunnelers sign in through `openziti`, a public client with PKCE and the tunneler callback URL:
+The tunnelers sign in through `openziti`, a public client with PKCE and the tunneler callback URL. The client has two
+mappers that put the audience and the user's groups in the token.
 
-```text
-CID=$(kcadm create clients -r acme -i \
-  -s clientId=openziti \
-  -s publicClient=true \
-  -s standardFlowEnabled=true \
-  -s directAccessGrantsEnabled=false \
-  -s 'redirectUris=["http://localhost:20314/auth/callback"]' \
-  -s 'attributes={"pkce.code.challenge.method":"S256"}')
-```
+1. Create the `openziti` client:
 
-The client has two mappers. An **Audience** mapper adds `openziti` to the access token:
+   ```text
+   CID=$(kcadm create clients -r acme -i \
+     -s clientId=openziti \
+     -s publicClient=true \
+     -s standardFlowEnabled=true \
+     -s directAccessGrantsEnabled=false \
+     -s 'redirectUris=["http://localhost:20314/auth/callback"]' \
+     -s 'attributes={"pkce.code.challenge.method":"S256"}')
+   ```
 
-```text
-kcadm create clients/$CID/protocol-mappers/models -r acme \
-  -s name=openziti-audience \
-  -s protocol=openid-connect \
-  -s protocolMapper=oidc-audience-mapper \
-  -s 'config."included.client.audience"=openziti' \
-  -s 'config."access.token.claim"=true' \
-  -s 'config."id.token.claim"=false'
-```
+2. Add an **Audience** mapper that adds `openziti` to the access token:
 
-A **Group Membership** mapper named `groups`, with **Full group path** turned off, sends `engineering` instead of
-`/engineering`:
+   ```text
+   kcadm create clients/$CID/protocol-mappers/models -r acme \
+     -s name=openziti-audience \
+     -s protocol=openid-connect \
+     -s protocolMapper=oidc-audience-mapper \
+     -s 'config."included.client.audience"=openziti' \
+     -s 'config."access.token.claim"=true' \
+     -s 'config."id.token.claim"=false'
+   ```
 
-```text
-kcadm create clients/$CID/protocol-mappers/models -r acme \
-  -s name=groups \
-  -s protocol=openid-connect \
-  -s protocolMapper=oidc-group-membership-mapper \
-  -s 'config."claim.name"=groups' \
-  -s 'config."full.path"=false' \
-  -s 'config."access.token.claim"=true' \
-  -s 'config."id.token.claim"=true' \
-  -s 'config."userinfo.token.claim"=true'
-```
+3. Add a **Group Membership** mapper named `groups`, with **Full group path** turned off, so the token carries
+   `engineering` instead of `/engineering`:
+
+   ```text
+   kcadm create clients/$CID/protocol-mappers/models -r acme \
+     -s name=groups \
+     -s protocol=openid-connect \
+     -s protocolMapper=oidc-group-membership-mapper \
+     -s 'config."claim.name"=groups' \
+     -s 'config."full.path"=false' \
+     -s 'config."access.token.claim"=true' \
+     -s 'config."id.token.claim"=true' \
+     -s 'config."userinfo.token.claim"=true'
+   ```
 
 ## Done when
 
