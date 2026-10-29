@@ -7,7 +7,7 @@ A=/work; mkdir -p "$A/users"; cd "$A"
 # the SDK binds its OIDC callback to [::1] only; see bind6.c
 [[ $(cat /proc/sys/net/ipv6/conf/lo/disable_ipv6) == 1 ]] && export LD_PRELOAD=/opt/ziti/lib/bind6.so
 u=$1 mode=${2:-token}
-CTRL=https://addbyurl.zititv.demo.openziti.org:9580
+CTRL=$CTRL_URL
 URL_RE="https://[^ '\"]*openid-connect/auth\?[^ '\"]*"
 rm -f "users/$u.json"
 if [[ $mode == none ]]; then

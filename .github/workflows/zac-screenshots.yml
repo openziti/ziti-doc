@@ -1,11 +1,16 @@
 name: zac-screenshots
 
-# Regenerates the add-by-url lab's ZAC screenshots (light and dark) and uploads them as an artifact. All logic lives in
+# Regenerates a doc flow's ZAC screenshots (light and dark) and uploads them as an artifact. All logic lives in
 # docusaurus/scripts/zac-screenshots/capture.ps1 so it runs the same locally; this workflow only checks out the code
 # and invokes it.
 
 on:
   workflow_dispatch:
+    inputs:
+      flow:
+        description: Flow under docusaurus/scripts/zac-screenshots/flows
+        required: true
+        default: add-by-url
 
 jobs:
   capture:
@@ -16,9 +21,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Capture
         shell: pwsh
-        run: ./docusaurus/scripts/zac-screenshots/capture.ps1 -Runtime docker -Out "$env:RUNNER_TEMP/zac-screenshots"
+        env:
+          FLOW: ${{ inputs.flow }}
+        run: ./docusaurus/scripts/zac-screenshots/capture.ps1 -Flow $env:FLOW -Runtime docker -Out "$env:RUNNER_TEMP/zac-screenshots"
       - uses: actions/upload-artifact@v4
         with:
-          name: zac-screenshots
+          name: zac-screenshots-${{ inputs.flow }}
           path: ${{ runner.temp }}/zac-screenshots/*.png
           if-no-files-found: error
