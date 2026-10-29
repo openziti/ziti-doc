@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HR Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --a1: #F4044D; --a2: #ff6f98; --other: #0068F9; --text: #ffffff; --muted: #a9b1d6; --dim: #5b6390; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    font: 22px/1.45 "Segoe UI", "Inter", system-ui, -apple-system, sans-serif; color: var(--text);
+    background:
+      radial-gradient(900px 700px at 8% 0%, color-mix(in srgb, var(--a1) 45%, transparent), transparent 70%),
+      radial-gradient(900px 800px at 100% 100%, color-mix(in srgb, var(--other) 22%, transparent), transparent 70%),
+      radial-gradient(circle at 2px 2px, rgba(255,255,255,.06) 1.4px, transparent 0) 0 0 / 32px 32px,
+      #05070f;
+    background-attachment: fixed;
+    padding: 36px 90px 40px;
+  }
+  .mono { font-family: "Cascadia Code", Consolas, Menlo, monospace; }
+  .glass {
+    background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+    border: 1.5px solid color-mix(in srgb, var(--a2) 55%, transparent); border-radius: 28px;
+  }
+  .rise { opacity: 0; animation: rise .7s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+  .ziti { display: flex; align-items: center; gap: 16px; padding: 14px 26px; border-radius: 999px; font-size: 20px;
+          border-color: transparent; background:
+            linear-gradient(#0b0f1f, #0b0f1f) padding-box,
+            linear-gradient(90deg, #0068F9, #F4044D) border-box; }
+  .ziti .dot { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+               background: linear-gradient(135deg, #0068F9, #F4044D); box-shadow: 0 0 22px rgba(244,4,77,.45); }
+  .ziti b { font-weight: 700; }
+  .ziti .host { margin-left: auto; color: var(--muted); }
+
+  header { margin: 64px 0 40px; }
+  .kicker { font-size: 24px; font-weight: 800; letter-spacing: .5em; text-transform: uppercase;
+            background: linear-gradient(90deg, var(--a2), var(--a1)); -webkit-background-clip: text; background-clip: text;
+            color: transparent; }
+  h1 { margin: 8px 0 0; font-size: 92px; line-height: 1.05; font-weight: 800; letter-spacing: -.01em; }
+  .tagline { margin: 14px 0 0; color: var(--muted); font-size: 28px; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .stat { padding: 30px 34px; position: relative; overflow: hidden; }
+  .stat::after { content: ""; position: absolute; right: -60px; top: -60px; width: 180px; height: 180px; border-radius: 50%;
+                 background: radial-gradient(circle, color-mix(in srgb, var(--a1) 45%, transparent), transparent 70%); }
+  .label { font-size: 16px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--a2); }
+  .big { margin-top: 10px; font-size: 64px; font-weight: 800; line-height: 1; }
+  .sub { margin-top: 10px; color: var(--muted); }
+
+  .wide { margin-top: 30px; padding: 26px 34px; }
+  .row { display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 20px; padding: 14px 0;
+         border-top: 1px solid rgba(255,255,255,.07); }
+  .row:first-of-type { border-top: 0; }
+  .icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-weight: 800;
+          background: color-mix(in srgb, var(--a1) 22%, transparent); color: var(--a2); font-size: 24px; }
+  .row .what { font-weight: 600; }
+  .row .meta { color: var(--muted); font-size: 18px; }
+  .row .when { color: var(--dim); font-size: 18px; }
+  .pill { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 16px; font-weight: 700;
+          background: color-mix(in srgb, var(--a1) 22%, transparent); color: var(--a2); }
+
+  footer { margin-top: 28px; color: var(--dim); font-size: 17px; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<div class="ziti glass rise">
+  <span class="dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"
+    stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="11" width="15" height="10" rx="2.5"/>
+    <path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+  <span><b>Reached over OpenZiti.</b> This server has no open ports.</span>
+  <span class="host mono">served by acme-hr-portal</span>
+</div>
+
+<header class="rise" style="animation-delay:.15s">
+  <div class="kicker">Acme · People</div>
+  <h1>HR Portal</h1>
+  <p class="tagline">Payroll, time off and benefits.</p>
+</header>
+
+<section class="stats">
+  <div class="stat glass rise" style="animation-delay:0.30s"><div class="label">Next payroll</div><div class="big">Nov 14</div><div class="sub">Direct deposit</div></div>
+  <div class="stat glass rise" style="animation-delay:0.45s"><div class="label">Time-off requests</div><div class="big">5</div><div class="sub">Waiting for approval</div></div>
+  <div class="stat glass rise" style="animation-delay:0.60s"><div class="label">Open enrollment</div><div class="big">Nov 1–30</div><div class="sub">Two new dental plans</div></div>
+</section>
+<section class="wide glass rise" style="animation-delay:.75s">
+  <div class="label">Announcements</div>
+  <div class="row"><div class="icon">H</div><div><div class="what">Holiday calendar for 2027</div><div class="meta">Published</div></div><div class="when">today</div></div>
+  <div class="row"><div class="icon">B</div><div><div class="what">Benefits fair</div><div class="meta">Nov 6, main office and online</div></div><div class="when">2 days ago</div></div>
+  <div class="row"><div class="icon">W</div><div><div class="what">Welcome our new hires</div><div class="meta">Four people start Monday</div></div><div class="when">last week</div></div>
+</section>
+
+<footer class="rise" style="animation-delay:.9s"><span>Acme Corp internal</span><span>hr-portal</span></footer>
+</body>
+</html>
