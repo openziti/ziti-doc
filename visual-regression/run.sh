@@ -133,6 +133,14 @@ publish_baselines() {
   echo ">> Baselines published"
 }
 
+# After a failed comparison: build diff-view/index.html (changed bands only) and, in CI, the job summary. Runs on the
+# host, which is where GITHUB_STEP_SUMMARY points; the --docker inner run skips it.
+report_diffs() {
+  [[ -n "${VRT_IN_DOCKER:-}" || ! -d "$VR_DIR/test-results" ]] && return 0
+  echo ">> Building the diff view"
+  node "$VR_DIR/diff-view.mjs" "$VR_DIR/test-results" --no-open || true
+}
+
 # Derive the pinned Playwright image from the dependency version so the browser binaries
 # in the container match the @playwright/test version we install.
 PW_VERSION="$(grep -oE '"@playwright/test":[[:space:]]*"[0-9.]+"' "$VR_DIR/package.json" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')"
@@ -163,11 +171,13 @@ if [[ "$USE_DOCKER" == "1" ]]; then
   host_mount="${MOUNT_PATH:-$REPO_ROOT}"
   # No -t: this must run in non-tty contexts (background shells, CI). corepack enable
   # provisions the yarn version pinned in docusaurus/package.json; surface its errors.
+  rc=0
   docker run --rm \
     -v "${host_mount}:/work" -w /work \
-    -e CI="${CI:-}" \
+    -e CI="${CI:-}" -e VRT_IN_DOCKER=1 \
     "$IMAGE" \
-    bash -lc "corepack enable && /work/visual-regression/run.sh ${inner[*]}"
+    bash -lc "corepack enable && /work/visual-regression/run.sh ${inner[*]}" || rc=$?
+  if [[ "$rc" != "0" ]]; then report_diffs; exit "$rc"; fi
   [[ "$PUBLISH_BASELINES" == "1" ]] && publish_baselines
   exit 0
 fi
@@ -203,7 +213,7 @@ if [[ -n "$BASE_URL" ]]; then
   export VRT_BASE_URL="$BASE_URL"
   echo ">> Testing already-running site at $BASE_URL"
   install_vr_deps
-  run_playwright
+  run_playwright || { report_diffs; exit 1; }
   [[ "$PUBLISH_BASELINES" == "1" ]] && publish_baselines
   echo ">> Done. HTML report: $VR_DIR/playwright-report/index.html"
   exit 0
@@ -249,6 +259,6 @@ for i in $(seq 1 60); do
 done
 
 install_vr_deps
-run_playwright
+run_playwright || { report_diffs; exit 1; }
 [[ "$PUBLISH_BASELINES" == "1" ]] && publish_baselines
 echo ">> Done. HTML report: $VR_DIR/playwright-report/index.html"

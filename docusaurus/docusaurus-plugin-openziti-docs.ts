@@ -97,6 +97,7 @@ export function openzitiRedirects(routeBasePath: string = 'docs/openziti'): Plug
                 { from: `${base}/how-to-guides/external-auth/identity-providers`,     to: `${base}/how-to-guides/identity-providers/` },
                 { from: `${base}/how-to-guides/external-auth/tunnelers`,              to: `${base}/how-to-guides/tunnelers/` },
                 { from: `${base}/how-to-guides/external-auth/zac`,                    to: `${base}/how-to-guides/zac` },
+                { from: `${base}/how-to-guides/deployments/console`,                  to: `${base}/how-to-guides/deployments/public-certificate` },
                 { from: `${base}/how-to-guides/external-auth/ziti-cli`,               to: `${base}/reference/oidc-reference` },
                 // pki-troubleshooting moved from /support/ to /support/troubleshooting/
                 { from: `${base}/support/pki-troubleshooting`,                         to: `${base}/support/troubleshooting/pki-troubleshooting/` },

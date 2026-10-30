@@ -111,13 +111,26 @@ per-assertion in the spec.
 
 ## Reviewing failures
 
-On a mismatch, Playwright writes the expected/actual/diff images and an HTML report:
+Full-page screenshots run to 9,000+ pixels tall, and a change is usually a small band of one. [`diff-view.mjs`](./diff-view.mjs)
+finds the changed bands and builds one self-contained HTML page (images inlined) that shows only those bands, expected
+| actual | diff side by side, with a summary table on top. It notes when the page height changed, since everything below
+the first change then shows as shifted.
 
 ```bash
-npx playwright show-report      # run from this directory
+# from docusaurus/ -- needs gh; downloads the run's report into visual-regression/.runs/<run id>/ and opens the page
+yarn view:visual-regression --pr 1363          # the PR's latest failed run
+yarn view:visual-regression --run 40925162807  # a run by ID
+yarn view:visual-regression                    # a local run's visual-regression/test-results
+
+# or call it directly; --no-open just writes the page, --out DIR puts it elsewhere
+node visual-regression/diff-view.mjs --pr 1363 --no-open
 ```
 
-In CI the report and diffs are uploaded as the `visual-regression-report` artifact.
+It has no dependencies, so it runs without `yarn install`. Playwright's own report, with a slider per image, is still
+there too: `npx playwright show-report` from this directory, or from `.runs/<run id>/playwright-report`.
+
+In CI, a failed verify writes the summary table to the job summary, and the `visual-regression-report` artifact carries
+the page as `diff-view/index.html` next to the Playwright report and the raw images.
 
 ### Intentional design changes
 
