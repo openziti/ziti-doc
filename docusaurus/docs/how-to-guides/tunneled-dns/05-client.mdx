@@ -1,13 +1,20 @@
+import TabItem from '@theme/TabItem';
+import { AdminToolTabs } from '../../_imports';
+
 # Step 5: Enroll a client
 
 ![The client's tunneler highlighted, dialing out to the edge router.](./img/step-05-client.svg)
 
-Every client gets its own identity, tagged `dnslab-clients` so the Dial policy from step 4 picks it up. One identity
-per device, never shared. That way you can see each one in ZAC and revoke one without touching the others.
+Every client gets its own identity, tagged `dnslab-clients` so the Dial policy from [step 4](./04-policies.mdx) picks
+it up. One identity per device, never shared. That way you can see each one in ZAC and revoke one without touching the
+others.
 
 ## Create the identity
 
 One per test client:
+
+<AdminToolTabs>
+<TabItem value="cli" label="ziti CLI">
 
 ```
 ziti edge create identity dnslab-client-win     --role-attributes dnslab-clients -o dnslab-client-win.jwt
@@ -15,28 +22,35 @@ ziti edge create identity dnslab-client-linux   --role-attributes dnslab-clients
 ziti edge create identity dnslab-client-android --role-attributes dnslab-clients -o dnslab-client-android.jwt
 ```
 
-In ZAC: Identities -> add, attribute `dnslab-clients`, then download the JWT or show its QR code (handy for the
-phone).
+</TabItem>
+<TabItem value="zac" label="ZAC">
+
+**Identities** -> click **+**, **attribute** `dnslab-clients`, then download the JWT or show its QR code (handy for
+the phone).
+
+</TabItem>
+</AdminToolTabs>
 
 ## Install the tunneler and enroll
 
-**Windows**: install Ziti Desktop Edge for Windows. Tray icon -> Add Identity -> pick the `.jwt`.
+**Windows**: install [Ziti Desktop Edge for Windows](../tunnelers/02-windows/index.md). Tray icon -> Add Identity ->
+pick the `.jwt`.
 
-**Linux**: install `ziti-edge-tunnel` from the OpenZiti package repo, then:
+**Linux**: install `ziti-edge-tunnel` from the [OpenZiti package repo](../tunnelers/60-linux/index.mdx), then:
 
 ```
 sudo ziti-edge-tunnel add --jwt "$(< ./dnslab-client-linux.jwt)" --identity dnslab-client-linux
 ```
 
-If `add` fails with a socket error, see the troubleshooting in step 2.
+If `add` fails with a socket error, see the troubleshooting in [step 2](./02-dns-server-identity.mdx#if-add-fails).
 
-**Android**: install Ziti Mobile Edge from the Play Store. Add Identity -> scan the QR code from ZAC, or open the
-`.jwt` file.
+**Android**: install [Ziti Mobile Edge](../tunnelers/03-android.md) from the Play Store. Add Identity -> scan the QR
+code from ZAC, or open the `.jwt` file.
 
 ## Check it works
 
-Stay on your LAN for these. Testing from off the LAN comes in step 7. The OS DNS settings don't change until step 6,
-so every check here names the Pi-hole explicitly.
+Stay on your LAN for these. Testing from off the LAN comes in [step 7](./07-off-lan-test.md). The OS DNS settings
+don't change until [step 6](./06-client-dns.md), so every check here names the Pi-hole explicitly.
 
 ### 1. The controller says the client may dial the service
 
@@ -77,7 +91,7 @@ Windows:
 Find-NetRoute -RemoteIPAddress 192.168.1.53 | Select-Object InterfaceAlias
 ```
 
-Expect the Ziti adapter, not Wi-Fi or Ethernet.
+Expect the OpenZiti adapter, not Wi-Fi or Ethernet.
 
 ### 4. Pi-hole answers over the overlay
 
@@ -120,6 +134,6 @@ query. If you see the client's LAN IP instead, the query skipped the overlay. Go
 
 - [ ] policy-advisor says `OKAY` for each client
 - [ ] Each client lists `dnslab-dns`
-- [ ] Route to `192.168.1.53` goes through the Ziti interface
+- [ ] Route to `192.168.1.53` goes through the OpenZiti interface
 - [ ] `nslookup doubleclick.net 192.168.1.53` returns `0.0.0.0`
 - [ ] Pi-hole logs that query from `127.0.0.1`

@@ -33,7 +33,7 @@ This part covers your remote backup servers.
   "$dst_hostname"}` on the intercept, one service covers many hosts. A client dials `<identity-name>.zititv` and
   reaches the host enrolled under that name. To add a backup server, enroll an identity with the bind attribute. The
   service and policies stay the same.
-- **Wildcard intercepts with `forwardAddress`.** The same technique as step 9, applied to `*.zititv`.
+- **Wildcard intercepts with `forwardAddress`.** The same technique as [step 9](./09-wildcard-web.md), applied to `*.zititv`.
 
 ## Part 4: Dark management API
 
@@ -42,6 +42,6 @@ This part covers your remote backup servers.
 This part covers keeping the admin console (ZAC) private.
 
 The controller's `edge-management`, `fabric`, and `zac` bindings move to a web listener that isn't exposed to the
-internet. The management API and ZAC are then published as a Ziti service that only admin identities may dial. Once
+internet. The management API and ZAC are then published as an OpenZiti service that only admin identities may dial. Once
 it's done, ZAC can't be reached from the internet at all. You need an enrolled admin identity with its tunneler
 running to open it.

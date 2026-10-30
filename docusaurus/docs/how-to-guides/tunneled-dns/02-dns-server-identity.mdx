@@ -1,3 +1,6 @@
+import TabItem from '@theme/TabItem';
+import { AdminToolTabs } from '../../_imports';
+
 # Step 2: Put the DNS server on the overlay
 
 ![The Pi-hole host's tunneler highlighted, dialing out to the edge router.](./img/step-02-dns-server-identity.svg)
@@ -9,16 +12,25 @@ install is fine.
 
 ## Create the identity
 
-In ZAC: Identities -> add -> name `dnslab-pihole`, attribute `dnslab-hosts`, type Default. Download the JWT.
-
-Or with the CLI:
+<AdminToolTabs>
+<TabItem value="cli" label="ziti CLI">
 
 ```
 ziti edge create identity dnslab-pihole --role-attributes dnslab-hosts -o dnslab-pihole.jwt
 ```
 
+</TabItem>
+<TabItem value="zac" label="ZAC">
+
+**Identities** -> click **+** -> **name** `dnslab-pihole`, **attribute** `dnslab-hosts`, **type** **Default**. Download
+the JWT.
+
+</TabItem>
+</AdminToolTabs>
+
 The `dnslab-hosts` attribute is how policies will refer to "the things that host lab services". Policies match on
-attributes (`#dnslab-hosts`), not names, so adding a second host later is just tagging it.
+[attributes](../../learn/core-concepts/security/authorization/policies/overview.mdx#roles-and-role-attributes)
+(`#dnslab-hosts`), not names, so adding a second host later is just tagging it.
 
 The JWT is single-use and expires (90 minutes on this network). If it expires, re-create the enrollment in ZAC or with
 `ziti edge create enrollment ott`.
@@ -41,7 +53,7 @@ sudo ziti-edge-tunnel tunnel_status | jq -r '.Data.Identities[].Name'
 
 `dnslab-pihole` should be in the list, next to any identities you already had.
 
-On the controller (or ZAC -> Identities, look at the online indicator):
+On the controller (or ZAC -> **Identities**, look at the online indicator):
 
 ```
 ziti edge list identities 'name="dnslab-pihole"'

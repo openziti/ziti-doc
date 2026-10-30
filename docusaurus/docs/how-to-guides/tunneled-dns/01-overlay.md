@@ -17,7 +17,7 @@ be, so in practice that means a public address or a port forward.
 ## If you're building your own
 
 The quickest path is the quickstart on a Linux box with a public IP. It stands up a controller and one edge router.
-See the OpenZiti docs quickstart for the current command for your platform.
+See the [OpenZiti quickstarts](../../get-started/network/index.md) for the current command for your platform.
 
 ## Check it works
 

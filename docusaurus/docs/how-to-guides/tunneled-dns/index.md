@@ -30,11 +30,11 @@ and the home network makes outbound connections only. Nothing listens on your pu
 3. A tunneler on the Pi-hole box hosts the service. It hands each query to the Pi-hole on `127.0.0.1:53`.
 4. The answer comes back the same way.
 
-Once that works, step 9 uses the same tunneler to reach your LAN web apps by name through one wildcard service.
+Once that works, [step 9](./09-wildcard-web.md) uses the same tunneler to reach your LAN web apps by name through one wildcard service.
 
 ## What you need
 
-- An OpenZiti network with a controller and a public edge router. Step 1 checks it.
+- An OpenZiti network with a controller and a public edge router. [Step 1](./01-overlay.md) checks it.
 - A DNS server on your LAN. Its Linux host also runs `ziti-edge-tunnel`.
 - At least one client: Windows, Linux, or Android.
 - A network that can't reach your LAN, for the off-LAN tests. A phone hotspot works.
@@ -44,10 +44,10 @@ Everything the lab creates is named `dnslab-*`, so it's easy to find and delete 
 ## Steps
 
 1. [Set up your overlay network](./01-overlay.md)
-2. [Put the DNS server on the overlay](./02-dns-server-identity.md)
-3. [Create the DNS service](./03-dns-service.md)
-4. [Grant access with policies](./04-policies.md)
-5. [Enroll a client](./05-client.md)
+2. [Put the DNS server on the overlay](./02-dns-server-identity.mdx)
+3. [Create the DNS service](./03-dns-service.mdx)
+4. [Grant access with policies](./04-policies.mdx)
+5. [Enroll a client](./05-client.mdx)
 6. [Point the client's DNS at the Pi-hole](./06-client-dns.md)
 7. [Test from off your LAN](./07-off-lan-test.md)
 8. [Cold start without a fallback resolver](./08-cold-start.md)

@@ -2,11 +2,11 @@
 
 ![The client's hosts file highlighted, resolving the controller and router names.](./img/step-08-cold-start.svg)
 
-Step 6 kept `1.1.1.1` as a secondary so the tunneler can find the controller and routers before the overlay is up.
+[Step 6](./06-client-dns.md) kept `1.1.1.1` as a secondary so the tunneler can find the controller and routers before the overlay is up.
 This step removes the secondary and shows why you need it. Then it fixes the problem a stricter way: put the
 controller and router names in the hosts file, and send every other lookup to the Pi-hole.
 
-Stay off your LAN for this step (same hotspot or VLAN as step 7).
+Stay off your LAN for this step (same hotspot or VLAN as [step 7](./07-off-lan-test.md)).
 
 ## 1. Find the names the tunneler resolves at startup
 
@@ -54,7 +54,7 @@ sudo resolvectl flush-caches
 
 ## 3. Cold-start the tunneler and watch it fail
 
-Turning Ziti off and on in the app isn't enough, because the running service can reuse addresses it already looked
+Turning OpenZiti off and on in the app isn't enough, because the running service can reuse addresses it already looked
 up. Restart the service so it starts from nothing:
 
 ```
@@ -98,7 +98,7 @@ before it fails anyway.
 
 ## 4. Fix it with the hosts file
 
-Add the IPs from part 1. Windows, in an admin editor (`notepad` from the admin PowerShell):
+Add the IPs from [part 1](#1-find-the-names-the-tunneler-resolves-at-startup). Windows, in an admin editor (`notepad` from the admin PowerShell):
 
 ```
 # ADMIN PowerShell
@@ -113,7 +113,7 @@ Add one line per name. Here the controller and the router share a name, so one l
 203.0.113.10  ec2-203-0-113-10.us-east-2.compute.amazonaws.com
 ```
 
-Then restart the tunneler again (part 3's commands). This time it connects, because the OS answers those names from
+Then restart the tunneler again (the commands in [part 3](#3-cold-start-the-tunneler-and-watch-it-fail)). This time it connects, because the OS answers those names from
 the hosts file without asking any DNS server. On Linux, the log shows `authorization successful` and
 `router edge-router-1 connected` within a couple of seconds.
 
@@ -150,7 +150,7 @@ phone, keep the fallback.
 
 ## Undo
 
-Put the step 6 setting back and remove the hosts lines if you're not keeping them:
+Put the [step 6](./06-client-dns.md) setting back and remove the hosts lines if you're not keeping them:
 
 ```
 # ADMIN PowerShell

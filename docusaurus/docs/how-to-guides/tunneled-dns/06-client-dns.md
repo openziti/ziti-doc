@@ -2,7 +2,7 @@
 
 ![The client's OS DNS setting highlighted, pointing at 192.168.1.53.](./img/step-06-client-dns.svg)
 
-Step 5 proved the overlay path to `192.168.1.53:53` works. Now make the OS use it for every lookup.
+[Step 5](./05-client.mdx) proved the overlay path to `192.168.1.53:53` works. Now make the OS use it for every lookup.
 
 ## The fallback trade-off
 
@@ -16,7 +16,7 @@ the secondary anyway, and those answers aren't filtered. So expect the odd ad to
 The stricter option is to drop the secondary and put the controller and router names in the client's hosts file
 instead. Then every lookup goes to the Pi-hole and the tunneler can still start. The catch: if those IPs ever change,
 the client can't connect until you update the hosts file. Do the fallback version first and try the strict one in
-step 8.
+[step 8](./08-cold-start.md).
 
 ## Windows
 
@@ -140,7 +140,7 @@ On mobile data, the phone's own lookups are **not** filtered. Tested with Ziti M
   Pi-hole works.
 - `ping -c1 doubleclick.net` returns a real Google IP. Android's own resolver went to the carrier's DNS, not to the
   Pi-hole.
-- Intercepted names still work: `https://app1.home.lan:8443/` from step 9 loads in Chrome.
+- Intercepted names still work: `https://app1.home.lan:8443/` from [step 9](./09-wildcard-web.md) loads in Chrome.
 
 So on Android you get your intercepted services everywhere, but Pi-hole filtering only on Wi-Fi networks where you set
 the DNS by hand. Test with `ping`, not `nslookup` with no server: Termux's `nslookup` reads its own resolver file
