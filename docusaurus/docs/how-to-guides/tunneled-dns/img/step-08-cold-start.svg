@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080"
+     font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#002451"/>
+      <stop offset="55%" stop-color="#001634"/>
+      <stop offset="100%" stop-color="#000B1E"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF3E82"/>
+      <stop offset="100%" stop-color="#2F86FF"/>
+    </linearGradient>
+    <linearGradient id="cardFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A2A57" stop-opacity="0.97"/>
+      <stop offset="100%" stop-color="#041A3A" stop-opacity="0.97"/>
+    </linearGradient>
+    <linearGradient id="shellFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#062A5C" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#03183A" stop-opacity="0.7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF3E82" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#FF3E82" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#13407F" stroke-width="1" stroke-opacity="0.32"/>
+    </pattern>
+    <filter id="lift" x="-30%" y="-30%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#020609" flood-opacity="0.7"/>
+    </filter>
+    <marker id="arrowDim" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8"
+            orient="auto-start-reverse">
+      <path d="M1 1 L11 6 L1 11 z" fill="#2F5A94"/>
+    </marker>
+    <marker id="arrowPink" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8"
+            orient="auto-start-reverse">
+      <path d="M1 1 L11 6 L1 11 z" fill="#FF3E82"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  <ellipse cx="960" cy="600" rx="560" ry="460" fill="url(#glow)"/>
+
+  <!-- eyebrow + title -->
+  <text x="120" y="130" fill="#7FA6C4" font-size="28" font-weight="600" letter-spacing="7">STEP 8 · TUNNELED DNS</text>
+  <rect x="120" y="152" width="132" height="10" rx="5" fill="url(#accent)"/>
+  <text x="116" y="248" fill="#F2F8FF" font-size="76" font-weight="800" letter-spacing="-2">Cold start <tspan fill="url(#accent)">without a fallback</tspan></text>
+
+  <!-- shells -->
+  <rect x="96" y="300" width="470" height="600" rx="30" fill="url(#shellFill)" stroke="#1A4C9A" stroke-width="2"/>
+  <text x="130" y="352" fill="#7FA6C4" font-size="25" font-weight="700" letter-spacing="5">ANYWHERE</text>
+  <rect x="720" y="300" width="480" height="600" rx="30" fill="url(#shellFill)" stroke="#1A4C9A" stroke-width="2"/>
+  <text x="754" y="352" fill="#7FA6C4" font-size="25" font-weight="700" letter-spacing="5">OPENZITI OVERLAY</text>
+  <rect x="1354" y="300" width="470" height="600" rx="30" fill="url(#shellFill)" stroke="#1A4C9A" stroke-width="2"/>
+  <text x="1388" y="352" fill="#7FA6C4" font-size="25" font-weight="700" letter-spacing="5">HOME LAN</text>
+
+  <!-- client card -->
+  <g filter="url(#lift)">
+    <rect x="130" y="390" width="402" height="230" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
+  </g>
+  <circle cx="176" cy="436" r="15" fill="#FF3E82"/>
+  <text x="212" y="446" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">CLIENT</text>
+  <g font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace" font-size="22">
+    <text x="164" y="500" fill="#FFB3C8">ziti-edge-tunnel</text>
+    <text x="164" y="540" fill="#5E819C">intercepts 192.168.1.53:53</text>
+    <text x="164" y="580" fill="#FFB3C8">hosts: ctrl + router names</text>
+  </g>
+  <rect x="130" y="650" width="124" height="42" rx="21" fill="#0D2F63"/>
+  <text x="192" y="678" fill="#5E819C" font-size="21" font-weight="600" text-anchor="middle">hotspot</text>
+  <rect x="274" y="650" width="172" height="42" rx="21" fill="#0D2F63"/>
+  <text x="360" y="678" fill="#5E819C" font-size="21" font-weight="600" text-anchor="middle">hotel Wi-Fi</text>
+  <text x="130" y="760" fill="#5E819C" font-size="24" font-weight="500">Windows · Linux · Android</text>
+
+  <!-- controller card -->
+  <g filter="url(#lift)">
+    <rect x="754" y="390" width="412" height="150" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
+  </g>
+  <circle cx="800" cy="436" r="15" fill="#FF3E82"/>
+  <text x="836" y="446" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">CONTROLLER</text>
+  <text x="790" y="500" fill="#FFB3C8" font-size="21" font-weight="500">identities, services, policies</text>
+
+  <!-- edge router card -->
+  <g filter="url(#lift)">
+    <rect x="754" y="600" width="412" height="150" rx="18" fill="url(#cardFill)" stroke="#FF3E82" stroke-width="2"/>
+  </g>
+  <circle cx="800" cy="646" r="15" fill="#FF3E82"/>
+  <text x="836" y="656" fill="#FFE3EC" font-size="26" font-weight="600" letter-spacing="2">EDGE ROUTER</text>
+  <text x="790" y="710" fill="#FFB3C8" font-size="22"
+        font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">public, port 443</text>
+
+  <!-- control link -->
+  <path d="M960 546 L960 594" fill="none" stroke="#2F5A94" stroke-width="3" stroke-dasharray="8 7"
+        marker-start="url(#arrowDim)" marker-end="url(#arrowDim)"/>
+  <text x="980" y="578" fill="#4A72A8" font-size="21" font-weight="600">control</text>
+
+  <!-- pi-hole host card -->
+  <g >
+    <rect x="1388" y="390" width="402" height="280" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
+  </g>
+  <circle cx="1434" cy="436" r="15" fill="#0068F9"/>
+  <text x="1470" y="446" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">PI-HOLE HOST</text>
+  <rect x="1420" y="480" width="232" height="42" rx="21" fill="#0D2F63"
+        stroke="#1F5FC4" stroke-width="2"/>
+  <text x="1536" y="508" fill="#5E819C" font-size="21" font-weight="600" text-anchor="middle"
+        font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">ziti-edge-tunnel</text>
+  <path d="M1536 524 L1536 578" fill="none" stroke="#2F5A94" stroke-width="4" marker-end="url(#arrowDim)"/>
+  <text x="1556" y="560" fill="#4A72A8" font-size="20"
+        font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">127.0.0.1:53</text>
+  <rect x="1474" y="584" width="124" height="42" rx="21" fill="#0D2F63"/>
+  <text x="1536" y="612" fill="#A8C6DC" font-size="21" font-weight="600" text-anchor="middle">Pi-hole</text>
+
+  <!-- web apps card -->
+  <g >
+    <rect x="1388" y="710" width="402" height="150" rx="18" fill="url(#cardFill)" stroke="#1F5FC4" stroke-width="2"/>
+  </g>
+  <circle cx="1434" cy="756" r="15" fill="#0068F9"/>
+  <text x="1470" y="766" fill="#8FB0C8" font-size="26" font-weight="600" letter-spacing="2">WEB APPS</text>
+  <text x="1424" y="820" fill="#5E819C" font-size="22"
+        font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">NGINX · *.home.lan</text>
+  <path d="M1654 501 C1765 501 1765 600 1765 704" fill="none" stroke="#2F5A94" stroke-width="3"
+        stroke-dasharray="10 8" marker-end="url(#arrowDim)"/>
+  <text x="1745" y="697" fill="#4A72A8" font-size="20" text-anchor="end"
+        font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace">*.home.lan</text>
+
+  <!-- overlay flows: both ends dial out to the router -->
+  <path d="M534 560 C640 560 650 675 750 675" fill="none" stroke="#2F5A94" stroke-width="4"
+        marker-end="url(#arrowDim)"/>
+  <text x="574" y="740" fill="#4A72A8" font-size="25" font-weight="600">DNS query</text>
+  <path d="M1386 520 C1290 520 1270 675 1170 675" fill="none" stroke="#2F5A94" stroke-width="4"
+        marker-end="url(#arrowDim)"/>
+  <text x="1206" y="740" fill="#4A72A8" font-size="25" font-weight="600">dials out</text>
+
+  <!-- caption + wordmark -->
+  <text x="96" y="1006" fill="#9FBDD4" font-size="30" font-weight="500">The hosts file finds the controller and router. Every other lookup goes to Pi-hole.</text>
+  <text x="1800" y="1042" fill="#4E7391" font-size="30" font-weight="700" text-anchor="end" letter-spacing="4">OPENZITI</text>
+</svg>

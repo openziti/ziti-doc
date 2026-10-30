@@ -100,6 +100,57 @@ export async function service(page, name, address, port) {
   await save(page);
 }
 
+// The advanced service form with new configs entered in ZAC's config form, not its JSON view: ZAC 4.6 validates the
+// form fields, so a config pasted as JSON fails Create and Attach. Each config is { type, name, shot?, ...fields }:
+//   intercept.v1   protocols ['tcp', 'udp'], addresses, ports ('53')
+//   host.v1        protocol, address, port; or forwardProtocol: ['tcp', 'udp'] (the allowed protocols),
+//                  forwardAddress: 'allowed addresses', forwardPort: 'allowed port ranges'
+// `shot` takes a shot of the filled config before it is attached. Leaves the service unsaved.
+export async function serviceWithConfigs(page, name, attrs, configs) {
+  await go(page, 'services/advanced/create');
+  await ph(page, 'Name this Service').fill(name);
+  await roles(page, 'Add attributes to group Services', attrs.map((a) => `#${a}`));
+  const cfg = card(page, 'Add Configurations');
+  for (const c of configs) {
+    // the fields filled, which a shot's crop covers
+    // the FORM/JSON switch sets the right edge; host.v1's FORWARD PORT label runs past it
+    const touched = [cfg.locator('.form-field-title', { hasText: 'Config Name' }), cfg.locator('.form-header-toggle-container').first()];
+    if (c.type === 'host.v1') touched.push(cfg.locator('label[for="schema__forwardport"]').first());
+    const fill = async (sel, v) => { touched.push(cfg.locator(sel).first()); await touched.at(-1).fill(v); };
+    const checks = async (labels) => {
+      for (const l of labels) await cfg.locator('input.checkbox').nth(l === 'udp' ? 1 : 0).check();
+      touched.push(cfg.locator('input.checkbox').nth(1));
+    };
+    await cfg.locator('select.form-field-dropdown').first().selectOption(c.type);
+    await page.waitForTimeout(1000);
+    await ph(page, 'New Config Name').fill(c.name);
+    if (c.type === 'intercept.v1') {
+      await fill('input[placeholder="80 120-125 443 8080"]', c.ports);
+      await fill('#schema__addresses', c.addresses.join(', '));
+      await checks(c.protocols);
+    } else {
+      if (c.forwardProtocol) {
+        await cfg.locator('#schema__forwardprotocol').click();
+        await checks(c.forwardProtocol);
+      } else await cfg.locator('select.jsonEntry').first().selectOption(c.protocol);
+      if (!c.forwardAddress) await fill('#schema__address', c.address);
+      if (!c.forwardPort) await fill('#schema__port', String(c.port));
+      if (c.forwardAddress) {
+        await cfg.locator('#schema__forwardaddress').click();
+        await fill('#schema__allowedaddresses', c.forwardAddress);
+      }
+      if (c.forwardPort) {
+        await cfg.locator('#schema__forwardport').click();
+        await fill('#schema__allowedportranges', c.forwardPort);
+      }
+    }
+    await blur(page); await page.waitForTimeout(500);
+    if (c.shot) await shot(page, c.shot, touched);
+    await page.getByText('Create and Attach').click(); await page.waitForTimeout(2500);
+  }
+  await blur(page);
+}
+
 // fills the identity form and leaves it unsaved, so the caller can take a shot first
 export async function identity(page, name, attrs, { authPolicy, externalId } = {}) {
   await go(page, 'identities/create');
