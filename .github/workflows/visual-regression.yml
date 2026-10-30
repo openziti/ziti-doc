@@ -14,6 +14,8 @@ on:
         type: boolean
         default: false
   pull_request:
+    # Baselines track main, so only PRs into main are compared against them.
+    branches: [main]
     types: [opened, synchronize, reopened, labeled]
     paths:
       - "docusaurus/src/**"

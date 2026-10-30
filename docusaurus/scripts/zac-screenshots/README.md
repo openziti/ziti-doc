@@ -70,6 +70,22 @@ does steps 3-8 in order:
 5. `70-check-identities` and `80-map-existing-identities` take the step 7 and step 8 shots.
 6. `join.sh carol none` does the step 8 sign-in, and `verify.sh` fails the run unless all three users can dial.
 
+## The tunneled-dns flow
+
+Rebuilds the controller side of the [tunneled-dns lab](../../docs/how-to-guides/tunneled-dns/index.md), steps 2-5
+and 9. The Pi-hole, the clients and their DNS settings are not part of it. Both tabs of each page get tested:
+
+1. `setup` runs `cli.sh`, the pages' CLI tabs verbatim, then `host.sh` enrolls `dnslab-pihole` and runs it.
+   `verify.sh cli` checks the policies with the policy advisor and checks that each service has a terminator.
+2. For each theme, `pass` runs `reset.sh`, then does the same steps through ZAC with `02-dns-server-identity`,
+   `03-dns-service`, `04-policies`, `05-client` and `09-wildcard-web`.
+3. `host.sh` enrolls the JWT that ZAC downloaded, and `verify.sh zac` repeats the checks. It also fails the run unless
+   each config that ZAC stored has the same data as the one the CLI tab created.
+
+`serviceWithConfigs` in `lib/zac.mjs` fills each config with ZAC's form fields. ZAC 4.6 rejects a config pasted in
+its JSON view, because it validates the hidden form fields (`must have required property 'address'`). The pages tell
+readers to use the form for the same reason.
+
 ## Versions
 
 The ziti, ziti-edge-tunnel and ZAC versions are build args in the `Dockerfile`. The Playwright image tag there must

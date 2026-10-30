@@ -12,7 +12,7 @@ CTRL_PORT=9580 ROUTER_PORT=9590
 A=/work
 LAB=$(cd "$(dirname "$0")" && pwd)
 # keep the logs of a failed run; capture.ps1 mounts .work/logs on /logs
-trap '[[ -d /logs && -d $A ]] && cp -r "$A"/*.log "$A"/users /logs/ 2>/dev/null' EXIT
+trap '[[ -d /logs && -d $A ]] && cp -r "$A"/*.log "$A"/users /logs/ 2>/dev/null || true' EXIT
 
 certs() {
   cd /certs
@@ -49,6 +49,9 @@ network() {
   for _ in $(seq 1 60); do curl -sf "$CTRL_URL/edge/client/v1/version" >/dev/null && break; sleep 2; done
   curl -sf -o /dev/null "$CTRL_URL/zac/" || { tail -20 ctrl.log >&2; exit 1; }
   ziti edge login "localhost:$CTRL_PORT" -u admin -p admin-demo-pw -y >/dev/null
+  # reads work before the cluster elects a leader; writes fail with CLUSTER_NO_LEADER until it does
+  for _ in $(seq 1 60); do ziti edge create identity lab-ready >/dev/null 2>&1 && break; sleep 2; done
+  ziti edge delete identity lab-ready >/dev/null || { tail -20 ctrl.log >&2; exit 1; }
   echo "network: controller, router and ZAC up on $CTRL_URL"
 }
 
