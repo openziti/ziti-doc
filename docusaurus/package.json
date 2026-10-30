@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "prestart": "node scripts/load-config-builder.mjs --if-missing",
     "start": "docusaurus start",
+    "prebuild": "node scripts/load-config-builder.mjs",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -14,7 +16,8 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "stargazers:load": "node scripts/load-stargazer-data.mjs",
-    "view:visual-regression": "node ../visual-regression/diff-view.mjs"
+    "view:visual-regression": "node ../visual-regression/diff-view.mjs",
+    "config-builder:load": "node scripts/load-config-builder.mjs"
   },
   "dependencies": {
     "@algolia/client-search": "^5.56.0",

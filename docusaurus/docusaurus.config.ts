@@ -280,6 +280,7 @@ const config: Config = {
         ['@docusaurus/plugin-google-tag-manager', {id: `openziti-gtm`, containerId: 'GTM-5SF399H3'}],
         ['@docusaurus/plugin-content-pages',{id: `openziti-root-pages`, path: `src/pages`, routeBasePath: '/'}],
         ['@docusaurus/plugin-content-pages',{id: `openziti-pages`, path: `src/pages`, routeBasePath: 'openziti'}],
+        ['@docusaurus/plugin-content-pages',{id: `openziti-config-builder`, path: `src/pages/config-builder`, routeBasePath: `${docsBase}/config-builder`}],
         openzitiDocsPluginConfig(__dirname, REMARK_MAPPINGS, `docs/${openziti}`),
         [
             '@scalar/docusaurus',
