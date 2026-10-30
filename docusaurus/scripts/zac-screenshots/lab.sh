@@ -6,11 +6,14 @@
 # flows/<flow>/flow.sh sets the controller's names and defines:
 #   pass      required; runs the flow once (THEME, SHOTS and CTRL_URL are set) and fails if the result is wrong
 #   setup     optional; runs once after the network is up (extra servers the flow needs)
+# doc_cli <page.mdx>... prints those pages' CLI tabs, for a flow that tests them.
 set -euo pipefail
 D=zititv.demo.openziti.org
 CTRL_PORT=9580 ROUTER_PORT=9590
 A=/work
 LAB=$(cd "$(dirname "$0")" && pwd)
+# docusaurus/docs, mounted read-only by capture.ps1
+DOCS=/docs
 # keep the logs of a failed run; capture.ps1 mounts .work/logs on /logs
 trap '[[ -d /logs && -d $A ]] && cp -r "$A"/*.log "$A"/users /logs/ 2>/dev/null || true' EXIT
 
@@ -53,6 +56,12 @@ network() {
   for _ in $(seq 1 60); do ziti edge create identity lab-ready >/dev/null 2>&1 && break; sleep 2; done
   ziti edge delete identity lab-ready >/dev/null || { tail -20 ctrl.log >&2; exit 1; }
   echo "network: controller, router and ZAC up on $CTRL_URL"
+}
+
+# prints the code in the pages' `ziti CLI` tabs, in order, so a flow can run exactly what the docs show
+doc_cli() {
+  awk '/<TabItem value="cli"/ { tab = 1 } /<\/TabItem>/ { tab = 0 }
+       tab && /^```/ { code = !code; next } tab && code' "$@"
 }
 
 case ${1:-} in

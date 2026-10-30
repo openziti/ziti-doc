@@ -25,7 +25,7 @@ if (-not (Test-Path (Join-Path $FlowDir 'flow.sh'))) {
 }
 if ($Runtime -eq 'auto') {
   $Runtime = if ((Get-Command docker -ErrorAction SilentlyContinue) -and
-    $(docker info *> $null; $LASTEXITCODE -eq 0)) { 'docker' }
+    $(& { $PSNativeCommandUseErrorActionPreference = $false; docker info *> $null; $LASTEXITCODE -eq 0 })) { 'docker' }
   elseif (Get-Command wslc -ErrorAction SilentlyContinue) { 'wslc' }
   else { throw 'no docker daemon and no wslc' }
 }
@@ -37,6 +37,7 @@ $Net = 'zac-screenshots'
 $Lab = 'zac-screenshots-lab'
 $Certs = Join-Path $PSScriptRoot '.work/certs'
 $Logs = Join-Path $PSScriptRoot '.work/logs'
+$Docs = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../docs'))
 if (-not $Out) { $Out = Join-Path $PSScriptRoot "../../static/img/$Flow" }
 $Out = [IO.Path]::GetFullPath($Out)
 
@@ -66,7 +67,7 @@ try {
   $Ipv6 = if ($Runtime -eq 'docker') { @('--sysctl', 'net.ipv6.conf.all.disable_ipv6=0') } else { @() }
   $AliasArgs = $Aliases | ForEach-Object { '--network-alias', $_ }
   C run --rm --name $Lab --network $Net @Ipv6 @AliasArgs `
-    -v "${Certs}:/certs:ro" -v "${Out}:/out" -v "${Logs}:/logs" `
+    -v "${Certs}:/certs:ro" -v "${Docs}:/docs:ro" -v "${Out}:/out" -v "${Logs}:/logs" `
     $Image bash /lab/lab.sh run $Flow @Themes
   Get-ChildItem $Out -Filter '*.png' | Sort-Object Name | Format-Table Name, Length, LastWriteTime
 }
