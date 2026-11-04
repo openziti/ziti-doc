@@ -1,11 +1,12 @@
 ---
-title: Install the tunneler on Debian
 sidebar_label: Debian
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import { LinuxResolverConfig, LinuxAddIdentities } from "../../../_imports";
+
+# Install the tunneler on Debian
 
 Install the `ziti-edge-tunnel` package on Debian/Ubuntu and compatible distributions.
 
@@ -29,11 +30,11 @@ Install the `ziti-edge-tunnel` package on Debian/Ubuntu and compatible distribut
 
 Architectures available:
 
-* x86_64
-* arm64
+- x86_64
+- arm64
 
 :::note
-Please read this script to ensure it is safe before running it.
+Read this script to ensure it is safe before running it.
 :::
 
 ```text
@@ -52,13 +53,14 @@ curl -sSLf https://get.openziti.io/tun/scripts/install-ubuntu.bash | bash
 | 12 Bookworm | jammy        | x86_64, arm64 |
 | 11 Bullseye | focal        | x86_64, arm64 |
 
-1. Refer to the table to find the Ubuntu release name that is the contemporary of the Debian release. Substitute the Ubuntu release name for `jammy` in the `/etc/apt/sources.list.d/openziti.list` file.
+1. Refer to the table to find the Ubuntu release name that is the contemporary of the Debian release. Substitute
+   the Ubuntu release name for `jammy` in the `/etc/apt/sources.list.d/openziti.list` file.
 
     ```text
     UBUNTU_LTS=jammy
     ```
 
-1. Subscribe the system to the OpenZiti package repository for the UBUNTU_LTS specified above.
+1. Subscribe the system to the OpenZiti package repository for the `UBUNTU_LTS` specified above.
 
     ```text
     echo "deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable $UBUNTU_LTS main" \
@@ -88,17 +90,16 @@ curl -sSLf https://get.openziti.io/tun/scripts/install-ubuntu.bash | bash
 </TabItem>
 </Tabs>
 
-2. Enable and start the service
+2. Enable and start the service.
 
     ```text
     sudo systemctl enable --now ziti-edge-tunnel.service
     ```
 
-2. Add an Identity.
+3. Add an identity.
 
     <LinuxAddIdentities/>
 
-2. Configure the Resolver.
+4. Configure the resolver.
 
     <LinuxResolverConfig/>
-
