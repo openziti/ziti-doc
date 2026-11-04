@@ -1,5 +1,4 @@
 ---
-title: Troubleshoot the Linux tunneler
 sidebar_label: Troubleshoot
 ---
 
@@ -61,8 +60,9 @@ sudo systemctl edit ziti-edge-tunnel.service
 
 ## Intercepting or hosting not working
 
-Inspect the identity and router info for a running tunneler process. This creates a file named like `{{identity name}}.ziti`
-for each loaded identity. Each file summarizes the available services and router connections for the identity.
+Inspect the identity and router info for a running tunneler process. This creates a file named like
+`{{identity name}}.ziti` for each loaded identity. Each file summarizes the available services and router
+connections for the identity.
 
 ```text
 sudo -u ziti ziti-edge-tunnel dump -p /tmp/ziti-dump-dir/
@@ -75,7 +75,7 @@ $ resolvectl --interface=ziti0 dns
 Link 19 (tun0): 100.64.0.2
 ```
 
-Query the Ziti nameserver to find the intercept IP address for a service.
+Query the OpenZiti nameserver to find the intercept IP address for a service.
 
 ```text
 dig +noall +answer my.ziti.service.example.com @100.64.0.2
@@ -107,18 +107,20 @@ A crash may be caused by a segmentation fault. If saving a Corefile is enabled, 
 according to this pattern file: `/proc/sys/kernel/core_pattern`. Ubuntu configures this to use
 [Apport](https://wiki.ubuntu.com/Apport). Read more about [core dumps](https://en.wikipedia.org/wiki/Core_dump).
 
-Please raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/) if the tunneler crashes.
+Raise [a GitHub issue](https://github.com/openziti/ziti-tunnel-sdk-c/issues/) if the tunneler crashes.
 
 ## Operation not permitted
 
-Deleting the `/tmp/.ziti` directory and restarting the tunneler may solve this issue if the tunneler was previously run as root.
+Deleting the `/tmp/.ziti` directory and restarting the tunneler may solve this issue if the tunneler was
+previously run as root.
 
 ```text
 WARN ziti-edge-tunnel:ziti-edge-tunnel.c:1686 make_socket_path() failed to set ownership of /tmp/.ziti to 1003:1003: Operation not permitted (errno=1)
 WARN ziti-edge-tunnel:ziti-edge-tunnel.c:1730 run_tunneler_loop() One or more socket servers did not properly start.
 ```
 
-Another symptom of the same issue is this error when attempting to send a message to the IPC socket server, which is not running.
+Another symptom of the same issue is this error when attempting to send a message to the IPC socket server, which
+is not running.
 
 ```text
 failed to connect: -111/connection refused
