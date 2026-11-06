@@ -8,14 +8,15 @@ sidebar_label: Sidecar proxy
 ## Overview
 
 This guide shows you how to access a service with a non-Ziti client application that's running
-in a Kubernetes pod. To provide access to the service, we will deploy the `ziti-tunnel` container as a sidecar in a pod with a demo client app.
+in a Kubernetes pod. To provide access to the service, we will deploy the `ziti-tunnel` container as a sidecar in
+a pod with a demo client app.
 
 This guide also demonstrates `ziti-tunnel`'s internal DNS server, which allows us to access services
 by hostname instead of IP address.
 
 ![Diagram of solution](./sidecar-diagram.svg)
 
-[Here's some detail on how the various intercept modes work on Linux](../../../how-to-guides/tunnelers/60-linux/index.mdx)
+[Here's some detail on how the various intercept modes work on Linux](../../../how-to-guides/tunnelers/60-linux/index.mdx).
 
 ## Prerequisites
 
@@ -25,20 +26,20 @@ by hostname instead of IP address.
 
 ## Create and enroll an identity
 
-This guide will re-use the service "testapi-service", a REST API demo server, that was created in the quickstart.
+This guide will re-use the service `testapi-service`, a REST API demo server, that was created in the quickstart.
 
 1. We will create a new identity for our client app with the correct role to grant access to the service.
 
-  ```text
-  ziti edge create identity sidecar-client \
-    --jwt-output-file /tmp/sidecar-client.jwt --role-attributes testapi-clients
-  ```
+    ```text
+    ziti edge create identity sidecar-client \
+      --jwt-output-file /tmp/sidecar-client.jwt --role-attributes testapi-clients
+    ```
 
 1. Enroll the identity.
 
-  ```text
-  ziti edge enroll /tmp/sidecar-client.jwt
-  ```
+    ```text
+    ziti edge enroll /tmp/sidecar-client.jwt
+    ```
 
 ## Restore the quickstart KUBECONFIG if necessary
 
@@ -60,17 +61,21 @@ kubectl create secret generic "sidecar-client-identity" \
 ## Deploy the pod
 
 Deploy a Pod that runs a non-Ziti demo client application and `ziti-tunnel` as a sidecar proxy. For this
-demonstration, the client application is `wget`. Our Pod sends a `POST` request to the demo testapi server in a loop so we can see the response in the log.
+demonstration, the client application is `wget`. Our Pod sends a `POST` request to the demo testapi server in a
+loop so we can see the response in the log.
 
 1. Find the CoreDNS cluster service IP address.
 
-    You need to update the deployment manifest with the CoreDNS CLUSTER-IP address before you deploy. This is because the `ziti-tunnel` sidecar provides an override nameserver for the pod, so we need to inject the CoreDNS nameserver as fallback resolver for non-Ziti names because `ziti-tunnel` itself will not answer queries for non-Ziti DNS names.
+    You need to update the deployment manifest with the CoreDNS CLUSTER-IP address before you deploy. This is
+    because the `ziti-tunnel` sidecar provides an override nameserver for the pod, so we need to inject the
+    CoreDNS nameserver as fallback resolver for non-Ziti names because `ziti-tunnel` itself will not answer
+    queries for non-Ziti DNS names.
 
     ```text
     kubectl --namespace kube-system get services kube-dns
     ```
 
-1. Save the following to a file named /tmp/sidecar-demo.yaml.
+1. Save the following to a file named `/tmp/sidecar-demo.yaml`.
 
     ```text
     # /tmp/sidecar-demo.yaml
@@ -137,12 +142,12 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
 
     You'll notice that the `ziti-tunnel` sidecar container has a few requirements:
 
-    1. The basename (sans suffix) of the identity that is assumed by `ziti-tunnel` must be passed into the container with the
-      `ZITI_IDENTITY_BASENAME` environment variable.
+    1. The basename (sans suffix) of the identity that is assumed by `ziti-tunnel` must be passed into the
+      container with the `ZITI_IDENTITY_BASENAME` environment variable.
     2. The secret that we created above for the enrolled identity must be mounted into the container at
-      "/netfoundry".
+      `/netfoundry`.
 
-1. Once the manifest YAML is saved, we can deploy the pod with `kubectl`
+1. Once the manifest YAML is saved, we can deploy the pod with `kubectl`.
 
     ```text
     kubectl apply -f /tmp/sidecar-demo.yaml
@@ -157,7 +162,8 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
     ziti-tunnel-sidecar-demo-749c476989-6wpfn   1/1     Running   0          42s
     ```
 
-1. Tail the logs for the "testclient" container inside the pod. The first few attempts didn't get a reply because the tunnel was starting up.
+1. Tail the logs for the `testclient` container inside the pod. The first few attempts didn't get a reply because
+   the tunnel was starting up.
 
     ```text
     $ kubectl logs --follow ziti-tunnel-sidecar-demo-749c476989-6wpfn --container testclient
@@ -178,5 +184,7 @@ demonstration, the client application is `wget`. Our Pod sends a `POST` request 
     + wget --quiet --output-document=- --post-data ziti=awesome http://testapi.ziti/post
     + jq .data
     "ziti=awesome"
+    ```
 
-Notice that the `wget` client is using the DNS name that we provided in the service definition to make the request.
+Notice that the `wget` client is using the DNS name that we provided in the service definition to make the
+request.

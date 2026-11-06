@@ -1,18 +1,22 @@
 ---
-title: Tunnel to NGINX upstreams
 sidebar_label: NGINX module
 ---
 
-[Ziti's NGINX module](https://github.com/openziti/ngx_ziti_module) works like a tunneler for hosting Ziti services, i.e. as a reverse proxy. This means that NGINX listens for particular, pre-configured Ziti services on the Ziti overlay (not on an IP address), and forwards the incoming requests to the NGINX upstream specified for that service in the NGINX config file.
+# Tunnel to NGINX upstreams
+
+[Ziti's NGINX module](https://github.com/openziti/ngx_ziti_module) works like a tunneler for hosting Ziti
+services, i.e. as a reverse proxy. This means that NGINX listens for particular, pre-configured Ziti services on
+the Ziti overlay (not on an IP address), and forwards the incoming requests to the NGINX upstream specified for
+that service in the NGINX config file.
 
 We'll run the module in Kubernetes as an example, but the module works anywhere NGINX does.
 
 ## Prerequisites
 
-- Azure Subscription, Resource Group and [Azure Cli](https://learn.microsoft.com/en-us/cli/azure/)
+- Azure Subscription, Resource Group and [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 - [NGINX Module](https://github.com/openziti/ngx_ziti_module)
 - [Terraform](https://developer.hashicorp.com/terraform/install)
-- network
+- An OpenZiti network
 - [Desktop Tunneler](../../how-to-guides/tunnelers/index.mdx)
 
 ---
@@ -20,9 +24,11 @@ We'll run the module in Kubernetes as an example, but the module works anywhere 
 ## Architecture
 
 - Before
+
 ![Before](/img/nginx-aks-before.svg)
 
-- After 
+- After
+
 ![After](/img/nginx-aks-after.svg)
 
 ---
@@ -37,28 +43,37 @@ We'll run the module in Kubernetes as an example, but the module works anywhere 
 
 ## Create identities
 
-Follow the guide @[Create Identities](/learn/core-concepts/identities/overview.mdx#creating-an-identity) for the ngx-ziti-module and windows client.
+Follow the guide [Create Identities](/learn/core-concepts/identities/overview.mdx#creating-an-identity) for the
+ngx-ziti-module and Windows client.
 
 :::tip
-client name = `client-nginx` with `Attribute`: `#clients`,  server module name = `server-nginx` with `Attribute`: `#servers`
+Client name = `client-nginx` with attribute `#clients`; server module name = `server-nginx` with attribute
+`#servers`.
 :::
 
-Download jwt files and enroll identities. 
+Download JWT files and enroll identities.
 
-- Windows ZDE Identity can be enrolled by following this [enrolling process](/how-to-guides/tunnelers/02-windows/index.md)
-- Nginx Module Identity can be enrolled by following [Enrolling an Identity Guide](/learn/core-concepts/identities/20-enrolling.md)
+- The Windows ZDE identity can be enrolled by following this
+  [enrolling process](/how-to-guides/tunnelers/02-windows/index.md).
+- The Nginx module identity can be enrolled by following the
+  [enrolling an identity guide](/learn/core-concepts/identities/20-enrolling.md).
 
 ---
 
 ## Build Docker image
 
-Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2~3MBs. Therefore, it can not be uploaded to the existing nginx image. One needs to build a custom docker image and add it during the build process.
+Currently, configmaps have a binary file limit of 1MB and the size of the ngx-ziti-module is around 2-3MBs.
+Therefore, it cannot be uploaded to the existing NGINX image. You need to build a custom Docker image and add it
+during the build process.
 
-- Follow steps to build @[ngx-ziti-module](https://github.com/openziti/ngx_ziti_module/blob/main/README.md#user-content-build-using-cmake)
-- Follow steps to create @[nginx ingress controller image](https://docs.nginx.com/nginx-ingress-controller/installation/building-nginx-ingress-controller/#build-image)
+- Follow steps to build
+  [ngx-ziti-module](https://github.com/openziti/ngx_ziti_module/blob/main/README.md#user-content-build-using-cmake)
+- Follow steps to create
+  [nginx ingress controller image](https://docs.nginx.com/nginx-ingress-controller/installation/building-nginx-ingress-controller/#build-image)
 
 :::tip
-One way to update the build is to add to the Dockerfile (`build/Dockerfile`) this snippet of code under the common section, i.e. `FROM ${BUILD_OS} as common`
+One way to update the build is to add this snippet of code to the Dockerfile (`build/Dockerfile`) under the common
+section, i.e. `FROM ${BUILD_OS} as common`.
 
 ```textell
 # copy ziti module
@@ -66,13 +81,14 @@ COPY  ./ngx_ziti_module.so /usr/lib/nginx/modules
 
 ```
 
-Also, need to add the following package `libc6` to the debian build in the same Dockerfile, i.e. `FROM nginx:1.23.3 AS debian`. Did not try the alpine build but the assumption is that would be the same.
+Also, add the following package `libc6` to the debian build in the same Dockerfile, i.e. `FROM nginx:1.23.3 AS
+debian`. This was not tried with the alpine build, but the assumption is that it would be the same.
 
 ```textell
 && apt-get install --no-install-recommends --no-install-suggests -y libcap2-bin libc6 \
 ```
 
-Lastly, if you don't want the image name to have a postfix of`SNAPSHOT...` , comment it out in `Makefile`.
+Lastly, if you don't want the image name to have a postfix of `SNAPSHOT...`, comment it out in `Makefile`.
 
 ```textell
 VERSION = $(GIT_TAG)##-SNAPSHOT-$(GIT_COMMIT_SHORT)
@@ -80,9 +96,11 @@ VERSION = $(GIT_TAG)##-SNAPSHOT-$(GIT_COMMIT_SHORT)
 
 :::
 
-Once the image is built, upload it to your container registry. You will need it during customization of the nginx ingress controller deployment to the AKS Cluster.
+Once the image is built, upload it to your container registry. You will need it during customization of the
+NGINX ingress controller deployment to the AKS cluster.
+
 :::note
-if you don't have time to build your own, can use our test image based on debian 11 and nginx v1.23.3 
+If you don't have time to build your own, you can use our test image based on debian 11 and nginx v1.23.3.
 
 ```textell
 set {
@@ -94,14 +112,16 @@ set {
 
 ## Deploy AKS cluster
 
-Deploy the AKS Infrustructure in Azure using terraform. The terraform code is located @[OpenZiti Nginx Ingress Terraform Repo](https://github.com/dariuszSki/openziti-nginx-ingress-terraform.git). The following resources will be created, when the plan is applied.
+Deploy the AKS infrastructure in Azure using terraform. The terraform code is located at the
+[OpenZiti Nginx Ingress Terraform Repo](https://github.com/dariuszSki/openziti-nginx-ingress-terraform.git). The
+following resources will be created when the plan is applied.
 
 - Virtual Network
 - AKS Private Cluster with Kubenet CNI and Nginx Ingress Controller
 
-Set a few environmental variables for Azure Authentication and Authorization.
+Set a few environment variables for Azure authentication and authorization.
 
-:::tip[Env Vars]
+:::tip[Environment variables]
 
 ```
 export ARM_SUBSCRIPTION_ID = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
@@ -116,6 +136,7 @@ export ARM_TENANT_ID = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 :::
 
 Run terraform plan.
+
 :::info[Steps]
 
 ```textell
@@ -140,7 +161,7 @@ cluster_public_fqdn = "akssand-2ift1yqr.hcp.eastus.azmk8s.io"
 
 If you are using your own deployment method, here are some configuration details from helm chart that need to be passed to the nginx ingress controller deployment.
 
-- ***Ziti Nginx Module Identity***
+### Ziti NGINX module identity
 
 ```textell
 nginx_ziti_identity = "${file("./server-nginx.json")}"
@@ -155,7 +176,7 @@ resource "kubernetes_secret" "ziti-identity" {
 }
 ```
 
-- ***Image Reference***
+### Image reference
 
 ```textell
 set {
@@ -169,7 +190,8 @@ set {
 }
 ```
 
-- ***Configuration File - Main section block***
+### Configuration file: main section block
+
 :::info
 Services are commented out until they are created. Then, terraform plan can be re-run to enable them.
 
@@ -195,7 +217,9 @@ controller:
         #}
 ```
 
-- ***Volume section and path to secrets. Added openziti.io folder.***
+### Volume section and path to secrets
+
+Added the `openziti.io` folder.
 
 ```text
   volumes:
@@ -219,13 +243,13 @@ controller:
 
 ## Service configurations
 
-- ***Create configs***
+### Create configs
 
 ```textell
 ziti edge create config k8s-api-intercept.v1 intercept.v1 "{\"protocols\": [\"tcp\"], \"addresses\": [\"akssand-2ift1yqr.hcp.eastus.azmk8s.io\"],\"portRanges\": [{\"low\": 443,\"high\": 443}]}"
 ```
 
-- ***Create Service***
+### Create the service
 
 ```textell
 ziti edge create service k8s-api --configs "k8s-api-intercept.v1" --role-attributes "service-nginx"
@@ -233,7 +257,7 @@ ziti edge create service k8s-api --configs "k8s-api-intercept.v1" --role-attribu
 
 ---
 
-- ***Create Service Bind Policy***
+### Create service bind policy
 
 ```textell
 ziti edge create service-policy k8s-api-bind Bind --semantic "AnyOf" --identity-roles "#servers" --service-roles "#service-nginx"
@@ -241,7 +265,7 @@ ziti edge create service-policy k8s-api-bind Bind --semantic "AnyOf" --identity-
 
 ---
 
-- ***Create Service Dial Policy***
+### Create service dial policy
 
 ```textell
 ziti edge create service-policy k8s-api-dial Dial --semantic "AnyOf" --identity-roles "#clients" --service-roles "#service-nginx"
@@ -274,7 +298,7 @@ config:
 Need to disable ZDE for this network before the next step, so the nginx updates will not get intercepted while the service is not ready yet.
 :::
 
-- ***Re-run terraform***
+### Re-run terraform
 
 ```text
 terraform plan  -var include_aks_nginx=true  -out aks
@@ -300,7 +324,7 @@ az aks get-credentials --resource-group $RG_NAME --name {cluster_name} --subscri
 
 :::
 
-- ***Check context in the kubectl config file***
+### Check context in the kubectl config file
 
 ```textell
 kubectl config  get-contexts
@@ -313,7 +337,7 @@ CURRENT   NAME            CLUSTER         AUTHINFO                              
 *         akssandeastus   akssandeastus   clusterUser_nginx_module_rg_eastus_akssandeastus   
 ```
 
-- ***Let's check the status of nodes in the cluster.***
+### Check the status of nodes in the cluster
 
 ```textell
 kubectl get nodes
@@ -327,7 +351,7 @@ aks-agentpool-20887740-vmss000000   Ready    agent   151m   v1.24.9
 aks-agentpool-20887740-vmss000001   Ready    agent   151m   v1.24.9
 ```
 
-- ***List cluster info***
+### List cluster info
 
 ```textell
 kubectl cluster-info
@@ -343,7 +367,7 @@ Metrics-server is running at https://akssand-2ift1yqr.hcp.eastus.azmk8s.io:443/a
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
-- ***List pods***
+### List pods
 
 ```textell
 kubectl get pods --all-namespaces
@@ -373,7 +397,7 @@ kube-system   metrics-server-8655f897d8-mr2bq                2/2     Running   0
 kube-system   metrics-server-8655f897d8-tnpzt                2/2     Running   0          165m
 ```
 
-- ***List  services***
+### List services
 
 ```textell
 kubectl get services --all-namespaces

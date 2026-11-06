@@ -1,10 +1,8 @@
----
-title: Linux tunneler
----
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Details from '@theme/MDXComponents/Details';
+
+# Linux tunneler
 
 :::important
 Persistent, writable volumes are necessary for the tunneler to manage identity files, e.g., certificate renewal.
@@ -20,11 +18,11 @@ Reasons to use the package:
 
 1. Install the tunneler as a systemd service.
 1. Create permissions and policies for the tunneler to run as a non-root user.
-1. Enroll the identity and clean up the enrollment token in identity directory.
+1. Enroll the identity and clean up the enrollment token in the identity directory.
 1. Upgrade the tunneler when a new package is available.
 
-Linux DEB packages are currently available for the x86_64 and arm64 platforms and RPM packages are available for x86_64.
-ARM/v7 (32bit) binaries are available from GitHub.
+Linux DEB packages are currently available for the x86_64 and arm64 platforms and RPM packages are available for
+x86_64. ARM/v7 (32bit) binaries are available from GitHub.
 
 - [Debian](./10-debian-package.mdx)
 - [RedHat](./20-redhat-package.mdx)
@@ -32,8 +30,8 @@ ARM/v7 (32bit) binaries are available from GitHub.
 
 ## Run with Docker
 
-Reference [the article about running the Linux tunneler in a container](/how-to-guides/tunnelers/70-docker/readme.mdx) for guidance and
-examples.
+Reference [the article about running the Linux tunneler in a container](/how-to-guides/tunnelers/70-docker/readme.mdx)
+for guidance and examples.
 
 ## Install a pre-release
 
@@ -87,4 +85,4 @@ ziti-edge-tunnel version;
 
 ## Troubleshooting
 
-Refer to [the troubleshooting guide](./50-linux-tunnel-troubleshooting.mdx)
+Refer to [the troubleshooting guide](./50-linux-tunnel-troubleshooting.mdx).
