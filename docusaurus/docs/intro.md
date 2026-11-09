@@ -6,8 +6,8 @@ sidebar_position: 1
 # OpenZiti overview
 
 OpenZiti is a free, open-source zero trust networking platform that makes network services invisible to unauthorized
-users. The project provides everything you need to create a zero trust overlay network — controllers, routers,
-tunnelers, and SDKs — so you can secure both existing applications and new ones. Whether you add zero trust at the
+users. The project provides everything you need to create a zero trust overlay network: controllers, routers,
+tunnelers, and SDKs, so you can secure both existing applications and new ones. Whether you add zero trust at the
 network level, the host level, or directly inside your application, every connection is authenticated, authorized, and
 encrypted end to end.
 
@@ -32,18 +32,19 @@ An OpenZiti network has a few key deployed pieces:
 
 Three logical constructs govern access once the network is running:
 
-- **Services**: The resources identities connect to. See [Services](@openzitidocs/learn/core-concepts/services/overview).
-- **Identities**: Authenticated endpoints — every connection in an OpenZiti network is mutually authenticated.
+- **Services**: The resources identities connect to.
+  See [Services](@openzitidocs/learn/core-concepts/services/overview).
+- **Identities**: Authenticated endpoints. Every connection in an OpenZiti network is mutually authenticated.
   See [Identities](@openzitidocs/learn/core-concepts/identities/overview).
 - **Policies**: Govern which identities can access which services via which edge routers.
   See [Policies](@openzitidocs/learn/core-concepts/security/authorization/policies/overview).
 
 ## Key concepts
 
-- **Zero trust / application segmentation**: OpenZiti doesn't just gate access to a network — it enforces access to
+- **Zero trust / application segmentation**: OpenZiti doesn't just gate access to a network; it enforces access to
   individual applications within it. Every identity requires a certificate, and access can be revoked at any time,
   closing existing connections immediately.
-- **Dark services and routers**: Services and routers can be made "dark" — no open listening ports, no public
+- **Dark services and routers**: Services and routers can be made *dark*: no open listening ports, no public
   exposure. They reach out to the fabric rather than accepting inbound connections, so nothing in your private network
   needs to receive inbound traffic.
 - **End-to-end encryption**: Every connection is encrypted from endpoint to endpoint using public-private-key

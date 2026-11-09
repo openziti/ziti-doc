@@ -1,11 +1,12 @@
 ---
-title: Upgrade a quickstart network
 id: upgrade-quickstart-network
 sidebar_position: 90
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+# Upgrade a quickstart network
 
 Back up and upgrade your controller and routers with these steps.
 
@@ -132,8 +133,8 @@ the files if desired.
     1. Copy the PKI as was done with the database file (default path: `/persistent/pki/`).
 1. Back up the controller config file (default path: `/persistent/ziti-controller.yaml`).
 1. Back up the environment file (default path: `/persistent/ziti.env`).
-1. Back up the router config files — depending on which quickstart you performed, you may have more than one (default
-   path: `/persistent/*-router*.yaml`). Unfortunately, Docker does not support wildcard characters when using
+1. Back up the router config files. Depending on which quickstart you performed, you may have more than one
+   (default path: `/persistent/*-router*.yaml`). Unfortunately, Docker does not support wildcard characters when using
    `docker cp`. This command will list the files in `/persistent`, from which you can craft your `docker cp` commands
    for each router config:
    ```bash
