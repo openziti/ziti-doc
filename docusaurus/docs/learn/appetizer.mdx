@@ -93,7 +93,7 @@ export const AppetizerSlideshow = () => {
       text: (
         <p>
           When the appetizer process starts, it first creates a strong identity for itself. This identity
-          (represented by the lock icon) is authorized to "bind" the reflect service, creating a listener
+          (represented by the lock icon) is authorized to `bind` the reflect service, creating a listener
           on the overlay network so it can accept incoming connections from other authorized identities.
         </p>
       ),
@@ -108,8 +108,8 @@ export const AppetizerSlideshow = () => {
           The reflect server is now ready to join the overlay. The OpenZiti SDK locates all{' '}
           <a href="/docs/openziti/learn/core-concepts/data-flow-explainer">edge routers</a> it's authorized
           to reach and, using the identity from step 1, attaches to the overlay. Following the principle of
-          least privilege, the server must be explicitly authorized to "bind" the reflect service. Other
-          identities must be separately authorized to "dial" it — unauthorized identities can't reach the
+          least privilege, the server must be explicitly authorized to `bind` the reflect service. Other
+          identities must be separately authorized to `dial` it; unauthorized identities can't reach the
           service at all.
         </p>
       ),
@@ -136,7 +136,7 @@ export const AppetizerSlideshow = () => {
       text: (
         <p>
           With its own strong identity, the reflect client connects to the overlay. Both client and server
-          make outbound connections to edge routers — no inbound firewall rules are needed on either side.
+          make outbound connections to edge routers, so no inbound firewall rules are needed on either side.
           The reflect server has no listening ports on the underlay network; it's only reachable through
           the overlay, giving it complete protection from port scanning.
         </p>
@@ -152,7 +152,7 @@ export const AppetizerSlideshow = () => {
           The reflect client securely dials the reflect server over the overlay. Both are authenticated
           and authorized. The client sends bytes to the server, which reflects them back. End-to-end
           encryption is negotiated automatically when the connection is established. The overlay also
-          applies continuous authorization — as soon as either identity is deauthorized, the connection
+          applies continuous authorization: as soon as either identity is deauthorized, the connection
           terminates immediately.
         </p>
       ),
@@ -209,13 +209,15 @@ export const AppetizerHero = () => {
   );
 };
 
-The appetizer is an interactive demo of application-embedded zero trust. Three commands get you connected to a live reflect server — authenticated, encrypted, and invisible to port scanners, with no exposed ports or firewall rules on either side.
+The appetizer is an interactive demo of application-embedded zero trust. Three commands get you connected to a
+live reflect server, authenticated, encrypted, and invisible to port scanners, with no exposed ports or firewall
+rules on either side.
 
 ### What you get by adopting an OpenZiti SDK
 
 - **Strong identities**: X.509 certificates guarantee entities are who they claim to be.
-- **Segmented access**: Enforce least-privileged access — only explicitly authorized identities can reach a service.
-- **No exposed ports**: The app is "dark" on the underlay network and invisible to port scanners.
+- **Segmented access**: Enforce least-privileged access; only explicitly authorized identities can reach a service.
+- **No exposed ports**: The app is *dark* on the underlay network and invisible to port scanners.
 - **Continuous authentication**: Authorization is checked throughout the session, not just at connect time.
 - **End-to-end encryption**: Data is only accessible to the intended recipient.
 
