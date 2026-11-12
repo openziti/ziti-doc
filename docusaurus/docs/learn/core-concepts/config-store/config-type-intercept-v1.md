@@ -1,11 +1,12 @@
-
 # Tunneler config type `intercept.v1`
 
-A Config of Config Type `intercept.v1` configures an intercepting Ziti tunneler as a proxy for a particular Ziti service.
+A config of config type `intercept.v1` configures an intercepting OpenZiti tunneler as a proxy for a particular Ziti
+service.
 
 ## Examples
 
-This Config instructs the tunneler to intercept any outgoing traffic with destination `tcp:acme.example.ziti:5000`. An intercepting tunneler provides a DNS nameserver that resolves authorized Ziti services' domain names.
+This config instructs the tunneler to intercept any outgoing traffic with destination `tcp:acme.example.ziti:5000`.
+An intercepting tunneler provides a DNS nameserver that resolves authorized Ziti services' domain names.
 
 ```text
 {
@@ -24,7 +25,9 @@ This Config instructs the tunneler to intercept any outgoing traffic with destin
 }
 ```
 
-This Config has not only a Ziti domain name destination `acme.ziti` for which traffic is intercepted, but also a wildcard domain and an IP subnet. Additionally, there is a range of destination ports for which all packets will be intercepted if their destination address also matches.
+This config has not only an OpenZiti domain name destination `acme.ziti` for which traffic is intercepted, but also a
+wildcard domain and an IP subnet. Additionally, there is a range of destination ports for which all packets will be
+intercepted if their destination address also matches.
 
 ```text
 {
@@ -47,4 +50,5 @@ This Config has not only a Ziti domain name destination `acme.ziti` for which tr
 
 ## Schema reference
 
-The JSON schema for this tunneler Config Type is maintained [in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/intercept.v1.json).
+The JSON schema for this tunneler config type is maintained
+[in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/intercept.v1.json).

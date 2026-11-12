@@ -1,6 +1,6 @@
 # Managing configurations
 
-Here is a JSON schema, modeled on the tunneler client configuration. 
+Here is a JSON schema, modeled on the tunneler client configuration.
 
 ```text
     {
@@ -24,15 +24,16 @@ Here is a JSON schema, modeled on the tunneler client configuration.
     }
 ```
 
-Put the schema in a file named `example-config-type.json`, and you can create a configuration type named my-app with it. 
+Put the schema in a file named `example-config-type.json`, and you can create a configuration type named `my-app`
+with it.
 
-```
+```bash
     $ ziti edge create config-type my-app --schema-file example-config-type.json 
 ```
 
-You can now create a configuration of this type
+You can now create a configuration of this type.
 
-```
+```bash
     $ ziti edge create config ssh-client my-app \
         '{  
            "hostname" : "ssh.company.com", 
@@ -42,13 +43,13 @@ You can now create a configuration of this type
 
 Finally, you can reference this when creating a service.
 
-```
+```bash
     $ ziti edge create service ssh --configs ssh
 ```
 
-If a particular site wanted SSH on a different port, you could create a different configuration
+If a particular site wanted SSH on a different port, you could create a different configuration.
 
-```
+```bash
     $ ziti edge create config scranton-office-ssh-client my-app \
         '{ 
            "hostname" : "ssh.company.com", 
@@ -58,7 +59,7 @@ If a particular site wanted SSH on a different port, you could create a differen
 
 The identity corresponding to a tunneler at that site could then be configured to use that configuration.
 
-```
+```text
     $ ziti edge create identity service scranton-office
 
     $ ziti edge update identity-configs scranton-office ssh scranton-office-ssh-client
@@ -70,7 +71,7 @@ The identity corresponding to a tunneler at that site could then be configured t
 
 Overrides can be removed as well, if they are no longer needed.
 
-```
+```text
     $ ziti edge update identity-configs scranton-office ssh scranton-office-ssh-client --remove
 
     $ ziti edge list identity service-configs scranton-office
