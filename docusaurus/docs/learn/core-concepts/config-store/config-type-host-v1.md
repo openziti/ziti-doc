@@ -1,10 +1,12 @@
 # Tunneler config type `host.v1`
 
-A Config of Config Type `host.v1` configures a hosting Ziti tunneler to forward connections to the destination server for a particular Ziti service.
+A config of config type `host.v1` configures a hosting OpenZiti tunneler to forward connections to the destination server
+for a particular Ziti service.
 
 ## Examples
 
-This Config forwards Ziti service traffic to a server known as `tcp:localhost:54321`. The server must be reachable at that destination from the network perspective of the device where the Ziti tunneler is running.
+This config forwards Ziti service traffic to a server known as `tcp:localhost:54321`. The server must be reachable
+at that destination from the network perspective of the device where the OpenZiti tunneler is running.
 
 ```text
 {
@@ -14,7 +16,8 @@ This Config forwards Ziti service traffic to a server known as `tcp:localhost:54
 }
 ```
 
-Rather than a static destination port, this Config forwards the Ziti service traffic to the same TCP port that the initiating client was connecting to as long as it falls within the range of allowed ports.
+Rather than a static destination port, this config forwards the Ziti service traffic to the same TCP port that the
+initiating client was connecting to, as long as it falls within the range of allowed ports.
 
 ```text
 {
@@ -25,7 +28,8 @@ Rather than a static destination port, this Config forwards the Ziti service tra
 }
 ```
 
-Rather than a static destination address, this Config forwards the Ziti service traffic to the same address that the initiating client was connecting to as long as it is in the list of allowed addresses.
+Rather than a static destination address, this config forwards the Ziti service traffic to the same address that the
+initiating client was connecting to, as long as it is in the list of allowed addresses.
 
 ```text
 {
@@ -42,4 +46,5 @@ Rather than a static destination address, this Config forwards the Ziti service 
 
 ## Schema reference
 
-The JSON schema for this tunneler Config Type is maintained [in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/host.v1.json).
+The JSON schema for this tunneler config type is maintained
+[in GitHub](https://github.com/openziti/ziti/blob/main/tunnel/entities/host.v1.json).
