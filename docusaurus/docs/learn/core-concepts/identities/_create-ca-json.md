@@ -1,4 +1,4 @@
-```
+```text
     Verb: POST
 
     name:
@@ -6,7 +6,7 @@
     isAutoCaEnrollmentEnabled:
       controls if the CA can be used for automatic enrollment
     isOttCaEnrollmentEnabled:
-      controls if the CA be used for one time token enrollment
+      controls if the CA can be used for one-time token enrollment
     isAuthEnabled:
       controls if the CA is enabled for authentication. Devices can enroll but not connect if set to false
     certPem:
