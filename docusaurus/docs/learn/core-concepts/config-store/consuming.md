@@ -1,10 +1,12 @@
 # Consuming configuration data
 
-Configuration data can be retrieved directly, but it will usually be consumed by applications via the SDK. When an SDK authenticates, it will indicate which configuration types it can process. Then, when listing services, the SDK will receive configuration data in-line. This can be done from the CLI as well.
+Configuration data can be retrieved directly, but it's usually consumed by applications via the SDK. When an SDK
+authenticates, it indicates which configuration types it can process. Then, when listing services, the SDK receives
+configuration data inline. This can be done from the CLI as well.
 
 If we've set up a service `ssh` as follows:
 
-```
+```bash
     $ ziti edge create config ssh-client my-app \
         '{ 
             "hostname" : "ssh.company.com", 
@@ -12,15 +14,21 @@ If we've set up a service `ssh` as follows:
          }'
     
     $ ziti edge create service ssh --configs ssh
- ```
-
-The SDKs will present this configuration in language specific ways. You can see the data the SDK are working with from the SDK, by specifying configuration types when listing services. 
-
-**NOTES**
-* You can specify `all` to see all the configuration data.
-* In addition to the `config` block which has the embedded configuration data there's also a `configs` section which lists all the associated configurations by ID. All associated configurations will always be listed here, regardless of which configuration types are requested.
-
 ```
+
+The SDKs present this configuration in language-specific ways. You can see the data the SDK is working with by
+specifying configuration types when listing services.
+
+:::note
+
+- You can specify `all` to see all the configuration data.
+- In addition to the `config` block, which has the embedded configuration data, there's also a `configs` section
+  that lists all the associated configurations by ID. All associated configurations are always listed here,
+  regardless of which configuration types are requested.
+
+:::
+
+```text
     $ ziti edge list services -j --config-types my-app 'name="ssh"'
     {
         "meta": {
@@ -79,4 +87,3 @@ The SDKs will present this configuration in language specific ways. You can see 
         ]
     }
 ```
- 
