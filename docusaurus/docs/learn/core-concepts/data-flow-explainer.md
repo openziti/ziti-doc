@@ -13,17 +13,17 @@ This diagram shows the components of the example network.
 
 It has the following components:
 
-* An OpenZiti controller
-* Two OpenZiti routers that are available via the public internet
-* Two private networks, each containing a router and an application server
-  * The application servers are serving up the same application. There are multiple servers, so
+- An OpenZiti controller
+- Two OpenZiti routers that are available via the public internet
+- Two private networks, each containing a router and an application server
+  - The application servers are serving up the same application. There are multiple servers, so
     that load can be spread across them. They are in separate regions to ensure that the
     application can still be accessed, even if a datacenter becomes unavailable.
-* An SDK application which wants to access the application hosted by the application servers
+- An SDK application which wants to access the application hosted by the application servers
 
 ## Control channels
 
-When a router starts up it will attempt to make a connection to the controller(s) in its
+When a router starts up, it will attempt to make a connection to the controller(s) in its
 configuration file. This establishes the control plane, which allows controllers to update router
 state as needed and allows routers to report changes, metrics and events back to the controller.
 
@@ -32,7 +32,7 @@ state as needed and allows routers to report changes, metrics and events back to
 ## Data links
 
 Once a router is connected to the controller, the controller will inform the router of other routers
-along with information about if and how those routers are listening for data links connections. The
+along with information about if and how those routers are listening for data link connections. The
 router will then attempt to establish data links to other routers, so it can participate in the data
 mesh.
 
@@ -41,7 +41,7 @@ mesh.
 ## Terminators/last hop
 
 Data links establish inter-router connectivity, but a way to establish connectivity to the
-application servers is still needed. The service definition on its own doesn't specify how to
+application servers is still needed. The service definition on its own doesn't specify how
 connections to the application servers should be made. Connectivity to the application servers is
 handled by terminators.
 
@@ -57,7 +57,7 @@ router is deleted.
 
 ### SDK hosted
 
-When an SDK application hosts (or binds, in OpenZiti terms) a service, it will first connect to one
+When an SDK application hosts (or `binds`, in OpenZiti terms) a service, it will first connect to one
 or more edge routers. It can then request those edge routers to create terminators on its behalf.
 When the SDK app disconnects from the edge router, the terminator will automatically be cleaned up.
 
@@ -69,7 +69,7 @@ forwarded to and what kind of health checks to run.
 ### Edge router hosted
 
 Edge routers running in tunneler mode (ER/T) can also host services by acting as a reverse proxy.
-They will also use the `host.v1` and `host.v2` configurations, same as the SDK based tunnelers. An
+They will also use the `host.v1` and `host.v2` configurations, same as the SDK-based tunnelers. An
 ER/T will create and delete terminators as services, configurations and policies are created,
 updated or deleted.
 
@@ -78,15 +78,15 @@ updated or deleted.
 When an SDK wants to connect to an OpenZiti hosted service, it will initiate the following sequence
 of events:
 
-1. Authenticate to the controller
-2. Create a Session for the desired service
-3. Connect to one or more edge routers
-4. Send a Dial request to the selected edge router
-5. The edge router will send a create circuit request to the controller
-6. The controller will find the least expensive path
-7. The controller will send route updates to non-terminal elements of the path
-8. The controller will instruct the terminating router to dial the service
-9. Once the circuit is established, data can begin to flow
+1. Authenticate to the controller.
+2. Create a Session for the desired service.
+3. Connect to one or more edge routers.
+4. Send a `Dial` request to the selected edge router.
+5. The edge router will send a `create circuit` request to the controller.
+6. The controller will find the least expensive path.
+7. The controller will send route updates to non-terminal elements of the path.
+8. The controller will instruct the terminating router to dial the service.
+9. Once the circuit is established, data can begin to flow.
 
 ### Authentication
 
@@ -127,9 +127,9 @@ routers will be notified and connections associated with that API Session will b
 
 ### Dial the service
 
-The SDK will pick an edge router and send it a Dial request for desired service along with the
+The SDK will pick an edge router and send it a `Dial` request for the desired service along with the
 Session token. The edge router selected is known as the initiating router. The edge router
-will translate this into a 'create circuit' request to the controller. The controller will select a
+will translate this into a `create circuit` request to the controller. The controller will select a
 path and will message the routers in the path, so they can update their routing tables and/or make
 connections to application servers as necessary.
 
@@ -137,14 +137,14 @@ The path will be selected based on the cost of the terminators available on that
 cost of the routers and links from the initiating router to the terminator's router. The last router
 in the path is called the terminating router.
 
-* Router costs can be set via the management API. There is also a configurable minimum router cost.
+- Router costs can be set via the management API. There is also a configurable minimum router cost.
   A minimum cost will prevent paths from adding unnecessary hops or from bouncing between two
   similar paths.
-* Link costs are currently based on the link's round-trip latency
-* Terminators have a static cost which can be managed via the management API for static terminators,
+- Link costs are currently based on the link's round-trip latency.
+- Terminators have a static cost which can be managed via the management API for static terminators,
   or via the SDK for dynamic terminators.
-* Terminators also have a dynamic cost. The more circuits on a terminator, the higher the cost. As
-  circuits are torn down, the cost goes back down. Dial failures will also temporarily raise the
+- Terminators also have a dynamic cost. The more circuits on a terminator, the higher the cost. As
+  circuits are torn down, the cost goes back down. `Dial` failures will also temporarily raise the
   dynamic terminator cost.
 
 ![image](/img/data-flow/dial.png)

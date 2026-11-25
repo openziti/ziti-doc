@@ -1,33 +1,35 @@
 ---
 title: Enrolling
 ---
+
 ## Enrolling an identity
 
-All connections made to the Ziti network leverage [mutual TLS](https://en.wikipedia.org/wiki/Mutual_authentication)
-which means every client needs a valid X509 certificate which it will present to the Ziti network during the connection
-process. The process of obtaining a key/certificate pair and presenting it securely to the controller is called
-"Enrollment".
+All connections made to the Ziti network leverage [mutual TLS](https://en.wikipedia.org/wiki/Mutual_authentication),
+which means every client needs a valid X.509 certificate, which it will present to the Ziti network during the
+connection process. The process of obtaining a key/certificate pair and presenting it securely to the controller is
+called *enrollment*.
 
 ### Overview
 
 All identities need to be enrolled with the controller so the controller can authenticate the incoming connection.
-This process is slightly different for each type of identity and is complex. The easiest way to enroll an identity is to 
-use either the Ziti Desktop Edge/Ziti Mobile Edge for your operating system. Alternatively, you may perform the enrollment separate 
-with the `ziti` CLI which can be downloaded from the [GitHub releases page](https://github.com/openziti/ziti/releases/latest) 
+This process is slightly different for each type of identity and is complex. The easiest way to enroll an identity is
+to use either the Ziti Desktop Edge/Ziti Mobile Edge for your operating system. Alternatively, you may perform the
+enrollment separately using the `ziti` CLI, which can be downloaded from the
+[GitHub releases page](https://github.com/openziti/ziti/releases/latest).
 
 ### One-time token enrollment: Internal PKI
 
-Perhaps the easiest path to an enrolled identity is by using the one-time token enrollment flow. This flow leverages the
-PKI configured in the controller.  Using the one-time token flow - the `ziti` CLI will generate a private key
-and a certificate signing request for the controller's built-in certificate authority to fulfill.
+Perhaps the easiest path to an enrolled identity is by using the one-time token enrollment flow. This flow leverages
+the PKI configured in the controller. Using the one-time token flow, the `ziti` CLI will generate a private key and a
+certificate signing request for the controller's built-in certificate authority to fulfill.
 
 Follow these steps to enroll an identity with a one-time token:
 
-* [create the Identity](./10-creating.mdx)
-* download or copy the JWT - this file contains the single use token
-* run the `ziti` CLI:
+- [create the identity](./10-creating.mdx)
+- download or copy the JWT: this file contains the single-use token
+- run the `ziti` CLI:
 
-**Example Usage:**
+#### Example usage for one-time token enrollment
 
 ```text
 ziti edge enroll \
@@ -36,14 +38,14 @@ ziti edge enroll \
 ```
 
 :::caution
-The output from the `ziti` CLI is a permanent identity configuration file which
+The output from the `ziti` CLI is a permanent identity configuration file, which
 must be stored securely. This file contains within it the private key that backs
-the certificate issued by the controller.  This file should not be
+the certificate issued by the controller. This file should not be
 transferred or shared and should not be moved from the machine unless you are
 confident you understand the risks involved in doing so.
 :::
 
-**Example Usage for `ziti-edge-tunnel` CLI**
+#### Example usage for `ziti-edge-tunnel` CLI
 
 ```text
 # enroll from a token file
@@ -57,17 +59,18 @@ confident you understand the risks involved in doing so.
 
 ### 3rd-party CA: One-time token
 
-This flow allows you to pre-create identities for a 3rd-party CA with distinct role attributes. This flow is similar to the one-time token flow from above except that it expects that a private key and certificate have
-already been created on or distributed to the machine that is about to enroll and that the certificate presented is
-issued by a validated, [3rd-party CA](../../../learn/core-concepts/pki.mdx#3rd-party-ca-optional).
+This flow allows you to pre-create identities for a 3rd-party CA with distinct role attributes. This flow is similar
+to the one-time token flow from above except that it expects that a private key and certificate have already been
+created on or distributed to the machine that is about to enroll and that the certificate presented is issued by a
+validated [3rd-party CA](../../../learn/core-concepts/pki.mdx#3rd-party-ca-optional).
 
-Follow these steps to enroll a 3rd-party CA - one-time token identity:
+Follow these steps to enroll a 3rd-party CA one-time token identity:
 
-* [create the Identity](./10-creating.mdx)
-* download or copy the JWT - this file contains the one-time token
-* run the `ziti` CLI. Notice you can provide the filename of the identity config JSON file to output:
+- [create the identity](./10-creating.mdx)
+- download or copy the JWT: this file contains the one-time token
+- run the `ziti` CLI. Notice you can provide the filename of the identity config JSON file to output:
 
-**Example Usage:**
+#### Example usage for 3rd-party CA one-time token
 
 ```text
 ziti edge enroll \
@@ -77,23 +80,22 @@ ziti edge enroll \
     --out ${identity_config_file}
 ```
 
-### 3rd-party CA: Auto
+### 3rd-party CA: Auto-enrolled
 
-When using a 3rd-party CA identity creation process in the controller is
-automatic. Enrolling the identity will create it with the default role attributes that were specified when the 3rd-party CA was created.
+When using a 3rd-party CA, identity creation in the controller is automatic. Enrolling the identity will create it
+with the default role attributes that were specified when the 3rd-party CA was created.
 
-Like "3rd-party CA - one-time token" - this flow expects that a private key and certificate have
-already been created on or distributed to the machine that is about to enroll.
-The certificate presented to the controller must be issued by a [3rd-party
-CA](../../../learn/core-concepts/pki.mdx#3rd-party-ca-optional) that was already
-imported and verified in the controller with the
-`isAutoCaEnrollmentEnabled` property set to true.
+Like the [3rd-party CA: One-time token](#3rd-party-ca-one-time-token) flow, this flow expects that a private key and
+certificate have already been created on or distributed to the machine that is about to enroll. The certificate
+presented to the controller must be issued by a
+[3rd-party CA](../../../learn/core-concepts/pki.mdx#3rd-party-ca-optional) that was already imported and verified in
+the controller with the `isAutoCaEnrollmentEnabled` property set to true.
 
-Using the `ziti` CLI will also require the re-use of a permanent JWT that is unique to the external CA. The JWT
-can be downloaded from the controller from:  `${controller_uri}/cas/${id}/jwt` where `${controller_uri}` represents
-the fully qualified address of the controller api and `${id}` represents the identifier for the given 3rd-party CA.
+Using the `ziti` CLI will also require the re-use of a permanent JWT that is unique to the external CA. The JWT can be
+downloaded from the controller from: `${controller_uri}/cas/${id}/jwt` where `${controller_uri}` represents the
+fully qualified address of the controller API and `${id}` represents the identifier for the given 3rd-party CA.
 
-**Example Usage:**
+#### Example usage for 3rd-party CA auto-enrollment
 
 ```text
 ziti edge enroll \
@@ -103,4 +105,6 @@ ziti edge enroll \
     --out ${identity_config_file}
 ```
 
-If supplied, the argument to option `--idname` will be used as the name for the identity created. The default name of auto-created identities is generated from a template that uses values from the user certificate i.e. `[caName]-[commonName]`.
+If supplied, the argument to option `--idname` will be used as the name for the identity created. The default name of
+auto-created identities is generated from a template that uses values from the user certificate, i.e.,
+`[caName]-[commonName]`.
